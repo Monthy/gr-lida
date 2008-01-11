@@ -1,0 +1,17 @@
+none|sinimg
+BG|sinimg
+CZ243|sinimg
+FR|sinimg
+GK|sinimg
+GR|sinimg
+HR|sinimg
+HU|sinimg
+IT|sinimg
+NL|sinimg
+NO|sinimg
+PL|sinimg
+RU|sinimg
+SK|sinimg
+SP|sinimg
+SU|sinimg
+SV|sinimg

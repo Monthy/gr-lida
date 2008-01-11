@@ -1,0 +1,147 @@
+<ui version="4.0" >
+ <class>InfoClass</class>
+ <widget class="QDialog" name="InfoClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>354</width>
+    <height>303</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Información</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../res/grlida.qrc" >:/img16/informacion.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>4</number>
+   </property>
+   <property name="topMargin" >
+    <number>4</number>
+   </property>
+   <property name="rightMargin" >
+    <number>4</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>4</number>
+   </property>
+   <item>
+    <widget class="QTreeWidget" name="twInfo" >
+     <property name="focusPolicy" >
+      <enum>Qt::ClickFocus</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="verticalScrollBarPolicy" >
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy" >
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="showDropIndicator" stdset="0" >
+      <bool>false</bool>
+     </property>
+     <property name="alternatingRowColors" >
+      <bool>false</bool>
+     </property>
+     <property name="iconSize" >
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="textElideMode" >
+      <enum>Qt::ElideNone</enum>
+     </property>
+     <property name="rootIsDecorated" >
+      <bool>false</bool>
+     </property>
+     <property name="itemsExpandable" >
+      <bool>false</bool>
+     </property>
+     <column>
+      <property name="text" >
+       <string/>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string/>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>4</number>
+     </property>
+     <property name="topMargin" >
+      <number>4</number>
+     </property>
+     <property name="rightMargin" >
+      <number>4</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>4</number>
+     </property>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk" >
+       <property name="text" >
+        <string>Aceptar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <resources>
+  <include location="../res/grlida.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>btnOk</sender>
+   <signal>clicked()</signal>
+   <receiver>InfoClass</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>292</x>
+     <y>225</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>170</x>
+     <y>124</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

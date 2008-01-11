@@ -1,0 +1,1330 @@
+<ui version="4.0" >
+ <class>ImportarJuegoClass</class>
+ <widget class="QDialog" name="ImportarJuegoClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>560</width>
+    <height>435</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>560</width>
+    <height>430</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Importar Juego</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../res/grlida.qrc" >:/img16/importar.png</iconset>
+  </property>
+  <layout class="QGridLayout" >
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <property name="horizontalSpacing" >
+    <number>0</number>
+   </property>
+   <property name="verticalSpacing" >
+    <number>0</number>
+   </property>
+   <item row="1" column="0" >
+    <layout class="QVBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="statusLabel" />
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <property name="leftMargin" >
+        <number>4</number>
+       </property>
+       <property name="topMargin" >
+        <number>4</number>
+       </property>
+       <property name="rightMargin" >
+        <number>4</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>4</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="btnUpdateList" >
+         <property name="minimumSize" >
+          <size>
+           <width>111</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Actualizar Lista</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="../res/grlida.qrc" >:/img16/actualizar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnPrevious" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>97</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>97</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Atrás</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_atras.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnNext" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>97</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>97</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Siguiente</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_adelante.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCancelar" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>81</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>97</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Cancelar</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0" >
+    <widget class="QStackedWidget" name="stackedWidget" >
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="page_1" >
+      <layout class="QVBoxLayout" >
+       <property name="spacing" >
+        <number>2</number>
+       </property>
+       <property name="leftMargin" >
+        <number>6</number>
+       </property>
+       <property name="topMargin" >
+        <number>6</number>
+       </property>
+       <property name="rightMargin" >
+        <number>6</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QSplitter" name="splitter" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QWidget" name="layoutWidget" >
+          <layout class="QVBoxLayout" >
+           <property name="spacing" >
+            <number>3</number>
+           </property>
+           <property name="leftMargin" >
+            <number>0</number>
+           </property>
+           <property name="topMargin" >
+            <number>0</number>
+           </property>
+           <property name="rightMargin" >
+            <number>0</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label" >
+             <property name="text" >
+              <string>Dirección web GR-lida DB para importar Juego:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cbxDbXml" >
+             <property name="editable" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTreeWidget" name="twListaJuegos" >
+             <property name="focusPolicy" >
+              <enum>Qt::ClickFocus</enum>
+             </property>
+             <property name="frameShadow" >
+              <enum>QFrame::Sunken</enum>
+             </property>
+             <property name="showDropIndicator" stdset="0" >
+              <bool>false</bool>
+             </property>
+             <property name="iconSize" >
+              <size>
+               <width>24</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="textElideMode" >
+              <enum>Qt::ElideNone</enum>
+             </property>
+             <property name="rootIsDecorated" >
+              <bool>false</bool>
+             </property>
+             <property name="itemsExpandable" >
+              <bool>false</bool>
+             </property>
+             <column>
+              <property name="text" >
+               <string>Títulos</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="layoutWidget_1" >
+          <layout class="QVBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <property name="leftMargin" >
+            <number>0</number>
+           </property>
+           <property name="topMargin" >
+            <number>0</number>
+           </property>
+           <property name="rightMargin" >
+            <number>0</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QTextBrowser" name="textBrowser" />
+           </item>
+           <item>
+            <widget class="QFrame" name="frame" >
+             <property name="minimumSize" >
+              <size>
+               <width>16</width>
+               <height>130</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>16777215</width>
+               <height>130</height>
+              </size>
+             </property>
+             <property name="frameShape" >
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow" >
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" >
+              <property name="spacing" >
+               <number>2</number>
+              </property>
+              <property name="leftMargin" >
+               <number>0</number>
+              </property>
+              <property name="topMargin" >
+               <number>0</number>
+              </property>
+              <property name="rightMargin" >
+               <number>0</number>
+              </property>
+              <property name="bottomMargin" >
+               <number>0</number>
+              </property>
+              <item>
+               <layout class="QHBoxLayout" >
+                <property name="spacing" >
+                 <number>2</number>
+                </property>
+                <property name="leftMargin" >
+                 <number>0</number>
+                </property>
+                <property name="topMargin" >
+                 <number>0</number>
+                </property>
+                <property name="rightMargin" >
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin" >
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_1" >
+                  <property name="maximumSize" >
+                   <size>
+                    <width>71</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="text" >
+                   <string>Título:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lb_infoTitulo" >
+                  <property name="maximumSize" >
+                   <size>
+                    <width>16777215</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="text" >
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" >
+                <property name="spacing" >
+                 <number>2</number>
+                </property>
+                <property name="leftMargin" >
+                 <number>0</number>
+                </property>
+                <property name="topMargin" >
+                 <number>0</number>
+                </property>
+                <property name="rightMargin" >
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin" >
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_2" >
+                  <property name="maximumSize" >
+                   <size>
+                    <width>71</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="text" >
+                   <string>Link:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lb_infoLink" >
+                  <property name="maximumSize" >
+                   <size>
+                    <width>16777215</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="text" >
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" >
+                <property name="spacing" >
+                 <number>2</number>
+                </property>
+                <property name="leftMargin" >
+                 <number>0</number>
+                </property>
+                <property name="topMargin" >
+                 <number>0</number>
+                </property>
+                <property name="rightMargin" >
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin" >
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_3" >
+                  <property name="maximumSize" >
+                   <size>
+                    <width>71</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="text" >
+                   <string>BuildDate:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lb_infoBuildDate" >
+                  <property name="maximumSize" >
+                   <size>
+                    <width>16777215</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="text" >
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_4" >
+                <property name="maximumSize" >
+                 <size>
+                  <width>16777215</width>
+                  <height>16</height>
+                 </size>
+                </property>
+                <property name="text" >
+                 <string>Descripción:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="lb_infoDescripcion" >
+                <property name="frameShape" >
+                 <enum>QFrame::NoFrame</enum>
+                </property>
+                <property name="readOnly" >
+                 <bool>true</bool>
+                </property>
+                <property name="html" >
+                 <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;">&lt;/p>&lt;/body>&lt;/html></string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2" >
+      <layout class="QGridLayout" >
+       <property name="leftMargin" >
+        <number>6</number>
+       </property>
+       <property name="topMargin" >
+        <number>6</number>
+       </property>
+       <property name="rightMargin" >
+        <number>6</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>6</number>
+       </property>
+       <property name="horizontalSpacing" >
+        <number>2</number>
+       </property>
+       <property name="verticalSpacing" >
+        <number>2</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QSplitter" name="splitter_2" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QTreeWidget" name="twDatosInfo" >
+          <property name="focusPolicy" >
+           <enum>Qt::ClickFocus</enum>
+          </property>
+          <property name="frameShadow" >
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="showDropIndicator" stdset="0" >
+           <bool>false</bool>
+          </property>
+          <property name="iconSize" >
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="textElideMode" >
+           <enum>Qt::ElideNone</enum>
+          </property>
+          <property name="rootIsDecorated" >
+           <bool>false</bool>
+          </property>
+          <property name="itemsExpandable" >
+           <bool>false</bool>
+          </property>
+          <column>
+           <property name="text" >
+            <string/>
+           </property>
+          </column>
+          <column>
+           <property name="text" >
+            <string>Datos</string>
+           </property>
+          </column>
+          <item>
+           <property name="text" >
+            <string>Icono:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Título:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Subtítulo:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Genero:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Compaña:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Desarrollador:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Tema:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Idioma:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Formato:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Año:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Nº Disc:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Sistema OS:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Tamaño:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Gráficos:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Sonido:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Jugabilidad:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Original:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Estado:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Thumbs:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Caratula delantera:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Caratula trasera:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Fecha:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Tipo emu:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Comentario:</string>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </item>
+         </widget>
+         <widget class="QWidget" name="layoutWidget_2" >
+          <layout class="QVBoxLayout" >
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <property name="leftMargin" >
+            <number>0</number>
+           </property>
+           <property name="topMargin" >
+            <number>0</number>
+           </property>
+           <property name="rightMargin" >
+            <number>0</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" >
+             <property name="spacing" >
+              <number>0</number>
+             </property>
+             <property name="leftMargin" >
+              <number>0</number>
+             </property>
+             <property name="topMargin" >
+              <number>0</number>
+             </property>
+             <property name="rightMargin" >
+              <number>0</number>
+             </property>
+             <property name="bottomMargin" >
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lb_titulo_juego" >
+               <property name="font" >
+                <font>
+                 <family>MS Shell Dlg 2</family>
+                 <pointsize>10</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text" >
+                <string>Titulo</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" >
+               <property name="spacing" >
+                <number>4</number>
+               </property>
+               <property name="leftMargin" >
+                <number>0</number>
+               </property>
+               <property name="topMargin" >
+                <number>0</number>
+               </property>
+               <property name="rightMargin" >
+                <number>0</number>
+               </property>
+               <property name="bottomMargin" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="lb_thumbs" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>145</width>
+                   <height>186</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>145</width>
+                   <height>186</height>
+                  </size>
+                 </property>
+                 <property name="text" >
+                  <string/>
+                 </property>
+                 <property name="pixmap" >
+                  <pixmap/>
+                 </property>
+                 <property name="scaledContents" >
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" >
+                 <property name="spacing" >
+                  <number>2</number>
+                 </property>
+                 <property name="leftMargin" >
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin" >
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin" >
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin" >
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_6" >
+                   <property name="text" >
+                    <string>Subido por:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lb_usuario_1" >
+                   <property name="font" >
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_8" >
+                   <property name="text" >
+                    <string>Datos del DOSBox subido por:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lb_usuario_2" >
+                   <property name="font" >
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_10" >
+                   <property name="text" >
+                    <string>Datos del ScummVM subido por:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lb_usuario_3" >
+                   <property name="font" >
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_11" >
+                   <property name="text" >
+                    <string>Datos del VDMSound subido por:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lb_usuario_4" >
+                   <property name="font" >
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Preferred</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType" >
+              <enum>QSizePolicy::Preferred</enum>
+             </property>
+             <property name="sizeHint" >
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QTabWidget" name="tabWidget" >
+             <property name="enabled" >
+              <bool>true</bool>
+             </property>
+             <property name="currentIndex" >
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="tab_1" >
+              <attribute name="title" >
+               <string>Archivos</string>
+              </attribute>
+              <attribute name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/importar.png</iconset>
+              </attribute>
+              <layout class="QVBoxLayout" >
+               <property name="spacing" >
+                <number>6</number>
+               </property>
+               <property name="leftMargin" >
+                <number>4</number>
+               </property>
+               <property name="topMargin" >
+                <number>4</number>
+               </property>
+               <property name="rightMargin" >
+                <number>4</number>
+               </property>
+               <property name="bottomMargin" >
+                <number>4</number>
+               </property>
+               <item>
+                <widget class="QTreeWidget" name="twDatosFiles" >
+                 <property name="showDropIndicator" stdset="0" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="iconSize" >
+                  <size>
+                   <width>16</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="textElideMode" >
+                  <enum>Qt::ElideNone</enum>
+                 </property>
+                 <property name="rootIsDecorated" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="itemsExpandable" >
+                  <bool>false</bool>
+                 </property>
+                 <column>
+                  <property name="text" >
+                   <string>Nombre</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>CRC32</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Descripción</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Size</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Path</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_2" >
+              <attribute name="title" >
+               <string>URLs</string>
+              </attribute>
+              <attribute name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/edit_enlace.png</iconset>
+              </attribute>
+              <layout class="QVBoxLayout" >
+               <property name="spacing" >
+                <number>6</number>
+               </property>
+               <property name="leftMargin" >
+                <number>4</number>
+               </property>
+               <property name="topMargin" >
+                <number>4</number>
+               </property>
+               <property name="rightMargin" >
+                <number>4</number>
+               </property>
+               <property name="bottomMargin" >
+                <number>4</number>
+               </property>
+               <item>
+                <widget class="QTreeWidget" name="twDatosURL" >
+                 <property name="showDropIndicator" stdset="0" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="iconSize" >
+                  <size>
+                   <width>16</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="textElideMode" >
+                  <enum>Qt::ElideNone</enum>
+                 </property>
+                 <property name="rootIsDecorated" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="itemsExpandable" >
+                  <bool>false</bool>
+                 </property>
+                 <column>
+                  <property name="text" >
+                   <string>URL</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Descripción</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_3" >
+              <property name="enabled" >
+               <bool>true</bool>
+              </property>
+              <attribute name="title" >
+               <string>DOSBox Montajes</string>
+              </attribute>
+              <attribute name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/drive_hd.png</iconset>
+              </attribute>
+              <layout class="QVBoxLayout" >
+               <property name="spacing" >
+                <number>6</number>
+               </property>
+               <property name="leftMargin" >
+                <number>4</number>
+               </property>
+               <property name="topMargin" >
+                <number>4</number>
+               </property>
+               <property name="rightMargin" >
+                <number>4</number>
+               </property>
+               <property name="bottomMargin" >
+                <number>4</number>
+               </property>
+               <item>
+                <widget class="QTreeWidget" name="twMontajes" >
+                 <property name="focusPolicy" >
+                  <enum>Qt::ClickFocus</enum>
+                 </property>
+                 <property name="frameShadow" >
+                  <enum>QFrame::Sunken</enum>
+                 </property>
+                 <property name="showDropIndicator" stdset="0" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="iconSize" >
+                  <size>
+                   <width>24</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="textElideMode" >
+                  <enum>Qt::ElideNone</enum>
+                 </property>
+                 <property name="rootIsDecorated" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="itemsExpandable" >
+                  <bool>false</bool>
+                 </property>
+                 <column>
+                  <property name="text" >
+                   <string>Folder/Imagen</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Etiqueta</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Tipo</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Driver</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>CD/DVD index</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Opciones CD/DVD</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>IO Ctrl</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Primer montaje</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" >
+             <property name="spacing" >
+              <number>0</number>
+             </property>
+             <property name="leftMargin" >
+              <number>0</number>
+             </property>
+             <property name="topMargin" >
+              <number>0</number>
+             </property>
+             <property name="rightMargin" >
+              <number>0</number>
+             </property>
+             <property name="bottomMargin" >
+              <number>0</number>
+             </property>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnOk" >
+               <property name="enabled" >
+                <bool>false</bool>
+               </property>
+               <property name="minimumSize" >
+                <size>
+                 <width>88</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>88</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="text" >
+                <string>Descargar</string>
+               </property>
+               <property name="icon" >
+                <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>cbxDbXml</tabstop>
+  <tabstop>twListaJuegos</tabstop>
+  <tabstop>lb_infoDescripcion</tabstop>
+  <tabstop>btnPrevious</tabstop>
+  <tabstop>btnNext</tabstop>
+  <tabstop>twDatosInfo</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>twDatosFiles</tabstop>
+  <tabstop>twDatosURL</tabstop>
+  <tabstop>twMontajes</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancelar</tabstop>
+  <tabstop>btnUpdateList</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/grlida.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>btnCancelar</sender>
+   <signal>clicked()</signal>
+   <receiver>ImportarJuegoClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>513</x>
+     <y>498</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>294</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

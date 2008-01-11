@@ -1,0 +1,1958 @@
+<ui version="4.0" >
+ <class>DbxAddClass</class>
+ <widget class="QDialog" name="DbxAddClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>389</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>450</width>
+    <height>389</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>450</width>
+    <height>389</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Asistente del DOSBox</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../res/grlida.qrc" >:/img16/dosbox.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="spacing" >
+    <number>0</number>
+   </property>
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="imgLogoDbx" >
+     <property name="minimumSize" >
+      <size>
+       <width>157</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>16777215</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="palette" >
+      <palette>
+       <active>
+        <colorrole role="WindowText" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Button" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Light" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Midlight" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Dark" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Mid" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Text" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="BrightText" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="ButtonText" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Base" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Shadow" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="AlternateBase" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="WindowText" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Button" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Light" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Midlight" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Dark" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Mid" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Text" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="BrightText" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="ButtonText" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Base" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Shadow" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="AlternateBase" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="WindowText" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Button" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Light" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Midlight" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Dark" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Mid" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Text" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="BrightText" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="ButtonText" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Base" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Shadow" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="AlternateBase" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="autoFillBackground" >
+      <bool>true</bool>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="pixmap" >
+      <pixmap resource="../res/grlida.qrc" >:/images/wizard_dosbox.png</pixmap>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="wizardDbx" >
+     <property name="frameShape" >
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="page_1" >
+      <widget class="QLineEdit" name="txtDbx_6" >
+       <property name="geometry" >
+        <rect>
+         <x>130</x>
+         <y>265</y>
+         <width>261</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_1" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>201</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>El juego necesita 'loadfix'</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtDbx_4" >
+       <property name="geometry" >
+        <rect>
+         <x>130</x>
+         <y>195</y>
+         <width>261</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtDbx_1" >
+       <property name="geometry" >
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>301</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_1" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>111</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Título:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_3" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>155</y>
+         <width>381</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Ejecutable (exe,com,bat) del Juego:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_6" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>265</y>
+         <width>111</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Parametros:</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_3" >
+       <property name="geometry" >
+        <rect>
+         <x>230</x>
+         <y>110</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Cerrar la consola del DOSBox</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_5" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>225</y>
+         <width>381</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Ejecutable (exe,com,bat) Setup del Juego:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtDbx_2" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>381</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtDbx_3" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>170</y>
+         <width>381</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_4" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>195</y>
+         <width>111</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Parametros:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtDbx_5" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>240</y>
+         <width>381</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnFileConfg" >
+       <property name="geometry" >
+        <rect>
+         <x>400</x>
+         <y>80</y>
+         <width>30</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>30</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string/>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnExeJuego" >
+       <property name="geometry" >
+        <rect>
+         <x>400</x>
+         <y>170</y>
+         <width>30</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>30</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string/>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnExeSetup" >
+       <property name="geometry" >
+        <rect>
+         <x>400</x>
+         <y>240</y>
+         <width>30</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>30</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string/>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_2" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>421</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.conf</string>
+       </property>
+       <property name="wordWrap" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_2" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>130</y>
+         <width>281</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Cerrar DOSBox al terminar el juego</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_2" >
+      <widget class="QLabel" name="lb_Dbx_8" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Resolución pantalla:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_9" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Modo de Renderizado:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_10" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>210</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Tarjeta de Video:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_11" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>240</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Escalar y Filtros:</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_4" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>431</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>fullscreen -- Iniciar DOSBox directamente en pantalla completa.</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_5" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>431</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>fullfixed -- Fijar la resolución en pantalla completa.</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_6" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>431</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>autolock -- El ratón se autobloqueará al hace clic en la pantalla.</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_7" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>421</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>aspect -- Aplicar corrección de aspecto.</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_7" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>431</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed.</string>
+       </property>
+       <property name="wordWrap" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_1" >
+       <property name="geometry" >
+        <rect>
+         <x>150</x>
+         <y>150</y>
+         <width>131</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_2" >
+       <property name="geometry" >
+        <rect>
+         <x>150</x>
+         <y>180</y>
+         <width>131</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_3" >
+       <property name="geometry" >
+        <rect>
+         <x>150</x>
+         <y>210</y>
+         <width>131</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_4" >
+       <property name="geometry" >
+        <rect>
+         <x>150</x>
+         <y>240</y>
+         <width>131</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>-1</number>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_3" >
+      <widget class="QComboBox" name="cbxDbx_5" >
+       <property name="geometry" >
+        <rect>
+         <x>330</x>
+         <y>30</y>
+         <width>101</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>-1</number>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_6" >
+       <property name="geometry" >
+        <rect>
+         <x>330</x>
+         <y>90</y>
+         <width>101</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>-1</number>
+       </property>
+       <property name="maxVisibleItems" >
+        <number>7</number>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_8" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>130</y>
+         <width>321</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>xms -- Activa o desactiva soporte para memoria XMS</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_9" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>321</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>ems -- Activa o desactiva soporte para memoria EMS</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_7" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>170</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text" >
+         <string>true</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>false</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>max</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_14" >
+       <property name="geometry" >
+        <rect>
+         <x>100</x>
+         <y>170</y>
+         <width>341</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>umb -- Activa o desactiva soporte para memoria UMB</string>
+       </property>
+       <property name="alignment" >
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_13" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>311</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Ciclos: Cantidad de instrucciones que DOSBox intenta emular cada milisegundo.</string>
+       </property>
+       <property name="wordWrap" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_12" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>311</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Cantidad de memoria (Mb) que DOSBox tendrá disponible:</string>
+       </property>
+       <property name="wordWrap" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_4" >
+      <widget class="Line" name="line_4" >
+       <property name="geometry" >
+        <rect>
+         <x>200</x>
+         <y>150</y>
+         <width>241</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_11" >
+       <property name="geometry" >
+        <rect>
+         <x>355</x>
+         <y>130</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text" >
+         <string>11050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>22050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>44100</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_11" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>341</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Activa la emulación de Gravis Ultrasound</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="Line" name="line_3" >
+       <property name="geometry" >
+        <rect>
+         <x>130</x>
+         <y>90</y>
+         <width>311</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_9" >
+       <property name="geometry" >
+        <rect>
+         <x>150</x>
+         <y>65</y>
+         <width>91</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>-1</number>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_10" >
+       <property name="geometry" >
+        <rect>
+         <x>355</x>
+         <y>65</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text" >
+         <string>11050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>22050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>44100</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="Line" name="line_2" >
+       <property name="geometry" >
+        <rect>
+         <x>110</x>
+         <y>40</y>
+         <width>331</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_8" >
+       <property name="geometry" >
+        <rect>
+         <x>355</x>
+         <y>20</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text" >
+         <string>11050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>22050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>44100</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_12" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>201</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Activar emulación MPU-401</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_13" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>201</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Modo inteligente</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_12" >
+       <property name="geometry" >
+        <rect>
+         <x>355</x>
+         <y>170</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>-1</number>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_13" >
+       <property name="geometry" >
+        <rect>
+         <x>355</x>
+         <y>200</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text" >
+         <string>11050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>22050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>44100</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_14" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>220</y>
+         <width>201</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Activa el altavoz interno</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_15" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>240</y>
+         <width>201</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Activa Disney Sound Source</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_14" >
+       <property name="geometry" >
+        <rect>
+         <x>355</x>
+         <y>230</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text" >
+         <string>11050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>22050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>44100</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_15" >
+       <property name="geometry" >
+        <rect>
+         <x>355</x>
+         <y>260</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text" >
+         <string>11050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>22050</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>44100</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_15" >
+       <property name="geometry" >
+        <rect>
+         <x>260</x>
+         <y>20</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Frecuencia:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_18" >
+       <property name="geometry" >
+        <rect>
+         <x>260</x>
+         <y>65</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Frecuencia:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_16" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>101</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Sound Blaster:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_17" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>65</y>
+         <width>131</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Tipo Sound Blaste:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_19" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Gravis Ultrasound:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_20" >
+       <property name="geometry" >
+        <rect>
+         <x>270</x>
+         <y>130</y>
+         <width>81</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Frecuencia:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_22" >
+       <property name="geometry" >
+        <rect>
+         <x>212</x>
+         <y>170</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Device MPU-401:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_23" >
+       <property name="geometry" >
+        <rect>
+         <x>212</x>
+         <y>200</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Frecuencia mt32rate:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_24" >
+       <property name="geometry" >
+        <rect>
+         <x>212</x>
+         <y>230</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Frecuencia pcrate:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_21" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>191</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>MIDI y configuracion adicional:</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_16" >
+       <property name="geometry" >
+        <rect>
+         <x>80</x>
+         <y>260</y>
+         <width>101</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="currentIndex" >
+        <number>-1</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_26" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>260</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>MPU-401:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_25" >
+       <property name="geometry" >
+        <rect>
+         <x>212</x>
+         <y>260</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Frecuencia tandyrate:</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chkDbx_10" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Desactivar Sonido</string>
+       </property>
+       <property name="checked" >
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_5" >
+      <widget class="QPushButton" name="btnMount_Add" >
+       <property name="geometry" >
+        <rect>
+         <x>360</x>
+         <y>10</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Añadir</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/nuevo.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnMount_Edit" >
+       <property name="geometry" >
+        <rect>
+         <x>360</x>
+         <y>45</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Editar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/editar.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnMount_Delete" >
+       <property name="geometry" >
+        <rect>
+         <x>360</x>
+         <y>80</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Eliminar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/eliminar.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnMount_AutoCrear" >
+       <property name="geometry" >
+        <rect>
+         <x>290</x>
+         <y>150</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Autocrear Montaje</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/ejecutar_app.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnMount_Primario" >
+       <property name="geometry" >
+        <rect>
+         <x>290</x>
+         <y>185</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Montaje primario</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnMount_Clear" >
+       <property name="geometry" >
+        <rect>
+         <x>360</x>
+         <y>115</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Limpiar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnMount_Subir" >
+       <property name="geometry" >
+        <rect>
+         <x>290</x>
+         <y>50</y>
+         <width>61</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Subir</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/go-up.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnMount_Bajar" >
+       <property name="geometry" >
+        <rect>
+         <x>290</x>
+         <y>90</y>
+         <width>61</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Bajar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/go-down.png</iconset>
+       </property>
+      </widget>
+      <widget class="QSplitter" name="splitter" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>271</width>
+         <height>281</height>
+        </rect>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QTreeWidget" name="twMontajes" >
+        <property name="focusPolicy" >
+         <enum>Qt::ClickFocus</enum>
+        </property>
+        <property name="frameShadow" >
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="showDropIndicator" stdset="0" >
+         <bool>false</bool>
+        </property>
+        <property name="iconSize" >
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="textElideMode" >
+         <enum>Qt::ElideNone</enum>
+        </property>
+        <property name="rootIsDecorated" >
+         <bool>false</bool>
+        </property>
+        <property name="itemsExpandable" >
+         <bool>false</bool>
+        </property>
+        <column>
+         <property name="text" >
+          <string>Folder/Imagen</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Etiqueta</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Tipo</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Driver</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>CD/DVD index</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Opciones CD/DVD</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>IO Ctrl</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Primer montaje</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QListWidget" name="previer_mount" />
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_6" >
+      <layout class="QGridLayout" >
+       <property name="leftMargin" >
+        <number>9</number>
+       </property>
+       <property name="topMargin" >
+        <number>9</number>
+       </property>
+       <property name="rightMargin" >
+        <number>9</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>9</number>
+       </property>
+       <property name="horizontalSpacing" >
+        <number>6</number>
+       </property>
+       <property name="verticalSpacing" >
+        <number>6</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="lb_wizard_Dbx" >
+         <property name="font" >
+          <font>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text" >
+          <string>Fin de la Configuración
+Pulsa Aceptar para cerrar el Asistente
+
+</string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>4</number>
+     </property>
+     <property name="topMargin" >
+      <number>4</number>
+     </property>
+     <property name="rightMargin" >
+      <number>4</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>4</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="btnCancel" >
+       <property name="minimumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Cancelar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnPrevious" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Atrás</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_atras.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnNext" >
+       <property name="minimumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Siguiente</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_adelante.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Aceptar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>txtDbx_1</tabstop>
+  <tabstop>txtDbx_2</tabstop>
+  <tabstop>btnFileConfg</tabstop>
+  <tabstop>chkDbx_1</tabstop>
+  <tabstop>chkDbx_3</tabstop>
+  <tabstop>chkDbx_2</tabstop>
+  <tabstop>txtDbx_3</tabstop>
+  <tabstop>btnExeJuego</tabstop>
+  <tabstop>txtDbx_4</tabstop>
+  <tabstop>txtDbx_5</tabstop>
+  <tabstop>btnExeSetup</tabstop>
+  <tabstop>txtDbx_6</tabstop>
+  <tabstop>chkDbx_4</tabstop>
+  <tabstop>chkDbx_5</tabstop>
+  <tabstop>chkDbx_6</tabstop>
+  <tabstop>chkDbx_7</tabstop>
+  <tabstop>cbxDbx_1</tabstop>
+  <tabstop>cbxDbx_2</tabstop>
+  <tabstop>cbxDbx_3</tabstop>
+  <tabstop>cbxDbx_4</tabstop>
+  <tabstop>cbxDbx_5</tabstop>
+  <tabstop>cbxDbx_6</tabstop>
+  <tabstop>chkDbx_8</tabstop>
+  <tabstop>chkDbx_9</tabstop>
+  <tabstop>cbxDbx_7</tabstop>
+  <tabstop>chkDbx_10</tabstop>
+  <tabstop>cbxDbx_8</tabstop>
+  <tabstop>cbxDbx_9</tabstop>
+  <tabstop>cbxDbx_10</tabstop>
+  <tabstop>chkDbx_11</tabstop>
+  <tabstop>cbxDbx_11</tabstop>
+  <tabstop>chkDbx_12</tabstop>
+  <tabstop>chkDbx_13</tabstop>
+  <tabstop>chkDbx_14</tabstop>
+  <tabstop>chkDbx_15</tabstop>
+  <tabstop>cbxDbx_12</tabstop>
+  <tabstop>cbxDbx_13</tabstop>
+  <tabstop>cbxDbx_14</tabstop>
+  <tabstop>cbxDbx_15</tabstop>
+  <tabstop>cbxDbx_16</tabstop>
+  <tabstop>btnMount_Add</tabstop>
+  <tabstop>btnMount_Edit</tabstop>
+  <tabstop>btnMount_Delete</tabstop>
+  <tabstop>btnMount_Clear</tabstop>
+  <tabstop>btnMount_AutoCrear</tabstop>
+  <tabstop>btnMount_Primario</tabstop>
+  <tabstop>btnMount_Subir</tabstop>
+  <tabstop>btnMount_Bajar</tabstop>
+  <tabstop>twMontajes</tabstop>
+  <tabstop>previer_mount</tabstop>
+  <tabstop>btnNext</tabstop>
+  <tabstop>btnPrevious</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/grlida.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>btnCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>DbxAddClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>309</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>480</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,33 @@
+Acción|datos_3
+Acción-Arcade|datos_3
+Arcade|datos_3
+Aventura Gráfica|datos_3
+Aventura-Terror|datos_3
+Baile|datos_3
+Carreras|datos_3
+Carreras-Coches|datos_3
+Carreras-Motos|datos_3
+Deportes|datos_3
+Deportes-Baloncesto|datos_3
+Deportes-Fútbol|datos_3
+Emulador|datos_3
+Estrategia|datos_3
+FPS|datos_3
+Juego de Rol|datos_3
+Juegos Deportivos|datos_3
+Lucha|datos_3
+Matamarcianos|datos_3
+Mechs|datos_3
+Multijugador|datos_3
+Otros|datos_3
+Pesca|datos_3
+Plataformas|datos_3
+Puzzle e Inteligencia|datos_3
+Puzzle|datos_3
+Reproductor de Música|datos_3
+Reproductor de video|datos_3
+RPG|datos_3
+Simulador|datos_3
+Simulador de Trenes|datos_3
+Simulador de Vuelo|datos_3
+|

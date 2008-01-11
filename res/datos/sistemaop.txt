@@ -1,0 +1,11 @@
+MS-Dos|ms-dos
+MS-Dos y W95,98|ms-dos_win9x
+W2k,NT,XP|winxp
+W95,98,Me|win9x
+Windows 95|win9x
+Windows 98|win9x
+Windows Me|win9x
+Windows XP|winxp
+Linux|linux
+Mac OS|macintosh
+|

@@ -1,0 +1,15 @@
+<default>|
+Apple IIgs|2gs
+3DO|3do
+Acorn|acorn
+Amiga|amiga
+Atari ST|atari
+Commodore 64|c64
+DOS|pc
+FM-TOWNS|fmtowns
+Linux|linux
+Macintosh|macintosh
+PC-Engine|pce
+NES|nes
+SegaCD|segacd
+Windows|windows

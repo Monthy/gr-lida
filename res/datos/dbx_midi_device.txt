@@ -1,0 +1,6 @@
+default|sinimg
+alsa|sinimg
+oss|sinimg
+win32|sinimg
+coreaudio|sinimg
+none|sinimg

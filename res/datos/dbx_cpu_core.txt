@@ -1,0 +1,5 @@
+auto|sinimg
+normal|sinimg
+simple|sinimg
+dynamic|sinimg
+full|sinimg

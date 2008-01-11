@@ -1,0 +1,7 @@
+auto|sinimg
+none|sinimg
+2axis|sinimg
+4axis|sinimg
+4axis_2|sinimg
+fcs|sinimg
+ch|sinimg

@@ -1,0 +1,6 @@
+|sinimg
+hercGreen|sinimg
+hercAmber|sinimg
+cga|sinimg
+ega|sinimg
+amiga|sinimg

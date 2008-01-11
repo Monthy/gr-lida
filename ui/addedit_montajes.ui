@@ -1,0 +1,601 @@
+<ui version="4.0" >
+ <class>AddEditMontajesClass</class>
+ <widget class="QDialog" name="AddEditMontajesClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>409</width>
+    <height>384</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Montaje de unidades</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="spacing" >
+    <number>4</number>
+   </property>
+   <property name="leftMargin" >
+    <number>4</number>
+   </property>
+   <property name="topMargin" >
+    <number>4</number>
+   </property>
+   <property name="rightMargin" >
+    <number>4</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>4</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lb_Montaje_1" >
+     <property name="text" >
+      <string>Seccionar la Unidad, Carpeta o CDROM que desea Montar</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="txtMontaje_1" />
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnDirFile" >
+       <property name="minimumSize" >
+        <size>
+         <width>30</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>30</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string/>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="lb_Montaje_2" >
+     <property name="text" >
+      <string>Etiqueta para la Unidad es opcional:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="txtMontaje_2" />
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="lb_Montaje_3" >
+       <property name="minimumSize" >
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Tipo de Montaje:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbxMontaje_1" >
+       <property name="minimumSize" >
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
+       <item>
+        <property name="text" >
+         <string>drive</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="../res/grlida.qrc" >:/img16/drive_hd.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>cdrom</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="../res/grlida.qrc" >:/img16/drive_cdrom.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>floppy</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="../res/grlida.qrc" >:/img16/drive_floppy.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>IMG_floppy</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="../res/grlida.qrc" >:/img16/floppy_1.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>IMG_iso</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="../res/grlida.qrc" >:/img16/cd_iso.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>IMG_hdd</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="../res/grlida.qrc" >:/img16/drive_hd.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>boot</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="../res/grlida.qrc" >:/img16/floppy_2.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lb_Montaje_4" >
+       <property name="minimumSize" >
+        <size>
+         <width>96</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Letra a Montar:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbxMontaje_2" >
+       <property name="minimumSize" >
+        <size>
+         <width>52</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="currentIndex" >
+        <number>2</number>
+       </property>
+       <item>
+        <property name="text" >
+         <string>A</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>B</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>C</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>D</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>E</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>F</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>G</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>H</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>I</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>J</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>K</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>L</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>M</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>N</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>O</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>P</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Q</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>R</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>S</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>T</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>U</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>V</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>W</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>X</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Y</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="lb_Montaje_5" >
+       <property name="minimumSize" >
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>CD-Rom reales:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbxMontaje_3" >
+       <property name="minimumSize" >
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="editable" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtMontaje_3" >
+       <property name="text" >
+        <string>-usecd 0</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="lb_Montaje_7" >
+       <property name="minimumSize" >
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Modo CD-Rom:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbxMontaje_4" >
+       <property name="minimumSize" >
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="currentIndex" >
+        <number>0</number>
+       </property>
+       <item>
+        <property name="text" >
+         <string>-aspi</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>-ioctl</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>-noioctl</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="lb_Montaje_6" >
+     <property name="text" >
+      <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-size:8pt; font-weight:600;">-aspi&lt;/span>&lt;span style=" font-size:8pt;"> -- Forces use of the aspi layer. Only valid if mounting a CD-ROM under Windows systems with an ASPI-Layer.&lt;/span>&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;">&lt;span style=" font-weight:600;">-ioctl&lt;/span> -- Forces use of ioctl commands. Only valid if mounting a CD-ROM under a Windows OS which support them (Win2000/XP/NT).&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;">&lt;span style=" font-weight:600;">-noioctl&lt;/span> -- Forces use of the SDL CD-ROM layer. Valid on all systems.&lt;/p>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;">&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;">Procura no montar la Raiz del sistema operativo: ejemplo en windows seria &lt;span style=" font-weight:600; color:#dc143c;">C:\&lt;/span> y en linux seria directamente &lt;span style=" font-weight:600; color:#dc143c;">/&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+     </property>
+     <property name="wordWrap" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
+     </property>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk" >
+       <property name="text" >
+        <string>Aceptar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel" >
+       <property name="text" >
+        <string>Cancelar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>txtMontaje_1</tabstop>
+  <tabstop>btnDirFile</tabstop>
+  <tabstop>txtMontaje_2</tabstop>
+  <tabstop>cbxMontaje_1</tabstop>
+  <tabstop>cbxMontaje_2</tabstop>
+  <tabstop>cbxMontaje_3</tabstop>
+  <tabstop>txtMontaje_3</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/grlida.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>btnCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddEditMontajesClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>369</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>179</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

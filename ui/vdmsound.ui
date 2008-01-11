@@ -1,0 +1,408 @@
+<ui version="4.0" >
+ <class>VdmsAddClass</class>
+ <widget class="QDialog" name="VdmsAddClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>389</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>450</width>
+    <height>389</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>450</width>
+    <height>389</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Asistente del VdmSound</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../res/grlida.qrc" >:/img16/vdmsound.png</iconset>
+  </property>
+  <property name="autoFillBackground" >
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>0</number>
+   </property>
+   <property name="spacing" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="imgLogoSvm" >
+     <property name="minimumSize" >
+      <size>
+       <width>450</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>16777215</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="palette" >
+      <palette>
+       <active>
+        <colorrole role="Base" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="Base" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="Base" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window" >
+         <brush brushstyle="SolidPattern" >
+          <color alpha="255" >
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="autoFillBackground" >
+      <bool>true</bool>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="pixmap" >
+      <pixmap resource="../res/grlida.qrc" >:/images/wizard_vdmsound.png</pixmap>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame" >
+     <widget class="QLabel" name="lb_Vdms_3" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string>Parametros:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_Vdms_4" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>170</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string>Dirección del Icono:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnVdms_Icono" >
+      <property name="geometry" >
+       <rect>
+        <x>400</x>
+        <y>170</y>
+        <width>31</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string/>
+      </property>
+      <property name="icon" >
+       <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnVdms_ExeJuego" >
+      <property name="geometry" >
+       <rect>
+        <x>400</x>
+        <y>110</y>
+        <width>31</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string/>
+      </property>
+      <property name="icon" >
+       <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnVdms_FileConfg" >
+      <property name="geometry" >
+       <rect>
+        <x>400</x>
+        <y>60</y>
+        <width>31</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string/>
+      </property>
+      <property name="icon" >
+       <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_Vdms_1" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>361</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string>Nombre del Archivo de configuración a Guardar:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_Datos_1" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string>Titulo:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtDatos_1" >
+      <property name="geometry" >
+       <rect>
+        <x>90</x>
+        <y>10</y>
+        <width>301</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_Vdms_2" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>361</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string>Ejecutable (exe,com,bat) del Juego:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtVdms_3" >
+      <property name="geometry" >
+       <rect>
+        <x>130</x>
+        <y>140</y>
+        <width>261</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtVdms_1" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtVdms_2" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtVdms_4" >
+      <property name="geometry" >
+       <rect>
+        <x>130</x>
+        <y>170</y>
+        <width>261</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>4</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="btnCancel" >
+       <property name="minimumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Cancelar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk" >
+       <property name="enabled" >
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Aceptar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>txtDatos_1</tabstop>
+  <tabstop>txtVdms_1</tabstop>
+  <tabstop>btnVdms_FileConfg</tabstop>
+  <tabstop>txtVdms_2</tabstop>
+  <tabstop>btnVdms_ExeJuego</tabstop>
+  <tabstop>txtVdms_3</tabstop>
+  <tabstop>txtVdms_4</tabstop>
+  <tabstop>btnVdms_Icono</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/grlida.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>btnCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>VdmsAddClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>69</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>214</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,13 @@
+
+-  TODO
+-----------------------------------
+
+- Implementar Importar y Exportar
+- Mejorar los montajes entre otras cosas
+- CoverFlow
+- Visor de Cajas en 3D
+
+-----------------------------------
+Monthy <ermonthy@gmail.com>
+http://www.laisladelabandoware.com/
+

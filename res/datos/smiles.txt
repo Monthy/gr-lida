@@ -1,0 +1,13 @@
+:D",":/smiles/biggrin.png
+8)",":/smiles/cool.png
+:P",":/smiles/razz.png
+:x",":/smiles/mad.png
+:o",":/smiles/surprised.png
+:roll:",":/smiles/rolleyes.png
+:(",":/smiles/sad.png
+:)",":/smiles/smile.png
+:p",":/smiles/razz.png
+;)",":/smiles/wink.png
+:flecha:",":/smiles/flecha.png
+:!:",":/smiles/exclamation.png
+:corazon:",":/smiles/corazon.png

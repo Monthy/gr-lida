@@ -1,0 +1,201 @@
+/*
+ *
+ * GR-lida by Monthy
+ *
+ * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
+ * Copyright (C) 2006  Pedro A. Garcia Rosado Aka Monthy
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ *
+ *
+**/
+
+#include <QApplication>
+#include <QSplashScreen>
+#include <QMessageBox>
+#include <QProcess>
+#include <QtCore>
+#include <QtGui>
+#include <QTranslator>
+
+#include "grlida.h"
+#include "grlida_config_inicial.h"
+
+int main(int argc, char *argv[])
+{
+	QString stHomeDir, stDirPath, stIdiomaSelect, Version_GRL, stStyleSelect;
+	bool ejecutado_por_primeravez , chk_StylePalette;
+
+    QApplication app(argc, argv);
+	
+	QSplashScreen splash( QPixmap(":/images/splash.png") );
+	splash.setFont( QFont("Helvetica", 10) );
+	splash.show();
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Creando ventana principal"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+	
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta principal"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+ 
+	stHomeDir = QDir::homePath()+"/.gr-lida/";  // Indicamos el directorio del usuario
+//	stHomeDir = QDir::currentPath()+ "/";  		// Indicamos el directorio del usuario
+//	stHomeDir = "./";  							// Indicamos el directorio del usuario
+
+// Crear directorio de la aplicacion si no existe
+    QDir appDir;
+    if (!appDir.exists(stHomeDir)) appDir.mkdir( stHomeDir );
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando la configuración Inicial"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+	
+// Comprueba y sino crea la configuracion por defecto
+	QFile appConfg(stHomeDir+"GR-lida.conf");
+	if ( !appConfg.exists() ) {
+		QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
+		settings.beginGroup("OpcGeneral");
+			settings.setValue("DOSBoxDisp"   , "false");
+			settings.setValue("ScummVMDisp"  , "false");
+			settings.setValue("VDMSoundDisp" , "false");
+			settings.setValue("Primeravez"   , "true");
+			settings.setValue("Cerrar_GRlida", "false");
+		//	settings.setValue("dbGRlida"     , stHomeDir+"db_grl.grl");
+			settings.setValue("dbColTabla"   , "titulo");
+			settings.setValue("dbOrdenBy"    , "titulo");
+			settings.setValue("dbOrden"      , "asc");
+			settings.setValue("IdiomaSelect" , "es_ES");
+			settings.setValue("url_xmldb"    , "");		
+			settings.setValue("Style"        , "Default");
+			settings.setValue("StylePalette" , "false");
+		settings.endGroup();
+		settings.beginGroup("OpcVer");
+			settings.setValue("Pnl_Datos"    , "true" );
+			settings.setValue("Pnl_Capturas" , "false");
+			settings.setValue("Pnl_FilesUrl" , "false");
+		settings.endGroup();
+		settings.beginGroup("SqlDatabase");
+			settings.setValue("db_type"		, "QSQLITE" ); // QSQLITE, QMYSQL, QPSQL
+			settings.setValue("db_host"		, stHomeDir+"db_grl.grl"); // localhost, archivo
+			settings.setValue("db_name"		, ""	); // Nombre base de datos
+			settings.setValue("db_username"	, ""	); // Nombre del Usuario
+			settings.setValue("db_password"	, ""	); // Password
+			settings.setValue("db_port"		, "3306"); // Puerto
+		settings.endGroup();		
+		//settings.beginGroup("Updates");
+		//	settings.setValue("Version"      , "");
+		//settings.endGroup();		
+		ejecutado_por_primeravez = true;
+		chk_StylePalette = false;
+		stIdiomaSelect = "es_ES" ;
+		Version_GRL = "";
+	}else{
+		QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
+		settings.beginGroup("OpcGeneral");
+			ejecutado_por_primeravez = settings.value("Primeravez", "true").toBool();
+			stIdiomaSelect   = settings.value("IdiomaSelect", "es_ES").toString();
+		    stStyleSelect    = settings.value("Style", "Default").toString();
+		    chk_StylePalette = settings.value("StylePalette", "false").toBool();
+		settings.endGroup();
+		settings.beginGroup("Updates");
+			Version_GRL = settings.value("Version", "").toString();
+		settings.endGroup();	
+	}	
+	if(stStyleSelect!="" || stStyleSelect!="Default")
+		QApplication::setStyle( stStyleSelect );
+	
+	if (chk_StylePalette)
+        QApplication::setPalette(QApplication::style()->standardPalette());
+	
+	if( ejecutado_por_primeravez ){
+		frmConfigInicial * ConfigInicial = new frmConfigInicial();
+		if ( ConfigInicial->exec() == QDialog::Accepted )
+			stIdiomaSelect = ConfigInicial->IdiomaSelect; 
+	}
+	QTranslator translator;
+	translator.load( stHomeDir+ "idiomas/gr-lida_" + stIdiomaSelect + ".qm" );
+	qApp->installTranslator(&translator);
+	
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Idiomas"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio idiomas si no existe
+    QDir langDir;
+    if (!langDir.exists(stHomeDir+"idiomas")) langDir.mkdir( stHomeDir+"idiomas" );
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Iconos"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio iconos si no existe
+    QDir iconDir;
+    if (!iconDir.exists(stHomeDir+"iconos")) iconDir.mkdir(stHomeDir+"iconos");
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Smiles"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio smiles si no existe
+    QDir smilesDir;
+    if (!smilesDir.exists(stHomeDir+"smiles")) smilesDir.mkdir(stHomeDir+"smiles");
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Datos"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio datos si no existe
+	QDir datosDir;
+	if (!datosDir.exists(stHomeDir+"datos")) datosDir.mkdir(stHomeDir+"datos");
+ 
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Configuración del DOSBox"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio confDbx si no existe
+    QDir confDbxDir;
+    if (!confDbxDir.exists(stHomeDir + "confdbx")) confDbxDir.mkdir(stHomeDir + "confdbx");
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Roms"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio Roms si no existe
+    QDir RomsDir;
+    if (!RomsDir.exists(stHomeDir + "roms")) RomsDir.mkdir(stHomeDir + "roms");
+
+#ifdef Q_OS_WIN32
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Configuración del VdmSound"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio confVdms si no existe
+    QDir confVdmsDir;
+    if (!confVdmsDir.exists(stHomeDir+"confvdms")) confVdmsDir.mkdir(stHomeDir+"confvdms");
+#endif
+
+// Crear directorio confVdms si no existe
+    QDir thumbsDir;
+    if (!thumbsDir.exists(stHomeDir+"thumbs")) thumbsDir.mkdir(stHomeDir+"thumbs");
+
+// Crear directorio confVdms si no existe
+    QDir coversDir;
+    if (!coversDir.exists(stHomeDir+"covers")) coversDir.mkdir(stHomeDir+"covers");
+
+    GrLida w;
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Cargando Configuración..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+	w.CargarConfigInicial();
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando archivos de Datos..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();	
+	w.ComprobarArchivosDatos( Version_GRL );
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Cargando Base de Datos..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+	w.CargarBaseDatos();
+	
+    w.show();
+	splash.finish(&w);
+
+	app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
+    return app.exec();
+}

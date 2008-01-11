@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=GR-lida
+Comment=Front-End para el DOSBox, ScummVM y VDMSound
+Exec=gr-lida
+Icon=gr-lida.png
+Terminal=false
+Type=Application
+Categories=Application;Game;
+StartupNotify=false

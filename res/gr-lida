@@ -1,0 +1,3 @@
+?package(gr-lida):needs="x11" section="Games" \
+  title="GR-lida" command="/usr/bin/gr-lida" \
+  icon="/usr/share/icons/gr-lida.png"

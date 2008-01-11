@@ -1,0 +1,5 @@
+surface|sinimg
+overlay|sinimg
+opengl|sinimg
+openglnb|sinimg
+ddraw|sinimg

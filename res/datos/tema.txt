@@ -1,0 +1,9 @@
+Ciencia Ficción|datos_3
+Aventuras|datos_3
+Aventura-Terror|datos_3
+Video Aventura|datos_3
+Futurista|datos_3
+No se|datos_3
+Medieval|datos_3
+Clásico|datos_3
+|

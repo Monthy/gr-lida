@@ -1,0 +1,19 @@
+Castellano|es
+Ingles|en
+Ingles (GB)|gb
+Ingles (US)|us
+Aleman|de
+Frances|fr
+Italiano|it
+Portuges|pt
+Japones|jp
+Chino (Taiwan)|zh
+Coreano|kr
+Hebreo|hb
+Ruso|ru
+Checo|cz
+Sueco|se
+Holandés|nl
+Noruego Bokmal|nb
+Polaco|pl
+<default>|

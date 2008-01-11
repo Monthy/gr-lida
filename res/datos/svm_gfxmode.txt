@@ -1,0 +1,13 @@
+<default>||sinimg
+Normal (no scaling)|1x|img_1x
+2x (Default)|2x|img_2x
+3x|3x|img_3x
+2x SAI|2xsai|img_2xsai
+Super 2x Sai|super2xsai|img_super2xsai
+SuperEagle|supereagle|img_supereagle
+Advanced Mame 2x|advmame2x|img_advmame2x_3x
+Advanced Mame 3x|advmame3x|img_advmame2x_3x
+High Quality 2x|hq2x|img_hq2x
+High Quality 3x|hq3x|img_hq3x
+Tv 2x|tv2x|img_tv2x
+Dotmatrix|dotmatrix|img_dotmatrix

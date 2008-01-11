@@ -1,0 +1,18 @@
+1 CD|cd_iso
+2 CDs|cd_iso
+3 CDs|cd_iso
+4 CDs|cd_iso
+5 CDs|cd_iso
+6 CDs|cd_iso
+7 CDs|cd_iso
+8 CDs|cd_iso
+1 DVD|dvd
+1 Disquete|floppy_2
+2 Disquete|floppy_2
+3 Disquete|floppy_2
+4 Disquete|floppy_2
+5 Disquete|floppy_2
+6 Disquete|floppy_2
+7 Disquete|floppy_2
+8 Disquete|floppy_2
+|

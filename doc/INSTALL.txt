@@ -1,0 +1,32 @@
+
+-  Basic Installation
+-----------------------------------
+
+The simplest way to compile this package is:
+
+- Compile GR-lida in Linux
+  
+  1. Open a command shell.
+  2. Type `qmake' to generate the Makefile for your system.
+  3. Type `make'
+  4. The executable file GR-lida is built on bin/ directory.
+
+
+- Compile GR-lida in Windows
+
+  1. Open a command shell: Start->run: cmd
+  2. Type `qmake' to generate the Makefile for your system.
+  3. Type `mingw32-make'
+  4. The executable file GR-lida is built on bin/ directory.
+
+
+- En Español Linux/Windows -----------
+  
+  1. Abrir la Consola o Símbolo del sistema en Windows ejecutar-> cmd
+  2. Escribe `qmake' para generar el Makefile para tu sistema
+  3. Escribe `make' o ( `mingw32-make' si es en Windows ) para empezar a compilar
+  4. El ejecutable del GR-lida lo encontrar en el directorio bin/
+
+-----------------------------------
+Monthy <ermonthy@gmail.com>
+http://www.laisladelabandoware.com/

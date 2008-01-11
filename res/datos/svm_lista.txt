@@ -1,0 +1,91 @@
+LucasArts Game Compatibility Chart||logo_lucas_arts
+Maniac Mansion|maniac|90
+Zak McKracken and the Alien Mindbenders|zak|90
+Indiana Jones and the Last Crusade|indy3|90
+Loom|loom|95
+Passport to Adventure|pass|95
+The Secret of Monkey Island|monkey|95
+Monkey Island 2: LeChuck's Revenge|monkey2|95
+Indiana Jones and the Fate of Atlantis|atlantis|95
+Day of the Tentacle|tentacle|95
+Sam & Max Hit the Road|samnmax|95
+Full Throttle|ft|90
+The Dig|dig|90
+The Curse of Monkey Island|comi|90
+Sierra AGI Game Compatibility Chart||logo_sierra
+The Black Cauldron|bc|90
+Gold Rush!|goldrush|90
+King's Quest I|kq1|90
+King's Quest II|kq2|90
+King's Quest III|kq3|90
+King's Quest IV|kq4|90
+Leisure Suit Larry in the Land of the Lounge Lizards|lsl1|90
+Mixed-Up Mother Goose|mixedup|90
+Manhunter 1: New York|mh1|90
+Manhunter 2: San Francisco|mh2|90
+Police Quest I: In Pursuit of the Death Angel|pq1|90
+Space Quest I: The Sarien Encounter|sq1|90
+Space Quest II: Vohaul's Revenge|sq2|90
+Fanmade Games|agi-fanmade|80
+Other Game Compatibility Chart||
+Bargon Attack|bargon|95
+Beneath a Steel Sky|sky|98
+Broken Sword 1: The Shadow of the Templars|sword1|98
+Broken Sword 2: The Smoking Mirror|sword2|98
+Elvira II - The Jaws of Cerberus|elvira2|50
+Flight of the Amazon Queen|queen|98
+Future Wars|fw|75
+Gobliiins|gob1|95
+Gobliins 2|gob2|95
+Goblins 3|gob3|90
+Inherit the Earth: Quest for the Orb|ite|87
+Nippon Safes Inc.|nippon|70
+Simon the Sorcerer 1|simon1|95
+Simon the Sorcerer 2|simon2|95
+Simon the Sorcerer's Puzzle Pack - D.I.M.P.|dimp|70
+Simon the Sorcerer's Puzzle Pack - Jumble|jumble|70
+Simon the Sorcerer's Puzzle Pack - NoPatience|puzzle|70
+Simon the Sorcerer's Puzzle Pack - Swampy Adventures|swampy|70
+The Feeble Files|feeble|95
+The Legend of Kyrandia|kyra1|80
+Touche: The Adventures of the Fifth Musketeer|touche|75
+Ween: The Prophecy|ween|95
+Humongous Entertainment Game Compatibility Chart||
+Backyard Baseball|baseball|20
+Backyard Football|football|80
+Backyard Soccer|soccer|20
+Big Thinkers First Grade|thinker1|90
+Big Thinkers Kindergarten|thinkerk|90
+Blue's ABC Time|BluesABCTime|50
+Blue's Birthday Adventure|BluesBirthday|50
+Fatty Bear's Birthday Surprise|fbear|93
+Fatty Bear's Fun Pack|fbpack|95
+Freddi Fish 1: The Case of the Missing Kelp Seeds|freddi|90
+Freddi Fish 2: The Case of the Haunted Schoolhouse|freddi2|90
+Freddi Fish 3: The Case of the Stolen Conch Shell|freddi3|90
+Freddi Fish 4: The Case of the Hogfish Rustlers of Briny Gulch|freddi4|90
+Freddi Fish and Luther's Maze Madness|maze|90
+Freddi Fish and Luther's Water Worries|water|90
+Let's Explore the Airport with Buzzy|airport|90
+Let's Explore the Farm with Buzzy|farm|90
+Let's Explore the Jungle with Buzzy|jungle|90
+Pajama Sam 1: No Need to Hide When It's Dark Outside|pajama|90
+Pajama Sam 2: Thunder and Lightning Aren't so Frightening|pajama2|90
+Pajama Sam 3: You Are What You Eat From Your Head to Your Feet|pajama3|90
+Pajama Sam's Lost & Found|lost|85
+Pajama Sam's Sock Works|socks|90
+Putt-Putt Enters the Race|puttrace|90
+Putt-Putt Goes to the Moon|puttmoon|95
+Putt-Putt Joins the Circus|puttcircus|90
+Putt-Putt Joins the Parade|puttputt|95
+Putt-Putt Saves the Zoo|puttzoo|90
+Putt-Putt Travels Through Time|putttime|90
+Putt-Putt and Pep's Balloon-O-Rama|balloon|90
+Putt-Putt and Pep's Dog on a Stick|dog|90
+Putt-Putt & Fatty Bear's Activity Pack|activity|95
+Putt-Putt's Fun Pack|funpack|95
+SPY Fox 1: Dry Cereal|spyfox|90
+SPY Fox 2: Some Assembly Required|spyfox2|90
+SPY Fox 3: Operation Ozone|spyozon|70
+SPY Fox in Cheese Chase|chase|90
+SPY Fox in Hold the Mustard|mustard|85

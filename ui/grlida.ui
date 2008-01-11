@@ -1,0 +1,2374 @@
+<ui version="4.0" >
+ <class>GrLidaClass</class>
+ <widget class="QMainWindow" name="GrLidaClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>743</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>GR-lida</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
+  </property>
+  <property name="iconSize" >
+   <size>
+    <width>32</width>
+    <height>32</height>
+   </size>
+  </property>
+  <widget class="QWidget" name="centralWidget" >
+   <layout class="QVBoxLayout" >
+    <property name="spacing" >
+     <number>0</number>
+    </property>
+    <property name="leftMargin" >
+     <number>4</number>
+    </property>
+    <property name="topMargin" >
+     <number>4</number>
+    </property>
+    <property name="rightMargin" >
+     <number>4</number>
+    </property>
+    <property name="bottomMargin" >
+     <number>4</number>
+    </property>
+    <item>
+     <widget class="QSplitter" name="splitter_2" >
+      <property name="orientation" >
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QWidget" name="layoutWidget" >
+       <layout class="QHBoxLayout" >
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QSplitter" name="splitter" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
+          </property>
+          <widget class="QTreeWidget" name="twJuegos" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>220</height>
+            </size>
+           </property>
+           <property name="focusPolicy" >
+            <enum>Qt::ClickFocus</enum>
+           </property>
+           <property name="frameShadow" >
+            <enum>QFrame::Sunken</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy" >
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="showDropIndicator" stdset="0" >
+            <bool>false</bool>
+           </property>
+           <property name="alternatingRowColors" >
+            <bool>false</bool>
+           </property>
+           <property name="iconSize" >
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="textElideMode" >
+            <enum>Qt::ElideNone</enum>
+           </property>
+           <property name="rootIsDecorated" >
+            <bool>false</bool>
+           </property>
+           <property name="itemsExpandable" >
+            <bool>false</bool>
+           </property>
+           <column>
+            <property name="text" >
+             <string/>
+            </property>
+           </column>
+           <column>
+            <property name="text" >
+             <string>Título</string>
+            </property>
+           </column>
+          </widget>
+          <widget class="QDockWidget" name="dockw_FilesUrl" >
+           <property name="features" >
+            <set>QDockWidget::NoDockWidgetFeatures</set>
+           </property>
+           <property name="allowedAreas" >
+            <set>Qt::NoDockWidgetArea</set>
+           </property>
+           <property name="windowTitle" >
+            <string>Archivos y Url</string>
+           </property>
+           <widget class="QWidget" name="dockWidgetContents" >
+            <layout class="QVBoxLayout" >
+             <property name="spacing" >
+              <number>0</number>
+             </property>
+             <property name="leftMargin" >
+              <number>0</number>
+             </property>
+             <property name="topMargin" >
+              <number>0</number>
+             </property>
+             <property name="rightMargin" >
+              <number>0</number>
+             </property>
+             <property name="bottomMargin" >
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QFrame" name="frame_toolbar_1" >
+               <property name="minimumSize" >
+                <size>
+                 <width>110</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>16777215</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="frameShape" >
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow" >
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" >
+                <property name="spacing" >
+                 <number>2</number>
+                </property>
+                <property name="leftMargin" >
+                 <number>0</number>
+                </property>
+                <property name="topMargin" >
+                 <number>0</number>
+                </property>
+                <property name="rightMargin" >
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin" >
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QToolButton" name="btn_fileurl_1" >
+                  <property name="minimumSize" >
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text" >
+                   <string>Ver URL</string>
+                  </property>
+                  <property name="icon" >
+                   <iconset resource="../res/grlida.qrc" >:/img16/edit_enlace.png</iconset>
+                  </property>
+                  <property name="checkable" >
+                   <bool>true</bool>
+                  </property>
+                  <property name="checked" >
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="btn_fileurl_2" >
+                  <property name="minimumSize" >
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text" >
+                   <string>Ver Archivos</string>
+                  </property>
+                  <property name="icon" >
+                   <iconset resource="../res/grlida.qrc" >:/img16/archivos.png</iconset>
+                  </property>
+                  <property name="checkable" >
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer>
+                  <property name="orientation" >
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" >
+                   <size>
+                    <width>51</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" >
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <property name="leftMargin" >
+                <number>0</number>
+               </property>
+               <property name="topMargin" >
+                <number>0</number>
+               </property>
+               <property name="rightMargin" >
+                <number>0</number>
+               </property>
+               <property name="bottomMargin" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QTreeWidget" name="twFiles" >
+                 <property name="focusPolicy" >
+                  <enum>Qt::ClickFocus</enum>
+                 </property>
+                 <property name="showDropIndicator" stdset="0" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="iconSize" >
+                  <size>
+                   <width>16</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="textElideMode" >
+                  <enum>Qt::ElideNone</enum>
+                 </property>
+                 <property name="rootIsDecorated" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="itemsExpandable" >
+                  <bool>false</bool>
+                 </property>
+                 <column>
+                  <property name="text" >
+                   <string>Nombre</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>CRC32</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Descripción</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Size</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Path</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTreeWidget" name="twUrls" >
+                 <property name="focusPolicy" >
+                  <enum>Qt::ClickFocus</enum>
+                 </property>
+                 <property name="frameShadow" >
+                  <enum>QFrame::Sunken</enum>
+                 </property>
+                 <property name="showDropIndicator" stdset="0" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="iconSize" >
+                  <size>
+                   <width>16</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="textElideMode" >
+                  <enum>Qt::ElideNone</enum>
+                 </property>
+                 <property name="rootIsDecorated" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="itemsExpandable" >
+                  <bool>false</bool>
+                 </property>
+                 <column>
+                  <property name="text" >
+                   <string>Url</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text" >
+                   <string>Descripción</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDockWidget" name="dockw_Capturas" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize" >
+           <size>
+            <width>170</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="features" >
+           <set>QDockWidget::NoDockWidgetFeatures</set>
+          </property>
+          <property name="allowedAreas" >
+           <set>Qt::NoDockWidgetArea</set>
+          </property>
+          <property name="windowTitle" >
+           <string>Capturas del juego</string>
+          </property>
+          <widget class="QWidget" name="dockWidgetContents_2" >
+           <layout class="QVBoxLayout" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QFrame" name="frame_toolbar_2" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>170</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="frameShape" >
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow" >
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QHBoxLayout" >
+               <property name="spacing" >
+                <number>2</number>
+               </property>
+               <property name="leftMargin" >
+                <number>0</number>
+               </property>
+               <property name="topMargin" >
+                <number>0</number>
+               </property>
+               <property name="rightMargin" >
+                <number>0</number>
+               </property>
+               <property name="bottomMargin" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QToolButton" name="btn_imgtumb_1" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>24</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text" >
+                  <string>DOSBox</string>
+                 </property>
+                 <property name="icon" >
+                  <iconset resource="../res/grlida.qrc" >:/img16/dosbox.png</iconset>
+                 </property>
+                 <property name="checkable" >
+                  <bool>true</bool>
+                 </property>
+                 <property name="checked" >
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="btn_imgtumb_2" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>24</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text" >
+                  <string>ScummVM</string>
+                 </property>
+                 <property name="icon" >
+                  <iconset resource="../res/grlida.qrc" >:/img16/scummvm.png</iconset>
+                 </property>
+                 <property name="checkable" >
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer>
+                 <property name="orientation" >
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" >
+                  <size>
+                   <width>51</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTreeWidget" name="twCapturas" >
+              <property name="maximumSize" >
+               <size>
+                <width>170</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="focusPolicy" >
+               <enum>Qt::ClickFocus</enum>
+              </property>
+              <property name="frameShadow" >
+               <enum>QFrame::Sunken</enum>
+              </property>
+              <property name="showDropIndicator" stdset="0" >
+               <bool>false</bool>
+              </property>
+              <property name="alternatingRowColors" >
+               <bool>false</bool>
+              </property>
+              <property name="iconSize" >
+               <size>
+                <width>135</width>
+                <height>120</height>
+               </size>
+              </property>
+              <property name="textElideMode" >
+               <enum>Qt::ElideNone</enum>
+              </property>
+              <property name="rootIsDecorated" >
+               <bool>false</bool>
+              </property>
+              <property name="itemsExpandable" >
+               <bool>false</bool>
+              </property>
+              <column>
+               <property name="text" >
+                <string>Capturas</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QDockWidget" name="dockw_Datos" >
+       <property name="minimumSize" >
+        <size>
+         <width>327</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="floating" >
+        <bool>false</bool>
+       </property>
+       <property name="features" >
+        <set>QDockWidget::NoDockWidgetFeatures</set>
+       </property>
+       <property name="allowedAreas" >
+        <set>Qt::NoDockWidgetArea</set>
+       </property>
+       <property name="windowTitle" >
+        <string>Datos del juego</string>
+       </property>
+       <widget class="QWidget" name="dockWidgetContents_3" >
+        <layout class="QVBoxLayout" >
+         <property name="spacing" >
+          <number>0</number>
+         </property>
+         <property name="leftMargin" >
+          <number>0</number>
+         </property>
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <property name="rightMargin" >
+          <number>0</number>
+         </property>
+         <property name="bottomMargin" >
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <property name="leftMargin" >
+            <number>2</number>
+           </property>
+           <property name="topMargin" >
+            <number>2</number>
+           </property>
+           <property name="rightMargin" >
+            <number>2</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>2</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lb_info_1" >
+             <property name="minimumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Subtítulo</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtDatos_1" >
+             <property name="minimumSize" >
+              <size>
+               <width>0</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>16777215</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="frame" >
+              <bool>true</bool>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <property name="leftMargin" >
+            <number>2</number>
+           </property>
+           <property name="topMargin" >
+            <number>2</number>
+           </property>
+           <property name="rightMargin" >
+            <number>2</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>2</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lb_info_2" >
+             <property name="minimumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Genero</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtDatos_2" >
+             <property name="minimumSize" >
+              <size>
+               <width>0</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>16777215</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QGridLayout" >
+           <property name="leftMargin" >
+            <number>1</number>
+           </property>
+           <property name="topMargin" >
+            <number>1</number>
+           </property>
+           <property name="rightMargin" >
+            <number>1</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>1</number>
+           </property>
+           <property name="horizontalSpacing" >
+            <number>3</number>
+           </property>
+           <property name="verticalSpacing" >
+            <number>3</number>
+           </property>
+           <item row="3" column="1" >
+            <widget class="QLineEdit" name="txtDatos_6" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize" >
+              <size>
+               <width>75</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>75</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" >
+            <widget class="QLineEdit" name="txtDatos_3" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize" >
+              <size>
+               <width>75</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>75</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" >
+            <widget class="QLabel" name="lb_info_3" >
+             <property name="minimumSize" >
+              <size>
+               <width>89</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>89</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="layoutDirection" >
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text" >
+              <string>Idioma:</string>
+             </property>
+             <property name="textFormat" >
+              <enum>Qt::AutoText</enum>
+             </property>
+            </widget>
+           </item>
+           <item rowspan="5" row="0" column="2" >
+            <widget class="QFrame" name="frame_imagen" >
+             <property name="minimumSize" >
+              <size>
+               <width>158</width>
+               <height>109</height>
+              </size>
+             </property>
+             <property name="baseSize" >
+              <size>
+               <width>158</width>
+               <height>109</height>
+              </size>
+             </property>
+             <property name="frameShape" >
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow" >
+              <enum>QFrame::Sunken</enum>
+             </property>
+             <layout class="QHBoxLayout" >
+              <property name="spacing" >
+               <number>0</number>
+              </property>
+              <property name="leftMargin" >
+               <number>0</number>
+              </property>
+              <property name="topMargin" >
+               <number>0</number>
+              </property>
+              <property name="rightMargin" >
+               <number>0</number>
+              </property>
+              <property name="bottomMargin" >
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="lbImgThumbs" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Ignored" hsizetype="Ignored" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize" >
+                 <size>
+                  <width>152</width>
+                  <height>103</height>
+                 </size>
+                </property>
+                <property name="baseSize" >
+                 <size>
+                  <width>152</width>
+                  <height>103</height>
+                 </size>
+                </property>
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="scaledContents" >
+                 <bool>true</bool>
+                </property>
+                <property name="alignment" >
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="1" >
+            <widget class="QLineEdit" name="txtDatos_4" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize" >
+              <size>
+               <width>75</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>75</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" >
+            <widget class="QLabel" name="lb_info_4" >
+             <property name="maximumSize" >
+              <size>
+               <width>89</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Formato</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" >
+            <widget class="QLabel" name="lb_info_7" >
+             <property name="maximumSize" >
+              <size>
+               <width>89</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Tamaño</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" >
+            <widget class="QLineEdit" name="txtDatos_5" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize" >
+              <size>
+               <width>75</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>75</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" >
+            <widget class="QLineEdit" name="txtDatos_7" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize" >
+              <size>
+               <width>75</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>75</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" >
+            <widget class="QLabel" name="lb_info_6" >
+             <property name="maximumSize" >
+              <size>
+               <width>89</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Año</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" >
+            <widget class="QLabel" name="lb_info_5" >
+             <property name="maximumSize" >
+              <size>
+               <width>89</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Nº Cds</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <property name="leftMargin" >
+            <number>2</number>
+           </property>
+           <property name="topMargin" >
+            <number>2</number>
+           </property>
+           <property name="rightMargin" >
+            <number>2</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>2</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lb_info_8" >
+             <property name="minimumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Compañia</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtDatos_8" >
+             <property name="minimumSize" >
+              <size>
+               <width>0</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>16777215</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <property name="leftMargin" >
+            <number>2</number>
+           </property>
+           <property name="topMargin" >
+            <number>2</number>
+           </property>
+           <property name="rightMargin" >
+            <number>2</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>2</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lb_info_9" >
+             <property name="minimumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Desarrollador</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtDatos_9" >
+             <property name="minimumSize" >
+              <size>
+               <width>0</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>16777215</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <property name="leftMargin" >
+            <number>2</number>
+           </property>
+           <property name="topMargin" >
+            <number>2</number>
+           </property>
+           <property name="rightMargin" >
+            <number>2</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>2</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lb_info_10" >
+             <property name="minimumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Tema</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtDatos_10" >
+             <property name="minimumSize" >
+              <size>
+               <width>0</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>16777215</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <property name="leftMargin" >
+            <number>2</number>
+           </property>
+           <property name="topMargin" >
+            <number>2</number>
+           </property>
+           <property name="rightMargin" >
+            <number>2</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>2</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lb_info_11" >
+             <property name="minimumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>90</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Sistema Op.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtDatos_11" >
+             <property name="minimumSize" >
+              <size>
+               <width>0</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>16777215</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <property name="leftMargin" >
+            <number>2</number>
+           </property>
+           <property name="topMargin" >
+            <number>2</number>
+           </property>
+           <property name="rightMargin" >
+            <number>2</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>2</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lb_info_12" >
+             <property name="minimumSize" >
+              <size>
+               <width>200</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>16777215</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Dispone de Archivos / Carátulas</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="toolButton_11" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>23</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Archivos</string>
+             </property>
+             <property name="icon" >
+              <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="toolButton" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>23</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Caratula delantera</string>
+             </property>
+             <property name="icon" >
+              <iconset resource="../res/grlida.qrc" >:/img16/capturas.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="toolButton_2" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>23</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Caratula trasera</string>
+             </property>
+             <property name="icon" >
+              <iconset resource="../res/grlida.qrc" >:/img16/capturas.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTextEdit" name="txtDatos_12" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="readOnly" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QToolBar" name="toolBar_1" >
+   <property name="minimumSize" >
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>16777215</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="windowTitle" >
+    <string>Barra de Herramientas</string>
+   </property>
+   <property name="movable" >
+    <bool>true</bool>
+   </property>
+   <property name="allowedAreas" >
+    <set>Qt::NoToolBarArea</set>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle" >
+    <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <property name="floatable" >
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea" >
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak" >
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionClose" />
+   <addaction name="separator" />
+   <addaction name="actionNewDbx" />
+   <addaction name="actionNewSvm" />
+   <addaction name="actionNewVdms" />
+   <addaction name="separator" />
+   <addaction name="actionEjectar" />
+   <addaction name="actionEjectarSetup" />
+   <addaction name="separator" />
+   <addaction name="actionNuevo" />
+   <addaction name="actionEditar" />
+   <addaction name="actionEiminar" />
+   <addaction name="separator" />
+   <addaction name="actionImportarJuego" />
+   <addaction name="actionVerFilesUrl" />
+   <addaction name="actionVerDatos" />
+   <addaction name="actionVerCapturas" />
+   <addaction name="separator" />
+   <addaction name="actionOpciones" />
+   <addaction name="actionAcercaD" />
+  </widget>
+  <widget class="QMenuBar" name="menuBar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>743</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_Ver" >
+    <property name="title" >
+     <string>&amp;Ver</string>
+    </property>
+    <addaction name="mnu_ver_archivos_url" />
+    <addaction name="mnu_ver_datos" />
+    <addaction name="mnu_ver_capturas" />
+    <addaction name="mnu_ver_toolbar" />
+    <addaction name="separator" />
+    <addaction name="mnu_tool_opciones" />
+    <addaction name="mnu_ver_acercad" />
+   </widget>
+   <widget class="QMenu" name="menu_Herramientas" >
+    <property name="title" >
+     <string>&amp;Herramientas</string>
+    </property>
+    <addaction name="mnu_tool_importar" />
+    <addaction name="separator" />
+    <addaction name="mnu_tool_opciones" />
+   </widget>
+   <widget class="QMenu" name="menuEjecutar" >
+    <property name="title" >
+     <string>E&amp;jecutar</string>
+    </property>
+    <addaction name="mnu_ejecutar_dosbox" />
+    <addaction name="mnu_ejecutar_scummvm" />
+    <addaction name="separator" />
+    <addaction name="mnu_ejecutar_juego" />
+    <addaction name="mnu_ejecutar_setup" />
+   </widget>
+   <widget class="QMenu" name="menuEdici_n" >
+    <property name="title" >
+     <string>&amp;Edición</string>
+    </property>
+    <addaction name="mnu_edit_nuevo_dosbox" />
+    <addaction name="mnu_edit_nuevo_scummvm" />
+    <addaction name="mnu_edit_nuevo_vdmsound" />
+    <addaction name="separator" />
+    <addaction name="mnu_edit_nuevo" />
+    <addaction name="mnu_edit_editar" />
+    <addaction name="mnu_edit_eliminar" />
+   </widget>
+   <widget class="QMenu" name="menuArchivo" >
+    <property name="title" >
+     <string>&amp;Archivo</string>
+    </property>
+    <addaction name="mnu_file_informacion" />
+    <addaction name="separator" />
+    <addaction name="mnu_file_cerrar" />
+   </widget>
+   <addaction name="menuArchivo" />
+   <addaction name="menuEdici_n" />
+   <addaction name="menuEjecutar" />
+   <addaction name="menu_Herramientas" />
+   <addaction name="menu_Ver" />
+  </widget>
+  <action name="actionClose" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnClose.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Cerrar</string>
+   </property>
+   <property name="iconText" >
+    <string>Cerrar</string>
+   </property>
+   <property name="toolTip" >
+    <string>Cerrar</string>
+   </property>
+   <property name="statusTip" >
+    <string>Cerrar el GR-lida</string>
+   </property>
+  </action>
+  <action name="actionNewDbx" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnDosBox.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Nuevo con DOSBox</string>
+   </property>
+   <property name="iconText" >
+    <string>DOSBox</string>
+   </property>
+   <property name="toolTip" >
+    <string>Nuevo Juego DOSBox</string>
+   </property>
+   <property name="statusTip" >
+    <string>Nuevo Juego para el emulador DOSBox</string>
+   </property>
+  </action>
+  <action name="actionNewSvm" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnScummVM.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Nuevo con ScummVM</string>
+   </property>
+   <property name="iconText" >
+    <string>ScummVM</string>
+   </property>
+   <property name="toolTip" >
+    <string>Nuevo Juego ScummVM</string>
+   </property>
+   <property name="statusTip" >
+    <string>Nuevo Juego para el emulador ScummVM</string>
+   </property>
+  </action>
+  <action name="actionEjectar" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnEjecutar.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ejecutar Juego</string>
+   </property>
+   <property name="iconText" >
+    <string>Ejecutar</string>
+   </property>
+   <property name="toolTip" >
+    <string>Ejecutar Juego</string>
+   </property>
+   <property name="statusTip" >
+    <string>Ejecuta un Juego con el emulador correspondiente</string>
+   </property>
+  </action>
+  <action name="actionEditar" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnEditar.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Editar Juego</string>
+   </property>
+   <property name="iconText" >
+    <string>Editar</string>
+   </property>
+   <property name="toolTip" >
+    <string>Editar Juego</string>
+   </property>
+   <property name="statusTip" >
+    <string>Edita los datos del Juego asi como la configuración del emulador</string>
+   </property>
+  </action>
+  <action name="actionEiminar" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnEliminar.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Eliminar Juego</string>
+   </property>
+   <property name="iconText" >
+    <string>Eliminar</string>
+   </property>
+   <property name="toolTip" >
+    <string>Eliminar Juego</string>
+   </property>
+   <property name="statusTip" >
+    <string>Elimina un Juego de la lista</string>
+   </property>
+  </action>
+  <action name="actionOpciones" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnOpciones.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Opciones</string>
+   </property>
+   <property name="iconText" >
+    <string>Opciones</string>
+   </property>
+   <property name="toolTip" >
+    <string>Opciones del GR-lida</string>
+   </property>
+   <property name="statusTip" >
+    <string>Opciones de Configuración del GR-lida</string>
+   </property>
+  </action>
+  <action name="actionAcercaD" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnAcercaD.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Acerca de...</string>
+   </property>
+   <property name="iconText" >
+    <string>AcercaD</string>
+   </property>
+   <property name="toolTip" >
+    <string>Acerca de...</string>
+   </property>
+   <property name="statusTip" >
+    <string>Muestra información acerca del GR-lida</string>
+   </property>
+  </action>
+  <action name="actionNuevo" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnNuevo.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Nuevo Juego</string>
+   </property>
+   <property name="iconText" >
+    <string>Nuevo</string>
+   </property>
+   <property name="toolTip" >
+    <string>Nuevo Juego</string>
+   </property>
+   <property name="statusTip" >
+    <string>Añade un nuevo Juego a la lista</string>
+   </property>
+   <property name="visible" >
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionNewVdms" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnVdmSound.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Nuevo con VDMSound</string>
+   </property>
+   <property name="iconText" >
+    <string>VDMSound</string>
+   </property>
+   <property name="toolTip" >
+    <string>Nuevo Juego VDMSound</string>
+   </property>
+   <property name="statusTip" >
+    <string>Nuevo Juego para el emulador VDMSound</string>
+   </property>
+  </action>
+  <action name="actionEjectarSetup" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnSetup.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ejecutar el Setup</string>
+   </property>
+   <property name="iconText" >
+    <string>Setup</string>
+   </property>
+   <property name="statusTip" >
+    <string>Ejecuta el Setup del Juego</string>
+   </property>
+  </action>
+  <action name="actionVerDatos" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnDatos.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ver Datos</string>
+   </property>
+   <property name="iconText" >
+    <string>Datos</string>
+   </property>
+   <property name="statusTip" >
+    <string>Muestra los datos del Juego</string>
+   </property>
+   <property name="whatsThis" >
+    <string/>
+   </property>
+  </action>
+  <action name="actionVerCapturas" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnCapturas.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ver Capturas</string>
+   </property>
+   <property name="iconText" >
+    <string>Capturas</string>
+   </property>
+   <property name="toolTip" >
+    <string>Ver Capturas</string>
+   </property>
+   <property name="statusTip" >
+    <string>Muestra las Capturas del Juego</string>
+   </property>
+  </action>
+  <action name="actionVerFilesUrl" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnArchivos.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ver Archivos y URL</string>
+   </property>
+   <property name="iconText" >
+    <string>Archivos_URL</string>
+   </property>
+   <property name="toolTip" >
+    <string>Ver Archivos y URL</string>
+   </property>
+   <property name="statusTip" >
+    <string>Muestra los  Archivos y URL del Juego</string>
+   </property>
+  </action>
+  <action name="actionImportarJuego" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img32/btnImportarJuego.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Importar Juego</string>
+   </property>
+   <property name="iconText" >
+    <string>Importar</string>
+   </property>
+   <property name="statusTip" >
+    <string>Importa los datos de un Juego via web</string>
+   </property>
+  </action>
+  <action name="mnu_ejecutar_dosbox" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/dosbox.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ejecuta DOSBox</string>
+   </property>
+   <property name="iconText" >
+    <string>DOSBox</string>
+   </property>
+   <property name="toolTip" >
+    <string>Ejecuta DOSBox</string>
+   </property>
+   <property name="statusTip" >
+    <string>Ejecuta el emulador DOSBox</string>
+   </property>
+   <property name="shortcut" >
+    <string>Shift+D</string>
+   </property>
+  </action>
+  <action name="mnu_ejecutar_scummvm" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/scummvm.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ejecuta ScummVM</string>
+   </property>
+   <property name="iconText" >
+    <string>ScummVM</string>
+   </property>
+   <property name="toolTip" >
+    <string>Ejecuta ScummVM</string>
+   </property>
+   <property name="statusTip" >
+    <string>Ejecuta el emulador ScummVM</string>
+   </property>
+   <property name="shortcut" >
+    <string>Shift+S</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ayuda" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/ayuda.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ayuda</string>
+   </property>
+   <property name="iconText" >
+    <string>Ayuda</string>
+   </property>
+   <property name="statusTip" >
+    <string>Muestra la Ayuda del GR-lida</string>
+   </property>
+   <property name="shortcut" >
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionBuscar" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/edit_buscar.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Buscar Juego</string>
+   </property>
+   <property name="iconText" >
+    <string>Buscar</string>
+   </property>
+   <property name="toolTip" >
+    <string>Buscar Juego</string>
+   </property>
+   <property name="statusTip" >
+    <string>Busca un Juego en la Lista</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="mnu_file_informacion" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/informacion.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Información</string>
+   </property>
+   <property name="statusTip" >
+    <string>Muestra Información sobre la Base de Datos</string>
+   </property>
+  </action>
+  <action name="mnu_file_cerrar" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/cerrar.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Cerrar</string>
+   </property>
+   <property name="statusTip" >
+    <string>Cerrar el GR-lida</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="mnu_edit_nuevo" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/nuevo.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Nuevo Juego</string>
+   </property>
+   <property name="iconText" >
+    <string>Nuevo</string>
+   </property>
+   <property name="statusTip" >
+    <string>Añade un nuevo Juego a la lista</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ins</string>
+   </property>
+  </action>
+  <action name="mnu_edit_editar" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/editar.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Editar Juego</string>
+   </property>
+   <property name="iconText" >
+    <string>Editar</string>
+   </property>
+   <property name="statusTip" >
+    <string>Edita los datos del Juego asi como la configuración del emulador</string>
+   </property>
+   <property name="shortcut" >
+    <string>Shift+Ins</string>
+   </property>
+  </action>
+  <action name="mnu_edit_eliminar" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/eliminar.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Eliminar Juego</string>
+   </property>
+   <property name="statusTip" >
+    <string>Elimina un Juego de la lista</string>
+   </property>
+   <property name="shortcut" >
+    <string>Del</string>
+   </property>
+  </action>
+  <action name="mnu_edit_nuevo_dosbox" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/dosbox.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Nuevo con DOSBox</string>
+   </property>
+   <property name="iconText" >
+    <string>DOSBox</string>
+   </property>
+   <property name="toolTip" >
+    <string>Nuevo Juego con DOSBox</string>
+   </property>
+   <property name="statusTip" >
+    <string>Nuevo Juego para el emulador DOSBox</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="mnu_edit_nuevo_scummvm" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/scummvm.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Nuevo con ScummVM</string>
+   </property>
+   <property name="iconText" >
+    <string>ScummVM</string>
+   </property>
+   <property name="toolTip" >
+    <string>Nuevo Juego ScummVM</string>
+   </property>
+   <property name="statusTip" >
+    <string>Nuevo Juego para el emulador ScummVM</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="mnu_edit_nuevo_vdmsound" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/vdmsound.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Nuevo con VDMSound</string>
+   </property>
+   <property name="iconText" >
+    <string>VDMSound</string>
+   </property>
+   <property name="toolTip" >
+    <string>Nuevo Juego VDMSound</string>
+   </property>
+   <property name="statusTip" >
+    <string>Nuevo Juego para el emulador VDMSound</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="mnu_ejecutar_juego" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/ejecutar_app.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ejecutar Juego</string>
+   </property>
+   <property name="iconText" >
+    <string>Ejecutar</string>
+   </property>
+   <property name="toolTip" >
+    <string>Ejecutar Juego</string>
+   </property>
+   <property name="statusTip" >
+    <string>Ejecuta un Juego con el emulador correspondiente</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="mnu_ejecutar_setup" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/ejecutar_app_setup.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ejecutar el Setup</string>
+   </property>
+   <property name="iconText" >
+    <string>Setup</string>
+   </property>
+   <property name="statusTip" >
+    <string>Ejecuta el Setup del Juego</string>
+   </property>
+  </action>
+  <action name="mnu_tool_importar" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/importar.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Importar Juego</string>
+   </property>
+   <property name="statusTip" >
+    <string>Importa los datos de un Juego via web</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="mnu_tool_opciones" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/opciones.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Opciones</string>
+   </property>
+   <property name="iconText" >
+    <string>Opciones</string>
+   </property>
+   <property name="toolTip" >
+    <string>Opciones del GR-lida</string>
+   </property>
+   <property name="statusTip" >
+    <string>Opciones de Configuración del GR-lida</string>
+   </property>
+   <property name="shortcut" >
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="mnu_ver_datos" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/datos_1.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ver Datos</string>
+   </property>
+   <property name="iconText" >
+    <string>Datos</string>
+   </property>
+   <property name="toolTip" >
+    <string>Ver Datos</string>
+   </property>
+   <property name="statusTip" >
+    <string>Muestra los datos del Juego</string>
+   </property>
+   <property name="shortcut" >
+    <string>F6</string>
+   </property>
+  </action>
+  <action name="mnu_ver_archivos_url" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/archivos.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ver Archivos y URL</string>
+   </property>
+   <property name="iconText" >
+    <string>Archivos_URL</string>
+   </property>
+   <property name="statusTip" >
+    <string>Muestra los  Archivos y URL del Juego</string>
+   </property>
+   <property name="shortcut" >
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="mnu_ver_capturas" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/capturas.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ver Capturas</string>
+   </property>
+   <property name="iconText" >
+    <string>Capturas</string>
+   </property>
+   <property name="statusTip" >
+    <string>Muestra las Capturas del Juego</string>
+   </property>
+   <property name="shortcut" >
+    <string>F7</string>
+   </property>
+  </action>
+  <action name="mnu_ver_acercad" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Acerca de...</string>
+   </property>
+  </action>
+  <action name="mnu_ver_toolbar" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/barra_herramintas.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ver Barra de Herramientas</string>
+   </property>
+   <property name="iconText" >
+    <string>Herramientas</string>
+   </property>
+   <property name="shortcut" >
+    <string>F8</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <tabstops>
+  <tabstop>twJuegos</tabstop>
+  <tabstop>txtDatos_1</tabstop>
+  <tabstop>txtDatos_2</tabstop>
+  <tabstop>txtDatos_3</tabstop>
+  <tabstop>txtDatos_4</tabstop>
+  <tabstop>txtDatos_5</tabstop>
+  <tabstop>txtDatos_6</tabstop>
+  <tabstop>txtDatos_7</tabstop>
+  <tabstop>txtDatos_8</tabstop>
+  <tabstop>txtDatos_9</tabstop>
+  <tabstop>txtDatos_10</tabstop>
+  <tabstop>txtDatos_11</tabstop>
+  <tabstop>toolButton_11</tabstop>
+  <tabstop>toolButton</tabstop>
+  <tabstop>toolButton_2</tabstop>
+  <tabstop>txtDatos_12</tabstop>
+  <tabstop>btn_fileurl_1</tabstop>
+  <tabstop>btn_fileurl_2</tabstop>
+  <tabstop>twUrls</tabstop>
+  <tabstop>btn_imgtumb_1</tabstop>
+  <tabstop>btn_imgtumb_2</tabstop>
+  <tabstop>twCapturas</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/grlida.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>actionClose</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>GrLidaClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>566</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionVerFilesUrl</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockw_FilesUrl</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>69</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionVerCapturas</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockw_Capturas</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>209</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionVerDatos</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockw_Datos</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>533</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_file_cerrar</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>GrLidaClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>338</x>
+     <y>266</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_ver_archivos_url</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockw_FilesUrl</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>85</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_ver_capturas</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockw_Capturas</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>253</x>
+     <y>288</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_ver_datos</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockw_Datos</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>508</x>
+     <y>288</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionVerFilesUrl</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>mnu_ver_archivos_url</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionVerCapturas</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>mnu_ver_capturas</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionVerDatos</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>mnu_ver_datos</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_ver_archivos_url</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>actionVerFilesUrl</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_ver_capturas</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>actionVerCapturas</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_ver_datos</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>actionVerDatos</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_ver_toolbar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>toolBar_1</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>339</x>
+     <y>66</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

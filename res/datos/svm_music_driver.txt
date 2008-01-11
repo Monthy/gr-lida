@@ -1,0 +1,8 @@
+auto|img_audio_auto
+null|img_audio_null
+windows|img_audio_winmidi
+adlib|img_audio
+towns|img_audio
+pcspk|img_audio_winmidi
+pcjr|img_audio
+mt32|img_audio

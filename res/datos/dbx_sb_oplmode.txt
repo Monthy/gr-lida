@@ -1,0 +1,5 @@
+auto|sinimg
+cms|sinimg
+opl2|sinimg
+dualopl2|sinimg
+opl3|sinimg

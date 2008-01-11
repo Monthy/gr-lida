@@ -1,0 +1,3 @@
+intelligent|sinimg
+uart|sinimg
+none|sinimg

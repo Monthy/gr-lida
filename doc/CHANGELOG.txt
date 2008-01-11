@@ -1,0 +1,43 @@
+
+-  CHANGELOG
+-----------------------------------
+0.3.0 (18-09-2007)
+ - Añadido soporte para MySQL, PostgreSQL.
+ - Añadida ventana de informacion donde mostrara la version del GR-lida las de Qt
+   asi como las versiones soportadas por el GR-lida, tambien muestra el total de
+   juegos y cuasntos en cada apartado Datos, DOSBox, ScummVM y VDMSound.
+ - Mejora en el codigo y eliminacion de algunas funciones duplicadas.
+ - Corregido varios errores.
+ 
+0.2.0 (22-08-2007)
+ - Cambio de numeracion de versiones a una mas estandar
+ - Corregido error en la configuracion del DOSBox "language=" que daba
+   al editar un juego en DOSBox
+ - Corregido error al eliminar configuracion del DOSBox y VDMSound
+ - Posibilidad de cambiar el Estilo de las ventanas
+ - Sistema multilenguaje 
+ 
+0.1.8 (11-08-2007)
+ - Añadida parte para editar y añadir un juego para el emulador VDMSound
+ - Modificado la forma de pasar los datos en el codigo ahora es mas sencilla
+   para modificar o ampliar en versiones futuras 
+
+0.1.7 (02-07-2007)
+ - Añadida parte para editar y añadir URL en la base de datos
+ - Añadida parte para editar y añadir datos de archivos en la base de datos
+ - Añadida funcion par importar datos y configuracion de los juegos
+ - Añadido soporte para mostrar smiles en los comentarios de los juegos
+ - Actualizada la lista de juegos ScummVM
+ - Corregido varios errores
+ 
+0.1.5 (09-03-2007)
+ - Añadida funciones para el DOSBox 0.70
+ - Corregido varios errores
+
+0.1.0 (23-01-2007):
+ - First Public Version :D
+
+-----------------------------------
+Monthy <ermonthy@gmail.com>
+http://www.laisladelabandoware.com/
+

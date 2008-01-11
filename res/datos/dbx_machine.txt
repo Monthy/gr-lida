@@ -1,0 +1,4 @@
+vga|sinimg
+tandy|sinimg
+cga|sinimg
+hercules|sinimg
