@@ -1,38 +1,77 @@
 
 -  NEWS
 -----------------------------------
+0.4.0 (26-03-2008)
+ - Añadida la opción Output Rate, Midi Gain, Copy-Protection y SoundFont
+   en las configuraciones del ScummVM.
+ - Añadido sistema básico de Búsqueda de juegos.
+ - Añadido sistema para ordenar la lista por año, genero, formato, compañía etc...
+ - Añadido Favorito a las opciones del Juego.
+ - Mejorado el sistema de Importar Juego ahora se bajan la captura o las
+   carátulas del juego si están disponibles, y ahora también se puede
+   importar offline las configuraciones descargadas.
+ - Añadido pequeño visor de imágenes para las carátulas, capturas, etc...
+ - Añadidos los archivos de idioma de forma interna con posibilidad de usar los externos.
+ - Corregido error que sobreescribía archivo de configuración del DOSBox y el VDMSound.
+ - Corregido el estado del boton "ejecutar" y "ejecutar setup" al seleccionar un juego.
+ - Corregidos varios errores.
+
+0.3.4 (19-03-2008)
+ - Modificados los permisos de casi todos los archivos. Estaban mal y por eso
+   "make install" no funcionaba correctamente. Se cambia "target" a minúsculas
+   (en la parte de la instalación) en gr-lida.pro para ajustarlo a las indicaciones
+   de la documentación de qmake.
+
+0.3.3 (19-03-2008)
+ - Cambio de versión en funciones.h para igualarla a la de mercurial
+ - Se añade "gr-lida_en_EN.qm" a la carpeta "lng" como solución temporal, para que
+   los usuarios tengan la traducción en el tarball con el resto del código.
+   Las traducciones estarán integradas en próximas versiones para evitar la
+   instalación manual.
+ - Añadido "THANKS.txt" a la doc, para poder añadir los colaboradores en el futuro
+ - qmake es idiota y si no existe "bin/gr-lida" no lo crea. Añadido archivo
+   vacío "bin/gr-lida" para corregir esto.
+
+0.3.2 (18-03-2008)
+ - Corregida la versión de GR-lida para que muestre la misma que en mercurial
+ - Corregido un bug en gr-lida.pro, que no permitía la instalación del binario con
+   "make install", ya que faltaba la variable TARGET.
+
+0.3.1 (12-01-2008)
+ - Modificado "gr-lida.desktop" para que use el icono svg
+ - Corregido problema con la instalación en sistemas Linux/BSD
 
 0.3.0 (18-09-2007)
- - A�adido soporte para MySQL, PostgreSQL.
- - A�adida ventana de informacion donde mostrara la version del GR-lida las de Qt
-   asi como las versiones soportadas por el GR-lida, tambien muestra el total de
-   juegos y cuasntos en cada apartado Datos, DOSBox, ScummVM y VDMSound.
- - Mejora en el codigo y eliminacion de algunas funciones duplicadas.
- - Corregido varios errores.
+ - Añadido soporte para MySQL, PostgreSQL.
+ - Añadida ventana de información donde mostrará la versión del GR-lida, las de Qt
+   así como las versiones soportadas por el GR-lida, también muestra el total de
+   juegos y cuantos en cada apartado (Datos, DOSBox, ScummVM y VDMSound).
+ - Mejora en el código y eliminación de algunas funciones duplicadas.
+ - Corregidos varios errores.
 
 0.2.0 (22-08-2007)
- - Cambio de numeracion de versiones a una mas estandar
- - Corregido error en la configuracion del DOSBox "language=" que daba
+ - Cambio de numeración de versiones a una mas estándar
+ - Corregido error en la configuración del DOSBox "language=" que daba
    al editar un juego en DOSBox
- - Corregido error al eliminar configuracion del DOSBox y VDMSound
- - Posibilidad de cambiar el Estilo de las ventanas
+ - Corregido error al eliminar configuración del DOSBox y VDMSound
+ - Posibilidad de cambiar el estilo de las ventanas
  - Sistema multilenguaje 
 
 0.1.8 (11-08-2007)
- - A�adida parte para editar y a�adir un juego para el emulador VDMSound
- - Modificado la forma de pasar los datos en el codigo ahora es mas sencilla
+ - Añadida parte para editar y añadir un juego para el emulador VDMSound
+ - Modificado la forma de pasar los datos en el código ahora es más sencilla
    para modificar o ampliar en versiones futuras 
 
 0.1.7 (02-07-2007)
- - A�adida parte para editar y a�adir URL en la base de datos
- - A�adida parte para editar y a�adir datos de archivos en la base de datos
- - A�adida funcion par importar datos y configuracion de los juegos
- - A�adido soporte para mostrar smiles en los comentarios de los juegos
+ - Añadida parte para editar y añadir URL en la base de datos
+ - Añadida parte para editar y añadir datos de archivos en la base de datos
+ - Añadida funcion par importar datos y configuración de los juegos
+ - Añadido soporte para mostrar smiles en los comentarios de los juegos
  - Actualizada la lista de juegos ScummVM
  - Corregido varios errores
  
 0.1.5 (09-03-2007)
- - A�adida funciones para el DOSBox 0.70
+ - Añadida funciones para el DOSBox 0.70
  - Corregido varios errores
 
 0.1.0 (23-01-2007):
@@ -40,5 +79,5 @@
 
 -----------------------------------
 Monthy <ermonthy@gmail.com>
-http://www.laisladelabandoware.com/
+http://www.laisladelabandoware.es/
 

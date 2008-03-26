@@ -1,26 +1,26 @@
 ------------------------------------------------------------------
 -
 -  GR-lida Lanzador para el DOSBox, ScummVM y VdmSound
--  Por Pedro GarcÌa aka Monthy <ermonthy@gmail.com>
+-  Por Pedro Garc√≠a aka Monthy <ermonthy@gmail.com>
 -
--  versiÛn 0.3.0 - 18 Septiembre del 2007
+-  versi√≥n 0.4.0 - 26 Marzo del 2008
 -		por Monthy
 -
 ------------------------------------------------------------------
 
-(I) IntroducciÛn
+(I) Introducci√≥n
 --------------------------------------------
-GR-lida es un multi-lanzador con el que podr·s manejar de forma sencilla
+GR-lida es un multi-lanzador con el que podr√°s manejar de forma sencilla
 tres emuladores que se usan principalmente para el mundo abandonware.
 
  - DOSBox emulador de MS-DOS con Sound Blaster o Gravis Ultrasound, principalmente
      para juegos basados en 486.
  - ScummVM es un emulador o interprete principalmente para los juegos de Lucar-Arts 
-     y otras compaÒÌas como Revolution Software.
+     y otras compa√±√≠as como Revolution Software.
  - VDMSound principalmete es un emulador de sonido para windows NT, 2000 y XP
 
-El programa no tiene dependencia de librerÌas externas a las de Qt con lo cual no
-tendr· problemas a la hora de compilar teniendo lo b·sico instalado
+El programa no tiene dependencia de librer√≠as externas a las de Qt con lo cual no
+tendr√° problemas a la hora de compilar teniendo lo b√°sico instalado
 
 
 (II) Compilar el programa
@@ -28,22 +28,22 @@ tendr· problemas a la hora de compilar teniendo lo b·sico instalado
 Vea el fichero: INSTALL.txt
 
 
-(III) Otras caracterÌsticas
+(III) Otras caracter√≠sticas
 --------------------------------------------
  - Actuar como Base de Datos de Juegos:
-   En ella podr·s aÒadir los juegos y poner a que genero pertenece, en que aÒo se publico,
-   la compaÒÌa que lo creo, comentario del juego entre otras cosas.
+   En ella podr√°s a√±adir los juegos y poner a que genero pertenece, en que a√±o se publico,
+   la compa√±√≠a que lo creo, comentario del juego entre otras cosas.
  - Importar datos y configuraciones de los juegos desde una web preparada para ello.
  - Soporte para mostrar smiles en los comentarios de los juegos
- - AÒadir Iconos para cada Juego.
-   Con esta funciÛn podr·s aÒadirle un icono predeterminado o uno propio para identificar
+ - A√±adir Iconos para cada Juego.
+   Con esta funci√≥n podr√°s a√±adirle un icono predeterminado o uno propio para identificar
    cada juego en la lista de GR-lida, soportando los siguientes formatos: *.png; *.gif;
-   *.jpg; *.bmp; de un tamaÒo m·ximo de 24x24 pÌxel.
+   *.jpg; *.bmp; de un tama√±o m√°ximo de 24x24 p√≠xel.
  - Comentario del Juego con soporte de Html
-   En el comentario se le puede aÒadir cÛdigo html para darle la apariencia que desees,
-   para ver las etiquetas que soporta mira la documentaciÛn de las QT
+   En el comentario se le puede a√±adir c√≥digo html para darle la apariencia que desees,
+   para ver las etiquetas que soporta mira la documentaci√≥n de las QT
    http://doc.trolltech.com/4.2/richtext-html-subset.html
 
 -----------------------------------
 Monthy <ermonthy@gmail.com>
-http://www.laisladelabandoware.com/
+http://www.laisladelabandoware.es/
