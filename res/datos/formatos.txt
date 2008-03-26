@@ -5,6 +5,9 @@ CD-Rom|cd_iso
 DVD|dvd
 CD-Audio|cd_audio
 Archivo Comprimido|archivo_comprimido
+Archivo ISO|cd_iso
+Archivo CUE/BIN|cd_iso
+Archivo IMG|floppy_1
 Archivo IMA|floppy_1
 Archivo IMZ|floppy_1
 |

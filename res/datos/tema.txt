@@ -1,9 +1,25 @@
-Ciencia Ficci�n|datos_3
+Adulto|datos_3
+Arcade|datos_3
 Aventuras|datos_3
 Aventura-Terror|datos_3
-Video Aventura|datos_3
+Ciencia Ficción|datos_3
+Clásico|datos_3
+Cyberpunk - Dark Sci-Fi|datos_3
+Detective - Misterio|datos_3
+Ficción Interactiva con Gráficos|datos_3
+Ficción Interactiva|datos_3
 Futurista|datos_3
-No se|datos_3
+Horror|datos_3
+Medieval - Fantasía|datos_3
 Medieval|datos_3
-Cl�sico|datos_3
+No se|datos_3
+Película Interactiva|datos_3
+Pinball|datos_3
+Post-Apocalíptica|datos_3
+Sci-Fi - Futurista|datos_3
+Shooter|datos_3
+Solución - Puzzle|datos_3
+Survival Horror|datos_3
+Tiempo Real|datos_3
+Video Aventura|datos_3
 |

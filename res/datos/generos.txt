@@ -1,15 +1,18 @@
-Acción|datos_3
-Acción-Arcade|datos_3
+AcciÃ³n|datos_3
+AcciÃ³n-Arcade|datos_3
 Arcade|datos_3
-Aventura Gráfica|datos_3
+Aventura|datos_3
+Aventura GrÃ¡fica|datos_3
 Aventura-Terror|datos_3
+Adultos|datos_3
 Baile|datos_3
 Carreras|datos_3
 Carreras-Coches|datos_3
 Carreras-Motos|datos_3
+Deportivos|datos_3
 Deportes|datos_3
 Deportes-Baloncesto|datos_3
-Deportes-Fútbol|datos_3
+Deportes-FÃºtbol|datos_3
 Emulador|datos_3
 Estrategia|datos_3
 FPS|datos_3
@@ -23,10 +26,12 @@ Otros|datos_3
 Pesca|datos_3
 Plataformas|datos_3
 Puzzle e Inteligencia|datos_3
+Puzzle-Inteligencia|datos_3
 Puzzle|datos_3
-Reproductor de Música|datos_3
+Reproductor de MÃºsica|datos_3
 Reproductor de video|datos_3
 RPG|datos_3
+SimulaciÃ³n|datos_3
 Simulador|datos_3
 Simulador de Trenes|datos_3
 Simulador de Vuelo|datos_3

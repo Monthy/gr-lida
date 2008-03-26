@@ -1,11 +1,13 @@
 11th Dimension Entertainment|datos_3
 21st Century Entertainment|datos_3
+3D Realms Entertainment|datos_3
 3DO|datos_3
+8th Day, The|datos_3
 Aardvark Software|datos_3
 Absolute Entertainment|datos_3
 Abstrax|datos_3
 Access Software, Inc.|datos_3
-Accolade|datos_3
+Accolade, Inc.|datos_3
 Accursed Toys|datos_3
 ACRO Studio|datos_3
 Actionsoft|datos_3
@@ -15,7 +17,8 @@ Addix Software Development, Inc.|datos_3
 Adeline Software International|datos_3
 ADI Development|datos_3
 Adventure International|datos_3
-Adventuresoft|datos_3
+Adventure Soft Publishing Ltd.|datos_3
+Adventuresoft Ltd.|datos_3
 Aegis International|datos_3
 Allie Vision|datos_3
 Alternative Software|datos_3
@@ -26,7 +29,7 @@ Angelsoft, Inc.|datos_3
 AnimaTek|datos_3
 Animation FX|datos_3
 Ant Software|datos_3
-Apogee|datos_3
+Apogee Software, Ltd.|datos_3
 Arc Developments|datos_3
 Arcade Masters|datos_3
 Arcana|datos_3
@@ -46,8 +49,8 @@ Asciiware|datos_3
 Assembly Line, The|datos_3
 Astral Software|datos_3
 Astros Productions|datos_3
-Atari|datos_3
 Atari Games|datos_3
+Atari|datos_3
 ATOD|datos_3
 Atomic Entertainment|datos_3
 Atomic Games|datos_3
@@ -71,7 +74,7 @@ Binary Design, Ltd.|datos_3
 Binary Systems|datos_3
 Bitmap Brothers|datos_3
 Bits of Magic|datos_3
-Blizzard|datos_3
+Blizzard Entertainment Inc.|datos_3
 Blue Byte|datos_3
 Blue Sky Productions|datos_3
 Blue Sphere (France)|datos_3
@@ -81,12 +84,13 @@ BMB Compuscience|datos_3
 BnB Software|datos_3
 Bones Park Software Artistic|datos_3
 Boyle and Elggren Games, Inc.|datos_3
+Br&oslash;derbund|datos_3
 Brain Bug|datos_3
 BrainBank, Inc.|datos_3
-Br&oslash;derbund|datos_3
 Broderbund Sofware|datos_3
 BUG Multisystem Ltd.|datos_3
 Bullfrog|datos_3
+Burst|datos_3
 Byte Riders|datos_3
 C&E INC.|datos_3
 Cabana Boy|datos_3
@@ -101,6 +105,7 @@ Celeris|datos_3
 Celestial Software|datos_3
 Ceridus Software|datos_3
 Challenge Inc.|datos_3
+Chaosium Inc.|datos_3
 Choice Software|datos_3
 Chris Gray Enterprises|datos_3
 Cinemaware|datos_3
@@ -146,8 +151,8 @@ Destiny Software Productions, Inc.|datos_3
 DigiFX Interactive|datos_3
 Digital Eclipse|datos_3
 Digital Extremes|datos_3
-Digital Illusions|datos_3
 Digital Illusions inc.|datos_3
+Digital Illusions|datos_3
 Digital Image Design|datos_3
 Digital Integration|datos_3
 Dimension Creative Designs, Ltd.|datos_3
@@ -155,19 +160,21 @@ Dinamic Multimedia|datos_3
 Discovery Software International|datos_3
 Distinctive Software, Inc.|datos_3
 Diversions Entertainment|datos_3
-Divide By Zero|datos_3
 Divide By Zero Software Inc.|datos_3
-DMA Design|datos_3
+Divide By Zero|datos_3
+DMA Design Limited|datos_3
 Domark|datos_3
 DOS|datos_3
 Dragonware Games|datos_3
 DreamForge Entertainment, Inc.|datos_3
+Dro Soft|datos_3
 Dynabyte|datos_3
 Dynamix|datos_3
 EA Sports|datos_3
 EA*Kids|datos_3
 Eagle Dynamics|datos_3
 Eastridge Technology|datos_3
+Ebenel Enterprises|datos_3
 Eclipse Productions|datos_3
 Egosoft|datos_3
 Eldritch Games|datos_3
@@ -182,6 +189,7 @@ Entertainment Software Partners|datos_3
 Eon Software, Inc.|datos_3
 Epic MegaGames, Inc.|datos_3
 Epyx|datos_3
+Erbe Software, S.A.|datos_3
 ERE Informatique|datos_3
 Escape Programming|datos_3
 Event Horizon Software Inc.|datos_3
@@ -214,6 +222,7 @@ Greg Margo|datos_3
 Gremlin Graphics Software Ltd.|datos_3
 Gremlin Interactive|datos_3
 Grolier Interactive|datos_3
+GT Interactive Software Corp.|datos_3
 GTE Vantage Inc.|datos_3
 Hayden Software|datos_3
 Headfirst Productions|datos_3
@@ -228,7 +237,7 @@ I.J.E., Inc.|datos_3
 IBM|datos_3
 IBS|datos_3
 ICOM Simulations, inc.|datos_3
-id Software|datos_3
+ID Software|datos_3
 IF...|datos_3
 Iguana Entertainment|datos_3
 Ikarion Software GmbH|datos_3
@@ -241,8 +250,8 @@ ImagiSoft, Inc.|datos_3
 Imagitec Design|datos_3
 Impact Software Development, Ltd.|datos_3
 Impressions|datos_3
-Incentive|datos_3
 Incentive Software Ltd.|datos_3
+Incentive|datos_3
 Incredible Technologies, Inc.|datos_3
 Infernal Bytes|datos_3
 Infocom|datos_3
@@ -250,6 +259,7 @@ Infogrames|datos_3
 Information Access Technologies|datos_3
 Innerprise|datos_3
 Inrac Corporation|datos_3
+InSide Team|datos_3
 Intelligent Chess Software|datos_3
 Intelligent Design|datos_3
 Intelligent Games, Ltd.|datos_3
@@ -257,7 +267,7 @@ Intense! interactive|datos_3
 Interactive Binary Illusions|datos_3
 Interactive Designs|datos_3
 International PC Owners|datos_3
-Interplay|datos_3
+Interplay Productions, Inc.|datos_3
 Interstel|datos_3
 Intracorp Entertainment|datos_3
 IO Design Group Inc.|datos_3
@@ -268,6 +278,7 @@ Jeff Tunnell Productions|datos_3
 Johnson Joyce Cammarata Inc.|datos_3
 Kaiko|datos_3
 Kalisto Entertainment|datos_3
+KarmaSoft|datos_3
 Knowledge Adventure|datos_3
 Koei|datos_3
 Kompart UK|datos_3
@@ -301,7 +312,7 @@ Macgillivray Freeman Films|datos_3
 Macrocom, Inc.|datos_3
 Madlab Software|datos_3
 Maelstrom Games|datos_3
-Magnetic Fields|datos_3
+Magnetic Fields (Software Design) Ltd.|datos_3
 Magnetic Scrolls|datos_3
 Major Developments|datos_3
 Malibu Interactive|datos_3
@@ -332,7 +343,7 @@ MicroLeague|datos_3
 MicroMagic, Inc.|datos_3
 Micromosaics|datos_3
 Microplay|datos_3
-MicroProse|datos_3
+MicroProse Software, Inc.|datos_3
 Microsmiths, Inc.|datos_3
 Microsoft|datos_3
 Midnight Software, Inc|datos_3
@@ -340,9 +351,9 @@ Midway Games|datos_3
 Miles Computing|datos_3
 Milestone|datos_3
 Millenium Interactive|datos_3
-Millennium|datos_3
 Millennium Interactive|datos_3
 Millennium Media Group|datos_3
+Millennium|datos_3
 Mind Shear Software|datos_3
 Mindcraft|datos_3
 Mindscape|datos_3
@@ -377,7 +388,7 @@ Norsehelm Production|datos_3
 Northwest Software|datos_3
 NovaLogic|datos_3
 Novotrade|datos_3
-Ocean|datos_3
+Ocean Software Ltd.|datos_3
 Omega Integral Systems|datos_3
 Omegavision|datos_3
 Omnitrend Software|datos_3
@@ -385,8 +396,9 @@ oP Group (Oehler & Partner Computer Creations & Virtuality)|datos_3
 Opera Soft|datos_3
 Optimum Resource|datos_3
 Oracle software|datos_3
-Origin|datos_3
 Origin Systems Inc.|datos_3
+Origin|datos_3
+Orion Software, Inc.|datos_3
 OSI|datos_3
 Oxford Digital Enterprises Ltd.|datos_3
 Oxford Mobius|datos_3
@@ -407,7 +419,7 @@ Particle Systems|datos_3
 PAS Systems|datos_3
 PC Music|datos_3
 Peakstar Software|datos_3
-Pendulo|datos_3
+Pendulo Studios|datos_3
 Perfect 10 Productions|datos_3
 Pie in the Sky Software|datos_3
 Platinumware|datos_3
@@ -421,7 +433,7 @@ Proline Software|datos_3
 PSI Software Designers|datos_3
 PSS|datos_3
 Psyclapse|datos_3
-Psygnosis|datos_3
+Psygnosis Limited|datos_3
 Publishing International|datos_3
 Pyramid|datos_3
 Quantum Quality Productions|datos_3
@@ -455,8 +467,8 @@ Sanctuary Woods Inc.|datos_3
 Sandcastle|datos_3
 SAV Creation|datos_3
 Scenario Software|datos_3
-Sculptured Software|datos_3
 Sculptured Software, Inc|datos_3
+Sculptured Software|datos_3
 SDJ Enterprises|datos_3
 Sega|datos_3
 Sensible Software|datos_3
@@ -465,6 +477,7 @@ ShareData, Inc.|datos_3
 Sherston Software|datos_3
 Sherwood Forest Software|datos_3
 Shiny Entertainment|datos_3
+Sierra On-Line, Inc.|datos_3
 Sierra|datos_3
 Silent Software|datos_3
 Silicon & Synapse|datos_3
@@ -484,12 +497,14 @@ SNK USA, Inc.|datos_3
 Soft Enterprises|datos_3
 SoftArts, Inc.|datos_3
 Softdisk Publishing|datos_3
+Softgold Computerspiele GmbH|datos_3
 Softie, Inc.|datos_3
 Softstar|datos_3
 Software 2000|datos_3
 Software Sorcery|datos_3
 Software Toolworks, The|datos_3
 Soggybread Software|datos_3
+Sold Out Sales & Marketing Ltd.|datos_3
 Soleau Software|datos_3
 Soleil Software|datos_3
 Sound Images|datos_3
@@ -514,16 +529,15 @@ Symtus|datos_3
 Synapse|datos_3
 Synergistic Software, Inc.|datos_3
 Synergy Inc.|datos_3
-System 3|datos_3
 System 3 Software, Ltd.|datos_3
-T-Time Technology Corp.|datos_3
+System 3|datos_3
 Tactical Design Group|datos_3
 Taito|datos_3
 Take 2 Interactive|datos_3
 Teacy Entertainment|datos_3
 Team 17|datos_3
-Tech-Noir|datos_3
 TechnoCrafts Unlimited Inc.|datos_3
+Tech-Noir|datos_3
 Technos Japan|datos_3
 Tecmo Ltd.|datos_3
 Teeny Weeny Games, Ltd.|datos_3
@@ -534,7 +548,6 @@ Terminal Reality, Inc.|datos_3
 Terra Nova Development|datos_3
 TexaSoft|datos_3
 Thalion Software|datos_3
-The 8th Day|datos_3
 The Bruce Artwick Organization Ltd.|datos_3
 The Camel Advertising and Marketing Group|datos_3
 The Creative Assembly|datos_3
@@ -565,19 +578,21 @@ Triniti Software|datos_3
 Trip Media|datos_3
 True Emotions Software|datos_3
 Tsunami Games|datos_3
+T-Time Technology Corp.|datos_3
 Turcan Research Systems Limited|datos_3
-U-Neek Software|datos_3
+U.S. Gold Ltd.|datos_3
 U.S. Gold|datos_3
 UBI Soft Entertainment|datos_3
 Ultra Software Corporation|datos_3
+U-Neek Software|datos_3
 Unlimited Software Inc.|datos_3
-US Gold|datos_3
 UXB|datos_3
 Vektor Graphics, Ltd.|datos_3
 Velocity|datos_3
 Viacom International, Inc.|datos_3
 Viacom New Media|datos_3
 Villa Crespo Software|datos_3
+Virgin Games, Inc.|datos_3
 Virgin Interactive Entertainment|datos_3
 Virtual Concepts|datos_3
 Virtual X-Perience|datos_3
@@ -585,12 +600,13 @@ Volume 11 Software|datos_3
 Walt Disney Computer Software, Inc.|datos_3
 Weltenschmiede|datos_3
 Wesson International|datos_3
+Westwood Associates|datos_3
 Westwood Studios|datos_3
 Wetware|datos_3
 White Wolf Productions|datos_3
 Windmill Software|datos_3
-Wizard Games|datos_3
 Wizard Games of Scotland, Ltd.|datos_3
+Wizard Games|datos_3
 Woolward, Dickson & Company|datos_3
 Wordworks Software|datos_3
 Worwyk Software|datos_3
@@ -598,8 +614,8 @@ Xatrix|datos_3
 xLand Games|datos_3
 XOR Corporation|datos_3
 Ybarra Productions|datos_3
-Z-Ware|datos_3
 Zeppelin Games|datos_3
 Zombie|datos_3
 Zorlim Software|datos_3
+Z-Ware|datos_3
 |

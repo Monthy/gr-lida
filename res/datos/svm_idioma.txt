@@ -13,7 +13,7 @@ Hebreo|hb
 Ruso|ru
 Checo|cz
 Sueco|se
-Holandés|nl
+HolandÃ©s|nl
 Noruego Bokmal|nb
 Polaco|pl
 <default>|

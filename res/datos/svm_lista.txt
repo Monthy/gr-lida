@@ -12,6 +12,26 @@ Sam & Max Hit the Road|samnmax|95
 Full Throttle|ft|90
 The Dig|dig|90
 The Curse of Monkey Island|comi|90
+
+Adventuresoft/Horrorsoft Game Compatibility Chart||svmlist_space
+Elvira - Mistress of the Dark|elvira1|90
+Elvira II - The Jaws of Cerberus|elvira2|80
+Simon the Sorcerer 1|simon1|95
+Simon the Sorcerer 2|simon2|95
+Simon the Sorcerer's Puzzle Pack - D.I.M.P.|dimp|70
+Simon the Sorcerer's Puzzle Pack - Jumble|jumble|70
+Simon the Sorcerer's Puzzle Pack - NoPatience|puzzle|70
+Simon the Sorcerer's Puzzle Pack - Swampy Adventures|swampy|70
+The Feeble Files|feeble|95
+Waxworks|waxworks|10
+
+Coktel Vision Game Compatibility Chart||logo_coktel_vision
+Bargon Attack|bargon|95
+Gobliiins|gob1|95
+Gobliins 2|gob2|95
+Goblins 3|gob3|90
+Ween: The Prophecy|ween|95
+
 Sierra AGI Game Compatibility Chart||logo_sierra
 The Black Cauldron|bc|90
 Gold Rush!|goldrush|90
@@ -27,33 +47,28 @@ Police Quest I: In Pursuit of the Death Angel|pq1|90
 Space Quest I: The Sarien Encounter|sq1|90
 Space Quest II: Vohaul's Revenge|sq2|90
 Fanmade Games|agi-fanmade|80
-Other Game Compatibility Chart||
-Bargon Attack|bargon|95
+Mickey's Space Adventure|mickey|90
+Troll's Tale|troll|80
+Winnie the Pooh in the Hundred Acre Wood|winnie|80
+
+Other Game Compatibility Chart||svmlist_space
 Beneath a Steel Sky|sky|98
 Broken Sword 1: The Shadow of the Templars|sword1|98
 Broken Sword 2: The Smoking Mirror|sword2|98
-Elvira II - The Jaws of Cerberus|elvira2|50
 Flight of the Amazon Queen|queen|98
-Future Wars|fw|75
-Gobliiins|gob1|95
-Gobliins 2|gob2|95
-Goblins 3|gob3|90
-Inherit the Earth: Quest for the Orb|ite|87
-Nippon Safes Inc.|nippon|70
-Simon the Sorcerer 1|simon1|95
-Simon the Sorcerer 2|simon2|95
-Simon the Sorcerer's Puzzle Pack - D.I.M.P.|dimp|70
-Simon the Sorcerer's Puzzle Pack - Jumble|jumble|70
-Simon the Sorcerer's Puzzle Pack - NoPatience|puzzle|70
-Simon the Sorcerer's Puzzle Pack - Swampy Adventures|swampy|70
-The Feeble Files|feeble|95
+Future Wars|fw|80
+I Have No Mouth, and I Must Scream|ihnm|80
+Inherit the Earth: Quest for the Orb|ite|95
+Nippon Safes Inc.|nippon|90
 The Legend of Kyrandia|kyra1|80
+Lure of the Temptress|lure|95
 Touche: The Adventures of the Fifth Musketeer|touche|75
-Ween: The Prophecy|ween|95
-Humongous Entertainment Game Compatibility Chart||
+
+Humongous Entertainment Game Compatibility Chart||svmlist_space
 Backyard Baseball|baseball|20
 Backyard Football|football|80
 Backyard Soccer|soccer|20
+Bear Stormin'|brstorm|95
 Big Thinkers First Grade|thinker1|90
 Big Thinkers Kindergarten|thinkerk|90
 Blue's ABC Time|BluesABCTime|50
