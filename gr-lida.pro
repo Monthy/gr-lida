@@ -1,27 +1,40 @@
+# #####################################################################
+# Qmake for building: gr-lida
+# Description: GR-lida Front-End para DOSBox, ScummVM y el VDMSound
+# Command: qmake gr-lida.pro
+# #####################################################################
 TEMPLATE = app
-DESTDIR += bin
-DEPENDPATH += res \
-    src \
-    ui
-INCLUDEPATH += src
-RESOURCES += res/grlida.qrc
-CONFIG += release \
-    thread \
-    warn_on \
-    qt
+
+# ###### Output filename, directory
+TARGET = gr-lida
+DESTDIR += ./bin
+
+# ###### Compiler, tools and options
+UI_DIR += ./src/
+MOC_DIR += ./build/
+RCC_DIR += ./build/
+OBJECTS_DIR += ./build/
 QT += core \
     gui \
     sql \
     xml \
     network
-UI_DIR += src/
-MOC_DIR += build/
-RCC_DIR += build/
-OBJECTS_DIR += build/
-TARGET = gr-lida
-TRANSLATIONS += lng/gr-lida_es_ES.ts \
-    lng/gr-lida_en_EN.ts
-HEADERS += src/grlida_info.h \
+CONFIG += qt \
+    warn_on \
+    thread \
+    release
+
+# CONFIG += qt warn_on thread debug
+INCLUDEPATH += . \
+    src \
+    ui
+DEPENDPATH += . \
+    src \
+    lng \
+    res \
+    ui
+HEADERS += src/grlida_img_viewer.h \
+    src/grlida_info.h \
     src/dbsql.h \
     src/funciones.h \
     src/grlida.h \
@@ -36,7 +49,9 @@ HEADERS += src/grlida_info.h \
     src/grlida_opciones.h \
     src/grlida_svmadd.h \
     src/grlida_vdmsadd.h
-SOURCES += src/grlida_info.cpp \
+
+SOURCES += src/grlida_img_viewer.cpp \
+    src/grlida_info.cpp \
     src/dbsql.cpp \
     src/funciones.cpp \
     src/grlida.cpp \
@@ -52,6 +67,7 @@ SOURCES += src/grlida_info.cpp \
     src/grlida_svmadd.cpp \
     src/grlida_vdmsadd.cpp \
     src/main.cpp
+
 FORMS += ui/login_url.ui \
     ui/acercad.ui \
     ui/addedit_juego.ui \
@@ -66,15 +82,25 @@ FORMS += ui/login_url.ui \
     ui/svmadd.ui \
     ui/vdmsound.ui \
     ui/informacion.ui
+
+RESOURCES += res/grlida.qrc
+TRANSLATIONS += lng/gr-lida_es_ES.ts \
+    lng/gr-lida_en_EN.ts
+
+win32:RC_FILE += gr-lida.rc
 mac:ICON += gr-lida.icns
 macx:ICON += gr-lida.icns
-win32:RC_FILE += gr-lida.rc
-target.files = bin/gr-lida
-target.path = /usr/bin
-pixmaps.files = gr-lida.svg gr-lida.png
-pixmaps.path = /usr/share/pixmaps
-desktop.files = res/gr-lida.desktop
-desktop.path = /usr/share/applications
-docs.files = doc/AUTHORS.txt doc/LEEME.txt doc/NEWS.txt doc/TODO.txt doc/INSTALL.txt
-docs.path = /usr/share/doc/GR-lida
-INSTALLS += target pixmaps desktop docs
+
+# ###### Install
+!win32 { 
+    target.files = bin/gr-lida
+    target.path = /usr/bin
+    pixmaps.files = gr-lida.svg gr-lida.png
+    pixmaps.path = /usr/share/pixmaps
+    desktop.files = res/gr-lida.desktop
+    desktop.path = /usr/share/applications
+    docs.files = doc/AUTHORS.txt doc/COPYING.txt doc/INSTALL.txt doc/LEEME.txt doc/LICENSE.txt doc/NEWS.txt doc/THANKS.txt doc/TODO.txt
+    docs.path = /usr/share/doc/GR-lida
+
+    INSTALLS += target pixmaps desktop docs
+}

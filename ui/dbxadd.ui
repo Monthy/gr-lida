@@ -1430,7 +1430,7 @@
         </rect>
        </property>
        <property name="text" >
-        <string>MIDI y configuracion adicional:</string>
+        <string>MIDI y configuración adicional:</string>
        </property>
       </widget>
       <widget class="QComboBox" name="cbxDbx_16" >
@@ -1565,6 +1565,9 @@
        </property>
        <property name="text" >
         <string>Montaje primario</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnMount_Clear" >

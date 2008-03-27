@@ -82,86 +82,6 @@
             <height>22</height>
            </rect>
           </property>
-          <item>
-           <property name="text" >
-            <string>1</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>2</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>3</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>4</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>5</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>6</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>7</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>8</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>9</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>10</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_13" >
           <property name="geometry" >
@@ -172,86 +92,6 @@
             <height>22</height>
            </rect>
           </property>
-          <item>
-           <property name="text" >
-            <string>1</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>2</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>3</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>4</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>5</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>6</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>7</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>8</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>9</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>10</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_11" >
           <property name="geometry" >
@@ -262,86 +102,6 @@
             <height>22</height>
            </rect>
           </property>
-          <item>
-           <property name="text" >
-            <string>1</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>2</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>3</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>4</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>5</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>6</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>7</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>8</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>9</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>10</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/grafica.png</iconset>
-           </property>
-          </item>
          </widget>
          <widget class="QLabel" name="lb_fechahora" >
           <property name="geometry" >
@@ -413,11 +173,6 @@
           <property name="editable" >
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_2" >
           <property name="geometry" >
@@ -431,11 +186,6 @@
           <property name="editable" >
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_3" >
           <property name="geometry" >
@@ -449,11 +199,6 @@
           <property name="editable" >
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_10" >
           <property name="geometry" >
@@ -467,11 +212,6 @@
           <property name="editable" >
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_6" >
           <property name="geometry" >
@@ -485,11 +225,6 @@
           <property name="editable" >
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_8" >
           <property name="geometry" >
@@ -503,11 +238,6 @@
           <property name="editable" >
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_7" >
           <property name="geometry" >
@@ -521,11 +251,6 @@
           <property name="editable" >
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_4" >
           <property name="geometry" >
@@ -539,17 +264,12 @@
           <property name="editable" >
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
          </widget>
          <widget class="QCheckBox" name="chkDatos_1" >
           <property name="geometry" >
            <rect>
             <x>170</x>
-            <y>310</y>
+            <y>304</y>
             <width>111</width>
             <height>18</height>
            </rect>
@@ -776,7 +496,7 @@
            </rect>
           </property>
           <property name="text" >
-           <string>Caratula delantera</string>
+           <string>Carátula delantera</string>
           </property>
           <property name="alignment" >
            <set>Qt::AlignCenter</set>
@@ -792,7 +512,7 @@
            </rect>
           </property>
           <property name="text" >
-           <string>Caratula Trasera</string>
+           <string>Carátula trasera</string>
           </property>
           <property name="alignment" >
            <set>Qt::AlignCenter</set>
@@ -1037,11 +757,6 @@
           <property name="editable" >
            <bool>false</bool>
           </property>
-          <item>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
          </widget>
          <widget class="QToolButton" name="btnImgVer_1" >
           <property name="enabled" >
@@ -1279,6 +994,19 @@
           </property>
           <property name="icon" >
            <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="chkDatos_2" >
+          <property name="geometry" >
+           <rect>
+            <x>170</x>
+            <y>323</y>
+            <width>111</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Juego Favorito</string>
           </property>
          </widget>
         </widget>
@@ -1520,7 +1248,7 @@
               </size>
              </property>
              <property name="toolTip" >
-              <string>Insertar direccion de una imagen</string>
+              <string>Insertar dirección de una imagen</string>
              </property>
              <property name="text" >
               <string>Imagen</string>
@@ -1551,7 +1279,7 @@
               </size>
              </property>
              <property name="toolTip" >
-              <string>Insertar direccion Url</string>
+              <string>Insertar dirección Url</string>
              </property>
              <property name="text" >
               <string>Url</string>
@@ -5846,7 +5574,7 @@
               <item>
                <widget class="QCheckBox" name="chkDbx_21" >
                 <property name="text" >
-                 <string>Activar Configuracion manual del [autoexec] del DOSBox</string>
+                 <string>Activar Configuración manual del [autoexec] del DOSBox</string>
                 </property>
                 <property name="checked" >
                  <bool>false</bool>
@@ -6625,7 +6353,7 @@
                <rect>
                 <x>360</x>
                 <y>170</y>
-                <width>161</width>
+                <width>141</width>
                 <height>16</height>
                </rect>
               </property>
@@ -6638,7 +6366,7 @@
                <rect>
                 <x>360</x>
                 <y>190</y>
-                <width>161</width>
+                <width>141</width>
                 <height>18</height>
                </rect>
               </property>
@@ -6651,7 +6379,7 @@
                <rect>
                 <x>360</x>
                 <y>210</y>
-                <width>161</width>
+                <width>141</width>
                 <height>18</height>
                </rect>
               </property>
@@ -6682,7 +6410,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>Direectorio Capturas:</string>
+               <string>Directorio Capturas:</string>
               </property>
              </widget>
              <widget class="QLabel" name="lb_Svm_12" >
@@ -6941,6 +6669,80 @@
                <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
               </property>
              </widget>
+             <widget class="QCheckBox" name="chkSvm_7" >
+              <property name="geometry" >
+               <rect>
+                <x>510</x>
+                <y>170</y>
+                <width>111</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="text" >
+               <string>Copy-Protection</string>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="txtSvm_7" >
+              <property name="geometry" >
+               <rect>
+                <x>150</x>
+                <y>320</y>
+                <width>401</width>
+                <height>22</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="btnDirSvm_6" >
+              <property name="geometry" >
+               <rect>
+                <x>560</x>
+                <y>320</y>
+                <width>30</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+             <widget class="QLabel" name="lb_Svm_22" >
+              <property name="geometry" >
+               <rect>
+                <x>10</x>
+                <y>320</y>
+                <width>121</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text" >
+               <string>Sound_Font:</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="btnDirSvm_5_clear_2" >
+              <property name="geometry" >
+               <rect>
+                <x>595</x>
+                <y>320</y>
+                <width>30</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+              </property>
+             </widget>
             </widget>
            </item>
           </layout>
@@ -6977,7 +6779,7 @@
               <property name="geometry" >
                <rect>
                 <x>170</x>
-                <y>50</y>
+                <y>80</y>
                 <width>201</width>
                 <height>21</height>
                </rect>
@@ -6996,7 +6798,7 @@
               <property name="geometry" >
                <rect>
                 <x>170</x>
-                <y>80</y>
+                <y>110</y>
                 <width>201</width>
                 <height>21</height>
                </rect>
@@ -7015,7 +6817,7 @@
               <property name="geometry" >
                <rect>
                 <x>170</x>
-                <y>110</y>
+                <y>140</y>
                 <width>201</width>
                 <height>21</height>
                </rect>
@@ -7034,7 +6836,7 @@
               <property name="geometry" >
                <rect>
                 <x>170</x>
-                <y>170</y>
+                <y>200</y>
                 <width>201</width>
                 <height>21</height>
                </rect>
@@ -7053,7 +6855,7 @@
               <property name="geometry" >
                <rect>
                 <x>170</x>
-                <y>200</y>
+                <y>230</y>
                 <width>201</width>
                 <height>21</height>
                </rect>
@@ -7069,7 +6871,7 @@
               <property name="geometry" >
                <rect>
                 <x>170</x>
-                <y>140</y>
+                <y>170</y>
                 <width>201</width>
                 <height>21</height>
                </rect>
@@ -7091,7 +6893,7 @@
               <property name="geometry" >
                <rect>
                 <x>10</x>
-                <y>240</y>
+                <y>290</y>
                 <width>331</width>
                 <height>18</height>
                </rect>
@@ -7104,7 +6906,7 @@
               <property name="geometry" >
                <rect>
                 <x>360</x>
-                <y>230</y>
+                <y>290</y>
                 <width>251</width>
                 <height>31</height>
                </rect>
@@ -7133,7 +6935,7 @@
               <property name="geometry" >
                <rect>
                 <x>380</x>
-                <y>50</y>
+                <y>80</y>
                 <width>51</width>
                 <height>16</height>
                </rect>
@@ -7152,7 +6954,7 @@
               <property name="geometry" >
                <rect>
                 <x>380</x>
-                <y>80</y>
+                <y>110</y>
                 <width>51</width>
                 <height>16</height>
                </rect>
@@ -7171,7 +6973,7 @@
               <property name="geometry" >
                <rect>
                 <x>380</x>
-                <y>110</y>
+                <y>140</y>
                 <width>51</width>
                 <height>16</height>
                </rect>
@@ -7190,7 +6992,7 @@
               <property name="geometry" >
                <rect>
                 <x>380</x>
-                <y>140</y>
+                <y>170</y>
                 <width>51</width>
                 <height>16</height>
                </rect>
@@ -7209,7 +7011,7 @@
               <property name="geometry" >
                <rect>
                 <x>380</x>
-                <y>170</y>
+                <y>200</y>
                 <width>51</width>
                 <height>16</height>
                </rect>
@@ -7228,7 +7030,7 @@
               <property name="geometry" >
                <rect>
                 <x>380</x>
-                <y>200</y>
+                <y>230</y>
                 <width>51</width>
                 <height>16</height>
                </rect>
@@ -7247,7 +7049,7 @@
               <property name="geometry" >
                <rect>
                 <x>10</x>
-                <y>50</y>
+                <y>80</y>
                 <width>151</width>
                 <height>21</height>
                </rect>
@@ -7260,7 +7062,7 @@
               <property name="geometry" >
                <rect>
                 <x>10</x>
-                <y>80</y>
+                <y>110</y>
                 <width>151</width>
                 <height>21</height>
                </rect>
@@ -7273,7 +7075,7 @@
               <property name="geometry" >
                <rect>
                 <x>10</x>
-                <y>110</y>
+                <y>140</y>
                 <width>151</width>
                 <height>21</height>
                </rect>
@@ -7286,7 +7088,7 @@
               <property name="geometry" >
                <rect>
                 <x>10</x>
-                <y>140</y>
+                <y>170</y>
                 <width>151</width>
                 <height>21</height>
                </rect>
@@ -7299,7 +7101,7 @@
               <property name="geometry" >
                <rect>
                 <x>10</x>
-                <y>170</y>
+                <y>200</y>
                 <width>151</width>
                 <height>21</height>
                </rect>
@@ -7312,7 +7114,7 @@
               <property name="geometry" >
                <rect>
                 <x>10</x>
-                <y>200</y>
+                <y>230</y>
                 <width>151</width>
                 <height>21</height>
                </rect>
@@ -7325,7 +7127,7 @@
               <property name="geometry" >
                <rect>
                 <x>10</x>
-                <y>260</y>
+                <y>310</y>
                 <width>331</width>
                 <height>18</height>
                </rect>
@@ -7338,7 +7140,7 @@
               <property name="geometry" >
                <rect>
                 <x>10</x>
-                <y>280</y>
+                <y>330</y>
                 <width>331</width>
                 <height>18</height>
                </rect>
@@ -7355,6 +7157,111 @@
                 <width>201</width>
                 <height>22</height>
                </rect>
+              </property>
+             </widget>
+             <widget class="QLabel" name="lb_Svm_20" >
+              <property name="geometry" >
+               <rect>
+                <x>10</x>
+                <y>50</y>
+                <width>151</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text" >
+               <string>Output Rate:</string>
+              </property>
+             </widget>
+             <widget class="QComboBox" name="cbxSvm_8" >
+              <property name="geometry" >
+               <rect>
+                <x>170</x>
+                <y>50</y>
+                <width>91</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="currentIndex" >
+               <number>0</number>
+              </property>
+              <item>
+               <property name="text" >
+                <string>&lt;defecto></string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>11050</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>22050</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>44100</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>48000</string>
+               </property>
+              </item>
+             </widget>
+             <widget class="QLabel" name="lb_Svm_21" >
+              <property name="geometry" >
+               <rect>
+                <x>10</x>
+                <y>260</y>
+                <width>151</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text" >
+               <string>Midi Gain</string>
+              </property>
+             </widget>
+             <widget class="QSlider" name="h_SliderSvm_7" >
+              <property name="geometry" >
+               <rect>
+                <x>170</x>
+                <y>260</y>
+                <width>201</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="maximum" >
+               <number>1000</number>
+              </property>
+              <property name="value" >
+               <number>100</number>
+              </property>
+              <property name="sliderPosition" >
+               <number>100</number>
+              </property>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+             <widget class="QLabel" name="posSliderSvm_7" >
+              <property name="geometry" >
+               <rect>
+                <x>380</x>
+                <y>260</y>
+                <width>51</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>51</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>100</string>
               </property>
              </widget>
             </widget>
@@ -8094,12 +8001,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>255</x>
-     <y>131</y>
+     <x>191</x>
+     <y>147</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>411</x>
-     <y>132</y>
+     <x>401</x>
+     <y>147</y>
     </hint>
    </hints>
   </connection>
@@ -8110,12 +8017,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>255</x>
-     <y>161</y>
+     <x>191</x>
+     <y>177</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>411</x>
-     <y>162</y>
+     <x>401</x>
+     <y>177</y>
     </hint>
    </hints>
   </connection>
@@ -8126,12 +8033,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>255</x>
-     <y>191</y>
+     <x>191</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>411</x>
-     <y>192</y>
+     <x>401</x>
+     <y>207</y>
     </hint>
    </hints>
   </connection>
@@ -8142,12 +8049,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>255</x>
-     <y>221</y>
+     <x>191</x>
+     <y>237</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>411</x>
-     <y>222</y>
+     <x>401</x>
+     <y>237</y>
     </hint>
    </hints>
   </connection>
@@ -8158,12 +8065,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>255</x>
-     <y>251</y>
+     <x>191</x>
+     <y>267</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>411</x>
-     <y>252</y>
+     <x>401</x>
+     <y>267</y>
     </hint>
    </hints>
   </connection>
@@ -8174,12 +8081,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>255</x>
-     <y>281</y>
+     <x>191</x>
+     <y>297</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>411</x>
-     <y>282</y>
+     <x>401</x>
+     <y>297</y>
     </hint>
    </hints>
   </connection>
@@ -8190,12 +8097,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>495</x>
-     <y>241</y>
+     <x>540</x>
+     <y>316</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>415</x>
-     <y>234</y>
+     <x>426</x>
+     <y>316</y>
     </hint>
    </hints>
   </connection>
@@ -8206,12 +8113,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>490</x>
-     <y>290</y>
+     <x>540</x>
+     <y>366</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>409</x>
-     <y>294</y>
+     <x>420</x>
+     <y>366</y>
     </hint>
    </hints>
   </connection>
@@ -8222,12 +8129,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>492</x>
-     <y>337</y>
+     <x>540</x>
+     <y>416</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>419</x>
-     <y>339</y>
+     <x>430</x>
+     <y>416</y>
     </hint>
    </hints>
   </connection>
@@ -8238,12 +8145,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>487</x>
-     <y>384</y>
+     <x>540</x>
+     <y>466</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>391</x>
-     <y>390</y>
+     <x>402</x>
+     <y>466</y>
     </hint>
    </hints>
   </connection>
@@ -8254,12 +8161,12 @@
    <slot>scrollToTop()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>472</x>
-     <y>144</y>
+     <x>288</x>
+     <y>276</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>399</x>
-     <y>145</y>
+     <x>294</x>
+     <y>276</y>
     </hint>
    </hints>
   </connection>
@@ -8270,12 +8177,12 @@
    <slot>scrollToBottom()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>455</x>
-     <y>174</y>
+     <x>288</x>
+     <y>276</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>394</x>
-     <y>177</y>
+     <x>294</x>
+     <y>276</y>
     </hint>
    </hints>
   </connection>
@@ -8366,12 +8273,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>523</x>
-     <y>96</y>
+     <x>664</x>
+     <y>267</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>422</x>
-     <y>88</y>
+     <x>433</x>
+     <y>267</y>
     </hint>
    </hints>
   </connection>
@@ -8382,12 +8289,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>527</x>
-     <y>143</y>
+     <x>664</x>
+     <y>317</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>454</x>
-     <y>142</y>
+     <x>465</x>
+     <y>317</y>
     </hint>
    </hints>
   </connection>
@@ -8398,12 +8305,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>525</x>
-     <y>201</y>
+     <x>664</x>
+     <y>377</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>443</x>
-     <y>202</y>
+     <x>454</x>
+     <y>377</y>
     </hint>
    </hints>
   </connection>
@@ -8414,12 +8321,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>527</x>
-     <y>124</y>
+     <x>694</x>
+     <y>320</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>446</x>
-     <y>117</y>
+     <x>457</x>
+     <y>320</y>
     </hint>
    </hints>
   </connection>
@@ -8430,12 +8337,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>535</x>
-     <y>283</y>
+     <x>694</x>
+     <y>480</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>452</x>
-     <y>281</y>
+     <x>463</x>
+     <y>480</y>
     </hint>
    </hints>
   </connection>
@@ -8446,12 +8353,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>531</x>
-     <y>364</y>
+     <x>694</x>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>442</x>
-     <y>357</y>
+     <x>453</x>
+     <y>560</y>
     </hint>
    </hints>
   </connection>
@@ -8462,12 +8369,44 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>533</x>
-     <y>76</y>
+     <x>154</x>
+     <y>179</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>409</x>
-     <y>78</y>
+     <x>224</x>
+     <y>179</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>h_SliderSvm_7</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>posSliderSvm_7</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>291</x>
+     <y>337</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>426</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDirSvm_5_clear_2</sender>
+   <signal>clicked()</signal>
+   <receiver>txtSvm_7</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>630</x>
+     <y>406</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>553</x>
+     <y>402</y>
     </hint>
    </hints>
   </connection>

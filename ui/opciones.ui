@@ -77,9 +77,6 @@
           <string>Opciones generales</string>
          </property>
          <layout class="QVBoxLayout" >
-          <property name="spacing" >
-           <number>6</number>
-          </property>
           <property name="leftMargin" >
            <number>4</number>
           </property>
@@ -139,6 +136,23 @@
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="chkConfini_5" >
+            <property name="text" >
+             <string>Utilizar Idiomas externos</string>
+            </property>
+            <property name="checked" >
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line_5" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="chkConfini_1" >
@@ -330,7 +344,7 @@
           <item>
            <layout class="QHBoxLayout" >
             <property name="spacing" >
-             <number>6</number>
+             <number>12</number>
             </property>
             <property name="leftMargin" >
              <number>0</number>
@@ -347,16 +361,10 @@
             <item>
              <widget class="QLabel" name="label_4" >
               <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>150</width>
-                <height>0</height>
-               </size>
               </property>
               <property name="text" >
                <string>Otras Opciones del GR-lida</string>
@@ -440,8 +448,8 @@
             </property>
             <property name="sizeHint" >
              <size>
-              <width>20</width>
-              <height>16</height>
+              <width>438</width>
+              <height>20</height>
              </size>
             </property>
            </spacer>
@@ -562,7 +570,7 @@
           <item>
            <layout class="QHBoxLayout" >
             <property name="spacing" >
-             <number>6</number>
+             <number>12</number>
             </property>
             <property name="leftMargin" >
              <number>0</number>
@@ -579,16 +587,10 @@
             <item>
              <widget class="QLabel" name="label" >
               <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>235</width>
-                <height>0</height>
-               </size>
               </property>
               <property name="text" >
                <string>Dirección actual de la Base de Datos del GR-lida</string>
@@ -690,7 +692,7 @@
           <item>
            <layout class="QHBoxLayout" >
             <property name="spacing" >
-             <number>6</number>
+             <number>12</number>
             </property>
             <property name="leftMargin" >
              <number>0</number>
@@ -707,16 +709,10 @@
             <item>
              <widget class="QLabel" name="label_2" >
               <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>150</width>
-                <height>0</height>
-               </size>
               </property>
               <property name="text" >
                <string>Otras Opciones de la Base de Datos del GR-lida</string>
@@ -943,9 +939,6 @@
           <string>Apariencia y estilo del GR-lida</string>
          </property>
          <layout class="QVBoxLayout" >
-          <property name="spacing" >
-           <number>6</number>
-          </property>
           <property name="leftMargin" >
            <number>4</number>
           </property>
@@ -1014,14 +1007,81 @@
            </widget>
           </item>
           <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>12</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_5" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>Icono para el Favorito</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="Line" name="line_4" >
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="label_6" >
+              <property name="minimumSize" >
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Seleccionar Icono:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cmbIconFav" >
+              <property name="minimumSize" >
+               <size>
+                <width>90</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
            <spacer>
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" >
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>438</width>
+              <height>131</height>
              </size>
             </property>
            </spacer>
@@ -1134,6 +1194,38 @@
  </resources>
  <connections>
   <connection>
+   <sender>btnCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>OpcionesClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>433</x>
+     <y>410</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>243</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDirSvm_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>txtDirSvm</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>445</x>
+     <y>176</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>368</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>chkConfini_1</sender>
    <signal>toggled(bool)</signal>
    <receiver>btnDirDbx</receiver>
@@ -1230,22 +1322,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>btnCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>OpcionesClass</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>433</x>
-     <y>410</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>243</x>
-     <y>184</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>btnDirDbx_clear</sender>
    <signal>clicked()</signal>
    <receiver>txtDirDbx</receiver>
@@ -1258,22 +1334,6 @@
     <hint type="destinationlabel" >
      <x>345</x>
      <y>117</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnDirSvm_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtDirSvm</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>445</x>
-     <y>176</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>368</x>
-     <y>174</y>
     </hint>
    </hints>
   </connection>

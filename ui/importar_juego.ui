@@ -1,12 +1,15 @@
 <ui version="4.0" >
  <class>ImportarJuegoClass</class>
  <widget class="QDialog" name="ImportarJuegoClass" >
+  <property name="enabled" >
+   <bool>true</bool>
+  </property>
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
-    <height>435</height>
+    <width>574</width>
+    <height>462</height>
    </rect>
   </property>
   <property name="minimumSize" >
@@ -21,262 +24,383 @@
   <property name="windowIcon" >
    <iconset resource="../res/grlida.qrc" >:/img16/importar.png</iconset>
   </property>
-  <layout class="QGridLayout" >
+  <layout class="QVBoxLayout" >
    <property name="leftMargin" >
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="topMargin" >
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="rightMargin" >
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="bottomMargin" >
-    <number>0</number>
+    <number>2</number>
    </property>
-   <property name="horizontalSpacing" >
-    <number>0</number>
-   </property>
-   <property name="verticalSpacing" >
-    <number>0</number>
-   </property>
-   <item row="1" column="0" >
-    <layout class="QVBoxLayout" >
-     <property name="spacing" >
-      <number>6</number>
-     </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
-      <number>0</number>
-     </property>
-     <item>
-      <widget class="QLabel" name="statusLabel" />
-     </item>
-     <item>
-      <layout class="QHBoxLayout" >
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <property name="leftMargin" >
-        <number>4</number>
-       </property>
-       <property name="topMargin" >
-        <number>4</number>
-       </property>
-       <property name="rightMargin" >
-        <number>4</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>4</number>
-       </property>
-       <item>
-        <widget class="QPushButton" name="btnUpdateList" >
-         <property name="minimumSize" >
-          <size>
-           <width>111</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Actualizar Lista</string>
-         </property>
-         <property name="icon" >
-          <iconset resource="../res/grlida.qrc" >:/img16/actualizar.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnPrevious" >
-         <property name="enabled" >
-          <bool>false</bool>
-         </property>
-         <property name="minimumSize" >
-          <size>
-           <width>97</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>97</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Atrás</string>
-         </property>
-         <property name="icon" >
-          <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_atras.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnNext" >
-         <property name="enabled" >
-          <bool>false</bool>
-         </property>
-         <property name="minimumSize" >
-          <size>
-           <width>97</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>97</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Siguiente</string>
-         </property>
-         <property name="icon" >
-          <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_adelante.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnCancelar" >
-         <property name="enabled" >
-          <bool>true</bool>
-         </property>
-         <property name="minimumSize" >
-          <size>
-           <width>81</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>97</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Cancelar</string>
-         </property>
-         <property name="icon" >
-          <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item row="0" column="0" >
-    <widget class="QStackedWidget" name="stackedWidget" >
+   <item>
+    <widget class="QStackedWidget" name="wizardImport" >
      <property name="currentIndex" >
       <number>0</number>
      </property>
      <widget class="QWidget" name="page_1" >
       <layout class="QVBoxLayout" >
-       <property name="spacing" >
+       <property name="leftMargin" >
         <number>2</number>
        </property>
-       <property name="leftMargin" >
-        <number>6</number>
-       </property>
        <property name="topMargin" >
-        <number>6</number>
+        <number>2</number>
        </property>
        <property name="rightMargin" >
-        <number>6</number>
+        <number>2</number>
        </property>
        <property name="bottomMargin" >
-        <number>6</number>
+        <number>2</number>
        </property>
        <item>
-        <widget class="QSplitter" name="splitter" >
+        <widget class="QGroupBox" name="groupBox" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title" >
+          <string>Importar desde...</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="leftMargin" >
+           <number>6</number>
+          </property>
+          <property name="topMargin" >
+           <number>6</number>
+          </property>
+          <property name="rightMargin" >
+           <number>6</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QRadioButton" name="rbt_desde_URL" >
+            <property name="text" >
+             <string>Desde una dirección Web</string>
+            </property>
+            <property name="checked" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rbt_desde_XML" >
+            <property name="text" >
+             <string>Desde un archivo, XML, etc...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title" >
+          <string>Dirección web GR-lida DB para importar Juego:</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="leftMargin" >
+           <number>6</number>
+          </property>
+          <property name="topMargin" >
+           <number>6</number>
+          </property>
+          <property name="rightMargin" >
+           <number>6</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>6</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="label" >
+              <property name="autoFillBackground" >
+               <bool>true</bool>
+              </property>
+              <property name="text" >
+               <string>URL:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbxDbXml" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="editable" >
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnUpdateList" >
+              <property name="minimumSize" >
+               <size>
+                <width>111</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Actualizar Lista</string>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/actualizar.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType" >
+               <enum>QSizePolicy::Preferred</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>80</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QGridLayout" >
+            <item row="0" column="0" >
+             <widget class="QLabel" name="label_7" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>Fecha de actualización del archivo de la Lista local:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" >
+             <widget class="QLabel" name="lbl_DateFile" >
+              <property name="text" >
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" >
+             <widget class="QLabel" name="label_12" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>Fecha de actualización del archivo de la Lista via web:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" >
+             <widget class="QLabel" name="lbl_DateFileLast" >
+              <property name="text" >
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_3" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
+         <property name="title" >
+          <string>Dirección del archivo web GR-lida DB para importar Juego:</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="leftMargin" >
+           <number>6</number>
+          </property>
+          <property name="topMargin" >
+           <number>6</number>
+          </property>
+          <property name="rightMargin" >
+           <number>6</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>6</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLineEdit" name="DirFileXML" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirFileXML" >
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirFileXML_clear" >
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QGridLayout" >
+            <item row="0" column="0" >
+             <widget class="QLabel" name="label_5" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>Archivo:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" >
+             <widget class="QLabel" name="lbl_nameFile" >
+              <property name="text" >
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" >
+             <widget class="QLabel" name="label_9" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>Tipo:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" >
+             <widget class="QLabel" name="lbl_TipeFile" >
+              <property name="text" >
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>546</width>
+              <height>31</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2" >
+      <layout class="QVBoxLayout" >
+       <property name="leftMargin" >
+        <number>2</number>
+       </property>
+       <property name="topMargin" >
+        <number>2</number>
+       </property>
+       <property name="rightMargin" >
+        <number>2</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="QSplitter" name="splitter_2" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
          </property>
-         <widget class="QWidget" name="layoutWidget" >
-          <layout class="QVBoxLayout" >
-           <property name="spacing" >
-            <number>3</number>
+         <widget class="QTreeWidget" name="twListaJuegos" >
+          <property name="focusPolicy" >
+           <enum>Qt::ClickFocus</enum>
+          </property>
+          <property name="frameShadow" >
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="showDropIndicator" stdset="0" >
+           <bool>false</bool>
+          </property>
+          <property name="iconSize" >
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="textElideMode" >
+           <enum>Qt::ElideNone</enum>
+          </property>
+          <property name="rootIsDecorated" >
+           <bool>false</bool>
+          </property>
+          <property name="itemsExpandable" >
+           <bool>false</bool>
+          </property>
+          <column>
+           <property name="text" >
+            <string>Títulos</string>
            </property>
-           <property name="leftMargin" >
-            <number>0</number>
-           </property>
-           <property name="topMargin" >
-            <number>0</number>
-           </property>
-           <property name="rightMargin" >
-            <number>0</number>
-           </property>
-           <property name="bottomMargin" >
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="label" >
-             <property name="text" >
-              <string>Dirección web GR-lida DB para importar Juego:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="cbxDbXml" >
-             <property name="editable" >
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTreeWidget" name="twListaJuegos" >
-             <property name="focusPolicy" >
-              <enum>Qt::ClickFocus</enum>
-             </property>
-             <property name="frameShadow" >
-              <enum>QFrame::Sunken</enum>
-             </property>
-             <property name="showDropIndicator" stdset="0" >
-              <bool>false</bool>
-             </property>
-             <property name="iconSize" >
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-             <property name="textElideMode" >
-              <enum>Qt::ElideNone</enum>
-             </property>
-             <property name="rootIsDecorated" >
-              <bool>false</bool>
-             </property>
-             <property name="itemsExpandable" >
-              <bool>false</bool>
-             </property>
-             <column>
-              <property name="text" >
-               <string>Títulos</string>
-              </property>
-             </column>
-            </widget>
-           </item>
-          </layout>
+          </column>
          </widget>
          <widget class="QWidget" name="layoutWidget_1" >
           <layout class="QVBoxLayout" >
@@ -326,7 +450,7 @@
                <number>0</number>
               </property>
               <property name="topMargin" >
-               <number>0</number>
+               <number>4</number>
               </property>
               <property name="rightMargin" >
                <number>0</number>
@@ -490,12 +614,6 @@
                 <property name="readOnly" >
                  <bool>true</bool>
                 </property>
-                <property name="html" >
-                 <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
-p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;">&lt;/p>&lt;/body>&lt;/html></string>
-                </property>
                </widget>
               </item>
              </layout>
@@ -507,28 +625,22 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_2" >
-      <layout class="QGridLayout" >
+     <widget class="QWidget" name="page_3" >
+      <layout class="QVBoxLayout" >
        <property name="leftMargin" >
-        <number>6</number>
+        <number>2</number>
        </property>
        <property name="topMargin" >
-        <number>6</number>
+        <number>2</number>
        </property>
        <property name="rightMargin" >
-        <number>6</number>
+        <number>2</number>
        </property>
        <property name="bottomMargin" >
-        <number>6</number>
-       </property>
-       <property name="horizontalSpacing" >
         <number>2</number>
        </property>
-       <property name="verticalSpacing" >
-        <number>2</number>
-       </property>
-       <item row="0" column="0" >
-        <widget class="QSplitter" name="splitter_2" >
+       <item>
+        <widget class="QSplitter" name="splitter" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
          </property>
@@ -721,7 +833,7 @@ p, li { white-space: pre-wrap; }
           </item>
           <item>
            <property name="text" >
-            <string>Caratula delantera:</string>
+            <string>Carátula delantera:</string>
            </property>
            <property name="text" >
             <string/>
@@ -729,7 +841,7 @@ p, li { white-space: pre-wrap; }
           </item>
           <item>
            <property name="text" >
-            <string>Caratula trasera:</string>
+            <string>Carátula trasera:</string>
            </property>
            <property name="text" >
             <string/>
@@ -760,39 +872,12 @@ p, li { white-space: pre-wrap; }
            </property>
           </item>
          </widget>
-         <widget class="QWidget" name="layoutWidget_2" >
+         <widget class="QWidget" name="layoutWidget" >
           <layout class="QVBoxLayout" >
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <property name="leftMargin" >
-            <number>0</number>
-           </property>
-           <property name="topMargin" >
-            <number>0</number>
-           </property>
-           <property name="rightMargin" >
-            <number>0</number>
-           </property>
-           <property name="bottomMargin" >
-            <number>0</number>
-           </property>
            <item>
             <layout class="QVBoxLayout" >
              <property name="spacing" >
-              <number>0</number>
-             </property>
-             <property name="leftMargin" >
-              <number>0</number>
-             </property>
-             <property name="topMargin" >
-              <number>0</number>
-             </property>
-             <property name="rightMargin" >
-              <number>0</number>
-             </property>
-             <property name="bottomMargin" >
-              <number>0</number>
+              <number>1</number>
              </property>
              <item>
               <widget class="QLabel" name="lb_titulo_juego" >
@@ -804,6 +889,9 @@ p, li { white-space: pre-wrap; }
                  <bold>true</bold>
                 </font>
                </property>
+               <property name="autoFillBackground" >
+                <bool>true</bool>
+               </property>
                <property name="text" >
                 <string>Titulo</string>
                </property>
@@ -812,19 +900,7 @@ p, li { white-space: pre-wrap; }
              <item>
               <layout class="QHBoxLayout" >
                <property name="spacing" >
-                <number>4</number>
-               </property>
-               <property name="leftMargin" >
-                <number>0</number>
-               </property>
-               <property name="topMargin" >
-                <number>0</number>
-               </property>
-               <property name="rightMargin" >
-                <number>0</number>
-               </property>
-               <property name="bottomMargin" >
-                <number>0</number>
+                <number>6</number>
                </property>
                <item>
                 <widget class="QLabel" name="lb_thumbs" >
@@ -840,11 +916,14 @@ p, li { white-space: pre-wrap; }
                    <height>186</height>
                   </size>
                  </property>
-                 <property name="text" >
-                  <string/>
+                 <property name="autoFillBackground" >
+                  <bool>true</bool>
                  </property>
-                 <property name="pixmap" >
-                  <pixmap/>
+                 <property name="frameShape" >
+                  <enum>QFrame::Panel</enum>
+                 </property>
+                 <property name="frameShadow" >
+                  <enum>QFrame::Sunken</enum>
                  </property>
                  <property name="scaledContents" >
                   <bool>true</bool>
@@ -857,22 +936,16 @@ p, li { white-space: pre-wrap; }
                <item>
                 <layout class="QVBoxLayout" >
                  <property name="spacing" >
-                  <number>2</number>
+                  <number>1</number>
                  </property>
                  <property name="leftMargin" >
                   <number>0</number>
                  </property>
-                 <property name="topMargin" >
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin" >
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin" >
-                  <number>0</number>
-                 </property>
                  <item>
                   <widget class="QLabel" name="label_6" >
+                   <property name="autoFillBackground" >
+                    <bool>true</bool>
+                   </property>
                    <property name="text" >
                     <string>Subido por:</string>
                    </property>
@@ -886,6 +959,9 @@ p, li { white-space: pre-wrap; }
                      <bold>true</bold>
                     </font>
                    </property>
+                   <property name="autoFillBackground" >
+                    <bool>true</bool>
+                   </property>
                    <property name="text" >
                     <string/>
                    </property>
@@ -893,6 +969,9 @@ p, li { white-space: pre-wrap; }
                  </item>
                  <item>
                   <widget class="QLabel" name="label_8" >
+                   <property name="autoFillBackground" >
+                    <bool>true</bool>
+                   </property>
                    <property name="text" >
                     <string>Datos del DOSBox subido por:</string>
                    </property>
@@ -906,6 +985,9 @@ p, li { white-space: pre-wrap; }
                      <bold>true</bold>
                     </font>
                    </property>
+                   <property name="autoFillBackground" >
+                    <bool>true</bool>
+                   </property>
                    <property name="text" >
                     <string/>
                    </property>
@@ -913,6 +995,9 @@ p, li { white-space: pre-wrap; }
                  </item>
                  <item>
                   <widget class="QLabel" name="label_10" >
+                   <property name="autoFillBackground" >
+                    <bool>true</bool>
+                   </property>
                    <property name="text" >
                     <string>Datos del ScummVM subido por:</string>
                    </property>
@@ -926,6 +1011,9 @@ p, li { white-space: pre-wrap; }
                      <bold>true</bold>
                     </font>
                    </property>
+                   <property name="autoFillBackground" >
+                    <bool>true</bool>
+                   </property>
                    <property name="text" >
                     <string/>
                    </property>
@@ -933,6 +1021,9 @@ p, li { white-space: pre-wrap; }
                  </item>
                  <item>
                   <widget class="QLabel" name="label_11" >
+                   <property name="autoFillBackground" >
+                    <bool>true</bool>
+                   </property>
                    <property name="text" >
                     <string>Datos del VDMSound subido por:</string>
                    </property>
@@ -946,6 +1037,9 @@ p, li { white-space: pre-wrap; }
                      <bold>true</bold>
                     </font>
                    </property>
+                   <property name="autoFillBackground" >
+                    <bool>true</bool>
+                   </property>
                    <property name="text" >
                     <string/>
                    </property>
@@ -955,9 +1049,6 @@ p, li { white-space: pre-wrap; }
                   <spacer>
                    <property name="orientation" >
                     <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeType" >
-                    <enum>QSizePolicy::Preferred</enum>
                    </property>
                    <property name="sizeHint" >
                     <size>
@@ -977,9 +1068,6 @@ p, li { white-space: pre-wrap; }
             <spacer>
              <property name="orientation" >
               <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeType" >
-              <enum>QSizePolicy::Preferred</enum>
              </property>
              <property name="sizeHint" >
               <size>
@@ -1224,63 +1312,6 @@ p, li { white-space: pre-wrap; }
              </widget>
             </widget>
            </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="spacing" >
-              <number>0</number>
-             </property>
-             <property name="leftMargin" >
-              <number>0</number>
-             </property>
-             <property name="topMargin" >
-              <number>0</number>
-             </property>
-             <property name="rightMargin" >
-              <number>0</number>
-             </property>
-             <property name="bottomMargin" >
-              <number>0</number>
-             </property>
-             <item>
-              <spacer>
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" >
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnOk" >
-               <property name="enabled" >
-                <bool>false</bool>
-               </property>
-               <property name="minimumSize" >
-                <size>
-                 <width>88</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>88</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>Descargar</string>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
           </layout>
          </widget>
         </widget>
@@ -1288,6 +1319,139 @@ p, li { white-space: pre-wrap; }
       </layout>
      </widget>
     </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="statusLabel" />
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnPrevious" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Atrás</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_atras.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnNext" >
+       <property name="enabled" >
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Siguiente</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_adelante.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>88</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>88</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Descargar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancelar" >
+       <property name="enabled" >
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>81</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>97</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Cancelar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
@@ -1317,12 +1481,92 @@ p, li { white-space: pre-wrap; }
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>513</x>
-     <y>498</y>
+     <x>570</x>
+     <y>435</y>
     </hint>
     <hint type="destinationlabel" >
      <x>294</x>
      <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbt_desde_URL</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox_2</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>74</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>86</x>
+     <y>105</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbt_desde_URL</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox_3</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>190</x>
+     <y>44</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>196</x>
+     <y>181</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbt_desde_XML</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox_2</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>152</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>162</x>
+     <y>105</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbt_desde_XML</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox_3</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>232</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>234</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDirFileXML_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>DirFileXML</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>220</x>
+     <y>268</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>140</x>
+     <y>266</y>
     </hint>
    </hints>
   </connection>

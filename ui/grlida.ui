@@ -27,17 +27,109 @@
      <number>0</number>
     </property>
     <property name="leftMargin" >
-     <number>4</number>
+     <number>2</number>
     </property>
     <property name="topMargin" >
-     <number>4</number>
+     <number>0</number>
     </property>
     <property name="rightMargin" >
-     <number>4</number>
+     <number>2</number>
     </property>
     <property name="bottomMargin" >
-     <number>4</number>
+     <number>2</number>
     </property>
+    <item>
+     <widget class="QFrame" name="toolBar_ordenar" >
+      <property name="minimumSize" >
+       <size>
+        <width>16</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>16777215</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="frameShape" >
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow" >
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" >
+       <property name="leftMargin" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <property name="rightMargin" >
+        <number>0</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" >
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="txtBuscar" />
+         </item>
+         <item>
+          <widget class="QLabel" name="lb_ordenar_1" >
+           <property name="text" >
+            <string>Ordenar:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cbxColTabla" />
+         </item>
+         <item>
+          <widget class="QLabel" name="lb_ordenar_2" >
+           <property name="text" >
+            <string>por</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cbxOrdenBy" />
+         </item>
+         <item>
+          <widget class="QComboBox" name="cbxOrden" />
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_Ordenar" >
+           <property name="text" >
+            <string>Ordenar</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item>
      <widget class="QSplitter" name="splitter_2" >
       <property name="orientation" >
@@ -75,7 +167,7 @@
            <property name="minimumSize" >
             <size>
              <width>0</width>
-             <height>220</height>
+             <height>200</height>
             </size>
            </property>
            <property name="focusPolicy" >
@@ -1269,7 +1361,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton" >
+            <widget class="QToolButton" name="btn_VerCoverFront" >
              <property name="enabled" >
               <bool>false</bool>
              </property>
@@ -1288,7 +1380,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton_2" >
+            <widget class="QToolButton" name="btn_VerCoverBack" >
              <property name="enabled" >
               <bool>false</bool>
              </property>
@@ -1330,18 +1422,6 @@
   </widget>
   <widget class="QStatusBar" name="statusBar" />
   <widget class="QToolBar" name="toolBar_1" >
-   <property name="minimumSize" >
-    <size>
-     <width>0</width>
-     <height>0</height>
-    </size>
-   </property>
-   <property name="maximumSize" >
-    <size>
-     <width>16777215</width>
-     <height>42</height>
-    </size>
-   </property>
    <property name="windowTitle" >
     <string>Barra de Herramientas</string>
    </property>
@@ -1399,7 +1479,7 @@
      <x>0</x>
      <y>0</y>
      <width>743</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Ver" >
@@ -1409,6 +1489,7 @@
     <addaction name="mnu_ver_archivos_url" />
     <addaction name="mnu_ver_datos" />
     <addaction name="mnu_ver_capturas" />
+    <addaction name="mnu_ver_ordenar" />
     <addaction name="mnu_ver_toolbar" />
     <addaction name="separator" />
     <addaction name="mnu_tool_opciones" />
@@ -1443,6 +1524,8 @@
     <addaction name="mnu_edit_nuevo" />
     <addaction name="mnu_edit_editar" />
     <addaction name="mnu_edit_eliminar" />
+    <addaction name="separator" />
+    <addaction name="mnu_edit_favorito" />
    </widget>
    <widget class="QMenu" name="menuArchivo" >
     <property name="title" >
@@ -2100,6 +2183,43 @@
     <string>F8</string>
    </property>
   </action>
+  <action name="mnu_ver_ordenar" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/orden_asc.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Ver Ordenar</string>
+   </property>
+   <property name="iconText" >
+    <string>Ordenar</string>
+   </property>
+   <property name="statusTip" >
+    <string>Ordena la lista de juego</string>
+   </property>
+   <property name="shortcut" >
+    <string>F10</string>
+   </property>
+  </action>
+  <action name="mnu_edit_favorito" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/fav_0.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Marcar como Favorito</string>
+   </property>
+   <property name="iconText" >
+    <string>Favorito</string>
+   </property>
+   <property name="statusTip" >
+    <string>Marca o quita un juego seleccionado como Favorito</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11" />
  <tabstops>
@@ -2116,8 +2236,8 @@
   <tabstop>txtDatos_10</tabstop>
   <tabstop>txtDatos_11</tabstop>
   <tabstop>toolButton_11</tabstop>
-  <tabstop>toolButton</tabstop>
-  <tabstop>toolButton_2</tabstop>
+  <tabstop>btn_VerCoverFront</tabstop>
+  <tabstop>btn_VerCoverBack</tabstop>
   <tabstop>txtDatos_12</tabstop>
   <tabstop>btn_fileurl_1</tabstop>
   <tabstop>btn_fileurl_2</tabstop>
@@ -2367,6 +2487,22 @@
     <hint type="destinationlabel" >
      <x>339</x>
      <y>66</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_ver_ordenar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>toolBar_ordenar</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>371</x>
+     <y>75</y>
     </hint>
    </hints>
   </connection>
