@@ -61,7 +61,8 @@ public:
 	void ItemInsertaVdms(const QHash<QString, QString> datos, const QString IDgrl);
 
 	void ItemActualizaDatos(const QHash<QString, QString> datos, const QString IDgrl);
-
+	void ItemActualizaDatosFavorito(const QString EstadoFav , const QString IDgrl );
+	
 	void ItemActualizaDbx(const QHash<QString, QString> datos, const QString IDdbx);
 	void ItemActualizaMontajeDbx(QTreeWidget *treeWidget);
 

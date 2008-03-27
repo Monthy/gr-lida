@@ -45,6 +45,8 @@ public:
 private:
 	Funciones fGrl;
 	QString stHomeDir ;
+	QTranslator translator;
+	bool IdiomaExterno;
 
 private slots:
 	void on_btnOk();

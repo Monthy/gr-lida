@@ -44,7 +44,7 @@ public:
 
 private:
 	Funciones fGrl;
-	QString stHomeDir, IdiomaSelect, url_xmldb, stStyleSelect, stdb_type;
+	QString stHomeDir, IdiomaSelect, url_xmldb, stStyleSelect, stdb_type, stIconoFav;
 	QPalette originalPalette;
 
 private slots:

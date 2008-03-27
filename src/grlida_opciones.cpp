@@ -48,19 +48,21 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 
 	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
 	settings.beginGroup("OpcGeneral");
-		ui.chkConfini_1->setChecked(settings.value("DOSBoxDisp"    , "false").toBool() );
-		ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool() );
-		ui.txtDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool() );
-		ui.txtDirDbx->setText( settings.value("DirDOSBox"       , "" ).toString()      );
-		ui.chkConfini_2->setChecked(settings.value("ScummVMDisp"   , "false").toBool() );
-		ui.btnDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool() );
-		ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool() );
-		ui.txtDirSvm->setText( settings.value("DirScummVM"      , "" ).toString()      );
-		ui.chkConfini_3->setChecked( settings.value("VDMSoundDisp" , "false").toBool() );
-		ui.chkConfini_4->setChecked( settings.value("Primeravez"   , "true").toBool()  );
-		IdiomaSelect  = settings.value("IdiomaSelect", "es_ES" ).toString();
-		stStyleSelect = settings.value("Style", "Default" ).toString();
-		url_xmldb = settings.value("url_xmldb", "http://freegamedatabase.110mb.com/" ).toString(); // GR-lida xmlDB
+		ui.chkConfini_1->setChecked(settings.value("DOSBoxDisp"    , "false").toBool()   );
+		ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool()   );
+		ui.txtDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool()   );
+		ui.txtDirDbx->setText( settings.value("DirDOSBox"          , ""     ).toString() );
+		ui.chkConfini_2->setChecked(settings.value("ScummVMDisp"   , "false").toBool()   );
+		ui.btnDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool()   );
+		ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool()   );
+		ui.txtDirSvm->setText( settings.value("DirScummVM"         , ""     ).toString() );
+		ui.chkConfini_3->setChecked( settings.value("VDMSoundDisp" , "false").toBool()   );
+		ui.chkConfini_4->setChecked( settings.value("Primeravez"   , "true" ).toBool()   );
+		IdiomaSelect      = settings.value("IdiomaSelect", "es_ES" ).toString();
+		ui.chkConfini_5->setChecked( settings.value("IdiomaExterno" , "false").toBool()  );
+		stIconoFav        = settings.value("IconoFav", "fav_0.png").toString();
+		stStyleSelect     = settings.value("Style", "Default" ).toString();
+		url_xmldb         = settings.value("url_xmldb", "" ).toString(); // GR-lida xmlDB
 		ui.chkStylePalette->setChecked( settings.value("StylePalette","false").toBool());
 	settings.endGroup();
 	settings.beginGroup("SqlDatabase");
@@ -86,8 +88,18 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 	ui.cbxMotorDataBase->setCurrentIndex( ui.cbxMotorDataBase->findText( stdb_type, Qt::MatchContains) ); //
 
 	ui.cmbStyle->setCurrentIndex( ui.cmbStyle->findText(stStyleSelect, Qt::MatchContains) ); //
-	
-	fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );
+
+	ui.cmbIconFav->addItem(QIcon(":/img16/fav_0.png"), "fav_0.png");
+	ui.cmbIconFav->addItem(QIcon(":/img16/fav_1.png"), "fav_1.png");
+	ui.cmbIconFav->addItem(QIcon(":/img16/fav_2.png"), "fav_2.png");
+	ui.cmbIconFav->addItem(QIcon(":/img16/fav_3.png"), "fav_3.png");
+	ui.cmbIconFav->setCurrentIndex( ui.cmbIconFav->findText(stIconoFav, Qt::MatchContains) ); //
+
+	if(ui.chkConfini_5->isChecked())
+		fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );	
+	else
+		fGrl.CargarIdiomasCombo( ":/idiomas/", ui.cbxIdioma );
+
 	ui.cbxIdioma->setCurrentIndex( ui.cbxIdioma->findText(IdiomaSelect, Qt::MatchContains) ); //
 	on_setLanguage( ui.cbxIdioma->currentText() );
 
@@ -128,29 +140,34 @@ void frmOpciones::on_changeTypeDB(const QString &typedb)
 		ui.btnDirDB->setEnabled(false);
 }
 
-void frmOpciones::on_btnOk(){
-
-	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
+void frmOpciones::on_btnOk()
+{
+	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat ); 
 
 	DatosConfiguracion.clear();
 	if(ui.chkConfini_1->isChecked())
-	  DatosConfiguracion["DOSBoxDisp"] = "true"; else DatosConfiguracion["DOSBoxDisp"] = "false"; // DOSBox
+		DatosConfiguracion["DOSBoxDisp"]   = "true"; else DatosConfiguracion["DOSBoxDisp"]   = "false"; // DOSBox
 	if(ui.chkConfini_2->isChecked())
-	  DatosConfiguracion["ScummVMDisp"] = "true"; else DatosConfiguracion["ScummVMDisp"] = "false"; // ScummVM
+		DatosConfiguracion["ScummVMDisp"]  = "true"; else DatosConfiguracion["ScummVMDisp"]  = "false"; // ScummVM
 	if(ui.chkConfini_3->isChecked())
-	  DatosConfiguracion["VDMSoundDisp"] = "true"; else DatosConfiguracion["VDMSoundDisp"] = "false"; // vdmsound
+		DatosConfiguracion["VDMSoundDisp"] = "true"; else DatosConfiguracion["VDMSoundDisp"] = "false"; // VDMSound
 	if(ui.chkConfini_4->isChecked())
-	  DatosConfiguracion["Primeravez"] = "true"; else DatosConfiguracion["Primeravez"] = "false"; // primera vez
+		DatosConfiguracion["Primeravez"]   = "true"; else DatosConfiguracion["Primeravez"]   = "false"; // primera vez
+	if(ui.chkConfini_5->isChecked())
+		DatosConfiguracion["IdiomaExterno"]= "true"; else DatosConfiguracion["IdiomaExterno"] = "false"; // primera vez
 	if(ui.chkStylePalette->isChecked())
-	  DatosConfiguracion["StylePalette"] = "true"; else DatosConfiguracion["StylePalette"] = "false"; // StylePalette
+		DatosConfiguracion["StylePalette"] = "true"; else DatosConfiguracion["StylePalette"] = "false"; // StylePalette
 
 	DatosConfiguracion["DirDOSBox"]  = ui.txtDirDbx->text() ; // DirDbx
 	DatosConfiguracion["DirScummVM"] = ui.txtDirSvm->text() ; // DirSvm
 
 	if(ui.cbxDbXml->currentText()!="")
-	  url_xmldb = ui.cbxDbXml->currentText(); else  url_xmldb = "";
+		url_xmldb = ui.cbxDbXml->currentText(); else url_xmldb = "";
 	if(ui.cbxMotorDataBase->currentText()!="")
-	  stdb_type = ui.cbxMotorDataBase->currentText(); else stdb_type = ""; // SqlDatabase
+		stdb_type = ui.cbxMotorDataBase->currentText(); else stdb_type = ""; // SqlDatabase
+
+	if(ui.cmbIconFav->currentText()!="")
+		stIconoFav = ui.cmbIconFav->currentText(); else stIconoFav = "fav_0.png";
 
 	settings.beginGroup("OpcGeneral");
 		settings.setValue("DOSBoxDisp"   , DatosConfiguracion["DOSBoxDisp"]		);
@@ -160,9 +177,11 @@ void frmOpciones::on_btnOk(){
 		settings.setValue("DirDOSBox"    , DatosConfiguracion["DirDOSBox"]		);
 		settings.setValue("DirScummVM"   , DatosConfiguracion["DirScummVM"] 	);
 		settings.setValue("IdiomaSelect" , IdiomaSelect          				);
+		settings.setValue("IdiomaExterno", DatosConfiguracion["IdiomaExterno"]  );
 		settings.setValue("Style"        , stStyleSelect         				);
 	    settings.setValue("StylePalette" , DatosConfiguracion["StylePalette"]	);
-		settings.setValue("url_xmldb"    , url_xmldb							);
+	    settings.setValue("IconoFav"     , stIconoFav							);
+	    settings.setValue("url_xmldb"    , url_xmldb							);
 	settings.endGroup();
 
 	settings.beginGroup("SqlDatabase");
@@ -181,7 +200,12 @@ void frmOpciones::on_setLanguage(const QString txt_locale)
 {
 	QStringList parts = txt_locale.split(" - ");
 	QTranslator translator;
-	translator.load( stHomeDir + "idiomas/gr-lida_" + parts.value(1)+".qm" );
+	
+	if(ui.chkConfini_5->isChecked())
+		translator.load( stHomeDir + "idiomas/gr-lida_" + parts.value(1)+".qm" );
+	else
+		translator.load(":/idiomas/gr-lida_" + parts.value(1)+".qm" );
+
 	qApp->installTranslator(&translator);
 
 	IdiomaSelect = parts.value(1);

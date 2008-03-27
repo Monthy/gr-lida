@@ -32,7 +32,7 @@ frmVdmsAdd::frmVdmsAdd(QDialog *parent, Qt::WFlags flags)
 	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
 //	stHomeDir = QDir::currentPath()+"/";		// directorio de trabajo del GR-lida
 //	stHomeDir = "./";							// directorio de trabajo del GR-lida
-	stConfgVdmSDir = stHomeDir + "confvdms/";			// directorio de configuracion para el VDMSound
+	stConfgVdmSDir = stHomeDir + "confvdms/";	// directorio de configuracion para el VDMSound
 	
 	
 // Conecta los distintos botones con las funciones.
@@ -53,9 +53,41 @@ frmVdmsAdd::~frmVdmsAdd(){}
 
 void frmVdmsAdd::on_btnOk()
 {
-	if ( ui.txtDatos_1->text().isEmpty() ) {
+	bool siguiente;
+
+	QFile appConfg( stHomeDir + "confvdms/"+ ui.txtVdms_1->text() );
+
+	if ( ui.txtDatos_1->text().isEmpty() )
+	{
+		siguiente = false;
 		QMessageBox::information( this, stTituloVdms(), tr("Debes poner por lo menos el titulo."));
 	} else {
+		siguiente = true;
+
+		if( ui.txtVdms_1->text().isEmpty() )
+		{
+			siguiente = false;
+			QMessageBox::information(this, stTituloVdms(), tr("Debes indicar el archivo de Configuración para el VDMSound"));
+		} else {
+			siguiente = true;
+			if( appConfg.exists() )
+			{
+				siguiente = false;
+				QMessageBox::information( this, stTituloVdms(), tr("El archivo de Configuración para el VDMSound ya esixte"));
+			} else {
+				siguiente = true;
+				if( ui.txtVdms_2->text().isEmpty() )
+				{
+					siguiente = false;
+					QMessageBox::information(this, stTituloVdms(), tr("Debes indicar el Ejecutable del juego"));
+				} else 
+					siguiente = true;
+			}
+		}
+	}
+
+	if( siguiente == true )
+	{
 		DatosJuego.clear();
 		DatosJuego["icono"]			= "vdmsound"		;//icono
 		DatosJuego["titulo"]		= ui.txtDatos_1->text();//titulo
@@ -81,6 +113,7 @@ void frmVdmsAdd::on_btnOk()
 		DatosJuego["fecha"] 		= fGrl.HoraFechaActual();//fecha d/m/a h:m:s
 		DatosJuego["tipo_emu"] 		= "vdmsound"	;//tipo_emu
 		DatosJuego["comentario"] 	= ""			;//comentario
+		DatosJuego["favorito"]		= "false"		;//favorito
 
 		DatosVDMSound.clear();
 		DatosVDMSound["path_conf"]       = ui.txtVdms_1->text()	; //
@@ -106,17 +139,19 @@ void frmVdmsAdd::on_btnVdms_FileConfg()
 	bool str_ok;
 	QString str, archivo;
 	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stConfgVdmSDir, ui.txtVdms_1->text(), tr("Todos los archivo (*)"), 0, true);
-	if(archivo != ""){
+	if(archivo != "")
+	{
 		QFile appConfg( archivo );
-		if ( !appConfg.exists() ) {
+		if ( !appConfg.exists() )
+		{
 			QFileInfo fi( archivo );
 			str = fi.fileName();
-			str.replace(" ", "_");
+			str = fGrl.eliminar_caracteres( str );
 	  		str_ok = str.endsWith(".vlp");
 			if(str_ok == false) str.append(".vlp");
 			ui.txtVdms_1->setText( str );
-		}else{
-			QMessageBox::information( this, stTituloVdms(), tr("El archivo de Configuraci�n para el VDMSound ya esixte"));
+		} else {
+			QMessageBox::information( this, stTituloVdms(), tr("El archivo de Configuración para el VDMSound ya esixte"));
 			ui.txtVdms_1->setText("");
 		}
 	}else ui.txtVdms_1->setText( "" );
@@ -136,10 +171,12 @@ void frmVdmsAdd::on_txtDatos_1_textChanged(const QString &)
 {
 	bool str_ok;
 	QString str = ui.txtDatos_1->text();
-	if(str != ""){
-		str.replace(" ", "_");
+	if(str != "")
+	{
+		str = fGrl.eliminar_caracteres( str );
   		str_ok = str.endsWith(".vlp");
 		if(str_ok == false) str.append(".vlp");
 		ui.txtVdms_1->setText( str );
-	}else ui.txtVdms_1->setText( "" );
+	} else
+		ui.txtVdms_1->setText( "" );
 }

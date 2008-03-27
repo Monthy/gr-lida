@@ -33,22 +33,26 @@ class Funciones
 public:
 	Funciones();
 	~Funciones();
-	
-// Versión del GR-lida
-	QString stVersionGrl(){ return "0.3.4"; }
+
+// VersiÃ³n del GR-lida
+	QString stVersionGrl(){ return "0.4.0"; }
 // Versiones que soporta
 	QString stVersionDbx(){ return "0.72";  }
-	QString stVersionSvm(){ return "0.10.0";}
+	QString stVersionSvm(){ return "0.11.1";}
 	QString stVersionVdms(){return "2.0.4"; }
 
 // Muestra el Nombre de la plataforma donde esta compilada
 	QString get_Plataforma();
-// Convierte de Número a Texto
+// Convierte de NÃºmero a Texto
 	QString	IntToStr(int num);
-// Convierte de Texto a Número
+// Convierte de Texto a NÃºmero
 	int StrToInt(QString text);
 // Devuelve la hora y la fecha
 	QString HoraFechaActual();
+// Devuelve una URL correcta
+	QString url_correcta(QString url);
+// Elimina caracteres no permitidos por windows por ejemplo
+	QString eliminar_caracteres(QString str);
 // Elimina un item de un TreeWidget
 	void DeleteItemTree( QTreeWidgetItem * item );
 //	
@@ -60,13 +64,16 @@ public:
 	QHash<QString, QString> Cargar_Smiles(QString Archivo, QTreeWidget *myTreeWidget);
 	QHash<QString, QString> Cargar_Smiles(QString Archivo);
 	QString ReemplazaTextoSmiles(QString str, QHash<QString, QString> lista);
+// Carga los Distintos datos para Ordenar
+	QStringList CargaDatosListas(QString Archivo, QString delimitador);
 // Obtiene la direccion y el nombre del archivo atraves de QFileDialog
 	QString VentanaAbrirArchivos(const QString caption, const QString dir, const QString tmp_dir, const QString filter, QString *selectedFilter, bool Open_Save);
 // Obtiene la direccion de una carpeta atraves de QFileDialog
 	QString VentanaDirectorios(const QString caption, const QString dir, const QString tmp_dir);
 //
 	QStringList CreaConfigMontajes(QTreeWidget *treeWidget, const QHash<QString, QString> datos);
-
+// Exportar la configuracion del DOSBox para el DFend
+	void Exportar_Profile_DFend(QString fileName);
 };
 
 #endif /*FUNCIONES_H*/

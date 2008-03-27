@@ -35,55 +35,54 @@
 
 int main(int argc, char *argv[])
 {
+	QTranslator translator;
 	QString stHomeDir, stDirPath, stIdiomaSelect, Version_GRL, stStyleSelect;
-	bool ejecutado_por_primeravez , chk_StylePalette;
-
-    QApplication app(argc, argv);
+	bool ejecutado_por_primeravez , chk_StylePalette, chk_IdiomaExterno;
+	QApplication app(argc, argv);
+	
+	stHomeDir = QDir::homePath()+"/.gr-lida/";	// Indicamos el directorio del usuario
+//	stHomeDir = QDir::currentPath()+ "/";		// Indicamos el directorio del usuario
+//	stHomeDir = "./";  							// Indicamos el directorio del usuario
 	
 	QSplashScreen splash( QPixmap(":/images/splash.png") );
 	splash.setFont( QFont("Helvetica", 10) );
 	splash.show();
-
+	
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Creando ventana principal"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 	
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta principal"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
- 
-	stHomeDir = QDir::homePath()+"/.gr-lida/";  // Indicamos el directorio del usuario
-//	stHomeDir = QDir::currentPath()+ "/";  		// Indicamos el directorio del usuario
-//	stHomeDir = "./";  							// Indicamos el directorio del usuario
 
 // Crear directorio de la aplicacion si no existe
-    QDir appDir;
-    if (!appDir.exists(stHomeDir)) appDir.mkdir( stHomeDir );
+	QDir appDir;
+	if(!appDir.exists(stHomeDir)) appDir.mkdir( stHomeDir );
 
-	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando la configuraci髇 Inicial"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando la configuraci贸n Inicial"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-	
+
 // Comprueba y sino crea la configuracion por defecto
 	QFile appConfg(stHomeDir+"GR-lida.conf");
-	if ( !appConfg.exists() ) {
+	if( !appConfg.exists() )
+	{
 		QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
 		settings.beginGroup("OpcGeneral");
 			settings.setValue("DOSBoxDisp"   , "false");
 			settings.setValue("ScummVMDisp"  , "false");
 			settings.setValue("VDMSoundDisp" , "false");
 			settings.setValue("Primeravez"   , "true");
-			settings.setValue("Cerrar_GRlida", "false");
-		//	settings.setValue("dbGRlida"     , stHomeDir+"db_grl.grl");
-			settings.setValue("dbColTabla"   , "titulo");
-			settings.setValue("dbOrdenBy"    , "titulo");
-			settings.setValue("dbOrden"      , "asc");
 			settings.setValue("IdiomaSelect" , "es_ES");
+			settings.setValue("IdiomaExterno", "false");
 			settings.setValue("url_xmldb"    , "");		
 			settings.setValue("Style"        , "Default");
 			settings.setValue("StylePalette" , "false");
+			settings.setValue("IconoFav"     , "fav_0.png");
 		settings.endGroup();
 		settings.beginGroup("OpcVer");
 			settings.setValue("Pnl_Datos"    , "true" );
 			settings.setValue("Pnl_Capturas" , "false");
 			settings.setValue("Pnl_FilesUrl" , "false");
+			settings.setValue("Pnl_Ordenar"  , "false");
 		settings.endGroup();
 		settings.beginGroup("SqlDatabase");
 			settings.setValue("db_type"		, "QSQLITE" ); // QSQLITE, QMYSQL, QPSQL
@@ -92,110 +91,118 @@ int main(int argc, char *argv[])
 			settings.setValue("db_username"	, ""	); // Nombre del Usuario
 			settings.setValue("db_password"	, ""	); // Password
 			settings.setValue("db_port"		, "3306"); // Puerto
-		settings.endGroup();		
-		//settings.beginGroup("Updates");
-		//	settings.setValue("Version"      , "");
-		//settings.endGroup();		
+			settings.setValue("db_Orden_ColTabla", "titulo");
+			settings.setValue("db_Orden_By"      , "titulo");
+			settings.setValue("db_Orden"         , "ASC"   );			
+		settings.endGroup();
 		ejecutado_por_primeravez = true;
 		chk_StylePalette = false;
 		stIdiomaSelect = "es_ES" ;
+		chk_IdiomaExterno = false;
 		Version_GRL = "";
-	}else{
+	} else {
 		QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
 		settings.beginGroup("OpcGeneral");
 			ejecutado_por_primeravez = settings.value("Primeravez", "true").toBool();
 			stIdiomaSelect   = settings.value("IdiomaSelect", "es_ES").toString();
+			chk_IdiomaExterno= settings.value("IdiomaExterno" , "false").toBool();
 		    stStyleSelect    = settings.value("Style", "Default").toString();
 		    chk_StylePalette = settings.value("StylePalette", "false").toBool();
 		settings.endGroup();
 		settings.beginGroup("Updates");
 			Version_GRL = settings.value("Version", "").toString();
 		settings.endGroup();	
-	}	
-	if(stStyleSelect!="" || stStyleSelect!="Default")
+	}
+	if( stStyleSelect!="" || stStyleSelect!="Default" )
 		QApplication::setStyle( stStyleSelect );
-	
-	if (chk_StylePalette)
-        QApplication::setPalette(QApplication::style()->standardPalette());
-	
-	if( ejecutado_por_primeravez ){
+
+	if( chk_StylePalette )
+		QApplication::setPalette(QApplication::style()->standardPalette());
+
+	if( ejecutado_por_primeravez )
+	{
 		frmConfigInicial * ConfigInicial = new frmConfigInicial();
-		if ( ConfigInicial->exec() == QDialog::Accepted )
+		if( ConfigInicial->exec() == QDialog::Accepted )
 			stIdiomaSelect = ConfigInicial->IdiomaSelect; 
 	}
-	QTranslator translator;
-	translator.load( stHomeDir+ "idiomas/gr-lida_" + stIdiomaSelect + ".qm" );
-	qApp->installTranslator(&translator);
+	
+	if(chk_IdiomaExterno)
+		translator.load( stHomeDir + "idiomas/gr-lida_" + stIdiomaSelect + ".qm" );
+	else
+		translator.load( ":/idiomas/gr-lida_" + stIdiomaSelect + ".qm" );
+
+	qApp->installTranslator(&translator);	
 	
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Idiomas"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio idiomas si no existe
-    QDir langDir;
-    if (!langDir.exists(stHomeDir+"idiomas")) langDir.mkdir( stHomeDir+"idiomas" );
+	QDir langDir;
+	if(!langDir.exists(stHomeDir+"idiomas")) langDir.mkdir( stHomeDir+"idiomas" );
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Iconos"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio iconos si no existe
-    QDir iconDir;
-    if (!iconDir.exists(stHomeDir+"iconos")) iconDir.mkdir(stHomeDir+"iconos");
+	QDir iconDir;
+	if(!iconDir.exists(stHomeDir+"iconos")) iconDir.mkdir(stHomeDir+"iconos");
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Smiles"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio smiles si no existe
-    QDir smilesDir;
-    if (!smilesDir.exists(stHomeDir+"smiles")) smilesDir.mkdir(stHomeDir+"smiles");
+	QDir smilesDir;
+	if(!smilesDir.exists(stHomeDir+"smiles")) smilesDir.mkdir(stHomeDir+"smiles");
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Datos"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio datos si no existe
 	QDir datosDir;
-	if (!datosDir.exists(stHomeDir+"datos")) datosDir.mkdir(stHomeDir+"datos");
- 
-	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Configuraci髇 del DOSBox"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	if(!datosDir.exists(stHomeDir+"datos")) datosDir.mkdir(stHomeDir+"datos");
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Configuraci贸n del DOSBox"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio confDbx si no existe
-    QDir confDbxDir;
-    if (!confDbxDir.exists(stHomeDir + "confdbx")) confDbxDir.mkdir(stHomeDir + "confdbx");
+	QDir confDbxDir;
+	if(!confDbxDir.exists(stHomeDir + "confdbx")) confDbxDir.mkdir(stHomeDir + "confdbx");
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Roms"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-// Crear directorio Roms si no existe
-    QDir RomsDir;
-    if (!RomsDir.exists(stHomeDir + "roms")) RomsDir.mkdir(stHomeDir + "roms");
 
 #ifdef Q_OS_WIN32
-	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Configuraci髇 del VdmSound"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Configuraci贸n del VdmSound"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio confVdms si no existe
-    QDir confVdmsDir;
-    if (!confVdmsDir.exists(stHomeDir+"confvdms")) confVdmsDir.mkdir(stHomeDir+"confvdms");
+	QDir confVdmsDir;
+	if(!confVdmsDir.exists(stHomeDir+"confvdms")) confVdmsDir.mkdir(stHomeDir+"confvdms");
 #endif
 
 // Crear directorio confVdms si no existe
-    QDir thumbsDir;
-    if (!thumbsDir.exists(stHomeDir+"thumbs")) thumbsDir.mkdir(stHomeDir+"thumbs");
+	QDir thumbsDir;
+	if(!thumbsDir.exists(stHomeDir+"thumbs")) thumbsDir.mkdir(stHomeDir+"thumbs");
 
 // Crear directorio confVdms si no existe
-    QDir coversDir;
-    if (!coversDir.exists(stHomeDir+"covers")) coversDir.mkdir(stHomeDir+"covers");
+	QDir coversDir;
+	if(!coversDir.exists(stHomeDir+"covers")) coversDir.mkdir(stHomeDir+"covers");
 
-    GrLida w;
+// Crear directorio temp para las descargas temporales de imagenes, archivos
+	QDir tempDir;
+	if(!tempDir.exists(stHomeDir+"temp")) coversDir.mkdir(stHomeDir+"temp");
+	
+	GrLida w;
 
-	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Cargando Configuraci髇..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Cargando Configuraci贸n..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 	w.CargarConfigInicial();
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando archivos de Datos..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-	app.processEvents();	
+	app.processEvents();
 	w.ComprobarArchivosDatos( Version_GRL );
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Cargando Base de Datos..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-	w.CargarBaseDatos();
-	
-    w.show();
+	w.CargarBaseDatos("");
+
+	w.show();
 	splash.finish(&w);
 
 	app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
-    return app.exec();
+	return app.exec();
 }

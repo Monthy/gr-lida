@@ -58,7 +58,7 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	ui.twMontajes->header()->setMovable(false);
 
 
-	fGrl.CargarDatosComboBox(":/datos/dbx_resolution.txt" , ui.cbxDbx_1 , 1, false); // Resoluci髇 pantalla
+	fGrl.CargarDatosComboBox(":/datos/dbx_resolution.txt" , ui.cbxDbx_1 , 1, false); // Resoluci贸n pantalla
 	fGrl.CargarDatosComboBox(":/datos/dbx_output.txt"	  , ui.cbxDbx_2 , 1, false); // Modo de Renderizado
 	fGrl.CargarDatosComboBox(":/datos/dbx_machine.txt"	  , ui.cbxDbx_3 , 1, false); // Tarjeta de Video
 	fGrl.CargarDatosComboBox(":/datos/dbx_scaler.txt"	  , ui.cbxDbx_4 , 1, false); // Escalar y Filtros
@@ -69,7 +69,7 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt", ui.cbxDbx_12, 1, false); // MIDI Device
 
 	// Ponemos los Combobox por defecto.
-	ui.cbxDbx_1->setCurrentIndex( 0 );	// Resoluci髇 pantalla
+	ui.cbxDbx_1->setCurrentIndex( 0 );	// Resoluci贸n pantalla
 	ui.cbxDbx_2->setCurrentIndex( 0 );	// Modo de Renderizado
 	ui.cbxDbx_3->setCurrentIndex( 0 );	// Tarjeta de Video
 	ui.cbxDbx_4->setCurrentIndex( 1 );	// Escalar y Filtros
@@ -100,38 +100,48 @@ void frmDbxAdd::on_btnPrevious()
 void frmDbxAdd::on_btnNext()
 {
 	bool siguiente;
-	if (ui.txtDbx_1->text() != "") {
-		if ( ui.txtDbx_2->text() != ""){
-			QString archivo = stHomeDir + "confdbx/"+ ui.txtDbx_2->text();
-			QFile appConfg( archivo );
-			if ( appConfg.exists() ) {
+	if (ui.txtDbx_1->text() != "")
+	{
+		if ( ui.txtDbx_2->text() != "")
+		{
+			QFile appConfg( stHomeDir + "confdbx/"+ ui.txtDbx_2->text() );
+			if ( appConfg.exists() )
+			{
 				ui.txtDbx_2->setText("");
 				siguiente = false;
-				QMessageBox::information( this, stTituloDbx(), tr("El archivo de Configuraci髇 para el DOSBox ya esixte"));
-			}else{
+				QMessageBox::information( this, stTituloDbx(), tr("El archivo de Configuraci贸n para el DOSBox ya esixte"));
+			} else {
 				siguiente = true;
-				if ( ui.txtDbx_3->text() == ""){
+				if ( ui.txtDbx_3->text() == "")
+				{
 					QMessageBox::information(this, stTituloDbx(), tr("Debes indicar el Ejecutable del juego"));
 					siguiente = false;
-				}else siguiente = true;			
+				} else
+					siguiente = true;			
 			}
-		}else{
-			QMessageBox::information(this, stTituloDbx(), tr("Debes indicar el archivo donde guardara la configuraci髇 del juego"));
+		} else {
+			QMessageBox::information(this, stTituloDbx(), tr("Debes indicar el archivo donde guardara la configuraci贸n del juego"));
 			siguiente = false;
 		}
-	}else{
+	} else {
 		QMessageBox::information(this, stTituloDbx(), tr("Debes poner un Titulo al juego"));
 		siguiente = false;
 	}
-	if (siguiente == true ){
+	if (siguiente == true )
+	{
 		ui.btnPrevious->setEnabled(true);
 		ui.wizardDbx->setCurrentIndex(ui.wizardDbx->currentIndex()+1);
 	}
 	if( ui.wizardDbx->currentIndex() == 1) ui.chkDbx_4->setFocus();
 	if( ui.wizardDbx->currentIndex() == 2) ui.cbxDbx_5->setFocus();
 	if( ui.wizardDbx->currentIndex() == 3) ui.chkDbx_10->setFocus();
-	if( ui.wizardDbx->currentIndex() == 4) ui.twMontajes->setFocus();
-	if( ui.wizardDbx->currentIndex() >= 5) {
+	if( ui.wizardDbx->currentIndex() == 4)
+	{
+		ui.btnMount_AutoCrear->click();
+		ui.twMontajes->setFocus();		
+	}
+	if( ui.wizardDbx->currentIndex() >= 5)
+	{
 		ui.btnOk->setEnabled(true);
 	  	ui.btnOk->setFocus();
 		ui.btnNext->setEnabled(false);
@@ -140,9 +150,9 @@ void frmDbxAdd::on_btnNext()
 
 void frmDbxAdd::on_btnOk()
 {
-	if ( ui.txtDbx_1->text().isEmpty() ) {
+	if ( ui.txtDbx_1->text().isEmpty() )
 		QMessageBox::information( this, stTituloDbx(), tr("Debes poner por lo menos el titulo."));
-	} else {
+	else {
 		DatosJuego.clear();
 		DatosJuego["icono"]			= "dosbox"		;//icono
 		DatosJuego["titulo"]		= ui.txtDbx_1->text();//titulo
@@ -168,6 +178,7 @@ void frmDbxAdd::on_btnOk()
 		DatosJuego["fecha"] 		= fGrl.HoraFechaActual();//fecha d/m/a h:m:s
 		DatosJuego["tipo_emu"] 		= "dosbox"		;//tipo_emu
 		DatosJuego["comentario"] 	= ""			;//comentario	
+		DatosJuego["favorito"]		= "false"		;//favorito
 
 		DatosDosBox.clear();
 		if(ui.chkDbx_4->isChecked() )
@@ -308,12 +319,14 @@ void frmDbxAdd::on_txtDbx_1_textChanged(const QString &)
 {
 	bool str_ok;
 	QString str = ui.txtDbx_1->text();
-	if(str != ""){
-		str.replace(" ", "_");
+	if(str != "")
+	{
+		str = fGrl.eliminar_caracteres( str );
   		str_ok = str.endsWith(".conf");
 		if(str_ok == false) str.append(".conf");
 		ui.txtDbx_2->setText( str );
-	}else ui.txtDbx_2->setText( "" );
+	} else
+		ui.txtDbx_2->setText( "" );
 }
 
 void frmDbxAdd::on_btnFileConfg()
@@ -321,20 +334,22 @@ void frmDbxAdd::on_btnFileConfg()
 	bool str_ok;
 	QString str, archivo;
 	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_2->text(), tr("Todos los archivo (*)"), 0, true);
-	if(archivo != ""){
+	if(archivo != "")
+	{
 		QFile appConfg( archivo );
 //		if ( !appConfg.exists() ) {
 			QFileInfo fi( archivo );
 			str = fi.fileName();
-			str.replace(" ", "_");
+			str = fGrl.eliminar_caracteres( str );
 	  		str_ok = str.endsWith(".conf");
 			if(str_ok == false) str.append(".conf");
 			ui.txtDbx_2->setText( str );
 //		}else{
-//			QMessageBox::information( this, stTituloDbx(), tr("El archivo de Configuraci髇 para el DOSBox ya esixte"));
+//			QMessageBox::information( this, stTituloDbx(), tr("El archivo de Configuraci贸n para el DOSBox ya esixte"));
 //			ui.txtDbx_2->setText("");
 //		}
-	}else ui.txtDbx_2->setText( "" );
+	} else
+		ui.txtDbx_2->setText( "" );
 }
 
 void frmDbxAdd::on_btnExeJuego()
@@ -349,7 +364,8 @@ void frmDbxAdd::on_btnExeSetup()
 
 void frmDbxAdd::on_btnMount_Add()
 {
-QVector<QString> datos_montaje_edit;
+	QVector<QString> datos_montaje_edit;
+
 	datos_montaje_edit.clear();
 	datos_montaje_edit << ""; // directorio o iso
 	datos_montaje_edit << ""; // etiqueta
@@ -360,7 +376,8 @@ QVector<QString> datos_montaje_edit;
 	datos_montaje_edit << ""; // cd/dvd
 
 	frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes(false,datos_montaje_edit);
-    if ( AddEditMontajes->exec() == QDialog::Accepted ) {
+    if ( AddEditMontajes->exec() == QDialog::Accepted )
+    {
 		QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 		QString tipoDrive = AddEditMontajes->DatosMontaje[2];
 		if(tipoDrive=="drive")
@@ -400,7 +417,8 @@ QVector<QString> datos_montaje_edit;
 	}
 }
 
-void frmDbxAdd::on_btnMount_Edit(){
+void frmDbxAdd::on_btnMount_Edit()
+{
 
 	QVector<QString> datos_montaje_edit;
 	datos_montaje_edit.clear();
@@ -452,11 +470,14 @@ void frmDbxAdd::on_btnMount_Edit(){
 	}
 }
 
-void frmDbxAdd::on_btnMount_Delete(){
-	if( ui.twMontajes->topLevelItemCount()>0 ){
+void frmDbxAdd::on_btnMount_Delete()
+{
+	if( ui.twMontajes->topLevelItemCount()>0 )
+	{
 		int EliminarSiNO;
-		EliminarSiNO = QMessageBox::information( this, tr("縀liminar Juego...?"), tr( "緿eseas eliminar este montaje?" ), tr( "Si" ), tr( "Cancelar" ), 0, 1 );
-		if( EliminarSiNO == 0 ){
+		EliminarSiNO = QMessageBox::information( this, tr("驴Eliminar Juego...?"), tr( "驴Deseas eliminar este montaje?" ), tr( "Si" ), tr( "Cancelar" ), 0, 1 );
+		if( EliminarSiNO == 0 )
+		{
 			fGrl.DeleteItemTree( ui.twMontajes->currentItem() ) ;
 		
 			QHash<QString, QString> datos_montaje;
@@ -475,20 +496,24 @@ void frmDbxAdd::on_btnMount_Delete(){
 	}
 }
 
-void frmDbxAdd::on_btnMount_Clear(){
+void frmDbxAdd::on_btnMount_Clear()
+{
 	ui.twMontajes->clear();
 	ui.previer_mount->clear();
 }
 
-void frmDbxAdd::on_btnMount_Subir(){
+void frmDbxAdd::on_btnMount_Subir()
+{
 	
 }
 
-void frmDbxAdd::on_btnMount_Bajar(){
+void frmDbxAdd::on_btnMount_Bajar()
+{
 	
 }
 
-void frmDbxAdd::on_btnMount_AutoCrear(){
+void frmDbxAdd::on_btnMount_AutoCrear()
+{
 	QFileInfo fi( ui.txtDbx_3->text() );
 	QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 	item->setIcon( 0, QIcon(":/img16/drive_hd.png") );
@@ -519,7 +544,8 @@ void frmDbxAdd::on_btnMount_Primario()
 {
 	int indx_mount=0, num_mount=0;
 	indx_mount = ui.twMontajes->indexOfTopLevelItem(ui.twMontajes->currentItem());
-	for ( num_mount = 0; num_mount < ui.twMontajes->topLevelItemCount(); num_mount++ ) {
+	for ( num_mount = 0; num_mount < ui.twMontajes->topLevelItemCount(); num_mount++ )
+	{
 		ui.twMontajes->topLevelItem( num_mount )->setText(7 , "x");
 	}
 	ui.twMontajes->topLevelItem( indx_mount )->setText(7 , "v");

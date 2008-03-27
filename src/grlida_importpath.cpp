@@ -90,13 +90,14 @@ void frmImportPath::on_btnOpenDatoFile_3()
 
 void frmImportPath::on_btnOpenDbxFile_1()
 {
-	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir, ui.txtPath_Dbx_1->text(), tr("Todos los archivo (*)"), 0, true);
+	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confdbx/", ui.txtPath_Dbx_1->text(), tr("Todos los archivo (*)"), 0, true);
 	QFile appConfg( archivo );
-	if ( !appConfg.exists() ) {
+	if ( !appConfg.exists() )
+	{
 		QFileInfo fi( archivo );
 		ui.txtPath_Dbx_1->setText( fi.fileName() );
-	}else{
-		QMessageBox::information( this, "GR-lida", tr("El archivo de Configuraci�n para el DOSBox ya esixte"));
+	} else {
+		QMessageBox::information( this, "GR-lida", tr("El archivo de Configuración para el DOSBox ya esixte"));
 		ui.txtPath_Dbx_1->setText("");
 	}
 }
@@ -168,7 +169,16 @@ void frmImportPath::on_btnOpenSvmDir_6()
 
 void frmImportPath::on_btnOpenVdmsFile_1()
 {
-	ui.txtPath_Vdms_1->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Vdms_1->text(), tr("Todos los archivo (*)"), 0, false) );
+	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confvdms/", ui.txtPath_Vdms_1->text(), tr("Todos los archivo (*)"), 0, true);
+	QFile appConfg( archivo );
+	if ( !appConfg.exists() )
+	{
+		QFileInfo fi( archivo );
+		ui.txtPath_Vdms_1->setText( fi.fileName() );
+	} else {
+		QMessageBox::information( this, "GR-lida", tr("El archivo de Configuración para el VDMSound ya esixte"));
+		ui.txtPath_Vdms_1->setText("");
+	}
 }
 
 void frmImportPath::on_btnOpenVdmsFile_2()

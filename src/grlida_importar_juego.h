@@ -68,12 +68,13 @@ private:
 	int  httpGetId;
     bool httpRequestAborted;
     void parseListaJuegos(const QDomElement &element);
-	QString url_correcta(QString url);
+    void LoadProfile_DFend(QString fileName);
 
 private slots:
 	void on_btnPrevious();
 	void on_btnNext();
 	void on_btnOk();
+	void on_btnDirFileXML();
 	void on_xml_open();
 	void on_download();
 	void on_treeWidget_Dblclicked( QTreeWidgetItem *item);

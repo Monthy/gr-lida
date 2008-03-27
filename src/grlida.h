@@ -32,6 +32,7 @@
 #include <QTreeWidgetItem>
 #include <QSettings>
 #include <QTextStream>
+#include <QSystemTrayIcon>
 #include "funciones.h"
 #include "dbsql.h"
 #include "ui_grlida.h"
@@ -44,22 +45,27 @@ public:
 	~GrLida();
 
 	Ui::GrLidaClass ui;
-	
-	void CargarBaseDatos();		   // Abre y carga la base de datos
-	void CargarConfigInicial();    // Cargar la Configuracin Inicial
-	void ComprobarArchivosDatos(QString Version_GRL); // Comprueba si existen los archivos de datos
+
+	void CargarBaseDatos(QString str);				// Abre y carga la base de datos
+	void CargarConfigInicial();							// Cargar la Configuracin Inicial
+	void ComprobarArchivosDatos(QString Version_GRL);	// Comprueba si existen los archivos de datos
+
+	void setVisible(bool visible);
 
 private:
 	Funciones fGrl;
 	dbSql *sql;
+
 	QProcess *dBoxSvm;
 	
 	QString stTituloGrl() { return tr("GR-lida Lanzador para el DOSBox, ScummVM y VdmSound"); }
 
 	QString stdb_type, stdb_host, stdb_name, stdb_username, stdb_password, stdb_port;
+	QString stdb_Orden_ColTabla, stdb_Orden_By, stdb_Orden;
 	QString stHomeDir, stIconDir, stDatosDir, stConfgDbxDir, stConfgVdmSDir;
 	QString stBinExeDbx, stBinExeSvm;
-	QString stItemIndex, stConfgJuego, stTipoEmu, stIdiomaSelect, stCapturasDbx, stCapturasSvm, stCapturasVdms;
+	QString stItemIndex, stConfgJuego, stTipoEmu, stIdiomaSelect;
+	QString stCapturasDbx, stCapturasSvm, stCapturasVdms, stCaratula_Delantera, stCaratula_Trasera, stIconoFav;
 
 	QStringList stl_param, smiles_Lista, smiles_ListaTemp;
 
@@ -67,7 +73,16 @@ private:
 	QHash<QString, QString>::const_iterator i_Hash;
 
 	QLabel lbpanel_1, lbpanel_2, lbpanel_3, lbpanel_4, lbpanel_5;
+	
+	QAction *minimizeAction;
+	QAction *maximizeAction;
+	QAction *restoreAction;
+	QAction *quitAction;
 
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayIconMenu, *ljMenuPopUp;
+    bool isTrayIcon;
+    
 	void MostrarDatosDelJuego(QString IDitem);
 	void CargarThumbsTreeWidget(const QString directorio);
 	void NuevoItemTreeWidget(const QHash<QString, QString> datos, QString imgEmu, QString IDitem);
@@ -76,15 +91,18 @@ private:
 	void Confg_Svm_Dbx(QString IDitem);	
 	void CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg);
 	void CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
-
+	
 protected:
 	void closeEvent( QCloseEvent *e );
-
+	
 private slots:
+	void showPopup(const QPoint& aPosition);
 	void on_twJuegos_clicked( QTreeWidgetItem *item );
 	void on_twJuegos_Dblclicked( QTreeWidgetItem *item);
 	void on_twJuegos_currentItemChanged( QTreeWidgetItem *item1, QTreeWidgetItem *item2);
-
+	void on_twCapturas_Dblclicked( QTreeWidgetItem *item);
+	void on_txtBuscar_textChanged(const QString &);
+	
 	void on_AddNewDbx();		// Aade un juego para el DOSBox.
 	void on_Informacion();		// Muestra distinta informacion
 	void on_AddNewSvm();		// Aade un juego para el scummvm.
@@ -96,13 +114,21 @@ private slots:
 	void on_EliminarJuego();	// Elimina un juego de la BD y sus Configuracin.
 	void on_Opciones();			// Accede a las Opciones del GR-lida
     void on_AcercaD();			// Acerca del GR-lida.
-	void on_ImportarJuego();	// Obtiene lo datos de jugo de forma externa.
+    void on_Ordenar_Lista();	// Ordena la Lista de Juegos
+    void on_ImportarJuego();	// Obtiene lo datos de jugo de forma externa.
 	void on_EjecutarDosbox();
 	void on_EjecutarScummVM();
 	void on_btn_fileurl_1();
 	void on_btn_fileurl_2();
 	void on_btn_imgtumb_1();
 	void on_btn_imgtumb_2();
+	void on_btn_VerCoverFront();
+	void on_btn_VerCoverBack();
+	void on_setFavorito();
+
+	bool createTrayIcon();
+	void fin_Proceso( int, QProcess::ExitStatus );
+	void fin_ProcesoError( QProcess::ProcessError );
 
 //public slots:
 

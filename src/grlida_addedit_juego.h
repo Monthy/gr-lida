@@ -127,8 +127,10 @@ private slots:
 	void on_btnDirSvm_extra();
 	void on_btnDirSvm_capturas();
 	void on_btnDirSvm_sonido();
+	void on_btnDirSvm_sound_font();
 // ---------------------------------------------------------------
 // Referente al DOSBox -------------------------------------------
+	void on_txtDbx_1_textChanged(const QString &);
 	void CargarDatosDosBox( QString stIDdbx );
 	void CargarDatosDBxMontaje( QString stIDdbx );
 	void setDatosDosBox();

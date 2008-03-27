@@ -23,16 +23,12 @@
 **/
 
 #include "dbsql.h"
-/*#include <QtSql>
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlResult>
-*/
+
 dbSql::dbSql(QString db_type, QString db_host, QString db_name, QString db_username, QString db_password, QString db_port)
 {
 	ok_OpenDB = false;
-	if( db_type == "QMYSQL" || db_type == "QPSQL" ){
+	if( db_type == "QMYSQL" || db_type == "QPSQL" )
+	{
 		sqldb = QSqlDatabase::addDatabase( db_type );
 		sqldb.setHostName( db_host 	 ); // localhost, archivo
 		sqldb.setDatabaseName( db_name ); // Nombre base de datos
@@ -40,7 +36,7 @@ dbSql::dbSql(QString db_type, QString db_host, QString db_name, QString db_usern
 		sqldb.setPassword( db_password ); // Password
 		sqldb.setPort( db_port.toInt() );
 	    ok_OpenDB = sqldb.open();
-	}else{
+	} else {
 		sqldb = QSqlDatabase::addDatabase("QSQLITE");
 		sqldb.setDatabaseName( db_host );
 		ok_OpenDB = sqldb.open();
@@ -71,7 +67,8 @@ dbSql::~dbSql()
 
 bool dbSql::Chequear_Query( QSqlQuery q )
 {
-	if ( q.lastError().type() != QSqlError::NoError ) {
+	if ( q.lastError().type() != QSqlError::NoError )
+	{
 		QMessageBox::critical( 0, QCoreApplication::applicationName(), "SQL: " + q.lastQuery() + "\nError: " + q.lastError().text() );
 		return false;
 	}
@@ -81,7 +78,8 @@ bool dbSql::Chequear_Query( QSqlQuery q )
 int dbSql::getCount(QString stTable, QString stWhere)
 {
 	QSqlQuery result( "SELECT COUNT(*) FROM "+ stTable + " " + stWhere );
-	if ( Chequear_Query(result) ) {
+	if ( Chequear_Query(result) )
+	{
 		result.next();
 		int count = result.record().value(0).toInt();
 		result.clear();
@@ -136,9 +134,8 @@ void dbSql::eliminararchivo(QString archivo)
 //	QString stArchivoConfg = QDir::currentPath()+"/confdbx/"+ archivo;
 //	QString stArchivoConfg = "./confdbx/"+ archivo;
 	QFile f( stArchivoConfg );
-	if ( f.exists() ) {
+	if ( f.exists() )
 		f.remove();
-	}
 }
 
 QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
@@ -148,11 +145,11 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	strSQL.append("INSERT INTO dbgrl (");
 	strSQL.append("icono, titulo, subtitulo, genero, compania, desarrollador, tema, idioma, formato, anno, numdisc, ");
 	strSQL.append("sistemaop, tamano, graficos, sonido, jugabilidad, original, estado, thumbs, cover_front, cover_back,");
-	strSQL.append("fecha, tipo_emu, comentario ");
+	strSQL.append("fecha, tipo_emu, comentario, favorito ");
 	strSQL.append(") VALUES ( ");
 	strSQL.append(":icono, :titulo, :subtitulo, :genero, :compania, :desarrollador, :tema, :idioma, :formato, :anno, :numdisc, ");
 	strSQL.append(":sistemaop, :tamano, :graficos, :sonido, :jugabilidad, :original, :estado, :thumbs, :cover_front, :cover_back, ");
-	strSQL.append(":fecha, :tipo_emu, :comentario)");
+	strSQL.append(":fecha, :tipo_emu, :comentario, :favorito)");
 	
 	QSqlQuery query;
 	query.prepare( strSQL );
@@ -180,6 +177,8 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	query.bindValue(":fecha"		, datos["fecha"] );
 	query.bindValue(":tipo_emu"		, datos["tipo_emu"] );
 	query.bindValue(":comentario"	, datos["comentario"] );
+	query.bindValue(":favorito"		, datos["favorito"] );
+
 	query.exec();
 	QVariant v;
 	v = query.lastInsertId();
@@ -196,7 +195,7 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	strSQL.append("formato = :formato, anno = :anno, numdisc = :numdisc, sistemaop = :sistemaop, ");
 	strSQL.append("tamano = :tamano, graficos = :graficos, sonido = :sonido, jugabilidad = :jugabilidad, ");
 	strSQL.append("original = :original, estado = :estado, thumbs = :thumbs, cover_front = :cover_front, ");
-	strSQL.append("cover_back = :cover_back, comentario = :comentario ");
+	strSQL.append("cover_back = :cover_back, comentario = :comentario, favorito = :favorito ");
 	strSQL.append("WHERE idgrl = :idgrl ;"); 
 	
 	QSqlQuery query;
@@ -226,7 +225,17 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	//query.bindValue(":fecha"		, datos["fecha"] );
 	//query.bindValue(":tipo_emu"	, datos["tipo_emu"] );
 	query.bindValue(":comentario"	, datos["comentario"] );
+	query.bindValue(":favorito"		, datos["favorito"] );
 	query.bindValue(":idgrl"		,   IDgrl   );	// idgrl
+	query.exec();
+}
+
+void dbSql::ItemActualizaDatosFavorito(const QString EstadoFav , const QString IDgrl )
+{
+	QSqlQuery query;
+	query.prepare( "UPDATE dbgrl SET favorito = :favorito WHERE idgrl = :idgrl ;" );
+	query.bindValue(":favorito"	, EstadoFav );
+	query.bindValue(":idgrl"	, IDgrl     );	// idgrl
 	query.exec();
 }
 
@@ -357,7 +366,8 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	query.bindValue(":parametros_setup"			, datos["parametros_setup"]  );
 	query.exec();
 
-	if ( Chequear_Query( query ) ) {
+	if ( Chequear_Query( query ) )
+	{
 		QVariant v;
 		v = query.lastInsertId();
 		return v.toString();
@@ -500,7 +510,8 @@ void dbSql::ItemInsertaMontajesDbx(QTreeWidget *treeWidget, const QString IDdbx)
 	strSQL.append(":id_dosbox, :id_lista, :path, :label, :tipo_as, :letter, :indx_cd, :opt_mount, :io_ctrl, :select_mount");
 	strSQL.append(")");
 
-	for ( num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ ) {
+	for ( num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
+	{
 		QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
 		QSqlQuery query;
 		query.prepare( strSQL );
@@ -556,7 +567,8 @@ void dbSql::ItemActualizaMontajeDbx(QTreeWidget *treeWidget)
 	strSQL.append("tipo_as = :tipo_as, letter = :letter, indx_cd = :indx_cd, opt_mount = :opt_mount, ");
 	strSQL.append("io_ctrl = :io_ctrl, select_mount = :select_mount ");
 	strSQL.append("WHERE id = :id ;");
-	for ( num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ ) {
+	for ( num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
+	{
 		QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
 		QSqlQuery query;
 		query.prepare( strSQL );
@@ -589,12 +601,12 @@ void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString ID
 	strSQL.append("idgrl, game, language, subtitles, platform, gfx_mode, render_mode, fullscreen, aspect_ratio, path, ");
 	strSQL.append("path_setup, path_extra, path_save, path_capturas, path_sonido, music_driver, enable_gs, multi_midi, ");
 	strSQL.append("native_mt32, master_volume, music_volume, sfx_volume, speech_volume, tempo, talkspeed, debuglevel, ");
-	strSQL.append("cdrom, joystick_num ");
+	strSQL.append("cdrom, joystick_num, output_rate, midi_gain, copy_protection, sound_font ");
 	strSQL.append(") VALUES ( ");
 	strSQL.append(":idgrl, :game, :language, :subtitles, :platform, :gfx_mode, :render_mode, :fullscreen, :aspect_ratio, :path, ");
 	strSQL.append(":path_setup, :path_extra, :path_save, :path_capturas, :path_sonido, :music_driver, :enable_gs, :multi_midi, ");
 	strSQL.append(":native_mt32, :master_volume, :music_volume, :sfx_volume, :speech_volume, :tempo, :talkspeed, :debuglevel, ");
-	strSQL.append(":cdrom, :joystick_num )");
+	strSQL.append(":cdrom, :joystick_num, :output_rate, :midi_gain, :copy_protection, :sound_font )");
 
 	QSqlQuery query;
 	query.prepare( strSQL );
@@ -626,6 +638,10 @@ void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString ID
 	query.bindValue(":debuglevel"		, datos["debuglevel"] );
 	query.bindValue(":cdrom"			, datos["cdrom"] );
 	query.bindValue(":joystick_num"		, datos["joystick_num"] );
+	query.bindValue(":output_rate"		, datos["output_rate"] );
+	query.bindValue(":midi_gain"		, datos["midi_gain"] );
+	query.bindValue(":copy_protection"	, datos["copy_protection"] );
+	query.bindValue(":sound_font"		, datos["sound_font"] );
 	query.exec();
 }
 
@@ -640,7 +656,9 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 	strSQL.append("path_capturas = :path_capturas, path_sonido = :path_sonido, music_driver = :music_driver, enable_gs = :enable_gs, ");
 	strSQL.append("multi_midi = :multi_midi, native_mt32 = :native_mt32, master_volume = :master_volume, music_volume = :music_volume, ");
 	strSQL.append("sfx_volume = :sfx_volume, speech_volume = :speech_volume, tempo = :tempo, talkspeed = :talkspeed, ");
-	strSQL.append("debuglevel = :debuglevel, cdrom = :cdrom, joystick_num = :joystick_num ");
+	strSQL.append("debuglevel = :debuglevel, cdrom = :cdrom, joystick_num = :joystick_num, output_rate = :output_rate, ");
+	strSQL.append("midi_gain = :midi_gain, copy_protection = :copy_protection, sound_font = :sound_font ");
+	
 	strSQL.append("WHERE id = :id ;"); 
 	
 	QSqlQuery query;
@@ -672,6 +690,10 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 	query.bindValue(":debuglevel"		, datos["debuglevel"] );
 	query.bindValue(":cdrom"			, datos["cdrom"] );
 	query.bindValue(":joystick_num"		, datos["joystick_num"] );
+	query.bindValue(":output_rate"		, datos["output_rate"] );
+	query.bindValue(":midi_gain"		, datos["midi_gain"] );
+	query.bindValue(":copy_protection"	, datos["copy_protection"] );
+	query.bindValue(":sound_font"		, datos["sound_font"] );
 	query.bindValue(":id"				,   IDsvm   );	// id del scummvm
 	query.exec();	
 }
@@ -697,7 +719,6 @@ void dbSql::ItemInsertaVdms(const QHash<QString, QString> datos, const QString I
 	query.bindValue(":winnt_storage"	, datos["winnt_storage_1"] +"|"+ datos["winnt_storage_2"]);
 		
 	query.exec();
-	
 }
 
 void dbSql::ItemActualizaVdms(const QHash<QString, QString> datos, const QString IDvdms)
@@ -732,7 +753,8 @@ void dbSql::ItemInsertaFiles(QTreeWidget *treeWidget, const QString IDgrl)
 	strSQL.append(") VALUES ( ");
 	strSQL.append(":idgrl, :nombre, :crc, :descripcion, :path, :size )");
 
-	for ( num_file = 0; num_file < treeWidget->topLevelItemCount(); num_file++ ) {
+	for ( num_file = 0; num_file < treeWidget->topLevelItemCount(); num_file++ )
+	{
 		QTreeWidgetItem *item_files = treeWidget->topLevelItem( num_file );
 		QSqlQuery query;
 		query.prepare( strSQL );
@@ -802,7 +824,8 @@ void dbSql::ItemInsertaURL(QTreeWidget *treeWidget, const QString IDgrl)
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_url ( idgrl, url, descripcion ) VALUES ( :idgrl, :url, :descripcion )");
 
-	for ( num_url = 0; num_url < treeWidget->topLevelItemCount(); num_url++ ) {
+	for ( num_url = 0; num_url < treeWidget->topLevelItemCount(); num_url++ )
+	{
 		QTreeWidgetItem *item_files = treeWidget->topLevelItem( num_url );
 		QSqlQuery query;
 		query.prepare( strSQL );
@@ -853,9 +876,19 @@ void dbSql::ItemEliminarURL( const QString IDURL )
 
 void dbSql::CrearTablas()
 {
-// Crea toda las Tablas de la Base de Datos
+// Crea las Tablas de la Base de Datos si es Necesario
 	QSqlQuery query;
-    query.exec(
+
+//	Añade las columnas si no están disponibles
+	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'favorito' VARCHAR(5) NOT NULL DEFAULT 'false';");
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'output_rate' VARCHAR(10) NOT NULL DEFAULT '<defecto>';");
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'midi_gain' integer NOT NULL default 100;");
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'copy_protection' VARCHAR(5) NOT NULL DEFAULT 'false';");
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'sound_font' VARCHAR(255) NOT NULL DEFAULT '';");
+
+// Añade las distintas tablas si no están disponibles
+// Tabla principal - dbgrl
+	query.exec(
 	"CREATE TABLE `dbgrl` ("
 	"	`idgrl`					integer NOT NULL primary key,"
 	"	`icono`					varchar(255) NOT NULL default '',"
@@ -881,10 +914,12 @@ void dbSql::CrearTablas()
 	"	`cover_back`			varchar(255) NOT NULL default '',"
 	"	`fecha`					varchar(50) NOT NULL default '',"
 	"	`tipo_emu`				varchar(255) NOT NULL default 'datos',"
-	"	`comentario`			longtext"
+	"	`comentario`			longtext,"
+	"	`favorito`				varchar(5) NOT NULL default 'false'"
 	");");
 
-    query.exec(
+// Tabla - dbgrl_emu_dosbox
+	query.exec(
 	"CREATE TABLE `dbgrl_emu_dosbox` ("
 	"	`id`					integer NOT NULL primary key,"
 	"	`idgrl`					integer NOT NULL default 1,"
@@ -980,7 +1015,8 @@ void dbSql::CrearTablas()
 	"	`parametros_exe`		varchar(255) NOT NULL default '',"
 	"	`parametros_setup`		varchar(255) NOT NULL default ''"
 	");");
-
+	
+// Tabla - dbgrl_emu_dosbox_mount
     query.exec(
 	"CREATE TABLE `dbgrl_emu_dosbox_mount` ("
 	"	`id`					integer NOT NULL primary key,"
@@ -996,6 +1032,7 @@ void dbSql::CrearTablas()
 	"	`select_mount`			varchar(10) NOT NULL default 'x'"
 	");");
 
+// Tabla - dbgrl_emu_scummvm
     query.exec(
 	"CREATE TABLE `dbgrl_emu_scummvm` ("
 	"	`id`					integer NOT NULL primary key,"
@@ -1026,9 +1063,14 @@ void dbSql::CrearTablas()
 	"	`talkspeed`				integer NOT NULL default 60,"
 	"	`debuglevel`			integer NOT NULL default 0,"
 	"	`cdrom`					integer NOT NULL default 0,"
-	"	`joystick_num`			integer NOT NULL default 0"
+	"	`joystick_num`			integer NOT NULL default 0,"
+    "	`output_rate`			varchar(10) NOT NULL default '<defecto>',"
+    "	`midi_gain`				integer NOT NULL default 100,"    		
+    "	`copy_protection`		varchar(5) NOT NULL default 'false',"	
+    "	`sound_font`			varchar(255) NOT NULL default ''"
 	");");
 
+// Tabla - dbgrl_emu_vdmsound
     query.exec(
 	"CREATE TABLE `dbgrl_emu_vdmsound` ("
 	"	`id`					integer NOT NULL primary key,"
@@ -1042,6 +1084,7 @@ void dbSql::CrearTablas()
 	"	`winnt_storage`			text"
 	");");
 
+// Tabla - dbgrl_file
     query.exec(
 	"CREATE TABLE `dbgrl_file` ("
 	"	`id`					integer NOT NULL primary key,"
@@ -1053,6 +1096,7 @@ void dbSql::CrearTablas()
 	"	`size`					varchar(50) NOT NULL default ''"
 	");");
 
+// Tabla - dbgrl_url
     query.exec(
 	"CREATE TABLE `dbgrl_url` ("
 	"	`id`					integer NOT NULL primary key,"
@@ -1060,4 +1104,13 @@ void dbSql::CrearTablas()
 	"	`url`					varchar(255) NOT NULL default '',"
 	"	`descripcion`			varchar(255) NOT NULL default ''"
 	");");
+
+//	bool dbgrl_url_ok;
+//	dbgrl_url_ok = query.exec("SHOW TABLES LIKE dbgrl_url");
+//	if( dbgrl_url_ok == false )
+//	{
+//		QMessageBox::critical( 0, QCoreApplication::applicationName(), "SQL: creada la tabla dbgrl_url");
+//	} else
+//		QMessageBox::critical( 0, QCoreApplication::applicationName(), "SQL: No se ha creado nada (dbgrl_url)");
+
 }

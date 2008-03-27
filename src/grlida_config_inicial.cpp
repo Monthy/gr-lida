@@ -40,19 +40,24 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 
 	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
 	settings.beginGroup("OpcGeneral");
-	ui.chkConfini_1->setChecked(settings.value("DOSBoxDisp"    , "false").toBool() );
-	ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool() );
-	ui.txtDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool() );
-	ui.txtDirDbx->setText( settings.value("DirDOSBox"       , "" ).toString()      );
-	ui.chkConfini_2->setChecked(settings.value("ScummVMDisp"   , "false").toBool() );
-	ui.btnDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool() );
-	ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool() );
-	ui.txtDirSvm->setText( settings.value("DirScummVM"      , "" ).toString()      );
-	ui.chkConfini_3->setChecked( settings.value("VDMSoundDisp" , "false").toBool() );
+	ui.chkConfini_1->setChecked(settings.value("DOSBoxDisp"    , "false").toBool()   );
+	ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool()   );
+	ui.txtDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool()   );
+	ui.txtDirDbx->setText( settings.value("DirDOSBox"          , ""     ).toString() );
+	ui.chkConfini_2->setChecked(settings.value("ScummVMDisp"   , "false").toBool()   );
+	ui.btnDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool()   );
+	ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool()   );
+	ui.txtDirSvm->setText( settings.value("DirScummVM"         , ""     ).toString() );
+	ui.chkConfini_3->setChecked( settings.value("VDMSoundDisp" , "false").toBool()   );
 	IdiomaSelect = settings.value("IdiomaSelect", "es_ES" ).toString();
-	settings.endGroup();
+	IdiomaExterno = settings.value("IdiomaExterno" , "false").toBool();
 
-	fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );
+	settings.endGroup();
+	
+	if(IdiomaExterno)
+		fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );	
+	else
+		fGrl.CargarIdiomasCombo( ":/idiomas/", ui.cbxIdioma );
 
 	ui.cbxIdioma->setCurrentIndex( ui.cbxIdioma->findText(IdiomaSelect, Qt::MatchContains) ); //
 	on_setLanguage( ui.cbxIdioma->currentText() );
@@ -62,7 +67,7 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 	#else
 		ui.chkConfini_3->setEnabled(false);
 	#endif
-
+	
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
@@ -76,8 +81,12 @@ frmConfigInicial::~frmConfigInicial(){}
 void frmConfigInicial::on_setLanguage(const QString txt_locale)
 {
 	QStringList parts = txt_locale.split(" - ");
-	QTranslator translator;
-	translator.load( stHomeDir + "idiomas/gr-lida_" + parts.value(1)+".qm" );
+
+	if(IdiomaExterno)
+		translator.load( stHomeDir + "idiomas/gr-lida_" + parts.value(1)+".qm" );
+	else
+		translator.load(":/idiomas/gr-lida_" + parts.value(1)+".qm" );
+	
 	qApp->installTranslator(&translator);
 
 	IdiomaSelect = parts.value(1);

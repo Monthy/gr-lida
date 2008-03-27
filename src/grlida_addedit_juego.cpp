@@ -25,6 +25,7 @@
 #include "grlida_addedit_juego.h"
 #include "grlida_addedit_montajes.h"
 #include "grlida_addedit_url.h"
+#include "grlida_img_viewer.h"
 
 frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIndex, QDialog *parent, Qt::WFlags flags)
     : QDialog(parent, flags)
@@ -116,17 +117,24 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	fGrl.CargarDatosComboBox(stDatosDir + "companias.txt", ui.cbxDatos_2 , 1, false);
 	fGrl.CargarDatosComboBox(stDatosDir + "companias.txt", ui.cbxDatos_3 , 1, false);
 	fGrl.CargarDatosComboBox(stDatosDir + "tema.txt"     , ui.cbxDatos_4 , 1, false);
-	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"   	, ui.cbxDatos_5 , 1, true );
+	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"    , ui.cbxDatos_5 , 1, true );
 	fGrl.CargarDatosComboBox(stDatosDir + "formatos.txt" , ui.cbxDatos_6 , 1, false);
 	fGrl.CargarDatosComboBox(stDatosDir + "fechas.txt"   , ui.cbxDatos_7 , 1, false);
 	fGrl.CargarDatosComboBox(stDatosDir + "numdisc.txt"  , ui.cbxDatos_8 , 1, false);
 	fGrl.CargarDatosComboBox(stDatosDir + "sistemaop.txt", ui.cbxDatos_10, 1, false);
 
+	for(int n=1; n<11; n++)
+		ui.cbxDatos_11->addItem(QIcon(":/img16/grafica.png"),fGrl.IntToStr(n));
+	for(int n=1; n<11; n++)
+		ui.cbxDatos_12->addItem(QIcon(":/img16/grafica.png"),fGrl.IntToStr(n));
+	for(int n=1; n<11; n++)
+		ui.cbxDatos_13->addItem(QIcon(":/img16/grafica.png"),fGrl.IntToStr(n));
+	
 	ui.html_preview->setVisible(false);
 
-	if(EditandoJuego == true){
+	if(EditandoJuego == true)
 		CargarDatosJuego( stItemIDGrl );
-	}else{
+	else {
 		ui.lb_fechahora->setText( fGrl.HoraFechaActual() );
 		stThumbs=""		;
 		stCoverFront=""	;
@@ -166,6 +174,7 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	connect( ui.btnDirSvm_3   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_extra() ) );
 	connect( ui.btnDirSvm_4   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_capturas() ) );
 	connect( ui.btnDirSvm_5   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sonido() ) );
+	connect( ui.btnDirSvm_6   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sound_font() ) );
 
 	ui.twScummVM->header()->setStretchLastSection(true); 
 	ui.twScummVM->header()->setMovable(false);
@@ -185,8 +194,10 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	ui.cbxSvm_3->setCurrentIndex(0);
 	ui.cbxSvm_4->setCurrentIndex(0);
 	ui.cbxSvm_5->setCurrentIndex(0);
+	ui.cbxSvm_8->setCurrentIndex(0);
 	
-	if( (EditandoJuego == true) && (TipoEmulador == "scummvm") ){
+	if( (EditandoJuego == true) && (TipoEmulador == "scummvm") )
+	{
 		ui.tabWidget_Datos->setTabEnabled (4, true ); // tab scummvm
 		stItemIDSvm = sql->ItemIDIndex("dbgrl_emu_scummvm", stItemIDGrl); // Obtenemos el Index del ScummVM
 		CargarDatosScummVM( stItemIDGrl );  // Carga los Datos del ScummVM.
@@ -249,7 +260,8 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	ui.cbxDbx_28->setCurrentIndex( 0 ); // MPU-401
 	ui.cbxDbx_29->setCurrentIndex( 0 ); // MIDI Device
 
-	if( (EditandoJuego == true) && (TipoEmulador == "dosbox") ){
+	if( (EditandoJuego == true) && (TipoEmulador == "dosbox") )
+	{
 		ui.tabWidget_Datos->setTabEnabled (3, true ); // tab DOSBox
 		stItemIDDbx = sql->ItemIDIndex("dbgrl_emu_dosbox", stItemIDGrl); // Obtenemos el Index del ScummVM
 		CargarDatosDosBox( stItemIDGrl );
@@ -262,19 +274,21 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	connect( ui.btnVdms_ExeJuego , SIGNAL( clicked() ), this, SLOT( on_btnVdms_ExeJuego()  ) );
 	connect( ui.btnVdms_Icono	 , SIGNAL( clicked() ), this, SLOT( on_btnVdms_Icono()     ) );
 
-	if( (EditandoJuego == true) && (TipoEmulador == "vdmsound") ){
+	if( (EditandoJuego == true) && (TipoEmulador == "vdmsound") )
+	{
 		ui.tabWidget_Datos->setTabEnabled (5, true ); // tab VDMSound
 		stItemIDVdms = sql->ItemIDIndex("dbgrl_emu_vdmsound", stItemIDGrl); // Obtenemos el Index del ScummVM
 		CargarDatosVDMSound( stItemIDGrl );
 	}
 // Fin del VDMSound ----------------------------------------------
 
-	if ( EditandoJuego == true ){
+	if ( EditandoJuego == true )
+	{
 		ui.cbxDatos_15->setEnabled( false );
 		setWindowTitle( "Editando a : " + ui.txtDatos_1->text() );
 	} else {
 		ui.cbxDatos_15->setEnabled( true );
-		setWindowTitle( "Aadiendo un nuevo juego" );
+		setWindowTitle( "Añadiendo un nuevo juego" );
 	}
 
 // centra la ventana en el escritorio
@@ -292,26 +306,47 @@ void frmAddEditJuego::on_btnOk()
 	bool siguiente;
  
 	//DOSBox minimo archivo conf, ejecutable
-	if(ui.txtDatos_1->text()!=""){
+	if(ui.txtDatos_1->text()!="")
+	{
 		siguiente=true;
-		if(ui.cbxDatos_15->currentText()=="dosbox"){
-			if ( ui.txtDbx_1->text() != "" ) {
-				if ( ui.txtDbx_3->text() == ""){
-					QMessageBox::information(this, stTituloAddEdit(), tr("Debes indicar el Ejecutable del juego para el")+ " DOSBox");
+		if(ui.cbxDatos_15->currentText()=="dosbox")
+		{
+			if ( ui.txtDbx_1->text() != "" )
+			{
+				siguiente = true;
+				if ( ui.txtDbx_3->text() == "")
+				{
 					siguiente = false;
-				}else siguiente = true;
-			}else{
+					QMessageBox::information(this, stTituloAddEdit(), tr("Debes indicar el Ejecutable del juego para el")+ " DOSBox");
+				} else {
+					siguiente = true;				
+					if(EditandoJuego != true)
+					{
+						QFile appConfg( stHomeDir + "confdbx/"+ ui.txtDbx_1->text() );
+						if ( appConfg.exists() )
+						{
+							siguiente = false;
+							ui.txtDbx_1->setText("");
+							QMessageBox::information( this, stTituloAddEdit(), tr("El archivo de Configuración para el DOSBox ya esixte"));
+						} else
+							siguiente = true;
+					}
+				}
+			} else {
 				siguiente = false;
-				QMessageBox::information( this, stTituloAddEdit(), tr("Debes indicar el archivo de Configuracin para el")+ " DOSBox");
+				QMessageBox::information( this, stTituloAddEdit(), tr("Debes indicar el archivo de Configuración para el")+ " DOSBox");
 			}
 		}
-		if(ui.cbxDatos_15->currentText()=="scummvm"){//IF de scummvm
-			if(ui.txtSvm_1->text()==""){
+		if(ui.cbxDatos_15->currentText()=="scummvm")
+		{//IF de scummvm
+			if(ui.txtSvm_1->text()=="")
+			{
 				siguiente=false;
 				QMessageBox::information(this, stTituloAddEdit(), tr("Debes poner la etiqueta del juego de")+ " ScummVM" );
-			}else{
+			} else {
 				siguiente=true;
-				if(ui.txtSvm_2->text()==""){
+				if(ui.txtSvm_2->text()=="")
+				{
 					siguiente=false;
 					QMessageBox::information(this, stTituloAddEdit(), tr("Debes indicar el Directorio del juego de")+ " ScummVM" );
 				}
@@ -326,33 +361,50 @@ void frmAddEditJuego::on_btnOk()
 				}*/
 			}
 		}//fin IF de scummvm
-		if(ui.cbxDatos_15->currentText()=="vdmsound"){
-			if(ui.txtVdms_1->text()==""){
-				siguiente=false;
-				QMessageBox::information(this, stTituloAddEdit(), tr("Debes indicar el archivo de Configuracin para el")+ " VDMSound");
-			}else{
-				siguiente=true;
-				if(ui.txtVdms_2->text()==""){
+		if(ui.cbxDatos_15->currentText()=="vdmsound")
+		{
+			if(ui.txtVdms_1->text()!="")
+			{
+				siguiente = true;
+				if(ui.txtVdms_2->text()=="")
+				{
 					siguiente=false;
 					QMessageBox::information(this, stTituloAddEdit(), tr("Debes indicar el Ejecutable del juego para el")+ " VDMSound");
+				} else {
+					siguiente = true;				
+					if(EditandoJuego != true)
+					{
+						QFile appConfg( stHomeDir + "confdbx/"+ ui.txtDbx_1->text() );
+						if ( appConfg.exists() )
+						{
+							siguiente = false;
+							ui.txtDbx_1->setText("");
+							QMessageBox::information( this, stTituloAddEdit(), tr("El archivo de Configuración para el VDMSound ya esixte"));
+						} else
+							siguiente = true;
+					}
 				}
+			} else {				
+				siguiente=false;
+				QMessageBox::information(this, stTituloAddEdit(), tr("Debes indicar el archivo de Configuración para el")+ " VDMSound");
 			}
 		}
-	}else{
+	} else {
 		siguiente=false;
 		QMessageBox::information(this, stTituloAddEdit(), tr("Debes poner un Titulo al juego"));
 	}
-	if(siguiente==true){
+	if(siguiente==true)
+	{
 		setDatosJuegos();
-		if(ui.cbxDatos_15->currentText()=="dosbox"){
+		if(ui.cbxDatos_15->currentText()=="dosbox")
 			setDatosDosBox();
-		}
-		if(ui.cbxDatos_15->currentText()=="scummvm"){
+
+		if(ui.cbxDatos_15->currentText()=="scummvm")
 			setDatosScummVM();
-		}
-		if(ui.cbxDatos_15->currentText()=="vdmsound"){
+
+		if(ui.cbxDatos_15->currentText()=="vdmsound")
 			setDatosVDMSound();
-		}
+
 		QDialog::accept();
 	}
 }
@@ -363,7 +415,8 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 	QSqlQuery query;
 	QSqlRecord rec;
 	query.exec("SELECT * FROM dbgrl WHERE idgrl="+stIDIndex+" LIMIT 0,1");
-	if ( query.first() ){
+	if ( query.first() )
+	{
 		rec = query.record();
 		ui.lb_fechahora->setText( query.value( rec.indexOf("fecha") ).toString())				; // fecha
 		ui.txtDatos_1->setText( query.value( rec.indexOf("titulo") ).toString()   )				; // titulo 
@@ -401,7 +454,8 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 		ui.cbxDatos_14->setCurrentIndex(ui.cbxDatos_14->findText(query.value( rec.indexOf("estado") ).toString() ))			; // estado
 	
 		ui.chkDatos_1->setChecked( query.value( rec.indexOf("original") ).toBool() )										; // original
-		
+		ui.chkDatos_2->setChecked( query.value( rec.indexOf("favorito") ).toBool() )										; // favorito
+
 		QString stIcono;
 		stIcono.clear();
 		stIcono = query.value( rec.indexOf("icono") ).toString() ; // icono
@@ -415,7 +469,7 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 			ui.cbxDatos_9->setCurrentIndex(3) ;
 		else 
 			ui.cbxDatos_9->setCurrentIndex( ui.cbxDatos_9->findText( stIcono ) ); // icono
-
+	
 		stThumbs.clear()	; // thumbs
 		stCoverFront.clear(); // cover_front
 		stCoverBack.clear()	; // cover_back
@@ -423,29 +477,32 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 		stCoverFront = query.value( rec.indexOf("cover_front")).toString()	; // cover_front
 		stCoverBack  = query.value( rec.indexOf("cover_back") ).toString()	; // cover_back
 
-		if( file_thumbs.exists(stThumbs) ){
+		if( file_thumbs.exists(stThumbs) )
+		{
 			ui.lbImage_1->setPixmap( QPixmap(stThumbs) );
 			ui.btnImgVer_1->setEnabled( true );
 			ui.btnImgEliminar_1->setEnabled( true );
-		}else{
+		} else {
 			ui.lbImage_1->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 			ui.btnImgVer_1->setEnabled( false );
 			ui.btnImgEliminar_1->setEnabled( false );
 		}
-		if( file_cover_front.exists(stCoverFront) ){
+		if( file_cover_front.exists(stCoverFront) )
+		{
 			ui.lbImage_2->setPixmap( QPixmap(stCoverFront) );
 			ui.btnImgVer_2->setEnabled( true );
 			ui.btnImgEliminar_2->setEnabled( true );
-		}else{
+		} else {
 			ui.lbImage_2->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 			ui.btnImgVer_2->setEnabled( false );
 			ui.btnImgEliminar_2->setEnabled( false );
 		}
-		if( file_cover_back.exists(stCoverBack) ){
+		if( file_cover_back.exists(stCoverBack) )
+		{
 			ui.lbImage_3->setPixmap( QPixmap(stCoverBack) );
 			ui.btnImgVer_3->setEnabled( true );
 			ui.btnImgEliminar_3->setEnabled( true );
-		}else{
+		} else {
 			ui.lbImage_3->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 			ui.btnImgVer_3->setEnabled( false );
 			ui.btnImgEliminar_3->setEnabled( false );
@@ -454,7 +511,8 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 	
 	ui.twDatosURL->clear();
 	query.exec("SELECT * FROM dbgrl_url WHERE idgrl="+stIDIndex);
-	if (query.first()) {
+	if (query.first())
+	{
 		do {
 			rec = query.record();
 			QTreeWidgetItem *item_url = new QTreeWidgetItem( ui.twDatosURL );
@@ -469,7 +527,8 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 	
 	ui.twDatosFiles->clear();
 	query.exec("SELECT * FROM dbgrl_file WHERE idgrl="+stIDIndex);
-	if (query.first()) {
+	if (query.first())
+	{
 		do {
 			rec = query.record();
 			QTreeWidgetItem *item_files = new QTreeWidgetItem( ui.twDatosFiles );
@@ -490,9 +549,9 @@ void frmAddEditJuego::setDatosJuegos()
 {
 	DatosJuego.clear();
 
-	if ( ui.cbxDatos_9->currentText()!="" ){
+	if ( ui.cbxDatos_9->currentText()!="" )
 		DatosJuego["icono"] = ui.cbxDatos_9->currentText()		; // icono
-	}else DatosJuego["icono"] = "" ;
+	else DatosJuego["icono"] = "" ;
 
 	DatosJuego["titulo"] = ui.txtDatos_1->text()				; // titulo
 	DatosJuego["subtitulo"] = ui.txtDatos_2->text()				; // subtitulo
@@ -541,6 +600,9 @@ void frmAddEditJuego::setDatosJuegos()
 	if( ui.chkDatos_1->isChecked() ) DatosJuego["original"] = "true";
 	else DatosJuego["original"] = "false"						; // original
 
+	if( ui.chkDatos_2->isChecked() ) DatosJuego["favorito"] = "true";
+	else DatosJuego["favorito"] = "false"						; // favorito	
+	
 	if ( ui.cbxDatos_14->currentText()!="" )
 		DatosJuego["estado"] = ui.cbxDatos_14->currentText()	; // estado
 	else DatosJuego["estado"] = "" ;
@@ -550,16 +612,18 @@ void frmAddEditJuego::setDatosJuegos()
 	DatosJuego["fecha"] = ui.lb_fechahora->text()				; // fecha d/m/a h:m:s
 	DatosJuego["tipo_emu"] = ui.cbxDatos_15->currentText()		; // tipo_emu
 	DatosJuego["comentario"] = ui.txtDatos_4->toPlainText()		; // comentario
+
 }
 
 void frmAddEditJuego::on_btnAbrirImg_1()
 {
 	stThumbs = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stThumbs, stThumbs, tr("Todos los archivo (*)"), 0, false) ;
-	if( file_thumbs.exists(stThumbs) ){
+	if( file_thumbs.exists(stThumbs) )
+	{
 		ui.lbImage_1->setPixmap( QPixmap(stThumbs) );
 		ui.btnImgVer_1->setEnabled( true );
 		ui.btnImgEliminar_1->setEnabled( true );
-	}else{
+	} else {
 		ui.lbImage_1->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 		ui.btnImgVer_1->setEnabled( false );
 		ui.btnImgEliminar_1->setEnabled( false );
@@ -570,11 +634,12 @@ void frmAddEditJuego::on_btnAbrirImg_1()
 void frmAddEditJuego::on_btnAbrirImg_2()
 {
 	stCoverFront = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stCoverFront, stCoverFront, tr("Todos los archivo (*)"), 0, false);
-	if( file_cover_front.exists(stCoverFront) ){
+	if( file_cover_front.exists(stCoverFront) )
+	{
 		ui.lbImage_2->setPixmap( QPixmap(stCoverFront) );
 		ui.btnImgVer_2->setEnabled( true );
 		ui.btnImgEliminar_2->setEnabled( true );
-	}else{
+	} else {
 		ui.lbImage_2->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 		ui.btnImgVer_2->setEnabled( false );
 		ui.btnImgEliminar_2->setEnabled( false );
@@ -585,11 +650,12 @@ void frmAddEditJuego::on_btnAbrirImg_2()
 void frmAddEditJuego::on_btnAbrirImg_3()
 {
 	stCoverBack = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stCoverBack, stCoverBack, tr("Todos los archivo (*)"), 0, false) ;
-	if( file_cover_back.exists(stCoverBack) ){
+	if( file_cover_back.exists(stCoverBack) )
+	{
 		ui.lbImage_3->setPixmap( QPixmap(stCoverBack) );
 		ui.btnImgVer_3->setEnabled( true );
 		ui.btnImgEliminar_3->setEnabled( true );
-	}else{
+	} else {
 		ui.lbImage_3->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 		ui.btnImgVer_3->setEnabled( false );
 		ui.btnImgEliminar_3->setEnabled( false );
@@ -599,22 +665,43 @@ void frmAddEditJuego::on_btnAbrirImg_3()
 
 void frmAddEditJuego::on_btnVerImg_1()
 {
-	// abre la imagen con el editor de imagenes predeterminado
+	// Abre la imagen para verla en su tamaño original
+	if( file_thumbs.exists(stThumbs) )
+	{
+		ImageViewer *imgViewer = new ImageViewer(this);
+		imgViewer->setWindowModality(Qt::WindowModal);
+		imgViewer->open( stThumbs );
+		imgViewer->show();
+	}
 }
 
 void frmAddEditJuego::on_btnVerImg_2()
 {
-	// abre la imagen con el editor de imagenes predeterminado
+	// Abre la imagen para verla en su tamaño original
+	if( file_cover_front.exists(stCoverFront) )
+	{
+		ImageViewer *imgViewer = new ImageViewer(this);
+		imgViewer->setWindowModality(Qt::WindowModal);
+		imgViewer->open( stCoverFront );
+		imgViewer->show();
+	}
 }
 
 void frmAddEditJuego::on_btnVerImg_3()
 {
-	// abre la imagen con el editor de imagenes predeterminado
+	// Abre la imagen para verla en su tamaño original
+	if( file_cover_back.exists(stCoverBack) )
+	{
+		ImageViewer *imgViewer = new ImageViewer(this);
+		imgViewer->setWindowModality(Qt::WindowModal);
+		imgViewer->open( stCoverBack );
+		imgViewer->show();
+	}
 }
 
 void frmAddEditJuego::on_btnElimnarImg_1()
 {
-	stThumbs=""		;
+	stThumbs="" ;
 	ui.lbImage_1->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 	ui.btnImgVer_1->setEnabled( false );
 	ui.btnImgEliminar_1->setEnabled( false );
@@ -640,28 +727,39 @@ void frmAddEditJuego::on_cbxDatos_15_txtChanged(const QString texto)
 {
 	if (texto == "datos")
 		ui.cbxDatos_9->setCurrentIndex(0) ;
-	if (texto == "dosbox"){
+
+	if (texto == "dosbox")
+	{
 		ui.tabWidget_Datos->setTabEnabled (3, true )	; // tab dosbox
 		ui.cbxDatos_9->setCurrentIndex(1) ;
-	}else ui.tabWidget_Datos->setTabEnabled (3, false )	;
-	if (texto == "scummvm"){
+	} else
+		ui.tabWidget_Datos->setTabEnabled (3, false )	;
+
+	if (texto == "scummvm")
+	{
 		ui.tabWidget_Datos->setTabEnabled (4, true )	; // tab scummvm
 		ui.cbxDatos_9->setCurrentIndex(2) ;
-	}else ui.tabWidget_Datos->setTabEnabled (4, false )	;
-	if (texto == "vdmsound"){
+	} else
+		ui.tabWidget_Datos->setTabEnabled (4, false )	;
+
+	if (texto == "vdmsound")
+	{
 		ui.tabWidget_Datos->setTabEnabled (5, true )	; // tab vdmsound
 		ui.cbxDatos_9->setCurrentIndex(3) ;
-	}else ui.tabWidget_Datos->setTabEnabled (5, false )	;
+	} else
+		ui.tabWidget_Datos->setTabEnabled (5, false )	;
 }
 
 void frmAddEditJuego::on_twDatoSmile_Dblclicked(QTreeWidgetItem *item)
 {
-	if( item ){
+	if( item )
+	{
 		ui.txtDatos_4->textCursor().insertText( " " + item->text(0) + " " );
 		// preview texto-html
 		if( ui.btnTool_16->isChecked() )
 			ui.html_preview->setHtml( fGrl.ReemplazaTextoSmiles( ui.txtDatos_4->toPlainText(), listSmailes ) );
-	}else return;
+	} else
+		return;
 }
 
 void frmAddEditJuego::on_btnTool_1()
@@ -684,7 +782,7 @@ void frmAddEditJuego::on_btnTool_3()
 
 void frmAddEditJuego::on_btnTool_4()
 {
-// seleccionar todo el texto
+// seleccionar el texto
 	ui.txtDatos_4->selectAll();
 }
 
@@ -757,11 +855,12 @@ void frmAddEditJuego::on_btnTool_15()
 void frmAddEditJuego::on_btnTool_16()
 {
 // preview texto-html
-	if( ui.btnTool_16->isChecked() ){
+	if( ui.btnTool_16->isChecked() )
+	{
 		ui.txtDatos_4->setVisible(false);
 		ui.html_preview->setVisible(true);
 		ui.html_preview->setHtml( fGrl.ReemplazaTextoSmiles( ui.txtDatos_4->toPlainText(), listSmailes ) );
-	}else{	
+	} else {	
 		ui.txtDatos_4->setVisible(true);
 		ui.html_preview->setVisible(false);
 	}
@@ -771,7 +870,8 @@ void frmAddEditJuego::on_btnNuevaUrl()
 {
 	QString id_url;
 	frmAddEditURL * AddEditURL = new frmAddEditURL();
-    if ( AddEditURL->exec() == QDialog::Accepted ) {
+    if ( AddEditURL->exec() == QDialog::Accepted )
+    {
 		QHash<QString, QString> datos_url;
 		datos_url.clear();
 		datos_url["url"] = AddEditURL->ui.txt_addedit_url_1->currentText(); // 0
@@ -793,7 +893,8 @@ void frmAddEditJuego::on_btnNuevaUrl()
 
 void frmAddEditJuego::on_btnEditarUrl()
 {
-	if( (ui.twDatosURL->topLevelItemCount() > 0) && (ui.twDatosURL->isItemSelected(ui.twDatosURL->currentItem())) ){
+	if( (ui.twDatosURL->topLevelItemCount() > 0) && (ui.twDatosURL->isItemSelected(ui.twDatosURL->currentItem())) )
+	{
 		QString id_url;
 		frmAddEditURL * AddEditURL = new frmAddEditURL();
 			
@@ -801,7 +902,8 @@ void frmAddEditJuego::on_btnEditarUrl()
 		AddEditURL->ui.txt_addedit_url_2->setPlainText( ui.twDatosURL->currentItem()->text(1) ); // 1		
 		id_url    = ui.twDatosURL->currentItem()->text(2); // id
 
-	    if ( AddEditURL->exec() == QDialog::Accepted ) {
+	    if ( AddEditURL->exec() == QDialog::Accepted )
+	    {
 			QHash<QString, QString> datos_url;
 			datos_url.clear();
 			datos_url["url"] = AddEditURL->ui.txt_addedit_url_1->currentText(); // 0
@@ -822,13 +924,16 @@ void frmAddEditJuego::on_btnEditarUrl()
 void frmAddEditJuego::on_btnEliminarUrl()
 {
 	QString id_url;
-	if( ui.twDatosURL->topLevelItemCount()>0 ){
+	if( ui.twDatosURL->topLevelItemCount()>0 )
+	{
 		int EliminarSiNO;
 		id_url = ui.twDatosURL->currentItem()->text(2); // id
-		EliminarSiNO = QMessageBox::information( this, tr("�Eliminar url...?"), tr("�Deseas eliminar esta url?"), tr( "Si" ), tr( "No" ), 0, 1 );
-		if( EliminarSiNO == 0 ){
+		EliminarSiNO = QMessageBox::information( this, tr("¿Eliminar url...?"), tr("¿Deseas eliminar esta url?"), tr( "Si" ), tr( "No" ), 0, 1 );
+		if( EliminarSiNO == 0 )
+		{
 			fGrl.DeleteItemTree( ui.twDatosURL->currentItem() ) ;
-			if(id_url!="") sql->ItemEliminarURL( id_url );
+			if(id_url!="")
+				sql->ItemEliminarURL( id_url );
 		}
 	}
 }
@@ -847,7 +952,8 @@ void frmAddEditJuego::on_btnAddFile()
 {
 	QString id_file;
 	
-	if(ui.txtDatos_5->text()!=""){
+	if(ui.txtDatos_5->text()!="")
+	{
 		QHash<QString, QString> datos_file;
 		datos_file.clear();
 		datos_file["nombre"] = ui.txtDatos_6->text()			; // 0 nombre
@@ -875,7 +981,8 @@ void frmAddEditJuego::on_btnAddFile()
 
 void frmAddEditJuego:: on_btnEditFile()
 {
-	if( (ui.twDatosFiles->topLevelItemCount() > 0) && (ui.twDatosFiles->isItemSelected(ui.twDatosFiles->currentItem())) ){
+	if( (ui.twDatosFiles->topLevelItemCount() > 0) && (ui.twDatosFiles->isItemSelected(ui.twDatosFiles->currentItem())) )
+	{
 		ui.btnAddFile->setEnabled( false );
 		ui.btnEditFile->setEnabled( false );
 		ui.btnUpdateFile->setEnabled( true );
@@ -891,7 +998,8 @@ void frmAddEditJuego:: on_btnEditFile()
 
 void frmAddEditJuego::on_btnUpdateFile()
 {
-	if( ui.twDatosFiles->isItemSelected( ui.twDatosFiles->currentItem() ) ){
+	if( ui.twDatosFiles->isItemSelected( ui.twDatosFiles->currentItem() ) )
+	{
 		QString id_file;
 		QHash<QString, QString> datos_file;
 		datos_file.clear();
@@ -903,7 +1011,8 @@ void frmAddEditJuego::on_btnUpdateFile()
 
       	id_file = ui.twDatosFiles->currentItem()->text(5) ; // id 
  		
- 		if(id_file!="") sql->ItemActualizaFiles( datos_file, id_file);
+ 		if(id_file!="")
+ 			sql->ItemActualizaFiles( datos_file, id_file);
 	
 		ui.twDatosFiles->currentItem()->setText(0, datos_file["nombre"] 	) ; // 0 nombre
 		ui.twDatosFiles->currentItem()->setText(1, datos_file["crc"] 		) ; // 1 crc32
@@ -921,14 +1030,17 @@ void frmAddEditJuego::on_btnUpdateFile()
 
 void frmAddEditJuego::on_btnDeleteFile()
 {
-	if( ui.twDatosFiles->topLevelItemCount()>0 ){
+	if( ui.twDatosFiles->topLevelItemCount()>0 )
+	{
 		QString id_file;	
 		int EliminarSiNO;
 		id_file = ui.twDatosFiles->currentItem()->text(5); // id
-		EliminarSiNO = QMessageBox::information( this, tr("�Eliminar Archivo...?"), tr("�Deseas eliminar esta Archivo?"), tr("Si"), tr("No"), 0, 1 );
-		if( EliminarSiNO == 0 ){
+		EliminarSiNO = QMessageBox::information( this, tr("¿Eliminar Archivo...?"), tr("¿Deseas eliminar esta Archivo?"), tr("Si"), tr("No"), 0, 1 );
+		if( EliminarSiNO == 0 )
+		{
 			fGrl.DeleteItemTree( ui.twDatosFiles->currentItem() ) ;
-			if(id_file!="") sql->ItemEliminarFiles( id_file );
+			if(id_file!="")
+				sql->ItemEliminarFiles( id_file );
 		}
 	}
 }
@@ -939,21 +1051,30 @@ void frmAddEditJuego::on_btnDirSvm_path()
 {
 	ui.txtSvm_2->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_2->text() ) );
 }
+
 void frmAddEditJuego::on_btnDirSvm_save()
 {
 	ui.txtSvm_3->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_3->text() ) );
 }
+
 void frmAddEditJuego::on_btnDirSvm_extra()
 {
 	ui.txtSvm_4->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_4->text() ) );
 }
+
 void frmAddEditJuego::on_btnDirSvm_capturas()
 {
 	ui.txtSvm_5->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_5->text() ) );
 }
+
 void frmAddEditJuego::on_btnDirSvm_sonido()
 {
 	ui.txtSvm_6->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_6->text() ) );
+}
+
+void frmAddEditJuego::on_btnDirSvm_sound_font()
+{
+	ui.txtSvm_7->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtSvm_7->text(), tr("Todos los archivo (*)"), 0, false) );
 }
 
 void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
@@ -961,7 +1082,8 @@ void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
 	QSqlQuery query;
 	QSqlRecord rec;
 	query.exec("SELECT * FROM dbgrl_emu_scummvm WHERE idgrl="+stIDsvm+" LIMIT 0,1");
-	if ( query.first() ){
+	if ( query.first() )
+	{
 		rec = query.record();
 		ui.txtSvm_1->setText( query.value( rec.indexOf("game") ).toString() )					; // game
 		
@@ -995,6 +1117,15 @@ void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
 		ui.h_SliderSvm_6->setSliderPosition(query.value( rec.indexOf("debuglevel") ).toInt())	; // debuglevel
 		//query.value( rec.indexOf("cdrom") ).toString()"0"										; // cdrom ui.cbxSvm_6->currentText()
 		ui.cbxSvm_7->setCurrentIndex( query.value( rec.indexOf("joystick_num") ).toInt() )		; // joystick_num 
+
+		if(query.value( rec.indexOf("output_rate") ).toString()!="")
+			ui.cbxSvm_8->setCurrentIndex( ui.cbxSvm_8->findText( query.value( rec.indexOf("output_rate") ).toString(), Qt::MatchContains ) ); // output_rate
+		else
+			ui.cbxSvm_8->setCurrentIndex( 0 ); // output_rate
+
+		ui.h_SliderSvm_7->setSliderPosition(query.value( rec.indexOf("midi_gain") ).toInt())	; // midi_gain
+		ui.chkSvm_7->setChecked( query.value( rec.indexOf("copy_protection") ).toBool() )		; // copy_protection
+		ui.txtSvm_7->setText( query.value( rec.indexOf("sound_font") ).toString() )				; // sound_font 
 	}
 }
 
@@ -1054,16 +1185,31 @@ void frmAddEditJuego::setDatosScummVM()
 
 	if( ui.chkSvm_5->isChecked() ) DatosScummvm["native_mt32"] = "true";
 	else DatosScummvm["native_mt32"] = "false"					; // native_mt32
-
+	
 	DatosScummvm["master_volume"] = "255"						; // master_volume
-	DatosScummvm["music_volume"] =	ui.posSliderSvm_1->text() 	; // music_volume
-	DatosScummvm["sfx_volume"] =	ui.posSliderSvm_2->text()	; // sfx_volume
-	DatosScummvm["speech_volume"] =	ui.posSliderSvm_3->text()	; // speech_volume
-	DatosScummvm["tempo"] =	ui.posSliderSvm_4->text()			; // tempo
-	DatosScummvm["talkspeed"] =	ui.posSliderSvm_5->text()		; // talkspeed
-	DatosScummvm["debuglevel"] = ui.posSliderSvm_6->text()		; // debuglevel
-	DatosScummvm["cdrom"] =	"0"									; // cdrom ui.cbxSvm_6->currentIndex()
-	DatosScummvm["joystick_num"] =	fGrl.IntToStr(ui.cbxSvm_7->currentIndex()) ; // joystick_num 
+	DatosScummvm["music_volume"]  = ui.posSliderSvm_1->text()	; // music_volume
+	DatosScummvm["sfx_volume"]    = ui.posSliderSvm_2->text()	; // sfx_volume
+	DatosScummvm["speech_volume"] = ui.posSliderSvm_3->text()	; // speech_volume
+	DatosScummvm["tempo"]         = ui.posSliderSvm_4->text()	; // tempo
+	DatosScummvm["talkspeed"]     = ui.posSliderSvm_5->text()	; // talkspeed
+	DatosScummvm["debuglevel"]    = ui.posSliderSvm_6->text()	; // debuglevel
+	DatosScummvm["cdrom"]         = "0"							; // cdrom ui.cbxSvm_6->currentIndex()
+	DatosScummvm["joystick_num"]  = fGrl.IntToStr(ui.cbxSvm_7->currentIndex()) ; // joystick_num 
+
+	if ( ui.cbxSvm_8->currentText()!="" && ui.cbxSvm_8->currentIndex()!= 0 )
+		DatosScummvm["output_rate"] = ui.cbxSvm_8->currentText();
+	else
+		DatosScummvm["output_rate"] = "";
+
+	if( ui.chkSvm_7->isChecked() ) DatosScummvm["copy_protection"] = "true";
+	else DatosScummvm["copy_protection"] = "false"					; // copy_protection
+
+	DatosScummvm["midi_gain"]     = ui.posSliderSvm_7->text()		; // midi_gain 
+
+	if( ui.chkSvm_7->isChecked() ) DatosScummvm["copy_protection"] = "true";
+	else DatosScummvm["copy_protection"] = "false"					; // copy_protection
+
+	DatosScummvm["sound_font"]     = ui.txtSvm_7->text()			; // sound_font 
 }
 
 void frmAddEditJuego::on_twScummVM_clicked( QTreeWidgetItem *item )
@@ -1079,6 +1225,7 @@ void frmAddEditJuego::on_btnDefecto()
 	ui.h_SliderSvm_4->setValue(100);
 	ui.h_SliderSvm_5->setValue(60);
 	ui.h_SliderSvm_6->setValue(0);
+	ui.h_SliderSvm_7->setValue(100);
 }
 // ---------------------------------------------------------------
 // Referente al DOSBox -------------------------------------------
@@ -1087,7 +1234,8 @@ void frmAddEditJuego::CargarDatosDosBox( QString stIDdbx )
 	QSqlQuery query;
 	QSqlRecord rec;
 	query.exec("SELECT * FROM dbgrl_emu_dosbox WHERE idgrl="+stIDdbx+" LIMIT 0,1");
-	if ( query.first() ){
+	if ( query.first() )
+	{
 		rec = query.record();
 //0 id
 //1 idgrl
@@ -1210,24 +1358,25 @@ void frmAddEditJuego::CargarDatosDBxMontaje( QString stIDdbx )
 	QSqlRecord rec;
 	QString tipoDrive;
 	query.exec("SELECT * FROM dbgrl_emu_dosbox_mount WHERE id_dosbox="+stIDdbx+" ORDER BY id_lista");
-	if ( query.first() ){
+	if ( query.first() )
+	{
 		do {
 			rec = query.record();
 			QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 			tipoDrive.clear();
 			tipoDrive = query.value(rec.indexOf("tipo_as")).toString();
-			if(tipoDrive=="drive"){
-				item->setIcon( 0, QIcon(":/img16/drive_hd.png") );}
-			if(tipoDrive=="cdrom"){
-				item->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );}
-			if(tipoDrive=="floppy"){
-				item->setIcon( 0, QIcon(":/img16/drive_floppy.png") );}
-			if(tipoDrive=="IMG_floppy"){
-				item->setIcon( 0, QIcon(":/img16/floppy_1.png") );}
-			if(tipoDrive=="IMG_iso"){
-				item->setIcon( 0, QIcon(":/img16/cd_iso.png") );}
-			if(tipoDrive=="IMG_hdd"){
-				item->setIcon( 0, QIcon(":/img16/drive_hd.png") );}
+			if(tipoDrive=="drive")
+				item->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+			if(tipoDrive=="cdrom")
+				item->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+			if(tipoDrive=="floppy")
+				item->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+			if(tipoDrive=="IMG_floppy")
+				item->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+			if(tipoDrive=="IMG_iso")
+				item->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+			if(tipoDrive=="IMG_hdd")
+				item->setIcon( 0, QIcon(":/img16/drive_hd.png") );
 			
 			item->setText( 0 , query.value(rec.indexOf("path")).toString() )		;	// path			- directorio o iso
 			item->setText( 1 , query.value(rec.indexOf("label")).toString() )		;	// label		- etiqueta
@@ -1247,10 +1396,16 @@ void frmAddEditJuego::CargarDatosDBxMontaje( QString stIDdbx )
 	datos_montaje["path_exe"] = ui.txtDbx_3->text();
 	datos_montaje["parametros_exe"] = ui.txtDbx_4->text();
 	datos_montaje["opt_loadfix_mem"] = ui.txtDbx_2->text();
+
 	if(ui.chkDbx_1->isChecked())
-	  datos_montaje["opt_loadfix"] = "true"; else datos_montaje["opt_loadfix"] = "false";
+		datos_montaje["opt_loadfix"] = "true";
+	else
+		datos_montaje["opt_loadfix"] = "false";
+
 	if(ui.chkDbx_2->isChecked())
-	  datos_montaje["opt_cerrar_dbox"] = "true"; else datos_montaje["opt_cerrar_dbox"] = "false";
+		datos_montaje["opt_cerrar_dbox"] = "true";
+	else
+		datos_montaje["opt_cerrar_dbox"] = "false";
   
 	ui.previer_mount->clear();
 	ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
@@ -1486,22 +1641,51 @@ void frmAddEditJuego::setDatosDosBox()
 		  DatosDosBox["parametros_setup"] = ui.txtDbx_6->text(); else DatosDosBox["parametros_setup"] = ""	; // parametros_setup
 }
 
+void frmAddEditJuego::on_txtDbx_1_textChanged(const QString &)
+{
+	QRegExp rx("/([a-zA-Z0-9]+)");
+	QValidator *validator = new QRegExpValidator(rx, this);
+
+	ui.txtDbx_1->setValidator(validator);
+	
+	bool str_ok;
+	QString str = ui.txtDbx_1->text();
+	if(str != "")
+	{
+		str = fGrl.eliminar_caracteres( str );
+  		str_ok = str.endsWith(".conf");
+		if(str_ok == false)
+			str.append(".conf");
+		ui.txtDbx_1->setText( str );
+	} else
+		ui.txtDbx_1->setText( "" );
+}
+
 void frmAddEditJuego::on_btnFileConfg()
 {
 	bool str_ok;
 	QString str, archivo;
+	
 	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_1->text(), tr("Todos los archivo (*)"), 0, true);
-	if(archivo != ""){
+	if(archivo != "")
+	{
 		QFile appConfg( archivo );
-		if ( !appConfg.exists() ) {
-			QFileInfo fi( archivo );
-			str = fi.fileName();
-			str.replace(" ", "_");
-	  		str_ok = str.endsWith(".conf");
-			if(str_ok == false) str.append(".conf");
-			ui.txtDbx_1->setText( str );
+	
+		if(EditandoJuego != true)
+		{
+			if ( appConfg.exists() )
+				QMessageBox::information( this, stTituloAddEdit(), tr("El archivo de Configuración para el DOSBox ya esixte"));
 		}
-	}else ui.txtDbx_1->setText( "" );
+		QFileInfo fi( archivo );
+		str = fi.fileName();
+
+		str = fGrl.eliminar_caracteres( str );
+	  	str_ok = str.endsWith(".conf");
+		if(str_ok == false)
+			str.append(".conf");
+		ui.txtDbx_1->setText( str );
+	} else 
+		ui.txtDbx_1->setText( "" );
 }
 
 void frmAddEditJuego::on_btnExeJuego()
@@ -1541,7 +1725,8 @@ void frmAddEditJuego::on_btnDbx_musica()
 
 void frmAddEditJuego::on_btnAddSerial()
 {
-	switch ( ui.cbxDbx_34->currentIndex() ) {
+	switch ( ui.cbxDbx_34->currentIndex() )
+	{
 		case 0:       // serial 1
 			ui.txtDbx_17->setText(setOpcionesSerial());		
 		break;
@@ -1560,13 +1745,14 @@ void frmAddEditJuego::on_btnAddSerial()
 QString frmAddEditJuego::setOpcionesSerial()
 {
 	QString Serial_Dbx;
-	switch ( ui.cbxDbx_38->currentIndex() ) {
-        case 0:       // diasabled
+	switch ( ui.cbxDbx_38->currentIndex() )
+	{
+		case 0:       // diasabled
 			Serial_Dbx = ui.cbxDbx_38->currentText() ;
-            break;
+		break;
         case 1:       // dummy
             Serial_Dbx = ui.cbxDbx_38->currentText();
-            break;
+    	break;
         case 2:       // modem
             Serial_Dbx = ui.cbxDbx_38->currentText() + " " +
 						"listenport:" + ui.txtDbx_12->text() + " " +
@@ -1576,7 +1762,7 @@ QString frmAddEditJuego::setOpcionesSerial()
 						"bytesize:" + ui.cbxDbx_40->currentText() + " " +
 						"stopbits:" + ui.cbxDbx_41->currentText() + " " +
 						"irq:" + ui.txtDbx_11->text();
-            break;
+    	break;
         case 3:       // directserial
             Serial_Dbx = ui.cbxDbx_38->currentText() + " " +
 						"realport:" + ui.cbxDbx_36->currentText() + " " +
@@ -1585,7 +1771,7 @@ QString frmAddEditJuego::setOpcionesSerial()
 						"bytesize:" + ui.cbxDbx_40->currentText() + " " +
 						"stopbits:" + ui.cbxDbx_41->currentText() + " " +
 						"irq:" + ui.txtDbx_11->text();
-            break;
+    	break;
     }
 	return Serial_Dbx;
 }
@@ -1603,7 +1789,8 @@ void frmAddEditJuego::on_btnMount_Add()
 	datos_montaje_edit << ""; // cd/dvd
 
 	frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes(false,datos_montaje_edit);
-    if ( AddEditMontajes->exec() == QDialog::Accepted ) {
+    if ( AddEditMontajes->exec() == QDialog::Accepted )
+    {
 		QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 		QString tipoDrive = AddEditMontajes->DatosMontaje[2];
 		if(tipoDrive=="drive")
@@ -1618,6 +1805,7 @@ void frmAddEditJuego::on_btnMount_Add()
 			item->setIcon( 0, QIcon(":/img16/cd_iso.png") );
 		if(tipoDrive=="IMG_hdd")
 			item->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+
 		item->setText( 0 , AddEditMontajes->DatosMontaje[0] );	// directorio o iso
 		item->setText( 1 , AddEditMontajes->DatosMontaje[1] );	// etiqueta
 		item->setText( 2 , AddEditMontajes->DatosMontaje[2] );	// tipo de montaje
@@ -1627,7 +1815,8 @@ void frmAddEditJuego::on_btnMount_Add()
 		item->setText( 6 , AddEditMontajes->DatosMontaje[6] );	// cd/dvd
 		item->setText( 7 , "x"								);	// primer montaje
 
-		if( (EditandoJuego == true) && (TipoEmulador == "dosbox") ){
+		if( (EditandoJuego == true) && (TipoEmulador == "dosbox") )
+		{
 			QHash<QString, QString> datos_montaje_nuevo;
 			datos_montaje_nuevo.clear();
 			datos_montaje_nuevo["id_lista"] = "";
@@ -1641,7 +1830,8 @@ void frmAddEditJuego::on_btnMount_Add()
 			datos_montaje_nuevo["select_mount"] = "x";			
 			
 			item->setText( 8 , sql->ItemInsertaUnMontajeDbx( datos_montaje_nuevo, stItemIDDbx) );	// id
-		}else item->setText( 8 , "" );//
+		} else
+			item->setText( 8 , "" );//
 		item->setText( 9 , fGrl.IntToStr( item->childCount() ) ); //
 
 		QHash<QString, QString> datos_montaje;
@@ -1661,7 +1851,8 @@ void frmAddEditJuego::on_btnMount_Add()
 
 void frmAddEditJuego::on_btnMount_Edit()
 {
-	if( ui.twMontajes->topLevelItemCount()>0 ){
+	if( ui.twMontajes->topLevelItemCount()>0 )
+	{
 		QVector<QString> datos_montaje_edit;
 		datos_montaje_edit.clear();
 		datos_montaje_edit << ui.twMontajes->currentItem()->text(0); // directorio o iso
@@ -1673,7 +1864,8 @@ void frmAddEditJuego::on_btnMount_Edit()
 		datos_montaje_edit << ui.twMontajes->currentItem()->text(6); // cd/dvd
 	
 		frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes(true,datos_montaje_edit);
-	    if ( AddEditMontajes->exec() == QDialog::Accepted ) {
+	    if ( AddEditMontajes->exec() == QDialog::Accepted )
+	    {
 			QString tipoDrive = AddEditMontajes->DatosMontaje[2];
 			if(tipoDrive=="drive")
 				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_hd.png") );
@@ -1687,6 +1879,7 @@ void frmAddEditJuego::on_btnMount_Edit()
 				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/cd_iso.png") );
 			if(tipoDrive=="IMG_hdd")
 				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+
 			ui.twMontajes->currentItem()->setText( 0 , AddEditMontajes->DatosMontaje[0] );	// directorio o iso
 			ui.twMontajes->currentItem()->setText( 1 , AddEditMontajes->DatosMontaje[1] );	// etiqueta
 			ui.twMontajes->currentItem()->setText( 2 , AddEditMontajes->DatosMontaje[2] );	// tipo de montaje
@@ -1732,13 +1925,15 @@ void frmAddEditJuego::on_btnMount_Edit()
 
 void frmAddEditJuego::on_btnMount_Delete()
 {
-	if( ui.twMontajes->topLevelItemCount()>0 ){
+	if( ui.twMontajes->topLevelItemCount()>0 )
+	{
 		int EliminarSiNO;
-		EliminarSiNO = QMessageBox::information( this, tr("�Eliminar Juego...?"), tr( "�Deseas eliminar estemontaje?" ), tr( "Si" ), tr( "Cancelar" ), 0, 1 );
-		if( EliminarSiNO == 0 ){
-			if( (EditandoJuego == true) && (TipoEmulador == "dosbox") ){
+		EliminarSiNO = QMessageBox::information( this, tr("¿Eliminar Juego...?"), tr( "¿Deseas eliminar este montaje?" ), tr( "Si" ), tr( "Cancelar" ), 0, 1 );
+		if( EliminarSiNO == 0 )
+		{
+			if( (EditandoJuego == true) && (TipoEmulador == "dosbox") )
 				sql->ItemEliminarMontaje( ui.twMontajes->currentItem()->text(8) );
-			}
+
 			fGrl.DeleteItemTree( ui.twMontajes->currentItem() ) ;
 			QHash<QString, QString> datos_montaje;
 			datos_montaje.clear();
@@ -1758,9 +1953,12 @@ void frmAddEditJuego::on_btnMount_Delete()
 
 void frmAddEditJuego::on_btnMount_Clear()
 {
-	if( ui.twMontajes->topLevelItemCount()>0 ){
-		if( (EditandoJuego == true) && (TipoEmulador == "dosbox") ){
-			for (int num_mount = 0; num_mount < ui.twMontajes->topLevelItemCount(); num_mount++ ) {
+	if( ui.twMontajes->topLevelItemCount()>0 )
+	{
+		if( (EditandoJuego == true) && (TipoEmulador == "dosbox") )
+		{
+			for (int num_mount = 0; num_mount < ui.twMontajes->topLevelItemCount(); num_mount++ )
+			{
 				QTreeWidgetItem *item = ui.twMontajes->topLevelItem( num_mount );
 				sql->ItemEliminarMontaje( item->text(8) );
 			}
@@ -1794,7 +1992,8 @@ void frmAddEditJuego::on_btnMount_AutoCrear()
 	item->setText( 6 , "-aspi"      );	// cd/dvd IOCtrl
 	item->setText( 7 , "x"     );	// primer montaje
 
-	if( (EditandoJuego == true) && (TipoEmulador == "dosbox") ){
+	if( (EditandoJuego == true) && (TipoEmulador == "dosbox") )
+	{
 		QHash<QString, QString> datos_montaje_nuevo;
 		datos_montaje_nuevo.clear();
 		datos_montaje_nuevo["id_lista"] = fGrl.IntToStr( item->childCount() );
@@ -1808,7 +2007,8 @@ void frmAddEditJuego::on_btnMount_AutoCrear()
 		datos_montaje_nuevo["select_mount"] = "x";		
 				
 		item->setText( 8 , sql->ItemInsertaUnMontajeDbx( datos_montaje_nuevo, stItemIDDbx) );	// id
-	}else item->setText( 8 , "" );//
+	} else
+		item->setText( 8 , "" );//
 	item->setText( 9 , fGrl.IntToStr( item->childCount() )  ); //
 
 	QHash<QString, QString> datos_montaje;
@@ -1828,11 +2028,12 @@ void frmAddEditJuego::on_btnMount_AutoCrear()
 void frmAddEditJuego::on_btnMount_Primario()
 {
 	int indx_mount=0, num_mount=0;
-	if( ui.twMontajes->topLevelItemCount()>0 ){
+	if( ui.twMontajes->topLevelItemCount()>0 )
+	{
 		indx_mount = ui.twMontajes->indexOfTopLevelItem(ui.twMontajes->currentItem());
-		for ( num_mount = 0; num_mount < ui.twMontajes->topLevelItemCount(); num_mount++ ) {
+		for ( num_mount = 0; num_mount < ui.twMontajes->topLevelItemCount(); num_mount++ )
 			ui.twMontajes->topLevelItem( num_mount )->setText(7 , "x");
-		}
+
 		ui.twMontajes->topLevelItem( indx_mount )->setText(7 , "v");
 		
 		QHash<QString, QString> datos_montaje;
@@ -1857,7 +2058,8 @@ void frmAddEditJuego::CargarDatosVDMSound( QString stIDvdms )
 	QSqlQuery query;
 	QSqlRecord rec;
 	query.exec("SELECT * FROM dbgrl_emu_vdmsound WHERE idgrl="+stIDvdms+" LIMIT 0,1");
-	if ( query.first() ){
+	if ( query.first() )
+	{
 		rec = query.record();
 
 		ui.txtVdms_1->setText( query.value(rec.indexOf("path_conf")).toString() )	; // 
@@ -1942,7 +2144,28 @@ void frmAddEditJuego::setDatosVDMSound()
 
 void frmAddEditJuego::on_btnVdms_FileConfg()
 {
-	ui.txtVdms_1->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtVdms_1->text(), tr("Todos los archivo (*)"), 0, false) );
+	bool str_ok;
+	QString str, archivo;
+
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir + "confvdms/", ui.txtVdms_1->text(), tr("Todos los archivo (*)"), 0, true);
+	if(archivo != "")
+	{
+		QFile appConfg( archivo );
+		if(EditandoJuego != true)
+		{
+			if ( appConfg.exists() )
+				QMessageBox::information( this, stTituloAddEdit(), tr("El archivo de Configuración para el VDMSound ya esixte"));
+		}
+		QFileInfo fi( archivo );
+		str = fi.fileName();
+
+		str = fGrl.eliminar_caracteres( str );
+	  	str_ok = str.endsWith(".vlp");
+		if(str_ok == false)
+			str.append(".vlp");
+		ui.txtVdms_1->setText( str );
+	} else 
+		ui.txtVdms_1->setText( "" );
 }
 
 void frmAddEditJuego::on_btnVdms_ExeJuego()

@@ -46,12 +46,12 @@ frmInfo::frmInfo(QWidget *parent)
 	ui.twInfo->header()->resizeSection(0, 200 );
 	
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Versión")+ " GR-lida"	); //
+		ItemInfo->setText( 0 , tr("VersiÃ³n")+ " GR-lida"	); //
 		ItemInfo->setIcon( 0 , QIcon(":/img16/grlida.png")	); //
 		ItemInfo->setText( 1 , fGrl.stVersionGrl() 			); //	
 	
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Versión")+ " QT"			); //
+		ItemInfo->setText( 0 , tr("VersiÃ³n")+ " QT"			); //
 		ItemInfo->setIcon( 0 , QIcon(":/img16/qt.png")		); //
 		ItemInfo->setText( 1 , qVersion() 					); //
 
@@ -113,8 +113,4 @@ frmInfo::frmInfo(QWidget *parent)
 	setGeometry( left, top, width(), height() );
 }
 
-frmInfo::~frmInfo()
-{
-
-}
-
+frmInfo::~frmInfo(){}

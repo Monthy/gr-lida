@@ -31,10 +31,7 @@ frmAddEditURL::frmAddEditURL(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnOk , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 }
 
-frmAddEditURL::~frmAddEditURL()
-{
-
-}
+frmAddEditURL::~frmAddEditURL(){}
 
 void frmAddEditURL::on_btnOk(){
 	if(ui.txt_addedit_url_1->currentText()!="")

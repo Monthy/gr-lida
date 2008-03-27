@@ -33,10 +33,16 @@ frmAddEditMontajes::frmAddEditMontajes(bool EditMount,const QVector<QString> dat
 	connect( ui.btnDirFile , SIGNAL( clicked() ), this, SLOT( on_DirFile() ) );
 
 	stHomeDir     = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
-//	stHomeDir     = QDir::currentPath()+"/";	// directorio de trabajo del GR-lida
+//	stHomeDir     = QDir::currentPath()+"/";			// directorio de trabajo del GR-lida
 //	stHomeDir     = "./";								// directorio de trabajo del GR-lida
 
-	if(EditMount==true){
+	ui.lb_Montaje_6->setText( "<b>-aspi</b> -- "+ tr("Forces use of the aspi layer. Only valid if mounting a CD-ROM under Windows systems with an ASPI-Layer.")+"<br>"+
+		"<b>-ioctl</b> -- "+ tr("Forces use of ioctl commands. Only valid if mounting a CD-ROM under a Windows OS which support them (Win2000/XP/NT).")+"<br>"+
+		"<b>-noioctl</b> -- "+ tr("Forces use of the SDL CD-ROM layer. Valid on all systems.")+"<br>"+
+		tr("Procura no montar la Raiz del sistema operativo: ejemplo en windows seria")+" <b style=\"color:#FF0000;\">C:\\</b> "+ tr("y en linux seria directamente")+ " <b style=\"color:#FF0000;\">/</b> ");
+
+	if(EditMount==true)
+	{
 		ui.txtMontaje_1->setText( datos_montaje[0] );
 		ui.txtMontaje_2->setText( datos_montaje[1] );
 		ui.cbxMontaje_1->setCurrentIndex( ui.cbxMontaje_1->findText( datos_montaje[2] ) );
