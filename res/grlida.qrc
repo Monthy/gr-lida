@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/" >
+        <file>license.gpl</file>
         <file>datos/companias.txt</file>
         <file>datos/dbx_cpu_core.txt</file>
         <file>datos/dbx_cycles.txt</file>
@@ -31,6 +32,8 @@
         <file>datos/svm_render_mode.txt</file>
         <file>datos/tema.txt</file>
         <file>datos/xmldb.txt</file>
+        <file>idiomas/gr-lida_en_EN.qm</file>
+        <file>idiomas/gr-lida_es_ES.qm</file>
         <file>images/grlida_logo.png</file>
         <file>images/juego_sin_imagen.png</file>
         <file>images/splash.png</file>
@@ -85,6 +88,10 @@
         <file>img16/ejecutar_app.png</file>
         <file>img16/ejecutar_app_setup.png</file>
         <file>img16/eliminar.png</file>
+        <file>img16/fav_0.png</file>
+        <file>img16/fav_1.png</file>
+        <file>img16/fav_2.png</file>
+        <file>img16/fav_3.png</file>
         <file>img16/fecha.png</file>
         <file>img16/floppy_1.png</file>
         <file>img16/floppy_2.png</file>
@@ -128,6 +135,8 @@
         <file>img16/nes.png</file>
         <file>img16/nuevo.png</file>
         <file>img16/opciones.png</file>
+        <file>img16/orden_asc.png</file>
+        <file>img16/orden_desc.png</file>
         <file>img16/pc.png</file>
         <file>img16/qt.png</file>
         <file>img16/scummvm.png</file>
@@ -199,10 +208,12 @@
         <file>imgsvm/93.png</file>
         <file>imgsvm/95.png</file>
         <file>imgsvm/98.png</file>
+        <file>imgsvm/logo_coktel_vision.png</file>
         <file>imgsvm/logo_lucas_arts.png</file>
         <file>imgsvm/logo_sierra.png</file>
         <file>imgsvm/sin_num.png</file>
         <file>imgsvm/svmlist_space.png</file>
+        <file>list_translators.txt</file>
         <file>smiles/biggrin.png</file>
         <file>smiles/cool.png</file>
         <file>smiles/corazon.png</file>
