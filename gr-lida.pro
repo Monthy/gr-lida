@@ -1,12 +1,13 @@
 # #####################################################################
 # Qmake for building: gr-lida
 # Description: GR-lida Front-End para DOSBox, ScummVM y el VDMSound
-# Command: qmake gr-lida.pro
+# Command: qmake gr-lida.pro && gmake
 # #####################################################################
 TEMPLATE = app
 
 # ###### Output filename, directory
-TARGET = gr-lida
+win32: TARGET = GR-lida
+!win32: TARGET = gr-lida
 DESTDIR += ./bin
 
 # ###### Compiler, tools and options
@@ -86,7 +87,7 @@ FORMS += ui/login_url.ui \
 RESOURCES += res/grlida.qrc
 TRANSLATIONS += lng/gr-lida_es_ES.ts \
     lng/gr-lida_en_EN.ts
-
+	
 win32:RC_FILE += gr-lida.rc
 mac:ICON += gr-lida.icns
 macx:ICON += gr-lida.icns

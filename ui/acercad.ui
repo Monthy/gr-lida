@@ -184,7 +184,7 @@
         </size>
        </property>
        <property name="text" >
-        <string>Versión del GR-lida</string>
+        <string>Versión del GR-lida:</string>
        </property>
       </widget>
      </item>

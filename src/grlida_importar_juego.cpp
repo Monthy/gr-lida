@@ -52,7 +52,7 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	if(file_xmldb.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file_xmldb);
-		in.setCodec("ISO 8859-1");
+		in.setCodec("UTF-8");
 		while( !in.atEnd() )
 			cbx_ListaTemp << in.readLine();
 
@@ -427,7 +427,7 @@ bool frmImportarJuego::xml_read(QString fileName)
 				}
 				else if(root.hasAttribute("version") && root.attribute("version") != "0.1.0")
 				{
-					QMessageBox::information(window(), "GR-lida DB", tr("El archivo no corresponde a la version") + " 0.1.0");
+					QMessageBox::information(window(), "GR-lida DB", tr("El archivo no corresponde a la versión") + " 0.1.0");
 					return false;
 				}
 

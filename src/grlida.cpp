@@ -358,7 +358,7 @@ void GrLida::CargarConfigInicial()
 	sql = new dbSql( stdb_type, stdb_host, stdb_name, stdb_username, stdb_password, stdb_port ); // Carga la base de datos
 
 	if( !sql->dbisOpen() )
-		QMessageBox::critical(0, tr("Error abrir la Base de Datos"), tr("No se ha podido establecer una conesión con la Base de Datos.\nEsta aplicación necesita soporte de SQLite. Mira la documentación de Qt SQL driver para ms información.\n\nClick Cancelar para salir."), QMessageBox::Cancel);
+		QMessageBox::critical(0, tr("Error abrir la Base de Datos"), tr("No se ha podido establecer una conexión con la Base de Datos.\nEsta aplicación necesita soporte de SQLite. Mira la documentación de Qt SQL driver para ms información.\n\nClick Cancelar para salir."), QMessageBox::Cancel);
 	else
 		sql->CrearTablas();	// Crea las tablas si no lo estan		
 }
@@ -1030,7 +1030,7 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 		{
 			ui.actionEjectar->setEnabled(false);
 			ui.mnu_ejecutar_juego->setEnabled(false);
-			QMessageBox::information( this, stTituloGrl(), tr("Configuración del juego no encontrada!")+ "\n\n'" + stConfgDbxDir + conf_dosbox["path_conf"] + "'" );
+			QMessageBox::information( this, stTituloGrl(), tr("Configuración del juego no encontrada.")+ "\n\n'" + stConfgDbxDir + conf_dosbox["path_conf"] + "'" );
 		} else {
 			ui.actionEjectar->setEnabled(true);
 			ui.mnu_ejecutar_juego->setEnabled(true);
@@ -1796,9 +1796,9 @@ void GrLida::CargarBaseDatos(QString str)
 	}
 
 	if( num_juegos > 0)
-		lbpanel_2.setText(" "+tr("Nº Juegos")+ ": " + fGrl.IntToStr(num_juegos)+ "  " );
+		lbpanel_2.setText(" "+ tr("Nº Juegos") + ": " + fGrl.IntToStr(num_juegos)+ "  " );
 	else
-		lbpanel_2.setText(" "+tr("Nº Juegos")+ ": 0 ");
+		lbpanel_2.setText(" "+ tr("Nº Juegos") + ": 0 ");
 }
 
 void GrLida::ComprobarArchivosDatos(QString Version_GRL)
@@ -1847,7 +1847,7 @@ void GrLida::CrearArchivoDato(QString archivo)
 	}
 
     QTextStream in( &LeerArchivo );
-	in.setCodec("ISO 8859-1");
+	in.setCodec("UTF-8");
     QString line = in.readAll();
     LeerArchivo.close();
  
@@ -1859,7 +1859,7 @@ void GrLida::CrearArchivoDato(QString archivo)
 		return ;
 
 	QTextStream out( CrearArchivo );
-	out.setCodec("ISO 8859-1");
+	out.setCodec("UTF-8");
 	out << line;
 	out.flush();
     CrearArchivo->close();

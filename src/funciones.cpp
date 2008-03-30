@@ -168,8 +168,7 @@ void Funciones::CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int n
 	if (file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
-		//in.setCodec("UTF-8");
-		in.setCodec("ISO 8859-1");
+		in.setCodec("UTF-8");
 
 		while ( !in.atEnd() )
 			cbx_ListaTemp << in.readLine();

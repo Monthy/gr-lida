@@ -52,6 +52,8 @@ frmAcercaD::frmAcercaD(QDialog *parent, Qt::WFlags flags)
 	if (file.open(QIODevice::ReadOnly)!=0 )
 	{
     	QTextStream in(&file);
+		in.setCodec("UTF-8");
+
     	while ( !in.atEnd() )
     		str_ListaTemp << in.readLine();
 
@@ -67,7 +69,7 @@ frmAcercaD::frmAcercaD(QDialog *parent, Qt::WFlags flags)
    				item->setIcon( 1, QIcon(":/img16/sinimg.png") );
    			else
    				item->setIcon( 1, QIcon(":/img_lng/"+str_Lista.value(2)+".png") );	   				
-   			item->setText( 1, str_Lista.value(1) );
+   			item->setText( 1, str_Lista.value(1));
    		}
    	}
    	file.close();

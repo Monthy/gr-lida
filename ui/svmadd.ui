@@ -1079,7 +1079,7 @@
         </rect>
        </property>
        <property name="text" >
-        <string>Nivel de Errores</string>
+        <string>Nivel de Errores:</string>
        </property>
       </widget>
       <widget class="QLabel" name="posSliderSvm_6" >

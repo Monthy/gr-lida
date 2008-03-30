@@ -2757,7 +2757,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>aspect -- Aplicar corrección de aspecto.</string>
+               <string>aspect -- Aplicar corrección de aspecto</string>
               </property>
              </widget>
              <widget class="QCheckBox" name="chkDbx_5" >
@@ -2770,7 +2770,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>fullfixed -- Fijar la resolución en pantalla completa.</string>
+               <string>fullfixed -- Fijar la resolución en pantalla completa</string>
               </property>
              </widget>
              <widget class="QComboBox" name="cbxDbx_2" >
@@ -2793,7 +2793,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>fullscreen -- Iniciar dosbox directamente en pantalla completa.</string>
+               <string>fullscreen -- Iniciar dosbox directamente en pantalla completa</string>
               </property>
              </widget>
              <widget class="QCheckBox" name="chkDbx_22" >
@@ -2933,7 +2933,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed.</string>
+               <string>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed</string>
               </property>
               <property name="wordWrap" >
                <bool>true</bool>
@@ -2962,7 +2962,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>autolock -- El ratón se autobloqueará al hace clic en la pantalla.</string>
+               <string>autolock -- El ratón se autobloqueará al hace clic en la pantalla</string>
               </property>
               <property name="checked" >
                <bool>true</bool>
@@ -2978,7 +2978,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>waitonerror -- Esperar antes de cerrar la consola si dosbox provoca un error.</string>
+               <string>waitonerror -- Esperar antes de cerrar la consola si dosbox provoca un error</string>
               </property>
               <property name="checked" >
                <bool>true</bool>
@@ -2994,7 +2994,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>usescancodes -- Evitar el uso de symkeys, no en todos los sistemas operativos.</string>
+               <string>usescancodes -- Evitar el uso de symkeys, no en todos los sistemas operativos</string>
               </property>
               <property name="checked" >
                <bool>true</bool>
@@ -3271,7 +3271,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>xms -- Activa o desactiva soporte para memoria XMS</string>
+               <string>xms -- Activa o desactiva soporte para memoria XMS.</string>
               </property>
               <property name="checked" >
                <bool>true</bool>
@@ -3287,7 +3287,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>ems -- Activa o desactiva soporte para memoria EMS</string>
+               <string>ems -- Activa o desactiva soporte para memoria EMS.</string>
               </property>
               <property name="checked" >
                <bool>true</bool>
@@ -3332,7 +3332,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>autofire -- Disparo continuado mientras mantengas el botón presionado </string>
+               <string>autofire -- Disparo continuado mientras mantengas el botón presionado</string>
               </property>
              </widget>
              <widget class="QCheckBox" name="chkDbx_27" >
@@ -3345,7 +3345,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>swap34 -- Intercambiar el 3ro y 4to eje. Puede ser útil para ciertas palancas de mando.</string>
+               <string>swap34 -- Intercambiar el 3ro y 4to eje. Puede ser útil para ciertas palancas de mando</string>
               </property>
              </widget>
              <widget class="QCheckBox" name="chkDbx_25" >
@@ -3358,7 +3358,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>timed -- Permitir los intervalos sincronizados para el eje. (falso es el estilo de comportamiento viejo).</string>
+               <string>timed -- Permitir los intervalos sincronizados para el eje. (falso es el estilo de comportamiento viejo)</string>
               </property>
               <property name="checked" >
                <bool>true</bool>
@@ -3374,7 +3374,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>buttonwrap -- enable button wrapping at the number of emulated buttons.</string>
+               <string>buttonwrap -- enable button wrapping at the number of emulated buttons</string>
               </property>
               <property name="checked" >
                <bool>true</bool>
@@ -4962,7 +4962,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>ipx -- Activa emulación IPX sobre UDP/IP.</string>
+               <string>ipx -- Activa emulación IPX sobre UDP/IP</string>
               </property>
               <property name="checked" >
                <bool>true</bool>
@@ -4978,7 +4978,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>directserial -- Activa soporte de puerto serie directo.</string>
+               <string>directserial -- Activa soporte de puerto serie directo</string>
               </property>
               <property name="checked" >
                <bool>true</bool>
@@ -5790,7 +5790,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>Archivo usado para cargar/guardar el mapa de teclas/eventos</string>
+               <string>Archivo usado para cargar/guardar el mapa de teclas/eventos:</string>
               </property>
              </widget>
              <widget class="QLabel" name="lb_Dbx_57" >
@@ -5803,7 +5803,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>language -- Selecciona otro archivo de idioma</string>
+               <string>language -- Selecciona otro archivo de idioma:</string>
               </property>
              </widget>
              <widget class="QLabel" name="lb_Dbx_58" >
@@ -5816,7 +5816,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>captures -- Directorio donde se capturarán cosas como sonido,midi o pantallas</string>
+               <string>captures -- Directorio donde se capturarán cosas como sonido,midi o pantallas:</string>
               </property>
              </widget>
              <widget class="QLabel" name="lb_Dbx_59" >
@@ -5829,7 +5829,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>Directorio donde esta la musica del juego asi como la BSO, sonido etc...</string>
+               <string>Directorio donde esta la musica del juego asi como la BSO, sonido:</string>
               </property>
              </widget>
              <widget class="QLineEdit" name="txtDbx_13" >
@@ -6912,7 +6912,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>Configuracion predeterminada</string>
+               <string>Configuración predeterminada</string>
               </property>
               <property name="icon" >
                <iconset resource="../res/grlida.qrc" >:/img16/actualizar.png</iconset>
@@ -7120,7 +7120,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>Nivel de Errores</string>
+               <string>Nivel de Errores:</string>
               </property>
              </widget>
              <widget class="QCheckBox" name="chkSvm_5" >
@@ -7220,7 +7220,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>Midi Gain</string>
+               <string>Midi Gain:</string>
               </property>
              </widget>
              <widget class="QSlider" name="h_SliderSvm_7" >

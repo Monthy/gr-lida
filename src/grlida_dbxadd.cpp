@@ -333,7 +333,7 @@ void frmDbxAdd::on_btnFileConfg()
 {
 	bool str_ok;
 	QString str, archivo;
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_2->text(), tr("Todos los archivo (*)"), 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_2->text(), tr("Todos los archivo") + " (*.*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -354,12 +354,12 @@ void frmDbxAdd::on_btnFileConfg()
 
 void frmDbxAdd::on_btnExeJuego()
 {
-	ui.txtDbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_3->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtDbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_3->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmDbxAdd::on_btnExeSetup()
 {
-	ui.txtDbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_5->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtDbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_5->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmDbxAdd::on_btnMount_Add()

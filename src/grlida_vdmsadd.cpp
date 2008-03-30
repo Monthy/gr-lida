@@ -138,7 +138,7 @@ void frmVdmsAdd::on_btnVdms_FileConfg()
 {
 	bool str_ok;
 	QString str, archivo;
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stConfgVdmSDir, ui.txtVdms_1->text(), tr("Todos los archivo (*)"), 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stConfgVdmSDir, ui.txtVdms_1->text(), tr("Todos los archivo") + " (*.*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -159,12 +159,12 @@ void frmVdmsAdd::on_btnVdms_FileConfg()
 
 void frmVdmsAdd::on_btnVdms_ExeJuego()
 {
-	ui.txtVdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_2->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtVdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_2->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmVdmsAdd::on_btnVdms_Icono()
 {
-	ui.txtVdms_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_4->text(), tr("Todos los archivo (*)"), 0, false)+ ",0");
+	ui.txtVdms_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_4->text(), tr("Todos los archivo") + " (*.*)", 0, false)+ ",0");
 }
 
 void frmVdmsAdd::on_txtDatos_1_textChanged(const QString &)

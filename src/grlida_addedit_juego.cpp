@@ -285,10 +285,10 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	if ( EditandoJuego == true )
 	{
 		ui.cbxDatos_15->setEnabled( false );
-		setWindowTitle( "Editando a : " + ui.txtDatos_1->text() );
+		setWindowTitle( tr("Editando a") + ": " + ui.txtDatos_1->text() );
 	} else {
 		ui.cbxDatos_15->setEnabled( true );
-		setWindowTitle( "Añadiendo un nuevo juego" );
+		setWindowTitle( tr("Añadiendo un nuevo juego") );
 	}
 
 // centra la ventana en el escritorio
@@ -617,7 +617,7 @@ void frmAddEditJuego::setDatosJuegos()
 
 void frmAddEditJuego::on_btnAbrirImg_1()
 {
-	stThumbs = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stThumbs, stThumbs, tr("Todos los archivo (*)"), 0, false) ;
+	stThumbs = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stThumbs, stThumbs, tr("Todos los archivo") + " (*.*)", 0, false) ;
 	if( file_thumbs.exists(stThumbs) )
 	{
 		ui.lbImage_1->setPixmap( QPixmap(stThumbs) );
@@ -633,7 +633,7 @@ void frmAddEditJuego::on_btnAbrirImg_1()
 
 void frmAddEditJuego::on_btnAbrirImg_2()
 {
-	stCoverFront = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stCoverFront, stCoverFront, tr("Todos los archivo (*)"), 0, false);
+	stCoverFront = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stCoverFront, stCoverFront, tr("Todos los archivo") + " (*.*)", 0, false);
 	if( file_cover_front.exists(stCoverFront) )
 	{
 		ui.lbImage_2->setPixmap( QPixmap(stCoverFront) );
@@ -649,7 +649,7 @@ void frmAddEditJuego::on_btnAbrirImg_2()
 
 void frmAddEditJuego::on_btnAbrirImg_3()
 {
-	stCoverBack = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stCoverBack, stCoverBack, tr("Todos los archivo (*)"), 0, false) ;
+	stCoverBack = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stCoverBack, stCoverBack, tr("Todos los archivo") + " (*.*)", 0, false) ;
 	if( file_cover_back.exists(stCoverBack) )
 	{
 		ui.lbImage_3->setPixmap( QPixmap(stCoverBack) );
@@ -945,7 +945,7 @@ void frmAddEditJuego::on_btnAbrirUrl()
 
 void frmAddEditJuego::on_btnDatosFiles()
 {
-	ui.txtDatos_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDatos_5->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtDatos_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDatos_5->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnAddFile()
@@ -1074,7 +1074,7 @@ void frmAddEditJuego::on_btnDirSvm_sonido()
 
 void frmAddEditJuego::on_btnDirSvm_sound_font()
 {
-	ui.txtSvm_7->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtSvm_7->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtSvm_7->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtSvm_7->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
@@ -1666,7 +1666,7 @@ void frmAddEditJuego::on_btnFileConfg()
 	bool str_ok;
 	QString str, archivo;
 	
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_1->text(), tr("Todos los archivo (*)"), 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_1->text(), tr("Todos los archivo") + " (*.*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -1690,12 +1690,12 @@ void frmAddEditJuego::on_btnFileConfg()
 
 void frmAddEditJuego::on_btnExeJuego()
 {
-	ui.txtDbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_3->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtDbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_3->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnExeSetup()
 {
-	ui.txtDbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_5->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtDbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_5->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnDirGravisUltraSound()
@@ -1705,12 +1705,12 @@ void frmAddEditJuego::on_btnDirGravisUltraSound()
 
 void frmAddEditJuego::on_btnDbx_mapperfile()
 {
-	ui.txtDbx_13->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_13->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtDbx_13->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_13->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnDbx_language()
 {
-	ui.txtDbx_14->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_14->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtDbx_14->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_14->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnDbx_capturas()
@@ -2147,7 +2147,7 @@ void frmAddEditJuego::on_btnVdms_FileConfg()
 	bool str_ok;
 	QString str, archivo;
 
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir + "confvdms/", ui.txtVdms_1->text(), tr("Todos los archivo (*)"), 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir + "confvdms/", ui.txtVdms_1->text(), tr("Todos los archivo") + " (*.*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -2170,11 +2170,11 @@ void frmAddEditJuego::on_btnVdms_FileConfg()
 
 void frmAddEditJuego::on_btnVdms_ExeJuego()
 {
-	ui.txtVdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtVdms_2->text(), tr("Todos los archivo (*)"), 0, false) );
+	ui.txtVdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtVdms_2->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnVdms_Icono()
 {
-	ui.txtVdms_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtVdms_4->text(), tr("Todos los archivo (*)"), 0, false) + ",0" );
+	ui.txtVdms_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtVdms_4->text(), tr("Todos los archivo") + " (*.*)", 0, false) + ",0" );
 }
 // ---------------------------------------------------------------

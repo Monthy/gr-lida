@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 	else
 		translator.load( ":/idiomas/gr-lida_" + stIdiomaSelect + ".qm" );
 
-	qApp->installTranslator(&translator);	
+	app.installTranslator(&translator);	
 	
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Idiomas"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();

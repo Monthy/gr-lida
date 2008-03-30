@@ -6,11 +6,11 @@
     <x>0</x>
     <y>0</y>
     <width>371</width>
-    <height>149</height>
+    <height>168</height>
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Http authentication required</string>
+   <string>Requiere autentificación</string>
   </property>
   <layout class="QGridLayout" >
    <property name="leftMargin" >
@@ -34,17 +34,17 @@
    <item row="0" column="0" colspan="2" >
     <widget class="QLabel" name="label" >
      <property name="text" >
-      <string>You need to supply a Username and a Password to access this site</string>
+      <string>Usted necesita introducir un nombre de usuario y una contraseña para acceder a este sitio</string>
      </property>
      <property name="wordWrap" >
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
    </item>
    <item row="2" column="0" >
     <widget class="QLabel" name="label_2" >
      <property name="text" >
-      <string>Username:</string>
+      <string>Usuario:</string>
      </property>
     </widget>
    </item>
@@ -54,7 +54,7 @@
    <item row="3" column="0" >
     <widget class="QLabel" name="label_3" >
      <property name="text" >
-      <string>Password:</string>
+      <string>Contraseña:</string>
      </property>
     </widget>
    </item>
@@ -74,7 +74,7 @@
    <item row="1" column="0" >
     <widget class="QLabel" name="label_4" >
      <property name="text" >
-      <string>Site:</string>
+      <string>Sitio:</string>
      </property>
     </widget>
    </item>
@@ -87,7 +87,7 @@
       </font>
      </property>
      <property name="text" >
-      <string>%1 at %2</string>
+      <string>%1 en %2</string>
      </property>
      <property name="wordWrap" >
       <bool>true</bool>

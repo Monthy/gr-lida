@@ -1791,7 +1791,7 @@
     <string>Ver Archivos y URL</string>
    </property>
    <property name="statusTip" >
-    <string>Muestra los  Archivos y URL del Juego</string>
+    <string>Muestra los Archivos y URL del Juego</string>
    </property>
   </action>
   <action name="actionImportarJuego" >
@@ -2129,7 +2129,7 @@
     <string>Archivos_URL</string>
    </property>
    <property name="statusTip" >
-    <string>Muestra los  Archivos y URL del Juego</string>
+    <string>Muestra los Archivos y URL del Juego</string>
    </property>
    <property name="shortcut" >
     <string>F5</string>

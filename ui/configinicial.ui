@@ -453,7 +453,7 @@ p, li { white-space: pre-wrap; }
           </size>
          </property>
          <property name="text" >
-          <string>  Aceptar  </string>
+          <string>Aceptar</string>
          </property>
          <property name="icon" >
           <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>

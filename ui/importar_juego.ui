@@ -93,7 +93,7 @@
           <item>
            <widget class="QRadioButton" name="rbt_desde_XML" >
             <property name="text" >
-             <string>Desde un archivo, XML, etc...</string>
+             <string>Desde un archivo, XML</string>
             </property>
            </widget>
           </item>
@@ -109,7 +109,7 @@
           </sizepolicy>
          </property>
          <property name="title" >
-          <string>Dirección web GR-lida DB para importar Juego:</string>
+          <string>Dirección web GR-lida DB para importar Juego</string>
          </property>
          <layout class="QVBoxLayout" >
           <property name="leftMargin" >
@@ -236,7 +236,7 @@
           <bool>false</bool>
          </property>
          <property name="title" >
-          <string>Dirección del archivo web GR-lida DB para importar Juego:</string>
+          <string>Dirección del archivo web GR-lida DB para importar Juego</string>
          </property>
          <layout class="QVBoxLayout" >
           <property name="leftMargin" >
@@ -894,6 +894,9 @@
                </property>
                <property name="text" >
                 <string>Titulo</string>
+               </property>
+               <property name="wordWrap" >
+                <bool>true</bool>
                </property>
               </widget>
              </item>

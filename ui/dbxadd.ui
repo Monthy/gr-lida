@@ -748,7 +748,7 @@
         </rect>
        </property>
        <property name="text" >
-        <string>fullscreen -- Iniciar DOSBox directamente en pantalla completa.</string>
+        <string>fullscreen -- Iniciar DOSBox directamente en pantalla completa</string>
        </property>
       </widget>
       <widget class="QCheckBox" name="chkDbx_5" >
@@ -761,7 +761,7 @@
         </rect>
        </property>
        <property name="text" >
-        <string>fullfixed -- Fijar la resolución en pantalla completa.</string>
+        <string>fullfixed -- Fijar la resolución en pantalla completa</string>
        </property>
       </widget>
       <widget class="QCheckBox" name="chkDbx_6" >
@@ -774,7 +774,7 @@
         </rect>
        </property>
        <property name="text" >
-        <string>autolock -- El ratón se autobloqueará al hace clic en la pantalla.</string>
+        <string>autolock -- El ratón se autobloqueará al hace clic en la pantalla</string>
        </property>
       </widget>
       <widget class="QCheckBox" name="chkDbx_7" >
@@ -787,7 +787,7 @@
         </rect>
        </property>
        <property name="text" >
-        <string>aspect -- Aplicar corrección de aspecto.</string>
+        <string>aspect -- Aplicar corrección de aspecto</string>
        </property>
       </widget>
       <widget class="QLabel" name="lb_Dbx_7" >
@@ -800,7 +800,7 @@
         </rect>
        </property>
        <property name="text" >
-        <string>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed.</string>
+        <string>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed</string>
        </property>
        <property name="wordWrap" >
         <bool>true</bool>
@@ -966,7 +966,7 @@
         </rect>
        </property>
        <property name="text" >
-        <string>Ciclos: Cantidad de instrucciones que DOSBox intenta emular cada milisegundo.</string>
+        <string>Ciclos: Cantidad de instrucciones que DOSBox intenta emular cada milisegundo:</string>
        </property>
        <property name="wordWrap" >
         <bool>true</bool>

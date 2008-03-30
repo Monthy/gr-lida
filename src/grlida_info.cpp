@@ -83,27 +83,27 @@ frmInfo::frmInfo(QWidget *parent)
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos")		) ; //
 		ItemInfo->setIcon( 0 , QIcon(":/img16/grlida.png")	); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl")) + tr(" juego/s")	) ; //
+		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl")) + " " + tr("juego/s") ) ; //
 		
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos Datos")) ; //
 		ItemInfo->setIcon( 0 , QIcon(":/img16/datos_1.png") ); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"datos\"")) + tr(" juego/s") ) ; //
+		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"datos\"")) + " " + tr("juego/s") ) ; //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos") + " DOSBox") ; //
 		ItemInfo->setIcon( 0 , QIcon(":/img16/dosbox.png") ); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"dosbox\"")) + tr(" juego/s") ) ; //
+		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"dosbox\"")) + " " + tr("juego/s") ) ; //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos") + " ScummVM") ; //
 		ItemInfo->setIcon( 0 , QIcon(":/img16/scummvm.png") ); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"scummvm\"")) + tr(" juego/s") ) ; //
+		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"scummvm\"")) + " " + tr("juego/s") ) ; //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos") + " VDMSound") ; //
 		ItemInfo->setIcon( 0 , QIcon(":/img16/vdmsound.png") ); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"vdmsound\"")) + tr(" juego/s") ) ; //
+		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"vdmsound\"")) + " " + tr("juego/s") ) ; //
 
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
