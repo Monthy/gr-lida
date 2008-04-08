@@ -652,7 +652,7 @@
        <widget class="QWidget" name="dockWidgetContents_3" >
         <layout class="QVBoxLayout" >
          <property name="spacing" >
-          <number>0</number>
+          <number>4</number>
          </property>
          <property name="leftMargin" >
           <number>0</number>
@@ -1401,14 +1401,8 @@
           </layout>
          </item>
          <item>
-          <widget class="QTextEdit" name="txtDatos_12" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="readOnly" >
+          <widget class="QTextBrowser" name="txtDatos_12" >
+           <property name="openExternalLinks" >
             <bool>true</bool>
            </property>
           </widget>
@@ -2238,7 +2232,6 @@
   <tabstop>toolButton_11</tabstop>
   <tabstop>btn_VerCoverFront</tabstop>
   <tabstop>btn_VerCoverBack</tabstop>
-  <tabstop>txtDatos_12</tabstop>
   <tabstop>btn_fileurl_1</tabstop>
   <tabstop>btn_fileurl_2</tabstop>
   <tabstop>twUrls</tabstop>

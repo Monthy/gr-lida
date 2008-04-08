@@ -940,7 +940,15 @@ void frmAddEditJuego::on_btnEliminarUrl()
 
 void frmAddEditJuego::on_btnAbrirUrl()
 {
-//
+// Abre la URL con el navegador por defecto
+	QTreeWidgetItem * item = 0;
+	item = ui.twDatosURL->currentItem();
+	if ( item )
+	{
+		my_url.clear();
+		my_url = ui.twDatosURL->currentItem()->text(0);
+	    QDesktopServices::openUrl( my_url );
+	}
 }
 
 void frmAddEditJuego::on_btnDatosFiles()

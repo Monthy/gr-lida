@@ -66,7 +66,7 @@ private:
 	QString stBinExeDbx, stBinExeSvm;
 	QString stItemIndex, stConfgJuego, stTipoEmu, stIdiomaSelect;
 	QString stCapturasDbx, stCapturasSvm, stCapturasVdms, stCaratula_Delantera, stCaratula_Trasera, stIconoFav;
-
+	QUrl my_url;
 	QStringList stl_param, smiles_Lista, smiles_ListaTemp;
 
 	QHash<QString, QString> listSmailes;
@@ -101,6 +101,7 @@ private slots:
 	void on_twJuegos_Dblclicked( QTreeWidgetItem *item);
 	void on_twJuegos_currentItemChanged( QTreeWidgetItem *item1, QTreeWidgetItem *item2);
 	void on_twCapturas_Dblclicked( QTreeWidgetItem *item);
+	void on_twUrls_Dblclicked( QTreeWidgetItem *item);
 	void on_txtBuscar_textChanged(const QString &);
 	
 	void on_AddNewDbx();		// Aade un juego para el DOSBox.

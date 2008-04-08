@@ -1603,12 +1603,9 @@
                  <widget class="QTextEdit" name="txtDatos_4" />
                 </item>
                 <item>
-                 <widget class="QTextEdit" name="html_preview" >
-                  <property name="readOnly" >
+                 <widget class="QTextBrowser" name="html_preview" >
+                  <property name="openExternalLinks" >
                    <bool>true</bool>
-                  </property>
-                  <property name="textInteractionFlags" >
-                   <set>Qt::NoTextInteraction</set>
                   </property>
                  </widget>
                 </item>

@@ -73,6 +73,7 @@ private:
 	QString stThumbs, stCoverFront, stCoverBack;
 	QHash<QString, QString> listSmailes;
 	//QHash<QString, QString>::const_iterator i_Hash;
+	QUrl my_url;
 
 private slots:
 	void on_btnOk();

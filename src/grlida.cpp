@@ -94,7 +94,8 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 
 // Conecta la lista de capturas
 	connect( ui.twCapturas, SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twCapturas_Dblclicked(QTreeWidgetItem*) ));
-	
+	connect( ui.twUrls, SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twUrls_Dblclicked(QTreeWidgetItem*) ));
+
 	ui.toolBar_1->setContextMenuPolicy( Qt::PreventContextMenu );
 
 	lbpanel_1.setFrameStyle( QFrame::NoFrame  );
@@ -1499,13 +1500,18 @@ void GrLida::on_twJuegos_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetI
 
 void GrLida::showPopup(const QPoint & aPosition)
 {
-	QTreeWidgetItem * item = 0 ;
-	item = ui.twJuegos->itemAt(aPosition) ;
-	if ( item )
-	{
+//	QTreeWidgetItem * item = 0 ;
+//	item = ui.twJuegos->itemAt(aPosition) ;
+//	if ( item )
+//	{
 	// Creando el menu
 		ljMenuPopUp = new QMenu(ui.twJuegos);
 		ljMenuPopUp->addAction(ui.mnu_ejecutar_juego);
+		ljMenuPopUp->addAction(ui.mnu_ejecutar_setup);
+		ljMenuPopUp->addSeparator();
+		ljMenuPopUp->addAction(ui.mnu_edit_nuevo);
+		ljMenuPopUp->addAction(ui.mnu_edit_editar);
+		ljMenuPopUp->addAction(ui.mnu_edit_eliminar);
 		ljMenuPopUp->addSeparator();
 		ljMenuPopUp->addAction(ui.mnu_edit_favorito);
 	
@@ -1513,7 +1519,7 @@ void GrLida::showPopup(const QPoint & aPosition)
 		ljMenuPopUp->exec(ui.twJuegos->mapToGlobal(aPosition));
 		//ljMenuPopUp->exec(QCursor::pos());
 		delete ljMenuPopUp;
-	}
+//	}
 }
 
 void GrLida::on_twJuegos_clicked( QTreeWidgetItem *item)
@@ -1567,6 +1573,16 @@ void GrLida::on_twCapturas_Dblclicked( QTreeWidgetItem *item)
 		imgViewer->setWindowModality(Qt::WindowModal);
 		imgViewer->open( item->text(1) );
 		imgViewer->show();
+	}
+}
+
+void GrLida::on_twUrls_Dblclicked( QTreeWidgetItem *item)
+{
+	if( item )
+	{
+		my_url.clear();
+		my_url = ui.twUrls->currentItem()->text(0);
+	    QDesktopServices::openUrl( my_url );	// Abre la URL con el navegador por defecto
 	}
 }
 
