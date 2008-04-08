@@ -90,5 +90,5 @@ void frmAddEditMontajes::on_DirFile()
 	if((tipomontaje==0)||(tipomontaje==1)||(tipomontaje==2))
 		ui.txtMontaje_1->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), stHomeDir, ui.txtMontaje_1->text() ));
 	else
-		ui.txtMontaje_1->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtMontaje_1->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+		ui.txtMontaje_1->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtMontaje_1->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }

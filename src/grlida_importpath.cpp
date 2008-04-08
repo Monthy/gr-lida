@@ -75,22 +75,22 @@ void frmImportPath::on_btnOk()
 
 void frmImportPath::on_btnOpenDatoFile_1()
 {
-	ui.txtPath_Datos_1->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Datos_1->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtPath_Datos_1->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Datos_1->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDatoFile_2()
 {
-	ui.txtPath_Datos_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Datos_2->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtPath_Datos_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Datos_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDatoFile_3()
 {
-	ui.txtPath_Datos_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Datos_3->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtPath_Datos_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Datos_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxFile_1()
 {
-	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confdbx/", ui.txtPath_Dbx_1->text(), tr("Todos los archivo") + " (*.*)", 0, true);
+	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confdbx/", ui.txtPath_Dbx_1->text(), tr("Todos los archivo") + " (*)", 0, true);
 	QFile appConfg( archivo );
 	if ( !appConfg.exists() )
 	{
@@ -104,22 +104,22 @@ void frmImportPath::on_btnOpenDbxFile_1()
 
 void frmImportPath::on_btnOpenDbxFile_2()
 {
-	ui.txtPath_Dbx_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_2->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtPath_Dbx_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxFile_3()
 {
-	ui.txtPath_Dbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_3->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtPath_Dbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxFile_4()
 {
-	ui.txtPath_Dbx_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_4->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtPath_Dbx_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_4->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxFile_5()
 {
-	ui.txtPath_Dbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_5->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtPath_Dbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_5->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxDir_6()
@@ -149,7 +149,7 @@ void frmImportPath::on_btnOpenSvmDir_2()
 
 void frmImportPath::on_btnOpenSvmFile3()
 {
-	ui.txtPath_Svm_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Svm_3->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtPath_Svm_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Svm_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenSvmDir_4()
@@ -169,7 +169,7 @@ void frmImportPath::on_btnOpenSvmDir_6()
 
 void frmImportPath::on_btnOpenVdmsFile_1()
 {
-	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confvdms/", ui.txtPath_Vdms_1->text(), tr("Todos los archivo") + " (*.*)", 0, true);
+	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confvdms/", ui.txtPath_Vdms_1->text(), tr("Todos los archivo") + " (*)", 0, true);
 	QFile appConfg( archivo );
 	if ( !appConfg.exists() )
 	{
@@ -183,5 +183,5 @@ void frmImportPath::on_btnOpenVdmsFile_1()
 
 void frmImportPath::on_btnOpenVdmsFile_2()
 {
-	ui.txtPath_Vdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Vdms_2->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtPath_Vdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Vdms_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }

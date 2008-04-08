@@ -214,15 +214,15 @@ void frmOpciones::on_setLanguage(const QString txt_locale)
 
 void frmOpciones::on_btnDirDbx()
 {
-	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDirDbx->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDirDbx->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmOpciones::on_btnDirSvm()
 {
-	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDirSvm->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDirSvm->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmOpciones::on_btnDirDB()
 {
-	ui.txtDirBD->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDirBD->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtDirBD->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDirBD->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }

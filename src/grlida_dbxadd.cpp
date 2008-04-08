@@ -67,6 +67,7 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	fGrl.CargarDatosComboBox(":/datos/dbx_sbtype.txt" 	  , ui.cbxDbx_9 , 1, false); // Tipo Sound Blaste
 	fGrl.CargarDatosComboBox(":/datos/dbx_mpu401.txt" 	  , ui.cbxDbx_16, 1, false); // MPU-401
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt", ui.cbxDbx_12, 1, false); // MIDI Device
+	fGrl.CargarDatosComboBox(":/datos/dbx_cpu_core.txt"	 , ui.cbxDbx_17 , 1, false); // Ncleo de la CPU DOSBox
 
 	// Ponemos los Combobox por defecto.
 	ui.cbxDbx_1->setCurrentIndex( 0 );	// Resolución pantalla
@@ -218,7 +219,8 @@ void frmDbxAdd::on_btnOk()
 		  DatosDosBox["render_aspect"] = "true" ; else DatosDosBox["render_aspect"] = "false"	; // render_aspect
 		if ( ui.cbxDbx_4->currentText()!="" )
 		  DatosDosBox["render_scaler"] = ui.cbxDbx_4->currentText(); else DatosDosBox["render_scaler"] = "normal2x" ; // render_scaler
-		DatosDosBox["cpu_core"] = "auto"				; // cpu_core
+		if ( ui.cbxDbx_17->currentText()!="" )
+		  DatosDosBox["cpu_core"] = ui.cbxDbx_17->currentText(); else DatosDosBox["cpu_core"] = "auto" ; // cpu_core
 		if ( ui.cbxDbx_6->currentText()!="" )		
 		  DatosDosBox["cpu_cycles"] = ui.cbxDbx_6->currentText(); else DatosDosBox["cpu_cycles"] = "auto" ; // cpu_cycles
 		DatosDosBox["cpu_cycleup"] = "500"				; // cpu_cycleup
@@ -333,7 +335,7 @@ void frmDbxAdd::on_btnFileConfg()
 {
 	bool str_ok;
 	QString str, archivo;
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_2->text(), tr("Todos los archivo") + " (*.*)", 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_2->text(), tr("Todos los archivo") + " (*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -354,12 +356,12 @@ void frmDbxAdd::on_btnFileConfg()
 
 void frmDbxAdd::on_btnExeJuego()
 {
-	ui.txtDbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_3->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtDbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmDbxAdd::on_btnExeSetup()
 {
-	ui.txtDbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_5->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtDbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_5->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmDbxAdd::on_btnMount_Add()

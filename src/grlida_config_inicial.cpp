@@ -130,10 +130,10 @@ void frmConfigInicial::on_btnOk(){
 
 void frmConfigInicial::on_btnDirDbx()
 {
-	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del DOSBox"), stHomeDir, ui.txtDirDbx->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del DOSBox"), stHomeDir, ui.txtDirDbx->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmConfigInicial::on_btnDirSvm()
 {
-	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del ScummVM"), stHomeDir, ui.txtDirSvm->text(), tr("Todos los archivo") + " (*.*)", 0, false) );
+	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del ScummVM"), stHomeDir, ui.txtDirSvm->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
