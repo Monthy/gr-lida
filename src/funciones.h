@@ -71,6 +71,7 @@ public:
 // Obtiene la direccion de una carpeta atraves de QFileDialog
 	QString VentanaDirectorios(const QString caption, const QString dir, const QString tmp_dir);
 //
+	void CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm);
 	QStringList CreaConfigMontajes(QTreeWidget *treeWidget, const QHash<QString, QString> datos);
 // Exportar la configuracion del DOSBox para el DFend
 	void Exportar_Profile_DFend(QString fileName);

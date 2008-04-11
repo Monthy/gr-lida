@@ -373,6 +373,47 @@ QString Funciones::VentanaDirectorios(const QString caption, const QString dir, 
 		return tmp_dir;
 }
 
+void Funciones::CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm)
+{
+	QSettings settings( dirIni, QSettings::IniFormat );
+	settings.clear();
+	settings.beginGroup( conf_Svm["game"] );
+		settings.setValue("description"		, conf_Svm["description"]	); //
+		settings.setValue("gameid"			, conf_Svm["game"]			); // monkey
+		settings.setValue("language"		, conf_Svm["language"]		); // es
+		settings.setValue("subtitles"		, conf_Svm["subtitles"]		); // true	
+		settings.setValue("platform"		, conf_Svm["platform"]		); // pc	
+		settings.setValue("gfx_mode"		, conf_Svm["gfx_mode"]		); // 2x
+		settings.setValue("render_mode"		, conf_Svm["render_mode"]	); // hercGreen
+		settings.setValue("fullscreen"		, conf_Svm["fullscreen"]	); // true
+		settings.setValue("aspect_ratio"	, conf_Svm["aspect_ratio"]	); // true
+		settings.setValue("path"			, conf_Svm["path"]			);
+		settings.setValue("extrapath"		, conf_Svm["path_extra"]	);
+		settings.setValue("savepath"		, conf_Svm["path_save"]		);
+		settings.setValue("music_driver"	, conf_Svm["music_driver"]	); // adlib
+		settings.setValue("enable_gs"		, conf_Svm["enable_gs"]		); // true
+		settings.setValue("multi_midi"		, conf_Svm["multi_midi"]	); // true
+		settings.setValue("native_mt32"		, conf_Svm["native_mt32"]	); // true
+		settings.setValue("master_volume"	, conf_Svm["master_volume"]	); // 192
+		settings.setValue("music_volume"	, conf_Svm["music_volume"]	); // 192
+		settings.setValue("sfx_volume"		, conf_Svm["sfx_volume"]	); // 192
+		settings.setValue("speech_volume"	, conf_Svm["speech_volume"]	); // 192
+		settings.setValue("tempo"			, conf_Svm["tempo"]			); // 0
+		settings.setValue("talkspeed"		, conf_Svm["talkspeed"]		); // 107
+		settings.setValue("cdrom"			, conf_Svm["cdrom"]			); // 0
+		settings.setValue("joystick_num"	, conf_Svm["joystick_num"]	); // -1
+		settings.setValue("output_rate"		, conf_Svm["output_rate"]	); // 44100
+		settings.setValue("midi_gain"		, conf_Svm["midi_gain"]		); // 257
+		settings.setValue("copy_protection"	, conf_Svm["copy_protection"]);// false
+		settings.setValue("soundfont"		, conf_Svm["sound_font"]	);
+	settings.endGroup();
+	settings.beginGroup("scummvm");
+		settings.setValue("gui_theme","modern");
+		settings.setValue("gfx_mode","2x");
+		settings.setValue("fullscreen","false");
+	settings.endGroup();
+}
+
 QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash<QString, QString> datos)
 {
 // Creando la configuracion de los distintos Montajes

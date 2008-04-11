@@ -850,101 +850,109 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 		query.first();
 		rec = query.record();
 		conf_scummvm.clear();
+		
+		conf_scummvm["description"] = "";
 		conf_scummvm["game"] = query.value( rec.indexOf("game") ).toString();	// game
 	// language
 		if( query.value( rec.indexOf("language") ).toString()!="")
-			conf_scummvm["language"] = "-q" + query.value( rec.indexOf("language") ).toString() + "|";
+			conf_scummvm["language"] = query.value( rec.indexOf("language") ).toString();
 		else
-			conf_scummvm["language"] = "|"; 
+			conf_scummvm["language"] = "es";
 	// subtitles
 		if( query.value( rec.indexOf("subtitles") ).toBool()==true)
-			conf_scummvm["subtitles"] = "-n|";
+			conf_scummvm["subtitles"] = "true";
 		else
-			conf_scummvm["subtitles"] = "|"; 
+			conf_scummvm["subtitles"] = "false";
 	// platform
 		if( query.value( rec.indexOf("platform") ).toString()!="")
-			conf_scummvm["platform"] = "--platform=" + query.value( rec.indexOf("platform") ).toString() + "|";
+			conf_scummvm["platform"] = query.value( rec.indexOf("platform") ).toString();
 		else
-			conf_scummvm["platform"] = "|"; 
+			conf_scummvm["platform"] = "pc";
 	// gfx_mode
 		if( query.value( rec.indexOf("gfx_mode") ).toString()!="")
-			conf_scummvm["gfx_mode"] = "-g" + query.value( rec.indexOf("gfx_mode") ).toString() + "|";
+			conf_scummvm["gfx_mode"] = query.value( rec.indexOf("gfx_mode") ).toString();
 		else
-			conf_scummvm["gfx_mode"] = "|";
+			conf_scummvm["gfx_mode"] = "2x";
 	// render_mode
 		if( query.value( rec.indexOf("render_mode") ).toString()!="")
-			conf_scummvm["render_mode"] = "--render-mode=" + query.value( rec.indexOf("render_mode") ).toString() + "|";
+			conf_scummvm["render_mode"] = query.value( rec.indexOf("render_mode") ).toString();
 		else
-			conf_scummvm["render_mode"] = "|";
+			conf_scummvm["render_mode"] = "";
 	// fullscreen
 		if( query.value( rec.indexOf("fullscreen") ).toBool()==true)
-			conf_scummvm["fullscreen"] = "-f|";
+			conf_scummvm["fullscreen"] = "true";
 		else
-			conf_scummvm["fullscreen"] = "-F|";
+			conf_scummvm["fullscreen"] = "false";
 	// aspect_ratio
 		if( query.value( rec.indexOf("aspect_ratio") ).toBool()==true)
-			conf_scummvm["aspect_ratio"] = "--aspect-ratio|";
+			conf_scummvm["aspect_ratio"] = "true";
 		else
-			conf_scummvm["aspect_ratio"] = "--no-aspect-ratio|"; 
-	// path_save
-		if( query.value( rec.indexOf("path_save") ).toString()!="")
-			conf_scummvm["path_save"] = "--savepath=" + query.value( rec.indexOf("path_save") ).toString() + "|";
-		else
-			conf_scummvm["path_save"] = "|";	
+			conf_scummvm["aspect_ratio"] = "false";
+	// path
+		conf_scummvm["path"] = query.value( rec.indexOf("path") ).toString();
 	// path_extra
 		if( query.value( rec.indexOf("path_extra") ).toString()!="")
-			conf_scummvm["path_extra"] = "--extrapath=" + query.value( rec.indexOf("path_extra") ).toString() + "|";
+			conf_scummvm["path_extra"] = query.value( rec.indexOf("path_extra") ).toString();
 		else
-			conf_scummvm["path_extra"] = "|"					;	
-	// sound_font
-		if( query.value( rec.indexOf("sound_font") ).toString()!="")
-			conf_scummvm["sound_font"] = "--soundfont=" + query.value( rec.indexOf("sound_font") ).toString() + "|";
+			conf_scummvm["path_extra"] = "";
+	// path_save
+		if( query.value( rec.indexOf("path_save") ).toString()!="")
+			conf_scummvm["path_save"] = query.value( rec.indexOf("path_save") ).toString();
 		else
-			conf_scummvm["sound_font"] = "|";
+			conf_scummvm["path_save"] = "";
+	// music_driver
+		conf_scummvm["music_driver"] = query.value( rec.indexOf("music_driver") ).toString();
 	// enable_gs
 		if( query.value( rec.indexOf("enable_gs") ).toBool()==true)
-			conf_scummvm["enable_gs"] = "--enable-gs|";
+			conf_scummvm["enable_gs"] = "true";
 		else
-			conf_scummvm["enable_gs"] = "|";	
+			conf_scummvm["enable_gs"] = "false";
 	// multi_midi
 		if( query.value( rec.indexOf("multi_midi") ).toBool()==true)
-			conf_scummvm["multi_midi"] = "--multi-midi|";
+			conf_scummvm["multi_midi"] = "true";
 		else
-			conf_scummvm["multi_midi"] = "|";
+			conf_scummvm["multi_midi"] = "false";
 	// native_mt32
 		if( query.value( rec.indexOf("native_mt32") ).toBool()==true)
-			conf_scummvm["native_mt32"] = "--native-mt32|";
+			conf_scummvm["native_mt32"] = "true";
 		else
-			conf_scummvm["native_mt32"] = "|";	
-		
-		conf_scummvm["music_driver"]  = "-e" + query.value( rec.indexOf("music_driver") ).toString() + "|"							;	// music_driver
-		conf_scummvm["master_volume"] = fGrl.IntToStr( query.value( rec.indexOf("master_volume") ).toInt() ) + "|"					;	// master_volume
-		conf_scummvm["music_volume"]  = "-m" + fGrl.IntToStr( query.value( rec.indexOf("music_volume") ).toInt() ) + "|"				;	// music_volume
-		conf_scummvm["sfx_volume"]    = "-s" + fGrl.IntToStr( query.value( rec.indexOf("sfx_volume") ).toInt() ) + "|"				;	// sfx_volume
-		conf_scummvm["speech_volume"] = "-r" + fGrl.IntToStr( query.value( rec.indexOf("speech_volume") ).toInt() ) + "|"			;	// speech_volume
-		conf_scummvm["tempo"]         = "--tempo=" + fGrl.IntToStr( query.value( rec.indexOf("tempo") ).toInt() ) + "|"				;	// tempo
-		conf_scummvm["talkspeed"]     = "--talkspeed=" + fGrl.IntToStr( query.value( rec.indexOf("talkspeed") ).toInt() ) + "|"		;	// talkspeed
+			conf_scummvm["native_mt32"] = "false";
+
+		conf_scummvm["master_volume"] = fGrl.IntToStr( query.value( rec.indexOf("master_volume") ).toInt() );	// master_volume
+		conf_scummvm["music_volume"]  = fGrl.IntToStr( query.value( rec.indexOf("music_volume") ).toInt() );	// music_volume
+		conf_scummvm["sfx_volume"]    = fGrl.IntToStr( query.value( rec.indexOf("sfx_volume") ).toInt() );		// sfx_volume
+		conf_scummvm["speech_volume"] = fGrl.IntToStr( query.value( rec.indexOf("speech_volume") ).toInt() );	// speech_volume
+		conf_scummvm["tempo"]         = fGrl.IntToStr( query.value( rec.indexOf("tempo") ).toInt() );			// tempo
+		conf_scummvm["talkspeed"]     = fGrl.IntToStr( query.value( rec.indexOf("talkspeed") ).toInt() );		// talkspeed
+		conf_scummvm["cdrom"]         = fGrl.IntToStr( query.value( rec.indexOf("cdrom") ).toInt() );			// cdrom
+		conf_scummvm["joystick_num"]  = fGrl.IntToStr( query.value( rec.indexOf("joystick_num") ).toInt() );	// joystick_num
+	// output_rate
+		if( query.value( rec.indexOf("output_rate") ).toString()!="")
+			conf_scummvm["output_rate"] = query.value( rec.indexOf("output_rate") ).toString();
+		else
+			conf_scummvm["output_rate"] = "";
+	// midi_gain
+		conf_scummvm["midi_gain"] = query.value( rec.indexOf("midi_gain") ).toString(); // midi_gain
+	// copy_protection
+		if( query.value( rec.indexOf("copy_protection") ).toBool()==true)
+			conf_scummvm["copy_protection"] = "true";
+		else
+			conf_scummvm["copy_protection"] = "false";	
+	// sound_font
+		if( query.value( rec.indexOf("sound_font") ).toString()!="")
+			conf_scummvm["sound_font"] = query.value( rec.indexOf("sound_font") ).toString();
+		else
+			conf_scummvm["sound_font"] = "";
+
 		conf_scummvm["debuglevel"]    = "-d" + fGrl.IntToStr( query.value( rec.indexOf("debuglevel") ).toInt() ) + "|"				;	// debuglevel
-		conf_scummvm["cdrom"]         = "--cdrom=" + fGrl.IntToStr( query.value( rec.indexOf("cdrom") ).toInt() ) + "|"				;	// cdrom
-		conf_scummvm["joystick_num"]  = "--joystick=" + fGrl.IntToStr( query.value( rec.indexOf("joystick_num") ).toInt() ) + "|"	;	// joystick_num
-		conf_scummvm["path"]          = "--path=" + query.value( rec.indexOf("path") ).toString() + "|"								;	// path
 		conf_scummvm["path_setup"]    = query.value( rec.indexOf("path_setup") ).toString()											;	// path_setup
 		conf_scummvm["path_capturas"] = query.value( rec.indexOf("path_capturas") ).toString()										;	// path_capturas
 		conf_scummvm["path_sonido"]   = query.value( rec.indexOf("path_sonido") ).toString()										;	// path_sonido
-	// output_rate
-		if( query.value( rec.indexOf("output_rate") ).toString()!="")
-			conf_scummvm["output_rate"] = "--output-rate=" + query.value( rec.indexOf("output_rate") ).toString() + "|";
-		else
-			conf_scummvm["output_rate"] = "|";			
 
-		conf_scummvm["midi_gain"]   = "--midi-gain=" + query.value( rec.indexOf("midi_gain") ).toString() + "|"							;	// music_driver
-
-	// copy_protection
-		if( query.value( rec.indexOf("copy_protection") ).toBool()==true)
-			conf_scummvm["copy_protection"] = "--copy-protection|";
-		else
-			conf_scummvm["copy_protection"] = "|";	
-		
+		stConfgJuego = "-c"+stHomeDir+"scummvm.ini|"+
+					conf_scummvm["debuglevel"]		+	// debuglevel
+					conf_scummvm["game"];				// game
+/*		
 		stConfgJuego = conf_scummvm["path"]			+	// path
 					conf_scummvm["language"]		+	// language
 					conf_scummvm["subtitles"]		+	// subtitles
@@ -972,8 +980,12 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 			 		conf_scummvm["copy_protection"] +	// copy_protection
 			 		conf_scummvm["sound_font"]      +	// sound_font
 			 		conf_scummvm["game"];				// game
-	
+*/
 		//	conf_scummvm["path_sonido"];				// path_sonido
+		
+		// Creamos el INI de configuracion del ScummVM
+		fGrl.CreaIniScummVM(stHomeDir+"scummvm.ini", conf_scummvm);
+		
 		stCapturasSvm =  conf_scummvm["path_capturas"]; // path_capturas
 		stCapturasDbx = "";
 		if( (stCapturasSvm !="") && ui.btn_imgtumb_2->isChecked() )
