@@ -44,24 +44,24 @@
 class frmAddEditJuego : public QDialog {
     Q_OBJECT
 public:
-    frmAddEditJuego( bool EditJuego, QString TipoEmu, QString stIDIndex, QDialog *parent = 0, Qt::WFlags flags = 0 );
-    ~frmAddEditJuego();
+	frmAddEditJuego( bool EditJuego, QString TipoEmu, QString stIDIndex, QDialog *parent = 0, Qt::WFlags flags = 0 );
+	~frmAddEditJuego();
 
-    Ui::AddEditJuegoClass ui;
-    
+	Ui::AddEditJuegoClass ui;
+
 	QHash<QString, QString> DatosJuego;
 	QHash<QString, QString> DatosScummvm;
 	QHash<QString, QString> DatosDosBox;
 	QHash<QString, QString> DatosVDMSound;
-    
+
 	QString stItemIDSvm;
 	QString stItemIDDbx;
 	QString stItemIDVdms;
-	
+
 private:
 	Funciones fGrl;
 	dbSql *sql;
-	
+
 	bool EditandoJuego;
 	QString TipoEmulador;
 	QString stItemIDGrl;
@@ -77,41 +77,41 @@ private:
 
 private slots:
 	void on_btnOk();
-	void on_cbxDatos_15_txtChanged(const QString texto);
+	void on_cbxDatos_TipoEmu_txtChanged(const QString texto);
 // Referente al DatosJuego ---------------------------------------
 	void CargarDatosJuego( QString stIDIndex );
 	void setDatosJuegos();
 	void on_twDatoSmile_Dblclicked( QTreeWidgetItem *item);
-	void on_btnAbrirImg_1();
-	void on_btnAbrirImg_2();
-	void on_btnAbrirImg_3();
-	void on_btnVerImg_1();
-	void on_btnVerImg_2();
-	void on_btnVerImg_3();
-	void on_btnElimnarImg_1();
-	void on_btnElimnarImg_2();
-	void on_btnElimnarImg_3();
-	void on_btnTool_1();
-	void on_btnTool_2();
-	void on_btnTool_3();
-	void on_btnTool_4();
-	void on_btnTool_5();
-	void on_btnTool_6();
-	void on_btnTool_7();
-	void on_btnTool_8();
-	void on_btnTool_9();
-	void on_btnTool_10();
-	void on_btnTool_11();
-	void on_btnTool_12();
-	void on_btnTool_13();
-	void on_btnTool_14();
-	void on_btnTool_15();
-	void on_btnTool_16();
+	void on_btnImgAbrir_Thumbs();
+	void on_btnImgAbrir_CoverFront();
+	void on_btnImgAbrir_CoverBack();
+	void on_btnImgVer_Thumbs();
+	void on_btnImgVer_CoverFront();
+	void on_btnImgVer_CoverBack();
+	void on_btnImgEliminar_Thumbs();
+	void on_btnImgEliminar_CoverFront();
+	void on_btnImgEliminar_CoverBack();
+	void on_btnTool_Cortar();
+	void on_btnTool_Copiar();
+	void on_btnTool_Pegar();
+	void on_btnTool_SelectAll();
+	void on_btnTool_Deshacer();
+	void on_btnTool_Rehacer();
+	void on_btnTool_TextoNegrita();
+	void on_btnTool_TextoCursiva();
+	void on_btnTool_TextoSubrayado();
+	void on_btnTool_InsertarImg();
+	void on_btnTool_InsertaUrl();
+	void on_btnTool_Buscar();
+	void on_btnTool_BuscarAnterior();
+	void on_btnTool_BuscarSiguiente();
+	void on_btnTool_Reemplazar();
+	void on_btnTool_Preview();
 	void on_btnNuevaUrl();
 	void on_btnEditarUrl();
 	void on_btnEliminarUrl();
 	void on_btnAbrirUrl();
-	void on_btnDatosFiles();	
+	void on_btnDatosFiles_PathFile();
 	void on_btnAddFile();
 	void on_btnEditFile();
 	void on_btnUpdateFile();
@@ -129,22 +129,23 @@ private slots:
 	void on_btnDirSvm_capturas();
 	void on_btnDirSvm_sonido();
 	void on_btnDirSvm_sound_font();
+
 // ---------------------------------------------------------------
 // Referente al DOSBox -------------------------------------------
-	void on_txtDbx_1_textChanged(const QString &);
+	void on_txtDbx_path_conf_textChanged(const QString &);
 	void CargarDatosDosBox( QString stIDdbx );
 	void CargarDatosDBxMontaje( QString stIDdbx );
 	void setDatosDosBox();
 	QString setOpcionesSerial();
-	void on_btnFileConfg();
-	void on_btnExeJuego();
-	void on_btnExeSetup();
+	void on_btnDbx_FileConfg();
+	void on_btnDbx_ExeJuego();
+	void on_btnDbx_ExeSetup();
 	void on_btnDirGravisUltraSound();
 	void on_btnDbx_mapperfile();
 	void on_btnDbx_language();
 	void on_btnDbx_capturas();
 	void on_btnDbx_musica();
-	void on_btnAddSerial();
+	void on_btnDbx_AddSerial();
 	void on_btnMount_Add();
 	void on_btnMount_Edit();
 	void on_btnMount_Delete();
@@ -153,6 +154,7 @@ private slots:
 	void on_btnMount_Bajar();
 	void on_btnMount_AutoCrear();
 	void on_btnMount_Primario();
+
 // ---------------------------------------------------------------
 // Referente al VDMSound -----------------------------------------
 	void CargarDatosVDMSound( QString stIDvdms );

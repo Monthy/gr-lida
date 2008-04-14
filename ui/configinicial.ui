@@ -225,7 +225,7 @@ p, li { white-space: pre-wrap; }
       </layout>
      </item>
      <item>
-      <widget class="QCheckBox" name="chkConfini_1" >
+      <widget class="QCheckBox" name="chkConfig_DOSBoxDisp" >
        <property name="text" >
         <string>Tengo instalado el emulador DOSBox</string>
        </property>
@@ -302,7 +302,7 @@ p, li { white-space: pre-wrap; }
       </layout>
      </item>
      <item>
-      <widget class="QCheckBox" name="chkConfini_2" >
+      <widget class="QCheckBox" name="chkConfig_ScummVMDisp" >
        <property name="text" >
         <string>Tengo instalado el emulador ScummVM</string>
        </property>
@@ -413,14 +413,14 @@ p, li { white-space: pre-wrap; }
           <number>4</number>
          </property>
          <item>
-          <widget class="QCheckBox" name="chkConfini_3" >
+          <widget class="QCheckBox" name="chkConfig_VDMSoundDisp" >
            <property name="text" >
             <string>Tengo instalado el emulador VDMSound</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="chkConfini_4" >
+          <widget class="QCheckBox" name="chkConfig_ShowNext" >
            <property name="text" >
             <string>Mostrar la próxima vez que inicie</string>
            </property>
@@ -468,14 +468,14 @@ p, li { white-space: pre-wrap; }
  </widget>
  <tabstops>
   <tabstop>cbxIdioma</tabstop>
-  <tabstop>chkConfini_1</tabstop>
+  <tabstop>chkConfig_DOSBoxDisp</tabstop>
   <tabstop>txtDirDbx</tabstop>
   <tabstop>btnDirDbx</tabstop>
-  <tabstop>chkConfini_2</tabstop>
+  <tabstop>chkConfig_ScummVMDisp</tabstop>
   <tabstop>txtDirSvm</tabstop>
   <tabstop>btnDirSvm</tabstop>
-  <tabstop>chkConfini_3</tabstop>
-  <tabstop>chkConfini_4</tabstop>
+  <tabstop>chkConfig_VDMSoundDisp</tabstop>
+  <tabstop>chkConfig_ShowNext</tabstop>
   <tabstop>btnOk</tabstop>
  </tabstops>
  <resources>
@@ -483,7 +483,7 @@ p, li { white-space: pre-wrap; }
  </resources>
  <connections>
   <connection>
-   <sender>chkConfini_1</sender>
+   <sender>chkConfig_DOSBoxDisp</sender>
    <signal>toggled(bool)</signal>
    <receiver>btnDirDbx</receiver>
    <slot>setEnabled(bool)</slot>
@@ -499,7 +499,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>chkConfini_1</sender>
+   <sender>chkConfig_DOSBoxDisp</sender>
    <signal>toggled(bool)</signal>
    <receiver>txtDirDbx</receiver>
    <slot>setEnabled(bool)</slot>
@@ -515,7 +515,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>chkConfini_2</sender>
+   <sender>chkConfig_ScummVMDisp</sender>
    <signal>toggled(bool)</signal>
    <receiver>btnDirSvm</receiver>
    <slot>setEnabled(bool)</slot>
@@ -531,7 +531,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>chkConfini_2</sender>
+   <sender>chkConfig_ScummVMDisp</sender>
    <signal>toggled(bool)</signal>
    <receiver>txtDirSvm</receiver>
    <slot>setEnabled(bool)</slot>

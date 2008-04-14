@@ -62,12 +62,12 @@ void dbSql::dbClose()
 
 dbSql::~dbSql()
 {
-	if (sqldb.isOpen()) sqldb.close();
+	if( sqldb.isOpen()) sqldb.close();
 }
 
 bool dbSql::Chequear_Query( QSqlQuery q )
 {
-	if ( q.lastError().type() != QSqlError::NoError )
+	if( q.lastError().type() != QSqlError::NoError )
 	{
 		QMessageBox::critical( 0, QCoreApplication::applicationName(), "SQL: " + q.lastQuery() + "\nError: " + q.lastError().text() );
 		return false;
@@ -78,7 +78,7 @@ bool dbSql::Chequear_Query( QSqlQuery q )
 int dbSql::getCount(QString stTable, QString stWhere)
 {
 	QSqlQuery result( "SELECT COUNT(*) FROM "+ stTable + " " + stWhere );
-	if ( Chequear_Query(result) )
+	if( Chequear_Query(result) )
 	{
 		result.next();
 		int count = result.record().value(0).toInt();
@@ -94,7 +94,7 @@ QString dbSql::ItemIDIndex(QString SQLtabla, QString SQLindex)
 	QSqlQuery query;
 	query.exec("SELECT * FROM "+SQLtabla+" WHERE idgrl="+SQLindex+" LIMIT 0,1");
 	query.first();
-	return query.value(0).toString() ;
+	return query.value(0).toString();
 }
 
 void dbSql::ItemEliminar( const QString IDgrl )
@@ -134,13 +134,13 @@ void dbSql::eliminararchivo(QString archivo)
 //	QString stArchivoConfg = QDir::currentPath()+"/confdbx/"+ archivo;
 //	QString stArchivoConfg = "./confdbx/"+ archivo;
 	QFile f( stArchivoConfg );
-	if ( f.exists() )
+	if( f.exists() )
 		f.remove();
 }
 
 QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl (");
 	strSQL.append("icono, titulo, subtitulo, genero, compania, desarrollador, tema, idioma, formato, anno, numdisc, ");
@@ -187,7 +187,7 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 
 void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QString IDgrl)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl SET "); 
 	strSQL.append("icono = :icono, titulo = :titulo, subtitulo = :subtitulo, genero = :genero, "); 
@@ -196,7 +196,7 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	strSQL.append("tamano = :tamano, graficos = :graficos, sonido = :sonido, jugabilidad = :jugabilidad, ");
 	strSQL.append("original = :original, estado = :estado, thumbs = :thumbs, cover_front = :cover_front, ");
 	strSQL.append("cover_back = :cover_back, comentario = :comentario, favorito = :favorito ");
-	strSQL.append("WHERE idgrl = :idgrl ;"); 
+	strSQL.append("WHERE idgrl = :idgrl;"); 
 	
 	QSqlQuery query;
 	query.prepare( strSQL );
@@ -233,7 +233,7 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 void dbSql::ItemActualizaDatosFavorito(const QString EstadoFav , const QString IDgrl )
 {
 	QSqlQuery query;
-	query.prepare( "UPDATE dbgrl SET favorito = :favorito WHERE idgrl = :idgrl ;" );
+	query.prepare( "UPDATE dbgrl SET favorito = :favorito WHERE idgrl = :idgrl;" );
 	query.bindValue(":favorito"	, EstadoFav );
 	query.bindValue(":idgrl"	, IDgrl     );	// idgrl
 	query.exec();
@@ -241,7 +241,7 @@ void dbSql::ItemActualizaDatosFavorito(const QString EstadoFav , const QString I
 
 QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString IDgrl)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_emu_dosbox (");
 	strSQL.append("idgrl, sdl_fullscreen, sdl_fulldouble, sdl_fullfixed, sdl_fullresolution, sdl_windowresolution, sdl_output, ");
@@ -366,7 +366,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	query.bindValue(":parametros_setup"			, datos["parametros_setup"]  );
 	query.exec();
 
-	if ( Chequear_Query( query ) )
+	if( Chequear_Query( query ) )
 	{
 		QVariant v;
 		v = query.lastInsertId();
@@ -377,7 +377,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 
 void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString IDdbx)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl_emu_dosbox SET ");
 	strSQL.append("sdl_fullscreen = :sdl_fullscreen , sdl_fulldouble = :sdl_fulldouble , sdl_fullfixed = :sdl_fullfixed , sdl_fullresolution = :sdl_fullresolution ,");
@@ -399,7 +399,7 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	strSQL.append("dos_xms = :dos_xms , dos_ems = :dos_ems , dos_umb = :dos_umb , dos_keyboardlayout = :dos_keyboardlayout , ipx_ipx = :ipx_ipx , autoexec = :autoexec , opt_autoexec = :opt_autoexec , opt_loadfix = :opt_loadfix ,");
 	strSQL.append("opt_loadfix_mem = :opt_loadfix_mem , opt_consola_dbox = :opt_consola_dbox , opt_cerrar_dbox = :opt_cerrar_dbox , opt_cycle_sincronizar = :opt_cycle_sincronizar ,");
 	strSQL.append("path_conf = :path_conf , path_sonido = :path_sonido , path_exe = :path_exe , path_setup = :path_setup , parametros_exe = :parametros_exe , parametros_setup = :parametros_setup ");
-	strSQL.append("WHERE id = :id ;"); 
+	strSQL.append("WHERE id = :id;"); 
 
 	QSqlQuery query;
 	query.prepare( strSQL );
@@ -501,8 +501,8 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 
 void dbSql::ItemInsertaMontajesDbx(QTreeWidget *treeWidget, const QString IDdbx)
 {
-	int num_mount;
-	QString strSQL ;
+	int num_mount = 0, num_items = 0;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_emu_dosbox_mount (");
 	strSQL.append("id_dosbox, id_lista, path, label, tipo_as, letter, indx_cd, opt_mount, io_ctrl, select_mount");
@@ -510,7 +510,9 @@ void dbSql::ItemInsertaMontajesDbx(QTreeWidget *treeWidget, const QString IDdbx)
 	strSQL.append(":id_dosbox, :id_lista, :path, :label, :tipo_as, :letter, :indx_cd, :opt_mount, :io_ctrl, :select_mount");
 	strSQL.append(")");
 
-	for ( num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
+	num_items = treeWidget->topLevelItemCount();
+
+	for ( num_mount = 0; num_mount < num_items; num_mount++ )
 	{
 		QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
 		QSqlQuery query;
@@ -531,7 +533,7 @@ void dbSql::ItemInsertaMontajesDbx(QTreeWidget *treeWidget, const QString IDdbx)
 
 QString dbSql::ItemInsertaUnMontajeDbx(const QHash<QString, QString> datos, const QString IDdbx)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_emu_dosbox_mount (");
 	strSQL.append("id_dosbox, id_lista, path, label, tipo_as, letter, indx_cd, opt_mount, io_ctrl, select_mount");
@@ -560,13 +562,13 @@ QString dbSql::ItemInsertaUnMontajeDbx(const QHash<QString, QString> datos, cons
 void dbSql::ItemActualizaMontajeDbx(QTreeWidget *treeWidget)
 {
 	int num_mount;
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl_emu_dosbox_mount SET ");
 	strSQL.append("id_lista = :id_lista, path = :path, label = :label, ");
 	strSQL.append("tipo_as = :tipo_as, letter = :letter, indx_cd = :indx_cd, opt_mount = :opt_mount, ");
 	strSQL.append("io_ctrl = :io_ctrl, select_mount = :select_mount ");
-	strSQL.append("WHERE id = :id ;");
+	strSQL.append("WHERE id = :id;");
 	for ( num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
 	{
 		QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
@@ -595,7 +597,7 @@ void dbSql::ItemEliminarMontaje( const QString IDmountdbx )
 
 void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString IDgrl)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_emu_scummvm (");
 	strSQL.append("idgrl, game, language, subtitles, platform, gfx_mode, render_mode, fullscreen, aspect_ratio, path, ");
@@ -647,7 +649,7 @@ void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString ID
 
 void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString IDsvm)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl_emu_scummvm SET "); 
 	strSQL.append("game = :game, language = :language, subtitles = :subtitles, platform = :platform, "); 
@@ -659,7 +661,7 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 	strSQL.append("debuglevel = :debuglevel, cdrom = :cdrom, joystick_num = :joystick_num, output_rate = :output_rate, ");
 	strSQL.append("midi_gain = :midi_gain, copy_protection = :copy_protection, sound_font = :sound_font ");
 	
-	strSQL.append("WHERE id = :id ;"); 
+	strSQL.append("WHERE id = :id;"); 
 	
 	QSqlQuery query;
 	query.prepare( strSQL );
@@ -700,7 +702,7 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 
 void dbSql::ItemInsertaVdms(const QHash<QString, QString> datos, const QString IDgrl)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_emu_vdmsound (");
 	strSQL.append("idgrl, path_conf, path_exe, program, vdms_debug, winnt_dos, winnt_dosbox, winnt_storage ");
@@ -723,12 +725,12 @@ void dbSql::ItemInsertaVdms(const QHash<QString, QString> datos, const QString I
 
 void dbSql::ItemActualizaVdms(const QHash<QString, QString> datos, const QString IDvdms)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl_emu_vdmsound SET "); 
 	strSQL.append("path_conf = :path_conf, path_exe = :path_exe, program = :program, vdms_debug = :vdms_debug, "); 
 	strSQL.append("winnt_dos = :winnt_dos, winnt_dosbox = :winnt_dosbox, winnt_storage = :winnt_storage ");
-	strSQL.append("WHERE id = :id ;"); 
+	strSQL.append("WHERE id = :id;"); 
 
 	QSqlQuery query;
 	query.prepare( strSQL );
@@ -746,7 +748,7 @@ void dbSql::ItemActualizaVdms(const QHash<QString, QString> datos, const QString
 void dbSql::ItemInsertaFiles(QTreeWidget *treeWidget, const QString IDgrl)
 {
 	int num_file;
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_file (");
 	strSQL.append("idgrl, nombre, crc, descripcion, path, size");
@@ -770,7 +772,7 @@ void dbSql::ItemInsertaFiles(QTreeWidget *treeWidget, const QString IDgrl)
 
 QString dbSql::ItemInsertaUnFiles(const QHash<QString, QString> datos, const QString IDgrl)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_file (");
 	strSQL.append("idgrl, nombre, crc, descripcion, path, size");
@@ -793,11 +795,11 @@ QString dbSql::ItemInsertaUnFiles(const QHash<QString, QString> datos, const QSt
 
 void dbSql::ItemActualizaFiles(const QHash<QString, QString> datos, const QString IDFiles)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl_file SET "); 
 	strSQL.append("nombre = :nombre, crc = :crc, descripcion = :descripcion, path = :path, size = :size "); 
-	strSQL.append("WHERE id = :id ;"); 
+	strSQL.append("WHERE id = :id;"); 
 
 	QSqlQuery query;
 	query.prepare( strSQL );
@@ -820,7 +822,7 @@ void dbSql::ItemEliminarFiles( const QString IDFiles )
 void dbSql::ItemInsertaURL(QTreeWidget *treeWidget, const QString IDgrl)
 {
 	int num_url;
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_url ( idgrl, url, descripcion ) VALUES ( :idgrl, :url, :descripcion )");
 
@@ -838,7 +840,7 @@ void dbSql::ItemInsertaURL(QTreeWidget *treeWidget, const QString IDgrl)
 
 QString dbSql::ItemInsertaUnURL(const QHash<QString, QString> datos, const QString IDgrl)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_url ( idgrl, url, descripcion ) VALUES ( :idgrl, :url, :descripcion )");
 	
@@ -855,9 +857,9 @@ QString dbSql::ItemInsertaUnURL(const QHash<QString, QString> datos, const QStri
 
 void dbSql::ItemActualizaURL(const QHash<QString, QString> datos, const QString IDURL)
 {
-	QString strSQL ;
+	QString strSQL;
 	strSQL.clear();
-	strSQL.append("UPDATE dbgrl_url SET url = :url, descripcion = :descripcion WHERE id = :id ;"); 
+	strSQL.append("UPDATE dbgrl_url SET url = :url, descripcion = :descripcion WHERE id = :id;"); 
 
 	QSqlQuery query;
 	query.prepare( strSQL );

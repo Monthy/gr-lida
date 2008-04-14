@@ -533,7 +533,7 @@
         <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtSvm_1" >
+      <widget class="QLineEdit" name="txtDatos_Titulo" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -543,7 +543,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtSvm_2" >
+      <widget class="QLineEdit" name="txtSvm_game_label" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -553,7 +553,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtSvm_3" >
+      <widget class="QLineEdit" name="txtSvm_path" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -563,7 +563,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxSvm_2" >
+      <widget class="QComboBox" name="cbxSvm_platform" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -573,7 +573,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtSvm_4" >
+      <widget class="QLineEdit" name="txtSvm_savepath" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -661,7 +661,7 @@
         <string>Plataforma:</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxSvm_1" >
+      <widget class="QComboBox" name="cbxSvm_language" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -671,7 +671,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkSvm_1" >
+      <widget class="QCheckBox" name="chkSvm_subtitles" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -686,7 +686,7 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_3" >
-      <widget class="QCheckBox" name="chkSvm_2" >
+      <widget class="QCheckBox" name="chkSvm_fullscreen" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -699,7 +699,7 @@
         <string>Pantalla Completa</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkSvm_3" >
+      <widget class="QCheckBox" name="chkSvm_aspect_ratio" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -712,7 +712,7 @@
         <string>Aspect-ratio</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxSvm_6" >
+      <widget class="QComboBox" name="cbxSvm_cdrom" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -722,7 +722,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxSvm_7" >
+      <widget class="QComboBox" name="cbxSvm_joystick_num" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -800,7 +800,7 @@
         <string>Joystick:</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxSvm_3" >
+      <widget class="QComboBox" name="cbxSvm_gfx_mode" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -813,7 +813,7 @@
         <number>-1</number>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxSvm_4" >
+      <widget class="QComboBox" name="cbxSvm_render_mode" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -825,7 +825,7 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_4" >
-      <widget class="QComboBox" name="cbxSvm_5" >
+      <widget class="QComboBox" name="cbxSvm_music_driver" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -835,7 +835,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkSvm_4" >
+      <widget class="QCheckBox" name="chkSvm_multi_midi" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -848,7 +848,7 @@
         <string>Mixed Adlib/MIDI mode</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkSvm_5" >
+      <widget class="QCheckBox" name="chkSvm_native_mt32" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -877,7 +877,7 @@
         <iconset resource="../res/grlida.qrc" >:/img16/actualizar.png</iconset>
        </property>
       </widget>
-      <widget class="QSlider" name="h_SliderSvm_6" >
+      <widget class="QSlider" name="h_SliderSvm_debuglevel" >
        <property name="geometry" >
         <rect>
          <x>160</x>
@@ -893,7 +893,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QSlider" name="h_SliderSvm_5" >
+      <widget class="QSlider" name="h_SliderSvm_talkspeed" >
        <property name="geometry" >
         <rect>
          <x>160</x>
@@ -912,7 +912,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QSlider" name="h_SliderSvm_4" >
+      <widget class="QSlider" name="h_SliderSvm_tempo" >
        <property name="geometry" >
         <rect>
          <x>160</x>
@@ -934,7 +934,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QSlider" name="h_SliderSvm_3" >
+      <widget class="QSlider" name="h_SliderSvm_speech_volume" >
        <property name="geometry" >
         <rect>
          <x>160</x>
@@ -953,7 +953,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QSlider" name="h_SliderSvm_2" >
+      <widget class="QSlider" name="h_SliderSvm_sfx_volume" >
        <property name="geometry" >
         <rect>
          <x>160</x>
@@ -972,7 +972,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QSlider" name="h_SliderSvm_1" >
+      <widget class="QSlider" name="h_SliderSvm_music_volume" >
        <property name="geometry" >
         <rect>
          <x>160</x>
@@ -1160,7 +1160,7 @@
         <string>192</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkSvm_6" >
+      <widget class="QCheckBox" name="chkSvm_enable_gs" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -1358,32 +1358,32 @@ Pulsa Aceptar para cerrar el Asistente
  </widget>
  <tabstops>
   <tabstop>twScummVM</tabstop>
-  <tabstop>txtSvm_1</tabstop>
-  <tabstop>txtSvm_2</tabstop>
-  <tabstop>txtSvm_3</tabstop>
+  <tabstop>txtDatos_Titulo</tabstop>
+  <tabstop>txtSvm_game_label</tabstop>
+  <tabstop>txtSvm_path</tabstop>
   <tabstop>btnDirSvm_1</tabstop>
-  <tabstop>txtSvm_4</tabstop>
+  <tabstop>txtSvm_savepath</tabstop>
   <tabstop>btnDirSvm_2</tabstop>
-  <tabstop>cbxSvm_1</tabstop>
-  <tabstop>chkSvm_1</tabstop>
-  <tabstop>cbxSvm_2</tabstop>
-  <tabstop>cbxSvm_3</tabstop>
-  <tabstop>cbxSvm_4</tabstop>
-  <tabstop>chkSvm_2</tabstop>
-  <tabstop>chkSvm_3</tabstop>
-  <tabstop>cbxSvm_6</tabstop>
-  <tabstop>cbxSvm_7</tabstop>
-  <tabstop>cbxSvm_5</tabstop>
-  <tabstop>h_SliderSvm_1</tabstop>
-  <tabstop>h_SliderSvm_2</tabstop>
-  <tabstop>h_SliderSvm_3</tabstop>
-  <tabstop>h_SliderSvm_4</tabstop>
-  <tabstop>h_SliderSvm_5</tabstop>
-  <tabstop>h_SliderSvm_6</tabstop>
+  <tabstop>cbxSvm_language</tabstop>
+  <tabstop>chkSvm_subtitles</tabstop>
+  <tabstop>cbxSvm_platform</tabstop>
+  <tabstop>cbxSvm_gfx_mode</tabstop>
+  <tabstop>cbxSvm_render_mode</tabstop>
+  <tabstop>chkSvm_fullscreen</tabstop>
+  <tabstop>chkSvm_aspect_ratio</tabstop>
+  <tabstop>cbxSvm_cdrom</tabstop>
+  <tabstop>cbxSvm_joystick_num</tabstop>
+  <tabstop>cbxSvm_music_driver</tabstop>
+  <tabstop>h_SliderSvm_music_volume</tabstop>
+  <tabstop>h_SliderSvm_sfx_volume</tabstop>
+  <tabstop>h_SliderSvm_speech_volume</tabstop>
+  <tabstop>h_SliderSvm_tempo</tabstop>
+  <tabstop>h_SliderSvm_talkspeed</tabstop>
+  <tabstop>h_SliderSvm_debuglevel</tabstop>
   <tabstop>btnDefectoSvm</tabstop>
-  <tabstop>chkSvm_4</tabstop>
-  <tabstop>chkSvm_5</tabstop>
-  <tabstop>chkSvm_6</tabstop>
+  <tabstop>chkSvm_multi_midi</tabstop>
+  <tabstop>chkSvm_native_mt32</tabstop>
+  <tabstop>chkSvm_enable_gs</tabstop>
   <tabstop>btnNext</tabstop>
   <tabstop>btnPrevious</tabstop>
   <tabstop>btnOk</tabstop>
@@ -1410,7 +1410,7 @@ Pulsa Aceptar para cerrar el Asistente
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_1</sender>
+   <sender>h_SliderSvm_music_volume</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_1</receiver>
    <slot>setNum(int)</slot>
@@ -1426,7 +1426,7 @@ Pulsa Aceptar para cerrar el Asistente
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_2</sender>
+   <sender>h_SliderSvm_sfx_volume</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_2</receiver>
    <slot>setNum(int)</slot>
@@ -1442,7 +1442,7 @@ Pulsa Aceptar para cerrar el Asistente
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_3</sender>
+   <sender>h_SliderSvm_speech_volume</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_3</receiver>
    <slot>setNum(int)</slot>
@@ -1458,7 +1458,7 @@ Pulsa Aceptar para cerrar el Asistente
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_4</sender>
+   <sender>h_SliderSvm_tempo</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_4</receiver>
    <slot>setNum(int)</slot>
@@ -1474,7 +1474,7 @@ Pulsa Aceptar para cerrar el Asistente
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_5</sender>
+   <sender>h_SliderSvm_talkspeed</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_5</receiver>
    <slot>setNum(int)</slot>
@@ -1490,7 +1490,7 @@ Pulsa Aceptar para cerrar el Asistente
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_6</sender>
+   <sender>h_SliderSvm_debuglevel</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_6</receiver>
    <slot>setNum(int)</slot>

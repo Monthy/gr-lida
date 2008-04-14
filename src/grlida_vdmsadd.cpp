@@ -55,16 +55,16 @@ void frmVdmsAdd::on_btnOk()
 {
 	bool siguiente;
 
-	QFile appConfg( stHomeDir + "confvdms/"+ ui.txtVdms_1->text() );
+	QFile appConfg( stHomeDir + "confvdms/"+ ui.txtVdms_path_conf->text() );
 
-	if ( ui.txtDatos_1->text().isEmpty() )
+	if ( ui.txtDatos_Titulo->text().isEmpty() )
 	{
 		siguiente = false;
 		QMessageBox::information( this, stTituloVdms(), tr("Debes poner por lo menos el titulo."));
 	} else {
 		siguiente = true;
 
-		if( ui.txtVdms_1->text().isEmpty() )
+		if( ui.txtVdms_path_conf->text().isEmpty() )
 		{
 			siguiente = false;
 			QMessageBox::information(this, stTituloVdms(), tr("Debes indicar el archivo de Configuración para el VDMSound"));
@@ -76,11 +76,11 @@ void frmVdmsAdd::on_btnOk()
 				QMessageBox::information( this, stTituloVdms(), tr("El archivo de Configuración para el VDMSound ya esixte"));
 			} else {
 				siguiente = true;
-				if( ui.txtVdms_2->text().isEmpty() )
+				if( ui.txtVdms_path_exe->text().isEmpty() )
 				{
 					siguiente = false;
 					QMessageBox::information(this, stTituloVdms(), tr("Debes indicar el Ejecutable del juego"));
-				} else 
+				} else
 					siguiente = true;
 			}
 		}
@@ -90,7 +90,7 @@ void frmVdmsAdd::on_btnOk()
 	{
 		DatosJuego.clear();
 		DatosJuego["icono"]			= "vdmsound"		;//icono
-		DatosJuego["titulo"]		= ui.txtDatos_1->text();//titulo
+		DatosJuego["titulo"]		= ui.txtDatos_Titulo->text();//titulo
 		DatosJuego["subtitulo"] 	= ""			;//subtitulo
 		DatosJuego["genero"] 		= ""			;//genero
 		DatosJuego["compania"] 		= ""			;//compania
@@ -116,10 +116,10 @@ void frmVdmsAdd::on_btnOk()
 		DatosJuego["favorito"]		= "false"		;//favorito
 
 		DatosVDMSound.clear();
-		DatosVDMSound["path_conf"]       = ui.txtVdms_1->text()	; //
-		DatosVDMSound["path_exe"]        = ui.txtVdms_2->text()	; //
-		DatosVDMSound["program_1"]       = ui.txtVdms_3->text() ; //
-		DatosVDMSound["program_2"]       = ui.txtVdms_4->text()	; //
+		DatosVDMSound["path_conf"]       = ui.txtVdms_path_conf->text()	; //
+		DatosVDMSound["path_exe"]        = ui.txtVdms_path_exe->text()	; //
+		DatosVDMSound["program_1"]       = ui.txtVdms_params->text() ; //
+		DatosVDMSound["program_2"]       = ui.txtVdms_icon->text()	; //
 		DatosVDMSound["vdms_debug_1"]    = "no"		; //
 		DatosVDMSound["vdms_debug_2"]    = ""		; //
 		DatosVDMSound["winnt_dos_1"]     = "no"		; //
@@ -138,7 +138,7 @@ void frmVdmsAdd::on_btnVdms_FileConfg()
 {
 	bool str_ok;
 	QString str, archivo;
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stConfgVdmSDir, ui.txtVdms_1->text(), tr("Todos los archivo") + " (*)", 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stConfgVdmSDir, ui.txtVdms_path_conf->text(), tr("Todos los archivo") + " (*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -149,34 +149,34 @@ void frmVdmsAdd::on_btnVdms_FileConfg()
 			str = fGrl.eliminar_caracteres( str );
 	  		str_ok = str.endsWith(".vlp");
 			if(str_ok == false) str.append(".vlp");
-			ui.txtVdms_1->setText( str );
+			ui.txtVdms_path_conf->setText( str );
 		} else {
 			QMessageBox::information( this, stTituloVdms(), tr("El archivo de Configuración para el VDMSound ya esixte"));
-			ui.txtVdms_1->setText("");
+			ui.txtVdms_path_conf->setText("");
 		}
-	}else ui.txtVdms_1->setText( "" );
+	}else ui.txtVdms_path_conf->setText( "" );
 }
 
 void frmVdmsAdd::on_btnVdms_ExeJuego()
 {
-	ui.txtVdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmVdmsAdd::on_btnVdms_Icono()
 {
-	ui.txtVdms_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_4->text(), tr("Todos los archivo") + " (*)", 0, false)+ ",0");
+	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false)+ ",0");
 }
 
-void frmVdmsAdd::on_txtDatos_1_textChanged(const QString &)
+void frmVdmsAdd::on_txtDatos_Titulo_textChanged(const QString &)
 {
 	bool str_ok;
-	QString str = ui.txtDatos_1->text();
+	QString str = ui.txtDatos_Titulo->text();
 	if(str != "")
 	{
 		str = fGrl.eliminar_caracteres( str );
   		str_ok = str.endsWith(".vlp");
 		if(str_ok == false) str.append(".vlp");
-		ui.txtVdms_1->setText( str );
+		ui.txtVdms_path_conf->setText( str );
 	} else
-		ui.txtVdms_1->setText( "" );
+		ui.txtVdms_path_conf->setText( "" );
 }

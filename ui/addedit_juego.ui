@@ -73,7 +73,7 @@
          <property name="title" >
           <string>Datos generales del juego</string>
          </property>
-         <widget class="QComboBox" name="cbxDatos_12" >
+         <widget class="QComboBox" name="cbxDatos_Sonido" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -83,7 +83,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_13" >
+         <widget class="QComboBox" name="cbxDatos_Jugabilidad" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -93,7 +93,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_11" >
+         <widget class="QComboBox" name="cbxDatos_Graficos" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -125,7 +125,7 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_9" >
+         <widget class="QComboBox" name="cbxDatos_Icono" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -141,7 +141,7 @@
            </size>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtDatos_2" >
+         <widget class="QLineEdit" name="txtDatos_Subtitulo" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -151,7 +151,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtDatos_3" >
+         <widget class="QLineEdit" name="txtDatos_Tamano" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -161,7 +161,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_1" >
+         <widget class="QComboBox" name="cbxDatos_Genero" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -174,7 +174,7 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_2" >
+         <widget class="QComboBox" name="cbxDatos_Compania" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -187,7 +187,7 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_3" >
+         <widget class="QComboBox" name="cbxDatos_Desarrollador" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -200,7 +200,7 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_10" >
+         <widget class="QComboBox" name="cbxDatos_SistemaOp" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -213,7 +213,7 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_6" >
+         <widget class="QComboBox" name="cbxDatos_Formato" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -226,7 +226,7 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_8" >
+         <widget class="QComboBox" name="cbxDatos_NumDisc" >
           <property name="geometry" >
            <rect>
             <x>310</x>
@@ -239,7 +239,7 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_7" >
+         <widget class="QComboBox" name="cbxDatos_Anno" >
           <property name="geometry" >
            <rect>
             <x>310</x>
@@ -252,7 +252,7 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_4" >
+         <widget class="QComboBox" name="cbxDatos_Tema" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -265,7 +265,7 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QCheckBox" name="chkDatos_1" >
+         <widget class="QCheckBox" name="chkDatos_Original" >
           <property name="geometry" >
            <rect>
             <x>170</x>
@@ -278,7 +278,7 @@
            <string>Juego Original</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtDatos_1" >
+         <widget class="QLineEdit" name="txtDatos_Titulo" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -589,7 +589,7 @@
            <string>Nº Cds:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="lbImage_3" >
+         <widget class="QLabel" name="lbImg_CoverBack" >
           <property name="geometry" >
            <rect>
             <x>440</x>
@@ -638,7 +638,7 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QLabel" name="lbImage_1" >
+         <widget class="QLabel" name="lbImg_Thumbs" >
           <property name="geometry" >
            <rect>
             <x>440</x>
@@ -690,7 +690,7 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_15" >
+         <widget class="QComboBox" name="cbxDatos_TipoEmu" >
           <property name="geometry" >
            <rect>
             <x>460</x>
@@ -732,7 +732,7 @@
            </property>
           </item>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_5" >
+         <widget class="QComboBox" name="cbxDatos_Idioma" >
           <property name="geometry" >
            <rect>
             <x>100</x>
@@ -745,7 +745,7 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QComboBox" name="cbxDatos_14" >
+         <widget class="QComboBox" name="cbxDatos_Estado" >
           <property name="geometry" >
            <rect>
             <x>170</x>
@@ -758,7 +758,7 @@
            <bool>false</bool>
           </property>
          </widget>
-         <widget class="QToolButton" name="btnImgVer_1" >
+         <widget class="QToolButton" name="btnImgVer_Thumbs" >
           <property name="enabled" >
            <bool>false</bool>
           </property>
@@ -780,7 +780,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/capturas.png</iconset>
           </property>
          </widget>
-         <widget class="QToolButton" name="btnImgAbrir_3" >
+         <widget class="QToolButton" name="btnImgAbrir_CoverBack" >
           <property name="geometry" >
            <rect>
             <x>440</x>
@@ -799,7 +799,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
-         <widget class="QToolButton" name="btnImgVer_3" >
+         <widget class="QToolButton" name="btnImgVer_CoverBack" >
           <property name="enabled" >
            <bool>false</bool>
           </property>
@@ -821,7 +821,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/capturas.png</iconset>
           </property>
          </widget>
-         <widget class="QToolButton" name="btnImgAbrir_2" >
+         <widget class="QToolButton" name="btnImgAbrir_CoverFront" >
           <property name="geometry" >
            <rect>
             <x>290</x>
@@ -840,7 +840,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
-         <widget class="QToolButton" name="btnImgVer_2" >
+         <widget class="QToolButton" name="btnImgVer_CoverFront" >
           <property name="enabled" >
            <bool>false</bool>
           </property>
@@ -862,7 +862,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/capturas.png</iconset>
           </property>
          </widget>
-         <widget class="QLabel" name="lbImage_2" >
+         <widget class="QLabel" name="lbImg_CoverFront" >
           <property name="geometry" >
            <rect>
             <x>290</x>
@@ -911,7 +911,7 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QToolButton" name="btnImgAbrir_1" >
+         <widget class="QToolButton" name="btnImgAbrir_Thumbs" >
           <property name="geometry" >
            <rect>
             <x>440</x>
@@ -930,7 +930,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
-         <widget class="QToolButton" name="btnImgEliminar_1" >
+         <widget class="QToolButton" name="btnImgEliminar_Thumbs" >
           <property name="enabled" >
            <bool>false</bool>
           </property>
@@ -952,7 +952,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
           </property>
          </widget>
-         <widget class="QToolButton" name="btnImgEliminar_3" >
+         <widget class="QToolButton" name="btnImgEliminar_CoverBack" >
           <property name="enabled" >
            <bool>false</bool>
           </property>
@@ -974,7 +974,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
           </property>
          </widget>
-         <widget class="QToolButton" name="btnImgEliminar_2" >
+         <widget class="QToolButton" name="btnImgEliminar_CoverFront" >
           <property name="enabled" >
            <bool>false</bool>
           </property>
@@ -996,7 +996,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
           </property>
          </widget>
-         <widget class="QCheckBox" name="chkDatos_2" >
+         <widget class="QCheckBox" name="chkDatos_Favorito" >
           <property name="geometry" >
            <rect>
             <x>170</x>
@@ -1077,7 +1077,7 @@
             <property name="frameShadow" >
              <enum>QFrame::Raised</enum>
             </property>
-            <widget class="QToolButton" name="btnTool_1" >
+            <widget class="QToolButton" name="btnTool_Cortar" >
              <property name="geometry" >
               <rect>
                <x>0</x>
@@ -1102,7 +1102,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_cut.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_2" >
+            <widget class="QToolButton" name="btnTool_Copiar" >
              <property name="geometry" >
               <rect>
                <x>27</x>
@@ -1133,7 +1133,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_copy.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_3" >
+            <widget class="QToolButton" name="btnTool_Pegar" >
              <property name="geometry" >
               <rect>
                <x>53</x>
@@ -1164,7 +1164,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_paste.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_8" >
+            <widget class="QToolButton" name="btnTool_TextoCursiva" >
              <property name="geometry" >
               <rect>
                <x>193</x>
@@ -1195,7 +1195,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_cursiva.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_9" >
+            <widget class="QToolButton" name="btnTool_TextoSubrayado" >
              <property name="geometry" >
               <rect>
                <x>219</x>
@@ -1226,7 +1226,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_subrayada.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_10" >
+            <widget class="QToolButton" name="btnTool_InsertarImg" >
              <property name="geometry" >
               <rect>
                <x>250</x>
@@ -1257,7 +1257,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_imagen.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_11" >
+            <widget class="QToolButton" name="btnTool_InsertaUrl" >
              <property name="geometry" >
               <rect>
                <x>276</x>
@@ -1288,7 +1288,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_enlace.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_12" >
+            <widget class="QToolButton" name="btnTool_Buscar" >
              <property name="geometry" >
               <rect>
                <x>307</x>
@@ -1316,7 +1316,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_buscar.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_13" >
+            <widget class="QToolButton" name="btnTool_BuscarAnterior" >
              <property name="geometry" >
               <rect>
                <x>333</x>
@@ -1338,13 +1338,13 @@
               </size>
              </property>
              <property name="text" >
-              <string>Buscar anterios</string>
+              <string>Buscar anterior</string>
              </property>
              <property name="icon" >
               <iconset resource="../res/grlida.qrc" >:/img16/edit_buscar_anterior.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_14" >
+            <widget class="QToolButton" name="btnTool_BuscarSiguiente" >
              <property name="geometry" >
               <rect>
                <x>359</x>
@@ -1372,7 +1372,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_buscar_siguiente.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_15" >
+            <widget class="QToolButton" name="btnTool_Reemplazar" >
              <property name="geometry" >
               <rect>
                <x>385</x>
@@ -1400,7 +1400,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_reemplazar.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_16" >
+            <widget class="QToolButton" name="btnTool_Preview" >
              <property name="geometry" >
               <rect>
                <x>416</x>
@@ -1434,7 +1434,7 @@
               <enum>Qt::ToolButtonIconOnly</enum>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_4" >
+            <widget class="QToolButton" name="btnTool_SelectAll" >
              <property name="geometry" >
               <rect>
                <x>79</x>
@@ -1465,7 +1465,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_select_all.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_5" >
+            <widget class="QToolButton" name="btnTool_Deshacer" >
              <property name="geometry" >
               <rect>
                <x>110</x>
@@ -1496,7 +1496,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_deshacer.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_6" >
+            <widget class="QToolButton" name="btnTool_Rehacer" >
              <property name="geometry" >
               <rect>
                <x>136</x>
@@ -1527,7 +1527,7 @@
               <iconset resource="../res/grlida.qrc" >:/img16/edit_rehacer.png</iconset>
              </property>
             </widget>
-            <widget class="QToolButton" name="btnTool_7" >
+            <widget class="QToolButton" name="btnTool_TextoNegrita" >
              <property name="geometry" >
               <rect>
                <x>167</x>
@@ -1600,7 +1600,7 @@
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QTextEdit" name="txtDatos_4" />
+                 <widget class="QTextEdit" name="txtDatos_Comentario" />
                 </item>
                 <item>
                  <widget class="QTextBrowser" name="html_preview" >
@@ -1869,10 +1869,10 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtDatos_5" />
+             <widget class="QLineEdit" name="txtDatosFiles_PathFile" />
             </item>
             <item>
-             <widget class="QPushButton" name="btnDatosFiles" >
+             <widget class="QPushButton" name="btnDatosFiles_PathFile" >
               <property name="maximumSize" >
                <size>
                 <width>30</width>
@@ -1949,7 +1949,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtDatos_6" />
+             <widget class="QLineEdit" name="txtDatosFiles_FileName" />
             </item>
             <item>
              <spacer>
@@ -2040,7 +2040,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="txtDatos_8" >
+                 <widget class="QLineEdit" name="txtDatosFiles_Crc32" >
                   <property name="sizePolicy" >
                    <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                     <horstretch>0</horstretch>
@@ -2100,7 +2100,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="txtDatos_9" >
+                 <widget class="QLineEdit" name="txtDatosFiles_Size" >
                   <property name="sizePolicy" >
                    <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                     <horstretch>0</horstretch>
@@ -2184,7 +2184,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QTextEdit" name="txtDatos_7" >
+               <widget class="QTextEdit" name="txtDatosFiles_Comentario" >
                 <property name="sizePolicy" >
                  <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
                   <horstretch>0</horstretch>
@@ -2398,7 +2398,7 @@
              <property name="title" >
               <string>Datos Generales para el DOSbox</string>
              </property>
-             <widget class="QLineEdit" name="txtDbx_6" >
+             <widget class="QLineEdit" name="txtDbx_parametros_setup" >
               <property name="geometry" >
                <rect>
                 <x>140</x>
@@ -2408,7 +2408,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_42" >
+             <widget class="QComboBox" name="cbxDbx_dos_keyboardlayout" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2457,7 +2457,7 @@
                <string>keyboardlayout -- Código de la lengua de la disposición de teclado (o ninguna) :</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_2" >
+             <widget class="QLineEdit" name="txtDbx_loadfix_mem" >
               <property name="geometry" >
                <rect>
                 <x>280</x>
@@ -2470,7 +2470,7 @@
                <string>64</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_5" >
+             <widget class="QLineEdit" name="txtDbx_path_setup" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2493,7 +2493,7 @@
                <string>Ejecutable (exe,com,bat) del Juego:</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_3" >
+             <widget class="QLineEdit" name="txtDbx_path_exe" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2516,7 +2516,7 @@
                <string>Parametros:</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_4" >
+             <widget class="QLineEdit" name="txtDbx_parametros_exe" >
               <property name="geometry" >
                <rect>
                 <x>140</x>
@@ -2526,7 +2526,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_1" >
+             <widget class="QCheckBox" name="chkDbx_loadfix" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2552,7 +2552,7 @@
                <string>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.conf</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="btnFileConfg" >
+             <widget class="QPushButton" name="btnDbx_FileConfg" >
               <property name="geometry" >
                <rect>
                 <x>460</x>
@@ -2571,7 +2571,7 @@
                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
-             <widget class="QPushButton" name="btnExeJuego" >
+             <widget class="QPushButton" name="btnDbx_ExeJuego" >
               <property name="geometry" >
                <rect>
                 <x>460</x>
@@ -2590,7 +2590,7 @@
                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
-             <widget class="QPushButton" name="btnExeSetup" >
+             <widget class="QPushButton" name="btnDbx_ExeSetup" >
               <property name="geometry" >
                <rect>
                 <x>460</x>
@@ -2622,7 +2622,7 @@
                <string>Ejecutable (exe,com,bat) Setup del Juego:</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_3" >
+             <widget class="QCheckBox" name="chkDbx_consola_dbox" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2635,7 +2635,7 @@
                <string>Cerrar la consola del DOSBox</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_2" >
+             <widget class="QCheckBox" name="chkDbx_cerrar_dbox" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2648,7 +2648,7 @@
                <string>Cerrar DOSBox al terminar el juego</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_1" >
+             <widget class="QLineEdit" name="txtDbx_path_conf" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2744,7 +2744,7 @@
              <property name="title" >
               <string>Opciones de pantalla, video, ratón y renderizado....</string>
              </property>
-             <widget class="QCheckBox" name="chkDbx_7" >
+             <widget class="QCheckBox" name="chkDbx_render_aspect" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2757,7 +2757,7 @@
                <string>aspect -- Aplicar corrección de aspecto</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_5" >
+             <widget class="QCheckBox" name="chkDbx_sdl_fullfixed" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2770,7 +2770,7 @@
                <string>fullfixed -- Fijar la resolución en pantalla completa</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_2" >
+             <widget class="QComboBox" name="cbxDbx_sdl_windowresolution" >
               <property name="geometry" >
                <rect>
                 <x>160</x>
@@ -2780,7 +2780,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_4" >
+             <widget class="QCheckBox" name="chkDbx_sdl_fullscreen" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2793,7 +2793,7 @@
                <string>fullscreen -- Iniciar dosbox directamente en pantalla completa</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_22" >
+             <widget class="QCheckBox" name="chkDbx_sdl_fulldouble" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2806,7 +2806,7 @@
                <string>fulldouble -- Usar doble búfer en pantalla completa</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_6" >
+             <widget class="QComboBox" name="cbxDbx_sdl_hwscale" >
               <property name="geometry" >
                <rect>
                 <x>450</x>
@@ -2819,7 +2819,7 @@
                <number>-1</number>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_7" >
+             <widget class="QComboBox" name="cbxDbx_sdl_sensitivity" >
               <property name="geometry" >
                <rect>
                 <x>450</x>
@@ -2832,7 +2832,7 @@
                <number>-1</number>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_1" >
+             <widget class="QComboBox" name="cbxDbx_sdl_fullresolution" >
               <property name="geometry" >
                <rect>
                 <x>160</x>
@@ -2949,7 +2949,7 @@
                <string>windowresolution:</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_6" >
+             <widget class="QCheckBox" name="chkDbx_sdl_autolock" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2965,7 +2965,7 @@
                <bool>true</bool>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_8" >
+             <widget class="QCheckBox" name="chkDbx_sdl_waitonerror" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2981,7 +2981,7 @@
                <bool>true</bool>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_9" >
+             <widget class="QCheckBox" name="chkDbx_sdl_usescancodes" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -2997,7 +2997,7 @@
                <bool>true</bool>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_3" >
+             <widget class="QComboBox" name="cbxDbx_sdl_output" >
               <property name="geometry" >
                <rect>
                 <x>160</x>
@@ -3007,7 +3007,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_4" >
+             <widget class="QComboBox" name="cbxDbx_dosbox_machine" >
               <property name="geometry" >
                <rect>
                 <x>160</x>
@@ -3017,7 +3017,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_5" >
+             <widget class="QComboBox" name="cbxDbx_render_scaler" >
               <property name="geometry" >
                <rect>
                 <x>160</x>
@@ -3059,7 +3059,7 @@
              <property name="title" >
               <string>Opciones de memoria, joystick y ciclos de emulación</string>
              </property>
-             <widget class="QComboBox" name="cbxDbx_8" >
+             <widget class="QComboBox" name="cbxDbx_dosbox_memsize" >
               <property name="geometry" >
                <rect>
                 <x>420</x>
@@ -3072,7 +3072,7 @@
                <number>-1</number>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_10" >
+             <widget class="QComboBox" name="cbxDbx_render_frameskip" >
               <property name="geometry" >
                <rect>
                 <x>420</x>
@@ -3085,7 +3085,7 @@
                <number>-1</number>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_12" >
+             <widget class="QComboBox" name="cbxDbx_cpu_cycles" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3120,7 +3120,7 @@
                <number>20</number>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_11" >
+             <widget class="QComboBox" name="cbxDbx_dos_umb" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3145,7 +3145,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_12" >
+             <widget class="QCheckBox" name="chkDbx_cycle_sincronizar" >
               <property name="geometry" >
                <rect>
                 <x>340</x>
@@ -3158,7 +3158,7 @@
                <string>Sincronizar. Arriba/Abajo</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_9" >
+             <widget class="QComboBox" name="cbxDbx_cpu_core" >
               <property name="geometry" >
                <rect>
                 <x>420</x>
@@ -3258,7 +3258,7 @@
                <string>Emulador de joystick:</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_10" >
+             <widget class="QCheckBox" name="chkDbx_dos_xms" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3274,7 +3274,7 @@
                <bool>true</bool>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_11" >
+             <widget class="QCheckBox" name="chkDbx_dos_ems" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3303,7 +3303,7 @@
                <string>umb -- Activa o desactiva soporte para memoria UMB</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_13" >
+             <widget class="QComboBox" name="cbxDbx_joystick_type" >
               <property name="geometry" >
                <rect>
                 <x>130</x>
@@ -3319,7 +3319,7 @@
                <number>7</number>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_26" >
+             <widget class="QCheckBox" name="chkDbx_joystick_autofire" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3332,7 +3332,7 @@
                <string>autofire -- Disparo continuado mientras mantengas el botón presionado</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_27" >
+             <widget class="QCheckBox" name="chkDbx_joystick_swap34" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3345,7 +3345,7 @@
                <string>swap34 -- Intercambiar el 3ro y 4to eje. Puede ser útil para ciertas palancas de mando</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_25" >
+             <widget class="QCheckBox" name="chkDbx_joystick_timed" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3361,7 +3361,7 @@
                <bool>true</bool>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_28" >
+             <widget class="QCheckBox" name="chkDbx_joystick_buttonwrap" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3451,7 +3451,7 @@
                <string>Prebuffer:</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_13" >
+             <widget class="QCheckBox" name="chkDbx_mixer_nosound" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3480,7 +3480,7 @@
                <string>Frecuencia:</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_14" >
+             <widget class="QComboBox" name="cbxDbx_mixer_rate" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3521,7 +3521,7 @@
                <string>Bloque:</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_7" >
+             <widget class="QLineEdit" name="txtDbx_mixer_blocksize" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3534,7 +3534,7 @@
                <string>2048</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_8" >
+             <widget class="QLineEdit" name="txtDbx_mixer_prebuffer" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -3563,7 +3563,7 @@
                <attribute name="title" >
                 <string>Sound Blaster</string>
                </attribute>
-               <widget class="QComboBox" name="cbxDbx_21" >
+               <widget class="QComboBox" name="cbxDbx_sblaster_oplrate" >
                 <property name="geometry" >
                  <rect>
                   <x>350</x>
@@ -3591,7 +3591,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_15" >
+               <widget class="QComboBox" name="cbxDbx_sblaster_sbtype" >
                 <property name="geometry" >
                  <rect>
                   <x>130</x>
@@ -3604,7 +3604,7 @@
                  <number>-1</number>
                 </property>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_16" >
+               <widget class="QComboBox" name="cbxDbx_sblaster_sbbase" >
                 <property name="geometry" >
                  <rect>
                   <x>130</x>
@@ -3642,7 +3642,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_17" >
+               <widget class="QComboBox" name="cbxDbx_sblaster_irq" >
                 <property name="geometry" >
                  <rect>
                   <x>130</x>
@@ -3680,7 +3680,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_18" >
+               <widget class="QComboBox" name="cbxDbx_sblaster_dma" >
                 <property name="geometry" >
                  <rect>
                   <x>130</x>
@@ -3708,7 +3708,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_19" >
+               <widget class="QComboBox" name="cbxDbx_sblaster_hdma" >
                 <property name="geometry" >
                  <rect>
                   <x>130</x>
@@ -3736,7 +3736,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_20" >
+               <widget class="QComboBox" name="cbxDbx_sblaster_oplmode" >
                 <property name="geometry" >
                  <rect>
                   <x>350</x>
@@ -3840,7 +3840,7 @@
                  <string>Frecuencia:</string>
                 </property>
                </widget>
-               <widget class="QCheckBox" name="chkDbx_14" >
+               <widget class="QCheckBox" name="chkDbx_sblaster_mixer" >
                 <property name="geometry" >
                  <rect>
                   <x>10</x>
@@ -3861,7 +3861,7 @@
                <attribute name="title" >
                 <string>Gravis Ultrasound</string>
                </attribute>
-               <widget class="QCheckBox" name="chkDbx_15" >
+               <widget class="QCheckBox" name="chkDbx_gus_gus" >
                 <property name="geometry" >
                  <rect>
                   <x>10</x>
@@ -3877,7 +3877,7 @@
                  <bool>true</bool>
                 </property>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_22" >
+               <widget class="QComboBox" name="cbxDbx_gus_gusbase" >
                 <property name="geometry" >
                  <rect>
                   <x>70</x>
@@ -3915,7 +3915,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_23" >
+               <widget class="QComboBox" name="cbxDbx_gus_irq1" >
                 <property name="geometry" >
                  <rect>
                   <x>70</x>
@@ -3953,7 +3953,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_24" >
+               <widget class="QComboBox" name="cbxDbx_gus_irq2" >
                 <property name="geometry" >
                  <rect>
                   <x>70</x>
@@ -3991,7 +3991,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_25" >
+               <widget class="QComboBox" name="cbxDbx_gus_gusrate" >
                 <property name="geometry" >
                  <rect>
                   <x>250</x>
@@ -4019,7 +4019,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_26" >
+               <widget class="QComboBox" name="cbxDbx_gus_dma1" >
                 <property name="geometry" >
                  <rect>
                   <x>250</x>
@@ -4047,7 +4047,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_27" >
+               <widget class="QComboBox" name="cbxDbx_gus_dma2" >
                 <property name="geometry" >
                  <rect>
                   <x>250</x>
@@ -4153,7 +4153,7 @@
                  <string>Address:</string>
                 </property>
                </widget>
-               <widget class="QLineEdit" name="txtDbx_9" >
+               <widget class="QLineEdit" name="txtDbx_gus_ultradir" >
                 <property name="geometry" >
                  <rect>
                   <x>10</x>
@@ -4190,7 +4190,7 @@
                <attribute name="title" >
                 <string>MIDI</string>
                </attribute>
-               <widget class="QCheckBox" name="chkDbx_16" >
+               <widget class="QCheckBox" name="chkDbx_activar_mpu401" >
                 <property name="geometry" >
                  <rect>
                   <x>10</x>
@@ -4206,7 +4206,7 @@
                  <bool>true</bool>
                 </property>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_28" >
+               <widget class="QComboBox" name="cbxDbx_midi_mpu401" >
                 <property name="geometry" >
                  <rect>
                   <x>330</x>
@@ -4219,7 +4219,7 @@
                  <number>-1</number>
                 </property>
                </widget>
-               <widget class="QCheckBox" name="chkDbx_17" >
+               <widget class="QCheckBox" name="chkDbx_midi_intelligent" >
                 <property name="geometry" >
                  <rect>
                   <x>10</x>
@@ -4235,7 +4235,7 @@
                  <bool>true</bool>
                 </property>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_29" >
+               <widget class="QComboBox" name="cbxDbx_midi_device" >
                 <property name="geometry" >
                  <rect>
                   <x>330</x>
@@ -4248,7 +4248,7 @@
                  <number>-1</number>
                 </property>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_30" >
+               <widget class="QComboBox" name="cbxDbx_midi_mt32rate" >
                 <property name="geometry" >
                  <rect>
                   <x>330</x>
@@ -4318,7 +4318,7 @@
                  <string>Opciones de configuración especiales para el dispositivo:</string>
                 </property>
                </widget>
-               <widget class="QLineEdit" name="txtDbx_10" >
+               <widget class="QLineEdit" name="txtDbx_midi_config" >
                 <property name="geometry" >
                  <rect>
                   <x>10</x>
@@ -4349,7 +4349,7 @@
                <attribute name="title" >
                 <string>Configuración Adicional</string>
                </attribute>
-               <widget class="QComboBox" name="cbxDbx_31" >
+               <widget class="QComboBox" name="cbxDbx_speaker_pcrate" >
                 <property name="geometry" >
                  <rect>
                   <x>360</x>
@@ -4377,7 +4377,7 @@
                  </property>
                 </item>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_33" >
+               <widget class="QComboBox" name="cbxDbx_speaker_tandy" >
                 <property name="geometry" >
                  <rect>
                   <x>80</x>
@@ -4418,7 +4418,7 @@
                  <string>Tandy:</string>
                 </property>
                </widget>
-               <widget class="QCheckBox" name="chkDbx_18" >
+               <widget class="QCheckBox" name="chkDbx_speaker_pcspeaker" >
                 <property name="geometry" >
                  <rect>
                   <x>10</x>
@@ -4434,7 +4434,7 @@
                  <bool>true</bool>
                 </property>
                </widget>
-               <widget class="QCheckBox" name="chkDbx_19" >
+               <widget class="QCheckBox" name="chkDbx_speaker_disney" >
                 <property name="geometry" >
                  <rect>
                   <x>10</x>
@@ -4450,7 +4450,7 @@
                  <bool>true</bool>
                 </property>
                </widget>
-               <widget class="QComboBox" name="cbxDbx_32" >
+               <widget class="QComboBox" name="cbxDbx_speaker_tandyrate" >
                 <property name="geometry" >
                  <rect>
                   <x>10</x>
@@ -4881,7 +4881,7 @@
              <property name="title" >
               <string>Opciones de comunicaciones como la red o modem</string>
              </property>
-             <widget class="QLineEdit" name="txtDbx_20" >
+             <widget class="QLineEdit" name="txtDbx_serial_4" >
               <property name="geometry" >
                <rect>
                 <x>70</x>
@@ -4894,7 +4894,7 @@
                <string>disabled</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_19" >
+             <widget class="QLineEdit" name="txtDbx_serial_3" >
               <property name="geometry" >
                <rect>
                 <x>70</x>
@@ -4907,7 +4907,7 @@
                <string>disabled</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_18" >
+             <widget class="QLineEdit" name="txtDbx_serial_2" >
               <property name="geometry" >
                <rect>
                 <x>70</x>
@@ -4920,7 +4920,7 @@
                <string>dummy</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_17" >
+             <widget class="QLineEdit" name="txtDbx_serial_1" >
               <property name="geometry" >
                <rect>
                 <x>70</x>
@@ -4933,7 +4933,7 @@
                <string>dummy</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="btnAddSerial" >
+             <widget class="QPushButton" name="btnDbx_AddSerial" >
               <property name="geometry" >
                <rect>
                 <x>470</x>
@@ -4949,7 +4949,7 @@
                <iconset resource="../res/grlida.qrc" >:/img16/applications.png</iconset>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_20" >
+             <widget class="QCheckBox" name="chkDbx_ipx_ipx" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -4965,7 +4965,7 @@
                <bool>true</bool>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_24" >
+             <widget class="QCheckBox" name="chkDbx_dserial_directserial" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -5176,7 +5176,7 @@
                <string>Modem comport:</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_43" >
+             <widget class="QComboBox" name="cbxDbx_modem_comport" >
               <property name="geometry" >
                <rect>
                 <x>480</x>
@@ -5209,7 +5209,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_40" >
+             <widget class="QComboBox" name="cbxDbx_dserial_bytesize" >
               <property name="geometry" >
                <rect>
                 <x>370</x>
@@ -5232,7 +5232,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_12" >
+             <widget class="QLineEdit" name="txtDbx_modem_listenport" >
               <property name="geometry" >
                <rect>
                 <x>370</x>
@@ -5245,7 +5245,7 @@
                <string>23</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_39" >
+             <widget class="QComboBox" name="cbxDbx_dserial_defaultbps" >
               <property name="geometry" >
                <rect>
                 <x>370</x>
@@ -5321,7 +5321,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_41" >
+             <widget class="QComboBox" name="cbxDbx_dserial_stopbit" >
               <property name="geometry" >
                <rect>
                 <x>370</x>
@@ -5344,7 +5344,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_38" >
+             <widget class="QComboBox" name="cbxDbx_type_serial" >
               <property name="geometry" >
                <rect>
                 <x>370</x>
@@ -5377,7 +5377,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_34" >
+             <widget class="QComboBox" name="cbxDbx_select_serial" >
               <property name="geometry" >
                <rect>
                 <x>140</x>
@@ -5410,7 +5410,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_37" >
+             <widget class="QComboBox" name="cbxDbx_dserial_parity" >
               <property name="geometry" >
                <rect>
                 <x>140</x>
@@ -5438,7 +5438,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_11" >
+             <widget class="QLineEdit" name="txtDbx_modem_irq" >
               <property name="geometry" >
                <rect>
                 <x>140</x>
@@ -5451,7 +5451,7 @@
                <string>1</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_36" >
+             <widget class="QComboBox" name="cbxDbx_dserial_realport" >
               <property name="geometry" >
                <rect>
                 <x>140</x>
@@ -5484,7 +5484,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QComboBox" name="cbxDbx_35" >
+             <widget class="QComboBox" name="cbxDbx_dserial_comport" >
               <property name="geometry" >
                <rect>
                 <x>140</x>
@@ -5507,7 +5507,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QCheckBox" name="chkDbx_23" >
+             <widget class="QCheckBox" name="chkDbx_modem_modem" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -5569,7 +5569,7 @@
                <number>4</number>
               </property>
               <item>
-               <widget class="QCheckBox" name="chkDbx_21" >
+               <widget class="QCheckBox" name="chkDbx_autoexec" >
                 <property name="text" >
                  <string>Activar Configuración manual del [autoexec] del DOSBox</string>
                 </property>
@@ -5611,7 +5611,7 @@
              <property name="title" >
               <string>Otras opciones como la prioridad del emulador, directorio de capturas y sonido, etc...</string>
              </property>
-             <widget class="QLineEdit" name="txtDbx_14" >
+             <widget class="QLineEdit" name="txtDbx_dosbox_language" >
               <property name="geometry" >
                <rect>
                 <x>20</x>
@@ -5621,7 +5621,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_15" >
+             <widget class="QLineEdit" name="txtDbx_dosbox_captures" >
               <property name="geometry" >
                <rect>
                 <x>20</x>
@@ -5631,7 +5631,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_16" >
+             <widget class="QLineEdit" name="txtDbx_path_sonido" >
               <property name="geometry" >
                <rect>
                 <x>20</x>
@@ -5829,7 +5829,7 @@
                <string>Directorio donde esta la musica del juego asi como la BSO, sonido:</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtDbx_13" >
+             <widget class="QLineEdit" name="txtDbx_sdl_mapperfile" >
               <property name="geometry" >
                <rect>
                 <x>20</x>
@@ -6142,7 +6142,7 @@
              <property name="title" >
               <string>Opciones Generales</string>
              </property>
-             <widget class="QComboBox" name="cbxSvm_6" >
+             <widget class="QComboBox" name="cbxSvm_cdrom" >
               <property name="geometry" >
                <rect>
                 <x>450</x>
@@ -6152,7 +6152,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxSvm_7" >
+             <widget class="QComboBox" name="cbxSvm_joystick_num" >
               <property name="geometry" >
                <rect>
                 <x>450</x>
@@ -6178,7 +6178,7 @@
                </property>
               </item>
              </widget>
-             <widget class="QComboBox" name="cbxSvm_4" >
+             <widget class="QComboBox" name="cbxSvm_render_mode" >
               <property name="geometry" >
                <rect>
                 <x>130</x>
@@ -6188,7 +6188,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtSvm_6" >
+             <widget class="QLineEdit" name="txtSvm_path_sonido" >
               <property name="geometry" >
                <rect>
                 <x>150</x>
@@ -6198,7 +6198,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtSvm_4" >
+             <widget class="QLineEdit" name="txtSvm_extrapath" >
               <property name="geometry" >
                <rect>
                 <x>150</x>
@@ -6208,17 +6208,17 @@
                </rect>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtSvm_1" >
+             <widget class="QLineEdit" name="txtSvm_game_label" >
               <property name="geometry" >
                <rect>
                 <x>130</x>
                 <y>20</y>
-                <width>201</width>
+                <width>221</width>
                 <height>22</height>
                </rect>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtSvm_5" >
+             <widget class="QLineEdit" name="txtSvm_path_capturas" >
               <property name="geometry" >
                <rect>
                 <x>150</x>
@@ -6345,7 +6345,7 @@
                <string>Joystick:</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkSvm_1" >
+             <widget class="QCheckBox" name="chkSvm_subtitles" >
               <property name="geometry" >
                <rect>
                 <x>360</x>
@@ -6358,7 +6358,7 @@
                <string>Mostras Subtitulo</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkSvm_2" >
+             <widget class="QCheckBox" name="chkSvm_fullscreen" >
               <property name="geometry" >
                <rect>
                 <x>360</x>
@@ -6371,7 +6371,7 @@
                <string>Pantalla Completa</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkSvm_3" >
+             <widget class="QCheckBox" name="chkSvm_aspect_ratio" >
               <property name="geometry" >
                <rect>
                 <x>360</x>
@@ -6389,7 +6389,7 @@
                <rect>
                 <x>10</x>
                 <y>230</y>
-                <width>121</width>
+                <width>134</width>
                 <height>21</height>
                </rect>
               </property>
@@ -6415,7 +6415,7 @@
                <rect>
                 <x>10</x>
                 <y>290</y>
-                <width>121</width>
+                <width>134</width>
                 <height>21</height>
                </rect>
               </property>
@@ -6423,7 +6423,7 @@
                <string>Directorio Sonido:</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxSvm_2" >
+             <widget class="QComboBox" name="cbxSvm_platform" >
               <property name="geometry" >
                <rect>
                 <x>130</x>
@@ -6433,7 +6433,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxSvm_1" >
+             <widget class="QComboBox" name="cbxSvm_language" >
               <property name="geometry" >
                <rect>
                 <x>130</x>
@@ -6443,7 +6443,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxSvm_3" >
+             <widget class="QComboBox" name="cbxSvm_gfx_mode" >
               <property name="geometry" >
                <rect>
                 <x>130</x>
@@ -6456,7 +6456,7 @@
                <number>-1</number>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtSvm_2" >
+             <widget class="QLineEdit" name="txtSvm_path" >
               <property name="geometry" >
                <rect>
                 <x>130</x>
@@ -6466,7 +6466,7 @@
                </rect>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtSvm_3" >
+             <widget class="QLineEdit" name="txtSvm_savepath" >
               <property name="geometry" >
                <rect>
                 <x>130</x>
@@ -6666,7 +6666,7 @@
                <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkSvm_7" >
+             <widget class="QCheckBox" name="chkSvm_copy_protection" >
               <property name="geometry" >
                <rect>
                 <x>510</x>
@@ -6679,49 +6679,20 @@
                <string>Copy-Protection</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="txtSvm_7" >
-              <property name="geometry" >
-               <rect>
-                <x>150</x>
-                <y>320</y>
-                <width>401</width>
-                <height>22</height>
-               </rect>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="btnDirSvm_6" >
-              <property name="geometry" >
-               <rect>
-                <x>560</x>
-                <y>320</y>
-                <width>30</width>
-                <height>26</height>
-               </rect>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>30</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
-              </property>
-             </widget>
-             <widget class="QLabel" name="lb_Svm_22" >
+             <widget class="QLabel" name="lb_Svm_23" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
                 <y>320</y>
-                <width>121</width>
+                <width>134</width>
                 <height>21</height>
                </rect>
               </property>
               <property name="text" >
-               <string>Sound_Font:</string>
+               <string>Setup del Juego:</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="btnDirSvm_5_clear_2" >
+             <widget class="QPushButton" name="btnDirSvm_5_clear_3" >
               <property name="geometry" >
                <rect>
                 <x>595</x>
@@ -6738,6 +6709,35 @@
               </property>
               <property name="icon" >
                <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="txtSvm_path_setup" >
+              <property name="geometry" >
+               <rect>
+                <x>150</x>
+                <y>320</y>
+                <width>401</width>
+                <height>22</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="btnDirSvm_7" >
+              <property name="geometry" >
+               <rect>
+                <x>560</x>
+                <y>320</y>
+                <width>30</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </widget>
@@ -6772,7 +6772,7 @@
              <property name="title" >
               <string>Opciones de Sonido</string>
              </property>
-             <widget class="QSlider" name="h_SliderSvm_1" >
+             <widget class="QSlider" name="h_SliderSvm_music_volume" >
               <property name="geometry" >
                <rect>
                 <x>170</x>
@@ -6791,7 +6791,7 @@
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
-             <widget class="QSlider" name="h_SliderSvm_2" >
+             <widget class="QSlider" name="h_SliderSvm_sfx_volume" >
               <property name="geometry" >
                <rect>
                 <x>170</x>
@@ -6810,7 +6810,7 @@
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
-             <widget class="QSlider" name="h_SliderSvm_3" >
+             <widget class="QSlider" name="h_SliderSvm_speech_volume" >
               <property name="geometry" >
                <rect>
                 <x>170</x>
@@ -6829,7 +6829,7 @@
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
-             <widget class="QSlider" name="h_SliderSvm_5" >
+             <widget class="QSlider" name="h_SliderSvm_talkspeed" >
               <property name="geometry" >
                <rect>
                 <x>170</x>
@@ -6848,7 +6848,7 @@
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
-             <widget class="QSlider" name="h_SliderSvm_6" >
+             <widget class="QSlider" name="h_SliderSvm_debuglevel" >
               <property name="geometry" >
                <rect>
                 <x>170</x>
@@ -6864,7 +6864,7 @@
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
-             <widget class="QSlider" name="h_SliderSvm_4" >
+             <widget class="QSlider" name="h_SliderSvm_tempo" >
               <property name="geometry" >
                <rect>
                 <x>170</x>
@@ -6886,7 +6886,7 @@
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkSvm_4" >
+             <widget class="QCheckBox" name="chkSvm_multi_midi" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -7120,7 +7120,7 @@
                <string>Nivel de Errores:</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkSvm_5" >
+             <widget class="QCheckBox" name="chkSvm_native_mt32" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -7133,7 +7133,7 @@
                <string>True Roland MT-32 (diseable GM emulation)</string>
               </property>
              </widget>
-             <widget class="QCheckBox" name="chkSvm_6" >
+             <widget class="QCheckBox" name="chkSvm_enable_gs" >
               <property name="geometry" >
                <rect>
                 <x>10</x>
@@ -7146,7 +7146,7 @@
                <string>Permitir el modo de Roland GS</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxSvm_5" >
+             <widget class="QComboBox" name="cbxSvm_music_driver" >
               <property name="geometry" >
                <rect>
                 <x>170</x>
@@ -7159,9 +7159,9 @@
              <widget class="QLabel" name="lb_Svm_20" >
               <property name="geometry" >
                <rect>
-                <x>10</x>
-                <y>50</y>
-                <width>151</width>
+                <x>380</x>
+                <y>20</y>
+                <width>101</width>
                 <height>21</height>
                </rect>
               </property>
@@ -7169,12 +7169,12 @@
                <string>Output Rate:</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="cbxSvm_8" >
+             <widget class="QComboBox" name="cbxSvm_output_rate" >
               <property name="geometry" >
                <rect>
-                <x>170</x>
-                <y>50</y>
-                <width>91</width>
+                <x>480</x>
+                <y>20</y>
+                <width>121</width>
                 <height>22</height>
                </rect>
               </property>
@@ -7220,7 +7220,7 @@
                <string>Midi Gain:</string>
               </property>
              </widget>
-             <widget class="QSlider" name="h_SliderSvm_7" >
+             <widget class="QSlider" name="h_SliderSvm_midi_gain" >
               <property name="geometry" >
                <rect>
                 <x>170</x>
@@ -7259,6 +7259,67 @@
               </property>
               <property name="text" >
                <string>100</string>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="txtSvm_soundfont" >
+              <property name="geometry" >
+               <rect>
+                <x>170</x>
+                <y>50</y>
+                <width>381</width>
+                <height>22</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="btnDirSvm_5_clear_2" >
+              <property name="geometry" >
+               <rect>
+                <x>595</x>
+                <y>50</y>
+                <width>30</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="btnDirSvm_6" >
+              <property name="geometry" >
+               <rect>
+                <x>560</x>
+                <y>50</y>
+                <width>30</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+             <widget class="QLabel" name="lb_Svm_22" >
+              <property name="geometry" >
+               <rect>
+                <x>10</x>
+                <y>50</y>
+                <width>151</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text" >
+               <string>Sound_Font:</string>
               </property>
              </widget>
             </widget>
@@ -7365,14 +7426,14 @@
             <number>4</number>
            </property>
            <item>
-            <widget class="QCheckBox" name="chkVdms_1" >
+            <widget class="QCheckBox" name="chkVdms_useAutoexec" >
              <property name="text" >
               <string>useAutoexec</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QTextEdit" name="txtVdms_5" />
+            <widget class="QTextEdit" name="txtVdms_autoexec" />
            </item>
           </layout>
          </widget>
@@ -7405,21 +7466,21 @@
             <number>4</number>
            </property>
            <item>
-            <widget class="QCheckBox" name="chkVdms_3" >
+            <widget class="QCheckBox" name="chkVdms_exitclose" >
              <property name="text" >
               <string>exitclose</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="chkVdms_4" >
+            <widget class="QCheckBox" name="chkVdms_exitWarn" >
              <property name="text" >
               <string>exitWarn</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="chkVdms_5" >
+            <widget class="QCheckBox" name="chkVdms_fastPaste" >
              <property name="text" >
               <string>fastPaste</string>
              </property>
@@ -7456,14 +7517,14 @@
             <number>4</number>
            </property>
            <item>
-            <widget class="QCheckBox" name="chkVdms_6" >
+            <widget class="QCheckBox" name="chkVdms_useCDROM" >
              <property name="text" >
               <string>useCDROM</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="chkVdms_7" >
+            <widget class="QCheckBox" name="chkVdms_useNetware" >
              <property name="text" >
               <string>useNetware</string>
              </property>
@@ -7500,18 +7561,18 @@
             <number>4</number>
            </property>
            <item>
-            <widget class="QCheckBox" name="chkVdms_2" >
+            <widget class="QCheckBox" name="chkVdms_useCustomCfg" >
              <property name="text" >
               <string>useCustomCfg</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QTextEdit" name="txtVdms_6" />
+            <widget class="QTextEdit" name="txtVdms_customCfg" />
            </item>
           </layout>
          </widget>
-         <widget class="QLineEdit" name="txtVdms_2" >
+         <widget class="QLineEdit" name="txtVdms_path_exe" >
           <property name="geometry" >
            <rect>
             <x>10</x>
@@ -7521,7 +7582,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtVdms_3" >
+         <widget class="QLineEdit" name="txtVdms_params" >
           <property name="geometry" >
            <rect>
             <x>140</x>
@@ -7531,7 +7592,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtVdms_4" >
+         <widget class="QLineEdit" name="txtVdms_icon" >
           <property name="geometry" >
            <rect>
             <x>140</x>
@@ -7611,7 +7672,7 @@
            <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtVdms_1" >
+         <widget class="QLineEdit" name="txtVdms_path_conf" >
           <property name="geometry" >
            <rect>
             <x>10</x>
@@ -7773,121 +7834,121 @@
  </widget>
  <tabstops>
   <tabstop>tabWidget_Datos</tabstop>
-  <tabstop>txtDatos_1</tabstop>
-  <tabstop>txtDatos_2</tabstop>
-  <tabstop>cbxDatos_1</tabstop>
-  <tabstop>cbxDatos_2</tabstop>
-  <tabstop>cbxDatos_3</tabstop>
-  <tabstop>cbxDatos_4</tabstop>
-  <tabstop>cbxDatos_5</tabstop>
-  <tabstop>cbxDatos_6</tabstop>
-  <tabstop>cbxDatos_7</tabstop>
-  <tabstop>cbxDatos_8</tabstop>
-  <tabstop>cbxDatos_9</tabstop>
-  <tabstop>cbxDatos_10</tabstop>
-  <tabstop>txtDatos_3</tabstop>
-  <tabstop>cbxDatos_11</tabstop>
-  <tabstop>cbxDatos_12</tabstop>
-  <tabstop>cbxDatos_13</tabstop>
-  <tabstop>chkDatos_1</tabstop>
-  <tabstop>cbxDatos_14</tabstop>
-  <tabstop>cbxDatos_15</tabstop>
-  <tabstop>btnImgAbrir_1</tabstop>
-  <tabstop>btnImgVer_1</tabstop>
-  <tabstop>btnImgEliminar_1</tabstop>
-  <tabstop>btnImgAbrir_2</tabstop>
-  <tabstop>btnImgVer_2</tabstop>
-  <tabstop>btnImgEliminar_2</tabstop>
-  <tabstop>btnImgAbrir_3</tabstop>
-  <tabstop>btnImgVer_3</tabstop>
-  <tabstop>btnImgEliminar_3</tabstop>
-  <tabstop>txtDatos_5</tabstop>
-  <tabstop>btnDatosFiles</tabstop>
-  <tabstop>txtDatos_6</tabstop>
-  <tabstop>txtDatos_8</tabstop>
-  <tabstop>txtDatos_7</tabstop>
-  <tabstop>txtDatos_9</tabstop>
+  <tabstop>txtDatos_Titulo</tabstop>
+  <tabstop>txtDatos_Subtitulo</tabstop>
+  <tabstop>cbxDatos_Genero</tabstop>
+  <tabstop>cbxDatos_Compania</tabstop>
+  <tabstop>cbxDatos_Desarrollador</tabstop>
+  <tabstop>cbxDatos_Tema</tabstop>
+  <tabstop>cbxDatos_Idioma</tabstop>
+  <tabstop>cbxDatos_Formato</tabstop>
+  <tabstop>cbxDatos_Anno</tabstop>
+  <tabstop>cbxDatos_NumDisc</tabstop>
+  <tabstop>cbxDatos_Icono</tabstop>
+  <tabstop>cbxDatos_SistemaOp</tabstop>
+  <tabstop>txtDatos_Tamano</tabstop>
+  <tabstop>cbxDatos_Graficos</tabstop>
+  <tabstop>cbxDatos_Sonido</tabstop>
+  <tabstop>cbxDatos_Jugabilidad</tabstop>
+  <tabstop>chkDatos_Original</tabstop>
+  <tabstop>cbxDatos_Estado</tabstop>
+  <tabstop>cbxDatos_TipoEmu</tabstop>
+  <tabstop>btnImgAbrir_Thumbs</tabstop>
+  <tabstop>btnImgVer_Thumbs</tabstop>
+  <tabstop>btnImgEliminar_Thumbs</tabstop>
+  <tabstop>btnImgAbrir_CoverFront</tabstop>
+  <tabstop>btnImgVer_CoverFront</tabstop>
+  <tabstop>btnImgEliminar_CoverFront</tabstop>
+  <tabstop>btnImgAbrir_CoverBack</tabstop>
+  <tabstop>btnImgVer_CoverBack</tabstop>
+  <tabstop>btnImgEliminar_CoverBack</tabstop>
+  <tabstop>txtDatosFiles_PathFile</tabstop>
+  <tabstop>btnDatosFiles_PathFile</tabstop>
+  <tabstop>txtDatosFiles_FileName</tabstop>
+  <tabstop>txtDatosFiles_Crc32</tabstop>
+  <tabstop>txtDatosFiles_Comentario</tabstop>
+  <tabstop>txtDatosFiles_Size</tabstop>
   <tabstop>btnAddFile</tabstop>
   <tabstop>btnEditFile</tabstop>
   <tabstop>btnUpdateFile</tabstop>
   <tabstop>btnDeleteFile</tabstop>
   <tabstop>twDatosFiles</tabstop>
   <tabstop>tabWidget_DosBox</tabstop>
-  <tabstop>txtDbx_1</tabstop>
-  <tabstop>btnFileConfg</tabstop>
-  <tabstop>chkDbx_2</tabstop>
-  <tabstop>chkDbx_1</tabstop>
-  <tabstop>txtDbx_2</tabstop>
-  <tabstop>chkDbx_3</tabstop>
-  <tabstop>cbxDbx_42</tabstop>
-  <tabstop>txtDbx_3</tabstop>
-  <tabstop>btnExeJuego</tabstop>
-  <tabstop>txtDbx_4</tabstop>
-  <tabstop>txtDbx_5</tabstop>
-  <tabstop>btnExeSetup</tabstop>
-  <tabstop>txtDbx_6</tabstop>
-  <tabstop>chkDbx_4</tabstop>
-  <tabstop>chkDbx_22</tabstop>
-  <tabstop>chkDbx_5</tabstop>
-  <tabstop>chkDbx_6</tabstop>
-  <tabstop>chkDbx_7</tabstop>
-  <tabstop>chkDbx_8</tabstop>
-  <tabstop>chkDbx_9</tabstop>
-  <tabstop>cbxDbx_1</tabstop>
-  <tabstop>cbxDbx_2</tabstop>
-  <tabstop>cbxDbx_3</tabstop>
-  <tabstop>cbxDbx_4</tabstop>
-  <tabstop>cbxDbx_5</tabstop>
-  <tabstop>cbxDbx_6</tabstop>
-  <tabstop>cbxDbx_7</tabstop>
-  <tabstop>cbxDbx_8</tabstop>
-  <tabstop>cbxDbx_9</tabstop>
-  <tabstop>cbxDbx_10</tabstop>
-  <tabstop>chkDbx_10</tabstop>
-  <tabstop>chkDbx_11</tabstop>
-  <tabstop>cbxDbx_11</tabstop>
-  <tabstop>cbxDbx_12</tabstop>
+  <tabstop>txtDbx_path_conf</tabstop>
+  <tabstop>btnDbx_FileConfg</tabstop>
+  <tabstop>chkDbx_cerrar_dbox</tabstop>
+  <tabstop>chkDbx_loadfix</tabstop>
+  <tabstop>txtDbx_loadfix_mem</tabstop>
+  <tabstop>chkDbx_consola_dbox</tabstop>
+  <tabstop>cbxDbx_dos_keyboardlayout</tabstop>
+  <tabstop>txtDbx_path_exe</tabstop>
+  <tabstop>btnDbx_ExeJuego</tabstop>
+  <tabstop>txtDbx_parametros_exe</tabstop>
+  <tabstop>txtDbx_path_setup</tabstop>
+  <tabstop>btnDbx_ExeSetup</tabstop>
+  <tabstop>txtDbx_parametros_setup</tabstop>
+  <tabstop>chkDbx_sdl_fullscreen</tabstop>
+  <tabstop>chkDbx_sdl_fulldouble</tabstop>
+  <tabstop>chkDbx_sdl_fullfixed</tabstop>
+  <tabstop>chkDbx_sdl_autolock</tabstop>
+  <tabstop>chkDbx_render_aspect</tabstop>
+  <tabstop>chkDbx_sdl_waitonerror</tabstop>
+  <tabstop>chkDbx_sdl_usescancodes</tabstop>
+  <tabstop>cbxDbx_sdl_fullresolution</tabstop>
+  <tabstop>cbxDbx_sdl_windowresolution</tabstop>
+  <tabstop>cbxDbx_sdl_output</tabstop>
+  <tabstop>cbxDbx_dosbox_machine</tabstop>
+  <tabstop>cbxDbx_render_scaler</tabstop>
+  <tabstop>cbxDbx_sdl_hwscale</tabstop>
+  <tabstop>cbxDbx_sdl_sensitivity</tabstop>
+  <tabstop>cbxDbx_dosbox_memsize</tabstop>
+  <tabstop>cbxDbx_cpu_core</tabstop>
+  <tabstop>cbxDbx_render_frameskip</tabstop>
+  <tabstop>chkDbx_dos_xms</tabstop>
+  <tabstop>chkDbx_dos_ems</tabstop>
+  <tabstop>cbxDbx_dos_umb</tabstop>
+  <tabstop>cbxDbx_cpu_cycles</tabstop>
   <tabstop>spinDbx_1</tabstop>
   <tabstop>spinDbx_2</tabstop>
-  <tabstop>chkDbx_12</tabstop>
-  <tabstop>cbxDbx_13</tabstop>
-  <tabstop>chkDbx_25</tabstop>
-  <tabstop>chkDbx_26</tabstop>
-  <tabstop>chkDbx_27</tabstop>
-  <tabstop>chkDbx_28</tabstop>
-  <tabstop>chkDbx_13</tabstop>
-  <tabstop>cbxDbx_14</tabstop>
-  <tabstop>txtDbx_7</tabstop>
-  <tabstop>txtDbx_8</tabstop>
+  <tabstop>chkDbx_cycle_sincronizar</tabstop>
+  <tabstop>cbxDbx_joystick_type</tabstop>
+  <tabstop>chkDbx_joystick_timed</tabstop>
+  <tabstop>chkDbx_joystick_autofire</tabstop>
+  <tabstop>chkDbx_joystick_swap34</tabstop>
+  <tabstop>chkDbx_joystick_buttonwrap</tabstop>
+  <tabstop>chkDbx_mixer_nosound</tabstop>
+  <tabstop>cbxDbx_mixer_rate</tabstop>
+  <tabstop>txtDbx_mixer_blocksize</tabstop>
+  <tabstop>txtDbx_mixer_prebuffer</tabstop>
   <tabstop>tabWidget</tabstop>
-  <tabstop>chkDbx_14</tabstop>
-  <tabstop>cbxDbx_15</tabstop>
-  <tabstop>cbxDbx_16</tabstop>
-  <tabstop>cbxDbx_17</tabstop>
-  <tabstop>cbxDbx_18</tabstop>
-  <tabstop>cbxDbx_19</tabstop>
-  <tabstop>cbxDbx_20</tabstop>
-  <tabstop>cbxDbx_21</tabstop>
-  <tabstop>chkDbx_15</tabstop>
-  <tabstop>cbxDbx_22</tabstop>
-  <tabstop>cbxDbx_23</tabstop>
-  <tabstop>cbxDbx_24</tabstop>
-  <tabstop>cbxDbx_25</tabstop>
-  <tabstop>cbxDbx_26</tabstop>
-  <tabstop>cbxDbx_27</tabstop>
-  <tabstop>txtDbx_9</tabstop>
+  <tabstop>chkDbx_sblaster_mixer</tabstop>
+  <tabstop>cbxDbx_sblaster_sbtype</tabstop>
+  <tabstop>cbxDbx_sblaster_sbbase</tabstop>
+  <tabstop>cbxDbx_sblaster_irq</tabstop>
+  <tabstop>cbxDbx_sblaster_dma</tabstop>
+  <tabstop>cbxDbx_sblaster_hdma</tabstop>
+  <tabstop>cbxDbx_sblaster_oplmode</tabstop>
+  <tabstop>cbxDbx_sblaster_oplrate</tabstop>
+  <tabstop>chkDbx_gus_gus</tabstop>
+  <tabstop>cbxDbx_gus_gusbase</tabstop>
+  <tabstop>cbxDbx_gus_irq1</tabstop>
+  <tabstop>cbxDbx_gus_irq2</tabstop>
+  <tabstop>cbxDbx_gus_gusrate</tabstop>
+  <tabstop>cbxDbx_gus_dma1</tabstop>
+  <tabstop>cbxDbx_gus_dma2</tabstop>
+  <tabstop>txtDbx_gus_ultradir</tabstop>
   <tabstop>btnDirGravisUltraSound</tabstop>
-  <tabstop>chkDbx_16</tabstop>
-  <tabstop>chkDbx_17</tabstop>
-  <tabstop>cbxDbx_28</tabstop>
-  <tabstop>cbxDbx_29</tabstop>
-  <tabstop>cbxDbx_30</tabstop>
-  <tabstop>txtDbx_10</tabstop>
-  <tabstop>chkDbx_18</tabstop>
-  <tabstop>chkDbx_19</tabstop>
-  <tabstop>cbxDbx_31</tabstop>
-  <tabstop>cbxDbx_33</tabstop>
-  <tabstop>cbxDbx_32</tabstop>
+  <tabstop>chkDbx_activar_mpu401</tabstop>
+  <tabstop>chkDbx_midi_intelligent</tabstop>
+  <tabstop>cbxDbx_midi_mpu401</tabstop>
+  <tabstop>cbxDbx_midi_device</tabstop>
+  <tabstop>cbxDbx_midi_mt32rate</tabstop>
+  <tabstop>txtDbx_midi_config</tabstop>
+  <tabstop>chkDbx_speaker_pcspeaker</tabstop>
+  <tabstop>chkDbx_speaker_disney</tabstop>
+  <tabstop>cbxDbx_speaker_pcrate</tabstop>
+  <tabstop>cbxDbx_speaker_tandy</tabstop>
+  <tabstop>cbxDbx_speaker_tandyrate</tabstop>
   <tabstop>twMontajes</tabstop>
   <tabstop>btnMount_Add</tabstop>
   <tabstop>btnMount_Edit</tabstop>
@@ -7898,26 +7959,26 @@
   <tabstop>btnMount_Subir</tabstop>
   <tabstop>btnMount_Bajar</tabstop>
   <tabstop>previer_mount</tabstop>
-  <tabstop>chkDbx_23</tabstop>
-  <tabstop>chkDbx_24</tabstop>
-  <tabstop>cbxDbx_35</tabstop>
-  <tabstop>cbxDbx_36</tabstop>
-  <tabstop>txtDbx_11</tabstop>
-  <tabstop>cbxDbx_37</tabstop>
-  <tabstop>cbxDbx_39</tabstop>
-  <tabstop>txtDbx_12</tabstop>
-  <tabstop>cbxDbx_40</tabstop>
-  <tabstop>cbxDbx_41</tabstop>
-  <tabstop>cbxDbx_43</tabstop>
-  <tabstop>cbxDbx_34</tabstop>
-  <tabstop>cbxDbx_38</tabstop>
-  <tabstop>btnAddSerial</tabstop>
-  <tabstop>txtDbx_17</tabstop>
-  <tabstop>txtDbx_18</tabstop>
-  <tabstop>txtDbx_19</tabstop>
-  <tabstop>txtDbx_20</tabstop>
-  <tabstop>chkDbx_20</tabstop>
-  <tabstop>chkDbx_21</tabstop>
+  <tabstop>chkDbx_modem_modem</tabstop>
+  <tabstop>chkDbx_dserial_directserial</tabstop>
+  <tabstop>cbxDbx_dserial_comport</tabstop>
+  <tabstop>cbxDbx_dserial_realport</tabstop>
+  <tabstop>txtDbx_modem_irq</tabstop>
+  <tabstop>cbxDbx_dserial_parity</tabstop>
+  <tabstop>cbxDbx_dserial_defaultbps</tabstop>
+  <tabstop>txtDbx_modem_listenport</tabstop>
+  <tabstop>cbxDbx_dserial_bytesize</tabstop>
+  <tabstop>cbxDbx_dserial_stopbit</tabstop>
+  <tabstop>cbxDbx_modem_comport</tabstop>
+  <tabstop>cbxDbx_select_serial</tabstop>
+  <tabstop>cbxDbx_type_serial</tabstop>
+  <tabstop>btnDbx_AddSerial</tabstop>
+  <tabstop>txtDbx_serial_1</tabstop>
+  <tabstop>txtDbx_serial_2</tabstop>
+  <tabstop>txtDbx_serial_3</tabstop>
+  <tabstop>txtDbx_serial_4</tabstop>
+  <tabstop>chkDbx_ipx_ipx</tabstop>
+  <tabstop>chkDbx_autoexec</tabstop>
   <tabstop>txtDbx_Autoexec</tabstop>
   <tabstop>rbtPrioridadBaja</tabstop>
   <tabstop>rbtPrioridadNormal</tabstop>
@@ -7927,46 +7988,46 @@
   <tabstop>rbtNoPrioridadNormal</tabstop>
   <tabstop>rbtNoPrioridadAlta</tabstop>
   <tabstop>rbtNoPrioridadMuyAlt</tabstop>
-  <tabstop>txtDbx_13</tabstop>
+  <tabstop>txtDbx_sdl_mapperfile</tabstop>
   <tabstop>btnDbx_mapperfile</tabstop>
-  <tabstop>txtDbx_14</tabstop>
+  <tabstop>txtDbx_dosbox_language</tabstop>
   <tabstop>btnDbx_language</tabstop>
-  <tabstop>txtDbx_15</tabstop>
+  <tabstop>txtDbx_dosbox_captures</tabstop>
   <tabstop>btnDbx_capturas</tabstop>
-  <tabstop>txtDbx_16</tabstop>
+  <tabstop>txtDbx_path_sonido</tabstop>
   <tabstop>btnDbx_musica</tabstop>
   <tabstop>tabWidget_ScummVM</tabstop>
   <tabstop>twScummVM</tabstop>
-  <tabstop>txtSvm_1</tabstop>
-  <tabstop>txtSvm_2</tabstop>
+  <tabstop>txtSvm_game_label</tabstop>
+  <tabstop>txtSvm_path</tabstop>
   <tabstop>btnDirSvm_1</tabstop>
-  <tabstop>txtSvm_3</tabstop>
+  <tabstop>txtSvm_savepath</tabstop>
   <tabstop>btnDirSvm_2</tabstop>
-  <tabstop>cbxSvm_1</tabstop>
-  <tabstop>cbxSvm_2</tabstop>
-  <tabstop>cbxSvm_3</tabstop>
-  <tabstop>cbxSvm_4</tabstop>
-  <tabstop>cbxSvm_6</tabstop>
-  <tabstop>cbxSvm_7</tabstop>
-  <tabstop>chkSvm_1</tabstop>
-  <tabstop>chkSvm_2</tabstop>
-  <tabstop>chkSvm_3</tabstop>
-  <tabstop>txtSvm_4</tabstop>
+  <tabstop>cbxSvm_language</tabstop>
+  <tabstop>cbxSvm_platform</tabstop>
+  <tabstop>cbxSvm_gfx_mode</tabstop>
+  <tabstop>cbxSvm_render_mode</tabstop>
+  <tabstop>cbxSvm_cdrom</tabstop>
+  <tabstop>cbxSvm_joystick_num</tabstop>
+  <tabstop>chkSvm_subtitles</tabstop>
+  <tabstop>chkSvm_fullscreen</tabstop>
+  <tabstop>chkSvm_aspect_ratio</tabstop>
+  <tabstop>txtSvm_extrapath</tabstop>
   <tabstop>btnDirSvm_3</tabstop>
-  <tabstop>txtSvm_5</tabstop>
+  <tabstop>txtSvm_path_capturas</tabstop>
   <tabstop>btnDirSvm_4</tabstop>
-  <tabstop>txtSvm_6</tabstop>
+  <tabstop>txtSvm_path_sonido</tabstop>
   <tabstop>btnDirSvm_5</tabstop>
-  <tabstop>cbxSvm_5</tabstop>
-  <tabstop>h_SliderSvm_1</tabstop>
-  <tabstop>h_SliderSvm_2</tabstop>
-  <tabstop>h_SliderSvm_3</tabstop>
-  <tabstop>h_SliderSvm_4</tabstop>
-  <tabstop>h_SliderSvm_5</tabstop>
-  <tabstop>h_SliderSvm_6</tabstop>
-  <tabstop>chkSvm_4</tabstop>
-  <tabstop>chkSvm_5</tabstop>
-  <tabstop>chkSvm_6</tabstop>
+  <tabstop>cbxSvm_music_driver</tabstop>
+  <tabstop>h_SliderSvm_music_volume</tabstop>
+  <tabstop>h_SliderSvm_sfx_volume</tabstop>
+  <tabstop>h_SliderSvm_speech_volume</tabstop>
+  <tabstop>h_SliderSvm_tempo</tabstop>
+  <tabstop>h_SliderSvm_talkspeed</tabstop>
+  <tabstop>h_SliderSvm_debuglevel</tabstop>
+  <tabstop>chkSvm_multi_midi</tabstop>
+  <tabstop>chkSvm_native_mt32</tabstop>
+  <tabstop>chkSvm_enable_gs</tabstop>
   <tabstop>btnDefectoSvm</tabstop>
   <tabstop>btnOk</tabstop>
   <tabstop>btnCancel</tabstop>
@@ -7992,162 +8053,162 @@
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_1</sender>
+   <sender>h_SliderSvm_music_volume</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_1</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>191</x>
-     <y>147</y>
+     <x>387</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>401</x>
-     <y>147</y>
+     <x>597</x>
+     <y>380</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_2</sender>
+   <sender>h_SliderSvm_sfx_volume</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_2</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>191</x>
-     <y>177</y>
+     <x>387</x>
+     <y>410</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>401</x>
-     <y>177</y>
+     <x>597</x>
+     <y>410</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_3</sender>
+   <sender>h_SliderSvm_speech_volume</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_3</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>191</x>
-     <y>207</y>
+     <x>387</x>
+     <y>440</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>401</x>
-     <y>207</y>
+     <x>597</x>
+     <y>440</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_4</sender>
+   <sender>h_SliderSvm_tempo</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_4</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>191</x>
-     <y>237</y>
+     <x>387</x>
+     <y>470</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>401</x>
-     <y>237</y>
+     <x>597</x>
+     <y>470</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_5</sender>
+   <sender>h_SliderSvm_talkspeed</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_5</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>191</x>
-     <y>267</y>
+     <x>387</x>
+     <y>500</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>401</x>
-     <y>267</y>
+     <x>597</x>
+     <y>500</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_6</sender>
+   <sender>h_SliderSvm_debuglevel</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_6</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>191</x>
-     <y>297</y>
+     <x>387</x>
+     <y>530</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>401</x>
-     <y>297</y>
+     <x>597</x>
+     <y>530</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDbx_mapperfile_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtDbx_13</receiver>
+   <receiver>txtDbx_sdl_mapperfile</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>540</x>
-     <y>316</y>
+     <x>498</x>
+     <y>270</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>426</x>
-     <y>316</y>
+     <x>276</x>
+     <y>270</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDbx_language_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtDbx_14</receiver>
+   <receiver>txtDbx_dosbox_language</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>540</x>
-     <y>366</y>
+     <x>498</x>
+     <y>320</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>420</x>
-     <y>366</y>
+     <x>270</x>
+     <y>320</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDbx_capturas_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtDbx_15</receiver>
+   <receiver>txtDbx_dosbox_captures</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>540</x>
-     <y>416</y>
+     <x>498</x>
+     <y>370</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>430</x>
-     <y>416</y>
+     <x>280</x>
+     <y>370</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDbx_musica_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtDbx_16</receiver>
+   <receiver>txtDbx_path_sonido</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>540</x>
-     <y>466</y>
+     <x>498</x>
+     <y>420</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>402</x>
-     <y>466</y>
+     <x>252</x>
+     <y>420</y>
     </hint>
    </hints>
   </connection>
@@ -8158,12 +8219,12 @@
    <slot>scrollToTop()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>288</x>
-     <y>276</y>
+     <x>224</x>
+     <y>206</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>294</x>
-     <y>276</y>
+     <x>228</x>
+     <y>233</y>
     </hint>
    </hints>
   </connection>
@@ -8174,236 +8235,252 @@
    <slot>scrollToBottom()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>288</x>
-     <y>276</y>
+     <x>224</x>
+     <y>206</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>294</x>
-     <y>276</y>
+     <x>228</x>
+     <y>233</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDirSvm_1_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtSvm_2</receiver>
+   <receiver>txtSvm_path</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>633</x>
-     <y>131</y>
+     <x>790</x>
+     <y>326</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>550</x>
-     <y>129</y>
+     <x>420</x>
+     <y>326</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDirSvm_2_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtSvm_3</receiver>
+   <receiver>txtSvm_savepath</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>633</x>
-     <y>164</y>
+     <x>790</x>
+     <y>356</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>546</x>
-     <y>166</y>
+     <x>416</x>
+     <y>356</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDirSvm_3_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtSvm_4</receiver>
+   <receiver>txtSvm_extrapath</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>630</x>
-     <y>311</y>
+     <x>790</x>
+     <y>506</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>551</x>
-     <y>305</y>
+     <x>421</x>
+     <y>506</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDirSvm_4_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtSvm_5</receiver>
+   <receiver>txtSvm_path_capturas</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>630</x>
-     <y>342</y>
+     <x>790</x>
+     <y>536</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>552</x>
-     <y>342</y>
+     <x>422</x>
+     <y>536</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDirSvm_5_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtSvm_6</receiver>
+   <receiver>txtSvm_path_sonido</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>629</x>
-     <y>376</y>
+     <x>790</x>
+     <y>566</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>541</x>
-     <y>374</y>
+     <x>411</x>
+     <y>566</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnVdms_FileConfg_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtVdms_1</receiver>
+   <receiver>txtVdms_path_conf</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>664</x>
-     <y>267</y>
+     <x>539</x>
+     <y>103</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>433</x>
-     <y>267</y>
+     <x>422</x>
+     <y>99</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnVdms_ExeJuego_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtVdms_2</receiver>
+   <receiver>txtVdms_path_exe</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>664</x>
-     <y>317</y>
+     <x>539</x>
+     <y>153</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>465</x>
-     <y>317</y>
+     <x>454</x>
+     <y>149</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnVdms_Icono_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtVdms_4</receiver>
+   <receiver>txtVdms_icon</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>664</x>
-     <y>377</y>
+     <x>539</x>
+     <y>213</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>454</x>
-     <y>377</y>
+     <x>443</x>
+     <y>209</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnFileConfg_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtDbx_1</receiver>
+   <receiver>txtDbx_path_conf</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>694</x>
-     <y>320</y>
+     <x>545</x>
+     <y>130</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>457</x>
-     <y>320</y>
+     <x>356</x>
+     <y>126</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnExeJuego_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtDbx_3</receiver>
+   <receiver>txtDbx_path_exe</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>694</x>
-     <y>480</y>
+     <x>545</x>
+     <y>290</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>463</x>
-     <y>480</y>
+     <x>362</x>
+     <y>286</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnExeSetup_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtDbx_5</receiver>
+   <receiver>txtDbx_path_setup</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>694</x>
-     <y>560</y>
+     <x>545</x>
+     <y>370</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>453</x>
-     <y>560</y>
+     <x>352</x>
+     <y>366</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDatosFiles_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtDatos_5</receiver>
+   <receiver>txtDatosFiles_PathFile</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>154</x>
-     <y>179</y>
+     <x>132</x>
+     <y>155</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>224</x>
-     <y>179</y>
+     <x>202</x>
+     <y>155</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>h_SliderSvm_7</sender>
+   <sender>h_SliderSvm_midi_gain</sender>
    <signal>valueChanged(int)</signal>
    <receiver>posSliderSvm_7</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>291</x>
-     <y>337</y>
+     <x>387</x>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>426</x>
-     <y>334</y>
+     <x>597</x>
+     <y>560</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDirSvm_5_clear_3</sender>
+   <signal>clicked()</signal>
+   <receiver>txtSvm_path_setup</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>790</x>
+     <y>596</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>571</x>
+     <y>596</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>btnDirSvm_5_clear_2</sender>
    <signal>clicked()</signal>
-   <receiver>txtSvm_7</receiver>
+   <receiver>txtSvm_soundfont</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>630</x>
-     <y>406</y>
+     <x>812</x>
+     <y>350</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>553</x>
-     <y>402</y>
+     <x>569</x>
+     <y>350</y>
     </hint>
    </hints>
   </connection>

@@ -33,14 +33,16 @@
 class frmAddEditMontajes : public QDialog {
     Q_OBJECT
 public:
-    frmAddEditMontajes(bool EditMount,const QVector<QString> datos_montaje, QDialog *parent = 0, Qt::WFlags flags = 0 );
-    ~frmAddEditMontajes();
+	frmAddEditMontajes(bool EditMount, QDialog *parent = 0, Qt::WFlags flags = 0 );
+	~frmAddEditMontajes();
 
-    Ui::AddEditMontajesClass ui;
-    
-    QVector<QString> DatosMontaje;
+	Ui::AddEditMontajesClass ui;
+
+	//QVector<QString> DatosMontaje;
+	QHash<QString, QString> DatosMontaje;
+
 private:
-    Funciones fGrl;
+	Funciones fGrl;
 	QString stHomeDir ;
 
 private slots:

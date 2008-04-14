@@ -166,10 +166,10 @@
      <widget class="QPushButton" name="btnVdms_Icono" >
       <property name="geometry" >
        <rect>
-        <x>400</x>
+        <x>380</x>
         <y>170</y>
-        <width>31</width>
-        <height>23</height>
+        <width>30</width>
+        <height>26</height>
        </rect>
       </property>
       <property name="text" >
@@ -182,10 +182,10 @@
      <widget class="QPushButton" name="btnVdms_ExeJuego" >
       <property name="geometry" >
        <rect>
-        <x>400</x>
+        <x>380</x>
         <y>110</y>
-        <width>31</width>
-        <height>23</height>
+        <width>30</width>
+        <height>26</height>
        </rect>
       </property>
       <property name="text" >
@@ -198,10 +198,10 @@
      <widget class="QPushButton" name="btnVdms_FileConfg" >
       <property name="geometry" >
        <rect>
-        <x>400</x>
+        <x>380</x>
         <y>60</y>
-        <width>31</width>
-        <height>23</height>
+        <width>30</width>
+        <height>26</height>
        </rect>
       </property>
       <property name="text" >
@@ -237,12 +237,12 @@
        <string>Titulo:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtDatos_1" >
+     <widget class="QLineEdit" name="txtDatos_Titulo" >
       <property name="geometry" >
        <rect>
         <x>90</x>
         <y>10</y>
-        <width>301</width>
+        <width>341</width>
         <height>22</height>
        </rect>
       </property>
@@ -260,44 +260,101 @@
        <string>Ejecutable (exe,com,bat) del Juego:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtVdms_3" >
+     <widget class="QLineEdit" name="txtVdms_params" >
       <property name="geometry" >
        <rect>
         <x>130</x>
         <y>140</y>
-        <width>261</width>
+        <width>241</width>
         <height>22</height>
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtVdms_1" >
+     <widget class="QLineEdit" name="txtVdms_path_conf" >
       <property name="geometry" >
        <rect>
         <x>10</x>
         <y>60</y>
-        <width>381</width>
+        <width>361</width>
         <height>22</height>
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtVdms_2" >
+     <widget class="QLineEdit" name="txtVdms_path_exe" >
       <property name="geometry" >
        <rect>
         <x>10</x>
         <y>110</y>
-        <width>381</width>
+        <width>361</width>
         <height>22</height>
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtVdms_4" >
+     <widget class="QLineEdit" name="txtVdms_icon" >
       <property name="geometry" >
        <rect>
         <x>130</x>
         <y>170</y>
-        <width>261</width>
+        <width>241</width>
         <height>22</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnVdms_Icono_clear" >
+      <property name="geometry" >
+       <rect>
+        <x>414</x>
+        <y>170</y>
+        <width>30</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>30</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="icon" >
+       <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnVdms_FileConfg_clear" >
+      <property name="geometry" >
+       <rect>
+        <x>414</x>
+        <y>60</y>
+        <width>30</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>30</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="icon" >
+       <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnVdms_ExeJuego_clear" >
+      <property name="geometry" >
+       <rect>
+        <x>414</x>
+        <y>110</y>
+        <width>30</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>30</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="icon" >
+       <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
       </property>
      </widget>
     </widget>
@@ -391,14 +448,17 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>txtDatos_1</tabstop>
-  <tabstop>txtVdms_1</tabstop>
+  <tabstop>txtDatos_Titulo</tabstop>
+  <tabstop>txtVdms_path_conf</tabstop>
   <tabstop>btnVdms_FileConfg</tabstop>
-  <tabstop>txtVdms_2</tabstop>
+  <tabstop>btnVdms_FileConfg_clear</tabstop>
+  <tabstop>txtVdms_path_exe</tabstop>
   <tabstop>btnVdms_ExeJuego</tabstop>
-  <tabstop>txtVdms_3</tabstop>
-  <tabstop>txtVdms_4</tabstop>
+  <tabstop>btnVdms_ExeJuego_clear</tabstop>
+  <tabstop>txtVdms_params</tabstop>
+  <tabstop>txtVdms_icon</tabstop>
   <tabstop>btnVdms_Icono</tabstop>
+  <tabstop>btnVdms_Icono_clear</tabstop>
   <tabstop>btnOk</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>
@@ -413,12 +473,60 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>69</x>
-     <y>218</y>
+     <x>73</x>
+     <y>384</y>
     </hint>
     <hint type="destinationlabel" >
      <x>214</x>
      <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnVdms_FileConfg_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>txtVdms_path_conf</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>423</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>336</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnVdms_ExeJuego_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>txtVdms_path_exe</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>423</x>
+     <y>184</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>364</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnVdms_Icono_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>txtVdms_icon</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>428</x>
+     <y>242</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>354</x>
+     <y>244</y>
     </hint>
    </hints>
   </connection>

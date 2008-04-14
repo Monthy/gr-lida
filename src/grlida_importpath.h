@@ -33,22 +33,22 @@
 class frmImportPath: public QDialog {
     Q_OBJECT
 public:
-    frmImportPath(QDialog *parent = 0, Qt::WFlags flags = 0 );
-    ~frmImportPath();
+	frmImportPath(QDialog *parent = 0, Qt::WFlags flags = 0 );
+	~frmImportPath();
 
-    Ui::ImportPathClass ui;
+	Ui::ImportPathClass ui;
 
 private:
 	Funciones fGrl;
 	QString stHomeDir; 
-    
+
 private slots:
 	void on_btnOk();
-	
-	void on_btnOpenDatoFile_1();
-	void on_btnOpenDatoFile_2();
-	void on_btnOpenDatoFile_3();
-	
+
+	void on_btnDirPath_Datos_Thumbs();
+	void on_btnDirPath_Datos_CoverFront();
+	void on_btnDirPath_Datos_CoverBack();
+
 	void on_btnOpenDbxFile_1();
 	void on_btnOpenDbxFile_2();
 	void on_btnOpenDbxFile_3();

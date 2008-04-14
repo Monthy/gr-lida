@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
+    <width>680</width>
     <height>480</height>
    </rect>
   </property>
@@ -652,7 +652,7 @@
        <widget class="QWidget" name="dockWidgetContents_3" >
         <layout class="QVBoxLayout" >
          <property name="spacing" >
-          <number>4</number>
+          <number>0</number>
          </property>
          <property name="leftMargin" >
           <number>0</number>
@@ -703,7 +703,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="txtDatos_1" >
+            <widget class="QLineEdit" name="txtInfo_Subtitulo" >
              <property name="minimumSize" >
               <size>
                <width>0</width>
@@ -763,7 +763,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="txtDatos_2" >
+            <widget class="QLineEdit" name="txtInfo_Genero" >
              <property name="minimumSize" >
               <size>
                <width>0</width>
@@ -804,7 +804,7 @@
             <number>3</number>
            </property>
            <item row="3" column="1" >
-            <widget class="QLineEdit" name="txtDatos_6" >
+            <widget class="QLineEdit" name="txtInfo_Anno" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
                <horstretch>0</horstretch>
@@ -829,7 +829,7 @@
             </widget>
            </item>
            <item row="0" column="1" >
-            <widget class="QLineEdit" name="txtDatos_3" >
+            <widget class="QLineEdit" name="txtInfo_Idioma" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
                <horstretch>0</horstretch>
@@ -949,7 +949,7 @@
             </widget>
            </item>
            <item row="1" column="1" >
-            <widget class="QLineEdit" name="txtDatos_4" >
+            <widget class="QLineEdit" name="txtInfo_Formato" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
                <horstretch>0</horstretch>
@@ -1000,7 +1000,7 @@
             </widget>
            </item>
            <item row="2" column="1" >
-            <widget class="QLineEdit" name="txtDatos_5" >
+            <widget class="QLineEdit" name="txtInfo_NumDisc" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
                <horstretch>0</horstretch>
@@ -1025,7 +1025,7 @@
             </widget>
            </item>
            <item row="4" column="1" >
-            <widget class="QLineEdit" name="txtDatos_7" >
+            <widget class="QLineEdit" name="txtInfo_Tamano" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
                <horstretch>0</horstretch>
@@ -1114,7 +1114,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="txtDatos_8" >
+            <widget class="QLineEdit" name="txtInfo_Compania" >
              <property name="minimumSize" >
               <size>
                <width>0</width>
@@ -1171,7 +1171,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="txtDatos_9" >
+            <widget class="QLineEdit" name="txtInfo_Desarrollador" >
              <property name="minimumSize" >
               <size>
                <width>0</width>
@@ -1228,7 +1228,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="txtDatos_10" >
+            <widget class="QLineEdit" name="txtInfo_Tema" >
              <property name="minimumSize" >
               <size>
                <width>0</width>
@@ -1285,7 +1285,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="txtDatos_11" >
+            <widget class="QLineEdit" name="txtInfo_SistemaOp" >
              <property name="minimumSize" >
               <size>
                <width>0</width>
@@ -1361,7 +1361,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="btn_VerCoverFront" >
+            <widget class="QToolButton" name="btnVer_CoverFront" >
              <property name="enabled" >
               <bool>false</bool>
              </property>
@@ -1380,7 +1380,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="btn_VerCoverBack" >
+            <widget class="QToolButton" name="btnVer_CoverBack" >
              <property name="enabled" >
               <bool>false</bool>
              </property>
@@ -1401,7 +1401,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QTextBrowser" name="txtDatos_12" >
+          <widget class="QTextBrowser" name="txtInfo_Comentario" >
            <property name="openExternalLinks" >
             <bool>true</bool>
            </property>
@@ -1472,7 +1472,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>743</width>
+     <width>680</width>
      <height>21</height>
     </rect>
    </property>
@@ -2218,20 +2218,20 @@
  <layoutdefault spacing="6" margin="11" />
  <tabstops>
   <tabstop>twJuegos</tabstop>
-  <tabstop>txtDatos_1</tabstop>
-  <tabstop>txtDatos_2</tabstop>
-  <tabstop>txtDatos_3</tabstop>
-  <tabstop>txtDatos_4</tabstop>
-  <tabstop>txtDatos_5</tabstop>
-  <tabstop>txtDatos_6</tabstop>
-  <tabstop>txtDatos_7</tabstop>
-  <tabstop>txtDatos_8</tabstop>
-  <tabstop>txtDatos_9</tabstop>
-  <tabstop>txtDatos_10</tabstop>
-  <tabstop>txtDatos_11</tabstop>
+  <tabstop>txtInfo_Subtitulo</tabstop>
+  <tabstop>txtInfo_Genero</tabstop>
+  <tabstop>txtInfo_Idioma</tabstop>
+  <tabstop>txtInfo_Formato</tabstop>
+  <tabstop>txtInfo_NumDisc</tabstop>
+  <tabstop>txtInfo_Anno</tabstop>
+  <tabstop>txtInfo_Tamano</tabstop>
+  <tabstop>txtInfo_Compania</tabstop>
+  <tabstop>txtInfo_Desarrollador</tabstop>
+  <tabstop>txtInfo_Tema</tabstop>
+  <tabstop>txtInfo_SistemaOp</tabstop>
   <tabstop>toolButton_11</tabstop>
-  <tabstop>btn_VerCoverFront</tabstop>
-  <tabstop>btn_VerCoverBack</tabstop>
+  <tabstop>btnVer_CoverFront</tabstop>
+  <tabstop>btnVer_CoverBack</tabstop>
   <tabstop>btn_fileurl_1</tabstop>
   <tabstop>btn_fileurl_2</tabstop>
   <tabstop>twUrls</tabstop>

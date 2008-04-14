@@ -56,10 +56,10 @@ private slots:
 	void on_btnOk();
 	void on_btnNext();
 	void on_btnPrevious();
-	void on_txtDbx_1_textChanged(const QString &);
-	void on_btnFileConfg();
-	void on_btnExeJuego();
-	void on_btnExeSetup();
+	void on_txtDatos_Titulo_textChanged(const QString &);
+	void on_btnDbx_FileConfg();
+	void on_btnDbx_ExeJuego();
+	void on_btnDbx_ExeSetup();
 	void on_btnMount_Add();
 	void on_btnMount_Edit();
 	void on_btnMount_Delete();

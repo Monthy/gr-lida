@@ -34,40 +34,39 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDirSvm , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm() ) );
 	connect( ui.cbxIdioma, SIGNAL( activated(const QString &) ), this, SLOT( on_setLanguage(const QString &) ) );
 
-	stHomeDir     = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
-//	stHomeDir     = QDir::currentPath()+"/";	// directorio de trabajo del GR-lida
-//	stHomeDir     = "./";								// directorio de trabajo del GR-lida
+	stHomeDir = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
+//	stHomeDir = QDir::currentPath()+"/";			// directorio de trabajo del GR-lida
+//	stHomeDir = "./";								// directorio de trabajo del GR-lida
 
 	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
 	settings.beginGroup("OpcGeneral");
-	ui.chkConfini_1->setChecked(settings.value("DOSBoxDisp"    , "false").toBool()   );
-	ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool()   );
-	ui.txtDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool()   );
-	ui.txtDirDbx->setText( settings.value("DirDOSBox"          , ""     ).toString() );
-	ui.chkConfini_2->setChecked(settings.value("ScummVMDisp"   , "false").toBool()   );
-	ui.btnDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool()   );
-	ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool()   );
-	ui.txtDirSvm->setText( settings.value("DirScummVM"         , ""     ).toString() );
-	ui.chkConfini_3->setChecked( settings.value("VDMSoundDisp" , "false").toBool()   );
-	IdiomaSelect = settings.value("IdiomaSelect", "es_ES" ).toString();
-	IdiomaExterno = settings.value("IdiomaExterno" , "false").toBool();
-
+		ui.chkConfig_DOSBoxDisp->setChecked( settings.value("DOSBoxDisp", "false").toBool() );
+		ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp", "false").toBool() );
+		ui.txtDirDbx->setEnabled( settings.value("DOSBoxDisp", "false").toBool() );
+		ui.txtDirDbx->setText( settings.value("DirDOSBox", "").toString() );
+		ui.chkConfig_ScummVMDisp->setChecked( settings.value("ScummVMDisp"   , "false").toBool() );
+		ui.btnDirSvm->setEnabled( settings.value("ScummVMDisp", "false").toBool()   );
+		ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp", "false").toBool()   );
+		ui.txtDirSvm->setText( settings.value("DirScummVM", "").toString() );
+		ui.chkConfig_VDMSoundDisp->setChecked( settings.value("VDMSoundDisp" , "false").toBool() );
+		IdiomaSelect = settings.value("IdiomaSelect", "es_ES").toString();
+		IdiomaExterno = settings.value("IdiomaExterno" , "false").toBool();
 	settings.endGroup();
 	
 	if(IdiomaExterno)
-		fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );	
+		fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );
 	else
 		fGrl.CargarIdiomasCombo( ":/idiomas/", ui.cbxIdioma );
 
 	ui.cbxIdioma->setCurrentIndex( ui.cbxIdioma->findText(IdiomaSelect, Qt::MatchContains) ); //
 	on_setLanguage( ui.cbxIdioma->currentText() );
-	
+
 	#ifdef Q_OS_WIN32
-		ui.chkConfini_3->setEnabled(true);
+		ui.chkConfig_VDMSoundDisp->setEnabled(true);
 	#else
-		ui.chkConfini_3->setEnabled(false);
+		ui.chkConfig_VDMSoundDisp->setEnabled(false);
 	#endif
-	
+
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
@@ -86,7 +85,7 @@ void frmConfigInicial::on_setLanguage(const QString txt_locale)
 		translator.load( stHomeDir + "idiomas/gr-lida_" + parts.value(1)+".qm" );
 	else
 		translator.load(":/idiomas/gr-lida_" + parts.value(1)+".qm" );
-	
+
 	qApp->installTranslator(&translator);
 
 	IdiomaSelect = parts.value(1);
@@ -103,28 +102,28 @@ void frmConfigInicial::on_btnOk(){
 	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat ); 
 
 	QString stDirDbx, stDirSvm;
-	if(ui.chkConfini_1->isChecked())
+	if(ui.chkConfig_DOSBoxDisp->isChecked())
 		stDirDbx = ui.txtDirDbx->text();
 	else
 		stDirDbx = "";
 
-	if(ui.chkConfini_2->isChecked())
+	if(ui.chkConfig_ScummVMDisp->isChecked())
 		stDirSvm = ui.txtDirSvm->text();
 	else
 		stDirSvm = "";
 
 	settings.beginGroup("OpcGeneral");
-	settings.setValue("DOSBoxDisp"   , ui.chkConfini_1->isChecked() );
-	settings.setValue("ScummVMDisp"  , ui.chkConfini_2->isChecked() );
-	settings.setValue("VDMSoundDisp" , ui.chkConfini_3->isChecked() );
-	settings.setValue("Primeravez"   , ui.chkConfini_4->isChecked() );
-	settings.setValue("DirDOSBox"    , stDirDbx						);
-	settings.setValue("DirScummVM"   , stDirSvm						);
+	settings.setValue("DOSBoxDisp"   , ui.chkConfig_DOSBoxDisp->isChecked()		);
+	settings.setValue("ScummVMDisp"  , ui.chkConfig_ScummVMDisp->isChecked()	);
+	settings.setValue("VDMSoundDisp" , ui.chkConfig_VDMSoundDisp->isChecked()	);
+	settings.setValue("Primeravez"   , ui.chkConfig_ShowNext->isChecked() 		);
+	settings.setValue("DirDOSBox"    , stDirDbx									);
+	settings.setValue("DirScummVM"   , stDirSvm									);
 	settings.setValue("IdiomaSelect" , IdiomaSelect );
 	settings.endGroup();
-	
+
 	on_setLanguage( ui.cbxIdioma->currentText() );
-	
+
 	QDialog::accept();
 }
 

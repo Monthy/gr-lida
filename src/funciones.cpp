@@ -35,46 +35,46 @@ QString plataforma;
 		plataforma = "Windows";
 	#endif
 	#ifdef Q_OS_MACX
-		plataforma = "MacX" ;
+		plataforma = "MacX";
 	#endif
 	#ifdef Q_OS_MAC9
-		plataforma = "Mac9" ;
+		plataforma = "Mac9";
 	#endif
 	#ifdef Q_OS_BSD4 
-		plataforma = "BSD 4.4" ;
+		plataforma = "BSD 4.4";
 	#endif
 	#ifdef Q_OS_BSDI 
-		plataforma = "BSD/OS" ;
+		plataforma = "BSD/OS";
 	#endif
 	#ifdef Q_OS_FREEBSD 
-		plataforma = "FreeBSD" ;
+		plataforma = "FreeBSD";
 	#endif
 	#ifdef Q_OS_LINUX 
-		plataforma = "Linux" ;
+		plataforma = "Linux";
 	#endif
 	#ifdef Q_OS_LYNX 
-		plataforma = "LynxOS" ;
+		plataforma = "LynxOS";
 	#endif
 	#ifdef Q_OS_MSDOS 
-		plataforma = "MS-DOS and Windows" ;
+		plataforma = "MS-DOS and Windows";
 	#endif
 	#ifdef Q_OS_NETBSD 
-		plataforma = "NetBSD" ;
+		plataforma = "NetBSD";
 	#endif
 	#ifdef Q_OS_OS2 
-		plataforma = "OS/2" ;
+		plataforma = "OS/2";
 	#endif
 	#ifdef Q_OS_OPENBSD 
-		plataforma = "OpenBSD" ;
+		plataforma = "OpenBSD";
 	#endif
 	#ifdef Q_OS_SOLARIS 
-		plataforma = "Sun Solaris" ;
+		plataforma = "Sun Solaris";
 	#endif
 //	#ifdef Q_OS_UNIX 
-//		plataforma = "UNIX BSD/SYSV" ;
+//		plataforma = "UNIX BSD/SYSV";
 //	#endif
 
-	return plataforma ;
+	return plataforma;
 }
 
 // Convierte de Nmero a Texto
@@ -101,10 +101,10 @@ QString Funciones::HoraFechaActual()
 QString Funciones::url_correcta(QString url)
 {
 	bool url_ok;
-    url_ok = url.startsWith("http://");
-   	if(url_ok==false) url.prepend("http://");
+	url_ok = url.startsWith("http://");
+	if(url_ok==false) url.prepend("http://");
 
-   	url_ok = url.endsWith("/");
+	url_ok = url.endsWith("/");
 	if(url_ok==false) url.append("/");
 
 	return url;
@@ -128,12 +128,12 @@ QString Funciones::eliminar_caracteres(QString str)
 
 void Funciones::DeleteItemTree( QTreeWidgetItem * item )
 {
-   if (!item) return;
-   for(int i=item->childCount()-1; i>=0; i--)
-   {
-     DeleteItemTree(item->child(i));
-   }
-   delete item;
+	if(!item) return;
+	for(int i=item->childCount()-1; i>=0; i--)
+	{
+		DeleteItemTree(item->child(i));
+	}
+	delete item;
 }
 
 void Funciones::CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox)
@@ -156,7 +156,7 @@ void Funciones::CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox)
 		QString country  = QLocale::countryToString(locale.country());
 		QString namelang = language + " (" + country + ") - "+ tmp_locale;
 		
-		myCombobox->addItem( namelang );	
+		myCombobox->addItem( namelang );
 	}
 }
 
@@ -165,7 +165,7 @@ void Funciones::CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int n
 	QStringList cbx_Lista, cbx_ListaTemp;
 	QPixmap pixmap;
 	QFile file( Archivo );
-	if (file.open(QIODevice::ReadOnly)!=0 )
+	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
 		in.setCodec("UTF-8");
@@ -197,7 +197,7 @@ void Funciones::CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int n
 					if( pixmap.isNull() ) pixmap.load(":/img16/sinimg.png");
 					myCombobox->addItem( QIcon( pixmap ), cbx_Lista.value(0).toLatin1() + " - " + cbx_Lista.value(1) );
 				break;
-		    }	
+			}
 		}
 	}
 	file.close();
@@ -230,7 +230,7 @@ void Funciones::CargarDatosListaSvm(QString Archivo, QTreeWidget *myTreeWidget)
 	QStringList svm_Lista, svm_ListaTemp;
 	
 	myTreeWidget->clear();
-	if (file.open(QIODevice::ReadOnly)!=0 )
+	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
 		while ( !in.atEnd() )
@@ -267,7 +267,7 @@ QHash<QString, QString> Funciones::Cargar_Smiles(QString Archivo, QTreeWidget *m
 
 	myTreeWidget->clear();
 	listSmailes.clear();
-	if (file.open(QIODevice::ReadOnly)!=0 )
+	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
 		while ( !in.atEnd() )
@@ -278,8 +278,8 @@ QHash<QString, QString> Funciones::Cargar_Smiles(QString Archivo, QTreeWidget *m
 			listSmailes.insert( smiles_Lista.value(0), smiles_Lista.value(1) );
 
 			QTreeWidgetItem *item_smiles = new QTreeWidgetItem( myTreeWidget );
-			item_smiles->setText( 0 , smiles_Lista.value(0)       ) ; // codigo
-			item_smiles->setIcon( 0 , QIcon(smiles_Lista.value(1))) ; // imagen
+			item_smiles->setText( 0 , smiles_Lista.value(0)       ); // codigo
+			item_smiles->setIcon( 0 , QIcon(smiles_Lista.value(1))); // imagen
 		}
 	}
 	return listSmailes;
@@ -293,7 +293,7 @@ QHash<QString, QString> Funciones::Cargar_Smiles(QString Archivo)
 	QHash<QString, QString> listSmailes;
 
 	listSmailes.clear();
-	if (file.open(QIODevice::ReadOnly)!=0 )
+	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
 		while ( !in.atEnd() )
@@ -315,7 +315,7 @@ QStringList Funciones::CargaDatosListas(QString Archivo, QString delimitador)
 	//QHash<QString, QString> listaDatos;
 
 	listaDatos.clear();
-	if (file.open(QIODevice::ReadOnly)!=0 )
+	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
 		while ( !in.atEnd() )
@@ -367,7 +367,7 @@ QString Funciones::VentanaDirectorios(const QString caption, const QString dir, 
 	QString directorio;
 	directorio = QFileDialog::getExistingDirectory(0, caption, dir, QFileDialog::ShowDirsOnly);
 	
-	if (!directorio.isEmpty())
+	if(!directorio.isEmpty())
 		return directorio;
 	else
 		return tmp_dir;
@@ -381,8 +381,8 @@ void Funciones::CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm)
 		settings.setValue("description"		, conf_Svm["description"]	); //
 		settings.setValue("gameid"			, conf_Svm["game"]			); // monkey
 		settings.setValue("language"		, conf_Svm["language"]		); // es
-		settings.setValue("subtitles"		, conf_Svm["subtitles"]		); // true	
-		settings.setValue("platform"		, conf_Svm["platform"]		); // pc	
+		settings.setValue("subtitles"		, conf_Svm["subtitles"]		); // true
+		settings.setValue("platform"		, conf_Svm["platform"]		); // pc
 		settings.setValue("gfx_mode"		, conf_Svm["gfx_mode"]		); // 2x
 		settings.setValue("render_mode"		, conf_Svm["render_mode"]	); // hercGreen
 		settings.setValue("fullscreen"		, conf_Svm["fullscreen"]	); // true
@@ -425,9 +425,9 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 	bool mount_Boot = false;
 	QStringList listmontajes;
 	QFileInfo fi( datos["path_exe"] );
-	
-	NombreEXEDbx = fi.fileName(); 		// Nombre del ejecutable
-	DirEXEDbx    = QDir::toNativeSeparators( datos["path_exe"] ) ;	// Directorio donde esta
+
+	NombreEXEDbx = fi.fileName();		// Nombre del ejecutable
+	DirEXEDbx    = QDir::toNativeSeparators( datos["path_exe"] );	// Directorio donde esta
 	DirEXEDbx.remove( fi.fileName(), Qt::CaseInsensitive );
 
 // loadfix
@@ -459,62 +459,62 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 			mount_dir_primario   = QDir::toNativeSeparators( myTreeWidget->topLevelItem(0)->text(0) );
 		}
 	//Montando las unidades
-		if ( item->text(2) != "boot")
+		if( item->text(2) != "boot")
 		{
 			mount_Boot = false;
-			if ( item->text(2) == "floppy")
+			if( item->text(2) == "floppy")
 			{
 				montaje_IMG = false;
 				mount_type = " -t floppy";
 			}		
-			if ( item->text(2) == "drive" )
+			if( item->text(2) == "drive" )
 			{
 				montaje_IMG = false;
 				mount_type = " ";
 			}
-			if ( item->text(2) == "cdrom" )
+			if( item->text(2) == "cdrom" )
 			{
 				montaje_IMG  = false;
 				mount_type  = " -t cdrom";
 				mount_IOCtrl = " " + item->text(6);
-				if ( item->text(5) != "" )
+				if( item->text(5) != "" )
 					mount_Options = " " + item->text(5);
 				else
 					mount_Options = " ";
 			} else
 				mount_IOCtrl= " ";
 		// Montando imagenes de Discos, disquetes y CDs
-			if ( item->text(2) == "IMG_floppy")
+			if( item->text(2) == "IMG_floppy")
 			{
 				montaje_IMG = true;
 				mount_type = " -t floppy";
 			}
-			if ( item->text(2) == "IMG_hdd")
+			if( item->text(2) == "IMG_hdd")
 			{
 				montaje_IMG = true;
 				mount_type = " -t hdd";
 			}
-			if ( item->text(2) == "IMG_iso")
+			if( item->text(2) == "IMG_iso")
 			{
 				montaje_IMG = true;
 				mount_type = " -t iso";
 			}
 		// Etiqueta de las unidades.
-			if ( item->text(1) != "" )
+			if( item->text(1) != "" )
 				mount_label = " -label " + item->text(1);
 			else
 				mount_label = "";
 					
 			if( montaje_IMG == true )
-				listmontajes << "imgmount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_label ;
+				listmontajes << "imgmount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_label;
 			else
-				listmontajes << "mount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_Options + mount_IOCtrl + mount_label ;
+				listmontajes << "mount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_Options + mount_IOCtrl + mount_label;
 		} else {
 			mount_Boot = true;
-			montaje_boot = "boot \"" + mount_drive + "\"" ;
+			montaje_boot = "boot \"" + mount_drive + "\"";
 		}
 	}
-	mount_dir = DirEXEDbx ;
+	mount_dir = DirEXEDbx;
 	mount_dir.remove(mount_dir_primario, Qt::CaseInsensitive);
 
 	if(mount_Boot == false)

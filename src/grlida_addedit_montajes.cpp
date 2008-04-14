@@ -24,32 +24,32 @@
 
 #include "grlida_addedit_montajes.h"
 
-frmAddEditMontajes::frmAddEditMontajes(bool EditMount,const QVector<QString> datos_montaje, QDialog *parent, Qt::WFlags flags)
+frmAddEditMontajes::frmAddEditMontajes(bool EditMount, QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
 {
 	ui.setupUi(this);
-	
+
 	connect( ui.btnOk      , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 	connect( ui.btnDirFile , SIGNAL( clicked() ), this, SLOT( on_DirFile() ) );
 
-	stHomeDir     = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
-//	stHomeDir     = QDir::currentPath()+"/";			// directorio de trabajo del GR-lida
-//	stHomeDir     = "./";								// directorio de trabajo del GR-lida
+	stHomeDir = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
+//	stHomeDir = QDir::currentPath()+"/";			// directorio de trabajo del GR-lida
+//	stHomeDir = "./";								// directorio de trabajo del GR-lida
 
-	ui.lb_Montaje_6->setText( "<b>-aspi</b> -- "+ tr("Forces use of the aspi layer. Only valid if mounting a CD-ROM under Windows systems with an ASPI-Layer.")+"<br>"+
+	ui.lb_Montaje_info->setText( "<b>-aspi</b> -- "+ tr("Forces use of the aspi layer. Only valid if mounting a CD-ROM under Windows systems with an ASPI-Layer.")+"<br>"+
 		"<b>-ioctl</b> -- "+ tr("Forces use of ioctl commands. Only valid if mounting a CD-ROM under a Windows OS which support them (Win2000/XP/NT).")+"<br>"+
 		"<b>-noioctl</b> -- "+ tr("Forces use of the SDL CD-ROM layer. Valid on all systems.")+"<br>"+
 		tr("Procura no montar la Raiz del sistema operativo: ejemplo en windows seria")+" <b style=\"color:#FF0000;\">C:\\</b> "+ tr("y en linux seria directamente")+ " <b style=\"color:#FF0000;\">/</b> ");
 
 	if(EditMount==true)
 	{
-		ui.txtMontaje_1->setText( datos_montaje[0] );
-		ui.txtMontaje_2->setText( datos_montaje[1] );
-		ui.cbxMontaje_1->setCurrentIndex( ui.cbxMontaje_1->findText( datos_montaje[2] ) );
-		ui.cbxMontaje_2->setCurrentIndex( ui.cbxMontaje_2->findText( datos_montaje[3] ) );
-		ui.cbxMontaje_3->setCurrentIndex( ui.cbxMontaje_3->findText( datos_montaje[4] ) );
-		ui.txtMontaje_3->setText( datos_montaje[5] );
-		ui.cbxMontaje_4->setCurrentIndex( ui.cbxMontaje_4->findText( datos_montaje[6], Qt::MatchContains ) )	; // platform
+		ui.txtMontaje_path->setText( DatosMontaje["path"] );
+		ui.txtMontaje_label->setText( DatosMontaje["label"] );
+		ui.cbxMontaje_type_drive->setCurrentIndex( ui.cbxMontaje_type_drive->findText( DatosMontaje["tipo_as"] ) );
+		ui.cbxMontaje_letter->setCurrentIndex( ui.cbxMontaje_letter->findText( DatosMontaje["letter"] ) );
+		ui.cbxMontaje_cdrom->setCurrentIndex( ui.cbxMontaje_cdrom->findText( DatosMontaje["indx_cd"] ) );
+		ui.txtMontaje_opt_mount->setText( DatosMontaje["opt_mount"] );
+		ui.cbxMontaje_mode_cdrom->setCurrentIndex( ui.cbxMontaje_mode_cdrom->findText( DatosMontaje["io_ctrl"], Qt::MatchContains ) );
 	}
 
 // centra la ventana en el escritorio
@@ -65,30 +65,35 @@ frmAddEditMontajes::~frmAddEditMontajes(){}
 void frmAddEditMontajes::on_btnOk()
 {
 	DatosMontaje.clear();
-	DatosMontaje << ui.txtMontaje_1->text();			//0 directorio o iso
-	DatosMontaje << ui.txtMontaje_2->text();			//1 etiqueta
-	if ( ui.cbxMontaje_1->currentText()!="" )
-		DatosMontaje << ui.cbxMontaje_1->currentText();	//2 tipo de montaje
-	else DatosMontaje << "";
-	if ( ui.cbxMontaje_2->currentText()!="" )
-		DatosMontaje << ui.cbxMontaje_2->currentText();	//3 letra de montaje
-	else DatosMontaje << "";
-	if ( ui.cbxMontaje_3->currentText()!="" )
-		DatosMontaje << ui.cbxMontaje_3->currentText();	//4 index de la unidad de cd-rom
-	else DatosMontaje << "";
-	DatosMontaje << ui.txtMontaje_3->text();			//5 opciones del cd-rom
-	if ( ui.cbxMontaje_4->currentText()!="" )
-		DatosMontaje << ui.cbxMontaje_4->currentText();	//6 cd/dvd windows, w9x, linux 
-	else DatosMontaje << "-noioctl"; // Forces use of the SDL
+	DatosMontaje["path"]  = ui.txtMontaje_path->text();						// directorio o iso
+	DatosMontaje["label"] = ui.txtMontaje_label->text();					// etiqueta
+
+	if ( ui.cbxMontaje_type_drive->currentText()!="" )
+		DatosMontaje["tipo_as"] = ui.cbxMontaje_type_drive->currentText();	// tipo de montaje
+	else DatosMontaje["tipo_as"] = "";
+
+	if ( ui.cbxMontaje_letter->currentText()!="" )
+		DatosMontaje["letter"] = ui.cbxMontaje_letter->currentText();		// letra de montaje
+	else DatosMontaje["letter"] = "";
+
+	if ( ui.cbxMontaje_cdrom->currentText()!="" )
+		DatosMontaje["indx_cd"] = ui.cbxMontaje_cdrom->currentText();		// index de la unidad de cd-rom
+	else DatosMontaje["indx_cd"] = "";
+
+	DatosMontaje["opt_mount"] = ui.txtMontaje_opt_mount->text();			// opciones del cd-rom
+
+	if ( ui.cbxMontaje_mode_cdrom->currentText()!="" )
+		DatosMontaje["io_ctrl"] = ui.cbxMontaje_mode_cdrom->currentText();	// cd/dvd windows, w9x, linux
+	else DatosMontaje["io_ctrl"] = "-noioctl";								// Forces use of the SDL
 
 	QDialog::accept();
 }
 
 void frmAddEditMontajes::on_DirFile()
 {
-	int tipomontaje = ui.cbxMontaje_1->currentIndex();
+	int tipomontaje = ui.cbxMontaje_type_drive->currentIndex();
 	if((tipomontaje==0)||(tipomontaje==1)||(tipomontaje==2))
-		ui.txtMontaje_1->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), stHomeDir, ui.txtMontaje_1->text() ));
+		ui.txtMontaje_path->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), stHomeDir, ui.txtMontaje_path->text() ));
 	else
-		ui.txtMontaje_1->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtMontaje_1->text(), tr("Todos los archivo") + " (*)", 0, false) );
+		ui.txtMontaje_path->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtMontaje_path->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }

@@ -35,9 +35,9 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
 	
 	connect( ui.btnOk, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 
-	connect( ui.btnDirPath_Datos_1 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDatoFile_1() ) );
-	connect( ui.btnDirPath_Datos_2 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDatoFile_2() ) );
-	connect( ui.btnDirPath_Datos_3 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDatoFile_3() ) );
+	connect( ui.btnDirPath_Datos_Thumbs     , SIGNAL( clicked() ), this, SLOT( on_btnDirPath_Datos_Thumbs() ) );
+	connect( ui.btnDirPath_Datos_CoverFront , SIGNAL( clicked() ), this, SLOT( on_btnDirPath_Datos_CoverFront() ) );
+	connect( ui.btnDirPath_Datos_CoverBack  , SIGNAL( clicked() ), this, SLOT( on_btnDirPath_Datos_CoverBack() ) );
 
 	connect( ui.btnDirPath_Dbx_1 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxFile_1() ) );
 	connect( ui.btnDirPath_Dbx_2 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxFile_2() ) );
@@ -67,32 +67,81 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
 }
 
 frmImportPath::~frmImportPath(){}
-		
+
 void frmImportPath::on_btnOk()
 {
-	QDialog::accept();
+	QFile appConfg;
+	QString stExeJuego;	
+	bool siguiente = true;
+
+	ui.gBox_path_emu->setTitle("Path");
+	if( ui.gBox_path_emu->isEnabled() )
+	{
+		siguiente = false;
+		if( (ui.wizardPath->currentIndex() == 0) || (ui.wizardPath->currentIndex() == 2) )
+		{
+		// DOSBox
+			if( ui.wizardPath->currentIndex() == 0 )
+			{
+				appConfg.setFileName( stHomeDir + "confdbx/"+ ui.txtPath_Dbx_1->text() );
+				ui.gBox_path_emu->setTitle("Path - DOSBox");
+			}
+		// VDMSound
+			if( ui.wizardPath->currentIndex() == 2 )
+			{
+				appConfg.setFileName( stHomeDir + "confvdms/"+ ui.txtPath_Vdms_1->text() );
+				ui.gBox_path_emu->setTitle("Path - VDMSound");
+			}
+			if( appConfg.exists() )
+			{
+				siguiente = false;
+				QMessageBox::information( this, "ImportPath", tr("El archivo de Configuración ya esixte")+":\n\n"+appConfg.fileName() );
+			} else {
+				siguiente = true;
+				stExeJuego.clear();
+				if( ui.wizardPath->currentIndex() == 0 )
+					stExeJuego = ui.txtPath_Dbx_2->text();
+				if( ui.wizardPath->currentIndex() == 2 )
+					stExeJuego = ui.txtPath_Vdms_2->text();
+				if( stExeJuego.isEmpty() )
+				{
+					siguiente = false;
+					QMessageBox::information(this, "ImportPath", tr("Debes indicar el Ejecutable del juego") );
+				} else
+					siguiente = true;
+			}
+		} else {
+			siguiente = true;
+			ui.gBox_path_emu->setTitle("Path - ScummVM");
+		}
+	}
+
+	if( siguiente == true )
+		QDialog::accept();
+	else
+		QDialog::rejected();
 }
 
-void frmImportPath::on_btnOpenDatoFile_1()
+void frmImportPath::on_btnDirPath_Datos_Thumbs()
 {
-	ui.txtPath_Datos_1->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Datos_1->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDatosPath_Thumbs->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDatosPath_Thumbs->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
-void frmImportPath::on_btnOpenDatoFile_2()
+void frmImportPath::on_btnDirPath_Datos_CoverFront()
 {
-	ui.txtPath_Datos_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Datos_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDatosPath_CoverFront->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDatosPath_CoverFront->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
-void frmImportPath::on_btnOpenDatoFile_3()
+void frmImportPath::on_btnDirPath_Datos_CoverBack()
 {
-	ui.txtPath_Datos_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Datos_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDatosPath_CoverBack->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDatosPath_CoverBack->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxFile_1()
 {
 	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confdbx/", ui.txtPath_Dbx_1->text(), tr("Todos los archivo") + " (*)", 0, true);
 	QFile appConfg( archivo );
-	if ( !appConfg.exists() )
+	if( !appConfg.exists() )
 	{
 		QFileInfo fi( archivo );
 		ui.txtPath_Dbx_1->setText( fi.fileName() );
@@ -171,7 +220,7 @@ void frmImportPath::on_btnOpenVdmsFile_1()
 {
 	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confvdms/", ui.txtPath_Vdms_1->text(), tr("Todos los archivo") + " (*)", 0, true);
 	QFile appConfg( archivo );
-	if ( !appConfg.exists() )
+	if( !appConfg.exists() )
 	{
 		QFileInfo fi( archivo );
 		ui.txtPath_Vdms_1->setText( fi.fileName() );

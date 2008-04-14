@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>493</width>
-    <height>401</height>
+    <height>353</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -44,7 +44,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cbxMontaje_1" >
+      <widget class="QComboBox" name="cbxMontaje_type_drive" >
        <property name="minimumSize" >
         <size>
          <width>90</width>
@@ -152,7 +152,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QLineEdit" name="txtMontaje_1" />
+      <widget class="QLineEdit" name="txtMontaje_path" />
      </item>
      <item>
       <widget class="QPushButton" name="btnDirFile" >
@@ -208,7 +208,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="txtMontaje_2" />
+    <widget class="QLineEdit" name="txtMontaje_label" />
    </item>
    <item>
     <layout class="QHBoxLayout" >
@@ -226,7 +226,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cbxMontaje_2" >
+      <widget class="QComboBox" name="cbxMontaje_letter" >
        <property name="minimumSize" >
         <size>
          <width>90</width>
@@ -409,7 +409,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cbxMontaje_4" >
+      <widget class="QComboBox" name="cbxMontaje_mode_cdrom" >
        <property name="minimumSize" >
         <size>
          <width>90</width>
@@ -482,7 +482,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cbxMontaje_3" >
+      <widget class="QComboBox" name="cbxMontaje_cdrom" >
        <property name="minimumSize" >
         <size>
          <width>90</width>
@@ -495,7 +495,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="txtMontaje_3" >
+      <widget class="QLineEdit" name="txtMontaje_opt_mount" >
        <property name="text" >
         <string/>
        </property>
@@ -504,7 +504,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QLabel" name="lb_Montaje_6" >
+    <widget class="QLabel" name="lb_Montaje_info" >
      <property name="wordWrap" >
       <bool>true</bool>
      </property>
@@ -591,13 +591,13 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>txtMontaje_1</tabstop>
+  <tabstop>txtMontaje_path</tabstop>
   <tabstop>btnDirFile</tabstop>
-  <tabstop>txtMontaje_2</tabstop>
-  <tabstop>cbxMontaje_1</tabstop>
-  <tabstop>cbxMontaje_2</tabstop>
-  <tabstop>cbxMontaje_3</tabstop>
-  <tabstop>txtMontaje_3</tabstop>
+  <tabstop>txtMontaje_label</tabstop>
+  <tabstop>cbxMontaje_type_drive</tabstop>
+  <tabstop>cbxMontaje_letter</tabstop>
+  <tabstop>cbxMontaje_cdrom</tabstop>
+  <tabstop>txtMontaje_opt_mount</tabstop>
   <tabstop>btnOk</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>
@@ -624,7 +624,7 @@
   <connection>
    <sender>btnClearDirFile</sender>
    <signal>clicked()</signal>
-   <receiver>txtMontaje_1</receiver>
+   <receiver>txtMontaje_path</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >

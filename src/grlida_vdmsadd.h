@@ -51,7 +51,7 @@ private slots:
 	void on_btnVdms_FileConfg();
 	void on_btnVdms_ExeJuego();
 	void on_btnVdms_Icono();
-	void on_txtDatos_1_textChanged(const QString &);
+	void on_txtDatos_Titulo_textChanged(const QString &);
 };
 
 #endif // GRLIDA_VDMSADD_H

@@ -35,51 +35,51 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDirSvm , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm() ) );
 	connect( ui.btnDirDB  , SIGNAL( clicked() ), this, SLOT( on_btnDirDB()  ) );
 	connect( ui.cbxIdioma , SIGNAL( activated(const QString &) ), this, SLOT( on_setLanguage(const QString &) ) );
-    connect( ui.cmbStyle  , SIGNAL(activated(const QString &)), this, SLOT( on_changeStyle(const QString &)));
-    connect( ui.cbxMotorDataBase, SIGNAL(activated(const QString &)), this, SLOT( on_changeTypeDB(const QString &)));
+	connect( ui.cmbStyle  , SIGNAL(activated(const QString &)), this, SLOT( on_changeStyle(const QString &)));
+	connect( ui.cbxMotorDataBase, SIGNAL(activated(const QString &)), this, SLOT( on_changeTypeDB(const QString &)));
 
 	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
 //	stHomeDir = QDir::currentPath()+"/";		// directorio de trabajo del GR-lida
 //	stHomeDir = "./";							// directorio de trabajo del GR-lida
-	
+
 	ui.cmbStyle->clear();
 	ui.cmbStyle->addItem( "Default" );
 	ui.cmbStyle->addItems( QStyleFactory::keys() );
 
 	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
 	settings.beginGroup("OpcGeneral");
-		ui.chkConfini_1->setChecked(settings.value("DOSBoxDisp"    , "false").toBool()   );
-		ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool()   );
-		ui.txtDirDbx->setEnabled( settings.value("DOSBoxDisp"      , "false").toBool()   );
-		ui.txtDirDbx->setText( settings.value("DirDOSBox"          , ""     ).toString() );
-		ui.chkConfini_2->setChecked(settings.value("ScummVMDisp"   , "false").toBool()   );
-		ui.btnDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool()   );
-		ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp"     , "false").toBool()   );
-		ui.txtDirSvm->setText( settings.value("DirScummVM"         , ""     ).toString() );
-		ui.chkConfini_3->setChecked( settings.value("VDMSoundDisp" , "false").toBool()   );
-		ui.chkConfini_4->setChecked( settings.value("Primeravez"   , "true" ).toBool()   );
-		IdiomaSelect      = settings.value("IdiomaSelect", "es_ES" ).toString();
-		ui.chkConfini_5->setChecked( settings.value("IdiomaExterno" , "false").toBool()  );
-		stIconoFav        = settings.value("IconoFav", "fav_0.png").toString();
-		stStyleSelect     = settings.value("Style", "Default" ).toString();
-		url_xmldb         = settings.value("url_xmldb", "" ).toString(); // GR-lida xmlDB
+		ui.chkConfig_DOSBoxDisp->setChecked(settings.value("DOSBoxDisp", "false").toBool() );
+		ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp", "false").toBool() );
+		ui.txtDirDbx->setEnabled( settings.value("DOSBoxDisp", "false").toBool() );
+		ui.txtDirDbx->setText( settings.value("DirDOSBox", "").toString() );
+		ui.chkConfig_ScummVMDisp->setChecked(settings.value("ScummVMDisp", "false").toBool() );
+		ui.btnDirSvm->setEnabled( settings.value("ScummVMDisp", "false").toBool() );
+		ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp", "false").toBool() );
+		ui.txtDirSvm->setText( settings.value("DirScummVM", "").toString() );
+		ui.chkConfig_VDMSoundDisp->setChecked( settings.value("VDMSoundDisp", "false").toBool() );
+		ui.chkConfig_ShowNext->setChecked( settings.value("Primeravez", "true").toBool() );
+		IdiomaSelect = settings.value("IdiomaSelect", "es_ES").toString();
+		ui.chkConfig_IdiomaExterno->setChecked( settings.value("IdiomaExterno" , "false").toBool() );
+		stIconoFav    = settings.value("IconoFav", "fav_0.png").toString();
+		stStyleSelect = settings.value("Style", "Default").toString();
+		url_xmldb     = settings.value("url_xmldb", "").toString(); // GR-lida xmlDB
 		ui.chkStylePalette->setChecked( settings.value("StylePalette","false").toBool());
 	settings.endGroup();
 	settings.beginGroup("SqlDatabase");
-	  stdb_type	= settings.value("db_type", "QSQLITE" ).toString();
-	  ui.txtDirBD->setText( settings.value("db_host", stHomeDir + "db_grl.grl" ).toString() );
-	  ui.txt_dbname->setText( settings.value("db_name", "" ).toString() );
-	  ui.txt_dbusername->setText( settings.value("db_username", "" ).toString() );
-	  ui.txt_dbpassword->setText( settings.value("db_password", "" ).toString() );
-	  ui.txt_dbport->setText( settings.value("db_port", "3306" ).toString() );
+		stdb_type	= settings.value("db_type", "QSQLITE" ).toString();
+		ui.txtDirBD->setText( settings.value("db_host", stHomeDir + "db_grl.grl" ).toString() );
+		ui.txt_dbname->setText( settings.value("db_name", "" ).toString() );
+		ui.txt_dbusername->setText( settings.value("db_username", "" ).toString() );
+		ui.txt_dbpassword->setText( settings.value("db_password", "" ).toString() );
+		ui.txt_dbport->setText( settings.value("db_port", "3306" ).toString() );
 	settings.endGroup();
 
 //	ui.txt_dbpassword->setEchoMode(QLineEdit::Password);
 
 	#ifdef Q_OS_WIN32
-		ui.chkConfini_3->setEnabled(true);
+		ui.chkConfig_VDMSoundDisp->setEnabled(true);
 	#else
-		ui.chkConfini_3->setEnabled(false);
+		ui.chkConfig_VDMSoundDisp->setEnabled(false);
 	#endif
 
 	ui.cbxMotorDataBase->addItem( QIcon( ":/img16/basedatos.png" ), "QSQLITE"	);
@@ -95,7 +95,7 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 	ui.cmbIconFav->addItem(QIcon(":/img16/fav_3.png"), "fav_3.png");
 	ui.cmbIconFav->setCurrentIndex( ui.cmbIconFav->findText(stIconoFav, Qt::MatchContains) ); //
 
-	if(ui.chkConfini_5->isChecked())
+	if(ui.chkConfig_IdiomaExterno->isChecked())
 		fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );	
 	else
 		fGrl.CargarIdiomasCombo( ":/idiomas/", ui.cbxIdioma );
@@ -121,15 +121,15 @@ void frmOpciones::on_changeStyle(const QString &styleName)
 {
 	stStyleSelect = styleName;
 	QApplication::setStyle(QStyleFactory::create(styleName));
-    changePalette();
+	changePalette();
 }
 
 void frmOpciones::changePalette()
 {
 	if (ui.chkStylePalette->isChecked())
-        QApplication::setPalette(QApplication::style()->standardPalette());
-    else
-        QApplication::setPalette(originalPalette);
+		QApplication::setPalette(QApplication::style()->standardPalette());
+	else
+		QApplication::setPalette(originalPalette);
 }
 
 void frmOpciones::on_changeTypeDB(const QString &typedb)
@@ -145,15 +145,15 @@ void frmOpciones::on_btnOk()
 	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat ); 
 
 	DatosConfiguracion.clear();
-	if(ui.chkConfini_1->isChecked())
+	if(ui.chkConfig_DOSBoxDisp->isChecked())
 		DatosConfiguracion["DOSBoxDisp"]   = "true"; else DatosConfiguracion["DOSBoxDisp"]   = "false"; // DOSBox
-	if(ui.chkConfini_2->isChecked())
+	if(ui.chkConfig_ScummVMDisp->isChecked())
 		DatosConfiguracion["ScummVMDisp"]  = "true"; else DatosConfiguracion["ScummVMDisp"]  = "false"; // ScummVM
-	if(ui.chkConfini_3->isChecked())
+	if(ui.chkConfig_VDMSoundDisp->isChecked())
 		DatosConfiguracion["VDMSoundDisp"] = "true"; else DatosConfiguracion["VDMSoundDisp"] = "false"; // VDMSound
-	if(ui.chkConfini_4->isChecked())
+	if(ui.chkConfig_ShowNext->isChecked())
 		DatosConfiguracion["Primeravez"]   = "true"; else DatosConfiguracion["Primeravez"]   = "false"; // primera vez
-	if(ui.chkConfini_5->isChecked())
+	if(ui.chkConfig_IdiomaExterno->isChecked())
 		DatosConfiguracion["IdiomaExterno"]= "true"; else DatosConfiguracion["IdiomaExterno"] = "false"; // primera vez
 	if(ui.chkStylePalette->isChecked())
 		DatosConfiguracion["StylePalette"] = "true"; else DatosConfiguracion["StylePalette"] = "false"; // StylePalette
@@ -175,13 +175,13 @@ void frmOpciones::on_btnOk()
 		settings.setValue("VDMSoundDisp" , DatosConfiguracion["VDMSoundDisp"]	);
 		settings.setValue("Primeravez"   , DatosConfiguracion["Primeravez"]		);
 		settings.setValue("DirDOSBox"    , DatosConfiguracion["DirDOSBox"]		);
-		settings.setValue("DirScummVM"   , DatosConfiguracion["DirScummVM"] 	);
-		settings.setValue("IdiomaSelect" , IdiomaSelect          				);
-		settings.setValue("IdiomaExterno", DatosConfiguracion["IdiomaExterno"]  );
-		settings.setValue("Style"        , stStyleSelect         				);
-	    settings.setValue("StylePalette" , DatosConfiguracion["StylePalette"]	);
-	    settings.setValue("IconoFav"     , stIconoFav							);
-	    settings.setValue("url_xmldb"    , url_xmldb							);
+		settings.setValue("DirScummVM"   , DatosConfiguracion["DirScummVM"]		);
+		settings.setValue("IdiomaSelect" , IdiomaSelect							);
+		settings.setValue("IdiomaExterno", DatosConfiguracion["IdiomaExterno"]	);
+		settings.setValue("Style"        , stStyleSelect						);
+		settings.setValue("StylePalette" , DatosConfiguracion["StylePalette"]	);
+		settings.setValue("IconoFav"     , stIconoFav							);
+		settings.setValue("url_xmldb"    , url_xmldb							);
 	settings.endGroup();
 
 	settings.beginGroup("SqlDatabase");
@@ -190,7 +190,7 @@ void frmOpciones::on_btnOk()
 		settings.setValue("db_name"      , ui.txt_dbname->text()				);
 		settings.setValue("db_username"  , ui.txt_dbusername->text()			);
 		settings.setValue("db_password"  , ui.txt_dbpassword->text()			);
-		settings.setValue("db_port"		 , ui.txt_dbport->text()				);
+		settings.setValue("db_port"      , ui.txt_dbport->text()				);
 	settings.endGroup();
 
 	QDialog::accept();
@@ -201,7 +201,7 @@ void frmOpciones::on_setLanguage(const QString txt_locale)
 	QStringList parts = txt_locale.split(" - ");
 	QTranslator translator;
 	
-	if(ui.chkConfini_5->isChecked())
+	if(ui.chkConfig_IdiomaExterno->isChecked())
 		translator.load( stHomeDir + "idiomas/gr-lida_" + parts.value(1)+".qm" );
 	else
 		translator.load(":/idiomas/gr-lida_" + parts.value(1)+".qm" );

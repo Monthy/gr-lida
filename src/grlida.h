@@ -71,6 +71,7 @@ private:
 
 	QHash<QString, QString> listSmailes;
 	QHash<QString, QString>::const_iterator i_Hash;
+	QHash<QString, QString> conf_scummvm;
 
 	QLabel lbpanel_1, lbpanel_2, lbpanel_3, lbpanel_4, lbpanel_5;
 	
@@ -123,8 +124,8 @@ private slots:
 	void on_btn_fileurl_2();
 	void on_btn_imgtumb_1();
 	void on_btn_imgtumb_2();
-	void on_btn_VerCoverFront();
-	void on_btn_VerCoverBack();
+	void on_btnVer_CoverFront();
+	void on_btnVer_CoverBack();
 	void on_setFavorito();
 
 	bool createTrayIcon();

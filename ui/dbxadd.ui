@@ -438,7 +438,7 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="page_1" >
-      <widget class="QLineEdit" name="txtDbx_6" >
+      <widget class="QLineEdit" name="txtDbx_parametros_setup" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -448,7 +448,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_1" >
+      <widget class="QCheckBox" name="chkDbx_loadfix" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -461,7 +461,7 @@
         <string>El juego necesita 'loadfix'</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtDbx_4" >
+      <widget class="QLineEdit" name="txtDbx_parametros_exe" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -471,7 +471,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtDbx_1" >
+      <widget class="QLineEdit" name="txtDatos_Titulo" >
        <property name="geometry" >
         <rect>
          <x>130</x>
@@ -520,7 +520,7 @@
         <string>Parametros:</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_3" >
+      <widget class="QCheckBox" name="chkDbx_consola_dbox" >
        <property name="geometry" >
         <rect>
          <x>230</x>
@@ -546,7 +546,7 @@
         <string>Ejecutable (exe,com,bat) Setup del Juego:</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtDbx_2" >
+      <widget class="QLineEdit" name="txtDbx_path_conf" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -556,7 +556,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtDbx_3" >
+      <widget class="QLineEdit" name="txtDbx_path_exe" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -579,7 +579,7 @@
         <string>Parametros:</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtDbx_5" >
+      <widget class="QLineEdit" name="txtDbx_path_setup" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -589,7 +589,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnFileConfg" >
+      <widget class="QPushButton" name="btnDbx_FileConfg" >
        <property name="geometry" >
         <rect>
          <x>400</x>
@@ -611,7 +611,7 @@
         <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnExeJuego" >
+      <widget class="QPushButton" name="btnDbx_ExeJuego" >
        <property name="geometry" >
         <rect>
          <x>400</x>
@@ -633,7 +633,7 @@
         <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnExeSetup" >
+      <widget class="QPushButton" name="btnDbx_ExeSetup" >
        <property name="geometry" >
         <rect>
          <x>400</x>
@@ -671,7 +671,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_2" >
+      <widget class="QCheckBox" name="chkDbx_cerrar_dbox" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -738,7 +738,7 @@
         <string>Escalar y Filtros:</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_4" >
+      <widget class="QCheckBox" name="chkDbx_sdl_fullscreen" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -751,7 +751,7 @@
         <string>fullscreen -- Iniciar DOSBox directamente en pantalla completa</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_5" >
+      <widget class="QCheckBox" name="chkDbx_sdl_fullfixed" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -764,7 +764,7 @@
         <string>fullfixed -- Fijar la resolución en pantalla completa</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_6" >
+      <widget class="QCheckBox" name="chkDbx_sdl_autolock" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -776,8 +776,11 @@
        <property name="text" >
         <string>autolock -- El ratón se autobloqueará al hace clic en la pantalla</string>
        </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_7" >
+      <widget class="QCheckBox" name="chkDbx_render_aspect" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -806,7 +809,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_1" >
+      <widget class="QComboBox" name="cbxDbx_sdl_fullresolution" >
        <property name="geometry" >
         <rect>
          <x>150</x>
@@ -816,7 +819,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_2" >
+      <widget class="QComboBox" name="cbxDbx_sdl_output" >
        <property name="geometry" >
         <rect>
          <x>150</x>
@@ -826,7 +829,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_3" >
+      <widget class="QComboBox" name="cbxDbx_dosbox_machine" >
        <property name="geometry" >
         <rect>
          <x>150</x>
@@ -836,7 +839,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_4" >
+      <widget class="QComboBox" name="cbxDbx_render_scaler" >
        <property name="geometry" >
         <rect>
          <x>150</x>
@@ -851,7 +854,7 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_3" >
-      <widget class="QComboBox" name="cbxDbx_5" >
+      <widget class="QComboBox" name="cbxDbx_dosbox_memsize" >
        <property name="geometry" >
         <rect>
          <x>330</x>
@@ -864,7 +867,7 @@
         <number>-1</number>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_6" >
+      <widget class="QComboBox" name="cbxDbx_cpu_cycles" >
        <property name="geometry" >
         <rect>
          <x>330</x>
@@ -880,7 +883,7 @@
         <number>7</number>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_8" >
+      <widget class="QCheckBox" name="chkDbx_dos_xms" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -896,7 +899,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_9" >
+      <widget class="QCheckBox" name="chkDbx_dos_ems" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -912,7 +915,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_7" >
+      <widget class="QComboBox" name="cbxDbx_dos_umb" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -1004,7 +1007,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_17" >
+      <widget class="QComboBox" name="cbxDbx_cpu_core" >
        <property name="geometry" >
         <rect>
          <x>120</x>
@@ -1035,7 +1038,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_11" >
+      <widget class="QComboBox" name="cbxDbx_gus_gusrate" >
        <property name="geometry" >
         <rect>
          <x>355</x>
@@ -1063,7 +1066,7 @@
         </property>
        </item>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_11" >
+      <widget class="QCheckBox" name="chkDbx_gus_gus" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -1092,7 +1095,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_9" >
+      <widget class="QComboBox" name="cbxDbx_sblaster_sbtype" >
        <property name="geometry" >
         <rect>
          <x>150</x>
@@ -1105,7 +1108,7 @@
         <number>-1</number>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_10" >
+      <widget class="QComboBox" name="cbxDbx_sblaster_oplrate" >
        <property name="geometry" >
         <rect>
          <x>355</x>
@@ -1146,7 +1149,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_8" >
+      <widget class="QComboBox" name="cbxDbx_mixer_rate" >
        <property name="geometry" >
         <rect>
          <x>355</x>
@@ -1174,7 +1177,7 @@
         </property>
        </item>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_12" >
+      <widget class="QCheckBox" name="chkDbx_activar_mpu401" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -1190,7 +1193,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_13" >
+      <widget class="QCheckBox" name="chkDbx_midi_intelligent" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -1206,7 +1209,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_12" >
+      <widget class="QComboBox" name="cbxDbx_midi_device" >
        <property name="geometry" >
         <rect>
          <x>355</x>
@@ -1219,7 +1222,7 @@
         <number>-1</number>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_13" >
+      <widget class="QComboBox" name="cbxDbx_midi_mt32rate" >
        <property name="geometry" >
         <rect>
          <x>355</x>
@@ -1247,7 +1250,7 @@
         </property>
        </item>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_14" >
+      <widget class="QCheckBox" name="chkDbx_speaker_pcspeaker" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -1263,7 +1266,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_15" >
+      <widget class="QCheckBox" name="chkDbx_speaker_disney" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -1279,7 +1282,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_14" >
+      <widget class="QComboBox" name="cbxDbx_speaker_pcrate" >
        <property name="geometry" >
         <rect>
          <x>355</x>
@@ -1307,7 +1310,7 @@
         </property>
        </item>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_15" >
+      <widget class="QComboBox" name="cbxDbx_speaker_tandyrate" >
        <property name="geometry" >
         <rect>
          <x>355</x>
@@ -1465,7 +1468,7 @@
         <string>MIDI y configuración adicional:</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="cbxDbx_16" >
+      <widget class="QComboBox" name="cbxDbx_midi_mpu401" >
        <property name="geometry" >
         <rect>
          <x>80</x>
@@ -1504,7 +1507,7 @@
         <string>Frecuencia tandyrate:</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="chkDbx_10" >
+      <widget class="QCheckBox" name="chkDbx_mixer_nosound" >
        <property name="geometry" >
         <rect>
          <x>10</x>
@@ -1914,46 +1917,46 @@ Pulsa Aceptar para cerrar el Asistente
   </layout>
  </widget>
  <tabstops>
-  <tabstop>txtDbx_1</tabstop>
-  <tabstop>txtDbx_2</tabstop>
-  <tabstop>btnFileConfg</tabstop>
-  <tabstop>chkDbx_1</tabstop>
-  <tabstop>chkDbx_3</tabstop>
-  <tabstop>chkDbx_2</tabstop>
-  <tabstop>txtDbx_3</tabstop>
-  <tabstop>btnExeJuego</tabstop>
-  <tabstop>txtDbx_4</tabstop>
-  <tabstop>txtDbx_5</tabstop>
-  <tabstop>btnExeSetup</tabstop>
-  <tabstop>txtDbx_6</tabstop>
-  <tabstop>chkDbx_4</tabstop>
-  <tabstop>chkDbx_5</tabstop>
-  <tabstop>chkDbx_6</tabstop>
-  <tabstop>chkDbx_7</tabstop>
-  <tabstop>cbxDbx_1</tabstop>
-  <tabstop>cbxDbx_2</tabstop>
-  <tabstop>cbxDbx_3</tabstop>
-  <tabstop>cbxDbx_4</tabstop>
-  <tabstop>cbxDbx_5</tabstop>
-  <tabstop>cbxDbx_6</tabstop>
-  <tabstop>chkDbx_8</tabstop>
-  <tabstop>chkDbx_9</tabstop>
-  <tabstop>cbxDbx_7</tabstop>
-  <tabstop>chkDbx_10</tabstop>
-  <tabstop>cbxDbx_8</tabstop>
-  <tabstop>cbxDbx_9</tabstop>
-  <tabstop>cbxDbx_10</tabstop>
-  <tabstop>chkDbx_11</tabstop>
-  <tabstop>cbxDbx_11</tabstop>
-  <tabstop>chkDbx_12</tabstop>
-  <tabstop>chkDbx_13</tabstop>
-  <tabstop>chkDbx_14</tabstop>
-  <tabstop>chkDbx_15</tabstop>
-  <tabstop>cbxDbx_12</tabstop>
-  <tabstop>cbxDbx_13</tabstop>
-  <tabstop>cbxDbx_14</tabstop>
-  <tabstop>cbxDbx_15</tabstop>
-  <tabstop>cbxDbx_16</tabstop>
+  <tabstop>txtDatos_Titulo</tabstop>
+  <tabstop>txtDbx_path_conf</tabstop>
+  <tabstop>btnDbx_FileConfg</tabstop>
+  <tabstop>chkDbx_loadfix</tabstop>
+  <tabstop>chkDbx_consola_dbox</tabstop>
+  <tabstop>chkDbx_cerrar_dbox</tabstop>
+  <tabstop>txtDbx_path_exe</tabstop>
+  <tabstop>btnDbx_ExeJuego</tabstop>
+  <tabstop>txtDbx_parametros_exe</tabstop>
+  <tabstop>txtDbx_path_setup</tabstop>
+  <tabstop>btnDbx_ExeSetup</tabstop>
+  <tabstop>txtDbx_parametros_setup</tabstop>
+  <tabstop>chkDbx_sdl_fullscreen</tabstop>
+  <tabstop>chkDbx_sdl_fullfixed</tabstop>
+  <tabstop>chkDbx_sdl_autolock</tabstop>
+  <tabstop>chkDbx_render_aspect</tabstop>
+  <tabstop>cbxDbx_sdl_fullresolution</tabstop>
+  <tabstop>cbxDbx_sdl_output</tabstop>
+  <tabstop>cbxDbx_dosbox_machine</tabstop>
+  <tabstop>cbxDbx_render_scaler</tabstop>
+  <tabstop>cbxDbx_dosbox_memsize</tabstop>
+  <tabstop>cbxDbx_cpu_cycles</tabstop>
+  <tabstop>chkDbx_dos_xms</tabstop>
+  <tabstop>chkDbx_dos_ems</tabstop>
+  <tabstop>cbxDbx_dos_umb</tabstop>
+  <tabstop>chkDbx_mixer_nosound</tabstop>
+  <tabstop>cbxDbx_mixer_rate</tabstop>
+  <tabstop>cbxDbx_sblaster_sbtype</tabstop>
+  <tabstop>cbxDbx_sblaster_oplrate</tabstop>
+  <tabstop>chkDbx_gus_gus</tabstop>
+  <tabstop>cbxDbx_gus_gusrate</tabstop>
+  <tabstop>chkDbx_activar_mpu401</tabstop>
+  <tabstop>chkDbx_midi_intelligent</tabstop>
+  <tabstop>chkDbx_speaker_pcspeaker</tabstop>
+  <tabstop>chkDbx_speaker_disney</tabstop>
+  <tabstop>cbxDbx_midi_device</tabstop>
+  <tabstop>cbxDbx_midi_mt32rate</tabstop>
+  <tabstop>cbxDbx_speaker_pcrate</tabstop>
+  <tabstop>cbxDbx_speaker_tandyrate</tabstop>
+  <tabstop>cbxDbx_midi_mpu401</tabstop>
   <tabstop>btnMount_Add</tabstop>
   <tabstop>btnMount_Edit</tabstop>
   <tabstop>btnMount_Delete</tabstop>
@@ -1980,8 +1983,8 @@ Pulsa Aceptar para cerrar el Asistente
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>309</x>
-     <y>461</y>
+     <x>100</x>
+     <y>384</y>
     </hint>
     <hint type="destinationlabel" >
      <x>480</x>

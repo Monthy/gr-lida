@@ -6,19 +6,13 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>380</height>
+    <height>460</height>
    </rect>
   </property>
   <property name="minimumSize" >
    <size>
     <width>400</width>
-    <height>380</height>
-   </size>
-  </property>
-  <property name="maximumSize" >
-   <size>
-    <width>400</width>
-    <height>380</height>
+    <height>460</height>
    </size>
   </property>
   <property name="windowTitle" >
@@ -28,50 +22,281 @@
    <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
+   <property name="spacing" >
     <number>4</number>
    </property>
-   <property name="spacing" >
-    <number>6</number>
+   <property name="leftMargin" >
+    <number>4</number>
+   </property>
+   <property name="topMargin" >
+    <number>4</number>
+   </property>
+   <property name="rightMargin" >
+    <number>4</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>4</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="tabWidget_ImportPath" >
-     <property name="enabled" >
-      <bool>true</bool>
+    <widget class="QGroupBox" name="gBox_path_images" >
+     <property name="title" >
+      <string>Confirmar directorios de las Imágenes</string>
      </property>
-     <property name="currentIndex" >
-      <number>0</number>
-     </property>
-     <widget class="QWidget" name="tab_2" >
-      <attribute name="title" >
-       <string>Path Juego</string>
-      </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item>
-        <widget class="QFrame" name="frame" >
+     <layout class="QVBoxLayout" >
+      <property name="spacing" >
+       <number>4</number>
+      </property>
+      <property name="leftMargin" >
+       <number>6</number>
+      </property>
+      <property name="topMargin" >
+       <number>0</number>
+      </property>
+      <property name="rightMargin" >
+       <number>6</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>6</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" >
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lb_path_17" >
+          <property name="minimumSize" >
+           <size>
+            <width>95</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Thumbs</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtDatosPath_Thumbs" />
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDirPath_Datos_Thumbs" >
+          <property name="minimumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string/>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" >
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lb_path_18" >
+          <property name="minimumSize" >
+           <size>
+            <width>95</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Cover Front</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtDatosPath_CoverFront" />
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDirPath_Datos_CoverFront" >
+          <property name="minimumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string/>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" >
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lb_path_19" >
+          <property name="minimumSize" >
+           <size>
+            <width>95</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Cover Back</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtDatosPath_CoverBack" />
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDirPath_Datos_CoverBack" >
+          <property name="minimumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string/>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="gBox_path_emu" >
+     <layout class="QVBoxLayout" >
+      <property name="spacing" >
+       <number>4</number>
+      </property>
+      <property name="leftMargin" >
+       <number>6</number>
+      </property>
+      <property name="topMargin" >
+       <number>0</number>
+      </property>
+      <property name="rightMargin" >
+       <number>6</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QStackedWidget" name="wizardPath" >
+        <property name="minimumSize" >
+         <size>
+          <width>16</width>
+          <height>260</height>
+         </size>
+        </property>
+        <property name="currentIndex" >
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="page_1" >
          <layout class="QVBoxLayout" >
-          <property name="margin" >
+          <property name="spacing" >
            <number>4</number>
           </property>
-          <property name="spacing" >
-           <number>6</number>
+          <property name="leftMargin" >
+           <number>0</number>
+          </property>
+          <property name="topMargin" >
+           <number>0</number>
+          </property>
+          <property name="rightMargin" >
+           <number>0</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>0</number>
           </property>
           <item>
            <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
             <property name="spacing" >
              <number>6</number>
             </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
             <item>
-             <widget class="QLabel" name="lb_path_17" >
+             <widget class="QLabel" name="lb_path_1" >
               <property name="minimumSize" >
                <size>
                 <width>95</width>
@@ -79,15 +304,15 @@
                </size>
               </property>
               <property name="text" >
-               <string>Thumbs</string>
+               <string>path_conf</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Datos_1" />
+             <widget class="QLineEdit" name="txtPath_Dbx_1" />
             </item>
             <item>
-             <widget class="QPushButton" name="btnDirPath_Datos_1" >
+             <widget class="QPushButton" name="btnDirPath_Dbx_1" >
               <property name="minimumSize" >
                <size>
                 <width>30</width>
@@ -112,14 +337,23 @@
           </item>
           <item>
            <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
             <property name="spacing" >
              <number>6</number>
             </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
             <item>
-             <widget class="QLabel" name="lb_path_18" >
+             <widget class="QLabel" name="lb_path_2" >
               <property name="minimumSize" >
                <size>
                 <width>95</width>
@@ -127,15 +361,15 @@
                </size>
               </property>
               <property name="text" >
-               <string>Cover Front</string>
+               <string>path_exe</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Datos_2" />
+             <widget class="QLineEdit" name="txtPath_Dbx_2" />
             </item>
             <item>
-             <widget class="QPushButton" name="btnDirPath_Datos_2" >
+             <widget class="QPushButton" name="btnDirPath_Dbx_2" >
               <property name="minimumSize" >
                <size>
                 <width>30</width>
@@ -160,14 +394,23 @@
           </item>
           <item>
            <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
             <property name="spacing" >
              <number>6</number>
             </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
             <item>
-             <widget class="QLabel" name="lb_path_19" >
+             <widget class="QLabel" name="lb_path_3" >
               <property name="minimumSize" >
                <size>
                 <width>95</width>
@@ -175,15 +418,820 @@
                </size>
               </property>
               <property name="text" >
-               <string>Cover Back</string>
+               <string>path_setup</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Datos_3" />
+             <widget class="QLineEdit" name="txtPath_Dbx_3" />
             </item>
             <item>
-             <widget class="QPushButton" name="btnDirPath_Datos_3" >
+             <widget class="QPushButton" name="btnDirPath_Dbx_3" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_4" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_lang</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Dbx_4" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Dbx_4" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_5" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_mapper</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Dbx_5" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Dbx_5" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_6" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_gus</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Dbx_6" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Dbx_6" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_7" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_capturas</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Dbx_7" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Dbx_7" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_8" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_sonido</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Dbx_8" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Dbx_8" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_2" >
+         <layout class="QVBoxLayout" >
+          <property name="spacing" >
+           <number>4</number>
+          </property>
+          <property name="leftMargin" >
+           <number>0</number>
+          </property>
+          <property name="topMargin" >
+           <number>0</number>
+          </property>
+          <property name="rightMargin" >
+           <number>0</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_9" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Svm_1" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Svm_1" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_10" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Svm_2" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Svm_2" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_11" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_setup</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Svm_3" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Svm_3" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_12" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_extra</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Svm_4" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Svm_4" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_13" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_capturas</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Svm_5" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Svm_5" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_14" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_sonido</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Svm_6" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Svm_6" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_3" >
+         <layout class="QVBoxLayout" >
+          <property name="spacing" >
+           <number>4</number>
+          </property>
+          <property name="leftMargin" >
+           <number>0</number>
+          </property>
+          <property name="topMargin" >
+           <number>0</number>
+          </property>
+          <property name="rightMargin" >
+           <number>0</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_15" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_conf</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Vdms_1" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Vdms_1" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <property name="leftMargin" >
+             <number>0</number>
+            </property>
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_path_16" >
+              <property name="minimumSize" >
+               <size>
+                <width>95</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>path_exe</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtPath_Vdms_2" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirPath_Vdms_2" >
               <property name="minimumSize" >
                <size>
                 <width>30</width>
@@ -221,875 +1269,27 @@
           </item>
          </layout>
         </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tab_1" >
-      <attribute name="title" >
-       <string>Path emu</string>
-      </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item>
-        <widget class="QStackedWidget" name="wizardPath" >
-         <property name="currentIndex" >
-          <number>0</number>
-         </property>
-         <widget class="QWidget" name="page_1" >
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>4</number>
-           </property>
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_1" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_conf</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Dbx_1" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Dbx_1" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_2" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_exe</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Dbx_2" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Dbx_2" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_3" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_setup</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Dbx_3" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Dbx_3" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_4" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_lang</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Dbx_4" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Dbx_4" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_5" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_mapper</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Dbx_5" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Dbx_5" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_6" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_gus</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Dbx_6" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Dbx_6" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_7" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_capturas</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Dbx_7" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Dbx_7" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_8" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_sonido</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Dbx_8" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Dbx_8" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="page_2" >
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>4</number>
-           </property>
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_9" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Svm_1" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Svm_1" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_10" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_save</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Svm_2" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Svm_2" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_11" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_setup</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Svm_3" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Svm_3" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_12" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_extra</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Svm_4" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Svm_4" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_13" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_capturas</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Svm_5" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Svm_5" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_14" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_sonido</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Svm_6" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Svm_6" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="page_3" >
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>4</number>
-           </property>
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_15" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_conf</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Vdms_1" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Vdms_1" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lb_path_16" >
-               <property name="minimumSize" >
-                <size>
-                 <width>95</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>path_exe</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="txtPath_Vdms_2" />
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnDirPath_Vdms_2" >
-               <property name="minimumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>30</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-      </layout>
-     </widget>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" >
-     <property name="margin" >
-      <number>4</number>
-     </property>
      <property name="spacing" >
       <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>4</number>
+     </property>
+     <property name="topMargin" >
+      <number>4</number>
+     </property>
+     <property name="rightMargin" >
+      <number>4</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>4</number>
      </property>
      <item>
       <spacer>
@@ -1168,24 +1368,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>234</x>
-     <y>289</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>191</x>
-     <y>168</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnOk</sender>
-   <signal>clicked()</signal>
-   <receiver>ImportPathClass</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>148</x>
-     <y>289</y>
+     <x>282</x>
+     <y>451</y>
     </hint>
     <hint type="destinationlabel" >
      <x>191</x>
