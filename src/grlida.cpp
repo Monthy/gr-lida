@@ -358,7 +358,7 @@ void GrLida::CargarConfigInicial()
 	sql = new dbSql( stdb_type, stdb_host, stdb_name, stdb_username, stdb_password, stdb_port ); // Carga la base de datos
 
 	if( !sql->dbisOpen() )
-		QMessageBox::critical(0, tr("Error abrir la Base de Datos"), tr("No se ha podido establecer una conexión con la Base de Datos.\nEsta aplicación necesita soporte de SQLite. Mira la documentación de Qt SQL driver para ms información.\n\nClick Cancelar para salir."), QMessageBox::Cancel);
+		QMessageBox::critical(0, tr("Error abrir la Base de Datos"), tr("No se ha podido establecer una conexión con la Base de Datos.\nEsta aplicación necesita soporte de SQLite. Mira la documentación de Qt SQL driver para más información.\n\nClick Cancelar para salir."), QMessageBox::Cancel);
 	else
 		sql->CrearTablas();	// Crea las tablas si no lo estan		
 }

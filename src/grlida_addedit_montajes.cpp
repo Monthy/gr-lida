@@ -36,9 +36,9 @@ frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog
 //	stHomeDir = QDir::currentPath()+"/";			// directorio de trabajo del GR-lida
 //	stHomeDir = "./";								// directorio de trabajo del GR-lida
 
-	ui.lb_Montaje_info->setText( "<b>-aspi</b> -- "+ tr("Forces use of the aspi layer. Only valid if mounting a CD-ROM under Windows systems with an ASPI-Layer.")+"<br>"+
-		"<b>-ioctl</b> -- "+ tr("Forces use of ioctl commands. Only valid if mounting a CD-ROM under a Windows OS which support them (Win2000/XP/NT).")+"<br>"+
-		"<b>-noioctl</b> -- "+ tr("Forces use of the SDL CD-ROM layer. Valid on all systems.")+"<br>"+
+	ui.lb_Montaje_info->setText( "<b>-aspi</b> -- "+ tr("Fuerza el uso de la capa aspi. Sólo válido si montas un CD-ROM bajo los sistemas Windows con un ASPI-Layer.")+"<br>"+
+		"<b>-ioctl</b> -- "+ tr("Fuerza el uso de los comandos ioctl. Sólo válido si montar un CD-ROM bajo un sistema operativo de Windows que lo soporten (Win2000/XP/NT).")+"<br>"+
+		"<b>-noioctl</b> -- "+ tr("Fuerza el uso de las SDL para el CD-ROM. Válido para todos los sistemas.")+"<br>"+
 		tr("Procura no montar la Raiz del sistema operativo: ejemplo en windows seria")+" <b style=\"color:#FF0000;\">C:\\</b> "+ tr("y en linux seria directamente")+ " <b style=\"color:#FF0000;\">/</b> ");
 
 	ui.txtMontaje_path->setText( Montajes["path"] );
