@@ -132,7 +132,6 @@ private slots:
 
 // ---------------------------------------------------------------
 // Referente al DOSBox -------------------------------------------
-	void on_txtDbx_path_conf_textChanged(const QString &);
 	void CargarDatosDosBox( QString stIDdbx );
 	void CargarDatosDBxMontaje( QString stIDdbx );
 	void setDatosDosBox();

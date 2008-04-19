@@ -58,6 +58,17 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDirPath_Vdms_1, SIGNAL( clicked() ), this, SLOT( on_btnOpenVdmsFile_1()) );
 	connect( ui.btnDirPath_Vdms_2, SIGNAL( clicked() ), this, SLOT( on_btnOpenVdmsFile_2()) );
 
+	if( ui.gBox_path_emu->isEnabled() )
+	{
+		if( ui.wizardPath->currentIndex() == 0 )
+			ui.gBox_path_emu->setTitle("Path - DOSBox");
+		if( ui.wizardPath->currentIndex() == 1 )
+			ui.gBox_path_emu->setTitle("Path - ScummVM");
+		if( ui.wizardPath->currentIndex() == 2 )
+			ui.gBox_path_emu->setTitle("Path - VDMSound");
+	} else
+			ui.gBox_path_emu->setTitle("Path");
+
 // centra la ventana en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
@@ -74,7 +85,6 @@ void frmImportPath::on_btnOk()
 	QString stExeJuego;	
 	bool siguiente = true;
 
-	ui.gBox_path_emu->setTitle("Path");
 	if( ui.gBox_path_emu->isEnabled() )
 	{
 		siguiente = false;
@@ -82,16 +92,11 @@ void frmImportPath::on_btnOk()
 		{
 		// DOSBox
 			if( ui.wizardPath->currentIndex() == 0 )
-			{
 				appConfg.setFileName( stHomeDir + "confdbx/"+ ui.txtPath_Dbx_1->text() );
-				ui.gBox_path_emu->setTitle("Path - DOSBox");
-			}
 		// VDMSound
 			if( ui.wizardPath->currentIndex() == 2 )
-			{
 				appConfg.setFileName( stHomeDir + "confvdms/"+ ui.txtPath_Vdms_1->text() );
-				ui.gBox_path_emu->setTitle("Path - VDMSound");
-			}
+
 			if( appConfg.exists() )
 			{
 				siguiente = false;
@@ -110,10 +115,8 @@ void frmImportPath::on_btnOk()
 				} else
 					siguiente = true;
 			}
-		} else {
+		} else 
 			siguiente = true;
-			ui.gBox_path_emu->setTitle("Path - ScummVM");
-		}
 	}
 
 	if( siguiente == true )

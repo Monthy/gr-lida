@@ -61,14 +61,15 @@ private:
 	QString url_xmldb, xml_ListaJuegos, xml_InfoJuegos, url_filed;
 	int indx_fin_descarga;
 	bool xml_read(QString fileName);
-    QHttp *http;
-    QFile *file;
-    QDomDocument domDocument;
-    QProgressDialog *progressDialog;
+	QHttp *http;
+	QFile *file;
+	QDomDocument domDocument;
+	QProgressDialog *progressDialog;
 	int  httpGetId;
-    bool httpRequestAborted;
-    void parseListaJuegos(const QDomElement &element);
-    void LoadProfile_DFend(QString fileName);
+	bool httpRequestAborted;
+	void MostrarDatosJuegoInfo();
+	void parseListaJuegos(const QDomElement &element);
+	void setProfile_DFend(QString fileName);
 
 private slots:
 	void on_btnPrevious();
@@ -76,7 +77,7 @@ private slots:
 	void on_btnOk();
 	void on_btnDirFileXML();
 	void on_xml_open();
-	void on_download();
+	void on_btnUpdateList();
 	void on_treeWidget_Dblclicked( QTreeWidgetItem *item);
 	void on_treeWidget_clicked( QTreeWidgetItem *item);
 

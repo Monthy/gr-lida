@@ -35,7 +35,7 @@ public:
 	~Funciones();
 
 // Versión del GR-lida
-	QString stVersionGrl(){ return "0.4.1"; }
+	QString stVersionGrl(){ return "0.4.2"; }
 // Versiones que soporta
 	QString stVersionDbx(){ return "0.72";  }
 	QString stVersionSvm(){ return "0.11.1";}
@@ -72,9 +72,15 @@ public:
 	QString VentanaDirectorios(const QString caption, const QString dir, const QString tmp_dir);
 //
 	void CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm);
+//
+	void CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
 	QStringList CreaConfigMontajes(QTreeWidget *treeWidget, const QHash<QString, QString> datos);
+//
+	void CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg);
 // Exportar la configuracion del DOSBox para el DFend
 	void Exportar_Profile_DFend(QString fileName);
+// Importar la configuracion del DOSBox para el DFend
+	QHash<QString, QString> Importar_Profile_DFend(QString fileName);
 };
 
 #endif /*FUNCIONES_H*/

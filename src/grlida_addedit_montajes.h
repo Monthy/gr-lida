@@ -33,12 +33,11 @@
 class frmAddEditMontajes : public QDialog {
     Q_OBJECT
 public:
-	frmAddEditMontajes(bool EditMount, QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog *parent = 0, Qt::WFlags flags = 0 );
 	~frmAddEditMontajes();
 
 	Ui::AddEditMontajesClass ui;
 
-	//QVector<QString> DatosMontaje;
 	QHash<QString, QString> DatosMontaje;
 
 private:

@@ -138,7 +138,7 @@ void frmVdmsAdd::on_btnVdms_FileConfg()
 {
 	bool str_ok;
 	QString str, archivo;
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stConfgVdmSDir, ui.txtVdms_path_conf->text(), tr("Todos los archivo") + " (*)", 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stConfgVdmSDir, ui.txtVdms_path_conf->text(), "Config VDMSound (*.vlp);;"+tr("Todos los archivo") + " (*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );

@@ -24,7 +24,7 @@
 
 #include "grlida_addedit_montajes.h"
 
-frmAddEditMontajes::frmAddEditMontajes(bool EditMount, QDialog *parent, Qt::WFlags flags)
+frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
 {
 	ui.setupUi(this);
@@ -41,16 +41,13 @@ frmAddEditMontajes::frmAddEditMontajes(bool EditMount, QDialog *parent, Qt::WFla
 		"<b>-noioctl</b> -- "+ tr("Forces use of the SDL CD-ROM layer. Valid on all systems.")+"<br>"+
 		tr("Procura no montar la Raiz del sistema operativo: ejemplo en windows seria")+" <b style=\"color:#FF0000;\">C:\\</b> "+ tr("y en linux seria directamente")+ " <b style=\"color:#FF0000;\">/</b> ");
 
-	if(EditMount==true)
-	{
-		ui.txtMontaje_path->setText( DatosMontaje["path"] );
-		ui.txtMontaje_label->setText( DatosMontaje["label"] );
-		ui.cbxMontaje_type_drive->setCurrentIndex( ui.cbxMontaje_type_drive->findText( DatosMontaje["tipo_as"] ) );
-		ui.cbxMontaje_letter->setCurrentIndex( ui.cbxMontaje_letter->findText( DatosMontaje["letter"] ) );
-		ui.cbxMontaje_cdrom->setCurrentIndex( ui.cbxMontaje_cdrom->findText( DatosMontaje["indx_cd"] ) );
-		ui.txtMontaje_opt_mount->setText( DatosMontaje["opt_mount"] );
-		ui.cbxMontaje_mode_cdrom->setCurrentIndex( ui.cbxMontaje_mode_cdrom->findText( DatosMontaje["io_ctrl"], Qt::MatchContains ) );
-	}
+	ui.txtMontaje_path->setText( Montajes["path"] );
+	ui.txtMontaje_label->setText( Montajes["label"] );
+	ui.cbxMontaje_type_drive->setCurrentIndex( ui.cbxMontaje_type_drive->findText( Montajes["tipo_as"] ) );
+	ui.cbxMontaje_letter->setCurrentIndex( ui.cbxMontaje_letter->findText( Montajes["letter"] ) );
+	ui.cbxMontaje_cdrom->setCurrentIndex( ui.cbxMontaje_cdrom->findText( Montajes["indx_cd"] ) );
+	ui.txtMontaje_opt_mount->setText( Montajes["opt_mount"] );
+	ui.cbxMontaje_mode_cdrom->setCurrentIndex( ui.cbxMontaje_mode_cdrom->findText( Montajes["io_ctrl"], Qt::MatchContains ) );
 
 // centra la ventana en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();

@@ -683,6 +683,9 @@
        <property name="text" >
         <string>Cerrar DOSBox al terminar el juego</string>
        </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
       </widget>
      </widget>
      <widget class="QWidget" name="page_2" >
@@ -1677,8 +1680,8 @@
         </property>
         <property name="iconSize" >
          <size>
-          <width>24</width>
-          <height>24</height>
+          <width>16</width>
+          <height>16</height>
          </size>
         </property>
         <property name="textElideMode" >
@@ -1687,8 +1690,14 @@
         <property name="rootIsDecorated" >
          <bool>false</bool>
         </property>
+        <property name="uniformRowHeights" >
+         <bool>true</bool>
+        </property>
         <property name="itemsExpandable" >
          <bool>false</bool>
+        </property>
+        <property name="allColumnsShowFocus" >
+         <bool>true</bool>
         </property>
         <column>
          <property name="text" >

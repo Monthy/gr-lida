@@ -548,9 +548,9 @@ void frmAddEditJuego::setDatosJuegos()
 
 	if( ui.cbxDatos_Icono->currentText()!="" )
 		DatosJuego["icono"] = ui.cbxDatos_Icono->currentText();					// icono
-	else DatosJuego["icono"] = "";
+	else DatosJuego["icono"] = ""+TipoEmulador;
 
-	DatosJuego["titulo"] = ui.txtDatos_Titulo->text();							// titulo
+	DatosJuego["titulo"]    = ui.txtDatos_Titulo->text();							// titulo
 	DatosJuego["subtitulo"] = ui.txtDatos_Subtitulo->text();					// subtitulo
 
 	if( ui.cbxDatos_Genero->currentText()!="" )
@@ -588,11 +588,20 @@ void frmAddEditJuego::setDatosJuegos()
 	if( ui.cbxDatos_SistemaOp->currentText()!="" )
 		DatosJuego["sistemaop"] = ui.cbxDatos_SistemaOp->currentText();			// sistemaop
 	else DatosJuego["sistemaop"] = "";
-	
-	DatosJuego["tamano"]      = ui.txtDatos_Tamano->text();						// tamano
-	DatosJuego["graficos"]    = ui.cbxDatos_Graficos->currentText();			// graficos
-	DatosJuego["sonido"]      = ui.cbxDatos_Sonido->currentText();				// sonido
-	DatosJuego["jugabilidad"] = ui.cbxDatos_Jugabilidad->currentText();			// jugabilidad
+
+	DatosJuego["tamano"] = ui.txtDatos_Tamano->text();							// tamano
+
+	if( ui.cbxDatos_Graficos->currentText()!="" )
+		DatosJuego["graficos"] = ui.cbxDatos_Graficos->currentText();			// graficos
+	else DatosJuego["graficos"] = "1";
+
+	if( ui.cbxDatos_Sonido->currentText()!="" )
+		DatosJuego["sonido"] = ui.cbxDatos_Sonido->currentText();				// sonido
+	else DatosJuego["sonido"] = "1";
+
+	if( ui.cbxDatos_Jugabilidad->currentText()!="" )
+		DatosJuego["jugabilidad"] = ui.cbxDatos_Jugabilidad->currentText();		// jugabilidad
+	else DatosJuego["jugabilidad"] = "1";
 
 	if( ui.chkDatos_Original->isChecked() )
 		DatosJuego["original"] = "true";								// original
@@ -610,9 +619,12 @@ void frmAddEditJuego::setDatosJuegos()
 	DatosJuego["cover_front"] = stCoverFront;							// cover_front
 	DatosJuego["cover_back"]  = stCoverBack;							// cover_back
 	DatosJuego["fecha"]       = ui.lb_fechahora->text();				// fecha d/m/a h:m:s
-	DatosJuego["tipo_emu"]    = ui.cbxDatos_TipoEmu->currentText();		// tipo_emu
-	DatosJuego["comentario"]  = ui.txtDatos_Comentario->toPlainText();	// comentario
 
+	if( ui.cbxDatos_TipoEmu->currentText()!="" )
+		DatosJuego["tipo_emu"] = ui.cbxDatos_TipoEmu->currentText();	// tipo_emu
+	else DatosJuego["tipo_emu"] = ""+TipoEmulador;
+
+	DatosJuego["comentario"]  = ui.txtDatos_Comentario->toPlainText();	// comentario
 }
 
 void frmAddEditJuego::on_btnImgAbrir_Thumbs()
@@ -1733,32 +1745,12 @@ void frmAddEditJuego::setDatosDosBox()
 			DatosDosBox["parametros_setup"] = ui.txtDbx_parametros_setup->text(); else DatosDosBox["parametros_setup"] = "";
 }
 
-void frmAddEditJuego::on_txtDbx_path_conf_textChanged(const QString &)
-{
-	QRegExp rx("/([a-zA-Z0-9]+)");
-	QValidator *validator = new QRegExpValidator(rx, this);
-
-	ui.txtDbx_path_conf->setValidator(validator);
-
-	bool str_ok;
-	QString str = ui.txtDbx_path_conf->text();
-	if(str != "")
-	{
-		str = fGrl.eliminar_caracteres( str );
-		str_ok = str.endsWith(".conf");
-		if(str_ok == false)
-			str.append(".conf");
-		ui.txtDbx_path_conf->setText( str );
-	} else
-		ui.txtDbx_path_conf->setText( "" );
-}
-
 void frmAddEditJuego::on_btnDbx_FileConfg()
 {
 	bool str_ok;
 	QString str, archivo;
 
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_path_conf->text(), tr("Todos los archivo") + " (*)", 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_path_conf->text(), "Config DOSBox (*.conf);;"+tr("Todos los archivo") + " (*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -1870,16 +1862,17 @@ QString frmAddEditJuego::setOpcionesSerial()
 
 void frmAddEditJuego::on_btnMount_Add()
 {	
-	frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes(false);
-	AddEditMontajes->DatosMontaje.clear();
-	AddEditMontajes->DatosMontaje["path"]      = ""; // directorio o iso
-	AddEditMontajes->DatosMontaje["label"]     = ""; // etiqueta
-	AddEditMontajes->DatosMontaje["tipo_as"]   = ""; // tipo de montaje
-	AddEditMontajes->DatosMontaje["letter"]    = ""; // letra de montaje
-	AddEditMontajes->DatosMontaje["indx_cd"]   = ""; // index de la unidad de cd-rom
-	AddEditMontajes->DatosMontaje["opt_mount"] = ""; // opciones del cd-rom
-	AddEditMontajes->DatosMontaje["io_ctrl"]   = ""; // cd/dvd
+	QHash<QString, QString> DatosMontaje;
+	DatosMontaje.clear();
+	DatosMontaje["path"]      = "";      // directorio o iso
+	DatosMontaje["label"]     = "";      // etiqueta
+	DatosMontaje["tipo_as"]   = "drive"; // tipo de montaje
+	DatosMontaje["letter"]    = "C";     // letra de montaje
+	DatosMontaje["indx_cd"]   = "";      // index de la unidad de cd-rom
+	DatosMontaje["opt_mount"] = "";      // opciones del cd-rom
+	DatosMontaje["io_ctrl"]   = "-aspi"; // cd/dvd
 
+	frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes( DatosMontaje );
 	if( AddEditMontajes->exec() == QDialog::Accepted )
 	{
 		QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
@@ -1947,18 +1940,21 @@ void frmAddEditJuego::on_btnMount_Add()
 
 void frmAddEditJuego::on_btnMount_Edit()
 {
-	if( ui.twMontajes->topLevelItemCount()>0 )
-	{
-		frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes(true);
-		AddEditMontajes->DatosMontaje.clear();
-		AddEditMontajes->DatosMontaje["path"]      = ui.twMontajes->currentItem()->text(0); // directorio o iso
-		AddEditMontajes->DatosMontaje["label"]     = ui.twMontajes->currentItem()->text(1); // etiqueta
-		AddEditMontajes->DatosMontaje["tipo_as"]   = ui.twMontajes->currentItem()->text(2); // tipo de montaje
-		AddEditMontajes->DatosMontaje["letter"]    = ui.twMontajes->currentItem()->text(3); // letra de montaje
-		AddEditMontajes->DatosMontaje["indx_cd"]   = ui.twMontajes->currentItem()->text(4); // index de la unidad de cd-rom
-		AddEditMontajes->DatosMontaje["opt_mount"] = ui.twMontajes->currentItem()->text(5); // opciones del cd-rom
-		AddEditMontajes->DatosMontaje["io_ctrl"]   = ui.twMontajes->currentItem()->text(6); // cd/dvd
+	int pos = ui.twMontajes->indexOfTopLevelItem( ui.twMontajes->currentItem() );
 
+	if( ui.twMontajes->topLevelItemCount()>0 && pos!=-1 )
+	{
+		QHash<QString, QString> DatosMontaje;
+		DatosMontaje.clear();
+		DatosMontaje["path"]      = ui.twMontajes->currentItem()->text(0); // directorio o iso
+		DatosMontaje["label"]     = ui.twMontajes->currentItem()->text(1); // etiqueta
+		DatosMontaje["tipo_as"]   = ui.twMontajes->currentItem()->text(2); // tipo de montaje
+		DatosMontaje["letter"]    = ui.twMontajes->currentItem()->text(3); // letra de montaje
+		DatosMontaje["indx_cd"]   = ui.twMontajes->currentItem()->text(4); // index de la unidad de cd-rom
+		DatosMontaje["opt_mount"] = ui.twMontajes->currentItem()->text(5); // opciones del cd-rom
+		DatosMontaje["io_ctrl"]   = ui.twMontajes->currentItem()->text(6); // cd/dvd
+
+		frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes( DatosMontaje );
 		if( AddEditMontajes->exec() == QDialog::Accepted )
 		{
 			QString tipoDrive = AddEditMontajes->DatosMontaje["tipo_as"];
@@ -1982,8 +1978,8 @@ void frmAddEditJuego::on_btnMount_Edit()
 			ui.twMontajes->currentItem()->setText( 4 , AddEditMontajes->DatosMontaje["indx_cd"]		);	// index de la unidad de cd-rom
 			ui.twMontajes->currentItem()->setText( 5 , AddEditMontajes->DatosMontaje["opt_mount"]	);	// opciones del cd-rom
 			ui.twMontajes->currentItem()->setText( 6 , AddEditMontajes->DatosMontaje["io_ctrl"]		);	// cd/dvd
-			ui.twMontajes->currentItem()->setText( 7 , "x"											);	// primer montaje
-			ui.twMontajes->currentItem()->setText( 9 , fGrl.IntToStr( ui.twMontajes->currentItem()->childCount() ) ); //
+			//ui.twMontajes->currentItem()->setText( 7 , "x"											);	// primer montaje
+			//ui.twMontajes->currentItem()->setText( 9 , fGrl.IntToStr( ui.twMontajes->currentItem()->childCount() ) ); //
 
 			QHash<QString, QString> datos_montaje;
 			datos_montaje.clear();
@@ -2228,7 +2224,7 @@ void frmAddEditJuego::on_btnVdms_FileConfg()
 	bool str_ok;
 	QString str, archivo;
 
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir + "confvdms/", ui.txtVdms_path_conf->text(), tr("Todos los archivo") + " (*)", 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir + "confvdms/", ui.txtVdms_path_conf->text(), "Config VDMSound (*.vlp);;"+tr("Todos los archivo") + " (*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );

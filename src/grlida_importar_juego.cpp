@@ -31,7 +31,7 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 {
 	ui.setupUi(this);
 // Conecta los distintos botones
-	connect( ui.btnUpdateList , SIGNAL(clicked()), this, SLOT(on_download()));
+	connect( ui.btnUpdateList , SIGNAL(clicked()), this, SLOT(on_btnUpdateList()));
 	connect( ui.btnPrevious   , SIGNAL(clicked()), this, SLOT(on_btnPrevious()));
 	connect( ui.btnNext       , SIGNAL(clicked()), this, SLOT(on_btnNext()));
 	connect( ui.btnOk         , SIGNAL(clicked()), this, SLOT(on_btnOk()));
@@ -61,7 +61,7 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 			pixmap.load(":/img16/"+cbx_Lista.value(1)+".png");
 			if( pixmap.isNull() )
 				pixmap.load(":/img16/sinimg.png");
-			ui.cbxDbXml->addItem( QIcon( pixmap ), fGrl.url_correcta( cbx_Lista.value(0).toLatin1() ) );
+			ui.cbxDbXml->addItem( QIcon( pixmap ), fGrl.url_correcta( cbx_Lista.value(0) ) );
 		}
 	}
 	file_xmldb.close();
@@ -118,6 +118,18 @@ void frmImportarJuego::on_btnPrevious()
 	{
 		ui.wizardImport->setCurrentIndex(ui.wizardImport->currentIndex()-1);
 		ui.btnNext->setEnabled( true );
+		if(ui.wizardImport->currentIndex() == 1 )
+		{
+			ui.twMontajes->clear();
+			ui.twDatosFiles->clear();
+			ui.twDatosURL->clear();
+			ui.lb_thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+
+			for(int i = 0; i < ui.twDatosInfo->topLevelItemCount(); i++)
+				ui.twDatosInfo->topLevelItem(i)->setText(1,"");
+
+			ui.btnOk->setEnabled(false);
+		}
 		if(ui.wizardImport->currentIndex() < 1 )
 			ui.btnPrevious->setEnabled(false);
 	}
@@ -140,19 +152,21 @@ void frmImportarJuego::on_btnNext()
 
 		if( ui.wizardImport->currentIndex() == 1 )
 		{
-			ui.twMontajes->clear();
-			ui.twDatosFiles->clear();
-			ui.twDatosURL->clear();
-
 			if((ui.twListaJuegos->isItemSelected(ui.twListaJuegos->currentItem())) && (ui.twListaJuegos->currentItem()->text(1)!=""))
 			{
 				indx_fin_descarga = 1;
 				url_filed = url_xmldb + "grlidadb.php?ver=juego&gid="+ui.twListaJuegos->currentItem()->text(1)+"&id_emu="+ui.twListaJuegos->currentItem()->text(5)+"&tipo_emu="+ui.twListaJuegos->currentItem()->text(6);
 
+				ui.twMontajes->clear();
+				ui.twDatosFiles->clear();
+				ui.twDatosURL->clear();
+
 				downloadFile( url_filed, xml_InfoJuegos );
 
 				if(ui.twListaJuegos->currentItem()->text(6)=="dosbox")
-					ui.tabWidget->setTabEnabled(2,true); else ui.tabWidget->setTabEnabled(2,false);
+					ui.tabWidget->setTabEnabled(2,true);
+				else
+					ui.tabWidget->setTabEnabled(2,false);
 
 				siguiente = true;
 			} else
@@ -175,26 +189,33 @@ void frmImportarJuego::on_btnNext()
 		siguiente = false;
 		QString tipo_file;
 		
-		ui.twMontajes->clear();
-		ui.twDatosFiles->clear();
-		ui.twDatosURL->clear();
-
 		tipo_file = ui.DirFileXML->text();
 
 		if( tipo_file.endsWith(".xml") )
 		{
 			indx_fin_descarga = 1;
+
+			ui.twMontajes->clear();
+			ui.twDatosFiles->clear();
+			ui.twDatosURL->clear();
+
 			xml_read( ui.DirFileXML->text() );
+			MostrarDatosJuegoInfo();
 			siguiente = true;
-		//}
-		//else if( tipo_file.endsWith(".prof") )
-		//{
-		//	LoadProfile_DFend( ui.DirFileXML->text() );
-		//	siguiente = true;
+		}
+		else if( tipo_file.endsWith(".prof") )
+		{
+			ui.twMontajes->clear();
+			ui.twDatosFiles->clear();
+			ui.twDatosURL->clear();
+
+			setProfile_DFend( tipo_file );
+			MostrarDatosJuegoInfo();
+			siguiente = true;
 		} else
 			siguiente = false;
 
-		if(siguiente == true )
+		if( siguiente == true )
 		{
 			ui.wizardImport->setCurrentIndex(2);
 			ui.btnOk->setEnabled(true);
@@ -216,38 +237,35 @@ void frmImportarJuego::on_btnOk()
 	img_thumbs.clear();
 	img_cover_front.clear();
 	img_cover_back.clear();
-
-	if(DatosJuego["thumbs"]=="null" || DatosJuego["thumbs"]=="")
+	
+	if(DatosJuego["thumbs"]=="null" || DatosJuego["thumbs"].isEmpty() )
 	{
 		img_thumbs = "null";
-
 		ImportPathNew->ui.txtDatosPath_Thumbs->setText("");
 		ImportPathNew->ui.txtDatosPath_Thumbs->setEnabled(false);
 		ImportPathNew->ui.btnDirPath_Datos_Thumbs->setEnabled(false);
 	} else {
 		img_thumbs = DatosJuego["thumbs"];
-
-		DatosJuego["thumbs"] = stHomeDir +"thumbs/thumbs_" + img_thumbs;
-		ImportPathNew->ui.txtDatosPath_Thumbs->setText( DatosJuego["thumbs"] );
+		ImportPathNew->ui.txtDatosPath_Thumbs->setText( stHomeDir + "thumbs/thumbs_"+DatosJuego["thumbs"] );
 		ImportPathNew->ui.txtDatosPath_Thumbs->setEnabled(true);
 		ImportPathNew->ui.btnDirPath_Datos_Thumbs->setEnabled(true);
 	}
 
-	if(DatosJuego["cover_front"]=="null" || DatosJuego["cover_front"]=="")
+	if(DatosJuego["cover_front"]=="null" || DatosJuego["cover_front"].isEmpty() )
 	{
 		img_cover_front = "null";
-
 		ImportPathNew->ui.txtDatosPath_CoverFront->setText("");
 		ImportPathNew->ui.txtDatosPath_CoverFront->setEnabled(false);
 		ImportPathNew->ui.btnDirPath_Datos_CoverFront->setEnabled(false);
 	} else {
+		if( !file_cover_front.exists( stHomeDir + "temp/cover_front_" + DatosJuego["cover_front"] ) )
+		{
+			indx_fin_descarga = 3;
+			url_filed = url_xmldb + "images/covers/large/" + DatosJuego["cover_front"];
+			downloadFile( url_filed, stHomeDir + "temp/cover_front_" + DatosJuego["cover_front"]);
+		}
 		img_cover_front = DatosJuego["cover_front"];
-
-		url_filed = url_xmldb + "images/covers/large/"+ img_cover_front;
-		downloadFile( url_filed, stHomeDir + "temp/cover_front_" + img_cover_front);
-
-		DatosJuego["cover_front"] = stHomeDir +"covers/cover_front_" + img_cover_front;
-		ImportPathNew->ui.txtDatosPath_CoverFront->setText( DatosJuego["cover_front"] );
+		ImportPathNew->ui.txtDatosPath_CoverFront->setText( stHomeDir + "covers/cover_front_" + DatosJuego["cover_front"] );
 		ImportPathNew->ui.txtDatosPath_CoverFront->setEnabled(true);
 		ImportPathNew->ui.btnDirPath_Datos_CoverFront->setEnabled(true);
 	}
@@ -255,18 +273,18 @@ void frmImportarJuego::on_btnOk()
 	if(DatosJuego["cover_back"]=="null" || DatosJuego["cover_back"]=="")
 	{
 		img_cover_back = "null";
-
 		ImportPathNew->ui.txtDatosPath_CoverBack->setText("");
 		ImportPathNew->ui.txtDatosPath_CoverBack->setEnabled(false);
 		ImportPathNew->ui.btnDirPath_Datos_CoverBack->setEnabled(false);
 	} else {
+		if( !file_cover_front.exists( stHomeDir + "covers/cover_back_" + DatosJuego["cover_back"] ) )
+		{
+			indx_fin_descarga = 3;
+			url_filed = url_xmldb + "images/covers/large/" + DatosJuego["cover_back"];
+			downloadFile( url_filed, stHomeDir + "temp/cover_back_" + DatosJuego["cover_back"]);
+		}
 		img_cover_back = DatosJuego["cover_back"];
-
-		url_filed = url_xmldb + "images/covers/large/"+ img_cover_back;
-		downloadFile( url_filed, stHomeDir + "temp/cover_back_" + img_cover_back);
-
-		DatosJuego["cover_back"] = stHomeDir +"covers/cover_back_"+ img_cover_back;
-		ImportPathNew->ui.txtDatosPath_CoverBack->setText( DatosJuego["cover_back"] );
+		ImportPathNew->ui.txtDatosPath_CoverBack->setText( stHomeDir + "covers/cover_back_" + DatosJuego["cover_back"] );
 		ImportPathNew->ui.txtDatosPath_CoverBack->setEnabled(true);
 		ImportPathNew->ui.btnDirPath_Datos_CoverBack->setEnabled(true);
 	}
@@ -307,7 +325,7 @@ void frmImportarJuego::on_btnOk()
 
 	if( ImportPathNew->exec() == QDialog::Accepted )
 	{
-		DatosJuego["thumbs"]      = ImportPathNew->ui.txtDatosPath_Thumbs->text();	// thumbs
+		DatosJuego["thumbs"]      = ImportPathNew->ui.txtDatosPath_Thumbs->text();		// thumbs
 		DatosJuego["cover_front"] = ImportPathNew->ui.txtDatosPath_CoverFront->text();	// cover_front
 		DatosJuego["cover_back"]  = ImportPathNew->ui.txtDatosPath_CoverBack->text();	// cover_back
 
@@ -339,16 +357,16 @@ void frmImportarJuego::on_btnOk()
 			DatosVDMSound["path_exe"]  = ImportPathNew->ui.txtPath_Vdms_2->text();		// path_exe
 		}
 
-		if(img_thumbs!="null" || img_thumbs!="")
+		if(DatosJuego["thumbs"]!="null" || !DatosJuego["thumbs"].isEmpty() )
 		{
 			if( file_thumbs.exists( stHomeDir + "temp/thumbs_" + img_thumbs ) )
 			{
 				file_thumbs.copy( stHomeDir + "temp/thumbs_" + img_thumbs, DatosJuego["thumbs"] );
-				file_thumbs.remove( stHomeDir + "temp/thumbs_" + img_thumbs );
+				//file_thumbs.remove( stHomeDir + "temp/thumbs_" + img_thumbs );
 			}
 		}
 
-		if(img_cover_front!="null" || img_cover_front!="")
+		if(DatosJuego["cover_front"]!="null" || !DatosJuego["cover_front"].isEmpty() )
 		{
 			if( file_cover_front.exists( stHomeDir + "temp/cover_front_" + img_cover_front ) )
 			{
@@ -357,11 +375,11 @@ void frmImportarJuego::on_btnOk()
 			}
 		}
 
-		if(img_cover_back!="null" || img_cover_back!="")
+		if(DatosJuego["cover_back"]!="null" || !DatosJuego["cover_back"].isEmpty() )
 		{
 			if( file_cover_back.exists( stHomeDir + "temp/cover_back_" + img_cover_back ) )
 			{
-				file_cover_back.copy( stHomeDir + "temp/cover_back_" + img_cover_back, DatosJuego["cover_back"] );
+				file_cover_back.copy( stHomeDir + "temp/cover_back_" + img_cover_back , DatosJuego["cover_back"] );
 				file_cover_back.remove( stHomeDir + "temp/cover_back_" + img_cover_back );
 			}
 		}
@@ -381,10 +399,10 @@ void frmImportarJuego::on_btnOk()
 
 void frmImportarJuego::on_btnDirFileXML()
 {
-	ui.DirFileXML->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.DirFileXML->text(), "DB GR-lida (*.xml)", 0, false) );
+	ui.DirFileXML->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.DirFileXML->text(), tr("Soportados")+" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend R (*.prof);;"+tr("Todos los archivo")+" (*)", 0, false) );
 }
 
-void frmImportarJuego::on_download()
+void frmImportarJuego::on_btnUpdateList()
 {
 	ui.twListaJuegos->clear();
 	indx_fin_descarga = 0;
@@ -538,39 +556,7 @@ void frmImportarJuego::parseListaJuegos(const QDomElement &element)
 				DatosJuego["comentario"]    = child.firstChildElement("comentario").text();		// comentario
 				DatosJuego["favorito"]      = "false";											//favorito
 
-				//for(int i = 0; i < ui.twDatosInfo->topLevelItemCount(); ++i)
-				//	ui.twDatosInfo->topLevelItem(i)->setText(1,DatosJuego[i]);
-
-				ui.twDatosInfo->topLevelItem(0)->setText(1 , DatosJuego["icono"] );			// icono
-				ui.twDatosInfo->topLevelItem(1)->setText(1 , DatosJuego["titulo"] );		// titulo
-				ui.twDatosInfo->topLevelItem(2)->setText(1 , DatosJuego["subtitulo"] );		// subtitulo
-				ui.twDatosInfo->topLevelItem(3)->setText(1 , DatosJuego["genero"] );		// genero
-				ui.twDatosInfo->topLevelItem(4)->setText(1 , DatosJuego["compania"] );		// compania
-				ui.twDatosInfo->topLevelItem(5)->setText(1 , DatosJuego["desarrollador"]);	// desarrollador
-				ui.twDatosInfo->topLevelItem(6)->setText(1 , DatosJuego["tema"] );			// tema
-				ui.twDatosInfo->topLevelItem(7)->setText(1 , DatosJuego["idioma"]);			// idioma
-				ui.twDatosInfo->topLevelItem(8)->setText(1 , DatosJuego["formato"] );		// formato
-				ui.twDatosInfo->topLevelItem(9)->setText(1 , DatosJuego["anno"] );			// anno
-				ui.twDatosInfo->topLevelItem(10)->setText(1, DatosJuego["numdisc"] );		// numdisc
-				ui.twDatosInfo->topLevelItem(11)->setText(1, DatosJuego["sistemaop"] );		// sistemaop
-				ui.twDatosInfo->topLevelItem(12)->setText(1, DatosJuego["tamano"] );		// tamano
-				ui.twDatosInfo->topLevelItem(13)->setText(1, DatosJuego["graficos"] );		// graficos
-				ui.twDatosInfo->topLevelItem(14)->setText(1, DatosJuego["sonido"] );		// sonido
-				ui.twDatosInfo->topLevelItem(15)->setText(1, DatosJuego["jugabilidad"]);	// jugabilidad
-				ui.twDatosInfo->topLevelItem(16)->setText(1, DatosJuego["original"]);		// original
-				ui.twDatosInfo->topLevelItem(17)->setText(1, DatosJuego["estado"] );		// estado
-				ui.twDatosInfo->topLevelItem(18)->setText(1, DatosJuego["thumbs"] );		// thumbs
-				ui.twDatosInfo->topLevelItem(19)->setText(1, DatosJuego["cover_front"] );	// cover_front
-				ui.twDatosInfo->topLevelItem(20)->setText(1, DatosJuego["cover_back"]);		// cover_back
-				ui.twDatosInfo->topLevelItem(21)->setText(1, DatosJuego["fecha"] );			// fecha d/m/a h:m:s
-				ui.twDatosInfo->topLevelItem(22)->setText(1, DatosJuego["tipo_emu"] );		// tipo_emu
-				ui.twDatosInfo->topLevelItem(23)->setText(1, DatosJuego["comentario"] );	// comentario
-
-				QFile file_thumbs;	// thumbs
-				if( file_thumbs.exists(stHomeDir + "temp/thumbs_"+DatosJuego["thumbs"]) )
-					ui.lb_thumbs->setPixmap( QPixmap(stHomeDir + "temp/thumbs_"+DatosJuego["thumbs"]) );
-				else
-					ui.lb_thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+				MostrarDatosJuegoInfo();
 
 			}
 			else if(child.tagName() == "datos_files")
@@ -644,7 +630,7 @@ void frmImportarJuego::parseListaJuegos(const QDomElement &element)
 				DatosDosBox["sdl_fullresolution"]    = child.firstChildElement("sdl_fullresolution").text();	// sdl_fullresolution
 				DatosDosBox["sdl_windowresolution"]  = child.firstChildElement("sdl_windowresolution").text();	// sdl_windowresolution
 				DatosDosBox["sdl_output"]            = child.firstChildElement("sdl_output").text();			// sdl_output
-				DatosDosBox["sdl_hwscale"]           =  child.firstChildElement("sdl_hwscale").text();			// sdl_hwscale
+				DatosDosBox["sdl_hwscale"]           = child.firstChildElement("sdl_hwscale").text();			// sdl_hwscale
 				DatosDosBox["sdl_autolock"]          = child.firstChildElement("sdl_autolock").text();			// sdl_autolock
 				DatosDosBox["sdl_sensitivity"]       = child.firstChildElement("sdl_sensitivity").text();		// sdl_sensitivity
 				DatosDosBox["sdl_waitonerror"]       = child.firstChildElement("sdl_waitonerror").text();		// sdl_waitonerror
@@ -759,19 +745,143 @@ void frmImportarJuego::parseListaJuegos(const QDomElement &element)
 				childItem->setText(7, child.firstChildElement("select_mount").text() );
 
 			}
-			else if(child.tagName() == "separator")
-			{
-				QTreeWidgetItem *childItem = new QTreeWidgetItem(ui.twMontajes); 
-				childItem->setText(0, QString(30, 0xB7));
-			}
+
 			child = child.nextSiblingElement();
 		}
 	}
 }
 
-void frmImportarJuego::LoadProfile_DFend(QString fileName)
+void frmImportarJuego::setProfile_DFend(QString fileName)
 {
-/* Para futura importacion de este frontend :) */
+	QStringList str_Lista;
+	QString tipoDrive, temp_opt_mount;
+	int i=0, num_mounts=0;
+	
+	DatosDosBox.clear();
+	DatosDosBox = fGrl.Importar_Profile_DFend( fileName );	
+
+//	DatosDosBox["WWW"]
+//	DatosDosBox["UserInfo"]
+	
+	DatosJuego.clear();
+	DatosJuego["icono"]         = DatosDosBox["Icon"];		// icono
+	DatosJuego["titulo"]        = DatosDosBox["Name"];		// titulo
+	DatosJuego["subtitulo"]     = "";						// subtitulo
+	DatosJuego["genero"]        = DatosDosBox["Genre"];		// genero
+	DatosJuego["compania"]      = DatosDosBox["Publisher"];	// compania
+	DatosJuego["desarrollador"] = DatosDosBox["Developer"];	// desarrollador
+	DatosJuego["tema"]          = "";						// tema
+	DatosJuego["idioma"]        = DatosDosBox["Language"];	// idioma
+	DatosJuego["formato"]       = "";						// formato
+	DatosJuego["anno"]          = DatosDosBox["Year"];		// anno
+	DatosJuego["numdisc"]       = "";						// numdisc
+	DatosJuego["sistemaop"]     = "";						// sistemaop
+	DatosJuego["tamano"]        = "";						// tamano
+	DatosJuego["graficos"]      = "0";						// graficos
+	DatosJuego["sonido"]        = "0";						// sonido
+	DatosJuego["jugabilidad"]   = "0";						// jugabilidad
+	DatosJuego["original"]      = "false";					// original
+	DatosJuego["estado"]        = "";						// estado
+	DatosJuego["thumbs"]        = "null";					// thumbs
+	DatosJuego["cover_front"]   = "null";					// cover_front
+	DatosJuego["cover_back"]    = "null";					// cover_back
+	DatosJuego["fecha"]         = fGrl.HoraFechaActual();	// fecha d/m/a h:m:s
+	DatosJuego["tipo_emu"]      = "dosbox"; 				// tipo_emu
+	DatosJuego["comentario"]    = DatosDosBox["Notes"];		// comentario
+	DatosJuego["favorito"]      = DatosDosBox["Favorite"];	//favorito
+
+	num_mounts = fGrl.StrToInt( DatosDosBox["NrOfMounts"] );
+	if( num_mounts > 0 )
+	{
+		ui.statusLabel->setText(fGrl.IntToStr(num_mounts));
+		for(i=0; i < num_mounts ; i++)
+		{
+			QTreeWidgetItem *twItemDfend = new QTreeWidgetItem(ui.twMontajes);
+
+			str_Lista.clear();
+			str_Lista = DatosDosBox[fGrl.IntToStr(i)].split("|");
+
+			tipoDrive.clear();
+			tipoDrive = str_Lista.value(1).toLower();// tipo_as
+
+			if(tipoDrive=="drive")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+				tipoDrive = "drive";
+			}
+			if(tipoDrive=="cdrom")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+				tipoDrive = "cdrom";
+			}
+			if(tipoDrive=="floppy")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+				tipoDrive = "floppy";
+			}
+			if(tipoDrive=="floppyimage")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+				tipoDrive = "IMG_floppy";
+			}
+			if(tipoDrive=="cdromimage")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+				tipoDrive = "IMG_iso";
+			}
+			if(tipoDrive=="image")
+			{
+				twItemDfend->setIcon(0, QIcon(":/img16/drive_hd.png") );
+				tipoDrive = "IMG_hdd";
+			}
+			temp_opt_mount.clear();
+			temp_opt_mount = str_Lista.value(5);
+
+			twItemDfend->setText(0, ""+str_Lista.value(0) ); // path
+			twItemDfend->setText(1, ""+str_Lista.value(4) ); // label
+			twItemDfend->setText(2, ""+tipoDrive          ); // tipo_as
+			twItemDfend->setText(3, ""+str_Lista.value(2) ); // letter
+			twItemDfend->setText(4, ""+fGrl.IntToStr(i)   ); // indx_cd
+			twItemDfend->setText(5, ""+temp_opt_mount     ); // opt_mount
+			twItemDfend->setText(6, ""+str_Lista.value(3) ); // io_ctrl
+			twItemDfend->setText(7, "x"                    ); // select_mount
+
+		}
+	}
+}
+
+void frmImportarJuego::MostrarDatosJuegoInfo()
+{
+	ui.twDatosInfo->topLevelItem(0)->setText(1 , DatosJuego["icono"] );			// icono
+	ui.twDatosInfo->topLevelItem(1)->setText(1 , DatosJuego["titulo"] );		// titulo
+	ui.twDatosInfo->topLevelItem(2)->setText(1 , DatosJuego["subtitulo"] );		// subtitulo
+	ui.twDatosInfo->topLevelItem(3)->setText(1 , DatosJuego["genero"] );		// genero
+	ui.twDatosInfo->topLevelItem(4)->setText(1 , DatosJuego["compania"] );		// compania
+	ui.twDatosInfo->topLevelItem(5)->setText(1 , DatosJuego["desarrollador"]);	// desarrollador
+	ui.twDatosInfo->topLevelItem(6)->setText(1 , DatosJuego["tema"] );			// tema
+	ui.twDatosInfo->topLevelItem(7)->setText(1 , DatosJuego["idioma"]);			// idioma
+	ui.twDatosInfo->topLevelItem(8)->setText(1 , DatosJuego["formato"] );		// formato
+	ui.twDatosInfo->topLevelItem(9)->setText(1 , DatosJuego["anno"] );			// anno
+	ui.twDatosInfo->topLevelItem(10)->setText(1, DatosJuego["numdisc"] );		// numdisc
+	ui.twDatosInfo->topLevelItem(11)->setText(1, DatosJuego["sistemaop"] );		// sistemaop
+	ui.twDatosInfo->topLevelItem(12)->setText(1, DatosJuego["tamano"] );		// tamano
+	ui.twDatosInfo->topLevelItem(13)->setText(1, DatosJuego["graficos"] );		// graficos
+	ui.twDatosInfo->topLevelItem(14)->setText(1, DatosJuego["sonido"] );		// sonido
+	ui.twDatosInfo->topLevelItem(15)->setText(1, DatosJuego["jugabilidad"]);	// jugabilidad
+	ui.twDatosInfo->topLevelItem(16)->setText(1, DatosJuego["original"]);		// original
+	ui.twDatosInfo->topLevelItem(17)->setText(1, DatosJuego["estado"] );		// estado
+	ui.twDatosInfo->topLevelItem(18)->setText(1, DatosJuego["thumbs"] );		// thumbs
+	ui.twDatosInfo->topLevelItem(19)->setText(1, DatosJuego["cover_front"] );	// cover_front
+	ui.twDatosInfo->topLevelItem(20)->setText(1, DatosJuego["cover_back"]);		// cover_back
+	ui.twDatosInfo->topLevelItem(21)->setText(1, DatosJuego["fecha"] );			// fecha d/m/a h:m:s
+	ui.twDatosInfo->topLevelItem(22)->setText(1, DatosJuego["tipo_emu"] );		// tipo_emu
+	ui.twDatosInfo->topLevelItem(23)->setText(1, DatosJuego["comentario"] );	// comentario
+	
+	QFile file_thumbs;	// thumbs
+	if( file_thumbs.exists(stHomeDir + "temp/thumbs_"+DatosJuego["thumbs"]) )
+		ui.lb_thumbs->setPixmap( QPixmap(stHomeDir + "temp/thumbs_"+DatosJuego["thumbs"]) );
+	else
+		ui.lb_thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 }
 
 void frmImportarJuego::downloadFile(QString urlfile, QString fileName)
@@ -864,6 +974,9 @@ void frmImportarJuego::httpRequestFinished(int requestId, bool error)
 			case 2:
 				ui.textBrowser->setHtml( texto_html );
 			break;
+			case 3:
+				//
+			break;
 		}
 	}
 	ui.btnUpdateList->setEnabled(true);
@@ -915,20 +1028,30 @@ void frmImportarJuego::slotAuthenticationRequired(const QString &hostName, quint
 void frmImportarJuego::on_treeWidget_clicked( QTreeWidgetItem *item)
 {
 	QString temp_html_img;
+	bool descarga_img;
 
 	if( item )
 	{
-		indx_fin_descarga = 2;
-
 		temp_html_img.clear();
-		if( item->text(2)=="null" || item->text(2)=="" )
+		if( item->text(2)=="null" || item->text(2).isEmpty() )
+		{
+			descarga_img = false;
 			temp_html_img = "<img src=\":/images/juego_sin_imagen.png\" width=\"145\" height=\"178\" hspace=\"4\" vspace=\"4\" border=\"0\" align=\"right\" />";
-		else {
-			url_filed = url_xmldb + "images/covers/small/"+ item->text(2);
-			downloadFile( url_filed , stHomeDir + "temp/thumbs_"+ item->text(2) );
-			temp_html_img = "<img src=\""+stHomeDir+"temp/thumbs_"+item->text(2)+"\" width=\"145\" height=\"178\" hspace=\"4\" vspace=\"4\" border=\"0\" align=\"right\" />";
-		}
+		} else {
+			QFile file_thumbs;	// thumbs
 
+			temp_html_img = "<img src=\""+stHomeDir+"temp/thumbs_"+item->text(2)+"\" width=\"145\" height=\"178\" hspace=\"4\" vspace=\"4\" border=\"0\" align=\"right\" />";
+
+			if( !file_thumbs.exists( stHomeDir + "temp/thumbs_"+ item->text(2) ) )
+			{
+				indx_fin_descarga = 2;
+				descarga_img = true;
+				url_filed = url_xmldb + "images/covers/small/"+ item->text(2);
+				downloadFile( url_filed , stHomeDir + "temp/thumbs_"+ item->text(2) );
+			} else
+				descarga_img = false;
+		}
+	
 		ui.textBrowser->clear();
 		texto_html.clear();
 		texto_html.append("<html>");
@@ -940,7 +1063,7 @@ void frmImportarJuego::on_treeWidget_clicked( QTreeWidgetItem *item)
 		texto_html.append("</body>");
 		texto_html.append("</html>");
 
-		if( item->text(2)=="null" || item->text(2)=="" )
+		if( !descarga_img )
 			ui.textBrowser->setHtml( texto_html );
 
 		ui.btnNext->setEnabled(true);
@@ -955,7 +1078,6 @@ void frmImportarJuego::on_treeWidget_Dblclicked(QTreeWidgetItem *item)
 {
 	if( item )
 	{
-		ui.twDatosInfo->clear();
 		ui.twMontajes->clear();
 		ui.twDatosFiles->clear();
 		ui.twDatosURL->clear();

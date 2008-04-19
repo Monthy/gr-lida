@@ -260,13 +260,13 @@ void GrLida::on_ImportarJuego()
 		lastID = sql->ItemInsertaDatos( NewImportar->DatosJuego );
 
 		sql->ItemInsertaFiles( NewImportar->ui.twDatosFiles, lastID );
-		//sql->ItemInsertaURL( NewImportar->ui.twDatosURL, lastID );
+		sql->ItemInsertaURL( NewImportar->ui.twDatosURL, lastID );
 
 		if( NewImportar->DatosJuego["tipo_emu"]=="dosbox")
 		{
 			lastID_Dbx = sql->ItemInsertaDbx( NewImportar->DatosDosBox , lastID);
 			sql->ItemInsertaMontajesDbx( NewImportar->ui.twMontajes, lastID_Dbx );
-			CrearArchivoConfigDbx( NewImportar->DatosDosBox, NewImportar->ui.twMontajes, stConfgDbxDir + NewImportar->DatosDosBox["path_conf"] );
+			fGrl.CrearArchivoConfigDbx( NewImportar->DatosDosBox, NewImportar->ui.twMontajes, stConfgDbxDir + NewImportar->DatosDosBox["path_conf"] );
 		}
 		if( NewImportar->DatosJuego["tipo_emu"]=="scummvm")
 		{
@@ -372,220 +372,8 @@ void GrLida::on_AddNewDbx()
 		lastID = sql->ItemInsertaDatos( AddDbxNew->DatosJuego );
 		lastID_Dbx = sql->ItemInsertaDbx( AddDbxNew->DatosDosBox , lastID);
 		sql->ItemInsertaMontajesDbx( AddDbxNew->ui.twMontajes, lastID_Dbx );
-		CrearArchivoConfigDbx( AddDbxNew->DatosDosBox, AddDbxNew->ui.twMontajes, stConfgDbxDir + AddDbxNew->DatosDosBox["path_conf"] );
+		fGrl.CrearArchivoConfigDbx( AddDbxNew->DatosDosBox, AddDbxNew->ui.twMontajes, stConfgDbxDir + AddDbxNew->DatosDosBox["path_conf"] );
 		NuevoItemTreeWidget( AddDbxNew->DatosJuego, "dosbox", lastID);
-	}
-}
-
-void GrLida::CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg)
-{
-	QSettings * settings = new QSettings( PathSaveConfg, QSettings::IniFormat ); 
-	QFileInfo workdir( datosVdms["path_exe"] );
-
-	settings->beginGroup("program");
-		settings->setValue("executable"	, datosVdms["path_exe"]  );
-		settings->setValue("workdir"	, workdir.absolutePath() );
-		settings->setValue("params"		, datosVdms["program_1"] );
-		settings->setValue("icon"		, datosVdms["program_2"] );
-	settings->endGroup();
-
-	settings->beginGroup("vdms.debug");
-		settings->setValue("useCustomCfg"	, datosVdms["vdms_debug_1"] );
-		settings->setValue("customCfg"		, datosVdms["vdms_debug_2"] );
-	settings->endGroup();
-	
-	settings->beginGroup("winnt.dos");
-		settings->setValue("useAutoexec"	, datosVdms["winnt_dos_1"] );
-		settings->setValue("autoexec"		, datosVdms["winnt_dos_2"] );
-	settings->endGroup();
-
-	settings->beginGroup("winnt.dosbox");
-		settings->setValue("exitclose"	, datosVdms["winnt_dosbox_1"] );
-		settings->setValue("exitWarn"	, datosVdms["winnt_dosbox_2"] );
-		settings->setValue("fastPaste"	, datosVdms["winnt_dosbox_3"] );
-	settings->endGroup();
-
-	settings->beginGroup("winnt.storage");
-		settings->setValue("useCDROM"	, datosVdms["winnt_storage_1"] );
-		settings->setValue("useNetware"	, datosVdms["winnt_storage_2"] );
-	settings->endGroup();
-}
-
-void GrLida::CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg)
-{
-	QSettings * settings = new QSettings( PathSaveConfg, QSettings::IniFormat ); 
-	settings->beginGroup("sdl");
-		settings->setValue("fullscreen"			, datosDbx["sdl_fullscreen"]		);
-		settings->setValue("fulldouble"			, datosDbx["sdl_fulldouble"]		);
-		settings->setValue("fullfixed"			, datosDbx["sdl_fullfixed"]			); // DOSBox 0.63
-		settings->setValue("fullresolution"		, datosDbx["sdl_fullresolution"]	);
-		settings->setValue("windowresolution"	, datosDbx["sdl_windowresolution"]	);
-		settings->setValue("output"				, datosDbx["sdl_output"]			);
-		settings->setValue("hwscale"			, datosDbx["sdl_hwscale"]			); // DOSBox 0.63
-		settings->setValue("autolock"			, datosDbx["sdl_autolock"]			);
-		settings->setValue("sensitivity"		, datosDbx["sdl_sensitivity"]		);
-		settings->setValue("waitonerror"		, datosDbx["sdl_waitonerror"]		);
-		settings->setValue("priority"			, datosDbx["sdl_priority"]			);
-		settings->setValue("mapperfile"			, datosDbx["sdl_mapperfile"]		);
-		settings->setValue("usescancodes"		, datosDbx["sdl_usescancodes"]		);
-	settings->endGroup();
-	
-	settings->beginGroup("dosbox");
-		if( datosDbx["dosbox_language"]!="" || datosDbx["dosbox_language"]!=" " )
-		settings->setValue("language"		, datosDbx["dosbox_language"]	);
-		settings->setValue("machine"		, datosDbx["dosbox_machine"]	);
-		settings->setValue("captures"		, datosDbx["dosbox_captures"]	);
-		settings->setValue("memsize"		, datosDbx["dosbox_memsize"]	);
-	settings->endGroup();
-
-	settings->beginGroup("render");
-		settings->setValue("frameskip"		, datosDbx["render_frameskip"]	);
-		settings->setValue("aspect"			, datosDbx["render_aspect"]		);
-		settings->setValue("scaler"			, datosDbx["render_scaler"]		);
-	settings->endGroup();
-	
-	settings->beginGroup("cpu");
-		settings->setValue("core"			, datosDbx["cpu_core"]		);
-		settings->setValue("cycles"			, datosDbx["cpu_cycles"]	);
-		settings->setValue("cycleup"		, datosDbx["cpu_cycleup"]	);
-		settings->setValue("cycledown"		, datosDbx["cpu_cycledown"]	);
-	settings->endGroup();
-
-	settings->beginGroup("mixer");
-		settings->setValue("nosound"		, datosDbx["mixer_nosound"]		);
-		settings->setValue("rate"			, datosDbx["mixer_rate"]		);
-		settings->setValue("blocksize"		, datosDbx["mixer_blocksize"]	);
-		settings->setValue("prebuffer"		, datosDbx["mixer_prebuffer"]	);
-	settings->endGroup();
-
-	settings->beginGroup("midi");
-		settings->setValue("mpu401"			, datosDbx["midi_mpu401"]		);
-		settings->setValue("intelligent"	, datosDbx["midi_intelligent"]	); // DOSBox 0.63
-		settings->setValue("device"			, datosDbx["midi_device"]		);
-		settings->setValue("config"			, datosDbx["midi_config"]		);
-		settings->setValue("mt32rate"		, datosDbx["midi_mt32rate"]		); // DOSBox 0.63
-	settings->endGroup();
-
-	settings->beginGroup("sblaster");
-		settings->setValue("sbtype"			, datosDbx["sblaster_sbtype"]	);
-		settings->setValue("sbbase"			, datosDbx["sblaster_sbbase"]	);
-		settings->setValue("irq"			, datosDbx["sblaster_irq"]		);
-		settings->setValue("dma"			, datosDbx["sblaster_dma"]		);
-		settings->setValue("hdma"			, datosDbx["sblaster_hdma"]		);
-		settings->setValue("mixer"			, datosDbx["sblaster_mixer"]	);
-		settings->setValue("oplmode"		, datosDbx["sblaster_oplmode"]	);
-		settings->setValue("oplrate"		, datosDbx["sblaster_oplrate"]	);
-	settings->endGroup();
-
-	settings->beginGroup("gus");
-		settings->setValue("gus"			, datosDbx["gus_gus"]		);
-		settings->setValue("gusrate"		, datosDbx["gus_gusrate"]	);
-		settings->setValue("gusbase"		, datosDbx["gus_gusbase"]	);
-		settings->setValue("irq1"			, datosDbx["gus_irq1"]		);
-		settings->setValue("irq2"			, datosDbx["gus_irq2"]		);
-		settings->setValue("dma1"			, datosDbx["gus_dma1"]		);
-		settings->setValue("dma2"			, datosDbx["gus_dma2"]		);
-		settings->setValue("ultradir"		, datosDbx["gus_ultradir"]	);
-	settings->endGroup();
-
-	settings->beginGroup("speaker");
-		settings->setValue("pcspeaker"		, datosDbx["speaker_pcspeaker"]	);
-		settings->setValue("pcrate"			, datosDbx["speaker_pcrate"]	);
-		settings->setValue("tandy"			, datosDbx["speaker_tandy"]		);
-		settings->setValue("tandyrate"		, datosDbx["speaker_tandyrate"]	);
-		settings->setValue("disney"			, datosDbx["speaker_disney"]	);
-	settings->endGroup();
-
-	settings->beginGroup("joystick");
-		settings->setValue("joysticktype"	, datosDbx["joystick_type"]			);
-		settings->setValue("timed"			, datosDbx["joystick_timed"]		);
-		settings->setValue("autofire"		, datosDbx["joystick_autofire"]		);
-		settings->setValue("swap34"			, datosDbx["joystick_swap34"]		);
-		settings->setValue("buttonwrap"		, datosDbx["joystick_buttonwrap"]	);
-	settings->endGroup();
-
-	settings->beginGroup("modem"); // DOSBox 0.63
-		settings->setValue("modem"			, datosDbx["modem_modem"]		);
-		settings->setValue("comport"		, datosDbx["modem_comport"]		);
-		settings->setValue("listenport"		, datosDbx["modem_listenport"]	);
-	settings->endGroup();
-	
-	settings->beginGroup("directserial"); // DOSBox 0.63
-		settings->setValue("directserial"	, datosDbx["dserial_directserial"]	);
-		settings->setValue("comport"		, datosDbx["dserial_comport"]		);
-		settings->setValue("realport"		, datosDbx["dserial_realport"]		);
-		settings->setValue("defaultbps"		, datosDbx["dserial_defaultbps"]	);
-		settings->setValue("parity"			, datosDbx["dserial_parity"]		);
-		settings->setValue("bytesize"		, datosDbx["dserial_bytesize"]		);
-		settings->setValue("stopbit"		, datosDbx["dserial_stopbit"]		);
-	settings->endGroup();
-
-	settings->beginGroup("serial");
-		settings->setValue("serial1"		, datosDbx["serial_1"]	);
-		settings->setValue("serial2"		, datosDbx["serial_2"]	);
-		settings->setValue("serial3"		, datosDbx["serial_3"]	);
-		settings->setValue("serial4"		, datosDbx["serial_4"]	);
-	settings->endGroup();
-
-	settings->beginGroup("dos");
-		settings->setValue("xms"			, datosDbx["dos_xms"]				);
-		settings->setValue("ems"			, datosDbx["dos_ems"]				);
-		settings->setValue("umb"			, datosDbx["dos_umb"]				);
-		settings->setValue("keyboardlayout"	, datosDbx["dos_keyboardlayout"]	);
-	settings->endGroup();
-
-	settings->beginGroup("ipx");
-		settings->setValue("ipx"			, datosDbx["ipx_ipx"]	);
-	settings->endGroup();
-
-	settings->sync();
-
-	if( datosDbx["opt_autoexec"]== "true" )
-	{
-		QFile file( PathSaveConfg );
-		if( file.open(QFile::WriteOnly | QFile::Append ) )
-		{
-			QTextStream stAutoexec( &file );
-			stAutoexec << "\n[autoexec]\n";
-			stAutoexec << datosDbx["autoexec"] << "\n";
-			stAutoexec.flush();
-			file.close();
-			delete settings;
-		} else {
-			delete settings;
-			return;
-		}
-	} else {
-		// Creando el Autoexec
-		QStringList listamontaje;
-		QHash<QString, QString> datos_montaje;
-		datos_montaje.clear();
-		datos_montaje["path_exe"]        = datosDbx["path_exe"];
-		datos_montaje["parametros_exe"]  = datosDbx["parametros_exe"];
-		datos_montaje["opt_loadfix_mem"] = datosDbx["opt_loadfix_mem"];
-		datos_montaje["opt_loadfix"]     = datosDbx["opt_loadfix"];
-		datos_montaje["opt_cerrar_dbox"] = datosDbx["opt_cerrar_dbox"];
-		
-		listamontaje.clear();
-		listamontaje = fGrl.CreaConfigMontajes( treeWidget, datos_montaje );
-
-		QFile file( PathSaveConfg );
-		if( file.open(QFile::WriteOnly | QFile::Append ) )
-		{
-			QTextStream stAutoexec( &file );
-			stAutoexec << "\n[autoexec]\n";
-			int i = 0;
-			for (i = 0; i < listamontaje.size(); ++i)
-			{
-				stAutoexec << listamontaje.at(i).toLocal8Bit().constData() << "\n";
-			}
-			stAutoexec.flush();
-			file.close();
-			delete settings;
-		} else {
-			delete settings;
-			return;
-		}
 	}
 }
 
@@ -635,6 +423,11 @@ void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString im
 	else
 		item->setIcon( 1 , QIcon()); // icono favorito
 
+	ui.twJuegos->clearSelection();
+	item->setSelected( true );
+
+	emit on_twJuegos_clicked( item );
+
 	lbpanel_2.setText(" " + tr("Nº Juegos") + ": " + fGrl.IntToStr(sql->getCount("dbgrl"))+ "  " );
 }
 
@@ -646,7 +439,7 @@ void GrLida::on_AddNewVdms()
 		QString lastID;
 		lastID = sql->ItemInsertaDatos( AddVdmsNew->DatosJuego );
 		sql->ItemInsertaVdms( AddVdmsNew->DatosVDMSound, lastID);
-		CrearArchivoConfigVdmS( AddVdmsNew->DatosVDMSound, stConfgVdmSDir + AddVdmsNew->DatosVDMSound["path_conf"] );
+		fGrl.CrearArchivoConfigVdmS( AddVdmsNew->DatosVDMSound, stConfgVdmSDir + AddVdmsNew->DatosVDMSound["path_conf"] );
 		NuevoItemTreeWidget( AddVdmsNew->DatosJuego, "vdmsound", lastID);
 	}
 }
@@ -1067,7 +860,7 @@ void GrLida::on_NuevoJuego()
 		{
 			lastID_Dbx = sql->ItemInsertaDbx( AddJuego->DatosDosBox , lastID);
 			sql->ItemInsertaMontajesDbx( AddJuego->ui.twMontajes, lastID_Dbx );
-			CrearArchivoConfigDbx( AddJuego->DatosDosBox, AddJuego->ui.twMontajes, stConfgDbxDir + AddJuego->DatosDosBox["path_conf"] );
+			fGrl.CrearArchivoConfigDbx( AddJuego->DatosDosBox, AddJuego->ui.twMontajes, stConfgDbxDir + AddJuego->DatosDosBox["path_conf"] );
 		}
 		if( AddJuego->DatosJuego["tipo_emu"]=="scummvm")
 		{
@@ -1076,7 +869,7 @@ void GrLida::on_NuevoJuego()
 		if( AddJuego->DatosJuego["tipo_emu"]=="vdmsound")
 		{
 			sql->ItemInsertaVdms( AddJuego->DatosVDMSound, lastID);
-			CrearArchivoConfigVdmS( AddJuego->DatosVDMSound, stConfgVdmSDir + AddJuego->DatosVDMSound["path_conf"] );
+			fGrl.CrearArchivoConfigVdmS( AddJuego->DatosVDMSound, stConfgVdmSDir + AddJuego->DatosVDMSound["path_conf"] );
 		}
 		NuevoItemTreeWidget( AddJuego->DatosJuego, AddJuego->DatosJuego["tipo_emu"], lastID);
 	}
@@ -1098,7 +891,7 @@ void GrLida::on_EditarJuego()
 			{
 				sql->ItemActualizaDbx( EditJuego->DatosDosBox, EditJuego->stItemIDDbx );
 				sql->ItemActualizaMontajeDbx(EditJuego->ui.twMontajes);
-				CrearArchivoConfigDbx( EditJuego->DatosDosBox, EditJuego->ui.twMontajes, stConfgDbxDir + EditJuego->DatosDosBox["path_conf"] );
+				fGrl.CrearArchivoConfigDbx( EditJuego->DatosDosBox, EditJuego->ui.twMontajes, stConfgDbxDir + EditJuego->DatosDosBox["path_conf"] );
 			}
 			if( stTipoEmu=="scummvm")
 			{
@@ -1107,7 +900,7 @@ void GrLida::on_EditarJuego()
 			if( stTipoEmu=="vdmsound")
 			{
 				sql->ItemActualizaVdms( EditJuego->DatosVDMSound, EditJuego->stItemIDVdms );
-				CrearArchivoConfigVdmS( EditJuego->DatosVDMSound, stConfgVdmSDir + EditJuego->DatosVDMSound["path_conf"] );
+				fGrl.CrearArchivoConfigVdmS( EditJuego->DatosVDMSound, stConfgVdmSDir + EditJuego->DatosVDMSound["path_conf"] );
 			}
 			stIcono = EditJuego->DatosJuego["icono"];
 			if( stIcono=="")
@@ -1218,7 +1011,10 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 		QSqlQuery query;
 		QSqlRecord rec;
 		query.exec("SELECT * FROM dbgrl WHERE idgrl="+IDitem+" LIMIT 0,1");
-		if( query.first() ){
+		if( query.first() )
+		{
+			QString strTempHtml;
+
 			rec = query.record();
 			ui.txtInfo_Subtitulo->setText( query.value( rec.indexOf("subtitulo") ).toString() );			// subtitulo
 			ui.txtInfo_Genero->setText( query.value( rec.indexOf("genero") ).toString() );					// genero
@@ -1232,12 +1028,12 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 			ui.txtInfo_Tema->setText( query.value( rec.indexOf("tema") ).toString() );						// tema
 			ui.txtInfo_SistemaOp->setText( query.value( rec.indexOf("sistemaop") ).toString() );			// sistemaop
 
-			QString strTempHtml = query.value( rec.indexOf("comentario") ).toString();
+			strTempHtml.clear();
+			strTempHtml = query.value( rec.indexOf("comentario") ).toString();
 
 			for (i_Hash = listSmailes.constBegin(); i_Hash != listSmailes.constEnd(); ++i_Hash)
 			{
-				QString strSmaile = i_Hash.value();
-				if( strSmaile.contains(":/smiles", Qt::CaseInsensitive) )
+				if( i_Hash.value().contains(":/smiles", Qt::CaseInsensitive) )
 					strTempHtml.replace( i_Hash.key(), "<img src=\""+i_Hash.value()+"\" />");
 				else
 					strTempHtml.replace( i_Hash.key(), "<img src=\""+stHomeDir+i_Hash.value()+"\" />");
@@ -1251,7 +1047,7 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 				ui.lbImgThumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 
 			stCaratula_Delantera = query.value( rec.indexOf("cover_front") ).toString();
-			stCaratula_Trasera = query.value( rec.indexOf("cover_back") ).toString();
+			stCaratula_Trasera   = query.value( rec.indexOf("cover_back") ).toString();
 
 			if(stCaratula_Delantera!="")
 				ui.btnVer_CoverFront->setEnabled(true);
@@ -1263,33 +1059,6 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 			else
 				ui.btnVer_CoverBack->setEnabled(false);
 
-			/*
-			fGrl.IntToStr(query.value(0).toInt()); // idgrl
-			query.value(2).toString()      ; // titulo
-			query.value(23).toString()     ; // tipo_emu
-			query.value(3).toString()      ; // subtitulo
-			query.value(4).toString()      ; // genero
-			query.value(5).toString()      ; // compania
-			query.value(6).toString()      ; // desarrollador
-			query.value(7).toString()      ; // tema
-			query.value(8).toString()      ; // idioma
-			query.value(9).toString()      ; // formato
-			query.value(10).toString()     ; // anno
-			query.value(11).toString()     ; // numdisc
-			query.value(12).toString()     ; // sistemaop
-			query.value(13).toString()     ; // tamano
-			query.value(14).toString()     ; // graficos
-			query.value(15).toString()     ; // sonido
-			query.value(16).toString()     ; // jugabilidad
-			query.value(17).toString()     ; // original
-			query.value(18).toString()     ; // estado
-			query.value(19).toString()     ; // thumbs
-			query.value(20).toString()     ; // cover_front
-			query.value(21).toString()     ; // cover_back
-			query.value(22).toString()     ; // fecha
-			query.value(23).toString()     ; // tipo_emu
-			query.value(24).toString()     ; // comentario
-			*/
 			lbpanel_5.setText(" " + query.value( rec.indexOf("titulo") ).toString() + " - " + tr("introducido el") + " " + query.value( rec.indexOf("fecha") ).toString() + "  " );	
 
 			if( query.value( rec.indexOf("tipo_emu") ).toString()== "datos")
@@ -1364,11 +1133,6 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 
 		ui.twUrls->clear();
 		ui.twFiles->clear();
-
-		/*ui.actionEjectar->setEnabled(false);
-		ui.mnu_ejecutar_juego->setEnabled(false);
-		ui.actionEjectarSetup->setEnabled(false);
-		ui.mnu_ejecutar_setup->setEnabled(false);*/
 	}
 }
 void GrLida::on_btn_fileurl_1()

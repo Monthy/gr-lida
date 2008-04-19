@@ -501,7 +501,6 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 
 void dbSql::ItemInsertaMontajesDbx(QTreeWidget *treeWidget, const QString IDdbx)
 {
-	int num_mount = 0, num_items = 0;
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_emu_dosbox_mount (");
@@ -510,9 +509,7 @@ void dbSql::ItemInsertaMontajesDbx(QTreeWidget *treeWidget, const QString IDdbx)
 	strSQL.append(":id_dosbox, :id_lista, :path, :label, :tipo_as, :letter, :indx_cd, :opt_mount, :io_ctrl, :select_mount");
 	strSQL.append(")");
 
-	num_items = treeWidget->topLevelItemCount();
-
-	for ( num_mount = 0; num_mount < num_items; num_mount++ )
+	for(int num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
 	{
 		QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
 		QSqlQuery query;
@@ -561,7 +558,6 @@ QString dbSql::ItemInsertaUnMontajeDbx(const QHash<QString, QString> datos, cons
 
 void dbSql::ItemActualizaMontajeDbx(QTreeWidget *treeWidget)
 {
-	int num_mount;
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl_emu_dosbox_mount SET ");
@@ -569,7 +565,7 @@ void dbSql::ItemActualizaMontajeDbx(QTreeWidget *treeWidget)
 	strSQL.append("tipo_as = :tipo_as, letter = :letter, indx_cd = :indx_cd, opt_mount = :opt_mount, ");
 	strSQL.append("io_ctrl = :io_ctrl, select_mount = :select_mount ");
 	strSQL.append("WHERE id = :id;");
-	for ( num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
+	for(int num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
 	{
 		QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
 		QSqlQuery query;
@@ -747,7 +743,6 @@ void dbSql::ItemActualizaVdms(const QHash<QString, QString> datos, const QString
 
 void dbSql::ItemInsertaFiles(QTreeWidget *treeWidget, const QString IDgrl)
 {
-	int num_file;
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_file (");
@@ -755,7 +750,7 @@ void dbSql::ItemInsertaFiles(QTreeWidget *treeWidget, const QString IDgrl)
 	strSQL.append(") VALUES ( ");
 	strSQL.append(":idgrl, :nombre, :crc, :descripcion, :path, :size )");
 
-	for ( num_file = 0; num_file < treeWidget->topLevelItemCount(); num_file++ )
+	for(int num_file = 0; num_file < treeWidget->topLevelItemCount(); num_file++ )
 	{
 		QTreeWidgetItem *item_files = treeWidget->topLevelItem( num_file );
 		QSqlQuery query;
@@ -821,12 +816,11 @@ void dbSql::ItemEliminarFiles( const QString IDFiles )
 
 void dbSql::ItemInsertaURL(QTreeWidget *treeWidget, const QString IDgrl)
 {
-	int num_url;
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_url ( idgrl, url, descripcion ) VALUES ( :idgrl, :url, :descripcion )");
 
-	for ( num_url = 0; num_url < treeWidget->topLevelItemCount(); num_url++ )
+	for(int num_url = 0; num_url < treeWidget->topLevelItemCount(); num_url++ )
 	{
 		QTreeWidgetItem *item_files = treeWidget->topLevelItem( num_url );
 		QSqlQuery query;
@@ -1008,7 +1002,7 @@ void dbSql::CrearTablas()
 	"	`opt_loadfix`			varchar(5) NOT NULL default 'false',"
 	"	`opt_loadfix_mem`		varchar(5) NOT NULL default '64',"
 	"	`opt_consola_dbox`		varchar(5) NOT NULL default 'false',"
-	"	`opt_cerrar_dbox`		varchar(5) NOT NULL default 'false',"
+	"	`opt_cerrar_dbox`		varchar(5) NOT NULL default 'true',"
 	"	`opt_cycle_sincronizar` varchar(5) NOT NULL default 'false',"
 	"	`path_conf`				varchar(255) NOT NULL default '',"
 	"	`path_sonido`			varchar(255) NOT NULL default 'waves',"

@@ -90,8 +90,6 @@ private:
 	void CrearArchivoDato(QString archivo);  // Crea los archivos de datos
 	void Ejecutar( const QString& bin, const QString &parametros);
 	void Confg_Svm_Dbx(QString IDitem);	
-	void CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg);
-	void CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
 	
 protected:
 	void closeEvent( QCloseEvent *e );

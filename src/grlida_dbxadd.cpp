@@ -376,7 +376,8 @@ void frmDbxAdd::on_txtDatos_Titulo_textChanged(const QString &)
 	{
 		str = fGrl.eliminar_caracteres( str );
 		str_ok = str.endsWith(".conf");
-		if(str_ok == false) str.append(".conf");
+		if(str_ok == false)
+			str.append(".conf");
 		ui.txtDbx_path_conf->setText( str );
 	} else
 		ui.txtDbx_path_conf->setText( "" );
@@ -386,7 +387,7 @@ void frmDbxAdd::on_btnDbx_FileConfg()
 {
 	bool str_ok;
 	QString str, archivo;
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_path_conf->text(), tr("Todos los archivo") + " (*)", 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_path_conf->text(), "Config DOSBox (*.conf);;"+tr("Todos los archivo") + " (*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -417,16 +418,17 @@ void frmDbxAdd::on_btnDbx_ExeSetup()
 
 void frmDbxAdd::on_btnMount_Add()
 {
-	frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes(false);
-	AddEditMontajes->DatosMontaje.clear();
-	AddEditMontajes->DatosMontaje["path"]      = ""; // directorio o iso
-	AddEditMontajes->DatosMontaje["label"]     = ""; // etiqueta
-	AddEditMontajes->DatosMontaje["tipo_as"]   = ""; // tipo de montaje
-	AddEditMontajes->DatosMontaje["letter"]    = ""; // letra de montaje
-	AddEditMontajes->DatosMontaje["indx_cd"]   = ""; // index de la unidad de cd-rom
-	AddEditMontajes->DatosMontaje["opt_mount"] = ""; // opciones del cd-rom
-	AddEditMontajes->DatosMontaje["io_ctrl"]   = ""; // cd/dvd
+	QHash<QString, QString> DatosMontaje;
+	DatosMontaje.clear();
+	DatosMontaje["path"]      = ""; // directorio o iso
+	DatosMontaje["label"]     = ""; // etiqueta
+	DatosMontaje["tipo_as"]   = "drive"; // tipo de montaje
+	DatosMontaje["letter"]    = "C"; // letra de montaje
+	DatosMontaje["indx_cd"]   = ""; // index de la unidad de cd-rom
+	DatosMontaje["opt_mount"] = ""; // opciones del cd-rom
+	DatosMontaje["io_ctrl"]   = "-aspi"; // cd/dvd
 
+	frmAddEditMontajes *AddEditMontajes = new frmAddEditMontajes( DatosMontaje );
 	if( AddEditMontajes->exec() == QDialog::Accepted )
 	{
 		QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
@@ -474,56 +476,63 @@ void frmDbxAdd::on_btnMount_Add()
 
 void frmDbxAdd::on_btnMount_Edit()
 {
-	frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes(true);
-	AddEditMontajes->DatosMontaje.clear();
-	AddEditMontajes->DatosMontaje["path"]      = ui.twMontajes->currentItem()->text(0); // directorio o iso
-	AddEditMontajes->DatosMontaje["label"]     = ui.twMontajes->currentItem()->text(1); // etiqueta
-	AddEditMontajes->DatosMontaje["tipo_as"]   = ui.twMontajes->currentItem()->text(2); // tipo de montaje
-	AddEditMontajes->DatosMontaje["letter"]    = ui.twMontajes->currentItem()->text(3); // letra de montaje
-	AddEditMontajes->DatosMontaje["indx_cd"]   = ui.twMontajes->currentItem()->text(4); // index de la unidad de cd-rom
-	AddEditMontajes->DatosMontaje["opt_mount"] = ui.twMontajes->currentItem()->text(5); // opciones del cd-rom
-	AddEditMontajes->DatosMontaje["io_ctrl"]   = ui.twMontajes->currentItem()->text(6); // cd/dvd
+	int pos = ui.twMontajes->indexOfTopLevelItem( ui.twMontajes->currentItem() );
 
-	if( AddEditMontajes->exec() == QDialog::Accepted ) {
-		QString tipoDrive = AddEditMontajes->DatosMontaje["tipo_as"];
-		if(tipoDrive=="drive")
-			ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_hd.png") );
-		if(tipoDrive=="cdrom")
-			ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
-		if(tipoDrive=="floppy")
-			ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
-		if(tipoDrive=="IMG_floppy")
-			ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/floppy_1.png") );
-		if(tipoDrive=="IMG_iso")
-			ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/cd_iso.png") );
-		if(tipoDrive=="IMG_hdd")
-			ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_hd.png")	);
+	if( ui.twMontajes->topLevelItemCount()>0 && pos!=-1 )
+	{
+		QHash<QString, QString> DatosMontaje;
+		DatosMontaje.clear();
+		DatosMontaje["path"]      = ui.twMontajes->currentItem()->text(0); // directorio o iso
+		DatosMontaje["label"]     = ui.twMontajes->currentItem()->text(1); // etiqueta
+		DatosMontaje["tipo_as"]   = ui.twMontajes->currentItem()->text(2); // tipo de montaje
+		DatosMontaje["letter"]    = ui.twMontajes->currentItem()->text(3); // letra de montaje
+		DatosMontaje["indx_cd"]   = ui.twMontajes->currentItem()->text(4); // index de la unidad de cd-rom
+		DatosMontaje["opt_mount"] = ui.twMontajes->currentItem()->text(5); // opciones del cd-rom
+		DatosMontaje["io_ctrl"]   = ui.twMontajes->currentItem()->text(6); // cd/dvd
+	
+		frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes( DatosMontaje );
+		if( AddEditMontajes->exec() == QDialog::Accepted )
+		{
+			QString tipoDrive = AddEditMontajes->DatosMontaje["tipo_as"];
+			if(tipoDrive=="drive")
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+			if(tipoDrive=="cdrom")
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+			if(tipoDrive=="floppy")
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+			if(tipoDrive=="IMG_floppy")
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+			if(tipoDrive=="IMG_iso")
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+			if(tipoDrive=="IMG_hdd")
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/drive_hd.png")	);
 
-		ui.twMontajes->currentItem()->setText( 0 , AddEditMontajes->DatosMontaje["path"]		);	// directorio o iso
-		ui.twMontajes->currentItem()->setText( 1 , AddEditMontajes->DatosMontaje["label"]		);	// etiqueta
-		ui.twMontajes->currentItem()->setText( 2 , AddEditMontajes->DatosMontaje["tipo_as"]		);	// tipo de montaje
-		ui.twMontajes->currentItem()->setText( 3 , AddEditMontajes->DatosMontaje["letter"]		);	// letra de montaje
-		ui.twMontajes->currentItem()->setText( 4 , AddEditMontajes->DatosMontaje["indx_cd"]		);	// index de la unidad de cd-rom
-		ui.twMontajes->currentItem()->setText( 5 , AddEditMontajes->DatosMontaje["opt_mount"]	);	// opciones del cd-rom
-		ui.twMontajes->currentItem()->setText( 6 , AddEditMontajes->DatosMontaje["io_ctrl"]		);	// cd/dvd
-		ui.twMontajes->currentItem()->setText( 7 , "x"											);	// primer montaje
-//		ui.twMontajes->currentItem()->setText( 8 , ""											);	//
-		ui.twMontajes->currentItem()->setText( 9 , ""											);	//
-
-		QHash<QString, QString> datos_montaje;
-		datos_montaje.clear();
-		datos_montaje["path_exe"] = ui.txtDbx_path_exe->text();
-		datos_montaje["parametros_exe"] = ui.txtDbx_parametros_exe->text();
-		if(ui.chkDbx_loadfix->isChecked())
-			datos_montaje["opt_loadfix"] = "true";
-		else datos_montaje["opt_loadfix"] = "false";
-
-		if(ui.chkDbx_cerrar_dbox->isChecked())
-			datos_montaje["opt_cerrar_dbox"] = "true";
-		else datos_montaje["opt_cerrar_dbox"] = "false";
-
-		ui.previer_mount->clear();
-		ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
+			ui.twMontajes->currentItem()->setText( 0 , AddEditMontajes->DatosMontaje["path"]		);	// directorio o iso
+			ui.twMontajes->currentItem()->setText( 1 , AddEditMontajes->DatosMontaje["label"]		);	// etiqueta
+			ui.twMontajes->currentItem()->setText( 2 , AddEditMontajes->DatosMontaje["tipo_as"]		);	// tipo de montaje
+			ui.twMontajes->currentItem()->setText( 3 , AddEditMontajes->DatosMontaje["letter"]		);	// letra de montaje
+			ui.twMontajes->currentItem()->setText( 4 , AddEditMontajes->DatosMontaje["indx_cd"]		);	// index de la unidad de cd-rom
+			ui.twMontajes->currentItem()->setText( 5 , AddEditMontajes->DatosMontaje["opt_mount"]	);	// opciones del cd-rom
+			ui.twMontajes->currentItem()->setText( 6 , AddEditMontajes->DatosMontaje["io_ctrl"]		);	// cd/dvd
+			//ui.twMontajes->currentItem()->setText( 7 , );	// select_mount
+			//ui.twMontajes->currentItem()->setText( 8 , );	// id
+			//ui.twMontajes->currentItem()->setText( 9 , AddEditMontajes->DatosMontaje["io_ctrl"]		);	// id_lista
+	
+			QHash<QString, QString> datos_montaje;
+			datos_montaje.clear();
+			datos_montaje["path_exe"] = ui.txtDbx_path_exe->text();
+			datos_montaje["parametros_exe"] = ui.txtDbx_parametros_exe->text();
+			if(ui.chkDbx_loadfix->isChecked())
+				datos_montaje["opt_loadfix"] = "true";
+			else datos_montaje["opt_loadfix"] = "false";
+	
+			if(ui.chkDbx_cerrar_dbox->isChecked())
+				datos_montaje["opt_cerrar_dbox"] = "true";
+			else datos_montaje["opt_cerrar_dbox"] = "false";
+	
+			ui.previer_mount->clear();
+			ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
+		}
 	}
 }
 
@@ -582,7 +591,7 @@ void frmDbxAdd::on_btnMount_AutoCrear()
 	item->setText( 2 , "drive"				);	// tipo de montaje
 	item->setText( 3 , "C"					);	// letra de montaje
 	item->setText( 4 , ""					);	// index de la unidad de cd-rom
-	item->setText( 5 , "-usecd 0"			);	// opciones del cd-rom
+	item->setText( 5 , ""					);	// opciones del cd-rom
 	item->setText( 6 , "-aspi"				);	// cd/dvd IOCtrl
 	item->setText( 7 , "x"					);	// primer montaje
 
@@ -606,23 +615,26 @@ void frmDbxAdd::on_btnMount_AutoCrear()
 
 void frmDbxAdd::on_btnMount_Primario()
 {
-	int indx_mount=0, num_mount=0;
-	indx_mount = ui.twMontajes->indexOfTopLevelItem(ui.twMontajes->currentItem());
-	for ( num_mount = 0; num_mount < ui.twMontajes->topLevelItemCount(); num_mount++ )
+	int indx_mount=0, num_mount=0;	
+	if( ui.twMontajes->topLevelItemCount()>0 )
 	{
-		ui.twMontajes->topLevelItem( num_mount )->setText(7 , "x");
-	}
-	ui.twMontajes->topLevelItem( indx_mount )->setText(7 , "v");
+		indx_mount = ui.twMontajes->indexOfTopLevelItem(ui.twMontajes->currentItem());
+		for ( num_mount = 0; num_mount < ui.twMontajes->topLevelItemCount(); num_mount++ )
+			ui.twMontajes->topLevelItem( num_mount )->setText(7 , "x");
 
-	QHash<QString, QString> datos_montaje;
-	datos_montaje.clear();
-	datos_montaje["path_exe"] = ui.txtDbx_path_exe->text();
-	datos_montaje["parametros_exe"] = ui.txtDbx_parametros_exe->text();
-	datos_montaje["opt_loadfix_mem"] = "64";
-	if(ui.chkDbx_loadfix->isChecked())
-		datos_montaje["opt_loadfix"] = "true"; else datos_montaje["opt_loadfix"] = "false";
-	if(ui.chkDbx_cerrar_dbox->isChecked())
-		datos_montaje["opt_cerrar_dbox"] = "true"; else datos_montaje["opt_cerrar_dbox"] = "false";
-	ui.previer_mount->clear();
-	ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
+		ui.twMontajes->topLevelItem( indx_mount )->setText(7 , "v");
+
+		QHash<QString, QString> datos_montaje;
+		datos_montaje.clear();
+		datos_montaje["path_exe"] = ui.txtDbx_path_exe->text();
+		datos_montaje["parametros_exe"] = ui.txtDbx_parametros_exe->text();
+		datos_montaje["opt_loadfix_mem"] = "64";
+		if(ui.chkDbx_loadfix->isChecked())
+			datos_montaje["opt_loadfix"] = "true"; else datos_montaje["opt_loadfix"] = "false";
+		if(ui.chkDbx_cerrar_dbox->isChecked())
+			datos_montaje["opt_cerrar_dbox"] = "true"; else datos_montaje["opt_cerrar_dbox"] = "false";
+
+		ui.previer_mount->clear();
+		ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
+	}
 }
