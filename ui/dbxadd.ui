@@ -452,7 +452,7 @@
        <property name="geometry" >
         <rect>
          <x>10</x>
-         <y>110</y>
+         <y>115</y>
          <width>201</width>
          <height>16</height>
         </rect>
@@ -475,7 +475,7 @@
        <property name="geometry" >
         <rect>
          <x>130</x>
-         <y>20</y>
+         <y>40</y>
          <width>301</width>
          <height>22</height>
         </rect>
@@ -485,7 +485,7 @@
        <property name="geometry" >
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>40</y>
          <width>111</width>
          <height>21</height>
         </rect>
@@ -524,7 +524,7 @@
        <property name="geometry" >
         <rect>
          <x>230</x>
-         <y>110</y>
+         <y>115</y>
          <width>211</width>
          <height>16</height>
         </rect>
@@ -550,7 +550,7 @@
        <property name="geometry" >
         <rect>
          <x>10</x>
-         <y>80</y>
+         <y>85</y>
          <width>381</width>
          <height>22</height>
         </rect>
@@ -593,7 +593,7 @@
        <property name="geometry" >
         <rect>
          <x>400</x>
-         <y>80</y>
+         <y>85</y>
          <width>30</width>
          <height>26</height>
         </rect>
@@ -659,9 +659,9 @@
        <property name="geometry" >
         <rect>
          <x>10</x>
-         <y>50</y>
-         <width>421</width>
-         <height>31</height>
+         <y>65</y>
+         <width>431</width>
+         <height>21</height>
         </rect>
        </property>
        <property name="text" >
@@ -675,7 +675,7 @@
        <property name="geometry" >
         <rect>
          <x>10</x>
-         <y>130</y>
+         <y>135</y>
          <width>281</width>
          <height>16</height>
         </rect>
@@ -685,6 +685,29 @@
        </property>
        <property name="checked" >
         <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbxDbx_Profiles" >
+       <property name="geometry" >
+        <rect>
+         <x>130</x>
+         <y>15</y>
+         <width>301</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lb_Dbx_0" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>15</y>
+         <width>111</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Templates Profiles:</string>
        </property>
       </widget>
      </widget>
@@ -866,6 +889,9 @@
          <height>22</height>
         </rect>
        </property>
+       <property name="editable" >
+        <bool>true</bool>
+       </property>
        <property name="currentIndex" >
         <number>-1</number>
        </property>
@@ -878,6 +904,9 @@
          <width>101</width>
          <height>22</height>
         </rect>
+       </property>
+       <property name="editable" >
+        <bool>true</bool>
        </property>
        <property name="currentIndex" >
         <number>-1</number>

@@ -157,6 +157,12 @@ int main(int argc, char *argv[])
 	QDir datosDir;
 	if(!datosDir.exists(stHomeDir+"datos")) datosDir.mkdir(stHomeDir+"datos");
 
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Templates"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio templates si no existe
+	QDir templatesDir;
+	if(!templatesDir.exists(stHomeDir+"templates")) templatesDir.mkdir(stHomeDir+"templates");
+
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Configuración del DOSBox"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio confDbx si no existe

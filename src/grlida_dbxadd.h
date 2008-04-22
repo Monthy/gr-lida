@@ -40,9 +40,9 @@ class frmDbxAdd : public QDialog {
 public:
 	frmDbxAdd( QDialog *parent = 0, Qt::WFlags flags = 0 );
     ~frmDbxAdd();
-    
+
 	Ui::DbxAddClass ui;
-    
+
 	QHash<QString, QString>  DatosJuego;
 	QHash<QString, QString>  DatosDosBox;
 
@@ -51,12 +51,14 @@ private:
 	QString stTituloDbx(){ return tr("Nuevo juego para el DOSBox"); }
 	int intStepwizard;
 	QString stHomeDir;
-	
+	QHash<QString, QString>  TempProfileDosBox;
+
 private slots:
 	void on_btnOk();
 	void on_btnNext();
 	void on_btnPrevious();
 	void on_txtDatos_Titulo_textChanged(const QString &);
+	void on_setProfileGame(const QString ProfileGame);
 	void on_btnDbx_FileConfg();
 	void on_btnDbx_ExeJuego();
 	void on_btnDbx_ExeSetup();

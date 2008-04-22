@@ -35,7 +35,7 @@ public:
 	~Funciones();
 
 // Versión del GR-lida
-	QString stVersionGrl(){ return "0.4.2"; }
+	QString stVersionGrl(){ return "0.4.3"; }
 // Versiones que soporta
 	QString stVersionDbx(){ return "0.72";  }
 	QString stVersionSvm(){ return "0.11.1";}
@@ -47,6 +47,8 @@ public:
 	QString	IntToStr(int num);
 // Convierte de Texto a Número
 	int StrToInt(QString text);
+// Convierte Texto "true", "yes" a tipo Bool
+	bool StrToBool(QString text);
 // Devuelve la hora y la fecha
 	QString HoraFechaActual();
 // Devuelve una URL correcta
@@ -77,6 +79,8 @@ public:
 	QStringList CreaConfigMontajes(QTreeWidget *treeWidget, const QHash<QString, QString> datos);
 //
 	void CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg);
+// Carga la lista de los perfiles preconfigurados en un ComboBox
+	void Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *myCombobox);
 // Exportar la configuracion del DOSBox para el DFend
 	void Exportar_Profile_DFend(QString fileName);
 // Importar la configuracion del DOSBox para el DFend

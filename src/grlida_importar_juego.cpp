@@ -790,10 +790,10 @@ void frmImportarJuego::setProfile_DFend(QString fileName)
 	DatosJuego["comentario"]    = DatosDosBox["Notes"];		// comentario
 	DatosJuego["favorito"]      = DatosDosBox["Favorite"];	//favorito
 
+	ui.twMontajes->clear();
 	num_mounts = fGrl.StrToInt( DatosDosBox["NrOfMounts"] );
 	if( num_mounts > 0 )
 	{
-		ui.statusLabel->setText(fGrl.IntToStr(num_mounts));
 		for(i=0; i < num_mounts ; i++)
 		{
 			QTreeWidgetItem *twItemDfend = new QTreeWidgetItem(ui.twMontajes);

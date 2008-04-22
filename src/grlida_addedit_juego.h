@@ -74,6 +74,7 @@ private:
 	QHash<QString, QString> listSmailes;
 	//QHash<QString, QString>::const_iterator i_Hash;
 	QUrl my_url;
+	QHash<QString, QString>  TempProfileDosBox;
 
 private slots:
 	void on_btnOk();
@@ -136,6 +137,7 @@ private slots:
 	void CargarDatosDBxMontaje( QString stIDdbx );
 	void setDatosDosBox();
 	QString setOpcionesSerial();
+	void on_setProfileGame(const QString ProfileGame);
 	void on_btnDbx_FileConfg();
 	void on_btnDbx_ExeJuego();
 	void on_btnDbx_ExeSetup();

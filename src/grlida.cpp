@@ -423,10 +423,9 @@ void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString im
 	else
 		item->setIcon( 1 , QIcon()); // icono favorito
 
-	ui.twJuegos->clearSelection();
-	item->setSelected( true );
-
-	emit on_twJuegos_clicked( item );
+//	ui.twJuegos->clearSelection();
+//	item->setSelected( true );
+//	emit on_twJuegos_clicked( item );
 
 	lbpanel_2.setText(" " + tr("Nº Juegos") + ": " + fGrl.IntToStr(sql->getCount("dbgrl"))+ "  " );
 }

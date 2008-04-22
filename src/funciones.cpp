@@ -90,6 +90,15 @@ int Funciones::StrToInt(QString text)
 	return text.toInt();
 }
 
+// Convierte Texto "true", "yes" a tipo Bool
+bool Funciones::StrToBool(QString text)
+{
+	if(text.toLower()=="true" || text.toLower()=="yes" )
+		return true;
+	else
+		return false;
+}
+
 // Devuelve la hora y la fecha
 QString Funciones::HoraFechaActual()
 {
@@ -820,6 +829,22 @@ void Funciones::CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, 
 	settings->endGroup();
 
 	delete settings;
+}
+
+void Funciones::Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *myCombobox)
+{
+	QDir dir( dirProfiles );
+	QString filter = "*.prof";
+	QDir::Filters filters = QDir::Files | QDir::Readable;
+	QDir::SortFlags sort  = QDir::Name;
+	QFileInfoList entries = dir.entryInfoList( QStringList() << filter, filters, sort);
+
+	myCombobox->clear();
+	myCombobox->addItem( "<defecto>" );
+	foreach (QFileInfo file, entries)
+	{
+		myCombobox->addItem( file.completeBaseName() );
+	}
 }
 
 void Funciones::Exportar_Profile_DFend(QString fileName)
