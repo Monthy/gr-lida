@@ -343,16 +343,10 @@ QStringList Funciones::CargaDatosListas(QString Archivo, QString delimitador)
 QString Funciones::ReemplazaTextoSmiles(QString str, QHash<QString, QString> lista)
 {
 	QHash<QString, QString>::const_iterator i_Hash;
-//	QString strTempHtml = ui.txtDatos_4->toPlainText();
+
 	for (i_Hash = lista.constBegin(); i_Hash != lista.constEnd(); ++i_Hash)
 		str.replace( i_Hash.key(), "<img src=\""+i_Hash.value()+"\" />");
-//	{
-//		QString strSmaile = i_Hash.value();
-//		if( strSmaile.contains(":/smiles", Qt::CaseInsensitive) )
-//			strTempHtml.replace( i_Hash.key(), "<img src=\""+i_Hash.value()+"\" />");
-//		else
-//			strTempHtml.replace( i_Hash.key(), "<img src=\"" + stHomeDir + i_Hash.value()+"\" />");
-//	}
+
 	return str;
 }
 
@@ -471,7 +465,7 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QT
 		out << "# machine -- The type of machine tries to emulate:hercules,cga,tandy,pcjr,vga." << endl;
 		out << "# captures -- Directory where things like wave,midi,screenshot get captured." << endl << endl;
 
-		if( datosDbx["dosbox_language"]!="" || datosDbx["dosbox_language"]!=" ")
+		if( !datosDbx["dosbox_language"].isEmpty() || datosDbx["dosbox_language"]!=" ")
 		out << "language=" << datosDbx["dosbox_language"] << endl;
 		out << "machine=" << datosDbx["dosbox_machine"] << endl;
 		out << "captures=" << datosDbx["dosbox_captures"] << endl;
@@ -671,7 +665,6 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QT
 
 			for (i = 0; i < listamontaje.size(); ++i)
 				out << listamontaje.value( i ) << endl;
-			//out << listamontaje.at(i).toLocal8Bit().constData() << endl;
 		}
 
 		out.flush();
