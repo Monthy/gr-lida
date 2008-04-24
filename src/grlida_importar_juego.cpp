@@ -41,8 +41,6 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDirFileXML , SIGNAL(clicked()), this, SLOT(on_btnDirFileXML()));
 
 	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
-//	stHomeDir = QDir::currentPath()+"/";		// directorio de trabajo del GR-lida
-//	stHomeDir = "./";							// directorio de trabajo del GR-lida
 
 	QStringList cbx_Lista, cbx_ListaTemp;
 	QPixmap pixmap;
@@ -68,7 +66,8 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 
 	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
 	settings.beginGroup("OpcGeneral");
-	  url_xmldb = fGrl.url_correcta( settings.value("url_xmldb", "" ).toString() ); // GR-lida
+		url_xmldb    = fGrl.url_correcta( settings.value("url_xmldb", "" ).toString() ); // GR-lida
+		DirBaseGames = settings.value("DirBaseGames", "").toString() ;
 	settings.endGroup();
 
 	xml_ListaJuegos = stHomeDir + "tmp_lista_juegos.xml";
@@ -293,26 +292,26 @@ void frmImportarJuego::on_btnOk()
 	{
 		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
 		ImportPathNew->ui.wizardPath->setCurrentIndex(0);
-		ImportPathNew->ui.txtPath_Dbx_1->setText( QDir::toNativeSeparators( DatosDosBox["path_conf"]) );		// path_conf
-		ImportPathNew->ui.txtPath_Dbx_2->setText( QDir::toNativeSeparators( DatosDosBox["path_exe"]) );			// path_exe
-		ImportPathNew->ui.txtPath_Dbx_3->setText( QDir::toNativeSeparators( DatosDosBox["path_setup"]) );		// path_setup
-		ImportPathNew->ui.txtPath_Dbx_4->setText( QDir::toNativeSeparators( DatosDosBox["dosbox_language"]) );	// dosbox_language
-		ImportPathNew->ui.txtPath_Dbx_5->setText( QDir::toNativeSeparators( DatosDosBox["sdl_mapperfile"]) );	// sdl_mapperfile
-		ImportPathNew->ui.txtPath_Dbx_6->setText( QDir::toNativeSeparators( DatosDosBox["gus_ultradir"]) );		// gus_ultradir
-		ImportPathNew->ui.txtPath_Dbx_7->setText( QDir::toNativeSeparators( DatosDosBox["dosbox_captures"]) );	// dosbox_captures
-		ImportPathNew->ui.txtPath_Dbx_8->setText( QDir::toNativeSeparators( DatosDosBox["path_sonido"]) );		// path_sonido
+		ImportPathNew->ui.txtPath_Dbx_1->setText( QDir::toNativeSeparators( DatosDosBox["path_conf"] ) );			// path_conf
+		ImportPathNew->ui.txtPath_Dbx_2->setText( QDir::toNativeSeparators( DatosDosBox["path_exe"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_exe
+		ImportPathNew->ui.txtPath_Dbx_3->setText( QDir::toNativeSeparators( DatosDosBox["path_setup"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_setup
+		ImportPathNew->ui.txtPath_Dbx_4->setText( QDir::toNativeSeparators( DatosDosBox["dosbox_language"] ) );		// dosbox_language
+		ImportPathNew->ui.txtPath_Dbx_5->setText( QDir::toNativeSeparators( DatosDosBox["sdl_mapperfile"] ) );		// sdl_mapperfile
+		ImportPathNew->ui.txtPath_Dbx_6->setText( QDir::toNativeSeparators( DatosDosBox["gus_ultradir"] ) );		// gus_ultradir
+		ImportPathNew->ui.txtPath_Dbx_7->setText( QDir::toNativeSeparators( DatosDosBox["dosbox_captures"] ) );		// dosbox_captures
+		ImportPathNew->ui.txtPath_Dbx_8->setText( QDir::toNativeSeparators( DatosDosBox["path_sonido"] ) );			// path_sonido
 	}
 
 	if(DatosJuego["tipo_emu"]=="scummvm")
 	{
 		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
 		ImportPathNew->ui.wizardPath->setCurrentIndex(1);
-		ImportPathNew->ui.txtPath_Svm_1->setText( QDir::toNativeSeparators( DatosScummvm["path"] ) );			// path
-		ImportPathNew->ui.txtPath_Svm_2->setText( QDir::toNativeSeparators( DatosScummvm["path_save"]) );		// path_save
-		ImportPathNew->ui.txtPath_Svm_3->setText( QDir::toNativeSeparators( DatosScummvm["path_setup"] ) );		// path_setup
-		ImportPathNew->ui.txtPath_Svm_4->setText( QDir::toNativeSeparators( DatosScummvm["path_extra"]) );		// path_extra
-		ImportPathNew->ui.txtPath_Svm_5->setText( QDir::toNativeSeparators( DatosScummvm["path_capturas"]) );	// path_capturas
-		ImportPathNew->ui.txtPath_Svm_6->setText( QDir::toNativeSeparators( DatosScummvm["path_sonido"]) );		// path_sonido
+		ImportPathNew->ui.txtPath_Svm_1->setText( QDir::toNativeSeparators( DatosScummvm["path"].replace("{DirBaseGames}", DirBaseGames+"/") ) );		// path
+		ImportPathNew->ui.txtPath_Svm_2->setText( QDir::toNativeSeparators( DatosScummvm["path_save"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_save
+		ImportPathNew->ui.txtPath_Svm_3->setText( QDir::toNativeSeparators( DatosScummvm["path_setup"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_setup
+		ImportPathNew->ui.txtPath_Svm_4->setText( QDir::toNativeSeparators( DatosScummvm["path_extra"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_extra
+		ImportPathNew->ui.txtPath_Svm_5->setText( QDir::toNativeSeparators( DatosScummvm["path_capturas"] ) );	// path_capturas
+		ImportPathNew->ui.txtPath_Svm_6->setText( QDir::toNativeSeparators( DatosScummvm["path_sonido"] ) );		// path_sonido
 	}
 
 	if(DatosJuego["tipo_emu"]=="vdmsound")
@@ -320,7 +319,7 @@ void frmImportarJuego::on_btnOk()
 		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
 		ImportPathNew->ui.wizardPath->setCurrentIndex(2);
 		ImportPathNew->ui.txtPath_Vdms_1->setText( QDir::toNativeSeparators( DatosVDMSound["path_conf"] ) );	// path_conf
-		ImportPathNew->ui.txtPath_Vdms_2->setText( QDir::toNativeSeparators( DatosVDMSound["path_exe"] ) );		// path_exe
+		ImportPathNew->ui.txtPath_Vdms_2->setText( QDir::toNativeSeparators( DatosVDMSound["path_exe"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_exe
 	}
 
 	if( ImportPathNew->exec() == QDialog::Accepted )
@@ -399,7 +398,7 @@ void frmImportarJuego::on_btnOk()
 
 void frmImportarJuego::on_btnDirFileXML()
 {
-	ui.DirFileXML->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.DirFileXML->text(), tr("Soportados")+" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend R (*.prof);;"+tr("Todos los archivo")+" (*)", 0, false) );
+	ui.DirFileXML->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.DirFileXML->text(), tr("Soportados")+" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend Reloaded (*.prof);;"+tr("Todos los archivo")+" (*)", 0, false) );
 }
 
 void frmImportarJuego::on_btnUpdateList()
@@ -735,7 +734,7 @@ void frmImportarJuego::parseListaJuegos(const QDomElement &element)
 				if(tipoDrive=="IMG_hdd")
 					childItem->setIcon(0, QIcon(":/img16/drive_hd.png") );
 
-				childItem->setText(0, child.firstChildElement("path").text()         );
+				childItem->setText(0, child.firstChildElement("path").text().replace("{DirBaseGames}", DirBaseGames) );
 				childItem->setText(1, child.firstChildElement("label").text()        );
 				childItem->setText(2, child.firstChildElement("tipo_as").text()      );
 				childItem->setText(3, child.firstChildElement("letter").text()       );
@@ -837,7 +836,7 @@ void frmImportarJuego::setProfile_DFend(QString fileName)
 			temp_opt_mount.clear();
 			temp_opt_mount = str_Lista.value(5);
 
-			twItemDfend->setText(0, ""+str_Lista.value(0) ); // path
+			twItemDfend->setText(0, ""+str_Lista.value(0).replace("{DirBaseGames}", DirBaseGames) ); // path
 			twItemDfend->setText(1, ""+str_Lista.value(4) ); // label
 			twItemDfend->setText(2, ""+tipoDrive          ); // tipo_as
 			twItemDfend->setText(3, ""+str_Lista.value(2) ); // letter

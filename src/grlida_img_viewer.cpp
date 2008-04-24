@@ -78,8 +78,6 @@ void ImageViewer::open()
 
 void ImageViewer::open(QString fileName)
 {
-//    QString fileName = QFileDialog::getOpenFileName(this,
-//                                    tr("Open File"), QDir::currentPath());
     if (!fileName.isEmpty())
     {
         QImage image(fileName);

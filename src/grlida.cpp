@@ -283,8 +283,6 @@ void GrLida::on_ImportarJuego()
 void GrLida::CargarConfigInicial()
 {
 	stHomeDir      = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
-//	stHomeDir      = QDir::currentPath()+"/";			// directorio de trabajo del GR-lida
-//	stHomeDir      = "./";								// directorio de trabajo del GR-lida	
 	stIconDir      = stHomeDir + "iconos/";				// directorio de iconos para el GR-lida
 	stDatosDir     = stHomeDir + "datos/";				// directorio para los distintos datos del GR-lida
 	stConfgDbxDir  = stHomeDir + "confdbx/";			// directorio de configuracion para el DOSBox
@@ -360,7 +358,7 @@ void GrLida::CargarConfigInicial()
 	if( !sql->dbisOpen() )
 		QMessageBox::critical(0, tr("Error abrir la Base de Datos"), tr("No se ha podido establecer una conexión con la Base de Datos.\nEsta aplicación necesita soporte de SQLite. Mira la documentación de Qt SQL driver para más información.\n\nClick Cancelar para salir."), QMessageBox::Cancel);
 	else
-		sql->CrearTablas();	// Crea las tablas si no lo estan		
+		sql->CrearTablas();	// Crea las tablas si no lo estan
 }
 
 void GrLida::on_AddNewDbx()
@@ -423,9 +421,10 @@ void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString im
 	else
 		item->setIcon( 1 , QIcon()); // icono favorito
 
-//	ui.twJuegos->clearSelection();
-//	item->setSelected( true );
-//	emit on_twJuegos_clicked( item );
+	ui.twJuegos->setFocus();
+	ui.twJuegos->clearSelection();
+	ui.twJuegos->setCurrentItem( item );
+	emit on_twJuegos_clicked( item );
 
 	lbpanel_2.setText(" " + tr("Nº Juegos") + ": " + fGrl.IntToStr(sql->getCount("dbgrl"))+ "  " );
 }
@@ -459,7 +458,7 @@ void GrLida::on_EjecutarJuego()
 				fGrl.CreaIniScummVM(stHomeDir+"scummvm.ini", conf_scummvm);
 				Ejecutar( stBinExeSvm, stConfgJuego);
 			}
-		// Ejecuta el juego con el emulador vdmsound 	
+		// Ejecuta el juego con el emulador vdmsound
 			if( stTipoEmu=="vdmsound" )
 			{
 				#ifdef Q_OS_WIN32
@@ -823,8 +822,8 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 
 		query.exec("SELECT * FROM dbgrl_emu_vdmsound WHERE idgrl="+IDitem+" LIMIT 0,1");
 		query.first();
-		rec = query.record();		
-		
+		rec = query.record();
+
 		stConfgJuego = stConfgVdmSDir + query.value( rec.indexOf("path_conf") ).toString();
 
 		ui.actionEjectar->setEnabled(true);
@@ -1243,38 +1242,33 @@ void GrLida::on_twJuegos_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetI
 
 void GrLida::showPopup(const QPoint & aPosition)
 {
-//	QTreeWidgetItem * item = 0;
-//	item = ui.twJuegos->itemAt(aPosition);
-//	if( item )
-//	{
-	// Creando el menu
-		ljMenuPopUp = new QMenu(ui.twJuegos);
-		ljMenuPopUp->addAction(ui.mnu_ejecutar_juego);
-		ljMenuPopUp->addAction(ui.mnu_ejecutar_setup);
-		ljMenuPopUp->addSeparator();
-		ljMenuPopUp->addAction(ui.mnu_edit_nuevo);
-		ljMenuPopUp->addAction(ui.mnu_edit_editar);
-		ljMenuPopUp->addAction(ui.mnu_edit_eliminar);
-		ljMenuPopUp->addSeparator();
-		ljMenuPopUp->addAction(ui.mnu_edit_favorito);
-	
-	// Muestra popupmenu
-		ljMenuPopUp->exec(ui.twJuegos->mapToGlobal(aPosition));
-		//ljMenuPopUp->exec(QCursor::pos());
-		delete ljMenuPopUp;
-//	}
+// Creando el menu
+	ljMenuPopUp = new QMenu(ui.twJuegos);
+	ljMenuPopUp->addAction(ui.mnu_ejecutar_juego);
+	ljMenuPopUp->addAction(ui.mnu_ejecutar_setup);
+	ljMenuPopUp->addSeparator();
+	ljMenuPopUp->addAction(ui.mnu_edit_nuevo);
+	ljMenuPopUp->addAction(ui.mnu_edit_editar);
+	ljMenuPopUp->addAction(ui.mnu_edit_eliminar);
+	ljMenuPopUp->addSeparator();
+	ljMenuPopUp->addAction(ui.mnu_edit_favorito);
+
+// Muestra popupmenu
+	ljMenuPopUp->exec(ui.twJuegos->mapToGlobal(aPosition));
+	//ljMenuPopUp->exec(QCursor::pos());
+	delete ljMenuPopUp;
 }
 
 void GrLida::on_twJuegos_clicked( QTreeWidgetItem *item)
 {
 	if( item )
 	{
-		stItemIndex  = "";						// Limpiamos el idgrl
-		stTipoEmu    = "";						// Limpiamos el tipo_emu
+		stItemIndex.clear();					// Limpiamos el idgrl
+		stTipoEmu.clear();						// Limpiamos el tipo_emu
 		stItemIndex  = item->text(0);			// idgrl del juego en la Base de Datos
 		stTipoEmu    = item->text(2);			// tipo_emu
 		Confg_Svm_Dbx( stItemIndex );			// carga toda la configuracion
-		MostrarDatosDelJuego( stItemIndex );	// Muestra los distintos datos del juego 	
+		MostrarDatosDelJuego( stItemIndex );	// Muestra los distintos datos del juego
 
 		if(item->text(3)!="")
 			ui.mnu_edit_favorito->setEnabled(true);
@@ -1298,12 +1292,13 @@ void GrLida::on_twJuegos_Dblclicked(QTreeWidgetItem *item)
 {
 	if( item )
 	{
-		stItemIndex  = "";				// Limpiamos el idgrl
-		stTipoEmu    = "";				// Limpiamos el tipo_emu
-		stItemIndex  = item->text(0);	// index del juego en la Base de Datos 
-		stTipoEmu    = item->text(2);	// indica el tipo de emulador
-		Confg_Svm_Dbx( stItemIndex );	// carga toda la configuracion
-		on_EjecutarJuego();				// ejecuta el juego
+		stItemIndex.clear();				// Limpiamos el idgrl
+		stTipoEmu.clear();					// Limpiamos el tipo_emu
+		stItemIndex  = item->text(0);		// index del juego en la Base de Datos
+		stTipoEmu    = item->text(2);		// indica el tipo de emulador
+		Confg_Svm_Dbx( stItemIndex );		// carga toda la configuracion
+		MostrarDatosDelJuego( stItemIndex );// Muestra los distintos datos del juego
+		on_EjecutarJuego();					// ejecuta el juego
 	}else
 		return;
 }
@@ -1417,7 +1412,7 @@ void GrLida::CargarBaseDatos(QString str)
 					else
 						item->setIcon( 0, QIcon(":/img24/emu_sin_imagen.png") );
 				}
-				
+
 				if(query.value(rec.indexOf("favorito")).toString()=="true")
 					item->setIcon( 1 , QIcon(":/img16/"+stIconoFav)); // icono favorito
 

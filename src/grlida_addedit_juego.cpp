@@ -37,8 +37,6 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	stItemIDGrl   = stIDIndex;
 
 	stHomeDir     = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
-//	stHomeDir     = QDir::currentPath()+"/";			// directorio de trabajo del GR-lida
-//	stHomeDir     = "./";								// directorio de trabajo del GR-lida
 	stIconDir     = stHomeDir + "iconos/";				// directorio de iconos para el GR-lida
 	stDatosDir    = stHomeDir + "datos/";				// directorio para los distintos datos del GR-lida
 

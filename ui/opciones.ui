@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>420</height>
+    <height>433</height>
    </rect>
   </property>
   <property name="minimumSize" >
@@ -375,6 +375,67 @@
              <widget class="Line" name="line_3" >
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_Confini_12" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize" >
+               <size>
+                <width>150</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Directorio Base Juegos:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtDirBaseGames" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirBaseGames" >
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnDirBaseGames_clear" >
+              <property name="enabled" >
+               <bool>true</bool>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="icon" >
+               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
               </property>
              </widget>
             </item>
@@ -1200,8 +1261,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>433</x>
-     <y>410</y>
+     <x>429</x>
+     <y>419</y>
     </hint>
     <hint type="destinationlabel" >
      <x>243</x>
@@ -1216,12 +1277,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>445</x>
-     <y>176</y>
+     <x>456</x>
+     <y>228</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>368</x>
-     <y>174</y>
+     <x>384</x>
+     <y>225</y>
     </hint>
    </hints>
   </connection>
@@ -1232,12 +1293,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>136</x>
-     <y>99</y>
+     <x>126</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>425</x>
-     <y>132</y>
+     <x>420</x>
+     <y>170</y>
     </hint>
    </hints>
   </connection>
@@ -1248,12 +1309,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>136</x>
-     <y>99</y>
+     <x>126</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>389</x>
-     <y>129</y>
+     <x>384</x>
+     <y>167</y>
     </hint>
    </hints>
   </connection>
@@ -1264,12 +1325,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>136</x>
-     <y>157</y>
+     <x>126</x>
+     <y>195</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>425</x>
-     <y>190</y>
+     <x>420</x>
+     <y>228</y>
     </hint>
    </hints>
   </connection>
@@ -1280,12 +1341,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>136</x>
-     <y>157</y>
+     <x>126</x>
+     <y>195</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>389</x>
-     <y>187</y>
+     <x>384</x>
+     <y>225</y>
     </hint>
    </hints>
   </connection>
@@ -1296,12 +1357,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>136</x>
-     <y>99</y>
+     <x>126</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>389</x>
-     <y>129</y>
+     <x>384</x>
+     <y>167</y>
     </hint>
    </hints>
   </connection>
@@ -1312,12 +1373,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>136</x>
-     <y>157</y>
+     <x>126</x>
+     <y>195</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>389</x>
-     <y>187</y>
+     <x>384</x>
+     <y>225</y>
     </hint>
    </hints>
   </connection>
@@ -1328,12 +1389,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>446</x>
-     <y>119</y>
+     <x>456</x>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>345</x>
-     <y>117</y>
+     <x>384</x>
+     <y>167</y>
     </hint>
    </hints>
   </connection>
@@ -1344,12 +1405,28 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>437</x>
-     <y>107</y>
+     <x>456</x>
+     <y>133</y>
     </hint>
     <hint type="destinationlabel" >
      <x>312</x>
      <y>119</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDirBaseGames_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>txtDirBaseGames</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>443</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>342</x>
+     <y>292</y>
     </hint>
    </hints>
   </connection>

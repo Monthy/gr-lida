@@ -30,8 +30,6 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 	ui.setupUi(this);
 
 	stHomeDir  = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
-//	stHomeDir  = QDir::currentPath()+"/";		// directorio de trabajo del GR-lida
-//	stHomeDir  = "./";							// directorio de trabajo del GR-lida
 	stDatosDir = stHomeDir + "datos/";
 
 	ui.wizardSvm->setCurrentIndex(0);

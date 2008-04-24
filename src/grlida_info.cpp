@@ -30,8 +30,6 @@ frmInfo::frmInfo(QWidget *parent)
 	ui.setupUi(this);
 	
 	stHomeDir     = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
-//	stHomeDir     = QDir::currentPath()+"/";		// directorio de trabajo del GR-lida
-//	stHomeDir     = "./";							// directorio de trabajo del GR-lida	
 
 	QSettings settings(stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
 	settings.beginGroup("SqlDatabase");

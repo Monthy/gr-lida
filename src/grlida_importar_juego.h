@@ -58,7 +58,7 @@ public:
 private:
 	Funciones fGrl;
 	QString stHomeDir, texto_html, img_thumbs, img_cover_front, img_cover_back ;
-	QString url_xmldb, xml_ListaJuegos, xml_InfoJuegos, url_filed;
+	QString url_xmldb, xml_ListaJuegos, xml_InfoJuegos, url_filed, DirBaseGames;
 	int indx_fin_descarga;
 	bool xml_read(QString fileName);
 	QHttp *http;

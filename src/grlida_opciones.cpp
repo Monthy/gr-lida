@@ -34,13 +34,12 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDirDbx , SIGNAL( clicked() ), this, SLOT( on_btnDirDbx() ) );
 	connect( ui.btnDirSvm , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm() ) );
 	connect( ui.btnDirDB  , SIGNAL( clicked() ), this, SLOT( on_btnDirDB()  ) );
+	connect( ui.btnDirBaseGames  , SIGNAL( clicked() ), this, SLOT( on_btnDirBaseGames()  ) );
 	connect( ui.cbxIdioma , SIGNAL( activated(const QString &) ), this, SLOT( on_setLanguage(const QString &) ) );
 	connect( ui.cmbStyle  , SIGNAL(activated(const QString &)), this, SLOT( on_changeStyle(const QString &)));
 	connect( ui.cbxMotorDataBase, SIGNAL(activated(const QString &)), this, SLOT( on_changeTypeDB(const QString &)));
 
 	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
-//	stHomeDir = QDir::currentPath()+"/";		// directorio de trabajo del GR-lida
-//	stHomeDir = "./";							// directorio de trabajo del GR-lida
 
 	ui.cmbStyle->clear();
 	ui.cmbStyle->addItem( "Default" );
@@ -56,6 +55,7 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 		ui.btnDirSvm->setEnabled( settings.value("ScummVMDisp", "false").toBool() );
 		ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp", "false").toBool() );
 		ui.txtDirSvm->setText( settings.value("DirScummVM", "").toString() );
+		ui.txtDirBaseGames->setText( settings.value("DirBaseGames", "").toString() );
 		ui.chkConfig_VDMSoundDisp->setChecked( settings.value("VDMSoundDisp", "false").toBool() );
 		ui.chkConfig_ShowNext->setChecked( settings.value("Primeravez", "true").toBool() );
 		IdiomaSelect = settings.value("IdiomaSelect", "es_ES").toString();
@@ -176,6 +176,7 @@ void frmOpciones::on_btnOk()
 		settings.setValue("Primeravez"   , DatosConfiguracion["Primeravez"]		);
 		settings.setValue("DirDOSBox"    , DatosConfiguracion["DirDOSBox"]		);
 		settings.setValue("DirScummVM"   , DatosConfiguracion["DirScummVM"]		);
+		settings.setValue("DirBaseGames" , ui.txtDirBaseGames->text()			);
 		settings.setValue("IdiomaSelect" , IdiomaSelect							);
 		settings.setValue("IdiomaExterno", DatosConfiguracion["IdiomaExterno"]	);
 		settings.setValue("Style"        , stStyleSelect						);
@@ -225,4 +226,9 @@ void frmOpciones::on_btnDirSvm()
 void frmOpciones::on_btnDirDB()
 {
 	ui.txtDirBD->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDirBD->text(), tr("Todos los archivo") + " (*)", 0, false) );
+}
+
+void frmOpciones::on_btnDirBaseGames()
+{
+	ui.txtDirBaseGames->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), stHomeDir, ui.txtDirBaseGames->text() ) );
 }

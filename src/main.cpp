@@ -41,8 +41,6 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	
 	stHomeDir = QDir::homePath()+"/.gr-lida/";	// Indicamos el directorio del usuario
-//	stHomeDir = QDir::currentPath()+ "/";		// Indicamos el directorio del usuario
-//	stHomeDir = "./";  							// Indicamos el directorio del usuario
 	
 	QSplashScreen splash( QPixmap(":/images/splash.png") );
 	splash.setFont( QFont("Helvetica", 10) );

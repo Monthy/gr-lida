@@ -33,8 +33,6 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	ui.wizardDbx->setCurrentIndex(0);
 
 	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
-//	stHomeDir = QDir::currentPath()+"/";		// directorio de trabajo del GR-lida
-//	stHomeDir = "./";							// directorio de trabajo del GR-lida
 
 // Conecta los distintos botones con las funciones.
 	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );

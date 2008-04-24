@@ -52,6 +52,7 @@ private slots:
 	void on_btnDirDbx();
 	void on_btnDirSvm();
 	void on_btnDirDB();
+	void on_btnDirBaseGames();
 	void on_setLanguage(const QString txt_locale);
 	void on_changeStyle(const QString &styleName);
 	void on_changeTypeDB(const QString &typedb);

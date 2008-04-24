@@ -93,7 +93,8 @@ int Funciones::StrToInt(QString text)
 // Convierte Texto "true", "yes" a tipo Bool
 bool Funciones::StrToBool(QString text)
 {
-	if(text.toLower()=="true" || text.toLower()=="yes" )
+	text.toLower();
+	if(text=="true" || text=="yes" )
 		return true;
 	else
 		return false;
@@ -109,12 +110,19 @@ QString Funciones::HoraFechaActual()
 
 QString Funciones::url_correcta(QString url)
 {
-	bool url_ok;
-	url_ok = url.startsWith("http://");
-	if(url_ok==false) url.prepend("http://");
-
-	url_ok = url.endsWith("/");
-	if(url_ok==false) url.append("/");
+	bool url_ok,  s_url_ok;
+	s_url_ok = url.startsWith("https://");
+	if( s_url_ok )
+	{
+		url_ok = url.endsWith("/");
+		if(url_ok==false) url.append("/");	
+	} else {
+		url_ok = url.startsWith("http://");
+		if(url_ok==false) url.prepend("http://");
+	
+		url_ok = url.endsWith("/");
+		if(url_ok==false) url.append("/");		
+	}
 
 	return url;
 }
@@ -149,7 +157,6 @@ void Funciones::CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox)
 {
 	QString tmp_locale;	
 	QString filter = "*.qm";
-//	QFile temp_lng_internal;
 	QDir dir( dirLng );
 	QDir::Filters filters = QDir::Files | QDir::Readable;
 	QDir::SortFlags sort = QDir::Name;
