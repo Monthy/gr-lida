@@ -38,10 +38,13 @@ int main(int argc, char *argv[])
 	QTranslator translator;
 	QString stHomeDir, stDirPath, stIdiomaSelect, Version_GRL, stStyleSelect;
 	bool ejecutado_por_primeravez , chk_StylePalette, chk_IdiomaExterno;
+	Funciones fGrl;
+
 	QApplication app(argc, argv);
-	
-	stHomeDir = QDir::homePath()+"/.gr-lida/";	// Indicamos el directorio del usuario
-	
+
+	//stHomeDir = QDir::homePath()+"/.gr-lida/";
+	stHomeDir = fGrl.GRlidaHomePath();	// Indicamos el directorio del usuario
+
 	QSplashScreen splash( QPixmap(":/images/splash.png") );
 	splash.setFont( QFont("Helvetica", 10) );
 	splash.show();
@@ -202,7 +205,7 @@ int main(int argc, char *argv[])
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Cargando Base de Datos..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-	w.CargarBaseDatos("");
+	w.CargarBaseDatos();
 
 	w.show();
 	splash.finish(&w);

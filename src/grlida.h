@@ -46,7 +46,7 @@ public:
 
 	Ui::GrLidaClass ui;
 
-	void CargarBaseDatos(QString str);				// Abre y carga la base de datos
+	void CargarBaseDatos(QString str="");				// Abre y carga la base de datos
 	void CargarConfigInicial();							// Cargar la Configuracin Inicial
 	void ComprobarArchivosDatos(QString Version_GRL);	// Comprueba si existen los archivos de datos
 

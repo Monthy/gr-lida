@@ -35,12 +35,13 @@ public:
 	~Funciones();
 
 // Versión del GR-lida
-	QString stVersionGrl(){ return "0.4.5"; }
+	QString stVersionGrl(){ return "0.4.6"; }
 // Versiones que soporta
 	QString stVersionDbx(){ return "0.72";  }
 	QString stVersionSvm(){ return "0.11.1";}
 	QString stVersionVdms(){return "2.0.4"; }
-
+// Devuelve el directorio que usa el GR-lida
+	QString GRlidaHomePath();
 // Muestra el Nombre de la plataforma donde esta compilada
 	QString get_Plataforma();
 // Convierte de Número a Texto
@@ -49,6 +50,7 @@ public:
 	int StrToInt(QString text);
 // Convierte Texto "true", "yes" a tipo Bool
 	bool StrToBool(QString text);
+	QString BoolToStr(bool estado, bool type_yes = false);
 // Devuelve la hora y la fecha
 	QString HoraFechaActual();
 // Devuelve una URL correcta

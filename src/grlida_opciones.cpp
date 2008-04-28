@@ -39,7 +39,7 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 	connect( ui.cmbStyle  , SIGNAL(activated(const QString &)), this, SLOT( on_changeStyle(const QString &)));
 	connect( ui.cbxMotorDataBase, SIGNAL(activated(const QString &)), this, SLOT( on_changeTypeDB(const QString &)));
 
-	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
+	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 
 	ui.cmbStyle->clear();
 	ui.cmbStyle->addItem( "Default" );

@@ -28,6 +28,34 @@ Funciones::Funciones(){}
 
 Funciones::~Funciones(){}
 
+QString Funciones::GRlidaHomePath()
+{
+
+	QFile appConfg;
+	QString stDirApp, stConfgCurrentPath;
+	stDirApp.clear();
+	stConfgCurrentPath.clear();
+	stConfgCurrentPath = QDir::currentPath()+"/GR-lida.conf";
+
+	if( appConfg.exists( stConfgCurrentPath ) )
+	{
+		QSettings settings( stConfgCurrentPath, QSettings::IniFormat );
+		settings.beginGroup("OpcGeneral");
+			stDirApp = settings.value("DirApp", "HomePath").toString().toLower();
+		settings.endGroup();	
+	} else
+		stDirApp = "homepath";
+
+	if( stDirApp == "currentpath" )
+		return QDir::currentPath()+"/";
+	else if( stDirApp == "homepath" )
+		return QDir::homePath()+"/.gr-lida/";
+	else
+		return QDir::homePath()+"/.gr-lida/";
+
+//	return QDir::homePath()+"/.gr-lida/";
+}
+
 QString Funciones::get_Plataforma()
 {
 QString plataforma;
@@ -98,6 +126,18 @@ bool Funciones::StrToBool(QString text)
 		return true;
 	else
 		return false;
+}
+
+QString Funciones::BoolToStr(bool estado, bool type_yes)
+{
+	if(estado)
+	{
+		if(type_yes)
+			return "yes"; else return "true";
+	} else {
+		if(type_yes)
+			return "no"; else return "false";
+	}
 }
 
 // Devuelve la hora y la fecha
@@ -249,6 +289,8 @@ void Funciones::CargarDatosListaSvm(QString Archivo, QTreeWidget *myTreeWidget)
 	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
+		in.setCodec("UTF-8");
+
 		while ( !in.atEnd() )
 			svm_ListaTemp << in.readLine();
 
@@ -286,8 +328,11 @@ QHash<QString, QString> Funciones::Cargar_Smiles(QString Archivo, QTreeWidget *m
 	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
+		in.setCodec("UTF-8");
+
 		while ( !in.atEnd() )
 			smiles_ListaTemp << in.readLine();
+
 		for ( int i = 0; i < smiles_ListaTemp.size(); i++ )
 		{
 			smiles_Lista = smiles_ListaTemp[i].split( "\",\"" );
@@ -312,8 +357,11 @@ QHash<QString, QString> Funciones::Cargar_Smiles(QString Archivo)
 	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
+		in.setCodec("UTF-8");
+
 		while ( !in.atEnd() )
 			smiles_ListaTemp << in.readLine();
+
 		for ( int i = 0; i < smiles_ListaTemp.size(); i++ )
 		{
 			smiles_Lista = smiles_ListaTemp[i].split( "\",\"" );
@@ -334,8 +382,11 @@ QStringList Funciones::CargaDatosListas(QString Archivo, QString delimitador)
 	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
 		QTextStream in(&file);
+		in.setCodec("UTF-8");
+
 		while ( !in.atEnd() )
 			str_ListaTemp << in.readLine();
+
 		for ( int i = 0; i < str_ListaTemp.size(); i++ )
 		{
 			str_Lista = str_ListaTemp[i].split( delimitador );
@@ -378,7 +429,7 @@ QString Funciones::VentanaAbrirArchivos(const QString caption, const QString dir
 QString Funciones::VentanaDirectorios(const QString caption, const QString dir, const QString tmp_dir)
 {
 	QString directorio;
-	directorio = QFileDialog::getExistingDirectory(0, caption, dir, QFileDialog::ShowDirsOnly);
+	directorio = QFileDialog::getExistingDirectory(0, caption, dir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
 	
 	if(!directorio.isEmpty())
 		return directorio;
@@ -860,13 +911,15 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 	int n=0, num_mounts=0;
 	bool str_ok;
 
-	fileTemp = QDir::homePath()+"/.gr-lida/temp_config.prof";
+	fileTemp = GRlidaHomePath()+"temp_config.prof";
 
 // Leer archivo ------------------------------------------------------
 	QFile file_in( fileName );
 	file_in.open( QIODevice::ReadOnly | QIODevice::Text );
 
 	QTextStream in(&file_in);
+	in.setCodec("UTF-8");
+
 	stline.clear();
 	stline = in.readAll();
 	stline.replace("\\", "\\\\");

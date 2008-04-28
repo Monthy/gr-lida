@@ -29,7 +29,7 @@ frmVdmsAdd::frmVdmsAdd(QDialog *parent, Qt::WFlags flags)
 {
 	ui.setupUi(this);
 
-	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
+	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stConfgVdmSDir = stHomeDir + "confvdms/";	// directorio de configuracion para el VDMSound
 	
 	

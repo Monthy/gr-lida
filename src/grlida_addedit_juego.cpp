@@ -36,7 +36,7 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	TipoEmulador  = TipoEmu;
 	stItemIDGrl   = stIDIndex;
 
-	stHomeDir     = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
+	stHomeDir     = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
 	stIconDir     = stHomeDir + "iconos/";				// directorio de iconos para el GR-lida
 	stDatosDir    = stHomeDir + "datos/";				// directorio para los distintos datos del GR-lida
 
@@ -550,7 +550,7 @@ void frmAddEditJuego::setDatosJuegos()
 		DatosJuego["icono"] = ui.cbxDatos_Icono->currentText();					// icono
 	else DatosJuego["icono"] = ""+TipoEmulador;
 
-	DatosJuego["titulo"]    = ui.txtDatos_Titulo->text();							// titulo
+	DatosJuego["titulo"]    = ui.txtDatos_Titulo->text();						// titulo
 	DatosJuego["subtitulo"] = ui.txtDatos_Subtitulo->text();					// subtitulo
 
 	if( ui.cbxDatos_Genero->currentText()!="" )
@@ -603,14 +603,9 @@ void frmAddEditJuego::setDatosJuegos()
 		DatosJuego["jugabilidad"] = ui.cbxDatos_Jugabilidad->currentText();		// jugabilidad
 	else DatosJuego["jugabilidad"] = "1";
 
-	if( ui.chkDatos_Original->isChecked() )
-		DatosJuego["original"] = "true";								// original
-	else DatosJuego["original"] = "false";
-
-	if( ui.chkDatos_Favorito->isChecked() )
-		DatosJuego["favorito"] = "true";								// favorito
-	else DatosJuego["favorito"] = "false";
-
+	DatosJuego["original"] = fGrl.BoolToStr( ui.chkDatos_Original->isChecked() ); // original
+	DatosJuego["favorito"] = fGrl.BoolToStr( ui.chkDatos_Favorito->isChecked() ); // favorito
+	
 	if( ui.cbxDatos_Estado->currentText()!="" )
 		DatosJuego["estado"] = ui.cbxDatos_Estado->currentText();		// estado
 	else DatosJuego["estado"] = "";
@@ -713,7 +708,7 @@ void frmAddEditJuego::on_btnImgVer_CoverBack()
 
 void frmAddEditJuego::on_btnImgEliminar_Thumbs()
 {
-	stThumbs = "";
+	stThumbs.clear();
 	ui.lbImg_Thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 	ui.btnImgVer_Thumbs->setEnabled( false );
 	ui.btnImgEliminar_Thumbs->setEnabled( false );
@@ -721,7 +716,7 @@ void frmAddEditJuego::on_btnImgEliminar_Thumbs()
 
 void frmAddEditJuego::on_btnImgEliminar_CoverFront()
 {
-	stCoverFront = "";
+	stCoverFront.clear();
 	ui.lbImg_CoverFront->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 	ui.btnImgVer_CoverFront->setEnabled( false );
 	ui.btnImgEliminar_CoverFront->setEnabled( false );
@@ -729,7 +724,7 @@ void frmAddEditJuego::on_btnImgEliminar_CoverFront()
 
 void frmAddEditJuego::on_btnImgEliminar_CoverBack()
 {
-	stCoverBack = "";
+	stCoverBack.clear();
 	ui.lbImg_CoverBack->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 	ui.btnImgVer_CoverBack->setEnabled( false );
 	ui.btnImgEliminar_CoverBack->setEnabled( false );
@@ -1172,66 +1167,44 @@ void frmAddEditJuego::setDatosScummVM()
 	if( tmp_gfx_mode == "" ) tmp_gfx_mode = "";
 
 	DatosScummvm.clear();
-	DatosScummvm["game"] = ui.txtSvm_game_label->text();	// game
-	DatosScummvm["language"] = tmp_language;				// language
-
-	if( ui.chkSvm_subtitles->isChecked() ) DatosScummvm["subtitles"] = "true";
-	else DatosScummvm["subtitles"] = "false";		// subtitles
-
-	DatosScummvm["platform"] = tmp_platform;		// platform
-	DatosScummvm["gfx_mode"] = tmp_gfx_mode;		// gfx_mode
+	DatosScummvm["game"]      = ui.txtSvm_game_label->text();	// game
+	DatosScummvm["language"]  = tmp_language;					// language
+	DatosScummvm["subtitles"] = fGrl.BoolToStr( ui.chkSvm_subtitles->isChecked() ); // subtitles
+	DatosScummvm["platform"]  = tmp_platform;		// platform
+	DatosScummvm["gfx_mode"]  = tmp_gfx_mode;		// gfx_mode
 
 	if( ui.cbxSvm_render_mode->currentText()!="" )
 		DatosScummvm["render_mode"] = ui.cbxSvm_render_mode->currentText();	// render_mode
 	else DatosScummvm["render_mode"] = "";
 
-	if( ui.chkSvm_fullscreen->isChecked() )
-		DatosScummvm["fullscreen"] = "true";								// fullscreen
-	else DatosScummvm["fullscreen"] = "false";
-
-	if( ui.chkSvm_aspect_ratio->isChecked() )
-		DatosScummvm["aspect_ratio"] = "true";								// aspect_ratio
-	else DatosScummvm["aspect_ratio"] = "false";
-
-	DatosScummvm["path"]          = ui.txtSvm_path->text();					// path
-	DatosScummvm["path_setup"]    = "";										// path_setup
-	DatosScummvm["path_extra"]    = ui.txtSvm_extrapath->text();			// path_extra
-	DatosScummvm["path_save"]     = ui.txtSvm_savepath->text();				// path_save
-	DatosScummvm["path_capturas"] = ui.txtSvm_path_capturas->text();		// path_capturas
-	DatosScummvm["path_sonido"]   = ui.txtSvm_path_sonido->text();			// path_sonido
-	DatosScummvm["music_driver"]  = ui.cbxSvm_music_driver->currentText();	// music_driver
-
-	if( ui.chkSvm_enable_gs->isChecked() )
-		DatosScummvm["enable_gs"] = "true";							// enable_gs
-	else DatosScummvm["enable_gs"] = "false";
-
-	if( ui.chkSvm_multi_midi->isChecked() )
-		DatosScummvm["multi_midi"] = "true";						// multi_midi
-	else DatosScummvm["multi_midi"] = "false";
-
-	if( ui.chkSvm_native_mt32->isChecked() )
-		DatosScummvm["native_mt32"] = "true";						// native_mt32
-	else DatosScummvm["native_mt32"] = "false";
-
-	DatosScummvm["master_volume"] = "255";							// master_volume
-	DatosScummvm["music_volume"]  = ui.posSliderSvm_1->text();		// music_volume
-	DatosScummvm["sfx_volume"]    = ui.posSliderSvm_2->text();		// sfx_volume
-	DatosScummvm["speech_volume"] = ui.posSliderSvm_3->text();		// speech_volume
-	DatosScummvm["tempo"]         = ui.posSliderSvm_4->text();		// tempo
-	DatosScummvm["talkspeed"]     = ui.posSliderSvm_5->text();		// talkspeed
-	DatosScummvm["debuglevel"]    = ui.posSliderSvm_6->text();		// debuglevel
-	DatosScummvm["cdrom"]         = "0";							// cdrom ui.cbxSvm_cdrom->currentIndex()
-	DatosScummvm["joystick_num"]  = fGrl.IntToStr(ui.cbxSvm_joystick_num->currentIndex()); // joystick_num 
+	DatosScummvm["fullscreen"]    = fGrl.BoolToStr( ui.chkSvm_fullscreen->isChecked() );	// fullscreen
+	DatosScummvm["aspect_ratio"]  = fGrl.BoolToStr( ui.chkSvm_aspect_ratio->isChecked() );	// aspect_ratio
+	DatosScummvm["path"]          = ui.txtSvm_path->text();									// path
+	DatosScummvm["path_setup"]    = "";														// path_setup
+	DatosScummvm["path_extra"]    = ui.txtSvm_extrapath->text();							// path_extra
+	DatosScummvm["path_save"]     = ui.txtSvm_savepath->text();								// path_save
+	DatosScummvm["path_capturas"] = ui.txtSvm_path_capturas->text();						// path_capturas
+	DatosScummvm["path_sonido"]   = ui.txtSvm_path_sonido->text();							// path_sonido
+	DatosScummvm["music_driver"]  = ui.cbxSvm_music_driver->currentText();					// music_driver
+	DatosScummvm["enable_gs"]     = fGrl.BoolToStr( ui.chkSvm_enable_gs->isChecked() );		// enable_gs
+	DatosScummvm["multi_midi"]    = fGrl.BoolToStr( ui.chkSvm_multi_midi->isChecked() );	// multi_midi
+	DatosScummvm["native_mt32"]   = fGrl.BoolToStr( ui.chkSvm_native_mt32->isChecked() );	// native_mt32
+	DatosScummvm["master_volume"] = "255";													// master_volume
+	DatosScummvm["music_volume"]  = ui.posSliderSvm_1->text();								// music_volume
+	DatosScummvm["sfx_volume"]    = ui.posSliderSvm_2->text();								// sfx_volume
+	DatosScummvm["speech_volume"] = ui.posSliderSvm_3->text();								// speech_volume
+	DatosScummvm["tempo"]         = ui.posSliderSvm_4->text();								// tempo
+	DatosScummvm["talkspeed"]     = ui.posSliderSvm_5->text();								// talkspeed
+	DatosScummvm["debuglevel"]    = ui.posSliderSvm_6->text();								// debuglevel
+	DatosScummvm["cdrom"]         = "0";													// cdrom ui.cbxSvm_cdrom->currentIndex()
+	DatosScummvm["joystick_num"]  = fGrl.IntToStr(ui.cbxSvm_joystick_num->currentIndex());	// joystick_num 
 
 	if( ui.cbxSvm_output_rate->currentText()!="" && ui.cbxSvm_output_rate->currentIndex()!= 0 )
 		DatosScummvm["output_rate"] = ui.cbxSvm_output_rate->currentText();
 	else
 		DatosScummvm["output_rate"] = "";
 
-	if( ui.chkSvm_copy_protection->isChecked() )
-		DatosScummvm["copy_protection"] = "true";					// copy_protection
-	else DatosScummvm["copy_protection"] = "false";
-
+	DatosScummvm["copy_protection"] = fGrl.BoolToStr( ui.chkSvm_copy_protection->isChecked() );	// copy_protection
 	DatosScummvm["midi_gain"]  = ui.posSliderSvm_7->text();			// midi_gain 
 	DatosScummvm["sound_font"] = ui.txtSvm_soundfont->text();		// sound_font 
 }
@@ -1261,8 +1234,7 @@ void frmAddEditJuego::CargarDatosDosBox( QString stIDdbx )
 	if( query.first() )
 	{
 		rec = query.record();
-//0 id
-//1 idgrl
+
 		ui.chkDbx_sdl_fullscreen->setChecked( query.value( rec.indexOf("sdl_fullscreen") ).toBool() );										// sdl_fullscreen
 		ui.chkDbx_sdl_fulldouble->setChecked(query.value( rec.indexOf("sdl_fulldouble") ).toBool() );										// sdl_fulldouble
 		ui.chkDbx_sdl_fullfixed->setChecked( query.value( rec.indexOf("sdl_fullfixed") ).toBool() );										// sdl_fullfixed
@@ -1273,18 +1245,19 @@ void frmAddEditJuego::CargarDatosDosBox( QString stIDdbx )
 		ui.chkDbx_sdl_autolock->setChecked( query.value( rec.indexOf("sdl_autolock") ).toBool() );											// sdl_autolock
 		ui.cbxDbx_sdl_sensitivity->setCurrentIndex( ui.cbxDbx_sdl_sensitivity->findText( query.value( rec.indexOf("sdl_sensitivity") ).toString() ) );		// sdl_sensitivity
 		ui.chkDbx_sdl_waitonerror->setChecked( query.value( rec.indexOf("sdl_waitonerror") ).toBool() );										// sdl_waitonerror
+// sdl_priority
 	QString sdl_priority_temp;
 	QStringList sdl_priority_templist;
 		sdl_priority_temp     = query.value( rec.indexOf("sdl_priority") ).toString();
 		sdl_priority_templist = sdl_priority_temp.split(",");
-		if( sdl_priority_templist.value(0) == "lower"  ) ui.rbtPrioridadBaja->setChecked(true);		// sdl_priority
-		if( sdl_priority_templist.value(0) == "normal" ) ui.rbtPrioridadNormal->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(0) == "higher" ) ui.rbtPrioridadAlta->setChecked(true);		// sdl_priority
-		if( sdl_priority_templist.value(0) == "highest") ui.rbtPrioridadMuyAlt->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(1) == "lower"  ) ui.rbtNoPrioridadBaja->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(1) == "normal" ) ui.rbtNoPrioridadNormal->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(1) == "higher" ) ui.rbtNoPrioridadAlta->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(1) == "highest") ui.rbtNoPrioridadMuyAlt->setChecked(true);	// sdl_priority
+		if( sdl_priority_templist.value(0) == "lower"  ) ui.rbtPrioridadBaja->setChecked(true);
+		if( sdl_priority_templist.value(0) == "normal" ) ui.rbtPrioridadNormal->setChecked(true);
+		if( sdl_priority_templist.value(0) == "higher" ) ui.rbtPrioridadAlta->setChecked(true);
+		if( sdl_priority_templist.value(0) == "highest") ui.rbtPrioridadMuyAlt->setChecked(true);
+		if( sdl_priority_templist.value(1) == "lower"  ) ui.rbtNoPrioridadBaja->setChecked(true);
+		if( sdl_priority_templist.value(1) == "normal" ) ui.rbtNoPrioridadNormal->setChecked(true);
+		if( sdl_priority_templist.value(1) == "higher" ) ui.rbtNoPrioridadAlta->setChecked(true);
+		if( sdl_priority_templist.value(1) == "highest") ui.rbtNoPrioridadMuyAlt->setChecked(true);
 
 		ui.txtDbx_sdl_mapperfile->setText( query.value( rec.indexOf("sdl_mapperfile") ).toString() );										// sdl_mapperfile
 		ui.chkDbx_sdl_usescancodes->setChecked( query.value( rec.indexOf("sdl_usescancodes") ).toBool() );										// sdl_usescancodes
@@ -1411,7 +1384,6 @@ void frmAddEditJuego::on_setProfileGame(const QString ProfileGame)
 
 		sdl_priority_templist.clear();
 		sdl_priority_templist = TempProfileDosBox["sdl_priority"].split(",");
-
 		if( sdl_priority_templist.value(0) == "lower"  ) ui.rbtPrioridadBaja->setChecked(true);		// sdl_priority
 		if( sdl_priority_templist.value(0) == "normal" ) ui.rbtPrioridadNormal->setChecked(true);	// sdl_priority
 		if( sdl_priority_templist.value(0) == "higher" ) ui.rbtPrioridadAlta->setChecked(true);		// sdl_priority
@@ -1643,17 +1615,8 @@ void frmAddEditJuego::CargarDatosDBxMontaje( QString stIDdbx )
 	datos_montaje["path_exe"]        = ui.txtDbx_path_exe->text();
 	datos_montaje["parametros_exe"]  = ui.txtDbx_parametros_exe->text();
 	datos_montaje["opt_loadfix_mem"] = ui.txtDbx_loadfix_mem->text();
-
-	if(ui.chkDbx_loadfix->isChecked())
-		datos_montaje["opt_loadfix"] = "true";
-	else
-		datos_montaje["opt_loadfix"] = "false";
-
-	if(ui.chkDbx_cerrar_dbox->isChecked())
-		datos_montaje["opt_cerrar_dbox"] = "true";
-	else
-		datos_montaje["opt_cerrar_dbox"] = "false";
-
+	datos_montaje["opt_loadfix"]     = fGrl.BoolToStr( ui.chkDbx_loadfix->isChecked() );
+	datos_montaje["opt_cerrar_dbox"] = fGrl.BoolToStr( ui.chkDbx_cerrar_dbox->isChecked() );
 	ui.previer_mount->clear();
 	ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
 }
@@ -1673,14 +1636,11 @@ void frmAddEditJuego::setDatosDosBox()
 
 		DatosDosBox.clear();
 	// sdl_fullscreen
-		if(ui.chkDbx_sdl_fullscreen->isChecked() )
-			DatosDosBox["sdl_fullscreen"] = "true"; else DatosDosBox["sdl_fullscreen"] = "false";
+		DatosDosBox["sdl_fullscreen"] = fGrl.BoolToStr( ui.chkDbx_sdl_fullscreen->isChecked() );
 	// sdl_fulldouble
-		if(ui.chkDbx_sdl_fulldouble->isChecked() )
-			DatosDosBox["sdl_fulldouble"] = "true"; else DatosDosBox["sdl_fulldouble"] = "false";
+		DatosDosBox["sdl_fulldouble"] = fGrl.BoolToStr( ui.chkDbx_sdl_fulldouble->isChecked() );
 	// sdl_fullfixed
-		if(ui.chkDbx_sdl_fullfixed->isChecked() )
-			DatosDosBox["sdl_fullfixed"] = "true"; else DatosDosBox["sdl_fullfixed"] = "false";
+		DatosDosBox["sdl_fullfixed"] = fGrl.BoolToStr( ui.chkDbx_sdl_fullfixed->isChecked() );
 	// sdl_fullresolution
 		if(ui.cbxDbx_sdl_fullresolution->currentText()!="")
 			DatosDosBox["sdl_fullresolution"] = ui.cbxDbx_sdl_fullresolution->currentText(); else DatosDosBox["sdl_fullresolution"] = "original";
@@ -1694,14 +1654,12 @@ void frmAddEditJuego::setDatosDosBox()
 		if(ui.cbxDbx_sdl_hwscale->currentText()!="")
 			DatosDosBox["sdl_hwscale"] = ui.cbxDbx_sdl_hwscale->currentText(); else DatosDosBox["sdl_hwscale"] = "1.00";
 	// sdl_autolock
-		if(ui.chkDbx_sdl_autolock->isChecked() )
-			DatosDosBox["sdl_autolock"] = "true"; else DatosDosBox["sdl_autolock"] = "false";
+		DatosDosBox["sdl_autolock"] = fGrl.BoolToStr( ui.chkDbx_sdl_autolock->isChecked() );
 	// sdl_sensitivity
 		if(ui.cbxDbx_sdl_sensitivity->currentText()!="")
 			DatosDosBox["sdl_sensitivity"] = ui.cbxDbx_sdl_sensitivity->currentText(); else DatosDosBox["sdl_sensitivity"] = "100";
 	// sdl_waitonerror
-		if(ui.chkDbx_sdl_waitonerror->isChecked() )
-			DatosDosBox["sdl_waitonerror"] = "true"; else DatosDosBox["sdl_waitonerror"] = "false";
+		DatosDosBox["sdl_waitonerror"] = fGrl.BoolToStr( ui.chkDbx_sdl_waitonerror->isChecked() );
 	// sdl_priority
 		if(prioritySelect!="" && priorityNoSelect!="" )
 			DatosDosBox["sdl_priority"] = prioritySelect+","+priorityNoSelect ; else DatosDosBox["sdl_priority"] = "higher,normal";
@@ -1709,8 +1667,7 @@ void frmAddEditJuego::setDatosDosBox()
 		if(ui.txtDbx_sdl_mapperfile->text()!="")
 			DatosDosBox["sdl_mapperfile"] = ui.txtDbx_sdl_mapperfile->text(); else DatosDosBox["sdl_mapperfile"] = "mapper.txt";
 	// sdl_usescancodes
-		if(ui.chkDbx_sdl_usescancodes->isChecked()	)
-			DatosDosBox["sdl_usescancodes"] = "true"; else DatosDosBox["sdl_usescancodes"] = "true";
+		DatosDosBox["sdl_usescancodes"] = fGrl.BoolToStr( ui.chkDbx_sdl_usescancodes->isChecked() );
 	// dosbox_language
 		if(ui.txtDbx_dosbox_language->text()!="")
 			DatosDosBox["dosbox_language"] = ui.txtDbx_dosbox_language->text(); else DatosDosBox["dosbox_language"] = "";
@@ -1727,8 +1684,7 @@ void frmAddEditJuego::setDatosDosBox()
 		if(ui.cbxDbx_render_frameskip->currentText()!="")
 			DatosDosBox["render_frameskip"] = ui.cbxDbx_render_frameskip->currentText(); else DatosDosBox["render_frameskip"] = "0";
 	// render_aspect
-		if(ui.chkDbx_render_aspect->isChecked() )
-			DatosDosBox["render_aspect"] = "true"; else DatosDosBox["render_aspect"] = "false";
+		DatosDosBox["render_aspect"] = fGrl.BoolToStr( ui.chkDbx_render_aspect->isChecked() );
 	// render_scaler
 		if(ui.cbxDbx_render_scaler->currentText()!="")
 			DatosDosBox["render_scaler"] = ui.cbxDbx_render_scaler->currentText(); else DatosDosBox["render_scaler"] = "normal2x";
@@ -1760,8 +1716,7 @@ void frmAddEditJuego::setDatosDosBox()
 		if(ui.cbxDbx_midi_mpu401->currentText()!="")
 			DatosDosBox["midi_mpu401"] = ui.cbxDbx_midi_mpu401->currentText(); else DatosDosBox["midi_mpu401"] = "intelligent";
 	// midi_intelligent
-		if(ui.chkDbx_midi_intelligent->isChecked() )
-			DatosDosBox["midi_intelligent"] = "true"; else DatosDosBox["midi_intelligent"] = "false";
+		DatosDosBox["midi_intelligent"] = fGrl.BoolToStr( ui.chkDbx_midi_intelligent->isChecked() );
 	// midi_device
 		if(ui.cbxDbx_midi_device->currentText()!="")
 			DatosDosBox["midi_device"] = ui.cbxDbx_midi_device->currentText(); else DatosDosBox["midi_device"] = "default";
@@ -1788,18 +1743,16 @@ void frmAddEditJuego::setDatosDosBox()
 		if(ui.cbxDbx_sblaster_hdma->currentText()!="")
 			DatosDosBox["sblaster_hdma"] = ui.cbxDbx_sblaster_hdma->currentText(); else DatosDosBox["sblaster_hdma"] = "5";
 	// sblaster_mixer
-		if(ui.chkDbx_sblaster_mixer->isChecked() )
-			DatosDosBox["sblaster_mixer"] = "true"; else DatosDosBox["sblaster_mixer"] = "false";
+		DatosDosBox["sblaster_mixer"] = fGrl.BoolToStr( ui.chkDbx_sblaster_mixer->isChecked() );
 	// sblaster_oplmode
 		if(ui.cbxDbx_sblaster_oplmode->currentText()!="")
 			DatosDosBox["sblaster_oplmode"] = ui.cbxDbx_sblaster_oplmode->currentText(); else DatosDosBox["sblaster_oplmode"] = "auto";
 	// sblaster_oplrate
 		if(ui.cbxDbx_sblaster_oplrate->currentText()!="")
 			DatosDosBox["sblaster_oplrate"] = ui.cbxDbx_sblaster_oplrate->currentText(); else DatosDosBox["sblaster_oplrate"] = "22050";
-	
+
 	// gus_gus
-		if(ui.chkDbx_gus_gus->isChecked() )
-			DatosDosBox["gus_gus"] = "true"; else DatosDosBox["gus_gus"] = "false";
+		DatosDosBox["gus_gus"] = fGrl.BoolToStr( ui.chkDbx_gus_gus->isChecked() );
 	// gus_gusrate
 		if(ui.cbxDbx_gus_gusrate->currentText()!="")
 			DatosDosBox["gus_gusrate"] = ui.cbxDbx_gus_gusrate->currentText(); else DatosDosBox["gus_gusrate"] = "22050";
@@ -1823,8 +1776,7 @@ void frmAddEditJuego::setDatosDosBox()
 			DatosDosBox["gus_ultradir"] = ui.txtDbx_gus_ultradir->text(); else DatosDosBox["gus_ultradir"] = "C:/ULTRASND";
 		
 	// speaker_pcspeaker
-		if(ui.chkDbx_speaker_pcspeaker->isChecked() )
-			DatosDosBox["speaker_pcspeaker"] = "true"; else DatosDosBox["speaker_pcspeaker"] = "false";
+		DatosDosBox["speaker_pcspeaker"] = fGrl.BoolToStr( ui.chkDbx_speaker_pcspeaker->isChecked() );
 	// speaker_pcrate
 		if(ui.cbxDbx_speaker_pcrate->currentText()!="")
 			DatosDosBox["speaker_pcrate"] = ui.cbxDbx_speaker_pcrate->currentText(); else DatosDosBox["speaker_pcrate"] = "22050";
@@ -1835,28 +1787,21 @@ void frmAddEditJuego::setDatosDosBox()
 		if(ui.cbxDbx_speaker_tandyrate->currentText()!="")
 			DatosDosBox["speaker_tandyrate"] = ui.cbxDbx_speaker_tandyrate->currentText(); else DatosDosBox["speaker_tandyrate"] = "22050";
 	// speaker_disney
-		if(ui.chkDbx_speaker_disney->isChecked() )
-			DatosDosBox["speaker_disney"] = "true"; else DatosDosBox["speaker_disney"] = "false";
-
+		DatosDosBox["speaker_disney"] = fGrl.BoolToStr( ui.chkDbx_speaker_disney->isChecked() );
 	// joystick_type
 		if(ui.cbxDbx_joystick_type->currentText()!="")
 			DatosDosBox["joystick_type"] = ui.cbxDbx_joystick_type->currentText(); else DatosDosBox["joystick_type"] = "auto";
 	// joystick_timed
-		if(ui.chkDbx_joystick_timed->isChecked() )
-			DatosDosBox["joystick_timed"] = "true"; else DatosDosBox["joystick_timed"] = "false";
+		DatosDosBox["joystick_timed"] = fGrl.BoolToStr( ui.chkDbx_joystick_timed->isChecked() );
 	// joystick_autofire
-		if(ui.chkDbx_joystick_autofire->isChecked() )
-			DatosDosBox["joystick_autofire"] = "true"; else DatosDosBox["joystick_autofire"] = "false";
+		DatosDosBox["joystick_autofire"] = fGrl.BoolToStr( ui.chkDbx_joystick_autofire->isChecked() );
 	// joystick_swap34
-		if(ui.chkDbx_joystick_swap34->isChecked() )
-			DatosDosBox["joystick_swap34"] = "true"; else DatosDosBox["joystick_swap34"] = "false";
+		DatosDosBox["joystick_swap34"] = fGrl.BoolToStr( ui.chkDbx_joystick_swap34->isChecked() );
 	// joystick_buttonwrap
-		if(ui.chkDbx_joystick_buttonwrap->isChecked() )
-			DatosDosBox["joystick_buttonwrap"] = "true"; else DatosDosBox["joystick_buttonwrap"] = "false";
+		DatosDosBox["joystick_buttonwrap"] = fGrl.BoolToStr( ui.chkDbx_joystick_buttonwrap->isChecked() );
 
 	// modem_modem
-		if(ui.chkDbx_modem_modem->isChecked() )
-			DatosDosBox["modem_modem"] = "true"; else DatosDosBox["modem_modem"] = "false";
+		DatosDosBox["modem_modem"] = fGrl.BoolToStr( ui.chkDbx_modem_modem->isChecked() );
 	// modem_comport
 		if(ui.cbxDbx_modem_comport->currentText()!="")
 			DatosDosBox["modem_comport"] = fGrl.IntToStr(ui.cbxDbx_modem_comport->currentIndex()+1); else DatosDosBox["modem_comport"] = "2";
@@ -1865,8 +1810,7 @@ void frmAddEditJuego::setDatosDosBox()
 			DatosDosBox["modem_listenport"] = ui.txtDbx_modem_listenport->text() ; else DatosDosBox["modem_listenport"] = "";
 
 	// dserial_directserial
-		if(ui.chkDbx_dserial_directserial->isChecked() )
-			DatosDosBox["dserial_directserial"] = "true"; else DatosDosBox["dserial_directserial"] = "false";
+		DatosDosBox["dserial_directserial"] = fGrl.BoolToStr( ui.chkDbx_dserial_directserial->isChecked() );
 	// dserial_comport
 		if(ui.cbxDbx_dserial_comport->currentText()!="")
 			DatosDosBox["dserial_comport"] = ui.cbxDbx_dserial_comport->currentText(); else DatosDosBox["dserial_comport"] = "1";
@@ -1900,11 +1844,9 @@ void frmAddEditJuego::setDatosDosBox()
 			DatosDosBox["serial_4"] = ui.txtDbx_serial_4->text(); else DatosDosBox["serial_4"] = "";
 
 	// dos_xms
-		if(ui.chkDbx_dos_xms->isChecked() )
-			DatosDosBox["dos_xms"] = "true"; else DatosDosBox["dos_xms"] = "false";
+		DatosDosBox["dos_xms"] = fGrl.BoolToStr( ui.chkDbx_dos_xms->isChecked() );
 	// dos_ems
-		if(ui.chkDbx_dos_ems->isChecked() )
-			DatosDosBox["dos_ems"] = "true"; else DatosDosBox["dos_ems"] = "false";
+		DatosDosBox["dos_ems"] = fGrl.BoolToStr( ui.chkDbx_dos_ems->isChecked() );
 	// dos_umb
 		if(ui.cbxDbx_dos_umb->currentText()!="")
 			DatosDosBox["dos_umb"] = ui.cbxDbx_dos_umb->currentText(); else DatosDosBox["dos_umb"] = "true";
@@ -1913,31 +1855,24 @@ void frmAddEditJuego::setDatosDosBox()
 			DatosDosBox["dos_keyboardlayout"] = ui.cbxDbx_dos_keyboardlayout->currentText(); else DatosDosBox["dos_keyboardlayout"] = "none";
 
 	// ipx_ipx
-		if(ui.chkDbx_ipx_ipx->isChecked() )
-			DatosDosBox["ipx_ipx"] = "true"; else DatosDosBox["ipx_ipx"] = "false";
-
+		DatosDosBox["ipx_ipx"] = fGrl.BoolToStr( ui.chkDbx_ipx_ipx->isChecked() );
 	// autoexec
 		if(ui.txtDbx_Autoexec->toPlainText()!="")
 			DatosDosBox["autoexec"] = ui.txtDbx_Autoexec->toPlainText(); else DatosDosBox["autoexec"] = "";
 
 	// opt_autoexec
-		if(ui.chkDbx_autoexec->isChecked() )
-			DatosDosBox["opt_autoexec"] = "true"; else DatosDosBox["opt_autoexec"] = "false";
+		DatosDosBox["opt_autoexec"] = fGrl.BoolToStr( ui.chkDbx_autoexec->isChecked() );
 	// opt_loadfix
-		if(ui.chkDbx_loadfix->isChecked() )
-			DatosDosBox["opt_loadfix"] = "true"; else DatosDosBox["opt_loadfix"] = "false";
+		DatosDosBox["opt_loadfix"] = fGrl.BoolToStr( ui.chkDbx_loadfix->isChecked() );
 	// opt_loadfix_mem
 		if(ui.txtDbx_loadfix_mem->text()!="")
 			DatosDosBox["opt_loadfix_mem"] = ui.txtDbx_loadfix_mem->text(); else  DatosDosBox["opt_loadfix_mem"] = "";
 	// opt_consola_dbox
-		if(ui.chkDbx_consola_dbox->isChecked() )
-			DatosDosBox["opt_consola_dbox"] = "true"; else DatosDosBox["opt_consola_dbox"] = "false";
+		DatosDosBox["opt_consola_dbox"] = fGrl.BoolToStr( ui.chkDbx_consola_dbox->isChecked() );
 	// opt_cerrar_dbox
-		if(ui.chkDbx_cerrar_dbox->isChecked() )
-			DatosDosBox["opt_cerrar_dbox"] = "true"; else DatosDosBox["opt_cerrar_dbox"] = "false";
+		DatosDosBox["opt_cerrar_dbox"] = fGrl.BoolToStr( ui.chkDbx_cerrar_dbox->isChecked() );
 	// opt_cycle_sincronizar
-		if(ui.chkDbx_cycle_sincronizar->isChecked() )
-			DatosDosBox["opt_cycle_sincronizar"] = "true"; else DatosDosBox["opt_cycle_sincronizar"] = "false";
+		DatosDosBox["opt_cycle_sincronizar"] = fGrl.BoolToStr( ui.chkDbx_cycle_sincronizar->isChecked() );
 
 	// path_conf
 		if(ui.txtDbx_path_conf->text()!="")
@@ -2135,17 +2070,11 @@ void frmAddEditJuego::on_btnMount_Add()
 
 		QHash<QString, QString> datos_montaje;
 		datos_montaje.clear();
-		datos_montaje["path_exe"] = ui.txtDbx_path_exe->text();
-		datos_montaje["parametros_exe"] = ui.txtDbx_parametros_exe->text();
+		datos_montaje["path_exe"]        = ui.txtDbx_path_exe->text();
+		datos_montaje["parametros_exe"]  = ui.txtDbx_parametros_exe->text();
 		datos_montaje["opt_loadfix_mem"] = ui.txtDbx_loadfix_mem->text();
-
-		if(ui.chkDbx_loadfix->isChecked())
-			datos_montaje["opt_loadfix"] = "true";
-		else datos_montaje["opt_loadfix"] = "false";
-
-		if(ui.chkDbx_cerrar_dbox->isChecked())
-			datos_montaje["opt_cerrar_dbox"] = "true";
-		else datos_montaje["opt_cerrar_dbox"] = "false";
+		datos_montaje["opt_loadfix"]     = fGrl.BoolToStr( ui.chkDbx_loadfix->isChecked() );
+		datos_montaje["opt_cerrar_dbox"] = fGrl.BoolToStr( ui.chkDbx_cerrar_dbox->isChecked() );
 
 		ui.previer_mount->clear();
 		ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
@@ -2200,14 +2129,8 @@ void frmAddEditJuego::on_btnMount_Edit()
 			datos_montaje["path_exe"]        = ui.txtDbx_path_exe->text();
 			datos_montaje["parametros_exe"]  = ui.txtDbx_parametros_exe->text();
 			datos_montaje["opt_loadfix_mem"] = ui.txtDbx_loadfix_mem->text();
-
-			if(ui.chkDbx_loadfix->isChecked())
-				datos_montaje["opt_loadfix"] = "true";
-			else datos_montaje["opt_loadfix"] = "false";
-
-			if(ui.chkDbx_cerrar_dbox->isChecked())
-				datos_montaje["opt_cerrar_dbox"] = "true";
-			else datos_montaje["opt_cerrar_dbox"] = "false";
+			datos_montaje["opt_loadfix"]     = fGrl.BoolToStr( ui.chkDbx_loadfix->isChecked() );
+			datos_montaje["opt_cerrar_dbox"] = fGrl.BoolToStr( ui.chkDbx_cerrar_dbox->isChecked() );
 
 			ui.previer_mount->clear();
 			ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
@@ -2229,13 +2152,11 @@ void frmAddEditJuego::on_btnMount_Delete()
 			fGrl.DeleteItemTree( ui.twMontajes->currentItem() ) ;
 			QHash<QString, QString> datos_montaje;
 			datos_montaje.clear();
-			datos_montaje["path_exe"] = ui.txtDbx_path_exe->text();
-			datos_montaje["parametros_exe"] = ui.txtDbx_parametros_exe->text();
+			datos_montaje["path_exe"]        = ui.txtDbx_path_exe->text();
+			datos_montaje["parametros_exe"]  = ui.txtDbx_parametros_exe->text();
 			datos_montaje["opt_loadfix_mem"] = ui.txtDbx_loadfix_mem->text();
-			if(ui.chkDbx_loadfix->isChecked())
-				datos_montaje["opt_loadfix"] = "true"; else datos_montaje["opt_loadfix"] = "false";
-			if(ui.chkDbx_cerrar_dbox->isChecked())
-				datos_montaje["opt_cerrar_dbox"] = "true"; else datos_montaje["opt_cerrar_dbox"] = "false";
+			datos_montaje["opt_loadfix"]     = fGrl.BoolToStr( ui.chkDbx_loadfix->isChecked() );
+			datos_montaje["opt_cerrar_dbox"] = fGrl.BoolToStr( ui.chkDbx_cerrar_dbox->isChecked() );
 
 			ui.previer_mount->clear();
 			ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
@@ -2262,12 +2183,36 @@ void frmAddEditJuego::on_btnMount_Clear()
 
 void frmAddEditJuego::on_btnMount_Subir()
 {
-	//
+	int index_1 = ui.twMontajes->indexOfTopLevelItem( ui.twMontajes->currentItem() );
+	int index_2;
+	if( index_1 > 0 && index_1!=-1 )
+	{
+		index_2 = index_1 - 1;
+
+		QTreeWidgetItem *item = ui.twMontajes->topLevelItem( index_1 );
+
+		item = ui.twMontajes->takeTopLevelItem( index_1 );
+		ui.twMontajes->insertTopLevelItem(index_2, item);
+
+		ui.twMontajes->setCurrentItem( item );
+	}
 }
 
 void frmAddEditJuego::on_btnMount_Bajar()
 {
-	//
+	int index_1 = ui.twMontajes->indexOfTopLevelItem( ui.twMontajes->currentItem() );
+	int index_2;
+	if( index_1 < (ui.twMontajes->topLevelItemCount() - 1) && index_1!=-1 )
+	{
+		index_2 = index_1 + 1;
+
+		QTreeWidgetItem *item = ui.twMontajes->topLevelItem( index_1 );
+
+		item = ui.twMontajes->takeTopLevelItem( index_1 );
+		ui.twMontajes->insertTopLevelItem(index_2, item);
+
+		ui.twMontajes->setCurrentItem( item );
+	}
 }
 
 void frmAddEditJuego::on_btnMount_AutoCrear()
@@ -2308,10 +2253,8 @@ void frmAddEditJuego::on_btnMount_AutoCrear()
 	datos_montaje["path_exe"]        = ui.txtDbx_path_exe->text();
 	datos_montaje["parametros_exe"]  = ui.txtDbx_parametros_exe->text();
 	datos_montaje["opt_loadfix_mem"] = ui.txtDbx_loadfix_mem->text();
-	if(ui.chkDbx_loadfix->isChecked())
-		datos_montaje["opt_loadfix"] = "true"; else datos_montaje["opt_loadfix"] = "false";
-	if(ui.chkDbx_cerrar_dbox->isChecked())
-		datos_montaje["opt_cerrar_dbox"] = "true"; else datos_montaje["opt_cerrar_dbox"] = "false";
+	datos_montaje["opt_loadfix"]     = fGrl.BoolToStr( ui.chkDbx_loadfix->isChecked() );
+	datos_montaje["opt_cerrar_dbox"] = fGrl.BoolToStr( ui.chkDbx_cerrar_dbox->isChecked() );
 
 	ui.previer_mount->clear();
 	ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
@@ -2330,13 +2273,11 @@ void frmAddEditJuego::on_btnMount_Primario()
 
 		QHash<QString, QString> datos_montaje;
 		datos_montaje.clear();
-		datos_montaje["path_exe"] = ui.txtDbx_path_exe->text();
-		datos_montaje["parametros_exe"] = ui.txtDbx_parametros_exe->text();
+		datos_montaje["path_exe"]        = ui.txtDbx_path_exe->text();
+		datos_montaje["parametros_exe"]  = ui.txtDbx_parametros_exe->text();
 		datos_montaje["opt_loadfix_mem"] = ui.txtDbx_loadfix_mem->text();
-		if(ui.chkDbx_loadfix->isChecked())
-			datos_montaje["opt_loadfix"] = "true"; else datos_montaje["opt_loadfix"] = "false";
-		if(ui.chkDbx_cerrar_dbox->isChecked())
-			datos_montaje["opt_cerrar_dbox"] = "true"; else datos_montaje["opt_cerrar_dbox"] = "false";
+		datos_montaje["opt_loadfix"]     = fGrl.BoolToStr( ui.chkDbx_loadfix->isChecked() );
+		datos_montaje["opt_cerrar_dbox"] = fGrl.BoolToStr( ui.chkDbx_cerrar_dbox->isChecked() );
 
 		ui.previer_mount->clear();
 		ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
@@ -2354,13 +2295,13 @@ void frmAddEditJuego::CargarDatosVDMSound( QString stIDvdms )
 	{
 		rec = query.record();
 
-		ui.txtVdms_path_conf->setText( query.value(rec.indexOf("path_conf")).toString() );	// 
-		ui.txtVdms_path_exe->setText( query.value(rec.indexOf("path_exe")).toString() );	// 
-		str_program       = query.value(rec.indexOf("program")).toString();					// 
-		str_vdms_debug    = query.value(rec.indexOf("vdms_debug")).toString();				// 
-		str_winnt_dos     = query.value(rec.indexOf("winnt_dos")).toString();				// 
-		str_winnt_dosbox  = query.value(rec.indexOf("winnt_dosbox")).toString();			// 
-		str_winnt_storage = query.value(rec.indexOf("winnt_storage")).toString();			// 
+		ui.txtVdms_path_conf->setText( query.value(rec.indexOf("path_conf")).toString() );
+		ui.txtVdms_path_exe->setText( query.value(rec.indexOf("path_exe")).toString() );
+		str_program       = query.value(rec.indexOf("program")).toString();
+		str_vdms_debug    = query.value(rec.indexOf("vdms_debug")).toString();
+		str_winnt_dos     = query.value(rec.indexOf("winnt_dos")).toString();
+		str_winnt_dosbox  = query.value(rec.indexOf("winnt_dosbox")).toString();
+		str_winnt_storage = query.value(rec.indexOf("winnt_storage")).toString();
 
 		QStringList list_program       = str_program.split("|");
 		QStringList list_winnt_dos     = str_winnt_dos.split("|");
@@ -2369,33 +2310,20 @@ void frmAddEditJuego::CargarDatosVDMSound( QString stIDvdms )
 		QStringList list_winnt_storage = str_winnt_storage.split("|");
 
 		ui.txtVdms_params->setText( list_program[0] ); 
-		ui.txtVdms_icon->setText( list_program[1] ); 
+		ui.txtVdms_icon->setText( list_program[1] );
 
-		if(list_winnt_dos[0]=="yes")
-			ui.chkVdms_useAutoexec->setChecked(true); else ui.chkVdms_useAutoexec->setChecked(false);
+		ui.chkVdms_useAutoexec->setChecked( fGrl.StrToBool( list_winnt_dos[0] ) );
+		ui.txtVdms_autoexec->setPlainText( list_winnt_dos[1].replace("%000d%000a", "\n") );
 
-		strTemp.clear();
-		strTemp = list_winnt_dos[1];
-		ui.txtVdms_autoexec->setPlainText( strTemp.replace("%000d%000a", "\n") );
+		ui.chkVdms_useCustomCfg->setChecked( fGrl.StrToBool( list_vdms_debug[0] ) );
+		ui.txtVdms_customCfg->setPlainText( list_vdms_debug[1].replace("%000d%000a", "\n") );
 
-		if(list_vdms_debug[0]=="yes")
-			ui.chkVdms_useCustomCfg->setChecked(true); else ui.chkVdms_useCustomCfg->setChecked(false);
+		ui.chkVdms_exitclose->setChecked( fGrl.StrToBool( list_winnt_dosbox[0] ) );
+		ui.chkVdms_exitWarn->setChecked( fGrl.StrToBool( list_winnt_dosbox[1] ) );
+		ui.chkVdms_fastPaste->setChecked( fGrl.StrToBool( list_winnt_dosbox[2] ) );
 
-		strTemp.clear();
-		strTemp = list_vdms_debug[1];
-		ui.txtVdms_customCfg->setPlainText( strTemp.replace("%000d%000a", "\n") );
-
-		if(list_winnt_dosbox[0]=="yes")
-			ui.chkVdms_exitclose->setChecked(true); else ui.chkVdms_exitclose->setChecked(false); 
-		if(list_winnt_dosbox[1]=="yes")
-			ui.chkVdms_exitWarn->setChecked(true); else ui.chkVdms_exitWarn->setChecked(false); 
-		if(list_winnt_dosbox[2]=="yes")
-			ui.chkVdms_fastPaste->setChecked(true); else ui.chkVdms_fastPaste->setChecked(false); 
-
-		if(list_winnt_storage[0]=="yes")
-			ui.chkVdms_useCDROM->setChecked(true); else ui.chkVdms_useCDROM->setChecked(false); 
-		if(list_winnt_storage[1]=="yes")
-			ui.chkVdms_useNetware->setChecked(true); else ui.chkVdms_useNetware->setChecked(false); 
+		ui.chkVdms_useCDROM->setChecked( fGrl.StrToBool( list_winnt_storage[0] ) );
+		ui.chkVdms_useNetware->setChecked( fGrl.StrToBool( list_winnt_storage[1] ) );
 	}
 }
 
@@ -2407,30 +2335,19 @@ void frmAddEditJuego::setDatosVDMSound()
 	DatosVDMSound["path_exe"]  = ui.txtVdms_path_exe->text();
 	DatosVDMSound["program_1"] = ui.txtVdms_params->text();
 	DatosVDMSound["program_2"] = ui.txtVdms_icon->text();
-	if(ui.chkVdms_useAutoexec->isChecked())
-		DatosVDMSound["winnt_dos_1"] = "yes"; else DatosVDMSound["winnt_dos_1"] = "no";
 
-	strTemp.clear();
-	strTemp = ui.txtVdms_autoexec->toPlainText();
-	DatosVDMSound["winnt_dos_2"] = strTemp.replace("\n", "%000d%000a");
+	DatosVDMSound["winnt_dos_1"] = fGrl.BoolToStr( ui.chkVdms_useAutoexec->isChecked() ,true);
+	DatosVDMSound["winnt_dos_2"] = ui.txtVdms_autoexec->toPlainText().replace("\n", "%000d%000a");
 
-	if(ui.chkVdms_useCustomCfg->isChecked())
-		DatosVDMSound["vdms_debug_1"] = "yes"; else DatosVDMSound["vdms_debug_1"] = "no";
+	DatosVDMSound["vdms_debug_1"] = fGrl.BoolToStr( ui.chkVdms_useCustomCfg->isChecked() ,true);
+	DatosVDMSound["vdms_debug_2"] = ui.txtVdms_customCfg->toPlainText().replace("\n", "%000d%000a");
 
-	strTemp.clear();
-	strTemp = ui.txtVdms_customCfg->toPlainText();
-	DatosVDMSound["vdms_debug_2"] = strTemp.replace("\n", "%000d%000a");
+	DatosVDMSound["winnt_dosbox_1"] = fGrl.BoolToStr( ui.chkVdms_exitclose->isChecked() ,true);
+	DatosVDMSound["winnt_dosbox_2"] = fGrl.BoolToStr( ui.chkVdms_exitWarn->isChecked() ,true);
+	DatosVDMSound["winnt_dosbox_3"] = fGrl.BoolToStr( ui.chkVdms_fastPaste->isChecked() ,true);
 
-	if(ui.chkVdms_exitclose->isChecked())
-		DatosVDMSound["winnt_dosbox_1"] = "yes"; else DatosVDMSound["winnt_dosbox_1"] = "no";
-	if(ui.chkVdms_exitWarn->isChecked())
-		DatosVDMSound["winnt_dosbox_2"] = "yes"; else DatosVDMSound["winnt_dosbox_2"] = "no";
-	if(ui.chkVdms_fastPaste->isChecked())
-		DatosVDMSound["winnt_dosbox_3"] = "yes"; else DatosVDMSound["winnt_dosbox_3"] = "no";
-	if(ui.chkVdms_useCDROM->isChecked())
-		DatosVDMSound["winnt_storage_1"] = "yes"; else DatosVDMSound["winnt_storage_1"] = "no";
-	if(ui.chkVdms_useNetware->isChecked()) 
-		DatosVDMSound["winnt_storage_2"] = "yes"; else DatosVDMSound["winnt_storage_2"] = "no";
+	DatosVDMSound["winnt_storage_1"] = fGrl.BoolToStr( ui.chkVdms_useCDROM->isChecked() ,true);
+	DatosVDMSound["winnt_storage_2"] = fGrl.BoolToStr( ui.chkVdms_useNetware->isChecked() ,true);
 }
 
 void frmAddEditJuego::on_btnVdms_FileConfg()

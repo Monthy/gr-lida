@@ -34,7 +34,7 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDirSvm , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm() ) );
 	connect( ui.cbxIdioma, SIGNAL( activated(const QString &) ), this, SLOT( on_setLanguage(const QString &) ) );
 
-	stHomeDir = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
+	stHomeDir = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
 
 	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
 	settings.beginGroup("OpcGeneral");

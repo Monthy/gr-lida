@@ -130,7 +130,7 @@ void dbSql::ItemEliminar( const QString IDgrl )
 void dbSql::eliminararchivo(QString archivo)
 {
 // Directorio de configuracion para el DOSBox
-	QString stArchivoConfg = QDir::homePath()+"/.gr-lida/" + archivo;
+	QString stArchivoConfg = fGrl.GRlidaHomePath() + archivo;
 	QFile f( stArchivoConfg );
 	if( f.exists() )
 		f.remove();

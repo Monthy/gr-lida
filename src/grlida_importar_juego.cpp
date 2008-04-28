@@ -40,7 +40,7 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	connect( ui.cbxDbXml      , SIGNAL(activated(const QString &)), this, SLOT( on_changeURL_XML(const QString &)));
 	connect( ui.btnDirFileXML , SIGNAL(clicked()), this, SLOT(on_btnDirFileXML()));
 
-	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
+	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 
 	QStringList cbx_Lista, cbx_ListaTemp;
 	QPixmap pixmap;

@@ -32,7 +32,7 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 
 	ui.wizardDbx->setCurrentIndex(0);
 
-	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
+	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 
 // Conecta los distintos botones con las funciones.
 	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );
@@ -768,12 +768,36 @@ void frmDbxAdd::on_btnMount_Clear()
 
 void frmDbxAdd::on_btnMount_Subir()
 {
-	//
+	int index_1 = ui.twMontajes->indexOfTopLevelItem( ui.twMontajes->currentItem() );
+	int index_2;
+	if( index_1 > 0 && index_1!=-1)
+	{
+		index_2 = index_1 - 1;
+
+		QTreeWidgetItem *item = ui.twMontajes->topLevelItem( index_1 );
+
+		item = ui.twMontajes->takeTopLevelItem( index_1 );
+		ui.twMontajes->insertTopLevelItem(index_2, item);
+
+		ui.twMontajes->setCurrentItem( item );
+	}
 }
 
 void frmDbxAdd::on_btnMount_Bajar()
 {
-	//
+	int index_1 = ui.twMontajes->indexOfTopLevelItem( ui.twMontajes->currentItem() );
+	int index_2;
+	if( index_1 < (ui.twMontajes->topLevelItemCount() - 1) && index_1!=-1 )
+	{
+		index_2 = index_1 + 1;
+
+		QTreeWidgetItem *item = ui.twMontajes->topLevelItem( index_1 );
+
+		item = ui.twMontajes->takeTopLevelItem( index_1 );
+		ui.twMontajes->insertTopLevelItem(index_2, item);
+
+		ui.twMontajes->setCurrentItem( item );
+	}
 }
 
 void frmDbxAdd::on_btnMount_AutoCrear()

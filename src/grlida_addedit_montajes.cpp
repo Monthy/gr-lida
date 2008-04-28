@@ -32,7 +32,7 @@ frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog
 	connect( ui.btnOk      , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 	connect( ui.btnDirFile , SIGNAL( clicked() ), this, SLOT( on_DirFile() ) );
 
-	stHomeDir = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
+	stHomeDir = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
 
 	ui.lb_Montaje_info->setText( "<b>-aspi</b> -- "+ tr("Fuerza el uso de la capa aspi. Sólo válido si montas un CD-ROM bajo los sistemas Windows con un ASPI-Layer.")+"<br>"+
 		"<b>-ioctl</b> -- "+ tr("Fuerza el uso de los comandos ioctl. Sólo válido si montar un CD-ROM bajo un sistema operativo de Windows que lo soporten (Win2000/XP/NT).")+"<br>"+

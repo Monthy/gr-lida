@@ -282,7 +282,7 @@ void GrLida::on_ImportarJuego()
 
 void GrLida::CargarConfigInicial()
 {
-	stHomeDir      = QDir::homePath()+"/.gr-lida/";		// directorio de trabajo del GR-lida
+	stHomeDir      = fGrl.GRlidaHomePath();				// directorio de trabajo del GR-lida
 	stIconDir      = stHomeDir + "iconos/";				// directorio de iconos para el GR-lida
 	stDatosDir     = stHomeDir + "datos/";				// directorio para los distintos datos del GR-lida
 	stConfgDbxDir  = stHomeDir + "confdbx/";			// directorio de configuracion para el DOSBox
@@ -302,6 +302,9 @@ void GrLida::CargarConfigInicial()
 		stdb_Orden_By       = settings.value("db_Orden_By"      , "titulo" ).toString();
 		stdb_Orden          = settings.value("db_Orden"         , "asc"    ).toString();
 	settings.endGroup();
+
+	if( !QFile::exists(stdb_host) )
+		stdb_host = stHomeDir + "db_grl.grl";
 
 	settings.beginGroup("OpcGeneral");
 		stBinExeDbx = QDir::toNativeSeparators( settings.value("DirDOSBox" , "").toString() );
@@ -651,10 +654,7 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 		else
 			conf_scummvm["language"] = "es";
 	// subtitles
-		if( query.value( rec.indexOf("subtitles") ).toBool()==true)
-			conf_scummvm["subtitles"] = "true";
-		else
-			conf_scummvm["subtitles"] = "false";
+		conf_scummvm["subtitles"] = fGrl.BoolToStr( query.value( rec.indexOf("subtitles") ).toBool() );
 	// platform
 		if( query.value( rec.indexOf("platform") ).toString()!="")
 			conf_scummvm["platform"] = query.value( rec.indexOf("platform") ).toString();
@@ -671,15 +671,9 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 		else
 			conf_scummvm["render_mode"] = "";
 	// fullscreen
-		if( query.value( rec.indexOf("fullscreen") ).toBool()==true)
-			conf_scummvm["fullscreen"] = "true";
-		else
-			conf_scummvm["fullscreen"] = "false";
+		conf_scummvm["fullscreen"] = fGrl.BoolToStr( query.value( rec.indexOf("fullscreen") ).toBool() );
 	// aspect_ratio
-		if( query.value( rec.indexOf("aspect_ratio") ).toBool()==true)
-			conf_scummvm["aspect_ratio"] = "true";
-		else
-			conf_scummvm["aspect_ratio"] = "false";
+		conf_scummvm["aspect_ratio"] = fGrl.BoolToStr( query.value( rec.indexOf("aspect_ratio") ).toBool() );
 	// path
 		conf_scummvm["path"] = query.value( rec.indexOf("path") ).toString();
 	// path_extra
@@ -695,20 +689,11 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 	// music_driver
 		conf_scummvm["music_driver"] = query.value( rec.indexOf("music_driver") ).toString();
 	// enable_gs
-		if( query.value( rec.indexOf("enable_gs") ).toBool()==true)
-			conf_scummvm["enable_gs"] = "true";
-		else
-			conf_scummvm["enable_gs"] = "false";
+		conf_scummvm["enable_gs"] = fGrl.BoolToStr( query.value( rec.indexOf("enable_gs") ).toBool() );
 	// multi_midi
-		if( query.value( rec.indexOf("multi_midi") ).toBool()==true)
-			conf_scummvm["multi_midi"] = "true";
-		else
-			conf_scummvm["multi_midi"] = "false";
+		conf_scummvm["multi_midi"] = fGrl.BoolToStr( query.value( rec.indexOf("multi_midi") ).toBool() );
 	// native_mt32
-		if( query.value( rec.indexOf("native_mt32") ).toBool()==true)
-			conf_scummvm["native_mt32"] = "true";
-		else
-			conf_scummvm["native_mt32"] = "false";
+		conf_scummvm["native_mt32"] = fGrl.BoolToStr( query.value( rec.indexOf("native_mt32") ).toBool() );
 
 		conf_scummvm["master_volume"] = fGrl.IntToStr( query.value( rec.indexOf("master_volume") ).toInt() );	// master_volume
 		conf_scummvm["music_volume"]  = fGrl.IntToStr( query.value( rec.indexOf("music_volume") ).toInt() );	// music_volume
@@ -726,10 +711,7 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 	// midi_gain
 		conf_scummvm["midi_gain"] = query.value( rec.indexOf("midi_gain") ).toString(); // midi_gain
 	// copy_protection
-		if( query.value( rec.indexOf("copy_protection") ).toBool()==true)
-			conf_scummvm["copy_protection"] = "true";
-		else
-			conf_scummvm["copy_protection"] = "false";	
+		conf_scummvm["copy_protection"] = fGrl.BoolToStr( query.value( rec.indexOf("copy_protection") ).toBool() );
 	// sound_font
 		if( query.value( rec.indexOf("sound_font") ).toString()!="")
 			conf_scummvm["sound_font"] = query.value( rec.indexOf("sound_font") ).toString();
@@ -746,7 +728,7 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 					conf_scummvm["game"];				// game
 		
 		stCapturasSvm =  conf_scummvm["path_capturas"]; // path_capturas
-		stCapturasDbx = "";
+		stCapturasDbx.clear();
 		if( (stCapturasSvm !="") && ui.btn_imgtumb_2->isChecked() )
 			CargarThumbsTreeWidget( stCapturasSvm );
 		else ui.twCapturas->clear();
@@ -783,15 +765,15 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 			if( conf_dosbox["opt_consola_dbox"]=="true")
 				consolaDbx = "|-noconsole";
 			else
-				consolaDbx = "";
+				consolaDbx.clear();
 		#else
-			consolaDbx = "";
+			consolaDbx.clear();
 		#endif
 
 		stConfgJuego = "-conf|" + stConfgDbxDir + conf_dosbox["path_conf"] + consolaDbx;
 
 		stCapturasDbx = conf_dosbox["dosbox_captures"];  //3 dosbox_capture
-		stCapturasSvm = "";
+		stCapturasSvm.clear();
 		
 		if( (stCapturasDbx !="") && ui.btn_imgtumb_1->isChecked() )
 			CargarThumbsTreeWidget( stCapturasDbx );
@@ -830,9 +812,9 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 		ui.mnu_ejecutar_juego->setEnabled(true);
 		ui.actionEjectarSetup->setEnabled(false);
 	} else {
-		stCapturasSvm = "";
-		stCapturasDbx = "";
-		stConfgJuego = "";
+		stCapturasSvm.clear();
+		stCapturasDbx.clear();
+		stConfgJuego.clear();
 		ui.twCapturas->clear();
 
 		ui.actionEjectar->setEnabled(false);
@@ -934,7 +916,7 @@ void GrLida::on_EliminarJuego()
 {
 	if( ui.twJuegos->topLevelItemCount()>0 )
 	{
-		if( stItemIndex == "" )
+		if( stItemIndex.isEmpty() )
 			QMessageBox::information( this, stTituloGrl(), tr("Porfavor selecciona un Juego de la lista para eliminarlo") );
 		else {
 			int EliminarSiNO;
@@ -1027,15 +1009,7 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 			ui.txtInfo_SistemaOp->setText( query.value( rec.indexOf("sistemaop") ).toString() );			// sistemaop
 
 			strTempHtml.clear();
-			strTempHtml = query.value( rec.indexOf("comentario") ).toString();
-
-			for (i_Hash = listSmailes.constBegin(); i_Hash != listSmailes.constEnd(); ++i_Hash)
-			{
-				if( i_Hash.value().contains(":/smiles", Qt::CaseInsensitive) )
-					strTempHtml.replace( i_Hash.key(), "<img src=\""+i_Hash.value()+"\" />");
-				else
-					strTempHtml.replace( i_Hash.key(), "<img src=\""+stHomeDir+i_Hash.value()+"\" />");
-			}
+			strTempHtml = fGrl.ReemplazaTextoSmiles( query.value( rec.indexOf("comentario") ).toString(), listSmailes);
 			ui.txtInfo_Comentario->setHtml( strTempHtml ); // comentario
 
 			QFile file_thumbs;  // thumbs
@@ -1063,12 +1037,14 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 				lbpanel_3.setPixmap( QPixmap(":/img16/datos_1.png") );
 			else if( query.value( rec.indexOf("tipo_emu") ).toString()== "dosbox")
 			{
-				ui.btn_imgtumb_1->click();
+				if( !ui.btn_imgtumb_1->isChecked() )
+					ui.btn_imgtumb_1->click();
 				lbpanel_3.setPixmap( QPixmap(":/img16/dosbox.png") );
 			}
 			else if( query.value( rec.indexOf("tipo_emu") ).toString()== "scummvm")
 			{
-				ui.btn_imgtumb_2->click();
+				if( !ui.btn_imgtumb_2->isChecked() )
+					ui.btn_imgtumb_2->click();
 				lbpanel_3.setPixmap( QPixmap(":/img16/scummvm.png") );
 			}
 			else if( query.value( rec.indexOf("tipo_emu") ).toString()== "vdmsound")
@@ -1162,7 +1138,7 @@ void GrLida::on_btn_fileurl_2()
 }
 void GrLida::on_btn_imgtumb_1()
 {
-	if( ui.btn_imgtumb_1->isChecked()==true)
+	if( ui.btn_imgtumb_1->isChecked() )
 	{
 		ui.btn_imgtumb_2->setChecked(false);
 		CargarThumbsTreeWidget( stCapturasDbx ); //carga imagenes dosbox
@@ -1174,7 +1150,7 @@ void GrLida::on_btn_imgtumb_1()
 
 void GrLida::on_btn_imgtumb_2()
 {
-	if( ui.btn_imgtumb_2->isChecked()== true )
+	if( ui.btn_imgtumb_2->isChecked() )
 	{
 		ui.btn_imgtumb_1->setChecked(false);
 		CargarThumbsTreeWidget( stCapturasSvm ); //carga imagenes scummvm
@@ -1297,7 +1273,7 @@ void GrLida::on_twJuegos_Dblclicked(QTreeWidgetItem *item)
 		stItemIndex  = item->text(0);		// index del juego en la Base de Datos
 		stTipoEmu    = item->text(2);		// indica el tipo de emulador
 		Confg_Svm_Dbx( stItemIndex );		// carga toda la configuracion
-		MostrarDatosDelJuego( stItemIndex );// Muestra los distintos datos del juego
+		//MostrarDatosDelJuego( stItemIndex );// Muestra los distintos datos del juego
 		on_EjecutarJuego();					// ejecuta el juego
 	}else
 		return;
@@ -1361,7 +1337,7 @@ void GrLida::on_Ordenar_Lista()
 	else
 		stdb_Orden = "ASC";
 
-	CargarBaseDatos("");
+	CargarBaseDatos();
 }
 
 void GrLida::CargarBaseDatos(QString str)

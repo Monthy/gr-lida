@@ -34,6 +34,8 @@
 #include <QSqlQuery>
 #include <QSqlResult>
 
+#include "funciones.h"
+
 class dbSql
 {
 public:
@@ -80,6 +82,7 @@ public:
 	void ItemEliminarURL( const QString IDURL );
 	
 private:
+	Funciones fGrl;
 	bool ok_OpenDB;
 	QSqlDatabase sqldb;
 	QString stQuery;

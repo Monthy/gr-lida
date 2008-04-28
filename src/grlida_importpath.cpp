@@ -29,7 +29,7 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
 {
 	ui.setupUi(this);
 	
-	stHomeDir = QDir::homePath()+"/.gr-lida/";	// directorio de trabajo del GR-lida
+	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	
 	connect( ui.btnOk, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 
