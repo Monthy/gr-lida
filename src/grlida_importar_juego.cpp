@@ -232,6 +232,7 @@ void frmImportarJuego::on_btnOk()
 	frmImportPath * ImportPathNew = new frmImportPath();
 
 	ImportPathNew->ui.gBox_path_emu->setEnabled( false );
+	ImportPathNew->ui.gBox_path_emu->setTitle("Path");
 
 	img_thumbs.clear();
 	img_cover_front.clear();
@@ -291,6 +292,7 @@ void frmImportarJuego::on_btnOk()
 	if(DatosJuego["tipo_emu"] =="dosbox")
 	{
 		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
+		ImportPathNew->ui.gBox_path_emu->setTitle("Path - DOSBox");
 		ImportPathNew->ui.wizardPath->setCurrentIndex(0);
 		ImportPathNew->ui.txtPath_Dbx_1->setText( QDir::toNativeSeparators( DatosDosBox["path_conf"] ) );			// path_conf
 		ImportPathNew->ui.txtPath_Dbx_2->setText( QDir::toNativeSeparators( DatosDosBox["path_exe"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_exe
@@ -305,6 +307,7 @@ void frmImportarJuego::on_btnOk()
 	if(DatosJuego["tipo_emu"]=="scummvm")
 	{
 		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
+		ImportPathNew->ui.gBox_path_emu->setTitle("Path - ScummVM");
 		ImportPathNew->ui.wizardPath->setCurrentIndex(1);
 		ImportPathNew->ui.txtPath_Svm_1->setText( QDir::toNativeSeparators( DatosScummvm["path"].replace("{DirBaseGames}", DirBaseGames+"/") ) );		// path
 		ImportPathNew->ui.txtPath_Svm_2->setText( QDir::toNativeSeparators( DatosScummvm["path_save"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_save
@@ -317,6 +320,7 @@ void frmImportarJuego::on_btnOk()
 	if(DatosJuego["tipo_emu"]=="vdmsound")
 	{
 		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
+		ImportPathNew->ui.gBox_path_emu->setTitle("Path - VDMSound");
 		ImportPathNew->ui.wizardPath->setCurrentIndex(2);
 		ImportPathNew->ui.txtPath_Vdms_1->setText( QDir::toNativeSeparators( DatosVDMSound["path_conf"] ) );	// path_conf
 		ImportPathNew->ui.txtPath_Vdms_2->setText( QDir::toNativeSeparators( DatosVDMSound["path_exe"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_exe

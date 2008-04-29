@@ -56,17 +56,6 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDirPath_Vdms_1, SIGNAL( clicked() ), this, SLOT( on_btnOpenVdmsFile_1()) );
 	connect( ui.btnDirPath_Vdms_2, SIGNAL( clicked() ), this, SLOT( on_btnOpenVdmsFile_2()) );
 
-	if( ui.gBox_path_emu->isEnabled() )
-	{
-		if( ui.wizardPath->currentIndex() == 0 )
-			ui.gBox_path_emu->setTitle("Path - DOSBox");
-		if( ui.wizardPath->currentIndex() == 1 )
-			ui.gBox_path_emu->setTitle("Path - ScummVM");
-		if( ui.wizardPath->currentIndex() == 2 )
-			ui.gBox_path_emu->setTitle("Path - VDMSound");
-	} else
-			ui.gBox_path_emu->setTitle("Path");
-
 // centra la ventana en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
