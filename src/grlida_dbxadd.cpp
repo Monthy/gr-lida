@@ -69,6 +69,7 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	fGrl.CargarDatosComboBox(":/datos/dbx_cpu_core.txt"   , ui.cbxDbx_cpu_core           , 1, false); // Ncleo de la CPU DOSBox
 
 	// Ponemos los Combobox por defecto.
+	ui.cbxDbx_Profiles->setCurrentIndex( 0 );
 	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 );	// Resolución pantalla
 	ui.cbxDbx_sdl_output->setCurrentIndex( 0 );			// Modo de Renderizado
 	ui.cbxDbx_dosbox_machine->setCurrentIndex( 0 );		// Tarjeta de Video
@@ -78,6 +79,8 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );	// Tipo Sound Blaste
 	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 );		// MPU-401
 	ui.cbxDbx_midi_device->setCurrentIndex( 0 );		// MIDI Device
+
+	on_setProfileGame( ui.cbxDbx_Profiles->currentText() );
 
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();

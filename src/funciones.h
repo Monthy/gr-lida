@@ -35,7 +35,7 @@ public:
 	~Funciones();
 
 // Versión del GR-lida
-	QString stVersionGrl(){ return "0.4.7"; }
+	QString stVersionGrl(){ return "0.4.8"; }
 // Versiones que soporta
 	QString stVersionDbx(){ return "0.72";  }
 	QString stVersionSvm(){ return "0.11.1";}
@@ -77,14 +77,15 @@ public:
 //
 	void CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm);
 //
-	void CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
+	void CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg, bool ExportToDFend = false);
 	QStringList CreaConfigMontajes(QTreeWidget *treeWidget, const QHash<QString, QString> datos);
 //
 	void CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg);
 // Carga la lista de los perfiles preconfigurados en un ComboBox
 	void Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *myCombobox);
-// Exportar la configuracion del DOSBox para el DFend
-	void Exportar_Profile_DFend(QString fileName);
+// Exportar la configuracion del DOSBox para el DFend y GR-lida
+	void Exportar_Profile_DFend(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
+	void Exportar_Profile_GRLida(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
 // Importar la configuracion del DOSBox para el DFend
 	QHash<QString, QString> Importar_Profile_DFend(QString fileName);
 };

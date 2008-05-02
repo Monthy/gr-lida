@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/" >
-        <file>license.gpl</file>
         <file>datos/companias.txt</file>
         <file>datos/dbx_cpu_core.txt</file>
         <file>datos/dbx_cycles.txt</file>
@@ -88,6 +87,7 @@
         <file>img16/ejecutar_app.png</file>
         <file>img16/ejecutar_app_setup.png</file>
         <file>img16/eliminar.png</file>
+        <file>img16/exportar.png</file>
         <file>img16/fav_0.png</file>
         <file>img16/fav_1.png</file>
         <file>img16/fav_2.png</file>
@@ -213,6 +213,7 @@
         <file>imgsvm/logo_sierra.png</file>
         <file>imgsvm/sin_num.png</file>
         <file>imgsvm/svmlist_space.png</file>
+        <file>license.gpl</file>
         <file>list_translators.txt</file>
         <file>smiles/biggrin.png</file>
         <file>smiles/cool.png</file>

@@ -116,6 +116,7 @@ private slots:
     void on_AcercaD();			// Acerca del GR-lida.
     void on_Ordenar_Lista();	// Ordena la Lista de Juegos
     void on_ImportarJuego();	// Obtiene lo datos de jugo de forma externa.
+    void on_ExportarJuego();
 	void on_EjecutarDosbox();
 	void on_EjecutarScummVM();
 	void on_btn_fileurl_1();

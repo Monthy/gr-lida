@@ -31,6 +31,7 @@
 #include "grlida_addedit_juego.h"
 #include "grlida_opciones.h"
 #include "grlida_importar_juego.h"
+#include "grlida_exportar_juego.h"
 #include "grlida_img_viewer.h"
 
 #ifdef Q_OS_WIN32
@@ -76,6 +77,7 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 	connect( ui.mnu_ejecutar_juego, SIGNAL( triggered() ), this, SLOT( on_EjecutarJuego() ));
 	connect( ui.mnu_ejecutar_setup, SIGNAL( triggered() ), this, SLOT( on_EjecutarSetup() ));
 	connect( ui.mnu_tool_importar, SIGNAL( triggered() ), this, SLOT( on_ImportarJuego() ));
+	connect( ui.mnu_tool_exportar, SIGNAL( triggered() ), this, SLOT( on_ExportarJuego() ));
 	connect( ui.mnu_tool_opciones, SIGNAL( triggered() ), this, SLOT( on_Opciones() ));
 	connect( ui.mnu_ver_acercad, SIGNAL( triggered() ), this, SLOT( on_AcercaD() ));
 
@@ -278,6 +280,16 @@ void GrLida::on_ImportarJuego()
 		}
 		NuevoItemTreeWidget( NewImportar->DatosJuego, NewImportar->DatosJuego["tipo_emu"], lastID);
 	}
+}
+
+void GrLida::on_ExportarJuego()
+{
+	frmExportarJuego * NewExportar = new frmExportarJuego( 0, Qt::Window );
+	if( NewExportar->exec() == QDialog::Accepted )
+	{
+
+	}
+	delete NewExportar;
 }
 
 void GrLida::CargarConfigInicial()

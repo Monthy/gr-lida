@@ -1518,6 +1518,7 @@
      <string>&amp;Herramientas</string>
     </property>
     <addaction name="mnu_tool_importar" />
+    <addaction name="mnu_tool_exportar" />
     <addaction name="separator" />
     <addaction name="mnu_tool_opciones" />
    </widget>
@@ -2236,6 +2237,17 @@
    </property>
    <property name="statusTip" >
     <string>Marca o quita un juego seleccionado como Favorito</string>
+   </property>
+  </action>
+  <action name="mnu_tool_exportar" >
+   <property name="icon" >
+    <iconset resource="../res/grlida.qrc" >:/img16/exportar.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Exportar Juego</string>
+   </property>
+   <property name="statusTip" >
+    <string>Exporta los datos de configuración del Juego</string>
    </property>
   </action>
  </widget>

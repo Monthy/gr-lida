@@ -46,6 +46,7 @@ HEADERS += src/grlida_img_viewer.h \
     src/grlida_config_inicial.h \
     src/grlida_dbxadd.h \
     src/grlida_importar_juego.h \
+    src/grlida_exportar_juego.h \
     src/grlida_importpath.h \
     src/grlida_opciones.h \
     src/grlida_svmadd.h \
@@ -64,6 +65,7 @@ SOURCES += src/grlida_img_viewer.cpp \
     src/grlida_dbxadd.cpp \
     src/grlida_importar_juego.cpp \
     src/grlida_importpath.cpp \
+    src/grlida_exportar_juego.cpp \
     src/grlida_opciones.cpp \
     src/grlida_svmadd.cpp \
     src/grlida_vdmsadd.cpp \
@@ -79,6 +81,7 @@ FORMS += ui/login_url.ui \
     ui/grlida.ui \
     ui/importar_juego.ui \
     ui/importpath.ui \
+    ui/exportar_juego.ui \
     ui/opciones.ui \
     ui/svmadd.ui \
     ui/vdmsound.ui \
