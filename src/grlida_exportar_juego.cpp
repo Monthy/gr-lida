@@ -32,7 +32,6 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnOk           , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 	connect( ui.btnCheckedAll   , SIGNAL( clicked() ), this, SLOT( on_btnCheckedAll() ) );
 	connect( ui.btnUnCheckedAll , SIGNAL( clicked() ), this, SLOT( on_btnUnCheckedAll() ) );
-	//connect( ui.cbxExpotarComo  , SIGNAL( activated(int &) ), this, SLOT( on_cbxExpotarComo(int &) ) );
 	connect( ui.btnDirExportPath, SIGNAL( clicked() ), this, SLOT( on_btnDirExportPath() ) );
 	
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
@@ -41,8 +40,8 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
 	CargarListaJuegos("dosbox");
 
 	ui.cbxExpotarComo->clear();
-	ui.cbxExpotarComo->addItem("D-Fend Reloaded (*.prof)");
-	ui.cbxExpotarComo->addItem("GR-lida (*.xml)");
+	ui.cbxExpotarComo->addItem("D-Fend Reloaded (*.prof)"); // Index 0
+	ui.cbxExpotarComo->addItem("GR-lida (*.xml)");          // Index 1
 	ui.cbxExpotarComo->setCurrentIndex( 1 );
 
 // centra la aplicacion en el escritorio
@@ -106,18 +105,29 @@ void frmExportarJuego::on_btnOk()
 
 void frmExportarJuego::on_btnCheckedAll()
 {
-	//
+	int pos = ui.twListaJuegos->indexOfTopLevelItem( ui.twListaJuegos->currentItem() );
+	if( ui.twListaJuegos->topLevelItemCount()>0 && pos!=-1 )
+	{
+		for(int num = 0; num < ui.twListaJuegos->topLevelItemCount(); num++ )
+		{
+			QTreeWidgetItem *item = ui.twListaJuegos->topLevelItem( num );
+			item->setCheckState(0, Qt::Checked);
+		}
+	}
 }
 
 void frmExportarJuego::on_btnUnCheckedAll()
 {
-	//
+	int pos = ui.twListaJuegos->indexOfTopLevelItem( ui.twListaJuegos->currentItem() );
+	if( ui.twListaJuegos->topLevelItemCount()>0 && pos!=-1 )
+	{
+		for(int num = 0; num < ui.twListaJuegos->topLevelItemCount(); num++ )
+		{
+			QTreeWidgetItem *item = ui.twListaJuegos->topLevelItem( num );
+			item->setCheckState(0, Qt::Unchecked);
+		}
+	}
 }
-
-//void frmExportarJuego::on_cbxExpotarComo(int exportar_como)
-//{
-	//
-//}
 
 void frmExportarJuego::on_btnDirExportPath()
 {

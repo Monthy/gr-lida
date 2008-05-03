@@ -2387,138 +2387,186 @@ Click &apos;OK&apos; to exit this wizard
     </message>
 </context>
 <context>
+    <name>ExportarJuegoClass</name>
+    <message>
+        <location filename="../ui/exportar_juego.ui" line="13"/>
+        <source>Exportar Juego</source>
+        <translation>Export Game</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportar_juego.ui" line="47"/>
+        <source>Titulos</source>
+        <translation>Titles</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportar_juego.ui" line="57"/>
+        <source>Seleccionar todos</source>
+        <translation>Select all</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportar_juego.ui" line="64"/>
+        <source>Seleccionar ninguno</source>
+        <translation>Select none</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportar_juego.ui" line="86"/>
+        <source>Opciones de Exportar</source>
+        <translation>Export Options</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportar_juego.ui" line="106"/>
+        <source>Expotar como:</source>
+        <translation>Expotar como:</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportar_juego.ui" line="133"/>
+        <source>Guardar en:</source>
+        <translation>Save to:</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportar_juego.ui" line="197"/>
+        <source>Exportar</source>
+        <translation>Export</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportar_juego.ui" line="222"/>
+        <source>Cerrar</source>
+        <translation>Close</translation>
+    </message>
+</context>
+<context>
     <name>GrLida</name>
     <message>
-        <location filename="../src/grlida.cpp" line="209"/>
+        <location filename="../src/grlida.cpp" line="211"/>
         <source>Mi&amp;nimizar</source>
         <translation>Mi&amp;nimize</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="212"/>
+        <location filename="../src/grlida.cpp" line="214"/>
         <source>Ma&amp;ximizar</source>
         <translation>Ma&amp;ximize</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="215"/>
+        <location filename="../src/grlida.cpp" line="217"/>
         <source>&amp;Restaurar</source>
         <translation>&amp;Restore</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="218"/>
+        <location filename="../src/grlida.cpp" line="220"/>
         <source>&amp;Cerrar</source>
         <translation>&amp;Quit</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="359"/>
+        <location filename="../src/grlida.cpp" line="374"/>
         <source>Error abrir la Base de Datos</source>
         <translation>Error when opening database</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1555"/>
+        <location filename="../src/grlida.cpp" line="1543"/>
         <source>N&#xc2;&#xba; Juegos</source>
         <translation>Number of games</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="466"/>
+        <location filename="../src/grlida.cpp" line="481"/>
         <source>No se ha podido ejecutar el juego</source>
         <translation>Couldn&apos;t execute game</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="468"/>
+        <location filename="../src/grlida.cpp" line="483"/>
         <source>Solo disponible para SO, Windows (NT/2000/XP)</source>
         <translation>Only available for Windows (NT/2000/XP)</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="472"/>
+        <location filename="../src/grlida.cpp" line="487"/>
         <source>No dispones de ninguna configuraci&#xc3;&#xb3;n</source>
         <translation>No configuration available</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="474"/>
+        <location filename="../src/grlida.cpp" line="489"/>
         <source>Porfavor, seleccione un juego de la lista antes.</source>
         <translation>Please, first select a game from list.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="567"/>
+        <location filename="../src/grlida.cpp" line="582"/>
         <source>No esta disponible el ejecutable del emulador.
 Compruebe si lo tiene instalado.</source>
         <translation>The emulator binary was not found.
 Check if the program is really installed.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="805"/>
+        <location filename="../src/grlida.cpp" line="799"/>
         <source>Configuraci&#xc3;&#xb3;n del juego no encontrada.</source>
         <translation>Game configuration not found.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="938"/>
+        <location filename="../src/grlida.cpp" line="932"/>
         <source>Porfavor selecciona un Juego de la lista para eliminarlo</source>
         <translation>Please select a game from the list to delete</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="941"/>
+        <location filename="../src/grlida.cpp" line="935"/>
         <source>&#xc2;&#xbf;Eliminar Juego...?</source>
         <translation>Delete game...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="941"/>
+        <location filename="../src/grlida.cpp" line="935"/>
         <source>&#xc2;&#xbf;Deseas realmente eliminar este juego de la Base de Datos?
 Si es de DOSBox o VDMSound tambien se borrar el archivo de configuraci&#xc3;&#xb3;n</source>
         <translation>Do you really want to delete this game from the database?
 If it relies on DOSBox or VDMSound, config files will also be deleted</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="941"/>
+        <location filename="../src/grlida.cpp" line="935"/>
         <source>Si</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="941"/>
+        <location filename="../src/grlida.cpp" line="935"/>
         <source>Cancelar</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="946"/>
+        <location filename="../src/grlida.cpp" line="940"/>
         <source>Juego Eliminado correctamente</source>
         <translation>Game successfully deleted</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1060"/>
+        <location filename="../src/grlida.cpp" line="1046"/>
         <source>introducido el</source>
         <translation>Entered the</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1477"/>
+        <location filename="../src/grlida.cpp" line="1465"/>
         <source>Genero sin Clasificar</source>
         <translation>Unclassified genre</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1486"/>
+        <location filename="../src/grlida.cpp" line="1474"/>
         <source>Calificaci&#xc3;&#xb3;n Gr&#xc3;&#xa1;ficos</source>
         <translation>Graphics rating</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1488"/>
+        <location filename="../src/grlida.cpp" line="1476"/>
         <source>Calificaci&#xc3;&#xb3;n Sonido</source>
         <translation>Sound rating</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1490"/>
+        <location filename="../src/grlida.cpp" line="1478"/>
         <source>Calificaci&#xc3;&#xb3;n Jugabilidad</source>
         <translation>Playability rating</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1494"/>
+        <location filename="../src/grlida.cpp" line="1482"/>
         <source>Juegos Originales</source>
         <translation>Original games</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1503"/>
+        <location filename="../src/grlida.cpp" line="1491"/>
         <source>No lo son</source>
         <translation>They aren&apos;t</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1501"/>
+        <location filename="../src/grlida.cpp" line="1489"/>
         <source>Juegos Favoritos</source>
         <translation>Favorite Game</translation>
     </message>
@@ -2528,7 +2576,7 @@ If it relies on DOSBox or VDMSound, config files will also be deleted</translati
         <translation>GR-lida DOSBox, ScummVM and VDMSound launcher</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="359"/>
+        <location filename="../src/grlida.cpp" line="374"/>
         <source>No se ha podido establecer una conexi&#xc3;&#xb3;n con la Base de Datos.
 Esta aplicaci&#xc3;&#xb3;n necesita soporte de SQLite. Mira la documentaci&#xc3;&#xb3;n de Qt SQL driver para m&#xc3;&#xa1;s informaci&#xc3;&#xb3;n.
 
@@ -2557,7 +2605,7 @@ Click on &apos;Cancel&apos; to exit.</translation>
         <translation>by</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2215"/>
+        <location filename="../ui/grlida.ui" line="2216"/>
         <source>Ordenar</source>
         <translation>Sort</translation>
     </message>
@@ -2617,17 +2665,17 @@ Click on &apos;Cancel&apos; to exit.</translation>
         <translation>Game Screenshots</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1990"/>
+        <location filename="../ui/grlida.ui" line="1991"/>
         <source>DOSBox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2010"/>
+        <location filename="../ui/grlida.ui" line="2011"/>
         <source>ScummVM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2167"/>
+        <location filename="../ui/grlida.ui" line="2168"/>
         <source>Capturas</source>
         <translation>Snapshots</translation>
     </message>
@@ -2727,429 +2775,439 @@ Click on &apos;Cancel&apos; to exit.</translation>
         <translation>&amp;Tools</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1526"/>
+        <location filename="../ui/grlida.ui" line="1527"/>
         <source>E&amp;jecutar</source>
         <translation>&amp;Run</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/grlida.ui" line="1536"/>
+        <location filename="../ui/grlida.ui" line="1537"/>
         <source>&amp;Edición</source>
         <translation>&amp;Edit</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1550"/>
+        <location filename="../ui/grlida.ui" line="1551"/>
         <source>&amp;Archivo</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1925"/>
+        <location filename="../ui/grlida.ui" line="1926"/>
         <source>Cerrar</source>
         <translation>Close</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1928"/>
+        <location filename="../ui/grlida.ui" line="1929"/>
         <source>Cerrar el GR-lida</source>
         <translation>Close GR-lida</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1987"/>
+        <location filename="../ui/grlida.ui" line="1988"/>
         <source>Nuevo con DOSBox</source>
         <translation>New game using DOSBox</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1590"/>
+        <location filename="../ui/grlida.ui" line="1591"/>
         <source>Nuevo Juego DOSBox</source>
         <translation>New DOSBox game</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1996"/>
+        <location filename="../ui/grlida.ui" line="1997"/>
         <source>Nuevo Juego para el emulador DOSBox</source>
         <translation>New game to use with DOSBox</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2007"/>
+        <location filename="../ui/grlida.ui" line="2008"/>
         <source>Nuevo con ScummVM</source>
         <translation>New game using ScummVM</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2013"/>
+        <location filename="../ui/grlida.ui" line="2014"/>
         <source>Nuevo Juego ScummVM</source>
         <translation>New ScummVM game</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2016"/>
+        <location filename="../ui/grlida.ui" line="2017"/>
         <source>Nuevo Juego para el emulador ScummVM</source>
         <translation>New game to use with ScummVM</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2053"/>
+        <location filename="../ui/grlida.ui" line="2054"/>
         <source>Ejecutar Juego</source>
         <translation>Run game</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2050"/>
+        <location filename="../ui/grlida.ui" line="2051"/>
         <source>Ejecutar</source>
         <translation>Run</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2056"/>
+        <location filename="../ui/grlida.ui" line="2057"/>
         <source>Ejecuta un Juego con el emulador correspondiente</source>
         <translation>Run game with its default emulator</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1956"/>
+        <location filename="../ui/grlida.ui" line="1957"/>
         <source>Editar Juego</source>
         <translation>Edit game</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1959"/>
+        <location filename="../ui/grlida.ui" line="1960"/>
         <source>Editar</source>
         <translation>Edit</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/grlida.ui" line="1962"/>
+        <location filename="../ui/grlida.ui" line="1963"/>
         <source>Edita los datos del Juego asi como la configuración del emulador</source>
         <translation>Edit game data and emulator configuration</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1973"/>
+        <location filename="../ui/grlida.ui" line="1974"/>
         <source>Eliminar Juego</source>
         <translation>Delete game</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1655"/>
+        <location filename="../ui/grlida.ui" line="1656"/>
         <source>Eliminar</source>
         <translation>Delete</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1976"/>
+        <location filename="../ui/grlida.ui" line="1977"/>
         <source>Elimina un Juego de la lista</source>
         <translation>Delete a game from list</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2098"/>
+        <location filename="../ui/grlida.ui" line="2099"/>
         <source>Opciones</source>
         <translation>Options</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2101"/>
+        <location filename="../ui/grlida.ui" line="2102"/>
         <source>Opciones del GR-lida</source>
         <translation>GR-lida options</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/grlida.ui" line="2104"/>
+        <location filename="../ui/grlida.ui" line="2105"/>
         <source>Opciones de Configuración del GR-lida</source>
         <translation>GR-lida configuration options</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2181"/>
+        <location filename="../ui/grlida.ui" line="2182"/>
         <source>Acerca de...</source>
         <translation>About...</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1689"/>
+        <location filename="../ui/grlida.ui" line="1690"/>
         <source>AcercaD</source>
         <translation>About</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/grlida.ui" line="1695"/>
+        <location filename="../ui/grlida.ui" line="1696"/>
         <source>Muestra información acerca del GR-lida</source>
         <translation>Shows GR-lida related information</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1939"/>
+        <location filename="../ui/grlida.ui" line="1940"/>
         <source>Nuevo Juego</source>
         <translation>New game</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1942"/>
+        <location filename="../ui/grlida.ui" line="1943"/>
         <source>Nuevo</source>
         <translation>New</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/grlida.ui" line="1945"/>
+        <location filename="../ui/grlida.ui" line="1946"/>
         <source>Añade un nuevo Juego a la lista</source>
         <translation>Add new game to list</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2027"/>
+        <location filename="../ui/grlida.ui" line="2028"/>
         <source>Nuevo con VDMSound</source>
         <translation>New game using VDMSound</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2030"/>
+        <location filename="../ui/grlida.ui" line="2031"/>
         <source>VDMSound</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2033"/>
+        <location filename="../ui/grlida.ui" line="2034"/>
         <source>Nuevo Juego VDMSound</source>
         <translation>New VDMSound</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2036"/>
+        <location filename="../ui/grlida.ui" line="2037"/>
         <source>Nuevo Juego para el emulador VDMSound</source>
         <translation>New game to use with VDMSound</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2067"/>
+        <location filename="../ui/grlida.ui" line="2068"/>
         <source>Ejecutar el Setup</source>
         <translation>Run setup</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2070"/>
+        <location filename="../ui/grlida.ui" line="2071"/>
         <source>Setup</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2073"/>
+        <location filename="../ui/grlida.ui" line="2074"/>
         <source>Ejecuta el Setup del Juego</source>
         <translation>Run game setup</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2127"/>
+        <location filename="../ui/grlida.ui" line="2128"/>
         <source>Ver Datos</source>
         <translation>Show data</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2124"/>
+        <location filename="../ui/grlida.ui" line="2125"/>
         <source>Datos</source>
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2130"/>
+        <location filename="../ui/grlida.ui" line="2131"/>
         <source>Muestra los datos del Juego</source>
         <translation>Shows game data</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2164"/>
+        <location filename="../ui/grlida.ui" line="2165"/>
         <source>Ver Capturas</source>
         <translation>Show snapshots</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2170"/>
+        <location filename="../ui/grlida.ui" line="2171"/>
         <source>Muestra las Capturas del Juego</source>
         <translation>Shows screen snapshots</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2144"/>
+        <location filename="../ui/grlida.ui" line="2145"/>
         <source>Ver Archivos y URL</source>
         <translation>Show files and URL</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2147"/>
+        <location filename="../ui/grlida.ui" line="2148"/>
         <source>Archivos_URL</source>
         <translation>Files_URL</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2150"/>
+        <location filename="../ui/grlida.ui" line="2151"/>
         <source>Muestra los Archivos y URL del Juego</source>
         <translation>Shows game files and URL</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2081"/>
+        <location filename="../ui/grlida.ui" line="2082"/>
         <source>Importar Juego</source>
         <translation>Import game</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1823"/>
+        <location filename="../ui/grlida.ui" line="1824"/>
         <source>Importar</source>
         <translation>Import</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2084"/>
+        <location filename="../ui/grlida.ui" line="2085"/>
         <source>Importa los datos de un Juego via web</source>
         <translation>Import game data from web</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1840"/>
+        <location filename="../ui/grlida.ui" line="1841"/>
         <source>Ejecuta DOSBox</source>
         <translation>Run DOSBox</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1843"/>
+        <location filename="../ui/grlida.ui" line="1844"/>
         <source>Ejecuta el emulador DOSBox</source>
         <translation>Run DOSBox emulator</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1846"/>
+        <location filename="../ui/grlida.ui" line="1847"/>
         <source>Shift+D</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1860"/>
+        <location filename="../ui/grlida.ui" line="1861"/>
         <source>Ejecuta ScummVM</source>
         <translation>Run ScummVM</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1863"/>
+        <location filename="../ui/grlida.ui" line="1864"/>
         <source>Ejecuta el emulador ScummVM</source>
         <translation>Run ScummVM emulator</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1866"/>
+        <location filename="../ui/grlida.ui" line="1867"/>
         <source>Shift+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1877"/>
+        <location filename="../ui/grlida.ui" line="1878"/>
         <source>Ayuda</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1880"/>
+        <location filename="../ui/grlida.ui" line="1881"/>
         <source>Muestra la Ayuda del GR-lida</source>
         <translation>Shows GR-lida help</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1883"/>
+        <location filename="../ui/grlida.ui" line="1884"/>
         <source>F1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1900"/>
+        <location filename="../ui/grlida.ui" line="1901"/>
         <source>Buscar Juego</source>
         <translation>Search game</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1897"/>
+        <location filename="../ui/grlida.ui" line="1898"/>
         <source>Buscar</source>
         <translation>Search</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1903"/>
+        <location filename="../ui/grlida.ui" line="1904"/>
         <source>Busca un Juego en la Lista</source>
         <translation>Searches a game in the list</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1906"/>
+        <location filename="../ui/grlida.ui" line="1907"/>
         <source>Ctrl+F</source>
         <translation></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/grlida.ui" line="1914"/>
+        <location filename="../ui/grlida.ui" line="1915"/>
         <source>Información</source>
         <translation>Information</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/grlida.ui" line="1917"/>
+        <location filename="../ui/grlida.ui" line="1918"/>
         <source>Muestra Información sobre la Base de Datos</source>
         <translation>Shows database information</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1931"/>
+        <location filename="../ui/grlida.ui" line="1932"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1948"/>
+        <location filename="../ui/grlida.ui" line="1949"/>
         <source>Ins</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1965"/>
+        <location filename="../ui/grlida.ui" line="1966"/>
         <source>Shift+Ins</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1979"/>
+        <location filename="../ui/grlida.ui" line="1980"/>
         <source>Del</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1993"/>
+        <location filename="../ui/grlida.ui" line="1994"/>
         <source>Nuevo Juego con DOSBox</source>
         <translation>New game to use with DOSBox</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1999"/>
+        <location filename="../ui/grlida.ui" line="2000"/>
         <source>Ctrl+D</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2019"/>
+        <location filename="../ui/grlida.ui" line="2020"/>
         <source>Ctrl+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2039"/>
+        <location filename="../ui/grlida.ui" line="2040"/>
         <source>Ctrl+V</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2059"/>
+        <location filename="../ui/grlida.ui" line="2060"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2087"/>
+        <location filename="../ui/grlida.ui" line="2088"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2107"/>
+        <location filename="../ui/grlida.ui" line="2108"/>
         <source>F2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2133"/>
+        <location filename="../ui/grlida.ui" line="2134"/>
         <source>F6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2153"/>
+        <location filename="../ui/grlida.ui" line="2154"/>
         <source>F5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2173"/>
+        <location filename="../ui/grlida.ui" line="2174"/>
         <source>F7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2195"/>
+        <location filename="../ui/grlida.ui" line="2196"/>
         <source>Ver Barra de Herramientas</source>
         <translation>Show toolbar</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2198"/>
+        <location filename="../ui/grlida.ui" line="2199"/>
         <source>Herramientas</source>
         <translation>Tools</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2201"/>
+        <location filename="../ui/grlida.ui" line="2202"/>
         <source>F8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2212"/>
+        <location filename="../ui/grlida.ui" line="2213"/>
         <source>Ver Ordenar</source>
         <translation>Show sorting</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2218"/>
+        <location filename="../ui/grlida.ui" line="2219"/>
         <source>Ordena la lista de juego</source>
         <translation>Sort gamelist</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2221"/>
+        <location filename="../ui/grlida.ui" line="2222"/>
         <source>F10</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2232"/>
+        <location filename="../ui/grlida.ui" line="2233"/>
         <source>Marcar como Favorito</source>
         <translation>Mark as favorite</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2235"/>
+        <location filename="../ui/grlida.ui" line="2236"/>
         <source>Favorito</source>
         <translation>Favorite</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="2238"/>
+        <location filename="../ui/grlida.ui" line="2239"/>
         <source>Marca o quita un juego seleccionado como Favorito</source>
         <translation>Tags or untags a game as favourite</translation>
+    </message>
+    <message>
+        <location filename="../ui/grlida.ui" line="2247"/>
+        <source>Exportar Juego</source>
+        <translation>Export Game</translation>
+    </message>
+    <message encoding="UTF-8">
+        <location filename="../ui/grlida.ui" line="2250"/>
+        <source>Exporta los datos de configuración del Juego</source>
+        <translation>Exports configuration data Game</translation>
     </message>
 </context>
 <context>
@@ -3860,77 +3918,77 @@ Click on &apos;Cancel&apos; to exit.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="203"/>
+        <location filename="../src/main.cpp" line="206"/>
         <source>Iniciando:</source>
         <translation>Starting:</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="49"/>
+        <location filename="../src/main.cpp" line="52"/>
         <source>Creando ventana principal</source>
         <translation>Creating main window</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="52"/>
+        <location filename="../src/main.cpp" line="55"/>
         <source>Comprobando carpeta principal</source>
         <translation>Checking main folder</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="59"/>
+        <location filename="../src/main.cpp" line="62"/>
         <source>Comprobando la configuraci&#xc3;&#xb3;n Inicial</source>
         <translation>Checking default configuration</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="134"/>
+        <location filename="../src/main.cpp" line="137"/>
         <source>Comprobando carpeta Idiomas</source>
         <translation>Checking language folder</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="140"/>
+        <location filename="../src/main.cpp" line="143"/>
         <source>Comprobando carpeta Iconos</source>
         <translation>Checking icons folder</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="146"/>
+        <location filename="../src/main.cpp" line="149"/>
         <source>Comprobando carpeta Smiles</source>
         <translation>Checking smilies folder</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="152"/>
+        <location filename="../src/main.cpp" line="155"/>
         <source>Comprobando carpeta Datos</source>
         <translation>Checking data folder</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="164"/>
+        <location filename="../src/main.cpp" line="167"/>
         <source>Comprobando carpeta Configuraci&#xc3;&#xb3;n del DOSBox</source>
         <translation>Checking DOSBox configuration</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="170"/>
+        <location filename="../src/main.cpp" line="173"/>
         <source>Comprobando carpeta Roms</source>
         <translation>Checking roms folder</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="174"/>
+        <location filename="../src/main.cpp" line="177"/>
         <source>Comprobando carpeta Configuraci&#xc3;&#xb3;n del VdmSound</source>
         <translation>Checking VDMSound configuration folder</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="195"/>
+        <location filename="../src/main.cpp" line="198"/>
         <source>Cargando Configuraci&#xc3;&#xb3;n...</source>
         <translation>Loading configuration...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="199"/>
+        <location filename="../src/main.cpp" line="202"/>
         <source>Comprobando archivos de Datos...</source>
         <translation>Checking data files...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="203"/>
+        <location filename="../src/main.cpp" line="206"/>
         <source>Cargando Base de Datos...</source>
         <translation>Loading database...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="158"/>
+        <location filename="../src/main.cpp" line="161"/>
         <source>Comprobando carpeta Templates</source>
         <translation>Checking Templates folder</translation>
     </message>
@@ -4223,7 +4281,7 @@ Click &apos;OK&apos; to exit this wizard
         <translation>You must specify the game binary for</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2011"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1910"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n para el DOSBox ya esixte</source>
         <translation>The DOSBox configuration file already exists</translation>
     </message>
@@ -4248,7 +4306,7 @@ Click &apos;OK&apos; to exit this wizard
         <translation>You must specify the folder already exists</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2507"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2365"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n para el VDMSound ya esixte</source>
         <translation>The VDMSound configuration file already exists</translation>
     </message>
@@ -4258,67 +4316,67 @@ Click &apos;OK&apos; to exit this wizard
         <translation>You must specify the game title</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2528"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2386"/>
         <source>Selecciona un archivo</source>
         <translation>Select a file</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2528"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2386"/>
         <source>Todos los archivo</source>
         <translation>All files</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="947"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="938"/>
         <source>&#xc2;&#xbf;Eliminar url...?</source>
         <translation>Delete URL?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="947"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="938"/>
         <source>&#xc2;&#xbf;Deseas eliminar esta url?</source>
         <translation>Do you want to delete this URL?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2263"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2146"/>
         <source>Si</source>
         <translation>Yes</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1062"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1053"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1062"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1053"/>
         <source>&#xc2;&#xbf;Eliminar Archivo...?</source>
         <translation>Delete file...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1062"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1053"/>
         <source>&#xc2;&#xbf;Deseas eliminar esta Archivo?</source>
         <translation>Do you really want to delete this file?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2057"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1956"/>
         <source>Selecciona el directorio</source>
         <translation>Select folder</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2500"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2358"/>
         <source>Guardar archivo como...</source>
         <translation>Save file as...</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2263"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2146"/>
         <source>&#xc2;&#xbf;Eliminar Juego...?</source>
         <translation>Delete game...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2263"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2146"/>
         <source>&#xc2;&#xbf;Deseas eliminar este montaje?</source>
         <translation>Do you want to delete this mounting?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2263"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2146"/>
         <source>Cancelar</source>
         <translation>Cancel</translation>
     </message>
@@ -4395,62 +4453,62 @@ Click &apos;OK&apos; to exit this wizard
 <context>
     <name>frmDbxAdd</name>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="112"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="115"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n para el DOSBox ya esixte</source>
         <translation>The DOSBox configuration file already exists</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="118"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="121"/>
         <source>Debes indicar el Ejecutable del juego</source>
         <translation>You must specfy the game binary</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="125"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="128"/>
         <source>Debes indicar el archivo donde guardara la configuraci&#xc3;&#xb3;n del juego</source>
         <translation>You must specify the file where configuration will be saved</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="130"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="133"/>
         <source>Debes poner un Titulo al juego</source>
         <translation>You must specify the game title</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="350"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="353"/>
         <source>Debes poner por lo menos el titulo.</source>
         <translation>You must specify at least the game title.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="585"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="588"/>
         <source>Guardar archivo como...</source>
         <translation>Save file as...</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="611"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="614"/>
         <source>Todos los archivo</source>
         <translation>All files</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="611"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="614"/>
         <source>Selecciona un archivo</source>
         <translation>Choose a file</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="739"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="742"/>
         <source>&#xc2;&#xbf;Eliminar Juego...?</source>
         <translation>Delete game?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="739"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="742"/>
         <source>&#xc2;&#xbf;Deseas eliminar este montaje?</source>
         <translation>Do you wish to delete this mounting?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="739"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="742"/>
         <source>Si</source>
         <translation>Yes</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="739"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="742"/>
         <source>Cancelar</source>
         <translation>Cancel</translation>
     </message>
@@ -4461,44 +4519,52 @@ Click &apos;OK&apos; to exit this wizard
     </message>
 </context>
 <context>
+    <name>frmExportarJuego</name>
+    <message>
+        <location filename="../src/grlida_exportar_juego.cpp" line="124"/>
+        <source>Seleccionar un directorio.</source>
+        <translation>Select a folder.</translation>
+    </message>
+</context>
+<context>
     <name>frmImportPath</name>
     <message>
-        <location filename="../src/grlida_importpath.cpp" line="101"/>
+        <location filename="../src/grlida_importpath.cpp" line="90"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n ya esixte</source>
         <translation>The configuration file already exists</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importpath.cpp" line="112"/>
+        <location filename="../src/grlida_importpath.cpp" line="101"/>
         <source>Debes indicar el Ejecutable del juego</source>
         <translation>You must specfy the game binary</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importpath.cpp" line="236"/>
+        <location filename="../src/grlida_importpath.cpp" line="225"/>
         <source>Selecciona un archivo</source>
         <translation>Select a file</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importpath.cpp" line="236"/>
+        <location filename="../src/grlida_importpath.cpp" line="225"/>
         <source>Todos los archivo</source>
         <translation>All files</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importpath.cpp" line="222"/>
+        <location filename="../src/grlida_importpath.cpp" line="211"/>
         <source>Guardar archivo como...</source>
         <translation>Save file as...</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importpath.cpp" line="150"/>
+        <location filename="../src/grlida_importpath.cpp" line="139"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n para el DOSBox ya esixte</source>
         <translation>The DOSBox configuration file already exists</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importpath.cpp" line="217"/>
+        <location filename="../src/grlida_importpath.cpp" line="206"/>
         <source>Seleccionar un directorio.</source>
         <translation>Select a folder.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importpath.cpp" line="229"/>
+        <location filename="../src/grlida_importpath.cpp" line="218"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n para el VDMSound ya esixte</source>
         <translation>The VDMSound configuration file already exists</translation>
     </message>
@@ -4506,76 +4572,76 @@ Click &apos;OK&apos; to exit this wizard
 <context>
     <name>frmImportarJuego</name>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="401"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="405"/>
         <source>Selecciona un archivo</source>
         <translation>Select a file</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="401"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="405"/>
         <source>Soportados</source>
         <translation>Supported</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="401"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="405"/>
         <source>Todos los archivo</source>
         <translation>All files</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="434"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="438"/>
         <source>Error en Parse en la linea %1, columna %2:
 %3</source>
         <translation>Parsing Error in line %1, column %2:
 %3</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="441"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="445"/>
         <source>No es un archivo de</source>
         <translation>It&apos;s not a file</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="446"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="450"/>
         <source>El archivo no corresponde a la versi&#xc3;&#xb3;n</source>
         <translation>The file doesn&apos;t correspond to version</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="458"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="462"/>
         <source>No se ha podido leer el archivo %1:
 %2.</source>
         <translation>Couldn&apos;t read the file %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="905"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="909"/>
         <source>No se ha podido guardar el archivo %1: %2.</source>
         <translation>Couldn&apos;t save %1 file: %2.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="921"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="925"/>
         <source>Descargando %1.</source>
         <translation>Downloading %1.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="927"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="931"/>
         <source>Descarga cancelada.</source>
         <translation>Download cancelled.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="960"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="964"/>
         <source>No se ha podido guardar el archivo: %1.</source>
         <translation>Couldn&apos;t save the file: %1.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="964"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="968"/>
         <source>Descargado en el directorio: %1.</source>
         <translation>Downloaded in folder %1.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="990"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="994"/>
         <source>La descarga ha fallado: %1.</source>
         <translation>The download has failed: %1.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="1018"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="1022"/>
         <source>%1 en %2</source>
         <translation>%1 at %2</translation>
     </message>

@@ -526,7 +526,7 @@ void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datosDbx, 
 		out << "    </datos>" << endl;
 
 		out << "    <dosbox>" << endl;
-		out << "      <usuario>" <<  datosDbx["user_name"] << "</usuario>" << endl;
+		//out << "      <usuario>" <<  datosDbx["user_name"] << "</usuario>" << endl;
 		out << "      <sdl_fullscreen>" << datosDbx["sdl_fullscreen"] << "</sdl_fullscreen>" << endl;
 		out << "      <sdl_fulldouble>" << datosDbx["sdl_fulldouble"] << "</sdl_fulldouble>" << endl;
 		out << "      <sdl_fullfixed>" << datosDbx["sdl_fullfixed"] << "</sdl_fullfixed>" << endl;

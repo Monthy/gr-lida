@@ -55,7 +55,6 @@ private slots:
 	void on_btnOk();
 	void on_btnCheckedAll();
 	void on_btnUnCheckedAll();
-	//void on_cbxExpotarComo(int exportar_como);
 	void on_btnDirExportPath();
 	
 };
