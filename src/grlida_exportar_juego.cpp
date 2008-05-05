@@ -140,8 +140,8 @@ void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By,
 	QSqlQuery query;
 	QSqlRecord rec;
 
-	if( TipoEmu.isEmpty() )
-		stSqlWhere = " WHERE tipoemu LIKE '%"+TipoEmu+"%'";
+	if( !TipoEmu.isEmpty() )
+		stSqlWhere = " WHERE tipo_emu LIKE '%"+TipoEmu+"%'";
 	else
 		stSqlWhere.clear();
 

@@ -411,9 +411,13 @@ QString Funciones::ReemplazaTextoSmiles(QString str, QHash<QString, QString> lis
 QString Funciones::VentanaAbrirArchivos(const QString caption, const QString dir, const QString tmp_dir, const QString filter, QString *selectedFilter, bool Open_Save)
 {
 	QString archivo, base;
+	QFileInfo fi;
 
-	QFileInfo fi( dir );
-	base = fi.absolutePath();
+	fi.setFile( dir );
+	if( fi.exists() )
+		base = fi.absolutePath();
+	else
+		base = GRlidaHomePath();
 
 	if(Open_Save== true)
 		archivo = QFileDialog::getSaveFileName(0, caption, base, filter, selectedFilter);

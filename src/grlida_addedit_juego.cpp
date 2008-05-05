@@ -960,7 +960,7 @@ void frmAddEditJuego::on_btnAbrirUrl()
 
 void frmAddEditJuego::on_btnDatosFiles_PathFile()
 {
-	ui.txtDatosFiles_PathFile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDatosFiles_PathFile->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDatosFiles_PathFile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDatosFiles_PathFile->text(), ui.txtDatosFiles_PathFile->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnAddFile()
@@ -1089,7 +1089,7 @@ void frmAddEditJuego::on_btnDirSvm_sonido()
 
 void frmAddEditJuego::on_btnDirSvm_sound_font()
 {
-	ui.txtSvm_soundfont->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtSvm_soundfont->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtSvm_soundfont->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtSvm_soundfont->text(), ui.txtSvm_soundfont->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
@@ -1923,12 +1923,12 @@ void frmAddEditJuego::on_btnDbx_FileConfg()
 
 void frmAddEditJuego::on_btnDbx_ExeJuego()
 {
-	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_path_exe->text(), ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnDbx_ExeSetup()
 {
-	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_path_setup->text(), ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnDirGravisUltraSound()
@@ -1938,12 +1938,12 @@ void frmAddEditJuego::on_btnDirGravisUltraSound()
 
 void frmAddEditJuego::on_btnDbx_mapperfile()
 {
-	ui.txtDbx_sdl_mapperfile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_sdl_mapperfile->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_sdl_mapperfile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_sdl_mapperfile->text(), ui.txtDbx_sdl_mapperfile->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnDbx_language()
 {
-	ui.txtDbx_dosbox_language->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_dosbox_language->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_dosbox_language->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_dosbox_language->text(), ui.txtDbx_dosbox_language->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnDbx_capturas()
@@ -2378,11 +2378,11 @@ void frmAddEditJuego::on_btnVdms_FileConfg()
 
 void frmAddEditJuego::on_btnVdms_ExeJuego()
 {
-	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtVdms_path_exe->text(), ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmAddEditJuego::on_btnVdms_Icono()
 {
-	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false) + ",0" );
+	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtVdms_icon->text(), ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false) + ",0" );
 }
 // ---------------------------------------------------------------

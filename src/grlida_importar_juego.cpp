@@ -314,7 +314,7 @@ void frmImportarJuego::on_btnOk()
 		ImportPathNew->ui.txtPath_Svm_3->setText( QDir::toNativeSeparators( DatosScummvm["path_setup"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_setup
 		ImportPathNew->ui.txtPath_Svm_4->setText( QDir::toNativeSeparators( DatosScummvm["path_extra"].replace("{DirBaseGames}", DirBaseGames+"/") ) );	// path_extra
 		ImportPathNew->ui.txtPath_Svm_5->setText( QDir::toNativeSeparators( DatosScummvm["path_capturas"] ) );	// path_capturas
-		ImportPathNew->ui.txtPath_Svm_6->setText( QDir::toNativeSeparators( DatosScummvm["path_sonido"] ) );		// path_sonido
+		ImportPathNew->ui.txtPath_Svm_6->setText( QDir::toNativeSeparators( DatosScummvm["path_sonido"] ) );	// path_sonido
 	}
 
 	if(DatosJuego["tipo_emu"]=="vdmsound")
@@ -402,7 +402,7 @@ void frmImportarJuego::on_btnOk()
 
 void frmImportarJuego::on_btnDirFileXML()
 {
-	ui.DirFileXML->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.DirFileXML->text(), tr("Soportados")+" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend Reloaded (*.prof);;"+tr("Todos los archivo")+" (*)", 0, false) );
+	ui.DirFileXML->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.DirFileXML->text(), ui.DirFileXML->text(), tr("Soportados")+" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend Reloaded (*.prof);;"+tr("Todos los archivo")+" (*)", 0, false) );
 }
 
 void frmImportarJuego::on_btnUpdateList()

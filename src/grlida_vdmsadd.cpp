@@ -157,12 +157,12 @@ void frmVdmsAdd::on_btnVdms_FileConfg()
 
 void frmVdmsAdd::on_btnVdms_ExeJuego()
 {
-	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtVdms_path_exe->text(), ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmVdmsAdd::on_btnVdms_Icono()
 {
-	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stConfgVdmSDir, ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false)+ ",0");
+	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtVdms_icon->text(), ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false)+ ",0");
 }
 
 void frmVdmsAdd::on_txtDatos_Titulo_textChanged(const QString &)

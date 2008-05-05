@@ -114,17 +114,17 @@ void frmImportPath::on_btnOk()
 
 void frmImportPath::on_btnDirPath_Datos_Thumbs()
 {
-	ui.txtDatosPath_Thumbs->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDatosPath_Thumbs->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDatosPath_Thumbs->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDatosPath_Thumbs->text(), ui.txtDatosPath_Thumbs->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnDirPath_Datos_CoverFront()
 {
-	ui.txtDatosPath_CoverFront->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDatosPath_CoverFront->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDatosPath_CoverFront->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDatosPath_CoverFront->text(), ui.txtDatosPath_CoverFront->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnDirPath_Datos_CoverBack()
 {
-	ui.txtDatosPath_CoverBack->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDatosPath_CoverBack->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDatosPath_CoverBack->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDatosPath_CoverBack->text(), ui.txtDatosPath_CoverBack->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxFile_1()
@@ -143,22 +143,22 @@ void frmImportPath::on_btnOpenDbxFile_1()
 
 void frmImportPath::on_btnOpenDbxFile_2()
 {
-	ui.txtPath_Dbx_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Dbx_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtPath_Dbx_2->text(), ui.txtPath_Dbx_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxFile_3()
 {
-	ui.txtPath_Dbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Dbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtPath_Dbx_3->text(), ui.txtPath_Dbx_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxFile_4()
 {
-	ui.txtPath_Dbx_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_4->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Dbx_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtPath_Dbx_4->text(), ui.txtPath_Dbx_4->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxFile_5()
 {
-	ui.txtPath_Dbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Dbx_5->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Dbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtPath_Dbx_5->text(), ui.txtPath_Dbx_5->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenDbxDir_6()
@@ -188,7 +188,7 @@ void frmImportPath::on_btnOpenSvmDir_2()
 
 void frmImportPath::on_btnOpenSvmFile3()
 {
-	ui.txtPath_Svm_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Svm_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Svm_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtPath_Svm_3->text(), ui.txtPath_Svm_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmImportPath::on_btnOpenSvmDir_4()
@@ -222,5 +222,5 @@ void frmImportPath::on_btnOpenVdmsFile_1()
 
 void frmImportPath::on_btnOpenVdmsFile_2()
 {
-	ui.txtPath_Vdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtPath_Vdms_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Vdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtPath_Vdms_2->text(), ui.txtPath_Vdms_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }

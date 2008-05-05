@@ -606,12 +606,12 @@ void frmDbxAdd::on_btnDbx_FileConfg()
 
 void frmDbxAdd::on_btnDbx_ExeJuego()
 {
-	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_path_exe->text(), ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmDbxAdd::on_btnDbx_ExeSetup()
 {
-	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_path_setup->text(), ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
 }
 
 void frmDbxAdd::on_btnMount_Add()

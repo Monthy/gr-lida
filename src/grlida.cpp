@@ -285,10 +285,7 @@ void GrLida::on_ImportarJuego()
 void GrLida::on_ExportarJuego()
 {
 	frmExportarJuego * NewExportar = new frmExportarJuego( 0, Qt::Window );
-	if( NewExportar->exec() == QDialog::Accepted )
-	{
-
-	}
+	NewExportar->exec();
 	delete NewExportar;
 }
 
