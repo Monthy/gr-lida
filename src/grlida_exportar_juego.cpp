@@ -82,9 +82,9 @@ void frmExportarJuego::on_btnOk()
 					switch ( ui.cbxExpotarComo->currentIndex() )
 					{
 						case 0: // D-Fend Reloaded
-							str_ok = archivo.endsWith(".conf");
+							str_ok = archivo.endsWith(".prof");
 							if(str_ok == false)
-								archivo.append(".conf");
+								archivo.append(".prof");
 		
 							fGrl.Exportar_Profile_DFend( TempDatosJuego, TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
 						break;
