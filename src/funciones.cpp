@@ -642,6 +642,44 @@ void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, con
 				out << "    </montajes>" << endl;
 			}
 		}
+
+		if( datos["tipo_emu"] == "scummvm" )
+		{
+			out << "    <scummvm>" << endl;
+			out << "      <game>" << datosDbx["game"] << "</game>" << endl;
+			out << "      <language>" << datosDbx["language"] << "</language>" << endl;
+			out << "      <subtitles>" << datosDbx["subtitles"] << "</subtitles>" << endl;
+			out << "      <platform>" << datosDbx["platform"] << "</platform>" << endl;
+			out << "      <gfx_mode>" << datosDbx["gfx_mode"] << "</gfx_mode>" << endl;
+			out << "      <render_mode>" << datosDbx["render_mode"] << "</render_mode>" << endl;
+			out << "      <fullscreen>" << datosDbx["fullscreen"] << "</fullscreen>" << endl;
+			out << "      <aspect_ratio>" << datosDbx["aspect_ratio"] << "</aspect_ratio>" << endl;
+			out << "      <path>" << datosDbx["path"] << "</path>" << endl;
+			out << "      <path_setup>" << datosDbx["path_setup"] << "</path_setup>" << endl;
+			out << "      <path_extra>" << datosDbx["path_extra"] << "</path_extra>" << endl;
+			out << "      <path_save>" << datosDbx["path_save"] << "</path_save>" << endl;
+			out << "      <path_capturas>" << datosDbx["path_capturas"] << "</path_capturas>" << endl;
+			out << "      <path_sonido>" << datosDbx["path_sonido"] << "</path_sonido>" << endl;
+			out << "      <music_driver>" << datosDbx["music_driver"] << "</music_driver>" << endl;
+			out << "      <enable_gs>" << datosDbx["enable_gs"] << "</enable_gs>" << endl;
+			out << "      <multi_midi>" << datosDbx["multi_midi"] << "</multi_midi>" << endl;
+			out << "      <native_mt32>" << datosDbx["native_mt32"] << "</native_mt32>" << endl;
+			out << "      <master_volume>" << datosDbx["master_volume"] << "</master_volume>" << endl;
+			out << "      <music_volume>" << datosDbx["music_volume"] << "</music_volume>" << endl;
+			out << "      <sfx_volume>" << datosDbx["sfx_volume"] << "</sfx_volume>" << endl;
+			out << "      <speech_volume>" << datosDbx["speech_volume"] << "</speech_volume>" << endl;
+			out << "      <tempo>" << datosDbx["tempo"] << "</tempo>" << endl;
+			out << "      <talkspeed>" << datosDbx["talkspeed"] << "</talkspeed>" << endl;
+			out << "      <debuglevel>" << datosDbx["debuglevel"] << "</debuglevel>" << endl;
+			out << "      <cdrom>" << datosDbx["cdrom"] << "</cdrom>" << endl;
+			out << "      <joystick_num>" << datosDbx["joystick_num"] << "</joystick_num>" << endl;
+			out << "      <output_rate>" << datosDbx["output_rate"] << "</output_rate>" << endl;
+			out << "      <midi_gain>" << datosDbx["midi_gain"] << "</midi_gain>" << endl;
+			out << "      <copy_protection>" << datosDbx["copy_protection"] << "</copy_protection>" << endl;
+			out << "      <sound_font>" << datosDbx["sound_font"] << "</sound_font>" << endl;
+			out << "    </scummvm>" << endl;
+		}
+
 		out << "  </lista_db>" << endl;
 		out << "</grlida_db>" << endl;
 	}

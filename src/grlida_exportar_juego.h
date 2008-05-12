@@ -46,10 +46,11 @@ private:
 	
 	QString stHomeDir, stIconDir, stIDdbx;
 	QHash<QString, QString> TempDatosJuego;
+	QHash<QString, QString> TempDatosScummvm;
 	QHash<QString, QString> TempDatosDosBox;
 	QTreeWidget *twMontajes;
 
-	void CargarListaJuegos(QString TipoEmu="dosbox", QString stdb_Orden_By="titulo", QString stdb_Orden="desc");
+	void CargarListaJuegos(QString TipoEmu="", QString stdb_Orden_By="titulo", QString stdb_Orden="desc");
 	void CargarDatosExportar( QString stIDx );
 
 private slots:

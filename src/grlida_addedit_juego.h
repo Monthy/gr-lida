@@ -72,9 +72,7 @@ private:
 	QFile file_thumbs, file_cover_front, file_cover_back;
 	QString stThumbs, stCoverFront, stCoverBack;
 	QHash<QString, QString> listSmailes;
-	//QHash<QString, QString>::const_iterator i_Hash;
 	QUrl my_url;
-	//QHash<QString, QString>  TempProfileDosBox;
 
 private slots:
 	void on_btnOk();
