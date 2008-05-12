@@ -44,49 +44,51 @@ public:
 
 	bool dbisOpen();// Retorna si esta abierta o no la base de datos.
 	void dbClose();	// Cierra la base de datos.
-	
+
 	void CrearTablas(); // Crea las tablas si no las tiene.
 	int getCount(QString stTable, QString stWhere = "");
-
-	void ItemEliminar(const QString IDgrl);
-	void ItemEliminarMontaje( const QString IDmountdbx );
-	void eliminararchivo(QString archivo);
-	
 	QString ItemIDIndex(QString SQLtabla, QString SQLindex );
+// Elimina un juego de la base de datos.
+	void ItemEliminar(const QString IDgrl);
+// Datos Juego.
+	QHash<QString, QString> show_Datos(QString IDgrl);
 	QString ItemInsertaDatos(const QHash<QString, QString> datos);
-
-	QString ItemInsertaDbx(const QHash<QString, QString> datos, const QString IDgrl);
-	void ItemInsertaMontajesDbx(QTreeWidget *treeWidget, const QString IDdbx);
-	QString ItemInsertaUnMontajeDbx(const QHash<QString, QString> datos, const QString IDdbx);
-
-	void ItemInsertaSvm(const QHash<QString, QString> datos, const QString IDgrl);
-	void ItemInsertaVdms(const QHash<QString, QString> datos, const QString IDgrl);
-
 	void ItemActualizaDatos(const QHash<QString, QString> datos, const QString IDgrl);
 	void ItemActualizaDatosFavorito(const QString EstadoFav , const QString IDgrl );
-	
+// DOSBox.
+	QHash<QString, QString> showConfg_DOSBox(QString IDgrl);
+	QString ItemInsertaDbx(const QHash<QString, QString> datos, const QString IDgrl);
 	void ItemActualizaDbx(const QHash<QString, QString> datos, const QString IDdbx);
+	void ItemInsertaMontajesDbx(QTreeWidget *treeWidget, const QString IDdbx);
+	QString ItemInsertaUnMontajeDbx(const QHash<QString, QString> datos, const QString IDdbx);
 	void ItemActualizaMontajeDbx(QTreeWidget *treeWidget);
-
+	void ItemEliminarMontaje( const QString IDmountdbx );
+// ScummVM.
+	QHash<QString, QString> showConfg_ScummVM(QString IDgrl);
+	void ItemInsertaSvm(const QHash<QString, QString> datos, const QString IDgrl);
 	void ItemActualizaSvm(const QHash<QString, QString> datos, const QString IDsvm);
+// VDMSound.
+	QHash<QString, QString> showConfg_VDMSound(QString IDgrl);
+	void ItemInsertaVdms(const QHash<QString, QString> datos, const QString IDgrl);
 	void ItemActualizaVdms(const QHash<QString, QString> datos, const QString IDvdms);
-
+// Archivos.
 	void ItemInsertaFiles(QTreeWidget *treeWidget, const QString IDgrl);
 	QString ItemInsertaUnFiles(const QHash<QString, QString> datos, const QString IDgrl);
 	void ItemActualizaFiles(const QHash<QString, QString> datos, const QString IDFiles);
 	void ItemEliminarFiles( const QString IDFiles );
-
+// URL.
 	void ItemInsertaURL(QTreeWidget *treeWidget, const QString IDgrl);
 	QString ItemInsertaUnURL(const QHash<QString, QString> datos, const QString IDgrl);
 	void ItemActualizaURL(const QHash<QString, QString> datos, const QString IDURL);
 	void ItemEliminarURL( const QString IDURL );
-	
+
 private:
 	Funciones fGrl;
-	bool ok_OpenDB;
 	QSqlDatabase sqldb;
-	QString stQuery;
+	bool ok_OpenDB;
+
 	bool Chequear_Query(QSqlQuery q);
+	void eliminararchivo(QString archivo);
 };
 
 #endif

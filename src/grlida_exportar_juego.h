@@ -45,6 +45,7 @@ private:
 	dbSql *sql;
 	
 	QString stHomeDir, stIconDir, stIDdbx;
+	QHash<QString, QString> TempDatosJuego;
 	QHash<QString, QString> TempDatosDosBox;
 	QTreeWidget *twMontajes;
 

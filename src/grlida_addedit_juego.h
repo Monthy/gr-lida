@@ -74,7 +74,7 @@ private:
 	QHash<QString, QString> listSmailes;
 	//QHash<QString, QString>::const_iterator i_Hash;
 	QUrl my_url;
-	QHash<QString, QString>  TempProfileDosBox;
+	//QHash<QString, QString>  TempProfileDosBox;
 
 private slots:
 	void on_btnOk();
@@ -133,7 +133,7 @@ private slots:
 
 // ---------------------------------------------------------------
 // Referente al DOSBox -------------------------------------------
-	void CargarDatosDosBox( QString stIDdbx );
+	void CargarDatosDosBox(QString stIDdbx, const QString ProfileGame = "", bool isProfileGame = false);
 	void CargarDatosDBxMontaje( QString stIDdbx );
 	void setDatosDosBox();
 	QString setOpcionesSerial();

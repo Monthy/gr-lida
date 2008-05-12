@@ -86,14 +86,14 @@ void frmExportarJuego::on_btnOk()
 							if(str_ok == false)
 								archivo.append(".conf");
 		
-							fGrl.Exportar_Profile_DFend( TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
+							fGrl.Exportar_Profile_DFend( TempDatosJuego, TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
 						break;
 						case 1: // GR-lida
 							str_ok = archivo.endsWith(".xml");
 							if(str_ok == false)
 								archivo.append(".xml");
 
-							fGrl.Exportar_Profile_GRLida( TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
+							fGrl.Exportar_Profile_GRLida( TempDatosJuego, TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
 						break;
 					}
 				}
@@ -186,9 +186,12 @@ void frmExportarJuego::CargarDatosExportar( QString stIDx )
 	if( !stIDx.isEmpty() )
 	{
 		TempDatosDosBox.clear();
+		TempDatosJuego.clear();
 		QSqlQuery query;
-		QSqlRecord rec;
 
+		TempDatosJuego  = sql->show_Datos( stIDx );
+		TempDatosDosBox = sql->showConfg_DOSBox( stIDx );
+/*
 		query.exec("SELECT * FROM dbgrl WHERE idgrl="+stIDx+" LIMIT 0,1");
 		if( query.first() )
 		{
@@ -336,7 +339,7 @@ void frmExportarJuego::CargarDatosExportar( QString stIDx )
 			TempDatosDosBox["parametros_exe"]   = query.value( rec.indexOf("parametros_exe") ).toString();				// parametros_exe
 			TempDatosDosBox["parametros_setup"] = query.value( rec.indexOf("parametros_setup") ).toString();			// parametros_setup
 		}
-
+*/
 		twMontajes = new QTreeWidget();
 		twMontajes->clear();		
 		
@@ -344,19 +347,18 @@ void frmExportarJuego::CargarDatosExportar( QString stIDx )
 		if( query.first() )
 		{
 			do {
-				rec = query.record();
 				QTreeWidgetItem *item_mount = new QTreeWidgetItem( twMontajes );
 
-				item_mount->setText( 0 , query.value(rec.indexOf("path")).toString() );			// path			- directorio o iso
-				item_mount->setText( 1 , query.value(rec.indexOf("label")).toString() );		// label		- etiqueta
-				item_mount->setText( 2 , query.value(rec.indexOf("tipo_as")).toString() );		// tipo_as		- tipo de montaje
-				item_mount->setText( 3 , query.value(rec.indexOf("letter")).toString() );		// letter		- letra de montaje
-				item_mount->setText( 4 , query.value(rec.indexOf("indx_cd")).toString() );		// indx_cd		- index de la unidad de cd-rom
-				item_mount->setText( 5 , query.value(rec.indexOf("opt_mount")).toString() );	// opt_mount	- opciones del cd-rom
-				item_mount->setText( 6 , query.value(rec.indexOf("io_ctrl")).toString() );		// io_ctrl		- cd/dvd
-				item_mount->setText( 7 , query.value(rec.indexOf("select_mount")).toString());	// select_mount	- primer montaje
-				item_mount->setText( 8 , query.value(rec.indexOf("id")).toString() );			// id
-				item_mount->setText( 9 , query.value(rec.indexOf("id_lista")).toString() );		// id_lista		- id_lista
+				item_mount->setText( 0 , query.record().value("path").toString() );			// path			- directorio o iso
+				item_mount->setText( 1 , query.record().value("label").toString() );		// label		- etiqueta
+				item_mount->setText( 2 , query.record().value("tipo_as").toString() );		// tipo_as		- tipo de montaje
+				item_mount->setText( 3 , query.record().value("letter").toString() );		// letter		- letra de montaje
+				item_mount->setText( 4 , query.record().value("indx_cd").toString() );		// indx_cd		- index de la unidad de cd-rom
+				item_mount->setText( 5 , query.record().value("opt_mount").toString() );	// opt_mount	- opciones del cd-rom
+				item_mount->setText( 6 , query.record().value("io_ctrl").toString() );		// io_ctrl		- cd/dvd
+				item_mount->setText( 7 , query.record().value("select_mount").toString());	// select_mount	- primer montaje
+				item_mount->setText( 8 , query.record().value("id").toString() );			// id
+				item_mount->setText( 9 , query.record().value("id_lista").toString() );		// id_lista		- id_lista
 
 			} while (query.next());
 		}

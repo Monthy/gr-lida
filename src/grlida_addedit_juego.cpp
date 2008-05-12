@@ -412,98 +412,93 @@ void frmAddEditJuego::on_btnOk()
 // Referente al DatosJuego ---------------------------------------
 void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 {
+	QHash<QString, QString> strDatosJuego;
 	QSqlQuery query;
-	QSqlRecord rec;
-	query.exec("SELECT * FROM dbgrl WHERE idgrl="+stIDIndex+" LIMIT 0,1");
-	if( query.first() )
-	{
-		rec = query.record();
-		ui.lb_fechahora->setText( query.value( rec.indexOf("fecha") ).toString() );						// fecha
-		ui.txtDatos_Titulo->setText( query.value( rec.indexOf("titulo") ).toString() );					// titulo
-		ui.txtDatos_Subtitulo->setText( query.value( rec.indexOf("subtitulo") ).toString() );			// subtitulo
-		ui.txtDatos_Tamano->setText( query.value( rec.indexOf("tamano") ).toString() );					// tamano
-		ui.txtDatos_Comentario->setPlainText( query.value( rec.indexOf("comentario") ).toString() );	// comentario
 
-		ui.cbxDatos_Genero->addItem( QIcon(":/img16/datos_3.png") , query.value( rec.indexOf("genero") ).toString() );				// genero
-		ui.cbxDatos_Compania->addItem( QIcon(":/img16/datos_3.png") , query.value( rec.indexOf("compania") ).toString() );			// compania
-		ui.cbxDatos_Desarrollador->addItem( QIcon(":/img16/datos_3.png") , query.value( rec.indexOf("desarrollador") ).toString());	// desarrollador
-		ui.cbxDatos_Tema->addItem( QIcon(":/img16/datos_3.png") , query.value( rec.indexOf("tema") ).toString() );					// tema
-		ui.cbxDatos_Idioma->addItem( QIcon(":/img16/sinimg.png") , query.value( rec.indexOf("idioma") ).toString() );				// idioma
-		ui.cbxDatos_Formato->addItem( QIcon(":/img16/sinimg.png") , query.value( rec.indexOf("formato") ).toString() );				// formato
-		ui.cbxDatos_Anno->addItem( QIcon(":/img16/fecha.png") , query.value( rec.indexOf("anno") ).toString() );					// anno
-		ui.cbxDatos_NumDisc->addItem( QIcon(":/img16/sinimg.png") , query.value( rec.indexOf("numdisc") ).toString() );				// numdisc
-		ui.cbxDatos_SistemaOp->addItem( QIcon(":/img16/sinimg.png") , query.value( rec.indexOf("sistemaop") ).toString() );			// sistemaop
-		ui.cbxDatos_Estado->addItem( QIcon(":/img16/sinimg.png") , query.value( rec.indexOf("estado") ).toString() );				// estado
+	strDatosJuego = sql->show_Datos( stIDIndex );
+
+	ui.lb_fechahora->setText( strDatosJuego["fecha"] );						// fecha
+	ui.txtDatos_Titulo->setText( strDatosJuego["titulo"] );					// titulo
+	ui.txtDatos_Subtitulo->setText( strDatosJuego["subtitulo"] );			// subtitulo
+	ui.txtDatos_Tamano->setText( strDatosJuego["tamano"] );					// tamano
+	ui.txtDatos_Comentario->setPlainText( strDatosJuego["comentario"] );	// comentario
+
+	ui.cbxDatos_Genero->addItem( QIcon(":/img16/datos_3.png") , strDatosJuego["genero"] );				// genero
+	ui.cbxDatos_Compania->addItem( QIcon(":/img16/datos_3.png") , strDatosJuego["compania"] );			// compania
+	ui.cbxDatos_Desarrollador->addItem( QIcon(":/img16/datos_3.png") , strDatosJuego["desarrollador"] );// desarrollador
+	ui.cbxDatos_Tema->addItem( QIcon(":/img16/datos_3.png") , strDatosJuego["tema"] );					// tema
+	ui.cbxDatos_Idioma->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["idioma"] );				// idioma
+	ui.cbxDatos_Formato->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["formato"] );				// formato
+	ui.cbxDatos_Anno->addItem( QIcon(":/img16/fecha.png") , strDatosJuego["anno"] );					// anno
+	ui.cbxDatos_NumDisc->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["numdisc"] );				// numdisc
+	ui.cbxDatos_SistemaOp->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["sistemaop"] );			// sistemaop
+	ui.cbxDatos_Estado->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["estado"] );				// estado
 
 // Selecciona el dato correspondiente.
-		ui.cbxDatos_Genero->setCurrentIndex( ui.cbxDatos_Genero->findText( query.value( rec.indexOf("genero") ).toString() ) );						// genero
-		ui.cbxDatos_Compania->setCurrentIndex( ui.cbxDatos_Compania->findText( query.value( rec.indexOf("compania") ).toString() ) );				// compania
-		ui.cbxDatos_Desarrollador->setCurrentIndex( ui.cbxDatos_Desarrollador->findText( query.value( rec.indexOf("desarrollador") ).toString() ) );// desarrollador
-		ui.cbxDatos_Tema->setCurrentIndex( ui.cbxDatos_Tema->findText( query.value( rec.indexOf("tema") ).toString() ) );							// tema
-		ui.cbxDatos_Idioma->setCurrentIndex( ui.cbxDatos_Idioma->findText( query.value( rec.indexOf("idioma") ).toString() ) );						// idioma
-		ui.cbxDatos_Formato->setCurrentIndex( ui.cbxDatos_Formato->findText( query.value( rec.indexOf("formato") ).toString() ) );					// formato
-		ui.cbxDatos_Anno->setCurrentIndex( ui.cbxDatos_Anno->findText( query.value( rec.indexOf("anno") ).toString() ) );							// anno
-		ui.cbxDatos_NumDisc->setCurrentIndex( ui.cbxDatos_NumDisc->findText( query.value( rec.indexOf("numdisc") ).toString() ) );					// numdisc
-		ui.cbxDatos_SistemaOp->setCurrentIndex( ui.cbxDatos_SistemaOp->findText( query.value( rec.indexOf("sistemaop") ).toString() ) );			// sistemaop
-		ui.cbxDatos_Graficos->setCurrentIndex( ui.cbxDatos_Graficos->findText( query.value( rec.indexOf("graficos") ).toString() ) );				// graficos
-		ui.cbxDatos_Sonido->setCurrentIndex( ui.cbxDatos_Sonido->findText( query.value( rec.indexOf("sonido") ).toString() ) );						// sonido
-		ui.cbxDatos_Jugabilidad->setCurrentIndex( ui.cbxDatos_Jugabilidad->findText( query.value( rec.indexOf("jugabilidad") ).toString() ) );		// jugabilidad
-		ui.cbxDatos_Estado->setCurrentIndex( ui.cbxDatos_Estado->findText( query.value( rec.indexOf("estado") ).toString() ) );						// estado
+	ui.cbxDatos_Genero->setCurrentIndex( ui.cbxDatos_Genero->findText( strDatosJuego["genero"] ) );						// genero
+	ui.cbxDatos_Compania->setCurrentIndex( ui.cbxDatos_Compania->findText( strDatosJuego["compania"] ) );				// compania
+	ui.cbxDatos_Desarrollador->setCurrentIndex( ui.cbxDatos_Desarrollador->findText( strDatosJuego["desarrollador"] ) );// desarrollador
+	ui.cbxDatos_Tema->setCurrentIndex( ui.cbxDatos_Tema->findText( strDatosJuego["tema"] ) );							// tema
+	ui.cbxDatos_Idioma->setCurrentIndex( ui.cbxDatos_Idioma->findText( strDatosJuego["idioma"] ) );						// idioma
+	ui.cbxDatos_Formato->setCurrentIndex( ui.cbxDatos_Formato->findText( strDatosJuego["formato"] ) );					// formato
+	ui.cbxDatos_Anno->setCurrentIndex( ui.cbxDatos_Anno->findText( strDatosJuego["anno"] ) );							// anno
+	ui.cbxDatos_NumDisc->setCurrentIndex( ui.cbxDatos_NumDisc->findText( strDatosJuego["numdisc"] ) );					// numdisc
+	ui.cbxDatos_SistemaOp->setCurrentIndex( ui.cbxDatos_SistemaOp->findText( strDatosJuego["sistemaop"] ) );			// sistemaop
+	ui.cbxDatos_Graficos->setCurrentIndex( ui.cbxDatos_Graficos->findText( strDatosJuego["graficos"] ) );				// graficos
+	ui.cbxDatos_Sonido->setCurrentIndex( ui.cbxDatos_Sonido->findText( strDatosJuego["sonido"] ) );						// sonido
+	ui.cbxDatos_Jugabilidad->setCurrentIndex( ui.cbxDatos_Jugabilidad->findText( strDatosJuego["jugabilidad"] ) );		// jugabilidad
+	ui.cbxDatos_Estado->setCurrentIndex( ui.cbxDatos_Estado->findText( strDatosJuego["estado"] ) );						// estado
+	ui.chkDatos_Original->setChecked( fGrl.StrToBool( strDatosJuego["original"] ) );	// original
+	ui.chkDatos_Favorito->setChecked( fGrl.StrToBool( strDatosJuego["favorito"] ) );	// favorito
 
-		ui.chkDatos_Original->setChecked( query.value( rec.indexOf("original") ).toBool() );	// original
-		ui.chkDatos_Favorito->setChecked( query.value( rec.indexOf("favorito") ).toBool() );	// favorito
+// icono
+	if( strDatosJuego["icono"] == "datos" || strDatosJuego["icono"] == "" )
+		ui.cbxDatos_Icono->setCurrentIndex(0);
+	else if( strDatosJuego["icono"] == "dosbox" )
+		ui.cbxDatos_Icono->setCurrentIndex(1);
+	else if( strDatosJuego["icono"] == "scummvm" )
+		ui.cbxDatos_Icono->setCurrentIndex(2);
+	else if( strDatosJuego["icono"] =="vdmsound" )
+		ui.cbxDatos_Icono->setCurrentIndex(3);
+	else
+		ui.cbxDatos_Icono->setCurrentIndex( ui.cbxDatos_Icono->findText( strDatosJuego["icono"] ) );	// icono
 
-		QString stIcono;
-		stIcono.clear();
-		stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
-		if( stIcono == "datos" || stIcono == "" )
-			ui.cbxDatos_Icono->setCurrentIndex(0);
-		else if( stIcono == "dosbox" )
-			ui.cbxDatos_Icono->setCurrentIndex(1);
-		else if( stIcono == "scummvm" )
-			ui.cbxDatos_Icono->setCurrentIndex(2);
-		else if( stIcono =="vdmsound" )
-			ui.cbxDatos_Icono->setCurrentIndex(3);
-		else
-			ui.cbxDatos_Icono->setCurrentIndex( ui.cbxDatos_Icono->findText( stIcono ) );	// icono
+	stThumbs.clear();
+	stCoverFront.clear();
+	stCoverBack.clear();
+	stThumbs     = strDatosJuego["thumbs"];			// thumbs
+	stCoverFront = strDatosJuego["cover_front"];	// cover_front
+	stCoverBack  = strDatosJuego["cover_back"];		// cover_back
 
-		stThumbs.clear()	; // thumbs
-		stCoverFront.clear(); // cover_front
-		stCoverBack.clear()	; // cover_back
-		stThumbs     = query.value( rec.indexOf("thumbs")     ).toString()	; // thumbs
-		stCoverFront = query.value( rec.indexOf("cover_front")).toString()	; // cover_front
-		stCoverBack  = query.value( rec.indexOf("cover_back") ).toString()	; // cover_back
-
-		if( file_thumbs.exists(stThumbs) )
-		{
-			ui.lbImg_Thumbs->setPixmap( QPixmap(stThumbs) );
-			ui.btnImgVer_Thumbs->setEnabled( true );
-			ui.btnImgEliminar_Thumbs->setEnabled( true );
-		} else {
-			ui.lbImg_Thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
-			ui.btnImgVer_Thumbs->setEnabled( false );
-			ui.btnImgEliminar_Thumbs->setEnabled( false );
-		}
-		if( file_cover_front.exists(stCoverFront) )
-		{
-			ui.lbImg_CoverFront->setPixmap( QPixmap(stCoverFront) );
-			ui.btnImgVer_CoverFront->setEnabled( true );
-			ui.btnImgEliminar_CoverFront->setEnabled( true );
-		} else {
-			ui.lbImg_CoverFront->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
-			ui.btnImgVer_CoverFront->setEnabled( false );
-			ui.btnImgEliminar_CoverFront->setEnabled( false );
-		}
-		if( file_cover_back.exists(stCoverBack) )
-		{
-			ui.lbImg_CoverBack->setPixmap( QPixmap(stCoverBack) );
-			ui.btnImgVer_CoverBack->setEnabled( true );
-			ui.btnImgEliminar_CoverBack->setEnabled( true );
-		} else {
-			ui.lbImg_CoverBack->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
-			ui.btnImgVer_CoverBack->setEnabled( false );
-			ui.btnImgEliminar_CoverBack->setEnabled( false );
-		}
+	if( file_thumbs.exists(stThumbs) )
+	{
+		ui.lbImg_Thumbs->setPixmap( QPixmap(stThumbs) );
+		ui.btnImgVer_Thumbs->setEnabled( true );
+		ui.btnImgEliminar_Thumbs->setEnabled( true );
+	} else {
+		ui.lbImg_Thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.btnImgVer_Thumbs->setEnabled( false );
+		ui.btnImgEliminar_Thumbs->setEnabled( false );
+	}
+	if( file_cover_front.exists(stCoverFront) )
+	{
+		ui.lbImg_CoverFront->setPixmap( QPixmap(stCoverFront) );
+		ui.btnImgVer_CoverFront->setEnabled( true );
+		ui.btnImgEliminar_CoverFront->setEnabled( true );
+	} else {
+		ui.lbImg_CoverFront->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.btnImgVer_CoverFront->setEnabled( false );
+		ui.btnImgEliminar_CoverFront->setEnabled( false );
+	}
+	if( file_cover_back.exists(stCoverBack) )
+	{
+		ui.lbImg_CoverBack->setPixmap( QPixmap(stCoverBack) );
+		ui.btnImgVer_CoverBack->setEnabled( true );
+		ui.btnImgEliminar_CoverBack->setEnabled( true );
+	} else {
+		ui.lbImg_CoverBack->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.btnImgVer_CoverBack->setEnabled( false );
+		ui.btnImgEliminar_CoverBack->setEnabled( false );
 	}
 
 	ui.twDatosURL->clear();
@@ -511,13 +506,12 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 	if(query.first())
 	{
 		do {
-			rec = query.record();
 			QTreeWidgetItem *item_url = new QTreeWidgetItem( ui.twDatosURL );
-			item_url->setText( 0 , query.value( rec.indexOf("url") ).toString()                 ); // url
-			item_url->setIcon( 0 , QIcon(":/img16/edit_enlace.png")                             ); // icono
-			item_url->setText( 1 , query.value( rec.indexOf("descripcion") ).toString()         ); // descripcion
-			item_url->setText( 2 , fGrl.IntToStr( query.value( rec.indexOf("id") ).toInt() )    ); // id
-			item_url->setText( 3 , fGrl.IntToStr( query.value( rec.indexOf("idgrl") ).toInt() ) ); // idgrl
+			item_url->setText( 0 , query.record().value("url").toString()         ); // url
+			item_url->setIcon( 0 , QIcon(":/img16/edit_enlace.png")               ); // icono
+			item_url->setText( 1 , query.record().value("descripcion").toString() ); // descripcion
+			item_url->setText( 2 , query.record().value("id").toString()          ); // id
+			item_url->setText( 3 , query.record().value("idgrl").toString()       ); // idgrl
 		} while (query.next());
 		ui.twDatosURL->sortItems( 0, Qt::AscendingOrder ); // Qt::DescendingOrder
 	}
@@ -527,16 +521,15 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 	if(query.first())
 	{
 		do {
-			rec = query.record();
 			QTreeWidgetItem *item_files = new QTreeWidgetItem( ui.twDatosFiles );
-			item_files->setText( 0 , query.value( rec.indexOf("nombre") ).toString()              ); // nombre
-			item_files->setIcon( 0 , QIcon(":/img16/importar.png")                                ); // icono
-			item_files->setText( 1 , query.value( rec.indexOf("crc") ).toString()                 ); // crc
-			item_files->setText( 2 , query.value( rec.indexOf("descripcion") ).toString()         ); // descripcion
-			item_files->setText( 3 , query.value( rec.indexOf("size") ).toString()                ); // size
-			item_files->setText( 4 , query.value( rec.indexOf("path") ).toString()                ); // path
-			item_files->setText( 5 , fGrl.IntToStr( query.value( rec.indexOf("id") ).toInt() )    ); // id
-			item_files->setText( 6 , fGrl.IntToStr( query.value( rec.indexOf("idgrl") ).toInt() ) ); // idgrl
+			item_files->setText( 0 , query.record().value("nombre").toString()      ); // nombre
+			item_files->setIcon( 0 , QIcon(":/img16/importar.png")                  ); // icono
+			item_files->setText( 1 , query.record().value("crc").toString()         ); // crc
+			item_files->setText( 2 , query.record().value("descripcion").toString() ); // descripcion
+			item_files->setText( 3 , query.record().value("size").toString()        ); // size
+			item_files->setText( 4 , query.record().value("path").toString()        ); // path
+			item_files->setText( 5 , query.record().value("id").toString()          ); // id
+			item_files->setText( 6 , query.record().value("idgrl").toString()       ); // idgrl
 		} while (query.next());
 		ui.twDatosFiles->sortItems( 0, Qt::AscendingOrder ); // Qt::DescendingOrder
 	}
@@ -1094,55 +1087,53 @@ void frmAddEditJuego::on_btnDirSvm_sound_font()
 
 void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
 {
-	QSqlQuery query;
-	QSqlRecord rec;
-	query.exec("SELECT * FROM dbgrl_emu_scummvm WHERE idgrl="+stIDsvm+" LIMIT 0,1");
-	if( query.first() )
-	{
-		rec = query.record();
-		ui.txtSvm_game_label->setText( query.value( rec.indexOf("game") ).toString() ); // game
+	QHash<QString, QString> strDatosScummvm;
 
-		QTreeWidgetItem *item;
-		QList<QTreeWidgetItem *> found = ui.twScummVM->findItems(ui.txtSvm_game_label->text() , Qt::MatchExactly, 1);
-		foreach (item, found)
-			ui.twScummVM->setItemSelected(item, true);
+	strDatosScummvm.clear();
+	strDatosScummvm = sql->showConfg_ScummVM( stIDsvm );
 
-		ui.cbxSvm_language->setCurrentIndex( ui.cbxSvm_language->findText( " - " + query.value( rec.indexOf("language") ).toString(), Qt::MatchContains ) );	// language
-		ui.chkSvm_subtitles->setChecked( query.value( rec.indexOf("subtitles") ).toBool() )				; // subtitles
-		ui.cbxSvm_platform->setCurrentIndex( ui.cbxSvm_platform->findText( " - " + query.value( rec.indexOf("platform") ).toString(), Qt::MatchContains ) );	// platform
-		ui.cbxSvm_gfx_mode->setCurrentIndex( ui.cbxSvm_gfx_mode->findText( query.value( rec.indexOf("gfx_mode") ).toString(), Qt::MatchContains ) );			// gfx_mode
-		ui.cbxSvm_render_mode->setCurrentIndex( ui.cbxSvm_render_mode->findText( query.value( rec.indexOf("render_mode") ).toString() ) );		// render_mode
-		ui.chkSvm_fullscreen->setChecked( query.value( rec.indexOf("fullscreen") ).toBool() );													// fullscreen
-		ui.chkSvm_aspect_ratio->setChecked( query.value( rec.indexOf("aspect_ratio") ).toBool() );												// aspect_ratio
-		ui.txtSvm_path->setText( query.value( rec.indexOf("path") ).toString() );																// path
-		ui.txtSvm_path_setup->setText( query.value( rec.indexOf("path_setup") ).toString() );													// path_setup
-		ui.txtSvm_extrapath->setText( query.value( rec.indexOf("path_extra") ).toString() ); 													// path_extra
-		ui.txtSvm_savepath->setText( query.value( rec.indexOf("path_save") ).toString() );														// path_save
-		ui.txtSvm_path_capturas->setText( query.value( rec.indexOf("path_capturas") ).toString() );												// path_capturas
-		ui.txtSvm_path_sonido->setText( query.value( rec.indexOf("path_sonido") ).toString() );													// path_sonido
-		ui.cbxSvm_music_driver->setCurrentIndex( ui.cbxSvm_music_driver->findText( query.value( rec.indexOf("music_driver") ).toString()) );	// music_driver
-		ui.chkSvm_enable_gs->setChecked( query.value( rec.indexOf("enable_gs") ).toBool() );													// enable_gs
-		ui.chkSvm_multi_midi->setChecked( query.value( rec.indexOf("multi_midi") ).toBool() );													// multi_midi
-		ui.chkSvm_native_mt32->setChecked( query.value( rec.indexOf("native_mt32") ).toBool() );												// native_mt32
-		//"255"query.value( rec.indexOf("master_volume") ).toString();																			// master_volume
-		ui.h_SliderSvm_music_volume->setSliderPosition(query.value( rec.indexOf("music_volume") ).toInt());										// music_volume
-		ui.h_SliderSvm_sfx_volume->setSliderPosition(query.value( rec.indexOf("sfx_volume") ).toInt());											// sfx_volume
-		ui.h_SliderSvm_speech_volume->setSliderPosition(query.value( rec.indexOf("speech_volume") ).toInt());									// speech_volume
-		ui.h_SliderSvm_tempo->setSliderPosition(query.value( rec.indexOf("tempo") ).toInt());													// tempo
-		ui.h_SliderSvm_talkspeed->setSliderPosition(query.value( rec.indexOf("talkspeed") ).toInt());											// talkspeed
-		ui.h_SliderSvm_debuglevel->setSliderPosition(query.value( rec.indexOf("debuglevel") ).toInt());											// debuglevel
-		//query.value( rec.indexOf("cdrom") ).toString()"0";																					// cdrom
-		ui.cbxSvm_joystick_num->setCurrentIndex( query.value( rec.indexOf("joystick_num") ).toInt() );											// joystick_num 
+	ui.txtSvm_game_label->setText( strDatosScummvm["game"] ); // game
 
-		if(query.value( rec.indexOf("output_rate") ).toString()!="")
-			ui.cbxSvm_output_rate->setCurrentIndex( ui.cbxSvm_output_rate->findText( query.value( rec.indexOf("output_rate") ).toString(), Qt::MatchContains ) ); // output_rate
-		else
-			ui.cbxSvm_output_rate->setCurrentIndex( 0 ); // output_rate
+	QTreeWidgetItem *item;
+	QList<QTreeWidgetItem *> found = ui.twScummVM->findItems( strDatosScummvm["game"], Qt::MatchExactly, 1);
+	foreach (item, found)
+		ui.twScummVM->setItemSelected(item, true);
 
-		ui.h_SliderSvm_midi_gain->setSliderPosition(query.value( rec.indexOf("midi_gain") ).toInt())	; // midi_gain
-		ui.chkSvm_copy_protection->setChecked( query.value( rec.indexOf("copy_protection") ).toBool() )	; // copy_protection
-		ui.txtSvm_soundfont->setText( query.value( rec.indexOf("sound_font") ).toString() )				; // sound_font 
-	}
+	ui.cbxSvm_language->setCurrentIndex( ui.cbxSvm_language->findText( " - " + strDatosScummvm["language"], Qt::MatchContains ) );	// language
+	ui.chkSvm_subtitles->setChecked( fGrl.StrToBool( strDatosScummvm["subtitles"] ) );												// subtitles
+	ui.cbxSvm_platform->setCurrentIndex( ui.cbxSvm_platform->findText( " - " + strDatosScummvm["platform"], Qt::MatchContains ) );	// platform
+	ui.cbxSvm_gfx_mode->setCurrentIndex( ui.cbxSvm_gfx_mode->findText( strDatosScummvm["gfx_mode"], Qt::MatchContains ) );			// gfx_mode
+	ui.cbxSvm_render_mode->setCurrentIndex( ui.cbxSvm_render_mode->findText( strDatosScummvm["render_mode"] ) );					// render_mode
+	ui.chkSvm_fullscreen->setChecked( fGrl.StrToBool( strDatosScummvm["fullscreen"] ) );											// fullscreen
+	ui.chkSvm_aspect_ratio->setChecked( fGrl.StrToBool( strDatosScummvm["aspect_ratio"] ) );										// aspect_ratio
+	ui.txtSvm_path->setText( strDatosScummvm["path"] );																				// path
+	ui.txtSvm_path_setup->setText( strDatosScummvm["path_setup"] );																	// path_setup
+	ui.txtSvm_extrapath->setText( strDatosScummvm["path_extra"] ); 																	// path_extra
+	ui.txtSvm_savepath->setText( strDatosScummvm["path_save"] );																	// path_save
+	ui.txtSvm_path_capturas->setText( strDatosScummvm["path_capturas"] );															// path_capturas
+	ui.txtSvm_path_sonido->setText( strDatosScummvm["path_sonido"] );																// path_sonido
+	ui.cbxSvm_music_driver->setCurrentIndex( ui.cbxSvm_music_driver->findText( strDatosScummvm["music_driver"] ) );					// music_driver
+	ui.chkSvm_enable_gs->setChecked( fGrl.StrToBool( strDatosScummvm["enable_gs"] ) );												// enable_gs
+	ui.chkSvm_multi_midi->setChecked( fGrl.StrToBool( strDatosScummvm["multi_midi"] ) );											// multi_midi
+	ui.chkSvm_native_mt32->setChecked( fGrl.StrToBool( strDatosScummvm["native_mt32"] ) );											// native_mt32
+	//strDatosScummvm["master_volume"];																								// master_volume
+	ui.h_SliderSvm_music_volume->setSliderPosition( fGrl.StrToInt( strDatosScummvm["music_volume"] ) );								// music_volume
+	ui.h_SliderSvm_sfx_volume->setSliderPosition( fGrl.StrToInt( strDatosScummvm["sfx_volume"] ) );									// sfx_volume
+	ui.h_SliderSvm_speech_volume->setSliderPosition( fGrl.StrToInt( strDatosScummvm["speech_volume"] ) );							// speech_volume
+	ui.h_SliderSvm_tempo->setSliderPosition( fGrl.StrToInt( strDatosScummvm["tempo"] ) );											// tempo
+	ui.h_SliderSvm_talkspeed->setSliderPosition(fGrl.StrToInt(  strDatosScummvm["talkspeed"] ) );									// talkspeed
+	ui.h_SliderSvm_debuglevel->setSliderPosition( fGrl.StrToInt( strDatosScummvm["debuglevel"] ) );									// debuglevel
+	//strDatosScummvm["cdrom"];																										// cdrom
+	ui.cbxSvm_joystick_num->setCurrentIndex( fGrl.StrToInt( strDatosScummvm["joystick_num"] ) );									// joystick_num 
+
+	if( strDatosScummvm["output_rate"]!="" )
+		ui.cbxSvm_output_rate->setCurrentIndex( ui.cbxSvm_output_rate->findText( strDatosScummvm["output_rate"], Qt::MatchContains ) ); // output_rate
+	else
+		ui.cbxSvm_output_rate->setCurrentIndex( 0 );
+
+	ui.h_SliderSvm_midi_gain->setSliderPosition( fGrl.StrToInt( strDatosScummvm["midi_gain"] ) );	// midi_gain
+	ui.chkSvm_copy_protection->setChecked( fGrl.StrToBool( strDatosScummvm["copy_protection"] ) );	// copy_protection
+	ui.txtSvm_soundfont->setText( strDatosScummvm["sound_font"] );									// sound_font 
 }
 
 void frmAddEditJuego::setDatosScummVM()
@@ -1226,349 +1217,231 @@ void frmAddEditJuego::on_btnDefecto()
 }
 // ---------------------------------------------------------------
 // Referente al DOSBox -------------------------------------------
-void frmAddEditJuego::CargarDatosDosBox( QString stIDdbx )
-{
-	QSqlQuery query;
-	QSqlRecord rec;
-	query.exec("SELECT * FROM dbgrl_emu_dosbox WHERE idgrl="+stIDdbx+" LIMIT 0,1");
-	if( query.first() )
-	{
-		rec = query.record();
-
-		ui.chkDbx_sdl_fullscreen->setChecked( query.value( rec.indexOf("sdl_fullscreen") ).toBool() );										// sdl_fullscreen
-		ui.chkDbx_sdl_fulldouble->setChecked(query.value( rec.indexOf("sdl_fulldouble") ).toBool() );										// sdl_fulldouble
-		ui.chkDbx_sdl_fullfixed->setChecked( query.value( rec.indexOf("sdl_fullfixed") ).toBool() );										// sdl_fullfixed
-		ui.cbxDbx_sdl_fullresolution->setCurrentIndex( ui.cbxDbx_sdl_fullresolution->findText( query.value( rec.indexOf("sdl_fullresolution" )).toString() ) );	// sdl_fullresolution
-		ui.cbxDbx_sdl_windowresolution->setCurrentIndex( ui.cbxDbx_sdl_windowresolution->findText( query.value( rec.indexOf("sdl_windowresolution") ).toString() ) );	// sdl_windowresolution
-		ui.cbxDbx_sdl_output->setCurrentIndex( ui.cbxDbx_sdl_output->findText( query.value( rec.indexOf("sdl_output") ).toString() ) );			// sdl_output
-		ui.cbxDbx_sdl_hwscale->setCurrentIndex( ui.cbxDbx_sdl_hwscale->findText( query.value( rec.indexOf("sdl_hwscale") ).toString() ) );			// sdl_hwscale
-		ui.chkDbx_sdl_autolock->setChecked( query.value( rec.indexOf("sdl_autolock") ).toBool() );											// sdl_autolock
-		ui.cbxDbx_sdl_sensitivity->setCurrentIndex( ui.cbxDbx_sdl_sensitivity->findText( query.value( rec.indexOf("sdl_sensitivity") ).toString() ) );		// sdl_sensitivity
-		ui.chkDbx_sdl_waitonerror->setChecked( query.value( rec.indexOf("sdl_waitonerror") ).toBool() );										// sdl_waitonerror
-// sdl_priority
-	QString sdl_priority_temp;
-	QStringList sdl_priority_templist;
-		sdl_priority_temp     = query.value( rec.indexOf("sdl_priority") ).toString();
-		sdl_priority_templist = sdl_priority_temp.split(",");
-		if( sdl_priority_templist.value(0) == "lower"  ) ui.rbtPrioridadBaja->setChecked(true);
-		if( sdl_priority_templist.value(0) == "normal" ) ui.rbtPrioridadNormal->setChecked(true);
-		if( sdl_priority_templist.value(0) == "higher" ) ui.rbtPrioridadAlta->setChecked(true);
-		if( sdl_priority_templist.value(0) == "highest") ui.rbtPrioridadMuyAlt->setChecked(true);
-		if( sdl_priority_templist.value(1) == "lower"  ) ui.rbtNoPrioridadBaja->setChecked(true);
-		if( sdl_priority_templist.value(1) == "normal" ) ui.rbtNoPrioridadNormal->setChecked(true);
-		if( sdl_priority_templist.value(1) == "higher" ) ui.rbtNoPrioridadAlta->setChecked(true);
-		if( sdl_priority_templist.value(1) == "highest") ui.rbtNoPrioridadMuyAlt->setChecked(true);
-
-		ui.txtDbx_sdl_mapperfile->setText( query.value( rec.indexOf("sdl_mapperfile") ).toString() );										// sdl_mapperfile
-		ui.chkDbx_sdl_usescancodes->setChecked( query.value( rec.indexOf("sdl_usescancodes") ).toBool() );										// sdl_usescancodes
-
-		ui.txtDbx_dosbox_language->setText( query.value( rec.indexOf("dosbox_language") ).toString() );										// dosbox_language
-		ui.cbxDbx_dosbox_machine->setCurrentIndex( ui.cbxDbx_dosbox_machine->findText( query.value( rec.indexOf("dosbox_machine") ).toString() ) );		// dosbox_machine
-		ui.txtDbx_dosbox_captures->setText( query.value( rec.indexOf("dosbox_captures") ).toString() );										// dosbox_captures
-		ui.cbxDbx_dosbox_memsize->setCurrentIndex( ui.cbxDbx_dosbox_memsize->findText( query.value( rec.indexOf("dosbox_memsize") ).toString() ) );		// dosbox_memsize
-
-		ui.cbxDbx_render_frameskip->setCurrentIndex( ui.cbxDbx_render_frameskip->findText( query.value( rec.indexOf("render_frameskip") ).toString() ));	// render_frameskip
-		ui.chkDbx_render_aspect->setChecked( query.value( rec.indexOf("render_aspect") ).toBool() );										// render_aspect
-		ui.cbxDbx_render_scaler->setCurrentIndex( ui.cbxDbx_render_scaler->findText( query.value( rec.indexOf("render_scaler") ).toString() ) );		// render_scaler
-
-		ui.cbxDbx_cpu_core->setCurrentIndex( ui.cbxDbx_cpu_core->findText( query.value( rec.indexOf("cpu_core") ).toString() ) );				// cpu_core
-		ui.cbxDbx_cpu_cycles->setCurrentIndex( ui.cbxDbx_cpu_cycles->findText( query.value( rec.indexOf("cpu_cycles") ).toString() ));			// cpu_cycles
-		ui.spinDbx_1->setValue( query.value( rec.indexOf("cpu_cycleup") ).toInt() );											// cpu_cycleup
-		ui.spinDbx_2->setValue( query.value( rec.indexOf("cpu_cycledown") ).toInt() );											// cpu_cycledown
-
-		ui.chkDbx_mixer_nosound->setChecked( query.value( rec.indexOf("mixer_nosound") ).toBool() );										// mixer_nosound
-		ui.cbxDbx_mixer_rate->setCurrentIndex( ui.cbxDbx_mixer_rate->findText( query.value( rec.indexOf("mixer_rate") ).toString() ));			// mixer_rate
-		ui.txtDbx_mixer_blocksize->setText( query.value( rec.indexOf("mixer_blocksize") ).toString() );										// mixer_blocksize
-		ui.txtDbx_mixer_prebuffer->setText( query.value( rec.indexOf("mixer_prebuffer") ).toString() );										// mixer_prebuffer
-
-		ui.cbxDbx_midi_mpu401->setCurrentIndex( ui.cbxDbx_midi_mpu401->findText( query.value( rec.indexOf("midi_mpu401") ).toString() ));			// midi_mpu401
-		ui.chkDbx_midi_intelligent->setChecked( query.value( rec.indexOf("midi_intelligent") ).toBool() );									// midi_intelligent
-		ui.cbxDbx_midi_device->setCurrentIndex( ui.cbxDbx_midi_device->findText( query.value( rec.indexOf("midi_device") ).toString() ));			// midi_device
-		ui.txtDbx_midi_config->setText( query.value( rec.indexOf("midi_config") ).toString() );											// midi_config
-		ui.cbxDbx_midi_mt32rate->setCurrentIndex( ui.cbxDbx_midi_mt32rate->findText( query.value( rec.indexOf("midi_mt32rate") ).toString() ));		// midi_mt32rate
-
-		ui.cbxDbx_sblaster_sbtype->setCurrentIndex( ui.cbxDbx_sblaster_sbtype->findText( query.value( rec.indexOf("sblaster_sbtype") ).toString() ));		// sblaster_sbtype
-		ui.cbxDbx_sblaster_sbbase->setCurrentIndex( ui.cbxDbx_sblaster_sbbase->findText( query.value( rec.indexOf("sblaster_sbbase") ).toString() ));		// sblaster_sbbase
-		ui.cbxDbx_sblaster_irq->setCurrentIndex( ui.cbxDbx_sblaster_irq->findText( query.value( rec.indexOf("sblaster_irq") ).toString() ));		// sblaster_irq
-		ui.cbxDbx_sblaster_dma->setCurrentIndex( ui.cbxDbx_sblaster_dma->findText( query.value( rec.indexOf("sblaster_dma") ).toString() ));		// sblaster_dma
-		ui.cbxDbx_sblaster_hdma->setCurrentIndex( ui.cbxDbx_sblaster_hdma->findText( query.value( rec.indexOf("sblaster_hdma") ).toString() ));		// sblaster_hdma
-		ui.chkDbx_sblaster_mixer->setChecked( query.value( rec.indexOf("sblaster_mixer") ).toBool() );										// sblaster_mixer
-		ui.cbxDbx_sblaster_oplmode->setCurrentIndex( ui.cbxDbx_sblaster_oplmode->findText( query.value( rec.indexOf("sblaster_oplmode") ).toString() ));	// sblaster_oplmode
-		ui.cbxDbx_sblaster_oplrate->setCurrentIndex( ui.cbxDbx_sblaster_oplrate->findText( query.value( rec.indexOf("sblaster_oplrate") ).toString() ));	// sblaster_oplrate
-
-		ui.chkDbx_gus_gus->setChecked( query.value( rec.indexOf("gus_gus") ).toBool() );												// gus_gus
-		ui.cbxDbx_gus_gusrate->setCurrentIndex( ui.cbxDbx_gus_gusrate->findText( query.value( rec.indexOf("gus_gusrate") ).toString() ));			// gus_gusrate
-		ui.cbxDbx_gus_gusbase->setCurrentIndex( ui.cbxDbx_gus_gusbase->findText( query.value( rec.indexOf("gus_gusbase") ).toString() ));			// gus_gusbase
-		ui.cbxDbx_gus_irq1->setCurrentIndex( ui.cbxDbx_gus_irq1->findText( query.value( rec.indexOf("gus_irq1") ).toString() ));			// gus_irq1
-		ui.cbxDbx_gus_irq2->setCurrentIndex( ui.cbxDbx_gus_irq2->findText( query.value( rec.indexOf("gus_irq2") ).toString() ));			// gus_irq2
-		ui.cbxDbx_gus_dma1->setCurrentIndex( ui.cbxDbx_gus_dma1->findText( query.value( rec.indexOf("gus_dma1") ).toString() ));			// gus_dma1
-		ui.cbxDbx_gus_dma2->setCurrentIndex( ui.cbxDbx_gus_dma2->findText( query.value( rec.indexOf("gus_dma2") ).toString() ));			// gus_dma2
-		ui.txtDbx_gus_ultradir->setText( query.value( rec.indexOf("gus_ultradir") ).toString() );											// gus_ultradir
-
-		ui.chkDbx_speaker_pcspeaker->setChecked( query.value( rec.indexOf("speaker_pcspeaker") ).toBool() );									// speaker_pcspeaker
-		ui.cbxDbx_speaker_pcrate->setCurrentIndex( ui.cbxDbx_speaker_pcrate->findText( query.value( rec.indexOf("speaker_pcrate") ).toString() ));		// speaker_pcrate
-		ui.cbxDbx_speaker_tandy->setCurrentIndex( ui.cbxDbx_speaker_tandy->findText( query.value( rec.indexOf("speaker_tandy") ).toString() ));		// speaker_tandy
-		ui.cbxDbx_speaker_tandyrate->setCurrentIndex( ui.cbxDbx_speaker_tandyrate->findText( query.value( rec.indexOf("speaker_tandyrate") ).toString() ));	// speaker_tandyrate
-		ui.chkDbx_speaker_disney->setChecked( query.value( rec.indexOf("speaker_disney") ).toBool() );										// speaker_disney
-
-		ui.cbxDbx_joystick_type->setCurrentIndex( ui.cbxDbx_joystick_type->findText( query.value( rec.indexOf("joystick_type") ).toString() ));		// joystick_type
-		ui.chkDbx_joystick_timed->setChecked( query.value( rec.indexOf("joystick_timed") ).toBool() );										// joystick_timed
-		ui.chkDbx_joystick_autofire->setChecked( query.value( rec.indexOf("joystick_autofire") ).toBool() );									// joystick_autofire
-		ui.chkDbx_joystick_swap34->setChecked( query.value( rec.indexOf("joystick_swap34") ).toBool() );										// joystick_swap34
-		ui.chkDbx_joystick_buttonwrap->setChecked( query.value( rec.indexOf("joystick_buttonwrap") ).toBool() );									// joystick_buttonwrap
-
-		ui.chkDbx_modem_modem->setChecked( query.value( rec.indexOf("modem_modem") ).toBool() );											// modem_modem
-		ui.cbxDbx_modem_comport->setCurrentIndex( query.value( rec.indexOf("modem_comport") ).toInt()-1 );									// modem_comport
-		ui.txtDbx_modem_listenport->setText( query.value( rec.indexOf("modem_listenport") ).toString() );										// modem_listenport
-
-		ui.chkDbx_dserial_directserial->setChecked( query.value( rec.indexOf("dserial_directserial") ).toBool() );								// dserial_directserial
-		ui.cbxDbx_dserial_comport->setCurrentIndex( ui.cbxDbx_dserial_comport->findText( query.value( rec.indexOf("dserial_comport") ).toString() ));		// dserial_comport
-		ui.cbxDbx_dserial_realport->setCurrentIndex( ui.cbxDbx_dserial_realport->findText( query.value( rec.indexOf("dserial_realport") ).toString() ));	// serial_realport
-		ui.cbxDbx_dserial_defaultbps->setCurrentIndex( ui.cbxDbx_dserial_defaultbps->findText( query.value( rec.indexOf("dserial_defaultbps") ).toString() ));	// dserial_defaultbps
-		ui.cbxDbx_dserial_parity->setCurrentIndex( ui.cbxDbx_dserial_parity->findText( query.value( rec.indexOf("dserial_parity") ).toString() ));		// dserial_parity
-		ui.cbxDbx_dserial_bytesize->setCurrentIndex( ui.cbxDbx_dserial_bytesize->findText( query.value( rec.indexOf("dserial_bytesize") ).toString() ));	// dserial_bytesize
-		ui.cbxDbx_dserial_stopbit->setCurrentIndex( ui.cbxDbx_dserial_stopbit->findText( query.value( rec.indexOf("dserial_stopbit") ).toString() ));		// dserial_stopbit
-		ui.txtDbx_serial_1->setText( query.value( rec.indexOf("serial_1") ).toString() );												// serial_1
-		ui.txtDbx_serial_2->setText( query.value( rec.indexOf("serial_2") ).toString() );												// serial_2
-		ui.txtDbx_serial_3->setText( query.value( rec.indexOf("serial_3") ).toString() );												// serial_3
-		ui.txtDbx_serial_4->setText( query.value( rec.indexOf("serial_4") ).toString() );												// serial_4
-
-		ui.chkDbx_dos_xms->setChecked( query.value( rec.indexOf("dos_xms") ).toBool() );												// dos_xms
-		ui.chkDbx_dos_ems->setChecked( query.value( rec.indexOf("dos_ems") ).toBool() );												// dos_ems
-		ui.cbxDbx_dos_umb->setCurrentIndex( ui.cbxDbx_dos_umb->findText( query.value( rec.indexOf("dos_umb") ).toString() ));				// dos_umb
-		ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( ui.cbxDbx_dos_keyboardlayout->findText( query.value( rec.indexOf("dos_keyboardlayout") ).toString() ));	// dos_keyboardlayout
-
-		ui.chkDbx_ipx_ipx->setChecked( query.value( rec.indexOf("ipx_ipx") ).toBool() );												// ipx_ipx
-
-		ui.txtDbx_Autoexec->setText(query.value( rec.indexOf("autoexec") ).toString() );										// autoexec
-		ui.chkDbx_autoexec->setChecked( query.value( rec.indexOf("opt_autoexec") ).toBool() );										// opt_autoexec
-
-		ui.chkDbx_loadfix->setChecked( query.value( rec.indexOf("opt_loadfix") ).toBool() );											// opt_loadfix
-		ui.txtDbx_loadfix_mem->setText( query.value( rec.indexOf("opt_loadfix_mem") ).toString()  );										// opt_loadfix_mem
-		ui.chkDbx_consola_dbox->setChecked( query.value( rec.indexOf("opt_consola_dbox") ).toBool() );										// opt_consola_dbox
-		ui.chkDbx_cerrar_dbox->setChecked( query.value( rec.indexOf("opt_cerrar_dbox") ).toBool() );										// opt_cerrar_dbox
-		ui.chkDbx_cycle_sincronizar->setChecked( query.value( rec.indexOf("opt_cycle_sincronizar") ).toBool() );								// opt_cycle_sincronizar
-
-		ui.txtDbx_path_conf->setText( query.value( rec.indexOf("path_conf") ).toString() );												// path_conf
-		ui.txtDbx_path_sonido->setText( query.value( rec.indexOf("path_sonido") ).toString());											// path_sonido
-		ui.txtDbx_path_exe->setText( query.value( rec.indexOf("path_exe") ).toString() );												// path_exe
-		ui.txtDbx_path_setup->setText( query.value( rec.indexOf("path_setup") ).toString() );											// path_setup
-		ui.txtDbx_parametros_exe->setText( query.value( rec.indexOf("parametros_exe") ).toString() );										// parametros_exe
-		ui.txtDbx_parametros_setup->setText( query.value( rec.indexOf("parametros_setup") ).toString() );										// parametros_setup
-	}
-}
-
 void frmAddEditJuego::on_setProfileGame(const QString ProfileGame)
 {
-	if(!ProfileGame.isEmpty() || ProfileGame!="<defecto>")
+	CargarDatosDosBox("null", ProfileGame, true);
+}
+
+void frmAddEditJuego::CargarDatosDosBox(QString stIDdbx, const QString ProfileGame, bool isProfileGame)
+{
+	QStringList  sdl_priority_templist; //, str_Lista;
+	QString strProfile; //, tipoDrive, temp_opt_mount;
+	QHash<QString, QString> strDatosDosBox;
+
+	strDatosDosBox.clear();
+	if( stIDdbx=="null" && isProfileGame )
 	{
-		QStringList str_Lista, sdl_priority_templist;
-		QString strProfile, tipoDrive, temp_opt_mount;
-
-		strProfile.clear();
-		strProfile = stHomeDir + "templates/" + ProfileGame + ".prof";
-
-		TempProfileDosBox.clear();
-		TempProfileDosBox = fGrl.Importar_Profile_DFend( strProfile );
-
-		ui.chkDbx_sdl_fullscreen->setChecked( fGrl.StrToBool( TempProfileDosBox["sdl_fullscreen"] ) );												// sdl_fullscreen
-		ui.chkDbx_sdl_fulldouble->setChecked( fGrl.StrToBool( TempProfileDosBox["sdl_fulldouble"] ) );												// sdl_fulldouble
-		ui.chkDbx_sdl_fullfixed->setChecked( fGrl.StrToBool( TempProfileDosBox["sdl_fullfixed"] ) );												// sdl_fullfixed
-		ui.cbxDbx_sdl_fullresolution->setCurrentIndex( ui.cbxDbx_sdl_fullresolution->findText( TempProfileDosBox["sdl_fullresolution"] ) );			// sdl_fullresolution
-		ui.cbxDbx_sdl_windowresolution->setCurrentIndex( ui.cbxDbx_sdl_windowresolution->findText( TempProfileDosBox["sdl_windowresolution"] ) );	// sdl_windowresolution
-		ui.cbxDbx_sdl_output->setCurrentIndex( ui.cbxDbx_sdl_output->findText( TempProfileDosBox["sdl_output"] ) );									// sdl_output
-		ui.cbxDbx_sdl_hwscale->setCurrentIndex( ui.cbxDbx_sdl_hwscale->findText( TempProfileDosBox["sdl_hwscale"] ) );								// sdl_hwscale
-		ui.chkDbx_sdl_autolock->setChecked( fGrl.StrToBool( TempProfileDosBox["sdl_autolock"] ) );													// sdl_autolock
-		ui.cbxDbx_sdl_sensitivity->setCurrentIndex( ui.cbxDbx_sdl_sensitivity->findText( TempProfileDosBox["sdl_sensitivity"] ) );					// sdl_sensitivity
-		ui.chkDbx_sdl_waitonerror->setChecked( fGrl.StrToBool( TempProfileDosBox["sdl_waitonerror"] ) );											// sdl_waitonerror
-
-		sdl_priority_templist.clear();
-		sdl_priority_templist = TempProfileDosBox["sdl_priority"].split(",");
-		if( sdl_priority_templist.value(0) == "lower"  ) ui.rbtPrioridadBaja->setChecked(true);		// sdl_priority
-		if( sdl_priority_templist.value(0) == "normal" ) ui.rbtPrioridadNormal->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(0) == "higher" ) ui.rbtPrioridadAlta->setChecked(true);		// sdl_priority
-		if( sdl_priority_templist.value(0) == "highest") ui.rbtPrioridadMuyAlt->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(1) == "lower"  ) ui.rbtNoPrioridadBaja->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(1) == "normal" ) ui.rbtNoPrioridadNormal->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(1) == "higher" ) ui.rbtNoPrioridadAlta->setChecked(true);	// sdl_priority
-		if( sdl_priority_templist.value(1) == "highest") ui.rbtNoPrioridadMuyAlt->setChecked(true);	// sdl_priority
-	
-		ui.txtDbx_sdl_mapperfile->setText( TempProfileDosBox["sdl_mapperfile"] );														// sdl_mapperfile
-		ui.chkDbx_sdl_usescancodes->setChecked( fGrl.StrToBool( TempProfileDosBox["sdl_usescancodes"] ) );								// sdl_usescancodes
-	
-		ui.txtDbx_dosbox_language->setText( TempProfileDosBox["dosbox_language"] );														// dosbox_language
-		ui.cbxDbx_dosbox_machine->setCurrentIndex( ui.cbxDbx_dosbox_machine->findText( TempProfileDosBox["dosbox_machine"] ) );			// dosbox_machine
-		ui.txtDbx_dosbox_captures->setText( TempProfileDosBox["dosbox_captures"] );														// dosbox_captures
-	
-		ui.cbxDbx_dosbox_memsize->setEditText( TempProfileDosBox["dosbox_memsize"] );
-	
-		ui.cbxDbx_render_frameskip->setCurrentIndex( ui.cbxDbx_render_frameskip->findText( TempProfileDosBox["render_frameskip"] ) );	// render_frameskip
-		ui.chkDbx_render_aspect->setChecked( fGrl.StrToBool( TempProfileDosBox["render_aspect"] ) );									// render_aspect
-		ui.cbxDbx_render_scaler->setCurrentIndex( ui.cbxDbx_render_scaler->findText( TempProfileDosBox["render_scaler"] ) );			// render_scaler
-	
-		ui.cbxDbx_cpu_core->setCurrentIndex( ui.cbxDbx_cpu_core->findText( TempProfileDosBox["cpu_core"] ) );							// cpu_core
-		ui.cbxDbx_cpu_cycles->setCurrentIndex( ui.cbxDbx_cpu_cycles->findText( TempProfileDosBox["cpu_cycles"] ) );						// cpu_cycles
-		ui.spinDbx_1->setValue( fGrl.StrToInt( TempProfileDosBox["cpu_cycleup"] ) );													// cpu_cycleup
-		ui.spinDbx_2->setValue( fGrl.StrToInt( TempProfileDosBox["cpu_cycledown"] ) );													// cpu_cycledown
-	
-		ui.chkDbx_mixer_nosound->setChecked( fGrl.StrToBool( TempProfileDosBox["mixer_nosound"] ) );									// mixer_nosound
-		ui.cbxDbx_mixer_rate->setCurrentIndex( ui.cbxDbx_mixer_rate->findText( TempProfileDosBox["mixer_rate"] ) );						// mixer_rate
-		ui.txtDbx_mixer_blocksize->setText( TempProfileDosBox["mixer_blocksize"] );														// mixer_blocksize
-		ui.txtDbx_mixer_prebuffer->setText( TempProfileDosBox["mixer_prebuffer"] );														// mixer_prebuffer
-	
-		ui.cbxDbx_midi_mpu401->setCurrentIndex( ui.cbxDbx_midi_mpu401->findText( TempProfileDosBox["midi_mpu401"] ) );					// midi_mpu401
-		ui.chkDbx_midi_intelligent->setChecked( fGrl.StrToBool( TempProfileDosBox["midi_intelligent"] ) );								// midi_intelligent
-		ui.cbxDbx_midi_device->setCurrentIndex( ui.cbxDbx_midi_device->findText( TempProfileDosBox["midi_device"] ) );					// midi_device
-		ui.txtDbx_midi_config->setText( TempProfileDosBox["midi_config"] );																// midi_config
-		ui.cbxDbx_midi_mt32rate->setCurrentIndex( ui.cbxDbx_midi_mt32rate->findText( TempProfileDosBox["midi_mt32rate"] ) );				// midi_mt32rate
-	
-		ui.cbxDbx_sblaster_sbtype->setCurrentIndex( ui.cbxDbx_sblaster_sbtype->findText( TempProfileDosBox["sblaster_sbtype"] ) );		// sblaster_sbtype
-		ui.cbxDbx_sblaster_sbbase->setCurrentIndex( ui.cbxDbx_sblaster_sbbase->findText( TempProfileDosBox["sblaster_sbbase"] ) );		// sblaster_sbbase
-		ui.cbxDbx_sblaster_irq->setCurrentIndex( ui.cbxDbx_sblaster_irq->findText( TempProfileDosBox["sblaster_irq"] ) );				// sblaster_irq
-		ui.cbxDbx_sblaster_dma->setCurrentIndex( ui.cbxDbx_sblaster_dma->findText( TempProfileDosBox["sblaster_dma"] ) );				// sblaster_dma
-		ui.cbxDbx_sblaster_hdma->setCurrentIndex( ui.cbxDbx_sblaster_hdma->findText( TempProfileDosBox["sblaster_hdma"] ) );				// sblaster_hdma
-		ui.chkDbx_sblaster_mixer->setChecked( fGrl.StrToBool( TempProfileDosBox["sblaster_mixer"] ) );									// sblaster_mixer
-		ui.cbxDbx_sblaster_oplmode->setCurrentIndex( ui.cbxDbx_sblaster_oplmode->findText( TempProfileDosBox["sblaster_oplmode"] ) );	// sblaster_oplmode
-		ui.cbxDbx_sblaster_oplrate->setCurrentIndex( ui.cbxDbx_sblaster_oplrate->findText( TempProfileDosBox["sblaster_oplrate"] ) );	// sblaster_oplrate
-	
-		ui.chkDbx_gus_gus->setChecked( fGrl.StrToBool( TempProfileDosBox["gus_gus"] ) );												// gus_gus
-		ui.cbxDbx_gus_gusrate->setCurrentIndex( ui.cbxDbx_gus_gusrate->findText( TempProfileDosBox["gus_gusrate"] ) );					// gus_gusrate
-		ui.cbxDbx_gus_gusbase->setCurrentIndex( ui.cbxDbx_gus_gusbase->findText( TempProfileDosBox["gus_gusbase"] ) );					// gus_gusbase
-		ui.cbxDbx_gus_irq1->setCurrentIndex( ui.cbxDbx_gus_irq1->findText( TempProfileDosBox["gus_irq1"] ) );							// gus_irq1
-		ui.cbxDbx_gus_irq2->setCurrentIndex( ui.cbxDbx_gus_irq2->findText( TempProfileDosBox["gus_irq2"] ) );							// gus_irq2
-		ui.cbxDbx_gus_dma1->setCurrentIndex( ui.cbxDbx_gus_dma1->findText( TempProfileDosBox["gus_dma1"] ) );							// gus_dma1
-		ui.cbxDbx_gus_dma2->setCurrentIndex( ui.cbxDbx_gus_dma2->findText( TempProfileDosBox["gus_dma2"] ) );							// gus_dma2
-		ui.txtDbx_gus_ultradir->setText( TempProfileDosBox["gus_ultradir"] );															// gus_ultradir
-	
-		ui.chkDbx_speaker_pcspeaker->setChecked( fGrl.StrToBool( TempProfileDosBox["speaker_pcspeaker"] ) );							// speaker_pcspeaker
-		ui.cbxDbx_speaker_pcrate->setCurrentIndex( ui.cbxDbx_speaker_pcrate->findText( TempProfileDosBox["speaker_pcrate"] ) );			// speaker_pcrate
-		ui.cbxDbx_speaker_tandy->setCurrentIndex( ui.cbxDbx_speaker_tandy->findText( TempProfileDosBox["speaker_tandy"] ) );			// speaker_tandy
-		ui.cbxDbx_speaker_tandyrate->setCurrentIndex( ui.cbxDbx_speaker_tandyrate->findText( TempProfileDosBox["speaker_tandyrate"] ) );// speaker_tandyrate
-		ui.chkDbx_speaker_disney->setChecked( fGrl.StrToBool( TempProfileDosBox["speaker_disney"] ) );									// speaker_disney
-	
-		ui.cbxDbx_joystick_type->setCurrentIndex( ui.cbxDbx_joystick_type->findText( TempProfileDosBox["joystick_type"] ) );			// joystick_type
-		ui.chkDbx_joystick_timed->setChecked( fGrl.StrToBool( TempProfileDosBox["joystick_timed"] ) );									// joystick_timed
-		ui.chkDbx_joystick_autofire->setChecked( fGrl.StrToBool( TempProfileDosBox["joystick_autofire"] ) );							// joystick_autofire
-		ui.chkDbx_joystick_swap34->setChecked( fGrl.StrToBool( TempProfileDosBox["joystick_swap34"] ) );								// joystick_swap34
-		ui.chkDbx_joystick_buttonwrap->setChecked( fGrl.StrToBool( TempProfileDosBox["joystick_buttonwrap"] ) );						// joystick_buttonwrap
-	
-		ui.chkDbx_modem_modem->setChecked( fGrl.StrToBool( TempProfileDosBox["modem_modem"] ) );										// modem_modem
-		ui.cbxDbx_modem_comport->setCurrentIndex( fGrl.StrToInt( TempProfileDosBox["modem_comport"] )-1 );								// modem_comport
-		ui.txtDbx_modem_listenport->setText( TempProfileDosBox["modem_listenport"] );													// modem_listenport
-	
-		ui.chkDbx_dserial_directserial->setChecked( fGrl.StrToBool( TempProfileDosBox["dserial_directserial"] ) );						// dserial_directserial
-		ui.cbxDbx_dserial_comport->setCurrentIndex( ui.cbxDbx_dserial_comport->findText( TempProfileDosBox["dserial_comport"] ) );		// dserial_comport
-		ui.cbxDbx_dserial_realport->setCurrentIndex( ui.cbxDbx_dserial_realport->findText( TempProfileDosBox["dserial_realport"] ) );	// serial_realport
-		ui.cbxDbx_dserial_defaultbps->setCurrentIndex( ui.cbxDbx_dserial_defaultbps->findText( TempProfileDosBox["dserial_defaultbps"] ) );	// dserial_defaultbps
-		ui.cbxDbx_dserial_parity->setCurrentIndex( ui.cbxDbx_dserial_parity->findText( TempProfileDosBox["dserial_parity"] ) );			// dserial_parity
-		ui.cbxDbx_dserial_bytesize->setCurrentIndex( ui.cbxDbx_dserial_bytesize->findText( TempProfileDosBox["dserial_bytesize"] ) );	// dserial_bytesize
-		ui.cbxDbx_dserial_stopbit->setCurrentIndex( ui.cbxDbx_dserial_stopbit->findText( TempProfileDosBox["dserial_stopbit"] ) );		// dserial_stopbit
-		ui.txtDbx_serial_1->setText( TempProfileDosBox["serial_1"] );	// serial_1
-		ui.txtDbx_serial_2->setText( TempProfileDosBox["serial_2"] );	// serial_2
-		ui.txtDbx_serial_3->setText( TempProfileDosBox["serial_3"] );	// serial_3
-		ui.txtDbx_serial_4->setText( TempProfileDosBox["serial_4"] );	// serial_4
-	
-		ui.chkDbx_dos_xms->setChecked( fGrl.StrToBool( TempProfileDosBox["dos_xms"] ) );						// dos_xms
-		ui.chkDbx_dos_ems->setChecked( fGrl.StrToBool( TempProfileDosBox["dos_ems"] ) );						// dos_ems
-		ui.cbxDbx_dos_umb->setCurrentIndex( ui.cbxDbx_dos_umb->findText( TempProfileDosBox["dos_umb"] ) );		// dos_umb
-		ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( ui.cbxDbx_dos_keyboardlayout->findText( TempProfileDosBox["dos_keyboardlayout"] ) );	// dos_keyboardlayout
-	
-		ui.chkDbx_ipx_ipx->setChecked( fGrl.StrToBool( TempProfileDosBox["ipx_ipx"] ) );							// ipx_ipx
-	
-		ui.txtDbx_Autoexec->setText(TempProfileDosBox["autoexec"] );												// autoexec
-		ui.chkDbx_autoexec->setChecked( fGrl.StrToBool( TempProfileDosBox["opt_autoexec"] ) );						// opt_autoexec
-	
-		ui.chkDbx_loadfix->setChecked( fGrl.StrToBool( TempProfileDosBox["opt_loadfix"] ) );						// opt_loadfix
-		ui.txtDbx_loadfix_mem->setText( TempProfileDosBox["opt_loadfix_mem"]  );									// opt_loadfix_mem
-		ui.chkDbx_consola_dbox->setChecked( fGrl.StrToBool( TempProfileDosBox["opt_consola_dbox"] ) );				// opt_consola_dbox
-		ui.chkDbx_cerrar_dbox->setChecked( fGrl.StrToBool( TempProfileDosBox["opt_cerrar_dbox"] ) );				// opt_cerrar_dbox
-		ui.chkDbx_cycle_sincronizar->setChecked( fGrl.StrToBool( TempProfileDosBox["opt_cycle_sincronizar"] ) );	// opt_cycle_sincronizar
-	
-		//ui.txtDbx_path_conf->setText( TempProfileDosBox["path_conf"] );					// path_conf
-		ui.txtDbx_path_sonido->setText( TempProfileDosBox["path_sonido"]);					// path_sonido
-
-		if( !TempProfileDosBox["path_exe"].isEmpty() )
-			ui.txtDbx_path_exe->setText( TempProfileDosBox["path_exe"] );					// path_exe
-
-		if( !TempProfileDosBox["path_setup"].isEmpty() )
-			ui.txtDbx_path_setup->setText( TempProfileDosBox["path_setup"] );				// path_setup
-
-		ui.txtDbx_parametros_exe->setText( TempProfileDosBox["parametros_exe"] );			// parametros_exe
-		ui.txtDbx_parametros_setup->setText( TempProfileDosBox["parametros_setup"] );		// parametros_setup
-
-		ui.twMontajes->clear();		
-		ui.btnMount_AutoCrear->click();
-/*
-		int num_mounts = fGrl.StrToInt( TempProfileDosBox["NrOfMounts"] );
-		if( num_mounts > 0 )
+		if(!ProfileGame.isEmpty() || ProfileGame!="<defecto>")
 		{
-			for(int i=0; i < num_mounts ; i++)
-			{
-				QTreeWidgetItem *twItemDfend = new QTreeWidgetItem(ui.twMontajes);
-	
-				str_Lista.clear();
-				str_Lista = TempProfileDosBox[fGrl.IntToStr(i)].split("|");
-	
-				tipoDrive.clear();
-				tipoDrive = str_Lista.value(1).toLower();// tipo_as
-	
-				if(tipoDrive=="drive")
-				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/drive_hd.png") );
-					tipoDrive = "drive";
-				}
-				if(tipoDrive=="cdrom")
-				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
-					tipoDrive = "cdrom";
-				}
-				if(tipoDrive=="floppy")
-				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
-					tipoDrive = "floppy";
-				}
-				if(tipoDrive=="floppyimage")
-				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/floppy_1.png") );
-					tipoDrive = "IMG_floppy";
-				}
-				if(tipoDrive=="cdromimage")
-				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/cd_iso.png") );
-					tipoDrive = "IMG_iso";
-				}
-				if(tipoDrive=="image")
-				{
-					twItemDfend->setIcon(0, QIcon(":/img16/drive_hd.png") );
-					tipoDrive = "IMG_hdd";
-				}
-				temp_opt_mount.clear();
-				temp_opt_mount = str_Lista.value(5);
-	
-				twItemDfend->setText(0, ""+str_Lista.value(0) ); // path
-				twItemDfend->setText(1, ""+str_Lista.value(4) ); // label
-				twItemDfend->setText(2, ""+tipoDrive          ); // tipo_as
-				twItemDfend->setText(3, ""+str_Lista.value(2) ); // letter
-				twItemDfend->setText(4, ""+fGrl.IntToStr(i)   ); // indx_cd
-				twItemDfend->setText(5, ""+temp_opt_mount     ); // opt_mount
-				twItemDfend->setText(6, ""+str_Lista.value(3) ); // io_ctrl
-				twItemDfend->setText(7, "x"                   ); // select_mount
-			}
-			QHash<QString, QString> datos_montaje;
-			datos_montaje.clear();
-			datos_montaje["path_exe"]        = ui.txtDbx_path_exe->text();
-			datos_montaje["parametros_exe"]  = ui.txtDbx_parametros_exe->text();
-			datos_montaje["opt_loadfix_mem"] = ui.txtDbx_loadfix_mem->text();
-			if(ui.chkDbx_loadfix->isChecked())
-				datos_montaje["opt_loadfix"] = "true"; else datos_montaje["opt_loadfix"] = "false";
-			if(ui.chkDbx_cerrar_dbox->isChecked())
-				datos_montaje["opt_cerrar_dbox"] = "true"; else datos_montaje["opt_cerrar_dbox"] = "false";
+			strProfile.clear();
+			strProfile = stHomeDir + "templates/" + ProfileGame + ".prof";
 
-			ui.previer_mount->clear();
-			ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
+			strDatosDosBox = fGrl.Importar_Profile_DFend( strProfile );
 		}
-*/
+	} else
+		strDatosDosBox = sql->showConfg_DOSBox( stIDdbx );
+
+	ui.chkDbx_sdl_fullscreen->setChecked( fGrl.StrToBool( strDatosDosBox["sdl_fullscreen"] ) );												// sdl_fullscreen
+	ui.chkDbx_sdl_fulldouble->setChecked( fGrl.StrToBool( strDatosDosBox["sdl_fulldouble"] ) );												// sdl_fulldouble
+	ui.chkDbx_sdl_fullfixed->setChecked( fGrl.StrToBool( strDatosDosBox["sdl_fullfixed"] ) );												// sdl_fullfixed
+	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( ui.cbxDbx_sdl_fullresolution->findText( strDatosDosBox["sdl_fullresolution"] ) );			// sdl_fullresolution
+	ui.cbxDbx_sdl_windowresolution->setCurrentIndex( ui.cbxDbx_sdl_windowresolution->findText( strDatosDosBox["sdl_windowresolution"] ) );	// sdl_windowresolution
+	ui.cbxDbx_sdl_output->setCurrentIndex( ui.cbxDbx_sdl_output->findText( strDatosDosBox["sdl_output"] ) );									// sdl_output
+	ui.cbxDbx_sdl_hwscale->setCurrentIndex( ui.cbxDbx_sdl_hwscale->findText( strDatosDosBox["sdl_hwscale"] ) );								// sdl_hwscale
+	ui.chkDbx_sdl_autolock->setChecked( fGrl.StrToBool( strDatosDosBox["sdl_autolock"] ) );													// sdl_autolock
+	ui.cbxDbx_sdl_sensitivity->setCurrentIndex( ui.cbxDbx_sdl_sensitivity->findText( strDatosDosBox["sdl_sensitivity"] ) );					// sdl_sensitivity
+	ui.chkDbx_sdl_waitonerror->setChecked( fGrl.StrToBool( strDatosDosBox["sdl_waitonerror"] ) );											// sdl_waitonerror
+
+	sdl_priority_templist.clear();
+	sdl_priority_templist = strDatosDosBox["sdl_priority"].split(",");
+	if( sdl_priority_templist.value(0) == "lower"  ) ui.rbtPrioridadBaja->setChecked(true);		// sdl_priority
+	if( sdl_priority_templist.value(0) == "normal" ) ui.rbtPrioridadNormal->setChecked(true);	// sdl_priority
+	if( sdl_priority_templist.value(0) == "higher" ) ui.rbtPrioridadAlta->setChecked(true);		// sdl_priority
+	if( sdl_priority_templist.value(0) == "highest") ui.rbtPrioridadMuyAlt->setChecked(true);	// sdl_priority
+	if( sdl_priority_templist.value(1) == "lower"  ) ui.rbtNoPrioridadBaja->setChecked(true);	// sdl_priority
+	if( sdl_priority_templist.value(1) == "normal" ) ui.rbtNoPrioridadNormal->setChecked(true);	// sdl_priority
+	if( sdl_priority_templist.value(1) == "higher" ) ui.rbtNoPrioridadAlta->setChecked(true);	// sdl_priority
+	if( sdl_priority_templist.value(1) == "highest") ui.rbtNoPrioridadMuyAlt->setChecked(true);	// sdl_priority
+
+	ui.txtDbx_sdl_mapperfile->setText( strDatosDosBox["sdl_mapperfile"] );														// sdl_mapperfile
+	ui.chkDbx_sdl_usescancodes->setChecked( fGrl.StrToBool( strDatosDosBox["sdl_usescancodes"] ) );								// sdl_usescancodes
+
+	ui.txtDbx_dosbox_language->setText( strDatosDosBox["dosbox_language"] );														// dosbox_language
+	ui.cbxDbx_dosbox_machine->setCurrentIndex( ui.cbxDbx_dosbox_machine->findText( strDatosDosBox["dosbox_machine"] ) );			// dosbox_machine
+	ui.txtDbx_dosbox_captures->setText( strDatosDosBox["dosbox_captures"] );														// dosbox_captures
+	ui.cbxDbx_dosbox_memsize->setEditText( strDatosDosBox["dosbox_memsize"] );
+
+	ui.cbxDbx_render_frameskip->setCurrentIndex( ui.cbxDbx_render_frameskip->findText( strDatosDosBox["render_frameskip"] ) );	// render_frameskip
+	ui.chkDbx_render_aspect->setChecked( fGrl.StrToBool( strDatosDosBox["render_aspect"] ) );									// render_aspect
+	ui.cbxDbx_render_scaler->setCurrentIndex( ui.cbxDbx_render_scaler->findText( strDatosDosBox["render_scaler"] ) );			// render_scaler
+
+	ui.cbxDbx_cpu_core->setCurrentIndex( ui.cbxDbx_cpu_core->findText( strDatosDosBox["cpu_core"] ) );							// cpu_core
+	ui.cbxDbx_cpu_cycles->setCurrentIndex( ui.cbxDbx_cpu_cycles->findText( strDatosDosBox["cpu_cycles"] ) );						// cpu_cycles
+	ui.spinDbx_1->setValue( fGrl.StrToInt( strDatosDosBox["cpu_cycleup"] ) );													// cpu_cycleup
+	ui.spinDbx_2->setValue( fGrl.StrToInt( strDatosDosBox["cpu_cycledown"] ) );													// cpu_cycledown
+
+	ui.chkDbx_mixer_nosound->setChecked( fGrl.StrToBool( strDatosDosBox["mixer_nosound"] ) );									// mixer_nosound
+	ui.cbxDbx_mixer_rate->setCurrentIndex( ui.cbxDbx_mixer_rate->findText( strDatosDosBox["mixer_rate"] ) );						// mixer_rate
+	ui.txtDbx_mixer_blocksize->setText( strDatosDosBox["mixer_blocksize"] );														// mixer_blocksize
+	ui.txtDbx_mixer_prebuffer->setText( strDatosDosBox["mixer_prebuffer"] );														// mixer_prebuffer
+
+	ui.cbxDbx_midi_mpu401->setCurrentIndex( ui.cbxDbx_midi_mpu401->findText( strDatosDosBox["midi_mpu401"] ) );					// midi_mpu401
+	ui.chkDbx_midi_intelligent->setChecked( fGrl.StrToBool( strDatosDosBox["midi_intelligent"] ) );								// midi_intelligent
+	ui.cbxDbx_midi_device->setCurrentIndex( ui.cbxDbx_midi_device->findText( strDatosDosBox["midi_device"] ) );					// midi_device
+	ui.txtDbx_midi_config->setText( strDatosDosBox["midi_config"] );																// midi_config
+	ui.cbxDbx_midi_mt32rate->setCurrentIndex( ui.cbxDbx_midi_mt32rate->findText( strDatosDosBox["midi_mt32rate"] ) );				// midi_mt32rate
+
+	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( ui.cbxDbx_sblaster_sbtype->findText( strDatosDosBox["sblaster_sbtype"] ) );		// sblaster_sbtype
+	ui.cbxDbx_sblaster_sbbase->setCurrentIndex( ui.cbxDbx_sblaster_sbbase->findText( strDatosDosBox["sblaster_sbbase"] ) );		// sblaster_sbbase
+	ui.cbxDbx_sblaster_irq->setCurrentIndex( ui.cbxDbx_sblaster_irq->findText( strDatosDosBox["sblaster_irq"] ) );				// sblaster_irq
+	ui.cbxDbx_sblaster_dma->setCurrentIndex( ui.cbxDbx_sblaster_dma->findText( strDatosDosBox["sblaster_dma"] ) );				// sblaster_dma
+	ui.cbxDbx_sblaster_hdma->setCurrentIndex( ui.cbxDbx_sblaster_hdma->findText( strDatosDosBox["sblaster_hdma"] ) );				// sblaster_hdma
+	ui.chkDbx_sblaster_mixer->setChecked( fGrl.StrToBool( strDatosDosBox["sblaster_mixer"] ) );									// sblaster_mixer
+	ui.cbxDbx_sblaster_oplmode->setCurrentIndex( ui.cbxDbx_sblaster_oplmode->findText( strDatosDosBox["sblaster_oplmode"] ) );	// sblaster_oplmode
+	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( ui.cbxDbx_sblaster_oplrate->findText( strDatosDosBox["sblaster_oplrate"] ) );	// sblaster_oplrate
+
+	ui.chkDbx_gus_gus->setChecked( fGrl.StrToBool( strDatosDosBox["gus_gus"] ) );												// gus_gus
+	ui.cbxDbx_gus_gusrate->setCurrentIndex( ui.cbxDbx_gus_gusrate->findText( strDatosDosBox["gus_gusrate"] ) );					// gus_gusrate
+	ui.cbxDbx_gus_gusbase->setCurrentIndex( ui.cbxDbx_gus_gusbase->findText( strDatosDosBox["gus_gusbase"] ) );					// gus_gusbase
+	ui.cbxDbx_gus_irq1->setCurrentIndex( ui.cbxDbx_gus_irq1->findText( strDatosDosBox["gus_irq1"] ) );							// gus_irq1
+	ui.cbxDbx_gus_irq2->setCurrentIndex( ui.cbxDbx_gus_irq2->findText( strDatosDosBox["gus_irq2"] ) );							// gus_irq2
+	ui.cbxDbx_gus_dma1->setCurrentIndex( ui.cbxDbx_gus_dma1->findText( strDatosDosBox["gus_dma1"] ) );							// gus_dma1
+	ui.cbxDbx_gus_dma2->setCurrentIndex( ui.cbxDbx_gus_dma2->findText( strDatosDosBox["gus_dma2"] ) );							// gus_dma2
+	ui.txtDbx_gus_ultradir->setText( strDatosDosBox["gus_ultradir"] );															// gus_ultradir
+
+	ui.chkDbx_speaker_pcspeaker->setChecked( fGrl.StrToBool( strDatosDosBox["speaker_pcspeaker"] ) );							// speaker_pcspeaker
+	ui.cbxDbx_speaker_pcrate->setCurrentIndex( ui.cbxDbx_speaker_pcrate->findText( strDatosDosBox["speaker_pcrate"] ) );			// speaker_pcrate
+	ui.cbxDbx_speaker_tandy->setCurrentIndex( ui.cbxDbx_speaker_tandy->findText( strDatosDosBox["speaker_tandy"] ) );			// speaker_tandy
+	ui.cbxDbx_speaker_tandyrate->setCurrentIndex( ui.cbxDbx_speaker_tandyrate->findText( strDatosDosBox["speaker_tandyrate"] ) );// speaker_tandyrate
+	ui.chkDbx_speaker_disney->setChecked( fGrl.StrToBool( strDatosDosBox["speaker_disney"] ) );									// speaker_disney
+
+	ui.cbxDbx_joystick_type->setCurrentIndex( ui.cbxDbx_joystick_type->findText( strDatosDosBox["joystick_type"] ) );			// joystick_type
+	ui.chkDbx_joystick_timed->setChecked( fGrl.StrToBool( strDatosDosBox["joystick_timed"] ) );									// joystick_timed
+	ui.chkDbx_joystick_autofire->setChecked( fGrl.StrToBool( strDatosDosBox["joystick_autofire"] ) );							// joystick_autofire
+	ui.chkDbx_joystick_swap34->setChecked( fGrl.StrToBool( strDatosDosBox["joystick_swap34"] ) );								// joystick_swap34
+	ui.chkDbx_joystick_buttonwrap->setChecked( fGrl.StrToBool( strDatosDosBox["joystick_buttonwrap"] ) );						// joystick_buttonwrap
+
+	ui.chkDbx_modem_modem->setChecked( fGrl.StrToBool( strDatosDosBox["modem_modem"] ) );										// modem_modem
+	ui.cbxDbx_modem_comport->setCurrentIndex( fGrl.StrToInt( strDatosDosBox["modem_comport"] )-1 );								// modem_comport
+	ui.txtDbx_modem_listenport->setText( strDatosDosBox["modem_listenport"] );													// modem_listenport
+
+	ui.chkDbx_dserial_directserial->setChecked( fGrl.StrToBool( strDatosDosBox["dserial_directserial"] ) );						// dserial_directserial
+	ui.cbxDbx_dserial_comport->setCurrentIndex( ui.cbxDbx_dserial_comport->findText( strDatosDosBox["dserial_comport"] ) );		// dserial_comport
+	ui.cbxDbx_dserial_realport->setCurrentIndex( ui.cbxDbx_dserial_realport->findText( strDatosDosBox["dserial_realport"] ) );	// serial_realport
+	ui.cbxDbx_dserial_defaultbps->setCurrentIndex( ui.cbxDbx_dserial_defaultbps->findText( strDatosDosBox["dserial_defaultbps"] ) );	// dserial_defaultbps
+	ui.cbxDbx_dserial_parity->setCurrentIndex( ui.cbxDbx_dserial_parity->findText( strDatosDosBox["dserial_parity"] ) );			// dserial_parity
+	ui.cbxDbx_dserial_bytesize->setCurrentIndex( ui.cbxDbx_dserial_bytesize->findText( strDatosDosBox["dserial_bytesize"] ) );	// dserial_bytesize
+	ui.cbxDbx_dserial_stopbit->setCurrentIndex( ui.cbxDbx_dserial_stopbit->findText( strDatosDosBox["dserial_stopbit"] ) );		// dserial_stopbit
+	ui.txtDbx_serial_1->setText( strDatosDosBox["serial_1"] );	// serial_1
+	ui.txtDbx_serial_2->setText( strDatosDosBox["serial_2"] );	// serial_2
+	ui.txtDbx_serial_3->setText( strDatosDosBox["serial_3"] );	// serial_3
+	ui.txtDbx_serial_4->setText( strDatosDosBox["serial_4"] );	// serial_4
+
+	ui.chkDbx_dos_xms->setChecked( fGrl.StrToBool( strDatosDosBox["dos_xms"] ) );						// dos_xms
+	ui.chkDbx_dos_ems->setChecked( fGrl.StrToBool( strDatosDosBox["dos_ems"] ) );						// dos_ems
+	ui.cbxDbx_dos_umb->setCurrentIndex( ui.cbxDbx_dos_umb->findText( strDatosDosBox["dos_umb"] ) );		// dos_umb
+	ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( ui.cbxDbx_dos_keyboardlayout->findText( strDatosDosBox["dos_keyboardlayout"] ) );	// dos_keyboardlayout
+
+	ui.chkDbx_ipx_ipx->setChecked( fGrl.StrToBool( strDatosDosBox["ipx_ipx"] ) );							// ipx_ipx
+
+	ui.txtDbx_Autoexec->setText(strDatosDosBox["autoexec"] );												// autoexec
+
+	ui.chkDbx_autoexec->setChecked( fGrl.StrToBool( strDatosDosBox["opt_autoexec"] ) );						// opt_autoexec
+	ui.chkDbx_loadfix->setChecked( fGrl.StrToBool( strDatosDosBox["opt_loadfix"] ) );						// opt_loadfix
+	ui.txtDbx_loadfix_mem->setText( strDatosDosBox["opt_loadfix_mem"]  );									// opt_loadfix_mem
+	ui.chkDbx_consola_dbox->setChecked( fGrl.StrToBool( strDatosDosBox["opt_consola_dbox"] ) );				// opt_consola_dbox
+	ui.chkDbx_cerrar_dbox->setChecked( fGrl.StrToBool( strDatosDosBox["opt_cerrar_dbox"] ) );				// opt_cerrar_dbox
+	ui.chkDbx_cycle_sincronizar->setChecked( fGrl.StrToBool( strDatosDosBox["opt_cycle_sincronizar"] ) );	// opt_cycle_sincronizar
+
+	if( stIDdbx!="null" && !isProfileGame )
+		ui.txtDbx_path_conf->setText( strDatosDosBox["path_conf"] );					// path_conf
+
+	ui.txtDbx_path_sonido->setText( strDatosDosBox["path_sonido"]);					// path_sonido
+
+	if( !strDatosDosBox["path_exe"].isEmpty() )
+		ui.txtDbx_path_exe->setText( strDatosDosBox["path_exe"] );					// path_exe
+
+	if( !strDatosDosBox["path_setup"].isEmpty() )
+		ui.txtDbx_path_setup->setText( strDatosDosBox["path_setup"] );				// path_setup
+
+	ui.txtDbx_parametros_exe->setText( strDatosDosBox["parametros_exe"] );			// parametros_exe
+	ui.txtDbx_parametros_setup->setText( strDatosDosBox["parametros_setup"] );		// parametros_setup
+
+//	if( stIDdbx=="null" && isProfileGame )
+//	{
+//		ui.btnMount_Clear->click();
+//		ui.btnMount_AutoCrear->click();
+//	}
+
+/*
+	int num_mounts = fGrl.StrToInt( strDatosDosBox["NrOfMounts"] );
+	if( num_mounts > 0 )
+	{
+		for(int i=0; i < num_mounts ; i++)
+		{
+			QTreeWidgetItem *twItemDfend = new QTreeWidgetItem(ui.twMontajes);
+			str_Lista.clear();
+			str_Lista = strDatosDosBox[fGrl.IntToStr(i)].split("|");
+
+			tipoDrive.clear();
+			tipoDrive = str_Lista.value(1).toLower();// tipo_as
+
+			if(tipoDrive=="drive")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+				tipoDrive = "drive";
+			}
+			if(tipoDrive=="cdrom")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+				tipoDrive = "cdrom";
+			}
+			if(tipoDrive=="floppy")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+				tipoDrive = "floppy";
+			}
+			if(tipoDrive=="floppyimage")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+				tipoDrive = "IMG_floppy";
+			}
+			if(tipoDrive=="cdromimage")
+			{
+				twItemDfend->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+				tipoDrive = "IMG_iso";
+			}
+			if(tipoDrive=="image")
+			{
+				twItemDfend->setIcon(0, QIcon(":/img16/drive_hd.png") );
+				tipoDrive = "IMG_hdd";
+			}
+			temp_opt_mount.clear();
+			temp_opt_mount = str_Lista.value(5);
+
+			twItemDfend->setText(0, ""+str_Lista.value(0) ); // path
+			twItemDfend->setText(1, ""+str_Lista.value(4) ); // label
+			twItemDfend->setText(2, ""+tipoDrive          ); // tipo_as
+			twItemDfend->setText(3, ""+str_Lista.value(2) ); // letter
+			twItemDfend->setText(4, ""+fGrl.IntToStr(i)   ); // indx_cd
+			twItemDfend->setText(5, ""+temp_opt_mount     ); // opt_mount
+			twItemDfend->setText(6, ""+str_Lista.value(3) ); // io_ctrl
+			twItemDfend->setText(7, "x"                   ); // select_mount
+		}
+		QHash<QString, QString> datos_montaje;
+		datos_montaje.clear();
+		datos_montaje["path_exe"]        = ui.txtDbx_path_exe->text();
+		datos_montaje["parametros_exe"]  = ui.txtDbx_parametros_exe->text();
+		datos_montaje["opt_loadfix_mem"] = ui.txtDbx_loadfix_mem->text();
+		if(ui.chkDbx_loadfix->isChecked())
+			datos_montaje["opt_loadfix"] = "true"; else datos_montaje["opt_loadfix"] = "false";
+		if(ui.chkDbx_cerrar_dbox->isChecked())
+			datos_montaje["opt_cerrar_dbox"] = "true"; else datos_montaje["opt_cerrar_dbox"] = "false";
+
+		ui.previer_mount->clear();
+		ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
 	}
+*/
 }
 
 void frmAddEditJuego::CargarDatosDBxMontaje( QString stIDdbx )

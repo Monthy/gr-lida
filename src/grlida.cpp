@@ -268,7 +268,7 @@ void GrLida::on_ImportarJuego()
 		{
 			lastID_Dbx = sql->ItemInsertaDbx( NewImportar->DatosDosBox , lastID);
 			sql->ItemInsertaMontajesDbx( NewImportar->ui.twMontajes, lastID_Dbx );
-			fGrl.CrearArchivoConfigDbx( NewImportar->DatosDosBox, NewImportar->ui.twMontajes, stConfgDbxDir + NewImportar->DatosDosBox["path_conf"] );
+			fGrl.CrearArchivoConfigDbx( NewImportar->DatosJuego, NewImportar->DatosDosBox, NewImportar->ui.twMontajes, stConfgDbxDir + NewImportar->DatosDosBox["path_conf"] );
 		}
 		if( NewImportar->DatosJuego["tipo_emu"]=="scummvm")
 		{
@@ -382,7 +382,7 @@ void GrLida::on_AddNewDbx()
 		lastID = sql->ItemInsertaDatos( AddDbxNew->DatosJuego );
 		lastID_Dbx = sql->ItemInsertaDbx( AddDbxNew->DatosDosBox , lastID);
 		sql->ItemInsertaMontajesDbx( AddDbxNew->ui.twMontajes, lastID_Dbx );
-		fGrl.CrearArchivoConfigDbx( AddDbxNew->DatosDosBox, AddDbxNew->ui.twMontajes, stConfgDbxDir + AddDbxNew->DatosDosBox["path_conf"] );
+		fGrl.CrearArchivoConfigDbx( AddDbxNew->DatosJuego, AddDbxNew->DatosDosBox, AddDbxNew->ui.twMontajes, stConfgDbxDir + AddDbxNew->DatosDosBox["path_conf"] );
 		NuevoItemTreeWidget( AddDbxNew->DatosJuego, "dosbox", lastID);
 	}
 }
@@ -650,98 +650,18 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 // Si el emulador es el ScummVM:
 	if( stTipoEmu=="scummvm" )
 	{
-		query.exec("SELECT * FROM dbgrl_emu_scummvm WHERE idgrl="+IDitem+" LIMIT 0,1");
-		query.first();
-		rec = query.record();
-
 		conf_scummvm.clear();
+		conf_scummvm = sql->showConfg_ScummVM( IDitem );
 		conf_scummvm["description"] = ui.twJuegos->currentItem()->text(1);
-		conf_scummvm["game"] = query.value( rec.indexOf("game") ).toString();	// game
-	// language
-		if( query.value( rec.indexOf("language") ).toString()!="")
-			conf_scummvm["language"] = query.value( rec.indexOf("language") ).toString();
-		else
-			conf_scummvm["language"] = "es";
-	// subtitles
-		conf_scummvm["subtitles"] = fGrl.BoolToStr( query.value( rec.indexOf("subtitles") ).toBool() );
-	// platform
-		if( query.value( rec.indexOf("platform") ).toString()!="")
-			conf_scummvm["platform"] = query.value( rec.indexOf("platform") ).toString();
-		else
-			conf_scummvm["platform"] = "pc";
-	// gfx_mode
-		if( query.value( rec.indexOf("gfx_mode") ).toString()!="")
-			conf_scummvm["gfx_mode"] = query.value( rec.indexOf("gfx_mode") ).toString();
-		else
-			conf_scummvm["gfx_mode"] = "2x";
-	// render_mode
-		if( query.value( rec.indexOf("render_mode") ).toString()!="")
-			conf_scummvm["render_mode"] = query.value( rec.indexOf("render_mode") ).toString();
-		else
-			conf_scummvm["render_mode"] = "";
-	// fullscreen
-		conf_scummvm["fullscreen"] = fGrl.BoolToStr( query.value( rec.indexOf("fullscreen") ).toBool() );
-	// aspect_ratio
-		conf_scummvm["aspect_ratio"] = fGrl.BoolToStr( query.value( rec.indexOf("aspect_ratio") ).toBool() );
-	// path
-		conf_scummvm["path"] = query.value( rec.indexOf("path") ).toString();
-	// path_extra
-		if( query.value( rec.indexOf("path_extra") ).toString()!="")
-			conf_scummvm["path_extra"] = query.value( rec.indexOf("path_extra") ).toString();
-		else
-			conf_scummvm["path_extra"] = "";
-	// path_save
-		if( query.value( rec.indexOf("path_save") ).toString()!="")
-			conf_scummvm["path_save"] = query.value( rec.indexOf("path_save") ).toString();
-		else
-			conf_scummvm["path_save"] = "";
-	// music_driver
-		conf_scummvm["music_driver"] = query.value( rec.indexOf("music_driver") ).toString();
-	// enable_gs
-		conf_scummvm["enable_gs"] = fGrl.BoolToStr( query.value( rec.indexOf("enable_gs") ).toBool() );
-	// multi_midi
-		conf_scummvm["multi_midi"] = fGrl.BoolToStr( query.value( rec.indexOf("multi_midi") ).toBool() );
-	// native_mt32
-		conf_scummvm["native_mt32"] = fGrl.BoolToStr( query.value( rec.indexOf("native_mt32") ).toBool() );
 
-		conf_scummvm["master_volume"] = fGrl.IntToStr( query.value( rec.indexOf("master_volume") ).toInt() );	// master_volume
-		conf_scummvm["music_volume"]  = fGrl.IntToStr( query.value( rec.indexOf("music_volume") ).toInt() );	// music_volume
-		conf_scummvm["sfx_volume"]    = fGrl.IntToStr( query.value( rec.indexOf("sfx_volume") ).toInt() );		// sfx_volume
-		conf_scummvm["speech_volume"] = fGrl.IntToStr( query.value( rec.indexOf("speech_volume") ).toInt() );	// speech_volume
-		conf_scummvm["tempo"]         = fGrl.IntToStr( query.value( rec.indexOf("tempo") ).toInt() );			// tempo
-		conf_scummvm["talkspeed"]     = fGrl.IntToStr( query.value( rec.indexOf("talkspeed") ).toInt() );		// talkspeed
-		conf_scummvm["cdrom"]         = fGrl.IntToStr( query.value( rec.indexOf("cdrom") ).toInt() );			// cdrom
-		conf_scummvm["joystick_num"]  = fGrl.IntToStr( query.value( rec.indexOf("joystick_num") ).toInt() );	// joystick_num
-	// output_rate
-		if( query.value( rec.indexOf("output_rate") ).toString()!="")
-			conf_scummvm["output_rate"] = query.value( rec.indexOf("output_rate") ).toString();
-		else
-			conf_scummvm["output_rate"] = "";
-	// midi_gain
-		conf_scummvm["midi_gain"] = query.value( rec.indexOf("midi_gain") ).toString(); // midi_gain
-	// copy_protection
-		conf_scummvm["copy_protection"] = fGrl.BoolToStr( query.value( rec.indexOf("copy_protection") ).toBool() );
-	// sound_font
-		if( query.value( rec.indexOf("sound_font") ).toString()!="")
-			conf_scummvm["sound_font"] = query.value( rec.indexOf("sound_font") ).toString();
-		else
-			conf_scummvm["sound_font"] = "";
+		stConfgJuego = "-c" + stHomeDir + "scummvm.ini|" + "-d" + conf_scummvm["debuglevel"] + "|" + conf_scummvm["game"];
 
-		conf_scummvm["debuglevel"]    = "-d" + fGrl.IntToStr( query.value( rec.indexOf("debuglevel") ).toInt() ) + "|"	;	// debuglevel
-		conf_scummvm["path_setup"]    = query.value( rec.indexOf("path_setup") ).toString()								;	// path_setup
-		conf_scummvm["path_capturas"] = query.value( rec.indexOf("path_capturas") ).toString()							;	// path_capturas
-		conf_scummvm["path_sonido"]   = query.value( rec.indexOf("path_sonido") ).toString()							;	// path_sonido
-
-		stConfgJuego = "-c"+stHomeDir+"scummvm.ini|"+
-					conf_scummvm["debuglevel"]		+	// debuglevel
-					conf_scummvm["game"];				// game
-		
 		stCapturasSvm =  conf_scummvm["path_capturas"]; // path_capturas
 		stCapturasDbx.clear();
 		if( (stCapturasSvm !="") && ui.btn_imgtumb_2->isChecked() )
 			CargarThumbsTreeWidget( stCapturasSvm );
 		else ui.twCapturas->clear();
-		
+
 		ui.actionEjectar->setEnabled(true);
 		ui.mnu_ejecutar_juego->setEnabled(true);
 
@@ -759,15 +679,8 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 
 		QHash<QString, QString> conf_dosbox;
 
-		query.exec("SELECT * FROM dbgrl_emu_dosbox WHERE idgrl="+IDitem+" LIMIT 0,1");
-		query.first();
-		rec = query.record();
 		conf_dosbox.clear();
-		conf_dosbox["path_conf"]        = query.value( rec.indexOf("path_conf") ).toString()		;	// path_conf
-		conf_dosbox["path_exe"]         = query.value( rec.indexOf("path_exe") ).toString()			;	// path_exe
-		conf_dosbox["path_setup"]       = query.value( rec.indexOf("path_setup") ).toString()		;	// path_setup
-		conf_dosbox["opt_consola_dbox"] = query.value( rec.indexOf("opt_consola_dbox") ).toString()	;	// opt_consola_dbox
-		conf_dosbox["dosbox_captures"]  = query.value( rec.indexOf("dosbox_captures") ).toString()	;	// dosbox_capture
+		conf_dosbox = sql->showConfg_DOSBox( IDitem );
 
 		QString consolaDbx;
 		#ifdef Q_OS_WIN32
@@ -783,7 +696,7 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 
 		stCapturasDbx = conf_dosbox["dosbox_captures"];  //3 dosbox_capture
 		stCapturasSvm.clear();
-		
+
 		if( (stCapturasDbx !="") && ui.btn_imgtumb_1->isChecked() )
 			CargarThumbsTreeWidget( stCapturasDbx );
 		else
@@ -849,7 +762,7 @@ void GrLida::on_NuevoJuego()
 		{
 			lastID_Dbx = sql->ItemInsertaDbx( AddJuego->DatosDosBox , lastID);
 			sql->ItemInsertaMontajesDbx( AddJuego->ui.twMontajes, lastID_Dbx );
-			fGrl.CrearArchivoConfigDbx( AddJuego->DatosDosBox, AddJuego->ui.twMontajes, stConfgDbxDir + AddJuego->DatosDosBox["path_conf"] );
+			fGrl.CrearArchivoConfigDbx( AddJuego->DatosDosBox, AddJuego->DatosDosBox, AddJuego->ui.twMontajes, stConfgDbxDir + AddJuego->DatosDosBox["path_conf"] );
 		}
 		if( AddJuego->DatosJuego["tipo_emu"]=="scummvm")
 		{
@@ -880,7 +793,7 @@ void GrLida::on_EditarJuego()
 			{
 				sql->ItemActualizaDbx( EditJuego->DatosDosBox, EditJuego->stItemIDDbx );
 				sql->ItemActualizaMontajeDbx(EditJuego->ui.twMontajes);
-				fGrl.CrearArchivoConfigDbx( EditJuego->DatosDosBox, EditJuego->ui.twMontajes, stConfgDbxDir + EditJuego->DatosDosBox["path_conf"] );
+				fGrl.CrearArchivoConfigDbx( EditJuego->DatosJuego, EditJuego->DatosDosBox, EditJuego->ui.twMontajes, stConfgDbxDir + EditJuego->DatosDosBox["path_conf"] );
 			}
 			if( stTipoEmu=="scummvm")
 			{
@@ -999,69 +912,69 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 	{
 		QSqlQuery query;
 		QSqlRecord rec;
-		query.exec("SELECT * FROM dbgrl WHERE idgrl="+IDitem+" LIMIT 0,1");
-		if( query.first() )
+		QHash<QString, QString> strDatosJuego;
+
+		strDatosJuego = sql->show_Datos( IDitem );
+
+		QString strTempHtml;
+
+		ui.txtInfo_Subtitulo->setText( strDatosJuego["subtitulo"] );			// subtitulo
+		ui.txtInfo_Genero->setText( strDatosJuego["genero"] );					// genero
+		ui.txtInfo_Idioma->setText( strDatosJuego["idioma"] );					// idioma
+		ui.txtInfo_Formato->setText( strDatosJuego["formato"] );				// formato
+		ui.txtInfo_NumDisc->setText( strDatosJuego["numdisc"] );				// numdisc
+		ui.txtInfo_Anno->setText( strDatosJuego["anno"] );						// anno
+		ui.txtInfo_Tamano->setText( strDatosJuego["tamano"] );					// tamano
+		ui.txtInfo_Compania->setText( strDatosJuego["compania"] );				// compania
+		ui.txtInfo_Desarrollador->setText( strDatosJuego["desarrollador"] );	// desarrollador
+		ui.txtInfo_Tema->setText( strDatosJuego["tema"] );						// tema
+		ui.txtInfo_SistemaOp->setText( strDatosJuego["sistemaop"] );			// sistemaop
+
+		strTempHtml.clear();
+		strTempHtml = fGrl.ReemplazaTextoSmiles( strDatosJuego["comentario"] , listSmailes);
+		ui.txtInfo_Comentario->setHtml( strTempHtml ); // comentario
+
+		QFile file_thumbs;  // thumbs
+		if( file_thumbs.exists( strDatosJuego["thumbs"] ) )
+			ui.lbImgThumbs->setPixmap( QPixmap( strDatosJuego["thumbs"] ) );
+		else
+			ui.lbImgThumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+
+		stCaratula_Delantera = strDatosJuego["cover_front"];
+		stCaratula_Trasera   = strDatosJuego["cover_back"];
+
+		if(stCaratula_Delantera!="")
+			ui.btnVer_CoverFront->setEnabled(true);
+		else
+			ui.btnVer_CoverFront->setEnabled(false);
+
+		if(stCaratula_Trasera!="")
+			ui.btnVer_CoverBack->setEnabled(true);
+		else
+			ui.btnVer_CoverBack->setEnabled(false);
+
+		lbpanel_5.setText(" " + strDatosJuego["titulo"] + " - " + tr("introducido el") + " " + strDatosJuego["fecha"] + "  " );	
+
+		if( strDatosJuego["tipo_emu"] == "datos")
+			lbpanel_3.setPixmap( QPixmap(":/img16/datos_1.png") );
+		else if( strDatosJuego["tipo_emu"] == "dosbox")
 		{
-			QString strTempHtml;
-
-			rec = query.record();
-			ui.txtInfo_Subtitulo->setText( query.value( rec.indexOf("subtitulo") ).toString() );			// subtitulo
-			ui.txtInfo_Genero->setText( query.value( rec.indexOf("genero") ).toString() );					// genero
-			ui.txtInfo_Idioma->setText( query.value( rec.indexOf("idioma") ).toString() );					// idioma
-			ui.txtInfo_Formato->setText( query.value( rec.indexOf("formato") ).toString() );				// formato
-			ui.txtInfo_NumDisc->setText( query.value( rec.indexOf("numdisc") ).toString() );				// numdisc
-			ui.txtInfo_Anno->setText( query.value( rec.indexOf("anno") ).toString() );						// anno
-			ui.txtInfo_Tamano->setText( query.value( rec.indexOf("tamano") ).toString() );					// tamano
-			ui.txtInfo_Compania->setText( query.value( rec.indexOf("compania") ).toString() );				// compania
-			ui.txtInfo_Desarrollador->setText( query.value( rec.indexOf("desarrollador") ).toString() );	// desarrollador
-			ui.txtInfo_Tema->setText( query.value( rec.indexOf("tema") ).toString() );						// tema
-			ui.txtInfo_SistemaOp->setText( query.value( rec.indexOf("sistemaop") ).toString() );			// sistemaop
-
-			strTempHtml.clear();
-			strTempHtml = fGrl.ReemplazaTextoSmiles( query.value( rec.indexOf("comentario") ).toString(), listSmailes);
-			ui.txtInfo_Comentario->setHtml( strTempHtml ); // comentario
-
-			QFile file_thumbs;  // thumbs
-			if( file_thumbs.exists( query.value( rec.indexOf("thumbs") ).toString() ) )
-				ui.lbImgThumbs->setPixmap( QPixmap( query.value( rec.indexOf("thumbs") ).toString() ) );
-			else
-				ui.lbImgThumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
-
-			stCaratula_Delantera = query.value( rec.indexOf("cover_front") ).toString();
-			stCaratula_Trasera   = query.value( rec.indexOf("cover_back") ).toString();
-
-			if(stCaratula_Delantera!="")
-				ui.btnVer_CoverFront->setEnabled(true);
-			else
-				ui.btnVer_CoverFront->setEnabled(false);
-
-			if(stCaratula_Trasera!="")
-				ui.btnVer_CoverBack->setEnabled(true);
-			else
-				ui.btnVer_CoverBack->setEnabled(false);
-
-			lbpanel_5.setText(" " + query.value( rec.indexOf("titulo") ).toString() + " - " + tr("introducido el") + " " + query.value( rec.indexOf("fecha") ).toString() + "  " );	
-
-			if( query.value( rec.indexOf("tipo_emu") ).toString()== "datos")
-				lbpanel_3.setPixmap( QPixmap(":/img16/datos_1.png") );
-			else if( query.value( rec.indexOf("tipo_emu") ).toString()== "dosbox")
-			{
-				if( !ui.btn_imgtumb_1->isChecked() )
-					ui.btn_imgtumb_1->click();
-				lbpanel_3.setPixmap( QPixmap(":/img16/dosbox.png") );
-			}
-			else if( query.value( rec.indexOf("tipo_emu") ).toString()== "scummvm")
-			{
-				if( !ui.btn_imgtumb_2->isChecked() )
-					ui.btn_imgtumb_2->click();
-				lbpanel_3.setPixmap( QPixmap(":/img16/scummvm.png") );
-			}
-			else if( query.value( rec.indexOf("tipo_emu") ).toString()== "vdmsound")
-				lbpanel_3.setPixmap( QPixmap(":/img16/vdmsound.png") );
-			else
-				lbpanel_3.setPixmap( QPixmap(":/img16/sinimg.png") );
+			if( !ui.btn_imgtumb_1->isChecked() )
+				ui.btn_imgtumb_1->click();
+			lbpanel_3.setPixmap( QPixmap(":/img16/dosbox.png") );
 		}
-		
+		else if( strDatosJuego["tipo_emu"] == "scummvm")
+		{
+			if( !ui.btn_imgtumb_2->isChecked() )
+				ui.btn_imgtumb_2->click();
+			lbpanel_3.setPixmap( QPixmap(":/img16/scummvm.png") );
+		}
+		else if( strDatosJuego["tipo_emu"] == "vdmsound")
+			lbpanel_3.setPixmap( QPixmap(":/img16/vdmsound.png") );
+		else
+			lbpanel_3.setPixmap( QPixmap(":/img16/sinimg.png") );
+
+
 		ui.twUrls->clear();
 		query.exec("SELECT * FROM dbgrl_url WHERE idgrl="+IDitem);
 		if( query.first())

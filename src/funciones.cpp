@@ -482,7 +482,7 @@ void Funciones::CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm)
 	settings.endGroup();
 }
 
-void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg)
+void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg)
 {
 	QFile file_out( PathSaveConfg );
 	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
@@ -501,150 +501,153 @@ void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datosDbx, 
 		out << "    <copyright>Copyright 2003-2008</copyright>" << endl;
 
 		out << "    <datos>" << endl;
-//		out << "      <usuario>" <<  datosDbx["user_name"] << "</usuario>" << endl;
-		out << "      <icono>" << datosDbx["Icon"] << "</icono>" << endl;
-		out << "      <titulo>" <<  datosDbx["Name"] << "</titulo>" << endl;
-		out << "      <subtitulo>" <<  datosDbx["subtitulo"] << "</subtitulo>" << endl;
-		out << "      <genero>" << datosDbx["Genre"] << "</genero>" << endl;
-		out << "      <compania>" << datosDbx["Publisher"] << "</compania>" << endl;
-		out << "      <desarrollador>" << datosDbx["Developer"] << "</desarrollador>" << endl;
-		out << "      <tema>" << datosDbx["tema"] << "</tema>" << endl;
-		out << "      <idioma>" << datosDbx["Language"] << "</idioma>" << endl;
-		out << "      <formato>" << datosDbx["formato"] << "</formato>" << endl;
-		out << "      <anno>" <<  datosDbx["Year"] << "</anno>" << endl;
-		out << "      <numdisc>" <<  datosDbx["numdisc"] << "</numdisc>" << endl;
-		out << "      <sistemaop>" << datosDbx["sistemaop"] << "</sistemaop>" << endl;
-		out << "      <tamano>" << datosDbx["tamano"] << "</tamano>" << endl;
-		out << "      <graficos>" << datosDbx["graficos"] << "</graficos>" << endl;
-		out << "      <sonido>" << datosDbx["sonido"] << "</sonido>" << endl;
-		out << "      <jugabilidad>" << datosDbx["jugabilidad"] << "</jugabilidad>" << endl;
-		out << "      <original>" << datosDbx["original"] << "</original>" << endl;
-		out << "      <estado>" << datosDbx["estado"] << "</estado>" << endl;
-		out << "      <thumbs>" << datosDbx["thumbs"] << "</thumbs>" << endl;
-		out << "      <cover_front>" << datosDbx["cover_front"] << "</cover_front>" << endl;
-		out << "      <cover_back>" << datosDbx["cover_back"] << "</cover_back>" << endl;
-		out << "      <fecha>" << datosDbx["fecha"] << "</fecha>" << endl;
-		out << "      <tipo_emu>" << datosDbx["tipo_emu"] << "</tipo_emu>" << endl;
-		out << "      <comentario><![CDATA[" << datosDbx["Notes"] << "]]></comentario>" << endl;
-		out << "      <favorito>" << datosDbx["Favorite"] << "</favorito>" << endl;
+//		out << "      <usuario>" <<  datos["user_name"] << "</usuario>" << endl;
+		out << "      <icono>" << datos["icono"] << "</icono>" << endl;
+		out << "      <titulo>" <<  datos["titulo"] << "</titulo>" << endl;
+		out << "      <subtitulo>" <<  datos["subtitulo"] << "</subtitulo>" << endl;
+		out << "      <genero>" << datos["genero"] << "</genero>" << endl;
+		out << "      <compania>" << datos["compania"] << "</compania>" << endl;
+		out << "      <desarrollador>" << datos["desarrollador"] << "</desarrollador>" << endl;
+		out << "      <tema>" << datos["tema"] << "</tema>" << endl;
+		out << "      <idioma>" << datos["idioma"] << "</idioma>" << endl;
+		out << "      <formato>" << datos["formato"] << "</formato>" << endl;
+		out << "      <anno>" <<  datos["anno"] << "</anno>" << endl;
+		out << "      <numdisc>" <<  datos["numdisc"] << "</numdisc>" << endl;
+		out << "      <sistemaop>" << datos["sistemaop"] << "</sistemaop>" << endl;
+		out << "      <tamano>" << datos["tamano"] << "</tamano>" << endl;
+		out << "      <graficos>" << datos["graficos"] << "</graficos>" << endl;
+		out << "      <sonido>" << datos["sonido"] << "</sonido>" << endl;
+		out << "      <jugabilidad>" << datos["jugabilidad"] << "</jugabilidad>" << endl;
+		out << "      <original>" << datos["original"] << "</original>" << endl;
+		out << "      <estado>" << datos["estado"] << "</estado>" << endl;
+		out << "      <thumbs>" << datos["thumbs"] << "</thumbs>" << endl;
+		out << "      <cover_front>" << datos["cover_front"] << "</cover_front>" << endl;
+		out << "      <cover_back>" << datos["cover_back"] << "</cover_back>" << endl;
+		out << "      <fecha>" << datos["fecha"] << "</fecha>" << endl;
+		out << "      <tipo_emu>" << datos["tipo_emu"] << "</tipo_emu>" << endl;
+		out << "      <comentario><![CDATA[" << datos["comentario"] << "]]></comentario>" << endl;
+		out << "      <favorito>" << datos["favorito"] << "</favorito>" << endl;
 		out << "    </datos>" << endl;
-
-		out << "    <dosbox>" << endl;
-		//out << "      <usuario>" <<  datosDbx["user_name"] << "</usuario>" << endl;
-		out << "      <sdl_fullscreen>" << datosDbx["sdl_fullscreen"] << "</sdl_fullscreen>" << endl;
-		out << "      <sdl_fulldouble>" << datosDbx["sdl_fulldouble"] << "</sdl_fulldouble>" << endl;
-		out << "      <sdl_fullfixed>" << datosDbx["sdl_fullfixed"] << "</sdl_fullfixed>" << endl;
-		out << "      <sdl_fullresolution>" << datosDbx["sdl_fullresolution"] << "</sdl_fullresolution>" << endl;
-		out << "      <sdl_windowresolution>" << datosDbx["sdl_windowresolution"] << "</sdl_windowresolution>" << endl;
-		out << "      <sdl_output>" << datosDbx["sdl_output"] << "</sdl_output>" << endl;
-		out << "      <sdl_hwscale>" << datosDbx["sdl_hwscale"] << "</sdl_hwscale>" << endl;
-		out << "      <sdl_autolock>" << datosDbx["sdl_autolock"] << "</sdl_autolock>" << endl;
-		out << "      <sdl_sensitivity>" << datosDbx["sdl_sensitivity"] << "</sdl_sensitivity>" << endl;
-		out << "      <sdl_waitonerror>" << datosDbx["sdl_waitonerror"] << "</sdl_waitonerror>" << endl;
-		out << "      <sdl_priority>" << datosDbx["sdl_priority"] << "</sdl_priority>" << endl;
-		out << "      <sdl_mapperfile>" << datosDbx["sdl_mapperfile"] << "</sdl_mapperfile>" << endl;
-		out << "      <sdl_usescancodes>" << datosDbx["sdl_usescancodes"] << "</sdl_usescancodes>" << endl;
-		out << "      <dosbox_language>" << datosDbx["dosbox_language"] << "</dosbox_language>" << endl;
-		out << "      <dosbox_machine>" << datosDbx["dosbox_machine"] << "</dosbox_machine>" << endl;
-		out << "      <dosbox_captures>" << datosDbx["dosbox_captures"] << "</dosbox_captures>" << endl;
-		out << "      <dosbox_memsize>" << datosDbx["dosbox_memsize"] << "</dosbox_memsize>" << endl;
-		out << "      <render_frameskip>" << datosDbx["render_frameskip"] << "</render_frameskip>" << endl;
-		out << "      <render_aspect>" << datosDbx["render_aspect"] << "</render_aspect>" << endl;
-		out << "      <render_scaler>" << datosDbx["render_scaler"] << "</render_scaler>" << endl;
-		out << "      <cpu_core>" << datosDbx["cpu_core"] << "</cpu_core>" << endl;
-		out << "      <cpu_cycles>" << datosDbx["cpu_cycles"] << "</cpu_cycles>" << endl;
-		out << "      <cpu_cycleup>" << datosDbx["cpu_cycleup"] << "</cpu_cycleup>" << endl;
-		out << "      <cpu_cycledown>" << datosDbx["cpu_cycledown"] << "</cpu_cycledown>" << endl;
-		out << "      <mixer_nosound>" << datosDbx["mixer_nosound"] << "</mixer_nosound>" << endl;
-		out << "      <mixer_rate>" << datosDbx["mixer_rate"] << "</mixer_rate>" << endl;
-		out << "      <mixer_blocksize>" << datosDbx["mixer_blocksize"] << "</mixer_blocksize>" << endl;
-		out << "      <mixer_prebuffer>" << datosDbx["mixer_prebuffer"] << "</mixer_prebuffer>" << endl;
-		out << "      <midi_mpu401>" << datosDbx["midi_mpu401"] << "</midi_mpu401>" << endl;
-		out << "      <midi_intelligent>" << datosDbx["midi_intelligent"] << "</midi_intelligent>" << endl;
-		out << "      <midi_device>" << datosDbx["midi_device"] << "</midi_device>" << endl;
-		out << "      <midi_config>" << datosDbx["midi_config"] << "</midi_config>" << endl;
-		out << "      <midi_mt32rate>" << datosDbx["midi_mt32rate"] << "</midi_mt32rate>" << endl;
-		out << "      <sblaster_sbtype>" << datosDbx["sblaster_sbtype"] << "</sblaster_sbtype>" << endl;
-		out << "      <sblaster_sbbase>" << datosDbx["sblaster_sbbase"] << "</sblaster_sbbase>" << endl;
-		out << "      <sblaster_irq>" << datosDbx["sblaster_irq"] << "</sblaster_irq>" << endl;
-		out << "      <sblaster_dma>" << datosDbx["sblaster_dma"] << "</sblaster_dma>" << endl;
-		out << "      <sblaster_hdma>" << datosDbx["sblaster_hdma"] << "</sblaster_hdma>" << endl;
-		out << "      <sblaster_mixer>" << datosDbx["sblaster_mixer"] << "</sblaster_mixer>" << endl;
-		out << "      <sblaster_oplmode>" << datosDbx["sblaster_oplmode"] << "</sblaster_oplmode>" << endl;
-		out << "      <sblaster_oplrate>" << datosDbx["sblaster_oplrate"] << "</sblaster_oplrate>" << endl;
-		out << "      <gus_gus>" << datosDbx["gus_gus"] << "</gus_gus>" << endl;
-		out << "      <gus_gusrate>" << datosDbx["gus_gusrate"] << "</gus_gusrate>" << endl;
-		out << "      <gus_gusbase>" << datosDbx["gus_gusbase"] << "</gus_gusbase>" << endl;
-		out << "      <gus_irq1>" << datosDbx["gus_irq1"] << "</gus_irq1>" << endl;
-		out << "      <gus_irq2>" << datosDbx["gus_irq2"] << "</gus_irq2>" << endl;
-		out << "      <gus_dma1>" << datosDbx["gus_dma1"] << "</gus_dma1>" << endl;
-		out << "      <gus_dma2>" << datosDbx["gus_dma2"] << "</gus_dma2>" << endl;
-		out << "      <gus_ultradir>" << datosDbx["gus_ultradir"] << "</gus_ultradir>" << endl;
-		out << "      <speaker_pcspeaker>" << datosDbx["speaker_pcspeaker"] << "</speaker_pcspeaker>" << endl;
-		out << "      <speaker_pcrate>" << datosDbx["speaker_pcrate"] << "</speaker_pcrate>" << endl;
-		out << "      <speaker_tandy>" << datosDbx["speaker_tandy"] << "</speaker_tandy>" << endl;
-		out << "      <speaker_tandyrate>" << datosDbx["speaker_tandyrate"] << "</speaker_tandyrate>" << endl;
-		out << "      <speaker_disney>" << datosDbx["speaker_disney"] << "</speaker_disney>" << endl;
-		out << "      <joystick_type>" << datosDbx["joystick_type"] << "</joystick_type>" << endl;
-		out << "      <joystick_timed>" << datosDbx["joystick_timed"] << "</joystick_timed>" << endl;
-		out << "      <joystick_autofire>" << datosDbx["joystick_autofire"] << "</joystick_autofire>" << endl;
-		out << "      <joystick_swap34>" << datosDbx["joystick_swap34"] << "</joystick_swap34>" << endl;
-		out << "      <joystick_buttonwrap>" << datosDbx["joystick_buttonwrap"] << "</joystick_buttonwrap>" << endl;
-		out << "      <modem_modem>" << datosDbx["modem_modem"] << "</modem_modem>" << endl;
-		out << "      <modem_comport>" << datosDbx["modem_comport"] << "</modem_comport>" << endl;
-		out << "      <modem_listenport>" << datosDbx["modem_listenport"] << "</modem_listenport>" << endl;
-		out << "      <dserial_directserial>" << datosDbx["dserial_directserial"] << "</dserial_directserial>" << endl;
-		out << "      <dserial_comport>" << datosDbx["dserial_comport"] << "</dserial_comport>" << endl;
-		out << "      <dserial_realport>" << datosDbx["dserial_realport"] << "</dserial_realport>" << endl;
-		out << "      <dserial_defaultbps>" << datosDbx["dserial_defaultbps"] << "</dserial_defaultbps>" << endl;
-		out << "      <dserial_parity>" << datosDbx["dserial_parity"] << "</dserial_parity>" << endl;
-		out << "      <dserial_bytesize>" << datosDbx["dserial_bytesize"] << "</dserial_bytesize>" << endl;
-		out << "      <dserial_stopbit>" << datosDbx["dserial_stopbit"] << "</dserial_stopbit>" << endl;
-		out << "      <serial_1>" << datosDbx["serial_1"] << "</serial_1>" << endl;
-		out << "      <serial_2>" << datosDbx["serial_2"] << "</serial_2>" << endl;
-		out << "      <serial_3>" << datosDbx["serial_3"] << "</serial_3>" << endl;
-		out << "      <serial_4>" << datosDbx["serial_4"] << "</serial_4>" << endl;
-		out << "      <dos_xms>" << datosDbx["dos_xms"] << "</dos_xms>" << endl;
-		out << "      <dos_ems>" << datosDbx["dos_ems"] << "</dos_ems>" << endl;
-		out << "      <dos_umb>" << datosDbx["dos_umb"] << "</dos_umb>" << endl;
-		out << "      <dos_keyboardlayout>" << datosDbx["dos_keyboardlayout"] << "</dos_keyboardlayout>" << endl;
-		out << "      <ipx_ipx>" << datosDbx["ipx_ipx"] << "</ipx_ipx>" << endl;
-		out << "      <autoexec>" << datosDbx["autoexec"] << "</autoexec>" << endl;
-		out << "      <opt_autoexec>" << datosDbx["opt_autoexec"] << "</opt_autoexec>" << endl;
-		out << "      <opt_loadfix>" << datosDbx["opt_loadfix"] << "</opt_loadfix>" << endl;
-		out << "      <opt_loadfix_mem>" << datosDbx["opt_loadfix_mem"] << "</opt_loadfix_mem>" << endl;
-		out << "      <opt_consola_dbox>" << datosDbx["opt_consola_dbox"] << "</opt_consola_dbox>" << endl;
-		out << "      <opt_cerrar_dbox>" << datosDbx["opt_cerrar_dbox"] << "</opt_cerrar_dbox>" << endl;
-		out << "      <opt_cycle_sincronizar>" << datosDbx["opt_cycle_sincronizar"] << "</opt_cycle_sincronizar>" << endl;
-		out << "      <path_conf>" << datosDbx["path_conf"] << "</path_conf>" << endl;
-		out << "      <path_sonido>" << datosDbx["path_sonido"] << "</path_sonido>" << endl;
-		out << "      <path_exe>" << datosDbx["path_exe"] << "</path_exe>" << endl;
-		out << "      <path_setup>" << datosDbx["path_setup"] << "</path_setup>" << endl;
-		out << "      <parametros_exe>" << datosDbx["parametros_exe"] << "</parametros_exe>" << endl;
-		out << "      <parametros_setup>" << datosDbx["parametros_setup"] << "</parametros_setup>" << endl;
-		out << "    </dosbox>" << endl;
-
-		for(int num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
+		
+		if( datos["tipo_emu"] == "dosbox" )
 		{
-			QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
-			out << "    <montajes>" << endl;
-			out << "      <id_lista>" << item->text(9) << "</id_lista>" << endl;
-			out << "      <path>" << item->text(0) << "</path>" << endl;
-			out << "      <label>" << item->text(1) << "</label>" << endl;
-			out << "      <tipo_as>" << item->text(2) << "</tipo_as>" << endl;
-			out << "      <letter>" << item->text(3) << "</letter>" << endl;
-			out << "      <indx_cd>" << item->text(4) << "</indx_cd>" << endl;
-			out << "      <opt_mount>" << item->text(5) << "</opt_mount>" << endl;
-			out << "      <io_ctrl>" << item->text(6) << "</io_ctrl>" << endl;
-			out << "      <select_mount>" << item->text(7) << "</select_mount>" << endl;
-			out << "    </montajes>" << endl;
+			out << "    <dosbox>" << endl;
+			//out << "      <usuario>" <<  datosDbx["user_name"] << "</usuario>" << endl;
+			out << "      <sdl_fullscreen>" << datosDbx["sdl_fullscreen"] << "</sdl_fullscreen>" << endl;
+			out << "      <sdl_fulldouble>" << datosDbx["sdl_fulldouble"] << "</sdl_fulldouble>" << endl;
+			out << "      <sdl_fullfixed>" << datosDbx["sdl_fullfixed"] << "</sdl_fullfixed>" << endl;
+			out << "      <sdl_fullresolution>" << datosDbx["sdl_fullresolution"] << "</sdl_fullresolution>" << endl;
+			out << "      <sdl_windowresolution>" << datosDbx["sdl_windowresolution"] << "</sdl_windowresolution>" << endl;
+			out << "      <sdl_output>" << datosDbx["sdl_output"] << "</sdl_output>" << endl;
+			out << "      <sdl_hwscale>" << datosDbx["sdl_hwscale"] << "</sdl_hwscale>" << endl;
+			out << "      <sdl_autolock>" << datosDbx["sdl_autolock"] << "</sdl_autolock>" << endl;
+			out << "      <sdl_sensitivity>" << datosDbx["sdl_sensitivity"] << "</sdl_sensitivity>" << endl;
+			out << "      <sdl_waitonerror>" << datosDbx["sdl_waitonerror"] << "</sdl_waitonerror>" << endl;
+			out << "      <sdl_priority>" << datosDbx["sdl_priority"] << "</sdl_priority>" << endl;
+			out << "      <sdl_mapperfile>" << datosDbx["sdl_mapperfile"] << "</sdl_mapperfile>" << endl;
+			out << "      <sdl_usescancodes>" << datosDbx["sdl_usescancodes"] << "</sdl_usescancodes>" << endl;
+			out << "      <dosbox_language>" << datosDbx["dosbox_language"] << "</dosbox_language>" << endl;
+			out << "      <dosbox_machine>" << datosDbx["dosbox_machine"] << "</dosbox_machine>" << endl;
+			out << "      <dosbox_captures>" << datosDbx["dosbox_captures"] << "</dosbox_captures>" << endl;
+			out << "      <dosbox_memsize>" << datosDbx["dosbox_memsize"] << "</dosbox_memsize>" << endl;
+			out << "      <render_frameskip>" << datosDbx["render_frameskip"] << "</render_frameskip>" << endl;
+			out << "      <render_aspect>" << datosDbx["render_aspect"] << "</render_aspect>" << endl;
+			out << "      <render_scaler>" << datosDbx["render_scaler"] << "</render_scaler>" << endl;
+			out << "      <cpu_core>" << datosDbx["cpu_core"] << "</cpu_core>" << endl;
+			out << "      <cpu_cycles>" << datosDbx["cpu_cycles"] << "</cpu_cycles>" << endl;
+			out << "      <cpu_cycleup>" << datosDbx["cpu_cycleup"] << "</cpu_cycleup>" << endl;
+			out << "      <cpu_cycledown>" << datosDbx["cpu_cycledown"] << "</cpu_cycledown>" << endl;
+			out << "      <mixer_nosound>" << datosDbx["mixer_nosound"] << "</mixer_nosound>" << endl;
+			out << "      <mixer_rate>" << datosDbx["mixer_rate"] << "</mixer_rate>" << endl;
+			out << "      <mixer_blocksize>" << datosDbx["mixer_blocksize"] << "</mixer_blocksize>" << endl;
+			out << "      <mixer_prebuffer>" << datosDbx["mixer_prebuffer"] << "</mixer_prebuffer>" << endl;
+			out << "      <midi_mpu401>" << datosDbx["midi_mpu401"] << "</midi_mpu401>" << endl;
+			out << "      <midi_intelligent>" << datosDbx["midi_intelligent"] << "</midi_intelligent>" << endl;
+			out << "      <midi_device>" << datosDbx["midi_device"] << "</midi_device>" << endl;
+			out << "      <midi_config>" << datosDbx["midi_config"] << "</midi_config>" << endl;
+			out << "      <midi_mt32rate>" << datosDbx["midi_mt32rate"] << "</midi_mt32rate>" << endl;
+			out << "      <sblaster_sbtype>" << datosDbx["sblaster_sbtype"] << "</sblaster_sbtype>" << endl;
+			out << "      <sblaster_sbbase>" << datosDbx["sblaster_sbbase"] << "</sblaster_sbbase>" << endl;
+			out << "      <sblaster_irq>" << datosDbx["sblaster_irq"] << "</sblaster_irq>" << endl;
+			out << "      <sblaster_dma>" << datosDbx["sblaster_dma"] << "</sblaster_dma>" << endl;
+			out << "      <sblaster_hdma>" << datosDbx["sblaster_hdma"] << "</sblaster_hdma>" << endl;
+			out << "      <sblaster_mixer>" << datosDbx["sblaster_mixer"] << "</sblaster_mixer>" << endl;
+			out << "      <sblaster_oplmode>" << datosDbx["sblaster_oplmode"] << "</sblaster_oplmode>" << endl;
+			out << "      <sblaster_oplrate>" << datosDbx["sblaster_oplrate"] << "</sblaster_oplrate>" << endl;
+			out << "      <gus_gus>" << datosDbx["gus_gus"] << "</gus_gus>" << endl;
+			out << "      <gus_gusrate>" << datosDbx["gus_gusrate"] << "</gus_gusrate>" << endl;
+			out << "      <gus_gusbase>" << datosDbx["gus_gusbase"] << "</gus_gusbase>" << endl;
+			out << "      <gus_irq1>" << datosDbx["gus_irq1"] << "</gus_irq1>" << endl;
+			out << "      <gus_irq2>" << datosDbx["gus_irq2"] << "</gus_irq2>" << endl;
+			out << "      <gus_dma1>" << datosDbx["gus_dma1"] << "</gus_dma1>" << endl;
+			out << "      <gus_dma2>" << datosDbx["gus_dma2"] << "</gus_dma2>" << endl;
+			out << "      <gus_ultradir>" << datosDbx["gus_ultradir"] << "</gus_ultradir>" << endl;
+			out << "      <speaker_pcspeaker>" << datosDbx["speaker_pcspeaker"] << "</speaker_pcspeaker>" << endl;
+			out << "      <speaker_pcrate>" << datosDbx["speaker_pcrate"] << "</speaker_pcrate>" << endl;
+			out << "      <speaker_tandy>" << datosDbx["speaker_tandy"] << "</speaker_tandy>" << endl;
+			out << "      <speaker_tandyrate>" << datosDbx["speaker_tandyrate"] << "</speaker_tandyrate>" << endl;
+			out << "      <speaker_disney>" << datosDbx["speaker_disney"] << "</speaker_disney>" << endl;
+			out << "      <joystick_type>" << datosDbx["joystick_type"] << "</joystick_type>" << endl;
+			out << "      <joystick_timed>" << datosDbx["joystick_timed"] << "</joystick_timed>" << endl;
+			out << "      <joystick_autofire>" << datosDbx["joystick_autofire"] << "</joystick_autofire>" << endl;
+			out << "      <joystick_swap34>" << datosDbx["joystick_swap34"] << "</joystick_swap34>" << endl;
+			out << "      <joystick_buttonwrap>" << datosDbx["joystick_buttonwrap"] << "</joystick_buttonwrap>" << endl;
+			out << "      <modem_modem>" << datosDbx["modem_modem"] << "</modem_modem>" << endl;
+			out << "      <modem_comport>" << datosDbx["modem_comport"] << "</modem_comport>" << endl;
+			out << "      <modem_listenport>" << datosDbx["modem_listenport"] << "</modem_listenport>" << endl;
+			out << "      <dserial_directserial>" << datosDbx["dserial_directserial"] << "</dserial_directserial>" << endl;
+			out << "      <dserial_comport>" << datosDbx["dserial_comport"] << "</dserial_comport>" << endl;
+			out << "      <dserial_realport>" << datosDbx["dserial_realport"] << "</dserial_realport>" << endl;
+			out << "      <dserial_defaultbps>" << datosDbx["dserial_defaultbps"] << "</dserial_defaultbps>" << endl;
+			out << "      <dserial_parity>" << datosDbx["dserial_parity"] << "</dserial_parity>" << endl;
+			out << "      <dserial_bytesize>" << datosDbx["dserial_bytesize"] << "</dserial_bytesize>" << endl;
+			out << "      <dserial_stopbit>" << datosDbx["dserial_stopbit"] << "</dserial_stopbit>" << endl;
+			out << "      <serial_1>" << datosDbx["serial_1"] << "</serial_1>" << endl;
+			out << "      <serial_2>" << datosDbx["serial_2"] << "</serial_2>" << endl;
+			out << "      <serial_3>" << datosDbx["serial_3"] << "</serial_3>" << endl;
+			out << "      <serial_4>" << datosDbx["serial_4"] << "</serial_4>" << endl;
+			out << "      <dos_xms>" << datosDbx["dos_xms"] << "</dos_xms>" << endl;
+			out << "      <dos_ems>" << datosDbx["dos_ems"] << "</dos_ems>" << endl;
+			out << "      <dos_umb>" << datosDbx["dos_umb"] << "</dos_umb>" << endl;
+			out << "      <dos_keyboardlayout>" << datosDbx["dos_keyboardlayout"] << "</dos_keyboardlayout>" << endl;
+			out << "      <ipx_ipx>" << datosDbx["ipx_ipx"] << "</ipx_ipx>" << endl;
+			out << "      <autoexec>" << datosDbx["autoexec"] << "</autoexec>" << endl;
+			out << "      <opt_autoexec>" << datosDbx["opt_autoexec"] << "</opt_autoexec>" << endl;
+			out << "      <opt_loadfix>" << datosDbx["opt_loadfix"] << "</opt_loadfix>" << endl;
+			out << "      <opt_loadfix_mem>" << datosDbx["opt_loadfix_mem"] << "</opt_loadfix_mem>" << endl;
+			out << "      <opt_consola_dbox>" << datosDbx["opt_consola_dbox"] << "</opt_consola_dbox>" << endl;
+			out << "      <opt_cerrar_dbox>" << datosDbx["opt_cerrar_dbox"] << "</opt_cerrar_dbox>" << endl;
+			out << "      <opt_cycle_sincronizar>" << datosDbx["opt_cycle_sincronizar"] << "</opt_cycle_sincronizar>" << endl;
+			out << "      <path_conf>" << datosDbx["path_conf"] << "</path_conf>" << endl;
+			out << "      <path_sonido>" << datosDbx["path_sonido"] << "</path_sonido>" << endl;
+			out << "      <path_exe>" << datosDbx["path_exe"] << "</path_exe>" << endl;
+			out << "      <path_setup>" << datosDbx["path_setup"] << "</path_setup>" << endl;
+			out << "      <parametros_exe>" << datosDbx["parametros_exe"] << "</parametros_exe>" << endl;
+			out << "      <parametros_setup>" << datosDbx["parametros_setup"] << "</parametros_setup>" << endl;
+			out << "    </dosbox>" << endl;
+	
+			for(int num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
+			{
+				QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
+				out << "    <montajes>" << endl;
+				out << "      <id_lista>" << item->text(9) << "</id_lista>" << endl;
+				out << "      <path>" << item->text(0) << "</path>" << endl;
+				out << "      <label>" << item->text(1) << "</label>" << endl;
+				out << "      <tipo_as>" << item->text(2) << "</tipo_as>" << endl;
+				out << "      <letter>" << item->text(3) << "</letter>" << endl;
+				out << "      <indx_cd>" << item->text(4) << "</indx_cd>" << endl;
+				out << "      <opt_mount>" << item->text(5) << "</opt_mount>" << endl;
+				out << "      <io_ctrl>" << item->text(6) << "</io_ctrl>" << endl;
+				out << "      <select_mount>" << item->text(7) << "</select_mount>" << endl;
+				out << "    </montajes>" << endl;
+			}
 		}
 		out << "  </lista_db>" << endl;
 		out << "</grlida_db>" << endl;
 	}
 }
 
-void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg, bool ExportToDFend)
+void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg, bool ExportToDFend)
 {
 	QFile file_out( PathSaveConfg );
 	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
@@ -656,7 +659,7 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QT
 		{
 			out << "[Extra]" << endl;
 			out << "Exe=" << datosDbx["path_exe"] << endl;
-			out << "Environment=" << datosDbx[""] << endl;
+			//out << "Environment=" << datosDbx[""] << endl;
 			//out << "Tab=" << datosDbx[""] << endl;
 			//out << "Tab2=" << datosDbx[""] << endl;
 			out << "Loadhigh=" << datosDbx["opt_loadfix"] << endl;
@@ -686,19 +689,19 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datosDbx, QT
 
 			QString stNotes;
 			stNotes.clear();
-			stNotes = datosDbx["Notes"];
+			stNotes = datos["comentario"];
 			stNotes.replace("<br/>\n","[13][10]").replace("<br/>","[13]").replace("\n","[13]");
 
 			out << "[ExtraInfo]" << endl;
-			out << "Genre=" << datosDbx["Genre"] << endl;
-			out << "Developer=" << datosDbx["Developer"] << endl;
-			out << "Publisher=" << datosDbx["Publisher"] << endl;
-			out << "Year=" << datosDbx["Year"] << endl;
-			out << "Language=" << datosDbx["Language"] << endl;
-			//out << "UserInfo=" << datosDbx[""] << endl;
-			out << "Favorite=" << datosDbx["Favorite"] << endl;
-			out << "Name=" << datosDbx["Name"] << endl;
-			out << "Icon=" << datosDbx["Icon"] << endl;
+			out << "Genre=" << datos["genero"] << endl;
+			out << "Developer=" << datos["desarrollador"] << endl;
+			out << "Publisher=" << datos["compania"] << endl;
+			out << "Year=" << datos["anno"] << endl;
+			out << "Language=" << datos["idioma"] << endl;
+			//out << "UserInfo=" << datos[""] << endl;
+			out << "Favorite=" << datos["favorito"] << endl;
+			out << "Name=" << datos["titulo"] << endl;
+			out << "Icon=" << datos["icono"] << endl;
 			out << "Notes=" << stNotes << endl << endl;
 			//out << "WWW=" << datosDbx[""] << endl;
 		}
@@ -1119,9 +1122,9 @@ void Funciones::Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *my
 	}
 }
 
-void Funciones::Exportar_Profile_DFend(const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg)
+void Funciones::Exportar_Profile_DFend(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg)
 {
-	CrearArchivoConfigDbx(datosDbx, treeWidget, PathSaveConfg, true);
+	CrearArchivoConfigDbx(datos, datosDbx, treeWidget, PathSaveConfg, true);
 }
 
 QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
@@ -1166,22 +1169,26 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 
 // Datos del juego -----
 	settings.beginGroup("ExtraInfo");
-		ProfileDFend["Genre"]     = settings.value("Genre"    , "").toString().replace("--", ",");
-		ProfileDFend["Developer"] = settings.value("Developer", "").toString().replace("--", ",");
-		ProfileDFend["Year"]      = settings.value("Year"     , "").toString().replace("--", ",");
-		ProfileDFend["Notes"]     = settings.value("Notes"    , "").toString().replace("--", ",").replace("[13][10]","<br/>\n").replace("[13]","\n");
+		ProfileDFend["genero"]        = settings.value("Genre"    , "").toString().replace("--", ",");
+		ProfileDFend["desarrollador"] = settings.value("Developer", "").toString().replace("--", ",");
+		ProfileDFend["anno"]          = settings.value("Year"     , "").toString().replace("--", ",");
+		ProfileDFend["comentario"]    = settings.value("Notes"    , "").toString().replace("--", ",").replace("[13][10]","<br/>\n").replace("[13]","\n");
 
 		if(settings.value("Favorite","false").toBool())
-			ProfileDFend["Favorite"] = "true"; else ProfileDFend["Favorite"] = "false";
+			ProfileDFend["favorito"] = "true";
+		else
+			ProfileDFend["favorito"] = "false";
 
 		if( settings.value("Icon", "dosbox").toString().replace("--", ",") !="")
-			ProfileDFend["Icon"] = settings.value("Icon", "dosbox").toString().replace("--", ","); else ProfileDFend["Icon"] = "dosbox";
+			ProfileDFend["icono"] = settings.value("Icon", "dosbox").toString().replace("--", ",");
+		else
+			ProfileDFend["icono"] = "dosbox";
 
-		ProfileDFend["Publisher"] = settings.value("Publisher", "").toString().replace("--", ",");
+		ProfileDFend["compania"] = settings.value("Publisher", "").toString().replace("--", ",");
 		ProfileDFend["WWW"]       = settings.value("WWW"      , "").toString().replace("--", ",");
-		ProfileDFend["Language"]  = settings.value("Language" , "").toString().replace("--", ",");
+		ProfileDFend["idioma"]  = settings.value("Language" , "").toString().replace("--", ",");
 		ProfileDFend["UserInfo"]  = settings.value("UserInfo" , "").toString().replace("--", ",");
-		ProfileDFend["Name"]      = settings.value("Name"     , "").toString().replace("--", ",");
+		ProfileDFend["titulo"]      = settings.value("Name"     , "").toString().replace("--", ",");
 	settings.endGroup();
 
 	ProfileDFend["opt_autoexec"]          = "false";

@@ -110,19 +110,22 @@ void dbSql::ItemEliminar( const QString IDgrl )
 	query.clear();
 	query.exec("DELETE FROM dbgrl_emu_scummvm WHERE idgrl="+IDgrl);
 	query.clear();
-	query.exec("SELECT * FROM dbgrl_emu_dosbox WHERE idgrl="+IDgrl+" LIMIT 0,1");
+	query.exec("SELECT id, idgrl, path_conf FROM dbgrl_emu_dosbox WHERE idgrl="+IDgrl+" LIMIT 0,1");
 	query.first();
-		IDdbx = query.value(0).toString();
-		temp_FileConf = query.value(87).toString();
-	eliminararchivo( "confdbx/" + temp_FileConf );
+		IDdbx.clear();
+		IDdbx = query.record().value("id").toString();
+		temp_FileConf.clear();
+		temp_FileConf = query.record().value("path_conf").toString();
+		eliminararchivo( "confdbx/" + temp_FileConf );
 	query.exec("DELETE FROM dbgrl_emu_dosbox_mount WHERE id_dosbox="+IDdbx);
 	query.clear();
 	query.exec("DELETE FROM dbgrl_emu_dosbox WHERE idgrl="+IDgrl);
 	query.clear();
-	query.exec("SELECT * FROM dbgrl_emu_vdmsound WHERE idgrl="+IDgrl+" LIMIT 0,1");
+	query.exec("SELECT id, idgrl, path_conf FROM dbgrl_emu_vdmsound WHERE idgrl="+IDgrl+" LIMIT 0,1");
 	query.first();
-		temp_FileConf = query.value(2).toString();	
-	eliminararchivo( "confvdms/" + temp_FileConf );
+		temp_FileConf.clear();
+		temp_FileConf = query.record().value("path_conf").toString();	
+		eliminararchivo( "confvdms/" + temp_FileConf );
 	query.exec("DELETE FROM dbgrl_emu_vdmsound WHERE idgrl="+IDgrl);
 	query.clear();
 }
@@ -134,6 +137,45 @@ void dbSql::eliminararchivo(QString archivo)
 	QFile f( stArchivoConfg );
 	if( f.exists() )
 		f.remove();
+}
+
+QHash<QString, QString> dbSql::show_Datos(QString IDgrl)
+{
+	QHash<QString, QString> tmpDatosJuego;
+
+	QSqlQuery query;
+	query.clear();
+	query.exec("SELECT * FROM dbgrl WHERE idgrl="+IDgrl+" LIMIT 0,1");
+	query.first();
+
+	tmpDatosJuego["idgrl"]         = query.record().value("idgrl").toString();
+	tmpDatosJuego["icono"]         = query.record().value("icono").toString();
+	tmpDatosJuego["titulo"]        = query.record().value("titulo").toString();
+	tmpDatosJuego["subtitulo"]     = query.record().value("subtitulo").toString();
+	tmpDatosJuego["genero"]        = query.record().value("genero").toString();
+	tmpDatosJuego["compania"]      = query.record().value("compania").toString();
+	tmpDatosJuego["desarrollador"] = query.record().value("desarrollador").toString();
+	tmpDatosJuego["tema"]          = query.record().value("tema").toString();
+	tmpDatosJuego["idioma"]        = query.record().value("idioma").toString();
+	tmpDatosJuego["formato"]       = query.record().value("formato").toString();
+	tmpDatosJuego["anno"]          = query.record().value("anno").toString();
+	tmpDatosJuego["numdisc"]       = query.record().value("numdisc").toString();
+	tmpDatosJuego["sistemaop"]     = query.record().value("sistemaop").toString();
+	tmpDatosJuego["tamano"]        = query.record().value("tamano").toString();
+	tmpDatosJuego["graficos"]      = query.record().value("graficos").toString();
+	tmpDatosJuego["sonido"]        = query.record().value("sonido").toString();
+	tmpDatosJuego["jugabilidad"]   = query.record().value("jugabilidad").toString();
+	tmpDatosJuego["original"]      = query.record().value("original").toString();
+	tmpDatosJuego["estado"]        = query.record().value("estado").toString();
+	tmpDatosJuego["thumbs"]        = query.record().value("thumbs").toString();
+	tmpDatosJuego["cover_front"]   = query.record().value("cover_front").toString();
+	tmpDatosJuego["cover_back"]    = query.record().value("cover_back").toString();
+	tmpDatosJuego["fecha"]         = query.record().value("fecha").toString();
+	tmpDatosJuego["tipo_emu"]      = query.record().value("tipo_emu").toString();
+	tmpDatosJuego["comentario"]    = query.record().value("comentario").toString();
+	tmpDatosJuego["favorito"]      = query.record().value("favorito").toString();
+
+	return tmpDatosJuego;
 }
 
 QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
@@ -235,6 +277,129 @@ void dbSql::ItemActualizaDatosFavorito(const QString EstadoFav , const QString I
 	query.bindValue(":favorito"	, EstadoFav );
 	query.bindValue(":idgrl"	, IDgrl     );	// idgrl
 	query.exec();
+}
+
+QHash<QString, QString> dbSql::showConfg_DOSBox(QString IDgrl)
+{
+	QHash<QString, QString> tmpDatosDosBox;
+
+	QSqlQuery query;
+	query.clear();
+	query.exec("SELECT * FROM dbgrl_emu_dosbox WHERE idgrl="+IDgrl+" LIMIT 0,1");
+	query.first();
+
+	tmpDatosDosBox["id"]                   = query.record().value("id").toString();
+	tmpDatosDosBox["idgrl"]                = query.record().value("idgrl").toString();
+// [sdl]
+	tmpDatosDosBox["sdl_fullscreen"]       = query.record().value("sdl_fullscreen").toString();
+	tmpDatosDosBox["sdl_fulldouble"]       = query.record().value("sdl_fulldouble").toString();
+	tmpDatosDosBox["sdl_fullfixed"]        = query.record().value("sdl_fullfixed").toString();
+	tmpDatosDosBox["sdl_fullresolution"]   = query.record().value("sdl_fullresolution").toString();
+	tmpDatosDosBox["sdl_windowresolution"] = query.record().value("sdl_windowresolution").toString();
+	tmpDatosDosBox["sdl_output"]           = query.record().value("sdl_output").toString();
+	tmpDatosDosBox["sdl_hwscale"]          = query.record().value("sdl_hwscale").toString();
+	tmpDatosDosBox["sdl_autolock"]         = query.record().value("sdl_autolock").toString();
+	tmpDatosDosBox["sdl_sensitivity"]      = query.record().value("sdl_sensitivity").toString();
+	tmpDatosDosBox["sdl_waitonerror"]      = query.record().value("sdl_waitonerror").toString();
+	tmpDatosDosBox["sdl_priority"]         = query.record().value("sdl_priority").toString();
+	tmpDatosDosBox["sdl_mapperfile"]       = query.record().value("sdl_mapperfile").toString();
+	tmpDatosDosBox["sdl_usescancodes"]     = query.record().value("sdl_usescancodes").toString();
+// [dosbox]
+	tmpDatosDosBox["dosbox_language"] = query.record().value("dosbox_language").toString();
+	tmpDatosDosBox["dosbox_machine"]  = query.record().value("dosbox_machine").toString();
+	tmpDatosDosBox["dosbox_captures"] = query.record().value("dosbox_captures").toString();
+	tmpDatosDosBox["dosbox_memsize"]  = query.record().value("dosbox_memsize").toString();
+// [render]
+	tmpDatosDosBox["render_frameskip"] = query.record().value("render_frameskip").toString();
+	tmpDatosDosBox["render_aspect"]    = query.record().value("render_aspect").toString();
+	tmpDatosDosBox["render_scaler"]    = query.record().value("render_scaler").toString();
+// [cpu]
+	tmpDatosDosBox["cpu_core"]      = query.record().value("cpu_core").toString();
+	tmpDatosDosBox["cpu_cycles"]    = query.record().value("cpu_cycles").toString();
+	tmpDatosDosBox["cpu_cycleup"]   = query.record().value("cpu_cycleup").toString();
+	tmpDatosDosBox["cpu_cycledown"] = query.record().value("cpu_cycledown").toString();
+// [mixer]
+	tmpDatosDosBox["mixer_nosound"]   = query.record().value("mixer_nosound").toString();
+	tmpDatosDosBox["mixer_rate"]      = query.record().value("mixer_rate").toString();
+	tmpDatosDosBox["mixer_blocksize"] = query.record().value("mixer_blocksize").toString();
+	tmpDatosDosBox["mixer_prebuffer"] = query.record().value("mixer_prebuffer").toString();
+// [midi]
+	tmpDatosDosBox["midi_mpu401"]      = query.record().value("midi_mpu401").toString();
+	tmpDatosDosBox["midi_intelligent"] = query.record().value("midi_intelligent").toString();
+	tmpDatosDosBox["midi_device"]      = query.record().value("midi_device").toString();
+	tmpDatosDosBox["midi_config"]      = query.record().value("midi_config").toString();
+	tmpDatosDosBox["midi_mt32rate"]    = query.record().value("midi_mt32rate").toString();
+// [sblaster]
+	tmpDatosDosBox["sblaster_sbtype"]  = query.record().value("sblaster_sbtype").toString();
+	tmpDatosDosBox["sblaster_sbbase"]  = query.record().value("sblaster_sbbase").toString();
+	tmpDatosDosBox["sblaster_irq"]     = query.record().value("sblaster_irq").toString();
+	tmpDatosDosBox["sblaster_dma"]     = query.record().value("sblaster_dma").toString();
+	tmpDatosDosBox["sblaster_hdma"]    = query.record().value("sblaster_hdma").toString();
+	tmpDatosDosBox["sblaster_mixer"]   = query.record().value("sblaster_mixer").toString();
+	tmpDatosDosBox["sblaster_oplmode"] = query.record().value("sblaster_oplmode").toString();
+	tmpDatosDosBox["sblaster_oplrate"] = query.record().value("sblaster_oplrate").toString();
+// [gus]
+	tmpDatosDosBox["gus_gus"]      = query.record().value("gus_gus").toString();
+	tmpDatosDosBox["gus_gusrate"]  = query.record().value("gus_gusrate").toString();
+	tmpDatosDosBox["gus_gusbase"]  = query.record().value("gus_gusbase").toString();
+	tmpDatosDosBox["gus_irq1"]     = query.record().value("gus_irq1").toString();
+	tmpDatosDosBox["gus_irq2"]     = query.record().value("gus_irq2").toString();
+	tmpDatosDosBox["gus_dma1"]     = query.record().value("gus_dma1").toString();
+	tmpDatosDosBox["gus_dma2"]     = query.record().value("gus_dma2").toString();
+	tmpDatosDosBox["gus_ultradir"] = query.record().value("gus_ultradir").toString();
+// [speaker]
+	tmpDatosDosBox["speaker_pcspeaker"] = query.record().value("speaker_pcspeaker").toString();
+	tmpDatosDosBox["speaker_pcrate"]    = query.record().value("speaker_pcrate").toString();
+	tmpDatosDosBox["speaker_tandy"]     = query.record().value("speaker_tandy").toString();
+	tmpDatosDosBox["speaker_tandyrate"] = query.record().value("speaker_tandyrate").toString();
+	tmpDatosDosBox["speaker_disney"]    = query.record().value("speaker_disney").toString();
+// [joystick]
+	tmpDatosDosBox["joystick_type"]       = query.record().value("joystick_type").toString();
+	tmpDatosDosBox["joystick_timed"]      = query.record().value("joystick_timed").toString();
+	tmpDatosDosBox["joystick_autofire"]   = query.record().value("joystick_autofire").toString();
+	tmpDatosDosBox["joystick_swap34"]     = query.record().value("joystick_swap34").toString();
+	tmpDatosDosBox["joystick_buttonwrap"] = query.record().value("joystick_buttonwrap").toString();
+// [modem]
+	tmpDatosDosBox["modem_modem"]      = query.record().value("modem_modem").toString();
+	tmpDatosDosBox["modem_comport"]    = query.record().value("modem_comport").toString();
+	tmpDatosDosBox["modem_listenport"] = query.record().value("modem_listenport").toString();
+// [dserial]
+	tmpDatosDosBox["dserial_directserial"] = query.record().value("dserial_directserial").toString();
+	tmpDatosDosBox["dserial_comport"]      = query.record().value("dserial_comport").toString();
+	tmpDatosDosBox["dserial_realport"]     = query.record().value("dserial_realport").toString();
+	tmpDatosDosBox["dserial_defaultbps"]   = query.record().value("dserial_defaultbps").toString();
+	tmpDatosDosBox["dserial_parity"]       = query.record().value("dserial_parity").toString();
+	tmpDatosDosBox["dserial_bytesize"]     = query.record().value("dserial_bytesize").toString();
+	tmpDatosDosBox["dserial_stopbit"]      = query.record().value("dserial_stopbit").toString();
+	tmpDatosDosBox["serial_1"]             = query.record().value("serial_1").toString();
+	tmpDatosDosBox["serial_2"]             = query.record().value("serial_2").toString();
+	tmpDatosDosBox["serial_3"]             = query.record().value("serial_3").toString();
+	tmpDatosDosBox["serial_4"]             = query.record().value("serial_4").toString();
+// [dos]
+	tmpDatosDosBox["dos_xms"]            = query.record().value("dos_xms").toString();
+	tmpDatosDosBox["dos_ems"]            = query.record().value("dos_ems").toString();
+	tmpDatosDosBox["dos_umb"]            = query.record().value("dos_umb").toString();
+	tmpDatosDosBox["dos_keyboardlayout"] = query.record().value("dos_keyboardlayout").toString();
+// [ipx]
+	tmpDatosDosBox["ipx_ipx"]  = query.record().value("ipx_ipx").toString();
+// [autoexec]
+	tmpDatosDosBox["autoexec"] = query.record().value("autoexec").toString();
+// Opciones
+	tmpDatosDosBox["opt_autoexec"]          = query.record().value("opt_autoexec").toString();
+	tmpDatosDosBox["opt_loadfix"]           = query.record().value("opt_loadfix").toString();
+	tmpDatosDosBox["opt_loadfix_mem"]       = query.record().value("opt_loadfix_mem").toString();
+	tmpDatosDosBox["opt_consola_dbox"]      = query.record().value("opt_consola_dbox").toString();
+	tmpDatosDosBox["opt_cerrar_dbox"]       = query.record().value("opt_cerrar_dbox").toString();
+	tmpDatosDosBox["opt_cycle_sincronizar"] = query.record().value("opt_cycle_sincronizar").toString();
+// Otras opciones
+	tmpDatosDosBox["path_conf"]        = query.record().value("path_conf").toString();
+	tmpDatosDosBox["path_sonido"]      = query.record().value("path_sonido").toString();
+	tmpDatosDosBox["path_exe"]         = query.record().value("path_exe").toString();
+	tmpDatosDosBox["path_setup"]       = query.record().value("path_setup").toString();
+	tmpDatosDosBox["parametros_exe"]   = query.record().value("parametros_exe").toString();
+	tmpDatosDosBox["parametros_setup"] = query.record().value("parametros_setup").toString();
+
+	return tmpDatosDosBox;
 }
 
 QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString IDgrl)
@@ -589,6 +754,51 @@ void dbSql::ItemEliminarMontaje( const QString IDmountdbx )
 	query.exec("DELETE FROM dbgrl_emu_dosbox_mount WHERE id="+IDmountdbx);
 }
 
+QHash<QString, QString> dbSql::showConfg_ScummVM(QString IDgrl)
+{
+	QHash<QString, QString> tmpScummvm;
+	QSqlQuery query;
+	query.clear();
+	query.exec("SELECT * FROM dbgrl_emu_scummvm WHERE idgrl="+IDgrl+" LIMIT 0,1");
+	query.first();
+
+	tmpScummvm["id"]              = query.record().value("id" ).toString();
+	tmpScummvm["idgrl"]           = query.record().value("idgrl" ).toString();
+	tmpScummvm["game"]            = query.record().value("game" ).toString();
+	tmpScummvm["language"]        = query.record().value("language").toString();
+	tmpScummvm["subtitles"]       = query.record().value("subtitles").toString();
+	tmpScummvm["platform"]        = query.record().value("platform").toString();
+	tmpScummvm["gfx_mode"]        = query.record().value("gfx_mode").toString();
+	tmpScummvm["render_mode"]     = query.record().value("render_mode").toString();
+	tmpScummvm["fullscreen"]      = query.record().value("fullscreen").toString();
+	tmpScummvm["aspect_ratio"]    = query.record().value("aspect_ratio").toString();
+	tmpScummvm["path"]            = query.record().value("path").toString();
+	tmpScummvm["path_setup"]      = query.record().value("path_setup").toString();
+	tmpScummvm["path_extra"]      = query.record().value("path_extra").toString();
+	tmpScummvm["path_save"]       = query.record().value("path_save").toString();
+	tmpScummvm["path_capturas"]   = query.record().value("path_capturas").toString();
+	tmpScummvm["path_sonido"]     = query.record().value("path_sonido").toString();
+	tmpScummvm["music_driver"]    = query.record().value("music_driver").toString();
+	tmpScummvm["enable_gs"]       = query.record().value("enable_gs").toString();
+	tmpScummvm["multi_midi"]      = query.record().value("multi_midi").toString();
+	tmpScummvm["native_mt32"]     = query.record().value("native_mt32").toString();
+	tmpScummvm["master_volume"]   = query.record().value("master_volume").toString();
+	tmpScummvm["music_volume"]    = query.record().value("music_volume").toString();
+	tmpScummvm["sfx_volume"]      = query.record().value("sfx_volume").toString();
+	tmpScummvm["speech_volume"]   = query.record().value("speech_volume").toString();
+	tmpScummvm["tempo"]           = query.record().value("tempo").toString();
+	tmpScummvm["talkspeed"]       = query.record().value("talkspeed").toString();
+	tmpScummvm["debuglevel"]      = query.record().value("debuglevel").toString();
+	tmpScummvm["cdrom"]           = query.record().value("cdrom").toString();
+	tmpScummvm["joystick_num"]    = query.record().value("joystick_num").toString();
+	tmpScummvm["output_rate"]     = query.record().value("output_rate").toString();
+	tmpScummvm["midi_gain"]       = query.record().value("midi_gain").toString();
+	tmpScummvm["copy_protection"] = query.record().value("copy_protection").toString();
+	tmpScummvm["sound_font"]      = query.record().value("sound_font").toString();
+
+	return tmpScummvm;
+}
+
 void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString IDgrl)
 {
 	QString strSQL;
@@ -692,6 +902,27 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 	query.bindValue(":sound_font"		, datos["sound_font"] );
 	query.bindValue(":id"				,   IDsvm   );	// id del scummvm
 	query.exec();	
+}
+
+QHash<QString, QString> dbSql::showConfg_VDMSound(QString IDgrl)
+{
+	QHash<QString, QString> tmpVdmsound;
+	QSqlQuery query;
+	query.clear();
+	query.exec("SELECT * FROM dbgrl_emu_vdmsound WHERE idgrl="+IDgrl+" LIMIT 0,1");
+	query.first();
+
+	tmpVdmsound["id"]            = query.record().value("id").toString();
+	tmpVdmsound["idgrl"]         = query.record().value("idgrl").toString();
+	tmpVdmsound["path_conf"]     = query.record().value("path_conf").toString();
+	tmpVdmsound["path_exe"]      = query.record().value("path_exe").toString();
+	tmpVdmsound["program"]       = query.record().value("program").toString();
+	tmpVdmsound["vdms_debug"]    = query.record().value("vdms_debug").toString();
+	tmpVdmsound["winnt_dos"]     = query.record().value("winnt_dos").toString();
+	tmpVdmsound["winnt_dosbox"]  = query.record().value("winnt_dosbox").toString();
+	tmpVdmsound["winnt_storage"] = query.record().value("winnt_storage").toString();
+
+	return tmpVdmsound;	
 }
 
 void dbSql::ItemInsertaVdms(const QHash<QString, QString> datos, const QString IDgrl)

@@ -759,24 +759,24 @@ void frmImportarJuego::setProfile_DFend(QString fileName)
 	QStringList str_Lista;
 	QString tipoDrive, temp_opt_mount;
 	int i=0, num_mounts=0;
-	
+
 	DatosDosBox.clear();
 	DatosDosBox = fGrl.Importar_Profile_DFend( fileName );	
 
 //	DatosDosBox["WWW"]
 //	DatosDosBox["UserInfo"]
-	
+
 	DatosJuego.clear();
-	DatosJuego["icono"]         = DatosDosBox["Icon"];		// icono
-	DatosJuego["titulo"]        = DatosDosBox["Name"];		// titulo
+	DatosJuego["icono"]         = DatosDosBox["icono"];		// icono
+	DatosJuego["titulo"]        = DatosDosBox["titulo"];	// titulo
 	DatosJuego["subtitulo"]     = "";						// subtitulo
-	DatosJuego["genero"]        = DatosDosBox["Genre"];		// genero
-	DatosJuego["compania"]      = DatosDosBox["Publisher"];	// compania
-	DatosJuego["desarrollador"] = DatosDosBox["Developer"];	// desarrollador
+	DatosJuego["genero"]        = DatosDosBox["genero"];	// genero
+	DatosJuego["compania"]      = DatosDosBox["compania"];	// compania
+	DatosJuego["desarrollador"] = DatosDosBox["desarrollador"];	// desarrollador
 	DatosJuego["tema"]          = "";						// tema
-	DatosJuego["idioma"]        = DatosDosBox["Language"];	// idioma
+	DatosJuego["idioma"]        = DatosDosBox["idioma"];	// idioma
 	DatosJuego["formato"]       = "";						// formato
-	DatosJuego["anno"]          = DatosDosBox["Year"];		// anno
+	DatosJuego["anno"]          = DatosDosBox["anno"];		// anno
 	DatosJuego["numdisc"]       = "";						// numdisc
 	DatosJuego["sistemaop"]     = "";						// sistemaop
 	DatosJuego["tamano"]        = "";						// tamano
@@ -790,8 +790,8 @@ void frmImportarJuego::setProfile_DFend(QString fileName)
 	DatosJuego["cover_back"]    = "null";					// cover_back
 	DatosJuego["fecha"]         = fGrl.HoraFechaActual();	// fecha d/m/a h:m:s
 	DatosJuego["tipo_emu"]      = "dosbox"; 				// tipo_emu
-	DatosJuego["comentario"]    = DatosDosBox["Notes"];		// comentario
-	DatosJuego["favorito"]      = DatosDosBox["Favorite"];	//favorito
+	DatosJuego["comentario"]    = DatosDosBox["comentario"];// comentario
+	DatosJuego["favorito"]      = DatosDosBox["favorito"];	//favorito
 
 	ui.twMontajes->clear();
 	num_mounts = fGrl.StrToInt( DatosDosBox["NrOfMounts"] );
