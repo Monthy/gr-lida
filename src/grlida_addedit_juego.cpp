@@ -701,7 +701,7 @@ void frmAddEditJuego::on_btnImgVer_CoverBack()
 
 void frmAddEditJuego::on_btnImgEliminar_Thumbs()
 {
-	stThumbs.clear();
+	stThumbs = "";
 	ui.lbImg_Thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 	ui.btnImgVer_Thumbs->setEnabled( false );
 	ui.btnImgEliminar_Thumbs->setEnabled( false );
@@ -709,7 +709,7 @@ void frmAddEditJuego::on_btnImgEliminar_Thumbs()
 
 void frmAddEditJuego::on_btnImgEliminar_CoverFront()
 {
-	stCoverFront.clear();
+	stCoverFront = "";
 	ui.lbImg_CoverFront->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 	ui.btnImgVer_CoverFront->setEnabled( false );
 	ui.btnImgEliminar_CoverFront->setEnabled( false );
@@ -717,7 +717,7 @@ void frmAddEditJuego::on_btnImgEliminar_CoverFront()
 
 void frmAddEditJuego::on_btnImgEliminar_CoverBack()
 {
-	stCoverBack.clear();
+	stCoverBack = "";
 	ui.lbImg_CoverBack->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
 	ui.btnImgVer_CoverBack->setEnabled( false );
 	ui.btnImgEliminar_CoverBack->setEnabled( false );
