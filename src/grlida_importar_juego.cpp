@@ -41,9 +41,25 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDirFileXML , SIGNAL(clicked()), this, SLOT(on_btnDirFileXML()));
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
-
+	xml_ListaJuegos = stHomeDir + "tmp_lista_juegos.xml";
+	xml_InfoJuegos  = stHomeDir + "tmp_info_juego.xml";
+	
 	stTheme = fGrl.ThemeGrl();
 	setTheme();
+
+	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
+	settings.beginGroup("OpcGeneral");
+		temp_url_xmldb = settings.value("url_xmldb", "http://laisladelabandoware.es/" ).toString(); // GR-lida
+		DirBaseGames   = settings.value("DirBaseGames", "").toString() ;
+	settings.endGroup();
+
+	if( url_xmldb.isEmpty() )
+		url_xmldb = "http://laisladelabandoware.es/";
+	else
+		url_xmldb = fGrl.url_correcta( temp_url_xmldb );
+
+	ui.cbxDbXml->clear();
+	ui.cbxDbXml->addItem( QIcon(stTheme+"img16/edit_enlace.png"), url_xmldb);
 
 	QStringList cbx_Lista, cbx_ListaTemp;
 	QPixmap pixmap;
@@ -55,7 +71,6 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 		while( !in.atEnd() )
 			cbx_ListaTemp << in.readLine();
 
-		ui.cbxDbXml->clear();
 		for( int i = 0; i < cbx_ListaTemp.count(); i++ )
 		{
 			cbx_Lista = cbx_ListaTemp[i].split( "|" );
@@ -67,17 +82,10 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	}
 	file_xmldb.close();
 
-	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
-	settings.beginGroup("OpcGeneral");
-		url_xmldb    = fGrl.url_correcta( settings.value("url_xmldb", "" ).toString() ); // GR-lida
-		DirBaseGames = settings.value("DirBaseGames", "").toString() ;
-	settings.endGroup();
-
-	xml_ListaJuegos = stHomeDir + "tmp_lista_juegos.xml";
-	xml_InfoJuegos  = stHomeDir + "tmp_info_juego.xml";
-
-	ui.cbxDbXml->addItem( QIcon(stTheme+"img16/edit_enlace.png"), url_xmldb);
-	ui.cbxDbXml->setCurrentIndex( ui.cbxDbXml->findText(url_xmldb, Qt::MatchContains) ); //
+	if( url_xmldb.isEmpty() )
+		ui.cbxDbXml->setCurrentIndex( 0 );
+	else
+		ui.cbxDbXml->setCurrentIndex( ui.cbxDbXml->findText(url_xmldb, Qt::MatchContains) );
 
 	progressDialog = new QProgressDialog(this);
 	http = new QHttp(this);
@@ -404,8 +412,8 @@ void frmImportarJuego::on_btnOk()
 			}
 		}
 
-		if( ui.cbxDbXml->currentText()!="")
-			url_xmldb = fGrl.url_correcta(ui.cbxDbXml->currentText()); else  url_xmldb = "";
+		//if( ui.cbxDbXml->currentText()!="")
+		//	url_xmldb = fGrl.url_correcta(ui.cbxDbXml->currentText()); else  url_xmldb = "";
 
 		QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
 		settings.beginGroup("OpcGeneral");
@@ -426,7 +434,12 @@ void frmImportarJuego::on_btnUpdateList()
 {
 	ui.twListaJuegos->clear();
 	indx_fin_descarga = 0;
-	url_filed = url_xmldb + "grlidadb.xml";
+
+	if( ui.cbxDbXml->currentText()!="")
+		url_filed = fGrl.url_correcta( ui.cbxDbXml->currentText() ) + "grlidadb.xml";
+	else
+		url_filed = url_xmldb + "grlidadb.xml";
+
 	downloadFile( url_filed, xml_ListaJuegos );
 }
 
