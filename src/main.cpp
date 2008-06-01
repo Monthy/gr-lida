@@ -76,6 +76,7 @@ int main(int argc, char *argv[])
 			settings.setValue("IdiomaExterno", "false");
 			settings.setValue("url_xmldb"    , "");		
 			settings.setValue("Style"        , "Default");
+			settings.setValue("NameDirTheme" , "defecto");
 			settings.setValue("StylePalette" , "false");
 			settings.setValue("IconoFav"     , "fav_0.png");
 		settings.endGroup();
@@ -141,6 +142,12 @@ int main(int argc, char *argv[])
 	if(!langDir.exists(stHomeDir+"idiomas")) langDir.mkdir( stHomeDir+"idiomas" );
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Iconos"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio Themes si no existe
+	QDir themesDir;
+	if(!themesDir.exists(stHomeDir+"themes")) themesDir.mkdir( stHomeDir+"themes" );
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Themes"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio iconos si no existe
 	QDir iconDir;
