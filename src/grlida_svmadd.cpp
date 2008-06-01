@@ -32,6 +32,9 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 	stHomeDir  = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stDatosDir = stHomeDir + "datos/";
 
+	stTheme = fGrl.ThemeGrl();
+	setTheme();
+
 	ui.wizardSvm->setCurrentIndex(0);
 
 // Conecta los distintos botones con las funciones.
@@ -72,6 +75,17 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 }
 
 frmSvmAdd::~frmSvmAdd(){}
+
+void frmSvmAdd::setTheme()
+{
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+	ui.btnPrevious->setIcon( QIcon(stTheme+"img16/mp_rebobinar_atras.png") );
+	ui.btnNext->setIcon( QIcon(stTheme+"img16/mp_rebobinar_adelante.png") );
+	ui.btnDirSvm_1->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirSvm_2->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDefectoSvm->setIcon( QIcon(stTheme+"img16/actualizar.png") );
+}
 
 void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *item1,QTreeWidgetItem *item2)
 {

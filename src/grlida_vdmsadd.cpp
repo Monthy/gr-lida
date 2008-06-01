@@ -32,7 +32,9 @@ frmVdmsAdd::frmVdmsAdd(QDialog *parent, Qt::WFlags flags)
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stConfgVdmSDir = stHomeDir + "confvdms/";	// directorio de configuracion para el VDMSound
 	
-	
+	stTheme = fGrl.ThemeGrl();
+	setTheme();
+
 // Conecta los distintos botones con las funciones.
 	connect( ui.btnOk		     , SIGNAL( clicked() ), this, SLOT( on_btnOk()             ) );
 	connect( ui.btnVdms_FileConfg, SIGNAL( clicked() ), this, SLOT( on_btnVdms_FileConfg() ) );
@@ -48,6 +50,18 @@ frmVdmsAdd::frmVdmsAdd(QDialog *parent, Qt::WFlags flags)
 }
 
 frmVdmsAdd::~frmVdmsAdd(){}
+
+void frmVdmsAdd::setTheme()
+{
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+	ui.btnVdms_FileConfg->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnVdms_ExeJuego->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnVdms_Icono->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnVdms_FileConfg_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnVdms_ExeJuego_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnVdms_Icono_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+}
 
 void frmVdmsAdd::on_btnOk()
 {

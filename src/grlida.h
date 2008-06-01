@@ -62,7 +62,7 @@ private:
 
 	QString stdb_type, stdb_host, stdb_name, stdb_username, stdb_password, stdb_port;
 	QString stdb_Orden_ColTabla, stdb_Orden_By, stdb_Orden;
-	QString stHomeDir, stIconDir, stDatosDir, stConfgDbxDir, stConfgVdmSDir;
+	QString stHomeDir, stIconDir, stDatosDir, stConfgDbxDir, stConfgVdmSDir, stTheme;
 	QString stBinExeDbx, stBinExeSvm;
 	QString stItemIndex, stConfgJuego, stTipoEmu, stIdiomaSelect;
 	QString stCapturasDbx, stCapturasSvm, stCapturasVdms, stCaratula_Delantera, stCaratula_Trasera, stIconoFav;
@@ -90,7 +90,8 @@ private:
 	void CrearArchivoDato(QString archivo);  // Crea los archivos de datos
 	void Ejecutar( const QString& bin, const QString &parametros);
 	void Confg_Svm_Dbx(QString IDitem);	
-	
+	void setTheme();
+
 protected:
 	void closeEvent( QCloseEvent *e );
 	

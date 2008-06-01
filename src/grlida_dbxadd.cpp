@@ -34,6 +34,9 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 
+	stTheme = fGrl.ThemeGrl();
+	setTheme();
+
 // Conecta los distintos botones con las funciones.
 	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );
 	connect( ui.btnNext		, SIGNAL( clicked() ), this, SLOT( on_btnNext()     ) );
@@ -91,6 +94,25 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 }
 
 frmDbxAdd::~frmDbxAdd(){}
+
+void frmDbxAdd::setTheme()
+{
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+	ui.btnPrevious->setIcon( QIcon(stTheme+"img16/mp_rebobinar_atras.png") );
+	ui.btnNext->setIcon( QIcon(stTheme+"img16/mp_rebobinar_adelante.png") );
+	ui.btnDbx_FileConfg->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDbx_ExeJuego->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDbx_ExeSetup->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnMount_Add->setIcon( QIcon(stTheme+"img16/nuevo.png") );
+	ui.btnMount_Edit->setIcon( QIcon(stTheme+"img16/editar.png") );
+	ui.btnMount_Delete->setIcon( QIcon(stTheme+"img16/eliminar.png") );
+	ui.btnMount_Clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnMount_Subir->setIcon( QIcon(stTheme+"img16/go-up.png") );
+	ui.btnMount_Bajar->setIcon( QIcon(stTheme+"img16/go-down.png") );
+	ui.btnMount_AutoCrear->setIcon( QIcon(stTheme+"img16/ejecutar_app.png") );
+	ui.btnMount_Primario->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+}
 
 void frmDbxAdd::on_btnPrevious()
 {
@@ -234,32 +256,32 @@ void frmDbxAdd::on_setProfileGame(const QString ProfileGame)
 
 				if(tipoDrive=="drive")
 				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+					twItemDfend->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 					tipoDrive = "drive";
 				}
 				if(tipoDrive=="cdrom")
 				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+					twItemDfend->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
 					tipoDrive = "cdrom";
 				}
 				if(tipoDrive=="floppy")
 				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+					twItemDfend->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
 					tipoDrive = "floppy";
 				}
 				if(tipoDrive=="floppyimage")
 				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+					twItemDfend->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
 					tipoDrive = "IMG_floppy";
 				}
 				if(tipoDrive=="cdromimage")
 				{
-					twItemDfend->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+					twItemDfend->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
 					tipoDrive = "IMG_iso";
 				}
 				if(tipoDrive=="image")
 				{
-					twItemDfend->setIcon(0, QIcon(":/img16/drive_hd.png") );
+					twItemDfend->setIcon(0, QIcon(stTheme+"img16/drive_hd.png") );
 					tipoDrive = "IMG_hdd";
 				}
 				temp_opt_mount.clear();
@@ -632,17 +654,17 @@ void frmDbxAdd::on_btnMount_Add()
 		QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 		QString tipoDrive = AddEditMontajes->DatosMontaje["tipo_as"];
 		if(tipoDrive=="drive")
-			item->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 		if(tipoDrive=="cdrom")
-			item->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
 		if(tipoDrive=="floppy")
-			item->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
 		if(tipoDrive=="IMG_floppy")
-			item->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
 		if(tipoDrive=="IMG_iso")
-			item->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
 		if(tipoDrive=="IMG_hdd")
-			item->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 
 		item->setText( 0 , AddEditMontajes->DatosMontaje["path"]		);	// directorio o iso
 		item->setText( 1 , AddEditMontajes->DatosMontaje["label"]		);	// etiqueta
@@ -701,17 +723,17 @@ void frmDbxAdd::on_btnMount_Edit()
 				select_mount = "";
 
 			if(tipoDrive=="drive")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_hd.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
 			if(tipoDrive=="cdrom")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_cdrom.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_cdrom.png") );
 			if(tipoDrive=="floppy")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_floppy.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_floppy.png") );
 			if(tipoDrive=="IMG_floppy")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"floppy_1.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"floppy_1.png") );
 			if(tipoDrive=="IMG_iso")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"cd_iso.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"cd_iso.png") );
 			if(tipoDrive=="IMG_hdd")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_hd.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
 
 			ui.twMontajes->currentItem()->setText( 0 , AddEditMontajes->DatosMontaje["path"]		);	// directorio o iso
 			ui.twMontajes->currentItem()->setText( 1 , AddEditMontajes->DatosMontaje["label"]		);	// etiqueta
@@ -815,7 +837,7 @@ void frmDbxAdd::on_btnMount_AutoCrear()
 {
 	QFileInfo fi( ui.txtDbx_path_exe->text() );
 	QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
-	item->setIcon( 0 , QIcon(":/img16/drive_hd.png") );
+	item->setIcon( 0 , QIcon(stTheme+"img16/drive_hd.png") );
 	item->setText( 0 , fi.absolutePath()	);	// directorio o iso
 	item->setText( 1 , ""					);	// etiqueta
 	item->setText( 2 , "drive"				);	// tipo de montaje
@@ -856,17 +878,17 @@ void frmDbxAdd::on_btnMount_Primario()
 			tipoDrive = ui.twMontajes->topLevelItem( num_mount )->text(2);
 
 			if(tipoDrive=="drive")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 			if(tipoDrive=="cdrom")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
 			if(tipoDrive=="floppy")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
 			if(tipoDrive=="IMG_floppy")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
 			if(tipoDrive=="IMG_iso")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
 			if(tipoDrive=="IMG_hdd")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 
 			ui.twMontajes->topLevelItem( num_mount )->setText(7 , "x");
 		}
@@ -874,17 +896,17 @@ void frmDbxAdd::on_btnMount_Primario()
 		tipoDrive = ui.twMontajes->topLevelItem( indx_mount )->text(2);
 
 		if(tipoDrive=="drive")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_drive_hd.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_hd.png") );
 		if(tipoDrive=="cdrom")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_drive_cdrom.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_cdrom.png") );
 		if(tipoDrive=="floppy")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_drive_floppy.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_floppy.png") );
 		if(tipoDrive=="IMG_floppy")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_floppy_1.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_floppy_1.png") );
 		if(tipoDrive=="IMG_iso")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_cd_iso.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_cd_iso.png") );
 		if(tipoDrive=="IMG_hdd")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_drive_hd.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_hd.png") );
 
 		ui.twMontajes->topLevelItem( indx_mount )->setText(7 , "v");
 

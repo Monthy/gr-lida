@@ -42,6 +42,9 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 
+	stTheme = fGrl.ThemeGrl();
+	setTheme();
+
 	QStringList cbx_Lista, cbx_ListaTemp;
 	QPixmap pixmap;
 	QFile file_xmldb( stHomeDir + "datos/xmldb.txt" );
@@ -56,9 +59,9 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 		for( int i = 0; i < cbx_ListaTemp.count(); i++ )
 		{
 			cbx_Lista = cbx_ListaTemp[i].split( "|" );
-			pixmap.load(":/img16/"+cbx_Lista.value(1)+".png");
+			pixmap.load(stTheme+"img16/"+cbx_Lista.value(1)+".png");
 			if( pixmap.isNull() )
-				pixmap.load(":/img16/sinimg.png");
+				pixmap.load(stTheme+"img16/sinimg.png");
 			ui.cbxDbXml->addItem( QIcon( pixmap ), fGrl.url_correcta( cbx_Lista.value(0) ) );
 		}
 	}
@@ -73,7 +76,7 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	xml_ListaJuegos = stHomeDir + "tmp_lista_juegos.xml";
 	xml_InfoJuegos  = stHomeDir + "tmp_info_juego.xml";
 
-	ui.cbxDbXml->addItem( QIcon(":/img16/edit_enlace.png"), url_xmldb);
+	ui.cbxDbXml->addItem( QIcon(stTheme+"img16/edit_enlace.png"), url_xmldb);
 	ui.cbxDbXml->setCurrentIndex( ui.cbxDbXml->findText(url_xmldb, Qt::MatchContains) ); //
 
 	progressDialog = new QProgressDialog(this);
@@ -106,6 +109,20 @@ frmImportarJuego::~frmImportarJuego()
 	delete progressDialog;
 }
 
+void frmImportarJuego::setTheme()
+{
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancelar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+	ui.btnPrevious->setIcon( QIcon(stTheme+"img16/mp_rebobinar_atras.png") );
+	ui.btnNext->setIcon( QIcon(stTheme+"img16/mp_rebobinar_adelante.png") );
+	ui.btnUpdateList->setIcon( QIcon(stTheme+"img16/actualizar.png") );
+	ui.btnDirFileXML->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirFileXML_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.tabWidget->setTabIcon(0, QIcon(stTheme+"img16/importar.png") );
+	ui.tabWidget->setTabIcon(1, QIcon(stTheme+"img16/edit_enlace.png") );
+	ui.tabWidget->setTabIcon(2, QIcon(stTheme+"img16/drive_hd.png") );
+}
+
 void frmImportarJuego::on_changeURL_XML(const QString &url)
 {
 	url_xmldb = fGrl.url_correcta( url );
@@ -122,7 +139,7 @@ void frmImportarJuego::on_btnPrevious()
 			ui.twMontajes->clear();
 			ui.twDatosFiles->clear();
 			ui.twDatosURL->clear();
-			ui.lb_thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+			ui.lb_thumbs->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 
 			for(int i = 0; i < ui.twDatosInfo->topLevelItemCount(); i++)
 				ui.twDatosInfo->topLevelItem(i)->setText(1,"");
@@ -488,15 +505,15 @@ void frmImportarJuego::parseListaJuegos(const QDomElement &element)
 			{
 				QTreeWidgetItem *childItem = new QTreeWidgetItem(ui.twListaJuegos);
 				if(child.firstChildElement("tipo_emu").text()=="datos")
-					childItem->setIcon(0, QIcon(":/img24/emu_datos.png"));
+					childItem->setIcon(0, QIcon(stTheme+"img24/emu_datos.png"));
 				else if(child.firstChildElement("tipo_emu").text()=="dosbox")
-					childItem->setIcon(0, QIcon(":/img24/emu_dbx.png"));
+					childItem->setIcon(0, QIcon(stTheme+"img24/emu_dbx.png"));
 				else if(child.firstChildElement("tipo_emu").text()=="scummvm")
-					childItem->setIcon(0, QIcon(":/img24/emu_svm.png"));
+					childItem->setIcon(0, QIcon(stTheme+"img24/emu_svm.png"));
 				else if(child.firstChildElement("tipo_emu").text()=="vdmsound")
-					childItem->setIcon(0, QIcon(":/img24/emu_vdms.png"));
+					childItem->setIcon(0, QIcon(stTheme+"img24/emu_vdms.png"));
 				else 
-					childItem->setIcon(0, QIcon(":/img24/emu_sin_imagen.png"));
+					childItem->setIcon(0, QIcon(stTheme+"img24/emu_sin_imagen.png"));
 
 				childItem->setText(0, child.firstChildElement("titulo").text());
 				childItem->setText(1, child.attribute("ID") );
@@ -565,7 +582,7 @@ void frmImportarJuego::parseListaJuegos(const QDomElement &element)
 			else if(child.tagName() == "datos_files")
 			{
 				QTreeWidgetItem *childItem_files = new QTreeWidgetItem(ui.twDatosFiles);
-				childItem_files->setIcon(0, QIcon(":/img16/importar.png")					);
+				childItem_files->setIcon(0, QIcon(stTheme+"img16/importar.png")					);
 				childItem_files->setText(0, child.firstChildElement("nombre").text()		);
 				childItem_files->setText(1, child.firstChildElement("crc").text()			);
 				childItem_files->setText(2, child.firstChildElement("descripcion").text()	);
@@ -726,17 +743,17 @@ void frmImportarJuego::parseListaJuegos(const QDomElement &element)
 
 				QString tipoDrive = child.firstChildElement("tipo_as").text();
 				if(tipoDrive=="drive")
-					childItem->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+					childItem->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 				if(tipoDrive=="cdrom")
-					childItem->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+					childItem->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
 				if(tipoDrive=="floppy")
-					childItem->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+					childItem->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
 				if(tipoDrive=="IMG_floppy")
-					childItem->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+					childItem->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
 				if(tipoDrive=="IMG_iso")
-					childItem->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+					childItem->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
 				if(tipoDrive=="IMG_hdd")
-					childItem->setIcon(0, QIcon(":/img16/drive_hd.png") );
+					childItem->setIcon(0, QIcon(stTheme+"img16/drive_hd.png") );
 
 				childItem->setText(0, child.firstChildElement("path").text().replace("{DirBaseGames}", DirBaseGames) );
 				childItem->setText(1, child.firstChildElement("label").text()        );
@@ -809,32 +826,32 @@ void frmImportarJuego::setProfile_DFend(QString fileName)
 
 			if(tipoDrive=="drive")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 				tipoDrive = "drive";
 			}
 			if(tipoDrive=="cdrom")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
 				tipoDrive = "cdrom";
 			}
 			if(tipoDrive=="floppy")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
 				tipoDrive = "floppy";
 			}
 			if(tipoDrive=="floppyimage")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
 				tipoDrive = "IMG_floppy";
 			}
 			if(tipoDrive=="cdromimage")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
 				tipoDrive = "IMG_iso";
 			}
 			if(tipoDrive=="image")
 			{
-				twItemDfend->setIcon(0, QIcon(":/img16/drive_hd.png") );
+				twItemDfend->setIcon(0, QIcon(stTheme+"img16/drive_hd.png") );
 				tipoDrive = "IMG_hdd";
 			}
 			temp_opt_mount.clear();
@@ -884,7 +901,7 @@ void frmImportarJuego::MostrarDatosJuegoInfo()
 	if( file_thumbs.exists(stHomeDir + "temp/thumbs_"+DatosJuego["thumbs"]) )
 		ui.lb_thumbs->setPixmap( QPixmap(stHomeDir + "temp/thumbs_"+DatosJuego["thumbs"]) );
 	else
-		ui.lb_thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.lb_thumbs->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 }
 
 void frmImportarJuego::downloadFile(QString urlfile, QString fileName)
@@ -1039,7 +1056,7 @@ void frmImportarJuego::on_treeWidget_clicked( QTreeWidgetItem *item)
 		if( item->text(2)=="null" || item->text(2).isEmpty() )
 		{
 			descarga_img = false;
-			temp_html_img = "<img src=\":/images/juego_sin_imagen.png\" width=\"145\" height=\"178\" hspace=\"4\" vspace=\"4\" border=\"0\" align=\"right\" />";
+			temp_html_img = "<img src=\""+stTheme+"images/juego_sin_imagen.png\" width=\"145\" height=\"178\" hspace=\"4\" vspace=\"4\" border=\"0\" align=\"right\" />";
 		} else {
 			QFile file_thumbs;	// thumbs
 

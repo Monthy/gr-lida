@@ -44,7 +44,8 @@ public:
 private:
 	Funciones fGrl;
 	QString stTituloVdms(){ return tr("Nuevo juego para el VDMSound"); }
-	QString stHomeDir, stConfgVdmSDir;
+	QString stHomeDir, stConfgVdmSDir, stTheme;
+	void setTheme();
 
 private slots:
 	void on_btnOk();

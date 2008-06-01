@@ -28,6 +28,7 @@
 #include <QtCore>
 #include <QtGui>
 
+#include "funciones.h"
 #include "ui_acercad.h"
 
 class frmAcercaD : public QDialog {
@@ -38,6 +39,10 @@ public:
 
 	Ui::AcercaDClass ui;
 
+private:
+	Funciones fGrl;
+	QString stTheme;
+	void setTheme();
 };
 
 #endif // GRLIDA_ACERCAD_H

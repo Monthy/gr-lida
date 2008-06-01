@@ -44,7 +44,7 @@ private:
 	Funciones fGrl;
 	dbSql *sql;
 	
-	QString stHomeDir, stIconDir, stIDdbx;
+	QString stHomeDir, stIconDir, stIDdbx, stTheme;
 	QHash<QString, QString> TempDatosJuego;
 	QHash<QString, QString> TempDatosScummvm;
 	QHash<QString, QString> TempDatosDosBox;

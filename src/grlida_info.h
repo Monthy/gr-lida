@@ -44,7 +44,7 @@ private:
 	Funciones fGrl;
 	dbSql *sql;
 	QTreeWidgetItem *ItemInfo;
-	QString stHomeDir, stdb_host;
+	QString stHomeDir, stdb_host, stTheme;
 	
 };
 

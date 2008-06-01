@@ -42,6 +42,8 @@ public:
 	QString stVersionVdms(){return "2.0.4"; }
 // Devuelve el directorio que usa el GR-lida
 	QString GRlidaHomePath();
+// 
+	QString ThemeGrl();
 // Muestra el Nombre de la plataforma donde esta compilada
 	QString get_Plataforma();
 // Convierte de Número a Texto
@@ -88,6 +90,10 @@ public:
 	void Exportar_Profile_GRLida(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
 // Importar la configuracion del DOSBox para el DFend
 	QHash<QString, QString> Importar_Profile_DFend(QString fileName);
+
+private:
+	QString stTheme;
+
 };
 
 #endif /*FUNCIONES_H*/

@@ -40,6 +40,9 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	stIconDir     = stHomeDir + "iconos/";				// directorio de iconos para el GR-lida
 	stDatosDir    = stHomeDir + "datos/";				// directorio para los distintos datos del GR-lida
 
+	stTheme = fGrl.ThemeGrl();
+	setTheme();
+
 // Conecta los distintos botones con las funciones.
 	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 	connect( ui.cbxDatos_TipoEmu	, SIGNAL( activated(const QString &) ), this, SLOT( on_cbxDatos_TipoEmu_txtChanged(const QString &) ) );
@@ -122,11 +125,11 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	fGrl.CargarDatosComboBox(stDatosDir + "sistemaop.txt", ui.cbxDatos_SistemaOp, 1, false);
 
 	for(int n=1; n<11; n++)
-		ui.cbxDatos_Graficos->addItem(QIcon(":/img16/grafica.png"),fGrl.IntToStr(n));
+		ui.cbxDatos_Graficos->addItem(QIcon(stTheme+"img16/grafica.png"),fGrl.IntToStr(n));
 	for(int n=1; n<11; n++)
-		ui.cbxDatos_Sonido->addItem(QIcon(":/img16/grafica.png"),fGrl.IntToStr(n));
+		ui.cbxDatos_Sonido->addItem(QIcon(stTheme+"img16/grafica.png"),fGrl.IntToStr(n));
 	for(int n=1; n<11; n++)
-		ui.cbxDatos_Jugabilidad->addItem(QIcon(":/img16/grafica.png"),fGrl.IntToStr(n));
+		ui.cbxDatos_Jugabilidad->addItem(QIcon(stTheme+"img16/grafica.png"),fGrl.IntToStr(n));
 
 	ui.html_preview->setVisible(false);
 
@@ -137,9 +140,9 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 		stThumbs = "";
 		stCoverFront = "";
 		stCoverBack = "";
-		ui.lbImg_Thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
-		ui.lbImg_CoverFront->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
-		ui.lbImg_CoverBack->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.lbImg_Thumbs->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
+		ui.lbImg_CoverFront->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
+		ui.lbImg_CoverBack->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_Thumbs->setEnabled( false );
 		ui.btnImgVer_CoverFront->setEnabled( false );
 		ui.btnImgVer_CoverBack->setEnabled( false );
@@ -301,6 +304,106 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 
 frmAddEditJuego::~frmAddEditJuego(){}
 
+void frmAddEditJuego::setTheme()
+{
+// General
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+	ui.tabWidget_Datos->setTabIcon(0, QIcon(stTheme+"img16/datos_2.png") );
+	ui.tabWidget_Datos->setTabIcon(1, QIcon(stTheme+"img16/nuevo.png") );
+	ui.tabWidget_Datos->setTabIcon(2, QIcon(stTheme+"img16/importar.png") );
+	ui.tabWidget_Datos->setTabIcon(3, QIcon(stTheme+"img16/dosbox.png") );
+	ui.tabWidget_Datos->setTabIcon(4, QIcon(stTheme+"img16/scummvm.png") );
+	ui.tabWidget_Datos->setTabIcon(5, QIcon(stTheme+"img16/vdmsound.png") );
+// Datos
+	ui.btnImgAbrir_Thumbs->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnImgAbrir_CoverFront->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnImgAbrir_CoverBack->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnImgVer_Thumbs->setIcon( QIcon(stTheme+"img16/capturas.png") );
+	ui.btnImgVer_CoverFront->setIcon( QIcon(stTheme+"img16/capturas.png") );
+	ui.btnImgVer_CoverBack->setIcon( QIcon(stTheme+"img16/capturas.png") );
+	ui.btnImgEliminar_Thumbs->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnImgEliminar_CoverFront->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnImgEliminar_CoverBack->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnTool_Cortar->setIcon( QIcon(stTheme+"img16/edit_cut.png") );
+	ui.btnTool_Copiar->setIcon( QIcon(stTheme+"img16/edit_copy.png") );
+	ui.btnTool_Pegar->setIcon( QIcon(stTheme+"img16/edit_paste.png") );
+	ui.btnTool_SelectAll->setIcon( QIcon(stTheme+"img16/edit_select_all.png") );
+	ui.btnTool_Deshacer->setIcon( QIcon(stTheme+"img16/edit_deshacer.png") );
+	ui.btnTool_Rehacer->setIcon( QIcon(stTheme+"img16/edit_rehacer.png") );
+	ui.btnTool_TextoNegrita->setIcon( QIcon(stTheme+"img16/edit_negrita.png") );
+	ui.btnTool_TextoCursiva->setIcon( QIcon(stTheme+"img16/edit_cursiva.png") );
+	ui.btnTool_TextoSubrayado->setIcon( QIcon(stTheme+"img16/edit_subrayada.png") );
+	ui.btnTool_InsertarImg->setIcon( QIcon(stTheme+"img16/edit_imagen.png") );
+	ui.btnTool_InsertaUrl->setIcon( QIcon(stTheme+"img16/edit_enlace.png") );
+	ui.btnTool_Buscar->setIcon( QIcon(stTheme+"img16/edit_buscar.png") );
+	ui.btnTool_BuscarAnterior->setIcon( QIcon(stTheme+"img16/edit_buscar_anterior.png") );
+	ui.btnTool_BuscarSiguiente->setIcon( QIcon(stTheme+"img16/edit_buscar_siguiente.png") );
+	ui.btnTool_Reemplazar->setIcon( QIcon(stTheme+"img16/edit_reemplazar.png") );
+	ui.btnTool_Preview->setIcon( QIcon(stTheme+"img16/edit_preview.png") );
+	ui.btnNuevaUrl->setIcon( QIcon(stTheme+"img16/nuevo.png") );
+	ui.btnEditarUrl->setIcon( QIcon(stTheme+"img16/editar.png") );
+	ui.btnEliminarUrl->setIcon( QIcon(stTheme+"img16/eliminar.png") );
+	ui.btnAbrirUrl->setIcon( QIcon(stTheme+"img16/edit_enlace.png") );
+	ui.btnDatosFiles_PathFile->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDatosFiles_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnAddFile->setIcon( QIcon(stTheme+"img16/nuevo.png") );
+	ui.btnEditFile->setIcon( QIcon(stTheme+"img16/editar.png") );
+	ui.btnUpdateFile->setIcon( QIcon(stTheme+"img16/actualizar.png") );
+	ui.btnDeleteFile->setIcon( QIcon(stTheme+"img16/eliminar.png") );
+// DOSBox
+	ui.btnDbx_FileConfg->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDbx_ExeJuego->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDbx_ExeSetup->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnFileConfg_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnExeJuego_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnExeSetup_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirGravisUltraSound->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );	
+	ui.btnDbx_mapperfile->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDbx_language->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDbx_capturas->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDbx_musica->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDbx_mapperfile_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDbx_language_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDbx_capturas_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDbx_musica_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDbx_AddSerial->setIcon( QIcon(stTheme+"img16/applications.png") );
+	ui.btnMount_Add->setIcon( QIcon(stTheme+"img16/nuevo.png") );
+	ui.btnMount_Edit->setIcon( QIcon(stTheme+"img16/editar.png") );
+	ui.btnMount_Delete->setIcon( QIcon(stTheme+"img16/eliminar.png") );
+	ui.btnMount_Clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnMount_Subir->setIcon( QIcon(stTheme+"img16/go-up.png") );
+	ui.btnMount_Bajar->setIcon( QIcon(stTheme+"img16/go-down.png") );
+	ui.btnMount_AutoCrear->setIcon( QIcon(stTheme+"img16/ejecutar_app.png") );
+	ui.btnMount_Primario->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+// ScummVM
+	ui.btnDirSvm_1->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirSvm_2->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirSvm_3->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirSvm_4->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirSvm_5->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirSvm_6->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirSvm_7->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirSvm_1_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirSvm_2_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirSvm_3_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirSvm_4_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirSvm_5_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirSvm_6_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirSvm_7_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDefectoSvm->setIcon( QIcon(stTheme+"img16/actualizar.png") );
+	ui.tabWidget_ScummVM->setTabIcon(0, QIcon(stTheme+"img16/scummvm.png") );
+	ui.tabWidget_ScummVM->setTabIcon(1, QIcon(stTheme+"img16/opciones.png") );
+	ui.tabWidget_ScummVM->setTabIcon(2, QIcon(stTheme+"img16/vdmsound.png") );
+// VDMSound
+	ui.btnVdms_FileConfg->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnVdms_ExeJuego->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnVdms_Icono->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnVdms_FileConfg_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnVdms_ExeJuego_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnVdms_Icono_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+}
+
 void frmAddEditJuego::on_btnOk()
 {
 	bool siguiente;
@@ -423,16 +526,16 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 	ui.txtDatos_Tamano->setText( strDatosJuego["tamano"] );					// tamano
 	ui.txtDatos_Comentario->setPlainText( strDatosJuego["comentario"] );	// comentario
 
-	ui.cbxDatos_Genero->addItem( QIcon(":/img16/datos_3.png") , strDatosJuego["genero"] );				// genero
-	ui.cbxDatos_Compania->addItem( QIcon(":/img16/datos_3.png") , strDatosJuego["compania"] );			// compania
-	ui.cbxDatos_Desarrollador->addItem( QIcon(":/img16/datos_3.png") , strDatosJuego["desarrollador"] );// desarrollador
-	ui.cbxDatos_Tema->addItem( QIcon(":/img16/datos_3.png") , strDatosJuego["tema"] );					// tema
-	ui.cbxDatos_Idioma->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["idioma"] );				// idioma
-	ui.cbxDatos_Formato->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["formato"] );				// formato
-	ui.cbxDatos_Anno->addItem( QIcon(":/img16/fecha.png") , strDatosJuego["anno"] );					// anno
-	ui.cbxDatos_NumDisc->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["numdisc"] );				// numdisc
-	ui.cbxDatos_SistemaOp->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["sistemaop"] );			// sistemaop
-	ui.cbxDatos_Estado->addItem( QIcon(":/img16/sinimg.png") , strDatosJuego["estado"] );				// estado
+	ui.cbxDatos_Genero->addItem( QIcon(stTheme+"img16/datos_3.png") , strDatosJuego["genero"] );				// genero
+	ui.cbxDatos_Compania->addItem( QIcon(stTheme+"img16/datos_3.png") , strDatosJuego["compania"] );			// compania
+	ui.cbxDatos_Desarrollador->addItem( QIcon(stTheme+"img16/datos_3.png") , strDatosJuego["desarrollador"] );// desarrollador
+	ui.cbxDatos_Tema->addItem( QIcon(stTheme+"img16/datos_3.png") , strDatosJuego["tema"] );					// tema
+	ui.cbxDatos_Idioma->addItem( QIcon(stTheme+"img16/sinimg.png") , strDatosJuego["idioma"] );				// idioma
+	ui.cbxDatos_Formato->addItem( QIcon(stTheme+"img16/sinimg.png") , strDatosJuego["formato"] );				// formato
+	ui.cbxDatos_Anno->addItem( QIcon(stTheme+"img16/fecha.png") , strDatosJuego["anno"] );					// anno
+	ui.cbxDatos_NumDisc->addItem( QIcon(stTheme+"img16/sinimg.png") , strDatosJuego["numdisc"] );				// numdisc
+	ui.cbxDatos_SistemaOp->addItem( QIcon(stTheme+"img16/sinimg.png") , strDatosJuego["sistemaop"] );			// sistemaop
+	ui.cbxDatos_Estado->addItem( QIcon(stTheme+"img16/sinimg.png") , strDatosJuego["estado"] );				// estado
 
 // Selecciona el dato correspondiente.
 	ui.cbxDatos_Genero->setCurrentIndex( ui.cbxDatos_Genero->findText( strDatosJuego["genero"] ) );						// genero
@@ -476,7 +579,7 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 		ui.btnImgVer_Thumbs->setEnabled( true );
 		ui.btnImgEliminar_Thumbs->setEnabled( true );
 	} else {
-		ui.lbImg_Thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.lbImg_Thumbs->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_Thumbs->setEnabled( false );
 		ui.btnImgEliminar_Thumbs->setEnabled( false );
 	}
@@ -486,7 +589,7 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 		ui.btnImgVer_CoverFront->setEnabled( true );
 		ui.btnImgEliminar_CoverFront->setEnabled( true );
 	} else {
-		ui.lbImg_CoverFront->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.lbImg_CoverFront->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_CoverFront->setEnabled( false );
 		ui.btnImgEliminar_CoverFront->setEnabled( false );
 	}
@@ -496,7 +599,7 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 		ui.btnImgVer_CoverBack->setEnabled( true );
 		ui.btnImgEliminar_CoverBack->setEnabled( true );
 	} else {
-		ui.lbImg_CoverBack->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.lbImg_CoverBack->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_CoverBack->setEnabled( false );
 		ui.btnImgEliminar_CoverBack->setEnabled( false );
 	}
@@ -508,7 +611,7 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 		do {
 			QTreeWidgetItem *item_url = new QTreeWidgetItem( ui.twDatosURL );
 			item_url->setText( 0 , query.record().value("url").toString()         ); // url
-			item_url->setIcon( 0 , QIcon(":/img16/edit_enlace.png")               ); // icono
+			item_url->setIcon( 0 , QIcon(stTheme+"img16/edit_enlace.png")               ); // icono
 			item_url->setText( 1 , query.record().value("descripcion").toString() ); // descripcion
 			item_url->setText( 2 , query.record().value("id").toString()          ); // id
 			item_url->setText( 3 , query.record().value("idgrl").toString()       ); // idgrl
@@ -523,7 +626,7 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 		do {
 			QTreeWidgetItem *item_files = new QTreeWidgetItem( ui.twDatosFiles );
 			item_files->setText( 0 , query.record().value("nombre").toString()      ); // nombre
-			item_files->setIcon( 0 , QIcon(":/img16/importar.png")                  ); // icono
+			item_files->setIcon( 0 , QIcon(stTheme+"img16/importar.png")                  ); // icono
 			item_files->setText( 1 , query.record().value("crc").toString()         ); // crc
 			item_files->setText( 2 , query.record().value("descripcion").toString() ); // descripcion
 			item_files->setText( 3 , query.record().value("size").toString()        ); // size
@@ -624,7 +727,7 @@ void frmAddEditJuego::on_btnImgAbrir_Thumbs()
 		ui.btnImgVer_Thumbs->setEnabled( true );
 		ui.btnImgEliminar_Thumbs->setEnabled( true );
 	} else {
-		ui.lbImg_Thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.lbImg_Thumbs->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_Thumbs->setEnabled( false );
 		ui.btnImgEliminar_Thumbs->setEnabled( false );
 		stThumbs = "";
@@ -640,7 +743,7 @@ void frmAddEditJuego::on_btnImgAbrir_CoverFront()
 		ui.btnImgVer_CoverFront->setEnabled( true );
 		ui.btnImgEliminar_CoverFront->setEnabled( true );
 	} else {
-		ui.lbImg_CoverFront->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.lbImg_CoverFront->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_CoverFront->setEnabled( false );
 		ui.btnImgEliminar_CoverFront->setEnabled( false );
 		stCoverFront = "";
@@ -656,7 +759,7 @@ void frmAddEditJuego::on_btnImgAbrir_CoverBack()
 		ui.btnImgVer_CoverBack->setEnabled( true );
 		ui.btnImgEliminar_CoverBack->setEnabled( true );
 	} else {
-		ui.lbImg_CoverBack->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+		ui.lbImg_CoverBack->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_CoverBack->setEnabled( false );
 		ui.btnImgEliminar_CoverBack->setEnabled( false );
 		stCoverBack = "";
@@ -702,7 +805,7 @@ void frmAddEditJuego::on_btnImgVer_CoverBack()
 void frmAddEditJuego::on_btnImgEliminar_Thumbs()
 {
 	stThumbs = "";
-	ui.lbImg_Thumbs->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+	ui.lbImg_Thumbs->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 	ui.btnImgVer_Thumbs->setEnabled( false );
 	ui.btnImgEliminar_Thumbs->setEnabled( false );
 }
@@ -710,7 +813,7 @@ void frmAddEditJuego::on_btnImgEliminar_Thumbs()
 void frmAddEditJuego::on_btnImgEliminar_CoverFront()
 {
 	stCoverFront = "";
-	ui.lbImg_CoverFront->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+	ui.lbImg_CoverFront->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 	ui.btnImgVer_CoverFront->setEnabled( false );
 	ui.btnImgEliminar_CoverFront->setEnabled( false );
 }
@@ -718,7 +821,7 @@ void frmAddEditJuego::on_btnImgEliminar_CoverFront()
 void frmAddEditJuego::on_btnImgEliminar_CoverBack()
 {
 	stCoverBack = "";
-	ui.lbImg_CoverBack->setPixmap( QPixmap(":/images/juego_sin_imagen.png") );
+	ui.lbImg_CoverBack->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 	ui.btnImgVer_CoverBack->setEnabled( false );
 	ui.btnImgEliminar_CoverBack->setEnabled( false );
 }
@@ -884,7 +987,7 @@ void frmAddEditJuego::on_btnNuevaUrl()
 
 		QTreeWidgetItem *item_url = new QTreeWidgetItem( ui.twDatosURL );
 		item_url->setText( 0 , datos_url["url"]					); // url
-		item_url->setIcon( 0 , QIcon(":/img16/edit_enlace.png")	); // icono
+		item_url->setIcon( 0 , QIcon(stTheme+"img16/edit_enlace.png")	); // icono
 		item_url->setText( 1 , datos_url["descripcion"]			); // descripcion
 		item_url->setText( 2 , id_url							); // id
 		item_url->setText( 3 , stItemIDGrl						); // idgrl
@@ -910,7 +1013,7 @@ void frmAddEditJuego::on_btnEditarUrl()
 			datos_url["descripcion"] = AddEditURL->ui.txt_addedit_url_2->toPlainText();	// 1
 
 			ui.twDatosURL->currentItem()->setText( 0 , datos_url["url"]					); // url
-			ui.twDatosURL->currentItem()->setIcon( 0, QIcon(":/img16/edit_enlace.png")	); // icono
+			ui.twDatosURL->currentItem()->setIcon( 0, QIcon(stTheme+"img16/edit_enlace.png")	); // icono
 			ui.twDatosURL->currentItem()->setText( 1 , datos_url["descripcion"]			); // descripcion
 			ui.twDatosURL->currentItem()->setText( 2 , id_url							); // id
 			ui.twDatosURL->currentItem()->setText( 3 , stItemIDGrl						); // idgrl
@@ -977,7 +1080,7 @@ void frmAddEditJuego::on_btnAddFile()
 
 		QTreeWidgetItem *item_file = new QTreeWidgetItem( ui.twDatosFiles );
 		item_file->setText( 0 , datos_file["nombre"]			); // nombre
-		item_file->setIcon( 0 , QIcon(":/img16/archivos.png")	); // icono
+		item_file->setIcon( 0 , QIcon(stTheme+"img16/archivos.png")	); // icono
 		item_file->setText( 1 , datos_file["crc"]				); // crc32
 		item_file->setText( 2 , datos_file["descripcion"]		); // descripcion
 		item_file->setText( 3 , datos_file["size"]				); // size
@@ -1388,32 +1491,32 @@ void frmAddEditJuego::CargarDatosDosBox(QString stIDdbx, const QString ProfileGa
 
 			if(tipoDrive=="drive")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 				tipoDrive = "drive";
 			}
 			if(tipoDrive=="cdrom")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
 				tipoDrive = "cdrom";
 			}
 			if(tipoDrive=="floppy")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
 				tipoDrive = "floppy";
 			}
 			if(tipoDrive=="floppyimage")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
 				tipoDrive = "IMG_floppy";
 			}
 			if(tipoDrive=="cdromimage")
 			{
-				twItemDfend->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+				twItemDfend->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
 				tipoDrive = "IMG_iso";
 			}
 			if(tipoDrive=="image")
 			{
-				twItemDfend->setIcon(0, QIcon(":/img16/drive_hd.png") );
+				twItemDfend->setIcon(0, QIcon(stTheme+"img16/drive_hd.png") );
 				tipoDrive = "IMG_hdd";
 			}
 			temp_opt_mount.clear();
@@ -1464,17 +1567,17 @@ void frmAddEditJuego::CargarDatosDBxMontaje( QString stIDdbx )
 				select_mount = "";
 
 			if(tipoDrive=="drive")
-				item->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_hd.png") );
+				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
 			if(tipoDrive=="cdrom")
-				item->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_cdrom.png") );
+				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_cdrom.png") );
 			if(tipoDrive=="floppy")
-				item->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_floppy.png") );
+				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_floppy.png") );
 			if(tipoDrive=="IMG_floppy")
-				item->setIcon( 0, QIcon(":/img16/"+select_mount+"floppy_1.png") );
+				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"floppy_1.png") );
 			if(tipoDrive=="IMG_iso")
-				item->setIcon( 0, QIcon(":/img16/"+select_mount+"cd_iso.png") );
+				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"cd_iso.png") );
 			if(tipoDrive=="IMG_hdd")
-				item->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_hd.png") );
+				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
 
 			item->setText( 0 , query.value(rec.indexOf("path")).toString() );			// path			- directorio o iso
 			item->setText( 1 , query.value(rec.indexOf("label")).toString() );			// label		- etiqueta
@@ -1906,17 +2009,17 @@ void frmAddEditJuego::on_btnMount_Add()
 		QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 		QString tipoDrive = AddEditMontajes->DatosMontaje["tipo_as"];
 		if(tipoDrive=="drive")
-			item->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 		if(tipoDrive=="cdrom")
-			item->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
 		if(tipoDrive=="floppy")
-			item->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
 		if(tipoDrive=="IMG_floppy")
-			item->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
 		if(tipoDrive=="IMG_iso")
-			item->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
 		if(tipoDrive=="IMG_hdd")
-			item->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+			item->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 
 		item->setText( 0 , AddEditMontajes->DatosMontaje["path"]		);	// directorio o iso
 		item->setText( 1 , AddEditMontajes->DatosMontaje["label"]		);	// etiqueta
@@ -1989,17 +2092,17 @@ void frmAddEditJuego::on_btnMount_Edit()
 				select_mount = "";
 
 			if(tipoDrive=="drive")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_hd.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
 			if(tipoDrive=="cdrom")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_cdrom.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_cdrom.png") );
 			if(tipoDrive=="floppy")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_floppy.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_floppy.png") );
 			if(tipoDrive=="IMG_floppy")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"floppy_1.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"floppy_1.png") );
 			if(tipoDrive=="IMG_iso")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"cd_iso.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"cd_iso.png") );
 			if(tipoDrive=="IMG_hdd")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(":/img16/"+select_mount+"drive_hd.png") );
+				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
 
 			ui.twMontajes->currentItem()->setText( 0 , AddEditMontajes->DatosMontaje["path"]		);	// directorio o iso
 			ui.twMontajes->currentItem()->setText( 1 , AddEditMontajes->DatosMontaje["label"]		);	// etiqueta
@@ -2106,7 +2209,7 @@ void frmAddEditJuego::on_btnMount_AutoCrear()
 {
 	QFileInfo fi( ui.txtDbx_path_exe->text() );
 	QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
-	item->setIcon( 0 , QIcon(":/img16/drive_hd.png")	);
+	item->setIcon( 0 , QIcon(stTheme+"img16/drive_hd.png")	);
 	item->setText( 0 , fi.absolutePath()				);	// directorio o iso
 	item->setText( 1 , ""								);	// etiqueta
 	item->setText( 2 , "drive"							);	// tipo de montaje
@@ -2160,34 +2263,34 @@ void frmAddEditJuego::on_btnMount_Primario()
 			tipoDrive = ui.twMontajes->topLevelItem( num_mount )->text(2);
 
 			if(tipoDrive=="drive")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 			if(tipoDrive=="cdrom")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/drive_cdrom.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
 			if(tipoDrive=="floppy")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/drive_floppy.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
 			if(tipoDrive=="IMG_floppy")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/floppy_1.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
 			if(tipoDrive=="IMG_iso")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/cd_iso.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
 			if(tipoDrive=="IMG_hdd")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(":/img16/drive_hd.png") );
+				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 
 			ui.twMontajes->topLevelItem( num_mount )->setText(7 , "x");
 		}
 
 		tipoDrive = ui.twMontajes->topLevelItem( indx_mount )->text(2);
 		if(tipoDrive=="drive")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_drive_hd.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_hd.png") );
 		if(tipoDrive=="cdrom")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_drive_cdrom.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_cdrom.png") );
 		if(tipoDrive=="floppy")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_drive_floppy.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_floppy.png") );
 		if(tipoDrive=="IMG_floppy")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_floppy_1.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_floppy_1.png") );
 		if(tipoDrive=="IMG_iso")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_cd_iso.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_cd_iso.png") );
 		if(tipoDrive=="IMG_hdd")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(":/img16/s_drive_hd.png") );
+			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_hd.png") );
 
 		ui.twMontajes->topLevelItem( indx_mount )->setText(7 , "v");
 

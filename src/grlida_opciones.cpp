@@ -38,8 +38,12 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 	connect( ui.cbxIdioma , SIGNAL( activated(const QString &) ), this, SLOT( on_setLanguage(const QString &) ) );
 	connect( ui.cmbStyle  , SIGNAL(activated(const QString &)), this, SLOT( on_changeStyle(const QString &)));
 	connect( ui.cbxMotorDataBase, SIGNAL(activated(const QString &)), this, SLOT( on_changeTypeDB(const QString &)));
+	connect( ui.twThemes        , SIGNAL( itemClicked( QTreeWidgetItem*, int)), this, SLOT( on_twThemes_clicked(QTreeWidgetItem*)));
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
+
+	stTheme = fGrl.ThemeGrl();
+	setTheme();
 
 	ui.cmbStyle->clear();
 	ui.cmbStyle->addItem( "Default" );
@@ -62,6 +66,7 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 		ui.chkConfig_IdiomaExterno->setChecked( settings.value("IdiomaExterno" , "false").toBool() );
 		stIconoFav    = settings.value("IconoFav", "fav_0.png").toString();
 		stStyleSelect = settings.value("Style", "Default").toString();
+		stNameDirTheme= settings.value("NameDirTheme", "defecto").toString();
 		url_xmldb     = settings.value("url_xmldb", "").toString(); // GR-lida xmlDB
 		ui.chkStylePalette->setChecked( settings.value("StylePalette","false").toBool());
 	settings.endGroup();
@@ -74,6 +79,7 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 		ui.txt_dbport->setText( settings.value("db_port", "3306" ).toString() );
 	settings.endGroup();
 
+	CargarListaThemes();
 //	ui.txt_dbpassword->setEchoMode(QLineEdit::Password);
 
 	#ifdef Q_OS_WIN32
@@ -82,17 +88,17 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 		ui.chkConfig_VDMSoundDisp->setEnabled(false);
 	#endif
 
-	ui.cbxMotorDataBase->addItem( QIcon( ":/img16/basedatos.png" ), "QSQLITE"	);
-	ui.cbxMotorDataBase->addItem( QIcon( ":/img16/basedatos.png" ), "QMYSQL"	);
-	ui.cbxMotorDataBase->addItem( QIcon( ":/img16/basedatos.png" ), "QPSQL"		);
+	ui.cbxMotorDataBase->addItem( QIcon( stTheme+"img16/basedatos.png" ), "QSQLITE"	);
+	ui.cbxMotorDataBase->addItem( QIcon( stTheme+"img16/basedatos.png" ), "QMYSQL"	);
+	ui.cbxMotorDataBase->addItem( QIcon( stTheme+"img16/basedatos.png" ), "QPSQL"		);
 	ui.cbxMotorDataBase->setCurrentIndex( ui.cbxMotorDataBase->findText( stdb_type, Qt::MatchContains) ); //
 
 	ui.cmbStyle->setCurrentIndex( ui.cmbStyle->findText(stStyleSelect, Qt::MatchContains) ); //
 
-	ui.cmbIconFav->addItem(QIcon(":/img16/fav_0.png"), "fav_0.png");
-	ui.cmbIconFav->addItem(QIcon(":/img16/fav_1.png"), "fav_1.png");
-	ui.cmbIconFav->addItem(QIcon(":/img16/fav_2.png"), "fav_2.png");
-	ui.cmbIconFav->addItem(QIcon(":/img16/fav_3.png"), "fav_3.png");
+	ui.cmbIconFav->addItem(QIcon(stTheme+"img16/fav_0.png"), "fav_0.png");
+	ui.cmbIconFav->addItem(QIcon(stTheme+"img16/fav_1.png"), "fav_1.png");
+	ui.cmbIconFav->addItem(QIcon(stTheme+"img16/fav_2.png"), "fav_2.png");
+	ui.cmbIconFav->addItem(QIcon(stTheme+"img16/fav_3.png"), "fav_3.png");
 	ui.cmbIconFav->setCurrentIndex( ui.cmbIconFav->findText(stIconoFav, Qt::MatchContains) ); //
 
 	if(ui.chkConfig_IdiomaExterno->isChecked())
@@ -104,7 +110,7 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 	on_setLanguage( ui.cbxIdioma->currentText() );
 
 	fGrl.CargarDatosComboBox(stHomeDir + "datos/xmldb.txt", ui.cbxDbXml, 1, false);
-	ui.cbxDbXml->addItem( QIcon(":/img16/edit_enlace.png"), url_xmldb);
+	ui.cbxDbXml->addItem( QIcon(stTheme+"img16/edit_enlace.png"), url_xmldb);
 	ui.cbxDbXml->setCurrentIndex( ui.cbxDbXml->findText(url_xmldb, Qt::MatchContains) ); //
 
 // centra la aplicacion en el escritorio
@@ -116,6 +122,83 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 }
 
 frmOpciones::~frmOpciones(){}
+
+void frmOpciones::CargarListaThemes()
+{
+	QString stAutor, stVersion;
+	QDir dir( stHomeDir+"/themes/" );
+	QStringList themes_Lista = dir.entryList(QDir::NoDotAndDotDot | QDir::AllDirs );
+
+	ui.twThemes->clear();
+	QTreeWidgetItem *item_themes = new QTreeWidgetItem( ui.twThemes );
+	item_themes->setText( 0 , "defecto" );
+	item_themes->setIcon( 0 , QIcon(stTheme+"img16/style.png") );
+	item_themes->setText( 1 , "-" );
+	item_themes->setText( 2 , "-" );
+	item_themes->setSelected(true);
+
+	for ( int i = 0; i < themes_Lista.size(); i++ )
+	{
+		if( dir.exists(stHomeDir+"/themes/"+themes_Lista[i]) )
+		{
+			QSettings settings( stHomeDir+"/themes/"+themes_Lista[i]+"/info.ini", QSettings::IniFormat );
+			settings.beginGroup("info");
+				stAutor = settings.value("autor", "-").toString();
+				stVersion = settings.value("version", "-").toString();
+			settings.endGroup();
+
+			QTreeWidgetItem *item_themes = new QTreeWidgetItem( ui.twThemes );
+			item_themes->setText( 0 , themes_Lista[i] );
+			item_themes->setIcon( 0 , QIcon(stTheme+"img16/style.png") );
+			item_themes->setText( 1 , stAutor );
+			item_themes->setText( 2 , stVersion );
+
+			if( themes_Lista[i] == stNameDirTheme)
+			{
+				ui.twThemes->clearSelection();
+				ui.twThemes->setCurrentItem( item_themes );
+				emit on_twThemes_clicked( item_themes );
+			}
+		}
+	}
+}
+
+void frmOpciones::setTheme()
+{
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+	ui.btnDirDbx->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirSvm->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirDB->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirBaseGames->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirDbx_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirSvm_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirDB_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirBaseGames_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.tabWidget_Config->setTabIcon(0, QIcon(stTheme+"img16/opciones.png") );
+	ui.tabWidget_Config->setTabIcon(1, QIcon(stTheme+"img16/basedatos.png") );
+	ui.tabWidget_Config->setTabIcon(2, QIcon(stTheme+"img16/style.png") );
+}
+
+void frmOpciones::on_twThemes_clicked( QTreeWidgetItem *item )
+{
+	if( item )
+	{
+		stNameDirTheme = item->text(0);
+		ui.lb_theme_example->setPixmap( QPixmap(stHomeDir+"/themes/"+item->text(0)+"/preview.png") );
+	} else {
+		ui.lb_theme_example->setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
+		return;
+	}
+}
+
+void frmOpciones::on_twThemes_currentItemChanged( QTreeWidgetItem *item1, QTreeWidgetItem *item2)
+{
+	if( (item1)&&(item2) )
+		emit on_twThemes_clicked( ui.twThemes->currentItem() );
+	else
+		return;
+}
 
 void frmOpciones::on_changeStyle(const QString &styleName)
 {
@@ -182,6 +265,7 @@ void frmOpciones::on_btnOk()
 		settings.setValue("Style"        , stStyleSelect						);
 		settings.setValue("StylePalette" , DatosConfiguracion["StylePalette"]	);
 		settings.setValue("IconoFav"     , stIconoFav							);
+		settings.setValue("NameDirTheme" , stNameDirTheme                       );
 		settings.setValue("url_xmldb"    , url_xmldb							);
 	settings.endGroup();
 

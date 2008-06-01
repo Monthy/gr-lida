@@ -31,6 +31,10 @@ frmInfo::frmInfo(QWidget *parent)
 	
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 
+	stTheme = fGrl.ThemeGrl();
+
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+
 	QSettings settings(stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
 	settings.beginGroup("SqlDatabase");
 	  stdb_host	   = settings.value("db_host"	 , stHomeDir + "db_grl.grl" ).toString();
@@ -45,62 +49,62 @@ frmInfo::frmInfo(QWidget *parent)
 	
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Versión")+ " GR-lida"	); //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/grlida.png")	); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/grlida.png")	); //
 		ItemInfo->setText( 1 , fGrl.stVersionGrl() 			); //	
 	
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Versión")+ " QT"			); //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/qt.png")		); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/qt.png")		); //
 		ItemInfo->setText( 1 , qVersion() 					); //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , "DOSBox "+ tr("Soportado")	); //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/dosbox.png")	); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/dosbox.png")	); //
 		ItemInfo->setText( 1 , fGrl.stVersionDbx()			); //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , "ScummVM "+ tr("Soportado")	); //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/scummvm.png") ); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/scummvm.png") ); //
 		ItemInfo->setText( 1 , fGrl.stVersionSvm()			); //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , "VDMSound "+ tr("Soportado")	); //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/vdmsound.png")); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/vdmsound.png")); //
 		ItemInfo->setText( 1 , fGrl.stVersionVdms() 		); //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , "" ); //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/sinimg.png")	); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/sinimg.png")	); //
 		ItemInfo->setText( 1 , "" ); //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Base de Datos")			); //
-		ItemInfo->setIcon( 0 ,QIcon(":/img16/basedatos.png")); //
+		ItemInfo->setIcon( 0 ,QIcon(stTheme+"img16/basedatos.png")); //
 		ItemInfo->setText( 1 , fidb.fileName() 				); //
 	
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos")		) ; //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/grlida.png")	); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/grlida.png")	); //
 		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl")) + " " + tr("juego/s") ) ; //
 		
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos Datos")) ; //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/datos_1.png") ); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/datos_1.png") ); //
 		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"datos\"")) + " " + tr("juego/s") ) ; //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos") + " DOSBox") ; //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/dosbox.png") ); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/dosbox.png") ); //
 		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"dosbox\"")) + " " + tr("juego/s") ) ; //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos") + " ScummVM") ; //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/scummvm.png") ); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/scummvm.png") ); //
 		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"scummvm\"")) + " " + tr("juego/s") ) ; //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos") + " VDMSound") ; //
-		ItemInfo->setIcon( 0 , QIcon(":/img16/vdmsound.png") ); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/vdmsound.png") ); //
 		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"vdmsound\"")) + " " + tr("juego/s") ) ; //
 
 // centra la aplicacion en el escritorio

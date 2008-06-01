@@ -1135,17 +1135,132 @@
            </layout>
           </item>
           <item>
-           <spacer>
-            <property name="orientation" >
-             <enum>Qt::Vertical</enum>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>12</number>
             </property>
-            <property name="sizeHint" >
-             <size>
-              <width>438</width>
-              <height>131</height>
-             </size>
-            </property>
-           </spacer>
+            <item>
+             <widget class="QLabel" name="label_7" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>Seleccionar Theme</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="Line" name="line_6" >
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QTreeWidget" name="twThemes" >
+              <property name="focusPolicy" >
+               <enum>Qt::ClickFocus</enum>
+              </property>
+              <property name="frameShadow" >
+               <enum>QFrame::Sunken</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy" >
+               <enum>Qt::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="showDropIndicator" stdset="0" >
+               <bool>false</bool>
+              </property>
+              <property name="alternatingRowColors" >
+               <bool>false</bool>
+              </property>
+              <property name="iconSize" >
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="textElideMode" >
+               <enum>Qt::ElideNone</enum>
+              </property>
+              <property name="rootIsDecorated" >
+               <bool>false</bool>
+              </property>
+              <property name="uniformRowHeights" >
+               <bool>true</bool>
+              </property>
+              <property name="itemsExpandable" >
+               <bool>false</bool>
+              </property>
+              <property name="allColumnsShowFocus" >
+               <bool>true</bool>
+              </property>
+              <column>
+               <property name="text" >
+                <string>Themes</string>
+               </property>
+              </column>
+              <column>
+               <property name="text" >
+                <string>Autor</string>
+               </property>
+              </column>
+              <column>
+               <property name="text" >
+                <string>version</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" >
+              <item>
+               <widget class="QLabel" name="lb_theme_example" >
+                <property name="minimumSize" >
+                 <size>
+                  <width>180</width>
+                  <height>120</height>
+                 </size>
+                </property>
+                <property name="frameShape" >
+                 <enum>QFrame::Panel</enum>
+                </property>
+                <property name="frameShadow" >
+                 <enum>QFrame::Sunken</enum>
+                </property>
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="scaledContents" >
+                 <bool>true</bool>
+                </property>
+                <property name="alignment" >
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>

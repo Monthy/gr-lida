@@ -66,13 +66,15 @@ private:
 	QString TipoEmulador;
 	QString stItemIDGrl;
 	QString stTituloAddEdit(){ return windowTitle(); }
-	QString stHomeDir, stIconDir, stDatosDir;
+	QString stHomeDir, stIconDir, stDatosDir, stTheme;
 	QStringList filters;
 	QStringList svm_Lista, svm_ListaTemp, smiles_Lista, smiles_ListaTemp;
 	QFile file_thumbs, file_cover_front, file_cover_back;
 	QString stThumbs, stCoverFront, stCoverBack;
 	QHash<QString, QString> listSmailes;
 	QUrl my_url;
+	
+	void setTheme();
 
 private slots:
 	void on_btnOk();

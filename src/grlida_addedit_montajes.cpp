@@ -34,6 +34,18 @@ frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog
 
 	stHomeDir = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
 
+	stTheme = fGrl.ThemeGrl();
+	setTheme();
+
+	ui.cbxMontaje_type_drive->clear();
+	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_hd.png"), "drive");
+	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_cdrom.png"), "cdrom");
+	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_floppy.png"), "floppy");
+	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/floppy_1.png"), "IMG_floppy");
+	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/cd_iso.png"), "IMG_iso");
+	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_hd.png"), "IMG_hdd");
+	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/floppy_2.png"), "boot");
+
 	ui.lb_Montaje_info->setText( "<b>-aspi</b> -- "+ tr("Fuerza el uso de la capa aspi. Sólo válido si montas un CD-ROM bajo los sistemas Windows con un ASPI-Layer.")+"<br>"+
 		"<b>-ioctl</b> -- "+ tr("Fuerza el uso de los comandos ioctl. Sólo válido si montar un CD-ROM bajo un sistema operativo de Windows que lo soporten (Win2000/XP/NT).")+"<br>"+
 		"<b>-noioctl</b> -- "+ tr("Fuerza el uso de las SDL para el CD-ROM. Válido para todos los sistemas.")+"<br>"+
@@ -56,7 +68,15 @@ frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog
 }
 
 frmAddEditMontajes::~frmAddEditMontajes(){}
-		
+
+void frmAddEditMontajes::setTheme()
+{
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+	ui.btnDirFile->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnClearDirFile->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+}
+
 void frmAddEditMontajes::on_btnOk()
 {
 	DatosMontaje.clear();

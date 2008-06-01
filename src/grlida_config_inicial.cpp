@@ -36,6 +36,12 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 
 	stHomeDir = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
 
+	stTheme = fGrl.ThemeGrl();
+
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnDirDbx->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirSvm->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+
 	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
 	settings.beginGroup("OpcGeneral");
 		ui.chkConfig_DOSBoxDisp->setChecked( settings.value("DOSBoxDisp", "false").toBool() );

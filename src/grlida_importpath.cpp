@@ -30,7 +30,10 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
 	ui.setupUi(this);
 	
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
-	
+
+	stTheme = fGrl.ThemeGrl();
+	setTheme();
+
 	connect( ui.btnOk, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 
 	connect( ui.btnDirPath_Datos_Thumbs     , SIGNAL( clicked() ), this, SLOT( on_btnDirPath_Datos_Thumbs() ) );
@@ -65,6 +68,35 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
 }
 
 frmImportPath::~frmImportPath(){}
+
+void frmImportPath::setTheme()
+{
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+
+	ui.btnDirPath_Datos_Thumbs->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirPath_Datos_CoverFront->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirPath_Datos_CoverBack->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+
+	ui.btnDirPath_Dbx_1->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirPath_Dbx_2->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirPath_Dbx_3->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirPath_Dbx_4->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirPath_Dbx_5->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirPath_Dbx_6->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirPath_Dbx_7->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirPath_Dbx_8->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+
+	ui.btnDirPath_Svm_1->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirPath_Svm_2->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirPath_Svm_3->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirPath_Svm_4->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirPath_Svm_5->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirPath_Svm_6->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+
+	ui.btnDirPath_Vdms_1->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirPath_Vdms_2->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+}
 
 void frmImportPath::on_btnOk()
 {

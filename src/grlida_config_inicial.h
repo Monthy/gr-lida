@@ -44,7 +44,7 @@ public:
 
 private:
 	Funciones fGrl;
-	QString stHomeDir ;
+	QString stHomeDir, stTheme;
 	QTranslator translator;
 	bool IdiomaExterno;
 

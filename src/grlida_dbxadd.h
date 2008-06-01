@@ -50,8 +50,9 @@ private:
 	Funciones fGrl;
 	QString stTituloDbx(){ return tr("Nuevo juego para el DOSBox"); }
 	int intStepwizard;
-	QString stHomeDir;
+	QString stHomeDir, stTheme;
 	QHash<QString, QString>  TempProfileDosBox;
+	void setTheme();
 
 private slots:
 	void on_btnOk();

@@ -48,10 +48,11 @@ public:
 private:
 	Funciones fGrl;
 	QString stTituloSvm(){ return tr("Nuevo juego para el ScummVM"); }
-	QString stHomeDir, stDatosDir;
+	QString stHomeDir, stDatosDir, stTheme;
 	QStringList svm_Lista, svm_ListaTemp;
 	int intStepwizard;
-	
+	void setTheme();
+
 private slots:
 	void on_btnOk();
 	void on_btnNext();

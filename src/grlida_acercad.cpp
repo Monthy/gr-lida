@@ -29,6 +29,9 @@ frmAcercaD::frmAcercaD(QDialog *parent, Qt::WFlags flags)
 {
 	ui.setupUi(this);
 
+	stTheme = fGrl.ThemeGrl();
+	setTheme();
+
     connect( ui.btnAcercaQT, SIGNAL( clicked() ), qApp, SLOT( aboutQt() ) );
 
 	QString AcercaD_Html;
@@ -66,9 +69,9 @@ frmAcercaD::frmAcercaD(QDialog *parent, Qt::WFlags flags)
 			item->setFont( 0, QFont("Times", 10, QFont::Bold));
    			item->setText( 0, str_Lista.value(0) );
    			if( str_Lista.value(2)=="")
-   				item->setIcon( 1, QIcon(":/img16/sinimg.png") );
+   				item->setIcon( 1, QIcon(stTheme+"img16/sinimg.png") );
    			else
-   				item->setIcon( 1, QIcon(":/img_lng/"+str_Lista.value(2)+".png") );	   				
+   				item->setIcon( 1, QIcon(stTheme+"img_lng/"+str_Lista.value(2)+".png") );	   				
    			item->setText( 1, str_Lista.value(1));
    		}
    	}
@@ -90,3 +93,12 @@ frmAcercaD::frmAcercaD(QDialog *parent, Qt::WFlags flags)
 }
 
 frmAcercaD::~frmAcercaD(){}
+
+void frmAcercaD::setTheme()
+{
+	ui.btnAcercaQT->setIcon( QIcon(stTheme+"img16/qt.png") );
+	ui.btnClose->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.lb_Dbximg->setPixmap( QPixmap(stTheme+"img24/emu_dbx.png") );
+	ui.lb_Svmimg->setPixmap( QPixmap(stTheme+"img24/emu_svm.png") );
+	ui.lb_Vdmsimg->setPixmap( QPixmap(stTheme+"img24/emu_vdms.png") );
+}

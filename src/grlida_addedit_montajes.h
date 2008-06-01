@@ -42,7 +42,8 @@ public:
 
 private:
 	Funciones fGrl;
-	QString stHomeDir ;
+	QString stHomeDir, stTheme;
+	void setTheme();
 
 private slots:
 	void on_btnOk();

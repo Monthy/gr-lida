@@ -24,7 +24,10 @@
 
 #include "funciones.h"
 
-Funciones::Funciones(){}
+Funciones::Funciones()
+{
+	stTheme = ThemeGrl();
+}
 
 Funciones::~Funciones(){}
 
@@ -54,6 +57,29 @@ QString Funciones::GRlidaHomePath()
 		return QDir::homePath()+"/.gr-lida/";
 
 //	return QDir::homePath()+"/.gr-lida/";
+}
+
+QString Funciones::ThemeGrl()
+{
+	QString stDirApp, stNameDirTheme, theme;
+	QDir ThemeDir;
+
+	stDirApp = GRlidaHomePath();
+
+	QSettings settings( stDirApp + "/GR-lida.conf", QSettings::IniFormat );
+	settings.beginGroup("OpcGeneral");
+		stNameDirTheme = settings.value("NameDirTheme", "defecto").toString();
+	settings.endGroup();	
+
+	if( stNameDirTheme == "defecto" || stNameDirTheme.isEmpty() )
+		theme = ":/";
+	else {
+		if( ThemeDir.exists(stDirApp+"themes/"+ stNameDirTheme +"/") )
+			theme = stDirApp+"themes/"+ stNameDirTheme +"/";
+		else
+			theme = ":/";
+	}
+	return theme;
 }
 
 QString Funciones::get_Plataforma()
@@ -233,12 +259,12 @@ void Funciones::CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int n
 		for ( int i = 0; i < cbx_ListaTemp.count(); i++ )
 		{
 			cbx_Lista = cbx_ListaTemp[i].split( "|" );
-			pixmap.load(":/img16/sinimg.png");
+			pixmap.load(stTheme+"img16/sinimg.png");
 			if(idioma_svm==true)
-				pixmap.load(":/img_lng/"+cbx_Lista.value(1)+".png");
+				pixmap.load(stTheme+"img_lng/"+cbx_Lista.value(1)+".png");
 			else
-				pixmap.load(":/img16/"+cbx_Lista.value(1)+".png");
-			if( pixmap.isNull() ) pixmap.load(":/img16/sinimg.png");
+				pixmap.load(stTheme+"img16/"+cbx_Lista.value(1)+".png");
+			if( pixmap.isNull() ) pixmap.load(stTheme+"img16/sinimg.png");
 			
 			switch ( num_col )
 			{
@@ -249,8 +275,8 @@ void Funciones::CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int n
 					myCombobox->addItem( QIcon( pixmap ), cbx_Lista.value(0) + " - " + cbx_Lista.value(1) );
 				break;
 				case 3: // 3 columna
-					pixmap.load(":/img16/"+cbx_Lista.value(2)+".png");
-					if( pixmap.isNull() ) pixmap.load(":/img16/sinimg.png");
+					pixmap.load(stTheme+"img16/"+cbx_Lista.value(2)+".png");
+					if( pixmap.isNull() ) pixmap.load(stTheme+"img16/sinimg.png");
 					myCombobox->addItem( QIcon( pixmap ), cbx_Lista.value(0) + " - " + cbx_Lista.value(1) );
 				break;
 			}
@@ -267,10 +293,10 @@ void Funciones::CargarIconosComboBox(QString IconDir, QComboBox *myCombobox, QSt
 	dir.setNameFilters(filters);
 	QFileInfoList list = dir.entryInfoList();
 	myCombobox->clear();
-	myCombobox->addItem( QIcon( ":/img24/emu_datos.png" ), "datos" );
-	myCombobox->addItem( QIcon( ":/img24/emu_dbx.png"   ), "dosbox" );
-	myCombobox->addItem( QIcon( ":/img24/emu_svm.png"   ), "scummvm" );
-	myCombobox->addItem( QIcon( ":/img24/emu_vdms.png"  ), "vdmsound" );
+	myCombobox->addItem( QIcon( stTheme+"img24/emu_datos.png" ), "datos" );
+	myCombobox->addItem( QIcon( stTheme+"img24/emu_dbx.png"   ), "dosbox" );
+	myCombobox->addItem( QIcon( stTheme+"img24/emu_svm.png"   ), "scummvm" );
+	myCombobox->addItem( QIcon( stTheme+"img24/emu_vdms.png"  ), "vdmsound" );
 	for (int i = 0; i < list.size(); ++i)
 	{
 		QFileInfo fileInfo = list.at(i);
@@ -305,11 +331,11 @@ void Funciones::CargarDatosListaSvm(QString Archivo, QTreeWidget *myTreeWidget)
 				item->setTextColor(0,QColor(0,0,0));
 				item->setFont( 0, QFont("Times", 10, QFont::Bold));
 				if( svm_Lista.value(2)=="-1" || svm_Lista.value(2)=="")
-					item->setIcon( 0, QIcon(":/imgsvm/svmlist_space.png") );
+					item->setIcon( 0, QIcon(stTheme+"imgsvm/svmlist_space.png") );
 				else
-					item->setIcon( 0, QIcon(":/imgsvm/"+svm_Lista.value(2)+".png") );	
+					item->setIcon( 0, QIcon(stTheme+"imgsvm/"+svm_Lista.value(2)+".png") );	
 			} else
-				item->setIcon( 0, QIcon(":/imgsvm/"+svm_Lista.value(2)+".png") );
+				item->setIcon( 0, QIcon(stTheme+"imgsvm/"+svm_Lista.value(2)+".png") );
 			item->setText( 1, svm_Lista.value(1) );
 		}
 	}

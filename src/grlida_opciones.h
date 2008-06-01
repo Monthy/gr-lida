@@ -44,8 +44,11 @@ public:
 
 private:
 	Funciones fGrl;
-	QString stHomeDir, IdiomaSelect, url_xmldb, stStyleSelect, stdb_type, stIconoFav;
+	QString stHomeDir, IdiomaSelect, url_xmldb, stStyleSelect, stdb_type, stIconoFav, stTheme, stNameDirTheme;
 	QPalette originalPalette;
+	void setTheme();
+	void changePalette();
+	void CargarListaThemes();
 
 private slots:
 	void on_btnOk();
@@ -56,7 +59,9 @@ private slots:
 	void on_setLanguage(const QString txt_locale);
 	void on_changeStyle(const QString &styleName);
 	void on_changeTypeDB(const QString &typedb);
-	void changePalette();
+	void on_twThemes_clicked( QTreeWidgetItem *item );
+	void on_twThemes_currentItemChanged( QTreeWidgetItem *item1, QTreeWidgetItem *item2);
+
 };
 
 #endif // GRLIDA_OPCIONES_H

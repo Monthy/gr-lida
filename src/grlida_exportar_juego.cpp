@@ -37,6 +37,12 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stIconDir = stHomeDir + "iconos/";	// directorio de iconos para el GR-lida
 
+	stTheme = fGrl.ThemeGrl();
+
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancelar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+	ui.btnDirExportPath->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+
 	CargarListaJuegos();
 
 	ui.cbxExpotarComo->clear();
@@ -170,22 +176,22 @@ void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By,
 
 			stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
 			if( stIcono.isEmpty() )
-				item->setIcon( 0, QIcon(":/img24/emu_sin_imagen.png") );
+				item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 			else if( stIcono == "datos" ) 
-				item->setIcon( 0, QIcon(":/img24/emu_datos.png") );
+				item->setIcon( 0, QIcon(stTheme+"img24/emu_datos.png") );
 			else if( stIcono == "dosbox" )
-				item->setIcon( 0, QIcon(":/img24/emu_dbx.png") );
+				item->setIcon( 0, QIcon(stTheme+"img24/emu_dbx.png") );
 			else if( stIcono == "scummvm" )
-				item->setIcon( 0, QIcon(":/img24/emu_svm.png") );
+				item->setIcon( 0, QIcon(stTheme+"img24/emu_svm.png") );
 			else if( stIcono == "vdmsound" ) 
-				item->setIcon( 0, QIcon(":/img24/emu_vdms.png") );
+				item->setIcon( 0, QIcon(stTheme+"img24/emu_vdms.png") );
 			else {
 				bool existeIcono;
 				existeIcono = QFile::exists(stIconDir + stIcono);
 				if( existeIcono )
 					item->setIcon( 0, QIcon(stIconDir + stIcono) );
 				else
-					item->setIcon( 0, QIcon(":/img24/emu_sin_imagen.png") );
+					item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 			}
 		} while (query.next());
 		ui.twListaJuegos->setCurrentItem( ui.twListaJuegos->itemAt(0,0) );
