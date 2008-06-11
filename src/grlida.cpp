@@ -466,21 +466,21 @@ void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString im
 	QTreeWidgetItem *item = new QTreeWidgetItem( ui.twJuegos );
 
 	if( imgEmu == "" ) 
-		stIcono = ":/img24/emu_sin_imagen.png";
+		stIcono = stTheme+"img24/emu_sin_imagen.png";
 	else if( imgEmu == "datos" ) 
-		stIcono = ":/img24/emu_datos.png";
+		stIcono = stTheme+"img24/emu_datos.png";
 	else if( imgEmu == "dosbox" )
-		stIcono = ":/img24/emu_dbx.png";
+		stIcono = stTheme+"img24/emu_dbx.png";
 	else if( imgEmu == "scummvm" )
-		stIcono = ":/img24/emu_svm.png";
+		stIcono = stTheme+"img24/emu_svm.png";
 	else if( imgEmu =="vdmsound" ) 
-		stIcono = ":/img24/emu_vdms.png";
+		stIcono = stTheme+"img24/emu_vdms.png";
 	else {
 		bool existeIcono;
 		existeIcono = QFile::exists(stIconDir + imgEmu);
 		if( existeIcono )
 			stIcono = stIconDir + imgEmu;
-		else stIcono = ":/img24/emu_sin_imagen.png";
+		else stIcono = stTheme+"img24/emu_sin_imagen.png";
 	}
 
 	item->setText( 0 , IDitem			); // idgrl
@@ -867,21 +867,21 @@ void GrLida::on_EditarJuego()
 			}
 			stIcono = EditJuego->DatosJuego["icono"];
 			if( stIcono=="")
-				stSelectIcon = ":/img24/emu_sin_imagen.png";
+				stSelectIcon = stTheme+"img24/emu_sin_imagen.png";
 			else if( stIcono == "datos" ) 
-				stSelectIcon = ":/img24/emu_datos.png";
+				stSelectIcon = stTheme+"img24/emu_datos.png";
 			else if( stIcono == "dosbox" )
-				stSelectIcon = ":/img24/emu_dbx.png";
+				stSelectIcon = stTheme+"img24/emu_dbx.png";
 			else if( stIcono == "scummvm" )
-				stSelectIcon = ":/img24/emu_svm.png";
+				stSelectIcon = stTheme+"img24/emu_svm.png";
 			else if( stIcono == "vdmsound" ) 
-				stSelectIcon = ":/img24/emu_vdms.png";
+				stSelectIcon = stTheme+"img24/emu_vdms.png";
 			else {
 				bool existeIcono;
 				existeIcono = QFile::exists(stIconDir + stIcono);
 				if( existeIcono )
 					stSelectIcon = stIconDir + stIcono;
-				else stSelectIcon = ":/img24/emu_sin_imagen.png";
+				else stSelectIcon = stTheme+"img24/emu_sin_imagen.png";
 			}	
 			ui.twJuegos->currentItem()->setIcon( 0, QIcon( stSelectIcon ) );
 
@@ -1354,22 +1354,22 @@ void GrLida::CargarBaseDatos(QString str)
 
 				stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
 				if( stIcono=="")
-					item->setIcon( 0, QIcon(":/img24/emu_sin_imagen.png") );
+					item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 				else if( stIcono == "datos" ) 
-					item->setIcon( 0, QIcon(":/img24/emu_datos.png") );
+					item->setIcon( 0, QIcon(stTheme+"img24/emu_datos.png") );
 				else if( stIcono == "dosbox" )
-					item->setIcon( 0, QIcon(":/img24/emu_dbx.png") );
+					item->setIcon( 0, QIcon(stTheme+"img24/emu_dbx.png") );
 				else if( stIcono == "scummvm" )
-					item->setIcon( 0, QIcon(":/img24/emu_svm.png") );
+					item->setIcon( 0, QIcon(stTheme+"img24/emu_svm.png") );
 				else if( stIcono == "vdmsound" ) 
-					item->setIcon( 0, QIcon(":/img24/emu_vdms.png") );
+					item->setIcon( 0, QIcon(stTheme+"img24/emu_vdms.png") );
 				else {
 					bool existeIcono;
 					existeIcono = QFile::exists(stIconDir + stIcono);
 					if( existeIcono )
 						item->setIcon( 0, QIcon(stIconDir + stIcono) );
 					else
-						item->setIcon( 0, QIcon(":/img24/emu_sin_imagen.png") );
+						item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 				}
 
 				if(query.value(rec.indexOf("favorito")).toString()=="true")
@@ -1430,14 +1430,14 @@ void GrLida::CargarBaseDatos(QString str)
 					if( str_ListaDatos.at(n) == "" || str_ListaDatos.at(n) == "NULL" )
 					{
 						item->setText( 0 , "" );	// idgrl
-						item->setIcon( 0, QIcon(":/img24/emu_sin_imagen.png") );
+						item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 						item->setTextColor(1,QColor(0,0,0));
 						item->setFont( 1, QFont("Times", 10, QFont::Bold));
 						item->setText( 1 , tr("Genero sin Clasificar") );	// titulo
 						item->setText( 2 , "" );	// tipo_emu
 					} else {
 						item->setText( 0 , "" ); // idgrl
-						item->setIcon( 0, QIcon(":/img24/emu_sin_imagen.png") );
+						item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 						item->setTextColor(1,QColor(0,0,0));
 						item->setFont( 1, QFont("Times", 10, QFont::Bold));
 
@@ -1476,22 +1476,22 @@ void GrLida::CargarBaseDatos(QString str)
 						
 						stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
 						if( stIcono=="")
-							item->setIcon( 0, QIcon(":/img24/emu_sin_imagen.png") );
+							item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 						else if( stIcono == "datos" ) 
-							item->setIcon( 0, QIcon(":/img24/emu_datos.png") );
+							item->setIcon( 0, QIcon(stTheme+"img24/emu_datos.png") );
 						else if( stIcono == "dosbox" )
-							item->setIcon( 0, QIcon(":/img24/emu_dbx.png") );
+							item->setIcon( 0, QIcon(stTheme+"img24/emu_dbx.png") );
 						else if( stIcono == "scummvm" )
-							item->setIcon( 0, QIcon(":/img24/emu_svm.png") );
+							item->setIcon( 0, QIcon(stTheme+"img24/emu_svm.png") );
 						else if( stIcono == "vdmsound" ) 
-							item->setIcon( 0, QIcon(":/img24/emu_vdms.png") );
+							item->setIcon( 0, QIcon(stTheme+"img24/emu_vdms.png") );
 						else {
 							bool existeIcono;
 							existeIcono = QFile::exists(stIconDir + stIcono);
 							if( existeIcono )
 								item->setIcon( 0, QIcon(stIconDir + stIcono) );
 							else
-								item->setIcon( 0, QIcon(":/img24/emu_sin_imagen.png") );
+								item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 						}
 
 						if(query.value( rec.indexOf("favorito") ).toString()=="true")
