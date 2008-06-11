@@ -82,9 +82,10 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );	// Tipo Sound Blaste
 	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 );		// MPU-401
 	ui.cbxDbx_midi_device->setCurrentIndex( 0 );		// MIDI Device
-	ui.ui.cbxDbx_cpu_core->setCurrentIndex( 0 );
 
 	on_setProfileGame( ui.cbxDbx_Profiles->currentText() );
+
+	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );
 
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
