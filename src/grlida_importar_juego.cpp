@@ -46,11 +46,15 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	
 	stTheme = fGrl.ThemeGrl();
 	setTheme();
-
+	
 	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
 	settings.beginGroup("OpcGeneral");
 		temp_url_xmldb = settings.value("url_xmldb", "http://laisladelabandoware.es/" ).toString(); // GR-lida
 		DirBaseGames   = settings.value("DirBaseGames", "").toString() ;
+	settings.endGroup();
+	UltimoPath.clear();
+	settings.beginGroup("UltimoDirectorio");
+		UltimoPath["DirFileXML"] = settings.value("DirFileXML", "").toString();
 	settings.endGroup();
 
 	if( url_xmldb.isEmpty() )
@@ -427,7 +431,20 @@ void frmImportarJuego::on_btnOk()
 
 void frmImportarJuego::on_btnDirFileXML()
 {
-	ui.DirFileXML->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.DirFileXML->text(), ui.DirFileXML->text(), tr("Soportados")+" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend Reloaded (*.prof);;"+tr("Todos los archivo")+" (*)", 0, false) );
+	ui.DirFileXML->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["DirFileXML"], ui.DirFileXML->text(), tr("Soportados")+" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend Reloaded (*.prof);;"+tr("Todos los archivo")+" (*)", 0, false) );
+
+	QFileInfo fi( ui.DirFileXML->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("DirFileXML", fi.absolutePath()+"/" );
+			UltimoPath["DirFileXML"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("DirFileXML", "" );
+			UltimoPath["DirFileXML"] = "";
+		}
+	lastdir.endGroup();
 }
 
 void frmImportarJuego::on_btnUpdateList()

@@ -42,6 +42,7 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 
 	stTheme = fGrl.ThemeGrl();
 	setTheme();
+	CargaUltimosDirectorios();
 
 // Conecta los distintos botones con las funciones.
 	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
@@ -176,6 +177,7 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	connect( ui.btnDirSvm_4   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_capturas() ) );
 	connect( ui.btnDirSvm_5   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sonido() ) );
 	connect( ui.btnDirSvm_6   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sound_font() ) );
+	connect( ui.btnDirSvm_7   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_setup() ) );
 
 	ui.twScummVM->header()->setStretchLastSection(true);
 	ui.twScummVM->header()->setMovable(false);
@@ -402,6 +404,38 @@ void frmAddEditJuego::setTheme()
 	ui.btnVdms_FileConfg_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnVdms_ExeJuego_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnVdms_Icono_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+}
+
+void frmAddEditJuego::CargaUltimosDirectorios()
+{
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	UltimoPath.clear();
+	lastdir.beginGroup("UltimoDirectorio");
+	// Datos de Juegos
+		UltimoPath["Img_Thumbs"]          = lastdir.value("Img_Thumbs", "").toString();
+		UltimoPath["Img_CoverFront"]      = lastdir.value("Img_CoverFront", "").toString();
+		UltimoPath["Img_CoverBack"]       = lastdir.value("Img_CoverBack", "").toString();
+		UltimoPath["DatosFiles_PathFile"] = lastdir.value("DatosFiles_PathFile", "").toString();
+	// DOSBox
+		UltimoPath["Dbx_path_exe"]        = lastdir.value("Dbx_path_exe", "").toString();
+		UltimoPath["Dbx_path_setup"]      = lastdir.value("Dbx_path_setup", "").toString();
+		UltimoPath["Dbx_gus_ultradir"]    = lastdir.value("Dbx_gus_ultradir", "").toString();
+		UltimoPath["Dbx_sdl_mapperfile"]  = lastdir.value("Dbx_sdl_mapperfile", "").toString();
+		UltimoPath["Dbx_dosbox_language"] = lastdir.value("Dbx_dosbox_language", "").toString();
+		UltimoPath["Dbx_dosbox_captures"] = lastdir.value("Dbx_dosbox_captures", "").toString();
+		UltimoPath["Dbx_path_sonido"]     = lastdir.value("Dbx_path_sonido", "").toString();
+	// ScummVM
+		UltimoPath["Svm_path"]            = lastdir.value("Svm_path", "").toString();
+		UltimoPath["Svm_savepath"]        = lastdir.value("Svm_savepath", "").toString();
+		UltimoPath["Svm_extrapath"]       = lastdir.value("Svm_extrapath", "").toString();
+		UltimoPath["Svm_path_capturas"]   = lastdir.value("Svm_path_capturas", "").toString();
+		UltimoPath["Svm_path_sonido"]     = lastdir.value("Svm_path_sonido", "").toString();
+		UltimoPath["Svm_path_setup"]      = lastdir.value("Svm_path_setup", "").toString();
+		UltimoPath["Svm_soundfont"]       = lastdir.value("Svm_soundfont", "").toString();
+	// VDMSound
+		UltimoPath["Vdms_path_exe"]       = lastdir.value("Vdms_path_exe", "").toString();
+		UltimoPath["Vdms_icon"]           = lastdir.value("Vdms_icon", "").toString();
+	lastdir.endGroup();
 }
 
 void frmAddEditJuego::on_btnOk()
@@ -720,49 +754,88 @@ void frmAddEditJuego::setDatosJuegos()
 
 void frmAddEditJuego::on_btnImgAbrir_Thumbs()
 {
-	stThumbs = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stThumbs, stThumbs, tr("Todos los archivo") + " (*)", 0, false);
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+
+	stThumbs = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Img_Thumbs"], stThumbs, tr("Todos los archivo") + " (*)", 0, false);
 	if( file_thumbs.exists(stThumbs) )
 	{
 		ui.lbImg_Thumbs->setPixmap( QPixmap(stThumbs) );
 		ui.btnImgVer_Thumbs->setEnabled( true );
 		ui.btnImgEliminar_Thumbs->setEnabled( true );
+
+		QFileInfo fi( stThumbs );
+		lastdir.beginGroup("UltimoDirectorio");
+			lastdir.setValue("Img_Thumbs", fi.absolutePath()+"/" );
+		lastdir.endGroup();
+		UltimoPath["Img_Thumbs"] = fi.absolutePath()+"/";
 	} else {
 		ui.lbImg_Thumbs->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_Thumbs->setEnabled( false );
 		ui.btnImgEliminar_Thumbs->setEnabled( false );
 		stThumbs = "";
+
+		lastdir.beginGroup("UltimoDirectorio");
+			lastdir.setValue("Img_Thumbs", "" );
+		lastdir.endGroup();
+		UltimoPath["Img_Thumbs"] = "";
 	}
 }
 
 void frmAddEditJuego::on_btnImgAbrir_CoverFront()
 {
-	stCoverFront = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stCoverFront, stCoverFront, tr("Todos los archivo") + " (*)", 0, false);
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+
+	stCoverFront = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Img_CoverFront"], stCoverFront, tr("Todos los archivo") + " (*)", 0, false);
 	if( file_cover_front.exists(stCoverFront) )
 	{
 		ui.lbImg_CoverFront->setPixmap( QPixmap(stCoverFront) );
 		ui.btnImgVer_CoverFront->setEnabled( true );
 		ui.btnImgEliminar_CoverFront->setEnabled( true );
+
+		QFileInfo fi( stCoverFront );
+		lastdir.beginGroup("UltimoDirectorio");
+			lastdir.setValue("Img_CoverFront", fi.absolutePath()+"/" );
+		lastdir.endGroup();
+		UltimoPath["Img_CoverFront"] = fi.absolutePath()+"/";
 	} else {
 		ui.lbImg_CoverFront->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_CoverFront->setEnabled( false );
 		ui.btnImgEliminar_CoverFront->setEnabled( false );
 		stCoverFront = "";
+
+		lastdir.beginGroup("UltimoDirectorio");
+			lastdir.setValue("Img_CoverFront", "" );
+		lastdir.endGroup();
+		UltimoPath["Img_CoverFront"] = "";
 	}
 }
 
 void frmAddEditJuego::on_btnImgAbrir_CoverBack()
 {
-	stCoverBack = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stCoverBack, stCoverBack, tr("Todos los archivo") + " (*)", 0, false);
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+
+	stCoverBack = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Img_CoverBack"], stCoverBack, tr("Todos los archivo") + " (*)", 0, false);
 	if( file_cover_back.exists(stCoverBack) )
 	{
 		ui.lbImg_CoverBack->setPixmap( QPixmap(stCoverBack) );
 		ui.btnImgVer_CoverBack->setEnabled( true );
 		ui.btnImgEliminar_CoverBack->setEnabled( true );
+
+		QFileInfo fi( stCoverBack );
+		lastdir.beginGroup("UltimoDirectorio");
+			lastdir.setValue("Img_CoverBack", fi.absolutePath()+"/" );
+		lastdir.endGroup();
+		UltimoPath["Img_CoverBack"] = fi.absolutePath()+"/";
 	} else {
 		ui.lbImg_CoverBack->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		ui.btnImgVer_CoverBack->setEnabled( false );
 		ui.btnImgEliminar_CoverBack->setEnabled( false );
 		stCoverBack = "";
+
+		lastdir.beginGroup("UltimoDirectorio");
+			lastdir.setValue("Img_CoverBack", "" );
+		lastdir.endGroup();
+		UltimoPath["Img_CoverBack"] = "";
 	}
 }
 
@@ -1056,7 +1129,19 @@ void frmAddEditJuego::on_btnAbrirUrl()
 
 void frmAddEditJuego::on_btnDatosFiles_PathFile()
 {
-	ui.txtDatosFiles_PathFile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDatosFiles_PathFile->text(), ui.txtDatosFiles_PathFile->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDatosFiles_PathFile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["DatosFiles_PathFile"], ui.txtDatosFiles_PathFile->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	QFileInfo fi( ui.txtDatosFiles_PathFile->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("DatosFiles_PathFile", fi.absolutePath()+"/" );
+			UltimoPath["DatosFiles_PathFile"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("DatosFiles_PathFile", "" );
+			UltimoPath["DatosFiles_PathFile"] = "";
+		}
+	lastdir.endGroup();
 }
 
 void frmAddEditJuego::on_btnAddFile()
@@ -1160,32 +1245,93 @@ void frmAddEditJuego::on_btnDeleteFile()
 // Referente al ScummVM ------------------------------------------
 void frmAddEditJuego::on_btnDirSvm_path()
 {
-	ui.txtSvm_path->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_path->text() ) );
+	ui.txtSvm_path->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), UltimoPath["Svm_path"] , ui.txtSvm_path->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Svm_path", ui.txtSvm_path->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Svm_path"] = ui.txtSvm_path->text()+"/";
 }
 
 void frmAddEditJuego::on_btnDirSvm_save()
 {
-	ui.txtSvm_savepath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_savepath->text() ) );
+	ui.txtSvm_savepath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), UltimoPath["Svm_savepath"] , ui.txtSvm_savepath->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Svm_savepath", ui.txtSvm_savepath->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Svm_savepath"] = ui.txtSvm_savepath->text()+"/";
 }
 
 void frmAddEditJuego::on_btnDirSvm_extra()
 {
-	ui.txtSvm_extrapath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_extrapath->text() ) );
+	ui.txtSvm_extrapath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), UltimoPath["Svm_extrapath"] , ui.txtSvm_extrapath->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Svm_extrapath", ui.txtSvm_extrapath->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Svm_extrapath"] = ui.txtSvm_extrapath->text()+"/";
 }
 
 void frmAddEditJuego::on_btnDirSvm_capturas()
 {
-	ui.txtSvm_path_capturas->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_path_capturas->text() ) );
+	ui.txtSvm_path_capturas->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), UltimoPath["Svm_path_capturas"] , ui.txtSvm_path_capturas->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Svm_path_capturas", ui.txtSvm_path_capturas->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Svm_path_capturas"] = ui.txtSvm_path_capturas->text()+"/";
 }
 
 void frmAddEditJuego::on_btnDirSvm_sonido()
 {
-	ui.txtSvm_path_sonido->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtSvm_path_sonido->text() ) );
+	ui.txtSvm_path_sonido->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), UltimoPath["Svm_path_sonido"] , ui.txtSvm_path_sonido->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Svm_path_sonido", ui.txtSvm_path_sonido->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Svm_path_sonido"] = ui.txtSvm_path_sonido->text()+"/";
+}
+
+void frmAddEditJuego::on_btnDirSvm_setup()
+{
+	ui.txtSvm_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Svm_path_setup"], ui.txtSvm_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtSvm_path_setup->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Svm_path_setup", fi.absolutePath()+"/" );
+			UltimoPath["Svm_path_setup"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Svm_path_setup", "" );
+			UltimoPath["Svm_path_setup"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmAddEditJuego::on_btnDirSvm_sound_font()
 {
-	ui.txtSvm_soundfont->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtSvm_soundfont->text(), ui.txtSvm_soundfont->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtSvm_soundfont->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Svm_soundfont"], ui.txtSvm_soundfont->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtSvm_soundfont->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Svm_soundfont", fi.absolutePath()+"/" );
+			UltimoPath["Svm_soundfont"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Svm_soundfont", "" );
+			UltimoPath["Svm_soundfont"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
@@ -1905,37 +2051,107 @@ void frmAddEditJuego::on_btnDbx_FileConfg()
 
 void frmAddEditJuego::on_btnDbx_ExeJuego()
 {
-	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_path_exe->text(), ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Dbx_path_exe"], ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDbx_path_exe->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Dbx_path_exe", fi.absolutePath()+"/" );
+			UltimoPath["Dbx_path_exe"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Dbx_path_exe", "" );
+			UltimoPath["Dbx_path_exe"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmAddEditJuego::on_btnDbx_ExeSetup()
 {
-	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_path_setup->text(), ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Dbx_path_setup"], ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDbx_path_setup->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Dbx_path_setup", fi.absolutePath()+"/" );
+			UltimoPath["Dbx_path_setup"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Dbx_path_setup", "" );
+			UltimoPath["Dbx_path_setup"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmAddEditJuego::on_btnDirGravisUltraSound()
 {
-	ui.txtDbx_gus_ultradir->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtDbx_gus_ultradir->text() ) );
+	ui.txtDbx_gus_ultradir->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), UltimoPath["Dbx_gus_ultradir"] , ui.txtDbx_gus_ultradir->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Dbx_gus_ultradir", ui.txtDbx_gus_ultradir->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Dbx_gus_ultradir"] = ui.txtDbx_gus_ultradir->text()+"/";
 }
 
 void frmAddEditJuego::on_btnDbx_mapperfile()
 {
-	ui.txtDbx_sdl_mapperfile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_sdl_mapperfile->text(), ui.txtDbx_sdl_mapperfile->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_sdl_mapperfile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Dbx_sdl_mapperfile"], ui.txtDbx_sdl_mapperfile->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDbx_sdl_mapperfile->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Dbx_sdl_mapperfile", fi.absolutePath()+"/" );
+			UltimoPath["Dbx_sdl_mapperfile"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Dbx_sdl_mapperfile", "" );
+			UltimoPath["Dbx_sdl_mapperfile"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmAddEditJuego::on_btnDbx_language()
 {
-	ui.txtDbx_dosbox_language->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_dosbox_language->text(), ui.txtDbx_dosbox_language->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_dosbox_language->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Dbx_dosbox_language"], ui.txtDbx_dosbox_language->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDbx_dosbox_language->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Dbx_dosbox_language", fi.absolutePath()+"/" );
+			UltimoPath["Dbx_dosbox_language"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Dbx_dosbox_language", "" );
+			UltimoPath["Dbx_dosbox_language"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmAddEditJuego::on_btnDbx_capturas()
 {
-	ui.txtDbx_dosbox_captures->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtDbx_dosbox_captures->text() ) );
+	ui.txtDbx_dosbox_captures->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), UltimoPath["Dbx_dosbox_captures"] , ui.txtDbx_dosbox_captures->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Dbx_dosbox_captures", ui.txtDbx_dosbox_captures->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Dbx_dosbox_captures"] = ui.txtDbx_dosbox_captures->text()+"/";
 }
 
 void frmAddEditJuego::on_btnDbx_musica()
 {
-	ui.txtDbx_path_sonido->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), stHomeDir , ui.txtDbx_path_sonido->text() ) );
+	ui.txtDbx_path_sonido->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), UltimoPath["Dbx_path_sonido"] , ui.txtDbx_path_sonido->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Dbx_path_sonido", ui.txtDbx_path_sonido->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Dbx_path_sonido"] = ui.txtDbx_path_sonido->text()+"/";
 }
 
 void frmAddEditJuego::on_btnDbx_AddSerial()
@@ -2401,11 +2617,37 @@ void frmAddEditJuego::on_btnVdms_FileConfg()
 
 void frmAddEditJuego::on_btnVdms_ExeJuego()
 {
-	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtVdms_path_exe->text(), ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Vdms_path_exe"], ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtVdms_path_exe->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Vdms_path_exe", fi.absolutePath()+"/" );
+			UltimoPath["Vdms_path_exe"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Vdms_path_exe", "" );
+			UltimoPath["Vdms_path_exe"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmAddEditJuego::on_btnVdms_Icono()
 {
-	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtVdms_icon->text(), ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false) + ",0" );
+	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Vdms_icon"], ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false)  );//+ ",0"
+
+	QFileInfo fi( ui.txtVdms_icon->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Vdms_icon", fi.absolutePath()+"/" );
+			UltimoPath["Vdms_icon"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Vdms_icon", "" );
+			UltimoPath["Vdms_icon"] = "";	
+		}
+	lastdir.endGroup();
 }
 // ---------------------------------------------------------------

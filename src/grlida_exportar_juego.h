@@ -48,6 +48,7 @@ private:
 	QHash<QString, QString> TempDatosJuego;
 	QHash<QString, QString> TempDatosScummvm;
 	QHash<QString, QString> TempDatosDosBox;
+	QHash<QString, QString> UltimoPath;
 	QTreeWidget *twMontajes;
 
 	void CargarListaJuegos(QString TipoEmu="", QString stdb_Orden_By="titulo", QString stdb_Orden="desc");

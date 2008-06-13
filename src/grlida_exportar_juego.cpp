@@ -38,7 +38,13 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
 	stIconDir = stHomeDir + "iconos/";	// directorio de iconos para el GR-lida
 
 	stTheme = fGrl.ThemeGrl();
-
+	
+	QSettings lastdir( stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
+	UltimoPath.clear();
+	lastdir.beginGroup("UltimoDirectorio");
+		UltimoPath["DirExportPath"] = lastdir.value("DirExportPath", "").toString();
+	lastdir.endGroup();
+	
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancelar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnDirExportPath->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
@@ -148,7 +154,13 @@ void frmExportarJuego::on_btnUnCheckedAll()
 
 void frmExportarJuego::on_btnDirExportPath()
 {
-	ui.txtDirExportPath->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), ui.txtDirExportPath->text(), ui.txtDirExportPath->text() ));
+	ui.txtDirExportPath->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), UltimoPath["DirExportPath"], ui.txtDirExportPath->text() ));
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("DirExportPath", ui.txtDirExportPath->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["DirExportPath"] = ui.txtDirExportPath->text()+"/";
 }
 
 void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By, QString stdb_Orden)

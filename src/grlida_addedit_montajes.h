@@ -43,6 +43,8 @@ public:
 private:
 	Funciones fGrl;
 	QString stHomeDir, stTheme;
+	QHash<QString, QString> UltimoPath;
+	
 	void setTheme();
 
 private slots:

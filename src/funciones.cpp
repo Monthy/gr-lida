@@ -441,7 +441,7 @@ QString Funciones::VentanaAbrirArchivos(const QString caption, const QString dir
 
 	fi.setFile( dir );
 	if( fi.exists() )
-		base = fi.absolutePath();
+		base = dir;
 	else
 		base = GRlidaHomePath();
 

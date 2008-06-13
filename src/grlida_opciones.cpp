@@ -78,6 +78,13 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 		ui.txt_dbpassword->setText( settings.value("db_password", "" ).toString() );
 		ui.txt_dbport->setText( settings.value("db_port", "3306" ).toString() );
 	settings.endGroup();
+	UltimoPath.clear();
+	settings.beginGroup("UltimoDirectorio");
+		UltimoPath["DirDbx"]       = settings.value("DirDbx", "").toString();
+		UltimoPath["DirSvm"]       = settings.value("DirSvm", "").toString();
+		UltimoPath["DirBaseGames"] = settings.value("DirBaseGames", "").toString();
+		UltimoPath["DirBD"]        = settings.value("DirBD", "").toString();
+	settings.endGroup();
 
 	CargarListaThemes();
 //	ui.txt_dbpassword->setEchoMode(QLineEdit::Password);
@@ -299,20 +306,65 @@ void frmOpciones::on_setLanguage(const QString txt_locale)
 
 void frmOpciones::on_btnDirDbx()
 {
-	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDirDbx->text(), ui.txtDirDbx->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["DirDbx"], ui.txtDirDbx->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDirDbx->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("DirDbx", fi.absolutePath()+"/" );
+			UltimoPath["DirDbx"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("DirDbx", "" );
+			UltimoPath["DirDbx"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmOpciones::on_btnDirSvm()
 {
-	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDirSvm->text(), ui.txtDirSvm->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["DirSvm"], ui.txtDirSvm->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDirSvm->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("DirSvm", fi.absolutePath()+"/" );
+			UltimoPath["DirSvm"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("DirSvm", "" );
+			UltimoPath["DirSvm"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmOpciones::on_btnDirDB()
 {
-	ui.txtDirBD->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDirBD->text(), ui.txtDirBD->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDirBD->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["DirBD"], ui.txtDirBD->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDirBD->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("DirBD", fi.absolutePath()+"/" );
+			UltimoPath["DirBD"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("DirBD", "" );
+			UltimoPath["DirBD"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmOpciones::on_btnDirBaseGames()
 {
-	ui.txtDirBaseGames->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), stHomeDir, ui.txtDirBaseGames->text() ) );
+	ui.txtDirBaseGames->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), UltimoPath["DirBaseGames"], ui.txtDirBaseGames->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("DirBaseGames", ui.txtDirBaseGames->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["DirBaseGames"] = ui.txtDirBaseGames->text()+"/";
 }

@@ -46,6 +46,7 @@ private:
 	Funciones fGrl;
 	QString stHomeDir, IdiomaSelect, url_xmldb, stStyleSelect, stdb_type, stIconoFav, stTheme, stNameDirTheme;
 	QPalette originalPalette;
+	QHash<QString, QString> UltimoPath;
 	void setTheme();
 	void changePalette();
 	void CargarListaThemes();

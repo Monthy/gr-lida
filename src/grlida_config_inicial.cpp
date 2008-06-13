@@ -56,7 +56,12 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 		IdiomaSelect = settings.value("IdiomaSelect", "es_ES").toString();
 		IdiomaExterno = settings.value("IdiomaExterno" , "false").toBool();
 	settings.endGroup();
-	
+	UltimoPath.clear();
+	settings.beginGroup("UltimoDirectorio");
+		UltimoPath["DirDbx"] = settings.value("DirDbx", "").toString();
+		UltimoPath["DirSvm"] = settings.value("DirSvm", "").toString();
+	settings.endGroup();
+
 	if(IdiomaExterno)
 		fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );
 	else
@@ -133,10 +138,36 @@ void frmConfigInicial::on_btnOk(){
 
 void frmConfigInicial::on_btnDirDbx()
 {
-	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del DOSBox"), ui.txtDirDbx->text(), ui.txtDirDbx->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del DOSBox"), UltimoPath["DirDbx"], ui.txtDirDbx->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDirDbx->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("DirDbx", fi.absolutePath()+"/" );
+			UltimoPath["DirDbx"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("DirDbx", "" );
+			UltimoPath["DirDbx"] = "";	
+		}
+	lastdir.endGroup();
 }
 
 void frmConfigInicial::on_btnDirSvm()
 {
-	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del ScummVM"), ui.txtDirSvm->text(), ui.txtDirSvm->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del ScummVM"), UltimoPath["DirSvm"], ui.txtDirSvm->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDirSvm->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("DirSvm", fi.absolutePath()+"/" );
+			UltimoPath["DirSvm"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("DirSvm", "" );
+			UltimoPath["DirSvm"] = "";	
+		}
+	lastdir.endGroup();
 }

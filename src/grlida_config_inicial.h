@@ -46,6 +46,7 @@ private:
 	Funciones fGrl;
 	QString stHomeDir, stTheme;
 	QTranslator translator;
+	QHash<QString, QString> UltimoPath;
 	bool IdiomaExterno;
 
 private slots:

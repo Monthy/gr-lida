@@ -72,9 +72,11 @@ private:
 	QFile file_thumbs, file_cover_front, file_cover_back;
 	QString stThumbs, stCoverFront, stCoverBack;
 	QHash<QString, QString> listSmailes;
+	QHash<QString, QString> UltimoPath;
 	QUrl my_url;
 	
 	void setTheme();
+	void CargaUltimosDirectorios();
 
 private slots:
 	void on_btnOk();
@@ -129,6 +131,7 @@ private slots:
 	void on_btnDirSvm_extra();
 	void on_btnDirSvm_capturas();
 	void on_btnDirSvm_sonido();
+	void on_btnDirSvm_setup();
 	void on_btnDirSvm_sound_font();
 
 // ---------------------------------------------------------------

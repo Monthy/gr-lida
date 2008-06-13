@@ -37,6 +37,12 @@ frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog
 	stTheme = fGrl.ThemeGrl();
 	setTheme();
 
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	UltimoPath.clear();
+	lastdir.beginGroup("UltimoDirectorio");
+		UltimoPath["txtMontaje_path"] = lastdir.value("txtMontaje_path", "").toString();
+	lastdir.endGroup();
+
 	ui.cbxMontaje_type_drive->clear();
 	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_hd.png"), "drive");
 	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_cdrom.png"), "cdrom");
@@ -106,9 +112,30 @@ void frmAddEditMontajes::on_btnOk()
 
 void frmAddEditMontajes::on_DirFile()
 {
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+
 	int tipomontaje = ui.cbxMontaje_type_drive->currentIndex();
 	if((tipomontaje==0)||(tipomontaje==1)||(tipomontaje==2))
-		ui.txtMontaje_path->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), stHomeDir, ui.txtMontaje_path->text() ));
-	else
-		ui.txtMontaje_path->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtMontaje_path->text(), ui.txtMontaje_path->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	{
+		ui.txtMontaje_path->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), UltimoPath["txtMontaje_path"], ui.txtMontaje_path->text() ));
+
+		lastdir.beginGroup("UltimoDirectorio");
+			lastdir.setValue("txtMontaje_path", ui.txtMontaje_path->text()+"/" );
+		lastdir.endGroup();
+		UltimoPath["txtMontaje_path"] = ui.txtMontaje_path->text()+"/";
+	} else {
+		ui.txtMontaje_path->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["txtMontaje_path"], ui.txtMontaje_path->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+		QFileInfo fi( ui.txtMontaje_path->text() );
+		lastdir.beginGroup("UltimoDirectorio");
+			if( fi.exists() )
+			{
+				lastdir.setValue("txtMontaje_path", fi.absolutePath()+"/" );
+				UltimoPath["txtMontaje_path"] = fi.absolutePath()+"/";
+			} else {
+				lastdir.setValue("txtMontaje_path", "" );
+				UltimoPath["txtMontaje_path"] = "";	
+			}
+		lastdir.endGroup();
+	}
 }
