@@ -2176,7 +2176,7 @@
   </action>
   <action name="mnu_ver_acercad" >
    <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
+    <iconset resource="../res/grlida.qrc" >:/img16/acercad.png</iconset>
    </property>
    <property name="text" >
     <string>Acerca de...</string>

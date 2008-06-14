@@ -300,7 +300,7 @@ void GrLida::setTheme()
 	ui.mnu_ver_capturas->setIcon( QIcon(stTheme+"img16/capturas.png") );
 	ui.mnu_ver_ordenar->setIcon( QIcon(stTheme+"img16/orden_asc.png") );
 	ui.mnu_ver_toolbar->setIcon( QIcon(stTheme+"img16/barra_herramintas.png") );
-	ui.mnu_ver_acercad->setIcon( QIcon(stTheme+"img16/grlida.png") );
+	ui.mnu_ver_acercad->setIcon( QIcon(stTheme+"img16/acercad.png") );
 
 	ui.btn_fileurl_1->setIcon( QIcon(stTheme+"img16/edit_enlace.png") );
 	ui.btn_fileurl_2->setIcon( QIcon(stTheme+"img16/archivos.png") );
