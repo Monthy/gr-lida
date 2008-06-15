@@ -229,7 +229,7 @@ bool GrLida::createTrayIcon()
 
 		trayIcon = new QSystemTrayIcon(this);
 		trayIcon->setContextMenu(trayIconMenu);
-		trayIcon->setIcon(QIcon(stTheme+"img16/archivo_comprimido.png"));
+		trayIcon->setIcon(QIcon(":/img16/grlida.png"));
 		trayIcon->setToolTip("GR-lida");
 
 		trayIcon->hide();
