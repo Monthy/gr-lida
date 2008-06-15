@@ -1018,6 +1018,30 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 	}
 }
 
+// Funcion para Poner nombres cortos en DOS.
+// Estado: Beta
+QString Funciones::getShortPathName(QString longPath)
+{
+	QString str, shortPath;
+	QStringList list, listshortPath;
+
+	list = longPath.split("\\");
+
+	for ( int i = 0; i < list.size(); i++ )
+	{
+		str = list.value(i);
+
+		if( str.length() > 8 )
+			listshortPath << str.replace(" ","").left(6).append("~1");
+		else
+			listshortPath << str;
+	}
+
+	shortPath = listshortPath.join("\\");
+
+	return shortPath;
+}
+
 QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash<QString, QString> datos)
 {
 // Creando la configuracion de los distintos Montajes
@@ -1124,12 +1148,13 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 	if(mount_Boot == false)
 	{
 		listmontajes << mount_letra_primario + ":";
-		listmontajes << "cd " + mount_dir;	
+		listmontajes << "cd " + getShortPathName( mount_dir );	
 		listmontajes << chkDbx_loadfix;
 		listmontajes << chkDbx_cerrardbx;
 	} else {
 		listmontajes << mount_letra_primario + ":";
 		listmontajes << montaje_boot;
+		listmontajes << chkDbx_cerrardbx;
 	}
 	return listmontajes;
 }

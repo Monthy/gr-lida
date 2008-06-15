@@ -93,6 +93,8 @@ public:
 
 private:
 	QString stTheme;
+	// Funcion para Poner nombres cortos en DOS.
+	QString getShortPathName(QString longPath);
 
 };
 
