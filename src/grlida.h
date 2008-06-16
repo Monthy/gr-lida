@@ -84,13 +84,15 @@ private:
     QMenu *trayIconMenu, *ljMenuPopUp;
     bool isTrayIcon;
     int id_ImgPicFlow;
+
 	void MostrarDatosDelJuego(QString IDitem);
 	void CargarThumbsTreeWidget(const QString directorio);
 	void NuevoItemTreeWidget(const QHash<QString, QString> datos, QString imgEmu, QString IDitem);
 	void CrearArchivoDato(QString archivo);  // Crea los archivos de datos
 	void Ejecutar( const QString& bin, const QString &parametros);
-	void Confg_Svm_Dbx(QString IDitem);	
+	void Confg_Svm_Dbx(QString IDitem);
 	void setTheme();
+	bool createTrayIcon();
 
 protected:
 	void closeEvent( QCloseEvent *e );
@@ -103,7 +105,7 @@ private slots:
 	void on_twCapturas_Dblclicked( QTreeWidgetItem *item);
 	void on_twUrls_Dblclicked( QTreeWidgetItem *item);
 	void on_txtBuscar_textChanged(const QString &);
-	
+
 	void on_AddNewDbx();		// Aade un juego para el DOSBox.
 	void on_Informacion();		// Muestra distinta informacion
 	void on_AddNewSvm();		// Aade un juego para el scummvm.
@@ -124,7 +126,6 @@ private slots:
 	void on_btnVer_CoverBack();
 	void on_setFavorito();
 
-	bool createTrayIcon();
 	void fin_Proceso( int, QProcess::ExitStatus );
 	void fin_ProcesoError( QProcess::ProcessError );
 

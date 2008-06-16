@@ -73,25 +73,25 @@ private:
 	void parseListaJuegos(const QDomElement &element);
 	void setProfile_DFend(QString fileName);
 	void setTheme();
+	void downloadFile(QString urlfile, QString fileName);
+	void enableDownloadButton();
 
 private slots:
-	void on_btnPrevious();
-	void on_btnNext();
 	void on_btnOk();
-	void on_btnDirFileXML();
+	void on_btnNext();
+	void on_btnPrevious();
 	void on_xml_open();
+	void on_btnDirFileXML();
+	void on_changeURL_XML(const QString &url);
 	void on_btnUpdateList();
 	void on_treeWidget_Dblclicked( QTreeWidgetItem *item);
 	void on_treeWidget_clicked( QTreeWidgetItem *item);
-
-	void downloadFile(QString urlfile, QString fileName);
 	void cancelDownload();
 	void httpRequestFinished(int requestId, bool error);
 	void readResponseHeader(const QHttpResponseHeader &responseHeader);
 	void updateDataReadProgress(int bytesRead, int totalBytes);
-	void enableDownloadButton();
 	void slotAuthenticationRequired(const QString &, quint16, QAuthenticator *); // Qt 4.3.1
-	void on_changeURL_XML(const QString &url);
+
 };
 
 #endif // GRLIDA_IMPORTARJUEGO_H

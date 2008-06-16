@@ -77,13 +77,25 @@ private:
 	
 	void setTheme();
 	void CargaUltimosDirectorios();
+// Referente al DatosJuego ---------------------------------------
+	void CargarDatosJuego( QString stIDIndex );
+	void setDatosJuegos();
+// Referente al ScummVM ------------------------------------------
+	void CargarDatosScummVM( QString stIDsvm );
+	void setDatosScummVM();
+// Referente al DOSBox -------------------------------------------
+	void CargarDatosDosBox(QString stIDdbx, const QString ProfileGame = "", bool isProfileGame = false);
+	void CargarDatosDBxMontaje( QString stIDdbx );
+	void setDatosDosBox();
+	QString setOpcionesSerial();
+// Referente al VDMSound -----------------------------------------
+	void CargarDatosVDMSound( QString stIDvdms );
+	void setDatosVDMSound();
 
 private slots:
 	void on_btnOk();
 	void on_cbxDatos_TipoEmu_txtChanged(const QString texto);
 // Referente al DatosJuego ---------------------------------------
-	void CargarDatosJuego( QString stIDIndex );
-	void setDatosJuegos();
 	void on_twDatoSmile_Dblclicked( QTreeWidgetItem *item);
 	void on_btnImgAbrir_Thumbs();
 	void on_btnImgAbrir_CoverFront();
@@ -122,8 +134,6 @@ private slots:
 
 // ---------------------------------------------------------------
 // Referente al ScummVM ------------------------------------------
-	void CargarDatosScummVM( QString stIDsvm );
-	void setDatosScummVM();
 	void on_twScummVM_clicked( QTreeWidgetItem *item );
 	void on_btnDefecto();
 	void on_btnDirSvm_path();
@@ -136,10 +146,6 @@ private slots:
 
 // ---------------------------------------------------------------
 // Referente al DOSBox -------------------------------------------
-	void CargarDatosDosBox(QString stIDdbx, const QString ProfileGame = "", bool isProfileGame = false);
-	void CargarDatosDBxMontaje( QString stIDdbx );
-	void setDatosDosBox();
-	QString setOpcionesSerial();
 	void on_setProfileGame(const QString ProfileGame);
 	void on_btnDbx_FileConfg();
 	void on_btnDbx_ExeJuego();
@@ -161,8 +167,6 @@ private slots:
 
 // ---------------------------------------------------------------
 // Referente al VDMSound -----------------------------------------
-	void CargarDatosVDMSound( QString stIDvdms );
-	void setDatosVDMSound();
 	void on_btnVdms_FileConfg();
 	void on_btnVdms_ExeJuego();
 	void on_btnVdms_Icono();
