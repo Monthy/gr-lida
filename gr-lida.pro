@@ -28,12 +28,15 @@ CONFIG += qt \
 # CONFIG += qt warn_on thread debug
 INCLUDEPATH += . \
     src \
-    ui
+    ui \
+    3rdparty
+
 DEPENDPATH += . \
     src \
     lng \
     res \
     ui
+
 HEADERS += src/grlida_img_viewer.h \
     src/grlida_info.h \
     src/dbsql.h \
@@ -87,6 +90,9 @@ FORMS += ui/login_url.ui \
     ui/vdmsound.ui \
     ui/informacion.ui
 
+HEADERS += 3rdparty/pictureflow-qt/pictureflow.h
+SOURCES += 3rdparty/pictureflow-qt/pictureflow.cpp
+	
 RESOURCES += res/grlida.qrc
 TRANSLATIONS += lng/gr-lida_es_ES.ts \
     lng/gr-lida_en_EN.ts

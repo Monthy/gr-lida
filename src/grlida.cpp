@@ -82,10 +82,6 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 	connect( ui.mnu_ver_acercad, SIGNAL( triggered() ), this, SLOT( on_AcercaD() ));
 
 // Conecta otros botones
-	connect( ui.btn_fileurl_1, SIGNAL( clicked() ), this, SLOT( on_btn_fileurl_1() ));
-	connect( ui.btn_fileurl_2, SIGNAL( clicked() ), this, SLOT( on_btn_fileurl_2() ));
-	connect( ui.btn_imgtumb_1, SIGNAL( clicked() ), this, SLOT( on_btn_imgtumb_1() ));
-	connect( ui.btn_imgtumb_2, SIGNAL( clicked() ), this, SLOT( on_btn_imgtumb_2() ));
 	connect( ui.btnVer_CoverFront, SIGNAL( clicked() ), this, SLOT( on_btnVer_CoverFront() ));
 	connect( ui.btnVer_CoverBack , SIGNAL( clicked() ), this, SLOT( on_btnVer_CoverBack() ));
 
@@ -149,11 +145,6 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 	ui.twCapturas->header()->setMovable(false);
 	ui.twCapturas->header()->setResizeMode(QHeaderView::Interactive);
 
-	ui.btn_fileurl_1->setChecked(true);
-	ui.btn_fileurl_2->setChecked(false);
-	ui.twUrls->setVisible(true);
-	ui.twFiles->setVisible(false);
-	
 //	Crea el icono para la bandeja de iconos
 	isTrayIcon = createTrayIcon();
 
@@ -302,13 +293,12 @@ void GrLida::setTheme()
 	ui.mnu_ver_toolbar->setIcon( QIcon(stTheme+"img16/barra_herramintas.png") );
 	ui.mnu_ver_acercad->setIcon( QIcon(stTheme+"img16/acercad.png") );
 
-	ui.btn_fileurl_1->setIcon( QIcon(stTheme+"img16/edit_enlace.png") );
-	ui.btn_fileurl_2->setIcon( QIcon(stTheme+"img16/archivos.png") );
-	ui.btn_imgtumb_1->setIcon( QIcon(stTheme+"img16/dosbox.png") );
-	ui.btn_imgtumb_2->setIcon( QIcon(stTheme+"img16/scummvm.png") );
 	ui.btnVer_CoverFront->setIcon( QIcon(stTheme+"img16/capturas.png") );
 	ui.btnVer_CoverBack->setIcon( QIcon(stTheme+"img16/capturas.png") );
 	ui.toolButton_11->setIcon( QIcon(stTheme+"img16/grlida.png") );
+	
+	ui.PicFlowWidget->setReflectionEffect(PictureFlow::BlurredReflection);
+//	ui.PicFlowWidget->setReflectionEffect(PictureFlow::PlainReflection);
 }
 
 void GrLida::on_ImportarJuego()
@@ -483,16 +473,25 @@ void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString im
 		else stIcono = stTheme+"img24/emu_sin_imagen.png";
 	}
 
-	item->setText( 0 , IDitem			); // idgrl
-	item->setIcon( 0 , QIcon(stIcono)	); // icono
-	item->setText( 1 , datos["titulo"]	); // titulo
-	item->setText( 2 , datos["tipo_emu"]); // tipo_emu
-	item->setText( 3 , datos["favorito"]); // favorito
+	item->setText( 0 , IDitem			 ); // idgrl
+	item->setIcon( 0 , QIcon(stIcono)	 ); // icono
+	item->setText( 1 , datos["titulo"]	 ); // titulo
+	item->setText( 2 , datos["tipo_emu"] ); // tipo_emu
+	item->setText( 3 , datos["favorito"] ); // favorito
+	item->setText( 4 , fGrl.IntToStr( id_ImgPicFlow ) ); //
+
+	id_ImgPicFlow++;
 
 	if(datos["favorito"]=="true")
 		item->setIcon( 1 , QIcon(stTheme+"img16/"+stIconoFav)); // icono favorito
 	else
 		item->setIcon( 1 , QIcon()); // icono favorito
+
+	QImage img;
+	if( img.load( datos["thumbs"] ) )
+    	ui.PicFlowWidget->addSlide( img );
+    else
+    	ui.PicFlowWidget->addSlide( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 
 	ui.twJuegos->setFocus();
 	ui.twJuegos->clearSelection();
@@ -719,9 +718,11 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 
 		stCapturasSvm =  conf_scummvm["path_capturas"]; // path_capturas
 		stCapturasDbx.clear();
-		if( (stCapturasSvm !="") && ui.btn_imgtumb_2->isChecked() )
+
+		if( stCapturasSvm !="" )
 			CargarThumbsTreeWidget( stCapturasSvm );
-		else ui.twCapturas->clear();
+		else
+			ui.twCapturas->clear();
 
 		ui.actionEjectar->setEnabled(true);
 		ui.mnu_ejecutar_juego->setEnabled(true);
@@ -758,7 +759,7 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 		stCapturasDbx = conf_dosbox["dosbox_captures"];  //3 dosbox_capture
 		stCapturasSvm.clear();
 
-		if( (stCapturasDbx !="") && ui.btn_imgtumb_1->isChecked() )
+		if( stCapturasDbx !="" )
 			CargarThumbsTreeWidget( stCapturasDbx );
 		else
 			ui.twCapturas->clear();
@@ -849,7 +850,13 @@ void GrLida::on_EditarJuego()
 			sql->ItemActualizaDatos(EditJuego->DatosJuego, stItemIndex);
 			ui.twJuegos->currentItem()->setText(1, EditJuego->DatosJuego["titulo"] );
 			ui.twJuegos->currentItem()->setText(3, EditJuego->DatosJuego["favorito"] );
-			
+
+			QImage img;
+			if( img.load( EditJuego->DatosJuego["thumbs"] ) )
+				ui.PicFlowWidget->setSlide( fGrl.StrToInt( ui.twJuegos->currentItem()->text(4) ) , img );
+			else
+				ui.PicFlowWidget->setSlide( fGrl.StrToInt( ui.twJuegos->currentItem()->text(4) ) , QPixmap(stTheme+"images/juego_sin_imagen.png") );
+
 			if( stTipoEmu=="dosbox")
 			{
 				sql->ItemActualizaDbx( EditJuego->DatosDosBox, EditJuego->stItemIDDbx );
@@ -907,6 +914,9 @@ void GrLida::on_EliminarJuego()
 			if( EliminarSiNO == 0 )
 			{
 				sql->ItemEliminar(stItemIndex);
+
+				ui.PicFlowWidget->setSlide( fGrl.StrToInt( ui.twJuegos->currentItem()->text(4) ), QPixmap(stTheme+"images/juego_eliminado.png") );
+
 				fGrl.DeleteItemTree( ui.twJuegos->currentItem() );
 				QMessageBox::information( this, stTituloGrl(), tr("Juego Eliminado correctamente"));
 				if( ui.twJuegos->topLevelItemCount()<=0 )
@@ -1019,22 +1029,13 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 		if( strDatosJuego["tipo_emu"] == "datos")
 			lbpanel_3.setPixmap( QPixmap(stTheme+"img16/datos_1.png") );
 		else if( strDatosJuego["tipo_emu"] == "dosbox")
-		{
-			if( !ui.btn_imgtumb_1->isChecked() )
-				ui.btn_imgtumb_1->click();
 			lbpanel_3.setPixmap( QPixmap(stTheme+"img16/dosbox.png") );
-		}
 		else if( strDatosJuego["tipo_emu"] == "scummvm")
-		{
-			if( !ui.btn_imgtumb_2->isChecked() )
-				ui.btn_imgtumb_2->click();
 			lbpanel_3.setPixmap( QPixmap(stTheme+"img16/scummvm.png") );
-		}
 		else if( strDatosJuego["tipo_emu"] == "vdmsound")
 			lbpanel_3.setPixmap( QPixmap(stTheme+"img16/vdmsound.png") );
 		else
 			lbpanel_3.setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
-
 
 		ui.twUrls->clear();
 		query.exec("SELECT * FROM dbgrl_url WHERE idgrl="+IDitem);
@@ -1090,56 +1091,6 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 
 		ui.twUrls->clear();
 		ui.twFiles->clear();
-	}
-}
-void GrLida::on_btn_fileurl_1()
-{
-	if( ui.btn_fileurl_1->isChecked()==true)
-	{
-		ui.btn_fileurl_2->setChecked(false);
-		ui.twUrls->setVisible(true);
-		ui.twFiles->setVisible(false);
-	} else {
-		ui.btn_fileurl_2->setChecked(true);
-		ui.twUrls->setVisible(false);
-		ui.twFiles->setVisible(true);
-	}
-}
-
-void GrLida::on_btn_fileurl_2()
-{
-	if( ui.btn_fileurl_2->isChecked()== true )
-	{
-		ui.btn_fileurl_1->setChecked(false);
-		ui.twUrls->setVisible(false);
-		ui.twFiles->setVisible(true);
-	} else {
-		ui.btn_fileurl_1->setChecked(true);
-		ui.twUrls->setVisible(true);
-		ui.twFiles->setVisible(false);
-	}
-}
-void GrLida::on_btn_imgtumb_1()
-{
-	if( ui.btn_imgtumb_1->isChecked() )
-	{
-		ui.btn_imgtumb_2->setChecked(false);
-		CargarThumbsTreeWidget( stCapturasDbx ); //carga imagenes dosbox
-	} else {
-		ui.btn_imgtumb_2->setChecked(true);
-		CargarThumbsTreeWidget( stCapturasSvm ); //carga imagenes scummvm
-	}
-}
-
-void GrLida::on_btn_imgtumb_2()
-{
-	if( ui.btn_imgtumb_2->isChecked() )
-	{
-		ui.btn_imgtumb_1->setChecked(false);
-		CargarThumbsTreeWidget( stCapturasSvm ); //carga imagenes scummvm
-	} else {
-		ui.btn_imgtumb_1->setChecked(true);
-		CargarThumbsTreeWidget( stCapturasDbx ); //carga imagenes dosbox
 	}
 }
 
@@ -1226,8 +1177,6 @@ void GrLida::on_twJuegos_clicked( QTreeWidgetItem *item)
 		stTipoEmu.clear();						// Limpiamos el tipo_emu
 		stItemIndex  = item->text(0);			// idgrl del juego en la Base de Datos
 		stTipoEmu    = item->text(2);			// tipo_emu
-		Confg_Svm_Dbx( stItemIndex );			// carga toda la configuracion
-		MostrarDatosDelJuego( stItemIndex );	// Muestra los distintos datos del juego
 
 		if(item->text(3)!="")
 			ui.mnu_edit_favorito->setEnabled(true);
@@ -1238,6 +1187,12 @@ void GrLida::on_twJuegos_clicked( QTreeWidgetItem *item)
 			ui.mnu_edit_favorito->setChecked(true);
 		else
 			ui.mnu_edit_favorito->setChecked(false);
+
+		if( !item->text(4).isEmpty() )
+			ui.PicFlowWidget->showSlide( fGrl.StrToInt( item->text(4) ) );
+
+		Confg_Svm_Dbx( stItemIndex );			// carga toda la configuracion
+		MostrarDatosDelJuego( stItemIndex );	// Muestra los distintos datos del juego
 	} else {
 		lbpanel_3.setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
 		lbpanel_5.setText(" ");
@@ -1335,6 +1290,11 @@ void GrLida::CargarBaseDatos(QString str)
 
 	ui.twJuegos->setColumnCount( ui.twJuegos->columnCount() );
 	ui.twJuegos->clear();
+	
+	QImage img;
+	ui.PicFlowWidget->clear();
+	ui.PicFlowWidget->setSlideSize(QSize(145, 186));
+	id_ImgPicFlow = 0;
 
 	if(stdb_Orden_ColTabla == "titulo" || stdb_Orden_ColTabla == "subtitulo" || stdb_Orden_ColTabla == "idgrl")
 	{
@@ -1351,6 +1311,16 @@ void GrLida::CargarBaseDatos(QString str)
 				item->setText( 1 , query.value( rec.indexOf("titulo") ).toString()            );	// titulo
 				item->setText( 2 , query.value( rec.indexOf("tipo_emu") ).toString()          );	// tipo_emu
 				item->setText( 3 , query.value( rec.indexOf("favorito") ).toString()          );	// favorito
+				item->setText( 4 , fGrl.IntToStr( id_ImgPicFlow ) );
+
+			    if( img.load( query.record().value("thumbs").toString() ) )
+			    {
+			    	ui.PicFlowWidget->addSlide( img );
+			    } else {
+			    	ui.PicFlowWidget->addSlide( QPixmap(stTheme+"images/juego_sin_imagen.png") );
+			    }
+
+			    id_ImgPicFlow++;
 
 				stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
 				if( stIcono=="")
@@ -1473,7 +1443,17 @@ void GrLida::CargarBaseDatos(QString str)
 						item->setText( 1 , query.value( rec.indexOf("titulo") ).toString()            );	// titulo
 						item->setText( 2 , query.value( rec.indexOf("tipo_emu") ).toString()          );	// tipo_emu
 						item->setText( 3 , query.value( rec.indexOf("favorito") ).toString()          );	// favorito
-						
+						item->setText( 4 , fGrl.IntToStr( id_ImgPicFlow ) );
+
+					    if( img.load( query.record().value("thumbs").toString() ) )
+					    {
+					    	ui.PicFlowWidget->addSlide( img );
+					    } else {
+					    	ui.PicFlowWidget->addSlide( QPixmap(stTheme+"images/juego_sin_imagen.png") );
+					    }
+
+					    id_ImgPicFlow++;				
+
 						stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
 						if( stIcono=="")
 							item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
@@ -1507,6 +1487,11 @@ void GrLida::CargarBaseDatos(QString str)
 			} // fin de for lista datos
 		}
 	}
+
+	//ui.PicFlowWidget->resize( ui.PicFlowWidget->width(), ui.PicFlowWidget->height() );
+	//ui.PicFlowWidget->setCenterIndex( ui.PicFlowWidget->slideCount()/2 );
+	ui.PicFlowWidget->showSlide( 0 );
+	ui.PicFlowWidget->update();
 
 	if( num_juegos > 0)
 		lbpanel_2.setText(" "+ tr("Nº Juegos") + ": " + fGrl.IntToStr(num_juegos)+ "  " );

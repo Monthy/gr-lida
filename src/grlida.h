@@ -83,7 +83,7 @@ private:
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu, *ljMenuPopUp;
     bool isTrayIcon;
-    
+    int id_ImgPicFlow;
 	void MostrarDatosDelJuego(QString IDitem);
 	void CargarThumbsTreeWidget(const QString directorio);
 	void NuevoItemTreeWidget(const QHash<QString, QString> datos, QString imgEmu, QString IDitem);
@@ -94,7 +94,7 @@ private:
 
 protected:
 	void closeEvent( QCloseEvent *e );
-	
+
 private slots:
 	void showPopup(const QPoint& aPosition);
 	void on_twJuegos_clicked( QTreeWidgetItem *item );
@@ -120,10 +120,6 @@ private slots:
     void on_ExportarJuego();
 	void on_EjecutarDosbox();
 	void on_EjecutarScummVM();
-	void on_btn_fileurl_1();
-	void on_btn_fileurl_2();
-	void on_btn_imgtumb_1();
-	void on_btn_imgtumb_2();
 	void on_btnVer_CoverFront();
 	void on_btnVer_CoverBack();
 	void on_setFavorito();

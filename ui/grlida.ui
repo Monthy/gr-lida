@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
-    <height>480</height>
+    <width>730</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -24,7 +24,7 @@
   <widget class="QWidget" name="centralWidget" >
    <layout class="QVBoxLayout" >
     <property name="spacing" >
-     <number>0</number>
+     <number>2</number>
     </property>
     <property name="leftMargin" >
      <number>2</number>
@@ -36,188 +36,360 @@
      <number>2</number>
     </property>
     <property name="bottomMargin" >
-     <number>2</number>
+     <number>0</number>
     </property>
     <item>
      <widget class="QFrame" name="toolBar_ordenar" >
       <property name="minimumSize" >
        <size>
-        <width>16</width>
-        <height>26</height>
+        <width>0</width>
+        <height>30</height>
        </size>
       </property>
       <property name="maximumSize" >
        <size>
         <width>16777215</width>
-        <height>26</height>
+        <height>30</height>
        </size>
       </property>
-      <property name="frameShape" >
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow" >
-       <enum>QFrame::Raised</enum>
-      </property>
       <layout class="QHBoxLayout" >
+       <property name="spacing" >
+        <number>4</number>
+       </property>
        <property name="leftMargin" >
-        <number>0</number>
+        <number>4</number>
        </property>
        <property name="topMargin" >
         <number>0</number>
        </property>
        <property name="rightMargin" >
-        <number>0</number>
+        <number>4</number>
        </property>
        <property name="bottomMargin" >
         <number>0</number>
        </property>
        <item>
-        <layout class="QHBoxLayout" >
-         <property name="spacing" >
-          <number>6</number>
+        <widget class="QLineEdit" name="txtBuscar" />
+       </item>
+       <item>
+        <widget class="QLabel" name="lb_ordenar_1" >
+         <property name="text" >
+          <string>Ordenar:</string>
          </property>
-         <item>
-          <widget class="QLineEdit" name="txtBuscar" />
-         </item>
-         <item>
-          <widget class="QLabel" name="lb_ordenar_1" >
-           <property name="text" >
-            <string>Ordenar:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbxColTabla" />
-         </item>
-         <item>
-          <widget class="QLabel" name="lb_ordenar_2" >
-           <property name="text" >
-            <string>por</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbxOrdenBy" />
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbxOrden" />
-         </item>
-         <item>
-          <widget class="QPushButton" name="btn_Ordenar" >
-           <property name="text" >
-            <string>Ordenar</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="cbxColTabla" />
+       </item>
+       <item>
+        <widget class="QLabel" name="lb_ordenar_2" >
+         <property name="text" >
+          <string>por</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="cbxOrdenBy" />
+       </item>
+       <item>
+        <widget class="QComboBox" name="cbxOrden" />
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_Ordenar" >
+         <property name="text" >
+          <string>Ordenar</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
     </item>
     <item>
-     <widget class="QSplitter" name="splitter_2" >
+     <widget class="QSplitter" name="splitter_3" >
       <property name="orientation" >
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QWidget" name="layoutWidget" >
-       <layout class="QHBoxLayout" >
-        <property name="spacing" >
-         <number>6</number>
-        </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QSplitter" name="splitter" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
-          </property>
-          <widget class="QTreeWidget" name="twJuegos" >
+      <widget class="QSplitter" name="splitter_2" >
+       <property name="orientation" >
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QWidget" name="layoutWidget" >
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QSplitter" name="splitter" >
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <widget class="QTreeWidget" name="twJuegos" >
+            <property name="horizontalScrollBarPolicy" >
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="editTriggers" >
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="showDropIndicator" stdset="0" >
+             <bool>false</bool>
+            </property>
+            <property name="alternatingRowColors" >
+             <bool>false</bool>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="textElideMode" >
+             <enum>Qt::ElideNone</enum>
+            </property>
+            <property name="rootIsDecorated" >
+             <bool>false</bool>
+            </property>
+            <property name="uniformRowHeights" >
+             <bool>true</bool>
+            </property>
+            <property name="itemsExpandable" >
+             <bool>false</bool>
+            </property>
+            <property name="allColumnsShowFocus" >
+             <bool>true</bool>
+            </property>
+            <column>
+             <property name="text" >
+              <string/>
+             </property>
+            </column>
+            <column>
+             <property name="text" >
+              <string>Título</string>
+             </property>
+            </column>
+           </widget>
+           <widget class="QDockWidget" name="dockw_FilesUrl" >
+            <property name="features" >
+             <set>QDockWidget::NoDockWidgetFeatures</set>
+            </property>
+            <property name="allowedAreas" >
+             <set>Qt::NoDockWidgetArea</set>
+            </property>
+            <property name="windowTitle" >
+             <string>Archivos y Url</string>
+            </property>
+            <widget class="QWidget" name="dockWidgetContents" >
+             <layout class="QVBoxLayout" >
+              <property name="spacing" >
+               <number>0</number>
+              </property>
+              <property name="leftMargin" >
+               <number>0</number>
+              </property>
+              <property name="topMargin" >
+               <number>0</number>
+              </property>
+              <property name="rightMargin" >
+               <number>0</number>
+              </property>
+              <property name="bottomMargin" >
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QTabWidget" name="tabFileUrl" >
+                <property name="currentIndex" >
+                 <number>0</number>
+                </property>
+                <widget class="QWidget" name="tab_url" >
+                 <attribute name="title" >
+                  <string>Ver URL</string>
+                 </attribute>
+                 <attribute name="icon" >
+                  <iconset resource="../res/grlida.qrc" >:/img16/edit_enlace.png</iconset>
+                 </attribute>
+                 <layout class="QVBoxLayout" >
+                  <property name="spacing" >
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin" >
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin" >
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin" >
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin" >
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QTreeWidget" name="twUrls" >
+                    <property name="frameShape" >
+                     <enum>QFrame::NoFrame</enum>
+                    </property>
+                    <property name="frameShadow" >
+                     <enum>QFrame::Sunken</enum>
+                    </property>
+                    <property name="showDropIndicator" stdset="0" >
+                     <bool>false</bool>
+                    </property>
+                    <property name="iconSize" >
+                     <size>
+                      <width>16</width>
+                      <height>16</height>
+                     </size>
+                    </property>
+                    <property name="textElideMode" >
+                     <enum>Qt::ElideNone</enum>
+                    </property>
+                    <property name="rootIsDecorated" >
+                     <bool>false</bool>
+                    </property>
+                    <property name="uniformRowHeights" >
+                     <bool>true</bool>
+                    </property>
+                    <property name="itemsExpandable" >
+                     <bool>false</bool>
+                    </property>
+                    <property name="allColumnsShowFocus" >
+                     <bool>true</bool>
+                    </property>
+                    <column>
+                     <property name="text" >
+                      <string>Url</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text" >
+                      <string>Descripción</string>
+                     </property>
+                    </column>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab_file" >
+                 <attribute name="title" >
+                  <string>Ver Archivos</string>
+                 </attribute>
+                 <attribute name="icon" >
+                  <iconset resource="../res/grlida.qrc" >:/img16/archivos.png</iconset>
+                 </attribute>
+                 <layout class="QVBoxLayout" >
+                  <property name="spacing" >
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin" >
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin" >
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin" >
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin" >
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QTreeWidget" name="twFiles" >
+                    <property name="frameShape" >
+                     <enum>QFrame::NoFrame</enum>
+                    </property>
+                    <property name="showDropIndicator" stdset="0" >
+                     <bool>false</bool>
+                    </property>
+                    <property name="iconSize" >
+                     <size>
+                      <width>16</width>
+                      <height>16</height>
+                     </size>
+                    </property>
+                    <property name="textElideMode" >
+                     <enum>Qt::ElideNone</enum>
+                    </property>
+                    <property name="rootIsDecorated" >
+                     <bool>false</bool>
+                    </property>
+                    <property name="uniformRowHeights" >
+                     <bool>true</bool>
+                    </property>
+                    <property name="itemsExpandable" >
+                     <bool>false</bool>
+                    </property>
+                    <property name="allColumnsShowFocus" >
+                     <bool>true</bool>
+                    </property>
+                    <column>
+                     <property name="text" >
+                      <string>Nombre</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text" >
+                      <string>CRC32</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text" >
+                      <string>Descripción</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text" >
+                      <string>Size</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text" >
+                      <string>Path</string>
+                     </property>
+                    </column>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDockWidget" name="dockw_Capturas" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize" >
             <size>
-             <width>0</width>
-             <height>200</height>
+             <width>170</width>
+             <height>0</height>
             </size>
            </property>
-           <property name="focusPolicy" >
-            <enum>Qt::ClickFocus</enum>
-           </property>
-           <property name="frameShadow" >
-            <enum>QFrame::Sunken</enum>
-           </property>
-           <property name="horizontalScrollBarPolicy" >
-            <enum>Qt::ScrollBarAlwaysOff</enum>
-           </property>
-           <property name="showDropIndicator" stdset="0" >
-            <bool>false</bool>
-           </property>
-           <property name="alternatingRowColors" >
-            <bool>false</bool>
-           </property>
-           <property name="iconSize" >
+           <property name="maximumSize" >
             <size>
-             <width>24</width>
-             <height>24</height>
+             <width>16777215</width>
+             <height>16777215</height>
             </size>
            </property>
-           <property name="textElideMode" >
-            <enum>Qt::ElideNone</enum>
-           </property>
-           <property name="rootIsDecorated" >
-            <bool>false</bool>
-           </property>
-           <property name="uniformRowHeights" >
-            <bool>true</bool>
-           </property>
-           <property name="itemsExpandable" >
-            <bool>false</bool>
-           </property>
-           <property name="allColumnsShowFocus" >
-            <bool>true</bool>
-           </property>
-           <column>
-            <property name="text" >
-             <string/>
-            </property>
-           </column>
-           <column>
-            <property name="text" >
-             <string>Título</string>
-            </property>
-           </column>
-          </widget>
-          <widget class="QDockWidget" name="dockw_FilesUrl" >
            <property name="features" >
             <set>QDockWidget::NoDockWidgetFeatures</set>
            </property>
@@ -225,12 +397,12 @@
             <set>Qt::NoDockWidgetArea</set>
            </property>
            <property name="windowTitle" >
-            <string>Archivos y Url</string>
+            <string>Capturas del juego</string>
            </property>
-           <widget class="QWidget" name="dockWidgetContents" >
+           <widget class="QWidget" name="dockWidgetContents_2" >
             <layout class="QVBoxLayout" >
              <property name="spacing" >
-              <number>0</number>
+              <number>2</number>
              </property>
              <property name="leftMargin" >
               <number>0</number>
@@ -245,419 +417,72 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QFrame" name="frame_toolbar_1" >
-               <property name="minimumSize" >
-                <size>
-                 <width>110</width>
-                 <height>26</height>
-                </size>
-               </property>
+              <widget class="QTreeWidget" name="twCapturas" >
                <property name="maximumSize" >
                 <size>
-                 <width>16777215</width>
-                 <height>26</height>
+                 <width>170</width>
+                 <height>16777215</height>
                 </size>
                </property>
-               <property name="frameShape" >
-                <enum>QFrame::NoFrame</enum>
-               </property>
                <property name="frameShadow" >
-                <enum>QFrame::Raised</enum>
+                <enum>QFrame::Sunken</enum>
                </property>
-               <layout class="QHBoxLayout" >
-                <property name="spacing" >
-                 <number>2</number>
+               <property name="showDropIndicator" stdset="0" >
+                <bool>false</bool>
+               </property>
+               <property name="alternatingRowColors" >
+                <bool>false</bool>
+               </property>
+               <property name="iconSize" >
+                <size>
+                 <width>135</width>
+                 <height>120</height>
+                </size>
+               </property>
+               <property name="textElideMode" >
+                <enum>Qt::ElideNone</enum>
+               </property>
+               <property name="rootIsDecorated" >
+                <bool>false</bool>
+               </property>
+               <property name="uniformRowHeights" >
+                <bool>false</bool>
+               </property>
+               <property name="itemsExpandable" >
+                <bool>false</bool>
+               </property>
+               <property name="allColumnsShowFocus" >
+                <bool>true</bool>
+               </property>
+               <column>
+                <property name="text" >
+                 <string>Capturas</string>
                 </property>
-                <property name="leftMargin" >
-                 <number>0</number>
-                </property>
-                <property name="topMargin" >
-                 <number>0</number>
-                </property>
-                <property name="rightMargin" >
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin" >
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QToolButton" name="btn_fileurl_1" >
-                  <property name="minimumSize" >
-                   <size>
-                    <width>24</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                  <property name="text" >
-                   <string>Ver URL</string>
-                  </property>
-                  <property name="icon" >
-                   <iconset resource="../res/grlida.qrc" >:/img16/edit_enlace.png</iconset>
-                  </property>
-                  <property name="checkable" >
-                   <bool>true</bool>
-                  </property>
-                  <property name="checked" >
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QToolButton" name="btn_fileurl_2" >
-                  <property name="minimumSize" >
-                   <size>
-                    <width>24</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                  <property name="text" >
-                   <string>Ver Archivos</string>
-                  </property>
-                  <property name="icon" >
-                   <iconset resource="../res/grlida.qrc" >:/img16/archivos.png</iconset>
-                  </property>
-                  <property name="checkable" >
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer>
-                  <property name="orientation" >
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" >
-                   <size>
-                    <width>51</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
+               </column>
               </widget>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" >
-               <property name="spacing" >
-                <number>0</number>
-               </property>
-               <property name="leftMargin" >
-                <number>0</number>
-               </property>
-               <property name="topMargin" >
-                <number>0</number>
-               </property>
-               <property name="rightMargin" >
-                <number>0</number>
-               </property>
-               <property name="bottomMargin" >
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QTreeWidget" name="twFiles" >
-                 <property name="focusPolicy" >
-                  <enum>Qt::ClickFocus</enum>
-                 </property>
-                 <property name="showDropIndicator" stdset="0" >
-                  <bool>false</bool>
-                 </property>
-                 <property name="iconSize" >
-                  <size>
-                   <width>16</width>
-                   <height>16</height>
-                  </size>
-                 </property>
-                 <property name="textElideMode" >
-                  <enum>Qt::ElideNone</enum>
-                 </property>
-                 <property name="rootIsDecorated" >
-                  <bool>false</bool>
-                 </property>
-                 <property name="uniformRowHeights" >
-                  <bool>true</bool>
-                 </property>
-                 <property name="itemsExpandable" >
-                  <bool>false</bool>
-                 </property>
-                 <property name="allColumnsShowFocus" >
-                  <bool>true</bool>
-                 </property>
-                 <column>
-                  <property name="text" >
-                   <string>Nombre</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text" >
-                   <string>CRC32</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text" >
-                   <string>Descripción</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text" >
-                   <string>Size</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text" >
-                   <string>Path</string>
-                  </property>
-                 </column>
-                </widget>
-               </item>
-               <item>
-                <widget class="QTreeWidget" name="twUrls" >
-                 <property name="focusPolicy" >
-                  <enum>Qt::ClickFocus</enum>
-                 </property>
-                 <property name="frameShadow" >
-                  <enum>QFrame::Sunken</enum>
-                 </property>
-                 <property name="showDropIndicator" stdset="0" >
-                  <bool>false</bool>
-                 </property>
-                 <property name="iconSize" >
-                  <size>
-                   <width>16</width>
-                   <height>16</height>
-                  </size>
-                 </property>
-                 <property name="textElideMode" >
-                  <enum>Qt::ElideNone</enum>
-                 </property>
-                 <property name="rootIsDecorated" >
-                  <bool>false</bool>
-                 </property>
-                 <property name="uniformRowHeights" >
-                  <bool>true</bool>
-                 </property>
-                 <property name="itemsExpandable" >
-                  <bool>false</bool>
-                 </property>
-                 <property name="allColumnsShowFocus" >
-                  <bool>true</bool>
-                 </property>
-                 <column>
-                  <property name="text" >
-                   <string>Url</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text" >
-                   <string>Descripción</string>
-                  </property>
-                 </column>
-                </widget>
-               </item>
-              </layout>
              </item>
             </layout>
            </widget>
           </widget>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDockWidget" name="dockw_Capturas" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize" >
-           <size>
-            <width>170</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="features" >
-           <set>QDockWidget::NoDockWidgetFeatures</set>
-          </property>
-          <property name="allowedAreas" >
-           <set>Qt::NoDockWidgetArea</set>
-          </property>
-          <property name="windowTitle" >
-           <string>Capturas del juego</string>
-          </property>
-          <widget class="QWidget" name="dockWidgetContents_2" >
-           <layout class="QVBoxLayout" >
-            <property name="spacing" >
-             <number>0</number>
-            </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QFrame" name="frame_toolbar_2" >
-              <property name="minimumSize" >
-               <size>
-                <width>110</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>170</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="frameShape" >
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow" >
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QHBoxLayout" >
-               <property name="spacing" >
-                <number>2</number>
-               </property>
-               <property name="leftMargin" >
-                <number>0</number>
-               </property>
-               <property name="topMargin" >
-                <number>0</number>
-               </property>
-               <property name="rightMargin" >
-                <number>0</number>
-               </property>
-               <property name="bottomMargin" >
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QToolButton" name="btn_imgtumb_1" >
-                 <property name="minimumSize" >
-                  <size>
-                   <width>24</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text" >
-                  <string>DOSBox</string>
-                 </property>
-                 <property name="icon" >
-                  <iconset resource="../res/grlida.qrc" >:/img16/dosbox.png</iconset>
-                 </property>
-                 <property name="checkable" >
-                  <bool>true</bool>
-                 </property>
-                 <property name="checked" >
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btn_imgtumb_2" >
-                 <property name="minimumSize" >
-                  <size>
-                   <width>24</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text" >
-                  <string>ScummVM</string>
-                 </property>
-                 <property name="icon" >
-                  <iconset resource="../res/grlida.qrc" >:/img16/scummvm.png</iconset>
-                 </property>
-                 <property name="checkable" >
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer>
-                 <property name="orientation" >
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" >
-                  <size>
-                   <width>51</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTreeWidget" name="twCapturas" >
-              <property name="maximumSize" >
-               <size>
-                <width>170</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="focusPolicy" >
-               <enum>Qt::ClickFocus</enum>
-              </property>
-              <property name="frameShadow" >
-               <enum>QFrame::Sunken</enum>
-              </property>
-              <property name="showDropIndicator" stdset="0" >
-               <bool>false</bool>
-              </property>
-              <property name="alternatingRowColors" >
-               <bool>false</bool>
-              </property>
-              <property name="iconSize" >
-               <size>
-                <width>135</width>
-                <height>120</height>
-               </size>
-              </property>
-              <property name="textElideMode" >
-               <enum>Qt::ElideNone</enum>
-              </property>
-              <property name="rootIsDecorated" >
-               <bool>false</bool>
-              </property>
-              <property name="uniformRowHeights" >
-               <bool>false</bool>
-              </property>
-              <property name="itemsExpandable" >
-               <bool>false</bool>
-              </property>
-              <property name="allColumnsShowFocus" >
-               <bool>true</bool>
-              </property>
-              <column>
-               <property name="text" >
-                <string>Capturas</string>
-               </property>
-              </column>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
-       </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="PictureFlow" native="1" name="PicFlowWidget" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="minimumSize" >
+         <size>
+          <width>0</width>
+          <height>260</height>
+         </size>
+        </property>
+       </widget>
       </widget>
       <widget class="QDockWidget" name="dockw_Datos" >
        <property name="minimumSize" >
         <size>
-         <width>327</width>
+         <width>330</width>
          <height>0</height>
         </size>
        </property>
@@ -1380,7 +1205,7 @@
               <string>Archivos</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
+              <iconset resource="../res/grlida.qrc" >:/img16/archivos.png</iconset>
              </property>
             </widget>
            </item>
@@ -1496,7 +1321,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>680</width>
+     <width>730</width>
      <height>21</height>
     </rect>
    </property>
@@ -1506,6 +1331,7 @@
     </property>
     <addaction name="mnu_ver_archivos_url" />
     <addaction name="mnu_ver_datos" />
+    <addaction name="mnu_ver_pictureflow" />
     <addaction name="mnu_ver_capturas" />
     <addaction name="mnu_ver_ordenar" />
     <addaction name="mnu_ver_toolbar" />
@@ -2250,30 +2076,41 @@
     <string>Exporta los datos de configuración del Juego</string>
    </property>
   </action>
+  <action name="mnu_ver_pictureflow" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>PictureFlow</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11" />
+ <customwidgets>
+  <customwidget>
+   <class>PictureFlow</class>
+   <extends>QWidget</extends>
+   <header>pictureflow-qt/pictureflow.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>twJuegos</tabstop>
-  <tabstop>txtInfo_Subtitulo</tabstop>
-  <tabstop>txtInfo_Genero</tabstop>
-  <tabstop>txtInfo_Idioma</tabstop>
-  <tabstop>txtInfo_Formato</tabstop>
-  <tabstop>txtInfo_NumDisc</tabstop>
-  <tabstop>txtInfo_Anno</tabstop>
-  <tabstop>txtInfo_Tamano</tabstop>
-  <tabstop>txtInfo_Compania</tabstop>
-  <tabstop>txtInfo_Desarrollador</tabstop>
-  <tabstop>txtInfo_Tema</tabstop>
-  <tabstop>txtInfo_SistemaOp</tabstop>
+  <tabstop>tabFileUrl</tabstop>
+  <tabstop>twUrls</tabstop>
+  <tabstop>twFiles</tabstop>
+  <tabstop>twCapturas</tabstop>
   <tabstop>toolButton_11</tabstop>
   <tabstop>btnVer_CoverFront</tabstop>
   <tabstop>btnVer_CoverBack</tabstop>
-  <tabstop>btn_fileurl_1</tabstop>
-  <tabstop>btn_fileurl_2</tabstop>
-  <tabstop>twUrls</tabstop>
-  <tabstop>btn_imgtumb_1</tabstop>
-  <tabstop>btn_imgtumb_2</tabstop>
-  <tabstop>twCapturas</tabstop>
+  <tabstop>txtBuscar</tabstop>
+  <tabstop>cbxColTabla</tabstop>
+  <tabstop>cbxOrdenBy</tabstop>
+  <tabstop>cbxOrden</tabstop>
+  <tabstop>btn_Ordenar</tabstop>
  </tabstops>
  <resources>
   <include location="../res/grlida.qrc" />
@@ -2306,8 +2143,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>69</x>
-     <y>422</y>
+     <x>72</x>
+     <y>274</y>
     </hint>
    </hints>
   </connection>
@@ -2322,8 +2159,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>209</x>
-     <y>422</y>
+     <x>391</x>
+     <y>274</y>
     </hint>
    </hints>
   </connection>
@@ -2370,8 +2207,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>85</x>
-     <y>400</y>
+     <x>88</x>
+     <y>274</y>
     </hint>
    </hints>
   </connection>
@@ -2386,8 +2223,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>253</x>
-     <y>288</y>
+     <x>391</x>
+     <y>274</y>
     </hint>
    </hints>
   </connection>
@@ -2515,7 +2352,7 @@
     </hint>
     <hint type="destinationlabel" >
      <x>339</x>
-     <y>66</y>
+     <y>62</y>
     </hint>
    </hints>
   </connection>
@@ -2532,6 +2369,22 @@
     <hint type="destinationlabel" >
      <x>371</x>
      <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mnu_ver_pictureflow</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>PicFlowWidget</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>197</x>
+     <y>410</y>
     </hint>
    </hints>
   </connection>
