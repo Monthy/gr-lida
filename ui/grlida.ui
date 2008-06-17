@@ -2106,11 +2106,23 @@
   <tabstop>toolButton_11</tabstop>
   <tabstop>btnVer_CoverFront</tabstop>
   <tabstop>btnVer_CoverBack</tabstop>
+  <tabstop>txtInfo_Comentario</tabstop>
   <tabstop>txtBuscar</tabstop>
   <tabstop>cbxColTabla</tabstop>
   <tabstop>cbxOrdenBy</tabstop>
   <tabstop>cbxOrden</tabstop>
   <tabstop>btn_Ordenar</tabstop>
+  <tabstop>txtInfo_Subtitulo</tabstop>
+  <tabstop>txtInfo_Genero</tabstop>
+  <tabstop>txtInfo_Idioma</tabstop>
+  <tabstop>txtInfo_Formato</tabstop>
+  <tabstop>txtInfo_NumDisc</tabstop>
+  <tabstop>txtInfo_Anno</tabstop>
+  <tabstop>txtInfo_Tamano</tabstop>
+  <tabstop>txtInfo_Compania</tabstop>
+  <tabstop>txtInfo_Desarrollador</tabstop>
+  <tabstop>txtInfo_Tema</tabstop>
+  <tabstop>txtInfo_SistemaOp</tabstop>
  </tabstops>
  <resources>
   <include location="../res/grlida.qrc" />
