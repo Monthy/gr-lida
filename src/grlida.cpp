@@ -127,6 +127,8 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 	ui.twJuegos->header()->resizeSection(0, 31 );
 	ui.twJuegos->header()->resizeSection(1, 60 );
 	ui.twJuegos->setContextMenuPolicy(Qt::CustomContextMenu);
+	ui.twJuegos->installEventFilter(this);
+	ui.txtInfo_Comentario->installEventFilter(this);
 
 	ui.twFiles->header()->setStretchLastSection(true); 
 	ui.twFiles->header()->setMovable(false);
@@ -185,6 +187,64 @@ void GrLida::closeEvent( QCloseEvent *e )
 
 		e->accept();
 	}
+}
+
+bool GrLida::eventFilter(QObject *obj, QEvent *event)
+{
+	if (obj == ui.twJuegos || obj == ui.txtInfo_Comentario )
+	{
+		if(event->type() == QEvent::KeyPress)
+		{
+			QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+
+			int nItem, pos;
+			nItem = 0;
+			pos = ui.twJuegos->indexOfTopLevelItem( ui.twJuegos->currentItem() );
+
+			switch( keyEvent->key() )
+			{
+				case Qt::Key_Enter:
+				case Qt::Key_Space:
+				case Qt::Key_Return:
+					on_EjecutarJuego();
+					return true;
+				break;
+				case Qt::Key_Left:
+				case Qt::Key_Up:
+					if( ui.twJuegos->topLevelItemCount()>0 && pos!=-1 )
+					{
+						nItem = pos;
+						if( nItem == 0 )
+						{
+							nItem = ui.twJuegos->topLevelItemCount()-1 ;
+							ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( nItem ), true);
+						} else
+							ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( nItem - 1), true);
+					}
+					return true;
+				break;
+				case Qt::Key_Right:
+				case Qt::Key_Down:
+					if( ui.twJuegos->topLevelItemCount()>0 && pos!=-1 )
+					{
+						nItem = pos;
+						if( nItem == ui.twJuegos->topLevelItemCount()-1 )
+						{
+							nItem = 0 ;
+							ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( 0 ), true);
+						} else
+							ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( nItem + 1), true);
+					}
+					return true;
+				break;
+				default:
+					return false;
+				break;
+			}
+		} else
+			return false;
+	} else
+		return QMainWindow::eventFilter(obj, event); // pass the event on to the parent class
 }
 
 void GrLida::setVisible(bool visible)

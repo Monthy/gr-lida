@@ -96,6 +96,7 @@ private:
 
 protected:
 	void closeEvent( QCloseEvent *e );
+	bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
 	void showPopup(const QPoint& aPosition);
