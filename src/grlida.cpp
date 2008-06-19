@@ -175,6 +175,7 @@ void GrLida::closeEvent( QCloseEvent *e )
 			settings.setValue("Pnl_Datos"    , ui.actionVerDatos->isChecked()    );
 			settings.setValue("Pnl_FilesUrl" , ui.actionVerFilesUrl->isChecked() );
 			settings.setValue("Pnl_Ordenar"  , ui.mnu_ver_ordenar->isChecked()   );
+			settings.setValue("Pnl_PictureFlow", ui.mnu_ver_pictureflow->isChecked());
 		settings.endGroup();
 		settings.beginGroup("Updates");
 			settings.setValue("Version" , fGrl.stVersionGrl() );
@@ -183,6 +184,9 @@ void GrLida::closeEvent( QCloseEvent *e )
 			settings.setValue("db_Orden_ColTabla", stdb_Orden_ColTabla );
 			settings.setValue("db_Orden_By"      , stdb_Orden_By       );
 			settings.setValue("db_Orden"         , stdb_Orden          );
+		settings.endGroup();
+		settings.beginGroup("MainState");
+			settings.setValue("maximized", isMaximized() );
 		settings.endGroup();
 
 		e->accept();
@@ -449,6 +453,13 @@ void GrLida::CargarConfigInicial()
 		ui.dockw_Capturas->setVisible(    settings.value("Pnl_Capturas", "false" ).toBool() );
 		ui.dockw_FilesUrl->setVisible(    settings.value("Pnl_FilesUrl", "false" ).toBool() );
 		ui.toolBar_ordenar->setVisible(   settings.value("Pnl_Ordenar" , "false" ).toBool() );
+		ui.mnu_ver_pictureflow->setChecked( settings.value("Pnl_PictureFlow", "true"  ).toBool() );
+		ui.PicFlowWidget->setVisible( settings.value("Pnl_PictureFlow"      , "true"  ).toBool() );
+	settings.endGroup();
+
+	settings.beginGroup("MainState");
+		if( settings.value("maximized", isMaximized() ).toBool() ) // maximizado.
+			setWindowState( windowState() | Qt::WindowMaximized );
 	settings.endGroup();
 
 #ifdef Q_OS_WIN32

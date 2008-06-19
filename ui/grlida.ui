@@ -121,18 +121,18 @@
      </widget>
     </item>
     <item>
-     <widget class="QSplitter" name="splitter_3" >
+     <widget class="QSplitter" name="splitter_info" >
       <property name="orientation" >
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QSplitter" name="splitter_2" >
+      <widget class="QSplitter" name="splitter_pictureflow" >
        <property name="orientation" >
         <enum>Qt::Vertical</enum>
        </property>
        <widget class="QWidget" name="layoutWidget" >
         <layout class="QHBoxLayout" >
          <item>
-          <widget class="QSplitter" name="splitter" >
+          <widget class="QSplitter" name="splitter_listajuegos" >
            <property name="orientation" >
             <enum>Qt::Vertical</enum>
            </property>
