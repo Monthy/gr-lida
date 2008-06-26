@@ -26,6 +26,7 @@
 #include "grlida_addedit_montajes.h"
 #include "grlida_addedit_url.h"
 #include "grlida_img_viewer.h"
+#include "grlida_importar_juego_info.h"
 
 frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIndex, QDialog *parent, Qt::WFlags flags)
     : QDialog(parent, flags)
@@ -80,6 +81,7 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	connect( ui.btnImgEliminar_Thumbs     , SIGNAL( clicked() ), this, SLOT( on_btnImgEliminar_Thumbs() ) );
 	connect( ui.btnImgEliminar_CoverFront , SIGNAL( clicked() ), this, SLOT( on_btnImgEliminar_CoverFront() ) );
 	connect( ui.btnImgEliminar_CoverBack  , SIGNAL( clicked() ), this, SLOT( on_btnImgEliminar_CoverBack() ) );
+	connect( ui.btnDescargarInfo          , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo() ) );
 	connect( ui.twDatoSmile , SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twDatoSmile_Dblclicked(QTreeWidgetItem*) ));
 
 	// Conecta los botones para editar los comentarios de los juegos
@@ -897,6 +899,49 @@ void frmAddEditJuego::on_btnImgEliminar_CoverBack()
 	ui.lbImg_CoverBack->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 	ui.btnImgVer_CoverBack->setEnabled( false );
 	ui.btnImgEliminar_CoverBack->setEnabled( false );
+}
+
+void frmAddEditJuego::on_btnDescargarInfo()
+{
+	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo();
+	if( ImportarJuegoInfo->exec() == QDialog::Accepted )
+	{
+		//ui.lb_fechahora->setText( ImportarJuegoInfo->DatosJuego["fecha"] );						// fecha
+		ui.txtDatos_Titulo->setText( ImportarJuegoInfo->DatosJuego["titulo"] );					// titulo
+		ui.txtDatos_Subtitulo->setText( ImportarJuegoInfo->DatosJuego["subtitulo"] );			// subtitulo
+		ui.txtDatos_Tamano->setText( ImportarJuegoInfo->DatosJuego["tamano"] );					// tamano
+		ui.txtDatos_Comentario->setPlainText( ImportarJuegoInfo->DatosJuego["comentario"] );	// comentario
+		ui.cbxDatos_Genero->setEditText( ImportarJuegoInfo->DatosJuego["genero"] );
+		ui.cbxDatos_Compania->setEditText( ImportarJuegoInfo->DatosJuego["compania"] );
+		ui.cbxDatos_Desarrollador->setEditText( ImportarJuegoInfo->DatosJuego["desarrollador"] );
+		ui.cbxDatos_Tema->setEditText( ImportarJuegoInfo->DatosJuego["tema"] );
+		ui.cbxDatos_Idioma->setEditText( ImportarJuegoInfo->DatosJuego["idioma"] );
+		ui.cbxDatos_Formato->setEditText( ImportarJuegoInfo->DatosJuego["formato"] );
+		ui.cbxDatos_Anno->setEditText( ImportarJuegoInfo->DatosJuego["anno"] );
+		ui.cbxDatos_NumDisc->setEditText( ImportarJuegoInfo->DatosJuego["numdisc"] );
+		ui.cbxDatos_SistemaOp->setEditText( ImportarJuegoInfo->DatosJuego["sistemaop"] );
+		ui.cbxDatos_Graficos->setCurrentIndex( ui.cbxDatos_Graficos->findText( ImportarJuegoInfo->DatosJuego["graficos"] ) );
+		ui.cbxDatos_Sonido->setCurrentIndex( ui.cbxDatos_Sonido->findText( ImportarJuegoInfo->DatosJuego["sonido"] ) );
+		ui.cbxDatos_Jugabilidad->setCurrentIndex( ui.cbxDatos_Jugabilidad->findText( ImportarJuegoInfo->DatosJuego["jugabilidad"] ) );
+		ui.cbxDatos_Estado->setEditText( ImportarJuegoInfo->DatosJuego["estado"] );
+		ui.chkDatos_Original->setChecked( fGrl.StrToBool( ImportarJuegoInfo->DatosJuego["original"] ) );
+		ui.chkDatos_Favorito->setChecked( fGrl.StrToBool( ImportarJuegoInfo->DatosJuego["favorito"] ) );
+
+	// icono
+		if( ImportarJuegoInfo->DatosJuego["icono"] == "datos" || ImportarJuegoInfo->DatosJuego["icono"] == "" )
+			ui.cbxDatos_Icono->setCurrentIndex(0);
+		else if( ImportarJuegoInfo->DatosJuego["icono"] == "dosbox" )
+			ui.cbxDatos_Icono->setCurrentIndex(1);
+		else if( ImportarJuegoInfo->DatosJuego["icono"] == "scummvm" )
+			ui.cbxDatos_Icono->setCurrentIndex(2);
+		else if( ImportarJuegoInfo->DatosJuego["icono"] =="vdmsound" )
+			ui.cbxDatos_Icono->setCurrentIndex(3);
+		else
+			ui.cbxDatos_Icono->setCurrentIndex( ui.cbxDatos_Icono->findText( ImportarJuegoInfo->DatosJuego["icono"] ) );	// icono
+	}
+
+	if(ImportarJuegoInfo != NULL )
+		delete ImportarJuegoInfo;
 }
 
 void frmAddEditJuego::on_cbxDatos_TipoEmu_txtChanged(const QString texto)

@@ -106,6 +106,7 @@ private slots:
 	void on_btnImgEliminar_Thumbs();
 	void on_btnImgEliminar_CoverFront();
 	void on_btnImgEliminar_CoverBack();
+	void on_btnDescargarInfo();
 	void on_btnTool_Cortar();
 	void on_btnTool_Copiar();
 	void on_btnTool_Pegar();

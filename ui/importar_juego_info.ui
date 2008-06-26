@@ -1,0 +1,227 @@
+<ui version="4.0" >
+ <class>ImportarJuegoInfoClass</class>
+ <widget class="QDialog" name="ImportarJuegoInfoClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>678</width>
+    <height>440</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Importar Info del Juego</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../res/grlida.qrc" >:/img16/datos_1.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="leftMargin" >
+    <number>4</number>
+   </property>
+   <property name="topMargin" >
+    <number>4</number>
+   </property>
+   <property name="rightMargin" >
+    <number>4</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>4</number>
+   </property>
+   <item>
+    <layout class="QGridLayout" >
+     <property name="horizontalSpacing" >
+      <number>6</number>
+     </property>
+     <property name="verticalSpacing" >
+      <number>3</number>
+     </property>
+     <item row="0" column="0" >
+      <widget class="QLabel" name="lb_url" >
+       <property name="text" >
+        <string>URL:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" >
+      <widget class="QComboBox" name="cbxDbXml" >
+       <property name="editable" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" >
+      <widget class="QLabel" name="lb_titulo" >
+       <property name="text" >
+        <string>Titulo:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1" >
+      <widget class="QLineEdit" name="txtTituloBuscar" />
+     </item>
+     <item row="1" column="2" >
+      <widget class="QPushButton" name="btnBuscar" >
+       <property name="text" >
+        <string>Buscar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/edit_buscar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3" >
+      <widget class="QPushButton" name="btnAbortar" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="text" >
+        <string>Abortar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QSplitter" name="splitter" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="handleWidth" >
+      <number>4</number>
+     </property>
+     <widget class="QTreeWidget" name="twListaJuegos" >
+      <property name="editTriggers" >
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="alternatingRowColors" >
+       <bool>false</bool>
+      </property>
+      <property name="iconSize" >
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
+      <property name="textElideMode" >
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="rootIsDecorated" >
+       <bool>false</bool>
+      </property>
+      <property name="uniformRowHeights" >
+       <bool>true</bool>
+      </property>
+      <property name="itemsExpandable" >
+       <bool>false</bool>
+      </property>
+      <property name="allColumnsShowFocus" >
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text" >
+        <string>Titulos</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTextBrowser" name="txtb_info" >
+      <property name="minimumSize" >
+       <size>
+        <width>440</width>
+        <height>0</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QPushButton" name="btnVerInfo" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="text" >
+        <string>Ver Info</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/datos_2.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="text" >
+        <string>Aceptar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancelar" >
+       <property name="text" >
+        <string>Cancelar</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>cbxDbXml</tabstop>
+  <tabstop>txtTituloBuscar</tabstop>
+  <tabstop>btnBuscar</tabstop>
+  <tabstop>btnAbortar</tabstop>
+  <tabstop>twListaJuegos</tabstop>
+  <tabstop>btnVerInfo</tabstop>
+  <tabstop>txtb_info</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancelar</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/grlida.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>btnCancelar</sender>
+   <signal>clicked()</signal>
+   <receiver>ImportarJuegoInfoClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>672</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>346</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

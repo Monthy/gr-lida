@@ -7816,6 +7816,16 @@
       <number>0</number>
      </property>
      <item>
+      <widget class="QPushButton" name="btnDescargarInfo" >
+       <property name="text" >
+        <string>Descargar la Info del Juego</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >:/img16/go-down.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer>
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>

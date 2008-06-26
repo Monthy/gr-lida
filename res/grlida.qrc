@@ -235,5 +235,6 @@
         <file>smiles/smile.png</file>
         <file>smiles/surprised.png</file>
         <file>smiles/wink.png</file>
+        <file>tpl_juego_info.html</file>
     </qresource>
 </RCC>
