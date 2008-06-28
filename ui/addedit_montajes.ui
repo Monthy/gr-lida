@@ -51,62 +51,6 @@
          <height>0</height>
         </size>
        </property>
-       <item>
-        <property name="text" >
-         <string>drive</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="../res/grlida.qrc" >:/img16/drive_hd.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>cdrom</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="../res/grlida.qrc" >:/img16/drive_cdrom.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>floppy</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="../res/grlida.qrc" >:/img16/drive_floppy.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>IMG_floppy</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="../res/grlida.qrc" >:/img16/floppy_1.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>IMG_iso</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="../res/grlida.qrc" >:/img16/cd_iso.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>IMG_hdd</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="../res/grlida.qrc" >:/img16/drive_hd.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>boot</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="../res/grlida.qrc" >:/img16/floppy_2.png</iconset>
-        </property>
-       </item>
       </widget>
      </item>
      <item>
