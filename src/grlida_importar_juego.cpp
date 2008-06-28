@@ -24,7 +24,6 @@
 
 #include "grlida_importar_juego.h"
 #include "grlida_importpath.h"
-#include "ui_login_url.h" // Qt 4.3.x
 
 frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
@@ -57,7 +56,7 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 		UltimoPath["DirFileXML"] = settings.value("DirFileXML", "").toString();
 	settings.endGroup();
 
-	if( url_xmldb.isEmpty() )
+	if( temp_url_xmldb.isEmpty() )
 		url_xmldb = "http://laisladelabandoware.es/";
 	else
 		url_xmldb = fGrl.url_correcta( temp_url_xmldb );
@@ -91,15 +90,11 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	else
 		ui.cbxDbXml->setCurrentIndex( ui.cbxDbXml->findText(url_xmldb, Qt::MatchContains) );
 
-	progressDialog = new QProgressDialog(this);
-	http = new QHttp(this);
-
-	connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(httpRequestFinished(int, bool)));
-	connect(http, SIGNAL(dataReadProgress(int, int)), this, SLOT(updateDataReadProgress(int, int)));
-	connect(http, SIGNAL(responseHeaderReceived(const QHttpResponseHeader &)), this, SLOT(readResponseHeader(const QHttpResponseHeader &)));
-	connect(http, SIGNAL(authenticationRequired(const QString &, quint16, QAuthenticator *)), this, SLOT(slotAuthenticationRequired(const QString &, quint16, QAuthenticator *))); // Qt 4.3.x
-	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
-
+	httpdown = new HttpDownload(this);
+	connect(httpdown, SIGNAL( StatusRequestFinished() ), this, SLOT( isRequestFinished() ) );
+	connect(httpdown, SIGNAL( statusLabelChanged(QString) ), ui.statusLabel, SLOT( setText(QString) ) );
+	connect(httpdown, SIGNAL( StatusBtnDownloadChanged(bool) ), ui.btnUpdateList, SLOT( setEnabled(bool) ) );
+	
 	ui.btnUpdateList->setDefault(true);
 	ui.wizardImport->setCurrentIndex(0);
 
@@ -116,9 +111,7 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 
 frmImportarJuego::~frmImportarJuego()
 {
-	delete http;
-	delete file;
-	delete progressDialog;
+
 }
 
 void frmImportarJuego::setTheme()
@@ -189,7 +182,7 @@ void frmImportarJuego::on_btnNext()
 				ui.twDatosFiles->clear();
 				ui.twDatosURL->clear();
 
-				downloadFile( url_filed, xml_InfoJuegos );
+				httpdown->downloadFile( url_filed, xml_InfoJuegos );
 
 				if(ui.twListaJuegos->currentItem()->text(6)=="dosbox")
 					ui.tabWidget->setTabEnabled(2,true);
@@ -291,7 +284,7 @@ void frmImportarJuego::on_btnOk()
 		{
 			indx_fin_descarga = 3;
 			url_filed = url_xmldb + "images/covers/large/" + DatosJuego["cover_front"];
-			downloadFile( url_filed, stHomeDir + "temp/cover_front_" + DatosJuego["cover_front"]);
+			httpdown->downloadFile( url_filed, stHomeDir + "temp/cover_front_" + DatosJuego["cover_front"]);
 		}
 		img_cover_front = DatosJuego["cover_front"];
 		ImportPathNew->ui.txtDatosPath_CoverFront->setText( stHomeDir + "covers/cover_front_" + DatosJuego["cover_front"] );
@@ -310,7 +303,7 @@ void frmImportarJuego::on_btnOk()
 		{
 			indx_fin_descarga = 3;
 			url_filed = url_xmldb + "images/covers/large/" + DatosJuego["cover_back"];
-			downloadFile( url_filed, stHomeDir + "temp/cover_back_" + DatosJuego["cover_back"]);
+			httpdown->downloadFile( url_filed, stHomeDir + "temp/cover_back_" + DatosJuego["cover_back"]);
 		}
 		img_cover_back = DatosJuego["cover_back"];
 		ImportPathNew->ui.txtDatosPath_CoverBack->setText( stHomeDir + "covers/cover_back_" + DatosJuego["cover_back"] );
@@ -457,7 +450,7 @@ void frmImportarJuego::on_btnUpdateList()
 	else
 		url_filed = url_xmldb + "grlidadb.xml";
 
-	downloadFile( url_filed, xml_ListaJuegos );
+	httpdown->downloadFile( url_filed, xml_ListaJuegos );
 }
 
 void frmImportarJuego::on_xml_open()
@@ -934,144 +927,22 @@ void frmImportarJuego::MostrarDatosJuegoInfo()
 		ui.lb_thumbs->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 }
 
-void frmImportarJuego::downloadFile(QString urlfile, QString fileName)
+void frmImportarJuego::isRequestFinished()
 {
-	QUrl url( urlfile );
-	QFileInfo fileInfo( url.path() );
-	//QString fileName = fileInfo.fileName();
-	//if(fileName.isEmpty())
-	//	fileName = "index.html";
-	//if(QFile::exists(fileName) && (fileName!=xml_InfoJuegos || fileName!=xml_InfoJuegos) )
-	if( QFile::exists(fileName) )
+	switch( indx_fin_descarga )
 	{
-		//if(QMessageBox::question(this, "GR-lida", tr("Ya existe un archivo con el mismo nombre '%1' en el directorio actual. ¿Quieres sobreescribirlo?").arg(fileName),
-		//	QMessageBox::Ok|QMessageBox::Cancel, QMessageBox::Cancel) == QMessageBox::Cancel)
-		//	return;
-		QFile::remove(fileName);
-	}
-
-	file = new QFile(fileName);
-	if(!file->open(QIODevice::WriteOnly))
-	{
-		QMessageBox::information(this, "GR-lida",tr("No se ha podido guardar el archivo %1: %2.").arg(fileName).arg(file->errorString()));
-		delete file;
-		file = 0;
-		return;
-	}
-
-	QHttp::ConnectionMode mode = url.scheme().toLower() == "https" ? QHttp::ConnectionModeHttps : QHttp::ConnectionModeHttp; // Qt 4.3.x
-	http->setHost(url.host(), mode, url.port() == -1 ? 0 : url.port());
-
-	if(!url.userName().isEmpty())
-		http->setUser(url.userName(), url.password());
-
-	httpRequestAborted = false;
-	httpGetId = http->get( urlfile , file);
-
-	progressDialog->setWindowTitle("GR-lida DB");
-	progressDialog->setLabelText(tr("Descargando %1.").arg(fileName));
-	ui.btnUpdateList->setEnabled(false);
-}
-
-void frmImportarJuego::cancelDownload()
-{
-	ui.statusLabel->setText(tr("Descarga cancelada."));
-	httpRequestAborted = true;
-	http->abort();
-	ui.btnUpdateList->setEnabled(true);
-}
-
-void frmImportarJuego::httpRequestFinished(int requestId, bool error)
-{
-	if(requestId != httpGetId)
-		return;
-	if(httpRequestAborted)
-	{
-		if(file)
-		{
-			file->close();
-			file->remove();
-			delete file;
-			file = 0;
-		}
-		progressDialog->hide();
-		return;
-	}
-
-	if(requestId != httpGetId)
-		return;
-
-	progressDialog->hide();
-	file->flush();
-	file->close();
-
-	if(error)
-	{
-		file->remove();
-		QMessageBox::information(this, "GR-lida DB", tr("No se ha podido guardar el archivo: %1.").arg(http->errorString()));
-	
-	} else {
-		QString fileName = QFileInfo(QUrl( url_filed ).path()).fileName();
-		ui.statusLabel->setText(tr("Descargado en el directorio: %1.").arg(fileName));
-		switch( indx_fin_descarga )
-		{
-			case 0:
-				xml_read( xml_ListaJuegos );
-			break;
-			case 1:
-				xml_read( xml_InfoJuegos );
-			break;
-			case 2:
-				ui.textBrowser->setHtml( texto_html );
-			break;
-			case 3:
-				//
-			break;
-		}
-	}
-	ui.btnUpdateList->setEnabled(true);
-	delete file;
-	file = 0;
-}
-
-void frmImportarJuego::readResponseHeader(const QHttpResponseHeader &responseHeader)
-{
-	if(responseHeader.statusCode() != 200)
-	{
-		QMessageBox::information(this, "GR-lida DB", tr("La descarga ha fallado: %1.").arg(responseHeader.reasonPhrase()));
-		httpRequestAborted = true;
-		progressDialog->hide();
-		http->abort();
-		return;
-	}
-}
-
-void frmImportarJuego::updateDataReadProgress(int bytesRead, int totalBytes)
-{
-	if(httpRequestAborted)
-		return;
-	progressDialog->setMaximum(totalBytes);
-	progressDialog->setValue(bytesRead);
-}
-
-void frmImportarJuego::enableDownloadButton()
-{
-	ui.btnUpdateList->setEnabled(!url_filed.isEmpty());
-}
-
-// para la Qt 4.3.x
-void frmImportarJuego::slotAuthenticationRequired(const QString &hostName, quint16, QAuthenticator *authenticator)
-{
-	QDialog dlg;
-	Ui::Dialog ui;
-	ui.setupUi(&dlg);
-	dlg.adjustSize();
-	ui.siteDescription->setText(tr("%1 en %2").arg(authenticator->realm()).arg(hostName));
-	
-	if(dlg.exec() == QDialog::Accepted)
-	{
-		authenticator->setUser(ui.userEdit->text());
-		authenticator->setPassword(ui.passwordEdit->text());
+		case 0:
+			xml_read( xml_ListaJuegos );
+		break;
+		case 1:
+			xml_read( xml_InfoJuegos );
+		break;
+		case 2:
+			ui.textBrowser->setHtml( texto_html );
+		break;
+		case 3:
+			//
+		break;
 	}
 }
 
@@ -1097,7 +968,7 @@ void frmImportarJuego::on_treeWidget_clicked( QTreeWidgetItem *item)
 				indx_fin_descarga = 2;
 				descarga_img = true;
 				url_filed = url_xmldb + "images/covers/small/"+ item->text(2);
-				downloadFile( url_filed , stHomeDir + "temp/thumbs_"+ item->text(2) );
+				httpdown->downloadFile( url_filed , stHomeDir + "temp/thumbs_"+ item->text(2) );
 			} else
 				descarga_img = false;
 		}
@@ -1134,7 +1005,7 @@ void frmImportarJuego::on_treeWidget_Dblclicked(QTreeWidgetItem *item)
 		indx_fin_descarga = 1;
 
 		url_filed = url_xmldb + "grlidadb.php?ver=juego&gid="+item->text(1)+"&id_emu="+item->text(5)+"&tipo_emu="+item->text(6);
-		downloadFile( url_filed , xml_InfoJuegos );
+		httpdown->downloadFile( url_filed , xml_InfoJuegos );
 
 		ui.btnPrevious->setEnabled(true);
 		ui.btnOk->setEnabled(true);

@@ -23,6 +23,7 @@
 **/
 
 #include "grlida_importar_juego_info.h"
+#include "grlida_importpath.h"
 
 frmImportarJuegoInfo::frmImportarJuegoInfo(QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
@@ -36,13 +37,17 @@ frmImportarJuegoInfo::frmImportarJuegoInfo(QDialog *parent, Qt::WFlags flags)
 	connect( ui.cbxDbXml     , SIGNAL( activated(const QString &)), this, SLOT( on_changeURL_XML(const QString &)));
 	connect( ui.btnBuscar    , SIGNAL( clicked() ), this, SLOT( fetch() ) );
 	connect( ui.btnAbortar   , SIGNAL( clicked() ), &http, SLOT( abort() ) );
+
 	connect(&http, SIGNAL( readyRead(const QHttpResponseHeader &) ), this, SLOT( readData(const QHttpResponseHeader &) ) );
 	connect(&http, SIGNAL( requestFinished(int, bool) ), this, SLOT( finished(int, bool) ) );
+
+	httpdown = new HttpDownload(this);
+	connect(httpdown, SIGNAL( StatusRequestFinished() ), this, SLOT( isRequestFinished() ) );
 
 	ui.btnVerInfo->setEnabled(false);
 	ui.btnAbortar->setEnabled(false);
 	ui.btnOk->setEnabled(true);
-	
+
 	stHomeDir = fGrl.GRlidaHomePath(); // directorio de trabajo del GR-lida
 	stTheme   = fGrl.ThemeGrl();
 	setTheme();
@@ -151,6 +156,13 @@ void frmImportarJuegoInfo::on_changeURL_XML(const QString &url)
 	url_xmldb = fGrl.url_correcta( url );
 }
 
+void frmImportarJuegoInfo::isRequestFinished()
+{
+	QUrl url( url_xmldb );
+	http.setHost( url.host() );
+	connectionId = http.get( url_xmldb + "grlidadb.php?ver=juego&gid="+ui.twListaJuegos->currentItem()->text(1)+"&id_emu="+ui.twListaJuegos->currentItem()->text(5)+"&tipo_emu="+ui.twListaJuegos->currentItem()->text(6) );
+}
+
 void frmImportarJuegoInfo::on_btnVerInfo()
 {
 	if( ui.cbxDbXml->currentText()!="")
@@ -166,17 +178,116 @@ void frmImportarJuegoInfo::on_btnVerInfo()
 	DatosJuego.clear();
 	xml.clear();
 
-	QUrl url( url_xmldb );
-
-	http.setHost( url.host() );
-
-	connectionId = http.get( url_xmldb + "grlidadb.php?ver=juego&gid="+ui.twListaJuegos->currentItem()->text(1)+"&id_emu="+ui.twListaJuegos->currentItem()->text(5)+"&tipo_emu="+ui.twListaJuegos->currentItem()->text(6) );
+	QFile file_thumbs;
+	if( !file_thumbs.exists( stHomeDir + "temp/thumbs_"+ui.twListaJuegos->currentItem()->text(2)  ) )
+	{
+		url_filed = url_xmldb + "images/covers/small/"+ ui.twListaJuegos->currentItem()->text(2);
+		httpdown->downloadFile( url_filed , stHomeDir + "temp/thumbs_"+ ui.twListaJuegos->currentItem()->text(2) );
+	} else {
+		QUrl url( url_xmldb );
+		http.setHost( url.host() );
+		connectionId = http.get( url_xmldb + "grlidadb.php?ver=juego&gid="+ui.twListaJuegos->currentItem()->text(1)+"&id_emu="+ui.twListaJuegos->currentItem()->text(5)+"&tipo_emu="+ui.twListaJuegos->currentItem()->text(6) );
+	}
 }
 
 void frmImportarJuegoInfo::on_btnOk()
 {
-	if( !DatosJuego.isEmpty() )
+	QFile file_thumbs, file_cover_front, file_cover_back;
+
+	frmImportPath * ImportPathNew = new frmImportPath();
+
+	ImportPathNew->ui.gBox_path_emu->setEnabled( false );
+	ImportPathNew->ui.gBox_path_emu->setTitle("Path");
+
+	img_thumbs.clear();
+	img_cover_front.clear();
+	img_cover_back.clear();
+
+	if(DatosJuego["thumbs"]=="null" || DatosJuego["thumbs"].isEmpty() )
+	{
+		img_thumbs = "null";
+		ImportPathNew->ui.txtDatosPath_Thumbs->setText("");
+		ImportPathNew->ui.txtDatosPath_Thumbs->setEnabled(false);
+		ImportPathNew->ui.btnDirPath_Datos_Thumbs->setEnabled(false);
+	} else {
+		img_thumbs = DatosJuego["thumbs"];
+		ImportPathNew->ui.txtDatosPath_Thumbs->setText( stHomeDir + "thumbs/thumbs_"+DatosJuego["thumbs"] );
+		ImportPathNew->ui.txtDatosPath_Thumbs->setEnabled(true);
+		ImportPathNew->ui.btnDirPath_Datos_Thumbs->setEnabled(true);
+	}
+
+	if(DatosJuego["cover_front"]=="null" || DatosJuego["cover_front"].isEmpty() )
+	{
+		img_cover_front = "null";
+		ImportPathNew->ui.txtDatosPath_CoverFront->setText("");
+		ImportPathNew->ui.txtDatosPath_CoverFront->setEnabled(false);
+		ImportPathNew->ui.btnDirPath_Datos_CoverFront->setEnabled(false);
+	} else {
+		if( !file_cover_front.exists( stHomeDir + "temp/cover_front_" + DatosJuego["cover_front"] ) )
+		{
+			url_filed = url_xmldb + "images/covers/large/" + DatosJuego["cover_front"];
+			httpdown->downloadFile( url_filed, stHomeDir + "temp/cover_front_" + DatosJuego["cover_front"]);
+		}
+		img_cover_front = DatosJuego["cover_front"];
+		ImportPathNew->ui.txtDatosPath_CoverFront->setText( stHomeDir + "covers/cover_front_" + DatosJuego["cover_front"] );
+		ImportPathNew->ui.txtDatosPath_CoverFront->setEnabled(true);
+		ImportPathNew->ui.btnDirPath_Datos_CoverFront->setEnabled(true);
+	}
+
+	if(DatosJuego["cover_back"]=="null" || DatosJuego["cover_back"]=="")
+	{
+		img_cover_back = "null";
+		ImportPathNew->ui.txtDatosPath_CoverBack->setText("");
+		ImportPathNew->ui.txtDatosPath_CoverBack->setEnabled(false);
+		ImportPathNew->ui.btnDirPath_Datos_CoverBack->setEnabled(false);
+	} else {
+		if( !file_cover_front.exists( stHomeDir + "covers/cover_back_" + DatosJuego["cover_back"] ) )
+		{
+			url_filed = url_xmldb + "images/covers/large/" + DatosJuego["cover_back"];
+			httpdown->downloadFile( url_filed, stHomeDir + "temp/cover_back_" + DatosJuego["cover_back"]);
+		}
+		img_cover_back = DatosJuego["cover_back"];
+		ImportPathNew->ui.txtDatosPath_CoverBack->setText( stHomeDir + "covers/cover_back_" + DatosJuego["cover_back"] );
+		ImportPathNew->ui.txtDatosPath_CoverBack->setEnabled(true);
+		ImportPathNew->ui.btnDirPath_Datos_CoverBack->setEnabled(true);
+	}
+	
+	if( ImportPathNew->exec() == QDialog::Accepted )
+	{
+		DatosJuego["thumbs"]      = ImportPathNew->ui.txtDatosPath_Thumbs->text();		// thumbs
+		DatosJuego["cover_front"] = ImportPathNew->ui.txtDatosPath_CoverFront->text();	// cover_front
+		DatosJuego["cover_back"]  = ImportPathNew->ui.txtDatosPath_CoverBack->text();	// cover_back
+
+		if(DatosJuego["thumbs"]!="null" || !DatosJuego["thumbs"].isEmpty() )
+		{
+			if( file_thumbs.exists( stHomeDir + "temp/thumbs_" + img_thumbs ) )
+			{
+				file_thumbs.copy( stHomeDir + "temp/thumbs_" + img_thumbs, DatosJuego["thumbs"] );
+				//file_thumbs.remove( stHomeDir + "temp/thumbs_" + img_thumbs );
+			}
+		}
+
+		if(DatosJuego["cover_front"]!="null" || !DatosJuego["cover_front"].isEmpty() )
+		{
+			if( file_cover_front.exists( stHomeDir + "temp/cover_front_" + img_cover_front ) )
+			{
+				file_cover_front.copy( stHomeDir + "temp/cover_front_" + img_cover_front, DatosJuego["cover_front"] );
+				file_cover_front.remove( stHomeDir + "temp/cover_front_" + img_cover_front );
+			}
+		}
+
+		if(DatosJuego["cover_back"]!="null" || !DatosJuego["cover_back"].isEmpty() )
+		{
+			if( file_cover_back.exists( stHomeDir + "temp/cover_back_" + img_cover_back ) )
+			{
+				file_cover_back.copy( stHomeDir + "temp/cover_back_" + img_cover_back , DatosJuego["cover_back"] );
+				file_cover_back.remove( stHomeDir + "temp/cover_back_" + img_cover_back );
+			}
+		}
+
 		QDialog::accept();
+	} else
+		QDialog::rejected();
 }
 
 void frmImportarJuegoInfo::fetch()
@@ -272,7 +383,7 @@ void frmImportarJuegoInfo::parseXml()
 				//texto_html.replace("{info_icono}", "<img src=\""+str_Icon+"\" width=\"24\" height=\"24\">", Qt::CaseSensitive);
 				texto_html.replace("{info_usuario}", DatosJuego["usuario"], Qt::CaseSensitive);
 				texto_html.replace("{info_titulo}", DatosJuego["titulo"], Qt::CaseSensitive);
-				texto_html.replace("{info_cover_front}", DatosJuego["cover_front"], Qt::CaseSensitive);
+				texto_html.replace("{info_thumbs}", stHomeDir + "temp/thumbs_"+DatosJuego["thumbs"], Qt::CaseSensitive);
 				texto_html.replace("{info_subtitulo}", DatosJuego["subtitulo"], Qt::CaseSensitive);
 				texto_html.replace("{info_compania}", DatosJuego["compania"], Qt::CaseSensitive);
 				texto_html.replace("{info_desarrollador}", DatosJuego["desarrollador"], Qt::CaseSensitive);
@@ -402,7 +513,7 @@ void frmImportarJuegoInfo::on_treeWidget_currentItemChanged(QTreeWidgetItem *ite
 		return;
 }
 
-void frmImportarJuegoInfo::on_treeWidget_Dblclicked( QTreeWidgetItem *item)
+void frmImportarJuegoInfo::on_treeWidget_Dblclicked(QTreeWidgetItem *item)
 {
 	ui.btnOk->setEnabled(false);
 	ui.btnVerInfo->setEnabled(true);

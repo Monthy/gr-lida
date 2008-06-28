@@ -33,13 +33,10 @@
 #include <QTreeWidget>
 #include <QtNetwork>
 
-class QDialogButtonBox;
 class QFile;
-class QHttp;
-class QHttpResponseHeader;
-class QProgressDialog;
-class QAuthenticator;
+
 #include "funciones.h"
+#include "httpdownload.h"
 #include "ui_importar_juego.h"
 
 class frmImportarJuego : public QDialog {
@@ -63,18 +60,13 @@ private:
 	QHash<QString, QString> UltimoPath;
 	int indx_fin_descarga;
 	bool xml_read(QString fileName);
-	QHttp *http;
-	QFile *file;
+	HttpDownload *httpdown;
 	QDomDocument domDocument;
-	QProgressDialog *progressDialog;
-	int  httpGetId;
-	bool httpRequestAborted;
+
 	void MostrarDatosJuegoInfo();
 	void parseListaJuegos(const QDomElement &element);
 	void setProfile_DFend(QString fileName);
 	void setTheme();
-	void downloadFile(QString urlfile, QString fileName);
-	void enableDownloadButton();
 
 private slots:
 	void on_btnOk();
@@ -86,11 +78,7 @@ private slots:
 	void on_btnUpdateList();
 	void on_treeWidget_Dblclicked( QTreeWidgetItem *item);
 	void on_treeWidget_clicked( QTreeWidgetItem *item);
-	void cancelDownload();
-	void httpRequestFinished(int requestId, bool error);
-	void readResponseHeader(const QHttpResponseHeader &responseHeader);
-	void updateDataReadProgress(int bytesRead, int totalBytes);
-	void slotAuthenticationRequired(const QString &, quint16, QAuthenticator *); // Qt 4.3.1
+	void isRequestFinished();
 
 };
 

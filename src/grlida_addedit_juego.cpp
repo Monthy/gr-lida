@@ -38,8 +38,8 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	stItemIDGrl   = stIDIndex;
 
 	stHomeDir     = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
-	stIconDir     = stHomeDir + "iconos/";				// directorio de iconos para el GR-lida
-	stDatosDir    = stHomeDir + "datos/";				// directorio para los distintos datos del GR-lida
+	stIconDir     = stHomeDir + "iconos/";		// directorio de iconos para el GR-lida
+	stDatosDir    = stHomeDir + "datos/";		// directorio para los distintos datos del GR-lida
 
 	stTheme = fGrl.ThemeGrl();
 	setTheme();
@@ -771,10 +771,7 @@ void frmAddEditJuego::on_btnImgAbrir_Thumbs()
 		lastdir.endGroup();
 		UltimoPath["Img_Thumbs"] = fi.absolutePath()+"/";
 	} else {
-		ui.lbImg_Thumbs->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
-		ui.btnImgVer_Thumbs->setEnabled( false );
-		ui.btnImgEliminar_Thumbs->setEnabled( false );
-		stThumbs = "";
+		on_btnImgEliminar_Thumbs();
 
 		lastdir.beginGroup("UltimoDirectorio");
 			lastdir.setValue("Img_Thumbs", "" );
@@ -800,10 +797,7 @@ void frmAddEditJuego::on_btnImgAbrir_CoverFront()
 		lastdir.endGroup();
 		UltimoPath["Img_CoverFront"] = fi.absolutePath()+"/";
 	} else {
-		ui.lbImg_CoverFront->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
-		ui.btnImgVer_CoverFront->setEnabled( false );
-		ui.btnImgEliminar_CoverFront->setEnabled( false );
-		stCoverFront = "";
+		on_btnImgEliminar_CoverFront();
 
 		lastdir.beginGroup("UltimoDirectorio");
 			lastdir.setValue("Img_CoverFront", "" );
@@ -829,10 +823,7 @@ void frmAddEditJuego::on_btnImgAbrir_CoverBack()
 		lastdir.endGroup();
 		UltimoPath["Img_CoverBack"] = fi.absolutePath()+"/";
 	} else {
-		ui.lbImg_CoverBack->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
-		ui.btnImgVer_CoverBack->setEnabled( false );
-		ui.btnImgEliminar_CoverBack->setEnabled( false );
-		stCoverBack = "";
+		on_btnImgEliminar_CoverBack();
 
 		lastdir.beginGroup("UltimoDirectorio");
 			lastdir.setValue("Img_CoverBack", "" );
@@ -927,6 +918,33 @@ void frmAddEditJuego::on_btnDescargarInfo()
 		ui.chkDatos_Original->setChecked( fGrl.StrToBool( ImportarJuegoInfo->DatosJuego["original"] ) );
 		ui.chkDatos_Favorito->setChecked( fGrl.StrToBool( ImportarJuegoInfo->DatosJuego["favorito"] ) );
 
+		stThumbs = ImportarJuegoInfo->DatosJuego["thumbs"];
+		if( file_thumbs.exists(stThumbs) )
+		{
+			ui.lbImg_Thumbs->setPixmap( QPixmap(stThumbs) );
+			ui.btnImgVer_Thumbs->setEnabled( true );
+			ui.btnImgEliminar_Thumbs->setEnabled( true );
+		} else
+			on_btnImgEliminar_Thumbs();
+
+		stCoverFront = ImportarJuegoInfo->DatosJuego["cover_front"];
+		if( file_cover_front.exists(stCoverFront) )
+		{
+			ui.lbImg_CoverFront->setPixmap( QPixmap(stCoverFront) );
+			ui.btnImgVer_CoverFront->setEnabled( true );
+			ui.btnImgEliminar_CoverFront->setEnabled( true );
+		} else
+			on_btnImgEliminar_CoverFront();
+
+		stCoverBack = ImportarJuegoInfo->DatosJuego["cover_back"];
+		if( file_cover_back.exists(stCoverBack) )
+		{
+			ui.lbImg_CoverBack->setPixmap( QPixmap(stCoverBack) );
+			ui.btnImgVer_CoverBack->setEnabled( true );
+			ui.btnImgEliminar_CoverBack->setEnabled( true );
+		} else
+			on_btnImgEliminar_CoverBack();
+
 	// icono
 		if( ImportarJuegoInfo->DatosJuego["icono"] == "datos" || ImportarJuegoInfo->DatosJuego["icono"] == "" )
 			ui.cbxDatos_Icono->setCurrentIndex(0);
@@ -939,9 +957,6 @@ void frmAddEditJuego::on_btnDescargarInfo()
 		else
 			ui.cbxDatos_Icono->setCurrentIndex( ui.cbxDatos_Icono->findText( ImportarJuegoInfo->DatosJuego["icono"] ) );	// icono
 	}
-
-	if(ImportarJuegoInfo != NULL )
-		delete ImportarJuegoInfo;
 }
 
 void frmAddEditJuego::on_cbxDatos_TipoEmu_txtChanged(const QString texto)

@@ -33,6 +33,7 @@
 #include <QXmlStreamReader>
 
 #include "funciones.h"
+#include "httpdownload.h"
 #include "ui_importar_juego_info.h"
 
 class frmImportarJuegoInfo : public QDialog {
@@ -46,11 +47,13 @@ public:
 	QHash<QString, QString> DatosJuego;
 private:
 	Funciones fGrl;
+	HttpDownload *httpdown;
 
 	void setTheme();
 	void parseXml();
 
-	QString stHomeDir, stTheme;
+	QString stHomeDir, stTheme, url_filed;
+	QString img_thumbs, img_cover_front, img_cover_back;
 	QString url_xmldb, temp_url_xmldb, texto_html, str_html_old;
 	QXmlStreamReader xml;
 	QString currentTag, str_id, str_id_emu, str_Icon;
@@ -65,9 +68,10 @@ private slots:
 	void finished(int id, bool error);
 	void readData(const QHttpResponseHeader &);
 	void on_treeWidget_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2);
-	void on_treeWidget_Dblclicked( QTreeWidgetItem *item);
+	void on_treeWidget_Dblclicked(QTreeWidgetItem *item);
 	void itemActivated(QTreeWidgetItem * item);	
 	void on_changeURL_XML(const QString &url);
+	void isRequestFinished();
 
 };
 

@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog" >
+ <class>DialogLogin</class>
+ <widget class="QDialog" name="DialogLogin" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -59,7 +59,11 @@
     </widget>
    </item>
    <item row="3" column="1" >
-    <widget class="QLineEdit" name="passwordEdit" />
+    <widget class="QLineEdit" name="passwordEdit" >
+     <property name="echoMode" >
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
    </item>
    <item row="5" column="0" colspan="2" >
     <widget class="QDialogButtonBox" name="buttonBox" >
@@ -114,7 +118,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>DialogLogin</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -130,7 +134,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>DialogLogin</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
