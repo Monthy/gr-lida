@@ -894,7 +894,7 @@ void frmAddEditJuego::on_btnImgEliminar_CoverBack()
 
 void frmAddEditJuego::on_btnDescargarInfo()
 {
-	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo();
+	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(0, Qt::Window);
 	if( ImportarJuegoInfo->exec() == QDialog::Accepted )
 	{
 		//ui.lb_fechahora->setText( ImportarJuegoInfo->DatosJuego["fecha"] );						// fecha
