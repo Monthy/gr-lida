@@ -378,6 +378,8 @@ void frmImportarJuegoInfo::parseXml()
 				else 
 					str_Icon = stTheme+"img24/emu_sin_imagen.png";
 
+				DatosJuego["titulo"] = str_titulo;
+
 				// Reempla la info del juego.
 				texto_html.replace("{info_icono}", str_Icon, Qt::CaseSensitive);
 				//texto_html.replace("{info_icono}", "<img src=\""+str_Icon+"\" width=\"24\" height=\"24\">", Qt::CaseSensitive);
@@ -404,6 +406,7 @@ void frmImportarJuegoInfo::parseXml()
 				texto_html.replace("{info_comentario}", DatosJuego["comentario"], Qt::CaseSensitive);
 
 				ui.txtb_info->setHtml( texto_html );
+				str_titulo.clear();
 			}
 			if( xml.name() == "juego" )
 			{
@@ -420,6 +423,8 @@ void frmImportarJuegoInfo::parseXml()
 				else 
 					item->setIcon(0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 
+				DatosJuego["titulo"] = str_titulo;
+				
 				item->setText(0, DatosJuego["titulo"]      );
 				item->setText(1, str_id                    );
 				item->setText(2, DatosJuego["thumbs"]      );
@@ -432,6 +437,7 @@ void frmImportarJuegoInfo::parseXml()
 				DatosJuego.clear();
 				str_id.clear();
 				str_id_emu.clear();
+				str_titulo.clear();
 			}
 		}
 		else if( xml.isCharacters() && !xml.isWhitespace() )
@@ -441,7 +447,7 @@ void frmImportarJuegoInfo::parseXml()
 			else if(currentTag == "icono")
 				DatosJuego["icono"] = xml.text().toString();
 			else if(currentTag == "titulo")
-				DatosJuego["titulo"] = xml.text().toString();
+				str_titulo += xml.text().toString();
 			else if(currentTag == "subtitulo")
 				DatosJuego["subtitulo"] = xml.text().toString();
 			else if(currentTag == "genero")

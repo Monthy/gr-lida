@@ -56,7 +56,7 @@ private:
 	QString img_thumbs, img_cover_front, img_cover_back;
 	QString url_xmldb, temp_url_xmldb, texto_html, str_html_old;
 	QXmlStreamReader xml;
-	QString currentTag, str_id, str_id_emu, str_Icon;
+	QString currentTag, str_id, str_id_emu, str_Icon, str_titulo;
 
 	QHttp http;
 	int connectionId;
