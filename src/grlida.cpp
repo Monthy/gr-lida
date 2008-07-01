@@ -360,7 +360,10 @@ void GrLida::setTheme()
 	ui.btnVer_CoverFront->setIcon( QIcon(stTheme+"img16/capturas.png") );
 	ui.btnVer_CoverBack->setIcon( QIcon(stTheme+"img16/capturas.png") );
 	ui.toolButton_11->setIcon( QIcon(stTheme+"img16/grlida.png") );
-	
+
+	ui.tabFileUrl->setTabIcon(0, QIcon(stTheme+"img16/edit_enlace.png") );
+	ui.tabFileUrl->setTabIcon(1, QIcon(stTheme+"img16/archivos.png") );
+
 	ui.PicFlowWidget->setReflectionEffect(PictureFlow::BlurredReflection);
 //	ui.PicFlowWidget->setReflectionEffect(PictureFlow::PlainReflection);
 }
@@ -1017,6 +1020,9 @@ void GrLida::on_Opciones()
 
 		if(Opciones->ui.cmbIconFav->currentText()!="")
 			stIconoFav = Opciones->ui.cmbIconFav->currentText(); else stIconoFav = "fav_0.png";
+
+		stTheme = Opciones->DatosConfiguracion["NameDirTheme"];
+		setTheme();
 
 	#ifdef Q_OS_WIN32
 		if( (Opciones->DatosConfiguracion["DOSBoxDisp"]=="false")&&(Opciones->DatosConfiguracion["ScummVMDisp"]=="false")&&(Opciones->DatosConfiguracion["VDMSoundDisp"]=="false") )

@@ -192,9 +192,20 @@ void frmOpciones::on_twThemes_clicked( QTreeWidgetItem *item )
 	if( item )
 	{
 		stNameDirTheme = item->text(0);
-		ui.lb_theme_example->setPixmap( QPixmap(stHomeDir+"/themes/"+item->text(0)+"/preview.png") );
+		if(stNameDirTheme == "defecto" || stNameDirTheme.isEmpty()  )
+		{
+			stTheme.clear();
+			stTheme = ":/";
+			ui.lb_theme_example->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
+		}else {
+			stTheme.clear();
+			stTheme = stHomeDir+"themes/"+ stNameDirTheme +"/";
+			ui.lb_theme_example->setPixmap( QPixmap(stHomeDir+"/themes/"+item->text(0)+"/preview.png") );
+		}
+		setTheme();
+
 	} else {
-		ui.lb_theme_example->setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
+		ui.lb_theme_example->setPixmap( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 		return;
 	}
 }
@@ -258,6 +269,11 @@ void frmOpciones::on_btnOk()
 
 	if(ui.cmbIconFav->currentText()!="")
 		stIconoFav = ui.cmbIconFav->currentText(); else stIconoFav = "fav_0.png";
+
+	if( stNameDirTheme == "defecto" || stNameDirTheme.isEmpty() )
+		DatosConfiguracion["NameDirTheme"] = ":/";
+	else		
+		DatosConfiguracion["NameDirTheme"] = stHomeDir+"themes/"+ stNameDirTheme +"/";
 
 	settings.beginGroup("OpcGeneral");
 		settings.setValue("DOSBoxDisp"   , DatosConfiguracion["DOSBoxDisp"]		);
