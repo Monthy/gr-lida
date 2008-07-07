@@ -35,7 +35,7 @@ public:
 	~Funciones();
 
 // Versión del GR-lida
-	QString stVersionGrl(){ return "0.5.0"; }
+	QString stVersionGrl(){ return "0.6.0"; }
 // Versiones que soporta
 	QString stVersionDbx(){ return "0.72";  }
 	QString stVersionSvm(){ return "0.11.1";}

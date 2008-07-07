@@ -1,6 +1,13 @@
 
 -  NEWS
 -----------------------------------
+0.6.0 (07-07-2008)
+ - Visor de caratulas de los juegos usando PictureFlow.
+ - Sistama para buscar y descargar la info del juego, cuando se añade un juego de forma manual.
+ - Función para Poner nombres cortos en DOS. Estado: Beta.
+ - Sistema para recordar el ultimo directorio abierto.
+ - Corregidos varios errores.
+
 0.5.0 (05-05-2008)
  - Añadido exportar configuración de los juegos: GR-lida y para el D-Fend Reloaded.
  - Añadido Templates de configuración usando los mismos que el D-Fend Reloaded.
