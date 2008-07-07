@@ -4,7 +4,6 @@
 
 - Implementar Importar y Exportar de otros lanzadores
 - Mejorar los montajes entre otras cosas
-- CoverFlow
 - Visor de Cajas en 3D
 
 -----------------------------------

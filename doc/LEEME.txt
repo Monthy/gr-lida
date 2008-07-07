@@ -17,9 +17,9 @@ tres emuladores que se usan principalmente para el mundo abandonware.
      para juegos basados en 486.
  - ScummVM es un emulador o interprete principalmente para los juegos de Lucar-Arts 
      y otras compañías como Revolution Software.
- - VDMSound principalmete es un emulador de sonido para windows NT, 2000 y XP
+ - VDMSound principalmente es un emulador de sonido para windows NT, 2000 y XP
 
-El programa no tiene dependencia de librerías externas a las de Qt con lo cual no
+El programa no tiene dependencia de librerías externas a las de Qt4 con lo cual no
 tendrá problemas a la hora de compilar teniendo lo básico instalado
 
 
@@ -31,15 +31,15 @@ Vea el fichero: INSTALL.txt
 (III) Otras características
 --------------------------------------------
  - Actuar como Base de Datos de Juegos:
-   En ella podrás añadir los juegos y poner a que genero pertenece, en que año se publico,
-   la compañía que lo creo, comentario del juego entre otras cosas.
+   En ella podrás añadir los juegos y poner a que genero pertenece, en que año se publicó,
+   la compañía que lo creó, comentario del juego entre otras cosas.
  - Importar datos y configuraciones de los juegos desde una web preparada para ello.
- - Soporte para mostrar smiles en los comentarios de los juegos
+ - Soporte para mostrar smilies en los comentarios de los juegos
  - Añadir Iconos para cada Juego.
    Con esta función podrás añadirle un icono predeterminado o uno propio para identificar
    cada juego en la lista de GR-lida, soportando los siguientes formatos: *.png; *.gif;
-   *.jpg; *.bmp; de un tamaño máximo de 24x24 píxel.
- - Comentario del Juego con soporte de Html
+   *.jpg; *.bmp; de un tamaño máximo de 24x24 píxeles.
+ - Comentario del Juego con soporte de HTML
    En el comentario se le puede añadir código html para darle la apariencia que desees,
    para ver las etiquetas que soporta mira la documentación de las QT
    http://doc.trolltech.com/4.2/richtext-html-subset.html
