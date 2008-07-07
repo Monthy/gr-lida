@@ -22,5 +22,8 @@ A Sebastián Ramírez Magrí ( http://sebasmagri.wordpress.com/ )
 <sebasmagri[a]gmail.com> por mantener el ebuild de GR-lida para Gentoo y
 reportar bugs de la instalacción.
 
+A los desarrolladores de pictureflow ( http://code.google.com/p/pictureflow/ )
+por su magnífico widget para QT.
+
 A todos los usuarios y desarrolladores que de una u otra forma han colaborado
 directa o indirectamente en el desarrollo de GR-lida.
