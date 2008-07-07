@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="en_US">
+<defaultcodec></defaultcodec>
 <context>
     <name>AcercaDClass</name>
     <message>
@@ -60,7 +61,7 @@
     <message>
         <location filename="../ui/acercad.ui" line="556"/>
         <source>Autor</source>
-        <translation></translation>
+        <translation>Author</translation>
     </message>
     <message>
         <location filename="../ui/acercad.ui" line="561"/>
@@ -238,7 +239,7 @@
     <message>
         <location filename="../ui/addedit_juego.ui" line="1009"/>
         <source>Juego Favorito</source>
-        <translation>Favorite Game</translation>
+        <translation>Mark as favourite</translation>
     </message>
     <message>
         <location filename="../ui/addedit_juego.ui" line="1018"/>
@@ -358,7 +359,7 @@
     <message>
         <location filename="../ui/addedit_juego.ui" line="1647"/>
         <source>URL</source>
-        <translation></translation>
+        <translation>URL</translation>
     </message>
     <message encoding="UTF-8">
         <location filename="../ui/addedit_juego.ui" line="2340"/>
@@ -413,12 +414,12 @@
     <message>
         <location filename="../ui/addedit_juego.ui" line="2041"/>
         <source>CRC32:</source>
-        <translation></translation>
+        <translation>CRC32:</translation>
     </message>
     <message>
         <location filename="../ui/addedit_juego.ui" line="2101"/>
         <source>Size:</source>
-        <translation></translation>
+        <translation>Size:</translation>
     </message>
     <message encoding="UTF-8">
         <location filename="../ui/addedit_juego.ui" line="2185"/>
@@ -2053,7 +2054,7 @@ p, li { white-space: pre-wrap; }
     <message encoding="UTF-8">
         <location filename="../ui/dbxadd.ui" line="803"/>
         <source>autolock -- El ratón se autobloqueará al hace clic en la pantalla</source>
-        <translation>Autolock -- Mouse will lock when clicked onscreen</translation>
+        <translation>Autolock -- Mouse will lock automatically</translation>
     </message>
     <message encoding="UTF-8">
         <location filename="../ui/dbxadd.ui" line="819"/>
@@ -2263,7 +2264,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/dbxadd.ui" line="1748"/>
         <source>Driver</source>
-        <translation></translation>
+        <translation>Drive</translation>
     </message>
     <message>
         <location filename="../ui/dbxadd.ui" line="1753"/>
@@ -2385,7 +2386,7 @@ Click &apos;OK&apos; to exit this wizard
     <message>
         <location filename="../ui/exportar_juego.ui" line="106"/>
         <source>Expotar como:</source>
-        <translation>Expotar como:</translation>
+        <translation>Export as:</translation>
     </message>
     <message>
         <location filename="../ui/exportar_juego.ui" line="133"/>
@@ -2507,7 +2508,7 @@ If it relies on DOSBox or VDMSound, config files will also be deleted</translati
     <message>
         <location filename="../src/grlida.cpp" line="1477"/>
         <source>Genero sin Clasificar</source>
-        <translation>Unclassified genre</translation>
+        <translation>Unknown genre</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="1486"/>
@@ -2537,7 +2538,7 @@ If it relies on DOSBox or VDMSound, config files will also be deleted</translati
     <message>
         <location filename="../src/grlida.cpp" line="1501"/>
         <source>Juegos Favoritos</source>
-        <translation>Favorite Game</translation>
+        <translation>Favorite Games</translation>
     </message>
     <message>
         <location filename="../src/grlida.h" line="61"/>
@@ -2550,7 +2551,7 @@ If it relies on DOSBox or VDMSound, config files will also be deleted</translati
 Esta aplicaci&#xc3;&#xb3;n necesita soporte de SQLite. Mira la documentaci&#xc3;&#xb3;n de Qt SQL driver para m&#xc3;&#xa1;s informaci&#xc3;&#xb3;n.
 
 Click Cancelar para salir.</source>
-        <translation>Couldn&apos;t connect to databse.
+        <translation>Couldn&apos;t connect to database.
 This application requires SQLite. Read Qt SQL driver documents for more info.
 
 Click on &apos;Cancel&apos; to exit.</translation>
@@ -3232,7 +3233,7 @@ Click on &apos;Cancel&apos; to exit.</translation>
     <message>
         <location filename="../src/grlida_img_viewer.cpp" line="85"/>
         <source>Ver Imagen</source>
-        <translation>See image</translation>
+        <translation>Show image</translation>
     </message>
     <message>
         <location filename="../src/grlida_img_viewer.cpp" line="59"/>
@@ -4325,7 +4326,7 @@ Click &apos;OK&apos; to exit this wizard
     <message>
         <location filename="../src/grlida_acercad.cpp" line="39"/>
         <source>es un lanzador com&#xc3;&#xba;n para los emuladores:</source>
-        <translation>is a launcher for the programs:</translation>
+        <translation>is a common launcher for the programs:</translation>
     </message>
     <message>
         <location filename="../src/grlida_acercad.cpp" line="41"/>
@@ -4501,7 +4502,7 @@ Click &apos;OK&apos; to exit this wizard
     <message>
         <location filename="../src/grlida_addedit_montajes.cpp" line="55"/>
         <source>Fuerza el uso de la capa aspi. S&#xc3;&#xb3;lo v&#xc3;&#xa1;lido si montas un CD-ROM bajo los sistemas Windows con un ASPI-Layer.</source>
-        <translation>Forces use of the aspi layer. Only valid if mounting a CD-ROM under Windows systems with an ASPI-Layer.</translation>
+        <translation>Forces ASPI mode. Only valid if mounting a CD-ROM under Windows systems with an ASPI-Layer.</translation>
     </message>
     <message>
         <location filename="../src/grlida_addedit_montajes.cpp" line="56"/>
@@ -4686,7 +4687,7 @@ Click &apos;OK&apos; to exit this wizard
     <message>
         <location filename="../src/grlida_importar_juego.cpp" line="485"/>
         <source>No es un archivo de</source>
-        <translation>It&apos;s not a file</translation>
+        <translation>This is not a valid file</translation>
     </message>
     <message>
         <location filename="../src/grlida_importar_juego.cpp" line="490"/>
