@@ -1704,7 +1704,7 @@
     <message>
         <location filename="../ui/addedit_juego.ui" line="7821"/>
         <source>Descargar la Info del Juego</source>
-        <translation>Download Info Game</translation>
+        <translation>Download Game Info</translation>
     </message>
 </context>
 <context>
