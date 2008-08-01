@@ -45,7 +45,7 @@ QString Funciones::GRlidaHomePath()
 		QSettings settings( stConfgCurrentPath, QSettings::IniFormat );
 		settings.beginGroup("OpcGeneral");
 			stDirApp = settings.value("DirApp", "HomePath").toString().toLower();
-		settings.endGroup();	
+		settings.endGroup();
 	} else
 		stDirApp = "homepath";
 
@@ -69,7 +69,7 @@ QString Funciones::ThemeGrl()
 	QSettings settings( stDirApp + "/GR-lida.conf", QSettings::IniFormat );
 	settings.beginGroup("OpcGeneral");
 		stNameDirTheme = settings.value("NameDirTheme", "defecto").toString();
-	settings.endGroup();	
+	settings.endGroup();
 
 	if( stNameDirTheme == "defecto" || stNameDirTheme.isEmpty() )
 		theme = ":/";
@@ -94,37 +94,37 @@ QString plataforma;
 	#ifdef Q_OS_MAC9
 		plataforma = "Mac9";
 	#endif
-	#ifdef Q_OS_BSD4 
+	#ifdef Q_OS_BSD4
 		plataforma = "BSD 4.4";
 	#endif
-	#ifdef Q_OS_BSDI 
+	#ifdef Q_OS_BSDI
 		plataforma = "BSD/OS";
 	#endif
-	#ifdef Q_OS_FREEBSD 
+	#ifdef Q_OS_FREEBSD
 		plataforma = "FreeBSD";
 	#endif
-	#ifdef Q_OS_LINUX 
+	#ifdef Q_OS_LINUX
 		plataforma = "Linux";
 	#endif
-	#ifdef Q_OS_LYNX 
+	#ifdef Q_OS_LYNX
 		plataforma = "LynxOS";
 	#endif
-	#ifdef Q_OS_MSDOS 
+	#ifdef Q_OS_MSDOS
 		plataforma = "MS-DOS and Windows";
 	#endif
-	#ifdef Q_OS_NETBSD 
+	#ifdef Q_OS_NETBSD
 		plataforma = "NetBSD";
 	#endif
-	#ifdef Q_OS_OS2 
+	#ifdef Q_OS_OS2
 		plataforma = "OS/2";
 	#endif
-	#ifdef Q_OS_OPENBSD 
+	#ifdef Q_OS_OPENBSD
 		plataforma = "OpenBSD";
 	#endif
-	#ifdef Q_OS_SOLARIS 
+	#ifdef Q_OS_SOLARIS
 		plataforma = "Sun Solaris";
 	#endif
-//	#ifdef Q_OS_UNIX 
+//	#ifdef Q_OS_UNIX
 //		plataforma = "UNIX BSD/SYSV";
 //	#endif
 
@@ -181,13 +181,13 @@ QString Funciones::url_correcta(QString url)
 	if( s_url_ok )
 	{
 		url_ok = url.endsWith("/");
-		if(url_ok==false) url.append("/");	
+		if(url_ok==false) url.append("/");
 	} else {
 		url_ok = url.startsWith("http://");
 		if(url_ok==false) url.prepend("http://");
-	
+
 		url_ok = url.endsWith("/");
-		if(url_ok==false) url.append("/");		
+		if(url_ok==false) url.append("/");
 	}
 
 	return url;
@@ -221,7 +221,7 @@ void Funciones::DeleteItemTree( QTreeWidgetItem * item )
 
 void Funciones::CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox)
 {
-	QString tmp_locale;	
+	QString tmp_locale;
 	QString filter = "*.qm";
 	QDir dir( dirLng );
 	QDir::Filters filters = QDir::Files | QDir::Readable;
@@ -237,7 +237,7 @@ void Funciones::CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox)
 		QString language = QLocale::languageToString(locale.language());
 		QString country  = QLocale::countryToString(locale.country());
 		QString namelang = language + " (" + country + ") - "+ tmp_locale;
-		
+
 		myCombobox->addItem( namelang );
 	}
 }
@@ -265,7 +265,7 @@ void Funciones::CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int n
 			else
 				pixmap.load(stTheme+"img16/"+cbx_Lista.value(1)+".png");
 			if( pixmap.isNull() ) pixmap.load(stTheme+"img16/sinimg.png");
-			
+
 			switch ( num_col )
 			{
 				case 1: // 1 columna
@@ -310,7 +310,7 @@ void Funciones::CargarDatosListaSvm(QString Archivo, QTreeWidget *myTreeWidget)
 // Abrimos la lista de compatibilidad del ScummVM y rellenamos el twScummVM
 	QFile file( Archivo );
 	QStringList svm_Lista, svm_ListaTemp;
-	
+
 	myTreeWidget->clear();
 	if( file.open(QIODevice::ReadOnly)!=0 )
 	{
@@ -323,7 +323,7 @@ void Funciones::CargarDatosListaSvm(QString Archivo, QTreeWidget *myTreeWidget)
 		for ( int i = 0; i < svm_ListaTemp.size(); i++ )
 		{
 			svm_Lista = svm_ListaTemp[i].split( "|" );
-			
+
 			QTreeWidgetItem *item = new QTreeWidgetItem( myTreeWidget );
 			item->setText( 0, svm_Lista.value(0) );
 			if( svm_Lista.value(1)=="" )
@@ -333,7 +333,7 @@ void Funciones::CargarDatosListaSvm(QString Archivo, QTreeWidget *myTreeWidget)
 				if( svm_Lista.value(2)=="-1" || svm_Lista.value(2)=="")
 					item->setIcon( 0, QIcon(stTheme+"imgsvm/svmlist_space.png") );
 				else
-					item->setIcon( 0, QIcon(stTheme+"imgsvm/"+svm_Lista.value(2)+".png") );	
+					item->setIcon( 0, QIcon(stTheme+"imgsvm/"+svm_Lista.value(2)+".png") );
 			} else
 				item->setIcon( 0, QIcon(stTheme+"imgsvm/"+svm_Lista.value(2)+".png") );
 			item->setText( 1, svm_Lista.value(1) );
@@ -460,7 +460,7 @@ QString Funciones::VentanaDirectorios(const QString caption, const QString dir, 
 {
 	QString directorio;
 	directorio = QFileDialog::getExistingDirectory(0, caption, dir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
-	
+
 	if(!directorio.isEmpty())
 		return directorio;
 	else
@@ -554,7 +554,7 @@ void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, con
 		out << "      <comentario><![CDATA[" << datos["comentario"] << "]]></comentario>" << endl;
 		out << "      <favorito>" << datos["favorito"] << "</favorito>" << endl;
 		out << "    </datos>" << endl;
-		
+
 		if( datos["tipo_emu"] == "dosbox" )
 		{
 			out << "    <dosbox>" << endl;
@@ -651,7 +651,7 @@ void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, con
 			out << "      <parametros_exe>" << datos_emu["parametros_exe"] << "</parametros_exe>" << endl;
 			out << "      <parametros_setup>" << datos_emu["parametros_setup"] << "</parametros_setup>" << endl;
 			out << "    </dosbox>" << endl;
-	
+
 			for(int num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
 			{
 				QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
@@ -718,7 +718,7 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 	{
 		QTextStream out(&file_out);
 		out.setCodec("UTF-8");
-		
+
 		if( ExportToDFend )
 		{
 			out << "[Extra]" << endl;
@@ -943,7 +943,7 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "modem=" << datosDbx["modem_modem"] << endl;
 		out << "comport=" << datosDbx["modem_comport"] << endl;
 		out << "listenport=" << datosDbx["modem_listenport"] << endl << endl;
-		
+
 		out << "[directserial]" << endl;									// DOSBox 0.63
 		out << "directserial=" << datosDbx["dserial_directserial"] << endl;
 		out << "comport=" << datosDbx["dserial_comport"] << endl;
@@ -989,7 +989,7 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		{
 			out << "[autoexec]" << endl;
 			out << "# Lines in this section will be run at startup." << endl << endl;
-	
+
 			if( datosDbx["opt_autoexec"] == "true" )
 				out << datosDbx["autoexec"] << endl;
 			else {
@@ -997,22 +997,22 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 				QStringList listamontaje;
 				QHash<QString, QString> datos_montaje;
 				int i = 0;
-	
+
 				datos_montaje.clear();
 				datos_montaje["path_exe"]        = datosDbx["path_exe"];
 				datos_montaje["parametros_exe"]  = datosDbx["parametros_exe"];
 				datos_montaje["opt_loadfix_mem"] = datosDbx["opt_loadfix_mem"];
 				datos_montaje["opt_loadfix"]     = datosDbx["opt_loadfix"];
 				datos_montaje["opt_cerrar_dbox"] = datosDbx["opt_cerrar_dbox"];
-	
+
 				listamontaje.clear();
 				listamontaje = CreaConfigMontajes( treeWidget, datos_montaje );
-	
+
 				for (i = 0; i < listamontaje.size(); ++i)
 					out << listamontaje.value( i ) << endl;
 			}
 		}
-		
+
 		out.flush();
 		file_out.close();
 	}
@@ -1056,7 +1056,8 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 
 	NombreEXEDbx = fi.fileName();		// Nombre del ejecutable
 	DirEXEDbx    = QDir::toNativeSeparators( datos["path_exe"] );	// Directorio donde esta
-	DirEXEDbx.remove( fi.fileName(), Qt::CaseInsensitive );
+	DirEXEDbx.replace("/","\\");
+	DirEXEDbx.remove( NombreEXEDbx, Qt::CaseInsensitive );
 
 // loadfix
 	if( datos["opt_loadfix"] == "true" && datos["opt_loadfix_mem"] != "" )
@@ -1075,17 +1076,19 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 	{
 		QTreeWidgetItem *item = myTreeWidget->topLevelItem( num_mount );
 	// Indicamos el directorio y la letra a montar
-		mount_drive  = item->text(0); // Real Drive or Directory or Image ISO, IMA
+		mount_drive  = QDir::toNativeSeparators( item->text(0) ); // Real Drive or Directory or Image ISO, IMA
 		mount_letter = item->text(3); // Emulated Drive letter
 	// Situa el montaje primario independiente de donde este colocado
 		if( item->text(7) == "v")
 		{
 			mount_letra_primario = mount_letter;
-			mount_dir_primario   = QDir::toNativeSeparators( mount_drive );
+			mount_dir_primario   = mount_drive;
 		} else {
 			mount_letra_primario = myTreeWidget->topLevelItem(0)->text(3);
 			mount_dir_primario   = QDir::toNativeSeparators( myTreeWidget->topLevelItem(0)->text(0) );
 		}
+		mount_dir_primario.replace("/","\\");
+
 	//Montando las unidades
 		if( item->text(2) != "boot")
 		{
@@ -1094,7 +1097,7 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 			{
 				montaje_IMG = false;
 				mount_type = " -t floppy";
-			}		
+			}
 			if( item->text(2) == "drive" )
 			{
 				montaje_IMG = false;
@@ -1132,7 +1135,7 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 				mount_label = " -label " + item->text(1);
 			else
 				mount_label = "";
-					
+
 			if( montaje_IMG == true )
 				listmontajes << "imgmount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_label;
 			else
@@ -1148,7 +1151,7 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 	if(mount_Boot == false)
 	{
 		listmontajes << mount_letra_primario + ":";
-		listmontajes << "cd " + getShortPathName( mount_dir );	
+		listmontajes << "cd " + getShortPathName( mount_dir );
 		listmontajes << chkDbx_loadfix;
 		listmontajes << chkDbx_cerrardbx;
 	} else {
@@ -1161,7 +1164,7 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 
 void Funciones::CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg)
 {
-	QSettings * settings = new QSettings( PathSaveConfg, QSettings::IniFormat ); 
+	QSettings * settings = new QSettings( PathSaveConfg, QSettings::IniFormat );
 	QFileInfo workdir( datosVdms["path_exe"] );
 
 	settings->beginGroup("program");
@@ -1218,7 +1221,7 @@ void Funciones::Exportar_Profile_DFend(const QHash<QString, QString> datos, cons
 
 QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 {
-	QString stline, fileTemp, strTemp, info_name_conf;	
+	QString stline, fileTemp, strTemp, info_name_conf;
 	QHash<QString, QString> ProfileDFend;
 	QStringList list_priority;
 	int n=0, num_mounts=0;
@@ -1313,9 +1316,9 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 		ProfileDFend["opt_loadfix_mem"]  = settings.value("LoadFixVal"      ,"64").toString();
 		ProfileDFend["NrOfMounts"]       = settings.value("NrOfMounts"      ,"0" ).toString();
 
-		if(settings.value("CloseOnExit","false").toBool())		
+		if(settings.value("CloseOnExit","false").toBool())
 			ProfileDFend["opt_cerrar_dbox"] = "true"; else ProfileDFend["opt_cerrar_dbox"] = "false";
-	
+
 		if(settings.value("Loadhigh","false").toBool())
 			ProfileDFend["opt_loadfix"] = "true"; else ProfileDFend["opt_loadfix"] = "false";
 
@@ -1432,7 +1435,7 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 
 	settings.beginGroup("midi");
 		ProfileDFend["midi_mpu401"]      = settings.value("mpu401"       ,"intelligent").toString();
-		
+
 		if(settings.value("midi_intelligent","true").toBool())
 			ProfileDFend["midi_intelligent"] ="true"; else ProfileDFend["midi_intelligent"] ="false";
 
@@ -1498,7 +1501,7 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 
 	ProfileDFend["modem_modem"]          = settings.value("modem"       ,"true").toString();
 	ProfileDFend["modem_comport"]        = settings.value("comport"     ,"1").toString();
-	ProfileDFend["modem_listenport"]     = settings.value("listenport"  ,"23").toString();	
+	ProfileDFend["modem_listenport"]     = settings.value("listenport"  ,"23").toString();
 	ProfileDFend["dserial_directserial"] = settings.value("directserial","true").toString();
 	ProfileDFend["dserial_comport"]      = settings.value("comport"     ,"1").toString();
 	ProfileDFend["dserial_realport"]     = settings.value("realport"    ,"COM1").toString();
