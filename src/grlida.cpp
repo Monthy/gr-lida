@@ -49,7 +49,7 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 // Titulo de la aplicacion para los distintos Sistemas Operativos
 	setWindowTitle( stTituloGrl() + " - " + fGrl.get_Plataforma() + " v" +  fGrl.stVersionGrl() );
 
-// Conecta los distintos botones con las funciones de cada uno	
+// Conecta los distintos botones con las funciones de cada uno
 	connect( ui.actionNewDbx, SIGNAL( triggered() ), this, SLOT( on_AddNewDbx() ));
 	connect( ui.actionNewSvm, SIGNAL( triggered() ), this, SLOT( on_AddNewSvm() ));
 	connect( ui.actionNewVdms, SIGNAL( triggered() ), this, SLOT( on_AddNewVdms() ));
@@ -121,7 +121,7 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 	ui.statusBar->addWidget( &lbpanel_4    ); // icono datos
 	ui.statusBar->addWidget( &lbpanel_5, 1 ); // datos
 
-	ui.twJuegos->header()->setStretchLastSection(true); 
+	ui.twJuegos->header()->setStretchLastSection(true);
 	ui.twJuegos->header()->setMovable(false);
 	ui.twJuegos->header()->setResizeMode(QHeaderView::Custom);
 	ui.twJuegos->header()->resizeSection(0, 31 );
@@ -130,7 +130,7 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 	ui.twJuegos->installEventFilter(this);
 	ui.txtInfo_Comentario->installEventFilter(this);
 
-	ui.twFiles->header()->setStretchLastSection(true); 
+	ui.twFiles->header()->setStretchLastSection(true);
 	ui.twFiles->header()->setMovable(false);
 	ui.twFiles->header()->setResizeMode(QHeaderView::Interactive);
 	ui.twFiles->header()->resizeSection(0, 100 );	// nombre
@@ -138,12 +138,12 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 	ui.twFiles->header()->resizeSection(2, 140 );	// descripcion
 	ui.twFiles->header()->resizeSection(3, 70 );	// size
 
-	ui.twUrls->header()->setStretchLastSection(true); 
+	ui.twUrls->header()->setStretchLastSection(true);
 	ui.twUrls->header()->setMovable(false);
 	ui.twUrls->header()->setResizeMode(QHeaderView::Interactive);
 	ui.twUrls->header()->resizeSection(0, 100 );
 
-	ui.twCapturas->header()->setStretchLastSection(true); 
+	ui.twCapturas->header()->setStretchLastSection(true);
 	ui.twCapturas->header()->setMovable(false);
 	ui.twCapturas->header()->setResizeMode(QHeaderView::Interactive);
 
@@ -298,7 +298,7 @@ void GrLida::on_setFavorito()
 	if(ui.mnu_edit_favorito->isChecked())
 	{
 		ui.twJuegos->currentItem()->setIcon( 1, QIcon(stTheme+"img16/"+stIconoFav) ); // icono favorito
-		ui.twJuegos->currentItem()->setText( 3 , "true");	
+		ui.twJuegos->currentItem()->setText( 3 , "true");
 		sql->ItemActualizaDatosFavorito("true", ui.twJuegos->currentItem()->text(0));
 	} else {
 		ui.twJuegos->currentItem()->setIcon( 1 , QIcon()); // icono favorito
@@ -332,7 +332,7 @@ void GrLida::setTheme()
 	ui.btn_Ordenar->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.mnu_file_informacion->setIcon( QIcon(stTheme+"img16/informacion.png") );
 	ui.mnu_file_cerrar->setIcon( QIcon(stTheme+"img16/cerrar.png") );
-	
+
 	ui.mnu_edit_nuevo_dosbox->setIcon( QIcon(stTheme+"img16/dosbox.png") );
 	ui.mnu_edit_nuevo_scummvm->setIcon( QIcon(stTheme+"img16/scummvm.png") );
 	ui.mnu_edit_nuevo_vdmsound->setIcon( QIcon(stTheme+"img16/vdmsound.png") );
@@ -417,7 +417,7 @@ void GrLida::CargarConfigInicial()
 	stTheme = fGrl.ThemeGrl();
 	setTheme();
 
-	QSettings settings(stHomeDir+"GR-lida.conf", QSettings::IniFormat); 
+	QSettings settings(stHomeDir+"GR-lida.conf", QSettings::IniFormat);
 	settings.beginGroup("SqlDatabase");
 		stdb_type           = settings.value("db_type"          , "QSQLITE" ).toString();
 		stdb_host           = settings.value("db_host"          , stHomeDir+"db_grl.grl" ).toString();
@@ -529,15 +529,15 @@ void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString im
 	QString stIcono;
 	QTreeWidgetItem *item = new QTreeWidgetItem( ui.twJuegos );
 
-	if( imgEmu == "" ) 
+	if( imgEmu == "" )
 		stIcono = stTheme+"img24/emu_sin_imagen.png";
-	else if( imgEmu == "datos" ) 
+	else if( imgEmu == "datos" )
 		stIcono = stTheme+"img24/emu_datos.png";
 	else if( imgEmu == "dosbox" )
 		stIcono = stTheme+"img24/emu_dbx.png";
 	else if( imgEmu == "scummvm" )
 		stIcono = stTheme+"img24/emu_svm.png";
-	else if( imgEmu =="vdmsound" ) 
+	else if( imgEmu =="vdmsound" )
 		stIcono = stTheme+"img24/emu_vdms.png";
 	else {
 		bool existeIcono;
@@ -597,7 +597,7 @@ void GrLida::on_EjecutarJuego()
 		// Ejecuta el juego con el emulador DOSBox
 			if( stTipoEmu=="dosbox" )
 				Ejecutar( stBinExeDbx, stConfgJuego);
-		// Ejecuta el juego con el emulador ScummVM 
+		// Ejecuta el juego con el emulador ScummVM
 			if( stTipoEmu=="scummvm")
 			{
 			// Creamos el INI de configuracion del ScummVM
@@ -609,11 +609,11 @@ void GrLida::on_EjecutarJuego()
 			{
 				#ifdef Q_OS_WIN32
 					if( (long)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()), 0, 0, SW_SHOWNORMAL) <= 32)
-						QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego")); 		
+						QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego"));
 				#else
-					QMessageBox::information(this, stTituloGrl(), tr("Solo disponible para SO, Windows (NT/2000/XP)")); 			
+					QMessageBox::information(this, stTituloGrl(), tr("Solo disponible para SO, Windows (NT/2000/XP)"));
 				#endif
-			} 
+			}
 		} else if( stConfgJuego=="")
 			QMessageBox::information( this, stTituloGrl(),tr("No dispones de ninguna configuración") );
 		else
@@ -623,6 +623,8 @@ void GrLida::on_EjecutarJuego()
 
 void GrLida::on_EjecutarSetup()
 {
+	QHash<QString, QString> ConfgJuegoSetup;
+	QString stConfgSetup;
 	QSqlQuery query;
 	QSqlRecord rec;
 
@@ -632,37 +634,34 @@ void GrLida::on_EjecutarSetup()
 		// Ejecuta el juego con el emulador DOSBox
 			if( stTipoEmu=="dosbox")
 			{
-				QHash<QString, QString> ConfgJuegoSetup;
-				QString stConfgSetup;
-				
-				ConfgJuegoSetup.clear();
-				stConfgSetup.clear();
-				
+				query.clear();
 				query.exec("SELECT * FROM dbgrl_emu_dosbox WHERE idgrl="+stItemIndex+" LIMIT 0,1");
 				query.first();
 				rec = query.record();
 
+				ConfgJuegoSetup.clear();
 				//ConfgJuegoSetup["path_exe"]   = query.value( rec.indexOf("path_exe") ).toString()	;	// path_exe
 				ConfgJuegoSetup["path_setup"] = query.value( rec.indexOf("path_setup") ).toString()	;	// path_setup
 
+				stConfgSetup.clear();
 				stConfgSetup = ConfgJuegoSetup["path_setup"];
 
 				Ejecutar( stBinExeDbx, stConfgSetup);
 			}
-		// Ejecuta el juego con el emulador ScummVM 
+		// Ejecuta el juego con el emulador ScummVM
 //			if( stTipoEmu=="scummvm")
 //			{
 //
 //			}
-		// Ejecuta el juego con el emulador vdmsound 	
+		// Ejecuta el juego con el emulador vdmsound
 //			if( stTipoEmu=="vdmsound")
 //			{
 //				#ifdef Q_OS_WIN32
 //
 //				#else
-//					QMessageBox::information(this, stTituloGrl(), tr("Solo disponible para SO, Windows (NT/2000/XP)")); 			
-//				#endif	
-//			} 
+//					QMessageBox::information(this, stTituloGrl(), tr("Solo disponible para SO, Windows (NT/2000/XP)"));
+//				#endif
+//			}
 //		}else if( stConfgJuego==""){
 //			QMessageBox::information( this, stTituloGrl(),tr("No dispones de ninguna configuración"));
 //		}else{
@@ -684,7 +683,7 @@ void GrLida::on_EjecutarScummVM()
 void GrLida::Ejecutar( const QString& bin, const QString &parametros)
 {
 	dBoxSvm = new QProcess( this );
-	
+
 	QFile appBin( bin );
 	if( appBin.exists() )
 	{
@@ -696,7 +695,7 @@ void GrLida::Ejecutar( const QString& bin, const QString &parametros)
 
 		if( parametros !="")
 		{
-			stl_param << parametros.split("|", QString::SkipEmptyParts); 
+			stl_param << parametros.split("|", QString::SkipEmptyParts);
 			dBoxSvm->start( bin , stl_param );
 			stl_param.clear();
 		} else
@@ -706,7 +705,7 @@ void GrLida::Ejecutar( const QString& bin, const QString &parametros)
 
 		connect ( dBoxSvm, SIGNAL( finished(int, QProcess::ExitStatus) ), this, SLOT( fin_Proceso(int, QProcess::ExitStatus) ) );
 		connect ( dBoxSvm, SIGNAL( error(QProcess::ProcessError) ), this, SLOT( fin_ProcesoError(QProcess::ProcessError) ) );
-		
+
 		if( isTrayIcon )
 			this->hide();
 	} else
@@ -743,7 +742,7 @@ void GrLida::fin_ProcesoError( QProcess::ProcessError error )
 {
 	if( this->isHidden() )
 		this->show();
-		
+
 	if( isTrayIcon )
 	{
 		if( trayIcon->isVisible() )
@@ -755,13 +754,13 @@ void GrLida::fin_ProcesoError( QProcess::ProcessError error )
 		case QProcess::FailedToStart:
 			QMessageBox::critical(0, stTituloGrl(), "Se ha producido un error al iniciar el proceeso de inicio", QMessageBox::Cancel);
 		break;
-		case QProcess::Crashed: 	
+		case QProcess::Crashed:
 			QMessageBox::critical(0, stTituloGrl(), "Se ha producido un error en el proceso, tiempo después de empezar con éxito", QMessageBox::Cancel);
 		break;
 		case QProcess::Timedout:
 			QMessageBox::critical(0, stTituloGrl(), "Se ha producido un error, waitFor...() última función el tiempo de espera", QMessageBox::Cancel);
 		break;
-		case QProcess::WriteError:	
+		case QProcess::WriteError:
 			QMessageBox::critical(0, stTituloGrl(), "Se ha producido un error al intentar escribir en el proceso de inicio", QMessageBox::Cancel);
 		break;
 		case QProcess::ReadError:
@@ -857,7 +856,7 @@ void GrLida::Confg_Svm_Dbx(QString IDitem)
 			ui.mnu_ejecutar_setup->setEnabled(false);
 		}
 
-// Si el emulador es el vdmsound:	
+// Si el emulador es el vdmsound:
 	} else if( stTipoEmu=="vdmsound") {
 
 		query.exec("SELECT * FROM dbgrl_emu_vdmsound WHERE idgrl="+IDitem+" LIMIT 0,1");
@@ -886,11 +885,11 @@ void GrLida::on_NuevoJuego()
 {
 	QString lastID, lastID_Dbx;
 	frmAddEditJuego * AddJuego = new frmAddEditJuego( false, "datos", "", 0, Qt::Window);
-	
+
 	if( AddJuego->exec() == QDialog::Accepted )
 	{
 		lastID = sql->ItemInsertaDatos( AddJuego->DatosJuego );
-	
+
 		sql->ItemInsertaFiles( AddJuego->ui.twDatosFiles, lastID );
 		sql->ItemInsertaURL( AddJuego->ui.twDatosURL, lastID );
 
@@ -949,13 +948,13 @@ void GrLida::on_EditarJuego()
 			stIcono = EditJuego->DatosJuego["icono"];
 			if( stIcono=="")
 				stSelectIcon = stTheme+"img24/emu_sin_imagen.png";
-			else if( stIcono == "datos" ) 
+			else if( stIcono == "datos" )
 				stSelectIcon = stTheme+"img24/emu_datos.png";
 			else if( stIcono == "dosbox" )
 				stSelectIcon = stTheme+"img24/emu_dbx.png";
 			else if( stIcono == "scummvm" )
 				stSelectIcon = stTheme+"img24/emu_svm.png";
-			else if( stIcono == "vdmsound" ) 
+			else if( stIcono == "vdmsound" )
 				stSelectIcon = stTheme+"img24/emu_vdms.png";
 			else {
 				bool existeIcono;
@@ -963,7 +962,7 @@ void GrLida::on_EditarJuego()
 				if( existeIcono )
 					stSelectIcon = stIconDir + stIcono;
 				else stSelectIcon = stTheme+"img24/emu_sin_imagen.png";
-			}	
+			}
 			ui.twJuegos->currentItem()->setIcon( 0, QIcon( stSelectIcon ) );
 
 			if(EditJuego->DatosJuego["favorito"]=="true")
@@ -1101,7 +1100,7 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 		else
 			ui.btnVer_CoverBack->setEnabled(false);
 
-		lbpanel_5.setText(" " + strDatosJuego["titulo"] + " - " + tr("introducido el") + " " + strDatosJuego["fecha"] + "  " );	
+		lbpanel_5.setText(" " + strDatosJuego["titulo"] + " - " + tr("introducido el") + " " + strDatosJuego["fecha"] + "  " );
 
 		if( strDatosJuego["tipo_emu"] == "datos")
 			lbpanel_3.setPixmap( QPixmap(stTheme+"img16/datos_1.png") );
@@ -1367,7 +1366,7 @@ void GrLida::CargarBaseDatos(QString str)
 
 	ui.twJuegos->setColumnCount( ui.twJuegos->columnCount() );
 	ui.twJuegos->clear();
-	
+
 	QImage img;
 	ui.PicFlowWidget->clear();
 	ui.PicFlowWidget->setSlideSize(QSize(145, 186));
@@ -1402,13 +1401,13 @@ void GrLida::CargarBaseDatos(QString str)
 				stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
 				if( stIcono=="")
 					item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
-				else if( stIcono == "datos" ) 
+				else if( stIcono == "datos" )
 					item->setIcon( 0, QIcon(stTheme+"img24/emu_datos.png") );
 				else if( stIcono == "dosbox" )
 					item->setIcon( 0, QIcon(stTheme+"img24/emu_dbx.png") );
 				else if( stIcono == "scummvm" )
 					item->setIcon( 0, QIcon(stTheme+"img24/emu_svm.png") );
-				else if( stIcono == "vdmsound" ) 
+				else if( stIcono == "vdmsound" )
 					item->setIcon( 0, QIcon(stTheme+"img24/emu_vdms.png") );
 				else {
 					bool existeIcono;
@@ -1427,7 +1426,7 @@ void GrLida::CargarBaseDatos(QString str)
 			on_twJuegos_clicked( ui.twJuegos->currentItem() );
 		} else {
 			lbpanel_3.setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
-			lbpanel_5.setText(" ");	
+			lbpanel_5.setText(" ");
 		}
 	} else {
 		str_ListaDatos.clear();
@@ -1529,18 +1528,18 @@ void GrLida::CargarBaseDatos(QString str)
 					    	ui.PicFlowWidget->addSlide( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 					    }
 
-					    id_ImgPicFlow++;				
+					    id_ImgPicFlow++;
 
 						stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
 						if( stIcono=="")
 							item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
-						else if( stIcono == "datos" ) 
+						else if( stIcono == "datos" )
 							item->setIcon( 0, QIcon(stTheme+"img24/emu_datos.png") );
 						else if( stIcono == "dosbox" )
 							item->setIcon( 0, QIcon(stTheme+"img24/emu_dbx.png") );
 						else if( stIcono == "scummvm" )
 							item->setIcon( 0, QIcon(stTheme+"img24/emu_svm.png") );
-						else if( stIcono == "vdmsound" ) 
+						else if( stIcono == "vdmsound" )
 							item->setIcon( 0, QIcon(stTheme+"img24/emu_vdms.png") );
 						else {
 							bool existeIcono;
@@ -1553,13 +1552,13 @@ void GrLida::CargarBaseDatos(QString str)
 
 						if(query.value( rec.indexOf("favorito") ).toString()=="true")
 							item->setIcon( 1 , QIcon(stTheme+"img16/"+stIconoFav)); // icono favorito
-						
+
 					} while (query.next());
 					ui.twJuegos->setCurrentItem( ui.twJuegos->itemAt(0,0) );
 					on_twJuegos_clicked( ui.twJuegos->currentItem() );
 				} else {
 					lbpanel_3.setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
-					lbpanel_5.setText(" ");	
+					lbpanel_5.setText(" ");
 				}
 			} // fin de for lista datos
 		}
@@ -1577,7 +1576,7 @@ void GrLida::CargarBaseDatos(QString str)
 }
 
 void GrLida::ComprobarArchivosDatos(QString Version_GRL)
-{	
+{
 	QFile archivodatos;
 	QSqlQuery query;
 
@@ -1589,13 +1588,13 @@ void GrLida::ComprobarArchivosDatos(QString Version_GRL)
 	}
 
 	if( !archivodatos.exists(stDatosDir + "generos.txt") )
-		CrearArchivoDato("generos.txt");	
+		CrearArchivoDato("generos.txt");
 	if( !archivodatos.exists(stDatosDir + "companias.txt") )
 		CrearArchivoDato("companias.txt");
 	if( !archivodatos.exists(stDatosDir + "tema.txt") )
 		CrearArchivoDato("tema.txt");
 	if( !archivodatos.exists(stDatosDir + "formatos.txt") )
-		CrearArchivoDato("formatos.txt");	
+		CrearArchivoDato("formatos.txt");
 	if( !archivodatos.exists(stDatosDir + "fechas.txt") )
 		CrearArchivoDato("fechas.txt");
 	if( !archivodatos.exists(stDatosDir + "numdisc.txt") )
@@ -1603,7 +1602,7 @@ void GrLida::ComprobarArchivosDatos(QString Version_GRL)
 	if( !archivodatos.exists(stDatosDir + "sistemaop.txt") )
 		CrearArchivoDato("sistemaop.txt");
 	if( !archivodatos.exists(stDatosDir + "smiles.txt") )
-		CrearArchivoDato("smiles.txt");	
+		CrearArchivoDato("smiles.txt");
 	if( !archivodatos.exists(stDatosDir + "xmldb.txt") )
 		CrearArchivoDato("xmldb.txt");
 }
