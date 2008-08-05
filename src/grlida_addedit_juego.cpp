@@ -362,7 +362,7 @@ void frmAddEditJuego::setTheme()
 	ui.btnFileConfg_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnExeJuego_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnExeSetup_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnDirGravisUltraSound->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );	
+	ui.btnDirGravisUltraSound->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
 	ui.btnDbx_mapperfile->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDbx_language->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDbx_capturas->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
@@ -712,11 +712,11 @@ void frmAddEditJuego::setDatosJuegos()
 	if( ui.cbxDatos_Anno->currentText()!="" )
 		DatosJuego["anno"] = ui.cbxDatos_Anno->currentText();					// anno
 	else DatosJuego["anno"] = "";
-	
+
 	if( ui.cbxDatos_NumDisc->currentText()!="" )
 		DatosJuego["numdisc"] = ui.cbxDatos_NumDisc->currentText();				// numdisc
 	else DatosJuego["numdisc"] = "";
-	
+
 	if( ui.cbxDatos_SistemaOp->currentText()!="" )
 		DatosJuego["sistemaop"] = ui.cbxDatos_SistemaOp->currentText();			// sistemaop
 	else DatosJuego["sistemaop"] = "";
@@ -737,7 +737,7 @@ void frmAddEditJuego::setDatosJuegos()
 
 	DatosJuego["original"] = fGrl.BoolToStr( ui.chkDatos_Original->isChecked() ); // original
 	DatosJuego["favorito"] = fGrl.BoolToStr( ui.chkDatos_Favorito->isChecked() ); // favorito
-	
+
 	if( ui.cbxDatos_Estado->currentText()!="" )
 		DatosJuego["estado"] = ui.cbxDatos_Estado->currentText();		// estado
 	else DatosJuego["estado"] = "";
@@ -944,18 +944,6 @@ void frmAddEditJuego::on_btnDescargarInfo()
 			ui.btnImgEliminar_CoverBack->setEnabled( true );
 		} else
 			on_btnImgEliminar_CoverBack();
-
-	// icono
-		if( ImportarJuegoInfo->DatosJuego["icono"] == "datos" || ImportarJuegoInfo->DatosJuego["icono"] == "" )
-			ui.cbxDatos_Icono->setCurrentIndex(0);
-		else if( ImportarJuegoInfo->DatosJuego["icono"] == "dosbox" )
-			ui.cbxDatos_Icono->setCurrentIndex(1);
-		else if( ImportarJuegoInfo->DatosJuego["icono"] == "scummvm" )
-			ui.cbxDatos_Icono->setCurrentIndex(2);
-		else if( ImportarJuegoInfo->DatosJuego["icono"] =="vdmsound" )
-			ui.cbxDatos_Icono->setCurrentIndex(3);
-		else
-			ui.cbxDatos_Icono->setCurrentIndex( ui.cbxDatos_Icono->findText( ImportarJuegoInfo->DatosJuego["icono"] ) );	// icono
 	}
 }
 
@@ -1096,7 +1084,7 @@ void frmAddEditJuego::on_btnTool_Preview()
 		ui.txtDatos_Comentario->setVisible(false);
 		ui.html_preview->setVisible(true);
 		ui.html_preview->setHtml( fGrl.ReemplazaTextoSmiles( ui.txtDatos_Comentario->toPlainText(), listSmailes ) );
-	} else {	
+	} else {
 		ui.txtDatos_Comentario->setVisible(true);
 		ui.html_preview->setVisible(false);
 	}
@@ -1207,7 +1195,7 @@ void frmAddEditJuego::on_btnDatosFiles_PathFile()
 void frmAddEditJuego::on_btnAddFile()
 {
 	QString id_file;
-	
+
 	if(ui.txtDatosFiles_PathFile->text()!="")
 	{
 		QHash<QString, QString> datos_file;
@@ -1265,7 +1253,7 @@ void frmAddEditJuego::on_btnUpdateFile()
 		datos_file["path"]        = ui.txtDatosFiles_PathFile->text();			// 3 path
 		datos_file["size"]        = ui.txtDatosFiles_Size->text();				// 4 size
 
-		id_file = ui.twDatosFiles->currentItem()->text(5) ; // id 
+		id_file = ui.twDatosFiles->currentItem()->text(5) ; // id
 
 		if(id_file!="")
 			sql->ItemActualizaFiles( datos_file, id_file);
@@ -1371,7 +1359,7 @@ void frmAddEditJuego::on_btnDirSvm_setup()
 			UltimoPath["Svm_path_setup"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Svm_path_setup", "" );
-			UltimoPath["Svm_path_setup"] = "";	
+			UltimoPath["Svm_path_setup"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -1389,7 +1377,7 @@ void frmAddEditJuego::on_btnDirSvm_sound_font()
 			UltimoPath["Svm_soundfont"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Svm_soundfont", "" );
-			UltimoPath["Svm_soundfont"] = "";	
+			UltimoPath["Svm_soundfont"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -1433,7 +1421,7 @@ void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
 	ui.h_SliderSvm_talkspeed->setSliderPosition(fGrl.StrToInt(  strDatosScummvm["talkspeed"] ) );									// talkspeed
 	ui.h_SliderSvm_debuglevel->setSliderPosition( fGrl.StrToInt( strDatosScummvm["debuglevel"] ) );									// debuglevel
 	//strDatosScummvm["cdrom"];																										// cdrom
-	ui.cbxSvm_joystick_num->setCurrentIndex( fGrl.StrToInt( strDatosScummvm["joystick_num"] ) );									// joystick_num 
+	ui.cbxSvm_joystick_num->setCurrentIndex( fGrl.StrToInt( strDatosScummvm["joystick_num"] ) );									// joystick_num
 
 	if( strDatosScummvm["output_rate"]!="" )
 		ui.cbxSvm_output_rate->setCurrentIndex( ui.cbxSvm_output_rate->findText( strDatosScummvm["output_rate"], Qt::MatchContains ) ); // output_rate
@@ -1442,7 +1430,7 @@ void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
 
 	ui.h_SliderSvm_midi_gain->setSliderPosition( fGrl.StrToInt( strDatosScummvm["midi_gain"] ) );	// midi_gain
 	ui.chkSvm_copy_protection->setChecked( fGrl.StrToBool( strDatosScummvm["copy_protection"] ) );	// copy_protection
-	ui.txtSvm_soundfont->setText( strDatosScummvm["sound_font"] );									// sound_font 
+	ui.txtSvm_soundfont->setText( strDatosScummvm["sound_font"] );									// sound_font
 }
 
 void frmAddEditJuego::setDatosScummVM()
@@ -1497,7 +1485,7 @@ void frmAddEditJuego::setDatosScummVM()
 	DatosScummvm["talkspeed"]     = ui.posSliderSvm_5->text();								// talkspeed
 	DatosScummvm["debuglevel"]    = ui.posSliderSvm_6->text();								// debuglevel
 	DatosScummvm["cdrom"]         = "0";													// cdrom ui.cbxSvm_cdrom->currentIndex()
-	DatosScummvm["joystick_num"]  = fGrl.IntToStr(ui.cbxSvm_joystick_num->currentIndex());	// joystick_num 
+	DatosScummvm["joystick_num"]  = fGrl.IntToStr(ui.cbxSvm_joystick_num->currentIndex());	// joystick_num
 
 	if( ui.cbxSvm_output_rate->currentText()!="" && ui.cbxSvm_output_rate->currentIndex()!= 0 )
 		DatosScummvm["output_rate"] = ui.cbxSvm_output_rate->currentText();
@@ -1505,8 +1493,8 @@ void frmAddEditJuego::setDatosScummVM()
 		DatosScummvm["output_rate"] = "";
 
 	DatosScummvm["copy_protection"] = fGrl.BoolToStr( ui.chkSvm_copy_protection->isChecked() );	// copy_protection
-	DatosScummvm["midi_gain"]  = ui.posSliderSvm_7->text();			// midi_gain 
-	DatosScummvm["sound_font"] = ui.txtSvm_soundfont->text();		// sound_font 
+	DatosScummvm["midi_gain"]  = ui.posSliderSvm_7->text();			// midi_gain
+	DatosScummvm["sound_font"] = ui.txtSvm_soundfont->text();		// sound_font
 }
 
 void frmAddEditJuego::on_twScummVM_clicked( QTreeWidgetItem *item )
@@ -1834,7 +1822,7 @@ void frmAddEditJuego::setDatosDosBox()
 			DatosDosBox["sdl_fullresolution"] = ui.cbxDbx_sdl_fullresolution->currentText(); else DatosDosBox["sdl_fullresolution"] = "original";
 	// sdl_windowresolution
 		if(ui.cbxDbx_sdl_windowresolution->currentText()!="")
-			DatosDosBox["sdl_windowresolution"] = ui.cbxDbx_sdl_windowresolution->currentText(); else DatosDosBox["sdl_windowresolution"] = "original"; 
+			DatosDosBox["sdl_windowresolution"] = ui.cbxDbx_sdl_windowresolution->currentText(); else DatosDosBox["sdl_windowresolution"] = "original";
 	// sdl_output
 		if(ui.cbxDbx_sdl_output->currentText()!="")
 			DatosDosBox["sdl_output"] = ui.cbxDbx_sdl_output->currentText(); else DatosDosBox["sdl_output"] = "surface";
@@ -1913,7 +1901,7 @@ void frmAddEditJuego::setDatosDosBox()
 			DatosDosBox["midi_config"] = ui.txtDbx_midi_config->text();else	DatosDosBox["midi_config"] = "";
 	// midi_mt32rate
 		if(ui.cbxDbx_midi_mt32rate->currentText()!="")
-			DatosDosBox["midi_mt32rate"] = ui.cbxDbx_midi_mt32rate->currentText(); else DatosDosBox["midi_mt32rate"] = "22050"; 
+			DatosDosBox["midi_mt32rate"] = ui.cbxDbx_midi_mt32rate->currentText(); else DatosDosBox["midi_mt32rate"] = "22050";
 
 	// sblaster_sbtype
 		if(ui.cbxDbx_sblaster_sbtype->currentText()!="")
@@ -1962,7 +1950,7 @@ void frmAddEditJuego::setDatosDosBox()
 	// gus_ultradir
 		if(ui.txtDbx_gus_ultradir->text()!="")
 			DatosDosBox["gus_ultradir"] = ui.txtDbx_gus_ultradir->text(); else DatosDosBox["gus_ultradir"] = "C:/ULTRASND";
-		
+
 	// speaker_pcspeaker
 		DatosDosBox["speaker_pcspeaker"] = fGrl.BoolToStr( ui.chkDbx_speaker_pcspeaker->isChecked() );
 	// speaker_pcrate
@@ -2105,7 +2093,7 @@ void frmAddEditJuego::on_btnDbx_FileConfg()
 		if(str_ok == false)
 			str.append(".conf");
 		ui.txtDbx_path_conf->setText( str );
-	} else 
+	} else
 		ui.txtDbx_path_conf->setText( "" );
 }
 
@@ -2122,7 +2110,7 @@ void frmAddEditJuego::on_btnDbx_ExeJuego()
 			UltimoPath["Dbx_path_exe"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Dbx_path_exe", "" );
-			UltimoPath["Dbx_path_exe"] = "";	
+			UltimoPath["Dbx_path_exe"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -2140,7 +2128,7 @@ void frmAddEditJuego::on_btnDbx_ExeSetup()
 			UltimoPath["Dbx_path_setup"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Dbx_path_setup", "" );
-			UltimoPath["Dbx_path_setup"] = "";	
+			UltimoPath["Dbx_path_setup"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -2169,7 +2157,7 @@ void frmAddEditJuego::on_btnDbx_mapperfile()
 			UltimoPath["Dbx_sdl_mapperfile"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Dbx_sdl_mapperfile", "" );
-			UltimoPath["Dbx_sdl_mapperfile"] = "";	
+			UltimoPath["Dbx_sdl_mapperfile"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -2187,7 +2175,7 @@ void frmAddEditJuego::on_btnDbx_language()
 			UltimoPath["Dbx_dosbox_language"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Dbx_dosbox_language", "" );
-			UltimoPath["Dbx_dosbox_language"] = "";	
+			UltimoPath["Dbx_dosbox_language"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -2268,7 +2256,7 @@ QString frmAddEditJuego::setOpcionesSerial()
 }
 
 void frmAddEditJuego::on_btnMount_Add()
-{	
+{
 	QHash<QString, QString> DatosMontaje;
 	DatosMontaje.clear();
 	DatosMontaje["path"]      = "";      // directorio o iso
@@ -2608,7 +2596,7 @@ void frmAddEditJuego::CargarDatosVDMSound( QString stIDvdms )
 		QStringList list_winnt_dosbox  = str_winnt_dosbox.split("|");
 		QStringList list_winnt_storage = str_winnt_storage.split("|");
 
-		ui.txtVdms_params->setText( list_program[0] ); 
+		ui.txtVdms_params->setText( list_program[0] );
 		ui.txtVdms_icon->setText( list_program[1] );
 
 		ui.chkVdms_useAutoexec->setChecked( fGrl.StrToBool( list_winnt_dos[0] ) );
@@ -2671,7 +2659,7 @@ void frmAddEditJuego::on_btnVdms_FileConfg()
 		if(str_ok == false)
 			str.append(".vlp");
 		ui.txtVdms_path_conf->setText( str );
-	} else 
+	} else
 		ui.txtVdms_path_conf->setText( "" );
 }
 
@@ -2688,7 +2676,7 @@ void frmAddEditJuego::on_btnVdms_ExeJuego()
 			UltimoPath["Vdms_path_exe"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Vdms_path_exe", "" );
-			UltimoPath["Vdms_path_exe"] = "";	
+			UltimoPath["Vdms_path_exe"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -2706,7 +2694,7 @@ void frmAddEditJuego::on_btnVdms_Icono()
 			UltimoPath["Vdms_icon"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Vdms_icon", "" );
-			UltimoPath["Vdms_icon"] = "";	
+			UltimoPath["Vdms_icon"] = "";
 		}
 	lastdir.endGroup();
 }
