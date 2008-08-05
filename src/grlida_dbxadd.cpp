@@ -26,7 +26,7 @@
 #include "grlida_addedit_montajes.h"
 
 frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
-        : QDialog( parent, flags ) 
+        : QDialog( parent, flags )
 {
 	ui.setupUi(this);
 
@@ -114,6 +114,21 @@ void frmDbxAdd::setTheme()
 	ui.btnMount_Bajar->setIcon( QIcon(stTheme+"img16/go-down.png") );
 	ui.btnMount_AutoCrear->setIcon( QIcon(stTheme+"img16/ejecutar_app.png") );
 	ui.btnMount_Primario->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+}
+
+void frmDbxAdd::CargaUltimosDirectorios()
+{
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	UltimoPath.clear();
+	lastdir.beginGroup("UltimoDirectorio");
+		UltimoPath["Dbx_path_exe"]        = lastdir.value("Dbx_path_exe", "").toString();
+		UltimoPath["Dbx_path_setup"]      = lastdir.value("Dbx_path_setup", "").toString();
+		UltimoPath["Dbx_gus_ultradir"]    = lastdir.value("Dbx_gus_ultradir", "").toString();
+		UltimoPath["Dbx_sdl_mapperfile"]  = lastdir.value("Dbx_sdl_mapperfile", "").toString();
+		UltimoPath["Dbx_dosbox_language"] = lastdir.value("Dbx_dosbox_language", "").toString();
+		UltimoPath["Dbx_dosbox_captures"] = lastdir.value("Dbx_dosbox_captures", "").toString();
+		UltimoPath["Dbx_path_sonido"]     = lastdir.value("Dbx_path_sonido", "").toString();
+	lastdir.endGroup();
 }
 
 void frmDbxAdd::on_btnPrevious()
@@ -240,7 +255,7 @@ void frmDbxAdd::on_setProfileGame(const QString ProfileGame)
 		ui.txtDbx_parametros_exe->setText( TempProfileDosBox["parametros_exe"] );			// parametros_exe
 		ui.txtDbx_parametros_setup->setText( TempProfileDosBox["parametros_setup"] );		// parametros_setup
 
-		ui.twMontajes->clear();		
+		ui.twMontajes->clear();
 		ui.btnMount_AutoCrear->click();
 /*
 		int num_mounts = fGrl.StrToInt( TempProfileDosBox["NrOfMounts"] );
@@ -630,12 +645,38 @@ void frmDbxAdd::on_btnDbx_FileConfg()
 
 void frmDbxAdd::on_btnDbx_ExeJuego()
 {
-	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_path_exe->text(), ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Dbx_path_exe"], ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDbx_path_exe->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Dbx_path_exe", fi.absolutePath()+"/" );
+			UltimoPath["Dbx_path_exe"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Dbx_path_exe", "" );
+			UltimoPath["Dbx_path_exe"] = "";
+		}
+	lastdir.endGroup();
 }
 
 void frmDbxAdd::on_btnDbx_ExeSetup()
 {
-	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtDbx_path_setup->text(), ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Dbx_path_setup"], ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtDbx_path_setup->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Dbx_path_setup", fi.absolutePath()+"/" );
+			UltimoPath["Dbx_path_setup"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Dbx_path_setup", "" );
+			UltimoPath["Dbx_path_setup"] = "";
+		}
+	lastdir.endGroup();
 }
 
 void frmDbxAdd::on_btnMount_Add()
@@ -711,7 +752,7 @@ void frmDbxAdd::on_btnMount_Edit()
 		DatosMontaje["indx_cd"]   = ui.twMontajes->currentItem()->text(4); // index de la unidad de cd-rom
 		DatosMontaje["opt_mount"] = ui.twMontajes->currentItem()->text(5); // opciones del cd-rom
 		DatosMontaje["io_ctrl"]   = ui.twMontajes->currentItem()->text(6); // cd/dvd
-	
+
 		frmAddEditMontajes * AddEditMontajes = new frmAddEditMontajes( DatosMontaje );
 		if( AddEditMontajes->exec() == QDialog::Accepted )
 		{
@@ -747,7 +788,7 @@ void frmDbxAdd::on_btnMount_Edit()
 			//ui.twMontajes->currentItem()->setText( 7 , );	// select_mount
 			//ui.twMontajes->currentItem()->setText( 8 , );	// id
 			//ui.twMontajes->currentItem()->setText( 9 , AddEditMontajes->DatosMontaje["io_ctrl"]		);	// id_lista
-	
+
 			QHash<QString, QString> datos_montaje;
 			datos_montaje.clear();
 			datos_montaje["path_exe"] = ui.txtDbx_path_exe->text();
@@ -755,11 +796,11 @@ void frmDbxAdd::on_btnMount_Edit()
 			if(ui.chkDbx_loadfix->isChecked())
 				datos_montaje["opt_loadfix"] = "true";
 			else datos_montaje["opt_loadfix"] = "false";
-	
+
 			if(ui.chkDbx_cerrar_dbox->isChecked())
 				datos_montaje["opt_cerrar_dbox"] = "true";
 			else datos_montaje["opt_cerrar_dbox"] = "false";
-	
+
 			ui.previer_mount->clear();
 			ui.previer_mount->addItems( fGrl.CreaConfigMontajes( ui.twMontajes, datos_montaje) );
 		}

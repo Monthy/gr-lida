@@ -35,17 +35,20 @@ class frmVdmsAdd : public QDialog {
 public:
 	frmVdmsAdd( QDialog *parent = 0, Qt::WFlags flags = 0 );
 	~frmVdmsAdd();
-	
+
 	Ui::VdmsAddClass ui;
-	
+
 	QHash<QString, QString> DatosJuego;
 	QHash<QString, QString> DatosVDMSound;
-	
+
 private:
 	Funciones fGrl;
 	QString stTituloVdms(){ return tr("Nuevo juego para el VDMSound"); }
 	QString stHomeDir, stConfgVdmSDir, stTheme;
+	QHash<QString, QString> UltimoPath;
+
 	void setTheme();
+	void CargaUltimosDirectorios();
 
 private slots:
 	void on_btnOk();

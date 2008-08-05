@@ -31,7 +31,7 @@ frmVdmsAdd::frmVdmsAdd(QDialog *parent, Qt::WFlags flags)
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stConfgVdmSDir = stHomeDir + "confvdms/";	// directorio de configuracion para el VDMSound
-	
+
 	stTheme = fGrl.ThemeGrl();
 	setTheme();
 
@@ -40,7 +40,9 @@ frmVdmsAdd::frmVdmsAdd(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnVdms_FileConfg, SIGNAL( clicked() ), this, SLOT( on_btnVdms_FileConfg() ) );
 	connect( ui.btnVdms_ExeJuego , SIGNAL( clicked() ), this, SLOT( on_btnVdms_ExeJuego()  ) );
 	connect( ui.btnVdms_Icono	 , SIGNAL( clicked() ), this, SLOT( on_btnVdms_Icono()     ) );
-	
+
+	CargaUltimosDirectorios();
+
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
@@ -61,6 +63,16 @@ void frmVdmsAdd::setTheme()
 	ui.btnVdms_FileConfg_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnVdms_ExeJuego_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnVdms_Icono_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+}
+
+void frmVdmsAdd::CargaUltimosDirectorios()
+{
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	UltimoPath.clear();
+	lastdir.beginGroup("UltimoDirectorio");
+		UltimoPath["Vdms_path_exe"]       = lastdir.value("Vdms_path_exe", "").toString();
+		UltimoPath["Vdms_icon"]           = lastdir.value("Vdms_icon", "").toString();
+	lastdir.endGroup();
 }
 
 void frmVdmsAdd::on_btnOk()
@@ -171,12 +183,38 @@ void frmVdmsAdd::on_btnVdms_FileConfg()
 
 void frmVdmsAdd::on_btnVdms_ExeJuego()
 {
-	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtVdms_path_exe->text(), ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Vdms_path_exe"], ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+
+	QFileInfo fi( ui.txtVdms_path_exe->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Vdms_path_exe", fi.absolutePath()+"/" );
+			UltimoPath["Vdms_path_exe"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Vdms_path_exe", "" );
+			UltimoPath["Vdms_path_exe"] = "";
+		}
+	lastdir.endGroup();
 }
 
 void frmVdmsAdd::on_btnVdms_Icono()
 {
-	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), ui.txtVdms_icon->text(), ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false)+ ",0");
+	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), UltimoPath["Vdms_icon"], ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false)  );//+ ",0"
+
+	QFileInfo fi( ui.txtVdms_icon->text() );
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		if( fi.exists() )
+		{
+			lastdir.setValue("Vdms_icon", fi.absolutePath()+"/" );
+			UltimoPath["Vdms_icon"] = fi.absolutePath()+"/";
+		} else {
+			lastdir.setValue("Vdms_icon", "" );
+			UltimoPath["Vdms_icon"] = "";
+		}
+	lastdir.endGroup();
 }
 
 void frmVdmsAdd::on_txtDatos_Titulo_textChanged(const QString &)

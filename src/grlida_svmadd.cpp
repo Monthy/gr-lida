@@ -45,12 +45,12 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDirSvm_2	, SIGNAL( clicked() ), this, SLOT( on_btnDirSave()  ) );
 	connect( ui.btnDefectoSvm,SIGNAL( clicked() ), this, SLOT( on_btnDefecto()  ) );
 	connect( ui.twScummVM	, SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* )));
-	connect( ui.twScummVM	, SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twScummVM_Dblclicked(QTreeWidgetItem* ))); 
+	connect( ui.twScummVM	, SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twScummVM_Dblclicked(QTreeWidgetItem* )));
 
-	ui.twScummVM->header()->setStretchLastSection(true); 
+	ui.twScummVM->header()->setStretchLastSection(true);
 	ui.twScummVM->header()->setMovable(false);
-	ui.twScummVM->header()->resizeSection(0, 340); 
-	ui.twScummVM->header()->resizeSection(1, 80); 
+	ui.twScummVM->header()->resizeSection(0, 340);
+	ui.twScummVM->header()->resizeSection(1, 80);
 	ui.twScummVM->clear();
 
 	fGrl.CargarDatosListaSvm(":/datos/svm_lista.txt"		, ui.twScummVM ); 			// Carga la lista de compatibilidad del ScummVM.
@@ -65,6 +65,8 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 	ui.cbxSvm_gfx_mode->setCurrentIndex(0);
 	ui.cbxSvm_render_mode->setCurrentIndex(0);
 	ui.cbxSvm_music_driver->setCurrentIndex(0);
+
+	CargaUltimosDirectorios();
 
 // centra la ventana en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
@@ -85,6 +87,21 @@ void frmSvmAdd::setTheme()
 	ui.btnDirSvm_1->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
 	ui.btnDirSvm_2->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
 	ui.btnDefectoSvm->setIcon( QIcon(stTheme+"img16/actualizar.png") );
+}
+
+void frmSvmAdd::CargaUltimosDirectorios()
+{
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	UltimoPath.clear();
+	lastdir.beginGroup("UltimoDirectorio");
+		UltimoPath["Svm_path"]            = lastdir.value("Svm_path", "").toString();
+		UltimoPath["Svm_savepath"]        = lastdir.value("Svm_savepath", "").toString();
+		UltimoPath["Svm_extrapath"]       = lastdir.value("Svm_extrapath", "").toString();
+		UltimoPath["Svm_path_capturas"]   = lastdir.value("Svm_path_capturas", "").toString();
+		UltimoPath["Svm_path_sonido"]     = lastdir.value("Svm_path_sonido", "").toString();
+		UltimoPath["Svm_path_setup"]      = lastdir.value("Svm_path_setup", "").toString();
+		UltimoPath["Svm_soundfont"]       = lastdir.value("Svm_soundfont", "").toString();
+	lastdir.endGroup();
 }
 
 void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *item1,QTreeWidgetItem *item2)
@@ -264,23 +281,35 @@ void frmSvmAdd::on_btnOk()
 		DatosScummvm["talkspeed"]		= ui.posSliderSvm_5->text()	; // talkspeed
 		DatosScummvm["debuglevel"]		= ui.posSliderSvm_6->text()	; // debuglevel
 		DatosScummvm["cdrom"]			= "0"						; // cdrom ui.cbxSvm_cdrom->currentIndex()
-		DatosScummvm["joystick_num"]	= fGrl.IntToStr(ui.cbxSvm_joystick_num->currentIndex()); //joystick_num 
-		DatosScummvm["output_rate"]		= ""						; // output_rate 
-		DatosScummvm["midi_gain"]		= "100"						; // midi_gain 
-		DatosScummvm["copy_protection"]	= "false"					; // copy_protection 
-		DatosScummvm["sound_font"]		= ""						; // sound_font 
+		DatosScummvm["joystick_num"]	= fGrl.IntToStr(ui.cbxSvm_joystick_num->currentIndex()); //joystick_num
+		DatosScummvm["output_rate"]		= ""						; // output_rate
+		DatosScummvm["midi_gain"]		= "100"						; // midi_gain
+		DatosScummvm["copy_protection"]	= "false"					; // copy_protection
+		DatosScummvm["sound_font"]		= ""						; // sound_font
 		QDialog::accept();
 	}
 }
 
 void frmSvmAdd::on_btnDirGame()
 {
-	ui.txtSvm_path->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), stHomeDir , ui.txtSvm_path->text() ) ); 
+	ui.txtSvm_path->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), UltimoPath["Svm_path"] , ui.txtSvm_path->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Svm_path", ui.txtSvm_path->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Svm_path"] = ui.txtSvm_path->text()+"/";
 }
 
 void frmSvmAdd::on_btnDirSave()
 {
-	ui.txtSvm_savepath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), stHomeDir , ui.txtSvm_savepath->text() ) ); 
+	ui.txtSvm_savepath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), UltimoPath["Svm_savepath"] , ui.txtSvm_savepath->text() ) );
+
+	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	lastdir.beginGroup("UltimoDirectorio");
+		lastdir.setValue("Svm_savepath", ui.txtSvm_savepath->text()+"/" );
+	lastdir.endGroup();
+	UltimoPath["Svm_savepath"] = ui.txtSvm_savepath->text()+"/";
 }
 
 void frmSvmAdd::on_btnDefecto()

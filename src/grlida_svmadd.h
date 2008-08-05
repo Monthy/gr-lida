@@ -39,9 +39,9 @@ class frmSvmAdd : public QDialog {
 public:
     frmSvmAdd( QDialog *parent = 0, Qt::WFlags flags = 0 );
     ~frmSvmAdd();
-    
+
     Ui::SvmAddClass ui;
-    
+
 	QHash<QString, QString>  DatosJuego;
 	QHash<QString, QString>  DatosScummvm;
 
@@ -51,7 +51,10 @@ private:
 	QString stHomeDir, stDatosDir, stTheme;
 	QStringList svm_Lista, svm_ListaTemp;
 	int intStepwizard;
+	QHash<QString, QString> UltimoPath;
+
 	void setTheme();
+	void CargaUltimosDirectorios();
 
 private slots:
 	void on_btnOk();
@@ -61,7 +64,7 @@ private slots:
 	void on_btnDirSave();
 	void on_btnDefecto();
 	void on_twScummVM_clicked( QTreeWidgetItem *item );
-	void on_twScummVM_Dblclicked( QTreeWidgetItem *item ); 
+	void on_twScummVM_Dblclicked( QTreeWidgetItem *item );
 	void on_twScummVM_currentItemChanged(QTreeWidgetItem *item1,QTreeWidgetItem *item2);
 };
 
