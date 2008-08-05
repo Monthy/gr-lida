@@ -51,7 +51,8 @@ private:
 	QString stTituloDbx(){ return tr("Nuevo juego para el DOSBox"); }
 	int intStepwizard;
 	QString stHomeDir, stTheme;
-	QHash<QString, QString>  TempProfileDosBox;
+	QHash<QString, QString> TempDatosJuego;
+	QHash<QString, QString> TempProfileDosBox;
 	QHash<QString, QString> UltimoPath;
 
 	void setTheme();
@@ -74,6 +75,8 @@ private slots:
 	void on_btnMount_Bajar();
 	void on_btnMount_AutoCrear();
 	void on_btnMount_Primario();
+	void on_btnDescargarInfo();
+
 };
 
 #endif // GRLIDA_DBXADD_H

@@ -25,7 +25,8 @@
    <string>Asistente del VdmSound</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/vdmsound.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/vdmsound.png</normaloff>:/img16/vdmsound.png</iconset>
   </property>
   <property name="autoFillBackground" >
    <bool>true</bool>
@@ -34,16 +35,7 @@
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -137,6 +129,12 @@
    </item>
    <item>
     <widget class="QFrame" name="frame" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <widget class="QLabel" name="lb_Vdms_3" >
       <property name="geometry" >
        <rect>
@@ -176,7 +174,8 @@
        <string/>
       </property>
       <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
       </property>
      </widget>
      <widget class="QPushButton" name="btnVdms_ExeJuego" >
@@ -192,7 +191,8 @@
        <string/>
       </property>
       <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
       </property>
      </widget>
      <widget class="QPushButton" name="btnVdms_FileConfg" >
@@ -208,7 +208,8 @@
        <string/>
       </property>
       <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
       </property>
      </widget>
      <widget class="QLabel" name="lb_Vdms_1" >
@@ -242,7 +243,7 @@
        <rect>
         <x>90</x>
         <y>10</y>
-        <width>341</width>
+        <width>351</width>
         <height>22</height>
        </rect>
       </property>
@@ -316,7 +317,8 @@
        </size>
       </property>
       <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
       </property>
      </widget>
      <widget class="QPushButton" name="btnVdms_FileConfg_clear" >
@@ -335,7 +337,8 @@
        </size>
       </property>
       <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
       </property>
      </widget>
      <widget class="QPushButton" name="btnVdms_ExeJuego_clear" >
@@ -354,7 +357,25 @@
        </size>
       </property>
       <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnDescargarInfo" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>162</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string>Descargar la Info del Juego</string>
+      </property>
+      <property name="icon" >
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
       </property>
      </widget>
     </widget>
@@ -371,16 +392,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>4</number>
-     </property>
-     <property name="topMargin" >
-      <number>4</number>
-     </property>
-     <property name="rightMargin" >
-      <number>4</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>4</number>
      </property>
      <item>
@@ -401,7 +413,8 @@
         <string>Cancelar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
@@ -410,7 +423,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>20</width>
          <height>20</height>
@@ -439,7 +452,8 @@
         <string>Aceptar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>

@@ -23,6 +23,7 @@
 **/
 
 #include "grlida_svmadd.h"
+#include "grlida_importar_juego_info.h"
 
 frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
@@ -46,6 +47,7 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnDefectoSvm,SIGNAL( clicked() ), this, SLOT( on_btnDefecto()  ) );
 	connect( ui.twScummVM	, SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* )));
 	connect( ui.twScummVM	, SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twScummVM_Dblclicked(QTreeWidgetItem* )));
+	connect( ui.btnDescargarInfo , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo()  ) );
 
 	ui.twScummVM->header()->setStretchLastSection(true);
 	ui.twScummVM->header()->setMovable(false);
@@ -179,37 +181,83 @@ void frmSvmAdd::on_btnNext()
 		QMessageBox::information(this, stTituloSvm(), tr("Selecciona un juego de la lista"));
 }
 
+void frmSvmAdd::on_btnDescargarInfo()
+{
+	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(0, Qt::Window);
+	if( ImportarJuegoInfo->exec() == QDialog::Accepted )
+	{
+		QFile file_thumbs, file_cover_front, file_cover_back;
+
+		TempDatosJuego.clear();
+		ui.txtDatos_Titulo->setText( ImportarJuegoInfo->DatosJuego["titulo"] )			;// titulo
+		TempDatosJuego["icono"]			= "scummvm"										;//icono
+		TempDatosJuego["titulo"]		= ui.txtDatos_Titulo->text()					;//titulo
+		TempDatosJuego["subtitulo"]		= ImportarJuegoInfo->DatosJuego["subtitulo"]	;//subtitulo
+		TempDatosJuego["genero"]		= ImportarJuegoInfo->DatosJuego["genero"]		;//genero
+		TempDatosJuego["compania"]		= ImportarJuegoInfo->DatosJuego["compania"]		;//compania
+		TempDatosJuego["desarrollador"]	= ImportarJuegoInfo->DatosJuego["desarrollador"];//desarrollador
+		TempDatosJuego["tema"]			= ImportarJuegoInfo->DatosJuego["tema"] 		;//tema
+		TempDatosJuego["idioma"]		= ImportarJuegoInfo->DatosJuego["idioma"]		;//idioma
+		TempDatosJuego["formato"]		= ImportarJuegoInfo->DatosJuego["formato"]		;//formato
+		TempDatosJuego["anno"]			= ImportarJuegoInfo->DatosJuego["anno"]			;//anno
+		TempDatosJuego["numdisc"]		= ImportarJuegoInfo->DatosJuego["numdisc"]		;//numdisc
+		TempDatosJuego["sistemaop"]		= ImportarJuegoInfo->DatosJuego["sistemaop"]	;//sistemaop
+		TempDatosJuego["tamano"]		= ImportarJuegoInfo->DatosJuego["tamano"]		;//tamano
+		TempDatosJuego["graficos"]		= ImportarJuegoInfo->DatosJuego["graficos"]		;//graficos
+		TempDatosJuego["sonido"]		= ImportarJuegoInfo->DatosJuego["sonido"]		;//sonido
+		TempDatosJuego["jugabilidad"]	= ImportarJuegoInfo->DatosJuego["jugabilidad"]	;//jugabilidad
+		TempDatosJuego["original"]		= ImportarJuegoInfo->DatosJuego["original"]		;//original
+		TempDatosJuego["estado"]		= ImportarJuegoInfo->DatosJuego["estado"]		;//estado
+		TempDatosJuego["tipo_emu"]		= "scummvm"										;//tipo_emu
+		TempDatosJuego["comentario"]	= ImportarJuegoInfo->DatosJuego["comentario"]	;//comentario
+		TempDatosJuego["favorito"]		= ImportarJuegoInfo->DatosJuego["favorito"]		;//favorito
+
+		TempDatosJuego["thumbs"] = ImportarJuegoInfo->DatosJuego["thumbs"];
+		if( !file_thumbs.exists( TempDatosJuego["thumbs"] ) )
+			TempDatosJuego["thumbs"] = "";
+
+		TempDatosJuego["cover_front"] = ImportarJuegoInfo->DatosJuego["cover_front"];
+		if( !file_cover_front.exists( TempDatosJuego["cover_front"] ) )
+			TempDatosJuego["cover_front"] = "";
+
+		TempDatosJuego["cover_back"] = ImportarJuegoInfo->DatosJuego["cover_back"];
+		if( !file_cover_back.exists( TempDatosJuego["cover_back"] ) )
+			TempDatosJuego["cover_back"] = "";
+	}
+
+}
+
 void frmSvmAdd::on_btnOk()
 {
 	if( ui.txtDatos_Titulo->text().isEmpty() )
 		QMessageBox::information( this, stTituloSvm(), tr("Debes poner por lo menos el titulo."));
 	else {
 		DatosJuego.clear();
-		DatosJuego["icono"]			= "scummvm"		;//icono
-		DatosJuego["titulo"]		= ui.txtDatos_Titulo->text();//titulo
-		DatosJuego["subtitulo"]		= ""			;//subtitulo
-		DatosJuego["genero"]		= ""			;//genero
-		DatosJuego["compania"]		= ""			;//compania
-		DatosJuego["desarrollador"]	= ""			;//desarrollador
-		DatosJuego["tema"]			= ""			;//tema
-		DatosJuego["idioma"]		= ""			;//idioma
-		DatosJuego["formato"]		= ""			;//formato
-		DatosJuego["anno"]			= ""			;//anno
-		DatosJuego["numdisc"]		= ""			;//numdisc
-		DatosJuego["sistemaop"]		= ""			;//sistemaop
-		DatosJuego["tamano"]		= ""			;//tamano
-		DatosJuego["graficos"]		= "1"			;//graficos
-		DatosJuego["sonido"]		= "1"			;//sonido
-		DatosJuego["jugabilidad"]	= "1"			;//jugabilidad
-		DatosJuego["original"]		= "false"		;//original
-		DatosJuego["estado"]		= ""			;//estado
-		DatosJuego["thumbs"]		= ""			;//thumbs
-		DatosJuego["cover_front"]	= ""			;//cover_front
-		DatosJuego["cover_back"]	= ""			;//cover_back
-		DatosJuego["fecha"]			= fGrl.HoraFechaActual();//fecha d/m/a h:m:s
-		DatosJuego["tipo_emu"]		= "scummvm"		;//tipo_emu
-		DatosJuego["comentario"]	= ""			;//comentario
-		DatosJuego["favorito"]		= "false"		;//favorito
+		DatosJuego["icono"]			= "scummvm"							;//icono
+		DatosJuego["titulo"]		= ui.txtDatos_Titulo->text()		;//titulo
+		DatosJuego["subtitulo"]		= ""+TempDatosJuego["subtitulo"]	;//subtitulo
+		DatosJuego["genero"]		= ""+TempDatosJuego["genero"]		;//genero
+		DatosJuego["compania"]		= ""+TempDatosJuego["compania"]		;//compania
+		DatosJuego["desarrollador"]	= ""+TempDatosJuego["desarrollador"];//desarrollador
+		DatosJuego["tema"]			= ""+TempDatosJuego["tema"]			;//tema
+		DatosJuego["idioma"]		= ""+TempDatosJuego["idioma"]		;//idioma
+		DatosJuego["formato"]		= ""+TempDatosJuego["formato"]		;//formato
+		DatosJuego["anno"]			= ""+TempDatosJuego["anno"]			;//anno
+		DatosJuego["numdisc"]		= ""+TempDatosJuego["numdisc"]		;//numdisc
+		DatosJuego["sistemaop"]		= ""+TempDatosJuego["sistemaop"]	;//sistemaop
+		DatosJuego["tamano"]		= ""+TempDatosJuego["tamano"]		;//tamano
+		DatosJuego["graficos"]		= ""+TempDatosJuego["graficos"]		;//graficos
+		DatosJuego["sonido"]		= ""+TempDatosJuego["sonido"]		;//sonido
+		DatosJuego["jugabilidad"]	= ""+TempDatosJuego["jugabilidad"]	;//jugabilidad
+		DatosJuego["original"]		= ""+TempDatosJuego["original"]		;//original
+		DatosJuego["estado"]		= ""+TempDatosJuego["estado"]		;//estado
+		DatosJuego["thumbs"]		= ""+TempDatosJuego["thumbs"]		;//thumbs
+		DatosJuego["cover_front"]	= ""+TempDatosJuego["cover_front"]	;//cover_front
+		DatosJuego["cover_back"]	= ""+TempDatosJuego["cover_back"]	;//cover_back
+		DatosJuego["fecha"]			= fGrl.HoraFechaActual()			;//fecha d/m/a h:m:s
+		DatosJuego["tipo_emu"]		= "scummvm"							;//tipo_emu
+		DatosJuego["comentario"]	= ""+TempDatosJuego["comentario"]	;//comentario
+		DatosJuego["favorito"]		= ""+TempDatosJuego["favorito"]		;//favorito
 
 		QString tmp_language, tmp_platform, tmp_gfx_mode;
 		QStringList tmp_list;

@@ -51,6 +51,7 @@ private:
 	QString stHomeDir, stDatosDir, stTheme;
 	QStringList svm_Lista, svm_ListaTemp;
 	int intStepwizard;
+	QHash<QString, QString> TempDatosJuego;
 	QHash<QString, QString> UltimoPath;
 
 	void setTheme();
@@ -66,6 +67,8 @@ private slots:
 	void on_twScummVM_clicked( QTreeWidgetItem *item );
 	void on_twScummVM_Dblclicked( QTreeWidgetItem *item );
 	void on_twScummVM_currentItemChanged(QTreeWidgetItem *item1,QTreeWidgetItem *item2);
+	void on_btnDescargarInfo();
+
 };
 
 #endif // GRLIDA_SVMADD_H

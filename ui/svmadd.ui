@@ -386,7 +386,8 @@
    <string>Asistente del ScummVM</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/scummvm.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
   </property>
   <property name="autoFillBackground" >
    <bool>true</bool>
@@ -395,16 +396,7 @@
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -444,23 +436,19 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="page_1" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>450</width>
+        <height>293</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
-       <property name="leftMargin" >
+       <property name="margin" >
         <number>4</number>
        </property>
-       <property name="topMargin" >
-        <number>4</number>
-       </property>
-       <property name="rightMargin" >
-        <number>4</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>4</number>
-       </property>
-       <property name="horizontalSpacing" >
-        <number>6</number>
-       </property>
-       <property name="verticalSpacing" >
+       <property name="spacing" >
         <number>6</number>
        </property>
        <item row="0" column="0" >
@@ -507,6 +495,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>450</width>
+        <height>293</height>
+       </rect>
+      </property>
       <widget class="QPushButton" name="btnDirSvm_1" >
        <property name="geometry" >
         <rect>
@@ -520,7 +516,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnDirSvm_2" >
@@ -536,7 +533,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
        </property>
       </widget>
       <widget class="QLineEdit" name="txtDatos_Titulo" >
@@ -690,8 +688,33 @@
         <string>Mostras Subtitulo</string>
        </property>
       </widget>
+      <widget class="QPushButton" name="btnDescargarInfo" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>260</y>
+         <width>162</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Descargar la Info del Juego</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="page_3" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <widget class="QCheckBox" name="chkSvm_fullscreen" >
        <property name="geometry" >
         <rect>
@@ -742,7 +765,8 @@
          <string>Joystick 1</string>
         </property>
         <property name="icon" >
-         <iconset resource="../res/grlida.qrc" >:/img16/controller.png</iconset>
+         <iconset resource="../res/grlida.qrc" >
+          <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
         </property>
        </item>
        <item>
@@ -750,7 +774,8 @@
          <string>Joystick 2</string>
         </property>
         <property name="icon" >
-         <iconset resource="../res/grlida.qrc" >:/img16/controller.png</iconset>
+         <iconset resource="../res/grlida.qrc" >
+          <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
         </property>
        </item>
       </widget>
@@ -831,6 +856,14 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_4" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <widget class="QComboBox" name="cbxSvm_music_driver" >
        <property name="geometry" >
         <rect>
@@ -880,7 +913,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/actualizar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
        </property>
       </widget>
       <widget class="QSlider" name="h_SliderSvm_debuglevel" >
@@ -1181,23 +1215,19 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_5" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
-       <property name="leftMargin" >
+       <property name="margin" >
         <number>4</number>
        </property>
-       <property name="topMargin" >
-        <number>4</number>
-       </property>
-       <property name="rightMargin" >
-        <number>4</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>4</number>
-       </property>
-       <property name="horizontalSpacing" >
-        <number>6</number>
-       </property>
-       <property name="verticalSpacing" >
+       <property name="spacing" >
         <number>6</number>
        </property>
        <item row="0" column="0" >
@@ -1239,16 +1269,7 @@ Pulsa Aceptar para cerrar el Asistente
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>4</number>
-     </property>
-     <property name="topMargin" >
-      <number>4</number>
-     </property>
-     <property name="rightMargin" >
-      <number>4</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>4</number>
      </property>
      <item>
@@ -1269,7 +1290,8 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Cancelar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
@@ -1278,7 +1300,7 @@ Pulsa Aceptar para cerrar el Asistente
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>20</width>
          <height>20</height>
@@ -1307,7 +1329,8 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Atrás</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_atras.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/mp_rebobinar_atras.png</normaloff>:/img16/mp_rebobinar_atras.png</iconset>
        </property>
       </widget>
      </item>
@@ -1329,7 +1352,8 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Siguiente</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_adelante.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/mp_rebobinar_adelante.png</normaloff>:/img16/mp_rebobinar_adelante.png</iconset>
        </property>
       </widget>
      </item>
@@ -1354,7 +1378,8 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Aceptar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>

@@ -25,22 +25,14 @@
    <string>Asistente del DOSBox</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/dosbox.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -438,6 +430,14 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="page_1" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>450</width>
+        <height>293</height>
+       </rect>
+      </property>
       <widget class="QLineEdit" name="txtDbx_parametros_setup" >
        <property name="geometry" >
         <rect>
@@ -608,7 +608,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnDbx_ExeJuego" >
@@ -630,7 +631,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnDbx_ExeSetup" >
@@ -652,7 +654,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
        </property>
       </widget>
       <widget class="QLabel" name="lb_Dbx_2" >
@@ -676,7 +679,7 @@
         <rect>
          <x>10</x>
          <y>135</y>
-         <width>281</width>
+         <width>261</width>
          <height>16</height>
         </rect>
        </property>
@@ -710,8 +713,33 @@
         <string>Templates Profiles:</string>
        </property>
       </widget>
+      <widget class="QPushButton" name="btnDescargarInfo" >
+       <property name="geometry" >
+        <rect>
+         <x>270</x>
+         <y>134</y>
+         <width>162</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Descargar la Info del Juego</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="page_2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>450</width>
+        <height>293</height>
+       </rect>
+      </property>
       <widget class="QLabel" name="lb_Dbx_8" >
        <property name="geometry" >
         <rect>
@@ -880,6 +908,14 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_3" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <widget class="QComboBox" name="cbxDbx_dosbox_memsize" >
        <property name="geometry" >
         <rect>
@@ -1057,6 +1093,14 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_4" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <widget class="Line" name="line_4" >
        <property name="geometry" >
         <rect>
@@ -1557,6 +1601,14 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_5" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <widget class="QPushButton" name="btnMount_Add" >
        <property name="geometry" >
         <rect>
@@ -1570,7 +1622,8 @@
         <string>Añadir</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/nuevo.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnMount_Edit" >
@@ -1586,7 +1639,8 @@
         <string>Editar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/editar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/editar.png</normaloff>:/img16/editar.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnMount_Delete" >
@@ -1602,7 +1656,8 @@
         <string>Eliminar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/eliminar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/eliminar.png</normaloff>:/img16/eliminar.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnMount_AutoCrear" >
@@ -1618,7 +1673,8 @@
         <string>Autocrear Montaje</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/ejecutar_app.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/ejecutar_app.png</normaloff>:/img16/ejecutar_app.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnMount_Primario" >
@@ -1634,7 +1690,8 @@
         <string>Montaje primario</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnMount_Clear" >
@@ -1650,7 +1707,8 @@
         <string>Limpiar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnMount_Subir" >
@@ -1666,7 +1724,8 @@
         <string>Subir</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/go-up.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/go-up.png</normaloff>:/img16/go-up.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnMount_Bajar" >
@@ -1682,7 +1741,8 @@
         <string>Bajar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/go-down.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
        </property>
       </widget>
       <widget class="QSplitter" name="splitter" >
@@ -1773,23 +1833,19 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_6" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
-       <property name="leftMargin" >
+       <property name="margin" >
         <number>9</number>
        </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
-       <property name="horizontalSpacing" >
-        <number>6</number>
-       </property>
-       <property name="verticalSpacing" >
+       <property name="spacing" >
         <number>6</number>
        </property>
        <item row="0" column="0" >
@@ -1831,16 +1887,7 @@ Pulsa Aceptar para cerrar el Asistente
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>4</number>
-     </property>
-     <property name="topMargin" >
-      <number>4</number>
-     </property>
-     <property name="rightMargin" >
-      <number>4</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>4</number>
      </property>
      <item>
@@ -1861,7 +1908,8 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Cancelar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
@@ -1870,7 +1918,7 @@ Pulsa Aceptar para cerrar el Asistente
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>20</width>
          <height>20</height>
@@ -1899,7 +1947,8 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Atrás</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_atras.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/mp_rebobinar_atras.png</normaloff>:/img16/mp_rebobinar_atras.png</iconset>
        </property>
       </widget>
      </item>
@@ -1921,7 +1970,8 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Siguiente</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_adelante.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/mp_rebobinar_adelante.png</normaloff>:/img16/mp_rebobinar_adelante.png</iconset>
        </property>
       </widget>
      </item>
@@ -1946,13 +1996,18 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Aceptar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
     </layout>
    </item>
   </layout>
+  <zorder>imgLogoDbx</zorder>
+  <zorder>wizardDbx</zorder>
+  <zorder>line</zorder>
+  <zorder>btnDescargarInfo</zorder>
  </widget>
  <tabstops>
   <tabstop>txtDatos_Titulo</tabstop>

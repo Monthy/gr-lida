@@ -45,6 +45,7 @@ private:
 	Funciones fGrl;
 	QString stTituloVdms(){ return tr("Nuevo juego para el VDMSound"); }
 	QString stHomeDir, stConfgVdmSDir, stTheme;
+	QHash<QString, QString> TempDatosJuego;
 	QHash<QString, QString> UltimoPath;
 
 	void setTheme();
@@ -56,6 +57,8 @@ private slots:
 	void on_btnVdms_ExeJuego();
 	void on_btnVdms_Icono();
 	void on_txtDatos_Titulo_textChanged(const QString &);
+	void on_btnDescargarInfo();
+
 };
 
 #endif // GRLIDA_VDMSADD_H
