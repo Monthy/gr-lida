@@ -82,6 +82,17 @@ QString Funciones::ThemeGrl()
 	return theme;
 }
 
+QString Funciones::StyleSheet()
+{
+	QFile file( stTheme + "StyleSheet.qss" );
+	file.open( QIODevice::ReadOnly );
+	QString styleSheet = QLatin1String( file.readAll() );
+	styleSheet.replace("<theme>", stTheme);
+	file.close();
+
+	return styleSheet;
+}
+
 QString Funciones::get_Plataforma()
 {
 QString plataforma;

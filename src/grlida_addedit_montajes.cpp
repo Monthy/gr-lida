@@ -77,6 +77,8 @@ frmAddEditMontajes::~frmAddEditMontajes(){}
 
 void frmAddEditMontajes::setTheme()
 {
+	setStyleSheet( fGrl.StyleSheet() );
+
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnDirFile->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
@@ -134,7 +136,7 @@ void frmAddEditMontajes::on_DirFile()
 				UltimoPath["txtMontaje_path"] = fi.absolutePath()+"/";
 			} else {
 				lastdir.setValue("txtMontaje_path", "" );
-				UltimoPath["txtMontaje_path"] = "";	
+				UltimoPath["txtMontaje_path"] = "";
 			}
 		lastdir.endGroup();
 	}

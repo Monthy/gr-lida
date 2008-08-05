@@ -28,30 +28,31 @@ frmInfo::frmInfo(QWidget *parent)
     : QDialog(parent)
 {
 	ui.setupUi(this);
-	
+
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 
 	stTheme = fGrl.ThemeGrl();
+	setStyleSheet( fGrl.StyleSheet() );
 
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 
-	QSettings settings(stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
+	QSettings settings(stHomeDir + "GR-lida.conf", QSettings::IniFormat);
 	settings.beginGroup("SqlDatabase");
 	  stdb_host	   = settings.value("db_host"	 , stHomeDir + "db_grl.grl" ).toString();
 	settings.endGroup();
-	
+
 	QFileInfo fidb( stdb_host );
-	
-	ui.twInfo->header()->setStretchLastSection(true); 
+
+	ui.twInfo->header()->setStretchLastSection(true);
 	ui.twInfo->header()->setMovable(false);
 	ui.twInfo->header()->setResizeMode(QHeaderView::Interactive);
 	ui.twInfo->header()->resizeSection(0, 200 );
-	
+
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Versión")+ " GR-lida"	); //
 		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/grlida.png")	); //
-		ItemInfo->setText( 1 , fGrl.stVersionGrl() 			); //	
-	
+		ItemInfo->setText( 1 , fGrl.stVersionGrl() 			); //
+
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Versión")+ " QT"			); //
 		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/qt.png")		); //
@@ -81,12 +82,12 @@ frmInfo::frmInfo(QWidget *parent)
 		ItemInfo->setText( 0 , tr("Base de Datos")			); //
 		ItemInfo->setIcon( 0 ,QIcon(stTheme+"img16/basedatos.png")); //
 		ItemInfo->setText( 1 , fidb.fileName() 				); //
-	
+
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos")		) ; //
 		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/grlida.png")	); //
 		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl")) + " " + tr("juego/s") ) ; //
-		
+
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Total de Juegos Datos")) ; //
 		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/datos_1.png") ); //

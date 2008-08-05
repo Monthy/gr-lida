@@ -28,7 +28,7 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
 {
 	ui.setupUi(this);
-	
+
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 
 	stTheme = fGrl.ThemeGrl();
@@ -72,6 +72,8 @@ frmImportPath::~frmImportPath(){}
 
 void frmImportPath::setTheme()
 {
+	setStyleSheet( fGrl.StyleSheet() );
+
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 
@@ -133,7 +135,7 @@ void frmImportPath::CargaUltimosDirectorios()
 void frmImportPath::on_btnOk()
 {
 	QFile appConfg;
-	QString stExeJuego;	
+	QString stExeJuego;
 	bool siguiente = true;
 
 	if( ui.gBox_path_emu->isEnabled() )
@@ -166,7 +168,7 @@ void frmImportPath::on_btnOk()
 				} else
 					siguiente = true;
 			}
-		} else 
+		} else
 			siguiente = true;
 	}
 
@@ -189,7 +191,7 @@ void frmImportPath::on_btnDirPath_Datos_Thumbs()
 			UltimoPath["Img_Thumbs"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Img_Thumbs", "" );
-			UltimoPath["Img_Thumbs"] = "";	
+			UltimoPath["Img_Thumbs"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -207,7 +209,7 @@ void frmImportPath::on_btnDirPath_Datos_CoverFront()
 			UltimoPath["Img_CoverFront"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Img_CoverFront", "" );
-			UltimoPath["Img_CoverFront"] = "";	
+			UltimoPath["Img_CoverFront"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -225,7 +227,7 @@ void frmImportPath::on_btnDirPath_Datos_CoverBack()
 			UltimoPath["Img_CoverBack"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Img_CoverBack", "" );
-			UltimoPath["Img_CoverBack"] = "";	
+			UltimoPath["Img_CoverBack"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -257,7 +259,7 @@ void frmImportPath::on_btnOpenDbxFile_2()
 			UltimoPath["Dbx_path_exe"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Dbx_path_exe", "" );
-			UltimoPath["Dbx_path_exe"] = "";	
+			UltimoPath["Dbx_path_exe"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -275,7 +277,7 @@ void frmImportPath::on_btnOpenDbxFile_3()
 			UltimoPath["Dbx_path_setup"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Dbx_path_setup", "" );
-			UltimoPath["Dbx_path_setup"] = "";	
+			UltimoPath["Dbx_path_setup"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -293,7 +295,7 @@ void frmImportPath::on_btnOpenDbxFile_4()
 			UltimoPath["Dbx_dosbox_language"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Dbx_dosbox_language", "" );
-			UltimoPath["Dbx_dosbox_language"] = "";	
+			UltimoPath["Dbx_dosbox_language"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -311,7 +313,7 @@ void frmImportPath::on_btnOpenDbxFile_5()
 			UltimoPath["Dbx_sdl_mapperfile"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Dbx_sdl_mapperfile", "" );
-			UltimoPath["Dbx_sdl_mapperfile"] = "";	
+			UltimoPath["Dbx_sdl_mapperfile"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -384,7 +386,7 @@ void frmImportPath::on_btnOpenSvmFile3()
 			UltimoPath["Svm_path_setup"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Svm_path_setup", "" );
-			UltimoPath["Svm_path_setup"] = "";	
+			UltimoPath["Svm_path_setup"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -449,7 +451,7 @@ void frmImportPath::on_btnOpenVdmsFile_2()
 			UltimoPath["Vdms_path_exe"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("Vdms_path_exe", "" );
-			UltimoPath["Vdms_path_exe"] = "";	
+			UltimoPath["Vdms_path_exe"] = "";
 		}
 	lastdir.endGroup();
 }

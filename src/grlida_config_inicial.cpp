@@ -37,12 +37,13 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 	stHomeDir = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
 
 	stTheme = fGrl.ThemeGrl();
+	setStyleSheet( fGrl.StyleSheet() );
 
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnDirDbx->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDirSvm->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 
-	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
+	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
 	settings.beginGroup("OpcGeneral");
 		ui.chkConfig_DOSBoxDisp->setChecked( settings.value("DOSBoxDisp", "false").toBool() );
 		ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp", "false").toBool() );
@@ -108,7 +109,7 @@ void frmConfigInicial::closeEvent( QCloseEvent *e )
 }
 
 void frmConfigInicial::on_btnOk(){
-	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat ); 
+	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat );
 
 	QString stDirDbx, stDirSvm;
 	if(ui.chkConfig_DOSBoxDisp->isChecked())
@@ -149,7 +150,7 @@ void frmConfigInicial::on_btnDirDbx()
 			UltimoPath["DirDbx"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("DirDbx", "" );
-			UltimoPath["DirDbx"] = "";	
+			UltimoPath["DirDbx"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -167,7 +168,7 @@ void frmConfigInicial::on_btnDirSvm()
 			UltimoPath["DirSvm"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("DirSvm", "" );
-			UltimoPath["DirSvm"] = "";	
+			UltimoPath["DirSvm"] = "";
 		}
 	lastdir.endGroup();
 }

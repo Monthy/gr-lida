@@ -28,7 +28,7 @@
 #include <QtCore>
 #include <QtGui>
 
-class Funciones 
+class Funciones
 {
 public:
 	Funciones();
@@ -42,8 +42,9 @@ public:
 	QString stVersionVdms(){return "2.0.4"; }
 // Devuelve el directorio que usa el GR-lida
 	QString GRlidaHomePath();
-// 
+//
 	QString ThemeGrl();
+	QString StyleSheet();
 // Muestra el Nombre de la plataforma donde esta compilada
 	QString get_Plataforma();
 // Convierte de Número a Texto
@@ -61,7 +62,7 @@ public:
 	QString eliminar_caracteres(QString str);
 // Elimina un item de un TreeWidget
 	void DeleteItemTree( QTreeWidgetItem * item );
-//	
+//
 	void CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox);
 	void CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int num_col, bool idioma_svm);
 	void CargarIconosComboBox(QString IconDir, QComboBox *myCombobox, QStringList filters);

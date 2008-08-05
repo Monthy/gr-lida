@@ -103,6 +103,8 @@ frmDbxAdd::~frmDbxAdd(){}
 
 void frmDbxAdd::setTheme()
 {
+	setStyleSheet( fGrl.StyleSheet() );
+
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnPrevious->setIcon( QIcon(stTheme+"img16/mp_rebobinar_atras.png") );

@@ -42,11 +42,11 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	xml_ListaJuegos = stHomeDir + "tmp_lista_juegos.xml";
 	xml_InfoJuegos  = stHomeDir + "tmp_info_juego.xml";
-	
+
 	stTheme = fGrl.ThemeGrl();
 	setTheme();
-	
-	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
+
+	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat);
 	settings.beginGroup("OpcGeneral");
 		temp_url_xmldb = settings.value("url_xmldb", "http://laisladelabandoware.es/" ).toString(); // GR-lida
 		DirBaseGames   = settings.value("DirBaseGames", "").toString() ;
@@ -94,7 +94,7 @@ frmImportarJuego::frmImportarJuego(QDialog *parent, Qt::WFlags flags)
 	connect(httpdown, SIGNAL( StatusRequestFinished() ), this, SLOT( isRequestFinished() ) );
 	connect(httpdown, SIGNAL( statusLabelChanged(QString) ), ui.statusLabel, SLOT( setText(QString) ) );
 	connect(httpdown, SIGNAL( StatusBtnDownloadChanged(bool) ), ui.btnUpdateList, SLOT( setEnabled(bool) ) );
-	
+
 	ui.btnUpdateList->setDefault(true);
 	ui.wizardImport->setCurrentIndex(0);
 
@@ -116,6 +116,8 @@ frmImportarJuego::~frmImportarJuego()
 
 void frmImportarJuego::setTheme()
 {
+	setStyleSheet( fGrl.StyleSheet() );
+
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancelar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnPrevious->setIcon( QIcon(stTheme+"img16/mp_rebobinar_atras.png") );
@@ -209,7 +211,7 @@ void frmImportarJuego::on_btnNext()
 	{
 		siguiente = false;
 		QString tipo_file;
-		
+
 		tipo_file = ui.DirFileXML->text();
 
 		if( tipo_file.endsWith(".xml") )
@@ -259,7 +261,7 @@ void frmImportarJuego::on_btnOk()
 	img_thumbs.clear();
 	img_cover_front.clear();
 	img_cover_back.clear();
-	
+
 	if(DatosJuego["thumbs"]=="null" || DatosJuego["thumbs"].isEmpty() )
 	{
 		img_thumbs = "null";
@@ -535,7 +537,7 @@ void frmImportarJuego::parseListaJuegos(const QDomElement &element)
 					childItem->setIcon(0, QIcon(stTheme+"img24/emu_svm.png"));
 				else if(child.firstChildElement("tipo_emu").text()=="vdmsound")
 					childItem->setIcon(0, QIcon(stTheme+"img24/emu_vdms.png"));
-				else 
+				else
 					childItem->setIcon(0, QIcon(stTheme+"img24/emu_sin_imagen.png"));
 
 				childItem->setText(0, child.firstChildElement("titulo").text());
@@ -801,7 +803,7 @@ void frmImportarJuego::setProfile_DFend(QString fileName)
 	int i=0, num_mounts=0;
 
 	DatosDosBox.clear();
-	DatosDosBox = fGrl.Importar_Profile_DFend( fileName );	
+	DatosDosBox = fGrl.Importar_Profile_DFend( fileName );
 
 //	DatosDosBox["WWW"]
 //	DatosDosBox["UserInfo"]
@@ -919,7 +921,7 @@ void frmImportarJuego::MostrarDatosJuegoInfo()
 	ui.twDatosInfo->topLevelItem(21)->setText(1, DatosJuego["fecha"] );			// fecha d/m/a h:m:s
 	ui.twDatosInfo->topLevelItem(22)->setText(1, DatosJuego["tipo_emu"] );		// tipo_emu
 	ui.twDatosInfo->topLevelItem(23)->setText(1, DatosJuego["comentario"] );	// comentario
-	
+
 	QFile file_thumbs;	// thumbs
 	if( file_thumbs.exists(stHomeDir + "temp/thumbs_"+DatosJuego["thumbs"]) )
 		ui.lb_thumbs->setPixmap( QPixmap(stHomeDir + "temp/thumbs_"+DatosJuego["thumbs"]) );
@@ -972,7 +974,7 @@ void frmImportarJuego::on_treeWidget_clicked( QTreeWidgetItem *item)
 			} else
 				descarga_img = false;
 		}
-	
+
 		ui.textBrowser->clear();
 		texto_html.clear();
 		texto_html.append("<html>");

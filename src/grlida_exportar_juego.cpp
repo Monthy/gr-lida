@@ -33,18 +33,19 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
 	connect( ui.btnCheckedAll   , SIGNAL( clicked() ), this, SLOT( on_btnCheckedAll() ) );
 	connect( ui.btnUnCheckedAll , SIGNAL( clicked() ), this, SLOT( on_btnUnCheckedAll() ) );
 	connect( ui.btnDirExportPath, SIGNAL( clicked() ), this, SLOT( on_btnDirExportPath() ) );
-	
+
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stIconDir = stHomeDir + "iconos/";	// directorio de iconos para el GR-lida
 
 	stTheme = fGrl.ThemeGrl();
-	
-	QSettings lastdir( stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
+	setStyleSheet( fGrl.StyleSheet() );
+
+	QSettings lastdir( stHomeDir + "GR-lida.conf", QSettings::IniFormat);
 	UltimoPath.clear();
 	lastdir.beginGroup("UltimoDirectorio");
 		UltimoPath["DirExportPath"] = lastdir.value("DirExportPath", "").toString();
 	lastdir.endGroup();
-	
+
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancelar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnDirExportPath->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
@@ -189,13 +190,13 @@ void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By,
 			stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
 			if( stIcono.isEmpty() )
 				item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
-			else if( stIcono == "datos" ) 
+			else if( stIcono == "datos" )
 				item->setIcon( 0, QIcon(stTheme+"img24/emu_datos.png") );
 			else if( stIcono == "dosbox" )
 				item->setIcon( 0, QIcon(stTheme+"img24/emu_dbx.png") );
 			else if( stIcono == "scummvm" )
 				item->setIcon( 0, QIcon(stTheme+"img24/emu_svm.png") );
-			else if( stIcono == "vdmsound" ) 
+			else if( stIcono == "vdmsound" )
 				item->setIcon( 0, QIcon(stTheme+"img24/emu_vdms.png") );
 			else {
 				bool existeIcono;
@@ -212,7 +213,7 @@ void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By,
 
 void frmExportarJuego::CargarDatosExportar( QString stIDx )
 {
-	TempDatosJuego.clear();		
+	TempDatosJuego.clear();
 	TempDatosScummvm.clear();
 	TempDatosDosBox.clear();
 	if( !stIDx.isEmpty() )
@@ -225,7 +226,7 @@ void frmExportarJuego::CargarDatosExportar( QString stIDx )
 		{
 			TempDatosDosBox = sql->showConfg_DOSBox( stIDx );
 
-			twMontajes->clear();	
+			twMontajes->clear();
 
 			QSqlQuery query;
 			query.exec("SELECT * FROM dbgrl_emu_dosbox_mount WHERE id_dosbox="+stIDx+" ORDER BY id_lista");
@@ -233,7 +234,7 @@ void frmExportarJuego::CargarDatosExportar( QString stIDx )
 			{
 				do {
 					QTreeWidgetItem *item_mount = new QTreeWidgetItem( twMontajes );
-	
+
 					item_mount->setText( 0 , query.record().value("path").toString() );			// path			- directorio o iso
 					item_mount->setText( 1 , query.record().value("label").toString() );		// label		- etiqueta
 					item_mount->setText( 2 , query.record().value("tipo_as").toString() );		// tipo_as		- tipo de montaje
@@ -244,7 +245,7 @@ void frmExportarJuego::CargarDatosExportar( QString stIDx )
 					item_mount->setText( 7 , query.record().value("select_mount").toString());	// select_mount	- primer montaje
 					item_mount->setText( 8 , query.record().value("id").toString() );			// id
 					item_mount->setText( 9 , query.record().value("id_lista").toString() );		// id_lista		- id_lista
-	
+
 				} while (query.next());
 			}
 		}

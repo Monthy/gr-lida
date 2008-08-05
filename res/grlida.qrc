@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/" >
+        <file>StyleSheet.qss</file>
         <file>datos/companias.txt</file>
         <file>datos/dbx_cpu_core.txt</file>
         <file>datos/dbx_cycles.txt</file>

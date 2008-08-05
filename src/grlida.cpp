@@ -309,6 +309,8 @@ void GrLida::on_setFavorito()
 
 void GrLida::setTheme()
 {
+	setStyleSheet( fGrl.StyleSheet() );
+
 	lbpanel_1.setPixmap( QPixmap(stTheme+"img16/datos_3.png") );
 	lbpanel_3.setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
 	lbpanel_4.setPixmap( QPixmap(stTheme+"img16/datos_1.png") );

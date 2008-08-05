@@ -52,7 +52,7 @@ frmImportarJuegoInfo::frmImportarJuegoInfo(QDialog *parent, Qt::WFlags flags)
 	stTheme   = fGrl.ThemeGrl();
 	setTheme();
 
-	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat); 
+	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat);
 	settings.beginGroup("OpcGeneral");
 		temp_url_xmldb = settings.value("url_xmldb", "http://laisladelabandoware.es/" ).toString(); // GR-lida
 	settings.endGroup();
@@ -106,12 +106,14 @@ frmImportarJuegoInfo::~frmImportarJuegoInfo()
 
 void frmImportarJuegoInfo::setTheme()
 {
+	setStyleSheet( fGrl.StyleSheet() );
+
 	ui.btnBuscar->setIcon( QIcon(stTheme+"img16/edit_buscar.png") );
 	ui.btnAbortar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnVerInfo->setIcon( QIcon(stTheme+"img16/datos_2.png") );
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancelar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
-	
+
 	QFile LeerArchivo(stTheme+"tpl_juego_info.html");
 	if( LeerArchivo.open( QIODevice::ReadOnly | QIODevice::Text ) )
 	{
@@ -122,7 +124,7 @@ void frmImportarJuegoInfo::setTheme()
 	} else
 		str_html_old = "";
 
-	LeerArchivo.close();	
+	LeerArchivo.close();
 
 	// Reempla las Etiquetas
 	//str_html_old.replace("{dir_style_css}", "C:/eclipse/workspace/gr-lida/res/", Qt::CaseSensitive);
@@ -251,7 +253,7 @@ void frmImportarJuegoInfo::on_btnOk()
 		ImportPathNew->ui.txtDatosPath_CoverBack->setEnabled(true);
 		ImportPathNew->ui.btnDirPath_Datos_CoverBack->setEnabled(true);
 	}
-	
+
 	if( ImportPathNew->exec() == QDialog::Accepted )
 	{
 		DatosJuego["thumbs"]      = ImportPathNew->ui.txtDatosPath_Thumbs->text();		// thumbs
@@ -294,7 +296,7 @@ void frmImportarJuegoInfo::fetch()
 {
 	if( ui.cbxDbXml->currentText()!="")
 		url_xmldb = fGrl.url_correcta( ui.cbxDbXml->currentText() );
-	
+
 	ui.btnOk->setEnabled(false);
 	ui.btnVerInfo->setEnabled(false);
 	ui.cbxDbXml->setEnabled(false);
@@ -302,8 +304,8 @@ void frmImportarJuegoInfo::fetch()
 	ui.btnBuscar->setEnabled(false);
 	ui.btnAbortar->setEnabled(true);
 
-	ui.txtb_info->clear();	
-	DatosJuego.clear();	
+	ui.txtb_info->clear();
+	DatosJuego.clear();
 	ui.twListaJuegos->clear();
 	xml.clear();
 
@@ -332,7 +334,7 @@ void frmImportarJuegoInfo::finished(int id, bool error)
 	if(error)
 	{
 		qWarning("Received error during HTTP fetch.");
-		ui.cbxDbXml->setEnabled(true);		
+		ui.cbxDbXml->setEnabled(true);
 		ui.txtTituloBuscar->setReadOnly(false);
 		ui.btnAbortar->setEnabled(false);
 		ui.btnBuscar->setEnabled(true);
@@ -351,7 +353,7 @@ void frmImportarJuegoInfo::parseXml()
 	while ( !xml.atEnd() )
 	{
 		xml.readNext();
-		
+
 		if( xml.isStartElement() )
 		{
 			if( xml.name() == "juego")
@@ -375,7 +377,7 @@ void frmImportarJuegoInfo::parseXml()
 					str_Icon = stTheme+"img24/emu_svm.png";
 				else if( DatosJuego["icono"] == "vdmsound" )
 					str_Icon = stTheme+"img24/emu_vdms.png";
-				else 
+				else
 					str_Icon = stTheme+"img24/emu_sin_imagen.png";
 
 				DatosJuego["titulo"] = str_titulo;
@@ -420,11 +422,11 @@ void frmImportarJuegoInfo::parseXml()
 					item->setIcon(0, QIcon(stTheme+"img24/emu_svm.png") );
 				else if( DatosJuego["tipo_emu"] == "vdmsound" )
 					item->setIcon(0, QIcon(stTheme+"img24/emu_vdms.png") );
-				else 
+				else
 					item->setIcon(0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
 
 				DatosJuego["titulo"] = str_titulo;
-				
+
 				item->setText(0, DatosJuego["titulo"]      );
 				item->setText(1, str_id                    );
 				item->setText(2, DatosJuego["thumbs"]      );

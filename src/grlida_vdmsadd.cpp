@@ -57,6 +57,8 @@ frmVdmsAdd::~frmVdmsAdd(){}
 
 void frmVdmsAdd::setTheme()
 {
+	setStyleSheet( fGrl.StyleSheet() );
+
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnVdms_FileConfg->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );

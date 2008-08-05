@@ -49,7 +49,7 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 	ui.cmbStyle->addItem( "Default" );
 	ui.cmbStyle->addItems( QStyleFactory::keys() );
 
-	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
+	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
 	settings.beginGroup("OpcGeneral");
 		ui.chkConfig_DOSBoxDisp->setChecked(settings.value("DOSBoxDisp", "false").toBool() );
 		ui.btnDirDbx->setEnabled( settings.value("DOSBoxDisp", "false").toBool() );
@@ -109,7 +109,7 @@ frmOpciones::frmOpciones(QDialog *parent, Qt::WFlags flags)
 	ui.cmbIconFav->setCurrentIndex( ui.cmbIconFav->findText(stIconoFav, Qt::MatchContains) ); //
 
 	if(ui.chkConfig_IdiomaExterno->isChecked())
-		fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );	
+		fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );
 	else
 		fGrl.CargarIdiomasCombo( ":/idiomas/", ui.cbxIdioma );
 
@@ -172,6 +172,8 @@ void frmOpciones::CargarListaThemes()
 
 void frmOpciones::setTheme()
 {
+	setStyleSheet( fGrl.StyleSheet() );
+
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnDirDbx->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
@@ -243,7 +245,7 @@ void frmOpciones::on_changeTypeDB(const QString &typedb)
 
 void frmOpciones::on_btnOk()
 {
-	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat ); 
+	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat );
 
 	DatosConfiguracion.clear();
 	if(ui.chkConfig_DOSBoxDisp->isChecked())
@@ -272,7 +274,7 @@ void frmOpciones::on_btnOk()
 
 	if( stNameDirTheme == "defecto" || stNameDirTheme.isEmpty() )
 		DatosConfiguracion["NameDirTheme"] = ":/";
-	else		
+	else
 		DatosConfiguracion["NameDirTheme"] = stHomeDir+"themes/"+ stNameDirTheme +"/";
 
 	settings.beginGroup("OpcGeneral");
@@ -308,7 +310,7 @@ void frmOpciones::on_setLanguage(const QString txt_locale)
 {
 	QStringList parts = txt_locale.split(" - ");
 	QTranslator translator;
-	
+
 	if(ui.chkConfig_IdiomaExterno->isChecked())
 		translator.load( stHomeDir + "idiomas/gr-lida_" + parts.value(1)+".qm" );
 	else
@@ -333,7 +335,7 @@ void frmOpciones::on_btnDirDbx()
 			UltimoPath["DirDbx"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("DirDbx", "" );
-			UltimoPath["DirDbx"] = "";	
+			UltimoPath["DirDbx"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -351,7 +353,7 @@ void frmOpciones::on_btnDirSvm()
 			UltimoPath["DirSvm"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("DirSvm", "" );
-			UltimoPath["DirSvm"] = "";	
+			UltimoPath["DirSvm"] = "";
 		}
 	lastdir.endGroup();
 }
@@ -369,7 +371,7 @@ void frmOpciones::on_btnDirDB()
 			UltimoPath["DirBD"] = fi.absolutePath()+"/";
 		} else {
 			lastdir.setValue("DirBD", "" );
-			UltimoPath["DirBD"] = "";	
+			UltimoPath["DirBD"] = "";
 		}
 	lastdir.endGroup();
 }

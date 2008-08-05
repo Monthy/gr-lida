@@ -310,6 +310,8 @@ frmAddEditJuego::~frmAddEditJuego(){}
 
 void frmAddEditJuego::setTheme()
 {
+	setStyleSheet( fGrl.StyleSheet() );
+
 // General
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
