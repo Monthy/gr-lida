@@ -97,6 +97,7 @@
         <file>img16/fav_2.png</file>
         <file>img16/fav_3.png</file>
         <file>img16/fecha.png</file>
+        <file>img16/fit_to_win.png</file>
         <file>img16/floppy_1.png</file>
         <file>img16/floppy_2.png</file>
         <file>img16/floppy_3.png</file>
@@ -121,6 +122,7 @@
         <file>img16/img_supereagle.png</file>
         <file>img16/img_tv2x.png</file>
         <file>img16/importar.png</file>
+        <file>img16/imprimir.png</file>
         <file>img16/informacion.png</file>
         <file>img16/limpiar.png</file>
         <file>img16/linux.png</file>
@@ -154,6 +156,9 @@
         <file>img16/vdmsound.png</file>
         <file>img16/win9x.png</file>
         <file>img16/winxp.png</file>
+        <file>img16/zoom.png</file>
+        <file>img16/zoom_in.png</file>
+        <file>img16/zoom_out.png</file>
         <file>img24/emu_datos.png</file>
         <file>img24/emu_dbx.png</file>
         <file>img24/emu_sin_imagen.png</file>

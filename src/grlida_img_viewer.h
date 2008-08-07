@@ -28,6 +28,7 @@
 #include <QMainWindow>
 #include <QtGui>
 #include <QPrinter>
+#include "funciones.h"
 
 class QAction;
 class QLabel;
@@ -40,43 +41,51 @@ class ImageViewer : public QMainWindow
     Q_OBJECT
 
 public:
-    ImageViewer(QWidget *parent = 0, Qt::WFlags flags = 0);
-    ~ImageViewer();
+	ImageViewer(QWidget *parent = 0, Qt::WFlags flags = 0);
+	~ImageViewer();
+
+protected:
+	void closeEvent( QCloseEvent *e );
 
 private slots:
-    void open();
-    void print();
-    void zoomIn();
-    void zoomOut();
-    void normalSize();
-    void fitToWindow();
+	void open();
+	void print();
+	void zoomIn();
+	void zoomOut();
+	void normalSize();
+	void fitToWindow();
 
 public slots:
-    void open(QString fileName);
+	void open(QString fileName);
 
 private:
-    void createActions();
-    void createMenus();
-    void updateActions();
-    void scaleImage(double factor);
-    void adjustScrollBar(QScrollBar *scrollBar, double factor);
- 
-    QLabel *imageLabel;
-    QScrollArea *scrollArea;
-    double scaleFactor;
+	Funciones fGrl;
 
-    QPrinter printer;
+	void createActions();
+	void createMenus();
+	void createToolBars();
+	void updateActions();
+	void scaleImage(double factor);
+	void adjustScrollBar(QScrollBar *scrollBar, double factor);
 
-    QAction *openAct;
-    QAction *printAct;
-    QAction *exitAct;
-    QAction *zoomInAct;
-    QAction *zoomOutAct;
-    QAction *normalSizeAct;
-    QAction *fitToWindowAct;
+	QString stHomeDir, stTheme;
+	QLabel *imageLabel;
+	QScrollArea *scrollArea;
+	double scaleFactor;
 
-    QMenu *fileMenu;
-    QMenu *viewMenu;
+	QPrinter printer;
+
+	QAction *openAct;
+	QAction *printAct;
+	QAction *exitAct;
+	QAction *zoomInAct;
+	QAction *zoomOutAct;
+	QAction *normalSizeAct;
+	QAction *fitToWindowAct;
+
+	QMenu *fileMenu;
+	QMenu *viewMenu;
+	QToolBar *imgToolBar;
 };
 
 #endif
