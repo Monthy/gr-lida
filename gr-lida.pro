@@ -55,6 +55,7 @@ HEADERS += src/grlida_img_viewer.h \
     src/grlida_opciones.h \
     src/grlida_svmadd.h \
     src/grlida_vdmsadd.h \
+	src/stardelegate.h \
     src/httpdownload.h
 
 SOURCES += src/grlida_img_viewer.cpp \
@@ -76,6 +77,7 @@ SOURCES += src/grlida_img_viewer.cpp \
     src/grlida_svmadd.cpp \
     src/grlida_vdmsadd.cpp \
     src/httpdownload.cpp \
+	src/stardelegate.cpp \
     src/main.cpp
 
 FORMS += ui/login_url.ui \
