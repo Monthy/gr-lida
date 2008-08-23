@@ -38,6 +38,8 @@
         <file>images/juego_eliminado.png</file>
         <file>images/juego_sin_imagen.png</file>
         <file>images/splash.png</file>
+        <file>images/star_off.png</file>
+        <file>images/star_on.png</file>
         <file>images/wizard_dosbox.png</file>
         <file>images/wizard_scummvm.png</file>
         <file>images/wizard_vdmsound.png</file>
