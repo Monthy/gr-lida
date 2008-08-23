@@ -49,9 +49,11 @@ HttpDownload::HttpDownload(QWidget *parent)
 
 HttpDownload::~HttpDownload()
 {
+/*
 	delete progressDialog;
 	delete http;
 	delete file;
+*/
 }
 
 void HttpDownload::setHttpProxy( const QString host, int port, const QString username, const QString password)
@@ -101,8 +103,8 @@ void HttpDownload::downloadFile(QString urlfile, QString fileName)
 		http->setUser(url.userName(), url.password());
 
 	httpRequestAborted = false;
-//	httpGetId = http->get(url.path(), file);
-	httpGetId = http->get(urlLineEdit, file);
+//	httpGetId = http->get(urlLineEdit, file);
+	httpGetId = http->get(url.toEncoded(), file);
 
 	progressDialog->setWindowTitle( m_httpwindowtitle );
 	progressDialog->setLabelText( tr("Descargando %1.").arg( fileName ) );
