@@ -32,6 +32,7 @@ frmImportarJuegoInfo::frmImportarJuegoInfo(QDialog *parent, Qt::WFlags flags)
 
 	connect( ui.btnOk        , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 	connect( ui.btnVerInfo   , SIGNAL( clicked() ), this, SLOT( on_btnVerInfo() ) );
+	connect( ui.twListaJuegos, SIGNAL( itemClicked( QTreeWidgetItem*, int)), this, SLOT( on_treeWidget_clicked(QTreeWidgetItem*)));
 	connect( ui.twListaJuegos, SIGNAL( currentItemChanged( QTreeWidgetItem *, QTreeWidgetItem *) ), SLOT( on_treeWidget_currentItemChanged( QTreeWidgetItem *, QTreeWidgetItem *) ) );
 	connect( ui.twListaJuegos, SIGNAL( itemActivated(QTreeWidgetItem*, int) ), this, SLOT( itemActivated(QTreeWidgetItem*) ) );
 	connect( ui.cbxDbXml     , SIGNAL( activated(const QString &)), this, SLOT( on_changeURL_XML(const QString &)));
@@ -160,9 +161,10 @@ void frmImportarJuegoInfo::on_changeURL_XML(const QString &url)
 
 void frmImportarJuegoInfo::isRequestFinished()
 {
-	QUrl url( url_xmldb );
+//	QUrl url( url_xmldb );
+	QUrl url( url_xmldb + "grlidadb.php?ver=juego&gid="+ui.twListaJuegos->currentItem()->text(1)+"&id_emu="+ui.twListaJuegos->currentItem()->text(5)+"&tipo_emu="+ui.twListaJuegos->currentItem()->text(6) );
 	http.setHost( url.host() );
-	connectionId = http.get( url_xmldb + "grlidadb.php?ver=juego&gid="+ui.twListaJuegos->currentItem()->text(1)+"&id_emu="+ui.twListaJuegos->currentItem()->text(5)+"&tipo_emu="+ui.twListaJuegos->currentItem()->text(6) );
+	connectionId = http.get( url.toEncoded() );
 }
 
 void frmImportarJuegoInfo::on_btnVerInfo()
@@ -186,9 +188,10 @@ void frmImportarJuegoInfo::on_btnVerInfo()
 		url_filed = url_xmldb + "images/covers/small/"+ ui.twListaJuegos->currentItem()->text(2);
 		httpdown->downloadFile( url_filed , stHomeDir + "temp/thumbs_"+ ui.twListaJuegos->currentItem()->text(2) );
 	} else {
-		QUrl url( url_xmldb );
+		//QUrl url( url_xmldb );
+		QUrl url( url_xmldb + "grlidadb.php?ver=juego&gid="+ui.twListaJuegos->currentItem()->text(1)+"&id_emu="+ui.twListaJuegos->currentItem()->text(5)+"&tipo_emu="+ui.twListaJuegos->currentItem()->text(6) );
 		http.setHost( url.host() );
-		connectionId = http.get( url_xmldb + "grlidadb.php?ver=juego&gid="+ui.twListaJuegos->currentItem()->text(1)+"&id_emu="+ui.twListaJuegos->currentItem()->text(5)+"&tipo_emu="+ui.twListaJuegos->currentItem()->text(6) );
+		connectionId = http.get( url.toEncoded() );
 	}
 }
 
@@ -310,13 +313,13 @@ void frmImportarJuegoInfo::fetch()
 	xml.clear();
 
 	QUrl url( url_xmldb + "grlidadb.php?ver=lista" );
-
 	http.setHost( url.host() );
-
 	if( ui.txtTituloBuscar->text() != "" )
-		connectionId = http.get( url_xmldb + "grlidadb.php?ver=lista&titulo="+ui.txtTituloBuscar->text() );
-	else
-		connectionId = http.get( url_xmldb + "grlidadb.php?ver=lista" );
+	{
+		url.setUrl( url_xmldb + "grlidadb.php?ver=lista&titulo="+ui.txtTituloBuscar->text() );
+		connectionId = http.get( url.toEncoded() );
+	} else
+		connectionId = http.get( url.toEncoded() );
 }
 
 void frmImportarJuegoInfo::readData(const QHttpResponseHeader &resp)
@@ -520,17 +523,32 @@ void frmImportarJuegoInfo::on_treeWidget_currentItemChanged(QTreeWidgetItem *ite
 	} else
 		return;
 }
+void frmImportarJuegoInfo::on_treeWidget_clicked(QTreeWidgetItem *item)
+{
+	if( item )
+	{
+		ui.btnOk->setEnabled(false);
+		ui.btnVerInfo->setEnabled(true);
+		//ui.btnVerInfo->click();
+	}
+}
 
 void frmImportarJuegoInfo::on_treeWidget_Dblclicked(QTreeWidgetItem *item)
 {
-	ui.btnOk->setEnabled(false);
-	ui.btnVerInfo->setEnabled(true);
-	ui.btnVerInfo->click();
+	if( item )
+	{
+		ui.btnOk->setEnabled(false);
+		ui.btnVerInfo->setEnabled(true);
+		ui.btnVerInfo->click();
+	}
 }
 
 void frmImportarJuegoInfo::itemActivated(QTreeWidgetItem * item)
 {
-	ui.btnOk->setEnabled(false);
-	ui.btnVerInfo->setEnabled(true);
-	ui.btnVerInfo->click();
+	if( item )
+	{
+		ui.btnOk->setEnabled(false);
+		ui.btnVerInfo->setEnabled(true);
+		ui.btnVerInfo->click();
+	}
 }

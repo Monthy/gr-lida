@@ -67,9 +67,10 @@ private slots:
 	void fetch();
 	void finished(int id, bool error);
 	void readData(const QHttpResponseHeader &);
+	void on_treeWidget_clicked(QTreeWidgetItem *item);
 	void on_treeWidget_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2);
 	void on_treeWidget_Dblclicked(QTreeWidgetItem *item);
-	void itemActivated(QTreeWidgetItem * item);	
+	void itemActivated(QTreeWidgetItem * item);
 	void on_changeURL_XML(const QString &url);
 	void isRequestFinished();
 
