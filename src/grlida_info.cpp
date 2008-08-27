@@ -30,8 +30,8 @@ frmInfo::frmInfo(QWidget *parent)
 	ui.setupUi(this);
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
+	stTheme   = fGrl.ThemeGrl();
 
-	stTheme = fGrl.ThemeGrl();
 	setStyleSheet( fGrl.StyleSheet() );
 
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
@@ -43,6 +43,8 @@ frmInfo::frmInfo(QWidget *parent)
 
 	QFileInfo fidb( stdb_host );
 
+	ui.twInfo->headerItem()->setText(0,"");
+	ui.twInfo->headerItem()->setText(1,"");
 	ui.twInfo->header()->setStretchLastSection(true);
 	ui.twInfo->header()->setMovable(false);
 	ui.twInfo->header()->setResizeMode(QHeaderView::Interactive);
@@ -80,7 +82,7 @@ frmInfo::frmInfo(QWidget *parent)
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
 		ItemInfo->setText( 0 , tr("Base de Datos")			); //
-		ItemInfo->setIcon( 0 ,QIcon(stTheme+"img16/basedatos.png")); //
+		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/basedatos.png")); //
 		ItemInfo->setText( 1 , fidb.fileName() 				); //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
@@ -116,4 +118,7 @@ frmInfo::frmInfo(QWidget *parent)
 	setGeometry( left, top, width(), height() );
 }
 
-frmInfo::~frmInfo(){}
+frmInfo::~frmInfo()
+{
+
+}

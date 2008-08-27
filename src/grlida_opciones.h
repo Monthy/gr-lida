@@ -29,6 +29,7 @@
 #include <QtGui>
 #include <QTranslator>
 #include <QLocale>
+
 #include "funciones.h"
 #include "ui_opciones.h"
 
@@ -42,14 +43,23 @@ public:
 
 	QHash<QString, QString> DatosConfiguracion;
 
+protected:
+	void closeEvent( QCloseEvent *e );
+
 private:
 	Funciones fGrl;
-	QString stHomeDir, IdiomaSelect, url_xmldb, stStyleSelect, stdb_type, stIconoFav, stTheme, stNameDirTheme;
+	QString stHomeDir, url_xmldb;
+	QString stIdiomaSelect, stTheme, stIconoFav, stPicFlowReflection, stNameDirTheme, stStyleSelect;
+	QString stdb_type;
 	QPalette originalPalette;
 	QHash<QString, QString> UltimoPath;
+
+	void createConnections();
+	void CargarConfig();
+	void GuardarConfig();
 	void setTheme();
-	void changePalette();
 	void CargarListaThemes();
+	void changePalette();
 
 private slots:
 	void on_btnOk();

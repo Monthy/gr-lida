@@ -31,71 +31,10 @@ Funciones::Funciones()
 
 Funciones::~Funciones(){}
 
-QString Funciones::GRlidaHomePath()
-{
-
-	QFile appConfg;
-	QString stDirApp, stConfgCurrentPath;
-	stDirApp.clear();
-	stConfgCurrentPath.clear();
-	stConfgCurrentPath = QDir::currentPath()+"/GR-lida.conf";
-
-	if( appConfg.exists( stConfgCurrentPath ) )
-	{
-		QSettings settings( stConfgCurrentPath, QSettings::IniFormat );
-		settings.beginGroup("OpcGeneral");
-			stDirApp = settings.value("DirApp", "HomePath").toString().toLower();
-		settings.endGroup();
-	} else
-		stDirApp = "homepath";
-
-	if( stDirApp == "currentpath" )
-		return QDir::currentPath()+"/";
-	else if( stDirApp == "homepath" )
-		return QDir::homePath()+"/.gr-lida/";
-	else
-		return QDir::homePath()+"/.gr-lida/";
-
-//	return QDir::homePath()+"/.gr-lida/";
-}
-
-QString Funciones::ThemeGrl()
-{
-	QString stDirApp, stNameDirTheme, theme;
-	QDir ThemeDir;
-
-	stDirApp = GRlidaHomePath();
-
-	QSettings settings( stDirApp + "/GR-lida.conf", QSettings::IniFormat );
-	settings.beginGroup("OpcGeneral");
-		stNameDirTheme = settings.value("NameDirTheme", "defecto").toString();
-	settings.endGroup();
-
-	if( stNameDirTheme == "defecto" || stNameDirTheme.isEmpty() )
-		theme = ":/";
-	else {
-		if( ThemeDir.exists(stDirApp+"themes/"+ stNameDirTheme +"/") )
-			theme = stDirApp+"themes/"+ stNameDirTheme +"/";
-		else
-			theme = ":/";
-	}
-	return theme;
-}
-
-QString Funciones::StyleSheet()
-{
-	QFile file( stTheme + "StyleSheet.qss" );
-	file.open( QIODevice::ReadOnly );
-	QString styleSheet = QLatin1String( file.readAll() );
-	styleSheet.replace("<theme>", stTheme);
-	file.close();
-
-	return styleSheet;
-}
-
+// Muestra el Nombre de la plataforma donde esta compilada
 QString Funciones::get_Plataforma()
 {
-QString plataforma;
+	QString plataforma;
 	#ifdef Q_OS_WIN32
 		plataforma = "Windows";
 	#endif
@@ -142,14 +81,14 @@ QString plataforma;
 	return plataforma;
 }
 
-// Convierte de Nmero a Texto
+// Convierte de Número a Texto
 QString	Funciones::IntToStr(int num)
 {
 	QString temp;
 	return temp.setNum(num);
 }
 
-// Convierte de Texto a Nmero
+// Convierte de Texto a Número
 int Funciones::StrToInt(QString text)
 {
 	return text.toInt();
@@ -165,6 +104,7 @@ bool Funciones::StrToBool(QString text)
 		return false;
 }
 
+// Convierte Bool a Texto "true", "yes" indicando el tipo
 QString Funciones::BoolToStr(bool estado, bool type_yes)
 {
 	if(estado)
@@ -177,14 +117,18 @@ QString Funciones::BoolToStr(bool estado, bool type_yes)
 	}
 }
 
-// Devuelve la hora y la fecha
-QString Funciones::HoraFechaActual()
+// Devuelve la hora y la fecha actual
+QString Funciones::HoraFechaActual(QString hora)
 {
-	QDateTime dt;
-	dt = QDateTime::currentDateTime();
-	return dt.toString("dd/MM/yyyy HH:mm:ss");
+	QDateTime dt = QDateTime::currentDateTime();
+
+	if( hora.isEmpty() )
+		return dt.toString("dd/MM/yyyy HH:mm:ss");
+	else
+		return dt.toString( hora );
 }
 
+// Devuelve una URL correcta
 QString Funciones::url_correcta(QString url)
 {
 	bool url_ok,  s_url_ok;
@@ -200,10 +144,10 @@ QString Funciones::url_correcta(QString url)
 		url_ok = url.endsWith("/");
 		if(url_ok==false) url.append("/");
 	}
-
 	return url;
 }
 
+// Elimina caracteres no permitidos por windows por ejemplo
 QString Funciones::eliminar_caracteres(QString str)
 {
 	str.replace(" ", "_");
@@ -220,7 +164,149 @@ QString Funciones::eliminar_caracteres(QString str)
 	return str;
 }
 
-void Funciones::DeleteItemTree( QTreeWidgetItem * item )
+//QIcon myIcon  = getIconList( query.value( rec.indexOf("icono") ).toString() );
+
+QString Funciones::getIconListaJuegos(QString strIcon, QString strIconDir)
+{
+	strIconDir = GRlidaHomePath()+"iconos/";
+
+	if( strIcon.isEmpty() || strIcon == "" )
+		return stTheme+"img24/emu_sin_imagen.png";
+	else if( strIcon == "datos" )
+		return stTheme+"img24/emu_datos.png";
+	else if( strIcon == "dosbox" )
+		return stTheme+"img24/emu_dbx.png";
+	else if( strIcon == "scummvm" )
+		return stTheme+"img24/emu_svm.png";
+	else if( strIcon == "vdmsound" )
+		return stTheme+"img24/emu_vdms.png";
+	else {
+		bool existeIcono = QFile::exists(strIconDir + strIcon);
+		if( existeIcono )
+			return strIconDir + strIcon;
+		else
+			return stTheme+"img24/emu_sin_imagen.png";
+	}
+}
+
+QString Funciones::getIconMount(QString tipoDrive, QString select_mount)
+{
+	if(tipoDrive=="drive")
+		return stTheme+"img16/"+select_mount+"drive_hd.png";
+	if(tipoDrive=="cdrom")
+		return stTheme+"img16/"+select_mount+"drive_cdrom.png";
+	if(tipoDrive=="floppy")
+		return stTheme+"img16/"+select_mount+"drive_floppy.png";
+	if(tipoDrive=="IMG_floppy")
+		return stTheme+"img16/"+select_mount+"floppy_1.png";
+	if(tipoDrive=="IMG_iso")
+		return stTheme+"img16/"+select_mount+"cd_iso.png";
+	if(tipoDrive=="IMG_hdd")
+		return stTheme+"img16/"+select_mount+"drive_hd.png";
+
+	return "";
+}
+
+// Devuelve el directorio que usa el GR-lida
+QString Funciones::GRlidaHomePath()
+{
+
+	QFile appConfg;
+	QString stDirApp, stConfgCurrentPath;
+	stDirApp.clear();
+	stConfgCurrentPath.clear();
+	stConfgCurrentPath = QDir::currentPath()+"/GR-lida.conf";
+
+	if( appConfg.exists( stConfgCurrentPath ) )
+	{
+		QSettings settings( stConfgCurrentPath, QSettings::IniFormat );
+		settings.beginGroup("OpcGeneral");
+			stDirApp = settings.value("DirApp", "HomePath").toString().toLower();
+		settings.endGroup();
+	} else
+		stDirApp = "homepath";
+
+	if( stDirApp == "currentpath" )
+		return QDir::currentPath()+"/";
+	else if( stDirApp == "homepath" )
+		return QDir::homePath()+"/.gr-lida/";
+	else
+		return QDir::homePath()+"/.gr-lida/";
+}
+
+// Devuelve el directorio del Theme a usar
+QString Funciones::ThemeGrl()
+{
+	QString stDirApp, stNameDirTheme, theme;
+	QDir ThemeDir;
+
+	stDirApp = GRlidaHomePath();
+
+	QSettings settings( stDirApp+"/GR-lida.conf", QSettings::IniFormat );
+	settings.beginGroup("OpcGeneral");
+		stNameDirTheme = settings.value("NameDirTheme", "defecto").toString();
+	settings.endGroup();
+
+	if( stNameDirTheme == "defecto" || stNameDirTheme.isEmpty() )
+		theme = ":/";
+	else {
+		if( ThemeDir.exists(stDirApp+"themes/"+ stNameDirTheme +"/") )
+			theme = stDirApp+"themes/"+ stNameDirTheme +"/";
+		else
+			theme = ":/";
+	}
+	return theme;
+}
+
+// Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use
+QString Funciones::StyleSheet()
+{
+	QFile file( stTheme + "StyleSheet.qss" );
+	file.open( QIODevice::ReadOnly );
+	QString styleSheet = QLatin1String( file.readAll() );
+	styleSheet.replace("<theme>", stTheme);
+	file.close();
+
+	return styleSheet;
+}
+
+// Obtiene la dirección y el nombre del archivo atraves de QFileDialog
+QString Funciones::VentanaAbrirArchivos(const QString caption, const QString dir, const QString tmp_dir, const QString filter, QString *selectedFilter, bool Open_Save)
+{
+	QString archivo, base;
+	QFileInfo fi;
+
+	fi.setFile( dir );
+	if( fi.exists() )
+		base = dir;
+	else
+		base = GRlidaHomePath();
+
+	if(Open_Save== true)
+		archivo = QFileDialog::getSaveFileName(0, caption, base, filter, selectedFilter);
+	else
+		archivo = QFileDialog::getOpenFileName(0, caption, base, filter, selectedFilter);
+
+	if(!archivo.isEmpty())
+		return archivo;
+	else
+		return tmp_dir;
+}
+
+// Obtiene la dirección de una carpeta atraves de QFileDialog
+QString Funciones::VentanaDirectorios(const QString caption, const QString dir, const QString tmp_dir)
+{
+	QString directorio;
+	directorio = QFileDialog::getExistingDirectory(0, caption, dir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
+
+	if(!directorio.isEmpty())
+		return directorio;
+	else
+		return tmp_dir;
+}
+
+// Elimina un item de un TreeWidget
+void Funciones::DeleteItemTree(QTreeWidgetItem * item)
 {
 	if(!item) return;
 	for(int i=item->childCount()-1; i>=0; i--)
@@ -230,6 +316,7 @@ void Funciones::DeleteItemTree( QTreeWidgetItem * item )
 	delete item;
 }
 
+// Carga la lista de Idiomas en un QComboBox
 void Funciones::CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox)
 {
 	QString tmp_locale;
@@ -253,6 +340,7 @@ void Funciones::CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox)
 	}
 }
 
+// Carga una lista de datos en un QComboBox
 void Funciones::CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int num_col, bool idioma_svm)
 {
 	QStringList cbx_Lista, cbx_ListaTemp;
@@ -296,6 +384,7 @@ void Funciones::CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int n
 	file.close();
 }
 
+// Carga Iconos e imagenes soportadas en un QComboBox de un directorio
 void Funciones::CargarIconosComboBox(QString IconDir, QComboBox *myCombobox, QStringList filters)
 {
 	QDir dir( IconDir );
@@ -316,6 +405,7 @@ void Funciones::CargarIconosComboBox(QString IconDir, QComboBox *myCombobox, QSt
 	}
 }
 
+// Carga la lista del ScummVM en un QTreeWidget
 void Funciones::CargarDatosListaSvm(QString Archivo, QTreeWidget *myTreeWidget)
 {
 // Abrimos la lista de compatibilidad del ScummVM y rellenamos el twScummVM
@@ -353,7 +443,32 @@ void Funciones::CargarDatosListaSvm(QString Archivo, QTreeWidget *myTreeWidget)
 	file.close();
 }
 
-//Carga los Smiles en un TreeWidget
+//Carga la lista de los Smiles y los devuelve en un QHash<QString, QString>
+QHash<QString, QString> Funciones::Cargar_Smiles(QString Archivo)
+{
+	QFile file( Archivo );
+	QStringList smiles_Lista, smiles_ListaTemp;
+	QHash<QString, QString> listSmailes;
+
+	listSmailes.clear();
+	if( file.open(QIODevice::ReadOnly)!=0 )
+	{
+		QTextStream in(&file);
+		in.setCodec("UTF-8");
+
+		while ( !in.atEnd() )
+			smiles_ListaTemp << in.readLine();
+
+		for ( int i = 0; i < smiles_ListaTemp.size(); i++ )
+		{
+			smiles_Lista = smiles_ListaTemp[i].split( "\",\"" );
+			listSmailes.insert( smiles_Lista.value(0), smiles_Lista.value(1) );
+		}
+	}
+	return listSmailes;
+}
+
+//Carga la lista de los Smiles en un TreeWidget y los devuelve en un QHash<QString, QString>
 QHash<QString, QString> Funciones::Cargar_Smiles(QString Archivo, QTreeWidget *myTreeWidget)
 {
 	QFile file( Archivo );
@@ -383,32 +498,18 @@ QHash<QString, QString> Funciones::Cargar_Smiles(QString Archivo, QTreeWidget *m
 	return listSmailes;
 }
 
-//Carga los Smiles en un QHash<QString, QString>
-QHash<QString, QString> Funciones::Cargar_Smiles(QString Archivo)
+// Remplaza texto por las imagenes de los emoticones
+QString Funciones::ReemplazaTextoSmiles(QString str, QHash<QString, QString> lista)
 {
-	QFile file( Archivo );
-	QStringList smiles_Lista, smiles_ListaTemp;
-	QHash<QString, QString> listSmailes;
+	QHash<QString, QString>::const_iterator i_Hash;
 
-	listSmailes.clear();
-	if( file.open(QIODevice::ReadOnly)!=0 )
-	{
-		QTextStream in(&file);
-		in.setCodec("UTF-8");
+	for (i_Hash = lista.constBegin(); i_Hash != lista.constEnd(); ++i_Hash)
+		str.replace( i_Hash.key(), "<img src=\""+i_Hash.value()+"\" />");
 
-		while ( !in.atEnd() )
-			smiles_ListaTemp << in.readLine();
-
-		for ( int i = 0; i < smiles_ListaTemp.size(); i++ )
-		{
-			smiles_Lista = smiles_ListaTemp[i].split( "\",\"" );
-			listSmailes.insert( smiles_Lista.value(0), smiles_Lista.value(1) );
-		}
-	}
-	return listSmailes;
+	return str;
 }
 
-//
+// Carga los Distintos datos para Ordenar
 QStringList Funciones::CargaDatosListas(QString Archivo, QString delimitador)
 {
 	QFile file( Archivo );
@@ -434,91 +535,538 @@ QStringList Funciones::CargaDatosListas(QString Archivo, QString delimitador)
 	return listaDatos;
 }
 
-// Remplaza texto por las imagenes de los emoticones
-QString Funciones::ReemplazaTextoSmiles(QString str, QHash<QString, QString> lista)
-{
-	QHash<QString, QString>::const_iterator i_Hash;
-
-	for (i_Hash = lista.constBegin(); i_Hash != lista.constEnd(); ++i_Hash)
-		str.replace( i_Hash.key(), "<img src=\""+i_Hash.value()+"\" />");
-
-	return str;
-}
-
-QString Funciones::VentanaAbrirArchivos(const QString caption, const QString dir, const QString tmp_dir, const QString filter, QString *selectedFilter, bool Open_Save)
-{
-	QString archivo, base;
-	QFileInfo fi;
-
-	fi.setFile( dir );
-	if( fi.exists() )
-		base = dir;
-	else
-		base = GRlidaHomePath();
-
-	if(Open_Save== true)
-		archivo = QFileDialog::getSaveFileName(0, caption, base, filter, selectedFilter);
-	else
-		archivo = QFileDialog::getOpenFileName(0, caption, base, filter, selectedFilter);
-
-	if(!archivo.isEmpty())
-		return archivo;
-	else
-		return tmp_dir;
-}
-
-QString Funciones::VentanaDirectorios(const QString caption, const QString dir, const QString tmp_dir)
-{
-	QString directorio;
-	directorio = QFileDialog::getExistingDirectory(0, caption, dir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
-
-	if(!directorio.isEmpty())
-		return directorio;
-	else
-		return tmp_dir;
-}
-
+// Crea la configuración del ScummVM
 void Funciones::CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm)
 {
-	QSettings settings( dirIni, QSettings::IniFormat );
+	QSettings settings(dirIni, QSettings::IniFormat);
 	settings.clear();
 	settings.beginGroup( conf_Svm["game"] );
-		settings.setValue("description"		, conf_Svm["description"]	); //
-		settings.setValue("gameid"			, conf_Svm["game"]			); // monkey
-		settings.setValue("language"		, conf_Svm["language"]		); // es
-		settings.setValue("subtitles"		, conf_Svm["subtitles"]		); // true
-		settings.setValue("platform"		, conf_Svm["platform"]		); // pc
-		settings.setValue("gfx_mode"		, conf_Svm["gfx_mode"]		); // 2x
-		settings.setValue("render_mode"		, conf_Svm["render_mode"]	); // hercGreen
-		settings.setValue("fullscreen"		, conf_Svm["fullscreen"]	); // true
-		settings.setValue("aspect_ratio"	, conf_Svm["aspect_ratio"]	); // true
-		settings.setValue("path"			, conf_Svm["path"]			);
-		settings.setValue("extrapath"		, conf_Svm["path_extra"]	);
-		settings.setValue("savepath"		, conf_Svm["path_save"]		);
-		settings.setValue("music_driver"	, conf_Svm["music_driver"]	); // adlib
-		settings.setValue("enable_gs"		, conf_Svm["enable_gs"]		); // true
-		settings.setValue("multi_midi"		, conf_Svm["multi_midi"]	); // true
-		settings.setValue("native_mt32"		, conf_Svm["native_mt32"]	); // true
-		settings.setValue("master_volume"	, conf_Svm["master_volume"]	); // 192
-		settings.setValue("music_volume"	, conf_Svm["music_volume"]	); // 192
-		settings.setValue("sfx_volume"		, conf_Svm["sfx_volume"]	); // 192
-		settings.setValue("speech_volume"	, conf_Svm["speech_volume"]	); // 192
-		settings.setValue("tempo"			, conf_Svm["tempo"]			); // 0
-		settings.setValue("talkspeed"		, conf_Svm["talkspeed"]		); // 107
-		settings.setValue("cdrom"			, conf_Svm["cdrom"]			); // 0
-		settings.setValue("joystick_num"	, conf_Svm["joystick_num"]	); // -1
-		settings.setValue("output_rate"		, conf_Svm["output_rate"]	); // 44100
-		settings.setValue("midi_gain"		, conf_Svm["midi_gain"]		); // 257
-		settings.setValue("copy_protection"	, conf_Svm["copy_protection"]);// false
-		settings.setValue("soundfont"		, conf_Svm["sound_font"]	);
+		settings.setValue("description"    , conf_Svm["description"]    );
+		settings.setValue("gameid"         , conf_Svm["game"]           ); // monkey
+		settings.setValue("language"       , conf_Svm["language"]       ); // es
+		settings.setValue("subtitles"      , conf_Svm["subtitles"]      ); // true
+		settings.setValue("platform"       , conf_Svm["platform"]       ); // pc
+		settings.setValue("gfx_mode"       , conf_Svm["gfx_mode"]       ); // 2x
+		settings.setValue("render_mode"    , conf_Svm["render_mode"]    ); // hercGreen
+		settings.setValue("fullscreen"     , conf_Svm["fullscreen"]     ); // true
+		settings.setValue("aspect_ratio"   , conf_Svm["aspect_ratio"]   ); // true
+		settings.setValue("path"           , conf_Svm["path"]           );
+		settings.setValue("extrapath"      , conf_Svm["path_extra"]     );
+		settings.setValue("savepath"       , conf_Svm["path_save"]      );
+		settings.setValue("music_driver"   , conf_Svm["music_driver"]   ); // adlib
+		settings.setValue("enable_gs"      , conf_Svm["enable_gs"]      ); // true
+		settings.setValue("multi_midi"     , conf_Svm["multi_midi"]     ); // true
+		settings.setValue("native_mt32"    , conf_Svm["native_mt32"]    ); // true
+		settings.setValue("master_volume"  , conf_Svm["master_volume"]  ); // 192
+		settings.setValue("music_volume"   , conf_Svm["music_volume"]   ); // 192
+		settings.setValue("sfx_volume"     , conf_Svm["sfx_volume"]     ); // 192
+		settings.setValue("speech_volume"  , conf_Svm["speech_volume"]  ); // 192
+		settings.setValue("tempo"          , conf_Svm["tempo"]          ); // 0
+		settings.setValue("talkspeed"      , conf_Svm["talkspeed"]      ); // 107
+		settings.setValue("cdrom"          , conf_Svm["cdrom"]          ); // 0
+		settings.setValue("joystick_num"   , conf_Svm["joystick_num"]   ); // -1
+		settings.setValue("output_rate"    , conf_Svm["output_rate"]    ); // 44100
+		settings.setValue("midi_gain"      , conf_Svm["midi_gain"]      ); // 257
+		settings.setValue("copy_protection", conf_Svm["copy_protection"]);// false
+		settings.setValue("soundfont"      , conf_Svm["sound_font"]     );
 	settings.endGroup();
 	settings.beginGroup("scummvm");
-		settings.setValue("gui_theme","modern");
-		settings.setValue("gfx_mode","2x");
-		settings.setValue("fullscreen","false");
+		settings.setValue("gui_theme" ,"modern");
+		settings.setValue("gfx_mode"  ,"2x"    );
+		settings.setValue("fullscreen","false" );
 	settings.endGroup();
 }
 
+// Funcion para Poner nombres cortos en DOS.
+// Estado: Beta
+QString Funciones::getShortPathName(QString longPath)
+{
+	QString str, shortPath;
+	QStringList list, listshortPath;
+
+	list = longPath.split("\\");
+
+	for ( int i = 0; i < list.size(); i++ )
+	{
+		str = list.value(i);
+
+		if( str.length() > 8 )
+			listshortPath << str.replace(" ","").left(6).append("~1");
+		else
+			listshortPath << str;
+	}
+
+	shortPath = listshortPath.join("\\");
+
+	return shortPath;
+}
+
+// Crea la configuración de los Montajes para el DOSBox
+QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash<QString, QString> datos)
+{
+	QString NombreEXEDbx, DirEXEDbx, chkDbx_loadfix, chkDbx_cerrardbx;
+	QString mount_letra_primario, mount_dir_primario, mount_dir, montaje_boot;
+	QString mount_type, mount_drive, mount_letter, mount_label, mount_Options, mount_IOCtrl;
+	int num_mount = 0;
+	bool montaje_IMG = false;
+	bool mount_Boot = false;
+	QStringList listmontajes;
+	QFileInfo fi( datos["path_exe"] );
+
+	NombreEXEDbx = fi.fileName();		// Nombre del ejecutable
+	DirEXEDbx    = QDir::toNativeSeparators( datos["path_exe"] );	// Directorio donde esta
+	DirEXEDbx.replace("/","\\");
+	DirEXEDbx.remove( NombreEXEDbx, Qt::CaseInsensitive );
+
+// loadfix
+	if( datos["opt_loadfix"] == "true" && datos["opt_loadfix_mem"] != "" )
+		chkDbx_loadfix = "loadfix -" + datos["opt_loadfix_mem"] + " " + NombreEXEDbx + " " + datos["parametros_exe"];
+	else
+		chkDbx_loadfix = NombreEXEDbx + " " + datos["parametros_exe"];
+// Cerrar DOSBox
+	if( datos["opt_cerrar_dbox"]=="true" )
+		chkDbx_cerrardbx = "exit";
+	else
+		chkDbx_cerrardbx = "";
+
+// Montajes
+	listmontajes.clear();
+	for ( num_mount = 0; num_mount < myTreeWidget->topLevelItemCount(); num_mount++ )
+	{
+		QTreeWidgetItem *item = myTreeWidget->topLevelItem( num_mount );
+	// Indicamos el directorio y la letra a montar
+		mount_drive  = QDir::toNativeSeparators( item->text(0) ); // Real Drive or Directory or Image ISO, IMA
+		mount_letter = item->text(3); // Emulated Drive letter
+	// Situa el montaje primario independiente de donde este colocado
+		if( item->text(7) == "v")
+		{
+			mount_letra_primario = mount_letter;
+			mount_dir_primario   = mount_drive;
+		} else {
+			mount_letra_primario = myTreeWidget->topLevelItem(0)->text(3);
+			mount_dir_primario   = QDir::toNativeSeparators( myTreeWidget->topLevelItem(0)->text(0) );
+		}
+		mount_dir_primario.replace("/","\\");
+
+	//Montando las unidades
+		if( item->text(2) != "boot")
+		{
+			mount_Boot = false;
+			if( item->text(2) == "floppy")
+			{
+				montaje_IMG = false;
+				mount_type = " -t floppy";
+			}
+			if( item->text(2) == "drive" )
+			{
+				montaje_IMG = false;
+				mount_type = " ";
+			}
+			if( item->text(2) == "cdrom" )
+			{
+				montaje_IMG  = false;
+				mount_type  = " -t cdrom";
+				mount_IOCtrl = " " + item->text(6);
+				if( item->text(5) != "" )
+					mount_Options = " " + item->text(5);
+				else
+					mount_Options = " ";
+			} else
+				mount_IOCtrl= " ";
+		// Montando imagenes de Discos, disquetes y CDs
+			if( item->text(2) == "IMG_floppy")
+			{
+				montaje_IMG = true;
+				mount_type = " -t floppy";
+			}
+			if( item->text(2) == "IMG_hdd")
+			{
+				montaje_IMG = true;
+				mount_type = " -t hdd";
+			}
+			if( item->text(2) == "IMG_iso")
+			{
+				montaje_IMG = true;
+				mount_type = " -t iso";
+			}
+		// Etiqueta de las unidades.
+			if( item->text(1) != "" )
+				mount_label = " -label " + item->text(1);
+			else
+				mount_label = "";
+
+			if( montaje_IMG == true )
+				listmontajes << "imgmount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_label;
+			else
+				listmontajes << "mount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_Options + mount_IOCtrl + mount_label;
+		} else {
+			mount_Boot = true;
+			montaje_boot = "boot \"" + mount_drive + "\"";
+		}
+	}
+	mount_dir = DirEXEDbx;
+	mount_dir.remove(mount_dir_primario, Qt::CaseInsensitive);
+
+	if(mount_Boot == false)
+	{
+		listmontajes << mount_letra_primario + ":";
+		listmontajes << "cd " + getShortPathName( mount_dir );
+		listmontajes << chkDbx_loadfix;
+		listmontajes << chkDbx_cerrardbx;
+	} else {
+		listmontajes << mount_letra_primario + ":";
+		listmontajes << montaje_boot;
+		listmontajes << chkDbx_cerrardbx;
+	}
+	return listmontajes;
+}
+
+// Crea el archivo de configuración del DOSBox
+void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg, bool ExportToDFend)
+{
+	QFile file_out( PathSaveConfg );
+	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
+	{
+		QTextStream out(&file_out);
+		out.setCodec("UTF-8");
+
+		if( ExportToDFend )
+		{
+			out << "[Extra]" << endl;
+			out << "Exe=" << datosDbx["path_exe"] << endl;
+			//out << "Environment=" << datosDbx[""] << endl;
+			//out << "Tab=" << datosDbx[""] << endl;
+			//out << "Tab2=" << datosDbx[""] << endl;
+			out << "Loadhigh=" << datosDbx["opt_loadfix"] << endl;
+			out << "CloseOnExit=" << datosDbx["opt_cerrar_dbox"] << endl;
+			//out << "AutoMountCDs=" << datosDbx[""] << endl;
+			//out << "Overridegamestart=" << datosDbx[""] << endl;
+			//out << "OverrideMount=" << datosDbx[""] << endl;
+			//out << "LoadFixVal=" << datosDbx["opt_loadfix_mem"] << endl;
+			//out << "ExeMD5=" << datosDbx[""] << endl;
+			out << "Setup=" << datosDbx["path_setup"] << endl;
+			//out << "SetupMD5=" << datosDbx[""] << endl;
+			out << "GameParameters=" << datosDbx["parametros_exe"] << endl;
+			out << "SetupParameters=" << datosDbx["parametros_setup"] << endl;
+			//out << "ExtraDirs=" << datosDbx[""] << endl;
+			//out << "LastModification=" << datosDbx[""] << endl;
+			//out << "DataDir=" << datosDbx[""] << endl;
+			out << "NrOfMounts=" << treeWidget->topLevelItemCount() << endl;
+			for(int num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
+			{
+				QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
+				out << num_mount << "=" << item->text(0) << ";" << item->text(2) << ";" << item->text(3) << ";" << item->text(6) << endl;
+			}
+			out << "autoexec=" << datosDbx["autoexec"] << endl << endl;
+			//out << "BootImage=" << datosDbx[""] << endl;
+			//out << "Finalization=" << datosDbx[""] << endl;
+			//out << "CustomSettings=" << datosDbx[""] << endl;
+
+			QString stNotes;
+			stNotes.clear();
+			stNotes = datos["comentario"];
+			stNotes.replace("<br/>\n","[13][10]").replace("<br/>","[13]").replace("\n","[13]");
+
+			out << "[ExtraInfo]" << endl;
+			out << "Genre=" << datos["genero"] << endl;
+			out << "Developer=" << datos["desarrollador"] << endl;
+			out << "Publisher=" << datos["compania"] << endl;
+			out << "Year=" << datos["anno"] << endl;
+			out << "Language=" << datos["idioma"] << endl;
+			//out << "UserInfo=" << datos[""] << endl;
+			out << "Favorite=" << datos["favorito"] << endl;
+			out << "Name=" << datos["titulo"] << endl;
+			out << "Icon=" << datos["icono"] << endl;
+			out << "Notes=" << stNotes << endl << endl;
+			//out << "WWW=" << datosDbx[""] << endl;
+		}
+
+		out << "# This is the configurationfile for DOSBox 0.72." << endl;
+		out << "# Lines starting with a # are commentlines." << endl;
+		out << "# They are used to (briefly) document the effect of each option." << endl << endl;
+
+		out << "[sdl]" << endl;
+		out << "# fullscreen -- Start dosbox directly in fullscreen." << endl;
+		out << "# fulldouble -- Use double buffering in fullscreen." << endl;
+		out << "# fullresolution -- What resolution to use for fullscreen: original or fixed size (e.g. 1024x768)." << endl;
+		out << "# windowresolution -- Scale the window to this size IF the output device supports hardware scaling." << endl;
+		out << "# output -- What to use for output: surface,overlay,opengl,openglnb,ddraw." << endl;
+		out << "# autolock -- Mouse will automatically lock, if you click on the screen." << endl;
+		out << "# sensitiviy -- Mouse sensitivity." << endl;
+		out << "# waitonerror -- Wait before closing the console if dosbox has an error." << endl;
+		out << "# priority -- Priority levels for dosbox: lowest,lower,normal,higher,highest,pause (when not focussed)." << endl;
+		out << "#             Second entry behind the comma is for when dosbox is not focused/minimized." << endl;
+		out << "# mapperfile -- File used to load/save the key/event mappings from." << endl;
+		out << "# usescancodes -- Avoid usage of symkeys, might not work on all operating systems." << endl << endl;
+
+		out << "fullscreen=" << datosDbx["sdl_fullscreen"] << endl;
+		out << "fulldouble=" << datosDbx["sdl_fulldouble"] << endl;
+		out << "fullfixed=" << datosDbx["sdl_fullfixed"] << endl; // DOSBox 0.63
+		out << "fullresolution=" << datosDbx["sdl_fullresolution"] << endl;
+		out << "windowresolution=" << datosDbx["sdl_windowresolution"] << endl;
+		out << "output=" << datosDbx["sdl_output"] << endl;
+		out << "hwscale=" << datosDbx["sdl_hwscale"] << endl; // DOSBox 0.63
+		out << "autolock=" << datosDbx["sdl_autolock"] << endl;
+		out << "sensitivity=" << datosDbx["sdl_sensitivity"] << endl;
+		out << "waitonerror=" << datosDbx["sdl_waitonerror"] << endl;
+		out << "priority=" << datosDbx["sdl_priority"] << endl;
+		out << "mapperfile=" << datosDbx["sdl_mapperfile"] << endl;
+		out << "usescancodes=" << datosDbx["sdl_usescancodes"] << endl << endl;
+
+		out << "[dosbox]" << endl;
+		out << "# language -- Select another language file." << endl;
+		out << "# memsize -- Amount of memory DOSBox has in megabytes." << endl;
+		out << "# machine -- The type of machine tries to emulate:hercules,cga,tandy,pcjr,vga." << endl;
+		out << "# captures -- Directory where things like wave,midi,screenshot get captured." << endl << endl;
+
+		if( !datosDbx["dosbox_language"].isEmpty() || datosDbx["dosbox_language"]!=" ")
+		out << "language=" << datosDbx["dosbox_language"] << endl;
+		out << "machine=" << datosDbx["dosbox_machine"] << endl;
+		out << "captures=" << datosDbx["dosbox_captures"] << endl;
+		out << "memsize=" << datosDbx["dosbox_memsize"] << endl << endl;
+
+		out << "[render]" << endl;
+		out << "# frameskip -- How many frames DOSBox skips before drawing one." << endl;
+		out << "# aspect -- Do aspect correction, if your output method doesn't support scaling this can slow things down!." << endl;
+		out << "# scaler -- Scaler used to enlarge/enhance low resolution modes." << endl;
+		out << "#           Supported are none,normal2x,normal3x,advmame2x,advmame3x,hq2x,hq3x," << endl;
+		out << "#                         2xsai,super2xsai,supereagle,advinterp2x,advinterp3x," << endl;
+		out << "#                         tv2x,tv3x,rgb2x,rgb3x,scan2x,scan3x." << endl;
+		out << "#           If forced is appended (like scaler=hq2x forced), the scaler will be used" << endl;
+		out << "#           even if the result might not be desired." << endl << endl;
+
+		out << "frameskip=" << datosDbx["render_frameskip"] << endl;
+		out << "aspect=" << datosDbx["render_aspect"] << endl;
+		out << "scaler=" << datosDbx["render_scaler"] << endl << endl;
+
+		out << "[cpu]" << endl;
+		out << "# core -- CPU Core used in emulation: normal,simple,dynamic,auto." << endl;
+		out << "#         auto switches from normal to dynamic if appropriate." << endl;
+		out << "# cycles -- Amount of instructions DOSBox tries to emulate each millisecond." << endl;
+		out << "#           Setting this value too high results in sound dropouts and lags." << endl;
+		out << "#           You can also let DOSBox guess the correct value by setting it to max." << endl;
+		out << "#           The default setting (auto) switches to max if appropriate." << endl;
+		out << "# cycleup   -- Amount of cycles to increase/decrease with keycombo." << endl;
+		out << "# cycledown    Setting it lower than 100 will be a percentage." << endl << endl;
+
+		out << "core=" << datosDbx["cpu_core"] << endl;
+		out << "cycles=" << datosDbx["cpu_cycles"] << endl;
+		out << "cycleup=" << datosDbx["cpu_cycleup"] << endl;
+		out << "cycledown=" << datosDbx["cpu_cycledown"] << endl << endl;
+
+		out << "[mixer]" << endl;
+		out << "# nosound -- Enable silent mode, sound is still emulated though." << endl;
+		out << "# rate -- Mixer sample rate, setting any devices higher than this will" << endl;
+		out << "#         probably lower their sound quality." << endl;
+		out << "# blocksize -- Mixer block size, larger blocks might help sound stuttering" << endl;
+		out << "#              but sound will also be more lagged." << endl;
+		out << "# prebuffer -- How many milliseconds of data to keep on top of the blocksize." << endl << endl;
+
+		out << "nosound=" << datosDbx["mixer_nosound"] << endl;
+		out << "rate=" << datosDbx["mixer_rate"] << endl;
+		out << "blocksize=" << datosDbx["mixer_blocksize"] << endl;
+		out << "prebuffer=" << datosDbx["mixer_prebuffer"] << endl << endl;
+
+		out << "[midi]" << endl;
+		out << "# mpu401      -- Type of MPU-401 to emulate: none, uart or intelligent." << endl;
+		out << "# device      -- Device that will receive the MIDI data from MPU-401." << endl;
+		out << "#                This can be default,alsa,oss,win32,coreaudio,none." << endl;
+		out << "# config      -- Special configuration options for the device. In Windows put" << endl;
+		out << "#                the id of the device you want to use. See README for details." << endl << endl;
+
+		out << "mpu401=" << datosDbx["midi_mpu401"] << endl;
+		out << "intelligent=" << datosDbx["midi_intelligent"] << endl; // DOSBox 0.63
+		out << "device=" << datosDbx["midi_device"] << endl;
+		out << "config=" << datosDbx["midi_config"] << endl;
+		out << "mt32rate=" << datosDbx["midi_mt32rate"] << endl << endl; // DOSBox 0.63
+
+		out << "[sblaster]" << endl;
+		out << "# sbtype -- Type of sblaster to emulate:none,sb1,sb2,sbpro1,sbpro2,sb16." << endl;
+		out << "# sbbase,irq,dma,hdma -- The IO/IRQ/DMA/High DMA address of the soundblaster." << endl;
+		out << "# mixer -- Allow the soundblaster mixer to modify the DOSBox mixer." << endl;
+		out << "# oplmode -- Type of OPL emulation: auto,cms,opl2,dualopl2,opl3." << endl;
+		out << "#            On auto the mode is determined by sblaster type." << endl;
+		out << "#            All OPL modes are 'Adlib', except for CMS." << endl;
+		out << "# oplrate -- Sample rate of OPL music emulation." << endl << endl;
+
+		out << "sbtype=" << datosDbx["sblaster_sbtype"] << endl;
+		out << "sbbase=" << datosDbx["sblaster_sbbase"] << endl;
+		out << "irq=" << datosDbx["sblaster_irq"] << endl;
+		out << "dma=" << datosDbx["sblaster_dma"] << endl;
+		out << "hdma=" << datosDbx["sblaster_hdma"] << endl;
+		out << "mixer=" << datosDbx["sblaster_mixer"] << endl;
+		out << "oplmode=" << datosDbx["sblaster_oplmode"] << endl;
+		out << "oplrate=" << datosDbx["sblaster_oplrate"] << endl << endl;
+
+		out << "[gus]" << endl;
+		out << "# gus -- Enable the Gravis Ultrasound emulation." << endl;
+		out << "# gusbase,irq1,irq2,dma1,dma2 -- The IO/IRQ/DMA addresses of the" << endl;
+		out << "#            Gravis Ultrasound. (Same IRQ's and DMA's are OK.)" << endl;
+		out << "# gusrate -- Sample rate of Ultrasound emulation." << endl;
+		out << "# ultradir -- Path to Ultrasound directory.  In this directory" << endl;
+		out << "#             there should be a MIDI directory that contains" << endl;
+		out << "#             the patch files for GUS playback.  Patch sets used" << endl;
+		out << "#             with Timidity should work fine." << endl << endl;
+
+		out << "gus=" << datosDbx["gus_gus"] << endl;
+		out << "gusrate=" << datosDbx["gus_gusrate"] << endl;
+		out << "gusbase=" << datosDbx["gus_gusbase"] << endl;
+		out << "irq1=" << datosDbx["gus_irq1"] << endl;
+		out << "irq2=" << datosDbx["gus_irq2"] << endl;
+		out << "dma1=" << datosDbx["gus_dma1"] << endl;
+		out << "dma2=" << datosDbx["gus_dma2"] << endl;
+		out << "ultradir=" << datosDbx["gus_ultradir"] << endl << endl;
+
+		out << "[speaker]" << endl;
+		out << "# pcspeaker -- Enable PC-Speaker emulation." << endl;
+		out << "# pcrate -- Sample rate of the PC-Speaker sound generation." << endl;
+		out << "# tandy -- Enable Tandy Sound System emulation (off,on,auto)." << endl;
+		out << "#          For auto Tandysound emulation is present only if machine is set to tandy." << endl;
+		out << "# tandyrate -- Sample rate of the Tandy 3-Voice generation." << endl;
+		out << "# disney -- Enable Disney Sound Source emulation. Covox Voice Master and Speech Thing compatible." << endl << endl;
+
+		out << "pcspeaker=" << datosDbx["speaker_pcspeaker"] << endl;
+		out << "pcrate=" << datosDbx["speaker_pcrate"] << endl;
+		out << "tandy=" << datosDbx["speaker_tandy"] << endl;
+		out << "tandyrate=" << datosDbx["speaker_tandyrate"] << endl;
+		out << "disney=" << datosDbx["speaker_disney"] << endl << endl;
+
+		out << "[joystick]" << endl;
+		out << "# joysticktype -- Type of joystick to emulate: auto (default), none," << endl;
+		out << "#                 2axis (supports two joysticks," << endl;
+		out << "#                 4axis (supports one joystick, first joystick used)," << endl;
+		out << "#                 4axis_2 (supports one joystick, second joystick used)," << endl;
+		out << "#                 fcs (Thrustmaster), ch (CH Flightstick)." << endl;
+		out << "#                 none disables joystick emulation." << endl;
+		out << "#                 auto chooses emulation depending on real joystick(s)." << endl;
+		out << "# timed -- enable timed intervals for axis. (false is old style behaviour)." << endl;
+		out << "# autofire -- continuously fires as long as you keep the button pressed." << endl;
+		out << "# swap34 -- swap the 3rd and the 4th axis. can be useful for certain joysticks." << endl;
+		out << "# buttonwrap -- enable button wrapping at the number of emulated buttons." << endl << endl;
+
+		out << "joysticktype=" << datosDbx["joystick_type"] << endl;
+		out << "timed=" << datosDbx["joystick_timed"] << endl;
+		out << "autofire=" << datosDbx["joystick_autofire"] << endl;
+		out << "swap34=" << datosDbx["joystick_swap34"] << endl;
+		out << "buttonwrap=" << datosDbx["joystick_buttonwrap"] << endl << endl;
+
+		out << "[modem]" << endl; // DOSBox 0.63
+		out << "modem=" << datosDbx["modem_modem"] << endl;
+		out << "comport=" << datosDbx["modem_comport"] << endl;
+		out << "listenport=" << datosDbx["modem_listenport"] << endl << endl;
+
+		out << "[directserial]" << endl; // DOSBox 0.63
+		out << "directserial=" << datosDbx["dserial_directserial"] << endl;
+		out << "comport=" << datosDbx["dserial_comport"] << endl;
+		out << "realport=" << datosDbx["dserial_realport"] << endl;
+		out << "defaultbps=" << datosDbx["dserial_defaultbps"] << endl;
+		out << "parity=" << datosDbx["dserial_parity"] << endl;
+		out << "bytesize=" << datosDbx["dserial_bytesize"] << endl;
+		out << "stopbit=" << datosDbx["dserial_stopbit"] << endl << endl;
+
+		out << "[serial]" << endl;
+		out << "# serial1-4 -- set type of device connected to com port." << endl;
+		out << "#              Can be disabled, dummy, modem, nullmodem, directserial." << endl;
+		out << "#              Additional parameters must be in the same line in the form of" << endl;
+		out << "#              parameter:value. Parameter for all types is irq." << endl;
+		out << "#              for directserial: realport (required), rxdelay (optional)." << endl;
+		out << "#              for modem: listenport (optional)." << endl;
+		out << "#              for nullmodem: server, rxdelay, txdelay, telnet, usedtr," << endl;
+		out << "#                             transparent, port, inhsocket (all optional)." << endl;
+		out << "#              Example: serial1=modem listenport:5000" << endl << endl;
+
+		out << "serial1=" << datosDbx["serial_1"] << endl;
+		out << "serial2=" << datosDbx["serial_2"] << endl;
+		out << "serial3=" << datosDbx["serial_3"] << endl;
+		out << "serial4=" << datosDbx["serial_4"] << endl << endl;
+
+		out << "[dos]" << endl;
+		out << "# xms -- Enable XMS support." << endl;
+		out << "# ems -- Enable EMS support." << endl;
+		out << "# umb -- Enable UMB support." << endl;
+		out << "# keyboardlayout -- Language code of the keyboard layout (or none)." << endl << endl;
+
+		out << "xms=" << datosDbx["dos_xms"] << endl;
+		out << "ems=" << datosDbx["dos_ems"] << endl;
+		out << "umb=" << datosDbx["dos_umb"] << endl;
+		out << "keyboardlayout=" << datosDbx["dos_keyboardlayout"] << endl << endl;
+
+		out << "[ipx]" << endl;
+		out << "# ipx -- Enable ipx over UDP/IP emulation." << endl << endl;
+
+		out << "ipx=" << datosDbx["ipx_ipx"] << endl << endl;
+
+		if( !ExportToDFend )
+		{
+			out << "[autoexec]" << endl;
+			out << "# Lines in this section will be run at startup." << endl << endl;
+
+			if( datosDbx["opt_autoexec"] == "true" )
+				out << datosDbx["autoexec"] << endl;
+			else {
+				// Creando el Autoexec
+				QStringList listamontaje;
+				QHash<QString, QString> datos_montaje;
+				int i = 0;
+
+				datos_montaje.clear();
+				datos_montaje["path_exe"]        = datosDbx["path_exe"];
+				datos_montaje["parametros_exe"]  = datosDbx["parametros_exe"];
+				datos_montaje["opt_loadfix_mem"] = datosDbx["opt_loadfix_mem"];
+				datos_montaje["opt_loadfix"]     = datosDbx["opt_loadfix"];
+				datos_montaje["opt_cerrar_dbox"] = datosDbx["opt_cerrar_dbox"];
+
+				listamontaje.clear();
+				listamontaje = CreaConfigMontajes( treeWidget, datos_montaje );
+
+				for (i = 0; i < listamontaje.size(); ++i)
+					out << listamontaje.value( i ) << endl;
+			}
+		}
+
+		out.flush();
+		file_out.close();
+	}
+}
+
+// Crea el archivo de configuración del VDMSound
+void Funciones::CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg)
+{
+	QSettings * settings = new QSettings(PathSaveConfg, QSettings::IniFormat);
+	QFileInfo workdir( datosVdms["path_exe"] );
+
+	settings->beginGroup("program");
+		settings->setValue("executable"  , datosVdms["path_exe"]  );
+		settings->setValue("workdir"     , workdir.absolutePath() );
+		settings->setValue("params"      , datosVdms["program_1"] );
+		settings->setValue("icon"        , datosVdms["program_2"] );
+	settings->endGroup();
+
+	settings->beginGroup("vdms.debug");
+		settings->setValue("useCustomCfg", datosVdms["vdms_debug_1"] );
+		settings->setValue("customCfg"   , datosVdms["vdms_debug_2"] );
+	settings->endGroup();
+
+	settings->beginGroup("winnt.dos");
+		settings->setValue("useAutoexec" , datosVdms["winnt_dos_1"] );
+		settings->setValue("autoexec"    , datosVdms["winnt_dos_2"] );
+	settings->endGroup();
+
+	settings->beginGroup("winnt.dosbox");
+		settings->setValue("exitclose"   , datosVdms["winnt_dosbox_1"] );
+		settings->setValue("exitWarn"    , datosVdms["winnt_dosbox_2"] );
+		settings->setValue("fastPaste"   , datosVdms["winnt_dosbox_3"] );
+	settings->endGroup();
+
+	settings->beginGroup("winnt.storage");
+		settings->setValue("useCDROM"    , datosVdms["winnt_storage_1"] );
+		settings->setValue("useNetware"  , datosVdms["winnt_storage_2"] );
+	settings->endGroup();
+
+	delete settings;
+}
+
+// Exportar la configuracion del DOSBox para el GR-lida
 void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, const QHash<QString, QString> datos_emu, QTreeWidget *treeWidget, const QString PathSaveConfg)
 {
 	QFile file_out( PathSaveConfg );
@@ -722,493 +1270,7 @@ void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, con
 	}
 }
 
-void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg, bool ExportToDFend)
-{
-	QFile file_out( PathSaveConfg );
-	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
-	{
-		QTextStream out(&file_out);
-		out.setCodec("UTF-8");
-
-		if( ExportToDFend )
-		{
-			out << "[Extra]" << endl;
-			out << "Exe=" << datosDbx["path_exe"] << endl;
-			//out << "Environment=" << datosDbx[""] << endl;
-			//out << "Tab=" << datosDbx[""] << endl;
-			//out << "Tab2=" << datosDbx[""] << endl;
-			out << "Loadhigh=" << datosDbx["opt_loadfix"] << endl;
-			out << "CloseOnExit=" << datosDbx["opt_cerrar_dbox"] << endl;
-			//out << "AutoMountCDs=" << datosDbx[""] << endl;
-			//out << "Overridegamestart=" << datosDbx[""] << endl;
-			//out << "OverrideMount=" << datosDbx[""] << endl;
-			//out << "LoadFixVal=" << datosDbx["opt_loadfix_mem"] << endl;
-			//out << "ExeMD5=" << datosDbx[""] << endl;
-			out << "Setup=" << datosDbx["path_setup"] << endl;
-			//out << "SetupMD5=" << datosDbx[""] << endl;
-			out << "GameParameters=" << datosDbx["parametros_exe"] << endl;
-			out << "SetupParameters=" << datosDbx["parametros_setup"] << endl;
-			//out << "ExtraDirs=" << datosDbx[""] << endl;
-			//out << "LastModification=" << datosDbx[""] << endl;
-			//out << "DataDir=" << datosDbx[""] << endl;
-			out << "NrOfMounts=" << treeWidget->topLevelItemCount() << endl;
-			for(int num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
-			{
-				QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
-				out << num_mount << "=" << item->text(0) << ";" << item->text(2) << ";" << item->text(3) << ";" << item->text(6) << endl;
-			}
-			out << "autoexec=" << datosDbx["autoexec"] << endl << endl;
-			//out << "BootImage=" << datosDbx[""] << endl;
-			//out << "Finalization=" << datosDbx[""] << endl;
-			//out << "CustomSettings=" << datosDbx[""] << endl;
-
-			QString stNotes;
-			stNotes.clear();
-			stNotes = datos["comentario"];
-			stNotes.replace("<br/>\n","[13][10]").replace("<br/>","[13]").replace("\n","[13]");
-
-			out << "[ExtraInfo]" << endl;
-			out << "Genre=" << datos["genero"] << endl;
-			out << "Developer=" << datos["desarrollador"] << endl;
-			out << "Publisher=" << datos["compania"] << endl;
-			out << "Year=" << datos["anno"] << endl;
-			out << "Language=" << datos["idioma"] << endl;
-			//out << "UserInfo=" << datos[""] << endl;
-			out << "Favorite=" << datos["favorito"] << endl;
-			out << "Name=" << datos["titulo"] << endl;
-			out << "Icon=" << datos["icono"] << endl;
-			out << "Notes=" << stNotes << endl << endl;
-			//out << "WWW=" << datosDbx[""] << endl;
-		}
-
-		out << "# This is the configurationfile for DOSBox 0.72." << endl;
-		out << "# Lines starting with a # are commentlines." << endl;
-		out << "# They are used to (briefly) document the effect of each option." << endl << endl;
-
-		out << "[sdl]" << endl;
-		out << "# fullscreen -- Start dosbox directly in fullscreen." << endl;
-		out << "# fulldouble -- Use double buffering in fullscreen." << endl;
-		out << "# fullresolution -- What resolution to use for fullscreen: original or fixed size (e.g. 1024x768)." << endl;
-		out << "# windowresolution -- Scale the window to this size IF the output device supports hardware scaling." << endl;
-		out << "# output -- What to use for output: surface,overlay,opengl,openglnb,ddraw." << endl;
-		out << "# autolock -- Mouse will automatically lock, if you click on the screen." << endl;
-		out << "# sensitiviy -- Mouse sensitivity." << endl;
-		out << "# waitonerror -- Wait before closing the console if dosbox has an error." << endl;
-		out << "# priority -- Priority levels for dosbox: lowest,lower,normal,higher,highest,pause (when not focussed)." << endl;
-		out << "#             Second entry behind the comma is for when dosbox is not focused/minimized." << endl;
-		out << "# mapperfile -- File used to load/save the key/event mappings from." << endl;
-		out << "# usescancodes -- Avoid usage of symkeys, might not work on all operating systems." << endl << endl;
-
-		out << "fullscreen=" << datosDbx["sdl_fullscreen"] << endl;
-		out << "fulldouble=" << datosDbx["sdl_fulldouble"] << endl;
-		out << "fullfixed=" << datosDbx["sdl_fullfixed"] << endl;					// DOSBox 0.63
-		out << "fullresolution=" << datosDbx["sdl_fullresolution"] << endl;
-		out << "windowresolution=" << datosDbx["sdl_windowresolution"] << endl;
-		out << "output=" << datosDbx["sdl_output"] << endl;
-		out << "hwscale=" << datosDbx["sdl_hwscale"] << endl;						// DOSBox 0.63
-		out << "autolock=" << datosDbx["sdl_autolock"] << endl;
-		out << "sensitivity=" << datosDbx["sdl_sensitivity"] << endl;
-		out << "waitonerror=" << datosDbx["sdl_waitonerror"] << endl;
-		out << "priority=" << datosDbx["sdl_priority"] << endl;
-		out << "mapperfile=" << datosDbx["sdl_mapperfile"] << endl;
-		out << "usescancodes=" << datosDbx["sdl_usescancodes"] << endl << endl;
-
-		out << "[dosbox]" << endl;
-		out << "# language -- Select another language file." << endl;
-		out << "# memsize -- Amount of memory DOSBox has in megabytes." << endl;
-		out << "# machine -- The type of machine tries to emulate:hercules,cga,tandy,pcjr,vga." << endl;
-		out << "# captures -- Directory where things like wave,midi,screenshot get captured." << endl << endl;
-
-		if( !datosDbx["dosbox_language"].isEmpty() || datosDbx["dosbox_language"]!=" ")
-		out << "language=" << datosDbx["dosbox_language"] << endl;
-		out << "machine=" << datosDbx["dosbox_machine"] << endl;
-		out << "captures=" << datosDbx["dosbox_captures"] << endl;
-		out << "memsize=" << datosDbx["dosbox_memsize"] << endl << endl;
-
-		out << "[render]" << endl;
-		out << "# frameskip -- How many frames DOSBox skips before drawing one." << endl;
-		out << "# aspect -- Do aspect correction, if your output method doesn't support scaling this can slow things down!." << endl;
-		out << "# scaler -- Scaler used to enlarge/enhance low resolution modes." << endl;
-		out << "#           Supported are none,normal2x,normal3x,advmame2x,advmame3x,hq2x,hq3x," << endl;
-		out << "#                         2xsai,super2xsai,supereagle,advinterp2x,advinterp3x," << endl;
-		out << "#                         tv2x,tv3x,rgb2x,rgb3x,scan2x,scan3x." << endl;
-		out << "#           If forced is appended (like scaler=hq2x forced), the scaler will be used" << endl;
-		out << "#           even if the result might not be desired." << endl << endl;
-
-		out << "frameskip=" << datosDbx["render_frameskip"] << endl;
-		out << "aspect=" << datosDbx["render_aspect"] << endl;
-		out << "scaler=" << datosDbx["render_scaler"] << endl << endl;
-
-		out << "[cpu]" << endl;
-		out << "# core -- CPU Core used in emulation: normal,simple,dynamic,auto." << endl;
-		out << "#         auto switches from normal to dynamic if appropriate." << endl;
-		out << "# cycles -- Amount of instructions DOSBox tries to emulate each millisecond." << endl;
-		out << "#           Setting this value too high results in sound dropouts and lags." << endl;
-		out << "#           You can also let DOSBox guess the correct value by setting it to max." << endl;
-		out << "#           The default setting (auto) switches to max if appropriate." << endl;
-		out << "# cycleup   -- Amount of cycles to increase/decrease with keycombo." << endl;
-		out << "# cycledown    Setting it lower than 100 will be a percentage." << endl << endl;
-
-		out << "core=" << datosDbx["cpu_core"] << endl;
-		out << "cycles=" << datosDbx["cpu_cycles"] << endl;
-		out << "cycleup=" << datosDbx["cpu_cycleup"] << endl;
-		out << "cycledown=" << datosDbx["cpu_cycledown"] << endl << endl;
-
-		out << "[mixer]" << endl;
-		out << "# nosound -- Enable silent mode, sound is still emulated though." << endl;
-		out << "# rate -- Mixer sample rate, setting any devices higher than this will" << endl;
-		out << "#         probably lower their sound quality." << endl;
-		out << "# blocksize -- Mixer block size, larger blocks might help sound stuttering" << endl;
-		out << "#              but sound will also be more lagged." << endl;
-		out << "# prebuffer -- How many milliseconds of data to keep on top of the blocksize." << endl << endl;
-
-		out << "nosound=" << datosDbx["mixer_nosound"] << endl;
-		out << "rate=" << datosDbx["mixer_rate"] << endl;
-		out << "blocksize=" << datosDbx["mixer_blocksize"] << endl;
-		out << "prebuffer=" << datosDbx["mixer_prebuffer"] << endl << endl;
-
-		out << "[midi]" << endl;
-		out << "# mpu401      -- Type of MPU-401 to emulate: none, uart or intelligent." << endl;
-		out << "# device      -- Device that will receive the MIDI data from MPU-401." << endl;
-		out << "#                This can be default,alsa,oss,win32,coreaudio,none." << endl;
-		out << "# config      -- Special configuration options for the device. In Windows put" << endl;
-		out << "#                the id of the device you want to use. See README for details." << endl << endl;
-
-		out << "mpu401=" << datosDbx["midi_mpu401"] << endl;
-		out << "intelligent=" << datosDbx["midi_intelligent"] << endl;	// DOSBox 0.63
-		out << "device=" << datosDbx["midi_device"] << endl;
-		out << "config=" << datosDbx["midi_config"] << endl;
-		out << "mt32rate=" << datosDbx["midi_mt32rate"] << endl << endl;		// DOSBox 0.63
-
-		out << "[sblaster]" << endl;
-		out << "# sbtype -- Type of sblaster to emulate:none,sb1,sb2,sbpro1,sbpro2,sb16." << endl;
-		out << "# sbbase,irq,dma,hdma -- The IO/IRQ/DMA/High DMA address of the soundblaster." << endl;
-		out << "# mixer -- Allow the soundblaster mixer to modify the DOSBox mixer." << endl;
-		out << "# oplmode -- Type of OPL emulation: auto,cms,opl2,dualopl2,opl3." << endl;
-		out << "#            On auto the mode is determined by sblaster type." << endl;
-		out << "#            All OPL modes are 'Adlib', except for CMS." << endl;
-		out << "# oplrate -- Sample rate of OPL music emulation." << endl << endl;
-
-		out << "sbtype=" << datosDbx["sblaster_sbtype"] << endl;
-		out << "sbbase=" << datosDbx["sblaster_sbbase"] << endl;
-		out << "irq=" << datosDbx["sblaster_irq"] << endl;
-		out << "dma=" << datosDbx["sblaster_dma"] << endl;
-		out << "hdma=" << datosDbx["sblaster_hdma"] << endl;
-		out << "mixer=" << datosDbx["sblaster_mixer"] << endl;
-		out << "oplmode=" << datosDbx["sblaster_oplmode"] << endl;
-		out << "oplrate=" << datosDbx["sblaster_oplrate"] << endl << endl;
-
-		out << "[gus]" << endl;
-		out << "# gus -- Enable the Gravis Ultrasound emulation." << endl;
-		out << "# gusbase,irq1,irq2,dma1,dma2 -- The IO/IRQ/DMA addresses of the" << endl;
-		out << "#            Gravis Ultrasound. (Same IRQ's and DMA's are OK.)" << endl;
-		out << "# gusrate -- Sample rate of Ultrasound emulation." << endl;
-		out << "# ultradir -- Path to Ultrasound directory.  In this directory" << endl;
-		out << "#             there should be a MIDI directory that contains" << endl;
-		out << "#             the patch files for GUS playback.  Patch sets used" << endl;
-		out << "#             with Timidity should work fine." << endl << endl;
-
-		out << "gus=" << datosDbx["gus_gus"] << endl;
-		out << "gusrate=" << datosDbx["gus_gusrate"] << endl;
-		out << "gusbase=" << datosDbx["gus_gusbase"] << endl;
-		out << "irq1=" << datosDbx["gus_irq1"] << endl;
-		out << "irq2=" << datosDbx["gus_irq2"] << endl;
-		out << "dma1=" << datosDbx["gus_dma1"] << endl;
-		out << "dma2=" << datosDbx["gus_dma2"] << endl;
-		out << "ultradir=" << datosDbx["gus_ultradir"] << endl << endl;
-
-		out << "[speaker]" << endl;
-		out << "# pcspeaker -- Enable PC-Speaker emulation." << endl;
-		out << "# pcrate -- Sample rate of the PC-Speaker sound generation." << endl;
-		out << "# tandy -- Enable Tandy Sound System emulation (off,on,auto)." << endl;
-		out << "#          For auto Tandysound emulation is present only if machine is set to tandy." << endl;
-		out << "# tandyrate -- Sample rate of the Tandy 3-Voice generation." << endl;
-		out << "# disney -- Enable Disney Sound Source emulation. Covox Voice Master and Speech Thing compatible." << endl << endl;
-
-		out << "pcspeaker=" << datosDbx["speaker_pcspeaker"] << endl;
-		out << "pcrate=" << datosDbx["speaker_pcrate"] << endl;
-		out << "tandy=" << datosDbx["speaker_tandy"] << endl;
-		out << "tandyrate=" << datosDbx["speaker_tandyrate"] << endl;
-		out << "disney=" << datosDbx["speaker_disney"] << endl << endl;
-
-		out << "[joystick]" << endl;
-		out << "# joysticktype -- Type of joystick to emulate: auto (default), none," << endl;
-		out << "#                 2axis (supports two joysticks," << endl;
-		out << "#                 4axis (supports one joystick, first joystick used)," << endl;
-		out << "#                 4axis_2 (supports one joystick, second joystick used)," << endl;
-		out << "#                 fcs (Thrustmaster), ch (CH Flightstick)." << endl;
-		out << "#                 none disables joystick emulation." << endl;
-		out << "#                 auto chooses emulation depending on real joystick(s)." << endl;
-		out << "# timed -- enable timed intervals for axis. (false is old style behaviour)." << endl;
-		out << "# autofire -- continuously fires as long as you keep the button pressed." << endl;
-		out << "# swap34 -- swap the 3rd and the 4th axis. can be useful for certain joysticks." << endl;
-		out << "# buttonwrap -- enable button wrapping at the number of emulated buttons." << endl << endl;
-
-		out << "joysticktype=" << datosDbx["joystick_type"] << endl;
-		out << "timed=" << datosDbx["joystick_timed"] << endl;
-		out << "autofire=" << datosDbx["joystick_autofire"] << endl;
-		out << "swap34=" << datosDbx["joystick_swap34"] << endl;
-		out << "buttonwrap=" << datosDbx["joystick_buttonwrap"] << endl << endl;
-
-		out << "[modem]" << endl;											// DOSBox 0.63
-		out << "modem=" << datosDbx["modem_modem"] << endl;
-		out << "comport=" << datosDbx["modem_comport"] << endl;
-		out << "listenport=" << datosDbx["modem_listenport"] << endl << endl;
-
-		out << "[directserial]" << endl;									// DOSBox 0.63
-		out << "directserial=" << datosDbx["dserial_directserial"] << endl;
-		out << "comport=" << datosDbx["dserial_comport"] << endl;
-		out << "realport=" << datosDbx["dserial_realport"] << endl;
-		out << "defaultbps=" << datosDbx["dserial_defaultbps"] << endl;
-		out << "parity=" << datosDbx["dserial_parity"] << endl;
-		out << "bytesize=" << datosDbx["dserial_bytesize"] << endl;
-		out << "stopbit=" << datosDbx["dserial_stopbit"] << endl << endl;
-
-		out << "[serial]" << endl;
-		out << "# serial1-4 -- set type of device connected to com port." << endl;
-		out << "#              Can be disabled, dummy, modem, nullmodem, directserial." << endl;
-		out << "#              Additional parameters must be in the same line in the form of" << endl;
-		out << "#              parameter:value. Parameter for all types is irq." << endl;
-		out << "#              for directserial: realport (required), rxdelay (optional)." << endl;
-		out << "#              for modem: listenport (optional)." << endl;
-		out << "#              for nullmodem: server, rxdelay, txdelay, telnet, usedtr," << endl;
-		out << "#                             transparent, port, inhsocket (all optional)." << endl;
-		out << "#              Example: serial1=modem listenport:5000" << endl << endl;
-
-		out << "serial1=" << datosDbx["serial_1"] << endl;
-		out << "serial2=" << datosDbx["serial_2"] << endl;
-		out << "serial3=" << datosDbx["serial_3"] << endl;
-		out << "serial4=" << datosDbx["serial_4"] << endl << endl;
-
-		out << "[dos]" << endl;
-		out << "# xms -- Enable XMS support." << endl;
-		out << "# ems -- Enable EMS support." << endl;
-		out << "# umb -- Enable UMB support." << endl;
-		out << "# keyboardlayout -- Language code of the keyboard layout (or none)." << endl << endl;
-
-		out << "xms=" << datosDbx["dos_xms"] << endl;
-		out << "ems=" << datosDbx["dos_ems"] << endl;
-		out << "umb=" << datosDbx["dos_umb"] << endl;
-		out << "keyboardlayout=" << datosDbx["dos_keyboardlayout"] << endl << endl;
-
-		out << "[ipx]" << endl;
-		out << "# ipx -- Enable ipx over UDP/IP emulation." << endl << endl;
-
-		out << "ipx=" << datosDbx["ipx_ipx"] << endl << endl;
-
-		if( !ExportToDFend )
-		{
-			out << "[autoexec]" << endl;
-			out << "# Lines in this section will be run at startup." << endl << endl;
-
-			if( datosDbx["opt_autoexec"] == "true" )
-				out << datosDbx["autoexec"] << endl;
-			else {
-				// Creando el Autoexec
-				QStringList listamontaje;
-				QHash<QString, QString> datos_montaje;
-				int i = 0;
-
-				datos_montaje.clear();
-				datos_montaje["path_exe"]        = datosDbx["path_exe"];
-				datos_montaje["parametros_exe"]  = datosDbx["parametros_exe"];
-				datos_montaje["opt_loadfix_mem"] = datosDbx["opt_loadfix_mem"];
-				datos_montaje["opt_loadfix"]     = datosDbx["opt_loadfix"];
-				datos_montaje["opt_cerrar_dbox"] = datosDbx["opt_cerrar_dbox"];
-
-				listamontaje.clear();
-				listamontaje = CreaConfigMontajes( treeWidget, datos_montaje );
-
-				for (i = 0; i < listamontaje.size(); ++i)
-					out << listamontaje.value( i ) << endl;
-			}
-		}
-
-		out.flush();
-		file_out.close();
-	}
-}
-
-// Funcion para Poner nombres cortos en DOS.
-// Estado: Beta
-QString Funciones::getShortPathName(QString longPath)
-{
-	QString str, shortPath;
-	QStringList list, listshortPath;
-
-	list = longPath.split("\\");
-
-	for ( int i = 0; i < list.size(); i++ )
-	{
-		str = list.value(i);
-
-		if( str.length() > 8 )
-			listshortPath << str.replace(" ","").left(6).append("~1");
-		else
-			listshortPath << str;
-	}
-
-	shortPath = listshortPath.join("\\");
-
-	return shortPath;
-}
-
-QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash<QString, QString> datos)
-{
-// Creando la configuracion de los distintos Montajes
-	QString NombreEXEDbx, DirEXEDbx, chkDbx_loadfix, chkDbx_cerrardbx;
-	QString mount_letra_primario, mount_dir_primario, mount_dir, montaje_boot;
-	QString mount_type, mount_drive, mount_letter, mount_label, mount_Options, mount_IOCtrl;
-	int num_mount = 0;
-	bool montaje_IMG = false;
-	bool mount_Boot = false;
-	QStringList listmontajes;
-	QFileInfo fi( datos["path_exe"] );
-
-	NombreEXEDbx = fi.fileName();		// Nombre del ejecutable
-	DirEXEDbx    = QDir::toNativeSeparators( datos["path_exe"] );	// Directorio donde esta
-	DirEXEDbx.replace("/","\\");
-	DirEXEDbx.remove( NombreEXEDbx, Qt::CaseInsensitive );
-
-// loadfix
-	if( datos["opt_loadfix"] == "true" && datos["opt_loadfix_mem"] != "" )
-		chkDbx_loadfix = "loadfix -" + datos["opt_loadfix_mem"] + " " + NombreEXEDbx + " " + datos["parametros_exe"];
-	else
-		chkDbx_loadfix = NombreEXEDbx + " " + datos["parametros_exe"];
-// Cerrar DOSBox
-	if( datos["opt_cerrar_dbox"]=="true" )
-		chkDbx_cerrardbx = "exit";
-	else
-		chkDbx_cerrardbx = "";
-
-// Montajes
-	listmontajes.clear();
-	for ( num_mount = 0; num_mount < myTreeWidget->topLevelItemCount(); num_mount++ )
-	{
-		QTreeWidgetItem *item = myTreeWidget->topLevelItem( num_mount );
-	// Indicamos el directorio y la letra a montar
-		mount_drive  = QDir::toNativeSeparators( item->text(0) ); // Real Drive or Directory or Image ISO, IMA
-		mount_letter = item->text(3); // Emulated Drive letter
-	// Situa el montaje primario independiente de donde este colocado
-		if( item->text(7) == "v")
-		{
-			mount_letra_primario = mount_letter;
-			mount_dir_primario   = mount_drive;
-		} else {
-			mount_letra_primario = myTreeWidget->topLevelItem(0)->text(3);
-			mount_dir_primario   = QDir::toNativeSeparators( myTreeWidget->topLevelItem(0)->text(0) );
-		}
-		mount_dir_primario.replace("/","\\");
-
-	//Montando las unidades
-		if( item->text(2) != "boot")
-		{
-			mount_Boot = false;
-			if( item->text(2) == "floppy")
-			{
-				montaje_IMG = false;
-				mount_type = " -t floppy";
-			}
-			if( item->text(2) == "drive" )
-			{
-				montaje_IMG = false;
-				mount_type = " ";
-			}
-			if( item->text(2) == "cdrom" )
-			{
-				montaje_IMG  = false;
-				mount_type  = " -t cdrom";
-				mount_IOCtrl = " " + item->text(6);
-				if( item->text(5) != "" )
-					mount_Options = " " + item->text(5);
-				else
-					mount_Options = " ";
-			} else
-				mount_IOCtrl= " ";
-		// Montando imagenes de Discos, disquetes y CDs
-			if( item->text(2) == "IMG_floppy")
-			{
-				montaje_IMG = true;
-				mount_type = " -t floppy";
-			}
-			if( item->text(2) == "IMG_hdd")
-			{
-				montaje_IMG = true;
-				mount_type = " -t hdd";
-			}
-			if( item->text(2) == "IMG_iso")
-			{
-				montaje_IMG = true;
-				mount_type = " -t iso";
-			}
-		// Etiqueta de las unidades.
-			if( item->text(1) != "" )
-				mount_label = " -label " + item->text(1);
-			else
-				mount_label = "";
-
-			if( montaje_IMG == true )
-				listmontajes << "imgmount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_label;
-			else
-				listmontajes << "mount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_Options + mount_IOCtrl + mount_label;
-		} else {
-			mount_Boot = true;
-			montaje_boot = "boot \"" + mount_drive + "\"";
-		}
-	}
-	mount_dir = DirEXEDbx;
-	mount_dir.remove(mount_dir_primario, Qt::CaseInsensitive);
-
-	if(mount_Boot == false)
-	{
-		listmontajes << mount_letra_primario + ":";
-		listmontajes << "cd " + getShortPathName( mount_dir );
-		listmontajes << chkDbx_loadfix;
-		listmontajes << chkDbx_cerrardbx;
-	} else {
-		listmontajes << mount_letra_primario + ":";
-		listmontajes << montaje_boot;
-		listmontajes << chkDbx_cerrardbx;
-	}
-	return listmontajes;
-}
-
-void Funciones::CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg)
-{
-	QSettings * settings = new QSettings( PathSaveConfg, QSettings::IniFormat );
-	QFileInfo workdir( datosVdms["path_exe"] );
-
-	settings->beginGroup("program");
-		settings->setValue("executable"	, datosVdms["path_exe"]  );
-		settings->setValue("workdir"	, workdir.absolutePath() );
-		settings->setValue("params"		, datosVdms["program_1"] );
-		settings->setValue("icon"		, datosVdms["program_2"] );
-	settings->endGroup();
-
-	settings->beginGroup("vdms.debug");
-		settings->setValue("useCustomCfg"	, datosVdms["vdms_debug_1"] );
-		settings->setValue("customCfg"		, datosVdms["vdms_debug_2"] );
-	settings->endGroup();
-
-	settings->beginGroup("winnt.dos");
-		settings->setValue("useAutoexec"	, datosVdms["winnt_dos_1"] );
-		settings->setValue("autoexec"		, datosVdms["winnt_dos_2"] );
-	settings->endGroup();
-
-	settings->beginGroup("winnt.dosbox");
-		settings->setValue("exitclose"	, datosVdms["winnt_dosbox_1"] );
-		settings->setValue("exitWarn"	, datosVdms["winnt_dosbox_2"] );
-		settings->setValue("fastPaste"	, datosVdms["winnt_dosbox_3"] );
-	settings->endGroup();
-
-	settings->beginGroup("winnt.storage");
-		settings->setValue("useCDROM"	, datosVdms["winnt_storage_1"] );
-		settings->setValue("useNetware"	, datosVdms["winnt_storage_2"] );
-	settings->endGroup();
-
-	delete settings;
-}
-
+// Carga la lista de los perfiles preconfigurados en un QComboBox
 void Funciones::Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *myCombobox)
 {
 	QDir dir( dirProfiles );
@@ -1225,11 +1287,13 @@ void Funciones::Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *my
 	}
 }
 
+// Exportar la configuracion del DOSBox para el DFend
 void Funciones::Exportar_Profile_DFend(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg)
 {
 	CrearArchivoConfigDbx(datos, datosDbx, treeWidget, PathSaveConfg, true);
 }
 
+// Importar la configuracion del DOSBox para el DFend
 QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 {
 	QString stline, fileTemp, strTemp, info_name_conf;

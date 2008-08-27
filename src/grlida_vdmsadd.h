@@ -48,6 +48,7 @@ private:
 	QHash<QString, QString> TempDatosJuego;
 	QHash<QString, QString> UltimoPath;
 
+	void createConnections();
 	void setTheme();
 	void CargaUltimosDirectorios();
 

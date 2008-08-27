@@ -30,18 +30,13 @@ frmVdmsAdd::frmVdmsAdd(QDialog *parent, Qt::WFlags flags)
 {
 	ui.setupUi(this);
 
-	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
+	stHomeDir      = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stConfgVdmSDir = stHomeDir + "confvdms/";	// directorio de configuracion para el VDMSound
+	stTheme        = fGrl.ThemeGrl();
 
-	stTheme = fGrl.ThemeGrl();
+	createConnections();
+
 	setTheme();
-
-// Conecta los distintos botones con las funciones.
-	connect( ui.btnOk		     , SIGNAL( clicked() ), this, SLOT( on_btnOk()             ) );
-	connect( ui.btnVdms_FileConfg, SIGNAL( clicked() ), this, SLOT( on_btnVdms_FileConfg() ) );
-	connect( ui.btnVdms_ExeJuego , SIGNAL( clicked() ), this, SLOT( on_btnVdms_ExeJuego()  ) );
-	connect( ui.btnVdms_Icono	 , SIGNAL( clicked() ), this, SLOT( on_btnVdms_Icono()     ) );
-	connect( ui.btnDescargarInfo , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo()  ) );
 
 	CargaUltimosDirectorios();
 
@@ -53,7 +48,20 @@ frmVdmsAdd::frmVdmsAdd(QDialog *parent, Qt::WFlags flags)
 	setGeometry( left, top, width(), height() );
 }
 
-frmVdmsAdd::~frmVdmsAdd(){}
+frmVdmsAdd::~frmVdmsAdd()
+{
+	//
+}
+
+void frmVdmsAdd::createConnections()
+{
+// Conecta los distintos botones con las funciones.
+	connect( ui.btnOk		     , SIGNAL( clicked() ), this, SLOT( on_btnOk()             ) );
+	connect( ui.btnVdms_FileConfg, SIGNAL( clicked() ), this, SLOT( on_btnVdms_FileConfg() ) );
+	connect( ui.btnVdms_ExeJuego , SIGNAL( clicked() ), this, SLOT( on_btnVdms_ExeJuego()  ) );
+	connect( ui.btnVdms_Icono	 , SIGNAL( clicked() ), this, SLOT( on_btnVdms_Icono()     ) );
+	connect( ui.btnDescargarInfo , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo()  ) );
+}
 
 void frmVdmsAdd::setTheme()
 {

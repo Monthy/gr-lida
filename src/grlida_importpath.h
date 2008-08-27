@@ -40,8 +40,10 @@ public:
 
 private:
 	Funciones fGrl;
-	QString stHomeDir, stTheme; 
+	QString stHomeDir, stTheme;
 	QHash<QString, QString> UltimoPath;
+
+	void createConnections();
 	void setTheme();
 	void CargaUltimosDirectorios();
 

@@ -28,6 +28,7 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
 {
 	ui.setupUi(this);
+
 // Conecta los distintos botones
 	connect( ui.btnOk           , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 	connect( ui.btnCheckedAll   , SIGNAL( clicked() ), this, SLOT( on_btnCheckedAll() ) );
@@ -36,8 +37,8 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stIconDir = stHomeDir + "iconos/";	// directorio de iconos para el GR-lida
+	stTheme   = fGrl.ThemeGrl();
 
-	stTheme = fGrl.ThemeGrl();
 	setStyleSheet( fGrl.StyleSheet() );
 
 	QSettings lastdir( stHomeDir + "GR-lida.conf", QSettings::IniFormat);
@@ -168,7 +169,6 @@ void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By,
 {
 	QString stIcono, stSqlWhere;
 	QSqlQuery query;
-	QSqlRecord rec;
 
 	if( !TipoEmu.isEmpty() )
 		stSqlWhere = " WHERE tipo_emu LIKE '%"+TipoEmu+"%'";
@@ -180,32 +180,16 @@ void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By,
 	if( query.first() )
 	{
 		do {
-			rec = query.record();
 			QTreeWidgetItem *item = new QTreeWidgetItem( ui.twListaJuegos );
-			item->setText( 0 , query.value( rec.indexOf("titulo") ).toString() );
-			item->setCheckState(0, Qt::Unchecked);
-			item->setText( 1 , fGrl.IntToStr( query.value( rec.indexOf("idgrl") ).toInt() ) );	// titulo
-			item->setText( 2 , query.value( rec.indexOf("tipo_emu") ).toString()            );	// tipo_emu
 
-			stIcono = query.value( rec.indexOf("icono") ).toString();	// icono
-			if( stIcono.isEmpty() )
-				item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
-			else if( stIcono == "datos" )
-				item->setIcon( 0, QIcon(stTheme+"img24/emu_datos.png") );
-			else if( stIcono == "dosbox" )
-				item->setIcon( 0, QIcon(stTheme+"img24/emu_dbx.png") );
-			else if( stIcono == "scummvm" )
-				item->setIcon( 0, QIcon(stTheme+"img24/emu_svm.png") );
-			else if( stIcono == "vdmsound" )
-				item->setIcon( 0, QIcon(stTheme+"img24/emu_vdms.png") );
-			else {
-				bool existeIcono;
-				existeIcono = QFile::exists(stIconDir + stIcono);
-				if( existeIcono )
-					item->setIcon( 0, QIcon(stIconDir + stIcono) );
-				else
-					item->setIcon( 0, QIcon(stTheme+"img24/emu_sin_imagen.png") );
-			}
+			item->setText( 0 , query.record().value("titulo").toString() );
+			item->setCheckState(0, Qt::Unchecked);
+			item->setText( 1 , query.record().value("idgrl").toString()    );	// titulo
+			item->setText( 2 , query.record().value("tipo_emu").toString() );	// tipo_emu
+
+			stIcono = fGrl.getIconListaJuegos(query.record().value("icono").toString(), stIconDir);
+			item->setIcon( 0, QIcon(stIcono) );
+
 		} while (query.next());
 		ui.twListaJuegos->setCurrentItem( ui.twListaJuegos->itemAt(0,0) );
 	}

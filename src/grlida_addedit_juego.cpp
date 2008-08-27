@@ -45,9 +45,8 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	setTheme();
 	CargaUltimosDirectorios();
 
-// Conecta los distintos botones con las funciones.
-	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
-	connect( ui.cbxDatos_TipoEmu	, SIGNAL( activated(const QString &) ), this, SLOT( on_cbxDatos_TipoEmu_txtChanged(const QString &) ) );
+	// Conecta los distintos botones con las funciones.
+	createConnections();
 
 	ui.cbxDatos_TipoEmu->setCurrentIndex( ui.cbxDatos_TipoEmu->findText( TipoEmulador ) );
 
@@ -61,71 +60,30 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	ui.twDatosFiles->header()->setStretchLastSection(true);
 	ui.twDatosFiles->header()->setMovable(false);
 	ui.twDatosFiles->header()->setResizeMode(QHeaderView::Interactive);
-	ui.twDatosFiles->header()->resizeSection(0, 100 );//nombre
-	ui.twDatosFiles->header()->resizeSection(1, 70  );//crc32
-	ui.twDatosFiles->header()->resizeSection(2, 140 );//descripcion
-	ui.twDatosFiles->header()->resizeSection(3, 70  );//size
+	ui.twDatosFiles->setColumnWidth(0, 100 );//nombre
+	ui.twDatosFiles->setColumnWidth(1, 70  );//crc32
+	ui.twDatosFiles->setColumnWidth(2, 140 );//descripcion
+	ui.twDatosFiles->setColumnWidth(3, 70  );//size
 
 	ui.twDatosURL->header()->setStretchLastSection(true);
 	ui.twDatosURL->header()->setMovable(false);
 	ui.twDatosURL->header()->setResizeMode(QHeaderView::Interactive);
-	ui.twDatosURL->header()->resizeSection(0, 100 );
+	ui.twDatosURL->setColumnWidth(0, 100 );
 
 // Referente al DatosJuego ---------------------------------------
-	connect( ui.btnImgAbrir_Thumbs        , SIGNAL( clicked() ), this, SLOT( on_btnImgAbrir_Thumbs() ) );
-	connect( ui.btnImgAbrir_CoverFront    , SIGNAL( clicked() ), this, SLOT( on_btnImgAbrir_CoverFront() ) );
-	connect( ui.btnImgAbrir_CoverBack     , SIGNAL( clicked() ), this, SLOT( on_btnImgAbrir_CoverBack() ) );
-	connect( ui.btnImgVer_Thumbs          , SIGNAL( clicked() ), this, SLOT( on_btnImgVer_Thumbs() ) );
-	connect( ui.btnImgVer_CoverFront      , SIGNAL( clicked() ), this, SLOT( on_btnImgVer_CoverFront() ) );
-	connect( ui.btnImgVer_CoverBack       , SIGNAL( clicked() ), this, SLOT( on_btnImgVer_CoverBack() ) );
-	connect( ui.btnImgEliminar_Thumbs     , SIGNAL( clicked() ), this, SLOT( on_btnImgEliminar_Thumbs() ) );
-	connect( ui.btnImgEliminar_CoverFront , SIGNAL( clicked() ), this, SLOT( on_btnImgEliminar_CoverFront() ) );
-	connect( ui.btnImgEliminar_CoverBack  , SIGNAL( clicked() ), this, SLOT( on_btnImgEliminar_CoverBack() ) );
-	connect( ui.btnDescargarInfo          , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo() ) );
-	connect( ui.twDatoSmile , SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twDatoSmile_Dblclicked(QTreeWidgetItem*) ));
-
-	// Conecta los botones para editar los comentarios de los juegos
-	connect( ui.btnTool_Cortar          , SIGNAL( clicked() ), this, SLOT( on_btnTool_Cortar() ) );
-	connect( ui.btnTool_Copiar          , SIGNAL( clicked() ), this, SLOT( on_btnTool_Copiar() ) );
-	connect( ui.btnTool_Pegar           , SIGNAL( clicked() ), this, SLOT( on_btnTool_Pegar() ) );
-	connect( ui.btnTool_SelectAll       , SIGNAL( clicked() ), this, SLOT( on_btnTool_SelectAll() ) );
-	connect( ui.btnTool_Deshacer        , SIGNAL( clicked() ), this, SLOT( on_btnTool_Deshacer() ) );
-	connect( ui.btnTool_Rehacer         , SIGNAL( clicked() ), this, SLOT( on_btnTool_Rehacer() ) );
-	connect( ui.btnTool_TextoNegrita    , SIGNAL( clicked() ), this, SLOT( on_btnTool_TextoNegrita() ) );
-	connect( ui.btnTool_TextoCursiva    , SIGNAL( clicked() ), this, SLOT( on_btnTool_TextoCursiva() ) );
-	connect( ui.btnTool_TextoSubrayado  , SIGNAL( clicked() ), this, SLOT( on_btnTool_TextoSubrayado() ) );
-	connect( ui.btnTool_InsertarImg     , SIGNAL( clicked() ), this, SLOT( on_btnTool_InsertarImg() ) );
-	connect( ui.btnTool_InsertaUrl      , SIGNAL( clicked() ), this, SLOT( on_btnTool_InsertaUrl() ) );
-	connect( ui.btnTool_Buscar          , SIGNAL( clicked() ), this, SLOT( on_btnTool_Buscar() ) );
-	connect( ui.btnTool_BuscarAnterior  , SIGNAL( clicked() ), this, SLOT( on_btnTool_BuscarAnterior() ) );
-	connect( ui.btnTool_BuscarSiguiente , SIGNAL( clicked() ), this, SLOT( on_btnTool_BuscarSiguiente() ) );
-	connect( ui.btnTool_Reemplazar      , SIGNAL( clicked() ), this, SLOT( on_btnTool_Reemplazar() ) );
-	connect( ui.btnTool_Preview         , SIGNAL( clicked() ), this, SLOT( on_btnTool_Preview() ) );
-
-	connect( ui.btnNuevaUrl    , SIGNAL( clicked() ), this, SLOT( on_btnNuevaUrl()    ) );
-	connect( ui.btnEditarUrl   , SIGNAL( clicked() ), this, SLOT( on_btnEditarUrl()   ) );
-	connect( ui.btnEliminarUrl , SIGNAL( clicked() ), this, SLOT( on_btnEliminarUrl() ) );
-	connect( ui.btnAbrirUrl    , SIGNAL( clicked() ), this, SLOT( on_btnAbrirUrl()    ) );
-
-	connect( ui.btnDatosFiles_PathFile , SIGNAL( clicked() ), this, SLOT( on_btnDatosFiles_PathFile() ) );
-	connect( ui.btnAddFile     , SIGNAL( clicked() ), this, SLOT( on_btnAddFile()     ) );
-	connect( ui.btnEditFile    , SIGNAL( clicked() ), this, SLOT( on_btnEditFile()    ) );
-	connect( ui.btnUpdateFile  , SIGNAL( clicked() ), this, SLOT( on_btnUpdateFile()  ) );
-	connect( ui.btnDeleteFile  , SIGNAL( clicked() ), this, SLOT( on_btnDeleteFile()  ) );
-	//----
 	filters.clear();
 	filters << "*.bmp" << "*.jpg" << "*.png" << "*.gif"; // Imagenes soportadas
 	fGrl.CargarIconosComboBox(stIconDir, ui.cbxDatos_Icono, filters);
 
-	fGrl.CargarDatosComboBox(stDatosDir + "generos.txt"  , ui.cbxDatos_Genero , 1, false);
-	fGrl.CargarDatosComboBox(stDatosDir + "companias.txt", ui.cbxDatos_Compania , 1, false);
-	fGrl.CargarDatosComboBox(stDatosDir + "companias.txt", ui.cbxDatos_Desarrollador , 1, false);
-	fGrl.CargarDatosComboBox(stDatosDir + "tema.txt"     , ui.cbxDatos_Tema , 1, false);
-	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"    , ui.cbxDatos_Idioma , 1, true );
-	fGrl.CargarDatosComboBox(stDatosDir + "formatos.txt" , ui.cbxDatos_Formato , 1, false);
-	fGrl.CargarDatosComboBox(stDatosDir + "fechas.txt"   , ui.cbxDatos_Anno , 1, false);
-	fGrl.CargarDatosComboBox(stDatosDir + "numdisc.txt"  , ui.cbxDatos_NumDisc , 1, false);
-	fGrl.CargarDatosComboBox(stDatosDir + "sistemaop.txt", ui.cbxDatos_SistemaOp, 1, false);
+	fGrl.CargarDatosComboBox(stDatosDir + "generos.txt"  , ui.cbxDatos_Genero       , 1, false);
+	fGrl.CargarDatosComboBox(stDatosDir + "companias.txt", ui.cbxDatos_Compania     , 1, false);
+	fGrl.CargarDatosComboBox(stDatosDir + "companias.txt", ui.cbxDatos_Desarrollador, 1, false);
+	fGrl.CargarDatosComboBox(stDatosDir + "tema.txt"     , ui.cbxDatos_Tema         , 1, false);
+	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"    , ui.cbxDatos_Idioma       , 1, true );
+	fGrl.CargarDatosComboBox(stDatosDir + "formatos.txt" , ui.cbxDatos_Formato      , 1, false);
+	fGrl.CargarDatosComboBox(stDatosDir + "fechas.txt"   , ui.cbxDatos_Anno         , 1, false);
+	fGrl.CargarDatosComboBox(stDatosDir + "numdisc.txt"  , ui.cbxDatos_NumDisc      , 1, false);
+	fGrl.CargarDatosComboBox(stDatosDir + "sistemaop.txt", ui.cbxDatos_SistemaOp    , 1, false);
 
 	for(int n=1; n<11; n++)
 		ui.cbxDatos_Graficos->addItem(QIcon(stTheme+"img16/grafica.png"),fGrl.IntToStr(n));
@@ -133,6 +91,9 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 		ui.cbxDatos_Sonido->addItem(QIcon(stTheme+"img16/grafica.png"),fGrl.IntToStr(n));
 	for(int n=1; n<11; n++)
 		ui.cbxDatos_Jugabilidad->addItem(QIcon(stTheme+"img16/grafica.png"),fGrl.IntToStr(n));
+
+	listSmailes.clear();
+	listSmailes = fGrl.Cargar_Smiles( stDatosDir + "smiles.txt", ui.twDatoSmile);
 
 	ui.html_preview->setVisible(false);
 
@@ -166,25 +127,14 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 		ui.cbxDatos_Jugabilidad->setCurrentIndex(0);
 		ui.cbxDatos_Estado->setCurrentIndex(0);
 	}
-	listSmailes.clear();
-	listSmailes = fGrl.Cargar_Smiles( stDatosDir + "smiles.txt", ui.twDatoSmile);
 // Fin del DatosJuego --------------------------------------------
 
 // Referente al ScummVM ------------------------------------------
-	connect( ui.twScummVM     , SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* )));
-	connect( ui.btnDefectoSvm , SIGNAL( clicked() ), this, SLOT( on_btnDefecto() ) );
-	connect( ui.btnDirSvm_1   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_path() ) );
-	connect( ui.btnDirSvm_2   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_save() ) );
-	connect( ui.btnDirSvm_3   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_extra() ) );
-	connect( ui.btnDirSvm_4   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_capturas() ) );
-	connect( ui.btnDirSvm_5   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sonido() ) );
-	connect( ui.btnDirSvm_6   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sound_font() ) );
-	connect( ui.btnDirSvm_7   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_setup() ) );
-
-	ui.twScummVM->header()->setStretchLastSection(true);
+	ui.twScummVM->header()->setStretchLastSection(false);
 	ui.twScummVM->header()->setMovable(false);
-	ui.twScummVM->header()->resizeSection(0, 440);
-	ui.twScummVM->header()->resizeSection(1, 80);
+	ui.twScummVM->header()->setResizeMode(0, QHeaderView::Stretch);
+	ui.twScummVM->header()->setResizeMode(1, QHeaderView::Fixed  );
+	ui.twScummVM->setColumnWidth(1, 80);
 	ui.twScummVM->clear();
 
 	fGrl.CargarDatosListaSvm(":/datos/svm_lista.txt"		, ui.twScummVM						);	// Carga la lista de compatibilidad del ScummVM.
@@ -210,25 +160,6 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 // Fin del ScummVM -----------------------------------------------
 
 // Referente a DOSBox --------------------------------------------
-	connect( ui.btnDbx_FileConfg  , SIGNAL( clicked() ), this, SLOT( on_btnDbx_FileConfg()  ) );
-	connect( ui.btnDbx_ExeJuego   , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeJuego()   ) );
-	connect( ui.btnDbx_ExeSetup   , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeSetup()   ) );
-	connect( ui.btnDirGravisUltraSound, SIGNAL( clicked() ), this, SLOT( on_btnDirGravisUltraSound() ) );
-	connect( ui.btnDbx_mapperfile , SIGNAL( clicked() ), this, SLOT( on_btnDbx_mapperfile() ) );
-	connect( ui.btnDbx_language   , SIGNAL( clicked() ), this, SLOT( on_btnDbx_language()   ) );
-	connect( ui.btnDbx_capturas   , SIGNAL( clicked() ), this, SLOT( on_btnDbx_capturas()   ) );
-	connect( ui.btnDbx_musica     , SIGNAL( clicked() ), this, SLOT( on_btnDbx_musica()     ) );
-	connect( ui.btnDbx_AddSerial  , SIGNAL( clicked() ), this, SLOT( on_btnDbx_AddSerial()  ) );
-	connect( ui.btnMount_Add      , SIGNAL( clicked() ), this, SLOT( on_btnMount_Add()      ) );
-	connect( ui.btnMount_Edit     , SIGNAL( clicked() ), this, SLOT( on_btnMount_Edit()     ) );
-	connect( ui.btnMount_Delete   , SIGNAL( clicked() ), this, SLOT( on_btnMount_Delete()   ) );
-	connect( ui.btnMount_Clear    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Clear()    ) );
-	connect( ui.btnMount_Subir    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Subir()    ) );
-	connect( ui.btnMount_Bajar    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Bajar()    ) );
-	connect( ui.btnMount_AutoCrear, SIGNAL( clicked() ), this, SLOT( on_btnMount_AutoCrear()) );
-	connect( ui.btnMount_Primario , SIGNAL( clicked() ), this, SLOT( on_btnMount_Primario() ) );
-	connect( ui.cbxDbx_Profiles   , SIGNAL( activated(const QString &) ), this, SLOT( on_setProfileGame(const QString &) ) );
-
 	fGrl.Cargar_Profile_DFend_ComboBox(stHomeDir + "templates/", ui.cbxDbx_Profiles);
 	fGrl.CargarDatosComboBox(":/datos/dbx_resolution.txt"  , ui.cbxDbx_sdl_fullresolution , 1, false); // Resolucin pantalla
 	fGrl.CargarDatosComboBox(":/datos/dbx_resolution.txt"  , ui.cbxDbx_sdl_windowresolution , 1, false); // windowresolution
@@ -249,23 +180,23 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt" , ui.cbxDbx_midi_device, 1, false); // MIDI Device
 
 	// Ponemos los Combobox por defecto.
-	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 );	// Resolucin pantalla
-	ui.cbxDbx_sdl_windowresolution->setCurrentIndex( 0 );	// windowresolution
-	ui.cbxDbx_sdl_output->setCurrentIndex( 0 );	// Modo de Renderizado
-	ui.cbxDbx_dosbox_machine->setCurrentIndex( 0 );	// Tarjeta de Video
-	ui.cbxDbx_render_scaler->setCurrentIndex( 1 );	// Escalar y Filtros
-	ui.cbxDbx_sdl_hwscale->setCurrentIndex( 9 );	// Escalar por hardware
-	ui.cbxDbx_sdl_sensitivity->setCurrentIndex( 9 );	// Sensibilidad del ratn
-	ui.cbxDbx_dosbox_memsize->setCurrentIndex( 5 );	// Cantidad de memoria para DOSBox
-	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );	// Ncleo de la CPU DOSBox
-	ui.cbxDbx_render_frameskip->setCurrentIndex( 0 );	// Frameskip DOSBox
-	ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );	// Ciclos DOSBox
-	ui.cbxDbx_joystick_type->setCurrentIndex( 0 );	// Emulador de joystick
-	ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( 14 ); // keyboardlayout
-	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 ); // Tipo Sound Blaste
-	ui.cbxDbx_sblaster_oplmode->setCurrentIndex( 0 ); // Sound Blaste Opl mode
-	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 ); // MPU-401
-	ui.cbxDbx_midi_device->setCurrentIndex( 0 ); // MIDI Device
+	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 );   // Resolucin pantalla
+	ui.cbxDbx_sdl_windowresolution->setCurrentIndex( 0 ); // windowresolution
+	ui.cbxDbx_sdl_output->setCurrentIndex( 0 );           // Modo de Renderizado
+	ui.cbxDbx_dosbox_machine->setCurrentIndex( 0 );       // Tarjeta de Video
+	ui.cbxDbx_render_scaler->setCurrentIndex( 1 );        // Escalar y Filtros
+	ui.cbxDbx_sdl_hwscale->setCurrentIndex( 9 );          // Escalar por hardware
+	ui.cbxDbx_sdl_sensitivity->setCurrentIndex( 9 );      // Sensibilidad del ratn
+	ui.cbxDbx_dosbox_memsize->setCurrentIndex( 5 );       // Cantidad de memoria para DOSBox
+	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );             // Núcleo de la CPU DOSBox
+	ui.cbxDbx_render_frameskip->setCurrentIndex( 0 );     // Frameskip DOSBox
+	ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );           // Ciclos DOSBox
+	ui.cbxDbx_joystick_type->setCurrentIndex( 0 );        // Emulador de joystick
+	ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( 14 );  // keyboardlayout
+	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );      // Tipo Sound Blaste
+	ui.cbxDbx_sblaster_oplmode->setCurrentIndex( 0 );     // Sound Blaste Opl mode
+	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 );          // MPU-401
+	ui.cbxDbx_midi_device->setCurrentIndex( 0 );          // MIDI Device
 
 	if( (EditandoJuego == true) && (TipoEmulador == "dosbox") )
 	{
@@ -277,10 +208,6 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 // Fin del DOSBox ------------------------------------------------
 
 // Referente a VDMSound ------------------------------------------
-	connect( ui.btnVdms_FileConfg, SIGNAL( clicked() ), this, SLOT( on_btnVdms_FileConfg() ) );
-	connect( ui.btnVdms_ExeJuego , SIGNAL( clicked() ), this, SLOT( on_btnVdms_ExeJuego()  ) );
-	connect( ui.btnVdms_Icono    , SIGNAL( clicked() ), this, SLOT( on_btnVdms_Icono()     ) );
-
 	if( (EditandoJuego == true) && (TipoEmulador == "vdmsound") )
 	{
 		ui.tabWidget_Datos->setTabEnabled (5, true ); // tab VDMSound
@@ -306,7 +233,100 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	setGeometry( left, top, width(), height() );
 }
 
-frmAddEditJuego::~frmAddEditJuego(){}
+frmAddEditJuego::~frmAddEditJuego()
+{
+	//
+}
+void frmAddEditJuego::closeEvent( QCloseEvent *e )
+{
+	e->ignore();
+}
+
+void frmAddEditJuego::createConnections()
+{
+// Conecta los distintos botones con las funciones.
+	connect( ui.btnOk           , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
+	connect( ui.cbxDatos_TipoEmu, SIGNAL( activated(const QString &) ), this, SLOT( on_cbxDatos_TipoEmu_txtChanged(const QString &) ) );
+
+// Referente al DatosJuego ---------------------------------------
+	connect( ui.btnImgAbrir_Thumbs        , SIGNAL( clicked() ), this, SLOT( on_btnImgAbrir_Thumbs() ) );
+	connect( ui.btnImgAbrir_CoverFront    , SIGNAL( clicked() ), this, SLOT( on_btnImgAbrir_CoverFront() ) );
+	connect( ui.btnImgAbrir_CoverBack     , SIGNAL( clicked() ), this, SLOT( on_btnImgAbrir_CoverBack() ) );
+	connect( ui.btnImgVer_Thumbs          , SIGNAL( clicked() ), this, SLOT( on_btnImgVer_Thumbs() ) );
+	connect( ui.btnImgVer_CoverFront      , SIGNAL( clicked() ), this, SLOT( on_btnImgVer_CoverFront() ) );
+	connect( ui.btnImgVer_CoverBack       , SIGNAL( clicked() ), this, SLOT( on_btnImgVer_CoverBack() ) );
+	connect( ui.btnImgEliminar_Thumbs     , SIGNAL( clicked() ), this, SLOT( on_btnImgEliminar_Thumbs() ) );
+	connect( ui.btnImgEliminar_CoverFront , SIGNAL( clicked() ), this, SLOT( on_btnImgEliminar_CoverFront() ) );
+	connect( ui.btnImgEliminar_CoverBack  , SIGNAL( clicked() ), this, SLOT( on_btnImgEliminar_CoverBack() ) );
+	connect( ui.btnDescargarInfo          , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo() ) );
+	connect( ui.twDatoSmile , SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twDatoSmile_Dblclicked(QTreeWidgetItem*) ));
+
+	// Conecta los botones para editar los comentarios de los juegos
+	connect( ui.btnTool_Cortar          , SIGNAL( clicked() ), this, SLOT( on_btnTool_Cortar() ) );
+	connect( ui.btnTool_Copiar          , SIGNAL( clicked() ), this, SLOT( on_btnTool_Copiar() ) );
+	connect( ui.btnTool_Pegar           , SIGNAL( clicked() ), this, SLOT( on_btnTool_Pegar() ) );
+	connect( ui.btnTool_SelectAll       , SIGNAL( clicked() ), this, SLOT( on_btnTool_SelectAll() ) );
+	connect( ui.btnTool_Deshacer        , SIGNAL( clicked() ), this, SLOT( on_btnTool_Deshacer() ) );
+	connect( ui.btnTool_Rehacer         , SIGNAL( clicked() ), this, SLOT( on_btnTool_Rehacer() ) );
+	connect( ui.btnTool_TextoNegrita    , SIGNAL( clicked() ), this, SLOT( on_btnTool_TextoNegrita() ) );
+	connect( ui.btnTool_TextoCursiva    , SIGNAL( clicked() ), this, SLOT( on_btnTool_TextoCursiva() ) );
+	connect( ui.btnTool_TextoSubrayado  , SIGNAL( clicked() ), this, SLOT( on_btnTool_TextoSubrayado() ) );
+	connect( ui.btnTool_InsertarImg     , SIGNAL( clicked() ), this, SLOT( on_btnTool_InsertarImg() ) );
+	connect( ui.btnTool_InsertaUrl      , SIGNAL( clicked() ), this, SLOT( on_btnTool_InsertaUrl() ) );
+	connect( ui.btnTool_Buscar          , SIGNAL( clicked() ), this, SLOT( on_btnTool_Buscar() ) );
+	connect( ui.btnTool_BuscarAnterior  , SIGNAL( clicked() ), this, SLOT( on_btnTool_BuscarAnterior() ) );
+	connect( ui.btnTool_BuscarSiguiente , SIGNAL( clicked() ), this, SLOT( on_btnTool_BuscarSiguiente() ) );
+	connect( ui.btnTool_Reemplazar      , SIGNAL( clicked() ), this, SLOT( on_btnTool_Reemplazar() ) );
+	connect( ui.btnTool_Preview         , SIGNAL( clicked() ), this, SLOT( on_btnTool_Preview() ) );
+	//----
+	connect( ui.btnNuevaUrl    , SIGNAL( clicked() ), this, SLOT( on_btnNuevaUrl()    ) );
+	connect( ui.btnEditarUrl   , SIGNAL( clicked() ), this, SLOT( on_btnEditarUrl()   ) );
+	connect( ui.btnEliminarUrl , SIGNAL( clicked() ), this, SLOT( on_btnEliminarUrl() ) );
+	connect( ui.btnAbrirUrl    , SIGNAL( clicked() ), this, SLOT( on_btnAbrirUrl()    ) );
+	//----
+	connect( ui.btnDatosFiles_PathFile , SIGNAL( clicked() ), this, SLOT( on_btnDatosFiles_PathFile() ) );
+	connect( ui.btnAddFile     , SIGNAL( clicked() ), this, SLOT( on_btnAddFile()     ) );
+	connect( ui.btnEditFile    , SIGNAL( clicked() ), this, SLOT( on_btnEditFile()    ) );
+	connect( ui.btnUpdateFile  , SIGNAL( clicked() ), this, SLOT( on_btnUpdateFile()  ) );
+	connect( ui.btnDeleteFile  , SIGNAL( clicked() ), this, SLOT( on_btnDeleteFile()  ) );
+	//----
+
+// Referente a DOSBox --------------------------------------------
+	connect( ui.btnDbx_FileConfg  , SIGNAL( clicked() ), this, SLOT( on_btnDbx_FileConfg()  ) );
+	connect( ui.btnDbx_ExeJuego   , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeJuego()   ) );
+	connect( ui.btnDbx_ExeSetup   , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeSetup()   ) );
+	connect( ui.btnDirGravisUltraSound, SIGNAL( clicked() ), this, SLOT( on_btnDirGravisUltraSound() ) );
+	connect( ui.btnDbx_mapperfile , SIGNAL( clicked() ), this, SLOT( on_btnDbx_mapperfile() ) );
+	connect( ui.btnDbx_language   , SIGNAL( clicked() ), this, SLOT( on_btnDbx_language()   ) );
+	connect( ui.btnDbx_capturas   , SIGNAL( clicked() ), this, SLOT( on_btnDbx_capturas()   ) );
+	connect( ui.btnDbx_musica     , SIGNAL( clicked() ), this, SLOT( on_btnDbx_musica()     ) );
+	connect( ui.btnDbx_AddSerial  , SIGNAL( clicked() ), this, SLOT( on_btnDbx_AddSerial()  ) );
+	connect( ui.btnMount_Add      , SIGNAL( clicked() ), this, SLOT( on_btnMount_Add()      ) );
+	connect( ui.btnMount_Edit     , SIGNAL( clicked() ), this, SLOT( on_btnMount_Edit()     ) );
+	connect( ui.btnMount_Delete   , SIGNAL( clicked() ), this, SLOT( on_btnMount_Delete()   ) );
+	connect( ui.btnMount_Clear    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Clear()    ) );
+	connect( ui.btnMount_Subir    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Subir()    ) );
+	connect( ui.btnMount_Bajar    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Bajar()    ) );
+	connect( ui.btnMount_AutoCrear, SIGNAL( clicked() ), this, SLOT( on_btnMount_AutoCrear()) );
+	connect( ui.btnMount_Primario , SIGNAL( clicked() ), this, SLOT( on_btnMount_Primario() ) );
+	connect( ui.cbxDbx_Profiles   , SIGNAL( activated(const QString &) ), this, SLOT( on_setProfileGame(const QString &) ) );
+
+// Referente al ScummVM ------------------------------------------
+	connect( ui.twScummVM     , SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* )));
+	connect( ui.btnDefectoSvm , SIGNAL( clicked() ), this, SLOT( on_btnDefecto() ) );
+	connect( ui.btnDirSvm_1   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_path() ) );
+	connect( ui.btnDirSvm_2   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_save() ) );
+	connect( ui.btnDirSvm_3   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_extra() ) );
+	connect( ui.btnDirSvm_4   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_capturas() ) );
+	connect( ui.btnDirSvm_5   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sonido() ) );
+	connect( ui.btnDirSvm_6   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sound_font() ) );
+	connect( ui.btnDirSvm_7   , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_setup() ) );
+
+// Referente a VDMSound ------------------------------------------
+	connect( ui.btnVdms_FileConfg, SIGNAL( clicked() ), this, SLOT( on_btnVdms_FileConfg() ) );
+	connect( ui.btnVdms_ExeJuego , SIGNAL( clicked() ), this, SLOT( on_btnVdms_ExeJuego()  ) );
+	connect( ui.btnVdms_Icono    , SIGNAL( clicked() ), this, SLOT( on_btnVdms_Icono()     ) );
+}
 
 void frmAddEditJuego::setTheme()
 {
@@ -649,7 +669,7 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 		do {
 			QTreeWidgetItem *item_url = new QTreeWidgetItem( ui.twDatosURL );
 			item_url->setText( 0 , query.record().value("url").toString()         ); // url
-			item_url->setIcon( 0 , QIcon(stTheme+"img16/edit_enlace.png")               ); // icono
+			item_url->setIcon( 0 , QIcon(stTheme+"img16/edit_enlace.png")         ); // icono
 			item_url->setText( 1 , query.record().value("descripcion").toString() ); // descripcion
 			item_url->setText( 2 , query.record().value("id").toString()          ); // id
 			item_url->setText( 3 , query.record().value("idgrl").toString()       ); // idgrl
@@ -664,7 +684,7 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 		do {
 			QTreeWidgetItem *item_files = new QTreeWidgetItem( ui.twDatosFiles );
 			item_files->setText( 0 , query.record().value("nombre").toString()      ); // nombre
-			item_files->setIcon( 0 , QIcon(stTheme+"img16/importar.png")                  ); // icono
+			item_files->setIcon( 0 , QIcon(stTheme+"img16/importar.png")            ); // icono
 			item_files->setText( 1 , query.record().value("crc").toString()         ); // crc
 			item_files->setText( 2 , query.record().value("descripcion").toString() ); // descripcion
 			item_files->setText( 3 , query.record().value("size").toString()        ); // size
@@ -1202,11 +1222,11 @@ void frmAddEditJuego::on_btnAddFile()
 	{
 		QHash<QString, QString> datos_file;
 		datos_file.clear();
-		datos_file["nombre"] = ui.txtDatosFiles_FileName->text();				// 0 nombre
-		datos_file["crc"] = ui.txtDatosFiles_Crc32->text();						// 1 crc32
+		datos_file["nombre"]      = ui.txtDatosFiles_FileName->text();			// 0 nombre
+		datos_file["crc"]         = ui.txtDatosFiles_Crc32->text();				// 1 crc32
 		datos_file["descripcion"] = ui.txtDatosFiles_Comentario->toPlainText();	// 2 descripcion
-		datos_file["path"] = ui.txtDatosFiles_PathFile->text();					// 3 path
-		datos_file["size"] = ui.txtDatosFiles_Size->text();						// 4 size
+		datos_file["path"]        = ui.txtDatosFiles_PathFile->text();			// 3 path
+		datos_file["size"]        = ui.txtDatosFiles_Size->text();				// 4 size
 
 		if(stItemIDGrl!="")
 			id_file = sql->ItemInsertaUnFiles( datos_file , stItemIDGrl );
@@ -1746,45 +1766,31 @@ void frmAddEditJuego::CargarDatosDosBox(QString stIDdbx, const QString ProfileGa
 void frmAddEditJuego::CargarDatosDBxMontaje( QString stIDdbx )
 {
 	QSqlQuery query;
-	QSqlRecord rec;
 	QString tipoDrive, select_mount;
 	query.exec("SELECT * FROM dbgrl_emu_dosbox_mount WHERE id_dosbox="+stIDdbx+" ORDER BY id_lista");
 	if( query.first() )
 	{
 		do {
-			rec = query.record();
 			QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 			tipoDrive.clear();
-			tipoDrive = query.value(rec.indexOf("tipo_as")).toString();
+			tipoDrive = query.record().value("tipo_as").toString();
 
-			if(query.value(rec.indexOf("select_mount")).toString()=="v")
+			if(query.record().value("select_mount").toString()=="v")
 				select_mount = "s_";
 			else
 				select_mount = "";
 
-			if(tipoDrive=="drive")
-				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
-			if(tipoDrive=="cdrom")
-				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_cdrom.png") );
-			if(tipoDrive=="floppy")
-				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_floppy.png") );
-			if(tipoDrive=="IMG_floppy")
-				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"floppy_1.png") );
-			if(tipoDrive=="IMG_iso")
-				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"cd_iso.png") );
-			if(tipoDrive=="IMG_hdd")
-				item->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
-
-			item->setText( 0 , query.value(rec.indexOf("path")).toString() );			// path			- directorio o iso
-			item->setText( 1 , query.value(rec.indexOf("label")).toString() );			// label		- etiqueta
-			item->setText( 2 , query.value(rec.indexOf("tipo_as")).toString() );		// tipo_as		- tipo de montaje
-			item->setText( 3 , query.value(rec.indexOf("letter")).toString() );			// letter		- letra de montaje
-			item->setText( 4 , query.value(rec.indexOf("indx_cd")).toString() );		// indx_cd		- index de la unidad de cd-rom
-			item->setText( 5 , query.value(rec.indexOf("opt_mount")).toString() );		// opt_mount	- opciones del cd-rom
-			item->setText( 6 , query.value(rec.indexOf("io_ctrl")).toString() );		// io_ctrl		- cd/dvd
-			item->setText( 7 , query.value(rec.indexOf("select_mount")).toString());	// select_mount	- primer montaje
-			item->setText( 8 , query.value(rec.indexOf("id")).toString() );				// id
-			item->setText( 9 , query.value(rec.indexOf("id_lista")).toString() );		// id_lista		- id_lista
+			item->setIcon( 0 , QIcon( fGrl.getIconMount(tipoDrive, select_mount) ) );
+			item->setText( 0 , query.record().value("path").toString()         );	// path			- directorio o iso
+			item->setText( 1 , query.record().value("label").toString()        );	// label		- etiqueta
+			item->setText( 2 , query.record().value("tipo_as").toString()      );	// tipo_as		- tipo de montaje
+			item->setText( 3 , query.record().value("letter").toString()       );	// letter		- letra de montaje
+			item->setText( 4 , query.record().value("indx_cd").toString()      );	// indx_cd		- index de la unidad de cd-rom
+			item->setText( 5 , query.record().value("opt_mount").toString()    );	// opt_mount	- opciones del cd-rom
+			item->setText( 6 , query.record().value("io_ctrl").toString()      );	// io_ctrl		- cd/dvd
+			item->setText( 7 , query.record().value("select_mount").toString() );	// select_mount	- primer montaje
+			item->setText( 8 , query.record().value("id").toString()           );	// id
+			item->setText( 9 , query.record().value("id_lista").toString()     );	// id_lista		- id_lista
 		} while (query.next());
 	}
 
@@ -2274,19 +2280,8 @@ void frmAddEditJuego::on_btnMount_Add()
 	{
 		QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 		QString tipoDrive = AddEditMontajes->DatosMontaje["tipo_as"];
-		if(tipoDrive=="drive")
-			item->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
-		if(tipoDrive=="cdrom")
-			item->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
-		if(tipoDrive=="floppy")
-			item->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
-		if(tipoDrive=="IMG_floppy")
-			item->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
-		if(tipoDrive=="IMG_iso")
-			item->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
-		if(tipoDrive=="IMG_hdd")
-			item->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
 
+		item->setIcon( 0 , QIcon( fGrl.getIconMount(tipoDrive, "") ) );
 		item->setText( 0 , AddEditMontajes->DatosMontaje["path"]		);	// directorio o iso
 		item->setText( 1 , AddEditMontajes->DatosMontaje["label"]		);	// etiqueta
 		item->setText( 2 , AddEditMontajes->DatosMontaje["tipo_as"]		);	// tipo de montaje
@@ -2357,19 +2352,7 @@ void frmAddEditJuego::on_btnMount_Edit()
 			else
 				select_mount = "";
 
-			if(tipoDrive=="drive")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
-			if(tipoDrive=="cdrom")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_cdrom.png") );
-			if(tipoDrive=="floppy")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_floppy.png") );
-			if(tipoDrive=="IMG_floppy")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"floppy_1.png") );
-			if(tipoDrive=="IMG_iso")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"cd_iso.png") );
-			if(tipoDrive=="IMG_hdd")
-				ui.twMontajes->currentItem()->setIcon( 0, QIcon(stTheme+"img16/"+select_mount+"drive_hd.png") );
-
+			ui.twMontajes->currentItem()->setIcon( 0 , QIcon( fGrl.getIconMount(tipoDrive, select_mount) ) );
 			ui.twMontajes->currentItem()->setText( 0 , AddEditMontajes->DatosMontaje["path"]		);	// directorio o iso
 			ui.twMontajes->currentItem()->setText( 1 , AddEditMontajes->DatosMontaje["label"]		);	// etiqueta
 			ui.twMontajes->currentItem()->setText( 2 , AddEditMontajes->DatosMontaje["tipo_as"]		);	// tipo de montaje
@@ -2528,37 +2511,14 @@ void frmAddEditJuego::on_btnMount_Primario()
 		{
 			tipoDrive = ui.twMontajes->topLevelItem( num_mount )->text(2);
 
-			if(tipoDrive=="drive")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
-			if(tipoDrive=="cdrom")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_cdrom.png") );
-			if(tipoDrive=="floppy")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_floppy.png") );
-			if(tipoDrive=="IMG_floppy")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/floppy_1.png") );
-			if(tipoDrive=="IMG_iso")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/cd_iso.png") );
-			if(tipoDrive=="IMG_hdd")
-				ui.twMontajes->topLevelItem( num_mount )->setIcon( 0, QIcon(stTheme+"img16/drive_hd.png") );
-
-			ui.twMontajes->topLevelItem( num_mount )->setText(7 , "x");
+			ui.twMontajes->topLevelItem( num_mount )->setIcon(0, QIcon( fGrl.getIconMount(tipoDrive, "") ) );
+			ui.twMontajes->topLevelItem( num_mount )->setText(7, "x");
 		}
 
 		tipoDrive = ui.twMontajes->topLevelItem( indx_mount )->text(2);
-		if(tipoDrive=="drive")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_hd.png") );
-		if(tipoDrive=="cdrom")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_cdrom.png") );
-		if(tipoDrive=="floppy")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_floppy.png") );
-		if(tipoDrive=="IMG_floppy")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_floppy_1.png") );
-		if(tipoDrive=="IMG_iso")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_cd_iso.png") );
-		if(tipoDrive=="IMG_hdd")
-			ui.twMontajes->topLevelItem( indx_mount )->setIcon( 0, QIcon(stTheme+"img16/s_drive_hd.png") );
 
-		ui.twMontajes->topLevelItem( indx_mount )->setText(7 , "v");
+		ui.twMontajes->topLevelItem( indx_mount )->setIcon(0, QIcon( fGrl.getIconMount(tipoDrive, "s_") ) );
+		ui.twMontajes->topLevelItem( indx_mount )->setText(7, "v");
 
 		QHash<QString, QString> datos_montaje;
 		datos_montaje.clear();
@@ -2578,19 +2538,16 @@ void frmAddEditJuego::CargarDatosVDMSound( QString stIDvdms )
 {
 	QString strTemp, str_program, str_vdms_debug, str_winnt_dos, str_winnt_dosbox, str_winnt_storage;
 	QSqlQuery query;
-	QSqlRecord rec;
 	query.exec("SELECT * FROM dbgrl_emu_vdmsound WHERE idgrl="+stIDvdms+" LIMIT 0,1");
 	if( query.first() )
 	{
-		rec = query.record();
-
-		ui.txtVdms_path_conf->setText( query.value(rec.indexOf("path_conf")).toString() );
-		ui.txtVdms_path_exe->setText( query.value(rec.indexOf("path_exe")).toString() );
-		str_program       = query.value(rec.indexOf("program")).toString();
-		str_vdms_debug    = query.value(rec.indexOf("vdms_debug")).toString();
-		str_winnt_dos     = query.value(rec.indexOf("winnt_dos")).toString();
-		str_winnt_dosbox  = query.value(rec.indexOf("winnt_dosbox")).toString();
-		str_winnt_storage = query.value(rec.indexOf("winnt_storage")).toString();
+		ui.txtVdms_path_conf->setText( query.record().value("path_conf").toString() );
+		ui.txtVdms_path_exe->setText( query.record().value("path_exe").toString() );
+		str_program       = query.record().value("program").toString();
+		str_vdms_debug    = query.record().value("vdms_debug").toString();
+		str_winnt_dos     = query.record().value("winnt_dos").toString();
+		str_winnt_dosbox  = query.record().value("winnt_dosbox").toString();
+		str_winnt_storage = query.record().value("winnt_storage").toString();
 
 		QStringList list_program       = str_program.split("|");
 		QStringList list_winnt_dos     = str_winnt_dos.split("|");

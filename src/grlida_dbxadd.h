@@ -55,6 +55,7 @@ private:
 	QHash<QString, QString> TempProfileDosBox;
 	QHash<QString, QString> UltimoPath;
 
+	void createConnections();
 	void setTheme();
 	void CargaUltimosDirectorios();
 

@@ -58,6 +58,9 @@ public:
 	QString stItemIDDbx;
 	QString stItemIDVdms;
 
+protected:
+	void closeEvent( QCloseEvent *e );
+
 private:
 	Funciones fGrl;
 	dbSql *sql;
@@ -74,9 +77,11 @@ private:
 	QHash<QString, QString> listSmailes;
 	QHash<QString, QString> UltimoPath;
 	QUrl my_url;
-	
+
+	void createConnections();
 	void setTheme();
 	void CargaUltimosDirectorios();
+
 // Referente al DatosJuego ---------------------------------------
 	void CargarDatosJuego( QString stIDIndex );
 	void setDatosJuegos();

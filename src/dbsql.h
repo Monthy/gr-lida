@@ -45,15 +45,17 @@ public:
 	bool dbisOpen();// Retorna si esta abierta o no la base de datos.
 	void dbClose();	// Cierra la base de datos.
 
-	void CrearTablas(); // Crea las tablas si no las tiene.
 	int getCount(QString stTable, QString stWhere = "");
 	QString ItemIDIndex(QString SQLtabla, QString SQLindex );
 // Elimina un juego de la base de datos.
 	void ItemEliminar(const QString IDgrl);
+// Crea las tablas si no las tiene.
+	void CrearTablas();
 // Datos Juego.
 	QHash<QString, QString> show_Datos(QString IDgrl);
 	QString ItemInsertaDatos(const QHash<QString, QString> datos);
 	void ItemActualizaDatos(const QHash<QString, QString> datos, const QString IDgrl);
+	void ItemActualizaDatosRating(const QString new_rating , const QString IDgrl );
 	void ItemActualizaDatosFavorito(const QString EstadoFav , const QString IDgrl );
 // DOSBox.
 	QHash<QString, QString> showConfg_DOSBox(QString IDgrl);

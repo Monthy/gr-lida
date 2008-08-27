@@ -33,8 +33,8 @@ frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog
 	connect( ui.btnDirFile , SIGNAL( clicked() ), this, SLOT( on_DirFile() ) );
 
 	stHomeDir = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
+	stTheme   = fGrl.ThemeGrl();
 
-	stTheme = fGrl.ThemeGrl();
 	setTheme();
 
 	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );

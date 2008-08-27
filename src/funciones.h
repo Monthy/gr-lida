@@ -36,59 +36,79 @@ public:
 
 // Versión del GR-lida
 	QString stVersionGrl(){ return "0.6.0"; }
-// Versiones que soporta
+// Versiones de los emuladores que soporta el GR-lida
+// DOSBox
 	QString stVersionDbx(){ return "0.72";  }
+// ScummVM
 	QString stVersionSvm(){ return "0.11.1";}
+// VDMSound
 	QString stVersionVdms(){return "2.0.4"; }
-// Devuelve el directorio que usa el GR-lida
-	QString GRlidaHomePath();
-//
-	QString ThemeGrl();
-	QString StyleSheet();
 // Muestra el Nombre de la plataforma donde esta compilada
 	QString get_Plataforma();
+
 // Convierte de Número a Texto
 	QString	IntToStr(int num);
 // Convierte de Texto a Número
 	int StrToInt(QString text);
 // Convierte Texto "true", "yes" a tipo Bool
 	bool StrToBool(QString text);
+// Convierte Bool a Texto "true", "yes" indicando el tipo
 	QString BoolToStr(bool estado, bool type_yes = false);
-// Devuelve la hora y la fecha
-	QString HoraFechaActual();
+// Devuelve la hora y la fecha actual
+	QString HoraFechaActual(QString hora = "");
 // Devuelve una URL correcta
 	QString url_correcta(QString url);
 // Elimina caracteres no permitidos por windows por ejemplo
 	QString eliminar_caracteres(QString str);
+// Devuelve un Icono
+	QString getIconListaJuegos(QString strIcon, QString stIconDir);
+	QString getIconMount(QString tipoDrive, QString select_mount);
+// Devuelve el directorio que usa el GR-lida
+	QString GRlidaHomePath();
+// Devuelve el directorio del Theme a usar
+	QString ThemeGrl();
+// Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use
+	QString StyleSheet();
+
+// Obtiene la dirección y el nombre del archivo atraves de QFileDialog
+	QString VentanaAbrirArchivos(const QString caption, const QString dir, const QString tmp_dir, const QString filter, QString *selectedFilter, bool Open_Save);
+// Obtiene la dirección de una carpeta atraves de QFileDialog
+	QString VentanaDirectorios(const QString caption, const QString dir, const QString tmp_dir);
+
 // Elimina un item de un TreeWidget
-	void DeleteItemTree( QTreeWidgetItem * item );
-//
+	void DeleteItemTree(QTreeWidgetItem * item);
+// Carga la lista de Idiomas en un QComboBox
 	void CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox);
+// Carga una lista de datos en un QComboBox
 	void CargarDatosComboBox(QString Archivo, QComboBox *myCombobox,int num_col, bool idioma_svm);
+// Carga Iconos e imagenes soportadas en un QComboBox de un directorio
 	void CargarIconosComboBox(QString IconDir, QComboBox *myCombobox, QStringList filters);
+// Carga la lista del ScummVM en un QTreeWidget
 	void CargarDatosListaSvm(QString Archivo, QTreeWidget *myTreeWidget);
-//Carga los Smiles en un TreeWidget
-	QHash<QString, QString> Cargar_Smiles(QString Archivo, QTreeWidget *myTreeWidget);
+// Carga la lista de los Smiles y los devuelve en un QHash<QString, QString>
 	QHash<QString, QString> Cargar_Smiles(QString Archivo);
+// Carga la lista de los Smiles en un TreeWidget y los devuelve en un QHash<QString, QString>
+	QHash<QString, QString> Cargar_Smiles(QString Archivo, QTreeWidget *myTreeWidget);
+// Remplaza texto por las imagenes de los emoticones
 	QString ReemplazaTextoSmiles(QString str, QHash<QString, QString> lista);
 // Carga los Distintos datos para Ordenar
 	QStringList CargaDatosListas(QString Archivo, QString delimitador);
-// Obtiene la direccion y el nombre del archivo atraves de QFileDialog
-	QString VentanaAbrirArchivos(const QString caption, const QString dir, const QString tmp_dir, const QString filter, QString *selectedFilter, bool Open_Save);
-// Obtiene la direccion de una carpeta atraves de QFileDialog
-	QString VentanaDirectorios(const QString caption, const QString dir, const QString tmp_dir);
-//
+
+// Crea la configuración del ScummVM
 	void CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm);
-//
-	void CrearArchivoConfigDbx(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg, bool ExportToDFend = false);
+// Crea la configuración de los Montajes para el DOSBox
 	QStringList CreaConfigMontajes(QTreeWidget *treeWidget, const QHash<QString, QString> datos);
-//
+// Crea el archivo de configuración del DOSBox
+	void CrearArchivoConfigDbx(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg, bool ExportToDFend = false);
+// Crea el archivo de configuración del VDMSound
 	void CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString PathSaveConfg);
-// Carga la lista de los perfiles preconfigurados en un ComboBox
-	void Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *myCombobox);
-// Exportar la configuracion del DOSBox para el DFend y GR-lida
-	void Exportar_Profile_DFend(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
+
+// Exportar la configuracion del DOSBox para el GR-lida
 	void Exportar_Profile_GRLida(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
+// Carga la lista de los perfiles preconfigurados en un QComboBox
+	void Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *myCombobox);
+// Exportar la configuracion del DOSBox para el DFend
+	void Exportar_Profile_DFend(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString PathSaveConfg);
 // Importar la configuracion del DOSBox para el DFend
 	QHash<QString, QString> Importar_Profile_DFend(QString fileName);
 

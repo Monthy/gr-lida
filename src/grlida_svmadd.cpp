@@ -32,22 +32,15 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 
 	stHomeDir  = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stDatosDir = stHomeDir + "datos/";
+	stTheme    = fGrl.ThemeGrl();
 
-	stTheme = fGrl.ThemeGrl();
+	createConnections();
+
 	setTheme();
 
-	ui.wizardSvm->setCurrentIndex(0);
+	CargaUltimosDirectorios();
 
-// Conecta los distintos botones con las funciones.
-	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );
-	connect( ui.btnNext		, SIGNAL( clicked() ), this, SLOT( on_btnNext()     ) );
-	connect( ui.btnPrevious	, SIGNAL( clicked() ), this, SLOT( on_btnPrevious() ) );
-	connect( ui.btnDirSvm_1	, SIGNAL( clicked() ), this, SLOT( on_btnDirGame()  ) );
-	connect( ui.btnDirSvm_2	, SIGNAL( clicked() ), this, SLOT( on_btnDirSave()  ) );
-	connect( ui.btnDefectoSvm,SIGNAL( clicked() ), this, SLOT( on_btnDefecto()  ) );
-	connect( ui.twScummVM	, SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* )));
-	connect( ui.twScummVM	, SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twScummVM_Dblclicked(QTreeWidgetItem* )));
-	connect( ui.btnDescargarInfo , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo()  ) );
+	ui.wizardSvm->setCurrentIndex(0);
 
 	ui.twScummVM->header()->setStretchLastSection(true);
 	ui.twScummVM->header()->setMovable(false);
@@ -68,8 +61,6 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 	ui.cbxSvm_render_mode->setCurrentIndex(0);
 	ui.cbxSvm_music_driver->setCurrentIndex(0);
 
-	CargaUltimosDirectorios();
-
 // centra la ventana en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
@@ -79,6 +70,20 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 }
 
 frmSvmAdd::~frmSvmAdd(){}
+
+void frmSvmAdd::createConnections()
+{
+// Conecta los distintos botones con las funciones.
+	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );
+	connect( ui.btnNext		, SIGNAL( clicked() ), this, SLOT( on_btnNext()     ) );
+	connect( ui.btnPrevious	, SIGNAL( clicked() ), this, SLOT( on_btnPrevious() ) );
+	connect( ui.btnDirSvm_1	, SIGNAL( clicked() ), this, SLOT( on_btnDirGame()  ) );
+	connect( ui.btnDirSvm_2	, SIGNAL( clicked() ), this, SLOT( on_btnDirSave()  ) );
+	connect( ui.btnDefectoSvm,SIGNAL( clicked() ), this, SLOT( on_btnDefecto()  ) );
+	connect( ui.twScummVM	, SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* )));
+	connect( ui.twScummVM	, SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twScummVM_Dblclicked(QTreeWidgetItem* )));
+	connect( ui.btnDescargarInfo , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo()  ) );
+}
 
 void frmSvmAdd::setTheme()
 {

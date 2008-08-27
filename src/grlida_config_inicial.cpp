@@ -29,20 +29,46 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 {
 	ui.setupUi(this);
 
-	connect( ui.btnOk     , SIGNAL( clicked() ), this, SLOT( on_btnOk()     ) );
-	connect( ui.btnDirDbx , SIGNAL( clicked() ), this, SLOT( on_btnDirDbx() ) );
-	connect( ui.btnDirSvm , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm() ) );
+	stHomeDir = fGrl.GRlidaHomePath();
+	stTheme   = fGrl.ThemeGrl();
+	setTheme();
+
+	createConnections();
+
+	CargarConfig();
+
+// centra la aplicacion en el escritorio
+	QDesktopWidget *desktop = qApp->desktop();
+	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
+	int left = ( rect.width() - width() ) / 2;
+	int top = ( rect.height() - height() ) / 2;
+	setGeometry( left, top, width(), height() );
+}
+
+frmConfigInicial::~frmConfigInicial()
+{
+	//
+}
+
+void frmConfigInicial::closeEvent( QCloseEvent *e )
+{
+	on_setLanguage( ui.cbxIdioma->currentText() );
+
+	GuardarConfig();
+
+	e->accept();
+}
+
+void  frmConfigInicial::createConnections()
+{
+	connect( ui.btnOk    , SIGNAL( clicked() ), this, SLOT( on_btnOk()     ) );
+	connect( ui.btnDirDbx, SIGNAL( clicked() ), this, SLOT( on_btnDirDbx() ) );
+	connect( ui.btnDirSvm, SIGNAL( clicked() ), this, SLOT( on_btnDirSvm() ) );
 	connect( ui.cbxIdioma, SIGNAL( activated(const QString &) ), this, SLOT( on_setLanguage(const QString &) ) );
+}
 
-	stHomeDir = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
-
-	stTheme = fGrl.ThemeGrl();
-	setStyleSheet( fGrl.StyleSheet() );
-
-	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
-	ui.btnDirDbx->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirSvm->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-
+void frmConfigInicial::CargarConfig()
+{
 	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
 	settings.beginGroup("OpcGeneral");
 		ui.chkConfig_DOSBoxDisp->setChecked( settings.value("DOSBoxDisp", "false").toBool() );
@@ -54,7 +80,7 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 		ui.txtDirSvm->setEnabled( settings.value("ScummVMDisp", "false").toBool()   );
 		ui.txtDirSvm->setText( settings.value("DirScummVM", "").toString() );
 		ui.chkConfig_VDMSoundDisp->setChecked( settings.value("VDMSoundDisp" , "false").toBool() );
-		IdiomaSelect = settings.value("IdiomaSelect", "es_ES").toString();
+		stIdiomaSelect= settings.value("IdiomaSelect", "es_ES").toString();
 		IdiomaExterno = settings.value("IdiomaExterno" , "false").toBool();
 	settings.endGroup();
 	UltimoPath.clear();
@@ -64,11 +90,11 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 	settings.endGroup();
 
 	if(IdiomaExterno)
-		fGrl.CargarIdiomasCombo( stHomeDir + "idiomas/", ui.cbxIdioma );
+		fGrl.CargarIdiomasCombo(stHomeDir + "idiomas/", ui.cbxIdioma);
 	else
-		fGrl.CargarIdiomasCombo( ":/idiomas/", ui.cbxIdioma );
+		fGrl.CargarIdiomasCombo(":/idiomas/", ui.cbxIdioma);
 
-	ui.cbxIdioma->setCurrentIndex( ui.cbxIdioma->findText(IdiomaSelect, Qt::MatchContains) ); //
+	ui.cbxIdioma->setCurrentIndex( ui.cbxIdioma->findText(stIdiomaSelect, Qt::MatchContains) ); //
 	on_setLanguage( ui.cbxIdioma->currentText() );
 
 	#ifdef Q_OS_WIN32
@@ -76,16 +102,30 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 	#else
 		ui.chkConfig_VDMSoundDisp->setEnabled(false);
 	#endif
-
-// centra la aplicacion en el escritorio
-	QDesktopWidget *desktop = qApp->desktop();
-	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
-	int left = ( rect.width() - width() ) / 2;
-	int top = ( rect.height() - height() ) / 2;
-	setGeometry( left, top, width(), height() );
 }
 
-frmConfigInicial::~frmConfigInicial(){}
+void frmConfigInicial::GuardarConfig()
+{
+	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	settings.beginGroup("OpcGeneral");
+		settings.setValue("DOSBoxDisp"   , ui.chkConfig_DOSBoxDisp->isChecked()   );
+		settings.setValue("ScummVMDisp"  , ui.chkConfig_ScummVMDisp->isChecked()  );
+		settings.setValue("VDMSoundDisp" , ui.chkConfig_VDMSoundDisp->isChecked() );
+		settings.setValue("Primeravez"   , ui.chkConfig_ShowNext->isChecked()     );
+		settings.setValue("DirDOSBox"    , ui.txtDirDbx->text()                   );
+		settings.setValue("DirScummVM"   , ui.txtDirSvm->text()                   );
+		settings.setValue("IdiomaSelect" , stIdiomaSelect                         );
+	settings.endGroup();
+}
+
+void frmConfigInicial::setTheme()
+{
+	setStyleSheet( fGrl.StyleSheet() );
+
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnDirDbx->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnDirSvm->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+}
 
 void frmConfigInicial::on_setLanguage(const QString txt_locale)
 {
@@ -98,41 +138,15 @@ void frmConfigInicial::on_setLanguage(const QString txt_locale)
 
 	qApp->installTranslator(&translator);
 
-	IdiomaSelect = parts.value(1);
+	stIdiomaSelect = parts.value(1);
 	ui.retranslateUi(this);
 }
 
-void frmConfigInicial::closeEvent( QCloseEvent *e )
+void frmConfigInicial::on_btnOk()
 {
-	on_btnOk();
-	e->accept();
-}
-
-void frmConfigInicial::on_btnOk(){
-	QSettings settings( stHomeDir + "GR-lida.conf", QSettings::IniFormat );
-
-	QString stDirDbx, stDirSvm;
-	if(ui.chkConfig_DOSBoxDisp->isChecked())
-		stDirDbx = ui.txtDirDbx->text();
-	else
-		stDirDbx = "";
-
-	if(ui.chkConfig_ScummVMDisp->isChecked())
-		stDirSvm = ui.txtDirSvm->text();
-	else
-		stDirSvm = "";
-
-	settings.beginGroup("OpcGeneral");
-	settings.setValue("DOSBoxDisp"   , ui.chkConfig_DOSBoxDisp->isChecked()		);
-	settings.setValue("ScummVMDisp"  , ui.chkConfig_ScummVMDisp->isChecked()	);
-	settings.setValue("VDMSoundDisp" , ui.chkConfig_VDMSoundDisp->isChecked()	);
-	settings.setValue("Primeravez"   , ui.chkConfig_ShowNext->isChecked() 		);
-	settings.setValue("DirDOSBox"    , stDirDbx									);
-	settings.setValue("DirScummVM"   , stDirSvm									);
-	settings.setValue("IdiomaSelect" , IdiomaSelect );
-	settings.endGroup();
-
 	on_setLanguage( ui.cbxIdioma->currentText() );
+
+	GuardarConfig();
 
 	QDialog::accept();
 }

@@ -30,11 +30,26 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
 	ui.setupUi(this);
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
+	stTheme   = fGrl.ThemeGrl();
 
-	stTheme = fGrl.ThemeGrl();
+	createConnections();
+
 	setTheme();
+
 	CargaUltimosDirectorios();
 
+// centra la ventana en el escritorio
+	QDesktopWidget *desktop = qApp->desktop();
+	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
+	int left = ( rect.width() - width() ) / 2;
+	int top = ( rect.height() - height() ) / 2;
+	setGeometry( left, top, width(), height() );
+}
+
+frmImportPath::~frmImportPath(){}
+
+void frmImportPath::createConnections()
+{
 	connect( ui.btnOk, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 
 	connect( ui.btnDirPath_Datos_Thumbs     , SIGNAL( clicked() ), this, SLOT( on_btnDirPath_Datos_Thumbs() ) );
@@ -59,16 +74,7 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
 
 	connect( ui.btnDirPath_Vdms_1, SIGNAL( clicked() ), this, SLOT( on_btnOpenVdmsFile_1()) );
 	connect( ui.btnDirPath_Vdms_2, SIGNAL( clicked() ), this, SLOT( on_btnOpenVdmsFile_2()) );
-
-// centra la ventana en el escritorio
-	QDesktopWidget *desktop = qApp->desktop();
-	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
-	int left = ( rect.width() - width() ) / 2;
-	int top = ( rect.height() - height() ) / 2;
-	setGeometry( left, top, width(), height() );
 }
-
-frmImportPath::~frmImportPath(){}
 
 void frmImportPath::setTheme()
 {

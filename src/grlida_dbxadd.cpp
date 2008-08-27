@@ -34,29 +34,11 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	ui.wizardDbx->setCurrentIndex(0);
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
+	stTheme   = fGrl.ThemeGrl();
 
-	stTheme = fGrl.ThemeGrl();
+	createConnections();
+
 	setTheme();
-
-// Conecta los distintos botones con las funciones.
-	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );
-	connect( ui.btnNext		, SIGNAL( clicked() ), this, SLOT( on_btnNext()     ) );
-	connect( ui.btnPrevious	, SIGNAL( clicked() ), this, SLOT( on_btnPrevious() ) );
-
-	connect( ui.btnDbx_FileConfg, SIGNAL( clicked() ), this, SLOT( on_btnDbx_FileConfg() ) );
-	connect( ui.btnDbx_ExeJuego , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeJuego()  ) );
-	connect( ui.btnDbx_ExeSetup , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeSetup()  ) );
-
-	connect( ui.btnMount_Add      , SIGNAL( clicked() ), this, SLOT( on_btnMount_Add()      ) );
-	connect( ui.btnMount_Edit     , SIGNAL( clicked() ), this, SLOT( on_btnMount_Edit()     ) );
-	connect( ui.btnMount_Delete   , SIGNAL( clicked() ), this, SLOT( on_btnMount_Delete()   ) );
-	connect( ui.btnMount_Clear    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Clear()    ) );
-	connect( ui.btnMount_Subir    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Subir()    ) );
-	connect( ui.btnMount_Bajar    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Bajar()    ) );
-	connect( ui.btnMount_AutoCrear, SIGNAL( clicked() ), this, SLOT( on_btnMount_AutoCrear()) );
-	connect( ui.btnMount_Primario , SIGNAL( clicked() ), this, SLOT( on_btnMount_Primario() ) );
-	connect( ui.cbxDbx_Profiles   , SIGNAL( activated(const QString &) ), this, SLOT( on_setProfileGame(const QString &) ) );
-	connect( ui.btnDescargarInfo  , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo()  ) );
 
 	ui.twMontajes->header()->setStretchLastSection(true);
 	ui.twMontajes->header()->setMovable(false);
@@ -100,6 +82,29 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 }
 
 frmDbxAdd::~frmDbxAdd(){}
+
+void frmDbxAdd::createConnections()
+{
+// Conecta los distintos botones con las funciones.
+	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );
+	connect( ui.btnNext		, SIGNAL( clicked() ), this, SLOT( on_btnNext()     ) );
+	connect( ui.btnPrevious	, SIGNAL( clicked() ), this, SLOT( on_btnPrevious() ) );
+
+	connect( ui.btnDbx_FileConfg, SIGNAL( clicked() ), this, SLOT( on_btnDbx_FileConfg() ) );
+	connect( ui.btnDbx_ExeJuego , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeJuego()  ) );
+	connect( ui.btnDbx_ExeSetup , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeSetup()  ) );
+
+	connect( ui.btnMount_Add      , SIGNAL( clicked() ), this, SLOT( on_btnMount_Add()      ) );
+	connect( ui.btnMount_Edit     , SIGNAL( clicked() ), this, SLOT( on_btnMount_Edit()     ) );
+	connect( ui.btnMount_Delete   , SIGNAL( clicked() ), this, SLOT( on_btnMount_Delete()   ) );
+	connect( ui.btnMount_Clear    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Clear()    ) );
+	connect( ui.btnMount_Subir    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Subir()    ) );
+	connect( ui.btnMount_Bajar    , SIGNAL( clicked() ), this, SLOT( on_btnMount_Bajar()    ) );
+	connect( ui.btnMount_AutoCrear, SIGNAL( clicked() ), this, SLOT( on_btnMount_AutoCrear()) );
+	connect( ui.btnMount_Primario , SIGNAL( clicked() ), this, SLOT( on_btnMount_Primario() ) );
+	connect( ui.cbxDbx_Profiles   , SIGNAL( activated(const QString &) ), this, SLOT( on_setProfileGame(const QString &) ) );
+	connect( ui.btnDescargarInfo  , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo()  ) );
+}
 
 void frmDbxAdd::setTheme()
 {

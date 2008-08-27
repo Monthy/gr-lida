@@ -22,99 +22,86 @@
  *
 **/
 
-#include <QApplication>
-#include <QSplashScreen>
-#include <QMessageBox>
-#include <QProcess>
-#include <QtCore>
 #include <QtGui>
+#include <QApplication>
 #include <QTranslator>
+#include <QSplashScreen>
 
 #include "grlida.h"
 #include "grlida_config_inicial.h"
 
 int main(int argc, char *argv[])
 {
+	Funciones fGrl;
 	QTranslator translator;
 	QString stHomeDir, stDirPath, stIdiomaSelect, Version_GRL, stStyleSelect;
 	bool ejecutado_por_primeravez , chk_StylePalette, chk_IdiomaExterno;
-	Funciones fGrl;
 
 	QApplication app(argc, argv);
 
-	//stHomeDir = QDir::homePath()+"/.gr-lida/";
-	stHomeDir = fGrl.GRlidaHomePath();	// Indicamos el directorio del usuario
-
-	QSplashScreen splash( QPixmap(":/images/splash.png") );
-	splash.setFont( QFont("Helvetica", 10) );
-	splash.show();
-	
-	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Creando ventana principal"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-	app.processEvents();
-	
-	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta principal"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-	app.processEvents();
-
-// Crear directorio de la aplicacion si no existe
-	QDir appDir;
-	if(!appDir.exists(stHomeDir)) appDir.mkdir( stHomeDir );
-
-	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando la configuración Inicial"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-	app.processEvents();
+	stHomeDir = fGrl.GRlidaHomePath();
 
 // Comprueba y sino crea la configuracion por defecto
 	QFile appConfg(stHomeDir+"GR-lida.conf");
 	if( !appConfg.exists() )
 	{
-		QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
+		QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
 		settings.beginGroup("OpcGeneral");
-			settings.setValue("DOSBoxDisp"   , "false");
-			settings.setValue("ScummVMDisp"  , "false");
-			settings.setValue("VDMSoundDisp" , "false");
-			settings.setValue("Primeravez"   , "true");
-			settings.setValue("IdiomaSelect" , "es_ES");
-			settings.setValue("IdiomaExterno", "false");
-			settings.setValue("url_xmldb"    , "");		
+			settings.setValue("Primeravez"   , "true"   );
+			settings.setValue("IdiomaSelect" , "es_ES"  );
+			settings.setValue("IdiomaExterno", "false"  );
 			settings.setValue("Style"        , "Default");
 			settings.setValue("NameDirTheme" , "defecto");
-			settings.setValue("StylePalette" , "false");
-			settings.setValue("IconoFav"     , "fav_0.png");
+			settings.setValue("StylePalette" , "false"  );
 		settings.endGroup();
-		settings.beginGroup("OpcVer");
-			settings.setValue("Pnl_Datos"    , "true" );
-			settings.setValue("Pnl_Capturas" , "false");
-			settings.setValue("Pnl_FilesUrl" , "false");
-			settings.setValue("Pnl_Ordenar"  , "false");
+		settings.beginGroup("OpcGeneral");
+			settings.setValue("Primeravez"   , "true"   );
+			settings.setValue("IdiomaSelect" , "es_ES"  );
+			settings.setValue("IdiomaExterno", "false"  );
+			settings.setValue("Style"        , "Default");
+			settings.setValue("NameDirTheme" , "defecto");
+			settings.setValue("StylePalette" , "false"  );
 		settings.endGroup();
-		settings.beginGroup("SqlDatabase");
-			settings.setValue("db_type"		, "QSQLITE" ); // QSQLITE, QMYSQL, QPSQL
-			settings.setValue("db_host"		, stHomeDir+"db_grl.grl"); // localhost, archivo
-			settings.setValue("db_name"		, ""	); // Nombre base de datos
-			settings.setValue("db_username"	, ""	); // Nombre del Usuario
-			settings.setValue("db_password"	, ""	); // Password
-			settings.setValue("db_port"		, "3306"); // Puerto
-			settings.setValue("db_Orden_ColTabla", "titulo");
-			settings.setValue("db_Orden_By"      , "titulo");
-			settings.setValue("db_Orden"         , "ASC"   );			
+		settings.beginGroup("Updates");
+			settings.setValue("Version", "");
 		settings.endGroup();
+
 		ejecutado_por_primeravez = true;
 		chk_StylePalette = false;
-		stIdiomaSelect = "es_ES" ;
+		stIdiomaSelect = "es_ES";
 		chk_IdiomaExterno = false;
 		Version_GRL = "";
 	} else {
-		QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat ); 
+		QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
 		settings.beginGroup("OpcGeneral");
-			ejecutado_por_primeravez = settings.value("Primeravez", "true").toBool();
-			stIdiomaSelect   = settings.value("IdiomaSelect", "es_ES").toString();
-			chk_IdiomaExterno= settings.value("IdiomaExterno" , "false").toBool();
-		    stStyleSelect    = settings.value("Style", "Default").toString();
-		    chk_StylePalette = settings.value("StylePalette", "false").toBool();
+			ejecutado_por_primeravez = settings.value("Primeravez"   , "true"   ).toBool();
+			stIdiomaSelect           = settings.value("IdiomaSelect" , "es_ES"  ).toString();
+			chk_IdiomaExterno        = settings.value("IdiomaExterno", "false"  ).toBool();
+			stStyleSelect            = settings.value("Style"        , "Default").toString();
+			chk_StylePalette         = settings.value("StylePalette" , "false"  ).toBool();
 		settings.endGroup();
 		settings.beginGroup("Updates");
 			Version_GRL = settings.value("Version", "").toString();
-		settings.endGroup();	
+		settings.endGroup();
 	}
+	if(chk_IdiomaExterno)
+		translator.load(stHomeDir + "idiomas/gr-lida_" + stIdiomaSelect + ".qm");
+	else
+		translator.load(":/idiomas/gr-lida_" + stIdiomaSelect + ".qm");
+
+	app.installTranslator(&translator);
+
+// Creamos el logo.
+	QSplashScreen splash( QPixmap(":/images/splash.png") );
+	splash.setFont( QFont("Helvetica", 10) );
+	splash.show();
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Creando ventana principal"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando la configuración Inicial"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+
 	if( stStyleSelect!="" || stStyleSelect!="Default" )
 		QApplication::setStyle( stStyleSelect );
 
@@ -125,16 +112,15 @@ int main(int argc, char *argv[])
 	{
 		frmConfigInicial * ConfigInicial = new frmConfigInicial();
 		if( ConfigInicial->exec() == QDialog::Accepted )
-			stIdiomaSelect = ConfigInicial->IdiomaSelect; 
+			stIdiomaSelect = ConfigInicial->stIdiomaSelect;
 	}
-	
-	if(chk_IdiomaExterno)
-		translator.load( stHomeDir + "idiomas/gr-lida_" + stIdiomaSelect + ".qm" );
-	else
-		translator.load( ":/idiomas/gr-lida_" + stIdiomaSelect + ".qm" );
 
-	app.installTranslator(&translator);	
-	
+// Crear directorio de la aplicacion si no existe
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta principal"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+	QDir appDir;
+	if(!appDir.exists(stHomeDir)) appDir.mkdir( stHomeDir );
+
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Idiomas"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio idiomas si no existe
@@ -188,23 +174,29 @@ int main(int argc, char *argv[])
 	if(!confVdmsDir.exists(stHomeDir+"confvdms")) confVdmsDir.mkdir(stHomeDir+"confvdms");
 #endif
 
-// Crear directorio confVdms si no existe
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Thumbs"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio Thumbs si no existe
 	QDir thumbsDir;
 	if(!thumbsDir.exists(stHomeDir+"thumbs")) thumbsDir.mkdir(stHomeDir+"thumbs");
 
-// Crear directorio confVdms si no existe
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Covers"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio Covers si no existe
 	QDir coversDir;
 	if(!coversDir.exists(stHomeDir+"covers")) coversDir.mkdir(stHomeDir+"covers");
 
-// Crear directorio temp para las descargas temporales de imagenes, archivos
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Temp"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio Temp para las descargas temporales de imagenes, archivos
 	QDir tempDir;
 	if(!tempDir.exists(stHomeDir+"temp")) coversDir.mkdir(stHomeDir+"temp");
-	
+
 	GrLida w;
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Cargando Configuración..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-	w.CargarConfigInicial();
+	w.ConectarBaseDatos();
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando archivos de Datos..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
@@ -212,7 +204,7 @@ int main(int argc, char *argv[])
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Cargando Base de Datos..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-	w.CargarBaseDatos();
+	w.CargarListaJuegosDB();
 
 	w.show();
 	splash.finish(&w);
