@@ -190,7 +190,7 @@ void frmSvmAdd::on_btnNext()
 
 void frmSvmAdd::on_btnDescargarInfo()
 {
-	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(0, Qt::Window);
+	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(ui.txtDatos_Titulo->text(), 0, Qt::Window);
 	if( ImportarJuegoInfo->exec() == QDialog::Accepted )
 	{
 		QFile file_thumbs, file_cover_front, file_cover_back;
@@ -218,6 +218,7 @@ void frmSvmAdd::on_btnDescargarInfo()
 		TempDatosJuego["tipo_emu"]		= "scummvm"										;//tipo_emu
 		TempDatosJuego["comentario"]	= ImportarJuegoInfo->DatosJuego["comentario"]	;//comentario
 		TempDatosJuego["favorito"]		= ImportarJuegoInfo->DatosJuego["favorito"]		;//favorito
+		TempDatosJuego["rating"]		= ImportarJuegoInfo->DatosJuego["rating"]		;//rating
 
 		TempDatosJuego["thumbs"] = ImportarJuegoInfo->DatosJuego["thumbs"];
 		if( !file_thumbs.exists( TempDatosJuego["thumbs"] ) )
@@ -265,6 +266,7 @@ void frmSvmAdd::on_btnOk()
 		DatosJuego["tipo_emu"]		= "scummvm"							;//tipo_emu
 		DatosJuego["comentario"]	= ""+TempDatosJuego["comentario"]	;//comentario
 		DatosJuego["favorito"]		= ""+TempDatosJuego["favorito"]		;//favorito
+		DatosJuego["rating"]		= ""+TempDatosJuego["rating"]		;//rating
 
 		QString tmp_language, tmp_platform, tmp_gfx_mode;
 		QStringList tmp_list;

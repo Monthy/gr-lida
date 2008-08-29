@@ -578,6 +578,7 @@ void frmAddEditJuego::CargarDatosJuego( QString stIDIndex )
 
 	strDatosJuego = sql->show_Datos( stIDIndex );
 
+	m_rating = fGrl.StrToInt( strDatosJuego["rating"] );
 	ui.lb_fechahora->setText( strDatosJuego["fecha"] );						// fecha
 	ui.txtDatos_Titulo->setText( strDatosJuego["titulo"] );					// titulo
 	ui.txtDatos_Subtitulo->setText( strDatosJuego["subtitulo"] );			// subtitulo
@@ -774,6 +775,7 @@ void frmAddEditJuego::setDatosJuegos()
 	else DatosJuego["tipo_emu"] = ""+TipoEmulador;
 
 	DatosJuego["comentario"]  = ui.txtDatos_Comentario->toPlainText();	// comentario
+	DatosJuego["rating"] = fGrl.IntToStr( m_rating );
 }
 
 void frmAddEditJuego::on_btnImgAbrir_Thumbs()
@@ -916,7 +918,7 @@ void frmAddEditJuego::on_btnImgEliminar_CoverBack()
 
 void frmAddEditJuego::on_btnDescargarInfo()
 {
-	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(0, Qt::Window);
+	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(ui.txtDatos_Titulo->text(), 0, Qt::Window);
 	if( ImportarJuegoInfo->exec() == QDialog::Accepted )
 	{
 		//ui.lb_fechahora->setText( ImportarJuegoInfo->DatosJuego["fecha"] );						// fecha
@@ -939,6 +941,7 @@ void frmAddEditJuego::on_btnDescargarInfo()
 		ui.cbxDatos_Estado->setEditText( ImportarJuegoInfo->DatosJuego["estado"] );
 		ui.chkDatos_Original->setChecked( fGrl.StrToBool( ImportarJuegoInfo->DatosJuego["original"] ) );
 		ui.chkDatos_Favorito->setChecked( fGrl.StrToBool( ImportarJuegoInfo->DatosJuego["favorito"] ) );
+		m_rating = fGrl.StrToInt( ImportarJuegoInfo->DatosJuego["rating"] );
 
 		stThumbs = ImportarJuegoInfo->DatosJuego["thumbs"];
 		if( file_thumbs.exists(stThumbs) )

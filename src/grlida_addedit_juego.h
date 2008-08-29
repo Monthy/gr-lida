@@ -65,6 +65,7 @@ private:
 	Funciones fGrl;
 	dbSql *sql;
 
+	int m_rating;
 	bool EditandoJuego;
 	QString TipoEmulador;
 	QString stItemIDGrl;

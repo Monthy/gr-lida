@@ -430,6 +430,7 @@ QHash<QString, QString> dbSql::show_Datos(QString IDgrl)
 	tmpDatosJuego["tipo_emu"]      = query.record().value("tipo_emu").toString();
 	tmpDatosJuego["comentario"]    = query.record().value("comentario").toString();
 	tmpDatosJuego["favorito"]      = query.record().value("favorito").toString();
+	tmpDatosJuego["rating"]        = query.record().value("rating").toString();
 
 	return tmpDatosJuego;
 }
@@ -441,11 +442,11 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	strSQL.append("INSERT INTO dbgrl (");
 	strSQL.append("icono, titulo, subtitulo, genero, compania, desarrollador, tema, idioma, formato, anno, numdisc, ");
 	strSQL.append("sistemaop, tamano, graficos, sonido, jugabilidad, original, estado, thumbs, cover_front, cover_back,");
-	strSQL.append("fecha, tipo_emu, comentario, favorito ");
+	strSQL.append("fecha, tipo_emu, comentario, favorito, rating ");
 	strSQL.append(") VALUES ( ");
 	strSQL.append(":icono, :titulo, :subtitulo, :genero, :compania, :desarrollador, :tema, :idioma, :formato, :anno, :numdisc, ");
 	strSQL.append(":sistemaop, :tamano, :graficos, :sonido, :jugabilidad, :original, :estado, :thumbs, :cover_front, :cover_back, ");
-	strSQL.append(":fecha, :tipo_emu, :comentario, :favorito)");
+	strSQL.append(":fecha, :tipo_emu, :comentario, :favorito, :rating)");
 
 	QSqlQuery query;
 	query.prepare( strSQL );
@@ -474,6 +475,7 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	query.bindValue(":tipo_emu"     , datos["tipo_emu"]      );
 	query.bindValue(":comentario"   , datos["comentario"]    );
 	query.bindValue(":favorito"     , datos["favorito"]      );
+	query.bindValue(":rating"       , datos["rating"]        );
 	query.exec();
 
 	return query.lastInsertId().toString();
@@ -489,7 +491,7 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	strSQL.append("formato = :formato, anno = :anno, numdisc = :numdisc, sistemaop = :sistemaop, ");
 	strSQL.append("tamano = :tamano, graficos = :graficos, sonido = :sonido, jugabilidad = :jugabilidad, ");
 	strSQL.append("original = :original, estado = :estado, thumbs = :thumbs, cover_front = :cover_front, ");
-	strSQL.append("cover_back = :cover_back, comentario = :comentario, favorito = :favorito ");
+	strSQL.append("cover_back = :cover_back, comentario = :comentario, favorito = :favorito, rating = :rating ");
 	strSQL.append("WHERE idgrl = :idgrl;");
 
 	QSqlQuery query;
@@ -519,6 +521,7 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 //	query.bindValue(":tipo_emu"     , datos["tipo_emu"]      );
 	query.bindValue(":comentario"   , datos["comentario"]    );
 	query.bindValue(":favorito"     , datos["favorito"]      );
+	query.bindValue(":rating"       , datos["rating"]        );
 	query.bindValue(":idgrl"        , IDgrl                  );
 	query.exec();
 }

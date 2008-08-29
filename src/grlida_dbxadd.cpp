@@ -399,7 +399,7 @@ void frmDbxAdd::on_setProfileGame(const QString ProfileGame)
 
 void frmDbxAdd::on_btnDescargarInfo()
 {
-	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(0, Qt::Window);
+	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(ui.txtDatos_Titulo->text(), 0, Qt::Window);
 	if( ImportarJuegoInfo->exec() == QDialog::Accepted )
 	{
 		QFile file_thumbs, file_cover_front, file_cover_back;
@@ -427,6 +427,7 @@ void frmDbxAdd::on_btnDescargarInfo()
 		TempDatosJuego["tipo_emu"]		= "dosbox"										;//tipo_emu
 		TempDatosJuego["comentario"]	= ImportarJuegoInfo->DatosJuego["comentario"]	;//comentario
 		TempDatosJuego["favorito"]		= ImportarJuegoInfo->DatosJuego["favorito"]		;//favorito
+		TempDatosJuego["rating"]		= ImportarJuegoInfo->DatosJuego["rating"]		;//rating
 
 		TempDatosJuego["thumbs"] = ImportarJuegoInfo->DatosJuego["thumbs"];
 		if( !file_thumbs.exists( TempDatosJuego["thumbs"] ) )
@@ -474,6 +475,7 @@ void frmDbxAdd::on_btnOk()
 		DatosJuego["tipo_emu"]		= "dosbox"							;//tipo_emu
 		DatosJuego["comentario"]	= ""+TempDatosJuego["comentario"]	;//comentario
 		DatosJuego["favorito"]		= ""+TempDatosJuego["favorito"]		;//favorito
+		DatosJuego["rating"]		= ""+TempDatosJuego["rating"]		;//rating
 
 		DatosDosBox.clear();
 	// sdl_fullscreen

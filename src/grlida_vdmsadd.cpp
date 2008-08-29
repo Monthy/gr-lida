@@ -89,7 +89,7 @@ void frmVdmsAdd::CargaUltimosDirectorios()
 
 void frmVdmsAdd::on_btnDescargarInfo()
 {
-	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(0, Qt::Window);
+	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(ui.txtDatos_Titulo->text(), 0, Qt::Window);
 	if( ImportarJuegoInfo->exec() == QDialog::Accepted )
 	{
 		QFile file_thumbs, file_cover_front, file_cover_back;
@@ -117,6 +117,7 @@ void frmVdmsAdd::on_btnDescargarInfo()
 		TempDatosJuego["tipo_emu"]		= "vdmsound"									;//tipo_emu
 		TempDatosJuego["comentario"]	= ImportarJuegoInfo->DatosJuego["comentario"]	;//comentario
 		TempDatosJuego["favorito"]		= ImportarJuegoInfo->DatosJuego["favorito"]		;//favorito
+		TempDatosJuego["rating"]		= ImportarJuegoInfo->DatosJuego["rating"]		;//rating
 
 		TempDatosJuego["thumbs"] = ImportarJuegoInfo->DatosJuego["thumbs"];
 		if( !file_thumbs.exists( TempDatosJuego["thumbs"] ) )
@@ -196,6 +197,7 @@ void frmVdmsAdd::on_btnOk()
 		DatosJuego["tipo_emu"]		= "vdmsound"						;//tipo_emu
 		DatosJuego["comentario"]	= ""+TempDatosJuego["comentario"]	;//comentario
 		DatosJuego["favorito"]		= ""+TempDatosJuego["favorito"]		;//favorito
+		DatosJuego["rating"]		= ""+TempDatosJuego["rating"]		;//rating
 
 		DatosVDMSound.clear();
 		DatosVDMSound["path_conf"]       = ui.txtVdms_path_conf->text()	; //
