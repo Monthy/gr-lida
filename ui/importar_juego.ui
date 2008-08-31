@@ -22,19 +22,11 @@
    <string>Importar Juego</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/importar.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/importar.png</normaloff>:/img16/importar.png</iconset>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="leftMargin" >
-    <number>2</number>
-   </property>
-   <property name="topMargin" >
-    <number>2</number>
-   </property>
-   <property name="rightMargin" >
-    <number>2</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>2</number>
    </property>
    <item>
@@ -44,16 +36,7 @@
      </property>
      <widget class="QWidget" name="page_1" >
       <layout class="QVBoxLayout" >
-       <property name="leftMargin" >
-        <number>2</number>
-       </property>
-       <property name="topMargin" >
-        <number>2</number>
-       </property>
-       <property name="rightMargin" >
-        <number>2</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>2</number>
        </property>
        <item>
@@ -68,16 +51,7 @@
           <string>Importar desde...</string>
          </property>
          <layout class="QVBoxLayout" >
-          <property name="leftMargin" >
-           <number>6</number>
-          </property>
-          <property name="topMargin" >
-           <number>6</number>
-          </property>
-          <property name="rightMargin" >
-           <number>6</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>6</number>
           </property>
           <item>
@@ -112,16 +86,7 @@
           <string>Dirección web GR-lida DB para importar Juego</string>
          </property>
          <layout class="QVBoxLayout" >
-          <property name="leftMargin" >
-           <number>6</number>
-          </property>
-          <property name="topMargin" >
-           <number>6</number>
-          </property>
-          <property name="rightMargin" >
-           <number>6</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>6</number>
           </property>
           <item>
@@ -145,7 +110,7 @@
                </sizepolicy>
               </property>
               <property name="editable" >
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -161,7 +126,8 @@
                <string>Actualizar Lista</string>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/actualizar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
               </property>
              </widget>
             </item>
@@ -173,7 +139,7 @@
               <property name="sizeType" >
                <enum>QSizePolicy::Preferred</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>80</width>
                 <height>20</height>
@@ -239,16 +205,7 @@
           <string>Dirección del archivo web GR-lida DB para importar Juego</string>
          </property>
          <layout class="QVBoxLayout" >
-          <property name="leftMargin" >
-           <number>6</number>
-          </property>
-          <property name="topMargin" >
-           <number>6</number>
-          </property>
-          <property name="rightMargin" >
-           <number>6</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>6</number>
           </property>
           <item>
@@ -268,7 +225,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -284,7 +242,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
             </item>
@@ -339,7 +298,7 @@
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>546</width>
               <height>31</height>
@@ -354,16 +313,7 @@
      </widget>
      <widget class="QWidget" name="page_2" >
       <layout class="QVBoxLayout" >
-       <property name="leftMargin" >
-        <number>2</number>
-       </property>
-       <property name="topMargin" >
-        <number>2</number>
-       </property>
-       <property name="rightMargin" >
-        <number>2</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>2</number>
        </property>
        <item>
@@ -413,16 +363,7 @@
            <property name="spacing" >
             <number>0</number>
            </property>
-           <property name="leftMargin" >
-            <number>0</number>
-           </property>
-           <property name="topMargin" >
-            <number>0</number>
-           </property>
-           <property name="rightMargin" >
-            <number>0</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>0</number>
            </property>
            <item>
@@ -469,16 +410,7 @@
                 <property name="spacing" >
                  <number>2</number>
                 </property>
-                <property name="leftMargin" >
-                 <number>0</number>
-                </property>
-                <property name="topMargin" >
-                 <number>0</number>
-                </property>
-                <property name="rightMargin" >
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin" >
+                <property name="margin" >
                  <number>0</number>
                 </property>
                 <item>
@@ -514,16 +446,7 @@
                 <property name="spacing" >
                  <number>2</number>
                 </property>
-                <property name="leftMargin" >
-                 <number>0</number>
-                </property>
-                <property name="topMargin" >
-                 <number>0</number>
-                </property>
-                <property name="rightMargin" >
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin" >
+                <property name="margin" >
                  <number>0</number>
                 </property>
                 <item>
@@ -559,16 +482,7 @@
                 <property name="spacing" >
                  <number>2</number>
                 </property>
-                <property name="leftMargin" >
-                 <number>0</number>
-                </property>
-                <property name="topMargin" >
-                 <number>0</number>
-                </property>
-                <property name="rightMargin" >
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin" >
+                <property name="margin" >
                  <number>0</number>
                 </property>
                 <item>
@@ -633,16 +547,7 @@
      </widget>
      <widget class="QWidget" name="page_3" >
       <layout class="QVBoxLayout" >
-       <property name="leftMargin" >
-        <number>2</number>
-       </property>
-       <property name="topMargin" >
-        <number>2</number>
-       </property>
-       <property name="rightMargin" >
-        <number>2</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>2</number>
        </property>
        <item>
@@ -1065,7 +970,7 @@
                    <property name="orientation" >
                     <enum>Qt::Vertical</enum>
                    </property>
-                   <property name="sizeHint" >
+                   <property name="sizeHint" stdset="0" >
                     <size>
                      <width>20</width>
                      <height>40</height>
@@ -1084,7 +989,7 @@
              <property name="orientation" >
               <enum>Qt::Vertical</enum>
              </property>
-             <property name="sizeHint" >
+             <property name="sizeHint" stdset="0" >
               <size>
                <width>20</width>
                <height>40</height>
@@ -1105,22 +1010,14 @@
                <string>Archivos</string>
               </attribute>
               <attribute name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/importar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/importar.png</normaloff>:/img16/importar.png</iconset>
               </attribute>
               <layout class="QVBoxLayout" >
                <property name="spacing" >
                 <number>6</number>
                </property>
-               <property name="leftMargin" >
-                <number>4</number>
-               </property>
-               <property name="topMargin" >
-                <number>4</number>
-               </property>
-               <property name="rightMargin" >
-                <number>4</number>
-               </property>
-               <property name="bottomMargin" >
+               <property name="margin" >
                 <number>4</number>
                </property>
                <item>
@@ -1183,22 +1080,14 @@
                <string>URLs</string>
               </attribute>
               <attribute name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/edit_enlace.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/edit_enlace.png</normaloff>:/img16/edit_enlace.png</iconset>
               </attribute>
               <layout class="QVBoxLayout" >
                <property name="spacing" >
                 <number>6</number>
                </property>
-               <property name="leftMargin" >
-                <number>4</number>
-               </property>
-               <property name="topMargin" >
-                <number>4</number>
-               </property>
-               <property name="rightMargin" >
-                <number>4</number>
-               </property>
-               <property name="bottomMargin" >
+               <property name="margin" >
                 <number>4</number>
                </property>
                <item>
@@ -1249,22 +1138,14 @@
                <string>DOSBox Montajes</string>
               </attribute>
               <attribute name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/drive_hd.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/drive_hd.png</normaloff>:/img16/drive_hd.png</iconset>
               </attribute>
               <layout class="QVBoxLayout" >
                <property name="spacing" >
                 <number>6</number>
                </property>
-               <property name="leftMargin" >
-                <number>4</number>
-               </property>
-               <property name="topMargin" >
-                <number>4</number>
-               </property>
-               <property name="rightMargin" >
-                <number>4</number>
-               </property>
-               <property name="bottomMargin" >
+               <property name="margin" >
                 <number>4</number>
                </property>
                <item>
@@ -1363,7 +1244,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -1392,7 +1273,8 @@
         <string>Atrás</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_atras.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/mp_rebobinar_atras.png</normaloff>:/img16/mp_rebobinar_atras.png</iconset>
        </property>
       </widget>
      </item>
@@ -1417,7 +1299,8 @@
         <string>Siguiente</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/mp_rebobinar_adelante.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/mp_rebobinar_adelante.png</normaloff>:/img16/mp_rebobinar_adelante.png</iconset>
        </property>
       </widget>
      </item>
@@ -1426,7 +1309,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -1455,7 +1338,8 @@
         <string>Descargar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
@@ -1480,7 +1364,8 @@
         <string>Cancelar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>

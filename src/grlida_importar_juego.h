@@ -37,12 +37,20 @@ class QFile;
 
 #include "funciones.h"
 #include "httpdownload.h"
+#include "grlida_importpath.h"
 #include "ui_importar_juego.h"
+
+enum e_fin_descarga {
+	NohacerNada,
+	MostarFichaLista,
+	AnalizarPaginaBusqueda,
+	AnalizarPaginaFichaLIDA
+};
 
 class frmImportarJuego : public QDialog {
     Q_OBJECT
 public:
-	frmImportarJuego( QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmImportarJuego(QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmImportarJuego();
 
 	Ui::ImportarJuegoClass ui;
@@ -54,30 +62,40 @@ public:
 
 private:
 	Funciones fGrl;
-	QString stHomeDir, texto_html, img_thumbs, img_cover_front, img_cover_back, stTheme;
-	QString xml_ListaJuegos, xml_InfoJuegos, url_filed, DirBaseGames;
-	QString url_xmldb, temp_url_xmldb;
-	QHash<QString, QString> UltimoPath;
-	int indx_fin_descarga;
-	bool xml_read(QString fileName);
+	frmImportPath *ImportPathNew;
 	HttpDownload *httpdown;
 	QDomDocument domDocument;
 
-	void MostrarDatosJuegoInfo();
-	void parseListaJuegos(const QDomElement &element);
-	void setProfile_DFend(QString fileName);
+	int indx_fin_descarga;
+	QString stHomeDir, stTheme, DirBaseGames;
+	QString stUrlSelect, url_filed, temp_url_xmldb, xml_ListaJuegos, xml_InfoJuegos;
+	QString img_thumbs, img_cover_front, img_cover_back;
+	QFile file_thumbs, file_cover_front, file_cover_back;
+	QHash<QString, QString> UltimoPath;
+
 	void setTheme();
+	void MostrarDatosJuegoInfo();
+
+// Parte: La Isla del Abandoware ----------------------------------
+	bool xml_read(QString fileName);
+	void AddGamesTitlesLIDA(const QDomElement &element);
+	void AnalyzeGamePageLIDA(const QDomElement &element);
+
+// Parte: D-Fend --------------------------------------------------
+	void setProfile_DFend(QString fileName);
 
 private slots:
+	void on_treeWidget_clicked(QTreeWidgetItem *item);
+	void on_treeWidget_Dblclicked(QTreeWidgetItem *item);
+
 	void on_btnOk();
 	void on_btnNext();
 	void on_btnPrevious();
-	void on_xml_open();
-	void on_btnDirFileXML();
 	void on_changeURL_XML(const QString &url);
+
 	void on_btnUpdateList();
-	void on_treeWidget_Dblclicked( QTreeWidgetItem *item);
-	void on_treeWidget_clicked( QTreeWidgetItem *item);
+	void on_btnDirFileXML();
+	void on_xml_open();
 	void isRequestFinished();
 
 };

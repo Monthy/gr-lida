@@ -5,31 +5,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>678</width>
-    <height>440</height>
+    <width>730</width>
+    <height>487</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Importar Info del Juego</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/datos_1.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/datos_1.png</normaloff>:/img16/datos_1.png</iconset>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="leftMargin" >
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <property name="spacing" >
     <number>4</number>
    </property>
-   <property name="topMargin" >
-    <number>4</number>
-   </property>
-   <property name="rightMargin" >
-    <number>4</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>4</number>
    </property>
    <item>
-    <layout class="QGridLayout" >
+    <layout class="QGridLayout" name="gridLayout" >
      <property name="horizontalSpacing" >
       <number>6</number>
      </property>
@@ -46,7 +41,7 @@
      <item row="0" column="1" >
       <widget class="QComboBox" name="cbxDbXml" >
        <property name="editable" >
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -66,7 +61,8 @@
         <string>Buscar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/edit_buscar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/edit_buscar.png</normaloff>:/img16/edit_buscar.png</iconset>
        </property>
       </widget>
      </item>
@@ -79,7 +75,8 @@
         <string>Abortar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
@@ -87,13 +84,19 @@
    </item>
    <item>
     <widget class="QSplitter" name="splitter" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="handleWidth" >
       <number>4</number>
      </property>
-     <widget class="QTreeWidget" name="twListaJuegos" >
+     <widget class="QTreeWidget" name="twListaBusqueda" >
       <property name="editTriggers" >
        <set>QAbstractItemView::NoEditTriggers</set>
       </property>
@@ -126,6 +129,16 @@
         <string>Titulos</string>
        </property>
       </column>
+      <column>
+       <property name="text" >
+        <string>Plataforma</string>
+       </property>
+      </column>
+      <column>
+       <property name="text" >
+        <string>Año</string>
+       </property>
+      </column>
      </widget>
      <widget class="QTextBrowser" name="txtb_info" >
       <property name="minimumSize" >
@@ -134,11 +147,21 @@
         <height>0</height>
        </size>
       </property>
+      <property name="openExternalLinks" >
+       <bool>true</bool>
+      </property>
      </widget>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <widget class="QLabel" name="lb_status" >
+     <property name="text" >
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout" >
      <item>
       <widget class="QPushButton" name="btnVerInfo" >
        <property name="enabled" >
@@ -148,7 +171,8 @@
         <string>Ver Info</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/datos_2.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/datos_2.png</normaloff>:/img16/datos_2.png</iconset>
        </property>
       </widget>
      </item>
@@ -157,7 +181,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -174,7 +198,8 @@
         <string>Aceptar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
@@ -184,7 +209,8 @@
         <string>Cancelar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
@@ -197,7 +223,7 @@
   <tabstop>txtTituloBuscar</tabstop>
   <tabstop>btnBuscar</tabstop>
   <tabstop>btnAbortar</tabstop>
-  <tabstop>twListaJuegos</tabstop>
+  <tabstop>twListaBusqueda</tabstop>
   <tabstop>btnVerInfo</tabstop>
   <tabstop>txtb_info</tabstop>
   <tabstop>btnOk</tabstop>

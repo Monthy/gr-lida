@@ -25,52 +25,80 @@
 #ifndef GRLIDA_IMPORTARJUEGOINFO_H
 #define GRLIDA_IMPORTARJUEGOINFO_H
 
+#include <QDialog>
 #include <QtCore>
 #include <QtGui>
-
 #include <QHttp>
 #include <QBuffer>
 #include <QXmlStreamReader>
 
 #include "funciones.h"
 #include "httpdownload.h"
+#include "grlida_importpath.h"
 #include "ui_importar_juego_info.h"
 
-class frmImportarJuegoInfo : public QDialog {
+enum e_fin_descarga {
+	NohacerNada,
+	MostarFichaCompleta,
+	AnalizarPagina,
+	AnalizarPaginaBusqueda,
+	AnalizarPaginaFichaLIDA,
+	AnalizarPaginaFichaMobyGames,
+	CargarThumb,
+	CargarCoverFront,
+	CargarCoverBack
+};
+
+class frmImportarJuegoInfo : public QDialog
+{
     Q_OBJECT
 public:
-	frmImportarJuegoInfo( QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmImportarJuegoInfo(QString titulo_busqueda, QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmImportarJuegoInfo();
 
 	Ui::ImportarJuegoInfoClass ui;
 
 	QHash<QString, QString> DatosJuego;
+
 private:
 	Funciones fGrl;
+	frmImportPath *ImportPathNew;
 	HttpDownload *httpdown;
+	int indx_fin_descarga;
+	QString stHomeDir, stTheme;
+	QString stUrlSelect, stFileBusqueda, stFileFichaJuego;
+	QString str_html_old, str_html_new;
+	QString img_filename, img_thumbs, img_cover_front, img_cover_back;
+	QFile file_thumbs, file_cover_front, file_cover_back;
 
-	void setTheme();
-	void parseXml();
-
-	QString stHomeDir, stTheme, url_filed;
-	QString img_thumbs, img_cover_front, img_cover_back;
-	QString url_xmldb, temp_url_xmldb, texto_html, str_html_old;
 	QXmlStreamReader xml;
-	QString currentTag, str_id, str_id_emu, str_Icon, str_titulo;
 
-	QHttp http;
-	int connectionId;
+	void createConnections();
+	void setTheme();
+	void adjustarHeader();
+	void MostrarFichaHtml(QHash<QString, QString> datos);
+
+	QString LeerArchivoHTML(QString str_file_html);
+	void AnalyzeFindPage(QString Page);
+// MobyGames -----------------------------------------------
+	void AnalyzeGamePageMobyGames(QString Page);
+	QString AnalyzeCategoriasMobyGames(QString Page, QString stRegExp, QString stRegExpDos, int indxExp=2);
+	void AddGamesTitlesMobyGames(QString ResultsPage);
+
+// La Isla del Abandoware ----------------------------------
+	void AnalyzeGamePageLIDA(QString Page);
+	void AddGamesTitlesLIDA(QString ResultsPage);
 
 private slots:
-	void on_btnOk();
+	void on_twListaBusqueda_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2);
+	void on_twListaBusqueda_clicked(QTreeWidgetItem *item);
+	void on_twListaBusqueda_Dblclicked(QTreeWidgetItem *item);
+
+	void on_Buscar();
+	void on_Abortar();
 	void on_btnVerInfo();
-	void fetch();
-	void finished(int id, bool error);
-	void readData(const QHttpResponseHeader &);
-	void on_treeWidget_clicked(QTreeWidgetItem *item);
-	void on_treeWidget_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2);
-	void on_treeWidget_Dblclicked(QTreeWidgetItem *item);
-	void itemActivated(QTreeWidgetItem * item);
+	void on_btnOk();
+
 	void on_changeURL_XML(const QString &url);
 	void isRequestFinished();
 
