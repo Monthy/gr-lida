@@ -61,6 +61,8 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 	ui.cbxSvm_render_mode->setCurrentIndex(0);
 	ui.cbxSvm_music_driver->setCurrentIndex(0);
 
+	TempDatosJuego["rating"] = "0";
+
 // centra la ventana en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );

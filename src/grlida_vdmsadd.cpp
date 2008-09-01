@@ -40,6 +40,8 @@ frmVdmsAdd::frmVdmsAdd(QDialog *parent, Qt::WFlags flags)
 
 	CargaUltimosDirectorios();
 
+	TempDatosJuego["rating"] = "0";
+
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );

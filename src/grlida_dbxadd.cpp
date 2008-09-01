@@ -55,6 +55,8 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt", ui.cbxDbx_midi_device        , 1, false); // MIDI Device
 	fGrl.CargarDatosComboBox(":/datos/dbx_cpu_core.txt"   , ui.cbxDbx_cpu_core           , 1, false); // Ncleo de la CPU DOSBox
 
+	on_setProfileGame( ui.cbxDbx_Profiles->currentText() );
+
 	// Ponemos los Combobox por defecto.
 	ui.cbxDbx_Profiles->setCurrentIndex( 0 );
 	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 );	// Resolución pantalla
@@ -66,10 +68,10 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );	// Tipo Sound Blaste
 	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 );		// MPU-401
 	ui.cbxDbx_midi_device->setCurrentIndex( 0 );		// MIDI Device
-
-	on_setProfileGame( ui.cbxDbx_Profiles->currentText() );
-
+	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );		// mt32rate
 	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );
+
+	TempDatosJuego["rating"] = "0";
 
 	CargaUltimosDirectorios();
 
