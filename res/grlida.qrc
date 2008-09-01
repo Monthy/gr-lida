@@ -32,6 +32,7 @@
         <file>datos/svm_render_mode.txt</file>
         <file>datos/tema.txt</file>
         <file>datos/xmldb.txt</file>
+        <file>idiomas/gr-lida_da_DK.qm</file>
         <file>idiomas/gr-lida_en_EN.qm</file>
         <file>idiomas/gr-lida_es_ES.qm</file>
         <file>images/grlida_logo.png</file>
@@ -184,6 +185,7 @@
         <file>img32/gr-lida.png</file>
         <file>img_lng/cz.png</file>
         <file>img_lng/de.png</file>
+        <file>img_lng/dk.png</file>
         <file>img_lng/en.png</file>
         <file>img_lng/es.png</file>
         <file>img_lng/fr.png</file>

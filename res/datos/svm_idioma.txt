@@ -3,6 +3,7 @@ Ingles|en
 Ingles (GB)|gb
 Ingles (US)|us
 Aleman|de
+Danés|dk
 Frances|fr
 Italiano|it
 Portuges|pt
