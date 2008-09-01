@@ -298,6 +298,8 @@ void GrLida::CargarListaJuegosDB(QString strBuscar)
 			str_ListaDatos << "datos" << "dosbox" << "scummvm" << "vdmsound";
 		else if(stdb_Orden_ColTabla == "favorito")
 			str_ListaDatos << "true" << "false";
+		else if(stdb_Orden_ColTabla == "rating")
+			str_ListaDatos << "0" << "1" << "2" << "3" << "4" << "5";
 
 		if(strBuscar!="")
 			stSqlWhere = " AND titulo LIKE '%"+strBuscar+"%'";
@@ -346,7 +348,10 @@ void GrLida::CargarListaJuegosDB(QString strBuscar)
 								item->setText( 1 , tr("Juegos Favoritos") );
 							else
 								item->setText( 1 , tr("No lo son") );
-						} else
+						}
+						else if(stdb_Orden_ColTabla == "rating")
+								item->setText( 1 , tr("Calificación")+ ": " + str_ListaDatos.at(n) );
+						else
 							item->setText( 1 , str_ListaDatos.at(n) );
 
 						item->setText( 2 , "" ); // rating
@@ -514,7 +519,7 @@ void GrLida::createToolBars()
 
 	QStringList lista_columnas_tabla;
 	lista_columnas_tabla.clear();
-	lista_columnas_tabla << "idgrl" << "titulo" << "subtitulo" << "genero" << "compania" << "desarrollador" << "tema" << "idioma" << "formato" << "anno" << "numdisc" << "sistemaop" << "graficos" << "sonido" << "jugabilidad" << "original" << "tipo_emu" << "favorito";
+	lista_columnas_tabla << "idgrl" << "titulo" << "subtitulo" << "genero" << "compania" << "desarrollador" << "tema" << "idioma" << "formato" << "anno" << "numdisc" << "sistemaop" << "graficos" << "sonido" << "jugabilidad" << "original" << "tipo_emu" << "favorito" << "rating";
 
 	cbxColTabla = new QComboBox( frameOrdenar );
 	cbxColTabla->setObjectName("cbxColTabla");
