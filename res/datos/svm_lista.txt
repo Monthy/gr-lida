@@ -29,7 +29,9 @@ Coktel Vision Game Compatibility Chart||logo_coktel_vision
 Bargon Attack|bargon|95
 Gobliiins|gob1|95
 Gobliins 2|gob2|95
-Goblins 3|gob3|90
+Goblins 3|gob3|95
+Lost in Time|lostintime|95
+The Bizarre Adventures of Woodruff and the Schnibble|woodruff|90
 Ween: The Prophecy|ween|95
 
 Sierra AGI Game Compatibility Chart||logo_sierra
@@ -55,12 +57,15 @@ Other Game Compatibility Chart||svmlist_space
 Beneath a Steel Sky|sky|98
 Broken Sword 1: The Shadow of the Templars|sword1|98
 Broken Sword 2: The Smoking Mirror|sword2|98
+Drascula: The Vampire Strikes Back|drascula|98
 Flight of the Amazon Queen|queen|98
 Future Wars|fw|80
-I Have No Mouth, and I Must Scream|ihnm|80
+I Have No Mouth, and I Must Scream|ihnm|90
 Inherit the Earth: Quest for the Orb|ite|95
 Nippon Safes Inc.|nippon|90
-The Legend of Kyrandia|kyra1|80
+The Legend of Kyrandia|kyra1|85
+The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|80
+The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|80
 Lure of the Temptress|lure|95
 Touche: The Adventures of the Fifth Musketeer|touche|75
 
@@ -71,7 +76,8 @@ Backyard Soccer|soccer|20
 Bear Stormin'|brstorm|95
 Big Thinkers First Grade|thinker1|90
 Big Thinkers Kindergarten|thinkerk|90
-Blue's ABC Time|BluesABCTime|50
+Blue's 123 Time Activities|Blues123Time|50
+Blue's ABC Time Activities|BluesABCTime|50
 Blue's Birthday Adventure|BluesBirthday|50
 Fatty Bear's Birthday Surprise|fbear|93
 Fatty Bear's Fun Pack|fbpack|95
