@@ -52,6 +52,12 @@ frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog
 	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_hd.png"), "IMG_hdd");
 	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/floppy_2.png"), "boot");
 
+	ui.cbxMontaje_mode_cdrom->clear();
+	ui.cbxMontaje_mode_cdrom->addItem("-aspi");
+	ui.cbxMontaje_mode_cdrom->addItem("-ioctl");
+	ui.cbxMontaje_mode_cdrom->addItem("-noioctl");
+	ui.cbxMontaje_mode_cdrom->setCurrentIndex(0);
+
 	ui.lb_Montaje_info->setText( "<b>-aspi</b> -- "+ tr("Fuerza el uso de la capa aspi. Sólo válido si montas un CD-ROM bajo los sistemas Windows con un ASPI-Layer.")+"<br>"+
 		"<b>-ioctl</b> -- "+ tr("Fuerza el uso de los comandos ioctl. Sólo válido si montar un CD-ROM bajo un sistema operativo de Windows que lo soporten (Win2000/XP/NT).")+"<br>"+
 		"<b>-noioctl</b> -- "+ tr("Fuerza el uso de las SDL para el CD-ROM. Válido para todos los sistemas.")+"<br>"+

@@ -430,14 +430,6 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="page_1" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>450</width>
-        <height>293</height>
-       </rect>
-      </property>
       <widget class="QLineEdit" name="txtDbx_parametros_setup" >
        <property name="geometry" >
         <rect>
@@ -732,14 +724,6 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_2" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>450</width>
-        <height>293</height>
-       </rect>
-      </property>
       <widget class="QLabel" name="lb_Dbx_8" >
        <property name="geometry" >
         <rect>
@@ -908,14 +892,6 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_3" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>100</width>
-        <height>30</height>
-       </rect>
-      </property>
       <widget class="QComboBox" name="cbxDbx_dosbox_memsize" >
        <property name="geometry" >
         <rect>
@@ -992,21 +968,6 @@
          <height>22</height>
         </rect>
        </property>
-       <item>
-        <property name="text" >
-         <string>true</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>false</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>max</string>
-        </property>
-       </item>
       </widget>
       <widget class="QLabel" name="lb_Dbx_14" >
        <property name="geometry" >
@@ -1093,14 +1054,6 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_4" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>100</width>
-        <height>30</height>
-       </rect>
-      </property>
       <widget class="Line" name="line_4" >
        <property name="geometry" >
         <rect>
@@ -1124,23 +1077,8 @@
         </rect>
        </property>
        <property name="currentIndex" >
-        <number>1</number>
+        <number>-1</number>
        </property>
-       <item>
-        <property name="text" >
-         <string>11050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>22050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>44100</string>
-        </property>
-       </item>
       </widget>
       <widget class="QCheckBox" name="chkDbx_gus_gus" >
        <property name="geometry" >
@@ -1194,23 +1132,8 @@
         </rect>
        </property>
        <property name="currentIndex" >
-        <number>1</number>
+        <number>-1</number>
        </property>
-       <item>
-        <property name="text" >
-         <string>11050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>22050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>44100</string>
-        </property>
-       </item>
       </widget>
       <widget class="Line" name="line_2" >
        <property name="geometry" >
@@ -1235,23 +1158,8 @@
         </rect>
        </property>
        <property name="currentIndex" >
-        <number>1</number>
+        <number>-1</number>
        </property>
-       <item>
-        <property name="text" >
-         <string>11050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>22050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>44100</string>
-        </property>
-       </item>
       </widget>
       <widget class="QCheckBox" name="chkDbx_activar_mpu401" >
        <property name="geometry" >
@@ -1308,23 +1216,8 @@
         </rect>
        </property>
        <property name="currentIndex" >
-        <number>1</number>
+        <number>-1</number>
        </property>
-       <item>
-        <property name="text" >
-         <string>11050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>22050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>44100</string>
-        </property>
-       </item>
       </widget>
       <widget class="QCheckBox" name="chkDbx_speaker_pcspeaker" >
        <property name="geometry" >
@@ -1368,23 +1261,8 @@
         </rect>
        </property>
        <property name="currentIndex" >
-        <number>1</number>
+        <number>-1</number>
        </property>
-       <item>
-        <property name="text" >
-         <string>11050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>22050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>44100</string>
-        </property>
-       </item>
       </widget>
       <widget class="QComboBox" name="cbxDbx_speaker_tandyrate" >
        <property name="geometry" >
@@ -1396,23 +1274,8 @@
         </rect>
        </property>
        <property name="currentIndex" >
-        <number>1</number>
+        <number>-1</number>
        </property>
-       <item>
-        <property name="text" >
-         <string>11050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>22050</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>44100</string>
-        </property>
-       </item>
       </widget>
       <widget class="QLabel" name="lb_Dbx_15" >
        <property name="geometry" >
@@ -1601,14 +1464,6 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_5" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>100</width>
-        <height>30</height>
-       </rect>
-      </property>
       <widget class="QPushButton" name="btnMount_Add" >
        <property name="geometry" >
         <rect>
@@ -1833,14 +1688,6 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_6" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>100</width>
-        <height>30</height>
-       </rect>
-      </property>
       <layout class="QGridLayout" >
        <property name="margin" >
         <number>9</number>
@@ -2004,10 +1851,6 @@ Pulsa Aceptar para cerrar el Asistente
     </layout>
    </item>
   </layout>
-  <zorder>imgLogoDbx</zorder>
-  <zorder>wizardDbx</zorder>
-  <zorder>line</zorder>
-  <zorder>btnDescargarInfo</zorder>
  </widget>
  <tabstops>
   <tabstop>txtDatos_Titulo</tabstop>

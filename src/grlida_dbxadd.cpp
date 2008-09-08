@@ -43,6 +43,9 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	ui.twMontajes->header()->setStretchLastSection(true);
 	ui.twMontajes->header()->setMovable(false);
 
+	QStringList sonido_frecuencias;
+	sonido_frecuencias << "11050" << "22050" << "44100" << "48000";
+
 	fGrl.Cargar_Profile_DFend_ComboBox(stHomeDir + "templates/", ui.cbxDbx_Profiles);
 	fGrl.CargarDatosComboBox(":/datos/dbx_resolution.txt" , ui.cbxDbx_sdl_fullresolution , 1, false); // Resolución pantalla
 	fGrl.CargarDatosComboBox(":/datos/dbx_output.txt"     , ui.cbxDbx_sdl_output         , 1, false); // Modo de Renderizado
@@ -55,21 +58,46 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt", ui.cbxDbx_midi_device        , 1, false); // MIDI Device
 	fGrl.CargarDatosComboBox(":/datos/dbx_cpu_core.txt"   , ui.cbxDbx_cpu_core           , 1, false); // Ncleo de la CPU DOSBox
 
+	ui.cbxDbx_dos_umb->clear();
+	ui.cbxDbx_dos_umb->addItem("true");
+	ui.cbxDbx_dos_umb->addItem("false");
+	ui.cbxDbx_dos_umb->addItem("max");
+
+	ui.cbxDbx_mixer_rate->clear();
+	ui.cbxDbx_mixer_rate->addItems( sonido_frecuencias );
+	ui.cbxDbx_sblaster_oplrate->clear();
+	ui.cbxDbx_sblaster_oplrate->addItems( sonido_frecuencias );
+	ui.cbxDbx_gus_gusrate->clear();
+	ui.cbxDbx_gus_gusrate->addItems( sonido_frecuencias );
+	ui.cbxDbx_midi_mt32rate->clear();
+	ui.cbxDbx_midi_mt32rate->addItems( sonido_frecuencias );
+	ui.cbxDbx_speaker_pcrate->clear();
+	ui.cbxDbx_speaker_pcrate->addItems( sonido_frecuencias );
+	ui.cbxDbx_speaker_tandyrate->clear();
+	ui.cbxDbx_speaker_tandyrate->addItems( sonido_frecuencias );
+
 	on_setProfileGame( ui.cbxDbx_Profiles->currentText() );
 
 	// Ponemos los Combobox por defecto.
 	ui.cbxDbx_Profiles->setCurrentIndex( 0 );
-	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 );	// Resolución pantalla
-	ui.cbxDbx_sdl_output->setCurrentIndex( 0 );			// Modo de Renderizado
-	ui.cbxDbx_dosbox_machine->setCurrentIndex( 0 );		// Tarjeta de Video
-	ui.cbxDbx_render_scaler->setCurrentIndex( 1 );		// Escalar y Filtros
-	ui.cbxDbx_dosbox_memsize->setCurrentIndex( 5 );		// Cantidad de memoria para DOSBox
-	ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );			// Ciclos DOSBox
-	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );	// Tipo Sound Blaste
-	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 );		// MPU-401
-	ui.cbxDbx_midi_device->setCurrentIndex( 0 );		// MIDI Device
-	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );		// mt32rate
-	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );
+	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 ); // Resolución pantalla
+	ui.cbxDbx_sdl_output->setCurrentIndex( 0 );         // Modo de Renderizado
+	ui.cbxDbx_dosbox_machine->setCurrentIndex( 0 );     // Tarjeta de Video
+	ui.cbxDbx_render_scaler->setCurrentIndex( 1 );      // Escalar y Filtros
+	ui.cbxDbx_dosbox_memsize->setCurrentIndex( 5 );     // Cantidad de memoria para DOSBox
+	ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );         // Ciclos DOSBox
+	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );    // Tipo Sound Blaste
+	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 );        // MPU-401
+	ui.cbxDbx_midi_device->setCurrentIndex( 0 );        // MIDI Device
+	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );      // mt32rate
+	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );           //
+	ui.cbxDbx_dos_umb->setCurrentIndex( 0 );            // Soporte para memoria UMB
+	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );      //
+	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( 1 );   //
+	ui.cbxDbx_gus_gusrate->setCurrentIndex( 1 );        //
+	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );      //
+	ui.cbxDbx_speaker_pcrate->setCurrentIndex( 1 );     //
+	ui.cbxDbx_speaker_tandyrate->setCurrentIndex( 1 );  //
 
 	TempDatosJuego["rating"] = "0";
 

@@ -19,22 +19,14 @@
    <string>Añadir o Editar Juego</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/grlida.png</normaloff>:/img16/grlida.png</iconset>
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>9</number>
-   </property>
-   <property name="topMargin" >
-    <number>9</number>
-   </property>
-   <property name="rightMargin" >
-    <number>9</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>9</number>
    </property>
    <item>
@@ -47,25 +39,14 @@
        <string>Datos</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/datos_2.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/datos_2.png</normaloff>:/img16/datos_2.png</iconset>
       </attribute>
       <layout class="QGridLayout" >
-       <property name="leftMargin" >
+       <property name="margin" >
         <number>4</number>
        </property>
-       <property name="topMargin" >
-        <number>4</number>
-       </property>
-       <property name="rightMargin" >
-        <number>4</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>4</number>
-       </property>
-       <property name="horizontalSpacing" >
-        <number>6</number>
-       </property>
-       <property name="verticalSpacing" >
+       <property name="spacing" >
         <number>6</number>
        </property>
        <item row="0" column="0" >
@@ -699,38 +680,6 @@
             <height>22</height>
            </rect>
           </property>
-          <item>
-           <property name="text" >
-            <string>datos</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/datos_1.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>dosbox</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/dosbox.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>scummvm</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/scummvm.png</iconset>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>vdmsound</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >:/img16/vdmsound.png</iconset>
-           </property>
-          </item>
          </widget>
          <widget class="QComboBox" name="cbxDatos_Idioma" >
           <property name="geometry" >
@@ -777,7 +726,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/capturas.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
           </property>
          </widget>
          <widget class="QToolButton" name="btnImgAbrir_CoverBack" >
@@ -796,7 +746,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
          <widget class="QToolButton" name="btnImgVer_CoverBack" >
@@ -818,7 +769,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/capturas.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
           </property>
          </widget>
          <widget class="QToolButton" name="btnImgAbrir_CoverFront" >
@@ -837,7 +789,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
          <widget class="QToolButton" name="btnImgVer_CoverFront" >
@@ -859,7 +812,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/capturas.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
           </property>
          </widget>
          <widget class="QLabel" name="lbImg_CoverFront" >
@@ -927,7 +881,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
          <widget class="QToolButton" name="btnImgEliminar_Thumbs" >
@@ -949,7 +904,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
           </property>
          </widget>
          <widget class="QToolButton" name="btnImgEliminar_CoverBack" >
@@ -971,7 +927,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
           </property>
          </widget>
          <widget class="QToolButton" name="btnImgEliminar_CoverFront" >
@@ -993,7 +950,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
           </property>
          </widget>
          <widget class="QCheckBox" name="chkDatos_Favorito" >
@@ -1018,22 +976,14 @@
        <string>Otros Datos</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/nuevo.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
       </attribute>
       <layout class="QVBoxLayout" >
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>4</number>
-       </property>
-       <property name="topMargin" >
-        <number>4</number>
-       </property>
-       <property name="rightMargin" >
-        <number>4</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>4</number>
        </property>
        <item>
@@ -1045,16 +995,7 @@
           <property name="spacing" >
            <number>2</number>
           </property>
-          <property name="leftMargin" >
-           <number>4</number>
-          </property>
-          <property name="topMargin" >
-           <number>4</number>
-          </property>
-          <property name="rightMargin" >
-           <number>4</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>4</number>
           </property>
           <item>
@@ -1099,7 +1040,8 @@
               <string>Cortar</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_cut.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_cut.png</normaloff>:/img16/edit_cut.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_Copiar" >
@@ -1130,7 +1072,8 @@
               <string>Copiar</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_copy.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_copy.png</normaloff>:/img16/edit_copy.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_Pegar" >
@@ -1161,7 +1104,8 @@
               <string>Pegar</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_paste.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_paste.png</normaloff>:/img16/edit_paste.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_TextoCursiva" >
@@ -1192,7 +1136,8 @@
               <string>Cursiva</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_cursiva.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_cursiva.png</normaloff>:/img16/edit_cursiva.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_TextoSubrayado" >
@@ -1223,7 +1168,8 @@
               <string>Subrayada</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_subrayada.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_subrayada.png</normaloff>:/img16/edit_subrayada.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_InsertarImg" >
@@ -1254,7 +1200,8 @@
               <string>Imagen</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_imagen.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_imagen.png</normaloff>:/img16/edit_imagen.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_InsertaUrl" >
@@ -1285,7 +1232,8 @@
               <string>Url</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_enlace.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_enlace.png</normaloff>:/img16/edit_enlace.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_Buscar" >
@@ -1313,7 +1261,8 @@
               <string>Buscar texto</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_buscar.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_buscar.png</normaloff>:/img16/edit_buscar.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_BuscarAnterior" >
@@ -1341,7 +1290,8 @@
               <string>Buscar anterior</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_buscar_anterior.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_buscar_anterior.png</normaloff>:/img16/edit_buscar_anterior.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_BuscarSiguiente" >
@@ -1369,7 +1319,8 @@
               <string>Buscar siguiente</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_buscar_siguiente.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_buscar_siguiente.png</normaloff>:/img16/edit_buscar_siguiente.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_Reemplazar" >
@@ -1397,7 +1348,8 @@
               <string>Reemplazar</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_reemplazar.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_reemplazar.png</normaloff>:/img16/edit_reemplazar.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_Preview" >
@@ -1425,7 +1377,8 @@
               <string>Preview</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_preview.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_preview.png</normaloff>:/img16/edit_preview.png</iconset>
              </property>
              <property name="checkable" >
               <bool>true</bool>
@@ -1462,7 +1415,8 @@
               <string>Seleccionar todo</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_select_all.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_select_all.png</normaloff>:/img16/edit_select_all.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_Deshacer" >
@@ -1493,7 +1447,8 @@
               <string>Deshacer</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_deshacer.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_deshacer.png</normaloff>:/img16/edit_deshacer.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_Rehacer" >
@@ -1524,7 +1479,8 @@
               <string>Rehacer</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_rehacer.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_rehacer.png</normaloff>:/img16/edit_rehacer.png</iconset>
              </property>
             </widget>
             <widget class="QToolButton" name="btnTool_TextoNegrita" >
@@ -1555,7 +1511,8 @@
               <string>Negrita</string>
              </property>
              <property name="icon" >
-              <iconset resource="../res/grlida.qrc" >:/img16/edit_negrita.png</iconset>
+              <iconset resource="../res/grlida.qrc" >
+               <normaloff>:/img16/edit_negrita.png</normaloff>:/img16/edit_negrita.png</iconset>
              </property>
             </widget>
            </widget>
@@ -1565,16 +1522,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -1587,16 +1535,7 @@
                 <property name="spacing" >
                  <number>0</number>
                 </property>
-                <property name="leftMargin" >
-                 <number>0</number>
-                </property>
-                <property name="topMargin" >
-                 <number>0</number>
-                </property>
-                <property name="rightMargin" >
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin" >
+                <property name="margin" >
                  <number>0</number>
                 </property>
                 <item>
@@ -1660,16 +1599,7 @@
               <property name="spacing" >
                <number>4</number>
               </property>
-              <property name="leftMargin" >
-               <number>0</number>
-              </property>
-              <property name="topMargin" >
-               <number>0</number>
-              </property>
-              <property name="rightMargin" >
-               <number>0</number>
-              </property>
-              <property name="bottomMargin" >
+              <property name="margin" >
                <number>0</number>
               </property>
               <item>
@@ -1713,7 +1643,7 @@
                 <property name="sizeType" >
                  <enum>QSizePolicy::Preferred</enum>
                 </property>
-                <property name="sizeHint" >
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>20</width>
                   <height>20</height>
@@ -1733,7 +1663,8 @@
                  <string>Nueva url</string>
                 </property>
                 <property name="icon" >
-                 <iconset resource="../res/grlida.qrc" >:/img16/nuevo.png</iconset>
+                 <iconset resource="../res/grlida.qrc" >
+                  <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
                 </property>
                 <property name="iconSize" >
                  <size>
@@ -1758,7 +1689,8 @@
                  <string>Editar url</string>
                 </property>
                 <property name="icon" >
-                 <iconset resource="../res/grlida.qrc" >:/img16/editar.png</iconset>
+                 <iconset resource="../res/grlida.qrc" >
+                  <normaloff>:/img16/editar.png</normaloff>:/img16/editar.png</iconset>
                 </property>
                </widget>
               </item>
@@ -1774,7 +1706,8 @@
                  <string>Eliminar url</string>
                 </property>
                 <property name="icon" >
-                 <iconset resource="../res/grlida.qrc" >:/img16/eliminar.png</iconset>
+                 <iconset resource="../res/grlida.qrc" >
+                  <normaloff>:/img16/eliminar.png</normaloff>:/img16/eliminar.png</iconset>
                 </property>
                </widget>
               </item>
@@ -1790,7 +1723,8 @@
                  <string>Abrir URL</string>
                 </property>
                 <property name="icon" >
-                 <iconset resource="../res/grlida.qrc" >:/img16/edit_enlace.png</iconset>
+                 <iconset resource="../res/grlida.qrc" >
+                  <normaloff>:/img16/edit_enlace.png</normaloff>:/img16/edit_enlace.png</iconset>
                 </property>
                </widget>
               </item>
@@ -1808,22 +1742,14 @@
        <string>Archivos del Juego</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/importar.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/importar.png</normaloff>:/img16/importar.png</iconset>
       </attribute>
       <layout class="QVBoxLayout" >
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>4</number>
-       </property>
-       <property name="topMargin" >
-        <number>4</number>
-       </property>
-       <property name="rightMargin" >
-        <number>4</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>4</number>
        </property>
        <item>
@@ -1835,16 +1761,7 @@
           <property name="spacing" >
            <number>4</number>
           </property>
-          <property name="leftMargin" >
-           <number>4</number>
-          </property>
-          <property name="topMargin" >
-           <number>4</number>
-          </property>
-          <property name="rightMargin" >
-           <number>4</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>4</number>
           </property>
           <item>
@@ -1852,16 +1769,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -1886,7 +1794,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -1899,7 +1808,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
             </item>
@@ -1911,7 +1821,7 @@
               <property name="sizeType" >
                <enum>QSizePolicy::Preferred</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>100</width>
                 <height>20</height>
@@ -1926,16 +1836,7 @@
             <property name="spacing" >
              <number>0</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -1962,7 +1863,7 @@
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -1977,16 +1878,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -1994,16 +1886,7 @@
               <property name="spacing" >
                <number>6</number>
               </property>
-              <property name="leftMargin" >
-               <number>0</number>
-              </property>
-              <property name="topMargin" >
-               <number>0</number>
-              </property>
-              <property name="rightMargin" >
-               <number>0</number>
-              </property>
-              <property name="bottomMargin" >
+              <property name="margin" >
                <number>0</number>
               </property>
               <item>
@@ -2011,16 +1894,7 @@
                 <property name="spacing" >
                  <number>0</number>
                 </property>
-                <property name="leftMargin" >
-                 <number>0</number>
-                </property>
-                <property name="topMargin" >
-                 <number>0</number>
-                </property>
-                <property name="rightMargin" >
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin" >
+                <property name="margin" >
                  <number>0</number>
                 </property>
                 <item>
@@ -2077,16 +1951,7 @@
                 <property name="spacing" >
                  <number>0</number>
                 </property>
-                <property name="leftMargin" >
-                 <number>0</number>
-                </property>
-                <property name="topMargin" >
-                 <number>0</number>
-                </property>
-                <property name="rightMargin" >
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin" >
+                <property name="margin" >
                  <number>0</number>
                 </property>
                 <item>
@@ -2134,7 +1999,7 @@
                 <property name="orientation" >
                  <enum>Qt::Vertical</enum>
                 </property>
-                <property name="sizeHint" >
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>20</width>
                   <height>40</height>
@@ -2149,16 +2014,7 @@
               <property name="spacing" >
                <number>0</number>
               </property>
-              <property name="leftMargin" >
-               <number>0</number>
-              </property>
-              <property name="topMargin" >
-               <number>0</number>
-              </property>
-              <property name="rightMargin" >
-               <number>0</number>
-              </property>
-              <property name="bottomMargin" >
+              <property name="margin" >
                <number>0</number>
               </property>
               <item>
@@ -2208,16 +2064,7 @@
             <property name="spacing" >
              <number>4</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -2232,7 +2079,8 @@
                <string>Añadir</string>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/nuevo.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
               </property>
              </widget>
             </item>
@@ -2248,7 +2096,8 @@
                <string>Editar</string>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/editar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/editar.png</normaloff>:/img16/editar.png</iconset>
               </property>
              </widget>
             </item>
@@ -2264,7 +2113,8 @@
                <string>Actualizar</string>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/actualizar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
               </property>
              </widget>
             </item>
@@ -2280,7 +2130,8 @@
                <string>Elimiar</string>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/eliminar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/eliminar.png</normaloff>:/img16/eliminar.png</iconset>
               </property>
              </widget>
             </item>
@@ -2289,7 +2140,7 @@
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -2362,22 +2213,14 @@
        <string>DOSBox</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/dosbox.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
       </attribute>
       <layout class="QVBoxLayout" >
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>4</number>
-       </property>
-       <property name="topMargin" >
-        <number>4</number>
-       </property>
-       <property name="rightMargin" >
-        <number>4</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>4</number>
        </property>
        <item>
@@ -2393,16 +2236,7 @@
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -2479,7 +2313,7 @@
                </rect>
               </property>
               <property name="text" >
-               <string>64</string>
+               <string/>
               </property>
              </widget>
              <widget class="QLineEdit" name="txtDbx_path_setup" >
@@ -2580,7 +2414,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_ExeJuego" >
@@ -2599,7 +2434,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_ExeSetup" >
@@ -2618,7 +2454,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
              <widget class="QLabel" name="lb_Dbx_5" >
@@ -2689,7 +2526,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnFileConfg_clear" >
@@ -2708,7 +2546,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnExeSetup_clear" >
@@ -2727,7 +2566,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QComboBox" name="cbxDbx_Profiles" >
@@ -2765,16 +2605,7 @@
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -3080,16 +2911,7 @@
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -3170,21 +2992,6 @@
                 <height>22</height>
                </rect>
               </property>
-              <item>
-               <property name="text" >
-                <string>true</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>false</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>max</string>
-               </property>
-              </item>
              </widget>
              <widget class="QCheckBox" name="chkDbx_cycle_sincronizar" >
               <property name="geometry" >
@@ -3462,16 +3269,7 @@
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -3531,23 +3329,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>1</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>11050</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>22050</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>44100</string>
-               </property>
-              </item>
              </widget>
              <widget class="QLabel" name="lb_Dbx_24" >
               <property name="geometry" >
@@ -3571,9 +3354,6 @@
                 <height>22</height>
                </rect>
               </property>
-              <property name="text" >
-               <string>2048</string>
-              </property>
              </widget>
              <widget class="QLineEdit" name="txtDbx_mixer_prebuffer" >
               <property name="geometry" >
@@ -3583,9 +3363,6 @@
                 <width>91</width>
                 <height>22</height>
                </rect>
-              </property>
-              <property name="text" >
-               <string>10</string>
               </property>
              </widget>
              <widget class="QTabWidget" name="tabWidget" >
@@ -3614,23 +3391,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>1</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>11050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>22050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>44100</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_sblaster_sbtype" >
                 <property name="geometry" >
@@ -3655,33 +3417,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>210</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>220</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>240</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>260</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>280</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_sblaster_irq" >
                 <property name="geometry" >
@@ -3693,33 +3430,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>3</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>5</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>7</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>10</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>11</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_sblaster_dma" >
                 <property name="geometry" >
@@ -3731,23 +3443,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>0</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>1</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>3</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_sblaster_hdma" >
                 <property name="geometry" >
@@ -3759,23 +3456,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>5</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>6</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>7</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_sblaster_oplmode" >
                 <property name="geometry" >
@@ -3928,33 +3610,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>210</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>220</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>240</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>260</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>280</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_gus_irq1" >
                 <property name="geometry" >
@@ -3966,33 +3623,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>3</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>5</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>7</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>10</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>11</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_gus_irq2" >
                 <property name="geometry" >
@@ -4004,33 +3636,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>3</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>5</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>7</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>10</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>11</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_gus_gusrate" >
                 <property name="geometry" >
@@ -4042,23 +3649,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>1</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>11050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>22050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>44100</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_gus_dma1" >
                 <property name="geometry" >
@@ -4070,23 +3662,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>0</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>1</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>3</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_gus_dma2" >
                 <property name="geometry" >
@@ -4098,23 +3675,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>0</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>1</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>3</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QLabel" name="lb_Dbx_36" >
                 <property name="geometry" >
@@ -4203,9 +3765,6 @@
                   <height>22</height>
                  </rect>
                 </property>
-                <property name="text" >
-                 <string>C:\ULTRASND</string>
-                </property>
                </widget>
                <widget class="QPushButton" name="btnDirGravisUltraSound" >
                 <property name="geometry" >
@@ -4223,7 +3782,8 @@
                  </size>
                 </property>
                 <property name="icon" >
-                 <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+                 <iconset resource="../res/grlida.qrc" >
+                  <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
                 </property>
                </widget>
               </widget>
@@ -4299,23 +3859,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>1</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>11050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>22050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>44100</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QLabel" name="lb_Dbx_39" >
                 <property name="geometry" >
@@ -4400,23 +3945,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>1</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>11050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>22050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>44100</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QComboBox" name="cbxDbx_speaker_tandy" >
                 <property name="geometry" >
@@ -4428,23 +3958,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>0</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>auto</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>on</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>off</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QLabel" name="lb_Dbx_45" >
                 <property name="geometry" >
@@ -4501,23 +4016,8 @@
                  </rect>
                 </property>
                 <property name="currentIndex" >
-                 <number>1</number>
+                 <number>-1</number>
                 </property>
-                <item>
-                 <property name="text" >
-                  <string>11050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>22050</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text" >
-                  <string>44100</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QLabel" name="lb_Dbx_43" >
                 <property name="geometry" >
@@ -4571,16 +4071,7 @@
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>9</number>
-           </property>
-           <property name="topMargin" >
-            <number>9</number>
-           </property>
-           <property name="rightMargin" >
-            <number>9</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>9</number>
            </property>
            <item>
@@ -4592,16 +4083,7 @@
               <property name="spacing" >
                <number>6</number>
               </property>
-              <property name="leftMargin" >
-               <number>4</number>
-              </property>
-              <property name="topMargin" >
-               <number>4</number>
-              </property>
-              <property name="rightMargin" >
-               <number>4</number>
-              </property>
-              <property name="bottomMargin" >
+              <property name="margin" >
                <number>4</number>
               </property>
               <item>
@@ -4709,30 +4191,21 @@
                 </property>
                 <item>
                  <layout class="QGridLayout" >
-                  <property name="leftMargin" >
-                   <number>0</number>
-                  </property>
-                  <property name="topMargin" >
-                   <number>0</number>
-                  </property>
-                  <property name="rightMargin" >
-                   <number>0</number>
-                  </property>
-                  <property name="bottomMargin" >
-                   <number>0</number>
-                  </property>
                   <property name="horizontalSpacing" >
                    <number>0</number>
                   </property>
                   <property name="verticalSpacing" >
                    <number>6</number>
                   </property>
+                  <property name="margin" >
+                   <number>0</number>
+                  </property>
                   <item row="0" column="0" >
                    <spacer>
                     <property name="orientation" >
                      <enum>Qt::Vertical</enum>
                     </property>
-                    <property name="sizeHint" >
+                    <property name="sizeHint" stdset="0" >
                      <size>
                       <width>20</width>
                       <height>21</height>
@@ -4752,7 +4225,8 @@
                      <string>Añadir</string>
                     </property>
                     <property name="icon" >
-                     <iconset resource="../res/grlida.qrc" >:/img16/nuevo.png</iconset>
+                     <iconset resource="../res/grlida.qrc" >
+                      <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -4768,7 +4242,8 @@
                      <string>Selecciona montaje primario</string>
                     </property>
                     <property name="icon" >
-                     <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+                     <iconset resource="../res/grlida.qrc" >
+                      <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -4784,7 +4259,8 @@
                      <string>Bajar</string>
                     </property>
                     <property name="icon" >
-                     <iconset resource="../res/grlida.qrc" >:/img16/go-down.png</iconset>
+                     <iconset resource="../res/grlida.qrc" >
+                      <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -4800,7 +4276,8 @@
                      <string>Subir</string>
                     </property>
                     <property name="icon" >
-                     <iconset resource="../res/grlida.qrc" >:/img16/go-up.png</iconset>
+                     <iconset resource="../res/grlida.qrc" >
+                      <normaloff>:/img16/go-up.png</normaloff>:/img16/go-up.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -4816,7 +4293,8 @@
                      <string>Editar</string>
                     </property>
                     <property name="icon" >
-                     <iconset resource="../res/grlida.qrc" >:/img16/editar.png</iconset>
+                     <iconset resource="../res/grlida.qrc" >
+                      <normaloff>:/img16/editar.png</normaloff>:/img16/editar.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -4832,7 +4310,8 @@
                      <string>Autocrear Montaje</string>
                     </property>
                     <property name="icon" >
-                     <iconset resource="../res/grlida.qrc" >:/img16/ejecutar_app.png</iconset>
+                     <iconset resource="../res/grlida.qrc" >
+                      <normaloff>:/img16/ejecutar_app.png</normaloff>:/img16/ejecutar_app.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -4848,7 +4327,8 @@
                      <string>Limpiar</string>
                     </property>
                     <property name="icon" >
-                     <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+                     <iconset resource="../res/grlida.qrc" >
+                      <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -4857,7 +4337,7 @@
                     <property name="orientation" >
                      <enum>Qt::Vertical</enum>
                     </property>
-                    <property name="sizeHint" >
+                    <property name="sizeHint" stdset="0" >
                      <size>
                       <width>20</width>
                       <height>16</height>
@@ -4877,7 +4357,8 @@
                      <string>Eliminar</string>
                     </property>
                     <property name="icon" >
-                     <iconset resource="../res/grlida.qrc" >:/img16/eliminar.png</iconset>
+                     <iconset resource="../res/grlida.qrc" >
+                      <normaloff>:/img16/eliminar.png</normaloff>:/img16/eliminar.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -4888,7 +4369,7 @@
                   <property name="orientation" >
                    <enum>Qt::Vertical</enum>
                   </property>
-                  <property name="sizeHint" >
+                  <property name="sizeHint" stdset="0" >
                    <size>
                     <width>20</width>
                     <height>40</height>
@@ -4911,16 +4392,7 @@
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -4937,9 +4409,6 @@
                 <height>22</height>
                </rect>
               </property>
-              <property name="text" >
-               <string>disabled</string>
-              </property>
              </widget>
              <widget class="QLineEdit" name="txtDbx_serial_3" >
               <property name="geometry" >
@@ -4949,9 +4418,6 @@
                 <width>531</width>
                 <height>22</height>
                </rect>
-              </property>
-              <property name="text" >
-               <string>disabled</string>
               </property>
              </widget>
              <widget class="QLineEdit" name="txtDbx_serial_2" >
@@ -4963,9 +4429,6 @@
                 <height>22</height>
                </rect>
               </property>
-              <property name="text" >
-               <string>dummy</string>
-              </property>
              </widget>
              <widget class="QLineEdit" name="txtDbx_serial_1" >
               <property name="geometry" >
@@ -4975,9 +4438,6 @@
                 <width>531</width>
                 <height>22</height>
                </rect>
-              </property>
-              <property name="text" >
-               <string>dummy</string>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_AddSerial" >
@@ -4993,7 +4453,8 @@
                <string>Añade Serial</string>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/applications.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/applications.png</normaloff>:/img16/applications.png</iconset>
               </property>
              </widget>
              <widget class="QCheckBox" name="chkDbx_ipx_ipx" >
@@ -5233,28 +4694,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>0</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>COM1</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>COM2</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>COM3</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>COM4</string>
-               </property>
-              </item>
              </widget>
              <widget class="QComboBox" name="cbxDbx_dserial_bytesize" >
               <property name="geometry" >
@@ -5266,18 +4707,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>1</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>5</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>8</string>
-               </property>
-              </item>
              </widget>
              <widget class="QLineEdit" name="txtDbx_modem_listenport" >
               <property name="geometry" >
@@ -5287,9 +4718,6 @@
                 <width>91</width>
                 <height>22</height>
                </rect>
-              </property>
-              <property name="text" >
-               <string>23</string>
               </property>
              </widget>
              <widget class="QComboBox" name="cbxDbx_dserial_defaultbps" >
@@ -5305,68 +4733,8 @@
                <bool>true</bool>
               </property>
               <property name="currentIndex" >
-               <number>0</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>1200</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>1800</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>2400</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>4800</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>7200</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>9600</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>14400</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>19200</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>38400</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>57600</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>115200</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>128000</string>
-               </property>
-              </item>
              </widget>
              <widget class="QComboBox" name="cbxDbx_dserial_stopbit" >
               <property name="geometry" >
@@ -5378,18 +4746,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>0</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>1</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>2</string>
-               </property>
-              </item>
              </widget>
              <widget class="QComboBox" name="cbxDbx_type_serial" >
               <property name="geometry" >
@@ -5401,28 +4759,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>1</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>disabled</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>dummy</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>modem</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>directserial</string>
-               </property>
-              </item>
              </widget>
              <widget class="QComboBox" name="cbxDbx_select_serial" >
               <property name="geometry" >
@@ -5434,28 +4772,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>0</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>serial1</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>serial2</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>serial3</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>serial4</string>
-               </property>
-              </item>
              </widget>
              <widget class="QComboBox" name="cbxDbx_dserial_parity" >
               <property name="geometry" >
@@ -5467,23 +4785,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>0</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>N</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>E</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>O</string>
-               </property>
-              </item>
              </widget>
              <widget class="QLineEdit" name="txtDbx_modem_irq" >
               <property name="geometry" >
@@ -5493,9 +4796,6 @@
                 <width>91</width>
                 <height>22</height>
                </rect>
-              </property>
-              <property name="text" >
-               <string>1</string>
               </property>
              </widget>
              <widget class="QComboBox" name="cbxDbx_dserial_realport" >
@@ -5508,28 +4808,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>0</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>COM1</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>COM2</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>COM3</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>COM4</string>
-               </property>
-              </item>
              </widget>
              <widget class="QComboBox" name="cbxDbx_dserial_comport" >
               <property name="geometry" >
@@ -5541,18 +4821,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>0</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>1</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>2</string>
-               </property>
-              </item>
              </widget>
              <widget class="QCheckBox" name="chkDbx_modem_modem" >
               <property name="geometry" >
@@ -5582,16 +4852,7 @@
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -5603,16 +4864,7 @@
               <property name="spacing" >
                <number>2</number>
               </property>
-              <property name="leftMargin" >
-               <number>4</number>
-              </property>
-              <property name="topMargin" >
-               <number>4</number>
-              </property>
-              <property name="rightMargin" >
-               <number>4</number>
-              </property>
-              <property name="bottomMargin" >
+              <property name="margin" >
                <number>4</number>
               </property>
               <item>
@@ -5641,16 +4893,7 @@
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -5885,9 +5128,6 @@
                 <height>22</height>
                </rect>
               </property>
-              <property name="text" >
-               <string>mapper.txt</string>
-              </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_language" >
               <property name="geometry" >
@@ -5908,7 +5148,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_capturas" >
@@ -5930,7 +5171,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_musica" >
@@ -5952,7 +5194,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_mapperfile" >
@@ -5974,7 +5217,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_musica_clear" >
@@ -5996,7 +5240,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_mapperfile_clear" >
@@ -6018,7 +5263,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_language_clear" >
@@ -6040,7 +5286,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDbx_capturas_clear" >
@@ -6062,7 +5309,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
             </widget>
@@ -6078,22 +5326,14 @@
        <string>ScummVM</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/scummvm.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
       </attribute>
       <layout class="QHBoxLayout" >
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>4</number>
-       </property>
-       <property name="topMargin" >
-        <number>4</number>
-       </property>
-       <property name="rightMargin" >
-        <number>4</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>4</number>
        </property>
        <item>
@@ -6106,22 +5346,14 @@
            <string>Selecciona un Juego del ScummVM</string>
           </attribute>
           <attribute name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/scummvm.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
           </attribute>
           <layout class="QHBoxLayout" >
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -6172,22 +5404,14 @@
            <string>Opciones del Juego</string>
           </attribute>
           <attribute name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/opciones.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/opciones.png</normaloff>:/img16/opciones.png</iconset>
           </attribute>
           <layout class="QHBoxLayout" >
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -6219,7 +5443,8 @@
                 <string>Joystick 1</string>
                </property>
                <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/controller.png</iconset>
+                <iconset resource="../res/grlida.qrc" >
+                 <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
                </property>
               </item>
               <item>
@@ -6227,7 +5452,8 @@
                 <string>Joystick 2</string>
                </property>
                <property name="icon" >
-                <iconset resource="../res/grlida.qrc" >:/img16/controller.png</iconset>
+                <iconset resource="../res/grlida.qrc" >
+                 <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
                </property>
               </item>
              </widget>
@@ -6545,7 +5771,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_2" >
@@ -6564,7 +5791,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_3" >
@@ -6583,7 +5811,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_4" >
@@ -6602,7 +5831,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_5" >
@@ -6621,7 +5851,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_4_clear" >
@@ -6640,7 +5871,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_1_clear" >
@@ -6659,7 +5891,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_5_clear" >
@@ -6678,7 +5911,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_3_clear" >
@@ -6697,7 +5931,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_2_clear" >
@@ -6716,7 +5951,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QCheckBox" name="chkSvm_copy_protection" >
@@ -6761,7 +5997,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QLineEdit" name="txtSvm_path_setup" >
@@ -6790,7 +6027,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </widget>
@@ -6802,22 +6040,14 @@
            <string>Opciones de Sonido</string>
           </attribute>
           <attribute name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/vdmsound.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/vdmsound.png</normaloff>:/img16/vdmsound.png</iconset>
           </attribute>
           <layout class="QHBoxLayout" >
            <property name="spacing" >
             <number>6</number>
            </property>
-           <property name="leftMargin" >
-            <number>4</number>
-           </property>
-           <property name="topMargin" >
-            <number>4</number>
-           </property>
-           <property name="rightMargin" >
-            <number>4</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>4</number>
            </property>
            <item>
@@ -6965,7 +6195,8 @@
                <string>Configuración predeterminada</string>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/actualizar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
               </property>
              </widget>
              <widget class="QLabel" name="lb_Svm_13" >
@@ -7232,33 +6463,8 @@
                </rect>
               </property>
               <property name="currentIndex" >
-               <number>0</number>
+               <number>-1</number>
               </property>
-              <item>
-               <property name="text" >
-                <string>&lt;defecto></string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>11050</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>22050</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>44100</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>48000</string>
-               </property>
-              </item>
              </widget>
              <widget class="QLabel" name="lb_Svm_21" >
               <property name="geometry" >
@@ -7340,7 +6546,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
               </property>
              </widget>
              <widget class="QPushButton" name="btnDirSvm_6" >
@@ -7359,7 +6566,8 @@
                </size>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
              <widget class="QLabel" name="lb_Svm_22" >
@@ -7388,22 +6596,14 @@
        <string>VDMSound</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="../res/grlida.qrc" >:/img16/vdmsound.png</iconset>
+       <iconset resource="../res/grlida.qrc" >
+        <normaloff>:/img16/vdmsound.png</normaloff>:/img16/vdmsound.png</iconset>
       </attribute>
       <layout class="QHBoxLayout" >
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>4</number>
-       </property>
-       <property name="topMargin" >
-        <number>4</number>
-       </property>
-       <property name="rightMargin" >
-        <number>4</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>4</number>
        </property>
        <item>
@@ -7684,7 +6884,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
          <widget class="QPushButton" name="btnVdms_ExeJuego" >
@@ -7703,7 +6904,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
          <widget class="QPushButton" name="btnVdms_Icono" >
@@ -7722,7 +6924,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
          <widget class="QLineEdit" name="txtVdms_path_conf" >
@@ -7751,7 +6954,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
           </property>
          </widget>
          <widget class="QPushButton" name="btnVdms_FileConfg_clear" >
@@ -7770,7 +6974,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
           </property>
          </widget>
          <widget class="QPushButton" name="btnVdms_ExeJuego_clear" >
@@ -7789,7 +6994,8 @@
            </size>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
           </property>
          </widget>
         </widget>
@@ -7803,16 +7009,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>0</number>
      </property>
      <item>
@@ -7821,7 +7018,8 @@
         <string>Descargar la Info del Juego</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/go-down.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
        </property>
       </widget>
      </item>
@@ -7830,7 +7028,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -7859,7 +7057,8 @@
         <string>Aceptar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
@@ -7884,7 +7083,8 @@
         <string>Cancelar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
        <property name="flat" >
         <bool>false</bool>

@@ -48,6 +48,11 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	// Conecta los distintos botones con las funciones.
 	createConnections();
 
+	ui.cbxDatos_TipoEmu->clear();
+	ui.cbxDatos_TipoEmu->addItem(QIcon(stTheme+"img16/datos_1.png"),"datos");
+	ui.cbxDatos_TipoEmu->addItem(QIcon(stTheme+"img16/dosbox.png"),"dosbox");
+	ui.cbxDatos_TipoEmu->addItem(QIcon(stTheme+"img16/scummvm.png"),"scummvm");
+	ui.cbxDatos_TipoEmu->addItem(QIcon(stTheme+"img16/vdmsound.png"),"vdmsound");
 	ui.cbxDatos_TipoEmu->setCurrentIndex( ui.cbxDatos_TipoEmu->findText( TipoEmulador ) );
 
 	ui.tabWidget_Datos->setTabEnabled (3, false ); // tab DOSBox
@@ -69,6 +74,13 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	ui.twDatosURL->header()->setMovable(false);
 	ui.twDatosURL->header()->setResizeMode(QHeaderView::Interactive);
 	ui.twDatosURL->setColumnWidth(0, 100 );
+
+	QStringList sonido_frecuencias, sonido_Address,	sonido_IRQ, sonido_DMA, sonido_HDMA;
+	sonido_frecuencias << "11050" << "22050" << "44100" << "48000";
+	sonido_Address << "210" << "220" << "240" << "260" << "280";
+	sonido_IRQ << "3" << "5" << "7" << "10" << "11";
+	sonido_DMA << "0" << "1" << "3";
+	sonido_HDMA << "5" << "6" << "7";
 
 // Referente al DatosJuego ---------------------------------------
 	filters.clear();
@@ -144,12 +156,24 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	fGrl.CargarDatosComboBox(":/datos/svm_render_mode.txt"	, ui.cbxSvm_render_mode	, 1, false	);	// Carga la lista de render_mode
 	fGrl.CargarDatosComboBox(":/datos/svm_music_driver.txt"	, ui.cbxSvm_music_driver, 1, false	);	// Carga la lista de music_driver
 
+	ui.cbxSvm_output_rate->clear();
+	ui.cbxSvm_output_rate->addItem("<defecto>");
+	ui.cbxSvm_output_rate->addItems( sonido_frecuencias );
+
+	ui.cbxSvm_cdrom->clear();
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 0");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 1");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 2");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 3");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 4");
+
 	ui.cbxSvm_language->setCurrentIndex(0);
 	ui.cbxSvm_platform->setCurrentIndex(0);
 	ui.cbxSvm_gfx_mode->setCurrentIndex(0);
 	ui.cbxSvm_render_mode->setCurrentIndex(0);
 	ui.cbxSvm_music_driver->setCurrentIndex(0);
 	ui.cbxSvm_output_rate->setCurrentIndex(0);
+	ui.cbxSvm_cdrom->setCurrentIndex(0);
 
 	if( (EditandoJuego == true) && (TipoEmulador == "scummvm") )
 	{
@@ -179,24 +203,104 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	fGrl.CargarDatosComboBox(":/datos/dbx_mpu401.txt"      , ui.cbxDbx_midi_mpu401, 1, false); // MPU-401
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt" , ui.cbxDbx_midi_device, 1, false); // MIDI Device
 
-	// Ponemos los Combobox por defecto.
-	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 );   // Resolucin pantalla
-	ui.cbxDbx_sdl_windowresolution->setCurrentIndex( 0 ); // windowresolution
-	ui.cbxDbx_sdl_output->setCurrentIndex( 0 );           // Modo de Renderizado
-	ui.cbxDbx_dosbox_machine->setCurrentIndex( 0 );       // Tarjeta de Video
-	ui.cbxDbx_render_scaler->setCurrentIndex( 1 );        // Escalar y Filtros
-	ui.cbxDbx_sdl_hwscale->setCurrentIndex( 9 );          // Escalar por hardware
-	ui.cbxDbx_sdl_sensitivity->setCurrentIndex( 9 );      // Sensibilidad del ratn
-	ui.cbxDbx_dosbox_memsize->setCurrentIndex( 5 );       // Cantidad de memoria para DOSBox
-	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );             // Núcleo de la CPU DOSBox
-	ui.cbxDbx_render_frameskip->setCurrentIndex( 0 );     // Frameskip DOSBox
-	ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );           // Ciclos DOSBox
-	ui.cbxDbx_joystick_type->setCurrentIndex( 0 );        // Emulador de joystick
-	ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( 14 );  // keyboardlayout
-	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );      // Tipo Sound Blaste
-	ui.cbxDbx_sblaster_oplmode->setCurrentIndex( 0 );     // Sound Blaste Opl mode
-	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 );          // MPU-401
-	ui.cbxDbx_midi_device->setCurrentIndex( 0 );          // MIDI Device
+	ui.cbxDbx_dos_umb->clear();
+	ui.cbxDbx_dos_umb->addItem("true");
+	ui.cbxDbx_dos_umb->addItem("false");
+	ui.cbxDbx_dos_umb->addItem("max");
+
+	ui.cbxDbx_mixer_rate->clear();
+	ui.cbxDbx_mixer_rate->addItems( sonido_frecuencias );
+	ui.cbxDbx_sblaster_oplrate->clear();
+	ui.cbxDbx_sblaster_oplrate->addItems( sonido_frecuencias );
+	ui.cbxDbx_sblaster_sbbase->clear();
+	ui.cbxDbx_sblaster_sbbase->addItems( sonido_Address );
+	ui.cbxDbx_sblaster_irq->clear();
+	ui.cbxDbx_sblaster_irq->addItems( sonido_IRQ );
+	ui.cbxDbx_sblaster_dma->clear();
+	ui.cbxDbx_sblaster_dma->addItems( sonido_DMA );
+	ui.cbxDbx_sblaster_hdma->clear();
+	ui.cbxDbx_sblaster_hdma->addItems( sonido_HDMA );
+
+	ui.cbxDbx_gus_gusrate->clear();
+	ui.cbxDbx_gus_gusrate->addItems( sonido_frecuencias );
+	ui.cbxDbx_gus_gusbase->clear();
+	ui.cbxDbx_gus_gusbase->addItems( sonido_Address );
+	ui.cbxDbx_gus_irq1->clear();
+	ui.cbxDbx_gus_irq1->addItems( sonido_IRQ );
+	ui.cbxDbx_gus_irq2->clear();
+	ui.cbxDbx_gus_irq2->addItems( sonido_IRQ );
+	ui.cbxDbx_gus_dma1->clear();
+	ui.cbxDbx_gus_dma1->addItems( sonido_DMA );
+	ui.cbxDbx_gus_dma2->clear();
+	ui.cbxDbx_gus_dma2->addItems( sonido_DMA );
+	ui.txtDbx_gus_ultradir->setText("C:\\ULTRASND");
+
+	ui.cbxDbx_midi_mt32rate->clear();
+	ui.cbxDbx_midi_mt32rate->addItems( sonido_frecuencias );
+	ui.cbxDbx_speaker_pcrate->clear();
+	ui.cbxDbx_speaker_pcrate->addItems( sonido_frecuencias );
+	ui.cbxDbx_speaker_tandyrate->clear();
+	ui.cbxDbx_speaker_tandyrate->addItems( sonido_frecuencias );
+
+	ui.cbxDbx_speaker_tandy->clear();
+	ui.cbxDbx_speaker_tandy->addItem( "auto" );
+	ui.cbxDbx_speaker_tandy->addItem( "on" );
+	ui.cbxDbx_speaker_tandy->addItem( "off" );
+
+	ui.cbxDbx_dserial_comport->clear();
+	ui.cbxDbx_dserial_comport->addItem( "1" );
+	ui.cbxDbx_dserial_comport->addItem( "2" );
+
+	ui.cbxDbx_dserial_defaultbps->clear();
+	ui.cbxDbx_dserial_defaultbps->addItem( "1200" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "1800" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "2400" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "4800" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "7200" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "9600" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "14400" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "19200" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "38400" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "57600" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "115200" );
+	ui.cbxDbx_dserial_defaultbps->addItem( "128000" );
+
+	ui.cbxDbx_dserial_realport->clear();
+	ui.cbxDbx_dserial_realport->addItem( "COM1" );
+	ui.cbxDbx_dserial_realport->addItem( "COM2" );
+	ui.cbxDbx_dserial_realport->addItem( "COM3" );
+	ui.cbxDbx_dserial_realport->addItem( "COM4" );
+
+	ui.cbxDbx_modem_comport->clear();
+	ui.cbxDbx_modem_comport->addItem( "COM1" );
+	ui.cbxDbx_modem_comport->addItem( "COM2" );
+	ui.cbxDbx_modem_comport->addItem( "COM3" );
+	ui.cbxDbx_modem_comport->addItem( "COM4" );
+
+	ui.cbxDbx_dserial_bytesize->clear();
+	ui.cbxDbx_dserial_bytesize->addItem( "5" );
+	ui.cbxDbx_dserial_bytesize->addItem( "8" );
+
+	ui.cbxDbx_dserial_parity->clear();
+	ui.cbxDbx_dserial_parity->addItem( "N" );
+	ui.cbxDbx_dserial_parity->addItem( "E" );
+	ui.cbxDbx_dserial_parity->addItem( "O" );
+
+	ui.cbxDbx_dserial_stopbit->clear();
+	ui.cbxDbx_dserial_stopbit->addItem( "1" );
+	ui.cbxDbx_dserial_stopbit->addItem( "2" );
+
+	ui.cbxDbx_select_serial->clear();
+	ui.cbxDbx_select_serial->addItem( "serial1" );
+	ui.cbxDbx_select_serial->addItem( "serial2" );
+	ui.cbxDbx_select_serial->addItem( "serial3" );
+	ui.cbxDbx_select_serial->addItem( "serial4" );
+
+	ui.cbxDbx_type_serial->clear();
+	ui.cbxDbx_type_serial->addItem( "disabled" );
+	ui.cbxDbx_type_serial->addItem( "dummy" );
+	ui.cbxDbx_type_serial->addItem( "modem" );
+	ui.cbxDbx_type_serial->addItem( "directserial" );
 
 	if( (EditandoJuego == true) && (TipoEmulador == "dosbox") )
 	{
@@ -204,6 +308,61 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 		stItemIDDbx = sql->ItemIDIndex("dbgrl_emu_dosbox", stItemIDGrl); // Obtenemos el Index del ScummVM
 		CargarDatosDosBox( stItemIDGrl );
 		CargarDatosDBxMontaje( stItemIDDbx );
+	} else {
+		// Ponemos los datos por defecto.
+		ui.txtDbx_loadfix_mem->setText("64");
+		ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( 14 );  // keyboardlayout
+		ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 );   // Resolucin pantalla
+		ui.cbxDbx_sdl_windowresolution->setCurrentIndex( 0 ); // windowresolution
+		ui.cbxDbx_sdl_hwscale->setCurrentIndex( 9 );          // Escalar por hardware
+		ui.cbxDbx_sdl_sensitivity->setCurrentIndex( 9 );      // Sensibilidad del ratn
+		ui.cbxDbx_sdl_output->setCurrentIndex( 0 );           // Modo de Renderizado
+		ui.cbxDbx_dosbox_machine->setCurrentIndex( 0 );       // Tarjeta de Video
+		ui.cbxDbx_render_scaler->setCurrentIndex( 1 );        // Escalar y Filtros
+		ui.cbxDbx_dosbox_memsize->setCurrentIndex( 5 );       // Cantidad de memoria para DOSBox
+		ui.cbxDbx_cpu_core->setCurrentIndex( 0 );             // Núcleo de la CPU DOSBox
+		ui.cbxDbx_render_frameskip->setCurrentIndex( 0 );     // Frameskip DOSBox
+		ui.cbxDbx_dos_umb->setCurrentIndex( 0 );              // Soporte para memoria UMB
+		ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );           // Ciclos DOSBox
+		ui.cbxDbx_joystick_type->setCurrentIndex( 0 );        // Emulador de joystick
+		ui.cbxDbx_mixer_rate->setCurrentIndex( 1 );           // Frecuencia Sonido
+		ui.txtDbx_mixer_blocksize->setText("2048");           //
+		ui.txtDbx_mixer_prebuffer->setText("10");             //
+		ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );      // Tipo Sound Blaste
+		ui.cbxDbx_sblaster_oplmode->setCurrentIndex( 0 );     // Sound Blaste Opl mode
+		ui.cbxDbx_sblaster_oplrate->setCurrentIndex( 1 );     //
+		ui.cbxDbx_sblaster_sbbase->setCurrentIndex( 0 );      //
+		ui.cbxDbx_sblaster_irq->setCurrentIndex( 0 );         //
+		ui.cbxDbx_sblaster_dma->setCurrentIndex( 0 );         //
+		ui.cbxDbx_sblaster_hdma->setCurrentIndex( 0 );        //
+		ui.cbxDbx_gus_gusrate->setCurrentIndex( 1 );          //
+		ui.cbxDbx_gus_gusbase->setCurrentIndex( 0 );          //
+		ui.cbxDbx_gus_irq1->setCurrentIndex( 0 );             //
+		ui.cbxDbx_gus_irq2->setCurrentIndex( 0 );             //
+		ui.cbxDbx_gus_dma1->setCurrentIndex( 0 );             //
+		ui.cbxDbx_gus_dma2->setCurrentIndex( 0 );             //
+		ui.txtDbx_gus_ultradir->setText("C:\\ULTRASND");      // MPU-401
+		ui.cbxDbx_midi_device->setCurrentIndex( 0 );          // MIDI Device
+		ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );        //
+		ui.cbxDbx_speaker_pcrate->setCurrentIndex( 1 );       //
+		ui.cbxDbx_speaker_tandyrate->setCurrentIndex( 1 );    //
+		ui.cbxDbx_speaker_tandy->setCurrentIndex( 0 );        //
+		ui.cbxDbx_dserial_comport->setCurrentIndex(0);
+		ui.cbxDbx_dserial_defaultbps->setCurrentIndex(0);
+		ui.cbxDbx_dserial_bytesize->setCurrentIndex(1);
+		ui.cbxDbx_dserial_parity->setCurrentIndex(0);
+		ui.cbxDbx_dserial_stopbit->setCurrentIndex(0);
+		ui.cbxDbx_dserial_realport->setCurrentIndex(0);
+		ui.cbxDbx_modem_comport->setCurrentIndex(0);
+		ui.txtDbx_modem_listenport->setText("23");            //
+		ui.txtDbx_modem_irq->setText("1");                    //
+		ui.cbxDbx_select_serial->setCurrentIndex( 0 );        //
+		ui.cbxDbx_type_serial->setCurrentIndex(1);            //
+		ui.txtDbx_serial_1->setText("dummy");                 //
+		ui.txtDbx_serial_2->setText("dummy");                 //
+		ui.txtDbx_serial_3->setText("disabled");              //
+		ui.txtDbx_serial_4->setText("disabled");              //
+		ui.txtDbx_sdl_mapperfile->setText("mapper.txt");      //
 	}
 // Fin del DOSBox ------------------------------------------------
 
@@ -1445,7 +1604,7 @@ void frmAddEditJuego::CargarDatosScummVM( QString stIDsvm )
 	ui.h_SliderSvm_tempo->setSliderPosition( fGrl.StrToInt( strDatosScummvm["tempo"] ) );											// tempo
 	ui.h_SliderSvm_talkspeed->setSliderPosition(fGrl.StrToInt(  strDatosScummvm["talkspeed"] ) );									// talkspeed
 	ui.h_SliderSvm_debuglevel->setSliderPosition( fGrl.StrToInt( strDatosScummvm["debuglevel"] ) );									// debuglevel
-	//strDatosScummvm["cdrom"];																										// cdrom
+	ui.cbxSvm_cdrom->setCurrentIndex( fGrl.StrToInt( strDatosScummvm["cdrom"] ) );													// cdrom
 	ui.cbxSvm_joystick_num->setCurrentIndex( fGrl.StrToInt( strDatosScummvm["joystick_num"] ) );									// joystick_num
 
 	if( strDatosScummvm["output_rate"]!="" )
@@ -1509,7 +1668,7 @@ void frmAddEditJuego::setDatosScummVM()
 	DatosScummvm["tempo"]         = ui.posSliderSvm_4->text();								// tempo
 	DatosScummvm["talkspeed"]     = ui.posSliderSvm_5->text();								// talkspeed
 	DatosScummvm["debuglevel"]    = ui.posSliderSvm_6->text();								// debuglevel
-	DatosScummvm["cdrom"]         = "0";													// cdrom ui.cbxSvm_cdrom->currentIndex()
+	DatosScummvm["cdrom"]         = fGrl.IntToStr(ui.cbxSvm_cdrom->currentIndex());			// cdrom
 	DatosScummvm["joystick_num"]  = fGrl.IntToStr(ui.cbxSvm_joystick_num->currentIndex());	// joystick_num
 
 	if( ui.cbxSvm_output_rate->currentText()!="" && ui.cbxSvm_output_rate->currentIndex()!= 0 )

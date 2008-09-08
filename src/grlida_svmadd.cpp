@@ -55,11 +55,19 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 	fGrl.CargarDatosComboBox(":/datos/svm_render_mode.txt"	, ui.cbxSvm_render_mode, 1, false);	// Carga la lista de render_mode
 	fGrl.CargarDatosComboBox(":/datos/svm_music_driver.txt"	, ui.cbxSvm_music_driver, 1, false);	// Carga la lista de music_driver
 
+	ui.cbxSvm_cdrom->clear();
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 0");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 1");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 2");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 3");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 4");
+
 	ui.cbxSvm_language->setCurrentIndex(0);
 	ui.cbxSvm_platform->setCurrentIndex(0);
 	ui.cbxSvm_gfx_mode->setCurrentIndex(0);
 	ui.cbxSvm_render_mode->setCurrentIndex(0);
 	ui.cbxSvm_music_driver->setCurrentIndex(0);
+	ui.cbxSvm_cdrom->setCurrentIndex(0);
 
 	TempDatosJuego["rating"] = "0";
 
@@ -339,9 +347,9 @@ void frmSvmAdd::on_btnOk()
 		DatosScummvm["tempo"]			= ui.posSliderSvm_4->text()	; // tempo
 		DatosScummvm["talkspeed"]		= ui.posSliderSvm_5->text()	; // talkspeed
 		DatosScummvm["debuglevel"]		= ui.posSliderSvm_6->text()	; // debuglevel
-		DatosScummvm["cdrom"]			= "0"						; // cdrom ui.cbxSvm_cdrom->currentIndex()
+		DatosScummvm["cdrom"]			= fGrl.IntToStr(ui.cbxSvm_cdrom->currentIndex()); // cdrom
 		DatosScummvm["joystick_num"]	= fGrl.IntToStr(ui.cbxSvm_joystick_num->currentIndex()); //joystick_num
-		DatosScummvm["output_rate"]		= ""						; // output_rate
+		DatosScummvm["output_rate"]		= "22050"					; // output_rate
 		DatosScummvm["midi_gain"]		= "100"						; // midi_gain
 		DatosScummvm["copy_protection"]	= "false"					; // copy_protection
 		DatosScummvm["sound_font"]		= ""						; // sound_font

@@ -13,19 +13,11 @@
    <string>Montaje de unidades</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/grlida.png</normaloff>:/img16/grlida.png</iconset>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="leftMargin" >
-    <number>6</number>
-   </property>
-   <property name="topMargin" >
-    <number>6</number>
-   </property>
-   <property name="rightMargin" >
-    <number>6</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>6</number>
    </property>
    <item>
@@ -58,7 +50,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -83,16 +75,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>0</number>
      </property>
      <item>
@@ -116,7 +99,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
        </property>
       </widget>
      </item>
@@ -138,7 +122,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/limpiar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
        </property>
       </widget>
      </item>
@@ -312,7 +297,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -327,16 +312,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>0</number>
      </property>
      <item>
@@ -361,23 +337,8 @@
         </size>
        </property>
        <property name="currentIndex" >
-        <number>0</number>
+        <number>-1</number>
        </property>
-       <item>
-        <property name="text" >
-         <string>-aspi</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>-ioctl</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>-noioctl</string>
-        </property>
-       </item>
       </widget>
      </item>
      <item>
@@ -385,7 +346,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -400,16 +361,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>0</number>
      </property>
      <item>
@@ -459,7 +411,7 @@
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>401</width>
        <height>61</height>
@@ -472,16 +424,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>0</number>
      </property>
      <item>
@@ -489,7 +432,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -503,7 +446,8 @@
         <string>Aceptar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
@@ -513,7 +457,8 @@
         <string>Cancelar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
@@ -522,7 +467,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
