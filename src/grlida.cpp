@@ -1136,9 +1136,9 @@ void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString im
 
 	QImage img;
 	if( img.load( datos["thumbs"] ) )
-    	ui.PicFlowWidget->addSlide( img );
-    else
-    	ui.PicFlowWidget->addSlide( QPixmap(stTheme+"images/juego_sin_imagen.png") );
+		ui.PicFlowWidget->addSlide( img );
+	else
+		ui.PicFlowWidget->addSlide( QPixmap(stTheme+"images/juego_sin_imagen.png") );
 
 	ui.twJuegos->setFocus();
 	ui.twJuegos->clearSelection();
@@ -1279,7 +1279,7 @@ void GrLida::on_EliminarJuego()
 			{
 				sql->ItemEliminar(stItemIndex);
 
-				ui.PicFlowWidget->setSlide( fGrl.StrToInt( ui.twJuegos->currentItem()->text(4) ), QPixmap(stTheme+"images/juego_eliminado.png") );
+				ui.PicFlowWidget->setSlide( fGrl.StrToInt( ui.twJuegos->currentItem()->text(5) ), QPixmap(stTheme+"images/juego_eliminado.png") );
 
 				fGrl.DeleteItemTree( ui.twJuegos->currentItem() );
 				QMessageBox::information( this, stTituloGrl(), tr("Juego Eliminado correctamente"));
