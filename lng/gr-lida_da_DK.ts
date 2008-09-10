@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="es_ES">
-<defaultcodec></defaultcodec>
 <context>
     <name>AcercaDClass</name>
     <message>
@@ -92,517 +91,492 @@
         <translation>Tilføj eller Rediger Spil</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="47"/>
+        <location filename="../ui/addedit_juego.ui" line="39"/>
         <source>Datos</source>
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="74"/>
+        <location filename="../ui/addedit_juego.ui" line="55"/>
         <source>Datos generales del juego</source>
         <translation>Spil generelle data</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="278"/>
+        <location filename="../ui/addedit_juego.ui" line="259"/>
         <source>Juego Original</source>
         <translation>Original Spil</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="301"/>
+        <location filename="../ui/addedit_juego.ui" line="282"/>
         <source>Título:</source>
         <translation>Titel:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="314"/>
+        <location filename="../ui/addedit_juego.ui" line="295"/>
         <source>Subtítulo:</source>
         <translation>Undertitel:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="327"/>
+        <location filename="../ui/addedit_juego.ui" line="308"/>
         <source>Genero:</source>
         <translation>Genre:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="340"/>
+        <location filename="../ui/addedit_juego.ui" line="321"/>
         <source>Compañía:</source>
         <translation>Udgiver:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="353"/>
+        <location filename="../ui/addedit_juego.ui" line="334"/>
         <source>Desarrollador:</source>
         <translation>Developer:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="366"/>
+        <location filename="../ui/addedit_juego.ui" line="347"/>
         <source>Tema:</source>
         <translation>Tema:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6359"/>
+        <location filename="../ui/addedit_juego.ui" line="5585"/>
         <source>Idioma:</source>
         <translation>Sprog:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="392"/>
+        <location filename="../ui/addedit_juego.ui" line="373"/>
         <source>Formato:</source>
         <translation>Format:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="405"/>
+        <location filename="../ui/addedit_juego.ui" line="386"/>
         <source>Iconos:</source>
         <translation>Ikoner:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="418"/>
+        <location filename="../ui/addedit_juego.ui" line="399"/>
         <source>Sistema OS:</source>
         <translation>OS:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="431"/>
+        <location filename="../ui/addedit_juego.ui" line="412"/>
         <source>Tamaño:</source>
         <translation>Størrelse:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="444"/>
+        <location filename="../ui/addedit_juego.ui" line="425"/>
         <source>Gráficos:</source>
         <translation>Grafik:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="457"/>
+        <location filename="../ui/addedit_juego.ui" line="438"/>
         <source>Sonido:</source>
         <translation>Lyd:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="470"/>
+        <location filename="../ui/addedit_juego.ui" line="451"/>
         <source>Jugabilidad:</source>
         <translation>Playability:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="483"/>
+        <location filename="../ui/addedit_juego.ui" line="464"/>
         <source>Estado del juego</source>
         <translation>Staten spillet</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="499"/>
+        <location filename="../ui/addedit_juego.ui" line="480"/>
         <source>Carátula delantera</source>
         <translation>Forsideomslag</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="515"/>
+        <location filename="../ui/addedit_juego.ui" line="496"/>
         <source>Carátula trasera</source>
         <translation>Bagdæksel</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="531"/>
+        <location filename="../ui/addedit_juego.ui" line="512"/>
         <source>Portada o pantallazo</source>
         <translation>Cover eller skærmbillede</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="547"/>
+        <location filename="../ui/addedit_juego.ui" line="528"/>
         <source>Introducido el:</source>
         <translation>Indtastet:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="563"/>
+        <location filename="../ui/addedit_juego.ui" line="544"/>
         <source>Tipo:</source>
         <translation>Type:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="576"/>
+        <location filename="../ui/addedit_juego.ui" line="557"/>
         <source>Año:</source>
         <translation>År:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="589"/>
+        <location filename="../ui/addedit_juego.ui" line="570"/>
         <source>Nº Cds:</source>
         <translation>Antal diske:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="704"/>
-        <source>datos</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="712"/>
-        <source>dosbox</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="720"/>
-        <source>scummvm</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="728"/>
-        <source>vdmsound</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="1009"/>
+        <location filename="../ui/addedit_juego.ui" line="967"/>
         <source>Juego Favorito</source>
         <translation>Marker som favorit</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1018"/>
+        <location filename="../ui/addedit_juego.ui" line="976"/>
         <source>Otros Datos</source>
         <translation>Andre data</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="1042"/>
+        <location filename="../ui/addedit_juego.ui" line="992"/>
         <source>Descripción del juego y Url</source>
         <translation>Game beskrivelse og URL</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1099"/>
+        <location filename="../ui/addedit_juego.ui" line="1040"/>
         <source>Cortar</source>
         <translation>Klip</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1130"/>
+        <location filename="../ui/addedit_juego.ui" line="1072"/>
         <source>Copiar</source>
         <translation>Kopier</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1161"/>
+        <location filename="../ui/addedit_juego.ui" line="1104"/>
         <source>Pegar</source>
         <translation>Sæt ind</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1189"/>
+        <location filename="../ui/addedit_juego.ui" line="1133"/>
         <source>Texto en cursiva</source>
         <translation>Tekst i kursiv</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1192"/>
+        <location filename="../ui/addedit_juego.ui" line="1136"/>
         <source>Cursiva</source>
         <translation>Kursiv</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1220"/>
+        <location filename="../ui/addedit_juego.ui" line="1165"/>
         <source>Texto subrayado</source>
         <translation>Understreget tekst</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1223"/>
+        <location filename="../ui/addedit_juego.ui" line="1168"/>
         <source>Subrayada</source>
         <translation>Understreget</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="1251"/>
+        <location filename="../ui/addedit_juego.ui" line="1197"/>
         <source>Insertar dirección de una imagen</source>
         <translation>Indsæt billede URL</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1254"/>
+        <location filename="../ui/addedit_juego.ui" line="1200"/>
         <source>Imagen</source>
         <translation>Billede</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="1282"/>
+        <location filename="../ui/addedit_juego.ui" line="1229"/>
         <source>Insertar dirección Url</source>
         <translation>Indsæt URL-adresse/Hjemmeside adresse</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1285"/>
+        <location filename="../ui/addedit_juego.ui" line="1232"/>
         <source>Url</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1313"/>
+        <location filename="../ui/addedit_juego.ui" line="1261"/>
         <source>Buscar texto</source>
         <translation>Søg tekst</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1341"/>
+        <location filename="../ui/addedit_juego.ui" line="1290"/>
         <source>Buscar anterior</source>
         <translation>Søg forrige</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1369"/>
+        <location filename="../ui/addedit_juego.ui" line="1319"/>
         <source>Buscar siguiente</source>
         <translation>Søg næste</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1397"/>
+        <location filename="../ui/addedit_juego.ui" line="1348"/>
         <source>Reemplazar</source>
         <translation>Erstat</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1425"/>
+        <location filename="../ui/addedit_juego.ui" line="1377"/>
         <source>Preview</source>
         <translation>Forrige</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1462"/>
+        <location filename="../ui/addedit_juego.ui" line="1415"/>
         <source>Seleccionar todo</source>
         <translation>Vælg alle</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1493"/>
+        <location filename="../ui/addedit_juego.ui" line="1447"/>
         <source>Deshacer</source>
         <translation>Fortryd</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1524"/>
+        <location filename="../ui/addedit_juego.ui" line="1479"/>
         <source>Rehacer</source>
         <translation>Redo</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1552"/>
+        <location filename="../ui/addedit_juego.ui" line="1508"/>
         <source>Texto en negrita</source>
         <translation>Fed tekst</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1555"/>
+        <location filename="../ui/addedit_juego.ui" line="1511"/>
         <source>Negrita</source>
         <translation>Fed</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1647"/>
+        <location filename="../ui/addedit_juego.ui" line="1586"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2340"/>
+        <location filename="../ui/addedit_juego.ui" line="2191"/>
         <source>Descripción</source>
         <translation>Beskrivelse</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1703"/>
+        <location filename="../ui/addedit_juego.ui" line="1633"/>
         <source>Smiles</source>
         <translation>Emoticonos</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1733"/>
+        <location filename="../ui/addedit_juego.ui" line="1663"/>
         <source>Nueva url</source>
         <translation>Ny URL</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1758"/>
+        <location filename="../ui/addedit_juego.ui" line="1689"/>
         <source>Editar url</source>
         <translation>Rediger URL</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1774"/>
+        <location filename="../ui/addedit_juego.ui" line="1706"/>
         <source>Eliminar url</source>
         <translation>Slet URL</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1790"/>
+        <location filename="../ui/addedit_juego.ui" line="1723"/>
         <source>Abrir URL</source>
         <translation>Åbn URL</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1808"/>
+        <location filename="../ui/addedit_juego.ui" line="1742"/>
         <source>Archivos del Juego</source>
         <translation>Spil filer</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1832"/>
+        <location filename="../ui/addedit_juego.ui" line="1758"/>
         <source>Opciones de archivos</source>
         <translation>Fil indstillinger</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="1870"/>
+        <location filename="../ui/addedit_juego.ui" line="1778"/>
         <source>Archivo para añadir a la lista:</source>
         <translation>File at tilføje til listen:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1950"/>
+        <location filename="../ui/addedit_juego.ui" line="1851"/>
         <source>Nombre:</source>
         <translation>Navn:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2041"/>
+        <location filename="../ui/addedit_juego.ui" line="1915"/>
         <source>CRC32:</source>
         <translation>CRC32:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2101"/>
+        <location filename="../ui/addedit_juego.ui" line="1966"/>
         <source>Size:</source>
         <translation>Størrelse:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2185"/>
+        <location filename="../ui/addedit_juego.ui" line="2041"/>
         <source>Descripción:</source>
         <translation>Beskrivelse:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4752"/>
+        <location filename="../ui/addedit_juego.ui" line="4225"/>
         <source>Añadir</source>
         <translation>Tilføj</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4816"/>
+        <location filename="../ui/addedit_juego.ui" line="4293"/>
         <source>Editar</source>
         <translation>Rediger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2264"/>
+        <location filename="../ui/addedit_juego.ui" line="2113"/>
         <source>Actualizar</source>
         <translation>Opdater</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2280"/>
+        <location filename="../ui/addedit_juego.ui" line="2130"/>
         <source>Elimiar</source>
         <translation>Slet</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2330"/>
+        <location filename="../ui/addedit_juego.ui" line="2181"/>
         <source>Nombre</source>
         <translation>Navn</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2335"/>
+        <location filename="../ui/addedit_juego.ui" line="2186"/>
         <source>CRC32</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2345"/>
+        <location filename="../ui/addedit_juego.ui" line="2196"/>
         <source>Size</source>
         <translation>Størrelse</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2350"/>
+        <location filename="../ui/addedit_juego.ui" line="2201"/>
         <source>Path</source>
         <translation>Sti</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2362"/>
+        <location filename="../ui/addedit_juego.ui" line="2213"/>
         <source>DOSBox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2390"/>
+        <location filename="../ui/addedit_juego.ui" line="2233"/>
         <source>General</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2411"/>
+        <location filename="../ui/addedit_juego.ui" line="2245"/>
         <source>Datos Generales para el DOSbox</source>
         <translation>DOSBox generelle data</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2443"/>
+        <location filename="../ui/addedit_juego.ui" line="2277"/>
         <source>Memoria reservada en (KB)</source>
         <translation>Reserveret hukommelse (i KB)</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7437"/>
+        <location filename="../ui/addedit_juego.ui" line="6637"/>
         <source>Parametros:</source>
         <translation>Parametre:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2469"/>
+        <location filename="../ui/addedit_juego.ui" line="2303"/>
         <source>keyboardlayout -- Código de la lengua de la disposición de teclado (o ninguna) :</source>
         <translation>Tastaturlayout:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2482"/>
-        <source>64</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="7424"/>
+        <location filename="../ui/addedit_juego.ui" line="6624"/>
         <source>Ejecutable (exe,com,bat) del Juego:</source>
         <translation>Spil fil (EXE, COM, BAT):</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2551"/>
+        <location filename="../ui/addedit_juego.ui" line="2385"/>
         <source>El juego necesita &apos;loadfix&apos;</source>
         <translation>Dette spil kræver &apos;loadfix&apos;</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2564"/>
+        <location filename="../ui/addedit_juego.ui" line="2398"/>
         <source>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.conf</source>
         <translation>Navn på CONF-filen skal gemmes. Eksempel: Name_file.conf</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2634"/>
+        <location filename="../ui/addedit_juego.ui" line="2471"/>
         <source>Ejecutable (exe,com,bat) Setup del Juego:</source>
         <translation>Setup binær (EXE, COM, BAT):</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2647"/>
+        <location filename="../ui/addedit_juego.ui" line="2484"/>
         <source>Cerrar la consola del DOSBox</source>
         <translation>Luk DOSBox konsol</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2663"/>
+        <location filename="../ui/addedit_juego.ui" line="2500"/>
         <source>Cerrar DOSBox al terminar el juego</source>
         <translation>Luk DOSBox når spillet udgange</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2762"/>
+        <location filename="../ui/addedit_juego.ui" line="2602"/>
         <source>General DOSBox</source>
         <translation>DOSBox General</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2783"/>
+        <location filename="../ui/addedit_juego.ui" line="2614"/>
         <source>Opciones de pantalla, video, ratón y renderizado....</source>
         <translation>Skærm, video, mus og gøre valgmuligheder ...</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2795"/>
+        <location filename="../ui/addedit_juego.ui" line="2626"/>
         <source>aspect -- Aplicar corrección de aspecto</source>
         <translation>Aspekt -- Anvend aspekt korrektion</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2808"/>
+        <location filename="../ui/addedit_juego.ui" line="2639"/>
         <source>fullfixed -- Fijar la resolución en pantalla completa</source>
         <translation>Fullfixed - Lock-løsning i fuld skærmtilstand</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2831"/>
+        <location filename="../ui/addedit_juego.ui" line="2662"/>
         <source>fullscreen -- Iniciar dosbox directamente en pantalla completa</source>
         <translation>Fuld skærm -- Start DOSBox i fuld skærmtilstand</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2844"/>
+        <location filename="../ui/addedit_juego.ui" line="2675"/>
         <source>fulldouble -- Usar doble búfer en pantalla completa</source>
         <translation>Fuld dobbelt -- Brug dobbelt buffer i fuld skærmtilstand</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2893"/>
+        <location filename="../ui/addedit_juego.ui" line="2724"/>
         <source>Escalar por hardware:</source>
         <translation>Hardware skalering:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2906"/>
+        <location filename="../ui/addedit_juego.ui" line="2737"/>
         <source>Sensibilidad del ratón:</source>
         <translation>Mouse følsomhed:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2919"/>
+        <location filename="../ui/addedit_juego.ui" line="2750"/>
         <source>Resolución pantalla:</source>
         <translation>Skærmopløsning:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2932"/>
+        <location filename="../ui/addedit_juego.ui" line="2763"/>
         <source>Modo de Renderizado:</source>
         <translation>Render mode:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2945"/>
+        <location filename="../ui/addedit_juego.ui" line="2776"/>
         <source>Tarjeta de Video:</source>
         <translation>Grafikkort:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2958"/>
+        <location filename="../ui/addedit_juego.ui" line="2789"/>
         <source>Escalar y Filtros:</source>
         <translation>Scaler og filtre:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="2971"/>
+        <location filename="../ui/addedit_juego.ui" line="2802"/>
         <source>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed</source>
         <translation>Fuld opløsning - Beslutning, der skal anvendes i fuld skærmtilstand, skal du bruge sammen med fullfixed</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2987"/>
+        <location filename="../ui/addedit_juego.ui" line="2818"/>
         <source>windowresolution:</source>
         <translation>Vindue beslutning:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="3000"/>
+        <location filename="../ui/addedit_juego.ui" line="2831"/>
         <source>autolock -- El ratón se autobloqueará al hace clic en la pantalla</source>
         <translation>Autolås - mus vil blive låst automatisk, når du klikker på skærmen</translation>
     </message>
@@ -612,772 +586,507 @@
         <translation type="obsolete">Waiton fejl - Vent, før du lukker konsollen, hvis en fejl opstår</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3032"/>
+        <location filename="../ui/addedit_juego.ui" line="2863"/>
         <source>usescancodes -- Evitar el uso de symkeys, no en todos los sistemas operativos</source>
         <translation>Anvender cancodes - Undgå at bruge symkeys, ikke for alle OS</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3077"/>
+        <location filename="../ui/addedit_juego.ui" line="2908"/>
         <source>Entorno</source>
         <translation>Machine</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="3098"/>
+        <location filename="../ui/addedit_juego.ui" line="2920"/>
         <source>Opciones de memoria, joystick y ciclos de emulación</source>
         <translation>Hukommelse, joystick og cyklus  Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3175"/>
-        <source>true</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3180"/>
-        <source>false</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3185"/>
-        <source>max</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3199"/>
+        <location filename="../ui/addedit_juego.ui" line="3006"/>
         <source>Sincronizar. Arriba/Abajo</source>
         <translation>Sync. Op / Ned</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="3225"/>
+        <location filename="../ui/addedit_juego.ui" line="3032"/>
         <source>Cantidad de memoria (Mb) que DOSBox tendrá disponible:</source>
         <translation>Mængde hukommelse (MB), der skal tildeles for DOSBox:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="3241"/>
+        <location filename="../ui/addedit_juego.ui" line="3048"/>
         <source>Núcleo de la CPU usado en la emulación:</source>
         <translation>CPU-kerne anvendes under emulering:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3257"/>
+        <location filename="../ui/addedit_juego.ui" line="3064"/>
         <source>Cuantos cuadros salta dosbox antes de dibujar uno:</source>
         <translation>Hvor mange billeder DOSBox springer for hver drages:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3273"/>
+        <location filename="../ui/addedit_juego.ui" line="3080"/>
         <source>Abajo</source>
         <translation>Ned</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3286"/>
+        <location filename="../ui/addedit_juego.ui" line="3093"/>
         <source>Arriba</source>
         <translation>Op</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3299"/>
+        <location filename="../ui/addedit_juego.ui" line="3106"/>
         <source>Emulador de joystick:</source>
         <translation>Jostick emulator:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3312"/>
+        <location filename="../ui/addedit_juego.ui" line="3119"/>
         <source>xms -- Activa o desactiva soporte para memoria XMS.</source>
         <translation>XMS - aktiveres / deaktiveres XMS-hukommelse støtte.</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3328"/>
+        <location filename="../ui/addedit_juego.ui" line="3135"/>
         <source>ems -- Activa o desactiva soporte para memoria EMS.</source>
         <translation>EMS - aktiveres / deaktiveres EMS hukommelse støtte.</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3344"/>
+        <location filename="../ui/addedit_juego.ui" line="3151"/>
         <source>umb -- Activa o desactiva soporte para memoria UMB</source>
         <translation>UMB -- Enable / disable UMB memory support</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="3373"/>
+        <location filename="../ui/addedit_juego.ui" line="3180"/>
         <source>autofire -- Disparo continuado mientras mantengas el botón presionado</source>
         <translation>Autofire - Joystick vil brand kontinuerligt mens knappen er trykket</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="3386"/>
+        <location filename="../ui/addedit_juego.ui" line="3193"/>
         <source>swap34 -- Intercambiar el 3ro y 4to eje. Puede ser útil para ciertas palancas de mando</source>
         <translation>Swap34 - Swap 3rd og 4th joysticket akse. Kan være nyttigt med nogle modeller</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3399"/>
+        <location filename="../ui/addedit_juego.ui" line="3206"/>
         <source>timed -- Permitir los intervalos sincronizados para el eje. (falso es el estilo de comportamiento viejo)</source>
         <translation>Timeout - Aktiver timeout intervaller for akse. (Falsk er gammel stil adfærd)</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3415"/>
+        <location filename="../ui/addedit_juego.ui" line="3222"/>
         <source>buttonwrap -- enable button wrapping at the number of emulated buttons</source>
         <translation>Buttonwrap - Aktiver knappen indpakning på antallet af emuleret knapper</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="3447"/>
+        <location filename="../ui/addedit_juego.ui" line="3254"/>
         <source>Ciclos, Cantidad de instrucciones que dosbox intenta emular cada milisegundo, Es malo darle un valor mayor al que su máquina puede soportar:</source>
         <translation>Cycles, størrelsen af instruktioner at DOSBox emulerer pr milisecond. Værdier for høj, vil medføre lavere hastigheder:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6826"/>
+        <location filename="../ui/addedit_juego.ui" line="6056"/>
         <source>Opciones de Sonido</source>
         <translation>Lyd Indstillinger</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="3480"/>
+        <location filename="../ui/addedit_juego.ui" line="3278"/>
         <source>Todas las Opciones de sonido y emulación de sonido</source>
         <translation>Alle lyd og lyd-emulering Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3492"/>
+        <location filename="../ui/addedit_juego.ui" line="3290"/>
         <source>Prebuffer:</source>
         <translation>Prebuffer:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3505"/>
+        <location filename="../ui/addedit_juego.ui" line="3303"/>
         <source>Desactivar Sonido</source>
         <translation>Deaktiver lyd</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4129"/>
+        <location filename="../ui/addedit_juego.ui" line="3691"/>
         <source>Frecuencia:</source>
         <translation>Frecuency:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7244"/>
-        <source>11050</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="7249"/>
-        <source>22050</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="7254"/>
-        <source>44100</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3562"/>
+        <location filename="../ui/addedit_juego.ui" line="3345"/>
         <source>Bloque:</source>
         <translation>Block:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3575"/>
-        <source>2048</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="4026"/>
-        <source>10</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3605"/>
+        <location filename="../ui/addedit_juego.ui" line="3382"/>
         <source>Sound Blaster</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3935"/>
-        <source>210</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3940"/>
-        <source>220</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3945"/>
-        <source>240</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3950"/>
-        <source>260</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3955"/>
-        <source>280</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="4115"/>
-        <source>3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5273"/>
-        <source>5</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="4021"/>
-        <source>7</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="4031"/>
-        <source>11</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="7095"/>
+        <location filename="../ui/addedit_juego.ui" line="6326"/>
         <source>0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5548"/>
-        <source>1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3771"/>
-        <source>6</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="3803"/>
+        <location filename="../ui/addedit_juego.ui" line="3485"/>
         <source>Tipo Sound Blaste:</source>
         <translation>Sound Blaster type:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4194"/>
+        <location filename="../ui/addedit_juego.ui" line="3756"/>
         <source>Address:</source>
         <translation>Adresse:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5067"/>
+        <location filename="../ui/addedit_juego.ui" line="4528"/>
         <source>IRQ:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3842"/>
+        <location filename="../ui/addedit_juego.ui" line="3524"/>
         <source>DMA:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3855"/>
+        <location filename="../ui/addedit_juego.ui" line="3537"/>
         <source>HDMA:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3868"/>
+        <location filename="../ui/addedit_juego.ui" line="3550"/>
         <source>Opl mode:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3894"/>
+        <location filename="../ui/addedit_juego.ui" line="3576"/>
         <source>Permite al mezclador de la soundblaster modificar el del DOSBox</source>
         <translation>Tillad Sound Blaster mixer over DOSBox mixer</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3903"/>
+        <location filename="../ui/addedit_juego.ui" line="3585"/>
         <source>Gravis Ultrasound</source>
         <translation>Gravis UltraSound</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="3915"/>
+        <location filename="../ui/addedit_juego.ui" line="3597"/>
         <source>Activa la emulación de Gravis Ultrasound</source>
         <translation>Aktiver Gravis UltraSound emulering</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4142"/>
+        <location filename="../ui/addedit_juego.ui" line="3704"/>
         <source>DMA 1:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4155"/>
+        <location filename="../ui/addedit_juego.ui" line="3717"/>
         <source>DMA 2:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4168"/>
+        <location filename="../ui/addedit_juego.ui" line="3730"/>
         <source>IRQ 2:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4181"/>
+        <location filename="../ui/addedit_juego.ui" line="3743"/>
         <source>IRQ 1:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4207"/>
-        <source>C:\ULTRASND</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="4232"/>
+        <location filename="../ui/addedit_juego.ui" line="3792"/>
         <source>MIDI</source>
         <translation></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4244"/>
+        <location filename="../ui/addedit_juego.ui" line="3804"/>
         <source>Activar emulación MPU-401</source>
         <translation>Aktiver MPU-401 emulering</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4273"/>
+        <location filename="../ui/addedit_juego.ui" line="3833"/>
         <source>Modo inteligente</source>
         <translation>Intelligent mode</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4330"/>
+        <location filename="../ui/addedit_juego.ui" line="3875"/>
         <source>MPU-401:</source>
         <translation></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4343"/>
+        <location filename="../ui/addedit_juego.ui" line="3888"/>
         <source>Frecuencia de muestreo de la emulación de música MT32:</source>
         <translation>MT32 Musik emulering samplingfrekvens:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4359"/>
+        <location filename="../ui/addedit_juego.ui" line="3904"/>
         <source>Opciones de configuración especiales para el dispositivo:</source>
         <translation>Special konfiguration enheden muligheder:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4382"/>
+        <location filename="../ui/addedit_juego.ui" line="3927"/>
         <source>Dispositivo que recibirá los datos MIDI desde el MPU-401:</source>
         <translation>Enhed til at modtage MIDI-data fra MPU-401:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4391"/>
+        <location filename="../ui/addedit_juego.ui" line="3936"/>
         <source>Configuración Adicional</source>
         <translation>Yderligere Configuration</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4435"/>
-        <source>auto</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="4440"/>
-        <source>on</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="4445"/>
-        <source>off</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="4459"/>
+        <location filename="../ui/addedit_juego.ui" line="3974"/>
         <source>Tandy:</source>
         <translation>Tandy:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4472"/>
+        <location filename="../ui/addedit_juego.ui" line="3987"/>
         <source>Activa el altavoz interno</source>
         <translation>Aktiver interne højttaler</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4488"/>
+        <location filename="../ui/addedit_juego.ui" line="4003"/>
         <source>Activa Disney Sound Source</source>
         <translation>Aktiver Disney lydkilde</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4532"/>
+        <location filename="../ui/addedit_juego.ui" line="4032"/>
         <source>Frecuencia de muestreo de la generación de sonido del altavoz interno:</source>
         <translation>Intern højttaler samplingfrekvens:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4551"/>
+        <location filename="../ui/addedit_juego.ui" line="4051"/>
         <source>Frecuencia de muestreo de la generación de sonido Tandy de 3 voces. La emulación de sonido Tandy está presente si se selecciona tandy como máquina:</source>
         <translation>Tandy 3 samplingfrekvens. Tandy emulering er til stede, hvis Tandy maskine er valgt:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4568"/>
+        <location filename="../ui/addedit_juego.ui" line="4068"/>
         <source>Montaje</source>
         <translation>Mounting</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4589"/>
+        <location filename="../ui/addedit_juego.ui" line="4080"/>
         <source>Opciones de montaje de unidades</source>
         <translation>Mounting Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4651"/>
+        <location filename="../ui/addedit_juego.ui" line="4133"/>
         <source>Folder/Imagen</source>
         <translation>Mappe / Image</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4656"/>
+        <location filename="../ui/addedit_juego.ui" line="4138"/>
         <source>Etiqueta</source>
         <translation>Label</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4661"/>
+        <location filename="../ui/addedit_juego.ui" line="4143"/>
         <source>Tipo</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4666"/>
+        <location filename="../ui/addedit_juego.ui" line="4148"/>
         <source>Driver</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4671"/>
+        <location filename="../ui/addedit_juego.ui" line="4153"/>
         <source>CD/DVD index</source>
         <translation>CD / DVD index</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4676"/>
+        <location filename="../ui/addedit_juego.ui" line="4158"/>
         <source>Opciones CD/DVD</source>
         <translation>CD / DVD Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4681"/>
+        <location filename="../ui/addedit_juego.ui" line="4163"/>
         <source>IO Ctrl</source>
         <translation>IO CTRL</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4686"/>
+        <location filename="../ui/addedit_juego.ui" line="4168"/>
         <source>Primer montaje</source>
         <translation>Første enhed</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4768"/>
+        <location filename="../ui/addedit_juego.ui" line="4242"/>
         <source>Selecciona montaje primario</source>
         <translation>Vælg første enhed montering</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4784"/>
+        <location filename="../ui/addedit_juego.ui" line="4259"/>
         <source>Bajar</source>
         <translation>Ned</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4800"/>
+        <location filename="../ui/addedit_juego.ui" line="4276"/>
         <source>Subir</source>
         <translation>Op</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4832"/>
+        <location filename="../ui/addedit_juego.ui" line="4310"/>
         <source>Autocrear Montaje</source>
         <translation>Automatisk montage</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4848"/>
+        <location filename="../ui/addedit_juego.ui" line="4327"/>
         <source>Limpiar</source>
         <translation>Klar</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4877"/>
+        <location filename="../ui/addedit_juego.ui" line="4357"/>
         <source>Eliminar</source>
         <translation>Slet</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4908"/>
+        <location filename="../ui/addedit_juego.ui" line="4389"/>
         <source>Comunicación</source>
         <translation>Meddelelse</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="4929"/>
+        <location filename="../ui/addedit_juego.ui" line="4401"/>
         <source>Opciones de comunicaciones como la red o modem</source>
         <translation>Net og modem indstillinger</translation>
     </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5408"/>
-        <source>disabled</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5413"/>
-        <source>dummy</source>
-        <translation></translation>
-    </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="4993"/>
+        <location filename="../ui/addedit_juego.ui" line="4453"/>
         <source>Añade Serial</source>
         <translation>Tilføj Serial</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="5009"/>
+        <location filename="../ui/addedit_juego.ui" line="4470"/>
         <source>ipx -- Activa emulación IPX sobre UDP/IP</source>
         <translation>IPX -- Aktiver IPX over UDP / IP-emulering</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5025"/>
+        <location filename="../ui/addedit_juego.ui" line="4486"/>
         <source>directserial -- Activa soporte de puerto serie directo</source>
         <translation>Directserial - tillade direkte adgang til havn</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5041"/>
+        <location filename="../ui/addedit_juego.ui" line="4502"/>
         <source>Puerto COM:</source>
         <translation>COM port:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5054"/>
+        <location filename="../ui/addedit_juego.ui" line="4515"/>
         <source>Puerto real:</source>
         <translation>Real port:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5080"/>
+        <location filename="../ui/addedit_juego.ui" line="4541"/>
         <source>Paridad de paquetes:</source>
         <translation>Package parity:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5093"/>
+        <location filename="../ui/addedit_juego.ui" line="4554"/>
         <source>Seleccionar Serial:</source>
         <translation>Choose Serial:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5106"/>
+        <location filename="../ui/addedit_juego.ui" line="4567"/>
         <source>Serial 1:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5119"/>
+        <location filename="../ui/addedit_juego.ui" line="4580"/>
         <source>Serial 2:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5132"/>
+        <location filename="../ui/addedit_juego.ui" line="4593"/>
         <source>Serial 3:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5145"/>
+        <location filename="../ui/addedit_juego.ui" line="4606"/>
         <source>Serial 4:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5158"/>
+        <location filename="../ui/addedit_juego.ui" line="4619"/>
         <source>Bits por segundos:</source>
         <translation>Bits per sekund:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5171"/>
+        <location filename="../ui/addedit_juego.ui" line="4632"/>
         <source>Numero del puerto</source>
         <translation>Port nr</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="5184"/>
+        <location filename="../ui/addedit_juego.ui" line="4645"/>
         <source>Tamaño del Byte:</source>
         <translation>Byte størrelse:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5197"/>
+        <location filename="../ui/addedit_juego.ui" line="4658"/>
         <source>Bits de parada:</source>
         <translation>Stop Bits:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5210"/>
+        <location filename="../ui/addedit_juego.ui" line="4671"/>
         <source>Estado o tipo Serial:</source>
         <translation>State eller Serial type:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5223"/>
+        <location filename="../ui/addedit_juego.ui" line="4684"/>
         <source>Modem comport:</source>
         <translation>Modem comport:</translation>
     </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5515"/>
-        <source>COM1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5520"/>
-        <source>COM2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5525"/>
-        <source>COM3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5530"/>
-        <source>COM4</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5278"/>
-        <source>8</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5292"/>
-        <source>23</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5312"/>
-        <source>1200</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5317"/>
-        <source>1800</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5322"/>
-        <source>2400</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5327"/>
-        <source>4800</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5332"/>
-        <source>7200</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5337"/>
-        <source>9600</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5342"/>
-        <source>14400</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5347"/>
-        <source>19200</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5352"/>
-        <source>38400</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5357"/>
-        <source>57600</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5362"/>
-        <source>115200</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5367"/>
-        <source>128000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5553"/>
-        <source>2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5418"/>
-        <source>modem</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5423"/>
-        <source>directserial</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5441"/>
-        <source>serial1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5446"/>
-        <source>serial2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5451"/>
-        <source>serial3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5456"/>
-        <source>serial4</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5474"/>
-        <source>N</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5479"/>
-        <source>E</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="5484"/>
-        <source>O</source>
-        <translation></translation>
-    </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="5567"/>
+        <location filename="../ui/addedit_juego.ui" line="4837"/>
         <source>modem -- Activa emulación de módem virtual</source>
         <translation>Modem - Aktiver virtuelle modem emulation</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5579"/>
+        <location filename="../ui/addedit_juego.ui" line="4849"/>
         <source>Autoexec</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5600"/>
+        <location filename="../ui/addedit_juego.ui" line="4861"/>
         <source>Montaje de unidades manualmente</source>
         <translation>Håndbog monteringsudstyret</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="5621"/>
+        <location filename="../ui/addedit_juego.ui" line="4873"/>
         <source>Activar Configuración manual del [autoexec] del DOSBox</source>
         <translation>Aktiver manuel redigering af DOSBox [autoExec] Sektion</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="5638"/>
+        <location filename="../ui/addedit_juego.ui" line="4890"/>
         <source>Miscelánea</source>
         <translation>Misc</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5659"/>
+        <location filename="../ui/addedit_juego.ui" line="4902"/>
         <source>Otras opciones como la prioridad del emulador, directorio de capturas y sonido, etc...</source>
         <translation>Misc muligheder såsom prioritet emulator, lyd-opsamling og-snapshot-mappen, osv. ...</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5701"/>
+        <location filename="../ui/addedit_juego.ui" line="4944"/>
         <source>Prioridad DOSBox seleccionado</source>
         <translation>DOSBox Prioritet (forgrundsviden)</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5781"/>
+        <location filename="../ui/addedit_juego.ui" line="5024"/>
         <source>Baja</source>
         <translation>Lav</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5820"/>
+        <location filename="../ui/addedit_juego.ui" line="5063"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5807"/>
+        <location filename="../ui/addedit_juego.ui" line="5050"/>
         <source>Muy alta</source>
         <translation>Meget Højt</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5794"/>
+        <location filename="../ui/addedit_juego.ui" line="5037"/>
         <source>Alta</source>
         <translation>Høj</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5769"/>
+        <location filename="../ui/addedit_juego.ui" line="5012"/>
         <source>Prioridad DOSBox NO seleccionado</source>
         <translation>DOSBox Prioritet (baggrund)</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5837"/>
+        <location filename="../ui/addedit_juego.ui" line="5080"/>
         <source>Archivo usado para cargar/guardar el mapa de teclas/eventos:</source>
         <translation>Fil bruges til keymapper indstillinger:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5850"/>
+        <location filename="../ui/addedit_juego.ui" line="5093"/>
         <source>language -- Selecciona otro archivo de idioma:</source>
         <translation>Language -- Select another language file:</translation>
     </message>
@@ -1387,334 +1096,319 @@
         <translation type="obsolete">Captures -- Mappe, hvor lyden indfanger og andre snapshots vil blive opbevaret:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5876"/>
+        <location filename="../ui/addedit_juego.ui" line="5119"/>
         <source>Directorio donde esta la musica del juego asi como la BSO, sonido:</source>
         <translation>Mappe, hvor spillet musik, lyde, osv. ... opbevares:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="5889"/>
-        <source>mapper.txt</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="6078"/>
+        <location filename="../ui/addedit_juego.ui" line="5326"/>
         <source>ScummVM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6106"/>
+        <location filename="../ui/addedit_juego.ui" line="5346"/>
         <source>Selecciona un Juego del ScummVM</source>
         <translation>Vælg en ScummVM Game</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="6158"/>
+        <location filename="../ui/addedit_juego.ui" line="5390"/>
         <source>Selecciona el Juego a añadir</source>
         <translation>Vælg et spil for at tilføje</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6163"/>
+        <location filename="../ui/addedit_juego.ui" line="5395"/>
         <source>Config</source>
         <translation>Setup</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6172"/>
+        <location filename="../ui/addedit_juego.ui" line="5404"/>
         <source>Opciones del Juego</source>
         <translation>Spil Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6196"/>
+        <location filename="../ui/addedit_juego.ui" line="5420"/>
         <source>Opciones Generales</source>
         <translation>General Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6219"/>
+        <location filename="../ui/addedit_juego.ui" line="5443"/>
         <source>Joystick 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6227"/>
+        <location filename="../ui/addedit_juego.ui" line="5452"/>
         <source>Joystick 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6294"/>
+        <location filename="../ui/addedit_juego.ui" line="5520"/>
         <source>Etiqueta:</source>
         <translation>Label:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6307"/>
+        <location filename="../ui/addedit_juego.ui" line="5533"/>
         <source>Directorio:</source>
         <translation>Mappe:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6320"/>
+        <location filename="../ui/addedit_juego.ui" line="5546"/>
         <source>Guardar partida:</source>
         <translation>Gemte spil:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="6333"/>
+        <location filename="../ui/addedit_juego.ui" line="5559"/>
         <source>Modo Gráfico:</source>
         <translation>Grapic mode:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6346"/>
+        <location filename="../ui/addedit_juego.ui" line="5572"/>
         <source>Modo de Render:</source>
         <translation>Render mode:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6372"/>
+        <location filename="../ui/addedit_juego.ui" line="5598"/>
         <source>Plataforma:</source>
         <translation>Platform:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6385"/>
+        <location filename="../ui/addedit_juego.ui" line="5611"/>
         <source>Lector de CD:</source>
         <translation>CD drive:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6398"/>
+        <location filename="../ui/addedit_juego.ui" line="5624"/>
         <source>Joystick:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6411"/>
+        <location filename="../ui/addedit_juego.ui" line="5637"/>
         <source>Mostras Subtitulo</source>
         <translation>Vis undertekster</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6424"/>
+        <location filename="../ui/addedit_juego.ui" line="5650"/>
         <source>Pantalla Completa</source>
         <translation>Fuld Skærm</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6437"/>
+        <location filename="../ui/addedit_juego.ui" line="5663"/>
         <source>Aspect-ratio</source>
         <translation>Billedformat</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6450"/>
+        <location filename="../ui/addedit_juego.ui" line="5676"/>
         <source>Directorio Extra:</source>
         <translation>Extra mappe:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6463"/>
+        <location filename="../ui/addedit_juego.ui" line="5689"/>
         <source>Directorio Capturas:</source>
         <translation>Snapshot-mappe:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6476"/>
+        <location filename="../ui/addedit_juego.ui" line="5702"/>
         <source>Directorio Sonido:</source>
         <translation>Lyd mappe:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6732"/>
+        <location filename="../ui/addedit_juego.ui" line="5968"/>
         <source>Copy-Protection</source>
         <translation>Kopier Beskyttelse</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6745"/>
+        <location filename="../ui/addedit_juego.ui" line="5981"/>
         <source>Setup del Juego:</source>
         <translation>Lyd_Font:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6952"/>
+        <location filename="../ui/addedit_juego.ui" line="6182"/>
         <source>Mixed Adlib/MIDI mode</source>
         <translation></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="6965"/>
+        <location filename="../ui/addedit_juego.ui" line="6195"/>
         <source>Configuración predeterminada</source>
         <translation>Standard konfiguration</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="6981"/>
+        <location filename="../ui/addedit_juego.ui" line="6212"/>
         <source>Modo de Audio:</source>
         <translation>Audio mode:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7038"/>
+        <location filename="../ui/addedit_juego.ui" line="6269"/>
         <source>192</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7314"/>
+        <location filename="../ui/addedit_juego.ui" line="6520"/>
         <source>100</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7076"/>
+        <location filename="../ui/addedit_juego.ui" line="6307"/>
         <source>60</source>
         <translation></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="7108"/>
+        <location filename="../ui/addedit_juego.ui" line="6339"/>
         <source>Volumen Música:</source>
         <translation>Musik volume:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7121"/>
+        <location filename="../ui/addedit_juego.ui" line="6352"/>
         <source>Volumen SFX:</source>
         <translation>SFX volume:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7134"/>
+        <location filename="../ui/addedit_juego.ui" line="6365"/>
         <source>Volumen Speech:</source>
         <translation>Tale volume:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="7147"/>
+        <location filename="../ui/addedit_juego.ui" line="6378"/>
         <source>Tiempo de la Música:</source>
         <translation>Musik tempo:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7160"/>
+        <location filename="../ui/addedit_juego.ui" line="6391"/>
         <source>Velocidad de las Voces:</source>
         <translation>Voices speed:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7173"/>
+        <location filename="../ui/addedit_juego.ui" line="6404"/>
         <source>Nivel de Errores:</source>
         <translation>Fejl Niveau:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7186"/>
+        <location filename="../ui/addedit_juego.ui" line="6417"/>
         <source>True Roland MT-32 (diseable GM emulation)</source>
         <translation>True Roland MT-32 (GM deaktivere emulering)</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7199"/>
+        <location filename="../ui/addedit_juego.ui" line="6430"/>
         <source>Permitir el modo de Roland GS</source>
         <translation>Tillad Roland GS Mode</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7222"/>
+        <location filename="../ui/addedit_juego.ui" line="6453"/>
         <source>Output Rate:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7239"/>
-        <source>&lt;defecto&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="7259"/>
-        <source>48000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_juego.ui" line="7273"/>
+        <location filename="../ui/addedit_juego.ui" line="6479"/>
         <source>Midi Gain:</source>
         <translation>Midi Gain:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7388"/>
+        <location filename="../ui/addedit_juego.ui" line="6596"/>
         <source>VDMSound</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7412"/>
+        <location filename="../ui/addedit_juego.ui" line="6612"/>
         <source>Opciones del VDMSound</source>
         <translation>VDMS Indstillinger</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="7450"/>
+        <location filename="../ui/addedit_juego.ui" line="6650"/>
         <source>Dirección del Icono:</source>
         <translation>Ikon Sti:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7463"/>
+        <location filename="../ui/addedit_juego.ui" line="6663"/>
         <source>winnt.dos</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7484"/>
+        <location filename="../ui/addedit_juego.ui" line="6684"/>
         <source>useAutoexec</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7503"/>
+        <location filename="../ui/addedit_juego.ui" line="6703"/>
         <source>winnt.dosbox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7524"/>
+        <location filename="../ui/addedit_juego.ui" line="6724"/>
         <source>exitclose</source>
         <translation>afslutluk</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7531"/>
+        <location filename="../ui/addedit_juego.ui" line="6731"/>
         <source>exitWarn</source>
         <translation>Afslut Advar</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7538"/>
+        <location filename="../ui/addedit_juego.ui" line="6738"/>
         <source>fastPaste</source>
         <translation>hurtig Paste</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7554"/>
+        <location filename="../ui/addedit_juego.ui" line="6754"/>
         <source>winnt.storage</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7575"/>
+        <location filename="../ui/addedit_juego.ui" line="6775"/>
         <source>useCDROM</source>
         <translation>bruge cd-rommen</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7598"/>
+        <location filename="../ui/addedit_juego.ui" line="6798"/>
         <source>vdms.debug</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7619"/>
+        <location filename="../ui/addedit_juego.ui" line="6819"/>
         <source>useCustomCfg</source>
         <translation>Brug speciel Cfg</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="7668"/>
+        <location filename="../ui/addedit_juego.ui" line="6868"/>
         <source>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.vlp</source>
         <translation>Navn på config-filen skal gemmes. Eksempel: File_Name.vlp</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7859"/>
+        <location filename="../ui/addedit_juego.ui" line="7057"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7884"/>
+        <location filename="../ui/addedit_juego.ui" line="7083"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7821"/>
+        <location filename="../ui/addedit_juego.ui" line="7018"/>
         <source>Descargar la Info del Juego</source>
         <translation>Download Info Spil</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2753"/>
+        <location filename="../ui/addedit_juego.ui" line="2593"/>
         <source>Templates Profiles:</source>
         <translation>Skabeloner Profiler</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="3016"/>
+        <location filename="../ui/addedit_juego.ui" line="2847"/>
         <source>waitonerror -- Esperar antes de cerrar la consola si dosbox provoca un error</source>
-        <translation type="unfinished"></translation>
+        <translation>Waiton fejl - Vent, før du lukker konsollen, hvis en fejl opstår</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/addedit_juego.ui" line="5863"/>
+        <location filename="../ui/addedit_juego.ui" line="5106"/>
         <source>captures -- Directorio donde se capturarán cosas como sonido,midi o pantallas:</source>
-        <translation type="unfinished"></translation>
+        <translation>Captures -- Mappe, hvor lyden indfanger og andre snapshots vil blive opbevaret:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7375"/>
+        <location filename="../ui/addedit_juego.ui" line="6583"/>
         <source>Sound_Font:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="7582"/>
+        <location filename="../ui/addedit_juego.ui" line="6782"/>
         <source>useNetware</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1725,182 +1419,167 @@
         <translation>Mounting</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="42"/>
+        <location filename="../ui/addedit_montajes.ui" line="34"/>
         <source>Tipo de Montaje:</source>
         <translation>Mounting type:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="74"/>
+        <location filename="../ui/addedit_montajes.ui" line="66"/>
         <source>Seccionar la Unidad, Carpeta o CDROM que desea Montar</source>
         <translation>Vælg det drev, den mappe eller cd-rom, der skal monteres</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="150"/>
+        <location filename="../ui/addedit_montajes.ui" line="135"/>
         <source>Etiqueta para la Unidad es opcional:</source>
         <translation>Label for Drive er valgfri:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="168"/>
+        <location filename="../ui/addedit_montajes.ui" line="153"/>
         <source>Letra a Montar:</source>
         <translation>Leter at mount:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="185"/>
+        <location filename="../ui/addedit_montajes.ui" line="170"/>
         <source>A</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="190"/>
+        <location filename="../ui/addedit_montajes.ui" line="175"/>
         <source>B</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="195"/>
+        <location filename="../ui/addedit_montajes.ui" line="180"/>
         <source>C</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="200"/>
+        <location filename="../ui/addedit_montajes.ui" line="185"/>
         <source>D</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="205"/>
+        <location filename="../ui/addedit_montajes.ui" line="190"/>
         <source>E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="210"/>
+        <location filename="../ui/addedit_montajes.ui" line="195"/>
         <source>F</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="215"/>
+        <location filename="../ui/addedit_montajes.ui" line="200"/>
         <source>G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="220"/>
+        <location filename="../ui/addedit_montajes.ui" line="205"/>
         <source>H</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="225"/>
+        <location filename="../ui/addedit_montajes.ui" line="210"/>
         <source>I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="230"/>
+        <location filename="../ui/addedit_montajes.ui" line="215"/>
         <source>J</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="235"/>
+        <location filename="../ui/addedit_montajes.ui" line="220"/>
         <source>K</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="240"/>
+        <location filename="../ui/addedit_montajes.ui" line="225"/>
         <source>L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="245"/>
+        <location filename="../ui/addedit_montajes.ui" line="230"/>
         <source>M</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="250"/>
+        <location filename="../ui/addedit_montajes.ui" line="235"/>
         <source>N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="255"/>
+        <location filename="../ui/addedit_montajes.ui" line="240"/>
         <source>O</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="260"/>
+        <location filename="../ui/addedit_montajes.ui" line="245"/>
         <source>P</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="265"/>
+        <location filename="../ui/addedit_montajes.ui" line="250"/>
         <source>Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="270"/>
+        <location filename="../ui/addedit_montajes.ui" line="255"/>
         <source>R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="275"/>
+        <location filename="../ui/addedit_montajes.ui" line="260"/>
         <source>S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="280"/>
+        <location filename="../ui/addedit_montajes.ui" line="265"/>
         <source>T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="285"/>
+        <location filename="../ui/addedit_montajes.ui" line="270"/>
         <source>U</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="290"/>
+        <location filename="../ui/addedit_montajes.ui" line="275"/>
         <source>V</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="295"/>
+        <location filename="../ui/addedit_montajes.ui" line="280"/>
         <source>W</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="300"/>
+        <location filename="../ui/addedit_montajes.ui" line="285"/>
         <source>X</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="305"/>
+        <location filename="../ui/addedit_montajes.ui" line="290"/>
         <source>Y</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="351"/>
+        <location filename="../ui/addedit_montajes.ui" line="327"/>
         <source>Modo CD-Rom:</source>
         <translation>CD-ROM Mode:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="368"/>
-        <source>-aspi</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_montajes.ui" line="373"/>
-        <source>-ioctl</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_montajes.ui" line="378"/>
-        <source>-noioctl</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/addedit_montajes.ui" line="424"/>
+        <location filename="../ui/addedit_montajes.ui" line="376"/>
         <source>CD-Rom reales:</source>
         <translation>Real CD-ROM:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="503"/>
+        <location filename="../ui/addedit_montajes.ui" line="446"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_montajes.ui" line="513"/>
+        <location filename="../ui/addedit_montajes.ui" line="457"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
@@ -1992,62 +1671,62 @@ p, li { white-space: pre-wrap; }
         <translation>DOSBox Guiden</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="461"/>
+        <location filename="../ui/dbxadd.ui" line="453"/>
         <source>El juego necesita &apos;loadfix&apos;</source>
         <translation>Spillet behov &apos;loadfix&apos;</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="494"/>
+        <location filename="../ui/dbxadd.ui" line="486"/>
         <source>Título:</source>
         <translation>Titel:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="507"/>
+        <location filename="../ui/dbxadd.ui" line="499"/>
         <source>Ejecutable (exe,com,bat) del Juego:</source>
         <translation>Spil fil (EXE, COM, BAT):</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="579"/>
+        <location filename="../ui/dbxadd.ui" line="571"/>
         <source>Parametros:</source>
         <translation>Parametre:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="533"/>
+        <location filename="../ui/dbxadd.ui" line="525"/>
         <source>Cerrar la consola del DOSBox</source>
         <translation>Luk DOSBox konsol</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="546"/>
+        <location filename="../ui/dbxadd.ui" line="538"/>
         <source>Ejecutable (exe,com,bat) Setup del Juego:</source>
         <translation>Setup binær (EXE, COM, BAT):</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="671"/>
+        <location filename="../ui/dbxadd.ui" line="663"/>
         <source>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.conf</source>
         <translation>Navn på CONF-filen skal gemmes. Eksempel: File_Name.conf</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="687"/>
+        <location filename="../ui/dbxadd.ui" line="679"/>
         <source>Cerrar DOSBox al terminar el juego</source>
         <translation>Luk DOSBox når spillet udgange</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="753"/>
+        <location filename="../ui/dbxadd.ui" line="737"/>
         <source>Resolución pantalla:</source>
         <translation>Skærmopløsning:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="766"/>
+        <location filename="../ui/dbxadd.ui" line="750"/>
         <source>Modo de Renderizado:</source>
         <translation>Render mode:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="779"/>
+        <location filename="../ui/dbxadd.ui" line="763"/>
         <source>Tarjeta de Video:</source>
         <translation>Grafikkort:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="792"/>
+        <location filename="../ui/dbxadd.ui" line="776"/>
         <source>Escalar y Filtros:</source>
         <translation>Scalers og filtre:</translation>
     </message>
@@ -2057,247 +1736,217 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Fuld skærm -- Start DOSBox i fuld skærmtilstand</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="818"/>
+        <location filename="../ui/dbxadd.ui" line="802"/>
         <source>fullfixed -- Fijar la resolución en pantalla completa</source>
         <translation>Fullfixed -- Indstil fuld opløsning</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="831"/>
+        <location filename="../ui/dbxadd.ui" line="815"/>
         <source>autolock -- El ratón se autobloqueará al hace clic en la pantalla</source>
         <translation>Autolås -- Mouse låses automatisk</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="847"/>
+        <location filename="../ui/dbxadd.ui" line="831"/>
         <source>aspect -- Aplicar corrección de aspecto</source>
         <translation>Aspekt - Anvend aspekt korrektion</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="860"/>
+        <location filename="../ui/dbxadd.ui" line="844"/>
         <source>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed</source>
         <translation>Fuld opløsning - Beslutning, der skal anvendes i fuld skærmtilstand. Brug sammen med fullfixed</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="964"/>
+        <location filename="../ui/dbxadd.ui" line="940"/>
         <source>xms -- Activa o desactiva soporte para memoria XMS</source>
         <translation>XMS -- Aktivere eller deaktivere XMS-hukommelse støtte</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="980"/>
+        <location filename="../ui/dbxadd.ui" line="956"/>
         <source>ems -- Activa o desactiva soporte para memoria EMS</source>
         <translation>EMS - Aktiver eller deaktiver EMS hukommelse støtte</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="997"/>
-        <source>true</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/dbxadd.ui" line="1002"/>
-        <source>false</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/dbxadd.ui" line="1007"/>
-        <source>max</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/dbxadd.ui" line="1021"/>
+        <location filename="../ui/dbxadd.ui" line="982"/>
         <source>umb -- Activa o desactiva soporte para memoria UMB</source>
         <translation>UMB -- Aktiver eller deaktiver UMB hukommelse støtte</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1040"/>
+        <location filename="../ui/dbxadd.ui" line="1001"/>
         <source>Ciclos: Cantidad de instrucciones que DOSBox intenta emular cada milisegundo:</source>
         <translation>Cycles: Beløb af instruktioner DOSBox forsøger at effektuere hver milisecond:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="1056"/>
+        <location filename="../ui/dbxadd.ui" line="1017"/>
         <source>Cantidad de memoria (Mb) que DOSBox tendrá disponible:</source>
         <translation>Mængde hukommelse (MB), der skal tildeles for DOSBox:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1072"/>
+        <location filename="../ui/dbxadd.ui" line="1033"/>
         <source>Core DOSBox:</source>
         <translation></translation>
     </message>
-    <message>
-        <location filename="../ui/dbxadd.ui" line="1403"/>
-        <source>11050</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/dbxadd.ui" line="1408"/>
-        <source>22050</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/dbxadd.ui" line="1413"/>
-        <source>44100</source>
-        <translation></translation>
-    </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="1155"/>
+        <location filename="../ui/dbxadd.ui" line="1093"/>
         <source>Activa la emulación de Gravis Ultrasound</source>
         <translation>Aktiver Gravis UltraSound emulering</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="1266"/>
+        <location filename="../ui/dbxadd.ui" line="1174"/>
         <source>Activar emulación MPU-401</source>
         <translation>Aktiver MPU-401 emulering</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1282"/>
+        <location filename="../ui/dbxadd.ui" line="1190"/>
         <source>Modo inteligente</source>
         <translation>Intelligent mode</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1339"/>
+        <location filename="../ui/dbxadd.ui" line="1232"/>
         <source>Activa el altavoz interno</source>
         <translation>Aktiver interne højttaler</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1355"/>
+        <location filename="../ui/dbxadd.ui" line="1248"/>
         <source>Activa Disney Sound Source</source>
         <translation>Aktiver Disney lydkilde</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1492"/>
+        <location filename="../ui/dbxadd.ui" line="1355"/>
         <source>Frecuencia:</source>
         <translation>Sample rate:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1453"/>
+        <location filename="../ui/dbxadd.ui" line="1316"/>
         <source>Sound Blaster:</source>
         <translation>Sound Blaster:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1466"/>
+        <location filename="../ui/dbxadd.ui" line="1329"/>
         <source>Tipo Sound Blaste:</source>
         <translation>Sound Blaster type:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1479"/>
+        <location filename="../ui/dbxadd.ui" line="1342"/>
         <source>Gravis Ultrasound:</source>
         <translation>Gravis UltraSound:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1505"/>
+        <location filename="../ui/dbxadd.ui" line="1368"/>
         <source>Device MPU-401:</source>
         <translation>MPU-401 Device:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1518"/>
+        <location filename="../ui/dbxadd.ui" line="1381"/>
         <source>Frecuencia mt32rate:</source>
         <translation>MT-32 sample rate:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1531"/>
+        <location filename="../ui/dbxadd.ui" line="1394"/>
         <source>Frecuencia pcrate:</source>
         <translation>Internal speaker sample rate:</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="1544"/>
+        <location filename="../ui/dbxadd.ui" line="1407"/>
         <source>MIDI y configuración adicional:</source>
         <translation>MIDI og yderligere konfiguration:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1570"/>
+        <location filename="../ui/dbxadd.ui" line="1433"/>
         <source>MPU-401:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1583"/>
+        <location filename="../ui/dbxadd.ui" line="1446"/>
         <source>Frecuencia tandyrate:</source>
         <translation>Tandy samplingfrekvens:</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1596"/>
+        <location filename="../ui/dbxadd.ui" line="1459"/>
         <source>Desactivar Sonido</source>
         <translation>Deaktiver lyd</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="1622"/>
+        <location filename="../ui/dbxadd.ui" line="1477"/>
         <source>Añadir</source>
         <translation>Tilføj</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1639"/>
+        <location filename="../ui/dbxadd.ui" line="1494"/>
         <source>Editar</source>
         <translation>Rediger</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1656"/>
+        <location filename="../ui/dbxadd.ui" line="1511"/>
         <source>Eliminar</source>
         <translation>Slet</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1673"/>
+        <location filename="../ui/dbxadd.ui" line="1528"/>
         <source>Autocrear Montaje</source>
         <translation>Auto skabe montering</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1690"/>
+        <location filename="../ui/dbxadd.ui" line="1545"/>
         <source>Montaje primario</source>
         <translation>Primary mounting</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1707"/>
+        <location filename="../ui/dbxadd.ui" line="1562"/>
         <source>Limpiar</source>
         <translation>Erase</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1724"/>
+        <location filename="../ui/dbxadd.ui" line="1579"/>
         <source>Subir</source>
         <translation>Op</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1741"/>
+        <location filename="../ui/dbxadd.ui" line="1596"/>
         <source>Bajar</source>
         <translation>Ned</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1793"/>
+        <location filename="../ui/dbxadd.ui" line="1648"/>
         <source>Folder/Imagen</source>
         <translation>Mappe / Image</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1798"/>
+        <location filename="../ui/dbxadd.ui" line="1653"/>
         <source>Etiqueta</source>
         <translation>Label</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1803"/>
+        <location filename="../ui/dbxadd.ui" line="1658"/>
         <source>Tipo</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1808"/>
+        <location filename="../ui/dbxadd.ui" line="1663"/>
         <source>Driver</source>
         <translation>Drive</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1813"/>
+        <location filename="../ui/dbxadd.ui" line="1668"/>
         <source>CD/DVD index</source>
         <translation>CD / DVD index</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1818"/>
+        <location filename="../ui/dbxadd.ui" line="1673"/>
         <source>Opciones CD/DVD</source>
         <translation>CD / DVD Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1823"/>
+        <location filename="../ui/dbxadd.ui" line="1678"/>
         <source>IO Ctrl</source>
         <translation>IO CTRL</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1828"/>
+        <location filename="../ui/dbxadd.ui" line="1683"/>
         <source>Primer montaje</source>
         <translation>First mounting</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="1861"/>
+        <location filename="../ui/dbxadd.ui" line="1708"/>
         <source>Fin de la Configuración
 Pulsa Aceptar para cerrar el Asistente
 
@@ -2309,39 +1958,39 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 </translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1908"/>
+        <location filename="../ui/dbxadd.ui" line="1755"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="../ui/dbxadd.ui" line="1947"/>
+        <location filename="../ui/dbxadd.ui" line="1794"/>
         <source>Atrás</source>
         <translation>Forrige</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1970"/>
+        <location filename="../ui/dbxadd.ui" line="1817"/>
         <source>Siguiente</source>
         <translation>Næste</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="1996"/>
+        <location filename="../ui/dbxadd.ui" line="1843"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="713"/>
+        <location filename="../ui/dbxadd.ui" line="705"/>
         <source>Templates Profiles:</source>
         <translation>Skabeloner Profiler</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="726"/>
+        <location filename="../ui/dbxadd.ui" line="718"/>
         <source>Descargar la Info del Juego</source>
         <translation>Download Info Spil</translation>
     </message>
     <message>
-        <location filename="../ui/dbxadd.ui" line="805"/>
+        <location filename="../ui/dbxadd.ui" line="789"/>
         <source>fullscreen -- Iniciar DOSBox directamente en pantalla completa</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuld skærm -- Start DOSBox i fuld skærmtilstand</translation>
     </message>
 </context>
 <context>
@@ -3218,7 +2867,7 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
     <message>
         <location filename="../ui/grlida.ui" line="81"/>
         <source>Rating</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ui/grlida.ui" line="266"/>
@@ -3228,17 +2877,17 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
     <message>
         <location filename="../ui/grlida.ui" line="1619"/>
         <source>Mi&amp;nimizar</source>
-        <translation type="unfinished">Mi&amp;nimer</translation>
+        <translation>Mi&amp;nimer</translation>
     </message>
     <message>
         <location filename="../ui/grlida.ui" line="1624"/>
         <source>Ma&amp;ximizar</source>
-        <translation type="unfinished">Ma&amp;ximize</translation>
+        <translation>Ma&amp;ximize</translation>
     </message>
     <message>
         <location filename="../ui/grlida.ui" line="1629"/>
         <source>&amp;Restaurar</source>
-        <translation type="unfinished">&amp;Gendan</translation>
+        <translation>&amp;Gendan</translation>
     </message>
 </context>
 <context>
@@ -3384,7 +3033,7 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
     <message>
         <location filename="../src/grlida_img_viewer.cpp" line="234"/>
         <source>ImageViewer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3868,7 +3517,7 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
     <message>
         <location filename="../ui/importar_juego_info.ui" line="134"/>
         <source>Plataforma</source>
-        <translation type="unfinished"></translation>
+        <translation>Platform</translation>
     </message>
     <message encoding="UTF-8">
         <location filename="../ui/importar_juego_info.ui" line="139"/>
@@ -4172,17 +3821,17 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
     <message>
         <location filename="../src/main.cpp" line="177"/>
         <source>Comprobando carpeta Thumbs</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjek Thumbs mappe</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="183"/>
         <source>Comprobando carpeta Covers</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjek Covers mappe</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="189"/>
         <source>Comprobando carpeta Temp</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjek Temp mappe</translation>
     </message>
 </context>
 <context>
@@ -4468,117 +4117,117 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 <context>
     <name>frmAddEditJuego</name>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="222"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="381"/>
         <source>Editando a</source>
         <translation>Redigering af at</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="225"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="384"/>
         <source>A&#xc3;&#xb1;adiendo un nuevo juego</source>
         <translation>Tilføjelse af et nyt spil</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="533"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="692"/>
         <source>Debes indicar el Ejecutable del juego para el</source>
         <translation>Du skal angive spillet fil for</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2097"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2256"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n para el DOSBox ya esixte</source>
         <translation>DOSBox opsætningsfilen eksisterer allerede</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="550"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="709"/>
         <source>Debes indicar el archivo de Configuraci&#xc3;&#xb3;n para el</source>
         <translation>Du skal angive opsætningsfil for</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="506"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="665"/>
         <source>Debes poner la etiqueta del juego de</source>
         <translation>Du skal udfylde etiketten af spillet</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="512"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="671"/>
         <source>Debes indicar el Directorio del juego de</source>
         <translation>Du skal angive spillets mappe</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="519"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="678"/>
         <source>Debes indicar un Directorio que exista</source>
         <translation>Du skal angive den mappe allerede eksisterer</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2614"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2773"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n para el VDMSound ya esixte</source>
         <translation>VDMSound opsætningsfilen eksisterer allerede</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="555"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="714"/>
         <source>Debes poner un Titulo al juego</source>
         <translation>Du skal angive spillets titel</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2648"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2807"/>
         <source>Selecciona un archivo</source>
         <translation>Vælg en fil</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2648"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2807"/>
         <source>Todos los archivo</source>
         <translation>Alle filer</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1180"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1339"/>
         <source>&#xc2;&#xbf;Eliminar url...?</source>
         <translation>Slet adresse?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1180"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1339"/>
         <source>&#xc2;&#xbf;Deseas eliminar esta url?</source>
         <translation>Ønsker du at slette denne URL?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2388"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2547"/>
         <source>Si</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1307"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1466"/>
         <source>No</source>
         <translation>Nej</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1307"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1466"/>
         <source>&#xc2;&#xbf;Eliminar Archivo...?</source>
         <translation>Slet filen...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1307"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1466"/>
         <source>&#xc2;&#xbf;Deseas eliminar esta Archivo?</source>
         <translation>Vil du virkelig slette denne fil?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2207"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2366"/>
         <source>Selecciona el directorio</source>
         <translation>Vælg mappe</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2607"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2766"/>
         <source>Guardar archivo como...</source>
         <translation>Gem fil som...</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2388"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2547"/>
         <source>&#xc2;&#xbf;Eliminar Juego...?</source>
         <translation>Slet spil...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2388"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2547"/>
         <source>&#xc2;&#xbf;Deseas eliminar este montaje?</source>
         <translation>Ønsker du at slette denne montering?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="2388"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="2547"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
@@ -4586,42 +4235,42 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 <context>
     <name>frmAddEditMontajes</name>
     <message>
-        <location filename="../src/grlida_addedit_montajes.cpp" line="58"/>
+        <location filename="../src/grlida_addedit_montajes.cpp" line="64"/>
         <source>Procura no montar la Raiz del sistema operativo: ejemplo en windows seria</source>
         <translation>Prøv ikke at medtage dit OS sti i montering: et eksempel til Windows ville være</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_montajes.cpp" line="58"/>
+        <location filename="../src/grlida_addedit_montajes.cpp" line="64"/>
         <source>y en linux seria directamente</source>
         <translation>og i Linux ville det være</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_montajes.cpp" line="122"/>
+        <location filename="../src/grlida_addedit_montajes.cpp" line="128"/>
         <source>Seleccionar un directorio.</source>
         <translation>Vælg en mappe.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_montajes.cpp" line="129"/>
+        <location filename="../src/grlida_addedit_montajes.cpp" line="135"/>
         <source>Selecciona un archivo</source>
         <translation>Vælg en mappe.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_montajes.cpp" line="129"/>
+        <location filename="../src/grlida_addedit_montajes.cpp" line="135"/>
         <source>Todos los archivo</source>
         <translation>Vælg en fil</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_montajes.cpp" line="55"/>
+        <location filename="../src/grlida_addedit_montajes.cpp" line="61"/>
         <source>Fuerza el uso de la capa aspi. S&#xc3;&#xb3;lo v&#xc3;&#xa1;lido si montas un CD-ROM bajo los sistemas Windows con un ASPI-Layer.</source>
         <translation>Styrker ASPI tilstand. Kun gyldig, hvis montering en cd-rom i Windows-systemer med en ASPI-Layer.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_montajes.cpp" line="56"/>
+        <location filename="../src/grlida_addedit_montajes.cpp" line="62"/>
         <source>Fuerza el uso de los comandos ioctl. S&#xc3;&#xb3;lo v&#xc3;&#xa1;lido si montar un CD-ROM bajo un sistema operativo de Windows que lo soporten (Win2000/XP/NT).</source>
         <translation>Styrker brug af ioctl kommandoer. Kun gyldig, hvis montering en cd-rom i en Windows-operativsystemet, der støtter dem (Win2000/XP/NT).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_montajes.cpp" line="57"/>
+        <location filename="../src/grlida_addedit_montajes.cpp" line="63"/>
         <source>Fuerza el uso de las SDL para el CD-ROM. V&#xc3;&#xa1;lido para todos los sistemas.</source>
         <translation>Styrker brug af SDL cd-rom-lag. Gyldig på alle systemer.</translation>
     </message>
@@ -4655,62 +4304,62 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 <context>
     <name>frmDbxAdd</name>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="165"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="195"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n para el DOSBox ya esixte</source>
         <translation>DOSBox opsætningsfilen eksisterer allerede</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="171"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="201"/>
         <source>Debes indicar el Ejecutable del juego</source>
         <translation>Du skal specfy spillet binary</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="178"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="208"/>
         <source>Debes indicar el archivo donde guardara la configuraci&#xc3;&#xb3;n del juego</source>
         <translation>Du skal angive den fil, hvor konfiguration bliver gemt</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="183"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="213"/>
         <source>Debes poner un Titulo al juego</source>
         <translation>Du skal angive spillets titel</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="450"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="480"/>
         <source>Debes poner por lo menos el titulo.</source>
         <translation>Du skal angive mindst spillets titel.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="686"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="716"/>
         <source>Guardar archivo como...</source>
         <translation>Gem filen som...</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="725"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="755"/>
         <source>Todos los archivo</source>
         <translation>Alle filer</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="725"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="755"/>
         <source>Selecciona un archivo</source>
         <translation>Vælg en fil</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="874"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="904"/>
         <source>&#xc2;&#xbf;Eliminar Juego...?</source>
         <translation>Slet spil?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="874"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="904"/>
         <source>&#xc2;&#xbf;Deseas eliminar este montaje?</source>
         <translation>Ønsker du at slette denne montering?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="874"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="904"/>
         <source>Si</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="874"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="904"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
@@ -4967,7 +4616,7 @@ Klik på &apos;OK&apos; for at afslutte denne guide
     <message>
         <location filename="../src/grlida_importar_juego_info.cpp" line="143"/>
         <source>Rating</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -5034,27 +4683,27 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 <context>
     <name>frmSvmAdd</name>
     <message>
-        <location filename="../src/grlida_svmadd.cpp" line="165"/>
+        <location filename="../src/grlida_svmadd.cpp" line="175"/>
         <source>Debes indicar el Directorio del juego</source>
         <translation>Du skal angive spillets mappe</translation>
     </message>
     <message>
-        <location filename="../src/grlida_svmadd.cpp" line="170"/>
+        <location filename="../src/grlida_svmadd.cpp" line="180"/>
         <source>Debes poner un Titulo al juego</source>
         <translation>Du skal angive et spil titel</translation>
     </message>
     <message>
-        <location filename="../src/grlida_svmadd.cpp" line="188"/>
+        <location filename="../src/grlida_svmadd.cpp" line="198"/>
         <source>Selecciona un juego de la lista</source>
         <translation>Vælg et spil fra listen</translation>
     </message>
     <message>
-        <location filename="../src/grlida_svmadd.cpp" line="241"/>
+        <location filename="../src/grlida_svmadd.cpp" line="251"/>
         <source>Debes poner por lo menos el titulo.</source>
         <translation>Du skal angive mindst titlen.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_svmadd.cpp" line="363"/>
+        <location filename="../src/grlida_svmadd.cpp" line="373"/>
         <source>Selecciona el directorio del Juego</source>
         <translation>Vælg det spil mappe</translation>
     </message>
@@ -5067,37 +4716,37 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 <context>
     <name>frmVdmsAdd</name>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="146"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="148"/>
         <source>Debes poner por lo menos el titulo.</source>
         <translation>Du skal angive mindst spillets titel.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="153"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="155"/>
         <source>Debes indicar el archivo de Configuraci&#xc3;&#xb3;n para el VDMSound</source>
         <translation>Du skal angive en konfigurationsfil til VDMSound</translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="238"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="240"/>
         <source>El archivo de Configuraci&#xc3;&#xb3;n para el VDMSound ya esixte</source>
         <translation>Den VDMSound opsætningsfilen eksisterer allerede</translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="165"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="167"/>
         <source>Debes indicar el Ejecutable del juego</source>
         <translation>Du skal specfy spillet ½</translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="225"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="227"/>
         <source>Guardar archivo como...</source>
         <translation>Gem fil som...</translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="264"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="266"/>
         <source>Todos los archivo</source>
         <translation>Alle filer</translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="264"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="266"/>
         <source>Selecciona un archivo</source>
         <translation>Vælg en fil</translation>
     </message>
