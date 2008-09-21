@@ -1,6 +1,18 @@
 
 -  NEWS
 -----------------------------------
+0.7.0 (21-09-2008)
+ - Actualizada la lista de compatibilidad del ScummVM 0.12.0
+ - Añadido nuevo idioma, gracias a Jens Peter que lo ha traducido al danés.
+ - Añadida función para buscar y descargar la info del juego desde MobyGames.com
+ - Añadida la calificación o rating del juego.
+ - Añadido sistema de hoja de estilo o StyleSheet para poder cambiar por completo la apariencia del GR-lida.
+ - Añadido buscar y descargar la info del juego en los asistentes de los emuladores.
+ - Ahora algunas barras se pueden mover y acoplar en otra posicion manteniendo el estado.
+ - Corregido el error al ejecutar el Setup del juego con el DOSBox. Al no pillar bien los datos.
+ - Corregido el error al montar algunas unidades en DOSBox en Windows al utilizar / en lugar de \
+ - Corregido recordar el ultimo directorio abierto.
+
 0.6.0 (07-07-2008)
  - Visor de caratulas de los juegos usando PictureFlow.
  - Sistema para buscar y descargar la info del juego, cuando se añade un juego de forma manual.
