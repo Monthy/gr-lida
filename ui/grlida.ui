@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>730</width>
-    <height>586</height>
+    <height>590</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -110,6 +110,12 @@
             </property>
             <item>
              <widget class="QTreeWidget" name="twCapturas" >
+              <property name="maximumSize" >
+               <size>
+                <width>170</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="frameShadow" >
                <enum>QFrame::Sunken</enum>
               </property>
@@ -283,9 +289,12 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_InfoDatos" >
-    <layout class="QGridLayout" name="gridLayout" >
+    <layout class="QVBoxLayout" name="verticalLayout_3" >
+     <property name="spacing" >
+      <number>2</number>
+     </property>
      <property name="leftMargin" >
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="topMargin" >
       <number>0</number>
@@ -296,405 +305,385 @@
      <property name="bottomMargin" >
       <number>0</number>
      </property>
-     <property name="spacing" >
-      <number>4</number>
-     </property>
-     <item row="0" column="0" >
-      <widget class="QLabel" name="lb_info_1" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
+     <item>
+      <layout class="QGridLayout" name="gridLayout" >
+       <property name="spacing" >
+        <number>4</number>
        </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Subtítulo</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" colspan="2" >
-      <widget class="QLineEdit" name="txtInfo_Subtitulo" >
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" >
-      <widget class="QLabel" name="lb_info_2" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Genero</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" colspan="2" >
-      <widget class="QLineEdit" name="txtInfo_Genero" >
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0" >
-      <widget class="QLabel" name="lb_info_3" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection" >
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="text" >
-        <string>Idioma:</string>
-       </property>
-       <property name="textFormat" >
-        <enum>Qt::AutoText</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" >
-      <widget class="QLineEdit" name="txtInfo_Idioma" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>75</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item rowspan="5" row="2" column="2" >
-      <widget class="QFrame" name="frame_imagen" >
-       <property name="minimumSize" >
-        <size>
-         <width>158</width>
-         <height>109</height>
-        </size>
-       </property>
-       <property name="frameShape" >
-        <enum>QFrame::Panel</enum>
-       </property>
-       <property name="frameShadow" >
-        <enum>QFrame::Sunken</enum>
-       </property>
-       <layout class="QHBoxLayout" name="_2" >
-        <property name="margin" >
-         <number>1</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="lbImgThumbs" >
-          <property name="maximumSize" >
-           <size>
-            <width>156</width>
-            <height>16777215</height>
-           </size>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="lb_info_1" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Subtítulo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="2" >
+        <widget class="QLineEdit" name="txtInfo_Subtitulo" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="lb_info_2" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Genero</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2" >
+        <widget class="QLineEdit" name="txtInfo_Genero" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="lb_info_3" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="layoutDirection" >
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text" >
+          <string>Idioma:</string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::AutoText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QLineEdit" name="txtInfo_Idioma" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item rowspan="5" row="2" column="2" >
+        <widget class="QFrame" name="frame_imagen" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>158</width>
+           <height>109</height>
+          </size>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::Panel</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <layout class="QHBoxLayout" name="_2" >
+          <property name="margin" >
+           <number>1</number>
           </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <property name="pixmap" >
-           <pixmap resource="../res/grlida.qrc" >:/images/juego_sin_imagen.png</pixmap>
-          </property>
-          <property name="scaledContents" >
-           <bool>true</bool>
-          </property>
-          <property name="alignment" >
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+          <item>
+           <widget class="QLabel" name="lbImgThumbs" >
+            <property name="maximumSize" >
+             <size>
+              <width>156</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string/>
+            </property>
+            <property name="pixmap" >
+             <pixmap resource="../res/grlida.qrc" >:/images/juego_sin_imagen.png</pixmap>
+            </property>
+            <property name="scaledContents" >
+             <bool>true</bool>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="lb_info_4" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Formato</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <widget class="QLineEdit" name="txtInfo_Formato" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" >
+        <widget class="QLabel" name="lb_info_5" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Nº Cds</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" >
+        <widget class="QLineEdit" name="txtInfo_NumDisc" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" >
+        <widget class="QLabel" name="lb_info_6" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Año</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" >
+        <widget class="QLineEdit" name="txtInfo_Anno" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" >
+        <widget class="QLabel" name="lb_info_7" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Tamaño</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" >
+        <widget class="QLineEdit" name="txtInfo_Tamano" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" >
+        <widget class="QLabel" name="lb_info_8" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Compañia</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1" colspan="2" >
+        <widget class="QLineEdit" name="txtInfo_Compania" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" >
+        <widget class="QLabel" name="lb_info_9" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Desarrollador</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1" colspan="2" >
+        <widget class="QLineEdit" name="txtInfo_Desarrollador" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0" >
+        <widget class="QLabel" name="lb_info_10" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Tema</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1" colspan="2" >
+        <widget class="QLineEdit" name="txtInfo_Tema" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0" >
+        <widget class="QLabel" name="lb_info_11" >
+         <property name="minimumSize" >
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Sistema Op.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1" colspan="2" >
+        <widget class="QLineEdit" name="txtInfo_SistemaOp" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="3" column="0" >
-      <widget class="QLabel" name="lb_info_4" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Formato</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1" >
-      <widget class="QLineEdit" name="txtInfo_Formato" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>75</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" >
-      <widget class="QLabel" name="lb_info_5" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Nº Cds</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1" >
-      <widget class="QLineEdit" name="txtInfo_NumDisc" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>75</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0" >
-      <widget class="QLabel" name="lb_info_6" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Año</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1" >
-      <widget class="QLineEdit" name="txtInfo_Anno" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>75</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0" >
-      <widget class="QLabel" name="lb_info_7" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Tamaño</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1" >
-      <widget class="QLineEdit" name="txtInfo_Tamano" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>75</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0" >
-      <widget class="QLabel" name="lb_info_8" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Compañia</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1" colspan="2" >
-      <widget class="QLineEdit" name="txtInfo_Compania" >
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0" >
-      <widget class="QLabel" name="lb_info_9" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Desarrollador</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1" colspan="2" >
-      <widget class="QLineEdit" name="txtInfo_Desarrollador" >
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="0" >
-      <widget class="QLabel" name="lb_info_10" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Tema</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="1" colspan="2" >
-      <widget class="QLineEdit" name="txtInfo_Tema" >
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0" >
-      <widget class="QLabel" name="lb_info_11" >
-       <property name="minimumSize" >
-        <size>
-         <width>90</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>90</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Sistema Op.</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1" colspan="2" >
-      <widget class="QLineEdit" name="txtInfo_SistemaOp" >
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="0" colspan="3" >
+     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_ToolbarInfoDatos" >
        <property name="leftMargin" >
         <number>0</number>
@@ -756,7 +745,7 @@
        </item>
       </layout>
      </item>
-     <item row="12" column="0" colspan="3" >
+     <item>
       <widget class="QTextBrowser" name="txtInfo_Comentario" >
        <property name="openExternalLinks" >
         <bool>true</bool>
@@ -783,6 +772,12 @@
      </property>
      <item>
       <widget class="QTabWidget" name="tabFileUrl" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="currentIndex" >
         <number>0</number>
        </property>

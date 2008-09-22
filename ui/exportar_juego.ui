@@ -13,9 +13,13 @@
    <string>Exportar Juego</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/exportar.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/exportar.png</normaloff>:/img16/exportar.png</iconset>
   </property>
   <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>4</number>
+   </property>
    <item>
     <widget class="QTreeWidget" name="twListaJuegos" >
      <property name="showDropIndicator" stdset="0" >
@@ -53,6 +57,12 @@
     <layout class="QHBoxLayout" >
      <item>
       <widget class="QPushButton" name="btnCheckedAll" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text" >
         <string>Seleccionar todos</string>
        </property>
@@ -60,6 +70,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnUnCheckedAll" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text" >
         <string>Seleccionar ninguno</string>
        </property>
@@ -70,7 +86,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -115,6 +131,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
          </widget>
         </item>
        </layout>
@@ -135,7 +157,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="txtDirExportPath" />
+         <widget class="QLineEdit" name="txtDirExportPath" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="btnDirExportPath" >
@@ -155,7 +184,8 @@
            <string/>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
         </item>
@@ -171,7 +201,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -183,21 +213,22 @@
       <widget class="QPushButton" name="btnOk" >
        <property name="minimumSize" >
         <size>
-         <width>88</width>
-         <height>25</height>
+         <width>84</width>
+         <height>30</height>
         </size>
        </property>
        <property name="maximumSize" >
         <size>
-         <width>88</width>
-         <height>25</height>
+         <width>16777215</width>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
         <string>Exportar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
@@ -208,21 +239,22 @@
        </property>
        <property name="minimumSize" >
         <size>
-         <width>81</width>
-         <height>25</height>
+         <width>84</width>
+         <height>30</height>
         </size>
        </property>
        <property name="maximumSize" >
         <size>
-         <width>97</width>
-         <height>25</height>
+         <width>16777215</width>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
         <string>Cerrar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
@@ -231,7 +263,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>

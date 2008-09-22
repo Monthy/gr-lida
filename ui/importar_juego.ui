@@ -109,6 +109,12 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
               <property name="editable" >
                <bool>false</bool>
               </property>
@@ -119,7 +125,7 @@
               <property name="minimumSize" >
                <size>
                 <width>111</width>
-                <height>25</height>
+                <height>30</height>
                </size>
               </property>
               <property name="text" >
@@ -211,10 +217,23 @@
           <item>
            <layout class="QHBoxLayout" >
             <item>
-             <widget class="QLineEdit" name="DirFileXML" />
+             <widget class="QLineEdit" name="DirFileXML" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirFileXML" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
               <property name="maximumSize" >
                <size>
                 <width>30</width>
@@ -232,6 +251,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnDirFileXML_clear" >
+              <property name="minimumSize" >
+               <size>
+                <width>30</width>
+                <height>26</height>
+               </size>
+              </property>
               <property name="maximumSize" >
                <size>
                 <width>30</width>
@@ -1260,13 +1285,7 @@
        <property name="minimumSize" >
         <size>
          <width>97</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>97</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
@@ -1286,13 +1305,7 @@
        <property name="minimumSize" >
         <size>
          <width>97</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>97</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
@@ -1325,13 +1338,7 @@
        <property name="minimumSize" >
         <size>
          <width>88</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>88</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
@@ -1351,13 +1358,7 @@
        <property name="minimumSize" >
         <size>
          <width>81</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>97</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >

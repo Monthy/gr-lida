@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
-    <height>440</height>
+    <width>520</width>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -432,7 +432,14 @@
           </widget>
          </item>
          <item row="0" column="1" >
-          <widget class="QComboBox" name="cbxDbx_Profiles" />
+          <widget class="QComboBox" name="cbxDbx_Profiles" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0" >
           <widget class="QLabel" name="lb_Dbx_1" >
@@ -442,7 +449,14 @@
           </widget>
          </item>
          <item row="1" column="1" >
-          <widget class="QLineEdit" name="txtDatos_Titulo" />
+          <widget class="QLineEdit" name="txtDatos_Titulo" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -450,11 +464,6 @@
         <layout class="QGridLayout" name="gridLayout_2" >
          <item row="0" column="0" colspan="2" >
           <widget class="QLabel" name="lb_Dbx_2" >
-           <property name="font" >
-            <font>
-             <pointsize>8</pointsize>
-            </font>
-           </property>
            <property name="text" >
             <string>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.conf</string>
            </property>
@@ -464,10 +473,23 @@
           </widget>
          </item>
          <item row="1" column="0" >
-          <widget class="QLineEdit" name="txtDbx_path_conf" />
+          <widget class="QLineEdit" name="txtDbx_path_conf" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="1" column="1" >
           <widget class="QPushButton" name="btnDbx_FileConfg" >
+           <property name="minimumSize" >
+            <size>
+             <width>30</width>
+             <height>26</height>
+            </size>
+           </property>
            <property name="maximumSize" >
             <size>
              <width>30</width>
@@ -513,6 +535,12 @@
          </item>
          <item row="1" column="1" >
           <widget class="QPushButton" name="btnDescargarInfo" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text" >
             <string>Descargar la Info del Juego</string>
            </property>
@@ -537,10 +565,23 @@
           </widget>
          </item>
          <item row="1" column="0" colspan="2" >
-          <widget class="QLineEdit" name="txtDbx_path_exe" />
+          <widget class="QLineEdit" name="txtDbx_path_exe" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="1" column="2" >
           <widget class="QPushButton" name="btnDbx_ExeJuego" >
+           <property name="minimumSize" >
+            <size>
+             <width>30</width>
+             <height>26</height>
+            </size>
+           </property>
            <property name="maximumSize" >
             <size>
              <width>30</width>
@@ -564,17 +605,37 @@
           </widget>
          </item>
          <item row="2" column="1" >
-          <widget class="QLineEdit" name="txtDbx_parametros_exe" />
+          <widget class="QLineEdit" name="txtDbx_parametros_exe" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout_3" >
          <item row="1" column="0" colspan="2" >
-          <widget class="QLineEdit" name="txtDbx_path_setup" />
+          <widget class="QLineEdit" name="txtDbx_path_setup" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="1" column="2" >
           <widget class="QPushButton" name="btnDbx_ExeSetup" >
+           <property name="minimumSize" >
+            <size>
+             <width>30</width>
+             <height>26</height>
+            </size>
+           </property>
            <property name="maximumSize" >
             <size>
              <width>30</width>
@@ -598,7 +659,14 @@
           </widget>
          </item>
          <item row="2" column="1" >
-          <widget class="QLineEdit" name="txtDbx_parametros_setup" />
+          <widget class="QLineEdit" name="txtDbx_parametros_setup" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="0" column="0" colspan="2" >
           <widget class="QLabel" name="lb_Dbx_5" >
@@ -686,7 +754,14 @@
           </widget>
          </item>
          <item row="0" column="1" >
-          <widget class="QComboBox" name="cbxDbx_sdl_fullresolution" />
+          <widget class="QComboBox" name="cbxDbx_sdl_fullresolution" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0" >
           <widget class="QLabel" name="lb_Dbx_9" >
@@ -696,7 +771,14 @@
           </widget>
          </item>
          <item row="1" column="1" >
-          <widget class="QComboBox" name="cbxDbx_sdl_output" />
+          <widget class="QComboBox" name="cbxDbx_sdl_output" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="2" column="0" >
           <widget class="QLabel" name="lb_Dbx_10" >
@@ -706,7 +788,14 @@
           </widget>
          </item>
          <item row="2" column="1" >
-          <widget class="QComboBox" name="cbxDbx_dosbox_machine" />
+          <widget class="QComboBox" name="cbxDbx_dosbox_machine" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="3" column="0" >
           <widget class="QLabel" name="lb_Dbx_11" >
@@ -717,6 +806,12 @@
          </item>
          <item row="3" column="1" >
           <widget class="QComboBox" name="cbxDbx_render_scaler" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="currentIndex" >
             <number>-1</number>
            </property>
@@ -777,6 +872,12 @@
          </item>
          <item row="0" column="2" >
           <widget class="QComboBox" name="cbxDbx_dosbox_memsize" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="editable" >
             <bool>true</bool>
            </property>
@@ -797,6 +898,12 @@
          </item>
          <item row="1" column="2" >
           <widget class="QComboBox" name="cbxDbx_cpu_cycles" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="editable" >
             <bool>true</bool>
            </property>
@@ -820,6 +927,12 @@
          </item>
          <item row="2" column="1" >
           <widget class="QComboBox" name="cbxDbx_cpu_core" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="currentIndex" >
             <number>-1</number>
            </property>
@@ -853,7 +966,14 @@
           </widget>
          </item>
          <item row="2" column="0" >
-          <widget class="QComboBox" name="cbxDbx_dos_umb" />
+          <widget class="QComboBox" name="cbxDbx_dos_umb" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="2" column="1" >
           <widget class="QLabel" name="lb_Dbx_14" >
@@ -913,8 +1033,8 @@
           <widget class="QComboBox" name="cbxDbx_mixer_rate" >
            <property name="minimumSize" >
             <size>
-             <width>90</width>
-             <height>0</height>
+             <width>123</width>
+             <height>24</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -974,8 +1094,8 @@
           <widget class="QComboBox" name="cbxDbx_sblaster_sbtype" >
            <property name="minimumSize" >
             <size>
-             <width>90</width>
-             <height>0</height>
+             <width>123</width>
+             <height>24</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -994,8 +1114,8 @@
           <widget class="QComboBox" name="cbxDbx_sblaster_oplrate" >
            <property name="minimumSize" >
             <size>
-             <width>90</width>
-             <height>0</height>
+             <width>123</width>
+             <height>24</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -1078,8 +1198,8 @@
           <widget class="QComboBox" name="cbxDbx_gus_gusrate" >
            <property name="minimumSize" >
             <size>
-             <width>90</width>
-             <height>0</height>
+             <width>123</width>
+             <height>24</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -1136,8 +1256,8 @@
           <widget class="QComboBox" name="cbxDbx_midi_device" >
            <property name="minimumSize" >
             <size>
-             <width>90</width>
-             <height>0</height>
+             <width>123</width>
+             <height>24</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -1166,8 +1286,8 @@
           <widget class="QComboBox" name="cbxDbx_midi_mt32rate" >
            <property name="minimumSize" >
             <size>
-             <width>90</width>
-             <height>0</height>
+             <width>123</width>
+             <height>24</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -1196,8 +1316,8 @@
           <widget class="QComboBox" name="cbxDbx_speaker_pcrate" >
            <property name="minimumSize" >
             <size>
-             <width>90</width>
-             <height>0</height>
+             <width>123</width>
+             <height>24</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -1226,8 +1346,8 @@
           <widget class="QComboBox" name="cbxDbx_speaker_tandyrate" >
            <property name="minimumSize" >
             <size>
-             <width>90</width>
-             <height>0</height>
+             <width>123</width>
+             <height>24</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -1246,8 +1366,8 @@
           <widget class="QComboBox" name="cbxDbx_midi_mpu401" >
            <property name="minimumSize" >
             <size>
-             <width>90</width>
-             <height>0</height>
+             <width>123</width>
+             <height>24</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -1279,6 +1399,12 @@
        </property>
        <item>
         <widget class="QSplitter" name="splitter" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
@@ -1361,6 +1487,12 @@
         <layout class="QGridLayout" name="gridLayout_12" >
          <item row="0" column="1" >
           <widget class="QPushButton" name="btnMount_Add" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text" >
             <string>Añadir</string>
            </property>
@@ -1372,6 +1504,12 @@
          </item>
          <item row="1" column="0" >
           <widget class="QPushButton" name="btnMount_Subir" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text" >
             <string>Subir</string>
            </property>
@@ -1383,6 +1521,12 @@
          </item>
          <item row="1" column="1" >
           <widget class="QPushButton" name="btnMount_Edit" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text" >
             <string>Editar</string>
            </property>
@@ -1394,6 +1538,12 @@
          </item>
          <item rowspan="2" row="2" column="0" >
           <widget class="QPushButton" name="btnMount_Bajar" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text" >
             <string>Bajar</string>
            </property>
@@ -1405,6 +1555,12 @@
          </item>
          <item row="2" column="1" >
           <widget class="QPushButton" name="btnMount_Delete" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text" >
             <string>Eliminar</string>
            </property>
@@ -1416,6 +1572,12 @@
          </item>
          <item row="3" column="1" >
           <widget class="QPushButton" name="btnMount_Clear" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text" >
             <string>Limpiar</string>
            </property>
@@ -1427,6 +1589,12 @@
          </item>
          <item row="4" column="0" colspan="2" >
           <widget class="QPushButton" name="btnMount_AutoCrear" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text" >
             <string>Autocrear Montaje</string>
            </property>
@@ -1438,6 +1606,12 @@
          </item>
          <item row="5" column="0" colspan="2" >
           <widget class="QPushButton" name="btnMount_Primario" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text" >
             <string>Montaje primario</string>
            </property>
@@ -1522,13 +1696,7 @@ Pulsa Aceptar para cerrar el Asistente
        <property name="minimumSize" >
         <size>
          <width>97</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>97</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
@@ -1561,13 +1729,7 @@ Pulsa Aceptar para cerrar el Asistente
        <property name="minimumSize" >
         <size>
          <width>97</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>97</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
@@ -1584,13 +1746,7 @@ Pulsa Aceptar para cerrar el Asistente
        <property name="minimumSize" >
         <size>
          <width>97</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>97</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
@@ -1610,13 +1766,7 @@ Pulsa Aceptar para cerrar el Asistente
        <property name="minimumSize" >
         <size>
          <width>97</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>97</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >

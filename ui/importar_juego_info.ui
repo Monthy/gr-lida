@@ -40,6 +40,12 @@
      </item>
      <item row="0" column="1" >
       <widget class="QComboBox" name="cbxDbXml" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>24</height>
+        </size>
+       </property>
        <property name="editable" >
         <bool>false</bool>
        </property>
@@ -53,10 +59,23 @@
       </widget>
      </item>
      <item row="1" column="1" >
-      <widget class="QLineEdit" name="txtTituloBuscar" />
+      <widget class="QLineEdit" name="txtTituloBuscar" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
      </item>
      <item row="1" column="2" >
       <widget class="QPushButton" name="btnBuscar" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text" >
         <string>Buscar</string>
        </property>
@@ -70,6 +89,12 @@
       <widget class="QPushButton" name="btnAbortar" >
        <property name="enabled" >
         <bool>false</bool>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
        </property>
        <property name="text" >
         <string>Abortar</string>
@@ -167,6 +192,12 @@
        <property name="enabled" >
         <bool>false</bool>
        </property>
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text" >
         <string>Ver Info</string>
        </property>
@@ -194,6 +225,12 @@
        <property name="enabled" >
         <bool>false</bool>
        </property>
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text" >
         <string>Aceptar</string>
        </property>
@@ -205,6 +242,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnCancelar" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text" >
         <string>Cancelar</string>
        </property>

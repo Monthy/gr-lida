@@ -135,249 +135,292 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <widget class="QLabel" name="lb_Vdms_3" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>140</y>
-        <width>111</width>
-        <height>21</height>
-       </rect>
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <property name="leftMargin" >
+       <number>4</number>
       </property>
-      <property name="text" >
-       <string>Parametros:</string>
+      <property name="topMargin" >
+       <number>4</number>
       </property>
-     </widget>
-     <widget class="QLabel" name="lb_Vdms_4" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>170</y>
-        <width>111</width>
-        <height>21</height>
-       </rect>
+      <property name="rightMargin" >
+       <number>4</number>
       </property>
-      <property name="text" >
-       <string>Dirección del Icono:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnVdms_Icono" >
-      <property name="geometry" >
-       <rect>
-        <x>380</x>
-        <y>170</y>
-        <width>30</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string/>
-      </property>
-      <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >
-        <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnVdms_ExeJuego" >
-      <property name="geometry" >
-       <rect>
-        <x>380</x>
-        <y>110</y>
-        <width>30</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string/>
-      </property>
-      <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >
-        <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnVdms_FileConfg" >
-      <property name="geometry" >
-       <rect>
-        <x>380</x>
-        <y>60</y>
-        <width>30</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string/>
-      </property>
-      <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >
-        <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lb_Vdms_1" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>431</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.vlp</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lb_Datos_1" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>71</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Titulo:</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtDatos_Titulo" >
-      <property name="geometry" >
-       <rect>
-        <x>90</x>
-        <y>10</y>
-        <width>351</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lb_Vdms_2" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>90</y>
-        <width>361</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Ejecutable (exe,com,bat) del Juego:</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtVdms_params" >
-      <property name="geometry" >
-       <rect>
-        <x>130</x>
-        <y>140</y>
-        <width>241</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtVdms_path_conf" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>361</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtVdms_path_exe" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>110</y>
-        <width>361</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtVdms_icon" >
-      <property name="geometry" >
-       <rect>
-        <x>130</x>
-        <y>170</y>
-        <width>241</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnVdms_Icono_clear" >
-      <property name="geometry" >
-       <rect>
-        <x>414</x>
-        <y>170</y>
-        <width>30</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="maximumSize" >
-       <size>
-        <width>30</width>
-        <height>26</height>
-       </size>
-      </property>
-      <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >
-        <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnVdms_FileConfg_clear" >
-      <property name="geometry" >
-       <rect>
-        <x>414</x>
-        <y>60</y>
-        <width>30</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="maximumSize" >
-       <size>
-        <width>30</width>
-        <height>26</height>
-       </size>
-      </property>
-      <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >
-        <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnVdms_ExeJuego_clear" >
-      <property name="geometry" >
-       <rect>
-        <x>414</x>
-        <y>110</y>
-        <width>30</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="maximumSize" >
-       <size>
-        <width>30</width>
-        <height>26</height>
-       </size>
-      </property>
-      <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >
-        <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnDescargarInfo" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>260</y>
-        <width>162</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Descargar la Info del Juego</string>
-      </property>
-      <property name="icon" >
-       <iconset resource="../res/grlida.qrc" >
-        <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
-      </property>
-     </widget>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout" >
+        <item>
+         <widget class="QLabel" name="lb_Datos_1" >
+          <property name="text" >
+           <string>Titulo:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtDatos_Titulo" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout" >
+        <item row="0" column="0" colspan="4" >
+         <widget class="QLabel" name="lb_Vdms_1" >
+          <property name="text" >
+           <string>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.vlp</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2" >
+         <widget class="QLineEdit" name="txtVdms_path_conf" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2" >
+         <widget class="QPushButton" name="btnVdms_FileConfg" >
+          <property name="minimumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string/>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3" >
+         <widget class="QPushButton" name="btnVdms_FileConfg_clear" >
+          <property name="minimumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2" >
+         <widget class="QLabel" name="lb_Vdms_2" >
+          <property name="text" >
+           <string>Ejecutable (exe,com,bat) del Juego:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2" >
+         <widget class="QLineEdit" name="txtVdms_path_exe" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2" >
+         <widget class="QPushButton" name="btnVdms_ExeJuego" >
+          <property name="minimumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string/>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3" >
+         <widget class="QPushButton" name="btnVdms_ExeJuego_clear" >
+          <property name="minimumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" >
+         <widget class="QLabel" name="lb_Vdms_3" >
+          <property name="text" >
+           <string>Parametros:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" >
+         <widget class="QLineEdit" name="txtVdms_params" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" >
+         <widget class="QLabel" name="lb_Vdms_4" >
+          <property name="text" >
+           <string>Dirección del Icono:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1" >
+         <widget class="QLineEdit" name="txtVdms_icon" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="2" >
+         <widget class="QPushButton" name="btnVdms_Icono" >
+          <property name="minimumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string/>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3" >
+         <widget class="QPushButton" name="btnVdms_Icono_clear" >
+          <property name="minimumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer" >
+        <property name="orientation" >
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0" >
+         <size>
+          <width>20</width>
+          <height>51</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2" >
+        <item>
+         <widget class="QPushButton" name="btnDescargarInfo" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Descargar la Info del Juego</string>
+          </property>
+          <property name="icon" >
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer" >
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0" >
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -400,13 +443,7 @@
        <property name="minimumSize" >
         <size>
          <width>97</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>97</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
@@ -439,13 +476,7 @@
        <property name="minimumSize" >
         <size>
          <width>97</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>97</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >

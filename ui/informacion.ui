@@ -13,22 +13,14 @@
    <string>Información</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/informacion.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/informacion.png</normaloff>:/img16/informacion.png</iconset>
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>4</number>
-   </property>
-   <property name="topMargin" >
-    <number>4</number>
-   </property>
-   <property name="rightMargin" >
-    <number>4</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>4</number>
    </property>
    <item>
@@ -89,16 +81,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>4</number>
-     </property>
-     <property name="topMargin" >
-      <number>4</number>
-     </property>
-     <property name="rightMargin" >
-      <number>4</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>4</number>
      </property>
      <item>
@@ -106,7 +89,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -116,11 +99,18 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnOk" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text" >
         <string>Aceptar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>

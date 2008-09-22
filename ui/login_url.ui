@@ -13,22 +13,10 @@
    <string>Requiere autentificación</string>
   </property>
   <layout class="QGridLayout" >
-   <property name="leftMargin" >
+   <property name="margin" >
     <number>4</number>
    </property>
-   <property name="topMargin" >
-    <number>4</number>
-   </property>
-   <property name="rightMargin" >
-    <number>4</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>4</number>
-   </property>
-   <property name="horizontalSpacing" >
-    <number>6</number>
-   </property>
-   <property name="verticalSpacing" >
+   <property name="spacing" >
     <number>6</number>
    </property>
    <item row="0" column="0" colspan="2" >
@@ -49,7 +37,14 @@
     </widget>
    </item>
    <item row="2" column="1" >
-    <widget class="QLineEdit" name="userEdit" />
+    <widget class="QLineEdit" name="userEdit" >
+     <property name="minimumSize" >
+      <size>
+       <width>0</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
    </item>
    <item row="3" column="0" >
     <widget class="QLabel" name="label_3" >
@@ -60,6 +55,12 @@
    </item>
    <item row="3" column="1" >
     <widget class="QLineEdit" name="passwordEdit" >
+     <property name="minimumSize" >
+      <size>
+       <width>0</width>
+       <height>24</height>
+      </size>
+     </property>
      <property name="echoMode" >
       <enum>QLineEdit::Password</enum>
      </property>
@@ -71,7 +72,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -103,7 +104,7 @@
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
        <height>40</height>

@@ -40,7 +40,7 @@
        <property name="minimumSize" >
         <size>
          <width>90</width>
-         <height>0</height>
+         <height>24</height>
         </size>
        </property>
       </widget>
@@ -79,7 +79,14 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QLineEdit" name="txtMontaje_path" />
+      <widget class="QLineEdit" name="txtMontaje_path" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btnDirFile" >
@@ -137,7 +144,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="txtMontaje_label" />
+    <widget class="QLineEdit" name="txtMontaje_label" >
+     <property name="minimumSize" >
+      <size>
+       <width>0</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" >
@@ -159,7 +173,7 @@
        <property name="minimumSize" >
         <size>
          <width>90</width>
-         <height>0</height>
+         <height>24</height>
         </size>
        </property>
        <property name="currentIndex" >
@@ -333,7 +347,7 @@
        <property name="minimumSize" >
         <size>
          <width>90</width>
-         <height>0</height>
+         <height>24</height>
         </size>
        </property>
        <property name="currentIndex" >
@@ -382,7 +396,7 @@
        <property name="minimumSize" >
         <size>
          <width>90</width>
-         <height>0</height>
+         <height>24</height>
         </size>
        </property>
        <property name="editable" >
@@ -392,6 +406,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="txtMontaje_opt_mount" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>24</height>
+        </size>
+       </property>
        <property name="text" >
         <string/>
        </property>
@@ -442,6 +462,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnOk" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text" >
         <string>Aceptar</string>
        </property>
@@ -453,6 +479,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnCancel" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text" >
         <string>Cancelar</string>
        </property>

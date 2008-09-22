@@ -19,22 +19,14 @@
    <string>Cambia los distintos Path</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >:/img16/grlida.png</iconset>
+   <iconset resource="../res/grlida.qrc" >
+    <normaloff>:/img16/grlida.png</normaloff>:/img16/grlida.png</iconset>
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>4</number>
    </property>
-   <property name="leftMargin" >
-    <number>4</number>
-   </property>
-   <property name="topMargin" >
-    <number>4</number>
-   </property>
-   <property name="rightMargin" >
-    <number>4</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>4</number>
    </property>
    <item>
@@ -63,16 +55,7 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
@@ -89,7 +72,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="txtDatosPath_Thumbs" />
+         <widget class="QLineEdit" name="txtDatosPath_Thumbs" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="btnDirPath_Datos_Thumbs" >
@@ -109,7 +99,8 @@
            <string/>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
         </item>
@@ -120,16 +111,7 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
@@ -146,7 +128,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="txtDatosPath_CoverFront" />
+         <widget class="QLineEdit" name="txtDatosPath_CoverFront" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="btnDirPath_Datos_CoverFront" >
@@ -166,7 +155,8 @@
            <string/>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
         </item>
@@ -177,16 +167,7 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
@@ -203,7 +184,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="txtDatosPath_CoverBack" />
+         <widget class="QLineEdit" name="txtDatosPath_CoverBack" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="btnDirPath_Datos_CoverBack" >
@@ -223,7 +211,8 @@
            <string/>
           </property>
           <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+           <iconset resource="../res/grlida.qrc" >
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
           </property>
          </widget>
         </item>
@@ -262,20 +251,19 @@
          <number>0</number>
         </property>
         <widget class="QWidget" name="page_1" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>376</width>
+           <height>276</height>
+          </rect>
+         </property>
          <layout class="QVBoxLayout" >
           <property name="spacing" >
            <number>4</number>
           </property>
-          <property name="leftMargin" >
-           <number>0</number>
-          </property>
-          <property name="topMargin" >
-           <number>0</number>
-          </property>
-          <property name="rightMargin" >
-           <number>0</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>0</number>
           </property>
           <item>
@@ -283,16 +271,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -309,7 +288,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Dbx_1" />
+             <widget class="QLineEdit" name="txtPath_Dbx_1" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Dbx_1" >
@@ -329,7 +315,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -340,16 +327,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -366,7 +344,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Dbx_2" />
+             <widget class="QLineEdit" name="txtPath_Dbx_2" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Dbx_2" >
@@ -386,7 +371,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -397,16 +383,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -423,7 +400,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Dbx_3" />
+             <widget class="QLineEdit" name="txtPath_Dbx_3" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Dbx_3" >
@@ -443,7 +427,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -454,16 +439,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -480,7 +456,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Dbx_4" />
+             <widget class="QLineEdit" name="txtPath_Dbx_4" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Dbx_4" >
@@ -500,7 +483,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -511,16 +495,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -537,7 +512,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Dbx_5" />
+             <widget class="QLineEdit" name="txtPath_Dbx_5" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Dbx_5" >
@@ -557,7 +539,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -568,16 +551,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -594,7 +568,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Dbx_6" />
+             <widget class="QLineEdit" name="txtPath_Dbx_6" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Dbx_6" >
@@ -614,7 +595,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </item>
@@ -625,16 +607,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -651,7 +624,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Dbx_7" />
+             <widget class="QLineEdit" name="txtPath_Dbx_7" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Dbx_7" >
@@ -671,7 +651,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </item>
@@ -682,16 +663,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -708,7 +680,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Dbx_8" />
+             <widget class="QLineEdit" name="txtPath_Dbx_8" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Dbx_8" >
@@ -728,7 +707,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </item>
@@ -739,7 +719,7 @@
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>40</height>
@@ -750,20 +730,19 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_2" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>376</width>
+           <height>274</height>
+          </rect>
+         </property>
          <layout class="QVBoxLayout" >
           <property name="spacing" >
            <number>4</number>
           </property>
-          <property name="leftMargin" >
-           <number>0</number>
-          </property>
-          <property name="topMargin" >
-           <number>0</number>
-          </property>
-          <property name="rightMargin" >
-           <number>0</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>0</number>
           </property>
           <item>
@@ -771,16 +750,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -797,7 +767,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Svm_1" />
+             <widget class="QLineEdit" name="txtPath_Svm_1" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Svm_1" >
@@ -817,7 +794,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </item>
@@ -828,16 +806,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -854,7 +823,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Svm_2" />
+             <widget class="QLineEdit" name="txtPath_Svm_2" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Svm_2" >
@@ -874,7 +850,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </item>
@@ -885,16 +862,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -911,7 +879,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Svm_3" />
+             <widget class="QLineEdit" name="txtPath_Svm_3" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Svm_3" >
@@ -931,7 +906,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -942,16 +918,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -968,7 +935,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Svm_4" />
+             <widget class="QLineEdit" name="txtPath_Svm_4" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Svm_4" >
@@ -988,7 +962,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </item>
@@ -999,16 +974,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -1025,7 +991,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Svm_5" />
+             <widget class="QLineEdit" name="txtPath_Svm_5" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Svm_5" >
@@ -1045,7 +1018,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </item>
@@ -1056,16 +1030,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -1082,7 +1047,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Svm_6" />
+             <widget class="QLineEdit" name="txtPath_Svm_6" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Svm_6" >
@@ -1102,7 +1074,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_0.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
               </property>
              </widget>
             </item>
@@ -1113,7 +1086,7 @@
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>40</height>
@@ -1124,20 +1097,19 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_3" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>376</width>
+           <height>274</height>
+          </rect>
+         </property>
          <layout class="QVBoxLayout" >
           <property name="spacing" >
            <number>4</number>
           </property>
-          <property name="leftMargin" >
-           <number>0</number>
-          </property>
-          <property name="topMargin" >
-           <number>0</number>
-          </property>
-          <property name="rightMargin" >
-           <number>0</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>0</number>
           </property>
           <item>
@@ -1145,16 +1117,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -1171,7 +1134,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Vdms_1" />
+             <widget class="QLineEdit" name="txtPath_Vdms_1" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Vdms_1" >
@@ -1191,7 +1161,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -1202,16 +1173,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -1228,7 +1190,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="txtPath_Vdms_2" />
+             <widget class="QLineEdit" name="txtPath_Vdms_2" >
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="btnDirPath_Vdms_2" >
@@ -1248,7 +1217,8 @@
                <string/>
               </property>
               <property name="icon" >
-               <iconset resource="../res/grlida.qrc" >:/img16/carpeta_1.png</iconset>
+               <iconset resource="../res/grlida.qrc" >
+                <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
               </property>
              </widget>
             </item>
@@ -1259,7 +1229,7 @@
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>40</height>
@@ -1279,16 +1249,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>4</number>
-     </property>
-     <property name="topMargin" >
-      <number>4</number>
-     </property>
-     <property name="rightMargin" >
-      <number>4</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>4</number>
      </property>
      <item>
@@ -1296,7 +1257,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -1309,14 +1270,15 @@
        <property name="minimumSize" >
         <size>
          <width>80</width>
-         <height>0</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
         <string>Aceptar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/aplicar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
@@ -1325,14 +1287,15 @@
        <property name="minimumSize" >
         <size>
          <width>80</width>
-         <height>0</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text" >
         <string>Cancelar</string>
        </property>
        <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >:/img16/cancelar.png</iconset>
+        <iconset resource="../res/grlida.qrc" >
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
@@ -1341,7 +1304,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
