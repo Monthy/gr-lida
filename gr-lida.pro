@@ -103,7 +103,8 @@ SOURCES += 3rdparty/pictureflow-qt/pictureflow.cpp
 RESOURCES += res/grlida.qrc
 TRANSLATIONS += lng/gr-lida_es_ES.ts \
     lng/gr-lida_en_EN.ts \
-	lng/gr-lida_da_DK.ts
+	lng/gr-lida_da_DK.ts \
+	lng/gr-lida_fr_FR.ts
 	
 win32:RC_FILE += gr-lida.rc
 mac:ICON += gr-lida.icns
