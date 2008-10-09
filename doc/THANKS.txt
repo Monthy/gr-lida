@@ -17,6 +17,8 @@ en Freenode y mantenimiento del proyecto en ShareSource.
 
 A Neville <fmartiterron[a]yahoo.es> por su traducción de GR-lida al inglés y
 ayudarnos a hacerlo más internacional.
+A Jens Peter por su traducción del GR-lida al Danés.
+A Pascal Piallat por su traducción del GR-lida al Francés.
 
 A Sebastián Ramírez Magrí ( http://sebasmagri.wordpress.com/ )
 <sebasmagri[a]gmail.com> por mantener el ebuild de GR-lida para Gentoo y

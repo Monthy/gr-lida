@@ -1,20 +1,21 @@
 
 -  NEWS
 -----------------------------------
-0.7.0 (21-09-2008)
+0.7.0 (10-10-2008)
  - Actualizada la lista de compatibilidad del ScummVM 0.12.0
  - Añadido nuevo idioma, gracias a Jens Peter que lo ha traducido al danés.
+ - Añadido nuevo idioma, gracias a Pascal Piallat que lo ha traducido al francés.
  - Añadida función para buscar y descargar la info del juego desde MobyGames.com
  - Añadida la calificación o rating del juego.
  - Añadido sistema de hoja de estilo o StyleSheet para poder cambiar por completo la apariencia del GR-lida.
  - Añadido buscar y descargar la info del juego en los asistentes de los emuladores.
- - Ahora algunas barras se pueden mover y acoplar en otra posicion manteniendo el estado.
+ - Ahora algunas barras se pueden mover y acoplar en otra posición manteniendo el estado.
  - Corregido el error al ejecutar el Setup del juego con el DOSBox. Al no pillar bien los datos.
  - Corregido el error al montar algunas unidades en DOSBox en Windows al utilizar / en lugar de \
  - Corregido recordar el ultimo directorio abierto.
 
 0.6.0 (07-07-2008)
- - Visor de caratulas de los juegos usando PictureFlow.
+ - Visor de carátulas de los juegos usando PictureFlow.
  - Sistema para buscar y descargar la info del juego, cuando se añade un juego de forma manual.
  - Función para poner nombres cortos en DOS. Estado: Beta.
  - Sistema para recordar el último directorio abierto.
@@ -45,7 +46,7 @@
  - Añadido pequeño visor de imágenes para las carátulas, capturas, etc...
  - Añadidos los archivos de idioma de forma interna con posibilidad de usar los externos.
  - Corregido error que sobreescribía archivo de configuración del DOSBox y el VDMSound.
- - Corregido el estado del boton "ejecutar" y "ejecutar setup" al seleccionar un juego.
+ - Corregido el estado del botón "ejecutar" y "ejecutar setup" al seleccionar un juego.
  - Corregidos varios errores.
 
 0.3.4 (19-03-2008)
@@ -97,7 +98,7 @@
 0.1.7 (02-07-2007)
  - Añadida parte para editar y añadir URL en la base de datos
  - Añadida parte para editar y añadir datos de archivos en la base de datos
- - Añadida funcion par importar datos y configuración de los juegos
+ - Añadida función par importar datos y configuración de los juegos
  - Añadido soporte para mostrar smiles en los comentarios de los juegos
  - Actualizada la lista de juegos ScummVM
  - Corregido varios errores
