@@ -53,6 +53,7 @@ frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog
 	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/floppy_2.png"), "boot");
 
 	ui.cbxMontaje_mode_cdrom->clear();
+	ui.cbxMontaje_mode_cdrom->addItem("");
 	ui.cbxMontaje_mode_cdrom->addItem("-aspi");
 	ui.cbxMontaje_mode_cdrom->addItem("-ioctl");
 	ui.cbxMontaje_mode_cdrom->addItem("-noioctl");
@@ -111,9 +112,9 @@ void frmAddEditMontajes::on_btnOk()
 
 	DatosMontaje["opt_mount"] = ui.txtMontaje_opt_mount->text();			// opciones del cd-rom
 
-	if ( ui.cbxMontaje_mode_cdrom->currentText()!="" )
+//	if ( ui.cbxMontaje_mode_cdrom->currentText()!="" )
 		DatosMontaje["io_ctrl"] = ui.cbxMontaje_mode_cdrom->currentText();	// cd/dvd windows, w9x, linux
-	else DatosMontaje["io_ctrl"] = "-noioctl";								// Forces use of the SDL
+//	else DatosMontaje["io_ctrl"] = "-noioctl";								// Forces use of the SDL
 
 	QDialog::accept();
 }

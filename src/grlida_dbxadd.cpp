@@ -772,13 +772,13 @@ void frmDbxAdd::on_btnMount_Add()
 {
 	QHash<QString, QString> DatosMontaje;
 	DatosMontaje.clear();
-	DatosMontaje["path"]      = ""; // directorio o iso
-	DatosMontaje["label"]     = ""; // etiqueta
+	DatosMontaje["path"]      = "";      // directorio o iso
+	DatosMontaje["label"]     = "";      // etiqueta
 	DatosMontaje["tipo_as"]   = "drive"; // tipo de montaje
-	DatosMontaje["letter"]    = "C"; // letra de montaje
-	DatosMontaje["indx_cd"]   = ""; // index de la unidad de cd-rom
-	DatosMontaje["opt_mount"] = ""; // opciones del cd-rom
-	DatosMontaje["io_ctrl"]   = "-aspi"; // cd/dvd
+	DatosMontaje["letter"]    = "C";     // letra de montaje
+	DatosMontaje["indx_cd"]   = "";      // index de la unidad de cd-rom
+	DatosMontaje["opt_mount"] = "";      // opciones del cd-rom
+	DatosMontaje["io_ctrl"]   = "";      // cd/dvd
 
 	frmAddEditMontajes *AddEditMontajes = new frmAddEditMontajes( DatosMontaje );
 	if( AddEditMontajes->exec() == QDialog::Accepted )
@@ -970,14 +970,14 @@ void frmDbxAdd::on_btnMount_AutoCrear()
 	QFileInfo fi( ui.txtDbx_path_exe->text() );
 	QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 	item->setIcon( 0 , QIcon(stTheme+"img16/drive_hd.png") );
-	item->setText( 0 , fi.absolutePath()	);	// directorio o iso
-	item->setText( 1 , ""					);	// etiqueta
-	item->setText( 2 , "drive"				);	// tipo de montaje
-	item->setText( 3 , "C"					);	// letra de montaje
-	item->setText( 4 , ""					);	// index de la unidad de cd-rom
-	item->setText( 5 , ""					);	// opciones del cd-rom
-	item->setText( 6 , "-aspi"				);	// cd/dvd IOCtrl
-	item->setText( 7 , "x"					);	// primer montaje
+	item->setText( 0 , fi.absolutePath() );	// directorio o iso
+	item->setText( 1 , ""                );	// etiqueta
+	item->setText( 2 , "drive"           );	// tipo de montaje
+	item->setText( 3 , "C"               );	// letra de montaje
+	item->setText( 4 , ""                );	// index de la unidad de cd-rom
+	item->setText( 5 , ""                );	// opciones del cd-rom
+	item->setText( 6 , ""                );	// cd/dvd IOCtrl
+	item->setText( 7 , "x"               );	// primer montaje
 
 	QHash<QString, QString> datos_montaje;
 	datos_montaje.clear();

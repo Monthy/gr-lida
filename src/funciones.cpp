@@ -652,6 +652,7 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 		if( item->text(2) != "boot")
 		{
 			mount_Boot = false;
+			mount_IOCtrl = " ";
 			if( item->text(2) == "floppy")
 			{
 				montaje_IMG = false;
@@ -666,7 +667,12 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 			{
 				montaje_IMG  = false;
 				mount_type  = " -t cdrom";
-				mount_IOCtrl = " " + item->text(6);
+
+				if( item->text(6) != "" )
+					mount_IOCtrl = " " + item->text(6);
+				else
+					mount_IOCtrl = " ";
+
 				if( item->text(5) != "" )
 					mount_Options = " " + item->text(5);
 				else

@@ -4840,7 +4840,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget_ScummVM" >
          <property name="currentIndex" >
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tabSvm_1" >
           <attribute name="title" >
