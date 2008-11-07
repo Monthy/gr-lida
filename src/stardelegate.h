@@ -1,18 +1,19 @@
 #ifndef STARDELEGATE_H
 #define STARDELEGATE_H
 
+#include <QtCore>
+#include <QtGui>
 #include <QItemDelegate>
 #include <QSize>
 
 #include "dbsql.h"
-
-QT_FORWARD_DECLARE_CLASS(QPainter)
 
 class StarDelegate : public QItemDelegate
 {
 	Q_OBJECT
 public:
 	StarDelegate(QWidget *parent = 0);
+	~StarDelegate();
 
 	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
@@ -26,4 +27,3 @@ private:
 };
 
 #endif // STARDELEGATE_H
-

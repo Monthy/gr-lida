@@ -88,7 +88,7 @@ GrLida::GrLida( QWidget *parent, Qt::WFlags flags)
 	ui.twJuegos->setColumnWidth(2,90);
 	ui.twJuegos->setContextMenuPolicy(Qt::CustomContextMenu);
 	ui.twJuegos->installEventFilter(this);
-	ui.twJuegos->setItemDelegate( new StarDelegate( ui.twJuegos ) );
+	ui.twJuegos->setItemDelegate( new StarDelegate );
 
 	ui.txtInfo_Comentario->installEventFilter(this);
 

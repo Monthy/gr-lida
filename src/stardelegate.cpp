@@ -1,7 +1,5 @@
 #include "stardelegate.h"
 
-#include <QtGui>
-
 StarDelegate::StarDelegate(QWidget *parent)
     : QItemDelegate(parent)
 {
@@ -10,6 +8,8 @@ StarDelegate::StarDelegate(QWidget *parent)
 	star_on.load(":/images/star_on.png");
 	star_off.load(":/images/star_off.png");
 }
+
+StarDelegate::~StarDelegate(){}
 
 void StarDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
 		const QModelIndex &index) const
