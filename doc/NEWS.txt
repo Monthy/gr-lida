@@ -1,6 +1,11 @@
 
 -  NEWS
 -----------------------------------
+0.7.1 (15-11-2008)
+ - Cambios en el stardelegate para solucionar posible error al compilar en otras distribuciones.
+ - Corregido problema que provocaba el parámetro IOCtrl, al montar unidades de CD-ROM.
+ - Actualizados los archivos de Idioma, tanto los *.TS como los *.QM.
+
 0.7.0 (10-10-2008)
  - Actualizada la lista de compatibilidad del ScummVM 0.12.0
  - Añadido nuevo idioma, gracias a Jens Peter que lo ha traducido al danés.
