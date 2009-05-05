@@ -5,21 +5,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>389</height>
+    <width>520</width>
+    <height>440</height>
    </rect>
-  </property>
-  <property name="minimumSize" >
-   <size>
-    <width>450</width>
-    <height>389</height>
-   </size>
-  </property>
-  <property name="maximumSize" >
-   <size>
-    <width>450</width>
-    <height>389</height>
-   </size>
   </property>
   <property name="windowTitle" >
    <string>Asistente del VdmSound</string>
@@ -136,13 +124,7 @@
       </sizepolicy>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout" >
-      <property name="leftMargin" >
-       <number>4</number>
-      </property>
-      <property name="topMargin" >
-       <number>4</number>
-      </property>
-      <property name="rightMargin" >
+      <property name="margin" >
        <number>4</number>
       </property>
       <item>
@@ -368,7 +350,7 @@
        </layout>
       </item>
       <item>
-       <spacer name="verticalSpacer" >
+       <spacer name="vSpacer_" >
         <property name="orientation" >
          <enum>Qt::Vertical</enum>
         </property>
@@ -431,7 +413,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout" name="horizontalLayout_3" >
      <property name="spacing" >
       <number>6</number>
      </property>
@@ -456,7 +438,7 @@
       </widget>
      </item>
      <item>
-      <spacer>
+      <spacer name="horizontalSpacer_2" >
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -504,10 +486,13 @@
   <tabstop>txtVdms_icon</tabstop>
   <tabstop>btnVdms_Icono</tabstop>
   <tabstop>btnVdms_Icono_clear</tabstop>
+  <tabstop>btnDescargarInfo</tabstop>
   <tabstop>btnOk</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/grlida.qrc" />
+  <include location="../res/grlida.qrc" />
   <include location="../res/grlida.qrc" />
  </resources>
  <connections>

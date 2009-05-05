@@ -54,7 +54,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout" name="hLayout_2" >
      <item>
       <widget class="QPushButton" name="btnCheckedAll" >
        <property name="minimumSize" >
@@ -82,7 +82,7 @@
       </widget>
      </item>
      <item>
-      <spacer>
+      <spacer name="hSpacer_1" >
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -109,7 +109,7 @@
        <number>4</number>
       </property>
       <item>
-       <layout class="QHBoxLayout" >
+       <layout class="QHBoxLayout" name="hLayout_3" >
         <item>
          <widget class="QLabel" name="label_0" >
           <property name="minimumSize" >
@@ -142,7 +142,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" >
+       <layout class="QHBoxLayout" name="hLayout_4" >
         <item>
          <widget class="QLabel" name="label_1" >
           <property name="minimumSize" >
@@ -195,7 +195,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout" name="hLayout_1" >
      <item>
       <spacer>
        <property name="orientation" >
@@ -259,7 +259,7 @@
       </widget>
      </item>
      <item>
-      <spacer>
+      <spacer name="hSpacer_2" >
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -275,6 +275,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>twListaJuegos</tabstop>
+  <tabstop>btnCheckedAll</tabstop>
+  <tabstop>btnUnCheckedAll</tabstop>
+  <tabstop>cbxExpotarComo</tabstop>
+  <tabstop>txtDirExportPath</tabstop>
+  <tabstop>btnDirExportPath</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancelar</tabstop>
+ </tabstops>
  <resources>
   <include location="../res/grlida.qrc" />
  </resources>

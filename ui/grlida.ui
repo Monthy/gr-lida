@@ -1,166 +1,114 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>GrLidaClass</class>
- <widget class="QMainWindow" name="GrLidaClass" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="GrLidaClass">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>730</width>
-    <height>590</height>
+    <height>599</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>GR-lida</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >
+  <property name="windowIcon">
+   <iconset resource="../res/grlida.qrc">
     <normaloff>:/img16/grlida.png</normaloff>:/img16/grlida.png</iconset>
   </property>
-  <property name="toolButtonStyle" >
+  <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
   </property>
-  <widget class="QWidget" name="centralwidget" >
-   <layout class="QVBoxLayout" name="verticalLayout_2" >
-    <property name="leftMargin" >
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <property name="leftMargin">
      <number>2</number>
     </property>
-    <property name="topMargin" >
+    <property name="topMargin">
      <number>2</number>
     </property>
-    <property name="rightMargin" >
+    <property name="rightMargin">
      <number>2</number>
     </property>
-    <property name="bottomMargin" >
+    <property name="bottomMargin">
      <number>0</number>
     </property>
     <item>
-     <widget class="QSplitter" name="splitter_pictureflow" >
-      <property name="orientation" >
-       <enum>Qt::Vertical</enum>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>4</number>
       </property>
-      <widget class="QWidget" name="layoutWidget" >
-       <layout class="QHBoxLayout" name="horizontalLayout" >
-        <property name="spacing" >
-         <number>4</number>
+      <item>
+       <widget class="QTreeWidget" name="twJuegos">
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
-        <item>
-         <widget class="QTreeWidget" name="twJuegos" >
-          <property name="horizontalScrollBarPolicy" >
-           <enum>Qt::ScrollBarAlwaysOff</enum>
-          </property>
-          <property name="alternatingRowColors" >
-           <bool>false</bool>
-          </property>
-          <property name="iconSize" >
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="rootIsDecorated" >
-           <bool>false</bool>
-          </property>
-          <property name="uniformRowHeights" >
-           <bool>true</bool>
-          </property>
-          <property name="allColumnsShowFocus" >
-           <bool>true</bool>
-          </property>
-          <column>
-           <property name="text" >
-            <string/>
-           </property>
-          </column>
-          <column>
-           <property name="text" >
-            <string>Título</string>
-           </property>
-          </column>
-          <column>
-           <property name="text" >
-            <string>Rating</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDockWidget" name="dockw_Capturas" >
-          <property name="minimumSize" >
-           <size>
-            <width>170</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>170</width>
-            <height>524287</height>
-           </size>
-          </property>
-          <property name="features" >
-           <set>QDockWidget::NoDockWidgetFeatures</set>
-          </property>
-          <property name="windowTitle" >
-           <string>Capturas del juego</string>
-          </property>
-          <widget class="QWidget" name="dockWidgetContents_Capturas" >
-           <layout class="QVBoxLayout" name="verticalLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QTreeWidget" name="twCapturas" >
-              <property name="maximumSize" >
-               <size>
-                <width>170</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="frameShadow" >
-               <enum>QFrame::Sunken</enum>
-              </property>
-              <property name="iconSize" >
-               <size>
-                <width>135</width>
-                <height>120</height>
-               </size>
-              </property>
-              <property name="rootIsDecorated" >
-               <bool>false</bool>
-              </property>
-              <property name="allColumnsShowFocus" >
-               <bool>true</bool>
-              </property>
-              <column>
-               <property name="text" >
-                <string>Capturas</string>
-               </property>
-              </column>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="PictureFlow" native="1" name="PicFlowWidget" >
-       <property name="enabled" >
-        <bool>false</bool>
-       </property>
-       <property name="minimumSize" >
-        <size>
-         <width>0</width>
-         <height>260</height>
-        </size>
-       </property>
-      </widget>
-     </widget>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="rootIsDecorated">
+         <bool>false</bool>
+        </property>
+        <property name="uniformRowHeights">
+         <bool>true</bool>
+        </property>
+        <property name="allColumnsShowFocus">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string/>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Título</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Rating</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTreeWidget" name="twCapturas">
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>128</width>
+          <height>128</height>
+         </size>
+        </property>
+        <property name="rootIsDecorated">
+         <bool>false</bool>
+        </property>
+        <property name="uniformRowHeights">
+         <bool>true</bool>
+        </property>
+        <property name="allColumnsShowFocus">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string>Capturas</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar" >
-   <property name="geometry" >
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
@@ -168,658 +116,396 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuArchivo" >
-    <property name="title" >
+   <widget class="QMenu" name="menuArchivo">
+    <property name="title">
      <string>&amp;Archivo</string>
     </property>
-    <addaction name="mnu_file_informacion" />
-    <addaction name="separator" />
-    <addaction name="mnu_file_cerrar" />
+    <addaction name="mnu_file_informacion"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_file_cerrar"/>
    </widget>
-   <widget class="QMenu" name="menuEdicion" >
-    <property name="title" >
+   <widget class="QMenu" name="menuEdicion">
+    <property name="title">
      <string>&amp;Edición</string>
     </property>
-    <addaction name="mnu_edit_nuevo_dosbox" />
-    <addaction name="mnu_edit_nuevo_scummvm" />
-    <addaction name="mnu_edit_nuevo_vdmsound" />
-    <addaction name="separator" />
-    <addaction name="mnu_edit_nuevo" />
-    <addaction name="mnu_edit_editar" />
-    <addaction name="mnu_edit_eliminar" />
-    <addaction name="separator" />
-    <addaction name="mnu_edit_favorito" />
+    <addaction name="mnu_edit_nuevo_dosbox"/>
+    <addaction name="mnu_edit_nuevo_scummvm"/>
+    <addaction name="mnu_edit_nuevo_vdmsound"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_edit_nuevo"/>
+    <addaction name="mnu_edit_editar"/>
+    <addaction name="mnu_edit_eliminar"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_edit_favorito"/>
    </widget>
-   <widget class="QMenu" name="menuEjecutar" >
-    <property name="title" >
+   <widget class="QMenu" name="menuEjecutar">
+    <property name="title">
      <string>E&amp;jecutar</string>
     </property>
-    <addaction name="mnu_ejecutar_dosbox" />
-    <addaction name="mnu_ejecutar_scummvm" />
-    <addaction name="separator" />
-    <addaction name="mnu_ejecutar_juego" />
-    <addaction name="mnu_ejecutar_setup" />
+    <addaction name="mnu_ejecutar_dosbox"/>
+    <addaction name="mnu_ejecutar_scummvm"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_ejecutar_juego"/>
+    <addaction name="mnu_ejecutar_setup"/>
    </widget>
-   <widget class="QMenu" name="menuHerramientas" >
-    <property name="title" >
+   <widget class="QMenu" name="menuHerramientas">
+    <property name="title">
      <string>&amp;Herramientas</string>
     </property>
-    <addaction name="mnu_tool_importar" />
-    <addaction name="mnu_tool_exportar" />
-    <addaction name="separator" />
-    <addaction name="mnu_tool_opciones" />
+    <addaction name="mnu_tool_importar"/>
+    <addaction name="mnu_tool_exportar"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_tool_opciones"/>
    </widget>
-   <widget class="QMenu" name="menuVer" >
-    <property name="title" >
+   <widget class="QMenu" name="menuVer">
+    <property name="title">
      <string>&amp;Ver</string>
     </property>
-    <addaction name="mnu_ver_archivos_url" />
-    <addaction name="mnu_ver_datos" />
-    <addaction name="mnu_ver_pictureflow" />
-    <addaction name="mnu_ver_capturas" />
-    <addaction name="mnu_ver_ordenar" />
-    <addaction name="mnu_ver_toolbar" />
-    <addaction name="separator" />
-    <addaction name="mnu_ver_ayuda" />
-    <addaction name="mnu_ver_acercad" />
+    <widget class="QMenu" name="menuMenuVerCarpetas">
+     <property name="title">
+      <string>Ver Carpetas</string>
+     </property>
+     <addaction name="mnu_ver_carpeta_confdbx"/>
+     <addaction name="mnu_ver_carpeta_confvdms"/>
+     <addaction name="separator"/>
+     <addaction name="mnu_ver_carpeta_thumbs"/>
+     <addaction name="mnu_ver_carpeta_covers"/>
+     <addaction name="mnu_ver_carpeta_iconos"/>
+     <addaction name="mnu_ver_carpeta_smiles"/>
+     <addaction name="mnu_ver_carpeta_themes"/>
+     <addaction name="separator"/>
+     <addaction name="mnu_ver_carpeta_datos"/>
+     <addaction name="mnu_ver_carpeta_scripts"/>
+     <addaction name="mnu_ver_carpeta_templates"/>
+     <addaction name="mnu_ver_carpeta_idiomas"/>
+     <addaction name="separator"/>
+     <addaction name="mnu_ver_carpeta_temp"/>
+     <addaction name="mnu_ver_carpeta_home"/>
+    </widget>
+    <addaction name="mnu_ver_nav"/>
+    <addaction name="mnu_ver_archivos_url"/>
+    <addaction name="mnu_ver_datos"/>
+    <addaction name="mnu_ver_pictureflow"/>
+    <addaction name="mnu_ver_capturas"/>
+    <addaction name="mnu_ver_ordenar"/>
+    <addaction name="mnu_ver_toolbar"/>
+    <addaction name="mnu_ver_rating"/>
+    <addaction name="menuMenuVerCarpetas"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_ver_ayuda"/>
+    <addaction name="mnu_ver_acercad"/>
    </widget>
-   <addaction name="menuArchivo" />
-   <addaction name="menuEdicion" />
-   <addaction name="menuEjecutar" />
-   <addaction name="menuHerramientas" />
-   <addaction name="menuVer" />
+   <addaction name="menuArchivo"/>
+   <addaction name="menuEdicion"/>
+   <addaction name="menuEjecutar"/>
+   <addaction name="menuHerramientas"/>
+   <addaction name="menuVer"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar" />
-  <widget class="QToolBar" name="toolBar" >
-   <property name="windowTitle" >
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
     <string>Barra de Herramientas</string>
    </property>
-   <property name="iconSize" >
+   <property name="iconSize">
     <size>
      <width>32</width>
      <height>32</height>
     </size>
    </property>
-   <attribute name="toolBarArea" >
+   <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
-   <attribute name="toolBarBreak" >
+   <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionClose" />
-   <addaction name="separator" />
-   <addaction name="actionNewDbx" />
-   <addaction name="actionNewSvm" />
-   <addaction name="actionNewVdms" />
-   <addaction name="separator" />
-   <addaction name="actionEjectar" />
-   <addaction name="actionEjectarSetup" />
-   <addaction name="separator" />
-   <addaction name="actionNuevo" />
-   <addaction name="actionEditar" />
-   <addaction name="actionEiminar" />
-   <addaction name="separator" />
-   <addaction name="actionImportarJuego" />
-   <addaction name="actionVerFilesUrl" />
-   <addaction name="actionVerDatos" />
-   <addaction name="actionVerCapturas" />
-   <addaction name="separator" />
-   <addaction name="actionOpciones" />
-   <addaction name="actionAcercaD" />
+   <addaction name="actionClose"/>
+   <addaction name="separator"/>
+   <addaction name="actionNewDbx"/>
+   <addaction name="actionNewSvm"/>
+   <addaction name="actionNewVdms"/>
+   <addaction name="separator"/>
+   <addaction name="actionEjectar"/>
+   <addaction name="actionEjectarSetup"/>
+   <addaction name="separator"/>
+   <addaction name="actionNuevo"/>
+   <addaction name="actionEditar"/>
+   <addaction name="actionEiminar"/>
+   <addaction name="separator"/>
+   <addaction name="actionImportarJuego"/>
+   <addaction name="actionVerFilesUrl"/>
+   <addaction name="actionVerDatos"/>
+   <addaction name="actionVerCapturas"/>
+   <addaction name="separator"/>
+   <addaction name="actionOpciones"/>
+   <addaction name="actionAcercaD"/>
   </widget>
-  <widget class="QToolBar" name="toolBar_ordenar" >
-   <property name="windowTitle" >
+  <widget class="QToolBar" name="toolBar_ordenar">
+   <property name="windowTitle">
     <string>Barra Ordenar lista</string>
    </property>
-   <attribute name="toolBarArea" >
+   <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
-   <attribute name="toolBarBreak" >
+   <attribute name="toolBarBreak">
     <bool>true</bool>
    </attribute>
   </widget>
-  <widget class="QDockWidget" name="dockw_Datos" >
-   <property name="features" >
+  <widget class="QDockWidget" name="dockw_Datos">
+   <property name="features">
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
-   <property name="windowTitle" >
+   <property name="windowTitle">
     <string>Datos del juego</string>
    </property>
-   <attribute name="dockWidgetArea" >
+   <attribute name="dockWidgetArea">
     <number>2</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_InfoDatos" >
-    <layout class="QVBoxLayout" name="verticalLayout_3" >
-     <property name="spacing" >
-      <number>2</number>
+   <widget class="QWidget" name="dockWidgetContents_InfoDatos">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="spacing">
+      <number>1</number>
      </property>
-     <property name="leftMargin" >
-      <number>2</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>2</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin">
       <number>0</number>
      </property>
      <item>
-      <layout class="QGridLayout" name="gridLayout" >
-       <property name="spacing" >
-        <number>4</number>
+      <widget class="QTextBrowser" name="txtInfo_Comentario">
+       <property name="openExternalLinks">
+        <bool>true</bool>
        </property>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="lb_info_1" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Subtítulo</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" colspan="2" >
-        <widget class="QLineEdit" name="txtInfo_Subtitulo" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="lb_info_2" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Genero</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1" colspan="2" >
-        <widget class="QLineEdit" name="txtInfo_Genero" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" >
-        <widget class="QLabel" name="lb_info_3" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="layoutDirection" >
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text" >
-          <string>Idioma:</string>
-         </property>
-         <property name="textFormat" >
-          <enum>Qt::AutoText</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1" >
-        <widget class="QLineEdit" name="txtInfo_Idioma" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>75</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item rowspan="5" row="2" column="2" >
-        <widget class="QFrame" name="frame_imagen" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize" >
-          <size>
-           <width>158</width>
-           <height>109</height>
-          </size>
-         </property>
-         <property name="frameShape" >
-          <enum>QFrame::Panel</enum>
-         </property>
-         <property name="frameShadow" >
-          <enum>QFrame::Sunken</enum>
-         </property>
-         <layout class="QHBoxLayout" name="_2" >
-          <property name="margin" >
-           <number>1</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="lbImgThumbs" >
-            <property name="maximumSize" >
-             <size>
-              <width>156</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <property name="pixmap" >
-             <pixmap resource="../res/grlida.qrc" >:/images/juego_sin_imagen.png</pixmap>
-            </property>
-            <property name="scaledContents" >
-             <bool>true</bool>
-            </property>
-            <property name="alignment" >
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="3" column="0" >
-        <widget class="QLabel" name="lb_info_4" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Formato</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1" >
-        <widget class="QLineEdit" name="txtInfo_Formato" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>75</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0" >
-        <widget class="QLabel" name="lb_info_5" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Nº Cds</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1" >
-        <widget class="QLineEdit" name="txtInfo_NumDisc" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>75</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0" >
-        <widget class="QLabel" name="lb_info_6" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Año</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1" >
-        <widget class="QLineEdit" name="txtInfo_Anno" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>75</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0" >
-        <widget class="QLabel" name="lb_info_7" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Tamaño</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1" >
-        <widget class="QLineEdit" name="txtInfo_Tamano" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>75</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0" >
-        <widget class="QLabel" name="lb_info_8" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Compañia</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="1" colspan="2" >
-        <widget class="QLineEdit" name="txtInfo_Compania" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0" >
-        <widget class="QLabel" name="lb_info_9" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Desarrollador</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="1" colspan="2" >
-        <widget class="QLineEdit" name="txtInfo_Desarrollador" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="0" >
-        <widget class="QLabel" name="lb_info_10" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Tema</string>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="1" colspan="2" >
-        <widget class="QLineEdit" name="txtInfo_Tema" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="0" >
-        <widget class="QLabel" name="lb_info_11" >
-         <property name="minimumSize" >
-          <size>
-           <width>90</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Sistema Op.</string>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="1" colspan="2" >
-        <widget class="QLineEdit" name="txtInfo_SistemaOp" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="readOnly" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_ToolbarInfoDatos" >
-       <property name="leftMargin" >
+      <layout class="QHBoxLayout" name="horizontalLayout_ToolbarInfoDatos">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
         <number>0</number>
        </property>
-       <property name="topMargin" >
-        <number>0</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
-        <widget class="QLabel" name="lb_info_12" >
-         <property name="text" >
+        <widget class="QLabel" name="lb_info_12">
+         <property name="text">
           <string>Dispone de Archivos / Carátulas</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btnVer_Archivos" >
-         <property name="text" >
+        <widget class="QToolButton" name="btnVer_Archivos">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
           <string/>
          </property>
-         <property name="icon" >
-          <iconset resource="../res/grlida.qrc" >
+         <property name="icon">
+          <iconset resource="../res/grlida.qrc">
            <normaloff>:/img16/archivos.png</normaloff>:/img16/archivos.png</iconset>
          </property>
-         <property name="autoRaise" >
+         <property name="autoRaise">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btnVer_CoverFront" >
-         <property name="text" >
+        <widget class="QToolButton" name="btnVer_CoverFront">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
           <string/>
          </property>
-         <property name="icon" >
-          <iconset resource="../res/grlida.qrc" >
+         <property name="icon">
+          <iconset resource="../res/grlida.qrc">
            <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
          </property>
-         <property name="autoRaise" >
+         <property name="autoRaise">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btnVer_CoverBack" >
-         <property name="text" >
+        <widget class="QToolButton" name="btnVer_CoverBack">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
           <string/>
          </property>
-         <property name="icon" >
-          <iconset resource="../res/grlida.qrc" >
+         <property name="icon">
+          <iconset resource="../res/grlida.qrc">
            <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
          </property>
-         <property name="autoRaise" >
+         <property name="autoRaise">
           <bool>true</bool>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item>
-      <widget class="QTextBrowser" name="txtInfo_Comentario" >
-       <property name="openExternalLinks" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="dockw_FilesUrl" >
-   <property name="features" >
+  <widget class="QDockWidget" name="dockw_FilesUrl">
+   <property name="features">
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
-   <property name="windowTitle" >
+   <property name="windowTitle">
     <string>Archivos y Url</string>
    </property>
-   <attribute name="dockWidgetArea" >
+   <attribute name="dockWidgetArea">
     <number>2</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_FileUrls" >
-    <layout class="QVBoxLayout" name="verticalLayout_FileUrl" >
-     <property name="margin" >
+   <widget class="QWidget" name="dockWidgetContents_FileUrls">
+    <layout class="QVBoxLayout" name="verticalLayout_FileUrl">
+     <property name="margin">
       <number>0</number>
      </property>
      <item>
-      <widget class="QTabWidget" name="tabFileUrl" >
-       <property name="minimumSize" >
+      <widget class="QTabWidget" name="tabFileUrl">
+       <property name="minimumSize">
         <size>
          <width>0</width>
          <height>0</height>
         </size>
        </property>
-       <property name="currentIndex" >
+       <property name="currentIndex">
         <number>0</number>
        </property>
-       <widget class="QWidget" name="tab_url" >
-        <attribute name="title" >
-         <string>Ver URL</string>
+       <widget class="QWidget" name="tab_video">
+        <attribute name="icon">
+         <iconset resource="../res/grlida.qrc">
+          <normaloff>:/img16/img_tv2x.png</normaloff>:/img16/img_tv2x.png</iconset>
         </attribute>
-        <attribute name="icon" >
-         <iconset resource="../res/grlida.qrc" >
-          <normaloff>:/img16/edit_enlace.png</normaloff>:/img16/edit_enlace.png</iconset>
+        <attribute name="title">
+         <string>Capturas de Video</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_tabUrl" >
-         <property name="margin" >
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="margin">
           <number>0</number>
          </property>
          <item>
-          <widget class="QTreeWidget" name="twUrls" >
-           <property name="frameShape" >
+          <widget class="QTreeWidget" name="twCapturaVideo">
+           <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
-           <property name="iconSize" >
+           <property name="iconSize">
             <size>
              <width>16</width>
              <height>16</height>
             </size>
            </property>
-           <property name="rootIsDecorated" >
+           <property name="rootIsDecorated">
             <bool>false</bool>
            </property>
-           <property name="uniformRowHeights" >
+           <property name="uniformRowHeights">
             <bool>true</bool>
            </property>
-           <property name="allColumnsShowFocus" >
+           <property name="allColumnsShowFocus">
             <bool>true</bool>
            </property>
            <column>
-            <property name="text" >
+            <property name="text">
+             <string>Archivo</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>path</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_sonido">
+        <attribute name="icon">
+         <iconset resource="../res/grlida.qrc">
+          <normaloff>:/img16/img_audio.png</normaloff>:/img16/img_audio.png</iconset>
+        </attribute>
+        <attribute name="title">
+         <string>Capturas de Sonidos</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QTreeWidget" name="twCapturaSonido">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
+           </property>
+           <property name="uniformRowHeights">
+            <bool>true</bool>
+           </property>
+           <property name="allColumnsShowFocus">
+            <bool>true</bool>
+           </property>
+           <column>
+            <property name="text">
+             <string>Archivo</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>path</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_url">
+        <attribute name="icon">
+         <iconset resource="../res/grlida.qrc">
+          <normaloff>:/img16/edit_enlace.png</normaloff>:/img16/edit_enlace.png</iconset>
+        </attribute>
+        <attribute name="title">
+         <string>Ver URL</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_tabUrl">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QTreeWidget" name="twUrls">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
+           </property>
+           <property name="uniformRowHeights">
+            <bool>true</bool>
+           </property>
+           <property name="allColumnsShowFocus">
+            <bool>true</bool>
+           </property>
+           <column>
+            <property name="text">
              <string>Url</string>
             </property>
            </column>
            <column>
-            <property name="text" >
+            <property name="text">
              <string>Descripción</string>
             </property>
            </column>
@@ -827,63 +513,63 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="tab_file" >
-        <attribute name="title" >
-         <string>Ver Archivos</string>
-        </attribute>
-        <attribute name="icon" >
-         <iconset resource="../res/grlida.qrc" >
+       <widget class="QWidget" name="tab_file">
+        <attribute name="icon">
+         <iconset resource="../res/grlida.qrc">
           <normaloff>:/img16/archivos.png</normaloff>:/img16/archivos.png</iconset>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_tabFile" >
-         <property name="margin" >
+        <attribute name="title">
+         <string>Ver Archivos</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_tabFile">
+         <property name="margin">
           <number>0</number>
          </property>
          <item>
-          <widget class="QTreeWidget" name="twFiles" >
-           <property name="frameShape" >
+          <widget class="QTreeWidget" name="twFiles">
+           <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
-           <property name="iconSize" >
+           <property name="iconSize">
             <size>
              <width>16</width>
              <height>16</height>
             </size>
            </property>
-           <property name="rootIsDecorated" >
+           <property name="rootIsDecorated">
             <bool>false</bool>
            </property>
-           <property name="uniformRowHeights" >
+           <property name="uniformRowHeights">
             <bool>true</bool>
            </property>
-           <property name="itemsExpandable" >
+           <property name="itemsExpandable">
             <bool>false</bool>
            </property>
-           <property name="allColumnsShowFocus" >
+           <property name="allColumnsShowFocus">
             <bool>true</bool>
            </property>
            <column>
-            <property name="text" >
+            <property name="text">
              <string>Nombre</string>
             </property>
            </column>
            <column>
-            <property name="text" >
+            <property name="text">
              <string>CRC32</string>
             </property>
            </column>
            <column>
-            <property name="text" >
+            <property name="text">
              <string>Descripción</string>
             </property>
            </column>
            <column>
-            <property name="text" >
+            <property name="text">
              <string>Size</string>
             </property>
            </column>
            <column>
-            <property name="text" >
+            <property name="text">
              <string>Path</string>
             </property>
            </column>
@@ -896,732 +582,965 @@
     </layout>
    </widget>
   </widget>
-  <action name="mnu_file_informacion" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <widget class="QDockWidget" name="dockw_Nav">
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="windowTitle">
+    <string>Nav Categorias</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_twNav">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="twListNav">
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="uniformRowHeights">
+        <bool>true</bool>
+       </property>
+       <property name="allColumnsShowFocus">
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text">
+         <string>Categorias</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockw_PictureFlow">
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="windowTitle">
+    <string>PictureFlow</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_PicFlowWidget">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="PictureFlow" name="PicFlowWidget" native="true">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>260</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="mnu_file_informacion">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/informacion.png</normaloff>:/img16/informacion.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Información</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Muestra Información sobre la Base de Datos</string>
    </property>
   </action>
-  <action name="mnu_file_cerrar" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_file_cerrar">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/cerrar.png</normaloff>:/img16/cerrar.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Cerrar</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Cerrar el GR-lida</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="mnu_edit_nuevo_dosbox" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_edit_nuevo_dosbox">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Nuevo con DOSBox</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>DOSBox</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Nuevo Juego con DOSBox</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Nuevo Juego para el emulador DOSBox</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+D</string>
    </property>
   </action>
-  <action name="mnu_edit_nuevo_scummvm" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_edit_nuevo_scummvm">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Nuevo con ScummVM</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>ScummVM</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Nuevo Juego ScummVM</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Nuevo Juego para el emulador ScummVM</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="mnu_edit_nuevo_vdmsound" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_edit_nuevo_vdmsound">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/vdmsound.png</normaloff>:/img16/vdmsound.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Nuevo con VDMSound</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>VDMSound</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Nuevo Juego VDMSound</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Nuevo Juego para el emulador VDMSound</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+V</string>
    </property>
   </action>
-  <action name="mnu_edit_nuevo" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_edit_nuevo">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Nuevo Juego</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Nuevo</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Añade un nuevo Juego a la lista</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ins</string>
    </property>
   </action>
-  <action name="mnu_edit_editar" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_edit_editar">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/editar.png</normaloff>:/img16/editar.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Editar Juego</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Editar</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Edita los datos del Juego asi como la configuración del emulador</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Shift+Ins</string>
    </property>
   </action>
-  <action name="mnu_edit_eliminar" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_edit_eliminar">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/eliminar.png</normaloff>:/img16/eliminar.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Eliminar Juego</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Elimina un Juego de la lista</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Del</string>
    </property>
   </action>
-  <action name="mnu_edit_favorito" >
-   <property name="checkable" >
+  <action name="mnu_edit_favorito">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/fav_0.png</normaloff>:/img16/fav_0.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Marcar como Favorito</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Favorito</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Marca o quita un juego seleccionado como Favorito</string>
    </property>
   </action>
-  <action name="mnu_ejecutar_dosbox" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_ejecutar_dosbox">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ejecuta DOSBox</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>DOSBox</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Ejecuta DOSBox</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Ejecuta el emulador DOSBox</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Shift+D</string>
    </property>
   </action>
-  <action name="mnu_ejecutar_scummvm" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_ejecutar_scummvm">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ejecuta ScummVM</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>ScummVM</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Ejecuta ScummVM</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Ejecuta el emulador ScummVM</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Shift+S</string>
    </property>
   </action>
-  <action name="mnu_ejecutar_juego" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_ejecutar_juego">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/ejecutar_app.png</normaloff>:/img16/ejecutar_app.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ejecutar Juego</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Ejecutar</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Ejecutar Juego</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Ejecuta un Juego con el emulador correspondiente</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+E</string>
    </property>
   </action>
-  <action name="mnu_ejecutar_setup" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_ejecutar_setup">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/ejecutar_app_setup.png</normaloff>:/img16/ejecutar_app_setup.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ejecutar el Setup</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Setup</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Ejecuta el Setup del Juego</string>
    </property>
   </action>
-  <action name="mnu_tool_importar" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_tool_importar">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/importar.png</normaloff>:/img16/importar.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Importar Juego</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Importa los datos de un Juego via web</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+I</string>
    </property>
   </action>
-  <action name="mnu_tool_exportar" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_tool_exportar">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/exportar.png</normaloff>:/img16/exportar.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Exportar Juego</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Exporta los datos de configuración del Juego</string>
    </property>
   </action>
-  <action name="mnu_tool_opciones" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_tool_opciones">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/opciones.png</normaloff>:/img16/opciones.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Opciones</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Opciones</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Opciones del GR-lida</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Opciones de Configuración del GR-lida</string>
    </property>
   </action>
-  <action name="mnu_ver_archivos_url" >
-   <property name="checkable" >
+  <action name="mnu_ver_archivos_url">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/archivos.png</normaloff>:/img16/archivos.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ver Archivos y URL</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Archivos_URL</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Muestra los Archivos y URL del Juego</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>F5</string>
    </property>
   </action>
-  <action name="mnu_ver_datos" >
-   <property name="checkable" >
+  <action name="mnu_ver_datos">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="checked" >
+   <property name="checked">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/datos_1.png</normaloff>:/img16/datos_1.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ver Datos</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Datos</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Ver Datos</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Muestra los datos del Juego</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>F6</string>
    </property>
   </action>
-  <action name="mnu_ver_pictureflow" >
-   <property name="checkable" >
+  <action name="mnu_ver_pictureflow">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="checked" >
+   <property name="checked">
     <bool>true</bool>
    </property>
-   <property name="text" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/pictureflow.png</normaloff>:/img16/pictureflow.png</iconset>
+   </property>
+   <property name="text">
     <string>PictureFlow</string>
    </property>
   </action>
-  <action name="mnu_ver_capturas" >
-   <property name="checkable" >
+  <action name="mnu_ver_capturas">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ver Capturas</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Capturas</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Muestra las Capturas del Juego</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>F7</string>
    </property>
   </action>
-  <action name="mnu_ver_ordenar" >
-   <property name="checkable" >
+  <action name="mnu_ver_ordenar">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/orden_asc.png</normaloff>:/img16/orden_asc.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ver Ordenar</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Ordenar</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Ordena la lista de juego</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>F10</string>
    </property>
   </action>
-  <action name="mnu_ver_toolbar" >
-   <property name="checkable" >
+  <action name="mnu_ver_toolbar">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="checked" >
+   <property name="checked">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/barra_herramintas.png</normaloff>:/img16/barra_herramintas.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ver Barra de Herramientas</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Herramientas</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>F8</string>
    </property>
   </action>
-  <action name="mnu_ver_ayuda" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_ver_ayuda">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/ayuda.png</normaloff>:/img16/ayuda.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ayuda</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Ayuda</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Muestra la Ayuda del GR-lida</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>F1</string>
    </property>
   </action>
-  <action name="mnu_ver_acercad" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="mnu_ver_acercad">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/acercad.png</normaloff>:/img16/acercad.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Acerca de...</string>
    </property>
   </action>
-  <action name="actionClose" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionClose">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnClose.png</normaloff>:/img32/btnClose.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Cerrar</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Cerrar</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Cerrar</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Cerrar el GR-lida</string>
    </property>
   </action>
-  <action name="actionNewDbx" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionNewDbx">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnDosBox.png</normaloff>:/img32/btnDosBox.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Nuevo con DOSBox</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>DOSBox</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Nuevo Juego DOSBox</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Nuevo Juego para el emulador DOSBox</string>
    </property>
   </action>
-  <action name="actionNewSvm" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionNewSvm">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnScummVM.png</normaloff>:/img32/btnScummVM.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Nuevo con ScummVM</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>ScummVM</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Nuevo Juego ScummVM</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Nuevo Juego para el emulador ScummVM</string>
    </property>
   </action>
-  <action name="actionNewVdms" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionNewVdms">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnVdmSound.png</normaloff>:/img32/btnVdmSound.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Nuevo con VDMSound</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>VDMSound</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Nuevo Juego VDMSound</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Nuevo Juego para el emulador VDMSound</string>
    </property>
   </action>
-  <action name="actionEjectar" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionEjectar">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnEjecutar.png</normaloff>:/img32/btnEjecutar.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ejecutar Juego</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Ejecutar</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Ejecutar Juego</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Ejecuta un Juego con el emulador correspondiente</string>
    </property>
   </action>
-  <action name="actionEjectarSetup" >
-   <property name="enabled" >
+  <action name="actionEjectarSetup">
+   <property name="enabled">
     <bool>false</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnSetup.png</normaloff>:/img32/btnSetup.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ejecutar el Setup</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Setup</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Ejecuta el Setup del Juego</string>
    </property>
   </action>
-  <action name="actionNuevo" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionNuevo">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnNuevo.png</normaloff>:/img32/btnNuevo.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Nuevo Juego</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Nuevo</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Nuevo Juego</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Añade un nuevo Juego a la lista</string>
    </property>
-   <property name="visible" >
+   <property name="visible">
     <bool>true</bool>
    </property>
   </action>
-  <action name="actionEditar" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionEditar">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnEditar.png</normaloff>:/img32/btnEditar.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Editar Juego</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Editar</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Editar Juego</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Edita los datos del Juego asi como la configuración del emulador</string>
    </property>
   </action>
-  <action name="actionEiminar" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionEiminar">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnEliminar.png</normaloff>:/img32/btnEliminar.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Eliminar Juego</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Eliminar</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Eliminar Juego</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Elimina un Juego de la lista</string>
    </property>
   </action>
-  <action name="actionImportarJuego" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionImportarJuego">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnImportarJuego.png</normaloff>:/img32/btnImportarJuego.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Importar Juego</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Importar</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Importa los datos de un Juego via web</string>
    </property>
   </action>
-  <action name="actionVerFilesUrl" >
-   <property name="checkable" >
+  <action name="actionVerFilesUrl">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnArchivos.png</normaloff>:/img32/btnArchivos.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ver Archivos y URL</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Archivos_URL</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Ver Archivos y URL</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Muestra los Archivos y URL del Juego</string>
    </property>
   </action>
-  <action name="actionVerDatos" >
-   <property name="checkable" >
+  <action name="actionVerDatos">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="checked" >
+   <property name="checked">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnDatos.png</normaloff>:/img32/btnDatos.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ver Datos</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Datos</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Muestra los datos del Juego</string>
    </property>
-   <property name="whatsThis" >
+   <property name="whatsThis">
     <string/>
    </property>
   </action>
-  <action name="actionVerCapturas" >
-   <property name="checkable" >
+  <action name="actionVerCapturas">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnCapturas.png</normaloff>:/img32/btnCapturas.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Ver Capturas</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Capturas</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Ver Capturas</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Muestra las Capturas del Juego</string>
    </property>
   </action>
-  <action name="actionOpciones" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionOpciones">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnOpciones.png</normaloff>:/img32/btnOpciones.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Opciones</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>Opciones</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Opciones del GR-lida</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Opciones de Configuración del GR-lida</string>
    </property>
   </action>
-  <action name="actionAcercaD" >
-   <property name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <action name="actionAcercaD">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img32/btnAcercaD.png</normaloff>:/img32/btnAcercaD.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Acerca de...</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>AcercaD</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Acerca de...</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Muestra información acerca del GR-lida</string>
    </property>
   </action>
-  <action name="mnu_trayicon_minimize" >
-   <property name="text" >
+  <action name="mnu_trayicon_minimize">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/tray_minimize.png</normaloff>:/img16/tray_minimize.png</iconset>
+   </property>
+   <property name="text">
     <string>Mi&amp;nimizar</string>
    </property>
   </action>
-  <action name="mnu_trayicon_maximize" >
-   <property name="text" >
+  <action name="mnu_trayicon_maximize">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/tray_maximize.png</normaloff>:/img16/tray_maximize.png</iconset>
+   </property>
+   <property name="text">
     <string>Ma&amp;ximizar</string>
    </property>
   </action>
-  <action name="mnu_trayicon_restore" >
-   <property name="text" >
+  <action name="mnu_trayicon_restore">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/tray_restore.png</normaloff>:/img16/tray_restore.png</iconset>
+   </property>
+   <property name="text">
     <string>&amp;Restaurar</string>
+   </property>
+  </action>
+  <action name="mnu_ver_nav">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/categorias.png</normaloff>:/img16/categorias.png</iconset>
+   </property>
+   <property name="text">
+    <string>Nav Categorias</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_confdbx">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta configuraciones DOSBox</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_confvdms">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/vdmsound.png</normaloff>:/img16/vdmsound.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta configuraciones VDMSound</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_covers">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta de Carátulas</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_datos">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/datos_3.png</normaloff>:/img16/datos_3.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta de los Datos</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_iconos">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta de Iconos</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_idiomas">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/idiomas.png</normaloff>:/img16/idiomas.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta de Idiomas</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_smiles">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta de Emoticones</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_themes">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/style.png</normaloff>:/img16/style.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta de Themes</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_thumbs">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta de Thumbs</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_templates">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/datos_3.png</normaloff>:/img16/datos_3.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta de Templates</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_temp">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta Temporal</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_scripts">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/archivo_config.png</normaloff>:/img16/archivo_config.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta de Scripts</string>
+   </property>
+  </action>
+  <action name="mnu_ver_carpeta_home">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
+   </property>
+   <property name="text">
+    <string>Carpeta Principal</string>
+   </property>
+  </action>
+  <action name="mnu_ver_rating">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/images/star_on.png</normaloff>:/images/star_on.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ver Rating</string>
    </property>
   </action>
  </widget>
@@ -1633,8 +1552,22 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>twJuegos</tabstop>
+  <tabstop>twListNav</tabstop>
+  <tabstop>twCapturas</tabstop>
+  <tabstop>txtInfo_Comentario</tabstop>
+  <tabstop>btnVer_Archivos</tabstop>
+  <tabstop>btnVer_CoverFront</tabstop>
+  <tabstop>btnVer_CoverBack</tabstop>
+  <tabstop>tabFileUrl</tabstop>
+  <tabstop>twCapturaVideo</tabstop>
+  <tabstop>twCapturaSonido</tabstop>
+  <tabstop>twUrls</tabstop>
+  <tabstop>twFiles</tabstop>
+ </tabstops>
  <resources>
-  <include location="../res/grlida.qrc" />
+  <include location="../res/grlida.qrc"/>
  </resources>
  <connections/>
 </ui>

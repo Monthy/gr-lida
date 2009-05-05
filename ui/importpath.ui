@@ -51,7 +51,7 @@
        <number>6</number>
       </property>
       <item>
-       <layout class="QHBoxLayout" >
+       <layout class="QHBoxLayout" name="hLayout_19" >
         <property name="spacing" >
          <number>6</number>
         </property>
@@ -73,6 +73,9 @@
         </item>
         <item>
          <widget class="QLineEdit" name="txtDatosPath_Thumbs" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
           <property name="minimumSize" >
            <size>
             <width>0</width>
@@ -83,6 +86,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="btnDirPath_Datos_Thumbs" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
           <property name="minimumSize" >
            <size>
             <width>30</width>
@@ -107,7 +113,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" >
+       <layout class="QHBoxLayout" name="hLayout_18" >
         <property name="spacing" >
          <number>6</number>
         </property>
@@ -129,6 +135,9 @@
         </item>
         <item>
          <widget class="QLineEdit" name="txtDatosPath_CoverFront" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
           <property name="minimumSize" >
            <size>
             <width>0</width>
@@ -139,6 +148,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="btnDirPath_Datos_CoverFront" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
           <property name="minimumSize" >
            <size>
             <width>30</width>
@@ -163,7 +175,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" >
+       <layout class="QHBoxLayout" name="hLayout_17" >
         <property name="spacing" >
          <number>6</number>
         </property>
@@ -185,6 +197,9 @@
         </item>
         <item>
          <widget class="QLineEdit" name="txtDatosPath_CoverBack" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
           <property name="minimumSize" >
            <size>
             <width>0</width>
@@ -195,6 +210,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="btnDirPath_Datos_CoverBack" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
           <property name="minimumSize" >
            <size>
             <width>30</width>
@@ -223,6 +241,9 @@
    </item>
    <item>
     <widget class="QGroupBox" name="gBox_path_emu" >
+     <property name="enabled" >
+      <bool>false</bool>
+     </property>
      <layout class="QVBoxLayout" >
       <property name="spacing" >
        <number>4</number>
@@ -251,14 +272,6 @@
          <number>0</number>
         </property>
         <widget class="QWidget" name="page_1" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>376</width>
-           <height>276</height>
-          </rect>
-         </property>
          <layout class="QVBoxLayout" >
           <property name="spacing" >
            <number>4</number>
@@ -267,7 +280,7 @@
            <number>0</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_7" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -323,7 +336,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_8" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -379,7 +392,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_9" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -435,7 +448,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_2" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -491,7 +504,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_6" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -547,7 +560,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_3" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -603,7 +616,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_5" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -659,7 +672,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_4" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -715,7 +728,7 @@
            </layout>
           </item>
           <item>
-           <spacer>
+           <spacer name="vSpacer_1" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
@@ -730,14 +743,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_2" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>376</width>
-           <height>274</height>
-          </rect>
-         </property>
          <layout class="QVBoxLayout" >
           <property name="spacing" >
            <number>4</number>
@@ -746,7 +751,7 @@
            <number>0</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_14" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -858,7 +863,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_12" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -914,7 +919,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_13" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -970,7 +975,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_11" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -1026,7 +1031,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_10" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -1082,7 +1087,7 @@
            </layout>
           </item>
           <item>
-           <spacer>
+           <spacer name="vSpacer_2" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
@@ -1097,14 +1102,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_3" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>376</width>
-           <height>274</height>
-          </rect>
-         </property>
          <layout class="QVBoxLayout" >
           <property name="spacing" >
            <number>4</number>
@@ -1113,7 +1110,7 @@
            <number>0</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_15" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -1169,7 +1166,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="hLayout_16" >
             <property name="spacing" >
              <number>6</number>
             </property>
@@ -1225,7 +1222,7 @@
            </layout>
           </item>
           <item>
-           <spacer>
+           <spacer name="vSpacer_3" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
@@ -1245,7 +1242,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout" name="hLayout_1" >
      <property name="spacing" >
       <number>6</number>
      </property>
@@ -1253,7 +1250,7 @@
       <number>4</number>
      </property>
      <item>
-      <spacer>
+      <spacer name="hSpacer_1" >
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -1300,7 +1297,7 @@
       </widget>
      </item>
      <item>
-      <spacer>
+      <spacer name="hSpacer_2" >
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -1317,6 +1314,44 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>txtDatosPath_Thumbs</tabstop>
+  <tabstop>btnDirPath_Datos_Thumbs</tabstop>
+  <tabstop>txtDatosPath_CoverFront</tabstop>
+  <tabstop>btnDirPath_Datos_CoverFront</tabstop>
+  <tabstop>txtDatosPath_CoverBack</tabstop>
+  <tabstop>btnDirPath_Datos_CoverBack</tabstop>
+  <tabstop>txtPath_Dbx_1</tabstop>
+  <tabstop>btnDirPath_Dbx_1</tabstop>
+  <tabstop>txtPath_Dbx_2</tabstop>
+  <tabstop>btnDirPath_Dbx_2</tabstop>
+  <tabstop>txtPath_Dbx_3</tabstop>
+  <tabstop>btnDirPath_Dbx_3</tabstop>
+  <tabstop>txtPath_Dbx_4</tabstop>
+  <tabstop>btnDirPath_Dbx_4</tabstop>
+  <tabstop>txtPath_Dbx_5</tabstop>
+  <tabstop>btnDirPath_Dbx_5</tabstop>
+  <tabstop>txtPath_Dbx_6</tabstop>
+  <tabstop>btnDirPath_Dbx_6</tabstop>
+  <tabstop>txtPath_Dbx_7</tabstop>
+  <tabstop>btnDirPath_Dbx_7</tabstop>
+  <tabstop>txtPath_Dbx_8</tabstop>
+  <tabstop>btnDirPath_Dbx_8</tabstop>
+  <tabstop>txtPath_Svm_1</tabstop>
+  <tabstop>btnDirPath_Svm_1</tabstop>
+  <tabstop>txtPath_Svm_2</tabstop>
+  <tabstop>btnDirPath_Svm_2</tabstop>
+  <tabstop>txtPath_Svm_3</tabstop>
+  <tabstop>btnDirPath_Svm_3</tabstop>
+  <tabstop>txtPath_Svm_4</tabstop>
+  <tabstop>btnDirPath_Svm_4</tabstop>
+  <tabstop>txtPath_Svm_5</tabstop>
+  <tabstop>btnDirPath_Svm_5</tabstop>
+  <tabstop>txtPath_Svm_6</tabstop>
+  <tabstop>btnDirPath_Svm_6</tabstop>
+  <tabstop>txtPath_Vdms_1</tabstop>
+  <tabstop>btnDirPath_Vdms_1</tabstop>
+  <tabstop>txtPath_Vdms_2</tabstop>
+  <tabstop>btnDirPath_Vdms_2</tabstop>
   <tabstop>btnOk</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>

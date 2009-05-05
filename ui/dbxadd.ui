@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>520</width>
-    <height>491</height>
+    <height>490</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -533,23 +533,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1" >
-          <widget class="QPushButton" name="btnDescargarInfo" >
-           <property name="minimumSize" >
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text" >
-            <string>Descargar la Info del Juego</string>
-           </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
-             <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
@@ -692,6 +675,40 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6" >
+         <item>
+          <widget class="QPushButton" name="btnDescargarInfo" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Descargar la Info del Juego</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../res/grlida.qrc" >
+             <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -1466,7 +1483,7 @@
           </column>
           <column>
            <property name="text" >
-            <string>Opciones CD/DVD</string>
+            <string>Opciones</string>
            </property>
           </column>
           <column>
@@ -1684,7 +1701,7 @@ Pulsa Aceptar para cerrar el Asistente
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout" name="hLayout_1" >
      <property name="spacing" >
       <number>6</number>
      </property>
@@ -1709,7 +1726,7 @@ Pulsa Aceptar para cerrar el Asistente
       </widget>
      </item>
      <item>
-      <spacer>
+      <spacer name="hSpacer_1" >
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -1783,17 +1800,20 @@ Pulsa Aceptar para cerrar el Asistente
   </layout>
  </widget>
  <tabstops>
+  <tabstop>cbxDbx_Profiles</tabstop>
   <tabstop>txtDatos_Titulo</tabstop>
   <tabstop>txtDbx_path_conf</tabstop>
   <tabstop>btnDbx_FileConfg</tabstop>
   <tabstop>chkDbx_loadfix</tabstop>
   <tabstop>chkDbx_consola_dbox</tabstop>
+  <tabstop>chkDbx_cerrar_dbox</tabstop>
   <tabstop>txtDbx_path_exe</tabstop>
   <tabstop>btnDbx_ExeJuego</tabstop>
   <tabstop>txtDbx_parametros_exe</tabstop>
   <tabstop>txtDbx_path_setup</tabstop>
   <tabstop>btnDbx_ExeSetup</tabstop>
   <tabstop>txtDbx_parametros_setup</tabstop>
+  <tabstop>btnDescargarInfo</tabstop>
   <tabstop>chkDbx_sdl_fullscreen</tabstop>
   <tabstop>chkDbx_sdl_fullfixed</tabstop>
   <tabstop>chkDbx_sdl_autolock</tabstop>
@@ -1804,6 +1824,7 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>cbxDbx_render_scaler</tabstop>
   <tabstop>cbxDbx_dosbox_memsize</tabstop>
   <tabstop>cbxDbx_cpu_cycles</tabstop>
+  <tabstop>cbxDbx_cpu_core</tabstop>
   <tabstop>chkDbx_dos_xms</tabstop>
   <tabstop>chkDbx_dos_ems</tabstop>
   <tabstop>cbxDbx_dos_umb</tabstop>
@@ -1822,22 +1843,23 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>cbxDbx_speaker_pcrate</tabstop>
   <tabstop>cbxDbx_speaker_tandyrate</tabstop>
   <tabstop>cbxDbx_midi_mpu401</tabstop>
+  <tabstop>twMontajes</tabstop>
+  <tabstop>btnMount_Subir</tabstop>
+  <tabstop>btnMount_Bajar</tabstop>
   <tabstop>btnMount_Add</tabstop>
   <tabstop>btnMount_Edit</tabstop>
   <tabstop>btnMount_Delete</tabstop>
   <tabstop>btnMount_Clear</tabstop>
   <tabstop>btnMount_AutoCrear</tabstop>
   <tabstop>btnMount_Primario</tabstop>
-  <tabstop>btnMount_Subir</tabstop>
-  <tabstop>btnMount_Bajar</tabstop>
-  <tabstop>twMontajes</tabstop>
   <tabstop>previer_mount</tabstop>
   <tabstop>btnNext</tabstop>
-  <tabstop>btnPrevious</tabstop>
   <tabstop>btnOk</tabstop>
+  <tabstop>btnPrevious</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/grlida.qrc" />
   <include location="../res/grlida.qrc" />
  </resources>
  <connections>

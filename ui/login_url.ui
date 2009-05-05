@@ -100,7 +100,7 @@
     </widget>
    </item>
    <item row="4" column="0" >
-    <spacer>
+    <spacer name="vSpacer_1" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
      </property>
@@ -114,6 +114,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>userEdit</tabstop>
+  <tabstop>passwordEdit</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

@@ -40,7 +40,7 @@
     <widget class="QTextEdit" name="txt_addedit_url_2" />
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout" name="hLayout_1" >
      <property name="spacing" >
       <number>6</number>
      </property>
@@ -48,7 +48,7 @@
       <number>0</number>
      </property>
      <item>
-      <spacer>
+      <spacer name="hSpacer_1" >
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -98,6 +98,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>txt_addedit_url_1</tabstop>
+  <tabstop>txt_addedit_url_2</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
  <resources>
   <include location="../res/grlida.qrc" />
  </resources>

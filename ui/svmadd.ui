@@ -380,7 +380,7 @@
   <property name="autoFillBackground" >
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout_4" >
    <property name="spacing" >
     <number>0</number>
    </property>
@@ -388,29 +388,55 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="imgLogoSvm" >
-     <property name="minimumSize" >
-      <size>
-       <width>450</width>
-       <height>60</height>
-      </size>
+    <layout class="QHBoxLayout" name="horizontalLayout_Logo" >
+     <property name="spacing" >
+      <number>0</number>
      </property>
-     <property name="maximumSize" >
-      <size>
-       <width>16777215</width>
-       <height>60</height>
-      </size>
-     </property>
-     <property name="text" >
-      <string/>
-     </property>
-     <property name="pixmap" >
-      <pixmap resource="../res/grlida.qrc" >:/images/wizard_scummvm.png</pixmap>
-     </property>
-     <property name="scaledContents" >
-      <bool>true</bool>
-     </property>
-    </widget>
+     <item>
+      <widget class="QLabel" name="imgLogoSvm" >
+       <property name="minimumSize" >
+        <size>
+         <width>160</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>160</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="pixmap" >
+        <pixmap resource="../res/grlida.qrc" >:/images/wizard_scummvm.png</pixmap>
+       </property>
+       <property name="scaledContents" >
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="imgLogoSvm_bg" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>16777215</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="pixmap" >
+        <pixmap resource="../res/grlida.qrc" >:/images/wizard_scummvm_bg.png</pixmap>
+       </property>
+       <property name="scaledContents" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QStackedWidget" name="wizardSvm" >
@@ -424,7 +450,7 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="page_1" >
-      <layout class="QGridLayout" >
+      <layout class="QGridLayout" name="verticalLayout_0" >
        <property name="margin" >
         <number>4</number>
        </property>
@@ -489,7 +515,7 @@
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout" >
+        <layout class="QGridLayout" name="gridLayout_0" >
          <item row="0" column="0" >
           <widget class="QLabel" name="lb_Svm_1" >
            <property name="text" >
@@ -497,7 +523,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1" colspan="2" >
+         <item row="0" column="1" colspan="5" >
           <widget class="QLineEdit" name="txtDatos_Titulo" >
            <property name="minimumSize" >
             <size>
@@ -524,6 +550,29 @@
            </property>
           </widget>
          </item>
+         <item row="1" column="2" >
+          <widget class="QLabel" name="label" >
+           <property name="text" >
+            <string>GameID:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3" colspan="3" >
+          <widget class="QLineEdit" name="txtSvm_game" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="readOnly" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="0" >
           <widget class="QLabel" name="lb_Svm_3" >
            <property name="text" >
@@ -531,7 +580,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
+         <item row="2" column="1" colspan="3" >
           <widget class="QLineEdit" name="txtSvm_path" >
            <property name="minimumSize" >
             <size>
@@ -541,7 +590,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="2" >
+         <item row="2" column="4" >
           <widget class="QPushButton" name="btnDirSvm_1" >
            <property name="minimumSize" >
             <size>
@@ -564,6 +613,29 @@
            </property>
           </widget>
          </item>
+         <item row="2" column="5" >
+          <widget class="QPushButton" name="btnDirSvm_1_clear" >
+           <property name="minimumSize" >
+            <size>
+             <width>30</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>30</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="icon" >
+            <iconset resource="../res/grlida.qrc" >
+             <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+           </property>
+          </widget>
+         </item>
          <item row="3" column="0" >
           <widget class="QLabel" name="lb_Svm_4" >
            <property name="text" >
@@ -571,7 +643,7 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1" >
+         <item row="3" column="1" colspan="3" >
           <widget class="QLineEdit" name="txtSvm_savepath" >
            <property name="minimumSize" >
             <size>
@@ -581,7 +653,7 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="2" >
+         <item row="3" column="4" >
           <widget class="QPushButton" name="btnDirSvm_2" >
            <property name="minimumSize" >
             <size>
@@ -604,6 +676,29 @@
            </property>
           </widget>
          </item>
+         <item row="3" column="5" >
+          <widget class="QPushButton" name="btnDirSvm_2_clear" >
+           <property name="minimumSize" >
+            <size>
+             <width>30</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>30</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="icon" >
+            <iconset resource="../res/grlida.qrc" >
+             <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+           </property>
+          </widget>
+         </item>
          <item row="4" column="0" >
           <widget class="QLabel" name="lb_Svm_5" >
            <property name="text" >
@@ -621,7 +716,7 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="1" >
+         <item row="5" column="1" colspan="5" >
           <widget class="QCheckBox" name="chkSvm_subtitles" >
            <property name="text" >
             <string>Mostras Subtitulo</string>
@@ -1220,7 +1315,7 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_5" >
-      <layout class="QGridLayout" >
+      <layout class="QGridLayout" name="verticalLayout_1" >
        <property name="margin" >
         <number>4</number>
        </property>
@@ -1262,7 +1357,7 @@ Pulsa Aceptar para cerrar el Asistente
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout" name="hLayout_botones" >
      <property name="spacing" >
       <number>6</number>
      </property>
@@ -1287,7 +1382,7 @@ Pulsa Aceptar para cerrar el Asistente
       </widget>
      </item>
      <item>
-      <spacer>
+      <spacer name="hSpacer" >
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -1365,14 +1460,17 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>txtDatos_Titulo</tabstop>
   <tabstop>txtSvm_game_label</tabstop>
   <tabstop>txtSvm_path</tabstop>
-  <tabstop>btnDirSvm_1</tabstop>
+  <tabstop>btnDirSvm_1_clear</tabstop>
   <tabstop>txtSvm_savepath</tabstop>
-  <tabstop>btnDirSvm_2</tabstop>
+  <tabstop>btnDirSvm_2_clear</tabstop>
   <tabstop>cbxSvm_language</tabstop>
   <tabstop>chkSvm_subtitles</tabstop>
   <tabstop>cbxSvm_platform</tabstop>
+  <tabstop>btnDescargarInfo</tabstop>
   <tabstop>cbxSvm_gfx_mode</tabstop>
   <tabstop>cbxSvm_render_mode</tabstop>
+  <tabstop>chkSvm_fullscreen</tabstop>
+  <tabstop>chkSvm_aspect_ratio</tabstop>
   <tabstop>cbxSvm_cdrom</tabstop>
   <tabstop>cbxSvm_joystick_num</tabstop>
   <tabstop>cbxSvm_music_driver</tabstop>
@@ -1387,11 +1485,13 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>chkSvm_native_mt32</tabstop>
   <tabstop>chkSvm_enable_gs</tabstop>
   <tabstop>btnNext</tabstop>
-  <tabstop>btnPrevious</tabstop>
   <tabstop>btnOk</tabstop>
+  <tabstop>btnPrevious</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/grlida.qrc" />
+  <include location="../res/grlida.qrc" />
   <include location="../res/grlida.qrc" />
  </resources>
  <connections>
@@ -1402,8 +1502,8 @@ Pulsa Aceptar para cerrar el Asistente
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>69</x>
-     <y>218</y>
+     <x>73</x>
+     <y>435</y>
     </hint>
     <hint type="destinationlabel" >
      <x>214</x>
@@ -1418,12 +1518,12 @@ Pulsa Aceptar para cerrar el Asistente
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>234</x>
-     <y>143</y>
+     <x>47</x>
+     <y>71</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>369</x>
-     <y>140</y>
+     <x>93</x>
+     <y>71</y>
     </hint>
    </hints>
   </connection>
@@ -1434,12 +1534,12 @@ Pulsa Aceptar para cerrar el Asistente
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>234</x>
-     <y>173</y>
+     <x>47</x>
+     <y>73</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>369</x>
-     <y>170</y>
+     <x>93</x>
+     <y>73</y>
     </hint>
    </hints>
   </connection>
@@ -1450,12 +1550,12 @@ Pulsa Aceptar para cerrar el Asistente
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>234</x>
-     <y>203</y>
+     <x>47</x>
+     <y>74</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>369</x>
-     <y>200</y>
+     <x>93</x>
+     <y>74</y>
     </hint>
    </hints>
   </connection>
@@ -1466,12 +1566,12 @@ Pulsa Aceptar para cerrar el Asistente
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>234</x>
-     <y>233</y>
+     <x>47</x>
+     <y>75</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>369</x>
-     <y>230</y>
+     <x>93</x>
+     <y>75</y>
     </hint>
    </hints>
   </connection>
@@ -1482,12 +1582,12 @@ Pulsa Aceptar para cerrar el Asistente
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>234</x>
-     <y>263</y>
+     <x>47</x>
+     <y>76</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>369</x>
-     <y>260</y>
+     <x>93</x>
+     <y>76</y>
     </hint>
    </hints>
   </connection>
@@ -1498,12 +1598,44 @@ Pulsa Aceptar para cerrar el Asistente
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>234</x>
-     <y>293</y>
+     <x>47</x>
+     <y>78</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>369</x>
-     <y>290</y>
+     <x>93</x>
+     <y>78</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDirSvm_1_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>txtSvm_path</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>490</x>
+     <y>144</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>377</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDirSvm_2_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>txtSvm_savepath</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>479</x>
+     <y>169</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>406</x>
+     <y>175</y>
     </hint>
    </hints>
   </connection>

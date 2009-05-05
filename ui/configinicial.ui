@@ -129,7 +129,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QVBoxLayout" >
+    <layout class="QVBoxLayout" name="vLayout_1" >
      <property name="spacing" >
       <number>0</number>
      </property>
@@ -160,7 +160,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" >
+      <layout class="QHBoxLayout" name="hLayout_2" >
        <property name="spacing" >
         <number>6</number>
        </property>
@@ -199,14 +199,14 @@ p, li { white-space: pre-wrap; }
       </layout>
      </item>
      <item>
-      <widget class="QCheckBox" name="chkConfig_DOSBoxDisp" >
+      <widget class="QCheckBox" name="chkDOSBoxDisp" >
        <property name="text" >
         <string>Tengo instalado el emulador DOSBox</string>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" >
+      <layout class="QHBoxLayout" name="hLayout_3" >
        <property name="spacing" >
         <number>6</number>
        </property>
@@ -268,14 +268,14 @@ p, li { white-space: pre-wrap; }
       </layout>
      </item>
      <item>
-      <widget class="QCheckBox" name="chkConfig_ScummVMDisp" >
+      <widget class="QCheckBox" name="chkScummVMDisp" >
        <property name="text" >
         <string>Tengo instalado el emulador ScummVM</string>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" >
+      <layout class="QHBoxLayout" name="hLayout_1" >
        <property name="spacing" >
         <number>6</number>
        </property>
@@ -337,7 +337,7 @@ p, li { white-space: pre-wrap; }
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" >
+      <layout class="QHBoxLayout" name="hLayout_4" >
        <property name="spacing" >
         <number>6</number>
        </property>
@@ -345,7 +345,7 @@ p, li { white-space: pre-wrap; }
         <number>4</number>
        </property>
        <item>
-        <layout class="QVBoxLayout" >
+        <layout class="QVBoxLayout" name="vLayout_2" >
          <property name="spacing" >
           <number>6</number>
          </property>
@@ -353,14 +353,14 @@ p, li { white-space: pre-wrap; }
           <number>4</number>
          </property>
          <item>
-          <widget class="QCheckBox" name="chkConfig_VDMSoundDisp" >
+          <widget class="QCheckBox" name="chkVDMSoundDisp" >
            <property name="text" >
             <string>Tengo instalado el emulador VDMSound</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="chkConfig_ShowNext" >
+          <widget class="QCheckBox" name="chkShowNext" >
            <property name="text" >
             <string>Mostrar la próxima vez que inicie</string>
            </property>
@@ -372,7 +372,7 @@ p, li { white-space: pre-wrap; }
         </layout>
        </item>
        <item>
-        <spacer>
+        <spacer name="hSpacer_1" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
          </property>
@@ -409,22 +409,24 @@ p, li { white-space: pre-wrap; }
  </widget>
  <tabstops>
   <tabstop>cbxIdioma</tabstop>
-  <tabstop>chkConfig_DOSBoxDisp</tabstop>
+  <tabstop>chkDOSBoxDisp</tabstop>
   <tabstop>txtDirDbx</tabstop>
   <tabstop>btnDirDbx</tabstop>
-  <tabstop>chkConfig_ScummVMDisp</tabstop>
+  <tabstop>chkScummVMDisp</tabstop>
   <tabstop>txtDirSvm</tabstop>
   <tabstop>btnDirSvm</tabstop>
-  <tabstop>chkConfig_VDMSoundDisp</tabstop>
-  <tabstop>chkConfig_ShowNext</tabstop>
+  <tabstop>chkVDMSoundDisp</tabstop>
+  <tabstop>chkShowNext</tabstop>
   <tabstop>btnOk</tabstop>
  </tabstops>
  <resources>
   <include location="../res/grlida.qrc" />
+  <include location="../res/grlida.qrc" />
+  <include location="../res/grlida.qrc" />
  </resources>
  <connections>
   <connection>
-   <sender>chkConfig_DOSBoxDisp</sender>
+   <sender>chkDOSBoxDisp</sender>
    <signal>toggled(bool)</signal>
    <receiver>btnDirDbx</receiver>
    <slot>setEnabled(bool)</slot>
@@ -440,7 +442,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>chkConfig_DOSBoxDisp</sender>
+   <sender>chkDOSBoxDisp</sender>
    <signal>toggled(bool)</signal>
    <receiver>txtDirDbx</receiver>
    <slot>setEnabled(bool)</slot>
@@ -456,7 +458,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>chkConfig_ScummVMDisp</sender>
+   <sender>chkScummVMDisp</sender>
    <signal>toggled(bool)</signal>
    <receiver>btnDirSvm</receiver>
    <slot>setEnabled(bool)</slot>
@@ -472,7 +474,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>chkConfig_ScummVMDisp</sender>
+   <sender>chkScummVMDisp</sender>
    <signal>toggled(bool)</signal>
    <receiver>txtDirSvm</receiver>
    <slot>setEnabled(bool)</slot>
