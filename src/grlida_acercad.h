@@ -31,18 +31,23 @@
 #include "funciones.h"
 #include "ui_acercad.h"
 
-class frmAcercaD : public QDialog {
+class frmAcercaD : public QDialog
+{
     Q_OBJECT
+
 public:
-	frmAcercaD( QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmAcercaD(QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmAcercaD();
 
 	Ui::AcercaDClass ui;
 
 private:
 	Funciones fGrl;
+
 	QString stTheme;
+
 	void setTheme();
+
 };
 
 #endif // GRLIDA_ACERCAD_H
