@@ -27,32 +27,35 @@
 
 #include <QtCore>
 #include <QtGui>
-#include <QTranslator>
-#include <QLocale>
+#include <QHash>
+#include <QVariant>
 
 #include "funciones.h"
 #include "ui_opciones.h"
 
-class frmOpciones : public QDialog {
+class frmOpciones : public QDialog
+{
     Q_OBJECT
+
 public:
-	frmOpciones( QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmOpciones(QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmOpciones();
 
 	Ui::OpcionesClass ui;
 
-	QHash<QString, QString> DatosConfiguracion;
+	QHash<QString, QVariant> DatosConfiguracion;
 
 protected:
 	void closeEvent( QCloseEvent *e );
 
 private:
 	Funciones fGrl;
+	QHash<QString, QVariant> GRLConfig;
+
 	QString stHomeDir, url_xmldb;
 	QString stIdiomaSelect, stTheme, stIconoFav, stPicFlowReflection, stNameDirTheme, stStyleSelect;
 	QString stdb_type;
 	QPalette originalPalette;
-	QHash<QString, QString> UltimoPath;
 
 	void createConnections();
 	void CargarConfig();
@@ -67,12 +70,13 @@ private slots:
 	void on_btnDirSvm();
 	void on_btnDirDB();
 	void on_btnDirBaseGames();
-	void on_setLanguage(const QString txt_locale);
+	void on_setLanguage(int idx_locale);
 	void on_changeStyle(const QString &styleName);
-	void on_changeTypeDB(const QString &typedb);
+	void on_changeTypeDB(int idx_typedb);
 	void on_twThemes_clicked( QTreeWidgetItem *item );
 	void on_twThemes_currentItemChanged( QTreeWidgetItem *item1, QTreeWidgetItem *item2);
-
+	void on_InfoFormatoFecha();
+	void on_btnOpenUrl();
 };
 
 #endif // GRLIDA_OPCIONES_H
