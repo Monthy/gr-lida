@@ -1,4 +1,5 @@
 auto|sinimg
+max|sinimg
 20000|sinimg
 19000|sinimg
 18000|sinimg

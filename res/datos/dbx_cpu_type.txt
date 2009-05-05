@@ -1,0 +1,6 @@
+Auto|auto|sinimg
+386|386|sinimg
+386 Slow|386_slow|sinimg
+486 Slow|486_slow|sinimg
+Pentium Slow|pentium_slow|sinimg
+386 Prefetch|386_prefetch|sinimg

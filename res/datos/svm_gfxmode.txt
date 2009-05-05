@@ -1,4 +1,3 @@
-<default>||sinimg
 Normal (no scaling)|1x|img_1x
 2x (Default)|2x|img_2x
 3x|3x|img_3x

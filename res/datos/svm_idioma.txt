@@ -17,4 +17,3 @@ Sueco|se
 Holandés|nl
 Noruego Bokmal|nb
 Polaco|pl
-<default>|

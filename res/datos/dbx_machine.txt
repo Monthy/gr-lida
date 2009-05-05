@@ -1,4 +1,12 @@
-vga|sinimg
-tandy|sinimg
+vgaonly|sinimg
 cga|sinimg
+ega|sinimg
 hercules|sinimg
+pcjr|sinimg
+svga_et3000|sinimg
+svga_et4000|sinimg
+svga_paradise|sinimg
+svga_s3|sinimg
+tandy|sinimg
+vesa_nolfb|sinimg
+vesa_oldvbe|sinimg

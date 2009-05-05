@@ -23,7 +23,7 @@ Simon the Sorcerer's Puzzle Pack - Jumble|jumble|70
 Simon the Sorcerer's Puzzle Pack - NoPatience|puzzle|70
 Simon the Sorcerer's Puzzle Pack - Swampy Adventures|swampy|70
 The Feeble Files|feeble|95
-Waxworks|waxworks|10
+Waxworks|waxworks|20
 
 Coktel Vision Game Compatibility Chart||logo_coktel_vision
 Bargon Attack|bargon|95
@@ -57,16 +57,18 @@ Other Game Compatibility Chart||svmlist_space
 Beneath a Steel Sky|sky|98
 Broken Sword 1: The Shadow of the Templars|sword1|98
 Broken Sword 2: The Smoking Mirror|sword2|98
+Bud Tucker in Double Trouble|tucker|95
 Drascula: The Vampire Strikes Back|drascula|98
 Flight of the Amazon Queen|queen|98
 Future Wars|fw|80
 I Have No Mouth, and I Must Scream|ihnm|90
 Inherit the Earth: Quest for the Orb|ite|95
 Nippon Safes Inc.|nippon|90
-The Legend of Kyrandia|kyra1|85
-The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|80
+The Legend of Kyrandia|kyra1|87
+The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|85
 The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|80
 Lure of the Temptress|lure|95
+The 7th Guest|t7g|90
 Touche: The Adventures of the Fifth Musketeer|touche|75
 
 Humongous Entertainment Game Compatibility Chart||svmlist_space
@@ -76,9 +78,10 @@ Backyard Soccer|soccer|20
 Bear Stormin'|brstorm|95
 Big Thinkers First Grade|thinker1|90
 Big Thinkers Kindergarten|thinkerk|90
-Blue's 123 Time Activities|Blues123Time|50
-Blue's ABC Time Activities|BluesABCTime|50
+Blue's 123 Time Activities|Blues123Time|90
+Blue's ABC Time Activities|BluesABCTime|90
 Blue's Birthday Adventure|BluesBirthday|50
+Blue's Treasure Hunt|BluesTreasureHunt|50
 Fatty Bear's Birthday Surprise|fbear|93
 Fatty Bear's Fun Pack|fbpack|95
 Freddi Fish 1: The Case of the Missing Kelp Seeds|freddi|90
