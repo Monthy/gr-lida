@@ -22,4 +22,4 @@ Solución - Puzzle|datos_3
 Survival Horror|datos_3
 Tiempo Real|datos_3
 Video Aventura|datos_3
-|
+|sinimg

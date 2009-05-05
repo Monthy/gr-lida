@@ -35,4 +35,4 @@ Simulación|datos_3
 Simulador|datos_3
 Simulador de Trenes|datos_3
 Simulador de Vuelo|datos_3
-|
+|sinimg

@@ -15,4 +15,4 @@
 6 Disquete|floppy_2
 7 Disquete|floppy_2
 8 Disquete|floppy_2
-|
+|sinimg

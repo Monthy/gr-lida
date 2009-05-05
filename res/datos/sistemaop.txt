@@ -8,4 +8,4 @@ Windows Me|win9x
 Windows XP|winxp
 Linux|linux
 Mac OS|macintosh
-|
+|sinimg
