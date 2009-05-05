@@ -27,13 +27,16 @@
 
 #include <QtCore>
 #include <QtGui>
+
 #include "funciones.h"
 #include "ui_vdmsound.h"
 
-class frmVdmsAdd : public QDialog {
+class frmVdmsAdd : public QDialog
+{
     Q_OBJECT
+
 public:
-	frmVdmsAdd( QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmVdmsAdd(QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmVdmsAdd();
 
 	Ui::VdmsAddClass ui;
@@ -42,15 +45,19 @@ public:
 	QHash<QString, QString> DatosVDMSound;
 
 private:
-	Funciones fGrl;
 	QString stTituloVdms(){ return tr("Nuevo juego para el VDMSound"); }
+
+	Funciones fGrl;
+
 	QString stHomeDir, stConfgVdmSDir, stTheme;
-	QHash<QString, QString> TempDatosJuego;
-	QHash<QString, QString> UltimoPath;
+
+	QHash<QString, QVariant> GRLConfig;
+	QHash<QString, QString> tempDatosJuego;
+
 
 	void createConnections();
 	void setTheme();
-	void CargaUltimosDirectorios();
+	void CargarConfig();
 
 private slots:
 	void on_btnOk();
