@@ -28,13 +28,14 @@
 #include <QtCore>
 #include <QtGui>
 
-#include "funciones.h"
 #include "dbsql.h"
+#include "funciones.h"
 #include "ui_informacion.h"
 
 class frmInfo : public QDialog
 {
     Q_OBJECT
+
 public:
 	frmInfo(QWidget *parent = 0);
 	~frmInfo();
@@ -44,9 +45,9 @@ public:
 private:
 	Funciones fGrl;
 	dbSql *sql;
-	QTreeWidgetItem *ItemInfo;
-	QString stHomeDir, stdb_host, stTheme;
 
+	QString stHomeDir, stTheme;
+	QTreeWidgetItem *ItemInfo;
 };
 
 #endif // GRLIDA_INFO_H

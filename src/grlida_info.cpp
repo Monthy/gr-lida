@@ -33,16 +33,18 @@ frmInfo::frmInfo(QWidget *parent)
 	stTheme   = fGrl.ThemeGrl();
 
 	setStyleSheet( fGrl.StyleSheet() );
+	setWindowIcon( QIcon(stTheme+"img16/informacion.png") );
 
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 
-	QSettings settings(stHomeDir + "GR-lida.conf", QSettings::IniFormat);
-	settings.beginGroup("SqlDatabase");
-	  stdb_host	   = settings.value("db_host"	 , stHomeDir + "db_grl.grl" ).toString();
-	settings.endGroup();
+	QHash<QString, QVariant> GRLConfig;
 
-	QFileInfo fidb( stdb_host );
+	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
 
+	QFileInfo fidb( GRLConfig["db_host"].toString() );
+
+	ui.twInfo->headerItem()->setIcon(0, QIcon(stTheme+"img16/tag.png"));
+	ui.twInfo->headerItem()->setIcon(1, QIcon(stTheme+"img16/bullet_black.png"));
 	ui.twInfo->headerItem()->setText(0,"");
 	ui.twInfo->headerItem()->setText(1,"");
 	ui.twInfo->header()->setStretchLastSection(true);
@@ -51,64 +53,64 @@ frmInfo::frmInfo(QWidget *parent)
 	ui.twInfo->header()->resizeSection(0, 200 );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Versión")+ " GR-lida"	); //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/grlida.png")	); //
-		ItemInfo->setText( 1 , fGrl.stVersionGrl() 			); //
+		ItemInfo->setText(0, tr("Versión")+ " GR-lida"         );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/grlida.png") );
+		ItemInfo->setText(1, fGrl.stVersionGrl()               );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Versión")+ " QT"			); //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/qt.png")		); //
-		ItemInfo->setText( 1 , qVersion() 					); //
+		ItemInfo->setText(0, tr("Versión")+ " QT"          );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/qt.png") );
+		ItemInfo->setText(1, qVersion()                    );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , "DOSBox "+ tr("Soportado")	); //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/dosbox.png")	); //
-		ItemInfo->setText( 1 , fGrl.stVersionDbx()			); //
+		ItemInfo->setText(0, "DOSBox "+ tr("Soportado")        );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/dosbox.png") );
+		ItemInfo->setText(1, fGrl.stVersionDbx()               );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , "ScummVM "+ tr("Soportado")	); //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/scummvm.png") ); //
-		ItemInfo->setText( 1 , fGrl.stVersionSvm()			); //
+		ItemInfo->setText(0, "ScummVM "+ tr("Soportado")        );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/scummvm.png") );
+		ItemInfo->setText(1, fGrl.stVersionSvm()                );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , "VDMSound "+ tr("Soportado")	); //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/vdmsound.png")); //
-		ItemInfo->setText( 1 , fGrl.stVersionVdms() 		); //
+		ItemInfo->setText(0, "VDMSound "+ tr("Soportado")        );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/vdmsound.png") );
+		ItemInfo->setText(1, fGrl.stVersionVdms()                );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , "" ); //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/sinimg.png")	); //
-		ItemInfo->setText( 1 , "" ); //
+		ItemInfo->setText(0, "" ); //
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/sinimg.png") );
+		ItemInfo->setText(1, "" ); //
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Base de Datos")			); //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/basedatos.png")); //
-		ItemInfo->setText( 1 , fidb.fileName() 				); //
+		ItemInfo->setText(0, tr("Base de Datos")                  );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/basedatos.png") );
+		ItemInfo->setText(1, fidb.fileName()                      );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Total de Juegos")		) ; //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/grlida.png")	); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl")) + " " + tr("juego/s") ) ; //
+		ItemInfo->setText(0, tr("Total de Juegos")             );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/grlida.png") );
+		ItemInfo->setText(1, fGrl.IntToStr(sql->getCount("dbgrl")) + " " + tr("juego/s") );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Total de Juegos Datos")) ; //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/datos_1.png") ); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"datos\"")) + " " + tr("juego/s") ) ; //
+		ItemInfo->setText(0, tr("Total de Juegos Datos")        );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/datos_1.png") );
+		ItemInfo->setText(1, fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"datos\"")) + " " + tr("juego/s") );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Total de Juegos") + " DOSBox") ; //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/dosbox.png") ); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"dosbox\"")) + " " + tr("juego/s") ) ; //
+		ItemInfo->setText(0, tr("Total de Juegos") + " DOSBox" );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/dosbox.png") );
+		ItemInfo->setText(1, fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"dosbox\"")) + " " + tr("juego/s") );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Total de Juegos") + " ScummVM") ; //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/scummvm.png") ); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"scummvm\"")) + " " + tr("juego/s") ) ; //
+		ItemInfo->setText(0, tr("Total de Juegos") + " ScummVM" );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/scummvm.png") );
+		ItemInfo->setText(1, fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"scummvm\"")) + " " + tr("juego/s") );
 
 	ItemInfo = new QTreeWidgetItem( ui.twInfo );
-		ItemInfo->setText( 0 , tr("Total de Juegos") + " VDMSound") ; //
-		ItemInfo->setIcon( 0 , QIcon(stTheme+"img16/vdmsound.png") ); //
-		ItemInfo->setText( 1 , fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"vdmsound\"")) + " " + tr("juego/s") ) ; //
+		ItemInfo->setText(0, tr("Total de Juegos") + " VDMSound" );
+		ItemInfo->setIcon(0, QIcon(stTheme+"img16/vdmsound.png") );
+		ItemInfo->setText(1, fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"vdmsound\"")) + " " + tr("juego/s") );
 
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
