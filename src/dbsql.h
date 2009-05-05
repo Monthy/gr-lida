@@ -39,7 +39,7 @@
 class dbSql
 {
 public:
-	dbSql(QString db_type, QString db_host, QString db_name, QString db_username, QString db_password, QString db_port);
+	dbSql(QString db_type, QString db_server, QString db_host, QString db_name, QString db_username, QString db_password, QString db_port);
 	~dbSql();
 
 	bool dbisOpen();// Retorna si esta abierta o no la base de datos.
@@ -88,6 +88,7 @@ private:
 	Funciones fGrl;
 	QSqlDatabase sqldb;
 	bool ok_OpenDB;
+	QString dbType;
 
 	bool Chequear_Query(QSqlQuery q);
 	void eliminararchivo(QString archivo);

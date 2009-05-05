@@ -24,18 +24,19 @@
 
 #include "dbsql.h"
 
-dbSql::dbSql(QString db_type, QString db_host, QString db_name, QString db_username, QString db_password, QString db_port)
+dbSql::dbSql(QString db_type, QString db_server, QString db_host, QString db_name, QString db_username, QString db_password, QString db_port)
 {
+	dbType = db_type;
 	ok_OpenDB = false;
-	if( db_type == "QMYSQL" || db_type == "QPSQL" )
+	if( dbType == "QMYSQL" || dbType == "QPSQL" )
 	{
-		sqldb = QSqlDatabase::addDatabase( db_type );
-		sqldb.setHostName( db_host 	 ); // localhost, archivo
+		sqldb = QSqlDatabase::addDatabase( dbType );
+		sqldb.setHostName( db_server   ); // localhost, archivo
 		sqldb.setDatabaseName( db_name ); // Nombre base de datos
 		sqldb.setUserName( db_username ); // Nombre del Usuario
 		sqldb.setPassword( db_password ); // Password
 		sqldb.setPort( db_port.toInt() );
-	    ok_OpenDB = sqldb.open();
+		ok_OpenDB = sqldb.open();
 	} else {
 		sqldb = QSqlDatabase::addDatabase("QSQLITE");
 		sqldb.setDatabaseName( db_host );
@@ -43,7 +44,8 @@ dbSql::dbSql(QString db_type, QString db_host, QString db_name, QString db_usern
 	}
 /*
 db_type = "QSQLITE"		; // QSQLITE, QMYSQL, QPSQL
-db_host = "localhost"	; // localhost, archivo
+db_host = "database.db"	; // archivo
+db_server = "localhost"	; // localhost
 db_name = "gr_lida"		; // Nombre base de datos
 db_username = "root"	; // Usuario
 db_password = "123456"	; // Password
@@ -65,7 +67,7 @@ dbSql::~dbSql()
 	if( sqldb.isOpen()) sqldb.close();
 }
 
-bool dbSql::Chequear_Query( QSqlQuery q )
+bool dbSql::Chequear_Query(QSqlQuery q)
 {
 	if( q.lastError().type() != QSqlError::NoError )
 	{
@@ -92,16 +94,18 @@ int dbSql::getCount(QString stTable, QString stWhere)
 QString dbSql::ItemIDIndex(QString SQLtabla, QString SQLindex)
 {
 	QSqlQuery query;
+	query.clear();
 	query.exec("SELECT * FROM "+SQLtabla+" WHERE idgrl="+SQLindex+" LIMIT 0,1");
 	query.first();
 	return query.value(0).toString();
 }
 
-void dbSql::ItemEliminar( const QString IDgrl )
+void dbSql::ItemEliminar(const QString IDgrl)
 {
 	QSqlQuery query;
 	QString IDdbx, temp_FileConf;
 
+	query.clear();
 	query.exec("DELETE FROM dbgrl WHERE idgrl="+IDgrl);
 	query.clear();
 	query.exec("DELETE FROM dbgrl_url WHERE idgrl="+IDgrl);
@@ -117,6 +121,7 @@ void dbSql::ItemEliminar( const QString IDgrl )
 		temp_FileConf.clear();
 		temp_FileConf = query.record().value("path_conf").toString();
 		eliminararchivo( "confdbx/" + temp_FileConf );
+	query.clear();
 	query.exec("DELETE FROM dbgrl_emu_dosbox_mount WHERE id_dosbox="+IDdbx);
 	query.clear();
 	query.exec("DELETE FROM dbgrl_emu_dosbox WHERE idgrl="+IDgrl);
@@ -126,6 +131,7 @@ void dbSql::ItemEliminar( const QString IDgrl )
 		temp_FileConf.clear();
 		temp_FileConf = query.record().value("path_conf").toString();
 		eliminararchivo( "confvdms/" + temp_FileConf );
+	query.clear();
 	query.exec("DELETE FROM dbgrl_emu_vdmsound WHERE idgrl="+IDgrl);
 	query.clear();
 }
@@ -143,15 +149,27 @@ void dbSql::eliminararchivo(QString archivo)
 void dbSql::CrearTablas()
 {
 	QSqlQuery query;
-    QStringList tables = sqldb.tables();
+	QStringList tables = sqldb.tables();
+	QString sql_query, tipo_id_sql;
+
+	tipo_id_sql.clear();
+	if( dbType == "QMYSQL" )
+		tipo_id_sql = "INT(11) UNSIGNED NOT NULL AUTO_INCREMENT";
+	else if( dbType == "QPSQL" )
+		tipo_id_sql = "SERIAL";
+	else if( dbType == "QSQLITE" )
+		tipo_id_sql = "INTEGER NOT NULL";
+	else
+		tipo_id_sql = "INTEGER NOT NULL";
 
 // Añade las distintas tablas si no están disponibles
 // Tabla principal - dbgrl
-	if( !tables.contains("dbgrl", Qt::CaseInsensitive) )
+	if( !tables.contains("dbgrl") )
 	{
+		query.clear();
 		query.exec(
 		"CREATE TABLE `dbgrl` ("
-		"	`idgrl`					integer NOT NULL primary key,"
+		"	`idgrl`					" + tipo_id_sql + " PRIMARY KEY,"
 		"	`icono`					varchar(255) NOT NULL default '',"
 		"	`titulo`				varchar(255) NOT NULL default '',"
 		"	`subtitulo`				varchar(255) NOT NULL default '',"
@@ -177,16 +195,18 @@ void dbSql::CrearTablas()
 		"	`tipo_emu`				varchar(255) NOT NULL default 'datos',"
 		"	`comentario`			longtext,"
 		"	`favorito`				varchar(5) NOT NULL default 'false',"
-		"	`rating`				integer NOT NULL default 0"
+		"	`rating`				integer NOT NULL default 0,"
+		"	`usuario`				varchar(255) NOT NULL default ''"
 		");");
 	}
 
 // Tabla - dbgrl_emu_dosbox
-	if( !tables.contains("dbgrl_emu_dosbox", Qt::CaseInsensitive) )
+	if( !tables.contains("dbgrl_emu_dosbox") )
 	{
+		query.clear();
 		query.exec(
 		"CREATE TABLE `dbgrl_emu_dosbox` ("
-		"	`id`					integer NOT NULL primary key,"
+		"	`id`					" + tipo_id_sql + " PRIMARY KEY,"
 		"	`idgrl`					integer NOT NULL default 1,"
 		"	`sdl_fullscreen`		varchar(5) NOT NULL default 'false',"
 		"	`sdl_fulldouble`		varchar(5) NOT NULL default 'false',"
@@ -202,13 +222,14 @@ void dbSql::CrearTablas()
 		"	`sdl_mapperfile`		varchar(255) NOT NULL default 'mapper.txt',"
 		"	`sdl_usescancodes`		varchar(5) NOT NULL default 'true',"
 		"	`dosbox_language`		varchar(255) NOT NULL default '',"
-		"	`dosbox_machine`		varchar(10) NOT NULL default 'vga',"
+		"	`dosbox_machine`		varchar(20) NOT NULL default 'vga',"
 		"	`dosbox_captures`		varchar(255) NOT NULL default 'capture',"
 		"	`dosbox_memsize`		varchar(4) NOT NULL default '16',"
 		"	`render_frameskip`		varchar(2) NOT NULL default '0',"
 		"	`render_aspect`			varchar(5) NOT NULL default 'false',"
 		"	`render_scaler`			varchar(15) NOT NULL default 'normal2x',"
 		"	`cpu_core`				varchar(10) NOT NULL default 'auto',"
+		"	`cpu_cputype`			varchar(20) NOT NULL default 'auto',"
 		"	`cpu_cycles`			varchar(10) NOT NULL default 'auto',"
 		"	`cpu_cycleup`			varchar(10) NOT NULL default '500',"
 		"	`cpu_cycledown`			varchar(10) NOT NULL default '20',"
@@ -272,7 +293,7 @@ void dbSql::CrearTablas()
 		"	`opt_loadfix_mem`		varchar(5) NOT NULL default '64',"
 		"	`opt_consola_dbox`		varchar(5) NOT NULL default 'false',"
 		"	`opt_cerrar_dbox`		varchar(5) NOT NULL default 'true',"
-		"	`opt_cycle_sincronizar` varchar(5) NOT NULL default 'false',"
+		"	`opt_cycle_sincronizar`	varchar(5) NOT NULL default 'false',"
 		"	`path_conf`				varchar(255) NOT NULL default '',"
 		"	`path_sonido`			varchar(255) NOT NULL default 'waves',"
 		"	`path_exe`				varchar(255) NOT NULL default '',"
@@ -283,32 +304,35 @@ void dbSql::CrearTablas()
 	}
 
 // Tabla - dbgrl_emu_dosbox_mount
-	if( !tables.contains("dbgrl_emu_dosbox_mount", Qt::CaseInsensitive) )
+	if( !tables.contains("dbgrl_emu_dosbox_mount") )
 	{
+		query.clear();
 		query.exec(
 		"CREATE TABLE `dbgrl_emu_dosbox_mount` ("
-		"	`id`					integer NOT NULL primary key,"
+		"	`id`					" + tipo_id_sql + " PRIMARY KEY,"
 		"	`id_dosbox`				integer NOT NULL default 1,"
 		"	`id_lista`				varchar(255) NOT NULL default '0',"
 		"	`path`					varchar(255) NOT NULL default 'C:/',"
 		"	`label`					varchar(255) NOT NULL default '',"
 		"	`tipo_as`				varchar(50) NOT NULL default 'drive',"
 		"	`letter`				varchar(255) NOT NULL default 'C',"
-		"	`indx_cd`				varchar(255) NOT NULL default '0',"
+		"	`indx_cd`				varchar(255) NOT NULL default '',"
 		"	`opt_mount`				varchar(255) NOT NULL default '',"
-		"	`io_ctrl`				varchar(50) NOT NULL default 'false',"
+		"	`io_ctrl`				varchar(50) NOT NULL default '',"
 		"	`select_mount`			varchar(10) NOT NULL default 'x'"
 		");");
 	}
 
 // Tabla - dbgrl_emu_scummvm
-	if( !tables.contains("dbgrl_emu_scummvm", Qt::CaseInsensitive) )
+	if( !tables.contains("dbgrl_emu_scummvm") )
 	{
+		query.clear();
 		query.exec(
 		"CREATE TABLE `dbgrl_emu_scummvm` ("
-		"	`id`					integer NOT NULL primary key,"
+		"	`id`					" + tipo_id_sql + " PRIMARY KEY,"
 		"	`idgrl`					integer NOT NULL default 1,"
 		"	`game`					varchar(255) NOT NULL default '',"
+		"	`game_label`			varchar(255) NOT NULL default '',"
 		"	`language`				varchar(4) NOT NULL default 'es',"
 		"	`subtitles`				varchar(5) NOT NULL default 'true',"
 		"	`platform`				varchar(50) NOT NULL default 'pc',"
@@ -338,16 +362,18 @@ void dbSql::CrearTablas()
 		"	`output_rate`			varchar(10) NOT NULL default '<defecto>',"
 		"	`midi_gain`				integer NOT NULL default 100,"
 		"	`copy_protection`		varchar(5) NOT NULL default 'false',"
-		"	`sound_font`			varchar(255) NOT NULL default ''"
+		"	`sound_font`			varchar(255) NOT NULL default '',"
+		"	`walkspeed`				integer NOT NULL default 0"
 		");");
 	}
 
 // Tabla - dbgrl_emu_vdmsound
-	if( !tables.contains("dbgrl_emu_vdmsound", Qt::CaseInsensitive) )
+	if( !tables.contains("dbgrl_emu_vdmsound") )
 	{
+		query.clear();
 		query.exec(
 		"CREATE TABLE `dbgrl_emu_vdmsound` ("
-		"	`id`					integer NOT NULL primary key,"
+		"	`id`					" + tipo_id_sql + " PRIMARY KEY,"
 		"	`idgrl`					integer NOT NULL default 1,"
 		"	`path_conf`				text,"
 		"	`path_exe`				text,"
@@ -360,26 +386,29 @@ void dbSql::CrearTablas()
 	}
 
 // Tabla - dbgrl_file
-	if( !tables.contains("dbgrl_file", Qt::CaseInsensitive) )
+	if( !tables.contains("dbgrl_file") )
 	{
+		query.clear();
 		query.exec(
 		"CREATE TABLE `dbgrl_file` ("
-		"	`id`					integer NOT NULL primary key,"
+		"	`id`					" + tipo_id_sql + " PRIMARY KEY,"
 		"	`idgrl`					integer NOT NULL default 1,"
 		"	`nombre`				varchar(255) NOT NULL default '',"
 		"	`crc`					varchar(8) NOT NULL default '00000000',"
 		"	`descripcion`			varchar(255) NOT NULL default '',"
 		"	`path`					varchar(255) NOT NULL default '',"
-		"	`size`					varchar(50) NOT NULL default ''"
+		"	`size`					varchar(50) NOT NULL default '',"
+		"	`tipo`					varchar(50) NOT NULL default ''"
 		");");
 	}
 
 // Tabla - dbgrl_url
-	if( !tables.contains("dbgrl_url", Qt::CaseInsensitive) )
+	if( !tables.contains("dbgrl_url") )
 	{
+		query.clear();
 		query.exec(
 		"CREATE TABLE `dbgrl_url` ("
-		"	`id`					integer NOT NULL primary key,"
+		"	`id`					" + tipo_id_sql + " PRIMARY KEY,"
 		"	`idgrl`					integer NOT NULL default 1,"
 		"	`url`					varchar(255) NOT NULL default '',"
 		"	`descripcion`			varchar(255) NOT NULL default ''"
@@ -387,12 +416,31 @@ void dbSql::CrearTablas()
 	}
 
 //	Añade las columnas si no están disponibles
-	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'favorito' VARCHAR(5) NOT NULL DEFAULT 'false';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'favorito' varchar(5) NOT NULL DEFAULT 'false';");
+	query.clear();
 	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'rating' integer NOT NULL DEFAULT 0;");
-	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'output_rate' VARCHAR(10) NOT NULL DEFAULT '<defecto>';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'usuario' varchar(255) NOT NULL default '';");
+
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cputype' varchar(20) NOT NULL DEFAULT 'auto';");
+
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'output_rate' varchar(10) NOT NULL DEFAULT '<defecto>';");
+	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'midi_gain' integer NOT NULL default 100;");
-	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'copy_protection' VARCHAR(5) NOT NULL DEFAULT 'false';");
-	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'sound_font' VARCHAR(255) NOT NULL DEFAULT '';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'copy_protection' varchar(5) NOT NULL DEFAULT 'false';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'sound_font' varchar(255) NOT NULL DEFAULT '';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'game_label' varchar(255) NOT NULL DEFAULT '';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'walkspeed' integer NOT NULL DEFAULT 0;");
+
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_file' ADD COLUMN 'tipo' varchar(50) NOT NULL DEFAULT '';");
 }
 
 QHash<QString, QString> dbSql::show_Datos(QString IDgrl)
@@ -404,33 +452,34 @@ QHash<QString, QString> dbSql::show_Datos(QString IDgrl)
 	query.exec("SELECT * FROM dbgrl WHERE idgrl="+IDgrl+" LIMIT 0,1");
 	query.first();
 
-	tmpDatosJuego["idgrl"]         = query.record().value("idgrl").toString();
-	tmpDatosJuego["icono"]         = query.record().value("icono").toString();
-	tmpDatosJuego["titulo"]        = query.record().value("titulo").toString();
-	tmpDatosJuego["subtitulo"]     = query.record().value("subtitulo").toString();
-	tmpDatosJuego["genero"]        = query.record().value("genero").toString();
-	tmpDatosJuego["compania"]      = query.record().value("compania").toString();
-	tmpDatosJuego["desarrollador"] = query.record().value("desarrollador").toString();
-	tmpDatosJuego["tema"]          = query.record().value("tema").toString();
-	tmpDatosJuego["idioma"]        = query.record().value("idioma").toString();
-	tmpDatosJuego["formato"]       = query.record().value("formato").toString();
-	tmpDatosJuego["anno"]          = query.record().value("anno").toString();
-	tmpDatosJuego["numdisc"]       = query.record().value("numdisc").toString();
-	tmpDatosJuego["sistemaop"]     = query.record().value("sistemaop").toString();
-	tmpDatosJuego["tamano"]        = query.record().value("tamano").toString();
-	tmpDatosJuego["graficos"]      = query.record().value("graficos").toString();
-	tmpDatosJuego["sonido"]        = query.record().value("sonido").toString();
-	tmpDatosJuego["jugabilidad"]   = query.record().value("jugabilidad").toString();
-	tmpDatosJuego["original"]      = query.record().value("original").toString();
-	tmpDatosJuego["estado"]        = query.record().value("estado").toString();
-	tmpDatosJuego["thumbs"]        = query.record().value("thumbs").toString();
-	tmpDatosJuego["cover_front"]   = query.record().value("cover_front").toString();
-	tmpDatosJuego["cover_back"]    = query.record().value("cover_back").toString();
-	tmpDatosJuego["fecha"]         = query.record().value("fecha").toString();
-	tmpDatosJuego["tipo_emu"]      = query.record().value("tipo_emu").toString();
-	tmpDatosJuego["comentario"]    = query.record().value("comentario").toString();
-	tmpDatosJuego["favorito"]      = query.record().value("favorito").toString();
-	tmpDatosJuego["rating"]        = query.record().value("rating").toString();
+	tmpDatosJuego["Dat_idgrl"]         = query.record().value("idgrl").toString();
+	tmpDatosJuego["Dat_icono"]         = query.record().value("icono").toString();
+	tmpDatosJuego["Dat_titulo"]        = query.record().value("titulo").toString();
+	tmpDatosJuego["Dat_subtitulo"]     = query.record().value("subtitulo").toString();
+	tmpDatosJuego["Dat_genero"]        = query.record().value("genero").toString();
+	tmpDatosJuego["Dat_compania"]      = query.record().value("compania").toString();
+	tmpDatosJuego["Dat_desarrollador"] = query.record().value("desarrollador").toString();
+	tmpDatosJuego["Dat_tema"]          = query.record().value("tema").toString();
+	tmpDatosJuego["Dat_idioma"]        = query.record().value("idioma").toString();
+	tmpDatosJuego["Dat_formato"]       = query.record().value("formato").toString();
+	tmpDatosJuego["Dat_anno"]          = query.record().value("anno").toString();
+	tmpDatosJuego["Dat_numdisc"]       = query.record().value("numdisc").toString();
+	tmpDatosJuego["Dat_sistemaop"]     = query.record().value("sistemaop").toString();
+	tmpDatosJuego["Dat_tamano"]        = query.record().value("tamano").toString();
+	tmpDatosJuego["Dat_graficos"]      = query.record().value("graficos").toString();
+	tmpDatosJuego["Dat_sonido"]        = query.record().value("sonido").toString();
+	tmpDatosJuego["Dat_jugabilidad"]   = query.record().value("jugabilidad").toString();
+	tmpDatosJuego["Dat_original"]      = query.record().value("original").toString();
+	tmpDatosJuego["Dat_estado"]        = query.record().value("estado").toString();
+	tmpDatosJuego["Dat_thumbs"]        = query.record().value("thumbs").toString();
+	tmpDatosJuego["Dat_cover_front"]   = query.record().value("cover_front").toString();
+	tmpDatosJuego["Dat_cover_back"]    = query.record().value("cover_back").toString();
+	tmpDatosJuego["Dat_fecha"]         = query.record().value("fecha").toString();
+	tmpDatosJuego["Dat_tipo_emu"]      = query.record().value("tipo_emu").toString();
+	tmpDatosJuego["Dat_comentario"]    = query.record().value("comentario").toString();
+	tmpDatosJuego["Dat_favorito"]      = query.record().value("favorito").toString();
+	tmpDatosJuego["Dat_rating"]        = query.record().value("rating").toString();
+	tmpDatosJuego["Dat_usuario"]       = query.record().value("usuario").toString();
 
 	return tmpDatosJuego;
 }
@@ -441,44 +490,49 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl (");
 	strSQL.append("icono, titulo, subtitulo, genero, compania, desarrollador, tema, idioma, formato, anno, numdisc, ");
-	strSQL.append("sistemaop, tamano, graficos, sonido, jugabilidad, original, estado, thumbs, cover_front, cover_back,");
-	strSQL.append("fecha, tipo_emu, comentario, favorito, rating ");
+	strSQL.append("sistemaop, tamano, graficos, sonido, jugabilidad, original, estado, thumbs, cover_front, cover_back, ");
+	strSQL.append("fecha, tipo_emu, comentario, favorito, rating, usuario ");
 	strSQL.append(") VALUES ( ");
 	strSQL.append(":icono, :titulo, :subtitulo, :genero, :compania, :desarrollador, :tema, :idioma, :formato, :anno, :numdisc, ");
 	strSQL.append(":sistemaop, :tamano, :graficos, :sonido, :jugabilidad, :original, :estado, :thumbs, :cover_front, :cover_back, ");
-	strSQL.append(":fecha, :tipo_emu, :comentario, :favorito, :rating)");
+	strSQL.append(":fecha, :tipo_emu, :comentario, :favorito, :rating, :usuario )");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":icono"        , datos["icono"]         );
-	query.bindValue(":titulo"       , datos["titulo"]        );
-	query.bindValue(":subtitulo"    , datos["subtitulo"]     );
-	query.bindValue(":genero"       , datos["genero"]        );
-	query.bindValue(":compania"     , datos["compania"]      );
-	query.bindValue(":desarrollador", datos["desarrollador"] );
-	query.bindValue(":tema"         , datos["tema"]          );
-	query.bindValue(":idioma"       , datos["idioma"]        );
-	query.bindValue(":formato"      , datos["formato"]       );
-	query.bindValue(":anno"         , datos["anno"]          );
-	query.bindValue(":numdisc"      , datos["numdisc"]       );
-	query.bindValue(":sistemaop"    , datos["sistemaop"]     );
-	query.bindValue(":tamano"       , datos["tamano"]        );
-	query.bindValue(":graficos"     , datos["graficos"]      );
-	query.bindValue(":sonido"       , datos["sonido"]        );
-	query.bindValue(":jugabilidad"  , datos["jugabilidad"]   );
-	query.bindValue(":original"     , datos["original"]      );
-	query.bindValue(":estado"       , datos["estado"]        );
-	query.bindValue(":thumbs"       , datos["thumbs"]        );
-	query.bindValue(":cover_front"  , datos["cover_front"]   );
-	query.bindValue(":cover_back"   , datos["cover_back"]    );
-	query.bindValue(":fecha"        , datos["fecha"]         );
-	query.bindValue(":tipo_emu"     , datos["tipo_emu"]      );
-	query.bindValue(":comentario"   , datos["comentario"]    );
-	query.bindValue(":favorito"     , datos["favorito"]      );
-	query.bindValue(":rating"       , datos["rating"]        );
+	query.bindValue(":icono"        , datos["Dat_icono"]         );
+	query.bindValue(":titulo"       , datos["Dat_titulo"]        );
+	query.bindValue(":subtitulo"    , datos["Dat_subtitulo"]     );
+	query.bindValue(":genero"       , datos["Dat_genero"]        );
+	query.bindValue(":compania"     , datos["Dat_compania"]      );
+	query.bindValue(":desarrollador", datos["Dat_desarrollador"] );
+	query.bindValue(":tema"         , datos["Dat_tema"]          );
+	query.bindValue(":idioma"       , datos["Dat_idioma"]        );
+	query.bindValue(":formato"      , datos["Dat_formato"]       );
+	query.bindValue(":anno"         , datos["Dat_anno"]          );
+	query.bindValue(":numdisc"      , datos["Dat_numdisc"]       );
+	query.bindValue(":sistemaop"    , datos["Dat_sistemaop"]     );
+	query.bindValue(":tamano"       , datos["Dat_tamano"]        );
+	query.bindValue(":graficos"     , datos["Dat_graficos"]      );
+	query.bindValue(":sonido"       , datos["Dat_sonido"]        );
+	query.bindValue(":jugabilidad"  , datos["Dat_jugabilidad"]   );
+	query.bindValue(":original"     , datos["Dat_original"]      );
+	query.bindValue(":estado"       , datos["Dat_estado"]        );
+	query.bindValue(":thumbs"       , datos["Dat_thumbs"]        );
+	query.bindValue(":cover_front"  , datos["Dat_cover_front"]   );
+	query.bindValue(":cover_back"   , datos["Dat_cover_back"]    );
+	query.bindValue(":fecha"        , datos["Dat_fecha"]         );
+	query.bindValue(":tipo_emu"     , datos["Dat_tipo_emu"]      );
+	query.bindValue(":comentario"   , datos["Dat_comentario"]    );
+	query.bindValue(":favorito"     , datos["Dat_favorito"]      );
+	query.bindValue(":rating"       , datos["Dat_rating"]        );
+	query.bindValue(":usuario"      , datos["Dat_usuario"]       );
 	query.exec();
 
-	return query.lastInsertId().toString();
+	if( Chequear_Query(query) )
+		return query.lastInsertId().toString();
+	else
+		return "";
 }
 
 void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QString IDgrl)
@@ -491,180 +545,185 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	strSQL.append("formato = :formato, anno = :anno, numdisc = :numdisc, sistemaop = :sistemaop, ");
 	strSQL.append("tamano = :tamano, graficos = :graficos, sonido = :sonido, jugabilidad = :jugabilidad, ");
 	strSQL.append("original = :original, estado = :estado, thumbs = :thumbs, cover_front = :cover_front, ");
-	strSQL.append("cover_back = :cover_back, comentario = :comentario, favorito = :favorito, rating = :rating ");
-	strSQL.append("WHERE idgrl = :idgrl;");
+	strSQL.append("cover_back = :cover_back, comentario = :comentario, favorito = :favorito, rating = :rating, ");
+	strSQL.append("usuario = :usuario WHERE idgrl = :idgrl;");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":icono"        , datos["icono"]         );
-	query.bindValue(":titulo"       , datos["titulo"]        );
-	query.bindValue(":subtitulo"    , datos["subtitulo"]     );
-	query.bindValue(":genero"       , datos["genero"]        );
-	query.bindValue(":compania"     , datos["compania"]      );
-	query.bindValue(":desarrollador", datos["desarrollador"] );
-	query.bindValue(":tema"         , datos["tema"]          );
-	query.bindValue(":idioma"       , datos["idioma"]        );
-	query.bindValue(":formato"      , datos["formato"]       );
-	query.bindValue(":anno"         , datos["anno"]          );
-	query.bindValue(":numdisc"      , datos["numdisc"]       );
-	query.bindValue(":sistemaop"    , datos["sistemaop"]     );
-	query.bindValue(":tamano"       , datos["tamano"]        );
-	query.bindValue(":graficos"     , datos["graficos"]      );
-	query.bindValue(":sonido"       , datos["sonido"]        );
-	query.bindValue(":jugabilidad"  , datos["jugabilidad"]   );
-	query.bindValue(":original"     , datos["original"]      );
-	query.bindValue(":estado"       , datos["estado"]        );
-	query.bindValue(":thumbs"       , datos["thumbs"]        );
-	query.bindValue(":cover_front"  , datos["cover_front"]   );
-	query.bindValue(":cover_back"   , datos["cover_back"]    );
-//	query.bindValue(":fecha"        , datos["fecha"]         );
-//	query.bindValue(":tipo_emu"     , datos["tipo_emu"]      );
-	query.bindValue(":comentario"   , datos["comentario"]    );
-	query.bindValue(":favorito"     , datos["favorito"]      );
-	query.bindValue(":rating"       , datos["rating"]        );
-	query.bindValue(":idgrl"        , IDgrl                  );
+	query.bindValue(":icono"        , datos["Dat_icono"]         );
+	query.bindValue(":titulo"       , datos["Dat_titulo"]        );
+	query.bindValue(":subtitulo"    , datos["Dat_subtitulo"]     );
+	query.bindValue(":genero"       , datos["Dat_genero"]        );
+	query.bindValue(":compania"     , datos["Dat_compania"]      );
+	query.bindValue(":desarrollador", datos["Dat_desarrollador"] );
+	query.bindValue(":tema"         , datos["Dat_tema"]          );
+	query.bindValue(":idioma"       , datos["Dat_idioma"]        );
+	query.bindValue(":formato"      , datos["Dat_formato"]       );
+	query.bindValue(":anno"         , datos["Dat_anno"]          );
+	query.bindValue(":numdisc"      , datos["Dat_numdisc"]       );
+	query.bindValue(":sistemaop"    , datos["Dat_sistemaop"]     );
+	query.bindValue(":tamano"       , datos["Dat_tamano"]        );
+	query.bindValue(":graficos"     , datos["Dat_graficos"]      );
+	query.bindValue(":sonido"       , datos["Dat_sonido"]        );
+	query.bindValue(":jugabilidad"  , datos["Dat_jugabilidad"]   );
+	query.bindValue(":original"     , datos["Dat_original"]      );
+	query.bindValue(":estado"       , datos["Dat_estado"]        );
+	query.bindValue(":thumbs"       , datos["Dat_thumbs"]        );
+	query.bindValue(":cover_front"  , datos["Dat_cover_front"]   );
+	query.bindValue(":cover_back"   , datos["Dat_cover_back"]    );
+//	query.bindValue(":fecha"        , datos["Dat_fecha"]         );
+//	query.bindValue(":tipo_emu"     , datos["Dat_tipo_emu"]      );
+	query.bindValue(":comentario"   , datos["Dat_comentario"]    );
+	query.bindValue(":favorito"     , datos["Dat_favorito"]      );
+	query.bindValue(":rating"       , datos["Dat_rating"]        );
+	query.bindValue(":usuario"      , datos["Dat_usuario"]       );
+	query.bindValue(":idgrl"        , IDgrl                      );
 	query.exec();
 }
 
 void dbSql::ItemActualizaDatosRating(const QString new_rating , const QString IDgrl )
 {
 	QSqlQuery query;
+	query.clear();
 	query.prepare( "UPDATE dbgrl SET rating = :rating WHERE idgrl = :idgrl;" );
-	query.bindValue(":rating"	, new_rating );
-	query.bindValue(":idgrl"	, IDgrl );
+	query.bindValue(":rating" , new_rating );
+	query.bindValue(":idgrl"  , IDgrl      );
 	query.exec();
 }
 
 void dbSql::ItemActualizaDatosFavorito(const QString EstadoFav , const QString IDgrl )
 {
 	QSqlQuery query;
+	query.clear();
 	query.prepare( "UPDATE dbgrl SET favorito = :favorito WHERE idgrl = :idgrl;" );
-	query.bindValue(":favorito"	, EstadoFav );
-	query.bindValue(":idgrl"	, IDgrl     );
+	query.bindValue(":favorito" , EstadoFav );
+	query.bindValue(":idgrl"    , IDgrl     );
 	query.exec();
 }
 
 QHash<QString, QString> dbSql::showConfg_DOSBox(QString IDgrl)
 {
-	QHash<QString, QString> tmpDatosDosBox;
+	QHash<QString, QString> tmpDosBox;
 
 	QSqlQuery query;
 	query.clear();
 	query.exec("SELECT * FROM dbgrl_emu_dosbox WHERE idgrl="+IDgrl+" LIMIT 0,1");
 	query.first();
 
-	tmpDatosDosBox["id"]                   = query.record().value("id").toString();
-	tmpDatosDosBox["idgrl"]                = query.record().value("idgrl").toString();
+	tmpDosBox["Dbx_id"]                   = query.record().value("id").toString();
+	tmpDosBox["Dbx_idgrl"]                = query.record().value("idgrl").toString();
 // [sdl]
-	tmpDatosDosBox["sdl_fullscreen"]       = query.record().value("sdl_fullscreen").toString();
-	tmpDatosDosBox["sdl_fulldouble"]       = query.record().value("sdl_fulldouble").toString();
-	tmpDatosDosBox["sdl_fullfixed"]        = query.record().value("sdl_fullfixed").toString();
-	tmpDatosDosBox["sdl_fullresolution"]   = query.record().value("sdl_fullresolution").toString();
-	tmpDatosDosBox["sdl_windowresolution"] = query.record().value("sdl_windowresolution").toString();
-	tmpDatosDosBox["sdl_output"]           = query.record().value("sdl_output").toString();
-	tmpDatosDosBox["sdl_hwscale"]          = query.record().value("sdl_hwscale").toString();
-	tmpDatosDosBox["sdl_autolock"]         = query.record().value("sdl_autolock").toString();
-	tmpDatosDosBox["sdl_sensitivity"]      = query.record().value("sdl_sensitivity").toString();
-	tmpDatosDosBox["sdl_waitonerror"]      = query.record().value("sdl_waitonerror").toString();
-	tmpDatosDosBox["sdl_priority"]         = query.record().value("sdl_priority").toString();
-	tmpDatosDosBox["sdl_mapperfile"]       = query.record().value("sdl_mapperfile").toString();
-	tmpDatosDosBox["sdl_usescancodes"]     = query.record().value("sdl_usescancodes").toString();
+	tmpDosBox["Dbx_sdl_fullscreen"]       = query.record().value("sdl_fullscreen").toString();
+	tmpDosBox["Dbx_sdl_fulldouble"]       = query.record().value("sdl_fulldouble").toString();
+	tmpDosBox["Dbx_sdl_fullfixed"]        = query.record().value("sdl_fullfixed").toString();
+	tmpDosBox["Dbx_sdl_fullresolution"]   = query.record().value("sdl_fullresolution").toString();
+	tmpDosBox["Dbx_sdl_windowresolution"] = query.record().value("sdl_windowresolution").toString();
+	tmpDosBox["Dbx_sdl_output"]           = query.record().value("sdl_output").toString();
+	tmpDosBox["Dbx_sdl_hwscale"]          = query.record().value("sdl_hwscale").toString();
+	tmpDosBox["Dbx_sdl_autolock"]         = query.record().value("sdl_autolock").toString();
+	tmpDosBox["Dbx_sdl_sensitivity"]      = query.record().value("sdl_sensitivity").toString();
+	tmpDosBox["Dbx_sdl_waitonerror"]      = query.record().value("sdl_waitonerror").toString();
+	tmpDosBox["Dbx_sdl_priority"]         = query.record().value("sdl_priority").toString();
+	tmpDosBox["Dbx_sdl_mapperfile"]       = query.record().value("sdl_mapperfile").toString();
+	tmpDosBox["Dbx_sdl_usescancodes"]     = query.record().value("sdl_usescancodes").toString();
 // [dosbox]
-	tmpDatosDosBox["dosbox_language"]      = query.record().value("dosbox_language").toString();
-	tmpDatosDosBox["dosbox_machine"]       = query.record().value("dosbox_machine").toString();
-	tmpDatosDosBox["dosbox_captures"]      = query.record().value("dosbox_captures").toString();
-	tmpDatosDosBox["dosbox_memsize"]       = query.record().value("dosbox_memsize").toString();
+	tmpDosBox["Dbx_dosbox_language"]      = query.record().value("dosbox_language").toString();
+	tmpDosBox["Dbx_dosbox_machine"]       = query.record().value("dosbox_machine").toString();
+	tmpDosBox["Dbx_dosbox_captures"]      = query.record().value("dosbox_captures").toString();
+	tmpDosBox["Dbx_dosbox_memsize"]       = query.record().value("dosbox_memsize").toString();
 // [render]
-	tmpDatosDosBox["render_frameskip"]     = query.record().value("render_frameskip").toString();
-	tmpDatosDosBox["render_aspect"]        = query.record().value("render_aspect").toString();
-	tmpDatosDosBox["render_scaler"]        = query.record().value("render_scaler").toString();
+	tmpDosBox["Dbx_render_frameskip"]     = query.record().value("render_frameskip").toString();
+	tmpDosBox["Dbx_render_aspect"]        = query.record().value("render_aspect").toString();
+	tmpDosBox["Dbx_render_scaler"]        = query.record().value("render_scaler").toString();
 // [cpu]
-	tmpDatosDosBox["cpu_core"]             = query.record().value("cpu_core").toString();
-	tmpDatosDosBox["cpu_cycles"]           = query.record().value("cpu_cycles").toString();
-	tmpDatosDosBox["cpu_cycleup"]          = query.record().value("cpu_cycleup").toString();
-	tmpDatosDosBox["cpu_cycledown"]        = query.record().value("cpu_cycledown").toString();
+	tmpDosBox["Dbx_cpu_core"]             = query.record().value("cpu_core").toString();
+	tmpDosBox["Dbx_cpu_cputype"]             = query.record().value("cpu_cputype").toString();
+	tmpDosBox["Dbx_cpu_cycles"]           = query.record().value("cpu_cycles").toString();
+	tmpDosBox["Dbx_cpu_cycleup"]          = query.record().value("cpu_cycleup").toString();
+	tmpDosBox["Dbx_cpu_cycledown"]        = query.record().value("cpu_cycledown").toString();
 // [mixer]
-	tmpDatosDosBox["mixer_nosound"]        = query.record().value("mixer_nosound").toString();
-	tmpDatosDosBox["mixer_rate"]           = query.record().value("mixer_rate").toString();
-	tmpDatosDosBox["mixer_blocksize"]      = query.record().value("mixer_blocksize").toString();
-	tmpDatosDosBox["mixer_prebuffer"]      = query.record().value("mixer_prebuffer").toString();
+	tmpDosBox["Dbx_mixer_nosound"]        = query.record().value("mixer_nosound").toString();
+	tmpDosBox["Dbx_mixer_rate"]           = query.record().value("mixer_rate").toString();
+	tmpDosBox["Dbx_mixer_blocksize"]      = query.record().value("mixer_blocksize").toString();
+	tmpDosBox["Dbx_mixer_prebuffer"]      = query.record().value("mixer_prebuffer").toString();
 // [midi]
-	tmpDatosDosBox["midi_mpu401"]          = query.record().value("midi_mpu401").toString();
-	tmpDatosDosBox["midi_intelligent"]     = query.record().value("midi_intelligent").toString();
-	tmpDatosDosBox["midi_device"]          = query.record().value("midi_device").toString();
-	tmpDatosDosBox["midi_config"]          = query.record().value("midi_config").toString();
-	tmpDatosDosBox["midi_mt32rate"]        = query.record().value("midi_mt32rate").toString();
+	tmpDosBox["Dbx_midi_mpu401"]          = query.record().value("midi_mpu401").toString();
+	tmpDosBox["Dbx_midi_intelligent"]     = query.record().value("midi_intelligent").toString();
+	tmpDosBox["Dbx_midi_device"]          = query.record().value("midi_device").toString();
+	tmpDosBox["Dbx_midi_config"]          = query.record().value("midi_config").toString();
+	tmpDosBox["Dbx_midi_mt32rate"]        = query.record().value("midi_mt32rate").toString();
 // [sblaster]
-	tmpDatosDosBox["sblaster_sbtype"]      = query.record().value("sblaster_sbtype").toString();
-	tmpDatosDosBox["sblaster_sbbase"]      = query.record().value("sblaster_sbbase").toString();
-	tmpDatosDosBox["sblaster_irq"]         = query.record().value("sblaster_irq").toString();
-	tmpDatosDosBox["sblaster_dma"]         = query.record().value("sblaster_dma").toString();
-	tmpDatosDosBox["sblaster_hdma"]        = query.record().value("sblaster_hdma").toString();
-	tmpDatosDosBox["sblaster_mixer"]       = query.record().value("sblaster_mixer").toString();
-	tmpDatosDosBox["sblaster_oplmode"]     = query.record().value("sblaster_oplmode").toString();
-	tmpDatosDosBox["sblaster_oplrate"]     = query.record().value("sblaster_oplrate").toString();
+	tmpDosBox["Dbx_sblaster_sbtype"]      = query.record().value("sblaster_sbtype").toString();
+	tmpDosBox["Dbx_sblaster_sbbase"]      = query.record().value("sblaster_sbbase").toString();
+	tmpDosBox["Dbx_sblaster_irq"]         = query.record().value("sblaster_irq").toString();
+	tmpDosBox["Dbx_sblaster_dma"]         = query.record().value("sblaster_dma").toString();
+	tmpDosBox["Dbx_sblaster_hdma"]        = query.record().value("sblaster_hdma").toString();
+	tmpDosBox["Dbx_sblaster_mixer"]       = query.record().value("sblaster_mixer").toString();
+	tmpDosBox["Dbx_sblaster_oplmode"]     = query.record().value("sblaster_oplmode").toString();
+	tmpDosBox["Dbx_sblaster_oplrate"]     = query.record().value("sblaster_oplrate").toString();
 // [gus]
-	tmpDatosDosBox["gus_gus"]              = query.record().value("gus_gus").toString();
-	tmpDatosDosBox["gus_gusrate"]          = query.record().value("gus_gusrate").toString();
-	tmpDatosDosBox["gus_gusbase"]          = query.record().value("gus_gusbase").toString();
-	tmpDatosDosBox["gus_irq1"]             = query.record().value("gus_irq1").toString();
-	tmpDatosDosBox["gus_irq2"]             = query.record().value("gus_irq2").toString();
-	tmpDatosDosBox["gus_dma1"]             = query.record().value("gus_dma1").toString();
-	tmpDatosDosBox["gus_dma2"]             = query.record().value("gus_dma2").toString();
-	tmpDatosDosBox["gus_ultradir"]         = query.record().value("gus_ultradir").toString();
+	tmpDosBox["Dbx_gus_gus"]              = query.record().value("gus_gus").toString();
+	tmpDosBox["Dbx_gus_gusrate"]          = query.record().value("gus_gusrate").toString();
+	tmpDosBox["Dbx_gus_gusbase"]          = query.record().value("gus_gusbase").toString();
+	tmpDosBox["Dbx_gus_irq1"]             = query.record().value("gus_irq1").toString();
+	tmpDosBox["Dbx_gus_irq2"]             = query.record().value("gus_irq2").toString();
+	tmpDosBox["Dbx_gus_dma1"]             = query.record().value("gus_dma1").toString();
+	tmpDosBox["Dbx_gus_dma2"]             = query.record().value("gus_dma2").toString();
+	tmpDosBox["Dbx_gus_ultradir"]         = query.record().value("gus_ultradir").toString();
 // [speaker]
-	tmpDatosDosBox["speaker_pcspeaker"]    = query.record().value("speaker_pcspeaker").toString();
-	tmpDatosDosBox["speaker_pcrate"]       = query.record().value("speaker_pcrate").toString();
-	tmpDatosDosBox["speaker_tandy"]        = query.record().value("speaker_tandy").toString();
-	tmpDatosDosBox["speaker_tandyrate"]    = query.record().value("speaker_tandyrate").toString();
-	tmpDatosDosBox["speaker_disney"]       = query.record().value("speaker_disney").toString();
+	tmpDosBox["Dbx_speaker_pcspeaker"]    = query.record().value("speaker_pcspeaker").toString();
+	tmpDosBox["Dbx_speaker_pcrate"]       = query.record().value("speaker_pcrate").toString();
+	tmpDosBox["Dbx_speaker_tandy"]        = query.record().value("speaker_tandy").toString();
+	tmpDosBox["Dbx_speaker_tandyrate"]    = query.record().value("speaker_tandyrate").toString();
+	tmpDosBox["Dbx_speaker_disney"]       = query.record().value("speaker_disney").toString();
 // [joystick]
-	tmpDatosDosBox["joystick_type"]        = query.record().value("joystick_type").toString();
-	tmpDatosDosBox["joystick_timed"]       = query.record().value("joystick_timed").toString();
-	tmpDatosDosBox["joystick_autofire"]    = query.record().value("joystick_autofire").toString();
-	tmpDatosDosBox["joystick_swap34"]      = query.record().value("joystick_swap34").toString();
-	tmpDatosDosBox["joystick_buttonwrap"]  = query.record().value("joystick_buttonwrap").toString();
+	tmpDosBox["Dbx_joystick_type"]        = query.record().value("joystick_type").toString();
+	tmpDosBox["Dbx_joystick_timed"]       = query.record().value("joystick_timed").toString();
+	tmpDosBox["Dbx_joystick_autofire"]    = query.record().value("joystick_autofire").toString();
+	tmpDosBox["Dbx_joystick_swap34"]      = query.record().value("joystick_swap34").toString();
+	tmpDosBox["Dbx_joystick_buttonwrap"]  = query.record().value("joystick_buttonwrap").toString();
 // [modem]
-	tmpDatosDosBox["modem_modem"]          = query.record().value("modem_modem").toString();
-	tmpDatosDosBox["modem_comport"]        = query.record().value("modem_comport").toString();
-	tmpDatosDosBox["modem_listenport"]     = query.record().value("modem_listenport").toString();
+	tmpDosBox["Dbx_modem_modem"]          = query.record().value("modem_modem").toString();
+	tmpDosBox["Dbx_modem_comport"]        = query.record().value("modem_comport").toString();
+	tmpDosBox["Dbx_modem_listenport"]     = query.record().value("modem_listenport").toString();
 // [dserial]
-	tmpDatosDosBox["dserial_directserial"] = query.record().value("dserial_directserial").toString();
-	tmpDatosDosBox["dserial_comport"]      = query.record().value("dserial_comport").toString();
-	tmpDatosDosBox["dserial_realport"]     = query.record().value("dserial_realport").toString();
-	tmpDatosDosBox["dserial_defaultbps"]   = query.record().value("dserial_defaultbps").toString();
-	tmpDatosDosBox["dserial_parity"]       = query.record().value("dserial_parity").toString();
-	tmpDatosDosBox["dserial_bytesize"]     = query.record().value("dserial_bytesize").toString();
-	tmpDatosDosBox["dserial_stopbit"]      = query.record().value("dserial_stopbit").toString();
-	tmpDatosDosBox["serial_1"]             = query.record().value("serial_1").toString();
-	tmpDatosDosBox["serial_2"]             = query.record().value("serial_2").toString();
-	tmpDatosDosBox["serial_3"]             = query.record().value("serial_3").toString();
-	tmpDatosDosBox["serial_4"]             = query.record().value("serial_4").toString();
+	tmpDosBox["Dbx_dserial_directserial"] = query.record().value("dserial_directserial").toString();
+	tmpDosBox["Dbx_dserial_comport"]      = query.record().value("dserial_comport").toString();
+	tmpDosBox["Dbx_dserial_realport"]     = query.record().value("dserial_realport").toString();
+	tmpDosBox["Dbx_dserial_defaultbps"]   = query.record().value("dserial_defaultbps").toString();
+	tmpDosBox["Dbx_dserial_parity"]       = query.record().value("dserial_parity").toString();
+	tmpDosBox["Dbx_dserial_bytesize"]     = query.record().value("dserial_bytesize").toString();
+	tmpDosBox["Dbx_dserial_stopbit"]      = query.record().value("dserial_stopbit").toString();
+	tmpDosBox["Dbx_serial_1"]             = query.record().value("serial_1").toString();
+	tmpDosBox["Dbx_serial_2"]             = query.record().value("serial_2").toString();
+	tmpDosBox["Dbx_serial_3"]             = query.record().value("serial_3").toString();
+	tmpDosBox["Dbx_serial_4"]             = query.record().value("serial_4").toString();
 // [dos]
-	tmpDatosDosBox["dos_xms"]              = query.record().value("dos_xms").toString();
-	tmpDatosDosBox["dos_ems"]              = query.record().value("dos_ems").toString();
-	tmpDatosDosBox["dos_umb"]              = query.record().value("dos_umb").toString();
-	tmpDatosDosBox["dos_keyboardlayout"]   = query.record().value("dos_keyboardlayout").toString();
+	tmpDosBox["Dbx_dos_xms"]              = query.record().value("dos_xms").toString();
+	tmpDosBox["Dbx_dos_ems"]              = query.record().value("dos_ems").toString();
+	tmpDosBox["Dbx_dos_umb"]              = query.record().value("dos_umb").toString();
+	tmpDosBox["Dbx_dos_keyboardlayout"]   = query.record().value("dos_keyboardlayout").toString();
 // [ipx]
-	tmpDatosDosBox["ipx_ipx"]              = query.record().value("ipx_ipx").toString();
+	tmpDosBox["Dbx_ipx_ipx"]              = query.record().value("ipx_ipx").toString();
 // [autoexec]
-	tmpDatosDosBox["autoexec"]             = query.record().value("autoexec").toString();
+	tmpDosBox["Dbx_autoexec"]             = query.record().value("autoexec").toString();
 // Opciones
-	tmpDatosDosBox["opt_autoexec"]         = query.record().value("opt_autoexec").toString();
-	tmpDatosDosBox["opt_loadfix"]          = query.record().value("opt_loadfix").toString();
-	tmpDatosDosBox["opt_loadfix_mem"]      = query.record().value("opt_loadfix_mem").toString();
-	tmpDatosDosBox["opt_consola_dbox"]     = query.record().value("opt_consola_dbox").toString();
-	tmpDatosDosBox["opt_cerrar_dbox"]      = query.record().value("opt_cerrar_dbox").toString();
-	tmpDatosDosBox["opt_cycle_sincronizar"]= query.record().value("opt_cycle_sincronizar").toString();
+	tmpDosBox["Dbx_opt_autoexec"]         = query.record().value("opt_autoexec").toString();
+	tmpDosBox["Dbx_opt_loadfix"]          = query.record().value("opt_loadfix").toString();
+	tmpDosBox["Dbx_opt_loadfix_mem"]      = query.record().value("opt_loadfix_mem").toString();
+	tmpDosBox["Dbx_opt_consola_dbox"]     = query.record().value("opt_consola_dbox").toString();
+	tmpDosBox["Dbx_opt_cerrar_dbox"]      = query.record().value("opt_cerrar_dbox").toString();
+	tmpDosBox["Dbx_opt_cycle_sincronizar"]= query.record().value("opt_cycle_sincronizar").toString();
 // Otras opciones
-	tmpDatosDosBox["path_conf"]            = query.record().value("path_conf").toString();
-	tmpDatosDosBox["path_sonido"]          = query.record().value("path_sonido").toString();
-	tmpDatosDosBox["path_exe"]             = query.record().value("path_exe").toString();
-	tmpDatosDosBox["path_setup"]           = query.record().value("path_setup").toString();
-	tmpDatosDosBox["parametros_exe"]       = query.record().value("parametros_exe").toString();
-	tmpDatosDosBox["parametros_setup"]     = query.record().value("parametros_setup").toString();
+	tmpDosBox["Dbx_path_conf"]            = query.record().value("path_conf").toString();
+	tmpDosBox["Dbx_path_sonido"]          = query.record().value("path_sonido").toString();
+	tmpDosBox["Dbx_path_exe"]             = query.record().value("path_exe").toString();
+	tmpDosBox["Dbx_path_setup"]           = query.record().value("path_setup").toString();
+	tmpDosBox["Dbx_parametros_exe"]       = query.record().value("parametros_exe").toString();
+	tmpDosBox["Dbx_parametros_setup"]     = query.record().value("parametros_setup").toString();
 
-	return tmpDatosDosBox;
+	return tmpDosBox;
 }
 
 QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString IDgrl)
@@ -675,7 +734,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	strSQL.append("idgrl, sdl_fullscreen, sdl_fulldouble, sdl_fullfixed, sdl_fullresolution, sdl_windowresolution, sdl_output, ");
 	strSQL.append("sdl_hwscale, sdl_autolock, sdl_sensitivity, sdl_waitonerror, sdl_priority, sdl_mapperfile, sdl_usescancodes, ");
 	strSQL.append("dosbox_language, dosbox_machine, dosbox_captures, dosbox_memsize, render_frameskip, render_aspect, render_scaler, ");
-	strSQL.append("cpu_core, cpu_cycles, cpu_cycleup, cpu_cycledown, mixer_nosound, mixer_rate, mixer_blocksize, mixer_prebuffer, ");
+	strSQL.append("cpu_core, cpu_cputype, cpu_cycles, cpu_cycleup, cpu_cycledown, mixer_nosound, mixer_rate, mixer_blocksize, mixer_prebuffer, ");
 	strSQL.append("midi_mpu401, midi_intelligent, midi_device, midi_config, midi_mt32rate, sblaster_sbtype, sblaster_sbbase, sblaster_irq, ");
 	strSQL.append("sblaster_dma, sblaster_hdma, sblaster_mixer, sblaster_oplmode, sblaster_oplrate, gus_gus, gus_gusrate, gus_gusbase, ");
 	strSQL.append("gus_irq1, gus_irq2, gus_dma1, gus_dma2, gus_ultradir, speaker_pcspeaker, speaker_pcrate, speaker_tandy, speaker_tandyrate, ");
@@ -688,7 +747,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	strSQL.append(":idgrl, :sdl_fullscreen, :sdl_fulldouble, :sdl_fullfixed, :sdl_fullresolution, :sdl_windowresolution, :sdl_output, ");
 	strSQL.append(":sdl_hwscale, :sdl_autolock, :sdl_sensitivity, :sdl_waitonerror, :sdl_priority, :sdl_mapperfile, :sdl_usescancodes, ");
 	strSQL.append(":dosbox_language, :dosbox_machine, :dosbox_captures, :dosbox_memsize, :render_frameskip, :render_aspect, :render_scaler, ");
-	strSQL.append(":cpu_core, :cpu_cycles, :cpu_cycleup, :cpu_cycledown, :mixer_nosound, :mixer_rate, :mixer_blocksize, :mixer_prebuffer, ");
+	strSQL.append(":cpu_core, :cpu_cputype, :cpu_cycles, :cpu_cycleup, :cpu_cycledown, :mixer_nosound, :mixer_rate, :mixer_blocksize, :mixer_prebuffer, ");
 	strSQL.append(":midi_mpu401, :midi_intelligent, :midi_device, :midi_config, :midi_mt32rate, :sblaster_sbtype, :sblaster_sbbase, :sblaster_irq, ");
 	strSQL.append(":sblaster_dma, :sblaster_hdma, :sblaster_mixer, :sblaster_oplmode, :sblaster_oplrate, :gus_gus, :gus_gusrate, :gus_gusbase, ");
 	strSQL.append(":gus_irq1, :gus_irq2, :gus_dma1, :gus_dma2, :gus_ultradir, :speaker_pcspeaker, :speaker_pcrate, :speaker_tandy, :speaker_tandyrate, ");
@@ -699,102 +758,107 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	strSQL.append(":opt_cerrar_dbox, :opt_cycle_sincronizar, :path_conf, :path_sonido, :path_exe, :path_setup, :parametros_exe, :parametros_setup )");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":idgrl"                 , IDgrl                          );
-	query.bindValue(":sdl_fullscreen"        , datos["sdl_fullscreen"]        );
-	query.bindValue(":sdl_fulldouble"        , datos["sdl_fulldouble"]        );
-	query.bindValue(":sdl_fullfixed"         , datos["sdl_fullfixed"]         );
-	query.bindValue(":sdl_fullresolution"    , datos["sdl_fullresolution"]    );
-	query.bindValue(":sdl_windowresolution"  , datos["sdl_windowresolution"]  );
-	query.bindValue(":sdl_output"            , datos["sdl_output"]            );
-	query.bindValue(":sdl_hwscale"           , datos["sdl_hwscale"]           );
-	query.bindValue(":sdl_autolock"          , datos["sdl_autolock"]          );
-	query.bindValue(":sdl_sensitivity"       , datos["sdl_sensitivity"]       );
-	query.bindValue(":sdl_waitonerror"       , datos["sdl_waitonerror"]       );
-	query.bindValue(":sdl_priority"          , datos["sdl_priority"]          );
-	query.bindValue(":sdl_mapperfile"        , datos["sdl_mapperfile"]        );
-	query.bindValue(":sdl_usescancodes"      , datos["sdl_usescancodes"]      );
-	query.bindValue(":dosbox_language"       , datos["dosbox_language"]       );
-	query.bindValue(":dosbox_machine"        , datos["dosbox_machine"]        );
-	query.bindValue(":dosbox_captures"       , datos["dosbox_captures"]       );
-	query.bindValue(":dosbox_memsize"        , datos["dosbox_memsize"]        );
-	query.bindValue(":render_frameskip"      , datos["render_frameskip"]      );
-	query.bindValue(":render_aspect"         , datos["render_aspect"]         );
-	query.bindValue(":render_scaler"         , datos["render_scaler"]         );
-	query.bindValue(":cpu_core"              , datos["cpu_core"]              );
-	query.bindValue(":cpu_cycles"            , datos["cpu_cycles"]            );
-	query.bindValue(":cpu_cycleup"           , datos["cpu_cycleup"]           );
-	query.bindValue(":cpu_cycledown"         , datos["cpu_cycledown"]         );
-	query.bindValue(":mixer_nosound"         , datos["mixer_nosound"]         );
-	query.bindValue(":mixer_rate"            , datos["mixer_rate"]            );
-	query.bindValue(":mixer_blocksize"       , datos["mixer_blocksize"]       );
-	query.bindValue(":mixer_prebuffer"       , datos["mixer_prebuffer"]       );
-	query.bindValue(":midi_mpu401"           , datos["midi_mpu401"]           );
-	query.bindValue(":midi_intelligent"      , datos["midi_intelligent"]      );
-	query.bindValue(":midi_device"           , datos["midi_device"]           );
-	query.bindValue(":midi_config"           , datos["midi_config"]           );
-	query.bindValue(":midi_mt32rate"         , datos["midi_mt32rate"]         );
-	query.bindValue(":sblaster_sbtype"       , datos["sblaster_sbtype"]       );
-	query.bindValue(":sblaster_sbbase"       , datos["sblaster_sbbase"]       );
-	query.bindValue(":sblaster_irq"          , datos["sblaster_irq"]          );
-	query.bindValue(":sblaster_dma"          , datos["sblaster_dma"]          );
-	query.bindValue(":sblaster_hdma"         , datos["sblaster_hdma"]         );
-	query.bindValue(":sblaster_mixer"        , datos["sblaster_mixer"]        );
-	query.bindValue(":sblaster_oplmode"      , datos["sblaster_oplmode"]      );
-	query.bindValue(":sblaster_oplrate"      , datos["sblaster_oplrate"]      );
-	query.bindValue(":gus_gus"               , datos["gus_gus"]               );
-	query.bindValue(":gus_gusrate"           , datos["gus_gusrate"]           );
-	query.bindValue(":gus_gusbase"           , datos["gus_gusbase"]           );
-	query.bindValue(":gus_irq1"              , datos["gus_irq1"]              );
-	query.bindValue(":gus_irq2"              , datos["gus_irq2"]              );
-	query.bindValue(":gus_dma1"              , datos["gus_dma1"]              );
-	query.bindValue(":gus_dma2"              , datos["gus_dma2"]              );
-	query.bindValue(":gus_ultradir"          , datos["gus_ultradir"]          );
-	query.bindValue(":speaker_pcspeaker"     , datos["speaker_pcspeaker"]     );
-	query.bindValue(":speaker_pcrate"        , datos["speaker_pcrate"]        );
-	query.bindValue(":speaker_tandy"         , datos["speaker_tandy"]         );
-	query.bindValue(":speaker_tandyrate"     , datos["speaker_tandyrate"]     );
-	query.bindValue(":speaker_disney"        , datos["speaker_disney"]        );
-	query.bindValue(":joystick_type"         , datos["joystick_type"]         );
-	query.bindValue(":joystick_timed"        , datos["joystick_timed"]        );
-	query.bindValue(":joystick_autofire"     , datos["joystick_autofire"]     );
-	query.bindValue(":joystick_swap34"       , datos["joystick_swap34"]       );
-	query.bindValue(":joystick_buttonwrap"   , datos["joystick_buttonwrap"]   );
-	query.bindValue(":modem_modem"           , datos["modem_modem"]           );
-	query.bindValue(":modem_comport"         , datos["modem_comport"]         );
-	query.bindValue(":modem_listenport"      , datos["modem_listenport"]      );
-	query.bindValue(":dserial_directserial"  , datos["dserial_directserial"]  );
-	query.bindValue(":dserial_comport"       , datos["dserial_comport"]       );
-	query.bindValue(":dserial_realport"      , datos["dserial_realport"]      );
-	query.bindValue(":dserial_defaultbps"    , datos["dserial_defaultbps"]    );
-	query.bindValue(":dserial_parity"        , datos["dserial_parity"]        );
-	query.bindValue(":dserial_bytesize"      , datos["dserial_bytesize"]      );
-	query.bindValue(":dserial_stopbit"       , datos["dserial_stopbit"]       );
-	query.bindValue(":serial_1"              , datos["serial_1"]              );
-	query.bindValue(":serial_2"              , datos["serial_2"]              );
-	query.bindValue(":serial_3"              , datos["serial_3"]              );
-	query.bindValue(":serial_4"              , datos["serial_4"]              );
-	query.bindValue(":dos_xms"               , datos["dos_xms"]               );
-	query.bindValue(":dos_ems"               , datos["dos_ems"]               );
-	query.bindValue(":dos_umb"               , datos["dos_umb"]               );
-	query.bindValue(":dos_keyboardlayout"    , datos["dos_keyboardlayout"]    );
-	query.bindValue(":ipx_ipx"               , datos["ipx_ipx"]               );
-	query.bindValue(":autoexec"              , datos["autoexec"]              );
-	query.bindValue(":opt_autoexec"          , datos["opt_autoexec"]          );
-	query.bindValue(":opt_loadfix"           , datos["opt_loadfix"]           );
-	query.bindValue(":opt_loadfix_mem"       , datos["opt_loadfix_mem"]       );
-	query.bindValue(":opt_consola_dbox"      , datos["opt_consola_dbox"]      );
-	query.bindValue(":opt_cerrar_dbox"       , datos["opt_cerrar_dbox"]       );
-	query.bindValue(":opt_cycle_sincronizar" , datos["opt_cycle_sincronizar"] );
-	query.bindValue(":path_conf"             , datos["path_conf"]             );
-	query.bindValue(":path_sonido"           , datos["path_sonido"]           );
-	query.bindValue(":path_exe"              , datos["path_exe"]              );
-	query.bindValue(":path_setup"            , datos["path_setup"]            );
-	query.bindValue(":parametros_exe"        , datos["parametros_exe"]        );
-	query.bindValue(":parametros_setup"      , datos["parametros_setup"]      );
+	query.bindValue(":idgrl"                 , IDgrl                              );
+	query.bindValue(":sdl_fullscreen"        , datos["Dbx_sdl_fullscreen"]        );
+	query.bindValue(":sdl_fulldouble"        , datos["Dbx_sdl_fulldouble"]        );
+	query.bindValue(":sdl_fullfixed"         , datos["Dbx_sdl_fullfixed"]         );
+	query.bindValue(":sdl_fullresolution"    , datos["Dbx_sdl_fullresolution"]    );
+	query.bindValue(":sdl_windowresolution"  , datos["Dbx_sdl_windowresolution"]  );
+	query.bindValue(":sdl_output"            , datos["Dbx_sdl_output"]            );
+	query.bindValue(":sdl_hwscale"           , datos["Dbx_sdl_hwscale"]           );
+	query.bindValue(":sdl_autolock"          , datos["Dbx_sdl_autolock"]          );
+	query.bindValue(":sdl_sensitivity"       , datos["Dbx_sdl_sensitivity"]       );
+	query.bindValue(":sdl_waitonerror"       , datos["Dbx_sdl_waitonerror"]       );
+	query.bindValue(":sdl_priority"          , datos["Dbx_sdl_priority"]          );
+	query.bindValue(":sdl_mapperfile"        , datos["Dbx_sdl_mapperfile"]        );
+	query.bindValue(":sdl_usescancodes"      , datos["Dbx_sdl_usescancodes"]      );
+	query.bindValue(":dosbox_language"       , datos["Dbx_dosbox_language"]       );
+	query.bindValue(":dosbox_machine"        , datos["Dbx_dosbox_machine"]        );
+	query.bindValue(":dosbox_captures"       , datos["Dbx_dosbox_captures"]       );
+	query.bindValue(":dosbox_memsize"        , datos["Dbx_dosbox_memsize"]        );
+	query.bindValue(":render_frameskip"      , datos["Dbx_render_frameskip"]      );
+	query.bindValue(":render_aspect"         , datos["Dbx_render_aspect"]         );
+	query.bindValue(":render_scaler"         , datos["Dbx_render_scaler"]         );
+	query.bindValue(":cpu_core"              , datos["Dbx_cpu_core"]              );
+	query.bindValue(":cpu_cputype"           , datos["Dbx_cpu_cputype"]              );
+	query.bindValue(":cpu_cycles"            , datos["Dbx_cpu_cycles"]            );
+	query.bindValue(":cpu_cycleup"           , datos["Dbx_cpu_cycleup"]           );
+	query.bindValue(":cpu_cycledown"         , datos["Dbx_cpu_cycledown"]         );
+	query.bindValue(":mixer_nosound"         , datos["Dbx_mixer_nosound"]         );
+	query.bindValue(":mixer_rate"            , datos["Dbx_mixer_rate"]            );
+	query.bindValue(":mixer_blocksize"       , datos["Dbx_mixer_blocksize"]       );
+	query.bindValue(":mixer_prebuffer"       , datos["Dbx_mixer_prebuffer"]       );
+	query.bindValue(":midi_mpu401"           , datos["Dbx_midi_mpu401"]           );
+	query.bindValue(":midi_intelligent"      , datos["Dbx_midi_intelligent"]      );
+	query.bindValue(":midi_device"           , datos["Dbx_midi_device"]           );
+	query.bindValue(":midi_config"           , datos["Dbx_midi_config"]           );
+	query.bindValue(":midi_mt32rate"         , datos["Dbx_midi_mt32rate"]         );
+	query.bindValue(":sblaster_sbtype"       , datos["Dbx_sblaster_sbtype"]       );
+	query.bindValue(":sblaster_sbbase"       , datos["Dbx_sblaster_sbbase"]       );
+	query.bindValue(":sblaster_irq"          , datos["Dbx_sblaster_irq"]          );
+	query.bindValue(":sblaster_dma"          , datos["Dbx_sblaster_dma"]          );
+	query.bindValue(":sblaster_hdma"         , datos["Dbx_sblaster_hdma"]         );
+	query.bindValue(":sblaster_mixer"        , datos["Dbx_sblaster_mixer"]        );
+	query.bindValue(":sblaster_oplmode"      , datos["Dbx_sblaster_oplmode"]      );
+	query.bindValue(":sblaster_oplrate"      , datos["Dbx_sblaster_oplrate"]      );
+	query.bindValue(":gus_gus"               , datos["Dbx_gus_gus"]               );
+	query.bindValue(":gus_gusrate"           , datos["Dbx_gus_gusrate"]           );
+	query.bindValue(":gus_gusbase"           , datos["Dbx_gus_gusbase"]           );
+	query.bindValue(":gus_irq1"              , datos["Dbx_gus_irq1"]              );
+	query.bindValue(":gus_irq2"              , datos["Dbx_gus_irq2"]              );
+	query.bindValue(":gus_dma1"              , datos["Dbx_gus_dma1"]              );
+	query.bindValue(":gus_dma2"              , datos["Dbx_gus_dma2"]              );
+	query.bindValue(":gus_ultradir"          , datos["Dbx_gus_ultradir"]          );
+	query.bindValue(":speaker_pcspeaker"     , datos["Dbx_speaker_pcspeaker"]     );
+	query.bindValue(":speaker_pcrate"        , datos["Dbx_speaker_pcrate"]        );
+	query.bindValue(":speaker_tandy"         , datos["Dbx_speaker_tandy"]         );
+	query.bindValue(":speaker_tandyrate"     , datos["Dbx_speaker_tandyrate"]     );
+	query.bindValue(":speaker_disney"        , datos["Dbx_speaker_disney"]        );
+	query.bindValue(":joystick_type"         , datos["Dbx_joystick_type"]         );
+	query.bindValue(":joystick_timed"        , datos["Dbx_joystick_timed"]        );
+	query.bindValue(":joystick_autofire"     , datos["Dbx_joystick_autofire"]     );
+	query.bindValue(":joystick_swap34"       , datos["Dbx_joystick_swap34"]       );
+	query.bindValue(":joystick_buttonwrap"   , datos["Dbx_joystick_buttonwrap"]   );
+	query.bindValue(":modem_modem"           , datos["Dbx_modem_modem"]           );
+	query.bindValue(":modem_comport"         , datos["Dbx_modem_comport"]         );
+	query.bindValue(":modem_listenport"      , datos["Dbx_modem_listenport"]      );
+	query.bindValue(":dserial_directserial"  , datos["Dbx_dserial_directserial"]  );
+	query.bindValue(":dserial_comport"       , datos["Dbx_dserial_comport"]       );
+	query.bindValue(":dserial_realport"      , datos["Dbx_dserial_realport"]      );
+	query.bindValue(":dserial_defaultbps"    , datos["Dbx_dserial_defaultbps"]    );
+	query.bindValue(":dserial_parity"        , datos["Dbx_dserial_parity"]        );
+	query.bindValue(":dserial_bytesize"      , datos["Dbx_dserial_bytesize"]      );
+	query.bindValue(":dserial_stopbit"       , datos["Dbx_dserial_stopbit"]       );
+	query.bindValue(":serial_1"              , datos["Dbx_serial_1"]              );
+	query.bindValue(":serial_2"              , datos["Dbx_serial_2"]              );
+	query.bindValue(":serial_3"              , datos["Dbx_serial_3"]              );
+	query.bindValue(":serial_4"              , datos["Dbx_serial_4"]              );
+	query.bindValue(":dos_xms"               , datos["Dbx_dos_xms"]               );
+	query.bindValue(":dos_ems"               , datos["Dbx_dos_ems"]               );
+	query.bindValue(":dos_umb"               , datos["Dbx_dos_umb"]               );
+	query.bindValue(":dos_keyboardlayout"    , datos["Dbx_dos_keyboardlayout"]    );
+	query.bindValue(":ipx_ipx"               , datos["Dbx_ipx_ipx"]               );
+	query.bindValue(":autoexec"              , datos["Dbx_autoexec"]              );
+	query.bindValue(":opt_autoexec"          , datos["Dbx_opt_autoexec"]          );
+	query.bindValue(":opt_loadfix"           , datos["Dbx_opt_loadfix"]           );
+	query.bindValue(":opt_loadfix_mem"       , datos["Dbx_opt_loadfix_mem"]       );
+	query.bindValue(":opt_consola_dbox"      , datos["Dbx_opt_consola_dbox"]      );
+	query.bindValue(":opt_cerrar_dbox"       , datos["Dbx_opt_cerrar_dbox"]       );
+	query.bindValue(":opt_cycle_sincronizar" , datos["Dbx_opt_cycle_sincronizar"] );
+	query.bindValue(":path_conf"             , datos["Dbx_path_conf"]             );
+	query.bindValue(":path_sonido"           , datos["Dbx_path_sonido"]           );
+	query.bindValue(":path_exe"              , datos["Dbx_path_exe"]              );
+	query.bindValue(":path_setup"            , datos["Dbx_path_setup"]            );
+	query.bindValue(":parametros_exe"        , datos["Dbx_parametros_exe"]        );
+	query.bindValue(":parametros_setup"      , datos["Dbx_parametros_setup"]      );
 	query.exec();
 
-	return query.lastInsertId().toString();
+	if( Chequear_Query(query) )
+		return query.lastInsertId().toString();
+	else
+		return "";
 }
 
 void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString IDdbx)
@@ -807,7 +871,7 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	strSQL.append("sdl_sensitivity = :sdl_sensitivity , sdl_waitonerror = :sdl_waitonerror , sdl_priority = :sdl_priority , sdl_mapperfile = :sdl_mapperfile ,");
 	strSQL.append("sdl_usescancodes = :sdl_usescancodes , dosbox_language = :dosbox_language , dosbox_machine = :dosbox_machine , dosbox_captures = :dosbox_captures ,");
 	strSQL.append("dosbox_memsize = :dosbox_memsize , render_frameskip = :render_frameskip , render_aspect = :render_aspect , render_scaler = :render_scaler ,");
-	strSQL.append("cpu_core = :cpu_core , cpu_cycles = :cpu_cycles , cpu_cycleup = :cpu_cycleup , cpu_cycledown = :cpu_cycledown , mixer_nosound = :mixer_nosound ,");
+	strSQL.append("cpu_core = :cpu_core , cpu_cputype = :cpu_cputype , cpu_cycles = :cpu_cycles , cpu_cycleup = :cpu_cycleup , cpu_cycledown = :cpu_cycledown , mixer_nosound = :mixer_nosound ,");
 	strSQL.append("mixer_rate = :mixer_rate , mixer_blocksize = :mixer_blocksize , mixer_prebuffer = :mixer_prebuffer , midi_mpu401 = :midi_mpu401 , midi_intelligent = :midi_intelligent ,");
 	strSQL.append("midi_device = :midi_device , midi_config = :midi_config , midi_mt32rate = :midi_mt32rate , sblaster_sbtype = :sblaster_sbtype , sblaster_sbbase = :sblaster_sbbase ,");
 	strSQL.append("sblaster_irq = :sblaster_irq , sblaster_dma = :sblaster_dma , sblaster_hdma = :sblaster_hdma , sblaster_mixer = :sblaster_mixer , sblaster_oplmode = :sblaster_oplmode ,");
@@ -824,100 +888,102 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	strSQL.append("WHERE id = :id;");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-//	query.bindValue(":idgrl"                 , IDgrl                          );
-	query.bindValue(":sdl_fullscreen"        , datos["sdl_fullscreen"]        );
-	query.bindValue(":sdl_fulldouble"        , datos["sdl_fulldouble"]        );
-	query.bindValue(":sdl_fullfixed"         , datos["sdl_fullfixed"]         );
-	query.bindValue(":sdl_fullresolution"    , datos["sdl_fullresolution"]    );
-	query.bindValue(":sdl_windowresolution"  , datos["sdl_windowresolution"]  );
-	query.bindValue(":sdl_output"            , datos["sdl_output"]            );
-	query.bindValue(":sdl_hwscale"           , datos["sdl_hwscale"]           );
-	query.bindValue(":sdl_autolock"          , datos["sdl_autolock"]          );
-	query.bindValue(":sdl_sensitivity"       , datos["sdl_sensitivity"]       );
-	query.bindValue(":sdl_waitonerror"       , datos["sdl_waitonerror"]       );
-	query.bindValue(":sdl_priority"          , datos["sdl_priority"]          );
-	query.bindValue(":sdl_mapperfile"        , datos["sdl_mapperfile"]        );
-	query.bindValue(":sdl_usescancodes"      , datos["sdl_usescancodes"]      );
-	query.bindValue(":dosbox_language"       , datos["dosbox_language"]       );
-	query.bindValue(":dosbox_machine"        , datos["dosbox_machine"]        );
-	query.bindValue(":dosbox_captures"       , datos["dosbox_captures"]       );
-	query.bindValue(":dosbox_memsize"        , datos["dosbox_memsize"]        );
-	query.bindValue(":render_frameskip"      , datos["render_frameskip"]      );
-	query.bindValue(":render_aspect"         , datos["render_aspect"]         );
-	query.bindValue(":render_scaler"         , datos["render_scaler"]         );
-	query.bindValue(":cpu_core"              , datos["cpu_core"]              );
-	query.bindValue(":cpu_cycles"            , datos["cpu_cycles"]            );
-	query.bindValue(":cpu_cycleup"           , datos["cpu_cycleup"]           );
-	query.bindValue(":cpu_cycledown"         , datos["cpu_cycledown"]         );
-	query.bindValue(":mixer_nosound"         , datos["mixer_nosound"]         );
-	query.bindValue(":mixer_rate"            , datos["mixer_rate"]            );
-	query.bindValue(":mixer_blocksize"       , datos["mixer_blocksize"]       );
-	query.bindValue(":mixer_prebuffer"       , datos["mixer_prebuffer"]       );
-	query.bindValue(":midi_mpu401"           , datos["midi_mpu401"]           );
-	query.bindValue(":midi_intelligent"      , datos["midi_intelligent"]      );
-	query.bindValue(":midi_device"           , datos["midi_device"]           );
-	query.bindValue(":midi_config"           , datos["midi_config"]           );
-	query.bindValue(":midi_mt32rate"         , datos["midi_mt32rate"]         );
-	query.bindValue(":sblaster_sbtype"       , datos["sblaster_sbtype"]       );
-	query.bindValue(":sblaster_sbbase"       , datos["sblaster_sbbase"]       );
-	query.bindValue(":sblaster_irq"          , datos["sblaster_irq"]          );
-	query.bindValue(":sblaster_dma"          , datos["sblaster_dma"]          );
-	query.bindValue(":sblaster_hdma"         , datos["sblaster_hdma"]         );
-	query.bindValue(":sblaster_mixer"        , datos["sblaster_mixer"]        );
-	query.bindValue(":sblaster_oplmode"      , datos["sblaster_oplmode"]      );
-	query.bindValue(":sblaster_oplrate"      , datos["sblaster_oplrate"]      );
-	query.bindValue(":gus_gus"               , datos["gus_gus"]               );
-	query.bindValue(":gus_gusrate"           , datos["gus_gusrate"]           );
-	query.bindValue(":gus_gusbase"           , datos["gus_gusbase"]           );
-	query.bindValue(":gus_irq1"              , datos["gus_irq1"]              );
-	query.bindValue(":gus_irq2"              , datos["gus_irq2"]              );
-	query.bindValue(":gus_dma1"              , datos["gus_dma1"]              );
-	query.bindValue(":gus_dma2"              , datos["gus_dma2"]              );
-	query.bindValue(":gus_ultradir"          , datos["gus_ultradir"]          );
-	query.bindValue(":speaker_pcspeaker"     , datos["speaker_pcspeaker"]     );
-	query.bindValue(":speaker_pcrate"        , datos["speaker_pcrate"]        );
-	query.bindValue(":speaker_tandy"         , datos["speaker_tandy"]         );
-	query.bindValue(":speaker_tandyrate"     , datos["speaker_tandyrate"]     );
-	query.bindValue(":speaker_disney"        , datos["speaker_disney"]        );
-	query.bindValue(":joystick_type"         , datos["joystick_type"]         );
-	query.bindValue(":joystick_timed"        , datos["joystick_timed"]        );
-	query.bindValue(":joystick_autofire"     , datos["joystick_autofire"]     );
-	query.bindValue(":joystick_swap34"       , datos["joystick_swap34"]       );
-	query.bindValue(":joystick_buttonwrap"   , datos["joystick_buttonwrap"]   );
-	query.bindValue(":modem_modem"           , datos["modem_modem"]           );
-	query.bindValue(":modem_comport"         , datos["modem_comport"]         );
-	query.bindValue(":modem_listenport"      , datos["modem_listenport"]      );
-	query.bindValue(":dserial_directserial"  , datos["dserial_directserial"]  );
-	query.bindValue(":dserial_comport"       , datos["dserial_comport"]       );
-	query.bindValue(":dserial_realport"      , datos["dserial_realport"]      );
-	query.bindValue(":dserial_defaultbps"    , datos["dserial_defaultbps"]    );
-	query.bindValue(":dserial_parity"        , datos["dserial_parity"]        );
-	query.bindValue(":dserial_bytesize"      , datos["dserial_bytesize"]      );
-	query.bindValue(":dserial_stopbit"       , datos["dserial_stopbit"]       );
-	query.bindValue(":serial_1"              , datos["serial_1"]              );
-	query.bindValue(":serial_2"              , datos["serial_2"]              );
-	query.bindValue(":serial_3"              , datos["serial_3"]              );
-	query.bindValue(":serial_4"              , datos["serial_4"]              );
-	query.bindValue(":dos_xms"               , datos["dos_xms"]               );
-	query.bindValue(":dos_ems"               , datos["dos_ems"]               );
-	query.bindValue(":dos_umb"               , datos["dos_umb"]               );
-	query.bindValue(":dos_keyboardlayout"    , datos["dos_keyboardlayout"]    );
-	query.bindValue(":ipx_ipx"               , datos["ipx_ipx"]               );
-	query.bindValue(":autoexec"              , datos["autoexec"]              );
-	query.bindValue(":opt_autoexec"          , datos["opt_autoexec"]          );
-	query.bindValue(":opt_loadfix"           , datos["opt_loadfix"]           );
-	query.bindValue(":opt_loadfix_mem"       , datos["opt_loadfix_mem"]       );
-	query.bindValue(":opt_consola_dbox"      , datos["opt_consola_dbox"]      );
-	query.bindValue(":opt_cerrar_dbox"       , datos["opt_cerrar_dbox"]       );
-	query.bindValue(":opt_cycle_sincronizar" , datos["opt_cycle_sincronizar"] );
-	query.bindValue(":path_conf"             , datos["path_conf"]             );
-	query.bindValue(":path_sonido"           , datos["path_sonido"]           );
-	query.bindValue(":path_exe"              , datos["path_exe"]              );
-	query.bindValue(":path_setup"            , datos["path_setup"]            );
-	query.bindValue(":parametros_exe"        , datos["parametros_exe"]        );
-	query.bindValue(":parametros_setup"      , datos["parametros_setup"]      );
-	query.bindValue(":id"                    , IDdbx                          );
+//	query.bindValue(":idgrl"                 , IDgrl                              );
+	query.bindValue(":sdl_fullscreen"        , datos["Dbx_sdl_fullscreen"]        );
+	query.bindValue(":sdl_fulldouble"        , datos["Dbx_sdl_fulldouble"]        );
+	query.bindValue(":sdl_fullfixed"         , datos["Dbx_sdl_fullfixed"]         );
+	query.bindValue(":sdl_fullresolution"    , datos["Dbx_sdl_fullresolution"]    );
+	query.bindValue(":sdl_windowresolution"  , datos["Dbx_sdl_windowresolution"]  );
+	query.bindValue(":sdl_output"            , datos["Dbx_sdl_output"]            );
+	query.bindValue(":sdl_hwscale"           , datos["Dbx_sdl_hwscale"]           );
+	query.bindValue(":sdl_autolock"          , datos["Dbx_sdl_autolock"]          );
+	query.bindValue(":sdl_sensitivity"       , datos["Dbx_sdl_sensitivity"]       );
+	query.bindValue(":sdl_waitonerror"       , datos["Dbx_sdl_waitonerror"]       );
+	query.bindValue(":sdl_priority"          , datos["Dbx_sdl_priority"]          );
+	query.bindValue(":sdl_mapperfile"        , datos["Dbx_sdl_mapperfile"]        );
+	query.bindValue(":sdl_usescancodes"      , datos["Dbx_sdl_usescancodes"]      );
+	query.bindValue(":dosbox_language"       , datos["Dbx_dosbox_language"]       );
+	query.bindValue(":dosbox_machine"        , datos["Dbx_dosbox_machine"]        );
+	query.bindValue(":dosbox_captures"       , datos["Dbx_dosbox_captures"]       );
+	query.bindValue(":dosbox_memsize"        , datos["Dbx_dosbox_memsize"]        );
+	query.bindValue(":render_frameskip"      , datos["Dbx_render_frameskip"]      );
+	query.bindValue(":render_aspect"         , datos["Dbx_render_aspect"]         );
+	query.bindValue(":render_scaler"         , datos["Dbx_render_scaler"]         );
+	query.bindValue(":cpu_core"              , datos["Dbx_cpu_core"]              );
+	query.bindValue(":cpu_cputype"           , datos["Dbx_cpu_cputype"]              );
+	query.bindValue(":cpu_cycles"            , datos["Dbx_cpu_cycles"]            );
+	query.bindValue(":cpu_cycleup"           , datos["Dbx_cpu_cycleup"]           );
+	query.bindValue(":cpu_cycledown"         , datos["Dbx_cpu_cycledown"]         );
+	query.bindValue(":mixer_nosound"         , datos["Dbx_mixer_nosound"]         );
+	query.bindValue(":mixer_rate"            , datos["Dbx_mixer_rate"]            );
+	query.bindValue(":mixer_blocksize"       , datos["Dbx_mixer_blocksize"]       );
+	query.bindValue(":mixer_prebuffer"       , datos["Dbx_mixer_prebuffer"]       );
+	query.bindValue(":midi_mpu401"           , datos["Dbx_midi_mpu401"]           );
+	query.bindValue(":midi_intelligent"      , datos["Dbx_midi_intelligent"]      );
+	query.bindValue(":midi_device"           , datos["Dbx_midi_device"]           );
+	query.bindValue(":midi_config"           , datos["Dbx_midi_config"]           );
+	query.bindValue(":midi_mt32rate"         , datos["Dbx_midi_mt32rate"]         );
+	query.bindValue(":sblaster_sbtype"       , datos["Dbx_sblaster_sbtype"]       );
+	query.bindValue(":sblaster_sbbase"       , datos["Dbx_sblaster_sbbase"]       );
+	query.bindValue(":sblaster_irq"          , datos["Dbx_sblaster_irq"]          );
+	query.bindValue(":sblaster_dma"          , datos["Dbx_sblaster_dma"]          );
+	query.bindValue(":sblaster_hdma"         , datos["Dbx_sblaster_hdma"]         );
+	query.bindValue(":sblaster_mixer"        , datos["Dbx_sblaster_mixer"]        );
+	query.bindValue(":sblaster_oplmode"      , datos["Dbx_sblaster_oplmode"]      );
+	query.bindValue(":sblaster_oplrate"      , datos["Dbx_sblaster_oplrate"]      );
+	query.bindValue(":gus_gus"               , datos["Dbx_gus_gus"]               );
+	query.bindValue(":gus_gusrate"           , datos["Dbx_gus_gusrate"]           );
+	query.bindValue(":gus_gusbase"           , datos["Dbx_gus_gusbase"]           );
+	query.bindValue(":gus_irq1"              , datos["Dbx_gus_irq1"]              );
+	query.bindValue(":gus_irq2"              , datos["Dbx_gus_irq2"]              );
+	query.bindValue(":gus_dma1"              , datos["Dbx_gus_dma1"]              );
+	query.bindValue(":gus_dma2"              , datos["Dbx_gus_dma2"]              );
+	query.bindValue(":gus_ultradir"          , datos["Dbx_gus_ultradir"]          );
+	query.bindValue(":speaker_pcspeaker"     , datos["Dbx_speaker_pcspeaker"]     );
+	query.bindValue(":speaker_pcrate"        , datos["Dbx_speaker_pcrate"]        );
+	query.bindValue(":speaker_tandy"         , datos["Dbx_speaker_tandy"]         );
+	query.bindValue(":speaker_tandyrate"     , datos["Dbx_speaker_tandyrate"]     );
+	query.bindValue(":speaker_disney"        , datos["Dbx_speaker_disney"]        );
+	query.bindValue(":joystick_type"         , datos["Dbx_joystick_type"]         );
+	query.bindValue(":joystick_timed"        , datos["Dbx_joystick_timed"]        );
+	query.bindValue(":joystick_autofire"     , datos["Dbx_joystick_autofire"]     );
+	query.bindValue(":joystick_swap34"       , datos["Dbx_joystick_swap34"]       );
+	query.bindValue(":joystick_buttonwrap"   , datos["Dbx_joystick_buttonwrap"]   );
+	query.bindValue(":modem_modem"           , datos["Dbx_modem_modem"]           );
+	query.bindValue(":modem_comport"         , datos["Dbx_modem_comport"]         );
+	query.bindValue(":modem_listenport"      , datos["Dbx_modem_listenport"]      );
+	query.bindValue(":dserial_directserial"  , datos["Dbx_dserial_directserial"]  );
+	query.bindValue(":dserial_comport"       , datos["Dbx_dserial_comport"]       );
+	query.bindValue(":dserial_realport"      , datos["Dbx_dserial_realport"]      );
+	query.bindValue(":dserial_defaultbps"    , datos["Dbx_dserial_defaultbps"]    );
+	query.bindValue(":dserial_parity"        , datos["Dbx_dserial_parity"]        );
+	query.bindValue(":dserial_bytesize"      , datos["Dbx_dserial_bytesize"]      );
+	query.bindValue(":dserial_stopbit"       , datos["Dbx_dserial_stopbit"]       );
+	query.bindValue(":serial_1"              , datos["Dbx_serial_1"]              );
+	query.bindValue(":serial_2"              , datos["Dbx_serial_2"]              );
+	query.bindValue(":serial_3"              , datos["Dbx_serial_3"]              );
+	query.bindValue(":serial_4"              , datos["Dbx_serial_4"]              );
+	query.bindValue(":dos_xms"               , datos["Dbx_dos_xms"]               );
+	query.bindValue(":dos_ems"               , datos["Dbx_dos_ems"]               );
+	query.bindValue(":dos_umb"               , datos["Dbx_dos_umb"]               );
+	query.bindValue(":dos_keyboardlayout"    , datos["Dbx_dos_keyboardlayout"]    );
+	query.bindValue(":ipx_ipx"               , datos["Dbx_ipx_ipx"]               );
+	query.bindValue(":autoexec"              , datos["Dbx_autoexec"]              );
+	query.bindValue(":opt_autoexec"          , datos["Dbx_opt_autoexec"]          );
+	query.bindValue(":opt_loadfix"           , datos["Dbx_opt_loadfix"]           );
+	query.bindValue(":opt_loadfix_mem"       , datos["Dbx_opt_loadfix_mem"]       );
+	query.bindValue(":opt_consola_dbox"      , datos["Dbx_opt_consola_dbox"]      );
+	query.bindValue(":opt_cerrar_dbox"       , datos["Dbx_opt_cerrar_dbox"]       );
+	query.bindValue(":opt_cycle_sincronizar" , datos["Dbx_opt_cycle_sincronizar"] );
+	query.bindValue(":path_conf"             , datos["Dbx_path_conf"]             );
+	query.bindValue(":path_sonido"           , datos["Dbx_path_sonido"]           );
+	query.bindValue(":path_exe"              , datos["Dbx_path_exe"]              );
+	query.bindValue(":path_setup"            , datos["Dbx_path_setup"]            );
+	query.bindValue(":parametros_exe"        , datos["Dbx_parametros_exe"]        );
+	query.bindValue(":parametros_setup"      , datos["Dbx_parametros_setup"]      );
+	query.bindValue(":id"                    , IDdbx                              );
 	query.exec();
 }
 
@@ -935,6 +1001,7 @@ void dbSql::ItemInsertaMontajesDbx(QTreeWidget *treeWidget, const QString IDdbx)
 	{
 		QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
 		QSqlQuery query;
+		query.clear();
 		query.prepare( strSQL );
 		query.bindValue(":id_dosbox"   , IDdbx         );
 		query.bindValue(":id_lista"    , num_mount     );
@@ -961,6 +1028,7 @@ QString dbSql::ItemInsertaUnMontajeDbx(const QHash<QString, QString> datos, cons
 	strSQL.append(")");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
 	query.bindValue(":id_dosbox"   , IDdbx                 );
 	query.bindValue(":id_lista"    , datos["id_lista"]     );
@@ -991,6 +1059,7 @@ void dbSql::ItemActualizaMontajeDbx(QTreeWidget *treeWidget)
 	{
 		QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
 		QSqlQuery query;
+		query.clear();
 		query.prepare( strSQL );
 		query.bindValue(":id_lista"    , num_mount     );
 		query.bindValue(":path"        , item->text(0) );
@@ -1015,47 +1084,49 @@ void dbSql::ItemEliminarMontaje( const QString IDmountdbx )
 
 QHash<QString, QString> dbSql::showConfg_ScummVM(QString IDgrl)
 {
-	QHash<QString, QString> tmpScummvm;
+	QHash<QString, QString> tmpScummVM;
 	QSqlQuery query;
 	query.clear();
 	query.exec("SELECT * FROM dbgrl_emu_scummvm WHERE idgrl="+IDgrl+" LIMIT 0,1");
 	query.first();
 
-	tmpScummvm["id"]              = query.record().value("id" ).toString();
-	tmpScummvm["idgrl"]           = query.record().value("idgrl" ).toString();
-	tmpScummvm["game"]            = query.record().value("game" ).toString();
-	tmpScummvm["language"]        = query.record().value("language").toString();
-	tmpScummvm["subtitles"]       = query.record().value("subtitles").toString();
-	tmpScummvm["platform"]        = query.record().value("platform").toString();
-	tmpScummvm["gfx_mode"]        = query.record().value("gfx_mode").toString();
-	tmpScummvm["render_mode"]     = query.record().value("render_mode").toString();
-	tmpScummvm["fullscreen"]      = query.record().value("fullscreen").toString();
-	tmpScummvm["aspect_ratio"]    = query.record().value("aspect_ratio").toString();
-	tmpScummvm["path"]            = query.record().value("path").toString();
-	tmpScummvm["path_setup"]      = query.record().value("path_setup").toString();
-	tmpScummvm["path_extra"]      = query.record().value("path_extra").toString();
-	tmpScummvm["path_save"]       = query.record().value("path_save").toString();
-	tmpScummvm["path_capturas"]   = query.record().value("path_capturas").toString();
-	tmpScummvm["path_sonido"]     = query.record().value("path_sonido").toString();
-	tmpScummvm["music_driver"]    = query.record().value("music_driver").toString();
-	tmpScummvm["enable_gs"]       = query.record().value("enable_gs").toString();
-	tmpScummvm["multi_midi"]      = query.record().value("multi_midi").toString();
-	tmpScummvm["native_mt32"]     = query.record().value("native_mt32").toString();
-	tmpScummvm["master_volume"]   = query.record().value("master_volume").toString();
-	tmpScummvm["music_volume"]    = query.record().value("music_volume").toString();
-	tmpScummvm["sfx_volume"]      = query.record().value("sfx_volume").toString();
-	tmpScummvm["speech_volume"]   = query.record().value("speech_volume").toString();
-	tmpScummvm["tempo"]           = query.record().value("tempo").toString();
-	tmpScummvm["talkspeed"]       = query.record().value("talkspeed").toString();
-	tmpScummvm["debuglevel"]      = query.record().value("debuglevel").toString();
-	tmpScummvm["cdrom"]           = query.record().value("cdrom").toString();
-	tmpScummvm["joystick_num"]    = query.record().value("joystick_num").toString();
-	tmpScummvm["output_rate"]     = query.record().value("output_rate").toString();
-	tmpScummvm["midi_gain"]       = query.record().value("midi_gain").toString();
-	tmpScummvm["copy_protection"] = query.record().value("copy_protection").toString();
-	tmpScummvm["sound_font"]      = query.record().value("sound_font").toString();
+	tmpScummVM["Svm_id"]              = query.record().value("id" ).toString();
+	tmpScummVM["Svm_idgrl"]           = query.record().value("idgrl" ).toString();
+	tmpScummVM["Svm_game"]            = query.record().value("game" ).toString();
+	tmpScummVM["Svm_game_label"]      = query.record().value("game_label" ).toString();
+	tmpScummVM["Svm_language"]        = query.record().value("language").toString();
+	tmpScummVM["Svm_subtitles"]       = query.record().value("subtitles").toString();
+	tmpScummVM["Svm_platform"]        = query.record().value("platform").toString();
+	tmpScummVM["Svm_gfx_mode"]        = query.record().value("gfx_mode").toString();
+	tmpScummVM["Svm_render_mode"]     = query.record().value("render_mode").toString();
+	tmpScummVM["Svm_fullscreen"]      = query.record().value("fullscreen").toString();
+	tmpScummVM["Svm_aspect_ratio"]    = query.record().value("aspect_ratio").toString();
+	tmpScummVM["Svm_path"]            = query.record().value("path").toString();
+	tmpScummVM["Svm_path_setup"]      = query.record().value("path_setup").toString();
+	tmpScummVM["Svm_path_extra"]      = query.record().value("path_extra").toString();
+	tmpScummVM["Svm_path_save"]       = query.record().value("path_save").toString();
+	tmpScummVM["Svm_path_capturas"]   = query.record().value("path_capturas").toString();
+	tmpScummVM["Svm_path_sonido"]     = query.record().value("path_sonido").toString();
+	tmpScummVM["Svm_music_driver"]    = query.record().value("music_driver").toString();
+	tmpScummVM["Svm_enable_gs"]       = query.record().value("enable_gs").toString();
+	tmpScummVM["Svm_multi_midi"]      = query.record().value("multi_midi").toString();
+	tmpScummVM["Svm_native_mt32"]     = query.record().value("native_mt32").toString();
+	tmpScummVM["Svm_master_volume"]   = query.record().value("master_volume").toString();
+	tmpScummVM["Svm_music_volume"]    = query.record().value("music_volume").toString();
+	tmpScummVM["Svm_sfx_volume"]      = query.record().value("sfx_volume").toString();
+	tmpScummVM["Svm_speech_volume"]   = query.record().value("speech_volume").toString();
+	tmpScummVM["Svm_tempo"]           = query.record().value("tempo").toString();
+	tmpScummVM["Svm_talkspeed"]       = query.record().value("talkspeed").toString();
+	tmpScummVM["Svm_debuglevel"]      = query.record().value("debuglevel").toString();
+	tmpScummVM["Svm_cdrom"]           = query.record().value("cdrom").toString();
+	tmpScummVM["Svm_joystick_num"]    = query.record().value("joystick_num").toString();
+	tmpScummVM["Svm_output_rate"]     = query.record().value("output_rate").toString();
+	tmpScummVM["Svm_midi_gain"]       = query.record().value("midi_gain").toString();
+	tmpScummVM["Svm_copy_protection"] = query.record().value("copy_protection").toString();
+	tmpScummVM["Svm_sound_font"]      = query.record().value("sound_font").toString();
+	tmpScummVM["Svm_walkspeed"]       = query.record().value("walkspeed").toString();
 
-	return tmpScummvm;
+	return tmpScummVM;
 }
 
 void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString IDgrl)
@@ -1063,50 +1134,53 @@ void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString ID
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_emu_scummvm (");
-	strSQL.append("idgrl, game, language, subtitles, platform, gfx_mode, render_mode, fullscreen, aspect_ratio, path, ");
+	strSQL.append("idgrl, game, game_label, language, subtitles, platform, gfx_mode, render_mode, fullscreen, aspect_ratio, path, ");
 	strSQL.append("path_setup, path_extra, path_save, path_capturas, path_sonido, music_driver, enable_gs, multi_midi, ");
 	strSQL.append("native_mt32, master_volume, music_volume, sfx_volume, speech_volume, tempo, talkspeed, debuglevel, ");
-	strSQL.append("cdrom, joystick_num, output_rate, midi_gain, copy_protection, sound_font ");
+	strSQL.append("cdrom, joystick_num, output_rate, midi_gain, copy_protection, sound_font, walkspeed ");
 	strSQL.append(") VALUES ( ");
-	strSQL.append(":idgrl, :game, :language, :subtitles, :platform, :gfx_mode, :render_mode, :fullscreen, :aspect_ratio, :path, ");
+	strSQL.append(":idgrl, :game, :game_label, :language, :subtitles, :platform, :gfx_mode, :render_mode, :fullscreen, :aspect_ratio, :path, ");
 	strSQL.append(":path_setup, :path_extra, :path_save, :path_capturas, :path_sonido, :music_driver, :enable_gs, :multi_midi, ");
 	strSQL.append(":native_mt32, :master_volume, :music_volume, :sfx_volume, :speech_volume, :tempo, :talkspeed, :debuglevel, ");
-	strSQL.append(":cdrom, :joystick_num, :output_rate, :midi_gain, :copy_protection, :sound_font )");
+	strSQL.append(":cdrom, :joystick_num, :output_rate, :midi_gain, :copy_protection, :sound_font, :walkspeed )");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":idgrl"           , IDgrl                    );
-	query.bindValue(":game"            , datos["game"]            );
-	query.bindValue(":language"        , datos["language"]        );
-	query.bindValue(":subtitles"       , datos["subtitles"]       );
-	query.bindValue(":platform"        , datos["platform"]        );
-	query.bindValue(":gfx_mode"        , datos["gfx_mode"]        );
-	query.bindValue(":render_mode"     , datos["render_mode"]     );
-	query.bindValue(":fullscreen"      , datos["fullscreen"]      );
-	query.bindValue(":aspect_ratio"    , datos["aspect_ratio"]    );
-	query.bindValue(":path"            , datos["path"]            );
-	query.bindValue(":path_setup"      , datos["path_setup"]      );
-	query.bindValue(":path_extra"      , datos["path_extra"]      );
-	query.bindValue(":path_save"       , datos["path_save"]       );
-	query.bindValue(":path_capturas"   , datos["path_capturas"]   );
-	query.bindValue(":path_sonido"     , datos["path_sonido"]     );
-	query.bindValue(":music_driver"    , datos["music_driver"]    );
-	query.bindValue(":enable_gs"       , datos["enable_gs"]       );
-	query.bindValue(":multi_midi"      , datos["multi_midi"]      );
-	query.bindValue(":native_mt32"     , datos["native_mt32"]     );
-	query.bindValue(":master_volume"   , datos["master_volume"]   );
-	query.bindValue(":music_volume"    , datos["music_volume"]    );
-	query.bindValue(":sfx_volume"      , datos["sfx_volume"]      );
-	query.bindValue(":speech_volume"   , datos["speech_volume"]   );
-	query.bindValue(":tempo"           , datos["tempo"]           );
-	query.bindValue(":talkspeed"       , datos["talkspeed"]       );
-	query.bindValue(":debuglevel"      , datos["debuglevel"]      );
-	query.bindValue(":cdrom"           , datos["cdrom"]           );
-	query.bindValue(":joystick_num"    , datos["joystick_num"]    );
-	query.bindValue(":output_rate"     , datos["output_rate"]     );
-	query.bindValue(":midi_gain"       , datos["midi_gain"]       );
-	query.bindValue(":copy_protection" , datos["copy_protection"] );
-	query.bindValue(":sound_font"      , datos["sound_font"]      );
+	query.bindValue(":idgrl"           , IDgrl                        );
+	query.bindValue(":game"            , datos["Svm_game"]            );
+	query.bindValue(":game_label"      , datos["Svm_game_label"]      );
+	query.bindValue(":language"        , datos["Svm_language"]        );
+	query.bindValue(":subtitles"       , datos["Svm_subtitles"]       );
+	query.bindValue(":platform"        , datos["Svm_platform"]        );
+	query.bindValue(":gfx_mode"        , datos["Svm_gfx_mode"]        );
+	query.bindValue(":render_mode"     , datos["Svm_render_mode"]     );
+	query.bindValue(":fullscreen"      , datos["Svm_fullscreen"]      );
+	query.bindValue(":aspect_ratio"    , datos["Svm_aspect_ratio"]    );
+	query.bindValue(":path"            , datos["Svm_path"]            );
+	query.bindValue(":path_setup"      , datos["Svm_path_setup"]      );
+	query.bindValue(":path_extra"      , datos["Svm_path_extra"]      );
+	query.bindValue(":path_save"       , datos["Svm_path_save"]       );
+	query.bindValue(":path_capturas"   , datos["Svm_path_capturas"]   );
+	query.bindValue(":path_sonido"     , datos["Svm_path_sonido"]     );
+	query.bindValue(":music_driver"    , datos["Svm_music_driver"]    );
+	query.bindValue(":enable_gs"       , datos["Svm_enable_gs"]       );
+	query.bindValue(":multi_midi"      , datos["Svm_multi_midi"]      );
+	query.bindValue(":native_mt32"     , datos["Svm_native_mt32"]     );
+	query.bindValue(":master_volume"   , datos["Svm_master_volume"]   );
+	query.bindValue(":music_volume"    , datos["Svm_music_volume"]    );
+	query.bindValue(":sfx_volume"      , datos["Svm_sfx_volume"]      );
+	query.bindValue(":speech_volume"   , datos["Svm_speech_volume"]   );
+	query.bindValue(":tempo"           , datos["Svm_tempo"]           );
+	query.bindValue(":talkspeed"       , datos["Svm_talkspeed"]       );
+	query.bindValue(":debuglevel"      , datos["Svm_debuglevel"]      );
+	query.bindValue(":cdrom"           , datos["Svm_cdrom"]           );
+	query.bindValue(":joystick_num"    , datos["Svm_joystick_num"]    );
+	query.bindValue(":output_rate"     , datos["Svm_output_rate"]     );
+	query.bindValue(":midi_gain"       , datos["Svm_midi_gain"]       );
+	query.bindValue(":copy_protection" , datos["Svm_copy_protection"] );
+	query.bindValue(":sound_font"      , datos["Svm_sound_font"]      );
+	query.bindValue(":walkspeed"       , datos["Svm_walkspeed"]       );
 	query.exec();
 }
 
@@ -1115,52 +1189,54 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl_emu_scummvm SET ");
-	strSQL.append("game = :game, language = :language, subtitles = :subtitles, platform = :platform, ");
+	strSQL.append("game = :game, game_label = :game_label, language = :language, subtitles = :subtitles, platform = :platform, ");
 	strSQL.append("gfx_mode  = :gfx_mode, render_mode = :render_mode, fullscreen = :fullscreen, aspect_ratio = :aspect_ratio, ");
 	strSQL.append("path = :path, path_setup = :path_setup, path_extra = :path_extra, path_save = :path_save, ");
 	strSQL.append("path_capturas = :path_capturas, path_sonido = :path_sonido, music_driver = :music_driver, enable_gs = :enable_gs, ");
 	strSQL.append("multi_midi = :multi_midi, native_mt32 = :native_mt32, master_volume = :master_volume, music_volume = :music_volume, ");
 	strSQL.append("sfx_volume = :sfx_volume, speech_volume = :speech_volume, tempo = :tempo, talkspeed = :talkspeed, ");
 	strSQL.append("debuglevel = :debuglevel, cdrom = :cdrom, joystick_num = :joystick_num, output_rate = :output_rate, ");
-	strSQL.append("midi_gain = :midi_gain, copy_protection = :copy_protection, sound_font = :sound_font ");
-
+	strSQL.append("midi_gain = :midi_gain, copy_protection = :copy_protection, sound_font = :sound_font, walkspeed = :walkspeed ");
 	strSQL.append("WHERE id = :id;");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-//	query.bindValue(":idgrl"           , IDgrl                    );
-	query.bindValue(":game"            , datos["game"]            );
-	query.bindValue(":language"        , datos["language"]        );
-	query.bindValue(":subtitles"       , datos["subtitles"]       );
-	query.bindValue(":platform"        , datos["platform"]        );
-	query.bindValue(":gfx_mode"        , datos["gfx_mode"]        );
-	query.bindValue(":render_mode"     , datos["render_mode"]     );
-	query.bindValue(":fullscreen"      , datos["fullscreen"]      );
-	query.bindValue(":aspect_ratio"    , datos["aspect_ratio"]    );
-	query.bindValue(":path"            , datos["path"]            );
-	query.bindValue(":path_setup"      , datos["path_setup"]      );
-	query.bindValue(":path_extra"      , datos["path_extra"]      );
-	query.bindValue(":path_save"       , datos["path_save"]       );
-	query.bindValue(":path_capturas"   , datos["path_capturas"]   );
-	query.bindValue(":path_sonido"     , datos["path_sonido"]     );
-	query.bindValue(":music_driver"    , datos["music_driver"]    );
-	query.bindValue(":enable_gs"       , datos["enable_gs"]       );
-	query.bindValue(":multi_midi"      , datos["multi_midi"]      );
-	query.bindValue(":native_mt32"     , datos["native_mt32"]     );
-	query.bindValue(":master_volume"   , datos["master_volume"]   );
-	query.bindValue(":music_volume"    , datos["music_volume"]    );
-	query.bindValue(":sfx_volume"      , datos["sfx_volume"]      );
-	query.bindValue(":speech_volume"   , datos["speech_volume"]   );
-	query.bindValue(":tempo"           , datos["tempo"]           );
-	query.bindValue(":talkspeed"       , datos["talkspeed"]       );
-	query.bindValue(":debuglevel"      , datos["debuglevel"]      );
-	query.bindValue(":cdrom"           , datos["cdrom"]           );
-	query.bindValue(":joystick_num"    , datos["joystick_num"]    );
-	query.bindValue(":output_rate"     , datos["output_rate"]     );
-	query.bindValue(":midi_gain"       , datos["midi_gain"]       );
-	query.bindValue(":copy_protection" , datos["copy_protection"] );
-	query.bindValue(":sound_font"      , datos["sound_font"]      );
-	query.bindValue(":id"              , IDsvm                    ); // id del scummvm
+//	query.bindValue(":idgrl"           , IDgrl                        );
+	query.bindValue(":game"            , datos["Svm_game"]            );
+	query.bindValue(":game_label"      , datos["Svm_game_label"]      );
+	query.bindValue(":language"        , datos["Svm_language"]        );
+	query.bindValue(":subtitles"       , datos["Svm_subtitles"]       );
+	query.bindValue(":platform"        , datos["Svm_platform"]        );
+	query.bindValue(":gfx_mode"        , datos["Svm_gfx_mode"]        );
+	query.bindValue(":render_mode"     , datos["Svm_render_mode"]     );
+	query.bindValue(":fullscreen"      , datos["Svm_fullscreen"]      );
+	query.bindValue(":aspect_ratio"    , datos["Svm_aspect_ratio"]    );
+	query.bindValue(":path"            , datos["Svm_path"]            );
+	query.bindValue(":path_setup"      , datos["Svm_path_setup"]      );
+	query.bindValue(":path_extra"      , datos["Svm_path_extra"]      );
+	query.bindValue(":path_save"       , datos["Svm_path_save"]       );
+	query.bindValue(":path_capturas"   , datos["Svm_path_capturas"]   );
+	query.bindValue(":path_sonido"     , datos["Svm_path_sonido"]     );
+	query.bindValue(":music_driver"    , datos["Svm_music_driver"]    );
+	query.bindValue(":enable_gs"       , datos["Svm_enable_gs"]       );
+	query.bindValue(":multi_midi"      , datos["Svm_multi_midi"]      );
+	query.bindValue(":native_mt32"     , datos["Svm_native_mt32"]     );
+	query.bindValue(":master_volume"   , datos["Svm_master_volume"]   );
+	query.bindValue(":music_volume"    , datos["Svm_music_volume"]    );
+	query.bindValue(":sfx_volume"      , datos["Svm_sfx_volume"]      );
+	query.bindValue(":speech_volume"   , datos["Svm_speech_volume"]   );
+	query.bindValue(":tempo"           , datos["Svm_tempo"]           );
+	query.bindValue(":talkspeed"       , datos["Svm_talkspeed"]       );
+	query.bindValue(":debuglevel"      , datos["Svm_debuglevel"]      );
+	query.bindValue(":cdrom"           , datos["Svm_cdrom"]           );
+	query.bindValue(":joystick_num"    , datos["Svm_joystick_num"]    );
+	query.bindValue(":output_rate"     , datos["Svm_output_rate"]     );
+	query.bindValue(":midi_gain"       , datos["Svm_midi_gain"]       );
+	query.bindValue(":copy_protection" , datos["Svm_copy_protection"] );
+	query.bindValue(":sound_font"      , datos["Svm_sound_font"]      );
+	query.bindValue(":walkspeed"       , datos["Svm_walkspeed"]       );
+	query.bindValue(":id"              , IDsvm                        ); // id del scummvm
 	query.exec();
 }
 
@@ -1172,15 +1248,15 @@ QHash<QString, QString> dbSql::showConfg_VDMSound(QString IDgrl)
 	query.exec("SELECT * FROM dbgrl_emu_vdmsound WHERE idgrl="+IDgrl+" LIMIT 0,1");
 	query.first();
 
-	tmpVdmsound["id"]            = query.record().value("id").toString();
-	tmpVdmsound["idgrl"]         = query.record().value("idgrl").toString();
-	tmpVdmsound["path_conf"]     = query.record().value("path_conf").toString();
-	tmpVdmsound["path_exe"]      = query.record().value("path_exe").toString();
-	tmpVdmsound["program"]       = query.record().value("program").toString();
-	tmpVdmsound["vdms_debug"]    = query.record().value("vdms_debug").toString();
-	tmpVdmsound["winnt_dos"]     = query.record().value("winnt_dos").toString();
-	tmpVdmsound["winnt_dosbox"]  = query.record().value("winnt_dosbox").toString();
-	tmpVdmsound["winnt_storage"] = query.record().value("winnt_storage").toString();
+	tmpVdmsound["Vdms_id"]            = query.record().value("id").toString();
+	tmpVdmsound["Vdms_idgrl"]         = query.record().value("idgrl").toString();
+	tmpVdmsound["Vdms_path_conf"]     = query.record().value("path_conf").toString();
+	tmpVdmsound["Vdms_path_exe"]      = query.record().value("path_exe").toString();
+	tmpVdmsound["Vdms_program"]       = query.record().value("program").toString();
+	tmpVdmsound["Vdms_vdms_debug"]    = query.record().value("vdms_debug").toString();
+	tmpVdmsound["Vdms_winnt_dos"]     = query.record().value("winnt_dos").toString();
+	tmpVdmsound["Vdms_winnt_dosbox"]  = query.record().value("winnt_dosbox").toString();
+	tmpVdmsound["Vdms_winnt_storage"] = query.record().value("winnt_storage").toString();
 
 	return tmpVdmsound;
 }
@@ -1195,16 +1271,16 @@ void dbSql::ItemInsertaVdms(const QHash<QString, QString> datos, const QString I
 	strSQL.append(":idgrl, :path_conf, :path_exe, :program, :vdms_debug, :winnt_dos, :winnt_dosbox, :winnt_storage )");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":idgrl"         , IDgrl              );
-	query.bindValue(":path_conf"     , datos["path_conf"] );
-	query.bindValue(":path_exe"      , datos["path_exe"]  );
-	query.bindValue(":program"       , datos["program_1"]    +"|"+ datos["program_2"]    );
-	query.bindValue(":vdms_debug"    , datos["vdms_debug_1"] +"|"+ datos["vdms_debug_2"] );
-	query.bindValue(":winnt_dos"     , datos["winnt_dos_1"]  +"|"+ datos["winnt_dos_2"]  );
-	query.bindValue(":winnt_dosbox"  , datos["winnt_dosbox_1"] +"|"+ datos["winnt_dosbox_2"] +"|"+ datos["winnt_dosbox_3"] );
-	query.bindValue(":winnt_storage" , datos["winnt_storage_1"] +"|"+ datos["winnt_storage_2"] );
-
+	query.bindValue(":idgrl"         , IDgrl );
+	query.bindValue(":path_conf"     , datos["Vdms_path_conf"] );
+	query.bindValue(":path_exe"      , datos["Vdms_path_exe"] );
+	query.bindValue(":program"       , datos["Vdms_program_1"] +"|"+ datos["Vdms_program_2"] );
+	query.bindValue(":vdms_debug"    , datos["Vdms_vdms_debug_1"] +"|"+ datos["Vdms_vdms_debug_2"] );
+	query.bindValue(":winnt_dos"     , datos["Vdms_winnt_dos_1"] +"|"+ datos["Vdms_winnt_dos_2"] );
+	query.bindValue(":winnt_dosbox"  , datos["Vdms_winnt_dosbox_1"] +"|"+ datos["Vdms_winnt_dosbox_2"] +"|"+ datos["Vdms_winnt_dosbox_3"] );
+	query.bindValue(":winnt_storage" , datos["Vdms_winnt_storage_1"] +"|"+ datos["Vdms_winnt_storage_2"] );
 	query.exec();
 }
 
@@ -1218,14 +1294,15 @@ void dbSql::ItemActualizaVdms(const QHash<QString, QString> datos, const QString
 	strSQL.append("WHERE id = :id;");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":path_conf"     , datos["path_conf"] );
-	query.bindValue(":path_exe"      , datos["path_exe"]  );
-	query.bindValue(":program"       , datos["program_1"]    +"|"+ datos["program_2"]    );
-	query.bindValue(":vdms_debug"    , datos["vdms_debug_1"] +"|"+ datos["vdms_debug_2"] );
-	query.bindValue(":winnt_dos"     , datos["winnt_dos_1"]  +"|"+ datos["winnt_dos_2"]  );
-	query.bindValue(":winnt_dosbox"  , datos["winnt_dosbox_1"] +"|"+ datos["winnt_dosbox_2"] +"|"+ datos["winnt_dosbox_3"] );
-	query.bindValue(":winnt_storage" , datos["winnt_storage_1"] +"|"+ datos["winnt_storage_2"] );
+	query.bindValue(":path_conf"     , datos["Vdms_path_conf"] );
+	query.bindValue(":path_exe"      , datos["Vdms_path_exe"] );
+	query.bindValue(":program"       , datos["Vdms_program_1"] +"|"+ datos["Vdms_program_2"] );
+	query.bindValue(":vdms_debug"    , datos["Vdms_vdms_debug_1"] +"|"+ datos["Vdms_vdms_debug_2"] );
+	query.bindValue(":winnt_dos"     , datos["Vdms_winnt_dos_1"] +"|"+ datos["Vdms_winnt_dos_2"] );
+	query.bindValue(":winnt_dosbox"  , datos["Vdms_winnt_dosbox_1"] +"|"+ datos["Vdms_winnt_dosbox_2"] +"|"+ datos["Vdms_winnt_dosbox_3"] );
+	query.bindValue(":winnt_storage" , datos["Vdms_winnt_storage_1"] +"|"+ datos["Vdms_winnt_storage_2"] );
 	query.bindValue(":id"            , IDvdms   );
 	query.exec();
 }
@@ -1235,14 +1312,15 @@ void dbSql::ItemInsertaFiles(QTreeWidget *treeWidget, const QString IDgrl)
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_file (");
-	strSQL.append("idgrl, nombre, crc, descripcion, path, size");
+	strSQL.append("idgrl, nombre, crc, descripcion, path, size, tipo");
 	strSQL.append(") VALUES ( ");
-	strSQL.append(":idgrl, :nombre, :crc, :descripcion, :path, :size )");
+	strSQL.append(":idgrl, :nombre, :crc, :descripcion, :path, :size, :tipo )");
 
 	for(int num_file = 0; num_file < treeWidget->topLevelItemCount(); num_file++ )
 	{
 		QTreeWidgetItem *item_files = treeWidget->topLevelItem( num_file );
 		QSqlQuery query;
+		query.clear();
 		query.prepare( strSQL );
 		query.bindValue(":idgrl"       , IDgrl               );
 		query.bindValue(":nombre"      , item_files->text(0) );
@@ -1250,6 +1328,7 @@ void dbSql::ItemInsertaFiles(QTreeWidget *treeWidget, const QString IDgrl)
 		query.bindValue(":descripcion" , item_files->text(2) );
 		query.bindValue(":path"        , item_files->text(4) );
 		query.bindValue(":size"        , item_files->text(3) );
+		query.bindValue(":tipo"        , item_files->text(7) );
 		query.exec();
 	}
 }
@@ -1259,18 +1338,20 @@ QString dbSql::ItemInsertaUnFiles(const QHash<QString, QString> datos, const QSt
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl_file (");
-	strSQL.append("idgrl, nombre, crc, descripcion, path, size");
+	strSQL.append("idgrl, nombre, crc, descripcion, path, size, tipo");
 	strSQL.append(") VALUES ( ");
-	strSQL.append(":idgrl, :nombre, :crc, :descripcion, :path, :size )");
+	strSQL.append(":idgrl, :nombre, :crc, :descripcion, :path, :size, :tipo )");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":idgrl"       , IDgrl                );
-	query.bindValue(":nombre"      , datos["nombre"]      );
-	query.bindValue(":crc"         , datos["crc"]         );
-	query.bindValue(":descripcion" , datos["descripcion"] );
-	query.bindValue(":path"        , datos["path"]        );
-	query.bindValue(":size"        , datos["size"]        );
+	query.bindValue(":idgrl"       , IDgrl                    );
+	query.bindValue(":nombre"      , datos["Fil_nombre"]      );
+	query.bindValue(":crc"         , datos["Fil_crc"]         );
+	query.bindValue(":descripcion" , datos["Fil_descripcion"] );
+	query.bindValue(":path"        , datos["Fil_path"]        );
+	query.bindValue(":size"        , datos["Fil_size"]        );
+	query.bindValue(":tipo"        , datos["Fil_tipo"]        );
 	query.exec();
 
 	return query.lastInsertId().toString();
@@ -1281,25 +1362,28 @@ void dbSql::ItemActualizaFiles(const QHash<QString, QString> datos, const QStrin
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl_file SET ");
-	strSQL.append("nombre = :nombre, crc = :crc, descripcion = :descripcion, path = :path, size = :size ");
+	strSQL.append("nombre = :nombre, crc = :crc, descripcion = :descripcion, ");
+	strSQL.append("path = :path, size = :size, tipo = :tipo ");
 	strSQL.append("WHERE id = :id;");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":nombre"      , datos["nombre"]      );
-	query.bindValue(":crc"         , datos["crc"]         );
-	query.bindValue(":descripcion" , datos["descripcion"] );
-	query.bindValue(":path"        , datos["path"]        );
-	query.bindValue(":size"        , datos["size"]        );
-	query.bindValue(":id"          , IDFiles              );
+	query.bindValue(":nombre"      , datos["Fil_nombre"]      );
+	query.bindValue(":crc"         , datos["Fil_crc"]         );
+	query.bindValue(":descripcion" , datos["Fil_descripcion"] );
+	query.bindValue(":path"        , datos["Fil_path"]        );
+	query.bindValue(":size"        , datos["Fil_size"]        );
+	query.bindValue(":tipo"        , datos["Fil_tipo"]        );
+	query.bindValue(":id"          , IDFiles                  );
 	query.exec();
 }
 
 void dbSql::ItemEliminarFiles( const QString IDFiles )
 {
 	QSqlQuery query;
-	query.exec("DELETE FROM dbgrl_file WHERE id="+IDFiles);
 	query.clear();
+	query.exec("DELETE FROM dbgrl_file WHERE id="+IDFiles);
 }
 
 void dbSql::ItemInsertaURL(QTreeWidget *treeWidget, const QString IDgrl)
@@ -1312,6 +1396,7 @@ void dbSql::ItemInsertaURL(QTreeWidget *treeWidget, const QString IDgrl)
 	{
 		QTreeWidgetItem *item_files = treeWidget->topLevelItem( num_url );
 		QSqlQuery query;
+		query.clear();
 		query.prepare( strSQL );
 		query.bindValue(":idgrl"       , IDgrl               );
 		query.bindValue(":url"         , item_files->text(0) );
@@ -1327,10 +1412,11 @@ QString dbSql::ItemInsertaUnURL(const QHash<QString, QString> datos, const QStri
 	strSQL.append("INSERT INTO dbgrl_url ( idgrl, url, descripcion ) VALUES ( :idgrl, :url, :descripcion )");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":idgrl"       , IDgrl                );
-	query.bindValue(":url"         , datos["url"]         );
-	query.bindValue(":descripcion" , datos["descripcion"] );
+	query.bindValue(":idgrl"       , IDgrl                    );
+	query.bindValue(":url"         , datos["Url_url"]         );
+	query.bindValue(":descripcion" , datos["Url_descripcion"] );
 	query.exec();
 
 	return query.lastInsertId().toString();
@@ -1343,16 +1429,17 @@ void dbSql::ItemActualizaURL(const QHash<QString, QString> datos, const QString 
 	strSQL.append("UPDATE dbgrl_url SET url = :url, descripcion = :descripcion WHERE id = :id;");
 
 	QSqlQuery query;
+	query.clear();
 	query.prepare( strSQL );
-	query.bindValue(":url"         , datos["url"]         );
-	query.bindValue(":descripcion" , datos["descripcion"] );
-	query.bindValue(":id"          , IDURL                );
+	query.bindValue(":url"         , datos["Url_url"]         );
+	query.bindValue(":descripcion" , datos["Url_descripcion"] );
+	query.bindValue(":id"          , IDURL                    );
 	query.exec();
 }
 
 void dbSql::ItemEliminarURL( const QString IDURL )
 {
 	QSqlQuery query;
-	query.exec("DELETE FROM dbgrl_url WHERE id="+IDURL);
 	query.clear();
+	query.exec("DELETE FROM dbgrl_url WHERE id="+IDURL);
 }
