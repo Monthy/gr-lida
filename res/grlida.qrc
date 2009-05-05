@@ -31,7 +31,6 @@
         <file>datos/svm_platform.txt</file>
         <file>datos/svm_render_mode.txt</file>
         <file>datos/tema.txt</file>
-        <file>datos/xmldb.txt</file>
         <file>idiomas/gr-lida_da_DK.qm</file>
         <file>idiomas/gr-lida_en_EN.qm</file>
         <file>idiomas/gr-lida_es_ES.qm</file>
@@ -44,6 +43,7 @@
         <file>images/star_on.png</file>
         <file>images/wizard_dosbox.png</file>
         <file>images/wizard_scummvm.png</file>
+        <file>images/wizard_scummvm_bg.png</file>
         <file>images/wizard_vdmsound.png</file>
         <file>img16/DFend.png</file>
         <file>img16/acercad.png</file>
@@ -52,18 +52,22 @@
         <file>img16/aplicar.png</file>
         <file>img16/applications.png</file>
         <file>img16/archivo_comprimido.png</file>
+        <file>img16/archivo_config.png</file>
         <file>img16/archivos.png</file>
         <file>img16/atari.png</file>
         <file>img16/ayuda.png</file>
         <file>img16/barra_herramintas.png</file>
         <file>img16/basedatos.png</file>
+        <file>img16/bullet_black.png</file>
         <file>img16/c64.png</file>
         <file>img16/cancelar.png</file>
         <file>img16/capturas.png</file>
         <file>img16/carpeta_0.png</file>
         <file>img16/carpeta_1.png</file>
+        <file>img16/categorias.png</file>
         <file>img16/cd_audio.png</file>
         <file>img16/cd_iso.png</file>
+        <file>img16/cd_multi_iso.png</file>
         <file>img16/cerrar.png</file>
         <file>img16/controller.png</file>
         <file>img16/datos_1.png</file>
@@ -109,6 +113,7 @@
         <file>img16/go-up.png</file>
         <file>img16/grafica.png</file>
         <file>img16/grlida.png</file>
+        <file>img16/idiomas.png</file>
         <file>img16/img_1x.png</file>
         <file>img16/img_2x.png</file>
         <file>img16/img_2xsai.png</file>
@@ -148,15 +153,22 @@
         <file>img16/orden_asc.png</file>
         <file>img16/orden_desc.png</file>
         <file>img16/pc.png</file>
+        <file>img16/pictureflow.png</file>
         <file>img16/qt.png</file>
         <file>img16/s_cd_iso.png</file>
+        <file>img16/s_cd_multi_iso.png</file>
         <file>img16/s_drive_cdrom.png</file>
         <file>img16/s_drive_floppy.png</file>
         <file>img16/s_drive_hd.png</file>
         <file>img16/s_floppy_1.png</file>
+        <file>img16/s_floppy_2.png</file>
         <file>img16/scummvm.png</file>
         <file>img16/sinimg.png</file>
         <file>img16/style.png</file>
+        <file>img16/tag.png</file>
+        <file>img16/tray_maximize.png</file>
+        <file>img16/tray_minimize.png</file>
+        <file>img16/tray_restore.png</file>
         <file>img16/vdmsound.png</file>
         <file>img16/win9x.png</file>
         <file>img16/winxp.png</file>
@@ -234,6 +246,8 @@
         <file>imgsvm/svmlist_space.png</file>
         <file>license.gpl</file>
         <file>list_translators.txt</file>
+        <file>scripts/laisladelabandoware.js</file>
+        <file>scripts/mobygames.js</file>
         <file>smiles/biggrin.png</file>
         <file>smiles/cool.png</file>
         <file>smiles/corazon.png</file>
@@ -247,5 +261,10 @@
         <file>smiles/surprised.png</file>
         <file>smiles/wink.png</file>
         <file>tpl_juego_info.html</file>
+        <file>img16/go-back.png</file>
+        <file>img16/go-next.png</file>
+        <file>img16/multimedia.png</file>
+        <file>img16/ruleta.png</file>
+        <file>datos/dbx_cpu_type.txt</file>
     </qresource>
 </RCC>
