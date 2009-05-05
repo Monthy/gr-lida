@@ -10,9 +10,10 @@
 
 class StarDelegate : public QItemDelegate
 {
-	Q_OBJECT
+    Q_OBJECT
+
 public:
-	StarDelegate(QWidget *parent = 0);
+	StarDelegate(QString stTheme=":/", QWidget *parent = 0);
 	~StarDelegate();
 
 	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;

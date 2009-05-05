@@ -1,12 +1,12 @@
 #include "stardelegate.h"
 
-StarDelegate::StarDelegate(QWidget *parent)
-    : QItemDelegate(parent)
+StarDelegate::StarDelegate(QString stTheme, QWidget *parent)
+	: QItemDelegate(parent)
 {
 	num_column = 2;//26;
 	col_Icono  = 0;
-	star_on.load(":/images/star_on.png");
-	star_off.load(":/images/star_off.png");
+	star_on.load( stTheme+"images/star_on.png" );
+	star_off.load(stTheme+"images/star_off.png");
 }
 
 StarDelegate::~StarDelegate(){}
@@ -48,10 +48,10 @@ void StarDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
 QSize StarDelegate::sizeHint(const QStyleOptionViewItem &option,
 		const QModelIndex &index) const
 {
-    if (index.column() == num_column)
-        return QSize(5 * star_on.width(), star_on.height()) + QSize(1, 1);
+	if (index.column() == num_column)
+		return QSize(5 * star_on.width(), star_on.height()) + QSize(1, 1);
 
-    return QItemDelegate::sizeHint(option, index) + QSize(1, 1); // since we draw the grid ourselves
+	return QItemDelegate::sizeHint(option, index) + QSize(1, 1); // since we draw the grid ourselves
 }
 
 bool StarDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
