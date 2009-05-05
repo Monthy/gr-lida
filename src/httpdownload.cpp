@@ -38,27 +38,58 @@ HttpDownload::HttpDownload(QWidget *parent)
 	progressDialog = new QProgressDialog(this);
 	http = new QHttp(this);
 
+
 	connect(http, SIGNAL( requestFinished(int, bool) ), this, SLOT( httpRequestFinished(int, bool) ) );
 	connect(http, SIGNAL( responseHeaderReceived(const QHttpResponseHeader &) ), this, SLOT( readResponseHeader(const QHttpResponseHeader &) ) );
-	connect(http, SIGNAL( dataReadProgress(int, int) ), this, SLOT( updateDataReadProgress(int, int) ) ); 
+	connect(http, SIGNAL( dataReadProgress(int, int) ), this, SLOT( updateDataReadProgress(int, int) ) );
 	connect(http, SIGNAL( stateChanged(int) ), this, SLOT( httpstateChanged(int) ) );
 	connect(http, SIGNAL( authenticationRequired(const QString &, quint16, QAuthenticator *) ), this, SLOT( slotAuthenticationRequired(const QString &, quint16, QAuthenticator *) ) );
+
+#ifndef QT_NO_OPENSSL
+	connect(http, SIGNAL( sslErrors(const QList<QSslError> &) ), this, SLOT( sslErrors(const QList<QSslError> &) ) );
+#endif
 
 	connect(progressDialog, SIGNAL( canceled() ), this, SLOT( cancelDownload() ) );
 }
 
 HttpDownload::~HttpDownload()
 {
-/*
-	delete progressDialog;
-	delete http;
-	delete file;
-*/
+
 }
 
-void HttpDownload::setHttpProxy( const QString host, int port, const QString username, const QString password)
+void HttpDownload::setHttpProxy(int typeProxy, const QString host, int port, const QString username, const QString password)
 {
-	http->setProxy(host, port, username, password);
+	QNetworkProxy proxy;
+
+	switch ( typeProxy )
+	{
+		case 0:
+			proxy.setType(QNetworkProxy::DefaultProxy);
+		break;
+		case 1:
+			proxy.setType(QNetworkProxy::Socks5Proxy);
+		break;
+		case 2:
+			proxy.setType(QNetworkProxy::NoProxy);
+		break;
+		case 3:
+			proxy.setType(QNetworkProxy::HttpProxy);
+		break;
+		case 4:
+			proxy.setType(QNetworkProxy::HttpCachingProxy);
+		break;
+		default:
+			proxy.setType(QNetworkProxy::NoProxy);
+		break;
+	}
+	proxy.setHostName( host );
+	proxy.setPort( port );
+	proxy.setUser( username );
+	proxy.setPassword( password );
+//	QNetworkProxy::setApplicationProxy(proxy);
+	http->setProxy( proxy );
+
+//	http->setProxy(host, port, username, password);
 }
 
 void HttpDownload::setHttpWindowTitle(QString titulo)
@@ -66,7 +97,7 @@ void HttpDownload::setHttpWindowTitle(QString titulo)
 	m_httpwindowtitle = titulo;
 }
 
-void HttpDownload::downloadFile(QString urlfile, QString fileName)
+void HttpDownload::downloadFile(QString urlfile, QString fileName, QString metodo, QString contentPost)
 {
 	urlLineEdit.clear();
 	urlLineEdit = urlfile;
@@ -95,16 +126,36 @@ void HttpDownload::downloadFile(QString urlfile, QString fileName)
 
 		return;
 	}
-
 	QHttp::ConnectionMode mode = url.scheme().toLower() == "https" ? QHttp::ConnectionModeHttps : QHttp::ConnectionModeHttp;
 	http->setHost(url.host(), mode, url.port() == -1 ? 0 : url.port());
 
-	if(!url.userName().isEmpty())
+	if( !url.userName().isEmpty() )
 		http->setUser(url.userName(), url.password());
 
 	httpRequestAborted = false;
-//	httpGetId = http->get(urlLineEdit, file);
-	httpGetId = http->get(url.toEncoded(), file);
+
+//	QByteArray path = QUrl::toPercentEncoding(url.path(), "!$&'()*+,;=:@/");
+//	if (path.isEmpty())
+//		path = "/";
+
+	if( metodo == "POST" )
+	{
+	// header
+		QHttpRequestHeader header;
+	// content
+		QByteArray content;
+		content.append( contentPost );
+
+//		header.setRequest(metodo, path);
+		header.setRequest(metodo, url.path());
+		header.setValue("Host", url.host() );
+		header.setContentType("application/x-www-form-urlencoded"); // important
+		header.setContentLength( content.length() );
+
+		httpGetId = http->request(header, content, file);
+	} else
+		httpGetId = http->get(url.toEncoded(), file);
+//		httpGetId = http->get( path, file);
 
 	progressDialog->setWindowTitle( m_httpwindowtitle );
 	progressDialog->setLabelText( tr("Descargando %1.").arg( fileName ) );
@@ -166,12 +217,19 @@ void HttpDownload::httpRequestFinished(int requestId, bool error)
 
 void HttpDownload::readResponseHeader(const QHttpResponseHeader &responseHeader)
 {
-	if(responseHeader.statusCode() != 200)
+	switch (responseHeader.statusCode())
 	{
-		setStatusLabel("");
+	case 200:                   // Ok
+	case 301:                   // Moved Permanently
+	case 302:                   // Found
+	case 303:                   // See Other
+	case 307:                   // Temporary Redirect
+		// these are not error conditions
+		break;
 
-		QMessageBox::information(this, m_httpwindowtitle,
-			tr("La descarga ha fallado: %1.").arg( responseHeader.reasonPhrase() ) );
+	default:
+		setStatusLabel("");
+		QMessageBox::information(this, m_httpwindowtitle, tr("La descarga ha fallado: %1.").arg( responseHeader.reasonPhrase() ) );
 
 		httpRequestAborted = true;
 		progressDialog->hide();
@@ -179,7 +237,6 @@ void HttpDownload::readResponseHeader(const QHttpResponseHeader &responseHeader)
 		http->disconnect();
 		http->abort();
 		setStatusBtnDownload( true );
-		return;
 	}
 }
 
@@ -195,32 +252,30 @@ void HttpDownload::updateDataReadProgress(int bytesRead, int totalBytes)
 
 void HttpDownload::httpstateChanged(int state)
 {
-/*
 	switch( state )
 	{
 		case QHttp::Unconnected:
-			setStatusLabel("There is no connection to the host");
+//			setStatusLabel("There is no connection to the host");
 		break;
 		case QHttp::HostLookup:
-			setStatusLabel("A host name lookup is in progress.");
+//			setStatusLabel("A host name lookup is in progress.");
 		break;
 		case QHttp::Connecting:
-			setStatusLabel("An attempt to connect to the host is in progress.");
+//			setStatusLabel("An attempt to connect to the host is in progress.");
 		break;
 		case QHttp::Sending:
-			setStatusLabel("The client is sending its request to the server.");
+//			setStatusLabel("The client is sending its request to the server.");
 		break;
 		case QHttp::Reading:
-			setStatusLabel("The client's request has been sent and the client is reading the server's response.");
+//			setStatusLabel("The client's request has been sent and the client is reading the server's response.");
 		break;
 		case QHttp::Connected:
-			setStatusLabel("The connection to the host is open, but the client is neither sending a request, nor waiting for a response.");
+//			setStatusLabel("The connection to the host is open, but the client is neither sending a request, nor waiting for a response.");
 		break;
 		case QHttp::Closing:
-			setStatusLabel("The connection is closing down, but is not yet closed. (The state will be Unconnected when the connection is closed.");
+//			setStatusLabel("The connection is closing down, but is not yet closed. (The state will be Unconnected when the connection is closed.");
 		break;
 	}
-*/
 }
 
 void HttpDownload::slotAuthenticationRequired(const QString &hostName, quint16, QAuthenticator *authenticator)
@@ -249,3 +304,21 @@ void HttpDownload::setStatusLabel(QString str)
 	m_statuslabel = str;
 	emit statusLabelChanged( str );
 }
+
+#ifndef QT_NO_OPENSSL
+void HttpDownload::sslErrors(const QList<QSslError> &errors)
+{
+	QString errorString;
+	foreach (const QSslError &error, errors)
+	{
+		if(!errorString.isEmpty())
+			errorString += ", ";
+		errorString += error.errorString();
+	}
+
+	if(QMessageBox::warning(this, m_httpwindowtitle, tr("Uno o más errores de SSL se ha producido: %1").arg(errorString),
+			QMessageBox::Ignore | QMessageBox::Abort) == QMessageBox::Ignore) {
+		http->ignoreSslErrors();
+	}
+}
+#endif

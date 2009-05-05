@@ -31,20 +31,22 @@ class QFile;
 class QHttp;
 class QHttpResponseHeader;
 class QProgressDialog;
+class QSslError;
 class QAuthenticator;
 
 class HttpDownload : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
+
 public:
 	HttpDownload(QWidget *parent = 0);
 	~HttpDownload();
 
-	void downloadFile(QString urlfile, QString fileName);
+	void downloadFile(QString urlfile, QString fileName, QString metodo = "", QString contentPost = "");
 
 	QString getStatusLabel(){ return m_statuslabel; };
 	bool getStatusBtnDownload(){ return m_downloadButton; };
-	void setHttpProxy( const QString host, int port, const QString username = "", const QString password = "");
+	void setHttpProxy(int typeProxy, const QString host, int port, const QString username = "", const QString password = "");
 	void setHttpWindowTitle(QString titulo = "HttpDownload");
 
 private:
@@ -71,6 +73,9 @@ private slots:
 	void updateDataReadProgress(int bytesRead, int totalBytes);
 	void httpstateChanged(int state);
 	void slotAuthenticationRequired(const QString &, quint16, QAuthenticator *);
+#ifndef QT_NO_OPENSSL
+	void sslErrors(const QList<QSslError> &errors);
+#endif
 
 signals:
 	void statusLabelChanged(QString str);
