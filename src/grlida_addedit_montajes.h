@@ -27,13 +27,16 @@
 
 #include <QtCore>
 #include <QtGui>
+
 #include "funciones.h"
 #include "ui_addedit_montajes.h"
 
-class frmAddEditMontajes : public QDialog {
+class frmAddEditMontajes : public QDialog
+{
     Q_OBJECT
+
 public:
-	frmAddEditMontajes(QHash<QString, QString> Montajes, QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmAddEditMontajes(QHash<QString, QString> montajes, QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmAddEditMontajes();
 
 	Ui::AddEditMontajesClass ui;
@@ -43,14 +46,18 @@ public:
 private:
 	Funciones fGrl;
 	QString stHomeDir, stTheme;
-	QHash<QString, QString> UltimoPath;
-	
+	QHash<QString, QVariant> GRLConfig;
+
 	void setTheme();
 
 private slots:
+	void on_changeTypeDrive(int row);
 	void on_btnOk();
 	void on_DirFile();
-
+	void on_SubirIso();
+	void on_BajarIso();
+	void on_DeleteIso();
+	void on_lw_MultiIso_currentItemChanged(QListWidgetItem* current, QListWidgetItem* previous);
 };
 
 #endif // GRLIDA_ADDEDIT_MONTAJES_H
