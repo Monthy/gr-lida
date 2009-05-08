@@ -27,44 +27,46 @@
 
 #include <QtCore>
 #include <QtGui>
-#include <QTreeWidget>
-#include <QTreeWidgetItem>
-#include <QFileDialog>
-#include <QDir>
-#include <QString>
+
 #include "funciones.h"
 #include "ui_dbxadd.h"
 
-class frmDbxAdd : public QDialog {
+class frmDbxAdd : public QDialog
+{
     Q_OBJECT
+
 public:
-	frmDbxAdd( QDialog *parent = 0, Qt::WFlags flags = 0 );
-    ~frmDbxAdd();
+	frmDbxAdd(QDialog *parent = 0, Qt::WFlags flags = 0);
+	~frmDbxAdd();
 
 	Ui::DbxAddClass ui;
 
-	QHash<QString, QString>  DatosJuego;
-	QHash<QString, QString>  DatosDosBox;
+	QHash<QString, QString> DatosJuego;
+	QHash<QString, QString> DatosDosBox;
 
 private:
-	Funciones fGrl;
 	QString stTituloDbx(){ return tr("Nuevo juego para el DOSBox"); }
+
+	Funciones fGrl;
 	int intStepwizard;
+
 	QString stHomeDir, stTheme;
-	QHash<QString, QString> TempDatosJuego;
-	QHash<QString, QString> TempProfileDosBox;
-	QHash<QString, QString> UltimoPath;
+
+	QHash<QString, QVariant> GRLConfig;
+	QHash<QString, QString> tempDatosJuego;
+	QHash<QString, QString> tempProfileDosBox;
 
 	void createConnections();
 	void setTheme();
-	void CargaUltimosDirectorios();
+	void CargarConfig();
+	void PrevierMontajes();
 
 private slots:
 	void on_btnOk();
 	void on_btnNext();
 	void on_btnPrevious();
-	void on_txtDatos_Titulo_textChanged(const QString &);
-	void on_setProfileGame(const QString ProfileGame);
+	void on_txtDatos_Titulo_textChanged(const QString &text);
+	void on_setProfileGame(int row);
 	void on_btnDbx_FileConfg();
 	void on_btnDbx_ExeJuego();
 	void on_btnDbx_ExeSetup();
