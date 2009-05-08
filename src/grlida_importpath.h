@@ -27,21 +27,26 @@
 
 #include <QtCore>
 #include <QtGui>
+
 #include "funciones.h"
 #include "ui_importpath.h"
 
-class frmImportPath: public QDialog {
+class frmImportPath: public QDialog
+{
     Q_OBJECT
+
 public:
-	frmImportPath(QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmImportPath(QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmImportPath();
 
 	Ui::ImportPathClass ui;
 
 private:
 	Funciones fGrl;
+
 	QString stHomeDir, stTheme;
-	QHash<QString, QString> UltimoPath;
+
+	QHash<QString, QVariant> GRLConfig;
 
 	void createConnections();
 	void setTheme();
