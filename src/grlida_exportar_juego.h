@@ -32,10 +32,12 @@
 #include "dbsql.h"
 #include "ui_exportar_juego.h"
 
-class frmExportarJuego : public QDialog {
+class frmExportarJuego : public QDialog
+{
     Q_OBJECT
+
 public:
-	frmExportarJuego( QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmExportarJuego(QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmExportarJuego();
 
 	Ui::ExportarJuegoClass ui;
@@ -43,12 +45,12 @@ public:
 private:
 	Funciones fGrl;
 	dbSql *sql;
-	
+
 	QString stHomeDir, stIconDir, stIDdbx, stTheme;
 	QHash<QString, QString> TempDatosJuego;
 	QHash<QString, QString> TempDatosScummvm;
 	QHash<QString, QString> TempDatosDosBox;
-	QHash<QString, QString> UltimoPath;
+	QHash<QString, QVariant> GRLConfig;
 	QTreeWidget *twMontajes;
 
 	void CargarListaJuegos(QString TipoEmu="", QString stdb_Orden_By="titulo", QString stdb_Orden="desc");
@@ -59,7 +61,7 @@ private slots:
 	void on_btnCheckedAll();
 	void on_btnUnCheckedAll();
 	void on_btnDirExportPath();
-	
+
 };
 
 #endif // GRLIDA_EXPORTARJUEGO_H

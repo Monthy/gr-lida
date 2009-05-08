@@ -29,29 +29,23 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
 {
 	ui.setupUi(this);
 
+	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
+	stIconDir = stHomeDir + "iconos/";	// directorio de iconos para el GR-lida
+	stTheme   = fGrl.ThemeGrl();
+	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
+
 // Conecta los distintos botones
 	connect( ui.btnOk           , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 	connect( ui.btnCheckedAll   , SIGNAL( clicked() ), this, SLOT( on_btnCheckedAll() ) );
 	connect( ui.btnUnCheckedAll , SIGNAL( clicked() ), this, SLOT( on_btnUnCheckedAll() ) );
 	connect( ui.btnDirExportPath, SIGNAL( clicked() ), this, SLOT( on_btnDirExportPath() ) );
 
-	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
-	stIconDir = stHomeDir + "iconos/";	// directorio de iconos para el GR-lida
-	stTheme   = fGrl.ThemeGrl();
-
 	setStyleSheet( fGrl.StyleSheet() );
-
-	QSettings lastdir( stHomeDir + "GR-lida.conf", QSettings::IniFormat);
-	UltimoPath.clear();
-	lastdir.beginGroup("UltimoDirectorio");
-		UltimoPath["DirExportPath"] = lastdir.value("DirExportPath", "").toString();
-	lastdir.endGroup();
+	setWindowIcon( QIcon(stTheme+"img16/exportar.png") );
 
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancelar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnDirExportPath->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-
-	CargarListaJuegos();
 
 	ui.cbxExpotarComo->clear();
 	ui.cbxExpotarComo->addItem("D-Fend Reloaded (*.prof)"); // Index 0
@@ -59,6 +53,8 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
 	ui.cbxExpotarComo->setCurrentIndex( 1 );
 
 	twMontajes = new QTreeWidget();
+
+	CargarListaJuegos();
 
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
@@ -101,7 +97,7 @@ void frmExportarJuego::on_btnOk()
 					switch ( ui.cbxExpotarComo->currentIndex() )
 					{
 						case 0: // D-Fend Reloaded
-							if( TempDatosJuego["tipo_emu"] == "dosbox" )
+							if( TempDatosJuego["Dat_tipo_emu"] == "dosbox" )
 							{
 								str_ok = archivo.endsWith(".prof");
 								if(str_ok == false)
@@ -115,7 +111,7 @@ void frmExportarJuego::on_btnOk()
 							if(str_ok == false)
 								archivo.append(".xml");
 
-							if( TempDatosJuego["tipo_emu"] == "scummvm" )
+							if( TempDatosJuego["Dat_tipo_emu"] == "scummvm" )
 								fGrl.Exportar_Profile_GRLida( TempDatosJuego, TempDatosScummvm, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
 							else
 								fGrl.Exportar_Profile_GRLida( TempDatosJuego, TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
@@ -156,13 +152,15 @@ void frmExportarJuego::on_btnUnCheckedAll()
 
 void frmExportarJuego::on_btnDirExportPath()
 {
-	ui.txtDirExportPath->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), UltimoPath["DirExportPath"], ui.txtDirExportPath->text() ));
+	ui.txtDirExportPath->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["DirExportPath"].toString(), ui.txtDirExportPath->text() ));
 
-	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
-	lastdir.beginGroup("UltimoDirectorio");
-		lastdir.setValue("DirExportPath", ui.txtDirExportPath->text()+"/" );
-	lastdir.endGroup();
-	UltimoPath["DirExportPath"] = ui.txtDirExportPath->text()+"/";
+	QDir dir( ui.txtDirExportPath->text() );
+	if( dir.exists() )
+		GRLConfig["DirExportPath"] = ui.txtDirExportPath->text();
+	else
+		GRLConfig["DirExportPath"] = "";
+
+	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","DirExportPath", GRLConfig["DirExportPath"].toString() );
 }
 
 void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By, QString stdb_Orden)
@@ -193,6 +191,11 @@ void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By,
 		} while (query.next());
 		ui.twListaJuegos->setCurrentItem( ui.twListaJuegos->itemAt(0,0) );
 	}
+
+	if( ui.twListaJuegos->topLevelItemCount() > 0 )
+		ui.btnOk->setEnabled( true );
+	else
+		ui.btnOk->setEnabled( false );
 }
 
 void frmExportarJuego::CargarDatosExportar( QString stIDx )
@@ -204,9 +207,9 @@ void frmExportarJuego::CargarDatosExportar( QString stIDx )
 	{
 		TempDatosJuego  = sql->show_Datos( stIDx );
 
-		if( TempDatosJuego["tipo_emu"] == "scummvm" )
+		if( TempDatosJuego["Dat_tipo_emu"] == "scummvm" )
 			TempDatosScummvm = sql->showConfg_ScummVM( stIDx );
-		else if(TempDatosJuego["tipo_emu"]=="dosbox")
+		else if(TempDatosJuego["Dat_tipo_emu"]=="dosbox")
 		{
 			TempDatosDosBox = sql->showConfg_DOSBox( stIDx );
 
