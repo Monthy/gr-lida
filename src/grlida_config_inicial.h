@@ -27,16 +27,19 @@
 
 #include <QtCore>
 #include <QtGui>
+#include <QHash>
+#include <QVariant>
 #include <QTranslator>
-#include <QLocale>
 
 #include "funciones.h"
 #include "ui_configinicial.h"
 
-class frmConfigInicial : public QDialog {
+class frmConfigInicial : public QDialog
+{
     Q_OBJECT
+
 public:
-	frmConfigInicial( QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmConfigInicial(QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmConfigInicial();
 
 	Ui::ConfigInicialClass ui;
@@ -47,25 +50,23 @@ protected:
 	void closeEvent( QCloseEvent *e );
 
 private:
+	Funciones fGrl;
+	QTranslator translator;
+
+	QString stHomeDir, stTheme;
+
+	QHash<QString, QVariant> GRLConfig;
+
 	void createConnections();
 	void CargarConfig();
 	void GuardarConfig();
 	void setTheme();
 
-	Funciones fGrl;
-
-	QString stHomeDir, stTheme;
-	//QString stDirDbx, stDirSvm;
-	QTranslator translator;
-	QHash<QString, QString> UltimoPath;
-	bool IdiomaExterno;
-
 private slots:
 	void on_btnOk();
 	void on_btnDirDbx();
 	void on_btnDirSvm();
-	void on_setLanguage(const QString txt_locale);
-
+	void on_setLanguage(int idx_locale);
 };
 
 #endif // GRLIDA_CONFIG_INICIAL_H
