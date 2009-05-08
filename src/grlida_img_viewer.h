@@ -26,15 +26,14 @@
 #define IMAGEVIEWER_H
 
 #include <QMainWindow>
+#include <QtCore>
 #include <QtGui>
 #include <QPrinter>
-#include "funciones.h"
+#include <QGraphicsRectItem>
 
-class QAction;
-class QLabel;
-class QMenu;
-class QScrollArea;
-class QScrollBar;
+#include "funciones.h"
+#include "qtzip.h"
+#include "ui_image_viewer.h"
 
 class ImageViewer : public QMainWindow
 {
@@ -44,48 +43,69 @@ public:
 	ImageViewer(QWidget *parent = 0, Qt::WFlags flags = 0);
 	~ImageViewer();
 
+	Ui::ImageViewerClass ui;
+
+	void openZip(QString fileName);
+	void openImg(QString fileName);
+	void open(QString fileName);
+	void open(QString fileName, QList<QString> lista, bool is_zip = false);
+
 protected:
 	void closeEvent( QCloseEvent *e );
-
-private slots:
-	void open();
-	void print();
-	void zoomIn();
-	void zoomOut();
-	void normalSize();
-	void fitToWindow();
-
-public slots:
-	void open(QString fileName);
+	void resizeEvent(QResizeEvent *event);
+	bool eventFilter(QObject *obj, QEvent *event);
 
 private:
 	Funciones fGrl;
-
-	void createActions();
-	void createMenus();
-	void createToolBars();
-	void updateActions();
-	void scaleImage(double factor);
-	void adjustScrollBar(QScrollBar *scrollBar, double factor);
+	QtZip zip;
 
 	QString stHomeDir, stTheme;
-	QLabel *imageLabel;
-	QScrollArea *scrollArea;
+	bool isZip;
+
+	QGraphicsScene *scene;
+	QGraphicsPixmapItem *pxmItem;
+
+	int scene_width, scene_height;
 	double scaleFactor;
+	int total_img, id_imagen;
+
+	QPixmap imagen_src;
+	QList<QString> imgLista;
 
 	QPrinter printer;
 
-	QAction *openAct;
-	QAction *printAct;
-	QAction *exitAct;
-	QAction *zoomInAct;
-	QAction *zoomOutAct;
-	QAction *normalSizeAct;
-	QAction *fitToWindowAct;
+// StatusBar
+	QLabel *lbpanel_1;
+	QLabel *lbpanel_2;
 
-	QMenu *fileMenu;
-	QMenu *viewMenu;
-	QToolBar *imgToolBar;
+	QLabel *lbrotar;
+	QSlider *hsRotar;
+
+	void createConnections();
+	void setTheme();
+	void createStatusBar();
+	void updateActions();
+	void scaleImage(double factor);
+	void imgItemCentrar(QGraphicsPixmapItem *imgItem);
+	void imgItemRotar(QGraphicsPixmapItem *imgItem, int r = 0);
+	void cambiaImagenScene(QPixmap imgItem);
+	void setScrollBarPolicy(bool activar = true);
+
+private slots:
+	void on_currentItemChanged(QListWidgetItem *item1,QListWidgetItem *item2);
+	void on_itemClicked(QListWidgetItem *item);
+
+	void open();
+	void print();
+
+	void zoomIn();
+	void zoomOut();
+	void normalSize();
+	void imgRotar(int r = 0);
+	void fitToWindow();
+	void nextImagen();
+	void backImagen();
+	void setListImgVisible(bool visible);
 };
 
 #endif
