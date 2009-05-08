@@ -28,15 +28,21 @@
 #include <QtCore>
 #include <QtGui>
 
+#include "funciones.h"
 #include "ui_addedit_url.h"
 
-class frmAddEditURL : public QDialog {
-	Q_OBJECT
+class frmAddEditURL : public QDialog
+{
+    Q_OBJECT
+
 public:
-	frmAddEditURL( QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmAddEditURL(QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmAddEditURL();
-	
+
 	Ui::AddEditURLClass ui;
+
+private:
+	Funciones fGrl;
 
 private slots:
 	void on_btnOk();

@@ -28,14 +28,26 @@ frmAddEditURL::frmAddEditURL(QDialog *parent, Qt::WFlags flags)
 	: QDialog( parent, flags )
 {
 	ui.setupUi(this);
+
 	connect( ui.btnOk , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
+
+	QString stTheme = fGrl.ThemeGrl();
+	setStyleSheet( fGrl.StyleSheet() );
+	setWindowIcon( QIcon(stTheme+"img16/edit_enlace.png") );
+
+	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 }
 
-frmAddEditURL::~frmAddEditURL(){}
+frmAddEditURL::~frmAddEditURL()
+{
+	//
+}
 
-void frmAddEditURL::on_btnOk(){
-	if(ui.txt_addedit_url_1->currentText()!="")
+void frmAddEditURL::on_btnOk()
+{
+	if( ui.txt_addedit_url_1->currentText() != "" )
 		QDialog::accept();
 	else
-		QMessageBox::information( this, "URL", tr("Debes poner almenos la url"));
+		QMessageBox::information(this, "URL", tr("Debes poner almenos la url"));
 }
