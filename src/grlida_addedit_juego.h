@@ -27,41 +27,34 @@
 
 #include <QtCore>
 #include <QtGui>
-#include <QDir>
-#include <QTreeWidget>
-#include <QTreeWidgetItem>
-#include <QFileDialog>
-#include <QDir>
-#include <QString>
-#include <QStringList>
-#include <QTextEdit>
-#include <QSqlQuery>
-#include <QSqlRecord>
+
 #include "funciones.h"
 #include "dbsql.h"
 #include "ui_addedit_juego.h"
 
-class frmAddEditJuego : public QDialog {
+class frmAddEditJuego : public QDialog
+{
     Q_OBJECT
+
 public:
-	frmAddEditJuego( bool EditJuego, QString TipoEmu, QString stIDIndex, QDialog *parent = 0, Qt::WFlags flags = 0 );
+	frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIndex, QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmAddEditJuego();
 
 	Ui::AddEditJuegoClass ui;
 
 	QHash<QString, QString> DatosJuego;
-	QHash<QString, QString> DatosScummvm;
+	QHash<QString, QString> DatosScummVM;
 	QHash<QString, QString> DatosDosBox;
 	QHash<QString, QString> DatosVDMSound;
 
-	QString stItemIDSvm;
-	QString stItemIDDbx;
 	QString stItemIDVdms;
 
 protected:
 	void closeEvent( QCloseEvent *e );
 
 private:
+	QHash<QString, QVariant> GRLConfig;
+
 	Funciones fGrl;
 	dbSql *sql;
 
@@ -69,38 +62,32 @@ private:
 	bool EditandoJuego;
 	QString TipoEmulador;
 	QString stItemIDGrl;
+
 	QString stTituloAddEdit(){ return windowTitle(); }
-	QString stHomeDir, stIconDir, stDatosDir, stTheme;
+	QString stHomeDir, stIconDir, stDatosDir, stTheme, stUsuario;
 	QStringList filters;
-	QStringList svm_Lista, svm_ListaTemp, smiles_Lista, smiles_ListaTemp;
 	QFile file_thumbs, file_cover_front, file_cover_back;
 	QString stThumbs, stCoverFront, stCoverBack;
 	QHash<QString, QString> listSmailes;
-	QHash<QString, QString> UltimoPath;
+
 	QUrl my_url;
 
 	void createConnections();
 	void setTheme();
-	void CargaUltimosDirectorios();
+	void CargarConfig();
 
 // Referente al DatosJuego ---------------------------------------
-	void CargarDatosJuego( QString stIDIndex );
+	void CargarDatosJuego(QString stIDIndex);
 	void setDatosJuegos();
-// Referente al ScummVM ------------------------------------------
-	void CargarDatosScummVM( QString stIDsvm );
-	void setDatosScummVM();
-// Referente al DOSBox -------------------------------------------
-	void CargarDatosDosBox(QString stIDdbx, const QString ProfileGame = "", bool isProfileGame = false);
-	void CargarDatosDBxMontaje( QString stIDdbx );
-	void setDatosDosBox();
-	QString setOpcionesSerial();
+
 // Referente al VDMSound -----------------------------------------
-	void CargarDatosVDMSound( QString stIDvdms );
+	void CargarDatosVDMSound(QString stIDvdms);
 	void setDatosVDMSound();
 
 private slots:
 	void on_btnOk();
-	void on_cbxDatos_TipoEmu_txtChanged(const QString texto);
+	void on_cbxDatos_TipoEmu_Changed(int row);
+
 // Referente al DatosJuego ---------------------------------------
 	void on_twDatoSmile_Dblclicked( QTreeWidgetItem *item);
 	void on_btnImgAbrir_Thumbs();
@@ -138,39 +125,7 @@ private slots:
 	void on_btnEditFile();
 	void on_btnUpdateFile();
 	void on_btnDeleteFile();
-
-// ---------------------------------------------------------------
-// Referente al ScummVM ------------------------------------------
-	void on_twScummVM_clicked( QTreeWidgetItem *item );
-	void on_btnDefecto();
-	void on_btnDirSvm_path();
-	void on_btnDirSvm_save();
-	void on_btnDirSvm_extra();
-	void on_btnDirSvm_capturas();
-	void on_btnDirSvm_sonido();
-	void on_btnDirSvm_setup();
-	void on_btnDirSvm_sound_font();
-
-// ---------------------------------------------------------------
-// Referente al DOSBox -------------------------------------------
-	void on_setProfileGame(const QString ProfileGame);
-	void on_btnDbx_FileConfg();
-	void on_btnDbx_ExeJuego();
-	void on_btnDbx_ExeSetup();
-	void on_btnDirGravisUltraSound();
-	void on_btnDbx_mapperfile();
-	void on_btnDbx_language();
-	void on_btnDbx_capturas();
-	void on_btnDbx_musica();
-	void on_btnDbx_AddSerial();
-	void on_btnMount_Add();
-	void on_btnMount_Edit();
-	void on_btnMount_Delete();
-	void on_btnMount_Clear();
-	void on_btnMount_Subir();
-	void on_btnMount_Bajar();
-	void on_btnMount_AutoCrear();
-	void on_btnMount_Primario();
+	void on_twDatosFiles_Dblclicked(QTreeWidgetItem *item);
 
 // ---------------------------------------------------------------
 // Referente al VDMSound -----------------------------------------
