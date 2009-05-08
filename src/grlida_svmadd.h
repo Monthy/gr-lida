@@ -27,36 +27,37 @@
 
 #include <QtCore>
 #include <QtGui>
-#include <QFile>
-#include <QMessageBox>
-#include <QTreeWidgetItem>
-#include <QFont>
+
 #include "funciones.h"
 #include "ui_svmadd.h"
 
-class frmSvmAdd : public QDialog {
+class frmSvmAdd : public QDialog
+{
     Q_OBJECT
+
 public:
-    frmSvmAdd( QDialog *parent = 0, Qt::WFlags flags = 0 );
-    ~frmSvmAdd();
+	frmSvmAdd(QDialog *parent = 0, Qt::WFlags flags = 0);
+	~frmSvmAdd();
 
-    Ui::SvmAddClass ui;
+	Ui::SvmAddClass ui;
 
-	QHash<QString, QString>  DatosJuego;
-	QHash<QString, QString>  DatosScummvm;
+	QHash<QString, QString> DatosJuego;
+	QHash<QString, QString> DatosScummVM;
 
 private:
-	Funciones fGrl;
 	QString stTituloSvm(){ return tr("Nuevo juego para el ScummVM"); }
-	QString stHomeDir, stDatosDir, stTheme;
-	QStringList svm_Lista, svm_ListaTemp;
+
+	Funciones fGrl;
 	int intStepwizard;
-	QHash<QString, QString> TempDatosJuego;
-	QHash<QString, QString> UltimoPath;
+
+	QString stHomeDir, stDatosDir, stTheme;
+
+	QHash<QString, QVariant> GRLConfig;
+	QHash<QString, QString> tempDatosJuego;
 
 	void createConnections();
 	void setTheme();
-	void CargaUltimosDirectorios();
+	void CargarConfig();
 
 private slots:
 	void on_btnOk();
@@ -65,9 +66,9 @@ private slots:
 	void on_btnDirGame();
 	void on_btnDirSave();
 	void on_btnDefecto();
-	void on_twScummVM_clicked( QTreeWidgetItem *item );
-	void on_twScummVM_Dblclicked( QTreeWidgetItem *item );
-	void on_twScummVM_currentItemChanged(QTreeWidgetItem *item1,QTreeWidgetItem *item2);
+	void on_twScummVM_clicked(QTreeWidgetItem *item);
+	void on_twScummVM_Dblclicked(QTreeWidgetItem *item);
+	void on_twScummVM_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2);
 	void on_btnDescargarInfo();
 
 };

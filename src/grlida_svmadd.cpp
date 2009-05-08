@@ -23,12 +23,14 @@
 **/
 
 #include "grlida_svmadd.h"
-#include "grlida_importar_juego_info.h"
+#include "grlida_importar_juego.h"
 
 frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
 {
 	ui.setupUi(this);
+
+	ui.wizardSvm->setCurrentIndex(0);
 
 	stHomeDir  = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stDatosDir = stHomeDir + "datos/";
@@ -38,38 +40,7 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 
 	setTheme();
 
-	CargaUltimosDirectorios();
-
-	ui.wizardSvm->setCurrentIndex(0);
-
-	ui.twScummVM->header()->setStretchLastSection(true);
-	ui.twScummVM->header()->setMovable(false);
-	ui.twScummVM->header()->resizeSection(0, 340);
-	ui.twScummVM->header()->resizeSection(1, 80);
-	ui.twScummVM->clear();
-
-	fGrl.CargarDatosListaSvm(":/datos/svm_lista.txt"		, ui.twScummVM ); 			// Carga la lista de compatibilidad del ScummVM.
-	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"		, ui.cbxSvm_language, 2, true );	// Carga la lista de idiomas
-	fGrl.CargarDatosComboBox(":/datos/svm_platform.txt"		, ui.cbxSvm_platform, 2, false);	// Carga la lista de platform
-	fGrl.CargarDatosComboBox(":/datos/svm_gfxmode.txt"		, ui.cbxSvm_gfx_mode, 3, false);	// Carga la lista de gfxmode
-	fGrl.CargarDatosComboBox(":/datos/svm_render_mode.txt"	, ui.cbxSvm_render_mode, 1, false);	// Carga la lista de render_mode
-	fGrl.CargarDatosComboBox(":/datos/svm_music_driver.txt"	, ui.cbxSvm_music_driver, 1, false);	// Carga la lista de music_driver
-
-	ui.cbxSvm_cdrom->clear();
-	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 0");
-	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 1");
-	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 2");
-	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 3");
-	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"),"CD Index 4");
-
-	ui.cbxSvm_language->setCurrentIndex(0);
-	ui.cbxSvm_platform->setCurrentIndex(0);
-	ui.cbxSvm_gfx_mode->setCurrentIndex(0);
-	ui.cbxSvm_render_mode->setCurrentIndex(0);
-	ui.cbxSvm_music_driver->setCurrentIndex(0);
-	ui.cbxSvm_cdrom->setCurrentIndex(0);
-
-	TempDatosJuego["rating"] = "0";
+	CargarConfig();
 
 // centra la ventana en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
@@ -79,25 +50,29 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 	setGeometry( left, top, width(), height() );
 }
 
-frmSvmAdd::~frmSvmAdd(){}
+frmSvmAdd::~frmSvmAdd()
+{
+	//
+}
 
 void frmSvmAdd::createConnections()
 {
 // Conecta los distintos botones con las funciones.
-	connect( ui.btnOk		, SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );
-	connect( ui.btnNext		, SIGNAL( clicked() ), this, SLOT( on_btnNext()     ) );
-	connect( ui.btnPrevious	, SIGNAL( clicked() ), this, SLOT( on_btnPrevious() ) );
-	connect( ui.btnDirSvm_1	, SIGNAL( clicked() ), this, SLOT( on_btnDirGame()  ) );
-	connect( ui.btnDirSvm_2	, SIGNAL( clicked() ), this, SLOT( on_btnDirSave()  ) );
-	connect( ui.btnDefectoSvm,SIGNAL( clicked() ), this, SLOT( on_btnDefecto()  ) );
-	connect( ui.twScummVM	, SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* )));
-	connect( ui.twScummVM	, SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twScummVM_Dblclicked(QTreeWidgetItem* )));
-	connect( ui.btnDescargarInfo , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo()  ) );
+	connect( ui.btnOk            , SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );
+	connect( ui.btnNext          , SIGNAL( clicked() ), this, SLOT( on_btnNext()     ) );
+	connect( ui.btnPrevious      , SIGNAL( clicked() ), this, SLOT( on_btnPrevious() ) );
+	connect( ui.btnDirSvm_1      , SIGNAL( clicked() ), this, SLOT( on_btnDirGame()  ) );
+	connect( ui.btnDirSvm_2      , SIGNAL( clicked() ), this, SLOT( on_btnDirSave()  ) );
+	connect( ui.btnDefectoSvm    , SIGNAL( clicked() ), this, SLOT( on_btnDefecto()  ) );
+	connect( ui.twScummVM        , SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* ) ) );
+	connect( ui.twScummVM        , SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twScummVM_Dblclicked(QTreeWidgetItem* ) ) );
+	connect( ui.btnDescargarInfo , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo() ) );
 }
 
 void frmSvmAdd::setTheme()
 {
 	setStyleSheet( fGrl.StyleSheet() );
+	setWindowIcon( QIcon(stTheme+"img16/scummvm.png") );
 
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
@@ -105,37 +80,71 @@ void frmSvmAdd::setTheme()
 	ui.btnNext->setIcon( QIcon(stTheme+"img16/mp_rebobinar_adelante.png") );
 	ui.btnDirSvm_1->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
 	ui.btnDirSvm_2->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDirSvm_1_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDirSvm_2_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDescargarInfo->setIcon( QIcon(stTheme+"img16/go-down.png") );
 	ui.btnDefectoSvm->setIcon( QIcon(stTheme+"img16/actualizar.png") );
+	ui.cbxSvm_joystick_num->setItemIcon(0, QIcon(stTheme+"img16/controller.png") );
+	ui.cbxSvm_joystick_num->setItemIcon(1, QIcon(stTheme+"img16/controller.png") );
 }
 
-void frmSvmAdd::CargaUltimosDirectorios()
+void frmSvmAdd::CargarConfig()
 {
-	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
-	UltimoPath.clear();
-	lastdir.beginGroup("UltimoDirectorio");
-		UltimoPath["Svm_path"]            = lastdir.value("Svm_path", "").toString();
-		UltimoPath["Svm_savepath"]        = lastdir.value("Svm_savepath", "").toString();
-		UltimoPath["Svm_extrapath"]       = lastdir.value("Svm_extrapath", "").toString();
-		UltimoPath["Svm_path_capturas"]   = lastdir.value("Svm_path_capturas", "").toString();
-		UltimoPath["Svm_path_sonido"]     = lastdir.value("Svm_path_sonido", "").toString();
-		UltimoPath["Svm_path_setup"]      = lastdir.value("Svm_path_setup", "").toString();
-		UltimoPath["Svm_soundfont"]       = lastdir.value("Svm_soundfont", "").toString();
-	lastdir.endGroup();
+	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
+
+	ui.twScummVM->header()->setStretchLastSection(false);
+	ui.twScummVM->header()->setMovable(false);
+	ui.twScummVM->header()->setResizeMode(0, QHeaderView::Stretch);
+	ui.twScummVM->header()->setResizeMode(1, QHeaderView::Fixed  );
+	ui.twScummVM->setColumnWidth(1, 80);
+	ui.twScummVM->clear();
+
+	QRegExp regexp;
+	regexp.setPatternSyntax( QRegExp::RegExp );
+	regexp.setPattern("[A-Za-z-0-9]+");	// [A-Za-z_-]+([A-Za-z_-0-9]*)
+
+	QValidator *validarTexto = new QRegExpValidator( regexp, this );
+	ui.txtSvm_game_label->setValidator( validarTexto );
+
+	fGrl.CargarDatosListaSvm(":/datos/svm_lista.txt"        , ui.twScummVM                    );	// Carga la lista de compatibilidad del ScummVM.
+	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"       , ui.cbxSvm_language    , 2, true );	// Carga la lista de idiomas
+	fGrl.CargarDatosComboBox(":/datos/svm_platform.txt"     , ui.cbxSvm_platform    , 2, false);	// Carga la lista de platform
+	fGrl.CargarDatosComboBox(":/datos/svm_gfxmode.txt"      , ui.cbxSvm_gfx_mode    , 3, false);	// Carga la lista de gfxmode
+	fGrl.CargarDatosComboBox(":/datos/svm_render_mode.txt"  , ui.cbxSvm_render_mode , 1, false);	// Carga la lista de render_mode
+	fGrl.CargarDatosComboBox(":/datos/svm_music_driver.txt" , ui.cbxSvm_music_driver, 1, false);	// Carga la lista de music_driver
+
+	ui.cbxSvm_cdrom->clear();
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 0");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 1");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 2");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 3");
+	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 4");
+
+	ui.cbxSvm_language->setCurrentIndex(0);
+	ui.cbxSvm_platform->setCurrentIndex(0);
+	ui.cbxSvm_gfx_mode->setCurrentIndex(1);
+	ui.cbxSvm_render_mode->setCurrentIndex(0);
+	ui.cbxSvm_music_driver->setCurrentIndex(0);
+	ui.cbxSvm_cdrom->setCurrentIndex(0);
+
+	tempDatosJuego["Dat_favorito"] = "false";
+	tempDatosJuego["Dat_rating"]   = "0";
 }
 
-void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *item1,QTreeWidgetItem *item2)
+void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2)
 {
-	if( (item1)&&(item2) )
-		emit on_twScummVM_clicked(  ui.twScummVM->currentItem() );
+	if( item1 && item2 )
+		emit on_twScummVM_clicked( ui.twScummVM->currentItem() );
 	else
 		return;
 }
 
-void frmSvmAdd::on_twScummVM_clicked( QTreeWidgetItem *item )
+void frmSvmAdd::on_twScummVM_clicked(QTreeWidgetItem *item)
 {
-	if( item && item->text(1)!="")
+	if( item && item->text(1) != "" )
 	{
 		ui.txtDatos_Titulo->setText( item->text(0) );
+		ui.txtSvm_game->setText( item->text(1) );
 		ui.txtSvm_game_label->setText( item->text(1) );
 	} else
 		return;
@@ -143,9 +152,10 @@ void frmSvmAdd::on_twScummVM_clicked( QTreeWidgetItem *item )
 
 void frmSvmAdd::on_twScummVM_Dblclicked( QTreeWidgetItem *item )
 {
-	if( item && item->text(1)!="")
+	if( item && item->text(1) != "" )
 	{
 		ui.txtDatos_Titulo->setText( item->text(0) );
+		ui.txtSvm_game->setText( item->text(1) );
 		ui.txtSvm_game_label->setText( item->text(1) );
 		ui.btnNext->click();
 	} else
@@ -154,45 +164,45 @@ void frmSvmAdd::on_twScummVM_Dblclicked( QTreeWidgetItem *item )
 
 void frmSvmAdd::on_btnPrevious()
 {
-	ui.wizardSvm->setCurrentIndex(ui.wizardSvm->currentIndex()-1);
+	ui.wizardSvm->setCurrentIndex( ui.wizardSvm->currentIndex() - 1);
 	ui.btnNext->setEnabled( true );
 	if(ui.wizardSvm->currentIndex() < 1 )
-		ui.btnPrevious->setEnabled(false) ;
+		ui.btnPrevious->setEnabled( false ) ;
 }
 
 void frmSvmAdd::on_btnNext()
 {
 	bool siguiente;
-	if((ui.twScummVM->isItemSelected(ui.twScummVM->currentItem())) && (ui.twScummVM->currentItem()->text(1)!=""))
+	if( ui.twScummVM->isItemSelected( ui.twScummVM->currentItem() ) && ui.twScummVM->currentItem()->text(1) != "" )
 	{
 		siguiente = true;
-		if(ui.wizardSvm->currentIndex() == 1)
+		if( ui.wizardSvm->currentIndex() == 1 )
 		{
-			if((ui.txtDatos_Titulo->text() != "") && (ui.txtSvm_game_label->text() != ""))
+			if( ui.txtDatos_Titulo->text() != "" && ui.txtSvm_game->text() != "" )
 			{
-				if( ui.txtSvm_path->text() == "")
+				if( ui.txtSvm_path->text() == "" )
 				{
-					QMessageBox::information(this, stTituloSvm(), tr("Debes indicar el Directorio del juego"));
+					QMessageBox::information(this, stTituloSvm(), tr("Debes indicar el Directorio del juego") );
 					siguiente = false;
 				} else
 					siguiente = true;
 			} else {
-				QMessageBox::information(this, stTituloSvm(), tr("Debes poner un Titulo al juego"));
+				QMessageBox::information(this, stTituloSvm(), tr("Debes poner un Titulo al juego") );
 				siguiente = false;
 			}
 		}
 		if( siguiente == true )
 		{
-			ui.btnPrevious->setEnabled(true);
-			ui.wizardSvm->setCurrentIndex(ui.wizardSvm->currentIndex()+1);
+			ui.btnPrevious->setEnabled( true );
+			ui.wizardSvm->setCurrentIndex( ui.wizardSvm->currentIndex() + 1 );
 		}
 		if(ui.wizardSvm->currentIndex() == 2) ui.cbxSvm_render_mode->setFocus();
 		if(ui.wizardSvm->currentIndex() == 3) ui.cbxSvm_music_driver->setFocus();
 		if( ui.wizardSvm->currentIndex() >= 4)
 		{
-			ui.btnOk->setEnabled(true);
+			ui.btnOk->setEnabled( true );
 			ui.btnOk->setFocus();
-			ui.btnNext->setEnabled(false);
+			ui.btnNext->setEnabled( false );
 		}
 	} else
 		QMessageBox::information(this, stTituloSvm(), tr("Selecciona un juego de la lista"));
@@ -200,49 +210,40 @@ void frmSvmAdd::on_btnNext()
 
 void frmSvmAdd::on_btnDescargarInfo()
 {
-	frmImportarJuegoInfo * ImportarJuegoInfo = new frmImportarJuegoInfo(ui.txtDatos_Titulo->text(), 0, Qt::Window);
-	if( ImportarJuegoInfo->exec() == QDialog::Accepted )
+	frmImportarJuego * ImportarJuego = new frmImportarJuego(ui.txtDatos_Titulo->text(), 0, Qt::Window);
+	if( ImportarJuego->exec() == QDialog::Accepted )
 	{
 		QFile file_thumbs, file_cover_front, file_cover_back;
 
-		TempDatosJuego.clear();
-		ui.txtDatos_Titulo->setText( ImportarJuegoInfo->DatosJuego["titulo"] )			;// titulo
-		TempDatosJuego["icono"]			= "scummvm"										;//icono
-		TempDatosJuego["titulo"]		= ui.txtDatos_Titulo->text()					;//titulo
-		TempDatosJuego["subtitulo"]		= ImportarJuegoInfo->DatosJuego["subtitulo"]	;//subtitulo
-		TempDatosJuego["genero"]		= ImportarJuegoInfo->DatosJuego["genero"]		;//genero
-		TempDatosJuego["compania"]		= ImportarJuegoInfo->DatosJuego["compania"]		;//compania
-		TempDatosJuego["desarrollador"]	= ImportarJuegoInfo->DatosJuego["desarrollador"];//desarrollador
-		TempDatosJuego["tema"]			= ImportarJuegoInfo->DatosJuego["tema"] 		;//tema
-		TempDatosJuego["idioma"]		= ImportarJuegoInfo->DatosJuego["idioma"]		;//idioma
-		TempDatosJuego["formato"]		= ImportarJuegoInfo->DatosJuego["formato"]		;//formato
-		TempDatosJuego["anno"]			= ImportarJuegoInfo->DatosJuego["anno"]			;//anno
-		TempDatosJuego["numdisc"]		= ImportarJuegoInfo->DatosJuego["numdisc"]		;//numdisc
-		TempDatosJuego["sistemaop"]		= ImportarJuegoInfo->DatosJuego["sistemaop"]	;//sistemaop
-		TempDatosJuego["tamano"]		= ImportarJuegoInfo->DatosJuego["tamano"]		;//tamano
-		TempDatosJuego["graficos"]		= ImportarJuegoInfo->DatosJuego["graficos"]		;//graficos
-		TempDatosJuego["sonido"]		= ImportarJuegoInfo->DatosJuego["sonido"]		;//sonido
-		TempDatosJuego["jugabilidad"]	= ImportarJuegoInfo->DatosJuego["jugabilidad"]	;//jugabilidad
-		TempDatosJuego["original"]		= ImportarJuegoInfo->DatosJuego["original"]		;//original
-		TempDatosJuego["estado"]		= ImportarJuegoInfo->DatosJuego["estado"]		;//estado
-		TempDatosJuego["tipo_emu"]		= "scummvm"										;//tipo_emu
-		TempDatosJuego["comentario"]	= ImportarJuegoInfo->DatosJuego["comentario"]	;//comentario
-		TempDatosJuego["favorito"]		= ImportarJuegoInfo->DatosJuego["favorito"]		;//favorito
-		TempDatosJuego["rating"]		= ImportarJuegoInfo->DatosJuego["rating"]		;//rating
-
-		TempDatosJuego["thumbs"] = ImportarJuegoInfo->DatosJuego["thumbs"];
-		if( !file_thumbs.exists( TempDatosJuego["thumbs"] ) )
-			TempDatosJuego["thumbs"] = "";
-
-		TempDatosJuego["cover_front"] = ImportarJuegoInfo->DatosJuego["cover_front"];
-		if( !file_cover_front.exists( TempDatosJuego["cover_front"] ) )
-			TempDatosJuego["cover_front"] = "";
-
-		TempDatosJuego["cover_back"] = ImportarJuegoInfo->DatosJuego["cover_back"];
-		if( !file_cover_back.exists( TempDatosJuego["cover_back"] ) )
-			TempDatosJuego["cover_back"] = "";
+		tempDatosJuego.clear();
+		ui.txtDatos_Titulo->setText( ImportarJuego->DatosJuego["Dat_titulo"] );			// titulo
+		tempDatosJuego["Dat_icono"]         = "scummvm";									// icono
+		tempDatosJuego["Dat_titulo"]        = ui.txtDatos_Titulo->text();					// titulo
+		tempDatosJuego["Dat_subtitulo"]     = ImportarJuego->DatosJuego["Dat_subtitulo"];	// subtitulo
+		tempDatosJuego["Dat_genero"]        = ImportarJuego->DatosJuego["Dat_genero"];		// genero
+		tempDatosJuego["Dat_compania"]      = ImportarJuego->DatosJuego["Dat_compania"];	// compania
+		tempDatosJuego["Dat_desarrollador"] = ImportarJuego->DatosJuego["Dat_desarrollador"];//desarrollador
+		tempDatosJuego["Dat_tema"]          = ImportarJuego->DatosJuego["Dat_tema"];		// tema
+		tempDatosJuego["Dat_idioma"]        = ImportarJuego->DatosJuego["Dat_idioma"];		// idioma
+		tempDatosJuego["Dat_formato"]       = ImportarJuego->DatosJuego["Dat_formato"];		// formato
+		tempDatosJuego["Dat_anno"]          = ImportarJuego->DatosJuego["Dat_anno"];		// anno
+		tempDatosJuego["Dat_numdisc"]       = ImportarJuego->DatosJuego["Dat_numdisc"];		// numdisc
+		tempDatosJuego["Dat_sistemaop"]     = ImportarJuego->DatosJuego["Dat_sistemaop"];	// sistemaop
+		tempDatosJuego["Dat_tamano"]        = ImportarJuego->DatosJuego["Dat_tamano"];		// tamano
+		tempDatosJuego["Dat_graficos"]      = ImportarJuego->DatosJuego["Dat_graficos"];	// graficos
+		tempDatosJuego["Dat_sonido"]        = ImportarJuego->DatosJuego["Dat_sonido"];		// sonido
+		tempDatosJuego["Dat_jugabilidad"]   = ImportarJuego->DatosJuego["Dat_jugabilidad"];	// jugabilidad
+		tempDatosJuego["Dat_original"]      = ImportarJuego->DatosJuego["Dat_original"];	// original
+		tempDatosJuego["Dat_estado"]        = ImportarJuego->DatosJuego["Dat_estado"];		// estado
+		tempDatosJuego["Dat_thumbs"]        = ImportarJuego->DatosJuego["Dat_thumbs"];		// thumbs
+		tempDatosJuego["Dat_cover_front"]   = ImportarJuego->DatosJuego["Dat_cover_front"];	// cover_front
+		tempDatosJuego["Dat_cover_back"]    = ImportarJuego->DatosJuego["Dat_cover_back"];	// cover_back
+		tempDatosJuego["Dat_tipo_emu"]      = "scummvm";									// tipo_emu
+		tempDatosJuego["Dat_comentario"]    = ImportarJuego->DatosJuego["Dat_comentario"];	// comentario
+		tempDatosJuego["Dat_favorito"]      = ImportarJuego->DatosJuego["Dat_favorito"];	// favorito
+		tempDatosJuego["Dat_rating"]        = ImportarJuego->DatosJuego["Dat_rating"];		// rating
+		tempDatosJuego["Dat_usuario"]       = ImportarJuego->DatosJuego["Dat_usuario"];		// usuario
 	}
-
 }
 
 void frmSvmAdd::on_btnOk()
@@ -251,132 +252,97 @@ void frmSvmAdd::on_btnOk()
 		QMessageBox::information( this, stTituloSvm(), tr("Debes poner por lo menos el titulo."));
 	else {
 		DatosJuego.clear();
-		DatosJuego["icono"]			= "scummvm"							;//icono
-		DatosJuego["titulo"]		= ui.txtDatos_Titulo->text()		;//titulo
-		DatosJuego["subtitulo"]		= ""+TempDatosJuego["subtitulo"]	;//subtitulo
-		DatosJuego["genero"]		= ""+TempDatosJuego["genero"]		;//genero
-		DatosJuego["compania"]		= ""+TempDatosJuego["compania"]		;//compania
-		DatosJuego["desarrollador"]	= ""+TempDatosJuego["desarrollador"];//desarrollador
-		DatosJuego["tema"]			= ""+TempDatosJuego["tema"]			;//tema
-		DatosJuego["idioma"]		= ""+TempDatosJuego["idioma"]		;//idioma
-		DatosJuego["formato"]		= ""+TempDatosJuego["formato"]		;//formato
-		DatosJuego["anno"]			= ""+TempDatosJuego["anno"]			;//anno
-		DatosJuego["numdisc"]		= ""+TempDatosJuego["numdisc"]		;//numdisc
-		DatosJuego["sistemaop"]		= ""+TempDatosJuego["sistemaop"]	;//sistemaop
-		DatosJuego["tamano"]		= ""+TempDatosJuego["tamano"]		;//tamano
-		DatosJuego["graficos"]		= ""+TempDatosJuego["graficos"]		;//graficos
-		DatosJuego["sonido"]		= ""+TempDatosJuego["sonido"]		;//sonido
-		DatosJuego["jugabilidad"]	= ""+TempDatosJuego["jugabilidad"]	;//jugabilidad
-		DatosJuego["original"]		= ""+TempDatosJuego["original"]		;//original
-		DatosJuego["estado"]		= ""+TempDatosJuego["estado"]		;//estado
-		DatosJuego["thumbs"]		= ""+TempDatosJuego["thumbs"]		;//thumbs
-		DatosJuego["cover_front"]	= ""+TempDatosJuego["cover_front"]	;//cover_front
-		DatosJuego["cover_back"]	= ""+TempDatosJuego["cover_back"]	;//cover_back
-		DatosJuego["fecha"]			= fGrl.HoraFechaActual()			;//fecha d/m/a h:m:s
-		DatosJuego["tipo_emu"]		= "scummvm"							;//tipo_emu
-		DatosJuego["comentario"]	= ""+TempDatosJuego["comentario"]	;//comentario
-		DatosJuego["favorito"]		= ""+TempDatosJuego["favorito"]		;//favorito
-		DatosJuego["rating"]		= ""+TempDatosJuego["rating"]		;//rating
+		DatosJuego["Dat_icono"]         = "scummvm";								// icono
+		DatosJuego["Dat_titulo"]        = ui.txtDatos_Titulo->text();				// titulo
+		DatosJuego["Dat_subtitulo"]     = ""+tempDatosJuego["Dat_subtitulo"];		// subtitulo
+		DatosJuego["Dat_genero"]        = ""+tempDatosJuego["Dat_genero"];			// genero
+		DatosJuego["Dat_compania"]      = ""+tempDatosJuego["Dat_compania"];		// compania
+		DatosJuego["Dat_desarrollador"] = ""+tempDatosJuego["Dat_desarrollador"];	// desarrollador
+		DatosJuego["Dat_tema"]          = ""+tempDatosJuego["Dat_tema"];			// tema
+		DatosJuego["Dat_idioma"]        = ""+tempDatosJuego["Dat_idioma"];			// idioma
+		DatosJuego["Dat_formato"]       = ""+tempDatosJuego["Dat_formato"];			// formato
+		DatosJuego["Dat_anno"]          = ""+tempDatosJuego["Dat_anno"];			// anno
+		DatosJuego["Dat_numdisc"]       = ""+tempDatosJuego["Dat_numdisc"];			// numdisc
+		DatosJuego["Dat_sistemaop"]     = ""+tempDatosJuego["Dat_sistemaop"];		// sistemaop
+		DatosJuego["Dat_tamano"]        = ""+tempDatosJuego["Dat_tamano"];			// tamano
+		DatosJuego["Dat_graficos"]      = ""+tempDatosJuego["Dat_graficos"];		// graficos
+		DatosJuego["Dat_sonido"]        = ""+tempDatosJuego["Dat_sonido"];			// sonido
+		DatosJuego["Dat_jugabilidad"]   = ""+tempDatosJuego["Dat_jugabilidad"];		// jugabilidad
+		DatosJuego["Dat_original"]      = ""+tempDatosJuego["Dat_original"];		// original
+		DatosJuego["Dat_estado"]        = ""+tempDatosJuego["Dat_estado"];			// estado
+		DatosJuego["Dat_thumbs"]        = ""+tempDatosJuego["Dat_thumbs"];			// thumbs
+		DatosJuego["Dat_cover_front"]   = ""+tempDatosJuego["Dat_cover_front"];		// cover_front
+		DatosJuego["Dat_cover_back"]    = ""+tempDatosJuego["Dat_cover_back"];		// cover_back
+		DatosJuego["Dat_fecha"]         = fGrl.HoraFechaActual(GRLConfig["FormatoFecha"].toString());			// fecha d/m/a h:m:s
+		DatosJuego["Dat_tipo_emu"]      = "scummvm";								// tipo_emu
+		DatosJuego["Dat_comentario"]    = ""+tempDatosJuego["Dat_comentario"];		// comentario
+		DatosJuego["Dat_favorito"]      = ""+tempDatosJuego["Dat_favorito"];		// favorito
+		DatosJuego["Dat_rating"]        = ""+tempDatosJuego["Dat_rating"];			// rating
+		DatosJuego["Dat_usuario"]       = ""+tempDatosJuego["Dat_usuario"];			// rating
 
-		QString tmp_language, tmp_platform, tmp_gfx_mode;
-		QStringList tmp_list;
+		DatosScummVM.clear();
+		DatosScummVM["Svm_game"]            = ui.txtSvm_game->text();															// game
+		DatosScummVM["Svm_game_label"]      = ui.txtSvm_game_label->text();														// game_label
+		DatosScummVM["Svm_language"]        = ui.cbxSvm_language->itemData( ui.cbxSvm_language->currentIndex() ).toString();	// language
+		DatosScummVM["Svm_subtitles"]       = fGrl.BoolToStr( ui.chkSvm_subtitles->isChecked() );								// subtitles
+		DatosScummVM["Svm_platform"]        = ui.cbxSvm_platform->itemData( ui.cbxSvm_platform->currentIndex() ).toString();	// platform
+		DatosScummVM["Svm_gfx_mode"]        = ui.cbxSvm_gfx_mode->itemData( ui.cbxSvm_gfx_mode->currentIndex() ).toString();	// platform
+		DatosScummVM["Svm_render_mode"]     = ui.cbxSvm_render_mode->currentText();						// render_mode
+		DatosScummVM["Svm_fullscreen"]      = fGrl.BoolToStr( ui.chkSvm_fullscreen->isChecked() );		// fullscreen
+		DatosScummVM["Svm_aspect_ratio"]    = fGrl.BoolToStr( ui.chkSvm_aspect_ratio->isChecked() );	// aspect_ratio
+		DatosScummVM["Svm_path"]            = ui.txtSvm_path->text();									// path
+		DatosScummVM["Svm_path_setup"]      = "";														// path_setup
+		DatosScummVM["Svm_path_extra"]      = "";														// path_extra
+		DatosScummVM["Svm_path_save"]       = ui.txtSvm_savepath->text();								// path_save
+		DatosScummVM["Svm_path_capturas"]   = "";														// path_capturas
+		DatosScummVM["Svm_path_sonido"]     = "";														// path_sonido
+		DatosScummVM["Svm_music_driver"]    = ui.cbxSvm_music_driver->currentText();					// music_driver
+		DatosScummVM["Svm_enable_gs"]       = fGrl.BoolToStr( ui.chkSvm_enable_gs->isChecked() );		// enable_gs
+		DatosScummVM["Svm_multi_midi"]      = fGrl.BoolToStr( ui.chkSvm_multi_midi->isChecked() );		// multi_midi
+		DatosScummVM["Svm_native_mt32"]     = fGrl.BoolToStr( ui.chkSvm_native_mt32->isChecked() );		// native_mt32
+		DatosScummVM["Svm_master_volume"]   = "255";													// master_volume
+		DatosScummVM["Svm_music_volume"]    = ui.posSliderSvm_1->text();								// music_volume
+		DatosScummVM["Svm_sfx_volume"]      = ui.posSliderSvm_2->text();								// sfx_volume
+		DatosScummVM["Svm_speech_volume"]   = ui.posSliderSvm_3->text();								// speech_volume
+		DatosScummVM["Svm_tempo"]           = ui.posSliderSvm_4->text();								// tempo
+		DatosScummVM["Svm_talkspeed"]       = ui.posSliderSvm_5->text();								// talkspeed
+		DatosScummVM["Svm_debuglevel"]      = ui.posSliderSvm_6->text();								// debuglevel
+		DatosScummVM["Svm_cdrom"]           = fGrl.IntToStr( ui.cbxSvm_cdrom->currentIndex() );			// cdrom
+		DatosScummVM["Svm_joystick_num"]    = fGrl.IntToStr( ui.cbxSvm_joystick_num->currentIndex() );	//joystick_num
+		DatosScummVM["Svm_output_rate"]     = "22050";													// output_rate
+		DatosScummVM["Svm_midi_gain"]       = "100";													// midi_gain
+		DatosScummVM["Svm_copy_protection"] = "false";													// copy_protection
+		DatosScummVM["Svm_sound_font"]      = "";														// sound_font
+		DatosScummVM["Svm_walkspeed"]       = "0";														// sound_font
 
-		tmp_list.clear();
-		tmp_list     = ui.cbxSvm_language->currentText().split(" - ");
-		tmp_language = tmp_list[1];
-
-		tmp_list.clear();
-		tmp_list     = ui.cbxSvm_platform->currentText().split(" - ");
-		tmp_platform = tmp_list[1];
-
-		tmp_list.clear();
-		tmp_list     = ui.cbxSvm_gfx_mode->currentText().split(" - ");
-		tmp_gfx_mode = tmp_list[1];
-
-		if( tmp_language == "" ) tmp_language = "" ;
-		if( tmp_platform == "" ) tmp_platform = "" ;
-		if( tmp_gfx_mode == "" ) tmp_gfx_mode = "" ;
-
-		DatosScummvm.clear();
-		DatosScummvm["game"] = ui.txtSvm_game_label->text()	; //game
-		DatosScummvm["language"] = tmp_language		; //language
-	// subtitles
-		if( ui.chkSvm_subtitles->isChecked() )
-			DatosScummvm["subtitles"] = "true";
-		else DatosScummvm["subtitles"] = "false";
-
-		DatosScummvm["platform"] = tmp_platform; // platform
-		DatosScummvm["gfx_mode"] = tmp_gfx_mode; // gfx_mode
-	// render_mode
-		if( ui.cbxSvm_render_mode->currentText()!="" )
-			DatosScummvm["render_mode"] = ui.cbxSvm_render_mode->currentText();
-		else DatosScummvm["render_mode"] = "";
-	// fullscreen
-		if( ui.chkSvm_fullscreen->isChecked() )
-			DatosScummvm["fullscreen"] = "true";
-		else DatosScummvm["fullscreen"] = "false";
-	// aspect_ratio
-		if( ui.chkSvm_aspect_ratio->isChecked() )
-			DatosScummvm["aspect_ratio"] = "true";
-		else DatosScummvm["aspect_ratio"] = "false";
-
-		DatosScummvm["path"]			= ui.txtSvm_path->text()				; // path
-		DatosScummvm["path_setup"]		= ""									; // path_setup
-		DatosScummvm["path_extra"]		= ""									; // path_extra
-		DatosScummvm["path_save"]		= ui.txtSvm_savepath->text()			; // path_save
-		DatosScummvm["path_capturas"]	= ""									; // path_capturas
-		DatosScummvm["path_sonido"]		= ""									; // path_sonido
-		DatosScummvm["music_driver"]	= ui.cbxSvm_music_driver->currentText()	; // music_driver
-	// enable_gs
-		if( ui.chkSvm_enable_gs->isChecked() )
-			DatosScummvm["enable_gs"] = "true";
-		else DatosScummvm["enable_gs"] = "false";
-	// multi_midi
-		if( ui.chkSvm_multi_midi->isChecked() )
-			DatosScummvm["multi_midi"] = "true";
-		else DatosScummvm["multi_midi"] = "false";
-	// native_mt32
-		if( ui.chkSvm_native_mt32->isChecked() )
-			DatosScummvm["native_mt32"] = "true";
-		else DatosScummvm["native_mt32"] = "false";
-
-		DatosScummvm["master_volume"]	= "255"						; // master_volume
-		DatosScummvm["music_volume"]	= ui.posSliderSvm_1->text()	; // music_volume
-		DatosScummvm["sfx_volume"]		= ui.posSliderSvm_2->text()	; // sfx_volume
-		DatosScummvm["speech_volume"]	= ui.posSliderSvm_3->text()	; // speech_volume
-		DatosScummvm["tempo"]			= ui.posSliderSvm_4->text()	; // tempo
-		DatosScummvm["talkspeed"]		= ui.posSliderSvm_5->text()	; // talkspeed
-		DatosScummvm["debuglevel"]		= ui.posSliderSvm_6->text()	; // debuglevel
-		DatosScummvm["cdrom"]			= fGrl.IntToStr(ui.cbxSvm_cdrom->currentIndex()); // cdrom
-		DatosScummvm["joystick_num"]	= fGrl.IntToStr(ui.cbxSvm_joystick_num->currentIndex()); //joystick_num
-		DatosScummvm["output_rate"]		= "22050"					; // output_rate
-		DatosScummvm["midi_gain"]		= "100"						; // midi_gain
-		DatosScummvm["copy_protection"]	= "false"					; // copy_protection
-		DatosScummvm["sound_font"]		= ""						; // sound_font
 		QDialog::accept();
 	}
 }
 
 void frmSvmAdd::on_btnDirGame()
 {
-	ui.txtSvm_path->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), UltimoPath["Svm_path"] , ui.txtSvm_path->text() ) );
+	ui.txtSvm_path->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), GRLConfig["Svm_path"].toString() , ui.txtSvm_path->text() ) );
 
-	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
-	lastdir.beginGroup("UltimoDirectorio");
-		lastdir.setValue("Svm_path", ui.txtSvm_path->text()+"/" );
-	lastdir.endGroup();
-	UltimoPath["Svm_path"] = ui.txtSvm_path->text()+"/";
+	QDir dir( ui.txtSvm_path->text() );
+	if( dir.exists() )
+		GRLConfig["Svm_path"] = ui.txtSvm_path->text();
+	else
+		GRLConfig["Svm_path"] = "";
+
+	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path", GRLConfig["Svm_path"].toString() );
 }
 
 void frmSvmAdd::on_btnDirSave()
 {
-	ui.txtSvm_savepath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), UltimoPath["Svm_savepath"] , ui.txtSvm_savepath->text() ) );
+	ui.txtSvm_savepath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), GRLConfig["Svm_savepath"].toString() , ui.txtSvm_savepath->text() ) );
 
-	QSettings lastdir( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
-	lastdir.beginGroup("UltimoDirectorio");
-		lastdir.setValue("Svm_savepath", ui.txtSvm_savepath->text()+"/" );
-	lastdir.endGroup();
-	UltimoPath["Svm_savepath"] = ui.txtSvm_savepath->text()+"/";
+	QDir dir( ui.txtSvm_savepath->text() );
+	if( dir.exists() )
+		GRLConfig["Svm_savepath"] = ui.txtSvm_savepath->text();
+	else
+		GRLConfig["Svm_savepath"] = "";
+
+	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_savepath", GRLConfig["Svm_savepath"].toString() );
 }
 
 void frmSvmAdd::on_btnDefecto()
