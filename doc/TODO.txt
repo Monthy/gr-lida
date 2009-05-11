@@ -2,8 +2,7 @@
 -  TODO
 -----------------------------------
 
-- Implementar Importar y Exportar de otros lanzadores
-- Mejorar los montajes entre otras cosas
+- Mejorar la rutas cortas en DOSBox
 - Visor de Cajas en 3D
 
 -----------------------------------
