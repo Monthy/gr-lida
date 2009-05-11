@@ -1557,7 +1557,7 @@ void GrLida::on_twUrls_Dblclicked(QTreeWidgetItem *item)
 	if( item )
 	{
 		my_url.clear();
-		my_url = item->text(0);
+		my_url = fGrl.url_correcta( item->text(0) );
 		QDesktopServices::openUrl( my_url );	// Abre la URL con el navegador por defecto
 	}
 }
