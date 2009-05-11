@@ -27,5 +27,7 @@ reportar bugs de la instalacción.
 A los desarrolladores de pictureflow ( http://code.google.com/p/pictureflow/ )
 por su magnífico widget para QT.
 
+A los de The OSDaB Project ( http://osdab.42cows.org/ ) por la Clase para manejar archivos Zip.
+
 A todos los usuarios y desarrolladores que de una u otra forma han colaborado
 directa o indirectamente en el desarrollo de GR-lida.
