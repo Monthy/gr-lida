@@ -1,6 +1,22 @@
 
 -  NEWS
 -----------------------------------
+0.8.0 (16-05-2009)
+ - Actualizada la lista de compatibilidad del ScummVM 0.13.1 estable.
+ - Actualizados los archivos de Idioma, tanto los *.TS como los *.QM.
+ - Mejorada la obtención de información del juego de las distintas web mediante Scripts.
+ - Cambio de vista para la información del juego, ahora es mas cómoda y modificable mediante
+   temas de estilos ya que se basa en una plantilla HTML.
+ - Mejorado sistema de montaje para las rutas cortas en DOS.   
+ - Mejorado el visor de imágenes.
+ - Añadido la posibilidad de ver imágenes comprimidas en zip, idóneas para los manuales.
+ - Añadido cputype para la futura versión del DOSBox.
+ - Añadido soporte para la reproducción de contenido multimedia mediante Phonon.
+ - Añadido soporte para poder ver las ruletas o discos de protección de los juegos.
+ - Añadido soporte para usar un Proxy para las conexiones a internet.
+ - Corrección de la base de datos al crear las tablas usando MySql o PostgreSQL.
+ - Corrección al ejecutar el Setup de un juego.
+
 0.7.1 (15-11-2008)
  - Cambios en el stardelegate para solucionar posible error al compilar en otras distribuciones.
  - Corregido problema que provocaba el parámetro IOCtrl, al montar unidades de CD-ROM.
