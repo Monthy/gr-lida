@@ -360,6 +360,7 @@ void frmImportarJuego::setTheme()
 //	ui.twListaBusqueda->headerItem()->setIcon(2, QIcon(stTheme+"img16/fecha.png") );
 
 	ui.btnAbrir->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnAbrirUrl->setIcon( QIcon(stTheme+"img16/edit_enlace.png") );
 	ui.btnBuscar->setIcon( QIcon(stTheme+"img16/zoom.png") );
 	ui.btnAbortar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnVerInfo->setIcon( QIcon(stTheme+"img16/datos_2.png") );

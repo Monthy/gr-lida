@@ -235,6 +235,7 @@ void frmOpciones::setTheme()
 	ui.btnDirSvm_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnDirDB_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnDirBaseGames_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnOpenUrl->setIcon( QIcon(stTheme+"img16/edit_enlace.png") );
 	ui.btnInfoFormatoFecha->setIcon( QIcon(stTheme+"img16/informacion.png") );
 
 	ui.tabWidget_Config->setTabIcon(0, QIcon(stTheme+"img16/opciones.png") );
