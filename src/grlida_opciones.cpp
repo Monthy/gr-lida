@@ -96,6 +96,7 @@ void frmOpciones::CargarConfig()
 // Otras Opciones
 	ui.txtDirBaseGames->setText( GRLConfig["DirBaseGames"].toString() );
 	url_xmldb = GRLConfig["url_xmldb"].toString();
+	ui.chkComprobarVersionGrl->setChecked( GRLConfig["chkVersion"].toBool() );
 	ui.chkShowNext->setChecked( GRLConfig["Primeravez"].toBool() );
 	ui.txtFormatoFecha->setText( GRLConfig["FormatoFecha"].toString() );
 // Base de Datos
@@ -214,6 +215,8 @@ void frmOpciones::GuardarConfig()
 	GRLConfig["ProxyLogin"]        = ui.chkLogin->isChecked();
 	GRLConfig["ProxyUserName"]     = ui.txt_px_username->text();
 	GRLConfig["ProxyPassword"]     = ui.txt_px_password->text();
+// Versión
+	GRLConfig["chkVersion"]        = ui.chkComprobarVersionGrl->isChecked();
 
 	DatosConfiguracion = GRLConfig;
 

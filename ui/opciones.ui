@@ -549,6 +549,13 @@
            </layout>
           </item>
           <item>
+           <widget class="QCheckBox" name="chkComprobarVersionGrl">
+            <property name="text">
+             <string>Comprobación automática de nuevas versiones del GR-lida al iniciar el programa</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="chkShowNext">
             <property name="text">
              <string>Mostrar Configuración Inicial la próxima vez que se inicie</string>

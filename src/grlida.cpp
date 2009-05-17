@@ -417,6 +417,7 @@ void GrLida::createConnections()
 	connect( ui.mnu_tool_opciones      , SIGNAL( triggered(bool) ), this, SLOT( on_Opciones()          ));
 	connect( ui.mnu_ver_acercad        , SIGNAL( triggered(bool) ), this, SLOT( on_AcercaD()           ));
 	connect( ui.mnu_ver_rating         , SIGNAL( triggered(bool) ), this, SLOT( on_VerRating(bool)     ));
+	connect( ui.mnu_ver_check_updates  , SIGNAL( triggered(bool) ), this, SLOT( on_BuscarUpdates()     ));
 
 // Abre las distintas carpetas
 	connect( ui.mnu_ver_carpeta_confdbx  , SIGNAL( triggered(bool) ), this, SLOT( on_VerCarpeta_confdbx()   ));
@@ -982,6 +983,11 @@ void GrLida::CargarConfig()
 	ui.btnVer_Archivos->setEnabled( false );
 	ui.btnVer_CoverFront->setEnabled( false );
 	ui.btnVer_CoverBack->setEnabled( false );
+
+// Comprobación de nuevas versiones.
+	chkVersionDesdeMenu = false;
+	if( GRLConfig["chkVersion"].toBool() )
+		on_CheckUpdateGrl();
 }
 
 void GrLida::GuardarConfig()
@@ -1105,6 +1111,7 @@ void GrLida::setTheme()
 	ui.mnu_ver_toolbar->setIcon( QIcon(stTheme+"img16/barra_herramintas.png") );
 	ui.mnu_ver_rating->setIcon( QIcon(stTheme+"images/star_on.png") );
 	ui.mnu_ver_ayuda->setIcon( QIcon(stTheme+"img16/ayuda.png") );
+	ui.mnu_ver_check_updates->setIcon( QIcon(stTheme+"img16/actualizar.png") );
 	ui.mnu_ver_acercad->setIcon( QIcon(stTheme+"img16/acercad.png") );
 // Sub Menu Ver Carpetas
 	ui.mnu_ver_carpeta_confdbx->setIcon( QIcon(stTheme+"img16/dosbox.png") );
@@ -2238,6 +2245,12 @@ void GrLida::on_Opciones()
 	delete Opciones;
 }
 
+void GrLida::on_BuscarUpdates()
+{
+	chkVersionDesdeMenu = true;
+	on_CheckUpdateGrl();
+}
+
 void GrLida::on_AcercaD()
 {
 	frmAcercaD *AcercaD = new frmAcercaD();
@@ -2369,5 +2382,34 @@ void GrLida::CrearArchivoDato(QString origen, QString destino)
 
 			delete crearArchivo;
 		}
+	}
+}
+
+void GrLida::on_CheckUpdateGrl()
+{
+	HttpDownload *httpdown = new HttpDownload(this);
+	httpdown->setHidden(true);
+	connect(httpdown, SIGNAL( StatusRequestFinished() ), this, SLOT( isCheckUpdateFinished() ) );
+	httpdown->downloadFile("http://www.laisladelabandoware.es/lastver.ini", stHomeDir+"temp/lastver.ini");
+}
+
+void GrLida::isCheckUpdateFinished()
+{
+	bool isNuevaVersionGRlida = false;
+	QSettings settings(stHomeDir+"temp/lastver.ini", QSettings::IniFormat);
+	settings.beginGroup("update");
+		QString version = settings.value("version", fGrl.stVersionGrl()).toString();
+	settings.endGroup();
+
+	if( version != fGrl.stVersionGrl() && version > fGrl.stVersionGrl() )
+		isNuevaVersionGRlida = true;
+	else
+		isNuevaVersionGRlida = false;
+
+	if( isNuevaVersionGRlida )
+		QMessageBox::information( this, tr("Nueva Versión"), tr("Disponible nueva versión del GR-lida %1").arg(version), QMessageBox::Ok);
+	else {
+		if( chkVersionDesdeMenu )
+			QMessageBox::information( this, tr("Nueva Versión"), tr("No hay nuevas actualizaciones disponibles"), QMessageBox::Ok);
 	}
 }

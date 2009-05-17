@@ -79,6 +79,7 @@ private:
 	QUrl my_url;
 
 	int id_ImgPicFlow, id_ImgPicFlow_old, numSkip_PicFlow;
+	bool chkVersionDesdeMenu;
 
 	QString stHomeDir, stDatosDir, stIconDir, stConfgDbxDir, stConfgVdmSDir;
 	QString stIdiomaSelect, stTheme, stIconoFav, stPicFlowReflection;
@@ -151,6 +152,8 @@ private:
 
 	void Ejecutar(const QString &bin, const QString &parametros = "", const QString &dirWorking = "");
 
+	void on_CheckUpdateGrl();	// Comprueba si existen actualizaciones.
+
 private slots:
 	void on_ver_nav(bool mChecked);				//
 	void on_ver_archivos_url(bool mChecked);	// Muestra la pestaña de los Archivos/Url.
@@ -200,6 +203,7 @@ private slots:
 	void on_ExportarJuego();			// Exporta los datos de juego para ser usados en otro equipo o lanzador.
 
 	void on_Opciones();					// Accede a las Opciones del GR-lida.
+	void on_BuscarUpdates();			// Menú para comprobar si existen actualizaciones.
 	void on_AcercaD();					// Acerca del GR-lida.
 	void on_VerRating(bool visible);    // Muestra/Oculta el Rating de la Lista.
 
@@ -216,6 +220,8 @@ private slots:
 	void on_VerCarpeta_idiomas();		// Muestra la carpeta idiomas.
 	void on_VerCarpeta_temp();			// Muestra la carpeta temp.
 	void on_VerCarpeta_home();			// Muestra la carpeta principal.
+
+	void isCheckUpdateFinished();		// Comprueba la versión.
 };
 
 #endif // GRLIDA_H

@@ -397,7 +397,8 @@ QHash<QString, QVariant> Funciones::CargarGRLConfig(QString iniFileName)
 	settings.endGroup();
 
 	settings.beginGroup("Updates");
-		config["Version"] = settings.value("Version" , stVersionGrl()).toString();
+		config["chkVersion"] = settings.value("chkVersion", false).toBool();
+		config["Version"]    = settings.value("Version"   , stVersionGrl()).toString();
 	settings.endGroup();
 
 	return config;
@@ -515,7 +516,8 @@ void Funciones::GuardarGRLConfig(QString iniFileName, QHash<QString, QVariant> c
 	settings.endGroup();
 
 	settings.beginGroup("Updates");
-		settings.setValue("Version" , stVersionGrl() );
+		settings.setValue("chkVersion", config["chkVersion"] );
+		settings.setValue("Version"   , stVersionGrl()       );
 	settings.endGroup();
 }
 

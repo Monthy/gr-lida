@@ -193,6 +193,7 @@
     <addaction name="menuMenuVerCarpetas"/>
     <addaction name="separator"/>
     <addaction name="mnu_ver_ayuda"/>
+    <addaction name="mnu_ver_check_updates"/>
     <addaction name="mnu_ver_acercad"/>
    </widget>
    <addaction name="menuArchivo"/>
@@ -1541,6 +1542,15 @@
    </property>
    <property name="text">
     <string>Ver Rating</string>
+   </property>
+  </action>
+  <action name="mnu_ver_check_updates">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
+   </property>
+   <property name="text">
+    <string>Buscar actualizaciones...</string>
    </property>
   </action>
  </widget>
