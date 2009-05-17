@@ -323,440 +323,440 @@
         <translation>Buttonwrap - Aktiver knappen indpakning på antallet af emuleret knapper</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="941"/>
+        <location filename="../ui/addedit_dosbox.ui" line="951"/>
         <source>Opciones de Sonido</source>
         <translation>Lyd Indstillinger</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="950"/>
+        <location filename="../ui/addedit_dosbox.ui" line="960"/>
         <source>Todas las Opciones de sonido y emulación de sonido</source>
         <translation>Alle lyd og lyd-emulering Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="970"/>
+        <location filename="../ui/addedit_dosbox.ui" line="980"/>
         <source>Desactivar Sonido</source>
         <translation>Deaktiver lyd</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="990"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1000"/>
         <source>Sound Blaster</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="998"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1008"/>
         <source>Permite al mezclador de la soundblaster modificar el del DOSBox</source>
         <translation>Tillad Sound Blaster mixer over DOSBox mixer</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1008"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1018"/>
         <source>Tipo Sound Blaste:</source>
         <translation>Sound Blaster type:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1028"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1038"/>
         <source>Opl mode:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1048"/>
-        <location filename="../ui/addedit_dosbox.ui" line="1182"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1058"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1192"/>
         <source>Address:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1068"/>
-        <location filename="../ui/addedit_dosbox.ui" line="1202"/>
-        <location filename="../ui/addedit_dosbox.ui" line="1597"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1078"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1212"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1607"/>
         <source>Frecuencia:</source>
         <translation>Frecuency:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1088"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2110"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1098"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2120"/>
         <source>IRQ:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1108"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1118"/>
         <source>DMA:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1128"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1138"/>
         <source>HDMA:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1164"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1174"/>
         <source>Gravis Ultrasound</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1172"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1182"/>
         <source>Activa la emulación de Gravis Ultrasound</source>
         <translation>Aktiver Gravis UltraSound emulering</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1222"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1232"/>
         <source>IRQ 1:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1242"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1252"/>
         <source>DMA 1:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1262"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1272"/>
         <source>IRQ 2:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1282"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1292"/>
         <source>DMA 2:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1348"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1358"/>
         <source>MIDI</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1356"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1366"/>
         <source>Activar emulación MPU-401</source>
         <translation>Aktiver MPU-401 emulering</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1366"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1376"/>
         <source>MPU-401:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1386"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1396"/>
         <source>Modo inteligente</source>
         <translation>Intelligent mode</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1396"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1406"/>
         <source>Dispositivo que recibirá los datos MIDI desde el MPU-401:</source>
         <translation>Enhed til at modtage MIDI-data fra MPU-401:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1419"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1429"/>
         <source>Frecuencia de muestreo de la emulación de música MT32:</source>
         <translation>MT32 Musik emulering samplingfrekvens:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1442"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1452"/>
         <source>Opciones de configuración especiales para el dispositivo:</source>
         <translation>Special konfiguration enheden muligheder:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1478"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1488"/>
         <source>Configuración Adicional</source>
         <translation>Yderligere Configuration</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1486"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1496"/>
         <source>Activa el altavoz interno</source>
         <translation>Aktiver interne højttaler</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1496"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1506"/>
         <source>Activa Disney Sound Source</source>
         <translation>Aktiver Disney lydkilde</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1506"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1516"/>
         <source>Frecuencia de muestreo de la generación de sonido del altavoz interno:</source>
         <translation>Intern højttaler samplingfrekvens:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1532"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1542"/>
         <source>Tandy:</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1565"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1575"/>
         <source>Frecuencia de muestreo de la generación de sonido Tandy de 3 voces. La emulación de sonido Tandy está presente si se selecciona tandy como máquina:</source>
         <translation>Tandy 3 samplingfrekvens. Tandy emulering er til stede, hvis Tandy maskine er valgt:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1617"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1627"/>
         <source>Bloque:</source>
         <translation>Block:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1634"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1644"/>
         <source>Prebuffer:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1696"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1706"/>
         <source>Montaje</source>
         <translation>Mounting</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1705"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1715"/>
         <source>Opciones de montaje de unidades</source>
         <translation>Mounting Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1757"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1767"/>
         <source>Folder/Imagen</source>
         <translation>Mappe / Image</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1762"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1772"/>
         <source>Etiqueta</source>
         <translation>Label</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1767"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1777"/>
         <source>Tipo</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1772"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1782"/>
         <source>Driver</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1777"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1787"/>
         <source>CD/DVD index</source>
         <translation>CD / DVD index</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1782"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1792"/>
         <source>Opciones CD/DVD</source>
         <translation>CD / DVD Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1787"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1797"/>
         <source>IO Ctrl</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1792"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1802"/>
         <source>Primer montaje</source>
         <translation>Første enhed</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1810"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1820"/>
         <source>Añadir</source>
         <translation>Tilføj</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1827"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1837"/>
         <source>Subir</source>
         <translation>Op</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1844"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1854"/>
         <source>Editar</source>
         <translation>Rediger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1861"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1871"/>
         <source>Bajar</source>
         <translation>Ned</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1878"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1888"/>
         <source>Eliminar</source>
         <translation>Slet</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1895"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1905"/>
         <source>Limpiar</source>
         <translation>Klar</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1912"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1922"/>
         <source>Autocrear Montaje</source>
         <translation>Automatisk montage</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1929"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1939"/>
         <source>Selecciona montaje primario</source>
         <translation>Vælg første enhed montering</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1961"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1971"/>
         <source>Comunicación</source>
         <translation>Meddelelse</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1970"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1980"/>
         <source>Opciones de comunicaciones como la red o modem</source>
         <translation>Net og modem indstillinger</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1990"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2000"/>
         <source>modem -- Activa emulación de módem virtual</source>
         <translation>Modem - Aktiver virtuelle modem emulation</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2000"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2010"/>
         <source>directserial -- Activa soporte de puerto serie directo</source>
         <translation>Directserial - tillade direkte adgang til havn</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2010"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2020"/>
         <source>Puerto COM:</source>
         <translation>COM port:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2030"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2040"/>
         <source>Bits por segundos:</source>
         <translation>Bits per sekund:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2053"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2063"/>
         <source>Modem comport:</source>
         <translation>Modem comport:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2060"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2070"/>
         <source>Puerto real:</source>
         <translation>Real port:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2080"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2090"/>
         <source>Numero del puerto</source>
         <translation>Port nr</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2127"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2137"/>
         <source>Tamaño del Byte:</source>
         <translation>Byte størrelse:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2147"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2157"/>
         <source>Paridad de paquetes:</source>
         <translation>Package parity:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2167"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2177"/>
         <source>Bits de parada:</source>
         <translation>Stop Bits:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2187"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2197"/>
         <source>Seleccionar Serial:</source>
         <translation>Choose Serial:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2207"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2217"/>
         <source>Estado o tipo Serial:</source>
         <translation>State eller Serial type:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2233"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2243"/>
         <source>Añade Serial</source>
         <translation>Tilføj Serial</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2244"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2254"/>
         <source>Serial 1:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2261"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2271"/>
         <source>Serial 2:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2278"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2288"/>
         <source>Serial 3:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2295"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2305"/>
         <source>Serial 4:</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2312"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2322"/>
         <source>ipx -- Activa emulación IPX sobre UDP/IP</source>
         <translation>IPX -- Aktiver IPX over UDP / IP-emulering</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2341"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2351"/>
         <source>Autoexec</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2350"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2360"/>
         <source>Montaje de unidades manualmente</source>
         <translation>Håndbog monteringsudstyret</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2362"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2372"/>
         <source>Activar Configuración manual del [autoexec] del DOSBox</source>
         <translation>Aktiver manuel redigering af DOSBox [autoExec] Sektion</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2379"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2389"/>
         <source>Miscelánea</source>
         <translation>Misc</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2388"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2398"/>
         <source>Otras opciones como la prioridad del emulador, directorio de capturas y sonido, etc...</source>
         <translation>Misc muligheder såsom prioritet emulator, lyd-opsamling og-snapshot-mappen, osv. ...</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2414"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2424"/>
         <source>Prioridad DOSBox seleccionado</source>
         <translation>DOSBox Prioritet (forgrundsviden)</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2420"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2466"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2430"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2476"/>
         <source>Baja</source>
         <translation>Lav</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2427"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2473"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2437"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2483"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2434"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2483"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2444"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2493"/>
         <source>Alta</source>
         <translation>Høj</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2444"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2490"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2454"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2500"/>
         <source>Muy alta</source>
         <translation>Meget Højt</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2460"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2470"/>
         <source>Prioridad DOSBox NO seleccionado</source>
         <translation>DOSBox Prioritet (baggrund)</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2513"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2523"/>
         <source>Archivo usado para cargar/guardar el mapa de teclas/eventos:</source>
         <translation>Fil bruges til keymapper indstillinger:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2579"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2589"/>
         <source>language -- Selecciona otro archivo de idioma:</source>
         <translation>Language -- Select another language file:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2645"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2655"/>
         <source>captures -- Directorio donde se capturarán cosas como sonido,midi o pantallas:</source>
         <translation>Captures -- Mappe, hvor lyden indfanger og andre snapshots vil blive opbevaret:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2711"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2721"/>
         <source>Directorio donde esta la musica del juego asi como la BSO, sonido:</source>
         <translation>Mappe, hvor spillet musik, lyde, osv. ... opbevares:</translation>
     </message>
@@ -1026,7 +1026,7 @@
     </message>
     <message utf8="true">
         <location filename="../ui/addedit_juego.ui" line="1416"/>
-        <location filename="../ui/addedit_juego.ui" line="2010"/>
+        <location filename="../ui/addedit_juego.ui" line="2013"/>
         <source>Descripción</source>
         <translation>Beskrivelse</translation>
     </message>
@@ -1106,142 +1106,142 @@
         <translation>Rediger</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1932"/>
+        <location filename="../ui/addedit_juego.ui" line="1935"/>
         <source>Actualizar</source>
         <translation>Opdater</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1949"/>
+        <location filename="../ui/addedit_juego.ui" line="1952"/>
         <source>Elimiar</source>
         <translation>Slet</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2000"/>
+        <location filename="../ui/addedit_juego.ui" line="2003"/>
         <source>Nombre</source>
         <translation>Navn</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2005"/>
+        <location filename="../ui/addedit_juego.ui" line="2008"/>
         <source>CRC32</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2015"/>
+        <location filename="../ui/addedit_juego.ui" line="2018"/>
         <source>Size</source>
         <translation>Størrelse</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2020"/>
+        <location filename="../ui/addedit_juego.ui" line="2023"/>
         <source>Path</source>
         <translation>Sti</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2036"/>
+        <location filename="../ui/addedit_juego.ui" line="2039"/>
         <source>DOSBox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2056"/>
+        <location filename="../ui/addedit_juego.ui" line="2059"/>
         <source>ScummVM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2076"/>
+        <location filename="../ui/addedit_juego.ui" line="2079"/>
         <source>VDMSound</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2088"/>
+        <location filename="../ui/addedit_juego.ui" line="2091"/>
         <source>Opciones del VDMSound</source>
         <translation>VDMS Indstillinger</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="2108"/>
+        <location filename="../ui/addedit_juego.ui" line="2111"/>
         <source>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.vlp</source>
         <translation>Navn på config-filen skal gemmes. Eksempel: File_Name.vlp</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2168"/>
+        <location filename="../ui/addedit_juego.ui" line="2171"/>
         <source>Ejecutable (exe,com,bat) del Juego:</source>
         <translation>Spil fil (EXE, COM, BAT):</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2228"/>
+        <location filename="../ui/addedit_juego.ui" line="2231"/>
         <source>Parametros:</source>
         <translation>Parametre:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="2245"/>
+        <location filename="../ui/addedit_juego.ui" line="2248"/>
         <source>Dirección del Icono:</source>
         <translation>Ikon Sti:</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2302"/>
+        <location filename="../ui/addedit_juego.ui" line="2305"/>
         <source>winnt.dos</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2323"/>
+        <location filename="../ui/addedit_juego.ui" line="2326"/>
         <source>useAutoexec</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2336"/>
+        <location filename="../ui/addedit_juego.ui" line="2339"/>
         <source>vdms.debug</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2357"/>
+        <location filename="../ui/addedit_juego.ui" line="2360"/>
         <source>useCustomCfg</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2376"/>
+        <location filename="../ui/addedit_juego.ui" line="2379"/>
         <source>winnt.dosbox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2397"/>
+        <location filename="../ui/addedit_juego.ui" line="2400"/>
         <source>exitclose</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2404"/>
+        <location filename="../ui/addedit_juego.ui" line="2407"/>
         <source>exitWarn</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2411"/>
+        <location filename="../ui/addedit_juego.ui" line="2414"/>
         <source>fastPaste</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2427"/>
+        <location filename="../ui/addedit_juego.ui" line="2430"/>
         <source>winnt.storage</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2448"/>
+        <location filename="../ui/addedit_juego.ui" line="2451"/>
         <source>useCDROM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2455"/>
+        <location filename="../ui/addedit_juego.ui" line="2458"/>
         <source>useNetware</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2501"/>
+        <location filename="../ui/addedit_juego.ui" line="2504"/>
         <source>Descargar la Info del Juego</source>
         <translation>Download Info Spil</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2534"/>
+        <location filename="../ui/addedit_juego.ui" line="2537"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2554"/>
+        <location filename="../ui/addedit_juego.ui" line="2557"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
@@ -2205,335 +2205,351 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="317"/>
-        <location filename="../src/grlida.cpp" line="1034"/>
+        <location filename="../src/grlida.cpp" line="1040"/>
         <source>CalificaciÃ³n</source>
         <translation>Karakter</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="363"/>
         <location filename="../src/grlida.cpp" line="365"/>
-        <location filename="../src/grlida.cpp" line="1666"/>
-        <location filename="../src/grlida.cpp" line="1816"/>
+        <location filename="../src/grlida.cpp" line="1674"/>
+        <location filename="../src/grlida.cpp" line="1824"/>
         <source>NÂº Juegos</source>
         <translation>Antal spil</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="525"/>
+        <location filename="../src/grlida.cpp" line="526"/>
         <source>Ordenar:</source>
         <translation>Sorter:</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="531"/>
-        <location filename="../src/grlida.cpp" line="561"/>
+        <location filename="../src/grlida.cpp" line="532"/>
+        <location filename="../src/grlida.cpp" line="562"/>
         <source>Por ID</source>
         <translation>Af ID</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="532"/>
-        <location filename="../src/grlida.cpp" line="562"/>
-        <source>Titulo</source>
-        <translation>Titel</translation>
-    </message>
-    <message>
         <location filename="../src/grlida.cpp" line="533"/>
         <location filename="../src/grlida.cpp" line="563"/>
-        <location filename="../src/grlida.cpp" line="1037"/>
-        <source>Subtitulo</source>
-        <translation>Undertitel</translation>
+        <source>Titulo</source>
+        <translation>Titel</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="534"/>
         <location filename="../src/grlida.cpp" line="564"/>
         <location filename="../src/grlida.cpp" line="1043"/>
-        <source>Genero</source>
-        <translation>Genre</translation>
+        <source>Subtitulo</source>
+        <translation>Undertitel</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="535"/>
         <location filename="../src/grlida.cpp" line="565"/>
-        <source>CompaÃ±ia</source>
-        <translation>Udgiver</translation>
+        <location filename="../src/grlida.cpp" line="1049"/>
+        <source>Genero</source>
+        <translation>Genre</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="536"/>
         <location filename="../src/grlida.cpp" line="566"/>
-        <source>Desarrollador</source>
-        <translation>Developer</translation>
+        <source>CompaÃ±ia</source>
+        <translation>Udgiver</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="537"/>
         <location filename="../src/grlida.cpp" line="567"/>
-        <location filename="../src/grlida.cpp" line="644"/>
-        <location filename="../src/grlida.cpp" line="1044"/>
-        <source>Tema</source>
-        <translation>Tema</translation>
+        <source>Desarrollador</source>
+        <translation>Developer</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="538"/>
         <location filename="../src/grlida.cpp" line="568"/>
-        <location filename="../src/grlida.cpp" line="656"/>
-        <location filename="../src/grlida.cpp" line="1041"/>
-        <source>Idioma</source>
-        <translation>Sprog</translation>
+        <location filename="../src/grlida.cpp" line="645"/>
+        <location filename="../src/grlida.cpp" line="1050"/>
+        <source>Tema</source>
+        <translation>Tema</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="539"/>
         <location filename="../src/grlida.cpp" line="569"/>
-        <location filename="../src/grlida.cpp" line="1042"/>
-        <source>Formato</source>
-        <translation>Format</translation>
+        <location filename="../src/grlida.cpp" line="657"/>
+        <location filename="../src/grlida.cpp" line="1047"/>
+        <source>Idioma</source>
+        <translation>Sprog</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="540"/>
         <location filename="../src/grlida.cpp" line="570"/>
-        <location filename="../src/grlida.cpp" line="653"/>
-        <source>AÃ±o</source>
-        <translation>År</translation>
+        <location filename="../src/grlida.cpp" line="1048"/>
+        <source>Formato</source>
+        <translation>Format</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="541"/>
         <location filename="../src/grlida.cpp" line="571"/>
-        <source>NÂº Discos</source>
-        <translation>Antal Discs</translation>
+        <location filename="../src/grlida.cpp" line="654"/>
+        <source>AÃ±o</source>
+        <translation>År</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="542"/>
         <location filename="../src/grlida.cpp" line="572"/>
-        <source>Sistema OS</source>
-        <translation>OS</translation>
+        <source>NÂº Discos</source>
+        <translation>Antal Discs</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="543"/>
         <location filename="../src/grlida.cpp" line="573"/>
-        <location filename="../src/grlida.cpp" line="1048"/>
-        <source>GrÃ¡ficos</source>
-        <translation>Grafik</translation>
+        <source>Sistema OS</source>
+        <translation>OS</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="544"/>
         <location filename="../src/grlida.cpp" line="574"/>
-        <location filename="../src/grlida.cpp" line="1049"/>
-        <source>Sonido</source>
-        <translation>Lyd</translation>
+        <location filename="../src/grlida.cpp" line="1054"/>
+        <source>GrÃ¡ficos</source>
+        <translation>Grafik</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="545"/>
         <location filename="../src/grlida.cpp" line="575"/>
-        <location filename="../src/grlida.cpp" line="1050"/>
-        <source>Jugabilidad</source>
-        <translation>Playability</translation>
+        <location filename="../src/grlida.cpp" line="1055"/>
+        <source>Sonido</source>
+        <translation>Lyd</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="546"/>
         <location filename="../src/grlida.cpp" line="576"/>
-        <location filename="../src/grlida.cpp" line="1051"/>
-        <source>Original</source>
-        <translation>Original</translation>
+        <location filename="../src/grlida.cpp" line="1056"/>
+        <source>Jugabilidad</source>
+        <translation>Playability</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="547"/>
         <location filename="../src/grlida.cpp" line="577"/>
-        <source>Tipo emulador</source>
-        <translation>Emulator type</translation>
+        <location filename="../src/grlida.cpp" line="1057"/>
+        <source>Original</source>
+        <translation>Original</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="548"/>
         <location filename="../src/grlida.cpp" line="578"/>
-        <location filename="../src/grlida.cpp" line="1046"/>
-        <source>Favorito</source>
-        <translation>Favorit</translation>
+        <source>Tipo emulador</source>
+        <translation>Emulator type</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="549"/>
         <location filename="../src/grlida.cpp" line="579"/>
-        <location filename="../src/grlida.cpp" line="1055"/>
+        <location filename="../src/grlida.cpp" line="1052"/>
+        <source>Favorito</source>
+        <translation>Favorit</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida.cpp" line="550"/>
+        <location filename="../src/grlida.cpp" line="580"/>
+        <location filename="../src/grlida.cpp" line="1061"/>
         <source>Rating</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="555"/>
+        <location filename="../src/grlida.cpp" line="556"/>
         <source>por</source>
         <translation>af</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="585"/>
+        <location filename="../src/grlida.cpp" line="586"/>
         <source>Ascendente</source>
         <translation>Stigende</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="586"/>
+        <location filename="../src/grlida.cpp" line="587"/>
         <source>Descendente</source>
         <translation>Descending</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="595"/>
+        <location filename="../src/grlida.cpp" line="596"/>
         <source>Ordenar</source>
         <translation>Sorter</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="631"/>
+        <location filename="../src/grlida.cpp" line="632"/>
         <source>Todos</source>
         <translation>Alle</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="632"/>
+        <location filename="../src/grlida.cpp" line="633"/>
         <source>Favoritos</source>
         <translation>Favorit</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="633"/>
+        <location filename="../src/grlida.cpp" line="634"/>
         <source>Originales</source>
         <translation>Original</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="634"/>
+        <location filename="../src/grlida.cpp" line="635"/>
         <source>Tipo Emulador</source>
         <translation>Emulator type</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="641"/>
+        <location filename="../src/grlida.cpp" line="642"/>
         <source>Generos</source>
         <translation>Genre</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="647"/>
+        <location filename="../src/grlida.cpp" line="648"/>
         <source>Desarrolladores</source>
         <translation>Developer</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="650"/>
+        <location filename="../src/grlida.cpp" line="651"/>
         <source>CompaÃ±ias</source>
         <translation>Udgiver</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1032"/>
+        <location filename="../src/grlida.cpp" line="1038"/>
         <source>CarÃ¡tula Frontal</source>
         <translation>Front Cover</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1033"/>
+        <location filename="../src/grlida.cpp" line="1039"/>
         <source>Detalles del juego</source>
         <translation>Nærmere oplysninger om spillet</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1035"/>
+        <location filename="../src/grlida.cpp" line="1041"/>
         <source>Otros Datos</source>
         <translation>Andre data</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1036"/>
+        <location filename="../src/grlida.cpp" line="1042"/>
         <source>Subido por</source>
         <translation>Overført af</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1038"/>
+        <location filename="../src/grlida.cpp" line="1044"/>
         <source>Publicado por</source>
         <translation>Udgiver af</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1039"/>
+        <location filename="../src/grlida.cpp" line="1045"/>
         <source>Desarrollado por</source>
         <translation>Developer ved</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1040"/>
+        <location filename="../src/grlida.cpp" line="1046"/>
         <source>Publicado</source>
         <translation>Udgiver</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1045"/>
+        <location filename="../src/grlida.cpp" line="1051"/>
         <source>Sistema Operativo</source>
         <translation>OS</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1047"/>
+        <location filename="../src/grlida.cpp" line="1053"/>
         <source>AÃ±adido el</source>
         <translation>Tilføjet</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1052"/>
+        <location filename="../src/grlida.cpp" line="1058"/>
         <source>Estado</source>
         <translation>Stat</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1053"/>
+        <location filename="../src/grlida.cpp" line="1059"/>
         <source>Tipo Emu</source>
         <translation>Emu type</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1054"/>
+        <location filename="../src/grlida.cpp" line="1060"/>
         <source>DescripciÃ³n</source>
         <translation>Beskrivelse</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1393"/>
+        <location filename="../src/grlida.cpp" line="1401"/>
         <source>introducido el</source>
         <translation>Indtastet</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1798"/>
+        <location filename="../src/grlida.cpp" line="1806"/>
         <source>Porfavor selecciona un Juego de la lista para eliminarlo</source>
         <translation>Vælg et spil fra listen til at slette</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1800"/>
+        <location filename="../src/grlida.cpp" line="1808"/>
         <source>Â¿Eliminar Juego...?</source>
         <translation>Slet spil ...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1800"/>
+        <location filename="../src/grlida.cpp" line="1808"/>
         <source>Â¿Deseas realmente eliminar este juego de la Base de Datos?
 Si es de DOSBox o VDMSound tambien se borrar el archivo de configuraciÃ³n</source>
         <translation>Vil du virkelig slette dette spil fra databasen?
 Hvis det er afhængig af DOSBox eller VDMSound, config filer vil også blive slettet</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1800"/>
+        <location filename="../src/grlida.cpp" line="1808"/>
         <source>Si</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1800"/>
+        <location filename="../src/grlida.cpp" line="1808"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1809"/>
+        <location filename="../src/grlida.cpp" line="1817"/>
         <source>Juego Eliminado correctamente</source>
         <translation>Spillet blev slettet</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1864"/>
+        <location filename="../src/grlida.cpp" line="1872"/>
         <source>ConfiguraciÃ³n del juego no encontrada.</source>
         <translation>Spil konfiguration ikke fundet.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1993"/>
+        <location filename="../src/grlida.cpp" line="2001"/>
         <source>No esta disponible el ejecutable del emulador.
 Compruebe si lo tiene instalado.</source>
         <translation>Den emulator fil blev ikke fundet.
 Tjek, om programmet virkelig er installeret.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2027"/>
+        <location filename="../src/grlida.cpp" line="2035"/>
         <source>No se ha podido ejecutar el juego</source>
         <translation>Kunne ikke udføre spil</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2029"/>
+        <location filename="../src/grlida.cpp" line="2037"/>
         <source>Solo disponible para SO, Windows (NT/2000/XP)</source>
         <translation>Kun tilgængelig til Windows (NT/2000/XP)</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2033"/>
-        <location filename="../src/grlida.cpp" line="2080"/>
+        <location filename="../src/grlida.cpp" line="2041"/>
+        <location filename="../src/grlida.cpp" line="2088"/>
         <source>No dispones de ninguna configuraciÃ³n</source>
         <translation>Ingen konfiguration rådighed</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2035"/>
+        <location filename="../src/grlida.cpp" line="2043"/>
         <source>Porfavor, seleccione un juego de la lista antes.</source>
         <translation>Venligst, vælg først et spil fra listen.</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida.cpp" line="2410"/>
+        <location filename="../src/grlida.cpp" line="2413"/>
+        <source>Nueva VersiÃ³n</source>
+        <translation>New Version</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida.cpp" line="2410"/>
+        <source>Disponible nueva versiÃ³n del GR-lida %1</source>
+        <translation>Ingen nye version af GR-lida %1</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida.cpp" line="2413"/>
+        <source>No hay nuevas actualizaciones disponibles</source>
+        <translation>Ingen nye opdateringer tilgængelige</translation>
     </message>
     <message>
         <location filename="../src/grlida.h" line="71"/>
@@ -2560,8 +2576,8 @@ Tjek, om programmet virkelig er installeret.</translation>
     </message>
     <message>
         <location filename="../ui/grlida.ui" line="101"/>
-        <location filename="../ui/grlida.ui" line="1012"/>
-        <location filename="../ui/grlida.ui" line="1327"/>
+        <location filename="../ui/grlida.ui" line="1013"/>
+        <location filename="../ui/grlida.ui" line="1328"/>
         <source>Capturas</source>
         <translation>Snapshots</translation>
     </message>
@@ -2596,663 +2612,668 @@ Tjek, om programmet virkelig er installeret.</translation>
         <translation>Vis Mapper</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="207"/>
+        <location filename="../ui/grlida.ui" line="208"/>
         <source>Barra de Herramientas</source>
         <translation>Toolbar</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="244"/>
+        <location filename="../ui/grlida.ui" line="245"/>
         <source>Barra Ordenar lista</source>
         <translation>Sorter listen værktøjslinje</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="258"/>
+        <location filename="../ui/grlida.ui" line="259"/>
         <source>Datos del juego</source>
         <translation>Spil data</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="292"/>
+        <location filename="../ui/grlida.ui" line="293"/>
         <source>Dispone de Archivos / Carátulas</source>
         <translation>Har files / dækker</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="357"/>
+        <location filename="../ui/grlida.ui" line="358"/>
         <source>Archivos y Url</source>
         <translation>Filer og webadresser</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="384"/>
+        <location filename="../ui/grlida.ui" line="385"/>
         <source>Capturas de Video</source>
         <translation>Video indfanger</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="412"/>
-        <location filename="../ui/grlida.ui" line="458"/>
+        <location filename="../ui/grlida.ui" line="413"/>
+        <location filename="../ui/grlida.ui" line="459"/>
         <source>Archivo</source>
         <translation>Fil</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="417"/>
-        <location filename="../ui/grlida.ui" line="463"/>
+        <location filename="../ui/grlida.ui" line="418"/>
+        <location filename="../ui/grlida.ui" line="464"/>
         <source>path</source>
         <translation>Sti</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="430"/>
+        <location filename="../ui/grlida.ui" line="431"/>
         <source>Capturas de Sonidos</source>
         <translation>Lyd  indfanger</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="476"/>
+        <location filename="../ui/grlida.ui" line="477"/>
         <source>Ver URL</source>
         <translation>Vis URL</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="504"/>
+        <location filename="../ui/grlida.ui" line="505"/>
         <source>Url</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="509"/>
-        <location filename="../ui/grlida.ui" line="563"/>
+        <location filename="../ui/grlida.ui" line="510"/>
+        <location filename="../ui/grlida.ui" line="564"/>
         <source>Descripción</source>
         <translation>Beskrivelse</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="522"/>
+        <location filename="../ui/grlida.ui" line="523"/>
         <source>Ver Archivos</source>
         <translation>Vis filer</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="553"/>
+        <location filename="../ui/grlida.ui" line="554"/>
         <source>Nombre</source>
         <translation>Navn</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="558"/>
+        <location filename="../ui/grlida.ui" line="559"/>
         <source>CRC32</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="568"/>
+        <location filename="../ui/grlida.ui" line="569"/>
         <source>Size</source>
         <translation>Størrelse</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="573"/>
+        <location filename="../ui/grlida.ui" line="574"/>
         <source>Path</source>
         <translation>Sti</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="590"/>
-        <location filename="../ui/grlida.ui" line="1411"/>
+        <location filename="../ui/grlida.ui" line="591"/>
+        <location filename="../ui/grlida.ui" line="1412"/>
         <source>Nav Categorias</source>
         <translation>Gennemse kategorier</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="616"/>
+        <location filename="../ui/grlida.ui" line="617"/>
         <source>Categorias</source>
         <translation>Kategorier</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="629"/>
-        <location filename="../ui/grlida.ui" line="997"/>
+        <location filename="../ui/grlida.ui" line="630"/>
+        <location filename="../ui/grlida.ui" line="998"/>
         <source>PictureFlow</source>
         <translation>BilledeFlyde</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="661"/>
+        <location filename="../ui/grlida.ui" line="662"/>
         <source>Información</source>
         <translation>Information</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="664"/>
+        <location filename="../ui/grlida.ui" line="665"/>
         <source>Muestra Información sobre la Base de Datos</source>
         <translation>Vis database information</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="673"/>
-        <location filename="../ui/grlida.ui" line="1096"/>
-        <location filename="../ui/grlida.ui" line="1099"/>
-        <location filename="../ui/grlida.ui" line="1102"/>
+        <location filename="../ui/grlida.ui" line="674"/>
+        <location filename="../ui/grlida.ui" line="1097"/>
+        <location filename="../ui/grlida.ui" line="1100"/>
+        <location filename="../ui/grlida.ui" line="1103"/>
         <source>Cerrar</source>
         <translation>Luk</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="676"/>
-        <location filename="../ui/grlida.ui" line="1105"/>
+        <location filename="../ui/grlida.ui" line="677"/>
+        <location filename="../ui/grlida.ui" line="1106"/>
         <source>Cerrar el GR-lida</source>
         <translation>Luk GR-lida</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="679"/>
+        <location filename="../ui/grlida.ui" line="680"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="688"/>
-        <location filename="../ui/grlida.ui" line="1114"/>
+        <location filename="../ui/grlida.ui" line="689"/>
+        <location filename="../ui/grlida.ui" line="1115"/>
         <source>Nuevo con DOSBox</source>
         <translation>Nyt spil DOSBox</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="691"/>
-        <location filename="../ui/grlida.ui" line="823"/>
-        <location filename="../ui/grlida.ui" line="1117"/>
+        <location filename="../ui/grlida.ui" line="692"/>
+        <location filename="../ui/grlida.ui" line="824"/>
+        <location filename="../ui/grlida.ui" line="1118"/>
         <source>DOSBox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="694"/>
+        <location filename="../ui/grlida.ui" line="695"/>
         <source>Nuevo Juego con DOSBox</source>
         <translation>Nyt spil til brug med DOSBox</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="697"/>
-        <location filename="../ui/grlida.ui" line="1123"/>
+        <location filename="../ui/grlida.ui" line="698"/>
+        <location filename="../ui/grlida.ui" line="1124"/>
         <source>Nuevo Juego para el emulador DOSBox</source>
         <translation>Nyt spil til brug med DOSBox</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="700"/>
+        <location filename="../ui/grlida.ui" line="701"/>
         <source>Ctrl+D</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="709"/>
-        <location filename="../ui/grlida.ui" line="1132"/>
+        <location filename="../ui/grlida.ui" line="710"/>
+        <location filename="../ui/grlida.ui" line="1133"/>
         <source>Nuevo con ScummVM</source>
         <translation>Nyt spil ScummVM</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="712"/>
-        <location filename="../ui/grlida.ui" line="844"/>
-        <location filename="../ui/grlida.ui" line="1135"/>
+        <location filename="../ui/grlida.ui" line="713"/>
+        <location filename="../ui/grlida.ui" line="845"/>
+        <location filename="../ui/grlida.ui" line="1136"/>
         <source>ScummVM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="715"/>
-        <location filename="../ui/grlida.ui" line="1138"/>
+        <location filename="../ui/grlida.ui" line="716"/>
+        <location filename="../ui/grlida.ui" line="1139"/>
         <source>Nuevo Juego ScummVM</source>
         <translation>Ny ScummVM spil</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="718"/>
-        <location filename="../ui/grlida.ui" line="1141"/>
+        <location filename="../ui/grlida.ui" line="719"/>
+        <location filename="../ui/grlida.ui" line="1142"/>
         <source>Nuevo Juego para el emulador ScummVM</source>
         <translation>Nyt spil til brug med ScummVM</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="721"/>
+        <location filename="../ui/grlida.ui" line="722"/>
         <source>Ctrl+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="730"/>
-        <location filename="../ui/grlida.ui" line="1150"/>
+        <location filename="../ui/grlida.ui" line="731"/>
+        <location filename="../ui/grlida.ui" line="1151"/>
         <source>Nuevo con VDMSound</source>
         <translation>Nyt spil VDMSound</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="733"/>
-        <location filename="../ui/grlida.ui" line="1153"/>
+        <location filename="../ui/grlida.ui" line="734"/>
+        <location filename="../ui/grlida.ui" line="1154"/>
         <source>VDMSound</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="736"/>
-        <location filename="../ui/grlida.ui" line="1156"/>
+        <location filename="../ui/grlida.ui" line="737"/>
+        <location filename="../ui/grlida.ui" line="1157"/>
         <source>Nuevo Juego VDMSound</source>
         <translation>Nyt VDMSound</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="739"/>
-        <location filename="../ui/grlida.ui" line="1159"/>
+        <location filename="../ui/grlida.ui" line="740"/>
+        <location filename="../ui/grlida.ui" line="1160"/>
         <source>Nuevo Juego para el emulador VDMSound</source>
         <translation>Nyt spil til brug med VDMSound</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="742"/>
+        <location filename="../ui/grlida.ui" line="743"/>
         <source>Ctrl+V</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="751"/>
-        <location filename="../ui/grlida.ui" line="1204"/>
-        <location filename="../ui/grlida.ui" line="1210"/>
+        <location filename="../ui/grlida.ui" line="752"/>
+        <location filename="../ui/grlida.ui" line="1205"/>
+        <location filename="../ui/grlida.ui" line="1211"/>
         <source>Nuevo Juego</source>
         <translation>Nyt spil</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="754"/>
-        <location filename="../ui/grlida.ui" line="1207"/>
+        <location filename="../ui/grlida.ui" line="755"/>
+        <location filename="../ui/grlida.ui" line="1208"/>
         <source>Nuevo</source>
         <translation>Nyt</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="757"/>
-        <location filename="../ui/grlida.ui" line="1213"/>
+        <location filename="../ui/grlida.ui" line="758"/>
+        <location filename="../ui/grlida.ui" line="1214"/>
         <source>Añade un nuevo Juego a la lista</source>
         <translation>Tilføj nyt spil til listen</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="760"/>
+        <location filename="../ui/grlida.ui" line="761"/>
         <source>Ins</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="769"/>
-        <location filename="../ui/grlida.ui" line="1225"/>
-        <location filename="../ui/grlida.ui" line="1231"/>
+        <location filename="../ui/grlida.ui" line="770"/>
+        <location filename="../ui/grlida.ui" line="1226"/>
+        <location filename="../ui/grlida.ui" line="1232"/>
         <source>Editar Juego</source>
         <translation>Rediger spil</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="772"/>
-        <location filename="../ui/grlida.ui" line="1228"/>
+        <location filename="../ui/grlida.ui" line="773"/>
+        <location filename="../ui/grlida.ui" line="1229"/>
         <source>Editar</source>
         <translation>Rediger</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="775"/>
-        <location filename="../ui/grlida.ui" line="1234"/>
+        <location filename="../ui/grlida.ui" line="776"/>
+        <location filename="../ui/grlida.ui" line="1235"/>
         <source>Edita los datos del Juego asi como la configuración del emulador</source>
         <translation>Rediger vildt data og emulator konfiguration</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="778"/>
+        <location filename="../ui/grlida.ui" line="779"/>
         <source>Shift+Ins</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="787"/>
-        <location filename="../ui/grlida.ui" line="1243"/>
-        <location filename="../ui/grlida.ui" line="1249"/>
+        <location filename="../ui/grlida.ui" line="788"/>
+        <location filename="../ui/grlida.ui" line="1244"/>
+        <location filename="../ui/grlida.ui" line="1250"/>
         <source>Eliminar Juego</source>
         <translation>Slet spil</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="790"/>
-        <location filename="../ui/grlida.ui" line="1252"/>
+        <location filename="../ui/grlida.ui" line="791"/>
+        <location filename="../ui/grlida.ui" line="1253"/>
         <source>Elimina un Juego de la lista</source>
         <translation>Slet et spil fra liste</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="793"/>
+        <location filename="../ui/grlida.ui" line="794"/>
         <source>Del</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="805"/>
+        <location filename="../ui/grlida.ui" line="806"/>
         <source>Marcar como Favorito</source>
         <translation>Marker som favorit</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="808"/>
+        <location filename="../ui/grlida.ui" line="809"/>
         <source>Favorito</source>
         <translation>Favorit</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="811"/>
+        <location filename="../ui/grlida.ui" line="812"/>
         <source>Marca o quita un juego seleccionado como Favorito</source>
         <translation>Tags eller untags et spil som favorit</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="820"/>
-        <location filename="../ui/grlida.ui" line="826"/>
+        <location filename="../ui/grlida.ui" line="821"/>
+        <location filename="../ui/grlida.ui" line="827"/>
         <source>Ejecuta DOSBox</source>
         <translation>Kør DosBox</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="829"/>
+        <location filename="../ui/grlida.ui" line="830"/>
         <source>Ejecuta el emulador DOSBox</source>
         <translation>Kør DOSBox emulator</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="832"/>
+        <location filename="../ui/grlida.ui" line="833"/>
         <source>Shift+D</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="841"/>
-        <location filename="../ui/grlida.ui" line="847"/>
+        <location filename="../ui/grlida.ui" line="842"/>
+        <location filename="../ui/grlida.ui" line="848"/>
         <source>Ejecuta ScummVM</source>
         <translation>Kør ScummVM</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="850"/>
+        <location filename="../ui/grlida.ui" line="851"/>
         <source>Ejecuta el emulador ScummVM</source>
         <translation>Kør ScummVM emulator</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="853"/>
+        <location filename="../ui/grlida.ui" line="854"/>
         <source>Shift+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="862"/>
-        <location filename="../ui/grlida.ui" line="868"/>
-        <location filename="../ui/grlida.ui" line="1168"/>
-        <location filename="../ui/grlida.ui" line="1174"/>
+        <location filename="../ui/grlida.ui" line="863"/>
+        <location filename="../ui/grlida.ui" line="869"/>
+        <location filename="../ui/grlida.ui" line="1169"/>
+        <location filename="../ui/grlida.ui" line="1175"/>
         <source>Ejecutar Juego</source>
         <translation>Kør spil</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="865"/>
-        <location filename="../ui/grlida.ui" line="1171"/>
+        <location filename="../ui/grlida.ui" line="866"/>
+        <location filename="../ui/grlida.ui" line="1172"/>
         <source>Ejecutar</source>
         <translation>Kør</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="871"/>
-        <location filename="../ui/grlida.ui" line="1177"/>
+        <location filename="../ui/grlida.ui" line="872"/>
+        <location filename="../ui/grlida.ui" line="1178"/>
         <source>Ejecuta un Juego con el emulador correspondiente</source>
         <translation>Kør vildt med dens standard-emulator</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="874"/>
+        <location filename="../ui/grlida.ui" line="875"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="883"/>
-        <location filename="../ui/grlida.ui" line="1189"/>
+        <location filename="../ui/grlida.ui" line="884"/>
+        <location filename="../ui/grlida.ui" line="1190"/>
         <source>Ejecutar el Setup</source>
         <translation>Kør setup</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="886"/>
-        <location filename="../ui/grlida.ui" line="1192"/>
+        <location filename="../ui/grlida.ui" line="887"/>
+        <location filename="../ui/grlida.ui" line="1193"/>
         <source>Setup</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="889"/>
-        <location filename="../ui/grlida.ui" line="1195"/>
+        <location filename="../ui/grlida.ui" line="890"/>
+        <location filename="../ui/grlida.ui" line="1196"/>
         <source>Ejecuta el Setup del Juego</source>
         <translation>Kør spil setup</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="898"/>
-        <location filename="../ui/grlida.ui" line="1261"/>
+        <location filename="../ui/grlida.ui" line="899"/>
+        <location filename="../ui/grlida.ui" line="1262"/>
         <source>Importar Juego</source>
         <translation>Import spil</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="901"/>
-        <location filename="../ui/grlida.ui" line="1267"/>
+        <location filename="../ui/grlida.ui" line="902"/>
+        <location filename="../ui/grlida.ui" line="1268"/>
         <source>Importa los datos de un Juego via web</source>
         <translation>Import spil data fra web</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="904"/>
+        <location filename="../ui/grlida.ui" line="905"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="913"/>
+        <location filename="../ui/grlida.ui" line="914"/>
         <source>Exportar Juego</source>
         <translation>Export Spil</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="916"/>
+        <location filename="../ui/grlida.ui" line="917"/>
         <source>Exporta los datos de configuración del Juego</source>
         <translation>Eksport konfiguration data Game</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="925"/>
-        <location filename="../ui/grlida.ui" line="928"/>
-        <location filename="../ui/grlida.ui" line="1342"/>
-        <location filename="../ui/grlida.ui" line="1345"/>
+        <location filename="../ui/grlida.ui" line="926"/>
+        <location filename="../ui/grlida.ui" line="929"/>
+        <location filename="../ui/grlida.ui" line="1343"/>
+        <location filename="../ui/grlida.ui" line="1346"/>
         <source>Opciones</source>
         <translation>Indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="931"/>
-        <location filename="../ui/grlida.ui" line="1348"/>
+        <location filename="../ui/grlida.ui" line="932"/>
+        <location filename="../ui/grlida.ui" line="1349"/>
         <source>Opciones del GR-lida</source>
         <translation>GR-lida indstillinger</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="934"/>
-        <location filename="../ui/grlida.ui" line="1351"/>
+        <location filename="../ui/grlida.ui" line="935"/>
+        <location filename="../ui/grlida.ui" line="1352"/>
         <source>Opciones de Configuración del GR-lida</source>
         <translation>GR-lida konfiguration indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="946"/>
-        <location filename="../ui/grlida.ui" line="1279"/>
-        <location filename="../ui/grlida.ui" line="1285"/>
+        <location filename="../ui/grlida.ui" line="947"/>
+        <location filename="../ui/grlida.ui" line="1280"/>
+        <location filename="../ui/grlida.ui" line="1286"/>
         <source>Ver Archivos y URL</source>
         <translation>Show files and URL</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="949"/>
-        <location filename="../ui/grlida.ui" line="1282"/>
+        <location filename="../ui/grlida.ui" line="950"/>
+        <location filename="../ui/grlida.ui" line="1283"/>
         <source>Archivos_URL</source>
         <translation>Filer_URL</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="952"/>
-        <location filename="../ui/grlida.ui" line="1288"/>
+        <location filename="../ui/grlida.ui" line="953"/>
+        <location filename="../ui/grlida.ui" line="1289"/>
         <source>Muestra los Archivos y URL del Juego</source>
         <translation>Viser spil-filer og URL</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="955"/>
+        <location filename="../ui/grlida.ui" line="956"/>
         <source>F5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="970"/>
-        <location filename="../ui/grlida.ui" line="976"/>
-        <location filename="../ui/grlida.ui" line="1303"/>
+        <location filename="../ui/grlida.ui" line="971"/>
+        <location filename="../ui/grlida.ui" line="977"/>
+        <location filename="../ui/grlida.ui" line="1304"/>
         <source>Ver Datos</source>
         <translation>Vis data</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="973"/>
-        <location filename="../ui/grlida.ui" line="1306"/>
+        <location filename="../ui/grlida.ui" line="974"/>
+        <location filename="../ui/grlida.ui" line="1307"/>
         <source>Datos</source>
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="979"/>
-        <location filename="../ui/grlida.ui" line="1309"/>
+        <location filename="../ui/grlida.ui" line="980"/>
+        <location filename="../ui/grlida.ui" line="1310"/>
         <source>Muestra los datos del Juego</source>
         <translation>Vis spil data</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="982"/>
+        <location filename="../ui/grlida.ui" line="983"/>
         <source>F6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1009"/>
-        <location filename="../ui/grlida.ui" line="1324"/>
-        <location filename="../ui/grlida.ui" line="1330"/>
+        <location filename="../ui/grlida.ui" line="1010"/>
+        <location filename="../ui/grlida.ui" line="1325"/>
+        <location filename="../ui/grlida.ui" line="1331"/>
         <source>Ver Capturas</source>
         <translation>Vis snapshots</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1015"/>
-        <location filename="../ui/grlida.ui" line="1333"/>
+        <location filename="../ui/grlida.ui" line="1016"/>
+        <location filename="../ui/grlida.ui" line="1334"/>
         <source>Muestra las Capturas del Juego</source>
         <translation>Viser skærmen snapshots</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1018"/>
+        <location filename="../ui/grlida.ui" line="1019"/>
         <source>F7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1030"/>
+        <location filename="../ui/grlida.ui" line="1031"/>
         <source>Ver Ordenar</source>
         <translation>Vis sortering</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1033"/>
+        <location filename="../ui/grlida.ui" line="1034"/>
         <source>Ordenar</source>
         <translation>Sorter</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1036"/>
+        <location filename="../ui/grlida.ui" line="1037"/>
         <source>Ordena la lista de juego</source>
         <translation>Sorter spilliste</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1039"/>
+        <location filename="../ui/grlida.ui" line="1040"/>
         <source>F10</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1054"/>
+        <location filename="../ui/grlida.ui" line="1055"/>
         <source>Ver Barra de Herramientas</source>
         <translation>Vis toolbar</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1057"/>
+        <location filename="../ui/grlida.ui" line="1058"/>
         <source>Herramientas</source>
         <translation>Værktøj</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1060"/>
+        <location filename="../ui/grlida.ui" line="1061"/>
         <source>F8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1069"/>
-        <location filename="../ui/grlida.ui" line="1072"/>
+        <location filename="../ui/grlida.ui" line="1070"/>
+        <location filename="../ui/grlida.ui" line="1073"/>
         <source>Ayuda</source>
         <translation>Hjælp</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1075"/>
+        <location filename="../ui/grlida.ui" line="1076"/>
         <source>Muestra la Ayuda del GR-lida</source>
         <translation>Vis GR-lida hjælp</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1078"/>
+        <location filename="../ui/grlida.ui" line="1079"/>
         <source>F1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1087"/>
-        <location filename="../ui/grlida.ui" line="1360"/>
-        <location filename="../ui/grlida.ui" line="1366"/>
+        <location filename="../ui/grlida.ui" line="1088"/>
+        <location filename="../ui/grlida.ui" line="1361"/>
+        <location filename="../ui/grlida.ui" line="1367"/>
         <source>Acerca de...</source>
         <translation>Om...</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1120"/>
+        <location filename="../ui/grlida.ui" line="1121"/>
         <source>Nuevo Juego DOSBox</source>
         <translation>Ny DOSBox spil</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1246"/>
+        <location filename="../ui/grlida.ui" line="1247"/>
         <source>Eliminar</source>
         <translation>Slet</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1264"/>
+        <location filename="../ui/grlida.ui" line="1265"/>
         <source>Importar</source>
         <translation>Import</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1363"/>
+        <location filename="../ui/grlida.ui" line="1364"/>
         <source>AcercaD</source>
         <translation>om</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="1369"/>
+        <location filename="../ui/grlida.ui" line="1370"/>
         <source>Muestra información acerca del GR-lida</source>
         <translation>Viser GR-lida relaterede oplysninger</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1378"/>
+        <location filename="../ui/grlida.ui" line="1379"/>
         <source>Mi&amp;nimizar</source>
         <translation>Mi&amp;nimer</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1387"/>
+        <location filename="../ui/grlida.ui" line="1388"/>
         <source>Ma&amp;ximizar</source>
         <translation>Ma&amp;ximize</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1396"/>
+        <location filename="../ui/grlida.ui" line="1397"/>
         <source>&amp;Restaurar</source>
         <translation>&amp;Gendan</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1420"/>
+        <location filename="../ui/grlida.ui" line="1421"/>
         <source>Carpeta configuraciones DOSBox</source>
         <translation>DOSBox konfiguration mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1429"/>
+        <location filename="../ui/grlida.ui" line="1430"/>
         <source>Carpeta configuraciones VDMSound</source>
         <translation>VDMSound konfiguration mappe</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="1438"/>
+        <location filename="../ui/grlida.ui" line="1439"/>
         <source>Carpeta de Carátulas</source>
         <translation>Cover mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1447"/>
+        <location filename="../ui/grlida.ui" line="1448"/>
         <source>Carpeta de los Datos</source>
         <translation>Data mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1456"/>
+        <location filename="../ui/grlida.ui" line="1457"/>
         <source>Carpeta de Iconos</source>
         <translation>Ikoner mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1465"/>
+        <location filename="../ui/grlida.ui" line="1466"/>
         <source>Carpeta de Idiomas</source>
         <translation>Sprog filer mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1474"/>
+        <location filename="../ui/grlida.ui" line="1475"/>
         <source>Carpeta de Emoticones</source>
         <translation>Emoticones mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1483"/>
+        <location filename="../ui/grlida.ui" line="1484"/>
         <source>Carpeta de Themes</source>
         <translation>Temaer mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1492"/>
+        <location filename="../ui/grlida.ui" line="1493"/>
         <source>Carpeta de Thumbs</source>
         <translation>Thumbs mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1501"/>
+        <location filename="../ui/grlida.ui" line="1502"/>
         <source>Carpeta de Templates</source>
         <translation>Skabeloner mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1510"/>
+        <location filename="../ui/grlida.ui" line="1511"/>
         <source>Carpeta Temporal</source>
         <translation>Temp mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1519"/>
+        <location filename="../ui/grlida.ui" line="1520"/>
         <source>Carpeta de Scripts</source>
         <translation>Scripts mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1528"/>
+        <location filename="../ui/grlida.ui" line="1529"/>
         <source>Carpeta Principal</source>
         <translation>Hoved mappe</translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1543"/>
+        <location filename="../ui/grlida.ui" line="1544"/>
         <source>Ver Rating</source>
         <translation>Vis Rating</translation>
+    </message>
+    <message>
+        <location filename="../ui/grlida.ui" line="1553"/>
+        <source>Buscar actualizaciones...</source>
+        <translation>Kontroller for opdateringer...</translation>
     </message>
 </context>
 <context>
@@ -3867,177 +3888,182 @@ Tjek, om programmet virkelig er installeret.</translation>
     </message>
     <message utf8="true">
         <location filename="../ui/opciones.ui" line="554"/>
+        <source>Comprobación automática de nuevas versiones del GR-lida al iniciar el programa</source>
+        <translation>Automatisk tjek for nye versioner af GR-lida starter programmet</translation>
+    </message>
+    <message utf8="true">
+        <location filename="../ui/opciones.ui" line="561"/>
         <source>Mostrar Configuración Inicial la próxima vez que se inicie</source>
         <translation>Vis setup dialogboks i begyndelsen af næste møde</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="585"/>
+        <location filename="../ui/opciones.ui" line="592"/>
         <source>Base de Datos</source>
         <translation>Database</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="597"/>
+        <location filename="../ui/opciones.ui" line="604"/>
         <source>Opciones de la Base de Datos del GR-lida</source>
         <translation>GR-lida database indstillinger</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="629"/>
+        <location filename="../ui/opciones.ui" line="636"/>
         <source>Tipo de Base de Datos a usar:</source>
         <translation>Database type:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="678"/>
+        <location filename="../ui/opciones.ui" line="685"/>
         <source>Dirección actual de la Base de Datos del GR-lida</source>
         <translation>Present webadressen på GR-lida database</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="714"/>
+        <location filename="../ui/opciones.ui" line="721"/>
         <source>Dirección de la BD:</source>
         <translation>Database URL:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="796"/>
+        <location filename="../ui/opciones.ui" line="803"/>
         <source>Otras Opciones de la Base de Datos del GR-lida</source>
         <translation>Andre GR-lida database indstillnger</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="832"/>
+        <location filename="../ui/opciones.ui" line="839"/>
         <source>Servidor de la Base de Datos:</source>
         <translation>Database server:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="871"/>
+        <location filename="../ui/opciones.ui" line="878"/>
         <source>Nombre Base de Datos:</source>
         <translation>Database navn:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="910"/>
+        <location filename="../ui/opciones.ui" line="917"/>
         <source>Nombre del Usuario:</source>
         <translation>Database navn:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="949"/>
+        <location filename="../ui/opciones.ui" line="956"/>
         <source>Password:</source>
         <translation>Kodeord:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="991"/>
-        <location filename="../ui/opciones.ui" line="1458"/>
+        <location filename="../ui/opciones.ui" line="998"/>
+        <location filename="../ui/opciones.ui" line="1465"/>
         <source>Puerto:</source>
         <translation>Port:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1031"/>
+        <location filename="../ui/opciones.ui" line="1038"/>
         <source>Apariencia</source>
         <translation>Interface</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1043"/>
+        <location filename="../ui/opciones.ui" line="1050"/>
         <source>Apariencia y estilo del GR-lida</source>
         <translation>GR-lida stil og interface</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1072"/>
+        <location filename="../ui/opciones.ui" line="1079"/>
         <source>Estilo de los botones:</source>
         <translation>Button stil:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1091"/>
+        <location filename="../ui/opciones.ui" line="1098"/>
         <source>Utilizar la gama de colores estándar del estilo</source>
         <translation>Brug stil standard farver</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1109"/>
+        <location filename="../ui/opciones.ui" line="1116"/>
         <source>Icono para el Favorito</source>
         <translation>Ikon til favoritter</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1133"/>
+        <location filename="../ui/opciones.ui" line="1140"/>
         <source>Seleccionar Icono:</source>
         <translation>Vælg ikonet:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1176"/>
+        <location filename="../ui/opciones.ui" line="1183"/>
         <source>Tipo Reflejo PictureFlow</source>
         <translation>Type Reflection PictureFlow</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1200"/>
+        <location filename="../ui/opciones.ui" line="1207"/>
         <source>Seleccionar Reflejo:</source>
         <translation>Vælg Betænkningstid:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1217"/>
+        <location filename="../ui/opciones.ui" line="1224"/>
         <source>Salto de imagen PictureFlow</source>
         <translation>Skip image PictureFlow</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1266"/>
+        <location filename="../ui/opciones.ui" line="1273"/>
         <source>Seleccionar Theme</source>
         <translation>Vælg Tema</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1321"/>
+        <location filename="../ui/opciones.ui" line="1328"/>
         <source>Themes</source>
         <translation>Tema</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1326"/>
+        <location filename="../ui/opciones.ui" line="1333"/>
         <source>Autor</source>
         <translation>Forfatter</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1331"/>
+        <location filename="../ui/opciones.ui" line="1338"/>
         <source>version</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1391"/>
+        <location filename="../ui/opciones.ui" line="1398"/>
         <source>Http Proxy</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1403"/>
+        <location filename="../ui/opciones.ui" line="1410"/>
         <source>Configuración del Proxy</source>
         <translation>Proxy setup</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1414"/>
+        <location filename="../ui/opciones.ui" line="1421"/>
         <source>Tipo Proxy:</source>
         <translation>Proxy type:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1431"/>
+        <location filename="../ui/opciones.ui" line="1438"/>
         <source>Conectarse a un HTTP a través de un servidor proxy</source>
         <translation>Tilslut til HTTP gennem proxy-server</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1438"/>
+        <location filename="../ui/opciones.ui" line="1445"/>
         <source>Servidor:</source>
         <translation>Server:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1484"/>
+        <location filename="../ui/opciones.ui" line="1491"/>
         <source>Autentificación del servidor proxy</source>
         <translation>Proxyserver autentification</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1491"/>
+        <location filename="../ui/opciones.ui" line="1498"/>
         <source>Usuario:</source>
         <translation>Brugernavn:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1511"/>
+        <location filename="../ui/opciones.ui" line="1518"/>
         <source>Contraseña:</source>
         <translation>Kodeord:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1583"/>
+        <location filename="../ui/opciones.ui" line="1590"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1600"/>
+        <location filename="../ui/opciones.ui" line="1607"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
@@ -4045,17 +4071,17 @@ Tjek, om programmet virkelig er installeret.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/funciones.cpp" line="622"/>
+        <location filename="../src/funciones.cpp" line="624"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/funciones.cpp" line="664"/>
+        <location filename="../src/funciones.cpp" line="666"/>
         <source>Importar desde un archivo:</source>
         <translation>Import fra fil:</translation>
     </message>
     <message>
-        <location filename="../src/funciones.cpp" line="1800"/>
+        <location filename="../src/funciones.cpp" line="1810"/>
         <source>ConfiguraciÃ³n por Defecto</source>
         <translation>Standardkonfiguration</translation>
     </message>
@@ -4650,56 +4676,56 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 <context>
     <name>frmAddEditDosBox</name>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="784"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="792"/>
         <source>Guardar archivo como...</source>
         <translation>Gem filen som...</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="784"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="809"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="822"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="848"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="861"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="792"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="817"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="830"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="856"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="869"/>
         <source>Todos los archivo</source>
         <translation>Alle filer</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="792"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="800"/>
         <source>El archivo de ConfiguraciÃ³n para el DOSBox ya esixte</source>
         <translation>Den DOSBox opsætningsfilen eksisterer allerede</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="809"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="822"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="848"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="861"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="817"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="830"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="856"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="869"/>
         <source>Selecciona un archivo</source>
         <translation>Vælg en fil</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="835"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="874"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="887"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="843"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="882"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="895"/>
         <source>Selecciona el directorio</source>
         <translation>Vælg en mappe</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1050"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1058"/>
         <source>Â¿Eliminar Juego...?</source>
         <translation>Slet filen...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1050"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1058"/>
         <source>Â¿Deseas eliminar este montaje?</source>
         <translation>Ønsker du at slette denne montering?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1050"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1058"/>
         <source>Si</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1050"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1058"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
@@ -5042,65 +5068,65 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 <context>
     <name>frmDbxAdd</name>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="192"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="194"/>
         <source>El archivo de ConfiguraciÃ³n para el DOSBox ya esixte</source>
         <translation>DOSBox opsætningsfilen eksisterer allerede</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="198"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="200"/>
         <source>Debes indicar el Ejecutable del juego</source>
         <translation>Du skal specfy spillet binary</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="205"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="207"/>
         <source>Debes indicar el archivo donde guardara la configuraciÃ³n del juego</source>
         <translation>Du skal angive den fil, hvor konfiguration bliver gemt</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="210"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="212"/>
         <source>Debes poner un Titulo al juego</source>
         <translation>Du skal angive spillets titel</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="403"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="406"/>
         <source>Debes poner por lo menos el titulo.</source>
         <translation>Du skal angive mindst spillets titel.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="639"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="644"/>
         <source>Guardar archivo como...</source>
         <translation>Gem filen som...</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="639"/>
-        <location filename="../src/grlida_dbxadd.cpp" line="660"/>
-        <location filename="../src/grlida_dbxadd.cpp" line="673"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="644"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="665"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="678"/>
         <source>Todos los archivo</source>
         <translation>Alle filer</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="660"/>
-        <location filename="../src/grlida_dbxadd.cpp" line="673"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="665"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="678"/>
         <source>Selecciona un archivo</source>
         <translation>Vælg en fil</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="778"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="783"/>
         <source>Â¿Eliminar Juego...?</source>
         <translation>Slet spil?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="778"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="783"/>
         <source>Â¿Deseas eliminar este montaje?</source>
         <translation>Ønsker du at slette denne montering?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="778"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="783"/>
         <source>Si</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="778"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="783"/>
         <source>Cancelar</source>
         <translation>Annuller</translation>
     </message>
@@ -5190,137 +5216,137 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 <context>
     <name>frmImportarJuego</name>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="384"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="387"/>
         <source>CarÃ¡tula Frontal</source>
         <translation>Front Cover</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="385"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="388"/>
         <source>Detalles del juego</source>
         <translation>Nærmere oplysninger om spillet</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="386"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="389"/>
         <source>CalificaciÃ³n</source>
         <translation>Karakter</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="387"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="390"/>
         <source>Otros Datos</source>
         <translation>Andre data</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="388"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="391"/>
         <source>Subido por</source>
         <translation>Overført af</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="389"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="392"/>
         <source>Subtitulo</source>
         <translation>Undertitel</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="390"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="393"/>
         <source>Publicado por</source>
         <translation>Udgiver af</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="391"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="394"/>
         <source>Desarrollado por</source>
         <translation>Developer ved</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="392"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="395"/>
         <source>Publicado</source>
         <translation>Udgiver</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="393"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="396"/>
         <source>Idioma</source>
         <translation>Sprog</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="394"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="397"/>
         <source>Formato</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="395"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="398"/>
         <source>Genero</source>
         <translation>Genre</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="396"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="399"/>
         <source>Tema</source>
         <translation>Tema</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="397"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="400"/>
         <source>Sistema Operativo</source>
         <translation>OS</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="398"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="401"/>
         <source>Favorito</source>
         <translation>Favorit</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="399"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="402"/>
         <source>AÃ±adido el</source>
         <translation>Tilføjet</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="400"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="403"/>
         <source>GrÃ¡ficos</source>
         <translation>Grafik</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="401"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="404"/>
         <source>Sonido</source>
         <translation>Lyd</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="402"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="405"/>
         <source>Jugabilidad</source>
         <translation>Playability</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="403"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="406"/>
         <source>Original</source>
         <translation>Original</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="404"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="407"/>
         <source>Estado</source>
         <translation>Stat</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="405"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="408"/>
         <source>Tipo Emu</source>
         <translation>Emu type</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="406"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="409"/>
         <source>DescripciÃ³n</source>
         <translation>Beskrivelse</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="407"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="410"/>
         <source>Rating</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="565"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="568"/>
         <source>Selecciona un archivo para importarlo</source>
         <translation>Vælg fil for at importere</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="565"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="568"/>
         <source>Soportados</source>
         <translation>Supported</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="565"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="568"/>
         <source>Todos los archivo</source>
         <translation>Alle filer</translation>
     </message>
@@ -5379,211 +5405,211 @@ Klik på &apos;OK&apos; for at afslutte denne guide
 <context>
     <name>frmOpciones</name>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="129"/>
         <location filename="../src/grlida_opciones.cpp" line="130"/>
         <location filename="../src/grlida_opciones.cpp" line="131"/>
+        <location filename="../src/grlida_opciones.cpp" line="132"/>
         <source>Base de Datos</source>
         <translation>Database</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="135"/>
         <location filename="../src/grlida_opciones.cpp" line="136"/>
         <location filename="../src/grlida_opciones.cpp" line="137"/>
         <location filename="../src/grlida_opciones.cpp" line="138"/>
+        <location filename="../src/grlida_opciones.cpp" line="139"/>
         <source>Favorito</source>
         <translation>Favorit</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="163"/>
+        <location filename="../src/grlida_opciones.cpp" line="164"/>
         <source>No usar proxy</source>
         <translation>ingen tilnærmelse bruges</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="164"/>
+        <location filename="../src/grlida_opciones.cpp" line="165"/>
         <source>El proxy se determina sobre la base de la aplicaciÃ³n</source>
         <translation>Proxy, opgøres på grundlag af ansøgningen proxy indstillet ved hjælp af</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="165"/>
+        <location filename="../src/grlida_opciones.cpp" line="166"/>
         <source>Socks5 proxy se utilizara</source>
         <translation>SOCKS5 Tilnærmelse bruges</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="166"/>
+        <location filename="../src/grlida_opciones.cpp" line="167"/>
         <source>HTTP se utiliza proxy transparente</source>
         <translation>HTTP gennemsigtig Tilnærmelse bruges</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="167"/>
+        <location filename="../src/grlida_opciones.cpp" line="168"/>
         <source>HTTP proxy sÃ³lo para las solicitudes</source>
         <translation>Tilnærmelse til kun HTTP-anmodninger</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="310"/>
+        <location filename="../src/grlida_opciones.cpp" line="314"/>
         <source>Selecciona el Ejecutable del DOSBox</source>
         <translation>Vælg DOSBox binary</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="310"/>
-        <location filename="../src/grlida_opciones.cpp" line="321"/>
-        <location filename="../src/grlida_opciones.cpp" line="332"/>
+        <location filename="../src/grlida_opciones.cpp" line="314"/>
+        <location filename="../src/grlida_opciones.cpp" line="325"/>
+        <location filename="../src/grlida_opciones.cpp" line="336"/>
         <source>Todos los archivo</source>
         <translation>Alle filer</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="321"/>
+        <location filename="../src/grlida_opciones.cpp" line="325"/>
         <source>Selecciona el Ejecutable del ScummVM</source>
         <translation>Vælg ScummVM binary</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="332"/>
+        <location filename="../src/grlida_opciones.cpp" line="336"/>
         <source>Selecciona un archivo</source>
         <translation>Vælg en fil</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="343"/>
+        <location filename="../src/grlida_opciones.cpp" line="347"/>
         <source>Seleccionar un directorio.</source>
         <translation>Vælg en mappe.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="439"/>
+        <location filename="../src/grlida_opciones.cpp" line="443"/>
         <source>InformaciÃ³n sobre el formato de la fecha y hora</source>
         <translation>Info om dato og tidspunkt format</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="441"/>
+        <location filename="../src/grlida_opciones.cpp" line="445"/>
         <source>Devuelve una cadena con formato de acuerdo a la cadena de formato dada.</source>
         <translation>Returnerer en kæde med et passende format.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="442"/>
+        <location filename="../src/grlida_opciones.cpp" line="446"/>
         <source>Lista bÃ¡sica de parÃ¡metros:</source>
         <translation>Grundlæggende liste over parametre:</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="446"/>
-        <location filename="../src/grlida_opciones.cpp" line="495"/>
+        <location filename="../src/grlida_opciones.cpp" line="450"/>
+        <location filename="../src/grlida_opciones.cpp" line="499"/>
         <source>ExpresiÃ³n</source>
         <translation>Angivelse</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="447"/>
-        <location filename="../src/grlida_opciones.cpp" line="496"/>
+        <location filename="../src/grlida_opciones.cpp" line="451"/>
+        <location filename="../src/grlida_opciones.cpp" line="500"/>
         <source>Salida</source>
         <translation>Afslut</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="452"/>
+        <location filename="../src/grlida_opciones.cpp" line="456"/>
         <source>DÃ­a del mes sin ceros iniciales (1 a 31).</source>
         <translation>Dag i den måned, uden et foranstillet nul (1 til 31).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="456"/>
+        <location filename="../src/grlida_opciones.cpp" line="460"/>
         <source>DÃ­a del mes, 2 dÃ­gitos con ceros iniciales (01 a 31).</source>
         <translation>Dag i måneden med et foranstillet nul (01 til 31).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="460"/>
+        <location filename="../src/grlida_opciones.cpp" line="464"/>
         <source>Una representaciÃ³n textual de un dÃ­a, tres letras (e.j. &apos;Lun&apos; a &apos;Dom&apos;).</source>
         <translation>Forkortet dag navn (f.eks&apos; man &apos;til&apos; søn &apos;).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="464"/>
+        <location filename="../src/grlida_opciones.cpp" line="468"/>
         <source>Una representaciÃ³n textual completa del dÃ­a de la semana (e.j. &apos;Lunes&apos; a &apos;Domingo&apos;).</source>
         <translation>Heldags navn (f.eks&apos; man &apos;til&apos; søndag &apos;).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="468"/>
+        <location filename="../src/grlida_opciones.cpp" line="472"/>
         <source>RepresentaciÃ³n numÃ©rica de un mes, sin ceros iniciales (1-12).</source>
         <translation>Måneden som et tal uden et foranstillet nul (1-12).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="472"/>
+        <location filename="../src/grlida_opciones.cpp" line="476"/>
         <source>RepresentaciÃ³n numÃ©rica de un mes, con ceros iniciales (01-12).</source>
         <translation>Måneden som et tal med et foranstillet nul (01-12).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="476"/>
+        <location filename="../src/grlida_opciones.cpp" line="480"/>
         <source>Una representaciÃ³n textual corta de un mes, tres letras (e.j. &apos;Ene&apos; a &apos;Dic&apos;).</source>
         <translation>Forkortet måned navn (f.eks &quot;jan&quot; til &quot;dec&quot;).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="480"/>
+        <location filename="../src/grlida_opciones.cpp" line="484"/>
         <source>Una representaciÃ³n textual completa de un mes, como Enero o Marzo (e.j. &apos;Enero&apos; a &apos;Diciembre&apos;).</source>
         <translation>Fuld måned navn (f.eks &quot;januar&quot; til &quot;december&quot;).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="484"/>
+        <location filename="../src/grlida_opciones.cpp" line="488"/>
         <source>Una representaciÃ³n de dos dÃ­gitos de un aÃ±o (00-99).</source>
         <translation>År som et to-cifret antal (00-99).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="488"/>
+        <location filename="../src/grlida_opciones.cpp" line="492"/>
         <source>Una representaciÃ³n numÃ©rica completa de un aÃ±o, 4 dÃ­gitos.</source>
         <translation>År som et firecifret nummer.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="491"/>
+        <location filename="../src/grlida_opciones.cpp" line="495"/>
         <source>Estas expresiones pueden ser utilizadas para el tiempo.</source>
         <translation>Disse udtryk kan bruges i dag af format string.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="501"/>
+        <location filename="../src/grlida_opciones.cpp" line="505"/>
         <source>La hora sin ceros iniciales (0 a 23 o 1 a 12 si AM/PM display)</source>
         <translation>Time uden et foranstillet nul (0 til 23 eller 1 til 12, hvis AM / PM display)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="505"/>
+        <location filename="../src/grlida_opciones.cpp" line="509"/>
         <source>La hora con ceros iniciales (00 a 23 o de 01 a 12 si AM/PM display)</source>
         <translation>Time med et foranstillet nul (00 til 23 eller 01 til 12, hvis AM / PM display)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="509"/>
+        <location filename="../src/grlida_opciones.cpp" line="513"/>
         <source>La hora sin ceros iniciales (0 a 23, incluso con AM/PM display)</source>
         <translation>Time uden et foranstillet nul (0 til 23, selv med AM / PM display)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="513"/>
+        <location filename="../src/grlida_opciones.cpp" line="517"/>
         <source>La hora con un cero (00 a 23, incluso con AM/PM display)</source>
         <translation>Time med et foranstillet nul (00 til 23, selv med AM / PM display)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="517"/>
+        <location filename="../src/grlida_opciones.cpp" line="521"/>
         <source>Los minutos sin ceros iniciales (0 a 59)</source>
         <translation>Minut uden et foranstillet nul (0 til 59)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="521"/>
+        <location filename="../src/grlida_opciones.cpp" line="525"/>
         <source>Los minutos con ceros iniciales (00 a 59)</source>
         <translation>Minut med et foranstillet nul (00 til 59)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="525"/>
+        <location filename="../src/grlida_opciones.cpp" line="529"/>
         <source>Los segundos sin ceros iniciales (0 a 59)</source>
         <translation>Sekunder uden et foranstillet nul (0 til 59)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="529"/>
+        <location filename="../src/grlida_opciones.cpp" line="533"/>
         <source>Los segundos con ceros iniciales (00 a 59)</source>
         <translation>Sekunder med et foranstillet nul (00 til 59)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="533"/>
+        <location filename="../src/grlida_opciones.cpp" line="537"/>
         <source>Los milisegundos sin ceros iniciales (0 a 999)</source>
         <translation>Millisekunder uden førende nuller (0 til 999)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="537"/>
+        <location filename="../src/grlida_opciones.cpp" line="541"/>
         <source>Los milisegundos con ceros iniciales (000 a 999)</source>
         <translation>Millisekunder med førende nuller (000 til 999)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="541"/>
+        <location filename="../src/grlida_opciones.cpp" line="545"/>
         <source>Interpretar como un AM/PM del tiempo. AP debe ser &quot;AM&quot; o &quot;PM&quot;.</source>
         <translation>Fortolke som en AM / PM tid. AP skal være en &quot;AM&quot; eller &quot;PM&quot;.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="545"/>
+        <location filename="../src/grlida_opciones.cpp" line="549"/>
         <source>Interpretar como un AM/PM del tiempo. AP debe ser &quot;am&quot; o &quot;pm&quot;.</source>
         <translation>Fortolke som en AM / PM tid. AP skal være en &quot;AM&quot; eller &quot;pm&quot;.</translation>
     </message>
