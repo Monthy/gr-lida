@@ -42,7 +42,7 @@ public:
 // DOSBox
 	QString stVersionDbx(){ return "0.72";  }
 // ScummVM
-	QString stVersionSvm(){ return "0.12.0";}
+	QString stVersionSvm(){ return "0.13.1";}
 // VDMSound
 	QString stVersionVdms(){return "2.0.4"; }
 // Muestra el Nombre de la plataforma donde esta compilada
