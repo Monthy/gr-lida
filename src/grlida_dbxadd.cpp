@@ -488,6 +488,11 @@ void frmDbxAdd::on_btnOk()
 			DatosDosBox["Dbx_cpu_core"] = ui.cbxDbx_cpu_core->currentText();
 		else
 			DatosDosBox["Dbx_cpu_core"] = "auto";
+	// cputype
+		if( tempProfileDosBox["Dbx_cpu_cputype"] != "")
+			DatosDosBox["Dbx_cpu_cputype"] = tempProfileDosBox["Dbx_cpu_cputype"];
+		else
+			DatosDosBox["Dbx_cpu_cputype"] = "auto";
 	// cpu_cycleup
 		DatosDosBox["Dbx_cpu_cycleup"] = "auto";
 	// cpu_cycles
