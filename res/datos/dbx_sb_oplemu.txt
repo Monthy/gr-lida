@@ -1,0 +1,4 @@
+default|sinimg
+compat|sinimg
+fast|sinimg
+old|sinimg

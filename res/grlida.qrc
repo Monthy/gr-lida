@@ -266,5 +266,7 @@
         <file>img16/multimedia.png</file>
         <file>img16/ruleta.png</file>
         <file>datos/dbx_cpu_type.txt</file>
+        <file>datos/dbx_sb_oplrate.txt</file>
+        <file>datos/dbx_sb_oplemu.txt</file>
     </qresource>
 </RCC>
