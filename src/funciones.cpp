@@ -327,6 +327,7 @@ QHash<QString, QVariant> Funciones::CargarGRLConfig(QString iniFileName)
 		config["PicFlowReflection"] = settings.value("PicFlowReflection", "BlurredReflection").toString();
 		config["Skip_PicFlow"]      = settings.value("Skip_PicFlow" , 10).toInt();
 		config["IndexTabArchivos"]  = settings.value("IndexTabArchivos", 0).toInt();
+		config["VersionDBx"]        = settings.value("VersionDBx", "0.72").toString();
 	settings.endGroup();
 
 	settings.beginGroup("HttpProxy");
@@ -446,6 +447,7 @@ void Funciones::GuardarGRLConfig(QString iniFileName, QHash<QString, QVariant> c
 		settings.setValue("PicFlowReflection", config["PicFlowReflection"] );
 		settings.setValue("Skip_PicFlow"     , config["Skip_PicFlow"]      );
 		settings.setValue("IndexTabArchivos" , config["IndexTabArchivos"]  );
+		settings.setValue("VersionDBx"       , config["VersionDBx"]        );
 	settings.endGroup();
 
 	settings.beginGroup("HttpProxy");
@@ -1246,6 +1248,11 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 	QFile file_out( pathSaveConfg );
 	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
 	{
+		QSettings settings( GRlidaHomePath()+"/GR-lida.conf", QSettings::IniFormat );
+		settings.beginGroup("OpcGeneral");
+			QString versionDbx = settings.value("VersionDBx", "0.72").toString();
+		settings.endGroup();
+
 		QTextStream out(&file_out);
 		out.setCodec("UTF-8");
 
@@ -1300,23 +1307,24 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 			//out << "WWW=" << datosDbx[""] << endl;
 		}
 
-		out << "# This is the configurationfile for DOSBox 0.72." << endl;
+		out << "# This is the configurationfile for DOSBox " << versionDbx << "." << endl;
 		out << "# Lines starting with a # are commentlines." << endl;
 		out << "# They are used to (briefly) document the effect of each option." << endl << endl;
 
 		out << "[sdl]" << endl;
-		out << "# fullscreen -- Start dosbox directly in fullscreen." << endl;
-		out << "# fulldouble -- Use double buffering in fullscreen." << endl;
-		out << "# fullresolution -- What resolution to use for fullscreen: original or fixed size (e.g. 1024x768)." << endl;
-		out << "# windowresolution -- Scale the window to this size IF the output device supports hardware scaling." << endl;
-		out << "# output -- What to use for output: surface,overlay,opengl,openglnb,ddraw." << endl;
-		out << "# autolock -- Mouse will automatically lock, if you click on the screen." << endl;
-		out << "# sensitiviy -- Mouse sensitivity." << endl;
-		out << "# waitonerror -- Wait before closing the console if dosbox has an error." << endl;
-		out << "# priority -- Priority levels for dosbox: lowest,lower,normal,higher,highest,pause (when not focussed)." << endl;
-		out << "#             Second entry behind the comma is for when dosbox is not focused/minimized." << endl;
-		out << "# mapperfile -- File used to load/save the key/event mappings from." << endl;
-		out << "# usescancodes -- Avoid usage of symkeys, might not work on all operating systems." << endl << endl;
+		out << "#       fullscreen: Start dosbox directly in fullscreen." << endl;
+		out << "#       fulldouble: Use double buffering in fullscreen." << endl;
+		out << "#   fullresolution: What resolution to use for fullscreen: original or fixed size (e.g. 1024x768)." << endl;
+		out << "# windowresolution: Scale the window to this size IF the output device supports hardware scaling." << endl;
+		out << "#           output: What video system to use for output." << endl;
+		out << "#                   Possible values: surface, overlay, opengl, openglnb, ddraw." << endl;
+		out << "#         autolock: Mouse will automatically lock, if you click on the screen." << endl;
+		out << "#      sensitivity: Mouse sensitivity." << endl;
+		out << "#      waitonerror: Wait before closing the console if dosbox has an error." << endl;
+		out << "#         priority: Priority levels for dosbox. Second entry behind the comma is for when dosbox is not focused/minimized. (pause is only valid for the second entry)" << endl;
+		out << "#                   Possible values: lowest, lower, normal, higher, highest, pause." << endl;
+		out << "#       mapperfile: File used to load/save the key/event mappings from." << endl;
+		out << "#     usescancodes: Avoid usage of symkeys, might not work on all operating systems." << endl << endl;
 
 		out << "fullscreen=" << datosDbx["Dbx_sdl_fullscreen"] << endl;
 		out << "fulldouble=" << datosDbx["Dbx_sdl_fulldouble"] << endl;
@@ -1333,10 +1341,14 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "usescancodes=" << datosDbx["Dbx_sdl_usescancodes"] << endl << endl;
 
 		out << "[dosbox]" << endl;
-		out << "# language -- Select another language file." << endl;
-		out << "# memsize -- Amount of memory DOSBox has in megabytes." << endl;
-		out << "# machine -- The type of machine tries to emulate:hercules,cga,tandy,pcjr,vga." << endl;
-		out << "# captures -- Directory where things like wave,midi,screenshot get captured." << endl << endl;
+		out << "# language: Select another language file." << endl;
+		out << "#  machine: The type of machine tries to emulate." << endl;
+		out << "#           Possible values: hercules, cga, tandy, pcjr, ega, vgaonly, svga_s3, svga_et3000, svga_et4000, svga_paradise, vesa_nolfb, vesa_oldvbe." << endl;
+		out << "# captures: Directory where things like wave, midi, screenshot get captured." << endl;
+		out << "#  memsize: Amount of memory DOSBox has in megabytes." << endl;
+		out << "#             This value is best left at its default to avoid problems with some games," << endl;
+		out << "#             though few games might require a higher value." << endl;
+		out << "#             There is generally no speed advantage when raising this value." << endl << endl;
 
 		if( !datosDbx["Dbx_dosbox_language"].isEmpty() || datosDbx["Dbx_dosbox_language"]!=" ")
 		out << "language=" << datosDbx["Dbx_dosbox_language"] << endl;
@@ -1345,35 +1357,35 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "memsize=" << datosDbx["Dbx_dosbox_memsize"] << endl << endl;
 
 		out << "[render]" << endl;
-		out << "# frameskip -- How many frames DOSBox skips before drawing one." << endl;
-		out << "# aspect -- Do aspect correction, if your output method doesn't support scaling this can slow things down!." << endl;
-		out << "# scaler -- Scaler used to enlarge/enhance low resolution modes." << endl;
-		out << "#           Supported are none,normal2x,normal3x,advmame2x,advmame3x,hq2x,hq3x," << endl;
-		out << "#                         2xsai,super2xsai,supereagle,advinterp2x,advinterp3x," << endl;
-		out << "#                         tv2x,tv3x,rgb2x,rgb3x,scan2x,scan3x." << endl;
-		out << "#           If forced is appended (like scaler=hq2x forced), the scaler will be used" << endl;
-		out << "#           even if the result might not be desired." << endl << endl;
+		out << "# frameskip: How many frames DOSBox skips before drawing one." << endl;
+		out << "#    aspect: Do aspect correction, if your output method doesn't support scaling this can slow things down!." << endl;
+		out << "#    scaler: Scaler used to enlarge/enhance low resolution modes. If 'forced' is appended,the scaler will be used even if the result might not be desired." << endl;
+		out << "#            Possible values: none, normal2x, normal3x, advmame2x, advmame3x, advinterp2x, advinterp3x, hq2x, hq3x, 2xsai, super2xsai, supereagle, tv2x, tv3x, rgb2x, rgb3x, scan2x, scan3x." << endl << endl;
 
 		out << "frameskip=" << datosDbx["Dbx_render_frameskip"] << endl;
 		out << "aspect=" << datosDbx["Dbx_render_aspect"] << endl;
 		out << "scaler=" << datosDbx["Dbx_render_scaler"] << endl << endl;
 
 		out << "[cpu]" << endl;
-		out << "# core -- CPU Core used in emulation: normal,simple,dynamic,auto." << endl;
-		out << "#         auto switches from normal to dynamic if appropriate." << endl;
-		out << "# cputype -- CPU Type used in emulation. auto is the fastest choice." << endl;
+		out << "#      core: CPU Core used in emulation. auto will switch to dynamic if available and appropriate." << endl;
+		out << "#            Possible values: auto, dynamic, normal, simple." << endl;
+		out << "#   cputype: CPU Type used in emulation. auto is the fastest choice." << endl;
 		out << "#            Possible values: auto, 386, 386_slow, 486_slow, pentium_slow, 386_prefetch." << endl;
-		out << "# cycles -- Amount of instructions DOSBox tries to emulate each millisecond." << endl;
-		out << "#           Setting this value too high results in sound dropouts and lags." << endl;
-		out << "#           You can also let DOSBox guess the correct value by setting it to max." << endl;
-		out << "#           The default setting (auto) switches to max if appropriate." << endl;
-		out << "# cycleup   -- Amount of cycles to increase/decrease with keycombo." << endl;
-		out << "# cycledown    Setting it lower than 100 will be a percentage." << endl << endl;
+		out << "#    cycles: Amount of instructions DOSBox tries to emulate each millisecond. Setting this value too high results in sound dropouts and lags. Cycles can be set in 3 ways:" << endl;
+		out << "#              'auto'          tries to guess what a game needs." << endl;
+		out << "#                              It usually works, but can fail for certain games." << endl;
+		out << "#              'fixed #number' will set a fixed amount of cycles. This is what you usually need if 'auto' fails." << endl;
+		out << "#                              (Example: fixed 4000)" << endl;
+		out << "#              'max'           will allocate as much cycles as your computer is able to handle" << endl;
+		out << "#            " << endl;
+		out << "#            Possible values: auto, fixed, max." << endl;
+		out << "#   cycleup: Amount of cycles to increase/decrease with keycombo." << endl;
+		out << "# cycledown: Setting it lower than 100 will be a percentage." << endl << endl;
 
 		out << "core=" << datosDbx["Dbx_cpu_core"] << endl;
 		out << "cputype=" << datosDbx["Dbx_cpu_cputype"] << endl;
 
-		if( datosDbx["Dbx_cpu_cycles"] != "auto" && datosDbx["Dbx_cpu_cycles"] != "max" && stVersionDbx() == "0.73")
+		if( datosDbx["Dbx_cpu_cycles"] != "auto" && datosDbx["Dbx_cpu_cycles"] != "max" && versionDbx == "0.73")
 			out << "cycles=fixed " << datosDbx["Dbx_cpu_cycles"] << endl;
 		else
 			out << "cycles=" << datosDbx["Dbx_cpu_cycles"] << endl;
@@ -1382,12 +1394,12 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "cycledown=" << datosDbx["Dbx_cpu_cycledown"] << endl << endl;
 
 		out << "[mixer]" << endl;
-		out << "# nosound -- Enable silent mode, sound is still emulated though." << endl;
-		out << "# rate -- Mixer sample rate, setting any devices higher than this will" << endl;
-		out << "#         probably lower their sound quality." << endl;
-		out << "# blocksize -- Mixer block size, larger blocks might help sound stuttering" << endl;
-		out << "#              but sound will also be more lagged." << endl;
-		out << "# prebuffer -- How many milliseconds of data to keep on top of the blocksize." << endl << endl;
+		out << "#   nosound: Enable silent mode, sound is still emulated though." << endl;
+		out << "#      rate: Mixer sample rate, setting any device's rate higher than this will probably lower their sound quality." << endl;
+		out << "#            Possible values: 22050, 44100, 48000, 32000, 16000, 11025, 8000, 49716." << endl;
+		out << "# blocksize: Mixer block size, larger blocks might help sound stuttering but sound will also be more lagged." << endl;
+		out << "#            Possible values: 2048, 4096, 8192, 1024, 512, 256." << endl;
+		out << "# prebuffer: How many milliseconds of data to keep on top of the blocksize." << endl << endl;
 
 		out << "nosound=" << datosDbx["Dbx_mixer_nosound"] << endl;
 		out << "rate=" << datosDbx["Dbx_mixer_rate"] << endl;
@@ -1395,62 +1407,100 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "prebuffer=" << datosDbx["Dbx_mixer_prebuffer"] << endl << endl;
 
 		out << "[midi]" << endl;
-		out << "# mpu401      -- Type of MPU-401 to emulate: none, uart or intelligent." << endl;
-		out << "# device      -- Device that will receive the MIDI data from MPU-401." << endl;
-		out << "#                This can be default,alsa,oss,win32,coreaudio,none." << endl;
-		out << "# config      -- Special configuration options for the device. In Windows put" << endl;
-		out << "#                the id of the device you want to use. See README for details." << endl << endl;
+		out << "#     mpu401: Type of MPU-401 to emulate." << endl;
+		out << "#             Possible values: intelligent, uart, none." << endl;
+		out << "# mididevice: Device that will receive the MIDI data from MPU-401." << endl;
+		out << "#             Possible values: default, win32, alsa, oss, coreaudio, coremidi, none." << endl;
+		out << "# midiconfig: Special configuration options for the device driver. This is usually the id of the device you want to use. See README for details." << endl << endl;
 
 		out << "mpu401=" << datosDbx["Dbx_midi_mpu401"] << endl;
 		out << "intelligent=" << datosDbx["Dbx_midi_intelligent"] << endl; // DOSBox 0.63
-		out << "device=" << datosDbx["Dbx_midi_device"] << endl;
-		out << "config=" << datosDbx["Dbx_midi_config"] << endl;
+
+		if( versionDbx == "0.73" )
+			out << "mididevice=" << datosDbx["Dbx_midi_device"] << endl;
+		else
+			out << "device=" << datosDbx["Dbx_midi_device"] << endl;
+
+		if( versionDbx == "0.73" )
+			out << "midiconfig=" << datosDbx["Dbx_midi_config"] << endl;
+		else
+			out << "config=" << datosDbx["Dbx_midi_config"] << endl;
+
 		out << "mt32rate=" << datosDbx["Dbx_midi_mt32rate"] << endl << endl; // DOSBox 0.63
 
 		out << "[sblaster]" << endl;
-		out << "# sbtype -- Type of sblaster to emulate:none,sb1,sb2,sbpro1,sbpro2,sb16." << endl;
-		out << "# sbbase,irq,dma,hdma -- The IO/IRQ/DMA/High DMA address of the soundblaster." << endl;
-		out << "# mixer -- Allow the soundblaster mixer to modify the DOSBox mixer." << endl;
-		out << "# oplmode -- Type of OPL emulation: auto,cms,opl2,dualopl2,opl3." << endl;
-		out << "#            On auto the mode is determined by sblaster type." << endl;
-		out << "#            All OPL modes are 'Adlib', except for CMS." << endl;
-		out << "# oplrate -- Sample rate of OPL music emulation." << endl << endl;
+		out << "#  sbtype: Type of sblaster to emulate." << endl;
+		out << "#          Possible values: sb1, sb2, sbpro1, sbpro2, sb16, none." << endl;
+		out << "#  sbbase: The IO address of the soundblaster." << endl;
+		out << "#          Possible values: 220, 240, 260, 280, 2a0, 2c0, 2e0, 300." << endl;
+		out << "#     irq: The IRQ number of the soundblaster." << endl;
+		out << "#          Possible values: 7, 5, 3, 9, 10, 11, 12." << endl;
+		out << "#     dma: The DMA number of the soundblaster." << endl;
+		out << "#          Possible values: 1, 5, 0, 3, 6, 7." << endl;
+		out << "#    hdma: The High DMA number of the soundblaster." << endl;
+		out << "#          Possible values: 1, 5, 0, 3, 6, 7." << endl;
+		out << "# sbmixer: Allow the soundblaster mixer to modify the DOSBox mixer." << endl;
+		out << "# oplmode: Type of OPL emulation. On 'auto' the mode is determined by sblaster type. All OPL modes are Adlib-compatible, except for 'cms'." << endl;
+		out << "#          Possible values: auto, cms, opl2, dualopl2, opl3, none." << endl;
+		out << "#  oplemu: Provider for the OPL emulation. compat or old might provide better quality (see oplrate as well)." << endl;
+		out << "#          Possible values: default, compat, fast, old." << endl;
+		out << "# oplrate: Sample rate of OPL music emulation. Use 49716 for highest quality (set the mixer rate accordingly)." << endl;
+		out << "#          Possible values: 22050, 49716, 44100, 48000, 32000, 16000, 11025, 8000." << endl << endl;
 
 		out << "sbtype=" << datosDbx["Dbx_sblaster_sbtype"] << endl;
 		out << "sbbase=" << datosDbx["Dbx_sblaster_sbbase"] << endl;
 		out << "irq=" << datosDbx["Dbx_sblaster_irq"] << endl;
 		out << "dma=" << datosDbx["Dbx_sblaster_dma"] << endl;
 		out << "hdma=" << datosDbx["Dbx_sblaster_hdma"] << endl;
-		out << "mixer=" << datosDbx["Dbx_sblaster_mixer"] << endl;
+
+		if( versionDbx == "0.73" )
+			out << "sbmixer=" << datosDbx["Dbx_sblaster_mixer"] << endl;
+		else
+			out << "mixer=" << datosDbx["Dbx_sblaster_mixer"] << endl;
+
 		out << "oplmode=" << datosDbx["Dbx_sblaster_oplmode"] << endl;
+		out << "oplemu=" << datosDbx["Dbx_sblaster_oplemu"] << endl;
 		out << "oplrate=" << datosDbx["Dbx_sblaster_oplrate"] << endl << endl;
 
 		out << "[gus]" << endl;
-		out << "# gus -- Enable the Gravis Ultrasound emulation." << endl;
-		out << "# gusbase,irq1,irq2,dma1,dma2 -- The IO/IRQ/DMA addresses of the" << endl;
-		out << "#            Gravis Ultrasound. (Same IRQ's and DMA's are OK.)" << endl;
-		out << "# gusrate -- Sample rate of Ultrasound emulation." << endl;
-		out << "# ultradir -- Path to Ultrasound directory.  In this directory" << endl;
-		out << "#             there should be a MIDI directory that contains" << endl;
-		out << "#             the patch files for GUS playback.  Patch sets used" << endl;
-		out << "#             with Timidity should work fine." << endl << endl;
+		out << "#      gus: Enable the Gravis Ultrasound emulation." << endl;
+		out << "#  gusrate: Sample rate of Ultrasound emulation." << endl;
+		out << "#           Possible values: 22050, 44100, 48000, 32000, 16000, 11025, 8000, 49716." << endl;
+		out << "#  gusbase: The IO base address of the Gravis Ultrasound." << endl;
+		out << "#           Possible values: 240, 220, 260, 280, 2a0, 2c0, 2e0, 300." << endl;
+		out << "#   gusirq: The IRQ number of the Gravis Ultrasound." << endl;
+		out << "#           Possible values: 5, 3, 7, 9, 10, 11, 12." << endl;
+		out << "#   gusdma: The DMA channel of the Gravis Ultrasound." << endl;
+		out << "#           Possible values: 3, 0, 1, 5, 6, 7." << endl;
+		out << "# ultradir: Path to Ultrasound directory. In this directory" << endl;
+		out << "#           there should be a MIDI directory that contains" << endl;
+		out << "#           the patch files for GUS playback. Patch sets used" << endl;
+		out << "#           with Timidity should work fine." << endl << endl;
 
 		out << "gus=" << datosDbx["Dbx_gus_gus"] << endl;
 		out << "gusrate=" << datosDbx["Dbx_gus_gusrate"] << endl;
 		out << "gusbase=" << datosDbx["Dbx_gus_gusbase"] << endl;
-		out << "irq1=" << datosDbx["Dbx_gus_irq1"] << endl;
-		out << "irq2=" << datosDbx["Dbx_gus_irq2"] << endl;
-		out << "dma1=" << datosDbx["Dbx_gus_dma1"] << endl;
-		out << "dma2=" << datosDbx["Dbx_gus_dma2"] << endl;
+		if( versionDbx == "0.73" )
+		{
+			out << "gusirq=" << datosDbx["Dbx_gus_irq1"] << endl;
+			out << "gusdma=" << datosDbx["Dbx_gus_dma1"] << endl;
+		} else {
+			out << "irq1=" << datosDbx["Dbx_gus_irq1"] << endl;
+			out << "irq2=" << datosDbx["Dbx_gus_irq2"] << endl;
+			out << "dma1=" << datosDbx["Dbx_gus_dma1"] << endl;
+			out << "dma2=" << datosDbx["Dbx_gus_dma2"] << endl;
+		}
 		out << "ultradir=" << datosDbx["Dbx_gus_ultradir"] << endl << endl;
 
 		out << "[speaker]" << endl;
-		out << "# pcspeaker -- Enable PC-Speaker emulation." << endl;
-		out << "# pcrate -- Sample rate of the PC-Speaker sound generation." << endl;
-		out << "# tandy -- Enable Tandy Sound System emulation (off,on,auto)." << endl;
-		out << "#          For auto Tandysound emulation is present only if machine is set to tandy." << endl;
-		out << "# tandyrate -- Sample rate of the Tandy 3-Voice generation." << endl;
-		out << "# disney -- Enable Disney Sound Source emulation. Covox Voice Master and Speech Thing compatible." << endl << endl;
+		out << "# pcspeaker: Enable PC-Speaker emulation." << endl;
+		out << "#    pcrate: Sample rate of the PC-Speaker sound generation." << endl;
+		out << "#            Possible values: 22050, 44100, 48000, 32000, 16000, 11025, 8000, 49716." << endl;
+		out << "#     tandy: Enable Tandy Sound System emulation. For 'auto', emulation is present only if machine is set to 'tandy'." << endl;
+		out << "#            Possible values: auto, on, off." << endl;
+		out << "# tandyrate: Sample rate of the Tandy 3-Voice generation." << endl;
+		out << "#            Possible values: 22050, 44100, 48000, 32000, 16000, 11025, 8000, 49716." << endl;
+		out << "#    disney: Enable Disney Sound Source emulation. (Covox Voice Master and Speech Thing compatible)." << endl << endl;
 
 		out << "pcspeaker=" << datosDbx["Dbx_speaker_pcspeaker"] << endl;
 		out << "pcrate=" << datosDbx["Dbx_speaker_pcrate"] << endl;
@@ -1459,17 +1509,18 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "disney=" << datosDbx["Dbx_speaker_disney"] << endl << endl;
 
 		out << "[joystick]" << endl;
-		out << "# joysticktype -- Type of joystick to emulate: auto (default), none," << endl;
-		out << "#                 2axis (supports two joysticks," << endl;
-		out << "#                 4axis (supports one joystick, first joystick used)," << endl;
-		out << "#                 4axis_2 (supports one joystick, second joystick used)," << endl;
-		out << "#                 fcs (Thrustmaster), ch (CH Flightstick)." << endl;
-		out << "#                 none disables joystick emulation." << endl;
-		out << "#                 auto chooses emulation depending on real joystick(s)." << endl;
-		out << "# timed -- enable timed intervals for axis. (false is old style behaviour)." << endl;
-		out << "# autofire -- continuously fires as long as you keep the button pressed." << endl;
-		out << "# swap34 -- swap the 3rd and the 4th axis. can be useful for certain joysticks." << endl;
-		out << "# buttonwrap -- enable button wrapping at the number of emulated buttons." << endl << endl;
+		out << "# joysticktype: Type of joystick to emulate: auto (default), none," << endl;
+		out << "#               2axis (supports two joysticks)," << endl;
+		out << "#               4axis (supports one joystick, first joystick used)," << endl;
+		out << "#               4axis_2 (supports one joystick, second joystick used)," << endl;
+		out << "#               fcs (Thrustmaster), ch (CH Flightstick)." << endl;
+		out << "#               none disables joystick emulation." << endl;
+		out << "#               auto chooses emulation depending on real joystick(s)." << endl;
+		out << "#               Possible values: auto, 2axis, 4axis, 4axis_2, fcs, ch, none." << endl;
+		out << "#        timed: enable timed intervals for axis. (false is old style behaviour)." << endl;
+		out << "#     autofire: continuously fires as long as you keep the button pressed." << endl;
+		out << "#       swap34: swap the 3rd and the 4th axis. can be useful for certain joysticks." << endl;
+		out << "#   buttonwrap: enable button wrapping at the number of emulated buttons." << endl << endl;
 
 		out << "joysticktype=" << datosDbx["Dbx_joystick_type"] << endl;
 		out << "timed=" << datosDbx["Dbx_joystick_timed"] << endl;
@@ -1492,15 +1543,23 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "stopbit=" << datosDbx["Dbx_dserial_stopbit"] << endl << endl;
 
 		out << "[serial]" << endl;
-		out << "# serial1-4 -- set type of device connected to com port." << endl;
-		out << "#              Can be disabled, dummy, modem, nullmodem, directserial." << endl;
-		out << "#              Additional parameters must be in the same line in the form of" << endl;
-		out << "#              parameter:value. Parameter for all types is irq." << endl;
-		out << "#              for directserial: realport (required), rxdelay (optional)." << endl;
-		out << "#              for modem: listenport (optional)." << endl;
-		out << "#              for nullmodem: server, rxdelay, txdelay, telnet, usedtr," << endl;
-		out << "#                             transparent, port, inhsocket (all optional)." << endl;
-		out << "#              Example: serial1=modem listenport:5000" << endl << endl;
+		out << "# serial1: set type of device connected to com port." << endl;
+		out << "#          Can be disabled, dummy, modem, nullmodem, directserial." << endl;
+		out << "#          Additional parameters must be in the same line in the form of" << endl;
+		out << "#          parameter:value. Parameter for all types is irq." << endl;
+		out << "#          for directserial: realport (required), rxdelay (optional)." << endl;
+		out << "#                           (realport:COM1 realport:ttyS0)." << endl;
+		out << "#          for modem: listenport (optional)." << endl;
+		out << "#          for nullmodem: server, rxdelay, txdelay, telnet, usedtr," << endl;
+		out << "#                         transparent, port, inhsocket (all optional)." << endl;
+		out << "#          Example: serial1=modem listenport:5000" << endl;
+		out << "#          Possible values: dummy, disabled, modem, nullmodem, directserial." << endl;
+		out << "# serial2: see serial1" << endl;
+		out << "#          Possible values: dummy, disabled, modem, nullmodem, directserial." << endl;
+		out << "# serial3: see serial1" << endl;
+		out << "#          Possible values: dummy, disabled, modem, nullmodem, directserial." << endl;
+		out << "# serial4: see serial1" << endl;
+		out << "#          Possible values: dummy, disabled, modem, nullmodem, directserial." << endl << endl;
 
 		out << "serial1=" << datosDbx["Dbx_serial_1"] << endl;
 		out << "serial2=" << datosDbx["Dbx_serial_2"] << endl;
@@ -1508,10 +1567,10 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "serial4=" << datosDbx["Dbx_serial_4"] << endl << endl;
 
 		out << "[dos]" << endl;
-		out << "# xms -- Enable XMS support." << endl;
-		out << "# ems -- Enable EMS support." << endl;
-		out << "# umb -- Enable UMB support." << endl;
-		out << "# keyboardlayout -- Language code of the keyboard layout (or none)." << endl << endl;
+		out << "#            xms: Enable XMS support." << endl;
+		out << "#            ems: Enable EMS support." << endl;
+		out << "#            umb: Enable UMB support." << endl;
+		out << "# keyboardlayout: Language code of the keyboard layout (or none)." << endl << endl;
 
 		out << "xms=" << datosDbx["Dbx_dos_xms"] << endl;
 		out << "ems=" << datosDbx["Dbx_dos_ems"] << endl;
@@ -1519,7 +1578,7 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "keyboardlayout=" << datosDbx["Dbx_dos_keyboardlayout"] << endl << endl;
 
 		out << "[ipx]" << endl;
-		out << "# ipx -- Enable ipx over UDP/IP emulation." << endl << endl;
+		out << "# ipx: Enable ipx over UDP/IP emulation." << endl << endl;
 
 		out << "ipx=" << datosDbx["Dbx_ipx_ipx"] << endl << endl;
 
@@ -1666,6 +1725,7 @@ void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, con
 			out << "      <render_aspect>" << datos_emu["Dbx_render_aspect"] << "</render_aspect>" << endl;
 			out << "      <render_scaler>" << datos_emu["Dbx_render_scaler"] << "</render_scaler>" << endl;
 			out << "      <cpu_core>" << datos_emu["Dbx_cpu_core"] << "</cpu_core>" << endl;
+			out << "      <cpu_cputype>" << datos_emu["Dbx_cpu_cputype"] << "</cpu_cputype>" << endl;
 			out << "      <cpu_cycles>" << datos_emu["Dbx_cpu_cycles"] << "</cpu_cycles>" << endl;
 			out << "      <cpu_cycleup>" << datos_emu["Dbx_cpu_cycleup"] << "</cpu_cycleup>" << endl;
 			out << "      <cpu_cycledown>" << datos_emu["Dbx_cpu_cycledown"] << "</cpu_cycledown>" << endl;
@@ -1685,6 +1745,7 @@ void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, con
 			out << "      <sblaster_hdma>" << datos_emu["Dbx_sblaster_hdma"] << "</sblaster_hdma>" << endl;
 			out << "      <sblaster_mixer>" << datos_emu["Dbx_sblaster_mixer"] << "</sblaster_mixer>" << endl;
 			out << "      <sblaster_oplmode>" << datos_emu["Dbx_sblaster_oplmode"] << "</sblaster_oplmode>" << endl;
+			out << "      <sblaster_oplemu>" << datos_emu["Dbx_sblaster_oplemu"] << "</sblaster_oplemu>" << endl;
 			out << "      <sblaster_oplrate>" << datos_emu["Dbx_sblaster_oplrate"] << "</sblaster_oplrate>" << endl;
 			out << "      <gus_gus>" << datos_emu["Dbx_gus_gus"] << "</gus_gus>" << endl;
 			out << "      <gus_gusrate>" << datos_emu["Dbx_gus_gusrate"] << "</gus_gusrate>" << endl;
@@ -1759,6 +1820,7 @@ void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, con
 		{
 			out << "    <scummvm>" << endl;
 			out << "      <game>" << datos_emu["Svm_game"] << "</game>" << endl;
+			out << "      <game_label>" << datos_emu["Svm_game_label"] << "</game_label>" << endl;
 			out << "      <language>" << datos_emu["Svm_language"] << "</language>" << endl;
 			out << "      <subtitles>" << datos_emu["Svm_subtitles"] << "</subtitles>" << endl;
 			out << "      <platform>" << datos_emu["Svm_platform"] << "</platform>" << endl;
@@ -1929,7 +1991,7 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 		profileDFend["Dbx_parametros_setup"] = settings.value("SetupParameters" ,""  ).toString().replace("--", ",");
 		profileDFend["Dbx_autoexec"]         = settings.value("autoexec"        ,""  ).toString().replace("--", ",");
 		profileDFend["Dbx_opt_loadfix_mem"]  = settings.value("LoadFixVal"      ,"64").toString();
-		profileDFend["NrOfMounts"]              = settings.value("NrOfMounts"      ,"0" ).toString();
+		profileDFend["NrOfMounts"]           = settings.value("NrOfMounts"      ,"0" ).toString();
 		profileDFend["Dbx_opt_cerrar_dbox"]  = BoolToStr( settings.value("CloseOnExit","false").toBool() );
 		profileDFend["Dbx_opt_loadfix"]      = BoolToStr( settings.value("Loadhigh","false").toBool() );
 
@@ -2010,6 +2072,7 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 
 	settings.beginGroup("cpu");
 		profileDFend["Dbx_cpu_core"]      = settings.value("core"     ,"auto").toString();
+		profileDFend["Dbx_cpu_cputype"]   = settings.value("type"     ,"auto").toString();
 		profileDFend["Dbx_cpu_cycles"]    = settings.value("cycles"   ,"auto").toString();
 		profileDFend["Dbx_cpu_cycleup"]   = settings.value("cycleup"  ,"500").toString();
 		profileDFend["Dbx_cpu_cycledown"] = settings.value("cycledown","20").toString();
@@ -2036,13 +2099,9 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 		profileDFend["Dbx_sblaster_irq"]    = settings.value("irq"    ,"7").toString();
 		profileDFend["Dbx_sblaster_dma"]    = settings.value("dma"    ,"1").toString();
 		profileDFend["Dbx_sblaster_hdma"]   = settings.value("hdma"   ,"5").toString();
-
-		if( settings.value("mixer","true").toBool() )
-			profileDFend["Dbx_sblaster_mixer"] = "true";
-		else
-			profileDFend["Dbx_sblaster_mixer"] = "false";
-
+		profileDFend["Dbx_sblaster_mixer"]   = BoolToStr( settings.value("mixer","true").toBool() );
 		profileDFend["Dbx_sblaster_oplmode"] = settings.value("oplmode","auto").toString();
+		profileDFend["Dbx_sblaster_oplemu"]  = settings.value("oplemu" ,"default").toString();
 		profileDFend["Dbx_sblaster_oplrate"] = settings.value("oplrate","22050").toString();
 	settings.endGroup();
 
@@ -2096,10 +2155,10 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 		profileDFend["Dbx_dos_ems"] = BoolToStr( settings.value("ems","true").toBool() );
 		profileDFend["Dbx_dos_umb"] = settings.value("umb", "true").toString();
 
-		if( settings.value("keyboardlayout","none").toString()=="default")
-			profileDFend["Dbx_dos_keyboardlayout"] = "none";
+		if( settings.value("keyboardlayout","auto").toString() == "default")
+			profileDFend["Dbx_dos_keyboardlayout"] = "auto";
 		else
-			profileDFend["Dbx_dos_keyboardlayout"] = settings.value("keyboardlayout", "none").toString();
+			profileDFend["Dbx_dos_keyboardlayout"] = settings.value("keyboardlayout", "auto").toString();
 
 //		profileDFend["Dbx_dos_codepage"] = settings.value("codepage", "").toString();
 	settings.endGroup();
