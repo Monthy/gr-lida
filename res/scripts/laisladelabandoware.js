@@ -137,6 +137,7 @@ function AnalyzeGamePage(texto, local)
 		m_array["Dbx_render_aspect"]         = AnalyzeTagName(texto, "<render_aspect>([^\"<>]*)</render_aspect>", "");
 		m_array["Dbx_render_scaler"]         = AnalyzeTagName(texto, "<render_scaler>([^\"<>]*)</render_scaler>", "");
 		m_array["Dbx_cpu_core"]              = AnalyzeTagName(texto, "<cpu_core>([^\"<>]*)</cpu_core>", "");
+		m_array["Dbx_cpu_cputype"]           = AnalyzeTagName(texto, "<cpu_cputype>([^\"<>]*)</cpu_cputype>", "");
 		m_array["Dbx_cpu_cycles"]            = AnalyzeTagName(texto, "<cpu_cycles>([^\"<>]*)</cpu_cycles>", "");
 		m_array["Dbx_cpu_cycleup"]           = AnalyzeTagName(texto, "<cpu_cycleup>([^\"<>]*)</cpu_cycleup>", "");
 		m_array["Dbx_cpu_cycledown"]         = AnalyzeTagName(texto, "<cpu_cycledown>([^\"<>]*)</cpu_cycledown>", "");
@@ -156,6 +157,7 @@ function AnalyzeGamePage(texto, local)
 		m_array["Dbx_sblaster_hdma"]         = AnalyzeTagName(texto, "<sblaster_hdma>([^\"<>]*)</sblaster_hdma>", "");
 		m_array["Dbx_sblaster_mixer"]        = AnalyzeTagName(texto, "<sblaster_mixer>([^\"<>]*)</sblaster_mixer>", "");
 		m_array["Dbx_sblaster_oplmode"]      = AnalyzeTagName(texto, "<sblaster_oplmode>([^\"<>]*)</sblaster_oplmode>", "");
+		m_array["Dbx_sblaster_oplemu"]       = AnalyzeTagName(texto, "<sblaster_oplemu>([^\"<>]*)</sblaster_oplemu>", "");
 		m_array["Dbx_sblaster_oplrate"]      = AnalyzeTagName(texto, "<sblaster_oplrate>([^\"<>]*)</sblaster_oplrate>", "");
 		m_array["Dbx_gus_gus"]               = AnalyzeTagName(texto, "<gus_gus>([^\"<>]*)</gus_gus>", "");
 		m_array["Dbx_gus_gusrate"]           = AnalyzeTagName(texto, "<gus_gusrate>([^\"<>]*)</gus_gusrate>", "");

@@ -857,6 +857,7 @@ void frmImportarJuego::AnalyzePage(QString Page, bool local, bool tipoDFend)
 		DatosDosBox["Dbx_render_aspect"]         = ""+DatosJuegoTemp["Dbx_render_aspect"];
 		DatosDosBox["Dbx_render_scaler"]         = ""+DatosJuegoTemp["Dbx_render_scaler"];
 		DatosDosBox["Dbx_cpu_core"]              = ""+DatosJuegoTemp["Dbx_cpu_core"];
+		DatosDosBox["Dbx_cpu_cputype"]           = ""+DatosJuegoTemp["Dbx_cpu_cputype"];
 		DatosDosBox["Dbx_cpu_cycles"]            = ""+DatosJuegoTemp["Dbx_cpu_cycles"];
 		DatosDosBox["Dbx_cpu_cycleup"]           = ""+DatosJuegoTemp["Dbx_cpu_cycleup"];
 		DatosDosBox["Dbx_cpu_cycledown"]         = ""+DatosJuegoTemp["Dbx_cpu_cycledown"];
@@ -876,6 +877,7 @@ void frmImportarJuego::AnalyzePage(QString Page, bool local, bool tipoDFend)
 		DatosDosBox["Dbx_sblaster_hdma"]         = ""+DatosJuegoTemp["Dbx_sblaster_hdma"];
 		DatosDosBox["Dbx_sblaster_mixer"]        = ""+DatosJuegoTemp["Dbx_sblaster_mixer"];
 		DatosDosBox["Dbx_sblaster_oplmode"]      = ""+DatosJuegoTemp["Dbx_sblaster_oplmode"];
+		DatosDosBox["Dbx_sblaster_oplemu"]       = ""+DatosJuegoTemp["Dbx_sblaster_oplemu"];
 		DatosDosBox["Dbx_sblaster_oplrate"]      = ""+DatosJuegoTemp["Dbx_sblaster_oplrate"];
 		DatosDosBox["Dbx_gus_gus"]               = ""+DatosJuegoTemp["Dbx_gus_gus"];
 		DatosDosBox["Dbx_gus_gusrate"]           = ""+DatosJuegoTemp["Dbx_gus_gusrate"];

@@ -120,6 +120,8 @@ void frmAddEditDosBox::CargarConfigDosBox()
 	fGrl.CargarDatosComboBox(":/datos/dbx_keyboardlayout.txt", ui.cbxDbx_dos_keyboardlayout, 1, true); // keyboardlayout
 	fGrl.CargarDatosComboBox(":/datos/dbx_sbtype.txt"        , ui.cbxDbx_sblaster_sbtype            ); // Tipo Sound Blaste
 	fGrl.CargarDatosComboBox(":/datos/dbx_sb_oplmode.txt"    , ui.cbxDbx_sblaster_oplmode           ); // Sound Blaste Opl mode
+	fGrl.CargarDatosComboBox(":/datos/dbx_sb_oplemu.txt"     , ui.cbxDbx_sblaster_oplemu            ); // Provider for the OPL emulation
+	fGrl.CargarDatosComboBox(":/datos/dbx_sb_oplrate.txt"    , ui.cbxDbx_sblaster_oplrate           ); // Sample rate of OPL
 	fGrl.CargarDatosComboBox(":/datos/dbx_mpu401.txt"        , ui.cbxDbx_midi_mpu401                ); // MPU-401
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt"   , ui.cbxDbx_midi_device                ); // MIDI Device
 
@@ -130,15 +132,13 @@ void frmAddEditDosBox::CargarConfigDosBox()
 
 	QStringList sonido_frecuencias, sonido_Address,	sonido_IRQ, sonido_DMA, sonido_HDMA;
 	sonido_frecuencias << "11050" << "22050" << "44100" << "48000";
-	sonido_Address << "210" << "220" << "240" << "260" << "280";
-	sonido_IRQ << "3" << "5" << "7" << "10" << "11";
-	sonido_DMA << "0" << "1" << "3";
-	sonido_HDMA << "5" << "6" << "7";
+	sonido_Address << "210" << "220" << "240" << "260" << "280" << "2a0" << "2c0" << "2e0" << "300";
+	sonido_IRQ << "3" << "5" << "7" << "9" << "10" << "11" << "12";
+	sonido_DMA << "0" << "1" << "3" << "5" << "6" << "7";
+	sonido_HDMA << "0" << "1" << "3" << "5" << "6" << "7";
 
 	ui.cbxDbx_mixer_rate->clear();
 	ui.cbxDbx_mixer_rate->addItems( sonido_frecuencias );
-	ui.cbxDbx_sblaster_oplrate->clear();
-	ui.cbxDbx_sblaster_oplrate->addItems( sonido_frecuencias );
 	ui.cbxDbx_sblaster_sbbase->clear();
 	ui.cbxDbx_sblaster_sbbase->addItems( sonido_Address );
 	ui.cbxDbx_sblaster_irq->clear();
@@ -237,7 +237,7 @@ void frmAddEditDosBox::CargarConfigDosBox()
 void frmAddEditDosBox::setConfigDefecto()
 {
 	ui.txtDbx_loadfix_mem->setText("64");
-	ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( 14 );  // keyboardlayout
+	ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( 1 );  // keyboardlayout
 	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 );   // Resolucin pantalla
 	ui.cbxDbx_sdl_windowresolution->setCurrentIndex( 0 ); // windowresolution
 	ui.cbxDbx_sdl_hwscale->setCurrentIndex( 9 );          // Escalar por hardware
@@ -257,7 +257,8 @@ void frmAddEditDosBox::setConfigDefecto()
 	ui.txtDbx_mixer_prebuffer->setText("10");             //
 	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );      // Tipo Sound Blaste
 	ui.cbxDbx_sblaster_oplmode->setCurrentIndex( 0 );     // Sound Blaste Opl mode
-	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( 1 );     //
+	ui.cbxDbx_sblaster_oplemu->setCurrentIndex( 0 );      //
+	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( 4 );     //
 	ui.cbxDbx_sblaster_sbbase->setCurrentIndex( 0 );      //
 	ui.cbxDbx_sblaster_irq->setCurrentIndex( 0 );         //
 	ui.cbxDbx_sblaster_dma->setCurrentIndex( 0 );         //
@@ -376,9 +377,10 @@ void frmAddEditDosBox::CargarDatosDosBox(QString IDGrl, QString ProfileGame, boo
 	ui.cbxDbx_sblaster_sbbase->setCurrentIndex( ui.cbxDbx_sblaster_sbbase->findText( tempProfileDosBox["Dbx_sblaster_sbbase"] ) );		// sblaster_sbbase
 	ui.cbxDbx_sblaster_irq->setCurrentIndex( ui.cbxDbx_sblaster_irq->findText( tempProfileDosBox["Dbx_sblaster_irq"] ) );				// sblaster_irq
 	ui.cbxDbx_sblaster_dma->setCurrentIndex( ui.cbxDbx_sblaster_dma->findText( tempProfileDosBox["Dbx_sblaster_dma"] ) );				// sblaster_dma
-	ui.cbxDbx_sblaster_hdma->setCurrentIndex( ui.cbxDbx_sblaster_hdma->findText( tempProfileDosBox["Dbx_sblaster_hdma"] ) );				// sblaster_hdma
+	ui.cbxDbx_sblaster_hdma->setCurrentIndex( ui.cbxDbx_sblaster_hdma->findText( tempProfileDosBox["Dbx_sblaster_hdma"] ) );			// sblaster_hdma
 	ui.chkDbx_sblaster_mixer->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_sblaster_mixer"] ) );									// sblaster_mixer
 	ui.cbxDbx_sblaster_oplmode->setCurrentIndex( ui.cbxDbx_sblaster_oplmode->findText( tempProfileDosBox["Dbx_sblaster_oplmode"] ) );	// sblaster_oplmode
+	ui.cbxDbx_sblaster_oplemu->setCurrentIndex( ui.cbxDbx_sblaster_oplemu->findText( tempProfileDosBox["Dbx_sblaster_oplemu"] ) );		// sblaster_oplemu
 	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( ui.cbxDbx_sblaster_oplrate->findText( tempProfileDosBox["Dbx_sblaster_oplrate"] ) );	// sblaster_oplrate
 
 	ui.chkDbx_gus_gus->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_gus_gus"] ) );												// gus_gus
@@ -586,6 +588,9 @@ QHash<QString, QString> frmAddEditDosBox::setDatosDosBox()
 // sblaster_oplmode
 	if( ui.cbxDbx_sblaster_oplmode->currentText() != "" )
 		tempProfileDosBox["Dbx_sblaster_oplmode"] = ui.cbxDbx_sblaster_oplmode->currentText(); else tempProfileDosBox["Dbx_sblaster_oplmode"] = "auto";
+// sblaster_oplemu
+	if( ui.cbxDbx_sblaster_oplemu->currentText() != "" )
+		tempProfileDosBox["Dbx_sblaster_oplemu"] = ui.cbxDbx_sblaster_oplemu->currentText(); else tempProfileDosBox["Dbx_sblaster_oplemu"] = "default";
 // sblaster_oplrate
 	if( ui.cbxDbx_sblaster_oplrate->currentText() != "" )
 		tempProfileDosBox["Dbx_sblaster_oplrate"] = ui.cbxDbx_sblaster_oplrate->currentText(); else tempProfileDosBox["Dbx_sblaster_oplrate"] = "22050";

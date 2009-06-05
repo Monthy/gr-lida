@@ -249,6 +249,7 @@ void dbSql::CrearTablas()
 		"	`sblaster_hdma`			varchar(4) NOT NULL default '5',"
 		"	`sblaster_mixer`		varchar(5) NOT NULL default 'true',"
 		"	`sblaster_oplmode`		varchar(10) NOT NULL default 'auto',"
+		"	`sblaster_oplemu`		varchar(10) NOT NULL default 'default',"
 		"	`sblaster_oplrate`		varchar(10) NOT NULL default '22050',"
 		"	`gus_gus`				varchar(5) NOT NULL default 'true',"
 		"	`gus_gusrate`			varchar(10) NOT NULL default '22050',"
@@ -257,7 +258,7 @@ void dbSql::CrearTablas()
 		"	`gus_irq2`				varchar(4) NOT NULL default '5',"
 		"	`gus_dma1`				varchar(4) NOT NULL default '3',"
 		"	`gus_dma2`				varchar(4) NOT NULL default '3',"
-		"	`gus_ultradir`			varchar(255) NOT NULL default 'C:/ULTRASND',"
+		"	`gus_ultradir`			varchar(255) NOT NULL default 'C:\\ULTRASND',"
 		"	`speaker_pcspeaker`		varchar(5) NOT NULL default 'true',"
 		"	`speaker_pcrate`		varchar(10) NOT NULL default '22050',"
 		"	`speaker_tandy`			varchar(5) NOT NULL default 'auto',"		// DOSBox 0.65
@@ -285,7 +286,7 @@ void dbSql::CrearTablas()
 		"	`dos_xms`				varchar(5) NOT NULL default 'true',"
 		"	`dos_ems`				varchar(5) NOT NULL default 'true',"
 		"	`dos_umb`				varchar(5) NOT NULL default 'true',"
-		"	`dos_keyboardlayout`	varchar(5) NOT NULL default 'none',"
+		"	`dos_keyboardlayout`	varchar(5) NOT NULL default 'auto',"
 		"	`ipx_ipx`				varchar(5) NOT NULL default 'true',"
 		"	`autoexec`				longtext,"
 		"	`opt_autoexec`			varchar(5) NOT NULL default 'false',"
@@ -312,7 +313,7 @@ void dbSql::CrearTablas()
 		"	`id`					" + tipo_id_sql + " PRIMARY KEY,"
 		"	`id_dosbox`				integer NOT NULL default 1,"
 		"	`id_lista`				varchar(255) NOT NULL default '0',"
-		"	`path`					varchar(255) NOT NULL default 'C:/',"
+		"	`path`					varchar(255) NOT NULL default 'C:\\',"
 		"	`label`					varchar(255) NOT NULL default '',"
 		"	`tipo_as`				varchar(50) NOT NULL default 'drive',"
 		"	`letter`				varchar(255) NOT NULL default 'C',"
@@ -425,6 +426,7 @@ void dbSql::CrearTablas()
 
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cputype' varchar(20) NOT NULL DEFAULT 'auto';");
+	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'sblaster_oplemu' varchar(10) NOT NULL DEFAULT 'default';");
 
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'output_rate' varchar(10) NOT NULL DEFAULT '<defecto>';");
@@ -661,6 +663,7 @@ QHash<QString, QString> dbSql::showConfg_DOSBox(QString IDgrl)
 	tmpDosBox["Dbx_sblaster_hdma"]        = query.record().value("sblaster_hdma").toString();
 	tmpDosBox["Dbx_sblaster_mixer"]       = query.record().value("sblaster_mixer").toString();
 	tmpDosBox["Dbx_sblaster_oplmode"]     = query.record().value("sblaster_oplmode").toString();
+	tmpDosBox["Dbx_sblaster_oplemu"]      = query.record().value("sblaster_oplemu").toString();
 	tmpDosBox["Dbx_sblaster_oplrate"]     = query.record().value("sblaster_oplrate").toString();
 // [gus]
 	tmpDosBox["Dbx_gus_gus"]              = query.record().value("gus_gus").toString();
@@ -736,7 +739,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	strSQL.append("dosbox_language, dosbox_machine, dosbox_captures, dosbox_memsize, render_frameskip, render_aspect, render_scaler, ");
 	strSQL.append("cpu_core, cpu_cputype, cpu_cycles, cpu_cycleup, cpu_cycledown, mixer_nosound, mixer_rate, mixer_blocksize, mixer_prebuffer, ");
 	strSQL.append("midi_mpu401, midi_intelligent, midi_device, midi_config, midi_mt32rate, sblaster_sbtype, sblaster_sbbase, sblaster_irq, ");
-	strSQL.append("sblaster_dma, sblaster_hdma, sblaster_mixer, sblaster_oplmode, sblaster_oplrate, gus_gus, gus_gusrate, gus_gusbase, ");
+	strSQL.append("sblaster_dma, sblaster_hdma, sblaster_mixer, sblaster_oplmode, sblaster_oplemu, sblaster_oplrate, gus_gus, gus_gusrate, gus_gusbase, ");
 	strSQL.append("gus_irq1, gus_irq2, gus_dma1, gus_dma2, gus_ultradir, speaker_pcspeaker, speaker_pcrate, speaker_tandy, speaker_tandyrate, ");
 	strSQL.append("speaker_disney, joystick_type, joystick_timed, joystick_autofire, joystick_swap34, joystick_buttonwrap, ");
 	strSQL.append("modem_modem, modem_comport, modem_listenport, dserial_directserial, dserial_comport, ");
@@ -749,7 +752,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	strSQL.append(":dosbox_language, :dosbox_machine, :dosbox_captures, :dosbox_memsize, :render_frameskip, :render_aspect, :render_scaler, ");
 	strSQL.append(":cpu_core, :cpu_cputype, :cpu_cycles, :cpu_cycleup, :cpu_cycledown, :mixer_nosound, :mixer_rate, :mixer_blocksize, :mixer_prebuffer, ");
 	strSQL.append(":midi_mpu401, :midi_intelligent, :midi_device, :midi_config, :midi_mt32rate, :sblaster_sbtype, :sblaster_sbbase, :sblaster_irq, ");
-	strSQL.append(":sblaster_dma, :sblaster_hdma, :sblaster_mixer, :sblaster_oplmode, :sblaster_oplrate, :gus_gus, :gus_gusrate, :gus_gusbase, ");
+	strSQL.append(":sblaster_dma, :sblaster_hdma, :sblaster_mixer, :sblaster_oplmode, :sblaster_oplemu, :sblaster_oplrate, :gus_gus, :gus_gusrate, :gus_gusbase, ");
 	strSQL.append(":gus_irq1, :gus_irq2, :gus_dma1, :gus_dma2, :gus_ultradir, :speaker_pcspeaker, :speaker_pcrate, :speaker_tandy, :speaker_tandyrate, ");
 	strSQL.append(":speaker_disney, :joystick_type, :joystick_timed, :joystick_autofire, :joystick_swap34, :joystick_buttonwrap, ");
 	strSQL.append(":modem_modem, :modem_comport, :modem_listenport, :dserial_directserial, :dserial_comport, ");
@@ -782,7 +785,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	query.bindValue(":render_aspect"         , datos["Dbx_render_aspect"]         );
 	query.bindValue(":render_scaler"         , datos["Dbx_render_scaler"]         );
 	query.bindValue(":cpu_core"              , datos["Dbx_cpu_core"]              );
-	query.bindValue(":cpu_cputype"           , datos["Dbx_cpu_cputype"]              );
+	query.bindValue(":cpu_cputype"           , datos["Dbx_cpu_cputype"]           );
 	query.bindValue(":cpu_cycles"            , datos["Dbx_cpu_cycles"]            );
 	query.bindValue(":cpu_cycleup"           , datos["Dbx_cpu_cycleup"]           );
 	query.bindValue(":cpu_cycledown"         , datos["Dbx_cpu_cycledown"]         );
@@ -802,6 +805,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	query.bindValue(":sblaster_hdma"         , datos["Dbx_sblaster_hdma"]         );
 	query.bindValue(":sblaster_mixer"        , datos["Dbx_sblaster_mixer"]        );
 	query.bindValue(":sblaster_oplmode"      , datos["Dbx_sblaster_oplmode"]      );
+	query.bindValue(":sblaster_oplemu"       , datos["Dbx_sblaster_oplemu"]       );
 	query.bindValue(":sblaster_oplrate"      , datos["Dbx_sblaster_oplrate"]      );
 	query.bindValue(":gus_gus"               , datos["Dbx_gus_gus"]               );
 	query.bindValue(":gus_gusrate"           , datos["Dbx_gus_gusrate"]           );
@@ -875,7 +879,7 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	strSQL.append("mixer_rate = :mixer_rate , mixer_blocksize = :mixer_blocksize , mixer_prebuffer = :mixer_prebuffer , midi_mpu401 = :midi_mpu401 , midi_intelligent = :midi_intelligent ,");
 	strSQL.append("midi_device = :midi_device , midi_config = :midi_config , midi_mt32rate = :midi_mt32rate , sblaster_sbtype = :sblaster_sbtype , sblaster_sbbase = :sblaster_sbbase ,");
 	strSQL.append("sblaster_irq = :sblaster_irq , sblaster_dma = :sblaster_dma , sblaster_hdma = :sblaster_hdma , sblaster_mixer = :sblaster_mixer , sblaster_oplmode = :sblaster_oplmode ,");
-	strSQL.append("sblaster_oplrate = :sblaster_oplrate , gus_gus = :gus_gus , gus_gusrate = :gus_gusrate , gus_gusbase = :gus_gusbase , gus_irq1 = :gus_irq1 , gus_irq2 = :gus_irq2 ,");
+	strSQL.append("sblaster_oplemu = :sblaster_oplemu, sblaster_oplrate = :sblaster_oplrate , gus_gus = :gus_gus , gus_gusrate = :gus_gusrate , gus_gusbase = :gus_gusbase , gus_irq1 = :gus_irq1 , gus_irq2 = :gus_irq2 ,");
 	strSQL.append("gus_dma1 = :gus_dma1 , gus_dma2 = :gus_dma2 , gus_ultradir = :gus_ultradir , speaker_pcspeaker = :speaker_pcspeaker , speaker_pcrate = :speaker_pcrate ,");
 	strSQL.append("speaker_tandy = :speaker_tandy , speaker_tandyrate = :speaker_tandyrate , speaker_disney = :speaker_disney , joystick_type = :joystick_type ,");
 	strSQL.append("joystick_timed = :joystick_timed , joystick_autofire = :joystick_autofire , joystick_swap34 = :joystick_swap34 , joystick_buttonwrap = :joystick_buttonwrap ,");
@@ -932,6 +936,7 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	query.bindValue(":sblaster_hdma"         , datos["Dbx_sblaster_hdma"]         );
 	query.bindValue(":sblaster_mixer"        , datos["Dbx_sblaster_mixer"]        );
 	query.bindValue(":sblaster_oplmode"      , datos["Dbx_sblaster_oplmode"]      );
+	query.bindValue(":sblaster_oplemu"       , datos["Dbx_sblaster_oplemu"]       );
 	query.bindValue(":sblaster_oplrate"      , datos["Dbx_sblaster_oplrate"]      );
 	query.bindValue(":gus_gus"               , datos["Dbx_gus_gus"]               );
 	query.bindValue(":gus_gusrate"           , datos["Dbx_gus_gusrate"]           );

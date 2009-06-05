@@ -325,6 +325,7 @@ void frmDbxAdd::on_setProfileGame(int row)
 			tempProfileDosBox["Dbx_sblaster_hdma"]         = "5";			// sblaster_hdma
 			tempProfileDosBox["Dbx_sblaster_mixer"]        = "true";		// sblaster_mixer
 			tempProfileDosBox["Dbx_sblaster_oplmode"]      = "auto";		// sblaster_oplmode
+			tempProfileDosBox["Dbx_sblaster_oplemu"]       = "default";		// sblaster_oplemu
 			tempProfileDosBox["Dbx_gus_gusbase"]           = "240";			// gus_gusbase
 			tempProfileDosBox["Dbx_gus_irq1"]              = "5";			// gus_irq1
 			tempProfileDosBox["Dbx_gus_irq2"]              = "5";			// gus_irq2
@@ -351,7 +352,7 @@ void frmDbxAdd::on_setProfileGame(int row)
 			tempProfileDosBox["Dbx_serial_2"]              = "dummy";		// serial_2
 			tempProfileDosBox["Dbx_serial_3"]              = "disabled";	// serial_3
 			tempProfileDosBox["Dbx_serial_4"]              = "disabled";	// serial_4
-			tempProfileDosBox["Dbx_dos_keyboardlayout"]    = "none";		// dos_keyboardlayout
+			tempProfileDosBox["Dbx_dos_keyboardlayout"]    = "auto";		// dos_keyboardlayout
 			tempProfileDosBox["Dbx_ipx_ipx"]               = "false";		// ipx_ipx
 			tempProfileDosBox["Dbx_autoexec"]              = "";			// autoexec
 			tempProfileDosBox["Dbx_opt_autoexec"]          = "false";		// opt_autoexec
@@ -543,6 +544,7 @@ void frmDbxAdd::on_btnOk()
 		DatosDosBox["Dbx_sblaster_hdma"]    = tempProfileDosBox["Dbx_sblaster_hdma"];		// sblaster_hdma
 		DatosDosBox["Dbx_sblaster_mixer"]   = tempProfileDosBox["Dbx_sblaster_mixer"];		// sblaster_mixer
 		DatosDosBox["Dbx_sblaster_oplmode"] = tempProfileDosBox["Dbx_sblaster_oplmode"];	// sblaster_oplmode
+		DatosDosBox["Dbx_sblaster_oplemu"]  = tempProfileDosBox["Dbx_sblaster_oplemu"];		// sblaster_oplemu
 
 	// sblaster_oplrate
 		if( ui.cbxDbx_sblaster_oplrate->currentText() != "" )
