@@ -40,7 +40,7 @@ public:
 	QString stVersionGrl(){ return "0.8.0"; }
 // Versiones de los emuladores que soporta el GR-lida
 // DOSBox
-	QString stVersionDbx(){ return "0.72";  }
+	QString stVersionDbx(){ return "0.73";  }
 // ScummVM
 	QString stVersionSvm(){ return "0.13.1";}
 // VDMSound
