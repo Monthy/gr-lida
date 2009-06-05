@@ -3,4 +3,5 @@ alsa|sinimg
 oss|sinimg
 win32|sinimg
 coreaudio|sinimg
+coremidi|sinimg
 none|sinimg

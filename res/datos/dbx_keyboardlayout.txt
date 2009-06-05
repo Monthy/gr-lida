@@ -1,4 +1,5 @@
 none|sinimg
+auto|sinimg
 BG|sinimg
 CZ243|sinimg
 FR|fr
