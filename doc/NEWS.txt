@@ -1,7 +1,7 @@
 
 -  NEWS
 -----------------------------------
-0.8.0 (16-05-2009)
+0.8.0 (05-06-2009)
  - Actualizada la lista de compatibilidad del ScummVM 0.13.1 estable.
  - Actualizados los archivos de Idioma, tanto los *.TS como los *.QM.
  - Mejorada la obtención de información del juego de las distintas web mediante Scripts.
@@ -10,6 +10,7 @@
  - Mejorado sistema de montaje para las rutas cortas en DOS.   
  - Mejorado el visor de imágenes.
  - Añadido la posibilidad de ver imágenes comprimidas en zip, idóneas para los manuales.
+ - Añadida funciones para la nueva versión del DOSBox 0.73.
  - Añadido cputype para la futura versión del DOSBox.
  - Añadido soporte para la reproducción de contenido multimedia mediante Phonon.
  - Añadido soporte para poder ver las ruletas o discos de protección de los juegos.
