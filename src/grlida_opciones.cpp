@@ -76,8 +76,11 @@ void frmOpciones::createConnections()
 
 void frmOpciones::CargarConfig()
 {
-	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
+	ui.cbxVersionDbx->clear();
+	ui.cbxVersionDbx->addItem("0.72");
+	ui.cbxVersionDbx->addItem("0.73");
 
+	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
 // Idioma
 	stIdiomaSelect = GRLConfig["IdiomaSelect"].toString();
 	ui.chkIdiomaExterno->setChecked( GRLConfig["IdiomaExterno"].toBool() );
@@ -86,6 +89,7 @@ void frmOpciones::CargarConfig()
 	ui.btnDirDbx->setEnabled( GRLConfig["DOSBoxDisp"].toBool() );
 	ui.txtDirDbx->setEnabled( GRLConfig["DOSBoxDisp"].toBool() );
 	ui.txtDirDbx->setText( GRLConfig["DirDOSBox"].toString() );
+	ui.cbxVersionDbx->setCurrentIndex( ui.cbxVersionDbx->findText( GRLConfig["VersionDBx"].toString() ) );
 // ScummVM
 	ui.chkScummVMDisp->setChecked( GRLConfig["ScummVMDisp"].toBool() );
 	ui.btnDirSvm->setEnabled( GRLConfig["ScummVMDisp"].toBool() );
@@ -217,6 +221,7 @@ void frmOpciones::GuardarConfig()
 	GRLConfig["ProxyPassword"]     = ui.txt_px_password->text();
 // Versión
 	GRLConfig["chkVersion"]        = ui.chkComprobarVersionGrl->isChecked();
+	GRLConfig["VersionDBx"]        = ui.cbxVersionDbx->currentText();
 
 	DatosConfiguracion = GRLConfig;
 

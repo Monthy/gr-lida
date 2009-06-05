@@ -122,11 +122,44 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="chkDOSBoxDisp">
-            <property name="text">
-             <string>Tengo instalado el emulador DOSBox</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QCheckBox" name="chkDOSBoxDisp">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Tengo instalado el emulador DOSBox</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_Confini_1">
+              <property name="text">
+               <string>Version:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbxVersionDbx">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <layout class="QHBoxLayout" name="hLayout_3">
@@ -1637,6 +1670,7 @@
   <tabstop>cbxIdioma</tabstop>
   <tabstop>chkIdiomaExterno</tabstop>
   <tabstop>chkDOSBoxDisp</tabstop>
+  <tabstop>cbxVersionDbx</tabstop>
   <tabstop>txtDirDbx</tabstop>
   <tabstop>btnDirDbx</tabstop>
   <tabstop>btnDirDbx_clear</tabstop>
@@ -1649,8 +1683,10 @@
   <tabstop>btnDirBaseGames</tabstop>
   <tabstop>btnDirBaseGames_clear</tabstop>
   <tabstop>cbxScriptURL</tabstop>
+  <tabstop>btnOpenUrl</tabstop>
   <tabstop>txtFormatoFecha</tabstop>
   <tabstop>btnInfoFormatoFecha</tabstop>
+  <tabstop>chkComprobarVersionGrl</tabstop>
   <tabstop>chkShowNext</tabstop>
   <tabstop>cbxMotorDataBase</tabstop>
   <tabstop>txtDirBD</tabstop>
