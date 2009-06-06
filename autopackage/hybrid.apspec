@@ -14,12 +14,13 @@ AutopackageTarget: 1.4
 CPUArchitectures: x86
 PackageReporting: No
 PackageVersion: 1
-PackageFileName: $DISPLAYNAME-$SOFTWAREVERSION-$PACKAGEVERSION-32bits.package
+PackageFileName: $DISPLAYNAME-$SOFTWAREVERSION-$PACKAGEVERSION-hybrid.package
 
 [BuildPrepare]
 qmake-qt4
 make
 make INSTALL_ROOT=$build_root install
+export HYBRID_PACKAGE=$DISPLAYNAME-$SOFTWAREVERSION-$PACKAGEVERSION-64bits.package
 
 [BuildUnprepare]
 unprepareBuild

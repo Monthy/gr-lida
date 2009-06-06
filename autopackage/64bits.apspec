@@ -11,6 +11,7 @@ URL: http://laisladelabandoware.es/grlida
 License: GNU General Public License, Version 2
 SoftwareVersion: 0.8.0
 AutopackageTarget: 1.4
+CPUArchitectures: x86_64
 PackageReporting: No
 PackageVersion: 1
 PackageFileName: $DISPLAYNAME-$SOFTWAREVERSION-$PACKAGEVERSION-64bits.package
