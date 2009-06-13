@@ -1,33 +1,19 @@
-A los desarrolladores de ScummVM ( http://www.scummvm.org/ ), DOSBox
-( http://www.dosbox.com/ ) y VdmSound
-( http://sourceforge.net/projects/vdmsound/ ) , por permitirnos disfrutar
-de los juegos que marcaron nuestra infancia/juventud.
+A los desarrolladores de ScummVM ( http://www.scummvm.org/ ), DOSBox ( http://www.dosbox.com/ ) y VdmSound( http://sourceforge.net/projects/vdmsound/ ) , por permitirnos disfrutar de los juegos que marcaron nuestra infancia/juventud.
 
-Al equipo de ShareSource ( http://www.sharesource.org ) por poner a nuestra
-disposición sus servicios para mejorar el desarrollo y distribución de
-GR-lida.
+Al equipo de ShareSource ( http://www.sharesource.org ) por poner a nuestra disposición sus servicios para mejorar el desarrollo y distribución de GR-lida.
 
-A los desarrolladores de Trolltech ( http://trolltech.com/ ) por facilitar el
-desarrollo multiplataforma de GR-lida gracias a sus librerías QT4.
+A los desarrolladores de Trolltech ( http://trolltech.com/ ) por facilitar el desarrollo multiplataforma de GR-lida gracias a sus librerías QT4.
 
-A Juan Francisco Cantero Hurtado ( http://elretorno.wordpress.com )
-<juanfra684[a]gmail.com> por las infinitas pruebas en Linux/BSD, ideas para
-mejorar la integración en Linux/BSD, reporte de bugs, creación del canal IRC
-en Freenode y mantenimiento del proyecto en ShareSource.
+A Juan Francisco Cantero Hurtado ( http://juanfra.info ) <juanfra684[a]gmail.com> por las infinitas pruebas en Linux/BSD, ideas para mejorar la integración en Linux/BSD, reporte de bugs, creación del canal IRC en Freenode, mantenimiento del proyecto en ShareSource y creación de los autopackages.
 
-A Neville <fmartiterron[a]yahoo.es> por su traducción de GR-lida al inglés y
-ayudarnos a hacerlo más internacional.
-A Jens Peter por su traducción del GR-lida al Danés.
-A Pascal Piallat por su traducción del GR-lida al Francés.
+A Neville <fmartiterron[a]yahoo.es> por su traducción de GR-lida al inglés y ayudarnos a hacerlo más internacional. A Jens Peter por su traducción del GR-lida al Danés. A Pascal Piallat por su traducción del GR-lida al Francés.
 
-A Sebastián Ramírez Magrí ( http://sebasmagri.wordpress.com/ )
-<sebasmagri[a]gmail.com> por mantener el ebuild de GR-lida para Gentoo y
-reportar bugs de la instalacción.
+A Sebastián Ramírez Magrí ( http://sebasmagri.wordpress.com/ ) <sebasmagri[a]gmail.com> por mantener el ebuild de GR-lida para Gentoo y reportar bugs de la instalacción.
 
-A los desarrolladores de pictureflow ( http://code.google.com/p/pictureflow/ )
-por su magnífico widget para QT.
+A los desarrolladores de pictureflow ( http://code.google.com/p/pictureflow/ ) por su magnífico widget para QT.
 
 A los de The OSDaB Project ( http://osdab.42cows.org/ ) por la Clase para manejar archivos Zip.
 
-A todos los usuarios y desarrolladores que de una u otra forma han colaborado
-directa o indirectamente en el desarrollo de GR-lida.
+A los desarrolladores de autopackage por ayudar a hacer la instalación de software de terceros en linux más sencilla. A @Ismas ( http://twitter.com/Ismas ) por las prubas de la versión previa del autopackage.
+
+A todos los usuarios y desarrolladores que de una u otra forma han colaborado directa o indirectamente en el desarrollo de GR-lida.
