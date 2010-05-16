@@ -1,8 +1,11 @@
 <RCC>
-    <qresource prefix="/" >
+    <qresource prefix="/">
+        <file>img32/descargar.png</file>
         <file>StyleSheet.qss</file>
+        <file>StyleSheetList.qss</file>
         <file>datos/companias.txt</file>
         <file>datos/dbx_cpu_core.txt</file>
+        <file>datos/dbx_cpu_type.txt</file>
         <file>datos/dbx_cycles.txt</file>
         <file>datos/dbx_frameskip.txt</file>
         <file>datos/dbx_hwscale.txt</file>
@@ -14,14 +17,18 @@
         <file>datos/dbx_mpu401.txt</file>
         <file>datos/dbx_output.txt</file>
         <file>datos/dbx_resolution.txt</file>
+        <file>datos/dbx_sb_oplemu.txt</file>
         <file>datos/dbx_sb_oplmode.txt</file>
+        <file>datos/dbx_sb_oplrate.txt</file>
         <file>datos/dbx_sbtype.txt</file>
         <file>datos/dbx_scaler.txt</file>
         <file>datos/dbx_sensitivity.txt</file>
+        <file>datos/edad_recomendada.txt</file>
         <file>datos/fechas.txt</file>
         <file>datos/formatos.txt</file>
         <file>datos/generos.txt</file>
         <file>datos/numdisc.txt</file>
+        <file>datos/perspectivas.txt</file>
         <file>datos/sistemaop.txt</file>
         <file>datos/smiles.txt</file>
         <file>datos/svm_gfxmode.txt</file>
@@ -38,6 +45,9 @@
         <file>images/grlida_logo.png</file>
         <file>images/juego_eliminado.png</file>
         <file>images/juego_sin_imagen.png</file>
+        <file>images/list_bg.jpg</file>
+        <file>images/list_cover.png</file>
+        <file>images/list_cover_top.png</file>
         <file>images/splash.png</file>
         <file>images/star_off.png</file>
         <file>images/star_on.png</file>
@@ -70,6 +80,8 @@
         <file>img16/cd_multi_iso.png</file>
         <file>img16/cerrar.png</file>
         <file>img16/controller.png</file>
+        <file>img16/cover_create.png</file>
+        <file>img16/cover_mode.png</file>
         <file>img16/datos_1.png</file>
         <file>img16/datos_2.png</file>
         <file>img16/datos_3.png</file>
@@ -109,7 +121,9 @@
         <file>img16/floppy_1.png</file>
         <file>img16/floppy_2.png</file>
         <file>img16/floppy_3.png</file>
+        <file>img16/go-back.png</file>
         <file>img16/go-down.png</file>
+        <file>img16/go-next.png</file>
         <file>img16/go-up.png</file>
         <file>img16/grafica.png</file>
         <file>img16/grlida.png</file>
@@ -147,6 +161,7 @@
         <file>img16/mp_stop.png</file>
         <file>img16/ms-dos.png</file>
         <file>img16/ms-dos_win9x.png</file>
+        <file>img16/multimedia.png</file>
         <file>img16/nes.png</file>
         <file>img16/nuevo.png</file>
         <file>img16/opciones.png</file>
@@ -155,6 +170,7 @@
         <file>img16/pc.png</file>
         <file>img16/pictureflow.png</file>
         <file>img16/qt.png</file>
+        <file>img16/ruleta.png</file>
         <file>img16/s_cd_iso.png</file>
         <file>img16/s_cd_multi_iso.png</file>
         <file>img16/s_drive_cdrom.png</file>
@@ -239,13 +255,16 @@
         <file>imgsvm/93.png</file>
         <file>imgsvm/95.png</file>
         <file>imgsvm/98.png</file>
+        <file>imgsvm/logo_activision.png</file>
         <file>imgsvm/logo_coktel_vision.png</file>
         <file>imgsvm/logo_lucas_arts.png</file>
+        <file>imgsvm/logo_revolution_software.png</file>
         <file>imgsvm/logo_sierra.png</file>
         <file>imgsvm/sin_num.png</file>
         <file>imgsvm/svmlist_space.png</file>
         <file>license.gpl</file>
         <file>list_translators.txt</file>
+        <file>scripts/gr-lida.js</file>
         <file>scripts/laisladelabandoware.js</file>
         <file>scripts/mobygames.js</file>
         <file>smiles/biggrin.png</file>
@@ -261,12 +280,76 @@
         <file>smiles/surprised.png</file>
         <file>smiles/wink.png</file>
         <file>tpl_juego_info.html</file>
-        <file>img16/go-back.png</file>
-        <file>img16/go-next.png</file>
-        <file>img16/multimedia.png</file>
-        <file>img16/ruleta.png</file>
-        <file>datos/dbx_cpu_type.txt</file>
-        <file>datos/dbx_sb_oplrate.txt</file>
-        <file>datos/dbx_sb_oplemu.txt</file>
+        <file>tpl_info.html</file>
+        <file>img16/column_list.png</file>
+        <file>icon_svm/bargon.png</file>
+        <file>icon_svm/bc.png</file>
+        <file>icon_svm/comi.png</file>
+        <file>icon_svm/cruise.png</file>
+        <file>icon_svm/dig.png</file>
+        <file>icon_svm/drascula.png</file>
+        <file>icon_svm/dw.png</file>
+        <file>icon_svm/elvira.png</file>
+        <file>icon_svm/fan.png</file>
+        <file>icon_svm/fbear.png</file>
+        <file>icon_svm/feeble.png</file>
+        <file>icon_svm/ffish.png</file>
+        <file>icon_svm/field.png</file>
+        <file>icon_svm/ft.png</file>
+        <file>icon_svm/fw.png</file>
+        <file>icon_svm/gob.png</file>
+        <file>icon_svm/gr.png</file>
+        <file>icon_svm/ihnm.png</file>
+        <file>icon_svm/indy3.png</file>
+        <file>icon_svm/indy4.png</file>
+        <file>icon_svm/ite.png</file>
+        <file>icon_svm/kq.png</file>
+        <file>icon_svm/kyra.png</file>
+        <file>icon_svm/lgop2.png</file>
+        <file>icon_svm/loom.png</file>
+        <file>icon_svm/lostintime.png</file>
+        <file>icon_svm/lsl.png</file>
+        <file>icon_svm/lure.png</file>
+        <file>icon_svm/manhole.png</file>
+        <file>icon_svm/maniac.png</file>
+        <file>icon_svm/mh.png</file>
+        <file>icon_svm/mickey.png</file>
+        <file>icon_svm/monkey1.png</file>
+        <file>icon_svm/monkey2.png</file>
+        <file>icon_svm/mumg.png</file>
+        <file>icon_svm/nippon.png</file>
+        <file>icon_svm/pajama.png</file>
+        <file>icon_svm/pq.png</file>
+        <file>icon_svm/puttputt.png</file>
+        <file>icon_svm/queen.png</file>
+        <file>icon_svm/rodney.png</file>
+        <file>icon_svm/rtz.png</file>
+        <file>icon_svm/samnmax.png</file>
+        <file>icon_svm/simon.png</file>
+        <file>icon_svm/sinimg.png</file>
+        <file>icon_svm/sky.png</file>
+        <file>icon_svm/sports.png</file>
+        <file>icon_svm/spyfox.png</file>
+        <file>icon_svm/sq.png</file>
+        <file>icon_svm/sword1.png</file>
+        <file>icon_svm/sword2.png</file>
+        <file>icon_svm/t7g.png</file>
+        <file>icon_svm/tentacle.png</file>
+        <file>icon_svm/thinkers.png</file>
+        <file>icon_svm/touche.png</file>
+        <file>icon_svm/troll.png</file>
+        <file>icon_svm/tucker.png</file>
+        <file>icon_svm/waxworks.png</file>
+        <file>icon_svm/ween.png</file>
+        <file>icon_svm/winnie.png</file>
+        <file>icon_svm/woodruff.png</file>
+        <file>icon_svm/zak.png</file>
+        <file>img16/edad_3.png</file>
+        <file>img16/edad_7.png</file>
+        <file>img16/edad_12.png</file>
+        <file>img16/edad_16.png</file>
+        <file>img16/edad_18.png</file>
+        <file>img16/edad_nd.png</file>
+        <file>img16/edad_tp.png</file>
     </qresource>
 </RCC>
