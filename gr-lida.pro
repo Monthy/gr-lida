@@ -66,7 +66,8 @@ HEADERS += src/grlida_img_viewer.h \
     src/grlida_vdmsadd.h \
     src/stardelegate.h \
     src/httpdownload.h \
-    src/qtzip.h
+    src/qtzip.h \
+    src/grlida_instalar_juego.h
 
 SOURCES += src/grlida_img_viewer.cpp \
     src/grlida_info.cpp \
@@ -92,7 +93,8 @@ SOURCES += src/grlida_img_viewer.cpp \
     src/httpdownload.cpp \
     src/stardelegate.cpp \
     src/main.cpp \
-    src/qtzip.cpp
+    src/qtzip.cpp \
+    src/grlida_instalar_juego.cpp
 
 FORMS += ui/image_viewer.ui \
     ui/login_url.ui \
@@ -113,7 +115,8 @@ FORMS += ui/image_viewer.ui \
     ui/multimedia.ui \
     ui/svmadd.ui \
     ui/vdmsound.ui \
-    ui/informacion.ui
+    ui/informacion.ui \
+    ui/instalar_juego.ui
 
 # ###### 3rdparty Files
 HEADERS += 3rdparty/pictureflow-qt/pictureflow.h
