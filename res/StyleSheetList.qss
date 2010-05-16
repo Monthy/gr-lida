@@ -1,0 +1,27 @@
+QListWidget {
+	background-image:url(<theme>images/list_bg.jpg);
+	margin: 0px;
+	padding: 0px;
+}
+
+QListWidget::item {
+	border: 1px solid transparent;
+	padding: 0px 0px 0px 10px;
+	margin: 0px;
+}
+
+QListView::item:hover {
+	background-color: transparent;
+}
+
+QListView::item:selected {
+	border-color: transparent;
+}
+
+QListView::item:selected:active {
+	background-color: transparent;
+}
+
+QListView::item:selected:!active {
+	background-color: transparent;
+}
