@@ -42,10 +42,14 @@ public:
 
 	Ui::AddEditDosBoxClass ui;
 
+	bool isCorrectNext();
 	void setEditandoJuego(bool editando = false);
 	void CargarConfigDosBox();
 	void setConfigDefecto();
 	void CargarDatosDosBox(QString IDGrl, QString ProfileGame = "", bool isProfileGame = false);
+	void CargarDatosDosBox(QHash<QString, QString> datosDbx, QString IDGrl = "", bool isProfileGame = false);
+	void CargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
+
 	QHash<QString, QString> setDatosDosBox();
 
 private:
@@ -65,9 +69,10 @@ private:
 	void PrevierMontajes();
 	void CargarDatosDBxMontaje( QString IDdbx);
 	QString setOpcionesSerial();
+	void addMontajeAutoexec(QString tipo, QString dir_file);
 
 private slots:
-	void on_setProfileGame(const QString ProfileGame);
+	void on_setProfileGame(int row);
 	void on_btnDbx_FileConfg();
 	void on_btnDbx_ExeJuego();
 	void on_btnDbx_ExeSetup();
@@ -85,6 +90,15 @@ private slots:
 	void on_btnMount_Bajar();
 	void on_btnMount_AutoCrear();
 	void on_btnMount_Primario();
+
+// Menu Herramintas de Montaje en Autoexec
+
+	void on_btnToolDbx_mount_HD();
+	void on_btnToolDbx_mount_CD();
+	void on_btnToolDbx_mount_Floppy();
+	void on_btnToolDbx_mount_ImgFloppy();
+	void on_btnToolDbx_mount_ImgCD();
+	void on_btnToolDbx_mount_ImgHD();
 
 };
 
