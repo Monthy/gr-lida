@@ -27,6 +27,7 @@
 
 #include <QtCore>
 #include <QtGui>
+#include <QTextEdit>
 
 #include "funciones.h"
 #include "dbsql.h"
@@ -47,8 +48,6 @@ public:
 	QHash<QString, QString> DatosDosBox;
 	QHash<QString, QString> DatosVDMSound;
 
-	QString stItemIDVdms;
-
 protected:
 	void closeEvent( QCloseEvent *e );
 
@@ -58,16 +57,17 @@ private:
 	Funciones fGrl;
 	dbSql *sql;
 
-	int m_rating;
 	bool EditandoJuego;
-	QString TipoEmulador;
-	QString stItemIDGrl;
 
 	QString stTituloAddEdit(){ return windowTitle(); }
-	QString stHomeDir, stIconDir, stDatosDir, stTheme, stUsuario;
-	QStringList filters;
-	QFile file_thumbs, file_cover_front, file_cover_back;
+	QString stItemIDGrl, TipoEmulador;
+	QString stHomeDir, stIconDir, stDatosDir, stTheme, stTempDir, stUsuario;
+
+	QString stCoversDir, stThumbsDir, stListThumbsDir;
 	QString stThumbs, stCoverFront, stCoverBack;
+	QString file_thumbs, file_cover_front, file_cover_back;
+
+	QStringList filters;
 	QHash<QString, QString> listSmailes;
 
 	QUrl my_url;
@@ -79,10 +79,6 @@ private:
 // Referente al DatosJuego ---------------------------------------
 	void CargarDatosJuego(QString stIDIndex);
 	void setDatosJuegos();
-
-// Referente al VDMSound -----------------------------------------
-	void CargarDatosVDMSound(QString stIDvdms);
-	void setDatosVDMSound();
 
 private slots:
 	void on_btnOk();
@@ -111,15 +107,17 @@ private slots:
 	void on_btnTool_TextoSubrayado();
 	void on_btnTool_InsertarImg();
 	void on_btnTool_InsertaUrl();
-	void on_btnTool_Buscar();
+	void on_btnTool_Buscar(bool estado);
+	void on_btnTool_Reemplazar(bool estado);
+	void on_btnTool_ReemplazarTexto();
 	void on_btnTool_BuscarAnterior();
 	void on_btnTool_BuscarSiguiente();
-	void on_btnTool_Reemplazar();
 	void on_btnTool_Preview();
 	void on_btnNuevaUrl();
 	void on_btnEditarUrl();
 	void on_btnEliminarUrl();
 	void on_btnAbrirUrl();
+	void on_btnDatos_ExeJuego();
 	void on_btnDatosFiles_PathFile();
 	void on_btnAddFile();
 	void on_btnEditFile();
@@ -127,12 +125,7 @@ private slots:
 	void on_btnDeleteFile();
 	void on_twDatosFiles_Dblclicked(QTreeWidgetItem *item);
 
-// ---------------------------------------------------------------
-// Referente al VDMSound -----------------------------------------
-	void on_btnVdms_FileConfg();
-	void on_btnVdms_ExeJuego();
-	void on_btnVdms_Icono();
-// ---------------------------------------------------------------
+	void findText(QString text, bool m_anterior = false);
 };
 
 #endif // GRLIDA_ADDEDIT_JUEGO_H
