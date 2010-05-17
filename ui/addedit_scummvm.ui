@@ -1,68 +1,74 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>AddEditScummVMClass</class>
- <widget class="QTabWidget" name="AddEditScummVMClass" >
-  <property name="geometry" >
+ <widget class="QTabWidget" name="AddEditScummVMClass">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>591</width>
-    <height>454</height>
+    <width>620</width>
+    <height>481</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Configuración del ScummVM</string>
   </property>
-  <property name="currentIndex" >
+  <property name="currentIndex">
    <number>1</number>
   </property>
-  <widget class="QWidget" name="tabSvm_1" >
-   <attribute name="title" >
-    <string>Selecciona un Juego del ScummVM</string>
-   </attribute>
-   <attribute name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <widget class="QWidget" name="tabSvm_1">
+   <attribute name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout" >
-    <property name="margin" >
+   <attribute name="title">
+    <string>Selecciona un Juego del ScummVM</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QTreeWidget" name="twScummVM" >
-      <property name="focusPolicy" >
+     <widget class="QTreeWidget" name="twScummVM">
+      <property name="focusPolicy">
        <enum>Qt::ClickFocus</enum>
       </property>
-      <property name="showDropIndicator" stdset="0" >
+      <property name="showDropIndicator" stdset="0">
        <bool>false</bool>
       </property>
-      <property name="iconSize" >
+      <property name="iconSize">
        <size>
         <width>27</width>
-        <height>15</height>
+        <height>24</height>
        </size>
       </property>
-      <property name="textElideMode" >
+      <property name="textElideMode">
        <enum>Qt::ElideNone</enum>
       </property>
-      <property name="rootIsDecorated" >
+      <property name="rootIsDecorated">
        <bool>false</bool>
       </property>
-      <property name="uniformRowHeights" >
+      <property name="uniformRowHeights">
        <bool>true</bool>
       </property>
-      <property name="itemsExpandable" >
+      <property name="itemsExpandable">
        <bool>false</bool>
       </property>
-      <property name="allColumnsShowFocus" >
+      <property name="allColumnsShowFocus">
        <bool>true</bool>
       </property>
       <column>
-       <property name="text" >
+       <property name="text">
+        <string>%</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Selecciona el Juego a añadir</string>
        </property>
       </column>
       <column>
-       <property name="text" >
+       <property name="text">
         <string>Config</string>
        </property>
       </column>
@@ -70,48 +76,48 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="tabSvm_2" >
-   <attribute name="title" >
-    <string>Opciones del Juego</string>
-   </attribute>
-   <attribute name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <widget class="QWidget" name="tabSvm_2">
+   <attribute name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/opciones.png</normaloff>:/img16/opciones.png</iconset>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_2" >
-    <property name="margin" >
+   <attribute name="title">
+    <string>Opciones del Juego</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="groupBox_14" >
-      <property name="title" >
+     <widget class="QGroupBox" name="groupBox_14">
+      <property name="title">
        <string>Opciones Generales</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_14" >
-       <property name="leftMargin" >
+      <layout class="QVBoxLayout" name="verticalLayout_14">
+       <property name="leftMargin">
         <number>4</number>
        </property>
-       <property name="topMargin" >
+       <property name="topMargin">
         <number>4</number>
        </property>
-       <property name="rightMargin" >
+       <property name="rightMargin">
         <number>20</number>
        </property>
-       <property name="bottomMargin" >
+       <property name="bottomMargin">
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout_12" >
-         <item row="0" column="0" >
-          <widget class="QLabel" name="lb_Svm_1" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_12">
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_Svm_1">
+           <property name="text">
             <string>Etiqueta:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
-          <widget class="QLineEdit" name="txtSvm_game_label" >
-           <property name="minimumSize" >
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="txtSvm_game_label">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -119,36 +125,36 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2" >
-          <widget class="QLabel" name="lb_Svm_24" >
-           <property name="text" >
+         <item row="0" column="2">
+          <widget class="QLabel" name="lb_Svm_24">
+           <property name="text">
             <string>GameID:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="3" colspan="4" >
-          <widget class="QLineEdit" name="txtSvm_gameid" >
-           <property name="minimumSize" >
+         <item row="0" column="3" colspan="4">
+          <widget class="QLineEdit" name="txtSvm_gameid">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
            </property>
-           <property name="readOnly" >
+           <property name="readOnly">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="lb_Svm_2" >
-           <property name="text" >
+         <item row="1" column="0">
+          <widget class="QLabel" name="lb_Svm_2">
+           <property name="text">
             <string>Directorio:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1" colspan="4" >
-          <widget class="QLineEdit" name="txtSvm_path" >
-           <property name="minimumSize" >
+         <item row="1" column="1" colspan="4">
+          <widget class="QLineEdit" name="txtSvm_path">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -156,56 +162,56 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="5" >
-          <widget class="QPushButton" name="btnDirSvm_1" >
-           <property name="minimumSize" >
+         <item row="1" column="5">
+          <widget class="QPushButton" name="btnDirSvm_1">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="1" column="6" >
-          <widget class="QPushButton" name="btnDirSvm_1_clear" >
-           <property name="minimumSize" >
+         <item row="1" column="6">
+          <widget class="QPushButton" name="btnDirSvm_1_clear">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" >
-          <widget class="QLabel" name="lb_Svm_3" >
-           <property name="text" >
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_Svm_3">
+           <property name="text">
             <string>Guardar partida:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1" colspan="4" >
-          <widget class="QLineEdit" name="txtSvm_savepath" >
-           <property name="minimumSize" >
+         <item row="2" column="1" colspan="4">
+          <widget class="QLineEdit" name="txtSvm_savepath">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -213,56 +219,56 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="5" >
-          <widget class="QPushButton" name="btnDirSvm_2" >
-           <property name="minimumSize" >
+         <item row="2" column="5">
+          <widget class="QPushButton" name="btnDirSvm_2">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="2" column="6" >
-          <widget class="QPushButton" name="btnDirSvm_2_clear" >
-           <property name="minimumSize" >
+         <item row="2" column="6">
+          <widget class="QPushButton" name="btnDirSvm_2_clear">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="3" column="0" >
-          <widget class="QLabel" name="lb_Svm_4" >
-           <property name="text" >
+         <item row="3" column="0">
+          <widget class="QLabel" name="lb_Svm_4">
+           <property name="text">
             <string>Idioma:</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="1" >
-          <widget class="QComboBox" name="cbxSvm_language" >
-           <property name="minimumSize" >
+         <item row="3" column="1">
+          <widget class="QComboBox" name="cbxSvm_language">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -270,16 +276,16 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="2" >
-          <widget class="QLabel" name="lb_Svm_8" >
-           <property name="text" >
+         <item row="3" column="2">
+          <widget class="QLabel" name="lb_Svm_8">
+           <property name="text">
             <string>Lector de CD:</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="3" colspan="2" >
-          <widget class="QComboBox" name="cbxSvm_cdrom" >
-           <property name="minimumSize" >
+         <item row="3" column="3" colspan="2">
+          <widget class="QComboBox" name="cbxSvm_cdrom">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -287,16 +293,16 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="0" >
-          <widget class="QLabel" name="lb_Svm_5" >
-           <property name="text" >
+         <item row="4" column="0">
+          <widget class="QLabel" name="lb_Svm_5">
+           <property name="text">
             <string>Plataforma:</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="1" >
-          <widget class="QComboBox" name="cbxSvm_platform" >
-           <property name="minimumSize" >
+         <item row="4" column="1">
+          <widget class="QComboBox" name="cbxSvm_platform">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -304,85 +310,85 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="2" >
-          <widget class="QLabel" name="lb_Svm_9" >
-           <property name="text" >
+         <item row="4" column="2">
+          <widget class="QLabel" name="lb_Svm_9">
+           <property name="text">
             <string>Joystick:</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="3" colspan="2" >
-          <widget class="QComboBox" name="cbxSvm_joystick_num" >
-           <property name="minimumSize" >
+         <item row="4" column="3" colspan="2">
+          <widget class="QComboBox" name="cbxSvm_joystick_num">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
            </property>
            <item>
-            <property name="text" >
+            <property name="text">
              <string>Joystick 1</string>
             </property>
-            <property name="icon" >
-             <iconset resource="../res/grlida.qrc" >
+            <property name="icon">
+             <iconset resource="../res/grlida.qrc">
               <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
             </property>
            </item>
            <item>
-            <property name="text" >
+            <property name="text">
              <string>Joystick 2</string>
             </property>
-            <property name="icon" >
-             <iconset resource="../res/grlida.qrc" >
+            <property name="icon">
+             <iconset resource="../res/grlida.qrc">
               <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
             </property>
            </item>
           </widget>
          </item>
-         <item row="5" column="0" >
-          <widget class="QLabel" name="lb_Svm_6" >
-           <property name="text" >
+         <item row="5" column="0">
+          <widget class="QLabel" name="lb_Svm_6">
+           <property name="text">
             <string>Modo Gráfico:</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="1" >
-          <widget class="QComboBox" name="cbxSvm_gfx_mode" >
-           <property name="minimumSize" >
+         <item row="5" column="1">
+          <widget class="QComboBox" name="cbxSvm_gfx_mode">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="5" column="2" colspan="2" >
-          <widget class="QCheckBox" name="chkSvm_subtitles" >
-           <property name="text" >
+         <item row="5" column="2" colspan="2">
+          <widget class="QCheckBox" name="chkSvm_subtitles">
+           <property name="text">
             <string>Mostras Subtitulo</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="4" colspan="3" >
-          <widget class="QCheckBox" name="chkSvm_copy_protection" >
-           <property name="text" >
+         <item row="5" column="4" colspan="3">
+          <widget class="QCheckBox" name="chkSvm_copy_protection">
+           <property name="text">
             <string>Copy-Protection</string>
            </property>
           </widget>
          </item>
-         <item row="6" column="0" >
-          <widget class="QLabel" name="lb_Svm_7" >
-           <property name="text" >
+         <item row="6" column="0">
+          <widget class="QLabel" name="lb_Svm_7">
+           <property name="text">
             <string>Modo de Render:</string>
            </property>
           </widget>
          </item>
-         <item row="6" column="1" >
-          <widget class="QComboBox" name="cbxSvm_render_mode" >
-           <property name="minimumSize" >
+         <item row="6" column="1">
+          <widget class="QComboBox" name="cbxSvm_render_mode">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -390,30 +396,23 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="2" colspan="2" >
-          <widget class="QCheckBox" name="chkSvm_fullscreen" >
-           <property name="text" >
-            <string>Pantalla Completa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="2" colspan="2" >
-          <widget class="QCheckBox" name="chkSvm_aspect_ratio" >
-           <property name="text" >
+         <item row="7" column="2" colspan="2">
+          <widget class="QCheckBox" name="chkSvm_aspect_ratio">
+           <property name="text">
             <string>Aspect-ratio</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="0" >
-          <widget class="QLabel" name="lb_Svm_10" >
-           <property name="text" >
+         <item row="8" column="0">
+          <widget class="QLabel" name="lb_Svm_10">
+           <property name="text">
             <string>Directorio Extra:</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="1" colspan="4" >
-          <widget class="QLineEdit" name="txtSvm_extrapath" >
-           <property name="minimumSize" >
+         <item row="8" column="1" colspan="4">
+          <widget class="QLineEdit" name="txtSvm_extrapath">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -421,56 +420,56 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="5" >
-          <widget class="QPushButton" name="btnDirSvm_3" >
-           <property name="minimumSize" >
+         <item row="8" column="5">
+          <widget class="QPushButton" name="btnDirSvm_3">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="8" column="6" >
-          <widget class="QPushButton" name="btnDirSvm_3_clear" >
-           <property name="minimumSize" >
+         <item row="8" column="6">
+          <widget class="QPushButton" name="btnDirSvm_3_clear">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="9" column="0" >
-          <widget class="QLabel" name="lb_Svm_11" >
-           <property name="text" >
+         <item row="9" column="0">
+          <widget class="QLabel" name="lb_Svm_11">
+           <property name="text">
             <string>Directorio Capturas:</string>
            </property>
           </widget>
          </item>
-         <item row="9" column="1" colspan="4" >
-          <widget class="QLineEdit" name="txtSvm_path_capturas" >
-           <property name="minimumSize" >
+         <item row="9" column="1" colspan="4">
+          <widget class="QLineEdit" name="txtSvm_path_capturas">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -478,56 +477,56 @@
            </property>
           </widget>
          </item>
-         <item row="9" column="5" >
-          <widget class="QPushButton" name="btnDirSvm_4" >
-           <property name="minimumSize" >
+         <item row="9" column="5">
+          <widget class="QPushButton" name="btnDirSvm_4">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="9" column="6" >
-          <widget class="QPushButton" name="btnDirSvm_4_clear" >
-           <property name="minimumSize" >
+         <item row="9" column="6">
+          <widget class="QPushButton" name="btnDirSvm_4_clear">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="10" column="0" >
-          <widget class="QLabel" name="lb_Svm_12" >
-           <property name="text" >
+         <item row="10" column="0">
+          <widget class="QLabel" name="lb_Svm_12">
+           <property name="text">
             <string>Directorio Sonido:</string>
            </property>
           </widget>
          </item>
-         <item row="10" column="1" colspan="4" >
-          <widget class="QLineEdit" name="txtSvm_path_sonido" >
-           <property name="minimumSize" >
+         <item row="10" column="1" colspan="4">
+          <widget class="QLineEdit" name="txtSvm_path_sonido">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -535,56 +534,56 @@
            </property>
           </widget>
          </item>
-         <item row="10" column="5" >
-          <widget class="QPushButton" name="btnDirSvm_5" >
-           <property name="minimumSize" >
+         <item row="10" column="5">
+          <widget class="QPushButton" name="btnDirSvm_5">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="10" column="6" >
-          <widget class="QPushButton" name="btnDirSvm_5_clear" >
-           <property name="minimumSize" >
+         <item row="10" column="6">
+          <widget class="QPushButton" name="btnDirSvm_5_clear">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="11" column="0" >
-          <widget class="QLabel" name="lb_Svm_23" >
-           <property name="text" >
+         <item row="11" column="0">
+          <widget class="QLabel" name="lb_Svm_23">
+           <property name="text">
             <string>Setup del Juego:</string>
            </property>
           </widget>
          </item>
-         <item row="11" column="1" colspan="4" >
-          <widget class="QLineEdit" name="txtSvm_path_setup" >
-           <property name="minimumSize" >
+         <item row="11" column="1" colspan="4">
+          <widget class="QLineEdit" name="txtSvm_path_setup">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -592,54 +591,61 @@
            </property>
           </widget>
          </item>
-         <item row="11" column="5" >
-          <widget class="QPushButton" name="btnDirSvm_7" >
-           <property name="minimumSize" >
+         <item row="11" column="5">
+          <widget class="QPushButton" name="btnDirSvm_7">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="11" column="6" >
-          <widget class="QPushButton" name="btnDirSvm_7_clear" >
-           <property name="minimumSize" >
+         <item row="11" column="6">
+          <widget class="QPushButton" name="btnDirSvm_7_clear">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2" colspan="2">
+          <widget class="QCheckBox" name="chkSvm_fullscreen">
+           <property name="text">
+            <string>Pantalla Completa</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_13" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer_13">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>37</height>
@@ -652,48 +658,48 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="tabSvm_3" >
-   <attribute name="title" >
-    <string>Opciones de Sonido</string>
-   </attribute>
-   <attribute name="icon" >
-    <iconset resource="../res/grlida.qrc" >
+  <widget class="QWidget" name="tabSvm_3">
+   <attribute name="icon">
+    <iconset resource="../res/grlida.qrc">
      <normaloff>:/img16/img_audio.png</normaloff>:/img16/img_audio.png</iconset>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_3" >
-    <property name="margin" >
+   <attribute name="title">
+    <string>Opciones de Sonido</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="groupBox_15" >
-      <property name="title" >
+     <widget class="QGroupBox" name="groupBox_15">
+      <property name="title">
        <string>Opciones de Sonido</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_15" >
-       <property name="leftMargin" >
+      <layout class="QVBoxLayout" name="verticalLayout_15">
+       <property name="leftMargin">
         <number>4</number>
        </property>
-       <property name="topMargin" >
+       <property name="topMargin">
         <number>4</number>
        </property>
-       <property name="rightMargin" >
+       <property name="rightMargin">
         <number>20</number>
        </property>
-       <property name="bottomMargin" >
+       <property name="bottomMargin">
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout_13" >
-         <item row="0" column="0" >
-          <widget class="QLabel" name="lb_Svm_13" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_13">
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_Svm_13">
+           <property name="text">
             <string>Modo de Audio:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
-          <widget class="QComboBox" name="cbxSvm_music_driver" >
-           <property name="minimumSize" >
+         <item row="0" column="1" colspan="5">
+          <widget class="QComboBox" name="cbxSvm_music_driver">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -701,36 +707,16 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2" >
-          <widget class="QLabel" name="lb_Svm_20" >
-           <property name="text" >
-            <string>Output Rate:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3" colspan="3" >
-          <widget class="QComboBox" name="cbxSvm_output_rate" >
-           <property name="minimumSize" >
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex" >
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="lb_Svm_22" >
-           <property name="text" >
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_Svm_22">
+           <property name="text">
             <string>Sound_Font:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1" colspan="3" >
-          <widget class="QLineEdit" name="txtSvm_soundfont" >
-           <property name="minimumSize" >
+         <item row="2" column="1" colspan="3">
+          <widget class="QLineEdit" name="txtSvm_soundfont">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -738,76 +724,88 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="4" >
-          <widget class="QPushButton" name="btnDirSvm_6" >
-           <property name="maximumSize" >
+         <item row="2" column="4">
+          <widget class="QPushButton" name="btnDirSvm_6">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="1" column="5" >
-          <widget class="QPushButton" name="btnDirSvm_6_clear" >
-           <property name="maximumSize" >
+         <item row="2" column="5">
+          <widget class="QPushButton" name="btnDirSvm_6_clear">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" >
-          <widget class="QLabel" name="lb_Svm_14" >
-           <property name="text" >
+         <item row="3" column="0">
+          <widget class="QLabel" name="lb_Svm_14">
+           <property name="text">
             <string>Volumen Música:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
-          <widget class="QSlider" name="h_SliderSvm_music_volume" >
-           <property name="maximum" >
+         <item row="3" column="1">
+          <widget class="QSlider" name="h_SliderSvm_music_volume">
+           <property name="maximum">
             <number>255</number>
            </property>
-           <property name="value" >
+           <property name="value">
             <number>192</number>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="2" column="2" >
-          <widget class="QLabel" name="posSliderSvm_1" >
-           <property name="minimumSize" >
+         <item row="3" column="2">
+          <widget class="QLabel" name="posSliderSvm_1">
+           <property name="minimumSize">
             <size>
              <width>51</width>
              <height>0</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>192</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="3" >
-          <spacer name="horizontalSpacer_5" >
-           <property name="orientation" >
+         <item row="3" column="3">
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeType" >
+           <property name="sizeType">
             <enum>QSizePolicy::Preferred</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -815,289 +813,326 @@
            </property>
           </spacer>
          </item>
-         <item row="3" column="0" >
-          <widget class="QLabel" name="lb_Svm_15" >
-           <property name="text" >
+         <item row="4" column="0">
+          <widget class="QLabel" name="lb_Svm_15">
+           <property name="text">
             <string>Volumen SFX:</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="1" >
-          <widget class="QSlider" name="h_SliderSvm_sfx_volume" >
-           <property name="maximum" >
+         <item row="4" column="1">
+          <widget class="QSlider" name="h_SliderSvm_sfx_volume">
+           <property name="maximum">
             <number>255</number>
            </property>
-           <property name="value" >
+           <property name="value">
             <number>192</number>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="3" column="2" >
-          <widget class="QLabel" name="posSliderSvm_2" >
-           <property name="minimumSize" >
+         <item row="4" column="2">
+          <widget class="QLabel" name="posSliderSvm_2">
+           <property name="minimumSize">
             <size>
              <width>51</width>
              <height>0</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>192</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0" >
-          <widget class="QLabel" name="lb_Svm_16" >
-           <property name="text" >
+         <item row="5" column="0">
+          <widget class="QLabel" name="lb_Svm_16">
+           <property name="text">
             <string>Volumen Speech:</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="1" >
-          <widget class="QSlider" name="h_SliderSvm_speech_volume" >
-           <property name="maximum" >
+         <item row="5" column="1">
+          <widget class="QSlider" name="h_SliderSvm_speech_volume">
+           <property name="maximum">
             <number>255</number>
            </property>
-           <property name="value" >
+           <property name="value">
             <number>192</number>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="4" column="2" >
-          <widget class="QLabel" name="posSliderSvm_3" >
-           <property name="minimumSize" >
+         <item row="5" column="2">
+          <widget class="QLabel" name="posSliderSvm_3">
+           <property name="minimumSize">
             <size>
              <width>51</width>
              <height>0</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>192</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="0" >
-          <widget class="QLabel" name="lb_Svm_17" >
-           <property name="text" >
+         <item row="6" column="0">
+          <widget class="QLabel" name="lb_Svm_17">
+           <property name="text">
             <string>Tiempo de la Música:</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="1" >
-          <widget class="QSlider" name="h_SliderSvm_tempo" >
-           <property name="minimum" >
+         <item row="6" column="1">
+          <widget class="QSlider" name="h_SliderSvm_tempo">
+           <property name="minimum">
             <number>50</number>
            </property>
-           <property name="maximum" >
+           <property name="maximum">
             <number>200</number>
            </property>
-           <property name="value" >
+           <property name="value">
             <number>100</number>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="5" column="2" >
-          <widget class="QLabel" name="posSliderSvm_4" >
-           <property name="minimumSize" >
+         <item row="6" column="2">
+          <widget class="QLabel" name="posSliderSvm_4">
+           <property name="minimumSize">
             <size>
              <width>51</width>
              <height>0</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>100</string>
            </property>
           </widget>
          </item>
-         <item row="6" column="0" >
-          <widget class="QLabel" name="lb_Svm_18" >
-           <property name="text" >
+         <item row="7" column="0">
+          <widget class="QLabel" name="lb_Svm_18">
+           <property name="text">
             <string>Velocidad de las Voces:</string>
            </property>
           </widget>
          </item>
-         <item row="6" column="1" >
-          <widget class="QSlider" name="h_SliderSvm_talkspeed" >
-           <property name="maximum" >
+         <item row="7" column="1">
+          <widget class="QSlider" name="h_SliderSvm_talkspeed">
+           <property name="maximum">
             <number>100</number>
            </property>
-           <property name="value" >
+           <property name="value">
             <number>60</number>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="6" column="2" >
-          <widget class="QLabel" name="posSliderSvm_5" >
-           <property name="minimumSize" >
+         <item row="7" column="2">
+          <widget class="QLabel" name="posSliderSvm_5">
+           <property name="minimumSize">
             <size>
              <width>51</width>
              <height>0</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>60</string>
            </property>
           </widget>
          </item>
-         <item row="7" column="0" >
-          <widget class="QLabel" name="lb_Svm_19" >
-           <property name="text" >
+         <item row="8" column="0">
+          <widget class="QLabel" name="lb_Svm_19">
+           <property name="text">
             <string>Nivel de Errores:</string>
            </property>
           </widget>
          </item>
-         <item row="7" column="1" >
-          <widget class="QSlider" name="h_SliderSvm_debuglevel" >
-           <property name="maximum" >
+         <item row="8" column="1">
+          <widget class="QSlider" name="h_SliderSvm_debuglevel">
+           <property name="maximum">
             <number>10</number>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="7" column="2" >
-          <widget class="QLabel" name="posSliderSvm_6" >
-           <property name="minimumSize" >
+         <item row="8" column="2">
+          <widget class="QLabel" name="posSliderSvm_6">
+           <property name="minimumSize">
             <size>
              <width>51</width>
              <height>0</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>0</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="0" >
-          <widget class="QLabel" name="lb_Svm_21" >
-           <property name="text" >
+         <item row="9" column="0">
+          <widget class="QLabel" name="lb_Svm_21">
+           <property name="text">
             <string>Midi Gain:</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="1" >
-          <widget class="QSlider" name="h_SliderSvm_midi_gain" >
-           <property name="maximum" >
+         <item row="9" column="1">
+          <widget class="QSlider" name="h_SliderSvm_midi_gain">
+           <property name="maximum">
             <number>1000</number>
            </property>
-           <property name="value" >
+           <property name="value">
             <number>100</number>
            </property>
-           <property name="sliderPosition" >
+           <property name="sliderPosition">
             <number>100</number>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="8" column="2" >
-          <widget class="QLabel" name="posSliderSvm_7" >
-           <property name="minimumSize" >
+         <item row="9" column="2">
+          <widget class="QLabel" name="posSliderSvm_7">
+           <property name="minimumSize">
             <size>
              <width>51</width>
              <height>0</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>100</string>
            </property>
           </widget>
          </item>
-         <item row="9" column="0" >
-          <widget class="QLabel" name="lb_Svm_25" >
-           <property name="text" >
+         <item row="10" column="0">
+          <widget class="QLabel" name="lb_Svm_25">
+           <property name="text">
             <string>Walk Speed:</string>
            </property>
           </widget>
          </item>
-         <item row="9" column="1" >
-          <widget class="QSlider" name="h_SliderSvm_walkspeed" >
-           <property name="maximum" >
+         <item row="10" column="1">
+          <widget class="QSlider" name="h_SliderSvm_walkspeed">
+           <property name="maximum">
             <number>4</number>
            </property>
-           <property name="value" >
+           <property name="value">
             <number>0</number>
            </property>
-           <property name="sliderPosition" >
+           <property name="sliderPosition">
             <number>0</number>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="9" column="2" >
-          <widget class="QLabel" name="posSliderSvm_8" >
-           <property name="minimumSize" >
+         <item row="10" column="2">
+          <widget class="QLabel" name="posSliderSvm_8">
+           <property name="minimumSize">
             <size>
              <width>51</width>
              <height>0</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>0</string>
            </property>
           </widget>
          </item>
-         <item row="10" column="1" >
-          <widget class="QPushButton" name="btnDefectoSvm" >
-           <property name="minimumSize" >
+         <item row="11" column="1">
+          <widget class="QPushButton" name="btnDefectoSvm">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>26</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Configuración predeterminada</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="11" column="0" colspan="6" >
-          <widget class="QCheckBox" name="chkSvm_multi_midi" >
-           <property name="text" >
+         <item row="12" column="0" colspan="6">
+          <widget class="QCheckBox" name="chkSvm_multi_midi">
+           <property name="text">
             <string>Mixed Adlib/MIDI mode</string>
            </property>
           </widget>
          </item>
-         <item row="12" column="0" colspan="6" >
-          <widget class="QCheckBox" name="chkSvm_native_mt32" >
-           <property name="text" >
+         <item row="13" column="0" colspan="6">
+          <widget class="QCheckBox" name="chkSvm_native_mt32">
+           <property name="text">
             <string>True Roland MT-32 (diseable GM emulation)</string>
            </property>
           </widget>
          </item>
-         <item row="13" column="0" colspan="6" >
-          <widget class="QCheckBox" name="chkSvm_enable_gs" >
-           <property name="text" >
+         <item row="14" column="0" colspan="6">
+          <widget class="QCheckBox" name="chkSvm_enable_gs">
+           <property name="text">
             <string>Permitir el modo de Roland GS</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lb_Svm_26">
+           <property name="text">
+            <string>AdLib emulator:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="cbxSvm_opl_driver">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="lb_Svm_20">
+           <property name="text">
+            <string>Output Rate:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3" colspan="3">
+          <widget class="QComboBox" name="cbxSvm_output_rate">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_14" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer_14">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>4</height>
@@ -1112,7 +1147,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="../res/grlida.qrc" />
+  <include location="../res/grlida.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1121,11 +1156,11 @@
    <receiver>txtSvm_path</receiver>
    <slot>clear()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>548</x>
      <y>90</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>464</x>
      <y>87</y>
     </hint>
@@ -1137,11 +1172,11 @@
    <receiver>txtSvm_savepath</receiver>
    <slot>clear()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>542</x>
      <y>120</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>471</x>
      <y>121</y>
     </hint>
@@ -1153,11 +1188,11 @@
    <receiver>txtSvm_extrapath</receiver>
    <slot>clear()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>550</x>
      <y>303</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>469</x>
      <y>300</y>
     </hint>
@@ -1169,11 +1204,11 @@
    <receiver>txtSvm_path_capturas</receiver>
    <slot>clear()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>544</x>
      <y>333</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>470</x>
      <y>330</y>
     </hint>
@@ -1185,11 +1220,11 @@
    <receiver>txtSvm_path_sonido</receiver>
    <slot>clear()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>549</x>
      <y>364</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>476</x>
      <y>366</y>
     </hint>
@@ -1201,11 +1236,11 @@
    <receiver>txtSvm_path_setup</receiver>
    <slot>clear()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>541</x>
      <y>399</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>482</x>
      <y>399</y>
     </hint>

@@ -42,10 +42,12 @@ public:
 
 	Ui::AddEditScummVMClass ui;
 
+	bool isCorrectNext();
 	void setEditandoJuego(bool editando = false);
 	void CargarConfigScummVM();
 	void setConfigDefecto();
 	void CargarDatosScummVM(QString IDGrl);
+	void CargarDatosScummVM(QHash<QString, QString> datosSvm);
 	QHash<QString, QString> setDatosScummVM();
 
 private:
