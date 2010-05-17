@@ -55,10 +55,6 @@ private:
 private slots:
 	void on_btnOk();
 
-	void on_btnDirPath_Datos_Thumbs();
-	void on_btnDirPath_Datos_CoverFront();
-	void on_btnDirPath_Datos_CoverBack();
-
 	void on_btnOpenDbxFile_1();
 	void on_btnOpenDbxFile_2();
 	void on_btnOpenDbxFile_3();
@@ -77,6 +73,9 @@ private slots:
 
 	void on_btnOpenVdmsFile_1();
 	void on_btnOpenVdmsFile_2();
+
+public slots:
+	void on_changeEnabled(bool estado);
 
 };
 

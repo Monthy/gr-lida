@@ -28,6 +28,7 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
 {
 	ui.setupUi(this);
+	ui.frame_info->setVisible(false);
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stTheme   = fGrl.ThemeGrl();
@@ -50,13 +51,15 @@ frmImportPath::~frmImportPath()
 	//
 }
 
+void frmImportPath::on_changeEnabled(bool estado)
+{
+	ui.btnOk->setEnabled(estado);
+	ui.frame_info->setVisible(!estado);
+}
+
 void frmImportPath::createConnections()
 {
 	connect( ui.btnOk, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
-
-	connect( ui.btnDirPath_Datos_Thumbs    , SIGNAL( clicked() ), this, SLOT( on_btnDirPath_Datos_Thumbs() ) );
-	connect( ui.btnDirPath_Datos_CoverFront, SIGNAL( clicked() ), this, SLOT( on_btnDirPath_Datos_CoverFront() ) );
-	connect( ui.btnDirPath_Datos_CoverBack , SIGNAL( clicked() ), this, SLOT( on_btnDirPath_Datos_CoverBack() ) );
 
 	connect( ui.btnDirPath_Dbx_1 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxFile_1() ) );
 	connect( ui.btnDirPath_Dbx_2 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxFile_2() ) );
@@ -86,10 +89,6 @@ void frmImportPath::setTheme()
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 
-	ui.btnDirPath_Datos_Thumbs->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirPath_Datos_CoverFront->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirPath_Datos_CoverBack->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-
 	ui.btnDirPath_Dbx_1->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDirPath_Dbx_2->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDirPath_Dbx_3->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
@@ -108,6 +107,9 @@ void frmImportPath::setTheme()
 
 	ui.btnDirPath_Vdms_1->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDirPath_Vdms_2->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
 }
 
 void frmImportPath::on_btnOk()
@@ -154,45 +156,6 @@ void frmImportPath::on_btnOk()
 		QDialog::accept();
 	else
 		QDialog::rejected();
-}
-
-void frmImportPath::on_btnDirPath_Datos_Thumbs()
-{
-	ui.txtDatosPath_Thumbs->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Img_Thumbs"].toString(), ui.txtDatosPath_Thumbs->text(), tr("Todos los archivo") + " (*)", 0, false) );
-
-	QFileInfo fi( ui.txtDatosPath_Thumbs->text() );
-	if( fi.exists() )
-		GRLConfig["Img_Thumbs"] = fi.absolutePath();
-	else
-		GRLConfig["Img_Thumbs"] = "";
-
-	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Img_Thumbs", GRLConfig["Img_Thumbs"].toString() );
-}
-
-void frmImportPath::on_btnDirPath_Datos_CoverFront()
-{
-	ui.txtDatosPath_CoverFront->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Img_CoverFront"].toString(), ui.txtDatosPath_CoverFront->text(), tr("Todos los archivo") + " (*)", 0, false) );
-
-	QFileInfo fi( ui.txtDatosPath_CoverFront->text() );
-	if( fi.exists() )
-		GRLConfig["Img_CoverFront"] = fi.absolutePath();
-	else
-		GRLConfig["Img_CoverFront"] = "";
-
-	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Img_CoverFront", GRLConfig["Img_CoverFront"].toString() );
-}
-
-void frmImportPath::on_btnDirPath_Datos_CoverBack()
-{
-	ui.txtDatosPath_CoverBack->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Img_CoverBack"].toString(), ui.txtDatosPath_CoverBack->text(), tr("Todos los archivo") + " (*)", 0, false) );
-
-	QFileInfo fi( ui.txtDatosPath_CoverBack->text() );
-	if( fi.exists() )
-		GRLConfig["Img_CoverBack"] = fi.absolutePath();
-	else
-		GRLConfig["Img_CoverBack"] = "";
-
-	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Img_CoverBack", GRLConfig["Img_CoverBack"].toString() );
 }
 
 void frmImportPath::on_btnOpenDbxFile_1()
