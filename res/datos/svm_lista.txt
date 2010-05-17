@@ -1,115 +1,134 @@
-LucasArts Game Compatibility Chart||logo_lucas_arts
-Maniac Mansion|maniac|90
-Zak McKracken and the Alien Mindbenders|zak|90
-Indiana Jones and the Last Crusade|indy3|90
-Loom|loom|95
-Passport to Adventure|pass|95
-The Secret of Monkey Island|monkey|95
-Monkey Island 2: LeChuck's Revenge|monkey2|95
-Indiana Jones and the Fate of Atlantis|atlantis|95
-Day of the Tentacle|tentacle|95
-Sam & Max Hit the Road|samnmax|95
-Full Throttle|ft|90
-The Dig|dig|90
-The Curse of Monkey Island|comi|90
+LucasArts Game Compatibility Chart||logo_lucas_arts|
+Maniac Mansion|maniac|90|maniac.png
+Zak McKracken and the Alien Mindbenders|zak|90|zak.png
+Indiana Jones and the Last Crusade|indy3|90|indy3.png
+Loom|loom|95|loom.png
+Passport to Adventure|pass|95|pass.png
+The Secret of Monkey Island|monkey|95|monkey1.png
+Monkey Island 2: LeChuck's Revenge|monkey2|95|monkey2.png
+Indiana Jones and the Fate of Atlantis|atlantis|95|indy4.png
+Day of the Tentacle|tentacle|95|tentacle.png
+Sam & Max Hit the Road|samnmax|95|samnmax.png
+Full Throttle|ft|90|ft.png
+The Dig|dig|90|dig.png
+The Curse of Monkey Island|comi|90|comi.png
 
-Adventuresoft/Horrorsoft Game Compatibility Chart||svmlist_space
-Elvira - Mistress of the Dark|elvira1|90
-Elvira II - The Jaws of Cerberus|elvira2|80
-Simon the Sorcerer 1|simon1|95
-Simon the Sorcerer 2|simon2|95
-Simon the Sorcerer's Puzzle Pack - D.I.M.P.|dimp|70
-Simon the Sorcerer's Puzzle Pack - Jumble|jumble|70
-Simon the Sorcerer's Puzzle Pack - NoPatience|puzzle|70
-Simon the Sorcerer's Puzzle Pack - Swampy Adventures|swampy|70
-The Feeble Files|feeble|95
-Waxworks|waxworks|20
+Activision Adventure Game Compatibility Chart||logo_activision|
+Leather Goddesses of Phobos 2|lgop2|90|lgop2.png
+The Manhole|manhole|90|manhole.png
+Return to Zork|rtz|90|rtz.png
+Rodney's Funscreen|rodney|90|rodney.png
 
-Coktel Vision Game Compatibility Chart||logo_coktel_vision
-Bargon Attack|bargon|95
-Gobliiins|gob1|95
-Gobliins 2|gob2|95
-Goblins 3|gob3|95
-Lost in Time|lostintime|95
-The Bizarre Adventures of Woodruff and the Schnibble|woodruff|90
-Ween: The Prophecy|ween|95
+Adventuresoft/Horrorsoft Game Compatibility Chart||svmlist_space|
+Elvira - Mistress of the Dark|elvira1|90|elvira.png
+Elvira II - The Jaws of Cerberus|elvira2|80|elvira.png
+Simon the Sorcerer 1|simon1|95|simon.png
+Simon the Sorcerer 2|simon2|95|simon.png
+Simon the Sorcerer's Puzzle Pack - D.I.M.P.|dimp|70|simon.png
+Simon the Sorcerer's Puzzle Pack - Jumble|jumble|70|simon.png
+Simon the Sorcerer's Puzzle Pack - NoPatience|puzzle|70|simon.png
+Simon the Sorcerer's Puzzle Pack - Swampy Adventures|swampy|70|simon.png
+The Feeble Files|feeble|95|feeble.png
+Waxworks|waxworks|50|waxworks.png
 
-Sierra AGI Game Compatibility Chart||logo_sierra
-The Black Cauldron|bc|90
-Gold Rush!|goldrush|90
-King's Quest I|kq1|90
-King's Quest II|kq2|90
-King's Quest III|kq3|90
-King's Quest IV|kq4|90
-Leisure Suit Larry in the Land of the Lounge Lizards|lsl1|90
-Mixed-Up Mother Goose|mixedup|90
-Manhunter 1: New York|mh1|90
-Manhunter 2: San Francisco|mh2|90
-Police Quest I: In Pursuit of the Death Angel|pq1|90
-Space Quest I: The Sarien Encounter|sq1|90
-Space Quest II: Vohaul's Revenge|sq2|90
-Fanmade Games|agi-fanmade|80
-Mickey's Space Adventure|mickey|90
-Troll's Tale|troll|80
-Winnie the Pooh in the Hundred Acre Wood|winnie|80
+Coktel Vision Game Compatibility Chart||logo_coktel_vision|
+Bargon Attack|bargon|95|bargon.png
+Gobliiins|gob1|95|gob.png
+Gobliins 2|gob2|95|gob.png
+Goblins 3|gob3|95|gob.png
+Lost in Time|lostintime|95|lostintime.png
+The Bizarre Adventures of Woodruff and the Schnibble|woodruff|95|woodruff.png
+Ween: The Prophecy|ween|95|ween.png
 
-Other Game Compatibility Chart||svmlist_space
-Beneath a Steel Sky|sky|98
-Broken Sword 1: The Shadow of the Templars|sword1|98
-Broken Sword 2: The Smoking Mirror|sword2|98
-Bud Tucker in Double Trouble|tucker|95
-Drascula: The Vampire Strikes Back|drascula|98
-Flight of the Amazon Queen|queen|98
-Future Wars|fw|80
-I Have No Mouth, and I Must Scream|ihnm|90
-Inherit the Earth: Quest for the Orb|ite|95
-Nippon Safes Inc.|nippon|90
-The Legend of Kyrandia|kyra1|87
-The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|85
-The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|80
-Lure of the Temptress|lure|95
-The 7th Guest|t7g|90
-Touche: The Adventures of the Fifth Musketeer|touche|75
+Revolution Software Game Compatibility Chart||logo_revolution_software|
+Beneath a Steel Sky|sky|98|sky.png
+Broken Sword: The Shadow of the Templars|sword1|98|sword1.png
+Broken Sword II: The Smoking Mirror|sword2|98|sword2.png
+Lure of the Temptress|lure|95|lure.png
 
-Humongous Entertainment Game Compatibility Chart||svmlist_space
-Backyard Baseball|baseball|20
-Backyard Football|football|80
-Backyard Soccer|soccer|20
-Bear Stormin'|brstorm|95
-Big Thinkers First Grade|thinker1|90
-Big Thinkers Kindergarten|thinkerk|90
-Blue's 123 Time Activities|Blues123Time|90
-Blue's ABC Time Activities|BluesABCTime|90
-Blue's Birthday Adventure|BluesBirthday|50
-Blue's Treasure Hunt|BluesTreasureHunt|50
-Fatty Bear's Birthday Surprise|fbear|93
-Fatty Bear's Fun Pack|fbpack|95
-Freddi Fish 1: The Case of the Missing Kelp Seeds|freddi|90
-Freddi Fish 2: The Case of the Haunted Schoolhouse|freddi2|90
-Freddi Fish 3: The Case of the Stolen Conch Shell|freddi3|90
-Freddi Fish 4: The Case of the Hogfish Rustlers of Briny Gulch|freddi4|90
-Freddi Fish and Luther's Maze Madness|maze|90
-Freddi Fish and Luther's Water Worries|water|90
-Let's Explore the Airport with Buzzy|airport|90
-Let's Explore the Farm with Buzzy|farm|90
-Let's Explore the Jungle with Buzzy|jungle|90
-Pajama Sam 1: No Need to Hide When It's Dark Outside|pajama|90
-Pajama Sam 2: Thunder and Lightning Aren't so Frightening|pajama2|90
-Pajama Sam 3: You Are What You Eat From Your Head to Your Feet|pajama3|90
-Pajama Sam's Lost & Found|lost|85
-Pajama Sam's Sock Works|socks|90
-Putt-Putt Enters the Race|puttrace|90
-Putt-Putt Goes to the Moon|puttmoon|95
-Putt-Putt Joins the Circus|puttcircus|90
-Putt-Putt Joins the Parade|puttputt|95
-Putt-Putt Saves the Zoo|puttzoo|90
-Putt-Putt Travels Through Time|putttime|90
-Putt-Putt and Pep's Balloon-O-Rama|balloon|90
-Putt-Putt and Pep's Dog on a Stick|dog|90
-Putt-Putt & Fatty Bear's Activity Pack|activity|95
-Putt-Putt's Fun Pack|funpack|95
-SPY Fox 1: Dry Cereal|spyfox|90
-SPY Fox 2: Some Assembly Required|spyfox2|90
-SPY Fox 3: Operation Ozone|spyozon|70
-SPY Fox in Cheese Chase|chase|90
-SPY Fox in Hold the Mustard|mustard|85
+Sierra AGI Game Compatibility Chart||logo_sierra|
+The Black Cauldron|bc|90|bc.png
+Gold Rush!|goldrush|90|gr.png
+King's Quest I|kq1|90|kq.png
+King's Quest II|kq2|90|kq.png
+King's Quest III|kq3|90|kq.png
+King's Quest IV|kq4|90|kq.png
+Leisure Suit Larry in the Land of the Lounge Lizards|lsl1|90|lsl.png
+Mixed-Up Mother Goose|mixedup|90|mumg.png
+Manhunter 1: New York|mh1|90|mh.png
+Manhunter 2: San Francisco|mh2|90|mh.png
+Police Quest I: In Pursuit of the Death Angel|pq1|90|pq.png
+Space Quest I: The Sarien Encounter|sq1|90|sq.png
+Space Quest II: Vohaul's Revenge|sq2|90|sq.png
+Fanmade Games|agi-fanmade|80|fan.png
+Mickey's Space Adventure|mickey|90|mickey.png
+Troll's Tale|troll|80|troll.png
+Winnie the Pooh in the Hundred Acre Wood|winnie|80|winnie.png
+
+Other Game Compatibility Chart||svmlist_space|
+Bud Tucker in Double Trouble|tucker|95|tucker.png
+Cruise for a Corpse|cruise|95|cruise.png
+Discworld|dw|98|dw.png
+Discworld II - Missing presumed...!?|dw2|98|dw.png
+Dragon History|draci|90|sinimg.png
+Drascula: The Vampire Strikes Back|drascula|98|drascula.png
+Flight of the Amazon Queen|queen|98|queen.png
+Future Wars|fw|80|fw.png
+I Have No Mouth, and I Must Scream|ihnm|90|ihnm.png
+Inherit the Earth: Quest for the Orb|ite|95|ite.png
+Nippon Safes Inc.|nippon|90|nippon.png
+The Legend of Kyrandia|kyra1|90|kyra.png
+The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|85|kyra.png
+The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|80|kyra.png
+The 7th Guest|t7g|90|t7g.png
+TeenAgent|teenagent|80|sinimg.png
+Touche: The Adventures of the Fifth Musketeer|touche|75|touche.png
+
+Humongous Entertainment Game Compatibility Chart||svmlist_space|
+Backyard Baseball|baseball|20|sports.png
+Backyard Baseball 2001|baseball2001|20|sports.png
+Backyard Baseball 2003|baseball2003|20|sports.png
+Backyard Football|football|80|sports.png
+Backyard Football 2002|football2002|70|sports.png
+Bear Stormin'|brstorm|95|sports.png
+Big Thinkers First Grade|thinker1|90|thinkers.png
+Big Thinkers Kindergarten|thinkerk|90|thinkers.png
+Blue's 123 Time Activities|Blues123Time|90|sinimg.png
+Blue's ABC Time Activities|BluesABCTime|90|sinimg.png
+Blue's Art Time Activities|arttime|90|sinimg.png
+Blue's Birthday Adventure|BluesBirthday|50|sinimg.png
+Blue's Reading Time Activities|readtime|90|sinimg.png
+Blue's Treasure Hunt|BluesTreasureHunt|50|sinimg.png
+Fatty Bear's Birthday Surprise|fbear|95|fbear.png
+Fatty Bear's Fun Pack|fbpack|95|fbear.png
+Freddi Fish 1: The Case of the Missing Kelp Seeds|freddi|90|ffish.png
+Freddi Fish 2: The Case of the Haunted Schoolhouse|freddi2|90|ffish.png
+Freddi Fish 3: The Case of the Stolen Conch Shell|freddi3|90|ffish.png
+Freddi Fish 4: The Case of the Hogfish Rustlers of Briny Gulch|freddi4|90|ffish.png
+Freddi Fish 5: The Case of the Creature of Coral Cove|freddicove|90|ffish.png
+Freddi Fish and Luther's Maze Madness|maze|90|ffish.png
+Freddi Fish and Luther's Water Worries|water|90|ffish.png
+Let's Explore the Airport with Buzzy|airport|90|field.png
+Let's Explore the Farm with Buzzy|farm|90|field.png
+Let's Explore the Jungle with Buzzy|jungle|90|field.png
+Pajama Sam: Games to Play on Any Day|pjgames|70|pajama.png
+Pajama Sam 1: No Need to Hide When It's Dark Outside|pajama|90|pajama.png
+Pajama Sam 2: Thunder and Lightning Aren't so Frightening|pajama2|90|pajama.png
+Pajama Sam 3: You Are What You Eat From Your Head to Your Feet|pajama3|90|pajama.png
+Pajama Sam's Lost & Found|lost|85|pajama.png
+Pajama Sam's Sock Works|socks|90|pajama.png
+Putt-Putt Enters the Race|puttrace|90|puttputt.png
+Putt-Putt Goes to the Moon|puttmoon|95|puttputt.png
+Putt-Putt Joins the Circus|puttcircus|90|puttputt.png
+Putt-Putt Joins the Parade|puttputt|95|puttputt.png
+Putt-Putt Saves the Zoo|puttzoo|90|puttputt.png
+Putt-Putt Travels Through Time|putttime|90|puttputt.png
+Putt-Putt and Pep's Balloon-O-Rama|balloon|90|puttputt.png
+Putt-Putt and Pep's Dog on a Stick|dog|90|puttputt.png
+Putt-Putt & Fatty Bear's Activity Pack|activity|95|puttputt.png
+Putt-Putt's Fun Pack|funpack|95|puttputt.png
+SPY Fox 1: Dry Cereal|spyfox|90|spyfox.png
+SPY Fox 2: Some Assembly Required|spyfox2|90|spyfox.png
+SPY Fox 3: Operation Ozone|spyozon|90|spyfox.png
+SPY Fox in Cheese Chase|chase|90|spyfox.png
+SPY Fox in Hold the Mustard|mustard|85|spyfox.png
