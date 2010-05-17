@@ -6,6 +6,7 @@
 #include <QItemDelegate>
 #include <QSize>
 
+#include "funciones.h"
 #include "dbsql.h"
 
 class StarDelegate : public QItemDelegate
@@ -13,7 +14,7 @@ class StarDelegate : public QItemDelegate
     Q_OBJECT
 
 public:
-	StarDelegate(QString stTheme=":/", QWidget *parent = 0);
+	StarDelegate(QString theme = ":/", QString home_dir = "", int column = 4, QWidget *parent = 0);
 	~StarDelegate();
 
 	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
@@ -22,6 +23,8 @@ public:
 
 private:
 	dbSql *sql;
+	Funciones fGrl;
+	QString stHomeDir, stTheme;
 	QSize mSize;
 	QPixmap star_on, star_off;
 	int num_column, col_Icono;
