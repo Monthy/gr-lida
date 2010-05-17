@@ -59,7 +59,7 @@ class ImportarTwPrototype : public QObject, public QScriptable
 
 private:
 	Funciones fGrl;
-	QString stHomeDir, stTheme;
+	QString stHomeDir, stTheme, stDirBaseGames;
 
 public:
 	ImportarTwPrototype(QObject *parent = 0);
@@ -98,6 +98,8 @@ private:
 	QString img_thumbs, img_cover_front, img_cover_back;
 	QString img_url_cover_thumbs, img_url_cover_front, img_url_cover_back;
 	QFile file_thumbs, file_cover_front, file_cover_back;
+
+	QByteArray CodecFileHtml;
 
 	QHash<QString, QString> DatosJuegoTemp;
 	QHash<QString, QVariant> GRLConfig;

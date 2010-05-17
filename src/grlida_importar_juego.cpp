@@ -31,7 +31,13 @@ Q_DECLARE_METATYPE(QTreeWidget*);
 ImportarTwPrototype::ImportarTwPrototype(QObject *parent)
     : QObject(parent)
 {
-	stTheme = fGrl.ThemeGrl();
+	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
+	stTheme   = fGrl.ThemeGrl();
+
+	QSettings settings(stHomeDir+"GR-lida.conf", QSettings::IniFormat);
+	settings.beginGroup("OpcGeneral");
+		stDirBaseGames = settings.value("DirBaseGames", "").toString();
+	settings.endGroup();
 }
 
 void ImportarTwPrototype::addItemFind(const QString &titulo, const QString &plataforma, const QString &anno, const QString &url, QString icono)
@@ -62,7 +68,7 @@ void ImportarTwPrototype::addItemDatosFiles(const QString &nombre, const QString
 
 void ImportarTwPrototype::addItemMounts(const QString &path, const QString &label, const QString &tipo_as, const QString &letter, const QString &indx_cd, const QString &opt_mount, const QString &io_ctrl, const QString &select_mount)
 {
-	QString img_select_mount;
+	QString img_select_mount, dir_base_path;
 
 	if( select_mount == "v" )
 		img_select_mount = "s_"; else img_select_mount = "";
@@ -70,8 +76,10 @@ void ImportarTwPrototype::addItemMounts(const QString &path, const QString &labe
 	QTreeWidget *widget = qscriptvalue_cast<QTreeWidget*>(thisObject());
 	QTreeWidgetItem *Item = new QTreeWidgetItem(widget);
 
+	dir_base_path = path;
+
 	Item->setIcon(0, QIcon(fGrl.getIconMount(tipo_as, img_select_mount)) );
-	Item->setText(0, path         );
+	Item->setText(0, dir_base_path.replace("{DirBaseGames}", stDirBaseGames) );
 	Item->setText(1, label        );
 	Item->setText(2, tipo_as      );
 	Item->setText(3, letter       );
@@ -130,12 +138,16 @@ frmImportarJuego::frmImportarJuego(QString titulo_busqueda, QDialog *parent, Qt:
 	ui.twListaBusqueda->setColumnWidth(2,35);
 
 	ui.txtTituloBuscar->setText( titulo_busqueda );
+	ui.txtTituloBuscar->setFocus();
 
 	engine.setDefaultPrototype(qMetaTypeId<QTreeWidget*>(), engine.newQObject(&twProto));
 	engine.globalObject().setProperty("twListaBusqueda", engine.newQObject(ui.twListaBusqueda));
 	engine.globalObject().setProperty("twDatosFiles"   , engine.newQObject(ui.twDatosFiles));
 	engine.globalObject().setProperty("twDatosURL"     , engine.newQObject(ui.twDatosURL));
 	engine.globalObject().setProperty("twMounts"       , engine.newQObject(ui.twMontajes));
+
+	CodecFileHtml.clear();
+	CodecFileHtml.append("UTF-8");
 
 	fGrl.CargarScriptsComboBox(stHomeDir+"scripts/", ui.cbxScriptURL);
 
@@ -144,7 +156,6 @@ frmImportarJuego::frmImportarJuego(QString titulo_busqueda, QDialog *parent, Qt:
 
 	ui.cbxScriptURL->setCurrentIndex( rowScript );
 	on_changeScriptURL( rowScript );
-
 
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
@@ -165,27 +176,17 @@ void frmImportarJuego::on_btnOk()
 
 	ImportPathNew->ui.gBox_path_emu->setEnabled( false );
 	ImportPathNew->ui.gBox_path_emu->setTitle("Path");
-
-	if( DatosJuego["Dat_thumbs"] == "" || DatosJuego["Dat_thumbs"] == "null" )
-		ImportPathNew->ui.txtDatosPath_Thumbs->setText("");
-	else {
-		ImportPathNew->ui.txtDatosPath_Thumbs->setText( stThumbsDir + img_thumbs );
-		ImportPathNew->ui.txtDatosPath_Thumbs->setEnabled(true);
-		ImportPathNew->ui.btnDirPath_Datos_Thumbs->setEnabled(true);
-	}
-
-	if( DatosJuego["Dat_cover_front"] == "" || DatosJuego["Dat_cover_front"] == "null" )
-		ImportPathNew->ui.txtDatosPath_CoverFront->setText("");
-	else {
 //---------------------------------------------------------------------------------------
 //       CargarCoverFront
 //---------------------------------------------------------------------------------------
+	if( DatosJuego["Dat_cover_front"] != "" || DatosJuego["Dat_cover_front"] != "null" )
+	{
 		indx_fin_descarga = NohacerNada;
 		if( !img_cover_front.isEmpty() && !img_url_cover_front.isEmpty() )
 		{
 			if( !file_cover_front.exists( stTempDir+img_cover_front ) )
 			{
-				connect(httpdown, SIGNAL( StatusBtnDownloadChanged(bool) ), ImportPathNew->ui.btnOk, SLOT( setEnabled(bool) ) );
+				connect(httpdown, SIGNAL( StatusBtnDownloadChanged(bool) ), ImportPathNew , SLOT( on_changeEnabled(bool) ) );
 				httpdown->downloadFile(img_url_cover_front, stTempDir + img_cover_front);
 			} else
 				isRequestFinished();
@@ -196,20 +197,16 @@ void frmImportarJuego::on_btnOk()
 
 			isRequestFinished();
 		}
+	} else
+		DatosJuego["Dat_cover_front"] = "";
 //---------------------------------------------------------------------------------------
 //       FIN CargarCoverFront
 //---------------------------------------------------------------------------------------
-		ImportPathNew->ui.txtDatosPath_CoverFront->setText( stCoversDir + img_cover_front );
-		ImportPathNew->ui.txtDatosPath_CoverFront->setEnabled(true);
-		ImportPathNew->ui.btnDirPath_Datos_CoverFront->setEnabled(true);
-	}
-
-	if( DatosJuego["Dat_cover_back"] == "" || DatosJuego["Dat_cover_back"] == "null" )
-		ImportPathNew->ui.txtDatosPath_CoverBack->setText("");
-	else {
 //---------------------------------------------------------------------------------------
 //       CargarCoverBack
 //---------------------------------------------------------------------------------------
+	if( DatosJuego["Dat_cover_back"] != "" || DatosJuego["Dat_cover_back"] != "null" )
+	{
 		indx_fin_descarga = NohacerNada;
 		if( !img_cover_back.isEmpty() && !img_url_cover_back.isEmpty() )
 		{
@@ -218,7 +215,7 @@ void frmImportarJuego::on_btnOk()
 				HttpDownload *httpdown_dos = new HttpDownload(this);
 				httpdown_dos->setHidden(true);
 				connect(httpdown_dos, SIGNAL( StatusRequestFinished() ), this, SLOT( isRequestFinished() ) );
-				connect(httpdown_dos, SIGNAL( StatusBtnDownloadChanged(bool) ), ImportPathNew->ui.btnOk, SLOT( setEnabled(bool) ) );
+				connect(httpdown_dos, SIGNAL( StatusBtnDownloadChanged(bool) ), ImportPathNew, SLOT( on_changeEnabled(bool) ) );
 
 				if( GRLConfig["ProxyEnable"].toBool() )
 					httpdown_dos->setHttpProxy( GRLConfig["ProxyType"].toInt(), GRLConfig["ProxyHost"].toString(), GRLConfig["ProxyPort"].toInt(), GRLConfig["ProxyUserName"].toString(), GRLConfig["ProxyPassword"].toString() );
@@ -233,20 +230,23 @@ void frmImportarJuego::on_btnOk()
 
 			isRequestFinished();
 		}
+	} else
+		DatosJuego["Dat_cover_back"] = "";
 //---------------------------------------------------------------------------------------
 //       FIN CargarCoverBack
 //---------------------------------------------------------------------------------------
-		ImportPathNew->ui.txtDatosPath_CoverBack->setText( stCoversDir + img_cover_back );
-		ImportPathNew->ui.txtDatosPath_CoverBack->setEnabled(true);
-		ImportPathNew->ui.btnDirPath_Datos_CoverBack->setEnabled(true);
-	}
 
 	if( DatosJuego["Dat_tipo_emu"] == "dosbox" )
 	{
+		if( QFile::exists(stHomeDir +"confdbx/"+ DatosDosBox["Dbx_path_conf"] ) )
+			ImportPathNew->ui.txtPath_Dbx_1->setText( DatosDosBox["Dbx_path_conf"].prepend(fGrl.HoraFechaActual("ddMMyyyy_HHmmss")+"-") );
+		else
+			ImportPathNew->ui.txtPath_Dbx_1->setText( DatosDosBox["Dbx_path_conf"] ); // path_conf
+
 		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
 		ImportPathNew->ui.gBox_path_emu->setTitle("Path - DOSBox");
 		ImportPathNew->ui.wizardPath->setCurrentIndex(0);
-		ImportPathNew->ui.txtPath_Dbx_1->setText( DatosDosBox["Dbx_path_conf"]       );		// path_conf
+	//	ImportPathNew->ui.txtPath_Dbx_1->setText( DatosDosBox["Dbx_path_conf"]       );		// path_conf
 		ImportPathNew->ui.txtPath_Dbx_2->setText( DatosDosBox["Dbx_path_exe"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_exe
 		ImportPathNew->ui.txtPath_Dbx_3->setText( DatosDosBox["Dbx_path_setup"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_setup
 		ImportPathNew->ui.txtPath_Dbx_4->setText( DatosDosBox["Dbx_dosbox_language"] );		// dosbox_language
@@ -261,29 +261,30 @@ void frmImportarJuego::on_btnOk()
 		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
 		ImportPathNew->ui.gBox_path_emu->setTitle("Path - ScummVM");
 		ImportPathNew->ui.wizardPath->setCurrentIndex(1);
-		ImportPathNew->ui.txtPath_Svm_1->setText( DatosScummVM["path"].replace("{DirBaseGames}"      , GRLConfig["DirBaseGames"].toString() ) );	// path
-		ImportPathNew->ui.txtPath_Svm_2->setText( DatosScummVM["path_save"].replace("{DirBaseGames}" , GRLConfig["DirBaseGames"].toString() ) );	// path_save
-		ImportPathNew->ui.txtPath_Svm_3->setText( DatosScummVM["path_setup"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_setup
-		ImportPathNew->ui.txtPath_Svm_4->setText( DatosScummVM["path_extra"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_extra
-		ImportPathNew->ui.txtPath_Svm_5->setText( DatosScummVM["path_capturas"] );	// path_capturas
-		ImportPathNew->ui.txtPath_Svm_6->setText( DatosScummVM["path_sonido"]   );	// path_sonido
+		ImportPathNew->ui.txtPath_Svm_1->setText( DatosScummVM["Svm_path"].replace("{DirBaseGames}"      , GRLConfig["DirBaseGames"].toString() ) );	// path
+		ImportPathNew->ui.txtPath_Svm_2->setText( DatosScummVM["Svm_path_save"].replace("{DirBaseGames}" , GRLConfig["DirBaseGames"].toString() ) );	// path_save
+		ImportPathNew->ui.txtPath_Svm_3->setText( DatosScummVM["Svm_path_setup"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_setup
+		ImportPathNew->ui.txtPath_Svm_4->setText( DatosScummVM["Svm_path_extra"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_extra
+		ImportPathNew->ui.txtPath_Svm_5->setText( DatosScummVM["Svm_path_capturas"] );	// path_capturas
+		ImportPathNew->ui.txtPath_Svm_6->setText( DatosScummVM["Svm_path_sonido"]   );	// path_sonido
 	}
 
 	if( DatosJuego["Dat_tipo_emu"] == "vdmsound" )
 	{
+		if( QFile::exists(stHomeDir +"confvdms/"+ DatosVDMSound["Vdms_path_conf"] ) )
+			ImportPathNew->ui.txtPath_Dbx_1->setText( DatosVDMSound["Vdms_path_conf"].prepend(fGrl.HoraFechaActual("ddMMyyyy_HHmmss")+"-") );
+		else
+			ImportPathNew->ui.txtPath_Dbx_1->setText( DatosVDMSound["Vdms_path_conf"] ); // path_conf
+
 		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
 		ImportPathNew->ui.gBox_path_emu->setTitle("Path - VDMSound");
 		ImportPathNew->ui.wizardPath->setCurrentIndex(2);
-		ImportPathNew->ui.txtPath_Vdms_1->setText( DatosVDMSound["path_conf"] );	// path_conf
-		ImportPathNew->ui.txtPath_Vdms_2->setText( DatosVDMSound["path_exe"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_exe
+	//	ImportPathNew->ui.txtPath_Vdms_1->setText( DatosVDMSound["Vdms_path_conf"] );	// path_conf
+		ImportPathNew->ui.txtPath_Vdms_2->setText( DatosVDMSound["Vdms_path_exe"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_exe
 	}
 
 	if( ImportPathNew->exec() == QDialog::Accepted )
 	{
-		DatosJuego["Dat_thumbs"]      = ImportPathNew->ui.txtDatosPath_Thumbs->text();		// thumbs
-		DatosJuego["Dat_cover_front"] = ImportPathNew->ui.txtDatosPath_CoverFront->text();	// cover_front
-		DatosJuego["Dat_cover_back"]  = ImportPathNew->ui.txtDatosPath_CoverBack->text();	// cover_back
-
 		if( DatosJuego["Dat_tipo_emu"] == "dosbox" )
 		{
 			DatosDosBox["Dbx_path_conf"]      = ImportPathNew->ui.txtPath_Dbx_1->text();	// path_conf
@@ -298,45 +299,18 @@ void frmImportarJuego::on_btnOk()
 
 		if( DatosJuego["Dat_tipo_emu"] == "scummvm" )
 		{
-			DatosScummVM["path"]          = ImportPathNew->ui.txtPath_Svm_1->text();	// path
-			DatosScummVM["path_save"]     = ImportPathNew->ui.txtPath_Svm_2->text();	// path_save
-			DatosScummVM["path_setup"]    = ImportPathNew->ui.txtPath_Svm_3->text();	// path_setup
-			DatosScummVM["path_extra"]    = ImportPathNew->ui.txtPath_Svm_4->text();	// path_extra
-			DatosScummVM["path_capturas"] = ImportPathNew->ui.txtPath_Svm_5->text();	// path_capturas
-			DatosScummVM["path_sonido"]   = ImportPathNew->ui.txtPath_Svm_6->text();	// path_sonido
+			DatosScummVM["Svm_path"]          = ImportPathNew->ui.txtPath_Svm_1->text();	// path
+			DatosScummVM["Svm_path_save"]     = ImportPathNew->ui.txtPath_Svm_2->text();	// path_save
+			DatosScummVM["Svm_path_setup"]    = ImportPathNew->ui.txtPath_Svm_3->text();	// path_setup
+			DatosScummVM["Svm_path_extra"]    = ImportPathNew->ui.txtPath_Svm_4->text();	// path_extra
+			DatosScummVM["Svm_path_capturas"] = ImportPathNew->ui.txtPath_Svm_5->text();	// path_capturas
+			DatosScummVM["Svm_path_sonido"]   = ImportPathNew->ui.txtPath_Svm_6->text();	// path_sonido
 		}
 
 		if( DatosJuego["Dat_tipo_emu"] == "vdmsound" )
 		{
-			DatosVDMSound["path_conf"] = ImportPathNew->ui.txtPath_Vdms_1->text();		// path_conf
-			DatosVDMSound["path_exe"  ]= ImportPathNew->ui.txtPath_Vdms_2->text();		// path_exe
-		}
-
-		if(DatosJuego["Dat_thumbs"] != "" || DatosJuego["Dat_thumbs"] != "null" )
-		{
-			if( file_thumbs.exists( stTempDir + img_thumbs ) )
-			{
-				file_thumbs.copy( stTempDir + img_thumbs, stThumbsDir + img_thumbs );
-			//	file_thumbs.remove( stTempDir + img_thumbs );
-			}
-		}
-
-		if(DatosJuego["Dat_cover_front"] != "" || DatosJuego["Dat_cover_front"] != "null" )
-		{
-			if( file_cover_front.exists( stTempDir + img_cover_front ) )
-			{
-				file_cover_front.copy( stTempDir + img_cover_front, stCoversDir + img_cover_front );
-			//	file_cover_front.remove( stTempDir + img_cover_front );
-			}
-		}
-
-		if(DatosJuego["Dat_cover_back"] != "" || DatosJuego["Dat_cover_back"] != "null" )
-		{
-			if( file_cover_back.exists( stTempDir + img_cover_back ) )
-			{
-				file_cover_back.copy( stTempDir + img_cover_back, stCoversDir + img_cover_back );
-			//	file_cover_back.remove( stTempDir + img_cover_back );
-			}
+			DatosVDMSound["Vdms_path_conf"] = ImportPathNew->ui.txtPath_Vdms_1->text();		// path_conf
+			DatosVDMSound["Vdms_path_exe"  ]= ImportPathNew->ui.txtPath_Vdms_2->text();		// path_exe
 		}
 
 		fGrl.GuardarKeyGRLConfig(stHomeDir + "GR-lida.conf", "OpcGeneral", "url_xmldb", ui.cbxScriptURL->itemData( ui.cbxScriptURL->currentIndex() ).toString() );
@@ -393,10 +367,12 @@ void frmImportarJuego::setTheme()
 	str_html_old.replace("{lb_compania}"      , tr("Publicado por")     , Qt::CaseSensitive);
 	str_html_old.replace("{lb_desarrollador}" , tr("Desarrollado por")  , Qt::CaseSensitive);
 	str_html_old.replace("{lb_anno}"          , tr("Publicado")         , Qt::CaseSensitive);
+	str_html_old.replace("{lb_edad_recomendada}", tr("Edad recomendada"), Qt::CaseSensitive);
 	str_html_old.replace("{lb_idioma}"        , tr("Idioma")            , Qt::CaseSensitive);
 	str_html_old.replace("{lb_formato}"       , tr("Formato")           , Qt::CaseSensitive);
 	str_html_old.replace("{lb_genero}"        , tr("Genero")            , Qt::CaseSensitive);
 	str_html_old.replace("{lb_tema}"          , tr("Tema")              , Qt::CaseSensitive);
+	str_html_old.replace("{lb_perspectiva}"   , tr("Perspectiva")       , Qt::CaseSensitive);
 	str_html_old.replace("{lb_sistemaop}"     , tr("Sistema Operativo") , Qt::CaseSensitive);
 	str_html_old.replace("{lb_favorito}"      , tr("Favorito")          , Qt::CaseSensitive);
 	str_html_old.replace("{lb_fecha}"         , tr("Añadido el")        , Qt::CaseSensitive);
@@ -410,6 +386,9 @@ void frmImportarJuego::setTheme()
 	str_html_old.replace("{lb_rating}"        , tr("Rating")            , Qt::CaseSensitive);
 
 	setUpdatesEnabled( true );
+
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
 }
 
 void frmImportarJuego::on_btnAbrirUrl()
@@ -437,16 +416,18 @@ void frmImportarJuego::MostrarFichaHtml(QHash<QString, QString> datos)
 		stThumbs = stTempDir + img_thumbs;
 
 // Reempla la info del juego.
-	str_html_new.replace("{info_icono}"        , stIcono               , Qt::CaseSensitive);
+	str_html_new.replace("{info_icono}"        , stIcono                   , Qt::CaseSensitive);
 	str_html_new.replace("{info_titulo}"       , datos["Dat_titulo"]       , Qt::CaseSensitive);
 	str_html_new.replace("{info_subtitulo}"    , datos["Dat_subtitulo"]    , Qt::CaseSensitive);
 	str_html_new.replace("{info_genero}"       , datos["Dat_genero"]       , Qt::CaseSensitive);
 	str_html_new.replace("{info_compania}"     , datos["Dat_compania"]     , Qt::CaseSensitive);
 	str_html_new.replace("{info_desarrollador}", datos["Dat_desarrollador"], Qt::CaseSensitive);
 	str_html_new.replace("{info_tema}"         , datos["Dat_tema"]         , Qt::CaseSensitive);
+	str_html_new.replace("{info_perspectiva}"  , datos["Dat_perspectiva"]  , Qt::CaseSensitive);
 	str_html_new.replace("{info_idioma}"       , datos["Dat_idioma"]       , Qt::CaseSensitive);
 	str_html_new.replace("{info_formato}"      , datos["Dat_formato"]      , Qt::CaseSensitive);
 	str_html_new.replace("{info_anno}"         , datos["Dat_anno"]         , Qt::CaseSensitive);
+	str_html_new.replace("{info_edad_recomendada}", stTheme +"img16/edad_"+ datos["Dat_edad_recomendada"] +".png", Qt::CaseSensitive);
 //	str_html_new.replace("{info_numdisc}"      , datos["Dat_numdisc"]      , Qt::CaseSensitive);
 	str_html_new.replace("{info_sistemaop}"    , datos["Dat_sistemaop"]    , Qt::CaseSensitive);
 //	str_html_new.replace("{info_tamano}"       , datos["Dat_tamano"]       , Qt::CaseSensitive);
@@ -455,7 +436,7 @@ void frmImportarJuego::MostrarFichaHtml(QHash<QString, QString> datos)
 	str_html_new.replace("{info_jugabilidad}"  , datos["Dat_jugabilidad"]  , Qt::CaseSensitive);
 	str_html_new.replace("{info_original}"     , datos["Dat_original"]     , Qt::CaseSensitive);
 	str_html_new.replace("{info_estado}"       , datos["Dat_estado"]       , Qt::CaseSensitive);
-	str_html_new.replace("{info_thumbs}"       , stThumbs              , Qt::CaseSensitive);
+	str_html_new.replace("{info_thumbs}"       , stThumbs                  , Qt::CaseSensitive);
 //	str_html_new.replace("{info_cover_front}"  , datos["Dat_cover_front"]  , Qt::CaseSensitive);
 //	str_html_new.replace("{info_cover_back}"   , datos["Dat_cover_back"]   , Qt::CaseSensitive);
 	str_html_new.replace("{info_fecha}"        , datos["Dat_fecha"]        , Qt::CaseSensitive);
@@ -466,7 +447,6 @@ void frmImportarJuego::MostrarFichaHtml(QHash<QString, QString> datos)
 	str_html_new.replace("{info_comentario}"   , datos["Dat_comentario"]   , Qt::CaseSensitive);
 
 	ui.txtHtmlInfo->setHtml( str_html_new );
-//	ui.txtHtmlInfo->setPlainText( str_html_new );
 
 	setUpdatesEnabled( true );
 
@@ -484,6 +464,12 @@ void frmImportarJuego::CargarScript(QString fileScript)
 	scriptFile.open(QIODevice::ReadOnly | QIODevice::Text);
 	engine.evaluate( scriptFile.readAll() );
 	scriptFile.close();
+
+	CodecFileHtml.clear();
+	if(engine.evaluate("url_charset").isValid())
+		CodecFileHtml.append( engine.evaluate("url_charset").toString() );
+	else
+		CodecFileHtml.append("UTF-8");
 
 	if(engine.evaluate("url_site").isValid())
 		stUrlWeb = engine.evaluate("url_site").toString();
@@ -541,18 +527,25 @@ void frmImportarJuego::on_twListaBusqueda_Dblclicked(QTreeWidgetItem *item)
 
 QString frmImportarJuego::LeerArchivoHTML(QString file_html)
 {
+	QTextCodec *codec = QTextCodec::codecForName(CodecFileHtml);
 	QString text_html;
 	QFile file( file_html );
 	if( file.open(QIODevice::ReadOnly | QIODevice::Text) )
 	{
 		QTextStream in( &file );
-		in.setCodec("UTF-8");
+		in.setCodec(codec);
 		text_html = in.readAll();
 
 		text_html.replace("&#x27;","'");
 		text_html.replace("&#x26;","&");
 	//	text_html.replace("&#xE9;","Ã©");
 	//	text_html.replace("&#xE0;","Ã ");
+		text_html.replace("&aacute;","á");
+		text_html.replace("&eacute;","é");
+		text_html.replace("&iacute;","í");
+		text_html.replace("&oacute;","ó");
+		text_html.replace("&uacute;","ú");
+		text_html.replace("&nbsp;"," ");
 	} else
 		text_html = "";
 
@@ -574,8 +567,7 @@ void frmImportarJuego::on_btnAbrir()
 
 		if( fi.suffix() == "xml" )
 		{
-			CargarScript(stHomeDir+"scripts/laisladelabandoware.js");
-//			CargarScript(":/scripts/laisladelabandoware.js");
+			CargarScript(stHomeDir+"scripts/gr-lida.js");
 			AnalyzePage( LeerArchivoHTML( file_config ), true);
 			siguiente = true;
 		}
@@ -769,6 +761,7 @@ void frmImportarJuego::AnalyzePage(QString Page, bool local, bool tipoDFend)
 	DatosJuego["Dat_compania"]      = DatosJuegoTemp["Dat_compania"];
 	DatosJuego["Dat_desarrollador"] = DatosJuegoTemp["Dat_desarrollador"];
 	DatosJuego["Dat_tema"]          = DatosJuegoTemp["Dat_tema"];
+	DatosJuego["Dat_perspectiva"]   = DatosJuegoTemp["Dat_perspectiva"];
 	DatosJuego["Dat_idioma"]        = DatosJuegoTemp["Dat_idioma"];
 	DatosJuego["Dat_formato"]       = DatosJuegoTemp["Dat_formato"];
 	DatosJuego["Dat_anno"]          = DatosJuegoTemp["Dat_anno"];
@@ -780,15 +773,15 @@ void frmImportarJuego::AnalyzePage(QString Page, bool local, bool tipoDFend)
 	DatosJuego["Dat_jugabilidad"]   = DatosJuegoTemp["Dat_jugabilidad"];
 	DatosJuego["Dat_original"]      = DatosJuegoTemp["Dat_original"];
 	DatosJuego["Dat_estado"]        = DatosJuegoTemp["Dat_estado"];
-//	DatosJuego["Dat_thumbs"]        = DatosJuegoTemp["Dat_thumbs"];
-//	DatosJuego["Dat_cover_front"]   = DatosJuegoTemp["Dat_cover_front"];
-//	DatosJuego["Dat_cover_back"]    = DatosJuegoTemp["Dat_cover_back"];
 	DatosJuego["Dat_fecha"]         = fGrl.HoraFechaActual(GRLConfig["FormatoFecha"].toString());
 	DatosJuego["Dat_tipo_emu"]      = DatosJuegoTemp["Dat_tipo_emu"];
 	DatosJuego["Dat_comentario"]    = DatosJuegoTemp["Dat_comentario"];
 	DatosJuego["Dat_favorito"]      = "false";
 	DatosJuego["Dat_rating"]        = DatosJuegoTemp["Dat_rating"];
+	DatosJuego["Dat_edad_recomendada"] = DatosJuegoTemp["Dat_edad_recomendada"];
 	DatosJuego["Dat_usuario"]       = DatosJuegoTemp["Dat_usuario"];
+	DatosJuego["Dat_path_exe"]      = DatosJuegoTemp["Dat_path_exe"];
+	DatosJuego["Dat_parametros_exe"]= DatosJuegoTemp["Dat_parametros_exe"];
 
 // Nombre de la Imagen de las Caratulas --------
 	img_thumbs.clear();
@@ -807,7 +800,7 @@ void frmImportarJuego::AnalyzePage(QString Page, bool local, bool tipoDFend)
 	if( DatosJuegoTemp["Dat_cover_back"] == "" || DatosJuegoTemp["Dat_cover_back"] == "null" )
 		img_cover_back = "";
 	else
-		img_cover_back  = "cover_back_"+DatosJuegoTemp["Dat_cover_back"];
+		img_cover_back = "cover_back_"+DatosJuegoTemp["Dat_cover_back"];
 
 	DatosJuego["Dat_thumbs"]      = img_thumbs;
 	DatosJuego["Dat_cover_front"] = img_cover_front;
@@ -1027,6 +1020,7 @@ void frmImportarJuego::AnalyzePage(QString Page, bool local, bool tipoDFend)
 		DatosScummVM["Svm_copy_protection"] = ""+DatosJuegoTemp["Svm_copy_protection"];
 		DatosScummVM["Svm_sound_font"]      = ""+DatosJuegoTemp["Svm_sound_font"];
 		DatosScummVM["Svm_walkspeed"]       = ""+DatosJuegoTemp["Svm_walkspeed"];
+		DatosScummVM["Svm_opl_driver"]      = ""+DatosJuegoTemp["Svm_opl_driver"];
 	}
 // VDMSound ------------------
 //----------------------------
