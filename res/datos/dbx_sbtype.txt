@@ -4,3 +4,4 @@ sb2|sinimg
 sbpro1|sinimg
 sbpro2|sinimg
 sb16|sinimg
+gb|sinimg
