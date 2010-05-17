@@ -47,9 +47,13 @@ frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
 	ui.btnCancelar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnDirExportPath->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
+
 	ui.cbxExpotarComo->clear();
-	ui.cbxExpotarComo->addItem("D-Fend Reloaded (*.prof)"); // Index 0
-	ui.cbxExpotarComo->addItem("GR-lida (*.xml)");          // Index 1
+	ui.cbxExpotarComo->addItem("D-Fend Reloaded (*.prof)");	// Index 0
+	ui.cbxExpotarComo->addItem("GR-lida v1 (*.xml)");		// Index 1
+	ui.cbxExpotarComo->addItem("GR-lida v2 (*.xml)");		// Index 2
 	ui.cbxExpotarComo->setCurrentIndex( 1 );
 
 	twMontajes = new QTreeWidget();
@@ -94,7 +98,8 @@ void frmExportarJuego::on_btnOk()
 					archivo = fi.completeBaseName();
 					archivo = fGrl.eliminar_caracteres( archivo );
 
-					switch ( ui.cbxExpotarComo->currentIndex() )
+					int index_select = ui.cbxExpotarComo->currentIndex();
+					switch ( index_select )
 					{
 						case 0: // D-Fend Reloaded
 							if( TempDatosJuego["Dat_tipo_emu"] == "dosbox" )
@@ -107,14 +112,15 @@ void frmExportarJuego::on_btnOk()
 							}
 						break;
 						case 1: // GR-lida
+						case 2:
 							str_ok = archivo.endsWith(".xml");
 							if(str_ok == false)
 								archivo.append(".xml");
 
 							if( TempDatosJuego["Dat_tipo_emu"] == "scummvm" )
-								fGrl.Exportar_Profile_GRLida( TempDatosJuego, TempDatosScummvm, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
+								fGrl.Exportar_Profile_GRLida( TempDatosJuego, TempDatosScummvm, twMontajes, ui.txtDirExportPath->text() + "/" + archivo, index_select);
 							else
-								fGrl.Exportar_Profile_GRLida( TempDatosJuego, TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
+								fGrl.Exportar_Profile_GRLida( TempDatosJuego, TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo, index_select);
 						break;
 					}
 				}
