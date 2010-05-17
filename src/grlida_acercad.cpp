@@ -36,9 +36,9 @@ frmAcercaD::frmAcercaD(QDialog *parent, Qt::WFlags flags)
 
 	ui.txtAcercaD->setHtml("<strong>GR-lida</strong> "+tr("es un lanzador común para los emuladores:")+
 		"<center><strong>DOSBox</strong>, <strong><font color=\"#009900\">ScummVM</font></strong>, <strong>VDMSound</strong><br></center>"
-		"<strong>GR-lida</strong> "+tr("es GPL. Para mejorar el programa puedes dejar tu opinión en")+" <a href=\"http://www.laisladelabandoware.es\">http://www.laisladelabandoware.es</a><br />"+
+		"<strong>GR-lida</strong> "+tr("es GPL. Para mejorar el programa puedes dejar tu opinión en")+" <a href=\"http://www.gr-lida.org\">http://www.gr-lida.org</a><br />"+
 		tr("Web Oficiales del lanzador y los distintos emuladores:")+"<br />"+
-		tr("Lanzador")+" <strong>GR-lida</strong>: <a href=\"http://www.laisladelabandoware.es/grlida.php\">http://www.laisladelabandoware.es</a><br />"+
+		tr("Lanzador")+" <strong>GR-lida</strong>: <a href=\"http://www.gr-lida.org/grlida.php\">http://www.gr-lida.org</a><br />"+
 		tr("Emulador")+" <strong>DOSBox</strong>: <a href=\"http://dosbox.com\">http://dosbox.com</a><br />"+
 		tr("Emulador")+" <strong><font color=\"#009900\">ScummVM</font></strong>: <a href=\"http://www.scummvm.org\">http://www.scummvm.org</a><br />"+
 		tr("Emulador")+" <strong>VDMSound</strong>: <a href=\"http://sourceforge.net/projects/vdmsound/\">http://sourceforge.net/projects/vdmsound/</a><br>"
@@ -65,7 +65,7 @@ frmAcercaD::frmAcercaD(QDialog *parent, Qt::WFlags flags)
 
 			QTreeWidgetItem *item = new QTreeWidgetItem( ui.treeWidget );
 
-			item->setFont( 0, QFont("Times", 10, QFont::Bold));
+			item->setFont( 0, QFont(stFontFamily, stFontSize.toInt(), QFont::Bold));
 			item->setText( 0, lista.value(0) );
 			if( lista.value(2)=="")
 				item->setIcon( 1, QIcon(stTheme+"img16/sinimg.png") );
@@ -109,4 +109,12 @@ void frmAcercaD::setTheme()
 	ui.tabAcercaD->setTabIcon(2, QIcon(stTheme+"img16/nuevo.png") );
 	ui.btnAcercaQT->setIcon( QIcon(stTheme+"img16/qt.png") );
 	ui.btnClose->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+
+	QSettings settings( fGrl.GRlidaHomePath()+"GR-lida.conf", QSettings::IniFormat );
+	settings.beginGroup("OpcFuente");
+		stFontFamily = settings.value("font_family","Tahoma").toString();
+		stFontSize   = settings.value("font_size","8").toString();
+		if( settings.value("font_usar", false).toBool() )
+			setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+stFontFamily+"\";font-size:"+stFontSize+"pt;}");
+	settings.endGroup();
 }

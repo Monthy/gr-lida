@@ -44,7 +44,7 @@ public:
 private:
 	Funciones fGrl;
 
-	QString stTheme;
+	QString stTheme, stFontFamily, stFontSize;
 
 	void setTheme();
 
