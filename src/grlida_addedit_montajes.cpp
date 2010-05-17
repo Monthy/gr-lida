@@ -120,13 +120,17 @@ void frmAddEditMontajes::setTheme()
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnDirFile->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
 	ui.btnClearDirFile->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
 }
 
 void frmAddEditMontajes::on_changeTypeDrive(int row)
 {
 	if( row >= 0)
 	{
-		if( ui.cbxMontaje_type_drive->itemData( row ).toString() == "IMG_multi_iso" )
+		QString tipo_montaje = ui.cbxMontaje_type_drive->itemData( row ).toString();
+		if( tipo_montaje == "IMG_multi_iso" || tipo_montaje == "boot")
 		{
 			ui.txtMontaje_path->setVisible( false );
 			ui.lw_MultiIso->setVisible( true );
@@ -152,7 +156,7 @@ void frmAddEditMontajes::on_btnOk()
 	else
 		DatosMontaje["tipo_as"] = "";
 
-	if( DatosMontaje["tipo_as"] == "IMG_multi_iso" )
+	if( DatosMontaje["tipo_as"] == "IMG_multi_iso" || DatosMontaje["tipo_as"] == "boot" )
 	{
 		QStringList listaIso;
 		listaIso.clear();
@@ -184,33 +188,42 @@ void frmAddEditMontajes::on_btnOk()
 
 void frmAddEditMontajes::on_DirFile()
 {
-	QString tipomontaje = ui.cbxMontaje_type_drive->itemData( ui.cbxMontaje_type_drive->currentIndex() ).toString();
+	QString tipo_montaje = ui.cbxMontaje_type_drive->itemData( ui.cbxMontaje_type_drive->currentIndex() ).toString();
 
-	if( tipomontaje == "drive" || tipomontaje == "cdrom" || tipomontaje == "floppy" )
+	if( tipo_montaje == "drive" || tipo_montaje == "cdrom" || tipo_montaje == "floppy" )
 	{
-		ui.txtMontaje_path->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Montaje_path"].toString(), ui.txtMontaje_path->text() ));
+		QString directorio = fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Montaje_path"].toString(), ui.txtMontaje_path->text() );
+		if( directorio !="" )
+		{
+			ui.txtMontaje_path->setText( directorio );
 
-		QDir dir( ui.txtMontaje_path->text() );
-		if( dir.exists() )
-			GRLConfig["Montaje_path"] = ui.txtMontaje_path->text();
-		else
-			GRLConfig["Montaje_path"] = "";
+			QDir dir( ui.txtMontaje_path->text() );
+			if( dir.exists() )
+				GRLConfig["Montaje_path"] = ui.txtMontaje_path->text();
+			else
+				GRLConfig["Montaje_path"] = "";
+		}
 	} else {
 		QString archivo = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Montaje_path"].toString(), ui.txtMontaje_path->text(), tr("Todos los archivo") + " (*)", 0, false);
-
-		if( tipomontaje == "IMG_multi_iso" )
+		if( archivo !="" )
 		{
-			QListWidgetItem *itemIso = new QListWidgetItem( ui.lw_MultiIso );
-			itemIso->setIcon( QIcon(stTheme+"img16/cd_iso.png") );
-			itemIso->setText( archivo );
-		} else
-			ui.txtMontaje_path->setText( archivo );
+			if( tipo_montaje == "IMG_multi_iso" || tipo_montaje == "boot" )
+			{
+				QListWidgetItem *itemIso = new QListWidgetItem( ui.lw_MultiIso );
+				if( tipo_montaje == "boot" )
+					itemIso->setIcon( QIcon(stTheme+"img16/floppy_2.png") );
+				else
+					itemIso->setIcon( QIcon(stTheme+"img16/cd_iso.png") );
+				itemIso->setText( archivo );
+			} else
+				ui.txtMontaje_path->setText( archivo );
 
-		QFileInfo fi( archivo );
-		if( fi.exists() )
-			GRLConfig["Montaje_path"] = fi.absolutePath();
-		else
-			GRLConfig["Montaje_path"] = "";
+			QFileInfo fi( archivo );
+			if( fi.exists() )
+				GRLConfig["Montaje_path"] = fi.absolutePath();
+			else
+				GRLConfig["Montaje_path"] = "";
+		}
 	}
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Montaje_path", GRLConfig["Montaje_path"].toString() );
