@@ -140,6 +140,11 @@ int main(int argc, char *argv[])
 // Crear directorio Thumbs si no existe
 	fGrl.ComprobarDirectorio( stHomeDir + "thumbs" );
 
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Thumbs List"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio Thumbs si no existe
+	fGrl.ComprobarDirectorio( stHomeDir + "thumbs_list" );
+
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Covers"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio Covers si no existe
@@ -149,6 +154,8 @@ int main(int argc, char *argv[])
 	app.processEvents();
 // Crear directorio Temp para las descargas temporales de imagenes, archivos
 	fGrl.ComprobarDirectorio( stHomeDir + "temp" );
+// Crea una copia de seguridad de la Base de Datos
+	fGrl.CrearCopiaSeguridad_DB( stHomeDir, GRLConfig["Version"].toString() );
 
 	GrLida w;
 
