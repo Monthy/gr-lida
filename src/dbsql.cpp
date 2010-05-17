@@ -91,13 +91,17 @@ int dbSql::getCount(QString stTable, QString stWhere)
 	return -1;
 }
 
-QString dbSql::ItemIDIndex(QString SQLtabla, QString SQLindex)
+QString dbSql::ItemIDIndex(QString SQLtabla, QString SQLindex, QString column)
 {
 	QSqlQuery query;
 	query.clear();
-	query.exec("SELECT * FROM "+SQLtabla+" WHERE idgrl="+SQLindex+" LIMIT 0,1");
+	query.exec("SELECT "+column+" FROM "+SQLtabla+" WHERE idgrl="+SQLindex+" LIMIT 0,1");
 	query.first();
-	return query.value(0).toString();
+
+	if(column!="*")
+		return query.record().value(column).toString();
+	else
+		return query.value(0).toString();
 }
 
 void dbSql::ItemEliminar(const QString IDgrl)
@@ -150,7 +154,7 @@ void dbSql::CrearTablas()
 {
 	QSqlQuery query;
 	QStringList tables = sqldb.tables();
-	QString sql_query, tipo_id_sql;
+	QString tipo_id_sql;
 
 	tipo_id_sql.clear();
 	if( dbType == "QMYSQL" )
@@ -177,6 +181,7 @@ void dbSql::CrearTablas()
 		"	`compania`				varchar(255) NOT NULL default '',"
 		"	`desarrollador`			varchar(255) NOT NULL default '',"
 		"	`tema`					varchar(255) NOT NULL default '',"
+		"	`perspectiva`			varchar(255) NOT NULL default '',"
 		"	`idioma`				varchar(50) NOT NULL default '',"
 		"	`formato`				varchar(50) NOT NULL default '',"
 		"	`anno`					varchar(4) NOT NULL default '',"
@@ -196,7 +201,10 @@ void dbSql::CrearTablas()
 		"	`comentario`			longtext,"
 		"	`favorito`				varchar(5) NOT NULL default 'false',"
 		"	`rating`				integer NOT NULL default 0,"
-		"	`usuario`				varchar(255) NOT NULL default ''"
+		"	`edad_recomendada`		varchar(2) NOT NULL default 'nd',"
+		"	`usuario`				varchar(255) NOT NULL default '',"
+		"	`path_exe`				varchar(255) NOT NULL default '',"
+		"	`parametros_exe`		varchar(255) NOT NULL default ''"
 		");");
 	}
 
@@ -364,7 +372,8 @@ void dbSql::CrearTablas()
 		"	`midi_gain`				integer NOT NULL default 100,"
 		"	`copy_protection`		varchar(5) NOT NULL default 'false',"
 		"	`sound_font`			varchar(255) NOT NULL default '',"
-		"	`walkspeed`				integer NOT NULL default 0"
+		"	`walkspeed`				integer NOT NULL default 0,"
+		"	`opl_driver`			varchar(10) NOT NULL default 'auto'"
 		");");
 	}
 
@@ -423,6 +432,14 @@ void dbSql::CrearTablas()
 	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'rating' integer NOT NULL DEFAULT 0;");
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'usuario' varchar(255) NOT NULL default '';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'path_exe' varchar(255) NOT NULL default '';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'parametros_exe' varchar(255) NOT NULL default '';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'edad_recomendada' varchar(2) NOT NULL default 'nd';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'perspectiva' varchar(255) NOT NULL default '';");
 
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cputype' varchar(20) NOT NULL DEFAULT 'auto';");
@@ -440,6 +457,8 @@ void dbSql::CrearTablas()
 	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'game_label' varchar(255) NOT NULL DEFAULT '';");
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'walkspeed' integer NOT NULL DEFAULT 0;");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'opl_driver' varchar(10) NOT NULL default 'auto';");
 
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_file' ADD COLUMN 'tipo' varchar(50) NOT NULL DEFAULT '';");
@@ -462,6 +481,7 @@ QHash<QString, QString> dbSql::show_Datos(QString IDgrl)
 	tmpDatosJuego["Dat_compania"]      = query.record().value("compania").toString();
 	tmpDatosJuego["Dat_desarrollador"] = query.record().value("desarrollador").toString();
 	tmpDatosJuego["Dat_tema"]          = query.record().value("tema").toString();
+	tmpDatosJuego["Dat_perspectiva"]   = query.record().value("perspectiva").toString();
 	tmpDatosJuego["Dat_idioma"]        = query.record().value("idioma").toString();
 	tmpDatosJuego["Dat_formato"]       = query.record().value("formato").toString();
 	tmpDatosJuego["Dat_anno"]          = query.record().value("anno").toString();
@@ -481,7 +501,10 @@ QHash<QString, QString> dbSql::show_Datos(QString IDgrl)
 	tmpDatosJuego["Dat_comentario"]    = query.record().value("comentario").toString();
 	tmpDatosJuego["Dat_favorito"]      = query.record().value("favorito").toString();
 	tmpDatosJuego["Dat_rating"]        = query.record().value("rating").toString();
+	tmpDatosJuego["Dat_edad_recomendada"]= query.record().value("edad_recomendada").toString();
 	tmpDatosJuego["Dat_usuario"]       = query.record().value("usuario").toString();
+	tmpDatosJuego["Dat_path_exe"]      = query.record().value("path_exe").toString();
+	tmpDatosJuego["Dat_parametros_exe"]= query.record().value("parametros_exe").toString();
 
 	return tmpDatosJuego;
 }
@@ -491,13 +514,13 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl (");
-	strSQL.append("icono, titulo, subtitulo, genero, compania, desarrollador, tema, idioma, formato, anno, numdisc, ");
+	strSQL.append("icono, titulo, subtitulo, genero, compania, desarrollador, tema, perspectiva, idioma, formato, anno, numdisc, ");
 	strSQL.append("sistemaop, tamano, graficos, sonido, jugabilidad, original, estado, thumbs, cover_front, cover_back, ");
-	strSQL.append("fecha, tipo_emu, comentario, favorito, rating, usuario ");
+	strSQL.append("fecha, tipo_emu, comentario, favorito, rating, edad_recomendada, usuario, path_exe, parametros_exe ");
 	strSQL.append(") VALUES ( ");
-	strSQL.append(":icono, :titulo, :subtitulo, :genero, :compania, :desarrollador, :tema, :idioma, :formato, :anno, :numdisc, ");
+	strSQL.append(":icono, :titulo, :subtitulo, :genero, :compania, :desarrollador, :tema, :perspectiva, :idioma, :formato, :anno, :numdisc, ");
 	strSQL.append(":sistemaop, :tamano, :graficos, :sonido, :jugabilidad, :original, :estado, :thumbs, :cover_front, :cover_back, ");
-	strSQL.append(":fecha, :tipo_emu, :comentario, :favorito, :rating, :usuario )");
+	strSQL.append(":fecha, :tipo_emu, :comentario, :favorito, :rating, :edad_recomendada, :usuario, :path_exe, :parametros_exe )");
 
 	QSqlQuery query;
 	query.clear();
@@ -509,6 +532,7 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	query.bindValue(":compania"     , datos["Dat_compania"]      );
 	query.bindValue(":desarrollador", datos["Dat_desarrollador"] );
 	query.bindValue(":tema"         , datos["Dat_tema"]          );
+	query.bindValue(":perspectiva"  , datos["Dat_perspectiva"]   );
 	query.bindValue(":idioma"       , datos["Dat_idioma"]        );
 	query.bindValue(":formato"      , datos["Dat_formato"]       );
 	query.bindValue(":anno"         , datos["Dat_anno"]          );
@@ -528,7 +552,10 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	query.bindValue(":comentario"   , datos["Dat_comentario"]    );
 	query.bindValue(":favorito"     , datos["Dat_favorito"]      );
 	query.bindValue(":rating"       , datos["Dat_rating"]        );
-	query.bindValue(":usuario"      , datos["Dat_usuario"]       );
+	query.bindValue(":edad_recomendada", datos["Dat_edad_recomendada"]);
+	query.bindValue(":usuario"         , datos["Dat_usuario"]       );
+	query.bindValue(":path_exe"        , datos["Dat_path_exe"]      );
+	query.bindValue(":parametros_exe"  , datos["Dat_parametros_exe"]);
 	query.exec();
 
 	if( Chequear_Query(query) )
@@ -543,12 +570,12 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	strSQL.clear();
 	strSQL.append("UPDATE dbgrl SET ");
 	strSQL.append("icono = :icono, titulo = :titulo, subtitulo = :subtitulo, genero = :genero, ");
-	strSQL.append("compania  = :compania, desarrollador = :desarrollador, tema = :tema, idioma = :idioma, ");
+	strSQL.append("compania  = :compania, desarrollador = :desarrollador, tema = :tema, perspectiva = :perspectiva, idioma = :idioma, ");
 	strSQL.append("formato = :formato, anno = :anno, numdisc = :numdisc, sistemaop = :sistemaop, ");
 	strSQL.append("tamano = :tamano, graficos = :graficos, sonido = :sonido, jugabilidad = :jugabilidad, ");
 	strSQL.append("original = :original, estado = :estado, thumbs = :thumbs, cover_front = :cover_front, ");
-	strSQL.append("cover_back = :cover_back, comentario = :comentario, favorito = :favorito, rating = :rating, ");
-	strSQL.append("usuario = :usuario WHERE idgrl = :idgrl;");
+	strSQL.append("cover_back = :cover_back, comentario = :comentario, favorito = :favorito, rating = :rating, edad_recomendada = :edad_recomendada, ");
+	strSQL.append("usuario = :usuario, path_exe = :path_exe, parametros_exe = :parametros_exe WHERE idgrl = :idgrl;");
 
 	QSqlQuery query;
 	query.clear();
@@ -560,6 +587,7 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	query.bindValue(":compania"     , datos["Dat_compania"]      );
 	query.bindValue(":desarrollador", datos["Dat_desarrollador"] );
 	query.bindValue(":tema"         , datos["Dat_tema"]          );
+	query.bindValue(":perspectiva"  , datos["Dat_perspectiva"]   );
 	query.bindValue(":idioma"       , datos["Dat_idioma"]        );
 	query.bindValue(":formato"      , datos["Dat_formato"]       );
 	query.bindValue(":anno"         , datos["Dat_anno"]          );
@@ -579,8 +607,20 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	query.bindValue(":comentario"   , datos["Dat_comentario"]    );
 	query.bindValue(":favorito"     , datos["Dat_favorito"]      );
 	query.bindValue(":rating"       , datos["Dat_rating"]        );
-	query.bindValue(":usuario"      , datos["Dat_usuario"]       );
-	query.bindValue(":idgrl"        , IDgrl                      );
+	query.bindValue(":edad_recomendada", datos["Dat_edad_recomendada"]);
+	query.bindValue(":usuario"         , datos["Dat_usuario"]       );
+	query.bindValue(":path_exe"        , datos["Dat_path_exe"]      );
+	query.bindValue(":parametros_exe"  , datos["Dat_parametros_exe"]);
+	query.bindValue(":idgrl"           , IDgrl                      );
+	query.exec();
+}
+
+void dbSql::ItemActualizaDatosItem(const QString m_key, const QString m_value, const QString IDgrl)
+{
+	QSqlQuery query;
+	query.prepare("UPDATE dbgrl SET "+m_key+" = :"+m_key+" WHERE idgrl = :idgrl;");
+	query.bindValue(":"+m_key , m_value);
+	query.bindValue(":idgrl"  , IDgrl  );
 	query.exec();
 }
 
@@ -588,9 +628,9 @@ void dbSql::ItemActualizaDatosRating(const QString new_rating , const QString ID
 {
 	QSqlQuery query;
 	query.clear();
-	query.prepare( "UPDATE dbgrl SET rating = :rating WHERE idgrl = :idgrl;" );
-	query.bindValue(":rating" , new_rating );
-	query.bindValue(":idgrl"  , IDgrl      );
+	query.prepare("UPDATE dbgrl SET rating = :rating WHERE idgrl = :idgrl;");
+	query.bindValue(":rating" , new_rating);
+	query.bindValue(":idgrl"  , IDgrl     );
 	query.exec();
 }
 
@@ -598,9 +638,9 @@ void dbSql::ItemActualizaDatosFavorito(const QString EstadoFav , const QString I
 {
 	QSqlQuery query;
 	query.clear();
-	query.prepare( "UPDATE dbgrl SET favorito = :favorito WHERE idgrl = :idgrl;" );
-	query.bindValue(":favorito" , EstadoFav );
-	query.bindValue(":idgrl"    , IDgrl     );
+	query.prepare("UPDATE dbgrl SET favorito = :favorito WHERE idgrl = :idgrl;");
+	query.bindValue(":favorito" , EstadoFav);
+	query.bindValue(":idgrl"    , IDgrl    );
 	query.exec();
 }
 
@@ -916,7 +956,7 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	query.bindValue(":render_aspect"         , datos["Dbx_render_aspect"]         );
 	query.bindValue(":render_scaler"         , datos["Dbx_render_scaler"]         );
 	query.bindValue(":cpu_core"              , datos["Dbx_cpu_core"]              );
-	query.bindValue(":cpu_cputype"           , datos["Dbx_cpu_cputype"]              );
+	query.bindValue(":cpu_cputype"           , datos["Dbx_cpu_cputype"]           );
 	query.bindValue(":cpu_cycles"            , datos["Dbx_cpu_cycles"]            );
 	query.bindValue(":cpu_cycleup"           , datos["Dbx_cpu_cycleup"]           );
 	query.bindValue(":cpu_cycledown"         , datos["Dbx_cpu_cycledown"]         );
@@ -1130,6 +1170,7 @@ QHash<QString, QString> dbSql::showConfg_ScummVM(QString IDgrl)
 	tmpScummVM["Svm_copy_protection"] = query.record().value("copy_protection").toString();
 	tmpScummVM["Svm_sound_font"]      = query.record().value("sound_font").toString();
 	tmpScummVM["Svm_walkspeed"]       = query.record().value("walkspeed").toString();
+	tmpScummVM["Svm_opl_driver"]      = query.record().value("opl_driver").toString();
 
 	return tmpScummVM;
 }
@@ -1142,12 +1183,12 @@ void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString ID
 	strSQL.append("idgrl, game, game_label, language, subtitles, platform, gfx_mode, render_mode, fullscreen, aspect_ratio, path, ");
 	strSQL.append("path_setup, path_extra, path_save, path_capturas, path_sonido, music_driver, enable_gs, multi_midi, ");
 	strSQL.append("native_mt32, master_volume, music_volume, sfx_volume, speech_volume, tempo, talkspeed, debuglevel, ");
-	strSQL.append("cdrom, joystick_num, output_rate, midi_gain, copy_protection, sound_font, walkspeed ");
+	strSQL.append("cdrom, joystick_num, output_rate, midi_gain, copy_protection, sound_font, walkspeed, opl_driver");
 	strSQL.append(") VALUES ( ");
 	strSQL.append(":idgrl, :game, :game_label, :language, :subtitles, :platform, :gfx_mode, :render_mode, :fullscreen, :aspect_ratio, :path, ");
 	strSQL.append(":path_setup, :path_extra, :path_save, :path_capturas, :path_sonido, :music_driver, :enable_gs, :multi_midi, ");
 	strSQL.append(":native_mt32, :master_volume, :music_volume, :sfx_volume, :speech_volume, :tempo, :talkspeed, :debuglevel, ");
-	strSQL.append(":cdrom, :joystick_num, :output_rate, :midi_gain, :copy_protection, :sound_font, :walkspeed )");
+	strSQL.append(":cdrom, :joystick_num, :output_rate, :midi_gain, :copy_protection, :sound_font, :walkspeed, :opl_driver )");
 
 	QSqlQuery query;
 	query.clear();
@@ -1186,6 +1227,8 @@ void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString ID
 	query.bindValue(":copy_protection" , datos["Svm_copy_protection"] );
 	query.bindValue(":sound_font"      , datos["Svm_sound_font"]      );
 	query.bindValue(":walkspeed"       , datos["Svm_walkspeed"]       );
+	query.bindValue(":opl_driver"      , datos["Svm_opl_driver"]      );
+
 	query.exec();
 }
 
@@ -1201,7 +1244,7 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 	strSQL.append("multi_midi = :multi_midi, native_mt32 = :native_mt32, master_volume = :master_volume, music_volume = :music_volume, ");
 	strSQL.append("sfx_volume = :sfx_volume, speech_volume = :speech_volume, tempo = :tempo, talkspeed = :talkspeed, ");
 	strSQL.append("debuglevel = :debuglevel, cdrom = :cdrom, joystick_num = :joystick_num, output_rate = :output_rate, ");
-	strSQL.append("midi_gain = :midi_gain, copy_protection = :copy_protection, sound_font = :sound_font, walkspeed = :walkspeed ");
+	strSQL.append("midi_gain = :midi_gain, copy_protection = :copy_protection, sound_font = :sound_font, walkspeed = :walkspeed, opl_driver = :opl_driver ");
 	strSQL.append("WHERE id = :id;");
 
 	QSqlQuery query;
@@ -1241,6 +1284,7 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 	query.bindValue(":copy_protection" , datos["Svm_copy_protection"] );
 	query.bindValue(":sound_font"      , datos["Svm_sound_font"]      );
 	query.bindValue(":walkspeed"       , datos["Svm_walkspeed"]       );
+	query.bindValue(":opl_driver"      , datos["Svm_opl_driver"]      );
 	query.bindValue(":id"              , IDsvm                        ); // id del scummvm
 	query.exec();
 }

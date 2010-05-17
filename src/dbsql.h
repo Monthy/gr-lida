@@ -46,7 +46,7 @@ public:
 	void dbClose();	// Cierra la base de datos.
 
 	int getCount(QString stTable, QString stWhere = "");
-	QString ItemIDIndex(QString SQLtabla, QString SQLindex );
+	QString ItemIDIndex(QString SQLtabla, QString SQLindex, QString column = "*");
 // Elimina un juego de la base de datos.
 	void ItemEliminar(const QString IDgrl);
 // Crea las tablas si no las tiene.
@@ -55,6 +55,7 @@ public:
 	QHash<QString, QString> show_Datos(QString IDgrl);
 	QString ItemInsertaDatos(const QHash<QString, QString> datos);
 	void ItemActualizaDatos(const QHash<QString, QString> datos, const QString IDgrl);
+	void ItemActualizaDatosItem(const QString m_key, const QString m_value, const QString IDgrl);
 	void ItemActualizaDatosRating(const QString new_rating , const QString IDgrl );
 	void ItemActualizaDatosFavorito(const QString EstadoFav , const QString IDgrl );
 // DOSBox.
