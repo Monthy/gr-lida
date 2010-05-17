@@ -6,20 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>494</height>
+    <width>500</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>480</width>
-    <height>420</height>
-   </size>
-  </property>
-  <property name="baseSize">
-   <size>
-    <width>430</width>
-    <height>320</height>
+    <width>500</width>
+    <height>500</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -147,13 +141,13 @@
              <widget class="QComboBox" name="cbxVersionDbx">
               <property name="minimumSize">
                <size>
-                <width>50</width>
+                <width>80</width>
                 <height>22</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>50</width>
+                <width>80</width>
                 <height>16777215</height>
                </size>
               </property>
@@ -1133,6 +1127,108 @@
            </widget>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="hLayout_24">
+            <property name="spacing">
+             <number>12</number>
+            </property>
+            <item>
+             <widget class="QCheckBox" name="chkUsarTipoFuente">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Usar tipo de Fuente independientemente del Theme</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="Line" name="line_8">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hLayout_25">
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Tipo de Fuente:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFontComboBox" name="cbxFuenteTipo">
+              <property name="minimumSize">
+               <size>
+                <width>160</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="currentFont">
+               <font>
+                <family>Tahoma</family>
+                <pointsize>8</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_12">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Tamaño:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="sbxFontSize">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="minimum">
+               <number>8</number>
+              </property>
+              <property name="value">
+               <number>8</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="hSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="hLayout_22">
             <property name="spacing">
              <number>12</number>
@@ -1178,7 +1274,7 @@
              <widget class="QComboBox" name="cbxIconFav">
               <property name="minimumSize">
                <size>
-                <width>90</width>
+                <width>100</width>
                 <height>24</height>
                </size>
               </property>
@@ -1245,7 +1341,7 @@
              <widget class="QComboBox" name="cbxPicFlowReflection">
               <property name="minimumSize">
                <size>
-                <width>90</width>
+                <width>160</width>
                 <height>24</height>
                </size>
               </property>
@@ -1699,6 +1795,9 @@
   <tabstop>txt_dbport</tabstop>
   <tabstop>cbxStyle</tabstop>
   <tabstop>chkStylePalette</tabstop>
+  <tabstop>chkUsarTipoFuente</tabstop>
+  <tabstop>cbxFuenteTipo</tabstop>
+  <tabstop>sbxFontSize</tabstop>
   <tabstop>cbxIconFav</tabstop>
   <tabstop>cbxPicFlowReflection</tabstop>
   <tabstop>spinBox_SkipPicFlow</tabstop>

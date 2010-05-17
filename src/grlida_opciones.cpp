@@ -130,6 +130,12 @@ void frmOpciones::CargarConfig()
 	ui.cbxStyle->addItems( QStyleFactory::keys() );
 	ui.cbxStyle->setCurrentIndex( ui.cbxStyle->findText(stStyleSelect, Qt::MatchContains) );
 
+// OpcFuente
+	ui.chkUsarTipoFuente->setChecked( GRLConfig["font_usar"].toBool() );
+	ui.cbxFuenteTipo->setCurrentIndex( ui.cbxFuenteTipo->findText(GRLConfig["font_family"].toString(), Qt::MatchContains) );
+	ui.sbxFontSize->setValue( GRLConfig["font_size"].toInt() );
+
+// Base de Datos
 	ui.cbxMotorDataBase->clear();
 	ui.cbxMotorDataBase->addItem( QIcon(stTheme+"img16/basedatos.png"), tr("Base de Datos")+" SQLite"    , "QSQLITE");
 	ui.cbxMotorDataBase->addItem( QIcon(stTheme+"img16/basedatos.png"), tr("Base de Datos")+" MySQL"     , "QMYSQL" );
@@ -211,6 +217,10 @@ void frmOpciones::GuardarConfig()
 	GRLConfig["PicFlowReflection"] = ui.cbxPicFlowReflection->currentText();
 	GRLConfig["Skip_PicFlow"]      = ui.spinBox_SkipPicFlow->value();
 	GRLConfig["stTheme"]           = stTheme;
+// OpcFuente
+	GRLConfig["font_usar"]         = ui.chkUsarTipoFuente->isChecked();
+	GRLConfig["font_family"]       = ui.cbxFuenteTipo->currentText();
+	GRLConfig["font_size"]         = ui.sbxFontSize->value();
 // Servidor Proxy
 	GRLConfig["ProxyEnable"]       = ui.chkEnableProxy->isChecked();
 	GRLConfig["ProxyType"]         = ui.cbxTypeProxy->itemData(ui.cbxTypeProxy->currentIndex(), Qt::UserRole).toInt();
@@ -230,6 +240,7 @@ void frmOpciones::GuardarConfig()
 
 void frmOpciones::setTheme()
 {
+	fGrl.setTheme();
 	setStyleSheet( fGrl.StyleSheet() );
 	setWindowIcon( QIcon(stTheme+"img16/barra_herramintas.png") );
 
@@ -262,6 +273,9 @@ void frmOpciones::setTheme()
 
 	ui.cbxPicFlowReflection->setItemIcon(0, QIcon(stTheme+"img16/capturas.png") );
 	ui.cbxPicFlowReflection->setItemIcon(1, QIcon(stTheme+"img16/capturas.png") );
+
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
 }
 
 void frmOpciones::CargarListaThemes()
@@ -431,16 +445,19 @@ void frmOpciones::on_twThemes_currentItemChanged( QTreeWidgetItem *item1, QTreeW
 
 void frmOpciones::on_btnOpenUrl()
 {
-// Cargamos el script
-	QScriptEngine engine;
-	QFile scriptFile( ui.cbxScriptURL->itemData( ui.cbxScriptURL->currentIndex() ).toString() );
-	scriptFile.open(QIODevice::ReadOnly | QIODevice::Text);
-	engine.evaluate( scriptFile.readAll() );
-	scriptFile.close();
+	if( ui.cbxScriptURL->itemData( ui.cbxScriptURL->currentIndex() ).toString() != "_desde_archivo_" )
+	{
+	// Cargamos el script
+		QScriptEngine engine;
+		QFile scriptFile( stHomeDir +"scripts/"+ ui.cbxScriptURL->itemData( ui.cbxScriptURL->currentIndex() ).toString() );
+		scriptFile.open(QIODevice::ReadOnly | QIODevice::Text);
+		engine.evaluate( scriptFile.readAll() );
+		scriptFile.close();
 
-// Abre la URL con el navegador por defecto
-	if(engine.evaluate("url_site").isValid())
-		QDesktopServices::openUrl( engine.evaluate("url_site").toString() );
+	// Abre la URL con el navegador por defecto
+		if(engine.evaluate("url_site").isValid())
+			QDesktopServices::openUrl( engine.evaluate("url_site").toString() );
+	}
 }
 
 void frmOpciones::on_InfoFormatoFecha()
@@ -452,106 +469,106 @@ void frmOpciones::on_InfoFormatoFecha()
 		"<table border=\"0\" align=\"center\" cellspacing=\"1\" cellpadding=\"2\">"
 		"  <thead>"
 		"    <tr>"
-		"      <td bgcolor=\"#ecce64\"><p align=\"center\">"+tr("Expresión")+"</p></td>"
-		"      <td bgcolor=\"#ecce64\"><p align=\"center\">"+tr("Salida")+"</p></td>"
+		"      <td class=\"row_header\"><p align=\"center\">"+tr("Expresión")+"</p></td>"
+		"      <td class=\"row_header\"><p align=\"center\">"+tr("Salida")+"</p></td>"
 		"    </tr>"
 		"  </thead>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>d</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("Día del mes sin ceros iniciales (1 a 31).")+"</p></td>"
+		"    <td class=\"row_1\"><p>d</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("Día del mes sin ceros iniciales (1 a 31).")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>dd</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("Día del mes, 2 dígitos con ceros iniciales (01 a 31).")+"</p></td>"
+		"    <td class=\"row_2\"><p>dd</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("Día del mes, 2 dígitos con ceros iniciales (01 a 31).")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>ddd</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("Una representación textual de un día, tres letras (e.j. 'Lun' a 'Dom').")+"</p></td>"
+		"    <td class=\"row_1\"><p>ddd</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("Una representación textual de un día, tres letras (e.j. 'Lun' a 'Dom').")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>dddd</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("Una representación textual completa del día de la semana (e.j. 'Lunes' a 'Domingo').")+"</p></td>"
+		"    <td class=\"row_2\"><p>dddd</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("Una representación textual completa del día de la semana (e.j. 'Lunes' a 'Domingo').")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>M</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("Representación numérica de un mes, sin ceros iniciales (1-12).")+"</p></td>"
+		"    <td class=\"row_1\"><p>M</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("Representación numérica de un mes, sin ceros iniciales (1-12).")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>MM</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("Representación numérica de un mes, con ceros iniciales (01-12).")+"</p></td>"
+		"    <td class=\"row_2\"><p>MM</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("Representación numérica de un mes, con ceros iniciales (01-12).")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>MMM</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("Una representación textual corta de un mes, tres letras (e.j. 'Ene' a 'Dic').")+"</p></td>"
+		"    <td class=\"row_1\"><p>MMM</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("Una representación textual corta de un mes, tres letras (e.j. 'Ene' a 'Dic').")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>MMMM</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("Una representación textual completa de un mes, como Enero o Marzo (e.j. 'Enero' a 'Diciembre').")+"</p></td>"
+		"    <td class=\"row_2\"><p>MMMM</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("Una representación textual completa de un mes, como Enero o Marzo (e.j. 'Enero' a 'Diciembre').")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>yy</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("Una representación de dos dígitos de un año (00-99).")+"</p></td>"
+		"    <td class=\"row_1\"><p>yy</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("Una representación de dos dígitos de un año (00-99).")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>yyyy</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("Una representación numérica completa de un año, 4 dígitos.")+"</p></td>"
+		"    <td class=\"row_2\"><p>yyyy</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("Una representación numérica completa de un año, 4 dígitos.")+"</p></td>"
 		"  </tr>"
 		"</table>"
 		"<br><br>"+tr("Estas expresiones pueden ser utilizadas para el tiempo.")+"<br>"
 		"<table border=\"0\" align=\"center\" cellspacing=\"1\" cellpadding=\"2\">"
 		"  <thead>"
 		"    <tr>"
-		"      <td bgcolor=\"#ecce64\"><p align=\"center\">"+tr("Expresión")+"</p></td>"
-		"      <td bgcolor=\"#ecce64\"><p align=\"center\">"+tr("Salida")+"</p></td>"
+		"      <td class=\"row_header\"><p align=\"center\">"+tr("Expresión")+"</p></td>"
+		"      <td class=\"row_header\"><p align=\"center\">"+tr("Salida")+"</p></td>"
 		"    </tr>"
 		"  </thead>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>h</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("La hora sin ceros iniciales (0 a 23 o 1 a 12 si AM/PM display)")+"</p></td>"
+		"    <td class=\"row_1\"><p>h</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("La hora sin ceros iniciales (0 a 23 o 1 a 12 si AM/PM display)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>hh</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("La hora con ceros iniciales (00 a 23 o de 01 a 12 si AM/PM display)")+"</p></td>"
+		"    <td class=\"row_2\"><p>hh</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("La hora con ceros iniciales (00 a 23 o de 01 a 12 si AM/PM display)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>H</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("La hora sin ceros iniciales (0 a 23, incluso con AM/PM display)")+"</p></td>"
+		"    <td class=\"row_1\"><p>H</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("La hora sin ceros iniciales (0 a 23, incluso con AM/PM display)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>HH</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("La hora con un cero (00 a 23, incluso con AM/PM display)")+"</p></td>"
+		"    <td class=\"row_2\"><p>HH</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("La hora con un cero (00 a 23, incluso con AM/PM display)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>m</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("Los minutos sin ceros iniciales (0 a 59)")+"</p></td>"
+		"    <td class=\"row_1\"><p>m</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("Los minutos sin ceros iniciales (0 a 59)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>mm</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("Los minutos con ceros iniciales (00 a 59)")+"</p></td>"
+		"    <td class=\"row_2\"><p>mm</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("Los minutos con ceros iniciales (00 a 59)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>s</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("Los segundos sin ceros iniciales (0 a 59)")+"</p></td>"
+		"    <td class=\"row_1\"><p>s</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("Los segundos sin ceros iniciales (0 a 59)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>ss</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("Los segundos con ceros iniciales (00 a 59)")+"</p></td>"
+		"    <td class=\"row_2\"><p>ss</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("Los segundos con ceros iniciales (00 a 59)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>z</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("Los milisegundos sin ceros iniciales (0 a 999)")+"</p></td>"
+		"    <td class=\"row_1\"><p>z</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("Los milisegundos sin ceros iniciales (0 a 999)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>zzz</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("Los milisegundos con ceros iniciales (000 a 999)")+"</p></td>"
+		"    <td class=\"row_2\"><p>zzz</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("Los milisegundos con ceros iniciales (000 a 999)")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#f0f0f0\"><p>AP or A</p></td>"
-		"    <td bgcolor=\"#f0f0f0\"><p>"+tr("Interpretar como un AM/PM del tiempo. AP debe ser \"AM\" o \"PM\".")+"</p></td>"
+		"    <td class=\"row_1\"><p>AP or A</p></td>"
+		"    <td class=\"row_1\"><p>"+tr("Interpretar como un AM/PM del tiempo. AP debe ser \"AM\" o \"PM\".")+"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td bgcolor=\"#e4e4e4\"><p>ap or a</p></td>"
-		"    <td bgcolor=\"#e4e4e4\"><p>"+tr("Interpretar como un AM/PM del tiempo. AP debe ser \"am\" o \"pm\".")+"</p></td>"
+		"    <td class=\"row_2\"><p>ap or a</p></td>"
+		"    <td class=\"row_2\"><p>"+tr("Interpretar como un AM/PM del tiempo. AP debe ser \"am\" o \"pm\".")+"</p></td>"
 		"  </tr>"
 		"</table>"
 	);
