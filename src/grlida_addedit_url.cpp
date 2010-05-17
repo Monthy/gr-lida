@@ -37,6 +37,12 @@ frmAddEditURL::frmAddEditURL(QDialog *parent, Qt::WFlags flags)
 
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
+
+	QSettings settings( fGrl.GRlidaHomePath()+"GR-lida.conf", QSettings::IniFormat );
+	settings.beginGroup("OpcFuente");
+	if( settings.value("font_usar", false).toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+settings.value("font_family", "Tahoma").toString()+"\";font-size:"+settings.value("font_size", 8).toString()+"pt;}");
+	settings.endGroup();
 }
 
 frmAddEditURL::~frmAddEditURL()

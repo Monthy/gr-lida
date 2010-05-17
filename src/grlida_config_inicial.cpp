@@ -31,11 +31,11 @@ frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
 
 	stHomeDir = fGrl.GRlidaHomePath();
 	stTheme   = fGrl.ThemeGrl();
-	setTheme();
 
 	createConnections();
 
 	CargarConfig();
+	setTheme();
 
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
@@ -117,6 +117,9 @@ void frmConfigInicial::setTheme()
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnDirDbx->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDirSvm->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
 }
 
 void frmConfigInicial::on_setLanguage(int idx_locale)

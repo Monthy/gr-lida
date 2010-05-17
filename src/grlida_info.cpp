@@ -112,6 +112,9 @@ frmInfo::frmInfo(QWidget *parent)
 		ItemInfo->setIcon(0, QIcon(stTheme+"img16/vdmsound.png") );
 		ItemInfo->setText(1, fGrl.IntToStr(sql->getCount("dbgrl","WHERE tipo_emu=\"vdmsound\"")) + " " + tr("juego/s") );
 
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
+
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );

@@ -44,6 +44,12 @@ frmRuleta::frmRuleta(QDialog *parent, Qt::WFlags flags)
 	connect(ui.rotarB, SIGNAL(valueChanged(int)), this, SLOT(imgRotarB(int)));
 	connect(ui.rotarC, SIGNAL(valueChanged(int)), this, SLOT(imgRotarC(int)));
 
+	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	settings.beginGroup("OpcFuente");
+		if( settings.value("font_usar", false).toBool() )
+			setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+settings.value("font_family","Tahoma").toString()+"\";font-size:"+settings.value("font_size","8").toString()+"pt;}");
+	settings.endGroup();
+
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
@@ -262,7 +268,7 @@ void frmRuleta::imgRotarC(int r)
 
 void frmRuleta::imgItemCentrar(QGraphicsScene *scena, QGraphicsPixmapItem *imgItem)
 {
-	int pos_x = 0, pos_y = 0;
+	qreal pos_x = 0, pos_y = 0;
 
 	pos_x = (scena->width()/2)-(imgItem->pixmap().width()/2);
 	pos_y = (scena->height()/2)-(imgItem->pixmap().height()/2);

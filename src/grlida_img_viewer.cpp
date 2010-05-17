@@ -44,6 +44,11 @@ ImageViewer::ImageViewer(QWidget *parent, Qt::WFlags flags)
 		ui.verListImagesAct->setChecked( settings.value("verListaImagenes", false).toBool() );
 	settings.endGroup();
 
+	settings.beginGroup("OpcFuente");
+		if( settings.value("font_usar", false).toBool() )
+			setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+settings.value("font_family","Tahoma").toString()+"\";font-size:"+settings.value("font_size","8").toString()+"pt;}");
+	settings.endGroup();
+
 	if( ui.fitToWindowAct->isChecked() )
 		fitToWindow();
 
