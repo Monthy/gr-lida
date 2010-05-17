@@ -1,8 +1,16 @@
-auto|img_audio_auto
-null|img_audio_null
-windows|img_audio_winmidi
-adlib|img_audio
-towns|img_audio
-pcspk|img_audio_winmidi
-pcjr|img_audio
-mt32|img_audio
+Auto Music emulation|auto|img_audio_auto
+Null output. Don't play any music|null|img_audio_null
+Windows MIDI, for Windows users|windows|img_audio_winmidi
+FluidSynth MIDI emulation|fluidsynth|img_audio
+MT-32 emulation|mt32|img_audio
+AdLib emulation (default)|adlib|img_audio
+PC Speaker emulation|pcspk|img_audio_winmidi
+PCjr emulation (only usable in SCUMM games)|pcjr|img_audio
+Creative Music System|cms|img_audio
+FM-TOWNS YM2612 emulation (only usable in SCUMM FM-TOWNS games)|towns|img_audio
+Output using ALSA sequencer device|alsa|img_audio
+CoreAudio sound, Mac OS X users|core|img_audio
+CoreMIDI sound, Mac OS X users. Use only if you have a hardware MIDI synthesizer|coremidi|img_audio
+Quicktime sound, for Macintosh users.|qt|img_audio
+Use /dev/sequencer for MIDI, *nix users. See below.|seq|img_audio
+Connect to TiMidity++ MIDI server. See below.|timidity|img_audio
