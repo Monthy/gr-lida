@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
-    <height>599</height>
+    <width>868</width>
+    <height>667</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../res/grlida.qrc">
-    <normaloff>:/img16/grlida.png</normaloff>:/img16/grlida.png</iconset>
+    <normaloff>:/img32/gr-lida.png</normaloff>:/img32/gr-lida.png</iconset>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
@@ -39,6 +39,31 @@
       <property name="spacing">
        <number>4</number>
       </property>
+      <item>
+       <widget class="QListWidget" name="lwJuegos">
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>64</width>
+          <height>64</height>
+         </size>
+        </property>
+        <property name="movement">
+         <enum>QListView::Static</enum>
+        </property>
+        <property name="resizeMode">
+         <enum>QListView::Adjust</enum>
+        </property>
+        <property name="viewMode">
+         <enum>QListView::IconMode</enum>
+        </property>
+        <property name="uniformItemSizes">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QTreeWidget" name="twJuegos">
         <property name="horizontalScrollBarPolicy">
@@ -67,6 +92,16 @@
         <column>
          <property name="text">
           <string>Título</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Compañia</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Año</string>
          </property>
         </column>
         <column>
@@ -112,8 +147,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>730</width>
-     <height>21</height>
+     <width>868</width>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">
@@ -152,8 +187,13 @@
     <property name="title">
      <string>&amp;Herramientas</string>
     </property>
+    <addaction name="mnu_tool_instalar"/>
+    <addaction name="separator"/>
     <addaction name="mnu_tool_importar"/>
     <addaction name="mnu_tool_exportar"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_tool_rebuild_all_covers"/>
+    <addaction name="mnu_tool_rebuild_cover"/>
     <addaction name="separator"/>
     <addaction name="mnu_tool_opciones"/>
    </widget>
@@ -182,14 +222,23 @@
      <addaction name="mnu_ver_carpeta_temp"/>
      <addaction name="mnu_ver_carpeta_home"/>
     </widget>
+    <widget class="QMenu" name="menuMenuVerColumnas">
+     <property name="title">
+      <string>Ver Columnas</string>
+     </property>
+     <addaction name="mnu_ver_compania"/>
+     <addaction name="mnu_ver_anno"/>
+     <addaction name="mnu_ver_rating"/>
+    </widget>
     <addaction name="mnu_ver_nav"/>
+    <addaction name="mnu_ver_cover_mode"/>
     <addaction name="mnu_ver_archivos_url"/>
     <addaction name="mnu_ver_datos"/>
     <addaction name="mnu_ver_pictureflow"/>
     <addaction name="mnu_ver_capturas"/>
     <addaction name="mnu_ver_ordenar"/>
     <addaction name="mnu_ver_toolbar"/>
-    <addaction name="mnu_ver_rating"/>
+    <addaction name="menuMenuVerColumnas"/>
     <addaction name="menuMenuVerCarpetas"/>
     <addaction name="separator"/>
     <addaction name="mnu_ver_ayuda"/>
@@ -252,6 +301,18 @@
    </attribute>
   </widget>
   <widget class="QDockWidget" name="dockw_Datos">
+   <property name="minimumSize">
+    <size>
+     <width>380</width>
+     <height>108</height>
+    </size>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>380</width>
+     <height>0</height>
+    </size>
+   </property>
    <property name="features">
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
@@ -797,6 +858,9 @@
   <action name="mnu_edit_favorito">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
    </property>
    <property name="icon">
     <iconset resource="../res/grlida.qrc">
@@ -1551,6 +1615,81 @@
    </property>
    <property name="text">
     <string>Buscar actualizaciones...</string>
+   </property>
+  </action>
+  <action name="mnu_tool_instalar">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/ejecutar_app_setup.png</normaloff>:/img16/ejecutar_app_setup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Instalar Juego</string>
+   </property>
+   <property name="statusTip">
+    <string>Prepara el DOSBox para poder Instalar un juego de forma facil</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="mnu_ver_cover_mode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/cover_mode.png</normaloff>:/img16/cover_mode.png</iconset>
+   </property>
+   <property name="text">
+    <string>Lista modo Carátulas</string>
+   </property>
+  </action>
+  <action name="mnu_tool_rebuild_all_covers">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/cover_create.png</normaloff>:/img16/cover_create.png</iconset>
+   </property>
+   <property name="text">
+    <string>Reconstruir todas las carátulas</string>
+   </property>
+   <property name="toolTip">
+    <string>Reconstruir todas las carátulas</string>
+   </property>
+  </action>
+  <action name="mnu_tool_rebuild_cover">
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/cover_create.png</normaloff>:/img16/cover_create.png</iconset>
+   </property>
+   <property name="text">
+    <string>Reconstruir carátula</string>
+   </property>
+   <property name="toolTip">
+    <string>Reconstruir carátula</string>
+   </property>
+  </action>
+  <action name="mnu_ver_compania">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/datos_3.png</normaloff>:/img16/datos_3.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ver Compañia</string>
+   </property>
+  </action>
+  <action name="mnu_ver_anno">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/grlida.qrc">
+     <normaloff>:/img16/fecha.png</normaloff>:/img16/fecha.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ver Año</string>
    </property>
   </action>
  </widget>

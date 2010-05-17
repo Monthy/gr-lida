@@ -38,10 +38,12 @@
 enum col_TwJuegos {
 	col_IdGrl    = 0,
 	col_Titulo   = 1,
-	col_Rating   = 2,
-	col_TipoEmu  = 3,
-	col_Favorito = 4,
-	col_PicFlow  = 5
+	col_Compania = 2,
+	col_Anno     = 3,
+	col_Rating   = 4,
+	col_TipoEmu  = 5,
+	col_Favorito = 6,
+	col_PicFlow  = 7
 };
 
 class GrLida : public QMainWindow
@@ -74,14 +76,16 @@ private:
 	dbSql *sql;
 	QTreeWidgetItem *twCategoria;
 	QHash<QString, QVariant> GRLConfig;
+	QHash<QString, QVariant> LwConf;
 
 	QProcess *dBoxSvm;
 	QUrl my_url;
 
+	int new_rating, old_rating;
 	int id_ImgPicFlow, id_ImgPicFlow_old, numSkip_PicFlow;
-	bool chkVersionDesdeMenu;
+	bool chkVersionDesdeMenu, item_changed;
 
-	QString stHomeDir, stDatosDir, stIconDir, stConfgDbxDir, stConfgVdmSDir;
+	QString stHomeDir, stDatosDir, stIconDir, stTempDir, stConfgDbxDir, stConfgVdmSDir;
 	QString stIdiomaSelect, stTheme, stIconoFav, stPicFlowReflection;
 	QString str_html_new, str_html_old, str_html_comentario;
 	QString stdb_type, stdb_server, stdb_host, stdb_name, stdb_username, stdb_password, stdb_port;
@@ -89,6 +93,8 @@ private:
 	QString stBinExeDbx, stBinExeSvm;
 	QString stItemIndex, stConfgJuego, stDirWorkingJuego, stTipoEmu;
 	QString stDirCapturas, stCaratula_Delantera, stCaratula_Trasera;
+	QString stCoversDir, stThumbsDir, stListThumbsDir;
+	QString stThumbs, stCoverFront, stCoverBack;
 
 	QStringList stl_param;
 	QStringList smiles_Lista, smiles_ListaTemp;
@@ -96,6 +102,9 @@ private:
 	QHash<QString, QString> listSmailes;
 	QHash<QString, QString>::const_iterator i_Hash;
 	QHash<QString, QString> conf_scummvm;
+
+	QHash<QString, int> lwlista_pos;
+	QHash<QString, QTreeWidgetItem *> twlista_pos;
 
 // Barra de Heramientas Ordenar
 	QHBoxLayout *HLayoutOrdenar;
@@ -120,6 +129,9 @@ private:
 	QMenu *trayIconMenu, *ljMenuPopUp;
 	bool isTrayIcon;
 
+	void ItemNext();
+	void ItemBack();
+
 	void createConnections();
 	void createToolBars();
 	void createDockBars();
@@ -143,7 +155,8 @@ private:
 	void CargarCapturasImagenes(const QString directorio);		// Carga las Imágenes en una lista.
 	void CargarCapturasVideoSonidos(const QString directorio);	// Carga los Videos y Sonidos en una lista.
 
-	void NuevoItemTreeWidget(const QHash<QString, QString> datos, QString imgEmu, QString IDitem);
+	void NuevoItemTreeWidget(const QHash<QString, QString> datos, QString IDitem, bool nuevo_juego = false);
+	void NuevoItemCopiarImagenes(QHash<QString, QString> datos, QString IDitem, bool nuevo_juego = true);
 
 	void Config_Dbx(QString IDitem);	// Carga la configuración del DOSBox.
 	void Config_Svm(QString IDitem);	// Carga la configuración del ScummVM.
@@ -161,23 +174,28 @@ private slots:
 	void on_ver_capturas(bool mChecked);		// Muestra la lista de Captura del Juego si la posee.
 
 	void showPopup(const QPoint& aPosition);
+	void on_CoverMode(bool icon_mode);
 	void on_setFavorito();				// Marcamos como Favorito True/False dependiendo del estado.
 
-	void on_twJuegos_clicked(QTreeWidgetItem *item);
-	void on_twJuegos_Dblclicked(QTreeWidgetItem *item);
+	void on_twJuegos_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+	void on_twJuegos_clicked(QTreeWidgetItem *twItem);
+	void on_twJuegos_Dblclicked(QTreeWidgetItem *twItem);
 
-	void on_twListNav_clicked(QTreeWidgetItem *item);
-	void on_twListNav_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2);
+	void on_lwJuegos_clicked(QListWidgetItem *lwItem);
+	void on_lwJuegos_Dblclicked(QListWidgetItem *lwItem);
 
-	void on_twCapturas_Dblclicked(QTreeWidgetItem *item);
+	void on_twListNav_clicked(QTreeWidgetItem *twItem);
+	void on_twListNav_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+
+	void on_twCapturas_Dblclicked(QTreeWidgetItem *twItem);
 	void on_btnVer_CoverFront();		// Muestra la carátula Frontal.
 	void on_btnVer_CoverBack();			// Muestra la carátula Trasera.
 	void on_btnVer_Archivos();			// Muestra la barra de archivos.
 
-	void on_twCapturaVideo_Dblclicked(QTreeWidgetItem *item);
-	void on_twCapturaSonido_Dblclicked(QTreeWidgetItem *item);
-	void on_twUrls_Dblclicked(QTreeWidgetItem *item);
-	void on_twFiles_Dblclicked(QTreeWidgetItem *item);
+	void on_twCapturaVideo_Dblclicked(QTreeWidgetItem *twItem);
+	void on_twCapturaSonido_Dblclicked(QTreeWidgetItem *twItem);
+	void on_twUrls_Dblclicked(QTreeWidgetItem *twItem);
+	void on_twFiles_Dblclicked(QTreeWidgetItem *twItem);
 
 	void on_txtBuscar_textChanged(const QString &text);
 	void on_Ordenar_Lista();			// Ordena la Lista de Juegos.
@@ -199,13 +217,18 @@ private slots:
 	void fin_Proceso(int, QProcess::ExitStatus);
 	void fin_ProcesoError(QProcess::ProcessError);
 
+	void on_InstalarJuego();
 	void on_ImportarJuego();			// Obtiene los datos de juego de forma externa.
 	void on_ExportarJuego();			// Exporta los datos de juego para ser usados en otro equipo o lanzador.
+	void on_ReconstruirTodasCaratulas(bool db_cargada = true);
+	void on_ReconstruirCaratula();
 
 	void on_Opciones();					// Accede a las Opciones del GR-lida.
 	void on_BuscarUpdates();			// Menú para comprobar si existen actualizaciones.
 	void on_AcercaD();					// Acerca del GR-lida.
-	void on_VerRating(bool visible);    // Muestra/Oculta el Rating de la Lista.
+	void on_VerRating(bool visible);	// Muestra/Oculta el Rating de la Lista.
+	void on_VerCompania(bool visible);	// Muestra/Oculta la Compañia de la Lista.
+	void on_VerAnno(bool visible);		// Muestra/Oculta el Año de la Lista.
 
 	void on_VerCarpeta_confdbx();		// Muestra la carpeta confdbx.
 	void on_VerCarpeta_confvdms();		// Muestra la carpeta confvdms.

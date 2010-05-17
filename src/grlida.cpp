@@ -36,6 +36,7 @@
 #include "grlida_multimedia.h"
 #include "grlida_ruleta.h"
 #include "stardelegate.h"
+#include "grlida_instalar_juego.h"
 
 #ifdef Q_OS_WIN32
 #include <qt_windows.h>
@@ -52,10 +53,15 @@ GrLida::GrLida(QWidget *parent, Qt::WFlags flags)
 	setWindowTitle( stTituloGrl() + " - " + fGrl.get_Plataforma() + " v" +  fGrl.stVersionGrl() );
 
 	stHomeDir      = fGrl.GRlidaHomePath();
+	stTempDir      = stHomeDir + "temp/";
 	stIconDir      = stHomeDir + "iconos/";
 	stDatosDir     = stHomeDir + "datos/";
 	stConfgDbxDir  = stHomeDir + "confdbx/";
 	stConfgVdmSDir = stHomeDir + "confvdms/";
+	stCoversDir    = stHomeDir + "covers/";
+	stThumbsDir    = stHomeDir + "thumbs/";
+	stListThumbsDir= stHomeDir + "thumbs_list/";
+	GRLConfig      = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
 
 	stTheme = fGrl.ThemeGrl();
 
@@ -97,16 +103,11 @@ void GrLida::closeEvent(QCloseEvent *e)
 
 bool GrLida::eventFilter(QObject *obj, QEvent *event)
 {
-	if(obj == ui.twJuegos || obj == ui.txtInfo_Comentario )
+	if(obj == ui.twJuegos || obj == ui.lwJuegos || obj == ui.txtInfo_Comentario )
 	{
 		if(event->type() == QEvent::KeyPress)
 		{
 			QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
-
-			int nItem, pos;
-			nItem = 0;
-			pos = ui.twJuegos->indexOfTopLevelItem( ui.twJuegos->currentItem() );
-
 			switch( keyEvent->key() )
 			{
 				case Qt::Key_Enter:
@@ -117,32 +118,12 @@ bool GrLida::eventFilter(QObject *obj, QEvent *event)
 				break;
 				case Qt::Key_Left:
 				case Qt::Key_Up:
-					if( ui.twJuegos->topLevelItemCount()>0 && pos!=-1 )
-					{
-						nItem = pos;
-						if( nItem == 0 )
-						{
-							nItem = ui.twJuegos->topLevelItemCount()-1 ;
-							ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( nItem ), true);
-						} else
-							ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( nItem - 1), true);
-						on_twJuegos_clicked( ui.twJuegos->currentItem() );
-					}
+					ItemBack();
 					return true;
 				break;
 				case Qt::Key_Right:
 				case Qt::Key_Down:
-					if( ui.twJuegos->topLevelItemCount()>0 && pos!=-1 )
-					{
-						nItem = pos;
-						if( nItem == ui.twJuegos->topLevelItemCount()-1 )
-						{
-							nItem = 0 ;
-							ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( 0 ), true);
-						} else
-							ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( nItem + 1), true);
-						on_twJuegos_clicked( ui.twJuegos->currentItem() );
-					}
+					ItemNext();
 					return true;
 				break;
 				default:
@@ -153,6 +134,84 @@ bool GrLida::eventFilter(QObject *obj, QEvent *event)
 			return false;
 	} else
 		return QMainWindow::eventFilter(obj, event); // pass the event on to the parent class
+}
+
+void GrLida::ItemNext()
+{
+	int nItem, pos;
+	nItem = 0;
+	if( ui.mnu_ver_cover_mode->isChecked() )
+	{
+		pos = ui.lwJuegos->row(ui.lwJuegos->currentItem());
+		if( ui.lwJuegos->count() > 0 && pos!=-1)
+		{
+			nItem = pos;
+			if( nItem >= ui.lwJuegos->count()-1 )
+			{
+				nItem = 0 ;
+				ui.lwJuegos->setCurrentRow(0);
+				ui.lwJuegos->item(0)->setSelected(true);
+			} else {
+				ui.lwJuegos->setCurrentRow(nItem + 1);
+				ui.lwJuegos->item(nItem + 1)->setSelected(true);
+			}
+
+			emit on_lwJuegos_clicked( ui.lwJuegos->currentItem() );
+		}
+	} else {
+		pos = ui.twJuegos->indexOfTopLevelItem(ui.twJuegos->currentItem());
+		if( ui.twJuegos->topLevelItemCount()>0 && pos!=-1 )
+		{
+			nItem = pos;
+			if( nItem == ui.twJuegos->topLevelItemCount()-1 )
+			{
+				nItem = 0 ;
+				ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( 0 ));
+			} else
+				ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( nItem + 1));
+
+			emit on_twJuegos_clicked( ui.twJuegos->currentItem() );
+		}
+	}
+}
+
+void GrLida::ItemBack()
+{
+	int nItem, pos;
+	nItem = 0;
+	if( ui.mnu_ver_cover_mode->isChecked() )
+	{
+		pos = ui.lwJuegos->row(ui.lwJuegos->currentItem());
+		if( ui.lwJuegos->count() > 0 && pos!=-1)
+		{
+			nItem = pos;
+			if( nItem <= 0 )
+			{
+				nItem = ui.lwJuegos->count() - 1 ;
+				ui.lwJuegos->setCurrentRow(nItem);
+				ui.lwJuegos->item(nItem)->setSelected(true);
+			} else {
+				ui.lwJuegos->setCurrentRow(nItem - 1);
+				ui.lwJuegos->item(nItem - 1)->setSelected(true);
+			}
+
+			emit on_lwJuegos_clicked( ui.lwJuegos->currentItem() );
+		}
+	} else {
+		pos = ui.twJuegos->indexOfTopLevelItem(ui.twJuegos->currentItem());
+		if( ui.twJuegos->topLevelItemCount()>0 && pos!=-1 )
+		{
+			nItem = pos;
+			if( nItem == 0 )
+			{
+				nItem = ui.twJuegos->topLevelItemCount()-1 ;
+				ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( nItem ));
+			} else
+				ui.twJuegos->setCurrentItem( ui.twJuegos->topLevelItem( nItem - 1));
+
+			emit on_twJuegos_clicked( ui.twJuegos->currentItem() );
+		}
+	}
 }
 
 void GrLida::ConectarBaseDatos()
@@ -171,19 +230,23 @@ void GrLida::ConectarBaseDatos()
 void GrLida::CargarListaJuegosDB(QString strBuscar, QString sqlQuery)
 {
 	QSqlQuery query;
-	QString stIcono, stSqlWhere;
+	QHash<QString, QString> temp_datos;
+	QString stSqlWhere;
 	int n, num_listadatos, num_juegos;
 	QStringList str_ListaDatos;
-	QImage img;
 
 	num_juegos = sql->getCount("dbgrl");
 
-	ui.PicFlowWidget->clear();
-	ui.PicFlowWidget->setSlideSize(QSize(145, 186));
 	id_ImgPicFlow = 0;
 	id_ImgPicFlow_old = 0;
 
 	ui.twJuegos->clear();
+	ui.lwJuegos->clear();
+	ui.PicFlowWidget->clear();
+	ui.PicFlowWidget->setSlideSize(QSize(145, 186));
+
+	lwlista_pos.clear();
+	twlista_pos.clear();
 
 	if(stdb_Orden_ColTabla == "titulo" || stdb_Orden_ColTabla == "subtitulo" || stdb_Orden_ColTabla == "idgrl")
 	{
@@ -192,46 +255,40 @@ void GrLida::CargarListaJuegosDB(QString strBuscar, QString sqlQuery)
 		else
 			stSqlWhere = "WHERE titulo LIKE '%"+strBuscar+"%'";
 
-		setUpdatesEnabled( false );
-
+	//	setUpdatesEnabled( false );
 		query.clear();
-		query.exec("SELECT * FROM dbgrl "+stSqlWhere+" ORDER BY "+stdb_Orden_By+" "+stdb_Orden);
+		query.exec("SELECT idgrl, icono, titulo, compania, anno, thumbs, tipo_emu, favorito, rating FROM dbgrl "+stSqlWhere+" ORDER BY "+stdb_Orden_By+" "+stdb_Orden);
 		if( query.first())
 		{
 			do {
-				QTreeWidgetItem *item = new QTreeWidgetItem( ui.twJuegos );
-				item->setText( col_IdGrl   , query.record().value("idgrl").toString()    );	// idgrl
-				item->setText( col_Titulo  , query.record().value("titulo").toString()   );	// titulo
-				item->setText( col_Rating  , query.record().value("rating").toString()   );	// rating
-				item->setText( col_TipoEmu , query.record().value("tipo_emu").toString() );	// tipo_emu
-				item->setText( col_Favorito, query.record().value("favorito").toString() );	// favorito
-				item->setText( col_PicFlow , QVariant( id_ImgPicFlow ).toString()        );
+				temp_datos["Dat_icono"]    = query.record().value("icono").toString();
+				temp_datos["Dat_titulo"]   = query.record().value("titulo").toString();
+				temp_datos["Dat_compania"] = query.record().value("compania").toString();
+				temp_datos["Dat_anno"]     = query.record().value("anno").toString();
+				temp_datos["Dat_thumbs"]   = query.record().value("thumbs").toString();
+				temp_datos["Dat_tipo_emu"] = query.record().value("tipo_emu").toString();
+				temp_datos["Dat_favorito"] = query.record().value("favorito").toString();
+				temp_datos["Dat_rating"]   = query.record().value("rating").toString();
 
-				if( img.load( query.record().value("thumbs").toString() ) )
-					ui.PicFlowWidget->addSlide( img );
-				else
-					ui.PicFlowWidget->addSlide( QPixmap(stTheme+"images/juego_sin_imagen.png") );
-
-				id_ImgPicFlow++;
-
-				stIcono = fGrl.getIconListaJuegos(query.record().value("icono").toString(), stIconDir);
-				item->setIcon( col_IdGrl, QIcon(stIcono) );
-
-				if( query.record().value("favorito").toString() == "true")
-					item->setIcon( col_Titulo, QIcon(stTheme+"img16/"+stIconoFav)); // icono favorito
-
+				NuevoItemTreeWidget(temp_datos, query.record().value("idgrl").toString());
 			} while ( query.next() );
 
-			ui.twJuegos->setCurrentItem( ui.twJuegos->itemAt(0,0) );
-			on_twJuegos_clicked( ui.twJuegos->currentItem() );
-
+			if( ui.mnu_ver_cover_mode->isChecked() )
+			{
+				ui.lwJuegos->setCurrentItem( ui.lwJuegos->item(0) );
+				ui.lwJuegos->item(ui.lwJuegos->currentRow())->setSelected(true);
+				emit on_lwJuegos_clicked( ui.lwJuegos->currentItem() );
+			} else {
+				ui.twJuegos->setFocus();
+				ui.twJuegos->clearSelection();
+				ui.twJuegos->setCurrentItem( ui.twJuegos->itemAt(0,0) );
+				emit on_twJuegos_clicked( ui.twJuegos->currentItem() );
+			}
 		} else {
 			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
 			lbpanel_5->setText(" ");
 		}
-
-		setUpdatesEnabled( true );
-
+	//	setUpdatesEnabled( true );
 	} else {
 		str_ListaDatos.clear();
 		if(stdb_Orden_ColTabla == "genero")
@@ -276,86 +333,81 @@ void GrLida::CargarListaJuegosDB(QString strBuscar, QString sqlQuery)
 
 		if( num_listadatos >= 0 )
 		{
-			setUpdatesEnabled( false );
+		//	setUpdatesEnabled( false );
 			for(n = 0; n < num_listadatos; ++n)// inicio de for lista datos
 			{
 				query.clear();
-				query.exec("SELECT * FROM dbgrl WHERE "+stdb_Orden_ColTabla+" LIKE '"+ str_ListaDatos.at(n) +"' "+stSqlWhere+" ORDER BY "+ stdb_Orden_By +" "+ stdb_Orden );
+				query.exec("SELECT idgrl, icono, titulo, compania, anno, thumbs, tipo_emu, favorito, rating FROM dbgrl WHERE "+stdb_Orden_ColTabla+" LIKE '"+ str_ListaDatos.at(n) +"' "+stSqlWhere+" ORDER BY "+ stdb_Orden_By +" "+ stdb_Orden );
 				if( query.first() )
 				{
-					QTreeWidgetItem *item = new QTreeWidgetItem( ui.twJuegos );
-
-					item->setText( col_IdGrl, "" );	// idgrl
-					item->setIcon( col_IdGrl, QIcon(stTheme+"img24/emu_sin_imagen.png") );
-					item->setTextColor( col_Titulo, QColor(0,0,0) );
-					item->setFont( col_Titulo, QFont("Times", 10, QFont::Bold));
+					temp_datos["Dat_icono"]    = "";
+					temp_datos["Dat_compania"] = "";
+					temp_datos["Dat_anno"]     = "";
+					temp_datos["Dat_thumbs"]   = "";
+					temp_datos["Dat_tipo_emu"] = "";
+					temp_datos["Dat_favorito"] = "";
+					temp_datos["Dat_rating"]   = "";
 
 					if( str_ListaDatos.at(n) == "" || str_ListaDatos.at(n) == "NULL" )
-						item->setText( col_Titulo, tr("Genero sin Clasificar") );	// titulo
+						temp_datos["Dat_titulo"] = tr("Genero sin Clasificar");
 					else {
 						if( stdb_Orden_ColTabla == "graficos" )
-							item->setText( col_Titulo, tr("Calificación Gráficos")+ ": " + str_ListaDatos.at(n) );
+							temp_datos["Dat_titulo"] = tr("Calificación Gráficos")+ ": " + str_ListaDatos.at(n);
 						else if( stdb_Orden_ColTabla == "sonido" )
-							item->setText( col_Titulo, tr("Calificación Sonido")+ ": " + str_ListaDatos.at(n) );
+							temp_datos["Dat_titulo"] = tr("Calificación Sonido")+ ": " + str_ListaDatos.at(n);
 						else if( stdb_Orden_ColTabla == "jugabilidad" )
-							item->setText( col_Titulo, tr("Calificación Jugabilidad")+ ": " + str_ListaDatos.at(n) );
+							temp_datos["Dat_titulo"] = tr("Calificación Jugabilidad")+ ": " + str_ListaDatos.at(n);
 						else if( stdb_Orden_ColTabla == "original" )
 						{
 							if( str_ListaDatos.at(n) == "true")
-								item->setText( col_Titulo, tr("Juegos Originales") );
+								temp_datos["Dat_titulo"] = tr("Juegos Originales");
 							else
-								item->setText( col_Titulo, tr("No lo son") );
+								temp_datos["Dat_titulo"] = tr("No lo son");
 						}
 						else if( stdb_Orden_ColTabla == "favorito" )
 						{
 							if( str_ListaDatos.at(n) == "true")
-								item->setText( col_Titulo, tr("Juegos Favoritos") );
+								temp_datos["Dat_titulo"] = tr("Juegos Favoritos");
 							else
-								item->setText( col_Titulo, tr("No lo son") );
+								temp_datos["Dat_titulo"] = tr("No lo son");
 						}
 						else if( stdb_Orden_ColTabla == "rating" )
-								item->setText( col_Titulo, tr("Calificación")+ ": " + str_ListaDatos.at(n) );
+								temp_datos["Dat_titulo"] = tr("Calificación")+ ": " + str_ListaDatos.at(n);
 						else
-							item->setText( col_Titulo, str_ListaDatos.at(n) );
+							temp_datos["Dat_titulo"] = str_ListaDatos.at(n);
 					}
-					item->setText( col_Rating , "" ); // rating
-					item->setText( col_TipoEmu, "" ); // tipo_emu
+					NuevoItemTreeWidget(temp_datos, "");
 
 					do {
-						QTreeWidgetItem *item = new QTreeWidgetItem( ui.twJuegos );
+						temp_datos["Dat_icono"]    = query.record().value("icono").toString();
+						temp_datos["Dat_titulo"]   = query.record().value("titulo").toString();
+						temp_datos["Dat_compania"] = query.record().value("compania").toString();
+						temp_datos["Dat_anno"]     = query.record().value("anno").toString();
+						temp_datos["Dat_thumbs"]   = query.record().value("thumbs").toString();
+						temp_datos["Dat_tipo_emu"] = query.record().value("tipo_emu").toString();
+						temp_datos["Dat_favorito"] = query.record().value("favorito").toString();
+						temp_datos["Dat_rating"]   = query.record().value("rating").toString();
 
-						item->setText( col_IdGrl   , query.record().value("idgrl").toString()    );	// idgrl
-						item->setText( col_Titulo  , query.record().value("titulo").toString()   );	// titulo
-						item->setText( col_Rating  , query.record().value("rating").toString()   );	// rating
-						item->setText( col_TipoEmu , query.record().value("tipo_emu").toString() );	// tipo_emu
-						item->setText( col_Favorito, query.record().value("favorito").toString() );	// favorito
-						item->setText( col_PicFlow , QVariant( id_ImgPicFlow ).toString()        );
-
-						if( img.load( query.record().value("thumbs").toString() ) )
-							ui.PicFlowWidget->addSlide( img );
-						else
-							ui.PicFlowWidget->addSlide( QPixmap(stTheme+"images/juego_sin_imagen.png") );
-
-						id_ImgPicFlow++;
-
-						stIcono = fGrl.getIconListaJuegos(query.record().value("icono").toString(), stIconDir);
-						item->setIcon( col_IdGrl, QIcon(stIcono) );
-
-						if( query.record().value("favorito").toString() == "true" )
-							item->setIcon( col_Titulo, QIcon(stTheme+"img16/"+stIconoFav) ); // icono favorito
-
+						NuevoItemTreeWidget(temp_datos, query.record().value("idgrl").toString());
 					} while ( query.next() );
 
-					ui.twJuegos->setCurrentItem( ui.twJuegos->itemAt(0,0) );
-					on_twJuegos_clicked( ui.twJuegos->currentItem() );
-
+					if( ui.mnu_ver_cover_mode->isChecked() )
+					{
+						ui.lwJuegos->setCurrentItem( ui.lwJuegos->item(0) );
+						ui.lwJuegos->item(ui.lwJuegos->currentRow())->setSelected(true);
+						emit on_lwJuegos_clicked( ui.lwJuegos->currentItem() );
+					} else {
+						ui.twJuegos->setFocus();
+						ui.twJuegos->clearSelection();
+						ui.twJuegos->setCurrentItem( ui.twJuegos->itemAt(0,0) );
+						emit on_twJuegos_clicked( ui.twJuegos->currentItem() );
+					}
 				} else {
 					lbpanel_3->setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
 					lbpanel_5->setText(" ");
 				}
 			} // fin de for lista datos
-
-			setUpdatesEnabled( true );
+		//	setUpdatesEnabled( true );
 		}
 	}
 
@@ -412,12 +464,18 @@ void GrLida::createConnections()
 	connect( ui.mnu_ejecutar_scummvm   , SIGNAL( triggered(bool) ), this, SLOT( on_EjecutarScummVM()   ));
 	connect( ui.mnu_ejecutar_juego     , SIGNAL( triggered(bool) ), this, SLOT( on_EjecutarJuego()     ));
 	connect( ui.mnu_ejecutar_setup     , SIGNAL( triggered(bool) ), this, SLOT( on_EjecutarSetup()     ));
+	connect( ui.mnu_tool_instalar      , SIGNAL( triggered(bool) ), this, SLOT( on_InstalarJuego()     ));
 	connect( ui.mnu_tool_importar      , SIGNAL( triggered(bool) ), this, SLOT( on_ImportarJuego()     ));
 	connect( ui.mnu_tool_exportar      , SIGNAL( triggered(bool) ), this, SLOT( on_ExportarJuego()     ));
+	connect( ui.mnu_tool_rebuild_all_covers, SIGNAL( triggered(bool) ), this, SLOT( on_ReconstruirTodasCaratulas() ));
+	connect( ui.mnu_tool_rebuild_cover     , SIGNAL( triggered(bool) ), this, SLOT( on_ReconstruirCaratula()       ));
 	connect( ui.mnu_tool_opciones      , SIGNAL( triggered(bool) ), this, SLOT( on_Opciones()          ));
 	connect( ui.mnu_ver_acercad        , SIGNAL( triggered(bool) ), this, SLOT( on_AcercaD()           ));
+	connect( ui.mnu_ver_compania       , SIGNAL( triggered(bool) ), this, SLOT( on_VerCompania(bool)   ));
+	connect( ui.mnu_ver_anno           , SIGNAL( triggered(bool) ), this, SLOT( on_VerAnno(bool)       ));
 	connect( ui.mnu_ver_rating         , SIGNAL( triggered(bool) ), this, SLOT( on_VerRating(bool)     ));
 	connect( ui.mnu_ver_check_updates  , SIGNAL( triggered(bool) ), this, SLOT( on_BuscarUpdates()     ));
+	connect( ui.mnu_ver_cover_mode     , SIGNAL( triggered(bool) ), this, SLOT( on_CoverMode(bool)     ));
 
 // Abre las distintas carpetas
 	connect( ui.mnu_ver_carpeta_confdbx  , SIGNAL( triggered(bool) ), this, SLOT( on_VerCarpeta_confdbx()   ));
@@ -449,6 +507,10 @@ void GrLida::createConnections()
 	connect( ui.twJuegos, SIGNAL( itemClicked(QTreeWidgetItem*,int)), this, SLOT( on_twJuegos_clicked(QTreeWidgetItem*) ));
 	connect( ui.twJuegos, SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twJuegos_Dblclicked(QTreeWidgetItem*) ));
 	connect( ui.twJuegos, SIGNAL( customContextMenuRequested(const QPoint&)), this, SLOT(showPopup(const QPoint&) ));
+
+	connect( ui.lwJuegos, SIGNAL( itemClicked(QListWidgetItem*)), this, SLOT( on_lwJuegos_clicked(QListWidgetItem*) ));
+	connect( ui.lwJuegos, SIGNAL( itemDoubleClicked(QListWidgetItem*)), this, SLOT( on_lwJuegos_Dblclicked(QListWidgetItem*) ));
+	connect( ui.lwJuegos, SIGNAL( customContextMenuRequested(const QPoint&)), this, SLOT(showPopup(const QPoint&) ));
 
 // Conecta la Lista Nav
 	connect( ui.twListNav, SIGNAL( itemClicked( QTreeWidgetItem*,int)), this, SLOT( on_twListNav_clicked(QTreeWidgetItem*)));
@@ -625,7 +687,7 @@ void GrLida::CrearMenuNav()
 {
 //	if( ui.mnu_ver_nav->isChecked() )
 //	{
-		setUpdatesEnabled( false );
+	//	setUpdatesEnabled( false );
 
 		ui.twListNav->clear();
 
@@ -659,7 +721,7 @@ void GrLida::CrearMenuNav()
 
 		ui.twListNav->setCurrentItem( ui.twListNav->itemAt(0,0) );
 
-		setUpdatesEnabled( true );
+	//	setUpdatesEnabled( true );
 //	}
 }
 
@@ -668,7 +730,7 @@ void GrLida::MenuNav_AddCat(QString etiqueta_cat, QString icono_cat, QString tab
 	QString sqlquery;
 	int total = 0;
 
-	setUpdatesEnabled( false );
+//	setUpdatesEnabled( false );
 
 	if( tabla == "all" )
 		sqlquery = "";
@@ -685,9 +747,9 @@ void GrLida::MenuNav_AddCat(QString etiqueta_cat, QString icono_cat, QString tab
 	twCategoria->setIcon( 0, QIcon( icono_cat )  );
 
 //	if( total > 0 )
-//		twCategoria->setFont( 1, QFont("Times", 10, QFont::Bold) );
+//		twCategoria->setFont( 1, QFont(GRLConfig["font_family"].toString(), GRLConfig["font_size"].toInt(), QFont::Bold) );
 //	else
-//		twCategoria->setFont( 1, QFont("Times", 10, QFont::Normal) );
+//		twCategoria->setFont( 1, QFont(GRLConfig["font_family"].toString(), GRLConfig["font_size"].toInt(), QFont::Normal) );
 
 	twCategoria->setText( 0, etiqueta_cat );
 	twCategoria->setText( 1, QVariant(total).toString() );
@@ -696,14 +758,14 @@ void GrLida::MenuNav_AddCat(QString etiqueta_cat, QString icono_cat, QString tab
 
 	twCategoria->setExpanded( m_expanded );
 
-	setUpdatesEnabled( true );
+//	setUpdatesEnabled( true );
 }
 
 void GrLida::MenuNav_AddSubCat(QString etiqueta_subcat, QString icono_subcat, QString tabla)
 {
 	int total = 0;
 
-	setUpdatesEnabled( false );
+//	setUpdatesEnabled( false );
 
 	QTreeWidgetItem *sub_cat = new QTreeWidgetItem( twCategoria );
 
@@ -713,15 +775,15 @@ void GrLida::MenuNav_AddSubCat(QString etiqueta_subcat, QString icono_subcat, QS
 	sub_cat->setText( 0, etiqueta_subcat );
 
 //	if( total > 0 )
-//		sub_cat->setFont( 1, QFont("Times", 10, QFont::Bold) );
+//		sub_cat->setFont( 1, QFont(GRLConfig["font_family"].toString(), GRLConfig["font_size"].toInt(), QFont::Bold) );
 //	else
-//		sub_cat->setFont( 1, QFont("Times", 10, QFont::Normal) );
+//		sub_cat->setFont( 1, QFont(GRLConfig["font_family"].toString(), GRLConfig["font_size"].toInt(), QFont::Normal) );
 
 	sub_cat->setText( 1, QVariant(total).toString() );
 	sub_cat->setText( 2, tabla );
 	sub_cat->setText( 3, "subcat" );
 
-	setUpdatesEnabled( true );
+//	setUpdatesEnabled( true );
 }
 
 void GrLida::MenuNav_AddSubCat(QString archivo, QString tabla, int num_col, bool idioma_svm)
@@ -764,9 +826,9 @@ void GrLida::MenuNav_AddSubCat(QString archivo, QString tabla, int num_col, bool
 			sub_cat->setText( 0, lista.value(0) );
 
 //			if( total > 0 )
-//				sub_cat->setFont( 1, QFont("Times", 10, QFont::Bold) );
+//				sub_cat->setFont( 1, QFont(GRLConfig["font_family"].toString(), GRLConfig["font_size"].toInt(), QFont::Bold) );
 //			else
-//				sub_cat->setFont( 1, QFont("Times", 10, QFont::Normal) );
+//				sub_cat->setFont( 1, QFont(GRLConfig["font_family"].toString(), GRLConfig["font_size"].toInt(), QFont::Normal) );
 
 			sub_cat->setText( 1, QVariant(total).toString() );
 			sub_cat->setText( 2, tabla );
@@ -775,7 +837,7 @@ void GrLida::MenuNav_AddSubCat(QString archivo, QString tabla, int num_col, bool
 	}
 	file.close();
 
-	setUpdatesEnabled( true );
+//	setUpdatesEnabled( true );
 }
 
 void GrLida::createStatusBar()
@@ -846,7 +908,7 @@ void GrLida::setVisible(bool visible)
 
 void GrLida::CargarConfig()
 {
-	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
+	LwConf    = fGrl.CargarListWidgetIconConf();
 
 	stdb_type           = GRLConfig["db_type"].toString();
 	stdb_server         = GRLConfig["db_server"].toString();
@@ -877,14 +939,11 @@ void GrLida::CargarConfig()
 		setWindowState( windowState() | Qt::WindowMaximized );
 
 //	QRect ( int x, int y, int width, int height )
-	setGeometry(QRect(0,0,738,589));
-	ui.dockw_Nav->setGeometry(QRect(0,75,180,506));
-	ui.dockw_Datos->setGeometry(QRect(418,75,382,506));
-	ui.dockw_PictureFlow->setGeometry(QRect(0,299,356,282));
+	setGeometry(QRect(0,0,868,665));
+	if( GRLConfig["geometry"] !="" )
+		restoreGeometry( GRLConfig["geometry"].toByteArray() );
 
-	restoreGeometry( GRLConfig["geometry"].toByteArray() );
-
-	if( GRLConfig["Version"].toString() >= fGrl.stVersionGrl() )
+	if(GRLConfig["state"] !="" && GRLConfig["Version"].toString() >= fGrl.stVersionGrl() )
 		restoreState( GRLConfig["state"].toByteArray() );
 
 	ui.mnu_ver_nav->setChecked(         GRLConfig["Pnl_Nav"].toBool()         );
@@ -894,7 +953,10 @@ void GrLida::CargarConfig()
 	ui.actionVerCapturas->setChecked(   GRLConfig["Pnl_Capturas"].toBool()    );
 	ui.mnu_ver_ordenar->setChecked(     GRLConfig["Pnl_Ordenar"].toBool()     );
 	ui.mnu_ver_toolbar->setChecked(     GRLConfig["Pnl_Toolbar"].toBool()     );
+	ui.mnu_ver_compania->setChecked(    GRLConfig["ver_Compania"].toBool()    );
+	ui.mnu_ver_anno->setChecked(        GRLConfig["ver_Anno"].toBool()        );
 	ui.mnu_ver_rating->setChecked(      GRLConfig["ver_Rating"].toBool()      );
+	ui.mnu_ver_cover_mode->setChecked(  GRLConfig["ver_IconMode"].toBool()    );
 
 	ui.dockw_Nav->setVisible(           GRLConfig["Pnl_Nav"].toBool()         );
 	ui.dockw_FilesUrl->setVisible(      GRLConfig["Pnl_FilesUrl"].toBool()    );
@@ -902,6 +964,8 @@ void GrLida::CargarConfig()
 	ui.dockw_PictureFlow->setVisible(   GRLConfig["Pnl_PictureFlow"].toBool() );
 	ui.twCapturas->setVisible(          GRLConfig["Pnl_Capturas"].toBool()    );
 	ui.toolBar_ordenar->setVisible(     GRLConfig["Pnl_Ordenar"].toBool()     );
+	emit on_VerCompania( GRLConfig["ver_Compania"].toBool() );
+	emit on_VerAnno( GRLConfig["ver_Anno"].toBool() );
 	emit on_VerRating( GRLConfig["ver_Rating"].toBool() );
 
 #ifdef Q_OS_WIN32
@@ -921,25 +985,38 @@ void GrLida::CargarConfig()
 
 	ui.toolBar->setContextMenuPolicy( Qt::PreventContextMenu );
 
+	item_changed = false;
+	new_rating = old_rating = 0;
+
 	ui.twListNav->headerItem()->setIcon(0, QIcon(stTheme+"img16/tag.png"));
 	ui.twListNav->header()->setMovable(false);
 	ui.twListNav->header()->setResizeMode(0, QHeaderView::Stretch);
 
-	ui.twJuegos->headerItem()->setIcon(0, QIcon(stTheme+"img16/bullet_black.png"));
-	ui.twJuegos->headerItem()->setIcon(1, QIcon(stTheme+"img16/tag.png"));
-	ui.twJuegos->headerItem()->setIcon(2, QIcon(stTheme+"images/star_on.png"));
-	ui.twJuegos->headerItem()->setText(0, "");
+	ui.twJuegos->setVisible(!ui.mnu_ver_cover_mode->isChecked() );
+	ui.twJuegos->headerItem()->setIcon(col_IdGrl   , QIcon(stTheme+"img16/bullet_black.png"));
+	ui.twJuegos->headerItem()->setIcon(col_Titulo  , QIcon(stTheme+"img16/tag.png"));
+	ui.twJuegos->headerItem()->setIcon(col_Compania, QIcon(stTheme+"img16/datos_3.png"));
+	ui.twJuegos->headerItem()->setIcon(col_Anno    , QIcon(stTheme+"img16/fecha.png"));
+	ui.twJuegos->headerItem()->setIcon(col_Rating  , QIcon(stTheme+"images/star_on.png"));
+	ui.twJuegos->headerItem()->setText(col_IdGrl, "");
 	ui.twJuegos->header()->setStretchLastSection(false);
 	ui.twJuegos->header()->setMovable(false);
-	ui.twJuegos->header()->setResizeMode(0, QHeaderView::Fixed  );
-	ui.twJuegos->header()->setResizeMode(1, QHeaderView::Stretch);
-	ui.twJuegos->header()->setResizeMode(2, QHeaderView::Fixed  );
-	ui.twJuegos->setColumnWidth(0, 31);
-	ui.twJuegos->setColumnWidth(2, 90);
+	ui.twJuegos->header()->setResizeMode(col_IdGrl , QHeaderView::Fixed  );
+	ui.twJuegos->header()->setResizeMode(col_Titulo, QHeaderView::Stretch);
+	ui.twJuegos->header()->setResizeMode(col_Rating, QHeaderView::Fixed  );
+	ui.twJuegos->setColumnWidth(col_IdGrl   , 31);
+	ui.twJuegos->setColumnWidth(col_Compania, 160);
+	ui.twJuegos->setColumnWidth(col_Anno    , 50);
+	ui.twJuegos->setColumnWidth(col_Rating  , 90);
 //	ui.twJuegos->setColumnHidden(2, true);
 	ui.twJuegos->setContextMenuPolicy(Qt::CustomContextMenu);
 	ui.twJuegos->installEventFilter(this);
-	ui.twJuegos->setItemDelegate( new StarDelegate(stTheme) );
+	ui.twJuegos->setItemDelegate( new StarDelegate(stTheme, stHomeDir) );
+
+	ui.lwJuegos->setVisible( ui.mnu_ver_cover_mode->isChecked() );
+	ui.lwJuegos->setContextMenuPolicy(Qt::CustomContextMenu);
+	ui.lwJuegos->installEventFilter(this);
+	ui.lwJuegos->setIconSize(QSize(LwConf["icon_width"].toInt(), LwConf["icon_height"].toInt()));
 
 //	ui.txtInfo_Comentario->installEventFilter( this );
 
@@ -1003,7 +1080,10 @@ void GrLida::GuardarConfig()
 	GRLConfig["Pnl_Capturas"]    = ui.actionVerCapturas->isChecked();
 	GRLConfig["Pnl_Ordenar"]     = ui.mnu_ver_ordenar->isChecked();
 	GRLConfig["Pnl_Toolbar"]     = ui.mnu_ver_toolbar->isChecked();
-	GRLConfig["ver_Rating"]     = ui.mnu_ver_rating->isChecked();
+	GRLConfig["ver_Compania"]    = ui.mnu_ver_compania->isChecked();
+	GRLConfig["ver_Anno"]        = ui.mnu_ver_anno->isChecked();
+	GRLConfig["ver_Rating"]      = ui.mnu_ver_rating->isChecked();
+	GRLConfig["ver_IconMode"]    = ui.mnu_ver_cover_mode->isChecked();
 
 	GRLConfig["db_Orden_ColTabla"] = stdb_Orden_ColTabla;
 	GRLConfig["db_Orden_By"]       = stdb_Orden_By;
@@ -1018,9 +1098,10 @@ void GrLida::GuardarConfig()
 
 void GrLida::setTheme()
 {
-	setUpdatesEnabled( false );
-
+//	setUpdatesEnabled( false );
+	fGrl.setTheme();
 	setStyleSheet( fGrl.StyleSheet() );
+	ui.lwJuegos->setStyleSheet( fGrl.StyleSheet(true) );
 
 	QFile LeerArchivo(stTheme+"tpl_juego_info.html");
 	if( LeerArchivo.open( QIODevice::ReadOnly | QIODevice::Text ) )
@@ -1034,7 +1115,6 @@ void GrLida::setTheme()
 	LeerArchivo.close();
 
 // Reempla las Etiquetas
-	//str_html_old.replace("{dir_style_css}", "C:/eclipse/workspace/gr-lida/res/", Qt::CaseSensitive);
 	str_html_old.replace("{lb_cover_front}"   , tr("Carátula Frontal")  , Qt::CaseSensitive);
 	str_html_old.replace("{lb_detalles_juego}", tr("Detalles del juego"), Qt::CaseSensitive);
 	str_html_old.replace("{lb_calificacion}"  , tr("Calificación")      , Qt::CaseSensitive);
@@ -1044,10 +1124,12 @@ void GrLida::setTheme()
 	str_html_old.replace("{lb_compania}"      , tr("Publicado por")     , Qt::CaseSensitive);
 	str_html_old.replace("{lb_desarrollador}" , tr("Desarrollado por")  , Qt::CaseSensitive);
 	str_html_old.replace("{lb_anno}"          , tr("Publicado")         , Qt::CaseSensitive);
+	str_html_old.replace("{lb_edad_recomendada}", tr("Edad recomendada"), Qt::CaseSensitive);
 	str_html_old.replace("{lb_idioma}"        , tr("Idioma")            , Qt::CaseSensitive);
 	str_html_old.replace("{lb_formato}"       , tr("Formato")           , Qt::CaseSensitive);
 	str_html_old.replace("{lb_genero}"        , tr("Genero")            , Qt::CaseSensitive);
 	str_html_old.replace("{lb_tema}"          , tr("Tema")              , Qt::CaseSensitive);
+	str_html_old.replace("{lb_perspectiva}"   , tr("Perspectiva")       , Qt::CaseSensitive);
 	str_html_old.replace("{lb_sistemaop}"     , tr("Sistema Operativo") , Qt::CaseSensitive);
 	str_html_old.replace("{lb_favorito}"      , tr("Favorito")          , Qt::CaseSensitive);
 	str_html_old.replace("{lb_fecha}"         , tr("Añadido el")        , Qt::CaseSensitive);
@@ -1098,17 +1180,25 @@ void GrLida::setTheme()
 	ui.mnu_ejecutar_juego->setIcon( QIcon(stTheme+"img16/ejecutar_app.png") );
 	ui.mnu_ejecutar_setup->setIcon( QIcon(stTheme+"img16/ejecutar_app_setup.png") );
 // Menu Herramientas
+	ui.mnu_tool_instalar->setIcon( QIcon(stTheme+"img16/ejecutar_app_setup.png") );
 	ui.mnu_tool_importar->setIcon( QIcon(stTheme+"img16/importar.png") );
 	ui.mnu_tool_exportar->setIcon( QIcon(stTheme+"img16/exportar.png") );
+	ui.mnu_tool_rebuild_all_covers->setIcon( QIcon(stTheme+"img16/cover_create.png") );
+	ui.mnu_tool_rebuild_cover->setIcon( QIcon(stTheme+"img16/cover_create.png") );
 	ui.mnu_tool_opciones->setIcon( QIcon(stTheme+"img16/opciones.png") );
 // Menu Ver
+	ui.menuMenuVerColumnas->setIcon( QIcon(stTheme+"img16/column_list.png") );
+	ui.menuMenuVerCarpetas->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
 	ui.mnu_ver_nav->setIcon( QIcon(stTheme+"img16/categorias.png") );
+	ui.mnu_ver_cover_mode->setIcon( QIcon(stTheme+"img16/cover_mode.png") );
 	ui.mnu_ver_archivos_url->setIcon( QIcon(stTheme+"img16/archivos.png") );
 	ui.mnu_ver_datos->setIcon( QIcon(stTheme+"img16/datos_1.png") );
 	ui.mnu_ver_pictureflow->setIcon( QIcon(stTheme+"img16/pictureflow.png") );
 	ui.mnu_ver_capturas->setIcon( QIcon(stTheme+"img16/capturas.png") );
 	ui.mnu_ver_ordenar->setIcon( QIcon(stTheme+"img16/orden_asc.png") );
 	ui.mnu_ver_toolbar->setIcon( QIcon(stTheme+"img16/barra_herramintas.png") );
+	ui.mnu_ver_compania->setIcon( QIcon(stTheme+"img16/datos_3.png") );
+	ui.mnu_ver_anno->setIcon( QIcon(stTheme+"img16/fecha.png") );
 	ui.mnu_ver_rating->setIcon( QIcon(stTheme+"images/star_on.png") );
 	ui.mnu_ver_ayuda->setIcon( QIcon(stTheme+"img16/ayuda.png") );
 	ui.mnu_ver_check_updates->setIcon( QIcon(stTheme+"img16/actualizar.png") );
@@ -1142,13 +1232,19 @@ void GrLida::setTheme()
 	else
 		ui.PicFlowWidget->setReflectionEffect(PictureFlow::PlainReflection);
 
-	setUpdatesEnabled( true );
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
+//	setUpdatesEnabled( true );
 }
 
 void GrLida::showPopup(const QPoint & aPosition)
 {
 // Creando el menu
-	ljMenuPopUp = new QMenu(ui.twJuegos);
+	if( ui.mnu_ver_cover_mode->isChecked() )
+		ljMenuPopUp = new QMenu(ui.lwJuegos);
+	else
+		ljMenuPopUp = new QMenu(ui.twJuegos);
+
 	ljMenuPopUp->addAction(ui.mnu_ejecutar_juego);
 	ljMenuPopUp->addAction(ui.mnu_ejecutar_setup);
 	ljMenuPopUp->addSeparator();
@@ -1159,89 +1255,159 @@ void GrLida::showPopup(const QPoint & aPosition)
 	ljMenuPopUp->addAction(ui.mnu_edit_favorito);
 
 // Muestra popupmenu
-	ljMenuPopUp->exec(ui.twJuegos->mapToGlobal(aPosition));
-//	ljMenuPopUp->exec(QCursor::pos());
+//	ljMenuPopUp->exec(ui.twJuegos->mapToGlobal(aPosition));
+	ljMenuPopUp->exec(QCursor::pos());
 	delete ljMenuPopUp;
+}
+
+void GrLida::on_CoverMode(bool cover_mode)
+{
+	ui.twJuegos->setVisible( !cover_mode );
+	ui.lwJuegos->setVisible( cover_mode );
 }
 
 void GrLida::MostrarDatosDelJuego(QString IDitem)
 {
-	if( IDitem != "" && ui.mnu_ver_datos->isChecked() )
+	if( IDitem != "" )
 	{
-		QSqlQuery query;
 		QHash<QString, QString> strDatosJuego;
-		QString stThumbs, stIcono;
-		QFile file_thumbs;
 
-		setUpdatesEnabled( false );
+		ui.mnu_edit_editar->setEnabled(true);
+		ui.mnu_edit_eliminar->setEnabled(true);
+		ui.mnu_edit_favorito->setEnabled(true);
+		ui.mnu_tool_importar->setEnabled(true);
 
-		str_html_new.clear();
-		str_html_comentario.clear();
-
+	//	setUpdatesEnabled( false );
+		strDatosJuego.clear();
 		strDatosJuego = sql->show_Datos( IDitem );
 
-		str_html_new = str_html_old;
-		str_html_comentario = fGrl.ReemplazaTextoSmiles( strDatosJuego["Dat_comentario"], listSmailes);
+		if( ui.mnu_ver_datos->isChecked() )
+		{
+			QString stIcono;
+			str_html_new.clear();
+			str_html_new = str_html_old;
+			str_html_comentario.clear();
+			str_html_comentario = fGrl.ReemplazaTextoSmiles( strDatosJuego["Dat_comentario"], listSmailes);
 
-		stIcono = fGrl.getIconListaJuegos(strDatosJuego["Dat_icono"], stIconDir);
+			stIcono = fGrl.getIconListaJuegos(strDatosJuego["Dat_icono"], stIconDir);
 
-		if( file_thumbs.exists( strDatosJuego["Dat_thumbs"] ) )
-			stThumbs = strDatosJuego["Dat_thumbs"];
-		else
-			stThumbs = stTheme+"images/juego_sin_imagen.png";
+			if( strDatosJuego["Dat_thumbs"] != "" && QFile::exists( stThumbsDir + strDatosJuego["Dat_thumbs"] ) )
+				stThumbs = stThumbsDir + strDatosJuego["Dat_thumbs"];
+			else
+				stThumbs = stTheme + "images/juego_sin_imagen.png";
 
-	// Reempla la info del juego.
-		str_html_new.replace("{info_icono}"        , stIcono                       , Qt::CaseSensitive);
-		str_html_new.replace("{info_titulo}"       , strDatosJuego["Dat_titulo"]       , Qt::CaseSensitive);
-		str_html_new.replace("{info_subtitulo}"    , strDatosJuego["Dat_subtitulo"]    , Qt::CaseSensitive);
-		str_html_new.replace("{info_genero}"       , strDatosJuego["Dat_genero"]       , Qt::CaseSensitive);
-		str_html_new.replace("{info_compania}"     , strDatosJuego["Dat_compania"]     , Qt::CaseSensitive);
-		str_html_new.replace("{info_desarrollador}", strDatosJuego["Dat_desarrollador"], Qt::CaseSensitive);
-		str_html_new.replace("{info_tema}"         , strDatosJuego["Dat_tema"]         , Qt::CaseSensitive);
-		str_html_new.replace("{info_idioma}"       , strDatosJuego["Dat_idioma"]       , Qt::CaseSensitive);
-		str_html_new.replace("{info_formato}"      , strDatosJuego["Dat_formato"]      , Qt::CaseSensitive);
-		str_html_new.replace("{info_anno}"         , strDatosJuego["Dat_anno"]         , Qt::CaseSensitive);
-//		str_html_new.replace("{info_numdisc}"      , strDatosJuego["Dat_numdisc"]      , Qt::CaseSensitive);
-		str_html_new.replace("{info_sistemaop}"    , strDatosJuego["Dat_sistemaop"]    , Qt::CaseSensitive);
-//		str_html_new.replace("{info_tamano}"       , strDatosJuego["Dat_tamano"]       , Qt::CaseSensitive);
-		str_html_new.replace("{info_graficos}"     , strDatosJuego["Dat_graficos"]     , Qt::CaseSensitive);
-		str_html_new.replace("{info_sonido}"       , strDatosJuego["Dat_sonido"]       , Qt::CaseSensitive);
-		str_html_new.replace("{info_jugabilidad}"  , strDatosJuego["Dat_jugabilidad"]  , Qt::CaseSensitive);
-		str_html_new.replace("{info_original}"     , strDatosJuego["Dat_original"]     , Qt::CaseSensitive);
-		str_html_new.replace("{info_estado}"       , strDatosJuego["Dat_estado"]       , Qt::CaseSensitive);
-		str_html_new.replace("{info_thumbs}"       , stThumbs                      , Qt::CaseSensitive);
-//		str_html_new.replace("{info_cover_front}"  , strDatosJuego["Dat_cover_front"]  , Qt::CaseSensitive);
-//		str_html_new.replace("{info_cover_back}"   , strDatosJuego["Dat_cover_back"]   , Qt::CaseSensitive);
-		str_html_new.replace("{info_fecha}"        , strDatosJuego["Dat_fecha"]        , Qt::CaseSensitive);
-		str_html_new.replace("{info_tipo_emu}"     , strDatosJuego["Dat_tipo_emu"]     , Qt::CaseSensitive);
-		str_html_new.replace("{info_favorito}"     , strDatosJuego["Dat_favorito"]     , Qt::CaseSensitive);
-		str_html_new.replace("{info_rating}"       , strDatosJuego["Dat_rating"]       , Qt::CaseSensitive);
-		str_html_new.replace("{info_usuario}"      , strDatosJuego["Dat_usuario"]      , Qt::CaseSensitive);
-		str_html_new.replace("{info_comentario}"   , str_html_comentario           , Qt::CaseSensitive);
+		// Reempla la info del juego.
+			str_html_new.replace("{info_icono}"        , stIcono                           , Qt::CaseSensitive);
+			str_html_new.replace("{info_titulo}"       , strDatosJuego["Dat_titulo"]       , Qt::CaseSensitive);
+			str_html_new.replace("{info_subtitulo}"    , strDatosJuego["Dat_subtitulo"]    , Qt::CaseSensitive);
+			str_html_new.replace("{info_genero}"       , strDatosJuego["Dat_genero"]       , Qt::CaseSensitive);
+			str_html_new.replace("{info_compania}"     , strDatosJuego["Dat_compania"]     , Qt::CaseSensitive);
+			str_html_new.replace("{info_desarrollador}", strDatosJuego["Dat_desarrollador"], Qt::CaseSensitive);
+			str_html_new.replace("{info_tema}"         , strDatosJuego["Dat_tema"]         , Qt::CaseSensitive);
+			str_html_new.replace("{info_perspectiva}"  , strDatosJuego["Dat_perspectiva"]  , Qt::CaseSensitive);
+			str_html_new.replace("{info_idioma}"       , strDatosJuego["Dat_idioma"]       , Qt::CaseSensitive);
+			str_html_new.replace("{info_formato}"      , strDatosJuego["Dat_formato"]      , Qt::CaseSensitive);
+			str_html_new.replace("{info_anno}"         , strDatosJuego["Dat_anno"]         , Qt::CaseSensitive);
+			str_html_new.replace("{info_edad_recomendada}", stTheme +"img16/edad_"+ strDatosJuego["Dat_edad_recomendada"] +".png", Qt::CaseSensitive);
+	//		str_html_new.replace("{info_numdisc}"      , strDatosJuego["Dat_numdisc"]      , Qt::CaseSensitive);
+			str_html_new.replace("{info_sistemaop}"    , strDatosJuego["Dat_sistemaop"]    , Qt::CaseSensitive);
+	//		str_html_new.replace("{info_tamano}"       , strDatosJuego["Dat_tamano"]       , Qt::CaseSensitive);
+			str_html_new.replace("{info_graficos}"     , strDatosJuego["Dat_graficos"]     , Qt::CaseSensitive);
+			str_html_new.replace("{info_sonido}"       , strDatosJuego["Dat_sonido"]       , Qt::CaseSensitive);
+			str_html_new.replace("{info_jugabilidad}"  , strDatosJuego["Dat_jugabilidad"]  , Qt::CaseSensitive);
+			str_html_new.replace("{info_original}"     , strDatosJuego["Dat_original"]     , Qt::CaseSensitive);
+			str_html_new.replace("{info_estado}"       , strDatosJuego["Dat_estado"]       , Qt::CaseSensitive);
+			str_html_new.replace("{info_thumbs}"       , stThumbs                          , Qt::CaseSensitive);
+	//		str_html_new.replace("{info_cover_front}"  , strDatosJuego["Dat_cover_front"]  , Qt::CaseSensitive);
+	//		str_html_new.replace("{info_cover_back}"   , strDatosJuego["Dat_cover_back"]   , Qt::CaseSensitive);
+			str_html_new.replace("{info_fecha}"        , strDatosJuego["Dat_fecha"]        , Qt::CaseSensitive);
+			str_html_new.replace("{info_tipo_emu}"     , strDatosJuego["Dat_tipo_emu"]     , Qt::CaseSensitive);
+			str_html_new.replace("{info_favorito}"     , strDatosJuego["Dat_favorito"]     , Qt::CaseSensitive);
+			str_html_new.replace("{info_rating}"       , strDatosJuego["Dat_rating"]       , Qt::CaseSensitive);
+			str_html_new.replace("{info_usuario}"      , strDatosJuego["Dat_usuario"]      , Qt::CaseSensitive);
+			str_html_new.replace("{info_comentario}"   , str_html_comentario               , Qt::CaseSensitive);
 
-		ui.txtInfo_Comentario->setHtml( str_html_new );
+			ui.txtInfo_Comentario->clear();
+			ui.txtInfo_Comentario->setHtml( str_html_new );
 
-		setUpdatesEnabled( true );
+			if( strDatosJuego["Dat_cover_front"].isEmpty() )
+			{
+				stCaratula_Delantera = "";
+				ui.btnVer_CoverFront->setEnabled(false);
+			} else {
+				stCaratula_Delantera = stCoversDir + strDatosJuego["Dat_cover_front"];
+				ui.btnVer_CoverFront->setEnabled(true);
+			}
 
-//		lbpanel_5->setText(" " + strDatosJuego["Dat_titulo"] + " - " + tr("introducido el") + " " + strDatosJuego["Dat_fecha"] + "  " );
+			if( strDatosJuego["Dat_cover_back"].isEmpty() )
+			{
+				stCaratula_Trasera = "";
+				ui.btnVer_CoverBack->setEnabled(false);
+			} else {
+				stCaratula_Trasera = stCoversDir + strDatosJuego["Dat_cover_back"];
+				ui.btnVer_CoverBack->setEnabled(true);
+			}
+		}
+	//	setUpdatesEnabled( true );
 
-		stCaratula_Delantera = strDatosJuego["Dat_cover_front"];
-		stCaratula_Trasera   = strDatosJuego["Dat_cover_back"];
+		if( strDatosJuego["Dat_favorito"].isEmpty() )
+			ui.mnu_edit_favorito->setEnabled(false);
+		else {
+			ui.mnu_edit_favorito->setEnabled(true);
+			ui.mnu_edit_favorito->setChecked( fGrl.StrToBool( strDatosJuego["Dat_favorito"] ) );
+		}
 
-		if( stCaratula_Delantera.isEmpty() )
-			ui.btnVer_CoverFront->setEnabled(false);
-		else
-			ui.btnVer_CoverFront->setEnabled(true);
+		stTipoEmu = strDatosJuego["Dat_tipo_emu"];
+	// Carga  la configuración dependiendo el emulador
+		if( stTipoEmu == "datos" )
+		{
+			Config_Clear();
+			stConfgJuego = strDatosJuego["Dat_path_exe"];
+			stJuegoParametrosExe = strDatosJuego["Dat_parametros_exe"];
+			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/datos_1.png") );
 
-		if( stCaratula_Trasera.isEmpty() )
-			ui.btnVer_CoverBack->setEnabled(false);
-		else
-			ui.btnVer_CoverBack->setEnabled(true);
+			if(!stConfgJuego.isEmpty() && !QFile( stConfgJuego ).exists() )
+			{
+				ui.actionEjectar->setEnabled(false);
+				ui.mnu_ejecutar_juego->setEnabled(false);
+				QMessageBox::information( this, stTituloGrl(), tr("Configuración del juego no encontrada.")+ "\n\n'" + stConfgJuego + "'" );
+			} else {
+				stDirWorkingJuego = QFileInfo(stConfgJuego).absolutePath();
+				ui.actionEjectar->setEnabled(true);
+				ui.mnu_ejecutar_juego->setEnabled(true);
+			}
+		}
+		else if( stTipoEmu == "dosbox" )
+		{
+			Config_Dbx( stItemIndex );
+			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/dosbox.png") );
+		}
+		else if( stTipoEmu == "scummvm" )
+		{
+			Config_Svm( stItemIndex );
+			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/scummvm.png") );
+		}
+		else if( stTipoEmu == "vdmsound" )
+		{
+			Config_Vdms( stItemIndex );
+			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/vdmsound.png") );
+		} else {
+			Config_Clear();
+			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
+		}
+
+		lbpanel_5->setText(" " + strDatosJuego["Dat_titulo"] + " - " + tr("introducido el") + " " + strDatosJuego["Dat_fecha"] + "  " );
 	} else {
 		stCaratula_Delantera = "";
 		stCaratula_Trasera   = "";
 		ui.btnVer_CoverFront->setEnabled(false);
 		ui.btnVer_CoverBack->setEnabled(false);
+		ui.mnu_edit_editar->setEnabled(false);
+		ui.mnu_edit_eliminar->setEnabled(false);
+		ui.mnu_edit_favorito->setEnabled(false);
+		ui.mnu_edit_favorito->setChecked(false);
+		ui.mnu_tool_importar->setEnabled(false);
+
 		ui.txtInfo_Comentario->clear();
 
 		lbpanel_3->setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
@@ -1257,17 +1423,17 @@ void GrLida::MostrarArchivosURLDelJuego(QString IDitem)
 
 		ui.twUrls->clear();
 		query.clear();
-		query.exec("SELECT * FROM dbgrl_url WHERE idgrl='"+IDitem+"' ORDER BY url ASC");
+		query.exec("SELECT url, descripcion FROM dbgrl_url WHERE idgrl='"+IDitem+"' ORDER BY url ASC");
 		if( query.first())
 		{
-			setUpdatesEnabled( false );
+		//	setUpdatesEnabled( false );
 			do {
 				QTreeWidgetItem *item_url = new QTreeWidgetItem( ui.twUrls );
 				item_url->setText( 0, query.record().value("url").toString()         ); // url
 				item_url->setIcon( 0, QIcon(stTheme+"img16/edit_enlace.png")         ); // icono
 				item_url->setText( 1, query.record().value("descripcion").toString() ); // descripcion
 			} while (query.next());
-			setUpdatesEnabled( true );
+		//	setUpdatesEnabled( true );
 		}
 
 		ui.twFiles->clear();
@@ -1275,7 +1441,7 @@ void GrLida::MostrarArchivosURLDelJuego(QString IDitem)
 		query.exec("SELECT * FROM dbgrl_file WHERE idgrl='"+IDitem+"' ORDER BY nombre ASC");
 		if( query.first() )
 		{
-			setUpdatesEnabled( false );
+		//	setUpdatesEnabled( false );
 			do {
 				QTreeWidgetItem *item_files = new QTreeWidgetItem( ui.twFiles );
 
@@ -1296,7 +1462,7 @@ void GrLida::MostrarArchivosURLDelJuego(QString IDitem)
 				item_files->setText( 4, query.record().value("path").toString()        ); // path
 				item_files->setText( 5, query.record().value("tipo").toString()        ); // tipo
 			} while (query.next());
-			setUpdatesEnabled( true );
+		//	setUpdatesEnabled( true );
 		}
 	} else {
 		ui.twUrls->clear();
@@ -1312,9 +1478,9 @@ void GrLida::CargarCapturasImagenes(const QString directorio)
 		filters.clear();
 		filters << "*.bmp" << "*.jpg" << "*.png" << "*.gif"; // Imagenes soportadas
 
-		setUpdatesEnabled( false );
+	//	setUpdatesEnabled( false );
 		fGrl.CargarListaDeCaptura(ui.twCapturas, directorio, filters, true);
-		setUpdatesEnabled( true );
+	//	setUpdatesEnabled( true );
 	} else
 		ui.twCapturas->clear();
 }
@@ -1329,17 +1495,17 @@ void GrLida::CargarCapturasVideoSonidos(const QString directorio)
 	// Video soportados
 		filters << "*.avi" << "*.mkv" << "*.mov" << "*.mp4" << "*.mpeg" << "*.mpg" << "*.wmv";
 
-		setUpdatesEnabled( false );
+	//	setUpdatesEnabled( false );
 		fGrl.CargarListaDeCaptura(ui.twCapturaVideo, directorio, filters);
-		setUpdatesEnabled( true );
+	//	setUpdatesEnabled( true );
 
 		filters.clear();
 	// Sonidos soportados
 		filters << "*.mp3" << "*.ogg" << "*.wav" << "*.wma";
 
-		setUpdatesEnabled( false );
+	//	setUpdatesEnabled( false );
 		fGrl.CargarListaDeCaptura(ui.twCapturaSonido, directorio, filters);
-		setUpdatesEnabled( true );
+	//	setUpdatesEnabled( true );
 	} else {
 		ui.twCapturaVideo->clear();
 		ui.twCapturaSonido->clear();
@@ -1360,26 +1526,77 @@ void GrLida::on_setFavorito()
 	}
 }
 
-void GrLida::on_twJuegos_clicked(QTreeWidgetItem *item)
+void GrLida::on_lwJuegos_clicked(QListWidgetItem *lwItem)
 {
-	if( item )
+	if( lwItem )
 	{
-		stItemIndex.clear();			// Limpiamos el idgrl
-		stTipoEmu.clear();				// Limpiamos el tipo_emu
-		stItemIndex = item->text(col_IdGrl);	// idgrl del juego en la Base de Datos
-		stTipoEmu   = item->text(col_TipoEmu);	// tipo_emu
+		stItemIndex.clear();	// Limpiamos el idgrl
+		stTipoEmu.clear();		// Limpiamos el tipo_emu
+		stItemIndex = lwItem->data(Qt::UserRole).toString();	// idgrl del juego en la Base de Datos
+		stTipoEmu   = lwItem->data(Qt::UserRole+3).toString();	// indica el tipo de emulador
 
-		if( item->text(col_Favorito).isEmpty() )
-			ui.mnu_edit_favorito->setEnabled(false);
-		else {
-			ui.mnu_edit_favorito->setEnabled(true);
-			ui.mnu_edit_favorito->setChecked( fGrl.StrToBool( item->text(col_Favorito) ) );
-		}
-
-		if( !item->text(col_PicFlow).isEmpty() && ui.mnu_ver_pictureflow->isChecked() )
+		if( !lwItem->data(Qt::UserRole+1).toString().isEmpty() && ui.mnu_ver_pictureflow->isChecked() )
 		{
 			int current_imgPicFlow=0, diferencia=0;
-			current_imgPicFlow = QVariant( item->text(col_PicFlow) ).toInt();
+			current_imgPicFlow = lwItem->data(Qt::UserRole+1).toInt();
+			diferencia  = id_ImgPicFlow_old - current_imgPicFlow;
+
+			if( diferencia > numSkip_PicFlow || diferencia < -numSkip_PicFlow  )
+				ui.PicFlowWidget->setCenterIndex( current_imgPicFlow );
+			else
+				ui.PicFlowWidget->showSlide( current_imgPicFlow );
+
+			id_ImgPicFlow_old = current_imgPicFlow;
+		}
+
+		ui.twJuegos->clearSelection();
+		ui.twJuegos->setCurrentItem( twlista_pos[stItemIndex] );
+		ui.twJuegos->setItemSelected(twlista_pos[stItemIndex], true);
+
+	// Muestra los distintos datos del juego
+		MostrarDatosDelJuego( stItemIndex );
+		MostrarArchivosURLDelJuego( stItemIndex );
+	} else {
+		MostrarDatosDelJuego();
+		MostrarArchivosURLDelJuego();
+		return;
+	}
+}
+
+void GrLida::on_lwJuegos_Dblclicked(QListWidgetItem *lwItem)
+{
+	if( lwItem )
+	{
+		stItemIndex.clear();	// Limpiamos el idgrl
+		stTipoEmu.clear();		// Limpiamos el tipo_emu
+		stItemIndex = lwItem->data(Qt::UserRole).toString();	// idgrl del juego en la Base de Datos
+		stTipoEmu   = lwItem->data(Qt::UserRole+3).toString();	// indica el tipo de emulador
+		on_EjecutarJuego();		// ejecuta el juego
+	}else
+		return;
+}
+
+void GrLida::on_twJuegos_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+	if( current == previous )
+		item_changed = false;
+	else
+		item_changed = true;
+}
+
+void GrLida::on_twJuegos_clicked(QTreeWidgetItem *twItem)
+{
+	if( twItem )
+	{
+		stItemIndex.clear();	// Limpiamos el idgrl
+		stTipoEmu.clear();		// Limpiamos el tipo_emu
+		stItemIndex = twItem->text(col_IdGrl);		// idgrl del juego en la Base de Datos
+		stTipoEmu   = twItem->text(col_TipoEmu);	// indica el tipo de emulador
+
+		if( !twItem->text(col_PicFlow).isEmpty() && ui.mnu_ver_pictureflow->isChecked() )
+		{
+			int current_imgPicFlow=0, diferencia=0;
+			current_imgPicFlow = QVariant( twItem->text(col_PicFlow) ).toInt();
 			diferencia = id_ImgPicFlow_old - current_imgPicFlow;
 
 			if( diferencia > numSkip_PicFlow || diferencia < -numSkip_PicFlow )
@@ -1390,94 +1607,80 @@ void GrLida::on_twJuegos_clicked(QTreeWidgetItem *item)
 			id_ImgPicFlow_old = current_imgPicFlow;
 		}
 
+		int	pos = lwlista_pos[stItemIndex];
+		ui.lwJuegos->setCurrentRow(pos);
+		ui.lwJuegos->item(pos)->setSelected(true);
+
+		old_rating = twItem->text(col_Rating).toInt();
+		if( (item_changed == false) && (old_rating != new_rating) )
+		{
+			QPixmap img_list_thumb;
+			if( sql->ItemIDIndex("dbgrl", stItemIndex, "thumbs") != "" )
+			{
+				if( !img_list_thumb.load( stListThumbsDir + sql->ItemIDIndex("dbgrl", stItemIndex, "thumbs") +".png") )
+					img_list_thumb.load(stTheme+"images/list_cover.png");
+			} else {
+				img_list_thumb.load(stListThumbsDir +"ImgTemp.png");
+			}
+			ui.lwJuegos->item(pos)->setIcon(QIcon( img_list_thumb ));
+		}
+		new_rating = twItem->text(col_Rating).toInt();
+
 	// Muestra los distintos datos del juego
 		MostrarDatosDelJuego( stItemIndex );
 		MostrarArchivosURLDelJuego( stItemIndex );
-
-		QSqlQuery query;
-		query.clear();
-		query.exec("SELECT titulo, fecha FROM dbgrl WHERE idgrl="+stItemIndex+" LIMIT 0,1");
-		query.first();
-		lbpanel_5->setText(" " + query.record().value("titulo").toString() + " - " + tr("introducido el") + " " + query.record().value("fecha").toString() + "  " );
-
-	// Carga  la configuración dependiendo el emulador
-		if( stTipoEmu == "datos" )
-		{
-			Config_Clear();
-			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/datos_1.png") );
-		}
-		else if( stTipoEmu == "dosbox" )
-		{
-			Config_Dbx( stItemIndex );
-			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/dosbox.png") );
-		}
-		else if( stTipoEmu == "scummvm" )
-		{
-			Config_Svm( stItemIndex );
-			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/scummvm.png") );
-		}
-		else if( stTipoEmu == "vdmsound" )
-		{
-			Config_Vdms( stItemIndex );
-			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/vdmsound.png") );
-		} else {
-			Config_Clear();
-			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
-		}
 	} else {
-		lbpanel_3->setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
-		lbpanel_5->setText(" ");
-		ui.mnu_edit_favorito->setEnabled(false);
-		ui.mnu_edit_favorito->setChecked(false);
+		MostrarDatosDelJuego();
+		MostrarArchivosURLDelJuego();
 		return;
 	}
 }
 
-void GrLida::on_twJuegos_Dblclicked(QTreeWidgetItem *item)
+void GrLida::on_twJuegos_Dblclicked(QTreeWidgetItem *twItem)
 {
-	if( item )
+	if( twItem )
 	{
 		stItemIndex.clear();					// Limpiamos el idgrl
 		stTipoEmu.clear();						// Limpiamos el tipo_emu
-		stItemIndex = item->text(col_IdGrl);	// index del juego en la Base de Datos
-		stTipoEmu   = item->text(col_TipoEmu);	// indica el tipo de emulador
+		stItemIndex = twItem->text(col_IdGrl);	// index del juego en la Base de Datos
+		stTipoEmu   = twItem->text(col_TipoEmu);// indica el tipo de emulador
 		on_EjecutarJuego();						// ejecuta el juego
 	}else
 		return;
 }
 
-void GrLida::on_twListNav_clicked(QTreeWidgetItem *item)
+void GrLida::on_twListNav_clicked(QTreeWidgetItem *twItem)
 {
 	QString sqlquery;
-	if( item )
+	if( twItem )
 	{
-		if( item->text(2) == "all" )
+		if( twItem->text(2) == "all" )
 			sqlquery = "";
-		else if( item->text(2) == "favorito" )
+		else if( twItem->text(2) == "favorito" )
 			sqlquery = "WHERE favorito='true'";
-		else if( item->text(2) == "original" )
+		else if( twItem->text(2) == "original" )
 			sqlquery = "WHERE original='true'";
-		else if( item->text(3) == "subcat" && item->text(2) != "all" && item->text(2) != "favorito" && item->text(2) != "original" )
-			sqlquery = "WHERE "+item->text(2)+" LIKE '%"+item->text(0)+"%'";
+		else if( twItem->text(3) == "subcat" && twItem->text(2) != "all" && twItem->text(2) != "favorito" && twItem->text(2) != "original" )
+			sqlquery = "WHERE "+twItem->text(2)+" LIKE '%"+twItem->text(0)+"%'";
 		else
-			sqlquery = "WHERE "+item->text(2)+"!=''";
+			sqlquery = "WHERE "+twItem->text(2)+"!=''";
 
 		CargarListaJuegosDB("", sqlquery);
 	} else
 		return;
 }
 
-void GrLida::on_twListNav_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2)
+void GrLida::on_twListNav_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
-	if( item1 && item2 )
+	if( current && previous )
 		emit on_twListNav_clicked( ui.twListNav->currentItem() );
 	else
 		return;
 }
 
-void GrLida::on_twCapturas_Dblclicked(QTreeWidgetItem *item)
+void GrLida::on_twCapturas_Dblclicked(QTreeWidgetItem *twItem)
 {
-	if( item )
+	if( twItem )
 	{
 		ImageViewer *imgViewer = new ImageViewer(this);
 		imgViewer->setWindowModality(Qt::WindowModal);
@@ -1487,7 +1690,7 @@ void GrLida::on_twCapturas_Dblclicked(QTreeWidgetItem *item)
 		{
 			lista << ui.twCapturas->topLevelItem( num )->text(1);
 		}
-		imgViewer->open( item->text(1), lista );
+		imgViewer->open( twItem->text(1), lista );
 
 		lista.clear();
 
@@ -1500,7 +1703,7 @@ void GrLida::on_btnVer_CoverFront()
 	if( stCaratula_Delantera != "" )
 	{
 		ImageViewer *imgViewer = new ImageViewer(this);
-		imgViewer->setWindowModality(Qt::WindowModal);
+	//	imgViewer->setWindowModality(Qt::WindowModal);
 		imgViewer->show();
 		imgViewer->open( stCaratula_Delantera );
 	}
@@ -1511,7 +1714,7 @@ void GrLida::on_btnVer_CoverBack()
 	if( stCaratula_Trasera != "" )
 	{
 		ImageViewer *imgViewer = new ImageViewer(this);
-		imgViewer->setWindowModality(Qt::WindowModal);
+	//	imgViewer->setWindowModality(Qt::WindowModal);
 		imgViewer->show();
 		imgViewer->open( stCaratula_Trasera );
 	}
@@ -1522,9 +1725,9 @@ void GrLida::on_btnVer_Archivos()
 	//
 }
 
-void GrLida::on_twCapturaVideo_Dblclicked(QTreeWidgetItem *item)
+void GrLida::on_twCapturaVideo_Dblclicked(QTreeWidgetItem *twItem)
 {
-	if( item )
+	if( twItem )
 	{
 		frmMultiMedia *m_Media = new frmMultiMedia(0, Qt::Window);
 //		m_Media->setWindowModality(Qt::WindowModal);
@@ -1534,16 +1737,16 @@ void GrLida::on_twCapturaVideo_Dblclicked(QTreeWidgetItem *item)
 			lista << ui.twCapturaVideo->topLevelItem( num )->text(1);
 		}
 		m_Media->show();
-		int id = lista.indexOf(item->text(1),0);
+		int id = lista.indexOf(twItem->text(1),0);
 		m_Media->AbrirArchivos(lista);
 		m_Media->setItemID(id);
 		lista.clear();
 	}
 }
 
-void GrLida::on_twCapturaSonido_Dblclicked(QTreeWidgetItem *item)
+void GrLida::on_twCapturaSonido_Dblclicked(QTreeWidgetItem *twItem)
 {
-	if( item )
+	if( twItem )
 	{
 		frmMultiMedia *m_Media = new frmMultiMedia(0, Qt::Window);
 		m_Media->setWindowModality(Qt::WindowModal);
@@ -1553,43 +1756,43 @@ void GrLida::on_twCapturaSonido_Dblclicked(QTreeWidgetItem *item)
 			lista << ui.twCapturaSonido->topLevelItem( num )->text(1);
 		}
 		m_Media->show();
-		int id = lista.indexOf(item->text(1),0);
+		int id = lista.indexOf(twItem->text(1),0);
 		m_Media->AbrirArchivos(lista);
 		m_Media->setItemID(id);
 		lista.clear();
 	}
 }
 
-void GrLida::on_twUrls_Dblclicked(QTreeWidgetItem *item)
+void GrLida::on_twUrls_Dblclicked(QTreeWidgetItem *twItem)
 {
-	if( item )
+	if( twItem )
 	{
 		my_url.clear();
-		my_url = fGrl.url_correcta( item->text(0) );
+		my_url = fGrl.url_correcta( twItem->text(0) );
 		QDesktopServices::openUrl( my_url );	// Abre la URL con el navegador por defecto
 	}
 }
 
-void GrLida::on_twFiles_Dblclicked(QTreeWidgetItem *item)
+void GrLida::on_twFiles_Dblclicked(QTreeWidgetItem *twItem)
 {
-	if( item )
+	if( twItem )
 	{
-		if( item->text(5) == "manual" )
+		if( twItem->text(5) == "manual" )
 		{
 			ImageViewer *imgViewer = new ImageViewer(this);
 			imgViewer->setWindowModality(Qt::WindowModal);
 			imgViewer->show();
-			imgViewer->openZip( item->text(4) );
+			imgViewer->openZip( twItem->text(4) );
 		}
-		else if( item->text(5) == "ruleta" )
+		else if( twItem->text(5) == "ruleta" )
 		{
 			frmRuleta *m_Ruleta = new frmRuleta(0, Qt::Window);
 			m_Ruleta->setWindowModality(Qt::WindowModal);
-			m_Ruleta->CargarRuleta(item->text(4));
+			m_Ruleta->CargarRuleta(twItem->text(4));
 			m_Ruleta->exec();
 			delete m_Ruleta;
 		} else
-			fGrl.abrirArchivo( item->text(4) );
+			fGrl.abrirArchivo( twItem->text(4) );
 	}
 }
 
@@ -1639,39 +1842,171 @@ void GrLida::on_Informacion()
 	delete NewInfo;
 }
 
-void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString imgEmu, QString IDitem)
+void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString IDitem, bool nuevo_juego)
 {
-	QTreeWidgetItem *item = new QTreeWidgetItem( ui.twJuegos );
+	QHash<QString, QVariant> LwDat;
+	QPixmap img_thumb, img_list_thumb;
+	QString stIcono;
+	if(datos["Dat_thumbs"]!="")
+	{
+		if( !img_thumb.load( stThumbsDir + datos["Dat_thumbs"] ) )
+			img_thumb.load(stTheme+"images/juego_sin_imagen.png");
 
-	QString stIcono = fGrl.getIconListaJuegos(imgEmu, stIconDir);
+		if( !img_list_thumb.load( stListThumbsDir + datos["Dat_thumbs"]+".png" ) )
+			img_list_thumb.load(stTheme+"images/list_cover.png");
+	} else {
+		LwDat.clear();
+		LwDat["Dat_destino"]          = stListThumbsDir;
+		LwDat["Dat_img_src"]          = stTheme+"images/juego_sin_imagen.png";
+		LwDat["Dat_img_cover"]        = "ImgTemp";
+		LwDat["Dat_titulo"]           = datos["Dat_titulo"];
+		LwDat["Dat_tipo_emu"]         = datos["Dat_tipo_emu"];
+		LwDat["Dat_rating"]           = datos["Dat_rating"].toInt();
+		LwDat["Dat_rating_visible"]   = ui.mnu_ver_rating->isChecked();
 
-	item->setText( col_IdGrl   , IDitem            ); // idgrl
-	item->setIcon( col_IdGrl   , QIcon( stIcono )  ); // icono
-	item->setText( col_Titulo  , datos["Dat_titulo"]   ); // titulo
-	item->setText( col_Rating  , datos["Dat_rating"]   ); // rating
-	item->setText( col_TipoEmu , datos["Dat_tipo_emu"] ); // tipo_emu
-	item->setText( col_Favorito, datos["Dat_favorito"] ); // favorito
-	item->setText( col_PicFlow , QVariant(id_ImgPicFlow).toString() );
+		fGrl.CrearCoverList(LwDat, LwConf);
 
-	id_ImgPicFlow++;
+		img_list_thumb.load(stListThumbsDir +"ImgTemp.png");
+		img_thumb.load(stTheme+"images/juego_sin_imagen.png");
+	}
+
+	QListWidgetItem *lwItem = new QListWidgetItem(ui.lwJuegos);
+	lwItem->setIcon(QIcon( img_list_thumb ));
+	lwItem->setData(Qt::UserRole  , IDitem );
+	lwItem->setData(Qt::UserRole+1, QVariant(id_ImgPicFlow).toString() );
+	lwItem->setData(Qt::UserRole+2, datos["Dat_titulo"]   );
+	lwItem->setData(Qt::UserRole+3, datos["Dat_tipo_emu"] );
+
+	lwlista_pos.insert(IDitem, lwItem->listWidget()->row(lwItem) );
+
+	stIcono = fGrl.getIconListaJuegos(datos["Dat_icono"], stIconDir);
+
+	QTreeWidgetItem *twItem = new QTreeWidgetItem( ui.twJuegos );
+	twItem->setText( col_IdGrl   , IDitem                ); // idgrl
+	twItem->setIcon( col_IdGrl   , QIcon( stIcono )      ); // icono
+	twItem->setText( col_Titulo  , datos["Dat_titulo"]   ); // titulo
+	twItem->setText( col_Compania, datos["Dat_compania"] ); // compania
+	twItem->setText( col_Anno    , datos["Dat_anno"]     ); // anno
+	twItem->setText( col_Rating  , datos["Dat_rating"]   ); // rating
+	twItem->setText( col_TipoEmu , datos["Dat_tipo_emu"] ); // tipo_emu
+	twItem->setText( col_Favorito, datos["Dat_favorito"] ); // favorito
+	twItem->setText( col_PicFlow , QVariant(id_ImgPicFlow).toString() );
+
+	twItem->setTextAlignment(col_Anno,Qt::AlignCenter);
+
+	if(IDitem=="")
+	{
+		twItem->setTextColor( col_Titulo, QColor(0,0,0) );
+		twItem->setFont( col_Titulo, QFont(GRLConfig["font_family"].toString(), GRLConfig["font_size"].toInt(), QFont::Bold));
+	}
 
 	if( datos["Dat_favorito"] == "true" )
-		item->setIcon( col_Titulo, QIcon(stTheme+"img16/"+stIconoFav));
+		twItem->setIcon( col_Titulo, QIcon(stTheme+"img16/"+stIconoFav));
 
-	QImage img;
-	if( img.load( datos["Dat_thumbs"] ) )
-		ui.PicFlowWidget->addSlide( img );
-	else
-		ui.PicFlowWidget->addSlide( QPixmap(stTheme+"images/juego_sin_imagen.png") );
+	twlista_pos.insert(IDitem, twItem );
+
+	ui.PicFlowWidget->addSlide( img_thumb );
+	id_ImgPicFlow++;
 
 //	CrearMenuNav();
+	if( nuevo_juego )
+	{
+		if( ui.mnu_ver_cover_mode->isChecked() )
+		{
+			ui.lwJuegos->setCurrentItem( lwItem );
+			ui.lwJuegos->item(ui.lwJuegos->currentRow())->setSelected(true);
+			emit on_lwJuegos_clicked( ui.lwJuegos->currentItem() );
+		} else {
+			ui.twJuegos->setFocus();
+			ui.twJuegos->clearSelection();
+			ui.twJuegos->setCurrentItem( twItem );
+			emit on_twJuegos_clicked( ui.twJuegos->currentItem() );
+		}
+	}
+}
 
-	ui.twJuegos->setFocus();
-	ui.twJuegos->clearSelection();
-	ui.twJuegos->setCurrentItem( item );
-	on_twJuegos_clicked( item );
+void GrLida::NuevoItemCopiarImagenes(QHash<QString, QString> datos, QString IDitem, bool nuevo_juego)
+{
+	QString img_name, old_name_thumbs, old_name_cover_front, old_name_cover_back;
+	old_name_thumbs      = datos["Dat_thumbs"];
+	old_name_cover_front = datos["Dat_cover_front"];
+	old_name_cover_back  = datos["Dat_cover_back"];
 
-	lbpanel_2->setText(" " + tr("Nº Juegos") + ": " + QVariant(sql->getCount("dbgrl")).toString()+ "  " );
+	stThumbs.clear();
+	stCoverFront.clear();
+	stCoverBack.clear();
+
+	img_name.clear();
+	img_name = "id-"+ IDitem +"_"+ fGrl.eliminar_caracteres(datos["Dat_titulo"]) +"_"+ datos["Dat_tipo_emu"];
+
+// Actualizamos las Imagenes
+	if( old_name_thumbs != "")
+	{
+		datos["Dat_thumbs"] = img_name +"_thumbs"+ fGrl.getExtension(old_name_thumbs);
+		sql->ItemActualizaDatosItem("thumbs", datos["Dat_thumbs"], IDitem);
+
+		if( nuevo_juego == false )
+		{
+			QFileInfo fi_t( old_name_thumbs );
+			if( fi_t.absolutePath()+"/" == stThumbsDir )
+				QFile::rename( old_name_thumbs, stThumbsDir + datos["Dat_thumbs"] );
+			else
+				QFile::copy( old_name_thumbs,  stThumbsDir + datos["Dat_thumbs"] );
+		} else
+			QFile::copy( stTempDir + old_name_thumbs, stThumbsDir + datos["Dat_thumbs"] );
+
+		QHash<QString, QVariant> LwDat;
+		LwDat.clear();
+		LwDat["Dat_destino"]        = stListThumbsDir;
+		LwDat["Dat_img_src"]        = stThumbsDir + datos["Dat_thumbs"];
+		LwDat["Dat_img_cover"]      = datos["Dat_thumbs"];
+		LwDat["Dat_titulo"]         = datos["Dat_titulo"];
+		LwDat["Dat_tipo_emu"]       = datos["Dat_tipo_emu"];
+		LwDat["Dat_rating"]         = datos["Dat_rating"].toInt();
+		LwDat["Dat_rating_visible"] = ui.mnu_ver_rating->isChecked();
+		fGrl.CrearCoverList(LwDat, LwConf);
+
+		stThumbs = datos["Dat_thumbs"];
+	} else
+		stThumbs = "";
+
+	if( old_name_cover_front != "")
+	{
+		datos["Dat_cover_front"] = img_name +"_cover_front"+ fGrl.getExtension(old_name_cover_front);
+		sql->ItemActualizaDatosItem("cover_front", datos["Dat_cover_front"], IDitem);
+
+		if( nuevo_juego == false )
+		{
+			QFileInfo fi_cf( old_name_cover_front );
+			if( fi_cf.absolutePath()+"/" == stCoversDir )
+				QFile::rename( old_name_cover_front, stCoversDir + datos["Dat_cover_front"] );
+			else
+				QFile::copy( old_name_cover_front,  stCoversDir + datos["Dat_cover_front"] );
+		} else
+			QFile::copy( stTempDir + old_name_cover_front, stCoversDir + datos["Dat_cover_front"] );
+
+		stCoverFront = datos["Dat_cover_front"];
+	} else
+		stCoverFront = "";
+
+	if( old_name_cover_back != "")
+	{
+		datos["Dat_cover_back"] = img_name +"_cover_back"+ fGrl.getExtension(old_name_cover_back);
+		sql->ItemActualizaDatosItem("cover_back" , datos["Dat_cover_back"], IDitem);
+
+		if( nuevo_juego == false )
+		{
+			QFileInfo fi_cb( old_name_cover_back );
+			if( fi_cb.absolutePath()+"/" == stCoversDir )
+				QFile::rename( old_name_cover_back, stCoversDir + datos["Dat_cover_back"] );
+			else
+				QFile::copy( old_name_cover_back,  stCoversDir + datos["Dat_cover_back"] );
+		} else
+			QFile::copy( stTempDir + old_name_cover_back, stCoversDir + datos["Dat_cover_back"] );
+
+		stCoverBack = datos["Dat_cover_back"];
+	} else
+		stCoverBack = "";
 }
 
 void GrLida::on_AddNewDbx()
@@ -1680,11 +2015,18 @@ void GrLida::on_AddNewDbx()
 	if( AddDbxNew->exec() == QDialog::Accepted )
 	{
 		QString lastID, lastID_Dbx;
-		lastID = sql->ItemInsertaDatos( AddDbxNew->DatosJuego );
+		lastID     = sql->ItemInsertaDatos( AddDbxNew->DatosJuego );
 		lastID_Dbx = sql->ItemInsertaDbx( AddDbxNew->DatosDosBox , lastID);
 		sql->ItemInsertaMontajesDbx( AddDbxNew->ui.twMontajes, lastID_Dbx );
 		fGrl.CrearArchivoConfigDbx( AddDbxNew->DatosJuego, AddDbxNew->DatosDosBox, AddDbxNew->ui.twMontajes, stConfgDbxDir + AddDbxNew->DatosDosBox["Dbx_path_conf"] );
-		NuevoItemTreeWidget( AddDbxNew->DatosJuego, "dosbox", lastID);
+
+		NuevoItemCopiarImagenes( AddDbxNew->DatosJuego, lastID);
+		AddDbxNew->DatosJuego["Dat_thumbs"]      = stThumbs;
+		AddDbxNew->DatosJuego["Dat_cover_front"] = stCoverFront;
+		AddDbxNew->DatosJuego["Dat_cover_back"]  = stCoverBack;
+		NuevoItemTreeWidget( AddDbxNew->DatosJuego, lastID, true);
+
+		lbpanel_2->setText(" " + tr("Nº Juegos") + ": " + QVariant(sql->getCount("dbgrl")).toString()+ "  ");
 	}
 	delete AddDbxNew;
 }
@@ -1697,7 +2039,14 @@ void GrLida::on_AddNewSvm()
 		QString lastID;
 		lastID = sql->ItemInsertaDatos( AddSvmNew->DatosJuego );
 		sql->ItemInsertaSvm( AddSvmNew->DatosScummVM, lastID);
-		NuevoItemTreeWidget( AddSvmNew->DatosJuego, "scummvm", lastID);
+
+		NuevoItemCopiarImagenes( AddSvmNew->DatosJuego, lastID);
+		AddSvmNew->DatosJuego["Dat_thumbs"]      = stThumbs;
+		AddSvmNew->DatosJuego["Dat_cover_front"] = stCoverFront;
+		AddSvmNew->DatosJuego["Dat_cover_back"]  = stCoverBack;
+		NuevoItemTreeWidget( AddSvmNew->DatosJuego, lastID, true);
+
+		lbpanel_2->setText(" " + tr("Nº Juegos") + ": " + QVariant(sql->getCount("dbgrl")).toString()+ "  ");
 	}
 	delete AddSvmNew;
 }
@@ -1711,7 +2060,14 @@ void GrLida::on_AddNewVdms()
 		lastID = sql->ItemInsertaDatos( AddVdmsNew->DatosJuego );
 		sql->ItemInsertaVdms( AddVdmsNew->DatosVDMSound, lastID);
 		fGrl.CrearArchivoConfigVdmS( AddVdmsNew->DatosVDMSound, stConfgVdmSDir + AddVdmsNew->DatosVDMSound["Vdms_path_conf"] );
-		NuevoItemTreeWidget( AddVdmsNew->DatosJuego, "vdmsound", lastID);
+
+		NuevoItemCopiarImagenes( AddVdmsNew->DatosJuego, lastID);
+		AddVdmsNew->DatosJuego["Dat_thumbs"]      = stThumbs;
+		AddVdmsNew->DatosJuego["Dat_cover_front"] = stCoverFront;
+		AddVdmsNew->DatosJuego["Dat_cover_back"]  = stCoverBack;
+		NuevoItemTreeWidget( AddVdmsNew->DatosJuego, lastID, true);
+
+		lbpanel_2->setText(" " + tr("Nº Juegos") + ": " + QVariant(sql->getCount("dbgrl")).toString()+ "  ");
 	}
 	delete AddVdmsNew;
 }
@@ -1723,7 +2079,8 @@ void GrLida::on_NuevoJuego()
 
 	if( AddJuego->exec() == QDialog::Accepted )
 	{
-		lastID = sql->ItemInsertaDatos( AddJuego->DatosJuego );
+	//	lastID = sql->ItemInsertaDatos( AddJuego->DatosJuego );
+		lastID = AddJuego->DatosJuego["Dat_idgrl"];
 
 		sql->ItemInsertaFiles( AddJuego->ui.twDatosFiles, lastID );
 		sql->ItemInsertaURL( AddJuego->ui.twDatosURL, lastID );
@@ -1744,7 +2101,9 @@ void GrLida::on_NuevoJuego()
 			fGrl.CrearArchivoConfigVdmS( AddJuego->DatosVDMSound, stConfgVdmSDir + AddJuego->DatosVDMSound["Vdms_path_conf"] );
 		}
 
-		NuevoItemTreeWidget( AddJuego->DatosJuego, AddJuego->DatosJuego["Dat_tipo_emu"], lastID);
+		NuevoItemTreeWidget( AddJuego->DatosJuego, lastID, true);
+
+		lbpanel_2->setText(" " + tr("Nº Juegos") + ": " + QVariant(sql->getCount("dbgrl")).toString()+ "  ");
 	}
 	delete AddJuego;
 }
@@ -1756,16 +2115,39 @@ void GrLida::on_EditarJuego()
 		frmAddEditJuego *EditJuego = new frmAddEditJuego( true, stTipoEmu, stItemIndex, 0, Qt::Window);
 		if( EditJuego->exec() == QDialog::Accepted )
 		{
+			QString stCurrentImgPicFlow;
+			QPixmap img_thumb, img_list_thumb;
+
 			sql->ItemActualizaDatos(EditJuego->DatosJuego, stItemIndex);
+
+			if( ui.mnu_ver_cover_mode->isChecked() )
+				stCurrentImgPicFlow = ui.lwJuegos->item(ui.lwJuegos->currentRow())->data(Qt::UserRole+1).toString();
+			else
+				stCurrentImgPicFlow = ui.twJuegos->currentItem()->text(col_PicFlow);
+
+			if(EditJuego->DatosJuego["Dat_thumbs"]!="")
+			{
+				if( !img_thumb.load( stThumbsDir + EditJuego->DatosJuego["Dat_thumbs"] ) )
+					img_thumb.load(stTheme+"images/juego_sin_imagen.png");
+
+				if( !img_list_thumb.load( stListThumbsDir + EditJuego->DatosJuego["Dat_thumbs"]+".png" ) )
+					img_list_thumb.load(stTheme+"images/list_cover.png");
+			} else {
+			//	img_list_thumb.load(stTheme+"images/list_cover.png");
+				img_list_thumb.load(stListThumbsDir +"ImgTemp.png");
+				img_thumb.load(stTheme+"images/juego_sin_imagen.png");
+			}
+
+			ui.lwJuegos->item(ui.lwJuegos->currentRow())->setIcon(QIcon( img_list_thumb ));
+			ui.lwJuegos->item(ui.lwJuegos->currentRow())->setData(Qt::UserRole+2, EditJuego->DatosJuego["Dat_titulo"] );
+
 			ui.twJuegos->currentItem()->setText( col_Titulo  , EditJuego->DatosJuego["Dat_titulo"]   );
+			ui.twJuegos->currentItem()->setText( col_Compania, EditJuego->DatosJuego["Dat_compania"] );
+			ui.twJuegos->currentItem()->setText( col_Anno    , EditJuego->DatosJuego["Dat_anno"]     );
 			ui.twJuegos->currentItem()->setText( col_Rating  , EditJuego->DatosJuego["Dat_rating"]   );
 			ui.twJuegos->currentItem()->setText( col_Favorito, EditJuego->DatosJuego["Dat_favorito"] );
 
-			QImage img;
-			if( img.load( EditJuego->DatosJuego["Dat_thumbs"] ) )
-				ui.PicFlowWidget->setSlide( QVariant( ui.twJuegos->currentItem()->text(col_PicFlow) ).toInt(), img );
-			else
-				ui.PicFlowWidget->setSlide( QVariant( ui.twJuegos->currentItem()->text(col_PicFlow) ).toInt(), QPixmap(stTheme+"images/juego_sin_imagen.png") );
+			ui.PicFlowWidget->setSlide( QVariant( stCurrentImgPicFlow ).toInt(), img_thumb );
 
 			if( stTipoEmu == "dosbox" )
 			{
@@ -1779,7 +2161,7 @@ void GrLida::on_EditarJuego()
 			}
 			if( stTipoEmu == "vdmsound" )
 			{
-				sql->ItemActualizaVdms( EditJuego->DatosVDMSound, EditJuego->stItemIDVdms );
+				sql->ItemActualizaVdms( EditJuego->DatosVDMSound, EditJuego->DatosScummVM["Vdms_id"] );
 				fGrl.CrearArchivoConfigVdmS( EditJuego->DatosVDMSound, stConfgVdmSDir + EditJuego->DatosVDMSound["Vdms_path_conf"] );
 			}
 
@@ -1791,8 +2173,9 @@ void GrLida::on_EditarJuego()
 				ui.twJuegos->currentItem()->setIcon( col_Titulo, QIcon(stTheme+"img16/"+stIconoFav) ); // icono favorito
 
 //			CrearMenuNav();
-
-			on_twJuegos_clicked( ui.twJuegos->currentItem() );
+		// Muestra los distintos datos del juego
+			MostrarDatosDelJuego( stItemIndex );
+			MostrarArchivosURLDelJuego( stItemIndex );
 		}
 		delete EditJuego;
 	}
@@ -1808,17 +2191,38 @@ void GrLida::on_EliminarJuego()
 			int respuesta = QMessageBox::question( this, tr("¿Eliminar Juego...?"), tr("¿Deseas realmente eliminar este juego de la Base de Datos?\nSi es de DOSBox o VDMSound tambien se borrar el archivo de configuración"), tr("Si"), tr("Cancelar"), 0, 1 );
 			if( respuesta == 0 )
 			{
+				QString stCurrentImgPicFlow;
 				sql->ItemEliminar( stItemIndex );
 
-				ui.PicFlowWidget->setSlide( QVariant( ui.twJuegos->currentItem()->text(col_PicFlow) ).toInt(), QPixmap(stTheme+"images/juego_eliminado.png") );
+				if( ui.mnu_ver_cover_mode->isChecked() )
+					stCurrentImgPicFlow = ui.lwJuegos->item(ui.lwJuegos->currentRow())->data(Qt::UserRole+1).toString();
+				else
+					stCurrentImgPicFlow = ui.twJuegos->currentItem()->text(col_PicFlow);
+
+				ui.PicFlowWidget->setSlide( QVariant( stCurrentImgPicFlow ).toInt(), QPixmap(stTheme+"images/juego_eliminado.png") );
+
+				QListWidgetItem *lwItem = ui.lwJuegos->currentItem();
+				if(lwItem != NULL) delete lwItem;
 
 				fGrl.DeleteItemTree( ui.twJuegos->currentItem() );
 
 				QMessageBox::information( this, stTituloGrl(), tr("Juego Eliminado correctamente"));
 
 				if( ui.twJuegos->topLevelItemCount() > 0 )
-					on_twJuegos_clicked( ui.twJuegos->currentItem() );
-				else
+				{
+				//	on_twJuegos_clicked( ui.twJuegos->currentItem() );
+					if( ui.mnu_ver_cover_mode->isChecked() )
+					{
+						ui.lwJuegos->setCurrentItem(ui.lwJuegos->currentItem());
+						ui.lwJuegos->item(ui.lwJuegos->currentRow())->setSelected(true);
+						emit on_lwJuegos_clicked( ui.lwJuegos->currentItem() );
+					} else {
+						ui.twJuegos->setFocus();
+						ui.twJuegos->clearSelection();
+						ui.twJuegos->setCurrentItem( ui.twJuegos->currentItem() );
+						emit on_twJuegos_clicked( ui.twJuegos->currentItem() );
+					}
+				} else
 					MostrarDatosDelJuego();
 
 				lbpanel_2->setText(" " + tr("Nº Juegos") + ": " + QVariant(sql->getCount("dbgrl")).toString()+ "  " );
@@ -1895,7 +2299,7 @@ void GrLida::Config_Svm(QString IDitem)
 	conf_scummvm = sql->showConfg_ScummVM( IDitem );
 	conf_scummvm["Svm_description"] = ui.twJuegos->currentItem()->text(col_Titulo);
 
-	stConfgJuego = "-c" + stHomeDir + "scummvm.ini|" + "-d" + conf_scummvm["Svm_debuglevel"] + "|" + conf_scummvm["Svm_game_label"];
+	stConfgJuego = "-c" + stTempDir + "scummvm.ini|" + "-d" + conf_scummvm["Svm_debuglevel"] + "|" + conf_scummvm["Svm_game_label"];
 
 	QDir dir( conf_scummvm["Svm_path"] );
 	if( dir.exists() )
@@ -1930,7 +2334,7 @@ void GrLida::Config_Vdms(QString IDitem)
 	stDirWorkingJuego.clear();
 
 	query.clear();
-	query.exec("SELECT * FROM dbgrl_emu_vdmsound WHERE idgrl="+IDitem+" LIMIT 0,1");
+	query.exec("SELECT path_conf, path_exe FROM dbgrl_emu_vdmsound WHERE idgrl="+IDitem+" LIMIT 0,1");
 	query.first();
 
 	stConfgJuego = stConfgVdmSDir + query.record().value("path_conf").toString();
@@ -1957,6 +2361,7 @@ void GrLida::Config_Clear()
 	stDirCapturas.clear();
 	stConfgJuego.clear();
 	stDirWorkingJuego.clear();
+	stJuegoParametrosExe.clear();
 	ui.twCapturas->clear();
 
 	ui.actionEjectar->setEnabled(false);
@@ -1967,7 +2372,6 @@ void GrLida::Config_Clear()
 
 void GrLida::Ejecutar(const QString &bin, const QString &parametros, const QString &dirWorking)
 {
-
 	dBoxSvm = new QProcess( this );
 
 	QFile appBin( bin );
@@ -2013,8 +2417,22 @@ void GrLida::on_EjecutarScummVM()
 
 void GrLida::on_EjecutarJuego()
 {
-	if( stTipoEmu != "datos" )
+	if( stTipoEmu == "datos" )
 	{
+	// Ejecuta el juego directamente
+		if( stConfgJuego != "" )
+		{
+			setWindowState(windowState() | Qt::WindowMinimized);
+			#ifdef Q_OS_WIN32
+				if( (long)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()),
+									   reinterpret_cast<const WCHAR*>(stJuegoParametrosExe.utf16()),
+									   reinterpret_cast<const WCHAR*>(stDirWorkingJuego.utf16()), SW_SHOWNORMAL) <= 32)
+					QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego"));
+			#else
+				QMessageBox::information(this, stTituloGrl(), tr("Solo disponible para SO, Windows (NT/2000/XP)"));
+			#endif
+		}
+	} else {
 		if( stConfgJuego != "" )
 		{
 		// Ejecuta el juego con el emulador DOSBox
@@ -2024,12 +2442,13 @@ void GrLida::on_EjecutarJuego()
 			if( stTipoEmu == "scummvm")
 			{
 			// Creamos el INI de configuracion del ScummVM
-				fGrl.CreaIniScummVM(stHomeDir+"scummvm.ini", conf_scummvm);
+				fGrl.CreaIniScummVM(stTempDir+"scummvm.ini", conf_scummvm);
 				Ejecutar( stBinExeSvm, stConfgJuego, stDirWorkingJuego);
 			}
 		// Ejecuta el juego con el emulador vdmsound
 			if( stTipoEmu == "vdmsound" )
 			{
+				setWindowState(windowState() | Qt::WindowMinimized);
 				#ifdef Q_OS_WIN32
 					if( (long)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()), 0, 0, SW_SHOWNORMAL) <= 32)
 						QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego"));
@@ -2046,7 +2465,7 @@ void GrLida::on_EjecutarJuego()
 
 void GrLida::on_EjecutarSetup()
 {
-	QString stConfgSetup;
+	QString stConfgSetup, stDirConfgSetup;
 	QSqlQuery query;
 
 	if( stTipoEmu != "datos" )
@@ -2056,18 +2475,20 @@ void GrLida::on_EjecutarSetup()
 	// Ejecuta el juego con el emulador DOSBox
 		if( stTipoEmu == "dosbox" )
 		{
-			query.exec("SELECT * FROM dbgrl_emu_dosbox WHERE idgrl="+stItemIndex+" LIMIT 0,1");
+			query.exec("SELECT path_setup FROM dbgrl_emu_dosbox WHERE idgrl="+stItemIndex+" LIMIT 0,1");
 			query.first();
 
-			stConfgSetup = query.record().value("path_setup").toString();	// path_setup
+			stConfgSetup    = fGrl.getShortPathName( query.record().value("path_setup").toString() ) + "|-noautoexec";	// path_setup
+			stDirConfgSetup = query.record().value("path_setup").toString();
 		}
 	// Ejecuta el juego con el emulador ScummVM
 		if( stTipoEmu=="scummvm")
 		{
-			query.exec("SELECT * FROM dbgrl_emu_scummvm WHERE idgrl="+stItemIndex+" LIMIT 0,1");
+			query.exec("SELECT path_setup FROM dbgrl_emu_scummvm WHERE idgrl="+stItemIndex+" LIMIT 0,1");
 			query.first();
 
-			stConfgSetup = query.record().value("path_setup").toString();	// path_setup
+			stConfgSetup    = fGrl.getShortPathName( query.record().value("path_setup").toString() ) + "|-noautoexec";	// path_setup
+			stDirConfgSetup = query.record().value("path_setup").toString();
 		}
 	// Ejecuta el juego con el emulador vdmsound
 //		if( stTipoEmu=="vdmsound")
@@ -2078,7 +2499,8 @@ void GrLida::on_EjecutarSetup()
 //				QMessageBox::information(this, stTituloGrl(), tr("Solo disponible para SO, Windows (NT/2000/XP)"));
 //			#endif
 //		}
-		QFileInfo fi( stConfgSetup );
+
+		QFileInfo fi( stDirConfgSetup );
 		if( fi.exists() )
 			stDirWorkingJuego = fi.absolutePath();
 		else
@@ -2093,7 +2515,7 @@ void GrLida::on_EjecutarSetup()
 				else
 					stDirWorkingJuego.append("/").replace("/","\\");
 
-				Ejecutar( stBinExeDbx, fGrl.getShortPathName( stConfgSetup ), stDirWorkingJuego);
+				Ejecutar( stBinExeDbx,  stConfgSetup, stDirWorkingJuego);
 			#else
 				Ejecutar( stBinExeDbx, stConfgSetup, stDirWorkingJuego);
 			#endif
@@ -2163,6 +2585,13 @@ void GrLida::fin_ProcesoError( QProcess::ProcessError error )
 	ui.actionEjectar->setEnabled(true);
 }
 
+void GrLida::on_InstalarJuego()
+{
+	frmInstalarJuego *NewInstalar = new frmInstalarJuego(0);
+	NewInstalar->exec();
+	delete NewInstalar;
+}
+
 void GrLida::on_ImportarJuego()
 {
 	frmImportarJuego *ImportarJuego = new frmImportarJuego("", 0, Qt::Window );
@@ -2192,7 +2621,13 @@ void GrLida::on_ImportarJuego()
 			sql->ItemInsertaVdms(ImportarJuego->DatosVDMSound, lastID);
 		}
 
-		NuevoItemTreeWidget(ImportarJuego->DatosJuego, ImportarJuego->DatosJuego["Dat_tipo_emu"], lastID);
+		NuevoItemCopiarImagenes(ImportarJuego->DatosJuego, lastID);
+		ImportarJuego->DatosJuego["Dat_thumbs"]      = stThumbs;
+		ImportarJuego->DatosJuego["Dat_cover_front"] = stCoverFront;
+		ImportarJuego->DatosJuego["Dat_cover_back"]  = stCoverBack;
+		NuevoItemTreeWidget(ImportarJuego->DatosJuego, lastID, true);
+
+		lbpanel_2->setText(" " + tr("Nº Juegos") + ": " + QVariant(sql->getCount("dbgrl")).toString()+ "  ");
 	}
 	delete ImportarJuego;
 }
@@ -2202,6 +2637,72 @@ void GrLida::on_ExportarJuego()
 	frmExportarJuego *NewExportar = new frmExportarJuego(0, Qt::Window);
 	NewExportar->exec();
 	delete NewExportar;
+}
+
+void GrLida::on_ReconstruirTodasCaratulas(bool db_cargada)
+{
+	QHash<QString, QString> tempDatos;
+	QSqlQuery query_select;
+	query_select.clear();
+	query_select.exec("SELECT idgrl, titulo, thumbs, cover_front, cover_back, rating, tipo_emu FROM dbgrl ORDER BY idgrl ASC");
+	if( query_select.first() )
+	{
+		do {
+			tempDatos["Dat_idgrl"]       = query_select.record().value("idgrl").toString();
+			tempDatos["Dat_titulo"]      = query_select.record().value("titulo").toString();
+			tempDatos["Dat_tipo_emu"]    = query_select.record().value("tipo_emu").toString();
+			tempDatos["Dat_rating"]      = query_select.record().value("rating").toString();
+			tempDatos["Dat_thumbs"]      = query_select.record().value("thumbs").toString();
+			tempDatos["Dat_cover_front"] = query_select.record().value("cover_front").toString();
+			tempDatos["Dat_cover_back"]  = query_select.record().value("cover_back").toString();
+
+			NuevoItemCopiarImagenes(tempDatos, tempDatos["Dat_idgrl"], false);
+
+			if( db_cargada )
+			{
+				if(stThumbs != "")
+				{
+					int	pos = lwlista_pos[tempDatos["Dat_idgrl"]];
+					if( QFile::exists(stListThumbsDir + stThumbs +".png") )
+						ui.lwJuegos->item(pos)->setIcon(QIcon(stListThumbsDir + stThumbs +".png"));
+					else
+						ui.lwJuegos->item(pos)->setIcon(QIcon(stTheme+"images/list_cover.png"));
+				}
+			}
+		} while ( query_select.next() );
+	}
+}
+
+void GrLida::on_ReconstruirCaratula()
+{
+	if( stItemIndex != "" )
+	{
+		QHash<QString, QString> tempDatos;
+		QSqlQuery query_select;
+		query_select.clear();
+		query_select.exec("SELECT idgrl, titulo, thumbs, cover_front, cover_back, rating, tipo_emu FROM dbgrl WHERE idgrl="+stItemIndex+" LIMIT 0,1;");
+		if( query_select.first() )
+		{
+			tempDatos["Dat_idgrl"]       = query_select.record().value("idgrl").toString();
+			tempDatos["Dat_titulo"]      = query_select.record().value("titulo").toString();
+			tempDatos["Dat_tipo_emu"]    = query_select.record().value("tipo_emu").toString();
+			tempDatos["Dat_rating"]      = query_select.record().value("rating").toString();
+			tempDatos["Dat_thumbs"]      = query_select.record().value("thumbs").toString();
+			tempDatos["Dat_cover_front"] = query_select.record().value("cover_front").toString();
+			tempDatos["Dat_cover_back"]  = query_select.record().value("cover_back").toString();
+
+			NuevoItemCopiarImagenes(tempDatos, tempDatos["Dat_idgrl"], false);
+
+			if(stThumbs != "")
+			{
+				int	pos = lwlista_pos[stItemIndex];
+				if( QFile::exists(stListThumbsDir + stThumbs +".png") )
+					ui.lwJuegos->item(pos)->setIcon(QIcon(stListThumbsDir + stThumbs +".png"));
+				else
+					ui.lwJuegos->item(pos)->setIcon(QIcon(stTheme+"images/list_cover.png"));
+			}
+		}
+	}
 }
 
 void GrLida::on_Opciones()
@@ -2241,6 +2742,9 @@ void GrLida::on_Opciones()
 
 		stTheme = GRLConfig["stTheme"].toString();
 		setTheme();
+
+		LwConf = fGrl.CargarListWidgetIconConf();
+		ui.lwJuegos->setIconSize(QSize(LwConf["icon_width"].toInt(), LwConf["icon_height"].toInt()));
 	}
 	delete Opciones;
 }
@@ -2264,7 +2768,17 @@ void GrLida::on_AcercaD()
 
 void GrLida::on_VerRating(bool visible)
 {
-	ui.twJuegos->setColumnHidden(2, !visible);
+	ui.twJuegos->setColumnHidden(col_Rating, !visible);
+}
+
+void GrLida::on_VerCompania(bool visible)
+{
+	ui.twJuegos->setColumnHidden(col_Compania, !visible);
+}
+
+void GrLida::on_VerAnno(bool visible)
+{
+	ui.twJuegos->setColumnHidden(col_Anno, !visible);
 }
 
 void GrLida::on_VerCarpeta_confdbx()
@@ -2336,22 +2850,27 @@ void GrLida::ComprobarArchivosDatos(QString Version_GRL)
 {
 	QFile archivodatos;
 
-	if( Version_GRL != fGrl.stVersionGrl() && Version_GRL < fGrl.stVersionGrl())
+	if( Version_GRL != fGrl.stVersionGrl() && Version_GRL < fGrl.stVersionGrl() )
 	{
 		QDir dirFileDatos( stDatosDir);
 		if( archivodatos.exists( stDatosDir+"xmldb.txt") )
 			dirFileDatos.remove( stDatosDir+"xmldb.txt" );
+
+		emit on_ReconstruirTodasCaratulas(false);
 	}
 
 	CrearArchivoDato(":/datos/generos.txt"  , stDatosDir+"generos.txt");
 	CrearArchivoDato(":/datos/companias.txt", stDatosDir+"companias.txt");
 	CrearArchivoDato(":/datos/tema.txt"     , stDatosDir+"tema.txt");
+	CrearArchivoDato(":/datos/perspectivas.txt", stDatosDir+"perspectivas.txt");
 	CrearArchivoDato(":/datos/formatos.txt" , stDatosDir+"formatos.txt");
 	CrearArchivoDato(":/datos/fechas.txt"   , stDatosDir+"fechas.txt");
 	CrearArchivoDato(":/datos/numdisc.txt"  , stDatosDir+"numdisc.txt");
 	CrearArchivoDato(":/datos/sistemaop.txt", stDatosDir+"sistemaop.txt");
 	CrearArchivoDato(":/datos/smiles.txt"   , stDatosDir+"smiles.txt");
+	CrearArchivoDato(":/datos/edad_recomendada.txt", stDatosDir+"edad_recomendada.txt");
 
+	CrearArchivoDato(":/scripts/gr-lida.js", stHomeDir+"scripts/gr-lida.js");
 	CrearArchivoDato(":/scripts/laisladelabandoware.js", stHomeDir+"scripts/laisladelabandoware.js");
 	CrearArchivoDato(":/scripts/mobygames.js", stHomeDir+"scripts/mobygames.js");
 }
@@ -2390,15 +2909,68 @@ void GrLida::on_CheckUpdateGrl()
 	HttpDownload *httpdown = new HttpDownload(this);
 	httpdown->setHidden(true);
 	connect(httpdown, SIGNAL( StatusRequestFinished() ), this, SLOT( isCheckUpdateFinished() ) );
-	httpdown->downloadFile("http://www.laisladelabandoware.es/lastver.ini", stHomeDir+"temp/lastver.ini");
+	httpdown->downloadFile("http://localhost/gr-lida.org/lastver.ini", stHomeDir+"temp/lastver.ini");
 }
 
 void GrLida::isCheckUpdateFinished()
 {
+	QString html_info, version, info_grl, info_scripts;
+	int num_js = 0;
+	int num_js_updates = 0;
 	bool isNuevaVersionGRlida = false;
+	bool isUpdateScripts = false;
+	html_info.clear();
+	version.clear();
+	info_grl.clear();
+	info_scripts.clear();
+
+// Obtenemos la version de cada script para comparar si tiene actualizacion
+	QHash<QString, QString> js_version;
+	QScriptEngine engine;
+	QDir dir(stHomeDir+"scripts/");
+	QDir::Filters filters = QDir::Files | QDir::Readable;
+	QDir::SortFlags sort = QDir::Name;
+	QFileInfoList entries = dir.entryInfoList(QStringList() << "*.js", filters, sort);
+
+	js_version.clear();
+	foreach (QFileInfo file, entries)
+	{
+		QFile scriptFile( file.absoluteFilePath() );
+		scriptFile.open(QIODevice::ReadOnly | QIODevice::Text);
+		engine.evaluate( scriptFile.readAll() );
+		scriptFile.close();
+		if(engine.evaluate("version").isValid())
+			js_version.insert(file.fileName(), engine.evaluate("version").toString());
+	}
+
+// Abrimos el fichero lastver.ini para comparar las versiones.
 	QSettings settings(stHomeDir+"temp/lastver.ini", QSettings::IniFormat);
 	settings.beginGroup("update");
-		QString version = settings.value("version", fGrl.stVersionGrl()).toString();
+		version  = settings.value("version", fGrl.stVersionGrl()).toString();
+		info_grl = settings.value("info").toString();
+	settings.endGroup();
+	settings.beginGroup("update_scripts");
+		num_js = settings.value("num_js", 0).toInt();
+
+		if( num_js > 0 )
+			isUpdateScripts = true;
+
+		else
+			isUpdateScripts = false;
+
+		if( isUpdateScripts )
+		{
+			for(int i=0; i<num_js; i++)
+			{
+				if( settings.value("js_ver_"+fGrl.IntToStr(i+1)).toString() > js_version[settings.value("js_file_"+fGrl.IntToStr(i+1)).toString()] )
+				{
+					info_scripts.append("<div><a href=\"http://localhost/gr-lida.org/scripts.php\"><img src=\""+stTheme+"img16/floppy_2.png\" width=\"16\" height=\"16\" />"
+									"&nbsp;"+settings.value("js_titulo_"+fGrl.IntToStr(i+1)).toString() +" v"+ settings.value("js_ver_"+fGrl.IntToStr(i+1)).toString()+"</a>"
+									"<br>"+settings.value("js_info_"+fGrl.IntToStr(i+1)).toString()+"</div>");
+					num_js_updates++;
+				}
+			}
+		}
 	settings.endGroup();
 
 	if( version != fGrl.stVersionGrl() && version > fGrl.stVersionGrl() )
@@ -2406,10 +2978,26 @@ void GrLida::isCheckUpdateFinished()
 	else
 		isNuevaVersionGRlida = false;
 
+	html_info = "<h2>"+tr("Nueva Versión")+"</h2>"+tr("Disponible nueva versión del GR-lida %1").arg(version)+"<br>"
+				"<a href=\"http://localhost/gr-lida.org/descargas.php\"><img src=\""+stTheme+"img16/floppy_2.png\" width=\"16\" height=\"16\" />&nbsp;GR-lida v"+version+"</a>"
+				"<br><h3>Info GR-lida v"+version+"</h3>"+info_grl+"<br><br>";
+
 	if( isNuevaVersionGRlida )
-		QMessageBox::information( this, tr("Nueva Versión"), tr("Disponible nueva versión del GR-lida %1").arg(version), QMessageBox::Ok);
-	else {
+	{
+		if( isUpdateScripts && num_js_updates > 0 )
+			fGrl.VentanaInfo( tr("Nueva Versión")+"?", stTheme+"img16/actualizar.png", 400, 260, html_info+"<h3>"+tr("Nueva Versión")+" GR-lida Script Import</h3>"+info_scripts);
+		else
+			fGrl.VentanaInfo( tr("Nueva Versión")+"?", stTheme+"img16/actualizar.png", 400, 260, html_info);
+	} else {
 		if( chkVersionDesdeMenu )
-			QMessageBox::information( this, tr("Nueva Versión"), tr("No hay nuevas actualizaciones disponibles"), QMessageBox::Ok);
+		{
+			if( isUpdateScripts && num_js_updates > 0 )
+				fGrl.VentanaInfo( tr("Nueva Versión")+"?", stTheme+"img16/actualizar.png", 400, 260, "<h3>"+tr("Nueva Versión")+" GR-lida Script Import</h3>"+info_scripts);
+			else
+				fGrl.VentanaInfo( tr("Nueva Versión")+"?", stTheme+"img16/actualizar.png", 400, 260, "<center><br><h3>"+tr("No hay nuevas actualizaciones disponibles")+"</h3></center>");
+		} else {
+			if( isUpdateScripts && num_js_updates > 0 )
+				fGrl.VentanaInfo( tr("Nueva Versión")+"?", stTheme+"img16/actualizar.png", 400, 260, "<h3>"+tr("Nueva Versión")+" GR-lida Script Import</h3>"+info_scripts);
+		}
 	}
 }
