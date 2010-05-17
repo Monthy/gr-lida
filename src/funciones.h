@@ -48,6 +48,8 @@ public:
 // Muestra el Nombre de la plataforma donde esta compilada
 	QString get_Plataforma();
 
+// Crea una copia de seguridad de la Base de Datos
+	void CrearCopiaSeguridad_DB(QString dir, QString Version_GRL);
 // Convierte de Número a Texto
 	QString	IntToStr(int num);
 // Convierte de Texto a Número
@@ -62,6 +64,8 @@ public:
 	QString url_correcta(QString url);
 // Elimina caracteres no permitidos por windows por ejemplo
 	QString eliminar_caracteres(QString str);
+// Obtiene la extension del archivo
+	QString getExtension(QString str);
 // Devuelve un Icono
 	QString getIconListaJuegos(QString icono, QString iconoDir);
 	QString getIconMount(QString tipoDrive, QString select_mount = "");
@@ -69,8 +73,11 @@ public:
 	QString GRlidaHomePath();
 // Devuelve el directorio del Theme a usar
 	QString ThemeGrl();
+	void setTheme();
 // Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use
-	QString StyleSheet();
+	QString StyleSheet(bool list=false);
+// Carga la configuración de los iconos de la lista en modo Icono
+	QHash<QString, QVariant> CargarListWidgetIconConf();
 // Carga la configuración del GR-lida
 	QHash<QString, QVariant> CargarGRLConfig(QString iniFileName);
 // Guarda la configuración del GR-lida
@@ -125,13 +132,15 @@ public:
 	void CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString pathSaveConfg);
 
 // Exportar la configuracion del DOSBox para el GR-lida
-	void Exportar_Profile_GRLida(const QHash<QString, QString> datos, const QHash<QString, QString> datos_emu, QTreeWidget *treeWidget, const QString pathSaveConfg);
+	void Exportar_Profile_GRLida(const QHash<QString, QString> datos, const QHash<QString, QString> datos_emu, QTreeWidget *treeWidget, const QString pathSaveConfg, int exportGRLVersion = 1);
 // Carga la lista de los perfiles preconfigurados en un QComboBox
 	void Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *myCombobox);
 // Exportar la configuracion del DOSBox para el DFend
 	void Exportar_Profile_DFend(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString pathSaveConfg);
 // Importar la configuracion del DOSBox para el DFend
 	QHash<QString, QString> Importar_Profile_DFend(QString fileName);
+// Crea la imagen de la lista
+	void CrearCoverList(QHash<QString, QVariant> datos, QHash<QString, QVariant> config);
 
 private:
 	QString stTheme;
