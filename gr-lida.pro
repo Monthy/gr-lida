@@ -6,21 +6,24 @@
 TEMPLATE = app
 
 # ###### Output filename, directory
-win32:TARGET = GR-lida
-!win32:TARGET = gr-lida
-DESTDIR += ./bin
+win32|mac {
+    TARGET = GR-lida
+} else {
+    TARGET = gr-lida
+}
+
+DESTDIR += bin
 
 # ###### Output directory
-UI_DIR += ./src/
-MOC_DIR += ./build/
-RCC_DIR += ./build/
-OBJECTS_DIR += ./build/
+UI_DIR += src
+MOC_DIR += build
+RCC_DIR += build
+OBJECTS_DIR += build
 
 # ###### Compiler, tools and options
 QT += core \
     gui \
     sql \
-    xml \
     network \
     script \
     phonon
@@ -68,8 +71,7 @@ HEADERS += src/grlida_img_viewer.h \
     src/httpdownload.h \
     src/qtzip.h \
     src/grlida_instalar_juego.h \
-	src/grlida_addedit_vdmsound.h
-
+    src/grlida_addedit_vdmsound.h
 
 SOURCES += src/grlida_img_viewer.cpp \
     src/grlida_info.cpp \
@@ -141,12 +143,13 @@ TRANSLATIONS += lng/gr-lida_es_ES.ts \
     lng/gr-lida_da_DK.ts \
     lng/gr-lida_fr_FR.ts
 
-#
 #CODECFORSRC = UTF-8
 
 win32:RC_FILE += gr-lida.rc
-mac:ICON += gr-lida.icns
-macx:ICON += gr-lida.icns
+mac {
+    ICON += gr-lida.icns
+    LIBS += -lz
+}
 
 # ###### Install
 !win32 { 
