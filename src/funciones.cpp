@@ -1618,14 +1618,12 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		out << "mpu401=" << datosDbx["Dbx_midi_mpu401"] << endl;
 
 		if( versionDbx >= "0.73" )
+		{
 			out << "mididevice=" << datosDbx["Dbx_midi_device"] << endl;
-		else {
+			out << "midiconfig=" << datosDbx["Dbx_midi_config"] << endl << endl;
+		} else {
 			out << "intelligent=" << datosDbx["Dbx_midi_intelligent"] << endl; // DOSBox 0.63
 			out << "device=" << datosDbx["Dbx_midi_device"] << endl;
-		}
-		if( versionDbx >= "0.73" )
-			out << "midiconfig=" << datosDbx["Dbx_midi_config"] << endl;
-		else{
 			out << "config=" << datosDbx["Dbx_midi_config"] << endl;
 			out << "mt32rate=" << datosDbx["Dbx_midi_mt32rate"] << endl << endl; // DOSBox 0.63
 		}
