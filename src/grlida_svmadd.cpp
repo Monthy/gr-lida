@@ -38,9 +38,9 @@ frmSvmAdd::frmSvmAdd(QDialog *parent, Qt::WFlags flags)
 
 	createConnections();
 
-	setTheme();
-
 	CargarConfig();
+
+	setTheme();
 
 // centra la ventana en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
@@ -86,6 +86,9 @@ void frmSvmAdd::setTheme()
 	ui.btnDefectoSvm->setIcon( QIcon(stTheme+"img16/actualizar.png") );
 	ui.cbxSvm_joystick_num->setItemIcon(0, QIcon(stTheme+"img16/controller.png") );
 	ui.cbxSvm_joystick_num->setItemIcon(1, QIcon(stTheme+"img16/controller.png") );
+
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
 }
 
 void frmSvmAdd::CargarConfig()
@@ -94,10 +97,11 @@ void frmSvmAdd::CargarConfig()
 
 	ui.twScummVM->header()->setStretchLastSection(false);
 	ui.twScummVM->header()->setMovable(false);
-	ui.twScummVM->header()->setResizeMode(0, QHeaderView::Stretch);
-	ui.twScummVM->header()->setResizeMode(1, QHeaderView::Fixed  );
-	ui.twScummVM->setColumnWidth(1, 80);
-	ui.twScummVM->clear();
+	ui.twScummVM->header()->setResizeMode(0, QHeaderView::Fixed  );
+	ui.twScummVM->header()->setResizeMode(1, QHeaderView::Stretch);
+	ui.twScummVM->header()->setResizeMode(2, QHeaderView::Fixed  );
+	ui.twScummVM->setColumnWidth(0, 35);
+	ui.twScummVM->setColumnWidth(2, 80);
 
 	QRegExp regexp;
 	regexp.setPatternSyntax( QRegExp::RegExp );
@@ -106,12 +110,12 @@ void frmSvmAdd::CargarConfig()
 	QValidator *validarTexto = new QRegExpValidator( regexp, this );
 	ui.txtSvm_game_label->setValidator( validarTexto );
 
-	fGrl.CargarDatosListaSvm(":/datos/svm_lista.txt"        , ui.twScummVM                    );	// Carga la lista de compatibilidad del ScummVM.
-	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"       , ui.cbxSvm_language    , 2, true );	// Carga la lista de idiomas
-	fGrl.CargarDatosComboBox(":/datos/svm_platform.txt"     , ui.cbxSvm_platform    , 2, false);	// Carga la lista de platform
-	fGrl.CargarDatosComboBox(":/datos/svm_gfxmode.txt"      , ui.cbxSvm_gfx_mode    , 3, false);	// Carga la lista de gfxmode
-	fGrl.CargarDatosComboBox(":/datos/svm_render_mode.txt"  , ui.cbxSvm_render_mode , 1, false);	// Carga la lista de render_mode
-	fGrl.CargarDatosComboBox(":/datos/svm_music_driver.txt" , ui.cbxSvm_music_driver, 1, false);	// Carga la lista de music_driver
+	fGrl.CargarDatosListaSvm(":/datos/svm_lista.txt"        , ui.twScummVM             );	// Carga la lista de compatibilidad del ScummVM.
+	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"       , ui.cbxSvm_language,2,true);	// Carga la lista de idiomas
+	fGrl.CargarDatosComboBox(":/datos/svm_platform.txt"     , ui.cbxSvm_platform    , 2);	// Carga la lista de platform
+	fGrl.CargarDatosComboBox(":/datos/svm_gfxmode.txt"      , ui.cbxSvm_gfx_mode    , 3);	// Carga la lista de gfxmode
+	fGrl.CargarDatosComboBox(":/datos/svm_render_mode.txt"  , ui.cbxSvm_render_mode    );	// Carga la lista de render_mode
+	fGrl.CargarDatosComboBox(":/datos/svm_music_driver.txt" , ui.cbxSvm_music_driver, 3);	// Carga la lista de music_driver
 
 	ui.cbxSvm_cdrom->clear();
 	ui.cbxSvm_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 0");
@@ -127,8 +131,18 @@ void frmSvmAdd::CargarConfig()
 	ui.cbxSvm_music_driver->setCurrentIndex(0);
 	ui.cbxSvm_cdrom->setCurrentIndex(0);
 
-	tempDatosJuego["Dat_favorito"] = "false";
-	tempDatosJuego["Dat_rating"]   = "0";
+	tempDatosJuego["Dat_favorito"]        = "false";
+	tempDatosJuego["Dat_rating"]          = "0";
+	tempDatosJuego["Dat_edad_recomendada"]= "nd";
+	tempDatosJuego["Svm_path_setup"]      = "";
+	tempDatosJuego["Svm_path_extra"]      = "";
+	tempDatosJuego["Svm_path_capturas"]   = "";
+	tempDatosJuego["Svm_path_sonido"]     = "";
+	tempDatosJuego["Svm_master_volume"]   = "192";
+	tempDatosJuego["Svm_output_rate"]     = "<defecto>";
+	tempDatosJuego["Svm_copy_protection"] = "false";
+	tempDatosJuego["Svm_sound_font"]      = "";
+	tempDatosJuego["Svm_opl_driver"]      = "auto";
 }
 
 void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2)
@@ -141,22 +155,22 @@ void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *item1, QTreeWid
 
 void frmSvmAdd::on_twScummVM_clicked(QTreeWidgetItem *item)
 {
-	if( item && item->text(1) != "" )
+	if( item && item->text(2) != "" )
 	{
-		ui.txtDatos_Titulo->setText( item->text(0) );
-		ui.txtSvm_game->setText( item->text(1) );
-		ui.txtSvm_game_label->setText( item->text(1) );
+		ui.txtDatos_Titulo->setText( item->text(1) );
+		ui.txtSvm_game->setText( item->text(2) );
+		ui.txtSvm_game_label->setText( item->text(2) );
 	} else
 		return;
 }
 
 void frmSvmAdd::on_twScummVM_Dblclicked( QTreeWidgetItem *item )
 {
-	if( item && item->text(1) != "" )
+	if( item && item->text(2) != "" )
 	{
-		ui.txtDatos_Titulo->setText( item->text(0) );
-		ui.txtSvm_game->setText( item->text(1) );
-		ui.txtSvm_game_label->setText( item->text(1) );
+		ui.txtDatos_Titulo->setText( item->text(1) );
+		ui.txtSvm_game->setText( item->text(2) );
+		ui.txtSvm_game_label->setText( item->text(2) );
 		ui.btnNext->click();
 	} else
 		return;
@@ -173,7 +187,7 @@ void frmSvmAdd::on_btnPrevious()
 void frmSvmAdd::on_btnNext()
 {
 	bool siguiente;
-	if( ui.twScummVM->isItemSelected( ui.twScummVM->currentItem() ) && ui.twScummVM->currentItem()->text(1) != "" )
+	if( ui.twScummVM->isItemSelected( ui.twScummVM->currentItem() ) && ui.twScummVM->currentItem()->text(2) != "" )
 	{
 		siguiente = true;
 		if( ui.wizardSvm->currentIndex() == 1 )
@@ -213,8 +227,6 @@ void frmSvmAdd::on_btnDescargarInfo()
 	frmImportarJuego * ImportarJuego = new frmImportarJuego(ui.txtDatos_Titulo->text(), 0, Qt::Window);
 	if( ImportarJuego->exec() == QDialog::Accepted )
 	{
-		QFile file_thumbs, file_cover_front, file_cover_back;
-
 		tempDatosJuego.clear();
 		ui.txtDatos_Titulo->setText( ImportarJuego->DatosJuego["Dat_titulo"] );			// titulo
 		tempDatosJuego["Dat_icono"]         = "scummvm";									// icono
@@ -224,6 +236,7 @@ void frmSvmAdd::on_btnDescargarInfo()
 		tempDatosJuego["Dat_compania"]      = ImportarJuego->DatosJuego["Dat_compania"];	// compania
 		tempDatosJuego["Dat_desarrollador"] = ImportarJuego->DatosJuego["Dat_desarrollador"];//desarrollador
 		tempDatosJuego["Dat_tema"]          = ImportarJuego->DatosJuego["Dat_tema"];		// tema
+		tempDatosJuego["Dat_perspectiva"]   = ImportarJuego->DatosJuego["Dat_perspectiva"];	// perspectiva
 		tempDatosJuego["Dat_idioma"]        = ImportarJuego->DatosJuego["Dat_idioma"];		// idioma
 		tempDatosJuego["Dat_formato"]       = ImportarJuego->DatosJuego["Dat_formato"];		// formato
 		tempDatosJuego["Dat_anno"]          = ImportarJuego->DatosJuego["Dat_anno"];		// anno
@@ -242,7 +255,46 @@ void frmSvmAdd::on_btnDescargarInfo()
 		tempDatosJuego["Dat_comentario"]    = ImportarJuego->DatosJuego["Dat_comentario"];	// comentario
 		tempDatosJuego["Dat_favorito"]      = ImportarJuego->DatosJuego["Dat_favorito"];	// favorito
 		tempDatosJuego["Dat_rating"]        = ImportarJuego->DatosJuego["Dat_rating"];		// rating
-		tempDatosJuego["Dat_usuario"]       = ImportarJuego->DatosJuego["Dat_usuario"];		// usuario
+		tempDatosJuego["Dat_edad_recomendada"] = ImportarJuego->DatosJuego["Dat_edad_recomendada"];	// edad_recomendada
+		tempDatosJuego["Dat_usuario"]          = ImportarJuego->DatosJuego["Dat_usuario"];			// usuario
+		tempDatosJuego["Dat_path_exe"]         = ImportarJuego->DatosJuego["Dat_path_exe"];			// path_exe
+		tempDatosJuego["Dat_parametros_exe"]   = ImportarJuego->DatosJuego["Dat_parametros_exe"];	// parametros_exe
+
+		if( ImportarJuego->DatosJuego["Dat_tipo_emu"] == "scummvm" )
+		{
+			ui.cbxSvm_language->setCurrentIndex( ui.cbxSvm_language->findData( ImportarJuego->DatosScummVM["Svm_language"] ) );				// language
+			ui.chkSvm_subtitles->setChecked( fGrl.StrToBool( ImportarJuego->DatosScummVM["Svm_subtitles"] ) );								// subtitles
+			ui.cbxSvm_platform->setCurrentIndex( ui.cbxSvm_platform->findData( ImportarJuego->DatosScummVM["Svm_platform"] ) );				// platform
+			ui.cbxSvm_gfx_mode->setCurrentIndex( ui.cbxSvm_gfx_mode->findData( ImportarJuego->DatosScummVM["Svm_gfx_mode"] ) );				// gfx_mode
+			ui.cbxSvm_render_mode->setCurrentIndex( ui.cbxSvm_render_mode->findText( ImportarJuego->DatosScummVM["Svm_render_mode"] ) );	// render_mode
+			ui.chkSvm_fullscreen->setChecked( fGrl.StrToBool( ImportarJuego->DatosScummVM["Svm_fullscreen"] ) );							// fullscreen
+			ui.chkSvm_aspect_ratio->setChecked( fGrl.StrToBool( ImportarJuego->DatosScummVM["Svm_aspect_ratio"] ) );						// aspect_ratio
+			ui.txtSvm_path->setText( ImportarJuego->DatosScummVM["Svm_path"] );																// path
+			tempDatosJuego["Svm_path_setup"] = ImportarJuego->DatosScummVM["Svm_path_setup"];												// path_setup
+			tempDatosJuego["Svm_path_extra"] = ImportarJuego->DatosScummVM["Svm_path_extra"];												// path_extra
+			ui.txtSvm_savepath->setText( ImportarJuego->DatosScummVM["Svm_path_save"] );													// path_save
+			tempDatosJuego["Svm_path_capturas"] = ImportarJuego->DatosScummVM["Svm_path_capturas"];											// path_capturas
+			tempDatosJuego["Svm_path_sonido"]   = ImportarJuego->DatosScummVM["Svm_path_sonido"];											// path_sonido
+			ui.cbxSvm_music_driver->setCurrentIndex( ui.cbxSvm_music_driver->findText( ImportarJuego->DatosScummVM["Svm_music_driver"] ) );	// music_driver
+			ui.chkSvm_enable_gs->setChecked( fGrl.StrToBool( ImportarJuego->DatosScummVM["Svm_enable_gs"] ) );								// enable_gs
+			ui.chkSvm_multi_midi->setChecked( fGrl.StrToBool( ImportarJuego->DatosScummVM["Svm_multi_midi"] ) );							// multi_midi
+			ui.chkSvm_native_mt32->setChecked( fGrl.StrToBool( ImportarJuego->DatosScummVM["Svm_native_mt32"] ) );							// native_mt32
+			tempDatosJuego["Svm_master_volume"] = ImportarJuego->DatosScummVM["Svm_master_volume"];											// master_volume
+			ui.h_SliderSvm_music_volume->setSliderPosition( fGrl.StrToInt( ImportarJuego->DatosScummVM["Svm_music_volume"] ) );				// music_volume
+			ui.h_SliderSvm_sfx_volume->setSliderPosition( fGrl.StrToInt( ImportarJuego->DatosScummVM["Svm_sfx_volume"] ) );					// sfx_volume
+			ui.h_SliderSvm_speech_volume->setSliderPosition( fGrl.StrToInt( ImportarJuego->DatosScummVM["Svm_speech_volume"] ) );			// speech_volume
+			ui.h_SliderSvm_tempo->setSliderPosition( fGrl.StrToInt( ImportarJuego->DatosScummVM["Svm_tempo"] ) );							// tempo
+			ui.h_SliderSvm_talkspeed->setSliderPosition(fGrl.StrToInt(  ImportarJuego->DatosScummVM["Svm_talkspeed"] ) );					// talkspeed
+			ui.h_SliderSvm_debuglevel->setSliderPosition( fGrl.StrToInt( ImportarJuego->DatosScummVM["Svm_debuglevel"] ) );					// debuglevel
+			ui.h_SliderSvm_midi_gain->setSliderPosition( fGrl.StrToInt( ImportarJuego->DatosScummVM["Svm_midi_gain"] ) );					// midi_gain
+			ui.h_SliderSvm_walkspeed->setSliderPosition( fGrl.StrToInt( ImportarJuego->DatosScummVM["Svm_walkspeed"] ) );					// walkspeed
+			ui.cbxSvm_cdrom->setCurrentIndex( fGrl.StrToInt( ImportarJuego->DatosScummVM["Svm_cdrom"] ) );									// cdrom
+			ui.cbxSvm_joystick_num->setCurrentIndex( fGrl.StrToInt( ImportarJuego->DatosScummVM["Svm_joystick_num"] ) );					// joystick_num
+			tempDatosJuego["Svm_output_rate"]     = ImportarJuego->DatosScummVM["Svm_output_rate"];											// output_rate
+			tempDatosJuego["Svm_copy_protection"] = ImportarJuego->DatosScummVM["Svm_copy_protection"];										// copy_protection
+			tempDatosJuego["Svm_sound_font"]      = ImportarJuego->DatosScummVM["Svm_sound_font"];											// sound_font
+			tempDatosJuego["Svm_opl_driver"]      = ImportarJuego->DatosScummVM["Svm_opl_driver"];											// opl_driver
+		}
 	}
 }
 
@@ -259,6 +311,7 @@ void frmSvmAdd::on_btnOk()
 		DatosJuego["Dat_compania"]      = ""+tempDatosJuego["Dat_compania"];		// compania
 		DatosJuego["Dat_desarrollador"] = ""+tempDatosJuego["Dat_desarrollador"];	// desarrollador
 		DatosJuego["Dat_tema"]          = ""+tempDatosJuego["Dat_tema"];			// tema
+		DatosJuego["Dat_perspectiva"]   = ""+tempDatosJuego["Dat_perspectiva"];		// perspectiva
 		DatosJuego["Dat_idioma"]        = ""+tempDatosJuego["Dat_idioma"];			// idioma
 		DatosJuego["Dat_formato"]       = ""+tempDatosJuego["Dat_formato"];			// formato
 		DatosJuego["Dat_anno"]          = ""+tempDatosJuego["Dat_anno"];			// anno
@@ -273,12 +326,15 @@ void frmSvmAdd::on_btnOk()
 		DatosJuego["Dat_thumbs"]        = ""+tempDatosJuego["Dat_thumbs"];			// thumbs
 		DatosJuego["Dat_cover_front"]   = ""+tempDatosJuego["Dat_cover_front"];		// cover_front
 		DatosJuego["Dat_cover_back"]    = ""+tempDatosJuego["Dat_cover_back"];		// cover_back
-		DatosJuego["Dat_fecha"]         = fGrl.HoraFechaActual(GRLConfig["FormatoFecha"].toString());			// fecha d/m/a h:m:s
+		DatosJuego["Dat_fecha"]         = fGrl.HoraFechaActual(GRLConfig["FormatoFecha"].toString());// fecha d/m/a h:m:s
 		DatosJuego["Dat_tipo_emu"]      = "scummvm";								// tipo_emu
 		DatosJuego["Dat_comentario"]    = ""+tempDatosJuego["Dat_comentario"];		// comentario
 		DatosJuego["Dat_favorito"]      = ""+tempDatosJuego["Dat_favorito"];		// favorito
 		DatosJuego["Dat_rating"]        = ""+tempDatosJuego["Dat_rating"];			// rating
-		DatosJuego["Dat_usuario"]       = ""+tempDatosJuego["Dat_usuario"];			// rating
+		DatosJuego["Dat_edad_recomendada"] = ""+tempDatosJuego["Dat_edad_recomendada"];	// edad_recomendada
+		DatosJuego["Dat_usuario"]          = ""+tempDatosJuego["Dat_usuario"];			// usuario
+		DatosJuego["Dat_path_exe"]         = ""+tempDatosJuego["Dat_path_exe"];			// path_exe
+		DatosJuego["Dat_parametros_exe"]   = ""+tempDatosJuego["Dat_parametros_exe"];	// parametros_exe
 
 		DatosScummVM.clear();
 		DatosScummVM["Svm_game"]            = ui.txtSvm_game->text();															// game
@@ -286,21 +342,21 @@ void frmSvmAdd::on_btnOk()
 		DatosScummVM["Svm_language"]        = ui.cbxSvm_language->itemData( ui.cbxSvm_language->currentIndex() ).toString();	// language
 		DatosScummVM["Svm_subtitles"]       = fGrl.BoolToStr( ui.chkSvm_subtitles->isChecked() );								// subtitles
 		DatosScummVM["Svm_platform"]        = ui.cbxSvm_platform->itemData( ui.cbxSvm_platform->currentIndex() ).toString();	// platform
-		DatosScummVM["Svm_gfx_mode"]        = ui.cbxSvm_gfx_mode->itemData( ui.cbxSvm_gfx_mode->currentIndex() ).toString();	// platform
+		DatosScummVM["Svm_gfx_mode"]        = ui.cbxSvm_gfx_mode->itemData( ui.cbxSvm_gfx_mode->currentIndex() ).toString();	// gfx_mode
 		DatosScummVM["Svm_render_mode"]     = ui.cbxSvm_render_mode->currentText();						// render_mode
 		DatosScummVM["Svm_fullscreen"]      = fGrl.BoolToStr( ui.chkSvm_fullscreen->isChecked() );		// fullscreen
 		DatosScummVM["Svm_aspect_ratio"]    = fGrl.BoolToStr( ui.chkSvm_aspect_ratio->isChecked() );	// aspect_ratio
 		DatosScummVM["Svm_path"]            = ui.txtSvm_path->text();									// path
-		DatosScummVM["Svm_path_setup"]      = "";														// path_setup
-		DatosScummVM["Svm_path_extra"]      = "";														// path_extra
+		DatosScummVM["Svm_path_setup"]      = ""+tempDatosJuego["Svm_path_setup"];						// path_setup
+		DatosScummVM["Svm_path_extra"]      = ""+tempDatosJuego["Svm_path_extra"];						// path_extra
 		DatosScummVM["Svm_path_save"]       = ui.txtSvm_savepath->text();								// path_save
-		DatosScummVM["Svm_path_capturas"]   = "";														// path_capturas
-		DatosScummVM["Svm_path_sonido"]     = "";														// path_sonido
+		DatosScummVM["Svm_path_capturas"]   = ""+tempDatosJuego["Svm_path_capturas"];					// path_capturas
+		DatosScummVM["Svm_path_sonido"]     = ""+tempDatosJuego["Svm_path_sonido"];						// path_sonido
 		DatosScummVM["Svm_music_driver"]    = ui.cbxSvm_music_driver->currentText();					// music_driver
 		DatosScummVM["Svm_enable_gs"]       = fGrl.BoolToStr( ui.chkSvm_enable_gs->isChecked() );		// enable_gs
 		DatosScummVM["Svm_multi_midi"]      = fGrl.BoolToStr( ui.chkSvm_multi_midi->isChecked() );		// multi_midi
 		DatosScummVM["Svm_native_mt32"]     = fGrl.BoolToStr( ui.chkSvm_native_mt32->isChecked() );		// native_mt32
-		DatosScummVM["Svm_master_volume"]   = "255";													// master_volume
+		DatosScummVM["Svm_master_volume"]   = ""+tempDatosJuego["Svm_master_volume"];					// master_volume
 		DatosScummVM["Svm_music_volume"]    = ui.posSliderSvm_1->text();								// music_volume
 		DatosScummVM["Svm_sfx_volume"]      = ui.posSliderSvm_2->text();								// sfx_volume
 		DatosScummVM["Svm_speech_volume"]   = ui.posSliderSvm_3->text();								// speech_volume
@@ -309,11 +365,12 @@ void frmSvmAdd::on_btnOk()
 		DatosScummVM["Svm_debuglevel"]      = ui.posSliderSvm_6->text();								// debuglevel
 		DatosScummVM["Svm_cdrom"]           = fGrl.IntToStr( ui.cbxSvm_cdrom->currentIndex() );			// cdrom
 		DatosScummVM["Svm_joystick_num"]    = fGrl.IntToStr( ui.cbxSvm_joystick_num->currentIndex() );	//joystick_num
-		DatosScummVM["Svm_output_rate"]     = "22050";													// output_rate
-		DatosScummVM["Svm_midi_gain"]       = "100";													// midi_gain
-		DatosScummVM["Svm_copy_protection"] = "false";													// copy_protection
-		DatosScummVM["Svm_sound_font"]      = "";														// sound_font
-		DatosScummVM["Svm_walkspeed"]       = "0";														// sound_font
+		DatosScummVM["Svm_output_rate"]     = ""+tempDatosJuego["Svm_output_rate"];						// output_rate
+		DatosScummVM["Svm_midi_gain"]       = ui.posSliderSvm_7->text();;								// midi_gain
+		DatosScummVM["Svm_copy_protection"] = ""+tempDatosJuego["Svm_copy_protection"];					// copy_protection
+		DatosScummVM["Svm_sound_font"]      = ""+tempDatosJuego["Svm_sound_font"];						// sound_font
+		DatosScummVM["Svm_walkspeed"]       = ui.posSliderSvm_8->text();								// walkspeed
+		DatosScummVM["Svm_opl_driver"]      = ""+tempDatosJuego["Svm_opl_driver"];						// opl_driver
 
 		QDialog::accept();
 	}
@@ -353,4 +410,6 @@ void frmSvmAdd::on_btnDefecto()
 	ui.h_SliderSvm_tempo->setValue(100);
 	ui.h_SliderSvm_talkspeed->setValue(60);
 	ui.h_SliderSvm_debuglevel->setValue(0);
+	ui.h_SliderSvm_midi_gain->setValue(100);
+	ui.h_SliderSvm_walkspeed->setValue(0);
 }
