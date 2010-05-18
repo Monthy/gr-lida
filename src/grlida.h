@@ -91,7 +91,7 @@ private:
 	QString stdb_type, stdb_server, stdb_host, stdb_name, stdb_username, stdb_password, stdb_port;
 	QString stdb_Orden_ColTabla, stdb_Orden_By, stdb_Orden;
 	QString stBinExeDbx, stBinExeSvm;
-	QString stItemIndex, stConfgJuego, stDirWorkingJuego, stTipoEmu;
+	QString stItemIndex, stConfgJuego, stJuegoParametrosExe, stDirWorkingJuego, stTipoEmu;
 	QString stDirCapturas, stCaratula_Delantera, stCaratula_Trasera;
 	QString stCoversDir, stThumbsDir, stListThumbsDir;
 	QString stThumbs, stCoverFront, stCoverBack;
