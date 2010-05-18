@@ -49,6 +49,7 @@ private:
 
 	Funciones fGrl;
 	int intStepwizard;
+	bool isImportDbx, isCreateMounts;
 
 	QString stHomeDir, stTheme;
 
@@ -60,12 +61,16 @@ private:
 	void setTheme();
 	void CargarConfig();
 	void PrevierMontajes();
+	void setConfigDefecto();
+	void CargarDatosDosBox(QHash<QString, QString> datosDbx, bool isProfileGame = false);
+	void CargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
 
 private slots:
 	void on_btnOk();
 	void on_btnNext();
 	void on_btnPrevious();
 	void on_txtDatos_Titulo_textChanged(const QString &text);
+	void on_txtDbx_path_exe_textChanged(const QString &text);
 	void on_setProfileGame(int row);
 	void on_btnDbx_FileConfg();
 	void on_btnDbx_ExeJuego();
@@ -79,6 +84,7 @@ private slots:
 	void on_btnMount_AutoCrear();
 	void on_btnMount_Primario();
 	void on_btnDescargarInfo();
+	void on_btnInstalarJuego();
 
 };
 

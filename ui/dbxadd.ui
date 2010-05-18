@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>DbxAddClass</class>
- <widget class="QDialog" name="DbxAddClass" >
-  <property name="geometry" >
+ <widget class="QDialog" name="DbxAddClass">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,148 +10,148 @@
     <height>490</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Asistente del DOSBox</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >
+  <property name="windowIcon">
+   <iconset resource="../res/grlida.qrc">
     <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="spacing" >
+  <layout class="QVBoxLayout">
+   <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin" >
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="imgLogoDbx" >
-     <property name="minimumSize" >
+    <widget class="QLabel" name="imgLogoDbx">
+     <property name="minimumSize">
       <size>
        <width>157</width>
        <height>60</height>
       </size>
      </property>
-     <property name="maximumSize" >
+     <property name="maximumSize">
       <size>
        <width>16777215</width>
        <height>60</height>
       </size>
      </property>
-     <property name="palette" >
+     <property name="palette">
       <palette>
        <active>
-        <colorrole role="WindowText" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>255</red>
            <green>255</green>
            <blue>255</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Button" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Light" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Light">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Midlight" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Midlight">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Dark" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Dark">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Mid" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Mid">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Text" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Text">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>255</red>
            <green>255</green>
            <blue>255</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="BrightText" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="BrightText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>255</red>
            <green>255</green>
            <blue>255</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="ButtonText" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>255</red>
            <green>255</green>
            <blue>255</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Base" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Base">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Window" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Window">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Shadow" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Shadow">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="AlternateBase" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="AlternateBase">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
@@ -159,117 +160,117 @@
         </colorrole>
        </active>
        <inactive>
-        <colorrole role="WindowText" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>255</red>
            <green>255</green>
            <blue>255</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Button" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Light" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Light">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Midlight" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Midlight">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Dark" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Dark">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Mid" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Mid">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Text" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Text">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>255</red>
            <green>255</green>
            <blue>255</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="BrightText" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="BrightText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>255</red>
            <green>255</green>
            <blue>255</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="ButtonText" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>255</red>
            <green>255</green>
            <blue>255</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Base" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Base">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Window" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Window">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Shadow" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Shadow">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="AlternateBase" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="AlternateBase">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
@@ -278,117 +279,117 @@
         </colorrole>
        </inactive>
        <disabled>
-        <colorrole role="WindowText" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Button" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Light" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Light">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Midlight" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Midlight">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Dark" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Dark">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Mid" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Mid">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Text" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Text">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="BrightText" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="BrightText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>255</red>
            <green>255</green>
            <blue>255</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="ButtonText" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Base" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Base">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Window" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Window">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="Shadow" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="Shadow">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
         </colorrole>
-        <colorrole role="AlternateBase" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
+        <colorrole role="AlternateBase">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
            <red>0</red>
            <green>0</green>
            <blue>0</blue>
@@ -398,42 +399,42 @@
        </disabled>
       </palette>
      </property>
-     <property name="autoFillBackground" >
+     <property name="autoFillBackground">
       <bool>true</bool>
      </property>
-     <property name="text" >
+     <property name="text">
       <string/>
      </property>
-     <property name="pixmap" >
-      <pixmap resource="../res/grlida.qrc" >:/images/wizard_dosbox.png</pixmap>
+     <property name="pixmap">
+      <pixmap resource="../res/grlida.qrc">:/images/wizard_dosbox.png</pixmap>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QStackedWidget" name="wizardDbx" >
-     <property name="frameShape" >
+    <widget class="QStackedWidget" name="wizardDbx">
+     <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="currentIndex" >
+     <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="page_1" >
-      <layout class="QVBoxLayout" name="verticalLayout" >
-       <property name="margin" >
+     <widget class="QWidget" name="page_1">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="margin">
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout" >
-         <item row="0" column="0" >
-          <widget class="QLabel" name="lb_Dbx_0" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_Dbx_0">
+           <property name="text">
             <string>Templates Profiles:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
-          <widget class="QComboBox" name="cbxDbx_Profiles" >
-           <property name="minimumSize" >
+         <item row="0" column="1">
+          <widget class="QComboBox" name="cbxDbx_Profiles">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -441,16 +442,16 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="lb_Dbx_1" >
-           <property name="text" >
+         <item row="1" column="0">
+          <widget class="QLabel" name="lb_Dbx_1">
+           <property name="text">
             <string>Título:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1" >
-          <widget class="QLineEdit" name="txtDatos_Titulo" >
-           <property name="minimumSize" >
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="txtDatos_Titulo">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -461,20 +462,20 @@
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_2" >
-         <item row="0" column="0" colspan="2" >
-          <widget class="QLabel" name="lb_Dbx_2" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="lb_Dbx_2">
+           <property name="text">
             <string>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.conf</string>
            </property>
-           <property name="wordWrap" >
+           <property name="wordWrap">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="0" >
-          <widget class="QLineEdit" name="txtDbx_path_conf" >
-           <property name="minimumSize" >
+         <item row="1" column="0">
+          <widget class="QLineEdit" name="txtDbx_path_conf">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -482,25 +483,25 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1" >
-          <widget class="QPushButton" name="btnDbx_FileConfg" >
-           <property name="minimumSize" >
+         <item row="1" column="1">
+          <widget class="QPushButton" name="btnDbx_FileConfg">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string/>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
@@ -508,27 +509,30 @@
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_5" >
-         <item row="0" column="0" >
-          <widget class="QCheckBox" name="chkDbx_loadfix" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="chkDbx_loadfix">
+           <property name="text">
             <string>El juego necesita 'loadfix' </string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
-          <widget class="QCheckBox" name="chkDbx_consola_dbox" >
-           <property name="text" >
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="chkDbx_consola_dbox">
+           <property name="text">
             <string>Cerrar la consola del DOSBox</string>
            </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
-         <item row="1" column="0" >
-          <widget class="QCheckBox" name="chkDbx_cerrar_dbox" >
-           <property name="text" >
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="chkDbx_cerrar_dbox">
+           <property name="text">
             <string>Cerrar DOSBox al terminar el juego</string>
            </property>
-           <property name="checked" >
+           <property name="checked">
             <bool>true</bool>
            </property>
           </widget>
@@ -536,20 +540,20 @@
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_4" >
-         <item row="0" column="0" colspan="2" >
-          <widget class="QLabel" name="lb_Dbx_3" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="lb_Dbx_3">
+           <property name="text">
             <string>Ejecutable (exe,com,bat) del Juego:</string>
            </property>
-           <property name="wordWrap" >
+           <property name="wordWrap">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="2" >
-          <widget class="QLineEdit" name="txtDbx_path_exe" >
-           <property name="minimumSize" >
+         <item row="1" column="0" colspan="2">
+          <widget class="QLineEdit" name="txtDbx_path_exe">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -557,39 +561,39 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="2" >
-          <widget class="QPushButton" name="btnDbx_ExeJuego" >
-           <property name="minimumSize" >
+         <item row="1" column="2">
+          <widget class="QPushButton" name="btnDbx_ExeJuego">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string/>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" >
-          <widget class="QLabel" name="lb_Dbx_4" >
-           <property name="text" >
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_Dbx_4">
+           <property name="text">
             <string>Parametros:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
-          <widget class="QLineEdit" name="txtDbx_parametros_exe" >
-           <property name="minimumSize" >
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="txtDbx_parametros_exe">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -600,10 +604,10 @@
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_3" >
-         <item row="1" column="0" colspan="2" >
-          <widget class="QLineEdit" name="txtDbx_path_setup" >
-           <property name="minimumSize" >
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="1" column="0" colspan="2">
+          <widget class="QLineEdit" name="txtDbx_path_setup">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -611,39 +615,39 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="2" >
-          <widget class="QPushButton" name="btnDbx_ExeSetup" >
-           <property name="minimumSize" >
+         <item row="1" column="2">
+          <widget class="QPushButton" name="btnDbx_ExeSetup">
+           <property name="minimumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>30</width>
              <height>26</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string/>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" >
-          <widget class="QLabel" name="lb_Dbx_6" >
-           <property name="text" >
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_Dbx_6">
+           <property name="text">
             <string>Parametros:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
-          <widget class="QLineEdit" name="txtDbx_parametros_setup" >
-           <property name="minimumSize" >
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="txtDbx_parametros_setup">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -651,12 +655,12 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0" colspan="2" >
-          <widget class="QLabel" name="lb_Dbx_5" >
-           <property name="text" >
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="lb_Dbx_5">
+           <property name="text">
             <string>Ejecutable (exe,com,bat) Setup del Juego:</string>
            </property>
-           <property name="wordWrap" >
+           <property name="wordWrap">
             <bool>true</bool>
            </property>
           </widget>
@@ -664,11 +668,11 @@
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -677,102 +681,113 @@
         </spacer>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6" >
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QPushButton" name="btnDescargarInfo" >
-           <property name="minimumSize" >
+          <widget class="QPushButton" name="btnDescargarInfo">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>30</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Descargar la Info del Juego</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
            </property>
           </widget>
          </item>
          <item>
-          <spacer name="horizontalSpacer_5" >
-           <property name="orientation" >
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
             </size>
            </property>
           </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnInstalarJuego">
+           <property name="text">
+            <string>Instalar primero el Juego </string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
+             <normaloff>:/img16/ejecutar_app_setup.png</normaloff>:/img16/ejecutar_app_setup.png</iconset>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_2" >
-      <layout class="QVBoxLayout" name="verticalLayout_2" >
-       <property name="spacing" >
+     <widget class="QWidget" name="page_2">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
         <number>6</number>
        </property>
-       <property name="margin" >
+       <property name="margin">
         <number>4</number>
        </property>
        <item>
-        <widget class="QCheckBox" name="chkDbx_sdl_fullscreen" >
-         <property name="text" >
+        <widget class="QCheckBox" name="chkDbx_sdl_fullscreen">
+         <property name="text">
           <string>fullscreen -- Iniciar DOSBox directamente en pantalla completa</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="chkDbx_sdl_fullfixed" >
-         <property name="text" >
+        <widget class="QCheckBox" name="chkDbx_sdl_fullfixed">
+         <property name="text">
           <string>fullfixed -- Fijar la resolución en pantalla completa</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="chkDbx_sdl_autolock" >
-         <property name="text" >
+        <widget class="QCheckBox" name="chkDbx_sdl_autolock">
+         <property name="text">
           <string>autolock -- El ratón se autobloqueará al hace clic en la pantalla</string>
          </property>
-         <property name="checked" >
+         <property name="checked">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="chkDbx_render_aspect" >
-         <property name="text" >
+        <widget class="QCheckBox" name="chkDbx_render_aspect">
+         <property name="text">
           <string>aspect -- Aplicar corrección de aspecto</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="lb_Dbx_7" >
-         <property name="text" >
+        <widget class="QLabel" name="lb_Dbx_7">
+         <property name="text">
           <string>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed</string>
          </property>
-         <property name="wordWrap" >
+         <property name="wordWrap">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_6" >
-         <item row="0" column="0" >
-          <widget class="QLabel" name="lb_Dbx_8" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_6">
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_Dbx_8">
+           <property name="text">
             <string>Resolución pantalla:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
-          <widget class="QComboBox" name="cbxDbx_sdl_fullresolution" >
-           <property name="minimumSize" >
+         <item row="0" column="1">
+          <widget class="QComboBox" name="cbxDbx_sdl_fullresolution">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -780,16 +795,16 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="lb_Dbx_9" >
-           <property name="text" >
+         <item row="1" column="0">
+          <widget class="QLabel" name="lb_Dbx_9">
+           <property name="text">
             <string>Modo de Renderizado:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1" >
-          <widget class="QComboBox" name="cbxDbx_sdl_output" >
-           <property name="minimumSize" >
+         <item row="1" column="1">
+          <widget class="QComboBox" name="cbxDbx_sdl_output">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -797,16 +812,16 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0" >
-          <widget class="QLabel" name="lb_Dbx_10" >
-           <property name="text" >
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_Dbx_10">
+           <property name="text">
             <string>Tarjeta de Video:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
-          <widget class="QComboBox" name="cbxDbx_dosbox_machine" >
-           <property name="minimumSize" >
+         <item row="2" column="1">
+          <widget class="QComboBox" name="cbxDbx_dosbox_machine">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -814,35 +829,35 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0" >
-          <widget class="QLabel" name="lb_Dbx_11" >
-           <property name="text" >
+         <item row="3" column="0">
+          <widget class="QLabel" name="lb_Dbx_11">
+           <property name="text">
             <string>Escalar y Filtros:</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="1" >
-          <widget class="QComboBox" name="cbxDbx_render_scaler" >
-           <property name="minimumSize" >
+         <item row="3" column="1">
+          <widget class="QComboBox" name="cbxDbx_render_scaler">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="3" column="2" >
-          <spacer name="horizontalSpacer" >
-           <property name="orientation" >
+         <item row="3" column="2">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeType" >
+           <property name="sizeType">
             <enum>QSizePolicy::Minimum</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -853,11 +868,11 @@
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_2" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -867,93 +882,93 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_3" >
-      <layout class="QVBoxLayout" name="verticalLayout_3" >
-       <property name="leftMargin" >
+     <widget class="QWidget" name="page_3">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="leftMargin">
         <number>4</number>
        </property>
-       <property name="topMargin" >
+       <property name="topMargin">
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout_7" >
-         <item row="0" column="0" colspan="2" >
-          <widget class="QLabel" name="lb_Dbx_12" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="lb_Dbx_12">
+           <property name="text">
             <string>Cantidad de memoria (Mb) que DOSBox tendrá disponible:</string>
            </property>
-           <property name="wordWrap" >
+           <property name="wordWrap">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="0" column="2" >
-          <widget class="QComboBox" name="cbxDbx_dosbox_memsize" >
-           <property name="minimumSize" >
+         <item row="0" column="2">
+          <widget class="QComboBox" name="cbxDbx_dosbox_memsize">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
            </property>
-           <property name="editable" >
+           <property name="editable">
             <bool>true</bool>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="2" >
-          <widget class="QLabel" name="lb_Dbx_13" >
-           <property name="text" >
+         <item row="1" column="0" colspan="2">
+          <widget class="QLabel" name="lb_Dbx_13">
+           <property name="text">
             <string>Ciclos: Cantidad de instrucciones que DOSBox intenta emular cada milisegundo:</string>
            </property>
-           <property name="wordWrap" >
+           <property name="wordWrap">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="2" >
-          <widget class="QComboBox" name="cbxDbx_cpu_cycles" >
-           <property name="minimumSize" >
+         <item row="1" column="2">
+          <widget class="QComboBox" name="cbxDbx_cpu_cycles">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
            </property>
-           <property name="editable" >
+           <property name="editable">
             <bool>true</bool>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
-           <property name="maxVisibleItems" >
+           <property name="maxVisibleItems">
             <number>7</number>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" >
-          <widget class="QLabel" name="lb_Dbx_27" >
-           <property name="text" >
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_Dbx_27">
+           <property name="text">
             <string>Core DOSBox:</string>
            </property>
-           <property name="wordWrap" >
+           <property name="wordWrap">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
-          <widget class="QComboBox" name="cbxDbx_cpu_core" >
-           <property name="minimumSize" >
+         <item row="2" column="1">
+          <widget class="QComboBox" name="cbxDbx_cpu_core">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
-           <property name="maxVisibleItems" >
+           <property name="maxVisibleItems">
             <number>7</number>
            </property>
           </widget>
@@ -961,30 +976,30 @@
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_8" >
-         <item row="0" column="0" colspan="2" >
-          <widget class="QCheckBox" name="chkDbx_dos_xms" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_8">
+         <item row="0" column="0" colspan="2">
+          <widget class="QCheckBox" name="chkDbx_dos_xms">
+           <property name="text">
             <string>xms -- Activa o desactiva soporte para memoria XMS</string>
            </property>
-           <property name="checked" >
+           <property name="checked">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="2" >
-          <widget class="QCheckBox" name="chkDbx_dos_ems" >
-           <property name="text" >
+         <item row="1" column="0" colspan="2">
+          <widget class="QCheckBox" name="chkDbx_dos_ems">
+           <property name="text">
             <string>ems -- Activa o desactiva soporte para memoria EMS</string>
            </property>
-           <property name="checked" >
+           <property name="checked">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" >
-          <widget class="QComboBox" name="cbxDbx_dos_umb" >
-           <property name="minimumSize" >
+         <item row="2" column="0">
+          <widget class="QComboBox" name="cbxDbx_dos_umb">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
@@ -992,15 +1007,15 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
-          <widget class="QLabel" name="lb_Dbx_14" >
-           <property name="text" >
+         <item row="2" column="1">
+          <widget class="QLabel" name="lb_Dbx_14">
+           <property name="text">
             <string>umb -- Activa o desactiva soporte para memoria UMB</string>
            </property>
-           <property name="alignment" >
+           <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
            </property>
-           <property name="wordWrap" >
+           <property name="wordWrap">
             <bool>true</bool>
            </property>
           </widget>
@@ -1008,11 +1023,11 @@
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_3" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>184</height>
@@ -1022,49 +1037,49 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_4" >
-      <layout class="QVBoxLayout" name="verticalLayout_4" >
-       <property name="margin" >
+     <widget class="QWidget" name="page_4">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="margin">
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout_9" >
-         <item row="0" column="0" >
-          <widget class="QCheckBox" name="chkDbx_mixer_nosound" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_9">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="chkDbx_mixer_nosound">
+           <property name="text">
             <string>Desactivar Sonido</string>
            </property>
-           <property name="checked" >
+           <property name="checked">
             <bool>false</bool>
            </property>
           </widget>
          </item>
-         <item row="0" column="2" >
-          <widget class="QLabel" name="lb_Dbx_15" >
-           <property name="text" >
+         <item row="0" column="2">
+          <widget class="QLabel" name="lb_Dbx_15">
+           <property name="text">
             <string>Frecuencia:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="3" >
-          <widget class="QComboBox" name="cbxDbx_mixer_rate" >
-           <property name="minimumSize" >
+         <item row="0" column="3">
+          <widget class="QComboBox" name="cbxDbx_mixer_rate">
+           <property name="minimumSize">
             <size>
              <width>123</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
-          <spacer name="horizontalSpacer_2" >
-           <property name="orientation" >
+         <item row="0" column="1">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -1075,23 +1090,23 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout" >
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QLabel" name="lb_Dbx_16" >
-           <property name="text" >
+          <widget class="QLabel" name="lb_Dbx_16">
+           <property name="text">
             <string>Sound Blaster:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="Line" name="line_2" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
+          <widget class="Line" name="line_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
@@ -1099,53 +1114,53 @@
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_10" >
-         <item row="0" column="0" >
-          <widget class="QLabel" name="lb_Dbx_17" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_10">
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_Dbx_17">
+           <property name="text">
             <string>Tipo Sound Blaste:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
-          <widget class="QComboBox" name="cbxDbx_sblaster_sbtype" >
-           <property name="minimumSize" >
+         <item row="0" column="1">
+          <widget class="QComboBox" name="cbxDbx_sblaster_sbtype">
+           <property name="minimumSize">
             <size>
              <width>123</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="0" column="3" >
-          <widget class="QLabel" name="lb_Dbx_18" >
-           <property name="text" >
+         <item row="0" column="3">
+          <widget class="QLabel" name="lb_Dbx_18">
+           <property name="text">
             <string>Frecuencia:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="4" >
-          <widget class="QComboBox" name="cbxDbx_sblaster_oplrate" >
-           <property name="minimumSize" >
+         <item row="0" column="4">
+          <widget class="QComboBox" name="cbxDbx_sblaster_oplrate">
+           <property name="minimumSize">
             <size>
              <width>123</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="0" column="2" >
-          <spacer name="horizontalSpacer_3" >
-           <property name="orientation" >
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -1156,23 +1171,23 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2" >
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QLabel" name="lb_Dbx_19" >
-           <property name="text" >
+          <widget class="QLabel" name="lb_Dbx_19">
+           <property name="text">
             <string>Gravis Ultrasound:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="Line" name="line_3" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
+          <widget class="Line" name="line_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
@@ -1180,23 +1195,23 @@
         </layout>
        </item>
        <item>
-        <widget class="QCheckBox" name="chkDbx_gus_gus" >
-         <property name="text" >
+        <widget class="QCheckBox" name="chkDbx_gus_gus">
+         <property name="text">
           <string>Activa la emulación de Gravis Ultrasound</string>
          </property>
-         <property name="checked" >
+         <property name="checked">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4" >
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <spacer name="horizontalSpacer_4" >
-           <property name="orientation" >
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -1205,21 +1220,21 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="lb_Dbx_20" >
-           <property name="text" >
+          <widget class="QLabel" name="lb_Dbx_20">
+           <property name="text">
             <string>Frecuencia:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbxDbx_gus_gusrate" >
-           <property name="minimumSize" >
+          <widget class="QComboBox" name="cbxDbx_gus_gusrate">
+           <property name="minimumSize">
             <size>
              <width>123</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
@@ -1227,23 +1242,23 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3" >
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QLabel" name="lb_Dbx_21" >
-           <property name="text" >
+          <widget class="QLabel" name="lb_Dbx_21">
+           <property name="text">
             <string>MIDI y configuración adicional:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="Line" name="line_4" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
+          <widget class="Line" name="line_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
@@ -1251,143 +1266,143 @@
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_11" >
-         <item row="0" column="0" colspan="2" >
-          <widget class="QCheckBox" name="chkDbx_activar_mpu401" >
-           <property name="text" >
+        <layout class="QGridLayout" name="gridLayout_11">
+         <item row="0" column="0" colspan="2">
+          <widget class="QCheckBox" name="chkDbx_activar_mpu401">
+           <property name="text">
             <string>Activar emulación MPU-401</string>
            </property>
-           <property name="checked" >
+           <property name="checked">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="0" column="2" >
-          <widget class="QLabel" name="lb_Dbx_22" >
-           <property name="text" >
+         <item row="0" column="2">
+          <widget class="QLabel" name="lb_Dbx_22">
+           <property name="text">
             <string>Device MPU-401:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="3" >
-          <widget class="QComboBox" name="cbxDbx_midi_device" >
-           <property name="minimumSize" >
+         <item row="0" column="3">
+          <widget class="QComboBox" name="cbxDbx_midi_device">
+           <property name="minimumSize">
             <size>
              <width>123</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="2" >
-          <widget class="QCheckBox" name="chkDbx_midi_intelligent" >
-           <property name="text" >
+         <item row="1" column="0" colspan="2">
+          <widget class="QCheckBox" name="chkDbx_midi_intelligent">
+           <property name="text">
             <string>Modo inteligente</string>
            </property>
-           <property name="checked" >
+           <property name="checked">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="2" >
-          <widget class="QLabel" name="lb_Dbx_23" >
-           <property name="text" >
+         <item row="1" column="2">
+          <widget class="QLabel" name="lb_Dbx_23">
+           <property name="text">
             <string>Frecuencia mt32rate:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="3" >
-          <widget class="QComboBox" name="cbxDbx_midi_mt32rate" >
-           <property name="minimumSize" >
+         <item row="1" column="3">
+          <widget class="QComboBox" name="cbxDbx_midi_mt32rate">
+           <property name="minimumSize">
             <size>
              <width>123</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" colspan="2" >
-          <widget class="QCheckBox" name="chkDbx_speaker_pcspeaker" >
-           <property name="text" >
+         <item row="2" column="0" colspan="2">
+          <widget class="QCheckBox" name="chkDbx_speaker_pcspeaker">
+           <property name="text">
             <string>Activa el altavoz interno</string>
            </property>
-           <property name="checked" >
+           <property name="checked">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="2" column="2" >
-          <widget class="QLabel" name="lb_Dbx_24" >
-           <property name="text" >
+         <item row="2" column="2">
+          <widget class="QLabel" name="lb_Dbx_24">
+           <property name="text">
             <string>Frecuencia pcrate:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="3" >
-          <widget class="QComboBox" name="cbxDbx_speaker_pcrate" >
-           <property name="minimumSize" >
+         <item row="2" column="3">
+          <widget class="QComboBox" name="cbxDbx_speaker_pcrate">
+           <property name="minimumSize">
             <size>
              <width>123</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="3" column="0" colspan="2" >
-          <widget class="QCheckBox" name="chkDbx_speaker_disney" >
-           <property name="text" >
+         <item row="3" column="0" colspan="2">
+          <widget class="QCheckBox" name="chkDbx_speaker_disney">
+           <property name="text">
             <string>Activa Disney Sound Source</string>
            </property>
-           <property name="checked" >
+           <property name="checked">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="3" column="2" >
-          <widget class="QLabel" name="lb_Dbx_25" >
-           <property name="text" >
+         <item row="3" column="2">
+          <widget class="QLabel" name="lb_Dbx_25">
+           <property name="text">
             <string>Frecuencia tandyrate:</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="3" >
-          <widget class="QComboBox" name="cbxDbx_speaker_tandyrate" >
-           <property name="minimumSize" >
+         <item row="3" column="3">
+          <widget class="QComboBox" name="cbxDbx_speaker_tandyrate">
+           <property name="minimumSize">
             <size>
              <width>123</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
          </item>
-         <item row="4" column="0" >
-          <widget class="QLabel" name="lb_Dbx_26" >
-           <property name="text" >
+         <item row="4" column="0">
+          <widget class="QLabel" name="lb_Dbx_26">
+           <property name="text">
             <string>MPU-401:</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="1" >
-          <widget class="QComboBox" name="cbxDbx_midi_mpu401" >
-           <property name="minimumSize" >
+         <item row="4" column="1">
+          <widget class="QComboBox" name="cbxDbx_midi_mpu401">
+           <property name="minimumSize">
             <size>
              <width>123</width>
              <height>24</height>
             </size>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>-1</number>
            </property>
           </widget>
@@ -1395,11 +1410,11 @@
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_4" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -1409,241 +1424,241 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_5" >
-      <layout class="QHBoxLayout" name="horizontalLayout_5" >
-       <property name="margin" >
+     <widget class="QWidget" name="page_5">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <property name="margin">
         <number>4</number>
        </property>
        <item>
-        <widget class="QSplitter" name="splitter" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
+        <widget class="QSplitter" name="splitter">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <widget class="QTreeWidget" name="twMontajes" >
-          <property name="focusPolicy" >
+         <widget class="QTreeWidget" name="twMontajes">
+          <property name="focusPolicy">
            <enum>Qt::ClickFocus</enum>
           </property>
-          <property name="frameShadow" >
+          <property name="frameShadow">
            <enum>QFrame::Sunken</enum>
           </property>
-          <property name="showDropIndicator" stdset="0" >
+          <property name="showDropIndicator" stdset="0">
            <bool>false</bool>
           </property>
-          <property name="iconSize" >
+          <property name="iconSize">
            <size>
             <width>16</width>
             <height>16</height>
            </size>
           </property>
-          <property name="textElideMode" >
+          <property name="textElideMode">
            <enum>Qt::ElideNone</enum>
           </property>
-          <property name="rootIsDecorated" >
+          <property name="rootIsDecorated">
            <bool>false</bool>
           </property>
-          <property name="uniformRowHeights" >
+          <property name="uniformRowHeights">
            <bool>true</bool>
           </property>
-          <property name="itemsExpandable" >
+          <property name="itemsExpandable">
            <bool>false</bool>
           </property>
-          <property name="allColumnsShowFocus" >
+          <property name="allColumnsShowFocus">
            <bool>true</bool>
           </property>
           <column>
-           <property name="text" >
+           <property name="text">
             <string>Folder/Imagen</string>
            </property>
           </column>
           <column>
-           <property name="text" >
+           <property name="text">
             <string>Etiqueta</string>
            </property>
           </column>
           <column>
-           <property name="text" >
+           <property name="text">
             <string>Tipo</string>
            </property>
           </column>
           <column>
-           <property name="text" >
+           <property name="text">
             <string>Driver</string>
            </property>
           </column>
           <column>
-           <property name="text" >
+           <property name="text">
             <string>CD/DVD index</string>
            </property>
           </column>
           <column>
-           <property name="text" >
+           <property name="text">
             <string>Opciones</string>
            </property>
           </column>
           <column>
-           <property name="text" >
+           <property name="text">
             <string>IO Ctrl</string>
            </property>
           </column>
           <column>
-           <property name="text" >
+           <property name="text">
             <string>Primer montaje</string>
            </property>
           </column>
          </widget>
-         <widget class="QListWidget" name="previer_mount" />
+         <widget class="QListWidget" name="previer_mount"/>
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_12" >
-         <item row="0" column="1" >
-          <widget class="QPushButton" name="btnMount_Add" >
-           <property name="minimumSize" >
+        <layout class="QGridLayout" name="gridLayout_12">
+         <item row="0" column="1">
+          <widget class="QPushButton" name="btnMount_Add">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>30</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Añadir</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="1" column="0" >
-          <widget class="QPushButton" name="btnMount_Subir" >
-           <property name="minimumSize" >
+         <item row="1" column="0">
+          <widget class="QPushButton" name="btnMount_Subir">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>30</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Subir</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/go-up.png</normaloff>:/img16/go-up.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="1" column="1" >
-          <widget class="QPushButton" name="btnMount_Edit" >
-           <property name="minimumSize" >
+         <item row="1" column="1">
+          <widget class="QPushButton" name="btnMount_Edit">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>30</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Editar</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/editar.png</normaloff>:/img16/editar.png</iconset>
            </property>
           </widget>
          </item>
-         <item rowspan="2" row="2" column="0" >
-          <widget class="QPushButton" name="btnMount_Bajar" >
-           <property name="minimumSize" >
+         <item row="2" column="0" rowspan="2">
+          <widget class="QPushButton" name="btnMount_Bajar">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>30</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Bajar</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
-          <widget class="QPushButton" name="btnMount_Delete" >
-           <property name="minimumSize" >
+         <item row="2" column="1">
+          <widget class="QPushButton" name="btnMount_Delete">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>30</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Eliminar</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/eliminar.png</normaloff>:/img16/eliminar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="3" column="1" >
-          <widget class="QPushButton" name="btnMount_Clear" >
-           <property name="minimumSize" >
+         <item row="3" column="1">
+          <widget class="QPushButton" name="btnMount_Clear">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>30</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Limpiar</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="4" column="0" colspan="2" >
-          <widget class="QPushButton" name="btnMount_AutoCrear" >
-           <property name="minimumSize" >
+         <item row="4" column="0" colspan="2">
+          <widget class="QPushButton" name="btnMount_AutoCrear">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>30</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Autocrear Montaje</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/ejecutar_app.png</normaloff>:/img16/ejecutar_app.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="5" column="0" colspan="2" >
-          <widget class="QPushButton" name="btnMount_Primario" >
-           <property name="minimumSize" >
+         <item row="5" column="0" colspan="2">
+          <widget class="QPushButton" name="btnMount_Primario">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>30</height>
             </size>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Montaje primario</string>
            </property>
-           <property name="icon" >
-            <iconset resource="../res/grlida.qrc" >
+           <property name="icon">
+            <iconset resource="../res/grlida.qrc">
              <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="6" column="1" >
-          <spacer name="verticalSpacer_6" >
-           <property name="orientation" >
+         <item row="6" column="1">
+          <spacer name="verticalSpacer_6">
+           <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>20</width>
              <height>40</height>
@@ -1655,36 +1670,36 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_6" >
-      <layout class="QGridLayout" >
-       <property name="horizontalSpacing" >
+     <widget class="QWidget" name="page_6">
+      <layout class="QGridLayout">
+       <property name="horizontalSpacing">
         <number>4</number>
        </property>
-       <property name="verticalSpacing" >
+       <property name="verticalSpacing">
         <number>6</number>
        </property>
-       <property name="margin" >
+       <property name="margin">
         <number>4</number>
        </property>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="lb_wizard_Dbx" >
-         <property name="font" >
+       <item row="0" column="0">
+        <widget class="QLabel" name="lb_wizard_Dbx">
+         <property name="font">
           <font>
            <pointsize>14</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Fin de la Configuración
 Pulsa Aceptar para cerrar el Asistente
 
 </string>
          </property>
-         <property name="textFormat" >
+         <property name="textFormat">
           <enum>Qt::PlainText</enum>
          </property>
-         <property name="alignment" >
+         <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
@@ -1694,43 +1709,43 @@ Pulsa Aceptar para cerrar el Asistente
     </widget>
    </item>
    <item>
-    <widget class="Line" name="line" >
-     <property name="orientation" >
+    <widget class="Line" name="line">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="hLayout_1" >
-     <property name="spacing" >
+    <layout class="QHBoxLayout" name="hLayout_1">
+     <property name="spacing">
       <number>6</number>
      </property>
-     <property name="margin" >
+     <property name="margin">
       <number>4</number>
      </property>
      <item>
-      <widget class="QPushButton" name="btnCancel" >
-       <property name="minimumSize" >
+      <widget class="QPushButton" name="btnCancel">
+       <property name="minimumSize">
         <size>
          <width>97</width>
          <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Cancelar</string>
        </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
+       <property name="icon">
+        <iconset resource="../res/grlida.qrc">
          <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="hSpacer_1" >
-       <property name="orientation" >
+      <spacer name="hSpacer_1">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
          <height>20</height>
@@ -1739,58 +1754,58 @@ Pulsa Aceptar para cerrar el Asistente
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="btnPrevious" >
-       <property name="enabled" >
+      <widget class="QPushButton" name="btnPrevious">
+       <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>97</width>
          <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Atrás</string>
        </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
+       <property name="icon">
+        <iconset resource="../res/grlida.qrc">
          <normaloff>:/img16/mp_rebobinar_atras.png</normaloff>:/img16/mp_rebobinar_atras.png</iconset>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnNext" >
-       <property name="minimumSize" >
+      <widget class="QPushButton" name="btnNext">
+       <property name="minimumSize">
         <size>
          <width>97</width>
          <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Siguiente</string>
        </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
+       <property name="icon">
+        <iconset resource="../res/grlida.qrc">
          <normaloff>:/img16/mp_rebobinar_adelante.png</normaloff>:/img16/mp_rebobinar_adelante.png</iconset>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnOk" >
-       <property name="enabled" >
+      <widget class="QPushButton" name="btnOk">
+       <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>97</width>
          <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Aceptar</string>
        </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
+       <property name="icon">
+        <iconset resource="../res/grlida.qrc">
          <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
@@ -1859,8 +1874,10 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
-  <include location="../res/grlida.qrc" />
-  <include location="../res/grlida.qrc" />
+  <include location="../res/grlida.qrc"/>
+  <include location="../res/grlida.qrc"/>
+  <include location="../res/grlida.qrc"/>
+  <include location="../res/grlida.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1869,11 +1886,11 @@ Pulsa Aceptar para cerrar el Asistente
    <receiver>DbxAddClass</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>100</x>
      <y>384</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>480</x>
      <y>284</y>
     </hint>

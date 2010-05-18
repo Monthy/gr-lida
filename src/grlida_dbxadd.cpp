@@ -25,6 +25,7 @@
 #include "grlida_dbxadd.h"
 #include "grlida_addedit_montajes.h"
 #include "grlida_importar_juego.h"
+#include "grlida_instalar_juego.h"
 
 frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
     : QDialog( parent, flags )
@@ -38,9 +39,9 @@ frmDbxAdd::frmDbxAdd( QDialog *parent, Qt::WFlags flags )
 
 	createConnections();
 
-	setTheme();
-
 	CargarConfig();
+
+	setTheme();
 
 // centra la aplicacion en el escritorio
 	QDesktopWidget *desktop = qApp->desktop();
@@ -76,6 +77,7 @@ void frmDbxAdd::createConnections()
 	connect( ui.btnMount_Primario , SIGNAL( clicked() ), this, SLOT( on_btnMount_Primario() ) );
 	connect( ui.cbxDbx_Profiles   , SIGNAL( activated(int) ), this, SLOT( on_setProfileGame(int) ) );
 	connect( ui.btnDescargarInfo  , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo()  ) );
+	connect( ui.btnInstalarJuego  , SIGNAL( clicked() ), this, SLOT( on_btnInstalarJuego()  ) );
 }
 
 void frmDbxAdd::setTheme()
@@ -91,6 +93,7 @@ void frmDbxAdd::setTheme()
 	ui.btnDbx_ExeJuego->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDbx_ExeSetup->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDescargarInfo->setIcon( QIcon(stTheme+"img16/go-down.png") );
+	ui.btnInstalarJuego->setIcon( QIcon(stTheme+"img16/ejecutar_app_setup.png") );
 	ui.btnMount_Add->setIcon( QIcon(stTheme+"img16/nuevo.png") );
 	ui.btnMount_Edit->setIcon( QIcon(stTheme+"img16/editar.png") );
 	ui.btnMount_Delete->setIcon( QIcon(stTheme+"img16/eliminar.png") );
@@ -99,17 +102,23 @@ void frmDbxAdd::setTheme()
 	ui.btnMount_Bajar->setIcon( QIcon(stTheme+"img16/go-down.png") );
 	ui.btnMount_AutoCrear->setIcon( QIcon(stTheme+"img16/ejecutar_app.png") );
 	ui.btnMount_Primario->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+
+	if( GRLConfig["font_usar"].toBool() )
+		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
 }
 
 void frmDbxAdd::CargarConfig()
 {
 	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
 
+	isImportDbx    = false;
+	isCreateMounts = false;
+
 	ui.twMontajes->header()->setStretchLastSection(true);
 	ui.twMontajes->header()->setMovable(false);
 
 	QStringList sonido_frecuencias;
-	sonido_frecuencias << "11050" << "22050" << "44100" << "48000";
+	sonido_frecuencias << "8000" << "11025" << "16000" << "22050" << "32000" << "44100" << "48000" << "49716";
 
 	fGrl.Cargar_Profile_DFend_ComboBox(stHomeDir + "templates/", ui.cbxDbx_Profiles);
 	fGrl.CargarDatosComboBox(":/datos/dbx_resolution.txt" , ui.cbxDbx_sdl_fullresolution); // Resolución pantalla
@@ -119,6 +128,7 @@ void frmDbxAdd::CargarConfig()
 	fGrl.CargarDatosComboBox(":/datos/dbx_memsize.txt"    , ui.cbxDbx_dosbox_memsize    ); // Cantidad de memoria para DOSBox
 	fGrl.CargarDatosComboBox(":/datos/dbx_cycles.txt"     , ui.cbxDbx_cpu_cycles        ); // Ciclos DOSBox
 	fGrl.CargarDatosComboBox(":/datos/dbx_sbtype.txt"     , ui.cbxDbx_sblaster_sbtype   ); // Tipo Sound Blaste
+	fGrl.CargarDatosComboBox(":/datos/dbx_sb_oplrate.txt" , ui.cbxDbx_sblaster_oplrate  ); // Sample rate of OPL
 	fGrl.CargarDatosComboBox(":/datos/dbx_mpu401.txt"     , ui.cbxDbx_midi_mpu401       ); // MPU-401
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt", ui.cbxDbx_midi_device       ); // MIDI Device
 	fGrl.CargarDatosComboBox(":/datos/dbx_cpu_core.txt"   , ui.cbxDbx_cpu_core          ); // Ncleo de la CPU DOSBox
@@ -130,8 +140,6 @@ void frmDbxAdd::CargarConfig()
 
 	ui.cbxDbx_mixer_rate->clear();
 	ui.cbxDbx_mixer_rate->addItems( sonido_frecuencias );
-	ui.cbxDbx_sblaster_oplrate->clear();
-	ui.cbxDbx_sblaster_oplrate->addItems( sonido_frecuencias );
 	ui.cbxDbx_gus_gusrate->clear();
 	ui.cbxDbx_gus_gusrate->addItems( sonido_frecuencias );
 	ui.cbxDbx_midi_mt32rate->clear();
@@ -147,9 +155,9 @@ void frmDbxAdd::CargarConfig()
 	ui.cbxDbx_Profiles->setCurrentIndex( 0 );
 	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 ); // Resolución pantalla
 	ui.cbxDbx_sdl_output->setCurrentIndex( 0 );         // Modo de Renderizado
-	ui.cbxDbx_dosbox_machine->setCurrentIndex( 0 );     // Tarjeta de Video
+	ui.cbxDbx_dosbox_machine->setCurrentIndex( 8 );     // Tarjeta de Video
 	ui.cbxDbx_render_scaler->setCurrentIndex( 1 );      // Escalar y Filtros
-	ui.cbxDbx_dosbox_memsize->setCurrentIndex( 7 );     // Cantidad de memoria para DOSBox
+	ui.cbxDbx_dosbox_memsize->setCurrentIndex( 5 );     // Cantidad de memoria para DOSBox
 	ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );         // Ciclos DOSBox
 	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );    // Tipo Sound Blaste
 	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 );        // MPU-401
@@ -158,17 +166,21 @@ void frmDbxAdd::CargarConfig()
 	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );           // Núcleo de la CPU DOSBox
 	ui.cbxDbx_dos_umb->setCurrentIndex( 0 );            // Soporte para memoria UMB
 	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );      //
-	ui.cbxDbx_mixer_rate->setCurrentIndex( 1 );         //
-	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( 1 );   //
-	ui.cbxDbx_gus_gusrate->setCurrentIndex( 1 );        //
-	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );      //
-	ui.cbxDbx_speaker_pcrate->setCurrentIndex( 1 );     //
-	ui.cbxDbx_speaker_tandyrate->setCurrentIndex( 1 );  //
+	ui.cbxDbx_mixer_rate->setCurrentIndex( 5 );         //
+	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( 2 );   //
+	ui.cbxDbx_gus_gusrate->setCurrentIndex( 5 );        //
+	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 5 );      //
+	ui.cbxDbx_speaker_pcrate->setCurrentIndex( 5 );     //
+	ui.cbxDbx_speaker_tandyrate->setCurrentIndex( 5 );  //
 
 	ui.chkDbx_sdl_fullfixed->setVisible(false); // En desuso
 
+	ui.twMontajes->setColumnHidden(7, true);
+
 	tempDatosJuego["Dat_favorito"] = "false";
 	tempDatosJuego["Dat_rating"]   = "0";
+
+	ui.txtDatos_Titulo->setFocus();
 }
 
 void frmDbxAdd::on_btnPrevious()
@@ -186,23 +198,20 @@ void frmDbxAdd::on_btnNext()
 	{
 		if( !ui.txtDbx_path_conf->text().isEmpty() )
 		{
-			QFile appConfg( stHomeDir + "confdbx/"+ ui.txtDbx_path_conf->text() );
-			if( appConfg.exists() )
+			if( QFile::exists(stHomeDir +"confdbx/"+ ui.txtDbx_path_conf->text() ) )
 			{
-				ui.txtDbx_path_conf->setText("");
-				siguiente = false;
-				QMessageBox::information( this, stTituloDbx(), tr("El archivo de Configuración para el DOSBox ya esixte"));
-				ui.txtDbx_path_conf->setFocus();
-			} else {
-				siguiente = true;
-				if( ui.txtDbx_path_exe->text().isEmpty() )
-				{
-					QMessageBox::information(this, stTituloDbx(), tr("Debes indicar el Ejecutable del juego"));
-					siguiente = false;
-					ui.txtDbx_path_exe->setFocus();
-				} else
-					siguiente = true;
+				QString name_conf = ui.txtDbx_path_conf->text();
+				name_conf.prepend(fGrl.HoraFechaActual("ddMMyyyy_HHmmss")+"-");
+				ui.txtDbx_path_conf->setText(name_conf);
 			}
+			siguiente = true;
+			if( ui.txtDbx_path_exe->text().isEmpty() )
+			{
+				QMessageBox::information(this, stTituloDbx(), tr("Debes indicar el Ejecutable del juego"));
+				siguiente = false;
+				ui.txtDbx_path_exe->setFocus();
+			} else
+				siguiente = true;
 		} else {
 			QMessageBox::information(this, stTituloDbx(), tr("Debes indicar el archivo donde guardara la configuración del juego"));
 			siguiente = false;
@@ -223,8 +232,9 @@ void frmDbxAdd::on_btnNext()
 	if( ui.wizardDbx->currentIndex() == 3 ) ui.chkDbx_mixer_nosound->setFocus();
 	if( ui.wizardDbx->currentIndex() == 4 )
 	{
-		ui.btnMount_Clear->click();
-		ui.btnMount_AutoCrear->click();
+		if( isImportDbx == false )
+			emit on_btnMount_AutoCrear();
+
 		ui.twMontajes->setFocus();
 	}
 
@@ -236,130 +246,228 @@ void frmDbxAdd::on_btnNext()
 	}
 }
 
+void frmDbxAdd::setConfigDefecto()
+{
+// [sdl]
+	tempProfileDosBox["Dbx_sdl_fullscreen"]        = "false";
+	tempProfileDosBox["Dbx_sdl_fulldouble"]        = "false";
+	tempProfileDosBox["Dbx_sdl_fullfixed"]         = "false";
+	tempProfileDosBox["Dbx_sdl_fullresolution"]    = "original";
+	tempProfileDosBox["Dbx_sdl_windowresolution"]  = "original";
+	tempProfileDosBox["Dbx_sdl_output"]            = "surface";
+	tempProfileDosBox["Dbx_sdl_hwscale"]           = "1.00";
+	tempProfileDosBox["Dbx_sdl_autolock"]          = "true";
+	tempProfileDosBox["Dbx_sdl_sensitivity"]       = "100";
+	tempProfileDosBox["Dbx_sdl_waitonerror"]       = "true";
+	tempProfileDosBox["Dbx_sdl_priority"]          = "higher,normal";
+	tempProfileDosBox["Dbx_sdl_mapperfile"]        = "mapper.txt";
+	tempProfileDosBox["Dbx_sdl_usescancodes"]      = "true";
+// [dosbox]
+	tempProfileDosBox["Dbx_dosbox_language"]       = "";
+	tempProfileDosBox["Dbx_dosbox_machine"]        = "svga_s3";
+	tempProfileDosBox["Dbx_dosbox_captures"]       = "capture";
+	tempProfileDosBox["Dbx_dosbox_memsize"]        = "16";
+// [render]
+	tempProfileDosBox["Dbx_render_frameskip"]      = "0";
+	tempProfileDosBox["Dbx_render_aspect"]         = "false";
+	tempProfileDosBox["Dbx_render_scaler"]         = "normal2x";
+// [cpu]
+	tempProfileDosBox["Dbx_cpu_core"]              = "auto";
+	tempProfileDosBox["Dbx_cpu_cputype"]           = "auto";
+	tempProfileDosBox["Dbx_cpu_cycles"]            = "auto";
+	tempProfileDosBox["Dbx_cpu_cycleup"]           = "10";
+	tempProfileDosBox["Dbx_cpu_cycledown"]         = "20";
+// [mixer]
+	tempProfileDosBox["Dbx_mixer_nosound"]         = "false";
+	tempProfileDosBox["Dbx_mixer_rate"]            = "44100";
+	tempProfileDosBox["Dbx_mixer_blocksize"]       = "1024";
+	tempProfileDosBox["Dbx_mixer_prebuffer"]       = "20";
+// [midi]
+	tempProfileDosBox["Dbx_midi_mpu401"]           = "intelligent";
+	tempProfileDosBox["Dbx_midi_intelligent"]      = "true";
+	tempProfileDosBox["Dbx_midi_device"]           = "default";
+	tempProfileDosBox["Dbx_midi_config"]           = "";
+	tempProfileDosBox["Dbx_midi_mt32rate"]         = "44100";
+// [sblaster]
+	tempProfileDosBox["Dbx_sblaster_sbtype"]       = "sb16";
+	tempProfileDosBox["Dbx_sblaster_sbbase"]       = "220";
+	tempProfileDosBox["Dbx_sblaster_irq"]          = "7";
+	tempProfileDosBox["Dbx_sblaster_dma"]          = "1";
+	tempProfileDosBox["Dbx_sblaster_hdma"]         = "5";
+	tempProfileDosBox["Dbx_sblaster_mixer"]        = "true";
+	tempProfileDosBox["Dbx_sblaster_oplmode"]      = "auto";
+	tempProfileDosBox["Dbx_sblaster_oplemu"]       = "default";
+	tempProfileDosBox["Dbx_sblaster_oplrate"]      = "44100";
+// [gus]
+	tempProfileDosBox["Dbx_gus_gus"]               = "true";
+	tempProfileDosBox["Dbx_gus_gusrate"]           = "44100";
+	tempProfileDosBox["Dbx_gus_gusbase"]           = "240";
+	tempProfileDosBox["Dbx_gus_irq1"]              = "5";
+	tempProfileDosBox["Dbx_gus_irq2"]              = "5";
+	tempProfileDosBox["Dbx_gus_dma1"]              = "3";
+	tempProfileDosBox["Dbx_gus_dma2"]              = "3";
+	tempProfileDosBox["Dbx_gus_ultradir"]          = "C:\\ULTRASND";
+// [speaker]
+	tempProfileDosBox["Dbx_speaker_pcspeaker"]    = "true";
+	tempProfileDosBox["Dbx_speaker_pcrate"]       = "44100";
+	tempProfileDosBox["Dbx_speaker_tandy"]        = "auto";
+	tempProfileDosBox["Dbx_speaker_tandyrate"]    = "44100";
+	tempProfileDosBox["Dbx_speaker_disney"]       = "true";
+// [joystick]
+	tempProfileDosBox["Dbx_joystick_type"]         = "auto";
+	tempProfileDosBox["Dbx_joystick_timed"]        = "true";
+	tempProfileDosBox["Dbx_joystick_autofire"]     = "false";
+	tempProfileDosBox["Dbx_joystick_swap34"]       = "false";
+	tempProfileDosBox["Dbx_joystick_buttonwrap"]   = "true";
+// [modem]
+	tempProfileDosBox["Dbx_modem_modem"]           = "true";
+	tempProfileDosBox["Dbx_modem_comport"]         = "1";
+	tempProfileDosBox["Dbx_modem_listenport"]      = "23";
+// [dserial]
+	tempProfileDosBox["Dbx_dserial_directserial"]  = "true";
+	tempProfileDosBox["Dbx_dserial_comport"]       = "1";
+	tempProfileDosBox["Dbx_dserial_realport"]      = "COM1";
+	tempProfileDosBox["Dbx_dserial_defaultbps"]    = "1200";
+	tempProfileDosBox["Dbx_dserial_parity"]        = "N";
+	tempProfileDosBox["Dbx_dserial_bytesize"]      = "8";
+	tempProfileDosBox["Dbx_dserial_stopbit"]       = "1";
+	tempProfileDosBox["Dbx_serial_1"]              = "dummy";
+	tempProfileDosBox["Dbx_serial_2"]              = "dummy";
+	tempProfileDosBox["Dbx_serial_3"]              = "disabled";
+	tempProfileDosBox["Dbx_serial_4"]              = "disabled";
+// [dos]
+	tempProfileDosBox["Dbx_dos_xms"]               = "true";
+	tempProfileDosBox["Dbx_dos_ems"]               = "true";
+	tempProfileDosBox["Dbx_dos_umb"]               = "true";
+	tempProfileDosBox["Dbx_dos_keyboardlayout"]    = "auto";
+// [ipx]
+	tempProfileDosBox["Dbx_ipx_ipx"]               = "false";
+// [autoexec]
+	tempProfileDosBox["Dbx_autoexec"]              = "false";
+// Opciones
+	tempProfileDosBox["Dbx_opt_autoexec"]          = "false";
+	tempProfileDosBox["Dbx_opt_loadfix"]           = "false";
+	tempProfileDosBox["Dbx_opt_loadfix_mem"]       = "64";
+	tempProfileDosBox["Dbx_opt_consola_dbox"]      = "true";
+	tempProfileDosBox["Dbx_opt_cerrar_dbox"]       = "true";
+	tempProfileDosBox["Dbx_opt_cycle_sincronizar"] = "false";
+// Otras opciones
+	tempProfileDosBox["Dbx_path_conf"]             = "";
+	tempProfileDosBox["Dbx_path_sonido"]           = "";
+	tempProfileDosBox["Dbx_path_exe"]              = "";
+	tempProfileDosBox["Dbx_path_setup"]            = "";
+	tempProfileDosBox["Dbx_parametros_exe"]        = "";
+	tempProfileDosBox["Dbx_parametros_setup"]      = "";
+}
+
 void frmDbxAdd::on_setProfileGame(int row)
 {
 	if (row >= 0)
 	{
-		QString profileGame;
-		profileGame = ui.cbxDbx_Profiles->itemData( row ).toString();
+		tempProfileDosBox.clear();
+		QString profileGame = ui.cbxDbx_Profiles->itemData( row ).toString();
 
 		if( !profileGame.isEmpty() || profileGame != "<defecto>" )
-		{
-			tempProfileDosBox.clear();
 			tempProfileDosBox = fGrl.Importar_Profile_DFend( stHomeDir + "templates/" + profileGame );
+		else
+			setConfigDefecto();
 
-			ui.chkDbx_sdl_fullscreen->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_sdl_fullscreen"] ) );										// sdl_fullscreen
-			ui.chkDbx_sdl_fullfixed->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_sdl_fullfixed"] ) );										// sdl_fullfixed
-			ui.cbxDbx_sdl_fullresolution->setCurrentIndex( ui.cbxDbx_sdl_fullresolution->findText( tempProfileDosBox["Dbx_sdl_fullresolution"] ) );	// sdl_fullresolution
-			ui.cbxDbx_sdl_output->setCurrentIndex( ui.cbxDbx_sdl_output->findText( tempProfileDosBox["Dbx_sdl_output"] ) );							// sdl_output
-			ui.chkDbx_sdl_autolock->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_sdl_autolock"] ) );											// sdl_autolock
+		CargarDatosDosBox( tempProfileDosBox, true);
+	}
+}
 
-			ui.cbxDbx_dosbox_machine->setCurrentIndex( ui.cbxDbx_dosbox_machine->findText( tempProfileDosBox["Dbx_dosbox_machine"] ) );			// dosbox_machine
-			ui.cbxDbx_dosbox_memsize->setEditText(tempProfileDosBox["Dbx_dosbox_memsize"] );
+void frmDbxAdd::CargarDatosDosBox(QHash<QString, QString> datosDbx, bool isProfileGame)
+{
+	if( !isProfileGame )
+	{
+		tempProfileDosBox.clear();
+		tempProfileDosBox = datosDbx;
+	}
 
-			ui.chkDbx_render_aspect->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_render_aspect"] ) );									// render_aspect
-			ui.cbxDbx_render_scaler->setCurrentIndex( ui.cbxDbx_render_scaler->findText( tempProfileDosBox["Dbx_render_scaler"] ) );			// render_scaler
+	ui.chkDbx_sdl_fullscreen->setChecked( fGrl.StrToBool( datosDbx["Dbx_sdl_fullscreen"] ) );										// sdl_fullscreen
+	ui.chkDbx_sdl_fullfixed->setChecked( fGrl.StrToBool( datosDbx["Dbx_sdl_fullfixed"] ) );											// sdl_fullfixed
+	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( ui.cbxDbx_sdl_fullresolution->findText( datosDbx["Dbx_sdl_fullresolution"] ) );	// sdl_fullresolution
+	ui.cbxDbx_sdl_output->setCurrentIndex( ui.cbxDbx_sdl_output->findText( datosDbx["Dbx_sdl_output"] ) );							// sdl_output
+	ui.chkDbx_sdl_autolock->setChecked( fGrl.StrToBool( datosDbx["Dbx_sdl_autolock"] ) );											// sdl_autolock
 
-			ui.cbxDbx_cpu_core->setCurrentIndex( ui.cbxDbx_cpu_core->findText( tempProfileDosBox["Dbx_cpu_core"] ) );							// cpu_core
-			ui.cbxDbx_cpu_cycles->setCurrentIndex( ui.cbxDbx_cpu_cycles->findText( tempProfileDosBox["Dbx_cpu_cycles"] ) );						// cpu_cycles
+	ui.cbxDbx_dosbox_machine->setCurrentIndex( ui.cbxDbx_dosbox_machine->findText( datosDbx["Dbx_dosbox_machine"] ) );				// dosbox_machine
+	ui.cbxDbx_dosbox_memsize->setEditText( datosDbx["Dbx_dosbox_memsize"] );
 
-			ui.chkDbx_mixer_nosound->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_mixer_nosound"] ) );									// mixer_nosound
-			ui.cbxDbx_mixer_rate->setCurrentIndex( ui.cbxDbx_mixer_rate->findText( tempProfileDosBox["Dbx_mixer_rate"] ) );						// mixer_rate
+	ui.chkDbx_render_aspect->setChecked( fGrl.StrToBool( datosDbx["Dbx_render_aspect"] ) );											// render_aspect
+	ui.cbxDbx_render_scaler->setCurrentIndex( ui.cbxDbx_render_scaler->findText( datosDbx["Dbx_render_scaler"] ) );					// render_scaler
 
-			ui.cbxDbx_midi_mpu401->setCurrentIndex( ui.cbxDbx_midi_mpu401->findText( tempProfileDosBox["Dbx_midi_mpu401"] ) );					// midi_mpu401
-			ui.chkDbx_midi_intelligent->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_midi_intelligent"] ) );								// midi_intelligent
-			ui.cbxDbx_midi_device->setCurrentIndex( ui.cbxDbx_midi_device->findText( tempProfileDosBox["Dbx_midi_device"] ) );					// midi_device
-			ui.cbxDbx_midi_mt32rate->setCurrentIndex( ui.cbxDbx_midi_mt32rate->findText( tempProfileDosBox["Dbx_midi_mt32rate"] ) );				// midi_mt32rate
+	ui.cbxDbx_cpu_core->setCurrentIndex( ui.cbxDbx_cpu_core->findText( datosDbx["Dbx_cpu_core"] ) );								// cpu_core
+	ui.cbxDbx_cpu_cycles->setCurrentIndex( ui.cbxDbx_cpu_cycles->findText( datosDbx["Dbx_cpu_cycles"] ) );							// cpu_cycles
 
-			ui.cbxDbx_sblaster_sbtype->setCurrentIndex( ui.cbxDbx_sblaster_sbtype->findText( tempProfileDosBox["Dbx_sblaster_sbtype"] ) );		// sblaster_sbtype
-			ui.cbxDbx_sblaster_oplrate->setCurrentIndex( ui.cbxDbx_sblaster_oplrate->findText( tempProfileDosBox["Dbx_sblaster_oplrate"] ) );	// sblaster_oplrate
+	ui.chkDbx_mixer_nosound->setChecked( fGrl.StrToBool( datosDbx["Dbx_mixer_nosound"] ) );											// mixer_nosound
+	ui.cbxDbx_mixer_rate->setCurrentIndex( ui.cbxDbx_mixer_rate->findText( datosDbx["Dbx_mixer_rate"] ) );							// mixer_rate
 
-			ui.chkDbx_gus_gus->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_gus_gus"] ) );												// gus_gus
-			ui.cbxDbx_gus_gusrate->setCurrentIndex( ui.cbxDbx_gus_gusrate->findText( tempProfileDosBox["Dbx_gus_gusrate"] ) );					// gus_gusrate
+	ui.cbxDbx_midi_mpu401->setCurrentIndex( ui.cbxDbx_midi_mpu401->findText( datosDbx["Dbx_midi_mpu401"] ) );						// midi_mpu401
+	ui.chkDbx_midi_intelligent->setChecked( fGrl.StrToBool( datosDbx["Dbx_midi_intelligent"] ) );									// midi_intelligent
+	ui.cbxDbx_midi_device->setCurrentIndex( ui.cbxDbx_midi_device->findText( datosDbx["Dbx_midi_device"] ) );						// midi_device
+	ui.cbxDbx_midi_mt32rate->setCurrentIndex( ui.cbxDbx_midi_mt32rate->findText( datosDbx["Dbx_midi_mt32rate"] ) );					// midi_mt32rate
 
-			ui.chkDbx_speaker_pcspeaker->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_speaker_pcspeaker"] ) );							// speaker_pcspeaker
-			ui.cbxDbx_speaker_pcrate->setCurrentIndex( ui.cbxDbx_speaker_pcrate->findText( tempProfileDosBox["Dbx_speaker_pcrate"] ) );			// speaker_pcrate
-			ui.cbxDbx_speaker_tandyrate->setCurrentIndex( ui.cbxDbx_speaker_tandyrate->findText( tempProfileDosBox["Dbx_speaker_tandyrate"] ) );// speaker_tandyrate
-			ui.chkDbx_speaker_disney->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_speaker_disney"] ) );									// speaker_disney
+	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( ui.cbxDbx_sblaster_sbtype->findText( datosDbx["Dbx_sblaster_sbtype"] ) );			// sblaster_sbtype
+	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( ui.cbxDbx_sblaster_oplrate->findText( datosDbx["Dbx_sblaster_oplrate"] ) );		// sblaster_oplrate
 
-			ui.chkDbx_dos_xms->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_dos_xms"] ) );						// dos_xms
-			ui.chkDbx_dos_ems->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_dos_ems"] ) );						// dos_ems
-			ui.cbxDbx_dos_umb->setCurrentIndex( ui.cbxDbx_dos_umb->findText( tempProfileDosBox["Dbx_dos_umb"] ) );		// dos_umb
+	ui.chkDbx_gus_gus->setChecked( fGrl.StrToBool( datosDbx["Dbx_gus_gus"] ) );														// gus_gus
+	ui.cbxDbx_gus_gusrate->setCurrentIndex( ui.cbxDbx_gus_gusrate->findText( datosDbx["Dbx_gus_gusrate"] ) );						// gus_gusrate
 
-			ui.chkDbx_loadfix->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_opt_loadfix"] ) );					// opt_loadfix
-			ui.chkDbx_consola_dbox->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_opt_consola_dbox"] ) );			// opt_consola_dbox
-			ui.chkDbx_cerrar_dbox->setChecked( fGrl.StrToBool( tempProfileDosBox["Dbx_opt_cerrar_dbox"] ) );			// opt_cerrar_dbox
+	ui.chkDbx_speaker_pcspeaker->setChecked( fGrl.StrToBool( datosDbx["Dbx_speaker_pcspeaker"] ) );									// speaker_pcspeaker
+	ui.cbxDbx_speaker_pcrate->setCurrentIndex( ui.cbxDbx_speaker_pcrate->findText( datosDbx["Dbx_speaker_pcrate"] ) );				// speaker_pcrate
+	ui.cbxDbx_speaker_tandyrate->setCurrentIndex( ui.cbxDbx_speaker_tandyrate->findText( datosDbx["Dbx_speaker_tandyrate"] ) );		// speaker_tandyrate
+	ui.chkDbx_speaker_disney->setChecked( fGrl.StrToBool( datosDbx["Dbx_speaker_disney"] ) );										// speaker_disney
 
-			if( !tempProfileDosBox["Dbx_path_exe"].isEmpty() )
-				ui.txtDbx_path_exe->setText( tempProfileDosBox["Dbx_path_exe"] );					// path_exe
+	ui.chkDbx_dos_xms->setChecked( fGrl.StrToBool( datosDbx["Dbx_dos_xms"] ) );						// dos_xms
+	ui.chkDbx_dos_ems->setChecked( fGrl.StrToBool( datosDbx["Dbx_dos_ems"] ) );						// dos_ems
+	ui.cbxDbx_dos_umb->setCurrentIndex( ui.cbxDbx_dos_umb->findText( datosDbx["Dbx_dos_umb"] ) );	// dos_umb
 
-			if( !tempProfileDosBox["Dbx_path_setup"].isEmpty() )
-				ui.txtDbx_path_setup->setText( tempProfileDosBox["Dbx_path_setup"] );				// path_setup
+	ui.chkDbx_loadfix->setChecked( fGrl.StrToBool( datosDbx["Dbx_opt_loadfix"] ) );					// opt_loadfix
+	ui.chkDbx_consola_dbox->setChecked( fGrl.StrToBool( datosDbx["Dbx_opt_consola_dbox"] ) );		// opt_consola_dbox
+	ui.chkDbx_cerrar_dbox->setChecked( fGrl.StrToBool( datosDbx["Dbx_opt_cerrar_dbox"] ) );			// opt_cerrar_dbox
 
-			ui.txtDbx_parametros_exe->setText( tempProfileDosBox["Dbx_parametros_exe"] );			// parametros_exe
-			ui.txtDbx_parametros_setup->setText( tempProfileDosBox["Dbx_parametros_setup"] );		// parametros_setup
+	if( !datosDbx["Dbx_path_setup"].isEmpty() )
+		ui.txtDbx_path_setup->setText( datosDbx["Dbx_path_setup"] );				// path_setup
 
-			ui.twMontajes->clear();
-			ui.btnMount_AutoCrear->click();
-		} else {
-			tempProfileDosBox["Dbx_sdl_fulldouble"]        = "false";		// sdl_fulldouble
-			tempProfileDosBox["Dbx_sdl_windowresolution"]  = "original";	// sdl_windowresolution
-			tempProfileDosBox["Dbx_sdl_hwscale"]           = "1.00";		// sdl_hwscale
-			tempProfileDosBox["Dbx_sdl_sensitivity"]       = "100";			// sdl_sensitivity
-			tempProfileDosBox["Dbx_sdl_waitonerror"]       = "true";		// sdl_waitonerror
-			tempProfileDosBox["Dbx_sdl_priority"]          = "higher,normal";// sdl_priority
-			tempProfileDosBox["Dbx_sdl_mapperfile"]        = "mapper.txt";	// sdl_mapperfile
-			tempProfileDosBox["Dbx_sdl_usescancodes"]      = "true";		// sdl_usescancodes
-			tempProfileDosBox["Dbx_dosbox_language"]       = "";			// dosbox_language
-			tempProfileDosBox["Dbx_dosbox_captures"]       = "capture";		// dosbox_captures
-			tempProfileDosBox["Dbx_render_frameskip"]      = "0";			// render_frameskip
-			tempProfileDosBox["Dbx_cpu_cputype"]           = "auto";		// cpu_cputype
-			tempProfileDosBox["Dbx_cpu_cycleup"]           = "500";			// cpu_cycleup
-			tempProfileDosBox["Dbx_cpu_cycledown"]         = "20";			// cpu_cycledown
-			tempProfileDosBox["Dbx_mixer_blocksize"]       = "2048";		// mixer_blocksize
-			tempProfileDosBox["Dbx_mixer_prebuffer"]       = "10";			// mixer_prebuffer
-			tempProfileDosBox["Dbx_midi_config"]           = "";			// midi_config
-			tempProfileDosBox["Dbx_sblaster_sbbase"]       = "220";			// sblaster_sbbase
-			tempProfileDosBox["Dbx_sblaster_irq"]          = "7";			// sblaster_irq
-			tempProfileDosBox["Dbx_sblaster_dma"]          = "1";			// sblaster_dma
-			tempProfileDosBox["Dbx_sblaster_hdma"]         = "5";			// sblaster_hdma
-			tempProfileDosBox["Dbx_sblaster_mixer"]        = "true";		// sblaster_mixer
-			tempProfileDosBox["Dbx_sblaster_oplmode"]      = "auto";		// sblaster_oplmode
-			tempProfileDosBox["Dbx_sblaster_oplemu"]       = "default";		// sblaster_oplemu
-			tempProfileDosBox["Dbx_gus_gusbase"]           = "240";			// gus_gusbase
-			tempProfileDosBox["Dbx_gus_irq1"]              = "5";			// gus_irq1
-			tempProfileDosBox["Dbx_gus_irq2"]              = "5";			// gus_irq2
-			tempProfileDosBox["Dbx_gus_dma1"]              = "3";			// gus_dma1
-			tempProfileDosBox["Dbx_gus_dma2"]              = "3";			// gus_dma2
-			tempProfileDosBox["Dbx_gus_ultradir"]          = "C:\\ULTRASND";// gus_ultradir
-			tempProfileDosBox["Dbx_speaker_tandy"]         = "auto";		// speaker_tandy
-			tempProfileDosBox["Dbx_joystick_type"]         = "auto";		// joystick_type
-			tempProfileDosBox["Dbx_joystick_timed"]        = "true";		// joystick_timed
-			tempProfileDosBox["Dbx_joystick_autofire"]     = "false";		// joystick_autofire
-			tempProfileDosBox["Dbx_joystick_swap34"]       = "false";		// joystick_swap34
-			tempProfileDosBox["Dbx_joystick_buttonwrap"]   = "true";		// joystick_buttonwrap
-			tempProfileDosBox["Dbx_modem_modem"]           = "true";		// modem_modem
-			tempProfileDosBox["Dbx_modem_comport"]         = "1";			// modem_comport
-			tempProfileDosBox["Dbx_modem_listenport"]      = "23";			// modem_listenport
-			tempProfileDosBox["Dbx_dserial_directserial"]  = "true";		// dserial_directserial
-			tempProfileDosBox["Dbx_dserial_comport"]       = "1";			// dserial_comport
-			tempProfileDosBox["Dbx_dserial_realport"]      = "COM1";		// serial_realport
-			tempProfileDosBox["Dbx_dserial_defaultbps"]    = "1200";		// dserial_defaultbps
-			tempProfileDosBox["Dbx_dserial_parity"]        = "N";			// dserial_parity
-			tempProfileDosBox["Dbx_dserial_bytesize"]      = "8";			// dserial_bytesize
-			tempProfileDosBox["Dbx_dserial_stopbit"]       = "1";			// dserial_stopbit
-			tempProfileDosBox["Dbx_serial_1"]              = "dummy";		// serial_1
-			tempProfileDosBox["Dbx_serial_2"]              = "dummy";		// serial_2
-			tempProfileDosBox["Dbx_serial_3"]              = "disabled";	// serial_3
-			tempProfileDosBox["Dbx_serial_4"]              = "disabled";	// serial_4
-			tempProfileDosBox["Dbx_dos_keyboardlayout"]    = "auto";		// dos_keyboardlayout
-			tempProfileDosBox["Dbx_ipx_ipx"]               = "false";		// ipx_ipx
-			tempProfileDosBox["Dbx_autoexec"]              = "";			// autoexec
-			tempProfileDosBox["Dbx_opt_autoexec"]          = "false";		// opt_autoexec
-			tempProfileDosBox["Dbx_opt_loadfix_mem"]       = "64";			// opt_loadfix_mem
-			tempProfileDosBox["Dbx_opt_cycle_sincronizar"] = "false";		// opt_cycle_sincronizar
-			tempProfileDosBox["Dbx_path_sonido"]           = "";			// path_sonido
+	ui.txtDbx_parametros_exe->setText( datosDbx["Dbx_parametros_exe"] );			// parametros_exe
+	ui.txtDbx_parametros_setup->setText( datosDbx["Dbx_parametros_setup"] );		// parametros_setup
+
+	if( !datosDbx["Dbx_path_exe"].isEmpty() )
+	{
+		ui.txtDbx_path_exe->setText( datosDbx["Dbx_path_exe"] );	// path_exe
+		if( isProfileGame )
+		{
+			isImportDbx = false;
+			emit on_btnMount_AutoCrear();
+		} else
+			isImportDbx = true;
+	}
+}
+
+void frmDbxAdd::CargarDatosDBxMontaje(QTreeWidget *twMontajesDbx)
+{
+	ui.twMontajes->clear();
+	int total_mount = twMontajesDbx->topLevelItemCount();
+	if( total_mount >= 0 )
+	{
+		for(int num_mount = 0; num_mount < total_mount; num_mount++ )
+		{
+			QTreeWidgetItem *itemDbx = twMontajesDbx->topLevelItem( num_mount );
+			QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
+			item->setIcon( 0, itemDbx->icon(0) );
+			item->setText( 0, itemDbx->text(0) );	// path			- directorio o iso
+			item->setText( 1, itemDbx->text(1) );	// label		- etiqueta
+			item->setText( 2, itemDbx->text(2) );	// tipo_as		- tipo de montaje
+			item->setText( 3, itemDbx->text(3) );	// letter		- letra de montaje
+			item->setText( 4, itemDbx->text(4) );	// indx_cd		- index de la unidad de cd-rom
+			item->setText( 5, itemDbx->text(5) );	// opt_mount	- opciones del cd-rom
+			item->setText( 6, itemDbx->text(6) );	// io_ctrl		- cd/dvd
+			item->setText( 7, itemDbx->text(7) );	// select_mount	- primer montaje
+			item->setText( 8, itemDbx->text(8) );	// id
+			item->setText( 9, itemDbx->text(9) );	// id_lista		- id_lista
 		}
+		PrevierMontajes();
+		isCreateMounts = true;
 	}
 }
 
@@ -368,10 +476,8 @@ void frmDbxAdd::on_btnDescargarInfo()
 	frmImportarJuego * ImportarJuego = new frmImportarJuego(ui.txtDatos_Titulo->text(), 0, Qt::Window);
 	if( ImportarJuego->exec() == QDialog::Accepted )
 	{
-		QFile file_thumbs, file_cover_front, file_cover_back;
-
 		tempDatosJuego.clear();
-		ui.txtDatos_Titulo->setText( ImportarJuego->DatosJuego["Dat_titulo"] );			//  titulo
+		ui.txtDatos_Titulo->setText( ImportarJuego->DatosJuego["Dat_titulo"] );				// titulo
 		tempDatosJuego["Dat_icono"]         = "dosbox";										// icono
 		tempDatosJuego["Dat_titulo"]        = ui.txtDatos_Titulo->text();					// titulo
 		tempDatosJuego["Dat_subtitulo"]     = ImportarJuego->DatosJuego["Dat_subtitulo"];	// subtitulo
@@ -379,6 +485,7 @@ void frmDbxAdd::on_btnDescargarInfo()
 		tempDatosJuego["Dat_compania"]      = ImportarJuego->DatosJuego["Dat_compania"];	// compania
 		tempDatosJuego["Dat_desarrollador"] = ImportarJuego->DatosJuego["Dat_desarrollador"];//desarrollador
 		tempDatosJuego["Dat_tema"]          = ImportarJuego->DatosJuego["Dat_tema"];		// tema
+		tempDatosJuego["Dat_perspectiva"]   = ImportarJuego->DatosJuego["Dat_perspectiva"];	// perspectiva
 		tempDatosJuego["Dat_idioma"]        = ImportarJuego->DatosJuego["Dat_idioma"];		// idioma
 		tempDatosJuego["Dat_formato"]       = ImportarJuego->DatosJuego["Dat_formato"];		// formato
 		tempDatosJuego["Dat_anno"]          = ImportarJuego->DatosJuego["Dat_anno"];		// anno
@@ -397,8 +504,27 @@ void frmDbxAdd::on_btnDescargarInfo()
 		tempDatosJuego["Dat_comentario"]    = ImportarJuego->DatosJuego["Dat_comentario"];	// comentario
 		tempDatosJuego["Dat_favorito"]      = ImportarJuego->DatosJuego["Dat_favorito"];	// favorito
 		tempDatosJuego["Dat_rating"]        = ImportarJuego->DatosJuego["Dat_rating"];		// rating
-		tempDatosJuego["Dat_usuario"]       = ImportarJuego->DatosJuego["Dat_usuario"];		// usuario
+		tempDatosJuego["Dat_edad_recomendada"] = ImportarJuego->DatosJuego["Dat_edad_recomendada"];	// edad_recomendada
+		tempDatosJuego["Dat_usuario"]          = ImportarJuego->DatosJuego["Dat_usuario"];			// usuario
+		tempDatosJuego["Dat_path_exe"]         = ImportarJuego->DatosJuego["Dat_path_exe"];			// path_exe
+		tempDatosJuego["Dat_parametros_exe"]   = ImportarJuego->DatosJuego["Dat_parametros_exe"];	// parametros_exe
+
+		if( ImportarJuego->DatosJuego["Dat_tipo_emu"] == "dosbox" )
+		{
+			if( ImportarJuego->DatosDosBox["Dbx_path_conf"] != "")
+				ui.txtDbx_path_conf->setText( ImportarJuego->DatosDosBox["Dbx_path_conf"] );
+
+			CargarDatosDosBox(ImportarJuego->DatosDosBox, false);
+			CargarDatosDBxMontaje(ImportarJuego->ui.twMontajes);
+		}
 	}
+}
+
+void frmDbxAdd::on_btnInstalarJuego()
+{
+	frmInstalarJuego *NewInstalar = new frmInstalarJuego(0);
+	NewInstalar->exec();
+	delete NewInstalar;
 }
 
 void frmDbxAdd::on_btnOk()
@@ -414,6 +540,7 @@ void frmDbxAdd::on_btnOk()
 		DatosJuego["Dat_compania"]      = ""+tempDatosJuego["Dat_compania"];		// compania
 		DatosJuego["Dat_desarrollador"] = ""+tempDatosJuego["Dat_desarrollador"];	// desarrollador
 		DatosJuego["Dat_tema"]          = ""+tempDatosJuego["Dat_tema"];			// tema
+		DatosJuego["Dat_perspectiva"]   = ""+tempDatosJuego["Dat_perspectiva"];		// Dat_perspectiva
 		DatosJuego["Dat_idioma"]        = ""+tempDatosJuego["Dat_idioma"];			// idioma
 		DatosJuego["Dat_formato"]       = ""+tempDatosJuego["Dat_formato"];			// formato
 		DatosJuego["Dat_anno"]          = ""+tempDatosJuego["Dat_anno"];			// anno
@@ -433,7 +560,10 @@ void frmDbxAdd::on_btnOk()
 		DatosJuego["Dat_comentario"]    = ""+tempDatosJuego["Dat_comentario"];		// comentario
 		DatosJuego["Dat_favorito"]      = ""+tempDatosJuego["Dat_favorito"];		// favorito
 		DatosJuego["Dat_rating"]        = ""+tempDatosJuego["Dat_rating"];			// rating
-		DatosJuego["Dat_usuario"]       = ""+tempDatosJuego["Dat_usuario"];			// usuario
+		DatosJuego["Dat_edad_recomendada"] = ""+tempDatosJuego["Dat_edad_recomendada"];	// edad_recomendada
+		DatosJuego["Dat_usuario"]          = ""+tempDatosJuego["Dat_usuario"];			// usuario
+		DatosJuego["Dat_path_exe"]         = ""+tempDatosJuego["Dat_path_exe"];			// path_exe
+		DatosJuego["Dat_parametros_exe"]   = ""+tempDatosJuego["Dat_parametros_exe"];	// parametros_exe
 
 		DatosDosBox.clear();
 	// sdl_fullscreen
@@ -468,7 +598,7 @@ void frmDbxAdd::on_btnOk()
 		if( ui.cbxDbx_dosbox_machine->currentText() != "" )
 			DatosDosBox["Dbx_dosbox_machine"] = ui.cbxDbx_dosbox_machine->currentText();
 		else
-			DatosDosBox["Dbx_dosbox_machine"] = "vga";
+			DatosDosBox["Dbx_dosbox_machine"] = "svga_s3";
 	// dosbox_captures
 		DatosDosBox["Dbx_dosbox_captures"] = tempProfileDosBox["Dbx_dosbox_captures"];
 	// dosbox_memsize
@@ -509,7 +639,7 @@ void frmDbxAdd::on_btnOk()
 		if( ui.cbxDbx_mixer_rate->currentText() != "" )
 			DatosDosBox["Dbx_mixer_rate"] = ui.cbxDbx_mixer_rate->currentText();
 		else
-			DatosDosBox["Dbx_mixer_rate"] = "22050";
+			DatosDosBox["Dbx_mixer_rate"] = "44100";
 
 		DatosDosBox["Dbx_mixer_blocksize"] = tempProfileDosBox["Dbx_mixer_blocksize"];	// mixer_blocksize
 		DatosDosBox["Dbx_mixer_prebuffer"] = tempProfileDosBox["Dbx_mixer_prebuffer"];	// mixer_prebuffer
@@ -531,7 +661,7 @@ void frmDbxAdd::on_btnOk()
 		if( ui.cbxDbx_midi_mt32rate->currentText() != "" )
 			DatosDosBox["Dbx_midi_mt32rate"] = ui.cbxDbx_midi_mt32rate->currentText();
 		else
-			DatosDosBox["Dbx_midi_mt32rate"] = "22050";
+			DatosDosBox["Dbx_midi_mt32rate"] = "44100";
 	// sblaster_sbtype
 		if( ui.cbxDbx_sblaster_sbtype->currentText() != "" )
 			DatosDosBox["Dbx_sblaster_sbtype"] = ui.cbxDbx_sblaster_sbtype->currentText();
@@ -550,14 +680,14 @@ void frmDbxAdd::on_btnOk()
 		if( ui.cbxDbx_sblaster_oplrate->currentText() != "" )
 			DatosDosBox["Dbx_sblaster_oplrate"] = ui.cbxDbx_sblaster_oplrate->currentText();
 		else
-			DatosDosBox["Dbx_sblaster_oplrate"] = "22050";
+			DatosDosBox["Dbx_sblaster_oplrate"] = "44100";
 	// gus_gus
 		DatosDosBox["Dbx_gus_gus"] = fGrl.BoolToStr( ui.chkDbx_gus_gus->isChecked() );
 	// gus_gusrate
 		if( ui.cbxDbx_gus_gusrate->currentText() != "" )
 			DatosDosBox["Dbx_gus_gusrate"] = ui.cbxDbx_gus_gusrate->currentText();
 		else
-			DatosDosBox["Dbx_gus_gusrate"] = "22050";
+			DatosDosBox["Dbx_gus_gusrate"] = "44100";
 
 		DatosDosBox["Dbx_gus_gusbase"]       = tempProfileDosBox["Dbx_gus_gusbase"];	// gus_gusbase
 		DatosDosBox["Dbx_gus_irq1"]          = tempProfileDosBox["Dbx_gus_irq1"];		// gus_irq1
@@ -570,14 +700,14 @@ void frmDbxAdd::on_btnOk()
 		if( ui.cbxDbx_speaker_pcrate->currentText() != "" )
 			DatosDosBox["Dbx_speaker_pcrate"] = ui.cbxDbx_speaker_pcrate->currentText();
 		else
-			DatosDosBox["Dbx_speaker_pcrate"] = "22050";
+			DatosDosBox["Dbx_speaker_pcrate"] = "44100";
 
 		DatosDosBox["Dbx_speaker_tandy"] = tempProfileDosBox["Dbx_speaker_tandy"];	// speaker_tandy
 	// speaker_tandyrate
 		if( ui.cbxDbx_speaker_tandyrate->currentText() != "" )
 			DatosDosBox["Dbx_speaker_tandyrate"] = ui.cbxDbx_speaker_tandyrate->currentText();
 		else
-			DatosDosBox["Dbx_speaker_tandyrate"] = "22050";
+			DatosDosBox["Dbx_speaker_tandyrate"] = "44100";
 
 		DatosDosBox["Dbx_speaker_disney"]       = fGrl.BoolToStr( ui.chkDbx_speaker_disney->isChecked() );	// speaker_disney
 		DatosDosBox["Dbx_joystick_type"]        = tempProfileDosBox["Dbx_joystick_type"];		// joystick_type
@@ -642,6 +772,20 @@ void frmDbxAdd::on_txtDatos_Titulo_textChanged(const QString &text)
 		str = "";
 
 	ui.txtDbx_path_conf->setText( str );
+}
+
+void frmDbxAdd::on_txtDbx_path_exe_textChanged(const QString &text)
+{
+	if( !text.isEmpty() && QFile::exists( text ) )
+	{
+		ui.btnOk->setEnabled( true );
+		if( isImportDbx == false )
+		{
+			ui.twMontajes->clear();
+			ui.btnMount_AutoCrear->click();
+		}
+	} else
+		ui.btnOk->setEnabled( false );
 }
 
 void frmDbxAdd::on_btnDbx_FileConfg()
@@ -839,6 +983,8 @@ void frmDbxAdd::on_btnMount_Bajar()
 
 void frmDbxAdd::on_btnMount_AutoCrear()
 {
+	emit on_btnMount_Clear();
+
 	QFileInfo fi( ui.txtDbx_path_exe->text() );
 	QTreeWidgetItem *item = new QTreeWidgetItem( ui.twMontajes );
 	item->setIcon( 0 , QIcon(stTheme+"img16/drive_hd.png") );
