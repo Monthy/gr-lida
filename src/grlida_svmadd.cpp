@@ -112,7 +112,7 @@ void frmSvmAdd::CargarConfig()
 
 	fGrl.CargarDatosListaSvm(":/datos/svm_lista.txt"        , ui.twScummVM             );	// Carga la lista de compatibilidad del ScummVM.
 	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"       , ui.cbxSvm_language,2,true);	// Carga la lista de idiomas
-	fGrl.CargarDatosComboBox(":/datos/svm_platform.txt"     , ui.cbxSvm_platform    , 2);	// Carga la lista de platform
+	fGrl.CargarDatosComboBox(":/datos/svm_platform.txt"     , ui.cbxSvm_platform    , 3);	// Carga la lista de platform
 	fGrl.CargarDatosComboBox(":/datos/svm_gfxmode.txt"      , ui.cbxSvm_gfx_mode    , 3);	// Carga la lista de gfxmode
 	fGrl.CargarDatosComboBox(":/datos/svm_render_mode.txt"  , ui.cbxSvm_render_mode    );	// Carga la lista de render_mode
 	fGrl.CargarDatosComboBox(":/datos/svm_music_driver.txt" , ui.cbxSvm_music_driver, 3);	// Carga la lista de music_driver

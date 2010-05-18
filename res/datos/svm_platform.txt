@@ -1,15 +1,15 @@
-<default>|sinimg
-Apple IIgs|2gs
-3DO|3do
-Acorn|acorn
-Amiga|amiga
-Atari ST|atari
-Commodore 64|c64
-DOS|pc
-FM-TOWNS|fmtowns
-Linux|linux
-Macintosh|macintosh
-PC-Engine|pce
-NES|nes
-SegaCD|segacd
-Windows|windows
+<default>||sinimg
+Apple IIgs|2gs|sinimg
+3DO|3do|sinimg
+Acorn|acorn|sinimg
+Amiga|amiga|amiga
+Atari ST|atari|atari
+Commodore 64|c64|c64
+DOS|pc|pc
+FM-TOWNS|fmtowns|sinimg
+Linux|linux|linux
+Macintosh|macintosh|macintosh
+PC-Engine|pce|sinimg
+NES|nes|nes
+SegaCD|segacd|sinimg
+Windows|windows|win9x
