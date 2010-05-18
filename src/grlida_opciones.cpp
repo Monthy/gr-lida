@@ -79,6 +79,7 @@ void frmOpciones::CargarConfig()
 	ui.cbxVersionDbx->clear();
 	ui.cbxVersionDbx->addItem("0.72");
 	ui.cbxVersionDbx->addItem("0.73");
+	ui.cbxVersionDbx->addItem("0.74");
 
 	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
 // Idioma

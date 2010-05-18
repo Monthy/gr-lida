@@ -442,7 +442,7 @@ QHash<QString, QVariant> Funciones::CargarGRLConfig(QString iniFileName)
 		config["PicFlowReflection"] = settings.value("PicFlowReflection", "PlainReflection").toString();
 		config["Skip_PicFlow"]      = settings.value("Skip_PicFlow" , 10).toInt();
 		config["IndexTabArchivos"]  = settings.value("IndexTabArchivos", 0).toInt();
-		config["VersionDBx"]        = settings.value("VersionDBx", "0.73").toString();
+		config["VersionDBx"]        = settings.value("VersionDBx", "0.74").toString();
 	settings.endGroup();
 
 	settings.beginGroup("OpcFuente");
