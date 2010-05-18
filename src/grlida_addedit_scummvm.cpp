@@ -160,7 +160,8 @@ void frmAddEditScummVM::CargarConfigScummVM()
 
 	ui.cbxSvm_output_rate->clear();
 	ui.cbxSvm_output_rate->addItem("<defecto>");
-	ui.cbxSvm_output_rate->addItem("11050");
+	ui.cbxSvm_output_rate->addItem("8000");
+	ui.cbxSvm_output_rate->addItem("11025");
 	ui.cbxSvm_output_rate->addItem("22050");
 	ui.cbxSvm_output_rate->addItem("44100");
 	ui.cbxSvm_output_rate->addItem("48000");
