@@ -139,7 +139,7 @@ void frmSvmAdd::CargarConfig()
 	tempDatosJuego["Svm_path_capturas"]   = "";
 	tempDatosJuego["Svm_path_sonido"]     = "";
 	tempDatosJuego["Svm_master_volume"]   = "192";
-	tempDatosJuego["Svm_output_rate"]     = "<defecto>";
+	tempDatosJuego["Svm_output_rate"]     = "";
 	tempDatosJuego["Svm_copy_protection"] = "false";
 	tempDatosJuego["Svm_sound_font"]      = "";
 	tempDatosJuego["Svm_opl_driver"]      = "auto";
@@ -275,7 +275,7 @@ void frmSvmAdd::on_btnDescargarInfo()
 			ui.txtSvm_savepath->setText( ImportarJuego->DatosScummVM["Svm_path_save"] );													// path_save
 			tempDatosJuego["Svm_path_capturas"] = ImportarJuego->DatosScummVM["Svm_path_capturas"];											// path_capturas
 			tempDatosJuego["Svm_path_sonido"]   = ImportarJuego->DatosScummVM["Svm_path_sonido"];											// path_sonido
-			ui.cbxSvm_music_driver->setCurrentIndex( ui.cbxSvm_music_driver->findText( ImportarJuego->DatosScummVM["Svm_music_driver"] ) );	// music_driver
+			ui.cbxSvm_music_driver->setCurrentIndex( ui.cbxSvm_music_driver->findData( ImportarJuego->DatosScummVM["Svm_music_driver"] ) );	// music_driver
 			ui.chkSvm_enable_gs->setChecked( fGrl.StrToBool( ImportarJuego->DatosScummVM["Svm_enable_gs"] ) );								// enable_gs
 			ui.chkSvm_multi_midi->setChecked( fGrl.StrToBool( ImportarJuego->DatosScummVM["Svm_multi_midi"] ) );							// multi_midi
 			ui.chkSvm_native_mt32->setChecked( fGrl.StrToBool( ImportarJuego->DatosScummVM["Svm_native_mt32"] ) );							// native_mt32
@@ -352,7 +352,7 @@ void frmSvmAdd::on_btnOk()
 		DatosScummVM["Svm_path_save"]       = ui.txtSvm_savepath->text();								// path_save
 		DatosScummVM["Svm_path_capturas"]   = ""+tempDatosJuego["Svm_path_capturas"];					// path_capturas
 		DatosScummVM["Svm_path_sonido"]     = ""+tempDatosJuego["Svm_path_sonido"];						// path_sonido
-		DatosScummVM["Svm_music_driver"]    = ui.cbxSvm_music_driver->currentText();					// music_driver
+		DatosScummVM["Svm_music_driver"]    = ui.cbxSvm_music_driver->itemData( ui.cbxSvm_music_driver->currentIndex() ).toString();// music_driver
 		DatosScummVM["Svm_enable_gs"]       = fGrl.BoolToStr( ui.chkSvm_enable_gs->isChecked() );		// enable_gs
 		DatosScummVM["Svm_multi_midi"]      = fGrl.BoolToStr( ui.chkSvm_multi_midi->isChecked() );		// multi_midi
 		DatosScummVM["Svm_native_mt32"]     = fGrl.BoolToStr( ui.chkSvm_native_mt32->isChecked() );		// native_mt32
