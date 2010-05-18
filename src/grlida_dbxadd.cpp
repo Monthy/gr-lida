@@ -177,8 +177,12 @@ void frmDbxAdd::CargarConfig()
 
 	ui.twMontajes->setColumnHidden(7, true);
 
-	tempDatosJuego["Dat_favorito"] = "false";
-	tempDatosJuego["Dat_rating"]   = "0";
+	tempDatosJuego["Dat_graficos"]        = "0";
+	tempDatosJuego["Dat_sonido"]          = "0";
+	tempDatosJuego["Dat_jugabilidad"]     = "0";
+	tempDatosJuego["Dat_favorito"]        = "false";
+	tempDatosJuego["Dat_rating"]          = "0";
+	tempDatosJuego["Dat_edad_recomendada"]= "nd";
 
 	ui.txtDatos_Titulo->setFocus();
 }

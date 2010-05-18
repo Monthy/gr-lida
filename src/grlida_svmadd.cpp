@@ -131,6 +131,9 @@ void frmSvmAdd::CargarConfig()
 	ui.cbxSvm_music_driver->setCurrentIndex(0);
 	ui.cbxSvm_cdrom->setCurrentIndex(0);
 
+	tempDatosJuego["Dat_graficos"]        = "0";
+	tempDatosJuego["Dat_sonido"]          = "0";
+	tempDatosJuego["Dat_jugabilidad"]     = "0";
 	tempDatosJuego["Dat_favorito"]        = "false";
 	tempDatosJuego["Dat_rating"]          = "0";
 	tempDatosJuego["Dat_edad_recomendada"]= "nd";

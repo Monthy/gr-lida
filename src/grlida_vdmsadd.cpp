@@ -86,8 +86,12 @@ void frmVdmsAdd::CargarConfig()
 {
 	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
 
-	tempDatosJuego["Dat_favorito"] = "false";
-	tempDatosJuego["Dat_rating"]   = "0";
+	tempDatosJuego["Dat_graficos"]        = "0";
+	tempDatosJuego["Dat_sonido"]          = "0";
+	tempDatosJuego["Dat_jugabilidad"]     = "0";
+	tempDatosJuego["Dat_favorito"]        = "false";
+	tempDatosJuego["Dat_rating"]          = "0";
+	tempDatosJuego["Dat_edad_recomendada"]= "nd";
 }
 
 void frmVdmsAdd::on_btnDescargarInfo()
