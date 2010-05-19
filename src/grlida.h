@@ -103,7 +103,7 @@ private:
 	QHash<QString, QString>::const_iterator i_Hash;
 	QHash<QString, QString> conf_scummvm;
 
-	QHash<QString, int> lwlista_pos;
+	QHash<QString, QListWidgetItem *> lwlista_pos;
 	QHash<QString, QTreeWidgetItem *> twlista_pos;
 
 // Barra de Heramientas Ordenar

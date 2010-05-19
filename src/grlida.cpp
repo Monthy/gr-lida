@@ -1607,9 +1607,7 @@ void GrLida::on_twJuegos_clicked(QTreeWidgetItem *twItem)
 			id_ImgPicFlow_old = current_imgPicFlow;
 		}
 
-		int	pos = lwlista_pos[stItemIndex];
-		ui.lwJuegos->setCurrentRow(pos);
-		ui.lwJuegos->item(pos)->setSelected(true);
+		lwlista_pos[stItemIndex]->setSelected(true);
 
 		old_rating = twItem->text(col_Rating).toInt();
 		if( (item_changed == false) && (old_rating != new_rating) )
@@ -1622,7 +1620,7 @@ void GrLida::on_twJuegos_clicked(QTreeWidgetItem *twItem)
 			} else {
 				img_list_thumb.load(stListThumbsDir +"ImgTemp.png");
 			}
-			ui.lwJuegos->item(pos)->setIcon(QIcon( img_list_thumb ));
+			lwlista_pos[stItemIndex]->setIcon(QIcon( img_list_thumb ));
 		}
 		new_rating = twItem->text(col_Rating).toInt();
 
@@ -1877,7 +1875,7 @@ void GrLida::NuevoItemTreeWidget(const QHash<QString, QString> datos, QString ID
 	lwItem->setData(Qt::UserRole+2, datos["Dat_titulo"]   );
 	lwItem->setData(Qt::UserRole+3, datos["Dat_tipo_emu"] );
 
-	lwlista_pos.insert(IDitem, lwItem->listWidget()->row(lwItem) );
+	lwlista_pos.insert(IDitem, lwItem );
 
 	stIcono = fGrl.getIconListaJuegos(datos["Dat_icono"], stIconDir);
 
@@ -2192,8 +2190,6 @@ void GrLida::on_EliminarJuego()
 			if( respuesta == 0 )
 			{
 				QString stCurrentImgPicFlow;
-				sql->ItemEliminar( stItemIndex );
-
 				if( ui.mnu_ver_cover_mode->isChecked() )
 					stCurrentImgPicFlow = ui.lwJuegos->item(ui.lwJuegos->currentRow())->data(Qt::UserRole+1).toString();
 				else
@@ -2201,16 +2197,22 @@ void GrLida::on_EliminarJuego()
 
 				ui.PicFlowWidget->setSlide( QVariant( stCurrentImgPicFlow ).toInt(), QPixmap(stTheme+"images/juego_eliminado.png") );
 
-				QListWidgetItem *lwItem = ui.lwJuegos->currentItem();
-				if(lwItem != NULL) delete lwItem;
-
+			// Borramos el Item de QListWidget.
+				if(lwlista_pos[stItemIndex] != NULL)
+					delete lwlista_pos[stItemIndex];
+			// Borramos el Item de QTreeWidget.
 				fGrl.DeleteItemTree( ui.twJuegos->currentItem() );
+			// Borramos la dirección del puntero del Item de QListWidget.
+				lwlista_pos.remove(stItemIndex);
+			// Borramos la dirección del puntero del Item de QTreeWidget.
+				twlista_pos.remove(stItemIndex);
+			// Borramos los Datos de la Base de Datos.
+				sql->ItemEliminar( stItemIndex );
 
 				QMessageBox::information( this, stTituloGrl(), tr("Juego Eliminado correctamente"));
 
 				if( ui.twJuegos->topLevelItemCount() > 0 )
 				{
-				//	on_twJuegos_clicked( ui.twJuegos->currentItem() );
 					if( ui.mnu_ver_cover_mode->isChecked() )
 					{
 						ui.lwJuegos->setCurrentItem(ui.lwJuegos->currentItem());
@@ -2662,11 +2664,10 @@ void GrLida::on_ReconstruirTodasCaratulas(bool db_cargada)
 			{
 				if(stThumbs != "")
 				{
-					int	pos = lwlista_pos[tempDatos["Dat_idgrl"]];
 					if( QFile::exists(stListThumbsDir + stThumbs +".png") )
-						ui.lwJuegos->item(pos)->setIcon(QIcon(stListThumbsDir + stThumbs +".png"));
+						lwlista_pos[tempDatos["Dat_idgrl"]]->setIcon(QIcon(stListThumbsDir + stThumbs +".png"));
 					else
-						ui.lwJuegos->item(pos)->setIcon(QIcon(stTheme+"images/list_cover.png"));
+						lwlista_pos[tempDatos["Dat_idgrl"]]->setIcon(QIcon(stTheme+"images/list_cover.png"));
 				}
 			}
 		} while ( query_select.next() );
@@ -2695,11 +2696,10 @@ void GrLida::on_ReconstruirCaratula()
 
 			if(stThumbs != "")
 			{
-				int	pos = lwlista_pos[stItemIndex];
 				if( QFile::exists(stListThumbsDir + stThumbs +".png") )
-					ui.lwJuegos->item(pos)->setIcon(QIcon(stListThumbsDir + stThumbs +".png"));
+					lwlista_pos[stItemIndex]->setIcon(QIcon(stListThumbsDir + stThumbs +".png"));
 				else
-					ui.lwJuegos->item(pos)->setIcon(QIcon(stTheme+"images/list_cover.png"));
+					lwlista_pos[stItemIndex]->setIcon(QIcon(stTheme+"images/list_cover.png"));
 			}
 		}
 	}
