@@ -2502,7 +2502,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <property name="spacing">
-             <number>34</number>
+             <number>4</number>
             </property>
             <item>
              <widget class="QToolButton" name="btnToolDbx_mount_HD">
@@ -2587,7 +2587,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <property name="spacing">
-             <number>34</number>
+             <number>4</number>
             </property>
             <item>
              <widget class="QToolButton" name="btnToolDbx_mount_ImgFloppy">
