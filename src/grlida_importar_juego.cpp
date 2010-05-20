@@ -852,6 +852,9 @@ void frmImportarJuego::AnalyzePage(QString Page, bool local, bool tipoDFend)
 		DatosDosBox["Dbx_cpu_core"]              = ""+DatosJuegoTemp["Dbx_cpu_core"];
 		DatosDosBox["Dbx_cpu_cputype"]           = ""+DatosJuegoTemp["Dbx_cpu_cputype"];
 		DatosDosBox["Dbx_cpu_cycles"]            = ""+DatosJuegoTemp["Dbx_cpu_cycles"];
+		DatosDosBox["Dbx_cpu_cycles_realmode"]   = ""+DatosJuegoTemp["Dbx_cpu_cycles_realmode"];
+		DatosDosBox["Dbx_cpu_cycles_protmode"]   = ""+DatosJuegoTemp["Dbx_cpu_cycles_protmode"];
+		DatosDosBox["Dbx_cpu_cycles_limitmode"]  = ""+DatosJuegoTemp["Dbx_cpu_cycles"];
 		DatosDosBox["Dbx_cpu_cycleup"]           = ""+DatosJuegoTemp["Dbx_cpu_cycleup"];
 		DatosDosBox["Dbx_cpu_cycledown"]         = ""+DatosJuegoTemp["Dbx_cpu_cycledown"];
 		DatosDosBox["Dbx_mixer_nosound"]         = ""+DatosJuegoTemp["Dbx_mixer_nosound"];

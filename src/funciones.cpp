@@ -1588,8 +1588,32 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 
 		if( datosDbx["Dbx_cpu_cycles"] != "auto" && datosDbx["Dbx_cpu_cycles"] != "max" && versionDbx >= "0.73")
 			out << "cycles=fixed " << datosDbx["Dbx_cpu_cycles"] << endl;
-		else
-			out << "cycles=" << datosDbx["Dbx_cpu_cycles"] << endl;
+		else {
+			QString cycles_realmode, cycles_protmode, cycles_limitmode;
+			if( datosDbx["Dbx_cpu_cycles"] == "auto" && versionDbx >= "0.74")
+			{
+				cycles_realmode = cycles_protmode = cycles_limitmode = "";
+				if( datosDbx["Dbx_cpu_cycles_realmode"] != "")
+					cycles_realmode = " "+datosDbx["Dbx_cpu_cycles_realmode"];
+				if( datosDbx["Dbx_cpu_cycles_protmode"] != "")
+					cycles_protmode = " "+datosDbx["Dbx_cpu_cycles_protmode"];
+				if( datosDbx["Dbx_cpu_cycles_limitmode"] != "")
+					cycles_limitmode = " "+datosDbx["Dbx_cpu_cycles_limitmode"];
+
+				out << "cycles=" << "auto" << cycles_realmode << cycles_protmode << cycles_limitmode << endl;
+			}
+			else if( datosDbx["Dbx_cpu_cycles"] == "max" && versionDbx >= "0.74")
+			{
+				cycles_protmode = cycles_limitmode = "";
+				if( datosDbx["Dbx_cpu_cycles_protmode"] != "")
+					cycles_protmode = " "+datosDbx["Dbx_cpu_cycles_protmode"];
+				if( datosDbx["Dbx_cpu_cycles_limitmode"] != "")
+					cycles_limitmode = " "+datosDbx["Dbx_cpu_cycles_limitmode"];
+
+				out << "cycles=" << "max" << cycles_protmode << cycles_limitmode << endl;
+			} else
+				out << "cycles=" << datosDbx["Dbx_cpu_cycles"] << endl;
+		}
 
 		out << "cycleup=" << datosDbx["Dbx_cpu_cycleup"] << endl;
 		out << "cycledown=" << datosDbx["Dbx_cpu_cycledown"] << endl << endl;

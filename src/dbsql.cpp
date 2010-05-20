@@ -239,6 +239,9 @@ void dbSql::CrearTablas()
 		"	`cpu_core`				varchar(10) NOT NULL default 'auto',"
 		"	`cpu_cputype`			varchar(20) NOT NULL default 'auto',"
 		"	`cpu_cycles`			varchar(10) NOT NULL default 'auto',"
+		"	`cpu_cycles_realmode`	varchar(10) NOT NULL default '',"
+		"	`cpu_cycles_protmode`	varchar(10) NOT NULL default '',"
+		"	`cpu_cycles_limitmode`	varchar(10) NOT NULL default '',"
 		"	`cpu_cycleup`			varchar(10) NOT NULL default '500',"
 		"	`cpu_cycledown`			varchar(10) NOT NULL default '20',"
 		"	`mixer_nosound`			varchar(5) NOT NULL default 'false',"
@@ -444,6 +447,9 @@ void dbSql::CrearTablas()
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cputype' varchar(20) NOT NULL DEFAULT 'auto';");
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'sblaster_oplemu' varchar(10) NOT NULL DEFAULT 'default';");
+	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cycles_realmode' varchar(10) NOT NULL DEFAULT '';");
+	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cycles_protmode' varchar(10) NOT NULL DEFAULT '';");
+	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cycles_limitmode' varchar(10) NOT NULL DEFAULT '';");
 
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'output_rate' varchar(10) NOT NULL DEFAULT '<defecto>';");
@@ -680,8 +686,11 @@ QHash<QString, QString> dbSql::showConfg_DOSBox(QString IDgrl)
 	tmpDosBox["Dbx_render_scaler"]        = query.record().value("render_scaler").toString();
 // [cpu]
 	tmpDosBox["Dbx_cpu_core"]             = query.record().value("cpu_core").toString();
-	tmpDosBox["Dbx_cpu_cputype"]             = query.record().value("cpu_cputype").toString();
+	tmpDosBox["Dbx_cpu_cputype"]          = query.record().value("cpu_cputype").toString();
 	tmpDosBox["Dbx_cpu_cycles"]           = query.record().value("cpu_cycles").toString();
+	tmpDosBox["Dbx_cpu_cycles_realmode"]  = query.record().value("cpu_cycles_realmode").toString();
+	tmpDosBox["Dbx_cpu_cycles_protmode"]  = query.record().value("cpu_cycles_protmode").toString();
+	tmpDosBox["Dbx_cpu_cycles_limitmode"] = query.record().value("cpu_cycles_limitmode").toString();
 	tmpDosBox["Dbx_cpu_cycleup"]          = query.record().value("cpu_cycleup").toString();
 	tmpDosBox["Dbx_cpu_cycledown"]        = query.record().value("cpu_cycledown").toString();
 // [mixer]
@@ -777,7 +786,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	strSQL.append("idgrl, sdl_fullscreen, sdl_fulldouble, sdl_fullfixed, sdl_fullresolution, sdl_windowresolution, sdl_output, ");
 	strSQL.append("sdl_hwscale, sdl_autolock, sdl_sensitivity, sdl_waitonerror, sdl_priority, sdl_mapperfile, sdl_usescancodes, ");
 	strSQL.append("dosbox_language, dosbox_machine, dosbox_captures, dosbox_memsize, render_frameskip, render_aspect, render_scaler, ");
-	strSQL.append("cpu_core, cpu_cputype, cpu_cycles, cpu_cycleup, cpu_cycledown, mixer_nosound, mixer_rate, mixer_blocksize, mixer_prebuffer, ");
+	strSQL.append("cpu_core, cpu_cputype, cpu_cycles, cpu_cycles_realmode, cpu_cycles_protmode, cpu_cycles_limitmode, cpu_cycleup, cpu_cycledown, mixer_nosound, mixer_rate, mixer_blocksize, mixer_prebuffer, ");
 	strSQL.append("midi_mpu401, midi_intelligent, midi_device, midi_config, midi_mt32rate, sblaster_sbtype, sblaster_sbbase, sblaster_irq, ");
 	strSQL.append("sblaster_dma, sblaster_hdma, sblaster_mixer, sblaster_oplmode, sblaster_oplemu, sblaster_oplrate, gus_gus, gus_gusrate, gus_gusbase, ");
 	strSQL.append("gus_irq1, gus_irq2, gus_dma1, gus_dma2, gus_ultradir, speaker_pcspeaker, speaker_pcrate, speaker_tandy, speaker_tandyrate, ");
@@ -790,7 +799,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	strSQL.append(":idgrl, :sdl_fullscreen, :sdl_fulldouble, :sdl_fullfixed, :sdl_fullresolution, :sdl_windowresolution, :sdl_output, ");
 	strSQL.append(":sdl_hwscale, :sdl_autolock, :sdl_sensitivity, :sdl_waitonerror, :sdl_priority, :sdl_mapperfile, :sdl_usescancodes, ");
 	strSQL.append(":dosbox_language, :dosbox_machine, :dosbox_captures, :dosbox_memsize, :render_frameskip, :render_aspect, :render_scaler, ");
-	strSQL.append(":cpu_core, :cpu_cputype, :cpu_cycles, :cpu_cycleup, :cpu_cycledown, :mixer_nosound, :mixer_rate, :mixer_blocksize, :mixer_prebuffer, ");
+	strSQL.append(":cpu_core, :cpu_cputype, :cpu_cycles, :cpu_cycles_realmode, :cpu_cycles_protmode, :cpu_cycles_limitmode, :cpu_cycleup, :cpu_cycledown, :mixer_nosound, :mixer_rate, :mixer_blocksize, :mixer_prebuffer, ");
 	strSQL.append(":midi_mpu401, :midi_intelligent, :midi_device, :midi_config, :midi_mt32rate, :sblaster_sbtype, :sblaster_sbbase, :sblaster_irq, ");
 	strSQL.append(":sblaster_dma, :sblaster_hdma, :sblaster_mixer, :sblaster_oplmode, :sblaster_oplemu, :sblaster_oplrate, :gus_gus, :gus_gusrate, :gus_gusbase, ");
 	strSQL.append(":gus_irq1, :gus_irq2, :gus_dma1, :gus_dma2, :gus_ultradir, :speaker_pcspeaker, :speaker_pcrate, :speaker_tandy, :speaker_tandyrate, ");
@@ -827,6 +836,9 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	query.bindValue(":cpu_core"              , datos["Dbx_cpu_core"]              );
 	query.bindValue(":cpu_cputype"           , datos["Dbx_cpu_cputype"]           );
 	query.bindValue(":cpu_cycles"            , datos["Dbx_cpu_cycles"]            );
+	query.bindValue(":cpu_cycles_realmode"   , datos["Dbx_cpu_cycles_realmode"]   );
+	query.bindValue(":cpu_cycles_protmode"   , datos["Dbx_cpu_cycles_protmode"]   );
+	query.bindValue(":cpu_cycles_limitmode"  , datos["Dbx_cpu_cycles_limitmode"]  );
 	query.bindValue(":cpu_cycleup"           , datos["Dbx_cpu_cycleup"]           );
 	query.bindValue(":cpu_cycledown"         , datos["Dbx_cpu_cycledown"]         );
 	query.bindValue(":mixer_nosound"         , datos["Dbx_mixer_nosound"]         );
@@ -915,7 +927,8 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	strSQL.append("sdl_sensitivity = :sdl_sensitivity , sdl_waitonerror = :sdl_waitonerror , sdl_priority = :sdl_priority , sdl_mapperfile = :sdl_mapperfile ,");
 	strSQL.append("sdl_usescancodes = :sdl_usescancodes , dosbox_language = :dosbox_language , dosbox_machine = :dosbox_machine , dosbox_captures = :dosbox_captures ,");
 	strSQL.append("dosbox_memsize = :dosbox_memsize , render_frameskip = :render_frameskip , render_aspect = :render_aspect , render_scaler = :render_scaler ,");
-	strSQL.append("cpu_core = :cpu_core , cpu_cputype = :cpu_cputype , cpu_cycles = :cpu_cycles , cpu_cycleup = :cpu_cycleup , cpu_cycledown = :cpu_cycledown , mixer_nosound = :mixer_nosound ,");
+	strSQL.append("cpu_core = :cpu_core , cpu_cputype = :cpu_cputype , cpu_cycles = :cpu_cycles , cpu_cycles_realmode = :cpu_cycles_realmode ,");
+	strSQL.append("cpu_cycles_protmode = :cpu_cycles_protmode , cpu_cycles_limitmode = :cpu_cycles_limitmode , cpu_cycleup = :cpu_cycleup , cpu_cycledown = :cpu_cycledown , mixer_nosound = :mixer_nosound ,");
 	strSQL.append("mixer_rate = :mixer_rate , mixer_blocksize = :mixer_blocksize , mixer_prebuffer = :mixer_prebuffer , midi_mpu401 = :midi_mpu401 , midi_intelligent = :midi_intelligent ,");
 	strSQL.append("midi_device = :midi_device , midi_config = :midi_config , midi_mt32rate = :midi_mt32rate , sblaster_sbtype = :sblaster_sbtype , sblaster_sbbase = :sblaster_sbbase ,");
 	strSQL.append("sblaster_irq = :sblaster_irq , sblaster_dma = :sblaster_dma , sblaster_hdma = :sblaster_hdma , sblaster_mixer = :sblaster_mixer , sblaster_oplmode = :sblaster_oplmode ,");
@@ -958,6 +971,9 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	query.bindValue(":cpu_core"              , datos["Dbx_cpu_core"]              );
 	query.bindValue(":cpu_cputype"           , datos["Dbx_cpu_cputype"]           );
 	query.bindValue(":cpu_cycles"            , datos["Dbx_cpu_cycles"]            );
+	query.bindValue(":cpu_cycles_realmode"   , datos["Dbx_cpu_cycles_realmode"]   );
+	query.bindValue(":cpu_cycles_protmode"   , datos["Dbx_cpu_cycles_protmode"]   );
+	query.bindValue(":cpu_cycles_limitmode"  , datos["Dbx_cpu_cycles_limitmode"]  );
 	query.bindValue(":cpu_cycleup"           , datos["Dbx_cpu_cycleup"]           );
 	query.bindValue(":cpu_cycledown"         , datos["Dbx_cpu_cycledown"]         );
 	query.bindValue(":mixer_nosound"         , datos["Dbx_mixer_nosound"]         );

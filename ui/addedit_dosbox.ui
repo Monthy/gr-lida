@@ -634,21 +634,11 @@
        </property>
        <item>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0" colspan="2">
-          <widget class="QLabel" name="lb_Dbx_15">
-           <property name="text">
-            <string>Cantidad de memoria (Mb) que DOSBox tendrá disponible:</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
+         <item row="0" column="0">
           <widget class="QComboBox" name="cbxDbx_dosbox_memsize">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>100</width>
              <height>24</height>
             </size>
            </property>
@@ -660,7 +650,30 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="2">
+         <item row="0" column="1" colspan="8">
+          <widget class="QLabel" name="lb_Dbx_15">
+           <property name="text">
+            <string>Cantidad de memoria (Mb) que DOSBox tendrá disponible:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QComboBox" name="cbxDbx_cpu_core">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="8">
           <widget class="QLabel" name="lb_Dbx_16">
            <property name="text">
             <string>Núcleo de la CPU usado en la emulación:</string>
@@ -670,11 +683,24 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
-          <widget class="QComboBox" name="cbxDbx_cpu_core">
+         <item row="2" column="0">
+          <widget class="QComboBox" name="cbxDbx_cpu_cputype">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" colspan="8">
+          <widget class="QLabel" name="lb_Dbx_66"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QComboBox" name="cbxDbx_render_frameskip">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
              <height>24</height>
             </size>
            </property>
@@ -683,7 +709,7 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0" colspan="2">
+         <item row="3" column="1" colspan="8">
           <widget class="QLabel" name="lb_Dbx_17">
            <property name="text">
             <string>Cuantos cuadros salta dosbox antes de dibujar uno:</string>
@@ -693,20 +719,7 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="2">
-          <widget class="QComboBox" name="cbxDbx_render_frameskip">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0" colspan="3">
+         <item row="4" column="0" colspan="9">
           <widget class="QCheckBox" name="chkDbx_dos_xms">
            <property name="text">
             <string>xms -- Activa o desactiva soporte para memoria XMS.</string>
@@ -716,7 +729,7 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="0" colspan="3">
+         <item row="5" column="0" colspan="9">
           <widget class="QCheckBox" name="chkDbx_dos_ems">
            <property name="text">
             <string>ems -- Activa o desactiva soporte para memoria EMS.</string>
@@ -734,46 +747,112 @@
              <height>24</height>
             </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
           </widget>
          </item>
-         <item row="6" column="1" colspan="2">
+         <item row="6" column="1" colspan="8">
           <widget class="QLabel" name="lb_Dbx_18">
            <property name="text">
             <string>umb -- Activa o desactiva soporte para memoria UMB</string>
            </property>
           </widget>
          </item>
-         <item row="7" column="0" colspan="3">
-          <widget class="QLabel" name="lb_Dbx_19">
+         <item row="8" column="1" colspan="2">
+          <widget class="QLabel" name="lb_Dbx_67">
            <property name="text">
-            <string>Ciclos, Cantidad de instrucciones que dosbox intenta emular cada milisegundo, Es malo darle un valor mayor al que su máquina puede soportar:</string>
+            <string>realmode:</string>
            </property>
-           <property name="wordWrap">
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QComboBox" name="cbxDbx_cpu_cycles">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="editable">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="8" column="0" colspan="3">
+         <item row="8" column="3">
+          <widget class="QComboBox" name="cbxDbx_cpu_cycles_realmode">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="4">
+          <widget class="QLabel" name="lb_Dbx_68">
+           <property name="text">
+            <string>protected mode:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="5">
+          <widget class="QComboBox" name="cbxDbx_cpu_cycles_protmode">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="6">
+          <widget class="QLabel" name="lb_Dbx_69">
+           <property name="text">
+            <string>limit:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="7">
+          <widget class="QComboBox" name="cbxDbx_cpu_cycles_limitmode">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="8">
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>128</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="9" column="0" colspan="9">
           <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QComboBox" name="cbxDbx_cpu_cycles">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>24</height>
-              </size>
-             </property>
-             <property name="editable">
-              <bool>true</bool>
-             </property>
-             <property name="currentIndex">
-              <number>-1</number>
-             </property>
-             <property name="maxVisibleItems">
-              <number>7</number>
-             </property>
-            </widget>
-           </item>
            <item>
             <widget class="QLabel" name="lb_Dbx_20">
              <property name="text">
@@ -842,7 +921,7 @@
            </item>
           </layout>
          </item>
-         <item row="9" column="0" colspan="3">
+         <item row="10" column="0" colspan="9">
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QLabel" name="lb_Dbx_22">
@@ -882,7 +961,7 @@
            </item>
           </layout>
          </item>
-         <item row="10" column="0" colspan="3">
+         <item row="11" column="0" colspan="9">
           <widget class="QCheckBox" name="chkDbx_joystick_timed">
            <property name="text">
             <string>timed -- Permitir los intervalos sincronizados para el eje. (falso es el estilo de comportamiento viejo)</string>
@@ -892,21 +971,21 @@
            </property>
           </widget>
          </item>
-         <item row="11" column="0" colspan="3">
+         <item row="12" column="0" colspan="9">
           <widget class="QCheckBox" name="chkDbx_joystick_autofire">
            <property name="text">
             <string>autofire -- Disparo continuado mientras mantengas el botón presionado</string>
            </property>
           </widget>
          </item>
-         <item row="12" column="0" colspan="3">
+         <item row="13" column="0" colspan="9">
           <widget class="QCheckBox" name="chkDbx_joystick_swap34">
            <property name="text">
             <string>swap34 -- Intercambiar el 3ro y 4to eje. Puede ser útil para ciertas palancas de mando</string>
            </property>
           </widget>
          </item>
-         <item row="13" column="0" colspan="3">
+         <item row="14" column="0" colspan="9">
           <widget class="QCheckBox" name="chkDbx_joystick_buttonwrap">
            <property name="text">
             <string>buttonwrap -- enable button wrapping at the number of emulated buttons</string>
@@ -916,30 +995,30 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="2">
-          <widget class="QComboBox" name="cbxDbx_cpu_cputype">
-           <property name="minimumSize">
+         <item row="15" column="0">
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>0</width>
-             <height>24</height>
+             <width>20</width>
+             <height>48</height>
             </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="7" column="0" colspan="9">
+          <widget class="QLabel" name="lb_Dbx_19">
+           <property name="text">
+            <string>Ciclos, Cantidad de instrucciones que dosbox intenta emular cada milisegundo, Es malo darle un valor mayor al que su máquina puede soportar:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
         </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>48</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
@@ -2423,7 +2502,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <property name="spacing">
-             <number>4</number>
+             <number>34</number>
             </property>
             <item>
              <widget class="QToolButton" name="btnToolDbx_mount_HD">
@@ -2508,7 +2587,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <property name="spacing">
-             <number>4</number>
+             <number>34</number>
             </property>
             <item>
              <widget class="QToolButton" name="btnToolDbx_mount_ImgFloppy">
@@ -3032,6 +3111,149 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtDbx_path_conf</tabstop>
+  <tabstop>btnDbx_FileConfg</tabstop>
+  <tabstop>btnFileConfg_clear</tabstop>
+  <tabstop>cbxDbx_Profiles</tabstop>
+  <tabstop>chkDbx_loadfix</tabstop>
+  <tabstop>chkDbx_cerrar_dbox</tabstop>
+  <tabstop>chkDbx_consola_dbox</tabstop>
+  <tabstop>txtDbx_loadfix_mem</tabstop>
+  <tabstop>cbxDbx_dos_keyboardlayout</tabstop>
+  <tabstop>txtDbx_path_exe</tabstop>
+  <tabstop>btnDbx_ExeJuego</tabstop>
+  <tabstop>btnExeJuego_clear</tabstop>
+  <tabstop>txtDbx_parametros_exe</tabstop>
+  <tabstop>txtDbx_path_setup</tabstop>
+  <tabstop>btnDbx_ExeSetup</tabstop>
+  <tabstop>btnExeSetup_clear</tabstop>
+  <tabstop>txtDbx_parametros_setup</tabstop>
+  <tabstop>chkDbx_sdl_fullscreen</tabstop>
+  <tabstop>chkDbx_sdl_fulldouble</tabstop>
+  <tabstop>chkDbx_sdl_fullfixed</tabstop>
+  <tabstop>chkDbx_sdl_autolock</tabstop>
+  <tabstop>chkDbx_render_aspect</tabstop>
+  <tabstop>chkDbx_sdl_waitonerror</tabstop>
+  <tabstop>chkDbx_sdl_usescancodes</tabstop>
+  <tabstop>cbxDbx_sdl_fullresolution</tabstop>
+  <tabstop>cbxDbx_sdl_hwscale</tabstop>
+  <tabstop>cbxDbx_sdl_windowresolution</tabstop>
+  <tabstop>cbxDbx_sdl_sensitivity</tabstop>
+  <tabstop>cbxDbx_sdl_output</tabstop>
+  <tabstop>cbxDbx_dosbox_machine</tabstop>
+  <tabstop>cbxDbx_render_scaler</tabstop>
+  <tabstop>cbxDbx_dosbox_memsize</tabstop>
+  <tabstop>cbxDbx_cpu_core</tabstop>
+  <tabstop>cbxDbx_cpu_cputype</tabstop>
+  <tabstop>cbxDbx_render_frameskip</tabstop>
+  <tabstop>chkDbx_dos_xms</tabstop>
+  <tabstop>chkDbx_dos_ems</tabstop>
+  <tabstop>cbxDbx_dos_umb</tabstop>
+  <tabstop>cbxDbx_cpu_cycles</tabstop>
+  <tabstop>cbxDbx_cpu_cycles_realmode</tabstop>
+  <tabstop>cbxDbx_cpu_cycles_protmode</tabstop>
+  <tabstop>cbxDbx_cpu_cycles_limitmode</tabstop>
+  <tabstop>spinDbx_1</tabstop>
+  <tabstop>spinDbx_2</tabstop>
+  <tabstop>chkDbx_cycle_sincronizar</tabstop>
+  <tabstop>cbxDbx_joystick_type</tabstop>
+  <tabstop>chkDbx_joystick_timed</tabstop>
+  <tabstop>chkDbx_joystick_autofire</tabstop>
+  <tabstop>chkDbx_joystick_swap34</tabstop>
+  <tabstop>chkDbx_joystick_buttonwrap</tabstop>
+  <tabstop>chkDbx_mixer_nosound</tabstop>
+  <tabstop>cbxDbx_mixer_rate</tabstop>
+  <tabstop>txtDbx_mixer_blocksize</tabstop>
+  <tabstop>txtDbx_mixer_prebuffer</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>chkDbx_sblaster_mixer</tabstop>
+  <tabstop>cbxDbx_sblaster_sbtype</tabstop>
+  <tabstop>cbxDbx_sblaster_sbbase</tabstop>
+  <tabstop>cbxDbx_sblaster_irq</tabstop>
+  <tabstop>cbxDbx_sblaster_dma</tabstop>
+  <tabstop>cbxDbx_sblaster_hdma</tabstop>
+  <tabstop>cbxDbx_sblaster_oplmode</tabstop>
+  <tabstop>cbxDbx_sblaster_oplrate</tabstop>
+  <tabstop>cbxDbx_sblaster_oplemu</tabstop>
+  <tabstop>chkDbx_gus_gus</tabstop>
+  <tabstop>cbxDbx_gus_gusbase</tabstop>
+  <tabstop>cbxDbx_gus_irq1</tabstop>
+  <tabstop>cbxDbx_gus_irq2</tabstop>
+  <tabstop>cbxDbx_gus_gusrate</tabstop>
+  <tabstop>cbxDbx_gus_dma1</tabstop>
+  <tabstop>cbxDbx_gus_dma2</tabstop>
+  <tabstop>txtDbx_gus_ultradir</tabstop>
+  <tabstop>btnDirGravisUltraSound</tabstop>
+  <tabstop>chkDbx_activar_mpu401</tabstop>
+  <tabstop>chkDbx_midi_intelligent</tabstop>
+  <tabstop>cbxDbx_midi_mpu401</tabstop>
+  <tabstop>cbxDbx_midi_device</tabstop>
+  <tabstop>cbxDbx_midi_mt32rate</tabstop>
+  <tabstop>txtDbx_midi_config</tabstop>
+  <tabstop>chkDbx_speaker_pcspeaker</tabstop>
+  <tabstop>chkDbx_speaker_disney</tabstop>
+  <tabstop>cbxDbx_speaker_pcrate</tabstop>
+  <tabstop>cbxDbx_speaker_tandy</tabstop>
+  <tabstop>cbxDbx_speaker_tandyrate</tabstop>
+  <tabstop>twMontajes</tabstop>
+  <tabstop>btnMount_Add</tabstop>
+  <tabstop>btnMount_Edit</tabstop>
+  <tabstop>btnMount_Delete</tabstop>
+  <tabstop>btnMount_Clear</tabstop>
+  <tabstop>btnMount_AutoCrear</tabstop>
+  <tabstop>btnMount_Primario</tabstop>
+  <tabstop>btnMount_Subir</tabstop>
+  <tabstop>btnMount_Bajar</tabstop>
+  <tabstop>previer_mount</tabstop>
+  <tabstop>chkDbx_modem_modem</tabstop>
+  <tabstop>chkDbx_dserial_directserial</tabstop>
+  <tabstop>cbxDbx_dserial_comport</tabstop>
+  <tabstop>cbxDbx_dserial_realport</tabstop>
+  <tabstop>txtDbx_modem_irq</tabstop>
+  <tabstop>cbxDbx_dserial_parity</tabstop>
+  <tabstop>cbxDbx_select_serial</tabstop>
+  <tabstop>cbxDbx_dserial_defaultbps</tabstop>
+  <tabstop>txtDbx_modem_listenport</tabstop>
+  <tabstop>cbxDbx_modem_comport</tabstop>
+  <tabstop>cbxDbx_dserial_bytesize</tabstop>
+  <tabstop>cbxDbx_dserial_stopbit</tabstop>
+  <tabstop>cbxDbx_type_serial</tabstop>
+  <tabstop>btnDbx_AddSerial</tabstop>
+  <tabstop>txtDbx_serial_1</tabstop>
+  <tabstop>txtDbx_serial_2</tabstop>
+  <tabstop>txtDbx_serial_3</tabstop>
+  <tabstop>txtDbx_serial_4</tabstop>
+  <tabstop>chkDbx_ipx_ipx</tabstop>
+  <tabstop>chkDbx_autoexec</tabstop>
+  <tabstop>btnToolDbx_mount_HD</tabstop>
+  <tabstop>btnToolDbx_mount_CD</tabstop>
+  <tabstop>btnToolDbx_mount_Floppy</tabstop>
+  <tabstop>btnToolDbx_mount_ImgFloppy</tabstop>
+  <tabstop>btnToolDbx_mount_ImgCD</tabstop>
+  <tabstop>btnToolDbx_mount_ImgHD</tabstop>
+  <tabstop>txtDbx_Autoexec</tabstop>
+  <tabstop>rbtPrioridadBaja</tabstop>
+  <tabstop>rbtPrioridadNormal</tabstop>
+  <tabstop>rbtPrioridadAlta</tabstop>
+  <tabstop>rbtPrioridadMuyAlt</tabstop>
+  <tabstop>rbtNoPrioridadBaja</tabstop>
+  <tabstop>rbtNoPrioridadNormal</tabstop>
+  <tabstop>rbtNoPrioridadAlta</tabstop>
+  <tabstop>rbtNoPrioridadMuyAlt</tabstop>
+  <tabstop>txtDbx_sdl_mapperfile</tabstop>
+  <tabstop>btnDbx_mapperfile</tabstop>
+  <tabstop>btnDbx_mapperfile_clear</tabstop>
+  <tabstop>txtDbx_dosbox_language</tabstop>
+  <tabstop>btnDbx_language</tabstop>
+  <tabstop>btnDbx_language_clear</tabstop>
+  <tabstop>txtDbx_dosbox_captures</tabstop>
+  <tabstop>btnDbx_capturas</tabstop>
+  <tabstop>btnDbx_capturas_clear</tabstop>
+  <tabstop>txtDbx_path_sonido</tabstop>
+  <tabstop>btnDbx_musica</tabstop>
+  <tabstop>btnDbx_musica_clear</tabstop>
+ </tabstops>
  <resources>
   <include location="../res/grlida.qrc"/>
  </resources>

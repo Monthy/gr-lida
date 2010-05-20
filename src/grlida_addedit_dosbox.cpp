@@ -166,6 +166,8 @@ void frmAddEditDosBox::CargarConfigDosBox()
 	fGrl.CargarDatosComboBox(":/datos/dbx_cpu_type.txt"      , ui.cbxDbx_cpu_cputype       , 2      ); // Tipo de CPU para usar en la emulación
 	fGrl.CargarDatosComboBox(":/datos/dbx_frameskip.txt"     , ui.cbxDbx_render_frameskip           ); // Frameskip DOSBox
 	fGrl.CargarDatosComboBox(":/datos/dbx_cycles.txt"        , ui.cbxDbx_cpu_cycles                 ); // Ciclos DOSBox
+	fGrl.CargarDatosComboBox(":/datos/dbx_cycles.txt"        , ui.cbxDbx_cpu_cycles_realmode        ); // Ciclos DOSBox realmode
+	fGrl.CargarDatosComboBox(":/datos/dbx_cycles.txt"        , ui.cbxDbx_cpu_cycles_limitmode       ); // Ciclos DOSBox limitmode
 	fGrl.CargarDatosComboBox(":/datos/dbx_joystick.txt"      , ui.cbxDbx_joystick_type              ); // Emulador de joystick
 	fGrl.CargarDatosComboBox(":/datos/dbx_keyboardlayout.txt", ui.cbxDbx_dos_keyboardlayout, 1, true); // keyboardlayout
 	fGrl.CargarDatosComboBox(":/datos/dbx_sbtype.txt"        , ui.cbxDbx_sblaster_sbtype            ); // Tipo Sound Blaste
@@ -174,6 +176,24 @@ void frmAddEditDosBox::CargarConfigDosBox()
 	fGrl.CargarDatosComboBox(":/datos/dbx_sb_oplrate.txt"    , ui.cbxDbx_sblaster_oplrate           ); // Sample rate of OPL
 	fGrl.CargarDatosComboBox(":/datos/dbx_mpu401.txt"        , ui.cbxDbx_midi_mpu401                ); // MPU-401
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt"   , ui.cbxDbx_midi_device                ); // MIDI Device
+
+	ui.cbxDbx_cpu_cycles_realmode->setItemText(0,"");
+	ui.cbxDbx_cpu_cycles_realmode->removeItem(1);
+	ui.cbxDbx_cpu_cycles_limitmode->setItemText(0,"");
+	ui.cbxDbx_cpu_cycles_limitmode->removeItem(1);
+
+	ui.cbxDbx_cpu_cycles_protmode->clear();
+	ui.cbxDbx_cpu_cycles_protmode->addItem("");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("10%");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("20%");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("30%");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("40%");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("50%");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("60%");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("70%");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("80%");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("90%");
+	ui.cbxDbx_cpu_cycles_protmode->addItem("100%");
 
 	ui.cbxDbx_dos_umb->clear();
 	ui.cbxDbx_dos_umb->addItem("true");
@@ -306,6 +326,9 @@ void frmAddEditDosBox::setConfigDefecto()
 	ui.cbxDbx_render_frameskip->setCurrentIndex( 0 );     // Frameskip DOSBox
 	ui.cbxDbx_dos_umb->setCurrentIndex( 0 );              // Soporte para memoria UMB
 	ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );           // Ciclos DOSBox
+	ui.cbxDbx_cpu_cycles_realmode->setCurrentIndex( 0 );  // Ciclos DOSBox realmode
+	ui.cbxDbx_cpu_cycles_limitmode->setCurrentIndex( 0 ); // Ciclos DOSBox limitmode
+	ui.cbxDbx_cpu_cycles_protmode->setCurrentIndex( 0 );  // Ciclos DOSBox protected
 	ui.cbxDbx_joystick_type->setCurrentIndex( 0 );        // Emulador de joystick
 	ui.cbxDbx_mixer_rate->setCurrentIndex( 5 );           // Frecuencia Sonido
 	ui.txtDbx_mixer_blocksize->setText("1024");           //
@@ -417,6 +440,9 @@ void frmAddEditDosBox::CargarDatosDosBox(QHash<QString, QString> datosDbx, QStri
 	ui.cbxDbx_cpu_core->setCurrentIndex( ui.cbxDbx_cpu_core->findText( datosDbx["Dbx_cpu_core"] ) );							// cpu_core
 	ui.cbxDbx_cpu_cputype->setCurrentIndex( ui.cbxDbx_cpu_cputype->findData( datosDbx["Dbx_cpu_cputype"] ) );					// cpu_core
 	ui.cbxDbx_cpu_cycles->setCurrentIndex( ui.cbxDbx_cpu_cycles->findText( datosDbx["Dbx_cpu_cycles"] ) );						// cpu_cycles
+	ui.cbxDbx_cpu_cycles_realmode->setCurrentIndex( ui.cbxDbx_cpu_cycles_realmode->findText( datosDbx["Dbx_cpu_cycles_realmode"] ) );	// cpu_cycles realmode
+	ui.cbxDbx_cpu_cycles_protmode->setCurrentIndex( ui.cbxDbx_cpu_cycles_protmode->findText( datosDbx["Dbx_cpu_cycles_protmode"] ) );	// cpu_cycles protected mode
+	ui.cbxDbx_cpu_cycles_limitmode->setCurrentIndex( ui.cbxDbx_cpu_cycles_limitmode->findText( datosDbx["Dbx_cpu_cycles_limitmode"] ) );// cpu_cycles limitmode
 	ui.spinDbx_1->setValue( fGrl.StrToInt( datosDbx["Dbx_cpu_cycleup"] ) );														// cpu_cycleup
 	ui.spinDbx_2->setValue( fGrl.StrToInt( datosDbx["Dbx_cpu_cycledown"] ) );													// cpu_cycledown
 
@@ -598,6 +624,15 @@ QHash<QString, QString> frmAddEditDosBox::setDatosDosBox()
 // cpu_cycles
 	if( ui.cbxDbx_cpu_cycles->currentText() != "" )
 		tempProfileDosBox["Dbx_cpu_cycles"] = ui.cbxDbx_cpu_cycles->currentText(); else tempProfileDosBox["Dbx_cpu_cycles"] = "auto";
+// cpu_cycles_realmode
+	if( ui.cbxDbx_cpu_cycles_realmode->currentText() != "" )
+		tempProfileDosBox["Dbx_cpu_cycles_realmode"] = ui.cbxDbx_cpu_cycles_realmode->currentText(); else tempProfileDosBox["Dbx_cpu_cycles_realmode"] = "";
+// cpu_cycles_protmode
+	if( ui.cbxDbx_cpu_cycles_protmode->currentText() != "" )
+		tempProfileDosBox["Dbx_cpu_cycles_protmode"] = ui.cbxDbx_cpu_cycles_protmode->currentText(); else tempProfileDosBox["Dbx_cpu_cycles_protmode"] = "";
+// cpu_cycles_limitmode
+	if( ui.cbxDbx_cpu_cycles_limitmode->currentText() != "" )
+		tempProfileDosBox["Dbx_cpu_cycles_limitmode"] = ui.cbxDbx_cpu_cycles_limitmode->currentText(); else tempProfileDosBox["Dbx_cpu_cycles_limitmode"] = "";
 // cpu_cycleup
 	if( ui.spinDbx_1->value() >= 0)
 		tempProfileDosBox["Dbx_cpu_cycleup"] = fGrl.IntToStr( ui.spinDbx_1->value() ); else tempProfileDosBox["Dbx_cpu_cycleup"] = "10";

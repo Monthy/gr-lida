@@ -279,6 +279,9 @@ void frmDbxAdd::setConfigDefecto()
 	tempProfileDosBox["Dbx_cpu_core"]              = "auto";
 	tempProfileDosBox["Dbx_cpu_cputype"]           = "auto";
 	tempProfileDosBox["Dbx_cpu_cycles"]            = "auto";
+	tempProfileDosBox["Dbx_cpu_cycles_realmode"]   = "";
+	tempProfileDosBox["Dbx_cpu_cycles_protmode"]   = "";
+	tempProfileDosBox["Dbx_cpu_cycles_limitmode"]  = "";
 	tempProfileDosBox["Dbx_cpu_cycleup"]           = "10";
 	tempProfileDosBox["Dbx_cpu_cycledown"]         = "20";
 // [mixer]
@@ -635,11 +638,13 @@ void frmDbxAdd::on_btnOk()
 			DatosDosBox["Dbx_cpu_cycles"] = ui.cbxDbx_cpu_cycles->currentText();
 		else
 			DatosDosBox["Dbx_cpu_cycles"] = "auto";
-
+		DatosDosBox["Dbx_cpu_cycles_realmode"]  = tempProfileDosBox["Dbx_cpu_cycles_realmode"];
+		DatosDosBox["Dbx_cpu_cycles_protmode"]  = tempProfileDosBox["Dbx_cpu_cycles_protmode"];
+		DatosDosBox["Dbx_cpu_cycles_limitmode"] = tempProfileDosBox["Dbx_cpu_cycles_limitmode"];
 		DatosDosBox["Dbx_cpu_cycleup"]   = tempProfileDosBox["Dbx_cpu_cycleup"];						// cpu_cycleup
 		DatosDosBox["Dbx_cpu_cycledown"] = tempProfileDosBox["Dbx_cpu_cycledown"];						// cpu_cycledown
-		DatosDosBox["Dbx_mixer_nosound"] = fGrl.BoolToStr( ui.chkDbx_mixer_nosound->isChecked() );	// mixer_nosound
 	// mixer_rate
+		DatosDosBox["Dbx_mixer_nosound"] = fGrl.BoolToStr( ui.chkDbx_mixer_nosound->isChecked() );	// mixer_nosound
 		if( ui.cbxDbx_mixer_rate->currentText() != "" )
 			DatosDosBox["Dbx_mixer_rate"] = ui.cbxDbx_mixer_rate->currentText();
 		else
