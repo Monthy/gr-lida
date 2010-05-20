@@ -1516,13 +1516,19 @@ void GrLida::on_setFavorito()
 {
 	if( ui.mnu_edit_favorito->isChecked() )
 	{
-		ui.twJuegos->currentItem()->setIcon( col_Titulo  , QIcon(stTheme+"img16/"+stIconoFav) ); // icono favorito
-		ui.twJuegos->currentItem()->setText( col_Favorito, "true" );
-		sql->ItemActualizaDatosFavorito("true", ui.twJuegos->currentItem()->text(col_IdGrl) );
+		if( stItemIndex != "" )
+		{
+			twlista_pos[stItemIndex]->setIcon( col_Titulo  , QIcon(stTheme+"img16/"+stIconoFav) ); // icono favorito
+			twlista_pos[stItemIndex]->setText( col_Favorito, "true" );
+			sql->ItemActualizaDatosFavorito("true", twlista_pos[stItemIndex]->text(col_IdGrl) );
+		}
 	} else {
-		ui.twJuegos->currentItem()->setIcon( col_Titulo  , QIcon() ); // icono favorito
-		ui.twJuegos->currentItem()->setText( col_Favorito, "false" );
-		sql->ItemActualizaDatosFavorito("false", ui.twJuegos->currentItem()->text(col_IdGrl) );
+		if( stItemIndex != "" )
+		{
+			twlista_pos[stItemIndex]->setIcon( col_Titulo  , QIcon() ); // icono favorito
+			twlista_pos[stItemIndex]->setText( col_Favorito, "false" );
+			sql->ItemActualizaDatosFavorito("false", twlista_pos[stItemIndex]->text(col_IdGrl) );
+		}
 	}
 }
 
@@ -2119,9 +2125,9 @@ void GrLida::on_EditarJuego()
 			sql->ItemActualizaDatos(EditJuego->DatosJuego, stItemIndex);
 
 			if( ui.mnu_ver_cover_mode->isChecked() )
-				stCurrentImgPicFlow = ui.lwJuegos->item(ui.lwJuegos->currentRow())->data(Qt::UserRole+1).toString();
+				stCurrentImgPicFlow = lwlista_pos[stItemIndex]->data(Qt::UserRole+1).toString();
 			else
-				stCurrentImgPicFlow = ui.twJuegos->currentItem()->text(col_PicFlow);
+				stCurrentImgPicFlow = twlista_pos[stItemIndex]->text(col_PicFlow);
 
 			if(EditJuego->DatosJuego["Dat_thumbs"]!="")
 			{
@@ -2136,14 +2142,14 @@ void GrLida::on_EditarJuego()
 				img_thumb.load(stTheme+"images/juego_sin_imagen.png");
 			}
 
-			ui.lwJuegos->item(ui.lwJuegos->currentRow())->setIcon(QIcon( img_list_thumb ));
-			ui.lwJuegos->item(ui.lwJuegos->currentRow())->setData(Qt::UserRole+2, EditJuego->DatosJuego["Dat_titulo"] );
+			lwlista_pos[stItemIndex]->setIcon(QIcon( img_list_thumb ));
+			lwlista_pos[stItemIndex]->setData(Qt::UserRole+2, EditJuego->DatosJuego["Dat_titulo"] );
 
-			ui.twJuegos->currentItem()->setText( col_Titulo  , EditJuego->DatosJuego["Dat_titulo"]   );
-			ui.twJuegos->currentItem()->setText( col_Compania, EditJuego->DatosJuego["Dat_compania"] );
-			ui.twJuegos->currentItem()->setText( col_Anno    , EditJuego->DatosJuego["Dat_anno"]     );
-			ui.twJuegos->currentItem()->setText( col_Rating  , EditJuego->DatosJuego["Dat_rating"]   );
-			ui.twJuegos->currentItem()->setText( col_Favorito, EditJuego->DatosJuego["Dat_favorito"] );
+			twlista_pos[stItemIndex]->setText( col_Titulo  , EditJuego->DatosJuego["Dat_titulo"]   );
+			twlista_pos[stItemIndex]->setText( col_Compania, EditJuego->DatosJuego["Dat_compania"] );
+			twlista_pos[stItemIndex]->setText( col_Anno    , EditJuego->DatosJuego["Dat_anno"]     );
+			twlista_pos[stItemIndex]->setText( col_Rating  , EditJuego->DatosJuego["Dat_rating"]   );
+			twlista_pos[stItemIndex]->setText( col_Favorito, EditJuego->DatosJuego["Dat_favorito"] );
 
 			ui.PicFlowWidget->setSlide( QVariant( stCurrentImgPicFlow ).toInt(), img_thumb );
 
@@ -2165,10 +2171,10 @@ void GrLida::on_EditarJuego()
 
 			QString stIcono = fGrl.getIconListaJuegos(EditJuego->DatosJuego["Dat_icono"], stIconDir);
 
-			ui.twJuegos->currentItem()->setIcon( col_IdGrl, QIcon( stIcono ) );
+			twlista_pos[stItemIndex]->setIcon( col_IdGrl, QIcon( stIcono ) );
 
 			if(EditJuego->DatosJuego["Dat_favorito"] == "true" )
-				ui.twJuegos->currentItem()->setIcon( col_Titulo, QIcon(stTheme+"img16/"+stIconoFav) ); // icono favorito
+				twlista_pos[stItemIndex]->setIcon( col_Titulo, QIcon(stTheme+"img16/"+stIconoFav) ); // icono favorito
 
 //			CrearMenuNav();
 		// Muestra los distintos datos del juego
@@ -2193,7 +2199,7 @@ void GrLida::on_EliminarJuego()
 				if( ui.mnu_ver_cover_mode->isChecked() )
 					stCurrentImgPicFlow = ui.lwJuegos->item(ui.lwJuegos->currentRow())->data(Qt::UserRole+1).toString();
 				else
-					stCurrentImgPicFlow = ui.twJuegos->currentItem()->text(col_PicFlow);
+					stCurrentImgPicFlow = twlista_pos[stItemIndex]->text(col_PicFlow);
 
 				ui.PicFlowWidget->setSlide( QVariant( stCurrentImgPicFlow ).toInt(), QPixmap(stTheme+"images/juego_eliminado.png") );
 
@@ -2201,7 +2207,7 @@ void GrLida::on_EliminarJuego()
 				if(lwlista_pos[stItemIndex] != NULL)
 					delete lwlista_pos[stItemIndex];
 			// Borramos el Item de QTreeWidget.
-				fGrl.DeleteItemTree( ui.twJuegos->currentItem() );
+				fGrl.DeleteItemTree( twlista_pos[stItemIndex] );
 			// Borramos la dirección del puntero del Item de QListWidget.
 				lwlista_pos.remove(stItemIndex);
 			// Borramos la dirección del puntero del Item de QTreeWidget.
@@ -2299,7 +2305,7 @@ void GrLida::Config_Svm(QString IDitem)
 	conf_scummvm.clear();
 
 	conf_scummvm = sql->showConfg_ScummVM( IDitem );
-	conf_scummvm["Svm_description"] = ui.twJuegos->currentItem()->text(col_Titulo);
+	conf_scummvm["Svm_description"] = twlista_pos[IDitem]->text(col_Titulo);
 
 	stConfgJuego = "-c" + stTempDir + "scummvm.ini|" + "-d" + conf_scummvm["Svm_debuglevel"] + "|" + conf_scummvm["Svm_game_label"];
 
