@@ -5,6 +5,4 @@
 8|sinimg
 16|sinimg
 32|sinimg
-64|sinimg
-128|sinimg
-256|sinimg
+63|sinimg
