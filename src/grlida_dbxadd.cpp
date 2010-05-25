@@ -638,9 +638,9 @@ void frmDbxAdd::on_btnOk()
 			DatosDosBox["Dbx_cpu_cycles"] = ui.cbxDbx_cpu_cycles->currentText();
 		else
 			DatosDosBox["Dbx_cpu_cycles"] = "auto";
-		DatosDosBox["Dbx_cpu_cycles_realmode"]  = tempProfileDosBox["Dbx_cpu_cycles_realmode"];
-		DatosDosBox["Dbx_cpu_cycles_protmode"]  = tempProfileDosBox["Dbx_cpu_cycles_protmode"];
-		DatosDosBox["Dbx_cpu_cycles_limitmode"] = tempProfileDosBox["Dbx_cpu_cycles_limitmode"];
+		DatosDosBox["Dbx_cpu_cycles_realmode"]  = ""+tempProfileDosBox["Dbx_cpu_cycles_realmode"];
+		DatosDosBox["Dbx_cpu_cycles_protmode"]  = ""+tempProfileDosBox["Dbx_cpu_cycles_protmode"];
+		DatosDosBox["Dbx_cpu_cycles_limitmode"] = ""+tempProfileDosBox["Dbx_cpu_cycles_limitmode"];
 		DatosDosBox["Dbx_cpu_cycleup"]   = tempProfileDosBox["Dbx_cpu_cycleup"];						// cpu_cycleup
 		DatosDosBox["Dbx_cpu_cycledown"] = tempProfileDosBox["Dbx_cpu_cycledown"];						// cpu_cycledown
 	// mixer_rate
