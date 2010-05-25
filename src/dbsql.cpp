@@ -153,8 +153,14 @@ void dbSql::eliminararchivo(QString archivo)
 void dbSql::CrearTablas()
 {
 	QSqlQuery query;
-	QStringList tables = sqldb.tables();
+	QStringList tables;
 	QString tipo_id_sql;
+
+// Obtenemos las tablas de la Base de Datos.
+	query.clear();
+	query.exec("SHOW TABLES;");
+	if( query.first())
+		do tables << query.record().value(0).toString(); while (query.next());
 
 	tipo_id_sql.clear();
 	if( dbType == "QMYSQL" )
@@ -269,7 +275,7 @@ void dbSql::CrearTablas()
 		"	`gus_irq2`				varchar(4) NOT NULL default '5',"
 		"	`gus_dma1`				varchar(4) NOT NULL default '3',"
 		"	`gus_dma2`				varchar(4) NOT NULL default '3',"
-		"	`gus_ultradir`			varchar(255) NOT NULL default 'C:\\ULTRASND',"
+		"	`gus_ultradir`			varchar(255) NOT NULL default '',"
 		"	`speaker_pcspeaker`		varchar(5) NOT NULL default 'true',"
 		"	`speaker_pcrate`		varchar(10) NOT NULL default '22050',"
 		"	`speaker_tandy`			varchar(5) NOT NULL default 'auto',"		// DOSBox 0.65
@@ -324,7 +330,7 @@ void dbSql::CrearTablas()
 		"	`id`					" + tipo_id_sql + " PRIMARY KEY,"
 		"	`id_dosbox`				integer NOT NULL default 1,"
 		"	`id_lista`				varchar(255) NOT NULL default '0',"
-		"	`path`					varchar(255) NOT NULL default 'C:\\',"
+		"	`path`					varchar(255) NOT NULL default '',"
 		"	`label`					varchar(255) NOT NULL default '',"
 		"	`tipo_as`				varchar(50) NOT NULL default 'drive',"
 		"	`letter`				varchar(255) NOT NULL default 'C',"
