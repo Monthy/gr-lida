@@ -63,7 +63,7 @@ private:
 	QString stItemIDGrl, TipoEmulador;
 	QString stHomeDir, stIconDir, stDatosDir, stTheme, stTempDir, stUsuario;
 
-	QString stCoversDir, stThumbsDir, stListThumbsDir;
+	QString stCoversDir, stThumbsDir, stListThumbsDir, stCapturesDir;
 	QString stThumbs, stCoverFront, stCoverBack;
 	QString file_thumbs, file_cover_front, file_cover_back;
 

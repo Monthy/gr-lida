@@ -93,7 +93,7 @@ private:
 	QString stBinExeDbx, stBinExeSvm;
 	QString stItemIndex, stConfgJuego, stJuegoParametrosExe, stDirWorkingJuego, stTipoEmu;
 	QString stDirCapturas, stCaratula_Delantera, stCaratula_Trasera;
-	QString stCoversDir, stThumbsDir, stListThumbsDir;
+	QString stCoversDir, stThumbsDir, stListThumbsDir, stCapturesDir;
 	QString stThumbs, stCoverFront, stCoverBack;
 
 	QStringList stl_param;

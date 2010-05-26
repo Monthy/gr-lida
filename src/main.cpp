@@ -150,6 +150,11 @@ int main(int argc, char *argv[])
 // Crear directorio Covers si no existe
 	fGrl.ComprobarDirectorio( stHomeDir + "covers" );
 
+	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Capturas"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio Capturas si no existe
+	fGrl.ComprobarDirectorio( stHomeDir + "capturas" );
+
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando carpeta Temp"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio Temp para las descargas temporales de imagenes, archivos

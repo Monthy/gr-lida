@@ -1551,7 +1551,10 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 		if( !datosDbx["Dbx_dosbox_language"].isEmpty() || datosDbx["Dbx_dosbox_language"]!=" ")
 		out << "language=" << datosDbx["Dbx_dosbox_language"] << endl;
 		out << "machine=" << datosDbx["Dbx_dosbox_machine"] << endl;
-		out << "captures=" << datosDbx["Dbx_dosbox_captures"] << endl;
+		if(datosDbx["Dbx_dosbox_captures"] == "" || datosDbx["Dbx_dosbox_captures"] == "capture")
+			out << "captures=" << GRlidaHomePath() << "/capturas/" << "id-"+ datos["Dat_idgrl"] +"_"+ eliminar_caracteres(datos["Dat_titulo"]) +"_"+ datos["Dat_tipo_emu"] << endl;
+		else
+			out << "captures=" << datosDbx["Dbx_dosbox_captures"] << endl;
 		out << "memsize=" << datosDbx["Dbx_dosbox_memsize"] << endl << endl;
 
 		out << "[render]" << endl;

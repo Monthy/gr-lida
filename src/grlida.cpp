@@ -61,6 +61,7 @@ GrLida::GrLida(QWidget *parent, Qt::WFlags flags)
 	stCoversDir    = stHomeDir + "covers/";
 	stThumbsDir    = stHomeDir + "thumbs/";
 	stListThumbsDir= stHomeDir + "thumbs_list/";
+	stCapturesDir  = stHomeDir + "capturas/";
 	GRLConfig      = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
 
 	stTheme = fGrl.ThemeGrl();
@@ -2274,6 +2275,9 @@ void GrLida::Config_Dbx(QString IDitem)
 	stDirCapturas.clear();
 	stDirCapturas = conf_dosbox["Dbx_dosbox_captures"];
 
+	if( stDirCapturas == "" || stDirCapturas == "capture" )
+		stDirCapturas = stCapturesDir +"id-"+ IDitem +"_"+ fGrl.eliminar_caracteres(twlista_pos[IDitem]->text(col_Titulo)) +"_dosbox";
+
 	CargarCapturasImagenes( stDirCapturas );
 	CargarCapturasVideoSonidos( stDirCapturas );
 
@@ -2317,6 +2321,9 @@ void GrLida::Config_Svm(QString IDitem)
 
 	stDirCapturas.clear();
 	stDirCapturas = conf_scummvm["Svm_path_capturas"];
+
+	if( stDirCapturas == "" || stDirCapturas == "capture" )
+		stDirCapturas = stCapturesDir +"id-"+ IDitem +"_"+ fGrl.eliminar_caracteres(twlista_pos[IDitem]->text(col_Titulo)) +"_scummvm";
 
 	CargarCapturasImagenes( stDirCapturas );
 	CargarCapturasVideoSonidos( stDirCapturas );

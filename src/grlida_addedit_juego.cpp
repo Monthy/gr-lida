@@ -44,6 +44,7 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	stCoversDir    = stHomeDir + "covers/";
 	stThumbsDir    = stHomeDir + "thumbs/";
 	stListThumbsDir= stHomeDir + "thumbs_list/";
+	stCapturesDir  = stHomeDir + "capturas/";
 
 	stTheme = fGrl.ThemeGrl();
 
@@ -369,8 +370,6 @@ void frmAddEditJuego::on_btnOk()
 
 	if( siguiente == true )
 	{
-		setDatosJuegos();
-
 		if( currentTipoEmu == "dosbox" )
 		{
 			DatosDosBox.clear();
@@ -388,6 +387,8 @@ void frmAddEditJuego::on_btnOk()
 			DatosVDMSound.clear();
 			DatosVDMSound = ui.wVdms->setDatosVDMSound();
 		}
+
+		setDatosJuegos();
 
 		QDialog::accept();
 	}
@@ -538,7 +539,7 @@ void frmAddEditJuego::CargarDatosJuego(QString stIDIndex)
 
 void frmAddEditJuego::setDatosJuegos()
 {
-	QString nombre_temp, old_titulo, old_rating, old_name_thumbs, old_name_cover_front, old_name_cover_back;
+	QString nombre_temp, old_titulo, old_rating, old_name_thumbs, old_name_cover_front, old_name_cover_back, dir_capturas;
 
 	if( ui.cbxDatos_Icono->currentText() != "" )
 		DatosJuego["Dat_icono"] = ""+ui.cbxDatos_Icono->itemData( ui.cbxDatos_Icono->currentIndex() ).toString();	// icono
@@ -735,6 +736,23 @@ void frmAddEditJuego::setDatosJuegos()
 
 	// Actualizamos los datos del Juego
 		sql->ItemActualizaDatos(DatosJuego, stItemIDGrl);
+
+	// Renombra el directorio de las capturas del DOSBox si es necesario
+		if( DatosJuego["Dat_tipo_emu"] == "dosbox" )
+			dir_capturas = DatosDosBox["Dbx_dosbox_captures"];
+		else if( DatosJuego["Dat_tipo_emu"] == "scummvm" )
+			dir_capturas = DatosScummVM["Svm_path_capturas"];
+		else
+			dir_capturas = "";
+
+		if( dir_capturas == "" || dir_capturas == "capture" )
+		{
+			QDir captureDir;
+			if( captureDir.exists(stCapturesDir +"id-"+ stItemIDGrl +"_"+ fGrl.eliminar_caracteres(old_titulo) +"_"+ TipoEmulador) && old_titulo != DatosJuego["Dat_titulo"])
+				captureDir.rename(stCapturesDir +"id-"+ stItemIDGrl +"_"+ fGrl.eliminar_caracteres(old_titulo) +"_"+ TipoEmulador, stCapturesDir + nombre_temp);
+			else
+				fGrl.ComprobarDirectorio( stCapturesDir + nombre_temp );
+		}
 	} else {
 		DatosJuego["Dat_thumbs"]      = "";
 		DatosJuego["Dat_cover_front"] = "";
@@ -764,6 +782,20 @@ void frmAddEditJuego::setDatosJuegos()
 			DatosJuego["Dat_cover_back"] = nombre_temp +"_cover_back"+ fGrl.getExtension(file_cover_back);
 			sql->ItemActualizaDatosItem("cover_back", DatosJuego["Dat_cover_back"], DatosJuego["Dat_idgrl"]);
 			QFile::copy( file_cover_back, stCoversDir + DatosJuego["Dat_cover_back"] );
+		}
+
+		// Crear directorio para las capturas del DOSBox
+		if( DatosJuego["Dat_tipo_emu"] == "dosbox" || DatosJuego["Dat_tipo_emu"] == "scummvm" )
+		{
+			if( DatosJuego["Dat_tipo_emu"] == "dosbox" )
+				dir_capturas = DatosDosBox["Dbx_dosbox_captures"];
+			else if( DatosJuego["Dat_tipo_emu"] == "scummvm" )
+				dir_capturas = DatosScummVM["Svm_path_capturas"];
+			else
+				dir_capturas = "";
+
+			if( dir_capturas == "" || dir_capturas == "capture" )
+				fGrl.ComprobarDirectorio( stCapturesDir + nombre_temp );
 		}
 	}
 }
