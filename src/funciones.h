@@ -37,12 +37,12 @@ public:
 	~Funciones();
 
 // Versión del GR-lida
-	QString stVersionGrl(){ return "0.8.0"; }
+	QString stVersionGrl(){ return "0.9.0"; }
 // Versiones de los emuladores que soporta el GR-lida
 // DOSBox
-	QString stVersionDbx(){ return "0.73";  }
+	QString stVersionDbx(){ return "0.74";  }
 // ScummVM
-	QString stVersionSvm(){ return "0.13.1";}
+	QString stVersionSvm(){ return "1.1.1";}
 // VDMSound
 	QString stVersionVdms(){return "2.0.4"; }
 // Muestra el Nombre de la plataforma donde esta compilada
