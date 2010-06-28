@@ -213,6 +213,7 @@ function AnalyzeGamePage(texto, local)
 
 //-------------------------
 	m_array["Dat_idioma"]      = "";
+	m_array["Dat_idioma_voces"]= "";
 	m_array["Dat_formato"]     = "PC";
 	m_array["Dat_numdisc"]     = "";
 	m_array["Dat_tamano"]      = "";

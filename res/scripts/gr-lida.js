@@ -57,6 +57,7 @@ function AnalyzeGamePage(texto, local)
 	m_array["Dat_tema"]             = AnalyzeTagName(texto, "<Dat_tema>([^\"<>]*)</Dat_tema>");
 	m_array["Dat_perspectiva"]      = AnalyzeTagName(texto, "<Dat_perspectiva>([^\"<>]*)</Dat_perspectiva>");
 	m_array["Dat_idioma"]           = AnalyzeTagName(texto, "<Dat_idioma>([^\"<>]*)</Dat_idioma>");
+	m_array["Dat_idioma_voces"]     = AnalyzeTagName(texto, "<Dat_idioma_voces>([^\"<>]*)</Dat_idioma_voces>");
 	m_array["Dat_formato"]          = AnalyzeTagName(texto, "<Dat_formato>([^\"<>]*)</Dat_formato>");
 	m_array["Dat_anno"]             = AnalyzeTagName(texto, "<Dat_anno>([^\"<>]*)</Dat_anno>");
 	m_array["Dat_numdisc"]          = AnalyzeTagName(texto, "<Dat_numdisc>([^\"<>]*)</Dat_numdisc>");

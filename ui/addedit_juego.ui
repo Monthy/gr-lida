@@ -314,26 +314,6 @@
               </property>
              </widget>
             </item>
-            <item row="7" column="0">
-             <widget class="QLabel" name="lb_Datos_8">
-              <property name="text">
-               <string>Formato:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="1" colspan="3">
-             <widget class="QComboBox" name="cbxDatos_Formato">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
             <item row="7" column="4">
              <widget class="QLabel" name="lb_Datos_10">
               <property name="text">
@@ -351,29 +331,6 @@
               </property>
               <property name="editable">
                <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="0">
-             <widget class="QLabel" name="lb_Datos_11">
-              <property name="text">
-               <string>Iconos:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="1" colspan="3">
-             <widget class="QComboBox" name="cbxDatos_Icono">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>31</height>
-               </size>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>24</width>
-                <height>24</height>
-               </size>
               </property>
              </widget>
             </item>
@@ -439,120 +396,6 @@
               <property name="icon">
                <iconset resource="../res/grlida.qrc">
                 <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="0">
-             <widget class="QLabel" name="lb_Datos_12">
-              <property name="text">
-               <string>Sistema OS:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="1" colspan="3">
-             <widget class="QComboBox" name="cbxDatos_SistemaOp">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="0">
-             <widget class="QLabel" name="lb_Datos_13">
-              <property name="text">
-               <string>Tamaño:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="1" colspan="3">
-             <widget class="QLineEdit" name="txtDatos_Tamano">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="0">
-             <widget class="QLabel" name="lb_Datos_14">
-              <property name="text">
-               <string>Gráficos:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="1">
-             <widget class="QComboBox" name="cbxDatos_Graficos">
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="2" colspan="3">
-             <widget class="QCheckBox" name="chkDatos_Original">
-              <property name="text">
-               <string>Juego Original</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="0">
-             <widget class="QLabel" name="lb_Datos_15">
-              <property name="text">
-               <string>Sonido:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="1">
-             <widget class="QComboBox" name="cbxDatos_Sonido">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="2" colspan="3">
-             <widget class="QCheckBox" name="chkDatos_Favorito">
-              <property name="text">
-               <string>Juego Favorito</string>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="0">
-             <widget class="QLabel" name="lb_Datos_16">
-              <property name="text">
-               <string>Jugabilidad:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="1">
-             <widget class="QComboBox" name="cbxDatos_Jugabilidad">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
               </property>
              </widget>
             </item>
@@ -706,29 +549,6 @@
               </property>
              </widget>
             </item>
-            <item row="15" column="0" colspan="2">
-             <widget class="QLabel" name="lb_Datos_17">
-              <property name="text">
-               <string>Estado del juego</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="2">
-             <widget class="QComboBox" name="cbxDatos_Estado">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="editable">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
             <item row="15" column="7">
              <widget class="QToolButton" name="btnImgEliminar_CoverFront">
               <property name="enabled">
@@ -763,26 +583,6 @@
               </property>
              </widget>
             </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="lb_Datos_33">
-              <property name="text">
-               <string>Perspectiva:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="1" colspan="3">
-             <widget class="QComboBox" name="cbxDatos_Perspectiva">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
             <item row="9" column="4">
              <widget class="QLabel" name="lb_Datos_34">
               <property name="text">
@@ -797,6 +597,226 @@
                 <width>140</width>
                 <height>24</height>
                </size>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="1">
+             <widget class="QComboBox" name="cbxDatos_Jugabilidad">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="0">
+             <widget class="QLabel" name="lb_Datos_16">
+              <property name="text">
+               <string>Jugabilidad:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="0">
+             <widget class="QLabel" name="lb_Datos_15">
+              <property name="text">
+               <string>Sonido:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="1">
+             <widget class="QComboBox" name="cbxDatos_Sonido">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="1">
+             <widget class="QComboBox" name="cbxDatos_Graficos">
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="0">
+             <widget class="QLabel" name="lb_Datos_14">
+              <property name="text">
+               <string>Gráficos:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="4">
+             <widget class="QComboBox" name="cbxDatos_Estado">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="2" colspan="2">
+             <widget class="QLabel" name="lb_Datos_17">
+              <property name="text">
+               <string>Estado del juego</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="2" colspan="3">
+             <widget class="QCheckBox" name="chkDatos_Favorito">
+              <property name="text">
+               <string>Juego Favorito</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="2" colspan="3">
+             <widget class="QCheckBox" name="chkDatos_Original">
+              <property name="text">
+               <string>Juego Original</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="1" colspan="3">
+             <widget class="QLineEdit" name="txtDatos_Tamano">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="0">
+             <widget class="QLabel" name="lb_Datos_13">
+              <property name="text">
+               <string>Tamaño:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="0">
+             <widget class="QLabel" name="lb_Datos_12">
+              <property name="text">
+               <string>Sistema OS:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="0">
+             <widget class="QLabel" name="lb_Datos_33">
+              <property name="text">
+               <string>Perspectiva:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="1" colspan="3">
+             <widget class="QComboBox" name="cbxDatos_SistemaOp">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="1" colspan="3">
+             <widget class="QComboBox" name="cbxDatos_Perspectiva">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="1" colspan="3">
+             <widget class="QComboBox" name="cbxDatos_Icono">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>31</height>
+               </size>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1" colspan="3">
+             <widget class="QComboBox" name="cbxDatos_Formato">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLabel" name="lb_Datos_11">
+              <property name="text">
+               <string>Iconos:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="lb_Datos_8">
+              <property name="text">
+               <string>Formato:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1" colspan="3">
+             <widget class="QComboBox" name="cbxDatos_IdiomaVoces">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="lb_Datos_36">
+              <property name="text">
+               <string>Idioma Voces:</string>
               </property>
              </widget>
             </item>
@@ -2461,13 +2481,14 @@
   <tabstop>cbxDatos_Desarrollador</tabstop>
   <tabstop>cbxDatos_Tema</tabstop>
   <tabstop>cbxDatos_Idioma</tabstop>
+  <tabstop>cbxDatos_IdiomaVoces</tabstop>
   <tabstop>cbxDatos_Anno</tabstop>
-  <tabstop>cbxDatos_Formato</tabstop>
   <tabstop>cbxDatos_NumDisc</tabstop>
-  <tabstop>cbxDatos_Icono</tabstop>
+  <tabstop>cbxDatos_Formato</tabstop>
   <tabstop>cbxDatos_Rating</tabstop>
-  <tabstop>cbxDatos_Perspectiva</tabstop>
+  <tabstop>cbxDatos_Icono</tabstop>
   <tabstop>cbxDatos_EdadRecomendada</tabstop>
+  <tabstop>cbxDatos_Perspectiva</tabstop>
   <tabstop>cbxDatos_SistemaOp</tabstop>
   <tabstop>txtDatos_Tamano</tabstop>
   <tabstop>cbxDatos_Graficos</tabstop>
@@ -2529,10 +2550,10 @@
   <tabstop>btnAddFile</tabstop>
   <tabstop>btnEditFile</tabstop>
   <tabstop>btnUpdateFile</tabstop>
-  <tabstop>twDatosFiles</tabstop>
   <tabstop>btnDeleteFile</tabstop>
-  <tabstop>btnDescargarInfo</tabstop>
+  <tabstop>twDatosFiles</tabstop>
   <tabstop>btnOk</tabstop>
+  <tabstop>btnDescargarInfo</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>

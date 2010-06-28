@@ -1127,6 +1127,7 @@ void GrLida::setTheme()
 	str_html_old.replace("{lb_anno}"          , tr("Publicado")         , Qt::CaseSensitive);
 	str_html_old.replace("{lb_edad_recomendada}", tr("Edad recomendada"), Qt::CaseSensitive);
 	str_html_old.replace("{lb_idioma}"        , tr("Idioma")            , Qt::CaseSensitive);
+	str_html_old.replace("{lb_idioma_voces}"  , tr("Idioma voces")      , Qt::CaseSensitive);
 	str_html_old.replace("{lb_formato}"       , tr("Formato")           , Qt::CaseSensitive);
 	str_html_old.replace("{lb_genero}"        , tr("Genero")            , Qt::CaseSensitive);
 	str_html_old.replace("{lb_tema}"          , tr("Tema")              , Qt::CaseSensitive);
@@ -1307,6 +1308,7 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 			str_html_new.replace("{info_tema}"         , strDatosJuego["Dat_tema"]         , Qt::CaseSensitive);
 			str_html_new.replace("{info_perspectiva}"  , strDatosJuego["Dat_perspectiva"]  , Qt::CaseSensitive);
 			str_html_new.replace("{info_idioma}"       , strDatosJuego["Dat_idioma"]       , Qt::CaseSensitive);
+			str_html_new.replace("{info_idioma_voces}" , strDatosJuego["Dat_idioma_voces"] , Qt::CaseSensitive);
 			str_html_new.replace("{info_formato}"      , strDatosJuego["Dat_formato"]      , Qt::CaseSensitive);
 			str_html_new.replace("{info_anno}"         , strDatosJuego["Dat_anno"]         , Qt::CaseSensitive);
 			str_html_new.replace("{info_edad_recomendada}", stTheme +"img16/edad_"+ strDatosJuego["Dat_edad_recomendada"] +".png", Qt::CaseSensitive);
@@ -2884,7 +2886,6 @@ void GrLida::ComprobarArchivosDatos(QString Version_GRL)
 	CrearArchivoDato(":/datos/edad_recomendada.txt", stDatosDir+"edad_recomendada.txt");
 
 	CrearArchivoDato(":/scripts/gr-lida.js", stHomeDir+"scripts/gr-lida.js");
-	CrearArchivoDato(":/scripts/laisladelabandoware.js", stHomeDir+"scripts/laisladelabandoware.js");
 	CrearArchivoDato(":/scripts/mobygames.js", stHomeDir+"scripts/mobygames.js");
 }
 
@@ -2922,7 +2923,7 @@ void GrLida::on_CheckUpdateGrl()
 	HttpDownload *httpdown = new HttpDownload(this);
 	httpdown->setHidden(true);
 	connect(httpdown, SIGNAL( StatusRequestFinished() ), this, SLOT( isCheckUpdateFinished() ) );
-	httpdown->downloadFile("http://localhost/gr-lida.org/lastver.ini", stHomeDir+"temp/lastver.ini");
+	httpdown->downloadFile("http://www.gr-lida.org/lastver.ini", stHomeDir+"temp/lastver.ini");
 }
 
 void GrLida::isCheckUpdateFinished()
@@ -2977,7 +2978,7 @@ void GrLida::isCheckUpdateFinished()
 			{
 				if( settings.value("js_ver_"+fGrl.IntToStr(i+1)).toString() > js_version[settings.value("js_file_"+fGrl.IntToStr(i+1)).toString()] )
 				{
-					info_scripts.append("<div><a href=\"http://localhost/gr-lida.org/scripts.php\"><img src=\""+stTheme+"img16/floppy_2.png\" width=\"16\" height=\"16\" />"
+					info_scripts.append("<div><a href=\"http://www.gr-lida.org/scripts.php\"><img src=\""+stTheme+"img16/floppy_2.png\" width=\"16\" height=\"16\" />"
 									"&nbsp;"+settings.value("js_titulo_"+fGrl.IntToStr(i+1)).toString() +" v"+ settings.value("js_ver_"+fGrl.IntToStr(i+1)).toString()+"</a>"
 									"<br>"+settings.value("js_info_"+fGrl.IntToStr(i+1)).toString()+"</div>");
 					num_js_updates++;
@@ -2992,7 +2993,7 @@ void GrLida::isCheckUpdateFinished()
 		isNuevaVersionGRlida = false;
 
 	html_info = "<h2>"+tr("Nueva Versión")+"</h2>"+tr("Disponible nueva versión del GR-lida %1").arg(version)+"<br>"
-				"<a href=\"http://localhost/gr-lida.org/descargas.php\"><img src=\""+stTheme+"img16/floppy_2.png\" width=\"16\" height=\"16\" />&nbsp;GR-lida v"+version+"</a>"
+				"<a href=\"http://www.gr-lida.org/descargas.php\"><img src=\""+stTheme+"img16/floppy_2.png\" width=\"16\" height=\"16\" />&nbsp;GR-lida v"+version+"</a>"
 				"<br><h3>Info GR-lida v"+version+"</h3>"+info_grl+"<br><br>";
 
 	if( isNuevaVersionGRlida )

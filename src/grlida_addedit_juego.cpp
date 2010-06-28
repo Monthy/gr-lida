@@ -235,6 +235,7 @@ void frmAddEditJuego::CargarConfig()
 	fGrl.CargarDatosComboBox(stDatosDir + "tema.txt"     , ui.cbxDatos_Tema          );
 	fGrl.CargarDatosComboBox(stDatosDir + "perspectivas.txt", ui.cbxDatos_Perspectiva);
 	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"    , ui.cbxDatos_Idioma, 1,true);
+	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"    , ui.cbxDatos_IdiomaVoces, 1,true);
 	fGrl.CargarDatosComboBox(stDatosDir + "formatos.txt" , ui.cbxDatos_Formato       );
 	fGrl.CargarDatosComboBox(stDatosDir + "fechas.txt"   , ui.cbxDatos_Anno          );
 	fGrl.CargarDatosComboBox(stDatosDir + "numdisc.txt"  , ui.cbxDatos_NumDisc       );
@@ -282,6 +283,7 @@ void frmAddEditJuego::CargarConfig()
 		ui.cbxDatos_Desarrollador->setCurrentIndex(0);
 		ui.cbxDatos_Tema->setCurrentIndex(0);
 		ui.cbxDatos_Idioma->setCurrentIndex(0);
+		ui.cbxDatos_IdiomaVoces->setCurrentIndex(0);
 		ui.cbxDatos_Formato->setCurrentIndex(0);
 		ui.cbxDatos_Anno->setCurrentIndex(0);
 		ui.cbxDatos_NumDisc->setCurrentIndex(0);
@@ -417,6 +419,7 @@ void frmAddEditJuego::CargarDatosJuego(QString stIDIndex)
 	ui.cbxDatos_Tema->addItem( QIcon(stTheme+"img16/datos_3.png"), DatosJuego["Dat_tema"] );					// tema
 	ui.cbxDatos_Perspectiva->addItem( QIcon(stTheme+"img16/datos_3.png"), DatosJuego["Dat_perspectiva"] );		// perspectiva
 	ui.cbxDatos_Idioma->addItem( QIcon(stTheme+"img16/sinimg.png"), DatosJuego["Dat_idioma"] );					// idioma
+	ui.cbxDatos_IdiomaVoces->addItem( QIcon(stTheme+"img16/sinimg.png"), DatosJuego["Dat_idioma_voces"] );		// idioma_voces
 	ui.cbxDatos_Formato->addItem( QIcon(stTheme+"img16/sinimg.png"), DatosJuego["Dat_formato"] );				// formato
 	ui.cbxDatos_Anno->addItem( QIcon(stTheme+"img16/fecha.png"), DatosJuego["Dat_anno"] );						// anno
 	ui.cbxDatos_NumDisc->addItem( QIcon(stTheme+"img16/sinimg.png"), DatosJuego["Dat_numdisc"] );				// numdisc
@@ -430,6 +433,7 @@ void frmAddEditJuego::CargarDatosJuego(QString stIDIndex)
 	ui.cbxDatos_Tema->setCurrentIndex( ui.cbxDatos_Tema->findText( DatosJuego["Dat_tema"] ) );							// tema
 	ui.cbxDatos_Perspectiva->setCurrentIndex( ui.cbxDatos_Perspectiva->findText( DatosJuego["Dat_perspectiva"] ) );		// perspectiva
 	ui.cbxDatos_Idioma->setCurrentIndex( ui.cbxDatos_Idioma->findText( DatosJuego["Dat_idioma"] ) );					// idioma
+	ui.cbxDatos_IdiomaVoces->setCurrentIndex( ui.cbxDatos_IdiomaVoces->findText( DatosJuego["Dat_idioma_voces"] ) );	// idioma_voces
 	ui.cbxDatos_Formato->setCurrentIndex( ui.cbxDatos_Formato->findText( DatosJuego["Dat_formato"] ) );					// formato
 	ui.cbxDatos_Anno->setCurrentIndex( ui.cbxDatos_Anno->findText( DatosJuego["Dat_anno"] ) );							// anno
 	ui.cbxDatos_NumDisc->setCurrentIndex( ui.cbxDatos_NumDisc->findText( DatosJuego["Dat_numdisc"] ) );					// numdisc
@@ -581,6 +585,11 @@ void frmAddEditJuego::setDatosJuegos()
 		DatosJuego["Dat_idioma"] = ui.cbxDatos_Idioma->currentText();				// idioma
 	else
 		DatosJuego["Dat_idioma"] = "";
+
+	if( ui.cbxDatos_IdiomaVoces->currentText() != "" )
+		DatosJuego["Dat_idioma_voces"] = ui.cbxDatos_IdiomaVoces->currentText();	// idioma_voces
+	else
+		DatosJuego["Dat_idioma_voces"] = "";
 
 	if( ui.cbxDatos_Formato->currentText() != "" )
 		DatosJuego["Dat_formato"] = ui.cbxDatos_Formato->currentText();				// formato
@@ -957,6 +966,7 @@ void frmAddEditJuego::on_btnDescargarInfo()
 		ui.cbxDatos_Tema->setEditText( ImportarJuego->DatosJuego["Dat_tema"] );
 		ui.cbxDatos_Perspectiva->setEditText( ImportarJuego->DatosJuego["Dat_perspectiva"] );
 		ui.cbxDatos_Idioma->setEditText( ImportarJuego->DatosJuego["Dat_idioma"] );
+		ui.cbxDatos_IdiomaVoces->setEditText( ImportarJuego->DatosJuego["Dat_idioma_voces"] );
 		ui.cbxDatos_Formato->setEditText( ImportarJuego->DatosJuego["Dat_formato"] );
 		ui.cbxDatos_Anno->setEditText( ImportarJuego->DatosJuego["Dat_anno"] );
 		ui.cbxDatos_NumDisc->setEditText( ImportarJuego->DatosJuego["Dat_numdisc"] );

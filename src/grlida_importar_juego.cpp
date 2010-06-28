@@ -425,6 +425,7 @@ void frmImportarJuego::MostrarFichaHtml(QHash<QString, QString> datos)
 	str_html_new.replace("{info_tema}"         , datos["Dat_tema"]         , Qt::CaseSensitive);
 	str_html_new.replace("{info_perspectiva}"  , datos["Dat_perspectiva"]  , Qt::CaseSensitive);
 	str_html_new.replace("{info_idioma}"       , datos["Dat_idioma"]       , Qt::CaseSensitive);
+	str_html_new.replace("{info_idioma_voces}" , datos["Dat_idioma_voces"] , Qt::CaseSensitive);
 	str_html_new.replace("{info_formato}"      , datos["Dat_formato"]      , Qt::CaseSensitive);
 	str_html_new.replace("{info_anno}"         , datos["Dat_anno"]         , Qt::CaseSensitive);
 	str_html_new.replace("{info_edad_recomendada}", stTheme +"img16/edad_"+ datos["Dat_edad_recomendada"] +".png", Qt::CaseSensitive);
@@ -763,6 +764,7 @@ void frmImportarJuego::AnalyzePage(QString Page, bool local, bool tipoDFend)
 	DatosJuego["Dat_tema"]          = DatosJuegoTemp["Dat_tema"];
 	DatosJuego["Dat_perspectiva"]   = DatosJuegoTemp["Dat_perspectiva"];
 	DatosJuego["Dat_idioma"]        = DatosJuegoTemp["Dat_idioma"];
+	DatosJuego["Dat_idioma_voces"]  = DatosJuegoTemp["Dat_idioma_voces"];
 	DatosJuego["Dat_formato"]       = DatosJuegoTemp["Dat_formato"];
 	DatosJuego["Dat_anno"]          = DatosJuegoTemp["Dat_anno"];
 	DatosJuego["Dat_numdisc"]       = DatosJuegoTemp["Dat_numdisc"];

@@ -189,6 +189,7 @@ void dbSql::CrearTablas()
 		"	`tema`					varchar(255) NOT NULL default '',"
 		"	`perspectiva`			varchar(255) NOT NULL default '',"
 		"	`idioma`				varchar(50) NOT NULL default '',"
+		"	`idioma_voces`			varchar(50) NOT NULL default '',"
 		"	`formato`				varchar(50) NOT NULL default '',"
 		"	`anno`					varchar(4) NOT NULL default '',"
 		"	`numdisc`				varchar(50) NOT NULL default '',"
@@ -449,6 +450,8 @@ void dbSql::CrearTablas()
 	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'edad_recomendada' varchar(2) NOT NULL default 'nd';");
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'perspectiva' varchar(255) NOT NULL default '';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl' ADD COLUMN 'idioma_voces' varchar(50) NOT NULL default '';");
 
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cputype' varchar(20) NOT NULL DEFAULT 'auto';");
@@ -495,6 +498,7 @@ QHash<QString, QString> dbSql::show_Datos(QString IDgrl)
 	tmpDatosJuego["Dat_tema"]          = query.record().value("tema").toString();
 	tmpDatosJuego["Dat_perspectiva"]   = query.record().value("perspectiva").toString();
 	tmpDatosJuego["Dat_idioma"]        = query.record().value("idioma").toString();
+	tmpDatosJuego["Dat_idioma_voces"]  = query.record().value("idioma_voces").toString();
 	tmpDatosJuego["Dat_formato"]       = query.record().value("formato").toString();
 	tmpDatosJuego["Dat_anno"]          = query.record().value("anno").toString();
 	tmpDatosJuego["Dat_numdisc"]       = query.record().value("numdisc").toString();
@@ -526,11 +530,11 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	QString strSQL;
 	strSQL.clear();
 	strSQL.append("INSERT INTO dbgrl (");
-	strSQL.append("icono, titulo, subtitulo, genero, compania, desarrollador, tema, perspectiva, idioma, formato, anno, numdisc, ");
+	strSQL.append("icono, titulo, subtitulo, genero, compania, desarrollador, tema, perspectiva, idioma, idioma_voces, formato, anno, numdisc, ");
 	strSQL.append("sistemaop, tamano, graficos, sonido, jugabilidad, original, estado, thumbs, cover_front, cover_back, ");
 	strSQL.append("fecha, tipo_emu, comentario, favorito, rating, edad_recomendada, usuario, path_exe, parametros_exe ");
 	strSQL.append(") VALUES ( ");
-	strSQL.append(":icono, :titulo, :subtitulo, :genero, :compania, :desarrollador, :tema, :perspectiva, :idioma, :formato, :anno, :numdisc, ");
+	strSQL.append(":icono, :titulo, :subtitulo, :genero, :compania, :desarrollador, :tema, :perspectiva, :idioma, :idioma_voces, :formato, :anno, :numdisc, ");
 	strSQL.append(":sistemaop, :tamano, :graficos, :sonido, :jugabilidad, :original, :estado, :thumbs, :cover_front, :cover_back, ");
 	strSQL.append(":fecha, :tipo_emu, :comentario, :favorito, :rating, :edad_recomendada, :usuario, :path_exe, :parametros_exe )");
 
@@ -546,6 +550,7 @@ QString dbSql::ItemInsertaDatos(const QHash<QString, QString> datos)
 	query.bindValue(":tema"         , datos["Dat_tema"]          );
 	query.bindValue(":perspectiva"  , datos["Dat_perspectiva"]   );
 	query.bindValue(":idioma"       , datos["Dat_idioma"]        );
+	query.bindValue(":idioma_voces" , datos["Dat_idioma_voces"]  );
 	query.bindValue(":formato"      , datos["Dat_formato"]       );
 	query.bindValue(":anno"         , datos["Dat_anno"]          );
 	query.bindValue(":numdisc"      , datos["Dat_numdisc"]       );
@@ -583,7 +588,7 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	strSQL.append("UPDATE dbgrl SET ");
 	strSQL.append("icono = :icono, titulo = :titulo, subtitulo = :subtitulo, genero = :genero, ");
 	strSQL.append("compania  = :compania, desarrollador = :desarrollador, tema = :tema, perspectiva = :perspectiva, idioma = :idioma, ");
-	strSQL.append("formato = :formato, anno = :anno, numdisc = :numdisc, sistemaop = :sistemaop, ");
+	strSQL.append("idioma_voces = :idioma_voces, formato = :formato, anno = :anno, numdisc = :numdisc, sistemaop = :sistemaop, ");
 	strSQL.append("tamano = :tamano, graficos = :graficos, sonido = :sonido, jugabilidad = :jugabilidad, ");
 	strSQL.append("original = :original, estado = :estado, thumbs = :thumbs, cover_front = :cover_front, ");
 	strSQL.append("cover_back = :cover_back, comentario = :comentario, favorito = :favorito, rating = :rating, edad_recomendada = :edad_recomendada, ");
@@ -601,6 +606,7 @@ void dbSql::ItemActualizaDatos(const QHash<QString, QString> datos, const QStrin
 	query.bindValue(":tema"         , datos["Dat_tema"]          );
 	query.bindValue(":perspectiva"  , datos["Dat_perspectiva"]   );
 	query.bindValue(":idioma"       , datos["Dat_idioma"]        );
+	query.bindValue(":idioma_voces" , datos["Dat_idioma_voces"]  );
 	query.bindValue(":formato"      , datos["Dat_formato"]       );
 	query.bindValue(":anno"         , datos["Dat_anno"]          );
 	query.bindValue(":numdisc"      , datos["Dat_numdisc"]       );

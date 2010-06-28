@@ -110,6 +110,7 @@ void frmVdmsAdd::on_btnDescargarInfo()
 		tempDatosJuego["Dat_tema"]          = ImportarJuego->DatosJuego["Dat_tema"];		// tema
 		tempDatosJuego["Dat_perspectiva"]   = ImportarJuego->DatosJuego["Dat_perspectiva"];	// perspectiva
 		tempDatosJuego["Dat_idioma"]        = ImportarJuego->DatosJuego["Dat_idioma"];		// idioma
+		tempDatosJuego["Dat_idioma_voces"]  = ImportarJuego->DatosJuego["Dat_idioma_voces"];// idioma_voces
 		tempDatosJuego["Dat_formato"]       = ImportarJuego->DatosJuego["Dat_formato"];		// formato
 		tempDatosJuego["Dat_anno"]          = ImportarJuego->DatosJuego["Dat_anno"];		// anno
 		tempDatosJuego["Dat_numdisc"]       = ImportarJuego->DatosJuego["Dat_numdisc"];		// numdisc
@@ -181,6 +182,7 @@ void frmVdmsAdd::on_btnOk()
 		DatosJuego["Dat_tema"]          = ""+tempDatosJuego["Dat_tema"];			// tema
 		DatosJuego["Dat_perspectiva"]   = ""+tempDatosJuego["Dat_perspectiva"];		// perspectiva
 		DatosJuego["Dat_idioma"]        = ""+tempDatosJuego["Dat_idioma"];			// idioma
+		DatosJuego["Dat_idioma_voces"]  = ""+tempDatosJuego["Dat_idioma_voces"];	// idioma_voces
 		DatosJuego["Dat_formato"]       = ""+tempDatosJuego["Dat_formato"];			// formato
 		DatosJuego["Dat_anno"]          = ""+tempDatosJuego["Dat_anno"];			// anno
 		DatosJuego["Dat_numdisc"]       = ""+tempDatosJuego["Dat_numdisc"];			// numdisc
