@@ -1,4 +1,4 @@
-Castellano|es
+Español|es
 Ingles|en
 Ingles (GB)|gb
 Ingles (US)|us
