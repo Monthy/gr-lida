@@ -39,7 +39,7 @@
      <x>0</x>
      <y>0</y>
      <width>440</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -101,6 +101,9 @@
    <property name="text">
     <string>Play - Pausa</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionStop">
    <property name="icon">
@@ -109,6 +112,9 @@
    </property>
    <property name="text">
     <string>Stop</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionAnterior">
@@ -119,6 +125,9 @@
    <property name="text">
     <string>Anterior</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionRebobinarAtras">
    <property name="icon">
@@ -127,6 +136,9 @@
    </property>
    <property name="text">
     <string>Rebobinar atras</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionRebobinarAdelante">
@@ -137,6 +149,9 @@
    <property name="text">
     <string>Rebobinar adelante</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionSiguiente">
    <property name="icon">
@@ -146,6 +161,9 @@
    <property name="text">
     <string>Siguiente</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionAbrir">
    <property name="icon">
@@ -154,6 +172,9 @@
    </property>
    <property name="text">
     <string>Abrir</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionAleatorio">
@@ -167,6 +188,9 @@
    <property name="text">
     <string>Aleatorio</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionMute">
    <property name="checkable">
@@ -179,6 +203,9 @@
    <property name="text">
     <string>Mute</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionOpciones">
    <property name="icon">
@@ -187,6 +214,9 @@
    </property>
    <property name="text">
     <string>Opciones</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
  </widget>

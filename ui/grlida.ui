@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>868</width>
-    <height>667</height>
+    <height>680</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -148,7 +148,7 @@
      <x>0</x>
      <y>0</y>
      <width>868</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">
@@ -205,6 +205,10 @@
      <property name="title">
       <string>Ver Carpetas</string>
      </property>
+     <property name="icon">
+      <iconset resource="../res/grlida.qrc">
+       <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
+     </property>
      <addaction name="mnu_ver_carpeta_confdbx"/>
      <addaction name="mnu_ver_carpeta_confvdms"/>
      <addaction name="separator"/>
@@ -225,6 +229,10 @@
     <widget class="QMenu" name="menuMenuVerColumnas">
      <property name="title">
       <string>Ver Columnas</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../res/grlida.qrc">
+       <normaloff>:/img16/column_list.png</normaloff>:/img16/column_list.png</iconset>
      </property>
      <addaction name="mnu_ver_compania"/>
      <addaction name="mnu_ver_anno"/>
@@ -304,7 +312,7 @@
    <property name="minimumSize">
     <size>
      <width>380</width>
-     <height>108</height>
+     <height>136</height>
     </size>
    </property>
    <property name="baseSize">
@@ -725,6 +733,9 @@
    <property name="statusTip">
     <string>Muestra Información sobre la Base de Datos</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_file_cerrar">
    <property name="icon">
@@ -739,6 +750,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_edit_nuevo_dosbox">
@@ -761,6 +775,9 @@
    <property name="shortcut">
     <string>Ctrl+D</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_edit_nuevo_scummvm">
    <property name="icon">
@@ -781,6 +798,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_edit_nuevo_vdmsound">
@@ -803,6 +823,9 @@
    <property name="shortcut">
     <string>Ctrl+V</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_edit_nuevo">
    <property name="icon">
@@ -820,6 +843,9 @@
    </property>
    <property name="shortcut">
     <string>Ins</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_edit_editar">
@@ -839,6 +865,9 @@
    <property name="shortcut">
     <string>Shift+Ins</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_edit_eliminar">
    <property name="icon">
@@ -853,6 +882,9 @@
    </property>
    <property name="shortcut">
     <string>Del</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_edit_favorito">
@@ -875,6 +907,9 @@
    <property name="statusTip">
     <string>Marca o quita un juego seleccionado como Favorito</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ejecutar_dosbox">
    <property name="icon">
@@ -895,6 +930,9 @@
    </property>
    <property name="shortcut">
     <string>Shift+D</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ejecutar_scummvm">
@@ -917,6 +955,9 @@
    <property name="shortcut">
     <string>Shift+S</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ejecutar_juego">
    <property name="icon">
@@ -938,6 +979,9 @@
    <property name="shortcut">
     <string>Ctrl+E</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ejecutar_setup">
    <property name="icon">
@@ -952,6 +996,9 @@
    </property>
    <property name="statusTip">
     <string>Ejecuta el Setup del Juego</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_tool_importar">
@@ -968,6 +1015,9 @@
    <property name="shortcut">
     <string>Ctrl+I</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_tool_exportar">
    <property name="icon">
@@ -979,6 +1029,9 @@
    </property>
    <property name="statusTip">
     <string>Exporta los datos de configuración del Juego</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_tool_opciones">
@@ -997,6 +1050,9 @@
    </property>
    <property name="statusTip">
     <string>Opciones de Configuración del GR-lida</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_archivos_url">
@@ -1018,6 +1074,9 @@
    </property>
    <property name="shortcut">
     <string>F5</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_datos">
@@ -1046,6 +1105,9 @@
    <property name="shortcut">
     <string>F6</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_pictureflow">
    <property name="checkable">
@@ -1060,6 +1122,9 @@
    </property>
    <property name="text">
     <string>PictureFlow</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_capturas">
@@ -1082,6 +1147,9 @@
    <property name="shortcut">
     <string>F7</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_ordenar">
    <property name="checkable">
@@ -1102,6 +1170,9 @@
    </property>
    <property name="shortcut">
     <string>F10</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_toolbar">
@@ -1124,6 +1195,9 @@
    <property name="shortcut">
     <string>F8</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_ayuda">
    <property name="icon">
@@ -1142,6 +1216,9 @@
    <property name="shortcut">
     <string>F1</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_acercad">
    <property name="icon">
@@ -1150,6 +1227,9 @@
    </property>
    <property name="text">
     <string>Acerca de...</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionClose">
@@ -1169,6 +1249,9 @@
    <property name="statusTip">
     <string>Cerrar el GR-lida</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionNewDbx">
    <property name="icon">
@@ -1186,6 +1269,9 @@
    </property>
    <property name="statusTip">
     <string>Nuevo Juego para el emulador DOSBox</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionNewSvm">
@@ -1205,6 +1291,9 @@
    <property name="statusTip">
     <string>Nuevo Juego para el emulador ScummVM</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionNewVdms">
    <property name="icon">
@@ -1222,6 +1311,9 @@
    </property>
    <property name="statusTip">
     <string>Nuevo Juego para el emulador VDMSound</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionEjectar">
@@ -1241,6 +1333,9 @@
    <property name="statusTip">
     <string>Ejecuta un Juego con el emulador correspondiente</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionEjectarSetup">
    <property name="enabled">
@@ -1258,6 +1353,9 @@
    </property>
    <property name="statusTip">
     <string>Ejecuta el Setup del Juego</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionNuevo">
@@ -1280,6 +1378,9 @@
    <property name="visible">
     <bool>true</bool>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionEditar">
    <property name="icon">
@@ -1297,6 +1398,9 @@
    </property>
    <property name="statusTip">
     <string>Edita los datos del Juego asi como la configuración del emulador</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionEiminar">
@@ -1316,6 +1420,9 @@
    <property name="statusTip">
     <string>Elimina un Juego de la lista</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionImportarJuego">
    <property name="icon">
@@ -1330,6 +1437,9 @@
    </property>
    <property name="statusTip">
     <string>Importa los datos de un Juego via web</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionVerFilesUrl">
@@ -1351,6 +1461,9 @@
    </property>
    <property name="statusTip">
     <string>Muestra los Archivos y URL del Juego</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionVerDatos">
@@ -1376,6 +1489,9 @@
    <property name="whatsThis">
     <string/>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionVerCapturas">
    <property name="checkable">
@@ -1397,6 +1513,9 @@
    <property name="statusTip">
     <string>Muestra las Capturas del Juego</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionOpciones">
    <property name="icon">
@@ -1414,6 +1533,9 @@
    </property>
    <property name="statusTip">
     <string>Opciones de Configuración del GR-lida</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionAcercaD">
@@ -1433,6 +1555,9 @@
    <property name="statusTip">
     <string>Muestra información acerca del GR-lida</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_trayicon_minimize">
    <property name="icon">
@@ -1441,6 +1566,9 @@
    </property>
    <property name="text">
     <string>Mi&amp;nimizar</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_trayicon_maximize">
@@ -1451,6 +1579,9 @@
    <property name="text">
     <string>Ma&amp;ximizar</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_trayicon_restore">
    <property name="icon">
@@ -1459,6 +1590,9 @@
    </property>
    <property name="text">
     <string>&amp;Restaurar</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_nav">
@@ -1475,6 +1609,9 @@
    <property name="text">
     <string>Nav Categorias</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_carpeta_confdbx">
    <property name="icon">
@@ -1483,6 +1620,9 @@
    </property>
    <property name="text">
     <string>Carpeta configuraciones DOSBox</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_carpeta_confvdms">
@@ -1493,6 +1633,9 @@
    <property name="text">
     <string>Carpeta configuraciones VDMSound</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_carpeta_covers">
    <property name="icon">
@@ -1501,6 +1644,9 @@
    </property>
    <property name="text">
     <string>Carpeta de Carátulas</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_carpeta_datos">
@@ -1511,6 +1657,9 @@
    <property name="text">
     <string>Carpeta de los Datos</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_carpeta_iconos">
    <property name="icon">
@@ -1519,6 +1668,9 @@
    </property>
    <property name="text">
     <string>Carpeta de Iconos</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_carpeta_idiomas">
@@ -1529,6 +1681,9 @@
    <property name="text">
     <string>Carpeta de Idiomas</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_carpeta_smiles">
    <property name="icon">
@@ -1537,6 +1692,9 @@
    </property>
    <property name="text">
     <string>Carpeta de Emoticones</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_carpeta_themes">
@@ -1547,6 +1705,9 @@
    <property name="text">
     <string>Carpeta de Themes</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_carpeta_thumbs">
    <property name="icon">
@@ -1555,6 +1716,9 @@
    </property>
    <property name="text">
     <string>Carpeta de Thumbs</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_carpeta_templates">
@@ -1565,6 +1729,9 @@
    <property name="text">
     <string>Carpeta de Templates</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_carpeta_temp">
    <property name="icon">
@@ -1573,6 +1740,9 @@
    </property>
    <property name="text">
     <string>Carpeta Temporal</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_carpeta_scripts">
@@ -1583,6 +1753,9 @@
    <property name="text">
     <string>Carpeta de Scripts</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_carpeta_home">
    <property name="icon">
@@ -1591,6 +1764,9 @@
    </property>
    <property name="text">
     <string>Carpeta Principal</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_rating">
@@ -1607,6 +1783,9 @@
    <property name="text">
     <string>Ver Rating</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_check_updates">
    <property name="icon">
@@ -1615,6 +1794,9 @@
    </property>
    <property name="text">
     <string>Buscar actualizaciones...</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_tool_instalar">
@@ -1631,6 +1813,9 @@
    <property name="shortcut">
     <string>Ctrl+I</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_cover_mode">
    <property name="checkable">
@@ -1642,6 +1827,9 @@
    </property>
    <property name="text">
     <string>Lista modo Carátulas</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_tool_rebuild_all_covers">
@@ -1655,6 +1843,9 @@
    <property name="toolTip">
     <string>Reconstruir todas las carátulas</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_tool_rebuild_cover">
    <property name="icon">
@@ -1666,6 +1857,9 @@
    </property>
    <property name="toolTip">
     <string>Reconstruir carátula</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_compania">
@@ -1679,6 +1873,9 @@
    <property name="text">
     <string>Ver Compañia</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="mnu_ver_anno">
    <property name="checkable">
@@ -1690,6 +1887,9 @@
    </property>
    <property name="text">
     <string>Ver Año</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
  </widget>
