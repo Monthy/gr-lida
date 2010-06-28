@@ -248,550 +248,565 @@
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="640"/>
+        <location filename="../ui/addedit_dosbox.ui" line="656"/>
         <source>Cantidad de memoria (Mb) que DOSBox tendrá disponible:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="666"/>
+        <location filename="../ui/addedit_dosbox.ui" line="679"/>
         <source>Núcleo de la CPU usado en la emulación:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="689"/>
+        <location filename="../ui/addedit_dosbox.ui" line="715"/>
         <source>Cuantos cuadros salta dosbox antes de dibujar uno:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="712"/>
+        <location filename="../ui/addedit_dosbox.ui" line="725"/>
         <source>xms -- Activa o desactiva soporte para memoria XMS.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="722"/>
+        <location filename="../ui/addedit_dosbox.ui" line="735"/>
         <source>ems -- Activa o desactiva soporte para memoria EMS.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="742"/>
+        <location filename="../ui/addedit_dosbox.ui" line="761"/>
         <source>umb -- Activa o desactiva soporte para memoria UMB</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="749"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1014"/>
         <source>Ciclos, Cantidad de instrucciones que dosbox intenta emular cada milisegundo, Es malo darle un valor mayor al que su máquina puede soportar:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="780"/>
+        <location filename="../ui/addedit_dosbox.ui" line="859"/>
         <source>Arriba</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="803"/>
+        <location filename="../ui/addedit_dosbox.ui" line="768"/>
+        <source>realmode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/addedit_dosbox.ui" line="801"/>
+        <source>protected mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/addedit_dosbox.ui" line="824"/>
+        <source>limit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/addedit_dosbox.ui" line="882"/>
         <source>Abajo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="826"/>
+        <location filename="../ui/addedit_dosbox.ui" line="905"/>
         <source>Sincronizar. Arriba/Abajo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="850"/>
+        <location filename="../ui/addedit_dosbox.ui" line="929"/>
         <source>Emulador de joystick:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="888"/>
+        <location filename="../ui/addedit_dosbox.ui" line="967"/>
         <source>timed -- Permitir los intervalos sincronizados para el eje. (falso es el estilo de comportamiento viejo)</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="898"/>
+        <location filename="../ui/addedit_dosbox.ui" line="977"/>
         <source>autofire -- Disparo continuado mientras mantengas el botón presionado</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="905"/>
+        <location filename="../ui/addedit_dosbox.ui" line="984"/>
         <source>swap34 -- Intercambiar el 3ro y 4to eje. Puede ser útil para ciertas palancas de mando</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="912"/>
+        <location filename="../ui/addedit_dosbox.ui" line="991"/>
         <source>buttonwrap -- enable button wrapping at the number of emulated buttons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="951"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1030"/>
         <source>Opciones de Sonido</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="960"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1039"/>
         <source>Todas las Opciones de sonido y emulación de sonido</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="980"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1059"/>
         <source>Desactivar Sonido</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1000"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1079"/>
         <source>Sound Blaster</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1008"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1087"/>
         <source>Permite al mezclador de la soundblaster modificar el del DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1018"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1097"/>
         <source>Tipo Sound Blaste:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1038"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1117"/>
         <source>Opl mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1058"/>
-        <location filename="../ui/addedit_dosbox.ui" line="1209"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1137"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1288"/>
         <source>Address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1078"/>
-        <location filename="../ui/addedit_dosbox.ui" line="1229"/>
-        <location filename="../ui/addedit_dosbox.ui" line="1624"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1157"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1308"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1703"/>
         <source>Frecuencia:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1098"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2137"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1177"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2216"/>
         <source>IRQ:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1118"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1197"/>
         <source>DMA:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1138"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1217"/>
         <source>HDMA:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1168"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1247"/>
         <source>Opl emu:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1191"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1270"/>
         <source>Gravis Ultrasound</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1199"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1278"/>
         <source>Activa la emulación de Gravis Ultrasound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1249"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1328"/>
         <source>IRQ 1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1269"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1348"/>
         <source>DMA 1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1289"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1368"/>
         <source>IRQ 2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1309"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1388"/>
         <source>DMA 2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1375"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1454"/>
         <source>MIDI</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1383"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1462"/>
         <source>Activar emulación MPU-401</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1393"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1472"/>
         <source>MPU-401:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1413"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1492"/>
         <source>Modo inteligente</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1423"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1502"/>
         <source>Dispositivo que recibirá los datos MIDI desde el MPU-401:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1446"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1525"/>
         <source>Frecuencia de muestreo de la emulación de música MT32:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1469"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1548"/>
         <source>Opciones de configuración especiales para el dispositivo:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1505"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1584"/>
         <source>Configuración Adicional</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1513"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1592"/>
         <source>Activa el altavoz interno</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1523"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1602"/>
         <source>Activa Disney Sound Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1533"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1612"/>
         <source>Frecuencia de muestreo de la generación de sonido del altavoz interno:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1559"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1638"/>
         <source>Tandy:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1592"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1671"/>
         <source>Frecuencia de muestreo de la generación de sonido Tandy de 3 voces. La emulación de sonido Tandy está presente si se selecciona tandy como máquina:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1644"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1723"/>
         <source>Bloque:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1661"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1740"/>
         <source>Prebuffer:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1723"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1802"/>
         <source>Montaje</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1732"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1811"/>
         <source>Opciones de montaje de unidades</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1784"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1863"/>
         <source>Folder/Imagen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1789"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1868"/>
         <source>Etiqueta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1794"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1873"/>
         <source>Tipo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1799"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1878"/>
         <source>Driver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1804"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1883"/>
         <source>CD/DVD index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1809"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1888"/>
         <source>Opciones CD/DVD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1814"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1893"/>
         <source>IO Ctrl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1819"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1898"/>
         <source>Primer montaje</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1837"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1916"/>
         <source>Añadir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1854"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1933"/>
         <source>Subir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1871"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1950"/>
         <source>Editar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1888"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1967"/>
         <source>Bajar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1905"/>
+        <location filename="../ui/addedit_dosbox.ui" line="1984"/>
         <source>Eliminar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1922"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2001"/>
         <source>Limpiar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1939"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2018"/>
         <source>Autocrear Montaje</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1956"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2035"/>
         <source>Selecciona montaje primario</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="1988"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2067"/>
         <source>Comunicación</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="1997"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2076"/>
         <source>Opciones de comunicaciones como la red o modem</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2017"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2096"/>
         <source>modem -- Activa emulación de módem virtual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2027"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2106"/>
         <source>directserial -- Activa soporte de puerto serie directo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2037"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2116"/>
         <source>Puerto COM:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2057"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2136"/>
         <source>Bits por segundos:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2080"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2159"/>
         <source>Modem comport:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2087"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2166"/>
         <source>Puerto real:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2107"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2186"/>
         <source>Numero del puerto</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2154"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2233"/>
         <source>Tamaño del Byte:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2174"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2253"/>
         <source>Paridad de paquetes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2194"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2273"/>
         <source>Bits de parada:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2214"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2293"/>
         <source>Seleccionar Serial:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2234"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2313"/>
         <source>Estado o tipo Serial:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2260"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2339"/>
         <source>Añade Serial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2271"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2350"/>
         <source>Serial 1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2288"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2367"/>
         <source>Serial 2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2305"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2384"/>
         <source>Serial 3:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2322"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2401"/>
         <source>Serial 4:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2339"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2418"/>
         <source>ipx -- Activa emulación IPX sobre UDP/IP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2368"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2447"/>
         <source>Autoexec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2377"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2456"/>
         <source>Montaje de unidades manualmente</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2389"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2468"/>
         <source>Activar Configuración manual del [autoexec] del DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2443"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2522"/>
         <source>Mount Driver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2469"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2548"/>
         <source>Mount CD-Rom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2495"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2574"/>
         <source>Mount Floppy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2528"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2607"/>
         <source>Mount Image Floppy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2554"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2633"/>
         <source>Mount Image ISO, CUE/BIN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2580"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2659"/>
         <source>Mount Image HD</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2619"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2698"/>
         <source>Miscelánea</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2628"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2707"/>
         <source>Otras opciones como la prioridad del emulador, directorio de capturas y sonido, etc...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2654"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2733"/>
         <source>Prioridad DOSBox seleccionado</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2660"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2706"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2739"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2785"/>
         <source>Baja</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2667"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2713"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2746"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2792"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2674"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2723"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2753"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2802"/>
         <source>Alta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2684"/>
-        <location filename="../ui/addedit_dosbox.ui" line="2730"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2763"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2809"/>
         <source>Muy alta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2700"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2779"/>
         <source>Prioridad DOSBox NO seleccionado</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2753"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2832"/>
         <source>Archivo usado para cargar/guardar el mapa de teclas/eventos:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2819"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2898"/>
         <source>language -- Selecciona otro archivo de idioma:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_dosbox.ui" line="2885"/>
+        <location filename="../ui/addedit_dosbox.ui" line="2964"/>
         <source>captures -- Directorio donde se capturarán cosas como sonido,midi o pantallas:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_dosbox.ui" line="2951"/>
+        <location filename="../ui/addedit_dosbox.ui" line="3030"/>
         <source>Directorio donde esta la musica del juego asi como la BSO, sonido:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -869,398 +884,403 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="320"/>
+        <location filename="../ui/addedit_juego.ui" line="799"/>
         <source>Formato:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="340"/>
+        <location filename="../ui/addedit_juego.ui" line="320"/>
         <source>Nº Cds:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="360"/>
+        <location filename="../ui/addedit_juego.ui" line="792"/>
         <source>Iconos:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="568"/>
+        <location filename="../ui/addedit_juego.ui" line="411"/>
         <source>Carátula delantera</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="609"/>
+        <location filename="../ui/addedit_juego.ui" line="452"/>
         <source>Carátula trasera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="448"/>
+        <location filename="../ui/addedit_juego.ui" line="723"/>
         <source>Sistema OS:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="468"/>
+        <location filename="../ui/addedit_juego.ui" line="716"/>
         <source>Tamaño:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="502"/>
+        <location filename="../ui/addedit_juego.ui" line="699"/>
         <source>Juego Original</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="485"/>
+        <location filename="../ui/addedit_juego.ui" line="662"/>
         <source>Gráficos:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="532"/>
+        <location filename="../ui/addedit_juego.ui" line="692"/>
         <source>Juego Favorito</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="509"/>
+        <location filename="../ui/addedit_juego.ui" line="629"/>
         <source>Sonido:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="712"/>
+        <location filename="../ui/addedit_juego.ui" line="682"/>
         <source>Estado del juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="539"/>
+        <location filename="../ui/addedit_juego.ui" line="622"/>
         <source>Jugabilidad:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="383"/>
+        <location filename="../ui/addedit_juego.ui" line="340"/>
         <source>Rating:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="769"/>
+        <location filename="../ui/addedit_juego.ui" line="730"/>
         <source>Perspectiva:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="789"/>
+        <location filename="../ui/addedit_juego.ui" line="589"/>
         <source>Edad:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="829"/>
+        <location filename="../ui/addedit_juego.ui" line="819"/>
+        <source>Idioma Voces:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/addedit_juego.ui" line="849"/>
         <source>Otros Datos</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="841"/>
+        <location filename="../ui/addedit_juego.ui" line="861"/>
         <source>Descripción del juego y Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="909"/>
-        <location filename="../ui/addedit_juego.ui" line="912"/>
+        <location filename="../ui/addedit_juego.ui" line="929"/>
+        <location filename="../ui/addedit_juego.ui" line="932"/>
         <source>Cortar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="938"/>
-        <location filename="../ui/addedit_juego.ui" line="941"/>
+        <location filename="../ui/addedit_juego.ui" line="958"/>
+        <location filename="../ui/addedit_juego.ui" line="961"/>
         <source>Copiar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="967"/>
-        <location filename="../ui/addedit_juego.ui" line="970"/>
+        <location filename="../ui/addedit_juego.ui" line="987"/>
+        <location filename="../ui/addedit_juego.ui" line="990"/>
         <source>Pegar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="996"/>
-        <location filename="../ui/addedit_juego.ui" line="999"/>
+        <location filename="../ui/addedit_juego.ui" line="1016"/>
+        <location filename="../ui/addedit_juego.ui" line="1019"/>
         <source>Seleccionar todo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1032"/>
-        <location filename="../ui/addedit_juego.ui" line="1035"/>
+        <location filename="../ui/addedit_juego.ui" line="1052"/>
+        <location filename="../ui/addedit_juego.ui" line="1055"/>
         <source>Deshacer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1061"/>
-        <location filename="../ui/addedit_juego.ui" line="1064"/>
+        <location filename="../ui/addedit_juego.ui" line="1081"/>
+        <location filename="../ui/addedit_juego.ui" line="1084"/>
         <source>Rehacer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1097"/>
+        <location filename="../ui/addedit_juego.ui" line="1117"/>
         <source>Texto en negrita</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1100"/>
+        <location filename="../ui/addedit_juego.ui" line="1120"/>
         <source>Negrita</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1126"/>
+        <location filename="../ui/addedit_juego.ui" line="1146"/>
         <source>Texto en cursiva</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1129"/>
+        <location filename="../ui/addedit_juego.ui" line="1149"/>
         <source>Cursiva</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1155"/>
+        <location filename="../ui/addedit_juego.ui" line="1175"/>
         <source>Texto subrayado</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1158"/>
+        <location filename="../ui/addedit_juego.ui" line="1178"/>
         <source>Subrayada</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="1191"/>
+        <location filename="../ui/addedit_juego.ui" line="1211"/>
         <source>Insertar dirección de una imagen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1194"/>
+        <location filename="../ui/addedit_juego.ui" line="1214"/>
         <source>Imagen</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="1220"/>
+        <location filename="../ui/addedit_juego.ui" line="1240"/>
         <source>Insertar dirección Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1223"/>
+        <location filename="../ui/addedit_juego.ui" line="1243"/>
         <source>Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1256"/>
-        <location filename="../ui/addedit_juego.ui" line="1259"/>
+        <location filename="../ui/addedit_juego.ui" line="1276"/>
+        <location filename="../ui/addedit_juego.ui" line="1279"/>
         <source>Buscar texto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1583"/>
+        <location filename="../ui/addedit_juego.ui" line="1603"/>
         <source>Buscar:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1612"/>
+        <location filename="../ui/addedit_juego.ui" line="1632"/>
         <source>por:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1666"/>
+        <location filename="../ui/addedit_juego.ui" line="1686"/>
         <source>Buscar anterior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1669"/>
+        <location filename="../ui/addedit_juego.ui" line="1689"/>
         <source>Anterior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1698"/>
+        <location filename="../ui/addedit_juego.ui" line="1718"/>
         <source>Buscar siguiente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1288"/>
-        <location filename="../ui/addedit_juego.ui" line="1291"/>
-        <location filename="../ui/addedit_juego.ui" line="1641"/>
-        <location filename="../ui/addedit_juego.ui" line="1644"/>
+        <location filename="../ui/addedit_juego.ui" line="1308"/>
+        <location filename="../ui/addedit_juego.ui" line="1311"/>
+        <location filename="../ui/addedit_juego.ui" line="1661"/>
+        <location filename="../ui/addedit_juego.ui" line="1664"/>
         <source>Reemplazar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1322"/>
+        <location filename="../ui/addedit_juego.ui" line="1342"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1789"/>
+        <location filename="../ui/addedit_juego.ui" line="1809"/>
         <source>URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="1794"/>
-        <location filename="../ui/addedit_juego.ui" line="2267"/>
+        <location filename="../ui/addedit_juego.ui" line="1814"/>
+        <location filename="../ui/addedit_juego.ui" line="2287"/>
         <source>Descripción</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1391"/>
+        <location filename="../ui/addedit_juego.ui" line="1411"/>
         <source>Smiles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1427"/>
+        <location filename="../ui/addedit_juego.ui" line="1447"/>
         <source>Nueva url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1459"/>
+        <location filename="../ui/addedit_juego.ui" line="1479"/>
         <source>Editar url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1482"/>
+        <location filename="../ui/addedit_juego.ui" line="1502"/>
         <source>Eliminar url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1505"/>
+        <location filename="../ui/addedit_juego.ui" line="1525"/>
         <source>Abrir URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1811"/>
+        <location filename="../ui/addedit_juego.ui" line="1831"/>
         <source>Archivos del Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1924"/>
+        <location filename="../ui/addedit_juego.ui" line="1944"/>
         <source>Opciones de archivos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2024"/>
+        <location filename="../ui/addedit_juego.ui" line="2044"/>
         <source>Nombre:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2050"/>
+        <location filename="../ui/addedit_juego.ui" line="2070"/>
         <source>CRC32:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="2129"/>
+        <location filename="../ui/addedit_juego.ui" line="2149"/>
         <source>Descripción:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2091"/>
+        <location filename="../ui/addedit_juego.ui" line="2111"/>
         <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1701"/>
+        <location filename="../ui/addedit_juego.ui" line="1721"/>
         <source>Siguiente</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="1722"/>
+        <location filename="../ui/addedit_juego.ui" line="1742"/>
         <source>Coincidir mayúsculas</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="1732"/>
+        <location filename="../ui/addedit_juego.ui" line="1752"/>
         <source>Sólo palabras completas</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="1823"/>
+        <location filename="../ui/addedit_juego.ui" line="1843"/>
         <source>Ejecutar Juego directamente, solo si se añade como Datos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1844"/>
+        <location filename="../ui/addedit_juego.ui" line="1864"/>
         <source>Ejecutable del Juego:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1938"/>
+        <location filename="../ui/addedit_juego.ui" line="1958"/>
         <source>Tipo de Archivo:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="1958"/>
+        <location filename="../ui/addedit_juego.ui" line="1978"/>
         <source>Archivo para añadir a la lista:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/addedit_juego.ui" line="2152"/>
+        <location filename="../ui/addedit_juego.ui" line="2172"/>
         <source>Añadir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2169"/>
+        <location filename="../ui/addedit_juego.ui" line="2189"/>
         <source>Editar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2189"/>
+        <location filename="../ui/addedit_juego.ui" line="2209"/>
         <source>Actualizar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2206"/>
+        <location filename="../ui/addedit_juego.ui" line="2226"/>
         <source>Elimiar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2257"/>
+        <location filename="../ui/addedit_juego.ui" line="2277"/>
         <source>Nombre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2262"/>
+        <location filename="../ui/addedit_juego.ui" line="2282"/>
         <source>CRC32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2272"/>
+        <location filename="../ui/addedit_juego.ui" line="2292"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2277"/>
+        <location filename="../ui/addedit_juego.ui" line="2297"/>
         <source>Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2293"/>
+        <location filename="../ui/addedit_juego.ui" line="2313"/>
         <source>DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2313"/>
+        <location filename="../ui/addedit_juego.ui" line="2333"/>
         <source>ScummVM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2333"/>
+        <location filename="../ui/addedit_juego.ui" line="2353"/>
         <source>VDMSound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="1904"/>
+        <location filename="../ui/addedit_juego.ui" line="1924"/>
         <source>Parametros:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2366"/>
+        <location filename="../ui/addedit_juego.ui" line="2386"/>
         <source>Descargar la Info del Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2399"/>
+        <location filename="../ui/addedit_juego.ui" line="2419"/>
         <source>Aceptar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/addedit_juego.ui" line="2419"/>
+        <location filename="../ui/addedit_juego.ui" line="2439"/>
         <source>Cancelar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2269,12 +2289,12 @@ Pulsa Aceptar para cerrar el Asistente
 <context>
     <name>GrLida</name>
     <message>
-        <location filename="../src/grlida.cpp" line="223"/>
+        <location filename="../src/grlida.cpp" line="224"/>
         <source>Error al abrir la Base de Datos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="223"/>
+        <location filename="../src/grlida.cpp" line="224"/>
         <source>No se ha podido establecer una conexiÃ³n con la Base de Datos.
 Esta aplicaciÃ³n necesita soporte de SQLite. Mira la documentaciÃ³n de Qt SQL driver para mÃ¡s informaciÃ³n.
 
@@ -2285,406 +2305,411 @@ Esta aplicación necesita soporte de SQLite. Mira la documentación de Qt SQL dr
 Click Cancelar para salir.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="352"/>
+        <location filename="../src/grlida.cpp" line="353"/>
         <source>Genero sin Clasificar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="355"/>
+        <location filename="../src/grlida.cpp" line="356"/>
         <source>CalificaciÃ³n GrÃ¡ficos</source>
         <translation>Calificación Gráficos</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="357"/>
+        <location filename="../src/grlida.cpp" line="358"/>
         <source>CalificaciÃ³n Sonido</source>
         <translation>Calificación Sonido</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="359"/>
+        <location filename="../src/grlida.cpp" line="360"/>
         <source>CalificaciÃ³n Jugabilidad</source>
         <translation>Calificación Jugabilidad</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="363"/>
+        <location filename="../src/grlida.cpp" line="364"/>
         <source>Juegos Originales</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="365"/>
-        <location filename="../src/grlida.cpp" line="372"/>
+        <location filename="../src/grlida.cpp" line="366"/>
+        <location filename="../src/grlida.cpp" line="373"/>
         <source>No lo son</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="370"/>
+        <location filename="../src/grlida.cpp" line="371"/>
         <source>Juegos Favoritos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="375"/>
-        <location filename="../src/grlida.cpp" line="1120"/>
+        <location filename="../src/grlida.cpp" line="376"/>
+        <location filename="../src/grlida.cpp" line="1121"/>
         <source>CalificaciÃ³n</source>
         <translation>Calificación</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="415"/>
-        <location filename="../src/grlida.cpp" line="417"/>
-        <location filename="../src/grlida.cpp" line="2027"/>
-        <location filename="../src/grlida.cpp" line="2047"/>
-        <location filename="../src/grlida.cpp" line="2068"/>
-        <location filename="../src/grlida.cpp" line="2104"/>
-        <location filename="../src/grlida.cpp" line="2230"/>
-        <location filename="../src/grlida.cpp" line="2632"/>
+        <location filename="../src/grlida.cpp" line="416"/>
+        <location filename="../src/grlida.cpp" line="418"/>
+        <location filename="../src/grlida.cpp" line="2036"/>
+        <location filename="../src/grlida.cpp" line="2056"/>
+        <location filename="../src/grlida.cpp" line="2077"/>
+        <location filename="../src/grlida.cpp" line="2113"/>
+        <location filename="../src/grlida.cpp" line="2239"/>
+        <location filename="../src/grlida.cpp" line="2647"/>
         <source>NÂº Juegos</source>
         <translation>Nº Juegos</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="588"/>
+        <location filename="../src/grlida.cpp" line="589"/>
         <source>Ordenar:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/grlida.cpp" line="594"/>
-        <location filename="../src/grlida.cpp" line="624"/>
-        <source>Por ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="595"/>
         <location filename="../src/grlida.cpp" line="625"/>
-        <source>Titulo</source>
+        <source>Por ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="596"/>
         <location filename="../src/grlida.cpp" line="626"/>
-        <location filename="../src/grlida.cpp" line="1123"/>
-        <source>Subtitulo</source>
+        <source>Titulo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="597"/>
         <location filename="../src/grlida.cpp" line="627"/>
-        <location filename="../src/grlida.cpp" line="1130"/>
-        <source>Genero</source>
+        <location filename="../src/grlida.cpp" line="1124"/>
+        <source>Subtitulo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="598"/>
         <location filename="../src/grlida.cpp" line="628"/>
-        <source>CompaÃ±ia</source>
-        <translation>Compañia</translation>
+        <location filename="../src/grlida.cpp" line="1132"/>
+        <source>Genero</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="599"/>
         <location filename="../src/grlida.cpp" line="629"/>
-        <source>Desarrollador</source>
-        <translation type="unfinished"></translation>
+        <source>CompaÃ±ia</source>
+        <translation>Compañia</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="600"/>
         <location filename="../src/grlida.cpp" line="630"/>
-        <location filename="../src/grlida.cpp" line="707"/>
-        <location filename="../src/grlida.cpp" line="1131"/>
-        <source>Tema</source>
+        <source>Desarrollador</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="601"/>
         <location filename="../src/grlida.cpp" line="631"/>
-        <location filename="../src/grlida.cpp" line="719"/>
-        <location filename="../src/grlida.cpp" line="1128"/>
-        <source>Idioma</source>
+        <location filename="../src/grlida.cpp" line="708"/>
+        <location filename="../src/grlida.cpp" line="1133"/>
+        <source>Tema</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="602"/>
         <location filename="../src/grlida.cpp" line="632"/>
+        <location filename="../src/grlida.cpp" line="720"/>
         <location filename="../src/grlida.cpp" line="1129"/>
-        <source>Formato</source>
+        <source>Idioma</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="603"/>
         <location filename="../src/grlida.cpp" line="633"/>
-        <location filename="../src/grlida.cpp" line="716"/>
-        <source>AÃ±o</source>
-        <translation>Año</translation>
+        <location filename="../src/grlida.cpp" line="1131"/>
+        <source>Formato</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="604"/>
         <location filename="../src/grlida.cpp" line="634"/>
-        <source>NÂº Discos</source>
-        <translation>Nº Discos</translation>
+        <location filename="../src/grlida.cpp" line="717"/>
+        <source>AÃ±o</source>
+        <translation>Año</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="605"/>
         <location filename="../src/grlida.cpp" line="635"/>
-        <source>Sistema OS</source>
-        <translation type="unfinished"></translation>
+        <source>NÂº Discos</source>
+        <translation>Nº Discos</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="606"/>
         <location filename="../src/grlida.cpp" line="636"/>
-        <location filename="../src/grlida.cpp" line="1136"/>
-        <source>GrÃ¡ficos</source>
-        <translation>Gráficos</translation>
+        <source>Sistema OS</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="607"/>
         <location filename="../src/grlida.cpp" line="637"/>
-        <location filename="../src/grlida.cpp" line="1137"/>
-        <source>Sonido</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/grlida.cpp" line="1138"/>
+        <source>GrÃ¡ficos</source>
+        <translation>Gráficos</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="608"/>
         <location filename="../src/grlida.cpp" line="638"/>
-        <location filename="../src/grlida.cpp" line="1138"/>
-        <source>Jugabilidad</source>
+        <location filename="../src/grlida.cpp" line="1139"/>
+        <source>Sonido</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="609"/>
         <location filename="../src/grlida.cpp" line="639"/>
-        <location filename="../src/grlida.cpp" line="1139"/>
-        <source>Original</source>
+        <location filename="../src/grlida.cpp" line="1140"/>
+        <source>Jugabilidad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="610"/>
         <location filename="../src/grlida.cpp" line="640"/>
-        <source>Tipo emulador</source>
+        <location filename="../src/grlida.cpp" line="1141"/>
+        <source>Original</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="611"/>
         <location filename="../src/grlida.cpp" line="641"/>
-        <location filename="../src/grlida.cpp" line="1134"/>
-        <source>Favorito</source>
+        <source>Tipo emulador</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="612"/>
         <location filename="../src/grlida.cpp" line="642"/>
-        <location filename="../src/grlida.cpp" line="1143"/>
+        <location filename="../src/grlida.cpp" line="1136"/>
+        <source>Favorito</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/grlida.cpp" line="613"/>
+        <location filename="../src/grlida.cpp" line="643"/>
+        <location filename="../src/grlida.cpp" line="1145"/>
         <source>Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="618"/>
+        <location filename="../src/grlida.cpp" line="619"/>
         <source>por</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="648"/>
+        <location filename="../src/grlida.cpp" line="649"/>
         <source>Ascendente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="649"/>
+        <location filename="../src/grlida.cpp" line="650"/>
         <source>Descendente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="658"/>
+        <location filename="../src/grlida.cpp" line="659"/>
         <source>Ordenar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="694"/>
+        <location filename="../src/grlida.cpp" line="695"/>
         <source>Todos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="695"/>
+        <location filename="../src/grlida.cpp" line="696"/>
         <source>Favoritos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="696"/>
+        <location filename="../src/grlida.cpp" line="697"/>
         <source>Originales</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="697"/>
+        <location filename="../src/grlida.cpp" line="698"/>
         <source>Tipo Emulador</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="704"/>
+        <location filename="../src/grlida.cpp" line="705"/>
         <source>Generos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="710"/>
+        <location filename="../src/grlida.cpp" line="711"/>
         <source>Desarrolladores</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="713"/>
+        <location filename="../src/grlida.cpp" line="714"/>
         <source>CompaÃ±ias</source>
         <translation>Compañias</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1118"/>
+        <location filename="../src/grlida.cpp" line="1119"/>
         <source>CarÃ¡tula Frontal</source>
         <translation>Carátula Frontal</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1119"/>
+        <location filename="../src/grlida.cpp" line="1120"/>
         <source>Detalles del juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1121"/>
+        <location filename="../src/grlida.cpp" line="1122"/>
         <source>Otros Datos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1122"/>
+        <location filename="../src/grlida.cpp" line="1123"/>
         <source>Subido por</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1124"/>
+        <location filename="../src/grlida.cpp" line="1125"/>
         <source>Publicado por</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1125"/>
+        <location filename="../src/grlida.cpp" line="1126"/>
         <source>Desarrollado por</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1126"/>
+        <location filename="../src/grlida.cpp" line="1127"/>
         <source>Publicado</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1127"/>
+        <location filename="../src/grlida.cpp" line="1128"/>
         <source>Edad recomendada</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1132"/>
+        <location filename="../src/grlida.cpp" line="1130"/>
+        <source>Idioma voces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/grlida.cpp" line="1134"/>
         <source>Perspectiva</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1133"/>
+        <location filename="../src/grlida.cpp" line="1135"/>
         <source>Sistema Operativo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1135"/>
+        <location filename="../src/grlida.cpp" line="1137"/>
         <source>AÃ±adido el</source>
         <translation>Añadido el</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1140"/>
+        <location filename="../src/grlida.cpp" line="1142"/>
         <source>Estado</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1141"/>
+        <location filename="../src/grlida.cpp" line="1143"/>
         <source>Tipo Emu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1142"/>
+        <location filename="../src/grlida.cpp" line="1144"/>
         <source>DescripciÃ³n</source>
         <translation>Descripción</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1399"/>
+        <location filename="../src/grlida.cpp" line="1402"/>
         <source>introducido el</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2187"/>
+        <location filename="../src/grlida.cpp" line="2196"/>
         <source>Porfavor selecciona un Juego de la lista para eliminarlo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2189"/>
+        <location filename="../src/grlida.cpp" line="2198"/>
         <source>Â¿Eliminar Juego...?</source>
         <translation>¿Eliminar Juego...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2189"/>
+        <location filename="../src/grlida.cpp" line="2198"/>
         <source>Â¿Deseas realmente eliminar este juego de la Base de Datos?
 Si es de DOSBox o VDMSound tambien se borrar el archivo de configuraciÃ³n</source>
         <translation>¿Deseas realmente eliminar este juego de la Base de Datos?
 Si es de DOSBox o VDMSound tambien se borrar el archivo de configuración</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2189"/>
+        <location filename="../src/grlida.cpp" line="2198"/>
         <source>Si</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2189"/>
+        <location filename="../src/grlida.cpp" line="2198"/>
         <source>Cancelar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2212"/>
+        <location filename="../src/grlida.cpp" line="2221"/>
         <source>Juego Eliminado correctamente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1373"/>
-        <location filename="../src/grlida.cpp" line="2278"/>
+        <location filename="../src/grlida.cpp" line="1376"/>
+        <location filename="../src/grlida.cpp" line="2290"/>
         <source>ConfiguraciÃ³n del juego no encontrada.</source>
         <translation>Configuración del juego no encontrada.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2407"/>
+        <location filename="../src/grlida.cpp" line="2422"/>
         <source>No esta disponible el ejecutable del emulador.
 Compruebe si lo tiene instalado.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2432"/>
-        <location filename="../src/grlida.cpp" line="2456"/>
+        <location filename="../src/grlida.cpp" line="2447"/>
+        <location filename="../src/grlida.cpp" line="2471"/>
         <source>No se ha podido ejecutar el juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2434"/>
-        <location filename="../src/grlida.cpp" line="2458"/>
+        <location filename="../src/grlida.cpp" line="2449"/>
+        <location filename="../src/grlida.cpp" line="2473"/>
         <source>Solo disponible para SO, Windows (NT/2000/XP)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2462"/>
-        <location filename="../src/grlida.cpp" line="2512"/>
+        <location filename="../src/grlida.cpp" line="2477"/>
+        <location filename="../src/grlida.cpp" line="2527"/>
         <source>No dispones de ninguna configuraciÃ³n</source>
         <translation>No dispones de ninguna configuración</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2464"/>
+        <location filename="../src/grlida.cpp" line="2479"/>
         <source>Porfavor, seleccione un juego de la lista antes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2981"/>
-        <location filename="../src/grlida.cpp" line="2988"/>
-        <location filename="../src/grlida.cpp" line="2990"/>
         <location filename="../src/grlida.cpp" line="2995"/>
-        <location filename="../src/grlida.cpp" line="2997"/>
-        <location filename="../src/grlida.cpp" line="3000"/>
+        <location filename="../src/grlida.cpp" line="3002"/>
+        <location filename="../src/grlida.cpp" line="3004"/>
+        <location filename="../src/grlida.cpp" line="3009"/>
+        <location filename="../src/grlida.cpp" line="3011"/>
+        <location filename="../src/grlida.cpp" line="3014"/>
         <source>Nueva VersiÃ³n</source>
         <translation>Nueva Versión</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2981"/>
+        <location filename="../src/grlida.cpp" line="2995"/>
         <source>Disponible nueva versiÃ³n del GR-lida %1</source>
         <translation>Disponible nueva versión del GR-lida %1</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2997"/>
+        <location filename="../src/grlida.cpp" line="3011"/>
         <source>No hay nuevas actualizaciones disponibles</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2723,8 +2748,8 @@ Compruebe si lo tiene instalado.</source>
     </message>
     <message>
         <location filename="../ui/grlida.ui" line="136"/>
-        <location filename="../ui/grlida.ui" line="1077"/>
-        <location filename="../ui/grlida.ui" line="1392"/>
+        <location filename="../ui/grlida.ui" line="1142"/>
+        <location filename="../ui/grlida.ui" line="1508"/>
         <source>Capturas</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2759,709 +2784,709 @@ Compruebe si lo tiene instalado.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="227"/>
+        <location filename="../ui/grlida.ui" line="231"/>
         <source>Ver Columnas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="257"/>
+        <location filename="../ui/grlida.ui" line="265"/>
         <source>Barra de Herramientas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="294"/>
+        <location filename="../ui/grlida.ui" line="302"/>
         <source>Barra Ordenar lista</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="320"/>
+        <location filename="../ui/grlida.ui" line="328"/>
         <source>Datos del juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="354"/>
+        <location filename="../ui/grlida.ui" line="362"/>
         <source>Dispone de Archivos / Carátulas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="419"/>
+        <location filename="../ui/grlida.ui" line="427"/>
         <source>Archivos y Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="446"/>
+        <location filename="../ui/grlida.ui" line="454"/>
         <source>Capturas de Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="474"/>
-        <location filename="../ui/grlida.ui" line="520"/>
+        <location filename="../ui/grlida.ui" line="482"/>
+        <location filename="../ui/grlida.ui" line="528"/>
         <source>Archivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="479"/>
-        <location filename="../ui/grlida.ui" line="525"/>
+        <location filename="../ui/grlida.ui" line="487"/>
+        <location filename="../ui/grlida.ui" line="533"/>
         <source>path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="492"/>
+        <location filename="../ui/grlida.ui" line="500"/>
         <source>Capturas de Sonidos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="538"/>
+        <location filename="../ui/grlida.ui" line="546"/>
         <source>Ver URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="566"/>
+        <location filename="../ui/grlida.ui" line="574"/>
         <source>Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="571"/>
-        <location filename="../ui/grlida.ui" line="625"/>
+        <location filename="../ui/grlida.ui" line="579"/>
+        <location filename="../ui/grlida.ui" line="633"/>
         <source>Descripción</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="584"/>
+        <location filename="../ui/grlida.ui" line="592"/>
         <source>Ver Archivos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="615"/>
+        <location filename="../ui/grlida.ui" line="623"/>
         <source>Nombre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="620"/>
+        <location filename="../ui/grlida.ui" line="628"/>
         <source>CRC32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="630"/>
+        <location filename="../ui/grlida.ui" line="638"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="635"/>
+        <location filename="../ui/grlida.ui" line="643"/>
         <source>Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="652"/>
-        <location filename="../ui/grlida.ui" line="1476"/>
+        <location filename="../ui/grlida.ui" line="660"/>
+        <location filename="../ui/grlida.ui" line="1610"/>
         <source>Nav Categorias</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="678"/>
+        <location filename="../ui/grlida.ui" line="686"/>
         <source>Categorias</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="691"/>
-        <location filename="../ui/grlida.ui" line="1062"/>
+        <location filename="../ui/grlida.ui" line="699"/>
+        <location filename="../ui/grlida.ui" line="1124"/>
         <source>PictureFlow</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="723"/>
+        <location filename="../ui/grlida.ui" line="731"/>
         <source>Información</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="726"/>
+        <location filename="../ui/grlida.ui" line="734"/>
         <source>Muestra Información sobre la Base de Datos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="735"/>
-        <location filename="../ui/grlida.ui" line="1161"/>
-        <location filename="../ui/grlida.ui" line="1164"/>
-        <location filename="../ui/grlida.ui" line="1167"/>
+        <location filename="../ui/grlida.ui" line="746"/>
+        <location filename="../ui/grlida.ui" line="1241"/>
+        <location filename="../ui/grlida.ui" line="1244"/>
+        <location filename="../ui/grlida.ui" line="1247"/>
         <source>Cerrar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="738"/>
-        <location filename="../ui/grlida.ui" line="1170"/>
+        <location filename="../ui/grlida.ui" line="749"/>
+        <location filename="../ui/grlida.ui" line="1250"/>
         <source>Cerrar el GR-lida</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="741"/>
+        <location filename="../ui/grlida.ui" line="752"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="750"/>
-        <location filename="../ui/grlida.ui" line="1179"/>
+        <location filename="../ui/grlida.ui" line="764"/>
+        <location filename="../ui/grlida.ui" line="1262"/>
         <source>Nuevo con DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="753"/>
-        <location filename="../ui/grlida.ui" line="888"/>
-        <location filename="../ui/grlida.ui" line="1182"/>
+        <location filename="../ui/grlida.ui" line="767"/>
+        <location filename="../ui/grlida.ui" line="923"/>
+        <location filename="../ui/grlida.ui" line="1265"/>
         <source>DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="756"/>
+        <location filename="../ui/grlida.ui" line="770"/>
         <source>Nuevo Juego con DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="759"/>
-        <location filename="../ui/grlida.ui" line="1188"/>
+        <location filename="../ui/grlida.ui" line="773"/>
+        <location filename="../ui/grlida.ui" line="1271"/>
         <source>Nuevo Juego para el emulador DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="762"/>
+        <location filename="../ui/grlida.ui" line="776"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="771"/>
-        <location filename="../ui/grlida.ui" line="1197"/>
+        <location filename="../ui/grlida.ui" line="788"/>
+        <location filename="../ui/grlida.ui" line="1283"/>
         <source>Nuevo con ScummVM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="774"/>
-        <location filename="../ui/grlida.ui" line="909"/>
-        <location filename="../ui/grlida.ui" line="1200"/>
+        <location filename="../ui/grlida.ui" line="791"/>
+        <location filename="../ui/grlida.ui" line="947"/>
+        <location filename="../ui/grlida.ui" line="1286"/>
         <source>ScummVM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="777"/>
-        <location filename="../ui/grlida.ui" line="1203"/>
+        <location filename="../ui/grlida.ui" line="794"/>
+        <location filename="../ui/grlida.ui" line="1289"/>
         <source>Nuevo Juego ScummVM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="780"/>
-        <location filename="../ui/grlida.ui" line="1206"/>
+        <location filename="../ui/grlida.ui" line="797"/>
+        <location filename="../ui/grlida.ui" line="1292"/>
         <source>Nuevo Juego para el emulador ScummVM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="783"/>
+        <location filename="../ui/grlida.ui" line="800"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="792"/>
-        <location filename="../ui/grlida.ui" line="1215"/>
+        <location filename="../ui/grlida.ui" line="812"/>
+        <location filename="../ui/grlida.ui" line="1304"/>
         <source>Nuevo con VDMSound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="795"/>
-        <location filename="../ui/grlida.ui" line="1218"/>
+        <location filename="../ui/grlida.ui" line="815"/>
+        <location filename="../ui/grlida.ui" line="1307"/>
         <source>VDMSound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="798"/>
-        <location filename="../ui/grlida.ui" line="1221"/>
+        <location filename="../ui/grlida.ui" line="818"/>
+        <location filename="../ui/grlida.ui" line="1310"/>
         <source>Nuevo Juego VDMSound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="801"/>
-        <location filename="../ui/grlida.ui" line="1224"/>
+        <location filename="../ui/grlida.ui" line="821"/>
+        <location filename="../ui/grlida.ui" line="1313"/>
         <source>Nuevo Juego para el emulador VDMSound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="804"/>
+        <location filename="../ui/grlida.ui" line="824"/>
         <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="813"/>
-        <location filename="../ui/grlida.ui" line="1269"/>
-        <location filename="../ui/grlida.ui" line="1275"/>
+        <location filename="../ui/grlida.ui" line="836"/>
+        <location filename="../ui/grlida.ui" line="1367"/>
+        <location filename="../ui/grlida.ui" line="1373"/>
         <source>Nuevo Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="816"/>
-        <location filename="../ui/grlida.ui" line="1272"/>
+        <location filename="../ui/grlida.ui" line="839"/>
+        <location filename="../ui/grlida.ui" line="1370"/>
         <source>Nuevo</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="819"/>
-        <location filename="../ui/grlida.ui" line="1278"/>
+        <location filename="../ui/grlida.ui" line="842"/>
+        <location filename="../ui/grlida.ui" line="1376"/>
         <source>Añade un nuevo Juego a la lista</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="822"/>
+        <location filename="../ui/grlida.ui" line="845"/>
         <source>Ins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="831"/>
-        <location filename="../ui/grlida.ui" line="1290"/>
-        <location filename="../ui/grlida.ui" line="1296"/>
+        <location filename="../ui/grlida.ui" line="857"/>
+        <location filename="../ui/grlida.ui" line="1391"/>
+        <location filename="../ui/grlida.ui" line="1397"/>
         <source>Editar Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="834"/>
-        <location filename="../ui/grlida.ui" line="1293"/>
+        <location filename="../ui/grlida.ui" line="860"/>
+        <location filename="../ui/grlida.ui" line="1394"/>
         <source>Editar</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="837"/>
-        <location filename="../ui/grlida.ui" line="1299"/>
+        <location filename="../ui/grlida.ui" line="863"/>
+        <location filename="../ui/grlida.ui" line="1400"/>
         <source>Edita los datos del Juego asi como la configuración del emulador</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="840"/>
+        <location filename="../ui/grlida.ui" line="866"/>
         <source>Shift+Ins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="849"/>
-        <location filename="../ui/grlida.ui" line="1308"/>
-        <location filename="../ui/grlida.ui" line="1314"/>
+        <location filename="../ui/grlida.ui" line="878"/>
+        <location filename="../ui/grlida.ui" line="1412"/>
+        <location filename="../ui/grlida.ui" line="1418"/>
         <source>Eliminar Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="852"/>
-        <location filename="../ui/grlida.ui" line="1317"/>
+        <location filename="../ui/grlida.ui" line="881"/>
+        <location filename="../ui/grlida.ui" line="1421"/>
         <source>Elimina un Juego de la lista</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="855"/>
+        <location filename="../ui/grlida.ui" line="884"/>
         <source>Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="870"/>
+        <location filename="../ui/grlida.ui" line="902"/>
         <source>Marcar como Favorito</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="873"/>
+        <location filename="../ui/grlida.ui" line="905"/>
         <source>Favorito</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="876"/>
+        <location filename="../ui/grlida.ui" line="908"/>
         <source>Marca o quita un juego seleccionado como Favorito</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="885"/>
-        <location filename="../ui/grlida.ui" line="891"/>
+        <location filename="../ui/grlida.ui" line="920"/>
+        <location filename="../ui/grlida.ui" line="926"/>
         <source>Ejecuta DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="894"/>
+        <location filename="../ui/grlida.ui" line="929"/>
         <source>Ejecuta el emulador DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="897"/>
+        <location filename="../ui/grlida.ui" line="932"/>
         <source>Shift+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="906"/>
-        <location filename="../ui/grlida.ui" line="912"/>
+        <location filename="../ui/grlida.ui" line="944"/>
+        <location filename="../ui/grlida.ui" line="950"/>
         <source>Ejecuta ScummVM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="915"/>
+        <location filename="../ui/grlida.ui" line="953"/>
         <source>Ejecuta el emulador ScummVM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="918"/>
+        <location filename="../ui/grlida.ui" line="956"/>
         <source>Shift+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="927"/>
-        <location filename="../ui/grlida.ui" line="933"/>
-        <location filename="../ui/grlida.ui" line="1233"/>
-        <location filename="../ui/grlida.ui" line="1239"/>
+        <location filename="../ui/grlida.ui" line="968"/>
+        <location filename="../ui/grlida.ui" line="974"/>
+        <location filename="../ui/grlida.ui" line="1325"/>
+        <location filename="../ui/grlida.ui" line="1331"/>
         <source>Ejecutar Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="930"/>
-        <location filename="../ui/grlida.ui" line="1236"/>
+        <location filename="../ui/grlida.ui" line="971"/>
+        <location filename="../ui/grlida.ui" line="1328"/>
         <source>Ejecutar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="936"/>
-        <location filename="../ui/grlida.ui" line="1242"/>
+        <location filename="../ui/grlida.ui" line="977"/>
+        <location filename="../ui/grlida.ui" line="1334"/>
         <source>Ejecuta un Juego con el emulador correspondiente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="939"/>
+        <location filename="../ui/grlida.ui" line="980"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="948"/>
-        <location filename="../ui/grlida.ui" line="1254"/>
+        <location filename="../ui/grlida.ui" line="992"/>
+        <location filename="../ui/grlida.ui" line="1349"/>
         <source>Ejecutar el Setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="951"/>
-        <location filename="../ui/grlida.ui" line="1257"/>
+        <location filename="../ui/grlida.ui" line="995"/>
+        <location filename="../ui/grlida.ui" line="1352"/>
         <source>Setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="954"/>
-        <location filename="../ui/grlida.ui" line="1260"/>
+        <location filename="../ui/grlida.ui" line="998"/>
+        <location filename="../ui/grlida.ui" line="1355"/>
         <source>Ejecuta el Setup del Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="963"/>
-        <location filename="../ui/grlida.ui" line="1326"/>
+        <location filename="../ui/grlida.ui" line="1010"/>
+        <location filename="../ui/grlida.ui" line="1433"/>
         <source>Importar Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="966"/>
-        <location filename="../ui/grlida.ui" line="1332"/>
+        <location filename="../ui/grlida.ui" line="1013"/>
+        <location filename="../ui/grlida.ui" line="1439"/>
         <source>Importa los datos de un Juego via web</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="969"/>
-        <location filename="../ui/grlida.ui" line="1632"/>
+        <location filename="../ui/grlida.ui" line="1016"/>
+        <location filename="../ui/grlida.ui" line="1814"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="978"/>
+        <location filename="../ui/grlida.ui" line="1028"/>
         <source>Exportar Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="981"/>
+        <location filename="../ui/grlida.ui" line="1031"/>
         <source>Exporta los datos de configuración del Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="990"/>
-        <location filename="../ui/grlida.ui" line="993"/>
-        <location filename="../ui/grlida.ui" line="1407"/>
-        <location filename="../ui/grlida.ui" line="1410"/>
+        <location filename="../ui/grlida.ui" line="1043"/>
+        <location filename="../ui/grlida.ui" line="1046"/>
+        <location filename="../ui/grlida.ui" line="1526"/>
+        <location filename="../ui/grlida.ui" line="1529"/>
         <source>Opciones</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="996"/>
-        <location filename="../ui/grlida.ui" line="1413"/>
+        <location filename="../ui/grlida.ui" line="1049"/>
+        <location filename="../ui/grlida.ui" line="1532"/>
         <source>Opciones del GR-lida</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="999"/>
-        <location filename="../ui/grlida.ui" line="1416"/>
+        <location filename="../ui/grlida.ui" line="1052"/>
+        <location filename="../ui/grlida.ui" line="1535"/>
         <source>Opciones de Configuración del GR-lida</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1011"/>
-        <location filename="../ui/grlida.ui" line="1344"/>
-        <location filename="../ui/grlida.ui" line="1350"/>
+        <location filename="../ui/grlida.ui" line="1067"/>
+        <location filename="../ui/grlida.ui" line="1454"/>
+        <location filename="../ui/grlida.ui" line="1460"/>
         <source>Ver Archivos y URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1014"/>
-        <location filename="../ui/grlida.ui" line="1347"/>
+        <location filename="../ui/grlida.ui" line="1070"/>
+        <location filename="../ui/grlida.ui" line="1457"/>
         <source>Archivos_URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1017"/>
-        <location filename="../ui/grlida.ui" line="1353"/>
+        <location filename="../ui/grlida.ui" line="1073"/>
+        <location filename="../ui/grlida.ui" line="1463"/>
         <source>Muestra los Archivos y URL del Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1020"/>
+        <location filename="../ui/grlida.ui" line="1076"/>
         <source>F5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1035"/>
-        <location filename="../ui/grlida.ui" line="1041"/>
-        <location filename="../ui/grlida.ui" line="1368"/>
+        <location filename="../ui/grlida.ui" line="1094"/>
+        <location filename="../ui/grlida.ui" line="1100"/>
+        <location filename="../ui/grlida.ui" line="1481"/>
         <source>Ver Datos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1038"/>
-        <location filename="../ui/grlida.ui" line="1371"/>
+        <location filename="../ui/grlida.ui" line="1097"/>
+        <location filename="../ui/grlida.ui" line="1484"/>
         <source>Datos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1044"/>
-        <location filename="../ui/grlida.ui" line="1374"/>
+        <location filename="../ui/grlida.ui" line="1103"/>
+        <location filename="../ui/grlida.ui" line="1487"/>
         <source>Muestra los datos del Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1047"/>
+        <location filename="../ui/grlida.ui" line="1106"/>
         <source>F6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1074"/>
-        <location filename="../ui/grlida.ui" line="1389"/>
-        <location filename="../ui/grlida.ui" line="1395"/>
+        <location filename="../ui/grlida.ui" line="1139"/>
+        <location filename="../ui/grlida.ui" line="1505"/>
+        <location filename="../ui/grlida.ui" line="1511"/>
         <source>Ver Capturas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1080"/>
-        <location filename="../ui/grlida.ui" line="1398"/>
+        <location filename="../ui/grlida.ui" line="1145"/>
+        <location filename="../ui/grlida.ui" line="1514"/>
         <source>Muestra las Capturas del Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1083"/>
+        <location filename="../ui/grlida.ui" line="1148"/>
         <source>F7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1095"/>
+        <location filename="../ui/grlida.ui" line="1163"/>
         <source>Ver Ordenar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1098"/>
+        <location filename="../ui/grlida.ui" line="1166"/>
         <source>Ordenar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1101"/>
+        <location filename="../ui/grlida.ui" line="1169"/>
         <source>Ordena la lista de juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1104"/>
+        <location filename="../ui/grlida.ui" line="1172"/>
         <source>F10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1119"/>
+        <location filename="../ui/grlida.ui" line="1190"/>
         <source>Ver Barra de Herramientas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1122"/>
+        <location filename="../ui/grlida.ui" line="1193"/>
         <source>Herramientas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1125"/>
+        <location filename="../ui/grlida.ui" line="1196"/>
         <source>F8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1134"/>
-        <location filename="../ui/grlida.ui" line="1137"/>
+        <location filename="../ui/grlida.ui" line="1208"/>
+        <location filename="../ui/grlida.ui" line="1211"/>
         <source>Ayuda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1140"/>
+        <location filename="../ui/grlida.ui" line="1214"/>
         <source>Muestra la Ayuda del GR-lida</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1143"/>
+        <location filename="../ui/grlida.ui" line="1217"/>
         <source>F1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1152"/>
-        <location filename="../ui/grlida.ui" line="1425"/>
-        <location filename="../ui/grlida.ui" line="1431"/>
+        <location filename="../ui/grlida.ui" line="1229"/>
+        <location filename="../ui/grlida.ui" line="1547"/>
+        <location filename="../ui/grlida.ui" line="1553"/>
         <source>Acerca de...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1185"/>
+        <location filename="../ui/grlida.ui" line="1268"/>
         <source>Nuevo Juego DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1311"/>
+        <location filename="../ui/grlida.ui" line="1415"/>
         <source>Eliminar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1329"/>
+        <location filename="../ui/grlida.ui" line="1436"/>
         <source>Importar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1428"/>
+        <location filename="../ui/grlida.ui" line="1550"/>
         <source>AcercaD</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="1434"/>
+        <location filename="../ui/grlida.ui" line="1556"/>
         <source>Muestra información acerca del GR-lida</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1443"/>
+        <location filename="../ui/grlida.ui" line="1568"/>
         <source>Mi&amp;nimizar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1452"/>
+        <location filename="../ui/grlida.ui" line="1580"/>
         <source>Ma&amp;ximizar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1461"/>
+        <location filename="../ui/grlida.ui" line="1592"/>
         <source>&amp;Restaurar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1485"/>
+        <location filename="../ui/grlida.ui" line="1622"/>
         <source>Carpeta configuraciones DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1494"/>
+        <location filename="../ui/grlida.ui" line="1634"/>
         <source>Carpeta configuraciones VDMSound</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="1503"/>
+        <location filename="../ui/grlida.ui" line="1646"/>
         <source>Carpeta de Carátulas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1512"/>
+        <location filename="../ui/grlida.ui" line="1658"/>
         <source>Carpeta de los Datos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1521"/>
+        <location filename="../ui/grlida.ui" line="1670"/>
         <source>Carpeta de Iconos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1530"/>
+        <location filename="../ui/grlida.ui" line="1682"/>
         <source>Carpeta de Idiomas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1539"/>
+        <location filename="../ui/grlida.ui" line="1694"/>
         <source>Carpeta de Emoticones</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1548"/>
+        <location filename="../ui/grlida.ui" line="1706"/>
         <source>Carpeta de Themes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1557"/>
+        <location filename="../ui/grlida.ui" line="1718"/>
         <source>Carpeta de Thumbs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1566"/>
+        <location filename="../ui/grlida.ui" line="1730"/>
         <source>Carpeta de Templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1575"/>
+        <location filename="../ui/grlida.ui" line="1742"/>
         <source>Carpeta Temporal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1584"/>
+        <location filename="../ui/grlida.ui" line="1754"/>
         <source>Carpeta de Scripts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1593"/>
+        <location filename="../ui/grlida.ui" line="1766"/>
         <source>Carpeta Principal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1608"/>
+        <location filename="../ui/grlida.ui" line="1784"/>
         <source>Ver Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1617"/>
+        <location filename="../ui/grlida.ui" line="1796"/>
         <source>Buscar actualizaciones...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1626"/>
+        <location filename="../ui/grlida.ui" line="1808"/>
         <source>Instalar Juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/grlida.ui" line="1629"/>
+        <location filename="../ui/grlida.ui" line="1811"/>
         <source>Prepara el DOSBox para poder Instalar un juego de forma facil</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="1644"/>
+        <location filename="../ui/grlida.ui" line="1829"/>
         <source>Lista modo Carátulas</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="1653"/>
-        <location filename="../ui/grlida.ui" line="1656"/>
+        <location filename="../ui/grlida.ui" line="1841"/>
+        <location filename="../ui/grlida.ui" line="1844"/>
         <source>Reconstruir todas las carátulas</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="1665"/>
-        <location filename="../ui/grlida.ui" line="1668"/>
+        <location filename="../ui/grlida.ui" line="1856"/>
+        <location filename="../ui/grlida.ui" line="1859"/>
         <source>Reconstruir carátula</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="1680"/>
+        <location filename="../ui/grlida.ui" line="1874"/>
         <source>Ver Compañia</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/grlida.ui" line="1692"/>
+        <location filename="../ui/grlida.ui" line="1889"/>
         <source>Ver Año</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3581,82 +3606,82 @@ Compruebe si lo tiene instalado.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="169"/>
+        <location filename="../ui/image_viewer.ui" line="172"/>
         <source>Im&amp;primir...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="172"/>
+        <location filename="../ui/image_viewer.ui" line="175"/>
         <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="181"/>
+        <location filename="../ui/image_viewer.ui" line="187"/>
         <source>&amp;Salir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="184"/>
+        <location filename="../ui/image_viewer.ui" line="190"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="196"/>
+        <location filename="../ui/image_viewer.ui" line="205"/>
         <source>Zoom &amp;In (25%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="199"/>
+        <location filename="../ui/image_viewer.ui" line="208"/>
         <source>Ctrl++</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="211"/>
+        <location filename="../ui/image_viewer.ui" line="223"/>
         <source>Zoom &amp;Out (25%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="214"/>
+        <location filename="../ui/image_viewer.ui" line="226"/>
         <source>Ctrl+-</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/image_viewer.ui" line="226"/>
+        <location filename="../ui/image_viewer.ui" line="241"/>
         <source>Tamaño &amp;Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="229"/>
+        <location filename="../ui/image_viewer.ui" line="244"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="244"/>
+        <location filename="../ui/image_viewer.ui" line="262"/>
         <source>&amp;Fit to Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="247"/>
+        <location filename="../ui/image_viewer.ui" line="265"/>
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="259"/>
+        <location filename="../ui/image_viewer.ui" line="280"/>
         <source>Imagen anterior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="271"/>
+        <location filename="../ui/image_viewer.ui" line="295"/>
         <source>Siguiente imagen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="286"/>
+        <location filename="../ui/image_viewer.ui" line="313"/>
         <source>Ver &amp;lista imagenes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/image_viewer.ui" line="289"/>
+        <location filename="../ui/image_viewer.ui" line="316"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3972,47 +3997,47 @@ Compruebe si lo tiene instalado.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/multimedia.ui" line="111"/>
+        <location filename="../ui/multimedia.ui" line="114"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/multimedia.ui" line="120"/>
+        <location filename="../ui/multimedia.ui" line="126"/>
         <source>Anterior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/multimedia.ui" line="129"/>
+        <location filename="../ui/multimedia.ui" line="138"/>
         <source>Rebobinar atras</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/multimedia.ui" line="138"/>
+        <location filename="../ui/multimedia.ui" line="150"/>
         <source>Rebobinar adelante</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/multimedia.ui" line="147"/>
+        <location filename="../ui/multimedia.ui" line="162"/>
         <source>Siguiente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/multimedia.ui" line="156"/>
+        <location filename="../ui/multimedia.ui" line="174"/>
         <source>Abrir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/multimedia.ui" line="168"/>
+        <location filename="../ui/multimedia.ui" line="189"/>
         <source>Aleatorio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/multimedia.ui" line="180"/>
+        <location filename="../ui/multimedia.ui" line="204"/>
         <source>Mute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/multimedia.ui" line="189"/>
+        <location filename="../ui/multimedia.ui" line="216"/>
         <source>Opciones</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4309,7 +4334,7 @@ Compruebe si lo tiene instalado.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/funciones.cpp" line="2099"/>
+        <location filename="../src/funciones.cpp" line="2126"/>
         <source>ConfiguraciÃ³n por Defecto</source>
         <translation>Configuración por Defecto</translation>
     </message>
@@ -4332,9 +4357,10 @@ Compruebe si lo tiene instalado.</source>
         <location filename="../src/main.cpp" line="143"/>
         <location filename="../src/main.cpp" line="148"/>
         <location filename="../src/main.cpp" line="153"/>
-        <location filename="../src/main.cpp" line="162"/>
-        <location filename="../src/main.cpp" line="166"/>
-        <location filename="../src/main.cpp" line="170"/>
+        <location filename="../src/main.cpp" line="158"/>
+        <location filename="../src/main.cpp" line="167"/>
+        <location filename="../src/main.cpp" line="171"/>
+        <location filename="../src/main.cpp" line="175"/>
         <source>Iniciando:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4425,21 +4451,26 @@ Compruebe si lo tiene instalado.</source>
     </message>
     <message>
         <location filename="../src/main.cpp" line="153"/>
+        <source>Comprobando carpeta Capturas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="158"/>
         <source>Comprobando carpeta Temp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="162"/>
+        <location filename="../src/main.cpp" line="167"/>
         <source>Cargando ConfiguraciÃ³n de la Base de Datos...</source>
         <translation>Cargando Configuración de la Base de Datos...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="166"/>
+        <location filename="../src/main.cpp" line="171"/>
         <source>Comprobando archivos de Datos...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="170"/>
+        <location filename="../src/main.cpp" line="175"/>
         <source>Cargando Base de Datos...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4924,25 +4955,25 @@ Pulsa Aceptar para cerrar el Asistente
 <context>
     <name>frmAddEditDosBox</name>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="886"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="921"/>
         <source>Guardar archivo como...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="886"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="911"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="924"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="950"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="963"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1328"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1334"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1340"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="921"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="946"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="959"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="985"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="998"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1363"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1369"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1375"/>
         <source>Todos los archivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/grlida_addedit_dosbox.cpp" line="66"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="894"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="929"/>
         <source>El archivo de ConfiguraciÃ³n para el DOSBox ya esixte</source>
         <translation>El archivo de Configuración para el DOSBox ya esixte</translation>
     </message>
@@ -4957,43 +4988,43 @@ Pulsa Aceptar para cerrar el Asistente
         <translation>Debes indicar el archivo de Configuración para el</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="911"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="924"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="950"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="963"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1328"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1334"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1340"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="946"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="959"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="985"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="998"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1363"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1369"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1375"/>
         <source>Selecciona un archivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="937"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="976"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="989"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1310"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1316"/>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1322"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="972"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1011"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1024"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1345"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1351"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1357"/>
         <source>Selecciona el directorio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1152"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1187"/>
         <source>Â¿Eliminar Juego...?</source>
         <translation>¿Eliminar Juego...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1152"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1187"/>
         <source>Â¿Deseas eliminar este montaje?</source>
         <translation>¿Deseas eliminar este montaje?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1152"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1187"/>
         <source>Si</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_dosbox.cpp" line="1152"/>
+        <location filename="../src/grlida_addedit_dosbox.cpp" line="1187"/>
         <source>Cancelar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5001,122 +5032,122 @@ Pulsa Aceptar para cerrar el Asistente
 <context>
     <name>frmAddEditJuego</name>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="194"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="195"/>
         <source>Datos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="195"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="196"/>
         <source>DOSBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="196"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="197"/>
         <source>ScummVM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="197"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="198"/>
         <source>VDMSound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="259"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1287"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="261"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1329"/>
         <source>Documentos - Manuales</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="260"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1290"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="262"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1332"/>
         <source>Ruleta de protecciÃ³n</source>
         <translation>Ruleta de protección</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="261"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="263"/>
         <source>Cualquier archivos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="264"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="265"/>
         <location filename="../src/grlida_addedit_juego.cpp" line="266"/>
         <location filename="../src/grlida_addedit_juego.cpp" line="267"/>
         <location filename="../src/grlida_addedit_juego.cpp" line="268"/>
         <location filename="../src/grlida_addedit_juego.cpp" line="269"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="270"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="271"/>
         <source>Puntos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="342"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="345"/>
         <source>Editando a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="345"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="348"/>
         <source>AÃ±adiendo un nuevo juego</source>
         <translation>Añadiendo un nuevo juego</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="367"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="370"/>
         <source>Debes poner un Titulo al juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="773"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="795"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="817"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1268"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1299"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="814"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="836"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="858"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1310"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1341"/>
         <source>Selecciona un archivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="774"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="796"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="818"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="815"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="837"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="859"/>
         <source>Imagenes Soportadas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="775"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="797"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="819"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1268"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1293"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1296"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="816"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="838"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="860"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1310"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1335"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1338"/>
         <source>Todos los archivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1242"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1284"/>
         <source>Â¿Eliminar url...?</source>
         <translation>¿Eliminar url...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1242"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1284"/>
         <source>Â¿Deseas eliminar esta url?</source>
         <translation>¿Eliminar url...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1242"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1440"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1284"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1482"/>
         <source>Si</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1242"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1440"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1284"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1482"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1440"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1482"/>
         <source>Â¿Eliminar Archivo...?</source>
         <translation>¿Eliminar url...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1440"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1482"/>
         <source>Â¿Deseas eliminar esta Archivo?</source>
         <translation>¿Eliminar url...?</translation>
     </message>
@@ -5367,45 +5398,45 @@ Pulsa Aceptar para cerrar el Asistente
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="537"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="541"/>
         <source>Debes poner por lo menos el titulo.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="799"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="806"/>
         <source>Guardar archivo como...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="799"/>
-        <location filename="../src/grlida_dbxadd.cpp" line="820"/>
-        <location filename="../src/grlida_dbxadd.cpp" line="833"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="806"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="827"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="840"/>
         <source>Todos los archivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="820"/>
-        <location filename="../src/grlida_dbxadd.cpp" line="833"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="827"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="840"/>
         <source>Selecciona un archivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="938"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="945"/>
         <source>Â¿Eliminar Juego...?</source>
         <translation>¿Eliminar Juego...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="938"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="945"/>
         <source>Â¿Deseas eliminar este montaje?</source>
         <translation>¿Deseas eliminar este montaje?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="938"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="945"/>
         <source>Si</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_dbxadd.cpp" line="938"/>
+        <location filename="../src/grlida_dbxadd.cpp" line="945"/>
         <source>Cancelar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5619,17 +5650,17 @@ Pulsa Aceptar para cerrar el Asistente
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="561"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="562"/>
         <source>Selecciona un archivo para importarlo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="561"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="562"/>
         <source>Soportados</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="561"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="562"/>
         <source>Todos los archivo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6034,13 +6065,13 @@ Compruebe si lo tiene instalado.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_svmadd.cpp" line="307"/>
+        <location filename="../src/grlida_svmadd.cpp" line="308"/>
         <source>Debes poner por lo menos el titulo.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_svmadd.cpp" line="384"/>
-        <location filename="../src/grlida_svmadd.cpp" line="397"/>
+        <location filename="../src/grlida_svmadd.cpp" line="386"/>
+        <location filename="../src/grlida_svmadd.cpp" line="399"/>
         <source>Selecciona el directorio del Juego</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6053,41 +6084,41 @@ Compruebe si lo tiene instalado.</source>
 <context>
     <name>frmVdmsAdd</name>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="146"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="147"/>
         <source>Debes poner por lo menos el titulo.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="153"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="154"/>
         <source>Debes indicar el archivo de ConfiguraciÃ³n para el VDMSound</source>
         <translation>Debes indicar el archivo de Configuración para el VDMSound</translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="159"/>
-        <location filename="../src/grlida_vdmsadd.cpp" line="243"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="160"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="245"/>
         <source>El archivo de ConfiguraciÃ³n para el VDMSound ya esixte</source>
         <translation>El archivo de Configuración para el VDMSound ya esixte</translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="165"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="166"/>
         <source>Debes indicar el Ejecutable del juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="230"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="232"/>
         <source>Guardar archivo como...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="230"/>
-        <location filename="../src/grlida_vdmsadd.cpp" line="251"/>
-        <location filename="../src/grlida_vdmsadd.cpp" line="264"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="232"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="253"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="266"/>
         <source>Todos los archivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grlida_vdmsadd.cpp" line="251"/>
-        <location filename="../src/grlida_vdmsadd.cpp" line="264"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="253"/>
+        <location filename="../src/grlida_vdmsadd.cpp" line="266"/>
         <source>Selecciona un archivo</source>
         <translation type="unfinished"></translation>
     </message>
