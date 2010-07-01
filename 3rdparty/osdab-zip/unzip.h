@@ -86,7 +86,7 @@ public:
 		File, Directory
 	};
 
-	typedef struct ZipEntry
+	struct ZipEntry
 	{
 		ZipEntry();
 
