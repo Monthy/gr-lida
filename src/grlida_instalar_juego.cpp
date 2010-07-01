@@ -136,7 +136,7 @@ void frmInstalarJuego::on_btnOk()
 				lista_multiple_iso.clear();
 				for( int i = 0; i < ui.lwOrigenMultiPath->count(); ++i )
 				{
-					if(i = 0)
+					if(i == 0)
 						lista_multiple_iso << "\""+fGrl.getShortPathName( ui.lwOrigenMultiPath->item(i)->text() )+"\"";
 					else
 						lista_multiple_iso << "\""+ ui.lwOrigenMultiPath->item(i)->text() +"\"";
