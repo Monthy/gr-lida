@@ -28,7 +28,12 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtGui>
-#include <phonon>
+
+#include <phonon/audiooutput.h>
+#include <phonon/mediaobject.h>
+#include <phonon/seekslider.h>
+#include <phonon/videowidget.h>
+#include <phonon/volumeslider.h>
 
 #include "funciones.h"
 #include "ui_multimedia.h"
