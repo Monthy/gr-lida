@@ -106,8 +106,8 @@ int Funciones::StrToInt(QString text)
 // Convierte Texto "true", "yes", "1" a tipo Bool
 bool Funciones::StrToBool(QString text)
 {
-	text.toLower();
-	if( text == "true" || text == "yes" || text == "1" )
+	QString str = text.toLower();
+	if( str == "true" || str == "yes" || str == "1" )
 		return true;
 	else
 		return false;
@@ -243,7 +243,8 @@ QString Funciones::getIconMount(QString tipoDrive, QString select_mount)
 QString Funciones::GRlidaHomePath()
 {
 	QDir dirGrl;
-	QString dirhomepath, dirApp, dirDb, fileDb;
+	QString dirhomepath, dirApp, fileDb;
+	bool isWinOrMac = false;
 	dirhomepath.clear();
 	dirApp.clear();
 
@@ -259,7 +260,16 @@ QString Funciones::GRlidaHomePath()
 	if( dirApp == "currentpath" )
 		dirhomepath = QDir::currentPath()+"/";
 	else {
-		#ifdef Q_OS_WIN32 | Q_OS_MAC //Q_WS_WIN
+		#ifdef Q_OS_WIN32
+			isWinOrMac = true;
+		#elif Q_OS_MAC
+			isWinOrMac = true;
+		#else
+			isWinOrMac = false;
+		#endif
+
+		if( isWinOrMac )
+		{
 			dirhomepath = QDir::homePath()+"/GR-lida/";
 
 			if(dirGrl.exists(QDir::homePath()+"/.gr-lida/"))
@@ -274,9 +284,8 @@ QString Funciones::GRlidaHomePath()
 				QFileInfo info_db(fileDb);
 				GuardarKeyGRLConfig(dirhomepath+"GR-lida.conf", "SqlDatabase", "db_host", dirhomepath+info_db.fileName());
 			}
-		#else
+		} else
 			dirhomepath = QDir::homePath()+"/.gr-lida/";
-		#endif
 	}
 
 	return dirhomepath;
