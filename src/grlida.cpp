@@ -1257,8 +1257,10 @@ void GrLida::showPopup(const QPoint & aPosition)
 	ljMenuPopUp->addAction(ui.mnu_edit_favorito);
 
 // Muestra popupmenu
-//	ljMenuPopUp->exec(ui.twJuegos->mapToGlobal(aPosition));
-	ljMenuPopUp->exec(QCursor::pos());
+	if( ui.mnu_ver_cover_mode->isChecked() )
+		ljMenuPopUp->exec(ui.lwJuegos->mapToGlobal(aPosition));
+	else
+		ljMenuPopUp->exec(ui.twJuegos->mapToGlobal(aPosition));
 	delete ljMenuPopUp;
 }
 
