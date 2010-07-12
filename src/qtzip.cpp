@@ -217,3 +217,19 @@ QPixmap QtZip::loadImagen(QString filename)
 	}
 	return pixmap;
 }
+
+QBitmap QtZip::loadImagenBitmap(QString filename)
+{
+	QBitmap bitmap;
+	if( isZipOpen )
+	{
+		if(!filename.isEmpty())
+		{
+			QBuffer cbuf;
+			cbuf.open(QIODevice::WriteOnly);
+			ec = uz.extractFile(filename, &cbuf);
+			bitmap.loadFromData( cbuf.data() );
+		}
+	}
+	return bitmap;
+}

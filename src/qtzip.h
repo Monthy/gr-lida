@@ -49,6 +49,7 @@ public:
 	QString getCommentZip(){return comentarioZip;}
 	QString loadTexto(QString filename);
 	QPixmap loadImagen(QString filename);
+	QBitmap loadImagenBitmap(QString filename);
 
 private:
 	UnZip::ErrorCode ec;
