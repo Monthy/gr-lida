@@ -2448,7 +2448,7 @@ void GrLida::on_EjecutarJuego()
 									   reinterpret_cast<const WCHAR*>(stDirWorkingJuego.utf16()), SW_SHOWNORMAL) <= 32)
 					QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego"));
 			#else
-				QMessageBox::information(this, stTituloGrl(), tr("Solo disponible para SO, Windows (NT/2000/XP)"));
+				Ejecutar(stConfgJuego, stJuegoParametrosExe, stDirWorkingJuego);
 			#endif
 		}
 	} else {
