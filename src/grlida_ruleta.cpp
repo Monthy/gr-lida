@@ -78,11 +78,11 @@ void frmRuleta::CargarRuleta(QString filename)
 {
 	isZip = false;
 
-	QFileInfo tipofile, fileconf;
+	QFileInfo tipofile;
 
 	tipofile.setFile(filename);
 
-	QString ruleta_conf, mconf_select;
+	QString ruleta_conf;
 	if(tipofile.completeSuffix().toLower() == "zip")
 	{
 		isZip = true;
@@ -96,7 +96,7 @@ void frmRuleta::CargarRuleta(QString filename)
 		if( data.open(QFile::WriteOnly | QFile::Truncate) )
 		{
 			QTextStream out(&data);
-			out.setCodec("UTF-8");
+		//	out.setCodec("UTF-8");
 			out << zip.loadTexto(ruleta_conf);
 			out.flush();
 		}
@@ -105,7 +105,7 @@ void frmRuleta::CargarRuleta(QString filename)
 	} else
 		isZip = false;
 
-	num_ruletas = 3;
+	num_ruletas = 4;
 
 	QSettings settings(filename, QSettings::IniFormat);
 	config.clear();
@@ -126,7 +126,6 @@ void frmRuleta::CargarRuleta(QString filename)
 
 	settings.beginGroup("ruletas");
 		config["ruleta_dir"]  = settings.value("ruleta_dir" , "").toString();
-		config["ruleta_base"] = settings.value("ruleta_base", "").toString();
 		for(int i = 0; i < num_ruletas; i++)
 		{
 			config.insert("ruleta_"+fGrl.IntToStr(i)        , settings.value("ruleta_"+fGrl.IntToStr(i)        ,"").toString() );
@@ -166,7 +165,7 @@ void frmRuleta::CargarRuleta(QString filename)
 			stDir.append("/");
 	}
 
-	if( !config["ruleta_dir"].endsWith("/") )
+	if( config["ruleta_dir"]!="" && !config["ruleta_dir"].endsWith("/") )
 		config["ruleta_dir"].append("/");
 
 	if(config["lienzo_fondo"] != "" )
@@ -179,6 +178,9 @@ void frmRuleta::CargarRuleta(QString filename)
 		imgBackground.load(":/img16/sinimg.png");
 
 	QString str, strm;
+	listCapas.clear();
+	listItems.clear();
+	scene->clear();
 	for(int i = 0; i < num_ruletas; i++)
 	{
 		if( config["ruleta_"+fGrl.IntToStr(i)] == "" )
@@ -191,25 +193,7 @@ void frmRuleta::CargarRuleta(QString filename)
 		else
 			strm = stDir + config["ruleta_dir"] + config["ruleta_"+fGrl.IntToStr(i)+"_mask"];
 
-		if( isZip )
-		{
-			temp_mask = zip.loadImagen(strm);
-			temp_capa = zip.loadImagen(str);
-		} else {
-			temp_mask.load(strm);
-			temp_capa.load(str);
-		}
-		temp_capa.setMask( temp_mask );
-
-		listCapas.append( temp_capa );
-
-		listItems.append(new QGraphicsPixmapItem(listCapas.at(i)));
-		listItems.value(i)->setZValue(i);
-
-		scene->addItem(listItems.value(i));
-
-		imgItemCentrar(scene, listItems.value(i));
-		imgItemRotar(listItems.value(i), 0);
+		imgItemAddScene(str, strm, i, isZip);
 	}
 
 	ui.gvRuleta->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
@@ -264,6 +248,30 @@ void frmRuleta::imgRotarB(int r)
 void frmRuleta::imgRotarC(int r)
 {
 	imgItemRotar(listItems.value(3), r);
+}
+
+void frmRuleta::imgItemAddScene(QString capa, QString capa_mask, int id, bool is_Zip)
+{
+	QPixmap tmp_capa;
+	QBitmap tmp_mask;
+	if( is_Zip )
+	{
+		tmp_mask = zip.loadImagenBitmap(capa_mask);
+		tmp_capa = zip.loadImagen(capa);
+	} else {
+		tmp_mask.load(capa_mask);
+		tmp_capa.load(capa);
+	}
+	tmp_capa.setMask( tmp_mask );
+
+	listCapas.insert(id, tmp_capa);
+	listItems.insert(id, new QGraphicsPixmapItem(listCapas.value(id)));
+	listItems.value(id)->setZValue(id);
+
+	scene->addItem(listItems.value(id));
+
+	imgItemCentrar(scene, listItems.value(id));
+	imgItemRotar(listItems.value(id), 0);
 }
 
 void frmRuleta::imgItemCentrar(QGraphicsScene *scena, QGraphicsPixmapItem *imgItem)

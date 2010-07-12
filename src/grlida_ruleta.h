@@ -62,14 +62,14 @@ private:
 	QHash<QString, QString> config;
 	QList<QGraphicsPixmapItem *> listItems;
 	QList<QPixmap> listCapas;
-	QPixmap temp_capa, imgBackground;
-	QBitmap temp_mask;
+	QPixmap imgBackground;
 
 // StatusBar
 	QLabel *lbpanel_1;
 	QLabel *lbpanel_2;
 
 	void setTheme();
+	void imgItemAddScene(QString capa, QString capa_mask, int id, bool is_Zip);
 	void imgItemCentrar(QGraphicsScene *scena, QGraphicsPixmapItem *imgItem);
 	void imgItemRotar(QGraphicsPixmapItem *imgItem, int r = 0);
 
