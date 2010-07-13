@@ -146,8 +146,8 @@ TRANSLATIONS += lng/gr-lida_es_ES.ts \
 #CODECFORSRC = UTF-8
 
 win32:RC_FILE += gr-lida.rc
-mac {
-    ICON += gr-lida.icns
+mac:ICON += gr-lida.icns
+mac|unix {
     LIBS += -lz
 }
 
