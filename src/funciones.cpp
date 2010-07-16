@@ -260,9 +260,9 @@ QString Funciones::GRlidaHomePath()
 	if( dirApp == "currentpath" )
 		dirhomepath = QDir::currentPath()+"/";
 	else {
-		#ifdef Q_OS_WIN32
+		#if defined(Q_OS_WIN32)
 			isWinOrMac = true;
-		#elif Q_OS_MAC
+		#elif defined(Q_OS_MAC)
 			isWinOrMac = true;
 		#else
 			isWinOrMac = false;
