@@ -141,7 +141,8 @@ RESOURCES += res/grlida.qrc
 TRANSLATIONS += lng/gr-lida_es_ES.ts \
     lng/gr-lida_en_EN.ts \
     lng/gr-lida_da_DK.ts \
-    lng/gr-lida_fr_FR.ts
+    lng/gr-lida_fr_FR.ts \
+    lng/gr-lida_hu_HU.ts
 
 #CODECFORSRC = UTF-8
 
