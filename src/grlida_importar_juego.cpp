@@ -369,6 +369,7 @@ void frmImportarJuego::setTheme()
 	str_html_old.replace("{lb_anno}"          , tr("Publicado")         , Qt::CaseSensitive);
 	str_html_old.replace("{lb_edad_recomendada}", tr("Edad recomendada"), Qt::CaseSensitive);
 	str_html_old.replace("{lb_idioma}"        , tr("Idioma")            , Qt::CaseSensitive);
+        str_html_old.replace("{lb_idioma_voces}"  , tr("Idioma voces")      , Qt::CaseSensitive);
 	str_html_old.replace("{lb_formato}"       , tr("Formato")           , Qt::CaseSensitive);
 	str_html_old.replace("{lb_genero}"        , tr("Genero")            , Qt::CaseSensitive);
 	str_html_old.replace("{lb_tema}"          , tr("Tema")              , Qt::CaseSensitive);
