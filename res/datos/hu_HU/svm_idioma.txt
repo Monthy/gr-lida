@@ -1,0 +1,22 @@
+﻿Spanyol|es
+Anglol|en
+Angol (Britt)|gb
+Angol (Egyesült Államok)|us
+Német|de
+Dán|dk
+Francia|fr
+Olasz|it
+Portugál|pt
+Japán|jp
+Kínai (Kína)|zh-cn
+Kínai (Tajván)|zh
+Kóreai|kr
+Héber|hb
+Orosz|ru
+Cseh|cz
+Svéd|se
+Holland|nl
+Norvég|nb
+Lengyel|pl
+Magyar|hu
+Görög|gr

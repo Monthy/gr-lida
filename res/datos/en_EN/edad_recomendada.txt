@@ -1,0 +1,7 @@
+Not available|nd|edad_nd
+All public|tp|edad_tp
+More than 3 years|3|edad_3
+More than 7 years|7|edad_7
+More than 12 years|12|edad_12
+Over 16 years|16|edad_16
+Over 18 years|18|edad_18

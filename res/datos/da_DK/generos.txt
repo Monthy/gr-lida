@@ -1,0 +1,36 @@
+Action|datos_3
+Action-Arcade|datos_3
+Arcade|datos_3
+Adventure|datos_3
+Grafisk Adventure|datos_3
+Adventure-Horror|datos_3
+Voksen|datos_3
+Dancing|datos_3
+Racing|datos_3
+Racing / Trafik|datos_3
+Racing-Motorcykler|datos_3
+Sports|datos_3
+Sports-Basketball|datos_3
+Sports-Fodbold|datos_3
+Emulator|datos_3
+Strategi|datos_3
+FPS|datos_3
+Role-Playing (RPG)|datos_3
+Sports Games|datos_3
+Fight|datos_3
+Skydespil|datos_3
+Mechs|datos_3
+Multiplayer|datos_3
+Andre|datos_3
+Fiskeri|datos_3
+Platforme|datos_3
+Puzzle-Løsning|datos_3
+Puzzle|datos_3
+Music Player|datos_3
+Video-afspiller|datos_3
+Simulation|datos_3
+Simulator|datos_3
+Train Simulator|datos_3
+Flight Simulator|datos_3
+Pædagogisk|datos_3
+|sinimg

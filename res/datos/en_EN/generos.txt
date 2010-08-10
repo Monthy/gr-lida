@@ -1,0 +1,36 @@
+Action|datos_3
+Action-Arcade|datos_3
+Arcade|datos_3
+Adventure|datos_3
+Graphic Adventure|datos_3
+Adventure-Horror|datos_3
+Adult|datos_3
+Dancing|datos_3
+Racing|datos_3
+Racing / Driving|datos_3
+Racing-Motorcycles|datos_3
+Sports|datos_3
+Sports-Basketball|datos_3
+Sports-Football|datos_3
+Emulator|datos_3
+Strategy|datos_3
+FPS|datos_3
+Role-Playing (RPG)|datos_3
+Sports Games|datos_3
+Fight|datos_3
+Shooters|datos_3
+Mechs|datos_3
+Multiplayer|datos_3
+Others|datos_3
+Fishing|datos_3
+Platforms|datos_3
+Puzzle-Solving|datos_3
+Puzzle|datos_3
+Music Player|datos_3
+Video player|datos_3
+Simulation|datos_3
+Simulator|datos_3
+Train Simulator|datos_3
+Flight Simulator|datos_3
+Educational|datos_3
+|sinimg

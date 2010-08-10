@@ -1,0 +1,6 @@
+﻿Belső nézetű lövöldözős|datos_3
+Külső nézetű|datos_3
+Izometrikus|datos_3
+Platform|datos_3
+Side-Scroller|datos_3
+Felülnézetes|datos_3

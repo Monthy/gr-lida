@@ -1,0 +1,7 @@
+﻿Nem áll rendelkezésre|nd|edad_nd
+Bárkinek ajánlott|tp|edad_tp
+3 éven felülieknek|3|edad_3
+7 éven felülieknek|7|edad_7
+12 éven felülieknek|12|edad_12
+16 éven felülieknek|16|edad_16
+18 éven felülieknek|18|edad_18

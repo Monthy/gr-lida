@@ -1,0 +1,13 @@
+﻿PC|floppy_1
+Floppy 3.5|floppy_2
+Floppy 5.25|floppy_3
+CD-Rom|cd_iso
+DVD|dvd
+CD-Audio|cd_audio
+Tömörített Fájl|archivo_comprimido
+ISO fájl|cd_iso
+CUE/BIN fájl|cd_iso
+IMG fájl|floppy_1
+IMA fájl|floppy_1
+IMZ fájl|floppy_1
+|sinimg

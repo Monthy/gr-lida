@@ -1,0 +1,6 @@
+1st-Person Perspective|datos_3
+3rd-Person Perspective|datos_3
+Isometric|datos_3
+Platform|datos_3
+Side-Scrolling|datos_3
+Top-Down|datos_3

@@ -1,0 +1,24 @@
+Voksen|datos_3
+Arcade|datos_3
+Adventure|datos_3
+Adventure-Horror|datos_3
+Sci-Fi|datos_3
+Classic|datos_3
+Cyberpunk / Dark Sci-Fi|datos_3
+Detective / Mystery|datos_3
+Interaktiv Fiktion med grafik|datos_3
+Interaktiv Fiktion|datos_3
+Futuristisk|datos_3
+Horror|datos_3
+Medieval / Fantasy|datos_3
+Middelalderlig|datos_3
+Interaktiv film|datos_3
+Pinball|datos_3
+Post-apokalyptisk|datos_3
+Sci-Fi - Futuristic|datos_3
+Shooter|datos_3
+Puzzle-Løsning|datos_3
+Survival Horror|datos_3
+Real-Time|datos_3
+Video Adventure|datos_3
+|sinimg

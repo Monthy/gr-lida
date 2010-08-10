@@ -1,0 +1,22 @@
+Espagnol|es
+Anglais|en
+Anglais (GB)|gb
+Anglais (US)|us
+Allemand|de
+Danois|dk
+Français|fr
+Italien|it
+Portugais|pt
+Japonais|jp
+Chinois (Chine)|zh-cn
+Chinois (Taiwan)|zh
+Coréen|kr
+Hébreu|hb
+Russe|ru
+Tchèque|cz
+Suédois|se
+Néerlandais|nl
+Norvégien Bokmål|nb
+Polonais|pl
+Hongroise|hu
+Grecque|gr

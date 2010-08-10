@@ -1,0 +1,24 @@
+Adult|datos_3
+Arcade|datos_3
+Adventure|datos_3
+Adventure-Horror|datos_3
+Sci-Fi|datos_3
+Clasic|datos_3
+Cyberpunk / Dark Sci-Fi|datos_3
+Detective / Mystery|datos_3
+Interactive Fiction with Graphics|datos_3
+Interactive Fiction|datos_3
+Futuristic|datos_3
+Horror|datos_3
+Medieval / Fantasy|datos_3
+Medieval|datos_3
+Interactive Movie|datos_3
+Pinball|datos_3
+Post-Apocalyptic|datos_3
+Sci-Fi - Futuristic|datos_3
+Shooter|datos_3
+Puzzle-Solving|datos_3
+Survival Horror|datos_3
+Real-Time|datos_3
+Video Adventure|datos_3
+|sinimg
