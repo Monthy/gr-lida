@@ -1,13 +1,14 @@
 Español|es
-Ingles|en
-Ingles (GB)|gb
-Ingles (US)|us
-Aleman|de
+Inglés|en
+Inglés (GB)|gb
+Inglés (US)|us
+Alemán|de
 Danés|dk
-Frances|fr
+Francés|fr
 Italiano|it
-Portuges|pt
-Japones|jp
+Portugués|pt
+Japonés|jp
+Chino (China)|zh-cn
 Chino (Taiwan)|zh
 Coreano|kr
 Hebreo|hb
@@ -17,3 +18,5 @@ Sueco|se
 Holandés|nl
 Noruego Bokmal|nb
 Polaco|pl
+Húngaro|hu
+Griego|gr
