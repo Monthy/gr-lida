@@ -38,10 +38,39 @@
         <file>datos/svm_platform.txt</file>
         <file>datos/svm_render_mode.txt</file>
         <file>datos/tema.txt</file>
+        <file>datos/da_DK/edad_recomendada.txt</file>
+        <file>datos/da_DK/formatos.txt</file>
+        <file>datos/da_DK/generos.txt</file>
+        <file>datos/da_DK/numdisc.txt</file>
+        <file>datos/da_DK/perspectivas.txt</file>
+        <file>datos/da_DK/tema.txt</file>
+        <file>datos/da_DK/svm_idioma.txt</file>
+        <file>datos/en_EN/edad_recomendada.txt</file>
+        <file>datos/en_EN/formatos.txt</file>
+        <file>datos/en_EN/generos.txt</file>
+        <file>datos/en_EN/numdisc.txt</file>
+        <file>datos/en_EN/perspectivas.txt</file>
+        <file>datos/en_EN/tema.txt</file>
+        <file>datos/en_EN/svm_idioma.txt</file>
+        <file>datos/fr_FR/edad_recomendada.txt</file>
+        <file>datos/fr_FR/formatos.txt</file>
+        <file>datos/fr_FR/generos.txt</file>
+        <file>datos/fr_FR/numdisc.txt</file>
+        <file>datos/fr_FR/perspectivas.txt</file>
+        <file>datos/fr_FR/tema.txt</file>
+        <file>datos/fr_FR/svm_idioma.txt</file>
+        <file>datos/hu_HU/edad_recomendada.txt</file>
+        <file>datos/hu_HU/formatos.txt</file>
+        <file>datos/hu_HU/generos.txt</file>
+        <file>datos/hu_HU/numdisc.txt</file>
+        <file>datos/hu_HU/perspectivas.txt</file>
+        <file>datos/hu_HU/tema.txt</file>
+        <file>datos/hu_HU/svm_idioma.txt</file>
         <file>idiomas/gr-lida_da_DK.qm</file>
         <file>idiomas/gr-lida_en_EN.qm</file>
         <file>idiomas/gr-lida_es_ES.qm</file>
         <file>idiomas/gr-lida_fr_FR.qm</file>
+        <file>idiomas/gr-lida_hu_HU.qm</file>
         <file>images/grlida_logo.png</file>
         <file>images/juego_eliminado.png</file>
         <file>images/juego_sin_imagen.png</file>
@@ -219,7 +248,9 @@
         <file>img_lng/es.png</file>
         <file>img_lng/fr.png</file>
         <file>img_lng/gb.png</file>
+        <file>img_lng/gr.png</file>
         <file>img_lng/hb.png</file>
+        <file>img_lng/hu.png</file>
         <file>img_lng/it.png</file>
         <file>img_lng/jp.png</file>
         <file>img_lng/kr.png</file>
@@ -231,6 +262,7 @@
         <file>img_lng/se.png</file>
         <file>img_lng/us.png</file>
         <file>img_lng/zh.png</file>
+        <file>img_lng/zh-cn.png</file>
         <file>imgsvm/0.png</file>
         <file>imgsvm/10.png</file>
         <file>imgsvm/100.png</file>
