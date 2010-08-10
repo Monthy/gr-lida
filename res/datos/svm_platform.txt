@@ -6,6 +6,9 @@ Amiga|amiga|amiga
 Atari ST|atari|atari
 Commodore 64|c64|c64
 DOS|pc|pc
+PC-98|pc98|pc
+Nintendo Wii|wii|sinimg
+CoCo3|coco3|sinimg
 FM-TOWNS|fmtowns|sinimg
 Linux|linux|linux
 Macintosh|macintosh|macintosh
@@ -13,3 +16,5 @@ PC-Engine|pce|sinimg
 NES|nes|nes
 SegaCD|segacd|sinimg
 Windows|windows|win9x
+Sony PlayStation|playstation|sinimg
+Phillips CD-i|cdi|sinimg
