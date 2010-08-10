@@ -26,7 +26,8 @@
 
 Funciones::Funciones()
 {
-	stTheme = ThemeGrl();
+	stTheme  = ThemeGrl();
+
 }
 
 Funciones::~Funciones(){}
@@ -301,7 +302,7 @@ QString Funciones::ThemeGrl()
 
 	QSettings settings( dirApp+"/GR-lida.conf", QSettings::IniFormat );
 	settings.beginGroup("OpcGeneral");
-		nameDirTheme = settings.value("NameDirTheme", "defecto").toString();
+				nameDirTheme = settings.value("NameDirTheme", "defecto").toString();
 	settings.endGroup();
 
 	if( nameDirTheme == "defecto" || nameDirTheme.isEmpty() )
@@ -318,6 +319,28 @@ QString Funciones::ThemeGrl()
 void Funciones::setTheme()
 {
 	stTheme = ThemeGrl();
+}
+
+QString Funciones::IdiomaGrl()
+{
+	QString dirApp, idioma_select;
+	QDir idiomaDir;
+
+	dirApp = GRlidaHomePath();
+
+	QSettings settings( dirApp+"GR-lida.conf", QSettings::IniFormat );
+	settings.beginGroup("OpcGeneral");
+		idioma_select = settings.value("IdiomaSelect", "es_ES").toString();
+	settings.endGroup();
+
+	if( idioma_select == "es_ES" || idioma_select.isEmpty() )
+		return "";
+	else {
+		if( idiomaDir.exists(dirApp+"datos/"+ idioma_select +"/") )
+			return idioma_select+"/";
+		else
+			return "";
+	}
 }
 
 // Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use

@@ -50,7 +50,7 @@ private:
 	Funciones fGrl;
 	int intStepwizard;
 
-	QString stHomeDir, stDatosDir, stTheme;
+	QString stHomeDir, stDatosDir, stTheme, stIdioma;
 
 	QHash<QString, QVariant> GRLConfig;
 	QHash<QString, QString> tempDatosJuego;

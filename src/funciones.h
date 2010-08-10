@@ -74,6 +74,8 @@ public:
 // Devuelve el directorio del Theme a usar
 	QString ThemeGrl();
 	void setTheme();
+// Devuelve el directorio del Theme a usar
+        QString IdiomaGrl();
 // Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use
 	QString StyleSheet(bool list=false);
 // Carga la configuración de los iconos de la lista en modo Icono

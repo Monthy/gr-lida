@@ -59,7 +59,7 @@ private:
 	bool EditandoJuego;
 
 	QString stTituloAddEdit(){ return windowTitle(); }
-	QString stHomeDir, stTheme, stItemIDSvm;
+	QString stHomeDir, stIdioma, stTheme, stItemIDSvm;
 
 	void createConnections();
 	void setTheme();

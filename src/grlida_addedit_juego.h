@@ -61,7 +61,7 @@ private:
 
 	QString stTituloAddEdit(){ return windowTitle(); }
 	QString stItemIDGrl, TipoEmulador;
-	QString stHomeDir, stIconDir, stDatosDir, stTheme, stTempDir, stUsuario;
+	QString stHomeDir, stIconDir, stDatosDir, stTheme, stIdioma, stTempDir, stUsuario;
 
 	QString stCoversDir, stThumbsDir, stListThumbsDir, stCapturesDir;
 	QString stThumbs, stCoverFront, stCoverBack;

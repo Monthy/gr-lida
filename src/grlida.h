@@ -61,7 +61,7 @@ public:
 // Abre y carga la base de datos.
 	void CargarListaJuegosDB(QString strBuscar = "", QString sqlQuery = "");
 // Comprueba si existen los archivos de datos.
-	void ComprobarArchivosDatos(QString Version_GRL);
+	void ComprobarArchivosDatos(QString Version_GRL, QString lng = "");
 // Ocualta o muesta la ventana Principal.
 	void setVisible(bool visible);
 
@@ -86,7 +86,7 @@ private:
 	bool chkVersionDesdeMenu, item_changed;
 
 	QString stHomeDir, stDatosDir, stIconDir, stTempDir, stConfgDbxDir, stConfgVdmSDir;
-	QString stIdiomaSelect, stTheme, stIconoFav, stPicFlowReflection;
+	QString stIdiomaSelect, stTheme, stIdioma, stIconoFav, stPicFlowReflection;
 	QString str_html_new, str_html_old, str_html_comentario;
 	QString stdb_type, stdb_server, stdb_host, stdb_name, stdb_username, stdb_password, stdb_port;
 	QString stdb_Orden_ColTabla, stdb_Orden_By, stdb_Orden;

@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Comprobando archivos de Datos..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-	w.ComprobarArchivosDatos( GRLConfig["Version"].toString() );
+	w.ComprobarArchivosDatos( GRLConfig["Version"].toString(), stIdiomaSelect);
 
 	splash.showMessage(QObject::tr("Iniciando:")+" "+QObject::tr("Cargando Base de Datos..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();

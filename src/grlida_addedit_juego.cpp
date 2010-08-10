@@ -46,7 +46,8 @@ frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIn
 	stListThumbsDir= stHomeDir + "thumbs_list/";
 	stCapturesDir  = stHomeDir + "capturas/";
 
-	stTheme = fGrl.ThemeGrl();
+	stIdioma = fGrl.IdiomaGrl();
+	stTheme  = fGrl.ThemeGrl();
 
 // Conecta los distintos botones con las funciones.
 	createConnections();
@@ -229,18 +230,18 @@ void frmAddEditJuego::CargarConfig()
 	filters << "*.bmp" << "*.jpg" << "*.png" << "*.gif" << "*.ico"; // Imagenes soportadas
 	fGrl.CargarIconosComboBox(stIconDir, ui.cbxDatos_Icono, filters);
 
-	fGrl.CargarDatosComboBox(stDatosDir + "generos.txt"  , ui.cbxDatos_Genero        );
+	fGrl.CargarDatosComboBox(stDatosDir +stIdioma+ "generos.txt"  , ui.cbxDatos_Genero        );
 	fGrl.CargarDatosComboBox(stDatosDir + "companias.txt", ui.cbxDatos_Compania      );
 	fGrl.CargarDatosComboBox(stDatosDir + "companias.txt", ui.cbxDatos_Desarrollador );
-	fGrl.CargarDatosComboBox(stDatosDir + "tema.txt"     , ui.cbxDatos_Tema          );
-	fGrl.CargarDatosComboBox(stDatosDir + "perspectivas.txt", ui.cbxDatos_Perspectiva);
-	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"    , ui.cbxDatos_Idioma, 1,true);
-	fGrl.CargarDatosComboBox(":/datos/svm_idioma.txt"    , ui.cbxDatos_IdiomaVoces, 1,true);
-	fGrl.CargarDatosComboBox(stDatosDir + "formatos.txt" , ui.cbxDatos_Formato       );
+	fGrl.CargarDatosComboBox(stDatosDir +stIdioma+ "tema.txt"     , ui.cbxDatos_Tema          );
+	fGrl.CargarDatosComboBox(stDatosDir +stIdioma+ "perspectivas.txt", ui.cbxDatos_Perspectiva);
+	fGrl.CargarDatosComboBox(":/datos/"+stIdioma+"svm_idioma.txt"    , ui.cbxDatos_Idioma, 1,true);
+	fGrl.CargarDatosComboBox(":/datos/"+stIdioma+"svm_idioma.txt"    , ui.cbxDatos_IdiomaVoces, 1,true);
+	fGrl.CargarDatosComboBox(stDatosDir +stIdioma+ "formatos.txt" , ui.cbxDatos_Formato       );
 	fGrl.CargarDatosComboBox(stDatosDir + "fechas.txt"   , ui.cbxDatos_Anno          );
-	fGrl.CargarDatosComboBox(stDatosDir + "numdisc.txt"  , ui.cbxDatos_NumDisc       );
+	fGrl.CargarDatosComboBox(stDatosDir +stIdioma+ "numdisc.txt"  , ui.cbxDatos_NumDisc       );
 	fGrl.CargarDatosComboBox(stDatosDir + "sistemaop.txt", ui.cbxDatos_SistemaOp     );
-	fGrl.CargarDatosComboBox(stDatosDir + "edad_recomendada.txt", ui.cbxDatos_EdadRecomendada, 3);
+	fGrl.CargarDatosComboBox(stDatosDir +stIdioma+ "edad_recomendada.txt", ui.cbxDatos_EdadRecomendada, 3);
 
 	for(int n = 0; n < 11; n++)
 		ui.cbxDatos_Graficos->addItem(QIcon(stTheme+"img16/grafica.png"),fGrl.IntToStr(n));

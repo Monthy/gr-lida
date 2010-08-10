@@ -64,7 +64,8 @@ GrLida::GrLida(QWidget *parent, Qt::WFlags flags)
 	stCapturesDir  = stHomeDir + "capturas/";
 	GRLConfig      = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
 
-	stTheme = fGrl.ThemeGrl();
+	stIdioma = fGrl.IdiomaGrl();
+	stTheme  = fGrl.ThemeGrl();
 
 	createConnections();
 	createDockBars();
@@ -293,21 +294,21 @@ void GrLida::CargarListaJuegosDB(QString strBuscar, QString sqlQuery)
 	} else {
 		str_ListaDatos.clear();
 		if(stdb_Orden_ColTabla == "genero")
-			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir + "generos.txt"  , "|");
+			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir +stIdioma+ "generos.txt"  , "|");
 		else if(stdb_Orden_ColTabla == "compania")
 			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir + "companias.txt", "|");
 		else if(stdb_Orden_ColTabla == "desarrollador")
 			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir + "companias.txt", "|");
 		else if(stdb_Orden_ColTabla == "tema")
-			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir + "tema.txt"     , "|");
+			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir +stIdioma+ "tema.txt"     , "|");
 		else if(stdb_Orden_ColTabla == "idioma")
-			str_ListaDatos = fGrl.CargaDatosListas(":/datos/svm_idioma.txt"    , "|");
+			str_ListaDatos = fGrl.CargaDatosListas(":/datos/"+stIdioma+"svm_idioma.txt"    , "|");
 		else if(stdb_Orden_ColTabla == "formato")
-			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir + "formatos.txt" , "|");
+			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir +stIdioma+ "formatos.txt" , "|");
 		else if(stdb_Orden_ColTabla == "anno")
 			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir + "fechas.txt"   , "|");
 		else if(stdb_Orden_ColTabla == "numdisc")
-			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir + "numdisc.txt"  , "|");
+			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir +stIdioma+ "numdisc.txt"  , "|");
 		else if(stdb_Orden_ColTabla == "sistemaop")
 			str_ListaDatos = fGrl.CargaDatosListas(stDatosDir + "sistemaop.txt", "|");
 		else if(stdb_Orden_ColTabla == "graficos")
@@ -703,10 +704,10 @@ void GrLida::CrearMenuNav()
 	// Dinamicos?
 	//	MenuNav_AddCategorias();
 		MenuNav_AddCat( tr("Generos"), stTheme+"img16/datos_3.png", "genero"  );
-			MenuNav_AddSubCat(":/datos/generos.txt", "genero", 1, false);
+			MenuNav_AddSubCat(":/datos/"+stIdioma+"generos.txt", "genero", 1, false);
 
 		MenuNav_AddCat( tr("Tema"), stTheme+"img16/datos_3.png", "tema"  );
-			MenuNav_AddSubCat(":/datos/tema.txt", "tema", 1, false);
+			MenuNav_AddSubCat(":/datos/"+stIdioma+"tema.txt", "tema", 1, false);
 
 		MenuNav_AddCat( tr("Desarrolladores"), stTheme+"img16/datos_3.png", "desarrollador"  );
 			MenuNav_AddSubCat(":/datos/companias.txt", "desarrollador", 1, false);
@@ -718,7 +719,7 @@ void GrLida::CrearMenuNav()
 			MenuNav_AddSubCat(":/datos/fechas.txt", "anno", 1, false);
 
 		MenuNav_AddCat( tr("Idioma"), stTheme+"img16/idiomas.png", "idioma"  );
-			MenuNav_AddSubCat(":/datos/svm_idioma.txt", "idioma", 1, true);
+			MenuNav_AddSubCat(":/datos/"+stIdioma+"svm_idioma.txt", "idioma", 1, true);
 
 		ui.twListNav->setCurrentItem( ui.twListNav->itemAt(0,0) );
 
@@ -930,7 +931,7 @@ void GrLida::CargarConfig()
 	ui.actionNewDbx->setEnabled( GRLConfig["DOSBoxDisp"].toBool()  );
 	ui.actionNewSvm->setEnabled( GRLConfig["ScummVMDisp"].toBool() );
 	ui.actionNewVdms->setEnabled( GRLConfig["VDMSoundDisp"].toBool() );
-	stIdiomaSelect = GRLConfig["IdiomaSelect"].toString();
+	stIdiomaSelect      = GRLConfig["IdiomaSelect"].toString();
 	stIconoFav          = GRLConfig["IconoFav"].toString();
 	stPicFlowReflection = GRLConfig["PicFlowReflection"].toString();
 	numSkip_PicFlow     = GRLConfig["Skip_PicFlow"].toInt();
@@ -2863,9 +2864,12 @@ void GrLida::on_VerCarpeta_home()
 	fGrl.abrirDirectorio( stHomeDir );
 }
 
-void GrLida::ComprobarArchivosDatos(QString Version_GRL)
+void GrLida::ComprobarArchivosDatos(QString Version_GRL, QString lng)
 {
 	QFile archivodatos;
+
+	if( lng != "es_ES" || !lng.isEmpty())
+		stIdioma = lng;
 
 	if( Version_GRL != fGrl.stVersionGrl() && Version_GRL < fGrl.stVersionGrl() )
 	{
@@ -2876,16 +2880,18 @@ void GrLida::ComprobarArchivosDatos(QString Version_GRL)
 		emit on_ReconstruirTodasCaratulas(false);
 	}
 
-	CrearArchivoDato(":/datos/generos.txt"  , stDatosDir+"generos.txt");
+	fGrl.ComprobarDirectorio(stDatosDir+stIdioma);
+
+	CrearArchivoDato(":/datos/"+stIdioma+"generos.txt"  , stDatosDir+stIdioma+"generos.txt");
 	CrearArchivoDato(":/datos/companias.txt", stDatosDir+"companias.txt");
-	CrearArchivoDato(":/datos/tema.txt"     , stDatosDir+"tema.txt");
-	CrearArchivoDato(":/datos/perspectivas.txt", stDatosDir+"perspectivas.txt");
-	CrearArchivoDato(":/datos/formatos.txt" , stDatosDir+"formatos.txt");
+	CrearArchivoDato(":/datos/"+stIdioma+"tema.txt"     , stDatosDir+stIdioma+"tema.txt");
+	CrearArchivoDato(":/datos/"+stIdioma+"perspectivas.txt", stDatosDir+stIdioma+"perspectivas.txt");
+	CrearArchivoDato(":/datos/"+stIdioma+"formatos.txt" , stDatosDir+stIdioma+"formatos.txt");
 	CrearArchivoDato(":/datos/fechas.txt"   , stDatosDir+"fechas.txt");
-	CrearArchivoDato(":/datos/numdisc.txt"  , stDatosDir+"numdisc.txt");
+	CrearArchivoDato(":/datos/"+stIdioma+"numdisc.txt"  , stDatosDir+stIdioma+"numdisc.txt");
 	CrearArchivoDato(":/datos/sistemaop.txt", stDatosDir+"sistemaop.txt");
 	CrearArchivoDato(":/datos/smiles.txt"   , stDatosDir+"smiles.txt");
-	CrearArchivoDato(":/datos/edad_recomendada.txt", stDatosDir+"edad_recomendada.txt");
+	CrearArchivoDato(":/datos/"+stIdioma+"edad_recomendada.txt", stDatosDir+stIdioma+"edad_recomendada.txt");
 
 	CrearArchivoDato(":/scripts/gr-lida.js", stHomeDir+"scripts/gr-lida.js");
 	CrearArchivoDato(":/scripts/mobygames.js", stHomeDir+"scripts/mobygames.js");
