@@ -2868,7 +2868,9 @@ void GrLida::ComprobarArchivosDatos(QString Version_GRL, QString lng)
 {
 	QFile archivodatos;
 
-	if( lng != "es_ES" || !lng.isEmpty())
+	if( lng == "es_ES" || lng == "")
+		stIdioma = "";
+	else
 		stIdioma = lng +"/";
 
 	if( Version_GRL != fGrl.stVersionGrl() && Version_GRL < fGrl.stVersionGrl() )
