@@ -16,7 +16,7 @@ Russisk|ru
 Tjekkisk|cz
 Svensk|se
 Hollandsk|nl
-Norsk Bokmål|nb
+Norsk BokmÃ¥l|nb
 Polsk|pl
 Ungarske|hu
-Græsk|gr
+GrÃ¦sk|gr

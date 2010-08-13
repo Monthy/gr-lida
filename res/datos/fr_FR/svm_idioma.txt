@@ -4,19 +4,19 @@ Anglais (GB)|gb
 Anglais (US)|us
 Allemand|de
 Danois|dk
-Français|fr
+FranÃ§ais|fr
 Italien|it
 Portugais|pt
 Japonais|jp
 Chinois (Chine)|zh-cn
 Chinois (Taiwan)|zh
-Coréen|kr
-Hébreu|hb
+CorÃ©en|kr
+HÃ©breu|hb
 Russe|ru
-Tchèque|cz
-Suédois|se
-Néerlandais|nl
-Norvégien Bokmål|nb
+TchÃ¨que|cz
+SuÃ©dois|se
+NÃ©erlandais|nl
+NorvÃ©gien BokmÃ¥l|nb
 Polonais|pl
 Hongroise|hu
 Grecque|gr

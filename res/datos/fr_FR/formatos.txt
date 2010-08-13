@@ -4,7 +4,7 @@ Floppy 5.25|floppy_3
 CD-Rom|cd_iso
 DVD|dvd
 CD-Audio|cd_audio
-Le fichier compressé|archivo_comprimido
+Le fichier compressÃ©|archivo_comprimido
 ISO fichier|cd_iso
 CUE/BIN fichier|cd_iso
 IMG fichier|floppy_1

@@ -17,7 +17,7 @@ Pinball|datos_3
 Post-apokalyptisk|datos_3
 Sci-Fi - Futuristic|datos_3
 Shooter|datos_3
-Puzzle-Løsning|datos_3
+Puzzle-LÃ¸sning|datos_3
 Survival Horror|datos_3
 Real-Time|datos_3
 Video Adventure|datos_3

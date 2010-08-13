@@ -1,4 +1,4 @@
-﻿Felnőtt|datos_3
+Felnőtt|datos_3
 Árkád|datos_3
 Kaland|datos_3
 Kaland-Horror|datos_3

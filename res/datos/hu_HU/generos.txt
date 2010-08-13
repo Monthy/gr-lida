@@ -1,4 +1,4 @@
-﻿Akció|datos_3
+Akció|datos_3
 Akció-árkád|datos_3
 Árkád|datos_3
 Kaland|datos_3

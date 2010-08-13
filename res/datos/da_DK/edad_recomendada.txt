@@ -1,7 +1,7 @@
-Ikke til rådighed|nd|edad_nd
+Ikke til rÃ¥dighed|nd|edad_nd
 Alle offentlige|tp|edad_tp
-Mere end 3 år|3|edad_3
-Mere end 7 år|7|edad_7
-Mere end 12 år|12|edad_12
-Over 16 år|16|edad_16
-Over 18 år|18|edad_18
+Mere end 3 Ã¥r|3|edad_3
+Mere end 7 Ã¥r|7|edad_7
+Mere end 12 Ã¥r|12|edad_12
+Over 16 Ã¥r|16|edad_16
+Over 18 Ã¥r|18|edad_18

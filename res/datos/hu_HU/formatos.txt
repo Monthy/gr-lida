@@ -1,4 +1,4 @@
-﻿PC|floppy_1
+PC|floppy_1
 Floppy 3.5|floppy_2
 Floppy 5.25|floppy_3
 CD-Rom|cd_iso

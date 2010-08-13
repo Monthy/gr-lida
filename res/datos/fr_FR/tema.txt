@@ -11,13 +11,13 @@ Interactive Fiction|datos_3
 Futuriste|datos_3
 Horreur|datos_3
 Medieval / Fantasy|datos_3
-Médiéval|datos_3
+MÃ©diÃ©val|datos_3
 Interactive Movie|datos_3
 Flipper|datos_3
 Post-Apocalyptique|datos_3
 Sci-Fi - Futuristic|datos_3
 Tireur|datos_3
-Résolution d'énigmes|datos_3
+RÃ©solution d'Ã©nigmes|datos_3
 Survival Horror|datos_3
 Real-Time|datos_3
 Video Aventure|datos_3

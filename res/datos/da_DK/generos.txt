@@ -24,7 +24,7 @@ Multiplayer|datos_3
 Andre|datos_3
 Fiskeri|datos_3
 Platforme|datos_3
-Puzzle-Løsning|datos_3
+Puzzle-LÃ¸sning|datos_3
 Puzzle|datos_3
 Music Player|datos_3
 Video-afspiller|datos_3
@@ -32,5 +32,5 @@ Simulation|datos_3
 Simulator|datos_3
 Train Simulator|datos_3
 Flight Simulator|datos_3
-Pædagogisk|datos_3
+PÃ¦dagogisk|datos_3
 |sinimg
