@@ -1,6 +1,12 @@
 
 -  NEWS
 -----------------------------------
+0.9.1 (14-08-2010)
+ - Añadienda la traducción del GR-lida al Húngaro por Szabó Tihamér.
+ - Añadida opción para cargar los datos (generos, perspectivas, temas, idiomas, formatos, etc...) en el mismo idioma seleccionado.
+ - Añadidas las nuevas plataformas que soporta el ScummVM en su configuración.
+ - Corregido pequeño error ya que no estaba parte del código para reemplazar la etiqueta {lb_idioma_voces} en grlida_importar_juego.cpp
+
 0.9.0 (14-07-2010)
  - Añadida vista modo iconos en la lista de juegos.
  - Añadido asistente para instalar un juego mediante DOSBox.
