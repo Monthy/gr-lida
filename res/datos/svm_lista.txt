@@ -33,6 +33,7 @@ Waxworks|waxworks|50|waxworks.png
 
 Coktel Vision Game Compatibility Chart||logo_coktel_vision|
 Bargon Attack|bargon|95|bargon.png
+Fascination|fascination|80|sinimg.png
 Gobliiins|gob1|95|gob.png
 Gobliins 2|gob2|95|gob.png
 Goblins 3|gob3|95|gob.png
@@ -45,6 +46,47 @@ Beneath a Steel Sky|sky|98|sky.png
 Broken Sword: The Shadow of the Templars|sword1|98|sword1.png
 Broken Sword II: The Smoking Mirror|sword2|98|sword2.png
 Lure of the Temptress|lure|95|lure.png
+
+Sierra SCI Game Compatibility Chart||logo_sierra|
+Castle of Dr. Brain (EGA and VGA)|castlebrain|95|sinimg.png
+Codename: ICEMAN|iceman|95|sinimg.png
+Conquests of Camelot|camelot|95|sinimg.png
+Conquests of the Longbow (EGA and VGA)|longbow|95|sinimg.png
+EcoQuest: The Search for Cetus|ecoquest|95|sinimg.png
+EcoQuest 2: Lost Secret of the Rainforest|ecoquest2|95|sinimg.png
+Freddy Pharkas: Frontier Pharmacist|freddypharkas|95|sinimg.png
+Hoyle's Book of Games 1|hoyle1|95|sinimg.png
+Hoyle's Book of Games 2|hoyle2|95|sinimg.png
+Hoyle's Book of Games 3 (EGA and VGA)|hoyle3|95|sinimg.png
+Hoyle Classic Card Games|hoyle4|95|sinimg.png
+Jones in the Fast Lane|jones|95|sinimg.png
+King's Quest I (SCI remake)|kq1sci|95|kq.png
+King's Quest IV (SCI version)|kq4sci|95|kq.png
+King's Quest V (EGA and VGA)|kq5|95|kq.png
+King's Quest VI (low and hi res)|kq6|95|kq.png
+Laura Bow: The Colonel's Bequest|laurabow|95|sinimg.png
+Laura Bow 2: The Dagger of Amon Ra|laurabow2|95|sinimg.png
+Leisure Suit Larry 1 (SCI remake) (EGA and VGA)|lsl1sci|95|lsl.png
+Leisure Suit Larry 2|lsl2|95|lsl.png
+Leisure Suit Larry 3|lsl3|95|lsl.png
+Leisure Suit Larry 5 (EGA and VGA)|lsl5|95|lsl.png
+Leisure Suit Larry 6 (low res)|lsl6|95|lsl.png
+Mixed-up Fairy Tales|fairytales|95|mumg.png
+Mixed-up Mother Goose|mothergoose|95|mumg.png
+Pepper's Adventures in Time|pepper|95|sinimg.png
+Police Quest 1 (SCI remake)|pq1sci|95|pq.png
+Police Quest 2|pq2|95|pq.png
+Police Quest 3 (EGA and VGA)|pq3|95|pq.png
+Quest for Glory 1/Hero's Quest|qfg1|95|sinimg.png
+Quest for Glory 1 VGA remake|qfg1vga|95|sinimg.png
+Quest for Glory 2|qfg2|95|sinimg.png
+Quest for Glory 3|qfg3|95|sinimg.png
+Slater & Charlie go camping|slater|95|sinimg.png
+Space Quest I (SCI remake) (EGA and VGA)|sq1sci|95|sq.png
+Space Quest III|sq3|95|sq.png
+Space Quest IV (EGA and VGA)|sq4|95|sq.png
+Space Quest V|sq5|95|sq.png
+The Island of Dr. Brain|islandbrain|95|sinimg.png
 
 Sierra AGI Game Compatibility Chart||logo_sierra|
 The Black Cauldron|bc|90|bc.png
@@ -80,7 +122,7 @@ Nippon Safes Inc.|nippon|90|nippon.png
 The Legend of Kyrandia|kyra1|90|kyra.png
 The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|85|kyra.png
 The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|80|kyra.png
-The 7th Guest|t7g|90|t7g.png
+The 7th Guest|t7g|95|t7g.png
 TeenAgent|teenagent|80|sinimg.png
 Touche: The Adventures of the Fifth Musketeer|touche|75|touche.png
 
