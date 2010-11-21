@@ -10,11 +10,11 @@ var title		= "MobyGames (EN)";
 var url_site	= "http://www.mobygames.com";	// Site address
 var url_charset	= "UTF-8";
 var language	= "en-EN";						// Site language
-var version		= "0.3.0";						// Script version 17-11-2008 update 19-04-2010
-var requires	= "0.8.0";						// GR-lida version
+var version		= "0.3.1";						// Script version 17-11-2008 update 19-04-2010
+var requires	= "0.9.0";						// GR-lida version
 var comments	= "";
 var license		= "GPL v2";
-var description	= "Script para obtener los datos del juego (titulo, genero, año, compañía, etc...) así como la caratula principal del juego.";
+var description	= "Script para obtener los datos del juego (titulo, genero, aÃ±o, compaÃ±Ã­a, etc...) asÃ­ como la caratula principal del juego.";
 
 function UrlWebBusqueda(texto_busqueda)
 {
@@ -43,7 +43,7 @@ function AnalyzeFindPage(texto)
 		results_game_Title = resultsFind[i].match(rx_Title);
 
 		m_titulo    = results_game_Title[10];
-		m_contenido = results_game_Title[12].replace(' and ',', ').replace('</div>','');
+		m_contenido = results_game_Title[12].replace(' and ','; ').replace('</div>','');
 		m_url_game  = url_site + results_game_Title[9];
 
 		twListaBusqueda.addItemFind(m_titulo, "-", "-", m_url_game);
@@ -60,7 +60,7 @@ function AnalyzeFindPage(texto)
 		results_game_Title = resultsFind[i].match(rx_Title);
 
 		m_titulo    = results_game_Title[4];
-		m_contenido = results_game_Title[6].replace(' and ',', ').replace('</div>','');
+		m_contenido = results_game_Title[6].replace(' and ','; ').replace('</div>','');
 		m_url_game  = url_site + results_game_Title[3];
 
 		twListaBusqueda.addItemFind(m_titulo, "-", "-", m_url_game);
@@ -157,10 +157,10 @@ function AnalyzeGamePage(texto, local)
 				m_array["Dat_perspectiva"] = AnalyzeCategoriasMobyGames(texto, "Perspective</div><div [^>]*>([^?]*)</div><div style=\"([^?]*)\">Misc",
 									"<a href=\"/genre/([^\"<>]*)\">([^\"<>]*)</a>", 2);
 			} else {
-				m_array["Dat_perspectiva"] = AnalyzeCategoriasMobyGames(texto, "Perspective</div><div [^>]*>([^?]*)</div><div style=\"([^?]*)\">",
+				m_array["Dat_perspectiva"] = AnalyzeCategoriasMobyGames(texto, "Perspective</div><div [^>]*>([^?]*)</div>",
 									"<a href=\"/genre/([^\"<>]*)\">([^\"<>]*)</a>", 2);
 			}
-		}		
+		}
 	} else {
 		m_array["Dat_genero"] = AnalyzeCategoriasMobyGames(texto, "Genre</div><div [^>]*>([^?]*)</div><div style=\"([^?]*)\">Non-Sport",
 									"<a href=\"/genre/([^\"<>]*)\">([^\"<>]*)</a>", 2);
@@ -286,7 +286,7 @@ function AnalyzeCategoriasMobyGames(texto, stRegExp, stRegExpDos, indxExp)
 		list_array[i] = cat_results[indxExp].replace("&nbsp;"," ");
 	}
 
-	return list_array.join(", ");
+	return list_array.join("; ");
 }
 
 function AnalyzeOtherGame(titulo, contenido)

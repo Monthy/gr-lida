@@ -14,7 +14,7 @@ var version		= "0.1.0";						// Script version 19-04-2010
 var requires	= "0.9.0";						// GR-lida version
 var comments	= "";
 var license		= "GPL v2";
-var description	= "Script para obtener los datos del juego (titulo, genero, año, compañía, etc...) así como las caratulas. También da la posibilidad de bajar configuración ya establecida de distintos juegos para el DOSBox y el ScummVM.";
+var description	= "Script para obtener los datos del juego (titulo, genero, aÃ±o, compaÃ±Ã­a, etc...) asÃ­ como las caratulas. TambiÃ©n da la posibilidad de bajar configuraciÃ³n ya establecida de distintos juegos para el DOSBox y el ScummVM.";
 
 function UrlWebBusqueda(texto_busqueda)
 {
@@ -119,7 +119,7 @@ function AnalyzeGamePage(texto, local)
 
 	if( m_array["Dat_tipo_emu"] == "dosbox" )
 	{
-	// Datos del Configuración del DOSBox
+	// Datos del ConfiguraciÃ³n del DOSBox
 		m_array["Dbx_sdl_fullscreen"]        = AnalyzeTagName(texto, "<Dbx_sdl_fullscreen>([^\"<>]*)</Dbx_sdl_fullscreen>", "");
 		m_array["Dbx_sdl_fulldouble"]        = AnalyzeTagName(texto, "<Dbx_sdl_fulldouble>([^\"<>]*)</Dbx_sdl_fulldouble>", "");
 		m_array["Dbx_sdl_fullfixed"]         = AnalyzeTagName(texto, "<Dbx_sdl_fullfixed>([^\"<>]*)</Dbx_sdl_fullfixed>", "");
@@ -217,7 +217,7 @@ function AnalyzeGamePage(texto, local)
 		m_array["Dbx_parametros_exe"]        = AnalyzeTagName(texto, "<Dbx_parametros_exe>([^<>]*)</Dbx_parametros_exe>", "");
 		m_array["Dbx_parametros_setup"]      = AnalyzeTagName(texto, "<Dbx_parametros_setup>([^<>]*)</Dbx_parametros_setup>", "");
 
-	// Añadimos los distintos Montajes
+	// AÃ±adimos los distintos Montajes
 		myDbxRE = new RegExp("<dosbox_montajes>([^\"]*)</dosbox_montajes>","g");
 		resultsDbx = texto.match(myDbxRE);
 		for(var i_dbx = 0; i_dbx < resultsDbx.length; i_dbx++)
