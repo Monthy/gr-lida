@@ -120,7 +120,7 @@ public:
 // Carga los Distintos datos para Ordenar
 	QStringList CargaDatosListas(QString archivo, QString delimitador);
 // Carga las distintos archivos la ruta indicada en una Lista.
-	void CargarListaDeCaptura(QTreeWidget *myTreeWidget, const QString directorio, QStringList filters, bool isImagen = false);
+	void CargarListaDeCaptura(QTreeWidget *myTreeWidget, const QString directorio, QStringList filters, QString imagen = "");
 
 // Crea la configuración del ScummVM
 	void CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm);

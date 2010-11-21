@@ -1480,13 +1480,10 @@ void GrLida::CargarCapturasImagenes(const QString directorio)
 {
 	if( directorio !="" && ui.mnu_ver_capturas->isChecked() )
 	{
-		QStringList filters;
-		filters.clear();
-		filters << "*.bmp" << "*.jpg" << "*.png" << "*.gif"; // Imagenes soportadas
-
-	//	setUpdatesEnabled( false );
-		fGrl.CargarListaDeCaptura(ui.twCapturas, directorio, filters, true);
-	//	setUpdatesEnabled( true );
+		setUpdatesEnabled( false );
+	// Carga Imagenes soportadas
+		fGrl.CargarListaDeCaptura(ui.twCapturas, directorio, GRLConfig["FormatsImage"].toStringList());
+		setUpdatesEnabled( true );
 	} else
 		ui.twCapturas->clear();
 }
@@ -1495,23 +1492,12 @@ void GrLida::CargarCapturasVideoSonidos(const QString directorio)
 {
 	if( directorio !="" && ui.mnu_ver_archivos_url->isChecked() )
 	{
-		QStringList filters;
-
-		filters.clear();
-	// Video soportados
-		filters << "*.avi" << "*.mkv" << "*.mov" << "*.mp4" << "*.mpeg" << "*.mpg" << "*.wmv";
-
-	//	setUpdatesEnabled( false );
-		fGrl.CargarListaDeCaptura(ui.twCapturaVideo, directorio, filters);
-	//	setUpdatesEnabled( true );
-
-		filters.clear();
-	// Sonidos soportados
-		filters << "*.mp3" << "*.ogg" << "*.wav" << "*.wma";
-
-	//	setUpdatesEnabled( false );
-		fGrl.CargarListaDeCaptura(ui.twCapturaSonido, directorio, filters);
-	//	setUpdatesEnabled( true );
+		setUpdatesEnabled( false );
+	// Carga Videos soportados
+		fGrl.CargarListaDeCaptura(ui.twCapturaVideo, directorio, GRLConfig["FormatsVideo"].toStringList(), "img_tv2x.png");
+	// Carga Sonidos soportados
+		fGrl.CargarListaDeCaptura(ui.twCapturaSonido, directorio, GRLConfig["FormatsMusic"].toStringList(), "img_audio.png");
+		setUpdatesEnabled( true );
 	} else {
 		ui.twCapturaVideo->clear();
 		ui.twCapturaSonido->clear();

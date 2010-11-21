@@ -519,6 +519,12 @@ QHash<QString, QVariant> Funciones::CargarGRLConfig(QString iniFileName)
 		config["verListaImagenes"] = settings.value("verListaImagenes", false).toBool();
 	settings.endGroup();
 
+	settings.beginGroup("OpcMultimedia");
+		config["FormatsVideo"] = settings.value("FormatsVideo", QStringList() << "*.avi" << "*.mkv" << "*.mov" << "*.mp4" << "*.mpeg" << "*.mpg" << "*.wmv").toStringList();
+		config["FormatsMusic"] = settings.value("FormatsMusic", QStringList() << "*.mp3" << "*.ogg" << "*.wav" << "*.wma").toStringList();
+		config["FormatsImage"] = settings.value("FormatsImage", QStringList() << "*.bmp" << "*.jpg" << "*.png" << "*.gif").toStringList();
+	settings.endGroup();
+
 	settings.beginGroup("UltimoDirectorio");
 		config["DirBD"]               = settings.value("DirBD" , "").toString();
 		config["DirDbx"]              = settings.value("DirDbx", "").toString();
@@ -647,6 +653,12 @@ void Funciones::GuardarGRLConfig(QString iniFileName, QHash<QString, QVariant> c
 		settings.setValue("maximized"       , config["img_maximized"]   );
 		settings.setValue("fitToWindow"     , config["fitToWindow"]     );
 		settings.setValue("verListaImagenes", config["verListaImagenes"]);
+	settings.endGroup();
+
+	settings.beginGroup("OpcMultimedia");
+		settings.setValue("FormatsVideo", config["FormatsVideo"]);
+		settings.setValue("FormatsMusic", config["FormatsMusic"]);
+		settings.setValue("FormatsImage", config["FormatsImage"]);
 	settings.endGroup();
 
 	settings.beginGroup("UltimoDirectorio");
@@ -1118,10 +1130,10 @@ QStringList Funciones::CargaDatosListas(QString archivo, QString delimitador)
 	return listaDatos;
 }
 
-void Funciones::CargarListaDeCaptura(QTreeWidget *myTreeWidget, const QString directorio, QStringList filters, bool isImagen)
+void Funciones::CargarListaDeCaptura(QTreeWidget *myTreeWidget, const QString directorio, QStringList filters, QString imagen)
 {
 	myTreeWidget->clear();
-	QString archivo, extension;
+	QString archivo;
 	QDir dir( directorio );
 	dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
 	dir.setSorting(QDir::Name);
@@ -1135,28 +1147,19 @@ void Funciones::CargarListaDeCaptura(QTreeWidget *myTreeWidget, const QString di
 		{
 			QFileInfo fileInfo = list.at(i);
 
-			extension = fileInfo.completeSuffix();
-
 			if( directorio.endsWith("/") )
 				archivo = directorio + fileInfo.fileName();
 			else
 				archivo = directorio + "/" + fileInfo.fileName();
 
 			QTreeWidgetItem *item = new QTreeWidgetItem( myTreeWidget );
-			if( isImagen )
+			if( imagen == "" )
 			{
 				item->setIcon( 0, QIcon( archivo ) );
 				item->setText( 0, "" );
 			} else {
-			// Videos
-				if( extension == "avi" || extension == "mkv" || extension == "mov" ||
-					extension == "mp4" ||extension == "mpeg" || extension == "mpg" ||
-					extension == "wmv" )
-					item->setIcon( 0, QIcon(stTheme+"img16/img_tv2x.png") );
-			// Sonidos
-				else if( extension == "mp3" || extension == "ogg" || extension == "wav" ||
-						 extension == "wma" )
-					item->setIcon( 0, QIcon(stTheme+"img16/img_audio.png") );
+				if( QFile::exists(stTheme +"img16/"+ imagen) )
+					item->setIcon( 0, QIcon(stTheme +"img16/"+ imagen) );// Videos/Sonidos
 				else
 					item->setIcon( 0, QIcon(stTheme+"img16/tag.png") );
 				item->setText( 0, fileInfo.fileName() );
