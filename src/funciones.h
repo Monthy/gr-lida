@@ -77,7 +77,7 @@ public:
 // Devuelve el directorio del Theme a usar
         QString IdiomaGrl();
 // Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use
-	QString StyleSheet(bool list=false);
+	QString StyleSheet(bool list = false, bool isBgFixed = false);
 // Carga la configuración de los iconos de la lista en modo Icono
 	QHash<QString, QVariant> CargarListWidgetIconConf();
 // Carga la configuración del GR-lida

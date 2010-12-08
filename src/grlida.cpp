@@ -1103,7 +1103,7 @@ void GrLida::setTheme()
 //	setUpdatesEnabled( false );
 	fGrl.setTheme();
 	setStyleSheet( fGrl.StyleSheet() );
-	ui.lwJuegos->setStyleSheet( fGrl.StyleSheet(true) );
+	ui.lwJuegos->setStyleSheet( fGrl.StyleSheet(true, GRLConfig["FixBgList"].toBool()) );
 
 	QFile LeerArchivo(stTheme+"tpl_juego_info.html");
 	if( LeerArchivo.open( QIODevice::ReadOnly | QIODevice::Text ) )

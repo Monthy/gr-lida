@@ -1,5 +1,5 @@
 QListWidget {
-	background-image:url(<theme>images/list_bg.jpg);
+	background-image:url(<theme>images/list_bg<bgfix>.jpg);
 	margin: 0px;
 	padding: 0px;
 }

@@ -344,7 +344,7 @@ QString Funciones::IdiomaGrl()
 }
 
 // Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use
-QString Funciones::StyleSheet(bool list)
+QString Funciones::StyleSheet(bool list, bool isBgFixed)
 {
 	QString stDirTheme;
 	if( list )
@@ -356,6 +356,10 @@ QString Funciones::StyleSheet(bool list)
 	file.open( QIODevice::ReadOnly );
 	QString styleSheet = QLatin1String( file.readAll() );
 	styleSheet.replace("<theme>", stTheme);
+	if( isBgFixed )
+		styleSheet.replace("<bgfix>", "_bgfix");
+	else
+		styleSheet.replace("<bgfix>", "");
 	file.close();
 
 	return styleSheet;
@@ -469,6 +473,7 @@ QHash<QString, QVariant> Funciones::CargarGRLConfig(QString iniFileName)
 		config["FormatoFecha"]      = settings.value("FormatoFecha" , "dd/MM/yyyy HH:mm:ss").toString();
 		config["Style"]             = settings.value("Style"        , ""     ).toString();
 		config["StylePalette"]      = settings.value("StylePalette" , false  ).toBool();
+		config["FixBgList"]         = settings.value("FixBgList"    , false  ).toBool();
 		config["NameDirTheme"]      = settings.value("NameDirTheme" , "defecto"  ).toString();
 		config["IconoFav"]          = settings.value("IconoFav"     , "fav_0.png").toString();
 		config["PicFlowReflection"] = settings.value("PicFlowReflection", "PlainReflection").toString();
@@ -605,6 +610,7 @@ void Funciones::GuardarGRLConfig(QString iniFileName, QHash<QString, QVariant> c
 		settings.setValue("FormatoFecha"     , config["FormatoFecha"]      );
 		settings.setValue("Style"            , config["Style"]             );
 		settings.setValue("StylePalette"     , config["StylePalette"]      );
+		settings.setValue("FixBgList"        , config["FixBgList"]         );
 		settings.setValue("NameDirTheme"     , config["NameDirTheme"]      );
 		settings.setValue("IconoFav"         , config["IconoFav"]          );
 		settings.setValue("PicFlowReflection", config["PicFlowReflection"] );

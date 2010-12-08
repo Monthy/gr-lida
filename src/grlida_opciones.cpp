@@ -119,6 +119,7 @@ void frmOpciones::CargarConfig()
 	stPicFlowReflection = GRLConfig["PicFlowReflection"].toString();
 	ui.spinBox_SkipPicFlow->setValue( GRLConfig["Skip_PicFlow"].toInt() );
 	stNameDirTheme = GRLConfig["NameDirTheme"].toString();
+	ui.chkFixBgList->setChecked( GRLConfig["FixBgList"].toBool() );
 
 	#ifdef Q_OS_WIN32
 		ui.chkVDMSoundDisp->setEnabled(true);
@@ -213,6 +214,7 @@ void frmOpciones::GuardarConfig()
 	GRLConfig["FormatoFecha"]      = ui.txtFormatoFecha->text();
 	GRLConfig["Style"]             = stStyleSelect;
 	GRLConfig["StylePalette"]      = ui.chkStylePalette->isChecked();
+	GRLConfig["FixBgList"]         = ui.chkFixBgList->isChecked();
 	GRLConfig["NameDirTheme"]      = stNameDirTheme;
 	GRLConfig["IconoFav"]          = ui.cbxIconFav->itemData(ui.cbxIconFav->currentIndex(), Qt::UserRole).toString();
 	GRLConfig["PicFlowReflection"] = ui.cbxPicFlowReflection->currentText();

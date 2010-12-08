@@ -1413,6 +1413,13 @@
            </layout>
           </item>
           <item>
+           <widget class="QCheckBox" name="chkFixBgList">
+            <property name="text">
+             <string>Marcar si las carátulas no coinciden en las estanterías de la lista de juegos.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="hLayout_21">
             <item>
              <widget class="QTreeWidget" name="twThemes">
