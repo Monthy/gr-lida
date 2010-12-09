@@ -457,6 +457,7 @@ QHash<QString, QVariant> Funciones::CargarGRLConfig(QString iniFileName)
 
 	settings.beginGroup("OpcGeneral");
 		config["Primeravez"]   = settings.value("Primeravez" , true ).toBool();
+		config["DirApp"]       = settings.value("DirApp", "HomePath").toString();
 		config["DirDOSBox"]    = settings.value("DirDOSBox"  , ""   ).toString();
 		config["DirScummVM"]   = settings.value("DirScummVM" , ""   ).toString();
 		config["DOSBoxDisp"]   = settings.value("DOSBoxDisp" , false).toBool();
@@ -594,6 +595,7 @@ void Funciones::GuardarGRLConfig(QString iniFileName, QHash<QString, QVariant> c
 
 	settings.beginGroup("OpcGeneral");
 		settings.setValue("Primeravez"  , config["Primeravez"]   );
+		settings.setValue("DirApp"      , config["DirApp"]       );
 		settings.setValue("DirDOSBox"   , config["DirDOSBox"]    );
 		settings.setValue("DirScummVM"  , config["DirScummVM"]   );
 		settings.setValue("DOSBoxDisp"  , config["DOSBoxDisp"]   );
