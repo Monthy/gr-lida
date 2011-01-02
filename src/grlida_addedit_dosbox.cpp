@@ -177,6 +177,8 @@ void frmAddEditDosBox::CargarConfigDosBox()
 	fGrl.CargarDatosComboBox(":/datos/dbx_mpu401.txt"        , ui.cbxDbx_midi_mpu401                ); // MPU-401
 	fGrl.CargarDatosComboBox(":/datos/dbx_midi_device.txt"   , ui.cbxDbx_midi_device                ); // MIDI Device
 
+	ui.cbxDbx_sdl_fullresolution->addItem(QIcon(stTheme+"img16/sinimg.png"), "0x0");
+
 	ui.cbxDbx_cpu_cycles_realmode->setItemText(0,"");
 	ui.cbxDbx_cpu_cycles_realmode->removeItem(1);
 	ui.cbxDbx_cpu_cycles_limitmode->setItemText(0,"");

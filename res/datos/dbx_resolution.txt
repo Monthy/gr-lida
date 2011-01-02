@@ -36,6 +36,7 @@ original|sinimg
 1280x854|sinimg
 1280x960|sinimg
 1280x1024|sinimg
+1360x768|sinimg
 1440x900|sinimg
 1440x960|sinimg
 1400x1050|sinimg
