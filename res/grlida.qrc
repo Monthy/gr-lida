@@ -66,11 +66,19 @@
         <file>datos/hu_HU/perspectivas.txt</file>
         <file>datos/hu_HU/tema.txt</file>
         <file>datos/hu_HU/svm_idioma.txt</file>
+        <file>datos/ru_RU/edad_recomendada.txt</file>
+        <file>datos/ru_RU/formatos.txt</file>
+        <file>datos/ru_RU/generos.txt</file>
+        <file>datos/ru_RU/numdisc.txt</file>
+        <file>datos/ru_RU/perspectivas.txt</file>
+        <file>datos/ru_RU/tema.txt</file>
+        <file>datos/ru_RU/svm_idioma.txt</file>
         <file>idiomas/gr-lida_da_DK.qm</file>
         <file>idiomas/gr-lida_en_EN.qm</file>
         <file>idiomas/gr-lida_es_ES.qm</file>
         <file>idiomas/gr-lida_fr_FR.qm</file>
         <file>idiomas/gr-lida_hu_HU.qm</file>
+        <file>idiomas/gr-lida_ru_RU.qm</file>
         <file>images/grlida_logo.png</file>
         <file>images/juego_eliminado.png</file>
         <file>images/juego_sin_imagen.png</file>
