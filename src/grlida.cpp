@@ -1374,11 +1374,10 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 			stJuegoParametrosExe = strDatosJuego["Dat_parametros_exe"];
 			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/datos_1.png") );
 
-			if(!stConfgJuego.isEmpty() && !QFile( stConfgJuego ).exists() )
+			if(!stConfgJuego.isEmpty())
 			{
 				ui.actionEjectar->setEnabled(false);
 				ui.mnu_ejecutar_juego->setEnabled(false);
-				QMessageBox::information( this, stTituloGrl(), tr("Configuración del juego no encontrada.")+ "\n\n'" + stConfgJuego + "'" );
 			} else {
 				stDirWorkingJuego = QFileInfo(stConfgJuego).absolutePath();
 				ui.actionEjectar->setEnabled(true);
@@ -2428,7 +2427,7 @@ void GrLida::on_EjecutarJuego()
 	if( stTipoEmu == "datos" )
 	{
 	// Ejecuta el juego directamente
-		if( stConfgJuego != "" )
+		if( stConfgJuego != "" && QFile( stConfgJuego ).exists() )
 		{
 			setWindowState(windowState() | Qt::WindowMinimized);
 			#ifdef Q_OS_WIN32
@@ -2439,7 +2438,8 @@ void GrLida::on_EjecutarJuego()
 			#else
 				Ejecutar(stConfgJuego, stJuegoParametrosExe, stDirWorkingJuego);
 			#endif
-		}
+		} else
+			QMessageBox::information( this, stTituloGrl(), tr("Configuración del juego no encontrada.")+ "\n\n'" + stConfgJuego + "'" );
 	} else {
 		if( stConfgJuego != "" )
 		{
