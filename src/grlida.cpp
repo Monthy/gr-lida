@@ -41,7 +41,9 @@
 #ifdef Q_OS_WIN32
 #include <qt_windows.h>
 #include <shellapi.h>
-#pragma comment(lib, "SHELL32.LIB")
+	#if defined (_MSC_VER)
+		#pragma comment(lib, "SHELL32.LIB")
+	#endif
 #endif
 
 GrLida::GrLida(QWidget *parent, Qt::WFlags flags)
