@@ -37,7 +37,7 @@ public:
 	~Funciones();
 
 // Versión del GR-lida
-	QString stVersionGrl(){ return "0.9.1"; }
+	QString stVersionGrl(){ return "0.9.2"; }
 // Versiones de los emuladores que soporta el GR-lida
 // DOSBox
 	QString stVersionDbx(){ return "0.74";  }
