@@ -1,8 +1,16 @@
 
 -  NEWS
 -----------------------------------
+0.9.2 (30-04-2011)
+ - Añadida la traducción del GR-lida al Ruso por Vadim Petryaev.
+ - Añadida resolución 1360x768 y 0x0 para pantalla completa del DOSBox.
+ - Corregido error por el cual no se podía hacer portable la aplicación en windows por ejemplo.
+ - Actualizada la lista de juegos soportado por el ScummVM 1.2.0.
+ - Añadida opción para poder añadir formatos de video/sonido soportados en la configuración del GR-lida (depende de los codec instalados).
+ - Añadida opción para corregir el fondo de la lista en modo Icono, ya que por ejemplo en Windows 7 no coinciden las caratulas en las estanterías.
+
 0.9.1 (14-08-2010)
- - Añadienda la traducción del GR-lida al Húngaro por Szabó Tihamér.
+ - Añadida la traducción del GR-lida al Húngaro por Szabó Tihamér.
  - Añadida opción para cargar los datos (generos, perspectivas, temas, idiomas, formatos, etc...) en el mismo idioma seleccionado.
  - Añadidas las nuevas plataformas que soporta el ScummVM en su configuración.
  - Corregido pequeño error ya que no estaba parte del código para reemplazar la etiqueta {lb_idioma_voces} en grlida_importar_juego.cpp
