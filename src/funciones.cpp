@@ -1226,54 +1226,77 @@ void Funciones::CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm)
  *
 */
 // Funcion para Poner nombres cortos en DOS.
-// Estado: Beta v 0.0.2
+// Estado: Beta v 0.0.3
+
+QString Funciones::getNameTo8Caracter(QString name)
+{
+	if( name != "" )
+	{
+		QString final, str, ext;
+		if( name.contains(".") )
+		{
+			int last_dot = name.lastIndexOf(".");
+			str = name.left(last_dot);
+			ext = name.remove(0, last_dot);
+			if( ext.size() > 4 )
+				ext = name.left(4);
+		} else {
+			ext = "";
+			str = name;
+		}
+
+		// Contiene espacios
+		if( str.contains(" ") )
+			final = str.replace(" ","").replace(".","").left(6).append("~1").append(ext).toUpper();
+		else {
+		// No contiene espacios
+		// Si es mayor que 8 se covierte.
+			if( str.length() > 8 )
+				final =  str.left(6).append("~1").append(ext).toUpper();
+			else
+				final = str.append(ext);
+		}
+
+		return final;
+	} else
+		return "";
+}
+
 QString Funciones::getShortPathName(QString longPath)
 {
 /*
  * - Archivos 8 carateres maximo
  * - Nombres sin espacios
- *
+ * - Carpetas con extensión
 */
 	if( longPath != "" )
 	{
+//	#ifdef Q_OS_WIN32
+//		const char * lpath = longPath.replace("/","\\").toAscii();
+//		char spath[2048];
+//		int len = GetShortPathNameA(lpath,spath,sizeof(spath)-1);
+//		spath[len] = '\0';
+//		return QString(spath);
+//	#else
 		int listSize = 0;
-		QString str, extension;
+		QString f_name, f_path;
 		QStringList listShortPath, shortPath;
+		QFileInfo fi( longPath );
+		f_name = fi.fileName();
+		f_path = fi.absolutePath().append("/").replace("/","\\");
 
 		shortPath.clear();
 		listShortPath.clear();
-
-		QFileInfo fi( longPath );
-		if( fi.isFile() )
-		{
-			extension = "." + fi.completeSuffix();
-			listShortPath = longPath.replace("/","\\").remove(extension).split("\\");
-		} else
-			listShortPath = longPath.replace("/","\\").split("\\");
-
+		listShortPath = f_path.split("\\");
 		listSize = listShortPath.size();
+
 		for( int i = 0; i < listSize; ++i )
 		{
-			str.clear();
-			str = listShortPath.value(i);
-
-			// Contiene espacios
-			if( str.contains(" ") )
-				shortPath << str.replace(" ","").left(6).append("~1");
-			else {
-			// No contiene espacios
-			// Si es mayor que 8 se covierte.
-				if( str.length() > 8 )
-					shortPath << str.left(6).append("~1");
-				else
-					shortPath << str;
-			}
+			shortPath << getNameTo8Caracter(listShortPath.value(i));
 		}
 
-		if( fi.isFile() )
-			return shortPath.join("\\") + extension;
-		else
-			return shortPath.join("\\");
+		return shortPath.join("\\").append(getNameTo8Caracter(f_name));
+//	#endif
 	} else
 		return "";
 }
@@ -1290,21 +1313,16 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 	QStringList listmontajes, lista_multiple_iso, lista_isos;
 
 	QFileInfo fi( datos["Dbx_path_exe"] );
-	NombreEXEDbx = fi.fileName();		// Nombre del ejecutable
-	DirEXEDbx    = fi.absolutePath();	// Directorio donde esta
+	NombreEXEDbx = fi.fileName();						// Nombre del ejecutable
+	DirEXEDbx    = fi.absolutePath().replace("/","\\");	// Directorio donde esta
 
-	if( DirEXEDbx.endsWith("/") )
-		DirEXEDbx.replace("/","\\");
-	else
-		DirEXEDbx.append("/").replace("/","\\");
+	if( !DirEXEDbx.endsWith("\\") )
+		DirEXEDbx.append("\\");
 
 // loadfix
 	if( datos["Dbx_opt_loadfix"] == "true" )
-	{
-		Dbx_loadfix = "loadfix ";
-		if( datos["Dbx_opt_loadfix_mem"] != "" && datos["Dbx_opt_loadfix_mem"] != "64" )
-			Dbx_loadfix.append("-"+datos["Dbx_opt_loadfix_mem"]+" ");
-	} else
+		Dbx_loadfix = "loadfix -"+ datos["Dbx_opt_loadfix_mem"] +" ";
+	else
 		Dbx_loadfix = "";
 
 // Cerrar DOSBox
@@ -1315,155 +1333,161 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 
 // Montajes
 	listmontajes.clear();
-	for( num_mount = 0; num_mount < myTreeWidget->topLevelItemCount(); num_mount++ )
+	if( myTreeWidget->topLevelItemCount() > 0 )
 	{
-		QTreeWidgetItem *item = myTreeWidget->topLevelItem( num_mount );
+		mount_letra_primario = myTreeWidget->topLevelItem(0)->text(3);
+		mount_dir_primario   = myTreeWidget->topLevelItem(0)->text(0);
 
-	// Indicamos el directorio y la letra a montar
-		mount_drive  = item->text(0); // Real Drive or Directory or Image ISO, IMA
-		mount_letter = item->text(3); // Emulated Drive letter
-
-		if( (item->text(2) == "floppy") || (item->text(2) == "drive") || (item->text(2) == "cdrom") )
+		for( num_mount = 0; num_mount < myTreeWidget->topLevelItemCount(); num_mount++ )
 		{
-			#ifdef Q_OS_WIN32
-				mount_drive.replace("/","\\");
-				if( !mount_drive.endsWith("\\") )
-					mount_drive.append("\\");
-			#endif
-		} else {
-			#ifdef Q_OS_WIN32
-				mount_drive.replace("/","\\");
-			#endif
-		}
+			QTreeWidgetItem *item = myTreeWidget->topLevelItem( num_mount );
 
-	// Situa el montaje primario independiente de donde este colocado
-		if( item->text(7) == "v")
-		{
-			mount_letra_primario = mount_letter;
-			mount_dir_primario   = mount_drive;
-		} else {
-			mount_letra_primario = myTreeWidget->topLevelItem(0)->text(3);
-			mount_dir_primario   = myTreeWidget->topLevelItem(0)->text(0);
-		}
+		// Indicamos el directorio y la letra a montar
+			mount_drive  = item->text(0); // Real Drive or Directory or Image ISO, IMA
+			mount_letter = item->text(3); // Emulated Drive letter
 
-	//Montando las unidades
-		if( item->text(2) != "boot")
-		{
-			mount_Boot = false;
-		// Opciones de montaje
-			if( item->text(5) != "" )
-				mount_Options = " " + item->text(5);
-			else
-				mount_Options = "";
-
-		// Etiqueta de las unidades.
-			if( item->text(1) != "" )
-				mount_label = " -label " + item->text(1);
-			else
-				mount_label = "";
-
-			if( item->text(6) != "" )
-				mount_IOCtrl = " " + item->text(6);
-			else
-				mount_IOCtrl = "";
-
-		// Montando Disquetera, Disco Duro, CDs, Imagenes de Discos, disquetes y CDs
-			if( item->text(2) == "floppy")
+			if( (item->text(2) == "floppy") || (item->text(2) == "drive") || (item->text(2) == "cdrom") )
 			{
-				montaje_IMG = false;
-				mount_type = " -t floppy";
+				#ifdef Q_OS_WIN32
+					mount_drive.replace("/","\\");
+					if( !mount_drive.endsWith("\\") )
+						mount_drive.append("\\");
+				#endif
+			} else {
+				#ifdef Q_OS_WIN32
+					mount_drive.replace("/","\\");
+				#endif
 			}
 
-			if( item->text(2) == "drive" )
+		// Situa el montaje primario independiente de donde este colocado
+			if( item->text(7) == "v" )
 			{
-				montaje_IMG = false;
-				mount_type = "";
+				mount_letra_primario = mount_letter;
+				mount_dir_primario   = mount_drive;
 			}
 
-			if( item->text(2) == "cdrom" )
+		//Montando las unidades
+			if( item->text(2) != "boot")
 			{
-				montaje_IMG  = false;
-				mount_type  = " -t cdrom";
+				mount_Boot = false;
+			// Opciones de montaje
+				if( item->text(5) != "" )
+					mount_Options = " " + item->text(5);
+				else
+					mount_Options = "";
 
-				if( item->text(4) != "" )
-					mount_type.append( " -usecd "+ item->text(4) );
-			}
+			// Etiqueta de las unidades.
+				if( item->text(1) != "" )
+					mount_label = " -label " + item->text(1);
+				else
+					mount_label = "";
 
-			if( item->text(2) == "IMG_floppy")
-			{
-				montaje_IMG = true;
-				mount_type = " -t floppy";
-			}
+				if( item->text(6) != "" )
+					mount_IOCtrl = " " + item->text(6);
+				else
+					mount_IOCtrl = "";
 
-			if( item->text(2) == "IMG_iso")
-			{
-				montaje_IMG = true;
-				mount_type = " -t iso";
-			}
+			// Montando Disquetera, Disco Duro, CDs, Imagenes de Discos, disquetes y CDs
+				if( item->text(2) == "floppy" )
+				{
+					montaje_IMG = false;
+					mount_type = " -t floppy";
+				}
 
-			if( item->text(2) == "IMG_multi_iso")
-			{
-				montaje_IMG = true;
-				mount_type = " -t iso";
+				if( item->text(2) == "drive" )
+				{
+					montaje_IMG = false;
+					mount_type = "";
+				}
 
+				if( item->text(2) == "cdrom" )
+				{
+					montaje_IMG  = false;
+					mount_type  = " -t cdrom";
+
+					if( item->text(4) != "" )
+						mount_type.append( " -usecd "+ item->text(4) );
+				}
+
+				if( item->text(2) == "IMG_floppy" )
+				{
+					montaje_IMG = true;
+					mount_type = " -t floppy";
+				}
+
+				if( item->text(2) == "IMG_iso" )
+				{
+					montaje_IMG = true;
+					mount_type = " -t iso";
+				}
+
+				if( item->text(2) == "IMG_multi_iso" )
+				{
+					montaje_IMG = true;
+					mount_type = " -t iso";
+
+					lista_isos.clear();
+					lista_isos << mount_drive.split("|", QString::SkipEmptyParts);
+
+					lista_multiple_iso.clear();
+					for( int i = 0; i < lista_isos.size(); ++i )
+					{
+						lista_multiple_iso << "\""+ getShortPathName( lista_isos.value(i) ) +"\"";
+					}
+					mount_drive.clear();
+					mount_drive = lista_multiple_iso.join(" ");
+				}
+
+				if( item->text(2) == "IMG_hdd" )
+				{
+					montaje_IMG = true;
+					mount_type = " -t hdd";
+				}
+
+				if( montaje_IMG == true )
+				{
+					if( item->text(2) == "IMG_multi_iso" )
+						listmontajes << "imgmount " + mount_letter + " " + mount_drive + mount_type + mount_label;
+					else
+						listmontajes << "imgmount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_label;
+				} else
+					listmontajes << "mount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_IOCtrl + mount_Options + mount_label;
+			} else {
+				mount_Boot = true;
+
+			// Montaje multiple del BOOT
 				lista_isos.clear();
 				lista_isos << mount_drive.split("|", QString::SkipEmptyParts);
 
 				lista_multiple_iso.clear();
 				for( int i = 0; i < lista_isos.size(); ++i )
 				{
-					lista_multiple_iso << "\""+getShortPathName( lista_isos.value(i) )+"\"";
+					lista_multiple_iso << "\""+ getShortPathName( lista_isos.value(i) ) +"\"";
 				}
 				mount_drive.clear();
 				mount_drive = lista_multiple_iso.join(" ");
+				montaje_boot = "boot \""+ mount_drive +"\" -l"+ mount_letter;
 			}
-
-			if( item->text(2) == "IMG_hdd")
-			{
-				montaje_IMG = true;
-				mount_type = " -t hdd";
-			}
-
-			if( montaje_IMG == true )
-			{
-				if( item->text(2) == "IMG_multi_iso")
-					listmontajes << "imgmount " + mount_letter + " " + mount_drive + mount_type + mount_label;
-				else
-					listmontajes << "imgmount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_label;
-			} else
-				listmontajes << "mount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_IOCtrl + mount_Options + mount_label;
-		} else {
-			mount_Boot = true;
-
-		// Montaje multiple del BOOT
-			lista_isos.clear();
-			lista_isos << mount_drive.split("|", QString::SkipEmptyParts);
-
-			lista_multiple_iso.clear();
-			for( int i = 0; i < lista_isos.size(); ++i )
-			{
-				lista_multiple_iso << "\""+getShortPathName( lista_isos.value(i) )+"\"";
-			}
-			mount_drive.clear();
-			mount_drive = lista_multiple_iso.join(" ");
-
-			montaje_boot = "boot \"" + mount_drive + "\" -l"+mount_letter;
 		}
+	} else {
+		mount_letra_primario = "";
+		mount_dir_primario   = "";
+		montaje_boot = "";
 	}
 
 	mount_dir_primario.replace("/","\\");
 	if( !mount_dir_primario.endsWith("\\") )
 		mount_dir_primario.append("\\");
 
-	mount_dir = DirEXEDbx;
-	mount_dir.remove(mount_dir_primario);
+//	mount_dir = DirEXEDbx.remove(mount_dir_primario, Qt::CaseInsensitive);
 //	if( mount_dir == "\\" ) mount_dir.remove(0,1);
+	mount_dir = getShortPathName( DirEXEDbx ).remove( getShortPathName( mount_dir_primario ), Qt::CaseInsensitive);
 
 	if( mount_Boot == false )
 	{
-		listmontajes << mount_letra_primario + ":";
-		listmontajes << "cd " + getShortPathName( mount_dir );
-		listmontajes << Dbx_loadfix + NombreEXEDbx + " " + datos["Dbx_parametros_exe"];
+		listmontajes << mount_letra_primario +":";
+		listmontajes << "cd "+ mount_dir;
+		listmontajes << Dbx_loadfix + getNameTo8Caracter( NombreEXEDbx ) +" "+ datos["Dbx_parametros_exe"];
 	} else {
 		listmontajes << montaje_boot;
 	}

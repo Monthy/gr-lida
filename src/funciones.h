@@ -125,6 +125,7 @@ public:
 // Crea la configuración del ScummVM
 	void CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm);
 // Funcion para Poner nombres cortos en DOS.
+	QString getNameTo8Caracter(QString name);
 	QString getShortPathName(QString longPath);
 // Crea la configuración de los Montajes para el DOSBox
 	QStringList CreaConfigMontajes(QTreeWidget *treeWidget, const QHash<QString, QString> datos);
