@@ -920,7 +920,7 @@ void frmAddEditDosBox::on_btnDbx_FileConfg()
 	bool str_ok;
 	QString str, archivo;
 
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_path_conf->text(), "Config DOSBox (*.conf);;"+tr("Todos los archivo") + " (*)", 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_path_conf->text(), "Config DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -945,7 +945,7 @@ void frmAddEditDosBox::on_btnDbx_FileConfg()
 
 void frmAddEditDosBox::on_btnDbx_ExeJuego()
 {
-	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_exe"].toString(), ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_exe"].toString(), ui.txtDbx_path_exe->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtDbx_path_exe->text() );
 	if( fi.exists() )
@@ -958,7 +958,7 @@ void frmAddEditDosBox::on_btnDbx_ExeJuego()
 
 void frmAddEditDosBox::on_btnDbx_ExeSetup()
 {
-	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_setup"].toString(), ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_setup"].toString(), ui.txtDbx_path_setup->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtDbx_path_setup->text() );
 	if( fi.exists() )
@@ -984,7 +984,7 @@ void frmAddEditDosBox::on_btnDirGravisUltraSound()
 
 void frmAddEditDosBox::on_btnDbx_mapperfile()
 {
-	ui.txtDbx_sdl_mapperfile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_sdl_mapperfile"].toString(), ui.txtDbx_sdl_mapperfile->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_sdl_mapperfile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_sdl_mapperfile"].toString(), ui.txtDbx_sdl_mapperfile->text(), "KeyMapper (*.map *.txt);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtDbx_sdl_mapperfile->text() );
 	if( fi.exists() )
@@ -997,7 +997,7 @@ void frmAddEditDosBox::on_btnDbx_mapperfile()
 
 void frmAddEditDosBox::on_btnDbx_language()
 {
-	ui.txtDbx_dosbox_language->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_dosbox_language"].toString(), ui.txtDbx_dosbox_language->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_dosbox_language->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_dosbox_language"].toString(), ui.txtDbx_dosbox_language->text(), tr("Idioma") +" (*.lng *.txt);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtDbx_dosbox_language->text() );
 	if( fi.exists() )
@@ -1362,18 +1362,18 @@ void frmAddEditDosBox::on_btnToolDbx_mount_Floppy()
 
 void frmAddEditDosBox::on_btnToolDbx_mount_ImgFloppy()
 {
-	QString m_file = fGrl.VentanaAbrirArchivos(tr("Selecciona un archivo"), "", "", tr("Todos los archivo") + " (*)", 0, false);
+		QString m_file = fGrl.VentanaAbrirArchivos(tr("Selecciona un archivo"), "", "", tr("Imagen") +" (*.ima *.img);;"+ tr("Todos los archivo") + " (*)", 0, false);
 	addMontajeAutoexec("IMG_floppy", m_file);
 }
 
 void frmAddEditDosBox::on_btnToolDbx_mount_ImgCD()
 {
-	QString m_file = fGrl.VentanaAbrirArchivos(tr("Selecciona un archivo"), "", "", tr("Todos los archivo") + " (*)", 0, false);
+		QString m_file = fGrl.VentanaAbrirArchivos(tr("Selecciona un archivo"), "", "", tr("Imagen CD") +" (*.iso *.cue);;"+ tr("Todos los archivo") + " (*)", 0, false);
 	addMontajeAutoexec("IMG_iso", m_file);
 }
 
 void frmAddEditDosBox::on_btnToolDbx_mount_ImgHD()
 {
-	QString m_file = fGrl.VentanaAbrirArchivos(tr("Selecciona un archivo"), "", "", tr("Todos los archivo") + " (*)", 0, false);
+		QString m_file = fGrl.VentanaAbrirArchivos(tr("Selecciona un archivo"), "", "", tr("Imagen HD") +" (*.ima *.img);;"+tr("Todos los archivo") + " (*)", 0, false);
 	addMontajeAutoexec("IMG_hdd", m_file);
 }

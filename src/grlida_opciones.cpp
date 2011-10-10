@@ -333,7 +333,7 @@ void frmOpciones::on_btnOk()
 
 void frmOpciones::on_btnDirDbx()
 {
-	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del DOSBox"), GRLConfig["DirDbx"].toString(), ui.txtDirDbx->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del DOSBox"), GRLConfig["DirDbx"].toString(), ui.txtDirDbx->text(), tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtDirDbx->text() );
 	if( fi.exists() )
@@ -344,7 +344,7 @@ void frmOpciones::on_btnDirDbx()
 
 void frmOpciones::on_btnDirSvm()
 {
-	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del ScummVM"), GRLConfig["DirSvm"].toString(), ui.txtDirSvm->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del ScummVM"), GRLConfig["DirSvm"].toString(), ui.txtDirSvm->text(), tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtDirSvm->text() );
 	if( fi.exists() )
@@ -355,7 +355,7 @@ void frmOpciones::on_btnDirSvm()
 
 void frmOpciones::on_btnDirDB()
 {
-	ui.txtDirBD->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["DirBD"].toString(), ui.txtDirBD->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDirBD->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["DirBD"].toString(), ui.txtDirBD->text(), tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtDirBD->text() );
 	if( fi.exists() )

@@ -1308,7 +1308,7 @@ void frmAddEditJuego::on_btnAbrirUrl()
 void frmAddEditJuego::on_btnDatos_ExeJuego()
 {
 	QString archivo;
-	archivo = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["DatosFiles_PathExe"].toString(), ui.txtDatos_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["DatosFiles_PathExe"].toString(), ui.txtDatos_path_exe->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") + " (*)", 0, false);
 	QFileInfo fi( archivo );
 	if( fi.exists() )
 	{
@@ -1327,16 +1327,16 @@ void frmAddEditJuego::on_btnDatosFiles_PathFile()
 	switch ( ui.cbxDatos_TipoArchivo->currentIndex() )
 	{
 		case 0:
-			tipo_archivo = tr("Documentos - Manuales")+" - (*.cbz *.zip)";
+			tipo_archivo = tr("Documentos - Manuales") +" - (*.cbz *.zip);;"+ tr("Todos los archivo") +" (*)";
 		break;
 		case 1:
-			tipo_archivo = tr("Ruleta de protección")+" - (*.conf *.zip)";
+			tipo_archivo = tr("Ruleta de protección") +" - (*.conf *.zip);;"+ tr("Todos los archivo") +" (*)";
 		break;
 		case 2:
-			tipo_archivo = tr("Todos los archivo")+" (*)";
+			tipo_archivo = tr("Todos los archivo") +" (*)";
 		break;
 		default:
-			tipo_archivo = tr("Todos los archivo")+" (*)";
+			tipo_archivo = tr("Todos los archivo") +" (*)";
 		break;
 	}
 	archivo = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["DatosFiles_PathFile"].toString(), ui.txtDatosFiles_PathFile->text(), tipo_archivo, 0, false);

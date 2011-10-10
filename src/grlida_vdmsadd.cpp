@@ -250,7 +250,7 @@ void frmVdmsAdd::on_btnVdms_FileConfg()
 
 void frmVdmsAdd::on_btnVdms_ExeJuego()
 {
-	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_path_exe"].toString(), ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_path_exe"].toString(), ui.txtVdms_path_exe->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtVdms_path_exe->text() );
 	if( fi.exists() )
@@ -263,7 +263,7 @@ void frmVdmsAdd::on_btnVdms_ExeJuego()
 
 void frmVdmsAdd::on_btnVdms_Icono()
 {
-	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_icon"].toString(), ui.txtVdms_icon->text(), tr("Todos los archivo") + " (*)", 0, false)  );//+ ",0"
+	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_icon"].toString(), ui.txtVdms_icon->text(), tr("Iconos")+" (*.ico *.icl *.exe *.dll);;"+ tr("Todos los archivo") +" (*)", 0, false)  );//+ ",0"
 
 	QFileInfo fi( ui.txtVdms_icon->text() );
 	if( fi.exists() )

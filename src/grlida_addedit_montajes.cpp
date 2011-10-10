@@ -204,7 +204,15 @@ void frmAddEditMontajes::on_DirFile()
 				GRLConfig["Montaje_path"] = "";
 		}
 	} else {
-		QString archivo = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Montaje_path"].toString(), ui.txtMontaje_path->text(), tr("Todos los archivo") + " (*)", 0, false);
+		QString tipo_archivo;
+		if( tipo_montaje == "IMG_floppy" || tipo_montaje == "boot" || tipo_montaje == "IMG_hdd" )
+			tipo_archivo = tr("Imagen") +" (*.ima *.img);;";
+		else if( tipo_montaje == "IMG_iso" || tipo_montaje == "IMG_multi_iso" )
+			tipo_archivo = tr("Imagen CD") +" (*.iso *.cue);;";
+		else
+			tipo_archivo = "";
+
+		QString archivo = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Montaje_path"].toString(), ui.txtMontaje_path->text(), tipo_archivo + tr("Todos los archivo") +" (*)", 0, false);
 		if( archivo !="" )
 		{
 			if( tipo_montaje == "IMG_multi_iso" || tipo_montaje == "boot" )

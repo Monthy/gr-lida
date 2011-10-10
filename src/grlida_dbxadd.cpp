@@ -803,7 +803,7 @@ void frmDbxAdd::on_btnDbx_FileConfg()
 {
 	bool str_ok;
 	QString str, archivo;
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_path_conf->text(), "Config DOSBox (*.conf);;"+tr("Todos los archivo") + " (*)", 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."),  stHomeDir + "confdbx/", ui.txtDbx_path_conf->text(), "Config DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -824,7 +824,7 @@ void frmDbxAdd::on_btnDbx_FileConfg()
 
 void frmDbxAdd::on_btnDbx_ExeJuego()
 {
-	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_exe"].toString(), ui.txtDbx_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_exe"].toString(), ui.txtDbx_path_exe->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtDbx_path_exe->text() );
 	if( fi.exists() )
@@ -837,7 +837,7 @@ void frmDbxAdd::on_btnDbx_ExeJuego()
 
 void frmDbxAdd::on_btnDbx_ExeSetup()
 {
-	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_setup"].toString(), ui.txtDbx_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_setup"].toString(), ui.txtDbx_path_setup->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtDbx_path_setup->text() );
 	if( fi.exists() )

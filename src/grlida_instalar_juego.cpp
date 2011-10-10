@@ -164,9 +164,9 @@ void frmInstalarJuego::on_btnOk()
 
 void frmInstalarJuego::on_btnOrigen()
 {
-	QString tipomontaje = ui.cbxMontaje_type_drive->itemData( ui.cbxMontaje_type_drive->currentIndex() ).toString();
+	QString tipo_montaje = ui.cbxMontaje_type_drive->itemData( ui.cbxMontaje_type_drive->currentIndex() ).toString();
 
-	if( tipomontaje == "drive" || tipomontaje == "cdrom" || tipomontaje == "floppy" )
+	if( tipo_montaje == "drive" || tipo_montaje == "cdrom" || tipo_montaje == "floppy" )
 	{
 		QString directorio = fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Montaje_path"].toString(), ui.txtOrigenPath->text() );
 		QDir dir( directorio );
@@ -179,11 +179,19 @@ void frmInstalarJuego::on_btnOrigen()
 			GRLConfig["Montaje_path"] = "";
 		}
 	} else {
-		QString archivo = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Montaje_path"].toString(), ui.txtOrigenPath->text(), tr("Todos los archivo") + " (*)", 0, false);
+		QString tipo_archivo;
+		if( tipo_montaje == "IMG_floppy" || tipo_montaje == "boot" || tipo_montaje == "IMG_hdd" )
+			tipo_archivo = tr("Imagen") +" (*.ima *.img);;";
+		else if( tipo_montaje == "IMG_iso" || tipo_montaje == "IMG_multi_iso" )
+			tipo_archivo = tr("Imagen CD") +" (*.iso *.cue);;";
+		else
+			tipo_archivo = "";
+
+		QString archivo = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Montaje_path"].toString(), ui.txtOrigenPath->text(), tipo_archivo + tr("Todos los archivo") +" (*)", 0, false);
 		QFileInfo fi( archivo );
 		if( fi.exists() )
 		{
-			if( tipomontaje == "IMG_multi_iso" )
+			if( tipo_montaje == "IMG_multi_iso" )
 			{
 				QListWidgetItem *itemIso = new QListWidgetItem( ui.lwOrigenMultiPath );
 				itemIso->setIcon( QIcon(stTheme+"img16/cd_iso.png") );

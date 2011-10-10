@@ -379,7 +379,7 @@ void frmAddEditScummVM::on_btnDirSvm_sonido()
 
 void frmAddEditScummVM::on_btnDirSvm_setup()
 {
-	ui.txtSvm_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_path_setup"].toString(), ui.txtSvm_path_setup->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtSvm_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_path_setup"].toString(), ui.txtSvm_path_setup->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") + " (*)", 0, false) );
 
 	QFileInfo fi( ui.txtSvm_path_setup->text() );
 	if( fi.exists() )
@@ -392,7 +392,7 @@ void frmAddEditScummVM::on_btnDirSvm_setup()
 
 void frmAddEditScummVM::on_btnDirSvm_sound_font()
 {
-	ui.txtSvm_soundfont->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_soundfont"].toString(), ui.txtSvm_soundfont->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtSvm_soundfont->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_soundfont"].toString(), ui.txtSvm_soundfont->text(), "SoundFont (*.sf2 *.sfArk);;"+ tr("Todos los archivo") + " (*)", 0, false) );
 
 	QFileInfo fi( ui.txtSvm_soundfont->text() );
 	if( fi.exists() )

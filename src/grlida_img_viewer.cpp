@@ -198,7 +198,9 @@ void ImageViewer::setListImgVisible(bool visible)
 void ImageViewer::open()
 {
 	isZip = false;
-	QString fileName = QFileDialog::getOpenFileName(this, tr("Abrir Imagen"), QDir::currentPath());
+	QString fileName = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, stHomeDir,
+											  tr("Imagenes Soportadas")+" (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.tiff *.xbm *.xpm);;"+
+											  tr("Todos los archivo") + " (*)", 0, false);
 	if( !fileName.isEmpty() )
 	{
 		openImg( fileName );

@@ -188,7 +188,7 @@ void frmAddEditVDMSound::on_btnVdms_FileConfg()
 	bool str_ok;
 	QString str, archivo;
 
-	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir + "confvdms/", ui.txtVdms_path_conf->text(), "Config VDMSound (*.vlp);;"+tr("Todos los archivo") + " (*)", 0, true);
+	archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir + "confvdms/", ui.txtVdms_path_conf->text(), "Config VDMSound (*.vlp);;"+ tr("Todos los archivo") +" (*)", 0, true);
 	if(archivo != "")
 	{
 		QFile appConfg( archivo );
@@ -211,7 +211,7 @@ void frmAddEditVDMSound::on_btnVdms_FileConfg()
 
 void frmAddEditVDMSound::on_btnVdms_ExeJuego()
 {
-	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_path_exe"].toString(), ui.txtVdms_path_exe->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_path_exe"].toString(), ui.txtVdms_path_exe->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtVdms_path_exe->text() );
 	if( fi.exists() )
@@ -225,8 +225,8 @@ void frmAddEditVDMSound::on_btnVdms_ExeJuego()
 void frmAddEditVDMSound::on_btnVdms_Icono()
 {
 	ui.txtVdms_icon->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_icon"].toString(), ui.txtVdms_icon->text(),
-														tr("Iconos")+" (*.ico *.exe *.dll);;"+
-														tr("Todos los archivo") + " (*)", 0, false)  );//+ ",0"
+														tr("Iconos")+" (*.ico *.icl *.exe *.dll);;"+
+														tr("Todos los archivo") +" (*)", 0, false)  );//+ ",0"
 
 	QFileInfo fi( ui.txtVdms_icon->text() );
 	if( fi.exists() )

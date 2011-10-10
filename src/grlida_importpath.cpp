@@ -160,7 +160,7 @@ void frmImportPath::on_btnOk()
 
 void frmImportPath::on_btnOpenDbxFile_1()
 {
-	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confdbx/", ui.txtPath_Dbx_1->text(), tr("Todos los archivo") + " (*)", 0, true);
+	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confdbx/", ui.txtPath_Dbx_1->text(), "Config DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
 	QFile appConfg( archivo );
 	if( !appConfg.exists() )
 	{
@@ -174,7 +174,7 @@ void frmImportPath::on_btnOpenDbxFile_1()
 
 void frmImportPath::on_btnOpenDbxFile_2()
 {
-	ui.txtPath_Dbx_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_exe"].toString(), ui.txtPath_Dbx_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Dbx_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_exe"].toString(), ui.txtPath_Dbx_2->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtPath_Dbx_2->text() );
 	if( fi.exists() )
@@ -187,7 +187,7 @@ void frmImportPath::on_btnOpenDbxFile_2()
 
 void frmImportPath::on_btnOpenDbxFile_3()
 {
-	ui.txtPath_Dbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_setup"].toString(), ui.txtPath_Dbx_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Dbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_setup"].toString(), ui.txtPath_Dbx_3->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtPath_Dbx_3->text() );
 	if( fi.exists() )
@@ -200,7 +200,7 @@ void frmImportPath::on_btnOpenDbxFile_3()
 
 void frmImportPath::on_btnOpenDbxFile_4()
 {
-	ui.txtPath_Dbx_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_dosbox_language"].toString(), ui.txtPath_Dbx_4->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Dbx_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_dosbox_language"].toString(), ui.txtPath_Dbx_4->text(), tr("Idioma") +" (*.lng *.txt);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtPath_Dbx_4->text() );
 	if( fi.exists() )
@@ -213,7 +213,7 @@ void frmImportPath::on_btnOpenDbxFile_4()
 
 void frmImportPath::on_btnOpenDbxFile_5()
 {
-	ui.txtPath_Dbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_sdl_mapperfile"].toString(), ui.txtPath_Dbx_5->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Dbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_sdl_mapperfile"].toString(), ui.txtPath_Dbx_5->text(), tr("KeyMapper") +" (*.map *.txt);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtPath_Dbx_4->text() );
 	if( fi.exists() )
@@ -291,7 +291,7 @@ void frmImportPath::on_btnOpenSvmDir_2()
 
 void frmImportPath::on_btnOpenSvmFile3()
 {
-	ui.txtPath_Svm_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_path_setup"].toString(), ui.txtPath_Svm_3->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Svm_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_path_setup"].toString(), ui.txtPath_Svm_3->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtPath_Svm_3->text() );
 	if( fi.exists() )
@@ -343,7 +343,7 @@ void frmImportPath::on_btnOpenSvmDir_6()
 
 void frmImportPath::on_btnOpenVdmsFile_1()
 {
-	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confvdms/", ui.txtPath_Vdms_1->text(), tr("Todos los archivo") + " (*)", 0, true);
+	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confvdms/", ui.txtPath_Vdms_1->text(), "Config VDMSound (*.vlp);;"+ tr("Todos los archivo") +" (*)", 0, true);
 	QFile appConfg( archivo );
 	if( !appConfg.exists() )
 	{
@@ -357,7 +357,7 @@ void frmImportPath::on_btnOpenVdmsFile_1()
 
 void frmImportPath::on_btnOpenVdmsFile_2()
 {
-	ui.txtPath_Vdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_path_exe"].toString(), ui.txtPath_Vdms_2->text(), tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtPath_Vdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_path_exe"].toString(), ui.txtPath_Vdms_2->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
 	QFileInfo fi( ui.txtPath_Vdms_2->text() );
 	if( fi.exists() )
