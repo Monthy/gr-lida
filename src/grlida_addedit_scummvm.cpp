@@ -80,13 +80,14 @@ void frmAddEditScummVM::createConnections()
 {
 	connect( ui.twScummVM    , SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* )));
 	connect( ui.btnDefectoSvm, SIGNAL( clicked() ), this, SLOT( on_btnDefecto() ) );
-	connect( ui.btnDirSvm_1  , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_path() ) );
-	connect( ui.btnDirSvm_2  , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_save() ) );
-	connect( ui.btnDirSvm_3  , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_extra() ) );
-	connect( ui.btnDirSvm_4  , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_capturas() ) );
-	connect( ui.btnDirSvm_5  , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sonido() ) );
-	connect( ui.btnDirSvm_6  , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_sound_font() ) );
-	connect( ui.btnDirSvm_7  , SIGNAL( clicked() ), this, SLOT( on_btnDirSvm_setup() ) );
+
+	connect( ui.btnSvm_Path        , SIGNAL( clicked() ), this, SLOT( on_btnSvm_Path()         ) );
+	connect( ui.btnSvm_PathSave    , SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathSave()     ) );
+	connect( ui.btnSvm_PathSetup   , SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathSetup()    ) );
+	connect( ui.btnSvm_PathExtra   , SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathExtra()    ) );
+	connect( ui.btnSvm_PathCapturas, SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathCapturas() ) );
+	connect( ui.btnSvm_PathSonido  , SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathSonido()   ) );
+	connect( ui.btnSvm_SoundFont   , SIGNAL( clicked() ), this, SLOT( on_btnSvm_SoundFont()    ) );
 
 	connect( ui.h_SliderSvm_music_volume , SIGNAL(valueChanged(int)), ui.posSliderSvm_1, SLOT(setNum(int)));
 	connect( ui.h_SliderSvm_sfx_volume   , SIGNAL(valueChanged(int)), ui.posSliderSvm_2, SLOT(setNum(int)));
@@ -100,20 +101,20 @@ void frmAddEditScummVM::createConnections()
 
 void frmAddEditScummVM::setTheme()
 {
-	ui.btnDirSvm_1->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirSvm_2->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirSvm_3->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirSvm_4->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirSvm_5->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirSvm_6->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirSvm_7->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirSvm_1_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnDirSvm_2_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnDirSvm_3_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnDirSvm_4_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnDirSvm_5_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnDirSvm_6_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnDirSvm_7_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnSvm_Path->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_PathSave->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_PathExtra->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_PathCapturas->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_PathSonido->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_SoundFont->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnSvm_PathSetup->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnSvm_Path_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnSvm_PathSave_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnSvm_PathExtra_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnSvm_PathCapturas_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnSvm_PathSonido_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnSvm_SoundFont_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnSvm_PathSetup_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnDefectoSvm->setIcon( QIcon(stTheme+"img16/actualizar.png") );
 	setTabIcon(0, QIcon(stTheme+"img16/scummvm.png") );
 	setTabIcon(1, QIcon(stTheme+"img16/opciones.png") );
@@ -200,7 +201,7 @@ void frmAddEditScummVM::CargarDatosScummVM(QString IDGrl)
 
 void frmAddEditScummVM::CargarDatosScummVM(QHash<QString, QString> datosSvm)
 {
-	ui.txtSvm_gameid->setText( datosSvm["Svm_game"] );				// game
+	ui.txtSvm_game->setText( datosSvm["Svm_game"] );				// game
 	ui.txtSvm_game_label->setText( datosSvm["Svm_game_label"] );	// game_label
 
 	QTreeWidgetItem *item;
@@ -217,8 +218,8 @@ void frmAddEditScummVM::CargarDatosScummVM(QHash<QString, QString> datosSvm)
 	ui.chkSvm_aspect_ratio->setChecked( fGrl.StrToBool( datosSvm["Svm_aspect_ratio"] ) );							// aspect_ratio
 	ui.txtSvm_path->setText( datosSvm["Svm_path"] );																// path
 	ui.txtSvm_path_setup->setText( datosSvm["Svm_path_setup"] );													// path_setup
-	ui.txtSvm_extrapath->setText( datosSvm["Svm_path_extra"] ); 													// path_extra
-	ui.txtSvm_savepath->setText( datosSvm["Svm_path_save"] );														// path_save
+	ui.txtSvm_path_extra->setText( datosSvm["Svm_path_extra"] ); 													// path_extra
+	ui.txtSvm_path_save->setText( datosSvm["Svm_path_save"] );														// path_save
 	ui.txtSvm_path_capturas->setText( datosSvm["Svm_path_capturas"] );												// path_capturas
 	ui.txtSvm_path_sonido->setText( datosSvm["Svm_path_sonido"] );													// path_sonido
 	ui.cbxSvm_music_driver->setCurrentIndex( ui.cbxSvm_music_driver->findData( datosSvm["Svm_music_driver"] ) );	// music_driver
@@ -243,7 +244,7 @@ void frmAddEditScummVM::CargarDatosScummVM(QHash<QString, QString> datosSvm)
 
 	ui.h_SliderSvm_midi_gain->setSliderPosition( fGrl.StrToInt( datosSvm["Svm_midi_gain"] ) );	// midi_gain
 	ui.chkSvm_copy_protection->setChecked( fGrl.StrToBool( datosSvm["Svm_copy_protection"] ) );	// copy_protection
-	ui.txtSvm_soundfont->setText( datosSvm["Svm_sound_font"] );									// sound_font
+	ui.txtSvm_sound_font->setText( datosSvm["Svm_sound_font"] );									// sound_font
 	ui.cbxSvm_opl_driver->setCurrentIndex( ui.cbxSvm_opl_driver->findData( datosSvm["Svm_opl_driver"] ) ); // opl_driver
 }
 
@@ -254,7 +255,7 @@ QHash<QString, QString> frmAddEditScummVM::setDatosScummVM()
 	tempDatosScummVM.clear();
 
 	tempDatosScummVM["Svm_id"]         = stItemIDSvm;					// id del ScummVM
-	tempDatosScummVM["Svm_game"]       = ui.txtSvm_gameid->text();		// game
+	tempDatosScummVM["Svm_game"]       = ui.txtSvm_game->text();		// game
 	tempDatosScummVM["Svm_game_label"] = ui.txtSvm_game_label->text();	// game_label
 
 	if( ui.cbxSvm_language->itemData( ui.cbxSvm_language->currentIndex() ).toString() != "" )
@@ -280,8 +281,8 @@ QHash<QString, QString> frmAddEditScummVM::setDatosScummVM()
 	tempDatosScummVM["Svm_aspect_ratio"]  = fGrl.BoolToStr( ui.chkSvm_aspect_ratio->isChecked() );	// aspect_ratio
 	tempDatosScummVM["Svm_path"]          = ui.txtSvm_path->text();									// path
 	tempDatosScummVM["Svm_path_setup"]    = ui.txtSvm_path_setup->text();							// path_setup
-	tempDatosScummVM["Svm_path_extra"]    = ui.txtSvm_extrapath->text();							// path_extra
-	tempDatosScummVM["Svm_path_save"]     = ui.txtSvm_savepath->text();								// path_save
+	tempDatosScummVM["Svm_path_extra"]    = ui.txtSvm_path_extra->text();							// path_extra
+	tempDatosScummVM["Svm_path_save"]     = ui.txtSvm_path_save->text();								// path_save
 	tempDatosScummVM["Svm_path_capturas"] = ui.txtSvm_path_capturas->text();						// path_capturas
 	tempDatosScummVM["Svm_path_sonido"]   = ui.txtSvm_path_sonido->text();							// path_sonido
 	tempDatosScummVM["Svm_music_driver"]  = ui.cbxSvm_music_driver->itemData( ui.cbxSvm_music_driver->currentIndex() ).toString();	// music_driver
@@ -305,14 +306,14 @@ QHash<QString, QString> frmAddEditScummVM::setDatosScummVM()
 
 	tempDatosScummVM["Svm_copy_protection"] = fGrl.BoolToStr( ui.chkSvm_copy_protection->isChecked() );	// copy_protection
 	tempDatosScummVM["Svm_midi_gain"]       = ui.posSliderSvm_7->text();			// midi_gain
-	tempDatosScummVM["Svm_sound_font"]      = ui.txtSvm_soundfont->text();			// sound_font
+	tempDatosScummVM["Svm_sound_font"]      = ui.txtSvm_sound_font->text();			// sound_font
 	tempDatosScummVM["Svm_walkspeed"]       = ui.posSliderSvm_8->text();			// walkspeed
 	tempDatosScummVM["Svm_opl_driver"]      = ui.cbxSvm_opl_driver->itemData( ui.cbxSvm_opl_driver->currentIndex() ).toString();	// opl_driver
 
 	return tempDatosScummVM;
 }
 
-void frmAddEditScummVM::on_btnDirSvm_path()
+void frmAddEditScummVM::on_btnSvm_Path()
 {
 	ui.txtSvm_path->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), GRLConfig["Svm_path"].toString(), ui.txtSvm_path->text() ) );
 
@@ -325,33 +326,33 @@ void frmAddEditScummVM::on_btnDirSvm_path()
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path", GRLConfig["Svm_path"].toString() );
 }
 
-void frmAddEditScummVM::on_btnDirSvm_save()
+void frmAddEditScummVM::on_btnSvm_PathSave()
 {
-	ui.txtSvm_savepath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), GRLConfig["Svm_savepath"].toString(), ui.txtSvm_savepath->text() ) );
+	ui.txtSvm_path_save->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), GRLConfig["Svm_savepath"].toString(), ui.txtSvm_path_save->text() ) );
 
-	QDir dir( ui.txtSvm_savepath->text() );
+	QDir dir( ui.txtSvm_path_save->text() );
 	if( dir.exists() )
-		GRLConfig["Svm_savepath"] = ui.txtSvm_savepath->text();
+		GRLConfig["Svm_savepath"] = ui.txtSvm_path_save->text();
 	else
 		GRLConfig["Svm_savepath"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_savepath", GRLConfig["Svm_savepath"].toString() );
 }
 
-void frmAddEditScummVM::on_btnDirSvm_extra()
+void frmAddEditScummVM::on_btnSvm_PathExtra()
 {
-	ui.txtSvm_extrapath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), GRLConfig["Svm_extrapath"].toString(), ui.txtSvm_extrapath->text() ) );
+	ui.txtSvm_path_extra->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), GRLConfig["Svm_extrapath"].toString(), ui.txtSvm_path_extra->text() ) );
 
-	QDir dir( ui.txtSvm_extrapath->text() );
+	QDir dir( ui.txtSvm_path_extra->text() );
 	if( dir.exists() )
-		GRLConfig["Svm_extrapath"] = ui.txtSvm_extrapath->text();
+		GRLConfig["Svm_extrapath"] = ui.txtSvm_path_extra->text();
 	else
 		GRLConfig["Svm_extrapath"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_extrapath", GRLConfig["Svm_extrapath"].toString() );
 }
 
-void frmAddEditScummVM::on_btnDirSvm_capturas()
+void frmAddEditScummVM::on_btnSvm_PathCapturas()
 {
 	ui.txtSvm_path_capturas->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), GRLConfig["Svm_path_capturas"].toString(), ui.txtSvm_path_capturas->text() ) );
 
@@ -364,7 +365,7 @@ void frmAddEditScummVM::on_btnDirSvm_capturas()
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path_capturas", GRLConfig["Svm_path_capturas"].toString() );
 }
 
-void frmAddEditScummVM::on_btnDirSvm_sonido()
+void frmAddEditScummVM::on_btnSvm_PathSonido()
 {
 	ui.txtSvm_path_sonido->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), GRLConfig["Svm_path_sonido"].toString(), ui.txtSvm_path_sonido->text() ) );
 
@@ -377,7 +378,7 @@ void frmAddEditScummVM::on_btnDirSvm_sonido()
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path_sonido", GRLConfig["Svm_path_sonido"].toString() );
 }
 
-void frmAddEditScummVM::on_btnDirSvm_setup()
+void frmAddEditScummVM::on_btnSvm_PathSetup()
 {
 	ui.txtSvm_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_path_setup"].toString(), ui.txtSvm_path_setup->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") + " (*)", 0, false) );
 
@@ -390,11 +391,11 @@ void frmAddEditScummVM::on_btnDirSvm_setup()
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path_setup", GRLConfig["Svm_path_setup"].toString() );
 }
 
-void frmAddEditScummVM::on_btnDirSvm_sound_font()
+void frmAddEditScummVM::on_btnSvm_SoundFont()
 {
-	ui.txtSvm_soundfont->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_soundfont"].toString(), ui.txtSvm_soundfont->text(), "SoundFont (*.sf2 *.sfArk);;"+ tr("Todos los archivo") + " (*)", 0, false) );
+	ui.txtSvm_sound_font->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_soundfont"].toString(), ui.txtSvm_sound_font->text(), "SoundFont (*.sf2 *.sfArk);;"+ tr("Todos los archivo") + " (*)", 0, false) );
 
-	QFileInfo fi( ui.txtSvm_soundfont->text() );
+	QFileInfo fi( ui.txtSvm_sound_font->text() );
 	if( fi.exists() )
 		GRLConfig["Svm_soundfont"] = fi.absolutePath();
 	else
@@ -406,7 +407,7 @@ void frmAddEditScummVM::on_btnDirSvm_sound_font()
 
 void frmAddEditScummVM::on_twScummVM_clicked( QTreeWidgetItem *item )
 {
-	ui.txtSvm_gameid->setText( item->text(2) );
+	ui.txtSvm_game->setText( item->text(2) );
 	ui.txtSvm_game_label->setText( item->text(2) );
 }
 

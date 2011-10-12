@@ -76,7 +76,6 @@ private slots:
 	void on_btnDbx_FileConfg();
 	void on_btnDbx_ExeJuego();
 	void on_btnDbx_ExeSetup();
-	void on_btnDirGravisUltraSound();
 	void on_btnDbx_mapperfile();
 	void on_btnDbx_language();
 	void on_btnDbx_capturas();

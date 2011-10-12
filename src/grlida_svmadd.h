@@ -63,8 +63,8 @@ private slots:
 	void on_btnOk();
 	void on_btnNext();
 	void on_btnPrevious();
-	void on_btnDirGame();
-	void on_btnDirSave();
+	void on_btnSvm_Path();
+	void on_btnSvm_PathSave();
 	void on_btnDefecto();
 	void on_twScummVM_clicked(QTreeWidgetItem *item);
 	void on_twScummVM_Dblclicked(QTreeWidgetItem *item);

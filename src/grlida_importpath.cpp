@@ -61,55 +61,54 @@ void frmImportPath::createConnections()
 {
 	connect( ui.btnOk, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
 
-	connect( ui.btnDirPath_Dbx_1 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxFile_1() ) );
-	connect( ui.btnDirPath_Dbx_2 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxFile_2() ) );
-	connect( ui.btnDirPath_Dbx_3 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxFile_3() ) );
-	connect( ui.btnDirPath_Dbx_4 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxFile_4() ) );
-	connect( ui.btnDirPath_Dbx_5 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxFile_5() ) );
-	connect( ui.btnDirPath_Dbx_6 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxDir_6()  ) );
-	connect( ui.btnDirPath_Dbx_7 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxDir_7()  ) );
-	connect( ui.btnDirPath_Dbx_8 , SIGNAL( clicked() ), this, SLOT( on_btnOpenDbxDir_8()  ) );
+	connect( ui.btnDbx_FileConfg , SIGNAL( clicked() ), this, SLOT( on_btnDbx_FileConfg()  ) );
+	connect( ui.btnDbx_ExeJuego  , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeJuego()   ) );
+	connect( ui.btnDbx_ExeSetup  , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeSetup()   ) );
+	connect( ui.btnDbx_mapperfile, SIGNAL( clicked() ), this, SLOT( on_btnDbx_mapperfile() ) );
+	connect( ui.btnDbx_language  , SIGNAL( clicked() ), this, SLOT( on_btnDbx_language()   ) );
+	connect( ui.btnDbx_capturas  , SIGNAL( clicked() ), this, SLOT( on_btnDbx_capturas()   ) );
+	connect( ui.btnDbx_musica    , SIGNAL( clicked() ), this, SLOT( on_btnDbx_musica()     ) );
 
-	connect( ui.btnDirPath_Svm_1 , SIGNAL( clicked() ), this, SLOT( on_btnOpenSvmDir_1()  ) );
-	connect( ui.btnDirPath_Svm_2 , SIGNAL( clicked() ), this, SLOT( on_btnOpenSvmDir_2()  ) );
-	connect( ui.btnDirPath_Svm_3 , SIGNAL( clicked() ), this, SLOT( on_btnOpenSvmFile3()  ) );
-	connect( ui.btnDirPath_Svm_4 , SIGNAL( clicked() ), this, SLOT( on_btnOpenSvmDir_4()  ) );
-	connect( ui.btnDirPath_Svm_5 , SIGNAL( clicked() ), this, SLOT( on_btnOpenSvmDir_5()  ) );
-	connect( ui.btnDirPath_Svm_6 , SIGNAL( clicked() ), this, SLOT( on_btnOpenSvmDir_6()  ) );
+	connect( ui.btnSvm_Path        , SIGNAL( clicked() ), this, SLOT( on_btnSvm_Path()         ) );
+	connect( ui.btnSvm_PathSave    , SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathSave()     ) );
+	connect( ui.btnSvm_PathSetup   , SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathSetup()    ) );
+	connect( ui.btnSvm_PathExtra   , SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathExtra()    ) );
+	connect( ui.btnSvm_PathCapturas, SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathCapturas() ) );
+	connect( ui.btnSvm_PathSonido  , SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathSonido()   ) );
 
-	connect( ui.btnDirPath_Vdms_1, SIGNAL( clicked() ), this, SLOT( on_btnOpenVdmsFile_1()) );
-	connect( ui.btnDirPath_Vdms_2, SIGNAL( clicked() ), this, SLOT( on_btnOpenVdmsFile_2()) );
+	connect( ui.btnVdms_PathConf, SIGNAL( clicked() ), this, SLOT( on_btnVdms_PathConf() ) );
+	connect( ui.btnVdms_PathExe , SIGNAL( clicked() ), this, SLOT( on_btnVdms_PathExe()  ) );
 }
 
 void frmImportPath::setTheme()
 {
-	setStyleSheet( fGrl.StyleSheet() );
 	setWindowIcon( QIcon(stTheme+"img16/archivos.png") );
 
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 
-	ui.btnDirPath_Dbx_1->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirPath_Dbx_2->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirPath_Dbx_3->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirPath_Dbx_4->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirPath_Dbx_5->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirPath_Dbx_6->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirPath_Dbx_7->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirPath_Dbx_8->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDbx_FileConfg->setIcon( QIcon(stTheme +"img16/carpeta_1.png") );
+	ui.btnDbx_ExeJuego->setIcon( QIcon(stTheme +"img16/carpeta_1.png") );
+	ui.btnDbx_ExeSetup->setIcon( QIcon(stTheme +"img16/carpeta_1.png") );
+	ui.btnDbx_language->setIcon( QIcon(stTheme +"img16/carpeta_1.png") );
+	ui.btnDbx_mapperfile->setIcon( QIcon(stTheme +"img16/carpeta_1.png") );
+	ui.btnDbx_capturas->setIcon( QIcon(stTheme +"img16/carpeta_0.png") );
+	ui.btnDbx_musica->setIcon( QIcon(stTheme +"img16/carpeta_0.png") );
 
-	ui.btnDirPath_Svm_1->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirPath_Svm_2->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirPath_Svm_3->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirPath_Svm_4->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirPath_Svm_5->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirPath_Svm_6->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_Path->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_PathSave->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_PathSetup->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnSvm_PathExtra->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_PathCapturas->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_PathSonido->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
 
-	ui.btnDirPath_Vdms_1->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirPath_Vdms_2->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnVdms_PathConf->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	ui.btnVdms_PathExe->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 
 	if( GRLConfig["font_usar"].toBool() )
 		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
+	else
+		setStyleSheet(fGrl.StyleSheet());
 }
 
 void frmImportPath::on_btnOk()
@@ -128,7 +127,7 @@ void frmImportPath::on_btnOk()
 				appConfg.setFileName( stHomeDir + "confdbx/"+ ui.txtPath_Dbx_1->text() );
 		// VDMSound
 			if( ui.wizardPath->currentIndex() == 2 )
-				appConfg.setFileName( stHomeDir + "confvdms/"+ ui.txtPath_Vdms_1->text() );
+				appConfg.setFileName( stHomeDir + "confvdms/"+ ui.txtVdms_path_conf->text() );
 
 			if( appConfg.exists() )
 			{
@@ -138,9 +137,9 @@ void frmImportPath::on_btnOk()
 				siguiente = true;
 				stExeJuego.clear();
 				if( ui.wizardPath->currentIndex() == 0 )
-					stExeJuego = ui.txtPath_Dbx_2->text();
+					stExeJuego = ui.txtDbx_path_exe->text();
 				if( ui.wizardPath->currentIndex() == 2 )
-					stExeJuego = ui.txtPath_Vdms_2->text();
+					stExeJuego = ui.txtVdms_path_exe->text();
 				if( stExeJuego.isEmpty() )
 				{
 					siguiente = false;
@@ -158,25 +157,25 @@ void frmImportPath::on_btnOk()
 		QDialog::rejected();
 }
 
-void frmImportPath::on_btnOpenDbxFile_1()
+void frmImportPath::on_btnDbx_FileConfg()
 {
-	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confdbx/", ui.txtPath_Dbx_1->text(), "Config DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
+	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confdbx/", ui.txtDbx_path_conf->text(), "Config DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
 	QFile appConfg( archivo );
 	if( !appConfg.exists() )
 	{
 		QFileInfo fi( archivo );
-		ui.txtPath_Dbx_1->setText( fi.fileName() );
+		ui.txtDbx_path_conf->setText( fi.fileName() );
 	} else {
 		QMessageBox::information( this, "GR-lida", tr("El archivo de Configuración para el DOSBox ya esixte"));
-		ui.txtPath_Dbx_1->setText("");
+		ui.txtDbx_path_conf->setText("");
 	}
 }
 
-void frmImportPath::on_btnOpenDbxFile_2()
+void frmImportPath::on_btnDbx_ExeJuego()
 {
-	ui.txtPath_Dbx_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_exe"].toString(), ui.txtPath_Dbx_2->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
+	ui.txtDbx_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_exe"].toString(), ui.txtDbx_path_exe->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
-	QFileInfo fi( ui.txtPath_Dbx_2->text() );
+	QFileInfo fi( ui.txtDbx_path_exe->text() );
 	if( fi.exists() )
 		GRLConfig["Dbx_path_exe"] = fi.absolutePath();
 	else
@@ -185,11 +184,11 @@ void frmImportPath::on_btnOpenDbxFile_2()
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Dbx_path_exe", GRLConfig["Dbx_path_exe"].toString() );
 }
 
-void frmImportPath::on_btnOpenDbxFile_3()
+void frmImportPath::on_btnDbx_ExeSetup()
 {
-	ui.txtPath_Dbx_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_setup"].toString(), ui.txtPath_Dbx_3->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
+	ui.txtDbx_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_path_setup"].toString(), ui.txtDbx_path_setup->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
-	QFileInfo fi( ui.txtPath_Dbx_3->text() );
+	QFileInfo fi( ui.txtDbx_path_setup->text() );
 	if( fi.exists() )
 		GRLConfig["Dbx_path_setup"] = fi.absolutePath();
 	else
@@ -198,11 +197,11 @@ void frmImportPath::on_btnOpenDbxFile_3()
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Dbx_path_setup", GRLConfig["Dbx_path_setup"].toString() );
 }
 
-void frmImportPath::on_btnOpenDbxFile_4()
+void frmImportPath::on_btnDbx_language()
 {
-	ui.txtPath_Dbx_4->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_dosbox_language"].toString(), ui.txtPath_Dbx_4->text(), tr("Idioma") +" (*.lng *.txt);;"+ tr("Todos los archivo") +" (*)", 0, false) );
+	ui.txtDbx_dosbox_language->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_dosbox_language"].toString(), ui.txtDbx_dosbox_language->text(), tr("Idioma") +" (*.lng *.txt);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
-	QFileInfo fi( ui.txtPath_Dbx_4->text() );
+	QFileInfo fi( ui.txtDbx_dosbox_language->text() );
 	if( fi.exists() )
 		GRLConfig["Dbx_dosbox_language"] = fi.absolutePath();
 	else
@@ -211,11 +210,11 @@ void frmImportPath::on_btnOpenDbxFile_4()
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Dbx_dosbox_language", GRLConfig["Dbx_dosbox_language"].toString() );
 }
 
-void frmImportPath::on_btnOpenDbxFile_5()
+void frmImportPath::on_btnDbx_mapperfile()
 {
-	ui.txtPath_Dbx_5->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_sdl_mapperfile"].toString(), ui.txtPath_Dbx_5->text(), tr("KeyMapper") +" (*.map *.txt);;"+ tr("Todos los archivo") +" (*)", 0, false) );
+	ui.txtDbx_sdl_mapperfile->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Dbx_sdl_mapperfile"].toString(), ui.txtDbx_sdl_mapperfile->text(), tr("KeyMapper") +" (*.map *.txt);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
-	QFileInfo fi( ui.txtPath_Dbx_4->text() );
+	QFileInfo fi( ui.txtDbx_sdl_mapperfile->text() );
 	if( fi.exists() )
 		GRLConfig["Dbx_sdl_mapperfile"] = fi.absolutePath();
 	else
@@ -223,77 +222,77 @@ void frmImportPath::on_btnOpenDbxFile_5()
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Dbx_sdl_mapperfile", GRLConfig["Dbx_sdl_mapperfile"].toString() );
 }
-
+/*
 void frmImportPath::on_btnOpenDbxDir_6()
 {
-	ui.txtPath_Dbx_6->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Dbx_gus_ultradir"].toString(), ui.txtPath_Dbx_6->text() ));
+	ui.txtDbx_gus_ultradir->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Dbx_gus_ultradir"].toString(), ui.txtDbx_gus_ultradir->text() ));
 
-	QDir dir( ui.txtPath_Dbx_6->text() );
+	QDir dir( ui.txtDbx_gus_ultradir->text() );
 	if( dir.exists() )
-		GRLConfig["Dbx_gus_ultradir"] = ui.txtPath_Dbx_6->text();
+		GRLConfig["Dbx_gus_ultradir"] = ui.txtDbx_gus_ultradir->text();
 	else
 		GRLConfig["Dbx_gus_ultradir"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Dbx_gus_ultradir", GRLConfig["Dbx_gus_ultradir"].toString() );
 }
-
-void frmImportPath::on_btnOpenDbxDir_7()
+*/
+void frmImportPath::on_btnDbx_capturas()
 {
-	ui.txtPath_Dbx_7->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Dbx_dosbox_captures"].toString(), ui.txtPath_Dbx_7->text() ));
+	ui.txtDbx_dosbox_captures->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Dbx_dosbox_captures"].toString(), ui.txtDbx_dosbox_captures->text() ));
 
-	QDir dir( ui.txtPath_Dbx_7->text() );
+	QDir dir( ui.txtDbx_dosbox_captures->text() );
 	if( dir.exists() )
-		GRLConfig["Dbx_dosbox_captures"] = ui.txtPath_Dbx_7->text();
+		GRLConfig["Dbx_dosbox_captures"] = ui.txtDbx_dosbox_captures->text();
 	else
 		GRLConfig["Dbx_dosbox_captures"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Dbx_dosbox_captures", GRLConfig["Dbx_dosbox_captures"].toString() );
 }
 
-void frmImportPath::on_btnOpenDbxDir_8()
+void frmImportPath::on_btnDbx_musica()
 {
-	ui.txtPath_Dbx_8->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Dbx_path_sonido"].toString(), ui.txtPath_Dbx_8->text() ));
+	ui.txtDbx_path_sonido->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Dbx_path_sonido"].toString(), ui.txtDbx_path_sonido->text() ));
 
-	QDir dir( ui.txtPath_Dbx_8->text() );
+	QDir dir( ui.txtDbx_path_sonido->text() );
 	if( dir.exists() )
-		GRLConfig["Dbx_path_sonido"] = ui.txtPath_Dbx_8->text();
+		GRLConfig["Dbx_path_sonido"] = ui.txtDbx_path_sonido->text();
 	else
 		GRLConfig["Dbx_path_sonido"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Dbx_path_sonido", GRLConfig["Dbx_path_sonido"].toString() );
 }
 
-void frmImportPath::on_btnOpenSvmDir_1()
+void frmImportPath::on_btnSvm_Path()
 {
-	ui.txtPath_Svm_1->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_path"].toString(), ui.txtPath_Svm_1->text() ));
+	ui.txtSvm_path->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_path"].toString(), ui.txtSvm_path->text() ));
 
-	QDir dir( ui.txtPath_Svm_1->text() );
+	QDir dir( ui.txtSvm_path->text() );
 	if( dir.exists() )
-		GRLConfig["Svm_path"] = ui.txtPath_Svm_1->text();
+		GRLConfig["Svm_path"] = ui.txtSvm_path->text();
 	else
 		GRLConfig["Svm_path"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path", GRLConfig["Svm_path"].toString() );
 }
 
-void frmImportPath::on_btnOpenSvmDir_2()
+void frmImportPath::on_btnSvm_PathSave()
 {
-	ui.txtPath_Svm_2->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_savepath"].toString(), ui.txtPath_Svm_2->text() ));
+	ui.txtSvm_path_save->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_savepath"].toString(), ui.txtSvm_path_save->text() ));
 
-	QDir dir( ui.txtPath_Svm_2->text() );
+	QDir dir( ui.txtSvm_path_save->text() );
 	if( dir.exists() )
-		GRLConfig["Svm_savepath"] = ui.txtPath_Svm_2->text();
+		GRLConfig["Svm_savepath"] = ui.txtSvm_path_save->text();
 	else
 		GRLConfig["Svm_savepath"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_savepath", GRLConfig["Svm_savepath"].toString() );
 }
 
-void frmImportPath::on_btnOpenSvmFile3()
+void frmImportPath::on_btnSvm_PathSetup()
 {
-	ui.txtPath_Svm_3->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_path_setup"].toString(), ui.txtPath_Svm_3->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
+	ui.txtSvm_path_setup->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Svm_path_setup"].toString(), ui.txtSvm_path_setup->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
-	QFileInfo fi( ui.txtPath_Svm_3->text() );
+	QFileInfo fi( ui.txtSvm_path_setup->text() );
 	if( fi.exists() )
 		GRLConfig["Svm_path_setup"] = fi.absolutePath();
 	else
@@ -302,64 +301,64 @@ void frmImportPath::on_btnOpenSvmFile3()
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path_setup", GRLConfig["Svm_path_setup"].toString() );
 }
 
-void frmImportPath::on_btnOpenSvmDir_4()
+void frmImportPath::on_btnSvm_PathExtra()
 {
-	ui.txtPath_Svm_4->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_extrapath"].toString(), ui.txtPath_Svm_4->text() ));
+	ui.txtSvm_path_extra->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_extrapath"].toString(), ui.txtSvm_path_extra->text() ));
 
-	QDir dir( ui.txtPath_Svm_4->text() );
+	QDir dir( ui.txtSvm_path_extra->text() );
 	if( dir.exists() )
-		GRLConfig["Svm_extrapath"] = ui.txtPath_Svm_4->text();
+		GRLConfig["Svm_extrapath"] = ui.txtSvm_path_extra->text();
 	else
 		GRLConfig["Svm_extrapath"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_extrapath", GRLConfig["Svm_extrapath"].toString() );
 }
 
-void frmImportPath::on_btnOpenSvmDir_5()
+void frmImportPath::on_btnSvm_PathCapturas()
 {
-	ui.txtPath_Svm_5->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_path_capturas"].toString(), ui.txtPath_Svm_5->text() ));
+	ui.txtSvm_path_capturas->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_path_capturas"].toString(), ui.txtSvm_path_capturas->text() ));
 
-	QDir dir( ui.txtPath_Svm_5->text() );
+	QDir dir( ui.txtSvm_path_capturas->text() );
 	if( dir.exists() )
-		GRLConfig["Svm_path_capturas"] = ui.txtPath_Svm_5->text();
+		GRLConfig["Svm_path_capturas"] = ui.txtSvm_path_capturas->text();
 	else
 		GRLConfig["Svm_path_capturas"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path_capturas", GRLConfig["Svm_path_capturas"].toString() );
 }
 
-void frmImportPath::on_btnOpenSvmDir_6()
+void frmImportPath::on_btnSvm_PathSonido()
 {
-	ui.txtPath_Svm_6->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_path_sonido"].toString(), ui.txtPath_Svm_6->text() ));
+	ui.txtSvm_path_sonido->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Svm_path_sonido"].toString(), ui.txtSvm_path_sonido->text() ));
 
-	QDir dir( ui.txtPath_Svm_6->text() );
+	QDir dir( ui.txtSvm_path_sonido->text() );
 	if( dir.exists() )
-		GRLConfig["Svm_path_sonido"] = ui.txtPath_Svm_6->text();
+		GRLConfig["Svm_path_sonido"] = ui.txtSvm_path_sonido->text();
 	else
 		GRLConfig["Svm_path_sonido"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path_sonido", GRLConfig["Svm_path_sonido"].toString() );
 }
 
-void frmImportPath::on_btnOpenVdmsFile_1()
+void frmImportPath::on_btnVdms_PathConf()
 {
-	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confvdms/", ui.txtPath_Vdms_1->text(), "Config VDMSound (*.vlp);;"+ tr("Todos los archivo") +" (*)", 0, true);
+	QString archivo = fGrl.VentanaAbrirArchivos( tr("Guardar archivo como..."), stHomeDir+"/confvdms/", ui.txtVdms_path_conf->text(), "Config VDMSound (*.vlp);;"+ tr("Todos los archivo") +" (*)", 0, true);
 	QFile appConfg( archivo );
 	if( !appConfg.exists() )
 	{
 		QFileInfo fi( archivo );
-		ui.txtPath_Vdms_1->setText( fi.fileName() );
+		ui.txtVdms_path_conf->setText( fi.fileName() );
 	} else {
 		QMessageBox::information( this, "GR-lida", tr("El archivo de Configuración para el VDMSound ya esixte"));
-		ui.txtPath_Vdms_1->setText("");
+		ui.txtVdms_path_conf->setText("");
 	}
 }
 
-void frmImportPath::on_btnOpenVdmsFile_2()
+void frmImportPath::on_btnVdms_PathExe()
 {
-	ui.txtPath_Vdms_2->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_path_exe"].toString(), ui.txtPath_Vdms_2->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
+	ui.txtVdms_path_exe->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Vdms_path_exe"].toString(), ui.txtVdms_path_exe->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false) );
 
-	QFileInfo fi( ui.txtPath_Vdms_2->text() );
+	QFileInfo fi( ui.txtVdms_path_exe->text() );
 	if( fi.exists() )
 		GRLConfig["Vdms_path_exe"] = fi.absolutePath();
 	else

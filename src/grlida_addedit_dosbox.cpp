@@ -85,7 +85,6 @@ void frmAddEditDosBox::createConnections()
 	connect( ui.btnDbx_FileConfg      , SIGNAL( clicked() ), this, SLOT( on_btnDbx_FileConfg()       ) );
 	connect( ui.btnDbx_ExeJuego       , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeJuego()        ) );
 	connect( ui.btnDbx_ExeSetup       , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeSetup()        ) );
-	connect( ui.btnDirGravisUltraSound, SIGNAL( clicked() ), this, SLOT( on_btnDirGravisUltraSound() ) );
 	connect( ui.btnDbx_mapperfile     , SIGNAL( clicked() ), this, SLOT( on_btnDbx_mapperfile()      ) );
 	connect( ui.btnDbx_language       , SIGNAL( clicked() ), this, SLOT( on_btnDbx_language()        ) );
 	connect( ui.btnDbx_capturas       , SIGNAL( clicked() ), this, SLOT( on_btnDbx_capturas()        ) );
@@ -117,10 +116,9 @@ void frmAddEditDosBox::setTheme()
 	ui.btnDbx_FileConfg->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDbx_ExeJuego->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDbx_ExeSetup->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnFileConfg_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnExeJuego_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnExeSetup_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnDirGravisUltraSound->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnDbx_FileConfg_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDbx_ExeJuego_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnDbx_ExeSetup_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnDbx_mapperfile->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDbx_language->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
 	ui.btnDbx_capturas->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
@@ -967,19 +965,6 @@ void frmAddEditDosBox::on_btnDbx_ExeSetup()
 		GRLConfig["Dbx_path_setup"] = "";
 
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Dbx_path_setup", GRLConfig["Dbx_path_setup"].toString() );
-}
-
-void frmAddEditDosBox::on_btnDirGravisUltraSound()
-{
-	ui.txtDbx_gus_ultradir->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio"), GRLConfig["Dbx_gus_ultradir"].toString(), ui.txtDbx_gus_ultradir->text() ) );
-
-	QDir dir( ui.txtDbx_gus_ultradir->text() );
-	if( dir.exists() )
-		GRLConfig["Dbx_gus_ultradir"] = ui.txtDbx_gus_ultradir->text();
-	else
-		GRLConfig["Dbx_gus_ultradir"] = "";
-
-	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Dbx_gus_ultradir", GRLConfig["Dbx_gus_ultradir"].toString() );
 }
 
 void frmAddEditDosBox::on_btnDbx_mapperfile()

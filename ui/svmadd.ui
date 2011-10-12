@@ -597,7 +597,7 @@
           </widget>
          </item>
          <item row="2" column="4">
-          <widget class="QPushButton" name="btnDirSvm_1">
+          <widget class="QPushButton" name="btnSvm_Path">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -620,7 +620,7 @@
           </widget>
          </item>
          <item row="2" column="5">
-          <widget class="QPushButton" name="btnDirSvm_1_clear">
+          <widget class="QPushButton" name="btnSvm_Path_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -650,7 +650,7 @@
           </widget>
          </item>
          <item row="3" column="1" colspan="3">
-          <widget class="QLineEdit" name="txtSvm_savepath">
+          <widget class="QLineEdit" name="txtSvm_path_save">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -660,7 +660,7 @@
           </widget>
          </item>
          <item row="3" column="4">
-          <widget class="QPushButton" name="btnDirSvm_2">
+          <widget class="QPushButton" name="btnSvm_PathSave">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -683,7 +683,7 @@
           </widget>
          </item>
          <item row="3" column="5">
-          <widget class="QPushButton" name="btnDirSvm_2_clear">
+          <widget class="QPushButton" name="btnSvm_PathSave_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -1538,9 +1538,9 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>txtDatos_Titulo</tabstop>
   <tabstop>txtSvm_game_label</tabstop>
   <tabstop>txtSvm_path</tabstop>
-  <tabstop>btnDirSvm_1_clear</tabstop>
-  <tabstop>txtSvm_savepath</tabstop>
-  <tabstop>btnDirSvm_2_clear</tabstop>
+  <tabstop>btnSvm_Path_clear</tabstop>
+  <tabstop>txtSvm_path_save</tabstop>
+  <tabstop>btnSvm_PathSave_clear</tabstop>
   <tabstop>cbxSvm_language</tabstop>
   <tabstop>chkSvm_subtitles</tabstop>
   <tabstop>cbxSvm_platform</tabstop>
@@ -1568,6 +1568,7 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
@@ -1691,7 +1692,7 @@ Pulsa Aceptar para cerrar el Asistente
    </hints>
   </connection>
   <connection>
-   <sender>btnDirSvm_1_clear</sender>
+   <sender>btnSvm_Path_clear</sender>
    <signal>clicked()</signal>
    <receiver>txtSvm_path</receiver>
    <slot>clear()</slot>
@@ -1707,9 +1708,9 @@ Pulsa Aceptar para cerrar el Asistente
    </hints>
   </connection>
   <connection>
-   <sender>btnDirSvm_2_clear</sender>
+   <sender>btnSvm_PathSave_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtSvm_savepath</receiver>
+   <receiver>txtSvm_path_save</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -174,8 +174,8 @@ void frmImportarJuego::on_btnOk()
 {
 	frmImportPath *ImportPathNew = new frmImportPath();
 
-	ImportPathNew->ui.gBox_path_emu->setEnabled( false );
-	ImportPathNew->ui.gBox_path_emu->setTitle("Path");
+//	ImportPathNew->ui.gBox_path_emu->setEnabled( false );
+//	ImportPathNew->ui.gBox_path_emu->setTitle("Path");
 //---------------------------------------------------------------------------------------
 //       CargarCoverFront
 //---------------------------------------------------------------------------------------
@@ -239,78 +239,79 @@ void frmImportarJuego::on_btnOk()
 	if( DatosJuego["Dat_tipo_emu"] == "dosbox" )
 	{
 		if( QFile::exists(stHomeDir +"confdbx/"+ DatosDosBox["Dbx_path_conf"] ) )
-			ImportPathNew->ui.txtPath_Dbx_1->setText( DatosDosBox["Dbx_path_conf"].prepend(fGrl.HoraFechaActual("ddMMyyyy_HHmmss")+"-") );
+			ImportPathNew->ui.txtDbx_path_conf->setText( DatosDosBox["Dbx_path_conf"].prepend(fGrl.HoraFechaActual("ddMMyyyy_HHmmss")+"-") );
 		else
-			ImportPathNew->ui.txtPath_Dbx_1->setText( DatosDosBox["Dbx_path_conf"] ); // path_conf
+			ImportPathNew->ui.txtDbx_path_conf->setText( DatosDosBox["Dbx_path_conf"] ); // path_conf
 
-		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
-		ImportPathNew->ui.gBox_path_emu->setTitle("Path - DOSBox");
-		ImportPathNew->ui.wizardPath->setCurrentIndex(0);
-	//	ImportPathNew->ui.txtPath_Dbx_1->setText( DatosDosBox["Dbx_path_conf"]       );		// path_conf
-		ImportPathNew->ui.txtPath_Dbx_2->setText( DatosDosBox["Dbx_path_exe"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_exe
-		ImportPathNew->ui.txtPath_Dbx_3->setText( DatosDosBox["Dbx_path_setup"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_setup
-		ImportPathNew->ui.txtPath_Dbx_4->setText( DatosDosBox["Dbx_dosbox_language"] );		// dosbox_language
-		ImportPathNew->ui.txtPath_Dbx_5->setText( DatosDosBox["Dbx_sdl_mapperfile"]  );		// sdl_mapperfile
-		ImportPathNew->ui.txtPath_Dbx_6->setText( DatosDosBox["Dbx_gus_ultradir"]    );		// gus_ultradir
-		ImportPathNew->ui.txtPath_Dbx_7->setText( DatosDosBox["Dbx_dosbox_captures"] );		// dosbox_captures
-		ImportPathNew->ui.txtPath_Dbx_8->setText( DatosDosBox["Dbx_path_sonido"]     );		// path_sonido
+//		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
+//		ImportPathNew->ui.gBox_path_emu->setTitle("Path - DOSBox");
+//		ImportPathNew->ui.wizardPath->setCurrentIndex(0);
+	//	ImportPathNew->ui.txtDbx_path_conf->setText( DatosDosBox["Dbx_path_conf"]       );		// path_conf
+		ImportPathNew->ui.txtDbx_path_exe->setText( DatosDosBox["Dbx_path_exe"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_exe
+		ImportPathNew->ui.txtDbx_path_setup->setText( DatosDosBox["Dbx_path_setup"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_setup
+		ImportPathNew->ui.txtDbx_dosbox_language->setText( DatosDosBox["Dbx_dosbox_language"] );		// dosbox_language
+		ImportPathNew->ui.txtDbx_sdl_mapperfile->setText( DatosDosBox["Dbx_sdl_mapperfile"]  );		// sdl_mapperfile
+		ImportPathNew->ui.txtDbx_gus_ultradir->setText( DatosDosBox["Dbx_gus_ultradir"]    );		// gus_ultradir
+		ImportPathNew->ui.txtDbx_dosbox_captures->setText( DatosDosBox["Dbx_dosbox_captures"] );		// dosbox_captures
+		ImportPathNew->ui.txtDbx_path_sonido->setText( DatosDosBox["Dbx_path_sonido"]     );		// path_sonido
 	}
 
 	if( DatosJuego["Dat_tipo_emu"] == "scummvm" )
 	{
-		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
-		ImportPathNew->ui.gBox_path_emu->setTitle("Path - ScummVM");
-		ImportPathNew->ui.wizardPath->setCurrentIndex(1);
-		ImportPathNew->ui.txtPath_Svm_1->setText( DatosScummVM["Svm_path"].replace("{DirBaseGames}"      , GRLConfig["DirBaseGames"].toString() ) );	// path
-		ImportPathNew->ui.txtPath_Svm_2->setText( DatosScummVM["Svm_path_save"].replace("{DirBaseGames}" , GRLConfig["DirBaseGames"].toString() ) );	// path_save
-		ImportPathNew->ui.txtPath_Svm_3->setText( DatosScummVM["Svm_path_setup"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_setup
-		ImportPathNew->ui.txtPath_Svm_4->setText( DatosScummVM["Svm_path_extra"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_extra
-		ImportPathNew->ui.txtPath_Svm_5->setText( DatosScummVM["Svm_path_capturas"] );	// path_capturas
-		ImportPathNew->ui.txtPath_Svm_6->setText( DatosScummVM["Svm_path_sonido"]   );	// path_sonido
+//		ImportPathNew->ui.tabDatConf->setTabEnabled(2,true);
+//		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
+//		ImportPathNew->ui.gBox_path_emu->setTitle("Path - ScummVM");
+//		ImportPathNew->ui.wizardPath->setCurrentIndex(1);
+		ImportPathNew->ui.txtSvm_path->setText( DatosScummVM["Svm_path"].replace("{DirBaseGames}"      , GRLConfig["DirBaseGames"].toString() ) );
+		ImportPathNew->ui.txtSvm_path_save->setText( DatosScummVM["Svm_path_save"].replace("{DirBaseGames}" , GRLConfig["DirBaseGames"].toString() ) );
+		ImportPathNew->ui.txtSvm_path_setup->setText( DatosScummVM["Svm_path_setup"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );
+		ImportPathNew->ui.txtSvm_path_extra->setText( DatosScummVM["Svm_path_extra"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );
+		ImportPathNew->ui.txtSvm_path_capturas->setText( DatosScummVM["Svm_path_capturas"] );	// path_capturas
+		ImportPathNew->ui.txtSvm_path_sonido->setText( DatosScummVM["Svm_path_sonido"]   );
 	}
 
 	if( DatosJuego["Dat_tipo_emu"] == "vdmsound" )
 	{
 		if( QFile::exists(stHomeDir +"confvdms/"+ DatosVDMSound["Vdms_path_conf"] ) )
-			ImportPathNew->ui.txtPath_Dbx_1->setText( DatosVDMSound["Vdms_path_conf"].prepend(fGrl.HoraFechaActual("ddMMyyyy_HHmmss")+"-") );
+			ImportPathNew->ui.txtVdms_path_conf->setText( DatosVDMSound["Vdms_path_conf"].prepend(fGrl.HoraFechaActual("ddMMyyyy_HHmmss")+"-") );
 		else
-			ImportPathNew->ui.txtPath_Dbx_1->setText( DatosVDMSound["Vdms_path_conf"] ); // path_conf
+			ImportPathNew->ui.txtVdms_path_conf->setText( DatosVDMSound["Vdms_path_conf"] );
 
-		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
-		ImportPathNew->ui.gBox_path_emu->setTitle("Path - VDMSound");
-		ImportPathNew->ui.wizardPath->setCurrentIndex(2);
-	//	ImportPathNew->ui.txtPath_Vdms_1->setText( DatosVDMSound["Vdms_path_conf"] );	// path_conf
-		ImportPathNew->ui.txtPath_Vdms_2->setText( DatosVDMSound["Vdms_path_exe"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );	// path_exe
+//		ImportPathNew->ui.gBox_path_emu->setEnabled( true );
+//		ImportPathNew->ui.gBox_path_emu->setTitle("Path - VDMSound");
+//		ImportPathNew->ui.wizardPath->setCurrentIndex(2);
+	//	ImportPathNew->ui.txtVdms_path_conf->setText( DatosVDMSound["Vdms_path_conf"] );
+		ImportPathNew->ui.txtVdms_path_exe->setText( DatosVDMSound["Vdms_path_exe"].replace("{DirBaseGames}", GRLConfig["DirBaseGames"].toString() ) );
 	}
 
 	if( ImportPathNew->exec() == QDialog::Accepted )
 	{
 		if( DatosJuego["Dat_tipo_emu"] == "dosbox" )
 		{
-			DatosDosBox["Dbx_path_conf"]      = ImportPathNew->ui.txtPath_Dbx_1->text();	// path_conf
-			DatosDosBox["Dbx_path_exe"]       = ImportPathNew->ui.txtPath_Dbx_2->text();	// path_exe
-			DatosDosBox["Dbx_path_setup"]     = ImportPathNew->ui.txtPath_Dbx_3->text();	// path_setup
-			DatosDosBox["Dbx_dosbox_language"]= ImportPathNew->ui.txtPath_Dbx_4->text();	// dosbox_language
-			DatosDosBox["Dbx_sdl_mapperfile"] = ImportPathNew->ui.txtPath_Dbx_5->text();	// sdl_mapperfile
-			DatosDosBox["Dbx_gus_ultradir"]   = ImportPathNew->ui.txtPath_Dbx_6->text();	// gus_ultradir
-			DatosDosBox["Dbx_dosbox_captures"]= ImportPathNew->ui.txtPath_Dbx_7->text();	// dosbox_captures
-			DatosDosBox["Dbx_path_sonido"]    = ImportPathNew->ui.txtPath_Dbx_8->text();	// path_sonido
+			DatosDosBox["Dbx_path_conf"]       = ImportPathNew->ui.txtDbx_path_conf->text();
+			DatosDosBox["Dbx_path_exe"]        = ImportPathNew->ui.txtDbx_path_exe->text();
+			DatosDosBox["Dbx_path_setup"]      = ImportPathNew->ui.txtDbx_path_setup->text();
+			DatosDosBox["Dbx_dosbox_language"] = ImportPathNew->ui.txtDbx_dosbox_language->text();
+			DatosDosBox["Dbx_sdl_mapperfile"]  = ImportPathNew->ui.txtDbx_sdl_mapperfile->text();
+			DatosDosBox["Dbx_gus_ultradir"]    = ImportPathNew->ui.txtDbx_gus_ultradir->text();
+			DatosDosBox["Dbx_dosbox_captures"] = ImportPathNew->ui.txtDbx_dosbox_captures->text();
+			DatosDosBox["Dbx_path_sonido"]     = ImportPathNew->ui.txtDbx_path_sonido->text();
 		}
 
 		if( DatosJuego["Dat_tipo_emu"] == "scummvm" )
 		{
-			DatosScummVM["Svm_path"]          = ImportPathNew->ui.txtPath_Svm_1->text();	// path
-			DatosScummVM["Svm_path_save"]     = ImportPathNew->ui.txtPath_Svm_2->text();	// path_save
-			DatosScummVM["Svm_path_setup"]    = ImportPathNew->ui.txtPath_Svm_3->text();	// path_setup
-			DatosScummVM["Svm_path_extra"]    = ImportPathNew->ui.txtPath_Svm_4->text();	// path_extra
-			DatosScummVM["Svm_path_capturas"] = ImportPathNew->ui.txtPath_Svm_5->text();	// path_capturas
-			DatosScummVM["Svm_path_sonido"]   = ImportPathNew->ui.txtPath_Svm_6->text();	// path_sonido
+			DatosScummVM["Svm_path"]          = ImportPathNew->ui.txtSvm_path->text();
+			DatosScummVM["Svm_path_save"]     = ImportPathNew->ui.txtSvm_path_save->text();
+			DatosScummVM["Svm_path_setup"]    = ImportPathNew->ui.txtSvm_path_setup->text();
+			DatosScummVM["Svm_path_extra"]    = ImportPathNew->ui.txtSvm_path_extra->text();
+			DatosScummVM["Svm_path_capturas"] = ImportPathNew->ui.txtSvm_path_capturas->text();
+			DatosScummVM["Svm_path_sonido"]   = ImportPathNew->ui.txtSvm_path_sonido->text();
 		}
 
 		if( DatosJuego["Dat_tipo_emu"] == "vdmsound" )
 		{
-			DatosVDMSound["Vdms_path_conf"] = ImportPathNew->ui.txtPath_Vdms_1->text();		// path_conf
-			DatosVDMSound["Vdms_path_exe"  ]= ImportPathNew->ui.txtPath_Vdms_2->text();		// path_exe
+			DatosVDMSound["Vdms_path_conf"] = ImportPathNew->ui.txtVdms_path_conf->text();
+			DatosVDMSound["Vdms_path_exe"  ]= ImportPathNew->ui.txtVdms_path_exe->text();
 		}
 
 		fGrl.GuardarKeyGRLConfig(stHomeDir + "GR-lida.conf", "OpcGeneral", "url_xmldb", ui.cbxScriptURL->itemData( ui.cbxScriptURL->currentIndex() ).toString() );

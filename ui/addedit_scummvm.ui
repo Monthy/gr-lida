@@ -133,7 +133,7 @@
           </widget>
          </item>
          <item row="0" column="3" colspan="4">
-          <widget class="QLineEdit" name="txtSvm_gameid">
+          <widget class="QLineEdit" name="txtSvm_game">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -163,7 +163,7 @@
           </widget>
          </item>
          <item row="1" column="5">
-          <widget class="QPushButton" name="btnDirSvm_1">
+          <widget class="QPushButton" name="btnSvm_Path">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -183,7 +183,7 @@
           </widget>
          </item>
          <item row="1" column="6">
-          <widget class="QPushButton" name="btnDirSvm_1_clear">
+          <widget class="QPushButton" name="btnSvm_Path_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -210,7 +210,7 @@
           </widget>
          </item>
          <item row="2" column="1" colspan="4">
-          <widget class="QLineEdit" name="txtSvm_savepath">
+          <widget class="QLineEdit" name="txtSvm_path_save">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -220,7 +220,7 @@
           </widget>
          </item>
          <item row="2" column="5">
-          <widget class="QPushButton" name="btnDirSvm_2">
+          <widget class="QPushButton" name="btnSvm_PathSave">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -240,7 +240,7 @@
           </widget>
          </item>
          <item row="2" column="6">
-          <widget class="QPushButton" name="btnDirSvm_2_clear">
+          <widget class="QPushButton" name="btnSvm_PathSave_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -411,7 +411,7 @@
           </widget>
          </item>
          <item row="8" column="1" colspan="4">
-          <widget class="QLineEdit" name="txtSvm_extrapath">
+          <widget class="QLineEdit" name="txtSvm_path_extra">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -421,7 +421,7 @@
           </widget>
          </item>
          <item row="8" column="5">
-          <widget class="QPushButton" name="btnDirSvm_3">
+          <widget class="QPushButton" name="btnSvm_PathExtra">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -441,7 +441,7 @@
           </widget>
          </item>
          <item row="8" column="6">
-          <widget class="QPushButton" name="btnDirSvm_3_clear">
+          <widget class="QPushButton" name="btnSvm_PathExtra_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -478,7 +478,7 @@
           </widget>
          </item>
          <item row="9" column="5">
-          <widget class="QPushButton" name="btnDirSvm_4">
+          <widget class="QPushButton" name="btnSvm_PathCapturas">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -498,7 +498,7 @@
           </widget>
          </item>
          <item row="9" column="6">
-          <widget class="QPushButton" name="btnDirSvm_4_clear">
+          <widget class="QPushButton" name="btnSvm_PathCapturas_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -535,7 +535,7 @@
           </widget>
          </item>
          <item row="10" column="5">
-          <widget class="QPushButton" name="btnDirSvm_5">
+          <widget class="QPushButton" name="btnSvm_PathSonido">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -555,7 +555,7 @@
           </widget>
          </item>
          <item row="10" column="6">
-          <widget class="QPushButton" name="btnDirSvm_5_clear">
+          <widget class="QPushButton" name="btnSvm_PathSonido_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -592,7 +592,7 @@
           </widget>
          </item>
          <item row="11" column="5">
-          <widget class="QPushButton" name="btnDirSvm_7">
+          <widget class="QPushButton" name="btnSvm_PathSetup">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -612,7 +612,7 @@
           </widget>
          </item>
          <item row="11" column="6">
-          <widget class="QPushButton" name="btnDirSvm_7_clear">
+          <widget class="QPushButton" name="btnSvm_PathSetup_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -715,7 +715,7 @@
           </widget>
          </item>
          <item row="2" column="1" colspan="3">
-          <widget class="QLineEdit" name="txtSvm_soundfont">
+          <widget class="QLineEdit" name="txtSvm_sound_font">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -725,7 +725,7 @@
           </widget>
          </item>
          <item row="2" column="4">
-          <widget class="QPushButton" name="btnDirSvm_6">
+          <widget class="QPushButton" name="btnSvm_SoundFont">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -745,7 +745,7 @@
           </widget>
          </item>
          <item row="2" column="5">
-          <widget class="QPushButton" name="btnDirSvm_6_clear">
+          <widget class="QPushButton" name="btnSvm_SoundFont_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -1151,7 +1151,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>btnDirSvm_1_clear</sender>
+   <sender>btnSvm_Path_clear</sender>
    <signal>clicked()</signal>
    <receiver>txtSvm_path</receiver>
    <slot>clear()</slot>
@@ -1167,9 +1167,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>btnDirSvm_2_clear</sender>
+   <sender>btnSvm_PathSave_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtSvm_savepath</receiver>
+   <receiver>txtSvm_path_save</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1183,9 +1183,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>btnDirSvm_3_clear</sender>
+   <sender>btnSvm_PathExtra_clear</sender>
    <signal>clicked()</signal>
-   <receiver>txtSvm_extrapath</receiver>
+   <receiver>txtSvm_path_extra</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1199,7 +1199,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>btnDirSvm_4_clear</sender>
+   <sender>btnSvm_PathCapturas_clear</sender>
    <signal>clicked()</signal>
    <receiver>txtSvm_path_capturas</receiver>
    <slot>clear()</slot>
@@ -1215,7 +1215,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>btnDirSvm_5_clear</sender>
+   <sender>btnSvm_PathSonido_clear</sender>
    <signal>clicked()</signal>
    <receiver>txtSvm_path_sonido</receiver>
    <slot>clear()</slot>
@@ -1231,7 +1231,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>btnDirSvm_7_clear</sender>
+   <sender>btnSvm_PathSetup_clear</sender>
    <signal>clicked()</signal>
    <receiver>txtSvm_path_setup</receiver>
    <slot>clear()</slot>

@@ -85,7 +85,7 @@
           </widget>
          </item>
          <item row="1" column="4">
-          <widget class="QPushButton" name="btnFileConfg_clear">
+          <widget class="QPushButton" name="btnDbx_FileConfg_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -229,7 +229,7 @@
           </widget>
          </item>
          <item row="9" column="4">
-          <widget class="QPushButton" name="btnExeJuego_clear">
+          <widget class="QPushButton" name="btnDbx_ExeJuego_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -306,7 +306,7 @@
           </widget>
          </item>
          <item row="12" column="4">
-          <widget class="QPushButton" name="btnExeSetup_clear">
+          <widget class="QPushButton" name="btnDbx_ExeSetup_clear">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -1409,26 +1409,6 @@
                    <width>0</width>
                    <height>24</height>
                   </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="4">
-                <widget class="QPushButton" name="btnDirGravisUltraSound">
-                 <property name="minimumSize">
-                  <size>
-                   <width>30</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>30</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/grlida.qrc">
-                   <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -3114,7 +3094,7 @@
  <tabstops>
   <tabstop>txtDbx_path_conf</tabstop>
   <tabstop>btnDbx_FileConfg</tabstop>
-  <tabstop>btnFileConfg_clear</tabstop>
+  <tabstop>btnDbx_FileConfg_clear</tabstop>
   <tabstop>cbxDbx_Profiles</tabstop>
   <tabstop>chkDbx_loadfix</tabstop>
   <tabstop>chkDbx_cerrar_dbox</tabstop>
@@ -3123,11 +3103,11 @@
   <tabstop>cbxDbx_dos_keyboardlayout</tabstop>
   <tabstop>txtDbx_path_exe</tabstop>
   <tabstop>btnDbx_ExeJuego</tabstop>
-  <tabstop>btnExeJuego_clear</tabstop>
+  <tabstop>btnDbx_ExeJuego_clear</tabstop>
   <tabstop>txtDbx_parametros_exe</tabstop>
   <tabstop>txtDbx_path_setup</tabstop>
   <tabstop>btnDbx_ExeSetup</tabstop>
-  <tabstop>btnExeSetup_clear</tabstop>
+  <tabstop>btnDbx_ExeSetup_clear</tabstop>
   <tabstop>txtDbx_parametros_setup</tabstop>
   <tabstop>chkDbx_sdl_fullscreen</tabstop>
   <tabstop>chkDbx_sdl_fulldouble</tabstop>
@@ -3184,7 +3164,6 @@
   <tabstop>cbxDbx_gus_dma1</tabstop>
   <tabstop>cbxDbx_gus_dma2</tabstop>
   <tabstop>txtDbx_gus_ultradir</tabstop>
-  <tabstop>btnDirGravisUltraSound</tabstop>
   <tabstop>chkDbx_activar_mpu401</tabstop>
   <tabstop>chkDbx_midi_intelligent</tabstop>
   <tabstop>cbxDbx_midi_mpu401</tabstop>
@@ -3259,7 +3238,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>btnFileConfg_clear</sender>
+   <sender>btnDbx_FileConfg_clear</sender>
    <signal>clicked()</signal>
    <receiver>txtDbx_path_conf</receiver>
    <slot>clear()</slot>
@@ -3275,7 +3254,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>btnExeJuego_clear</sender>
+   <sender>btnDbx_ExeJuego_clear</sender>
    <signal>clicked()</signal>
    <receiver>txtDbx_path_exe</receiver>
    <slot>clear()</slot>
@@ -3291,7 +3270,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>btnExeSetup_clear</sender>
+   <sender>btnDbx_ExeSetup_clear</sender>
    <signal>clicked()</signal>
    <receiver>txtDbx_path_setup</receiver>
    <slot>clear()</slot>

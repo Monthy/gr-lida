@@ -25,8 +25,7 @@
 #ifndef GRLIDA_IMPORTPATH_H
 #define GRLIDA_IMPORTPATH_H
 
-#include <QtCore>
-#include <QtGui>
+#include <QDialog>
 
 #include "funciones.h"
 #include "ui_importpath.h"
@@ -55,24 +54,24 @@ private:
 private slots:
 	void on_btnOk();
 
-	void on_btnOpenDbxFile_1();
-	void on_btnOpenDbxFile_2();
-	void on_btnOpenDbxFile_3();
-	void on_btnOpenDbxFile_4();
-	void on_btnOpenDbxFile_5();
-	void on_btnOpenDbxDir_6();
-	void on_btnOpenDbxDir_7();
-	void on_btnOpenDbxDir_8();
-
-	void on_btnOpenSvmDir_1();
-	void on_btnOpenSvmDir_2();
-	void on_btnOpenSvmFile3();
-	void on_btnOpenSvmDir_4();
-	void on_btnOpenSvmDir_5();
-	void on_btnOpenSvmDir_6();
-
-	void on_btnOpenVdmsFile_1();
-	void on_btnOpenVdmsFile_2();
+// DOSBox
+	void on_btnDbx_FileConfg();
+	void on_btnDbx_ExeJuego();
+	void on_btnDbx_ExeSetup();
+	void on_btnDbx_mapperfile();
+	void on_btnDbx_language();
+	void on_btnDbx_capturas();
+	void on_btnDbx_musica();
+// ScummVM
+	void on_btnSvm_Path();
+	void on_btnSvm_PathSave();
+	void on_btnSvm_PathSetup();
+	void on_btnSvm_PathExtra();
+	void on_btnSvm_PathCapturas();
+	void on_btnSvm_PathSonido();
+// VDMSound
+	void on_btnVdms_PathConf();
+	void on_btnVdms_PathExe();
 
 public slots:
 	void on_changeEnabled(bool estado);

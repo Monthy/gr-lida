@@ -59,30 +59,29 @@ frmSvmAdd::~frmSvmAdd()
 void frmSvmAdd::createConnections()
 {
 // Conecta los distintos botones con las funciones.
-	connect( ui.btnOk            , SIGNAL( clicked() ), this, SLOT( on_btnOk()       ) );
-	connect( ui.btnNext          , SIGNAL( clicked() ), this, SLOT( on_btnNext()     ) );
-	connect( ui.btnPrevious      , SIGNAL( clicked() ), this, SLOT( on_btnPrevious() ) );
-	connect( ui.btnDirSvm_1      , SIGNAL( clicked() ), this, SLOT( on_btnDirGame()  ) );
-	connect( ui.btnDirSvm_2      , SIGNAL( clicked() ), this, SLOT( on_btnDirSave()  ) );
-	connect( ui.btnDefectoSvm    , SIGNAL( clicked() ), this, SLOT( on_btnDefecto()  ) );
-	connect( ui.twScummVM        , SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* ) ) );
-	connect( ui.twScummVM        , SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twScummVM_Dblclicked(QTreeWidgetItem* ) ) );
-	connect( ui.btnDescargarInfo , SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo() ) );
+	connect( ui.btnOk           , SIGNAL( clicked() ), this, SLOT( on_btnOk()           ) );
+	connect( ui.btnNext         , SIGNAL( clicked() ), this, SLOT( on_btnNext()         ) );
+	connect( ui.btnPrevious     , SIGNAL( clicked() ), this, SLOT( on_btnPrevious()     ) );
+	connect( ui.btnSvm_Path     , SIGNAL( clicked() ), this, SLOT( on_btnSvm_Path()     ) );
+	connect( ui.btnSvm_PathSave , SIGNAL( clicked() ), this, SLOT( on_btnSvm_PathSave() ) );
+	connect( ui.btnDefectoSvm   , SIGNAL( clicked() ), this, SLOT( on_btnDefecto()      ) );
+	connect( ui.twScummVM       , SIGNAL( itemClicked( QTreeWidgetItem*, int )), this, SLOT( on_twScummVM_clicked( QTreeWidgetItem* ) ) );
+	connect( ui.twScummVM       , SIGNAL( itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT( on_twScummVM_Dblclicked(QTreeWidgetItem* ) ) );
+	connect( ui.btnDescargarInfo, SIGNAL( clicked() ), this, SLOT( on_btnDescargarInfo() ) );
 }
 
 void frmSvmAdd::setTheme()
 {
-	setStyleSheet( fGrl.StyleSheet() );
 	setWindowIcon( QIcon(stTheme+"img16/scummvm.png") );
 
 	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
 	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
 	ui.btnPrevious->setIcon( QIcon(stTheme+"img16/mp_rebobinar_atras.png") );
 	ui.btnNext->setIcon( QIcon(stTheme+"img16/mp_rebobinar_adelante.png") );
-	ui.btnDirSvm_1->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirSvm_2->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnDirSvm_1_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-	ui.btnDirSvm_2_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnSvm_Path->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_PathSave->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
+	ui.btnSvm_Path_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
+	ui.btnSvm_PathSave_clear->setIcon( QIcon(stTheme+"img16/limpiar.png") );
 	ui.btnDescargarInfo->setIcon( QIcon(stTheme+"img16/go-down.png") );
 	ui.btnDefectoSvm->setIcon( QIcon(stTheme+"img16/actualizar.png") );
 	ui.cbxSvm_joystick_num->setItemIcon(0, QIcon(stTheme+"img16/controller.png") );
@@ -90,6 +89,8 @@ void frmSvmAdd::setTheme()
 
 	if( GRLConfig["font_usar"].toBool() )
 		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
+	else
+		setStyleSheet( fGrl.StyleSheet() );
 }
 
 void frmSvmAdd::CargarConfig()
@@ -277,7 +278,7 @@ void frmSvmAdd::on_btnDescargarInfo()
 			ui.txtSvm_path->setText( ImportarJuego->DatosScummVM["Svm_path"] );																// path
 			tempDatosJuego["Svm_path_setup"] = ImportarJuego->DatosScummVM["Svm_path_setup"];												// path_setup
 			tempDatosJuego["Svm_path_extra"] = ImportarJuego->DatosScummVM["Svm_path_extra"];												// path_extra
-			ui.txtSvm_savepath->setText( ImportarJuego->DatosScummVM["Svm_path_save"] );													// path_save
+			ui.txtSvm_path_save->setText( ImportarJuego->DatosScummVM["Svm_path_save"] );													// path_save
 			tempDatosJuego["Svm_path_capturas"] = ImportarJuego->DatosScummVM["Svm_path_capturas"];											// path_capturas
 			tempDatosJuego["Svm_path_sonido"]   = ImportarJuego->DatosScummVM["Svm_path_sonido"];											// path_sonido
 			ui.cbxSvm_music_driver->setCurrentIndex( ui.cbxSvm_music_driver->findData( ImportarJuego->DatosScummVM["Svm_music_driver"] ) );	// music_driver
@@ -355,7 +356,7 @@ void frmSvmAdd::on_btnOk()
 		DatosScummVM["Svm_path"]            = ui.txtSvm_path->text();									// path
 		DatosScummVM["Svm_path_setup"]      = ""+tempDatosJuego["Svm_path_setup"];						// path_setup
 		DatosScummVM["Svm_path_extra"]      = ""+tempDatosJuego["Svm_path_extra"];						// path_extra
-		DatosScummVM["Svm_path_save"]       = ui.txtSvm_savepath->text();								// path_save
+		DatosScummVM["Svm_path_save"]       = ui.txtSvm_path_save->text();								// path_save
 		DatosScummVM["Svm_path_capturas"]   = ""+tempDatosJuego["Svm_path_capturas"];					// path_capturas
 		DatosScummVM["Svm_path_sonido"]     = ""+tempDatosJuego["Svm_path_sonido"];						// path_sonido
 		DatosScummVM["Svm_music_driver"]    = ui.cbxSvm_music_driver->itemData( ui.cbxSvm_music_driver->currentIndex() ).toString();// music_driver
@@ -382,7 +383,7 @@ void frmSvmAdd::on_btnOk()
 	}
 }
 
-void frmSvmAdd::on_btnDirGame()
+void frmSvmAdd::on_btnSvm_Path()
 {
 	ui.txtSvm_path->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), GRLConfig["Svm_path"].toString() , ui.txtSvm_path->text() ) );
 
@@ -395,13 +396,13 @@ void frmSvmAdd::on_btnDirGame()
 	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Svm_path", GRLConfig["Svm_path"].toString() );
 }
 
-void frmSvmAdd::on_btnDirSave()
+void frmSvmAdd::on_btnSvm_PathSave()
 {
-	ui.txtSvm_savepath->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), GRLConfig["Svm_savepath"].toString() , ui.txtSvm_savepath->text() ) );
+	ui.txtSvm_path_save->setText( fGrl.VentanaDirectorios(tr("Selecciona el directorio del Juego"), GRLConfig["Svm_savepath"].toString() , ui.txtSvm_path_save->text() ) );
 
-	QDir dir( ui.txtSvm_savepath->text() );
+	QDir dir( ui.txtSvm_path_save->text() );
 	if( dir.exists() )
-		GRLConfig["Svm_savepath"] = ui.txtSvm_savepath->text();
+		GRLConfig["Svm_savepath"] = ui.txtSvm_path_save->text();
 	else
 		GRLConfig["Svm_savepath"] = "";
 

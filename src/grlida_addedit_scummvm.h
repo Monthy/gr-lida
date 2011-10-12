@@ -67,14 +67,13 @@ private:
 private slots:
 	void on_twScummVM_clicked( QTreeWidgetItem *item );
 	void on_btnDefecto();
-	void on_btnDirSvm_path();
-	void on_btnDirSvm_save();
-	void on_btnDirSvm_extra();
-	void on_btnDirSvm_capturas();
-	void on_btnDirSvm_sonido();
-	void on_btnDirSvm_setup();
-	void on_btnDirSvm_sound_font();
-
+	void on_btnSvm_Path();
+	void on_btnSvm_PathSave();
+	void on_btnSvm_PathSetup();
+	void on_btnSvm_PathExtra();
+	void on_btnSvm_PathCapturas();
+	void on_btnSvm_PathSonido();
+	void on_btnSvm_SoundFont();
 };
 
 #endif // GRLIDA_ADDEDIT_SCUMMVM_H

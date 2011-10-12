@@ -714,6 +714,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="btnInstalarJuego">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>Instalar primero el Juego </string>
            </property>
@@ -1874,6 +1880,7 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
