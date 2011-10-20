@@ -61,7 +61,6 @@ private:
 	void setTheme();
 	void CargarConfig();
 	void PrevierMontajes();
-	void setConfigDefecto();
 	void CargarDatosDosBox(QHash<QString, QString> datosDbx, bool isProfileGame = false);
 	void CargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
 

@@ -96,42 +96,15 @@ void frmVdmsAdd::CargarConfig()
 
 void frmVdmsAdd::on_btnDescargarInfo()
 {
-	frmImportarJuego * ImportarJuego = new frmImportarJuego(ui.txtDatos_Titulo->text(), 0, Qt::Window);
+	tempDatosJuego["Dat_titulo"]   = ui.txtDatos_Titulo->text();
+	tempDatosJuego["Dat_tipo_emu"] = "vdmsound";
+
+	frmImportarJuego *ImportarJuego = new frmImportarJuego(tempDatosJuego, fGrl.getDefectDatosScummVM(), fGrl.getDefectDatosDosBox(), fGrl.getDefectDatosVDMSound(), 0, Qt::Window);
 	if( ImportarJuego->exec() == QDialog::Accepted )
 	{
 		tempDatosJuego.clear();
-		ui.txtDatos_Titulo->setText( ImportarJuego->DatosJuego["Dat_titulo"] );				// titulo
-		tempDatosJuego["Dat_icono"]         = "vdmsound";									// icono
-		tempDatosJuego["Dat_titulo"]        = ui.txtDatos_Titulo->text();					// titulo
-		tempDatosJuego["Dat_subtitulo"]     = ImportarJuego->DatosJuego["Dat_subtitulo"];	// subtitulo
-		tempDatosJuego["Dat_genero"]        = ImportarJuego->DatosJuego["Dat_genero"];		// genero
-		tempDatosJuego["Dat_compania"]      = ImportarJuego->DatosJuego["Dat_compania"];	// compania
-		tempDatosJuego["Dat_desarrollador"] = ImportarJuego->DatosJuego["Dat_desarrollador"];//desarrollador
-		tempDatosJuego["Dat_tema"]          = ImportarJuego->DatosJuego["Dat_tema"];		// tema
-		tempDatosJuego["Dat_perspectiva"]   = ImportarJuego->DatosJuego["Dat_perspectiva"];	// perspectiva
-		tempDatosJuego["Dat_idioma"]        = ImportarJuego->DatosJuego["Dat_idioma"];		// idioma
-		tempDatosJuego["Dat_idioma_voces"]  = ImportarJuego->DatosJuego["Dat_idioma_voces"];// idioma_voces
-		tempDatosJuego["Dat_formato"]       = ImportarJuego->DatosJuego["Dat_formato"];		// formato
-		tempDatosJuego["Dat_anno"]          = ImportarJuego->DatosJuego["Dat_anno"];		// anno
-		tempDatosJuego["Dat_numdisc"]       = ImportarJuego->DatosJuego["Dat_numdisc"];		// numdisc
-		tempDatosJuego["Dat_sistemaop"]     = ImportarJuego->DatosJuego["Dat_sistemaop"];	// sistemaop
-		tempDatosJuego["Dat_tamano"]        = ImportarJuego->DatosJuego["Dat_tamano"];		// tamano
-		tempDatosJuego["Dat_graficos"]      = ImportarJuego->DatosJuego["Dat_graficos"];	// graficos
-		tempDatosJuego["Dat_sonido"]        = ImportarJuego->DatosJuego["Dat_sonido"];		// sonido
-		tempDatosJuego["Dat_jugabilidad"]   = ImportarJuego->DatosJuego["Dat_jugabilidad"];	// jugabilidad
-		tempDatosJuego["Dat_original"]      = ImportarJuego->DatosJuego["Dat_original"];	// original
-		tempDatosJuego["Dat_estado"]        = ImportarJuego->DatosJuego["Dat_estado"];		// estado
-		tempDatosJuego["Dat_thumbs"]        = ImportarJuego->DatosJuego["Dat_thumbs"];		// thumbs
-		tempDatosJuego["Dat_cover_front"]   = ImportarJuego->DatosJuego["Dat_cover_front"];	// cover_front
-		tempDatosJuego["Dat_cover_back"]    = ImportarJuego->DatosJuego["Dat_cover_back"];	// cover_back
-		tempDatosJuego["Dat_tipo_emu"]      = "vdmsound";									// tipo_emu
-		tempDatosJuego["Dat_comentario"]    = ImportarJuego->DatosJuego["Dat_comentario"];	// comentario
-		tempDatosJuego["Dat_favorito"]      = ImportarJuego->DatosJuego["Dat_favorito"];	// favorito
-		tempDatosJuego["Dat_rating"]        = ImportarJuego->DatosJuego["Dat_rating"];		// rating
-		tempDatosJuego["Dat_edad_recomendada"] = ImportarJuego->DatosJuego["Dat_edad_recomendada"];	// edad_recomendada
-		tempDatosJuego["Dat_usuario"]          = ImportarJuego->DatosJuego["Dat_usuario"];			// usuario
-		tempDatosJuego["Dat_path_exe"]         = ImportarJuego->DatosJuego["Dat_path_exe"];			// path_exe
-		tempDatosJuego["Dat_parametros_exe"]   = ImportarJuego->DatosJuego["Dat_parametros_exe"];	// parametros_exe
+		tempDatosJuego = ImportarJuego->DatosJuego;
+		ui.txtDatos_Titulo->setText( ImportarJuego->DatosJuego["Dat_titulo"] );
 	}
 }
 

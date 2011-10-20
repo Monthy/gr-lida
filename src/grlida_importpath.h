@@ -53,6 +53,7 @@ private:
 
 private slots:
 	void on_btnOk();
+	void on_estado_cheket_items(bool estado);
 
 // DOSBox
 	void on_btnDbx_FileConfg();

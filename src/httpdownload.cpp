@@ -22,9 +22,6 @@
  *
 **/
 
-#include <QtGui>
-#include <QtNetwork>
-
 #include "httpdownload.h"
 #include "ui_login_url.h"
 
@@ -34,22 +31,6 @@ HttpDownload::HttpDownload(QWidget *parent)
 	setStatusLabel( tr("Por favor, introduzca la dirección URL de un archivo que desea descargar.") );
 	setStatusBtnDownload( true );
 	setHttpWindowTitle();
-
-	progressDialog = new QProgressDialog(this);
-	http = new QHttp(this);
-
-
-	connect(http, SIGNAL( requestFinished(int, bool) ), this, SLOT( httpRequestFinished(int, bool) ) );
-	connect(http, SIGNAL( responseHeaderReceived(const QHttpResponseHeader &) ), this, SLOT( readResponseHeader(const QHttpResponseHeader &) ) );
-	connect(http, SIGNAL( dataReadProgress(int, int) ), this, SLOT( updateDataReadProgress(int, int) ) );
-	connect(http, SIGNAL( stateChanged(int) ), this, SLOT( httpstateChanged(int) ) );
-	connect(http, SIGNAL( authenticationRequired(const QString &, quint16, QAuthenticator *) ), this, SLOT( slotAuthenticationRequired(const QString &, quint16, QAuthenticator *) ) );
-
-#ifndef QT_NO_OPENSSL
-	connect(http, SIGNAL( sslErrors(const QList<QSslError> &) ), this, SLOT( sslErrors(const QList<QSslError> &) ) );
-#endif
-
-	connect(progressDialog, SIGNAL( canceled() ), this, SLOT( cancelDownload() ) );
 }
 
 HttpDownload::~HttpDownload()
@@ -59,8 +40,6 @@ HttpDownload::~HttpDownload()
 
 void HttpDownload::setHttpProxy(int typeProxy, const QString host, int port, const QString username, const QString password)
 {
-	QNetworkProxy proxy;
-
 	switch ( typeProxy )
 	{
 		case 0:
@@ -86,10 +65,6 @@ void HttpDownload::setHttpProxy(int typeProxy, const QString host, int port, con
 	proxy.setPort( port );
 	proxy.setUser( username );
 	proxy.setPassword( password );
-//	QNetworkProxy::setApplicationProxy(proxy);
-	http->setProxy( proxy );
-
-//	http->setProxy(host, port, username, password);
 }
 
 void HttpDownload::setHttpWindowTitle(QString titulo)
@@ -99,6 +74,22 @@ void HttpDownload::setHttpWindowTitle(QString titulo)
 
 void HttpDownload::downloadFile(QString urlfile, QString fileName, QString metodo, QString contentPost)
 {
+	progressDialog = new QProgressDialog(this);
+	http = new QHttp(this);
+
+	connect(http, SIGNAL( requestFinished(int, bool) ), this, SLOT( httpRequestFinished(int, bool) ) );
+	connect(http, SIGNAL( responseHeaderReceived(const QHttpResponseHeader &) ), this, SLOT( readResponseHeader(const QHttpResponseHeader &) ) );
+	connect(http, SIGNAL( dataReadProgress(int, int) ), this, SLOT( updateDataReadProgress(int, int) ) );
+	connect(http, SIGNAL( stateChanged(int) ), this, SLOT( httpstateChanged(int) ) );
+	connect(http, SIGNAL( authenticationRequired(const QString &, quint16, QAuthenticator *) ), this, SLOT( slotAuthenticationRequired(const QString &, quint16, QAuthenticator *) ) );
+
+#ifndef QT_NO_OPENSSL
+	connect(http, SIGNAL( sslErrors(const QList<QSslError> &) ), this, SLOT( sslErrors(const QList<QSslError> &) ) );
+#endif
+
+	connect(progressDialog, SIGNAL( canceled() ), this, SLOT( cancelDownload() ) );
+	http->setProxy( proxy );
+
 	urlLineEdit.clear();
 	urlLineEdit = urlfile;
 

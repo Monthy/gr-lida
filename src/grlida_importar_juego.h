@@ -40,6 +40,7 @@
 
 #include "httpdownload.h"
 #include "funciones.h"
+#include "grlida_importpath.h"
 #include "ui_importar_juego.h"
 
 enum e_fin_descarga {
@@ -77,7 +78,10 @@ class frmImportarJuego : public QDialog
     Q_OBJECT
 
 public:
-	frmImportarJuego(QString titulo_busqueda, QDialog *parent = 0, Qt::WFlags flags = 0);
+	frmImportarJuego(QHash<QString, QString> datos,
+					QHash<QString, QString> datos_svm,
+					QHash<QString, QString> datos_dbx,
+					QHash<QString, QString> datos_vdms, QDialog *parent = 0, Qt::WFlags flags = 0);
 	~frmImportarJuego();
 
 	Ui::ImportarJuegoClass ui;
@@ -88,11 +92,21 @@ public:
 	QHash<QString, QString> DatosVDMSound;
 
 private:
+	enum tab_dat_config {
+		tab_datos    = 0,
+		tab_dosbox   = 1,
+		tab_scummvm  = 2,
+		tab_vdmsound = 3
+	};
+
 	Funciones fGrl;
+	frmImportPath *ImportPathNew;
 	HttpDownload *httpdown;
+	HttpDownload *httpdown_dos;
 	int indx_fin_descarga;
 
-	QString stHomeDir, stTheme, stTempDir, stCoversDir, stThumbsDir;
+	QString stHomeDir, stIconDir, stTempDir, stConfgDbxDir, stConfgVdmSDir;
+	QString stTheme, stScriptsDir, stCoversDir, stThumbsDir;
 	QString stFileBusqueda, stFileFicha, stUrlWeb;
 	QString str_html_new, str_html_old;
 	QString img_thumbs, img_cover_front, img_cover_back;
@@ -101,8 +115,12 @@ private:
 
 	QByteArray CodecFileHtml;
 
-	QHash<QString, QString> DatosJuegoTemp;
 	QHash<QString, QVariant> GRLConfig;
+
+	QHash<QString, QString> tmpDatosJuego;
+	QHash<QString, QString> tmpDatosScummVM;
+	QHash<QString, QString> tmpDatosDosBox;
+	QHash<QString, QString> tmpDatosVDMSound;
 
 // Ini Script ------
 	QString stScripts;
@@ -115,12 +133,15 @@ private:
 	void CargarScript(QString fileScript);
 // Fin Script ------
 
+	void createConnections();
 	void setTheme();
+	void CargarConfig();
 	void MostrarFichaHtml(QHash<QString, QString> datos);
 	QString LeerArchivoHTML(QString file_html);
 //
 	void AddTitles(QString ResultsPage);
 	void AnalyzePage(QString Page, bool local = false, bool tipoDFend = false);
+	void InsertarItemDatosJuego(QString etiqueta, QString old_dat, QString new_dat, QString key_dat);
 
 private slots:
 	void on_twListaBusqueda_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2);

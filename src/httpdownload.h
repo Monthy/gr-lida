@@ -25,7 +25,9 @@
 #ifndef HTTPDOWNLOAD_H
 #define HTTPDOWNLOAD_H
 
-#include <QtGui/QWidget>
+#include <QtGui>
+#include <QWidget>
+#include <QtNetwork>
 
 class QFile;
 class QHttp;
@@ -44,8 +46,8 @@ public:
 
 	void downloadFile(QString urlfile, QString fileName, QString metodo = "", QString contentPost = "");
 
-	QString getStatusLabel(){ return m_statuslabel; };
-	bool getStatusBtnDownload(){ return m_downloadButton; };
+	QString getStatusLabel(){ return m_statuslabel; }
+	bool getStatusBtnDownload(){ return m_downloadButton; }
 	void setHttpProxy(int typeProxy, const QString host, int port, const QString username = "", const QString password = "");
 	void setHttpWindowTitle(QString titulo = "HttpDownload");
 
@@ -58,6 +60,7 @@ private:
 	bool m_downloadButton;
 
 	QHttp *http;
+	QNetworkProxy proxy;
 	QFile *file;
 	int httpGetId;
 	bool httpRequestAborted;

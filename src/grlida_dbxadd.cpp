@@ -149,41 +149,16 @@ void frmDbxAdd::CargarConfig()
 	ui.cbxDbx_speaker_tandyrate->clear();
 	ui.cbxDbx_speaker_tandyrate->addItems( sonido_frecuencias );
 
-	on_setProfileGame( 0 );
+
 
 // Ponemos los Combobox por defecto.
 	ui.cbxDbx_Profiles->setCurrentIndex( 0 );
-	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 ); // Resolución pantalla
-	ui.cbxDbx_sdl_output->setCurrentIndex( 0 );         // Modo de Renderizado
-	ui.cbxDbx_dosbox_machine->setCurrentIndex( 8 );     // Tarjeta de Video
-	ui.cbxDbx_render_scaler->setCurrentIndex( 1 );      // Escalar y Filtros
-	ui.cbxDbx_dosbox_memsize->setCurrentIndex( 5 );     // Cantidad de memoria para DOSBox
-	ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );         // Ciclos DOSBox
-	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );    // Tipo Sound Blaste
-	ui.cbxDbx_midi_mpu401->setCurrentIndex( 0 );        // MPU-401
-	ui.cbxDbx_midi_device->setCurrentIndex( 0 );        // MIDI Device
-	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );      // mt32rate
-	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );           // Núcleo de la CPU DOSBox
-	ui.cbxDbx_dos_umb->setCurrentIndex( 0 );            // Soporte para memoria UMB
-	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 1 );      //
-	ui.cbxDbx_mixer_rate->setCurrentIndex( 5 );         //
-	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( 2 );   //
-	ui.cbxDbx_gus_gusrate->setCurrentIndex( 5 );        //
-	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 5 );      //
-	ui.cbxDbx_speaker_pcrate->setCurrentIndex( 5 );     //
-	ui.cbxDbx_speaker_tandyrate->setCurrentIndex( 5 );  //
+	emit on_setProfileGame( 0 );
 
 	ui.chkDbx_sdl_fullfixed->setVisible(false); // En desuso
-
 	ui.twMontajes->setColumnHidden(7, true);
 
-	tempDatosJuego["Dat_graficos"]        = "0";
-	tempDatosJuego["Dat_sonido"]          = "0";
-	tempDatosJuego["Dat_jugabilidad"]     = "0";
-	tempDatosJuego["Dat_favorito"]        = "false";
-	tempDatosJuego["Dat_rating"]          = "0";
-	tempDatosJuego["Dat_edad_recomendada"]= "nd";
-
+	tempDatosJuego = fGrl.getDefectDatosJuego();
 	ui.txtDatos_Titulo->setFocus();
 }
 
@@ -250,137 +225,20 @@ void frmDbxAdd::on_btnNext()
 	}
 }
 
-void frmDbxAdd::setConfigDefecto()
-{
-// [sdl]
-	tempProfileDosBox["Dbx_sdl_fullscreen"]        = "false";
-	tempProfileDosBox["Dbx_sdl_fulldouble"]        = "false";
-	tempProfileDosBox["Dbx_sdl_fullfixed"]         = "false";
-	tempProfileDosBox["Dbx_sdl_fullresolution"]    = "original";
-	tempProfileDosBox["Dbx_sdl_windowresolution"]  = "original";
-	tempProfileDosBox["Dbx_sdl_output"]            = "surface";
-	tempProfileDosBox["Dbx_sdl_hwscale"]           = "1.00";
-	tempProfileDosBox["Dbx_sdl_autolock"]          = "true";
-	tempProfileDosBox["Dbx_sdl_sensitivity"]       = "100";
-	tempProfileDosBox["Dbx_sdl_waitonerror"]       = "true";
-	tempProfileDosBox["Dbx_sdl_priority"]          = "higher,normal";
-	tempProfileDosBox["Dbx_sdl_mapperfile"]        = "mapper.txt";
-	tempProfileDosBox["Dbx_sdl_usescancodes"]      = "true";
-// [dosbox]
-	tempProfileDosBox["Dbx_dosbox_language"]       = "";
-	tempProfileDosBox["Dbx_dosbox_machine"]        = "svga_s3";
-	tempProfileDosBox["Dbx_dosbox_captures"]       = "capture";
-	tempProfileDosBox["Dbx_dosbox_memsize"]        = "16";
-// [render]
-	tempProfileDosBox["Dbx_render_frameskip"]      = "0";
-	tempProfileDosBox["Dbx_render_aspect"]         = "false";
-	tempProfileDosBox["Dbx_render_scaler"]         = "normal2x";
-// [cpu]
-	tempProfileDosBox["Dbx_cpu_core"]              = "auto";
-	tempProfileDosBox["Dbx_cpu_cputype"]           = "auto";
-	tempProfileDosBox["Dbx_cpu_cycles"]            = "auto";
-	tempProfileDosBox["Dbx_cpu_cycles_realmode"]   = "";
-	tempProfileDosBox["Dbx_cpu_cycles_protmode"]   = "";
-	tempProfileDosBox["Dbx_cpu_cycles_limitmode"]  = "";
-	tempProfileDosBox["Dbx_cpu_cycleup"]           = "10";
-	tempProfileDosBox["Dbx_cpu_cycledown"]         = "20";
-// [mixer]
-	tempProfileDosBox["Dbx_mixer_nosound"]         = "false";
-	tempProfileDosBox["Dbx_mixer_rate"]            = "44100";
-	tempProfileDosBox["Dbx_mixer_blocksize"]       = "1024";
-	tempProfileDosBox["Dbx_mixer_prebuffer"]       = "20";
-// [midi]
-	tempProfileDosBox["Dbx_midi_mpu401"]           = "intelligent";
-	tempProfileDosBox["Dbx_midi_intelligent"]      = "true";
-	tempProfileDosBox["Dbx_midi_device"]           = "default";
-	tempProfileDosBox["Dbx_midi_config"]           = "";
-	tempProfileDosBox["Dbx_midi_mt32rate"]         = "44100";
-// [sblaster]
-	tempProfileDosBox["Dbx_sblaster_sbtype"]       = "sb16";
-	tempProfileDosBox["Dbx_sblaster_sbbase"]       = "220";
-	tempProfileDosBox["Dbx_sblaster_irq"]          = "7";
-	tempProfileDosBox["Dbx_sblaster_dma"]          = "1";
-	tempProfileDosBox["Dbx_sblaster_hdma"]         = "5";
-	tempProfileDosBox["Dbx_sblaster_mixer"]        = "true";
-	tempProfileDosBox["Dbx_sblaster_oplmode"]      = "auto";
-	tempProfileDosBox["Dbx_sblaster_oplemu"]       = "default";
-	tempProfileDosBox["Dbx_sblaster_oplrate"]      = "44100";
-// [gus]
-	tempProfileDosBox["Dbx_gus_gus"]               = "true";
-	tempProfileDosBox["Dbx_gus_gusrate"]           = "44100";
-	tempProfileDosBox["Dbx_gus_gusbase"]           = "240";
-	tempProfileDosBox["Dbx_gus_irq1"]              = "5";
-	tempProfileDosBox["Dbx_gus_irq2"]              = "5";
-	tempProfileDosBox["Dbx_gus_dma1"]              = "3";
-	tempProfileDosBox["Dbx_gus_dma2"]              = "3";
-	tempProfileDosBox["Dbx_gus_ultradir"]          = "C:\\ULTRASND";
-// [speaker]
-	tempProfileDosBox["Dbx_speaker_pcspeaker"]    = "true";
-	tempProfileDosBox["Dbx_speaker_pcrate"]       = "44100";
-	tempProfileDosBox["Dbx_speaker_tandy"]        = "auto";
-	tempProfileDosBox["Dbx_speaker_tandyrate"]    = "44100";
-	tempProfileDosBox["Dbx_speaker_disney"]       = "true";
-// [joystick]
-	tempProfileDosBox["Dbx_joystick_type"]         = "auto";
-	tempProfileDosBox["Dbx_joystick_timed"]        = "true";
-	tempProfileDosBox["Dbx_joystick_autofire"]     = "false";
-	tempProfileDosBox["Dbx_joystick_swap34"]       = "false";
-	tempProfileDosBox["Dbx_joystick_buttonwrap"]   = "true";
-// [modem]
-	tempProfileDosBox["Dbx_modem_modem"]           = "true";
-	tempProfileDosBox["Dbx_modem_comport"]         = "1";
-	tempProfileDosBox["Dbx_modem_listenport"]      = "23";
-// [dserial]
-	tempProfileDosBox["Dbx_dserial_directserial"]  = "true";
-	tempProfileDosBox["Dbx_dserial_comport"]       = "1";
-	tempProfileDosBox["Dbx_dserial_realport"]      = "COM1";
-	tempProfileDosBox["Dbx_dserial_defaultbps"]    = "1200";
-	tempProfileDosBox["Dbx_dserial_parity"]        = "N";
-	tempProfileDosBox["Dbx_dserial_bytesize"]      = "8";
-	tempProfileDosBox["Dbx_dserial_stopbit"]       = "1";
-	tempProfileDosBox["Dbx_serial_1"]              = "dummy";
-	tempProfileDosBox["Dbx_serial_2"]              = "dummy";
-	tempProfileDosBox["Dbx_serial_3"]              = "disabled";
-	tempProfileDosBox["Dbx_serial_4"]              = "disabled";
-// [dos]
-	tempProfileDosBox["Dbx_dos_xms"]               = "true";
-	tempProfileDosBox["Dbx_dos_ems"]               = "true";
-	tempProfileDosBox["Dbx_dos_umb"]               = "true";
-	tempProfileDosBox["Dbx_dos_keyboardlayout"]    = "auto";
-// [ipx]
-	tempProfileDosBox["Dbx_ipx_ipx"]               = "false";
-// [autoexec]
-	tempProfileDosBox["Dbx_autoexec"]              = "false";
-// Opciones
-	tempProfileDosBox["Dbx_opt_autoexec"]          = "false";
-	tempProfileDosBox["Dbx_opt_loadfix"]           = "false";
-	tempProfileDosBox["Dbx_opt_loadfix_mem"]       = "64";
-	tempProfileDosBox["Dbx_opt_consola_dbox"]      = "true";
-	tempProfileDosBox["Dbx_opt_cerrar_dbox"]       = "true";
-	tempProfileDosBox["Dbx_opt_cycle_sincronizar"] = "false";
-// Otras opciones
-	tempProfileDosBox["Dbx_path_conf"]             = "";
-	tempProfileDosBox["Dbx_path_sonido"]           = "";
-	tempProfileDosBox["Dbx_path_exe"]              = "";
-	tempProfileDosBox["Dbx_path_setup"]            = "";
-	tempProfileDosBox["Dbx_parametros_exe"]        = "";
-	tempProfileDosBox["Dbx_parametros_setup"]      = "";
-}
-
 void frmDbxAdd::on_setProfileGame(int row)
 {
 	if (row >= 0)
 	{
 		tempProfileDosBox.clear();
 		QString profileGame = ui.cbxDbx_Profiles->itemData( row ).toString();
-
 		if( !profileGame.isEmpty() || profileGame != "<defecto>" )
 			tempProfileDosBox = fGrl.Importar_Profile_DFend( stHomeDir + "templates/" + profileGame );
 		else
-			setConfigDefecto();
+			tempProfileDosBox = fGrl.getDefectDatosDosBox();
+	} else
+		tempProfileDosBox = fGrl.getDefectDatosDosBox();
 
-		CargarDatosDosBox( tempProfileDosBox, true);
-	}
+	CargarDatosDosBox( tempProfileDosBox, true);
 }
 
 void frmDbxAdd::CargarDatosDosBox(QHash<QString, QString> datosDbx, bool isProfileGame)
@@ -480,42 +338,15 @@ void frmDbxAdd::CargarDatosDBxMontaje(QTreeWidget *twMontajesDbx)
 
 void frmDbxAdd::on_btnDescargarInfo()
 {
-	frmImportarJuego * ImportarJuego = new frmImportarJuego(ui.txtDatos_Titulo->text(), 0, Qt::Window);
+	tempDatosJuego["Dat_titulo"]   = ui.txtDatos_Titulo->text();
+	tempDatosJuego["Dat_tipo_emu"] = "dosbox";
+
+	frmImportarJuego *ImportarJuego = new frmImportarJuego(tempDatosJuego, fGrl.getDefectDatosScummVM(), tempProfileDosBox, fGrl.getDefectDatosVDMSound(), 0, Qt::Window);
 	if( ImportarJuego->exec() == QDialog::Accepted )
 	{
 		tempDatosJuego.clear();
-		ui.txtDatos_Titulo->setText( ImportarJuego->DatosJuego["Dat_titulo"] );				// titulo
-		tempDatosJuego["Dat_icono"]         = "dosbox";										// icono
-		tempDatosJuego["Dat_titulo"]        = ui.txtDatos_Titulo->text();					// titulo
-		tempDatosJuego["Dat_subtitulo"]     = ImportarJuego->DatosJuego["Dat_subtitulo"];	// subtitulo
-		tempDatosJuego["Dat_genero"]        = ImportarJuego->DatosJuego["Dat_genero"];		// genero
-		tempDatosJuego["Dat_compania"]      = ImportarJuego->DatosJuego["Dat_compania"];	// compania
-		tempDatosJuego["Dat_desarrollador"] = ImportarJuego->DatosJuego["Dat_desarrollador"];//desarrollador
-		tempDatosJuego["Dat_tema"]          = ImportarJuego->DatosJuego["Dat_tema"];		// tema
-		tempDatosJuego["Dat_perspectiva"]   = ImportarJuego->DatosJuego["Dat_perspectiva"];	// perspectiva
-		tempDatosJuego["Dat_idioma"]        = ImportarJuego->DatosJuego["Dat_idioma"];		// idioma
-		tempDatosJuego["Dat_idioma_voces"]  = ImportarJuego->DatosJuego["Dat_idioma_voces"];// idioma_voces
-		tempDatosJuego["Dat_formato"]       = ImportarJuego->DatosJuego["Dat_formato"];		// formato
-		tempDatosJuego["Dat_anno"]          = ImportarJuego->DatosJuego["Dat_anno"];		// anno
-		tempDatosJuego["Dat_numdisc"]       = ImportarJuego->DatosJuego["Dat_numdisc"];		// numdisc
-		tempDatosJuego["Dat_sistemaop"]     = ImportarJuego->DatosJuego["Dat_sistemaop"];	// sistemaop
-		tempDatosJuego["Dat_tamano"]        = ImportarJuego->DatosJuego["Dat_tamano"];		// tamano
-		tempDatosJuego["Dat_graficos"]      = ImportarJuego->DatosJuego["Dat_graficos"];	// graficos
-		tempDatosJuego["Dat_sonido"]        = ImportarJuego->DatosJuego["Dat_sonido"];		// sonido
-		tempDatosJuego["Dat_jugabilidad"]   = ImportarJuego->DatosJuego["Dat_jugabilidad"];	// jugabilidad
-		tempDatosJuego["Dat_original"]      = ImportarJuego->DatosJuego["Dat_original"];	// original
-		tempDatosJuego["Dat_estado"]        = ImportarJuego->DatosJuego["Dat_estado"];		// estado
-		tempDatosJuego["Dat_thumbs"]        = ImportarJuego->DatosJuego["Dat_thumbs"];		// thumbs
-		tempDatosJuego["Dat_cover_front"]   = ImportarJuego->DatosJuego["Dat_cover_front"];	// cover_front
-		tempDatosJuego["Dat_cover_back"]    = ImportarJuego->DatosJuego["Dat_cover_back"];	// cover_back
-		tempDatosJuego["Dat_tipo_emu"]      = "dosbox";										// tipo_emu
-		tempDatosJuego["Dat_comentario"]    = ImportarJuego->DatosJuego["Dat_comentario"];	// comentario
-		tempDatosJuego["Dat_favorito"]      = ImportarJuego->DatosJuego["Dat_favorito"];	// favorito
-		tempDatosJuego["Dat_rating"]        = ImportarJuego->DatosJuego["Dat_rating"];		// rating
-		tempDatosJuego["Dat_edad_recomendada"] = ImportarJuego->DatosJuego["Dat_edad_recomendada"];	// edad_recomendada
-		tempDatosJuego["Dat_usuario"]          = ImportarJuego->DatosJuego["Dat_usuario"];			// usuario
-		tempDatosJuego["Dat_path_exe"]         = ImportarJuego->DatosJuego["Dat_path_exe"];			// path_exe
-		tempDatosJuego["Dat_parametros_exe"]   = ImportarJuego->DatosJuego["Dat_parametros_exe"];	// parametros_exe
+		tempDatosJuego = ImportarJuego->DatosJuego;
+		ui.txtDatos_Titulo->setText( tempDatosJuego["Dat_titulo"] );
 
 		if( ImportarJuego->DatosJuego["Dat_tipo_emu"] == "dosbox" )
 		{

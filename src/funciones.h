@@ -145,6 +145,12 @@ public:
 // Crea la imagen de la lista
 	void CrearCoverList(QHash<QString, QVariant> datos, QHash<QString, QVariant> config);
 
+// Datos por defecto
+	QHash<QString, QString> getDefectDatosJuego();
+	QHash<QString, QString> getDefectDatosDosBox();
+	QHash<QString, QString> getDefectDatosScummVM();
+	QHash<QString, QString> getDefectDatosVDMSound();
+
 private:
 	QString stTheme;
 

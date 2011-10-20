@@ -2602,7 +2602,7 @@ void GrLida::on_InstalarJuego()
 
 void GrLida::on_ImportarJuego()
 {
-	frmImportarJuego *ImportarJuego = new frmImportarJuego("", 0, Qt::Window );
+	frmImportarJuego *ImportarJuego = new frmImportarJuego(fGrl.getDefectDatosJuego(), fGrl.getDefectDatosScummVM(), fGrl.getDefectDatosDosBox(), fGrl.getDefectDatosVDMSound(), 0, Qt::Window );
 	if( ImportarJuego->exec() == QDialog::Accepted )
 	{
 		QString lastID, lastID_Dbx;

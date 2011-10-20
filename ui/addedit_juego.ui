@@ -2558,7 +2558,6 @@
  </tabstops>
  <resources>
   <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
  </resources>
  <connections>
   <connection>

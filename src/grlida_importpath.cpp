@@ -28,14 +28,18 @@ frmImportPath::frmImportPath(QDialog *parent, Qt::WFlags flags)
     : QDialog( parent, flags )
 {
 	ui.setupUi(this);
-	ui.frame_info->setVisible(false);
+//	emit on_changeEnabled(false);
 
 	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
 	stTheme   = fGrl.ThemeGrl();
 	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
 
-	createConnections();
+	ui.twDatosJuego->header()->setStretchLastSection(true);
+	ui.twDatosJuego->header()->setMovable(false);
+	ui.twDatosJuego->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+	ui.twDatosJuego->setColumnWidth(0, 100);
 
+	createConnections();
 	setTheme();
 
 // centra la ventana en el escritorio
@@ -60,6 +64,7 @@ void frmImportPath::on_changeEnabled(bool estado)
 void frmImportPath::createConnections()
 {
 	connect( ui.btnOk, SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
+	connect( ui.chk_selectDatos, SIGNAL(toggled(bool)), this, SLOT( on_estado_cheket_items(bool)) );
 
 	connect( ui.btnDbx_FileConfg , SIGNAL( clicked() ), this, SLOT( on_btnDbx_FileConfg()  ) );
 	connect( ui.btnDbx_ExeJuego  , SIGNAL( clicked() ), this, SLOT( on_btnDbx_ExeJuego()   ) );
@@ -115,46 +120,67 @@ void frmImportPath::on_btnOk()
 {
 	QFile appConfg;
 	QString stExeJuego;
-	bool siguiente = true;
+	bool siguiente, isEmuEnabled;
+	siguiente = true;
 
-	if( ui.gBox_path_emu->isEnabled() )
+	if( ui.tabDatConf->isTabEnabled(1) || ui.tabDatConf->isTabEnabled(2) || ui.tabDatConf->isTabEnabled(3) )
+		isEmuEnabled = true;
+	else
+		isEmuEnabled = false;
+
+	if( isEmuEnabled )
 	{
-		siguiente = false;
-		if( (ui.wizardPath->currentIndex() == 0) || (ui.wizardPath->currentIndex() == 2) )
-		{
-		// DOSBox
-			if( ui.wizardPath->currentIndex() == 0 )
-				appConfg.setFileName( stHomeDir + "confdbx/"+ ui.txtPath_Dbx_1->text() );
-		// VDMSound
-			if( ui.wizardPath->currentIndex() == 2 )
-				appConfg.setFileName( stHomeDir + "confvdms/"+ ui.txtVdms_path_conf->text() );
+	// DOSBox
+		if( ui.tabDatConf->isTabEnabled(1) )
+			appConfg.setFileName( stHomeDir + "confdbx/"+ ui.txtDbx_path_conf->text() );
+	// VDMSound
+		if( ui.tabDatConf->isTabEnabled(3) )
+			appConfg.setFileName( stHomeDir + "confvdms/"+ ui.txtVdms_path_conf->text() );
 
-			if( appConfg.exists() )
+		if( appConfg.exists() )
+		{
+			siguiente = false;
+			QMessageBox::information( this, "ImportPath", tr("El archivo de Configuración ya esixte")+":\n\n"+appConfg.fileName() );
+		} else {
+			siguiente = true;
+			stExeJuego.clear();
+		// DOSBox
+			if( ui.tabDatConf->isTabEnabled(1) )
+				stExeJuego = ui.txtDbx_path_exe->text();
+		// ScummVM
+			if( ui.tabDatConf->isTabEnabled(2) )
+				stExeJuego = ui.txtSvm_path->text();
+		// VDMSound
+			if( ui.tabDatConf->isTabEnabled(3) )
+				stExeJuego = ui.txtVdms_path_exe->text();
+
+			if( stExeJuego.isEmpty() )
 			{
 				siguiente = false;
-				QMessageBox::information( this, "ImportPath", tr("El archivo de Configuración ya esixte")+":\n\n"+appConfg.fileName() );
-			} else {
-				siguiente = true;
-				stExeJuego.clear();
-				if( ui.wizardPath->currentIndex() == 0 )
-					stExeJuego = ui.txtDbx_path_exe->text();
-				if( ui.wizardPath->currentIndex() == 2 )
-					stExeJuego = ui.txtVdms_path_exe->text();
-				if( stExeJuego.isEmpty() )
-				{
-					siguiente = false;
+				if( ui.tabDatConf->isTabEnabled(2) )
+					QMessageBox::information(this, "ImportPath", tr("Debes indicar el Directorio del juego") );
+				else
 					QMessageBox::information(this, "ImportPath", tr("Debes indicar el Ejecutable del juego") );
-				} else
-					siguiente = true;
-			}
-		} else
-			siguiente = true;
+			} else
+				siguiente = true;
+		}
 	}
-
 	if( siguiente == true )
 		QDialog::accept();
 	else
 		QDialog::rejected();
+}
+
+void frmImportPath::on_estado_cheket_items(bool estado)
+{
+	for(int num = 0; num < ui.twDatosJuego->topLevelItemCount(); num++ )
+	{
+		QTreeWidgetItem *item = ui.twDatosJuego->topLevelItem( num );
+		if( estado )
+			item->setCheckState(0,Qt::Checked );
+		else
+			item->setCheckState(0,Qt::Unchecked );
+	}
 }
 
 void frmImportPath::on_btnDbx_FileConfg()

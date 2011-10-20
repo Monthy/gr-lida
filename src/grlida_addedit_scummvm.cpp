@@ -178,14 +178,10 @@ void frmAddEditScummVM::CargarConfigScummVM()
 
 void frmAddEditScummVM::setConfigDefecto()
 {
-	ui.cbxSvm_language->setCurrentIndex(0);
-	ui.cbxSvm_platform->setCurrentIndex(0);
-	ui.cbxSvm_gfx_mode->setCurrentIndex(1);
-	ui.cbxSvm_render_mode->setCurrentIndex(0);
-	ui.cbxSvm_music_driver->setCurrentIndex(0);
-	ui.cbxSvm_output_rate->setCurrentIndex(0);
-	ui.cbxSvm_cdrom->setCurrentIndex(0);
-	ui.cbxSvm_opl_driver->setCurrentIndex(0);
+	QHash<QString, QString> datosSvm = fGrl.getDefectDatosScummVM();
+	datosSvm["Svm_id"] = stItemIDSvm;
+
+	CargarDatosScummVM( datosSvm );
 }
 
 void frmAddEditScummVM::CargarDatosScummVM(QString IDGrl)

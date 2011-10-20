@@ -2612,3 +2612,236 @@ void Funciones::CrearCoverList(QHash<QString, QVariant> datos, QHash<QString, QV
 
 	cover_result.save( datos["Dat_destino"].toString()+datos["Dat_img_cover"].toString()+".png", "PNG", -1);
 }
+
+// Datos por defecto.
+QHash<QString, QString> Funciones::getDefectDatosJuego()
+{
+	QHash<QString, QString> datos;
+	datos["Dat_idgrl"]            = "1";
+	datos["Dat_icono"]            = "datos";
+	datos["Dat_titulo"]           = "";
+	datos["Dat_subtitulo"]        = "";
+	datos["Dat_genero"]           = "";
+	datos["Dat_compania"]         = "";
+	datos["Dat_desarrollador"]    = "";
+	datos["Dat_tema"]             = "";
+	datos["Dat_grupo"]            = "";
+	datos["Dat_perspectiva"]      = "";
+	datos["Dat_idioma"]           = "";
+	datos["Dat_idioma_voces"]     = "";
+	datos["Dat_formato"]          = "";
+	datos["Dat_anno"]             = "";
+	datos["Dat_numdisc"]          = "";
+	datos["Dat_sistemaop"]        = "";
+	datos["Dat_tamano"]           = "";
+	datos["Dat_graficos"]         = "0";
+	datos["Dat_sonido"]           = "0";
+	datos["Dat_jugabilidad"]      = "0";
+	datos["Dat_original"]         = "false";
+	datos["Dat_estado"]           = "";
+	datos["Dat_thumbs"]           = "";
+	datos["Dat_cover_front"]      = "";
+	datos["Dat_cover_back"]       = "";
+	datos["Dat_fecha"]            = "";
+	datos["Dat_tipo_emu"]         = "datos";
+	datos["Dat_comentario"]       = "";
+	datos["Dat_favorito"]         = "false";
+	datos["Dat_rating"]           = "0";
+	datos["Dat_edad_recomendada"] = "nd";
+	datos["Dat_usuario"]          = "";
+	datos["Dat_path_exe"]         = "";
+	datos["Dat_parametros_exe"]   = "";
+
+	return datos;
+}
+
+QHash<QString, QString> Funciones::getDefectDatosDosBox()
+{
+	QHash<QString, QString> datos;
+	datos["Dbx_id"]                   = "1";
+	datos["Dbx_idgrl"]                = "1";
+	datos["Dbx_idcat"]                = "1";
+// [sdl]
+	datos["Dbx_sdl_fullscreen"]       = "false";
+	datos["Dbx_sdl_fulldouble"]       = "false";
+	datos["Dbx_sdl_fullfixed"]        = "false";
+	datos["Dbx_sdl_fullresolution"]   = "original";
+	datos["Dbx_sdl_windowresolution"] = "original";
+	datos["Dbx_sdl_output"]           = "surface";
+	datos["Dbx_sdl_hwscale"]          = "1.00";
+	datos["Dbx_sdl_autolock"]         = "true";
+	datos["Dbx_sdl_sensitivity"]      = "100";
+	datos["Dbx_sdl_waitonerror"]      = "true";
+	datos["Dbx_sdl_priority"]         = "higher,normal";
+	datos["Dbx_sdl_mapperfile"]       = "mapper.txt";
+	datos["Dbx_sdl_usescancodes"]     = "true";
+// [dosbox]
+	datos["Dbx_dosbox_language"]      = "";
+	datos["Dbx_dosbox_machine"]       = "svga_s3";
+	datos["Dbx_dosbox_captures"]      = "capture";
+	datos["Dbx_dosbox_memsize"]       = "16";
+// [render]
+	datos["Dbx_render_frameskip"]     = "0";
+	datos["Dbx_render_aspect"]        = "false";
+	datos["Dbx_render_scaler"]        = "normal2x";
+// [cpu]
+	datos["Dbx_cpu_core"]             = "auto";
+	datos["Dbx_cpu_cputype"]          = "auto";
+	datos["Dbx_cpu_cycles"]           = "auto";
+	datos["Dbx_cpu_cycles_realmode"]  = "";
+	datos["Dbx_cpu_cycles_protmode"]  = "";
+	datos["Dbx_cpu_cycles_limitmode"] = "";
+	datos["Dbx_cpu_cycleup"]          = "10";
+	datos["Dbx_cpu_cycledown"]        = "20";
+// [mixer]
+	datos["Dbx_mixer_nosound"]        = "false";
+	datos["Dbx_mixer_rate"]           = "44100";
+	datos["Dbx_mixer_blocksize"]      = "1024";
+	datos["Dbx_mixer_prebuffer"]      = "20";
+// [midi]
+	datos["Dbx_midi_mpu401"]          = "intelligent";
+	datos["Dbx_midi_intelligent"]     = "true";
+	datos["Dbx_midi_device"]          = "default";
+	datos["Dbx_midi_config"]          = "";
+	datos["Dbx_midi_mt32rate"]        = "44100";
+// [sblaster]
+	datos["Dbx_sblaster_sbtype"]      = "sb16";
+	datos["Dbx_sblaster_sbbase"]      = "220";
+	datos["Dbx_sblaster_irq"]         = "7";
+	datos["Dbx_sblaster_dma"]         = "1";
+	datos["Dbx_sblaster_hdma"]        = "5";
+	datos["Dbx_sblaster_mixer"]       = "true";
+	datos["Dbx_sblaster_oplmode"]     = "auto";
+	datos["Dbx_sblaster_oplemu"]      = "default";
+	datos["Dbx_sblaster_oplrate"]     = "44100";
+// [gus]
+	datos["Dbx_gus_gus"]              = "false";
+	datos["Dbx_gus_gusrate"]          = "44100";
+	datos["Dbx_gus_gusbase"]          = "240";
+	datos["Dbx_gus_irq1"]             = "5";
+	datos["Dbx_gus_irq2"]             = "5";
+	datos["Dbx_gus_dma1"]             = "3";
+	datos["Dbx_gus_dma2"]             = "3";
+	datos["Dbx_gus_ultradir"]         = "C:\\ULTRASND";
+// [speaker]
+	datos["Dbx_speaker_pcspeaker"]    = "true";
+	datos["Dbx_speaker_pcrate"]       = "44100";
+	datos["Dbx_speaker_tandy"]        = "auto";
+	datos["Dbx_speaker_tandyrate"]    = "44100";
+	datos["Dbx_speaker_disney"]       = "true";
+// [joystick]
+	datos["Dbx_joystick_type"]        = "auto";
+	datos["Dbx_joystick_timed"]       = "true";
+	datos["Dbx_joystick_autofire"]    = "false";
+	datos["Dbx_joystick_swap34"]      = "false";
+	datos["Dbx_joystick_buttonwrap"]  = "false";
+// [modem]
+	datos["Dbx_modem_modem"]          = "false";
+	datos["Dbx_modem_comport"]        = "2";
+	datos["Dbx_modem_listenport"]     = "23";
+// [dserial]
+	datos["Dbx_dserial_directserial"] = "false";
+	datos["Dbx_dserial_comport"]      = "1";
+	datos["Dbx_dserial_realport"]     = "COM1";
+	datos["Dbx_dserial_defaultbps"]   = "1200";
+	datos["Dbx_dserial_parity"]       = "N";
+	datos["Dbx_dserial_bytesize"]     = "8";
+	datos["Dbx_dserial_stopbit"]      = "1";
+	datos["Dbx_serial_1"]             = "dummy";
+	datos["Dbx_serial_2"]             = "dummy";
+	datos["Dbx_serial_3"]             = "disabled";
+	datos["Dbx_serial_4"]             = "disabled";
+// [dos]
+	datos["Dbx_dos_xms"]              = "true";
+	datos["Dbx_dos_ems"]              = "true";
+	datos["Dbx_dos_umb"]              = "true";
+	datos["Dbx_dos_keyboardlayout"]   = "auto";
+// [ipx]
+	datos["Dbx_ipx_ipx"]              = "false";
+// [autoexec]
+	datos["Dbx_autoexec"]             = "";
+// Opciones
+	datos["Dbx_opt_autoexec"]         = "false";
+	datos["Dbx_opt_loadfix"]          = "false";
+	datos["Dbx_opt_loadfix_mem"]      = "64";
+	datos["Dbx_opt_consola_dbox"]     = "false";
+	datos["Dbx_opt_cerrar_dbox"]      = "true";
+	datos["Dbx_opt_cycle_sincronizar"]= "false";
+// Otras opciones
+	datos["Dbx_path_conf"]            = "";
+	datos["Dbx_path_sonido"]          = "waves";
+	datos["Dbx_path_exe"]             = "";
+	datos["Dbx_path_setup"]           = "";
+	datos["Dbx_parametros_exe"]       = "";
+	datos["Dbx_parametros_setup"]     = "";
+
+	return datos;
+}
+
+QHash<QString, QString> Funciones::getDefectDatosScummVM()
+{
+	QHash<QString, QString> datos;
+	datos["Svm_id"]              = "1";
+	datos["Svm_idgrl"]           = "1";
+	datos["Svm_idcat"]           = "1";
+//--
+	datos["Svm_game"]            = "";
+	datos["Svm_game_label"]      = "";
+	datos["Svm_language"]        = "es";
+	datos["Svm_subtitles"]       = "true";
+	datos["Svm_platform"]        = "pc";
+	datos["Svm_gfx_mode"]        = "2x";
+	datos["Svm_render_mode"]     = "";
+	datos["Svm_fullscreen"]      = "false";
+	datos["Svm_aspect_ratio"]    = "true";
+	datos["Svm_path"]            = "";
+	datos["Svm_path_setup"]      = "";
+	datos["Svm_path_extra"]      = "";
+	datos["Svm_path_save"]       = "";
+	datos["Svm_path_capturas"]   = "";
+	datos["Svm_path_sonido"]     = "";
+	datos["Svm_music_driver"]    = "adlib";
+	datos["Svm_enable_gs"]       = "true";
+	datos["Svm_multi_midi"]      = "true";
+	datos["Svm_native_mt32"]     = "true";
+	datos["Svm_master_volume"]   = "192";
+	datos["Svm_music_volume"]    = "192";
+	datos["Svm_sfx_volume"]      = "192";
+	datos["Svm_speech_volume"]   = "192";
+	datos["Svm_tempo"]           = "100";
+	datos["Svm_talkspeed"]       = "60";
+	datos["Svm_debuglevel"]      = "0";
+	datos["Svm_cdrom"]           = "0";
+	datos["Svm_joystick_num"]    = "0";
+	datos["Svm_output_rate"]     = "<defecto>";
+	datos["Svm_midi_gain"]       = "100";
+	datos["Svm_copy_protection"] = "false";
+	datos["Svm_sound_font"]      = "";
+	datos["Svm_walkspeed"]       = "0";
+	datos["Svm_opl_driver"]      = "auto";
+
+	return datos;
+}
+
+QHash<QString, QString> Funciones::getDefectDatosVDMSound()
+{
+	QHash<QString, QString> datos;
+
+	datos["Vdms_id"]              = "1";
+	datos["Vdms_idgrl"]           = "1";
+	datos["Vdms_idcat"]           = "1";
+//--
+	datos["Vdms_path_conf"]       = "";
+	datos["Vdms_path_exe"]        = "";
+	datos["Vdms_vdms_debug_1"]    = "no";
+	datos["Vdms_vdms_debug_2"]    = "";
+	datos["Vdms_winnt_dos_1"]     = "no";
+	datos["Vdms_winnt_dos_2"]     = "";
+	datos["Vdms_winnt_dosbox_1"]  = "yes";
+	datos["Vdms_winnt_dosbox_2"]  = "no";
+	datos["Vdms_winnt_dosbox_3"]  = "no";
+	datos["Vdms_winnt_storage_1"] = "yes";
+	datos["Vdms_winnt_storage_2"] = "no";
+
+	return datos;
+}

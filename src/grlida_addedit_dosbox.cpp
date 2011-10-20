@@ -311,64 +311,10 @@ void frmAddEditDosBox::CargarConfigDosBox()
 
 void frmAddEditDosBox::setConfigDefecto()
 {
-	ui.txtDbx_loadfix_mem->setText("64");
-	ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( 1 );   // keyboardlayout
-	ui.cbxDbx_sdl_fullresolution->setCurrentIndex( 0 );   // Resolucin pantalla
-	ui.cbxDbx_sdl_windowresolution->setCurrentIndex( 0 ); // windowresolution
-	ui.cbxDbx_sdl_hwscale->setCurrentIndex( 9 );          // Escalar por hardware
-	ui.cbxDbx_sdl_sensitivity->setCurrentIndex( 9 );      // Sensibilidad del ratn
-	ui.cbxDbx_sdl_output->setCurrentIndex( 0 );           // Modo de Renderizado
-	ui.cbxDbx_dosbox_machine->setCurrentIndex( 8 );       // Tarjeta de Video
-	ui.cbxDbx_render_scaler->setCurrentIndex( 1 );        // Escalar y Filtros
-	ui.cbxDbx_dosbox_memsize->setCurrentIndex( 5 );       // Cantidad de memoria para DOSBox
-	ui.cbxDbx_cpu_core->setCurrentIndex( 0 );             // Núcleo de la CPU DOSBox
-	ui.cbxDbx_cpu_cputype->setCurrentIndex( 0 );          // Tipo de CPU para usar en la emulación
-	ui.cbxDbx_render_frameskip->setCurrentIndex( 0 );     // Frameskip DOSBox
-	ui.cbxDbx_dos_umb->setCurrentIndex( 0 );              // Soporte para memoria UMB
-	ui.cbxDbx_cpu_cycles->setCurrentIndex( 0 );           // Ciclos DOSBox
-	ui.cbxDbx_cpu_cycles_realmode->setCurrentIndex( 0 );  // Ciclos DOSBox realmode
-	ui.cbxDbx_cpu_cycles_limitmode->setCurrentIndex( 0 ); // Ciclos DOSBox limitmode
-	ui.cbxDbx_cpu_cycles_protmode->setCurrentIndex( 0 );  // Ciclos DOSBox protected
-	ui.cbxDbx_joystick_type->setCurrentIndex( 0 );        // Emulador de joystick
-	ui.cbxDbx_mixer_rate->setCurrentIndex( 5 );           // Frecuencia Sonido
-	ui.txtDbx_mixer_blocksize->setText("1024");           //
-	ui.txtDbx_mixer_prebuffer->setText("20");             //
-	ui.cbxDbx_sblaster_sbtype->setCurrentIndex( 5 );      // Tipo Sound Blaste
-	ui.cbxDbx_sblaster_oplmode->setCurrentIndex( 0 );     // Sound Blaste Opl mode
-	ui.cbxDbx_sblaster_oplemu->setCurrentIndex( 0 );      //
-	ui.cbxDbx_sblaster_oplrate->setCurrentIndex( 2 );     //
-	ui.cbxDbx_sblaster_sbbase->setCurrentIndex( 1 );      //
-	ui.cbxDbx_sblaster_irq->setCurrentIndex( 2 );         //
-	ui.cbxDbx_sblaster_dma->setCurrentIndex( 1 );         //
-	ui.cbxDbx_sblaster_hdma->setCurrentIndex( 3 );        //
-	ui.cbxDbx_gus_gusrate->setCurrentIndex( 5 );          //
-	ui.cbxDbx_gus_gusbase->setCurrentIndex( 2 );          //
-	ui.cbxDbx_gus_irq1->setCurrentIndex( 1 );             //
-	ui.cbxDbx_gus_irq2->setCurrentIndex( 1 );             //
-	ui.cbxDbx_gus_dma1->setCurrentIndex( 2 );             //
-	ui.cbxDbx_gus_dma2->setCurrentIndex( 2 );             //
-	ui.txtDbx_gus_ultradir->setText("C:\\ULTRASND");      // MPU-401
-	ui.cbxDbx_midi_device->setCurrentIndex( 0 );          // MIDI Device
-	ui.cbxDbx_midi_mt32rate->setCurrentIndex( 5 );        //
-	ui.cbxDbx_speaker_pcrate->setCurrentIndex( 5 );       //
-	ui.cbxDbx_speaker_tandyrate->setCurrentIndex( 5 );    //
-	ui.cbxDbx_speaker_tandy->setCurrentIndex( 0 );        //
-	ui.cbxDbx_dserial_comport->setCurrentIndex(0);        //
-	ui.cbxDbx_dserial_defaultbps->setCurrentIndex(0);     //
-	ui.cbxDbx_dserial_bytesize->setCurrentIndex(1);       //
-	ui.cbxDbx_dserial_parity->setCurrentIndex(0);         //
-	ui.cbxDbx_dserial_stopbit->setCurrentIndex(0);        //
-	ui.cbxDbx_dserial_realport->setCurrentIndex(0);       //
-	ui.cbxDbx_modem_comport->setCurrentIndex(0);          //
-	ui.txtDbx_modem_listenport->setText("23");            //
-	ui.txtDbx_modem_irq->setText("1");                    //
-	ui.cbxDbx_select_serial->setCurrentIndex( 0 );        //
-	ui.cbxDbx_type_serial->setCurrentIndex(1);            //
-	ui.txtDbx_serial_1->setText("dummy");                 //
-	ui.txtDbx_serial_2->setText("dummy");                 //
-	ui.txtDbx_serial_3->setText("disabled");              //
-	ui.txtDbx_serial_4->setText("disabled");              //
-	ui.txtDbx_sdl_mapperfile->setText("mapper.txt");      //
+	QHash<QString, QString> datosDbx = fGrl.getDefectDatosDosBox();
+	datosDbx["Dbx_id"] = stItemIDDbx;
+
+	CargarDatosDosBox(datosDbx, "", false);
 }
 
 void frmAddEditDosBox::on_setProfileGame(int row)
