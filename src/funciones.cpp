@@ -196,6 +196,16 @@ QString Funciones::getExtension(QString str)
 	return "."+ f_info.completeSuffix();
 }
 
+// Obtiene la ruta del archivo
+QString Funciones::getFilePath(QString str)
+{
+	QFileInfo f_info( str );
+	if( f_info.absolutePath().endsWith("/") || f_info.absolutePath().endsWith("\\") )
+		return QDir::toNativeSeparators( f_info.absolutePath() );
+	else
+		return QDir::toNativeSeparators( f_info.absolutePath().append("/") );
+}
+
 QString Funciones::getIconListaJuegos(QString icono, QString iconoDir)
 {
 	iconoDir = GRlidaHomePath()+"iconos/";

@@ -66,6 +66,8 @@ public:
 	QString eliminar_caracteres(QString str);
 // Obtiene la extension del archivo
 	QString getExtension(QString str);
+// Obtiene la ruta del archivo
+	QString getFilePath(QString str);
 // Devuelve un Icono
 	QString getIconListaJuegos(QString icono, QString iconoDir);
 	QString getIconMount(QString tipoDrive, QString select_mount = "");
@@ -75,7 +77,7 @@ public:
 	QString ThemeGrl();
 	void setTheme();
 // Devuelve el directorio del Theme a usar
-        QString IdiomaGrl();
+	QString IdiomaGrl();
 // Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use
 	QString StyleSheet(bool list = false, bool isBgFixed = false);
 // Carga la configuración de los iconos de la lista en modo Icono
