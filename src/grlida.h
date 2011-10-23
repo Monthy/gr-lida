@@ -101,7 +101,6 @@ private:
 
 	QHash<QString, QString> listSmailes;
 	QHash<QString, QString>::const_iterator i_Hash;
-	QHash<QString, QString> conf_scummvm;
 
 	QHash<QString, QListWidgetItem *> lwlista_pos;
 	QHash<QString, QTreeWidgetItem *> twlista_pos;
@@ -163,7 +162,7 @@ private:
 	void Config_Vdms(QString IDitem);	// Carga la configuración del VDMSound.
 	void Config_Clear();				// Limpia la configuración para evitar errores.
 
-	void Ejecutar(const QString &bin, const QString &parametros = "", const QString &dirWorking = "");
+	void Ejecutar(QString bin, QString parametros = "", QString dirWorking = "");
 
 	void on_CheckUpdateGrl();	// Comprueba si existen actualizaciones.
 
@@ -214,8 +213,8 @@ private slots:
 	void on_EjecutarScummVM();			// Ejecuta el emulador ScummVM.
 	void on_EjecutarJuego();			// Ejecuta el juego.
 	void on_EjecutarSetup();			// Ejecuta el Setup o install del juego.
-	void fin_Proceso(int, QProcess::ExitStatus);
-	void fin_ProcesoError(QProcess::ProcessError);
+	void fin_Proceso(int exitCode, QProcess::ExitStatus exitStatus);
+	void fin_ProcesoError(QProcess::ProcessError error);
 
 	void on_InstalarJuego();
 	void on_ImportarJuego();			// Obtiene los datos de juego de forma externa.

@@ -117,7 +117,7 @@ bool GrLida::eventFilter(QObject *obj, QEvent *event)
 				case Qt::Key_Enter:
 				case Qt::Key_Space:
 				case Qt::Key_Return:
-					on_EjecutarJuego();
+					emit on_EjecutarJuego();
 					return true;
 				break;
 				case Qt::Key_Left:
@@ -1365,11 +1365,11 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 			ui.mnu_edit_favorito->setChecked( fGrl.StrToBool( strDatosJuego["Dat_favorito"] ) );
 		}
 
+		Config_Clear();
 		stTipoEmu = strDatosJuego["Dat_tipo_emu"];
 	// Carga  la configuración dependiendo el emulador
 		if( stTipoEmu == "datos" )
 		{
-			Config_Clear();
 			stConfgJuego = strDatosJuego["Dat_path_exe"];
 			stJuegoParametrosExe = strDatosJuego["Dat_parametros_exe"];
 			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/datos_1.png") );
@@ -1398,10 +1398,8 @@ void GrLida::MostrarDatosDelJuego(QString IDitem)
 		{
 			Config_Vdms( stItemIndex );
 			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/vdmsound.png") );
-		} else {
-			Config_Clear();
+		} else
 			lbpanel_3->setPixmap( QPixmap(stTheme+"img16/sinimg.png") );
-		}
 
 		lbpanel_5->setText(" " + strDatosJuego["Dat_titulo"] + " - " + tr("introducido el") + " " + strDatosJuego["Dat_fecha"] + "  " );
 	} else {
@@ -1570,7 +1568,7 @@ void GrLida::on_lwJuegos_Dblclicked(QListWidgetItem *lwItem)
 		stTipoEmu.clear();		// Limpiamos el tipo_emu
 		stItemIndex = lwItem->data(Qt::UserRole).toString();	// idgrl del juego en la Base de Datos
 		stTipoEmu   = lwItem->data(Qt::UserRole+3).toString();	// indica el tipo de emulador
-		on_EjecutarJuego();		// ejecuta el juego
+		emit on_EjecutarJuego();		// ejecuta el juego
 	}else
 		return;
 }
@@ -1641,7 +1639,7 @@ void GrLida::on_twJuegos_Dblclicked(QTreeWidgetItem *twItem)
 		stTipoEmu.clear();						// Limpiamos el tipo_emu
 		stItemIndex = twItem->text(col_IdGrl);	// index del juego en la Base de Datos
 		stTipoEmu   = twItem->text(col_TipoEmu);// indica el tipo de emulador
-		on_EjecutarJuego();						// ejecuta el juego
+		emit on_EjecutarJuego();				// ejecuta el juego
 	}else
 		return;
 }
@@ -2237,13 +2235,9 @@ void GrLida::on_EliminarJuego()
 
 void GrLida::Config_Dbx(QString IDitem)
 {
-	QHash<QString, QString> conf_dosbox;
-
 // Limpiamos primero la informacion que pueda tener
-	stConfgJuego.clear();
-	stDirWorkingJuego.clear();
+	QHash<QString, QString> conf_dosbox;
 	conf_dosbox.clear();
-
 	conf_dosbox = sql->showConfg_DOSBox( IDitem );
 
 	QString consolaDbx;
@@ -2258,13 +2252,12 @@ void GrLida::Config_Dbx(QString IDitem)
 
 	stConfgJuego = "-conf|" + stConfgDbxDir + conf_dosbox["Dbx_path_conf"] + consolaDbx;
 
-	QFileInfo fi( conf_dosbox["Dbx_path_exe"] );
-	if( fi.exists() )
-		stDirWorkingJuego = fi.absolutePath();
-	else
+//	QFileInfo fi( conf_dosbox["Dbx_path_exe"] );
+//	if( fi.exists() )
+//		stDirWorkingJuego = fi.absolutePath();
+//	else
 		stDirWorkingJuego = "";
 
-	stDirCapturas.clear();
 	stDirCapturas = conf_dosbox["Dbx_dosbox_captures"];
 
 	if( stDirCapturas == "" || stDirCapturas == "capture" )
@@ -2296,22 +2289,22 @@ void GrLida::Config_Dbx(QString IDitem)
 void GrLida::Config_Svm(QString IDitem)
 {
 // Limpiamos primero la informacion que pueda tener
-	stConfgJuego.clear();
-	stDirWorkingJuego.clear();
+	QHash<QString, QString> conf_scummvm;
 	conf_scummvm.clear();
-
 	conf_scummvm = sql->showConfg_ScummVM( IDitem );
 	conf_scummvm["Svm_description"] = twlista_pos[IDitem]->text(col_Titulo);
 
 	stConfgJuego = "-c" + stTempDir + "scummvm.ini|" + "-d" + conf_scummvm["Svm_debuglevel"] + "|" + conf_scummvm["Svm_game_label"];
 
-	QDir dir( conf_scummvm["Svm_path"] );
-	if( dir.exists() )
-		stDirWorkingJuego = conf_scummvm["Svm_path"];
-	else
+// Creamos el INI de configuracion del ScummVM
+	fGrl.CreaIniScummVM(stTempDir+"scummvm.ini", conf_scummvm);
+
+//	QDir dir( conf_scummvm["Svm_path"] );
+//	if( dir.exists() )
+//		stDirWorkingJuego = conf_scummvm["Svm_path"];
+//	else
 		stDirWorkingJuego = "";
 
-	stDirCapturas.clear();
 	stDirCapturas = conf_scummvm["Svm_path_capturas"];
 
 	if( stDirCapturas == "" || stDirCapturas == "capture" )
@@ -2336,10 +2329,6 @@ void GrLida::Config_Svm(QString IDitem)
 void GrLida::Config_Vdms(QString IDitem)
 {
 	QSqlQuery query;
-// Limpiamos primero la informacion que pueda tener stConfgJuego
-	stConfgJuego.clear();
-	stDirWorkingJuego.clear();
-
 	query.clear();
 	query.exec("SELECT path_conf, path_exe FROM dbgrl_emu_vdmsound WHERE idgrl="+IDitem+" LIMIT 0,1");
 	query.first();
@@ -2352,7 +2341,6 @@ void GrLida::Config_Vdms(QString IDitem)
 	else
 		stDirWorkingJuego = "";
 
-	stDirCapturas.clear();
 	stDirCapturas = "";
 
 	CargarCapturasImagenes(stDirCapturas);
@@ -2365,10 +2353,11 @@ void GrLida::Config_Vdms(QString IDitem)
 
 void GrLida::Config_Clear()
 {
-	stDirCapturas.clear();
-	stConfgJuego.clear();
-	stDirWorkingJuego.clear();
-	stJuegoParametrosExe.clear();
+	stConfgJuego = "";
+	stDirCapturas = "";
+	stDirWorkingJuego = "";
+	stJuegoParametrosExe = "";
+	stl_param.clear();
 	ui.twCapturas->clear();
 
 	ui.actionEjectar->setEnabled(false);
@@ -2377,9 +2366,11 @@ void GrLida::Config_Clear()
 	ui.mnu_ejecutar_setup->setEnabled(false);
 }
 
-void GrLida::Ejecutar(const QString &bin, const QString &parametros, const QString &dirWorking)
+void GrLida::Ejecutar(QString bin, QString parametros, QString dirWorking)
 {
 	dBoxSvm = new QProcess( this );
+	connect( dBoxSvm, SIGNAL( finished(int, QProcess::ExitStatus) ), this, SLOT( fin_Proceso(int, QProcess::ExitStatus) ) );
+	connect( dBoxSvm, SIGNAL( error(QProcess::ProcessError) ), this, SLOT( fin_ProcesoError(QProcess::ProcessError) ) );
 
 	QFile appBin( bin );
 	if( appBin.exists() )
@@ -2397,14 +2388,12 @@ void GrLida::Ejecutar(const QString &bin, const QString &parametros, const QStri
 		{
 			stl_param << parametros.split("|", QString::SkipEmptyParts);
 			dBoxSvm->start( bin , stl_param );
+		//	dBoxSvm->startDetached( bin , stl_param );// No funciona como deseo
 			stl_param.clear();
 		} else
 			dBoxSvm->start( bin );
 
 		ui.actionEjectar->setEnabled(false);
-
-		connect( dBoxSvm, SIGNAL( finished(int, QProcess::ExitStatus) ), this, SLOT( fin_Proceso(int, QProcess::ExitStatus) ) );
-		connect( dBoxSvm, SIGNAL( error(QProcess::ProcessError) ), this, SLOT( fin_ProcesoError(QProcess::ProcessError) ) );
 
 		if( isTrayIcon )
 			this->hide();
@@ -2430,11 +2419,13 @@ void GrLida::on_EjecutarJuego()
 		if( stConfgJuego != "" && QFile( stConfgJuego ).exists() )
 		{
 			setWindowState(windowState() | Qt::WindowMinimized);
+			stl_param << stJuegoParametrosExe.split("|", QString::SkipEmptyParts);
 			#ifdef Q_OS_WIN32
 				if( (long)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()),
-									   reinterpret_cast<const WCHAR*>(stJuegoParametrosExe.utf16()),
+									   reinterpret_cast<const WCHAR*>(stl_param.join("").utf16()),
 									   reinterpret_cast<const WCHAR*>(stDirWorkingJuego.utf16()), SW_SHOWNORMAL) <= 32)
 					QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego"));
+				stl_param.clear();
 			#else
 				Ejecutar(stConfgJuego, stJuegoParametrosExe, stDirWorkingJuego);
 			#endif
@@ -2445,14 +2436,10 @@ void GrLida::on_EjecutarJuego()
 		{
 		// Ejecuta el juego con el emulador DOSBox
 			if( stTipoEmu == "dosbox" )
-				Ejecutar( stBinExeDbx, stConfgJuego, stDirWorkingJuego);
+				Ejecutar(stBinExeDbx, stConfgJuego, stDirWorkingJuego);
 		// Ejecuta el juego con el emulador ScummVM
 			if( stTipoEmu == "scummvm")
-			{
-			// Creamos el INI de configuracion del ScummVM
-				fGrl.CreaIniScummVM(stTempDir+"scummvm.ini", conf_scummvm);
-				Ejecutar( stBinExeSvm, stConfgJuego, stDirWorkingJuego);
-			}
+				Ejecutar(stBinExeSvm, stConfgJuego, stDirWorkingJuego);
 		// Ejecuta el juego con el emulador vdmsound
 			if( stTipoEmu == "vdmsound" )
 			{
@@ -2557,7 +2544,7 @@ void GrLida::fin_Proceso(int exitCode, QProcess::ExitStatus exitStatus)
 	ui.actionEjectar->setEnabled(true);
 }
 
-void GrLida::fin_ProcesoError( QProcess::ProcessError error )
+void GrLida::fin_ProcesoError(QProcess::ProcessError error)
 {
 	if( this->isHidden() )
 		this->show();
