@@ -22,6 +22,7 @@ Rodney's Funscreen|rodney|90|rodney.png
 Adventuresoft/Horrorsoft Game Compatibility Chart||svmlist_space|
 Elvira - Mistress of the Dark|elvira1|90|elvira.png
 Elvira II - The Jaws of Cerberus|elvira2|80|elvira.png
+Personal Nightmare|pn|50|sinimg.png
 Simon the Sorcerer 1|simon1|95|simon.png
 Simon the Sorcerer 2|simon2|95|simon.png
 Simon the Sorcerer's Puzzle Pack - D.I.M.P.|dimp|70|simon.png
@@ -33,12 +34,14 @@ Waxworks|waxworks|50|waxworks.png
 
 Coktel Vision Game Compatibility Chart||logo_coktel_vision|
 Bargon Attack|bargon|95|bargon.png
-Fascination|fascination|80|sinimg.png
+Fascination|fascination|90|fascination.png
 Gobliiins|gob1|95|gob.png
 Gobliins 2|gob2|95|gob.png
 Goblins 3|gob3|95|gob.png
 Lost in Time|lostintime|95|lostintime.png
+Playtoons: Bambou le Sauveur de la Jungle|bambou|90|sinimg.png
 The Bizarre Adventures of Woodruff and the Schnibble|woodruff|95|woodruff.png
+Urban Runner|urban|90|urban.png
 Ween: The Prophecy|ween|95|ween.png
 
 Revolution Software Game Compatibility Chart||logo_revolution_software|
@@ -46,47 +49,6 @@ Beneath a Steel Sky|sky|98|sky.png
 Broken Sword: The Shadow of the Templars|sword1|98|sword1.png
 Broken Sword II: The Smoking Mirror|sword2|98|sword2.png
 Lure of the Temptress|lure|95|lure.png
-
-Sierra SCI Game Compatibility Chart||logo_sierra|
-Castle of Dr. Brain (EGA and VGA)|castlebrain|95|sinimg.png
-Codename: ICEMAN|iceman|95|sinimg.png
-Conquests of Camelot|camelot|95|sinimg.png
-Conquests of the Longbow (EGA and VGA)|longbow|95|sinimg.png
-EcoQuest: The Search for Cetus|ecoquest|95|sinimg.png
-EcoQuest 2: Lost Secret of the Rainforest|ecoquest2|95|sinimg.png
-Freddy Pharkas: Frontier Pharmacist|freddypharkas|95|sinimg.png
-Hoyle's Book of Games 1|hoyle1|95|sinimg.png
-Hoyle's Book of Games 2|hoyle2|95|sinimg.png
-Hoyle's Book of Games 3 (EGA and VGA)|hoyle3|95|sinimg.png
-Hoyle Classic Card Games|hoyle4|95|sinimg.png
-Jones in the Fast Lane|jones|95|sinimg.png
-King's Quest I (SCI remake)|kq1sci|95|kq.png
-King's Quest IV (SCI version)|kq4sci|95|kq.png
-King's Quest V (EGA and VGA)|kq5|95|kq.png
-King's Quest VI (low and hi res)|kq6|95|kq.png
-Laura Bow: The Colonel's Bequest|laurabow|95|sinimg.png
-Laura Bow 2: The Dagger of Amon Ra|laurabow2|95|sinimg.png
-Leisure Suit Larry 1 (SCI remake) (EGA and VGA)|lsl1sci|95|lsl.png
-Leisure Suit Larry 2|lsl2|95|lsl.png
-Leisure Suit Larry 3|lsl3|95|lsl.png
-Leisure Suit Larry 5 (EGA and VGA)|lsl5|95|lsl.png
-Leisure Suit Larry 6 (low res)|lsl6|95|lsl.png
-Mixed-up Fairy Tales|fairytales|95|mumg.png
-Mixed-up Mother Goose|mothergoose|95|mumg.png
-Pepper's Adventures in Time|pepper|95|sinimg.png
-Police Quest 1 (SCI remake)|pq1sci|95|pq.png
-Police Quest 2|pq2|95|pq.png
-Police Quest 3 (EGA and VGA)|pq3|95|pq.png
-Quest for Glory 1/Hero's Quest|qfg1|95|sinimg.png
-Quest for Glory 1 VGA remake|qfg1vga|95|sinimg.png
-Quest for Glory 2|qfg2|95|sinimg.png
-Quest for Glory 3|qfg3|95|sinimg.png
-Slater & Charlie go camping|slater|95|sinimg.png
-Space Quest I (SCI remake) (EGA and VGA)|sq1sci|95|sq.png
-Space Quest III|sq3|95|sq.png
-Space Quest IV (EGA and VGA)|sq4|95|sq.png
-Space Quest V|sq5|95|sq.png
-The Island of Dr. Brain|islandbrain|95|sinimg.png
 
 Sierra AGI Game Compatibility Chart||logo_sierra|
 The Black Cauldron|bc|90|bc.png
@@ -105,42 +67,89 @@ Space Quest II: Vohaul's Revenge|sq2|90|sq.png
 Fanmade Games|agi-fanmade|80|fan.png
 Mickey's Space Adventure|mickey|90|mickey.png
 Troll's Tale|troll|80|troll.png
-Winnie the Pooh in the Hundred Acre Wood|winnie|80|winnie.png
+Winnie the Pooh in the Hundred Acre Wood|winnie|90|winnie.png
+
+Sierra SCI Game Compatibility Chart||logo_sierra|
+Castle of Dr. Brain (EGA and VGA)|castlebrain|95|castlebrain.png
+Codename: ICEMAN|iceman|95|iceman.png
+Conquests of Camelot|camelot|95|camelot.png
+Conquests of the Longbow (EGA and VGA)|longbow|95|camelot.png
+EcoQuest: The Search for Cetus|ecoquest|95|ecoquest.png
+EcoQuest 2: Lost Secret of the Rainforest|ecoquest2|95|ecoquest.png
+Freddy Pharkas: Frontier Pharmacist|freddypharkas|95|freddypharkas.png
+Hoyle's Book of Games 1|hoyle1|95|hoyle.png
+Hoyle's Book of Games 2|hoyle2|95|hoyle.png
+Hoyle's Book of Games 3 (EGA and VGA)|hoyle3|95|hoyle.png
+Hoyle Classic Card Games|hoyle4|95|hoyle.png
+Jones in the Fast Lane|jones|95|jones.png
+King's Quest I (SCI remake)|kq1sci|95|kq_sci.png
+King's Quest IV (SCI version)|kq4sci|95|kq_sci.png
+King's Quest V (EGA and VGA)|kq5|95|kq_sci.png
+King's Quest VI (low and hi res)|kq6|95|kq_sci.png
+Laura Bow: The Colonel's Bequest|laurabow|95|laurabow.png
+Laura Bow 2: The Dagger of Amon Ra|laurabow2|95|laurabow.png
+Leisure Suit Larry 1 (SCI remake) (EGA and VGA)|lsl1sci|95|lsl_sci.png
+Leisure Suit Larry 2|lsl2|95|lsl_sci.png
+Leisure Suit Larry 3|lsl3|95|lsl_sci.png
+Leisure Suit Larry 5 (EGA and VGA)|lsl5|95|lsl_sci.png
+Leisure Suit Larry 6 (low res)|lsl6|95|lsl_sci.png
+Mixed-up Fairy Tales|fairytales|95|mixedup.png
+Mixed-up Mother Goose|mothergoose|95|mixedup.png
+Pepper's Adventures in Time|pepper|95|pepper.png
+Police Quest 1 (SCI remake)|pq1sci|95|pq_sci.png
+Police Quest 2|pq2|95|pq_sci.png
+Police Quest 3 (EGA and VGA)|pq3|95|pq_sci.png
+Quest for Glory 1/Hero's Quest|qfg1|95|qfg_sci.png
+Quest for Glory 1 VGA remake|qfg1vga|95|qfg_sci.png
+Quest for Glory 2|qfg2|95|qfg_sci.png
+Quest for Glory 3|qfg3|95|qfg_sci.png
+Slater & Charlie Go Camping|slater|95|slater.png
+Space Quest I (SCI remake) (EGA and VGA)|sq1sci|95|sq_sci.png
+Space Quest III|sq3|95|sq_sci.png
+Space Quest IV (EGA and VGA)|sq4|95|sq_sci.png
+Space Quest V|sq5|95|sq_sci.png
+The Island of Dr. Brain|islandbrain|95|castlebrain.png
 
 Other Game Compatibility Chart||svmlist_space|
 Bud Tucker in Double Trouble|tucker|95|tucker.png
 Cruise for a Corpse|cruise|95|cruise.png
 Discworld|dw|98|dw.png
 Discworld II - Missing presumed...!?|dw2|98|dw.png
-Dragon History|draci|90|sinimg.png
+Dragon History|draci|90|draci.png
 Drascula: The Vampire Strikes Back|drascula|98|drascula.png
 Flight of the Amazon Queen|queen|98|queen.png
 Future Wars|fw|80|fw.png
+Hugo's House of Horrors|hugo1|90|sinimg.png
+Hugo 2: Whodunit?|hugo2|90|sinimg.png
+Hugo 3: Jungle of Doom|hugo3|90|sinimg.png
 I Have No Mouth, and I Must Scream|ihnm|90|ihnm.png
 Inherit the Earth: Quest for the Orb|ite|95|ite.png
+Lands of Lore: The Throne of Chaos|lol|80|sinimg.png
 Nippon Safes Inc.|nippon|90|nippon.png
+Ringworld: Revenge Of The Patriarch|ring|90|sinimg.png
 The Legend of Kyrandia|kyra1|90|kyra.png
-The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|85|kyra.png
-The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|80|kyra.png
+The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|90|kyra.png
+The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|90|kyra.png
 The 7th Guest|t7g|95|t7g.png
-TeenAgent|teenagent|80|sinimg.png
+TeenAgent|teenagent|80|teenagent.png
+Toonstruck|toon|80|toon.png
 Touche: The Adventures of the Fifth Musketeer|touche|75|touche.png
 
 Humongous Entertainment Game Compatibility Chart||svmlist_space|
-Backyard Baseball|baseball|20|sports.png
-Backyard Baseball 2001|baseball2001|20|sports.png
+Backyard Baseball|baseball|90|sports.png
+Backyard Baseball 2001|baseball2001|80|sports.png
 Backyard Baseball 2003|baseball2003|20|sports.png
-Backyard Football|football|80|sports.png
-Backyard Football 2002|football2002|70|sports.png
+Backyard Football|football|90|sports.png
+Backyard Football 2002|football2002|80|sports.png
 Bear Stormin'|brstorm|95|sports.png
 Big Thinkers First Grade|thinker1|90|thinkers.png
 Big Thinkers Kindergarten|thinkerk|90|thinkers.png
-Blue's 123 Time Activities|Blues123Time|90|sinimg.png
-Blue's ABC Time Activities|BluesABCTime|90|sinimg.png
-Blue's Art Time Activities|arttime|90|sinimg.png
-Blue's Birthday Adventure|BluesBirthday|50|sinimg.png
-Blue's Reading Time Activities|readtime|90|sinimg.png
-Blue's Treasure Hunt|BluesTreasureHunt|50|sinimg.png
+Blue's 123 Time Activities|Blues123Time|90|blues.png
+Blue's ABC Time Activities|BluesABCTime|90|blues.png
+Blue's Art Time Activities|arttime|90|blues.png
+Blue's Birthday Adventure|BluesBirthday|90|blues.png
+Blue's Reading Time Activities|readtime|90|blues.png
+Blue's Treasure Hunt|BluesTreasureHunt|50|blues.png
 Fatty Bear's Birthday Surprise|fbear|95|fbear.png
 Fatty Bear's Fun Pack|fbpack|95|fbear.png
 Freddi Fish 1: The Case of the Missing Kelp Seeds|freddi|90|ffish.png
@@ -174,3 +183,19 @@ SPY Fox 2: Some Assembly Required|spyfox2|90|spyfox.png
 SPY Fox 3: Operation Ozone|spyozon|90|spyfox.png
 SPY Fox in Cheese Chase|chase|90|spyfox.png
 SPY Fox in Hold the Mustard|mustard|85|spyfox.png
+
+Living Books Game Compatibility Chart||svmlist_space|
+Aesop's Fables: The Tortoise and the Hare|tortoise|90|tortoise.png
+Arthur's Birthday|arthurbday|90|arthur.png
+Arthur's Teacher Trouble|arthur|90|arthur.png
+Dr. Seuss's ABC|seussabc|90|seussabc.png
+Green Eggs and Ham|greeneggs|80|greeneggs.png
+Harry and the Haunted House|harryhh|90|harryhh.png
+Just Grandma and Me|grandma|90|grandma.png
+Little Monster at School|lilmonster|90|lilmonster.png
+Ruff's Bone|ruff|90|sinimg.png
+Sheila Rae, the Brave|sheila|90|sinimg.png
+Stellaluna|stellaluna|90|sinimg.png
+The Berenstain Bears Get in a Fight|bearfight|90|bearfight.png
+The Berenstain Bears in the Dark|beardark|90|bearfight.png
+The New Kid on the Block|newkid|90|sinimg.png
