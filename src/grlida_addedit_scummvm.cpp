@@ -242,6 +242,9 @@ void frmAddEditScummVM::CargarDatosScummVM(QHash<QString, QString> datosSvm)
 	ui.chkSvm_copy_protection->setChecked( fGrl.StrToBool( datosSvm["Svm_copy_protection"] ) );	// copy_protection
 	ui.txtSvm_sound_font->setText( datosSvm["Svm_sound_font"] );									// sound_font
 	ui.cbxSvm_opl_driver->setCurrentIndex( ui.cbxSvm_opl_driver->findData( datosSvm["Svm_opl_driver"] ) ); // opl_driver
+	ui.chkSvm_disable_dithering->setChecked( fGrl.StrToBool( datosSvm["Svm_disable_dithering"] ) );
+	ui.chkSvm_mute->setChecked( fGrl.StrToBool( datosSvm["Svm_mute"] ) );
+	ui.chkSvm_speech_mute->setChecked( fGrl.StrToBool( datosSvm["Svm_speech_mute"] ) );
 }
 
 QHash<QString, QString> frmAddEditScummVM::setDatosScummVM()
@@ -305,6 +308,10 @@ QHash<QString, QString> frmAddEditScummVM::setDatosScummVM()
 	tempDatosScummVM["Svm_sound_font"]      = ui.txtSvm_sound_font->text();			// sound_font
 	tempDatosScummVM["Svm_walkspeed"]       = ui.posSliderSvm_8->text();			// walkspeed
 	tempDatosScummVM["Svm_opl_driver"]      = ui.cbxSvm_opl_driver->itemData( ui.cbxSvm_opl_driver->currentIndex() ).toString();	// opl_driver
+
+	tempDatosScummVM["Svm_disable_dithering"] = fGrl.BoolToStr( ui.chkSvm_disable_dithering->isChecked() );
+	tempDatosScummVM["Svm_mute"]              = fGrl.BoolToStr( ui.chkSvm_mute->isChecked() );
+	tempDatosScummVM["Svm_speech_mute"]       = fGrl.BoolToStr( ui.chkSvm_speech_mute->isChecked() );
 
 	return tempDatosScummVM;
 }

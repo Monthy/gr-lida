@@ -383,7 +383,10 @@ void dbSql::CrearTablas()
 		"	`copy_protection`		varchar(5) NOT NULL default 'false',"
 		"	`sound_font`			varchar(255) NOT NULL default '',"
 		"	`walkspeed`				integer NOT NULL default 0,"
-		"	`opl_driver`			varchar(10) NOT NULL default 'auto'"
+		"	`opl_driver`			varchar(10) NOT NULL default 'auto',"
+		"	`disable_dithering`		varchar(5) NOT NULL default 'false',"
+		"	`mute`					varchar(5) NOT NULL default 'false',"
+		"	`speech_mute`			varchar(5) NOT NULL default 'false'"
 		");");
 	}
 
@@ -474,6 +477,12 @@ void dbSql::CrearTablas()
 	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'walkspeed' integer NOT NULL DEFAULT 0;");
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'opl_driver' varchar(10) NOT NULL default 'auto';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'disable_dithering' varchar(5) NOT NULL DEFAULT 'false';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'mute' varchar(5) NOT NULL DEFAULT 'false';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'speech_mute' varchar(5) NOT NULL DEFAULT 'false';");
 
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_file' ADD COLUMN 'tipo' varchar(50) NOT NULL DEFAULT '';");
@@ -1199,6 +1208,9 @@ QHash<QString, QString> dbSql::showConfg_ScummVM(QString IDgrl)
 	tmpScummVM["Svm_sound_font"]      = query.record().value("sound_font").toString();
 	tmpScummVM["Svm_walkspeed"]       = query.record().value("walkspeed").toString();
 	tmpScummVM["Svm_opl_driver"]      = query.record().value("opl_driver").toString();
+	tmpScummVM["Svm_disable_dithering"] = query.record().value("disable_dithering").toString();
+	tmpScummVM["Svm_mute"]              = query.record().value("mute").toString();
+	tmpScummVM["Svm_speech_mute"]       = query.record().value("speech_mute").toString();
 
 	return tmpScummVM;
 }
@@ -1211,12 +1223,14 @@ void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString ID
 	strSQL.append("idgrl, game, game_label, language, subtitles, platform, gfx_mode, render_mode, fullscreen, aspect_ratio, path, ");
 	strSQL.append("path_setup, path_extra, path_save, path_capturas, path_sonido, music_driver, enable_gs, multi_midi, ");
 	strSQL.append("native_mt32, master_volume, music_volume, sfx_volume, speech_volume, tempo, talkspeed, debuglevel, ");
-	strSQL.append("cdrom, joystick_num, output_rate, midi_gain, copy_protection, sound_font, walkspeed, opl_driver");
+	strSQL.append("cdrom, joystick_num, output_rate, midi_gain, copy_protection, sound_font, walkspeed, opl_driver, ");
+	strSQL.append("disable_dithering, mute, speech_mute ");
 	strSQL.append(") VALUES ( ");
 	strSQL.append(":idgrl, :game, :game_label, :language, :subtitles, :platform, :gfx_mode, :render_mode, :fullscreen, :aspect_ratio, :path, ");
 	strSQL.append(":path_setup, :path_extra, :path_save, :path_capturas, :path_sonido, :music_driver, :enable_gs, :multi_midi, ");
 	strSQL.append(":native_mt32, :master_volume, :music_volume, :sfx_volume, :speech_volume, :tempo, :talkspeed, :debuglevel, ");
-	strSQL.append(":cdrom, :joystick_num, :output_rate, :midi_gain, :copy_protection, :sound_font, :walkspeed, :opl_driver )");
+	strSQL.append(":cdrom, :joystick_num, :output_rate, :midi_gain, :copy_protection, :sound_font, :walkspeed, :opl_driver, ");
+	strSQL.append(":disable_dithering, :mute, :speech_mute )");
 
 	QSqlQuery query;
 	query.clear();
@@ -1256,7 +1270,9 @@ void dbSql::ItemInsertaSvm(const QHash<QString, QString> datos, const QString ID
 	query.bindValue(":sound_font"      , datos["Svm_sound_font"]      );
 	query.bindValue(":walkspeed"       , datos["Svm_walkspeed"]       );
 	query.bindValue(":opl_driver"      , datos["Svm_opl_driver"]      );
-
+	query.bindValue(":disable_dithering", datos["Svm_disable_dithering"]);
+	query.bindValue(":mute"             , datos["Svm_mute"]           );
+	query.bindValue(":speech_mute"      , datos["Svm_speech_mute"]    );
 	query.exec();
 }
 
@@ -1272,7 +1288,8 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 	strSQL.append("multi_midi = :multi_midi, native_mt32 = :native_mt32, master_volume = :master_volume, music_volume = :music_volume, ");
 	strSQL.append("sfx_volume = :sfx_volume, speech_volume = :speech_volume, tempo = :tempo, talkspeed = :talkspeed, ");
 	strSQL.append("debuglevel = :debuglevel, cdrom = :cdrom, joystick_num = :joystick_num, output_rate = :output_rate, ");
-	strSQL.append("midi_gain = :midi_gain, copy_protection = :copy_protection, sound_font = :sound_font, walkspeed = :walkspeed, opl_driver = :opl_driver ");
+	strSQL.append("midi_gain = :midi_gain, copy_protection = :copy_protection, sound_font = :sound_font, walkspeed = :walkspeed, opl_driver = :opl_driver, ");
+	strSQL.append("disable_dithering = :disable_dithering, mute = :mute, speech_mute = :speech_mute ");
 	strSQL.append("WHERE id = :id;");
 
 	QSqlQuery query;
@@ -1313,6 +1330,9 @@ void dbSql::ItemActualizaSvm(const QHash<QString, QString> datos, const QString 
 	query.bindValue(":sound_font"      , datos["Svm_sound_font"]      );
 	query.bindValue(":walkspeed"       , datos["Svm_walkspeed"]       );
 	query.bindValue(":opl_driver"      , datos["Svm_opl_driver"]      );
+	query.bindValue(":disable_dithering", datos["Svm_disable_dithering"]);
+	query.bindValue(":mute"             , datos["Svm_mute"]           );
+	query.bindValue(":speech_mute"      , datos["Svm_speech_mute"]    );
 	query.bindValue(":id"              , IDsvm                        ); // id del scummvm
 	query.exec();
 }

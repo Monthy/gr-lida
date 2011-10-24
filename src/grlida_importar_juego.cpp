@@ -1106,6 +1106,9 @@ void frmImportarJuego::AnalyzePage(QString Page, bool local, bool tipoDFend)
 		tmpDatosScummVM["Svm_sound_font"]      = ""+datosImportar["Svm_sound_font"];
 		tmpDatosScummVM["Svm_walkspeed"]       = ""+datosImportar["Svm_walkspeed"];
 		tmpDatosScummVM["Svm_opl_driver"]      = ""+datosImportar["Svm_opl_driver"];
+		tmpDatosScummVM["Svm_disable_dithering"] = ""+datosImportar["Svm_disable_dithering"];
+		tmpDatosScummVM["Svm_mute"]              = ""+datosImportar["Svm_mute"];
+		tmpDatosScummVM["Svm_speech_mute"]       = ""+datosImportar["Svm_speech_mute"];
 	}
 // VDMSound ------------------
 //----------------------------

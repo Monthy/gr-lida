@@ -1222,13 +1222,18 @@ void Funciones::CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm)
 		settings.setValue("copy_protection", conf_Svm["Svm_copy_protection"]); // false
 		settings.setValue("soundfont"      , conf_Svm["Svm_sound_font"]     );
 		settings.setValue("walkspeed"      , conf_Svm["Svm_walkspeed"]      );
+		settings.setValue("disable_dithering", conf_Svm["Svm_disable_dithering"]); // false
+		settings.setValue("mute"             , conf_Svm["Svm_mute"]             ); // false
+		settings.setValue("opl_driver"       , conf_Svm["Svm_opl_driver"]       ); // auto
+		settings.setValue("speech_mute"      , conf_Svm["Svm_speech_mute"]      ); // true
 	settings.endGroup();
-
+/*
 	settings.beginGroup("scummvm");
 		settings.setValue("gui_theme" ,"modern");
 		settings.setValue("gfx_mode"  ,"2x"    );
 		settings.setValue("fullscreen","false" );
 	settings.endGroup();
+*/
 }
 
 /*
@@ -2829,6 +2834,9 @@ QHash<QString, QString> Funciones::getDefectDatosScummVM()
 	datos["Svm_sound_font"]      = "";
 	datos["Svm_walkspeed"]       = "0";
 	datos["Svm_opl_driver"]      = "auto";
+	datos["Svm_disable_dithering"] = "false";
+	datos["Svm_mute"]              = "false";
+	datos["Svm_speech_mute"]       = "false";
 
 	return datos;
 }

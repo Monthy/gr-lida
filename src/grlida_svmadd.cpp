@@ -148,6 +148,9 @@ void frmSvmAdd::CargarConfig()
 	tempDatosJuego["Svm_copy_protection"] = "false";
 	tempDatosJuego["Svm_sound_font"]      = "";
 	tempDatosJuego["Svm_opl_driver"]      = "auto";
+	tempDatosJuego["Svm_disable_dithering"] = "false";
+	tempDatosJuego["Svm_mute"]              = "false";
+	tempDatosJuego["Svm_speech_mute"]       = "false";
 }
 
 void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2)
@@ -273,6 +276,9 @@ void frmSvmAdd::on_btnDescargarInfo()
 			tempDatosJuego["Svm_copy_protection"] = ImportarJuego->DatosScummVM["Svm_copy_protection"];										// copy_protection
 			tempDatosJuego["Svm_sound_font"]      = ImportarJuego->DatosScummVM["Svm_sound_font"];											// sound_font
 			tempDatosJuego["Svm_opl_driver"]      = ImportarJuego->DatosScummVM["Svm_opl_driver"];											// opl_driver
+			tempDatosJuego["Svm_disable_dithering"] = ImportarJuego->DatosScummVM["Svm_disable_dithering"];
+			tempDatosJuego["Svm_mute"]              = ImportarJuego->DatosScummVM["Svm_mute"];
+			tempDatosJuego["Svm_speech_mute"]       = ImportarJuego->DatosScummVM["Svm_speech_mute"];
 		}
 	}
 }
@@ -351,7 +357,9 @@ void frmSvmAdd::on_btnOk()
 		DatosScummVM["Svm_sound_font"]      = ""+tempDatosJuego["Svm_sound_font"];						// sound_font
 		DatosScummVM["Svm_walkspeed"]       = ui.posSliderSvm_8->text();								// walkspeed
 		DatosScummVM["Svm_opl_driver"]      = ""+tempDatosJuego["Svm_opl_driver"];						// opl_driver
-
+		DatosScummVM["Svm_disable_dithering"] = ""+tempDatosJuego["Svm_disable_dithering"];
+		DatosScummVM["Svm_mute"]              = ""+tempDatosJuego["Svm_mute"];
+		DatosScummVM["Svm_speech_mute"]       = ""+tempDatosJuego["Svm_speech_mute"];
 		QDialog::accept();
 	}
 }

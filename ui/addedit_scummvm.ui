@@ -399,7 +399,7 @@
          <item row="7" column="2" colspan="2">
           <widget class="QCheckBox" name="chkSvm_aspect_ratio">
            <property name="text">
-            <string>Aspect-ratio</string>
+            <string>Corrección de aspecto</string>
            </property>
           </widget>
          </item>
@@ -638,6 +638,13 @@
            </property>
           </widget>
          </item>
+         <item row="7" column="1">
+          <widget class="QCheckBox" name="chkSvm_disable_dithering">
+           <property name="text">
+            <string>Difuminado EGA</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
@@ -797,22 +804,6 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="3">
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Preferred</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
          <item row="4" column="0">
           <widget class="QLabel" name="lb_Svm_15">
            <property name="text">
@@ -948,108 +939,6 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="lb_Svm_19">
-           <property name="text">
-            <string>Nivel de Errores:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="1">
-          <widget class="QSlider" name="h_SliderSvm_debuglevel">
-           <property name="maximum">
-            <number>10</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="2">
-          <widget class="QLabel" name="posSliderSvm_6">
-           <property name="minimumSize">
-            <size>
-             <width>51</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="0">
-          <widget class="QLabel" name="lb_Svm_21">
-           <property name="text">
-            <string>Midi Gain:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="1">
-          <widget class="QSlider" name="h_SliderSvm_midi_gain">
-           <property name="maximum">
-            <number>1000</number>
-           </property>
-           <property name="value">
-            <number>100</number>
-           </property>
-           <property name="sliderPosition">
-            <number>100</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="2">
-          <widget class="QLabel" name="posSliderSvm_7">
-           <property name="minimumSize">
-            <size>
-             <width>51</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>100</string>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="0">
-          <widget class="QLabel" name="lb_Svm_25">
-           <property name="text">
-            <string>Walk Speed:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="1">
-          <widget class="QSlider" name="h_SliderSvm_walkspeed">
-           <property name="maximum">
-            <number>4</number>
-           </property>
-           <property name="value">
-            <number>0</number>
-           </property>
-           <property name="sliderPosition">
-            <number>0</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="2">
-          <widget class="QLabel" name="posSliderSvm_8">
-           <property name="minimumSize">
-            <size>
-             <width>51</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-         </item>
          <item row="11" column="1">
           <widget class="QPushButton" name="btnDefectoSvm">
            <property name="minimumSize">
@@ -1067,21 +956,14 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="0" colspan="6">
+         <item row="12" column="0" colspan="2">
           <widget class="QCheckBox" name="chkSvm_multi_midi">
            <property name="text">
             <string>Mixed Adlib/MIDI mode</string>
            </property>
           </widget>
          </item>
-         <item row="13" column="0" colspan="6">
-          <widget class="QCheckBox" name="chkSvm_native_mt32">
-           <property name="text">
-            <string>True Roland MT-32 (diseable GM emulation)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="14" column="0" colspan="6">
+         <item row="14" column="0" colspan="2">
           <widget class="QCheckBox" name="chkSvm_enable_gs">
            <property name="text">
             <string>Permitir el modo de Roland GS</string>
@@ -1122,6 +1004,145 @@
            </property>
            <property name="currentIndex">
             <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="13" column="0" colspan="2">
+          <widget class="QCheckBox" name="chkSvm_native_mt32">
+           <property name="text">
+            <string>True Roland MT-32 (diseable GM emulation)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="2">
+          <widget class="QLabel" name="posSliderSvm_7">
+           <property name="minimumSize">
+            <size>
+             <width>51</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>100</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="2">
+          <widget class="QLabel" name="posSliderSvm_8">
+           <property name="minimumSize">
+            <size>
+             <width>51</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="2">
+          <widget class="QLabel" name="posSliderSvm_6">
+           <property name="minimumSize">
+            <size>
+             <width>51</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="QSlider" name="h_SliderSvm_midi_gain">
+           <property name="maximum">
+            <number>1000</number>
+           </property>
+           <property name="value">
+            <number>100</number>
+           </property>
+           <property name="sliderPosition">
+            <number>100</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <widget class="QSlider" name="h_SliderSvm_walkspeed">
+           <property name="maximum">
+            <number>4</number>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+           <property name="sliderPosition">
+            <number>0</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="1">
+          <widget class="QSlider" name="h_SliderSvm_debuglevel">
+           <property name="maximum">
+            <number>10</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="lb_Svm_21">
+           <property name="text">
+            <string>Midi Gain:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0">
+          <widget class="QLabel" name="lb_Svm_25">
+           <property name="text">
+            <string>Walk Speed:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0">
+          <widget class="QLabel" name="lb_Svm_19">
+           <property name="text">
+            <string>Nivel de Errores:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="3">
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Preferred</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="3" column="3" colspan="3">
+          <widget class="QCheckBox" name="chkSvm_mute">
+           <property name="text">
+            <string>Silenciar</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="3" colspan="3">
+          <widget class="QCheckBox" name="chkSvm_speech_mute">
+           <property name="text">
+            <string>Silenciar Voces</string>
            </property>
           </widget>
          </item>

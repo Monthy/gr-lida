@@ -884,7 +884,7 @@
          <item row="3" column="1" colspan="2">
           <widget class="QCheckBox" name="chkSvm_aspect_ratio">
            <property name="text">
-            <string>Aspect-ratio</string>
+            <string>Corrección de aspecto</string>
            </property>
           </widget>
          </item>
@@ -1568,6 +1568,7 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
