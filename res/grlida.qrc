@@ -322,63 +322,93 @@
         <file>tpl_juego_info.html</file>
         <file>tpl_info.html</file>
         <file>img16/column_list.png</file>
+        <file>icon_svm/arthur.png</file>
         <file>icon_svm/bargon.png</file>
         <file>icon_svm/bc.png</file>
+        <file>icon_svm/bearfight.png</file>
+        <file>icon_svm/blues.png</file>
+        <file>icon_svm/camelot.png</file>
+        <file>icon_svm/castlebrain.png</file>
         <file>icon_svm/comi.png</file>
         <file>icon_svm/cruise.png</file>
         <file>icon_svm/dig.png</file>
+        <file>icon_svm/draci.png</file>
         <file>icon_svm/drascula.png</file>
         <file>icon_svm/dw.png</file>
+        <file>icon_svm/ecoquest.png</file>
         <file>icon_svm/elvira.png</file>
         <file>icon_svm/fan.png</file>
+        <file>icon_svm/fascination.png</file>
         <file>icon_svm/fbear.png</file>
         <file>icon_svm/feeble.png</file>
         <file>icon_svm/ffish.png</file>
         <file>icon_svm/field.png</file>
+        <file>icon_svm/freddypharkas.png</file>
         <file>icon_svm/ft.png</file>
         <file>icon_svm/fw.png</file>
         <file>icon_svm/gob.png</file>
         <file>icon_svm/gr.png</file>
+        <file>icon_svm/grandma.png</file>
+        <file>icon_svm/greeneggs.png</file>
+        <file>icon_svm/harryhh.png</file>
+        <file>icon_svm/hoyle.png</file>
+        <file>icon_svm/iceman.png</file>
         <file>icon_svm/ihnm.png</file>
         <file>icon_svm/indy3.png</file>
         <file>icon_svm/indy4.png</file>
         <file>icon_svm/ite.png</file>
+        <file>icon_svm/jones.png</file>
         <file>icon_svm/kq.png</file>
+        <file>icon_svm/kq_sci.png</file>
         <file>icon_svm/kyra.png</file>
+        <file>icon_svm/laurabow.png</file>
         <file>icon_svm/lgop2.png</file>
+        <file>icon_svm/lilmonster.png</file>
         <file>icon_svm/loom.png</file>
         <file>icon_svm/lostintime.png</file>
         <file>icon_svm/lsl.png</file>
+        <file>icon_svm/lsl_sci.png</file>
         <file>icon_svm/lure.png</file>
         <file>icon_svm/manhole.png</file>
         <file>icon_svm/maniac.png</file>
         <file>icon_svm/mh.png</file>
         <file>icon_svm/mickey.png</file>
+        <file>icon_svm/mixedup.png</file>
         <file>icon_svm/monkey1.png</file>
         <file>icon_svm/monkey2.png</file>
         <file>icon_svm/mumg.png</file>
         <file>icon_svm/nippon.png</file>
         <file>icon_svm/pajama.png</file>
+        <file>icon_svm/pepper.png</file>
         <file>icon_svm/pq.png</file>
+        <file>icon_svm/pq_sci.png</file>
         <file>icon_svm/puttputt.png</file>
+        <file>icon_svm/qfg_sci.png</file>
         <file>icon_svm/queen.png</file>
         <file>icon_svm/rodney.png</file>
         <file>icon_svm/rtz.png</file>
         <file>icon_svm/samnmax.png</file>
+        <file>icon_svm/seussabc.png</file>
         <file>icon_svm/simon.png</file>
         <file>icon_svm/sinimg.png</file>
         <file>icon_svm/sky.png</file>
+        <file>icon_svm/slater.png</file>
         <file>icon_svm/sports.png</file>
         <file>icon_svm/spyfox.png</file>
         <file>icon_svm/sq.png</file>
+        <file>icon_svm/sq_sci.png</file>
         <file>icon_svm/sword1.png</file>
         <file>icon_svm/sword2.png</file>
         <file>icon_svm/t7g.png</file>
+        <file>icon_svm/teenagent.png</file>
         <file>icon_svm/tentacle.png</file>
         <file>icon_svm/thinkers.png</file>
+        <file>icon_svm/toon.png</file>
+        <file>icon_svm/tortoise.png</file>
         <file>icon_svm/touche.png</file>
         <file>icon_svm/troll.png</file>
         <file>icon_svm/tucker.png</file>
+        <file>icon_svm/urban.png</file>
         <file>icon_svm/waxworks.png</file>
         <file>icon_svm/ween.png</file>
         <file>icon_svm/winnie.png</file>
