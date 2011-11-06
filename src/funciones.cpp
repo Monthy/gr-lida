@@ -1900,6 +1900,9 @@ void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const
 			out << "# Lines in this section will be run at startup." << endl;
 			out << "# You can put your MOUNT lines here." << endl << endl;
 
+			if( datosDbx["Dbx_dos_version"] != "" )
+				out << "ver set " << datosDbx["Dbx_dos_version"] << endl << endl;
+
 			if( datosDbx["Dbx_opt_autoexec"] == "true" )
 				out << datosDbx["Dbx_autoexec"] << endl;
 			else {
@@ -2488,6 +2491,7 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 		profileDFend["Dbx_dos_xms"] = BoolToStr( settings.value("xms","true").toBool() );
 		profileDFend["Dbx_dos_ems"] = BoolToStr( settings.value("ems","true").toBool() );
 		profileDFend["Dbx_dos_umb"] = settings.value("umb", "true").toString();
+		profileDFend["Dbx_dos_version"] = "";
 
 		if( settings.value("keyboardlayout","auto").toString() == "default")
 			profileDFend["Dbx_dos_keyboardlayout"] = "auto";
@@ -2771,6 +2775,7 @@ QHash<QString, QString> Funciones::getDefectDatosDosBox()
 	datos["Dbx_dos_ems"]              = "true";
 	datos["Dbx_dos_umb"]              = "true";
 	datos["Dbx_dos_keyboardlayout"]   = "auto";
+	datos["Dbx_dos_version"]          = "";
 // [ipx]
 	datos["Dbx_ipx_ipx"]              = "false";
 // [autoexec]

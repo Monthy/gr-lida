@@ -200,6 +200,15 @@ void frmAddEditDosBox::CargarConfigDosBox()
 	ui.cbxDbx_dos_umb->addItem("false");
 	ui.cbxDbx_dos_umb->addItem("max");
 
+	ui.cbxDbx_dos_version->clear();
+	ui.cbxDbx_dos_version->addItem("defecto", "" );
+	ui.cbxDbx_dos_version->addItem("6.22", "6 22");
+	ui.cbxDbx_dos_version->addItem("6.2" , "6 2" );
+	ui.cbxDbx_dos_version->addItem("6.0" , "6 0" );
+	ui.cbxDbx_dos_version->addItem("5.0" , "5 0" );
+	ui.cbxDbx_dos_version->addItem("4.0" , "4 0" );
+	ui.cbxDbx_dos_version->addItem("3.3" , "3 3" );
+
 	QStringList sonido_frecuencias, sonido_Address,	sonido_IRQ, sonido_DMA, sonido_HDMA;
 	sonido_frecuencias << "8000" << "11025" << "16000" << "22050" << "32000" << "44100" << "48000" << "49716";
 	sonido_Address << "210" << "220" << "240" << "260" << "280" << "2a0" << "2c0" << "2e0" << "300";
@@ -454,6 +463,7 @@ void frmAddEditDosBox::CargarDatosDosBox(QHash<QString, QString> datosDbx, QStri
 	ui.chkDbx_dos_ems->setChecked( fGrl.StrToBool( datosDbx["Dbx_dos_ems"] ) );						// dos_ems
 	ui.cbxDbx_dos_umb->setCurrentIndex( ui.cbxDbx_dos_umb->findText( datosDbx["Dbx_dos_umb"] ) );	// dos_umb
 	ui.cbxDbx_dos_keyboardlayout->setCurrentIndex( ui.cbxDbx_dos_keyboardlayout->findText( datosDbx["Dbx_dos_keyboardlayout"] ) );	// dos_keyboardlayout
+	ui.cbxDbx_dos_version->setCurrentIndex( ui.cbxDbx_dos_version->findData( datosDbx["Dbx_dos_version"] ) );
 
 	ui.chkDbx_ipx_ipx->setChecked( fGrl.StrToBool( datosDbx["Dbx_ipx_ipx"] ) );							// ipx_ipx
 
@@ -744,6 +754,9 @@ QHash<QString, QString> frmAddEditDosBox::setDatosDosBox()
 // dos_keyboardlayout
 	if( ui.cbxDbx_dos_keyboardlayout->currentText() != "" )
 		tempProfileDosBox["Dbx_dos_keyboardlayout"] = ui.cbxDbx_dos_keyboardlayout->currentText(); else tempProfileDosBox["Dbx_dos_keyboardlayout"] = "none";
+// dos_version
+	if( ui.cbxDbx_dos_version->currentText() != "" )
+		tempProfileDosBox["Dbx_dos_version"] = ui.cbxDbx_dos_version->itemData( ui.cbxDbx_dos_version->currentIndex() ).toString(); else tempProfileDosBox["Dbx_dos_version"] = "";
 
 // ipx_ipx
 	tempProfileDosBox["Dbx_ipx_ipx"] = fGrl.BoolToStr( ui.chkDbx_ipx_ipx->isChecked() );

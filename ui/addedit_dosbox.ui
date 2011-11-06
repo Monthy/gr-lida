@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>666</width>
+    <width>684</width>
     <height>477</height>
    </rect>
   </property>
@@ -633,7 +633,7 @@
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout_3">
+        <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0,0,0,0,0,0,1,0">
          <item row="0" column="0">
           <widget class="QComboBox" name="cbxDbx_dosbox_memsize">
            <property name="minimumSize">
@@ -650,10 +650,10 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1" colspan="8">
+         <item row="0" column="1" colspan="7">
           <widget class="QLabel" name="lb_Dbx_15">
            <property name="text">
-            <string>Cantidad de memoria (Mb) que DOSBox tendrá disponible:</string>
+            <string>Cantidad de memoria (Mb) que DOSBox tendrá disponible</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -673,10 +673,10 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1" colspan="8">
+         <item row="1" column="1" colspan="7">
           <widget class="QLabel" name="lb_Dbx_16">
            <property name="text">
-            <string>Núcleo de la CPU usado en la emulación:</string>
+            <string>Núcleo de la CPU usado en la emulación</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -693,7 +693,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1" colspan="8">
+         <item row="2" column="1" colspan="7">
           <widget class="QLabel" name="lb_Dbx_66"/>
          </item>
          <item row="3" column="0">
@@ -709,10 +709,10 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1" colspan="8">
+         <item row="3" column="1" colspan="7">
           <widget class="QLabel" name="lb_Dbx_17">
            <property name="text">
-            <string>Cuantos cuadros salta dosbox antes de dibujar uno:</string>
+            <string>Cuantos cuadros salta dosbox antes de dibujar uno</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -1015,6 +1015,29 @@
            </property>
            <property name="wordWrap">
             <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="8">
+          <widget class="QLabel" name="lb_Dbx_70">
+           <property name="text">
+            <string>Versión MS-DOS</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="8">
+          <widget class="QComboBox" name="cbxDbx_dos_version">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
            </property>
           </widget>
          </item>

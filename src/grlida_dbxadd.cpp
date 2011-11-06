@@ -149,8 +149,6 @@ void frmDbxAdd::CargarConfig()
 	ui.cbxDbx_speaker_tandyrate->clear();
 	ui.cbxDbx_speaker_tandyrate->addItems( sonido_frecuencias );
 
-
-
 // Ponemos los Combobox por defecto.
 	ui.cbxDbx_Profiles->setCurrentIndex( 0 );
 	emit on_setProfileGame( 0 );
@@ -580,6 +578,7 @@ void frmDbxAdd::on_btnOk()
 			DatosDosBox["Dbx_dos_umb"] = "true";
 
 		DatosDosBox["Dbx_dos_keyboardlayout"]    = tempProfileDosBox["Dbx_dos_keyboardlayout"];					// dos_keyboardlayout
+		DatosDosBox["Dbx_dos_version"]           = tempProfileDosBox["Dbx_dos_version"];
 		DatosDosBox["Dbx_ipx_ipx"]               = tempProfileDosBox["Dbx_ipx_ipx"];							// ipx_ipx
 		DatosDosBox["Dbx_autoexec"]              = tempProfileDosBox["Dbx_autoexec"];							// autoexec
 		DatosDosBox["Dbx_opt_autoexec"]          = tempProfileDosBox["Dbx_opt_autoexec"];						// opt_autoexec

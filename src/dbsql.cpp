@@ -305,6 +305,7 @@ void dbSql::CrearTablas()
 		"	`dos_ems`				varchar(5) NOT NULL default 'true',"
 		"	`dos_umb`				varchar(5) NOT NULL default 'true',"
 		"	`dos_keyboardlayout`	varchar(5) NOT NULL default 'auto',"
+		"	`dos_version`			varchar(5) NOT NULL default '',"
 		"	`ipx_ipx`				varchar(5) NOT NULL default 'true',"
 		"	`autoexec`				longtext,"
 		"	`opt_autoexec`			varchar(5) NOT NULL default 'false',"
@@ -458,10 +459,16 @@ void dbSql::CrearTablas()
 
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cputype' varchar(20) NOT NULL DEFAULT 'auto';");
+	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'sblaster_oplemu' varchar(10) NOT NULL DEFAULT 'default';");
+	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cycles_realmode' varchar(10) NOT NULL DEFAULT '';");
+	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cycles_protmode' varchar(10) NOT NULL DEFAULT '';");
+	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'cpu_cycles_limitmode' varchar(10) NOT NULL DEFAULT '';");
+	query.clear();
+	query.exec("ALTER TABLE 'dbgrl_emu_dosbox' ADD COLUMN 'dos_version' varchar(5) NOT NULL DEFAULT '';");
 
 	query.clear();
 	query.exec("ALTER TABLE 'dbgrl_emu_scummvm' ADD COLUMN 'output_rate' varchar(10) NOT NULL DEFAULT '<defecto>';");
@@ -777,6 +784,7 @@ QHash<QString, QString> dbSql::showConfg_DOSBox(QString IDgrl)
 	tmpDosBox["Dbx_dos_ems"]              = query.record().value("dos_ems").toString();
 	tmpDosBox["Dbx_dos_umb"]              = query.record().value("dos_umb").toString();
 	tmpDosBox["Dbx_dos_keyboardlayout"]   = query.record().value("dos_keyboardlayout").toString();
+	tmpDosBox["Dbx_dos_version"]          = query.record().value("dos_version").toString();
 // [ipx]
 	tmpDosBox["Dbx_ipx_ipx"]              = query.record().value("ipx_ipx").toString();
 // [autoexec]
@@ -814,7 +822,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	strSQL.append("speaker_disney, joystick_type, joystick_timed, joystick_autofire, joystick_swap34, joystick_buttonwrap, ");
 	strSQL.append("modem_modem, modem_comport, modem_listenport, dserial_directserial, dserial_comport, ");
 	strSQL.append("dserial_realport, dserial_defaultbps, dserial_parity, dserial_bytesize, dserial_stopbit, serial_1, serial_2, serial_3, ");
-	strSQL.append("serial_4, dos_xms, dos_ems, dos_umb, dos_keyboardlayout, ipx_ipx, autoexec, opt_autoexec, opt_loadfix, opt_loadfix_mem, opt_consola_dbox, ");
+	strSQL.append("serial_4, dos_xms, dos_ems, dos_umb, dos_keyboardlayout, dos_version, ipx_ipx, autoexec, opt_autoexec, opt_loadfix, opt_loadfix_mem, opt_consola_dbox, ");
 	strSQL.append("opt_cerrar_dbox, opt_cycle_sincronizar, path_conf, path_sonido, path_exe, path_setup, parametros_exe, parametros_setup ");
 	strSQL.append(") VALUES ( ");
 	strSQL.append(":idgrl, :sdl_fullscreen, :sdl_fulldouble, :sdl_fullfixed, :sdl_fullresolution, :sdl_windowresolution, :sdl_output, ");
@@ -827,7 +835,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	strSQL.append(":speaker_disney, :joystick_type, :joystick_timed, :joystick_autofire, :joystick_swap34, :joystick_buttonwrap, ");
 	strSQL.append(":modem_modem, :modem_comport, :modem_listenport, :dserial_directserial, :dserial_comport, ");
 	strSQL.append(":dserial_realport, :dserial_defaultbps, :dserial_parity, :dserial_bytesize, :dserial_stopbit, :serial_1, :serial_2, :serial_3, ");
-	strSQL.append(":serial_4, :dos_xms, :dos_ems, :dos_umb, :dos_keyboardlayout, :ipx_ipx, :autoexec, :opt_autoexec, :opt_loadfix, :opt_loadfix_mem, :opt_consola_dbox, ");
+	strSQL.append(":serial_4, :dos_xms, :dos_ems, :dos_umb, :dos_keyboardlayout, :dos_version, :ipx_ipx, :autoexec, :opt_autoexec, :opt_loadfix, :opt_loadfix_mem, :opt_consola_dbox, ");
 	strSQL.append(":opt_cerrar_dbox, :opt_cycle_sincronizar, :path_conf, :path_sonido, :path_exe, :path_setup, :parametros_exe, :parametros_setup )");
 
 	QSqlQuery query;
@@ -916,6 +924,7 @@ QString dbSql::ItemInsertaDbx(const QHash<QString, QString> datos, const QString
 	query.bindValue(":dos_ems"               , datos["Dbx_dos_ems"]               );
 	query.bindValue(":dos_umb"               , datos["Dbx_dos_umb"]               );
 	query.bindValue(":dos_keyboardlayout"    , datos["Dbx_dos_keyboardlayout"]    );
+	query.bindValue(":dos_version"           , datos["Dbx_dos_version"]           );
 	query.bindValue(":ipx_ipx"               , datos["Dbx_ipx_ipx"]               );
 	query.bindValue(":autoexec"              , datos["Dbx_autoexec"]              );
 	query.bindValue(":opt_autoexec"          , datos["Dbx_opt_autoexec"]          );
@@ -960,7 +969,7 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	strSQL.append("modem_modem = :modem_modem , modem_comport = :modem_comport , modem_listenport = :modem_listenport , dserial_directserial = :dserial_directserial ,");
 	strSQL.append("dserial_comport = :dserial_comport , dserial_realport = :dserial_realport , dserial_defaultbps = :dserial_defaultbps , dserial_parity = :dserial_parity ,");
 	strSQL.append("dserial_bytesize = :dserial_bytesize , dserial_stopbit = :dserial_stopbit , serial_1 = :serial_1 , serial_2 = :serial_2 , serial_3 = :serial_3 , serial_4 = :serial_4 ,");
-	strSQL.append("dos_xms = :dos_xms , dos_ems = :dos_ems , dos_umb = :dos_umb , dos_keyboardlayout = :dos_keyboardlayout , ipx_ipx = :ipx_ipx , autoexec = :autoexec , opt_autoexec = :opt_autoexec , opt_loadfix = :opt_loadfix ,");
+	strSQL.append("dos_xms = :dos_xms , dos_ems = :dos_ems , dos_umb = :dos_umb , dos_keyboardlayout = :dos_keyboardlayout , dos_version = :dos_version , ipx_ipx = :ipx_ipx , autoexec = :autoexec , opt_autoexec = :opt_autoexec , opt_loadfix = :opt_loadfix ,");
 	strSQL.append("opt_loadfix_mem = :opt_loadfix_mem , opt_consola_dbox = :opt_consola_dbox , opt_cerrar_dbox = :opt_cerrar_dbox , opt_cycle_sincronizar = :opt_cycle_sincronizar ,");
 	strSQL.append("path_conf = :path_conf , path_sonido = :path_sonido , path_exe = :path_exe , path_setup = :path_setup , parametros_exe = :parametros_exe , parametros_setup = :parametros_setup ");
 	strSQL.append("WHERE id = :id;");
@@ -1051,6 +1060,7 @@ void dbSql::ItemActualizaDbx(const QHash<QString, QString> datos, const QString 
 	query.bindValue(":dos_ems"               , datos["Dbx_dos_ems"]               );
 	query.bindValue(":dos_umb"               , datos["Dbx_dos_umb"]               );
 	query.bindValue(":dos_keyboardlayout"    , datos["Dbx_dos_keyboardlayout"]    );
+	query.bindValue(":dos_version"           , datos["Dbx_dos_version"]           );
 	query.bindValue(":ipx_ipx"               , datos["Dbx_ipx_ipx"]               );
 	query.bindValue(":autoexec"              , datos["Dbx_autoexec"]              );
 	query.bindValue(":opt_autoexec"          , datos["Dbx_opt_autoexec"]          );
