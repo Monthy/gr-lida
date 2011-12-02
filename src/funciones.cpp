@@ -2540,6 +2540,10 @@ QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
 	profileDFend["Svm_copy_protection"]   = BoolToStr( settings.value("copy_protection", "false").toBool() );
 	profileDFend["Svm_sound_font"]        = settings.value("sound_font"   , "").toString();
 		profileDFend["Svm_walkspeed"]     = settings.value("Walkspeed"    , "0").toString();
+		profileDFend["Svm_opl_driver"]    = settings.value("opl_driver"   , "auto").toString();
+		profileDFend["Svm_disable_dithering"] = BoolToStr( settings.value("disable_dithering", "false").toBool() );
+		profileDFend["Svm_mute"]              = BoolToStr( settings.value("mute"       , "false").toBool() );
+		profileDFend["Svm_speech_mute"]       = BoolToStr( settings.value("speech_mute", "false").toBool() );
 	settings.endGroup();
 
 	if( file_out.exists() )
