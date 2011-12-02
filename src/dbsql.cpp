@@ -370,10 +370,12 @@ void dbSql::CrearTablas()
 		"	`enable_gs`				varchar(5) NOT NULL default 'true',"
 		"	`multi_midi`			varchar(5) NOT NULL default 'true',"
 		"	`native_mt32`			varchar(5) NOT NULL default 'true',"
+		"	`mute`					varchar(5) NOT NULL default 'false',"
 		"	`master_volume`			integer NOT NULL default 192,"
 		"	`music_volume`			integer NOT NULL default 192,"
 		"	`sfx_volume`			integer NOT NULL default 192,"
 		"	`speech_volume`			integer NOT NULL default 192,"
+		"	`speech_mute`			varchar(5) NOT NULL default 'false',"
 		"	`tempo`					integer NOT NULL default 100,"
 		"	`talkspeed`				integer NOT NULL default 60,"
 		"	`debuglevel`			integer NOT NULL default 0,"
@@ -385,9 +387,7 @@ void dbSql::CrearTablas()
 		"	`sound_font`			varchar(255) NOT NULL default '',"
 		"	`walkspeed`				integer NOT NULL default 0,"
 		"	`opl_driver`			varchar(10) NOT NULL default 'auto',"
-		"	`disable_dithering`		varchar(5) NOT NULL default 'false',"
-		"	`mute`					varchar(5) NOT NULL default 'false',"
-		"	`speech_mute`			varchar(5) NOT NULL default 'false'"
+		"	`disable_dithering`		varchar(5) NOT NULL default 'false'"
 		");");
 	}
 
