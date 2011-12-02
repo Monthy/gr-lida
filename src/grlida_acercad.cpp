@@ -38,9 +38,9 @@ frmAcercaD::frmAcercaD(QDialog *parent, Qt::WFlags flags)
 		"<center><strong>DOSBox</strong>, <strong><font color=\"#009900\">ScummVM</font></strong>, <strong>VDMSound</strong><br></center>"
 		"<strong>GR-lida</strong> "+tr("es GPL. Para mejorar el programa puedes dejar tu opinión en")+" <a href=\"http://www.gr-lida.org\">http://www.gr-lida.org</a><br />"+
 		tr("Web Oficiales del lanzador y los distintos emuladores:")+"<br />"+
-		tr("Lanzador")+" <strong>GR-lida</strong>: <a href=\"http://www.gr-lida.org/grlida.php\">http://www.gr-lida.org</a><br />"+
-		tr("Emulador")+" <strong>DOSBox</strong>: <a href=\"http://dosbox.com\">http://dosbox.com</a><br />"+
-		tr("Emulador")+" <strong><font color=\"#009900\">ScummVM</font></strong>: <a href=\"http://www.scummvm.org\">http://www.scummvm.org</a><br />"+
+		tr("Lanzador")+" <strong>GR-lida</strong>: <a href=\"http://www.gr-lida.org/\">http://www.gr-lida.org</a><br />"+
+		tr("Emulador")+" <strong>DOSBox</strong>: <a href=\"http://dosbox.com/\">http://dosbox.com</a><br />"+
+		tr("Emulador")+" <strong><font color=\"#009900\">ScummVM</font></strong>: <a href=\"http://www.scummvm.org/\">http://www.scummvm.org</a><br />"+
 		tr("Emulador")+" <strong>VDMSound</strong>: <a href=\"http://sourceforge.net/projects/vdmsound/\">http://sourceforge.net/projects/vdmsound/</a><br>"
 	);
 
