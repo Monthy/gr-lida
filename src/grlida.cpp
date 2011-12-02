@@ -2421,7 +2421,7 @@ void GrLida::on_EjecutarJuego()
 			setWindowState(windowState() | Qt::WindowMinimized);
 			stl_param << stJuegoParametrosExe.split("|", QString::SkipEmptyParts);
 			#ifdef Q_OS_WIN32
-				if( (long)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()),
+				if( (long)(intptr_t)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()),
 									   reinterpret_cast<const WCHAR*>(stl_param.join("").utf16()),
 									   reinterpret_cast<const WCHAR*>(stDirWorkingJuego.utf16()), SW_SHOWNORMAL) <= 32)
 					QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego"));
@@ -2445,7 +2445,7 @@ void GrLida::on_EjecutarJuego()
 			{
 				setWindowState(windowState() | Qt::WindowMinimized);
 				#ifdef Q_OS_WIN32
-					if( (long)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()), 0, 0, SW_SHOWNORMAL) <= 32)
+					if( (long)(intptr_t)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()), 0, 0, SW_SHOWNORMAL) <= 32)
 						QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego"));
 				#else
 					QMessageBox::information(this, stTituloGrl(), tr("Solo disponible para SO, Windows (NT/2000/XP)"));
