@@ -2416,21 +2416,24 @@ void GrLida::on_EjecutarJuego()
 	if( stTipoEmu == "datos" )
 	{
 	// Ejecuta el juego directamente
-		if( stConfgJuego != "" && QFile( stConfgJuego ).exists() )
+		if( stConfgJuego != "" )
 		{
-			setWindowState(windowState() | Qt::WindowMinimized);
-			stl_param << stJuegoParametrosExe.split("|", QString::SkipEmptyParts);
-			#ifdef Q_OS_WIN32
-				if( (long)(intptr_t)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()),
-									   reinterpret_cast<const WCHAR*>(stl_param.join("").utf16()),
-									   reinterpret_cast<const WCHAR*>(stDirWorkingJuego.utf16()), SW_SHOWNORMAL) <= 32)
-					QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego"));
-				stl_param.clear();
-			#else
-				Ejecutar(stConfgJuego, stJuegoParametrosExe, stDirWorkingJuego);
-			#endif
-		} else
-			QMessageBox::information( this, stTituloGrl(), tr("Configuración del juego no encontrada.")+ "\n\n'" + stConfgJuego + "'" );
+			if( QFile( stConfgJuego ).exists() )
+			{
+				setWindowState(windowState() | Qt::WindowMinimized);
+				stl_param << stJuegoParametrosExe.split("|", QString::SkipEmptyParts);
+				#ifdef Q_OS_WIN32
+					if( (long)(intptr_t)ShellExecute(0, 0, reinterpret_cast<const WCHAR*>(stConfgJuego.utf16()),
+										   reinterpret_cast<const WCHAR*>(stl_param.join("").utf16()),
+										   reinterpret_cast<const WCHAR*>(stDirWorkingJuego.utf16()), SW_SHOWNORMAL) <= 32)
+						QMessageBox::information(this, stTituloGrl(), tr("No se ha podido ejecutar el juego"));
+					stl_param.clear();
+				#else
+					Ejecutar(stConfgJuego, stJuegoParametrosExe, stDirWorkingJuego);
+				#endif
+			} else
+				QMessageBox::information( this, stTituloGrl(), tr("Configuración del juego no encontrada.")+ "\n\n'" + stConfgJuego + "'" );
+		}
 	} else {
 		if( stConfgJuego != "" )
 		{
