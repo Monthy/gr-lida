@@ -8,9 +8,10 @@
 var authors		= "Monthy";						// Script authors
 var title		= "MobyGames (EN)";
 var url_site	= "http://www.mobygames.com";	// Site address
+var url_img_site= "http://pics.mobygames.com";	// Site pics address
 var url_charset	= "UTF-8";
 var language	= "en-EN";						// Site language
-var version		= "0.3.1";						// Script version 17-11-2008 update 19-04-2010
+var version		= "0.3.3";						// Script version 17-11-2008 update 17-05-2011
 var requires	= "0.9.0";						// GR-lida version
 var comments	= "";
 var license		= "GPL v2";
@@ -71,6 +72,22 @@ function AnalyzeFindPage(texto)
 function AnalyzeGamePage(texto, local)
 {
 	var m_array = new Array();
+// INI Temp ---------------
+m_array["Dat_usuario"]          = "Dat_usuario";
+m_array["Dat_titulo"]           = "Dat_titulo";
+m_array["Dat_subtitulo"]        = "Dat_subtitulo";
+m_array["Dat_compania"]         = "Dat_compania";
+m_array["Dat_desarrollador"]    = "Dat_desarrollador";
+m_array["Dat_anno"]             = "Dat_anno";
+m_array["Dat_sistemaop"]        = "Dat_sistemaop";
+m_array["Dat_edad_recomendada"] = "nd";
+m_array["Dat_genero"]           = "Dat_genero";
+m_array["Dat_perspectiva"]      = "Dat_perspectiva";
+m_array["Dat_tema"]             = "Dat_tema";
+m_array["Dat_misc"]             = "Dat_misc";
+m_array["Dat_comentario"]       = "Dat_comentario";
+m_array["Dat_rating"]           = "0";
+// FIN Temp ---------------
 
 // Usuario ----------------
 	if ( texto.indexOf("was contributed by",0) != -1)
@@ -84,9 +101,13 @@ function AnalyzeGamePage(texto, local)
 
 // Titulo -----------------
 // <div id="gameTitle"><a href="/game/dos/alone-in-the-dark">Alone in the Dark</a></div>
-	myRE = new RegExp("<div id=\"gameTitle\"><a href=\"([^\"]*)\">([^\n[]*)</a></div>");
-	titulo_results = texto.match(myRE);
-	m_array["Dat_titulo"]    = titulo_results[2];
+	if ( texto.indexOf("gameTitle",0) != -1)
+	{
+		myRE = new RegExp("<div id=\"gameTitle\"><a href=\"([^\"]*)\">([^\n[]*)</a></div>");
+		titulo_results = texto.match(myRE);
+		m_array["Dat_titulo"] = titulo_results[2];
+	} else
+		m_array["Dat_titulo"] = "";
 	m_array["Dat_subtitulo"] = "";
 
 // Developed, Published ---
@@ -162,8 +183,14 @@ function AnalyzeGamePage(texto, local)
 			}
 		}
 	} else {
-		m_array["Dat_genero"] = AnalyzeCategoriasMobyGames(texto, "Genre</div><div [^>]*>([^?]*)</div><div style=\"([^?]*)\">Non-Sport",
-									"<a href=\"/genre/([^\"<>]*)\">([^\"<>]*)</a>", 2);
+		if ( texto.indexOf("Non-Sport</div>") != -1)
+		{
+			m_array["Dat_genero"] = AnalyzeCategoriasMobyGames(texto, "Genre</div><div [^>]*>([^?]*)</div><div style=\"([^?]*)\">Non-Sport",
+										"<a href=\"/genre/([^\"<>]*)\">([^\"<>]*)</a>", 2);
+		} else {
+			m_array["Dat_genero"] = AnalyzeCategoriasMobyGames(texto, "Genre</div><div [^>]*>([^?]*)</div><div style=",
+										"<a href=\"/genre/([^\"<>]*)\">([^\"<>]*)</a>", 2);
+		}
 		m_array["Dat_perspectiva"] = "";
 	}
 
@@ -199,9 +226,9 @@ function AnalyzeGamePage(texto, local)
 		m_array["Dat_comentario"] = "";
 
 // MobyScore --------------
-	// <div class="fr scoreBoxMed scoreHi">4.0</div>
-	// <div class="fr scoreBoxMed scoreMed">3.1</div>
-	// <div class="fr scoreBoxMed scoreNone">...</div>
+// <div class="fr scoreBoxMed scoreHi">4.0</div>
+// <div class="fr scoreBoxMed scoreMed">3.1</div>
+// <div class="fr scoreBoxMed scoreNone">...</div>
 	myRE = new RegExp("<div class=\"fr scoreBoxMed([^\"<>]*)\">([^\"<>]*)</div>");
 	rating_results = texto.match(myRE);
 	if(rating_results != null)
@@ -211,7 +238,7 @@ function AnalyzeGamePage(texto, local)
 		m_array["Dat_rating"] = "0";
 	}
 
-//-------------------------
+// Other Dates ------------
 	m_array["Dat_idioma"]      = "";
 	m_array["Dat_idioma_voces"]= "";
 	m_array["Dat_formato"]     = "PC";
@@ -229,7 +256,7 @@ function AnalyzeGamePage(texto, local)
 	m_array["Dat_parametros_exe"] = "";
 
 // Imagenes Caratula ------
-	if ( texto.indexOf(url_site+"/images/covers/small/notonfile.gif",0) != -1 || texto.indexOf("noCoverArt",0) != -1 )
+	if ( texto.indexOf(url_img_site+"/images/covers/small/notonfile.gif",0) != -1 || texto.indexOf("noCoverArt",0) != -1 )
 	{
 		m_array["Dat_thumbs"]      = "";
 		m_array["Dat_cover_front"] = "";
@@ -238,16 +265,16 @@ function AnalyzeGamePage(texto, local)
 		m_array["Dat_url_cover_front"]  = "";
 		m_array["Dat_url_cover_back"]   = "";
 	}
-	else if ( texto.indexOf(url_site+"/images/covers/small/",0) != -1)
+	else if ( texto.indexOf(url_img_site+"/images/covers/small/",0) != -1)
 	{
-		myRE = new RegExp("<a href=\"/game/([^/]+)/([^\"]+)/cover-art/gameCoverId,([0-9]+)/\"><img alt=\"([^?]*)\" src=\""+url_site+"/images/covers/small/([^\"]+)\"");
+		myRE = new RegExp("<a href=\"/game/([^/]+)/([^\"]+)/cover-art/gameCoverId,([0-9]+)/\"><img alt=\"([^?]*)\" src=\""+url_img_site+"/images/covers/small/([^\"]+)\"");
 		img_results = texto.match(myRE);
 		if(img_results != null)
 		{
 			m_array["Dat_thumbs"]      = img_results[5];
 			m_array["Dat_cover_front"] = img_results[5];
 		} else {
-			myRE = new RegExp("<a href=\"/game/([^\"]+)/cover-art/gameCoverId,([0-9]+)/\"><img alt=\"([^?]*)\" src=\""+url_site+"/images/covers/small/([^\"]+)\"");
+			myRE = new RegExp("<a href=\"/game/([^\"]+)/cover-art/gameCoverId,([0-9]+)/\"><img alt=\"([^?]*)\" src=\""+url_img_site+"/images/covers/small/([^\"]+)\"");
 			img_results = texto.match(myRE);
 			if(img_results != null)
 			{
@@ -259,8 +286,8 @@ function AnalyzeGamePage(texto, local)
 			}
 		}
 		m_array["Dat_cover_back"]       = "";
-		m_array["Dat_url_cover_thumbs"] = url_site+"/images/covers/small/"+m_array["Dat_thumbs"];
-		m_array["Dat_url_cover_front"]  = url_site+"/images/covers/large/"+m_array["Dat_cover_front"];
+		m_array["Dat_url_cover_thumbs"] = url_img_site+"/images/covers/small/"+m_array["Dat_thumbs"];
+		m_array["Dat_url_cover_front"]  = url_img_site+"/images/covers/large/"+m_array["Dat_cover_front"];
 		m_array["Dat_url_cover_back"]   = "";
 	}
 // FIN Imagenes Caratula --
