@@ -985,7 +985,7 @@
    <item>
     <widget class="QCheckBox" name="chk_selectDatos">
      <property name="text">
-      <string>Marcar/Desmasrcar los datos de la lista para guardar la información.</string>
+      <string>Marcar/Desmarcar los datos de la lista para guardar la información.</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -1103,13 +1103,6 @@
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
   <include location="../res/grlida.qrc"/>
  </resources>
  <connections>
