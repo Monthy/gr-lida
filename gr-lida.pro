@@ -71,7 +71,8 @@ HEADERS += src/grlida_img_viewer.h \
     src/httpdownload.h \
     src/qtzip.h \
     src/grlida_instalar_juego.h \
-    src/grlida_addedit_vdmsound.h
+    src/grlida_addedit_vdmsound.h \
+    3rdparty/crc32qt.h
 
 SOURCES += src/grlida_img_viewer.cpp \
     src/grlida_info.cpp \
@@ -176,3 +177,4 @@ mac|unix {
         desktop \
         docs
 }
+

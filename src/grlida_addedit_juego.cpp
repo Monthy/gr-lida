@@ -27,6 +27,7 @@
 #include "grlida_img_viewer.h"
 #include "grlida_importar_juego.h"
 #include "grlida_ruleta.h"
+#include "crc32qt.h"
 
 frmAddEditJuego::frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIndex, QDialog *parent, Qt::WFlags flags)
     : QDialog(parent, flags)
@@ -1377,10 +1378,11 @@ void frmAddEditJuego::on_btnDatosFiles_PathFile()
 	QFileInfo fi( archivo );
 	if( fi.exists() )
 	{
+		Crc32Qt crc;
 		GRLConfig["DatosFiles_PathFile"] = fi.absolutePath();
 		ui.txtDatosFiles_PathFile->setText(archivo);
 		ui.txtDatosFiles_FileName->setText(fi.fileName());
-		ui.txtDatosFiles_Crc32->setText("");
+		ui.txtDatosFiles_Crc32->setText( crc.getCRC32toString(archivo) );
 		ui.txtDatosFiles_Size->setText(QVariant(fi.size()).toString());
 		ui.txtDatosFiles_Comentario->setText("");
 	} else {
