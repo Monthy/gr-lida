@@ -1190,50 +1190,49 @@ void Funciones::CargarListaDeCaptura(QTreeWidget *myTreeWidget, const QString di
 // Crea la configuración del ScummVM
 void Funciones::CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm)
 {
-	QSettings settings(dirIni, QSettings::IniFormat);
-	settings.clear();
-	settings.beginGroup( conf_Svm["Svm_game_label"] );
-		settings.setValue("description"    , conf_Svm["Svm_description"]    );
-		settings.setValue("gameid"         , conf_Svm["Svm_game"]           ); // monkey
-		settings.setValue("language"       , conf_Svm["Svm_language"]       ); // es
-		settings.setValue("subtitles"      , conf_Svm["Svm_subtitles"]      ); // true
-		settings.setValue("platform"       , conf_Svm["Svm_platform"]       ); // pc
-		settings.setValue("gfx_mode"       , conf_Svm["Svm_gfx_mode"]       ); // 2x
-		settings.setValue("render_mode"    , conf_Svm["Svm_render_mode"]    ); // hercGreen
-		settings.setValue("fullscreen"     , conf_Svm["Svm_fullscreen"]     ); // true
-		settings.setValue("aspect_ratio"   , conf_Svm["Svm_aspect_ratio"]   ); // true
-		settings.setValue("path"           , conf_Svm["Svm_path"]           );
-		settings.setValue("extrapath"      , conf_Svm["Svm_path_extra"]     );
-		settings.setValue("savepath"       , conf_Svm["Svm_path_save"]      );
-		settings.setValue("music_driver"   , conf_Svm["Svm_music_driver"]   ); // adlib
-		settings.setValue("enable_gs"      , conf_Svm["Svm_enable_gs"]      ); // true
-		settings.setValue("multi_midi"     , conf_Svm["Svm_multi_midi"]     ); // true
-		settings.setValue("native_mt32"    , conf_Svm["Svm_native_mt32"]    ); // true
-		settings.setValue("master_volume"  , conf_Svm["Svm_master_volume"]  ); // 192
-		settings.setValue("music_volume"   , conf_Svm["Svm_music_volume"]   ); // 192
-		settings.setValue("sfx_volume"     , conf_Svm["Svm_sfx_volume"]     ); // 192
-		settings.setValue("speech_volume"  , conf_Svm["Svm_speech_volume"]  ); // 192
-		settings.setValue("tempo"          , conf_Svm["Svm_tempo"]          ); // 0
-		settings.setValue("talkspeed"      , conf_Svm["Svm_talkspeed"]      ); // 107
-		settings.setValue("cdrom"          , conf_Svm["Svm_cdrom"]          ); // 0
-		settings.setValue("joystick_num"   , conf_Svm["Svm_joystick_num"]   ); // -1
-		settings.setValue("output_rate"    , conf_Svm["Svm_output_rate"]    ); // 44100
-		settings.setValue("midi_gain"      , conf_Svm["Svm_midi_gain"]      ); // 257
-		settings.setValue("copy_protection", conf_Svm["Svm_copy_protection"]); // false
-		settings.setValue("soundfont"      , conf_Svm["Svm_sound_font"]     );
-		settings.setValue("walkspeed"      , conf_Svm["Svm_walkspeed"]      );
-		settings.setValue("disable_dithering", conf_Svm["Svm_disable_dithering"]); // false
-		settings.setValue("mute"             , conf_Svm["Svm_mute"]             ); // false
-		settings.setValue("opl_driver"       , conf_Svm["Svm_opl_driver"]       ); // auto
-		settings.setValue("speech_mute"      , conf_Svm["Svm_speech_mute"]      ); // true
-	settings.endGroup();
-/*
-	settings.beginGroup("scummvm");
-		settings.setValue("gui_theme" ,"modern");
-		settings.setValue("gfx_mode"  ,"2x"    );
-		settings.setValue("fullscreen","false" );
-	settings.endGroup();
-*/
+	QFile file_out( dirIni );
+	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
+	{
+		QTextStream out(&file_out);
+		out.setAutoDetectUnicode(true);
+		out << "[" << conf_Svm["Svm_game_label"] << "]" << endl;
+		out << "description="       << conf_Svm["Svm_description"]       << endl;
+		out << "gameid="            << conf_Svm["Svm_game"]              << endl; // monkey
+		out << "language="          << conf_Svm["Svm_language"]          << endl; // es
+		out << "subtitles="         << conf_Svm["Svm_subtitles"]         << endl; // true
+		out << "platform="          << conf_Svm["Svm_platform"]          << endl; // pc
+		out << "gfx_mode="          << conf_Svm["Svm_gfx_mode"]          << endl; // 2x
+		out << "render_mode="       << conf_Svm["Svm_render_mode"]       << endl; // hercGreen
+		out << "fullscreen="        << conf_Svm["Svm_fullscreen"]        << endl; // true
+		out << "aspect_ratio="      << conf_Svm["Svm_aspect_ratio"]      << endl; // true
+		out << "path="              << conf_Svm["Svm_path"]              << endl;
+		out << "extrapath="         << conf_Svm["Svm_path_extra"]        << endl;
+		out << "savepath="          << conf_Svm["Svm_path_save"]         << endl;
+		out << "music_driver="      << conf_Svm["Svm_music_driver"]      << endl; // adlib
+		out << "enable_gs="         << conf_Svm["Svm_enable_gs"]         << endl; // true
+		out << "multi_midi="        << conf_Svm["Svm_multi_midi"]        << endl; // true
+		out << "native_mt32="       << conf_Svm["Svm_native_mt32"]       << endl; // true
+		out << "master_volume="     << conf_Svm["Svm_master_volume"]     << endl; // 192
+		out << "music_volume="      << conf_Svm["Svm_music_volume"]      << endl; // 192
+		out << "sfx_volume="        << conf_Svm["Svm_sfx_volume"]        << endl; // 192
+		out << "speech_volume="     << conf_Svm["Svm_speech_volume"]     << endl; // 192
+		out << "tempo="             << conf_Svm["Svm_tempo"]             << endl; // 0
+		out << "talkspeed="         << conf_Svm["Svm_talkspeed"]         << endl; // 107
+		out << "cdrom="             << conf_Svm["Svm_cdrom"]             << endl; // 0
+		out << "joystick_num="      << conf_Svm["Svm_joystick_num"]      << endl; // -1
+		out << "output_rate="       << conf_Svm["Svm_output_rate"]       << endl; // 44100
+		out << "midi_gain="         << conf_Svm["Svm_midi_gain"]         << endl; // 257
+		out << "copy_protection="   << conf_Svm["Svm_copy_protection"]   << endl; // false
+		out << "soundfont="         << conf_Svm["Svm_sound_font"]        << endl;
+		out << "walkspeed="         << conf_Svm["Svm_walkspeed"]         << endl;
+		out << "disable_dithering=" << conf_Svm["Svm_disable_dithering"] << endl; // false
+		out << "mute="              << conf_Svm["Svm_mute"]              << endl; // false
+		out << "opl_driver="        << conf_Svm["Svm_opl_driver"]        << endl; // auto
+		out << "speech_mute="       << conf_Svm["Svm_speech_mute"]       << endl; // true
+
+		out.flush();
+		file_out.close();
+	}
 }
 
 /*
