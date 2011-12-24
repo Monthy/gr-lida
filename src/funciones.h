@@ -90,6 +90,8 @@ public:
 
 // Comprueba si un directorio existe y sino lo crea
 	void ComprobarDirectorio(QString nameDir);
+// Comprueba si existe un archivo altenativo para cargarlo.
+	QString ComprobarArchivoAlternativo(QString archivo);
 // Obtiene la dirección y el nombre del archivo atraves de QFileDialog
 	QString VentanaAbrirArchivos(const QString caption, const QString dir, const QString tmp_dir, const QString filter, QString *selectedFilter, bool Open_Save = false);
 // Obtiene la dirección de una carpeta atraves de QFileDialog

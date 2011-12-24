@@ -737,6 +737,15 @@ void Funciones::ComprobarDirectorio(QString nameDir)
 		directorio.mkdir( nameDir );
 }
 
+QString Funciones::ComprobarArchivoAlternativo(QString archivo)
+{
+	QString tmpfile = archivo;
+	if( QFile::exists( tmpfile.replace(":/", GRlidaHomePath()) ) )
+		return tmpfile;
+	else
+		return archivo;
+}
+
 // Obtiene la dirección y el nombre del archivo atraves de QFileDialog
 QString Funciones::VentanaAbrirArchivos(const QString caption, const QString dir, const QString tmp_dir, const QString filter, QString *selectedFilter, bool Open_Save)
 {
@@ -924,7 +933,7 @@ void Funciones::CargarDatosComboBox(QString archivo, QComboBox *myCombobox, int 
 {
 	QStringList lista, listaTemp;
 	QString icono, iconoTemp;
-	QFile file( archivo );
+	QFile file( ComprobarArchivoAlternativo(archivo) );
 	if( file.open(QIODevice::ReadOnly) != 0 )
 	{
 		QTextStream in(&file);
@@ -1003,7 +1012,7 @@ void Funciones::CargarIconosComboBox(QString iconDir, QComboBox *myCombobox, QSt
 void Funciones::CargarDatosListaSvm(QString archivo, QTreeWidget *myTreeWidget)
 {
 // Abrimos la lista de compatibilidad del ScummVM y rellenamos el twScummVM
-	QFile file( archivo );
+	QFile file( ComprobarArchivoAlternativo(archivo) );
 	QStringList svm_Lista, svm_ListaTemp;
 
 	myTreeWidget->clear();
