@@ -72,7 +72,8 @@ HEADERS += src/grlida_img_viewer.h \
     src/qtzip.h \
     src/grlida_instalar_juego.h \
     src/grlida_addedit_vdmsound.h \
-    3rdparty/crc32qt.h
+    3rdparty/crc32qt.h \
+    src/grlida_pdf_viewer.h
 
 SOURCES += src/grlida_img_viewer.cpp \
     src/grlida_info.cpp \
@@ -100,7 +101,8 @@ SOURCES += src/grlida_img_viewer.cpp \
     src/main.cpp \
     src/qtzip.cpp \
     src/grlida_instalar_juego.cpp \
-    src/grlida_addedit_vdmsound.cpp
+    src/grlida_addedit_vdmsound.cpp \
+    src/grlida_pdf_viewer.cpp
 
 FORMS += ui/image_viewer.ui \
     ui/login_url.ui \
@@ -123,7 +125,8 @@ FORMS += ui/image_viewer.ui \
     ui/vdmsound.ui \
     ui/informacion.ui \
     ui/instalar_juego.ui \
-    ui/addedit_vdmsound.ui
+    ui/addedit_vdmsound.ui \
+    ui/pdf_viewer.ui
 
 # ###### 3rdparty Files
 HEADERS += 3rdparty/pictureflow-qt/pictureflow.h
@@ -136,6 +139,9 @@ HEADERS += 3rdparty/osdab-zip/zip.h \
         3rdparty/osdab-zip/zipentry_p.h
 SOURCES += 3rdparty/osdab-zip/zip.cpp \
         3rdparty/osdab-zip/unzip.cpp
+
+HEADERS += 3rdparty/doc_pdf_widget.h
+SOURCES += 3rdparty/doc_pdf_widget.cpp
 # ###### FIN 3rdparty
 
 RESOURCES += res/grlida.qrc
@@ -153,6 +159,7 @@ mac:ICON += gr-lida.icns
 mac|unix {
     LIBS += -lz
 }
+LIBS += -lpoppler-qt4
 
 # ###### Install
 !win32 { 

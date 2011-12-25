@@ -33,6 +33,7 @@
 #include "grlida_importar_juego.h"
 #include "grlida_exportar_juego.h"
 #include "grlida_img_viewer.h"
+#include "grlida_pdf_viewer.h"
 #include "grlida_multimedia.h"
 #include "grlida_ruleta.h"
 #include "stardelegate.h"
@@ -1453,6 +1454,8 @@ void GrLida::MostrarArchivosURLDelJuego(QString IDitem)
 				QString file_ico = query.record().value("tipo").toString();
 				if( file_ico == "manual" )
 					item_files->setIcon( 0, QIcon(stTheme+"img16/datos_1.png") ); // icono
+				else if( file_ico == "pdf" )
+					item_files->setIcon( 0, QIcon(stTheme+"img16/pdf.png") ); // icono
 				else if( file_ico == "ruleta" )
 					item_files->setIcon( 0, QIcon(stTheme+"img16/ruleta.png") ); // icono
 				else if( file_ico == "archivo" )
@@ -1778,6 +1781,13 @@ void GrLida::on_twFiles_Dblclicked(QTreeWidgetItem *twItem)
 			imgViewer->setWindowModality(Qt::WindowModal);
 			imgViewer->show();
 			imgViewer->openZip( twItem->text(4) );
+		}
+		else if( twItem->text(5) == "pdf" )
+		{
+			PdfViewer *pdfViewer = new PdfViewer(this);
+			pdfViewer->setWindowModality(Qt::NonModal);
+			pdfViewer->show();
+			pdfViewer->openPdf( twItem->text(4) );
 		}
 		else if( twItem->text(5) == "ruleta" )
 		{

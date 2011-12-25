@@ -25,6 +25,7 @@
 #include "grlida_addedit_juego.h"
 #include "grlida_addedit_url.h"
 #include "grlida_img_viewer.h"
+#include "grlida_pdf_viewer.h"
 #include "grlida_importar_juego.h"
 #include "grlida_ruleta.h"
 #include "crc32qt.h"
@@ -261,6 +262,7 @@ void frmAddEditJuego::CargarConfig()
 
 	ui.cbxDatos_TipoArchivo->clear();
 	ui.cbxDatos_TipoArchivo->addItem(QIcon(stTheme+"img16/datos_1.png") , tr("Documentos - Manuales")+" - (cbz - zip)", "manual");
+	ui.cbxDatos_TipoArchivo->addItem(QIcon(stTheme+"img16/pdf.png")     , tr("Documentos - Manuales")+" - (pdf)", "pdf");
 	ui.cbxDatos_TipoArchivo->addItem(QIcon(stTheme+"img16/ruleta.png")  , tr("Ruleta de protección")+" - (conf - zip)", "ruleta");
 	ui.cbxDatos_TipoArchivo->addItem(QIcon(stTheme+"img16/archivos.png"), tr("Cualquier archivos"), "");
 
@@ -524,6 +526,8 @@ void frmAddEditJuego::CargarDatosJuego(QString stIDIndex)
 			QString file_ico = query.record().value("tipo").toString();
 			if( file_ico == "manual" )
 				item_files->setIcon( 0, QIcon(stTheme+"img16/datos_1.png") ); // icono
+			else if( file_ico == "pdf" )
+				item_files->setIcon( 0, QIcon(stTheme+"img16/pdf.png") ); // icono
 			else if( file_ico == "ruleta" )
 				item_files->setIcon( 0, QIcon(stTheme+"img16/ruleta.png") ); // icono
 			else if( file_ico == "archivo" )
@@ -1365,9 +1369,12 @@ void frmAddEditJuego::on_btnDatosFiles_PathFile()
 			tipo_archivo = tr("Documentos - Manuales") +" - (*.cbz *.zip);;"+ tr("Todos los archivo") +" (*)";
 		break;
 		case 1:
-			tipo_archivo = tr("Ruleta de protección") +" - (*.conf *.zip);;"+ tr("Todos los archivo") +" (*)";
+			tipo_archivo = tr("Documentos - Manuales") +" - (*.pdf);;"+ tr("Todos los archivo") +" (*)";
 		break;
 		case 2:
+			tipo_archivo = tr("Ruleta de protección") +" - (*.conf *.zip);;"+ tr("Todos los archivo") +" (*)";
+		break;
+		case 3:
 			tipo_archivo = tr("Todos los archivo") +" (*)";
 		break;
 		default:
@@ -1421,6 +1428,8 @@ void frmAddEditJuego::on_btnAddFile()
 		QString file_ico;
 		if( datos_file["Fil_tipo"] == "manual" )
 			file_ico = stTheme+"img16/datos_1.png";
+		else if( datos_file["Fil_tipo"] == "pdf" )
+			file_ico = stTheme+"img16/pdf.png";
 		else if( datos_file["Fil_tipo"] == "ruleta" )
 			file_ico = stTheme+"img16/ruleta.png";
 		else if( datos_file["Fil_tipo"] == "archivo" )
@@ -1480,6 +1489,8 @@ void frmAddEditJuego::on_btnUpdateFile()
 		QString file_ico;
 		if( datos_file["Fil_tipo"] == "manual" )
 			file_ico = stTheme+"img16/datos_1.png";
+		else if( datos_file["Fil_tipo"] == "pdf" )
+			file_ico = stTheme+"img16/pdf.png";
 		else if( datos_file["Fil_tipo"] == "ruleta" )
 			file_ico = stTheme+"img16/ruleta.png";
 		else if( datos_file["Fil_tipo"] == "archivo" )
@@ -1536,6 +1547,13 @@ void frmAddEditJuego::on_twDatosFiles_Dblclicked(QTreeWidgetItem *item)
 			imgViewer->setWindowModality(Qt::WindowModal);
 			imgViewer->show();
 			imgViewer->openZip( item->text(4) );
+		}
+		else if( item->text(7) == "pdf" )
+		{
+			PdfViewer *pdfViewer = new PdfViewer(this);
+			pdfViewer->setWindowModality(Qt::NonModal);
+			pdfViewer->show();
+			pdfViewer->openPdf( item->text(4) );
 		}
 		else if( item->text(7) == "ruleta" )
 		{
