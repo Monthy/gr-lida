@@ -26,8 +26,6 @@
 #define IMAGEVIEWER_H
 
 #include <QMainWindow>
-#include <QtCore>
-#include <QtGui>
 #include <QPrinter>
 #include <QGraphicsRectItem>
 
