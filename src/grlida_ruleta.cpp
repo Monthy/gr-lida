@@ -24,8 +24,8 @@
 
 #include "grlida_ruleta.h"
 
-frmRuleta::frmRuleta(QDialog *parent, Qt::WFlags flags)
-    : QDialog( parent, flags )
+frmRuleta::frmRuleta(QWidget *parent, Qt::WFlags flags)
+	: QMainWindow(parent, flags)
 {
 	ui.setupUi(this);
 

@@ -1791,11 +1791,10 @@ void GrLida::on_twFiles_Dblclicked(QTreeWidgetItem *twItem)
 		}
 		else if( twItem->text(5) == "ruleta" )
 		{
-			frmRuleta *m_Ruleta = new frmRuleta(0, Qt::Window);
-			m_Ruleta->setWindowModality(Qt::WindowModal);
+			frmRuleta *m_Ruleta = new frmRuleta(this);
+			m_Ruleta->setWindowModality(Qt::NonModal);
+			m_Ruleta->show();
 			m_Ruleta->CargarRuleta(twItem->text(4));
-			m_Ruleta->exec();
-			delete m_Ruleta;
 		} else
 			fGrl.abrirArchivo( twItem->text(4) );
 	}

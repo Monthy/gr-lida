@@ -26,20 +26,18 @@
 #define GRLIDA_RULETA_H
 
 #include <QMainWindow>
-#include <QtCore>
-#include <QtGui>
 #include <QGraphicsRectItem>
 
 #include "funciones.h"
 #include "qtzip.h"
 #include "ui_ruleta.h"
 
-class frmRuleta : public QDialog
+class frmRuleta : public QMainWindow
 {
     Q_OBJECT
 
 public:
-	frmRuleta(QDialog *parent = 0, Qt::WFlags flags = 0);
+	frmRuleta(QWidget *parent = 0, Qt::WFlags flags = 0);
 	~frmRuleta();
 
 	Ui::RuletaClass ui;

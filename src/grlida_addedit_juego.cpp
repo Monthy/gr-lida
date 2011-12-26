@@ -1557,10 +1557,10 @@ void frmAddEditJuego::on_twDatosFiles_Dblclicked(QTreeWidgetItem *item)
 		}
 		else if( item->text(7) == "ruleta" )
 		{
-			frmRuleta *m_Ruleta = new frmRuleta(0, Qt::Window);
-			m_Ruleta->setWindowModality(Qt::WindowModal);
-			m_Ruleta->CargarRuleta(item->text(4));
+			frmRuleta *m_Ruleta = new frmRuleta(this);
+			m_Ruleta->setWindowModality(Qt::NonModal);
 			m_Ruleta->show();
+			m_Ruleta->CargarRuleta(item->text(4));
 		} else
 			fGrl.abrirArchivo( item->text(4) );
 	}
