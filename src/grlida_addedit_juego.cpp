@@ -1544,7 +1544,7 @@ void frmAddEditJuego::on_twDatosFiles_Dblclicked(QTreeWidgetItem *item)
 		if( item->text(7) == "manual" )
 		{
 			ImageViewer *imgViewer = new ImageViewer(this);
-			imgViewer->setWindowModality(Qt::WindowModal);
+			imgViewer->setWindowModality(Qt::NonModal);
 			imgViewer->show();
 			imgViewer->openZip( item->text(4) );
 		}

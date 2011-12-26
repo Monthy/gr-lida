@@ -1778,7 +1778,7 @@ void GrLida::on_twFiles_Dblclicked(QTreeWidgetItem *twItem)
 		if( twItem->text(5) == "manual" )
 		{
 			ImageViewer *imgViewer = new ImageViewer(this);
-			imgViewer->setWindowModality(Qt::WindowModal);
+			imgViewer->setWindowModality(Qt::NonModal);
 			imgViewer->show();
 			imgViewer->openZip( twItem->text(4) );
 		}
