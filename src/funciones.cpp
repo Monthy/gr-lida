@@ -491,6 +491,7 @@ QHash<QString, QVariant> Funciones::CargarGRLConfig(QString iniFileName)
 		config["Skip_PicFlow"]      = settings.value("Skip_PicFlow" , 10).toInt();
 		config["IndexTabArchivos"]  = settings.value("IndexTabArchivos", 0).toInt();
 		config["VersionDBx"]        = settings.value("VersionDBx", "0.74").toString();
+		config["OpenPdfExternal"]   = settings.value("OpenPdfExternal", false).toBool();
 	settings.endGroup();
 
 	settings.beginGroup("OpcFuente");
@@ -533,6 +534,11 @@ QHash<QString, QVariant> Funciones::CargarGRLConfig(QString iniFileName)
 		config["img_maximized"]    = settings.value("maximized"  , false).toBool();
 		config["fitToWindow"]      = settings.value("fitToWindow", false).toBool();
 		config["verListaImagenes"] = settings.value("verListaImagenes", false).toBool();
+	settings.endGroup();
+
+	settings.beginGroup("PdfViewerState");
+		config["pdf_maximized"]    = settings.value("maximized"     , false).toBool();
+		config["showTextSelect"]   = settings.value("showTextSelect", false).toBool();
 	settings.endGroup();
 
 	settings.beginGroup("OpcMultimedia");
@@ -629,6 +635,7 @@ void Funciones::GuardarGRLConfig(QString iniFileName, QHash<QString, QVariant> c
 		settings.setValue("Skip_PicFlow"     , config["Skip_PicFlow"]      );
 		settings.setValue("IndexTabArchivos" , config["IndexTabArchivos"]  );
 		settings.setValue("VersionDBx"       , config["VersionDBx"]        );
+		settings.setValue("OpenPdfExternal"  , config["OpenPdfExternal"]   );
 	settings.endGroup();
 
 	settings.beginGroup("OpcFuente");
@@ -671,6 +678,11 @@ void Funciones::GuardarGRLConfig(QString iniFileName, QHash<QString, QVariant> c
 		settings.setValue("maximized"       , config["img_maximized"]   );
 		settings.setValue("fitToWindow"     , config["fitToWindow"]     );
 		settings.setValue("verListaImagenes", config["verListaImagenes"]);
+	settings.endGroup();
+
+	settings.beginGroup("PdfViewerState");
+		settings.setValue("maximized"     , config["pdf_maximized"] );
+		settings.setValue("showTextSelect", config["showTextSelect"]);
 	settings.endGroup();
 
 	settings.beginGroup("OpcMultimedia");

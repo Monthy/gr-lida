@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>500</height>
+    <height>523</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -589,6 +589,13 @@
             </property>
             <property name="checked">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="chkOpenPdfExternal">
+            <property name="text">
+             <string>Abrir los archivos PDF com un programa externo </string>
             </property>
            </widget>
           </item>

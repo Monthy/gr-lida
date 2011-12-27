@@ -1784,10 +1784,14 @@ void GrLida::on_twFiles_Dblclicked(QTreeWidgetItem *twItem)
 		}
 		else if( twItem->text(5) == "pdf" )
 		{
-			PdfViewer *pdfViewer = new PdfViewer(this);
-			pdfViewer->setWindowModality(Qt::NonModal);
-			pdfViewer->show();
-			pdfViewer->openPdf( twItem->text(4) );
+			if( GRLConfig["OpenPdfExternal"].toBool() )
+				fGrl.abrirArchivo( twItem->text(4) );
+			else {
+				PdfViewer *pdfViewer = new PdfViewer(this);
+				pdfViewer->setWindowModality(Qt::NonModal);
+				pdfViewer->show();
+				pdfViewer->openPdf( twItem->text(4) );
+			}
 		}
 		else if( twItem->text(5) == "ruleta" )
 		{

@@ -1550,10 +1550,14 @@ void frmAddEditJuego::on_twDatosFiles_Dblclicked(QTreeWidgetItem *item)
 		}
 		else if( item->text(7) == "pdf" )
 		{
-			PdfViewer *pdfViewer = new PdfViewer(this);
-			pdfViewer->setWindowModality(Qt::NonModal);
-			pdfViewer->show();
-			pdfViewer->openPdf( item->text(4) );
+			if( GRLConfig["OpenPdfExternal"].toBool() )
+				fGrl.abrirArchivo( item->text(4) );
+			else {
+				PdfViewer *pdfViewer = new PdfViewer(this);
+				pdfViewer->setWindowModality(Qt::NonModal);
+				pdfViewer->show();
+				pdfViewer->openPdf( item->text(4) );
+			}
 		}
 		else if( item->text(7) == "ruleta" )
 		{

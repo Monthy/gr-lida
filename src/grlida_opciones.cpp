@@ -103,6 +103,7 @@ void frmOpciones::CargarConfig()
 	url_xmldb = GRLConfig["url_xmldb"].toString();
 	ui.chkComprobarVersionGrl->setChecked( GRLConfig["chkVersion"].toBool() );
 	ui.chkShowNext->setChecked( GRLConfig["Primeravez"].toBool() );
+	ui.chkOpenPdfExternal->setChecked( GRLConfig["OpenPdfExternal"].toBool() );
 	ui.txtFormatoFecha->setText( GRLConfig["FormatoFecha"].toString() );
 // Base de Datos
 	stdb_type = GRLConfig["db_type"].toString();
@@ -202,6 +203,7 @@ void frmOpciones::GuardarConfig()
 	GRLConfig["db_port"]           = ui.txt_dbport->text();
 // OpcGeneral
 	GRLConfig["Primeravez"]        = ui.chkShowNext->isChecked();
+	GRLConfig["OpenPdfExternal"]   = ui.chkOpenPdfExternal->isChecked();
 	GRLConfig["DirDOSBox"]         = ui.txtDirDbx->text();
 	GRLConfig["DirScummVM"]        = ui.txtDirSvm->text();
 	GRLConfig["DOSBoxDisp"]        = ui.chkDOSBoxDisp->isChecked();
