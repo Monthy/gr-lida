@@ -595,7 +595,7 @@
           <item>
            <widget class="QCheckBox" name="chkOpenPdfExternal">
             <property name="text">
-             <string>Abrir los archivos PDF com un programa externo </string>
+             <string>Abrir los archivos PDF con un programa externo</string>
             </property>
            </widget>
           </item>

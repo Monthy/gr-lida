@@ -172,7 +172,7 @@ void PdfViewer::openPdf(QString fileName)
 		ui.cbxOrden->setEnabled(true);
 		ui.cbxZoom->setEnabled(true);
 	} else
-		QMessageBox::warning(this, tr("PDF Viewer - Failed to Open File"), tr("The specified file could not be opened."));
+		QMessageBox::warning(this, windowTitle(), tr("El archivo especificado no se ha podido abrir."));
 }
 
 void PdfViewer::buscarTexto()

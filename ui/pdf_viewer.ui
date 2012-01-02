@@ -352,7 +352,7 @@
        <item>
         <widget class="QLabel" name="lb_zoom">
          <property name="text">
-          <string>Scala del documento:</string>
+          <string>Escala del documento:</string>
          </property>
          <property name="buddy">
           <cstring>cbxZoom</cstring>

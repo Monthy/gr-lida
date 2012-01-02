@@ -1857,57 +1857,57 @@
 <context>
     <name>ConfigInicialClass</name>
     <message utf8="true">
-        <location filename="../ui/configinicial.ui" line="26"/>
+        <location filename="../ui/configinicial.ui" line="20"/>
         <source>Configuración Inicial del GR-lida</source>
         <translation>Általános GR-lida konfiguráció</translation>
     </message>
     <message>
-        <location filename="../ui/configinicial.ui" line="155"/>
+        <location filename="../ui/configinicial.ui" line="149"/>
         <source>Bienvenidos a GR-lida</source>
         <translation>Üdvözöljük a GR-lida-ban</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/configinicial.ui" line="177"/>
+        <location filename="../ui/configinicial.ui" line="171"/>
         <source>Esta es la primera vez que lo abres o todaví­a no lo has configurado y para poder utilizar el programa correctamente debes configurarlo primero con estas sencillas opciones</source>
         <translation>Ez az ön első program futtatása vagy a program még nem lett konfigurálva. A program használatához a következő opciókat kell beállítani</translation>
     </message>
     <message>
-        <location filename="../ui/configinicial.ui" line="210"/>
+        <location filename="../ui/configinicial.ui" line="204"/>
         <source>Seleccionar Idioma:</source>
         <translation>Válasszon nyelvet:</translation>
     </message>
     <message>
-        <location filename="../ui/configinicial.ui" line="229"/>
+        <location filename="../ui/configinicial.ui" line="223"/>
         <source>Tengo instalado el emulador DOSBox</source>
         <translation>DOSBOX fel van telepítve</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/configinicial.ui" line="256"/>
+        <location filename="../ui/configinicial.ui" line="250"/>
         <source>Dirección del DOSBox:</source>
         <translation>DOSBox útvonal:</translation>
     </message>
     <message>
-        <location filename="../ui/configinicial.ui" line="298"/>
+        <location filename="../ui/configinicial.ui" line="292"/>
         <source>Tengo instalado el emulador ScummVM</source>
         <translation>ScummVM fel van telepítve</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/configinicial.ui" line="325"/>
+        <location filename="../ui/configinicial.ui" line="319"/>
         <source>Dirección del ScummVM:</source>
         <translation>ScummVM útvonal:</translation>
     </message>
     <message>
-        <location filename="../ui/configinicial.ui" line="383"/>
+        <location filename="../ui/configinicial.ui" line="377"/>
         <source>Tengo instalado el emulador VDMSound</source>
         <translation>VDMSound fel van telepítve</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/configinicial.ui" line="390"/>
+        <location filename="../ui/configinicial.ui" line="384"/>
         <source>Mostrar la próxima vez que inicie</source>
         <translation>Jelenjen meg ez az ablak a program minden futtatásakor</translation>
     </message>
     <message>
-        <location filename="../ui/configinicial.ui" line="421"/>
+        <location filename="../ui/configinicial.ui" line="415"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
@@ -2328,12 +2328,12 @@ A varázsló bezárásához kattincson az OK-ra
 <context>
     <name>GrLida</name>
     <message>
-        <location filename="../src/grlida.cpp" line="227"/>
+        <location filename="../src/grlida.cpp" line="228"/>
         <source>Error al abrir la Base de Datos</source>
         <translation>Hiba történt az adatbázis megnyitásakor</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="227"/>
+        <location filename="../src/grlida.cpp" line="228"/>
         <source>No se ha podido establecer una conexiÃ³n con la Base de Datos.
 Esta aplicaciÃ³n necesita soporte de SQLite. Mira la documentaciÃ³n de Qt SQL driver para mÃ¡s informaciÃ³n.
 
@@ -2344,411 +2344,411 @@ Ez az alkalmazás SQLite-ot kér. Olvassa el a Qt-SQL driver dokumentumot több 
 Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="356"/>
+        <location filename="../src/grlida.cpp" line="357"/>
         <source>Genero sin Clasificar</source>
         <translation>Ismeretlen műfaj</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="359"/>
+        <location filename="../src/grlida.cpp" line="360"/>
         <source>CalificaciÃ³n GrÃ¡ficos</source>
         <translation>Grafikai értékelés</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="361"/>
+        <location filename="../src/grlida.cpp" line="362"/>
         <source>CalificaciÃ³n Sonido</source>
         <translation>Hang értékelés</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="363"/>
+        <location filename="../src/grlida.cpp" line="364"/>
         <source>CalificaciÃ³n Jugabilidad</source>
         <translation>Játszhatóság értékelés</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="367"/>
+        <location filename="../src/grlida.cpp" line="368"/>
         <source>Juegos Originales</source>
         <translation>Eredeti játékok</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="369"/>
-        <location filename="../src/grlida.cpp" line="376"/>
+        <location filename="../src/grlida.cpp" line="370"/>
+        <location filename="../src/grlida.cpp" line="377"/>
         <source>No lo son</source>
         <translation>Ők nem</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="374"/>
+        <location filename="../src/grlida.cpp" line="375"/>
         <source>Juegos Favoritos</source>
         <translation>Kedvenc Játékok</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="379"/>
-        <location filename="../src/grlida.cpp" line="1124"/>
+        <location filename="../src/grlida.cpp" line="380"/>
+        <location filename="../src/grlida.cpp" line="1125"/>
         <source>CalificaciÃ³n</source>
         <translation>Értékelés</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="419"/>
-        <location filename="../src/grlida.cpp" line="421"/>
-        <location filename="../src/grlida.cpp" line="2024"/>
-        <location filename="../src/grlida.cpp" line="2044"/>
-        <location filename="../src/grlida.cpp" line="2065"/>
-        <location filename="../src/grlida.cpp" line="2101"/>
-        <location filename="../src/grlida.cpp" line="2227"/>
-        <location filename="../src/grlida.cpp" line="2628"/>
+        <location filename="../src/grlida.cpp" line="420"/>
+        <location filename="../src/grlida.cpp" line="422"/>
+        <location filename="../src/grlida.cpp" line="2037"/>
+        <location filename="../src/grlida.cpp" line="2057"/>
+        <location filename="../src/grlida.cpp" line="2078"/>
+        <location filename="../src/grlida.cpp" line="2114"/>
+        <location filename="../src/grlida.cpp" line="2240"/>
+        <location filename="../src/grlida.cpp" line="2641"/>
         <source>NÂº Juegos</source>
         <translation>Játékok száma</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="592"/>
+        <location filename="../src/grlida.cpp" line="593"/>
         <source>Ordenar:</source>
         <translation>Rendezés:</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="598"/>
-        <location filename="../src/grlida.cpp" line="628"/>
+        <location filename="../src/grlida.cpp" line="599"/>
+        <location filename="../src/grlida.cpp" line="629"/>
         <source>Por ID</source>
         <translation>ID szerint</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="599"/>
-        <location filename="../src/grlida.cpp" line="629"/>
+        <location filename="../src/grlida.cpp" line="600"/>
+        <location filename="../src/grlida.cpp" line="630"/>
         <source>Titulo</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="600"/>
-        <location filename="../src/grlida.cpp" line="630"/>
-        <location filename="../src/grlida.cpp" line="1127"/>
+        <location filename="../src/grlida.cpp" line="601"/>
+        <location filename="../src/grlida.cpp" line="631"/>
+        <location filename="../src/grlida.cpp" line="1128"/>
         <source>Subtitulo</source>
         <translation>Alcím</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="601"/>
-        <location filename="../src/grlida.cpp" line="631"/>
-        <location filename="../src/grlida.cpp" line="1135"/>
+        <location filename="../src/grlida.cpp" line="602"/>
+        <location filename="../src/grlida.cpp" line="632"/>
+        <location filename="../src/grlida.cpp" line="1136"/>
         <source>Genero</source>
         <translation>Műfaj</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="602"/>
-        <location filename="../src/grlida.cpp" line="632"/>
+        <location filename="../src/grlida.cpp" line="603"/>
+        <location filename="../src/grlida.cpp" line="633"/>
         <source>CompaÃ±ia</source>
         <translation>Kiadó</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="603"/>
-        <location filename="../src/grlida.cpp" line="633"/>
+        <location filename="../src/grlida.cpp" line="604"/>
+        <location filename="../src/grlida.cpp" line="634"/>
         <source>Desarrollador</source>
         <translation>Fejlesztő</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="604"/>
-        <location filename="../src/grlida.cpp" line="634"/>
-        <location filename="../src/grlida.cpp" line="711"/>
-        <location filename="../src/grlida.cpp" line="1136"/>
+        <location filename="../src/grlida.cpp" line="605"/>
+        <location filename="../src/grlida.cpp" line="635"/>
+        <location filename="../src/grlida.cpp" line="712"/>
+        <location filename="../src/grlida.cpp" line="1137"/>
         <source>Tema</source>
         <translation>Téma</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="605"/>
-        <location filename="../src/grlida.cpp" line="635"/>
-        <location filename="../src/grlida.cpp" line="723"/>
-        <location filename="../src/grlida.cpp" line="1132"/>
+        <location filename="../src/grlida.cpp" line="606"/>
+        <location filename="../src/grlida.cpp" line="636"/>
+        <location filename="../src/grlida.cpp" line="724"/>
+        <location filename="../src/grlida.cpp" line="1133"/>
         <source>Idioma</source>
         <translation>Nyelv</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="606"/>
-        <location filename="../src/grlida.cpp" line="636"/>
-        <location filename="../src/grlida.cpp" line="1134"/>
+        <location filename="../src/grlida.cpp" line="607"/>
+        <location filename="../src/grlida.cpp" line="637"/>
+        <location filename="../src/grlida.cpp" line="1135"/>
         <source>Formato</source>
         <translation>Formátum</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="607"/>
-        <location filename="../src/grlida.cpp" line="637"/>
-        <location filename="../src/grlida.cpp" line="720"/>
+        <location filename="../src/grlida.cpp" line="608"/>
+        <location filename="../src/grlida.cpp" line="638"/>
+        <location filename="../src/grlida.cpp" line="721"/>
         <source>AÃ±o</source>
         <translation>Év</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="608"/>
-        <location filename="../src/grlida.cpp" line="638"/>
+        <location filename="../src/grlida.cpp" line="609"/>
+        <location filename="../src/grlida.cpp" line="639"/>
         <source>NÂº Discos</source>
         <translation>Lemezek száma</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="609"/>
-        <location filename="../src/grlida.cpp" line="639"/>
-        <source>Sistema OS</source>
-        <translation>Operációs rendszer</translation>
-    </message>
-    <message>
         <location filename="../src/grlida.cpp" line="610"/>
         <location filename="../src/grlida.cpp" line="640"/>
-        <location filename="../src/grlida.cpp" line="1141"/>
-        <source>GrÃ¡ficos</source>
-        <translation>Grafika</translation>
+        <source>Sistema OS</source>
+        <translation>Operációs rendszer</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="611"/>
         <location filename="../src/grlida.cpp" line="641"/>
         <location filename="../src/grlida.cpp" line="1142"/>
-        <source>Sonido</source>
-        <translation>Hang</translation>
+        <source>GrÃ¡ficos</source>
+        <translation>Grafika</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="612"/>
         <location filename="../src/grlida.cpp" line="642"/>
         <location filename="../src/grlida.cpp" line="1143"/>
-        <source>Jugabilidad</source>
-        <translation>Játszhatóság</translation>
+        <source>Sonido</source>
+        <translation>Hang</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="613"/>
         <location filename="../src/grlida.cpp" line="643"/>
         <location filename="../src/grlida.cpp" line="1144"/>
-        <source>Original</source>
-        <translation>Eredeti</translation>
+        <source>Jugabilidad</source>
+        <translation>Játszhatóság</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="614"/>
         <location filename="../src/grlida.cpp" line="644"/>
-        <source>Tipo emulador</source>
-        <translation>Emuláció típus</translation>
+        <location filename="../src/grlida.cpp" line="1145"/>
+        <source>Original</source>
+        <translation>Eredeti</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="615"/>
         <location filename="../src/grlida.cpp" line="645"/>
-        <location filename="../src/grlida.cpp" line="1139"/>
-        <source>Favorito</source>
-        <translation>Kedvenc</translation>
+        <source>Tipo emulador</source>
+        <translation>Emuláció típus</translation>
     </message>
     <message>
         <location filename="../src/grlida.cpp" line="616"/>
         <location filename="../src/grlida.cpp" line="646"/>
-        <location filename="../src/grlida.cpp" line="1148"/>
+        <location filename="../src/grlida.cpp" line="1140"/>
+        <source>Favorito</source>
+        <translation>Kedvenc</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida.cpp" line="617"/>
+        <location filename="../src/grlida.cpp" line="647"/>
+        <location filename="../src/grlida.cpp" line="1149"/>
         <source>Rating</source>
         <translation>Értékelés</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="622"/>
+        <location filename="../src/grlida.cpp" line="623"/>
         <source>por</source>
         <translation>által</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="652"/>
+        <location filename="../src/grlida.cpp" line="653"/>
         <source>Ascendente</source>
         <translation>Növekvő</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="653"/>
+        <location filename="../src/grlida.cpp" line="654"/>
         <source>Descendente</source>
         <translation>Csökkenő</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="662"/>
+        <location filename="../src/grlida.cpp" line="663"/>
         <source>Ordenar</source>
         <translation>Rendez</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="698"/>
+        <location filename="../src/grlida.cpp" line="699"/>
         <source>Todos</source>
         <translation>Mind</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="699"/>
+        <location filename="../src/grlida.cpp" line="700"/>
         <source>Favoritos</source>
         <translation>Kedvencek</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="700"/>
+        <location filename="../src/grlida.cpp" line="701"/>
         <source>Originales</source>
         <translation>Eredeti</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="701"/>
+        <location filename="../src/grlida.cpp" line="702"/>
         <source>Tipo Emulador</source>
         <translation>Emuláció típus</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="708"/>
+        <location filename="../src/grlida.cpp" line="709"/>
         <source>Generos</source>
         <translation>Műfaj</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="714"/>
+        <location filename="../src/grlida.cpp" line="715"/>
         <source>Desarrolladores</source>
         <translation>Fejlesztők</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="717"/>
+        <location filename="../src/grlida.cpp" line="718"/>
         <source>CompaÃ±ias</source>
         <translation>Kiadók</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1122"/>
+        <location filename="../src/grlida.cpp" line="1123"/>
         <source>CarÃ¡tula Frontal</source>
         <translation>Előlap</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1123"/>
+        <location filename="../src/grlida.cpp" line="1124"/>
         <source>Detalles del juego</source>
         <translation>Játék részletek</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1125"/>
+        <location filename="../src/grlida.cpp" line="1126"/>
         <source>Otros Datos</source>
         <translation>Egyéb részletek</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1126"/>
+        <location filename="../src/grlida.cpp" line="1127"/>
         <source>Subido por</source>
         <translation>Feltöltötte</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1128"/>
+        <location filename="../src/grlida.cpp" line="1129"/>
         <source>Publicado por</source>
         <translation>Kiadta</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1129"/>
+        <location filename="../src/grlida.cpp" line="1130"/>
         <source>Desarrollado por</source>
         <translation>Fejlesztette</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1130"/>
+        <location filename="../src/grlida.cpp" line="1131"/>
         <source>Publicado</source>
         <translation>Kiadta</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1131"/>
+        <location filename="../src/grlida.cpp" line="1132"/>
         <source>Edad recomendada</source>
         <translation>Ajánlott életkor</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1133"/>
+        <location filename="../src/grlida.cpp" line="1134"/>
         <source>Idioma voces</source>
         <translation>Nyelvi hangok</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1137"/>
+        <location filename="../src/grlida.cpp" line="1138"/>
         <source>Perspectiva</source>
         <translation>Perspektíva</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1138"/>
+        <location filename="../src/grlida.cpp" line="1139"/>
         <source>Sistema Operativo</source>
         <translation>Operációs rendszer</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1140"/>
+        <location filename="../src/grlida.cpp" line="1141"/>
         <source>AÃ±adido el</source>
         <translation>Hozzáadva</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1145"/>
+        <location filename="../src/grlida.cpp" line="1146"/>
         <source>Estado</source>
         <translation>Sztátusz</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1146"/>
+        <location filename="../src/grlida.cpp" line="1147"/>
         <source>Tipo Emu</source>
         <translation>Emulátor típus</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1147"/>
+        <location filename="../src/grlida.cpp" line="1148"/>
         <source>DescripciÃ³n</source>
         <translation>Leírás</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="1404"/>
+        <location filename="../src/grlida.cpp" line="1405"/>
         <source>introducido el</source>
         <translation>Bevezette</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2184"/>
+        <location filename="../src/grlida.cpp" line="2197"/>
         <source>Porfavor selecciona un Juego de la lista para eliminarlo</source>
         <translation>Kérem válasszon ki egy játékot a listából amit törölni szeretne</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2186"/>
+        <location filename="../src/grlida.cpp" line="2199"/>
         <source>Â¿Eliminar Juego...?</source>
         <translation>Játék törlése...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2186"/>
+        <location filename="../src/grlida.cpp" line="2199"/>
         <source>Â¿Deseas realmente eliminar este juego de la Base de Datos?
 Si es de DOSBox o VDMSound tambien se borrar el archivo de configuraciÃ³n</source>
         <translation>Biztos szeretné törölni ezt a játékot az adatbázisból?
 Ha DOSBox-ot vagy VDMSound-ot használ, akkor a konfigurációs fájlok is törlődnek</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2186"/>
+        <location filename="../src/grlida.cpp" line="2199"/>
         <source>Si</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2186"/>
+        <location filename="../src/grlida.cpp" line="2199"/>
         <source>Cancelar</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2209"/>
+        <location filename="../src/grlida.cpp" line="2222"/>
         <source>Juego Eliminado correctamente</source>
         <translation>Játék sikeresen törölve</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2273"/>
-        <location filename="../src/grlida.cpp" line="2435"/>
+        <location filename="../src/grlida.cpp" line="2286"/>
+        <location filename="../src/grlida.cpp" line="2448"/>
         <source>ConfiguraciÃ³n del juego no encontrada.</source>
         <translation>Játék konfiguráció nem találaható.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2401"/>
+        <location filename="../src/grlida.cpp" line="2414"/>
         <source>No esta disponible el ejecutable del emulador.
 Compruebe si lo tiene instalado.</source>
         <translation>Az emulátor indítófájlja nem található.
 Ellenőrizze, hogy tényleg fel e van telepítve.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2429"/>
-        <location filename="../src/grlida.cpp" line="2452"/>
+        <location filename="../src/grlida.cpp" line="2442"/>
+        <location filename="../src/grlida.cpp" line="2465"/>
         <source>No se ha podido ejecutar el juego</source>
         <translation>A játék nem futtatható</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2454"/>
+        <location filename="../src/grlida.cpp" line="2467"/>
         <source>Solo disponible para SO, Windows (NT/2000/XP)</source>
         <translation>Csak Windows-on elérhető (NT/2000/XP)</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2458"/>
-        <location filename="../src/grlida.cpp" line="2508"/>
+        <location filename="../src/grlida.cpp" line="2471"/>
+        <location filename="../src/grlida.cpp" line="2521"/>
         <source>No dispones de ninguna configuraciÃ³n</source>
         <translation>Konfigurációs fájl nem elérhető</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2460"/>
+        <location filename="../src/grlida.cpp" line="2473"/>
         <source>Porfavor, seleccione un juego de la lista antes.</source>
         <translation>Kérem válasszon ki a listából egy játékot.</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2983"/>
-        <location filename="../src/grlida.cpp" line="2990"/>
-        <location filename="../src/grlida.cpp" line="2992"/>
-        <location filename="../src/grlida.cpp" line="2997"/>
-        <location filename="../src/grlida.cpp" line="2999"/>
-        <location filename="../src/grlida.cpp" line="3002"/>
+        <location filename="../src/grlida.cpp" line="2996"/>
+        <location filename="../src/grlida.cpp" line="3003"/>
+        <location filename="../src/grlida.cpp" line="3005"/>
+        <location filename="../src/grlida.cpp" line="3010"/>
+        <location filename="../src/grlida.cpp" line="3012"/>
+        <location filename="../src/grlida.cpp" line="3015"/>
         <source>Nueva VersiÃ³n</source>
         <translation>Új verzió</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2983"/>
+        <location filename="../src/grlida.cpp" line="2996"/>
         <source>Disponible nueva versiÃ³n del GR-lida %1</source>
         <translation>Új %1 verziójú GR-lida elérhető</translation>
     </message>
     <message>
-        <location filename="../src/grlida.cpp" line="2999"/>
+        <location filename="../src/grlida.cpp" line="3012"/>
         <source>No hay nuevas actualizaciones disponibles</source>
         <translation>Nincs új elérhető frissítés</translation>
     </message>
@@ -4228,211 +4228,332 @@ Ellenőrizze, hogy tényleg fel e van telepítve.</translation>
         <translation>Beállitási ablak megjelenítése a következő új szesszióban</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="619"/>
+        <location filename="../ui/opciones.ui" line="598"/>
+        <source>Abrir los archivos PDF con un programa externo</source>
+        <translation>Nyílt PDF fájlok egy külső program</translation>
+    </message>
+    <message>
+        <location filename="../ui/opciones.ui" line="626"/>
         <source>Base de Datos</source>
         <translation>Adatbázis</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="631"/>
+        <location filename="../ui/opciones.ui" line="638"/>
         <source>Opciones de la Base de Datos del GR-lida</source>
         <translation>GR-lida adatbázis opciók</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="663"/>
+        <location filename="../ui/opciones.ui" line="670"/>
         <source>Tipo de Base de Datos a usar:</source>
         <translation>Adatbázis típus:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="712"/>
+        <location filename="../ui/opciones.ui" line="719"/>
         <source>Dirección actual de la Base de Datos del GR-lida</source>
         <translation>Jelenlegi hivatkozás a GR-lida adatbázisához</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="748"/>
+        <location filename="../ui/opciones.ui" line="755"/>
         <source>Dirección de la BD:</source>
         <translation>Adatbázis hivatkozás:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="830"/>
+        <location filename="../ui/opciones.ui" line="837"/>
         <source>Otras Opciones de la Base de Datos del GR-lida</source>
         <translation>Más GR-lida adatbázis opciók</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="866"/>
+        <location filename="../ui/opciones.ui" line="873"/>
         <source>Servidor de la Base de Datos:</source>
         <translation>Adatbázis szerver:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="905"/>
+        <location filename="../ui/opciones.ui" line="912"/>
         <source>Nombre Base de Datos:</source>
         <translation>Adatbázis neve:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="944"/>
+        <location filename="../ui/opciones.ui" line="951"/>
         <source>Nombre del Usuario:</source>
         <translation>Adatbázis felhasználóneve:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="983"/>
+        <location filename="../ui/opciones.ui" line="990"/>
         <source>Password:</source>
         <translation>Jelszó:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1025"/>
-        <location filename="../ui/opciones.ui" line="1601"/>
+        <location filename="../ui/opciones.ui" line="1032"/>
+        <location filename="../ui/opciones.ui" line="1608"/>
         <source>Puerto:</source>
         <translation>Port:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1065"/>
+        <location filename="../ui/opciones.ui" line="1072"/>
         <source>Apariencia</source>
         <translation>Kezelőfelület</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1077"/>
+        <location filename="../ui/opciones.ui" line="1084"/>
         <source>Apariencia y estilo del GR-lida</source>
         <translation>GR-lida stílus és kezelőfelület</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1106"/>
+        <location filename="../ui/opciones.ui" line="1113"/>
         <source>Estilo de los botones:</source>
         <translation>Gombok stílusa:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1125"/>
+        <location filename="../ui/opciones.ui" line="1132"/>
         <source>Utilizar la gama de colores estándar del estilo</source>
         <translation>Stílus standard színek használata</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1143"/>
+        <location filename="../ui/opciones.ui" line="1150"/>
         <source>Usar tipo de Fuente independientemente del Theme</source>
         <translation>Betűtípus használata függetlenül a témától</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1167"/>
+        <location filename="../ui/opciones.ui" line="1174"/>
         <source>Tipo de Fuente:</source>
         <translation>Betűtípus:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1196"/>
+        <location filename="../ui/opciones.ui" line="1203"/>
         <source>Tamaño:</source>
         <translation>Méret:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1245"/>
+        <location filename="../ui/opciones.ui" line="1252"/>
         <source>Icono para el Favorito</source>
         <translation>Ikon kedvencekhez</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1269"/>
+        <location filename="../ui/opciones.ui" line="1276"/>
         <source>Seleccionar Icono:</source>
         <translation>Válasszon ikont:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1312"/>
+        <location filename="../ui/opciones.ui" line="1319"/>
         <source>Tipo Reflejo PictureFlow</source>
         <translation>PictureFlow visszatükröződési típus</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1336"/>
+        <location filename="../ui/opciones.ui" line="1343"/>
         <source>Seleccionar Reflejo:</source>
         <translation>Válasszon visszatükröződést:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1353"/>
+        <location filename="../ui/opciones.ui" line="1360"/>
         <source>Salto de imagen PictureFlow</source>
         <translation>PictureFlow kép ugrás száma</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1402"/>
+        <location filename="../ui/opciones.ui" line="1409"/>
         <source>Seleccionar Theme</source>
         <translation>Válasszon témát</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1418"/>
+        <location filename="../ui/opciones.ui" line="1425"/>
         <source>Marcar si las carátulas no coinciden en las estanterías de la lista de juegos.</source>
         <translation>Ellenőrizze, hogy a takarót nem ért egyet a polcokon a játék lista.</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1464"/>
+        <location filename="../ui/opciones.ui" line="1471"/>
         <source>Themes</source>
         <translation>Témák</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1469"/>
+        <location filename="../ui/opciones.ui" line="1476"/>
         <source>Autor</source>
         <translation>Szerző</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1474"/>
+        <location filename="../ui/opciones.ui" line="1481"/>
         <source>version</source>
         <translation>verzió</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1534"/>
+        <location filename="../ui/opciones.ui" line="1541"/>
         <source>Http Proxy</source>
         <translation>HTTP Proxy</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1546"/>
+        <location filename="../ui/opciones.ui" line="1553"/>
         <source>Configuración del Proxy</source>
         <translation>Proxy beállítások</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1557"/>
+        <location filename="../ui/opciones.ui" line="1564"/>
         <source>Tipo Proxy:</source>
         <translation>Proxy típus:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1574"/>
+        <location filename="../ui/opciones.ui" line="1581"/>
         <source>Conectarse a un HTTP a través de un servidor proxy</source>
         <translation>Kapcsolódás a HTTP-hoz proxy szerver segítségével</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1581"/>
+        <location filename="../ui/opciones.ui" line="1588"/>
         <source>Servidor:</source>
         <translation>Szerver:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1627"/>
+        <location filename="../ui/opciones.ui" line="1634"/>
         <source>Autentificación del servidor proxy</source>
         <translation>Proxy szerver bejelentkezés</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1634"/>
+        <location filename="../ui/opciones.ui" line="1641"/>
         <source>Usuario:</source>
         <translation>Felhasználónév:</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/opciones.ui" line="1654"/>
+        <location filename="../ui/opciones.ui" line="1661"/>
         <source>Contraseña:</source>
         <translation>Jelszó:</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1726"/>
+        <location filename="../ui/opciones.ui" line="1733"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../ui/opciones.ui" line="1743"/>
+        <location filename="../ui/opciones.ui" line="1750"/>
         <source>Cancelar</source>
         <translation>Mégse</translation>
     </message>
 </context>
 <context>
+    <name>PdfViewer</name>
+    <message>
+        <location filename="../src/grlida_pdf_viewer.cpp" line="65"/>
+        <source>Hacia adelante</source>
+        <translation>Csatárok</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_pdf_viewer.cpp" line="66"/>
+        <source>Hacia atras</source>
+        <translation>hátrafelé</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_pdf_viewer.cpp" line="115"/>
+        <source>Ver documentos en PDF</source>
+        <translation>PDF dokumentumok megtekintéséhez</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_pdf_viewer.cpp" line="145"/>
+        <source>Selecciona un archivo</source>
+        <translation>Válasszon ki egy fájlt</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_pdf_viewer.cpp" line="146"/>
+        <source>Abrir PDF</source>
+        <translation>Megnyitás PDF</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_pdf_viewer.cpp" line="147"/>
+        <source>Todos los archivo</source>
+        <translation>Összes fájlok</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_pdf_viewer.cpp" line="175"/>
+        <source>El archivo especificado no se ha podido abrir.</source>
+        <translation>A megadott fájl nem nyitható meg.</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_pdf_viewer.cpp" line="196"/>
+        <source>de</source>
+        <translation>a</translation>
+    </message>
+</context>
+<context>
+    <name>PdfViewerClass</name>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="14"/>
+        <source>Ver documentos en PDF</source>
+        <translation>PDF dokumentumok megtekintéséhez</translation>
+    </message>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="67"/>
+        <source>Cerrar</source>
+        <translation>Bezárás</translation>
+    </message>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="93"/>
+        <source>Abrir</source>
+        <translation>Megnyitás</translation>
+    </message>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="119"/>
+        <source>Ver texto seleccionado</source>
+        <translation>Nézet kijelölt szöveg</translation>
+    </message>
+    <message utf8="true">
+        <location filename="../ui/pdf_viewer.ui" line="146"/>
+        <source>Página:</source>
+        <translation>Oldal:</translation>
+    </message>
+    <message utf8="true">
+        <location filename="../ui/pdf_viewer.ui" line="171"/>
+        <source>Página anterior</source>
+        <translation>Előző oldal</translation>
+    </message>
+    <message utf8="true">
+        <location filename="../ui/pdf_viewer.ui" line="200"/>
+        <source>Página siguiente</source>
+        <translation>Következő oldal</translation>
+    </message>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="251"/>
+        <source>Buscar:</source>
+        <translation>Keresés:</translation>
+    </message>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="305"/>
+        <source>Buscar</source>
+        <translation>Keresés</translation>
+    </message>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="334"/>
+        <source>Limpiar</source>
+        <translation>Törlés</translation>
+    </message>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="355"/>
+        <source>Escala del documento:</source>
+        <translation>Scale a dokumentum:</translation>
+    </message>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="380"/>
+        <source>Ampliar</source>
+        <translation>Növelje</translation>
+    </message>
+    <message>
+        <location filename="../ui/pdf_viewer.ui" line="409"/>
+        <source>Reducir</source>
+        <translation>Csökkenteni</translation>
+    </message>
+    <message utf8="true">
+        <location filename="../ui/pdf_viewer.ui" line="445"/>
+        <source>Tamaño normal</source>
+        <translation>Normál méret</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
-        <location filename="../src/funciones.cpp" line="839"/>
+        <location filename="../src/funciones.cpp" line="860"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/funciones.cpp" line="883"/>
+        <location filename="../src/funciones.cpp" line="904"/>
         <source>Importar desde un archivo:</source>
         <translation>Importálás fájlból:</translation>
     </message>
     <message>
-        <location filename="../src/funciones.cpp" line="2211"/>
+        <location filename="../src/funciones.cpp" line="2231"/>
         <source>ConfiguraciÃ³n por Defecto</source>
         <translation>Alapértelmezett konfiguráció</translation>
     </message>
@@ -4591,17 +4712,17 @@ Ellenőrizze, hogy tényleg fel e van telepítve.</translation>
         <translation>Másolási védelem kerék</translation>
     </message>
     <message>
-        <location filename="../ui/ruleta.ui" line="210"/>
+        <location filename="../ui/ruleta.ui" line="211"/>
         <source>Ruleta 1</source>
         <translation>Kép 1</translation>
     </message>
     <message>
-        <location filename="../ui/ruleta.ui" line="245"/>
+        <location filename="../ui/ruleta.ui" line="246"/>
         <source>Ruleta 2</source>
         <translation>Kép 2</translation>
     </message>
     <message>
-        <location filename="../ui/ruleta.ui" line="280"/>
+        <location filename="../ui/ruleta.ui" line="281"/>
         <source>Ruleta 3</source>
         <translation>Kép 3</translation>
     </message>
@@ -5162,129 +5283,132 @@ Varázsló befejezéséhez kattincson az OK-ra
 <context>
     <name>frmAddEditJuego</name>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="196"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="198"/>
         <source>Datos</source>
         <translation>Adat</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="197"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="199"/>
         <source>DOSBox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="198"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="200"/>
         <source>ScummVM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="199"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="201"/>
         <source>VDMSound</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="262"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1364"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="264"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="265"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1369"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1372"/>
         <source>Documentos - Manuales</source>
         <translation>Dokumentumok - Kézikönyvek</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="263"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1367"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="266"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
         <source>Ruleta de protecciÃ³n</source>
         <translation>Másolási védelem kerék</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="264"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="267"/>
         <source>Cualquier archivos</source>
         <translation>Bármely fájlok</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="267"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="268"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="269"/>
         <location filename="../src/grlida_addedit_juego.cpp" line="270"/>
         <location filename="../src/grlida_addedit_juego.cpp" line="271"/>
         <location filename="../src/grlida_addedit_juego.cpp" line="272"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="273"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="274"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="275"/>
         <source>Puntos</source>
         <translation>Pontszám</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="346"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="349"/>
         <source>Editando a</source>
         <translation>Szerkesztése a</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="349"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="352"/>
         <source>AÃ±adiendo un nuevo juego</source>
         <translation>Új játék hozzáadása</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="371"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="374"/>
         <source>Debes poner un Titulo al juego</source>
         <translation>Meg kell határoznia a játék címét</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="816"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="838"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="860"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1345"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1376"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="821"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="843"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="865"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1350"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1384"/>
         <source>Selecciona un archivo</source>
         <translation>Válasszon ki egy fájlt</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="817"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="839"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="861"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="822"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="844"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="866"/>
         <source>Imagenes Soportadas</source>
         <translation>Támogatott képek</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="818"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="840"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="862"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1345"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1364"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1367"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1370"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1373"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="823"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="845"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="867"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1350"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1369"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1372"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1378"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1381"/>
         <source>Todos los archivo</source>
         <translation>Összes fájlok</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1319"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
         <source>Â¿Eliminar url...?</source>
         <translation>Hivatkozás törlése?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1319"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
         <source>Â¿Deseas eliminar esta url?</source>
         <translation>Akarja törölni ezt a hivatkozást?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1319"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1517"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
         <source>Si</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1319"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1517"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1345"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1350"/>
         <source>Ejecutables</source>
         <translation>Végrehajtható</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1517"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
         <source>Â¿Eliminar Archivo...?</source>
         <translation>Fájl törlése...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1517"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
         <source>Â¿Deseas eliminar esta Archivo?</source>
         <translation>Tényleg akarja törölni ezt a fájlt?</translation>
     </message>
@@ -6082,211 +6206,211 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
 <context>
     <name>frmOpciones</name>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="142"/>
         <location filename="../src/grlida_opciones.cpp" line="143"/>
         <location filename="../src/grlida_opciones.cpp" line="144"/>
+        <location filename="../src/grlida_opciones.cpp" line="145"/>
         <source>Base de Datos</source>
         <translation>Adatbázis</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="148"/>
         <location filename="../src/grlida_opciones.cpp" line="149"/>
         <location filename="../src/grlida_opciones.cpp" line="150"/>
         <location filename="../src/grlida_opciones.cpp" line="151"/>
+        <location filename="../src/grlida_opciones.cpp" line="152"/>
         <source>Favorito</source>
         <translation>Kedvenc</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="176"/>
+        <location filename="../src/grlida_opciones.cpp" line="177"/>
         <source>No usar proxy</source>
         <translation>Nincs proxy használva</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="177"/>
+        <location filename="../src/grlida_opciones.cpp" line="178"/>
         <source>El proxy se determina sobre la base de la aplicaciÃ³n</source>
         <translation>Proxy használata a proxy adatokra alapozva</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="178"/>
+        <location filename="../src/grlida_opciones.cpp" line="179"/>
         <source>Socks5 proxy se utilizara</source>
         <translation>Socks5 proxy használva</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="179"/>
+        <location filename="../src/grlida_opciones.cpp" line="180"/>
         <source>HTTP se utiliza proxy transparente</source>
         <translation>HTTP transparent proxying használva</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="180"/>
+        <location filename="../src/grlida_opciones.cpp" line="181"/>
         <source>HTTP proxy sÃ³lo para las solicitudes</source>
         <translation>Proxy-zás HTTP kérelem esetén csak</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="336"/>
+        <location filename="../src/grlida_opciones.cpp" line="338"/>
         <source>Selecciona el Ejecutable del DOSBox</source>
         <translation>Válassza ki a DOSBox indítófájlt</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="336"/>
-        <location filename="../src/grlida_opciones.cpp" line="347"/>
-        <location filename="../src/grlida_opciones.cpp" line="358"/>
+        <location filename="../src/grlida_opciones.cpp" line="338"/>
+        <location filename="../src/grlida_opciones.cpp" line="349"/>
+        <location filename="../src/grlida_opciones.cpp" line="360"/>
         <source>Todos los archivo</source>
         <translation>Összes fájlok</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="347"/>
+        <location filename="../src/grlida_opciones.cpp" line="349"/>
         <source>Selecciona el Ejecutable del ScummVM</source>
         <translation>Válassza ki a ScummVM indítófájlt</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="358"/>
+        <location filename="../src/grlida_opciones.cpp" line="360"/>
         <source>Selecciona un archivo</source>
         <translation>Válasszon ki egy fájlt</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="369"/>
+        <location filename="../src/grlida_opciones.cpp" line="371"/>
         <source>Seleccionar un directorio.</source>
         <translation>Válasszon ki egy könyvtárat.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="468"/>
+        <location filename="../src/grlida_opciones.cpp" line="470"/>
         <source>InformaciÃ³n sobre el formato de la fecha y hora</source>
         <translation>Információ a dátumról és időformátumról</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="470"/>
+        <location filename="../src/grlida_opciones.cpp" line="472"/>
         <source>Devuelve una cadena con formato de acuerdo a la cadena de formato dada.</source>
         <translation>Visszatér a lánc megfelelő formátumban.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="471"/>
+        <location filename="../src/grlida_opciones.cpp" line="473"/>
         <source>Lista bÃ¡sica de parÃ¡metros:</source>
         <translation>Alapvető paraméter lista:</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="475"/>
-        <location filename="../src/grlida_opciones.cpp" line="524"/>
+        <location filename="../src/grlida_opciones.cpp" line="477"/>
+        <location filename="../src/grlida_opciones.cpp" line="526"/>
         <source>ExpresiÃ³n</source>
         <translation>Kifejezés</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="476"/>
-        <location filename="../src/grlida_opciones.cpp" line="525"/>
+        <location filename="../src/grlida_opciones.cpp" line="478"/>
+        <location filename="../src/grlida_opciones.cpp" line="527"/>
         <source>Salida</source>
         <translation>Kilépés</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="481"/>
+        <location filename="../src/grlida_opciones.cpp" line="483"/>
         <source>DÃ­a del mes sin ceros iniciales (1 a 31).</source>
         <translation>A hónap napja nulla nélkül (1-től 31-ig).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="485"/>
+        <location filename="../src/grlida_opciones.cpp" line="487"/>
         <source>DÃ­a del mes, 2 dÃ­gitos con ceros iniciales (01 a 31).</source>
         <translation>A hónap napja nullával (01-től 31-ig).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="489"/>
+        <location filename="../src/grlida_opciones.cpp" line="491"/>
         <source>Una representaciÃ³n textual de un dÃ­a, tres letras (e.j. &apos;Lun&apos; a &apos;Dom&apos;).</source>
         <translation>Rövidített hét napjai (pl. Hét-től Vas-ig).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="493"/>
+        <location filename="../src/grlida_opciones.cpp" line="495"/>
         <source>Una representaciÃ³n textual completa del dÃ­a de la semana (e.j. &apos;Lunes&apos; a &apos;Domingo&apos;).</source>
         <translation>Teljes hét napjai (pl. Hétfőtől Vasárnapig).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="497"/>
+        <location filename="../src/grlida_opciones.cpp" line="499"/>
         <source>RepresentaciÃ³n numÃ©rica de un mes, sin ceros iniciales (1-12).</source>
         <translation>Hónap számozással nulla nélkül (1-12).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="501"/>
+        <location filename="../src/grlida_opciones.cpp" line="503"/>
         <source>RepresentaciÃ³n numÃ©rica de un mes, con ceros iniciales (01-12).</source>
         <translation>Hónap számozással nullával (1-12).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="505"/>
+        <location filename="../src/grlida_opciones.cpp" line="507"/>
         <source>Una representaciÃ³n textual corta de un mes, tres letras (e.j. &apos;Ene&apos; a &apos;Dic&apos;).</source>
         <translation>Rövidített hónap nevek (pl. &apos;Jan&apos; to &apos;Dec&apos;).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="509"/>
+        <location filename="../src/grlida_opciones.cpp" line="511"/>
         <source>Una representaciÃ³n textual completa de un mes, como Enero o Marzo (e.j. &apos;Enero&apos; a &apos;Diciembre&apos;).</source>
         <translation>Hónap teljes neve (pl. &apos;Januártól&apos; to &apos;Decemberig&apos;).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="513"/>
+        <location filename="../src/grlida_opciones.cpp" line="515"/>
         <source>Una representaciÃ³n de dos dÃ­gitos de un aÃ±o (00-99).</source>
         <translation>Év két számjegyként (00-99).</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="517"/>
+        <location filename="../src/grlida_opciones.cpp" line="519"/>
         <source>Una representaciÃ³n numÃ©rica completa de un aÃ±o, 4 dÃ­gitos.</source>
         <translation>Év négy számjegyként.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="520"/>
+        <location filename="../src/grlida_opciones.cpp" line="522"/>
         <source>Estas expresiones pueden ser utilizadas para el tiempo.</source>
         <translation>Ezek a kifejezések használhatóak a dátum formátumban.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="530"/>
+        <location filename="../src/grlida_opciones.cpp" line="532"/>
         <source>La hora sin ceros iniciales (0 a 23 o 1 a 12 si AM/PM display)</source>
         <translation>Óra nulla nélkül (0-tól 23-ig vagy 1-től 12-ig ha De/Du formátum)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="534"/>
+        <location filename="../src/grlida_opciones.cpp" line="536"/>
         <source>La hora con ceros iniciales (00 a 23 o de 01 a 12 si AM/PM display)</source>
         <translation>Óra nullával (00-tól 23-ig vagy 01-től 12-ig ha De/Du formátum)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="538"/>
+        <location filename="../src/grlida_opciones.cpp" line="540"/>
         <source>La hora sin ceros iniciales (0 a 23, incluso con AM/PM display)</source>
         <translation>Óra nulla nélkül (0-tól 23-ig vagy 1-től 12-ig és De/Du formátum)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="542"/>
+        <location filename="../src/grlida_opciones.cpp" line="544"/>
         <source>La hora con un cero (00 a 23, incluso con AM/PM display)</source>
         <translation>Óra nullával (00-tól 23-ig vagy 01-től 12-ig és De/Du formátum)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="546"/>
+        <location filename="../src/grlida_opciones.cpp" line="548"/>
         <source>Los minutos sin ceros iniciales (0 a 59)</source>
         <translation>Perc nulla nélkül (0-tól 59-ig)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="550"/>
+        <location filename="../src/grlida_opciones.cpp" line="552"/>
         <source>Los minutos con ceros iniciales (00 a 59)</source>
         <translation>Perc nullával (00-tól 59-ig)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="554"/>
+        <location filename="../src/grlida_opciones.cpp" line="556"/>
         <source>Los segundos sin ceros iniciales (0 a 59)</source>
         <translation>Másodperc nulla nélkül (0-tól 59-ig)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="558"/>
+        <location filename="../src/grlida_opciones.cpp" line="560"/>
         <source>Los segundos con ceros iniciales (00 a 59)</source>
         <translation>Másodperc nullával (00-tól 59-ig)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="562"/>
+        <location filename="../src/grlida_opciones.cpp" line="564"/>
         <source>Los milisegundos sin ceros iniciales (0 a 999)</source>
         <translation>Miliszekundum nulla nékül (0-tól 999-ig)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="566"/>
+        <location filename="../src/grlida_opciones.cpp" line="568"/>
         <source>Los milisegundos con ceros iniciales (000 a 999)</source>
         <translation>Miliszekundum nulla nékül (000-tól 999-ig)</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="570"/>
+        <location filename="../src/grlida_opciones.cpp" line="572"/>
         <source>Interpretar como un AM/PM del tiempo. AP debe ser &quot;AM&quot; o &quot;PM&quot;.</source>
         <translation>Értelmezés szerint De/Du idő. AP De vagy Du kell legyen.</translation>
     </message>
     <message>
-        <location filename="../src/grlida_opciones.cpp" line="574"/>
+        <location filename="../src/grlida_opciones.cpp" line="576"/>
         <source>Interpretar como un AM/PM del tiempo. AP debe ser &quot;am&quot; o &quot;pm&quot;.</source>
         <translation>Értelmezés szerint De/Du idő. AP de vagy du kell legyen.</translation>
     </message>
