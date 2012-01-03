@@ -628,16 +628,17 @@ QString frmImportarJuego::LeerArchivoHTML(QString file_html)
 		in.setCodec(codec);
 		text_html = in.readAll();
 
-		text_html.replace("&#x27;","'");
-		text_html.replace("&#x26;","&");
-	//	text_html.replace("&#xE9;","Ã©");
-	//	text_html.replace("&#xE0;","Ã ");
-//		text_html.replace("&aacute;","á");
-//		text_html.replace("&eacute;","é");
-//		text_html.replace("&iacute;","í");
-//		text_html.replace("&oacute;","ó");
-//		text_html.replace("&uacute;","ú");
-		text_html.replace("&nbsp;"," ");
+		text_html.replace("&#x27;", "'" );
+		text_html.replace("&#x26;", "&" );
+		text_html.replace("&#x22;", "\"");
+
+		text_html.replace("&#39;" , "'" );
+		text_html.replace("&#38;" , "&" );
+		text_html.replace("&#34;" , "\"");
+
+		text_html.replace("&apos;", "'" );
+		text_html.replace("&amp;" , "&" );
+		text_html.replace("&quot;", "\"");
 	} else
 		text_html = "";
 
