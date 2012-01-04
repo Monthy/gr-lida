@@ -77,7 +77,32 @@ frmAddEditJuego::~frmAddEditJuego()
 
 void frmAddEditJuego::closeEvent( QCloseEvent *e )
 {
-	e->ignore();
+	QMessageBox msgBox(this);
+	msgBox.setIcon( QMessageBox::Question );
+	msgBox.setWindowTitle( tr("¿Cerrar ventana?") );
+	msgBox.setText( tr("¿Deseas realmente cerrar la ventana?\nSi son nuevos datos o has echo cambios y no guardas puedes perder los cambios efectuados.") );
+	msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Close | QMessageBox::Cancel);
+	msgBox.setDefaultButton( QMessageBox::Save );
+	msgBox.setButtonText( QMessageBox::Save  , tr("Guardar")  );
+	msgBox.setButtonText( QMessageBox::Close , tr("Cerrar")   );
+	msgBox.setButtonText( QMessageBox::Cancel, tr("Cancelar") );
+
+	switch ( msgBox.exec() )
+	{
+		case QMessageBox::Save:
+			e->ignore();
+			on_btnOk();
+		break;
+		case QMessageBox::Cancel:
+			e->ignore();
+		break;
+		case QMessageBox::Close:
+			e->accept();
+		break;
+		default:
+			e->ignore();
+		break;
+	}
 }
 
 void frmAddEditJuego::createConnections()

@@ -5279,132 +5279,159 @@ Appuyer sur entrée pour quitter l&apos;assistant
 <context>
     <name>frmAddEditJuego</name>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="198"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="82"/>
+        <source>Â¿Cerrar ventana?</source>
+        <translation>Est-il fermer la fenêtre?</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="83"/>
+        <source>Â¿Deseas realmente cerrar la ventana?
+Si son nuevos datos o has echo cambios y no guardas puedes perder los cambios efectuados.</source>
+        <translation>Voulez-vous vraiment fermer la fenêtre?
+Si vous êtes de données nouvel écho ou ne pas enregistrer les modifications et vous pouvez perdre les modifications.</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="86"/>
+        <source>Guardar</source>
+        <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="87"/>
+        <source>Cerrar</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="88"/>
+        <source>Cancelar</source>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="223"/>
         <source>Datos</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="199"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="224"/>
         <source>DOSBox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="200"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="225"/>
         <source>ScummVM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="201"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="226"/>
         <source>VDMSound</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="264"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="265"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1369"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1372"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="289"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="290"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1394"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1397"/>
         <source>Documentos - Manuales</source>
         <translation>Documents - Manuels</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="266"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="291"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1400"/>
         <source>Ruleta de protecciÃ³n</source>
         <translation>Roulette de protection</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="267"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="292"/>
         <source>Cualquier archivos</source>
         <translation>Archives diverses</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="270"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="271"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="272"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="273"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="274"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="275"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="295"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="296"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="297"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="298"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="299"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="300"/>
         <source>Puntos</source>
         <translation>Score</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="349"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="374"/>
         <source>Editando a</source>
         <translation>Edite sous</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="352"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="377"/>
         <source>AÃ±adiendo un nuevo juego</source>
         <translation>Ajout d&apos;un nouveau jeu</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="374"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="399"/>
         <source>Debes poner un Titulo al juego</source>
         <translation>Entrer un titre pour le jeu</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="821"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="843"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="865"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1350"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1384"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="846"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="868"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="890"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1409"/>
         <source>Selecciona un archivo</source>
         <translation>Choisir un fichier</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="822"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="844"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="866"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="847"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="869"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="891"/>
         <source>Imagenes Soportadas</source>
         <translation>Images supportées</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="823"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="845"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="867"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1350"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1369"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1372"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="848"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="870"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="892"/>
         <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1378"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1381"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1394"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1397"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1400"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1403"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1406"/>
         <source>Todos los archivo</source>
         <translation>Tous les fichiers</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1349"/>
         <source>Â¿Eliminar url...?</source>
         <translation>Effacer l&apos;url...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1349"/>
         <source>Â¿Deseas eliminar esta url?</source>
         <translation>Vraiment effacer cette url ?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1349"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1555"/>
         <source>Si</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1349"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1555"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1350"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
         <source>Ejecutables</source>
         <translation>Executable</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1555"/>
         <source>Â¿Eliminar Archivo...?</source>
         <translation>Effacer le fichier...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1555"/>
         <source>Â¿Deseas eliminar esta Archivo?</source>
         <translation>Vraiment effacer le fichier ?</translation>
     </message>
@@ -6030,17 +6057,17 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <translation>Paramètres Exe</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="653"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="657"/>
         <source>Selecciona un archivo para importarlo</source>
         <translation>Choisir une archive à importer</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="653"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="657"/>
         <source>Soportados</source>
         <translation>Supportés</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="653"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="657"/>
         <source>Todos los archivo</source>
         <translation>Tous les fichiers</translation>
     </message>

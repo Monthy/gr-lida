@@ -5283,132 +5283,159 @@ Varázsló befejezéséhez kattincson az OK-ra
 <context>
     <name>frmAddEditJuego</name>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="198"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="82"/>
+        <source>Â¿Cerrar ventana?</source>
+        <translation>Lesz ablak bezárása?</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="83"/>
+        <source>Â¿Deseas realmente cerrar la ventana?
+Si son nuevos datos o has echo cambios y no guardas puedes perder los cambios efectuados.</source>
+        <translation>Valóban az ablak bezárásához?
+Ha Ön új echo adatokat, vagy nem menti a módosításokat, és akkor elveszíti a változtatásokat.</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="86"/>
+        <source>Guardar</source>
+        <translation>Mentési</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="87"/>
+        <source>Cerrar</source>
+        <translation>Bezárás</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="88"/>
+        <source>Cancelar</source>
+        <translation>Mégse</translation>
+    </message>
+    <message>
+        <location filename="../src/grlida_addedit_juego.cpp" line="223"/>
         <source>Datos</source>
         <translation>Adat</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="199"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="224"/>
         <source>DOSBox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="200"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="225"/>
         <source>ScummVM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="201"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="226"/>
         <source>VDMSound</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="264"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="265"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1369"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1372"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="289"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="290"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1394"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1397"/>
         <source>Documentos - Manuales</source>
         <translation>Dokumentumok - Kézikönyvek</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="266"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="291"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1400"/>
         <source>Ruleta de protecciÃ³n</source>
         <translation>Másolási védelem kerék</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="267"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="292"/>
         <source>Cualquier archivos</source>
         <translation>Bármely fájlok</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="270"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="271"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="272"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="273"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="274"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="275"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="295"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="296"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="297"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="298"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="299"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="300"/>
         <source>Puntos</source>
         <translation>Pontszám</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="349"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="374"/>
         <source>Editando a</source>
         <translation>Szerkesztése a</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="352"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="377"/>
         <source>AÃ±adiendo un nuevo juego</source>
         <translation>Új játék hozzáadása</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="374"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="399"/>
         <source>Debes poner un Titulo al juego</source>
         <translation>Meg kell határoznia a játék címét</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="821"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="843"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="865"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1350"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1384"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="846"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="868"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="890"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1409"/>
         <source>Selecciona un archivo</source>
         <translation>Válasszon ki egy fájlt</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="822"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="844"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="866"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="847"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="869"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="891"/>
         <source>Imagenes Soportadas</source>
         <translation>Támogatott képek</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="823"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="845"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="867"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1350"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1369"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1372"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="848"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="870"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="892"/>
         <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1378"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1381"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1394"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1397"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1400"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1403"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1406"/>
         <source>Todos los archivo</source>
         <translation>Összes fájlok</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1349"/>
         <source>Â¿Eliminar url...?</source>
         <translation>Hivatkozás törlése?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1349"/>
         <source>Â¿Deseas eliminar esta url?</source>
         <translation>Akarja törölni ezt a hivatkozást?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1349"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1555"/>
         <source>Si</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1324"/>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1349"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1555"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1350"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1375"/>
         <source>Ejecutables</source>
         <translation>Végrehajtható</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1555"/>
         <source>Â¿Eliminar Archivo...?</source>
         <translation>Fájl törlése...?</translation>
     </message>
     <message>
-        <location filename="../src/grlida_addedit_juego.cpp" line="1530"/>
+        <location filename="../src/grlida_addedit_juego.cpp" line="1555"/>
         <source>Â¿Deseas eliminar esta Archivo?</source>
         <translation>Tényleg akarja törölni ezt a fájlt?</translation>
     </message>
@@ -6034,17 +6061,17 @@ Varázsló befejezéséhez kattincson az OK-ra
         <translation>Paraméterek Exe</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="653"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="657"/>
         <source>Selecciona un archivo para importarlo</source>
         <translation>Válassza ki az importáló fájlt</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="653"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="657"/>
         <source>Soportados</source>
         <translation>Támogatott</translation>
     </message>
     <message>
-        <location filename="../src/grlida_importar_juego.cpp" line="653"/>
+        <location filename="../src/grlida_importar_juego.cpp" line="657"/>
         <source>Todos los archivo</source>
         <translation>Összes fájlok</translation>
     </message>
