@@ -635,6 +635,9 @@ QString frmImportarJuego::LeerArchivoHTML(QString file_html)
 		text_html.replace("&#39;" , "'" );
 		text_html.replace("&#38;" , "&" );
 		text_html.replace("&#34;" , "\"");
+		text_html.replace("&#039;" , "'" );
+		text_html.replace("&#038;" , "&" );
+		text_html.replace("&#034;" , "\"");
 
 		text_html.replace("&apos;", "'" );
 		text_html.replace("&amp;" , "&" );
