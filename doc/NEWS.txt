@@ -1,13 +1,20 @@
 
 -  NEWS
 -----------------------------------
-0.9.2 (30-04-2011)
+version (DD-MM-AAAA)
+
+0.10.0 (06-01-2012)
  - Añadida la traducción del GR-lida al Ruso por Vadim Petryaev.
  - Añadida resolución 1360x768 y 0x0 para pantalla completa del DOSBox.
- - Corregido error por el cual no se podía hacer portable la aplicación en windows por ejemplo.
- - Actualizada la lista de juegos soportado por el ScummVM 1.2.0.
+ - Añadido pequeño lector de PDF usando la libreria Poppler.
  - Añadida opción para poder añadir formatos de video/sonido soportados en la configuración del GR-lida (depende de los codec instalados).
  - Añadida opción para corregir el fondo de la lista en modo Icono, ya que por ejemplo en Windows 7 no coinciden las caratulas en las estanterías.
+ - Añadida la opción dos_version, a la configuración del DOSBox. Para poder especificar la versión de MS-DOS.
+ - Añadida la opción para poder leer los archivos de configuración de DOSBox, ScummVM y datos del juego de forma externa.
+ - Corregido error por el cual no se podía hacer portable la aplicación en windows por ejemplo.
+ - Actualizada la lista de juegos soportado por el ScummVM 1.4.0.
+ - Actualizado el sistema para poner nombres cortos en DOS. De esta manera admite nombres de carpetas con extensión.
+ - Actualizado el script para importar datos de MobyGames a la versión 0.3.3 para nuevas instalaciones.
 
 0.9.1 (14-08-2010)
  - Añadida la traducción del GR-lida al Húngaro por Szabó Tihamér.
