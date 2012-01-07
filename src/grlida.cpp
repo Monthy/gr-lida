@@ -2927,6 +2927,28 @@ void GrLida::on_CheckUpdateGrl()
 	httpdown->downloadFile("http://www.gr-lida.org/lastver.ini", stHomeDir+"temp/lastver.ini");
 }
 
+bool GrLida::version_compare(QString ver_old, QString ver_new)
+{
+	QStringList v_old, v_new;
+	v_new = ver_new.split(".");
+	v_old = ver_old.split(".");
+
+	if( v_new.at(0) > v_old.at(0) )
+		return true;
+	else // Major ver are =
+	{
+		if( v_new.at(1) > v_old.at(1) )
+			return true;
+		else // Minor ver are =
+		{
+			if( v_new.at(2) > v_old.at(2) )
+				return true;
+			else
+				return false;
+		}
+	}
+}
+
 void GrLida::isCheckUpdateFinished()
 {
 	QString html_info, version, info_grl, info_scripts;
@@ -2968,17 +2990,12 @@ void GrLida::isCheckUpdateFinished()
 		num_js = settings.value("num_js", 0).toInt();
 
 		if( num_js > 0 )
-			isUpdateScripts = true;
-
-		else
-			isUpdateScripts = false;
-
-		if( isUpdateScripts )
 		{
 			for(int i=0; i<num_js; i++)
 			{
-				if( settings.value("js_ver_"+fGrl.IntToStr(i+1)).toString() > js_version[settings.value("js_file_"+fGrl.IntToStr(i+1)).toString()] )
+				if( version_compare(js_version[settings.value("js_file_"+fGrl.IntToStr(i+1)).toString()], settings.value("js_ver_"+fGrl.IntToStr(i+1)).toString()) )
 				{
+					isUpdateScripts = true;
 					info_scripts.append("<div><a href=\"http://www.gr-lida.org/scripts.php\"><img src=\""+stTheme+"img16/floppy_2.png\" width=\"16\" height=\"16\" />"
 									"&nbsp;"+settings.value("js_titulo_"+fGrl.IntToStr(i+1)).toString() +" v"+ settings.value("js_ver_"+fGrl.IntToStr(i+1)).toString()+"</a>"
 									"<br>"+settings.value("js_info_"+fGrl.IntToStr(i+1)).toString()+"</div>");
@@ -2988,12 +3005,9 @@ void GrLida::isCheckUpdateFinished()
 		}
 	settings.endGroup();
 
-	if( version != fGrl.stVersionGrl() && version > fGrl.stVersionGrl() )
-		isNuevaVersionGRlida = true;
-	else
-		isNuevaVersionGRlida = false;
+	isNuevaVersionGRlida = version_compare(fGrl.stVersionGrl(), version);
 
-	html_info = "<h2>"+tr("Nueva Versión")+"</h2>"+tr("Disponible nueva versión del GR-lida %1").arg(version)+"<br>"
+	html_info = "<h2>"+fGrl.BoolToStr(isNuevaVersionGRlida)+" - "+ tr("Nueva Versión")+"</h2>"+tr("Disponible nueva versión del GR-lida %1").arg(version)+"<br>"
 				"<a href=\"http://www.gr-lida.org/descargas.php\"><img src=\""+stTheme+"img16/floppy_2.png\" width=\"16\" height=\"16\" />&nbsp;GR-lida v"+version+"</a>"
 				"<br><h3>Info GR-lida v"+version+"</h3>"+info_grl+"<br><br>";
 

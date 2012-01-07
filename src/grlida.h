@@ -164,6 +164,7 @@ private:
 
 	void Ejecutar(QString bin, QString parametros = "", QString dirWorking = "");
 
+	bool version_compare(QString ver_old, QString ver_new);	// Compara las versiones
 	void on_CheckUpdateGrl();	// Comprueba si existen actualizaciones.
 
 private slots:
