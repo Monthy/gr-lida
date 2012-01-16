@@ -19,9 +19,6 @@ tres emuladores que se usan principalmente para el mundo abandonware.
      y otras compañías como Revolution Software.
  - VDMSound principalmente es un emulador de sonido para windows NT, 2000 y XP
 
-El programa no tiene dependencia de librerías externas a las de Qt4 con lo cual no
-tendrá problemas a la hora de compilar teniendo lo básico instalado
-
 
 (II) Compilar el programa
 --------------------------------------------
