@@ -163,7 +163,7 @@ mac|unix {
 LIBS += -lpoppler-qt4
 
 # ###### Install
-!win32 { 
+!win32 {
     target.files = bin/gr-lida
     target.path = /usr/bin
     pixmaps.files = gr-lida.svg \
