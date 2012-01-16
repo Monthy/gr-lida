@@ -72,7 +72,6 @@ HEADERS += src/grlida_img_viewer.h \
     src/qtzip.h \
     src/grlida_instalar_juego.h \
     src/grlida_addedit_vdmsound.h \
-    3rdparty/crc32qt.h \
     src/grlida_pdf_viewer.h
 
 SOURCES += src/grlida_img_viewer.cpp \
@@ -142,6 +141,8 @@ SOURCES += 3rdparty/osdab-zip/zip.cpp \
 
 HEADERS += 3rdparty/doc_pdf_widget.h
 SOURCES += 3rdparty/doc_pdf_widget.cpp
+
+HEADERS += 3rdparty/crc32qt.h
 # ###### FIN 3rdparty
 
 RESOURCES += res/grlida.qrc
