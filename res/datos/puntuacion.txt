@@ -1,0 +1,11 @@
+0|grafica.png
+1|grafica.png
+2|grafica.png
+3|grafica.png
+4|grafica.png
+5|grafica.png
+6|grafica.png
+7|grafica.png
+8|grafica.png
+9|grafica.png
+10|grafica.png

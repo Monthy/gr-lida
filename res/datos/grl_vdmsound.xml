@@ -1,0 +1,15 @@
+    <vdmsound>
+      <Vdms_path_conf>{Vdms_path_conf}</Vdms_path_conf>
+      <Vdms_path_exe>{Vdms_path_exe}</Vdms_path_exe>
+      <Vdms_program_1>{Vdms_program_1}</Vdms_program_1>
+      <Vdms_program_2>{Vdms_program_2}</Vdms_program_2>
+      <Vdms_vdms_debug_1>{Vdms_vdms_debug_1}</Vdms_vdms_debug_1>
+      <Vdms_vdms_debug_2>{Vdms_vdms_debug_2}</Vdms_vdms_debug_2>
+      <Vdms_winnt_dos_1>{Vdms_winnt_dos_1}</Vdms_winnt_dos_1>
+      <Vdms_winnt_dos_2>{Vdms_winnt_dos_2}</Vdms_winnt_dos_2>
+      <Vdms_winnt_dosbox_1>{Vdms_winnt_dosbox_1}</Vdms_winnt_dosbox_1>
+      <Vdms_winnt_dosbox_2>{Vdms_winnt_dosbox_2}</Vdms_winnt_dosbox_2>
+      <Vdms_winnt_dosbox_3>{Vdms_winnt_dosbox_3}</Vdms_winnt_dosbox_3>
+      <Vdms_winnt_storage_1>{Vdms_winnt_storage_1}</Vdms_winnt_storage_1>
+      <Vdms_winnt_storage_2>{Vdms_winnt_storage_2}</Vdms_winnt_storage_2>
+    </vdmsound>

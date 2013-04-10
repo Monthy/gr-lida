@@ -1,0 +1,22 @@
+Испанский|es|es.png
+Английский|en|en.png
+Английский (GB)|gb|gb.png
+Английский (US)|us|us.png
+Немецкий|de|de.png
+Датский|dk|dk.png
+Французский|fr|fr.png
+Итальянский|it|it.png
+Португальский|pt|pt.png
+Японский|jp|jp.png
+Китайский (Китай)|zh-cn|zh-cn.png
+Китайский (Тайвань)|zh|zh.png
+Корейский|kr|kr.png
+Еврейский|hb|hb.png
+Русский|ru|ru.png
+Чешский|cz|cz.png
+Шведский|se|se.png
+Голландский|nl|nl.png
+Норвежский|nb|nb.png
+Польский|pl|pl.png
+Венгерский|hu|hu.png
+Греческий|gr|gr.png

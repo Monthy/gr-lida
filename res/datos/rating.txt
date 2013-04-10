@@ -1,0 +1,6 @@
+0|star_on.png
+1|star_on.png
+2|star_on.png
+3|star_on.png
+4|star_on.png
+5|star_on.png

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grlida_db version="0.1.0">
+  <lista_db>
+    <title>GR-lida DB</title>
+    <link>http://www.gr-lida.org/</link>
+    <description>Front-End para DOSBox, ScummVM y VDMSound</description>
+    <lastBuildDate>{lastBuildDate}</lastBuildDate>
+    <copyright>Copyright 2003-2013</copyright>
+    <datos>
+      <Dat_icono>{Dat_icono}</Dat_icono>
+      <Dat_titulo>{Dat_titulo}</Dat_titulo>
+      <Dat_subtitulo>{Dat_subtitulo}</Dat_subtitulo>
+      <Dat_genero>{Dat_genero}</Dat_genero>
+      <Dat_compania>{Dat_compania}</Dat_compania>
+      <Dat_desarrollador>{Dat_desarrollador}</Dat_desarrollador>
+      <Dat_tema>{Dat_tema}</Dat_tema>
+      <Dat_grupo>{Dat_grupo}</Dat_grupo>
+      <Dat_perspectiva>{Dat_perspectiva}</Dat_perspectiva>
+      <Dat_idioma>{Dat_idioma}</Dat_idioma>
+      <Dat_idioma_voces>{Dat_idioma_voces}</Dat_idioma_voces>
+      <Dat_formato>{Dat_formato}</Dat_formato>
+      <Dat_anno>{Dat_anno}</Dat_anno>
+      <Dat_numdisc>{Dat_numdisc}</Dat_numdisc>
+      <Dat_sistemaop>{Dat_sistemaop}</Dat_sistemaop>
+      <Dat_tamano>{Dat_tamano}</Dat_tamano>
+      <Dat_graficos>{Dat_graficos}</Dat_graficos>
+      <Dat_sonido>{Dat_sonido}</Dat_sonido>
+      <Dat_jugabilidad>{Dat_jugabilidad}</Dat_jugabilidad>
+      <Dat_original>{Dat_original}</Dat_original>
+      <Dat_estado>{Dat_estado}</Dat_estado>
+      <Dat_thumbs>{Dat_thumbs}</Dat_thumbs>
+      <Dat_cover_front>{Dat_cover_front}</Dat_cover_front>
+      <Dat_cover_back>{Dat_cover_back}</Dat_cover_back>
+      <Dat_fecha>{Dat_fecha}</Dat_fecha>
+      <Dat_tipo_emu>{Dat_tipo_emu}</Dat_tipo_emu>
+      <Dat_comentario>{Dat_comentario}</Dat_comentario>
+      <Dat_favorito>{Dat_favorito}</Dat_favorito>
+      <Dat_rating>{Dat_rating}</Dat_rating>
+      <Dat_edad_recomendada>{Dat_edad_recomendada}</Dat_edad_recomendada>
+      <Dat_usuario>{Dat_usuario}</Dat_usuario>
+      <Dat_path_exe>{Dat_path_exe}</Dat_path_exe>
+      <Dat_parametros_exe>{Dat_parametros_exe}</Dat_parametros_exe>
+      <Dat_path_capturas>{Dat_path_capturas}</Dat_path_capturas>
+      <Dat_path_setup>{Dat_path_setup}</Dat_path_setup>
+      <Dat_parametros_setup>{Dat_parametros_setup}</Dat_parametros_setup>
+    </datos>{grl_otra_configuracion}
+  </lista_db>
+</grlida_db>

@@ -1,0 +1,22 @@
+Español|es|es.png
+Inglés|en|en.png
+Inglés (GB)|gb|gb.png
+Inglés (US)|us|us.png
+Alemán|de|de.png
+Danés|dk|dk.png
+Francés|fr|fr.png
+Italiano|it|it.png
+Portugués|pt|pt.png
+Japonés|jp|jp.png
+Chino (China)|zh-cn|zh-cn.png
+Chino (Taiwan)|zh|zh.png
+Coreano|kr|kr.png
+Hebreo|hb|hb.png
+Ruso|ru|ru.png
+Checo|cz|cz.png
+Sueco|se|se.png
+Holandés|nl|nl.png
+Noruego Bokmal|nb|nb.png
+Polaco|pl|pl.png
+Húngaro|hu|hu.png
+Griego|gr|gr.png
