@@ -1,6 +1,6 @@
 /****************************************************************************
 ** Filename: zip.h
-** Last updated [dd/mm/yyyy]: 01/02/2007
+** Last updated [dd/mm/yyyy]: 27/03/2011
 **
 ** pkzip 2.0 file compression.
 **
@@ -8,9 +8,9 @@
 ** (mainly Info-Zip and Gilles Vollant's minizip).
 ** Compression and decompression actually uses the zlib library.
 **
-** Copyright (C) 2007-2008 Angius Fabrizio. All rights reserved.
+** Copyright (C) 2007-2012 Angius Fabrizio. All rights reserved.
 **
-** This file is part of the OSDaB project (http://osdab.sourceforge.net/).
+** This file is part of the OSDaB project (http://osdab.42cows.org/).
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -28,12 +28,12 @@
 #ifndef OSDAB_ZIP__H
 #define OSDAB_ZIP__H
 
-#include <QtGlobal>
-#include <QMap>
+#include "zipglobal.h"
+
+#include <QtCore/QMap>
+#include <QtCore/QtGlobal>
 
 #include <zlib/zlib.h>
-
-class ZipPrivate;
 
 class QIODevice;
 class QFile;
@@ -41,8 +41,11 @@ class QDir;
 class QStringList;
 class QString;
 
+OSDAB_BEGIN_NAMESPACE(Zip)
 
-class Zip
+class ZipPrivate;
+
+class OSDAB_ZIP_EXPORT Zip
 {
 public:
 	enum ErrorCode
@@ -56,7 +59,8 @@ public:
 		FileNotFound,
 		ReadFailed,
 		WriteFailed,
-		SeekFailed
+        SeekFailed,
+        InternalError
 	};
 
 	enum CompressionLevel
@@ -69,12 +73,28 @@ public:
 
 	enum CompressionOption
 	{
-		//! Does not preserve absolute paths in the zip file when adding a file/directory (default)
+        /*! Does not preserve absolute paths in the zip file when adding a
+            file or directory (default) */
 		RelativePaths = 0x0001,
-		//! Preserve absolute paths
+        /*! Preserve absolute paths */
 		AbsolutePaths = 0x0002,
-		//! Do not store paths. All the files are put in the (evtl. user defined) root of the zip file
-		IgnorePaths = 0x0004
+        /*! Do not store paths. All the files are put in the (evtl. user defined)
+            root of the zip file */
+        IgnorePaths = 0x0004,
+        /*! Works only with addDirectory(). Adds the directory's contents,
+            including subdirectories, but does not add an entry for the root
+            directory itself. */
+        IgnoreRoot = 0x0008,
+        /*! Used only when compressing a directory or multiple files.
+            If set invalid or unreadable files are simply skipped.
+        */
+        SkipBadFiles = 0x0020,
+        /*! Makes sure a file is never added twice to the same zip archive.
+            This check is only necessary in certain usage scenarios and given
+            that it slows down processing you need to enable it explicitly with
+            this flag.
+        */
+        CheckForDuplicates = 0x0040
 	};
 	Q_DECLARE_FLAGS(CompressionOptions, CompressionOption)
 
@@ -93,12 +113,35 @@ public:
 	QString archiveComment() const;
 	void setArchiveComment(const QString& comment);
 
-	ErrorCode addDirectoryContents(const QString& path, CompressionLevel level = AutoFull);
-	ErrorCode addDirectoryContents(const QString& path, const QString& root, CompressionLevel level = AutoFull);
+    ErrorCode addDirectoryContents(const QString& path,
+        CompressionLevel level = AutoFull);
+    ErrorCode addDirectoryContents(const QString& path, const QString& root,
+        CompressionLevel level = AutoFull);
 
-	ErrorCode addDirectory(const QString& path, CompressionOptions options = RelativePaths, CompressionLevel level = AutoFull);
-	ErrorCode addDirectory(const QString& path, const QString& root, CompressionLevel level = AutoFull);
-	ErrorCode addDirectory(const QString& path, const QString& root, CompressionOptions options = RelativePaths, CompressionLevel level = AutoFull);
+    ErrorCode addDirectory(const QString& path,
+        CompressionLevel level = AutoFull);
+    ErrorCode addDirectory(const QString& path, const QString& root,
+        CompressionLevel level = AutoFull);
+    ErrorCode addDirectory(const QString& path, const QString& root,
+        CompressionOptions options, CompressionLevel level = AutoFull,
+        int* addedFiles = 0);
+
+    ErrorCode addFile(const QString& path,
+        CompressionLevel level = AutoFull);
+    ErrorCode addFile(const QString& path, const QString& root,
+        CompressionLevel level = AutoFull);
+    ErrorCode addFile(const QString& path, const QString& root,
+        CompressionOptions options,
+        CompressionLevel level = AutoFull);
+
+    ErrorCode addFiles(const QStringList& paths,
+        CompressionLevel level = AutoFull);
+    ErrorCode addFiles(const QStringList& paths, const QString& root,
+        CompressionLevel level = AutoFull);
+    ErrorCode addFiles(const QStringList& paths, const QString& root,
+        CompressionOptions options,
+        CompressionLevel level = AutoFull,
+        int* addedFiles = 0);
 
 	ErrorCode closeArchive();
 
@@ -109,5 +152,7 @@ private:
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Zip::CompressionOptions)
+
+OSDAB_END_NAMESPACE
 
 #endif // OSDAB_ZIP__H

@@ -1,6 +1,6 @@
 /****************************************************************************
 ** Filename: unzip.h
-** Last updated [dd/mm/yyyy]: 28/01/2007
+** Last updated [dd/mm/yyyy]: 27/03/2011
 **
 ** pkzip 2.0 decompression.
 **
@@ -8,9 +8,9 @@
 ** (mainly Info-Zip and Gilles Vollant's minizip).
 ** Compression and decompression actually uses the zlib library.
 **
-** Copyright (C) 2007-2008 Angius Fabrizio. All rights reserved.
+** Copyright (C) 2007-2012 Angius Fabrizio. All rights reserved.
 **
-** This file is part of the OSDaB project (http://osdab.sourceforge.net/).
+** This file is part of the OSDaB project (http://osdab.42cows.org/).
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -28,21 +28,25 @@
 #ifndef OSDAB_UNZIP__H
 #define OSDAB_UNZIP__H
 
-#include <QtGlobal>
-#include <QMap>
-#include <QDateTime>
+#include "zipglobal.h"
+
+#include <QtCore/QDateTime>
+#include <QtCore/QMap>
+#include <QtCore/QtGlobal>
 
 #include <zlib/zlib.h>
 
-class UnzipPrivate;
-class QIODevice;
-class QFile;
 class QDir;
-class QStringList;
+class QFile;
+class QIODevice;
 class QString;
+class QStringList;
 
+OSDAB_BEGIN_NAMESPACE(Zip)
 
-class UnZip
+class UnzipPrivate;
+
+class OSDAB_ZIP_EXPORT UnZip
 {
 public:
 	enum ErrorCode
@@ -68,11 +72,11 @@ public:
 	};
 
 	enum ExtractionOption
-	{
-		//! Extracts paths (default)
-		ExtractPaths = 0x0001,
-		//! Ignores paths and extracts all the files to the same directory
-		SkipPaths = 0x0002
+    {
+        ExtractPaths = 0x0001,
+        SkipPaths = 0x0002,
+        VerifyOnly = 0x0004,
+        NoSilentDirectoryCreation = 0x0008
 	};
 	Q_DECLARE_FLAGS(ExtractionOptions, ExtractionOption)
 
@@ -123,6 +127,8 @@ public:
 	QStringList fileList() const;
 	QList<ZipEntry> entryList() const;
 
+    ErrorCode verifyArchive();
+
 	ErrorCode extractAll(const QString& dirname, ExtractionOptions options = ExtractPaths);
 	ErrorCode extractAll(const QDir& dir, ExtractionOptions options = ExtractPaths);
 
@@ -140,5 +146,7 @@ private:
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(UnZip::ExtractionOptions)
+
+OSDAB_END_NAMESPACE
 
 #endif // OSDAB_UNZIP__H
