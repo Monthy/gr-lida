@@ -1,18 +1,18 @@
-none|img_1x
-normal2x|img_2x
-normal3x|img_3x
-advmame2x|img_advmame2x_3x
-advmame3x|img_advmame2x_3x
-hq2x|sinimg
-hq3x|sinimg
-2xsai|sinimg
-super2xsai|sinimg
-supereagle|sinimg
-advinterp2x|sinimg
-advinterp3x|sinimg
-tv2x|img_tv2x
-tv3x|img_tv2x
-rgb2x|img_rgb
-rgb3x|img_rgb
-scan2x|sinimg
-scan3x|sinimg
+Normal (no scaling)|none|img_1x.png
+Normal 2x (default)|normal2x|img_2x.png
+Normal 3x|normal3x|img_3x.png
+Advanced Mame 2x|advmame2x|img_advmame2x_3x.png
+Advanced Mame 3x|advmame3x|img_advmame2x_3x.png
+High-Quality 2x|hq2x|img_hq2x.png
+High-Quality 3x|hq3x|img_hq3x.png
+Scale and Interpolation 2x|2xsai|img_2xsai.png
+Super Scale and Interpolation 2x|super2xsai|img_super2xsai.png
+Super Eagle|supereagle|img_supereagle.png
+Advanced Interpolation 2x|advinterp2x|img_2xsai.png
+Advanced Interpolation 3x|advinterp3x|img_super2xsai.png
+Tv Interlacing 2x|tv2x|img_tv2x.png
+Tv Interlacing 3x|tv3x|img_tv2x.png
+RGB 2x|rgb2x|img_rgb.png
+RGB 3x|rgb3x|img_rgb.png
+Scan 2x|scan2x|sinimg.png
+Scan 3x|scan3x|sinimg.png

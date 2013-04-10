@@ -1,38 +1,38 @@
-Acción|datos_3
-Acción-Arcade|datos_3
-Arcade|datos_3
-Aventura|datos_3
-Aventura Gráfica|datos_3
-Aventura-Terror|datos_3
-Adultos|datos_3
-Baile|datos_3
-Carreras|datos_3
-Carreras-Coches|datos_3
-Carreras-Motos|datos_3
-Deportivos|datos_3
-Deportes|datos_3
-Deportes-Baloncesto|datos_3
-Deportes-Fútbol|datos_3
-Emulador|datos_3
-Estrategia|datos_3
-FPS|datos_3
-Juego de Rol|datos_3
-Juegos Deportivos|datos_3
-Lucha|datos_3
-Matamarcianos|datos_3
-Mechs|datos_3
-Multijugador|datos_3
-Otros|datos_3
-Pesca|datos_3
-Plataformas|datos_3
-Puzzle e Inteligencia|datos_3
-Puzzle-Inteligencia|datos_3
-Puzzle|datos_3
-Reproductor de Música|datos_3
-Reproductor de video|datos_3
-RPG|datos_3
-Simulación|datos_3
-Simulador|datos_3
-Simulador de Trenes|datos_3
-Simulador de Vuelo|datos_3
-|sinimg
+Acción|datos_3.png
+Acción-Arcade|datos_3.png
+Arcade|datos_3.png
+Aventura|datos_3.png
+Aventura Gráfica|datos_3.png
+Aventura-Terror|datos_3.png
+Adultos|datos_3.png
+Baile|datos_3.png
+Carreras|datos_3.png
+Carreras-Coches|datos_3.png
+Carreras-Motos|datos_3.png
+Deportivos|datos_3.png
+Deportes|datos_3.png
+Deportes-Baloncesto|datos_3.png
+Deportes-Fútbol|datos_3.png
+Emulador|datos_3.png
+Estrategia|datos_3.png
+FPS|datos_3.png
+Juego de Rol|datos_3.png
+Juegos Deportivos|datos_3.png
+Lucha|datos_3.png
+Matamarcianos|datos_3.png
+Mechs|datos_3.png
+Multijugador|datos_3.png
+Otros|datos_3.png
+Pesca|datos_3.png
+Plataformas|datos_3.png
+Puzzle e Inteligencia|datos_3.png
+Puzzle-Inteligencia|datos_3.png
+Puzzle|datos_3.png
+Reproductor de Música|datos_3.png
+Reproductor de video|datos_3.png
+RPG|datos_3.png
+Simulación|datos_3.png
+Simulador|datos_3.png
+Simulador de Trenes|datos_3.png
+Simulador de Vuelo|datos_3.png
+|sinimg.png

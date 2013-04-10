@@ -1,36 +1,36 @@
-Стрелялка|datos_3
-Стрелялка-Бегалка|datos_3
-Бегалка|datos_3
-Приключение|datos_3
-Графическое приключение|datos_3
-Приключение-ужасы|datos_3
-Для взрослых|datos_3
-Танцы|datos_3
-Гонки|datos_3
-Гонки/Вождение|datos_3
-Гонки-мотоциклы|datos_3
-Спорт|datos_3
-Спорт-Баскетбол|datos_3
-Спорт-Футбол|datos_3
-Эмулятор|datos_3
-Стратегия|datos_3
-3D шутер|datos_3
-Ролевая игра (RPG)|datos_3
-Спортивные игры|datos_3
-Полет|datos_3
-Шутер|datos_3
-Механика|datos_3
-Многопользователская|datos_3
-Другие|datos_3
-Рыбная ловля|datos_3
-Платформы|datos_3
-Решение головоломок|datos_3
-Головоломки|datos_3
-Музыка|datos_3
-Видео|datos_3
-Симуляция|datos_3
-Симулятор|datos_3
-Симулятор поезда|datos_3
-Симулятор полета|datos_3
-Образовательные|datos_3
-|sinimg
+Стрелялка|datos_3.png
+Стрелялка-Бегалка|datos_3.png
+Бегалка|datos_3.png
+Приключение|datos_3.png
+Графическое приключение|datos_3.png
+Приключение-ужасы|datos_3.png
+Для взрослых|datos_3.png
+Танцы|datos_3.png
+Гонки|datos_3.png
+Гонки/Вождение|datos_3.png
+Гонки-мотоциклы|datos_3.png
+Спорт|datos_3.png
+Спорт-Баскетбол|datos_3.png
+Спорт-Футбол|datos_3.png
+Эмулятор|datos_3.png
+Стратегия|datos_3.png
+3D шутер|datos_3.png
+Ролевая игра (RPG)|datos_3.png
+Спортивные игры|datos_3.png
+Полет|datos_3.png
+Шутер|datos_3.png
+Механика|datos_3.png
+Многопользователская|datos_3.png
+Другие|datos_3.png
+Рыбная ловля|datos_3.png
+Платформы|datos_3.png
+Решение головоломок|datos_3.png
+Головоломки|datos_3.png
+Музыка|datos_3.png
+Видео|datos_3.png
+Симуляция|datos_3.png
+Симулятор|datos_3.png
+Симулятор поезда|datos_3.png
+Симулятор полета|datos_3.png
+Образовательные|datos_3.png
+|sinimg.png

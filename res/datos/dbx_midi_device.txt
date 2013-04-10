@@ -1,7 +1,7 @@
-default|sinimg
-alsa|sinimg
-oss|sinimg
-win32|sinimg
-coreaudio|sinimg
-coremidi|sinimg
-none|sinimg
+default|sinimg.png
+alsa|sinimg.png
+oss|sinimg.png
+win32|sinimg.png
+coreaudio|sinimg.png
+coremidi|sinimg.png
+none|sinimg.png

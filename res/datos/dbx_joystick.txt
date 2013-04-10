@@ -1,7 +1,7 @@
-auto|sinimg
-none|sinimg
-2axis|sinimg
-4axis|sinimg
-4axis_2|sinimg
-fcs|sinimg
-ch|sinimg
+Disables controller support|none|sinimg.png
+Autodetects|auto|controller.png
+Joystick 2 axes, 2 buttons|2axis|controller.png
+Joystick 4 axes, 4 buttons|4axis|controller.png
+Supports only second controller.|4axis_2|controller.png
+ThrustMaster Flight Control System|fcs|controller.png
+CH Flightstick 4-axes, 6 buttons and 1 hat|ch|controller.png

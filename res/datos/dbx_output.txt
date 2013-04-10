@@ -1,5 +1,5 @@
-surface|sinimg
-overlay|sinimg
-opengl|sinimg
-openglnb|sinimg
-ddraw|sinimg
+Surface|surface|sinimg.png
+Overlay|overlay|sinimg.png
+OpenGL|opengl|sinimg.png
+OpenGL NB|openglnb|sinimg.png
+Direct Draw|ddraw|sinimg.png

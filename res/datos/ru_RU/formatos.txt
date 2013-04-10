@@ -1,13 +1,13 @@
-PC|floppy_1
-Дискета 3.5|floppy_2
-Дискета 5.25|floppy_3
-CD-Rom|cd_iso
-DVD|dvd
-Аудио CD|cd_audio
-Сжатый файл|archivo_comprimido
-Образ ISO|cd_iso
-Образ CUE/BIN|cd_iso
-Образ IMG|floppy_1
-Образ IMA|floppy_1
-Образ IMZ|floppy_1
-|sinimg
+PC|floppy_1.png
+Дискета 3.5|floppy_2.png
+Дискета 5.25|floppy_3.png
+CD-Rom|cd_iso.png
+DVD|dvd.png
+Аудио CD|cd_audio.png
+Сжатый файл|archivo_comprimido.png
+Образ ISO|cd_iso.png
+Образ CUE/BIN|cd_iso.png
+Образ IMG|floppy_1.png
+Образ IMA|floppy_1.png
+Образ IMZ|floppy_1.png
+|sinimg.png

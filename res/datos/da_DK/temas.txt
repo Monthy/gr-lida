@@ -1,24 +1,24 @@
-Voksen|datos_3
-Arcade|datos_3
-Adventure|datos_3
-Adventure-Horror|datos_3
-Sci-Fi|datos_3
-Classic|datos_3
-Cyberpunk / Dark Sci-Fi|datos_3
-Detective / Mystery|datos_3
-Interaktiv Fiktion med grafik|datos_3
-Interaktiv Fiktion|datos_3
-Futuristisk|datos_3
-Horror|datos_3
-Medieval / Fantasy|datos_3
-Middelalderlig|datos_3
-Interaktiv film|datos_3
-Pinball|datos_3
-Post-apokalyptisk|datos_3
-Sci-Fi - Futuristic|datos_3
-Shooter|datos_3
-Puzzle-Løsning|datos_3
-Survival Horror|datos_3
-Real-Time|datos_3
-Video Adventure|datos_3
-|sinimg
+Voksen|datos_3.png
+Arcade|datos_3.png
+Adventure|datos_3.png
+Adventure-Horror|datos_3.png
+Sci-Fi|datos_3.png
+Classic|datos_3.png
+Cyberpunk / Dark Sci-Fi|datos_3.png
+Detective / Mystery|datos_3.png
+Interaktiv Fiktion med grafik|datos_3.png
+Interaktiv Fiktion|datos_3.png
+Futuristisk|datos_3.png
+Horror|datos_3.png
+Medieval / Fantasy|datos_3.png
+Middelalderlig|datos_3.png
+Interaktiv film|datos_3.png
+Pinball|datos_3.png
+Post-apokalyptisk|datos_3.png
+Sci-Fi - Futuristic|datos_3.png
+Shooter|datos_3.png
+Puzzle-Løsning|datos_3.png
+Survival Horror|datos_3.png
+Real-Time|datos_3.png
+Video Adventure|datos_3.png
+|sinimg.png

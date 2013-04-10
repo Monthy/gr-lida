@@ -1,27 +1,31 @@
-QListWidget {
-	background-image:url(<theme>images/list_bg<bgfix>.jpg);
+QTableView, QTableWidget, QTreeWidget, QTreeView, QListWidget, QListView {
+	outline: 0px solid transparent;
+}
+
+QListWidget, QListView {
+	background-image: url(<theme>images/list_bg.jpg);
 	margin: 0px;
 	padding: 0px;
 }
 
-QListWidget::item {
+QListWidget::item, QListView::item {
 	border: 1px solid transparent;
 	padding: 0px 0px 0px 10px;
 	margin: 0px;
 }
 
-QListView::item:hover {
+QListWidget::item:hover, QListView::item:hover {
 	background-color: transparent;
 }
 
-QListView::item:selected {
-	border-color: transparent;
+QListWidget::item:selected, QListView::item:selected {
+	border: 1px solid transparent;
 }
 
-QListView::item:selected:active {
+QListWidget::item:selected:active, QListView::item:selected:active {
 	background-color: transparent;
 }
 
-QListView::item:selected:!active {
+QListWidget::item:selected:!active, QListView::item:selected:!active {
 	background-color: transparent;
 }

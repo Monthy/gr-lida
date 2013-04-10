@@ -1,6 +1,6 @@
-1.-persons perspektiv|datos_3
-3.-persons perspektiv|datos_3
-Isometrisk|datos_3
-Platform|datos_3
-Side-Ruller|datos_3
-Top-Down|datos_3
+1.-persons perspektiv|datos_3.png
+3.-persons perspektiv|datos_3.png
+Isometrisk|datos_3.png
+Platform|datos_3.png
+Side-Ruller|datos_3.png
+Top-Down|datos_3.png

@@ -1,24 +1,24 @@
-Adulte|datos_3
-Arcade|datos_3
-Aventure|datos_3
-Aventure-Horror|datos_3
-Science-fiction|datos_3
-Classique|datos_3
-Cyberpunk / Dark Sci-Fi|datos_3
-Detective / Mystery|datos_3
-Interactive Fiction avec des graphiques|datos_3
-Interactive Fiction|datos_3
-Futuriste|datos_3
-Horreur|datos_3
-Medieval / Fantasy|datos_3
-Médiéval|datos_3
-Interactive Movie|datos_3
-Flipper|datos_3
-Post-Apocalyptique|datos_3
-Sci-Fi - Futuristic|datos_3
-Tireur|datos_3
-Résolution d'énigmes|datos_3
-Survival Horror|datos_3
-Real-Time|datos_3
-Video Aventure|datos_3
-|sinimg
+Adulte|datos_3.png
+Arcade|datos_3.png
+Aventure|datos_3.png
+Aventure-Horror|datos_3.png
+Science-fiction|datos_3.png
+Classique|datos_3.png
+Cyberpunk / Dark Sci-Fi|datos_3.png
+Detective / Mystery|datos_3.png
+Interactive Fiction avec des graphiques|datos_3.png
+Interactive Fiction|datos_3.png
+Futuriste|datos_3.png
+Horreur|datos_3.png
+Medieval / Fantasy|datos_3.png
+Médiéval|datos_3.png
+Interactive Movie|datos_3.png
+Flipper|datos_3.png
+Post-Apocalyptique|datos_3.png
+Sci-Fi - Futuristic|datos_3.png
+Tireur|datos_3.png
+Résolution d'énigmes|datos_3.png
+Survival Horror|datos_3.png
+Real-Time|datos_3.png
+Video Aventure|datos_3.png
+|sinimg.png

@@ -1,25 +1,25 @@
-Adulto|datos_3
-Arcade|datos_3
-Aventuras|datos_3
-Aventura-Terror|datos_3
-Ciencia Ficción|datos_3
-Clásico|datos_3
-Cyberpunk - Dark Sci-Fi|datos_3
-Detective - Misterio|datos_3
-Ficción Interactiva con Gráficos|datos_3
-Ficción Interactiva|datos_3
-Futurista|datos_3
-Horror|datos_3
-Medieval - Fantasía|datos_3
-Medieval|datos_3
-No se|datos_3
-Película Interactiva|datos_3
-Pinball|datos_3
-Post-Apocalíptica|datos_3
-Sci-Fi - Futurista|datos_3
-Shooter|datos_3
-Solución - Puzzle|datos_3
-Survival Horror|datos_3
-Tiempo Real|datos_3
-Video Aventura|datos_3
-|sinimg
+Adulto|datos_3.png
+Arcade|datos_3.png
+Aventuras|datos_3.png
+Aventura-Terror|datos_3.png
+Ciencia Ficción|datos_3.png
+Clásico|datos_3.png
+Cyberpunk - Dark Sci-Fi|datos_3.png
+Detective - Misterio|datos_3.png
+Ficción Interactiva con Gráficos|datos_3.png
+Ficción Interactiva|datos_3.png
+Futurista|datos_3.png
+Horror|datos_3.png
+Medieval - Fantasía|datos_3.png
+Medieval|datos_3.png
+No se|datos_3.png
+Película Interactiva|datos_3.png
+Pinball|datos_3.png
+Post-Apocalíptica|datos_3.png
+Sci-Fi - Futurista|datos_3.png
+Shooter|datos_3.png
+Solución - Puzzle|datos_3.png
+Survival Horror|datos_3.png
+Tiempo Real|datos_3.png
+Video Aventura|datos_3.png
+|sinimg.png

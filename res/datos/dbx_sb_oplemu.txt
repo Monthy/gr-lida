@@ -1,4 +1,4 @@
-default|sinimg
-compat|sinimg
-fast|sinimg
-old|sinimg
+default|sinimg.png
+compat|sinimg.png
+fast|sinimg.png
+old|sinimg.png

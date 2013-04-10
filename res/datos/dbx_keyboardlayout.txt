@@ -1,73 +1,97 @@
-none|sinimg
-auto|sinimg
-SP|es
-ES|es
-AZ|sinimg
-BA|sinimg
-BE|sinimg
-BG|sinimg
-BL|sinimg
-BR|sinimg
-BY|sinimg
-CA|sinimg
-CF|sinimg
-CZ243|cz
-DK|dk
-DV|sinimg
-EE|sinimg
-EL|sinimg
-ET|sinimg
-FI|sinimg
-FO|sinimg
-FR|fr
-GK|sinimg
-GR|de
-HR|sinimg
-HU|sinimg
-HY|sinimg
-IS|sinimg
-IT|it
-JP|sinimg
-KK|sinimg
-KY|sinimg
-LA|sinimg
-LH|sinimg
-LT221|sinimg
-LV|sinimg
-MK|sinimg
-ML|sinimg
-MN|sinimg
-MO|sinimg
-MT|sinimg
-NE|sinimg
-NG|sinimg
-NL|nl
-NO|sinimg
-PH|sinimg
-PL|pl
-PO|sinimg
-RH|sinimg
-RO|sinimg
-RU|ru
-SD|sinimg
-SF|sinimg
-SG|sinimg
-SI|sinimg
-SK|sinimg
-SQ|sinimg
-SR|sinimg
-SU|sinimg
-SV|sinimg
-TJ|sinimg
-TM|sinimg
-TR|sinimg
-UA|sinimg
-UK|sinimg
-UR|sinimg
-US|us
-UX|sinimg
-UZ|sinimg
-VI|sinimg
-YC|sinimg
-YU|sinimg
-br274|sinimg
+<default>|default|default|sinimg.png
+<auto>|auto|auto|sinimg.png
+<none>|none|none|sinimg.png
+Albania (SQ)|_sq|sq|sinimg.png
+Albania (SQ448)|_sq448|sq448|sinimg.png
+Argentina (LA)|1la|la|sinimg.png
+Armenia (HY)|_hy|hy|sinimg.png
+Australia (US)|1us|us|sinimg.png
+Austria (DE)|1de|de|sinimg.png
+Austria (DE453)|1de453|de453|sinimg.png
+Azerbaijan (AZ)|_az|az|sinimg.png
+Belarus (BY)|_by|by|sinimg.png
+Belgium (BE)|_be|be|sinimg.png
+Bosnia & Herzegovina (BA)|_ba|ba|sinimg.png
+Brazil (BR)|_br|br|sinimg.png
+Brazil (BR274)|_br274|br274|sinimg.png
+Bulgaria (BG)|_bg|bg|sinimg.png
+Bulgaria (BG241)|_bg241|bg241|sinimg.png
+Canada (CA)|_ca|ca|sinimg.png
+Canada (CA445)|_ca445|ca445|sinimg.png
+Canada (CF501)|_cf501|cf501|sinimg.png
+Chile (LA)|2la|la|sinimg.png
+Colombia (LA)|3la|la|sinimg.png
+Croatia (HR)|_hr|hr|sinimg.png
+Czech Republic (CZ)|_cz|cz|sinimg.png
+Czech Republic (CZ243)|_cz243|cz243|sinimg.png
+Denmark (DK)|_dk|dk|sinimg.png
+Ecuador (LA)|4la|la|sinimg.png
+Estonia (EE)|_ee|ee|sinimg.png
+Faeroe Islands (FO)|_fo|fo|sinimg.png
+Finland (FI)|_fi|fi|sinimg.png
+France (FR)|_fr|fr|sinimg.png
+France (FR120)|_fr120|fr120|sinimg.png
+Georgia (KA)|_ka|ka|sinimg.png
+Germany (DE)|2de|de|sinimg.png
+Germany (DE453)|2de453|de453|sinimg.png
+Greece (GK)|_gk|gk|sinimg.png
+Greece (GK220)|_gk220|gk220|sinimg.png
+Greece (GK459)|_gk459|gk459|sinimg.png
+Hungary (HU)|_hu|hu|sinimg.png
+Hungary (HU208)|_hu208|hu208|sinimg.png
+Iceland (IS)|_is|is|sinimg.png
+Iceland (IS161)|_is161|is161|sinimg.png
+Ireland (UK)|1uk|uk|sinimg.png
+Ireland (UK168)|1uk168|uk168|sinimg.png
+Italy (IT)|_it|it|sinimg.png
+Italy (IT142)|_it142|it142|sinimg.png
+Kazakhstan (KK)|_kk|kk|sinimg.png
+Kyrgyzstan (KY)|_ky|ky|sinimg.png
+Latin-American-Spanish (LA)|5la|la|sinimg.png
+Latvia (LV)|_lv|lv|sinimg.png
+Latvia (LV455)|_lv455|lv455|sinimg.png
+Lithuania (LT)|_lt|lt|sinimg.png
+Lithuania (LT210)|_lt210|lt210|sinimg.png
+Lithuania (LT211)|_lt211|lt211|sinimg.png
+Lithuania (LT221)|_lt221|lt221|sinimg.png
+Lithuania (LT456)|_lt456|lt456|sinimg.png
+Macedonia (MK)|_mk|mk|sinimg.png
+Malta (MT)|_mt|mt|sinimg.png
+Malta (MT47)|_mt47|mt47|sinimg.png
+Mexico (LA)|6la|la|sinimg.png
+Mongolia (MN)|_mn|mn|sinimg.png
+Netherlands (NL)|_nl|nl|sinimg.png
+New Zealand (US)|2us|us|sinimg.png
+Norway (NO)|_no|no|sinimg.png
+Philippines (PH)|_ph|ph|sinimg.png
+Poland (PL)|_pl|pl|sinimg.png
+Poland (PL214)|_pl214|pl214|sinimg.png
+Portugal (PO)|_po|po|sinimg.png
+Romania (RO)|_ro|ro|sinimg.png
+Romania (RO446)|_ro446|ro446|sinimg.png
+Russia (RU)|_ru|ru|sinimg.png
+Russia (RU443)|_ru443|ru443|sinimg.png
+Serbia & Montenegro (SR)|_sr|sr|sinimg.png
+Serbia & Montenegro (SR450)|_sr450|sr450|sinimg.png
+Slovakia (SK)|_sk|sk|sinimg.png
+Slovenia (SI)|_si|si|sinimg.png
+South Africa (US)|3us|us|sinimg.png
+Spain (ES)|_es|es|sinimg.png
+Sweden (SV)|_sv|sv|sinimg.png
+Switzerland - French (SF)|_sf|sf|sinimg.png
+Switzerland - German (SD)|_sd|sd|sinimg.png
+Turkey (TR)|_tr|tr|sinimg.png
+Turkey (TR440)|_tr440|tr440|sinimg.png
+Turkmenistan (TM)|_tm|tm|sinimg.png
+US (US)|4us|us|sinimg.png
+US Dvorak (DV)|_dv|dv|sinimg.png
+US International (UX)|_ux|ux|sinimg.png
+US Left-Hand Dvorak (LH)|_lh|lh|sinimg.png
+US Right-Hand Dvorak (RH)|_rh|rh|sinimg.png
+Ukraine (UA)|_ua|ua|sinimg.png
+Ukraine (UA465)|_ua465|ua465|sinimg.png
+United Kingdom (UK)|2uk|uk|sinimg.png
+United Kingdom (UK168)|2uk168|uk168|sinimg.png
+Uzbekistan (UZ)|_uz|uz|sinimg.png
+Venezuela (LA)|7la|la|sinimg.png
+Yugoslavia (YU)|_yu|yu|sinimg.png

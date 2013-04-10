@@ -1,8 +1,8 @@
-0|sinimg
-1|sinimg
-2|sinimg
-4|sinimg
-8|sinimg
-16|sinimg
-32|sinimg
-63|sinimg
+0|sinimg.png
+1|sinimg.png
+2|sinimg.png
+4|sinimg.png
+8|sinimg.png
+16|sinimg.png
+32|sinimg.png
+63|sinimg.png

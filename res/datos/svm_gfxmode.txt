@@ -1,12 +1,12 @@
-Normal (no scaling)|1x|img_1x
-2x (Default)|2x|img_2x
-3x|3x|img_3x
-2x SAI|2xsai|img_2xsai
-Super 2x Sai|super2xsai|img_super2xsai
-SuperEagle|supereagle|img_supereagle
-Advanced Mame 2x|advmame2x|img_advmame2x_3x
-Advanced Mame 3x|advmame3x|img_advmame2x_3x
-High Quality 2x|hq2x|img_hq2x
-High Quality 3x|hq3x|img_hq3x
-Tv 2x|tv2x|img_tv2x
-Dotmatrix|dotmatrix|img_dotmatrix
+Normal (no scaling)|1x|img_1x.png
+Normal 2x (default)|2x|img_2x.png
+Normal 3x|3x|img_3x.png
+Scale and Interpolation 2x|2xsai|img_2xsai.png
+Super Scale and Interpolation 2x|super2xsai|img_super2xsai.png
+Super Eagle|supereagle|img_supereagle.png
+Advanced Mame 2x|advmame2x|img_advmame2x_3x.png
+Advanced Mame 3x|advmame3x|img_advmame2x_3x.png
+High-Quality 2x|hq2x|img_hq2x.png
+High-Quality 3x|hq3x|img_hq3x.png
+Tv Interlacing 2x|tv2x|img_tv2x.png
+Dotmatrix|dotmatrix|img_dotmatrix.png

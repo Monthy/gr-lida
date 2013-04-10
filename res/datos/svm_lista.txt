@@ -1,4 +1,4 @@
-LucasArts Game Compatibility Chart||logo_lucas_arts|
+LucasArts Game Compatibility Chart|||logo_lucas_arts.png
 Maniac Mansion|maniac|90|maniac.png
 Zak McKracken and the Alien Mindbenders|zak|90|zak.png
 Indiana Jones and the Last Crusade|indy3|90|indy3.png
@@ -13,13 +13,13 @@ Full Throttle|ft|90|ft.png
 The Dig|dig|90|dig.png
 The Curse of Monkey Island|comi|90|comi.png
 
-Activision Adventure Game Compatibility Chart||logo_activision|
+Activision Adventure Game Compatibility Chart|||logo_activision.png
 Leather Goddesses of Phobos 2|lgop2|90|lgop2.png
 The Manhole|manhole|90|manhole.png
 Return to Zork|rtz|90|rtz.png
 Rodney's Funscreen|rodney|90|rodney.png
 
-Adventuresoft/Horrorsoft Game Compatibility Chart||svmlist_space|
+Adventuresoft/Horrorsoft Game Compatibility Chart|||sinimg.png
 Elvira - Mistress of the Dark|elvira1|90|elvira.png
 Elvira II - The Jaws of Cerberus|elvira2|80|elvira.png
 Personal Nightmare|pn|50|sinimg.png
@@ -32,25 +32,27 @@ Simon the Sorcerer's Puzzle Pack - Swampy Adventures|swampy|70|simon.png
 The Feeble Files|feeble|95|feeble.png
 Waxworks|waxworks|50|waxworks.png
 
-Coktel Vision Game Compatibility Chart||logo_coktel_vision|
+Coktel Vision Game Compatibility Chart|||logo_coktel_vision.png
 Bargon Attack|bargon|95|bargon.png
 Fascination|fascination|90|fascination.png
+Geisha|geisha|90|sinimg.png
 Gobliiins|gob1|95|gob.png
 Gobliins 2|gob2|95|gob.png
 Goblins 3|gob3|95|gob.png
 Lost in Time|lostintime|95|lostintime.png
-Playtoons: Bambou le Sauveur de la Jungle|bambou|90|sinimg.png
+Once Upon A Time: Little Red Riding Hood|littlered|90|sinimg.png
+Playtoons: Bambou le Sauveur de la Jungle|bambou|95|sinimg.png
 The Bizarre Adventures of Woodruff and the Schnibble|woodruff|95|woodruff.png
-Urban Runner|urban|90|urban.png
+Urban Runner|urban|95|urban.png
 Ween: The Prophecy|ween|95|ween.png
 
-Revolution Software Game Compatibility Chart||logo_revolution_software|
+Revolution Software Game Compatibility Chart|||logo_revolution_software.png
 Beneath a Steel Sky|sky|98|sky.png
 Broken Sword: The Shadow of the Templars|sword1|98|sword1.png
 Broken Sword II: The Smoking Mirror|sword2|98|sword2.png
 Lure of the Temptress|lure|95|lure.png
 
-Sierra AGI Game Compatibility Chart||logo_sierra|
+Sierra AGI Game Compatibility Chart|||logo_sierra.png
 The Black Cauldron|bc|90|bc.png
 Gold Rush!|goldrush|90|gr.png
 King's Quest I|kq1|90|kq.png
@@ -69,7 +71,7 @@ Mickey's Space Adventure|mickey|90|mickey.png
 Troll's Tale|troll|80|troll.png
 Winnie the Pooh in the Hundred Acre Wood|winnie|90|winnie.png
 
-Sierra SCI Game Compatibility Chart||logo_sierra|
+Sierra SCI Game Compatibility Chart|||logo_sierra.png
 Castle of Dr. Brain (EGA and VGA)|castlebrain|95|castlebrain.png
 Codename: ICEMAN|iceman|95|iceman.png
 Conquests of Camelot|camelot|95|camelot.png
@@ -110,13 +112,18 @@ Space Quest IV (EGA and VGA)|sq4|95|sq_sci.png
 Space Quest V|sq5|95|sq_sci.png
 The Island of Dr. Brain|islandbrain|95|castlebrain.png
 
-Other Game Compatibility Chart||svmlist_space|
+Other Game Compatibility Chart|||sinimg.png
+3 Skulls of the Toltecs|toltecs|90|sinimg.png
+Blue Force|blueforce|90|sinimg.png
 Bud Tucker in Double Trouble|tucker|95|tucker.png
 Cruise for a Corpse|cruise|95|cruise.png
+DreamWeb|dreamweb|95|dreamweb.png
 Discworld|dw|98|dw.png
 Discworld II - Missing presumed...!?|dw2|98|dw.png
 Dragon History|draci|90|draci.png
 Drascula: The Vampire Strikes Back|drascula|98|drascula.png
+Eye of the Beholder|eob|80|sinimg.png
+Eye of the Beholder II: The Legend of Darkmoon|eob2|80|sinimg.png
 Flight of the Amazon Queen|queen|98|queen.png
 Future Wars|fw|80|fw.png
 Hugo's House of Horrors|hugo1|90|sinimg.png
@@ -124,21 +131,23 @@ Hugo 2: Whodunit?|hugo2|90|sinimg.png
 Hugo 3: Jungle of Doom|hugo3|90|sinimg.png
 I Have No Mouth, and I Must Scream|ihnm|90|ihnm.png
 Inherit the Earth: Quest for the Orb|ite|95|ite.png
-Lands of Lore: The Throne of Chaos|lol|80|sinimg.png
+Lands of Lore: The Throne of Chaos|lol|80|lol.png
 Nippon Safes Inc.|nippon|90|nippon.png
-Ringworld: Revenge Of The Patriarch|ring|90|sinimg.png
+Ringworld: Revenge Of The Patriarch|ring|90|ringworld.png
+Soltys|soltys|90|soltys.png
 The Legend of Kyrandia|kyra1|90|kyra.png
 The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|90|kyra.png
 The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|90|kyra.png
 The 7th Guest|t7g|95|t7g.png
 TeenAgent|teenagent|80|teenagent.png
 Toonstruck|toon|80|toon.png
+Tony Tough|tony|98|sinimg.png
 Touche: The Adventures of the Fifth Musketeer|touche|75|touche.png
 
-Humongous Entertainment Game Compatibility Chart||svmlist_space|
+Humongous Entertainment Game Compatibility Chart|||sinimg.png
 Backyard Baseball|baseball|90|sports.png
 Backyard Baseball 2001|baseball2001|80|sports.png
-Backyard Baseball 2003|baseball2003|20|sports.png
+Backyard Baseball 2003|baseball2003|80|sports.png
 Backyard Football|football|90|sports.png
 Backyard Football 2002|football2002|80|sports.png
 Bear Stormin'|brstorm|95|sports.png
@@ -166,7 +175,7 @@ Pajama Sam: Games to Play on Any Day|pjgames|70|pajama.png
 Pajama Sam 1: No Need to Hide When It's Dark Outside|pajama|90|pajama.png
 Pajama Sam 2: Thunder and Lightning Aren't so Frightening|pajama2|90|pajama.png
 Pajama Sam 3: You Are What You Eat From Your Head to Your Feet|pajama3|90|pajama.png
-Pajama Sam's Lost & Found|lost|85|pajama.png
+Pajama Sam's Lost & Found|lost|90|pajama.png
 Pajama Sam's Sock Works|socks|90|pajama.png
 Putt-Putt Enters the Race|puttrace|90|puttputt.png
 Putt-Putt Goes to the Moon|puttmoon|95|puttputt.png
@@ -182,9 +191,16 @@ SPY Fox 1: Dry Cereal|spyfox|90|spyfox.png
 SPY Fox 2: Some Assembly Required|spyfox2|90|spyfox.png
 SPY Fox 3: Operation Ozone|spyozon|90|spyfox.png
 SPY Fox in Cheese Chase|chase|90|spyfox.png
-SPY Fox in Hold the Mustard|mustard|85|spyfox.png
+SPY Fox in Hold the Mustard|mustard|90|spyfox.png
 
-Living Books Game Compatibility Chart||svmlist_space|
+Animation Magic Game Compatibility Chart|||sinimg.png
+Darby the Dragon|darby|90|darby.png
+Gregory and the Hot Air Balloon|gregory|90|sinimg.png
+Magic Tales: Liam Finds a Story|liam|80|sinimg.png
+The Princess and the Crab|princess|80|sinimg.png
+Sleeping Cub's Test of Courage|sleepingcub|80|sinimg.png
+
+Living Books Game Compatibility Chart|||sinimg.png
 Aesop's Fables: The Tortoise and the Hare|tortoise|90|tortoise.png
 Arthur's Birthday|arthurbday|90|arthur.png
 Arthur's Teacher Trouble|arthur|90|arthur.png
@@ -193,9 +209,9 @@ Green Eggs and Ham|greeneggs|80|greeneggs.png
 Harry and the Haunted House|harryhh|90|harryhh.png
 Just Grandma and Me|grandma|90|grandma.png
 Little Monster at School|lilmonster|90|lilmonster.png
-Ruff's Bone|ruff|90|sinimg.png
-Sheila Rae, the Brave|sheila|90|sinimg.png
+Ruff's Bone|ruff|90|ruff.png
+Sheila Rae, the Brave|sheila|90|sheilarae.png
 Stellaluna|stellaluna|90|sinimg.png
 The Berenstain Bears Get in a Fight|bearfight|90|bearfight.png
 The Berenstain Bears in the Dark|beardark|90|bearfight.png
-The New Kid on the Block|newkid|90|sinimg.png
+The New Kid on the Block|newkid|90|newkid.png

@@ -1,22 +1,22 @@
-Espagnol|es
-Anglais|en
-Anglais (GB)|gb
-Anglais (US)|us
-Allemand|de
-Danois|dk
-Français|fr
-Italien|it
-Portugais|pt
-Japonais|jp
-Chinois (Chine)|zh-cn
-Chinois (Taiwan)|zh
-Coréen|kr
-Hébreu|hb
-Russe|ru
-Tchèque|cz
-Suédois|se
-Néerlandais|nl
-Norvégien Bokmål|nb
-Polonais|pl
-Hongroise|hu
-Grecque|gr
+Espagnol|es|es.png
+Anglais|en|en.png
+Anglais (GB)|gb|gb.png
+Anglais (US)|us|us.png
+Allemand|de|de.png
+Danois|dk|dk.png
+Français|fr|fr.png
+Italien|it|it.png
+Portugais|pt|pt.png
+Japonais|jp|jp.png
+Chinois (Chine)|zh-cn|zh-cn.png
+Chinois (Taiwan)|zh|zh.png
+Coréen|kr|kr.png
+Hébreu|hb|hb.png
+Russe|ru|ru.png
+Tchèque|cz|cz.png
+Suédois|se|se.png
+Néerlandais|nl|nl.png
+Norvégien Bokmål|nb|nb.png
+Polonais|pl|pl.png
+Hongroise|hu|hu.png
+Grecque|gr|gr.png

@@ -1,8 +1,74 @@
 <RCC>
     <qresource prefix="/">
-        <file>img32/descargar.png</file>
+        <file>license.gpl</file>
+        <file>list_translators.txt</file>
         <file>StyleSheet.qss</file>
         <file>StyleSheetList.qss</file>
+        <file>tpl_info.html</file>
+        <file>tpl_juego_info.html</file>
+        <file>tpl_juego_no_info.html</file>
+        <file>scripts/gr-lida.js</file>
+        <file>scripts/mobygames.js</file>
+        <file>idiomas/gr-lida_da_DK.qm</file>
+        <file>idiomas/gr-lida_en_EN.qm</file>
+        <file>idiomas/gr-lida_es_ES.qm</file>
+        <file>idiomas/gr-lida_fr_FR.qm</file>
+        <file>idiomas/gr-lida_hu_HU.qm</file>
+        <file>idiomas/gr-lida_ru_RU.qm</file>
+        <file>datos/da_DK/dosbox.conf</file>
+        <file>datos/da_DK/edad_recomendada.txt</file>
+        <file>datos/da_DK/formatos.txt</file>
+        <file>datos/da_DK/generos.txt</file>
+        <file>datos/da_DK/idiomas.txt</file>
+        <file>datos/da_DK/numdisc.txt</file>
+        <file>datos/da_DK/perspectivas.txt</file>
+        <file>datos/da_DK/svm_idioma.txt</file>
+        <file>datos/da_DK/temas.txt</file>
+        <file>datos/en_EN/dosbox.conf</file>
+        <file>datos/en_EN/edad_recomendada.txt</file>
+        <file>datos/en_EN/formatos.txt</file>
+        <file>datos/en_EN/generos.txt</file>
+        <file>datos/en_EN/idiomas.txt</file>
+        <file>datos/en_EN/numdisc.txt</file>
+        <file>datos/en_EN/perspectivas.txt</file>
+        <file>datos/en_EN/svm_idioma.txt</file>
+        <file>datos/en_EN/temas.txt</file>
+        <file>datos/es_ES/dosbox.conf</file>
+        <file>datos/es_ES/edad_recomendada.txt</file>
+        <file>datos/es_ES/formatos.txt</file>
+        <file>datos/es_ES/generos.txt</file>
+        <file>datos/es_ES/idiomas.txt</file>
+        <file>datos/es_ES/numdisc.txt</file>
+        <file>datos/es_ES/perspectivas.txt</file>
+        <file>datos/es_ES/svm_idioma.txt</file>
+        <file>datos/es_ES/temas.txt</file>
+        <file>datos/fr_FR/dosbox.conf</file>
+        <file>datos/fr_FR/edad_recomendada.txt</file>
+        <file>datos/fr_FR/formatos.txt</file>
+        <file>datos/fr_FR/generos.txt</file>
+        <file>datos/fr_FR/idiomas.txt</file>
+        <file>datos/fr_FR/numdisc.txt</file>
+        <file>datos/fr_FR/perspectivas.txt</file>
+        <file>datos/fr_FR/svm_idioma.txt</file>
+        <file>datos/fr_FR/temas.txt</file>
+        <file>datos/hu_HU/dosbox.conf</file>
+        <file>datos/hu_HU/edad_recomendada.txt</file>
+        <file>datos/hu_HU/formatos.txt</file>
+        <file>datos/hu_HU/generos.txt</file>
+        <file>datos/hu_HU/idiomas.txt</file>
+        <file>datos/hu_HU/numdisc.txt</file>
+        <file>datos/hu_HU/perspectivas.txt</file>
+        <file>datos/hu_HU/svm_idioma.txt</file>
+        <file>datos/hu_HU/temas.txt</file>
+        <file>datos/ru_RU/dosbox.conf</file>
+        <file>datos/ru_RU/edad_recomendada.txt</file>
+        <file>datos/ru_RU/formatos.txt</file>
+        <file>datos/ru_RU/generos.txt</file>
+        <file>datos/ru_RU/idiomas.txt</file>
+        <file>datos/ru_RU/numdisc.txt</file>
+        <file>datos/ru_RU/perspectivas.txt</file>
+        <file>datos/ru_RU/svm_idioma.txt</file>
+        <file>datos/ru_RU/temas.txt</file>
         <file>datos/companias.txt</file>
         <file>datos/dbx_cpu_core.txt</file>
         <file>datos/dbx_cpu_type.txt</file>
@@ -23,69 +89,31 @@
         <file>datos/dbx_sbtype.txt</file>
         <file>datos/dbx_scaler.txt</file>
         <file>datos/dbx_sensitivity.txt</file>
-        <file>datos/edad_recomendada.txt</file>
+        <file>datos/grl_datos.xml</file>
+        <file>datos/grl_dosbox.xml</file>
+        <file>datos/grl_scummvm.xml</file>
+        <file>datos/grl_vdmsound.xml</file>
+        <file>datos/dosbox.conf</file>
         <file>datos/fechas.txt</file>
-        <file>datos/formatos.txt</file>
-        <file>datos/generos.txt</file>
-        <file>datos/numdisc.txt</file>
-        <file>datos/perspectivas.txt</file>
-        <file>datos/sistemaop.txt</file>
+        <file>datos/puntuacion.txt</file>
+        <file>datos/rating.txt</file>
+        <file>datos/sistemas.txt</file>
         <file>datos/smiles.txt</file>
         <file>datos/svm_gfxmode.txt</file>
-        <file>datos/svm_idioma.txt</file>
         <file>datos/svm_lista.txt</file>
         <file>datos/svm_music_driver.txt</file>
         <file>datos/svm_platform.txt</file>
         <file>datos/svm_render_mode.txt</file>
-        <file>datos/tema.txt</file>
-        <file>datos/da_DK/edad_recomendada.txt</file>
-        <file>datos/da_DK/formatos.txt</file>
-        <file>datos/da_DK/generos.txt</file>
-        <file>datos/da_DK/numdisc.txt</file>
-        <file>datos/da_DK/perspectivas.txt</file>
-        <file>datos/da_DK/tema.txt</file>
-        <file>datos/da_DK/svm_idioma.txt</file>
-        <file>datos/en_EN/edad_recomendada.txt</file>
-        <file>datos/en_EN/formatos.txt</file>
-        <file>datos/en_EN/generos.txt</file>
-        <file>datos/en_EN/numdisc.txt</file>
-        <file>datos/en_EN/perspectivas.txt</file>
-        <file>datos/en_EN/tema.txt</file>
-        <file>datos/en_EN/svm_idioma.txt</file>
-        <file>datos/fr_FR/edad_recomendada.txt</file>
-        <file>datos/fr_FR/formatos.txt</file>
-        <file>datos/fr_FR/generos.txt</file>
-        <file>datos/fr_FR/numdisc.txt</file>
-        <file>datos/fr_FR/perspectivas.txt</file>
-        <file>datos/fr_FR/tema.txt</file>
-        <file>datos/fr_FR/svm_idioma.txt</file>
-        <file>datos/hu_HU/edad_recomendada.txt</file>
-        <file>datos/hu_HU/formatos.txt</file>
-        <file>datos/hu_HU/generos.txt</file>
-        <file>datos/hu_HU/numdisc.txt</file>
-        <file>datos/hu_HU/perspectivas.txt</file>
-        <file>datos/hu_HU/tema.txt</file>
-        <file>datos/hu_HU/svm_idioma.txt</file>
-        <file>datos/ru_RU/edad_recomendada.txt</file>
-        <file>datos/ru_RU/formatos.txt</file>
-        <file>datos/ru_RU/generos.txt</file>
-        <file>datos/ru_RU/numdisc.txt</file>
-        <file>datos/ru_RU/perspectivas.txt</file>
-        <file>datos/ru_RU/tema.txt</file>
-        <file>datos/ru_RU/svm_idioma.txt</file>
-        <file>idiomas/gr-lida_da_DK.qm</file>
-        <file>idiomas/gr-lida_en_EN.qm</file>
-        <file>idiomas/gr-lida_es_ES.qm</file>
-        <file>idiomas/gr-lida_fr_FR.qm</file>
-        <file>idiomas/gr-lida_hu_HU.qm</file>
-        <file>idiomas/gr-lida_ru_RU.qm</file>
-        <file>images/grlida_logo.png</file>
+        <file>images/flow0.png</file>
+        <file>images/flow1.png</file>
+        <file>images/flow2.png</file>
+        <file>images/gr-lida_logo.png</file>
         <file>images/juego_eliminado.png</file>
         <file>images/juego_sin_imagen.png</file>
         <file>images/list_bg.jpg</file>
-        <file>images/list_bg_bgfix.jpg</file>
-        <file>images/list_cover.png</file>
+        <file>images/list_cover_title_bg.png</file>
         <file>images/list_cover_top.png</file>
+        <file>images/list_cover_top_select.png</file>
         <file>images/splash.png</file>
         <file>images/star_off.png</file>
         <file>images/star_on.png</file>
@@ -93,7 +121,173 @@
         <file>images/wizard_scummvm.png</file>
         <file>images/wizard_scummvm_bg.png</file>
         <file>images/wizard_vdmsound.png</file>
-        <file>img16/DFend.png</file>
+        <file>smiles/biggrin.png</file>
+        <file>smiles/cool.png</file>
+        <file>smiles/corazon.png</file>
+        <file>smiles/exclamation.png</file>
+        <file>smiles/flecha.png</file>
+        <file>smiles/mad.png</file>
+        <file>smiles/razz.png</file>
+        <file>smiles/rolleyes.png</file>
+        <file>smiles/sad.png</file>
+        <file>smiles/sinimg.png</file>
+        <file>smiles/smile.png</file>
+        <file>smiles/surprised.png</file>
+        <file>smiles/wink.png</file>
+        <file>img_lng/cz.png</file>
+        <file>img_lng/de.png</file>
+        <file>img_lng/dk.png</file>
+        <file>img_lng/en.png</file>
+        <file>img_lng/es.png</file>
+        <file>img_lng/fr.png</file>
+        <file>img_lng/gb.png</file>
+        <file>img_lng/gr.png</file>
+        <file>img_lng/hb.png</file>
+        <file>img_lng/hu.png</file>
+        <file>img_lng/it.png</file>
+        <file>img_lng/jp.png</file>
+        <file>img_lng/kr.png</file>
+        <file>img_lng/nb.png</file>
+        <file>img_lng/nl.png</file>
+        <file>img_lng/pl.png</file>
+        <file>img_lng/pt.png</file>
+        <file>img_lng/ru.png</file>
+        <file>img_lng/se.png</file>
+        <file>img_lng/sinimg.png</file>
+        <file>img_lng/us.png</file>
+        <file>img_lng/zh.png</file>
+        <file>img_lng/zh-cn.png</file>
+        <file>img_svm/0.png</file>
+        <file>img_svm/5.png</file>
+        <file>img_svm/10.png</file>
+        <file>img_svm/15.png</file>
+        <file>img_svm/20.png</file>
+        <file>img_svm/25.png</file>
+        <file>img_svm/30.png</file>
+        <file>img_svm/35.png</file>
+        <file>img_svm/40.png</file>
+        <file>img_svm/45.png</file>
+        <file>img_svm/50.png</file>
+        <file>img_svm/55.png</file>
+        <file>img_svm/60.png</file>
+        <file>img_svm/65.png</file>
+        <file>img_svm/70.png</file>
+        <file>img_svm/75.png</file>
+        <file>img_svm/80.png</file>
+        <file>img_svm/85.png</file>
+        <file>img_svm/87.png</file>
+        <file>img_svm/90.png</file>
+        <file>img_svm/93.png</file>
+        <file>img_svm/95.png</file>
+        <file>img_svm/98.png</file>
+        <file>img_svm/100.png</file>
+        <file>img_svm/sin_num.png</file>
+        <file>img_svm/sinimg.png</file>
+        <file>icon_svm/arthur.png</file>
+        <file>icon_svm/bargon.png</file>
+        <file>icon_svm/bc.png</file>
+        <file>icon_svm/bearfight.png</file>
+        <file>icon_svm/blues.png</file>
+        <file>icon_svm/camelot.png</file>
+        <file>icon_svm/castlebrain.png</file>
+        <file>icon_svm/comi.png</file>
+        <file>icon_svm/cruise.png</file>
+        <file>icon_svm/darby.png</file>
+        <file>icon_svm/dig.png</file>
+        <file>icon_svm/draci.png</file>
+        <file>icon_svm/drascula.png</file>
+        <file>icon_svm/dreamweb.png</file>
+        <file>icon_svm/dw.png</file>
+        <file>icon_svm/ecoquest.png</file>
+        <file>icon_svm/elvira.png</file>
+        <file>icon_svm/fan.png</file>
+        <file>icon_svm/fascination.png</file>
+        <file>icon_svm/fbear.png</file>
+        <file>icon_svm/feeble.png</file>
+        <file>icon_svm/ffish.png</file>
+        <file>icon_svm/field.png</file>
+        <file>icon_svm/freddypharkas.png</file>
+        <file>icon_svm/ft.png</file>
+        <file>icon_svm/fw.png</file>
+        <file>icon_svm/gob.png</file>
+        <file>icon_svm/gr.png</file>
+        <file>icon_svm/grandma.png</file>
+        <file>icon_svm/greeneggs.png</file>
+        <file>icon_svm/harryhh.png</file>
+        <file>icon_svm/hoyle.png</file>
+        <file>icon_svm/iceman.png</file>
+        <file>icon_svm/ihnm.png</file>
+        <file>icon_svm/indy3.png</file>
+        <file>icon_svm/indy4.png</file>
+        <file>icon_svm/ite.png</file>
+        <file>icon_svm/jones.png</file>
+        <file>icon_svm/kq.png</file>
+        <file>icon_svm/kq_sci.png</file>
+        <file>icon_svm/kyra.png</file>
+        <file>icon_svm/laurabow.png</file>
+        <file>icon_svm/lgop2.png</file>
+        <file>icon_svm/lilmonster.png</file>
+        <file>icon_svm/logo_activision.png</file>
+        <file>icon_svm/logo_coktel_vision.png</file>
+        <file>icon_svm/logo_lucas_arts.png</file>
+        <file>icon_svm/logo_revolution_software.png</file>
+        <file>icon_svm/logo_sierra.png</file>
+        <file>icon_svm/lol.png</file>
+        <file>icon_svm/loom.png</file>
+        <file>icon_svm/lostintime.png</file>
+        <file>icon_svm/lsl.png</file>
+        <file>icon_svm/lsl_sci.png</file>
+        <file>icon_svm/lure.png</file>
+        <file>icon_svm/manhole.png</file>
+        <file>icon_svm/maniac.png</file>
+        <file>icon_svm/mh.png</file>
+        <file>icon_svm/mickey.png</file>
+        <file>icon_svm/mixedup.png</file>
+        <file>icon_svm/monkey1.png</file>
+        <file>icon_svm/monkey2.png</file>
+        <file>icon_svm/mumg.png</file>
+        <file>icon_svm/newkid.png</file>
+        <file>icon_svm/nippon.png</file>
+        <file>icon_svm/pajama.png</file>
+        <file>icon_svm/pepper.png</file>
+        <file>icon_svm/pq.png</file>
+        <file>icon_svm/pq_sci.png</file>
+        <file>icon_svm/puttputt.png</file>
+        <file>icon_svm/qfg_sci.png</file>
+        <file>icon_svm/queen.png</file>
+        <file>icon_svm/ringworld.png</file>
+        <file>icon_svm/rodney.png</file>
+        <file>icon_svm/rtz.png</file>
+        <file>icon_svm/ruff.png</file>
+        <file>icon_svm/samnmax.png</file>
+        <file>icon_svm/seussabc.png</file>
+        <file>icon_svm/sheilarae.png</file>
+        <file>icon_svm/simon.png</file>
+        <file>icon_svm/sinimg.png</file>
+        <file>icon_svm/sky.png</file>
+        <file>icon_svm/slater.png</file>
+        <file>icon_svm/soltys.png</file>
+        <file>icon_svm/sports.png</file>
+        <file>icon_svm/spyfox.png</file>
+        <file>icon_svm/sq.png</file>
+        <file>icon_svm/sq_sci.png</file>
+        <file>icon_svm/sword1.png</file>
+        <file>icon_svm/sword2.png</file>
+        <file>icon_svm/t7g.png</file>
+        <file>icon_svm/teenagent.png</file>
+        <file>icon_svm/tentacle.png</file>
+        <file>icon_svm/thinkers.png</file>
+        <file>icon_svm/toon.png</file>
+        <file>icon_svm/tortoise.png</file>
+        <file>icon_svm/touche.png</file>
+        <file>icon_svm/troll.png</file>
+        <file>icon_svm/tucker.png</file>
+        <file>icon_svm/urban.png</file>
+        <file>icon_svm/waxworks.png</file>
+        <file>icon_svm/ween.png</file>
+        <file>icon_svm/winnie.png</file>
+        <file>icon_svm/woodruff.png</file>
+        <file>icon_svm/zak.png</file>
         <file>img16/acercad.png</file>
         <file>img16/actualizar.png</file>
         <file>img16/amiga.png</file>
@@ -106,29 +300,42 @@
         <file>img16/ayuda.png</file>
         <file>img16/barra_herramintas.png</file>
         <file>img16/basedatos.png</file>
+        <file>img16/blu_ray.png</file>
         <file>img16/bullet_black.png</file>
         <file>img16/c64.png</file>
         <file>img16/cancelar.png</file>
         <file>img16/capturas.png</file>
         <file>img16/carpeta_0.png</file>
         <file>img16/carpeta_1.png</file>
+        <file>img16/cartucho.png</file>
         <file>img16/categorias.png</file>
         <file>img16/cd_audio.png</file>
         <file>img16/cd_iso.png</file>
         <file>img16/cd_multi_iso.png</file>
         <file>img16/cerrar.png</file>
+        <file>img16/column_list.png</file>
         <file>img16/controller.png</file>
         <file>img16/cover_create.png</file>
         <file>img16/cover_mode.png</file>
+        <file>img16/datos.png</file>
         <file>img16/datos_1.png</file>
         <file>img16/datos_2.png</file>
         <file>img16/datos_3.png</file>
-        <file>img16/dosbox-scummvm.png</file>
+        <file>img16/descarga.png</file>
+        <file>img16/DFend.png</file>
         <file>img16/dosbox.png</file>
+        <file>img16/dosbox-scummvm.png</file>
         <file>img16/drive_cdrom.png</file>
         <file>img16/drive_floppy.png</file>
         <file>img16/drive_hd.png</file>
         <file>img16/dvd.png</file>
+        <file>img16/edad_3.png</file>
+        <file>img16/edad_7.png</file>
+        <file>img16/edad_12.png</file>
+        <file>img16/edad_16.png</file>
+        <file>img16/edad_18.png</file>
+        <file>img16/edad_nd.png</file>
+        <file>img16/edad_tp.png</file>
         <file>img16/edit_buscar.png</file>
         <file>img16/edit_buscar_anterior.png</file>
         <file>img16/edit_buscar_siguiente.png</file>
@@ -164,7 +371,8 @@
         <file>img16/go-next.png</file>
         <file>img16/go-up.png</file>
         <file>img16/grafica.png</file>
-        <file>img16/grlida.png</file>
+        <file>img16/gr-lida.png</file>
+        <file>img16/html.png</file>
         <file>img16/idiomas.png</file>
         <file>img16/img_1x.png</file>
         <file>img16/img_2x.png</file>
@@ -187,6 +395,8 @@
         <file>img16/informacion.png</file>
         <file>img16/limpiar.png</file>
         <file>img16/linux.png</file>
+        <file>img16/list_add.png</file>
+        <file>img16/list_remove.png</file>
         <file>img16/macintosh.png</file>
         <file>img16/mp_aleatorio.png</file>
         <file>img16/mp_anterior.png</file>
@@ -205,6 +415,7 @@
         <file>img16/opciones.png</file>
         <file>img16/orden_asc.png</file>
         <file>img16/orden_desc.png</file>
+        <file>img16/original.png</file>
         <file>img16/pc.png</file>
         <file>img16/pdf.png</file>
         <file>img16/pictureflow.png</file>
@@ -217,210 +428,69 @@
         <file>img16/s_drive_hd.png</file>
         <file>img16/s_floppy_1.png</file>
         <file>img16/s_floppy_2.png</file>
+        <file>img16/script.png</file>
         <file>img16/scummvm.png</file>
         <file>img16/sinimg.png</file>
+        <file>img16/smile.png</file>
         <file>img16/style.png</file>
         <file>img16/tag.png</file>
         <file>img16/tray_maximize.png</file>
         <file>img16/tray_minimize.png</file>
         <file>img16/tray_restore.png</file>
+        <file>img16/umd.png</file>
         <file>img16/vdmsound.png</file>
         <file>img16/win9x.png</file>
         <file>img16/winxp.png</file>
         <file>img16/zoom.png</file>
         <file>img16/zoom_in.png</file>
         <file>img16/zoom_out.png</file>
-        <file>img24/emu_datos.png</file>
-        <file>img24/emu_dbx.png</file>
-        <file>img24/emu_sin_imagen.png</file>
-        <file>img24/emu_svm.png</file>
-        <file>img24/emu_vdms.png</file>
-        <file>img32/btnAcercaD.png</file>
-        <file>img32/btnArchivos.png</file>
-        <file>img32/btnCapturas.png</file>
-        <file>img32/btnClose.png</file>
-        <file>img32/btnDatos.png</file>
-        <file>img32/btnDosBox.png</file>
-        <file>img32/btnEditar.png</file>
-        <file>img32/btnEjecutar.png</file>
-        <file>img32/btnEliminar.png</file>
-        <file>img32/btnImportarJuego.png</file>
-        <file>img32/btnNuevo.png</file>
-        <file>img32/btnOpciones.png</file>
-        <file>img32/btnScummVM.png</file>
-        <file>img32/btnSetup.png</file>
-        <file>img32/btnVdmSound.png</file>
+        <file>img24/basedatos.png</file>
+        <file>img24/categorias.png</file>
+        <file>img24/menu_nav.png</file>
+        <file>img24/datos.png</file>
+        <file>img24/datos_1.png</file>
+        <file>img24/dosbox.png</file>
+        <file>img24/ejecutar_app_setup.png</file>
+        <file>img24/html.png</file>
+        <file>img24/opciones.png</file>
+        <file>img24/scummvm.png</file>
+        <file>img24/sinimg.png</file>
+        <file>img24/style.png</file>
+        <file>img24/vdmsound.png</file>
+        <file>img32/acercad.png</file>
+        <file>img32/archivos.png</file>
+        <file>img32/capturas.png</file>
+        <file>img32/cerrar.png</file>
+        <file>img32/datos.png</file>
+        <file>img32/descarga.png</file>
+        <file>img32/dosbox.png</file>
+        <file>img32/editar.png</file>
+        <file>img32/ejecutar_app.png</file>
+        <file>img32/ejecutar_app_setup.png</file>
+        <file>img32/eliminar.png</file>
         <file>img32/gr-lida.png</file>
-        <file>img_lng/cz.png</file>
-        <file>img_lng/de.png</file>
-        <file>img_lng/dk.png</file>
-        <file>img_lng/en.png</file>
-        <file>img_lng/es.png</file>
-        <file>img_lng/fr.png</file>
-        <file>img_lng/gb.png</file>
-        <file>img_lng/gr.png</file>
-        <file>img_lng/hb.png</file>
-        <file>img_lng/hu.png</file>
-        <file>img_lng/it.png</file>
-        <file>img_lng/jp.png</file>
-        <file>img_lng/kr.png</file>
-        <file>img_lng/nb.png</file>
-        <file>img_lng/nl.png</file>
-        <file>img_lng/pl.png</file>
-        <file>img_lng/pt.png</file>
-        <file>img_lng/ru.png</file>
-        <file>img_lng/se.png</file>
-        <file>img_lng/us.png</file>
-        <file>img_lng/zh.png</file>
-        <file>img_lng/zh-cn.png</file>
-        <file>imgsvm/0.png</file>
-        <file>imgsvm/10.png</file>
-        <file>imgsvm/100.png</file>
-        <file>imgsvm/15.png</file>
-        <file>imgsvm/20.png</file>
-        <file>imgsvm/25.png</file>
-        <file>imgsvm/30.png</file>
-        <file>imgsvm/35.png</file>
-        <file>imgsvm/40.png</file>
-        <file>imgsvm/45.png</file>
-        <file>imgsvm/5.png</file>
-        <file>imgsvm/50.png</file>
-        <file>imgsvm/55.png</file>
-        <file>imgsvm/60.png</file>
-        <file>imgsvm/65.png</file>
-        <file>imgsvm/70.png</file>
-        <file>imgsvm/75.png</file>
-        <file>imgsvm/80.png</file>
-        <file>imgsvm/85.png</file>
-        <file>imgsvm/87.png</file>
-        <file>imgsvm/90.png</file>
-        <file>imgsvm/93.png</file>
-        <file>imgsvm/95.png</file>
-        <file>imgsvm/98.png</file>
-        <file>imgsvm/logo_activision.png</file>
-        <file>imgsvm/logo_coktel_vision.png</file>
-        <file>imgsvm/logo_lucas_arts.png</file>
-        <file>imgsvm/logo_revolution_software.png</file>
-        <file>imgsvm/logo_sierra.png</file>
-        <file>imgsvm/sin_num.png</file>
-        <file>imgsvm/svmlist_space.png</file>
-        <file>license.gpl</file>
-        <file>list_translators.txt</file>
-        <file>scripts/gr-lida.js</file>
-        <file>scripts/mobygames.js</file>
-        <file>smiles/biggrin.png</file>
-        <file>smiles/cool.png</file>
-        <file>smiles/corazon.png</file>
-        <file>smiles/exclamation.png</file>
-        <file>smiles/flecha.png</file>
-        <file>smiles/mad.png</file>
-        <file>smiles/razz.png</file>
-        <file>smiles/rolleyes.png</file>
-        <file>smiles/sad.png</file>
-        <file>smiles/smile.png</file>
-        <file>smiles/surprised.png</file>
-        <file>smiles/wink.png</file>
-        <file>tpl_juego_info.html</file>
-        <file>tpl_info.html</file>
-        <file>img16/column_list.png</file>
-        <file>icon_svm/arthur.png</file>
-        <file>icon_svm/bargon.png</file>
-        <file>icon_svm/bc.png</file>
-        <file>icon_svm/bearfight.png</file>
-        <file>icon_svm/blues.png</file>
-        <file>icon_svm/camelot.png</file>
-        <file>icon_svm/castlebrain.png</file>
-        <file>icon_svm/comi.png</file>
-        <file>icon_svm/cruise.png</file>
-        <file>icon_svm/dig.png</file>
-        <file>icon_svm/draci.png</file>
-        <file>icon_svm/drascula.png</file>
-        <file>icon_svm/dw.png</file>
-        <file>icon_svm/ecoquest.png</file>
-        <file>icon_svm/elvira.png</file>
-        <file>icon_svm/fan.png</file>
-        <file>icon_svm/fascination.png</file>
-        <file>icon_svm/fbear.png</file>
-        <file>icon_svm/feeble.png</file>
-        <file>icon_svm/ffish.png</file>
-        <file>icon_svm/field.png</file>
-        <file>icon_svm/freddypharkas.png</file>
-        <file>icon_svm/ft.png</file>
-        <file>icon_svm/fw.png</file>
-        <file>icon_svm/gob.png</file>
-        <file>icon_svm/gr.png</file>
-        <file>icon_svm/grandma.png</file>
-        <file>icon_svm/greeneggs.png</file>
-        <file>icon_svm/harryhh.png</file>
-        <file>icon_svm/hoyle.png</file>
-        <file>icon_svm/iceman.png</file>
-        <file>icon_svm/ihnm.png</file>
-        <file>icon_svm/indy3.png</file>
-        <file>icon_svm/indy4.png</file>
-        <file>icon_svm/ite.png</file>
-        <file>icon_svm/jones.png</file>
-        <file>icon_svm/kq.png</file>
-        <file>icon_svm/kq_sci.png</file>
-        <file>icon_svm/kyra.png</file>
-        <file>icon_svm/laurabow.png</file>
-        <file>icon_svm/lgop2.png</file>
-        <file>icon_svm/lilmonster.png</file>
-        <file>icon_svm/loom.png</file>
-        <file>icon_svm/lostintime.png</file>
-        <file>icon_svm/lsl.png</file>
-        <file>icon_svm/lsl_sci.png</file>
-        <file>icon_svm/lure.png</file>
-        <file>icon_svm/manhole.png</file>
-        <file>icon_svm/maniac.png</file>
-        <file>icon_svm/mh.png</file>
-        <file>icon_svm/mickey.png</file>
-        <file>icon_svm/mixedup.png</file>
-        <file>icon_svm/monkey1.png</file>
-        <file>icon_svm/monkey2.png</file>
-        <file>icon_svm/mumg.png</file>
-        <file>icon_svm/nippon.png</file>
-        <file>icon_svm/pajama.png</file>
-        <file>icon_svm/pepper.png</file>
-        <file>icon_svm/pq.png</file>
-        <file>icon_svm/pq_sci.png</file>
-        <file>icon_svm/puttputt.png</file>
-        <file>icon_svm/qfg_sci.png</file>
-        <file>icon_svm/queen.png</file>
-        <file>icon_svm/rodney.png</file>
-        <file>icon_svm/rtz.png</file>
-        <file>icon_svm/samnmax.png</file>
-        <file>icon_svm/seussabc.png</file>
-        <file>icon_svm/simon.png</file>
-        <file>icon_svm/sinimg.png</file>
-        <file>icon_svm/sky.png</file>
-        <file>icon_svm/slater.png</file>
-        <file>icon_svm/sports.png</file>
-        <file>icon_svm/spyfox.png</file>
-        <file>icon_svm/sq.png</file>
-        <file>icon_svm/sq_sci.png</file>
-        <file>icon_svm/sword1.png</file>
-        <file>icon_svm/sword2.png</file>
-        <file>icon_svm/t7g.png</file>
-        <file>icon_svm/teenagent.png</file>
-        <file>icon_svm/tentacle.png</file>
-        <file>icon_svm/thinkers.png</file>
-        <file>icon_svm/toon.png</file>
-        <file>icon_svm/tortoise.png</file>
-        <file>icon_svm/touche.png</file>
-        <file>icon_svm/troll.png</file>
-        <file>icon_svm/tucker.png</file>
-        <file>icon_svm/urban.png</file>
-        <file>icon_svm/waxworks.png</file>
-        <file>icon_svm/ween.png</file>
-        <file>icon_svm/winnie.png</file>
-        <file>icon_svm/woodruff.png</file>
-        <file>icon_svm/zak.png</file>
-        <file>img16/edad_3.png</file>
-        <file>img16/edad_7.png</file>
-        <file>img16/edad_12.png</file>
-        <file>img16/edad_16.png</file>
-        <file>img16/edad_18.png</file>
-        <file>img16/edad_nd.png</file>
-        <file>img16/edad_tp.png</file>
+        <file>img32/importar.png</file>
+        <file>img32/nuevo.png</file>
+        <file>img32/opciones.png</file>
+        <file>img32/scummvm.png</file>
+        <file>img32/vdmsound.png</file>
+        <file>img16_cat/datos.png</file>
+        <file>img16_cat/dosbox.png</file>
+        <file>img16_cat/pc.png</file>
+        <file>img16_cat/scummvm.png</file>
+        <file>img16_cat/sinimg.png</file>
+        <file>img16_cat/vdmsound.png</file>
+        <file>img24_cat/datos.png</file>
+        <file>img24_cat/dosbox.png</file>
+        <file>img24_cat/pc.png</file>
+        <file>img24_cat/scummvm.png</file>
+        <file>img24_cat/sinimg.png</file>
+        <file>img24_cat/vdmsound.png</file>
+        <file>img32_cat/datos.png</file>
+        <file>img32_cat/dosbox.png</file>
+        <file>img32_cat/pc.png</file>
+        <file>img32_cat/scummvm.png</file>
+        <file>img32_cat/sinimg.png</file>
+        <file>img32_cat/vdmsound.png</file>
     </qresource>
 </RCC>

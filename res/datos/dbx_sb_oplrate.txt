@@ -1,8 +1,8 @@
-49716|sinimg
-48000|sinimg
-44100|sinimg
-32000|sinimg
-22050|sinimg
-16000|sinimg
-11025|sinimg
-8000|sinimg
+49716|sinimg.png
+48000|sinimg.png
+44100|sinimg.png
+32000|sinimg.png
+22050|sinimg.png
+16000|sinimg.png
+11025|sinimg.png
+8000|sinimg.png

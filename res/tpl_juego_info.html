@@ -60,37 +60,9 @@ img {
 		<th colspan="2" valign="top">{lb_detalles_juego}</th>
 	</tr>
 	<tr>
-		<td width="150" rowspan="15" align="center" valign="top"><img src="{info_thumbs}" width="145" height="186" class="cover"></td>
+		<td width="150" rowspan="17" align="center" valign="top"><img src="{info_thumbs}" width="145" height="186" class="cover"></td>
 		<td width="120" valign="top"><strong>{lb_subtitulo}</strong></td>
 		<td valign="top">{info_subtitulo}</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>{lb_compania}</strong></td>
-		<td valign="top">{info_compania}</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>{lb_desarrollador}</strong></td>
-		<td valign="top">{info_desarrollador}</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>{lb_anno}</strong></td>
-		<td valign="top">{info_anno}</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>{lb_edad_recomendada}</strong></td>
-		<td valign="top"><img src="{info_edad_recomendada}" width="16" height="16" class="absmiddle"></td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>{lb_idioma}</strong></td>
-		<td valign="top">{info_idioma}</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>{lb_idioma_voces}</strong></td>
-		<td valign="top">{info_idioma_voces}</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>{lb_formato}</strong></td>
-		<td valign="top">{info_formato}</td>
 	</tr>
 	<tr>
 		<td valign="top"><strong>{lb_genero}</strong></td>
@@ -101,6 +73,30 @@ img {
 		<td valign="top">{info_tema}</td>
 	</tr>
 	<tr>
+		<td valign="top"><strong>{lb_anno}</strong></td>
+		<td valign="top">{info_anno}</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>{lb_edad_recomendada}</strong></td>
+		<td valign="top">{info_img_edad_recomendada} {info_edad_recomendada}</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>{lb_idioma}</strong></td>
+		<td valign="top">{info_idioma}</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>{lb_idioma_voces}</strong></td>
+		<td valign="top">{info_idioma_voces}</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>{lb_compania}</strong></td>
+		<td valign="top">{info_compania}</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>{lb_desarrollador}</strong></td>
+		<td valign="top">{info_desarrollador}</td>
+	</tr>
+	<tr>
 		<td valign="top"><strong>{lb_perspectiva}</strong></td>
 		<td valign="top">{info_perspectiva}</td>
 	</tr>
@@ -109,8 +105,12 @@ img {
 		<td valign="top">{info_sistemaop}</td>
 	</tr>
 	<tr>
-		<td valign="top"><strong>{lb_favorito}</strong></td>
-		<td valign="top">{info_favorito}</td>
+		<td valign="top"><strong>{lb_formato}</strong></td>
+		<td valign="top">{info_formato}</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>{lb_grupo}</strong></td>
+		<td valign="top">{info_grupo}</td>
 	</tr>
 	<tr>
 		<td valign="top"><strong>{lb_fecha}</strong></td>
@@ -123,39 +123,47 @@ img {
 </table>
 <table width="100%" border="0" cellpadding="2" cellspacing="1" class="main">
 	<tr>
-    <th colspan="2">{lb_calificacion}</th>
-    <th colspan="2">{lb_otros_datos}</th>
-  </tr>
-  <tr>
-    <td width="100" valign="top"><strong>{lb_graficos}</strong></td>
-    <td valign="top">{info_graficos}</td>
-    <td width="100" valign="top"><strong>{lb_original}</strong></td>
-    <td valign="top">{info_original}</td>
-  </tr>
-  <tr>
-    <td width="100" valign="top"><strong>{lb_sonido}</strong></td>
-    <td valign="top">{info_sonido}</td>
-    <td width="100" valign="top"><strong>{lb_estado}</strong></td>
-    <td valign="top">{info_estado}</td>
-  </tr>
-  <tr>
-    <td width="100" valign="top"><strong>{lb_jugabilidad}</strong></td>
-    <td valign="top">{info_jugabilidad}</td>
-    <td width="100" valign="top"><strong>{lb_tipo_emu}</strong></td>
-    <td valign="top">{info_tipo_emu}</td>
-  </tr>
-  <tr>
-    <td width="100" valign="top"><strong>{lb_rating}</strong></td>
-    <td valign="top">{info_rating}</td>
-    <td width="100" valign="top">&nbsp;</td>
-    <td valign="top">&nbsp;</td>
-  </tr>
-  <tr>
-    <th colspan="4">{lb_comentario}</th>
-  </tr>
-  <tr>
-    <td colspan="4" valign="top" class="post">{info_comentario}</td>
-  </tr>
+		<th colspan="2">{lb_calificacion}</th>
+		<th colspan="2">{lb_otros_datos}</th>
+	</tr>
+	<tr>
+		<td width="100" valign="top"><strong>{lb_graficos}</strong></td>
+		<td valign="top">{info_graficos}</td>
+		<td width="100" valign="top"><strong>{lb_tipo_emu}</strong></td>
+		<td valign="top">{info_tipo_emu}</td>
+	</tr>
+	<tr>
+		<td width="100" valign="top"><strong>{lb_sonido}</strong></td>
+		<td valign="top">{info_sonido}</td>
+		<td width="100" valign="top"><strong>{lb_original}</strong></td>
+		<td valign="top">{info_original}</td>
+	</tr>
+	<tr>
+		<td width="100" valign="top"><strong>{lb_jugabilidad}</strong></td>
+		<td valign="top">{info_jugabilidad}</td>
+		<td width="100" valign="top"><strong>{lb_favorito}</strong></td>
+		<td valign="top">{info_favorito}</td>
+	</tr>
+	<tr>
+		<td width="100" valign="top">&nbsp;</td>
+		<td valign="top">&nbsp;</td>
+		<td width="100" valign="top"><strong>{lb_numdisc}</strong></td>
+		<td valign="top">{info_numdisc}</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>{lb_rating}</strong></td>
+		<td valign="top">{info_rating}</td>
+		<td valign="top"><strong>{lb_estado}</strong></td>
+		<td valign="top">{info_estado}</td>
+	</tr>
+</table>
+<table width="100%" border="0" cellpadding="2" cellspacing="1" class="main">
+	<tr>
+		<th>{lb_comentario}</th>
+	</tr>
+	<tr>
+		<td valign="top" class="post">{info_comentario}</td>
+	</tr>
 </table>
 </body>
 </html>

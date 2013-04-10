@@ -1,6 +1,6 @@
-En 1a Persona|datos_3
-En 3a Persona|datos_3
-Isometrica|datos_3
-Platforma|datos_3
-Side-Scrolling / Lateral|datos_3
-Top-Down / Cenital|datos_3
+En 1a Persona|datos_3.png
+En 3a Persona|datos_3.png
+Isometrica|datos_3.png
+Platforma|datos_3.png
+Side-Scrolling / Lateral|datos_3.png
+Top-Down / Cenital|datos_3.png

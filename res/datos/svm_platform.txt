@@ -1,20 +1,21 @@
-<default>||sinimg
-Apple IIgs|2gs|sinimg
-3DO|3do|sinimg
-Acorn|acorn|sinimg
-Amiga|amiga|amiga
-Atari ST|atari|atari
-Commodore 64|c64|c64
-DOS|pc|pc
-PC-98|pc98|pc
-Nintendo Wii|wii|sinimg
-CoCo3|coco3|sinimg
-FM-TOWNS|fmtowns|sinimg
-Linux|linux|linux
-Macintosh|macintosh|macintosh
-PC-Engine|pce|sinimg
-NES|nes|nes
-SegaCD|segacd|sinimg
-Windows|windows|win9x
-Sony PlayStation|playstation|sinimg
-Phillips CD-i|cdi|sinimg
+<default>||sinimg.png
+Apple IIgs|2gs|sinimg.png
+3DO|3do|sinimg.png
+Acorn|acorn|sinimg.png
+Amiga|amiga|amiga.png
+Atari ST|atari|atari.png
+Commodore 64|c64|c64.png
+DOS|pc|pc.png
+PC-98|pc98|pc.png
+Nintendo Wii|wii|sinimg.png
+CoCo3|coco3|sinimg.png
+FM-TOWNS|fmtowns|sinimg.png
+Linux|linux|linux.png
+Macintosh|macintosh|macintosh.png
+PC-Engine|pce|sinimg.png
+NES|nes|nes.png
+SegaCD|segacd|sinimg.png
+Windows|windows|win9x.png
+Sony PlayStation|playstation|sinimg.png
+Phillips CD-i|cdi|sinimg.png
+Apple iOS|ios|sinimg.png

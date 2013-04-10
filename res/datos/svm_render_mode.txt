@@ -1,6 +1,10 @@
-|sinimg
-hercGreen|sinimg
-hercAmber|sinimg
-cga|sinimg
-ega|sinimg
-amiga|sinimg
+<default>||sinimg.png
+VGA|vga|sinimg.png
+CGA|cga|sinimg.png
+EGA|ega|sinimg.png
+Hercules green|hercGreen|sinimg.png
+Hercules amber|hercAmber|sinimg.png
+Amiga|amiga|sinimg.png
+FM-Towns|fmtowns|sinimg.png
+PC-9821 (256 colors)|pc9821|sinimg.png
+PC-9801 (16 colors)|pc9801|sinimg.png

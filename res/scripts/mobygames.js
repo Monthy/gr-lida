@@ -11,8 +11,8 @@ var url_site	= "http://www.mobygames.com";	// Site address
 var url_img_site= "http://pics.mobygames.com";	// Site pics address
 var url_charset	= "UTF-8";
 var language	= "en-EN";						// Site language
-var version		= "0.3.3";						// Script version 17-11-2008 update 17-05-2011
-var requires	= "0.9.0";						// GR-lida version
+var version		= "0.4.0";						// Script version 17-11-2008 update 04-04-2013
+var requires	= "0.11.0";						// GR-lida version
 var comments	= "";
 var license		= "GPL v2";
 var description	= "Script para obtener los datos del juego (titulo, genero, año, compañía, etc...) así como la caratula principal del juego.";
@@ -23,7 +23,7 @@ function UrlWebBusqueda(texto_busqueda)
 
 	m_url["metodo"] = "GET";	// POST, GET
 	m_url["c_post"] = "";		// Contenido del POST si es post
-	m_url["url"]    = url_site+"/search/quick?q="+texto_busqueda.replace(" ","+")+"&p=-1&search=Go&sFilter=1&sG=on&sGG=on&sA=on&sD=on&sC=on";
+	m_url["url"]    = url_site +"/search/quick?q="+ texto_busqueda.replace(" ","+") +"&p=-1&search=Go&sFilter=1&sG=on&sGG=on&sA=on&sD=on&sC=on";
 
 	return m_url;
 }
@@ -32,7 +32,7 @@ function AnalyzeFindPage(texto)
 {
 // Expresion Regular para obtener los datos de la Busqueda
 	var textoFind, m_titulo, m_contenido, m_url_game;
-	textoFind = texto.replace(/<\/div><\/div><br clear="all"><\/div>/gi,"<fin_searchDetails>\n");// final a
+	textoFind = texto.replace(/<\/div><\/div><br clear="all"><\/div>/gi, "<fin_searchDetails>\n");// final a
 
 /* Busqueda CON imagenes
 --------------------------------------------------------*/
@@ -73,29 +73,23 @@ function AnalyzeGamePage(texto, local)
 {
 	var m_array = new Array();
 // INI Temp ---------------
-m_array["Dat_usuario"]          = "Dat_usuario";
-m_array["Dat_titulo"]           = "Dat_titulo";
-m_array["Dat_subtitulo"]        = "Dat_subtitulo";
-m_array["Dat_compania"]         = "Dat_compania";
-m_array["Dat_desarrollador"]    = "Dat_desarrollador";
-m_array["Dat_anno"]             = "Dat_anno";
-m_array["Dat_sistemaop"]        = "Dat_sistemaop";
+m_array["Dat_usuario"]          = "";
+m_array["Dat_titulo"]           = "";
+m_array["Dat_subtitulo"]        = "";
+m_array["Dat_compania"]         = "";
+m_array["Dat_desarrollador"]    = "";
+m_array["Dat_anno"]             = "";
+m_array["Dat_sistemaop"]        = "";
 m_array["Dat_edad_recomendada"] = "nd";
-m_array["Dat_genero"]           = "Dat_genero";
-m_array["Dat_perspectiva"]      = "Dat_perspectiva";
-m_array["Dat_tema"]             = "Dat_tema";
-m_array["Dat_misc"]             = "Dat_misc";
-m_array["Dat_comentario"]       = "Dat_comentario";
+m_array["Dat_genero"]           = "";
+m_array["Dat_perspectiva"]      = "";
+m_array["Dat_tema"]             = "";
+m_array["Dat_grupo"]            = "";
+m_array["Dat_misc"]             = "";
+m_array["Dat_comentario"]       = "";
 m_array["Dat_rating"]           = "0";
 // FIN Temp ---------------
 
-// Usuario ----------------
-	if ( texto.indexOf("was contributed by",0) != -1)
-	{
-		m_array["Dat_usuario"] = AnalyzeCategoriasMobyGames(texto, "contributed by([^[]*)</div>",
-								"<a href=\"([^\"]*)\">([^</]*)</a>", 2);
-	} else
-		m_array["Dat_usuario"] = "";
 // Icono ------------------
 	m_array["Dat_icono"] = "datos";
 
@@ -152,15 +146,6 @@ m_array["Dat_rating"]           = "0";
 									"<a href=\"/game/([^\"<>]*)\">([^\"<>]*)</a>", 2);
 	} else {
 		m_array["Dat_sistemaop"] = "";
-	}
-
-// aDeSe Rating -----------
-	if ( texto.indexOf("aDeSe Rating</div>") != -1)
-	{
-		m_array["Dat_edad_recomendada"] = AnalyzeCategoriasMobyGames(texto, "aDeSe Rating</div><div [^>]*>([^?]*)</div><div style=\"([^?]*)\">Genre",
-										"<a href=\"/attribute/([^\"<>]*)\">([^\"<>]*)</a>", 2);
-	} else {
-		m_array["Dat_edad_recomendada"] = "nd";
 	}
 
 // Genre, Perspective -----
@@ -238,29 +223,50 @@ m_array["Dat_rating"]           = "0";
 		m_array["Dat_rating"] = "0";
 	}
 
+// aDeSe Rating -----------
+	if ( texto.indexOf("aDeSe Rating</div>") != -1)
+	{
+		m_array["Dat_edad_recomendada"] = AnalyzeCategoriasMobyGames(texto, "aDeSe Rating</div><div [^>]*>([^?]*)</div><div style=\"([^?]*)\">Genre",
+										"<a href=\"/attribute/([^\"<>]*)\">([^\"<>]*)</a>", 2);
+	} else {
+		m_array["Dat_edad_recomendada"] = "nd";
+	}
+
+// Usuario ----------------
+	if ( texto.indexOf("was contributed by",0) != -1)
+	{
+		m_array["Dat_usuario"] = AnalyzeCategoriasMobyGames(texto, "contributed by([^[]*)</div>",
+								"<a href=\"([^\"]*)\">([^</]*)</a>", 2);
+	} else
+		m_array["Dat_usuario"] = "";
+
 // Other Dates ------------
-	m_array["Dat_idioma"]      = "";
-	m_array["Dat_idioma_voces"]= "";
-	m_array["Dat_formato"]     = "PC";
-	m_array["Dat_numdisc"]     = "";
-	m_array["Dat_tamano"]      = "";
-	m_array["Dat_graficos"]    = "1";
-	m_array["Dat_sonido"]      = "1";
-	m_array["Dat_jugabilidad"] = "1";
-	m_array["Dat_original"]    = "false";
-	m_array["Dat_estado"]      = "";
-	m_array["Dat_fecha"]       = "";
-	m_array["Dat_tipo_emu"]    = "datos"; // Importante = datos, dosbox, scummvm, vdmsound
-	m_array["Dat_favorito"]    = "";
-	m_array["Dat_path_exe"]    = "";
-	m_array["Dat_parametros_exe"] = "";
+	m_array["Dat_grupo"]            = "";
+	m_array["Dat_idioma"]           = "";
+	m_array["Dat_idioma_voces"]     = "";
+	m_array["Dat_formato"]          = "PC";
+	m_array["Dat_numdisc"]          = "";
+	m_array["Dat_tamano"]           = "";
+	m_array["Dat_graficos"]         = "0";
+	m_array["Dat_sonido"]           = "0";
+	m_array["Dat_jugabilidad"]      = "0";
+	m_array["Dat_original"]         = "false";
+	m_array["Dat_estado"]           = "";
+	m_array["Dat_fecha"]            = "";
+	m_array["Dat_tipo_emu"]         = "datos"; // Importante = datos, dosbox, scummvm, vdmsound
+	m_array["Dat_favorito"]         = "";
+	m_array["Dat_path_exe"]         = "";
+	m_array["Dat_parametros_exe"]   = "";
+	m_array["Dat_path_capturas"]    = "";
+	m_array["Dat_path_setup"]       = "";
+	m_array["Dat_parametros_setup"] = "";
 
 // Imagenes Caratula ------
 	if ( texto.indexOf(url_img_site+"/images/covers/small/notonfile.gif",0) != -1 || texto.indexOf("noCoverArt",0) != -1 )
 	{
-		m_array["Dat_thumbs"]      = "";
-		m_array["Dat_cover_front"] = "";
-		m_array["Dat_cover_back"]  = "";
+		m_array["Dat_thumbs"]           = "";
+		m_array["Dat_cover_front"]      = "";
+		m_array["Dat_cover_back"]       = "";
 		m_array["Dat_url_cover_thumbs"] = "";
 		m_array["Dat_url_cover_front"]  = "";
 		m_array["Dat_url_cover_back"]   = "";
@@ -291,6 +297,7 @@ m_array["Dat_rating"]           = "0";
 		m_array["Dat_url_cover_back"]   = "";
 	}
 // FIN Imagenes Caratula --
+
 	return m_array;
 }
 

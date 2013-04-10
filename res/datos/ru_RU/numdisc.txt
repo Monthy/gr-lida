@@ -1,18 +1,18 @@
-1 CD|cd_iso
-2 CD|cd_iso
-3 CD|cd_iso
-4 CD|cd_iso
-5 CD|cd_iso
-6 CD|cd_iso
-7 CD|cd_iso
-8 CD|cd_iso
-1 DVD|dvd
-1 дискета|floppy_2
-2 дискеты|floppy_2
-3 дискеты|floppy_2
-4 дискеты|floppy_2
-5 дискет|floppy_2
-6 дискет|floppy_2
-7 дискет|floppy_2
-8 дискет|floppy_2
-|sinimg
+1 CD|cd_iso.png
+2 CD|cd_iso.png
+3 CD|cd_iso.png
+4 CD|cd_iso.png
+5 CD|cd_iso.png
+6 CD|cd_iso.png
+7 CD|cd_iso.png
+8 CD|cd_iso.png
+1 DVD|dvd.png
+1 дискета|floppy_2.png
+2 дискеты|floppy_2.png
+3 дискеты|floppy_2.png
+4 дискеты|floppy_2.png
+5 дискет|floppy_2.png
+6 дискет|floppy_2.png
+7 дискет|floppy_2.png
+8 дискет|floppy_2.png
+|sinimg.png

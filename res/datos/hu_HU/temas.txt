@@ -1,24 +1,24 @@
-Felnőtt|datos_3
-Árkád|datos_3
-Kaland|datos_3
-Kaland-Horror|datos_3
-Sci-Fi|datos_3
-Klasszikus|datos_3
-Cyberpunk / Sötét Sci-Fi|datos_3
-Detektív / Rejtélyes|datos_3
-Interktív grafikus fikció|datos_3
-Interktív fikció|datos_3
-Futurisztikus|datos_3
-Horror|datos_3
-Középkori / Képzeletbeli|datos_3
-Középkori|datos_3
-Interaktív Film|datos_3
-Pinball|datos_3
-Apokaliptikus|datos_3
-Sci-Fi - Futurisztikus|datos_3
-Shooter|datos_3
-Puzzle|datos_3
-Túlélő-horror|datos_3
-Valós idejű|datos_3
-Kaland videó|datos_3
-|sinimg
+Felnőtt|datos_3.png
+Árkád|datos_3.png
+Kaland|datos_3.png
+Kaland-Horror|datos_3.png
+Sci-Fi|datos_3.png
+Klasszikus|datos_3.png
+Cyberpunk / Sötét Sci-Fi|datos_3.png
+Detektív / Rejtélyes|datos_3.png
+Interktív grafikus fikció|datos_3.png
+Interktív fikció|datos_3.png
+Futurisztikus|datos_3.png
+Horror|datos_3.png
+Középkori / Képzeletbeli|datos_3.png
+Középkori|datos_3.png
+Interaktív Film|datos_3.png
+Pinball|datos_3.png
+Apokaliptikus|datos_3.png
+Sci-Fi - Futurisztikus|datos_3.png
+Shooter|datos_3.png
+Puzzle|datos_3.png
+Túlélő-horror|datos_3.png
+Valós idejű|datos_3.png
+Kaland videó|datos_3.png
+|sinimg.png

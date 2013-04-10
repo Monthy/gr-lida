@@ -1,13 +1,13 @@
-PC|floppy_1
-Floppy 3.5|floppy_2
-Floppy 5.25|floppy_3
-CD-Rom|cd_iso
-DVD|dvd
-CD-Audio|cd_audio
-Compressed File|archivo_comprimido
-ISO file|cd_iso
-CUE/BIN file|cd_iso
-IMG file|floppy_1
-IMA file|floppy_1
-IMZ file|floppy_1
-|sinimg
+PC|floppy_1.png
+Floppy 3.5|floppy_2.png
+Floppy 5.25|floppy_3.png
+CD-Rom|cd_iso.png
+DVD|dvd.png
+CD-Audio|cd_audio.png
+Compressed File|archivo_comprimido.png
+ISO file|cd_iso.png
+CUE/BIN file|cd_iso.png
+IMG file|floppy_1.png
+IMA file|floppy_1.png
+IMZ file|floppy_1.png
+|sinimg.png

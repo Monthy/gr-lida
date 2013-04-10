@@ -1,7 +1,7 @@
-Non disponible|nd|edad_nd
-Tous publics|tp|edad_tp
-Plus de 3 ans|3|edad_3
-Plus de 7 ans|7|edad_7
-Plus de 12 ans|12|edad_12
-Plus de 16 ans|16|edad_16
-Plus de 18 ans|18|edad_18
+Non disponible|nd|edad_nd.png
+Tous publics|tp|edad_tp.png
+Plus de 3 ans|3|edad_3.png
+Plus de 7 ans|7|edad_7.png
+Plus de 12 ans|12|edad_12.png
+Plus de 16 ans|16|edad_16.png
+Plus de 18 ans|18|edad_18.png

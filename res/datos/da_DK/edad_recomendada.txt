@@ -1,7 +1,7 @@
-Ikke til rådighed|nd|edad_nd
-Alle offentlige|tp|edad_tp
-Mere end 3 år|3|edad_3
-Mere end 7 år|7|edad_7
-Mere end 12 år|12|edad_12
-Over 16 år|16|edad_16
-Over 18 år|18|edad_18
+Ikke til rådighed|nd|edad_nd.png
+Alle offentlige|tp|edad_tp.png
+Mere end 3 år|3|edad_3.png
+Mere end 7 år|7|edad_7.png
+Mere end 12 år|12|edad_12.png
+Over 16 år|16|edad_16.png
+Over 18 år|18|edad_18.png

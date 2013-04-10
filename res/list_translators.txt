@@ -1,6 +1,6 @@
-Monthy|Español-Spanish|es
-Neville|Inglés-English|en
-Jens Peter|Danés-Danish|dk
-Pascal Piallat|Francés-French|fr
-Szabó Tihamér|Húngaro-Hungarian|hu
-Vadim Petryaev|Russian-Russia|ru
+Monthy|Español-Spanish|es.png
+Neville|Inglés-English|en.png
+Jens Peter|Danés-Danish|dk.png
+Pascal Piallat|Francés-French|fr.png
+Szabó Tihamér|Húngaro-Hungarian|hu.png
+Vadim Petryaev|Russian-Russia|ru.png

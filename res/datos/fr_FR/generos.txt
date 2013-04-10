@@ -1,36 +1,36 @@
-Action|datos_3
-Action-Arcade|datos_3
-Arcade|datos_3
-Aventure|datos_3
-Aventure graphique|datos_3
-Aventure-Horror|datos_3
-Adulte|datos_3
-Dansant|datos_3
-Courses|datos_3
-Course|datos_3
-Racing-Moto|datos_3
-Sportif|datos_3
-Sports-ball|datos_3
-Sports-Football|datos_3
-Emulator|datos_3
-Stratégie|datos_3
-FPS|datos_3
-Jeux de rôle (RPG)|datos_3
-Les jeux de sport|datos_3
-Lutte|datos_3
-Shooters|datos_3
-Mechs|datos_3
-Multijoueur|datos_3
-D'autres|datos_3
-Pêche|datos_3
-Plates-formes|datos_3
-Résolution d'énigmes|datos_3
-Casse-tête|datos_3
-Lecteur de musique|datos_3
-Lecteur vidéo|datos_3
-Simulation|datos_3
-Simulateur|datos_3
-Train Simulator|datos_3
-Flight Simulator|datos_3
-Pédagogique|datos_3
-|sinimg
+Action|datos_3.png
+Action-Arcade|datos_3.png
+Arcade|datos_3.png
+Aventure|datos_3.png
+Aventure graphique|datos_3.png
+Aventure-Horror|datos_3.png
+Adulte|datos_3.png
+Dansant|datos_3.png
+Courses|datos_3.png
+Course|datos_3.png
+Racing-Moto|datos_3.png
+Sportif|datos_3.png
+Sports-ball|datos_3.png
+Sports-Football|datos_3.png
+Emulator|datos_3.png
+Stratégie|datos_3.png
+FPS|datos_3.png
+Jeux de rôle (RPG)|datos_3.png
+Les jeux de sport|datos_3.png
+Lutte|datos_3.png
+Shooters|datos_3.png
+Mechs|datos_3.png
+Multijoueur|datos_3.png
+D'autres|datos_3.png
+Pêche|datos_3.png
+Plates-formes|datos_3.png
+Résolution d'énigmes|datos_3.png
+Casse-tête|datos_3.png
+Lecteur de musique|datos_3.png
+Lecteur vidéo|datos_3.png
+Simulation|datos_3.png
+Simulateur|datos_3.png
+Train Simulator|datos_3.png
+Flight Simulator|datos_3.png
+Pédagogique|datos_3.png
+|sinimg.png

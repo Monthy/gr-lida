@@ -1,4 +1,4 @@
-auto|sinimg
-normal|sinimg
-simple|sinimg
-dynamic|sinimg
+Auto|auto|sinimg.png
+Normal|normal|sinimg.png
+Simple|simple|sinimg.png
+Dynamic|dynamic|sinimg.png

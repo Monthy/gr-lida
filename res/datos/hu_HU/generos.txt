@@ -1,36 +1,36 @@
-Akció|datos_3
-Akció-árkád|datos_3
-Árkád|datos_3
-Kaland|datos_3
-Grafikus kalandjáték|datos_3
-Kaland-Horror|datos_3
-Felőlt|datos_3
-Táncolós|datos_3
-Versenyzős|datos_3
-Versenyzős / Vezetős|datos_3
-Motorversenyzős|datos_3
-Sport|datos_3
-Sport-kosárlabda|datos_3
-Sport-Foci|datos_3
-Emulátor|datos_3
-Stratégia|datos_3
-Lövöldözős|datos_3
-RPG|datos_3
-Sport Játékok|datos_3
-Repülős|datos_3
-Lövöldözős|datos_3
-Mechanikus|datos_3
-Többjátékos|datos_3
-Mások|datos_3
-Halászós|datos_3
-Platform|datos_3
-Puzzle|datos_3
-Puzzle|datos_3
-Zene lejátszó|datos_3
-Videó lejátszó|datos_3
-Szimulációs játék|datos_3
-Szimulátor|datos_3
-Vonat Szimulátor|datos_3
-Repülő Szimulátor|datos_3
-Oktató|datos_3
-|sinimg
+Akció|datos_3.png
+Akció-árkád|datos_3.png
+Árkád|datos_3.png
+Kaland|datos_3.png
+Grafikus kalandjáték|datos_3.png
+Kaland-Horror|datos_3.png
+Felőlt|datos_3.png
+Táncolós|datos_3.png
+Versenyzős|datos_3.png
+Versenyzős / Vezetős|datos_3.png
+Motorversenyzős|datos_3.png
+Sport|datos_3.png
+Sport-kosárlabda|datos_3.png
+Sport-Foci|datos_3.png
+Emulátor|datos_3.png
+Stratégia|datos_3.png
+Lövöldözős|datos_3.png
+RPG|datos_3.png
+Sport Játékok|datos_3.png
+Repülős|datos_3.png
+Lövöldözős|datos_3.png
+Mechanikus|datos_3.png
+Többjátékos|datos_3.png
+Mások|datos_3.png
+Halászós|datos_3.png
+Platform|datos_3.png
+Puzzle|datos_3.png
+Puzzle|datos_3.png
+Zene lejátszó|datos_3.png
+Videó lejátszó|datos_3.png
+Szimulációs játék|datos_3.png
+Szimulátor|datos_3.png
+Vonat Szimulátor|datos_3.png
+Repülő Szimulátor|datos_3.png
+Oktató|datos_3.png
+|sinimg.png
