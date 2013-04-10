@@ -180,7 +180,7 @@ struct SlideInfo
 class PictureFlowState
 {
 public:
-  PictureFlowState();
+  PictureFlowState(int angle=50, float spacingRatio=0);
   ~PictureFlowState();
 
   void reposition();
@@ -192,8 +192,17 @@ public:
   PictureFlow::ReflectionEffect reflectionEffect;
   QVector<QImage*> slideImages;
 
+  QVector<bool> marks;
+  bool showMarks;
+  QImage mark;
+
+  bool showNumPos;
+  bool showTriangle;
+
   int angle;
+  int rawAngle;
   int spacing;
+  float spacingRatio;
   PFreal offsetX;
   PFreal offsetY;
 
@@ -217,6 +226,7 @@ public:
   int step;
   int frame;
   QTimer animateTimer;
+  bool animating;
 };
 
 class PictureFlowAbstractRenderer
@@ -241,6 +251,8 @@ public:
 
   virtual void init();
   virtual void paint();
+    void render();
+
 
 private:
   QSize size;
@@ -262,7 +274,7 @@ private:
   QIntDict<QImage> imageHash;
 #endif
 
-  void render();
+
   void renderSlides();
   QRect renderSlide(const SlideInfo &slide, int col1 = -1, int col2 = -1);
   QImage* surface(int slideIndex);
@@ -270,9 +282,9 @@ private:
 
 // ------------- PictureFlowState ---------------------------------------
 
-PictureFlowState::PictureFlowState():
+PictureFlowState::PictureFlowState(int a, float sr):
 backgroundColor(0), slideWidth(150), slideHeight(200),
-reflectionEffect(PictureFlow::BlurredReflection), centerIndex(0)
+reflectionEffect(PictureFlow::BlurredReflection), centerIndex(0) , rawAngle(a), spacingRatio(sr)
 {
 }
 
@@ -285,13 +297,18 @@ PictureFlowState::~PictureFlowState()
 // readjust the settings, call this when slide dimension is changed
 void PictureFlowState::reposition()
 {
-  angle = 70 * IANGLE_MAX / 360;  // approx. 70 degrees tilted
-
+ // angle = 70 * IANGLE_MAX / 360;  // approx. 70 degrees tilted
+  angle = rawAngle  * IANGLE_MAX / 360;
   offsetX = slideWidth/2 * (PFREAL_ONE-fcos(angle));
   offsetY = slideWidth/2 * fsin(angle);
   offsetX += slideWidth * PFREAL_ONE;
-  offsetY += slideWidth * PFREAL_ONE / 4;
-  spacing = 40;
+  offsetY += slideWidth * PFREAL_ONE / 3;
+  if(rawAngle < 45)
+    offsetX += offsetX/4;
+  if(angle>0)
+    spacing = slideWidth * 0.35;
+  else
+    spacing = slideWidth*spacingRatio + slideWidth*(spacingRatio?0.10:0.2);
 }
 
 // adjust slides so that they are in "steady state" position
@@ -303,30 +320,35 @@ void PictureFlowState::reset()
   centerSlide.slideIndex = centerIndex;
   centerSlide.blend = 256;
 
-  leftSlides.resize(6);
+  if(angle == 0 && spacingRatio)
+    leftSlides.resize(4);
+  else
+    leftSlides.resize(6);
   for(int i = 0; i < (int)leftSlides.count(); i++)
   {
     SlideInfo& si = leftSlides[i];
     si.angle = angle;
-    si.cx = -(offsetX + spacing*i*PFREAL_ONE);
+    si.cx = -(offsetX + spacing*(i)*PFREAL_ONE);
     si.cy = offsetY;
     si.slideIndex = centerIndex-1-i;
-    si.blend = 256;
+    si.blend = 200;
     if(i == (int)leftSlides.count()-2)
       si.blend = 128;
     if(i == (int)leftSlides.count()-1)
       si.blend = 0;
   }
-
-  rightSlides.resize(6);
+  if(angle==0 && spacingRatio)
+    rightSlides.resize(4);
+  else
+    rightSlides.resize(6);
   for(int i = 0; i < (int)rightSlides.count(); i++)
   {
     SlideInfo& si = rightSlides[i];
     si.angle = -angle;
-    si.cx = offsetX + spacing*i*PFREAL_ONE;
+    si.cx = offsetX + spacing*(i)*PFREAL_ONE;
     si.cy = offsetY;
     si.slideIndex = centerIndex+1+i;
-    si.blend = 256;
+    si.blend = 200;
     if(i == (int)rightSlides.count()-2)
       si.blend = 128;
     if(i == (int)rightSlides.count()-1)
@@ -337,7 +359,7 @@ void PictureFlowState::reset()
 // ------------- PictureFlowAnimator  ---------------------------------------
 
 PictureFlowAnimator::PictureFlowAnimator():
-state(0), target(0), step(0), frame(0)
+state(0), target(0), step(0), frame(0), animating(false)
 {
 }
 
@@ -347,7 +369,9 @@ void PictureFlowAnimator::start(int slide)
   if(!animateTimer.isActive() && state)
   {
     step = (target < state->centerSlide.slideIndex) ? -1 : 1;
-    animateTimer.start(30);
+    animateTimer.setSingleShot(true);
+    animateTimer.start(30); //TODO comprobar rendimiento, originalmente era 30
+    animating = true;
   }
 }
 
@@ -357,22 +381,23 @@ void PictureFlowAnimator::stop(int slide)
   target = slide;
   frame = slide << 16;
   animateTimer.stop();
+  animating = false;
 }
 
 void PictureFlowAnimator::update()
 {
-  if(!animateTimer.isActive())
-    return;
+  /*if(!animateTimer.isActive())
+    return;*/
   if(step == 0)
     return;
   if(!state)
     return;
 
-  int speed = 16384/4;
+  int speed = 16384/4; //TODO comprobar rendimiento, originalmente era /4
 
 #if 1
   // deaccelerate when approaching the target
-  const int max = 2 * 65536;
+  const int max = 2 * 65536; //TODO cambiado de 2 * a 4 * comprobar rendimiento
 
   int fi = frame;
   fi -= (target << 16);
@@ -421,7 +446,7 @@ void PictureFlowAnimator::update()
   {
     SlideInfo& si = state->leftSlides[i];
     si.angle = state->angle;
-    si.cx = -(state->offsetX + state->spacing*i*PFREAL_ONE + step*state->spacing*ftick);
+    si.cx = -(state->offsetX + state->spacing*(i)*PFREAL_ONE + step*state->spacing*ftick);
     si.cy = state->offsetY;
   }
 
@@ -429,7 +454,7 @@ void PictureFlowAnimator::update()
   {
     SlideInfo& si = state->rightSlides[i];
     si.angle = -state->angle;
-    si.cx = state->offsetX + state->spacing*i*PFREAL_ONE - step*state->spacing*ftick;
+    si.cx = state->offsetX + state->spacing*(i)*PFREAL_ONE - step*state->spacing*ftick;
     si.cy = state->offsetY;
   }
 
@@ -461,26 +486,32 @@ void PictureFlowAnimator::update()
 
   for(int index = 0; index < nleft; index++)
   {
-    int blend = 256;
+    int blend = 200;
     if(index == nleft-1)
       blend = (step > 0) ? 0 : 128-fade/2;
     if(index == nleft-2)
-      blend = (step > 0) ? 128-fade/2 : 256-fade/2;
+      blend = (step > 0) ? 128-fade/2 : 200-(0.5625*fade/2);
     if(index == nleft-3)
-      blend = (step > 0) ? 256-fade/2 : 256;
+      blend = (step > 0) ? 200-(0.5625*fade/2) : 200;
+    if(index == 0)
+      blend = (step > 0) ? 200 : 200 + 56-(0.4375*fade/2) ;
     state->leftSlides[index].blend = blend;
   }
   for(int index = 0; index < nright; index++)
   {
-    int blend = (index < nright-2) ? 256 : 128;
+    int blend = (index < nright-2) ? 200 : 128;
     if(index == nright-1)
       blend = (step > 0) ? fade/2 : 0;
     if(index == nright-2)
-      blend = (step > 0) ? 128+fade/2 : fade/2;
+      blend = (step > 0) ? 128+(0.5625*fade/2) : (0.5625*fade/2);
     if(index == nright-3)
-      blend = (step > 0) ? 256 : 128+fade/2;
+      blend = (step > 0) ? 200 : 128+(0.5625*fade/2);
+    if(index == 0)
+      blend = (step > 0) ? 200 + (0.4375*fade/2) : 200;
     state->rightSlides[index].blend = blend;
   }
+
+  state->centerSlide.blend = (step > 0) ? 256 - (0.4375*fade/2) : 200 + (0.4375*fade/2);
 
 }
 
@@ -541,6 +572,8 @@ void PictureFlowSoftwareRenderer::init()
   int wh = size.height();
   int w = (ww+1)/2;
   int h = (wh+1)/2;
+  if(h<10)//TODO a partir de qué h es seguro??
+    return;
 
 #ifdef PICTUREFLOW_QT4
   buffer = QImage(ww, wh, QImage::Format_RGB32);
@@ -574,9 +607,34 @@ static QRgb blendColor(QRgb c1, QRgb c2, int blend)
 static QImage* prepareSurface(const QImage* slideImage, int w, int h, QRgb bgcolor,
 PictureFlow::ReflectionEffect reflectionEffect)
 {
+
+  int iw, ih;
+  iw = slideImage->width();
+  ih = slideImage->height();
+  int psw,psh;
+  if(iw>ih)
+  {
+    psw = w;
+    psh = w * (1.0*ih/iw);
+  }
+  else
+  {
+    int h1=h;
+    psw = h1 * (1.0*iw/ih);
+    psh = h1;
+
+    while(psw>w)
+    {
+      h1-=2;
+      psw = h1 * (1.0*iw/ih);
+      psh = h1;
+    }
+  }
+  w = psw;
+
 #ifdef PICTUREFLOW_QT4
   Qt::TransformationMode mode = Qt::SmoothTransformation;
-  QImage img = slideImage->scaled(w, h, Qt::IgnoreAspectRatio, mode);
+  QImage img = slideImage->scaled(psw, psh, Qt::IgnoreAspectRatio, mode);
 #endif
 #if defined(PICTUREFLOW_QT3) || defined(PICTUREFLOW_QT2)
   QImage img = slideImage->smoothScale(w, h);
@@ -599,96 +657,30 @@ PictureFlow::ReflectionEffect reflectionEffect)
   // transpose the image, this is to speed-up the rendering
   // because we process one column at a time
   // (and much better and faster to work row-wise, i.e in one scanline)
-  for(int x = 0; x < w; x++)
-    for(int y = 0; y < h; y++)
-      result->setPixel(hofs + y, x, img.pixel(x, y));
+  int lhof = (h-psh);
+  //int lwof = (w-psw)/2;
+  for(int x = 0; x < psw; x++)
+    for(int y = 0; y < psh; y++)
+
+      result->setPixel(hofs + y + lhof , x, img.pixel(x, y));
 
   if(reflectionEffect != PictureFlow::NoReflection)
   {
     // create the reflection
-    int ht = hs - h - hofs;
+    int ht = hs - (h+hofs);
     int hte = ht;
-    for(int x = 0; x < w; x++)
+    for(int x = 0; x < psw; x++)
       for(int y = 0; y < ht; y++)
       {
-        QRgb color = img.pixel(x, img.height()-y-1);
-        result->setPixel(h+hofs+y, x, blendColor(color,bgcolor,128*(hte-y)/hte));
+        QRgb color;
+        if(y<psh)
+            color = img.pixel(x, psh-y-1);
+        else
+            color = bgcolor;
+        result->setPixel(h+hofs + y, x,blendColor(color,bgcolor,80*(hte-y)/hte));
       }
 
-    if(reflectionEffect == PictureFlow::BlurredReflection)
-    {
-      // blur the reflection everything first
-      // Based on exponential blur algorithm by Jani Huhtanen
-      QRect rect(hs/2, 0, hs/2, w);
-      rect &= result->rect();
 
-      int r1 = rect.top();
-      int r2 = rect.bottom();
-      int c1 = rect.left();
-      int c2 = rect.right();
-
-      int bpl = result->bytesPerLine();
-      int rgba[4];
-      unsigned char* p;
-
-      // how many times blur is applied?
-      // for low-end system, limit this to only 1 loop
-      for(int loop = 0; loop < 2; loop++)
-      {
-        for(int col = c1; col <= c2; col++)
-        {
-          p = result->scanLine(r1) + col*4;
-          for(int i = 0; i < 3; i++)
-            rgba[i] = p[i] << 4;
-
-          p += bpl;
-          for(int j = r1; j < r2; j++, p += bpl)
-            for(int i = 0; i < 3; i++)
-              p[i] = (rgba[i] += (((p[i]<<4)-rgba[i])) >> 1) >> 4;
-        }
-
-        for(int row = r1; row <= r2; row++)
-        {
-          p = result->scanLine(row) + c1*4;
-          for(int i = 0; i < 3; i++)
-            rgba[i] = p[i] << 4;
-
-          p += 4;
-          for(int j = c1; j < c2; j++, p+=4)
-            for(int i = 0; i < 3; i++)
-              p[i] = (rgba[i] += (((p[i]<<4)-rgba[i])) >> 1) >> 4;
-        }
-
-        for(int col = c1; col <= c2; col++)
-        {
-          p = result->scanLine(r2) + col*4;
-          for(int i = 0; i < 3; i++)
-            rgba[i] = p[i] << 4;
-
-          p -= bpl;
-          for(int j = r1; j < r2; j++, p -= bpl)
-            for(int i = 0; i < 3; i++)
-              p[i] = (rgba[i] += (((p[i]<<4)-rgba[i])) >> 1) >> 4;
-        }
-
-        for(int row = r1; row <= r2; row++)
-        {
-          p = result->scanLine(row) + c2*4;
-          for(int i = 0; i < 3; i++)
-            rgba[i] = p[i] << 4;
-
-          p -= 4;
-          for(int j = c1; j < c2; j++, p-=4)
-            for(int i = 0; i < 3; i++)
-              p[i] = (rgba[i] += (((p[i]<<4)-rgba[i])) >> 1) >> 4;
-        }
-      }
-
-      // overdraw to leave only the reflection blurred (but not the actual image)
-      for(int x = 0; x < w; x++)
-        for(int y = 0; y < h; y++)
-          result->setPixel(hofs + y, x, img.pixel(x, y));
-    }
   }
 
   return result;
@@ -711,6 +703,7 @@ QImage* PictureFlowSoftwareRenderer::surface(int slideIndex)
 #endif
 
   QImage* img = state->slideImages.at(slideIndex);
+
   bool empty = img ? img->isNull() : true;
   if(empty)
   {
@@ -733,9 +726,7 @@ QImage* PictureFlowSoftwareRenderer::surface(int slideIndex)
       painter.setBrush(linearGrad);
       painter.fillRect(0, 0, sw, sh, QBrush(linearGrad));
 
-      painter.setPen(QPen(QColor(64,64,64), 4));
-      painter.setBrush(QBrush());
-      painter.drawRect(2, 2, sw-3, sh-3);
+
       painter.end();
 #endif
 #if defined(PICTUREFLOW_QT3) || defined(PICTUREFLOW_QT2)
@@ -767,8 +758,30 @@ QImage* PictureFlowSoftwareRenderer::surface(int slideIndex)
 #endif
     if(surfaceCache.contains(key))
         return surfaceCache[key];
+  
 
   QImage* sr = prepareSurface(img, state->slideWidth, state->slideHeight, bgcolor, state->reflectionEffect);
+    //check if this slide must be marked
+  //if(marks[slideIndex])
+  if(state->showMarks)
+  {
+    if(state->marks[slideIndex])
+    {
+      QPainter painter(sr);
+      painter.setPen(QColor(255,0,0).rgb());
+      int sh = sr->height();
+      int jInit = sh*4/5;
+      int iInit = state->slideHeight+state->slideHeight/3;
+      /*for(int j = jInit; j < sh; j ++)
+      {
+        for(int i = iInit-(j-jInit); i < iInit; i ++)
+        {
+          painter.drawPoint(i,j);
+        }
+      }*/
+      painter.drawImage(QRect(iInit-(sh-jInit),jInit,sh-jInit,sh-jInit),state->mark);
+    }
+  }
   surfaceCache.insert(key, sr);
   imageHash.insert(slideIndex, img);
 
@@ -921,6 +934,31 @@ void PictureFlowSoftwareRenderer::render()
 {
   buffer.fill(state->backgroundColor);
   renderSlides();
+  if( state->slideImages.size() > 0 )
+  {
+    int x = buffer.width()/2;
+    int size = buffer.width() * 0.021;
+    int start =  buffer.width() * 0.010;
+    if( state->showTriangle )
+    {
+      for(int j = start; j<size;j++)
+      {
+        buffer.setPixel(QPoint(x,j),QColor(255,255,255).rgb()-state->backgroundColor);
+        for(int i = 0; i<size-j;i++)
+        {
+          buffer.setPixel(QPoint(x-i,j),QColor(255,255,255).rgb()-state->backgroundColor);
+          buffer.setPixel(QPoint(x+i,j),QColor(255,255,255).rgb()-state->backgroundColor);
+        }
+      }
+    }
+    if( state->showNumPos )
+    {
+      QPainter painter(&buffer);
+      painter.setPen(QColor(255,255,255).rgb()-state->backgroundColor);
+      painter.setFont(QFont("Arial", start+size*0.5));
+      painter.drawText(start, start+size, QString().setNum(state->centerIndex+1) +"/"+ QString().setNum(state->slideImages.size()));
+    }
+  }
   dirty = false;
 }
 
@@ -936,11 +974,24 @@ public:
 };
 
 
-PictureFlow::PictureFlow(QWidget* parent): QWidget(parent)
+PictureFlow::PictureFlow(QWidget* parent,FlowType flowType): QWidget(parent)
 {
   d = new PictureFlowPrivate;
 
-  d->state = new PictureFlowState;
+    switch(flowType){
+      case CoverFlowLike:
+      d->state = new PictureFlowState(50,0);
+      break;
+    case Strip:
+      d->state = new PictureFlowState(0,1);
+      break;
+    case StripOverlapped:
+      d->state = new PictureFlowState(0,0);
+      break;
+  }
+
+  framesSkip = 0;
+
   d->state->reset();
   d->state->reposition();
 
@@ -1032,6 +1083,8 @@ void PictureFlow::addSlide(const QImage& image)
   int c = d->state->slideImages.count();
   d->state->slideImages.resize(c+1);
   d->state->slideImages[c] = new QImage(image);
+  d->state->marks.resize(c+1);
+  d->state->marks[c] = false;
   triggerRender();
 }
 
@@ -1077,6 +1130,8 @@ void PictureFlow::clear()
   for(int i = 0; i < c; i++)
     delete d->state->slideImages[i];
   d->state->slideImages.resize(0);
+
+  d->state->marks.resize(0);
 
   d->state->reset();
   triggerRender();
@@ -1131,12 +1186,22 @@ void PictureFlow::showNext()
     d->animator->target = qMin(center + 2, slideCount()-1);
 }
 
-void PictureFlow::showSlide(int index)
+void PictureFlow::showSlide(unsigned int index)
 {
-  index = qMax(index, 0);
-  index = qMin(slideCount()-1, index);
+  index = qMax<unsigned int>(index, 0);
+  index = qMin<unsigned int>(slideCount()-1, index);
   if(index == d->state->centerSlide.slideIndex)
     return;
+
+  int distance = centerIndex()-index;
+
+  if(abs(distance)>10)
+  {
+    if(distance<0)
+      setCenterIndex(centerIndex()+(-distance)-10);
+    else
+      setCenterIndex(centerIndex()-distance+10);
+  }
 
   d->animator->start(index);
 }
@@ -1185,13 +1250,110 @@ void PictureFlow::resizeEvent(QResizeEvent* event)
   triggerRender();
   QWidget::resizeEvent(event);
 }
-
-void PictureFlow::updateAnimation()
+#include <QTime>
+void PictureFlow::updateAnimation()  //bucle principal
 {
+  QTime now;
+  now.start();
+  bool frameSkiped = false;
+
   int old_center = d->state->centerIndex;
   d->animator->update();
-  triggerRender();
+  if(framesSkip == 0)
+    render();//triggerRender();
+  else
+  {
+    framesSkip--;
+    frameSkiped = true;
+  }
+
   if(d->state->centerIndex != old_center)
     emit centerIndexChanged(d->state->centerIndex);
+  if(d->animator->animating == true)
+  {
+    int difference = 10-now.elapsed();
+    if(difference >= 0 && !frameSkiped)
+      QTimer::singleShot(difference, this, SLOT(updateAnimation()));
+    else
+    {
+      QTimer::singleShot(0, this, SLOT(updateAnimation()));
+      if(!frameSkiped)
+        framesSkip = -( (difference - 10) / 10); 
+    }
+  } else
+	  emit finishedAnimation();
 }
 
+void PictureFlow::setFlowType(FlowType flowType)
+{
+  switch(flowType){
+    case CoverFlowLike:
+        d->state->rawAngle = 50;
+        d->state->spacingRatio = 0,
+        d->state->reposition();
+      break;
+    case Strip:
+        d->state->rawAngle = 0;
+        d->state->spacingRatio = 1;
+        d->state->reposition();
+      break;
+    case StripOverlapped:
+        d->state->rawAngle = 0;
+        d->state->spacingRatio = 0;
+        d->state->reposition();
+      break;
+  }
+  d->state->reset();
+  d->renderer->init();
+}
+
+void PictureFlow::setMarkImage(const QImage & m)
+{
+  d->state->mark = m;
+}
+
+void PictureFlow::markSlide(int index)
+{
+  if(index<d->state->marks.size())
+    d->state->marks[index] = true;
+}
+
+void PictureFlow::updateMarks()
+{
+  d->renderer->init();
+  d->renderer->paint();
+  repaint();
+}
+
+void PictureFlow::unmarkSlide(int index)
+{
+  if(index<d->state->marks.size())
+    d->state->marks[index] = false;
+}
+
+void PictureFlow::setMarks(const QVector<bool> & m)
+{
+  d->state->marks = m;
+  updateMarks();
+}
+
+void PictureFlow::setShowMarks(bool enable)
+{
+  d->state->showMarks = enable;
+  updateMarks();
+}
+
+QVector<bool> PictureFlow::getMarks()
+{
+  return d->state->marks;
+}
+
+void PictureFlow::setShowNumPos(bool enable)
+{
+  d->state->showNumPos = enable;
+}
+
+void PictureFlow::setShowTriangle(bool enable)
+{
+  d->state->showTriangle = enable;
+}

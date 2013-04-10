@@ -59,11 +59,18 @@ public:
     BlurredReflection
   };
 
+  enum FlowType
+  {
+	CoverFlowLike   = 0,
+	Strip           = 1,
+	StripOverlapped = 2
+  };
+
   /*!
     Creates a new PictureFlow widget.
   */  
-  PictureFlow(QWidget* parent = 0);
-
+  PictureFlow(QWidget* parent = 0, FlowType flowType = CoverFlowLike);
+  
   /*!
     Destroys the widget.
   */
@@ -163,7 +170,7 @@ public slots:
   /*!
     Go to specified slide using animation effect.
   */
-  void showSlide(int index);
+  void showSlide(unsigned int index);
 
   /*!
     Rerender the widget. Normally this function will be automatically invoked
@@ -177,8 +184,28 @@ public slots:
   */  
   void triggerRender();
 
+  void setFlowType(FlowType flowType);
+
+  void setMarkImage(const QImage & mark);
+
+  void markSlide(int index);
+
+  void updateMarks();
+
+  void unmarkSlide(int index);
+
+  void setMarks(const QVector<bool> & marks);
+
+  void setShowMarks(bool enable);
+
+  QVector<bool> getMarks();
+
+  void setShowNumPos(bool enable);
+  void setShowTriangle(bool enable);
+
 signals:
   void centerIndexChanged(int index);
+  void finishedAnimation();
 
 protected:
   void paintEvent(QPaintEvent *event);
@@ -191,6 +218,12 @@ private slots:
 
 private:
   PictureFlowPrivate* d;
+  QImage mark;
+  QVector<bool> marks;
+  int framesSkip;
+  bool showNumPos;
+  bool showTriangle;
+
 };
 
 #endif // PICTUREFLOW_H
