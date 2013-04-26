@@ -1,0 +1,8 @@
+Normal 4x|normal4x|sinimg.png
+Normal 5x|normal5x|sinimg.png
+Hardware none|hardware_none|sinimg.png
+Hardware 2x|hardware2x|sinimg.png
+Hardware 3x|hardware3x|sinimg.png
+Hardware 4x|hardware4x|sinimg.png
+Hardware 5x|hardware5x|sinimg.png
+xbrz|xbrz|sinimg.png

@@ -82,15 +82,15 @@ void frmAddEditDosBox::cargarConfig()
 
 	ui->cbxDbx_sdl_fullresolution->addItem(QIcon(fGrl->Theme() +"img16/sinimg.png"), "0x0", "0x0");
 
-//	if( svn )
-//	{
+	if( grlCfg.DOSBoxSVN )
+	{
 		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_fullresolution  , grlDir.Datos +"dbx_resolution_svn.txt", fGrl->Theme() +"img16/", "", 2, "|", false);
 		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_windowresolution, grlDir.Datos +"dbx_resolution_svn.txt", fGrl->Theme() +"img16/", "", 2, "|", false);
 		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_output          , grlDir.Datos +"dbx_output_svn.txt"    , fGrl->Theme() +"img16/", "", 3, "|", false);
 		fGrl->cargarDatosComboBox(ui->cbxDbx_dosbox_machine      , grlDir.Datos +"dbx_machine_svn.txt"   , fGrl->Theme() +"img16/", "", 3, "|", false, true);
 		fGrl->cargarDatosComboBox(ui->cbxDbx_render_scaler       , grlDir.Datos +"dbx_scaler_svn.txt"    , fGrl->Theme() +"img16/", "", 3, "|", false, true);
 		fGrl->cargarDatosComboBox(ui->cbxDbx_cpu_cputype         , grlDir.Datos +"dbx_cpu_type_svn.txt"  , fGrl->Theme() +"img16/", "", 3, "|", false);
-//	}
+	}
 
 	ui->cbxDbx_cpu_cycles_realmode->setItemText(0,"");
 	ui->cbxDbx_cpu_cycles_realmode->removeItem(1);

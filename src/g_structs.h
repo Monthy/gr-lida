@@ -163,6 +163,7 @@ struct stGrlCfg {
 	int     Skip_PicFlow;
 	int     IndexTabArchivos;
 	QString VersionDBx;
+	bool    DOSBoxSVN;
 	QString LastSelectCatID;
 	int     LastTabOptSelect;
 // OpcFuente

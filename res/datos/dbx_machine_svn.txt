@@ -1,0 +1,2 @@
+CGA mono|cga_mono|sinimg.png
+Amstrad|amstrad|sinimg.png

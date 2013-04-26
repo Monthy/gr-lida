@@ -72,22 +72,27 @@
         <file>datos/companias.txt</file>
         <file>datos/dbx_cpu_core.txt</file>
         <file>datos/dbx_cpu_type.txt</file>
+        <file>datos/dbx_cpu_type_svn.txt</file>
         <file>datos/dbx_cycles.txt</file>
         <file>datos/dbx_frameskip.txt</file>
         <file>datos/dbx_hwscale.txt</file>
         <file>datos/dbx_joystick.txt</file>
         <file>datos/dbx_keyboardlayout.txt</file>
         <file>datos/dbx_machine.txt</file>
+        <file>datos/dbx_machine_svn.txt</file>
         <file>datos/dbx_memsize.txt</file>
         <file>datos/dbx_midi_device.txt</file>
         <file>datos/dbx_mpu401.txt</file>
         <file>datos/dbx_output.txt</file>
+        <file>datos/dbx_output_svn.txt</file>
         <file>datos/dbx_resolution.txt</file>
+        <file>datos/dbx_resolution_svn.txt</file>
         <file>datos/dbx_sb_oplemu.txt</file>
         <file>datos/dbx_sb_oplmode.txt</file>
         <file>datos/dbx_sb_oplrate.txt</file>
         <file>datos/dbx_sbtype.txt</file>
         <file>datos/dbx_scaler.txt</file>
+        <file>datos/dbx_scaler_svn.txt</file>
         <file>datos/dbx_sensitivity.txt</file>
         <file>datos/grl_datos.xml</file>
         <file>datos/grl_dosbox.xml</file>

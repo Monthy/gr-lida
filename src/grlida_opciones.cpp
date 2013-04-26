@@ -99,6 +99,7 @@ void frmOpciones::cargarConfig()
 	ui->cbxVersionDbx->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.73", "0.73");
 	ui->cbxVersionDbx->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.74", "0.74");
 	ui->cbxVersionDbx->setCurrentIndex( ui->cbxVersionDbx->findData( grlCfg.VersionDBx ) );
+	ui->chkDbxSVN->setChecked( grlCfg.DOSBoxSVN );
 
 // ScummVM ---------------------------
 	ui->chkScummVMDisp->setChecked( grlCfg.ScummVMDisp );
@@ -273,6 +274,7 @@ void frmOpciones::guardarConfig()
 	grlCfg.PicFlowMinHeight    = ui->spinBox_MinHeightPicFlow->value();
 	grlCfg.Skip_PicFlow        = ui->spinBox_SkipPicFlow->value();
 	grlCfg.VersionDBx          = ui->cbxVersionDbx->itemData(ui->cbxVersionDbx->currentIndex()).toString();
+	grlCfg.DOSBoxSVN           = ui->chkDbxSVN->isChecked();
 	grlCfg.LastTabOptSelect    = ui->lwOpciones->currentRow();
 // OpcFuente
 	grlCfg.font_usar   = ui->chkUsarTipoFuente->isChecked();
@@ -525,20 +527,25 @@ void frmOpciones::on_cbxIdioma_activated(int index)
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/smile.png"  ) , tr("Modificar archivo") +" - "+ tr("Smiles")             , "smiles.txt"            );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_cpu_core"        , "dbx_cpu_core.txt"      );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_cpu_type"        , "dbx_cpu_type.txt"      );
+	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox SVN - dbx_cpu_type_svn", "dbx_cpu_type_svn.txt"  );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_cycles"          , "dbx_cycles.txt"        );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_hwscale"         , "dbx_hwscale.txt"       );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_joystick"        , "dbx_joystick.txt"      );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_keyboardlayout"  , "dbx_keyboardlayout.txt");
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_machine"         , "dbx_machine.txt"       );
+	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox SVN - dbx_machine_svn" , "dbx_machine_svn.txt"   );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_memsize"         , "dbx_memsize.txt"       );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_midi_device"     , "dbx_midi_device.txt"   );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_mpu401"          , "dbx_mpu401.txt"        );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_output"          , "dbx_output.txt"        );
+	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox SVN - dbx_output_svn"  , "dbx_output_svn.txt"    );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_resolution"      , "dbx_resolution.txt"    );
+	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox SVN - dbx_resolution_svn", "dbx_resolution_svn.txt");
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_sb_oplemu"       , "dbx_sb_oplemu.txt"     );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_sb_oplmode"      , "dbx_sb_oplmode.txt"    );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_sbtype"          , "dbx_sbtype.txt"        );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_scaler"          , "dbx_scaler.txt"        );
+	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox SVN - dbx_scaler_svn"  , "dbx_scaler_svn.txt"    );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png" ) , tr("Modificar archivo") +" DOSBox - dbx_sensitivity"     , "dbx_sensitivity.txt"   );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/scummvm.png") , tr("Modificar archivo") +" ScummVM - svm_gfxmode"        , "svm_gfxmode.txt"       );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/scummvm.png") , tr("Modificar archivo") +" ScummVM - svm_idioma"         , "svm_idioma.txt"        );

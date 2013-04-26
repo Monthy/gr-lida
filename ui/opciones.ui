@@ -711,6 +711,13 @@
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QCheckBox" name="chkDbxSVN">
+                <property name="text">
+                 <string>SVN</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </item>
            </layout>
@@ -3166,6 +3173,7 @@
   <tabstop>lwOpciones</tabstop>
   <tabstop>cbxIdioma</tabstop>
   <tabstop>cbxVersionDbx</tabstop>
+  <tabstop>chkDbxSVN</tabstop>
   <tabstop>chkDOSBoxDisp</tabstop>
   <tabstop>btnDirDbx_find</tabstop>
   <tabstop>btnDirDbx</tabstop>
