@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -31,44 +31,48 @@
 
 #include "funciones.h"
 #include "qtzip.h"
-#include "ui_image_viewer.h"
 
-class ImageViewer : public QMainWindow
+namespace Ui {
+    class frmImgViewer;
+}
+
+class frmImgViewer : public QMainWindow
 {
     Q_OBJECT
 
 public:
-	ImageViewer(QWidget *parent = 0, Qt::WFlags flags = 0);
-	~ImageViewer();
+	explicit frmImgViewer(stGrlCfg m_cfg, QWidget *parent = 0);
+	~frmImgViewer();
 
-	Ui::ImageViewerClass ui;
-
-	void openZip(QString fileName);
-	void openImg(QString fileName);
 	void open(QString fileName);
-	void open(QString fileName, QList<QString> lista, bool is_zip = false);
+	void openZip(QString fileName);
+	void open(QString fileName, QStringList lista, bool is_zip = false);
+	void showImg(int index);
 
 protected:
-	void closeEvent( QCloseEvent *e );
+	void closeEvent(QCloseEvent *event);
 	void resizeEvent(QResizeEvent *event);
-	bool eventFilter(QObject *obj, QEvent *event);
+	bool eventFilter(QObject *object, QEvent *event);
 
 private:
-	Funciones fGrl;
+	Ui::frmImgViewer *ui;
+
+	Funciones *fGrl;
 	QtZip zip;
 
-	QString stHomeDir, stTheme;
-	bool isZip;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
 
 	QGraphicsScene *scene;
 	QGraphicsPixmapItem *pxmItem;
 
+	bool isZip;
 	int scene_width, scene_height;
 	double scaleFactor;
 	int total_img, id_imagen;
 
 	QPixmap imagen_src;
-	QList<QString> imgLista;
+	QStringList imgLista;
 
 	QPrinter printer;
 
@@ -76,34 +80,30 @@ private:
 	QLabel *lbpanel_1;
 	QLabel *lbpanel_2;
 
-	QLabel *lbrotar;
-	QSlider *hsRotar;
-
-	void createConnections();
+	void cargarConfig();
 	void setTheme();
-	void createStatusBar();
-	void updateActions();
-	void scaleImage(double factor);
-	void imgItemCentrar(QGraphicsPixmapItem *imgItem);
-	void imgItemRotar(QGraphicsPixmapItem *imgItem, int r = 0);
-	void cambiaImagenScene(QPixmap imgItem);
-	void setScrollBarPolicy(bool activar = true);
 
-private slots:
-	void on_currentItemChanged(QListWidgetItem *item1,QListWidgetItem *item2);
-	void on_itemClicked(QListWidgetItem *item);
-
-	void open();
-	void print();
-
-	void zoomIn();
-	void zoomOut();
-	void normalSize();
-	void imgRotar(int r = 0);
-	void fitToWindow();
 	void nextImagen();
 	void backImagen();
-	void setListImgVisible(bool visible);
+	void imgItemRotar(int radio = 0);
+	void updateActions();
+
+private slots:
+	void on_exit_triggered();
+	void on_open_triggered();
+	void on_print_triggered();
+	void on_zoomIn_triggered();
+	void on_zoomOut_triggered();
+	void on_normalSize_triggered();
+	void on_fitToWindow_triggered(bool checked);
+	void on_backImagen_triggered();
+	void on_nextImagen_triggered();
+	void on_verListImages_triggered(bool checked);
+	void on_centrar_triggered();
+
+	void on_lwListaImagenes_currentRowChanged(int currentRow);
+	void on_hsRotar_valueChanged(int value);
+
 };
 
 #endif

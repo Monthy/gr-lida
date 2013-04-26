@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,65 +25,75 @@
 #ifndef GRLIDA_DBXADD_H
 #define GRLIDA_DBXADD_H
 
-#include <QtCore>
-#include <QtGui>
+#include <QDialog>
 
 #include "funciones.h"
-#include "ui_dbxadd.h"
+#include "dbsql.h"
+
+namespace Ui {
+	class frmDbxAdd;
+}
 
 class frmDbxAdd : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmDbxAdd(QDialog *parent = 0, Qt::WFlags flags = 0);
+	explicit frmDbxAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent = 0);
 	~frmDbxAdd();
 
-	Ui::DbxAddClass ui;
-
-	QHash<QString, QString> DatosJuego;
-	QHash<QString, QString> DatosDosBox;
+	stGrlCfg getGrlCfg(){return grlCfg;}
+	stDatosJuego getDatosJuegos(){return DatosJuego;}
 
 private:
-	QString stTituloDbx(){ return tr("Nuevo juego para el DOSBox"); }
+	Ui::frmDbxAdd *ui;
 
-	Funciones fGrl;
-	int intStepwizard;
-	bool isImportDbx, isCreateMounts;
+	QString titulo_ventana(){ return tr("Nuevo juego para el DOSBox"); }
 
-	QString stHomeDir, stTheme;
+	Funciones *fGrl;
+	dbSql *sql;
 
-	QHash<QString, QVariant> GRLConfig;
-	QHash<QString, QString> tempDatosJuego;
-	QHash<QString, QString> tempProfileDosBox;
+	stDatosJuego DatosJuego;
+	stConfigDOSBox DatosDosBox;
 
-	void createConnections();
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stGrlCats categoria;
+	int index_wizard;
+
+	void cargarConfig();
 	void setTheme();
-	void CargarConfig();
-	void PrevierMontajes();
-	void CargarDatosDosBox(QHash<QString, QString> datosDbx, bool isProfileGame = false);
-	void CargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
+
+	void previerMontajes();
+	void setDatosDosBox();
+	void cargarDatosDosBox(stConfigDOSBox cfgDbx);
+	void cargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
 
 private slots:
-	void on_btnOk();
-	void on_btnNext();
-	void on_btnPrevious();
-	void on_txtDatos_Titulo_textChanged(const QString &text);
-	void on_txtDbx_path_exe_textChanged(const QString &text);
-	void on_setProfileGame(int row);
-	void on_btnDbx_FileConfg();
-	void on_btnDbx_ExeJuego();
-	void on_btnDbx_ExeSetup();
-	void on_btnMount_Add();
-	void on_btnMount_Edit();
-	void on_btnMount_Delete();
-	void on_btnMount_Clear();
-	void on_btnMount_Subir();
-	void on_btnMount_Bajar();
-	void on_btnMount_AutoCrear();
-	void on_btnMount_Primario();
-	void on_btnDescargarInfo();
-	void on_btnInstalarJuego();
+	void on_btnOk_clicked();
+	void on_btnCancel_clicked();
+	void on_btnNext_clicked();
+	void on_btnPrevious_clicked();
+
+	void on_btnDbx_FileConfg_clicked();
+	void on_btnDbx_FileConfg_clear_clicked();
+	void on_btnDbx_ExeJuego_clicked();
+	void on_btnDbx_ExeJuego_clear_clicked();
+	void on_btnDbx_ExeSetup_clicked();
+	void on_btnDbx_ExeSetup_clear_clicked();
+	void on_btnDescargarInfo_clicked();
+	void on_btnInstalarJuego_clicked();
+	void on_btnMount_Add_clicked();
+	void on_btnMount_Edit_clicked();
+	void on_btnMount_Delete_clicked();
+	void on_btnMount_Clear_clicked();
+	void on_btnMount_Subir_clicked();
+	void on_btnMount_Bajar_clicked();
+	void on_btnMount_AutoCrear_clicked();
+	void on_btnMount_Primario_clicked();
+
+	void on_cbxDbx_Profiles_activated(int index);
+	void on_txtDatos_Titulo_textEdited(const QString &arg1);
 
 };
 

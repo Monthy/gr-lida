@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,48 +25,62 @@
 #ifndef GRLIDA_ADDEDIT_VDMSOUND_H
 #define GRLIDA_ADDEDIT_VDMSOUND_H
 
-#include <QtGui>
 #include <QTabWidget>
 
 #include "funciones.h"
 #include "dbsql.h"
-#include "ui_addedit_vdmsound.h"
+
+namespace Ui {
+	class frmAddEditVDMSound;
+}
 
 class frmAddEditVDMSound : public QTabWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmAddEditVDMSound(QWidget *parent = 0);
+	explicit frmAddEditVDMSound(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QString id_game, bool m_editando, QWidget *parent = 0);
 	~frmAddEditVDMSound();
 
-	Ui::AddEditVDMSoundClass ui;
-
 	bool isCorrectNext();
-	void setEditandoJuego(bool editando = false);
-	void setConfigDefecto();
-	void CargarDatosVDMSound(QString IDGrl);
-	void CargarDatosVDMSound(QHash<QString, QString> datosVdms);
-	QHash<QString, QString> setDatosVDMSound();
+	void cargarConfig();
+
+	stGrlCfg getGrlCfg(){return grlCfg;}
+	stConfigVDMSound getDatosVDMSound(){return DatosVDMSound;}
+	QString getPathConf();
+	void setPathConf(QString config);
+
+	void setDatosVDMSound();
+	void cargarDatosVDMSound(stConfigVDMSound cfgVdms);
 
 private:
-	QHash<QString, QVariant> GRLConfig;
+	Ui::frmAddEditVDMSound *ui;
 
-	Funciones fGrl;
+	Funciones *fGrl;
 	dbSql *sql;
 
-	bool EditandoJuego;
+	QString titulo_ventana(){ return windowTitle(); }
 
-	QString stTituloAddEdit(){ return windowTitle(); }
-	QString stHomeDir, stTheme, stItemIDVdms;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stGrlCats categoria;
 
-	void createConnections();
+	stConfigVDMSound DatosVDMSound;
+
+	QString IdGame, IdVdms;
+
+	bool Editando;
+
 	void setTheme();
 
 private slots:
-	void on_btnVdms_FileConfg();
-	void on_btnVdms_ExeJuego();
-	void on_btnVdms_Icono();
+	void on_btnVdms_FileConfg_clicked();
+	void on_btnVdms_FileConfg_clear_clicked();
+	void on_btnVdms_ExeJuego_clicked();
+	void on_btnVdms_ExeJuego_clear_clicked();
+	void on_btnVdms_params_clear_clicked();
+	void on_btnVdms_Icono_clicked();
+	void on_btnVdms_Icono_clear_clicked();
 
 };
 

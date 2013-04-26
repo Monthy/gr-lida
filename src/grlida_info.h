@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,29 +25,49 @@
 #ifndef GRLIDA_INFO_H
 #define GRLIDA_INFO_H
 
-#include <QtCore>
-#include <QtGui>
+#include <QDialog>
 
 #include "dbsql.h"
 #include "funciones.h"
-#include "ui_informacion.h"
+#include "qtzip.h"
+
+namespace Ui {
+	class frmInfo;
+}
 
 class frmInfo : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmInfo(QWidget *parent = 0);
+	frmInfo(dbSql *m_sql, stGrlCfg m_cfg, QWidget *parent = 0);
 	~frmInfo();
 
-	Ui::InfoClass ui;
-
 private:
-	Funciones fGrl;
+	Ui::frmInfo *ui;
+
+	Funciones *fGrl;
 	dbSql *sql;
 
-	QString stHomeDir, stTheme;
-	QTreeWidgetItem *ItemInfo;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+
+	unsigned int id_cat;
+	QHash<int, stGrlCats> categoria;
+	QTreeWidgetItem *twListInfo;
+
+	void cargarConfig();
+	void setTheme();
+
+	void cargarListaCategorias();
+	void menuNavAddCat(QString etiqueta, QString icono, QString sql_query = "", bool m_expanded = true, bool m_show_total = true);
+	void menuNavAddSubCat(QString etiqueta, QString icono, QString sql_query = "", QString sql_col = "");
+	void crearMenuNav();
+
+private slots:
+	void on_cbxCategorias_activated(int index);
+	void on_btnOk_clicked();
+
 };
 
 #endif // GRLIDA_INFO_H

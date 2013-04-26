@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -23,148 +23,184 @@
 **/
 
 #include "grlida_config_inicial.h"
+#include "ui_config_inicial.h"
 
-frmConfigInicial::frmConfigInicial(QDialog *parent, Qt::WFlags flags)
-    : QDialog( parent, flags )
+frmConfigInicial::frmConfigInicial(stGrlCfg m_cfg, QWidget *parent) :
+	QDialog(parent),
+	ui(new Ui::frmConfigInicial)
 {
-	ui.setupUi(this);
+	ui->setupUi(this);
+	fGrl = new Funciones;
 
-	stHomeDir = fGrl.GRlidaHomePath();
-	stTheme   = fGrl.ThemeGrl();
+	grlCfg = m_cfg;
 
-	createConnections();
+	grlDir.Home    = fGrl->GRlidaHomePath();
+	grlDir.Idiomas = grlDir.Home +"idiomas/";
 
-	CargarConfig();
+	fGrl->setTheme(grlCfg.NameDirTheme);
+	fGrl->setIdioma(grlCfg.IdiomaSelect);
+
+	cargarConfig();
 	setTheme();
 
 // centra la aplicacion en el escritorio
-	QDesktopWidget *desktop = qApp->desktop();
-	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
-	int left = ( rect.width() - width() ) / 2;
-	int top = ( rect.height() - height() ) / 2;
-	setGeometry( left, top, width(), height() );
+	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
 frmConfigInicial::~frmConfigInicial()
 {
-	//
+	delete fGrl;
+	delete ui;
 }
 
-void frmConfigInicial::closeEvent( QCloseEvent *e )
+void frmConfigInicial::cargarConfig()
 {
-	on_setLanguage( ui.cbxIdioma->currentIndex() );
+	fGrl->cargarIdiomasComboBox(ui->cbxIdioma, ":/idiomas/");
+	fGrl->cargarIdiomasComboBox(ui->cbxIdioma, grlDir.Idiomas, false);
 
-	GuardarConfig();
+	int idx = ui->cbxIdioma->findData( grlCfg.IdiomaSelect +".qm", Qt::UserRole, Qt::MatchEndsWith);
+	ui->cbxIdioma->setCurrentIndex( idx );
+	emit on_cbxIdioma_activated( idx );
 
-	e->accept();
-}
+	ui->chkDOSBoxDisp->setChecked( grlCfg.DOSBoxDisp );
+	ui->txtDirDbx->setText( grlCfg.DirDOSBox );
+	ui->chkScummVMDisp->setChecked( grlCfg.ScummVMDisp );
+	ui->txtDirSvm->setText( grlCfg.DirScummVM );
 
-void  frmConfigInicial::createConnections()
-{
-	connect( ui.btnOk    , SIGNAL( clicked() ), this, SLOT( on_btnOk()     ) );
-	connect( ui.btnDirDbx, SIGNAL( clicked() ), this, SLOT( on_btnDirDbx() ) );
-	connect( ui.btnDirSvm, SIGNAL( clicked() ), this, SLOT( on_btnDirSvm() ) );
-	connect( ui.cbxIdioma, SIGNAL(activated(int)), this, SLOT( on_setLanguage(int) ) );
-}
-
-void frmConfigInicial::CargarConfig()
-{
-	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
-
-	ui.chkDOSBoxDisp->setChecked( GRLConfig["DOSBoxDisp"].toBool() );
-	ui.btnDirDbx->setEnabled( GRLConfig["DOSBoxDisp"].toBool() );
-	ui.txtDirDbx->setEnabled( GRLConfig["DOSBoxDisp"].toBool() );
-	ui.txtDirDbx->setText( GRLConfig["DirDOSBox"].toString() );
-	ui.chkScummVMDisp->setChecked( GRLConfig["ScummVMDisp"].toBool() );
-	ui.btnDirSvm->setEnabled( GRLConfig["ScummVMDisp"].toBool() );
-	ui.txtDirSvm->setEnabled( GRLConfig["ScummVMDisp"].toBool() );
-	ui.txtDirSvm->setText( GRLConfig["DirScummVM"].toString() );
-	ui.chkVDMSoundDisp->setChecked( GRLConfig["VDMSoundDisp"].toBool() );
-	stIdiomaSelect = GRLConfig["IdiomaSelect"].toString();
-
-	if( GRLConfig["IdiomaExterno"].toBool() )
-		fGrl.CargarIdiomasCombo(stHomeDir + "idiomas/", ui.cbxIdioma);
-	else
-		fGrl.CargarIdiomasCombo(":/idiomas/", ui.cbxIdioma);
-
-	ui.cbxIdioma->setCurrentIndex( ui.cbxIdioma->findData( stIdiomaSelect ) );
-	on_setLanguage( ui.cbxIdioma->currentIndex() );
+	ui->chkVDMSoundDisp->setChecked( grlCfg.VDMSoundDisp );
+	ui->chkShowNext->setChecked( grlCfg.Primeravez );
 
 	#ifdef Q_OS_WIN32
-		ui.chkVDMSoundDisp->setEnabled(true);
+		ui->chkVDMSoundDisp->setEnabled(true);
 	#else
-		ui.chkVDMSoundDisp->setEnabled(false);
+		ui->chkVDMSoundDisp->setEnabled(false);
 	#endif
-}
-
-void frmConfigInicial::GuardarConfig()
-{
-	GRLConfig["DOSBoxDisp"]   = ui.chkDOSBoxDisp->isChecked();
-	GRLConfig["ScummVMDisp"]  = ui.chkScummVMDisp->isChecked();
-	GRLConfig["VDMSoundDisp"] = ui.chkVDMSoundDisp->isChecked();
-	GRLConfig["Primeravez"]   = ui.chkShowNext->isChecked();
-	GRLConfig["DirDOSBox"]    = ui.txtDirDbx->text();
-	GRLConfig["DirScummVM"]   = ui.txtDirSvm->text();
-	GRLConfig["IdiomaSelect"] = stIdiomaSelect;
-
-	fGrl.GuardarGRLConfig( stHomeDir + "GR-lida.conf", GRLConfig );
 }
 
 void frmConfigInicial::setTheme()
 {
-	setStyleSheet( fGrl.StyleSheet() );
+	ui->btnOk->setIcon( QIcon(fGrl->Theme() +"img16/aplicar.png") );
+	ui->btnDirDbx->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->btnDirDbx_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
+	ui->btnDirDbx_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnDirSvm->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->btnDirSvm_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
+	ui->btnDirSvm_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 
-	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
-	ui.btnDirDbx->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.btnDirSvm->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
+	if( grlCfg.font_usar )
+		this->setStyleSheet(fGrl->myStyleSheet() +"*{font-family:\""+ grlCfg.font_family +"\";font-size:"+ grlCfg.font_size +"pt;}");
+	else
+		this->setStyleSheet(fGrl->myStyleSheet());
 
-	if( GRLConfig["font_usar"].toBool() )
-		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
+	this->setStyle(QStyleFactory::create(grlCfg.Style));
+
+	if( grlCfg.StylePalette )
+		this->setPalette(QApplication::style()->standardPalette());
+	else
+		this->setPalette(QApplication::palette());
 }
 
-void frmConfigInicial::on_setLanguage(int idx_locale)
+void frmConfigInicial::on_cbxIdioma_activated(int index)
 {
-	if(idx_locale >= 0)
-		stIdiomaSelect = ui.cbxIdioma->itemData(idx_locale, Qt::UserRole).toString();
-	else
-		stIdiomaSelect = "es_ES";
+	if( index > -1 )
+	{
+		QString idioma = ui->cbxIdioma->itemData(index).toString();
+		translator.load( idioma );
 
-	if( GRLConfig["IdiomaExterno"].toBool() )
-		translator.load(stHomeDir + "idiomas/gr-lida_" + stIdiomaSelect + ".qm");
-	else
-		translator.load(":/idiomas/gr-lida_" + stIdiomaSelect + ".qm");
+		idioma.remove(grlDir.Idiomas +"gr-lida_");
+		idioma.remove(":/idiomas/gr-lida_");
+		idioma.remove(".qm");
+
+		grlCfg.IdiomaSelect = idioma;
+	} else {
+		grlCfg.IdiomaSelect = "es_ES";
+		translator.load(":/idiomas/gr-lida_"+ grlCfg.IdiomaSelect +".qm");
+	}
+
+	fGrl->setIdioma(grlCfg.IdiomaSelect);
 
 	qApp->installTranslator(&translator);
-	ui.retranslateUi(this);
+	ui->retranslateUi(this);
 }
 
-void frmConfigInicial::on_btnOk()
+void frmConfigInicial::on_btnDirDbx_clicked()
 {
-	on_setLanguage( ui.cbxIdioma->currentIndex() );
+	ui->txtDirDbx->setText( fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, ui->txtDirDbx->text(), "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)") );
 
-	GuardarConfig();
+	if( QFile::exists( ui->txtDirDbx->text() ) )
+		grlCfg.DirDbx = fGrl->getInfoFile( ui->txtDirDbx->text() ).Path;
+}
+
+void frmConfigInicial::on_btnDirDbx_find_clicked()
+{
+#ifdef Q_OS_WIN32
+	QStringList lista_drivers;
+	QFileInfoList list_drives = QDir::drives();
+	lista_drivers.clear();
+	for (int i = 0; i < list_drives.size(); ++i)
+		lista_drivers.insert(i, QDir::toNativeSeparators(list_drives.at(i).absoluteFilePath()));
+
+	bool ok = false;
+	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" DOSBox", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
+	if( ok && !letra_drive.isEmpty() )
+		ui->txtDirDbx->setText( fGrl->getFindFile(letra_drive, "dosbox.exe") );
+#else
+	#ifdef Q_OS_MAC
+		ui->txtDirDbx->setText( fGrl->getFindFile("/", "dosbox") );
+	#else
+		ui->txtDirDbx->setText( fGrl->getFindFile("/usr/bin/", "dosbox") );
+	#endif
+#endif
+}
+
+void frmConfigInicial::on_btnDirDbx_clear_clicked()
+{
+	ui->txtDirDbx->clear();
+}
+
+void frmConfigInicial::on_btnDirSvm_clicked()
+{
+	ui->txtDirSvm->setText( fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, ui->txtDirSvm->text(), "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)") );
+
+	if( QFile::exists( ui->txtDirSvm->text() ) )
+		grlCfg.DirSvm = fGrl->getInfoFile( ui->txtDirSvm->text() ).Path;
+}
+
+void frmConfigInicial::on_btnDirSvm_find_clicked()
+{
+#ifdef Q_OS_WIN32
+	QStringList lista_drivers;
+	QFileInfoList list_drives = QDir::drives();
+	lista_drivers.clear();
+	for (int i = 0; i < list_drives.size(); ++i)
+		lista_drivers.insert(i, QDir::toNativeSeparators(list_drives.at(i).absoluteFilePath()));
+
+	bool ok = false;
+	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" ScummVM", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
+	if( ok && !letra_drive.isEmpty() )
+		ui->txtDirSvm->setText( fGrl->getFindFile(letra_drive, "scummvm.exe") );
+#else
+	#ifdef Q_OS_MAC
+		ui->txtDirSvm->setText( fGrl->getFindFile("/", "scummvm") );
+	#else
+		ui->txtDirSvm->setText( fGrl->getFindFile("/usr/games/", "scummvm") );
+	#endif
+#endif
+}
+
+void frmConfigInicial::on_btnDirSvm_clear_clicked()
+{
+	ui->txtDirSvm->clear();
+}
+
+void frmConfigInicial::on_btnOk_clicked()
+{
+	grlCfg.DOSBoxDisp   = ui->chkDOSBoxDisp->isChecked();
+	grlCfg.DirDOSBox    = ui->txtDirDbx->text();
+	grlCfg.ScummVMDisp  = ui->chkScummVMDisp->isChecked();
+	grlCfg.DirScummVM   = ui->txtDirSvm->text();
+	grlCfg.VDMSoundDisp = ui->chkVDMSoundDisp->isChecked();
+	grlCfg.Primeravez   = ui->chkShowNext->isChecked();
 
 	QDialog::accept();
-}
-
-void frmConfigInicial::on_btnDirDbx()
-{
-	ui.txtDirDbx->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del DOSBox"), GRLConfig["DirDbx"].toString(), ui.txtDirDbx->text(), tr("Todos los archivo") + " (*)", 0, false) );
-
-	QFileInfo fi( ui.txtDirDbx->text() );
-	if( fi.exists() )
-		GRLConfig["DirDbx"] = fi.absolutePath();
-	else
-		GRLConfig["DirDbx"] = "";
-}
-
-void frmConfigInicial::on_btnDirSvm()
-{
-	ui.txtDirSvm->setText( fGrl.VentanaAbrirArchivos( tr("Selecciona el Ejecutable del ScummVM"), GRLConfig["DirSvm"].toString(), ui.txtDirSvm->text(), tr("Todos los archivo") + " (*)", 0, false) );
-
-	QFileInfo fi( ui.txtDirSvm->text() );
-	if( fi.exists() )
-		GRLConfig["DirSvm"] = fi.absolutePath();
-	else
-		GRLConfig["DirSvm"] = "";
 }

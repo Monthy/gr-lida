@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -26,11 +26,21 @@
 #include "ui_login_url.h"
 
 HttpDownload::HttpDownload(QWidget *parent)
-    : QWidget(parent)
+	: QWidget(parent)
 {
 	setStatusLabel( tr("Por favor, introduzca la dirección URL de un archivo que desea descargar.") );
 	setStatusBtnDownload( true );
 	setHttpWindowTitle();
+	isProxyEnable = false;
+
+	progressDialog = new QProgressDialog(this);
+
+	connect(&qnam, SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)), this, SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
+	#ifndef QT_NO_OPENSSL
+		connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
+	#endif
+
+	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 }
 
 HttpDownload::~HttpDownload()
@@ -65,45 +75,58 @@ void HttpDownload::setHttpProxy(int typeProxy, const QString host, int port, con
 	proxy.setPort( port );
 	proxy.setUser( username );
 	proxy.setPassword( password );
+
+	isProxyEnable = true;
 }
 
-void HttpDownload::setHttpWindowTitle(QString titulo)
+void HttpDownload::setStatusLabel(QString str)
 {
-	m_httpwindowtitle = titulo;
+	m_statuslabel = str;
+	emit statusLabel( m_statuslabel );
 }
 
-void HttpDownload::downloadFile(QString urlfile, QString fileName, QString metodo, QString contentPost)
+void HttpDownload::setStatusBtnDownload(bool mbool)
 {
-	progressDialog = new QProgressDialog(this);
-	http = new QHttp(this);
+	m_downloadButton = mbool;
+	emit statusBtnEnabled( m_downloadButton );
+}
 
-	connect(http, SIGNAL( requestFinished(int, bool) ), this, SLOT( httpRequestFinished(int, bool) ) );
-	connect(http, SIGNAL( responseHeaderReceived(const QHttpResponseHeader &) ), this, SLOT( readResponseHeader(const QHttpResponseHeader &) ) );
-	connect(http, SIGNAL( dataReadProgress(int, int) ), this, SLOT( updateDataReadProgress(int, int) ) );
-	connect(http, SIGNAL( stateChanged(int) ), this, SLOT( httpstateChanged(int) ) );
-	connect(http, SIGNAL( authenticationRequired(const QString &, quint16, QAuthenticator *) ), this, SLOT( slotAuthenticationRequired(const QString &, quint16, QAuthenticator *) ) );
+void HttpDownload::startRequest(QUrl m_url, TipoDown tipo, QString contentPost)
+{
+	if( isProxyEnable )
+		qnam.setProxy(proxy);
 
-#ifndef QT_NO_OPENSSL
-	connect(http, SIGNAL( sslErrors(const QList<QSslError> &) ), this, SLOT( sslErrors(const QList<QSslError> &) ) );
-#endif
+	switch ( tipo )
+	{
+		case d_GET:
+			reply = qnam.get(QNetworkRequest(m_url));
+		break;
+		case d_POST:
+		// content
+			QByteArray content;
+				content.append( contentPost );
+			reply = qnam.post(QNetworkRequest(m_url), content);
+		break;
+	}
 
-	connect(progressDialog, SIGNAL( canceled() ), this, SLOT( cancelDownload() ) );
-	http->setProxy( proxy );
+	connect(reply, SIGNAL(finished()), this, SLOT(httpFinished()));
+	connect(reply, SIGNAL(readyRead()), this, SLOT(httpReadyRead()));
+	connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateDataReadProgress(qint64, qint64)));
+}
 
-	urlLineEdit.clear();
-	urlLineEdit = urlfile;
+void HttpDownload::downloadFile(QString urlfile, QString fileName, QString tipo, QString contentPost)
+{
+	url = urlfile;
 
-	QUrl url( urlLineEdit );
-
-	if(fileName.isEmpty())
+	if( fileName.isEmpty() )
 		fileName = "index.html";
 
-	if(QFile::exists(fileName))
+	if( QFile::exists(fileName) )
 	{
-	//	if(QMessageBox::question(this, m_httpwindowtitle,
-	//		tr("Ya existe un archivo con el mismo nombre '%1' en el directorio actual.").arg( fileName )+" "+
-	//		tr("¿Quieres sobreescribirlo?"), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Cancel) == QMessageBox::Cancel)
-	//		return;
+//		if( QMessageBox::question(this, m_httpwindowtitle,
+//			tr("Ya existe un archivo con el mismo nombre '%1' en el directorio actual.").arg( fileName ) +"\n"+
+//			tr("¿Quieres sobreescribirlo?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::No) == QMessageBox::No)
+//			return;
 		QFile::remove(fileName);
 	}
 
@@ -111,47 +134,22 @@ void HttpDownload::downloadFile(QString urlfile, QString fileName, QString metod
 	if( !file->open(QIODevice::WriteOnly) )
 	{
 		QMessageBox::information(this, m_httpwindowtitle, tr("No se ha podido guardar el archivo %1: %2.").arg( fileName ).arg( file->errorString() ));
-
 		delete file;
 		file = 0;
-
 		return;
 	}
-	QHttp::ConnectionMode mode = url.scheme().toLower() == "https" ? QHttp::ConnectionModeHttps : QHttp::ConnectionModeHttp;
-	http->setHost(url.host(), mode, url.port() == -1 ? 0 : url.port());
 
-	if( !url.userName().isEmpty() )
-		http->setUser(url.userName(), url.password());
-
-	httpRequestAborted = false;
-
-//	QByteArray path = QUrl::toPercentEncoding(url.path(), "!$&'()*+,;=:@/");
-//	if (path.isEmpty())
-//		path = "/";
-
-	if( metodo == "POST" )
-	{
-	// header
-		QHttpRequestHeader header;
-	// content
-		QByteArray content;
-		content.append( contentPost );
-
-//		header.setRequest(metodo, path);
-		header.setRequest(metodo, url.path());
-		header.setValue("Host", url.host() );
-		header.setContentType("application/x-www-form-urlencoded"); // important
-		header.setContentLength( content.length() );
-
-		httpGetId = http->request(header, content, file);
-	} else
-		httpGetId = http->get(url.toEncoded(), file);
-//		httpGetId = http->get( path, file);
-
-	progressDialog->setWindowTitle( m_httpwindowtitle );
-	progressDialog->setLabelText( tr("Descargando %1.").arg( fileName ) );
-
+	progressDialog->setWindowTitle(m_httpwindowtitle);
+	progressDialog->setLabelText(tr("Descargando %1.").arg(fileName));
 	setStatusBtnDownload( false );
+
+	// schedule the request
+	httpRequestAborted = false;
+//	if( tipo == "POST" )
+//		startRequest(url, d_POST, contentPost);
+//	else
+//		startRequest(url, d_GET, contentPost);
+	startRequest(url, (tipo == "POST")? d_POST : d_GET, contentPost);
 }
 
 void HttpDownload::cancelDownload()
@@ -159,157 +157,117 @@ void HttpDownload::cancelDownload()
 	setStatusLabel( tr("Descarga cancelada.") );
 
 	httpRequestAborted = true;
-	http->abort();
+	reply->abort();
 
 	setStatusBtnDownload( true );
 }
 
-void HttpDownload::httpRequestFinished(int requestId, bool error)
+void HttpDownload::httpFinished()
 {
-	if(requestId != httpGetId)
-		return;
-	if(httpRequestAborted)
+	if( httpRequestAborted )
 	{
-		if(file)
+		if( file )
 		{
 			file->close();
 			file->remove();
-
 			delete file;
 			file = 0;
 		}
-
+		reply->deleteLater();
 		progressDialog->hide();
 		return;
 	}
-
-	if(requestId != httpGetId)
-		return;
 
 	progressDialog->hide();
 	file->flush();
 	file->close();
 
-	if(error)
+	QVariant redirectionTarget = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+	if( reply->error() )
 	{
 		file->remove();
-		QMessageBox::information(this, m_httpwindowtitle, tr("No se ha podido guardar el archivo: %1.").arg( http->errorString() ) );
-	} else {
-		QString fileName = QFileInfo( QUrl( urlLineEdit ).path() ).fileName();
-		setStatusLabel( tr("Descargado en el directorio: %1.").arg( fileName ) );
-		emit StatusRequestFinished();
-	}
-
-	setStatusBtnDownload( true );
-
-	delete file;
-	file = 0;
-}
-
-void HttpDownload::readResponseHeader(const QHttpResponseHeader &responseHeader)
-{
-	switch (responseHeader.statusCode())
-	{
-	case 200:                   // Ok
-	case 301:                   // Moved Permanently
-	case 302:                   // Found
-	case 303:                   // See Other
-	case 307:                   // Temporary Redirect
-		// these are not error conditions
-		break;
-
-	default:
-		setStatusLabel("");
-		QMessageBox::information(this, m_httpwindowtitle, tr("La descarga ha fallado: %1.").arg( responseHeader.reasonPhrase() ) );
-
-		httpRequestAborted = true;
-		progressDialog->hide();
-
-		http->disconnect();
-		http->abort();
+		QMessageBox::information(this, m_httpwindowtitle, tr("No se ha podido guardar el archivo: %1.").arg( reply->errorString() ) );
 		setStatusBtnDownload( true );
 	}
+	else if( !redirectionTarget.isNull() )
+	{
+		QUrl newUrl = url.resolved( redirectionTarget.toUrl() );
+		if( QMessageBox::question(this, m_httpwindowtitle, tr("¿Redireccionar a '%1'?").arg( newUrl.toString() ), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes )
+		{
+			url = newUrl;
+			reply->deleteLater();
+			file->open(QIODevice::WriteOnly);
+			file->resize(0);
+			startRequest(url);
+			return;
+		}
+	} else {
+		QString fileName = QFileInfo( QUrl( url ).path() ).fileName();
+		setStatusLabel( tr("Descargado '%1' en el directorio actual.").arg( fileName ) );
+		setStatusBtnDownload( true );
+	}
+
+	reply->deleteLater();
+	reply = 0;
+	delete file;
+	file = 0;
+	emit statusFinished();
 }
 
-
-void HttpDownload::updateDataReadProgress(int bytesRead, int totalBytes)
+void HttpDownload::httpReadyRead()
 {
-	if(httpRequestAborted)
+// this slot gets called every time the QNetworkReply has new data.
+// We read all of its new data and write it into the file.
+// That way we use less RAM than when reading it at the finished()
+// signal of the QNetworkReply
+	if( file )
+		file->write(reply->readAll());
+}
+
+void HttpDownload::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes)
+{
+	if( httpRequestAborted )
 		return;
 
-	progressDialog->setMaximum(totalBytes);
-	progressDialog->setValue(bytesRead);
+	progressDialog->setMaximum( totalBytes );
+	progressDialog->setValue( bytesRead );
 }
 
-void HttpDownload::httpstateChanged(int state)
-{
-	switch( state )
-	{
-		case QHttp::Unconnected:
-//			setStatusLabel("There is no connection to the host");
-		break;
-		case QHttp::HostLookup:
-//			setStatusLabel("A host name lookup is in progress.");
-		break;
-		case QHttp::Connecting:
-//			setStatusLabel("An attempt to connect to the host is in progress.");
-		break;
-		case QHttp::Sending:
-//			setStatusLabel("The client is sending its request to the server.");
-		break;
-		case QHttp::Reading:
-//			setStatusLabel("The client's request has been sent and the client is reading the server's response.");
-		break;
-		case QHttp::Connected:
-//			setStatusLabel("The connection to the host is open, but the client is neither sending a request, nor waiting for a response.");
-		break;
-		case QHttp::Closing:
-//			setStatusLabel("The connection is closing down, but is not yet closed. (The state will be Unconnected when the connection is closed.");
-		break;
-	}
-}
-
-void HttpDownload::slotAuthenticationRequired(const QString &hostName, quint16, QAuthenticator *authenticator)
+void HttpDownload::slotAuthenticationRequired(QNetworkReply*,QAuthenticator *authenticator)
 {
 	QDialog dlg;
 	Ui::DialogLogin ui;
 	ui.setupUi(&dlg);
 	dlg.adjustSize();
-	ui.siteDescription->setText(tr("%1 en %2").arg(authenticator->realm()).arg(hostName));
+	ui.siteDescription->setText(tr("%1 en %2").arg(authenticator->realm()).arg(url.host()));
 
-	if(dlg.exec() == QDialog::Accepted)
+// Did the URL have information? Fill the UI
+// This is only relevant if the URL-supplied credentials were wrong
+	ui.userEdit->setText(url.userName());
+	ui.passwordEdit->setText(url.password());
+
+	if( dlg.exec() == QDialog::Accepted )
 	{
-		authenticator->setUser( ui.userEdit->text() );
-		authenticator->setPassword( ui.passwordEdit->text() );
+		authenticator->setUser(ui.userEdit->text());
+		authenticator->setPassword(ui.passwordEdit->text());
 	}
 }
 
-void HttpDownload::setStatusBtnDownload(bool mbool)
-{
-	m_downloadButton = mbool;
-	emit StatusBtnDownloadChanged( mbool );
-}
-
-void HttpDownload::setStatusLabel(QString str)
-{
-	m_statuslabel = str;
-	emit statusLabelChanged( str );
-}
-
 #ifndef QT_NO_OPENSSL
-void HttpDownload::sslErrors(const QList<QSslError> &errors)
+void HttpDownload::sslErrors(QNetworkReply*,const QList<QSslError> &errors)
 {
 	QString errorString;
 	foreach (const QSslError &error, errors)
 	{
-		if(!errorString.isEmpty())
+		if( !errorString.isEmpty() )
 			errorString += ", ";
 		errorString += error.errorString();
 	}
 
-	if(QMessageBox::warning(this, m_httpwindowtitle, tr("Uno o más errores de SSL se ha producido: %1").arg(errorString),
-			QMessageBox::Ignore | QMessageBox::Abort) == QMessageBox::Ignore) {
-		http->ignoreSslErrors();
+	if( QMessageBox::warning(this, m_httpwindowtitle, tr("Uno o más errores de SSL se ha producido: %1").arg(errorString),
+			QMessageBox::Ignore | QMessageBox::Abort) == QMessageBox::Ignore )
+	{
+		reply->ignoreSslErrors();
 	}
 }
 #endif

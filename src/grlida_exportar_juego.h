@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,43 +25,64 @@
 #ifndef GRLIDA_EXPORTARJUEGO_H
 #define GRLIDA_EXPORTARJUEGO_H
 
-#include <QtCore>
-#include <QtGui>
+#include <QDialog>
 
 #include "funciones.h"
 #include "dbsql.h"
-#include "ui_exportar_juego.h"
+
+namespace Ui {
+	class frmExportarJuego;
+}
 
 class frmExportarJuego : public QDialog
 {
     Q_OBJECT
 
 public:
-	frmExportarJuego(QDialog *parent = 0, Qt::WFlags flags = 0);
+	frmExportarJuego(dbSql *m_sql, stGrlCfg m_cfg, int m_id_cat, QWidget *parent = 0);
 	~frmExportarJuego();
 
-	Ui::ExportarJuegoClass ui;
+	stGrlCfg getGrlCfg(){return grlCfg;}
 
 private:
-	Funciones fGrl;
+	Ui::frmExportarJuego *ui;
+
+	Funciones *fGrl;
 	dbSql *sql;
 
-	QString stHomeDir, stIconDir, stIDdbx, stTheme;
-	QHash<QString, QString> TempDatosJuego;
-	QHash<QString, QString> TempDatosScummvm;
-	QHash<QString, QString> TempDatosDosBox;
-	QHash<QString, QVariant> GRLConfig;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+
+	stDatosJuego DatosJuego;
+	stConfigDOSBox DatosDosBox;
+	stConfigScummVM DatosScummVM;
+	stConfigVDMSound DatosVDMSound;
+
+	unsigned int id_cat;
+	QHash<int, stGrlCats> categoria;
+	QHash<QString, stGrlDatos> emu_list;
+	QString tipo_export;
+
 	QTreeWidget *twMontajes;
 
-	void CargarListaJuegos(QString TipoEmu="", QString stdb_Orden_By="titulo", QString stdb_Orden="desc");
-	void CargarDatosExportar( QString stIDx );
+	void cargarConfig();
+	void setTheme();
+
+	void cargarListaCategorias();
+	void cargarListaJuegos(QString sql_where = "");
+	void cargarDatosExportar(QString IdGame);
 
 private slots:
-	void on_btnOk();
-	void on_btnCheckedAll();
-	void on_btnUnCheckedAll();
-	void on_btnDirExportPath();
+	void on_btnOk_clicked();
+	void on_btnCancelar_clicked();
+	void on_cbxCategorias_activated(int index);
+	void on_btnCheckedAll_clicked();
+	void on_btnUnCheckedAll_clicked();
+	void on_cbxExpotarComo_activated(int index);
+	void on_btnDirExportPath_clicked();
+	void on_btnDirExportPath_clear_clicked();
 
+	void on_cbxTipoEmu_activated(int index);
 };
 
 #endif // GRLIDA_EXPORTARJUEGO_H

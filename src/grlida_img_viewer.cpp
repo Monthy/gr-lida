@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -23,90 +23,50 @@
 **/
 
 #include "grlida_img_viewer.h"
+#include "ui_img_viewer.h"
 
-ImageViewer::ImageViewer(QWidget *parent, Qt::WFlags flags)
-	: QMainWindow(parent, flags)
+frmImgViewer::frmImgViewer(stGrlCfg m_cfg, QWidget *parent) :
+	QMainWindow(parent),
+	ui(new Ui::frmImgViewer)
 {
-	ui.setupUi(this);
+	ui->setupUi(this);
+	fGrl = new Funciones;
 
-	stHomeDir = fGrl.GRlidaHomePath();
-	stTheme   = fGrl.ThemeGrl();
+	grlCfg = m_cfg;
 
-	createConnections();
+	grlDir.Home = fGrl->GRlidaHomePath();
+
+	cargarConfig();
 	setTheme();
-	createStatusBar();
-
-	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
-	settings.beginGroup("ImageViewerState");
-		if( settings.value("maximized", isMaximized() ).toBool() ) // maximizado.
-			setWindowState( windowState() | Qt::WindowMaximized );
-		ui.fitToWindowAct->setChecked( settings.value("fitToWindow", false ).toBool() );
-		ui.verListImagesAct->setChecked( settings.value("verListaImagenes", false).toBool() );
-	settings.endGroup();
-
-	settings.beginGroup("OpcFuente");
-		if( settings.value("font_usar", false).toBool() )
-			setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+settings.value("font_family","Tahoma").toString()+"\";font-size:"+settings.value("font_size","8").toString()+"pt;}");
-	settings.endGroup();
-
-	if( ui.fitToWindowAct->isChecked() )
-		fitToWindow();
-
-	id_imagen   = -1;
-	total_img   = -1;
-	scaleFactor = 1.0;
-	isZip = false;
-
-	pxmItem = new QGraphicsPixmapItem;
-	pxmItem->setZValue(0);
-
-	scene = new QGraphicsScene;
-	scene->setBackgroundBrush(QBrush(QColor(163,158,144)));
-	scene->addItem(pxmItem);
-
-	ui.gvImagen->setBackgroundBrush(QBrush(QColor(163,158,144)));
-	ui.gvImagen->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-	ui.gvImagen->setCacheMode(QGraphicsView::CacheBackground);
-	ui.gvImagen->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);//QGraphicsView::BoundingRectViewportUpdate
-	ui.gvImagen->setDragMode(QGraphicsView::ScrollHandDrag);
-	ui.gvImagen->setScene(scene);
-
-	ui.gvImagen->installEventFilter(this);
-	ui.lwListaImagenes->installEventFilter(this);
 
 // centra la aplicacion en el escritorio
-	QDesktopWidget *desktop = qApp->desktop();
-	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
-	int left = ( rect.width() - width() ) / 2;
-	int top = ( rect.height() - height() ) / 2;
-	setGeometry( left, top, width(), height() );
+	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
-ImageViewer::~ImageViewer()
+frmImgViewer::~frmImgViewer()
 {
-	delete lbrotar;
-	delete hsRotar;
 	delete pxmItem;
 	delete scene;
+	delete ui;
 }
 
-void ImageViewer::closeEvent( QCloseEvent *e )
+void frmImgViewer::closeEvent(QCloseEvent *event)
 {
-	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
+	QSettings settings( grlDir.Home +"GR-lida.conf", QSettings::IniFormat );
 	settings.beginGroup("ImageViewerState");
 		settings.setValue("maximized"  , isMaximized() );
-		settings.setValue("fitToWindow", ui.fitToWindowAct->isChecked() );
-		settings.setValue("verListaImagenes", ui.verListImagesAct->isChecked() );
+		settings.setValue("fitToWindow", ui->fitToWindow->isChecked() );
+		settings.setValue("verListaImagenes", ui->verListImages->isChecked() );
 	settings.endGroup();
 
-	e->accept();
+	event->accept();
 }
 
-bool ImageViewer::eventFilter(QObject *obj, QEvent *event)
+bool frmImgViewer::eventFilter(QObject *object, QEvent *event)
 {
-	if( obj == ui.lwListaImagenes || obj == ui.gvImagen )
+	if( object == ui->lwListaImagenes || object == ui->gvImagen )
 	{
-		if(event->type() == QEvent::KeyPress)
+		if( event->type() == QEvent::KeyPress)
 		{
 			QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
 			switch( keyEvent->key() )
@@ -128,184 +88,244 @@ bool ImageViewer::eventFilter(QObject *obj, QEvent *event)
 		} else
 			return false;
 	} else
-		return QMainWindow::eventFilter(obj, event); // pass the event on to the parent class
+		return QMainWindow::eventFilter(object, event); // pass the event on to the parent class
 }
 
-void ImageViewer::resizeEvent(QResizeEvent *event)
+void frmImgViewer::resizeEvent(QResizeEvent *event)
 {
-	fitToWindow();
+	emit on_fitToWindow_triggered( grlCfg.img_fitToWindow );
 	QMainWindow::resizeEvent(event);
 }
 
-void ImageViewer::setTheme()
+void frmImgViewer::cargarConfig()
 {
-	setWindowTitle(tr("Ver Imagen"));
-	setStyleSheet( fGrl.StyleSheet() );
-	setWindowIcon( QIcon(stTheme+"img16/capturas.png") );
+	id_imagen   = -1;
+	total_img   = -1;
+	scaleFactor = 1.0;
+	isZip       = false;
 
-	ui.openAct->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-	ui.printAct->setIcon( QIcon(stTheme+"img16/imprimir.png") );
-	ui.exitAct->setIcon( QIcon(stTheme+"img16/cerrar.png") );
-	ui.zoomInAct->setIcon( QIcon(stTheme+"img16/zoom_in.png") );
-	ui.zoomOutAct->setIcon( QIcon(stTheme+"img16/zoom_out.png") );
-	ui.normalSizeAct->setIcon( QIcon(stTheme+"img16/zoom.png") );
-	ui.fitToWindowAct->setIcon( QIcon(stTheme+"img16/fit_to_win.png") );
-	ui.backImagenAct->setIcon( QIcon(stTheme+"img16/go-back.png") );
-	ui.nextImagenAct->setIcon( QIcon(stTheme+"img16/go-next.png") );
-	ui.verListImagesAct->setIcon( QIcon(stTheme+"img16/categorias.png") );
+// StatusBar
+	lbpanel_1 = new QLabel( ui->statusBar );
+	lbpanel_1->setFrameStyle( QFrame::NoFrame );
+	lbpanel_1->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
+	lbpanel_1->setPixmap( QPixmap(fGrl->Theme() +"img16/capturas.png") );
+	lbpanel_1->setMinimumSize(20,20);
+
+	lbpanel_2 = new QLabel( ui->statusBar );
+	lbpanel_2->setFrameStyle( QFrame::NoFrame );
+	lbpanel_2->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
+
+	ui->statusBar->addWidget( lbpanel_1 );
+	ui->statusBar->addWidget( lbpanel_2, 1 );
+
+	if( grlCfg.img_maximized )
+		setWindowState( windowState() | Qt::WindowMaximized );
+	ui->fitToWindow->setChecked( grlCfg.img_fitToWindow );
+	ui->verListImages->setChecked( grlCfg.img_verListaImagenes );
+	emit on_verListImages_triggered( grlCfg.img_verListaImagenes );
+
+	emit on_fitToWindow_triggered( grlCfg.img_fitToWindow );
+
+	pxmItem = new QGraphicsPixmapItem;
+	pxmItem->setZValue(0);
+
+	scene = new QGraphicsScene;
+	scene->setBackgroundBrush(QBrush(QColor(163, 158, 144)));
+	scene->addItem(pxmItem);
+
+	ui->gvImagen->setBackgroundBrush(QBrush(QColor(163,158,144)));
+	ui->gvImagen->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+	ui->gvImagen->setCacheMode(QGraphicsView::CacheBackground);
+	ui->gvImagen->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);//QGraphicsView::BoundingRectViewportUpdate
+	ui->gvImagen->setDragMode(QGraphicsView::ScrollHandDrag);
+	ui->gvImagen->setScene(scene);
+
+	ui->gvImagen->installEventFilter(this);
+	ui->lwListaImagenes->installEventFilter(this);
+
+	ui->toolBar->addSeparator();
+	ui->toolBar->addWidget( ui->frameRotar );
+	ui->toolBar->addAction( ui->centrar );
 }
 
-void ImageViewer::createConnections()
+void frmImgViewer::setTheme()
 {
-	connect( ui.openAct       , SIGNAL(triggered()), this, SLOT(open()       ));
-	connect( ui.printAct      , SIGNAL(triggered()), this, SLOT(print()      ));
-	connect( ui.exitAct       , SIGNAL(triggered()), this, SLOT(close()      ));
-	connect( ui.zoomInAct     , SIGNAL(triggered()), this, SLOT(zoomIn()     ));
-	connect( ui.zoomOutAct    , SIGNAL(triggered()), this, SLOT(zoomOut()    ));
-	connect( ui.normalSizeAct , SIGNAL(triggered()), this, SLOT(normalSize() ));
-	connect( ui.fitToWindowAct, SIGNAL(triggered()), this, SLOT(fitToWindow()));
-	connect( ui.backImagenAct , SIGNAL(triggered()), this, SLOT(backImagen() ));
-	connect( ui.nextImagenAct , SIGNAL(triggered()), this, SLOT(nextImagen() ));
-	connect( ui.verListImagesAct, SIGNAL(toggled(bool)), this, SLOT(setListImgVisible(bool)));
+	setWindowIcon( QIcon(fGrl->Theme() +"img16/capturas.png") );
 
-	connect( ui.lwListaImagenes, SIGNAL( itemClicked(QListWidgetItem*)), this, SLOT( on_itemClicked(QListWidgetItem*) ));
-	connect( ui.lwListaImagenes, SIGNAL( currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT( on_currentItemChanged(QListWidgetItem*,QListWidgetItem*) ));
-
-
-	lbrotar = new QLabel( ui.toolBar );
-	lbrotar->setFrameStyle( QFrame::NoFrame );
-	lbrotar->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
-	lbrotar->setMinimumSize(20,20);
-
-	hsRotar = new QSlider(ui.toolBar);
-	hsRotar->setMinimum(-180);
-	hsRotar->setMaximum(180);
-	hsRotar->setOrientation(Qt::Horizontal);
-
-	connect(hsRotar, SIGNAL(valueChanged(int)), this, SLOT(imgRotar(int)));
-
-	ui.toolBar->addSeparator();
-	ui.toolBar->addWidget(lbrotar);
-	ui.toolBar->addWidget(hsRotar);
+	ui->open->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->print->setIcon( QIcon(fGrl->Theme() +"img16/imprimir.png") );
+	ui->exit->setIcon( QIcon(fGrl->Theme() +"img16/cerrar.png") );
+	ui->zoomIn->setIcon( QIcon(fGrl->Theme() +"img16/zoom_in.png") );
+	ui->zoomOut->setIcon( QIcon(fGrl->Theme() +"img16/zoom_out.png") );
+	ui->normalSize->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
+	ui->fitToWindow->setIcon( QIcon(fGrl->Theme() +"img16/fit_to_win.png") );
+	ui->backImagen->setIcon( QIcon(fGrl->Theme() +"img16/go-back.png") );
+	ui->nextImagen->setIcon( QIcon(fGrl->Theme() +"img16/go-next.png") );
+	ui->verListImages->setIcon( QIcon(fGrl->Theme() +"img16/categorias.png") );
 }
 
-void ImageViewer::setListImgVisible(bool visible)
-{
-	ui.lwListaImagenes->setVisible(visible);
-	fitToWindow();
-}
-
-void ImageViewer::open()
+void frmImgViewer::open(QString fileName)
 {
 	isZip = false;
-	QString fileName = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), stHomeDir, stHomeDir,
-											  tr("Imagenes Soportadas")+" (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.tiff *.xbm *.xpm);;"+
-											  tr("Todos los archivo") + " (*)", 0, false);
-	if( !fileName.isEmpty() )
-	{
-		openImg( fileName );
-	}
+
+	imgLista << fileName;
+	int indx = imgLista.indexOf(fileName, total_img);
+
+	QFileInfo f_info(fileName);
+	QListWidgetItem *Item = new QListWidgetItem(ui->lwListaImagenes);
+	Item->setIcon(QIcon(fGrl->Theme() +"img16/capturas.png"));
+	Item->setText( f_info.baseName() );
+	Item->setData(Qt::UserRole,  QVariant(indx).toString() );
+
+	id_imagen = indx;
+	total_img = imgLista.count();
+
+	showImg(id_imagen);
 }
 
-void ImageViewer::openZip(QString fileName)
+void frmImgViewer::openZip(QString fileName)
 {
 	isZip = true;
 	zip.abrirZip(fileName);
 	open("", zip.listaZip(), isZip);
 }
 
-void ImageViewer::openImg(QString fileName)
-{
-
-	if( !fileName.isEmpty() )
-	{
-		setUpdatesEnabled( false );
-
-		QFileInfo finfo(fileName);
-
-		if( isZip )
-			imagen_src = zip.loadImagen( fileName );
-		else
-			imagen_src.load( fileName );
-
-		cambiaImagenScene(imagen_src);
-		ui.lwListaImagenes->item(id_imagen)->setSelected(true);
-
-		ui.printAct->setEnabled(true);
-		ui.fitToWindowAct->setEnabled(true);
-
-		setScrollBarPolicy(!ui.fitToWindowAct->isChecked());
-		if( ui.fitToWindowAct->isChecked() )
-			ui.gvImagen->fitInView(0,0, imagen_src.width(),imagen_src.height(),Qt::IgnoreAspectRatio);
-
-		updateActions();
-
-		setUpdatesEnabled( true );
-
-		setWindowTitle(tr("Ver Imagen")+" - "+finfo.fileName() );
-		lbpanel_2->setText(tr("Total:")+" "+QVariant(id_imagen+1).toString()+" "+tr("de")+" "+QVariant(total_img).toString()+" "+
-				tr("Tamaño:")+" "+QVariant(imagen_src.width()).toString()+"x"+QVariant(imagen_src.height()).toString()+
-				" | "+finfo.fileName() );
-	}
-}
-
-void ImageViewer::open(QString fileName)
-{
-	isZip = false;
-	QFileInfo finfo(fileName);
-
-	imgLista << fileName;
-	int indx = imgLista.indexOf(fileName, total_img);
-
-	QListWidgetItem *Item = new QListWidgetItem(ui.lwListaImagenes);
-	Item->setIcon(QIcon(stTheme+"img16/capturas.png"));
-	Item->setText( finfo.baseName() );
-	Item->setData(Qt::UserRole,  QVariant(indx).toString() );
-
-	id_imagen = indx;
-	total_img = imgLista.count();
-
-	openImg(fileName);
-}
-
-void ImageViewer::open(QString fileName, QList<QString> lista, bool is_zip)
+void frmImgViewer::open(QString fileName, QStringList lista, bool is_zip)
 {
 	isZip = is_zip;
 
 	imgLista = lista;
 	if( fileName.isEmpty() )
-	{
 		id_imagen = 0;
-		fileName = imgLista.value(0);
-	} else
+	else
 		id_imagen = imgLista.indexOf(fileName);
 	total_img = imgLista.count();
 
-	ui.lwListaImagenes->clear();
-	for(int i=0 ; i < total_img; i++)
+	ui->lwListaImagenes->clear();
+	for(int i=0 ; i < total_img; ++i)
 	{
-		QString file(imgLista.value(i));
-		QFileInfo finfo(file);
-
-		QListWidgetItem *Item = new QListWidgetItem(ui.lwListaImagenes);
-		Item->setIcon(QIcon(stTheme+"img16/capturas.png"));
-		Item->setText( finfo.baseName() );
-		Item->setData(Qt::UserRole,  QVariant(i).toString() );
+		QFileInfo f_info( imgLista.at(i) );
+		QListWidgetItem *item = new QListWidgetItem(ui->lwListaImagenes);
+		item->setIcon(QIcon(fGrl->Theme() +"img16/capturas.png"));
+		item->setText( f_info.baseName() );
+		item->setData(Qt::UserRole, fGrl->IntToStr(i) );
 
 		if( i == id_imagen )
-			Item->setSelected(true);
+			item->setSelected(true);
 	}
 
 	if(total_img > 1)
 	{
-		ui.nextImagenAct->setEnabled(true);
-		ui.backImagenAct->setEnabled(true);
+		ui->nextImagen->setEnabled(true);
+		ui->backImagen->setEnabled(true);
 	}
 
-	openImg(fileName);
+	showImg(id_imagen);
 }
 
-void ImageViewer::print()
+void frmImgViewer::showImg(int index)
+{
+	if( index > -1 )
+	{
+		setUpdatesEnabled( false );
+
+		QFileInfo f_info( imgLista.at(index) );
+
+		if( isZip )
+			imagen_src = zip.loadImagen( imgLista.at(index) );
+		else
+			imagen_src.load( imgLista.at(index) );
+
+		scene_width  = imagen_src.width() + 4;
+		scene_height = imagen_src.height() + 4;
+		scene->setSceneRect(0, 0, scene_width, scene_height);
+		pxmItem->setPixmap( imagen_src );
+		pxmItem->setPos(2, 2);
+
+		ui->gvImagen->centerOn( pxmItem );
+		emit on_hsRotar_valueChanged(0);
+
+		ui->lwListaImagenes->item(id_imagen)->setSelected(true);
+
+		ui->print->setEnabled(true);
+		ui->fitToWindow->setEnabled(true);
+
+		emit on_fitToWindow_triggered( grlCfg.img_fitToWindow );
+
+		setUpdatesEnabled( true );
+
+		lbpanel_2->setText(tr("Total") +": "+ fGrl->IntToStr(id_imagen+1) +" "+ tr("de") +" "+ fGrl->IntToStr(total_img) +" "+
+				tr("Tamaño") +": "+ fGrl->IntToStr(imagen_src.width()) +"x"+ fGrl->IntToStr(imagen_src.height()) +" | "+ f_info.fileName() );
+	}
+}
+
+void frmImgViewer::nextImagen()
+{
+	id_imagen++;
+
+	if( id_imagen == total_img )
+	{
+		id_imagen = 0;
+		showImg( id_imagen );
+	} else
+		showImg( id_imagen );
+}
+
+void frmImgViewer::backImagen()
+{
+	id_imagen--;
+
+	if( id_imagen < 0 )
+	{
+		id_imagen = total_img - 1;
+		showImg( id_imagen );
+	} else
+		showImg( id_imagen );
+}
+
+void frmImgViewer::imgItemRotar(int radio)
+{
+	ui->lb_radio->setText(fGrl->IntToStr(radio) + tr("º"));
+
+	int pos_x = 0, pos_y = 0;
+	pos_x = pxmItem->pixmap().width() / 2;
+	pos_y = pxmItem->pixmap().height() / 2;
+
+	pxmItem->setTransform(QTransform().translate(pos_x, pos_y).rotate(radio).translate(-pos_x, -pos_y));
+}
+
+void frmImgViewer::updateActions()
+{
+	if( grlCfg.img_fitToWindow )
+	{
+		ui->zoomIn->setEnabled(false);
+		ui->zoomOut->setEnabled(false);
+		ui->gvImagen->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		ui->gvImagen->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	} else {
+		ui->zoomIn->setEnabled(scaleFactor < 3.0);
+		ui->zoomOut->setEnabled(scaleFactor > 0.333);
+		ui->gvImagen->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+		ui->gvImagen->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+	}
+	ui->normalSize->setEnabled(!grlCfg.img_fitToWindow);
+}
+
+void frmImgViewer::on_exit_triggered()
+{
+	close();
+}
+
+void frmImgViewer::on_open_triggered()
+{
+	isZip = false;
+	QString fileName = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlDir.Home, grlDir.Home,
+											tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)", 0, false);
+	if( !fileName.isEmpty() )
+		open( fileName );
+}
+
+void frmImgViewer::on_print_triggered()
 {
 	Q_ASSERT(imagen_src);
 	QPrintDialog dialog(&printer, this);
@@ -321,147 +341,73 @@ void ImageViewer::print()
 	}
 }
 
-void ImageViewer::zoomIn()
+void frmImgViewer::on_zoomIn_triggered()
 {
 	scaleFactor = 1.25;
-	scaleImage(scaleFactor);
-}
-
-void ImageViewer::zoomOut()
-{
-	scaleFactor = 0.80;
-	scaleImage(scaleFactor);
-}
-
-void ImageViewer::normalSize()
-{
-	scaleFactor  = 1.0;
-	double newScale = scaleFactor;
-	QMatrix oldMatrix = ui.gvImagen->matrix();
-	ui.gvImagen->resetMatrix();
-	ui.gvImagen->translate(oldMatrix.dx(), oldMatrix.dy());
-	scaleImage(newScale);
-}
-
-void ImageViewer::scaleImage(double factor)
-{
-	ui.zoomInAct->setEnabled(factor < 3.0);
-	ui.zoomOutAct->setEnabled(factor > 0.333);
-	ui.gvImagen->scale(factor, factor);
-}
-
-void ImageViewer::imgRotar(int r)
-{
-	lbrotar->setText(tr("Rotar")+": "+QVariant(r).toString()+"  ");
-	imgItemRotar(pxmItem,r);
-}
-
-void ImageViewer::imgItemRotar(QGraphicsPixmapItem *imgItem, int r)
-{
-	int pos_x = 0, pos_y = 0;
-	pos_x = imgItem->pixmap().width() / 2;
-	pos_y = imgItem->pixmap().height() / 2;
-	imgItem->setTransform(QTransform().translate(pos_x, pos_y).rotate(r).translate(-pos_x, -pos_y));
-}
-
-void ImageViewer::imgItemCentrar(QGraphicsPixmapItem *imgItem)
-{
-	ui.gvImagen->centerOn( imgItem );
-}
-
-void ImageViewer::fitToWindow()
-{
-	setScrollBarPolicy(!ui.fitToWindowAct->isChecked());
-	if( ui.fitToWindowAct->isChecked() )
-		ui.gvImagen->fitInView(0,0, imagen_src.width(),imagen_src.height(),Qt::IgnoreAspectRatio);
-	else
-		normalSize();
-
+	ui->gvImagen->scale(scaleFactor, scaleFactor);
+	scaleFactor = ui->gvImagen->transform().m11();
 	updateActions();
 }
 
-void ImageViewer::setScrollBarPolicy(bool activar)
+void frmImgViewer::on_zoomOut_triggered()
 {
-	if( activar )
-	{
-		ui.gvImagen->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-		ui.gvImagen->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-	} else {
-		ui.gvImagen->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-		ui.gvImagen->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	scaleFactor = 0.80;
+	ui->gvImagen->scale(scaleFactor, scaleFactor);
+	scaleFactor = ui->gvImagen->transform().m11();
+	updateActions();
+}
+
+void frmImgViewer::on_normalSize_triggered()
+{
+	scaleFactor = 1.0;
+	double newScale = scaleFactor;
+	QMatrix oldMatrix = ui->gvImagen->matrix();
+	ui->gvImagen->resetMatrix();
+	ui->gvImagen->translate(oldMatrix.dx(), oldMatrix.dy());
+	ui->gvImagen->scale(newScale, newScale);
+	updateActions();
+}
+
+void frmImgViewer::on_fitToWindow_triggered(bool checked)
+{
+	if( ui->fitToWindow->isChecked() )
+		ui->gvImagen->fitInView(0, 0, imagen_src.width(), imagen_src.height(), Qt::IgnoreAspectRatio);
+	else {
+		if( scaleFactor == 1.0 )
+			emit on_normalSize_triggered();
 	}
+	grlCfg.img_fitToWindow = checked;
+	updateActions();
 }
 
-void ImageViewer::backImagen()
+void frmImgViewer::on_backImagen_triggered()
 {
-	id_imagen--;
-
-	if( id_imagen < 0 )
-	{
-		id_imagen = total_img - 1;
-		openImg( imgLista[id_imagen] );
-	} else
-		openImg( imgLista[id_imagen] );
+	backImagen();
 }
 
-void ImageViewer::nextImagen()
+void frmImgViewer::on_nextImagen_triggered()
 {
-	id_imagen++;
-
-	if( id_imagen == total_img )
-	{
-		id_imagen = 0;
-		openImg( imgLista[id_imagen] );
-	} else
-		openImg( imgLista[id_imagen] );
+	nextImagen();
 }
 
-void ImageViewer::createStatusBar()
+void frmImgViewer::on_verListImages_triggered(bool checked)
 {
-// StatusBar
-	lbpanel_1 = new QLabel( ui.statusBar );
-	lbpanel_1->setFrameStyle( QFrame::NoFrame );
-	lbpanel_1->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
-	lbpanel_1->setPixmap( QPixmap(stTheme+"img16/capturas.png") );
-	lbpanel_1->setMinimumSize(20,20);
-
-	lbpanel_2 = new QLabel( ui.statusBar );
-	lbpanel_2->setFrameStyle( QFrame::NoFrame );
-	lbpanel_2->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
-
-	ui.statusBar->addWidget( lbpanel_1 );
-	ui.statusBar->addWidget( lbpanel_2, 1 );
+	ui->lwListaImagenes->setVisible(checked);
 }
 
-void ImageViewer::updateActions()
+void frmImgViewer::on_centrar_triggered()
 {
-	ui.zoomInAct->setEnabled(!ui.fitToWindowAct->isChecked());
-	ui.zoomOutAct->setEnabled(!ui.fitToWindowAct->isChecked());
-	ui.normalSizeAct->setEnabled(!ui.fitToWindowAct->isChecked());
+	imgItemRotar(0);
+	ui->hsRotar->setValue(0);
 }
 
-void ImageViewer::cambiaImagenScene(QPixmap imgItem)
+void frmImgViewer::on_lwListaImagenes_currentRowChanged(int currentRow)
 {
-	scene_width  = imgItem.width() + 4;
-	scene_height = imgItem.height() + 4;
-	scene->setSceneRect(0, 0, scene_width, scene_height);
-	pxmItem->setPixmap( imgItem );
-	pxmItem->setPos(2,2);
-	imgItemCentrar(pxmItem);
-	imgRotar( hsRotar->value());
+	if( currentRow > -1 )
+		showImg( ui->lwListaImagenes->item(currentRow)->data(Qt::UserRole).toInt() );
 }
 
-void ImageViewer::on_currentItemChanged(QListWidgetItem *item1,QListWidgetItem *item2)
+void frmImgViewer::on_hsRotar_valueChanged(int value)
 {
-	if( item1 && item2 )
-		emit on_itemClicked(item1);
-}
-
-void ImageViewer::on_itemClicked(QListWidgetItem *item)
-{
-	if( item )
-	{
-		id_imagen = item->data(Qt::UserRole).toInt();
-		openImg( imgLista[id_imagen] );
-	}
+	imgItemRotar(value);
 }

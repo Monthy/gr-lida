@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,55 +25,81 @@
 #ifndef GRLIDA_ADDEDIT_SCUMMVM_H
 #define GRLIDA_ADDEDIT_SCUMMVM_H
 
-#include <QtGui>
 #include <QTabWidget>
 
 #include "funciones.h"
 #include "dbsql.h"
-#include "ui_addedit_scummvm.h"
+
+namespace Ui {
+	class frmAddEditScummVM;
+}
 
 class frmAddEditScummVM : public QTabWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmAddEditScummVM(QWidget *parent = 0);
+	explicit frmAddEditScummVM(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QString id_game, bool m_editando, QWidget *parent = 0);
 	~frmAddEditScummVM();
 
-	Ui::AddEditScummVMClass ui;
-
 	bool isCorrectNext();
-	void setEditandoJuego(bool editando = false);
-	void CargarConfigScummVM();
-	void setConfigDefecto();
-	void CargarDatosScummVM(QString IDGrl);
-	void CargarDatosScummVM(QHash<QString, QString> datosSvm);
-	QHash<QString, QString> setDatosScummVM();
+	void cargarConfig();
+
+	stGrlCfg getGrlCfg(){return grlCfg;}
+	stConfigScummVM getDatosScummVM(){return DatosScummVM;}
+
+	void setDatosScummVM();
+	void cargarDatosScummVM(stConfigScummVM cfgSvm);
 
 private:
-	QHash<QString, QVariant> GRLConfig;
+	Ui::frmAddEditScummVM *ui;
 
-	Funciones fGrl;
+	Funciones *fGrl;
 	dbSql *sql;
 
-	bool EditandoJuego;
+	QString titulo_ventana(){ return windowTitle(); }
 
-	QString stTituloAddEdit(){ return windowTitle(); }
-	QString stHomeDir, stIdioma, stTheme, stItemIDSvm;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stGrlCats categoria;
 
-	void createConnections();
+	stConfigScummVM DatosScummVM;
+
+	QString IdGame, IdSvm;
+
+	bool Editando;
+
 	void setTheme();
 
 private slots:
-	void on_twScummVM_clicked( QTreeWidgetItem *item );
-	void on_btnDefecto();
-	void on_btnSvm_Path();
-	void on_btnSvm_PathSave();
-	void on_btnSvm_PathSetup();
-	void on_btnSvm_PathExtra();
-	void on_btnSvm_PathCapturas();
-	void on_btnSvm_PathSonido();
-	void on_btnSvm_SoundFont();
+	void on_twScummVM_itemClicked(QTreeWidgetItem *item, int column);
+	void on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+
+	void on_btnSvm_Path_clicked();
+	void on_btnSvm_Path_clear_clicked();
+	void on_btnSvm_PathSave_clicked();
+	void on_btnSvm_PathSave_clear_clicked();
+	void on_btnSvm_PathExtra_clicked();
+	void on_btnSvm_PathExtra_clear_clicked();
+	void on_btnSvm_PathCapturas_clicked();
+	void on_btnSvm_PathCapturas_clear_clicked();
+	void on_btnSvm_PathSonido_clicked();
+	void on_btnSvm_PathSonido_clear_clicked();
+	void on_btnSvm_PathSetup_clicked();
+	void on_btnSvm_PathSetup_clear_clicked();
+	void on_btnSvm_SoundFont_clicked();
+	void on_btnSvm_SoundFont_clear_clicked();
+
+	void on_h_SliderSvm_music_volume_valueChanged(int value);
+	void on_h_SliderSvm_sfx_volume_valueChanged(int value);
+	void on_h_SliderSvm_speech_volume_valueChanged(int value);
+	void on_h_SliderSvm_tempo_valueChanged(int value);
+	void on_h_SliderSvm_talkspeed_valueChanged(int value);
+	void on_h_SliderSvm_debuglevel_valueChanged(int value);
+	void on_h_SliderSvm_midi_gain_valueChanged(int value);
+	void on_h_SliderSvm_walkspeed_valueChanged(int value);
+	void on_btnDefectoSvm_clicked();
+
 };
 
 #endif // GRLIDA_ADDEDIT_SCUMMVM_H

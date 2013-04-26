@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,47 +25,61 @@
 #ifndef GRLIDA_VDMSADD_H
 #define GRLIDA_VDMSADD_H
 
-#include <QtCore>
-#include <QtGui>
+#include <QDialog>
 
 #include "funciones.h"
-#include "ui_vdmsound.h"
+#include "dbsql.h"
+
+namespace Ui {
+	class frmVdmsAdd;
+}
 
 class frmVdmsAdd : public QDialog
 {
     Q_OBJECT
 
 public:
-	frmVdmsAdd(QDialog *parent = 0, Qt::WFlags flags = 0);
+	frmVdmsAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent = 0);
 	~frmVdmsAdd();
 
-	Ui::VdmsAddClass ui;
-
-	QHash<QString, QString> DatosJuego;
-	QHash<QString, QString> DatosVDMSound;
+	stGrlCfg getGrlCfg(){return grlCfg;}
+	stDatosJuego getDatosJuegos(){return DatosJuego;}
 
 private:
-	QString stTituloVdms(){ return tr("Nuevo juego para el VDMSound"); }
+	Ui::frmVdmsAdd *ui;
 
-	Funciones fGrl;
+	QString titulo_ventana(){ return tr("Nuevo juego para el VDMSound"); }
 
-	QString stHomeDir, stConfgVdmSDir, stTheme;
+	Funciones *fGrl;
+	dbSql *sql;
 
-	QHash<QString, QVariant> GRLConfig;
-	QHash<QString, QString> tempDatosJuego;
+	stDatosJuego DatosJuego;
+	stConfigVDMSound DatosVDMSound;
 
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stGrlCats categoria;
 
-	void createConnections();
+	void cargarConfig();
 	void setTheme();
-	void CargarConfig();
+
+	void setDatosVDMSound();
+	void cargarDatosVDMSound(stConfigVDMSound cfgVdms);
 
 private slots:
-	void on_btnOk();
-	void on_btnVdms_FileConfg();
-	void on_btnVdms_ExeJuego();
-	void on_btnVdms_Icono();
-	void on_txtDatos_Titulo_textChanged(const QString &);
-	void on_btnDescargarInfo();
+	void on_btnOk_clicked();
+	void on_btnCancel_clicked();
+
+	void on_btnVdms_FileConfg_clicked();
+	void on_btnVdms_FileConfg_clear_clicked();
+	void on_btnVdms_ExeJuego_clicked();
+	void on_btnVdms_ExeJuego_clear_clicked();
+	void on_btnVdms_params_clear_clicked();
+	void on_btnVdms_Icono_clicked();
+	void on_btnVdms_Icono_clear_clicked();
+	void on_btnDescargarInfo_clicked();
+
+	void on_txtDatos_Titulo_textEdited(const QString &arg1);
 
 };
 

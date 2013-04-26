@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -23,185 +23,255 @@
 **/
 
 #include "grlida_addedit_montajes.h"
+#include "ui_addedit_montajes.h"
 
-frmAddEditMontajes::frmAddEditMontajes(QHash<QString, QString> montajes, QDialog *parent, Qt::WFlags flags)
-    : QDialog( parent, flags )
+frmAddEditMontajes::frmAddEditMontajes(stGrlCfg m_cfg, bool m_editando, QWidget *parent) :
+	QDialog(parent),
+	ui(new Ui::frmAddEditMontajes)
 {
-	ui.setupUi(this);
+	ui->setupUi(this);
+	fGrl = new Funciones;
 
-	connect( ui.cbxMontaje_type_drive, SIGNAL( activated(int) ), this, SLOT( on_changeTypeDrive(int) ) );
-	connect( ui.btnOk       , SIGNAL( clicked() ), this, SLOT( on_btnOk()     ) );
-	connect( ui.btnDirFile  , SIGNAL( clicked() ), this, SLOT( on_DirFile()   ) );
-	connect( ui.btnSubirIso , SIGNAL( clicked() ), this, SLOT( on_SubirIso()  ) );
-	connect( ui.btnBajarIso , SIGNAL( clicked() ), this, SLOT( on_BajarIso()  ) );
-	connect( ui.lw_MultiIso , SIGNAL( itemActivated(QListWidgetItem*) ), ui.btnDeleteIso, SLOT(setEnabled(bool)));
-	connect( ui.btnDeleteIso, SIGNAL( clicked() ), this, SLOT( on_DeleteIso() ) );
+	grlCfg      = m_cfg;
+	Editando    = m_editando;
+	grlDir.Home = fGrl->GRlidaHomePath();
 
-	stHomeDir = fGrl.GRlidaHomePath();		// directorio de trabajo del GR-lida
-	stTheme   = fGrl.ThemeGrl();
-	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
-
+	cargarConfig();
 	setTheme();
 
-	ui.cbxMontaje_type_drive->clear();
-	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_hd.png")    , tr("Carpeta como disco duro"), "drive"        );
-	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_cdrom.png") , tr("Unidad de CD-ROM")       , "cdrom"        );
-	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_floppy.png"), tr("Carpeta como disquete")  , "floppy"       );
-	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/floppy_1.png")    , tr("Imagen de disquete")     , "IMG_floppy"   );
-	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/cd_iso.png")      , tr("Imagen ISO, CUE/BIN")    , "IMG_iso"      );
-	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/cd_multi_iso.png"), tr("Imagen ISO multiples")   , "IMG_multi_iso");
-	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/drive_hd.png")    , tr("Imagen de disco duro")   , "IMG_hdd"      );
-	ui.cbxMontaje_type_drive->addItem( QIcon(stTheme+"img16/floppy_2.png")    , tr("Imagen Botable")         , "boot"         );
-	ui.cbxMontaje_type_drive->setCurrentIndex(0);
-	on_changeTypeDrive(0);
-
-	ui.cbxMontaje_mode_cdrom->clear();
-	ui.cbxMontaje_mode_cdrom->addItem( tr("No usar nada")    , "");
-	ui.cbxMontaje_mode_cdrom->addItem( tr("Usar")+" -aspi"   , "-aspi");
-	ui.cbxMontaje_mode_cdrom->addItem( tr("Usar")+" -ioctl"  , "-ioctl");
-	ui.cbxMontaje_mode_cdrom->addItem( tr("Usar")+" -noioctl", "-noioctl");
-	ui.cbxMontaje_mode_cdrom->setCurrentIndex(0);
-
-	ui.cbxMontaje_cdrom->clear();
-	ui.cbxMontaje_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), tr("NO usar CD"), ""  );
-	ui.cbxMontaje_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 0"    , "0" );
-	ui.cbxMontaje_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 1"    , "1" );
-	ui.cbxMontaje_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 2"    , "2" );
-	ui.cbxMontaje_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 3"    , "3" );
-	ui.cbxMontaje_cdrom->addItem(QIcon(stTheme+"img16/drive_cdrom.png"), "CD Index 4"    , "4" );
-	ui.cbxMontaje_cdrom->setCurrentIndex(0);
-
-	ui.lb_Montaje_info->setText( "<b>-aspi</b> -- "+ tr("Fuerza el uso de la capa aspi. Sólo válido si montas un CD-ROM bajo los sistemas Windows con un ASPI-Layer.")+"<br>"+
-		"<b>-ioctl</b> -- "+ tr("Fuerza el uso de los comandos ioctl. Sólo válido si montar un CD-ROM bajo un sistema operativo de Windows que lo soporten (Win2000/XP/NT).")+"<br>"+
-		"<b>-noioctl</b> -- "+ tr("Fuerza el uso de las SDL para el CD-ROM. Válido para todos los sistemas.")+"<br>"+
-		tr("Procura no montar la Raiz del sistema operativo: ejemplo en windows seria")+" <b style=\"color:#FF0000;\">C:\\</b> "+ tr("y en linux seria directamente")+ " <b style=\"color:#FF0000;\">/</b> ");
-
-	if( montajes["tipo_as"] == "IMG_multi_iso" )
-	{
-		ui.txtMontaje_path->setText("");
-		QStringList listaIso = montajes["path"].split("|");
-		ui.lw_MultiIso->clear();
-		for (int i = 0; i < listaIso.count(); ++i)
-		{
-			QListWidgetItem *itemIso = new QListWidgetItem( ui.lw_MultiIso );
-			itemIso->setIcon( QIcon(stTheme+"img16/cd_iso.png") );
-			itemIso->setText( listaIso.value(i) );
-		}
-	} else
-		ui.txtMontaje_path->setText( montajes["path"] );
-
-	ui.txtMontaje_label->setText( montajes["label"] );
-	ui.cbxMontaje_type_drive->setCurrentIndex( ui.cbxMontaje_type_drive->findData( montajes["tipo_as"] ) );
-	ui.cbxMontaje_letter->setCurrentIndex( ui.cbxMontaje_letter->findText( montajes["letter"] ) );
-	ui.cbxMontaje_cdrom->setCurrentIndex( ui.cbxMontaje_cdrom->findData( montajes["indx_cd"] ) );
-	ui.txtMontaje_opt_mount->setText( montajes["opt_mount"] );
-	ui.cbxMontaje_mode_cdrom->setCurrentIndex( ui.cbxMontaje_mode_cdrom->findData( montajes["io_ctrl"] ) );
-	on_changeTypeDrive( ui.cbxMontaje_type_drive->currentIndex() );
-
-// centra la ventana en el escritorio
-	QDesktopWidget *desktop = qApp->desktop();
-	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
-	int left = ( rect.width() - width() ) / 2;
-	int top = ( rect.height() - height() ) / 2;
-	setGeometry( left, top, width(), height() );
+// centra la aplicación en el escritorio
+	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
 frmAddEditMontajes::~frmAddEditMontajes()
 {
-	//
+	delete fGrl;
+	delete ui;
+}
+
+void frmAddEditMontajes::cargarConfig()
+{
+	fGrl->setIdioma(grlCfg.IdiomaSelect);
+
+	ui->cbxMontaje_type_drive->clear();
+	ui->cbxMontaje_type_drive->addItem( QIcon(fGrl->Theme() +"img16/drive_hd.png")    , tr("Carpeta como disco duro"), "drive"        );
+	ui->cbxMontaje_type_drive->addItem( QIcon(fGrl->Theme() +"img16/drive_cdrom.png") , tr("Unidad de CD-ROM")       , "cdrom"        );
+	ui->cbxMontaje_type_drive->addItem( QIcon(fGrl->Theme() +"img16/drive_floppy.png"), tr("Carpeta como disquete")  , "floppy"       );
+	ui->cbxMontaje_type_drive->addItem( QIcon(fGrl->Theme() +"img16/floppy_1.png")    , tr("Imagen de disquete")     , "IMG_floppy"   );
+	ui->cbxMontaje_type_drive->addItem( QIcon(fGrl->Theme() +"img16/cd_iso.png")      , tr("Imagen ISO, CUE/BIN")    , "IMG_iso"      );
+	ui->cbxMontaje_type_drive->addItem( QIcon(fGrl->Theme() +"img16/cd_multi_iso.png"), tr("Imagen ISO multiples")   , "IMG_multi_iso");
+	ui->cbxMontaje_type_drive->addItem( QIcon(fGrl->Theme() +"img16/drive_hd.png")    , tr("Imagen de disco duro")   , "IMG_hdd"      );
+	ui->cbxMontaje_type_drive->addItem( QIcon(fGrl->Theme() +"img16/floppy_2.png")    , tr("Imagen Botable")         , "boot"         );
+
+	ui->cbxMontaje_mode_cdrom->clear();
+	ui->cbxMontaje_mode_cdrom->addItem( tr("No usar nada"), "");
+	ui->cbxMontaje_mode_cdrom->addItem( tr("Usar") +" -aspi "+ tr("Fuerza el uso de la capa ASPI. Sólo en Windows con un ASPI-Layer")          , "-aspi"     );
+	ui->cbxMontaje_mode_cdrom->addItem( tr("Usar") +" -ioctl "+ tr("Selección automática de la interfaz de audio de CD")                       , "-ioctl"    );
+	ui->cbxMontaje_mode_cdrom->addItem( tr("Usar") +" -ioctl_dx "+ tr("Extracción digital de audio utilizado para los CD de audio")            , "-ioctl_dx" );
+	ui->cbxMontaje_mode_cdrom->addItem( tr("Usar") +" -ioctl_dio "+ tr("Llamadas ioctl utiliza para CD de audio")                              , "-ioctl_dio");
+	ui->cbxMontaje_mode_cdrom->addItem( tr("Usar") +" -ioctl_mci "+ tr("MCI utiliza para CD de audio")                                         , "-ioctl_mci");
+	ui->cbxMontaje_mode_cdrom->addItem( tr("Usar") +" -noioctl "+ tr("Fuerza el uso de las SDL para el CD-ROM. Válido para todos los sistemas"), "-noioctl"  );
+	ui->cbxMontaje_mode_cdrom->setCurrentIndex(0);
+
+	ui->cbxMontaje_opt_mount->clear();
+	ui->cbxMontaje_opt_mount->addItem("");
+	ui->cbxMontaje_opt_mount->addItem("-fs iso" );
+	ui->cbxMontaje_opt_mount->addItem("-fs fat" );
+	ui->cbxMontaje_opt_mount->addItem("-fs none");
+	ui->cbxMontaje_opt_mount->setCurrentIndex(0);
+
+	ui->cbxMontaje_cdrom->clear();
+	ui->cbxMontaje_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), tr("NO usar CD"), ""  );
+	ui->cbxMontaje_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 0"    , "0" );
+	ui->cbxMontaje_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 1"    , "1" );
+	ui->cbxMontaje_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 2"    , "2" );
+	ui->cbxMontaje_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 3"    , "3" );
+	ui->cbxMontaje_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 4"    , "4" );
+	ui->cbxMontaje_cdrom->setCurrentIndex(0);
+
+	ui->h_SliderMontaje_freesize->setValue(250);
+
+	list_letter.clear();
+	list_letter << "A" << "B" << "C" << "D" << "E" << "F" << "G" << "H" << "I" << "J" << "K" << "L" << "M" << "N" << "O" << "P" << "Q" << "R" << "S" << "T" << "U" << "V" << "W" << "X" << "Y" << "Z";
+
+	DatosMontaje.path         = "";
+	DatosMontaje.label        = "";
+	DatosMontaje.tipo_as      = "drive";
+	DatosMontaje.letter       = "C";
+	DatosMontaje.indx_cd      = "";
+	DatosMontaje.opt_mount    = "";
+	DatosMontaje.io_ctrl      = "";
+	DatosMontaje.select_mount = "x";
+	DatosMontaje.id_lista     = "";
+	DatosMontaje.id_dosbox    = "";
+	DatosMontaje.opt_size     = "";
+	DatosMontaje.opt_freesize = "false";
+	DatosMontaje.freesize     = "250";
+
+	setDatosMontaje(DatosMontaje);
+
+	ui->lb_Montaje_info->setText(tr("Procura no montar la Raiz del sistema operativo: ejemplo en windows seria") +" <b style=\"color:#FF0000;\">C:\\</b> "+ tr("y en linux seria directamente") +" <b style=\"color:#FF0000;\">/</b> ");
 }
 
 void frmAddEditMontajes::setTheme()
 {
-	setStyleSheet( fGrl.StyleSheet() );
-	setWindowIcon( QIcon(stTheme+"img16/applications.png") );
+	setWindowIcon( QIcon(fGrl->Theme() +"img16/applications.png") );
 
-	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
-	ui.btnCancel->setIcon( QIcon(stTheme+"img16/cancelar.png") );
-	ui.btnDirFile->setIcon( QIcon(stTheme+"img16/carpeta_0.png") );
-	ui.btnClearDirFile->setIcon( QIcon(stTheme+"img16/limpiar.png") );
-
-	if( GRLConfig["font_usar"].toBool() )
-		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
+	ui->btnOk->setIcon( QIcon(fGrl->Theme() +"img16/aplicar.png") );
+	ui->btnCancel->setIcon( QIcon(fGrl->Theme() +"img16/cancelar.png") );
+	ui->btnDirFile->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
+	ui->btnDirFile_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnSubirIso->setIcon( QIcon(fGrl->Theme() +"img16/go-up.png") );
+	ui->btnBajarIso->setIcon( QIcon(fGrl->Theme() +"img16/go-down.png") );
+	ui->btnDeleteIso->setIcon( QIcon(fGrl->Theme() +"img16/cancelar.png") );
+	ui->btnMontaje_opt_size_mount_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 }
 
-void frmAddEditMontajes::on_changeTypeDrive(int row)
+void frmAddEditMontajes::setDatosMontaje(stConfigDOSBoxMount montaje)
 {
-	if( row >= 0)
+	DatosMontaje = montaje;
+	if( montaje.tipo_as == "IMG_multi_iso" || montaje.tipo_as == "boot" )
 	{
-		QString tipo_montaje = ui.cbxMontaje_type_drive->itemData( row ).toString();
-		if( tipo_montaje == "IMG_multi_iso" || tipo_montaje == "boot")
+		ui->txtMontaje_path->setText("");
+		QString img_tipo_as  = montaje.tipo_as == "boot" ? "floppy_2.png" : "cd_iso.png";
+		QStringList listaIso = montaje.path.split("|");
+		ui->lw_MultiIso->clear();
+		const int listSize = listaIso.size();
+		for (int i = 0; i < listSize; ++i)
 		{
-			ui.txtMontaje_path->setVisible( false );
-			ui.lw_MultiIso->setVisible( true );
-			ui.btnSubirIso->setVisible( true );
-			ui.btnBajarIso->setVisible( true );
-			ui.btnDeleteIso->setVisible( true );
-		} else {
-			ui.txtMontaje_path->setVisible( true );
-			ui.lw_MultiIso->setVisible( false );
-			ui.btnSubirIso->setVisible( false );
-			ui.btnBajarIso->setVisible( false );
-			ui.btnDeleteIso->setVisible( false );
+			QListWidgetItem *itemIso = new QListWidgetItem( ui->lw_MultiIso );
+			itemIso->setIcon( QIcon(fGrl->Theme() +"img16/"+ img_tipo_as) );
+			itemIso->setText( listaIso.at(i) );
 		}
-	}
+	} else
+		ui->txtMontaje_path->setText( montaje.path );
+
+	ui->txtMontaje_label->setText( montaje.label );
+	ui->cbxMontaje_type_drive->setCurrentIndex( ui->cbxMontaje_type_drive->findData( montaje.tipo_as ) );
+	ui->cbxMontaje_cdrom->setCurrentIndex( ui->cbxMontaje_cdrom->findData( montaje.indx_cd ) );
+	ui->cbxMontaje_opt_mount->setEditText( montaje.opt_mount );
+	ui->cbxMontaje_mode_cdrom->setCurrentIndex( ui->cbxMontaje_mode_cdrom->findData( montaje.io_ctrl ) );
+	ui->txtMontaje_opt_size_mount->setText( DatosMontaje.opt_size );
+	ui->chkMontaje_opt_freesize->setChecked( fGrl->StrToBool(montaje.opt_freesize) );
+	ui->h_SliderMontaje_freesize->setEnabled( ui->chkMontaje_opt_freesize->isChecked() );
+	ui->h_SliderMontaje_freesize->setValue( montaje.freesize.toInt() );
+	emit on_h_SliderMontaje_freesize_valueChanged( montaje.freesize.toInt() );
+	emit on_cbxMontaje_type_drive_activated( ui->cbxMontaje_type_drive->currentIndex() );
 }
 
-void frmAddEditMontajes::on_btnOk()
+void frmAddEditMontajes::on_btnOk_clicked()
 {
-	DatosMontaje.clear();
+	QString str;
 
-	if( ui.cbxMontaje_type_drive->currentText() != "" )
-		DatosMontaje["tipo_as"] = ui.cbxMontaje_type_drive->itemData( ui.cbxMontaje_type_drive->currentIndex() ).toString();	// tipo de montaje
-	else
-		DatosMontaje["tipo_as"] = "";
+	str = ui->cbxMontaje_type_drive->itemData( ui->cbxMontaje_type_drive->currentIndex() ).toString();
+	DatosMontaje.tipo_as = str.isEmpty() ? "" : str;
 
-	if( DatosMontaje["tipo_as"] == "IMG_multi_iso" || DatosMontaje["tipo_as"] == "boot" )
+	if( DatosMontaje.tipo_as == "IMG_multi_iso" || DatosMontaje.tipo_as == "boot" )
 	{
 		QStringList listaIso;
 		listaIso.clear();
-		for (int i = 0; i < ui.lw_MultiIso->count(); ++i)
-		{
-			listaIso << ui.lw_MultiIso->item(i)->text();
-		}
-		DatosMontaje["path"]  = ""+listaIso.join("|");
+		const int count_isos = ui->lw_MultiIso->count();
+		for (int i = 0; i < count_isos; ++i)
+			listaIso << ui->lw_MultiIso->item(i)->text();
+
+		DatosMontaje.path = ""+ listaIso.join("|");
 	} else
-		DatosMontaje["path"]  = ui.txtMontaje_path->text();					// directorio o iso
+		DatosMontaje.path = ui->txtMontaje_path->text();
 
-	DatosMontaje["label"] = ui.txtMontaje_label->text();					// etiqueta
+	DatosMontaje.label        = ui->txtMontaje_label->text();
+	DatosMontaje.letter       = ui->cbxMontaje_letter->currentText().isEmpty() ? "" : ui->cbxMontaje_letter->currentText();
+	DatosMontaje.indx_cd      = ui->cbxMontaje_cdrom->itemData( ui->cbxMontaje_cdrom->currentIndex() ).toString();
+	DatosMontaje.opt_mount    = ui->cbxMontaje_opt_mount->currentText().isEmpty() ? "" : ui->cbxMontaje_opt_mount->currentText();
+	DatosMontaje.opt_size     = ui->txtMontaje_opt_size_mount->text();
+	DatosMontaje.opt_freesize = fGrl->BoolToStr( ui->chkMontaje_opt_freesize->isChecked() );
+	DatosMontaje.freesize     = fGrl->IntToStr( ui->h_SliderMontaje_freesize->value() );
 
-	if( ui.cbxMontaje_letter->currentText() != "" )
-		DatosMontaje["letter"] = ui.cbxMontaje_letter->currentText();		// letra de montaje
-	else
-		DatosMontaje["letter"] = "";
-
-	DatosMontaje["indx_cd"]   = ui.cbxMontaje_cdrom->itemData( ui.cbxMontaje_cdrom->currentIndex() ).toString();		// index de la unidad de cd-rom
-	DatosMontaje["opt_mount"] = ui.txtMontaje_opt_mount->text();			// opciones del cd-rom
-
-	if( ui.cbxMontaje_mode_cdrom->currentText()!="" )
-		DatosMontaje["io_ctrl"] = ui.cbxMontaje_mode_cdrom->itemData( ui.cbxMontaje_mode_cdrom->currentIndex() ).toString();	// cd/dvd windows, w9x, linux
-	else
-		DatosMontaje["io_ctrl"] = "";
+	str = ui->cbxMontaje_mode_cdrom->itemData( ui->cbxMontaje_mode_cdrom->currentIndex() ).toString();
+	DatosMontaje.io_ctrl = str.isEmpty() ? "" : str;
 
 	QDialog::accept();
 }
 
-void frmAddEditMontajes::on_DirFile()
+void frmAddEditMontajes::on_btnCancel_clicked()
 {
-	QString tipo_montaje = ui.cbxMontaje_type_drive->itemData( ui.cbxMontaje_type_drive->currentIndex() ).toString();
+	QDialog::reject();
+}
+
+void frmAddEditMontajes::on_cbxMontaje_type_drive_activated(int index)
+{
+	int id_letra = 0;
+	if( index > -1 )
+	{
+		QString tipo_montaje = ui->cbxMontaje_type_drive->itemData( index ).toString();
+		if( tipo_montaje == "IMG_multi_iso" || tipo_montaje == "boot" )
+		{
+			ui->txtMontaje_path->setVisible( false );
+			ui->lw_MultiIso->setVisible( true );
+			ui->btnSubirIso->setVisible( true );
+			ui->btnBajarIso->setVisible( true );
+			ui->btnDeleteIso->setVisible( true );
+			ui->gridLayout->addWidget(ui->txtMontaje_path, 3, 1, 1, 2);
+			ui->gridLayout->addWidget(ui->lw_MultiIso, 0, 0, 4, 1);
+			ui->frame->setMaximumHeight(16777215);
+		} else {
+			ui->txtMontaje_path->setVisible( true );
+			ui->lw_MultiIso->setVisible( false );
+			ui->btnSubirIso->setVisible( false );
+			ui->btnBajarIso->setVisible( false );
+			ui->btnDeleteIso->setVisible( false );
+
+			ui->gridLayout->addWidget(ui->txtMontaje_path, 0, 0, 1, 1);
+			ui->gridLayout->addWidget(ui->lw_MultiIso, 1, 0, 3, 1);
+			ui->frame->setMaximumHeight(26);
+		}
+
+		ui->cbxMontaje_letter->clear();
+		for (int i = 0; i < list_letter.size(); ++i)
+			ui->cbxMontaje_letter->addItem( list_letter.at(i) );
+
+		QString letra = "C";
+		if( tipo_montaje == "cdrom" || tipo_montaje == "IMG_iso" || tipo_montaje == "IMG_multi_iso" )
+			letra = "D";
+		else if( tipo_montaje == "drive" || tipo_montaje == "IMG_hdd" )
+		{
+			letra = "C";
+			if( tipo_montaje == "IMG_hdd" )
+			{
+				ui->cbxMontaje_letter->addItem("2");
+				ui->cbxMontaje_letter->addItem("3");
+			}
+		}
+		else if( tipo_montaje == "floppy" || tipo_montaje == "IMG_floppy" || tipo_montaje == "boot" )
+		{
+			letra = "A";
+			if( tipo_montaje == "IMG_floppy" )
+			{
+				ui->cbxMontaje_letter->addItem("0");
+				ui->cbxMontaje_letter->addItem("1");
+			}
+		}
+		id_letra = ui->cbxMontaje_letter->findText( Editando ? DatosMontaje.letter : letra );
+	}
+	ui->cbxMontaje_letter->setCurrentIndex( id_letra > -1 ? id_letra : 0 );
+}
+
+void frmAddEditMontajes::on_btnDirFile_clicked()
+{
+	QString tipo_montaje = ui->cbxMontaje_type_drive->itemData( ui->cbxMontaje_type_drive->currentIndex() ).toString();
 
 	if( tipo_montaje == "drive" || tipo_montaje == "cdrom" || tipo_montaje == "floppy" )
 	{
-		QString directorio = fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["Montaje_path"].toString(), ui.txtMontaje_path->text() );
-		if( directorio !="" )
+		QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Montaje_path, ui->txtMontaje_path->text() );
+		if( !directorio.isEmpty() )
 		{
-			ui.txtMontaje_path->setText( directorio );
-
-			QDir dir( ui.txtMontaje_path->text() );
+			QDir dir( directorio );
 			if( dir.exists() )
-				GRLConfig["Montaje_path"] = ui.txtMontaje_path->text();
-			else
-				GRLConfig["Montaje_path"] = "";
+			{
+				ui->txtMontaje_path->setText( directorio );
+				grlCfg.Montaje_path = ui->txtMontaje_path->text();
+
+				fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Montaje_path", grlCfg.Montaje_path);
+			}
 		}
 	} else {
 		QString tipo_archivo;
@@ -212,94 +282,119 @@ void frmAddEditMontajes::on_DirFile()
 		else
 			tipo_archivo = "";
 
-		QString archivo = fGrl.VentanaAbrirArchivos( tr("Selecciona un archivo"), GRLConfig["Montaje_path"].toString(), ui.txtMontaje_path->text(), tipo_archivo + tr("Todos los archivo") +" (*)", 0, false);
-		if( archivo !="" )
+		QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Montaje_path, ui->txtMontaje_path->text(), tipo_archivo + tr("Todos los archivo") +" (*)", 0, false);
+		
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
 		{
 			if( tipo_montaje == "IMG_multi_iso" || tipo_montaje == "boot" )
 			{
-				QListWidgetItem *itemIso = new QListWidgetItem( ui.lw_MultiIso );
+				QListWidgetItem *itemIso = new QListWidgetItem( ui->lw_MultiIso );
 				if( tipo_montaje == "boot" )
-					itemIso->setIcon( QIcon(stTheme+"img16/floppy_2.png") );
+					itemIso->setIcon( QIcon(fGrl->Theme() +"img16/floppy_2.png") );
 				else
-					itemIso->setIcon( QIcon(stTheme+"img16/cd_iso.png") );
+					itemIso->setIcon( QIcon(fGrl->Theme() +"img16/cd_iso.png") );
 				itemIso->setText( archivo );
 			} else
-				ui.txtMontaje_path->setText( archivo );
+				ui->txtMontaje_path->setText( archivo );
 
-			QFileInfo fi( archivo );
-			if( fi.exists() )
-				GRLConfig["Montaje_path"] = fi.absolutePath();
-			else
-				GRLConfig["Montaje_path"] = "";
+			grlCfg.Montaje_path = f_info.Path;
+
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Montaje_path", grlCfg.Montaje_path);
 		}
 	}
-
-	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","Montaje_path", GRLConfig["Montaje_path"].toString() );
 }
 
-void frmAddEditMontajes::on_SubirIso()
+void frmAddEditMontajes::on_btnDirFile_clear_clicked()
 {
-	int listIndex = ui.lw_MultiIso->currentRow();
-	if(listIndex > 0)
+	ui->txtMontaje_path->clear();
+	ui->lw_MultiIso->clear();
+}
+
+void frmAddEditMontajes::on_btnSubirIso_clicked()
+{
+	int index = ui->lw_MultiIso->currentRow();
+	if( index > 0 )
 	{
-		QListWidgetItem *item = new QListWidgetItem(*ui.lw_MultiIso->currentItem());
-		delete ui.lw_MultiIso->currentItem();
-		ui.lw_MultiIso->insertItem(listIndex - 1, item);
-		ui.lw_MultiIso->setCurrentItem(item);
+		QListWidgetItem *item = new QListWidgetItem(*ui->lw_MultiIso->currentItem());
+		delete ui->lw_MultiIso->currentItem();
+		ui->lw_MultiIso->insertItem(index - 1, item);
+		ui->lw_MultiIso->setCurrentItem(item);
 	}
 }
 
-void frmAddEditMontajes::on_BajarIso()
+void frmAddEditMontajes::on_btnBajarIso_clicked()
 {
-	int listIndex = ui.lw_MultiIso->currentRow();
-	if(listIndex < (ui.lw_MultiIso->count() - 1))
+	int index = ui->lw_MultiIso->currentRow();
+	if( index < (ui->lw_MultiIso->count() - 1) )
 	{
-		QListWidgetItem *item = new QListWidgetItem(*ui.lw_MultiIso->currentItem());
-		delete ui.lw_MultiIso->currentItem();
-		ui.lw_MultiIso->insertItem(listIndex + 1, item);
-		ui.lw_MultiIso->setCurrentItem(item);
+		QListWidgetItem *item = new QListWidgetItem(*ui->lw_MultiIso->currentItem());
+		delete ui->lw_MultiIso->currentItem();
+		ui->lw_MultiIso->insertItem(index + 1, item);
+		ui->lw_MultiIso->setCurrentItem(item);
 	}
 }
 
-void frmAddEditMontajes::on_DeleteIso()
+void frmAddEditMontajes::on_btnDeleteIso_clicked()
 {
-	QListWidgetItem *item = ui.lw_MultiIso->currentItem();
-	if(item != NULL)
+	QListWidgetItem *item = ui->lw_MultiIso->currentItem();
+	if( item != NULL )
 	{
-		int respuesta = QMessageBox::question(this, tr("¿Eliminar...?"), tr("¿Quieres eliminar la ISO de la lista?"), tr("Si"), tr("Cancelar"), 0 , 1);
-		if(respuesta == 0)
+		int respuesta = QMessageBox::question(this, tr("¿Eliminar...?"), tr("¿Quieres eliminar la ISO de la lista?"), tr("Si"), tr("No"), 0, 1);
+		if( respuesta == 0)
 		{
 			delete item;
 		}
 	}
 }
 
-void frmAddEditMontajes::on_lw_MultiIso_currentItemChanged(QListWidgetItem* current, QListWidgetItem* previous)
+void frmAddEditMontajes::on_lw_MultiIso_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-	if(previous != NULL)
+	if( previous != NULL )
 	{
 		//
 	}
 
-	if(current != NULL)
+	if( current != NULL )
 	{
-		int listIndex = ui.lw_MultiIso->currentRow();
-		if(listIndex == 0)
-			ui.btnSubirIso->setEnabled(false);
+		int index = ui->lw_MultiIso->currentRow();
+		if( index == 0 )
+			ui->btnSubirIso->setEnabled(false);
 		else
-			ui.btnSubirIso->setEnabled(true);
+			ui->btnSubirIso->setEnabled(true);
 
-		if(listIndex == (ui.lw_MultiIso->count() - 1))
-			ui.btnBajarIso->setEnabled(false);
+		if( index == (ui->lw_MultiIso->count() - 1) )
+			ui->btnBajarIso->setEnabled(false);
 		else
-			ui.btnBajarIso->setEnabled(true);
+			ui->btnBajarIso->setEnabled(true);
 
-		ui.btnDeleteIso->setEnabled(true);
+		ui->btnDeleteIso->setEnabled(true);
+	} else {
+		ui->btnDeleteIso->setEnabled(false);
+		ui->btnSubirIso->setEnabled(false);
+		ui->btnBajarIso->setEnabled(false);
 	}
+}
+
+void frmAddEditMontajes::on_chkMontaje_opt_freesize_clicked(bool checked)
+{
+	ui->h_SliderMontaje_freesize->setEnabled( checked );
+}
+
+void frmAddEditMontajes::on_h_SliderMontaje_freesize_valueChanged(int value)
+{
+	QString tipo_montaje, tipo_size;
+	tipo_montaje = ui->cbxMontaje_type_drive->itemData( ui->cbxMontaje_type_drive->currentIndex() ).toString();
+
+	if( tipo_montaje == "floppy" )
+		tipo_size = "KB";
 	else
-	{
-		ui.btnDeleteIso->setEnabled(false);
-		ui.btnSubirIso->setEnabled(false);
-		ui.btnBajarIso->setEnabled(false);
-	}
+		tipo_size = "MB";
+
+	ui->chkMontaje_opt_freesize->setTitle( tr("Espacio libre virtual (%1 %2)").arg(value).arg(tipo_size) );
+}
+
+void frmAddEditMontajes::on_btnMontaje_opt_size_mount_clear_clicked()
+{
+	ui->txtMontaje_opt_size_mount->clear();
 }

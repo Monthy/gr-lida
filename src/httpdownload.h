@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -28,62 +28,73 @@
 #include <QtGui>
 #include <QWidget>
 #include <QtNetwork>
+#include <QNetworkAccessManager>
+#include <QUrl>
 
+QT_BEGIN_NAMESPACE
 class QFile;
-class QHttp;
-class QHttpResponseHeader;
 class QProgressDialog;
 class QSslError;
 class QAuthenticator;
+class QNetworkReply;
+QT_END_NAMESPACE
 
 class HttpDownload : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	HttpDownload(QWidget *parent = 0);
 	~HttpDownload();
 
-	void downloadFile(QString urlfile, QString fileName, QString metodo = "", QString contentPost = "");
+	enum TipoDown
+	{
+		d_GET  = 0,
+		d_POST = 1
+	};
+
+	void setHttpProxy(int typeProxy, const QString host, int port, const QString username = "", const QString password = "");
+	void setHttpWindowTitle(QString titulo = "GR-lida - HttpDownload"){ m_httpwindowtitle = titulo; }
+
+	void downloadFile(QString urlfile, QString fileName, QString tipo = "GET", QString contentPost = "");
+	void startRequest(QUrl m_url, TipoDown tipo = d_GET, QString contentPost = "");
 
 	QString getStatusLabel(){ return m_statuslabel; }
 	bool getStatusBtnDownload(){ return m_downloadButton; }
-	void setHttpProxy(int typeProxy, const QString host, int port, const QString username = "", const QString password = "");
-	void setHttpWindowTitle(QString titulo = "HttpDownload");
+
+signals:
+	void statusLabel(QString str);
+	void statusBtnEnabled(bool mbool);
+	void statusFinished();
 
 private:
+	QUrl url;
+	QNetworkAccessManager qnam;
+	QNetworkReply *reply;
+	QNetworkProxy proxy;
 	QProgressDialog *progressDialog;
+	QFile *file;
 
 	QString m_httpwindowtitle;
 	QString m_statuslabel;
-	QString urlLineEdit;
-	bool m_downloadButton;
 
-	QHttp *http;
-	QNetworkProxy proxy;
-	QFile *file;
 	int httpGetId;
-	bool httpRequestAborted;
+	bool m_downloadButton, httpRequestAborted, isProxyEnable;
 
 	void setStatusLabel(QString str);
 	void setStatusBtnDownload(bool mbool);
 
-private slots:
+public slots:
 	void cancelDownload();
 
-	void httpRequestFinished(int requestId, bool error);
-	void readResponseHeader(const QHttpResponseHeader &responseHeader);
-	void updateDataReadProgress(int bytesRead, int totalBytes);
-	void httpstateChanged(int state);
-	void slotAuthenticationRequired(const QString &, quint16, QAuthenticator *);
+private slots:
+	void httpFinished();
+	void httpReadyRead();
+	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
+	void slotAuthenticationRequired(QNetworkReply*, QAuthenticator*);
 #ifndef QT_NO_OPENSSL
-	void sslErrors(const QList<QSslError> &errors);
+	void sslErrors(QNetworkReply*, const QList<QSslError> &errors);
 #endif
-
-signals:
-	void statusLabelChanged(QString str);
-	void StatusBtnDownloadChanged(bool mbool);
-	void StatusRequestFinished();
 
 };
 

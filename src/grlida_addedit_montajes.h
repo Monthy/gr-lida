@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,39 +25,55 @@
 #ifndef GRLIDA_ADDEDIT_MONTAJES_H
 #define GRLIDA_ADDEDIT_MONTAJES_H
 
-#include <QtCore>
-#include <QtGui>
+#include <QDialog>
 
 #include "funciones.h"
-#include "ui_addedit_montajes.h"
+
+namespace Ui {
+    class frmAddEditMontajes;
+}
 
 class frmAddEditMontajes : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmAddEditMontajes(QHash<QString, QString> montajes, QDialog *parent = 0, Qt::WFlags flags = 0);
+	frmAddEditMontajes(stGrlCfg m_cfg, bool m_editando, QWidget *parent = 0);
 	~frmAddEditMontajes();
 
-	Ui::AddEditMontajesClass ui;
-
-	QHash<QString, QString> DatosMontaje;
+	stGrlCfg getGrlCfg(){return grlCfg;}
+	void setDatosMontaje(stConfigDOSBoxMount montaje);
+	stConfigDOSBoxMount getDatosMontaje(){ return DatosMontaje;}
 
 private:
-	Funciones fGrl;
-	QString stHomeDir, stTheme;
-	QHash<QString, QVariant> GRLConfig;
+	Ui::frmAddEditMontajes *ui;
 
+	Funciones *fGrl;
+
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stConfigDOSBoxMount DatosMontaje;
+
+	bool Editando;
+	QStringList list_letter;
+
+	void cargarConfig();
 	void setTheme();
 
 private slots:
-	void on_changeTypeDrive(int row);
-	void on_btnOk();
-	void on_DirFile();
-	void on_SubirIso();
-	void on_BajarIso();
-	void on_DeleteIso();
-	void on_lw_MultiIso_currentItemChanged(QListWidgetItem* current, QListWidgetItem* previous);
+	void on_btnOk_clicked();
+	void on_btnCancel_clicked();
+	void on_cbxMontaje_type_drive_activated(int index);
+	void on_btnDirFile_clicked();
+	void on_btnDirFile_clear_clicked();
+	void on_btnSubirIso_clicked();
+	void on_btnBajarIso_clicked();
+	void on_btnDeleteIso_clicked();
+	void on_lw_MultiIso_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+	void on_chkMontaje_opt_freesize_clicked(bool checked);
+	void on_h_SliderMontaje_freesize_valueChanged(int value);
+
+	void on_btnMontaje_opt_size_mount_clear_clicked();
 };
 
 #endif // GRLIDA_ADDEDIT_MONTAJES_H

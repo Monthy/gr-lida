@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -22,141 +22,145 @@
  *
 **/
 
-#ifndef GRLIDA_IMPORTARJUEGO_H
-#define GRLIDA_IMPORTARJUEGO_H
+#ifndef GRLIDA_IMPORTAR_JUEGO_H
+#define GRLIDA_IMPORTAR_JUEGO_H
 
-#include <QtCore>
-#include <QtGui>
-#include <QtScript>
-#include <QRegExp>
+#include <QDialog>
 
-
-#include <QTreeWidgetItem>
-#include <QTreeWidget>
-#include <QHash>
-#include <QScriptValue>
-#include <QScriptEngine>
-#include <QScriptable>
-
-#include "httpdownload.h"
 #include "funciones.h"
+#include "dbsql.h"
+#include "httpdownload.h"
 #include "grlida_importpath.h"
 #include "ui_importar_juego.h"
 
-enum e_fin_descarga {
-	NohacerNada,
-	MostrarFicha,
-	AnalizarPaginaBusqueda,
-	AnalizarPaginaFicha,
-	CargarThumb,
-	CargarCoverFront,
-	CargarCoverBack
-};
+Q_DECLARE_METATYPE(QTreeWidgetItem*)
+Q_DECLARE_METATYPE(QTreeWidget*)
 
-//! [1]
+// INICIO ImportarTwPrototype -----------------------------------------------------------------------------------
 class ImportarTwPrototype : public QObject, public QScriptable
 {
-    Q_OBJECT
+	Q_OBJECT
+
+public:
+	ImportarTwPrototype(QString dir_theme, QString dir_base_game, QObject *parent = 0);
 
 private:
 	Funciones fGrl;
-	QString stHomeDir, stTheme, stDirBaseGames;
-
-public:
-	ImportarTwPrototype(QObject *parent = 0);
+	QString stDirApp, stTheme, stDirBaseGames;
 
 public slots:
 	void addItemFind(const QString &titulo, const QString &plataforma, const QString &anno, const QString &url, QString icono = "tag");
 	void addItemDatosFiles(const QString &nombre, const QString &crc, const QString &descripcion, const QString &size, const QString &path, QString icono = "archivos");
-	void addItemMounts(const QString &path, const QString &label, const QString &tipo_as, const QString &letter, const QString &indx_cd, const QString &opt_mount, const QString &io_ctrl, const QString &select_mount);
-};
-//! [1]
+	void addItemMounts(const QString &path, const QString &label, const QString &tipo_as, const QString &letter, const QString &indx_cd, const QString &opt_mount, const QString &io_ctrl, const QString &select_mount, const QString &opt_size, const QString &opt_freesize, const QString &freesize);
 
+};
+// FIN ImportarTwPrototype --------------------------------------------------------------------------------------
+
+namespace Ui {
+	class frmImportarJuego;
+}
 
 class frmImportarJuego : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmImportarJuego(QHash<QString, QString> datos,
-					QHash<QString, QString> datos_svm,
-					QHash<QString, QString> datos_dbx,
-					QHash<QString, QString> datos_vdms, QDialog *parent = 0, Qt::WFlags flags = 0);
+	explicit frmImportarJuego(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, stDatosJuego datos, stConfigDOSBox datos_dbx, stConfigScummVM datos_svm, stConfigVDMSound datos_vdms, bool m_editando = false, QWidget *parent = 0);
 	~frmImportarJuego();
 
-	Ui::ImportarJuegoClass ui;
+	stDatosJuego getDatosJuegos(bool getTipoEmu = false);
+	stConfigDOSBox getDatosDosBox(){return DatosDosBox;}
+	stConfigScummVM getDatosScummVM(){return DatosScummVM;}
+	stConfigVDMSound getDatosVDMSound(){return DatosVDMSound;}
+	stGrlCfg getGrlCfg(){return grlCfg;}
+	QString TipoEmu;
 
-	QHash<QString, QString> DatosJuego;
-	QHash<QString, QString> DatosScummVM;
-	QHash<QString, QString> DatosDosBox;
-	QHash<QString, QString> DatosVDMSound;
+	Ui::frmImportarJuego *ui;
 
 private:
-	enum tab_dat_config {
-		tab_datos    = 0,
-		tab_dosbox   = 1,
-		tab_scummvm  = 2,
-		tab_vdmsound = 3
+	enum e_fin_descarga {
+		NohacerNada            = 0,
+		MostrarFicha           = 1,
+		AnalizarPaginaBusqueda = 2,
+		AnalizarPaginaFicha    = 3,
+		CargarThumb            = 4,
+		CargarCoverFront       = 5,
+		CargarCoverBack        = 6
 	};
 
-	Funciones fGrl;
-	frmImportPath *ImportPathNew;
+	enum tab_datos {
+		tabDatos    = 0,
+		tabDOSBox   = 1,
+		tabScummVM  = 2,
+		tabVDMSound = 3
+	};
+
+	Funciones *fGrl;
+	dbSql *sql;
 	HttpDownload *httpdown;
-	HttpDownload *httpdown_dos;
-	int indx_fin_descarga;
+	frmImportPath *ImportPathNew;
 
-	QString stHomeDir, stIconDir, stTempDir, stConfgDbxDir, stConfgVdmSDir;
-	QString stTheme, stScriptsDir, stCoversDir, stThumbsDir;
-	QString stFileBusqueda, stFileFicha, stUrlWeb;
-	QString str_html_new, str_html_old;
-	QString img_thumbs, img_cover_front, img_cover_back;
-	QString img_url_cover_thumbs, img_url_cover_front, img_url_cover_back;
-	QFile file_thumbs, file_cover_front, file_cover_back;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stGrlCats categoria;
 
-	QByteArray CodecFileHtml;
+	stDatosJuego DatosJuego;
+	stConfigDOSBox DatosDosBox;
+	stConfigScummVM DatosScummVM;
+	stConfigVDMSound DatosVDMSound;
 
-	QHash<QString, QVariant> GRLConfig;
+	QHash<QString, QString> datosImportar;
+	QHash<QString, stGrlDatos> emu_list;
+	QHash<QString, stGrlDatos> smiles_list;
+	QHash<QString, stGrlDatos> idiomas_list;
+	QHash<QString, stGrlDatos> edades_list;
 
-	QHash<QString, QString> tmpDatosJuego;
-	QHash<QString, QString> tmpDatosScummVM;
-	QHash<QString, QString> tmpDatosDosBox;
-	QHash<QString, QString> tmpDatosVDMSound;
+	QString str_url_web, str_html_old;
+
+	QByteArray codecFileHtml;
+	int index_fin_descarga;
+	bool Editando;
 
 // Ini Script ------
-	QString stScripts;
-	QScriptEngine engine;
+	QScriptEngine *engine;
 	QScriptValue ctor;
 	QScriptValueList args;
-
-	ImportarTwPrototype twProto;
-
-	void CargarScript(QString fileScript);
+	ImportarTwPrototype *twProto;
 // Fin Script ------
 
 	void createConnections();
+	void cargarConfig();
 	void setTheme();
-	void CargarConfig();
-	void MostrarFichaHtml(QHash<QString, QString> datos);
-	QString LeerArchivoHTML(QString file_html);
+
+	void cargarScript(QString fileScript);
+	void mostrarFichaHtml(QHash<QString, QString> datos);
+	QString leerArchivoHTML(QString file_html);
 //
-	void AddTitles(QString ResultsPage);
-	void AnalyzePage(QString Page, bool local = false, bool tipoDFend = false);
-	void InsertarItemDatosJuego(QString etiqueta, QString old_dat, QString new_dat, QString key_dat);
+	void downloadFile(QString dat_key, QString dat_url_key, QString tipo);
+	void addTitles(QString filename);
+	void analyzePage(QString filename, bool local = false, bool tipoDFend = false);
+	void insertarDatosJuego(QString etiqueta, QString icono, QString old_dat, QString new_dat, QString key_dat);
+	void setDatosJuego(QHash<QString, QString> datos);
 
 private slots:
-	void on_twListaBusqueda_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2);
-	void on_twListaBusqueda_clicked(QTreeWidgetItem *item);
-	void on_twListaBusqueda_Dblclicked(QTreeWidgetItem *item);
+	void on_btnOk_clicked();
+	void on_btnCancelar_clicked();
 
-	void on_btnOk();
-	void on_btnAbrir();
-	void on_btnBuscar();
-	void on_btnVerInfo();
-	void on_btnAbrirUrl();
-	void on_changeScriptURL(int row);
-	void on_changeEnabled(bool estado);
-	void isRequestFinished();
+	void on_btnAbrir_clicked();
+	void on_btnAbrirUrl_clicked();
+	void on_btnBuscar_clicked();
+	void on_btnAbortar_clicked();
+	void on_btnVerInfo_clicked();
+
+	void on_cbxScriptURL_activated(int index);
+	void on_twListaBusqueda_itemClicked(QTreeWidgetItem *item, int column);
+	void on_twListaBusqueda_itemDoubleClicked(QTreeWidgetItem *item, int column);
+	void on_twListaBusqueda_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+	void on_txtTituloBuscar_returnPressed();
+
+	void statusBtnEnabled(bool estado);
+	void statusFinished();
 
 };
 
-#endif // GRLIDA_IMPORTARJUEGO_H
+#endif // GRLIDA_IMPORTAR_JUEGO_H

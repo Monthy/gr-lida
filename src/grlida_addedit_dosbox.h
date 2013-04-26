@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,79 +25,99 @@
 #ifndef GRLIDA_ADDEDIT_DOSBOX_H
 #define GRLIDA_ADDEDIT_DOSBOX_H
 
-#include <QtGui>
 #include <QTabWidget>
 
 #include "funciones.h"
 #include "dbsql.h"
 #include "ui_addedit_dosbox.h"
 
+namespace Ui {
+	class frmAddEditDosBox;
+}
+
 class frmAddEditDosBox : public QTabWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmAddEditDosBox(QWidget *parent = 0);
+	explicit frmAddEditDosBox(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QString id_game, bool m_editando, QWidget *parent = 0);
 	~frmAddEditDosBox();
 
-	Ui::AddEditDosBoxClass ui;
-
 	bool isCorrectNext();
-	void setEditandoJuego(bool editando = false);
-	void CargarConfigDosBox();
-	void setConfigDefecto();
-	void CargarDatosDosBox(QString IDGrl, QString ProfileGame = "", bool isProfileGame = false);
-	void CargarDatosDosBox(QHash<QString, QString> datosDbx, QString IDGrl = "", bool isProfileGame = false);
-	void CargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
+	void cargarConfig();
+	
+	stGrlCfg getGrlCfg(){return grlCfg;}
+	stConfigDOSBox getDatosDosBox(){return DatosDosBox;}
 
-	QHash<QString, QString> setDatosDosBox();
+	void setDatosDosBox();
+	void cargarDatosDosBox(stConfigDOSBox cfgDbx);
+	void cargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
+
+	Ui::frmAddEditDosBox *ui;
 
 private:
-	QHash<QString, QVariant> GRLConfig;
-
-	Funciones fGrl;
+	Funciones *fGrl;
 	dbSql *sql;
 
-	bool EditandoJuego;
+	QString titulo_ventana(){ return windowTitle(); }
 
-	QString stTituloAddEdit(){ return windowTitle(); }
-	QString stHomeDir, stTheme, stItemIDDbx;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stGrlCats categoria;
 
-	void createConnections();
+	stConfigDOSBox DatosDosBox;
+
+	QString IdGame, IdDbx;
+	QString dos_keyboardlayout;
+
+	QHash<QString, stGrlDatos> emu_list;
+	QHash<QString, stGrlDatos> smiles_list;
+	QHash<QString, stGrlDatos> dbx_keyboardlayout_list;
+	QHash<QString, QString> dbx_keyboardlayout;
+
+	bool Editando;
+
 	void setTheme();
-
-	void PrevierMontajes();
-	void CargarDatosDBxMontaje( QString IDdbx);
+	void previerMontajes();
+	void cargarDatosDBxMontaje(QString IDdbx);
 	QString setOpcionesSerial();
 	void addMontajeAutoexec(QString tipo, QString dir_file);
 
 private slots:
-	void on_setProfileGame(int row);
-	void on_btnDbx_FileConfg();
-	void on_btnDbx_ExeJuego();
-	void on_btnDbx_ExeSetup();
-	void on_btnDbx_mapperfile();
-	void on_btnDbx_language();
-	void on_btnDbx_capturas();
-	void on_btnDbx_musica();
-	void on_btnDbx_AddSerial();
-	void on_btnMount_Add();
-	void on_btnMount_Edit();
-	void on_btnMount_Delete();
-	void on_btnMount_Clear();
-	void on_btnMount_Subir();
-	void on_btnMount_Bajar();
-	void on_btnMount_AutoCrear();
-	void on_btnMount_Primario();
+	void on_btnDbx_FileConfg_clicked();
 
-// Menu Herramintas de Montaje en Autoexec
-
-	void on_btnToolDbx_mount_HD();
-	void on_btnToolDbx_mount_CD();
-	void on_btnToolDbx_mount_Floppy();
-	void on_btnToolDbx_mount_ImgFloppy();
-	void on_btnToolDbx_mount_ImgCD();
-	void on_btnToolDbx_mount_ImgHD();
+	void on_btnDbx_FileConfg_clear_clicked();
+	void on_cbxDbx_Profiles_activated(int index);
+	void on_chkDbx_loadfix_clicked();
+	void on_spinDbx_loadfix_mem_valueChanged(int arg1);
+	void on_cbxDbx_dos_keyboardlayout_activated(int index);
+	void on_btnDbx_ExeJuego_clicked();
+	void on_btnDbx_ExeJuego_clear_clicked();
+	void on_btnDbx_ExeSetup_clicked();
+	void on_btnDbx_ExeSetup_clear_clicked();
+	void on_btnMount_Add_clicked();
+	void on_btnMount_Edit_clicked();
+	void on_btnMount_Delete_clicked();
+	void on_btnMount_Clear_clicked();
+	void on_btnMount_Subir_clicked();
+	void on_btnMount_Bajar_clicked();
+	void on_btnMount_AutoCrear_clicked();
+	void on_btnMount_Primario_clicked();
+	void on_btnDbx_AddSerial_clicked();
+	void on_btnToolDbx_mount_HD_clicked();
+	void on_btnToolDbx_mount_CD_clicked();
+	void on_btnToolDbx_mount_Floppy_clicked();
+	void on_btnToolDbx_mount_ImgFloppy_clicked();
+	void on_btnToolDbx_mount_ImgCD_clicked();
+	void on_btnToolDbx_mount_ImgHD_clicked();
+	void on_btnDbx_mapperfile_clicked();
+	void on_btnDbx_mapperfile_clear_clicked();
+	void on_btnDbx_language_clicked();
+	void on_btnDbx_language_clear_clicked();
+	void on_btnDbx_capturas_clicked();
+	void on_btnDbx_capturas_clear_clicked();
+	void on_btnDbx_musica_clicked();
+	void on_btnDbx_musica_clear_clicked();
 
 };
 

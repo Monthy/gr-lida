@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -26,225 +26,251 @@
 #define GRLIDA_H
 
 #include <QMainWindow>
-#include <QtCore>
-#include <QtGui>
-#include <QHash>
-#include <QVariant>
+#include <QMessageBox>
+#include <QSqlTableModel>
+#include <QProcess>
+#include <QSystemTrayIcon>
 
 #include "funciones.h"
 #include "dbsql.h"
-#include "ui_grlida.h"
+#include "grlida_delegate.h"
+#include "grlida_picflow.h"
 
-enum col_TwJuegos {
-	col_IdGrl    = 0,
-	col_Titulo   = 1,
-	col_Compania = 2,
-	col_Anno     = 3,
-	col_Rating   = 4,
-	col_TipoEmu  = 5,
-	col_Favorito = 6,
-	col_PicFlow  = 7
-};
+namespace Ui {
+	class GrLida;
+}
 
 class GrLida : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	GrLida(QWidget *parent = 0, Qt::WFlags flags = 0);
+	explicit GrLida(QWidget *parent = 0);
 	~GrLida();
 
-	Ui::GrLidaClass ui;
-
-// Hace la conexion con la Base de Datos.
-	void ConectarBaseDatos();
-// Abre y carga la base de datos.
-	void CargarListaJuegosDB(QString strBuscar = "", QString sqlQuery = "");
-// Comprueba si existen los archivos de datos.
-	void ComprobarArchivosDatos(QString Version_GRL, QString lng = "");
-// Ocualta o muesta la ventana Principal.
+protected:
+	void closeEvent(QCloseEvent *event);
+	bool eventFilter(QObject *obj, QEvent *event);
 	void setVisible(bool visible);
 
-protected:
-	void closeEvent( QCloseEvent *e );
-	bool eventFilter(QObject *obj, QEvent *event);
-
 private:
-	QString stTituloGrl(){ return tr("GR-lida Lanzador para el DOSBox, ScummVM y VdmSound"); }
+	Ui::GrLida *ui;
 
-	Funciones fGrl;
+	QString tituloGrl(){ return tr("GR-lida lanzador para el DOSBox, ScummVM y VdmSound"); }
+
+	Funciones *fGrl;
 	dbSql *sql;
-	QTreeWidgetItem *twCategoria;
-	QHash<QString, QVariant> GRLConfig;
-	QHash<QString, QVariant> LwConf;
+	GrlTreeViewDelegate *grl_tv_delegate;
+	GrlListViewDelegate *grl_lv_delegate;
+	GrlPicFlow *grl_picflow;
 
-	QProcess *dBoxSvm;
-	QUrl my_url;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stCfgExec cfgExec;
+	stLwIconCfg lwIconCfg;
 
-	int new_rating, old_rating;
-	int id_ImgPicFlow, id_ImgPicFlow_old, numSkip_PicFlow;
-	bool chkVersionDesdeMenu, item_changed;
+	QString IdGame, TipoEmu, str_html_old;
+	QString Thumbs, CoverFront, CoverBack;
+	QString sql_where_select, sql_where_select_old;
+	bool isInicio, isUpdateMenu, isPicFlowActive;
 
-	QString stHomeDir, stDatosDir, stIconDir, stTempDir, stConfgDbxDir, stConfgVdmSDir;
-	QString stIdiomaSelect, stTheme, stIdioma, stIconoFav, stPicFlowReflection;
-	QString str_html_new, str_html_old, str_html_comentario;
-	QString stdb_type, stdb_server, stdb_host, stdb_name, stdb_username, stdb_password, stdb_port;
-	QString stdb_Orden_ColTabla, stdb_Orden_By, stdb_Orden;
-	QString stBinExeDbx, stBinExeSvm;
-	QString stItemIndex, stConfgJuego, stJuegoParametrosExe, stDirWorkingJuego, stTipoEmu;
-	QString stDirCapturas, stCaratula_Delantera, stCaratula_Trasera;
-	QString stCoversDir, stThumbsDir, stListThumbsDir, stCapturesDir;
-	QString stThumbs, stCoverFront, stCoverBack;
+	unsigned int id_cat, skip_picflow, total_juegos, row_select, col_select;
+	QHash<int, int> col;
+	QHash<int, stGrlCats> categoria;
+	QTreeWidgetItem *twListMnuNav;
 
-	QStringList stl_param;
-	QStringList smiles_Lista, smiles_ListaTemp;
+	QHash<QString, stGrlDatos> emu_list;
+	QHash<QString, stGrlDatos> smiles_list;
+	QHash<QString, stGrlDatos> idiomas_list;
+	QHash<QString, stGrlDatos> edades_list;
 
-	QHash<QString, QString> listSmailes;
-	QHash<QString, QString>::const_iterator i_Hash;
-
-	QHash<QString, QListWidgetItem *> lwlista_pos;
-	QHash<QString, QTreeWidgetItem *> twlista_pos;
-
-// Barra de Heramientas Ordenar
-	QHBoxLayout *HLayoutOrdenar;
-	QFrame *frameOrdenar;
-	QLineEdit *txtBuscar;
-	QLabel *lb_ordenar_1;
-	QLabel *lb_ordenar_2;
-	QComboBox *cbxColTabla;
-	QComboBox *cbxOrdenBy;
-	QComboBox *cbxOrden;
-	QToolButton *btn_Ordenar;
+	GrlTreeViewModel *tv_model;
+	QStandardItemModel *lv_model;
 
 // StatusBar
-	QLabel *lbpanel_1;
-	QLabel *lbpanel_2;
-	QLabel *lbpanel_3;
-	QLabel *lbpanel_4;
-	QLabel *lbpanel_5;
+	QLabel *lb_panel_1, *lb_panel_2, *lb_panel_3,*lb_panel_4, *lb_panel_5;
 
-// Tray Icon
+// Tray icon
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu, *ljMenuPopUp;
 	bool isTrayIcon;
 
-	void ItemNext();
-	void ItemBack();
+	QProcess *grlProcess;
 
-	void createConnections();
+	void conectarBaseDatos();
+	void comprobarArchivosDatos(QString version_grl, QString lng = "es_ES");
+	void copiarArchivos(QString dir_old, QString dir_new, QString filter, QString filter_sep = ";");
+
 	void createToolBars();
-	void createDockBars();
-// Menu de Navegacion de las distintas categorias --
-	void CrearMenuNav();
-	void MenuNav_AddCat(QString etiqueta_cat, QString icono_cat, QString tabla = "all", bool m_expanded = true);
-	void MenuNav_AddSubCat(QString etiqueta_subcat, QString icono_subcat, QString tabla);
-	void MenuNav_AddSubCat(QString archivo, QString tabla, int num_col = 1, bool idioma_svm = false);
-// -------------------------------------------------
 	void createStatusBar();
-	bool createTrayIcon();
+	void createTrayIcon();
+	void createConnections();
 
-	void CargarConfig();	// Carga la Configuración del GR-lida.
-	void GuardarConfig();	// Guarda la Configuración del GR-lida.
-	void setTheme();		// Carga el Tema de los Iconos.
+	void cargarConfig();
+	void guardarConfig();
+	void setTheme();
+	void showPopup(QWidget *w_parent, const QPoint &pos);
+	void checkUpdateGrl(bool is_menu = false);
 
-	void CrearArchivoDato(QString origen, QString destino);		// Crea los archivos de datos.
+	void cargarListaCategorias(bool isEmit = true);
+	void setConfigHeaderListaJuegos();
+	void cargarListaJuegosDB(QString sql_where = "");
+	void cargarListaPicFlow(QString sql_where = "");
 
-	void MostrarDatosDelJuego(QString IDitem = "");				// Muestra los Datos del Juego.
-	void MostrarArchivosURLDelJuego(QString IDitem = "");		// Muestra o carga los datos de los Archivos y Url del Juego.
-	void CargarCapturasImagenes(const QString directorio);		// Carga las Imágenes en una lista.
-	void CargarCapturasVideoSonidos(const QString directorio);	// Carga los Videos y Sonidos en una lista.
+	void setChangeCategorias(int cat_id);
+	void menuNavAddCat(QString etiqueta, QString icono, QString sql_query = "", bool m_expanded = true, bool m_show_total = true);
+	void menuNavAddSubCat(QString etiqueta, QString icono, QString sql_query = "", QString sql_col = "");
+	void crearMenuNav();
 
-	void NuevoItemTreeWidget(const QHash<QString, QString> datos, QString IDitem, bool nuevo_juego = false);
-	void NuevoItemCopiarImagenes(QHash<QString, QString> datos, QString IDitem, bool nuevo_juego = true);
+	void nuevoEditarDatosDelJuego(stDatosJuego datos, bool isNew);
+	stDatosJuego nuevoItemCopiarImagenes(stDatosJuego datos, QString tabla, bool isNew);
+	
+	void mostrarDatosDelJuego(QString IDitem = "");
+	void itemNext();
+	void itemBack();
 
-	void Config_Dbx(QString IDitem);	// Carga la configuración del DOSBox.
-	void Config_Svm(QString IDitem);	// Carga la configuración del ScummVM.
-	void Config_Vdms(QString IDitem);	// Carga la configuración del VDMSound.
-	void Config_Clear();				// Limpia la configuración para evitar errores.
-
-	void Ejecutar(QString bin, QString parametros = "", QString dirWorking = "");
-
-	bool version_compare(QString ver_old, QString ver_new);	// Compara las versiones
-	void on_CheckUpdateGrl();	// Comprueba si existen actualizaciones.
+	void cargarConfigEmu(QString tipo_emu = "datos");
+	void comprobarEmuloresDisp();
+	void ejecutar(QString bin, QString parametros = "", QString working_dir = "");
 
 private slots:
-	void on_ver_nav(bool mChecked);				//
-	void on_ver_archivos_url(bool mChecked);	// Muestra la pestaña de los Archivos/Url.
-	void on_ver_datos(bool mChecked);			// Muestra la pestaña de la información de los Datos del Juego.
-	void on_ver_capturas(bool mChecked);		// Muestra la lista de Captura del Juego si la posee.
+	void centerIndexPicFlow(const QModelIndex &index);
+	void skipPicFlow(int current);
+	void finishedAnimationPicFlow();
+	void isActivePicFlow(bool checked);
+	void fin_Proceso(int exitCode, QProcess::ExitStatus exitStatus);
+	void error_Proceso(QProcess::ProcessError error);
 
-	void showPopup(const QPoint& aPosition);
-	void on_CoverMode(bool icon_mode);
-	void on_setFavorito();				// Marcamos como Favorito True/False dependiendo del estado.
+// Menú archivo
+	void on_mnu_file_informacion_triggered();
+	void on_mnu_file_cerrar_triggered();
+// Menú editar
+	void on_mnu_edit_nuevo_dosbox_triggered();
+	void on_mnu_edit_nuevo_scummvm_triggered();
+	void on_mnu_edit_nuevo_vdmsound_triggered();
+	void on_mnu_edit_nuevo_triggered();
+	void on_mnu_edit_editar_triggered();
+	void on_mnu_edit_eliminar_triggered();
+	void on_mnu_edit_favorito_triggered(bool checked);
+// Menú ejecutar
+	void on_mnu_ejecutar_dosbox_triggered();
+	void on_mnu_ejecutar_scummvm_triggered();
+	void on_mnu_ejecutar_juego_triggered();
+	void on_mnu_ejecutar_setup_triggered();
+// Menú herramientas
+	void on_mnu_tool_instalar_triggered();
+	void on_mnu_tool_importar_triggered();
+	void on_mnu_tool_exportar_triggered();
+	void on_mnu_tool_opciones_triggered();
+// Menú ver
+	void on_mnu_ver_nav_triggered(bool checked);
+	void on_mnu_ver_cover_mode_triggered(bool checked);
+	void on_mnu_ver_archivos_url_triggered(bool checked);
+	void on_mnu_ver_datos_triggered(bool checked);
+	void on_mnu_ver_pictureflow_triggered(bool checked);
+	void on_mnu_ver_pictureflow_to_center_triggered(bool checked);
+	void on_mnu_ver_capturas_triggered(bool checked);
+	void on_mnu_ver_ordenar_triggered(bool checked);
+	void on_mnu_ver_menubar_triggered(bool checked);
+	void on_mnu_ver_toolbar_triggered(bool checked);
+	void on_mnu_ver_statusbar_triggered(bool checked);
+	void on_mnu_ver_fullscreen_triggered(bool checked);
+	void on_mnu_ver_ayuda_triggered();
+	void on_mnu_ver_check_updates_triggered();
+	void on_mnu_ver_acercad_triggered();
+// Menú ver columnas
+	void on_mnu_ver_col_icono_triggered(bool checked);
+	void on_mnu_ver_col_subtitulo_triggered(bool checked);
+	void on_mnu_ver_col_genero_triggered(bool checked);
+	void on_mnu_ver_col_compania_triggered(bool checked);
+	void on_mnu_ver_col_desarrollador_triggered(bool checked);
+	void on_mnu_ver_col_tema_triggered(bool checked);
+	void on_mnu_ver_col_grupo_triggered(bool checked);
+	void on_mnu_ver_col_perspectiva_triggered(bool checked);
+	void on_mnu_ver_col_idioma_triggered(bool checked);
+	void on_mnu_ver_col_idioma_voces_triggered(bool checked);
+	void on_mnu_ver_col_formato_triggered(bool checked);
+	void on_mnu_ver_col_anno_triggered(bool checked);
+	void on_mnu_ver_col_numdisc_triggered(bool checked);
+	void on_mnu_ver_col_sistemaop_triggered(bool checked);
+	void on_mnu_ver_col_tamano_triggered(bool checked);
+	void on_mnu_ver_col_graficos_triggered(bool checked);
+	void on_mnu_ver_col_sonido_triggered(bool checked);
+	void on_mnu_ver_col_jugabilidad_triggered(bool checked);
+	void on_mnu_ver_col_original_triggered(bool checked);
+	void on_mnu_ver_col_estado_triggered(bool checked);
+	void on_mnu_ver_col_fecha_triggered(bool checked);
+	void on_mnu_ver_col_tipoemu_triggered(bool checked);
+	void on_mnu_ver_col_favorito_triggered(bool checked);
+	void on_mnu_ver_col_rating_triggered(bool checked);
+	void on_mnu_ver_col_edad_triggered(bool checked);
+	void on_mnu_ver_col_usuario_triggered(bool checked);
+// Menú ver carpetas
+	void on_mnu_ver_carpeta_confdbx_triggered();
+	void on_mnu_ver_carpeta_confvdms_triggered();
+	void on_mnu_ver_carpeta_thumbs_triggered();
+	void on_mnu_ver_carpeta_covers_triggered();
+	void on_mnu_ver_carpeta_iconos_triggered();
+	void on_mnu_ver_carpeta_smiles_triggered();
+	void on_mnu_ver_carpeta_themes_triggered();
+	void on_mnu_ver_carpeta_datos_triggered();
+	void on_mnu_ver_carpeta_scripts_triggered();
+	void on_mnu_ver_carpeta_templates_triggered();
+	void on_mnu_ver_carpeta_idiomas_triggered();
+	void on_mnu_ver_carpeta_temp_triggered();
+	void on_mnu_ver_carpeta_home_triggered();
+// Barra de heramientas
+	void on_mnu_file_cerrar_big_triggered();
+	void on_mnu_edit_nuevo_dosbox_big_triggered();
+	void on_mnu_edit_nuevo_scummvm_big_triggered();
+	void on_mnu_edit_nuevo_vdmsound_big_triggered();
+	void on_mnu_ejecutar_juego_big_triggered();
+	void on_mnu_ejecutar_setup_big_triggered();
+	void on_mnu_edit_nuevo_big_triggered();
+	void on_mnu_edit_editar_big_triggered();
+	void on_mnu_edit_eliminar_big_triggered();
+	void on_mnu_tool_importar_big_triggered();
+	void on_mnu_ver_archivos_url_big_triggered(bool checked);
+	void on_mnu_ver_datos_big_triggered(bool checked);
+	void on_mnu_ver_capturas_big_triggered(bool checked);
+	void on_mnu_tool_opciones_big_triggered();
+	void on_mnu_ver_acercad_big_triggered();
+//--
+	void on_txtBuscar_textChanged(const QString &arg1);
+	void on_cbxOrdenBy_activated(int index);
+	void on_cbxOrden_activated(int index);
+	void on_btnOrdenar_clicked();
 
-	void on_twJuegos_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-	void on_twJuegos_clicked(QTreeWidgetItem *twItem);
-	void on_twJuegos_Dblclicked(QTreeWidgetItem *twItem);
+	void on_cbxCategoriasTb_activated(int index);
+	void on_cbxCategorias_activated(int index);
 
-	void on_lwJuegos_clicked(QListWidgetItem *lwItem);
-	void on_lwJuegos_Dblclicked(QListWidgetItem *lwItem);
-
-	void on_twListNav_clicked(QTreeWidgetItem *twItem);
+	void on_twListNav_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twListNav_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
-	void on_twCapturas_Dblclicked(QTreeWidgetItem *twItem);
-	void on_btnVer_CoverFront();		// Muestra la carátula Frontal.
-	void on_btnVer_CoverBack();			// Muestra la carátula Trasera.
-	void on_btnVer_Archivos();			// Muestra la barra de archivos.
+	void grl_picflow_customContextMenuRequested(const QPoint &pos);
 
-	void on_twCapturaVideo_Dblclicked(QTreeWidgetItem *twItem);
-	void on_twCapturaSonido_Dblclicked(QTreeWidgetItem *twItem);
-	void on_twUrls_Dblclicked(QTreeWidgetItem *twItem);
-	void on_twFiles_Dblclicked(QTreeWidgetItem *twItem);
+	void on_lvJuegos_clicked(const QModelIndex &index);
+	void on_lvJuegos_doubleClicked(const QModelIndex &index);
+	void on_lvJuegos_customContextMenuRequested(const QPoint &pos);
+	void on_tvJuegos_clicked(const QModelIndex &index);
+	void on_tvJuegos_doubleClicked(const QModelIndex &index);
+	void on_tvJuegos_customContextMenuRequested(const QPoint &pos);
 
-	void on_txtBuscar_textChanged(const QString &text);
-	void on_Ordenar_Lista();			// Ordena la Lista de Juegos.
+	void on_twCapturas_itemDoubleClicked(QTreeWidgetItem *item, int column);
+	void on_twCapturaVideo_itemDoubleClicked(QTreeWidgetItem *item, int column);
+	void on_twCapturaSonido_itemDoubleClicked(QTreeWidgetItem *item, int column);
+	void on_twUrls_itemDoubleClicked(QTreeWidgetItem *item, int column);
+	void on_twFiles_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
-	void on_Informacion();				// Muestra distinta informacion.
+	void on_btnVer_Archivos_clicked(bool checked);
+	void on_btnVer_CoverFront_clicked();
+	void on_btnVer_CoverBack_clicked();
 
-	void on_AddNewDbx();				// Aade un juego para el DOSBox.
-	void on_AddNewSvm();				// Aade un juego para el scummvm.
-	void on_AddNewVdms();				// Aade un juego para el vdmsound.
+	void on_dockw_Nav_visibilityChanged(bool visible);
+	void on_dockw_Datos_visibilityChanged(bool visible);
+	void on_dockw_PictureFlow_visibilityChanged(bool visible);
+	void on_dockw_FilesUrl_visibilityChanged(bool visible);
 
-	void on_NuevoJuego();				// Aade un juego, solo datos.
-	void on_EditarJuego();				// Edita juego no importa de que tipo sea.
-	void on_EliminarJuego();			// Elimina un juego de la BD y sus Configuración.
-
-	void on_EjecutarDosbox();			// Ejecuta el emulador DOSBox.
-	void on_EjecutarScummVM();			// Ejecuta el emulador ScummVM.
-	void on_EjecutarJuego();			// Ejecuta el juego.
-	void on_EjecutarSetup();			// Ejecuta el Setup o install del juego.
-	void fin_Proceso(int exitCode, QProcess::ExitStatus exitStatus);
-	void fin_ProcesoError(QProcess::ProcessError error);
-
-	void on_InstalarJuego();
-	void on_ImportarJuego();			// Obtiene los datos de juego de forma externa.
-	void on_ExportarJuego();			// Exporta los datos de juego para ser usados en otro equipo o lanzador.
-	void on_ReconstruirTodasCaratulas(bool db_cargada = true);
-	void on_ReconstruirCaratula();
-
-	void on_Opciones();					// Accede a las Opciones del GR-lida.
-	void on_BuscarUpdates();			// Menú para comprobar si existen actualizaciones.
-	void on_AcercaD();					// Acerca del GR-lida.
-	void on_VerRating(bool visible);	// Muestra/Oculta el Rating de la Lista.
-	void on_VerCompania(bool visible);	// Muestra/Oculta la Compañia de la Lista.
-	void on_VerAnno(bool visible);		// Muestra/Oculta el Año de la Lista.
-
-	void on_VerCarpeta_confdbx();		// Muestra la carpeta confdbx.
-	void on_VerCarpeta_confvdms();		// Muestra la carpeta confvdms.
-	void on_VerCarpeta_thumbs();		// Muestra la carpeta thumbs.
-	void on_VerCarpeta_covers();		// Muestra la carpeta covers.
-	void on_VerCarpeta_iconos();		// Muestra la carpeta iconos.
-	void on_VerCarpeta_smiles();		// Muestra la carpeta smiles.
-	void on_VerCarpeta_themes();		// Muestra la carpeta themes.
-	void on_VerCarpeta_datos();			// Muestra la carpeta datos.
-	void on_VerCarpeta_scripts();		// Muestra la carpeta scripts.
-	void on_VerCarpeta_templates();		// Muestra la carpeta templates.
-	void on_VerCarpeta_idiomas();		// Muestra la carpeta idiomas.
-	void on_VerCarpeta_temp();			// Muestra la carpeta temp.
-	void on_VerCarpeta_home();			// Muestra la carpeta principal.
-
-	void isCheckUpdateFinished();		// Comprueba la versión.
 };
 
 #endif // GRLIDA_H

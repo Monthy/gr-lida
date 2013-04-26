@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -29,17 +29,18 @@
 
 #include "funciones.h"
 #include "doc_pdf_widget.h"
-#include "ui_pdf_viewer.h"
 
-class PdfViewer : public QMainWindow
+namespace Ui {
+    class frmPdfViewer;
+}
+
+class frmPdfViewer : public QMainWindow
 {
     Q_OBJECT
 
 public:
-	PdfViewer(QWidget *parent = 0, Qt::WFlags flags = 0);
-	~PdfViewer();
-
-	Ui::PdfViewerClass ui;
+	explicit frmPdfViewer(QWidget *parent = 0);
+	~frmPdfViewer();
 
 	void openPdf(QString fileName);
 
@@ -47,30 +48,36 @@ protected:
 	void closeEvent( QCloseEvent *e );
 
 private:
-	Funciones fGrl;
+	Ui::frmPdfViewer *ui;
+
+	Funciones *fGrl;
+
+	stGrlDir grlDir;
 
 	QString lastPath, stHomeDir, stTheme;
 	int id_scale;
 	DocPdfWidget *doc_pdf_widget;
     QVector<qreal> scaleFactors;
 
-	void CargarConfig();
-	void createConnections();
+	void cargarConfig();
 	void setTheme();
 
 private slots:
-	void open();
-	void buscarTexto();
-	void cambiarPagina(int id_pagina);
-	void scaleDocument(int index);
-	void checkSearchText(const QString &text);
 	void showSelectedText(const QString &text);
-	void on_btn_TextSelect(bool estado);
-	void on_btn_PaginaBack();
-	void on_btn_PaginaNext();
-	void on_btn_ZoomIn();
-	void on_btn_ZoomOut();
-	void on_btn_ZoomNormal();
+	void on_btn_Salir_clicked();
+	void on_btn_Abrir_clicked();
+	void on_btn_TextSelect_toggled(bool checked);
+	void on_btn_PaginaBack_clicked();
+	void on_btn_PaginaNext_clicked();
+	void on_spinPagina_valueChanged(int arg1);
+	void on_txtBuscar_editingFinished();
+	void on_txtBuscar_textChanged(const QString &arg1);
+	void on_btn_Buscar_clicked();
+	void on_btn_Limpiar_clicked();
+	void on_btn_ZoomIn_clicked();
+	void on_btn_ZoomOut_clicked();
+	void on_cbxZoom_activated(int index);
+	void on_btn_ZoomNormal_clicked();
 
 };
 

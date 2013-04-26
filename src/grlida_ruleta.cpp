@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -23,85 +23,67 @@
 **/
 
 #include "grlida_ruleta.h"
+#include "ui_ruleta.h"
 
-frmRuleta::frmRuleta(QWidget *parent, Qt::WFlags flags)
-	: QMainWindow(parent, flags)
+frmRuleta::frmRuleta(stGrlCfg m_cfg, QWidget *parent) :
+	QDialog(parent),
+	ui(new Ui::frmRuleta)
 {
-	ui.setupUi(this);
+	ui->setupUi(this);
+	fGrl = new Funciones;
 
-	stHomeDir = fGrl.GRlidaHomePath();
-	stTheme   = fGrl.ThemeGrl();
+	grlCfg = m_cfg;
+
+	grlDir.Home = fGrl->GRlidaHomePath();
+	grlDir.Temp = grlDir.Home +"temp/";
+
 	setTheme();
-	scaleFactor = 1;
-
-	connect(ui.actionSalir     , SIGNAL(clicked()), this, SLOT( close()      ));
-	connect(ui.actionInfo      , SIGNAL(clicked()), this, SLOT( InfoRulea()  ));
-	connect(ui.actionZoomIn    , SIGNAL(clicked()), this, SLOT( zoomIn()     ));
-	connect(ui.actionZoomOut   , SIGNAL(clicked()), this, SLOT( zoomOut()    ));
-	connect(ui.actionSizeNormal, SIGNAL(clicked()), this, SLOT( normalSize() ));
-
-	connect(ui.rotarA, SIGNAL(valueChanged(int)), this, SLOT(imgRotarA(int)));
-	connect(ui.rotarB, SIGNAL(valueChanged(int)), this, SLOT(imgRotarB(int)));
-	connect(ui.rotarC, SIGNAL(valueChanged(int)), this, SLOT(imgRotarC(int)));
-
-	QSettings settings( stHomeDir+"GR-lida.conf", QSettings::IniFormat );
-	settings.beginGroup("OpcFuente");
-		if( settings.value("font_usar", false).toBool() )
-			setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+settings.value("font_family","Tahoma").toString()+"\";font-size:"+settings.value("font_size","8").toString()+"pt;}");
-	settings.endGroup();
 
 // centra la aplicacion en el escritorio
-	QDesktopWidget *desktop = qApp->desktop();
-	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
-	int left = ( rect.width() - width() ) / 2;
-	int top = ( rect.height() - height() ) / 2;
-	setGeometry( left, top, width(), height() );
+	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
 frmRuleta::~frmRuleta()
 {
-	//
+	delete fGrl;
+	delete ui;
 }
 
 void frmRuleta::setTheme()
 {
-	setStyleSheet( fGrl.StyleSheet() );
-	setWindowIcon( QIcon(stTheme+"img16/ruleta.png") );
+	setWindowIcon( QIcon(fGrl->Theme() +"img16/ruleta.png") );
 
-	ui.actionSalir->setIcon(QIcon(stTheme+"img16/cerrar.png"));
-	ui.actionZoomIn->setIcon(QIcon(stTheme+"img16/zoom_in.png"));
-	ui.actionZoomOut->setIcon(QIcon(stTheme+"img16/zoom_out.png"));
-	ui.actionSizeNormal->setIcon(QIcon(stTheme+"img16/zoom.png"));
+	ui->actionSalir->setIcon( QIcon(fGrl->Theme() +"img16/cerrar.png") );
+	ui->actionInfo->setIcon( QIcon(fGrl->Theme() +"img16/informacion.png") );
+	ui->actionZoomIn->setIcon( QIcon(fGrl->Theme() +"img16/zoom_in.png") );
+	ui->actionZoomOut->setIcon( QIcon(fGrl->Theme() +"img16/zoom_out.png") );
+	ui->actionSizeNormal->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
 }
 
-void frmRuleta::CargarRuleta(QString filename)
+void frmRuleta::cargarRuleta(QString filename)
 {
+	scaleFactor = 1;
 	isZip = false;
 
-	QFileInfo tipofile;
-
-	tipofile.setFile(filename);
-
-	QString ruleta_conf;
-	if(tipofile.completeSuffix().toLower() == "zip")
+	stFileInfo f_info = fGrl->getInfoFile(filename);
+	if( f_info.Ext.toLower() == ".zip" )
 	{
 		isZip = true;
 		zip.abrirZip(filename);
 
 		QStringList listzip = zip.listaZip();
 		QRegExp rx("([^\"<>]*).conf");
-		ruleta_conf = listzip.value(listzip.indexOf(rx, 0));
+		QString ruleta_conf = listzip.value(listzip.indexOf(rx, 0));
 
-		QFile data(stHomeDir+"/temp/conf_ruleta.ini");
+		QFile data(grlDir.Temp +"conf_ruleta.ini");
 		if( data.open(QFile::WriteOnly | QFile::Truncate) )
 		{
 			QTextStream out(&data);
-		//	out.setCodec("UTF-8");
 			out << zip.loadTexto(ruleta_conf);
 			out.flush();
 		}
 
-		filename = stHomeDir+"/temp/conf_ruleta.ini";
+		filename = grlDir.Temp +"conf_ruleta.ini";
 	} else
 		isZip = false;
 
@@ -110,70 +92,92 @@ void frmRuleta::CargarRuleta(QString filename)
 	QSettings settings(filename, QSettings::IniFormat);
 	config.clear();
 
+	emit on_actionInfo_clicked(false);
+//	ui->frameInfo->setFixedHeight(216);
+
 	settings.beginGroup("info");
 		config["info_title"]       = settings.value("title", "").toString();
 		config["info_autor"]       = settings.value("autor", "").toString();
-		config["info_url"]         = settings.value("url", "").toString();
+		config["info_url"]         = settings.value("url"  , "").toString();
 		config["info_description"] = settings.value("description", "").toString();
+		config["info_type"]        = settings.value("type", "").toString();
 	settings.endGroup();
+
+	ui->txtInfo->setHtml("<b>"+ tr("Título del juego") +":</b> "+ config["info_title"] +"<br>"
+								"<b>"+ tr("Autor") +":</b> "+ config["info_autor"] +"<br>"
+								"<b>"+ tr("Url") +":</b> <a href=\""+ config["info_url"] +"\">"+ config["info_url"] +"</a><br>"
+								"<b>"+ tr("Descipción") +":</b><br>"+ config["info_description"] +"<br>");
 
 	settings.beginGroup("lienzo");
-		scene_width  = settings.value("scene_width" , "").toInt();
-		scene_height = settings.value("scene_height", "").toInt();
+		scene_width  = settings.value("scene_width" , 500).toInt();
+		scene_height = settings.value("scene_height", 500).toInt();
 		config["lienzo_fondo"] = settings.value("bg_image", "").toString();
-		QStringList bgcolor = settings.value("bg_color", "").toStringList();
+		QStringList bgcolor    = settings.value("bg_color", "").toStringList();
 	settings.endGroup();
 
-	settings.beginGroup("ruletas");
-		config["ruleta_dir"]  = settings.value("ruleta_dir" , "").toString();
-		for(int i = 0; i < num_ruletas; i++)
-		{
-			config.insert("ruleta_"+fGrl.IntToStr(i)        , settings.value("ruleta_"+fGrl.IntToStr(i)        ,"").toString() );
-			config.insert("ruleta_"+fGrl.IntToStr(i)+"_mask", settings.value("ruleta_"+fGrl.IntToStr(i)+"_mask","").toString() );
-		}
-	settings.endGroup();
+	if( config["info_type"] == "ruletas" || config["info_type"].isEmpty() )
+	{
+		settings.beginGroup("ruletas");
+			config["img_dir"] = settings.value("ruleta_dir", "").toString();
+			for(int i = 0; i < num_ruletas; ++i)
+			{
+				config.insert("ruleta_"+ fGrl->IntToStr(i), settings.value("ruleta_"+ fGrl->IntToStr(i), "").toString() );
+				config.insert("ruleta_"+ fGrl->IntToStr(i) +"_mask", settings.value("ruleta_"+ fGrl->IntToStr(i) +"_mask", "").toString() );
+			}
+		settings.endGroup();
+		ui->ruleta_Cartas->setVisible(false);
+	}
 
-	ui.rotarA->setEnabled(!config["ruleta_1"].isEmpty());
-	ui.rotarB->setEnabled(!config["ruleta_2"].isEmpty());
-	ui.rotarC->setEnabled(!config["ruleta_3"].isEmpty());
+	if( config["info_type"] == "cartas_aitd2" )
+	{
+		ui->cbxCartaTop->clear();
+		ui->cbxCartaBot->clear();
+		settings.beginGroup("cartas_aitd2");
+			config["img_dir"] = settings.value("carta_dir", "").toString();
+			for(int i = 0; i < 12; ++i)
+			{
+				ui->cbxCartaTop->addItem(QIcon(":/img16/sinimg.png"), settings.value("titulo_"+ fGrl->IntToStr(i), "Carta "+ fGrl->IntToStr(i) ).toString(), settings.value("carta_"+ fGrl->IntToStr(i), "").toString());
+				ui->cbxCartaBot->addItem(QIcon(":/img16/sinimg.png"), settings.value("titulo_"+ fGrl->IntToStr(i), "Carta "+ fGrl->IntToStr(i) ).toString(), settings.value("carta_"+ fGrl->IntToStr(i), "").toString());
+			}
+		settings.endGroup();
+		ui->ruleta_Cartas->setVisible(true);
+	}
 
-	ui.rotarA->setVisible(!config["ruleta_1"].isEmpty());
-	ui.rotarB->setVisible(!config["ruleta_2"].isEmpty());
-	ui.rotarC->setVisible(!config["ruleta_3"].isEmpty());
-
-	ui.label->setVisible(!config["ruleta_1"].isEmpty());
-	ui.label_2->setVisible(!config["ruleta_2"].isEmpty());
-	ui.label_3->setVisible(!config["ruleta_3"].isEmpty());
+	ui->ruleta_A->setVisible(!config["ruleta_1"].isEmpty());
+	ui->ruleta_B->setVisible(!config["ruleta_2"].isEmpty());
+	ui->ruleta_C->setVisible(!config["ruleta_3"].isEmpty());
+	ui->ruleta_D->setVisible(!config["ruleta_4"].isEmpty());
 
 	scene = new QGraphicsScene;
 	scene->setSceneRect(0, 0, scene_width, scene_height);
 
-	setWindowTitle(config["info_title"]);
+	setWindowTitle(tr("Protección") +": "+ config["info_title"]);
+	ui->lb_info_titulo->setText(config["info_title"]);
 
-	if( bgcolor.count() > -1 )
-		scene->setBackgroundBrush(QBrush(QColor(bgcolor.value(0).toInt(),bgcolor.value(0).toInt(),bgcolor.value(0).toInt())));
+	if( bgcolor.count() > -1 && bgcolor.count() == 3)
+		scene->setBackgroundBrush(QBrush(QColor(bgcolor.at(0).toInt(), bgcolor.at(1).toInt(), bgcolor.at(2).toInt())));
 	else
 		scene->setBackgroundBrush(QBrush(QPalette::Dark));
 
-	if( isZip )
-		stDir = "";
-	else {
-		QFileInfo fileInfo(filename);
-		stDir = fileInfo.absolutePath();
+	stDir = "";
+	if( !isZip )
+	{
+		f_info = fGrl->getInfoFile(filename);
+		stDir = f_info.Path;
 
 		if( !stDir.endsWith("/") )
 			stDir.append("/");
 	}
 
-	if( config["ruleta_dir"]!="" && !config["ruleta_dir"].endsWith("/") )
-		config["ruleta_dir"].append("/");
+	if( !config["img_dir"].isEmpty() && !config["img_dir"].endsWith("/") )
+		config["img_dir"].append("/");
 
-	if(config["lienzo_fondo"] != "" )
+	if( !config["lienzo_fondo"].isEmpty() )
 	{
 		if( isZip )
-			imgBackground = zip.loadImagen(config["ruleta_dir"] + config["lienzo_fondo"]);
+			imgBackground = zip.loadImagen(config["img_dir"] + config["lienzo_fondo"]);
 		else
-			imgBackground.load( stDir + config["ruleta_dir"] + config["lienzo_fondo"] );
+			imgBackground.load( stDir + config["img_dir"] + config["lienzo_fondo"] );
 	} else
 		imgBackground.load(":/img16/sinimg.png");
 
@@ -181,90 +185,75 @@ void frmRuleta::CargarRuleta(QString filename)
 	listCapas.clear();
 	listItems.clear();
 	scene->clear();
-	for(int i = 0; i < num_ruletas; i++)
+
+	if( config["info_type"] == "ruletas" || config["info_type"].isEmpty() )
 	{
-		if( config["ruleta_"+fGrl.IntToStr(i)] == "" )
-			str = ":/img16/sinimg.png";
-		else
-			str = stDir + config["ruleta_dir"] + config["ruleta_"+fGrl.IntToStr(i)];
+		for(int i = 0; i < num_ruletas; ++i)
+		{
+			if( !config["ruleta_"+ fGrl->IntToStr(i)].isEmpty() )
+				str = stDir + config["img_dir"] + config["ruleta_"+ fGrl->IntToStr(i)];
+			else
+				str = "";
 
-		if( config["ruleta_"+fGrl.IntToStr(i)+"_mask"] == "" )
-			strm = ":/img16/sinimg.png";
-		else
-			strm = stDir + config["ruleta_dir"] + config["ruleta_"+fGrl.IntToStr(i)+"_mask"];
+			if( !config["ruleta_"+ fGrl->IntToStr(i) +"_mask"].isEmpty() )
+				strm = stDir + config["img_dir"] + config["ruleta_"+ fGrl->IntToStr(i) +"_mask"];
+			else
+				strm = "";
 
-		imgItemAddScene(str, strm, i, isZip);
+			imgItemAddScene(str, strm, i);
+		}
 	}
 
-	ui.gvRuleta->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-	ui.gvRuleta->setBackgroundBrush( imgBackground );
-	ui.gvRuleta->setCacheMode(QGraphicsView::CacheBackground);
-	ui.gvRuleta->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);//QGraphicsView::BoundingRectViewportUpdate
-	ui.gvRuleta->setDragMode(QGraphicsView::ScrollHandDrag);
-	ui.gvRuleta->setScene(scene);
-}
-
-void frmRuleta::InfoRulea()
-{
-	fGrl.VentanaInfo(tr("Información"),stTheme+"img16/informacion.png",400,280,
-		"<b>"+tr("Titulo del juego")+":</b> "+config["info_title"]+"<br>"
-		"<b>"+tr("Autor")+":</b> "+config["info_autor"]+"<br>"
-		"<b>"+tr("Url")+":</b> <a href=\""+config["info_url"]+"\">"+config["info_url"]+"</a><br>"
-		"<b>"+tr("Descipción")+":</b><br>"+config["info_description"]+"<br>");
-}
-
-void frmRuleta::zoomIn()
-{
-	scaleFactor = 1.25;
-	ui.gvRuleta->scale(scaleFactor,scaleFactor);
-}
-
-void frmRuleta::zoomOut()
-{
-	scaleFactor = 0.80;
-	ui.gvRuleta->scale(scaleFactor,scaleFactor);
-}
-
-void frmRuleta::normalSize()
-{
-	scaleFactor  = 1.0;
-	double newScale = scaleFactor;
-	QMatrix oldMatrix = ui.gvRuleta->matrix();
-	ui.gvRuleta->resetMatrix();
-	ui.gvRuleta->translate(oldMatrix.dx(), oldMatrix.dy());
-	ui.gvRuleta->scale(newScale, newScale);
-}
-
-void frmRuleta::imgRotarA(int r)
-{
-	imgItemRotar(listItems.value(1), r);
-}
-
-void frmRuleta::imgRotarB(int r)
-{
-	imgItemRotar(listItems.value(2), r);
-}
-
-void frmRuleta::imgRotarC(int r)
-{
-	imgItemRotar(listItems.value(3), r);
-}
-
-void frmRuleta::imgItemAddScene(QString capa, QString capa_mask, int id, bool is_Zip)
-{
-	QPixmap tmp_capa;
-	QBitmap tmp_mask;
-	if( is_Zip )
+	if( config["info_type"] == "cartas_aitd2" )
 	{
-		tmp_mask = zip.loadImagenBitmap(capa_mask);
-		tmp_capa = zip.loadImagen(capa);
+		for(int i = 0; i < 2; ++i)
+		{
+			if( !config["carta_"+ fGrl->IntToStr(i)].isEmpty() )
+				str = stDir + config["img_dir"] + config["carta_"+ fGrl->IntToStr(i)];
+			else
+				str = "";
+
+			imgItemAddScene(str, "", i);
+		}
+		emit on_cbxCartaTop_activated(0);
+		emit on_cbxCartaBot_activated(0);
+	}
+
+	ui->gvRuleta->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+	ui->gvRuleta->setBackgroundBrush( imgBackground );
+	ui->gvRuleta->setCacheMode(QGraphicsView::CacheBackground);
+	ui->gvRuleta->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);//QGraphicsView::BoundingRectViewportUpdate
+	ui->gvRuleta->setDragMode(QGraphicsView::ScrollHandDrag);
+	ui->gvRuleta->setScene(scene);
+}
+
+void frmRuleta::imgItemAddScene(QString f_capa, QString f_capa_mask, int id)
+{
+	QPixmap capa;
+	QBitmap mask;
+
+	if( f_capa.isEmpty() )
+		capa.load(":/img16/sinimg.png");
+	else {
+		if( isZip )
+			capa = zip.loadImagen(f_capa);
+		else
+			capa.load(f_capa);
+	}
+
+	if( f_capa_mask.isEmpty() )
+	{
+		mask.load(":/img16/sinimg.png");
+		capa.setMask( mask.scaled(capa.width(), capa.height()) );
 	} else {
-		tmp_mask.load(capa_mask);
-		tmp_capa.load(capa);
+		if( isZip )
+			mask = zip.loadImagenBitmap(f_capa_mask);
+		else
+			mask.load(f_capa_mask);
+		capa.setMask( mask );
 	}
-	tmp_capa.setMask( tmp_mask );
 
-	listCapas.insert(id, tmp_capa);
+	listCapas.insert(id, capa);
 	listItems.insert(id, new QGraphicsPixmapItem(listCapas.value(id)));
 	listItems.value(id)->setZValue(id);
 
@@ -280,16 +269,104 @@ void frmRuleta::imgItemCentrar(QGraphicsScene *scena, QGraphicsPixmapItem *imgIt
 
 	pos_x = (scena->width()/2)-(imgItem->pixmap().width()/2);
 	pos_y = (scena->height()/2)-(imgItem->pixmap().height()/2);
-	imgItem->setPos(pos_x,pos_y);
+	imgItem->setPos(pos_x, pos_y);
 }
 
 void frmRuleta::imgItemRotar(QGraphicsPixmapItem *imgItem, int r)
 {
 	int pos_x = 0, pos_y = 0;
-//	pos_x = scene->width()/2;
-//	pos_y = scene->height()/2;
 	pos_x = imgItem->pixmap().width() / 2;
 	pos_y = imgItem->pixmap().height() / 2;
 
 	imgItem->setTransform(QTransform().translate(pos_x, pos_y).rotate(r).translate(-pos_x, -pos_y));
+}
+
+void frmRuleta::on_actionSalir_clicked()
+{
+	close();
+}
+
+void frmRuleta::on_actionInfo_clicked(bool checked)
+{
+	ui->frameInfo->setVisible(checked);
+}
+
+void frmRuleta::on_btnCerrarInfo_clicked(bool checked)
+{
+	ui->actionInfo->setChecked(checked);
+	ui->frameInfo->setVisible(checked);
+}
+
+void frmRuleta::on_actionZoomIn_clicked()
+{
+	scaleFactor = 1.25;
+	ui->gvRuleta->scale(scaleFactor, scaleFactor);
+}
+
+void frmRuleta::on_actionZoomOut_clicked()
+{
+	scaleFactor = 0.80;
+	ui->gvRuleta->scale(scaleFactor, scaleFactor);
+}
+
+void frmRuleta::on_actionSizeNormal_clicked()
+{
+	scaleFactor = 1.0;
+	double newScale = scaleFactor;
+	QMatrix oldMatrix = ui->gvRuleta->matrix();
+	ui->gvRuleta->resetMatrix();
+	ui->gvRuleta->translate(oldMatrix.dx(), oldMatrix.dy());
+	ui->gvRuleta->scale(newScale, newScale);
+}
+
+void frmRuleta::on_slider_A_valueChanged(int value)
+{
+	imgItemRotar(listItems.value(1), value);
+}
+
+void frmRuleta::on_slider_B_valueChanged(int value)
+{
+	imgItemRotar(listItems.value(2), value);
+}
+
+void frmRuleta::on_slider_C_valueChanged(int value)
+{
+	imgItemRotar(listItems.value(3), value);
+}
+
+void frmRuleta::on_slider_D_valueChanged(int value)
+{
+	imgItemRotar(listItems.value(4), value);
+}
+
+void frmRuleta::on_cbxCartaTop_activated(int index)
+{
+	if( index > -1 )
+	{
+		QPixmap capa;
+		if( isZip )
+			capa = zip.loadImagen(stDir + config["img_dir"] + ui->cbxCartaTop->itemData(index).toString());
+		else
+			capa.load(stDir + config["img_dir"] + ui->cbxCartaTop->itemData(index).toString());
+
+		listItems.value(1)->setPixmap(capa);
+		imgItemCentrar(scene, listItems.value(1));
+		imgItemRotar(listItems.value(1), 0);
+	}
+}
+
+void frmRuleta::on_cbxCartaBot_activated(int index)
+{
+	if( index > -1 )
+	{
+		QPixmap capa;
+		if( isZip )
+			capa = zip.loadImagen(stDir + config["img_dir"] + ui->cbxCartaBot->itemData(index).toString());
+		else
+			capa.load(stDir + config["img_dir"] + ui->cbxCartaBot->itemData(index).toString());
+
+		listItems.value(0)->setPixmap(capa);
+		imgItemCentrar(scene, listItems.value(0));
+		imgItemRotar(listItems.value(0), 0);
+	}
 }

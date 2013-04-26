@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -26,115 +26,146 @@
 
 Funciones::Funciones()
 {
-	stTheme  = ThemeGrl();
-
+	stDirApp    = GRlidaHomePath();
+	stTheme     = Theme();
+	stThemeApp  = ThemeApp();
+	stLngSelect = Idioma();
 }
 
-Funciones::~Funciones(){}
-
-// Muestra el Nombre de la plataforma donde esta compilada
-QString Funciones::get_Plataforma()
+Funciones::~Funciones()
 {
-	QString plataforma;
-	#ifdef Q_OS_WIN32
-		plataforma = "Windows";
-	#endif
-	#ifdef Q_OS_MAC
-		plataforma = "Mac";
-	#endif
-	#ifdef Q_OS_BSD4
-		plataforma = "BSD 4.4";
-	#endif
-	#ifdef Q_OS_BSDI
-		plataforma = "BSD/OS";
-	#endif
-	#ifdef Q_OS_FREEBSD
-		plataforma = "FreeBSD";
-	#endif
-	#ifdef Q_OS_LINUX
-		plataforma = "Linux";
-	#endif
-	#ifdef Q_OS_LYNX
-		plataforma = "LynxOS";
-	#endif
-	#ifdef Q_OS_MSDOS
-		plataforma = "MS-DOS and Windows";
-	#endif
-	#ifdef Q_OS_NETBSD
-		plataforma = "NetBSD";
-	#endif
-	#ifdef Q_OS_OS2
-		plataforma = "OS/2";
-	#endif
-	#ifdef Q_OS_OPENBSD
-		plataforma = "OpenBSD";
-	#endif
-	#ifdef Q_OS_SOLARIS
-		plataforma = "Sun Solaris";
-	#endif
-//	#ifdef Q_OS_UNIX
-//		plataforma = "UNIX BSD/SYSV";
-//	#endif
-
-	return plataforma;
+	//
 }
 
-// Crea una copia de seguridad de la Base de Datos
-void Funciones::CrearCopiaSeguridad_DB(QString dir, QString Version_GRL)
+// Compara distintas version y devuelve True si es nueva o mayor
+bool Funciones::version_compare(QString ver_old, QString ver_new)
 {
-	if( Version_GRL != stVersionGrl() && Version_GRL < stVersionGrl() )
+	QStringList v_old, v_new;
+	v_old = ver_old.split(".");
+	v_new = ver_new.split(".");
+
+	if( v_old.size() < 3 )
 	{
-		if( QFile::exists(dir +"db_grl_v"+ Version_GRL +"_backup.grl") )
-			QFile::copy( dir +"db_grl.grl", dir +"db_grl_v"+ Version_GRL +"_"+HoraFechaActual("ddMMyyyy_HHmmss")+"_backup.grl");
-		else
-			QFile::copy( dir +"db_grl.grl", dir +"db_grl_v"+ Version_GRL +"_backup.grl");
+		int num = 3 - v_old.size();
+		for(int i = 0; i < num; ++i)
+			v_old.insert(i, "0");
+		ver_old = v_old.join(".");
+	}
+
+	if( v_new.size() < 3 )
+	{
+		int num = 3 - v_new.size();
+		for(int i = 0; i < num; ++i)
+			v_new.insert(i, "0");
+		ver_new = v_new.join(".");
+	}
+
+	if( v_new.at(0).toInt() > v_old.at(0).toInt() )
+		return true;
+	else // Major ver are =
+	{
+		if( v_new.at(1).toInt() > v_old.at(1).toInt() )
+			return true;
+		else // Minor ver are =
+		{
+			if( v_new.at(2).toInt() > v_old.at(2).toInt() )
+				return true;
+			else
+				return false;
+		}
 	}
 }
 
-// Convierte de Número a Texto
+// Crea una copia de seguridad de la base de datos
+void Funciones::crearCopiaSeguridad_DB(QString dir, QString version_grl)
+{
+	if( version_compare(version_grl, versionGrl()) )
+	{
+		if( QFile::exists(dir +"db_grl_v"+ version_grl +"_backup.grl") )
+			QFile::copy(dir +"db_grl.grl", dir +"db_grl_v"+ version_grl +"_"+ HoraFechaActual(getTime(), "ddMMyyyy_HHmmss") +"_backup.grl");
+		else
+			QFile::copy(dir +"db_grl.grl", dir +"db_grl_v"+ version_grl +"_backup.grl");
+	}
+}
+
+// Convierte de número a texto
 QString Funciones::IntToStr(int num)
 {
-	QString temp;
-	return temp.setNum(num);
+	return QVariant(num).toString();
 }
 
-// Convierte de Texto a Número
-int Funciones::StrToInt(QString text)
+// Convierte de texto a número
+int Funciones::StrToInt(QString str)
 {
-	return text.toInt();
+	return str.toInt();
 }
 
-// Convierte Texto "true", "yes", "1" a tipo Bool
-bool Funciones::StrToBool(QString text)
+// Convierte texto "true", "yes", "1" a tipo bool
+bool Funciones::StrToBool(QString str)
 {
-	QString str = text.toLower();
-	if( str == "true" || str == "yes" || str == "1" )
+	QString value = str.toLower();
+	if( value == "true" || value == "yes" || value == "1" )
 		return true;
 	else
 		return false;
 }
 
-// Convierte Bool a Texto "true", "yes" indicando el tipo
+// Convierte bool a texto "true", "yes" indicando el tipo
 QString Funciones::BoolToStr(bool estado, bool type_yes)
 {
 	if( estado )
-	{
-		if(type_yes)
-			return "yes";
-		else
-			return "true";
-	} else {
-		if(type_yes)
-			return "no";
-		else
-			return "false";
-	}
+		return type_yes ? "yes": "true";
+	else
+		return type_yes ? "no": "false";
 }
 
-// Devuelve la hora y la fecha actual
-QString Funciones::HoraFechaActual(QString formato)
+// Convierte bytes
+QString Funciones::covertir_bytes(float size)
 {
-	QDateTime dt = QDateTime::currentDateTime();
+	QStringList list;
+	list << "KB" << "MB" << "GB" << "TB";
+	QStringListIterator i(list);
+	QString unidad("bytes");
+
+	while( size >= 1024.0 && i.hasNext() )
+	{
+		unidad = i.next();
+		size /= 1024.0;
+	}
+
+	return QString().setNum(size, 'f', 2) +" "+ unidad;
+}
+
+// Convierte la lista de un QListWidget a QStringList
+QStringList Funciones::lwToStrList(QListWidget *lwlist)
+{
+	QStringList list;
+	const int listSize = lwlist->count();
+	for (int i = 0; i < listSize; ++i)
+		list.insert(i, lwlist->item(i)->text());
+
+	return list;
+}
+
+// Devuelve el tiempo actual, formato unix
+QString Funciones::getTime()
+{
+	uint secs = QDateTime::currentDateTime().toTime_t();
+	return IntToStr(secs);
+}
+
+// Convierte fecha 'dd/MM/yyyy HH:mm:ss' a formato unix
+QString Funciones::setTime(QString fecha, QString formato)
+{
+	uint secs = QDateTime::fromString(fecha, formato).toTime_t();
+	return IntToStr(secs);
+}
+
+// Devuelve la hora y la fecha
+QString Funciones::HoraFechaActual(QString fecha, QString formato)
+{
+	QDateTime dt;
+	dt.setTime_t( fecha.toInt() );
 
 	if( formato.isEmpty() )
 		return dt.toString("dd/MM/yyyy HH:mm:ss");
@@ -142,33 +173,36 @@ QString Funciones::HoraFechaActual(QString formato)
 		return dt.toString( formato );
 }
 
-// Devuelve una URL correcta
-QString Funciones::url_correcta(QString url)
+// Devuelve una la forma correcta
+QString Funciones::str_correcto(QString str, QString str_ini, QString str_end)
 {
-	if( !url.isEmpty() )
+	if( !str_ini.isEmpty() )
 	{
-		bool url_ok,  s_url_ok;
+		if( !str.startsWith(str_ini, Qt::CaseInsensitive) )
+			str.prepend(str_ini);
+	}
 
-		s_url_ok = url.startsWith("https://");
+	if( !str_end.isEmpty() )
+	{
+		if( !str.endsWith(str_end, Qt::CaseInsensitive) )
+			str.append(str_end);
+	}
 
-		if( !s_url_ok )
-		{
-			url_ok = url.startsWith("http://");
-			if( url_ok == false )
-				url.prepend("http://");
-		}
+	return str;
+}
 
-		url_ok = url.endsWith("/");
-		if( url_ok == false )
-			url.append("/");
+QString Funciones::str_start(QString str, QString str_ini)
+{
+	return str_correcto(str, str_ini, "");
+}
 
-		return url;
-	} else
-		return "";
+QString Funciones::str_end(QString str, QString str_end)
+{
+	return str_correcto(str, "", str_end);
 }
 
 // Elimina caracteres no permitidos por windows por ejemplo
-QString Funciones::eliminar_caracteres(QString str)
+QString Funciones::eliminar_caracteres(QString str, QString cambiar, QString sep)
 {
 	if( str.isEmpty() )
 		return "";
@@ -185,555 +219,798 @@ QString Funciones::eliminar_caracteres(QString str)
 		str.replace("|" , "" );
 		str.replace("." , "" );
 
+		if( !cambiar.isEmpty() )
+		{
+			QStringList lista = cambiar.split(sep, QString::SkipEmptyParts);
+			const int listSize = lista.size();
+			for (int i = 0; i < listSize; ++i)
+				str.replace(lista.at(i), "");
+		}
+
 		return str;
 	}
 }
 
-// Obtiene la extension del archivo
-QString Funciones::getExtension(QString str)
+// Devuelve si el archivos admiten traducción
+QString Funciones::getArchivoIsLng(QString archivo)
 {
-	QFileInfo f_info( str );
-	return "."+ f_info.completeSuffix();
+	QStringList lista;
+	lista << "edad_recomendada.txt" << "formatos.txt" << "generos.txt" << "idiomas.txt";
+	lista << "numdisc.txt" << "perspectivas.txt" << "svm_idioma.txt" << "temas.txt";
+
+	if( lista.contains(archivo) )
+	{
+		if( stLngSelect.isEmpty() )
+			stLngSelect = Idioma();
+
+		return stLngSelect +"/";
+	} else
+		return "";
 }
 
-// Obtiene la ruta del archivo
-QString Funciones::getFilePath(QString str)
+// Devuelve si el archivos es de 3 columnas
+bool Funciones::getArchivoIs3Col(QString archivo)
 {
-	QFileInfo f_info( str );
-	if( f_info.absolutePath().endsWith("/") || f_info.absolutePath().endsWith("\\") )
-		return QDir::toNativeSeparators( f_info.absolutePath() );
+	QStringList lista;
+	lista << "dbx_scaler.txt" << "dbx_sbtype.txt" << "dbx_sb_oplmode.txt" << "dbx_output.txt" << "dbx_machine.txt";
+	lista << "dbx_joystick.txt" << "dbx_cpu_type.txt" << "dbx_cpu_core.txt" << "svm_render_mode.txt" << "svm_platform.txt";
+	lista << "svm_music_driver.txt" << "svm_gfxmode.txt" << "edad_recomendada.txt";// << "dbx_keyboardlayout.txt";
+	lista << "svm_idioma.txt" << "idiomas.txt"  << "grupos.txt";
+
+	if( lista.contains(archivo) )
+		return true;
 	else
-		return QDir::toNativeSeparators( f_info.absolutePath().append("/") );
+		return false;
 }
 
-QString Funciones::getIconListaJuegos(QString icono, QString iconoDir)
+// Busca y obtiene la ruta de un archivo
+QString Funciones::getFindFile(QString dir, QString filename)
 {
-	iconoDir = GRlidaHomePath()+"iconos/";
+	QString resultado = "";
+	QDirIterator iterator(dir, QDirIterator::Subdirectories);
+	while (iterator.hasNext())
+	{
+		iterator.next();
+		if( !iterator.fileInfo().isDir() )
+		{
+			QString file_name = iterator.fileName().toLower();
+			if( file_name == filename )
+			{
+				resultado = QDir::toNativeSeparators( iterator.filePath() );
+				break;
+			}
+		}
+	}
+	return resultado;
+}
 
-	if( icono.isEmpty() || icono == "" )
-		return stTheme+"img24/emu_sin_imagen.png";
-	else if( icono == "datos" )
-		return stTheme+"img24/emu_datos.png";
-	else if( icono == "dosbox" )
-		return stTheme+"img24/emu_dbx.png";
-	else if( icono == "scummvm" )
-		return stTheme+"img24/emu_svm.png";
-	else if( icono == "vdmsound" )
-		return stTheme+"img24/emu_vdms.png";
-	else {
-		if( QFile::exists(iconoDir + icono) )
-			return iconoDir + icono;
+// Obtiene una la lista de archivos
+QFileInfoList Funciones::getListFiles(QString dir, QStringList filter)
+{
+	QDir m_dir( dir );
+	return m_dir.entryInfoList(filter, QDir::Files | QDir::Readable | QDir::Hidden | QDir::NoDotAndDotDot | QDir::NoSymLinks, QDir::Name);
+}
+
+// Obtiene información del archivo
+stFileInfo Funciones::getInfoFile(QString filename, TipoHash hash)
+{
+	stFileInfo info;
+
+	if( filename.isEmpty() )
+	{
+		info.Drive    = "";
+		info.Path     = "";
+		info.FilePath = "";
+		info.Name     = "";
+		info.NameExt  = "";
+		info.cExt     = "";
+		info.Ext      = "";
+		info.Size     = "";
+		info.Exists   = false;
+		info.Crc32    = "00000000";
+		info.Sha1     = "";
+		info.Md5      = "";
+	} else {
+		QFileInfo fi( filename );
+		#ifdef Q_OS_WIN32
+			info.Drive = filename.left(2) +"\\";
+		#else
+			info.Drive = "/";
+		#endif
+		if( fi.absolutePath().endsWith("/") || fi.absolutePath().endsWith("\\") )
+			info.Path = QDir::toNativeSeparators( fi.absolutePath() );
 		else
-			return stTheme+"img24/emu_sin_imagen.png";
+			info.Path = QDir::toNativeSeparators( fi.absolutePath().append("/") );
+		info.FilePath = info.Path + fi.fileName();
+		info.Name     = fi.baseName();
+		info.NameExt  = fi.fileName();
+		info.cExt     = "."+ fi.completeSuffix();
+		info.Ext      = "."+ fi.suffix();
+		info.Size     = IntToStr( fi.size() );
+		info.Exists   = fi.exists();
+
+		if( hash == hashCrc32 || hash == hashAll )
+			info.Crc32 = getHashFile(filename, hashCrc32);
+		else
+			info.Crc32 = "00000000";
+
+		if( hash == hashSha1 || hash == hashAll )
+			info.Sha1 = getHashFile(filename, hashSha1);
+		else
+			info.Sha1 = "";
+
+		if( hash == hashMd5 || hash == hashAll )
+			info.Md5 = getHashFile(filename, hashMd5);
+		else
+			info.Md5 = "";
+	}
+
+	return info;
+}
+
+// Obtiene el Hash del archivo
+QString Funciones::getHashFile(QString filename, TipoHash hash)
+{
+	if( hash == hashCrc32 )
+	{
+		Crc32Qt crc;
+		return crc.getCRC32toString(filename);
+	} else {
+		QCryptographicHash::Algorithm tipoAlgorithm = QCryptographicHash::Sha1;
+		if( hash == hashMd5 )
+			tipoAlgorithm = QCryptographicHash::Md5;
+		else
+			tipoAlgorithm = QCryptographicHash::Sha1;
+
+		QCryptographicHash crypto(tipoAlgorithm);
+		QFile file( filename );
+		file.open(QFile::ReadOnly);
+		while( !file.atEnd() )
+			crypto.addData(file.read(8192));
+		file.close();
+
+		return QString(crypto.result().toHex());
 	}
 }
 
-QString Funciones::getIconMount(QString tipoDrive, QString select_mount)
+// Devuelve un icono montaje
+QString Funciones::getIconMount(QString theme, QString tipoDrive, QString select_mount)
 {
 	if( tipoDrive == "drive" )
-		return stTheme+"img16/"+select_mount+"drive_hd.png";
+		return theme +"img16/"+ select_mount +"drive_hd.png";
 	else if( tipoDrive == "cdrom" )
-		return stTheme+"img16/"+select_mount+"drive_cdrom.png";
+		return theme +"img16/"+ select_mount +"drive_cdrom.png";
 	else if( tipoDrive == "floppy" )
-		return stTheme+"img16/"+select_mount+"drive_floppy.png";
+		return theme +"img16/"+ select_mount +"drive_floppy.png";
 	else if( tipoDrive == "IMG_floppy" )
-		return stTheme+"img16/"+select_mount+"floppy_1.png";
+		return theme +"img16/"+ select_mount +"floppy_1.png";
 	else if( tipoDrive == "IMG_iso" )
-		return stTheme+"img16/"+select_mount+"cd_iso.png";
+		return theme +"img16/"+ select_mount +"cd_iso.png";
 	else if( tipoDrive == "IMG_multi_iso" )
-		return stTheme+"img16/"+select_mount+"cd_multi_iso.png";
+		return theme +"img16/"+ select_mount +"cd_multi_iso.png";
 	else if( tipoDrive == "IMG_hdd" )
-		return stTheme+"img16/"+select_mount+"drive_hd.png";
-	else if(tipoDrive=="boot")
-		return stTheme+"img16/"+select_mount+"floppy_2.png";
+		return theme +"img16/"+ select_mount +"drive_hd.png";
+	else if( tipoDrive == "boot" )
+		return theme +"img16/"+ select_mount +"floppy_2.png";
 	else
-		return stTheme+"img16/sinimg.png";
+		return theme +"img16/sinimg.png";
+}
+
+// Leer archivo de texto
+QString Funciones::leerArchivo(QString filename, const QByteArray code)
+{
+	QString lineas;
+	QFile file_in( filename );
+	if( file_in.open(QIODevice::ReadOnly | QIODevice::Text) )
+	{
+		QTextStream in( &file_in );
+		if( !code.isEmpty() )
+			in.setCodec(QTextCodec::codecForName(code));
+		lineas = in.readAll();
+	} else
+		lineas = "";
+	file_in.close();
+
+	return lineas;
+}
+
+// Copia un archivo de un directorio a otro.
+bool Funciones::copiarArchivo(QString origen, QString destino, bool permisos)
+{
+	QFile f_name(destino);
+	bool isOk = f_name.copy(origen, destino);
+	if( permisos )
+		f_name.setPermissions(QFile::ReadOwner | QFile::ReadUser | QFile::ReadGroup | QFile::ReadOther |
+							  QFile::WriteOwner | QFile::WriteUser | QFile::WriteGroup | QFile::WriteOther);
+	return isOk;
+}
+/*
+// Comprueba el archivo y si existe aumenta un digito
+QString Funciones::comprobarArchivo(QString dir, QString filename)
+{
+	if( QFile::exists(dir + filename) )
+	{
+		int i = 1;
+		filename.remove(0, 1);
+		while( QFile::exists(dir + fGrl.IntToStr(i) + filename ) )
+			++i;
+		filename.prepend(fGrl.IntToStr(i));
+	}
+	return filename;
+}
+*/
+// Elimina un directorio si existe
+bool Funciones::eliminarDirectorio(QString nameDir)
+{
+	QDir directorio;
+	if( directorio.exists( nameDir ) )
+		return directorio.rmdir( nameDir );
+	else
+		return false;
+}
+
+// Renombra un directorio existe
+void Funciones::renombrarDirectorio(QString oldName, QString newName)
+{
+	QDir directorio;
+	if( directorio.exists( oldName ) )
+		directorio.rename( oldName, newName );
+	else
+		comprobarDirectorio( newName );
+}
+
+// Comprueba si un directorio existe y sino lo crea
+bool Funciones::comprobarDirectorio(QString nameDir, bool info)
+{
+	if( !nameDir.isEmpty() )
+	{
+		QDir directorio;
+		if( directorio.exists( nameDir ) )
+			return true;
+		else {
+			if( info )
+				return false;
+			else
+				return directorio.mkpath( nameDir );
+		}
+	} else
+		return false;
 }
 
 // Devuelve el directorio que usa el GR-lida
 QString Funciones::GRlidaHomePath()
 {
+	QSettings settings;
 	QDir dirGrl;
-	QString dirhomepath, dirApp, fileDb;
 	bool isWinOrMac = false;
-	dirhomepath.clear();
-	dirApp.clear();
+	stDirApp    = "";
+	stTheme     = "";
+	stLngSelect = "";
 
-	if( QFile::exists(QDir::currentPath()+"/GR-lida.conf") )
+	if( QFile::exists(QDir::currentPath() +"/GR-lida.conf") )
 	{
-		QSettings settings( QDir::currentPath()+"/GR-lida.conf", QSettings::IniFormat );
-		settings.beginGroup("OpcGeneral");
-			dirApp = settings.value("DirApp", "HomePath").toString().toLower();
-		settings.endGroup();
-	} else
-		dirApp = "homepath";
+		stDirApp = QDir::currentPath() +"/";
 
-	if( dirApp == "currentpath" )
-		dirhomepath = QDir::currentPath()+"/";
-	else {
-		#if defined(Q_OS_WIN32)
-			isWinOrMac = true;
-		#elif defined(Q_OS_MAC)
+		settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
+		settings.beginGroup("OpcGeneral");
+			setTheme( settings.value("NameDirTheme", "defecto").toString() );
+			setIdioma( settings.value("IdiomaSelect", "es_ES").toString() );
+		settings.endGroup();
+	} else {
+		#ifdef Q_OS_WIN32
 			isWinOrMac = true;
 		#else
-			isWinOrMac = false;
+			#ifdef Q_OS_MAC
+				isWinOrMac = true;
+			#else
+				isWinOrMac = false;
+			#endif
 		#endif
 
 		if( isWinOrMac )
 		{
-			dirhomepath = QDir::homePath()+"/GR-lida/";
-
-			if(dirGrl.exists(QDir::homePath()+"/.gr-lida/"))
+			stDirApp = QDir::homePath() +"/GR-lida/";
+			if( dirGrl.exists(QDir::homePath() +"/.gr-lida/") )
 			{
-				dirGrl.rename(QDir::homePath()+"/.gr-lida/", QDir::homePath()+"/GR-lida/");
+				dirGrl.rename(QDir::homePath() +"/.gr-lida/", QDir::homePath() +"/GR-lida/");
 
-				QSettings settings( dirhomepath+"GR-lida.conf", QSettings::IniFormat );
+				settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
 				settings.beginGroup("SqlDatabase");
-					fileDb = settings.value("db_host", dirhomepath+"/db_grl.grl").toString();
+					QString fileDb = settings.value("db_host", stDirApp +"/db_grl.grl").toString();
 				settings.endGroup();
 
 				QFileInfo info_db(fileDb);
-				GuardarKeyGRLConfig(dirhomepath+"GR-lida.conf", "SqlDatabase", "db_host", dirhomepath+info_db.fileName());
+				guardarKeyGRLConfig(stDirApp +"GR-lida.conf", "SqlDatabase", "db_host", stDirApp + info_db.fileName());
 			}
-		} else
-			dirhomepath = QDir::homePath()+"/.gr-lida/";
+
+			settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
+			settings.beginGroup("OpcGeneral");
+				setTheme( settings.value("NameDirTheme", "defecto").toString() );
+				setIdioma( settings.value("IdiomaSelect", "es_ES").toString() );
+			settings.endGroup();
+		} else {
+			stDirApp = QDir::homePath() +"/.gr-lida/";
+
+			settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
+			settings.beginGroup("OpcGeneral");
+				setTheme( settings.value("NameDirTheme", "defecto").toString() );
+				setIdioma( settings.value("IdiomaSelect", "es_ES").toString() );
+			settings.endGroup();
+		}
 	}
 
-	return dirhomepath;
+	return stDirApp;
 }
 
 // Devuelve el directorio del Theme a usar
-QString Funciones::ThemeGrl()
+void Funciones::setTheme(QString theme)
 {
-	QString dirApp, nameDirTheme, theme;
 	QDir themeDir;
 
-	dirApp = GRlidaHomePath();
-
-	QSettings settings( dirApp+"/GR-lida.conf", QSettings::IniFormat );
-	settings.beginGroup("OpcGeneral");
-				nameDirTheme = settings.value("NameDirTheme", "defecto").toString();
-	settings.endGroup();
-
-	if( nameDirTheme == "defecto" || nameDirTheme.isEmpty() )
-		theme = ":/";
-	else {
-		if( themeDir.exists(dirApp+"themes/"+ nameDirTheme +"/") )
-			theme = dirApp+"themes/"+ nameDirTheme +"/";
-		else
-			theme = ":/";
+	if( theme.toLower() == "defecto" || theme.isEmpty() )
+	{
+	//	if( themeDir.exists(stDirApp +"themes/defecto/") )
+	//		stTheme = stDirApp +"themes/defecto/";
+	//	else
+			stTheme = ":/";
+	} else {
+		if( themeDir.exists(stDirApp +"themes/"+ theme +"/") )
+			stTheme = stDirApp +"themes/"+ theme +"/";
+		else {
+		//	if( themeDir.exists(stDirApp +"themes/defecto/") )
+		//		stTheme = stDirApp +"themes/defecto/";
+		//	else
+				stTheme = ":/";
+		}
 	}
-	return theme;
+
+	if( stTheme == ":/" )
+		stThemeApp = stDirApp +"themes/defecto/";
+	else
+		stThemeApp = stTheme;
 }
 
-void Funciones::setTheme()
+void Funciones::setIdioma(QString lng)
 {
-	stTheme = ThemeGrl();
-}
-
-QString Funciones::IdiomaGrl()
-{
-	QString dirApp, idioma_select;
-	QDir idiomaDir;
-
-	dirApp = GRlidaHomePath();
-
-	QSettings settings( dirApp+"GR-lida.conf", QSettings::IniFormat );
-	settings.beginGroup("OpcGeneral");
-		idioma_select = settings.value("IdiomaSelect", "es_ES").toString();
-	settings.endGroup();
-
-	if( idioma_select == "es_ES" || idioma_select.isEmpty() )
-		return "";
+	if( lng.isEmpty() )
+		stLngSelect = "es_ES";
 	else {
-		if( idiomaDir.exists(dirApp+"datos/"+ idioma_select +"/") )
-			return idioma_select+"/";
+		QStringList lngs;
+		lngs << "da_DK" << "en_EN" << "es_ES" << "fr_FR" << "hu_HU" << "ru_RU";
+
+		if( lngs.contains(lng) )
+			stLngSelect = lng;
 		else
-			return "";
+			stLngSelect = "es_ES";
 	}
 }
 
 // Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use
-QString Funciones::StyleSheet(bool list, bool isBgFixed)
+QString Funciones::myStyleSheet(bool isList)
 {
-	QString stDirTheme;
-	if( list )
-		stDirTheme = stTheme + "StyleSheetList.qss";
+	if( isList )
+		return leerArchivo(stTheme +"StyleSheetList.qss", "UTF-8").replace("<theme>", stTheme) +"\n";
 	else
-		stDirTheme = stTheme + "StyleSheet.qss";
-
-	QFile file( stDirTheme );
-	file.open( QIODevice::ReadOnly );
-	QString styleSheet = QLatin1String( file.readAll() );
-	styleSheet.replace("<theme>", stTheme);
-	if( isBgFixed )
-		styleSheet.replace("<bgfix>", "_bgfix");
-	else
-		styleSheet.replace("<bgfix>", "");
-	file.close();
-
-	return styleSheet;
+		return leerArchivo(stTheme +"StyleSheet.qss", "UTF-8").replace("<theme>", stTheme) +"\n";
 }
 
 // Carga la configuración de los iconos de la lista en modo Icono
-QHash<QString, QVariant> Funciones::CargarListWidgetIconConf()
+stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla)
 {
-	QString nameDirTheme;
-	QHash<QString, QVariant> config;
-	config.clear();
+	QString file_cfg, dir_cfg, tmpfile, file_lwConf;
+	stLwIconCfg lwConf;
 
-	QSettings GRLsettings( GRlidaHomePath()+"GR-lida.conf", QSettings::IniFormat );
-	GRLsettings.beginGroup("OpcGeneral");
-		nameDirTheme = GRLsettings.value("NameDirTheme", "defecto").toString();
-	GRLsettings.endGroup();
+	dir_cfg  = (stTheme == ":/" ? stThemeApp : stTheme);
+	file_cfg = (tabla != "dbgrl" ? tabla +"_list_cfg.ini" : "list_cfg.ini");
 
-	if( nameDirTheme == "defecto" || nameDirTheme == "" )
-	{
-		config["icon_width"]           = 181;
-		config["icon_height"]          = 238;
-		config["img_scaled"]           = true;
-		config["img_scale_w"]          = 128;
-		config["img_scale_h"]          = 180;
-		config["img_scale_pos_x"]      = 27;
-		config["img_scale_pos_y"]      = 30;
-		config["tipo_emu_show"]        = true;
-		config["tipo_emu_pos_x"]       = 11;
-		config["tipo_emu_pos_y"]       = 200;
-		config["rating_show"]          = true;
-		config["rating_pos_x"]         = 91;
-		config["rating_pos_y"]         = 200;
-		config["title_show"]           = true;
-		config["title_pos_x"]          = 13;
-		config["title_pos_y"]          = 220;
-		config["title_width"]          = 155;
-		config["title_height"]         = 16;
-		config["title_font"]           = "Tahoma";
-		config["title_font_size"]      = 7;
-		config["title_font_bold"]      = true;
-		config["title_font_italic"]    = false;
-		config["title_font_underline"] = false;
-		config["title_max_caracteres"] = 27;
-	} else {
-		QSettings settings( stTheme+"info.ini", QSettings::IniFormat );
-		settings.beginGroup("list_icon");
-			config["icon_width"]           = settings.value("icon_width" , 181).toInt();
-			config["icon_height"]          = settings.value("icon_height", 238).toInt();
-			config["img_scaled"]           = settings.value("img_scaled" , true).toBool();
-			config["img_scale_w"]          = settings.value("img_scale_w", 128).toInt();
-			config["img_scale_h"]          = settings.value("img_scale_h", 180).toInt();
-			config["img_scale_pos_x"]      = settings.value("img_scale_pos_x", 27).toInt();
-			config["img_scale_pos_y"]      = settings.value("img_scale_pos_y", 30).toInt();
-			config["tipo_emu_show"]        = settings.value("tipo_emu_show"  , true).toBool();
-			config["tipo_emu_pos_x"]       = settings.value("tipo_emu_pos_x" , 11).toInt();
-			config["tipo_emu_pos_y"]       = settings.value("tipo_emu_pos_y" , 200).toInt();
-			config["rating_show"]          = settings.value("rating_show"  , true).toBool();
-			config["rating_pos_x"]         = settings.value("rating_pos_x" , 91).toInt();
-			config["rating_pos_y"]         = settings.value("rating_pos_y" , 200).toInt();
-			config["title_show"]           = settings.value("title_show"  , true).toBool();
-			config["title_pos_x"]          = settings.value("title_pos_x" , 13).toInt();
-			config["title_pos_y"]          = settings.value("title_pos_y" , 220).toInt();
-			config["title_width"]          = settings.value("title_width" , 155).toInt();
-			config["title_height"]         = settings.value("title_height", 16).toInt();
-			config["title_font"]           = settings.value("title_font"  , "Tahoma").toString();
-			config["title_font_size"]      = settings.value("title_font_size", 7).toInt();
-			config["title_font_bold"]      = settings.value("title_font_bold", true).toBool();
-			config["title_font_italic"]    = settings.value("title_font_italic", false).toBool();
-			config["title_font_underline"] = settings.value("title_font_underline", false).toBool();
-			config["title_max_caracteres"] = settings.value("title_max_caracteres", 27).toInt();
-		settings.endGroup();
-	}
-	return config;
+	if( QFile::exists(dir_cfg + file_cfg) )
+		file_lwConf = dir_cfg + file_cfg;
+	else
+		file_lwConf = dir_cfg +"list_cfg.ini";
+
+	QSettings settings(file_lwConf, QSettings::IniFormat);
+	settings.beginGroup("tw_list_icon");
+		lwConf.tw_icon_width  = settings.value("tw_icon_width" , 24).toInt();
+		lwConf.tw_icon_height = settings.value("tw_icon_height", 24).toInt();
+	settings.endGroup();
+	settings.beginGroup("picflow_img");
+		lwConf.pf_img_width  = settings.value("pf_img_width" , 145).toInt();
+		lwConf.pf_img_height = settings.value("pf_img_height", 186).toInt();
+	settings.endGroup();
+	settings.beginGroup("list_icon");
+		lwConf.icon_width           = settings.value("icon_width"          , 200     ).toInt();
+		lwConf.icon_height          = settings.value("icon_height"         , 243     ).toInt();
+		lwConf.img_cover_top        = settings.value("img_cover_top"       , "images/list_cover_top.png").toString();
+		lwConf.img_cover_top_select = settings.value("img_cover_top_select", "images/list_cover_top_select.png").toString();
+		lwConf.img_cover_top_pos_x  = settings.value("img_cover_top_pos_x" , 31      ).toInt();
+		lwConf.img_cover_top_pos_y  = settings.value("img_cover_top_pos_y" , 27      ).toInt();
+		lwConf.img_scaled           = settings.value("img_scaled"          , true    ).toBool();
+		lwConf.img_scale_w          = settings.value("img_scale_w"         , 128     ).toInt();
+		lwConf.img_scale_h          = settings.value("img_scale_h"         , 180     ).toInt();
+		lwConf.img_scale_pos_x      = settings.value("img_scale_pos_x"     , 36      ).toInt();
+		lwConf.img_scale_pos_y      = settings.value("img_scale_pos_y"     , 32      ).toInt();
+		lwConf.tipo_emu_show        = settings.value("tipo_emu_show"       , true    ).toBool();
+		lwConf.tipo_emu_pos_x       = settings.value("tipo_emu_pos_x"      , 15      ).toInt();
+		lwConf.tipo_emu_pos_y       = settings.value("tipo_emu_pos_y"      , 202     ).toInt();
+		lwConf.rating_show          = settings.value("rating_show"         , true    ).toBool();
+		lwConf.rating_vertical      = settings.value("rating_vertical"     , false   ).toBool();
+		lwConf.rating_pos_x         = settings.value("rating_pos_x"        , 105     ).toInt();
+		lwConf.rating_pos_y         = settings.value("rating_pos_y"        , 202     ).toInt();
+		lwConf.title_bg_show        = settings.value("title_bg_show"       , true    ).toBool();
+		lwConf.title_bg             = settings.value("title_bg"            , "images/list_cover_title_bg.png").toString();
+		lwConf.title_bg_pos_x       = settings.value("title_bg_pos_x"      , 13      ).toInt();
+		lwConf.title_bg_pos_y       = settings.value("title_bg_pos_y"      , 222     ).toInt();
+		lwConf.title_show           = settings.value("title_show"          , true    ).toBool();
+		lwConf.title_pos_x          = settings.value("title_pos_x"         , 21      ).toInt();
+		lwConf.title_pos_y          = settings.value("title_pos_y"         , 222     ).toInt();
+		lwConf.title_width          = settings.value("title_width"         , 156     ).toInt();
+		lwConf.title_height         = settings.value("title_height"        , 16      ).toInt();
+		lwConf.title_font           = settings.value("title_font"          , "Tahoma").toString();
+		lwConf.title_font_size      = settings.value("title_font_size"     , 7       ).toInt();
+		lwConf.title_font_bold      = settings.value("title_font_bold"     , true    ).toBool();
+		lwConf.title_font_italic    = settings.value("title_font_italic"   , false   ).toBool();
+		lwConf.title_font_underline = settings.value("title_font_underline", false   ).toBool();
+		lwConf.title_max_caracteres = settings.value("title_max_caracteres", 25      ).toInt();
+	settings.endGroup();
+
+	return lwConf;
 }
 
 // Carga la configuracion del GR-lida
-QHash<QString, QVariant> Funciones::CargarGRLConfig(QString iniFileName)
+stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 {
-	QHash<QString, QVariant> config;
-	config.clear();
+	stGrlCfg config;
 
 	QSettings settings(iniFileName, QSettings::IniFormat);
 	settings.beginGroup("SqlDatabase");
-		config["db_type"]           = settings.value("db_type"          , "QSQLITE").toString();
-		config["db_server"]         = settings.value("db_server"        , "localhost").toString();
-		config["db_host"]           = settings.value("db_host"          , QDir::toNativeSeparators(GRlidaHomePath()+"db_grl.grl") ).toString();
-		config["db_name"]           = settings.value("db_name"          , ""      ).toString();
-		config["db_username"]       = settings.value("db_username"      , ""      ).toString();
-		config["db_password"]       = settings.value("db_password"      , ""      ).toString();
-		config["db_port"]           = settings.value("db_port"          , "3306"  ).toString();
-		config["db_Orden_ColTabla"] = settings.value("db_Orden_ColTabla", "titulo").toString();
-		config["db_Orden_By"]       = settings.value("db_Orden_By"      , "titulo").toString();
-		config["db_Orden"]          = settings.value("db_Orden"         , "ASC"   ).toString();
+		config.db_type      = settings.value("db_type"     , "QSQLITE").toString();
+		config.db_server    = settings.value("db_server"   , "localhost").toString();
+		config.db_host      = settings.value("db_host"     , stDirApp +"db_grl.grl").toString();
+		config.db_name      = settings.value("db_name"     , "").toString();
+		config.db_username  = settings.value("db_username" , "").toString();
+		config.db_password  = settings.value("db_password" , "").toString();
+		config.db_port      = settings.value("db_port"     , "3306").toString();
+		config.db_orden_col = settings.value("db_orden_col", "titulo").toString();
+		config.db_orden_by  = settings.value("db_orden_by" , "titulo").toString();
+		config.db_orden     = settings.value("db_orden"    , "ASC").toString();
 	settings.endGroup();
 
 	settings.beginGroup("OpcGeneral");
-		config["Primeravez"]   = settings.value("Primeravez" , true ).toBool();
-		config["DirApp"]       = settings.value("DirApp", "HomePath").toString();
-		config["DirDOSBox"]    = settings.value("DirDOSBox"  , ""   ).toString();
-		config["DirScummVM"]   = settings.value("DirScummVM" , ""   ).toString();
-		config["DOSBoxDisp"]   = settings.value("DOSBoxDisp" , false).toBool();
-		config["ScummVMDisp"]  = settings.value("ScummVMDisp", false).toBool();
+		config.Primeravez   = settings.value("Primeravez"  , true).toBool();
+		config.DirApp       = settings.value("DirApp"      , "homepath").toString();
+		config.DirDOSBox    = settings.value("DirDOSBox"   , "").toString();
+		config.DirScummVM   = settings.value("DirScummVM"  , "").toString();
+		config.DirBaseGames = settings.value("DirBaseGames", "").toString();
+		config.DOSBoxDisp   = settings.value("DOSBoxDisp"  , false).toBool();
+		config.ScummVMDisp  = settings.value("ScummVMDisp" , false).toBool();
 	#ifdef Q_OS_WIN32
-		config["VDMSoundDisp"] = settings.value("VDMSoundDisp", false).toBool();
+		config.VDMSoundDisp = settings.value("VDMSoundDisp", false).toBool();
 	#else
-		config["VDMSoundDisp"] = false;
+		config.VDMSoundDisp = false;
 	#endif
-		config["IdiomaSelect"]      = settings.value("IdiomaSelect" , "es_ES").toString();
-		config["IdiomaExterno"]     = settings.value("IdiomaExterno", false  ).toBool();
-		config["DirBaseGames"]      = ""+settings.value("DirBaseGames" , ""  ).toString();
-		config["url_xmldb"]         = settings.value("url_xmldb"    , ""     ).toString();
-		config["FormatoFecha"]      = settings.value("FormatoFecha" , "dd/MM/yyyy HH:mm:ss").toString();
-		config["Style"]             = settings.value("Style"        , ""     ).toString();
-		config["StylePalette"]      = settings.value("StylePalette" , false  ).toBool();
-		config["FixBgList"]         = settings.value("FixBgList"    , false  ).toBool();
-		config["NameDirTheme"]      = settings.value("NameDirTheme" , "defecto"  ).toString();
-		config["IconoFav"]          = settings.value("IconoFav"     , "fav_0.png").toString();
-		config["PicFlowReflection"] = settings.value("PicFlowReflection", "PlainReflection").toString();
-		config["Skip_PicFlow"]      = settings.value("Skip_PicFlow" , 10).toInt();
-		config["IndexTabArchivos"]  = settings.value("IndexTabArchivos", 0).toInt();
-		config["VersionDBx"]        = settings.value("VersionDBx", "0.74").toString();
-		config["OpenPdfExternal"]   = settings.value("OpenPdfExternal", false).toBool();
+		config.IdiomaSelect        = settings.value("IdiomaSelect"       , "es_ES").toString();
+		config.OpenPdfExternal     = settings.value("OpenPdfExternal"    , false  ).toBool();
+		config.url_xmldb           = settings.value("url_xmldb"          , "gr-lida.js").toString();
+		config.FormatoFecha        = settings.value("FormatoFecha"       , "dd/MM/yyyy HH:mm:ss").toString();
+		config.ToolbarBigIcon      = settings.value("ToolbarBigIcon"     , true).toBool();
+		config.Style               = settings.value("Style"              , "").toString();
+		config.StylePalette        = settings.value("StylePalette"       , false).toBool();
+		config.NameDirTheme        = settings.value("NameDirTheme"       , "defecto").toString();
+		config.IconoFav            = settings.value("IconoFav"           , "fav_0.png").toString();
+		config.PicFlowType         = settings.value("PicFlowType"        , "CoverFlowLike").toString();
+		config.PicFlowBgColor      = settings.value("PicFlowBgColor"     , QStringList() << "0" << "0" << "0").toStringList();
+		config.PicFlowShowNumPos   = settings.value("PicFlowShowNumPos"  , false).toBool();
+		config.PicFlowShowTriangle = settings.value("PicFlowShowTriangle", false).toBool();		
+		config.PicFlowMinHeight    = settings.value("PicFlowMinHeight"   , 260).toInt();
+		config.Skip_PicFlow        = settings.value("Skip_PicFlow"       , 10).toInt();
+		config.IndexTabArchivos    = settings.value("IndexTabArchivos"   , 0).toInt();
+		config.VersionDBx          = settings.value("VersionDBx"         , "0.74").toString();
+		config.LastSelectCatID     = settings.value("LastSelectCatID"    , "0").toString();
+		config.LastTabOptSelect    = settings.value("LastTabOptSelect"   , 0).toInt();
 	settings.endGroup();
 
 	settings.beginGroup("OpcFuente");
-		config["font_usar"]   = settings.value("font_usar"  , false).toBool();
-		config["font_family"] = settings.value("font_family", "Tahoma").toString();
-		config["font_size"]   = settings.value("font_size"  , 8).toInt();
+		config.font_usar   = settings.value("font_usar"  , false   ).toBool();
+		config.font_family = settings.value("font_family", "Tahoma").toString();
+		config.font_size   = settings.value("font_size"  , "8"     ).toString();
 	settings.endGroup();
 
 	settings.beginGroup("HttpProxy");
-		config["ProxyEnable"]   = settings.value("ProxyEnable"  , false).toBool();
-		config["ProxyType"]     = settings.value("ProxyType"    , 2    ).toInt();
-		config["ProxyHost"]     = settings.value("ProxyHost"    , ""   ).toString();
-		config["ProxyPort"]     = settings.value("ProxyPort"    , 1080 ).toInt();
-		config["ProxyLogin"]    = settings.value("ProxyEnable"  , false).toBool();
-		config["ProxyUserName"] = settings.value("ProxyUserName", ""   ).toString();
-		config["ProxyPassword"] = settings.value("ProxyPassword", ""   ).toString();
+		config.ProxyEnable   = settings.value("ProxyEnable"  , false).toBool();
+		config.ProxyType     = settings.value("ProxyType"    , 2    ).toInt();
+		config.ProxyHost     = settings.value("ProxyHost"    , ""   ).toString();
+		config.ProxyPort     = settings.value("ProxyPort"    , "1080").toString();
+		config.ProxyLogin    = settings.value("ProxyLogin"   , false).toBool();
+		config.ProxyUserName = settings.value("ProxyUserName", ""   ).toString();
+		config.ProxyPassword = settings.value("ProxyPassword", ""   ).toString();
 	settings.endGroup();
 
 	settings.beginGroup("MainState");
-		config["maximized"] = settings.value("maximized", false).toBool();
-		config["geometry"]  = settings.value("geometry", "").toByteArray();
-		config["state"]     = settings.value("state", "").toByteArray();
+		config.main_fullscreen     = settings.value("main_fullscreen"    , false).toBool();
+		config.main_maximized      = settings.value("main_maximized"     , false).toBool();
+		config.main_geometry       = settings.value("main_geometry"      , "").toByteArray();
+		config.main_state          = settings.value("main_state"         , "").toByteArray();
+		config.main_twJuegos_state = settings.value("main_twJuegos_state", "").toByteArray();
 	settings.endGroup();
 
 	settings.beginGroup("OpcVer");
-		config["Pnl_Nav"]         = settings.value("Pnl_Nav"        , false).toBool();
-		config["Pnl_FilesUrl"]    = settings.value("Pnl_FilesUrl"   , false).toBool();
-		config["Pnl_Datos"]       = settings.value("Pnl_Datos"      , true ).toBool();
-		config["Pnl_PictureFlow"] = settings.value("Pnl_PictureFlow", true ).toBool();
-		config["Pnl_Capturas"]    = settings.value("Pnl_Capturas"   , false).toBool();
-		config["Pnl_Ordenar"]     = settings.value("Pnl_Ordenar"    , false).toBool();
-		config["Pnl_Toolbar"]     = settings.value("Pnl_Toolbar"    , true ).toBool();
-		config["ver_Compania"]    = settings.value("ver_Compania"   , false).toBool();
-		config["ver_Anno"]        = settings.value("ver_Anno"       , false).toBool();
-		config["ver_Rating"]      = settings.value("ver_Rating"     , true ).toBool();
-		config["ver_IconMode"]    = settings.value("ver_IconMode"   , false).toBool();
+		config.Pnl_Nav               = settings.value("Pnl_Nav"              , false).toBool();
+		config.Pnl_FilesUrl          = settings.value("Pnl_FilesUrl"         , false).toBool();
+		config.Pnl_Datos             = settings.value("Pnl_Datos"            , true ).toBool();
+		config.Pnl_PictureFlow       = settings.value("Pnl_PictureFlow"      , true ).toBool();
+		config.Pnl_Capturas          = settings.value("Pnl_Capturas"         , false).toBool();
+		config.Pnl_Menubar           = settings.value("Pnl_Menubar"          , true ).toBool();
+		config.Pnl_Toolbar           = settings.value("Pnl_Toolbar"          , true ).toBool();
+		config.Pnl_Ordenar           = settings.value("Pnl_Ordenar"          , false).toBool();
+		config.Pnl_StatusBar         = settings.value("Pnl_StatusBar"        , true ).toBool();
+		config.PictureFlowToCenter   = settings.value("PictureFlowToCenter"  , false).toBool();
+		config.ver_IconMode          = settings.value("ver_IconMode"         , false).toBool();
+		config.ver_col_Icono         = settings.value("ver_col_Icono"        , true ).toBool();
+		config.ver_col_Subtitulo     = settings.value("ver_col_Subtitulo"    , false).toBool();
+		config.ver_col_Genero        = settings.value("ver_col_Genero"       , false).toBool();
+		config.ver_col_Compania      = settings.value("ver_col_Compania"     , true ).toBool();
+		config.ver_col_Desarrollador = settings.value("ver_col_Desarrollador", false).toBool();
+		config.ver_col_Tema          = settings.value("ver_col_Tema"         , false).toBool();
+		config.ver_col_Grupo         = settings.value("ver_col_Grupo"        , false).toBool();
+		config.ver_col_Perspectiva   = settings.value("ver_col_Perspectiva"  , false).toBool();
+		config.ver_col_Idioma        = settings.value("ver_col_Idioma"       , false).toBool();
+		config.ver_col_IdiomaVoces   = settings.value("ver_col_IdiomaVoces"  , false).toBool();
+		config.ver_col_Formato       = settings.value("ver_col_Formato"      , false).toBool();
+		config.ver_col_Anno          = settings.value("ver_col_Anno"         , true ).toBool();
+		config.ver_col_NumDisc       = settings.value("ver_col_NumDisc"      , false).toBool();
+		config.ver_col_SistemaOp     = settings.value("ver_col_SistemaOp"    , false).toBool();
+		config.ver_col_Tamano        = settings.value("ver_col_Tamano"       , false).toBool();
+		config.ver_col_Graficos      = settings.value("ver_col_Graficos"     , false).toBool();
+		config.ver_col_Sonido        = settings.value("ver_col_Sonido"       , false).toBool();
+		config.ver_col_Jugabilidad   = settings.value("ver_col_Jugabilidad"  , false).toBool();
+		config.ver_col_Original      = settings.value("ver_col_Original"     , false).toBool();
+		config.ver_col_Estado        = settings.value("ver_col_Estado"       , false).toBool();
+		config.ver_col_Fecha         = settings.value("ver_col_Fecha"        , false).toBool();
+		config.ver_col_TipoEmu       = settings.value("ver_col_TipoEmu"      , false).toBool();
+		config.ver_col_Favorito      = settings.value("ver_col_Favorito"     , false).toBool();
+		config.ver_col_Rating        = settings.value("ver_col_Rating"       , true ).toBool();
+		config.ver_col_Edad          = settings.value("ver_col_Edad"         , false).toBool();
+		config.ver_col_Usuario       = settings.value("ver_col_Usuario"      , false).toBool();
 	settings.endGroup();
 
 	settings.beginGroup("ImageViewerState");
-		config["img_maximized"]    = settings.value("maximized"  , false).toBool();
-		config["fitToWindow"]      = settings.value("fitToWindow", false).toBool();
-		config["verListaImagenes"] = settings.value("verListaImagenes", false).toBool();
-	settings.endGroup();
-
-	settings.beginGroup("PdfViewerState");
-		config["pdf_maximized"]    = settings.value("maximized"     , false).toBool();
-		config["showTextSelect"]   = settings.value("showTextSelect", false).toBool();
+		config.img_maximized        = settings.value("img_maximized"       , false).toBool();
+		config.img_fitToWindow      = settings.value("img_fitToWindow"     , false).toBool();
+		config.img_verListaImagenes = settings.value("img_verListaImagenes", false).toBool();
 	settings.endGroup();
 
 	settings.beginGroup("OpcMultimedia");
-		config["FormatsVideo"] = settings.value("FormatsVideo", QStringList() << "*.avi" << "*.mkv" << "*.mov" << "*.mp4" << "*.mpeg" << "*.mpg" << "*.wmv").toStringList();
-		config["FormatsMusic"] = settings.value("FormatsMusic", QStringList() << "*.mp3" << "*.ogg" << "*.wav" << "*.wma").toStringList();
-		config["FormatsImage"] = settings.value("FormatsImage", QStringList() << "*.bmp" << "*.jpg" << "*.png" << "*.gif").toStringList();
+		config.FormatsVideo = settings.value("FormatsVideo", QStringList() << "*.avi" << "*.mkv" << "*.mov" << "*.mp4" << "*.mpeg" << "*.mpg" << "*.wmv").toStringList();
+		config.FormatsMusic = settings.value("FormatsMusic", QStringList() << "*.mp3" << "*.ogg" << "*.wav" << "*.wma").toStringList();
+		config.FormatsImage = settings.value("FormatsImage", QStringList() << "*.bmp" << "*.gif" << "*.jpg" << "*.jpeg" << "*.png" << "*.pbm" << "*.pgm" << "*.ppm" << "*.tiff" << "*.xbm" << "*.xpm" << "*.svg").toStringList();
 	settings.endGroup();
 
 	settings.beginGroup("UltimoDirectorio");
-		config["DirBD"]               = settings.value("DirBD" , "").toString();
-		config["DirDbx"]              = settings.value("DirDbx", "").toString();
-		config["DirSvm"]              = settings.value("DirSvm", "").toString();
-		config["DirImportar"]         = settings.value("DirImportar"  , "").toString();
-		config["DirExportPath"]       = settings.value("DirExportPath", "").toString();
+		config.DirBD         = QDir::toNativeSeparators(settings.value("DirBD" , "").toString());
+		config.DirImportar   = QDir::toNativeSeparators(settings.value("DirImportar"  , "").toString());
+		config.DirExportPath = QDir::toNativeSeparators(settings.value("DirExportPath", "").toString());
+		config.DirOtherEmus  = QDir::toNativeSeparators(settings.value("DirOtherEmus", "").toString());
 	// Datos de Juegos
-		config["Img_Thumbs"]          = settings.value("Img_Thumbs"         , "").toString();
-		config["Img_CoverFront"]      = settings.value("Img_CoverFront"     , "").toString();
-		config["Img_CoverBack"]       = settings.value("Img_CoverBack"      , "").toString();
-		config["DatosFiles_PathFile"] = settings.value("DatosFiles_PathFile", "").toString();
-		config["DatosFiles_PathExe"]  = settings.value("DatosFiles_PathExe" , "").toString();
+		config.Img_Thumbs          = QDir::toNativeSeparators(settings.value("Img_Thumbs"                 , "").toString());
+		config.Img_CoverFront      = QDir::toNativeSeparators(settings.value("Img_CoverFront"             , "").toString());
+		config.Img_CoverBack       = QDir::toNativeSeparators(settings.value("Img_CoverBack"              , "").toString());
+		config.DatosFiles_PathFile = QDir::toNativeSeparators(settings.value("DatosFiles_PathFile"        , "").toString());
+		config.DatosFiles_PathExe  = QDir::toNativeSeparators(settings.value("DatosFiles_PathExe"         , "").toString());
+		config.DatosFiles_PathSetup    = QDir::toNativeSeparators(settings.value("DatosFiles_PathSetup"   , "").toString());
+		config.DatosFiles_PathCapturas = QDir::toNativeSeparators(settings.value("DatosFiles_PathCapturas", "").toString());
 	// DOSBox
-		config["Dbx_path_exe"]        = settings.value("Dbx_path_exe"       , "").toString();
-		config["Dbx_path_setup"]      = settings.value("Dbx_path_setup"     , "").toString();
-		config["Dbx_gus_ultradir"]    = settings.value("Dbx_gus_ultradir"   , "").toString();
-		config["Dbx_sdl_mapperfile"]  = settings.value("Dbx_sdl_mapperfile" , "").toString();
-		config["Dbx_dosbox_language"] = settings.value("Dbx_dosbox_language", "").toString();
-		config["Dbx_dosbox_captures"] = settings.value("Dbx_dosbox_captures", "").toString();
-		config["Dbx_path_sonido"]     = settings.value("Dbx_path_sonido"    , "").toString();
+		config.DirDbx              = QDir::toNativeSeparators(settings.value("DirDbx"             , "").toString());
+		config.Dbx_path_exe        = QDir::toNativeSeparators(settings.value("Dbx_path_exe"       , "").toString());
+		config.Dbx_path_setup      = QDir::toNativeSeparators(settings.value("Dbx_path_setup"     , "").toString());
+		config.Dbx_gus_ultradir    = QDir::toNativeSeparators(settings.value("Dbx_gus_ultradir"   , "").toString());
+		config.Dbx_sdl_mapperfile  = QDir::toNativeSeparators(settings.value("Dbx_sdl_mapperfile" , "").toString());
+		config.Dbx_dosbox_language = QDir::toNativeSeparators(settings.value("Dbx_dosbox_language", "").toString());
+		config.Dbx_dosbox_captures = QDir::toNativeSeparators(settings.value("Dbx_dosbox_captures", "").toString());
+		config.Dbx_path_sonido     = QDir::toNativeSeparators(settings.value("Dbx_path_sonido"    , "").toString());
+		config.Montaje_path        = QDir::toNativeSeparators(settings.value("Montaje_path"       , "").toString());
 	// ScummVM
-		config["Svm_path"]            = settings.value("Svm_path"         , "").toString();
-		config["Svm_savepath"]        = settings.value("Svm_savepath"     , "").toString();
-		config["Svm_extrapath"]       = settings.value("Svm_extrapath"    , "").toString();
-		config["Svm_path_capturas"]   = settings.value("Svm_path_capturas", "").toString();
-		config["Svm_path_sonido"]     = settings.value("Svm_path_sonido"  , "").toString();
-		config["Svm_path_setup"]      = settings.value("Svm_path_setup"   , "").toString();
-		config["Svm_soundfont"]       = settings.value("Svm_soundfont"    , "").toString();
+		config.DirSvm            = QDir::toNativeSeparators(settings.value("DirSvm"           , "").toString());
+		config.Svm_path          = QDir::toNativeSeparators(settings.value("Svm_path"         , "").toString());
+		config.Svm_savepath      = QDir::toNativeSeparators(settings.value("Svm_savepath"     , "").toString());
+		config.Svm_extrapath     = QDir::toNativeSeparators(settings.value("Svm_extrapath"    , "").toString());
+		config.Svm_path_capturas = QDir::toNativeSeparators(settings.value("Svm_path_capturas", "").toString());
+		config.Svm_path_sonido   = QDir::toNativeSeparators(settings.value("Svm_path_sonido"  , "").toString());
+		config.Svm_path_setup    = QDir::toNativeSeparators(settings.value("Svm_path_setup"   , "").toString());
+		config.Svm_soundfont     = QDir::toNativeSeparators(settings.value("Svm_soundfont"    , "").toString());
 	// VDMSound
-		config["Vdms_path_exe"]       = settings.value("Vdms_path_exe", "").toString();
-		config["Vdms_icon"]           = settings.value("Vdms_icon"    , "").toString();
-	// Montaje
-		config["Montaje_path"]        = settings.value("Montaje_path" , "").toString();
+		config.Vdms_path_exe = QDir::toNativeSeparators(settings.value("Vdms_path_exe", "").toString());
+		config.Vdms_icon     = QDir::toNativeSeparators(settings.value("Vdms_icon"    , "").toString());
 	settings.endGroup();
 
 	settings.beginGroup("Updates");
-		config["chkVersion"] = settings.value("chkVersion", false).toBool();
-		config["Version"]    = settings.value("Version"   , stVersionGrl()).toString();
+		config.chkVersion  = settings.value("chkVersion" , false).toBool();
+		config.SoloUpdates = settings.value("SoloUpdates", false).toBool();
+		config.Version     = settings.value("Version"    , versionGrl()).toString();
+		config.VerListSvm  = settings.value("VerListSvm" , versionSvm()).toString();
 	settings.endGroup();
+
+	config.isChangedCategoria = false;
+	config.isChangedEmuList   = false;
+	config.isChangedIdioma    = false;
+
+	setIdioma( config.IdiomaSelect );
+	setTheme( config.NameDirTheme );
 
 	return config;
 }
 
 // Guarda la configuración del GR-lida
-void Funciones::GuardarGRLConfig(QString iniFileName, QHash<QString, QVariant> config)
+void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 {
 	QSettings settings(iniFileName, QSettings::IniFormat);
 	settings.clear();
 
 	settings.beginGroup("SqlDatabase");
-		settings.setValue("db_type"          , config["db_type"]           );
-		settings.setValue("db_server"        , config["db_server"]         );
-		settings.setValue("db_host"          , config["db_host"]           );
-		settings.setValue("db_name"          , config["db_name"]           );
-		settings.setValue("db_username"      , config["db_username"]       );
-		settings.setValue("db_password"      , config["db_password"]       );
-		settings.setValue("db_port"          , config["db_port"]           );
-		settings.setValue("db_Orden_ColTabla", config["db_Orden_ColTabla"] );
-		settings.setValue("db_Orden_By"      , config["db_Orden_By"]       );
-		settings.setValue("db_Orden"         , config["db_Orden"]          );
+		settings.setValue("db_type"     , config.db_type      );
+		settings.setValue("db_server"   , config.db_server    );
+		settings.setValue("db_host"     , config.db_host      );
+		settings.setValue("db_name"     , config.db_name      );
+		settings.setValue("db_username" , config.db_username  );
+		settings.setValue("db_password" , config.db_password  );
+		settings.setValue("db_port"     , config.db_port      );
+		settings.setValue("db_orden_col", config.db_orden_col );
+		settings.setValue("db_orden_by" , config.db_orden_by  );
+		settings.setValue("db_orden"    , config.db_orden     );
 	settings.endGroup();
 
 	settings.beginGroup("OpcGeneral");
-		settings.setValue("Primeravez"  , config["Primeravez"]   );
-		settings.setValue("DirApp"      , config["DirApp"]       );
-		settings.setValue("DirDOSBox"   , config["DirDOSBox"]    );
-		settings.setValue("DirScummVM"  , config["DirScummVM"]   );
-		settings.setValue("DOSBoxDisp"  , config["DOSBoxDisp"]   );
-		settings.setValue("ScummVMDisp" , config["ScummVMDisp"]  );
-	#ifdef Q_OS_WIN32
-		settings.setValue("VDMSoundDisp", config["VDMSoundDisp"] );
-	#else
-		settings.setValue("VDMSoundDisp", false );
-	#endif
-		settings.setValue("IdiomaSelect"     , config["IdiomaSelect"]      );
-		settings.setValue("IdiomaExterno"    , config["IdiomaExterno"]     );
-		settings.setValue("DirBaseGames"     , config["DirBaseGames"]      );
-		settings.setValue("url_xmldb"        , config["url_xmldb"]         );
-		settings.setValue("FormatoFecha"     , config["FormatoFecha"]      );
-		settings.setValue("Style"            , config["Style"]             );
-		settings.setValue("StylePalette"     , config["StylePalette"]      );
-		settings.setValue("FixBgList"        , config["FixBgList"]         );
-		settings.setValue("NameDirTheme"     , config["NameDirTheme"]      );
-		settings.setValue("IconoFav"         , config["IconoFav"]          );
-		settings.setValue("PicFlowReflection", config["PicFlowReflection"] );
-		settings.setValue("Skip_PicFlow"     , config["Skip_PicFlow"]      );
-		settings.setValue("IndexTabArchivos" , config["IndexTabArchivos"]  );
-		settings.setValue("VersionDBx"       , config["VersionDBx"]        );
-		settings.setValue("OpenPdfExternal"  , config["OpenPdfExternal"]   );
+		settings.setValue("Primeravez"         , config.Primeravez          );
+		settings.setValue("DirApp"             , config.DirApp              );
+		settings.setValue("DirDOSBox"          , config.DirDOSBox           );
+		settings.setValue("DirScummVM"         , config.DirScummVM          );
+		settings.setValue("DirBaseGames"       , config.DirBaseGames        );
+		settings.setValue("DOSBoxDisp"         , config.DOSBoxDisp          );
+		settings.setValue("ScummVMDisp"        , config.ScummVMDisp         );
+		settings.setValue("VDMSoundDisp"       , config.VDMSoundDisp        );
+		settings.setValue("IdiomaSelect"       , config.IdiomaSelect        );
+		settings.setValue("OpenPdfExternal"    , config.OpenPdfExternal     );
+		settings.setValue("url_xmldb"          , config.url_xmldb           );
+		settings.setValue("FormatoFecha"       , config.FormatoFecha        );
+		settings.setValue("ToolbarBigIcon"     , config.ToolbarBigIcon      );
+		settings.setValue("Style"              , config.Style               );
+		settings.setValue("StylePalette"       , config.StylePalette        );
+		settings.setValue("NameDirTheme"       , config.NameDirTheme        );
+		settings.setValue("IconoFav"           , config.IconoFav            );
+		settings.setValue("PicFlowType"        , config.PicFlowType         );
+		settings.setValue("PicFlowBgColor"     , config.PicFlowBgColor      );
+		settings.setValue("PicFlowShowNumPos"  , config.PicFlowShowNumPos   );
+		settings.setValue("PicFlowShowTriangle", config.PicFlowShowTriangle );
+		settings.setValue("PicFlowMinHeight"   , config.PicFlowMinHeight    );
+		settings.setValue("Skip_PicFlow"       , config.Skip_PicFlow        );
+		settings.setValue("IndexTabArchivos"   , config.IndexTabArchivos    );
+		settings.setValue("VersionDBx"         , config.VersionDBx          );
+		settings.setValue("LastSelectCatID"    , config.LastSelectCatID     );
+		settings.setValue("LastTabOptSelect"   , config.LastTabOptSelect    );
 	settings.endGroup();
 
 	settings.beginGroup("OpcFuente");
-		settings.setValue("font_usar"  , config["font_usar"]   );
-		settings.setValue("font_family", config["font_family"] );
-		settings.setValue("font_size"  , config["font_size"]   );
+		settings.setValue("font_usar"  , config.font_usar   );
+		settings.setValue("font_family", config.font_family );
+		settings.setValue("font_size"  , config.font_size   );
 	settings.endGroup();
 
 	settings.beginGroup("HttpProxy");
-		settings.setValue("ProxyEnable"  , config["ProxyEnable"]   );
-		settings.setValue("ProxyType"    , config["ProxyType"]     );
-		settings.setValue("ProxyHost"    , config["ProxyHost"]     );
-		settings.setValue("ProxyPort"    , config["ProxyPort"]     );
-		settings.setValue("ProxyLogin"   , config["ProxyLogin"]    );
-		settings.setValue("ProxyUserName", config["ProxyUserName"] );
-		settings.setValue("ProxyPassword", config["ProxyPassword"] );
+		settings.setValue("ProxyEnable"  , config.ProxyEnable   );
+		settings.setValue("ProxyType"    , config.ProxyType     );
+		settings.setValue("ProxyHost"    , config.ProxyHost     );
+		settings.setValue("ProxyPort"    , config.ProxyPort     );
+		settings.setValue("ProxyLogin"   , config.ProxyLogin    );
+		settings.setValue("ProxyUserName", config.ProxyUserName );
+		settings.setValue("ProxyPassword", config.ProxyPassword );
 	settings.endGroup();
 
 	settings.beginGroup("MainState");
-		settings.setValue("maximized", config["maximized"] );
-		settings.setValue("geometry" , config["geometry"]  );
-		settings.setValue("state"    , config["state"]     );
+		settings.setValue("main_fullscreen"    , config.main_fullscreen     );
+		settings.setValue("main_maximized"     , config.main_maximized      );
+		settings.setValue("main_geometry"      , config.main_geometry       );
+		settings.setValue("main_state"         , config.main_state          );
+		settings.setValue("main_twJuegos_state", config.main_twJuegos_state );
 	settings.endGroup();
 
 	settings.beginGroup("OpcVer");
-		settings.setValue("Pnl_Nav"        , config["Pnl_Nav"]         );
-		settings.setValue("Pnl_FilesUrl"   , config["Pnl_FilesUrl"]    );
-		settings.setValue("Pnl_Datos"      , config["Pnl_Datos"]       );
-		settings.setValue("Pnl_PictureFlow", config["Pnl_PictureFlow"] );
-		settings.setValue("Pnl_Capturas"   , config["Pnl_Capturas"]    );
-		settings.setValue("Pnl_Ordenar"    , config["Pnl_Ordenar"]     );
-		settings.setValue("Pnl_Toolbar"    , config["Pnl_Toolbar"]     );
-		settings.setValue("ver_Compania"   , config["ver_Compania"]    );
-		settings.setValue("ver_Anno"       , config["ver_Anno"]        );
-		settings.setValue("ver_Rating"     , config["ver_Rating"]      );
-		settings.setValue("ver_IconMode"   , config["ver_IconMode"]    );
+		settings.setValue("Pnl_Nav"              , config.Pnl_Nav               );
+		settings.setValue("Pnl_FilesUrl"         , config.Pnl_FilesUrl          );
+		settings.setValue("Pnl_Datos"            , config.Pnl_Datos             );
+		settings.setValue("Pnl_PictureFlow"      , config.Pnl_PictureFlow       );
+		settings.setValue("Pnl_Capturas"         , config.Pnl_Capturas          );
+		settings.setValue("Pnl_Menubar"          , config.Pnl_Menubar           );
+		settings.setValue("Pnl_Toolbar"          , config.Pnl_Toolbar           );
+		settings.setValue("Pnl_Ordenar"          , config.Pnl_Ordenar           );
+		settings.setValue("Pnl_StatusBar"        , config.Pnl_StatusBar         );
+		settings.setValue("PictureFlowToCenter"  , config.PictureFlowToCenter   );
+		settings.setValue("ver_IconMode"         , config.ver_IconMode          );
+		settings.setValue("ver_col_Icono"        , config.ver_col_Icono         );
+		settings.setValue("ver_col_Subtitulo"    , config.ver_col_Subtitulo     );
+		settings.setValue("ver_col_Genero"       , config.ver_col_Genero        );
+		settings.setValue("ver_col_Compania"     , config.ver_col_Compania      );
+		settings.setValue("ver_col_Desarrollador", config.ver_col_Desarrollador );
+		settings.setValue("ver_col_Tema"         , config.ver_col_Tema          );
+		settings.setValue("ver_col_Grupo"        , config.ver_col_Grupo         );
+		settings.setValue("ver_col_Perspectiva"  , config.ver_col_Perspectiva   );
+		settings.setValue("ver_col_Idioma"       , config.ver_col_Idioma        );
+		settings.setValue("ver_col_IdiomaVoces"  , config.ver_col_IdiomaVoces   );
+		settings.setValue("ver_col_Formato"      , config.ver_col_Formato       );
+		settings.setValue("ver_col_Anno"         , config.ver_col_Anno          );
+		settings.setValue("ver_col_NumDisc"      , config.ver_col_NumDisc       );
+		settings.setValue("ver_col_SistemaOp"    , config.ver_col_SistemaOp     );
+		settings.setValue("ver_col_Tamano"       , config.ver_col_Tamano        );
+		settings.setValue("ver_col_Graficos"     , config.ver_col_Graficos      );
+		settings.setValue("ver_col_Sonido"       , config.ver_col_Sonido        );
+		settings.setValue("ver_col_Jugabilidad"  , config.ver_col_Jugabilidad   );
+		settings.setValue("ver_col_Original"     , config.ver_col_Original      );
+		settings.setValue("ver_col_Estado"       , config.ver_col_Estado        );
+		settings.setValue("ver_col_Fecha"        , config.ver_col_Fecha         );
+		settings.setValue("ver_col_TipoEmu"      , config.ver_col_TipoEmu       );
+		settings.setValue("ver_col_Favorito"     , config.ver_col_Favorito      );
+		settings.setValue("ver_col_Rating"       , config.ver_col_Rating        );
+		settings.setValue("ver_col_Edad"         , config.ver_col_Edad          );
+		settings.setValue("ver_col_Usuario"      , config.ver_col_Usuario       );
 	settings.endGroup();
 
 	settings.beginGroup("ImageViewerState");
-		settings.setValue("maximized"       , config["img_maximized"]   );
-		settings.setValue("fitToWindow"     , config["fitToWindow"]     );
-		settings.setValue("verListaImagenes", config["verListaImagenes"]);
-	settings.endGroup();
-
-	settings.beginGroup("PdfViewerState");
-		settings.setValue("maximized"     , config["pdf_maximized"] );
-		settings.setValue("showTextSelect", config["showTextSelect"]);
+		settings.setValue("img_maximized"       , config.img_maximized        );
+		settings.setValue("img_fitToWindow"     , config.img_fitToWindow      );
+		settings.setValue("img_verListaImagenes", config.img_verListaImagenes );
 	settings.endGroup();
 
 	settings.beginGroup("OpcMultimedia");
-		settings.setValue("FormatsVideo", config["FormatsVideo"]);
-		settings.setValue("FormatsMusic", config["FormatsMusic"]);
-		settings.setValue("FormatsImage", config["FormatsImage"]);
+		settings.setValue("FormatsVideo", config.FormatsVideo );
+		settings.setValue("FormatsMusic", config.FormatsMusic );
+		settings.setValue("FormatsImage", config.FormatsImage );
 	settings.endGroup();
 
 	settings.beginGroup("UltimoDirectorio");
-		settings.setValue("DirBD" , config["DirBD"]  );
-		settings.setValue("DirDbx", config["DirDbx"] );
-		settings.setValue("DirSvm", config["DirSvm"] );
-		settings.setValue("DirImportar"  , config["DirImportar"]   );
-		settings.setValue("DirExportPath", config["DirExportPath"] );
+		settings.setValue("DirBD"        , config.DirBD         );
+		settings.setValue("DirImportar"  , config.DirImportar   );
+		settings.setValue("DirExportPath", config.DirExportPath );
+		settings.setValue("DirOtherEmus" , config.DirOtherEmus  );
 	// Datos de Juegos
-		settings.setValue("Img_Thumbs"         , config["Img_Thumbs"]     );
-		settings.setValue("Img_CoverFront"     , config["Img_CoverFront"] );
-		settings.setValue("Img_CoverBack"      , config["Img_CoverBack"]  );
-		settings.setValue("DatosFiles_PathFile", config["DatosFiles_PathFile"] );
-		settings.setValue("DatosFiles_PathExe", config["DatosFiles_PathExe"] );
+		settings.setValue("Img_Thumbs"             , config.Img_Thumbs              );
+		settings.setValue("Img_CoverFront"         , config.Img_CoverFront          );
+		settings.setValue("Img_CoverBack"          , config.Img_CoverBack           );
+		settings.setValue("DatosFiles_PathFile"    , config.DatosFiles_PathFile     );
+		settings.setValue("DatosFiles_PathExe"     , config.DatosFiles_PathExe      );
+		settings.setValue("DatosFiles_PathSetup"   , config.DatosFiles_PathSetup    );
+		settings.setValue("DatosFiles_PathCapturas", config.DatosFiles_PathCapturas );
 	// DOSBox
-		settings.setValue("Dbx_path_exe"       , config["Dbx_path_exe"]        );
-		settings.setValue("Dbx_path_setup"     , config["Dbx_path_setup"]      );
-		settings.setValue("Dbx_gus_ultradir"   , config["Dbx_gus_ultradir"]    );
-		settings.setValue("Dbx_sdl_mapperfile" , config["Dbx_sdl_mapperfile"]  );
-		settings.setValue("Dbx_dosbox_language", config["Dbx_dosbox_language"] );
-		settings.setValue("Dbx_dosbox_captures", config["Dbx_dosbox_captures"] );
-		settings.setValue("Dbx_path_sonido"    , config["Dbx_path_sonido"]     );
+		settings.setValue("DirDbx"             , config.DirDbx              );
+		settings.setValue("Dbx_path_exe"       , config.Dbx_path_exe        );
+		settings.setValue("Dbx_path_setup"     , config.Dbx_path_setup      );
+		settings.setValue("Dbx_gus_ultradir"   , config.Dbx_gus_ultradir    );
+		settings.setValue("Dbx_sdl_mapperfile" , config.Dbx_sdl_mapperfile  );
+		settings.setValue("Dbx_dosbox_language", config.Dbx_dosbox_language );
+		settings.setValue("Dbx_dosbox_captures", config.Dbx_dosbox_captures );
+		settings.setValue("Dbx_path_sonido"    , config.Dbx_path_sonido     );
+		settings.setValue("Montaje_path"       , config.Montaje_path        );
 	// ScummVM
-		settings.setValue("Svm_path"         , config["Svm_path"]          );
-		settings.setValue("Svm_savepath"     , config["Svm_savepath"]      );
-		settings.setValue("Svm_extrapath"    , config["Svm_extrapath"]     );
-		settings.setValue("Svm_path_capturas", config["Svm_path_capturas"] );
-		settings.setValue("Svm_path_sonido"  , config["Svm_path_sonido"]   );
-		settings.setValue("Svm_path_setup"   , config["Svm_path_setup"]    );
-		settings.setValue("Svm_soundfont"    , config["Svm_soundfont"]     );
+		settings.setValue("DirSvm"           , config.DirSvm            );
+		settings.setValue("Svm_path"         , config.Svm_path          );
+		settings.setValue("Svm_savepath"     , config.Svm_savepath      );
+		settings.setValue("Svm_extrapath"    , config.Svm_extrapath     );
+		settings.setValue("Svm_path_capturas", config.Svm_path_capturas );
+		settings.setValue("Svm_path_sonido"  , config.Svm_path_sonido   );
+		settings.setValue("Svm_path_setup"   , config.Svm_path_setup    );
+		settings.setValue("Svm_soundfont"    , config.Svm_soundfont     );
 	// VDMSound
-		settings.setValue("Vdms_path_exe", config["Vdms_path_exe"] );
-		settings.setValue("Vdms_icon"    , config["Vdms_icon"]     );
-	// Montaje
-		settings.setValue("Montaje_path" , config["Montaje_path"]  );
+		settings.setValue("Vdms_path_exe", config.Vdms_path_exe );
+		settings.setValue("Vdms_icon"    , config.Vdms_icon     );
 	settings.endGroup();
 
 	settings.beginGroup("Updates");
-		settings.setValue("chkVersion", config["chkVersion"] );
-		settings.setValue("Version"   , stVersionGrl()       );
+		settings.setValue("chkVersion" , config.chkVersion  );
+		settings.setValue("SoloUpdates", config.SoloUpdates );
+		settings.setValue("Version"    , versionGrl()       );
+		settings.setValue("VerListSvm" , config.VerListSvm  );
 	settings.endGroup();
 }
 
 // Guarda la configuración del GR-lida
-void Funciones::GuardarKeyGRLConfig(QString iniFileName, QString grupo, QString key, QString value)
+void Funciones::guardarKeyGRLConfig(QString iniFileName, QString grupo, QString key, QString value)
 {
 	QSettings settings(iniFileName, QSettings::IniFormat);
 	settings.beginGroup(grupo);
@@ -741,66 +1018,54 @@ void Funciones::GuardarKeyGRLConfig(QString iniFileName, QString grupo, QString 
 	settings.endGroup();
 }
 
-// Comprueba si un directorio existe y sino lo crea
-void Funciones::ComprobarDirectorio(QString nameDir)
-{
-	QDir directorio;
-	if( !directorio.exists( nameDir ) )
-		directorio.mkdir( nameDir );
-}
-
-QString Funciones::ComprobarArchivoAlternativo(QString archivo)
-{
-	QString tmpfile = archivo;
-	if( QFile::exists( tmpfile.replace(":/", GRlidaHomePath()) ) )
-		return tmpfile;
-	else
-		return archivo;
-}
-
 // Obtiene la dirección y el nombre del archivo atraves de QFileDialog
-QString Funciones::VentanaAbrirArchivos(const QString caption, const QString dir, const QString tmp_dir, const QString filter, QString *selectedFilter, bool Open_Save)
+QString Funciones::ventanaAbrirArchivos(QString caption, QString dir, QString archivo_old, QString filter, QString *selectedFilter, bool isSave)
 {
 	QString archivo, base;
-	QFileInfo fi;
-
-	fi.setFile( dir );
-	if( fi.exists() )
+	QDir m_dir;
+	if( !dir.isEmpty() && m_dir.exists(dir) )
 		base = dir;
 	else
-		base = GRlidaHomePath();
+		base = stDirApp;
 
-	if( Open_Save == true )
+	if( isSave )
 		archivo = QFileDialog::getSaveFileName(0, caption, base, filter, selectedFilter);
 	else
 		archivo = QFileDialog::getOpenFileName(0, caption, base, filter, selectedFilter);
 
-	if( !archivo.isEmpty() )
-		return archivo;
+	if( archivo.isEmpty() )
+		return QDir::toNativeSeparators( archivo_old );
 	else
-		return tmp_dir;
+		return QDir::toNativeSeparators( archivo );
 }
 
 // Obtiene la dirección de una carpeta atraves de QFileDialog
-QString Funciones::VentanaDirectorios(const QString caption, const QString dir, const QString tmp_dir)
+QString Funciones::ventanaDirectorios(QString caption, QString dir, QString dir_old)
 {
-	QString directorio = QFileDialog::getExistingDirectory(0, caption, dir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
+	QString directorio, base;
+	QDir m_dir;
+	if( !dir.isEmpty() && m_dir.exists(dir) )
+		base = dir;
+	else
+		base = stDirApp;
 
-	if( !directorio.isEmpty() )
+	directorio = QFileDialog::getExistingDirectory(0, caption, base, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
+
+	if( directorio.isEmpty() )
 	{
-		if( directorio.endsWith("/") )
-			return directorio;
-		else
-			return directorio+"/";
-	} else {
-		if( !tmp_dir.isEmpty() )
-		{
-			if( tmp_dir.endsWith("/") )
-				return tmp_dir;
-			else
-				return tmp_dir+"/";
-		} else
+		if( dir_old.isEmpty() )
 			return "";
+		else {
+			if( dir_old.endsWith("/") || dir_old.endsWith("\\") )
+				return QDir::toNativeSeparators( dir_old );
+			else
+				return QDir::toNativeSeparators( dir_old +"/");
+		}
+	} else {
+		if( directorio.endsWith("/") || directorio.endsWith("\\") )
+			return QDir::toNativeSeparators( directorio );
+		else
+			return QDir::toNativeSeparators( directorio +"/");
 	}
 }
 
@@ -817,20 +1082,8 @@ bool Funciones::abrirDirectorio(QString dirPath)
 }
 
 // Crea una ventana para mostrar Información
-void Funciones::VentanaInfo(QString titulo, QString icono, int w, int h, QString contenido)
+void Funciones::ventanaInfo(QString titulo, QString icono, int w, int h, QString contenido, bool isTextoPlano)
 {
-	QString str_html;
-	QFile LeerArchivo(stTheme+"tpl_info.html");
-	if( LeerArchivo.open( QIODevice::ReadOnly | QIODevice::Text ) )
-	{
-		QTextStream in( &LeerArchivo );
-		in.setCodec("UTF-8");
-		str_html.clear();
-		str_html = in.readAll();
-	} else
-		str_html = "";
-	LeerArchivo.close();
-
 	QDialog *Dialog = new QDialog(0);
 	QVBoxLayout *mainLayout;
 	QTextBrowser *textInfo;
@@ -856,417 +1109,902 @@ void Funciones::VentanaInfo(QString titulo, QString icono, int w, int h, QString
 	mainLayout->addWidget(textInfo);
 	mainLayout->addLayout(hLayout);
 
-	QObject::connect( btnAceptar, SIGNAL( clicked() ), Dialog, SLOT( accept() ) );
-	btnAceptar->setText( QObject::tr("Aceptar") );
-	btnAceptar->setIcon( QIcon(stTheme+"img16/aplicar.png") );
+	connect( btnAceptar, SIGNAL( clicked() ), Dialog, SLOT( accept() ) );
+	btnAceptar->setText( tr("Aceptar") );
+	btnAceptar->setIcon( QIcon(stTheme +"img16/aplicar.png") );
+	btnAceptar->setIconSize(QSize(16, 16));
+	btnAceptar->setMinimumSize(QSize(80, 24));
 
-	str_html.replace("<theme>", stTheme);
-	str_html.replace("{contenido_info}", contenido);
-	textInfo->setHtml( str_html );
+	if( isTextoPlano )
+		textInfo->setPlainText(contenido);
+	else {
+		QString str_html = "{contenido_info}";
+		if( QFile::exists(stThemeApp +"tpl_info.html") )
+			str_html = leerArchivo(stThemeApp +"tpl_info.html", "UTF-8");
+		else
+			str_html = leerArchivo(":/tpl_info.html", "UTF-8");
+
+		str_html.replace("<theme>", stTheme);
+		str_html.replace("{contenido_info}", contenido.replace("\n","<br/>"));
+		textInfo->setHtml( str_html );
+	}
+
+	if( QFile::exists(icono) )
+		Dialog->setWindowIcon(QIcon(icono));
+	else
+		Dialog->setWindowIcon(QIcon(":/img16/informacion.png"));
 
 	Dialog->setWindowTitle( titulo );
-	Dialog->setWindowIcon(QIcon(icono));
-	Dialog->setStyleSheet( StyleSheet() );
+	Dialog->setStyleSheet( myStyleSheet() );
 	Dialog->exec();
+
 	delete Dialog;
 }
 
 // Elimina un item de un TreeWidget
-void Funciones::DeleteItemTree(QTreeWidgetItem *item)
+void Funciones::deleteItemTree(QTreeWidgetItem *item)
 {
 	if( !item )
 		return;
-
-	for(int i = item->childCount() - 1; i >= 0; i--)
-	{
-		DeleteItemTree(item->child(i));
-	}
+	int count = item->childCount();
+	for (int i = count - 1; i >= 0; --i)
+		deleteItemTree(item->child(i));
 
 	delete item;
 }
 
-// Carga la lista de Scripts en un QComboBox
-void Funciones::CargarScriptsComboBox(const QString dirScripts, QComboBox *myCombobox, QString filter)
+// Mueve hacia arriba una posición de un QTreeWidget
+void Funciones::moveUpItemTw(QTreeWidget *twList)
 {
-	CargarIdiomasCombo(dirScripts, myCombobox, filter, true);
+	int current = twList->indexOfTopLevelItem( twList->currentItem() );
+	int next_pos = -1;
+	if( current > 0 && current != -1 )
+	{
+		next_pos = current - 1;
+
+		QTreeWidgetItem *item = twList->topLevelItem( current );
+		item = twList->takeTopLevelItem( current );
+		twList->insertTopLevelItem(next_pos, item);
+		twList->setCurrentItem( item );
+	}
+}
+
+// Mueve hacia abajo una posición de un QTreeWidget
+void Funciones::moveDownItemTw(QTreeWidget *twList)
+{
+	int current = twList->indexOfTopLevelItem( twList->currentItem() );
+	int next_pos = -1;
+	if( current < (twList->topLevelItemCount() - 1) && current != -1 )
+	{
+		next_pos = current + 1;
+
+		QTreeWidgetItem *item = twList->topLevelItem( current );
+		item = twList->takeTopLevelItem( current );
+		twList->insertTopLevelItem(next_pos, item);
+		twList->setCurrentItem( item );
+	}
+}
+
+// Carga la lista de archivos
+QList<stGrlDatos> Funciones::cargarListaArchivos(QString m_dir, TipoListCbx tipo, QString filter, QString filter_sep)
+{
+	QList<stGrlDatos> dato_list;
+	stGrlDatos dato;
+	QString language, js_titulo, js_version;
+	QLocale locale;
+	QStringList parts_lng;
+	QScriptEngine engine;
+	QFileInfoList list_files = getListFiles(m_dir, filter.split(filter_sep, QString::SkipEmptyParts));
+
+	dato_list.clear();
+	switch ( tipo )
+	{
+		case CbxListIcon:
+		case CbxListLng:
+		case CbxListJs:
+//
+		break;
+		case CbxListProf:
+			dato.titulo  = tr("Configuración por defecto");
+			dato.icono   = stTheme +"img16/archivo_config.png";
+			dato.extra   = "";
+			dato.key     = "_defecto_";
+
+			dato_list << dato;
+		break;
+		case CbxListJsi:
+			dato.titulo  = tr("Importar desde un archivo") +": GR-lida XML, D-Fend Reloaded prof";
+			dato.icono   = stTheme +"img16/archivo_config.png";
+			dato.extra   = "";
+			dato.key     = "_desde_archivo_";
+
+			dato_list << dato;
+		break;
+	};
+
+	const int listSize = list_files.size();
+	for (int i = 0; i < listSize; ++i)
+	{
+		switch ( tipo )
+		{
+			case CbxListIcon:
+				dato.icono  = m_dir + list_files.at(i).fileName();
+				dato.titulo = list_files.at(i).completeBaseName();
+				dato.extra  = "";
+				dato.key    = list_files.at(i).fileName();
+			break;
+			case CbxListLng:
+				parts_lng.clear();
+				parts_lng = list_files.at(i).baseName().split("_");
+				language  = parts_lng.at(1) +"_"+ parts_lng.at(2);
+				locale    = language;
+
+				if( QFile::exists(stTheme +"img_lng/"+ parts_lng.at(2).toLower() +".png") )
+					dato.icono = stTheme +"img_lng/"+ parts_lng.at(2).toLower() +".png";
+				else
+					dato.icono = stTheme +"img_lng/sinimg.png";
+
+				dato.titulo = locale.languageToString(locale.language()) +" ("+ locale.countryToString(locale.country()) +")"+ (m_dir == ":/idiomas/" ? "" : " "+ tr("exterior"));
+				dato.extra  = "";
+				dato.key    = list_files.at(i).absoluteFilePath();
+			break;
+			case CbxListProf:
+				dato.icono  = stTheme +"img16/archivo_config.png";
+				dato.titulo = list_files.at(i).completeBaseName();
+				dato.extra  = "";
+				dato.key    = list_files.at(i).fileName();
+			break;
+			case CbxListJs:
+			case CbxListJsi:
+				engine.evaluate( leerArchivo(list_files.at(i).absoluteFilePath(), "UTF-8") );
+
+				if( engine.evaluate("title").isValid() )
+					js_titulo = engine.evaluate("title").toString();
+				else
+					js_titulo = list_files.at(i).baseName();
+
+				if( engine.evaluate("version").isValid() )
+					js_version = engine.evaluate("version").toString();
+				else
+					js_version = "0";
+
+				dato.icono  = stTheme +"img16/script.png";
+				dato.titulo = js_titulo +" v"+ js_version;
+				dato.extra  = js_version;
+				dato.key    = list_files.at(i).fileName();
+			break;
+		};
+
+		dato_list << dato;
+	}
+
+	return dato_list;
+}
+
+void Funciones::cargarListaArchivosComboBox(QComboBox *cbx, QString m_dir, QString select_data, TipoListCbx tipo, QString filter, QString filter_sep, bool isClear)
+{
+	QList<stGrlDatos> list = cargarListaArchivos(m_dir, tipo, filter, filter_sep);
+
+	if( isClear )
+		cbx->clear();
+
+	const int listSize = list.size();
+	for (int i = 0; i < listSize; ++i)
+		cbx->addItem(QIcon(list.at(i).icono), list.at(i).titulo, list.at(i).key);
+
+	if( !select_data.isEmpty() )
+	{
+		int row = cbx->findData(select_data, Qt::UserRole, Qt::MatchExactly);
+		cbx->setCurrentIndex( row );
+	}
+}
+
+void Funciones::cargarListaArchivosCheckComboBox(QCheckComboBox *cbx, QString m_dir, QString select_data, TipoListCbx tipo, QString filter, QString filter_sep)
+{
+	QList<stGrlDatos> list = cargarListaArchivos(m_dir, tipo, filter, filter_sep);
+	cbx->clear();
+	const int listSize = list.size();
+	for (int i = 0; i < listSize; ++i)
+		cbx->addItem(QIcon(list.at(i).icono), list.at(i).titulo, list.at(i).key);
+
+	int row = cbx->findData(select_data, Qt::UserRole, Qt::MatchExactly);
+	cbx->setCurrentIndex( row );
 }
 
 // Carga la lista de Idiomas en un QComboBox
-void Funciones::CargarIdiomasCombo(const QString dirLng, QComboBox *myCombobox, QString filter, bool isScript)
+void Funciones::cargarIdiomasComboBox(QComboBox *cbx, QString dirLng, bool isClear, QString select_data, QString filter)
 {
-	QDir dir( dirLng );
-	QDir::Filters filters = QDir::Files | QDir::Readable;
-	QDir::SortFlags sort = QDir::Name;
-	QFileInfoList entries = dir.entryInfoList(QStringList() << filter, filters, sort);
-
-	myCombobox->clear();
-	if( isScript )
-		myCombobox->addItem(QIcon(stTheme+"img16/archivo_config.png"), QObject::tr("Importar desde un archivo:")+" GR-lida XML, D-Fend Reloaded prof", "_desde_archivo_");
-
-	foreach (QFileInfo file, entries)
-	{
-		if( isScript )
-		{
-			QScriptEngine engine;
-			QString js_titulo, js_version;
-			QFile scriptFile( file.absoluteFilePath() );
-			scriptFile.open(QIODevice::ReadOnly | QIODevice::Text);
-			engine.evaluate( scriptFile.readAll() );
-			scriptFile.close();
-
-			if(engine.evaluate("title").isValid())
-				js_titulo = engine.evaluate("title").toString();
-			else
-				js_titulo = file.baseName();
-
-			if(engine.evaluate("version").isValid())
-				js_version = engine.evaluate("version").toString();
-			else
-				js_version = "0";
-
-			myCombobox->addItem(QIcon(stTheme+"img16/edit_enlace.png"), js_titulo +" v"+ js_version, file.fileName());
-		} else {
-			// pick country and language out of the file name
-			QStringList parts = file.baseName().split("_");
-			QString tmp_locale = parts.value(1) + "_" + parts.value(2);
-
-			QLocale locale(tmp_locale);
-			QString language = QLocale::languageToString( locale.language() );
-			QString country  = QLocale::countryToString( locale.country() );
-			QString nameLang = language + " (" + country + ")";
-
-			myCombobox->addItem(QIcon(stTheme+"img_lng/"+parts.value(2).toLower()+".png"), nameLang, tmp_locale );
-		}
-	}
+	cargarListaArchivosComboBox(cbx, dirLng, select_data, CbxListLng, filter, ";", isClear);
 }
 
-// Carga una lista de datos en un QComboBox
-void Funciones::CargarDatosComboBox(QString archivo, QComboBox *myCombobox, int num_col, bool idioma_svm)
+// Carga la lista de Scripts en un QComboBox
+void Funciones::cargarScriptsComboBox(QComboBox *cbx, QString dirScripts, QString select_data, QString filter)
 {
-	QStringList lista, listaTemp;
-	QString icono, iconoTemp;
-	QFile file( ComprobarArchivoAlternativo(archivo) );
-	if( file.open(QIODevice::ReadOnly) != 0 )
-	{
-		QTextStream in(&file);
-		in.setCodec("UTF-8");
-
-		while ( !in.atEnd() )
-			listaTemp << in.readLine();
-
-		myCombobox->clear();
-		for( int i = 0; i < listaTemp.count(); i++ )
-		{
-			lista = listaTemp[i].split( "|" );
-
-			icono.clear();
-			icono = stTheme+"img16/sinimg.png";
-
-			if( num_col == 3 )
-				iconoTemp = lista.value(2);
-			else
-				iconoTemp = lista.value(1);
-
-			if( iconoTemp.isEmpty() || iconoTemp == "sinimg"  )
-				icono = stTheme+"img16/sinimg.png";
-			else {
-				if( idioma_svm )
-					icono = stTheme+"img_lng/"+iconoTemp+".png";
-				else
-					icono = stTheme+"img16/"+iconoTemp+".png";
-			}
-
-			if( !QFile::exists(icono) )
-				icono = stTheme+"img16/sinimg.png";
-
-			switch ( num_col )
-			{
-				case 1: // 1 columna
-					myCombobox->addItem( QIcon( icono ), lista.value(0) );
-				break;
-				case 2: // 2 columna
-					myCombobox->addItem( QIcon( icono ), lista.value(0), lista.value(1) );
-				break;
-				case 3: // 3 columna
-					myCombobox->addItem( QIcon( icono ), lista.value(0), lista.value(1) );
-				break;
-				default:
-					myCombobox->addItem( QIcon( icono ), lista.value(0) );
-				break;
-			}
-		}
-	}
-	file.close();
+	cargarListaArchivosComboBox(cbx, dirScripts, select_data, CbxListJsi, filter);
 }
 
 // Carga Iconos e imagenes soportadas en un QComboBox de un directorio
-void Funciones::CargarIconosComboBox(QString iconDir, QComboBox *myCombobox, QStringList filters)
+void Funciones::cargarIconosComboBox(QComboBox *cbx, QString iconDir, QString select_data, QString filter)
 {
-	QDir dir( iconDir );
-	dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-	dir.setSorting(QDir::Name);
-	dir.setNameFilters(filters);
-	QFileInfoList list = dir.entryInfoList();
-	myCombobox->clear();
-	myCombobox->addItem( QIcon( stTheme+"img24/emu_datos.png" ), "datos"   , "datos"    );
-	myCombobox->addItem( QIcon( stTheme+"img24/emu_dbx.png"   ), "dosbox"  , "dosbox"   );
-	myCombobox->addItem( QIcon( stTheme+"img24/emu_svm.png"   ), "scummvm" , "scummvm"  );
-	myCombobox->addItem( QIcon( stTheme+"img24/emu_vdms.png"  ), "vdmsound", "vdmsound" );
-	for(int i = 0; i < list.size(); ++i)
-	{
-		QFileInfo fileInfo = list.at(i);
-		QPixmap pixmap(iconDir + fileInfo.fileName() );
-		myCombobox->addItem( QIcon( pixmap ), fileInfo.completeBaseName(), fileInfo.fileName() );
-	}
+	cargarListaArchivosComboBox(cbx, iconDir, select_data, CbxListIcon, filter);
 }
 
-// Carga la lista del ScummVM en un QTreeWidget
-void Funciones::CargarDatosListaSvm(QString archivo, QTreeWidget *myTreeWidget)
+// Carga las distintos archivos la ruta indicada en una Lista.
+void Funciones::cargarArchivosTwLista(QTreeWidget *twList, QString m_dir, QString filter, QString filter_sep, QString img)
 {
-// Abrimos la lista de compatibilidad del ScummVM y rellenamos el twScummVM
-	QFile file( ComprobarArchivoAlternativo(archivo) );
-	QStringList svm_Lista, svm_ListaTemp;
-
-	myTreeWidget->clear();
-	if( file.open(QIODevice::ReadOnly)!=0 )
-	{
-		QTextStream in(&file);
-		in.setCodec("UTF-8");
-
-		while ( !in.atEnd() )
-			svm_ListaTemp << in.readLine();
-
-		for( int i = 0; i < svm_ListaTemp.size(); i++ )
-		{
-			if( svm_ListaTemp[i] != "" )
-			{
-				svm_Lista = svm_ListaTemp[i].split( "|" );
-
-				QTreeWidgetItem *item = new QTreeWidgetItem( myTreeWidget );
-				item->setText( 1, svm_Lista.value(0) );
-				if( svm_Lista.value(1) == "" )
-				{
-					item->setIcon( 0, QIcon(stTheme+"imgsvm/svmlist_space.png") );
-
-					item->setTextColor( 1, QColor(0,0,0) );
-					item->setFont( 1, QFont("Times", 10, QFont::Bold));
-					if( svm_Lista.value(2) == "-1" || svm_Lista.value(2) == "" )
-						item->setIcon( 1, QIcon(stTheme+"imgsvm/svmlist_space.png") );
-					else
-						item->setIcon( 1, QIcon(stTheme+"imgsvm/"+svm_Lista.value(2)+".png") );
-				} else {
-					item->setIcon( 0, QIcon(stTheme+"imgsvm/"+svm_Lista.value(2)+".png") );
-
-					if (QFile::exists(stTheme+"icon_svm/"+svm_Lista.value(3)) )
-						item->setIcon( 1, QIcon(stTheme+"icon_svm/"+svm_Lista.value(3)) );
-					else
-						item->setIcon( 1, QIcon(stTheme+"icon_svm/sinimg.png") );
-				}
-
-				item->setText( 2, svm_Lista.value(1) );
-			}else {
-				QTreeWidgetItem *item = new QTreeWidgetItem( myTreeWidget );
-				item->setText( 0, "" );
-				item->setText( 1, "" );
-				item->setText( 2, "" );
-				item->setIcon( 0, QIcon(stTheme+"icon_svm/sinimg.png") );
-				item->setIcon( 1, QIcon(stTheme+"icon_svm/sinimg.png") );
-			}
-		}
-	}
-	file.close();
-}
-
-//Carga la lista de los Smiles y los devuelve en un QHash<QString, QString>
-QHash<QString, QString> Funciones::Cargar_Smiles(QString archivo)
-{
-	QFile file( archivo );
-	QStringList smiles_Lista, smiles_ListaTemp;
-	QHash<QString, QString> listSmailes;
-
-	listSmailes.clear();
-	if( file.open(QIODevice::ReadOnly)!=0 )
-	{
-		QTextStream in(&file);
-		in.setCodec("UTF-8");
-
-		while ( !in.atEnd() )
-			smiles_ListaTemp << in.readLine();
-
-		for( int i = 0; i < smiles_ListaTemp.size(); i++ )
-		{
-			smiles_Lista = smiles_ListaTemp[i].split( "\",\"" );
-			listSmailes.insert( smiles_Lista.value(0), smiles_Lista.value(1) );
-		}
-	}
-	return listSmailes;
-}
-
-//Carga la lista de los Smiles en un TreeWidget y los devuelve en un QHash<QString, QString>
-QHash<QString, QString> Funciones::Cargar_Smiles(QString archivo, QTreeWidget *myTreeWidget)
-{
-	QFile file( archivo );
-	QStringList smiles_Lista, smiles_ListaTemp;
-	QHash<QString, QString> listSmailes;
-
-	myTreeWidget->clear();
-	listSmailes.clear();
-	if( file.open(QIODevice::ReadOnly)!=0 )
-	{
-		QTextStream in(&file);
-		in.setCodec("UTF-8");
-
-		while ( !in.atEnd() )
-			smiles_ListaTemp << in.readLine();
-
-		for( int i = 0; i < smiles_ListaTemp.size(); i++ )
-		{
-			smiles_Lista = smiles_ListaTemp[i].split( "\",\"" );
-			listSmailes.insert( smiles_Lista.value(0), smiles_Lista.value(1) );
-
-			QTreeWidgetItem *item_smiles = new QTreeWidgetItem( myTreeWidget );
-			item_smiles->setText( 0, smiles_Lista.value(0)          ); // codigo
-			item_smiles->setIcon( 0, QIcon( smiles_Lista.value(1) ) ); // imagen
-		}
-	}
-
-	return listSmailes;
-}
-
-// Remplaza texto por las imagenes de los emoticones
-QString Funciones::ReemplazaTextoSmiles(QString str, QHash<QString, QString> lista)
-{
-	QHash<QString, QString>::const_iterator i_Hash;
-
-	for( i_Hash = lista.constBegin(); i_Hash != lista.constEnd(); ++i_Hash )
-		str.replace( i_Hash.key(), "<img src=\""+i_Hash.value()+"\" />");
-
-	return str;
-}
-
-// Carga los Distintos datos para Ordenar
-QStringList Funciones::CargaDatosListas(QString archivo, QString delimitador)
-{
-	QFile file( archivo );
-	QStringList lista, listaTemp, listaDatos;
-	//QHash<QString, QString> listaDatos;
-
-	listaDatos.clear();
-	if( file.open(QIODevice::ReadOnly)!=0 )
-	{
-		QTextStream in(&file);
-		in.setCodec("UTF-8");
-
-		while ( !in.atEnd() )
-			listaTemp << in.readLine();
-
-		for( int i = 0; i < listaTemp.size(); i++ )
-		{
-			lista = listaTemp[i].split( delimitador );
-			listaDatos << lista.value(0);
-		}
-	}
-	return listaDatos;
-}
-
-void Funciones::CargarListaDeCaptura(QTreeWidget *myTreeWidget, const QString directorio, QStringList filters, QString imagen)
-{
-	myTreeWidget->clear();
 	QString archivo;
-	QDir dir( directorio );
-	dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-	dir.setSorting(QDir::Name);
-	dir.setNameFilters(filters);
+	QFileInfoList list_files = getListFiles(m_dir, filter.split(filter_sep, QString::SkipEmptyParts));
 
-	if( dir.exists() )
+	const int listSize = list_files.size();
+	twList->clear();
+	if( listSize > -1 )
 	{
-		QFileInfoList list = dir.entryInfoList();
-
-		for (int i = 0; i < list.size(); ++i)
+		for (int i = 0; i < listSize; ++i)
 		{
-			QFileInfo fileInfo = list.at(i);
-
-			if( directorio.endsWith("/") )
-				archivo = directorio + fileInfo.fileName();
+			if( m_dir.endsWith("/") || m_dir.endsWith("\\") )
+				archivo = m_dir + list_files.at(i).fileName();
 			else
-				archivo = directorio + "/" + fileInfo.fileName();
+				archivo = m_dir +"/"+ list_files.at(i).fileName();
 
-			QTreeWidgetItem *item = new QTreeWidgetItem( myTreeWidget );
-			if( imagen == "" )
+			QTreeWidgetItem *item = new QTreeWidgetItem( twList );
+			if( img.isEmpty() )
 			{
-				item->setIcon( 0, QIcon( archivo ) );
+				if( QFile::exists(archivo) )
+					item->setIcon( 0, QIcon( archivo ) );
+				else
+					item->setIcon( 0, QIcon(stTheme +"images/juego_sin_imagen.png") );
 				item->setText( 0, "" );
 			} else {
-				if( QFile::exists(stTheme +"img16/"+ imagen) )
-					item->setIcon( 0, QIcon(stTheme +"img16/"+ imagen) );// Videos/Sonidos
+				if( QFile::exists(stTheme +"img16/"+ img) )
+					item->setIcon( 0, QIcon(stTheme +"img16/"+ img) );
 				else
-					item->setIcon( 0, QIcon(stTheme+"img16/tag.png") );
-				item->setText( 0, fileInfo.fileName() );
+					item->setIcon( 0, QIcon(stTheme +"img16/tag.png") );
+				item->setText( 0, list_files.at(i).fileName() );
 			}
 			item->setText( 1, archivo );
 		}
 	}
 }
 
-// Crea la configuración del ScummVM
-void Funciones::CreaIniScummVM(QString dirIni, QHash<QString, QString> conf_Svm)
+// Carga la lista de datos de un archivo a un QTreeWidget
+void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoListTw tipo, QString sep, bool isLng)
 {
-	QFile file_out( dirIni );
-	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
+	QFile file_in( archivo );
+	QStringList lista;
+	QString linea, titulo, dato, extra, img, dir_img;
+	int col_titulo, col_dato, col_nada;
+	QFont m_font;
+	m_font.setBold(true);
+	col_titulo = 0;
+	col_dato   = 1;
+	col_nada   = 2;
+
+	if( !file_in.exists() )
+		file_in.setFileName(archivo.replace(stDirApp, ":/"));
+
+//	twList->clear();
+	if( file_in.open(QIODevice::ReadOnly | QIODevice::Text) )
+	{
+		QTextStream in( &file_in );
+		in.setCodec("UTF-8");
+		while ( !in.atEnd() )
+		{
+			linea = in.readLine();
+			if( linea.isEmpty() )
+			{
+				QTreeWidgetItem *item = new QTreeWidgetItem( twList );
+				switch ( tipo )
+				{
+					case TwListSvm:
+						item->setIcon( 0, QIcon(stTheme +"img_svm/sinimg.png") );
+						item->setIcon( 1, QIcon(stTheme +"icon_svm/sinimg.png") );
+					break;
+					case TwListEmu:
+						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
+					break;
+					case TwListTraduccion:
+						item->setIcon( 1, QIcon(stTheme +"img16/sinimg.png") );
+					break;
+					case TwListSmile:
+						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
+					break;
+					case TwList2col:
+						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
+					break;
+					case TwList3col:
+						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
+					break;
+				}
+				item->setText( 0, "" );
+				item->setText( 1, "" );
+				item->setText( 2, "" );
+				item->setText( 3, "" );
+				item->setText( 4, "" );
+			} else {
+				lista = linea.split( sep );
+
+				QTreeWidgetItem *item = new QTreeWidgetItem( twList );
+				switch ( tipo )
+				{
+					case TwListSvm:
+					case TwListEmu:
+						titulo = lista.at(0);
+						dato   = lista.at(1);
+						extra  = lista.at(2);
+						img    = lista.at(3);
+
+						if( tipo == TwListEmu )
+						{
+							if( isLng )
+								dir_img = stTheme +"img_lng/";
+							else
+								dir_img = stThemeApp +"img16_cat/";
+						} else {
+							dir_img = stTheme +"icon_svm/";
+							col_nada   = 0;
+							col_titulo = 1;
+							col_dato   = 2;
+
+							if( dato.isEmpty() )
+							{
+								item->setTextColor( 1, QColor(0,0,0) );
+								item->setFont( 1, m_font);
+							}
+
+							if( extra.isEmpty() )
+								item->setIcon( 0, QIcon(stTheme +"img_svm/sinimg.png") );
+							else
+								item->setIcon( 0, QIcon(stTheme +"img_svm/"+ extra +".png") );
+						}
+					break;
+					case TwListSmile:
+					case TwList2col:
+						titulo = lista.at(0);
+						dato   = "";
+						extra  = "";
+						img    = lista.at(1);
+
+						if( isLng )
+							dir_img = stTheme +"img_lng/";
+						else
+							dir_img = stTheme +"img16/";
+
+						if( tipo == TwListSmile )
+							dir_img = stTheme +"smiles/";
+					break;
+					case TwListTraduccion:
+					case TwList3col:
+						titulo = lista.at(0);
+						dato   = lista.at(1);
+						extra  = "";
+						img    = lista.at(2);
+
+						if( isLng )
+							dir_img = stTheme +"img_lng/";
+						else
+							dir_img = stTheme +"img16/";
+
+						if( tipo == TwListTraduccion )
+						{
+							titulo  = lista.at(1);
+							dato    = lista.at(0);
+							dir_img = stTheme +"img_lng/";
+
+							item->setFont( 0, m_font         );
+							item->setText( 0, lista.at(0) );
+						}
+					break;
+				}
+
+				if( img.isEmpty() )
+					img = "sinimg.png";
+
+				if( QFile::exists(dir_img + img) )
+					item->setIcon( col_titulo, QIcon(dir_img + img) );
+				else
+					item->setIcon( col_titulo, QIcon(dir_img +"sinimg.png") );
+
+				item->setText( col_nada  , ""     );
+				item->setText( col_titulo, titulo );
+				item->setText( col_dato  , dato   );
+				item->setText( 3         , extra  );
+				item->setText( 4         , img    );
+			}
+		}
+	}
+	file_in.close();
+}
+
+// Guarda la lista de datos de un QTreeWidget a un archivo
+void Funciones::guardarDatosTwLista(QTreeWidget *twList, QString archivo, TipoListTw tipo, QString sep)
+{
+	QFile file_out;
+	file_out.setFileName( archivo );
+
+	comprobarDirectorio( getInfoFile(archivo).Path );
+
+	if( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
 	{
 		QTextStream out(&file_out);
-		out.setAutoDetectUnicode(true);
-		out << "[" << conf_Svm["Svm_game_label"] << "]" << endl;
-		out << "description="       << conf_Svm["Svm_description"]       << endl;
-		out << "gameid="            << conf_Svm["Svm_game"]              << endl; // monkey
-		out << "language="          << conf_Svm["Svm_language"]          << endl; // es
-		out << "subtitles="         << conf_Svm["Svm_subtitles"]         << endl; // true
-		out << "platform="          << conf_Svm["Svm_platform"]          << endl; // pc
-		out << "gfx_mode="          << conf_Svm["Svm_gfx_mode"]          << endl; // 2x
-		out << "render_mode="       << conf_Svm["Svm_render_mode"]       << endl; // hercGreen
-		out << "fullscreen="        << conf_Svm["Svm_fullscreen"]        << endl; // true
-		out << "aspect_ratio="      << conf_Svm["Svm_aspect_ratio"]      << endl; // true
-		out << "path="              << conf_Svm["Svm_path"]              << endl;
-		out << "extrapath="         << conf_Svm["Svm_path_extra"]        << endl;
-		out << "savepath="          << conf_Svm["Svm_path_save"]         << endl;
-		out << "music_driver="      << conf_Svm["Svm_music_driver"]      << endl; // adlib
-		out << "enable_gs="         << conf_Svm["Svm_enable_gs"]         << endl; // true
-		out << "multi_midi="        << conf_Svm["Svm_multi_midi"]        << endl; // true
-		out << "native_mt32="       << conf_Svm["Svm_native_mt32"]       << endl; // true
-		out << "master_volume="     << conf_Svm["Svm_master_volume"]     << endl; // 192
-		out << "music_volume="      << conf_Svm["Svm_music_volume"]      << endl; // 192
-		out << "sfx_volume="        << conf_Svm["Svm_sfx_volume"]        << endl; // 192
-		out << "speech_volume="     << conf_Svm["Svm_speech_volume"]     << endl; // 192
-		out << "tempo="             << conf_Svm["Svm_tempo"]             << endl; // 0
-		out << "talkspeed="         << conf_Svm["Svm_talkspeed"]         << endl; // 107
-		out << "cdrom="             << conf_Svm["Svm_cdrom"]             << endl; // 0
-		out << "joystick_num="      << conf_Svm["Svm_joystick_num"]      << endl; // -1
-		out << "output_rate="       << conf_Svm["Svm_output_rate"]       << endl; // 44100
-		out << "midi_gain="         << conf_Svm["Svm_midi_gain"]         << endl; // 257
-		out << "copy_protection="   << conf_Svm["Svm_copy_protection"]   << endl; // false
-		out << "soundfont="         << conf_Svm["Svm_sound_font"]        << endl;
-		out << "walkspeed="         << conf_Svm["Svm_walkspeed"]         << endl;
-		out << "disable_dithering=" << conf_Svm["Svm_disable_dithering"] << endl; // false
-		out << "mute="              << conf_Svm["Svm_mute"]              << endl; // false
-		out << "opl_driver="        << conf_Svm["Svm_opl_driver"]        << endl; // auto
-		out << "speech_mute="       << conf_Svm["Svm_speech_mute"]       << endl; // true
+		out.setCodec("UTF-8");
+
+		if( twList->topLevelItemCount() > 0 )
+		{
+			const int listSize = twList->topLevelItemCount();
+			for (int i = 0; i < listSize; ++i)
+			{
+				QTreeWidgetItem *item = twList->topLevelItem( i );
+
+				switch ( tipo )
+				{
+					case TwListSvm:
+						if( item->text(1).isEmpty() && item->text(2).isEmpty() )
+							out << endl;
+						else
+							out << item->text(1) << sep << item->text(2) << sep << item->text(3) << sep << item->text(4) << endl;
+					break;
+					case TwListEmu:
+						out << item->text(0) << sep << item->text(1) << sep << item->text(3) << sep << item->text(4) << endl;
+					break;
+					case TwListTraduccion:
+						//
+					break;
+					case TwListSmile:
+					case TwList2col:
+						out << item->text(0) << sep << item->text(4) << endl;
+					break;
+					case TwList3col:
+						out << item->text(0) << sep << item->text(1) << sep << item->text(4) << endl;
+					break;
+				}
+			}
+		}
 
 		out.flush();
-		file_out.close();
 	}
+	file_out.close();
+}
+
+// Carga la lista de datos.
+QList<stGrlDatos> Funciones::cargaListaDatos(QString archivo, int num_col, QString sep)
+{
+	QList<stGrlDatos> dato_list;
+	stGrlDatos dato;
+	QFile file_in( archivo );
+	QStringList lista;
+	QString linea;
+	int key_col = 1;
+	int img_col = 2;
+
+	if( !file_in.exists() )
+		file_in.setFileName(archivo.replace(stDirApp, ":/"));
+
+	switch ( num_col )
+	{
+		case 2:
+			key_col = 0;
+			img_col = 1;
+		break;
+		case 3:
+			key_col = 1;
+			img_col = 2;
+		break;
+		case 4:
+			key_col = 1;
+			img_col = 3;
+		break;
+	}
+
+	dato_list.clear();
+	if( file_in.open(QIODevice::ReadOnly) != 0 )
+	{
+		QTextStream in(&file_in);
+		in.setCodec("UTF-8");
+		while ( !in.atEnd() )
+		{
+			linea = in.readLine();
+			if( !linea.isEmpty() )
+			{
+				lista = linea.split( sep );
+
+				dato.titulo = lista.at(0);
+				dato.icono  = lista.at(img_col);
+				dato.extra  = (num_col == 4) ? lista.at(2) : "";
+				dato.key    = lista.at(key_col);
+
+				dato_list << dato;
+			}
+		}
+	}
+
+	return dato_list;
+}
+
+// Carga la lista de datos en un QHash.
+QHash<QString, stGrlDatos> Funciones::cargaDatosQHash(QString archivo, int num_col, QString sep)
+{
+	QList<stGrlDatos> list = cargaListaDatos(archivo, num_col, sep);
+	QHash<QString, stGrlDatos> dato_list;
+	const int listSize = list.size();
+	for (int i = 0; i < listSize; ++i)
+		dato_list.insert(list.at(i).key, list.at(i));
+
+	return dato_list;
+}
+
+// Carga la lista de datos de un archivo a un QComboBox
+void Funciones::cargarDatosComboBox(QComboBox *cbx, QString archivo, QString theme, QString select_data, int num_col, QString sep, bool isClear, bool keyVisible)
+{
+	QList<stGrlDatos> list = cargaListaDatos(archivo, num_col, sep);
+	QString key_visible;
+
+	if( isClear )
+		cbx->clear();
+
+	const int listSize = list.size();
+	for (int i = 0; i < listSize; ++i)
+	{
+		key_visible = keyVisible ? "("+ list.at(i).key +") - " : "";
+		cbx->addItem(QIcon(theme + list.at(i).icono), key_visible + list.at(i).titulo, list.at(i).key);
+	}
+
+	if( !select_data.isEmpty() )
+	{
+		int row = cbx->findData(select_data, Qt::UserRole, Qt::MatchExactly);
+		cbx->setCurrentIndex( row );
+	}
+}
+
+// Carga la lista de datos de un archivo a un QCheckComboBox
+void Funciones::cargarDatosCheckComboBox(QCheckComboBox *chk_cbx, QString archivo, QString theme, QString select_data, int num_col, QString sep)
+{
+	QList<stGrlDatos> list = cargaListaDatos(archivo, num_col, sep);
+
+	chk_cbx->clear();
+	const int listSize = list.size();
+	for (int i = 0; i < listSize; ++i)
+		chk_cbx->addItem(QIcon(theme + list.at(i).icono), list.at(i).titulo, list.at(i).key);
+
+	int row = chk_cbx->findData(select_data, Qt::UserRole, Qt::MatchExactly);
+	chk_cbx->setCurrentIndex( row );
+}
+
+// Remplaza texto por las imagenes de los emoticones
+QString Funciones::reemplazaTextoSmiles(QString str, QHash<QString, stGrlDatos> lista)
+{
+	foreach (const stGrlDatos &smile, lista)
+		str.replace(smile.key, "<img src=\":smile_rs_"+ smile.icono +"\" alt=\""+ smile.key +"\" title=\""+ smile.key +"\"> ");
+	return str;
+}
+
+// Devuelve imagenes para la info del juego
+QString Funciones::getImgDatos(QHash<QString, stGrlDatos> datos, QStringList lista, bool isLng)
+{
+	QString img_lng = "";
+	const int listSize = lista.size();
+	for (int i=0; i < listSize; ++i)
+	{
+		if( !lista.at(i).isEmpty() )
+		{
+			foreach (const stGrlDatos &dat, datos)
+			{
+				if( dat.titulo == lista.at(i) || dat.extra == lista.at(i) )
+				{
+					if( isLng )
+						img_lng.append("<img src=\":idioma_rs_"+ dat.icono +"\" alt=\""+ dat.titulo +"\" title=\""+ dat.titulo +"\"> "+ dat.titulo +" ");
+					else
+						img_lng.append("<img src=\""+ stTheme +"img16/"+ dat.icono +"\" alt=\""+ dat.titulo +"\" title=\""+ dat.titulo +"\"> "+ dat.titulo +" ");
+				}
+			}
+		}
+	}
+
+	return img_lng;
+}
+
+void Funciones::insertaIconos(QHash<QString, QPixmap> &ico, QString m_dir, QString contiene, QString filter, bool isExt)
+{
+	QFileInfoList list_files = getListFiles(m_dir, filter.split(";", QString::SkipEmptyParts));
+	QPixmap img_ico;
+	const int listSize = list_files.size();
+	for (int i=0; i < listSize; ++i)
+	{
+		if( contiene.isEmpty() )
+		{
+			if( !img_ico.load(m_dir + list_files.at(i).fileName()) )
+				img_ico.load(":/img16/sinimg.png");
+
+			if( isExt )
+				ico.insert(list_files.at(i).fileName(), img_ico);
+			else
+				ico.insert(list_files.at(i).baseName(), img_ico);
+		} else {
+			if( list_files.at(i).fileName().contains(contiene, Qt::CaseInsensitive) )
+			{
+				if( !img_ico.load(m_dir + list_files.at(i).fileName()) )
+					img_ico.load(":/img16/sinimg.png");
+
+				if( isExt )
+					ico.insert(list_files.at(i).fileName(), img_ico);
+				else
+					ico.insert(list_files.at(i).baseName(), img_ico);
+			}
+		}
+	}
+}
+
+// Datos por defecto.
+stDatosJuego Funciones::getDefectDatos(QString icono, QHash<QString, QString> dato)
+{
+	bool isQHash = dato.isEmpty() ? false : true;
+	stDatosJuego datos;
+	datos.idgrl = isQHash ? dato["Dat_idgrl"] : "";
+//--
+	datos.icono            = isQHash ? dato["Dat_icono"]            : icono +".png";
+	datos.titulo           = isQHash ? dato["Dat_titulo"]           : "";
+	datos.subtitulo        = isQHash ? dato["Dat_subtitulo"]        : "";
+	datos.genero           = isQHash ? dato["Dat_genero"]           : "";
+	datos.compania         = isQHash ? dato["Dat_compania"]         : "";
+	datos.desarrollador    = isQHash ? dato["Dat_desarrollador"]    : "";
+	datos.tema             = isQHash ? dato["Dat_tema"]             : "";
+	datos.grupo            = isQHash ? dato["Dat_grupo"]            : "";
+	datos.perspectiva      = isQHash ? dato["Dat_perspectiva"]      : "";
+	datos.idioma           = isQHash ? dato["Dat_idioma"]           : "";
+	datos.idioma_voces     = isQHash ? dato["Dat_idioma_voces"]     : "";
+	datos.formato          = isQHash ? dato["Dat_formato"]          : "";
+	datos.anno             = isQHash ? dato["Dat_anno"]             : "";
+	datos.numdisc          = isQHash ? dato["Dat_numdisc"]          : "";
+	datos.sistemaop        = isQHash ? dato["Dat_sistemaop"]        : "";
+	datos.tamano           = isQHash ? dato["Dat_tamano"]           : "";
+	datos.graficos         = isQHash ? dato["Dat_graficos"]         : "0";
+	datos.sonido           = isQHash ? dato["Dat_sonido"]           : "0";
+	datos.jugabilidad      = isQHash ? dato["Dat_jugabilidad"]      : "0";
+	datos.original         = isQHash ? dato["Dat_original"]         : "false";
+	datos.estado           = isQHash ? dato["Dat_estado"]           : "";
+	datos.thumbs           = isQHash ? dato["Dat_thumbs"]           : "";
+	datos.thumbs_new       = isQHash ? StrToBool(dato["Dat_thumbs_new"])      : false;
+	datos.cover_front      = isQHash ? dato["Dat_cover_front"]      : "";
+	datos.cover_front_new  = isQHash ? StrToBool(dato["Dat_cover_front_new"]) : false;
+	datos.cover_back       = isQHash ? dato["Dat_cover_back"]       : "";
+	datos.cover_back_new   = isQHash ? StrToBool(dato["Dat_cover_back_new"])  : false;
+	datos.fecha            = isQHash ? dato["Dat_fecha"]            : "";
+	datos.tipo_emu         = isQHash ? dato["Dat_tipo_emu"]         : "datos";
+	datos.comentario       = isQHash ? dato["Dat_comentario"]       : "";
+	datos.favorito         = isQHash ? dato["Dat_favorito"]         : "false";
+	datos.rating           = isQHash ? dato["Dat_rating"]           : "0";
+	datos.edad_recomendada = isQHash ? dato["Dat_edad_recomendada"] : "nd";
+	datos.usuario          = isQHash ? dato["Dat_usuario"]          : "";
+	datos.path_exe         = isQHash ? dato["Dat_path_exe"]         : "";
+	datos.parametros_exe   = isQHash ? dato["Dat_parametros_exe"]   : "";
+	datos.path_capturas    = isQHash ? dato["Dat_path_capturas"]    : "";
+	datos.path_setup       = isQHash ? dato["Dat_path_setup"]       : "";
+	datos.parametros_setup = isQHash ? dato["Dat_parametros_setup"] : "";
+
+	return datos;
+}
+
+// DOSBox por defecto.
+stConfigDOSBox Funciones::getDefectDOSBox(QHash<QString, QString> dato)
+{
+	bool isQHash = dato.isEmpty() ? false : true;
+	stConfigDOSBox datos;
+	datos.id    = isQHash ? dato["Dbx_id"]    : "";
+	datos.idgrl = isQHash ? dato["Dbx_idgrl"] : "";
+	datos.idcat = isQHash ? dato["Dbx_idcat"] : "";
+// [sdl]
+	datos.sdl_fullscreen        = isQHash ? dato["Dbx_sdl_fullscreen"]        : "false";
+	datos.sdl_fulldouble        = isQHash ? dato["Dbx_sdl_fulldouble"]        : "false";
+	datos.sdl_fullfixed         = isQHash ? dato["Dbx_sdl_fullfixed"]         : "false";
+	datos.sdl_fullresolution    = isQHash ? dato["Dbx_sdl_fullresolution"]    : "original";
+	datos.sdl_windowresolution  = isQHash ? dato["Dbx_sdl_windowresolution"]  : "original";
+	datos.sdl_output            = isQHash ? dato["Dbx_sdl_output"]            : "surface";
+	datos.sdl_hwscale           = isQHash ? dato["Dbx_sdl_hwscale"]           : "1.00";
+	datos.sdl_autolock          = isQHash ? dato["Dbx_sdl_autolock"]          : "true";
+	datos.sdl_sensitivity       = isQHash ? dato["Dbx_sdl_sensitivity"]       : "100";
+	datos.sdl_waitonerror       = isQHash ? dato["Dbx_sdl_waitonerror"]       : "true";
+	datos.sdl_priority          = isQHash ? dato["Dbx_sdl_priority"]          : "higher,normal";
+	datos.sdl_mapperfile        = isQHash ? dato["Dbx_sdl_mapperfile"]        : "mapper.txt";
+	datos.sdl_usescancodes      = isQHash ? dato["Dbx_sdl_usescancodes"]      : "true";
+// [dosbox]
+	datos.dosbox_language       = isQHash ? dato["Dbx_dosbox_language"]       : "";
+	datos.dosbox_machine        = isQHash ? dato["Dbx_dosbox_machine"]        : "svga_s3";
+	datos.dosbox_captures       = isQHash ? dato["Dbx_dosbox_captures"]       : "capture";
+	datos.dosbox_memsize        = isQHash ? dato["Dbx_dosbox_memsize"]        : "16";
+// [render]
+	datos.render_frameskip      = isQHash ? dato["Dbx_render_frameskip"]      : "0";
+	datos.render_aspect         = isQHash ? dato["Dbx_render_aspect"]         : "false";
+	datos.render_scaler         = isQHash ? dato["Dbx_render_scaler"]         : "normal2x";
+// [cpu]
+	datos.cpu_core              = isQHash ? dato["Dbx_cpu_core"]              : "auto";
+	datos.cpu_cputype           = isQHash ? dato["Dbx_cpu_cputype"]           : "auto";
+	datos.cpu_cycles            = isQHash ? dato["Dbx_cpu_cycles"]            : "auto";
+	datos.cpu_cycles_realmode   = isQHash ? dato["Dbx_cpu_cycles_realmode"]   : "";
+	datos.cpu_cycles_protmode   = isQHash ? dato["Dbx_cpu_cycles_protmode"]   : "";
+	datos.cpu_cycles_limitmode  = isQHash ? dato["Dbx_cpu_cycles_limitmode"]  : "";
+	datos.cpu_cycleup           = isQHash ? dato["Dbx_cpu_cycleup"]           : "10";
+	datos.cpu_cycledown         = isQHash ? dato["Dbx_cpu_cycledown"]         : "20";
+// [mixer]
+	datos.mixer_nosound         = isQHash ? dato["Dbx_mixer_nosound"]         : "false";
+	datos.mixer_rate            = isQHash ? dato["Dbx_mixer_rate"]            : "44100";
+	datos.mixer_blocksize       = isQHash ? dato["Dbx_mixer_blocksize"]       : "1024";
+	datos.mixer_prebuffer       = isQHash ? dato["Dbx_mixer_prebuffer"]       : "20";
+// [midi]
+	datos.midi_mpu401           = isQHash ? dato["Dbx_midi_mpu401"]           : "intelligent";
+	datos.midi_intelligent      = isQHash ? dato["Dbx_midi_intelligent"]      : "true";
+	datos.midi_device           = isQHash ? dato["Dbx_midi_device"]           : "default";
+	datos.midi_config           = isQHash ? dato["Dbx_midi_config"]           : "";
+	datos.midi_mt32rate         = isQHash ? dato["Dbx_midi_mt32rate"]         : "44100";
+// [sblaster]
+	datos.sblaster_sbtype       = isQHash ? dato["Dbx_sblaster_sbtype"]       : "sb16";
+	datos.sblaster_sbbase       = isQHash ? dato["Dbx_sblaster_sbbase"]       : "220";
+	datos.sblaster_irq          = isQHash ? dato["Dbx_sblaster_irq"]          : "7";
+	datos.sblaster_dma          = isQHash ? dato["Dbx_sblaster_dma"]          : "1";
+	datos.sblaster_hdma         = isQHash ? dato["Dbx_sblaster_hdma"]         : "5";
+	datos.sblaster_mixer        = isQHash ? dato["Dbx_sblaster_mixer"]        : "true";
+	datos.sblaster_oplmode      = isQHash ? dato["Dbx_sblaster_oplmode"]      : "auto";
+	datos.sblaster_oplemu       = isQHash ? dato["Dbx_sblaster_oplemu"]       : "default";
+	datos.sblaster_oplrate      = isQHash ? dato["Dbx_sblaster_oplrate"]      : "44100";
+// [gus]
+	datos.gus_gus               = isQHash ? dato["Dbx_gus_gus"]               : "false";
+	datos.gus_gusrate           = isQHash ? dato["Dbx_gus_gusrate"]           : "44100";
+	datos.gus_gusbase           = isQHash ? dato["Dbx_gus_gusbase"]           : "240";
+	datos.gus_irq1              = isQHash ? dato["Dbx_gus_irq1"]              : "5";
+	datos.gus_irq2              = isQHash ? dato["Dbx_gus_irq2"]              : "5";
+	datos.gus_dma1              = isQHash ? dato["Dbx_gus_dma1"]              : "3";
+	datos.gus_dma2              = isQHash ? dato["Dbx_gus_dma2"]              : "3";
+	datos.gus_ultradir          = isQHash ? dato["Dbx_gus_ultradir"]          : "C:\\ULTRASND";
+// [speaker]
+	datos.speaker_pcspeaker     = isQHash ? dato["Dbx_speaker_pcspeaker"]     : "true";
+	datos.speaker_pcrate        = isQHash ? dato["Dbx_speaker_pcrate"]        : "44100";
+	datos.speaker_tandy         = isQHash ? dato["Dbx_speaker_tandy"]         : "auto";
+	datos.speaker_tandyrate     = isQHash ? dato["Dbx_speaker_tandyrate"]     : "44100";
+	datos.speaker_disney        = isQHash ? dato["Dbx_speaker_disney"]        : "true";
+// [joystick]
+	datos.joystick_type         = isQHash ? dato["Dbx_joystick_type"]         : "auto";
+	datos.joystick_timed        = isQHash ? dato["Dbx_joystick_timed"]        : "true";
+	datos.joystick_autofire     = isQHash ? dato["Dbx_joystick_autofire"]     : "false";
+	datos.joystick_swap34       = isQHash ? dato["Dbx_joystick_swap34"]       : "false";
+	datos.joystick_buttonwrap   = isQHash ? dato["Dbx_joystick_buttonwrap"]   : "false";
+// [modem]
+	datos.modem_modem           = isQHash ? dato["Dbx_modem_modem"]           : "false";
+	datos.modem_comport         = isQHash ? dato["Dbx_modem_comport"]         : "2";
+	datos.modem_listenport      = isQHash ? dato["Dbx_modem_listenport"]      : "23";
+// [dserial]
+	datos.dserial_directserial  = isQHash ? dato["Dbx_dserial_directserial"]  : "false";
+	datos.dserial_comport       = isQHash ? dato["Dbx_dserial_comport"]       : "1";
+	datos.dserial_realport      = isQHash ? dato["Dbx_dserial_realport"]      : "COM1";
+	datos.dserial_defaultbps    = isQHash ? dato["Dbx_dserial_defaultbps"]    : "1200";
+	datos.dserial_parity        = isQHash ? dato["Dbx_dserial_parity"]        : "N";
+	datos.dserial_bytesize      = isQHash ? dato["Dbx_dserial_bytesize"]      : "8";
+	datos.dserial_stopbit       = isQHash ? dato["Dbx_dserial_stopbit"]       : "1";
+// [serial]
+	datos.serial_1              = isQHash ? dato["Dbx_serial_1"]              : "dummy";
+	datos.serial_2              = isQHash ? dato["Dbx_serial_2"]              : "dummy";
+	datos.serial_3              = isQHash ? dato["Dbx_serial_3"]              : "disabled";
+	datos.serial_4              = isQHash ? dato["Dbx_serial_4"]              : "disabled";
+// [dos]
+	datos.dos_xms               = isQHash ? dato["Dbx_dos_xms"]               : "true";
+	datos.dos_ems               = isQHash ? dato["Dbx_dos_ems"]               : "true";
+	datos.dos_umb               = isQHash ? dato["Dbx_dos_umb"]               : "true";
+	datos.dos_keyboardlayout    = isQHash ? dato["Dbx_dos_keyboardlayout"]    : "auto";
+	datos.dos_version           = isQHash ? dato["Dbx_dos_version"]           : "";
+// [ipx]
+	datos.ipx_ipx               = isQHash ? dato["Dbx_ipx_ipx"]               : "false";
+	datos.ipx_type              = isQHash ? dato["Dbx_ipx_type"]              : "none";
+	datos.ipx_port              = isQHash ? dato["Dbx_ipx_port"]              : "213";
+	datos.ipx_ip                = isQHash ? dato["Dbx_ipx_ip"]                : "";
+// [autoexec]
+	datos.autoexec              = isQHash ? dato["Dbx_autoexec"]              : "";
+// Opciones
+	datos.opt_autoexec          = isQHash ? dato["Dbx_opt_autoexec"]          : "false";
+	datos.opt_loadfix           = isQHash ? dato["Dbx_opt_loadfix"]           : "false";
+	datos.opt_loadfix_mem       = isQHash ? dato["Dbx_opt_loadfix_mem"]       : "64";
+	datos.opt_consola_dbox      = isQHash ? dato["Dbx_opt_consola_dbox"]      : "false";
+	datos.opt_cerrar_dbox       = isQHash ? dato["Dbx_opt_cerrar_dbox"]       : "true";
+	datos.opt_cycle_sincronizar = isQHash ? dato["Dbx_opt_cycle_sincronizar"] : "false";
+// Path
+	datos.path_conf             = isQHash ? dato["Dbx_path_conf"]             : "";
+	datos.path_sonido           = isQHash ? dato["Dbx_path_sonido"]           : "waves";
+	datos.path_exe              = isQHash ? dato["Dbx_path_exe"]              : "";
+	datos.path_setup            = isQHash ? dato["Dbx_path_setup"]            : "";
+	datos.parametros_exe        = isQHash ? dato["Dbx_parametros_exe"]        : "";
+	datos.parametros_setup      = isQHash ? dato["Dbx_parametros_setup"]      : "";
+
+	return datos;
+}
+
+// ScummVM por defecto.
+stConfigScummVM Funciones::getDefectScummVM(QHash<QString, QString> dato)
+{
+	bool isQHash = dato.isEmpty() ? false : true;
+	stConfigScummVM datos;
+	datos.id    = isQHash ? dato["Svm_id"]    : "";
+	datos.idgrl = isQHash ? dato["Svm_idgrl"] : "";
+	datos.idcat = isQHash ? dato["Svm_idcat"] : "";
+//--
+	datos.game              = isQHash ? dato["Svm_game"]              : "";
+	datos.game_label        = isQHash ? dato["Svm_game_label"]        : "";
+	datos.language          = isQHash ? dato["Svm_language"]          : "es";
+	datos.subtitles         = isQHash ? dato["Svm_subtitles"]         : "true";
+	datos.platform          = isQHash ? dato["Svm_platform"]          : "pc";
+	datos.gfx_mode          = isQHash ? dato["Svm_gfx_mode"]          : "2x";
+	datos.render_mode       = isQHash ? dato["Svm_render_mode"]       : "";
+	datos.fullscreen        = isQHash ? dato["Svm_fullscreen"]        : "false";
+	datos.aspect_ratio      = isQHash ? dato["Svm_aspect_ratio"]      : "false";
+	datos.path              = isQHash ? dato["Svm_path"]              : "";
+	datos.path_setup        = isQHash ? dato["Svm_path_setup"]        : "";
+	datos.path_extra        = isQHash ? dato["Svm_path_extra"]        : "";
+	datos.path_save         = isQHash ? dato["Svm_path_save"]         : "";
+	datos.path_capturas     = isQHash ? dato["Svm_path_capturas"]     : "";
+	datos.path_sonido       = isQHash ? dato["Svm_path_sonido"]       : "";
+	datos.music_driver      = isQHash ? dato["Svm_music_driver"]      : "adlib";
+	datos.enable_gs         = isQHash ? dato["Svm_enable_gs"]         : "false";
+	datos.multi_midi        = isQHash ? dato["Svm_multi_midi"]        : "true";
+	datos.native_mt32       = isQHash ? dato["Svm_native_mt32"]       : "false";
+	datos.mute              = isQHash ? dato["Svm_mute"]              : "false";
+	datos.master_volume     = isQHash ? dato["Svm_master_volume"]     : "192";
+	datos.music_volume      = isQHash ? dato["Svm_music_volume"]      : "192";
+	datos.sfx_volume        = isQHash ? dato["Svm_sfx_volume"]        : "192";
+	datos.speech_volume     = isQHash ? dato["Svm_speech_volume"]     : "192";
+	datos.speech_mute       = isQHash ? dato["Svm_speech_mute"]       : "false";
+	datos.tempo             = isQHash ? dato["Svm_tempo"]             : "100";
+	datos.talkspeed         = isQHash ? dato["Svm_talkspeed"]         : "60";
+	datos.debuglevel        = isQHash ? dato["Svm_debuglevel"]        : "0";
+	datos.cdrom             = isQHash ? dato["Svm_cdrom"]             : "0";
+	datos.joystick_num      = isQHash ? dato["Svm_joystick_num"]      : "0";
+	datos.output_rate       = isQHash ? dato["Svm_output_rate"]       : "";
+	datos.midi_gain         = isQHash ? dato["Svm_midi_gain"]         : "100";
+	datos.copy_protection   = isQHash ? dato["Svm_copy_protection"]   : "false";
+	datos.sound_font        = isQHash ? dato["Svm_sound_font"]        : "";
+	datos.walkspeed         = isQHash ? dato["Svm_walkspeed"]         : "0";
+	datos.opl_driver        = isQHash ? dato["Svm_opl_driver"]        : "auto";
+	datos.disable_dithering = isQHash ? dato["Svm_disable_dithering"] : "false";
+	datos.alt_intro         = isQHash ? dato["Svm_alt_intro"]         : "false";
+	datos.boot_param        = isQHash ? dato["Svm_boot_param"]        : "";
+//--
+	datos.description       = isQHash ? dato["Svm_description"] : "";
+	datos.emu_svmpath       = isQHash ? dato["Svm_emu_svmpath"] : "";
+
+	return datos;
+}
+
+// VDMSound por defecto.
+stConfigVDMSound Funciones::getDefectVDMSound(QHash<QString, QString> dato)
+{
+	bool isQHash = dato.isEmpty() ? false : true;
+	stConfigVDMSound datos;
+	datos.id    = isQHash ? dato["Vdms_id"]    : "";
+	datos.idgrl = isQHash ? dato["Vdms_idgrl"] : "";
+	datos.idcat = isQHash ? dato["Vdms_idcat"] : "";
+//--
+	datos.path_conf       = isQHash ? dato["Vdms_path_conf"]       : "";
+	datos.path_exe        = isQHash ? dato["Vdms_path_exe"]        : "";
+	datos.program_1       = isQHash ? dato["Vdms_program_1"]       : "";
+	datos.program_2       = isQHash ? dato["Vdms_program_2"]       : "";
+	datos.vdms_debug_1    = isQHash ? dato["Vdms_vdms_debug_1"]    : "no";
+	datos.vdms_debug_2    = isQHash ? dato["Vdms_vdms_debug_2"]    : "";
+	datos.winnt_dos_1     = isQHash ? dato["Vdms_winnt_dos_1"]     : "no";
+	datos.winnt_dos_2     = isQHash ? dato["Vdms_winnt_dos_2"]     : "";
+	datos.winnt_dosbox_1  = isQHash ? dato["Vdms_winnt_dosbox_1"]  : "yes";
+	datos.winnt_dosbox_2  = isQHash ? dato["Vdms_winnt_dosbox_2"]  : "no";
+	datos.winnt_dosbox_3  = isQHash ? dato["Vdms_winnt_dosbox_3"]  : "no";
+	datos.winnt_storage_1 = isQHash ? dato["Vdms_winnt_storage_1"] : "yes";
+	datos.winnt_storage_2 = isQHash ? dato["Vdms_winnt_storage_2"] : "no";
+
+	return datos;
 }
 
 /*
  * INICIO MONTAJES DE UNIDADES ----------------------------------------------------------------------------------
+ * - Funcion para Poner nombres cortos en DOS.
+ * - Estado: Beta v 0.0.4
  *
 */
-// Funcion para Poner nombres cortos en DOS.
-// Estado: Beta v 0.0.3
-
-QString Funciones::getNameTo8Caracter(QString name)
+QString Funciones::getNameTo8Caracter(QString name, int index)
 {
-	if( name != "" )
-	{
+	if( name.isEmpty() )
+		return "";
+	else {
 		QString final, str, ext;
 		if( name.contains(".") )
 		{
@@ -1280,21 +2018,22 @@ QString Funciones::getNameTo8Caracter(QString name)
 			str = name;
 		}
 
+		int idx = IntToStr(index).length()-1;
+
 		// Contiene espacios
 		if( str.contains(" ") )
-			final = str.replace(" ","").replace(".","").left(6).append("~1").append(ext).toUpper();
+			final = str.replace(" ","").replace(".","").left(6-idx).append("~"+ IntToStr(index)).append(ext).toUpper();
 		else {
 		// No contiene espacios
 		// Si es mayor que 8 se covierte.
 			if( str.length() > 8 )
-				final =  str.left(6).append("~1").append(ext).toUpper();
+				final = str.left(6-idx).append("~"+ IntToStr(index)).append(ext).toUpper();
 			else
 				final = str.append(ext);
 		}
 
 		return final;
-	} else
-		return "";
+	}
 }
 
 QString Funciones::getShortPathName(QString longPath)
@@ -1303,83 +2042,135 @@ QString Funciones::getShortPathName(QString longPath)
  * - Archivos 8 carateres maximo
  * - Nombres sin espacios
  * - Carpetas con extensión
+ * - Carpetas similares nombre~1, nombre~2...
 */
-	if( longPath != "" )
+	if( !longPath.isEmpty() )
 	{
-//	#ifdef Q_OS_WIN32
-//		const char * lpath = longPath.replace("/","\\").toAscii();
-//		char spath[2048];
-//		int len = GetShortPathNameA(lpath,spath,sizeof(spath)-1);
-//		spath[len] = '\0';
-//		return QString(spath);
-//	#else
-		int listSize = 0;
-		QString f_name, f_path;
-		QStringList listShortPath, shortPath;
-		QFileInfo fi( longPath );
+		int index, idx_dos, listSize = 0;
+		QString f_name, f_path, sep;
+		QStringList listShortPath, shortPath, path_tmp, list_dir, list_dir_8names;
+#ifdef Q_OS_WIN32
+	sep = "\\";
+#else
+	sep = "/";
+#endif
+		QFileInfo fi( longPath.replace("\\", sep) );
 		f_name = fi.fileName();
-		f_path = fi.absolutePath().append("/").replace("/","\\");
+		f_path = fi.absolutePath().append("/").replace("/", sep);
 
 		shortPath.clear();
 		listShortPath.clear();
-		listShortPath = f_path.split("\\");
+		listShortPath = f_path.split(sep);
 		listSize = listShortPath.size();
 
-		for( int i = 0; i < listSize; ++i )
+		path_tmp << listShortPath.at(0);
+		shortPath << listShortPath.at(0);
+
+		for (int i = 1; i < listSize-1; ++i)
 		{
-			shortPath << getNameTo8Caracter(listShortPath.value(i));
+			QDir dir( str_end(path_tmp.join(sep), sep) );
+			list_dir = dir.entryList(QDir::NoDotAndDotDot | QDir::AllDirs);
+			list_dir_8names.clear();
+			idx_dos = 1;
+			for(int n = 0; n < list_dir.size(); ++n)
+			{
+				if( n > 0)
+				{
+					if( getNameTo8Caracter(list_dir.at(n), idx_dos) == getNameTo8Caracter(list_dir.at(n-1), idx_dos) )
+						++idx_dos;
+					else
+						idx_dos = 1;
+				}
+				list_dir_8names << getNameTo8Caracter(list_dir.at(n), idx_dos);
+			}
+			index = list_dir.indexOf( listShortPath.at(i) );
+			if( index > -1 )
+				shortPath << list_dir_8names.at(index);
+
+			path_tmp << listShortPath.at(i);
 		}
 
-		return shortPath.join("\\").append(getNameTo8Caracter(f_name));
-//	#endif
+		if( !f_name.isEmpty() )
+		{
+			QDir dir_exe( f_path );
+			list_dir = dir_exe.entryList(QDir::NoDotAndDotDot | QDir::Files);
+			list_dir_8names.clear();
+			idx_dos = 1;
+			for(int n = 0; n < list_dir.size(); ++n)
+			{
+				if( n > 0)
+				{
+					if( getNameTo8Caracter(list_dir.at(n), idx_dos) == getNameTo8Caracter(list_dir.at(n-1), idx_dos) )
+						++idx_dos;
+					else
+						idx_dos = 1;
+				}
+				list_dir_8names << getNameTo8Caracter(list_dir.at(n), idx_dos);
+			}
+			index = list_dir.indexOf( f_name );
+			if( index > -1 )
+				shortPath << list_dir_8names.at(index);
+		}
+
+		return shortPath.join("\\");
 	} else
 		return "";
 }
 
 // Crea la configuración de los Montajes para el DOSBox
-QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash<QString, QString> datos)
+QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBox cfgDbx)
 {
-	QString NombreEXEDbx, DirEXEDbx, Dbx_loadfix, Dbx_cerrardbx;
-	QString mount_letra_primario, mount_dir_primario, mount_dir, montaje_boot;
-	QString mount_type, mount_drive, mount_letter, mount_label, mount_Options, mount_IOCtrl;
+	QString NombreEXEDbx, DirEXEDbx, Dbx_loadfix, Dbx_cerrardbx, dir_base_game;
+	QString mount_letra_primario, mount_dir_primario, mount_dir, montaje_boot, mount_freesize;
+	QString mount_type, mount_drive, mount_letter, mount_label, mount_options, mount_ioctl;
 	int num_mount = 0;
 	bool montaje_IMG = false;
 	bool mount_Boot = false;
 	QStringList listmontajes, lista_multiple_iso, lista_isos;
 
-	QFileInfo fi( datos["Dbx_path_exe"] );
-	NombreEXEDbx = fi.fileName();						// Nombre del ejecutable
-	DirEXEDbx    = fi.absolutePath().replace("/","\\");	// Directorio donde esta
+	QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
+	settings.beginGroup("OpcGeneral");
+		dir_base_game = settings.value("DirBaseGames", "").toString();
+	settings.endGroup();
+
+	QFileInfo fi( cfgDbx.path_exe.replace("{DirBaseGames}", dir_base_game) );
+	NombreEXEDbx = fi.fileName();
+	DirEXEDbx    = fi.absolutePath().replace("/","\\");
 
 	if( !DirEXEDbx.endsWith("\\") )
 		DirEXEDbx.append("\\");
 
 // loadfix
-	if( datos["Dbx_opt_loadfix"] == "true" )
-		Dbx_loadfix = "loadfix -"+ datos["Dbx_opt_loadfix_mem"] +" ";
-	else
-		Dbx_loadfix = "";
+	if( StrToBool( cfgDbx.opt_loadfix ) )
+		Dbx_loadfix = "loadfix -"+ cfgDbx.opt_loadfix_mem +" ";
+	else {
+		if( fi.completeSuffix().toLower() == "bat" )
+			Dbx_loadfix = "call ";
+		else
+			Dbx_loadfix = "";
+	}
 
 // Cerrar DOSBox
-	if( datos["Dbx_opt_cerrar_dbox"] == "true" )
+	if( StrToBool( cfgDbx.opt_cerrar_dbox ) )
 		Dbx_cerrardbx = "exit";
 	else
 		Dbx_cerrardbx = "";
 
 // Montajes
 	listmontajes.clear();
-	if( myTreeWidget->topLevelItemCount() > 0 )
+	if( twDbxMount->topLevelItemCount() > 0 )
 	{
-		mount_letra_primario = myTreeWidget->topLevelItem(0)->text(3);
-		mount_dir_primario   = myTreeWidget->topLevelItem(0)->text(0);
+		mount_dir_primario   = twDbxMount->topLevelItem(0)->text(0);
+		mount_letra_primario = twDbxMount->topLevelItem(0)->text(1);
 
-		for( num_mount = 0; num_mount < myTreeWidget->topLevelItemCount(); num_mount++ )
+		const int count_mount = twDbxMount->topLevelItemCount();
+		for (num_mount = 0; num_mount < count_mount; ++num_mount)
 		{
-			QTreeWidgetItem *item = myTreeWidget->topLevelItem( num_mount );
+			QTreeWidgetItem *item = twDbxMount->topLevelItem( num_mount );
 
 		// Indicamos el directorio y la letra a montar
 			mount_drive  = item->text(0); // Real Drive or Directory or Image ISO, IMA
-			mount_letter = item->text(3); // Emulated Drive letter
+			mount_letter = item->text(1); // Emulated Drive letter
 
 			if( (item->text(2) == "floppy") || (item->text(2) == "drive") || (item->text(2) == "cdrom") )
 			{
@@ -1397,78 +2188,97 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 		// Situa el montaje primario independiente de donde este colocado
 			if( item->text(7) == "v" )
 			{
-				mount_letra_primario = mount_letter;
 				mount_dir_primario   = mount_drive;
+				mount_letra_primario = mount_letter;
 			}
 
-		//Montando las unidades
+			mount_label    = "";
+			mount_freesize = "";
+			mount_ioctl    = "";
+			mount_options  = "";
+
+		// Montando las unidades
+		// Disco Duro, Montando Disquetera, CDs, Imagenes de Discos, disquetes y CDs
 			if( item->text(2) != "boot")
 			{
 				mount_Boot = false;
-			// Opciones de montaje
-				if( item->text(5) != "" )
-					mount_Options = " " + item->text(5);
-				else
-					mount_Options = "";
-
-			// Etiqueta de las unidades.
-				if( item->text(1) != "" )
-					mount_label = " -label " + item->text(1);
-				else
-					mount_label = "";
-
-				if( item->text(6) != "" )
-					mount_IOCtrl = " " + item->text(6);
-				else
-					mount_IOCtrl = "";
-
-			// Montando Disquetera, Disco Duro, CDs, Imagenes de Discos, disquetes y CDs
-				if( item->text(2) == "floppy" )
-				{
-					montaje_IMG = false;
-					mount_type = " -t floppy";
-				}
 
 				if( item->text(2) == "drive" )
 				{
 					montaje_IMG = false;
 					mount_type = "";
+
+					if( StrToBool( item->text(11) ) )
+					{
+						if( item->text(10) != "" )
+							mount_freesize = " -size "+ item->text(10);
+						else
+							mount_freesize = " -freesize "+ item->text(12);
+					}
 				}
 
 				if( item->text(2) == "cdrom" )
 				{
 					montaje_IMG  = false;
 					mount_type  = " -t cdrom";
-
+				// usecd
 					if( item->text(4) != "" )
-						mount_type.append( " -usecd "+ item->text(4) );
+						mount_freesize = " -usecd "+ item->text(4);
+				// ioctl
+					if( item->text(6) != "" )
+						mount_ioctl = " "+ item->text(6);
+				// etiqueta
+					if( item->text(3) != "" )
+						mount_label = " -label "+ item->text(3);
+				}
+
+				if( item->text(2) == "floppy" )
+				{
+					montaje_IMG = false;
+					mount_type = " -t floppy";
+
+					if( StrToBool( item->text(11) ) )
+					{
+						if( item->text(10) != "" )
+							mount_freesize = " -size "+ item->text(10);
+						else
+							mount_freesize = " -freesize "+ item->text(12);
+					}
 				}
 
 				if( item->text(2) == "IMG_floppy" )
 				{
 					montaje_IMG = true;
 					mount_type = " -t floppy";
+
+					if( item->text(10) != "" )
+						mount_freesize = " -size "+ item->text(10);
+
+					if( item->text(5) != "" )
+						mount_options = " "+ item->text(5);
 				}
 
 				if( item->text(2) == "IMG_iso" )
 				{
 					montaje_IMG = true;
-					mount_type = " -t iso";
+					mount_type = " -t cdrom";
+
+					if( item->text(5) != "" )
+						mount_options = " "+ item->text(5);
 				}
 
 				if( item->text(2) == "IMG_multi_iso" )
 				{
 					montaje_IMG = true;
-					mount_type = " -t iso";
+					mount_type = " -t cdrom";
 
 					lista_isos.clear();
 					lista_isos << mount_drive.split("|", QString::SkipEmptyParts);
 
 					lista_multiple_iso.clear();
-					for( int i = 0; i < lista_isos.size(); ++i )
-					{
-						lista_multiple_iso << "\""+ getShortPathName( lista_isos.value(i) ) +"\"";
-					}
+					const int lmiso_Size = lista_isos.size();
+					for (int i = 0; i < lmiso_Size; ++i)
+						lista_multiple_iso << "\""+ getShortPathName( lista_isos.at(i) ) +"\"";
 					mount_drive.clear();
 					mount_drive = lista_multiple_iso.join(" ");
 				}
@@ -1477,16 +2287,22 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 				{
 					montaje_IMG = true;
 					mount_type = " -t hdd";
+
+					if( item->text(10) != "" )
+						mount_freesize = " -size "+ item->text(10);
+
+					if( item->text(5) != "" )
+						mount_options = " "+ item->text(5);
 				}
 
 				if( montaje_IMG == true )
 				{
 					if( item->text(2) == "IMG_multi_iso" )
-						listmontajes << "imgmount " + mount_letter + " " + mount_drive + mount_type + mount_label;
+						listmontajes << "imgmount "+ mount_letter +" "+ mount_drive + mount_type;
 					else
-						listmontajes << "imgmount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_label;
+						listmontajes << "imgmount "+ mount_letter +" \""+ mount_drive +"\""+ mount_type + mount_freesize + mount_options;
 				} else
-					listmontajes << "mount " + mount_letter + " \"" + mount_drive + "\"" + mount_type + mount_IOCtrl + mount_Options + mount_label;
+					listmontajes << "mount "+ mount_letter +" \""+ mount_drive +"\""+ mount_type + mount_freesize + mount_ioctl + mount_label;
 			} else {
 				mount_Boot = true;
 
@@ -1495,13 +2311,14 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 				lista_isos << mount_drive.split("|", QString::SkipEmptyParts);
 
 				lista_multiple_iso.clear();
-				for( int i = 0; i < lista_isos.size(); ++i )
+				const int lmisoSize = lista_isos.size();
+				for (int i = 0; i < lmisoSize; ++i)
 				{
-					lista_multiple_iso << "\""+ getShortPathName( lista_isos.value(i) ) +"\"";
+					lista_multiple_iso << "\""+ getShortPathName( lista_isos.at(i) ) +"\"";
 				}
 				mount_drive.clear();
 				mount_drive = lista_multiple_iso.join(" ");
-				montaje_boot = "boot \""+ mount_drive +"\" -l"+ mount_letter;
+				montaje_boot = "boot "+ mount_drive +" -l "+ mount_letter;
 			}
 		}
 	} else {
@@ -1514,15 +2331,13 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 	if( !mount_dir_primario.endsWith("\\") )
 		mount_dir_primario.append("\\");
 
-//	mount_dir = DirEXEDbx.remove(mount_dir_primario, Qt::CaseInsensitive);
-//	if( mount_dir == "\\" ) mount_dir.remove(0,1);
 	mount_dir = getShortPathName( DirEXEDbx ).remove( getShortPathName( mount_dir_primario ), Qt::CaseInsensitive);
 
 	if( mount_Boot == false )
 	{
 		listmontajes << mount_letra_primario +":";
 		listmontajes << "cd "+ mount_dir;
-		listmontajes << Dbx_loadfix + getNameTo8Caracter( NombreEXEDbx ) +" "+ datos["Dbx_parametros_exe"];
+		listmontajes << Dbx_loadfix + getNameTo8Caracter( NombreEXEDbx ) +" "+ cfgDbx.parametros_exe;
 	} else {
 		listmontajes << montaje_boot;
 	}
@@ -1531,1364 +2346,977 @@ QStringList Funciones::CreaConfigMontajes(QTreeWidget *myTreeWidget, const QHash
 
 	return listmontajes;
 }
-
 /*
  * FIN MONTAJES DE UNIDADES -------------------------------------------------------------------------------------
  *
 */
 
 // Crea el archivo de configuración del DOSBox
-void Funciones::CrearArchivoConfigDbx(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString pathSaveConfg, bool exportToDFend)
+void Funciones::crearArchivoConfigDbx(stDatosJuego datos, QList<QString> url_list, stConfigDOSBox cfgDbx, QTreeWidget *twDbxMount, QString dir_app, QString tabla, QString pathSaveConfg, TipoCfg tipo_cfg)
 {
+	datos.tipo_emu = "dosbox";
+	exportarProfileGRlida(datos, url_list, cfgDbx, twDbxMount, getDefectScummVM(), getDefectVDMSound(), dir_app, tabla, pathSaveConfg, tipo_cfg);
+}
+
+void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_list, stConfigDOSBox cfgDbx, QTreeWidget *twDbxMount, stConfigScummVM cfgSvm, stConfigVDMSound cfgVdms, QString dir_app, QString tabla, QString pathSaveConfg, TipoCfg tipo_cfg)
+{
+	QString cfg_out, dirBaseGames, versionDbx;
+
+	QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
+	settings.beginGroup("OpcGeneral");
+		dirBaseGames = settings.value("DirBaseGames", "").toString();
+		versionDbx   = settings.value("VersionDBx", "0.74").toString();
+	settings.endGroup();
+
+	if( tipo_cfg == ExportGrlida )
+	{
+		cfg_out = leerArchivo(":/datos/grl_datos.xml", "UTF-8");
+		if( datos.tipo_emu == "dosbox" )
+			cfg_out.replace("{grl_otra_configuracion}", "\n"+ leerArchivo(":/datos/grl_dosbox.xml", "UTF-8"));
+		else if( datos.tipo_emu == "scummvm" )
+			cfg_out.replace("{grl_otra_configuracion}", "\n"+ leerArchivo(":/datos/grl_scummvm.xml", "UTF-8"));
+		else if( datos.tipo_emu == "vdmsound" )
+			cfg_out.replace("{grl_otra_configuracion}", "\n"+ leerArchivo(":/datos/grl_vdmsound.xml", "UTF-8"));
+		else
+			cfg_out.replace("{grl_otra_configuracion}", "");
+	} else {
+		if( stLngSelect.isEmpty() )
+			cfg_out = leerArchivo(":/datos/dosbox.conf", "UTF-8");
+		else
+			cfg_out = leerArchivo(":/datos/"+ stLngSelect +"/dosbox.conf", "UTF-8");
+	}
+
+	if( tipo_cfg == ExportDfend )
+	{
+		QString cfg_dfend = "\n";
+		cfg_dfend.append("[ExtraInfo]\n");
+		cfg_dfend.append("Icon="+ datos.icono +"\n");
+		cfg_dfend.append("Language="+ datos.idioma +"\n");
+		cfg_dfend.append("Favorite="+ datos.favorito +"\n");
+		cfg_dfend.append("Name="+ datos.titulo +"\n");
+		cfg_dfend.append("Genre="+ datos.genero +"\n");
+		cfg_dfend.append("Developer="+ datos.desarrollador +"\n");
+		cfg_dfend.append("Publisher="+ datos.compania +"\n");
+		cfg_dfend.append("Year="+ datos.anno +"\n");
+//		cfg_dfend.append("UserInfo="+ datos +"\n");
+		cfg_dfend.append("Notes="+ datos.comentario.replace("<br/>\n","[13][10]").replace("<br/>","[13]").replace("\n","[13]") +"\n");
+
+		const int url_listSize = url_list.size();
+		for (int i = 0; i < url_listSize; ++i)
+		{
+			if( i < 1 )
+			{
+				cfg_dfend.append("WWW="+ url_list.at(i) +"\n");
+				cfg_dfend.append("WWWName="+ url_list.at(i) +"\n");
+			} else {
+				cfg_dfend.append("WWW"+ IntToStr(i+1) +"="+ url_list.at(i) +"\n");
+				cfg_dfend.append("WWWName"+ IntToStr(i+1) +"="+ url_list.at(i) +"\n");
+			}
+		}
+		cfg_dfend.append("\n");
+
+		cfg_dfend.append("[Extra]\n");
+//		cfg_dfend.append("BootImage="+ datos +"\n");
+//		cfg_dfend.append("Environment="+ datos +"\n");
+		cfg_dfend.append("Loadhigh="+ cfgDbx.opt_loadfix +"\n");
+		cfg_dfend.append("CloseOnExit="+ cfgDbx.opt_cerrar_dbox +"\n");
+//		cfg_dfend.append("Overridegamestart="+ datos +"\n");
+//		cfg_dfend.append("OverrideMount="+ datos +"\n");
+		cfg_dfend.append("LoadFixVal="+ cfgDbx.opt_loadfix_mem +"\n");
+		cfg_dfend.append("NrOfMounts="+ IntToStr(twDbxMount->topLevelItemCount()) +"\n");
+		cfg_dfend.append("Tab=-1\n");
+		cfg_dfend.append("Exe="+ cfgDbx.path_exe +"\n");
+		cfg_dfend.append("Setup="+ cfgDbx.path_setup +"\n");
+		cfg_dfend.append("GameParameters="+  cfgDbx.parametros_exe +"\n");
+		cfg_dfend.append("SetupParameters="+  cfgDbx.parametros_setup +"\n");
+//		cfg_dfend.append("ExtraDirs=\n");
+//		cfg_dfend.append("DataDir=\n");
+
+		const int count_mount = twDbxMount->topLevelItemCount();
+		if( count_mount > 0 )
+		{
+			for (int num_mount = 0; num_mount < count_mount; ++num_mount)
+			{
+				QTreeWidgetItem *item = twDbxMount->topLevelItem( num_mount );
+				cfg_dfend.append(IntToStr(num_mount) +"="+ item->text(0) +";"+ item->text(2) +";"+ item->text(3) +";"+ item->text(6) +"\n");
+			}
+		}
+
+		cfg_dfend.append("autoexec="+  cfgDbx.autoexec.replace("\n", "[13][10]") +"\n");
+//		cfg_dfend.append("CustomSettings="+ datos +"\n");
+//		cfg_dfend.append("AutoMountCDs="+ datos +"\n");
+//		cfg_dfend.append("SecureMode="+ datos +"\n");
+		cfg_dfend.append("Tab2=-1\n");
+		cfg_dfend.append("ExeMD5="+ getHashFile(cfgDbx.path_exe, hashMd5) +"\n");
+		cfg_dfend.append("SetupMD5="+ getHashFile(cfgDbx.path_setup, hashMd5) +"\n");
+//		cfg_dfend.append("ExtraFiles="+ datos +"\n");
+//		cfg_dfend.append("LastModification="+ datos +"\n");
+//		cfg_dfend.append("ScreenshotListScreenshot="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe0="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe1="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe2="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe3="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe4="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe5="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe6="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe7="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe8="+ datos +"\n");
+//		cfg_dfend.append("ExtraExe9="+ datos +"\n");
+//		cfg_dfend.append("Finalization="+ datos +"\n");
+		cfg_dfend.append("ProfileMode=DOSBox\n");
+		cfg_dfend.append("\n");
+
+//		cfg_dfend.append("[ExtraCommands]\n");
+//		cfg_dfend.append("BeforeExecution.Wait="+ datos +"\n");
+//		cfg_dfend.append("BeforeExecution.Minimized="+ datos +"\n");
+//		cfg_dfend.append("AfterExecution.Minimized="+ datos +"\n");
+//		cfg_dfend.append("BeforeExecution="+ datos +"\n");
+//		cfg_dfend.append("AfterExecution="+ datos +"\n");
+//		cfg_dfend.append("\n");
+
+//		cfg_dfend.append("[ExtraGameIdentify]\n");
+//		cfg_dfend.append("File1.Filename="+ datos +"\n");
+//		cfg_dfend.append("File1.Checksum="+ datos +"\n");
+//		cfg_dfend.append("File2.Filename="+ datos +"\n");
+//		cfg_dfend.append("File2.Checksum="+ datos +"\n");
+//		cfg_dfend.append("File3.Filename="+ datos +"\n");
+//		cfg_dfend.append("File3.Checksum="+ datos +"\n");
+//		cfg_dfend.append("File4.Filename="+ datos +"\n");
+//		cfg_dfend.append("File4.Checksum="+ datos +"\n");
+//		cfg_dfend.append("File5.Filename="+ datos +"\n");
+//		cfg_dfend.append("File5.Checksum="+ datos +"\n");
+//		cfg_dfend.append("\n");
+
+		cfg_out.replace("{Dbx_config_export_dfend}", cfg_dfend);
+	}
+	else if( tipo_cfg == ExportGrlida )
+	{
+		cfg_out.replace("{lastBuildDate}", HoraFechaActual( getTime() ) );
+
+		cfg_out.replace("{Dat_icono}"           , datos.icono           );
+		cfg_out.replace("{Dat_titulo}"          , datos.titulo          );
+		cfg_out.replace("{Dat_subtitulo}"       , datos.subtitulo       );
+		cfg_out.replace("{Dat_genero}"          , datos.genero          );
+		cfg_out.replace("{Dat_compania}"        , datos.compania        );
+		cfg_out.replace("{Dat_desarrollador}"   , datos.desarrollador   );
+		cfg_out.replace("{Dat_tema}"            , datos.tema            );
+		cfg_out.replace("{Dat_grupo}"           , datos.grupo           );
+		cfg_out.replace("{Dat_perspectiva}"     , datos.perspectiva     );
+		cfg_out.replace("{Dat_idioma}"          , datos.idioma          );
+		cfg_out.replace("{Dat_idioma_voces}"    , datos.idioma_voces    );
+		cfg_out.replace("{Dat_formato}"         , datos.formato         );
+		cfg_out.replace("{Dat_anno}"            , datos.anno            );
+		cfg_out.replace("{Dat_numdisc}"         , datos.numdisc         );
+		cfg_out.replace("{Dat_sistemaop}"       , datos.sistemaop       );
+		cfg_out.replace("{Dat_tamano}"          , datos.tamano          );
+		cfg_out.replace("{Dat_graficos}"        , datos.graficos        );
+		cfg_out.replace("{Dat_sonido}"          , datos.sonido          );
+		cfg_out.replace("{Dat_jugabilidad}"     , datos.jugabilidad     );
+		cfg_out.replace("{Dat_original}"        , datos.original        );
+		cfg_out.replace("{Dat_estado}"          , datos.estado          );
+		cfg_out.replace("{Dat_thumbs}"          , datos.thumbs          );
+		cfg_out.replace("{Dat_cover_front}"     , datos.cover_front     );
+		cfg_out.replace("{Dat_cover_back}"      , datos.cover_back      );
+		cfg_out.replace("{Dat_fecha}"           , datos.fecha           );
+		cfg_out.replace("{Dat_tipo_emu}"        , datos.tipo_emu        );
+		cfg_out.replace("{Dat_comentario}"      , datos.comentario      );
+		cfg_out.replace("{Dat_favorito}"        , datos.favorito        );
+		cfg_out.replace("{Dat_rating}"          , datos.rating          );
+		cfg_out.replace("{Dat_edad_recomendada}", datos.edad_recomendada);
+		cfg_out.replace("{Dat_usuario}"         , datos.usuario         );
+		cfg_out.replace("{Dat_path_exe}"        , datos.path_exe        );
+		cfg_out.replace("{Dat_parametros_exe}"  , datos.parametros_exe  );
+		cfg_out.replace("{Dat_path_capturas}"   , datos.path_capturas   );
+		cfg_out.replace("{Dat_path_setup}"      , datos.path_setup      );
+		cfg_out.replace("{Dat_parametros_setup}", datos.parametros_setup);
+	} else
+		cfg_out.replace("{Dbx_config_export_dfend}", "");
+
+	if( datos.tipo_emu == "dosbox" )
+	{
+	// [sdl]
+		cfg_out.replace("{Dbx_sdl_fullscreen}"      , cfgDbx.sdl_fullscreen);
+		cfg_out.replace("{Dbx_sdl_fulldouble}"      , cfgDbx.sdl_fulldouble);
+		cfg_out.replace("{Dbx_sdl_fullfixed}"       , cfgDbx.sdl_fullfixed);
+		cfg_out.replace("{Dbx_sdl_fullresolution}"  , cfgDbx.sdl_fullresolution);
+		cfg_out.replace("{Dbx_sdl_windowresolution}", cfgDbx.sdl_windowresolution);
+		cfg_out.replace("{Dbx_sdl_output}"          , cfgDbx.sdl_output);
+		cfg_out.replace("{Dbx_sdl_hwscale}"          , cfgDbx.sdl_hwscale);
+		cfg_out.replace("{Dbx_sdl_autolock}"        , cfgDbx.sdl_autolock);
+		cfg_out.replace("{Dbx_sdl_sensitivity}"     , cfgDbx.sdl_sensitivity);
+		cfg_out.replace("{Dbx_sdl_waitonerror}"     , cfgDbx.sdl_waitonerror);
+		cfg_out.replace("{Dbx_sdl_priority}"        , cfgDbx.sdl_priority);
+		cfg_out.replace("{Dbx_sdl_mapperfile}"      , cfgDbx.sdl_mapperfile);
+		cfg_out.replace("{Dbx_sdl_usescancodes}"    , cfgDbx.sdl_usescancodes);
+
+		if( versionDbx <= "0.73" )
+			cfg_out.replace("{Dbx_sdl_extra}", "hwscale="+ cfgDbx.sdl_hwscale +"\n");
+		else
+			cfg_out.replace("{Dbx_sdl_extra}", "");
+
+	// [dosbox]
+		cfg_out.replace("{Dbx_dosbox_language}", cfgDbx.dosbox_language);
+		cfg_out.replace("{Dbx_dosbox_machine}" , cfgDbx.dosbox_machine);
+
+		if( cfgDbx.dosbox_captures == "" || cfgDbx.dosbox_captures == "capture" )
+			cfg_out.replace("{Dbx_dosbox_captures}", dir_app +"capturas/"+ tabla +"/id-"+ datos.idgrl +"_"+ eliminar_caracteres(datos.titulo) +"_"+ datos.tipo_emu);
+		else
+			cfg_out.replace("{Dbx_dosbox_captures}", cfgDbx.dosbox_captures);
+
+		cfg_out.replace("{Dbx_dosbox_memsize}" , cfgDbx.dosbox_memsize);
+
+	// [render]
+		cfg_out.replace("{Dbx_render_frameskip}", cfgDbx.render_frameskip);
+		cfg_out.replace("{Dbx_render_aspect}"   , cfgDbx.render_aspect);
+		cfg_out.replace("{Dbx_render_scaler}"   , cfgDbx.render_scaler);
+
+	// [cpu]
+		cfg_out.replace("{Dbx_cpu_core}"            , cfgDbx.cpu_core);
+		cfg_out.replace("{Dbx_cpu_cputype}"         , cfgDbx.cpu_cputype);
+		cfg_out.replace("{Dbx_cpu_cycles_realmode}" , cfgDbx.cpu_cycles_realmode);
+		cfg_out.replace("{Dbx_cpu_cycles_protmode}" , cfgDbx.cpu_cycles_protmode);
+		cfg_out.replace("{Dbx_cpu_cycles_limitmode}", cfgDbx.cpu_cycles_limitmode);
+
+		if( cfgDbx.cpu_cycles != "auto" && cfgDbx.cpu_cycles != "max" && versionDbx >= "0.73" )
+			cfg_out.replace("{Dbx_cpu_cycles}", "fixed "+ cfgDbx.cpu_cycles);
+		else {
+			QString cycles_realmode, cycles_protmode, cycles_limitmode;
+			if( cfgDbx.cpu_cycles == "auto" && versionDbx >= "0.74" )
+			{
+				cycles_realmode = cycles_protmode = cycles_limitmode = "";
+				if( !cfgDbx.cpu_cycles_realmode.isEmpty() )
+					cycles_realmode = " "+ cfgDbx.cpu_cycles_realmode;
+				if( !cfgDbx.cpu_cycles_protmode.isEmpty() )
+					cycles_protmode = " "+ cfgDbx.cpu_cycles_protmode;
+				if( !cfgDbx.cpu_cycles_limitmode.isEmpty() )
+					cycles_limitmode = " "+ cfgDbx.cpu_cycles_limitmode;
+
+				cfg_out.replace("{Dbx_cpu_cycles}", "auto"+ cycles_realmode + cycles_protmode + cycles_limitmode);
+			}
+			else if( cfgDbx.cpu_cycles == "max" && versionDbx >= "0.74" )
+			{
+				cycles_protmode = cycles_limitmode = "";
+				if( !cfgDbx.cpu_cycles_protmode.isEmpty() )
+					cycles_protmode = " "+ cfgDbx.cpu_cycles_protmode;
+				if( !cfgDbx.cpu_cycles_limitmode.isEmpty() )
+					cycles_limitmode = " "+ cfgDbx.cpu_cycles_limitmode;
+
+				cfg_out.replace("{Dbx_cpu_cycles}", "max"+ cycles_protmode + cycles_limitmode);
+			} else
+				cfg_out.replace("{Dbx_cpu_cycles}", cfgDbx.cpu_cycles);
+		}
+
+		cfg_out.replace("{Dbx_cpu_cycleup}"  , cfgDbx.cpu_cycleup);
+		cfg_out.replace("{Dbx_cpu_cycledown}", cfgDbx.cpu_cycledown);
+
+	// [mixer]
+		cfg_out.replace("{Dbx_mixer_nosound}"  , cfgDbx.mixer_nosound);
+		cfg_out.replace("{Dbx_mixer_rate}"     , cfgDbx.mixer_rate);
+		cfg_out.replace("{Dbx_mixer_blocksize}", cfgDbx.mixer_blocksize);
+		cfg_out.replace("{Dbx_mixer_prebuffer}", cfgDbx.mixer_prebuffer);
+
+	// [midi]
+		cfg_out.replace("{Dbx_midi_mpu401}"     , cfgDbx.midi_mpu401);
+		cfg_out.replace("{Dbx_midi_intelligent}", cfgDbx.midi_intelligent);
+
+		if( versionDbx >= "0.73" || tipo_cfg == ExportGrlida )
+		{
+			cfg_out.replace("{Dbx_midi_device}", cfgDbx.midi_device);
+			cfg_out.replace("{Dbx_midi_config}", cfgDbx.midi_config);
+		} else {
+			cfg_out.replace("mididevice={Dbx_midi_device}", "intelligent="+ cfgDbx.midi_intelligent +"\ndevice="+ cfgDbx.midi_device +"\n");
+			cfg_out.replace("midiconfig={Dbx_midi_config}", "config="+ cfgDbx.midi_config +"\nmt32rate="+ cfgDbx.midi_mt32rate +"\n");
+		}
+
+		cfg_out.replace("{Dbx_midi_mt32rate}", cfgDbx.midi_mt32rate);
+
+	// [sblaster]
+		cfg_out.replace("{Dbx_sblaster_sbtype}" , cfgDbx.sblaster_sbtype);
+		cfg_out.replace("{Dbx_sblaster_sbbase}" , cfgDbx.sblaster_sbbase);
+		cfg_out.replace("{Dbx_sblaster_irq}"    , cfgDbx.sblaster_irq);
+		cfg_out.replace("{Dbx_sblaster_dma}"    , cfgDbx.sblaster_dma);
+		cfg_out.replace("{Dbx_sblaster_hdma}"   , cfgDbx.sblaster_hdma);
+
+		if( versionDbx >= "0.73" )
+			cfg_out.replace("{Dbx_sblaster_mixer}", cfgDbx.sblaster_mixer);
+		else
+			cfg_out.replace("sbmixer={Dbx_sblaster_mixer}", "mixer="+ cfgDbx.sblaster_mixer);
+
+		cfg_out.replace("{Dbx_sblaster_oplmode}", cfgDbx.sblaster_oplmode);
+		cfg_out.replace("{Dbx_sblaster_oplemu}" , cfgDbx.sblaster_oplemu);
+		cfg_out.replace("{Dbx_sblaster_oplrate}", cfgDbx.sblaster_oplrate);
+
+	// [gus]
+		cfg_out.replace("{Dbx_gus_gus}"     , cfgDbx.gus_gus);
+		cfg_out.replace("{Dbx_gus_gusrate}" , cfgDbx.gus_gusrate);
+		cfg_out.replace("{Dbx_gus_gusbase}" , cfgDbx.gus_gusbase);
+
+		if( versionDbx >= "0.73" || tipo_cfg == ExportGrlida )
+		{
+			cfg_out.replace("{Dbx_gus_irq1}", cfgDbx.gus_irq1);
+			cfg_out.replace("{Dbx_gus_irq2}", cfgDbx.gus_irq2);
+			cfg_out.replace("{Dbx_gus_dma1}", cfgDbx.gus_dma1);
+			cfg_out.replace("{Dbx_gus_dma2}", cfgDbx.gus_dma2);
+		} else {
+			cfg_out.replace("gusirq={Dbx_gus_irq1}", "irq1="+ cfgDbx.gus_irq1 +"\nirq2="+ cfgDbx.gus_irq2 +"\n");
+			cfg_out.replace("gusdma={Dbx_gus_dma1}", "dma1="+ cfgDbx.gus_dma1 +"\ndma2="+ cfgDbx.gus_dma2 +"\n");
+		}
+
+		cfg_out.replace("{Dbx_gus_ultradir}", cfgDbx.gus_ultradir);
+
+	// [speaker]
+		cfg_out.replace("{Dbx_speaker_pcspeaker}", cfgDbx.speaker_pcspeaker);
+		cfg_out.replace("{Dbx_speaker_pcrate}"   , cfgDbx.speaker_pcrate);
+		cfg_out.replace("{Dbx_speaker_tandy}"    , cfgDbx.speaker_tandy);
+		cfg_out.replace("{Dbx_speaker_tandyrate}", cfgDbx.speaker_tandyrate);
+		cfg_out.replace("{Dbx_speaker_disney}"   , cfgDbx.speaker_disney);
+
+	// [joystick]
+		cfg_out.replace("{Dbx_joystick_type}"      , cfgDbx.joystick_type);
+		cfg_out.replace("{Dbx_joystick_timed}"     , cfgDbx.joystick_timed);
+		cfg_out.replace("{Dbx_joystick_autofire}"  , cfgDbx.joystick_autofire);
+		cfg_out.replace("{Dbx_joystick_swap34}"    , cfgDbx.joystick_swap34);
+		cfg_out.replace("{Dbx_joystick_buttonwrap}", cfgDbx.joystick_buttonwrap);
+
+	// [dserial]
+		if( tipo_cfg == ExportGrlida )
+		{
+			cfg_out.replace("{Dbx_modem_modem}"         , cfgDbx.modem_modem);
+			cfg_out.replace("{Dbx_modem_comport}"       , cfgDbx.modem_comport);
+			cfg_out.replace("{Dbx_modem_listenport}"    , cfgDbx.modem_listenport);
+			cfg_out.replace("{Dbx_dserial_directserial}", cfgDbx.dserial_directserial);
+			cfg_out.replace("{Dbx_dserial_comport}"     , cfgDbx.dserial_comport);
+			cfg_out.replace("{Dbx_dserial_realport}"    , cfgDbx.dserial_realport);
+			cfg_out.replace("{Dbx_dserial_defaultbps}"  , cfgDbx.dserial_defaultbps);
+			cfg_out.replace("{Dbx_dserial_parity}"      , cfgDbx.dserial_parity);
+			cfg_out.replace("{Dbx_dserial_bytesize}"    , cfgDbx.dserial_bytesize);
+			cfg_out.replace("{Dbx_dserial_stopbit}"     , cfgDbx.dserial_stopbit);
+		} else {
+			if( versionDbx <= "0.73" )
+			{
+				QString moden_dserial = "\n[modem]\n"; // DOSBox 0.63
+				moden_dserial.append("modem="+ cfgDbx.modem_modem +"\n");
+				moden_dserial.append("comport="+ cfgDbx.modem_comport +"\n");
+				moden_dserial.append("listenport="+ cfgDbx.modem_listenport +"\n\n");
+
+				moden_dserial.append("[directserial]\n"); // DOSBox 0.63
+				moden_dserial.append("directserial="+ cfgDbx.dserial_directserial +"\n");
+				moden_dserial.append("comport="+ cfgDbx.dserial_comport +"\n");
+				moden_dserial.append("realport="+ cfgDbx.dserial_realport +"\n");
+				moden_dserial.append("defaultbps="+ cfgDbx.dserial_defaultbps +"\n");
+				moden_dserial.append("parity="+ cfgDbx.dserial_parity +"\n");
+				moden_dserial.append("bytesize="+ cfgDbx.dserial_bytesize +"\n");
+				moden_dserial.append("stopbit="+ cfgDbx.dserial_stopbit +"\n\n");
+
+				cfg_out.replace("{Dbx_moden_y_directserial}", moden_dserial);
+			} else
+				cfg_out.replace("{Dbx_moden_y_directserial}", "");
+		}
+
+	// [serial]
+		cfg_out.replace("{Dbx_serial_1}", cfgDbx.serial_1);
+		cfg_out.replace("{Dbx_serial_2}", cfgDbx.serial_2);
+		cfg_out.replace("{Dbx_serial_3}", cfgDbx.serial_3);
+		cfg_out.replace("{Dbx_serial_4}", cfgDbx.serial_4);
+
+	// [dos]
+		cfg_out.replace("{Dbx_dos_xms}", cfgDbx.dos_xms);
+		cfg_out.replace("{Dbx_dos_ems}", cfgDbx.dos_ems);
+		cfg_out.replace("{Dbx_dos_umb}", cfgDbx.dos_umb);
+
+		QHash<QString, stGrlDatos> dbx_keyboardlayout_list = cargaDatosQHash(dir_app +"datos/dbx_keyboardlayout.txt", 4, "|");
+		QHash<QString, QString> dbx_keyboardlayout;
+		foreach (const stGrlDatos &dat_kb, dbx_keyboardlayout_list)
+			dbx_keyboardlayout.insert(dat_kb.key, dat_kb.extra);
+		cfg_out.replace("{Dbx_dos_keyboardlayout}", dbx_keyboardlayout[cfgDbx.dos_keyboardlayout]);
+
+		if( tipo_cfg == ExportDfend )
+			cfg_out.replace("{Dbx_dos_version}", "ReportedDOSVersion="+ cfgDbx.dos_version +"\n");
+		else
+			cfg_out.replace("{Dbx_dos_version}", cfgDbx.dos_version);
+
+	// [ipx]
+		cfg_out.replace("{Dbx_ipx_ipx}", cfgDbx.ipx_ipx);
+
+		if( tipo_cfg == ExportDbx )
+		{
+			if( StrToBool( cfgDbx.ipx_ipx ) )
+			{
+				if( cfgDbx.ipx_type == "server" )
+					cfg_out.replace("{Dbx_ipx_config}", "IPXNET STARTSERVER "+ cfgDbx.ipx_port +"\n");
+				else if( cfgDbx.ipx_type == "client" )
+					cfg_out.replace("{Dbx_ipx_config}", "IPXNET CONNECT "+ cfgDbx.ipx_ip +" "+ cfgDbx.ipx_port +"\n");
+				else
+					cfg_out.replace("{Dbx_ipx_config}", "");
+			} else
+				cfg_out.replace("{Dbx_ipx_config}", "");
+
+		// [autoexec]
+			QString autoexec = "";
+
+			if( !cfgDbx.dos_version.isEmpty() )
+				autoexec.append("ver set "+ cfgDbx.dos_version +"\n\n");
+
+			if( StrToBool( cfgDbx.opt_autoexec ) )
+				autoexec.append( cfgDbx.autoexec +"\n");
+			else {
+				// Creando el Autoexec
+				QStringList listamontaje = creaConfigMontajes( twDbxMount, cfgDbx );
+				const int listamontajeSize = listamontaje.size();
+				for (int i = 0; i < listamontajeSize; ++i)
+					autoexec.append(listamontaje.at(i) +"\n");
+			}
+
+			cfg_out.replace("{Dbx_autoexec}", autoexec);
+		} 
+		else if( tipo_cfg == ExportGrlida )
+		{
+		// [ipx]
+			cfg_out.replace("{Dbx_ipx_type}", cfgDbx.ipx_type);
+			cfg_out.replace("{Dbx_ipx_port}", cfgDbx.ipx_port);
+			cfg_out.replace("{Dbx_ipx_ip}"  , cfgDbx.ipx_ip);
+
+		// [autoexec]
+			cfg_out.replace("{Dbx_autoexec}", cfgDbx.autoexec);
+
+		// Opciones
+			cfg_out.replace("{Dbx_opt_autoexec}"         , cfgDbx.opt_autoexec);
+			cfg_out.replace("{Dbx_opt_loadfix}"          , cfgDbx.opt_loadfix);
+			cfg_out.replace("{Dbx_opt_loadfix_mem}"      , cfgDbx.opt_loadfix_mem);
+			cfg_out.replace("{Dbx_opt_consola_dbox}"     , cfgDbx.opt_consola_dbox);
+			cfg_out.replace("{Dbx_opt_cerrar_dbox}"      , cfgDbx.opt_cerrar_dbox);
+			cfg_out.replace("{Dbx_opt_cycle_sincronizar}", cfgDbx.opt_cycle_sincronizar);
+		// Path
+			cfg_out.replace("{Dbx_path_conf}"       , cfgDbx.path_conf);
+			cfg_out.replace("{Dbx_path_sonido}"     , cfgDbx.path_sonido);
+			cfg_out.replace("{Dbx_path_exe}"        , cfgDbx.path_exe);
+			cfg_out.replace("{Dbx_path_setup}"      , cfgDbx.path_setup);
+			cfg_out.replace("{Dbx_parametros_exe}"  , cfgDbx.parametros_exe);
+			cfg_out.replace("{Dbx_parametros_setup}", cfgDbx.parametros_setup);
+
+		// Montajes
+			QString cfg_mount = "";
+			const int count_mount_grl = twDbxMount->topLevelItemCount();
+			if( count_mount_grl > 0 )
+			{
+				for (int num_mount_grl = 0; num_mount_grl < count_mount_grl; ++num_mount_grl)
+				{
+					QTreeWidgetItem *item_mount_grl = twDbxMount->topLevelItem( num_mount_grl );
+					cfg_mount.append("\n    <dosbox_montajes>\n");
+					cfg_mount.append("      <Dbx_mount_path>"+ item_mount_grl->text(0) +"</Dbx_mount_path>\n");
+					cfg_mount.append("      <Dbx_mount_letter>"+ item_mount_grl->text(1) +"</Dbx_mount_letter>\n");
+					cfg_mount.append("      <Dbx_mount_tipo_as>"+ item_mount_grl->text(2) +"</Dbx_mount_tipo_as>\n");
+					cfg_mount.append("      <Dbx_mount_label>"+ item_mount_grl->text(3) +"</Dbx_mount_label>\n");
+					cfg_mount.append("      <Dbx_mount_indx_cd>"+ item_mount_grl->text(4) +"</Dbx_mount_indx_cd>\n");
+					cfg_mount.append("      <Dbx_mount_opt_mount>"+ item_mount_grl->text(5) +"</Dbx_mount_opt_mount>\n");
+					cfg_mount.append("      <Dbx_mount_io_ctrl>"+ item_mount_grl->text(6) +"</Dbx_mount_io_ctrl>\n");
+					cfg_mount.append("      <Dbx_mount_select_mount>"+ item_mount_grl->text(7) +"</Dbx_mount_select_mount>\n");
+					cfg_mount.append("      <Dbx_mount_opt_size>"+ item_mount_grl->text(10) +"</Dbx_mount_opt_size>\n");
+					cfg_mount.append("      <Dbx_mount_opt_freesize>"+ item_mount_grl->text(11) +"</Dbx_mount_opt_freesize>\n");
+					cfg_mount.append("      <Dbx_mount_freesize>"+ item_mount_grl->text(12) +"</Dbx_mount_freesize>\n");
+					cfg_mount.append("    </dosbox_montajes>");
+				}
+			}
+			cfg_out.replace("{dosbox_montajes}", cfg_mount);
+		} else
+			cfg_out.replace("{Dbx_autoexec}", "");
+	}
+	
+	if( datos.tipo_emu == "scummvm" )
+	{
+		cfg_out.replace("{Svm_game}"             , cfgSvm.game           );
+		cfg_out.replace("{Svm_game_label}"       , cfgSvm.game_label     );
+		cfg_out.replace("{Svm_language}"         , cfgSvm.language       );
+		cfg_out.replace("{Svm_subtitles}"        , cfgSvm.subtitles      );
+		cfg_out.replace("{Svm_platform}"         , cfgSvm.platform       );
+		cfg_out.replace("{Svm_gfx_mode}"         , cfgSvm.gfx_mode       );
+		cfg_out.replace("{Svm_render_mode}"      , cfgSvm.render_mode    );
+		cfg_out.replace("{Svm_fullscreen}"       , cfgSvm.fullscreen     );
+		cfg_out.replace("{Svm_aspect_ratio}"     , cfgSvm.aspect_ratio   );
+		cfg_out.replace("{Svm_path}"             , cfgSvm.path           );
+		cfg_out.replace("{Svm_path_setup}"       , cfgSvm.path_setup     );
+		cfg_out.replace("{Svm_path_extra}"       , cfgSvm.path_extra     );
+		cfg_out.replace("{Svm_path_save}"        , cfgSvm.path_save      );
+		cfg_out.replace("{Svm_path_capturas}"    , cfgSvm.path_capturas  );
+		cfg_out.replace("{Svm_path_sonido}"      , cfgSvm.path_sonido    );
+		cfg_out.replace("{Svm_music_driver}"     , cfgSvm.music_driver   );
+		cfg_out.replace("{Svm_enable_gs}"        , cfgSvm.enable_gs      );
+		cfg_out.replace("{Svm_multi_midi}"       , cfgSvm.multi_midi     );
+		cfg_out.replace("{Svm_native_mt32}"      , cfgSvm.native_mt32    );
+		cfg_out.replace("{Svm_mute}"             , cfgSvm.mute           );
+		cfg_out.replace("{Svm_master_volume}"    , cfgSvm.master_volume  );
+		cfg_out.replace("{Svm_music_volume}"     , cfgSvm.music_volume   );
+		cfg_out.replace("{Svm_sfx_volume}"       , cfgSvm.sfx_volume     );
+		cfg_out.replace("{Svm_speech_volume}"    , cfgSvm.speech_volume  );
+		cfg_out.replace("{Svm_speech_mute}"      , cfgSvm.speech_mute    );
+		cfg_out.replace("{Svm_tempo}"            , cfgSvm.tempo          );
+		cfg_out.replace("{Svm_talkspeed}"        , cfgSvm.talkspeed      );
+		cfg_out.replace("{Svm_debuglevel}"       , cfgSvm.debuglevel     );
+		cfg_out.replace("{Svm_cdrom}"            , cfgSvm.cdrom          );
+		cfg_out.replace("{Svm_joystick_num}"     , cfgSvm.joystick_num   );
+		cfg_out.replace("{Svm_output_rate}"      , cfgSvm.output_rate    );
+		cfg_out.replace("{Svm_midi_gain}"        , cfgSvm.midi_gain      );
+		cfg_out.replace("{Svm_copy_protection}"  , cfgSvm.copy_protection);
+		cfg_out.replace("{Svm_sound_font}"       , cfgSvm.sound_font     );
+		cfg_out.replace("{Svm_walkspeed}"        , cfgSvm.walkspeed      );
+		cfg_out.replace("{Svm_opl_driver}"       , cfgSvm.opl_driver     );
+		cfg_out.replace("{Svm_disable_dithering}", cfgSvm.disable_dithering);
+		cfg_out.replace("{Svm_alt_intro}"        , cfgSvm.alt_intro      );
+		cfg_out.replace("{Svm_boot_param}"       , cfgSvm.boot_param     );
+	}
+
+	if( datos.tipo_emu == "vdmsound" )
+	{
+		cfg_out.replace("{Vdms_path_conf}"      , cfgVdms.path_conf      );
+		cfg_out.replace("{Vdms_path_exe}"       , cfgVdms.path_exe       );
+		cfg_out.replace("{Vdms_program_1}"      , cfgVdms.program_1      );
+		cfg_out.replace("{Vdms_program_2}"      , cfgVdms.program_2      );		
+		cfg_out.replace("{Vdms_vdms_debug_1}"   , cfgVdms.vdms_debug_1   );
+		cfg_out.replace("{Vdms_vdms_debug_2}"   , cfgVdms.vdms_debug_2   );
+		cfg_out.replace("{Vdms_winnt_dos_1}"    , cfgVdms.winnt_dos_1    );
+		cfg_out.replace("{Vdms_winnt_dos_2}"    , cfgVdms.winnt_dos_2    );
+		cfg_out.replace("{Vdms_winnt_dosbox_1}" , cfgVdms.winnt_dosbox_1 );
+		cfg_out.replace("{Vdms_winnt_dosbox_2}" , cfgVdms.winnt_dosbox_2 );
+		cfg_out.replace("{Vdms_winnt_dosbox_3}" , cfgVdms.winnt_dosbox_3 );
+		cfg_out.replace("{Vdms_winnt_storage_1}", cfgVdms.winnt_storage_1);
+		cfg_out.replace("{Vdms_winnt_storage_2}", cfgVdms.winnt_storage_2);
+	}
+
 	QFile file_out( pathSaveConfg );
 	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
 	{
-		QSettings settings( GRlidaHomePath()+"/GR-lida.conf", QSettings::IniFormat );
-		settings.beginGroup("OpcGeneral");
-			QString versionDbx = settings.value("VersionDBx", "0.72").toString();
-		settings.endGroup();
-
 		QTextStream out(&file_out);
 		out.setCodec("UTF-8");
-
-		if( exportToDFend )
-		{
-			out << "[Extra]" << endl;
-			out << "Exe=" << datosDbx["Dbx_path_exe"] << endl;
-			//out << "Environment=" << datosDbx[""] << endl;
-			//out << "Tab=" << datosDbx[""] << endl;
-			//out << "Tab2=" << datosDbx[""] << endl;
-			out << "Loadhigh=" << datosDbx["Dbx_opt_loadfix"] << endl;
-			out << "CloseOnExit=" << datosDbx["Dbx_opt_cerrar_dbox"] << endl;
-			//out << "AutoMountCDs=" << datosDbx[""] << endl;
-			//out << "Overridegamestart=" << datosDbx[""] << endl;
-			//out << "OverrideMount=" << datosDbx[""] << endl;
-			//out << "LoadFixVal=" << datosDbx["Dbx_opt_loadfix_mem"] << endl;
-			//out << "ExeMD5=" << datosDbx[""] << endl;
-			out << "Setup=" << datosDbx["Dbx_path_setup"] << endl;
-			//out << "SetupMD5=" << datosDbx[""] << endl;
-			out << "GameParameters=" << datosDbx["Dbx_parametros_exe"] << endl;
-			out << "SetupParameters=" << datosDbx["Dbx_parametros_setup"] << endl;
-			//out << "ExtraDirs=" << datosDbx[""] << endl;
-			//out << "LastModification=" << datosDbx[""] << endl;
-			//out << "DataDir=" << datosDbx[""] << endl;
-			out << "NrOfMounts=" << treeWidget->topLevelItemCount() << endl;
-			for(int num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
-			{
-				QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
-				out << num_mount << "=" << item->text(0) << ";" << item->text(2) << ";" << item->text(3) << ";" << item->text(6) << endl;
-			}
-			out << "autoexec=" << datosDbx["Dbx_autoexec"] << endl << endl;
-			//out << "BootImage=" << datosDbx[""] << endl;
-			//out << "Finalization=" << datosDbx[""] << endl;
-			//out << "CustomSettings=" << datosDbx[""] << endl;
-
-			QString notes;
-			notes.clear();
-			notes = datos["Dat_comentario"];
-			notes.replace("<br/>\n","[13][10]").replace("<br/>","[13]").replace("\n","[13]");
-
-			out << "[ExtraInfo]" << endl;
-			out << "Genre=" << datos["Dat_genero"] << endl;
-			out << "Developer=" << datos["Dat_desarrollador"] << endl;
-			out << "Publisher=" << datos["Dat_compania"] << endl;
-			out << "Year=" << datos["Dat_anno"] << endl;
-			out << "Language=" << datos["Dat_idioma"] << endl;
-			//out << "UserInfo=" << datos["Dat_"] << endl;
-			out << "Favorite=" << datos["Dat_favorito"] << endl;
-			out << "Name=" << datos["Dat_titulo"] << endl;
-			out << "Icon=" << datos["Dat_icono"] << endl;
-			out << "Notes=" << notes << endl << endl;
-			//out << "WWW=" << datosDbx[""] << endl;
-		}
-
-		out << "# This is the configurationfile for DOSBox " << versionDbx << "." << endl;
-		out << "# Lines starting with a # are commentlines and are ignored by DOSBox." << endl;
-		out << "# They are used to (briefly) document the effect of each option." << endl << endl;
-
-		out << "[sdl]" << endl;
-		out << "#       fullscreen: Start dosbox directly in fullscreen. (Press ALT-Enter to go back)" << endl;
-		out << "#       fulldouble: Use double buffering in fullscreen. It can reduce screen flickering, but it can also result in a slow DOSBox." << endl;
-		out << "#   fullresolution: What resolution to use for fullscreen: original or fixed size (e.g. 1024x768)." << endl;
-		out << "#                     Using your monitor's native resolution with aspect=true might give the best results." << endl;
-		out << "#                     If you end up with small window on a large screen, try an output different from surface." << endl;
-		out << "# windowresolution: Scale the window to this size IF the output device supports hardware scaling." << endl;
-		out << "#                     (output=surface does not!)" << endl;
-		out << "#           output: What video system to use for output." << endl;
-		out << "#                   Possible values: surface, overlay, opengl, openglnb, ddraw." << endl;
-		out << "#         autolock: Mouse will automatically lock, if you click on the screen. (Press CTRL-F10 to unlock)" << endl;
-		out << "#      sensitivity: Mouse sensitivity." << endl;
-		out << "#      waitonerror: Wait before closing the console if dosbox has an error." << endl;
-		out << "#         priority: Priority levels for dosbox. Second entry behind the comma is for when dosbox is not focused/minimized." << endl;
-		out << "#                     pause is only valid for the second entry." << endl;
-		out << "#                   Possible values: lowest, lower, normal, higher, highest, pause." << endl;
-		out << "#       mapperfile: File used to load/save the key/event mappings from. Resetmapper only works with the defaul value." << endl;
-		out << "#     usescancodes: Avoid usage of symkeys, might not work on all operating systems." << endl << endl;
-
-		out << "fullscreen=" << datosDbx["Dbx_sdl_fullscreen"] << endl;
-		out << "fulldouble=" << datosDbx["Dbx_sdl_fulldouble"] << endl;
-//		out << "fullfixed=" << datosDbx["Dbx_sdl_fullfixed"] << endl; // DOSBox 0.63 ya en desuso
-		out << "fullresolution=" << datosDbx["Dbx_sdl_fullresolution"] << endl;
-		out << "windowresolution=" << datosDbx["Dbx_sdl_windowresolution"] << endl;
-		out << "output=" << datosDbx["Dbx_sdl_output"] << endl;
-		if( versionDbx <= "0.73" )
-			out << "hwscale=" << datosDbx["Dbx_sdl_hwscale"] << endl; // DOSBox 0.63
-		out << "autolock=" << datosDbx["Dbx_sdl_autolock"] << endl;
-		out << "sensitivity=" << datosDbx["Dbx_sdl_sensitivity"] << endl;
-		out << "waitonerror=" << datosDbx["Dbx_sdl_waitonerror"] << endl;
-		out << "priority=" << datosDbx["Dbx_sdl_priority"] << endl;
-		out << "mapperfile=" << datosDbx["Dbx_sdl_mapperfile"] << endl;
-		out << "usescancodes=" << datosDbx["Dbx_sdl_usescancodes"] << endl << endl;
-
-		out << "[dosbox]" << endl;
-		out << "# language: Select another language file." << endl;
-		out << "#  machine: The type of machine tries to emulate." << endl;
-		out << "#           Possible values: hercules, cga, tandy, pcjr, ega, vgaonly, svga_s3, svga_et3000, svga_et4000, svga_paradise, vesa_nolfb, vesa_oldvbe." << endl;
-		out << "# captures: Directory where things like wave, midi, screenshot get captured." << endl;
-		out << "#  memsize: Amount of memory DOSBox has in megabytes." << endl;
-		out << "#             This value is best left at its default to avoid problems with some games," << endl;
-		out << "#             though few games might require a higher value." << endl;
-		out << "#             There is generally no speed advantage when raising this value." << endl << endl;
-
-		if( !datosDbx["Dbx_dosbox_language"].isEmpty() || datosDbx["Dbx_dosbox_language"]!=" ")
-		out << "language=" << datosDbx["Dbx_dosbox_language"] << endl;
-		out << "machine=" << datosDbx["Dbx_dosbox_machine"] << endl;
-		if(datosDbx["Dbx_dosbox_captures"] == "" || datosDbx["Dbx_dosbox_captures"] == "capture")
-			out << "captures=" << GRlidaHomePath() << "/capturas/" << "id-"+ datos["Dat_idgrl"] +"_"+ eliminar_caracteres(datos["Dat_titulo"]) +"_"+ datos["Dat_tipo_emu"] << endl;
-		else
-			out << "captures=" << datosDbx["Dbx_dosbox_captures"] << endl;
-		out << "memsize=" << datosDbx["Dbx_dosbox_memsize"] << endl << endl;
-
-		out << "[render]" << endl;
-		out << "# frameskip: How many frames DOSBox skips before drawing one." << endl;
-		out << "#    aspect: Do aspect correction, if your output method doesn't support scaling this can slow things down!." << endl;
-		out << "#    scaler: Scaler used to enlarge/enhance low resolution modes." << endl;
-		out << "#              If 'forced' is appended, then the scaler will be used even if the result might not be desired." << endl;
-		out << "#            Possible values: none, normal2x, normal3x, advmame2x, advmame3x, advinterp2x, advinterp3x, hq2x, hq3x, 2xsai, super2xsai, supereagle, tv2x, tv3x, rgb2x, rgb3x, scan2x, scan3x." << endl << endl;
-
-		out << "frameskip=" << datosDbx["Dbx_render_frameskip"] << endl;
-		out << "aspect=" << datosDbx["Dbx_render_aspect"] << endl;
-		out << "scaler=" << datosDbx["Dbx_render_scaler"] << endl << endl;
-
-		out << "[cpu]" << endl;
-		out << "#      core: CPU Core used in emulation. auto will switch to dynamic if available and appropriate." << endl;
-		out << "#            Possible values: auto, dynamic, normal, simple." << endl;
-		out << "#   cputype: CPU Type used in emulation. auto is the fastest choice." << endl;
-		out << "#            Possible values: auto, 386, 386_slow, 486_slow, pentium_slow, 386_prefetch." << endl;
-		out << "#    cycles: Amount of instructions DOSBox tries to emulate each millisecond." << endl;
-		out << "#            Setting this value too high results in sound dropouts and lags." << endl;
-		out << "#            Cycles can be set in 3 ways:" << endl;
-		out << "#              'auto'          tries to guess what a game needs." << endl;
-		out << "#                              It usually works, but can fail for certain games." << endl;
-		out << "#              'fixed #number' will set a fixed amount of cycles. This is what you usually need if 'auto' fails." << endl;
-		out << "#                              (Example: fixed 4000)." << endl;
-		out << "#              'max'           will allocate as much cycles as your computer is able to handle." << endl;
-		out << "#            " << endl;
-		out << "#            Possible values: auto, fixed, max." << endl;
-		out << "#   cycleup: Amount of cycles to decrease/increase with keycombo.(CTRL-F11/CTRL-F12)" << endl;
-		out << "# cycledown: Setting it lower than 100 will be a percentage." << endl << endl;
-
-		out << "core=" << datosDbx["Dbx_cpu_core"] << endl;
-		out << "cputype=" << datosDbx["Dbx_cpu_cputype"] << endl;
-
-		if( datosDbx["Dbx_cpu_cycles"] != "auto" && datosDbx["Dbx_cpu_cycles"] != "max" && versionDbx >= "0.73")
-			out << "cycles=fixed " << datosDbx["Dbx_cpu_cycles"] << endl;
-		else {
-			QString cycles_realmode, cycles_protmode, cycles_limitmode;
-			if( datosDbx["Dbx_cpu_cycles"] == "auto" && versionDbx >= "0.74")
-			{
-				cycles_realmode = cycles_protmode = cycles_limitmode = "";
-				if( datosDbx["Dbx_cpu_cycles_realmode"] != "")
-					cycles_realmode = " "+datosDbx["Dbx_cpu_cycles_realmode"];
-				if( datosDbx["Dbx_cpu_cycles_protmode"] != "")
-					cycles_protmode = " "+datosDbx["Dbx_cpu_cycles_protmode"];
-				if( datosDbx["Dbx_cpu_cycles_limitmode"] != "")
-					cycles_limitmode = " "+datosDbx["Dbx_cpu_cycles_limitmode"];
-
-				out << "cycles=" << "auto" << cycles_realmode << cycles_protmode << cycles_limitmode << endl;
-			}
-			else if( datosDbx["Dbx_cpu_cycles"] == "max" && versionDbx >= "0.74")
-			{
-				cycles_protmode = cycles_limitmode = "";
-				if( datosDbx["Dbx_cpu_cycles_protmode"] != "")
-					cycles_protmode = " "+datosDbx["Dbx_cpu_cycles_protmode"];
-				if( datosDbx["Dbx_cpu_cycles_limitmode"] != "")
-					cycles_limitmode = " "+datosDbx["Dbx_cpu_cycles_limitmode"];
-
-				out << "cycles=" << "max" << cycles_protmode << cycles_limitmode << endl;
-			} else
-				out << "cycles=" << datosDbx["Dbx_cpu_cycles"] << endl;
-		}
-
-		out << "cycleup=" << datosDbx["Dbx_cpu_cycleup"] << endl;
-		out << "cycledown=" << datosDbx["Dbx_cpu_cycledown"] << endl << endl;
-
-		out << "[mixer]" << endl;
-		out << "#   nosound: Enable silent mode, sound is still emulated though." << endl;
-		out << "#      rate: Mixer sample rate, setting any device's rate higher than this will probably lower their sound quality." << endl;
-		out << "#            Possible values: 44100, 48000, 32000, 22050, 16000, 11025, 8000, 49716." << endl;
-		out << "# blocksize: Mixer block size, larger blocks might help sound stuttering but sound will also be more lagged." << endl;
-		out << "#            Possible values: 1024, 2048, 4096, 8192, 512, 256." << endl;
-		out << "# prebuffer: How many milliseconds of data to keep on top of the blocksize." << endl << endl;
-
-		out << "nosound=" << datosDbx["Dbx_mixer_nosound"] << endl;
-		out << "rate=" << datosDbx["Dbx_mixer_rate"] << endl;
-		out << "blocksize=" << datosDbx["Dbx_mixer_blocksize"] << endl;
-		out << "prebuffer=" << datosDbx["Dbx_mixer_prebuffer"] << endl << endl;
-
-		out << "[midi]" << endl;
-		out << "#     mpu401: Type of MPU-401 to emulate." << endl;
-		out << "#             Possible values: intelligent, uart, none." << endl;
-		out << "# mididevice: Device that will receive the MIDI data from MPU-401." << endl;
-		out << "#             Possible values: default, win32, alsa, oss, coreaudio, coremidi, none." << endl;
-		out << "# midiconfig: Special configuration options for the device driver. This is usually the id of the device you want to use." << endl;
-		out << "#               See the README/Manual for more details." << endl << endl;
-
-		out << "mpu401=" << datosDbx["Dbx_midi_mpu401"] << endl;
-
-		if( versionDbx >= "0.73" )
-		{
-			out << "mididevice=" << datosDbx["Dbx_midi_device"] << endl;
-			out << "midiconfig=" << datosDbx["Dbx_midi_config"] << endl << endl;
-		} else {
-			out << "intelligent=" << datosDbx["Dbx_midi_intelligent"] << endl; // DOSBox 0.63
-			out << "device=" << datosDbx["Dbx_midi_device"] << endl;
-			out << "config=" << datosDbx["Dbx_midi_config"] << endl;
-			out << "mt32rate=" << datosDbx["Dbx_midi_mt32rate"] << endl << endl; // DOSBox 0.63
-		}
-
-		out << "[sblaster]" << endl;
-		out << "#  sbtype: Type of Soundblaster to emulate. gb is Gameblaster." << endl;
-		out << "#          Possible values: sb1, sb2, sbpro1, sbpro2, sb16, gb, none." << endl;
-		out << "#  sbbase: The IO address of the soundblaster." << endl;
-		out << "#          Possible values: 220, 240, 260, 280, 2a0, 2c0, 2e0, 300." << endl;
-		out << "#     irq: The IRQ number of the soundblaster." << endl;
-		out << "#          Possible values: 7, 5, 3, 9, 10, 11, 12." << endl;
-		out << "#     dma: The DMA number of the soundblaster." << endl;
-		out << "#          Possible values: 1, 5, 0, 3, 6, 7." << endl;
-		out << "#    hdma: The High DMA number of the soundblaster." << endl;
-		out << "#          Possible values: 1, 5, 0, 3, 6, 7." << endl;
-		out << "# sbmixer: Allow the soundblaster mixer to modify the DOSBox mixer." << endl;
-		out << "# oplmode: Type of OPL emulation. On 'auto' the mode is determined by sblaster type. All OPL modes are Adlib-compatible, except for 'cms'." << endl;
-		out << "#          Possible values: auto, cms, opl2, dualopl2, opl3, none." << endl;
-		out << "#  oplemu: Provider for the OPL emulation. compat might provide better quality (see oplrate as well)." << endl;
-		out << "#          Possible values: default, compat, fast." << endl;
-		out << "# oplrate: Sample rate of OPL music emulation. Use 49716 for highest quality (set the mixer rate accordingly)." << endl;
-		out << "#          Possible values: 44100, 49716, 48000, 32000, 22050, 16000, 11025, 8000." << endl << endl;
-
-		out << "sbtype=" << datosDbx["Dbx_sblaster_sbtype"] << endl;
-		out << "sbbase=" << datosDbx["Dbx_sblaster_sbbase"] << endl;
-		out << "irq=" << datosDbx["Dbx_sblaster_irq"] << endl;
-		out << "dma=" << datosDbx["Dbx_sblaster_dma"] << endl;
-		out << "hdma=" << datosDbx["Dbx_sblaster_hdma"] << endl;
-
-		if( versionDbx >= "0.73" )
-			out << "sbmixer=" << datosDbx["Dbx_sblaster_mixer"] << endl;
-		else
-			out << "mixer=" << datosDbx["Dbx_sblaster_mixer"] << endl;
-
-		out << "oplmode=" << datosDbx["Dbx_sblaster_oplmode"] << endl;
-		out << "oplemu=" << datosDbx["Dbx_sblaster_oplemu"] << endl;
-		out << "oplrate=" << datosDbx["Dbx_sblaster_oplrate"] << endl << endl;
-
-		out << "[gus]" << endl;
-		out << "#      gus: Enable the Gravis Ultrasound emulation." << endl;
-		out << "#  gusrate: Sample rate of Ultrasound emulation." << endl;
-		out << "#           Possible values: 44100, 48000, 32000, 22050, 16000, 11025, 8000, 49716." << endl;
-		out << "#  gusbase: The IO base address of the Gravis Ultrasound." << endl;
-		out << "#           Possible values: 240, 220, 260, 280, 2a0, 2c0, 2e0, 300." << endl;
-		out << "#   gusirq: The IRQ number of the Gravis Ultrasound." << endl;
-		out << "#           Possible values: 5, 3, 7, 9, 10, 11, 12." << endl;
-		out << "#   gusdma: The DMA channel of the Gravis Ultrasound." << endl;
-		out << "#           Possible values: 3, 0, 1, 5, 6, 7." << endl;
-		out << "# ultradir: Path to Ultrasound directory. In this directory" << endl;
-		out << "#           there should be a MIDI directory that contains" << endl;
-		out << "#           the patch files for GUS playback. Patch sets used" << endl;
-		out << "#           with Timidity should work fine." << endl << endl;
-
-		out << "gus=" << datosDbx["Dbx_gus_gus"] << endl;
-		out << "gusrate=" << datosDbx["Dbx_gus_gusrate"] << endl;
-		out << "gusbase=" << datosDbx["Dbx_gus_gusbase"] << endl;
-		if( versionDbx >= "0.73" )
-		{
-			out << "gusirq=" << datosDbx["Dbx_gus_irq1"] << endl;
-			out << "gusdma=" << datosDbx["Dbx_gus_dma1"] << endl;
-		} else {
-			out << "irq1=" << datosDbx["Dbx_gus_irq1"] << endl;
-			out << "irq2=" << datosDbx["Dbx_gus_irq2"] << endl;
-			out << "dma1=" << datosDbx["Dbx_gus_dma1"] << endl;
-			out << "dma2=" << datosDbx["Dbx_gus_dma2"] << endl;
-		}
-		out << "ultradir=" << datosDbx["Dbx_gus_ultradir"] << endl << endl;
-
-		out << "[speaker]" << endl;
-		out << "# pcspeaker: Enable PC-Speaker emulation." << endl;
-		out << "#    pcrate: Sample rate of the PC-Speaker sound generation." << endl;
-		out << "#            Possible values: 44100, 48000, 32000, 22050, 16000, 11025, 8000, 49716." << endl;
-		out << "#     tandy: Enable Tandy Sound System emulation. For 'auto', emulation is present only if machine is set to 'tandy'." << endl;
-		out << "#            Possible values: auto, on, off." << endl;
-		out << "# tandyrate: Sample rate of the Tandy 3-Voice generation." << endl;
-		out << "#            Possible values: 44100, 48000, 32000, 22050, 16000, 11025, 8000, 49716." << endl;
-		out << "#    disney: Enable Disney Sound Source emulation. (Covox Voice Master and Speech Thing compatible)." << endl << endl;
-
-		out << "pcspeaker=" << datosDbx["Dbx_speaker_pcspeaker"] << endl;
-		out << "pcrate=" << datosDbx["Dbx_speaker_pcrate"] << endl;
-		out << "tandy=" << datosDbx["Dbx_speaker_tandy"] << endl;
-		out << "tandyrate=" << datosDbx["Dbx_speaker_tandyrate"] << endl;
-		out << "disney=" << datosDbx["Dbx_speaker_disney"] << endl << endl;
-
-		out << "[joystick]" << endl;
-		out << "# joysticktype: Type of joystick to emulate: auto (default), none," << endl;
-		out << "#               2axis (supports two joysticks)," << endl;
-		out << "#               4axis (supports one joystick, first joystick used)," << endl;
-		out << "#               4axis_2 (supports one joystick, second joystick used)," << endl;
-		out << "#               fcs (Thrustmaster), ch (CH Flightstick)." << endl;
-		out << "#               none disables joystick emulation." << endl;
-		out << "#               auto chooses emulation depending on real joystick(s)." << endl;
-		out << "#               (Remember to reset dosbox's mapperfile if you saved it earlier)" << endl;
-		out << "#               Possible values: auto, 2axis, 4axis, 4axis_2, fcs, ch, none." << endl;
-		out << "#        timed: enable timed intervals for axis. Experiment with this option, if your joystick drifts (away)." << endl;
-		out << "#     autofire: continuously fires as long as you keep the button pressed." << endl;
-		out << "#       swap34: swap the 3rd and the 4th axis. can be useful for certain joysticks." << endl;
-		out << "#   buttonwrap: enable button wrapping at the number of emulated buttons." << endl << endl;
-
-		out << "joysticktype=" << datosDbx["Dbx_joystick_type"] << endl;
-		out << "timed=" << datosDbx["Dbx_joystick_timed"] << endl;
-		out << "autofire=" << datosDbx["Dbx_joystick_autofire"] << endl;
-		out << "swap34=" << datosDbx["Dbx_joystick_swap34"] << endl;
-		out << "buttonwrap=" << datosDbx["Dbx_joystick_buttonwrap"] << endl << endl;
-
-		if( versionDbx <= "0.73" )
-		{
-			out << "[modem]" << endl; // DOSBox 0.63
-			out << "modem=" << datosDbx["Dbx_modem_modem"] << endl;
-			out << "comport=" << datosDbx["Dbx_modem_comport"] << endl;
-			out << "listenport=" << datosDbx["Dbx_modem_listenport"] << endl << endl;
-
-			out << "[directserial]" << endl; // DOSBox 0.63
-			out << "directserial=" << datosDbx["Dbx_dserial_directserial"] << endl;
-			out << "comport=" << datosDbx["Dbx_dserial_comport"] << endl;
-			out << "realport=" << datosDbx["Dbx_dserial_realport"] << endl;
-			out << "defaultbps=" << datosDbx["Dbx_dserial_defaultbps"] << endl;
-			out << "parity=" << datosDbx["Dbx_dserial_parity"] << endl;
-			out << "bytesize=" << datosDbx["Dbx_dserial_bytesize"] << endl;
-			out << "stopbit=" << datosDbx["Dbx_dserial_stopbit"] << endl << endl;
-		}
-		out << "[serial]" << endl;
-		out << "# serial1: set type of device connected to com port." << endl;
-		out << "#          Can be disabled, dummy, modem, nullmodem, directserial." << endl;
-		out << "#          Additional parameters must be in the same line in the form of" << endl;
-		out << "#          parameter:value. Parameter for all types is irq (optional)." << endl;
-		out << "#          for directserial: realport (required), rxdelay (optional)." << endl;
-		out << "#                           (realport:COM1 realport:ttyS0)." << endl;
-		out << "#          for modem: listenport (optional)." << endl;
-		out << "#          for nullmodem: server, rxdelay, txdelay, telnet, usedtr," << endl;
-		out << "#                         transparent, port, inhsocket (all optional)." << endl;
-		out << "#          Example: serial1=modem listenport:5000" << endl;
-		out << "#          Possible values: dummy, disabled, modem, nullmodem, directserial." << endl;
-		out << "# serial2: see serial1" << endl;
-		out << "#          Possible values: dummy, disabled, modem, nullmodem, directserial" << endl;
-		out << "# serial3: see serial1" << endl;
-		out << "#          Possible values: dummy, disabled, modem, nullmodem, directserial." << endl;
-		out << "# serial4: see serial1" << endl;
-		out << "#          Possible values: dummy, disabled, modem, nullmodem, directserial." << endl << endl;
-
-		out << "serial1=" << datosDbx["Dbx_serial_1"] << endl;
-		out << "serial2=" << datosDbx["Dbx_serial_2"] << endl;
-		out << "serial3=" << datosDbx["Dbx_serial_3"] << endl;
-		out << "serial4=" << datosDbx["Dbx_serial_4"] << endl << endl;
-
-		out << "[dos]" << endl;
-		out << "#            xms: Enable XMS support." << endl;
-		out << "#            ems: Enable EMS support." << endl;
-		out << "#            umb: Enable UMB support." << endl;
-		out << "# keyboardlayout: Language code of the keyboard layout (or none)." << endl << endl;
-
-		out << "xms=" << datosDbx["Dbx_dos_xms"] << endl;
-		out << "ems=" << datosDbx["Dbx_dos_ems"] << endl;
-		out << "umb=" << datosDbx["Dbx_dos_umb"] << endl;
-		out << "keyboardlayout=" << datosDbx["Dbx_dos_keyboardlayout"] << endl << endl;
-
-		out << "[ipx]" << endl;
-		out << "# ipx: Enable ipx over UDP/IP emulation." << endl << endl;
-
-		out << "ipx=" << datosDbx["Dbx_ipx_ipx"] << endl << endl;
-
-		if( !exportToDFend )
-		{
-			out << "[autoexec]" << endl;
-			out << "# Lines in this section will be run at startup." << endl;
-			out << "# You can put your MOUNT lines here." << endl << endl;
-
-			if( datosDbx["Dbx_dos_version"] != "" )
-				out << "ver set " << datosDbx["Dbx_dos_version"] << endl << endl;
-
-			if( datosDbx["Dbx_opt_autoexec"] == "true" )
-				out << datosDbx["Dbx_autoexec"] << endl;
-			else {
-				// Creando el Autoexec
-				QStringList listamontaje;
-				QHash<QString, QString> datos_montaje;
-				int i = 0;
-
-				datos_montaje.clear();
-				datos_montaje["Dbx_path_exe"]        = datosDbx["Dbx_path_exe"];
-				datos_montaje["Dbx_parametros_exe"]  = datosDbx["Dbx_parametros_exe"];
-				datos_montaje["Dbx_opt_loadfix_mem"] = datosDbx["Dbx_opt_loadfix_mem"];
-				datos_montaje["Dbx_opt_loadfix"]     = datosDbx["Dbx_opt_loadfix"];
-				datos_montaje["Dbx_opt_cerrar_dbox"] = datosDbx["Dbx_opt_cerrar_dbox"];
-
-				listamontaje.clear();
-				listamontaje = CreaConfigMontajes( treeWidget, datos_montaje );
-
-				for(i = 0; i < listamontaje.size(); ++i)
-					out << listamontaje.value( i ) << endl;
-			}
-		}
-
+		out << cfg_out << endl;
 		out.flush();
 		file_out.close();
 	}
 }
 
-// Crea el archivo de configuración del VDMSound
-void Funciones::CrearArchivoConfigVdmS(const QHash<QString, QString> datosVdms, const QString pathSaveConfg)
+// Crea la configuración del ScummVM
+void Funciones::creaIniScummVM(stConfigScummVM cfgSvm, QString archivo)
 {
-	QSettings * settings = new QSettings(pathSaveConfg, QSettings::IniFormat);
-	QFileInfo workdir( datosVdms["Vdms_path_exe"] );
+	QFile file_out;
+	file_out.setFileName( archivo );
 
-	settings->beginGroup("program");
-		settings->setValue("executable"  , datosVdms["Vdms_path_exe"]  );
-		settings->setValue("workdir"     , workdir.absolutePath() );
-		settings->setValue("params"      , datosVdms["Vdms_program_1"] );
-		settings->setValue("icon"        , datosVdms["Vdms_program_2"] );
-	settings->endGroup();
+	comprobarDirectorio( getInfoFile(archivo).Path );
 
-	settings->beginGroup("vdms.debug");
-		settings->setValue("useCustomCfg", datosVdms["Vdms_vdms_debug_1"] );
-		settings->setValue("customCfg"   , datosVdms["Vdms_vdms_debug_2"] );
-	settings->endGroup();
-
-	settings->beginGroup("winnt.dos");
-		settings->setValue("useAutoexec" , datosVdms["Vdms_winnt_dos_1"] );
-		settings->setValue("autoexec"    , datosVdms["Vdms_winnt_dos_2"] );
-	settings->endGroup();
-
-	settings->beginGroup("winnt.dosbox");
-		settings->setValue("exitclose"   , datosVdms["Vdms_winnt_dosbox_1"] );
-		settings->setValue("exitWarn"    , datosVdms["Vdms_winnt_dosbox_2"] );
-		settings->setValue("fastPaste"   , datosVdms["Vdms_winnt_dosbox_3"] );
-	settings->endGroup();
-
-	settings->beginGroup("winnt.storage");
-		settings->setValue("useCDROM"    , datosVdms["Vdms_winnt_storage_1"] );
-		settings->setValue("useNetware"  , datosVdms["Vdms_winnt_storage_2"] );
-	settings->endGroup();
-
-	delete settings;
-}
-
-// Exportar la configuracion del DOSBox para el GR-lida
-void Funciones::Exportar_Profile_GRLida(const QHash<QString, QString> datos, const QHash<QString, QString> datos_emu, QTreeWidget *treeWidget, const QString pathSaveConfg, int exportGRLVersion)
-{
-	QString strDat, strDbx, strSvm, strVdms, str_dosbox, strDbxMount;
-	if(exportGRLVersion==2)
-	{
-		strDat  = "Dat_";
-		strDbx  = "Dbx_";
-		strSvm  = "Svm_";
-		strVdms = "Vdms_";
-		str_dosbox = "dosbox_";
-		strDbxMount = "Dbx_mount_";
-	} else {
-		strDat  = "";
-		strDbx  = "";
-		strSvm  = "";
-		strVdms = "";
-		str_dosbox = "";
-		strDbxMount = "";
-	}
-
-	QFile file_out( pathSaveConfg );
-	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
+	if( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
 	{
 		QTextStream out(&file_out);
 		out.setCodec("UTF-8");
 
-		out << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" << endl;
-		out << "<grlida_db version=\"0.1.0\">" << endl;
-		out << "  <lista_db>" << endl;
-		out << "    <title>Export GR-lida</title>" << endl;
-		out << "    <link></link>" << endl;
-		out << "    <description></description>" << endl;
-		out << "    <lastBuildDate>" << HoraFechaActual() << "</lastBuildDate>" << endl;
-//		out << "    <language>es-ES</language>" << endl;
-		out << "    <copyright>Copyright 2003-2010</copyright>" << endl;
+		out << "[" << cfgSvm.game_label << "]" << endl;
+		out << "description"     << "=" << cfgSvm.description     << endl;
+		out << "gameid"          << "=" << cfgSvm.game            << endl;
+		out << "language"        << "=" << cfgSvm.language        << endl;
+		out << "subtitles"       << "=" << cfgSvm.subtitles       << endl;
+		out << "platform"        << "=" << cfgSvm.platform        << endl;
+		out << "gfx_mode"        << "=" << cfgSvm.gfx_mode        << endl;
+		out << "render_mode"     << "=" << cfgSvm.render_mode     << endl;
+		out << "fullscreen"      << "=" << cfgSvm.fullscreen      << endl;
+		out << "aspect_ratio"    << "=" << cfgSvm.aspect_ratio    << endl;
+		out << "path"            << "=" << QDir::toNativeSeparators(cfgSvm.path) << endl;
+		out << "extrapath"       << "=" << QDir::toNativeSeparators(cfgSvm.path_extra) << endl;
+		out << "savepath"        << "=" << QDir::toNativeSeparators(cfgSvm.path_save) << endl;
+		out << "music_driver"    << "=" << cfgSvm.music_driver    << endl;
+		out << "enable_gs"       << "=" << cfgSvm.enable_gs       << endl;
+		out << "multi_midi"      << "=" << cfgSvm.multi_midi      << endl;
+		out << "native_mt32"     << "=" << cfgSvm.native_mt32     << endl;
+		out << "master_volume"   << "=" << cfgSvm.master_volume   << endl;
+		out << "music_volume"    << "=" << cfgSvm.music_volume    << endl;
+		out << "sfx_volume"      << "=" << cfgSvm.sfx_volume      << endl;
+		out << "speech_volume"   << "=" << cfgSvm.speech_volume   << endl;
+		out << "tempo"           << "=" << cfgSvm.tempo           << endl;
+		out << "talkspeed"       << "=" << cfgSvm.talkspeed       << endl;
+		out << "cdrom"           << "=" << cfgSvm.cdrom           << endl;
+		out << "joystick_num"    << "=" << cfgSvm.joystick_num    << endl;
+		out << "output_rate"     << "=" << cfgSvm.output_rate     << endl;
+		out << "midi_gain"       << "=" << cfgSvm.midi_gain       << endl;
+		out << "copy_protection" << "=" << cfgSvm.copy_protection << endl;
+		out << "soundfont"       << "=" << cfgSvm.sound_font      << endl;
+		out << "walkspeed"       << "=" << cfgSvm.walkspeed       << endl << endl;
 
-		out << "    <datos>" << endl;
-		out << "      <"+strDat+"usuario>" <<  datos["Dat_usuario"] << "</"+strDat+"usuario>" << endl;
-		out << "      <"+strDat+"icono>" << datos["Dat_icono"] << "</"+strDat+"icono>" << endl;
-		out << "      <"+strDat+"titulo>" <<  datos["Dat_titulo"] << "</"+strDat+"titulo>" << endl;
-		out << "      <"+strDat+"subtitulo>" <<  datos["Dat_subtitulo"] << "</"+strDat+"subtitulo>" << endl;
-		out << "      <"+strDat+"genero>" << datos["Dat_genero"] << "</"+strDat+"genero>" << endl;
-		out << "      <"+strDat+"compania>" << datos["Dat_compania"] << "</"+strDat+"compania>" << endl;
-		out << "      <"+strDat+"desarrollador>" << datos["Dat_desarrollador"] << "</"+strDat+"desarrollador>" << endl;
-		out << "      <"+strDat+"tema>" << datos["Dat_tema"] << "</"+strDat+"tema>" << endl;
-		out << "      <"+strDat+"perspectiva>" << datos["Dat_perspectiva"] << "</"+strDat+"perspectiva>" << endl;
-		out << "      <"+strDat+"idioma>" << datos["Dat_idioma"] << "</"+strDat+"idioma>" << endl;
-		out << "      <"+strDat+"formato>" << datos["Dat_formato"] << "</"+strDat+"formato>" << endl;
-		out << "      <"+strDat+"anno>" <<  datos["Dat_anno"] << "</"+strDat+"anno>" << endl;
-		out << "      <"+strDat+"numdisc>" <<  datos["Dat_numdisc"] << "</"+strDat+"numdisc>" << endl;
-		out << "      <"+strDat+"sistemaop>" << datos["Dat_sistemaop"] << "</"+strDat+"sistemaop>" << endl;
-		out << "      <"+strDat+"tamano>" << datos["Dat_tamano"] << "</"+strDat+"tamano>" << endl;
-		out << "      <"+strDat+"graficos>" << datos["Dat_graficos"] << "</"+strDat+"graficos>" << endl;
-		out << "      <"+strDat+"sonido>" << datos["Dat_sonido"] << "</"+strDat+"sonido>" << endl;
-		out << "      <"+strDat+"jugabilidad>" << datos["Dat_jugabilidad"] << "</"+strDat+"jugabilidad>" << endl;
-		out << "      <"+strDat+"original>" << datos["Dat_original"] << "</"+strDat+"original>" << endl;
-		out << "      <"+strDat+"estado>" << datos["Dat_estado"] << "</"+strDat+"estado>" << endl;
-		out << "      <"+strDat+"thumbs>" << datos["Dat_thumbs"] << "</"+strDat+"thumbs>" << endl;
-		out << "      <"+strDat+"cover_front>" << datos["Dat_cover_front"] << "</"+strDat+"cover_front>" << endl;
-		out << "      <"+strDat+"cover_back>" << datos["Dat_cover_back"] << "</"+strDat+"cover_back>" << endl;
-		out << "      <"+strDat+"fecha>" << datos["Dat_fecha"] << "</"+strDat+"fecha>" << endl;
-		out << "      <"+strDat+"tipo_emu>" << datos["Dat_tipo_emu"] << "</"+strDat+"tipo_emu>" << endl;
-		out << "      <"+strDat+"comentario>" << datos["Dat_comentario"] << "</"+strDat+"comentario>" << endl;
-		out << "      <"+strDat+"favorito>" << datos["Dat_favorito"] << "</"+strDat+"favorito>" << endl;
-		out << "      <"+strDat+"rating>" << datos["Dat_rating"] << "</"+strDat+"rating>" << endl;
-		out << "      <"+strDat+"edad_recomendada>" << datos["Dat_edad_recomendada"] << "</"+strDat+"edad_recomendada>" << endl;
-		out << "      <"+strDat+"path_exe>" << datos["Dat_path_exe"] << "</"+strDat+"path_exe>" << endl;
-		out << "      <"+strDat+"parametros_exe>" << datos["Dat_parametros_exe"] << "</"+strDat+"parametros_exe>" << endl;
-		out << "    </datos>" << endl;
+		out << "[scummvm]" << endl;
+		out << "gui_theme"  << "=" << "modern" << endl;
+		out << "gfx_mode"   << "=" << "2x"     << endl;
+		out << "fullscreen" << "=" << "false"  << endl;
+		out << "extrapath"  << "=" << QDir::toNativeSeparators(cfgSvm.path_extra) << endl;
+		out << "themepath"  << "=" << QDir::toNativeSeparators(cfgSvm.emu_svmpath) << endl << endl;
 
-		if( datos["Dat_tipo_emu"] == "dosbox" )
-		{
-			out << "    <dosbox>" << endl;
-//			out << "      <"+strDbx+"usuario>" <<  datos_emu["user_name"] << "</"+strDbx+"usuario>" << endl;
-			out << "      <"+strDbx+"sdl_fullscreen>" << datos_emu["Dbx_sdl_fullscreen"] << "</"+strDbx+"sdl_fullscreen>" << endl;
-			out << "      <"+strDbx+"sdl_fulldouble>" << datos_emu["Dbx_sdl_fulldouble"] << "</"+strDbx+"sdl_fulldouble>" << endl;
-//			out << "      <"+strDbx+"sdl_fullfixed>" << datos_emu["Dbx_sdl_fullfixed"] << "</"+strDbx+"sdl_fullfixed>" << endl; // en desuso
-			out << "      <"+strDbx+"sdl_fullresolution>" << datos_emu["Dbx_sdl_fullresolution"] << "</"+strDbx+"sdl_fullresolution>" << endl;
-			out << "      <"+strDbx+"sdl_windowresolution>" << datos_emu["Dbx_sdl_windowresolution"] << "</"+strDbx+"sdl_windowresolution>" << endl;
-			out << "      <"+strDbx+"sdl_output>" << datos_emu["Dbx_sdl_output"] << "</"+strDbx+"sdl_output>" << endl;
-			out << "      <"+strDbx+"sdl_hwscale>" << datos_emu["Dbx_sdl_hwscale"] << "</"+strDbx+"sdl_hwscale>" << endl;
-			out << "      <"+strDbx+"sdl_autolock>" << datos_emu["Dbx_sdl_autolock"] << "</"+strDbx+"sdl_autolock>" << endl;
-			out << "      <"+strDbx+"sdl_sensitivity>" << datos_emu["Dbx_sdl_sensitivity"] << "</"+strDbx+"sdl_sensitivity>" << endl;
-			out << "      <"+strDbx+"sdl_waitonerror>" << datos_emu["Dbx_sdl_waitonerror"] << "</"+strDbx+"sdl_waitonerror>" << endl;
-			out << "      <"+strDbx+"sdl_priority>" << datos_emu["Dbx_sdl_priority"] << "</"+strDbx+"sdl_priority>" << endl;
-			out << "      <"+strDbx+"sdl_mapperfile>" << datos_emu["Dbx_sdl_mapperfile"] << "</"+strDbx+"sdl_mapperfile>" << endl;
-			out << "      <"+strDbx+"sdl_usescancodes>" << datos_emu["Dbx_sdl_usescancodes"] << "</"+strDbx+"sdl_usescancodes>" << endl;
-			out << "      <"+strDbx+"dosbox_language>" << datos_emu["Dbx_dosbox_language"] << "</"+strDbx+"dosbox_language>" << endl;
-			out << "      <"+strDbx+"dosbox_machine>" << datos_emu["Dbx_dosbox_machine"] << "</"+strDbx+"dosbox_machine>" << endl;
-			out << "      <"+strDbx+"dosbox_captures>" << datos_emu["Dbx_dosbox_captures"] << "</"+strDbx+"dosbox_captures>" << endl;
-			out << "      <"+strDbx+"dosbox_memsize>" << datos_emu["Dbx_dosbox_memsize"] << "</"+strDbx+"dosbox_memsize>" << endl;
-			out << "      <"+strDbx+"render_frameskip>" << datos_emu["Dbx_render_frameskip"] << "</"+strDbx+"render_frameskip>" << endl;
-			out << "      <"+strDbx+"render_aspect>" << datos_emu["Dbx_render_aspect"] << "</"+strDbx+"render_aspect>" << endl;
-			out << "      <"+strDbx+"render_scaler>" << datos_emu["Dbx_render_scaler"] << "</"+strDbx+"render_scaler>" << endl;
-			out << "      <"+strDbx+"cpu_core>" << datos_emu["Dbx_cpu_core"] << "</"+strDbx+"cpu_core>" << endl;
-			out << "      <"+strDbx+"cpu_cputype>" << datos_emu["Dbx_cpu_cputype"] << "</"+strDbx+"cpu_cputype>" << endl;
-			out << "      <"+strDbx+"cpu_cycles>" << datos_emu["Dbx_cpu_cycles"] << "</"+strDbx+"cpu_cycles>" << endl;
-			out << "      <"+strDbx+"cpu_cycleup>" << datos_emu["Dbx_cpu_cycleup"] << "</"+strDbx+"cpu_cycleup>" << endl;
-			out << "      <"+strDbx+"cpu_cycledown>" << datos_emu["Dbx_cpu_cycledown"] << "</"+strDbx+"cpu_cycledown>" << endl;
-			out << "      <"+strDbx+"mixer_nosound>" << datos_emu["Dbx_mixer_nosound"] << "</"+strDbx+"mixer_nosound>" << endl;
-			out << "      <"+strDbx+"mixer_rate>" << datos_emu["Dbx_mixer_rate"] << "</"+strDbx+"mixer_rate>" << endl;
-			out << "      <"+strDbx+"mixer_blocksize>" << datos_emu["Dbx_mixer_blocksize"] << "</"+strDbx+"mixer_blocksize>" << endl;
-			out << "      <"+strDbx+"mixer_prebuffer>" << datos_emu["Dbx_mixer_prebuffer"] << "</"+strDbx+"mixer_prebuffer>" << endl;
-			out << "      <"+strDbx+"midi_mpu401>" << datos_emu["Dbx_midi_mpu401"] << "</"+strDbx+"midi_mpu401>" << endl;
-			out << "      <"+strDbx+"midi_intelligent>" << datos_emu["Dbx_midi_intelligent"] << "</"+strDbx+"midi_intelligent>" << endl;
-			out << "      <"+strDbx+"midi_device>" << datos_emu["Dbx_midi_device"] << "</"+strDbx+"midi_device>" << endl;
-			out << "      <"+strDbx+"midi_config>" << datos_emu["Dbx_midi_config"] << "</"+strDbx+"midi_config>" << endl;
-			out << "      <"+strDbx+"midi_mt32rate>" << datos_emu["Dbx_midi_mt32rate"] << "</"+strDbx+"midi_mt32rate>" << endl;
-			out << "      <"+strDbx+"sblaster_sbtype>" << datos_emu["Dbx_sblaster_sbtype"] << "</"+strDbx+"sblaster_sbtype>" << endl;
-			out << "      <"+strDbx+"sblaster_sbbase>" << datos_emu["Dbx_sblaster_sbbase"] << "</"+strDbx+"sblaster_sbbase>" << endl;
-			out << "      <"+strDbx+"sblaster_irq>" << datos_emu["Dbx_sblaster_irq"] << "</"+strDbx+"sblaster_irq>" << endl;
-			out << "      <"+strDbx+"sblaster_dma>" << datos_emu["Dbx_sblaster_dma"] << "</"+strDbx+"sblaster_dma>" << endl;
-			out << "      <"+strDbx+"sblaster_hdma>" << datos_emu["Dbx_sblaster_hdma"] << "</"+strDbx+"sblaster_hdma>" << endl;
-			out << "      <"+strDbx+"sblaster_mixer>" << datos_emu["Dbx_sblaster_mixer"] << "</"+strDbx+"sblaster_mixer>" << endl;
-			out << "      <"+strDbx+"sblaster_oplmode>" << datos_emu["Dbx_sblaster_oplmode"] << "</"+strDbx+"sblaster_oplmode>" << endl;
-			out << "      <"+strDbx+"sblaster_oplemu>" << datos_emu["Dbx_sblaster_oplemu"] << "</"+strDbx+"sblaster_oplemu>" << endl;
-			out << "      <"+strDbx+"sblaster_oplrate>" << datos_emu["Dbx_sblaster_oplrate"] << "</"+strDbx+"sblaster_oplrate>" << endl;
-			out << "      <"+strDbx+"gus_gus>" << datos_emu["Dbx_gus_gus"] << "</"+strDbx+"gus_gus>" << endl;
-			out << "      <"+strDbx+"gus_gusrate>" << datos_emu["Dbx_gus_gusrate"] << "</"+strDbx+"gus_gusrate>" << endl;
-			out << "      <"+strDbx+"gus_gusbase>" << datos_emu["Dbx_gus_gusbase"] << "</"+strDbx+"gus_gusbase>" << endl;
-			out << "      <"+strDbx+"gus_irq1>" << datos_emu["Dbx_gus_irq1"] << "</"+strDbx+"gus_irq1>" << endl;
-			out << "      <"+strDbx+"gus_irq2>" << datos_emu["Dbx_gus_irq2"] << "</"+strDbx+"gus_irq2>" << endl;
-			out << "      <"+strDbx+"gus_dma1>" << datos_emu["Dbx_gus_dma1"] << "</"+strDbx+"gus_dma1>" << endl;
-			out << "      <"+strDbx+"gus_dma2>" << datos_emu["Dbx_gus_dma2"] << "</"+strDbx+"gus_dma2>" << endl;
-			out << "      <"+strDbx+"gus_ultradir>" << datos_emu["Dbx_gus_ultradir"] << "</"+strDbx+"gus_ultradir>" << endl;
-			out << "      <"+strDbx+"speaker_pcspeaker>" << datos_emu["Dbx_speaker_pcspeaker"] << "</"+strDbx+"speaker_pcspeaker>" << endl;
-			out << "      <"+strDbx+"speaker_pcrate>" << datos_emu["Dbx_speaker_pcrate"] << "</"+strDbx+"speaker_pcrate>" << endl;
-			out << "      <"+strDbx+"speaker_tandy>" << datos_emu["Dbx_speaker_tandy"] << "</"+strDbx+"speaker_tandy>" << endl;
-			out << "      <"+strDbx+"speaker_tandyrate>" << datos_emu["Dbx_speaker_tandyrate"] << "</"+strDbx+"speaker_tandyrate>" << endl;
-			out << "      <"+strDbx+"speaker_disney>" << datos_emu["Dbx_speaker_disney"] << "</"+strDbx+"speaker_disney>" << endl;
-			out << "      <"+strDbx+"joystick_type>" << datos_emu["Dbx_joystick_type"] << "</"+strDbx+"joystick_type>" << endl;
-			out << "      <"+strDbx+"joystick_timed>" << datos_emu["Dbx_joystick_timed"] << "</"+strDbx+"joystick_timed>" << endl;
-			out << "      <"+strDbx+"joystick_autofire>" << datos_emu["Dbx_joystick_autofire"] << "</"+strDbx+"joystick_autofire>" << endl;
-			out << "      <"+strDbx+"joystick_swap34>" << datos_emu["Dbx_joystick_swap34"] << "</"+strDbx+"joystick_swap34>" << endl;
-			out << "      <"+strDbx+"joystick_buttonwrap>" << datos_emu["Dbx_joystick_buttonwrap"] << "</"+strDbx+"joystick_buttonwrap>" << endl;
-			out << "      <"+strDbx+"modem_modem>" << datos_emu["Dbx_modem_modem"] << "</"+strDbx+"modem_modem>" << endl;
-			out << "      <"+strDbx+"modem_comport>" << datos_emu["Dbx_modem_comport"] << "</"+strDbx+"modem_comport>" << endl;
-			out << "      <"+strDbx+"modem_listenport>" << datos_emu["Dbx_modem_listenport"] << "</"+strDbx+"modem_listenport>" << endl;
-			out << "      <"+strDbx+"dserial_directserial>" << datos_emu["Dbx_dserial_directserial"] << "</"+strDbx+"dserial_directserial>" << endl;
-			out << "      <"+strDbx+"dserial_comport>" << datos_emu["Dbx_dserial_comport"] << "</"+strDbx+"dserial_comport>" << endl;
-			out << "      <"+strDbx+"dserial_realport>" << datos_emu["Dbx_dserial_realport"] << "</"+strDbx+"dserial_realport>" << endl;
-			out << "      <"+strDbx+"dserial_defaultbps>" << datos_emu["Dbx_dserial_defaultbps"] << "</"+strDbx+"dserial_defaultbps>" << endl;
-			out << "      <"+strDbx+"dserial_parity>" << datos_emu["Dbx_dserial_parity"] << "</"+strDbx+"dserial_parity>" << endl;
-			out << "      <"+strDbx+"dserial_bytesize>" << datos_emu["Dbx_dserial_bytesize"] << "</"+strDbx+"dserial_bytesize>" << endl;
-			out << "      <"+strDbx+"dserial_stopbit>" << datos_emu["Dbx_dserial_stopbit"] << "</"+strDbx+"dserial_stopbit>" << endl;
-			out << "      <"+strDbx+"serial_1>" << datos_emu["Dbx_serial_1"] << "</"+strDbx+"serial_1>" << endl;
-			out << "      <"+strDbx+"serial_2>" << datos_emu["Dbx_serial_2"] << "</"+strDbx+"serial_2>" << endl;
-			out << "      <"+strDbx+"serial_3>" << datos_emu["Dbx_serial_3"] << "</"+strDbx+"serial_3>" << endl;
-			out << "      <"+strDbx+"serial_4>" << datos_emu["Dbx_serial_4"] << "</"+strDbx+"serial_4>" << endl;
-			out << "      <"+strDbx+"dos_xms>" << datos_emu["Dbx_dos_xms"] << "</"+strDbx+"dos_xms>" << endl;
-			out << "      <"+strDbx+"dos_ems>" << datos_emu["Dbx_dos_ems"] << "</"+strDbx+"dos_ems>" << endl;
-			out << "      <"+strDbx+"dos_umb>" << datos_emu["Dbx_dos_umb"] << "</"+strDbx+"dos_umb>" << endl;
-			out << "      <"+strDbx+"dos_keyboardlayout>" << datos_emu["Dbx_dos_keyboardlayout"] << "</"+strDbx+"dos_keyboardlayout>" << endl;
-			out << "      <"+strDbx+"ipx_ipx>" << datos_emu["Dbx_ipx_ipx"] << "</"+strDbx+"ipx_ipx>" << endl;
-			out << "      <"+strDbx+"autoexec>" << datos_emu["Dbx_autoexec"] << "</"+strDbx+"autoexec>" << endl;
-			out << "      <"+strDbx+"opt_autoexec>" << datos_emu["Dbx_opt_autoexec"] << "</"+strDbx+"opt_autoexec>" << endl;
-			out << "      <"+strDbx+"opt_loadfix>" << datos_emu["Dbx_opt_loadfix"] << "</"+strDbx+"opt_loadfix>" << endl;
-			out << "      <"+strDbx+"opt_loadfix_mem>" << datos_emu["Dbx_opt_loadfix_mem"] << "</"+strDbx+"opt_loadfix_mem>" << endl;
-			out << "      <"+strDbx+"opt_consola_dbox>" << datos_emu["Dbx_opt_consola_dbox"] << "</"+strDbx+"opt_consola_dbox>" << endl;
-			out << "      <"+strDbx+"opt_cerrar_dbox>" << datos_emu["Dbx_opt_cerrar_dbox"] << "</"+strDbx+"opt_cerrar_dbox>" << endl;
-			out << "      <"+strDbx+"opt_cycle_sincronizar>" << datos_emu["Dbx_opt_cycle_sincronizar"] << "</"+strDbx+"opt_cycle_sincronizar>" << endl;
-			out << "      <"+strDbx+"path_conf>" << datos_emu["Dbx_path_conf"] << "</"+strDbx+"path_conf>" << endl;
-			out << "      <"+strDbx+"path_sonido>" << datos_emu["Dbx_path_sonido"] << "</"+strDbx+"path_sonido>" << endl;
-			out << "      <"+strDbx+"path_exe>" << datos_emu["Dbx_path_exe"] << "</"+strDbx+"path_exe>" << endl;
-			out << "      <"+strDbx+"path_setup>" << datos_emu["Dbx_path_setup"] << "</"+strDbx+"path_setup>" << endl;
-			out << "      <"+strDbx+"parametros_exe>" << datos_emu["Dbx_parametros_exe"] << "</"+strDbx+"parametros_exe>" << endl;
-			out << "      <"+strDbx+"parametros_setup>" << datos_emu["Dbx_parametros_setup"] << "</"+strDbx+"parametros_setup>" << endl;
-			out << "    </dosbox>" << endl;
-
-			for(int num_mount = 0; num_mount < treeWidget->topLevelItemCount(); num_mount++ )
-			{
-				QTreeWidgetItem *item = treeWidget->topLevelItem( num_mount );
-				out << "    <"+str_dosbox+"montajes>" << endl;
-				out << "      <"+strDbxMount+"id_lista>" << item->text(9) << "</"+strDbxMount+"id_lista>" << endl;
-				out << "      <"+strDbxMount+"path>" << item->text(0) << "<"+strDbxMount+"/path>" << endl;
-				out << "      <"+strDbxMount+"label>" << item->text(1) << "</"+strDbxMount+"label>" << endl;
-				out << "      <"+strDbxMount+"tipo_as>" << item->text(2) << "</"+strDbxMount+"tipo_as>" << endl;
-				out << "      <"+strDbxMount+"letter>" << item->text(3) << "</"+strDbxMount+"letter>" << endl;
-				out << "      <"+strDbxMount+"indx_cd>" << item->text(4) << "</"+strDbxMount+"indx_cd>" << endl;
-				out << "      <"+strDbxMount+"opt_mount>" << item->text(5) << "</"+strDbxMount+"opt_mount>" << endl;
-				out << "      <"+strDbxMount+"io_ctrl>" << item->text(6) << "</"+strDbxMount+"io_ctrl>" << endl;
-				out << "      <"+strDbxMount+"select_mount>" << item->text(7) << "</"+strDbxMount+"select_mount>" << endl;
-				out << "    </"+str_dosbox+"montajes>" << endl;
-			}
-		}
-
-		if( datos["Dat_tipo_emu"] == "scummvm" )
-		{
-			out << "    <scummvm>" << endl;
-			out << "      <"+strSvm+"game>" << datos_emu["Svm_game"] << "</"+strSvm+"game>" << endl;
-			out << "      <"+strSvm+"game_label>" << datos_emu["Svm_game_label"] << "</"+strSvm+"game_label>" << endl;
-			out << "      <"+strSvm+"language>" << datos_emu["Svm_language"] << "</"+strSvm+"language>" << endl;
-			out << "      <"+strSvm+"subtitles>" << datos_emu["Svm_subtitles"] << "</"+strSvm+"subtitles>" << endl;
-			out << "      <"+strSvm+"platform>" << datos_emu["Svm_platform"] << "</"+strSvm+"platform>" << endl;
-			out << "      <"+strSvm+"gfx_mode>" << datos_emu["Svm_gfx_mode"] << "</"+strSvm+"gfx_mode>" << endl;
-			out << "      <"+strSvm+"render_mode>" << datos_emu["Svm_render_mode"] << "</"+strSvm+"render_mode>" << endl;
-			out << "      <"+strSvm+"fullscreen>" << datos_emu["Svm_fullscreen"] << "</"+strSvm+"fullscreen>" << endl;
-			out << "      <"+strSvm+"aspect_ratio>" << datos_emu["Svm_aspect_ratio"] << "</"+strSvm+"aspect_ratio>" << endl;
-			out << "      <"+strSvm+"path>" << datos_emu["Svm_path"] << "</"+strSvm+"path>" << endl;
-			out << "      <"+strSvm+"path_setup>" << datos_emu["Svm_path_setup"] << "</"+strSvm+"path_setup>" << endl;
-			out << "      <"+strSvm+"path_extra>" << datos_emu["Svm_path_extra"] << "</"+strSvm+"path_extra>" << endl;
-			out << "      <"+strSvm+"path_save>" << datos_emu["Svm_path_save"] << "</"+strSvm+"path_save>" << endl;
-			out << "      <"+strSvm+"path_capturas>" << datos_emu["Svm_path_capturas"] << "</"+strSvm+"path_capturas>" << endl;
-			out << "      <"+strSvm+"path_sonido>" << datos_emu["Svm_path_sonido"] << "</"+strSvm+"path_sonido>" << endl;
-			out << "      <"+strSvm+"music_driver>" << datos_emu["Svm_music_driver"] << "</"+strSvm+"music_driver>" << endl;
-			out << "      <"+strSvm+"enable_gs>" << datos_emu["Svm_enable_gs"] << "</"+strSvm+"enable_gs>" << endl;
-			out << "      <"+strSvm+"multi_midi>" << datos_emu["Svm_multi_midi"] << "</"+strSvm+"multi_midi>" << endl;
-			out << "      <"+strSvm+"native_mt32>" << datos_emu["Svm_native_mt32"] << "</"+strSvm+"native_mt32>" << endl;
-			out << "      <"+strSvm+"master_volume>" << datos_emu["Svm_master_volume"] << "</"+strSvm+"master_volume>" << endl;
-			out << "      <"+strSvm+"music_volume>" << datos_emu["Svm_music_volume"] << "</"+strSvm+"music_volume>" << endl;
-			out << "      <"+strSvm+"sfx_volume>" << datos_emu["Svm_sfx_volume"] << "</"+strSvm+"sfx_volume>" << endl;
-			out << "      <"+strSvm+"speech_volume>" << datos_emu["Svm_speech_volume"] << "</"+strSvm+"speech_volume>" << endl;
-			out << "      <"+strSvm+"tempo>" << datos_emu["Svm_tempo"] << "</"+strSvm+"tempo>" << endl;
-			out << "      <"+strSvm+"talkspeed>" << datos_emu["Svm_talkspeed"] << "</"+strSvm+"talkspeed>" << endl;
-			out << "      <"+strSvm+"debuglevel>" << datos_emu["Svm_debuglevel"] << "</"+strSvm+"debuglevel>" << endl;
-			out << "      <"+strSvm+"cdrom>" << datos_emu["Svm_cdrom"] << "</"+strSvm+"cdrom>" << endl;
-			out << "      <"+strSvm+"joystick_num>" << datos_emu["Svm_joystick_num"] << "</"+strSvm+"joystick_num>" << endl;
-			out << "      <"+strSvm+"output_rate>" << datos_emu["Svm_output_rate"] << "</"+strSvm+"output_rate>" << endl;
-			out << "      <"+strSvm+"midi_gain>" << datos_emu["Svm_midi_gain"] << "</"+strSvm+"midi_gain>" << endl;
-			out << "      <"+strSvm+"copy_protection>" << datos_emu["Svm_copy_protection"] << "</"+strSvm+"copy_protection>" << endl;
-			out << "      <"+strSvm+"sound_font>" << datos_emu["Svm_sound_font"] << "</"+strSvm+"sound_font>" << endl;
-			out << "    </scummvm>" << endl;
-		}
-
-		out << "  </lista_db>" << endl;
-		out << "</grlida_db>" << endl;
+		out.flush();
 	}
+	file_out.close();
 }
 
-// Carga la lista de los perfiles preconfigurados en un QComboBox
-void Funciones::Cargar_Profile_DFend_ComboBox(QString dirProfiles, QComboBox *myCombobox)
+// Crea el archivo de configuración del VDMSound
+void Funciones::crearArchivoConfigVdmS(stConfigVDMSound cfgVdms, QString pathSaveConfg)
 {
-	QDir dir( dirProfiles );
-	QString filter = "*.prof";
-	QDir::Filters filters = QDir::Files | QDir::Readable;
-	QDir::SortFlags sort  = QDir::Name;
-	QFileInfoList entries = dir.entryInfoList( QStringList() << filter, filters, sort);
+	QFile file_out;
+	QString file_name_conf;
+	stFileInfo f_info = getInfoFile(pathSaveConfg);
 
-	myCombobox->clear();
-	myCombobox->addItem( QIcon(stTheme+"img16/archivo_config.png"), QObject::tr("Configuración por Defecto"), "<defecto>" );
-	foreach (QFileInfo file, entries)
+	comprobarDirectorio( f_info.Path );
+
+	if( f_info.Exists )
+		file_name_conf = f_info.Path + f_info.Name +"_"+ HoraFechaActual(getTime(), "ddMMyyyy_HHmmss") + f_info.Ext;
+	else
+		file_name_conf = f_info.FilePath;
+
+	file_out.setFileName( file_name_conf );
+	if( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
 	{
-		myCombobox->addItem( QIcon(stTheme+"img16/archivo_config.png"), file.completeBaseName(), file.fileName() );
+		QTextStream out(&file_out);
+		out.setCodec("UTF-8");
+
+		out << "[program]" << endl;
+		out << "executable" << "=" << cfgVdms.path_exe  << endl;
+		out << "workdir"    << "=" << getInfoFile( cfgVdms.path_exe ).Path << endl;
+		out << "params"     << "=" << cfgVdms.program_1 << endl;
+		out << "icon"       << "=" << cfgVdms.program_2 << endl << endl;
+
+		out << "[vdms.debug]" << endl;
+		out << "useCustomCfg" << "=" << cfgVdms.vdms_debug_1 << endl;
+		out << "customCfg"    << "=" << cfgVdms.vdms_debug_2 << endl << endl;
+
+		out << "[winnt.dos]" << endl;
+		out << "useAutoexec" << "=" << cfgVdms.winnt_dos_1 << endl;
+		out << "autoexec"    << "=" << cfgVdms.winnt_dos_2 << endl << endl;
+
+		out << "[winnt.dosbox]" << endl;
+		out << "exitclose" << "=" << cfgVdms.winnt_dosbox_1 << endl;
+		out << "exitWarn"  << "=" << cfgVdms.winnt_dosbox_2 << endl;
+		out << "fastPaste" << "=" << cfgVdms.winnt_dosbox_3 << endl << endl;
+
+		out << "[winnt.storage]" << endl;
+		out << "useCDROM"   << "=" << cfgVdms.winnt_storage_1 << endl;
+		out << "useNetware" << "=" << cfgVdms.winnt_storage_2 << endl << endl;
+
+		out.flush();
 	}
+	file_out.close();
 }
 
-// Exportar la configuración del DOSBox para el DFend
-void Funciones::Exportar_Profile_DFend(const QHash<QString, QString> datos, const QHash<QString, QString> datosDbx, QTreeWidget *treeWidget, const QString pathSaveConfg)
+// Importar la configuración del DOSBox del DFend
+QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString tabla, QString filename)
 {
-	CrearArchivoConfigDbx(datos, datosDbx, treeWidget, pathSaveConfg, true);
-}
-
-// Importar la configuración del DOSBox para el DFend
-QHash<QString, QString> Funciones::Importar_Profile_DFend(QString fileName)
-{
-	QString linea, fileTemp, strTemp, info_name_conf;
-	QHash<QString, QString> profileDFend;
-	QStringList list_priority;
-	int n = 0, num_mounts = 0;
-	bool str_ok;
-
-	fileTemp = GRlidaHomePath()+"temp/temp_config.prof";
+	QHash<QString, QString> cfgDFend;
+	QSettings optgrl(dir_app +"GR-lida.conf", QSettings::IniFormat);
+	optgrl.beginGroup("OpcGeneral");
+		QString dirBaseGames = optgrl.value("DirBaseGames", "").toString();
+	optgrl.endGroup();
 
 // Leer archivo ------------------------------------------------------
-	QFile file_in( fileName );
-	file_in.open( QIODevice::ReadOnly | QIODevice::Text );
-
-	QTextStream in(&file_in);
-	in.setCodec("UTF-8");
-
-	linea.clear();
-	linea = in.readAll();
-	linea.replace("\\", "\\\\");
-	linea.replace(";", "|");
-	linea.replace(",", "--");
-
-	file_in.close();
+	QString lineas = leerArchivo(filename);
+	lineas.replace("\\", "\\\\");
+	lineas.replace(";", "|");
+	lineas.replace(",", "--");
 
 // Escribir archivo --------------------------------------------------
-	QFile file_out( fileTemp );
-	file_out.open( QIODevice::WriteOnly | QIODevice::Text );
+	QFile file_out(dir_app +"temp/temp_config.prof");
+	file_out.open(QIODevice::WriteOnly | QIODevice::Text);
 
 	QTextStream out(&file_out);
-		out.setCodec("UTF-8");
-		out << linea;
-		out.flush();
-
+	out.setCodec("UTF-8");
+	out << lineas;
+	out.flush();
 	file_out.close();
-	linea.clear();
+	lineas.clear();
 
-	profileDFend.clear();
-	QSettings settings( fileTemp , QSettings::IniFormat );
+	QSettings settings(dir_app +"temp/temp_config.prof", QSettings::IniFormat);
 
 // Datos del juego -----
 	settings.beginGroup("ExtraInfo");
 		QString icono = settings.value("Icon", "dosbox").toString().replace("--", ",");
-		if( icono != "" )
-			profileDFend["Dat_icono"] = icono;
-		else
-			profileDFend["Dat_icono"] = "dosbox";
-
-		profileDFend["Dat_titulo"]        = settings.value("Name", "").toString().replace("--", ",");
-		profileDFend["Dat_subtitulo"]     = "";
-		profileDFend["Dat_genero"]        = settings.value("Genre", "").toString().replace("--", ",");
-		profileDFend["Dat_compania"]      = settings.value("Publisher", "").toString().replace("--", ",");
-		profileDFend["Dat_desarrollador"] = settings.value("Developer", "").toString().replace("--", ",");
-		profileDFend["Dat_tema"]          = "";
-		profileDFend["Dat_idioma"]        = settings.value("Language", "").toString().replace("--", ",");
-		profileDFend["Dat_formato"]       = "";
-		profileDFend["Dat_anno"]          = settings.value("Year", "").toString().replace("--", ",");
-		profileDFend["Dat_numdisc"]       = "";
-		profileDFend["Dat_sistemaop"]     = "";
-		profileDFend["Dat_tamano"]        = "";
-		profileDFend["Dat_graficos"]      = "1";
-		profileDFend["Dat_sonido"]        = "1";
-		profileDFend["Dat_jugabilidad"]   = "1";
-		profileDFend["Dat_original"]      = "false";
-		profileDFend["Dat_estado"]        = "";
-		profileDFend["Dat_thumbs"]        = "";
-		profileDFend["Dat_cover_front"]   = "";
-		profileDFend["Dat_cover_back"]    = "";
-		profileDFend["Dat_comentario"]    = settings.value("Notes", "").toString().replace("--", ",").replace("[13][10]","<br/>\n").replace("[13]","\n");
-		profileDFend["Dat_favorito"]      = BoolToStr( settings.value("Favorite","false").toBool() );
-		profileDFend["Dat_rating"]        = "0";
-		profileDFend["Dat_usuario"]       = "";
-		profileDFend["WWW"]                 = settings.value("WWW"      , "").toString().replace("--", ",");
-		profileDFend["UserInfo"]            = settings.value("UserInfo" , "").toString().replace("--", ",");
+		cfgDFend["Dat_icono"]            = icono.isEmpty() ? "dosbox" : icono;
+		cfgDFend["Dat_titulo"]           = settings.value("Name", "").toString().replace("--", ";");
+		cfgDFend["Dat_subtitulo"]        = "";
+		cfgDFend["Dat_genero"]           = settings.value("Genre", "").toString().replace("--", ";");
+		cfgDFend["Dat_compania"]         = settings.value("Publisher", "").toString().replace("--", ";");
+		cfgDFend["Dat_desarrollador"]    = settings.value("Developer", "").toString().replace("--", ";");
+		cfgDFend["Dat_tema"]             = "";
+		cfgDFend["Dat_grupo"]            = "";
+		cfgDFend["Dat_perspectiva"]      = "";
+		cfgDFend["Dat_idioma"]           = settings.value("Language", "").toString().replace("--", ";");
+		cfgDFend["Dat_idioma_voces"]     = "";
+		cfgDFend["Dat_formato"]          = "";
+		cfgDFend["Dat_anno"]             = settings.value("Year", "").toString().replace("--", ";");
+		cfgDFend["Dat_numdisc"]          = "";
+		cfgDFend["Dat_sistemaop"]        = "";
+		cfgDFend["Dat_tamano"]           = "";
+		cfgDFend["Dat_graficos"]         = "0";
+		cfgDFend["Dat_sonido"]           = "0";
+		cfgDFend["Dat_jugabilidad"]      = "0";
+		cfgDFend["Dat_original"]         = "false";
+		cfgDFend["Dat_estado"]           = "";
+		cfgDFend["Dat_thumbs"]           = "";
+		cfgDFend["Dat_cover_front"]      = "";
+		cfgDFend["Dat_cover_back"]       = "";
+		cfgDFend["Dat_fecha"]            = "";
+		cfgDFend["Dat_tipo_emu"]         = "dosbox";
+		cfgDFend["Dat_comentario"]       = settings.value("Notes", "").toString().replace("--", ";").replace("[13][10]", "<br/>\n").replace("[13]", "\n");
+		cfgDFend["Dat_favorito"]         = BoolToStr( settings.value("Favorite", "false").toBool() );
+		cfgDFend["Dat_rating"]           = "0";
+		cfgDFend["Dat_edad_recomendada"] = "";
+		cfgDFend["Dat_usuario"]          = "";
+		cfgDFend["Dat_path_exe"]         = "";
+		cfgDFend["Dat_parametros_exe"]   = "";
+		cfgDFend["Dat_path_capturas"]    = "";
+		cfgDFend["Dat_path_setup"]       = "";
+		cfgDFend["Dat_parametros_setup"] = "";
+	//--
+		cfgDFend["Dat_www_1_name"] = settings.value("WWWName", "").toString().replace("--", ";");
+		cfgDFend["Dat_www_1"]      = settings.value("WWW", "").toString().replace("--", ";");
+		for (int i = 2; i < 10; ++i)
+		{
+			cfgDFend.insert("Dat_www_"+ IntToStr(i) +"_name", settings.value("WWW"+ IntToStr(i) +"Name", "").toString().replace("--", ";") );
+			cfgDFend.insert("Dat_www_"+ IntToStr(i), settings.value("WWW"+ IntToStr(i), "").toString().replace("--", ";") );
+		}
+		cfgDFend["UserInfo"]= settings.value("UserInfo", "").toString().replace("--", ",");
 	settings.endGroup();
 
 // Datos del emulador DOSBox ---
-	profileDFend["Dbx_opt_autoexec"]          = "false";
-	profileDFend["Dbx_opt_consola_dbox"]      = "false";
-	profileDFend["Dbx_opt_cycle_sincronizar"] = "false";
-	profileDFend["Dbx_path_sonido"]           = "";
+	QString file_name_conf = eliminar_caracteres( cfgDFend["Dat_titulo"] );
+	stFileInfo f_info = getInfoFile(dir_app +"confdbx/"+ tabla +"/"+ file_name_conf +".conf");
 
-	info_name_conf = eliminar_caracteres( profileDFend["Dat_titulo"] );
-	strTemp = info_name_conf;
-
-	str_ok = strTemp.endsWith(".conf");
-	if(str_ok == false)
-		strTemp.append(".conf");
-
-	QFile appConfg( QDir::homePath()+"/.gr-lida/confdbx/"+ strTemp );
-	if( appConfg.exists() )
-		profileDFend["Dbx_path_conf"] = HoraFechaActual("ddMMyyyy_HHmmss") +"-"+ info_name_conf;
+	if( f_info.Exists )
+		cfgDFend["Dbx_path_conf"] = f_info.Name +"_"+ HoraFechaActual(getTime(), "ddMMyyyy_HHmmss") +".conf";
 	else
-		profileDFend["Dbx_path_conf"] = strTemp;
+		cfgDFend["Dbx_path_conf"] = f_info.Name +".conf";
 
-	str_ok = profileDFend["Dbx_path_conf"].endsWith(".conf");
-	if(str_ok == false)
-		profileDFend["Dbx_path_conf"].append(".conf");
+	cfgDFend["Dbx_path_sonido"] = "";
 
 	settings.beginGroup("Extra");
-		profileDFend["Dbx_path_exe"]         = settings.value("Exe"             ,""  ).toString().replace("--", ",");
-		profileDFend["Dbx_path_setup"]       = settings.value("Setup"           ,""  ).toString().replace("--", ",");
-		profileDFend["Dbx_parametros_exe"]   = settings.value("GameParameters"  ,""  ).toString().replace("--", ",");
-		profileDFend["Dbx_parametros_setup"] = settings.value("SetupParameters" ,""  ).toString().replace("--", ",");
-		profileDFend["Dbx_autoexec"]         = settings.value("autoexec"        ,""  ).toString().replace("--", ",");
-		profileDFend["Dbx_opt_loadfix_mem"]  = settings.value("LoadFixVal"      ,"64").toString();
-		profileDFend["NrOfMounts"]           = settings.value("NrOfMounts"      ,"0" ).toString();
-		profileDFend["Dbx_opt_cerrar_dbox"]  = BoolToStr( settings.value("CloseOnExit","false").toBool() );
-		profileDFend["Dbx_opt_loadfix"]      = BoolToStr( settings.value("Loadhigh","false").toBool() );
+	// Path
+		cfgDFend["Dbx_path_exe"]         = settings.value("Exe"            , "").toString().replace("--", ",");
+		cfgDFend["Dbx_path_setup"]       = settings.value("Setup"          , "").toString().replace("--", ",");
+		cfgDFend["Dbx_parametros_exe"]   = settings.value("GameParameters" , "").toString().replace("--", ",");
+		cfgDFend["Dbx_parametros_setup"] = settings.value("SetupParameters", "").toString().replace("--", ",");
+	// [autoexec]
+		cfgDFend["Dbx_autoexec"] = settings.value("autoexec", "").toString().replace("--", ",").replace("[13][10]", "\n");
+	// Opciones
+		cfgDFend["Dbx_opt_autoexec"]     = cfgDFend["Dbx_autoexec"].isEmpty() ? "false" : "true";
+		cfgDFend["Dbx_opt_loadfix"]      = BoolToStr( settings.value("Loadhigh", false).toBool() );
+		cfgDFend["Dbx_opt_loadfix_mem"]  = settings.value("LoadFixVal", "64").toString();
+		cfgDFend["Dbx_opt_consola_dbox"] = BoolToStr( settings.value("ConsoleWindow", false).toBool() );
+		cfgDFend["Dbx_opt_cerrar_dbox"]  = BoolToStr( settings.value("CloseOnExit", true).toBool() );
+		cfgDFend["Dbx_opt_cycle_sincronizar"] = "false";
+		cfgDFend["Dbx_ExtraFiles"]       = settings.value("ExtraFiles", "").toString();
+		cfgDFend["Dbx_NrOfMounts"]       = settings.value("NrOfMounts", "0").toString();
 
-		num_mounts = StrToInt( profileDFend["NrOfMounts"] );
-		if( num_mounts > 0 )
+		int num_mounts = cfgDFend["Dbx_NrOfMounts"].toInt();
+		if( num_mounts > -1 )
 		{
-			for( n = 0; n < num_mounts; n++)
-				profileDFend.insert(IntToStr(n), settings.value(IntToStr(n),"").toString().replace("--",",") );
+			for(int n = 0; n < num_mounts; n++)
+				cfgDFend.insert(IntToStr(n), settings.value(IntToStr(n), "").toString() );
 		}
 
-		//profileDFend["ExeMD5"]            = settings.value("ExeMD5"           ,"").toString();
-		//profileDFend["LastModification"]  = settings.value("LastModification" ,"").toString();
-		//profileDFend["Environment"]       = settings.value("Environment"      ,"").toString();
-		//profileDFend["Tab"]               = settings.value("Tab"              ,"").toString();
-		//profileDFend["Tab2"]              = settings.value("Tab2"             ,"").toString();
-		//profileDFend["SetupMD5"]          = settings.value("SetupMD5"         ,"").toString();
-		//profileDFend["DataDir"]           = settings.value("DataDir"          ,"").toString();
-		//profileDFend["Overridegamestart"] = settings.value("Overridegamestart","").toString();
-		//profileDFend["OverrideMount"]     = settings.value("OverrideMount"    ,"").toString();
-		//profileDFend["AutoMountCDs"]      = settings.value("AutoMountCDs"     ,"").toString();
-		//profileDFend["ExtraDirs"]         = settings.value("ExtraDirs"        ,"").toString();
-		//profileDFend["ExtraFiles"]        = settings.value("ExtraFiles"       ,"").toString();
-		//profileDFend["ExtraExe0"]         = settings.value("ExtraExe0"        ,"").toString();
-		//profileDFend["0"]                 = settings.value("0"                ,"").toString();
-		//profileDFend["1"]                 = settings.value("1"                ,"").toString();
-		//profileDFend["2"]                 = settings.value("2"                ,"").toString();
-		//profileDFend["3"]                 = settings.value("3"                ,"").toString();
-		//profileDFend["4"]                 = settings.value("4"                ,"").toString();
-		//profileDFend["5"]                 = settings.value("5"                ,"").toString();
-		//profileDFend["6"]                 = settings.value("6"                ,"").toString();
-		//profileDFend["7"]                 = settings.value("7"                ,"").toString();
-		//profileDFend["8"]                 = settings.value("8"                ,"").toString();
-		//profileDFend["9"]                 = settings.value("9"                ,"").toString();
-		//profileDFend["BootImage"]         = settings.value("BootImage"        ,"").toString();
-		//profileDFend["Finalization"]      = settings.value("Finalization"     ,"").toString();
-		//profileDFend["CustomSettings"]    = settings.value("CustomSettings"   ,"").toString();
-		//profileDFend["ScreenshotListScreenshot"] = settings.value("ScreenshotListScreenshot","").toString();
+//		cfgDFend["ExeMD5"]            = settings.value("ExeMD5"           ,"").toString();
+//		cfgDFend["LastModification"]  = settings.value("LastModification" ,"").toString();
+//		cfgDFend["Environment"]       = settings.value("Environment"      ,"").toString();
+//		cfgDFend["SetupMD5"]          = settings.value("SetupMD5"         ,"").toString();
+//		cfgDFend["DataDir"]           = settings.value("DataDir"          ,"").toString();
+//		cfgDFend["Overridegamestart"] = settings.value("Overridegamestart","").toString();
+//		cfgDFend["OverrideMount"]     = settings.value("OverrideMount"    ,"").toString();
+//		cfgDFend["AutoMountCDs"]      = settings.value("AutoMountCDs"     ,"").toString();
+//		cfgDFend["ExtraDirs"]         = settings.value("ExtraDirs"        ,"").toString();
+//		cfgDFend["ExtraExe0"]         = settings.value("ExtraExe0"        ,"").toString();
+//		cfgDFend["BootImage"]         = settings.value("BootImage"        ,"").toString();
+//		cfgDFend["Finalization"]      = settings.value("Finalization"     ,"").toString();
+//		cfgDFend["CustomSettings"]    = settings.value("CustomSettings"   ,"").toString();
+//		cfgDFend["ScreenshotListScreenshot"] = settings.value("ScreenshotListScreenshot","").toString();
 
 		if( settings.value("ProfileMode").toString().toLower() == "dosbox" )
-			profileDFend["Dat_tipo_emu"] = "dosbox";
+			cfgDFend["Dat_tipo_emu"] = "dosbox";
 		else if( settings.value("ProfileMode").toString().toLower() == "scummvm" )
-			profileDFend["Dat_tipo_emu"] = "scummvm";
+			cfgDFend["Dat_tipo_emu"] = "scummvm";
 		else
-			profileDFend["Dat_tipo_emu"] = "datos";
-
+			cfgDFend["Dat_tipo_emu"] = "datos";
 	settings.endGroup();
 
+// [sdl]
 	settings.beginGroup("sdl");
-		profileDFend["Dbx_sdl_fullscreen"]       = BoolToStr( settings.value("fullscreen","false").toBool() );
-		profileDFend["Dbx_sdl_fulldouble"]       = BoolToStr( settings.value("fulldouble","false").toBool() );
-//		profileDFend["Dbx_sdl_fullfixed"]        = BoolToStr( settings.value("fullfixed","false").toBool() ); // en desuso
-		profileDFend["Dbx_sdl_fullresolution"]   = settings.value("fullresolution"  ,"original").toString();
-		profileDFend["Dbx_sdl_windowresolution"] = settings.value("windowresolution","original").toString();
-		profileDFend["Dbx_sdl_output"]           = settings.value("output"          ,"surface" ).toString();
-		profileDFend["Dbx_sdl_hwscale"]          = settings.value("hwscale"         ,"1.00"    ).toString();
-		profileDFend["Dbx_sdl_autolock"]         = BoolToStr( settings.value("autolock","true").toBool() );
-		profileDFend["Dbx_sdl_sensitivity"]      = settings.value("sensitivity", "100").toString();
-		profileDFend["Dbx_sdl_waitonerror"]      = BoolToStr( settings.value("waitonerror","true").toBool() );
-		profileDFend["Dbx_sdl_priority"]         = settings.value("priority"  , "higher,normal").toString().replace("--", ",");
-		profileDFend["Dbx_sdl_mapperfile"]       = settings.value("mapperfile", "mapper.txt"   ).toString().replace("--", ",");
-		profileDFend["Dbx_sdl_usescancodes"]     = BoolToStr( settings.value("usescancodes","true").toBool() );
-//		profileDFend["Dbx_sdl_dosboxlanguage"]   = settings.value("DOSBoxlanguage","").toString();
+		cfgDFend["Dbx_sdl_fullscreen"]       = BoolToStr( settings.value("fullscreen", false).toBool() );
+		cfgDFend["Dbx_sdl_fulldouble"]       = BoolToStr( settings.value("fulldouble", false).toBool() );
+		cfgDFend["Dbx_sdl_fullfixed"]        = BoolToStr( settings.value("fullfixed" , false).toBool() ); // en desuso
+		cfgDFend["Dbx_sdl_fullresolution"]   = settings.value("fullresolution"  , "original").toString();
+		cfgDFend["Dbx_sdl_windowresolution"] = settings.value("windowresolution", "original").toString();
+		cfgDFend["Dbx_sdl_output"]           = settings.value("output"          , "surface" ).toString();
+		cfgDFend["Dbx_sdl_hwscale"]          = settings.value("hwscale"         , "1.00"    ).toString();
+		cfgDFend["Dbx_sdl_autolock"]         = BoolToStr( settings.value("autolock", true).toBool() );
+		cfgDFend["Dbx_sdl_sensitivity"]      = settings.value("sensitivity", "100").toString();
+		cfgDFend["Dbx_sdl_waitonerror"]      = BoolToStr( settings.value("waitonerror", true).toBool() );
+		cfgDFend["Dbx_sdl_priority"]         = settings.value("priority"  , "higher,normal").toString().replace("--", ",");
+		cfgDFend["Dbx_sdl_mapperfile"]       = settings.value("mapperfile", "mapper.txt"   ).toString().replace("--", ",");
+		cfgDFend["Dbx_sdl_usescancodes"]     = BoolToStr( settings.value("usescancodes", true).toBool() );
+//		cfgDFend["Dbx_sdl_dosboxlanguage"]   = settings.value("DOSBoxlanguage", "default").toString();
 	settings.endGroup();
-
+// [dosbox]
 	settings.beginGroup("dosbox");
-		profileDFend["Dbx_dosbox_language"] = settings.value("language","").toString().replace("--", ",");
-		profileDFend["Dbx_dosbox_machine"]  = settings.value("machine" ,"vga").toString();
-		profileDFend["Dbx_dosbox_captures"] = settings.value("captures","capture").toString().replace("--", ",");
-		profileDFend["Dbx_dosbox_memsize"]  = settings.value("memsize" ,"16").toString();
+		cfgDFend["Dbx_dosbox_language"] = settings.value("language", "").toString().replace("--", ",");
+		cfgDFend["Dbx_dosbox_machine"]  = settings.value("machine" , "svga_s3").toString();
+		cfgDFend["Dbx_dosbox_captures"] = settings.value("captures", "capture").toString().replace("--", ",");
+		cfgDFend["Dbx_dosbox_memsize"]  = settings.value("memsize" , "16").toString();
 	settings.endGroup();
-
+// [render]
 	settings.beginGroup("render");
-		profileDFend["Dbx_render_frameskip"] = settings.value("frameskip","0").toString();
-		profileDFend["Dbx_render_aspect"]    = BoolToStr( settings.value("aspect","false").toBool() );
-		profileDFend["Dbx_render_scaler"]    = settings.value("scaler"   ,"normal2x").toString();
-//		profileDFend["Dbx_render_textmodelines"] = settings.value("TextModeLines","25").toString();
+		cfgDFend["Dbx_render_frameskip"] = settings.value("frameskip", "0").toString();
+		cfgDFend["Dbx_render_aspect"]    = BoolToStr( settings.value("aspect", false).toBool() );
+		cfgDFend["Dbx_render_scaler"]    = settings.value("scaler", "normal2x").toString();
+//		cfgDFend["Dbx_render_textmodelines = settings.value("TextModeLines", "25").toString();
 	settings.endGroup();
-
+// [cpu]
 	settings.beginGroup("cpu");
-		profileDFend["Dbx_cpu_core"]      = settings.value("core"     ,"auto").toString();
-		profileDFend["Dbx_cpu_cputype"]   = settings.value("type"     ,"auto").toString();
-		profileDFend["Dbx_cpu_cycles"]    = settings.value("cycles"   ,"auto").toString();
-		profileDFend["Dbx_cpu_cycleup"]   = settings.value("cycleup"  ,"500").toString();
-		profileDFend["Dbx_cpu_cycledown"] = settings.value("cycledown","20").toString();
+		cfgDFend["Dbx_cpu_core"]         = settings.value("core"     , "auto").toString();
+		cfgDFend["Dbx_cpu_cputype"]      = settings.value("type"     , "auto").toString();
+		cfgDFend["Dbx_cpu_cycles"]       = settings.value("cycles"   , "auto").toString();
+		cfgDFend["cpu_cycles_realmode"]  = "";
+		cfgDFend["cpu_cycles_protmode"]  = "";
+		cfgDFend["cpu_cycles_limitmode"] = "";
+		cfgDFend["Dbx_cpu_cycleup"]      = settings.value("cycleup"  , "10").toString();
+		cfgDFend["Dbx_cpu_cycledown"]    = settings.value("cycledown", "20").toString();
 	settings.endGroup();
-
+// [mixer]
 	settings.beginGroup("mixer");
-		profileDFend["Dbx_mixer_nosound"]   = BoolToStr( settings.value("nosound","false").toBool() );
-		profileDFend["Dbx_mixer_rate"]      = settings.value("rate"     ,"22050").toString();
-		profileDFend["Dbx_mixer_blocksize"] = settings.value("blocksize","2048").toString();
-		profileDFend["Dbx_mixer_prebuffer"] = settings.value("prebuffer","10").toString();
+		cfgDFend["Dbx_mixer_nosound"]   = BoolToStr( settings.value("nosound", false).toBool() );
+		cfgDFend["Dbx_mixer_rate"]      = settings.value("rate"     , "44100").toString();
+		cfgDFend["Dbx_mixer_blocksize"] = settings.value("blocksize", "1024").toString();
+		cfgDFend["Dbx_mixer_prebuffer"] = settings.value("prebuffer", "20").toString();
 	settings.endGroup();
-
+// [midi]
 	settings.beginGroup("midi");
-		profileDFend["Dbx_midi_mpu401"]      = settings.value("mpu401"       ,"intelligent").toString();
-		profileDFend["Dbx_midi_intelligent"] = BoolToStr( settings.value("midi_intelligent","true").toBool() );
-		profileDFend["Dbx_midi_device"]      = settings.value("device"       ,"default").toString();
-		profileDFend["Dbx_midi_config"]      = settings.value("config"       ,"").toString();
-		profileDFend["Dbx_midi_mt32rate"]    = settings.value("mt32rate"     ,"").toString();
+		cfgDFend["Dbx_midi_mpu401"]      = settings.value("mpu401", "intelligent").toString();
+		cfgDFend["Dbx_midi_intelligent"] = BoolToStr( settings.value("midi_intelligent", true).toBool() );
+		cfgDFend["Dbx_midi_device"]      = settings.value("device"  , "default").toString();
+		cfgDFend["Dbx_midi_config"]      = settings.value("config"  , "").toString();
+		cfgDFend["Dbx_midi_mt32rate"]    = settings.value("mt32rate", "44100").toString();
 	settings.endGroup();
-
+// [sblaster]
 	settings.beginGroup("sblaster");
-		profileDFend["Dbx_sblaster_sbtype"] = settings.value("sbtype" ,"sb16").toString();
-		profileDFend["Dbx_sblaster_sbbase"] = settings.value("sbbase" ,"220").toString();
-		profileDFend["Dbx_sblaster_irq"]    = settings.value("irq"    ,"7").toString();
-		profileDFend["Dbx_sblaster_dma"]    = settings.value("dma"    ,"1").toString();
-		profileDFend["Dbx_sblaster_hdma"]   = settings.value("hdma"   ,"5").toString();
-		profileDFend["Dbx_sblaster_mixer"]   = BoolToStr( settings.value("mixer","true").toBool() );
-		profileDFend["Dbx_sblaster_oplmode"] = settings.value("oplmode","auto").toString();
-		profileDFend["Dbx_sblaster_oplemu"]  = settings.value("oplemu" ,"default").toString();
-		profileDFend["Dbx_sblaster_oplrate"] = settings.value("oplrate","22050").toString();
+		cfgDFend["Dbx_sblaster_sbtype"]  = settings.value("sbtype", "sb16").toString();
+		cfgDFend["Dbx_sblaster_sbbase"]  = settings.value("sbbase", "220").toString();
+		cfgDFend["Dbx_sblaster_irq"]     = settings.value("irq"   , "7").toString();
+		cfgDFend["Dbx_sblaster_dma"]     = settings.value("dma"   , "1").toString();
+		cfgDFend["Dbx_sblaster_hdma"]    = settings.value("hdma"  , "5").toString();
+		cfgDFend["Dbx_sblaster_mixer"]   = BoolToStr( settings.value("mixer", true).toBool() );
+		cfgDFend["Dbx_sblaster_oplmode"] = settings.value("oplmode", "auto").toString();
+		cfgDFend["Dbx_sblaster_oplemu"]  = settings.value("oplemu" , "default").toString();
+		cfgDFend["Dbx_sblaster_oplrate"] = settings.value("oplrate", "44100").toString();
 	settings.endGroup();
-
+// [gus]
 	settings.beginGroup("gus");
-		profileDFend["Dbx_gus_gus"]      = BoolToStr( settings.value("gus","true").toBool() );
-		profileDFend["Dbx_gus_gusrate"]  = settings.value("gusrate" ,"22050").toString();
-		profileDFend["Dbx_gus_gusbase"]  = settings.value("gusbase" ,"240").toString();
-		profileDFend["Dbx_gus_irq1"]     = settings.value("irq1"    ,"5").toString();
-		profileDFend["Dbx_gus_irq2"]     = settings.value("irq2"    ,"5").toString();
-		profileDFend["Dbx_gus_dma1"]     = settings.value("dma1"    ,"3").toString();
-		profileDFend["Dbx_gus_dma2"]     = settings.value("dma2"    ,"3").toString();
-		profileDFend["Dbx_gus_ultradir"] = settings.value("ultradir","C:\\ULTRASND").toString().replace("--",",");
+		cfgDFend["Dbx_gus_gus"]      = BoolToStr( settings.value("gus", false).toBool() );
+		cfgDFend["Dbx_gus_gusrate"]  = settings.value("gusrate" , "44100").toString();
+		cfgDFend["Dbx_gus_gusbase"]  = settings.value("gusbase" , "240").toString();
+		cfgDFend["Dbx_gus_irq1"]     = settings.value("irq1"    , "5").toString();
+		cfgDFend["Dbx_gus_irq2"]     = settings.value("irq2"    , "5").toString();
+		cfgDFend["Dbx_gus_dma1"]     = settings.value("dma1"    , "3").toString();
+		cfgDFend["Dbx_gus_dma2"]     = settings.value("dma2"    , "3").toString();
+		cfgDFend["Dbx_gus_ultradir"] = settings.value("ultradir", "C:\\ULTRASND").toString().replace("--",",");
 	settings.endGroup();
-
+// [speaker]
 	settings.beginGroup("speaker");
-		profileDFend["Dbx_speaker_pcspeaker"] = BoolToStr( settings.value("pcspeaker","true").toBool() );
-		profileDFend["Dbx_speaker_pcrate"]    = settings.value("pcrate"   ,"22050").toString();
-		profileDFend["Dbx_speaker_tandy"]     = settings.value("tandy"    ,"auto").toString();
-		profileDFend["Dbx_speaker_tandyrate"] = settings.value("tandyrate","22050").toString();
-		profileDFend["Dbx_speaker_disney"]    = BoolToStr( settings.value("disney","true").toBool() );
+		cfgDFend["Dbx_speaker_pcspeaker"] = BoolToStr( settings.value("pcspeaker", true).toBool() );
+		cfgDFend["Dbx_speaker_pcrate"]    = settings.value("pcrate"   , "44100").toString();
+		cfgDFend["Dbx_speaker_tandy"]     = settings.value("tandy"    , "auto").toString();
+		cfgDFend["Dbx_speaker_tandyrate"] = settings.value("tandyrate", "44100").toString();
+		cfgDFend["Dbx_speaker_disney"]    = BoolToStr( settings.value("disney", true).toBool() );
 	settings.endGroup();
-
+// [joystick]
 	settings.beginGroup("joystick");
-		profileDFend["Dbx_joystick_type"]       = settings.value("joysticktype","auto").toString();
-		profileDFend["Dbx_joystick_timed"]      = BoolToStr( settings.value("timed","true").toBool() );
-		profileDFend["Dbx_joystick_autofire"]   = BoolToStr( settings.value("autofire","false").toBool() );
-		profileDFend["Dbx_joystick_swap34"]     = BoolToStr( settings.value("swap34","false").toBool() );
-		profileDFend["Dbx_joystick_buttonwrap"] = BoolToStr( settings.value("buttonwrap","true").toBool() );
+		cfgDFend["Dbx_joystick_type"]       = settings.value("joysticktype", "auto").toString();
+		cfgDFend["Dbx_joystick_timed"]      = BoolToStr( settings.value("timed"     , true ).toBool() );
+		cfgDFend["Dbx_joystick_autofire"]   = BoolToStr( settings.value("autofire"  , false).toBool() );
+		cfgDFend["Dbx_joystick_swap34"]     = BoolToStr( settings.value("swap34"    , false).toBool() );
+		cfgDFend["Dbx_joystick_buttonwrap"] = BoolToStr( settings.value("buttonwrap", false).toBool() );
 	settings.endGroup();
-
-	profileDFend["Dbx_modem_modem"]          = settings.value("modem"       ,"true").toString();
-	profileDFend["Dbx_modem_comport"]        = settings.value("comport"     ,"1").toString();
-	profileDFend["Dbx_modem_listenport"]     = settings.value("listenport"  ,"23").toString();
-	profileDFend["Dbx_dserial_directserial"] = settings.value("directserial","true").toString();
-	profileDFend["Dbx_dserial_comport"]      = settings.value("comport"     ,"1").toString();
-	profileDFend["Dbx_dserial_realport"]     = settings.value("realport"    ,"COM1").toString();
-	profileDFend["Dbx_dserial_defaultbps"]   = settings.value("defaultbps"  ,"1200").toString();
-	profileDFend["Dbx_dserial_parity"]       = settings.value("parity"      ,"N").toString();
-	profileDFend["Dbx_dserial_bytesize"]     = settings.value("bytesize"    ,"8").toString();
-	profileDFend["Dbx_dserial_stopbit"]      = settings.value("stopbit"     ,"1").toString();
-
+// [modem]
+	cfgDFend["Dbx_modem_modem"]          = "false";
+	cfgDFend["Dbx_modem_comport"]        = "2";
+	cfgDFend["Dbx_modem_listenport"]     = "23";
+// [dserial]
+	cfgDFend["Dbx_dserial_directserial"] = "false";
+	cfgDFend["Dbx_dserial_comport"]      = "1";
+	cfgDFend["Dbx_dserial_realport"]     = "COM1";
+	cfgDFend["Dbx_dserial_defaultbps"]   = "1200";
+	cfgDFend["Dbx_dserial_parity"]       = "N";
+	cfgDFend["Dbx_dserial_bytesize"]     = "8";
+	cfgDFend["Dbx_dserial_stopbit"]      = "1";
+// [serial]
 	settings.beginGroup("serial");
-		profileDFend["Dbx_serial_1"] = settings.value("serial1", "dummy").toString().replace("--",",");
-		profileDFend["Dbx_serial_2"] = settings.value("serial2", "dummy").toString().replace("--",",");
-		profileDFend["Dbx_serial_3"] = settings.value("serial3", "disabled").toString().replace("--",",");
-		profileDFend["Dbx_serial_4"] = settings.value("serial4", "disabled").toString().replace("--",",");
+		cfgDFend["Dbx_serial_1"] = settings.value("serial1", "dummy"   ).toString().replace("--",",");
+		cfgDFend["Dbx_serial_2"] = settings.value("serial2", "dummy"   ).toString().replace("--",",");
+		cfgDFend["Dbx_serial_3"] = settings.value("serial3", "disabled").toString().replace("--",",");
+		cfgDFend["Dbx_serial_4"] = settings.value("serial4", "disabled").toString().replace("--",",");
 	settings.endGroup();
-
+// [dos]
 	settings.beginGroup("dos");
-		profileDFend["Dbx_dos_xms"] = BoolToStr( settings.value("xms","true").toBool() );
-		profileDFend["Dbx_dos_ems"] = BoolToStr( settings.value("ems","true").toBool() );
-		profileDFend["Dbx_dos_umb"] = settings.value("umb", "true").toString();
-		profileDFend["Dbx_dos_version"] = "";
+		cfgDFend["Dbx_dos_xms"] = BoolToStr( settings.value("xms", true).toBool() );
+		cfgDFend["Dbx_dos_ems"] = BoolToStr( settings.value("ems", true).toBool() );
+		cfgDFend["Dbx_dos_umb"] = settings.value("umb", "true").toString();
 
-		if( settings.value("keyboardlayout","auto").toString() == "default")
-			profileDFend["Dbx_dos_keyboardlayout"] = "auto";
+		if( settings.value("keyboardlayout", "auto").toString().toLower() == "default" )
+			cfgDFend["Dbx_dos_keyboardlayout"] = "auto";
 		else
-			profileDFend["Dbx_dos_keyboardlayout"] = settings.value("keyboardlayout", "auto").toString();
+			cfgDFend["Dbx_dos_keyboardlayout"] = settings.value("keyboardlayout", "auto").toString();
 
-//		profileDFend["Dbx_dos_codepage"] = settings.value("codepage", "").toString();
+		cfgDFend["Dbx_dos_version"] = settings.value("ReportedDOSVersion", "").toString();
+//		cfgDFend["Dbx_dos_codepage"] = settings.value("codepage", "").toString();
 	settings.endGroup();
-
+// [ipx]
 	settings.beginGroup("ipx");
-		profileDFend["Dbx_ipx_ipx"] = BoolToStr( settings.value("ipx","false").toBool() );
+		cfgDFend["Dbx_ipx_ipx"]  = BoolToStr( settings.value("ipx", false).toBool() );
+		cfgDFend["Dbx_ipx_type"] = settings.value("type"   , "none").toString();
+		cfgDFend["Dbx_ipx_port"] = settings.value("port"   , "213").toString();
+		cfgDFend["Dbx_ipx_ip"]   = settings.value("address", "").toString();
 	settings.endGroup();
 
 // Datos del emulador ScummVM --
+// tipo_emu scummvm ---
 	settings.beginGroup("ScummVM");
-		profileDFend["Svm_game"]          = settings.value("GameName"     , "").toString();
-		profileDFend["Svm_game_label"]    = settings.value("GameName"     , "").toString();
-		profileDFend["Svm_language"]      = settings.value("Language"     , "es").toString();
-		profileDFend["Svm_subtitles"]     = BoolToStr( settings.value("Subtitles", "true").toBool() );
-	profileDFend["Svm_platform"]          = settings.value("platform"     , "pc").toString();
-		profileDFend["Svm_gfx_mode"]      = settings.value("Filter"       , "2x").toString();
-	profileDFend["Svm_render_mode"]       = settings.value("render_mode"  , "").toString();
-	profileDFend["Svm_fullscreen"]        = BoolToStr( settings.value("fullscreen"   , "false").toBool() );
-	profileDFend["Svm_aspect_ratio"]      = BoolToStr( settings.value("aspect_ratio" , "true").toBool() );
-		profileDFend["Svm_path"]          = settings.value("GamePath"     , "").toString();
-	profileDFend["Svm_path_setup"]        = settings.value("path_setup"   , "").toString();
-	profileDFend["Svm_path_extra"]        = settings.value("path_extra"   , "").toString();
-		profileDFend["Svm_path_save"]     = settings.value("Savepath"     , "").toString();
-	profileDFend["Svm_path_capturas"]     = settings.value("path_capturas", "").toString();
-	profileDFend["Svm_path_sonido"]       = settings.value("path_sonido"  , "").toString();
-		profileDFend["Svm_music_driver"]  = settings.value("MusicDriver"  , "adlib").toString();
-		profileDFend["Svm_enable_gs"]     = BoolToStr( settings.value("EnableGS"     , "true").toBool() );
-		profileDFend["Svm_multi_midi"]    = BoolToStr( settings.value("MultiMIDI"    , "true").toBool() );
-		profileDFend["Svm_native_mt32"]   = BoolToStr( settings.value("NativeMT32"   , "true").toBool() );
-		profileDFend["Svm_master_volume"] = settings.value("MusicVolume"  , "192").toString();
-		profileDFend["Svm_music_volume"]  = settings.value("MusicVolume"  , "192").toString();
-		profileDFend["Svm_sfx_volume"]    = settings.value("SFXVolume"    , "192").toString();
-		profileDFend["Svm_speech_volume"] = settings.value("SpeechVolume" , "192").toString();
-	profileDFend["Svm_tempo"]             = settings.value("tempo"        , "100").toString();
-		profileDFend["Svm_talkspeed"]     = settings.value("TalkSpeed"    , "60").toString();
-	profileDFend["Svm_debuglevel"]        = settings.value("debuglevel"   , "0").toString();
-		profileDFend["Svm_cdrom"]         = settings.value("CDROM"        , "0").toString();
-		profileDFend["Svm_joystick_num"]  = settings.value("JoystickNum"  , "0").toString();
-		profileDFend["Svm_output_rate"]   = settings.value("SampleRate"   , "<defecto>").toString();
-		profileDFend["Svm_midi_gain"]     = settings.value("MIDIGain"     , "100").toString();
-	profileDFend["Svm_copy_protection"]   = BoolToStr( settings.value("copy_protection", "false").toBool() );
-	profileDFend["Svm_sound_font"]        = settings.value("sound_font"   , "").toString();
-		profileDFend["Svm_walkspeed"]     = settings.value("Walkspeed"    , "0").toString();
-		profileDFend["Svm_opl_driver"]    = settings.value("opl_driver"   , "auto").toString();
-		profileDFend["Svm_disable_dithering"] = BoolToStr( settings.value("disable_dithering", "false").toBool() );
-		profileDFend["Svm_mute"]              = BoolToStr( settings.value("mute"       , "false").toBool() );
-		profileDFend["Svm_speech_mute"]       = BoolToStr( settings.value("speech_mute", "false").toBool() );
+		cfgDFend["Svm_game"]              = settings.value("GameName", "").toString();
+		cfgDFend["Svm_game_label"]        = settings.value("GameName", "").toString();
+		cfgDFend["Svm_language"]          = settings.value("Language", "es").toString();
+		cfgDFend["Svm_subtitles"]         = BoolToStr( settings.value("Subtitles", true).toBool() );
+		cfgDFend["Svm_platform"]          = settings.value("platform", "pc").toString();
+		cfgDFend["Svm_gfx_mode"]          = settings.value("Filter", "2x").toString();
+		cfgDFend["Svm_render_mode"]       = settings.value("render_mode", "").toString();
+		cfgDFend["Svm_fullscreen"]        = BoolToStr( settings.value("fullscreen", false).toBool() );
+		cfgDFend["Svm_aspect_ratio"]      = BoolToStr( settings.value("aspect_ratio", true).toBool() );
+		cfgDFend["Svm_path"]              = settings.value("GamePath", "").toString();
+		cfgDFend["Svm_path_setup"]        = settings.value("path_setup", "").toString();
+		cfgDFend["Svm_path_extra"]        = settings.value("path_extra", "").toString();
+		cfgDFend["Svm_path_save"]         = settings.value("Savepath", "").toString();
+		cfgDFend["Svm_path_capturas"]     = settings.value("path_capturas", "").toString();
+		cfgDFend["Svm_path_sonido"]       = settings.value("path_sonido", "").toString();
+		cfgDFend["Svm_music_driver"]      = settings.value("MusicDriver", "adlib").toString();
+		cfgDFend["Svm_enable_gs"]         = BoolToStr( settings.value("EnableGS", true).toBool() );
+		cfgDFend["Svm_multi_midi"]        = BoolToStr( settings.value("MultiMIDI", true).toBool() );
+		cfgDFend["Svm_native_mt32"]       = BoolToStr( settings.value("NativeMT32", true).toBool() );
+		cfgDFend["Svm_mute"]              = "false";
+		cfgDFend["Svm_master_volume"]     = settings.value("MusicVolume", "192").toString();
+		cfgDFend["Svm_music_volume"]      = settings.value("MusicVolume", "192").toString();
+		cfgDFend["Svm_sfx_volume"]        = settings.value("SFXVolume", "192").toString();
+		cfgDFend["Svm_speech_volume"]     = settings.value("SpeechVolume", "192").toString();
+		cfgDFend["Svm_speech_mute"]       = "false";
+		cfgDFend["Svm_tempo"]             = settings.value("tempo", "100").toString();
+		cfgDFend["Svm_talkspeed"]         = settings.value("TalkSpeed", "60").toString();
+		cfgDFend["Svm_debuglevel"]        = settings.value("debuglevel", "0").toString();
+		cfgDFend["Svm_cdrom"]             = settings.value("CDROM", "0").toString();
+		cfgDFend["Svm_joystick_num"]      = settings.value("JoystickNum", "0").toString();
+		cfgDFend["Svm_output_rate"]       = settings.value("SampleRate", "").toString();
+		cfgDFend["Svm_midi_gain"]         = settings.value("MIDIGain", "100").toString();
+		cfgDFend["Svm_copy_protection"]   = BoolToStr( settings.value("copy_protection", false).toBool() );
+		cfgDFend["Svm_sound_font"]        = settings.value("sound_font", "").toString();
+		cfgDFend["Svm_walkspeed"]         = settings.value("Walkspeed", "0").toString();
+		cfgDFend["Svm_opl_driver"]        = "";
+		cfgDFend["Svm_disable_dithering"] = "";
+		cfgDFend["Svm_alt_intro"]         = "";
+		cfgDFend["Svm_boot_param"]        = "";
 	settings.endGroup();
 
 	if( file_out.exists() )
 		file_out.remove();
 
-	return profileDFend;
-}
-
-// Crea la imagen de la lista
-void Funciones::CrearCoverList(QHash<QString, QVariant> datos, QHash<QString, QVariant> config)
-{
-	QImage cover_src;
-	QImage cover_top;
-	QImage cover_scaled;
-	QImage cover_result;
-	QImage img_tipo_emu;
-	QImage star_on(stTheme+"images/star_on.png");
-	QImage star_off(stTheme+"images/star_off.png");
-
-	if(datos["Dat_tipo_emu"].toString()=="")
-		img_tipo_emu.load(stTheme+"img16/sinimg.png");
-	else if(datos["Dat_tipo_emu"].toString()=="datos")
-		img_tipo_emu.load(stTheme+"img16/datos_3.png");
-	else if(datos["Dat_tipo_emu"].toString()=="dosbox")
-		img_tipo_emu.load(stTheme+"img16/dosbox.png");
-	else if(datos["Dat_tipo_emu"].toString()=="scummvm")
-		img_tipo_emu.load(stTheme+"img16/scummvm.png");
-	else if(datos["Dat_tipo_emu"].toString()=="vdmsound")
-		img_tipo_emu.load(stTheme+"img16/vdmsound.png");
-	else
-		img_tipo_emu.load(stTheme+"img16/sinimg.png");
-
-	cover_src.load( datos["Dat_img_src"].toString() );
-	cover_top.load(stTheme+"images/list_cover_top.png");
-
-	if( config["img_scaled"].toBool() )
-		cover_scaled = cover_src.scaled(config["img_scale_w"].toInt(), config["img_scale_h"].toInt(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-	else
-		cover_scaled = cover_src;
-
-	cover_result = QImage(config["icon_width"].toInt(), config["icon_height"].toInt(), QImage::Format_ARGB32_Premultiplied);
-	QPainter painter_result(&cover_result);
-	painter_result.setCompositionMode(QPainter::CompositionMode_Source);
-	painter_result.fillRect(cover_result.rect(), Qt::transparent);
-
-	painter_result.setCompositionMode(QPainter::CompositionMode_SourceOver);
-	painter_result.drawImage(config["img_scale_pos_x"].toInt(), config["img_scale_pos_y"].toInt(), cover_scaled);
-
-	painter_result.setCompositionMode(QPainter::CompositionMode_SourceOver);
-	painter_result.drawImage(0, 0, cover_top);
-
-	if( config["tipo_emu_show"].toBool() )
-		painter_result.drawImage(config["tipo_emu_pos_x"].toInt(), config["tipo_emu_pos_y"].toInt(), img_tipo_emu);// tipo emu
-
-	if( config["title_show"].toBool() )
-	{
-		QRectF rect(config["title_pos_x"].toInt(), config["title_pos_y"].toInt(), config["title_width"].toInt(), config["title_height"].toInt());
-		QFont font;
-		font.setFamily( config["title_font"].toString() );
-		font.setPointSize( config["title_font_size"].toInt() );
-		font.setBold( config["title_font_bold"].toBool() );
-		font.setItalic( config["title_font_italic"].toBool() );
-		font.setUnderline( config["title_font_underline"].toBool() );
-		font.setStyleStrategy(QFont::PreferAntialias);
-		painter_result.setFont( font );
-
-		if(datos["Dat_titulo"].toString().size() > config["title_max_caracteres"].toInt())
-			painter_result.drawText(rect, Qt::AlignCenter, datos["Dat_titulo"].toString().left(config["title_max_caracteres"].toInt())+".." );
-		else
-			painter_result.drawText(rect, Qt::AlignCenter, datos["Dat_titulo"].toString());
-	}
-
-//	if( datos["Dat_rating_visible"].toBool() || config["rating_show"].toBool() )
-	if( datos["Dat_rating_visible"].toBool() )
-	{
-		int x = config["rating_pos_x"].toInt();
-		for (int i = 0; i < 5; ++i)
-		{
-			if(i < datos["Dat_rating"].toInt())
-				painter_result.drawImage(x, config["rating_pos_y"].toInt(), star_on );
-			else
-				painter_result.drawImage(x, config["rating_pos_y"].toInt(), star_off );
-			x += 16;
-		}
-	}
-	painter_result.setCompositionMode(QPainter::CompositionMode_DestinationOver);
-	painter_result.fillRect(cover_result.rect(), Qt::transparent);
-	painter_result.end();
-
-	cover_result.save( datos["Dat_destino"].toString()+datos["Dat_img_cover"].toString()+".png", "PNG", -1);
-}
-
-// Datos por defecto.
-QHash<QString, QString> Funciones::getDefectDatosJuego()
-{
-	QHash<QString, QString> datos;
-	datos["Dat_idgrl"]            = "1";
-	datos["Dat_icono"]            = "datos";
-	datos["Dat_titulo"]           = "";
-	datos["Dat_subtitulo"]        = "";
-	datos["Dat_genero"]           = "";
-	datos["Dat_compania"]         = "";
-	datos["Dat_desarrollador"]    = "";
-	datos["Dat_tema"]             = "";
-	datos["Dat_grupo"]            = "";
-	datos["Dat_perspectiva"]      = "";
-	datos["Dat_idioma"]           = "";
-	datos["Dat_idioma_voces"]     = "";
-	datos["Dat_formato"]          = "";
-	datos["Dat_anno"]             = "";
-	datos["Dat_numdisc"]          = "";
-	datos["Dat_sistemaop"]        = "";
-	datos["Dat_tamano"]           = "";
-	datos["Dat_graficos"]         = "0";
-	datos["Dat_sonido"]           = "0";
-	datos["Dat_jugabilidad"]      = "0";
-	datos["Dat_original"]         = "false";
-	datos["Dat_estado"]           = "";
-	datos["Dat_thumbs"]           = "";
-	datos["Dat_cover_front"]      = "";
-	datos["Dat_cover_back"]       = "";
-	datos["Dat_fecha"]            = "";
-	datos["Dat_tipo_emu"]         = "datos";
-	datos["Dat_comentario"]       = "";
-	datos["Dat_favorito"]         = "false";
-	datos["Dat_rating"]           = "0";
-	datos["Dat_edad_recomendada"] = "nd";
-	datos["Dat_usuario"]          = "";
-	datos["Dat_path_exe"]         = "";
-	datos["Dat_parametros_exe"]   = "";
-
-	return datos;
-}
-
-QHash<QString, QString> Funciones::getDefectDatosDosBox()
-{
-	QHash<QString, QString> datos;
-	datos["Dbx_id"]                   = "1";
-	datos["Dbx_idgrl"]                = "1";
-	datos["Dbx_idcat"]                = "1";
-// [sdl]
-	datos["Dbx_sdl_fullscreen"]       = "false";
-	datos["Dbx_sdl_fulldouble"]       = "false";
-	datos["Dbx_sdl_fullfixed"]        = "false";
-	datos["Dbx_sdl_fullresolution"]   = "original";
-	datos["Dbx_sdl_windowresolution"] = "original";
-	datos["Dbx_sdl_output"]           = "surface";
-	datos["Dbx_sdl_hwscale"]          = "1.00";
-	datos["Dbx_sdl_autolock"]         = "true";
-	datos["Dbx_sdl_sensitivity"]      = "100";
-	datos["Dbx_sdl_waitonerror"]      = "true";
-	datos["Dbx_sdl_priority"]         = "higher,normal";
-	datos["Dbx_sdl_mapperfile"]       = "mapper.txt";
-	datos["Dbx_sdl_usescancodes"]     = "true";
-// [dosbox]
-	datos["Dbx_dosbox_language"]      = "";
-	datos["Dbx_dosbox_machine"]       = "svga_s3";
-	datos["Dbx_dosbox_captures"]      = "capture";
-	datos["Dbx_dosbox_memsize"]       = "16";
-// [render]
-	datos["Dbx_render_frameskip"]     = "0";
-	datos["Dbx_render_aspect"]        = "false";
-	datos["Dbx_render_scaler"]        = "normal2x";
-// [cpu]
-	datos["Dbx_cpu_core"]             = "auto";
-	datos["Dbx_cpu_cputype"]          = "auto";
-	datos["Dbx_cpu_cycles"]           = "auto";
-	datos["Dbx_cpu_cycles_realmode"]  = "";
-	datos["Dbx_cpu_cycles_protmode"]  = "";
-	datos["Dbx_cpu_cycles_limitmode"] = "";
-	datos["Dbx_cpu_cycleup"]          = "10";
-	datos["Dbx_cpu_cycledown"]        = "20";
-// [mixer]
-	datos["Dbx_mixer_nosound"]        = "false";
-	datos["Dbx_mixer_rate"]           = "44100";
-	datos["Dbx_mixer_blocksize"]      = "1024";
-	datos["Dbx_mixer_prebuffer"]      = "20";
-// [midi]
-	datos["Dbx_midi_mpu401"]          = "intelligent";
-	datos["Dbx_midi_intelligent"]     = "true";
-	datos["Dbx_midi_device"]          = "default";
-	datos["Dbx_midi_config"]          = "";
-	datos["Dbx_midi_mt32rate"]        = "44100";
-// [sblaster]
-	datos["Dbx_sblaster_sbtype"]      = "sb16";
-	datos["Dbx_sblaster_sbbase"]      = "220";
-	datos["Dbx_sblaster_irq"]         = "7";
-	datos["Dbx_sblaster_dma"]         = "1";
-	datos["Dbx_sblaster_hdma"]        = "5";
-	datos["Dbx_sblaster_mixer"]       = "true";
-	datos["Dbx_sblaster_oplmode"]     = "auto";
-	datos["Dbx_sblaster_oplemu"]      = "default";
-	datos["Dbx_sblaster_oplrate"]     = "44100";
-// [gus]
-	datos["Dbx_gus_gus"]              = "false";
-	datos["Dbx_gus_gusrate"]          = "44100";
-	datos["Dbx_gus_gusbase"]          = "240";
-	datos["Dbx_gus_irq1"]             = "5";
-	datos["Dbx_gus_irq2"]             = "5";
-	datos["Dbx_gus_dma1"]             = "3";
-	datos["Dbx_gus_dma2"]             = "3";
-	datos["Dbx_gus_ultradir"]         = "C:\\ULTRASND";
-// [speaker]
-	datos["Dbx_speaker_pcspeaker"]    = "true";
-	datos["Dbx_speaker_pcrate"]       = "44100";
-	datos["Dbx_speaker_tandy"]        = "auto";
-	datos["Dbx_speaker_tandyrate"]    = "44100";
-	datos["Dbx_speaker_disney"]       = "true";
-// [joystick]
-	datos["Dbx_joystick_type"]        = "auto";
-	datos["Dbx_joystick_timed"]       = "true";
-	datos["Dbx_joystick_autofire"]    = "false";
-	datos["Dbx_joystick_swap34"]      = "false";
-	datos["Dbx_joystick_buttonwrap"]  = "false";
-// [modem]
-	datos["Dbx_modem_modem"]          = "false";
-	datos["Dbx_modem_comport"]        = "2";
-	datos["Dbx_modem_listenport"]     = "23";
-// [dserial]
-	datos["Dbx_dserial_directserial"] = "false";
-	datos["Dbx_dserial_comport"]      = "1";
-	datos["Dbx_dserial_realport"]     = "COM1";
-	datos["Dbx_dserial_defaultbps"]   = "1200";
-	datos["Dbx_dserial_parity"]       = "N";
-	datos["Dbx_dserial_bytesize"]     = "8";
-	datos["Dbx_dserial_stopbit"]      = "1";
-	datos["Dbx_serial_1"]             = "dummy";
-	datos["Dbx_serial_2"]             = "dummy";
-	datos["Dbx_serial_3"]             = "disabled";
-	datos["Dbx_serial_4"]             = "disabled";
-// [dos]
-	datos["Dbx_dos_xms"]              = "true";
-	datos["Dbx_dos_ems"]              = "true";
-	datos["Dbx_dos_umb"]              = "true";
-	datos["Dbx_dos_keyboardlayout"]   = "auto";
-	datos["Dbx_dos_version"]          = "";
-// [ipx]
-	datos["Dbx_ipx_ipx"]              = "false";
-// [autoexec]
-	datos["Dbx_autoexec"]             = "";
-// Opciones
-	datos["Dbx_opt_autoexec"]         = "false";
-	datos["Dbx_opt_loadfix"]          = "false";
-	datos["Dbx_opt_loadfix_mem"]      = "64";
-	datos["Dbx_opt_consola_dbox"]     = "false";
-	datos["Dbx_opt_cerrar_dbox"]      = "true";
-	datos["Dbx_opt_cycle_sincronizar"]= "false";
-// Otras opciones
-	datos["Dbx_path_conf"]            = "";
-	datos["Dbx_path_sonido"]          = "waves";
-	datos["Dbx_path_exe"]             = "";
-	datos["Dbx_path_setup"]           = "";
-	datos["Dbx_parametros_exe"]       = "";
-	datos["Dbx_parametros_setup"]     = "";
-
-	return datos;
-}
-
-QHash<QString, QString> Funciones::getDefectDatosScummVM()
-{
-	QHash<QString, QString> datos;
-	datos["Svm_id"]              = "1";
-	datos["Svm_idgrl"]           = "1";
-	datos["Svm_idcat"]           = "1";
-//--
-	datos["Svm_game"]            = "";
-	datos["Svm_game_label"]      = "";
-	datos["Svm_language"]        = "es";
-	datos["Svm_subtitles"]       = "true";
-	datos["Svm_platform"]        = "pc";
-	datos["Svm_gfx_mode"]        = "2x";
-	datos["Svm_render_mode"]     = "";
-	datos["Svm_fullscreen"]      = "false";
-	datos["Svm_aspect_ratio"]    = "true";
-	datos["Svm_path"]            = "";
-	datos["Svm_path_setup"]      = "";
-	datos["Svm_path_extra"]      = "";
-	datos["Svm_path_save"]       = "";
-	datos["Svm_path_capturas"]   = "";
-	datos["Svm_path_sonido"]     = "";
-	datos["Svm_music_driver"]    = "adlib";
-	datos["Svm_enable_gs"]       = "true";
-	datos["Svm_multi_midi"]      = "true";
-	datos["Svm_native_mt32"]     = "true";
-	datos["Svm_master_volume"]   = "192";
-	datos["Svm_music_volume"]    = "192";
-	datos["Svm_sfx_volume"]      = "192";
-	datos["Svm_speech_volume"]   = "192";
-	datos["Svm_tempo"]           = "100";
-	datos["Svm_talkspeed"]       = "60";
-	datos["Svm_debuglevel"]      = "0";
-	datos["Svm_cdrom"]           = "0";
-	datos["Svm_joystick_num"]    = "0";
-	datos["Svm_output_rate"]     = "<defecto>";
-	datos["Svm_midi_gain"]       = "100";
-	datos["Svm_copy_protection"] = "false";
-	datos["Svm_sound_font"]      = "";
-	datos["Svm_walkspeed"]       = "0";
-	datos["Svm_opl_driver"]      = "auto";
-	datos["Svm_disable_dithering"] = "false";
-	datos["Svm_mute"]              = "false";
-	datos["Svm_speech_mute"]       = "false";
-
-	return datos;
-}
-
-QHash<QString, QString> Funciones::getDefectDatosVDMSound()
-{
-	QHash<QString, QString> datos;
-
-	datos["Vdms_id"]              = "1";
-	datos["Vdms_idgrl"]           = "1";
-	datos["Vdms_idcat"]           = "1";
-//--
-	datos["Vdms_path_conf"]       = "";
-	datos["Vdms_path_exe"]        = "";
-	datos["Vdms_vdms_debug_1"]    = "no";
-	datos["Vdms_vdms_debug_2"]    = "";
-	datos["Vdms_winnt_dos_1"]     = "no";
-	datos["Vdms_winnt_dos_2"]     = "";
-	datos["Vdms_winnt_dosbox_1"]  = "yes";
-	datos["Vdms_winnt_dosbox_2"]  = "no";
-	datos["Vdms_winnt_dosbox_3"]  = "no";
-	datos["Vdms_winnt_storage_1"] = "yes";
-	datos["Vdms_winnt_storage_2"] = "no";
-
-	return datos;
+	return cfgDFend;
 }

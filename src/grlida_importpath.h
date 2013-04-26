@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -30,52 +30,73 @@
 #include "funciones.h"
 #include "ui_importpath.h"
 
-class frmImportPath: public QDialog
+namespace Ui {
+	class frmImportPath;
+}
+
+class frmImportPath : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmImportPath(QDialog *parent = 0, Qt::WFlags flags = 0);
+	explicit frmImportPath(stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent = 0);
 	~frmImportPath();
 
-	Ui::ImportPathClass ui;
+	stGrlCfg getGrlCfg(){return grlCfg;}
 
+	Ui::frmImportPath *ui;
 private:
-	Funciones fGrl;
+	Funciones *fGrl;
 
-	QString stHomeDir, stTheme;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stGrlCats categoria;
 
-	QHash<QString, QVariant> GRLConfig;
-
-	void createConnections();
 	void setTheme();
-	void CargaUltimosDirectorios();
-
-private slots:
-	void on_btnOk();
-	void on_estado_cheket_items(bool estado);
-
-// DOSBox
-	void on_btnDbx_FileConfg();
-	void on_btnDbx_ExeJuego();
-	void on_btnDbx_ExeSetup();
-	void on_btnDbx_mapperfile();
-	void on_btnDbx_language();
-	void on_btnDbx_capturas();
-	void on_btnDbx_musica();
-// ScummVM
-	void on_btnSvm_Path();
-	void on_btnSvm_PathSave();
-	void on_btnSvm_PathSetup();
-	void on_btnSvm_PathExtra();
-	void on_btnSvm_PathCapturas();
-	void on_btnSvm_PathSonido();
-// VDMSound
-	void on_btnVdms_PathConf();
-	void on_btnVdms_PathExe();
 
 public slots:
-	void on_changeEnabled(bool estado);
+	void statusBtnEnabled(bool estado);
+
+private slots:
+	void on_btnOk_clicked();
+	void on_btnCancel_clicked();
+//-- Datos
+	void on_twDatosJuego_itemClicked(QTreeWidgetItem *item, int column);
+	void on_chk_selectDatos_clicked(bool checked);
+//-- DOSBox
+	void on_btnDbx_FileConfg_clicked();
+	void on_btnDbx_ExeJuego_clicked();
+	void on_btnDbx_FileConfg_clear_clicked();
+	void on_btnDbx_ExeJuego_clear_clicked();
+	void on_btnDbx_ExeSetup_clicked();
+	void on_btnDbx_ExeSetup_clear_clicked();
+	void on_btnDbx_language_clicked();
+	void on_btnDbx_language_clear_clicked();
+	void on_btnDbx_mapperfile_clicked();
+	void on_btnDbx_mapperfile_clear_clicked();
+	void on_btnDbx_gus_ultradir_clear_clicked();
+	void on_btnDbx_capturas_clicked();
+	void on_btnDbx_capturas_clear_clicked();
+	void on_btnDbx_musica_clicked();
+	void on_btnDbx_musica_clear_clicked();
+//-- ScummVM
+	void on_btnSvm_Path_clicked();
+	void on_btnSvm_Path_clear_clicked();
+	void on_btnSvm_PathSave_clicked();
+	void on_btnSvm_PathSave_clear_clicked();
+	void on_btnSvm_PathSetup_clicked();
+	void on_btnSvm_PathSetup_clear_clicked();
+	void on_btnSvm_PathExtra_clicked();
+	void on_btnSvm_PathExtra_clear_clicked();
+	void on_btnSvm_PathCapturas_clicked();
+	void on_btnSvm_PathCapturas_clear_clicked();
+	void on_btnSvm_PathSonido_clicked();
+	void on_btnSvm_PathSonido_clear_clicked();
+//-- VDMSound
+	void on_btnVdms_PathConf_clicked();
+	void on_btnVdms_PathConf_clear_clicked();
+	void on_btnVdms_PathExe_clicked();
+	void on_btnVdms_PathExe_clear_clicked();
 
 };
 

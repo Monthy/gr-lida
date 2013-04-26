@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,51 +25,72 @@
 #ifndef GRLIDA_SVMADD_H
 #define GRLIDA_SVMADD_H
 
-#include <QtCore>
-#include <QtGui>
+#include <QDialog>
 
 #include "funciones.h"
-#include "ui_svmadd.h"
+#include "dbsql.h"
+
+namespace Ui {
+	class frmSvmAdd;
+}
 
 class frmSvmAdd : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmSvmAdd(QDialog *parent = 0, Qt::WFlags flags = 0);
+	explicit frmSvmAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent = 0);
 	~frmSvmAdd();
 
-	Ui::SvmAddClass ui;
-
-	QHash<QString, QString> DatosJuego;
-	QHash<QString, QString> DatosScummVM;
+	stGrlCfg getGrlCfg(){return grlCfg;}
+	stDatosJuego getDatosJuegos(){return DatosJuego;}
 
 private:
-	QString stTituloSvm(){ return tr("Nuevo juego para el ScummVM"); }
+	Ui::frmSvmAdd *ui;
 
-	Funciones fGrl;
-	int intStepwizard;
+	QString titulo_ventana(){ return tr("Nuevo juego para el ScummVM"); }
 
-	QString stHomeDir, stDatosDir, stTheme, stIdioma;
+	Funciones *fGrl;
+	dbSql *sql;
 
-	QHash<QString, QVariant> GRLConfig;
-	QHash<QString, QString> tempDatosJuego;
+	stDatosJuego DatosJuego;
+	stConfigScummVM DatosScummVM;
 
-	void createConnections();
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stGrlCats categoria;
+	int index_wizard;
+
+	void cargarConfig();
 	void setTheme();
-	void CargarConfig();
+
+	void setDatosScummVM();
+	void cargarDatosScummVM(stConfigScummVM cfgSvm);
 
 private slots:
-	void on_btnOk();
-	void on_btnNext();
-	void on_btnPrevious();
-	void on_btnSvm_Path();
-	void on_btnSvm_PathSave();
-	void on_btnDefecto();
-	void on_twScummVM_clicked(QTreeWidgetItem *item);
-	void on_twScummVM_Dblclicked(QTreeWidgetItem *item);
-	void on_twScummVM_currentItemChanged(QTreeWidgetItem *item1, QTreeWidgetItem *item2);
-	void on_btnDescargarInfo();
+	void on_btnOk_clicked();
+	void on_btnCancel_clicked();
+	void on_btnNext_clicked();
+	void on_btnPrevious_clicked();
+
+	void on_twScummVM_itemClicked(QTreeWidgetItem *item, int column);
+	void on_twScummVM_itemDoubleClicked(QTreeWidgetItem *item, int column);
+	void on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+	void on_btnSvm_Path_clicked();
+	void on_btnSvm_Path_clear_clicked();
+	void on_btnSvm_PathSave_clicked();
+	void on_btnSvm_PathSave_clear_clicked();
+	void on_btnDescargarInfo_clicked();
+
+	void on_h_SliderSvm_music_volume_valueChanged(int value);
+	void on_h_SliderSvm_sfx_volume_valueChanged(int value);
+	void on_h_SliderSvm_speech_volume_valueChanged(int value);
+	void on_h_SliderSvm_tempo_valueChanged(int value);
+	void on_h_SliderSvm_talkspeed_valueChanged(int value);
+	void on_h_SliderSvm_debuglevel_valueChanged(int value);
+	void on_h_SliderSvm_midi_gain_valueChanged(int value);
+	void on_h_SliderSvm_walkspeed_valueChanged(int value);
+	void on_btnDefectoSvm_clicked();
 
 };
 

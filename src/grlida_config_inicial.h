@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,48 +25,51 @@
 #ifndef GRLIDA_CONFIG_INICIAL_H
 #define GRLIDA_CONFIG_INICIAL_H
 
-#include <QtCore>
-#include <QtGui>
-#include <QHash>
-#include <QVariant>
+#include <QDialog>
 #include <QTranslator>
 
 #include "funciones.h"
-#include "ui_configinicial.h"
+
+namespace Ui {
+	class frmConfigInicial;
+}
 
 class frmConfigInicial : public QDialog
 {
     Q_OBJECT
 
 public:
-	frmConfigInicial(QDialog *parent = 0, Qt::WFlags flags = 0);
+	frmConfigInicial(stGrlCfg m_cfg, QWidget *parent = 0);
 	~frmConfigInicial();
 
-	Ui::ConfigInicialClass ui;
-
-	QString stIdiomaSelect;
-
-protected:
-	void closeEvent( QCloseEvent *e );
+	stGrlCfg getGrlCfg(){return grlCfg;}
 
 private:
-	Funciones fGrl;
+	Ui::frmConfigInicial *ui;
+
+	Funciones *fGrl;
 	QTranslator translator;
 
-	QString stHomeDir, stTheme;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
 
-	QHash<QString, QVariant> GRLConfig;
-
-	void createConnections();
-	void CargarConfig();
-	void GuardarConfig();
+	void cargarConfig();
+	void guardarConfig();
 	void setTheme();
 
 private slots:
-	void on_btnOk();
-	void on_btnDirDbx();
-	void on_btnDirSvm();
-	void on_setLanguage(int idx_locale);
+	void on_cbxIdioma_activated(int index);
+
+	void on_btnDirDbx_clicked();
+	void on_btnDirDbx_find_clicked();
+	void on_btnDirDbx_clear_clicked();
+
+	void on_btnDirSvm_clicked();
+	void on_btnDirSvm_find_clicked();
+	void on_btnDirSvm_clear_clicked();
+
+	void on_btnOk_clicked();
+
 };
 
 #endif // GRLIDA_CONFIG_INICIAL_H

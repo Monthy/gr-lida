@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,107 +25,162 @@
 #ifndef GRLIDA_ADDEDIT_JUEGO_H
 #define GRLIDA_ADDEDIT_JUEGO_H
 
-#include <QtCore>
-#include <QtGui>
-#include <QTextEdit>
+#include <QDialog>
 
 #include "funciones.h"
 #include "dbsql.h"
-#include "ui_addedit_juego.h"
+#include "grlida_addedit_dosbox.h"
+#include "grlida_addedit_scummvm.h"
+#include "grlida_addedit_vdmsound.h"
+#include "qcheckcombobox.h"
+
+namespace Ui {
+	class frmAddEditJuego;
+}
 
 class frmAddEditJuego : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	frmAddEditJuego(bool EditJuego, QString TipoEmu, QString stIDIndex, QDialog *parent = 0, Qt::WFlags flags = 0);
+	explicit frmAddEditJuego(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QString id_game, QString tipo_emu, bool m_editando, QWidget *parent = 0);
 	~frmAddEditJuego();
 
-	Ui::AddEditJuegoClass ui;
-
-	QHash<QString, QString> DatosJuego;
-	QHash<QString, QString> DatosScummVM;
-	QHash<QString, QString> DatosDosBox;
-	QHash<QString, QString> DatosVDMSound;
+	stDatosJuego getDatosJuegos(){return DatosJuego;}
+	stGrlCfg getGrlCfg(){return grlCfg;}
 
 protected:
-	void closeEvent( QCloseEvent *e );
+	void closeEvent(QCloseEvent *event);
 
 private:
-	QHash<QString, QVariant> GRLConfig;
+	Ui::frmAddEditJuego *ui;
 
-	Funciones fGrl;
+	enum tab_datos {
+		tabDOSBox   = 4,
+		tabScummVM  = 5,
+		tabVDMSound = 6
+	};
+
+	QString titulo_ventana(){ return windowTitle(); }
+
+	Funciones *fGrl;
 	dbSql *sql;
 
-	bool EditandoJuego;
+	frmAddEditDosBox *wDbx;
+	frmAddEditScummVM *wSvm;
+	frmAddEditVDMSound *wVdms;
 
-	QString stTituloAddEdit(){ return windowTitle(); }
-	QString stItemIDGrl, TipoEmulador;
-	QString stHomeDir, stIconDir, stDatosDir, stTheme, stIdioma, stTempDir, stUsuario;
+	stGrlDir grlDir;
+	stGrlCfg grlCfg;
+	stGrlCats categoria;
 
-	QString stCoversDir, stThumbsDir, stListThumbsDir, stCapturesDir;
-	QString stThumbs, stCoverFront, stCoverBack;
+	stDatosJuego DatosJuego;
+	stConfigDOSBox DatosDosBox;
+	stConfigScummVM DatosScummVM;
+	stConfigVDMSound DatosVDMSound;
+
+	QString IdGame, TipoEmu, oldTitulo, str_html_old;
+	QString Thumbs, CoverFront, CoverBack;
 	QString file_thumbs, file_cover_front, file_cover_back;
 
-	QStringList filters;
-	QHash<QString, QString> listSmailes;
+	QHash<QString, stGrlDatos> emu_list;
+	QHash<QString, stGrlDatos> smiles_list;
+	bool Editando;
 
-	QUrl my_url;
+	QCheckComboBox *cbxDatos_Genero;
+	QCheckComboBox *cbxDatos_Compania;
+	QCheckComboBox *cbxDatos_Desarrollador;
+	QCheckComboBox *cbxDatos_Tema;
+	QCheckComboBox *cbxDatos_Grupo;
+	QCheckComboBox *cbxDatos_Idioma;
+	QCheckComboBox *cbxDatos_IdiomaVoces;
+	QCheckComboBox *cbxDatos_Formato;
+	QCheckComboBox *cbxDatos_Perspectiva;
+	QCheckComboBox *cbxDatos_SistemaOp;
 
+	void createWidgets();
 	void createConnections();
+	void cargarConfig();
 	void setTheme();
-	void CargarConfig();
 
-// Referente al DatosJuego ---------------------------------------
-	void CargarDatosJuego(QString stIDIndex);
-	void setDatosJuegos();
+	void cargarDatosJuego(stDatosJuego datos, bool isImport = false);
+	bool setDatosJuegos(bool isSoloDatos = false);
+	void comprobarDirCapturas(QString dir_capturas, QString old_titulo, QString new_titulo, QString tipo_emu);
+
+	void enabledUrlUpdate(QString texto, int col);
+	void addEditTwDatosURL(bool isNew);
+
+	void enabledDatosUpdate(QString texto, int col);
+	void addEditTwDatosFiles(bool isNew);
+	void buscarTexto(QString texto, bool anterior = false);
 
 private slots:
-	void on_btnOk();
-	void on_cbxDatos_TipoEmu_Changed(int row);
+	void on_btnOk_clicked();
+	void on_btnCancel_clicked();
+	void on_btnDescargarInfo_clicked();
+	void on_txtDatos_Titulo_editingFinished();
+	void on_cbxDatos_TipoEmu_activated(int index);
+	void on_btnImgAbrir_Thumbs_clicked();
+	void on_btnImgVer_Thumbs_clicked();
+	void on_btnImgEliminar_Thumbs_clicked();
+	void on_btnImgAbrir_CoverFront_clicked();
+	void on_btnImgVer_CoverFront_clicked();
+	void on_btnImgEliminar_CoverFront_clicked();
+	void on_btnImgAbrir_CoverBack_clicked();
+	void on_btnImgVer_CoverBack_clicked();
+	void on_btnImgEliminar_CoverBack_clicked();
+// Descripción
+	void on_btnTool_Cortar_clicked();
+	void on_btnTool_Copiar_clicked();
+	void on_btnTool_Pegar_clicked();
+	void on_btnTool_SelectAll_clicked();
+	void on_btnTool_Deshacer_clicked();
+	void on_btnTool_Rehacer_clicked();
+	void on_btnTool_TextoNegrita_clicked();
+	void on_btnTool_TextoCursiva_clicked();
+	void on_btnTool_TextoSubrayado_clicked();
+	void on_btnTool_InsertarImg_clicked();
+	void on_btnTool_InsertaUrl_clicked();
+	void on_btnTool_Buscar_clicked(bool checked);
+	void on_btnTool_Reemplazar_clicked(bool checked);
+	void on_btnTool_Preview_clicked();
+	void on_btnTool_ReemplazarTexto_clicked();
+	void on_btnTool_BuscarAnterior_clicked();
+	void on_btnTool_BuscarSiguiente_clicked();
+	void on_twDatoSmile_itemDoubleClicked(QTreeWidgetItem *item, int column);
+// Otros datos
+	void on_btnDatos_ExeJuego_clicked();
+	void on_btnDatos_ExeJuego_clear_clicked();
+	void on_btnDatos_ParametrosExe_clear_clicked();
+	void on_btnDatos_SetupJuego_clicked();
+	void on_btnDatos_SetupJuego_clear_clicked();
+	void on_btnDatos_ParametrosSetup_clear_clicked();
+	void on_btnDatos_PathCapturas_clicked();
+	void on_btnDatos_PathCapturas_clear_clicked();
+// Direcciones url
+	void on_cbxUrl_url_editTextChanged(const QString &arg1);
+	void on_txtUrl_descripcion_textChanged();
+	void on_cbxUrl_url_activated(int index);
+	void on_btnAddUrl_clicked();
+	void on_btnUpdateUrl_clicked();
+	void on_btnAbrirUrl_clicked();
+	void on_btnDeleteUrl_clicked();
+	void on_twDatosURL_itemClicked(QTreeWidgetItem *item, int column);
+	void on_twDatosURL_itemDoubleClicked(QTreeWidgetItem *item, int column);
+// Datos usuario
+	void on_btnDatos_Usuario_clear_clicked();
+// Datos archivos
+	void on_txtDatosFiles_PathFile_textEdited(const QString &arg1);
+	void on_txtDatosFiles_FileName_textEdited(const QString &arg1);
+	void on_txtDatosFiles_Comentario_textChanged();
+	void on_btnDatosFiles_PathFile_clicked();
+	void on_btnDatosFiles_PathFile_clear_clicked();
+	void on_btnAddFile_clicked();
+	void on_btnUpdateFile_clicked();
+	void on_btnDeleteFile_clicked();
+	void on_twDatosFiles_itemClicked(QTreeWidgetItem *item, int column);
+	void on_twDatosFiles_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
-// Referente al DatosJuego ---------------------------------------
-	void on_twDatoSmile_Dblclicked( QTreeWidgetItem *item);
-	void on_btnImgAbrir_Thumbs();
-	void on_btnImgAbrir_CoverFront();
-	void on_btnImgAbrir_CoverBack();
-	void on_btnImgVer_Thumbs();
-	void on_btnImgVer_CoverFront();
-	void on_btnImgVer_CoverBack();
-	void on_btnImgEliminar_Thumbs();
-	void on_btnImgEliminar_CoverFront();
-	void on_btnImgEliminar_CoverBack();
-	void on_btnDescargarInfo();
-	void on_btnTool_Cortar();
-	void on_btnTool_Copiar();
-	void on_btnTool_Pegar();
-	void on_btnTool_SelectAll();
-	void on_btnTool_Deshacer();
-	void on_btnTool_Rehacer();
-	void on_btnTool_TextoNegrita();
-	void on_btnTool_TextoCursiva();
-	void on_btnTool_TextoSubrayado();
-	void on_btnTool_InsertarImg();
-	void on_btnTool_InsertaUrl();
-	void on_btnTool_Buscar(bool estado);
-	void on_btnTool_Reemplazar(bool estado);
-	void on_btnTool_ReemplazarTexto();
-	void on_btnTool_BuscarAnterior();
-	void on_btnTool_BuscarSiguiente();
-	void on_btnTool_Preview();
-	void on_btnNuevaUrl();
-	void on_btnEditarUrl();
-	void on_btnEliminarUrl();
-	void on_btnAbrirUrl();
-	void on_btnDatos_ExeJuego();
-	void on_btnDatosFiles_PathFile();
-	void on_btnAddFile();
-	void on_btnEditFile();
-	void on_btnUpdateFile();
-	void on_btnDeleteFile();
-	void on_twDatosFiles_Dblclicked(QTreeWidgetItem *item);
-
-	void findText(QString text, bool m_anterior = false);
 };
 
 #endif // GRLIDA_ADDEDIT_JUEGO_H

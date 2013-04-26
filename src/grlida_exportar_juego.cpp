@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -23,224 +23,370 @@
 **/
 
 #include "grlida_exportar_juego.h"
+#include "ui_exportar_juego.h"
 
-frmExportarJuego::frmExportarJuego(QDialog *parent, Qt::WFlags flags)
-    : QDialog( parent, flags )
+frmExportarJuego::frmExportarJuego(dbSql *m_sql, stGrlCfg m_cfg, int m_id_cat, QWidget *parent) :
+	QDialog(parent),
+	ui(new Ui::frmExportarJuego)
 {
-	ui.setupUi(this);
+	ui->setupUi(this);
+	fGrl = new Funciones;
 
-	stHomeDir = fGrl.GRlidaHomePath();	// directorio de trabajo del GR-lida
-	stIconDir = stHomeDir + "iconos/";	// directorio de iconos para el GR-lida
-	stTheme   = fGrl.ThemeGrl();
-	GRLConfig = fGrl.CargarGRLConfig( stHomeDir + "GR-lida.conf" );
+	grlCfg = m_cfg;
+	sql    = m_sql;
+	id_cat = m_id_cat;
 
-// Conecta los distintos botones
-	connect( ui.btnOk           , SIGNAL( clicked() ), this, SLOT( on_btnOk() ) );
-	connect( ui.btnCheckedAll   , SIGNAL( clicked() ), this, SLOT( on_btnCheckedAll() ) );
-	connect( ui.btnUnCheckedAll , SIGNAL( clicked() ), this, SLOT( on_btnUnCheckedAll() ) );
-	connect( ui.btnDirExportPath, SIGNAL( clicked() ), this, SLOT( on_btnDirExportPath() ) );
+	grlDir.Home   = fGrl->GRlidaHomePath();
+	grlDir.Datos  = grlDir.Home +"datos/";
+	grlDir.Iconos = grlDir.Home +"iconos/";
 
-	setStyleSheet( fGrl.StyleSheet() );
-	setWindowIcon( QIcon(stTheme+"img16/exportar.png") );
-
-	ui.btnOk->setIcon( QIcon(stTheme+"img16/aplicar.png") );
-	ui.btnCancelar->setIcon( QIcon(stTheme+"img16/cancelar.png") );
-	ui.btnDirExportPath->setIcon( QIcon(stTheme+"img16/carpeta_1.png") );
-
-	if( GRLConfig["font_usar"].toBool() )
-		setStyleSheet(fGrl.StyleSheet()+"*{font-family:\""+GRLConfig["font_family"].toString()+"\";font-size:"+GRLConfig["font_size"].toString()+"pt;}");
-
-	ui.cbxExpotarComo->clear();
-	ui.cbxExpotarComo->addItem("D-Fend Reloaded (*.prof)");	// Index 0
-	ui.cbxExpotarComo->addItem("GR-lida v1 (*.xml)");		// Index 1
-	ui.cbxExpotarComo->addItem("GR-lida v2 (*.xml)");		// Index 2
-	ui.cbxExpotarComo->setCurrentIndex( 1 );
-
-	twMontajes = new QTreeWidget();
-
-	CargarListaJuegos();
+	cargarConfig();
+	setTheme();
+	cargarListaCategorias();
 
 // centra la aplicacion en el escritorio
-	QDesktopWidget *desktop = qApp->desktop();
-	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
-	int left = ( rect.width() - width() ) / 2;
-	int top = ( rect.height() - height() ) / 2;
-	setGeometry( left, top, width(), height() );
+	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
 frmExportarJuego::~frmExportarJuego()
 {
+	delete fGrl;
 	delete twMontajes;
+	delete ui;
 }
 
-void frmExportarJuego::on_btnOk()
+void frmExportarJuego::cargarConfig()
 {
-	QDir dir_export( ui.txtDirExportPath->text() );
+// Configuración del twListaJuegos
+	ui->twListaJuegos->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png"));
+	ui->twListaJuegos->header()->setMovable(false);
+	ui->twListaJuegos->header()->setStretchLastSection(true);
 
-	if( !ui.txtDirExportPath->text().isEmpty() && dir_export.exists() )
+	ui->cbxExpotarComo->clear();
+	ui->cbxExpotarComo->addItem(QIcon(fGrl->Theme() +"img16/gr-lida.png"), "GR-lida (*.xml)"         , "grl"  );
+	ui->cbxExpotarComo->addItem(QIcon(fGrl->Theme() +"img16/DFend.png")  , "D-Fend Reloaded (*.prof)", "dfend");
+	ui->cbxExpotarComo->setCurrentIndex(0);
+	emit on_cbxExpotarComo_activated(0);
+
+	twMontajes = new QTreeWidget(this);
+	twMontajes->setVisible(false);
+
+	emu_list = fGrl->cargaDatosQHash(grlDir.Datos +"emu_list.txt", 4, "|");
+}
+
+void frmExportarJuego::setTheme()
+{
+	setWindowIcon( QIcon(fGrl->Theme() +"img16/exportar.png") );
+
+	ui->btnOk->setIcon( QIcon(fGrl->Theme() +"img16/aplicar.png") );
+	ui->btnCancelar->setIcon( QIcon(fGrl->Theme() +"img16/cancelar.png") );
+	ui->btnDirExportPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+}
+
+// Carga las categorías de la base de datos.
+void frmExportarJuego::cargarListaCategorias()
+{
+//setUpdatesEnabled( false );
+	QSqlQuery query(sql->getSqlDB());
+	stGrlCats cat;
+
+	categoria.clear();
+	ui->cbxCategorias->clear();
+	query.exec("SELECT id, tabla, titulo, img, orden, emu_show FROM dbgrl_categorias ORDER BY orden ASC;");
+	if( sql->chequearQuery(query) )
 	{
-		bool str_ok;
-		QString archivo;
-
-		int pos = ui.twListaJuegos->indexOfTopLevelItem( ui.twListaJuegos->currentItem() );
-
-		if( ui.twListaJuegos->topLevelItemCount()>0 && pos!=-1 )
+		if( query.first() )
 		{
-			ui.gBox_OptExportar->setEnabled( false );
-			for(int num = 0; num < ui.twListaJuegos->topLevelItemCount(); num++ )
+			do {
+				cat.id       = query.record().value("id").toString();
+				cat.tabla    = query.record().value("tabla").toString();
+				cat.titulo   = query.record().value("titulo").toString();
+				cat.img      = query.record().value("img").toString();
+				cat.orden    = query.record().value("orden").toString();
+				cat.emu_show = query.record().value("emu_show").toString();
+				categoria.insert(cat.id.toInt(), cat);
+
+				QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
+				if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ cat.img) )
+					ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+				else
+					ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+			} while ( query.next() );
+		} else {
+			cat.tabla    = "dbgrl";
+			cat.titulo   = "Db GR-lida";
+			cat.img      = "pc.png";
+			cat.orden    = "0";
+			cat.emu_show = "all";
+			cat.id       = sql->insertaCategoria(cat.tabla, cat.titulo, cat.img, cat.orden.toInt(), cat.emu_show);
+			categoria.insert(cat.id.toInt(), cat);
+
+			QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
+			if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ cat.img) )
+				ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+			else
+				ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+		}
+	} else {
+		cat.tabla    = "dbgrl";
+		cat.titulo   = "Db GR-lida";
+		cat.img      = "pc.png";
+		cat.orden    = "0";
+		cat.emu_show = "all";
+		cat.id       = sql->insertaCategoria(cat.tabla, cat.titulo, cat.img, cat.orden.toInt(), cat.emu_show);
+		categoria.insert(cat.id.toInt(), cat);
+
+		QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
+		if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ cat.img) )
+			ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+		else
+			ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+	}
+	query.clear();
+//setUpdatesEnabled( true );
+
+	int id_index = ui->cbxCategorias->findData(id_cat);
+	if( id_index < 0 )
+		id_index = 0;
+
+	ui->cbxCategorias->setCurrentIndex(id_index);
+	emit on_cbxCategorias_activated(id_index);
+}
+
+void frmExportarJuego::cargarListaJuegos(QString sql_where)
+{
+	QSqlQuery query(sql->getSqlDB());
+	query.exec("SELECT idgrl, icono, titulo FROM "+ categoria[id_cat].tabla +" "+ sql_where +" ORDER BY titulo ASC");
+	ui->twListaJuegos->clear();
+	if( query.first() )
+	{
+		do {
+			QTreeWidgetItem *item = new QTreeWidgetItem( ui->twListaJuegos );
+			item->setIcon( 0, QIcon(grlDir.Iconos + query.record().value("icono").toString()) );
+			item->setCheckState(0, Qt::Unchecked);
+			item->setText( 0, query.record().value("titulo").toString()   );
+			item->setText( 1, query.record().value("idgrl").toString()    );
+		} while (query.next());
+		ui->twListaJuegos->setCurrentItem( ui->twListaJuegos->itemAt(0,0) );
+	}
+
+	if( ui->twListaJuegos->topLevelItemCount() > 0 )
+		ui->btnOk->setEnabled( true );
+	else
+		ui->btnOk->setEnabled( false );
+}
+
+void frmExportarJuego::cargarDatosExportar(QString IdGame)
+{
+	if( !IdGame.isEmpty() )
+	{
+		DatosJuego = sql->show_Datos(categoria[id_cat].tabla, IdGame);
+
+		if( DatosJuego.tipo_emu == "scummvm" )
+			DatosScummVM = sql->showConfg_ScummVM(IdGame, fGrl->IntToStr(id_cat));
+		else if( DatosJuego.tipo_emu == "vdmsound" )
+			DatosVDMSound = sql->showConfg_VDMSound(IdGame, fGrl->IntToStr(id_cat));
+		else if( DatosJuego.tipo_emu == "dosbox" )
+		{
+			DatosDosBox = sql->showConfg_DOSBox(IdGame, fGrl->IntToStr(id_cat));
+			twMontajes->clear();
+
+			QSqlQuery query(sql->getSqlDB());
+			query.exec("SELECT id, id_lista, path, label, tipo_as, letter, indx_cd, opt_mount, io_ctrl, select_mount, opt_size, opt_freesize, freesize FROM dbgrl_emu_dosbox_mount WHERE id_dosbox="+ DatosDosBox.id +" ORDER BY id_lista");
+			if( query.first() )
 			{
-				QTreeWidgetItem *item = ui.twListaJuegos->topLevelItem( num );
-				if( item->checkState(0) == Qt::Checked )
-				{
-					CargarDatosExportar( item->text(1) );
-
-					QFileInfo fi( item->text(0) );
-					archivo = fi.completeBaseName();
-					archivo = fGrl.eliminar_caracteres( archivo );
-
-					int index_select = ui.cbxExpotarComo->currentIndex();
-					switch ( index_select )
-					{
-						case 0: // D-Fend Reloaded
-							if( TempDatosJuego["Dat_tipo_emu"] == "dosbox" )
-							{
-								str_ok = archivo.endsWith(".prof");
-								if(str_ok == false)
-									archivo.append(".prof");
-
-								fGrl.Exportar_Profile_DFend( TempDatosJuego, TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo);
-							}
-						break;
-						case 1: // GR-lida
-						case 2:
-							str_ok = archivo.endsWith(".xml");
-							if(str_ok == false)
-								archivo.append(".xml");
-
-							if( TempDatosJuego["Dat_tipo_emu"] == "scummvm" )
-								fGrl.Exportar_Profile_GRLida( TempDatosJuego, TempDatosScummvm, twMontajes, ui.txtDirExportPath->text() + "/" + archivo, index_select);
-							else
-								fGrl.Exportar_Profile_GRLida( TempDatosJuego, TempDatosDosBox, twMontajes, ui.txtDirExportPath->text() + "/" + archivo, index_select);
-						break;
-					}
-				}
+				do {
+					QTreeWidgetItem *item = new QTreeWidgetItem( twMontajes );
+					item->setText( 0, query.record().value("path").toString()         );	// Directorio o iso
+					item->setText( 1, query.record().value("letter").toString()       );	// Letra de montaje
+					item->setText( 2, query.record().value("tipo_as").toString()      );	// Tipo de montaje
+					item->setText( 3, query.record().value("label").toString()        );	// Etiqueta
+					item->setText( 4, query.record().value("indx_cd").toString()      );	// Index de la unidad de cd-rom
+					item->setText( 5, query.record().value("opt_mount").toString()    );	// Opciones del cd-rom
+					item->setText( 6, query.record().value("io_ctrl").toString()      );	// Cd/dvd
+					item->setText( 7, query.record().value("select_mount").toString() );	// Primer montaje
+					item->setText( 8, query.record().value("id").toString()           );	// Id
+					item->setText( 9, query.record().value("id_lista").toString()     );	// Id_lista
+					item->setText(10, query.record().value("opt_size").toString()     );
+					item->setText(11, query.record().value("opt_freesize").toString() );
+					item->setText(12, query.record().value("freesize").toString()     );
+				} while (query.next());
 			}
-			ui.gBox_OptExportar->setEnabled( true );
 		}
 	}
 }
 
-void frmExportarJuego::on_btnCheckedAll()
+void frmExportarJuego::on_cbxCategorias_activated(int index)
 {
-	int pos = ui.twListaJuegos->indexOfTopLevelItem( ui.twListaJuegos->currentItem() );
-	if( ui.twListaJuegos->topLevelItemCount()>0 && pos!=-1 )
+	if( index > -1 )
+		id_cat = ui->cbxCategorias->itemData(index, Qt::UserRole).toInt();
+	else
+		id_cat = 0;
+
+	ui->cbxTipoEmu->clear();
+	ui->cbxTipoEmu->addItem(QIcon(fGrl->Theme() +"img16/tag.png"), tr("Todos los emuladores"), "");
+
+	QStringList lista = categoria[id_cat].emu_show.split(";", QString::SkipEmptyParts);
+	if( lista.isEmpty() || lista.contains("all") || lista.contains("datos") )
+		ui->cbxTipoEmu->addItem(QIcon(fGrl->Theme() +"img16/datos.png")   , tr("Datos")   , "WHERE tipo_emu='datos'"   );
+	if( lista.isEmpty() || lista.contains("all") || lista.contains("dosbox") )
+		ui->cbxTipoEmu->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png")  , tr("DOSBox")  , "WHERE tipo_emu='dosbox'"  );
+	if( lista.isEmpty() || lista.contains("all") || lista.contains("scummvm") )
+		ui->cbxTipoEmu->addItem(QIcon(fGrl->Theme() +"img16/scummvm.png") , tr("ScummVM") , "WHERE tipo_emu='scummvm'" );
+	if( lista.isEmpty() || lista.contains("all") || lista.contains("vdmsound") )
+		ui->cbxTipoEmu->addItem(QIcon(fGrl->Theme() +"img16/vdmsound.png"), tr("VDMSound"), "WHERE tipo_emu='vdmsound'");
+
+	foreach (const stGrlDatos &dat, emu_list)
 	{
-		for(int num = 0; num < ui.twListaJuegos->topLevelItemCount(); num++ )
+		if( lista.isEmpty() || lista.contains("all") || lista.contains(dat.key) )
 		{
-			QTreeWidgetItem *item = ui.twListaJuegos->topLevelItem( num );
+			if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ dat.icono) )
+				ui->cbxTipoEmu->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ dat.icono), dat.titulo, "WHERE tipo_emu='"+ dat.key +"'");
+			else
+				ui->cbxTipoEmu->addItem(QIcon(":/img16_cat/sinimg.png"), dat.titulo, "WHERE tipo_emu='"+ dat.key +"'");
+		}
+	}
+
+	ui->cbxTipoEmu->setCurrentIndex(0);
+	emit on_cbxTipoEmu_activated(0);
+}
+
+void frmExportarJuego::on_cbxTipoEmu_activated(int index)
+{
+	if( index > -1 )
+		cargarListaJuegos(ui->cbxTipoEmu->itemData(index, Qt::UserRole).toString());
+	else
+		cargarListaJuegos();
+}
+
+void frmExportarJuego::on_btnCheckedAll_clicked()
+{
+	int pos = ui->twListaJuegos->indexOfTopLevelItem( ui->twListaJuegos->currentItem() );
+	const int listSize = ui->twListaJuegos->topLevelItemCount();
+	if( listSize > 0 && pos != -1 )
+	{
+		for(int i = 0; i < listSize; ++i)
+		{
+			QTreeWidgetItem *item = ui->twListaJuegos->topLevelItem(i);
 			item->setCheckState(0, Qt::Checked);
 		}
 	}
 }
 
-void frmExportarJuego::on_btnUnCheckedAll()
+void frmExportarJuego::on_btnUnCheckedAll_clicked()
 {
-	int pos = ui.twListaJuegos->indexOfTopLevelItem( ui.twListaJuegos->currentItem() );
-	if( ui.twListaJuegos->topLevelItemCount()>0 && pos!=-1 )
+	int pos = ui->twListaJuegos->indexOfTopLevelItem( ui->twListaJuegos->currentItem() );
+	const int listSize = ui->twListaJuegos->topLevelItemCount();
+	if( listSize > 0 && pos != -1 )
 	{
-		for(int num = 0; num < ui.twListaJuegos->topLevelItemCount(); num++ )
+		for(int i = 0; i < listSize; ++i)
 		{
-			QTreeWidgetItem *item = ui.twListaJuegos->topLevelItem( num );
+			QTreeWidgetItem *item = ui->twListaJuegos->topLevelItem(i);
 			item->setCheckState(0, Qt::Unchecked);
 		}
 	}
 }
 
-void frmExportarJuego::on_btnDirExportPath()
+void frmExportarJuego::on_cbxExpotarComo_activated(int index)
 {
-	ui.txtDirExportPath->setText( fGrl.VentanaDirectorios( tr("Seleccionar un directorio."), GRLConfig["DirExportPath"].toString(), ui.txtDirExportPath->text() ));
-
-	QDir dir( ui.txtDirExportPath->text() );
-	if( dir.exists() )
-		GRLConfig["DirExportPath"] = ui.txtDirExportPath->text();
+	if( index > -1 )
+		tipo_export = ui->cbxExpotarComo->itemData(index).toString();
 	else
-		GRLConfig["DirExportPath"] = "";
-
-	fGrl.GuardarKeyGRLConfig(stHomeDir+"GR-lida.conf","UltimoDirectorio","DirExportPath", GRLConfig["DirExportPath"].toString() );
+		tipo_export = "grl";
 }
 
-void frmExportarJuego::CargarListaJuegos(QString TipoEmu, QString stdb_Orden_By, QString stdb_Orden)
+void frmExportarJuego::on_btnDirExportPath_clicked()
 {
-	QString stIcono, stSqlWhere;
-	QSqlQuery query;
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.DirExportPath, ui->txtDirExportPath->text() );
 
-	if( !TipoEmu.isEmpty() )
-		stSqlWhere = " WHERE tipo_emu LIKE '%"+TipoEmu+"%'";
-	else
-		stSqlWhere= " WHERE tipo_emu!='datos'";
-
-	query.exec("SELECT * FROM dbgrl "+stSqlWhere+" ORDER BY "+ stdb_Orden_By +" "+stdb_Orden);
-
-	if( query.first() )
+	if( !directorio.isEmpty() )
 	{
-		do {
-			QTreeWidgetItem *item = new QTreeWidgetItem( ui.twListaJuegos );
-
-			item->setText( 0 , query.record().value("titulo").toString() );
-			item->setCheckState(0, Qt::Unchecked);
-			item->setText( 1 , query.record().value("idgrl").toString()    );	// titulo
-			item->setText( 2 , query.record().value("tipo_emu").toString() );	// tipo_emu
-
-			stIcono = fGrl.getIconListaJuegos(query.record().value("icono").toString(), stIconDir);
-			item->setIcon( 0, QIcon(stIcono) );
-
-		} while (query.next());
-		ui.twListaJuegos->setCurrentItem( ui.twListaJuegos->itemAt(0,0) );
-	}
-
-	if( ui.twListaJuegos->topLevelItemCount() > 0 )
-		ui.btnOk->setEnabled( true );
-	else
-		ui.btnOk->setEnabled( false );
-}
-
-void frmExportarJuego::CargarDatosExportar( QString stIDx )
-{
-	TempDatosJuego.clear();
-	TempDatosScummvm.clear();
-	TempDatosDosBox.clear();
-	if( !stIDx.isEmpty() )
-	{
-		TempDatosJuego  = sql->show_Datos( stIDx );
-
-		if( TempDatosJuego["Dat_tipo_emu"] == "scummvm" )
-			TempDatosScummvm = sql->showConfg_ScummVM( stIDx );
-		else if(TempDatosJuego["Dat_tipo_emu"]=="dosbox")
+		QDir dir( directorio );
+		if( dir.exists() )
 		{
-			TempDatosDosBox = sql->showConfg_DOSBox( stIDx );
+			ui->txtDirExportPath->setText( directorio );
+			grlCfg.DirExportPath = ui->txtDirExportPath->text();
 
-			twMontajes->clear();
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirExportPath", grlCfg.DirExportPath);
+		}
+	}
+}
 
-			QSqlQuery query;
-			query.exec("SELECT * FROM dbgrl_emu_dosbox_mount WHERE id_dosbox="+stIDx+" ORDER BY id_lista");
-			if( query.first() )
+void frmExportarJuego::on_btnDirExportPath_clear_clicked()
+{
+	ui->txtDirExportPath->clear();
+}
+
+void frmExportarJuego::on_btnOk_clicked()
+{
+	QDir dir_export( ui->txtDirExportPath->text() );
+
+	if( !ui->txtDirExportPath->text().isEmpty() && dir_export.exists() )
+	{
+		int pos = ui->twListaJuegos->indexOfTopLevelItem( ui->twListaJuegos->currentItem() );
+		const int listSize = ui->twListaJuegos->topLevelItemCount();
+		if( listSize > 0 && pos != -1 )
+		{
+			QStringList lista_id;
+			bool multiple = false;
+			int isChecked = 0;
+
+			ui->gBox_OptExportar->setEnabled(false);
+			lista_id.clear();
+			for(int i = 0; i < listSize; ++i)
 			{
-				do {
-					QTreeWidgetItem *item_mount = new QTreeWidgetItem( twMontajes );
-
-					item_mount->setText( 0 , query.record().value("path").toString() );			// path			- directorio o iso
-					item_mount->setText( 1 , query.record().value("label").toString() );		// label		- etiqueta
-					item_mount->setText( 2 , query.record().value("tipo_as").toString() );		// tipo_as		- tipo de montaje
-					item_mount->setText( 3 , query.record().value("letter").toString() );		// letter		- letra de montaje
-					item_mount->setText( 4 , query.record().value("indx_cd").toString() );		// indx_cd		- index de la unidad de cd-rom
-					item_mount->setText( 5 , query.record().value("opt_mount").toString() );	// opt_mount	- opciones del cd-rom
-					item_mount->setText( 6 , query.record().value("io_ctrl").toString() );		// io_ctrl		- cd/dvd
-					item_mount->setText( 7 , query.record().value("select_mount").toString());	// select_mount	- primer montaje
-					item_mount->setText( 8 , query.record().value("id").toString() );			// id
-					item_mount->setText( 9 , query.record().value("id_lista").toString() );		// id_lista		- id_lista
-
-				} while (query.next());
+				if( ui->twListaJuegos->topLevelItem(i)->checkState(0) == Qt::Checked )
+				{
+					lista_id << ui->twListaJuegos->topLevelItem(i)->text(1);
+					++isChecked;
+				}
+				if( isChecked > 1 )
+					multiple = true;
 			}
+
+			QString dir_destino, archivo;
+
+			dir_destino = dir_export.absolutePath();
+			if( !dir_destino.endsWith("/") )
+				dir_destino.append("/");
+
+			if( multiple )
+			{
+				dir_destino.append("GR-lida_Conf_Export/");
+				fGrl->comprobarDirectorio(dir_destino);
+			}
+
+			for(int i = 0; i < lista_id.size(); ++i)
+			{
+				cargarDatosExportar( lista_id.at(i) );
+				archivo = "id-"+ DatosJuego.idgrl +"_"+ fGrl->eliminar_caracteres(DatosJuego.titulo) +"_"+ DatosJuego.tipo_emu;
+				QList<QString> url_list = sql->getDatosUrls(DatosJuego.idgrl, categoria[id_cat].id);
+
+				if( tipo_export == "dfend" )
+				{
+					if( DatosJuego.tipo_emu == "dosbox" )
+					{
+						if( !archivo.endsWith(".prof") )
+							archivo.append(".prof");
+
+						fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, twMontajes, grlDir.Home, categoria[id_cat].tabla, dir_destino + archivo, ExportDfend);
+					}
+				}
+
+				if( tipo_export == "grl" )
+				{
+					if( !archivo.endsWith(".xml") )
+						archivo.append(".xml");
+
+					fGrl->exportarProfileGRlida(DatosJuego, url_list, DatosDosBox, twMontajes, DatosScummVM, DatosVDMSound, grlDir.Home, categoria[id_cat].tabla, dir_destino + archivo, ExportGrlida);
+				}
+			}
+			ui->gBox_OptExportar->setEnabled(true);
 		}
 	}
+}
+
+void frmExportarJuego::on_btnCancelar_clicked()
+{
+	QDialog::reject();
 }
