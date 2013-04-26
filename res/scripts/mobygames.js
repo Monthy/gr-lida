@@ -309,16 +309,22 @@ function AnalyzeCategoriasMobyGames(texto, stRegExp, stRegExpDos, indxExp)
 
 	myRE_temp = new RegExp( stRegExp );
 	temp_results = texto.match( myRE_temp );
-	strTemp = temp_results[1];
+	if( temp_results != null )
+		strTemp = temp_results[1];
+	else
+		strTemp = "";
 
 	myRE = new RegExp( stRegExpDos,"g");
-	results = strTemp.match( myRE );
-	for(var i = 0; i < results.length; i++)
+	final_results = strTemp.match( myRE );
+	if( final_results != null )
 	{
-		rx = new RegExp( stRegExpDos );
-		cat_results =  results[i].match(rx);
-		list_array[i] = cat_results[indxExp].replace("&nbsp;"," ");
-	}
+		for(var i = 0; i < final_results.length; i++)
+		{
+			rx = new RegExp( stRegExpDos );
+			cat_results =  final_results[i].match(rx);
+			list_array[i] = cat_results[indxExp].replace("&nbsp;"," ");
+		}
+	}	
 
 	return list_array.join("; ");
 }
@@ -327,7 +333,7 @@ function AnalyzeOtherGame(titulo, contenido)
 {
 	my_rx = new RegExp("<span style=\"([^\"]*)\"><a href=\"([^\"]*)\">([^\"]*)</a> ([^\"]*)</span>","g");
 	results_contenido = contenido.match(my_rx);
-	if(results_contenido != null)
+	if( results_contenido != null )
 	{
 		for(var n = 0; n < results_contenido.length; n++)
 		{

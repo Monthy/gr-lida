@@ -41,7 +41,7 @@ function AnalyzeFindPage(texto)
 		results_tipo_emu   = AnalyzeTagName(resultsFind[i], "<tipo_emu>([^\"<>]*)</tipo_emu>", "datos");
 		results_alt_id     = AnalyzeTagName(resultsFind[i], "<alt_id>([0-9]+)</alt_id>");
 
-		twListaBusqueda.addItemFind(results_titulo, results_plataforma, results_publicado, url_site+"/grlidadb.php?ver=juego&gid="+results_id+"&id_emu="+results_id_emu+"&tipo_emu="+results_tipo_emu+"&alt_id="+results_alt_id, results_tipo_emu);		
+		twListaBusqueda.addItemFind(results_titulo, results_plataforma, results_publicado, url_site +"/grlidadb.php?ver=juego&gid="+ results_id +"&id_emu="+ results_id_emu +"&tipo_emu="+ results_tipo_emu +"&alt_id="+ results_alt_id, results_tipo_emu);		
 	}
 }
 
@@ -335,10 +335,10 @@ function AnalyzeTagName(texto, stRegExp, defecto)
 	{
 		myRE = new RegExp( stRegExp );
 		results = texto.match(myRE);
-		if( results != -1 )
+		if( results != null )
 			return results[1];
 		else
-			return defecto;
+			return ""+ defecto;
 	} else
-		return defecto;
+		return ""+ defecto;
 }
