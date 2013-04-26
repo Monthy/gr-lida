@@ -1,95 +1,368 @@
-<ui version="4.0" >
- <class>InfoClass</class>
- <widget class="QDialog" name="InfoClass" >
-  <property name="geometry" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmInfo</class>
+ <widget class="QDialog" name="frmInfo">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>354</width>
-    <height>303</height>
+    <width>400</width>
+    <height>470</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Información</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >
+  <property name="windowIcon">
+   <iconset resource="../res/gr-lida.qrc">
     <normaloff>:/img16/informacion.png</normaloff>:/img16/informacion.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="layout" >
-   <property name="spacing" >
-    <number>6</number>
-   </property>
-   <property name="margin" >
+  <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,0,0">
+   <property name="margin">
     <number>4</number>
    </property>
-   <item>
-    <widget class="QTreeWidget" name="twInfo" >
-     <property name="focusPolicy" >
+   <item row="1" column="0">
+    <widget class="QLabel" name="lb_info_grlida_ico">
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>30</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../res/gr-lida.qrc">:/img16/gr-lida.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLabel" name="lb_info_grlida"/>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLabel" name="lb_info_grlida_version">
+     <property name="minimumSize">
+      <size>
+       <width>46</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>180</width>
+       <height>16</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="lb_info_qt_ico">
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>30</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../res/gr-lida.qrc">:/img16/qt.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="lb_info_qt"/>
+   </item>
+   <item row="2" column="2">
+    <widget class="QLabel" name="lb_info_qt_version">
+     <property name="minimumSize">
+      <size>
+       <width>46</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="lb_info_dosbox_ico">
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>30</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../res/gr-lida.qrc">:/img16/dosbox.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLabel" name="lb_info_dosbox"/>
+   </item>
+   <item row="3" column="2">
+    <widget class="QLabel" name="lb_info_dosbox_version">
+     <property name="minimumSize">
+      <size>
+       <width>46</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="lb_info_scummvm_ico">
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>30</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../res/gr-lida.qrc">:/img16/scummvm.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLabel" name="lb_info_scummvm"/>
+   </item>
+   <item row="4" column="2">
+    <widget class="QLabel" name="lb_info_scummvm_version">
+     <property name="minimumSize">
+      <size>
+       <width>46</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="lb_info_vdmsound_ico">
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>30</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../res/gr-lida.qrc">:/img16/vdmsound.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QLabel" name="lb_info_vdmsound"/>
+   </item>
+   <item row="5" column="2">
+    <widget class="QLabel" name="lb_info_vdmsound_version">
+     <property name="minimumSize">
+      <size>
+       <width>46</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="lb_info_ico">
+       <property name="minimumSize">
+        <size>
+         <width>18</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>18</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../res/gr-lida.qrc">:/img16/informacion.png</pixmap>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lb_info">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Información</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="0" colspan="4">
+    <widget class="QComboBox" name="cbxCategorias">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QComboBox::AdjustToContents</enum>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0" colspan="4">
+    <widget class="QTreeWidget" name="twInfo">
+     <property name="focusPolicy">
       <enum>Qt::ClickFocus</enum>
      </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Sunken</enum>
-     </property>
-     <property name="verticalScrollBarPolicy" >
-      <enum>Qt::ScrollBarAsNeeded</enum>
-     </property>
-     <property name="horizontalScrollBarPolicy" >
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="showDropIndicator" stdset="0" >
-      <bool>false</bool>
-     </property>
-     <property name="alternatingRowColors" >
-      <bool>false</bool>
-     </property>
-     <property name="iconSize" >
+     <property name="iconSize">
       <size>
        <width>16</width>
        <height>16</height>
       </size>
      </property>
-     <property name="textElideMode" >
-      <enum>Qt::ElideNone</enum>
-     </property>
-     <property name="rootIsDecorated" >
-      <bool>false</bool>
-     </property>
-     <property name="uniformRowHeights" >
+     <property name="uniformRowHeights">
       <bool>true</bool>
      </property>
-     <property name="itemsExpandable" >
-      <bool>false</bool>
-     </property>
-     <property name="allColumnsShowFocus" >
+     <property name="allColumnsShowFocus">
       <bool>true</bool>
      </property>
      <column>
-      <property name="text" >
-       <string/>
+      <property name="text">
+       <string>Categorías</string>
       </property>
      </column>
      <column>
-      <property name="text" >
-       <string/>
+      <property name="text">
+       <string>Total</string>
       </property>
      </column>
     </widget>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="hLayout_1" >
-     <property name="spacing" >
-      <number>6</number>
+   <item row="8" column="0" colspan="4">
+    <layout class="QHBoxLayout" name="hLayout_1">
+     <property name="spacing">
+      <number>0</number>
      </property>
-     <property name="margin" >
-      <number>4</number>
+     <property name="margin">
+      <number>0</number>
      </property>
      <item>
-      <spacer name="hSpacer_1" >
-       <property name="orientation" >
+      <spacer name="hSpacer_1">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -98,18 +371,18 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="btnOk" >
-       <property name="minimumSize" >
+      <widget class="QPushButton" name="btnOk">
+       <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>97</width>
          <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Aceptar</string>
        </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
          <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
@@ -118,30 +391,13 @@
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11" />
+ <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>twInfo</tabstop>
+  <tabstop>cbxCategorias</tabstop>
   <tabstop>btnOk</tabstop>
  </tabstops>
  <resources>
-  <include location="../res/grlida.qrc" />
+  <include location="../res/gr-lida.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>btnOk</sender>
-   <signal>clicked()</signal>
-   <receiver>InfoClass</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>292</x>
-     <y>225</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>170</x>
-     <y>124</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

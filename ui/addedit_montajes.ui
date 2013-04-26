@@ -1,566 +1,272 @@
-<ui version="4.0" >
- <class>AddEditMontajesClass</class>
- <widget class="QDialog" name="AddEditMontajesClass" >
-  <property name="geometry" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmAddEditMontajes</class>
+ <widget class="QDialog" name="frmAddEditMontajes">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>490</width>
-    <height>365</height>
+    <width>464</width>
+    <height>520</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="minimumSize">
+   <size>
+    <width>464</width>
+    <height>520</height>
+   </size>
+  </property>
+  <property name="windowTitle">
    <string>Montaje de unidades</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >
+  <property name="windowIcon">
+   <iconset>
     <normaloff>:/img16/grlida.png</normaloff>:/img16/grlida.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2" >
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0,0,0,1,0">
    <item>
-    <layout class="QHBoxLayout" name="hLayout_2" >
-     <item>
-      <widget class="QLabel" name="lb_Montaje_3" >
-       <property name="minimumSize" >
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Tipo de Montaje:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="cbxMontaje_type_drive" >
-       <property name="minimumSize" >
-        <size>
-         <width>200</width>
-         <height>24</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="hSpacer_3" >
-       <property name="orientation" >
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0" >
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="lb_Montaje_1" >
-     <property name="text" >
-      <string>Seccionar la Unidad, Carpeta o CDROM que desea Montar</string>
+    <widget class="QLabel" name="lb_Montaje_1">
+     <property name="text">
+      <string>Seccionar la unidad, carpeta o CD-Rom que desea montar</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout_2" >
-     <item rowspan="4" row="0" column="0" >
-      <layout class="QVBoxLayout" name="verticalLayout" >
-       <property name="spacing" >
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QListWidget" name="lw_MultiIso" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>70</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txtMontaje_path" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_2" >
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-     <item row="0" column="1" >
-      <widget class="QPushButton" name="btnDirFile" >
-       <property name="minimumSize" >
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="lb_Montaje_2">
+       <property name="minimumSize">
         <size>
-         <width>30</width>
-         <height>26</height>
+         <width>100</width>
+         <height>0</height>
         </size>
        </property>
-       <property name="maximumSize" >
-        <size>
-         <width>30</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string/>
-       </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
-         <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
+       <property name="text">
+        <string>Tipo de montaje:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="2" >
-      <widget class="QPushButton" name="btnClearDirFile" >
-       <property name="minimumSize" >
+     <item>
+      <widget class="QComboBox" name="cbxMontaje_type_drive">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
         <size>
-         <width>30</width>
-         <height>26</height>
+         <width>100</width>
+         <height>24</height>
         </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>30</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string/>
-       </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
-         <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
        </property>
       </widget>
-     </item>
-     <item row="1" column="1" >
-      <widget class="QPushButton" name="btnSubirIso" >
-       <property name="enabled" >
-        <bool>false</bool>
-       </property>
-       <property name="minimumSize" >
-        <size>
-         <width>30</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>30</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string/>
-       </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
-         <normaloff>:/img16/go-up.png</normaloff>:/img16/go-up.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2" >
-      <widget class="QPushButton" name="btnDeleteIso" >
-       <property name="enabled" >
-        <bool>false</bool>
-       </property>
-       <property name="minimumSize" >
-        <size>
-         <width>30</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>30</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string/>
-       </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
-         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" >
-      <widget class="QPushButton" name="btnBajarIso" >
-       <property name="enabled" >
-        <bool>false</bool>
-       </property>
-       <property name="minimumSize" >
-        <size>
-         <width>30</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>30</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string/>
-       </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
-         <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1" colspan="2" >
-      <spacer name="verticalSpacer" >
-       <property name="orientation" >
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0" >
-        <size>
-         <width>55</width>
-         <height>18</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout" >
-     <property name="spacing" >
-      <number>6</number>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
      </property>
-     <item row="0" column="0" colspan="2" >
-      <widget class="QLabel" name="lb_Montaje_2" >
-       <property name="text" >
-        <string>Etiqueta para la Unidad es opcional:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2" colspan="3" >
-      <widget class="QLineEdit" name="txtMontaje_label" >
-       <property name="minimumSize" >
-        <size>
-         <width>0</width>
-         <height>24</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" >
-      <widget class="QLabel" name="lb_Montaje_4" >
-       <property name="minimumSize" >
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Letra a Montar:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" >
-      <widget class="QComboBox" name="cbxMontaje_letter" >
-       <property name="minimumSize" >
-        <size>
-         <width>100</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="currentIndex" >
-        <number>2</number>
-       </property>
-       <item>
-        <property name="text" >
-         <string>A</string>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="btnDirFile">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>B</string>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>C</string>
+        <property name="text">
+         <string/>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>D</string>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>E</string>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLineEdit" name="txtMontaje_path">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>F</string>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="btnDeleteIso">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>G</string>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>H</string>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>I</string>
+        <property name="text">
+         <string/>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>J</string>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>K</string>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="btnSubirIso">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>L</string>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>M</string>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>N</string>
+        <property name="text">
+         <string/>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>O</string>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/go-up.png</normaloff>:/img16/go-up.png</iconset>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>P</string>
+       </widget>
+      </item>
+      <item row="1" column="0" rowspan="3">
+       <widget class="QListWidget" name="lw_MultiIso">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>70</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>Q</string>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="btnDirFile_clear">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>R</string>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>S</string>
+        <property name="text">
+         <string/>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>T</string>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>U</string>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="btnBajarIso">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>V</string>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>W</string>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>X</string>
+        <property name="text">
+         <string/>
         </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>Y</string>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
         </property>
-       </item>
-      </widget>
-     </item>
-     <item row="1" column="2" colspan="3" >
-      <spacer name="hSpacer_5" >
-       <property name="orientation" >
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0" >
-        <size>
-         <width>298</width>
-         <height>21</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="2" column="0" >
-      <widget class="QLabel" name="lb_Montaje_5" >
-       <property name="minimumSize" >
+       </widget>
+      </item>
+     </layout>
+     <zorder>btnDeleteIso</zorder>
+     <zorder>btnSubirIso</zorder>
+     <zorder>btnDirFile_clear</zorder>
+     <zorder>btnDirFile</zorder>
+     <zorder>btnBajarIso</zorder>
+     <zorder>lw_MultiIso</zorder>
+     <zorder>txtMontaje_path</zorder>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="lb_Montaje_3">
+       <property name="minimumSize">
         <size>
          <width>100</width>
          <height>0</height>
         </size>
        </property>
-       <property name="text" >
-        <string>Index CD-Rom:</string>
+       <property name="text">
+        <string>Letra a montar:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1" >
-      <widget class="QComboBox" name="cbxMontaje_cdrom" >
-       <property name="minimumSize" >
+     <item>
+      <widget class="QComboBox" name="cbxMontaje_letter">
+       <property name="minimumSize">
         <size>
          <width>100</width>
          <height>24</height>
         </size>
        </property>
-       <property name="editable" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2" >
-      <widget class="QLabel" name="lb_Montaje_7" >
-       <property name="minimumSize" >
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Modo CD-Rom:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3" >
-      <widget class="QComboBox" name="cbxMontaje_mode_cdrom" >
-       <property name="minimumSize" >
-        <size>
-         <width>100</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="currentIndex" >
+       <property name="currentIndex">
         <number>-1</number>
        </property>
       </widget>
      </item>
-     <item row="2" column="4" >
-      <spacer name="hSpacer_4" >
-       <property name="orientation" >
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0" >
-        <size>
-         <width>82</width>
-         <height>21</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="3" column="0" colspan="2" >
-      <widget class="QLabel" name="lb_Montaje_6" >
-       <property name="minimumSize" >
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>Otras Opciones de Montajes:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2" colspan="3" >
-      <widget class="QLineEdit" name="txtMontaje_opt_mount" >
-       <property name="minimumSize" >
-        <size>
-         <width>0</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string/>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="lb_Montaje_info" >
-     <property name="wordWrap" >
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <spacer name="vSpacer_6" >
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0" >
-      <size>
-       <width>401</width>
-       <height>61</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="hLayout_1" >
-     <property name="spacing" >
-      <number>6</number>
-     </property>
-     <property name="margin" >
-      <number>0</number>
-     </property>
      <item>
-      <spacer name="hSpacer_1" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -569,45 +275,267 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="btnOk" >
-       <property name="minimumSize" >
+      <widget class="QLabel" name="lb_Montaje_4">
+       <property name="text">
+        <string>Index CD-Rom:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbxMontaje_cdrom">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="lb_Montaje_5">
+       <property name="text">
+        <string>Etiqueta para la unidad es opcional:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtMontaje_label">
+       <property name="minimumSize">
         <size>
          <width>0</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="lb_Montaje_6">
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Modo CD-Rom:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="cbxMontaje_mode_cdrom">
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="lb_Montaje_7">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Otras opciones de montajes:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbxMontaje_opt_mount">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="chkMontaje_opt_freesize">
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="margin">
+       <number>4</number>
+      </property>
+      <item row="1" column="0" colspan="2">
+       <widget class="QLabel" name="lb_Montaje_8">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Opción avanzada: [sectorsbytesize, sectorsperhead, heads, cylinders]</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLineEdit" name="txtMontaje_opt_size_mount">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="btnMontaje_opt_size_mount_clear">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QSlider" name="h_SliderMontaje_freesize">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="minimum">
+         <number>10</number>
+        </property>
+        <property name="maximum">
+         <number>4000</number>
+        </property>
+        <property name="value">
+         <number>250</number>
+        </property>
+        <property name="tracking">
+         <bool>true</bool>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TicksBelow</enum>
+        </property>
+        <property name="tickInterval">
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lb_Montaje_info">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk">
+       <property name="minimumSize">
+        <size>
+         <width>97</width>
          <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Aceptar</string>
        </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
          <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnCancel" >
-       <property name="minimumSize" >
+      <widget class="QPushButton" name="btnCancel">
+       <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>97</width>
          <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Cancelar</string>
        </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
          <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="hSpacer_2" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -621,68 +549,27 @@
  </widget>
  <tabstops>
   <tabstop>cbxMontaje_type_drive</tabstop>
-  <tabstop>txtMontaje_path</tabstop>
   <tabstop>btnDirFile</tabstop>
-  <tabstop>btnClearDirFile</tabstop>
-  <tabstop>txtMontaje_label</tabstop>
+  <tabstop>txtMontaje_path</tabstop>
+  <tabstop>lw_MultiIso</tabstop>
+  <tabstop>btnDirFile_clear</tabstop>
+  <tabstop>btnSubirIso</tabstop>
+  <tabstop>btnBajarIso</tabstop>
+  <tabstop>btnDeleteIso</tabstop>
   <tabstop>cbxMontaje_letter</tabstop>
   <tabstop>cbxMontaje_cdrom</tabstop>
+  <tabstop>txtMontaje_label</tabstop>
   <tabstop>cbxMontaje_mode_cdrom</tabstop>
-  <tabstop>txtMontaje_opt_mount</tabstop>
+  <tabstop>cbxMontaje_opt_mount</tabstop>
+  <tabstop>chkMontaje_opt_freesize</tabstop>
+  <tabstop>h_SliderMontaje_freesize</tabstop>
+  <tabstop>txtMontaje_opt_size_mount</tabstop>
+  <tabstop>btnMontaje_opt_size_mount_clear</tabstop>
   <tabstop>btnOk</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
-  <include location="../res/grlida.qrc" />
+  <include location="../res/gr-lida.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>btnCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>AddEditMontajesClass</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>324</x>
-     <y>354</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>179</x>
-     <y>282</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnClearDirFile</sender>
-   <signal>clicked()</signal>
-   <receiver>txtMontaje_path</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>479</x>
-     <y>87</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>385</x>
-     <y>157</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnClearDirFile</sender>
-   <signal>clicked()</signal>
-   <receiver>lw_MultiIso</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>467</x>
-     <y>82</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>406</x>
-     <y>91</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

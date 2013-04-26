@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ImageViewerClass</class>
- <widget class="QMainWindow" name="ImageViewerClass">
+ <class>frmImgViewer</class>
+ <widget class="QMainWindow" name="frmImgViewer">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>767</width>
-    <height>502</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="baseSize">
@@ -25,13 +25,67 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QSplitter" name="splitter">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+     <widget class="QFrame" name="frameRotar">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>26</height>
+       </size>
       </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Rotar:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="hsRotar">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::ClickFocus</enum>
+         </property>
+         <property name="minimum">
+          <number>-180</number>
+         </property>
+         <property name="maximum">
+          <number>180</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lb_radio">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0º</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSplitter" name="splitter">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -73,42 +127,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>767</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="fileMenu">
-    <property name="title">
-     <string>&amp;Archivo</string>
-    </property>
-    <addaction name="openAct"/>
-    <addaction name="printAct"/>
-    <addaction name="separator"/>
-    <addaction name="exitAct"/>
-   </widget>
-   <widget class="QMenu" name="viewMenu">
-    <property name="title">
-     <string>&amp;Ver</string>
-    </property>
-    <addaction name="zoomInAct"/>
-    <addaction name="zoomOutAct"/>
-    <addaction name="normalSizeAct"/>
-    <addaction name="separator"/>
-    <addaction name="fitToWindowAct"/>
-    <addaction name="separator"/>
-    <addaction name="backImagenAct"/>
-    <addaction name="nextImagenAct"/>
-    <addaction name="separator"/>
-    <addaction name="verListImagesAct"/>
-   </widget>
-   <addaction name="fileMenu"/>
-   <addaction name="viewMenu"/>
-  </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -129,25 +147,25 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="exitAct"/>
+   <addaction name="exit"/>
    <addaction name="separator"/>
-   <addaction name="openAct"/>
-   <addaction name="printAct"/>
+   <addaction name="open"/>
+   <addaction name="print"/>
    <addaction name="separator"/>
-   <addaction name="zoomInAct"/>
-   <addaction name="zoomOutAct"/>
-   <addaction name="normalSizeAct"/>
+   <addaction name="zoomIn"/>
+   <addaction name="zoomOut"/>
+   <addaction name="normalSize"/>
    <addaction name="separator"/>
-   <addaction name="fitToWindowAct"/>
+   <addaction name="fitToWindow"/>
    <addaction name="separator"/>
-   <addaction name="backImagenAct"/>
-   <addaction name="nextImagenAct"/>
+   <addaction name="backImagen"/>
+   <addaction name="nextImagen"/>
    <addaction name="separator"/>
-   <addaction name="verListImagesAct"/>
+   <addaction name="verListImages"/>
   </widget>
-  <action name="openAct">
+  <action name="open">
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
    </property>
    <property name="text">
@@ -160,12 +178,9 @@
     <bool>true</bool>
    </property>
   </action>
-  <action name="printAct">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <action name="print">
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/imprimir.png</normaloff>:/img16/imprimir.png</iconset>
    </property>
    <property name="text">
@@ -178,9 +193,9 @@
     <bool>true</bool>
    </property>
   </action>
-  <action name="exitAct">
+  <action name="exit">
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/cerrar.png</normaloff>:/img16/cerrar.png</iconset>
    </property>
    <property name="text">
@@ -193,16 +208,13 @@
     <bool>true</bool>
    </property>
   </action>
-  <action name="zoomInAct">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <action name="zoomIn">
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/zoom_in.png</normaloff>:/img16/zoom_in.png</iconset>
    </property>
    <property name="text">
-    <string>Zoom &amp;In (25%)</string>
+    <string>Zoom &amp;in (25%)</string>
    </property>
    <property name="shortcut">
     <string>Ctrl++</string>
@@ -211,16 +223,13 @@
     <bool>true</bool>
    </property>
   </action>
-  <action name="zoomOutAct">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <action name="zoomOut">
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/zoom_out.png</normaloff>:/img16/zoom_out.png</iconset>
    </property>
    <property name="text">
-    <string>Zoom &amp;Out (25%)</string>
+    <string>Zoom &amp;out (25%)</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+-</string>
@@ -229,16 +238,13 @@
     <bool>true</bool>
    </property>
   </action>
-  <action name="normalSizeAct">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <action name="normalSize">
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/zoom.png</normaloff>:/img16/zoom.png</iconset>
    </property>
    <property name="text">
-    <string>Tamaño &amp;Normal</string>
+    <string>Tamaño &amp;normal</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -247,19 +253,16 @@
     <bool>true</bool>
    </property>
   </action>
-  <action name="fitToWindowAct">
+  <action name="fitToWindow">
    <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/fit_to_win.png</normaloff>:/img16/fit_to_win.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Fit to Window</string>
+    <string>&amp;Fit to window</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
@@ -268,37 +271,37 @@
     <bool>true</bool>
    </property>
   </action>
-  <action name="backImagenAct">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <action name="backImagen">
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/go-back.png</normaloff>:/img16/go-back.png</iconset>
    </property>
    <property name="text">
     <string>Imagen anterior</string>
    </property>
+   <property name="shortcut">
+    <string>Left</string>
+   </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
    </property>
   </action>
-  <action name="nextImagenAct">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <action name="nextImagen">
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/go-next.png</normaloff>:/img16/go-next.png</iconset>
    </property>
    <property name="text">
     <string>Siguiente imagen</string>
    </property>
+   <property name="shortcut">
+    <string>Right</string>
+   </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
    </property>
   </action>
-  <action name="verListImagesAct">
+  <action name="verListImages">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -306,7 +309,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../res/grlida.qrc">
+    <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/categorias.png</normaloff>:/img16/categorias.png</iconset>
    </property>
    <property name="text">
@@ -319,9 +322,28 @@
     <bool>true</bool>
    </property>
   </action>
+  <action name="centrar">
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
+   </property>
+   <property name="text">
+    <string>Centrar</string>
+   </property>
+   <property name="toolTip">
+    <string>Centrar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
  </widget>
+ <tabstops>
+  <tabstop>gvImagen</tabstop>
+  <tabstop>lwListaImagenes</tabstop>
+ </tabstops>
  <resources>
-  <include location="../res/grlida.qrc"/>
+  <include location="../res/gr-lida.qrc"/>
  </resources>
  <connections/>
 </ui>

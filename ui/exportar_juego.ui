@@ -1,94 +1,155 @@
-<ui version="4.0" >
- <class>ExportarJuegoClass</class>
- <widget class="QDialog" name="ExportarJuegoClass" >
-  <property name="geometry" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmExportarJuego</class>
+ <widget class="QDialog" name="frmExportarJuego">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>380</width>
+    <width>360</width>
     <height>430</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="minimumSize">
+   <size>
+    <width>360</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
    <string>Exportar Juego</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="../res/grlida.qrc" >
+  <property name="windowIcon">
+   <iconset resource="../res/gr-lida.qrc">
     <normaloff>:/img16/exportar.png</normaloff>:/img16/exportar.png</iconset>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="margin" >
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
     <number>4</number>
    </property>
    <item>
-    <widget class="QTreeWidget" name="twListaJuegos" >
-     <property name="showDropIndicator" stdset="0" >
-      <bool>false</bool>
+    <widget class="QComboBox" name="cbxCategorias">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>30</height>
+      </size>
      </property>
-     <property name="iconSize" >
+     <property name="sizeAdjustPolicy">
+      <enum>QComboBox::AdjustToContents</enum>
+     </property>
+     <property name="iconSize">
       <size>
        <width>24</width>
        <height>24</height>
       </size>
      </property>
-     <property name="textElideMode" >
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="lb_export_1">
+       <property name="text">
+        <string>Tipo emu:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbxTipoEmu">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTreeWidget" name="twListaJuegos">
+     <property name="showDropIndicator" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="textElideMode">
       <enum>Qt::ElideNone</enum>
      </property>
-     <property name="rootIsDecorated" >
+     <property name="rootIsDecorated">
       <bool>false</bool>
      </property>
-     <property name="uniformRowHeights" >
+     <property name="uniformRowHeights">
       <bool>true</bool>
      </property>
-     <property name="itemsExpandable" >
+     <property name="itemsExpandable">
       <bool>false</bool>
      </property>
-     <property name="allColumnsShowFocus" >
+     <property name="allColumnsShowFocus">
       <bool>true</bool>
      </property>
      <column>
-      <property name="text" >
-       <string>Titulos</string>
+      <property name="text">
+       <string>Títulos</string>
       </property>
      </column>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="hLayout_2" >
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QPushButton" name="btnCheckedAll" >
-       <property name="minimumSize" >
+      <widget class="QPushButton" name="btnCheckedAll">
+       <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>30</height>
+         <height>26</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Seleccionar todos</string>
        </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/categorias.png</normaloff>:/img16/categorias.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnUnCheckedAll" >
-       <property name="minimumSize" >
+      <widget class="QPushButton" name="btnUnCheckedAll">
+       <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>30</height>
+         <height>26</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Seleccionar ninguno</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="hSpacer_1" >
-       <property name="orientation" >
+      <spacer name="hSpacer_1">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
+         <width>155</width>
          <height>20</height>
         </size>
        </property>
@@ -97,111 +158,123 @@
     </layout>
    </item>
    <item>
-    <widget class="QGroupBox" name="gBox_OptExportar" >
-     <property name="title" >
-      <string>Opciones de Exportar</string>
+    <widget class="QGroupBox" name="gBox_OptExportar">
+     <property name="title">
+      <string>Opciones de exportar</string>
      </property>
-     <layout class="QVBoxLayout" >
-      <property name="topMargin" >
-       <number>2</number>
-      </property>
-      <property name="bottomMargin" >
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="margin">
        <number>4</number>
       </property>
-      <item>
-       <layout class="QHBoxLayout" name="hLayout_3" >
-        <item>
-         <widget class="QLabel" name="label_0" >
-          <property name="minimumSize" >
-           <size>
-            <width>80</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text" >
-           <string>Expotar como:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cbxExpotarComo" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize" >
-           <size>
-            <width>0</width>
-            <height>24</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lb_export_2">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Expotar como:</string>
+        </property>
+       </widget>
       </item>
-      <item>
-       <layout class="QHBoxLayout" name="hLayout_4" >
-        <item>
-         <widget class="QLabel" name="label_1" >
-          <property name="minimumSize" >
-           <size>
-            <width>80</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text" >
-           <string>Guardar en:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="txtDirExportPath" >
-          <property name="minimumSize" >
-           <size>
-            <width>0</width>
-            <height>24</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnDirExportPath" >
-          <property name="minimumSize" >
-           <size>
-            <width>30</width>
-            <height>26</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>30</width>
-            <height>26</height>
-           </size>
-          </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <property name="icon" >
-           <iconset resource="../res/grlida.qrc" >
-            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lb_export_3">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Guardar en:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="txtDirExportPath">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="btnDirExportPath">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="btnDirExportPath_clear">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="3">
+       <widget class="QComboBox" name="cbxExpotarComo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="hLayout_1" >
+    <layout class="QHBoxLayout" name="hLayout_1">
      <item>
-      <spacer>
-       <property name="orientation" >
+      <spacer name="hSpacer_3">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -210,60 +283,60 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="btnOk" >
-       <property name="minimumSize" >
+      <widget class="QPushButton" name="btnOk">
+       <property name="minimumSize">
         <size>
-         <width>84</width>
+         <width>97</width>
          <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>16777215</width>
          <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Exportar</string>
        </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
          <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnCancelar" >
-       <property name="enabled" >
+      <widget class="QPushButton" name="btnCancelar">
+       <property name="enabled">
         <bool>true</bool>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
-         <width>84</width>
+         <width>97</width>
          <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>16777215</width>
          <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Cerrar</string>
        </property>
-       <property name="icon" >
-        <iconset resource="../res/grlida.qrc" >
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
          <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="hSpacer_2" >
-       <property name="orientation" >
+      <spacer name="hSpacer_2">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -276,34 +349,20 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>cbxCategorias</tabstop>
+  <tabstop>cbxTipoEmu</tabstop>
   <tabstop>twListaJuegos</tabstop>
   <tabstop>btnCheckedAll</tabstop>
   <tabstop>btnUnCheckedAll</tabstop>
   <tabstop>cbxExpotarComo</tabstop>
-  <tabstop>txtDirExportPath</tabstop>
   <tabstop>btnDirExportPath</tabstop>
+  <tabstop>txtDirExportPath</tabstop>
+  <tabstop>btnDirExportPath_clear</tabstop>
   <tabstop>btnOk</tabstop>
   <tabstop>btnCancelar</tabstop>
  </tabstops>
  <resources>
-  <include location="../res/grlida.qrc" />
+  <include location="../res/gr-lida.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>btnCancelar</sender>
-   <signal>clicked()</signal>
-   <receiver>ExportarJuegoClass</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>277</x>
-     <y>451</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>345</x>
-     <y>210</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

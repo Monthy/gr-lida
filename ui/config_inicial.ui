@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ConfigInicialClass</class>
- <widget class="QDialog" name="ConfigInicialClass">
+ <class>frmConfigInicial</class>
+ <widget class="QDialog" name="frmConfigInicial">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>440</width>
-    <height>380</height>
+    <width>441</width>
+    <height>424</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>440</width>
-    <height>380</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Configuración Inicial del GR-lida</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res/grlida.qrc">
-    <normaloff>:/img16/grlida.png</normaloff>:/img16/grlida.png</iconset>
+   <iconset resource="../res/gr-lida.qrc">
+    <normaloff>:/img32/gr-lida.png</normaloff>:/img32/gr-lida.png</iconset>
   </property>
-  <layout class="QVBoxLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -32,6 +26,12 @@
    </property>
    <item>
     <widget class="QLabel" name="lb_imagenlogo">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>72</height>
+      </size>
+     </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
@@ -109,7 +109,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../res/grlida.qrc">:/images/grlida_logo.png</pixmap>
+      <pixmap resource="../res/gr-lida.qrc">:/images/gr-lida_logo.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -124,43 +124,264 @@
     </widget>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="vLayout_1">
-     <property name="spacing">
-      <number>4</number>
+    <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,0">
+     <property name="verticalSpacing">
+      <number>7</number>
      </property>
      <property name="margin">
-      <number>4</number>
+      <number>6</number>
      </property>
-     <item>
-      <widget class="QLabel" name="lb_Confini_5">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lb_Confini_2">
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>0</height>
+        </size>
        </property>
        <property name="text">
-        <string>Bienvenidos a GR-lida</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignHCenter|Qt::AlignTop</set>
+        <string>Seleccionar idioma:</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLabel" name="lb_Confini_1">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+     <item row="4" column="0" colspan="3">
+      <widget class="QGroupBox" name="chkScummVMDisp">
+       <property name="title">
+        <string>Tengo instalado el emulador ScummVM</string>
        </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="spacing">
+         <number>4</number>
+        </property>
+        <property name="margin">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lb_Confini_4">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Dirección del ScummVM:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtDirSvm">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDirSvm">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDirSvm_find">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/zoom.png</normaloff>:/img16/zoom.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDirSvm_clear">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="3">
+      <widget class="QGroupBox" name="chkDOSBoxDisp">
+       <property name="title">
+        <string>Tengo instalado el emulador DOSBox</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>4</number>
+        </property>
+        <property name="margin">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lb_Confini_3">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Dirección del DOSBox:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtDirDbx">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDirDbx">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDirDbx_find">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/zoom.png</normaloff>:/img16/zoom.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDirDbx_clear">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QComboBox" name="cbxIdioma">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="3">
+      <widget class="QLabel" name="lb_Confini_1">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -178,249 +399,67 @@
        </property>
       </widget>
      </item>
-     <item>
-      <layout class="QHBoxLayout" name="hLayout_2">
-       <property name="spacing">
-        <number>6</number>
+     <item row="0" column="0" colspan="3">
+      <widget class="QLabel" name="lb_Confini_5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-       <property name="margin">
-        <number>4</number>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>16</height>
+        </size>
        </property>
-       <item>
-        <widget class="QLabel" name="lb_Confini_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Seleccionar Idioma:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="cbxIdioma">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>22</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="chkDOSBoxDisp">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
-        <string>Tengo instalado el emulador DOSBox</string>
+        <string>Bienvenidos a GR-lida</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignHCenter|Qt::AlignTop</set>
        </property>
       </widget>
      </item>
-     <item>
-      <layout class="QHBoxLayout" name="hLayout_3">
-       <property name="spacing">
-        <number>6</number>
+     <item row="6" column="2">
+      <widget class="QPushButton" name="btnOk">
+       <property name="minimumSize">
+        <size>
+         <width>97</width>
+         <height>30</height>
+        </size>
        </property>
-       <property name="margin">
-        <number>4</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="lb_Confini_3">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Dirección del DOSBox:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txtDirDbx">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>22</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnDirDbx">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/grlida.qrc">
-           <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="chkScummVMDisp">
        <property name="text">
-        <string>Tengo instalado el emulador ScummVM</string>
+        <string>Aceptar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
      </item>
-     <item>
-      <layout class="QHBoxLayout" name="hLayout_1">
-       <property name="spacing">
-        <number>6</number>
+     <item row="6" column="0" colspan="2">
+      <widget class="QCheckBox" name="chkShowNext">
+       <property name="text">
+        <string>Mostrar la próxima vez que inicie</string>
        </property>
-       <property name="margin">
-        <number>4</number>
+       <property name="checked">
+        <bool>true</bool>
        </property>
-       <item>
-        <widget class="QLabel" name="lb_Confini_4">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Dirección del ScummVM:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txtDirSvm">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>22</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnDirSvm">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/grlida.qrc">
-           <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
      </item>
-     <item>
-      <layout class="QHBoxLayout" name="hLayout_4">
-       <property name="spacing">
-        <number>6</number>
+     <item row="5" column="0" colspan="3">
+      <widget class="QCheckBox" name="chkVDMSoundDisp">
+       <property name="text">
+        <string>Tengo instalado el emulador VDMSound</string>
        </property>
-       <property name="margin">
-        <number>4</number>
-       </property>
-       <item>
-        <layout class="QVBoxLayout" name="vLayout_2">
-         <property name="spacing">
-          <number>6</number>
-         </property>
-         <property name="margin">
-          <number>4</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="chkVDMSoundDisp">
-           <property name="text">
-            <string>Tengo instalado el emulador VDMSound</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="chkShowNext">
-           <property name="text">
-            <string>Mostrar la próxima vez que inicie</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="hSpacer_1">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnOk">
-         <property name="minimumSize">
-          <size>
-           <width>80</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Aceptar</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/grlida.qrc">
-           <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
      </item>
     </layout>
    </item>
@@ -429,87 +468,21 @@
  <tabstops>
   <tabstop>cbxIdioma</tabstop>
   <tabstop>chkDOSBoxDisp</tabstop>
-  <tabstop>txtDirDbx</tabstop>
+  <tabstop>btnDirDbx_find</tabstop>
   <tabstop>btnDirDbx</tabstop>
+  <tabstop>txtDirDbx</tabstop>
+  <tabstop>btnDirDbx_clear</tabstop>
   <tabstop>chkScummVMDisp</tabstop>
-  <tabstop>txtDirSvm</tabstop>
+  <tabstop>btnDirSvm_find</tabstop>
   <tabstop>btnDirSvm</tabstop>
+  <tabstop>txtDirSvm</tabstop>
+  <tabstop>btnDirSvm_clear</tabstop>
   <tabstop>chkVDMSoundDisp</tabstop>
   <tabstop>chkShowNext</tabstop>
   <tabstop>btnOk</tabstop>
  </tabstops>
  <resources>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
+  <include location="../res/gr-lida.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>chkDOSBoxDisp</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>btnDirDbx</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>129</x>
-     <y>204</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>408</x>
-     <y>225</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>chkDOSBoxDisp</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>txtDirDbx</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>129</x>
-     <y>204</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>264</x>
-     <y>224</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>chkScummVMDisp</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>btnDirSvm</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>129</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>408</x>
-     <y>275</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>chkScummVMDisp</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>txtDirSvm</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>129</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>264</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

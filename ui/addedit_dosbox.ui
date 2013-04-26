@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddEditDosBoxClass</class>
- <widget class="QTabWidget" name="AddEditDosBoxClass">
+ <class>frmAddEditDosBox</class>
+ <widget class="QTabWidget" name="frmAddEditDosBox">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>684</width>
-    <height>477</height>
+    <width>680</width>
+    <height>448</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,41 +20,25 @@
    <attribute name="title">
     <string>General</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_1">
     <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="groupBox_4">
+     <widget class="QGroupBox" name="groupBox_1">
       <property name="title">
-       <string>Datos Generales para el DOSbox</string>
+       <string>Datos generales para el DOSbox</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="leftMargin">
-        <number>4</number>
-       </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
+      <layout class="QVBoxLayout" name="verticalLayout_16">
+       <property name="margin">
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0" colspan="5">
-          <widget class="QLabel" name="lb_Dbx_1">
-           <property name="text">
-            <string>Nombre del Archivo de configuración a Guardar ejemplo: Nombre_Archivo.conf</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" colspan="3">
+        <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,1,0,0,0,0">
+         <property name="verticalSpacing">
+          <number>4</number>
+         </property>
+         <item row="1" column="0" colspan="5">
           <widget class="QLineEdit" name="txtDbx_path_conf">
            <property name="minimumSize">
             <size>
@@ -64,7 +48,7 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="3">
+         <item row="1" column="5">
           <widget class="QPushButton" name="btnDbx_FileConfg">
            <property name="minimumSize">
             <size>
@@ -79,12 +63,12 @@
             </size>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="1" column="4">
+         <item row="1" column="6">
           <widget class="QPushButton" name="btnDbx_FileConfg_clear">
            <property name="minimumSize">
             <size>
@@ -99,7 +83,7 @@
             </size>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
@@ -107,11 +91,11 @@
          <item row="2" column="0">
           <widget class="QLabel" name="lb_Dbx_0">
            <property name="text">
-            <string>Templates Profiles:</string>
+            <string>Templates profiles:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1" colspan="2">
+         <item row="2" column="1" colspan="4">
           <widget class="QComboBox" name="cbxDbx_Profiles">
            <property name="minimumSize">
             <size>
@@ -121,84 +105,49 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0" colspan="2">
-          <widget class="QCheckBox" name="chkDbx_loadfix">
-           <property name="text">
-            <string>El juego necesita 'loadfix'</string>
+         <item row="3" column="3">
+          <widget class="QSpinBox" name="spinDbx_loadfix_mem">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>512</number>
+           </property>
+           <property name="value">
+            <number>64</number>
            </property>
           </widget>
          </item>
-         <item row="3" column="2" colspan="2">
+         <item row="3" column="4" colspan="3">
           <widget class="QLabel" name="lb_Dbx_2">
+           <property name="minimumSize">
+            <size>
+             <width>220</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>Memoria reservada en (KB)</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0" colspan="2">
-          <widget class="QCheckBox" name="chkDbx_cerrar_dbox">
-           <property name="text">
-            <string>Cerrar DOSBox al terminar el juego</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2" rowspan="2">
-          <widget class="QLineEdit" name="txtDbx_loadfix_mem">
+         <item row="4" column="4" colspan="3">
+          <widget class="QLabel" name="lb_Dbx_70">
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0" colspan="2">
-          <widget class="QCheckBox" name="chkDbx_consola_dbox">
-           <property name="text">
-            <string>Cerrar la consola del DOSBox</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0" colspan="5">
-          <widget class="QLabel" name="lb_Dbx_64">
-           <property name="text">
-            <string>keyboardlayout -- Código de la lengua de la disposición de teclado (o ninguna):</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QComboBox" name="cbxDbx_dos_keyboardlayout">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
+             <width>220</width>
+             <height>0</height>
             </size>
            </property>
           </widget>
          </item>
-         <item row="8" column="0" colspan="4">
-          <widget class="QLabel" name="lb_Dbx_3">
-           <property name="text">
-            <string>Ejecutable (exe,com,bat) del Juego:</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="0" colspan="3">
+         <item row="8" column="0" colspan="5">
           <widget class="QLineEdit" name="txtDbx_path_exe">
            <property name="minimumSize">
             <size>
@@ -208,7 +157,7 @@
            </property>
           </widget>
          </item>
-         <item row="9" column="3">
+         <item row="8" column="5">
           <widget class="QPushButton" name="btnDbx_ExeJuego">
            <property name="minimumSize">
             <size>
@@ -223,12 +172,12 @@
             </size>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="9" column="4">
+         <item row="8" column="6">
           <widget class="QPushButton" name="btnDbx_ExeJuego_clear">
            <property name="minimumSize">
             <size>
@@ -243,39 +192,19 @@
             </size>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="10" column="0">
+         <item row="9" column="0">
           <widget class="QLabel" name="lb_Dbx_4">
            <property name="text">
             <string>Parametros:</string>
            </property>
           </widget>
          </item>
-         <item row="10" column="1" colspan="2">
-          <widget class="QLineEdit" name="txtDbx_parametros_exe">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="11" column="0" colspan="4">
-          <widget class="QLabel" name="lb_Dbx_5">
-           <property name="text">
-            <string>Ejecutable (exe,com,bat) Setup del Juego:</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="12" column="0" colspan="3">
+         <item row="11" column="0" colspan="5">
           <widget class="QLineEdit" name="txtDbx_path_setup">
            <property name="minimumSize">
             <size>
@@ -285,7 +214,7 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="3">
+         <item row="11" column="5">
           <widget class="QPushButton" name="btnDbx_ExeSetup">
            <property name="minimumSize">
             <size>
@@ -300,12 +229,12 @@
             </size>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="12" column="4">
+         <item row="11" column="6">
           <widget class="QPushButton" name="btnDbx_ExeSetup_clear">
            <property name="minimumSize">
             <size>
@@ -320,20 +249,113 @@
             </size>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="13" column="0">
+         <item row="12" column="0">
           <widget class="QLabel" name="lb_Dbx_6">
            <property name="text">
             <string>Parametros:</string>
            </property>
           </widget>
          </item>
-         <item row="13" column="1" colspan="2">
+         <item row="12" column="1" colspan="4">
           <widget class="QLineEdit" name="txtDbx_parametros_setup">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="3">
+          <widget class="QCheckBox" name="chkDbx_consola_dbox">
+           <property name="text">
+            <string>Cerrar la consola del DOSBox</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0" colspan="3">
+          <widget class="QCheckBox" name="chkDbx_cerrar_dbox">
+           <property name="text">
+            <string>Cerrar DOSBox al terminar el juego</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="3">
+          <widget class="QCheckBox" name="chkDbx_loadfix">
+           <property name="text">
+            <string>El juego necesita 'loadfix'</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0" colspan="7">
+          <widget class="QLabel" name="lb_Dbx_3">
+           <property name="text">
+            <string>Ejecutable (exe,com,bat) del juego:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0" colspan="7">
+          <widget class="QLabel" name="lb_Dbx_5">
+           <property name="text">
+            <string>Ejecutable (exe,com,bat) setup del juego:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="7">
+          <widget class="QLabel" name="lb_Dbx_1">
+           <property name="text">
+            <string>Nombre del archivo de configuración a guardar ejemplo: nombre_archivo.conf</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2" colspan="5">
+          <widget class="QLabel" name="lb_Dbx_64">
+           <property name="text">
+            <string>keyboardlayout -- Código de la lengua de la disposición de teclado (o ninguna)</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0" colspan="2">
+          <widget class="QComboBox" name="cbxDbx_dos_keyboardlayout">
+           <property name="minimumSize">
+            <size>
+             <width>160</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1" colspan="4">
+          <widget class="QLineEdit" name="txtDbx_parametros_exe">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -345,14 +367,14 @@
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer">
+        <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>7</height>
+           <height>71</height>
           </size>
          </property>
         </spacer>
@@ -366,98 +388,24 @@
    <attribute name="title">
     <string>General DOSBox</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_4">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="groupBox_5">
+     <widget class="QGroupBox" name="groupBox_2">
       <property name="title">
        <string>Opciones de pantalla, video, ratón y renderizado....</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <property name="leftMargin">
-        <number>4</number>
-       </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
+      <layout class="QVBoxLayout" name="verticalLayout_17">
+       <property name="margin">
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0" colspan="4">
-          <widget class="QCheckBox" name="chkDbx_sdl_fullscreen">
-           <property name="text">
-            <string>fullscreen -- Iniciar dosbox directamente en pantalla completa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" colspan="4">
-          <widget class="QCheckBox" name="chkDbx_sdl_fulldouble">
-           <property name="text">
-            <string>fulldouble -- Usar doble búfer en pantalla completa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" colspan="4">
-          <widget class="QCheckBox" name="chkDbx_sdl_fullfixed">
-           <property name="text">
-            <string>fullfixed -- Fijar la resolución en pantalla completa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0" colspan="4">
-          <widget class="QCheckBox" name="chkDbx_sdl_autolock">
-           <property name="text">
-            <string>autolock -- El ratón se autobloqueará al hace clic en la pantalla</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0" colspan="4">
-          <widget class="QCheckBox" name="chkDbx_render_aspect">
-           <property name="text">
-            <string>aspect -- Aplicar corrección de aspecto</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0" colspan="4">
-          <widget class="QCheckBox" name="chkDbx_sdl_waitonerror">
-           <property name="text">
-            <string>waitonerror -- Esperar antes de cerrar la consola si dosbox provoca un error</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0" colspan="4">
-          <widget class="QCheckBox" name="chkDbx_sdl_usescancodes">
-           <property name="text">
-            <string>usescancodes -- Evitar el uso de symkeys, no en todos los sistemas operativos</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0" colspan="4">
-          <widget class="QLabel" name="lb_Dbx_7">
-           <property name="text">
-            <string>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
+        <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,1,0,1">
+         <property name="verticalSpacing">
+          <number>4</number>
+         </property>
          <item row="8" column="0">
           <widget class="QLabel" name="lb_Dbx_8">
            <property name="text">
@@ -535,7 +483,7 @@
          <item row="10" column="0">
           <widget class="QLabel" name="lb_Dbx_10">
            <property name="text">
-            <string>Modo de Renderizado:</string>
+            <string>Modo de renderizado:</string>
            </property>
           </widget>
          </item>
@@ -552,7 +500,7 @@
          <item row="11" column="0">
           <widget class="QLabel" name="lb_Dbx_11">
            <property name="text">
-            <string>Tarjeta de Video:</string>
+            <string>Tarjeta de video:</string>
            </property>
           </widget>
          </item>
@@ -569,7 +517,7 @@
          <item row="12" column="0">
           <widget class="QLabel" name="lb_Dbx_12">
            <property name="text">
-            <string>Escalar y Filtros:</string>
+            <string>Escalar y filtros:</string>
            </property>
           </widget>
          </item>
@@ -586,17 +534,85 @@
            </property>
           </widget>
          </item>
+         <item row="7" column="0" colspan="4">
+          <widget class="QLabel" name="lb_Dbx_7">
+           <property name="text">
+            <string>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0" colspan="4">
+          <widget class="QCheckBox" name="chkDbx_sdl_usescancodes">
+           <property name="text">
+            <string>usescancodes -- Evitar el uso de symkeys, no en todos los sistemas operativos</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="4">
+          <widget class="QCheckBox" name="chkDbx_sdl_waitonerror">
+           <property name="text">
+            <string>waitonerror -- Esperar antes de cerrar la consola si DOSBox provoca un error</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0" colspan="4">
+          <widget class="QCheckBox" name="chkDbx_render_aspect">
+           <property name="text">
+            <string>aspect -- Aplicar corrección de aspecto</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="4">
+          <widget class="QCheckBox" name="chkDbx_sdl_autolock">
+           <property name="text">
+            <string>autolock -- El ratón se autobloqueará al hace clic en la pantalla</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="4">
+          <widget class="QCheckBox" name="chkDbx_sdl_fullfixed">
+           <property name="text">
+            <string>fullfixed -- Fijar la resolución en pantalla completa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" colspan="4">
+          <widget class="QCheckBox" name="chkDbx_sdl_fulldouble">
+           <property name="text">
+            <string>fulldouble -- Usar doble búfer en pantalla completa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="4">
+          <widget class="QCheckBox" name="chkDbx_sdl_fullscreen">
+           <property name="text">
+            <string>fullscreen -- Iniciar DOSBox directamente en pantalla completa</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_2">
+        <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>12</height>
+           <height>86</height>
           </size>
          </property>
         </spacer>
@@ -610,109 +626,62 @@
    <attribute name="title">
     <string>Entorno</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_21">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
     <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="groupBox_6">
+     <widget class="QGroupBox" name="groupBox_3">
       <property name="title">
        <string>Opciones de memoria, joystick y ciclos de emulación</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <property name="leftMargin">
-        <number>4</number>
-       </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
+      <layout class="QVBoxLayout" name="verticalLayout_18">
+       <property name="margin">
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0,0,0,0,0,0,1,0">
-         <item row="0" column="0">
-          <widget class="QComboBox" name="cbxDbx_dosbox_memsize">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" colspan="7">
-          <widget class="QLabel" name="lb_Dbx_15">
+        <layout class="QGridLayout" name="gridLayout_10">
+         <property name="verticalSpacing">
+          <number>4</number>
+         </property>
+         <item row="14" column="0" colspan="10">
+          <widget class="QCheckBox" name="chkDbx_joystick_buttonwrap">
            <property name="text">
-            <string>Cantidad de memoria (Mb) que DOSBox tendrá disponible</string>
+            <string>buttonwrap -- Habilitar el ajuste de botón en el número de botones emulados</string>
            </property>
-           <property name="wordWrap">
+           <property name="checked">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QComboBox" name="cbxDbx_cpu_core">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
+         <item row="13" column="0" colspan="10">
+          <widget class="QCheckBox" name="chkDbx_joystick_swap34">
+           <property name="text">
+            <string>swap34 -- Intercambiar el 3ro y 4to eje. Puede ser útil para ciertas palancas de mando</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1" colspan="7">
-          <widget class="QLabel" name="lb_Dbx_16">
+         <item row="12" column="0" colspan="10">
+          <widget class="QCheckBox" name="chkDbx_joystick_autofire">
            <property name="text">
-            <string>Núcleo de la CPU usado en la emulación</string>
+            <string>autofire -- Disparo continuado mientras mantengas el botón presionado</string>
            </property>
-           <property name="wordWrap">
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="9">
+          <widget class="QCheckBox" name="chkDbx_dos_ems">
+           <property name="text">
+            <string>ems -- Activa o desactiva soporte para memoria EMS.</string>
+           </property>
+           <property name="checked">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QComboBox" name="cbxDbx_cpu_cputype">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1" colspan="7">
-          <widget class="QLabel" name="lb_Dbx_66"/>
-         </item>
-         <item row="3" column="0">
-          <widget class="QComboBox" name="cbxDbx_render_frameskip">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1" colspan="7">
-          <widget class="QLabel" name="lb_Dbx_17">
+         <item row="7" column="0" colspan="10">
+          <widget class="QLabel" name="lb_Dbx_19">
            <property name="text">
-            <string>Cuantos cuadros salta dosbox antes de dibujar uno</string>
+            <string>Ciclos, cantidad de instrucciones que dosbox intenta emular cada milisegundo, Es malo darle un valor mayor al que su máquina puede soportar:</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -729,306 +698,7 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="0" colspan="9">
-          <widget class="QCheckBox" name="chkDbx_dos_ems">
-           <property name="text">
-            <string>ems -- Activa o desactiva soporte para memoria EMS.</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QComboBox" name="cbxDbx_dos_umb">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1" colspan="8">
-          <widget class="QLabel" name="lb_Dbx_18">
-           <property name="text">
-            <string>umb -- Activa o desactiva soporte para memoria UMB</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="1" colspan="2">
-          <widget class="QLabel" name="lb_Dbx_67">
-           <property name="text">
-            <string>realmode:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0">
-          <widget class="QComboBox" name="cbxDbx_cpu_cycles">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="3">
-          <widget class="QComboBox" name="cbxDbx_cpu_cycles_realmode">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="4">
-          <widget class="QLabel" name="lb_Dbx_68">
-           <property name="text">
-            <string>protected mode:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="5">
-          <widget class="QComboBox" name="cbxDbx_cpu_cycles_protmode">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="6">
-          <widget class="QLabel" name="lb_Dbx_69">
-           <property name="text">
-            <string>limit:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="7">
-          <widget class="QComboBox" name="cbxDbx_cpu_cycles_limitmode">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="8">
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>128</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="9" column="0" colspan="9">
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QLabel" name="lb_Dbx_20">
-             <property name="text">
-              <string>Arriba</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="spinDbx_1">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>24</height>
-              </size>
-             </property>
-             <property name="maximum">
-              <number>9000</number>
-             </property>
-             <property name="value">
-              <number>10</number>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lb_Dbx_21">
-             <property name="text">
-              <string>Abajo</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="spinDbx_2">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>24</height>
-              </size>
-             </property>
-             <property name="maximum">
-              <number>9000</number>
-             </property>
-             <property name="value">
-              <number>20</number>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="chkDbx_cycle_sincronizar">
-             <property name="text">
-              <string>Sincronizar. Arriba/Abajo</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-         <item row="10" column="0" colspan="9">
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QLabel" name="lb_Dbx_22">
-             <property name="text">
-              <string>Emulador de joystick:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="cbxDbx_joystick_type">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>24</height>
-              </size>
-             </property>
-             <property name="currentIndex">
-              <number>-1</number>
-             </property>
-             <property name="maxVisibleItems">
-              <number>7</number>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-         <item row="11" column="0" colspan="9">
-          <widget class="QCheckBox" name="chkDbx_joystick_timed">
-           <property name="text">
-            <string>timed -- Permitir los intervalos sincronizados para el eje. (falso es el estilo de comportamiento viejo)</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="12" column="0" colspan="9">
-          <widget class="QCheckBox" name="chkDbx_joystick_autofire">
-           <property name="text">
-            <string>autofire -- Disparo continuado mientras mantengas el botón presionado</string>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="0" colspan="9">
-          <widget class="QCheckBox" name="chkDbx_joystick_swap34">
-           <property name="text">
-            <string>swap34 -- Intercambiar el 3ro y 4to eje. Puede ser útil para ciertas palancas de mando</string>
-           </property>
-          </widget>
-         </item>
-         <item row="14" column="0" colspan="9">
-          <widget class="QCheckBox" name="chkDbx_joystick_buttonwrap">
-           <property name="text">
-            <string>buttonwrap -- enable button wrapping at the number of emulated buttons</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="15" column="0">
-          <spacer name="verticalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>48</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="7" column="0" colspan="9">
-          <widget class="QLabel" name="lb_Dbx_19">
-           <property name="text">
-            <string>Ciclos, Cantidad de instrucciones que dosbox intenta emular cada milisegundo, Es malo darle un valor mayor al que su máquina puede soportar:</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="8">
-          <widget class="QLabel" name="lb_Dbx_70">
-           <property name="text">
-            <string>Versión MS-DOS</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="8">
+         <item row="1" column="9">
           <widget class="QComboBox" name="cbxDbx_dos_version">
            <property name="minimumSize">
             <size>
@@ -1041,677 +711,21 @@
            </property>
           </widget>
          </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="tabDbx_4">
-   <attribute name="title">
-    <string>Opciones de Sonido</string>
-   </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_20">
-    <property name="margin">
-     <number>4</number>
-    </property>
-    <item>
-     <widget class="QGroupBox" name="groupBox_7">
-      <property name="title">
-       <string>Todas las Opciones de sonido y emulación de sonido</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_13">
-       <property name="leftMargin">
-        <number>4</number>
-       </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
-        <number>4</number>
-       </property>
-       <item>
-        <layout class="QGridLayout" name="gridLayout_11">
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="chkDbx_mixer_nosound">
+         <item row="1" column="2" colspan="7">
+          <widget class="QLabel" name="lb_Dbx_16">
            <property name="text">
-            <string>Desactivar Sonido</string>
+            <string>Núcleo de la CPU usado en la emulación</string>
            </property>
-           <property name="checked">
-            <bool>false</bool>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="0" column="2" rowspan="8">
-          <widget class="QTabWidget" name="tabWidget">
+         <item row="1" column="0" colspan="2">
+          <widget class="QComboBox" name="cbxDbx_cpu_core">
            <property name="minimumSize">
             <size>
-             <width>450</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>0</number>
-           </property>
-           <widget class="QWidget" name="tabSonido_1">
-            <attribute name="title">
-             <string>Sound Blaster</string>
-            </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <item>
-              <layout class="QGridLayout" name="gridLayout_4">
-               <item row="0" column="0" colspan="4">
-                <widget class="QCheckBox" name="chkDbx_sblaster_mixer">
-                 <property name="text">
-                  <string>Permite al mezclador de la soundblaster modificar el del DOSBox</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="lb_Dbx_26">
-                 <property name="text">
-                  <string>Tipo Sound Blaste:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="cbxDbx_sblaster_sbtype">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QLabel" name="lb_Dbx_31">
-                 <property name="text">
-                  <string>Opl mode:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3">
-                <widget class="QComboBox" name="cbxDbx_sblaster_oplmode">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="lb_Dbx_27">
-                 <property name="text">
-                  <string>Address:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="cbxDbx_sblaster_sbbase">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QLabel" name="lb_Dbx_32">
-                 <property name="text">
-                  <string>Frecuencia:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3">
-                <widget class="QComboBox" name="cbxDbx_sblaster_oplrate">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="lb_Dbx_28">
-                 <property name="text">
-                  <string>IRQ:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="cbxDbx_sblaster_irq">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="lb_Dbx_29">
-                 <property name="text">
-                  <string>DMA:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QComboBox" name="cbxDbx_sblaster_dma">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0">
-                <widget class="QLabel" name="lb_Dbx_30">
-                 <property name="text">
-                  <string>HDMA:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1">
-                <widget class="QComboBox" name="cbxDbx_sblaster_hdma">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="3">
-                <widget class="QComboBox" name="cbxDbx_sblaster_oplemu">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>Opl emu:</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <spacer name="verticalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>57</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="tabSonido_2">
-            <attribute name="title">
-             <string>Gravis Ultrasound</string>
-            </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_7">
-             <item>
-              <layout class="QGridLayout" name="gridLayout_5">
-               <item row="0" column="0" colspan="5">
-                <widget class="QCheckBox" name="chkDbx_gus_gus">
-                 <property name="text">
-                  <string>Activa la emulación de Gravis Ultrasound</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="lb_Dbx_33">
-                 <property name="text">
-                  <string>Address:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="cbxDbx_gus_gusbase">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QLabel" name="lb_Dbx_36">
-                 <property name="text">
-                  <string>Frecuencia:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3" colspan="2">
-                <widget class="QComboBox" name="cbxDbx_gus_gusrate">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="lb_Dbx_34">
-                 <property name="text">
-                  <string>IRQ 1:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="cbxDbx_gus_irq1">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QLabel" name="lb_Dbx_37">
-                 <property name="text">
-                  <string>DMA 1:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3" colspan="2">
-                <widget class="QComboBox" name="cbxDbx_gus_dma1">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="lb_Dbx_35">
-                 <property name="text">
-                  <string>IRQ 2:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="cbxDbx_gus_irq2">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QLabel" name="lb_Dbx_38">
-                 <property name="text">
-                  <string>DMA 2:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="3" colspan="2">
-                <widget class="QComboBox" name="cbxDbx_gus_dma2">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="4">
-                <widget class="QLineEdit" name="txtDbx_gus_ultradir">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <spacer name="verticalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>77</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="tabSonido_3">
-            <attribute name="title">
-             <string>MIDI</string>
-            </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
-             <item>
-              <layout class="QGridLayout" name="gridLayout_6">
-               <item row="0" column="0">
-                <widget class="QCheckBox" name="chkDbx_activar_mpu401">
-                 <property name="text">
-                  <string>Activar emulación MPU-401</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="lb_Dbx_39">
-                 <property name="text">
-                  <string>MPU-401:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2">
-                <widget class="QComboBox" name="cbxDbx_midi_mpu401">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="chkDbx_midi_intelligent">
-                 <property name="text">
-                  <string>Modo inteligente</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0" colspan="2">
-                <widget class="QLabel" name="lb_Dbx_40">
-                 <property name="text">
-                  <string>Dispositivo que recibirá los datos MIDI desde el MPU-401:</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QComboBox" name="cbxDbx_midi_device">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0" colspan="2">
-                <widget class="QLabel" name="lb_Dbx_41">
-                 <property name="text">
-                  <string>Frecuencia de muestreo de la emulación de música MT32:</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QComboBox" name="cbxDbx_midi_mt32rate">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="3">
-                <widget class="QLabel" name="lb_Dbx_42">
-                 <property name="text">
-                  <string>Opciones de configuración especiales para el dispositivo:</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0" colspan="2">
-                <widget class="QLineEdit" name="txtDbx_midi_config">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <spacer name="verticalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>63</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="tabSonido_4">
-            <attribute name="title">
-             <string>Configuración Adicional</string>
-            </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_9">
-             <item>
-              <layout class="QGridLayout" name="gridLayout_7">
-               <item row="0" column="0" colspan="4">
-                <widget class="QCheckBox" name="chkDbx_speaker_pcspeaker">
-                 <property name="text">
-                  <string>Activa el altavoz interno</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0" colspan="4">
-                <widget class="QCheckBox" name="chkDbx_speaker_disney">
-                 <property name="text">
-                  <string>Activa Disney Sound Source</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0" colspan="3">
-                <widget class="QLabel" name="lb_Dbx_43">
-                 <property name="text">
-                  <string>Frecuencia de muestreo de la generación de sonido del altavoz interno:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3">
-                <widget class="QComboBox" name="cbxDbx_speaker_pcrate">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="lb_Dbx_45">
-                 <property name="text">
-                  <string>Tandy:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1" colspan="2">
-                <widget class="QComboBox" name="cbxDbx_speaker_tandy">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="2">
-                <widget class="QComboBox" name="cbxDbx_speaker_tandyrate">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="2" colspan="2">
-                <widget class="QLabel" name="lb_Dbx_44">
-                 <property name="text">
-                  <string>Frecuencia de muestreo de la generación de sonido Tandy de 3 voces. La emulación de sonido Tandy está presente si se selecciona tandy como máquina:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <spacer name="verticalSpacer_7">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>41</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lb_Dbx_23">
-           <property name="text">
-            <string>Frecuencia:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QComboBox" name="cbxDbx_mixer_rate">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
+             <width>100</width>
              <height>24</height>
             </size>
            </property>
@@ -1720,67 +734,276 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="lb_Dbx_24">
+         <item row="0" column="9">
+          <widget class="QLabel" name="lb_Dbx_71">
            <property name="text">
-            <string>Bloque:</string>
+            <string>Versión MS-DOS</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QLineEdit" name="txtDbx_mixer_blocksize">
+         <item row="2" column="0" colspan="2">
+          <widget class="QComboBox" name="cbxDbx_cpu_cputype">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2" colspan="7">
+          <widget class="QLabel" name="lb_Dbx_17">
+           <property name="text">
+            <string>Cuantos cuadros salta DOSBox antes de dibujar uno</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0" colspan="2">
+          <widget class="QComboBox" name="cbxDbx_dos_umb">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="2">
+          <widget class="QComboBox" name="cbxDbx_render_frameskip">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2" colspan="7">
+          <widget class="QLabel" name="lb_Dbx_18">
+           <property name="text">
+            <string>umb -- Activa o desactiva soporte para memoria UMB</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="0" colspan="10">
+          <widget class="QCheckBox" name="chkDbx_joystick_timed">
+           <property name="text">
+            <string>timed -- Permitir los intervalos sincronizados para el eje. (falso es el estilo de comportamiento viejo)</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="2">
+          <widget class="QComboBox" name="cbxDbx_dosbox_memsize">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2" colspan="7">
+          <widget class="QLabel" name="lb_Dbx_15">
+           <property name="text">
+            <string>Cantidad de memoria (Mb) que DOSBox tendrá disponible</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0" colspan="2">
+          <widget class="QComboBox" name="cbxDbx_cpu_cycles">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0">
+          <widget class="QLabel" name="lb_Dbx_20">
+           <property name="text">
+            <string>Arriba</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="2">
+          <widget class="QLabel" name="lb_Dbx_21">
+           <property name="text">
+            <string>Abajo</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="7">
+          <widget class="QLabel" name="lb_Dbx_69">
+           <property name="text">
+            <string>limit:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="8">
+          <widget class="QComboBox" name="cbxDbx_cpu_cycles_limitmode">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0" colspan="2">
+          <widget class="QLabel" name="lb_Dbx_22">
+           <property name="text">
+            <string>Emulador de joystick:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="6">
+          <widget class="QComboBox" name="cbxDbx_cpu_cycles_protmode">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <widget class="QSpinBox" name="spinDbx_cpu_cycleup">
            <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
            </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="lb_Dbx_25">
-           <property name="text">
-            <string>Prebuffer:</string>
+           <property name="maximum">
+            <number>9000</number>
+           </property>
+           <property name="value">
+            <number>10</number>
            </property>
           </widget>
          </item>
-         <item row="6" column="0">
-          <widget class="QLineEdit" name="txtDbx_mixer_prebuffer">
+         <item row="8" column="2">
+          <widget class="QLabel" name="lb_Dbx_67">
+           <property name="text">
+            <string>realmode:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="5">
+          <widget class="QLabel" name="lb_Dbx_68">
+           <property name="text">
+            <string>protected mode:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="3">
+          <widget class="QSpinBox" name="spinDbx_cpu_cycledown">
            <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
            </property>
+           <property name="maximum">
+            <number>9000</number>
+           </property>
+           <property name="value">
+            <number>20</number>
+           </property>
           </widget>
          </item>
-         <item row="7" column="0">
-          <spacer name="verticalSpacer_12">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
+         <item row="8" column="3" colspan="2">
+          <widget class="QComboBox" name="cbxDbx_cpu_cycles_realmode">
+           <property name="minimumSize">
             <size>
-             <width>116</width>
-             <height>58</height>
+             <width>100</width>
+             <height>24</height>
             </size>
            </property>
-          </spacer>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
-         <item row="4" column="1">
-          <spacer name="horizontalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+         <item row="9" column="5" colspan="4">
+          <widget class="QCheckBox" name="chkDbx_cycle_sincronizar">
+           <property name="text">
+            <string>Sincronizar. Arriba/Abajo</string>
            </property>
-           <property name="sizeHint" stdset="0">
+          </widget>
+         </item>
+         <item row="10" column="2" colspan="6">
+          <widget class="QComboBox" name="cbxDbx_joystick_type">
+           <property name="minimumSize">
             <size>
-             <width>40</width>
-             <height>20</height>
+             <width>100</width>
+             <height>24</height>
             </size>
            </property>
-          </spacer>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+           <property name="maxVisibleItems">
+            <number>7</number>
+           </property>
+          </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="lb_Dbx_66"/>
        </item>
        <item>
         <spacer name="verticalSpacer_11">
@@ -1790,7 +1013,837 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>63</height>
+           <height>54</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="tabDbx_4">
+   <attribute name="title">
+    <string>Opciones de sonido</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <property name="margin">
+     <number>4</number>
+    </property>
+    <item>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="title">
+       <string>Todas las opciones de sonido y emulación de sonido</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_12">
+       <property name="verticalSpacing">
+        <number>4</number>
+       </property>
+       <property name="margin">
+        <number>4</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="chkDbx_mixer_nosound">
+         <property name="title">
+          <string>Activar/Desactivar sonido</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <property name="leftMargin">
+           <number>4</number>
+          </property>
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>4</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lb_Dbx_23">
+            <property name="text">
+             <string>Frecuencia:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="cbxDbx_mixer_rate">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>-1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QLineEdit" name="txtDbx_mixer_blocksize">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="2">
+           <widget class="QLineEdit" name="txtDbx_mixer_prebuffer">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QLabel" name="lb_Dbx_25">
+            <property name="text">
+             <string>Prebuffer:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="lb_Dbx_24">
+            <property name="text">
+             <string>Bloque:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="1" rowspan="2">
+        <widget class="QTabWidget" name="tabSonido">
+         <property name="minimumSize">
+          <size>
+           <width>450</width>
+           <height>241</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="tabSonido_1">
+          <attribute name="title">
+           <string>Sound Blaster</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <property name="spacing">
+            <number>4</number>
+           </property>
+           <property name="margin">
+            <number>4</number>
+           </property>
+           <item>
+            <widget class="QGroupBox" name="chkDbx_sblaster_mixer">
+             <property name="title">
+              <string>Permite al mezclador de la soundblaster modificar el del DOSBox</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,0,0">
+              <property name="verticalSpacing">
+               <number>4</number>
+              </property>
+              <property name="margin">
+               <number>4</number>
+              </property>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lb_Dbx_31">
+                <property name="text">
+                 <string>Opl mode:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <spacer name="verticalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>48</width>
+                  <height>101</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="lb_Dbx_30">
+                <property name="text">
+                 <string>HDMA:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="lb_Dbx_29">
+                <property name="text">
+                 <string>DMA:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="lb_Dbx_28">
+                <property name="text">
+                 <string>IRQ:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lb_Dbx_27">
+                <property name="text">
+                 <string>Address:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QComboBox" name="cbxDbx_sblaster_hdma">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QComboBox" name="cbxDbx_sblaster_dma">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QComboBox" name="cbxDbx_sblaster_irq">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="cbxDbx_sblaster_sbbase">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QComboBox" name="cbxDbx_sblaster_oplemu">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Opl emu:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="lb_Dbx_32">
+                <property name="text">
+                 <string>Frecuencia:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="3">
+               <widget class="QComboBox" name="cbxDbx_sblaster_oplrate">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1" colspan="3">
+               <widget class="QComboBox" name="cbxDbx_sblaster_oplmode">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1" colspan="3">
+               <widget class="QComboBox" name="cbxDbx_sblaster_sbtype">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lb_Dbx_26">
+                <property name="text">
+                 <string>Tipo Sound Blaste:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tabSonido_2">
+          <attribute name="title">
+           <string>Gravis Ultrasound</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_10">
+           <property name="spacing">
+            <number>4</number>
+           </property>
+           <property name="margin">
+            <number>4</number>
+           </property>
+           <item>
+            <widget class="QGroupBox" name="chkDbx_gus_gus">
+             <property name="title">
+              <string>Activa la emulación de Gravis Ultrasound</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_6">
+              <property name="verticalSpacing">
+               <number>4</number>
+              </property>
+              <property name="margin">
+               <number>4</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lb_Dbx_33">
+                <property name="text">
+                 <string>Address:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="cbxDbx_gus_gusbase">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="lb_Dbx_36">
+                <property name="text">
+                 <string>Frecuencia:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QComboBox" name="cbxDbx_gus_gusrate">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lb_Dbx_34">
+                <property name="text">
+                 <string>IRQ 1:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="cbxDbx_gus_irq1">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="lb_Dbx_37">
+                <property name="text">
+                 <string>DMA 1:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QComboBox" name="cbxDbx_gus_dma1">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lb_Dbx_35">
+                <property name="text">
+                 <string>IRQ 2:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="cbxDbx_gus_irq2">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="lb_Dbx_38">
+                <property name="text">
+                 <string>DMA 2:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="3">
+               <widget class="QComboBox" name="cbxDbx_gus_dma2">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="4">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Directorio de la Gravis Ultrasound</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0" colspan="4">
+               <widget class="QLineEdit" name="txtDbx_gus_ultradir">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <spacer name="verticalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>77</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tabSonido_3">
+          <attribute name="title">
+           <string>MIDI</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <property name="spacing">
+            <number>4</number>
+           </property>
+           <property name="margin">
+            <number>4</number>
+           </property>
+           <item>
+            <widget class="QGroupBox" name="groupBox_8">
+             <property name="title">
+              <string>Opciones del MIDI</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <property name="verticalSpacing">
+               <number>4</number>
+              </property>
+              <property name="margin">
+               <number>4</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="chkDbx_activar_mpu401">
+                <property name="text">
+                 <string>Activar emulación MPU-401</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="lb_Dbx_39">
+                <property name="text">
+                 <string>MPU-401:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QComboBox" name="cbxDbx_midi_mpu401">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="chkDbx_midi_intelligent">
+                <property name="text">
+                 <string>Modo inteligente</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="2">
+               <widget class="QLabel" name="lb_Dbx_40">
+                <property name="text">
+                 <string>Dispositivo que recibirá los datos MIDI desde el MPU-401:</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QComboBox" name="cbxDbx_midi_device">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="2">
+               <widget class="QLabel" name="lb_Dbx_41">
+                <property name="text">
+                 <string>Frecuencia de muestreo de la emulación de música MT32:</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QComboBox" name="cbxDbx_midi_mt32rate">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0" colspan="3">
+               <widget class="QLabel" name="lb_Dbx_42">
+                <property name="text">
+                 <string>Opciones de configuración especiales para el dispositivo:</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLineEdit" name="txtDbx_midi_config">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <spacer name="verticalSpacer_7">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>63</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tabSonido_4">
+          <attribute name="title">
+           <string>Configuración Adicional</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_12">
+           <property name="spacing">
+            <number>4</number>
+           </property>
+           <property name="margin">
+            <number>4</number>
+           </property>
+           <item>
+            <widget class="QGroupBox" name="groupBox_9">
+             <property name="title">
+              <string>Otras opciones</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_4" columnstretch="1,0">
+              <property name="verticalSpacing">
+               <number>4</number>
+              </property>
+              <property name="margin">
+               <number>4</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="chkDbx_speaker_pcspeaker">
+                <property name="text">
+                 <string>Activa el altavoz interno</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="chkDbx_speaker_disney">
+                <property name="text">
+                 <string>Activa Disney Sound Source</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lb_Dbx_43">
+                <property name="text">
+                 <string>Frecuencia de muestreo de la generación de sonido del altavoz interno:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="cbxDbx_speaker_pcrate">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="lb_Dbx_45">
+                <property name="text">
+                 <string>Tandy:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QComboBox" name="cbxDbx_speaker_tandy">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0" rowspan="2">
+               <widget class="QLabel" name="lb_Dbx_44">
+                <property name="text">
+                 <string>Frecuencia de muestreo de la generación de sonido Tandy de 3 voces. La emulación de sonido Tandy está presente si se selecciona tandy como máquina:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QComboBox" name="cbxDbx_speaker_tandyrate">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="currentIndex">
+                 <number>-1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <spacer name="verticalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>38</width>
+                  <height>146</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
         </spacer>
@@ -1804,261 +1857,249 @@
    <attribute name="title">
     <string>Montaje</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_19">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="groupBox_8">
+     <widget class="QGroupBox" name="groupBox_5">
       <property name="title">
        <string>Opciones de montaje de unidades</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_10">
+      <layout class="QGridLayout" name="gridLayout_8">
+       <property name="verticalSpacing">
+        <number>4</number>
+       </property>
        <property name="margin">
         <number>4</number>
        </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QSplitter" name="splitter">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+       <item row="0" column="0" rowspan="9">
+        <widget class="QSplitter" name="splitter">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <widget class="QTreeWidget" name="twMontajes">
+          <property name="focusPolicy">
+           <enum>Qt::ClickFocus</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="showDropIndicator" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="textElideMode">
+           <enum>Qt::ElideNone</enum>
+          </property>
+          <property name="rootIsDecorated">
+           <bool>false</bool>
+          </property>
+          <property name="uniformRowHeights">
+           <bool>true</bool>
+          </property>
+          <property name="itemsExpandable">
+           <bool>false</bool>
+          </property>
+          <property name="allColumnsShowFocus">
+           <bool>true</bool>
+          </property>
+          <column>
+           <property name="text">
+            <string>Carpeta / Imagen</string>
            </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
+          </column>
+          <column>
+           <property name="text">
+            <string>Letra</string>
            </property>
-           <widget class="QTreeWidget" name="twMontajes">
-            <property name="focusPolicy">
-             <enum>Qt::ClickFocus</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Sunken</enum>
-            </property>
-            <property name="showDropIndicator" stdset="0">
-             <bool>false</bool>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>16</width>
-              <height>16</height>
-             </size>
-            </property>
-            <property name="textElideMode">
-             <enum>Qt::ElideNone</enum>
-            </property>
-            <property name="rootIsDecorated">
-             <bool>false</bool>
-            </property>
-            <property name="uniformRowHeights">
-             <bool>true</bool>
-            </property>
-            <property name="itemsExpandable">
-             <bool>false</bool>
-            </property>
-            <property name="allColumnsShowFocus">
-             <bool>true</bool>
-            </property>
-            <column>
-             <property name="text">
-              <string>Folder/Imagen</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Etiqueta</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Tipo</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Driver</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>CD/DVD index</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Opciones CD/DVD</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>IO Ctrl</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Primer montaje</string>
-             </property>
-            </column>
-           </widget>
-           <widget class="QListWidget" name="previer_mount"/>
-          </widget>
-         </item>
-         <item>
-          <layout class="QGridLayout" name="gridLayout_8">
-           <item row="0" column="1">
-            <widget class="QPushButton" name="btnMount_Add">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Añadir</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/grlida.qrc">
-               <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="btnMount_Subir">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Subir</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/grlida.qrc">
-               <normaloff>:/img16/go-up.png</normaloff>:/img16/go-up.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="btnMount_Edit">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Editar</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/grlida.qrc">
-               <normaloff>:/img16/editar.png</normaloff>:/img16/editar.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QPushButton" name="btnMount_Bajar">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Bajar</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/grlida.qrc">
-               <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QPushButton" name="btnMount_Delete">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Eliminar</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/grlida.qrc">
-               <normaloff>:/img16/eliminar.png</normaloff>:/img16/eliminar.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QPushButton" name="btnMount_Clear">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Limpiar</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/grlida.qrc">
-               <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0" colspan="2">
-            <widget class="QPushButton" name="btnMount_AutoCrear">
-             <property name="minimumSize">
-              <size>
-               <width>300</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Autocrear Montaje</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/grlida.qrc">
-               <normaloff>:/img16/ejecutar_app.png</normaloff>:/img16/ejecutar_app.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0" colspan="2">
-            <widget class="QPushButton" name="btnMount_Primario">
-             <property name="minimumSize">
-              <size>
-               <width>300</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Selecciona montaje primario</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/grlida.qrc">
-               <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <spacer name="verticalSpacer_8">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-        </layout>
+          </column>
+          <column>
+           <property name="text">
+            <string>Tipo</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Etiqueta</string>
+           </property>
+          </column>
+         </widget>
+         <widget class="QPlainTextEdit" name="previer_mount">
+          <property name="tabChangesFocus">
+           <bool>true</bool>
+          </property>
+          <property name="undoRedoEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="lineWrapMode">
+           <enum>QPlainTextEdit::NoWrap</enum>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="2">
+        <widget class="QPushButton" name="btnMount_Add">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Añadir</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2">
+        <widget class="QPushButton" name="btnMount_Edit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Editar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/editar.png</normaloff>:/img16/editar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="2">
+        <widget class="QPushButton" name="btnMount_Delete">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/eliminar.png</normaloff>:/img16/eliminar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <widget class="QPushButton" name="btnMount_Clear">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Limpiar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QPushButton" name="btnMount_Subir">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Subir</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/go-up.png</normaloff>:/img16/go-up.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QPushButton" name="btnMount_Bajar">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Bajar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" colspan="2">
+        <widget class="QPushButton" name="btnMount_AutoCrear">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Autocrear montaje</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/ejecutar_app.png</normaloff>:/img16/ejecutar_app.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1" colspan="2">
+        <widget class="QPushButton" name="btnMount_Primario">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Selecciona montaje primario</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2">
+        <spacer name="verticalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>145</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -2069,366 +2110,443 @@
    <attribute name="title">
     <string>Comunicación</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_18">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
     <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="groupBox_9">
+     <widget class="QGroupBox" name="groupBox_6">
       <property name="title">
        <string>Opciones de comunicaciones como la red o modem</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_11">
-       <property name="leftMargin">
+      <layout class="QGridLayout" name="gridLayout_9">
+       <property name="verticalSpacing">
         <number>4</number>
        </property>
-       <property name="topMargin">
+       <property name="margin">
         <number>4</number>
        </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
-        <number>4</number>
-       </property>
-       <item>
-        <layout class="QGridLayout" name="gridLayout_9">
-         <item row="0" column="0" colspan="6">
-          <widget class="QCheckBox" name="chkDbx_modem_modem">
-           <property name="text">
-            <string>modem -- Activa emulación de módem virtual</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" colspan="6">
-          <widget class="QCheckBox" name="chkDbx_dserial_directserial">
-           <property name="text">
-            <string>directserial -- Activa soporte de puerto serie directo</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" colspan="2">
-          <widget class="QLabel" name="lb_Dbx_47">
-           <property name="text">
-            <string>Puerto COM:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QComboBox" name="cbxDbx_dserial_comport">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="3">
-          <widget class="QLabel" name="lb_Dbx_52">
-           <property name="text">
-            <string>Bits por segundos:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4">
-          <widget class="QComboBox" name="cbxDbx_dserial_defaultbps">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="5">
-          <widget class="QLabel" name="lb_Dbx_65">
-           <property name="text">
-            <string>Modem comport:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0" colspan="2">
-          <widget class="QLabel" name="lb_Dbx_48">
-           <property name="text">
-            <string>Puerto real:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QComboBox" name="cbxDbx_dserial_realport">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="3">
-          <widget class="QLabel" name="lb_Dbx_53">
-           <property name="text">
-            <string>Numero del puerto</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="4">
-          <widget class="QLineEdit" name="txtDbx_modem_listenport">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="5">
-          <widget class="QComboBox" name="cbxDbx_modem_comport">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0" colspan="2">
-          <widget class="QLabel" name="lb_Dbx_49">
-           <property name="text">
-            <string>IRQ:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <widget class="QLineEdit" name="txtDbx_modem_irq">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="3">
-          <widget class="QLabel" name="lb_Dbx_54">
-           <property name="text">
-            <string>Tamaño del Byte:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="4">
-          <widget class="QComboBox" name="cbxDbx_dserial_bytesize">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0" colspan="2">
-          <widget class="QLabel" name="lb_Dbx_50">
-           <property name="text">
-            <string>Paridad de paquetes:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="2">
-          <widget class="QComboBox" name="cbxDbx_dserial_parity">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="3">
-          <widget class="QLabel" name="lb_Dbx_55">
-           <property name="text">
-            <string>Bits de parada:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="4">
-          <widget class="QComboBox" name="cbxDbx_dserial_stopbit">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0" colspan="2">
-          <widget class="QLabel" name="lb_Dbx_46">
-           <property name="text">
-            <string>Seleccionar Serial:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="2">
-          <widget class="QComboBox" name="cbxDbx_select_serial">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="3">
-          <widget class="QLabel" name="lb_Dbx_51">
-           <property name="text">
-            <string>Estado o tipo Serial:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="4">
-          <widget class="QComboBox" name="cbxDbx_type_serial">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="5">
-          <widget class="QPushButton" name="btnDbx_AddSerial">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Añade Serial</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../res/grlida.qrc">
-             <normaloff>:/img16/applications.png</normaloff>:/img16/applications.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QLabel" name="lb_Dbx_60">
-           <property name="text">
-            <string>Serial 1:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="1" colspan="5">
-          <widget class="QLineEdit" name="txtDbx_serial_1">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="lb_Dbx_61">
-           <property name="text">
-            <string>Serial 2:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="1" colspan="5">
-          <widget class="QLineEdit" name="txtDbx_serial_2">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="0">
-          <widget class="QLabel" name="lb_Dbx_62">
-           <property name="text">
-            <string>Serial 3:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="1" colspan="5">
-          <widget class="QLineEdit" name="txtDbx_serial_3">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="0">
-          <widget class="QLabel" name="lb_Dbx_63">
-           <property name="text">
-            <string>Serial 4:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="1" colspan="5">
-          <widget class="QLineEdit" name="txtDbx_serial_4">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="11" column="0" colspan="6">
-          <widget class="QCheckBox" name="chkDbx_ipx_ipx">
-           <property name="text">
-            <string>ipx -- Activa emulación IPX sobre UDP/IP</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="11" column="0" rowspan="2" colspan="6">
+        <widget class="QGroupBox" name="chkDbx_ipx_ipx">
+         <property name="title">
+          <string>ipx -- Activa emulación IPX sobre UDP/IP</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_13">
+          <property name="verticalSpacing">
+           <number>4</number>
+          </property>
+          <property name="margin">
+           <number>6</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lb_Dbx_72">
+            <property name="text">
+             <string>Red IPX como:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="cbxDbx_ipx_type">
+            <property name="minimumSize">
+             <size>
+              <width>160</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>-1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lb_Dbx_74">
+            <property name="text">
+             <string>Dirección IP del IPX:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QSpinBox" name="spinDbx_ipx_port">
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>65535</number>
+            </property>
+            <property name="value">
+             <number>213</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="lb_Dbx_73">
+            <property name="text">
+             <string>Puerto IPX:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QLineEdit" name="txtDbx_ipx_ip">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
-       <item>
-        <spacer name="verticalSpacer_9">
+       <item row="5" column="0" colspan="2">
+        <widget class="QLabel" name="lb_Dbx_50">
+         <property name="text">
+          <string>Paridad de paquetes:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="5">
+        <widget class="QCheckBox" name="chkDbx_dserial_directserial">
+         <property name="text">
+          <string>directserial -- Activa soporte de puerto serie directo</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="5">
+        <widget class="QCheckBox" name="chkDbx_modem_modem">
+         <property name="text">
+          <string>modem -- Activa emulación de módem virtual</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QComboBox" name="cbxDbx_dserial_parity">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <widget class="QComboBox" name="cbxDbx_dserial_bytesize">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QComboBox" name="cbxDbx_dserial_defaultbps">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <widget class="QLabel" name="lb_Dbx_54">
+         <property name="text">
+          <string>Tamaño del Byte:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <widget class="QLabel" name="lb_Dbx_53">
+         <property name="text">
+          <string>Numero del puerto</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="5">
+        <widget class="QLabel" name="lb_Dbx_65">
+         <property name="text">
+          <string>Modem comport:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QComboBox" name="cbxDbx_dserial_realport">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="lb_Dbx_49">
+         <property name="text">
+          <string>IRQ:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QLabel" name="lb_Dbx_48">
+         <property name="text">
+          <string>Puerto real:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QLineEdit" name="txtDbx_modem_irq">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="QLineEdit" name="txtDbx_modem_listenport">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="5">
+        <widget class="QComboBox" name="cbxDbx_modem_comport">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLabel" name="lb_Dbx_52">
+         <property name="text">
+          <string>Bits por segundos:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3">
+        <widget class="QLabel" name="lb_Dbx_55">
+         <property name="text">
+          <string>Bits de parada:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QComboBox" name="cbxDbx_dserial_comport">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QLabel" name="lb_Dbx_47">
+         <property name="text">
+          <string>Puerto COM:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="4">
+        <widget class="QComboBox" name="cbxDbx_dserial_stopbit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="2">
+        <widget class="QLabel" name="lb_Dbx_46">
+         <property name="text">
+          <string>Seleccionar Serial:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QComboBox" name="cbxDbx_select_serial">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <widget class="QLabel" name="lb_Dbx_51">
+         <property name="text">
+          <string>Estado o tipo Serial:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="4">
+        <widget class="QComboBox" name="cbxDbx_type_serial">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="5">
+        <widget class="QPushButton" name="btnDbx_AddSerial">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Añade Serial</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/applications.png</normaloff>:/img16/applications.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="lb_Dbx_60">
+         <property name="text">
+          <string>Serial 1:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1" colspan="4">
+        <widget class="QLineEdit" name="txtDbx_serial_1">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="lb_Dbx_61">
+         <property name="text">
+          <string>Serial 2:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1" colspan="4">
+        <widget class="QLineEdit" name="txtDbx_serial_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="lb_Dbx_62">
+         <property name="text">
+          <string>Serial 3:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1" colspan="4">
+        <widget class="QLineEdit" name="txtDbx_serial_3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="lb_Dbx_63">
+         <property name="text">
+          <string>Serial 4:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1" colspan="4">
+        <widget class="QLineEdit" name="txtDbx_serial_4">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <spacer name="verticalSpacer_10">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -2449,247 +2567,206 @@
    <attribute name="title">
     <string>Autoexec</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_17">
+   <layout class="QVBoxLayout" name="verticalLayout_7">
     <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="groupBox_10">
+     <widget class="QGroupBox" name="chkDbx_autoexec">
       <property name="title">
-       <string>Montaje de unidades manualmente</string>
+       <string>Activar configuración manual del [autoexec] del DOSBox</string>
       </property>
-      <layout class="QVBoxLayout" name="_2">
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_13">
        <property name="spacing">
-        <number>2</number>
+        <number>0</number>
        </property>
        <property name="margin">
         <number>4</number>
        </property>
        <item>
-        <widget class="QCheckBox" name="chkDbx_autoexec">
-         <property name="text">
-          <string>Activar Configuración manual del [autoexec] del DOSBox</string>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <property name="spacing">
+          <number>6</number>
          </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
+         <item>
+          <widget class="QToolButton" name="btnToolDbx_mount_HD">
+           <property name="minimumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Mount Driver</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/drive_hd.png</normaloff>:/img16/drive_hd.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="btnToolDbx_mount_CD">
+           <property name="minimumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Mount CD-Rom</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/drive_cdrom.png</normaloff>:/img16/drive_cdrom.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="btnToolDbx_mount_Floppy">
+           <property name="minimumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Mount Floppy</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/drive_floppy.png</normaloff>:/img16/drive_floppy.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="btnToolDbx_mount_ImgFloppy">
+           <property name="minimumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Mount Image Floppy</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/floppy_1.png</normaloff>:/img16/floppy_1.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="btnToolDbx_mount_ImgCD">
+           <property name="minimumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Mount Image ISO, CUE/BIN</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/cd_iso.png</normaloff>:/img16/cd_iso.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="btnToolDbx_mount_ImgHD">
+           <property name="minimumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Mount Image HD</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/drive_hd.png</normaloff>:/img16/drive_hd.png</iconset>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="hSpacerToolBarMount">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>95</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QFrame" name="frame">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
-          <property name="spacing">
-           <number>6</number>
-          </property>
-          <property name="margin">
-           <number>0</number>
-          </property>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
-            <property name="spacing">
-             <number>4</number>
-            </property>
-            <item>
-             <widget class="QToolButton" name="btnToolDbx_mount_HD">
-              <property name="minimumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Mount Driver</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../res/grlida.qrc">
-                <normaloff>:/img16/drive_hd.png</normaloff>:/img16/drive_hd.png</iconset>
-              </property>
-              <property name="autoRaise">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="btnToolDbx_mount_CD">
-              <property name="minimumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Mount CD-Rom</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../res/grlida.qrc">
-                <normaloff>:/img16/drive_cdrom.png</normaloff>:/img16/drive_cdrom.png</iconset>
-              </property>
-              <property name="autoRaise">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="btnToolDbx_mount_Floppy">
-              <property name="minimumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Mount Floppy</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../res/grlida.qrc">
-                <normaloff>:/img16/drive_floppy.png</normaloff>:/img16/drive_floppy.png</iconset>
-              </property>
-              <property name="autoRaise">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_7">
-            <property name="spacing">
-             <number>4</number>
-            </property>
-            <item>
-             <widget class="QToolButton" name="btnToolDbx_mount_ImgFloppy">
-              <property name="minimumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Mount Image Floppy</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../res/grlida.qrc">
-                <normaloff>:/img16/floppy_1.png</normaloff>:/img16/floppy_1.png</iconset>
-              </property>
-              <property name="autoRaise">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="btnToolDbx_mount_ImgCD">
-              <property name="minimumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Mount Image ISO, CUE/BIN</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../res/grlida.qrc">
-                <normaloff>:/img16/cd_iso.png</normaloff>:/img16/cd_iso.png</iconset>
-              </property>
-              <property name="autoRaise">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="btnToolDbx_mount_ImgHD">
-              <property name="minimumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Mount Image HD</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../res/grlida.qrc">
-                <normaloff>:/img16/drive_hd.png</normaloff>:/img16/drive_hd.png</iconset>
-              </property>
-              <property name="autoRaise">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <spacer name="hSpacerToolBarMount">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>95</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="txtDbx_Autoexec"/>
+        <widget class="QPlainTextEdit" name="txtDbx_Autoexec"/>
        </item>
       </layout>
      </widget>
@@ -2700,32 +2777,26 @@
    <attribute name="title">
     <string>Miscelánea</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_16">
+   <layout class="QVBoxLayout" name="verticalLayout_8">
     <property name="margin">
      <number>4</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="groupBox_11">
+     <widget class="QGroupBox" name="groupBox_7">
       <property name="title">
        <string>Otras opciones como la prioridad del emulador, directorio de capturas y sonido, etc...</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_12">
-       <property name="leftMargin">
-        <number>4</number>
-       </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="margin">
         <number>4</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="gridLayout_10">
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="verticalSpacing">
+          <number>4</number>
+         </property>
          <item row="0" column="0">
-          <widget class="QGroupBox" name="groupBox_12">
+          <widget class="QGroupBox" name="groupBox_10">
            <property name="minimumSize">
             <size>
              <width>200</width>
@@ -2736,6 +2807,9 @@
             <string>Prioridad DOSBox seleccionado</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_14">
+            <property name="margin">
+             <number>4</number>
+            </property>
             <item>
              <widget class="QRadioButton" name="rbtPrioridadBaja">
               <property name="text">
@@ -2770,8 +2844,8 @@
            </layout>
           </widget>
          </item>
-         <item row="0" column="1" colspan="2">
-          <widget class="QGroupBox" name="groupBox_13">
+         <item row="0" column="1">
+          <widget class="QGroupBox" name="groupBox_11">
            <property name="minimumSize">
             <size>
              <width>200</width>
@@ -2779,9 +2853,12 @@
             </size>
            </property>
            <property name="title">
-            <string>Prioridad DOSBox NO seleccionado</string>
+            <string>Prioridad DOSBox No seleccionado</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_15">
+            <property name="margin">
+             <number>4</number>
+            </property>
             <item>
              <widget class="QRadioButton" name="rbtNoPrioridadBaja">
               <property name="text">
@@ -2816,29 +2893,6 @@
            </layout>
           </widget>
          </item>
-         <item row="0" column="3">
-          <spacer name="horizontalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="0" colspan="4">
-          <widget class="QLabel" name="lb_Dbx_56">
-           <property name="text">
-            <string>Archivo usado para cargar/guardar el mapa de teclas/eventos:</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="0" colspan="2">
           <widget class="QLineEdit" name="txtDbx_sdl_mapperfile">
            <property name="maximumSize">
@@ -2867,7 +2921,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
@@ -2890,18 +2944,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0" colspan="4">
-          <widget class="QLabel" name="lb_Dbx_57">
-           <property name="text">
-            <string>language -- Selecciona otro archivo de idioma:</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -2933,7 +2977,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
@@ -2956,18 +3000,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0" colspan="4">
-          <widget class="QLabel" name="lb_Dbx_58">
-           <property name="text">
-            <string>captures -- Directorio donde se capturarán cosas como sonido,midi o pantallas:</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -2999,7 +3033,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
@@ -3022,12 +3056,12 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="7" column="0" colspan="4">
+         <item row="7" column="0" colspan="2">
           <widget class="QLabel" name="lb_Dbx_59">
            <property name="text">
             <string>Directorio donde esta la musica del juego asi como la BSO, sonido:</string>
@@ -3065,7 +3099,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
            </property>
           </widget>
@@ -3088,22 +3122,52 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="4">
+          <widget class="QLabel" name="lb_Dbx_58">
+           <property name="text">
+            <string>captures -- Directorio donde se capturarán cosas como sonido, midi o pantallas:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="4">
+          <widget class="QLabel" name="lb_Dbx_57">
+           <property name="text">
+            <string>language -- Selecciona otro archivo de idioma:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" colspan="4">
+          <widget class="QLabel" name="lb_Dbx_56">
+           <property name="text">
+            <string>Archivo usado para cargar/guardar el mapa de teclas/eventos:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_10">
+        <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>4</height>
+           <height>40</height>
           </size>
          </property>
         </spacer>
@@ -3120,16 +3184,16 @@
   <tabstop>btnDbx_FileConfg_clear</tabstop>
   <tabstop>cbxDbx_Profiles</tabstop>
   <tabstop>chkDbx_loadfix</tabstop>
+  <tabstop>spinDbx_loadfix_mem</tabstop>
   <tabstop>chkDbx_cerrar_dbox</tabstop>
   <tabstop>chkDbx_consola_dbox</tabstop>
-  <tabstop>txtDbx_loadfix_mem</tabstop>
   <tabstop>cbxDbx_dos_keyboardlayout</tabstop>
-  <tabstop>txtDbx_path_exe</tabstop>
   <tabstop>btnDbx_ExeJuego</tabstop>
+  <tabstop>txtDbx_path_exe</tabstop>
   <tabstop>btnDbx_ExeJuego_clear</tabstop>
   <tabstop>txtDbx_parametros_exe</tabstop>
-  <tabstop>txtDbx_path_setup</tabstop>
   <tabstop>btnDbx_ExeSetup</tabstop>
+  <tabstop>txtDbx_path_setup</tabstop>
   <tabstop>btnDbx_ExeSetup_clear</tabstop>
   <tabstop>txtDbx_parametros_setup</tabstop>
   <tabstop>chkDbx_sdl_fullscreen</tabstop>
@@ -3140,27 +3204,20 @@
   <tabstop>chkDbx_sdl_waitonerror</tabstop>
   <tabstop>chkDbx_sdl_usescancodes</tabstop>
   <tabstop>cbxDbx_sdl_fullresolution</tabstop>
-  <tabstop>cbxDbx_sdl_hwscale</tabstop>
   <tabstop>cbxDbx_sdl_windowresolution</tabstop>
-  <tabstop>cbxDbx_sdl_sensitivity</tabstop>
   <tabstop>cbxDbx_sdl_output</tabstop>
   <tabstop>cbxDbx_dosbox_machine</tabstop>
   <tabstop>cbxDbx_render_scaler</tabstop>
+  <tabstop>cbxDbx_sdl_hwscale</tabstop>
+  <tabstop>cbxDbx_sdl_sensitivity</tabstop>
   <tabstop>cbxDbx_dosbox_memsize</tabstop>
   <tabstop>cbxDbx_cpu_core</tabstop>
+  <tabstop>cbxDbx_dos_version</tabstop>
   <tabstop>cbxDbx_cpu_cputype</tabstop>
   <tabstop>cbxDbx_render_frameskip</tabstop>
   <tabstop>chkDbx_dos_xms</tabstop>
   <tabstop>chkDbx_dos_ems</tabstop>
   <tabstop>cbxDbx_dos_umb</tabstop>
-  <tabstop>cbxDbx_cpu_cycles</tabstop>
-  <tabstop>cbxDbx_cpu_cycles_realmode</tabstop>
-  <tabstop>cbxDbx_cpu_cycles_protmode</tabstop>
-  <tabstop>cbxDbx_cpu_cycles_limitmode</tabstop>
-  <tabstop>spinDbx_1</tabstop>
-  <tabstop>spinDbx_2</tabstop>
-  <tabstop>chkDbx_cycle_sincronizar</tabstop>
-  <tabstop>cbxDbx_joystick_type</tabstop>
   <tabstop>chkDbx_joystick_timed</tabstop>
   <tabstop>chkDbx_joystick_autofire</tabstop>
   <tabstop>chkDbx_joystick_swap34</tabstop>
@@ -3169,27 +3226,27 @@
   <tabstop>cbxDbx_mixer_rate</tabstop>
   <tabstop>txtDbx_mixer_blocksize</tabstop>
   <tabstop>txtDbx_mixer_prebuffer</tabstop>
-  <tabstop>tabWidget</tabstop>
+  <tabstop>tabSonido</tabstop>
   <tabstop>chkDbx_sblaster_mixer</tabstop>
   <tabstop>cbxDbx_sblaster_sbtype</tabstop>
+  <tabstop>cbxDbx_sblaster_oplmode</tabstop>
   <tabstop>cbxDbx_sblaster_sbbase</tabstop>
+  <tabstop>cbxDbx_sblaster_oplrate</tabstop>
   <tabstop>cbxDbx_sblaster_irq</tabstop>
+  <tabstop>cbxDbx_sblaster_oplemu</tabstop>
   <tabstop>cbxDbx_sblaster_dma</tabstop>
   <tabstop>cbxDbx_sblaster_hdma</tabstop>
-  <tabstop>cbxDbx_sblaster_oplmode</tabstop>
-  <tabstop>cbxDbx_sblaster_oplrate</tabstop>
-  <tabstop>cbxDbx_sblaster_oplemu</tabstop>
   <tabstop>chkDbx_gus_gus</tabstop>
   <tabstop>cbxDbx_gus_gusbase</tabstop>
+  <tabstop>cbxDbx_gus_gusrate</tabstop>
   <tabstop>cbxDbx_gus_irq1</tabstop>
   <tabstop>cbxDbx_gus_irq2</tabstop>
-  <tabstop>cbxDbx_gus_gusrate</tabstop>
   <tabstop>cbxDbx_gus_dma1</tabstop>
   <tabstop>cbxDbx_gus_dma2</tabstop>
   <tabstop>txtDbx_gus_ultradir</tabstop>
   <tabstop>chkDbx_activar_mpu401</tabstop>
-  <tabstop>chkDbx_midi_intelligent</tabstop>
   <tabstop>cbxDbx_midi_mpu401</tabstop>
+  <tabstop>chkDbx_midi_intelligent</tabstop>
   <tabstop>cbxDbx_midi_device</tabstop>
   <tabstop>cbxDbx_midi_mt32rate</tabstop>
   <tabstop>txtDbx_midi_config</tabstop>
@@ -3198,15 +3255,14 @@
   <tabstop>cbxDbx_speaker_pcrate</tabstop>
   <tabstop>cbxDbx_speaker_tandy</tabstop>
   <tabstop>cbxDbx_speaker_tandyrate</tabstop>
-  <tabstop>twMontajes</tabstop>
   <tabstop>btnMount_Add</tabstop>
   <tabstop>btnMount_Edit</tabstop>
   <tabstop>btnMount_Delete</tabstop>
   <tabstop>btnMount_Clear</tabstop>
-  <tabstop>btnMount_AutoCrear</tabstop>
-  <tabstop>btnMount_Primario</tabstop>
   <tabstop>btnMount_Subir</tabstop>
   <tabstop>btnMount_Bajar</tabstop>
+  <tabstop>btnMount_AutoCrear</tabstop>
+  <tabstop>btnMount_Primario</tabstop>
   <tabstop>previer_mount</tabstop>
   <tabstop>chkDbx_modem_modem</tabstop>
   <tabstop>chkDbx_dserial_directserial</tabstop>
@@ -3217,16 +3273,19 @@
   <tabstop>cbxDbx_select_serial</tabstop>
   <tabstop>cbxDbx_dserial_defaultbps</tabstop>
   <tabstop>txtDbx_modem_listenport</tabstop>
-  <tabstop>cbxDbx_modem_comport</tabstop>
   <tabstop>cbxDbx_dserial_bytesize</tabstop>
   <tabstop>cbxDbx_dserial_stopbit</tabstop>
   <tabstop>cbxDbx_type_serial</tabstop>
+  <tabstop>cbxDbx_modem_comport</tabstop>
   <tabstop>btnDbx_AddSerial</tabstop>
   <tabstop>txtDbx_serial_1</tabstop>
   <tabstop>txtDbx_serial_2</tabstop>
   <tabstop>txtDbx_serial_3</tabstop>
   <tabstop>txtDbx_serial_4</tabstop>
   <tabstop>chkDbx_ipx_ipx</tabstop>
+  <tabstop>cbxDbx_ipx_type</tabstop>
+  <tabstop>spinDbx_ipx_port</tabstop>
+  <tabstop>txtDbx_ipx_ip</tabstop>
   <tabstop>chkDbx_autoexec</tabstop>
   <tabstop>btnToolDbx_mount_HD</tabstop>
   <tabstop>btnToolDbx_mount_CD</tabstop>
@@ -3243,134 +3302,21 @@
   <tabstop>rbtNoPrioridadNormal</tabstop>
   <tabstop>rbtNoPrioridadAlta</tabstop>
   <tabstop>rbtNoPrioridadMuyAlt</tabstop>
-  <tabstop>txtDbx_sdl_mapperfile</tabstop>
   <tabstop>btnDbx_mapperfile</tabstop>
+  <tabstop>txtDbx_sdl_mapperfile</tabstop>
   <tabstop>btnDbx_mapperfile_clear</tabstop>
-  <tabstop>txtDbx_dosbox_language</tabstop>
   <tabstop>btnDbx_language</tabstop>
+  <tabstop>txtDbx_dosbox_language</tabstop>
   <tabstop>btnDbx_language_clear</tabstop>
-  <tabstop>txtDbx_dosbox_captures</tabstop>
   <tabstop>btnDbx_capturas</tabstop>
+  <tabstop>txtDbx_dosbox_captures</tabstop>
   <tabstop>btnDbx_capturas_clear</tabstop>
-  <tabstop>txtDbx_path_sonido</tabstop>
   <tabstop>btnDbx_musica</tabstop>
+  <tabstop>txtDbx_path_sonido</tabstop>
   <tabstop>btnDbx_musica_clear</tabstop>
  </tabstops>
  <resources>
-  <include location="../res/grlida.qrc"/>
+  <include location="../res/gr-lida.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>btnDbx_FileConfg_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtDbx_path_conf</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>619</x>
-     <y>79</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>539</x>
-     <y>79</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnDbx_ExeJuego_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtDbx_path_exe</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>622</x>
-     <y>286</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>526</x>
-     <y>283</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnDbx_ExeSetup_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtDbx_path_setup</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>615</x>
-     <y>365</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>536</x>
-     <y>365</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnDbx_mapperfile_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtDbx_sdl_mapperfile</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>434</x>
-     <y>208</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>363</x>
-     <y>209</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnDbx_language_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtDbx_dosbox_language</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>432</x>
-     <y>263</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>375</x>
-     <y>263</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnDbx_capturas_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtDbx_dosbox_captures</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>439</x>
-     <y>312</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>353</x>
-     <y>308</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnDbx_musica_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtDbx_path_sonido</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>453</x>
-     <y>367</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>380</x>
-     <y>366</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

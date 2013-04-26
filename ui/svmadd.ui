@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SvmAddClass</class>
- <widget class="QDialog" name="SvmAddClass">
+ <class>frmSvmAdd</class>
+ <widget class="QDialog" name="frmSvmAdd">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>520</width>
-    <height>469</height>
+    <height>490</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>520</width>
+    <height>490</height>
+   </size>
   </property>
   <property name="palette">
    <palette>
@@ -375,13 +381,13 @@
    <string>Asistente del ScummVM</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res/grlida.qrc">
+   <iconset resource="../res/gr-lida.qrc">
     <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_4">
+  <layout class="QVBoxLayout" name="verticalLayout_14">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -389,7 +395,7 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_Logo">
+    <layout class="QHBoxLayout" name="horizontalLayout_Logo_3">
      <property name="spacing">
       <number>0</number>
      </property>
@@ -408,7 +414,7 @@
         </size>
        </property>
        <property name="pixmap">
-        <pixmap resource="../res/grlida.qrc">:/images/wizard_scummvm.png</pixmap>
+        <pixmap resource="../res/gr-lida.qrc">:/images/wizard_scummvm.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>false</bool>
@@ -430,7 +436,7 @@
         </size>
        </property>
        <property name="pixmap">
-        <pixmap resource="../res/grlida.qrc">:/images/wizard_scummvm_bg.png</pixmap>
+        <pixmap resource="../res/gr-lida.qrc">:/images/wizard_scummvm_bg.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -451,18 +457,18 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="page_1">
-      <layout class="QGridLayout" name="verticalLayout_0">
+      <layout class="QGridLayout" name="verticalLayout_4">
+       <property name="horizontalSpacing">
+        <number>6</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>4</number>
+       </property>
        <property name="margin">
         <number>4</number>
        </property>
-       <property name="spacing">
-        <number>6</number>
-       </property>
        <item row="0" column="0">
         <widget class="QTreeWidget" name="twScummVM">
-         <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
-         </property>
          <property name="showDropIndicator" stdset="0">
           <bool>false</bool>
          </property>
@@ -494,7 +500,7 @@
          </column>
          <column>
           <property name="text">
-           <string>Selecciona el Juego a añadir</string>
+           <string>Selecciona el juego a añadir</string>
           </property>
          </column>
          <column>
@@ -507,249 +513,233 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_2">
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="leftMargin">
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="verticalSpacing">
         <number>4</number>
        </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
-        <number>4</number>
-       </property>
-       <item>
-        <layout class="QGridLayout" name="gridLayout_0">
-         <item row="0" column="0">
-          <widget class="QLabel" name="lb_Svm_1">
-           <property name="text">
-            <string>Título:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" colspan="5">
-          <widget class="QLineEdit" name="txtDatos_Titulo">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lb_Svm_2">
-           <property name="text">
-            <string>Etiqueta:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="txtSvm_game_label">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>GameID:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="3" colspan="3">
-          <widget class="QLineEdit" name="txtSvm_game">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="lb_Svm_3">
-           <property name="text">
-            <string>Directorio:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1" colspan="3">
-          <widget class="QLineEdit" name="txtSvm_path">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4">
-          <widget class="QPushButton" name="btnSvm_Path">
-           <property name="minimumSize">
-            <size>
-             <width>30</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../res/grlida.qrc">
-             <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="5">
-          <widget class="QPushButton" name="btnSvm_Path_clear">
-           <property name="minimumSize">
-            <size>
-             <width>30</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../res/grlida.qrc">
-             <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="lb_Svm_4">
-           <property name="text">
-            <string>Guardar partida en:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1" colspan="3">
-          <widget class="QLineEdit" name="txtSvm_path_save">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="4">
-          <widget class="QPushButton" name="btnSvm_PathSave">
-           <property name="minimumSize">
-            <size>
-             <width>30</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../res/grlida.qrc">
-             <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="5">
-          <widget class="QPushButton" name="btnSvm_PathSave_clear">
-           <property name="minimumSize">
-            <size>
-             <width>30</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../res/grlida.qrc">
-             <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="lb_Svm_5">
-           <property name="text">
-            <string>Idioma:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QComboBox" name="cbxSvm_language">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1" colspan="5">
-          <widget class="QCheckBox" name="chkSvm_subtitles">
-           <property name="text">
-            <string>Mostras Subtitulo</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="lb_Svm_6">
-           <property name="text">
-            <string>Plataforma:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QComboBox" name="cbxSvm_platform">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lb_Svm_9">
+         <property name="text">
+          <string>Título:</string>
+         </property>
+        </widget>
        </item>
-       <item>
-        <spacer name="verticalSpacer">
+       <item row="0" column="1" colspan="5">
+        <widget class="QLineEdit" name="txtDatos_Titulo">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lb_Svm_10">
+         <property name="text">
+          <string>Etiqueta:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="txtSvm_game_label">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="lb_Svm_11">
+         <property name="text">
+          <string>GameID:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3" colspan="3">
+        <widget class="QLineEdit" name="txtSvm_gameid">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lb_Svm_12">
+         <property name="text">
+          <string>Directorio:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="3">
+        <widget class="QLineEdit" name="txtSvm_path">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QPushButton" name="btnSvm_Path">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="5">
+        <widget class="QPushButton" name="btnSvm_Path_clear">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lb_Svm_13">
+         <property name="text">
+          <string>Guardar partida en:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="3">
+        <widget class="QLineEdit" name="txtSvm_savepath">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="QPushButton" name="btnSvm_PathSave">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="5">
+        <widget class="QPushButton" name="btnSvm_PathSave_clear">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="lb_Svm_14">
+         <property name="text">
+          <string>Idioma:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QComboBox" name="cbxSvm_language">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QCheckBox" name="chkSvm_subtitles">
+         <property name="text">
+          <string>Mostras subtitulo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="lb_Svm_16">
+         <property name="text">
+          <string>Plataforma:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QComboBox" name="cbxSvm_platform">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <spacer name="verticalSpacer_7">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -761,27 +751,27 @@
          </property>
         </spacer>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+       <item row="8" column="0" colspan="6">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="QPushButton" name="btnDescargarInfo">
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>30</height>
+             <height>26</height>
             </size>
            </property>
            <property name="text">
-            <string>Descargar la Info del Juego</string>
+            <string>Descargar la info del juego</string>
            </property>
            <property name="icon">
-            <iconset resource="../res/grlida.qrc">
+            <iconset resource="../res/gr-lida.qrc">
              <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
            </property>
           </widget>
          </item>
          <item>
-          <spacer name="horizontalSpacer">
+          <spacer name="horizontalSpacer_5">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -798,177 +788,128 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_3">
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="leftMargin">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <property name="verticalSpacing">
         <number>4</number>
        </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
-        <number>4</number>
-       </property>
-       <item>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="lb_Svm_7">
-           <property name="minimumSize">
-            <size>
-             <width>83</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Modo Gráfico:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" colspan="2">
-          <widget class="QComboBox" name="cbxSvm_gfx_mode">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lb_Svm_8">
-           <property name="minimumSize">
-            <size>
-             <width>83</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Modo de Render:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" colspan="2">
-          <widget class="QComboBox" name="cbxSvm_render_mode">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1" colspan="2">
-          <widget class="QCheckBox" name="chkSvm_fullscreen">
-           <property name="text">
-            <string>Pantalla Completa</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1" colspan="2">
-          <widget class="QCheckBox" name="chkSvm_aspect_ratio">
-           <property name="text">
-            <string>Corrección de aspecto</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="lb_Svm_9">
-           <property name="minimumSize">
-            <size>
-             <width>83</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Lector de CD:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QComboBox" name="cbxSvm_cdrom">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>278</width>
-             <height>21</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="lb_Svm_10">
-           <property name="minimumSize">
-            <size>
-             <width>83</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Joystick:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QComboBox" name="cbxSvm_joystick_num">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <item>
-            <property name="text">
-             <string>Joystick 1</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../res/grlida.qrc">
-              <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Joystick 2</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../res/grlida.qrc">
-              <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
-            </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lb_Svm_45">
+         <property name="text">
+          <string>Modo gráfico:</string>
+         </property>
+        </widget>
        </item>
-       <item>
-        <spacer name="verticalSpacer_2">
+       <item row="0" column="1" colspan="2">
+        <widget class="QComboBox" name="cbxSvm_gfx_mode">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lb_Svm_46">
+         <property name="text">
+          <string>Modo de render:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2">
+        <widget class="QComboBox" name="cbxSvm_render_mode">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="chkSvm_fullscreen">
+         <property name="text">
+          <string>Pantalla completa</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="chkSvm_aspect_ratio">
+         <property name="text">
+          <string>Aspect-ratio</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="lb_Svm_47">
+         <property name="text">
+          <string>Lector de CD:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QComboBox" name="cbxSvm_cdrom">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>278</width>
+           <height>21</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="lb_Svm_48">
+         <property name="text">
+          <string>Joystick:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QComboBox" name="cbxSvm_joystick_num">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Joystick 1</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Joystick 2</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <spacer name="verticalSpacer_8">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -983,402 +924,370 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_4">
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <property name="leftMargin">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <property name="verticalSpacing">
         <number>4</number>
        </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
-        <number>4</number>
-       </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QLabel" name="lb_Svm_11">
-           <property name="minimumSize">
-            <size>
-             <width>110</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Modo de Audio:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbxSvm_music_driver">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QGridLayout" name="gridLayout_4">
-         <item row="0" column="0">
-          <widget class="QLabel" name="lb_Svm_12">
-           <property name="minimumSize">
-            <size>
-             <width>110</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Volumen Música:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QSlider" name="h_SliderSvm_music_volume">
-           <property name="maximum">
-            <number>255</number>
-           </property>
-           <property name="value">
-            <number>192</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="posSliderSvm_1">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>192</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lb_Svm_13">
-           <property name="minimumSize">
-            <size>
-             <width>110</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Volumen SFX:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QSlider" name="h_SliderSvm_sfx_volume">
-           <property name="maximum">
-            <number>255</number>
-           </property>
-           <property name="value">
-            <number>192</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="posSliderSvm_2">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>192</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="lb_Svm_14">
-           <property name="minimumSize">
-            <size>
-             <width>110</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Volumen Speech:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QSlider" name="h_SliderSvm_speech_volume">
-           <property name="maximum">
-            <number>255</number>
-           </property>
-           <property name="value">
-            <number>192</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QLabel" name="posSliderSvm_3">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>192</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="lb_Svm_15">
-           <property name="minimumSize">
-            <size>
-             <width>110</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Tiempo de la Música:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QSlider" name="h_SliderSvm_tempo">
-           <property name="minimum">
-            <number>50</number>
-           </property>
-           <property name="maximum">
-            <number>200</number>
-           </property>
-           <property name="value">
-            <number>100</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QLabel" name="posSliderSvm_4">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>100</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="lb_Svm_16">
-           <property name="minimumSize">
-            <size>
-             <width>110</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Velocidad de las Voces:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QSlider" name="h_SliderSvm_talkspeed">
-           <property name="maximum">
-            <number>100</number>
-           </property>
-           <property name="value">
-            <number>60</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <widget class="QLabel" name="posSliderSvm_5">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>60</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="lb_Svm_17">
-           <property name="minimumSize">
-            <size>
-             <width>110</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Nivel de Errores:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QSlider" name="h_SliderSvm_debuglevel">
-           <property name="maximum">
-            <number>10</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="2">
-          <widget class="QLabel" name="posSliderSvm_6">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0">
-          <widget class="QPushButton" name="btnDefectoSvm">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../res/grlida.qrc">
-             <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="lb_Svm_21">
-           <property name="text">
-            <string>Midi Gain:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QLabel" name="lb_Svm_25">
-           <property name="text">
-            <string>Walk Speed:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QSlider" name="h_SliderSvm_midi_gain">
-           <property name="maximum">
-            <number>1000</number>
-           </property>
-           <property name="value">
-            <number>100</number>
-           </property>
-           <property name="sliderPosition">
-            <number>100</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="1">
-          <widget class="QSlider" name="h_SliderSvm_walkspeed">
-           <property name="maximum">
-            <number>4</number>
-           </property>
-           <property name="value">
-            <number>0</number>
-           </property>
-           <property name="sliderPosition">
-            <number>0</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="2">
-          <widget class="QLabel" name="posSliderSvm_7">
-           <property name="minimumSize">
-            <size>
-             <width>51</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>100</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="2">
-          <widget class="QLabel" name="posSliderSvm_8">
-           <property name="minimumSize">
-            <size>
-             <width>51</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="chkSvm_multi_midi">
+       <item row="0" column="0">
+        <widget class="QLabel" name="lb_Svm_15">
          <property name="text">
-          <string>Mixed Adlib/MIDI mode</string>
+          <string>Modo de audio:</string>
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QCheckBox" name="chkSvm_native_mt32">
-         <property name="text">
-          <string>True Roland MT-32 (diseable GM emulation)</string>
+       <item row="0" column="1" colspan="2">
+        <widget class="QComboBox" name="cbxSvm_music_driver">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QCheckBox" name="chkSvm_enable_gs">
+       <item row="1" column="0">
+        <widget class="QLabel" name="lb_Svm_1">
          <property name="text">
-          <string>Permitir el modo de Roland GS</string>
+          <string>Volumen música:</string>
          </property>
         </widget>
        </item>
-       <item>
-        <spacer name="verticalSpacer_3">
+       <item row="1" column="1">
+        <widget class="QSlider" name="h_SliderSvm_music_volume">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>255</number>
+         </property>
+         <property name="value">
+          <number>192</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="valueSliderSvm_music_volume">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>192</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lb_Svm_2">
+         <property name="text">
+          <string>Volumen SFX:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSlider" name="h_SliderSvm_sfx_volume">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>255</number>
+         </property>
+         <property name="value">
+          <number>192</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="valueSliderSvm_sfx_volume">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>192</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lb_Svm_3">
+         <property name="text">
+          <string>Volumen voces:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QSlider" name="h_SliderSvm_speech_volume">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>255</number>
+         </property>
+         <property name="value">
+          <number>192</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="valueSliderSvm_speech_volume">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>192</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="lb_Svm_4">
+         <property name="text">
+          <string>Tiempo de la música:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QSlider" name="h_SliderSvm_tempo">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="minimum">
+          <number>50</number>
+         </property>
+         <property name="maximum">
+          <number>200</number>
+         </property>
+         <property name="value">
+          <number>100</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QLabel" name="valueSliderSvm_tempo">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>100</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="lb_Svm_5">
+         <property name="text">
+          <string>Velocidad de subtitulos:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QSlider" name="h_SliderSvm_talkspeed">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>255</number>
+         </property>
+         <property name="value">
+          <number>60</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QLabel" name="valueSliderSvm_talkspeed">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>60</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="lb_Svm_6">
+         <property name="text">
+          <string>Nivel de errores:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QSlider" name="h_SliderSvm_debuglevel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QLabel" name="valueSliderSvm_debuglevel">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="lb_Svm_7">
+         <property name="text">
+          <string>Midi Gain:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QSlider" name="h_SliderSvm_midi_gain">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>1000</number>
+         </property>
+         <property name="value">
+          <number>100</number>
+         </property>
+         <property name="sliderPosition">
+          <number>100</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
+        <widget class="QLabel" name="valueSliderSvm_midi_gain">
+         <property name="minimumSize">
+          <size>
+           <width>51</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>100</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="lb_Svm_8">
+         <property name="text">
+          <string>Walk Speed:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QSlider" name="h_SliderSvm_walkspeed">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>4</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+         <property name="sliderPosition">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2">
+        <widget class="QLabel" name="valueSliderSvm_walkspeed">
+         <property name="minimumSize">
+          <size>
+           <width>51</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <widget class="QPushButton" name="btnDefectoSvm">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Configuración predeterminada</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0" colspan="3">
+        <spacer name="verticalSpacer_9">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -1390,16 +1299,31 @@
          </property>
         </spacer>
        </item>
+       <item row="10" column="0" colspan="3">
+        <widget class="QCheckBox" name="chkSvm_multi_midi">
+         <property name="text">
+          <string>Mixed Adlib / MIDI mode</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0" colspan="3">
+        <widget class="QCheckBox" name="chkSvm_native_mt32">
+         <property name="text">
+          <string>True Roland MT-32 (diseable GM emulation)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0" colspan="3">
+        <widget class="QCheckBox" name="chkSvm_enable_gs">
+         <property name="text">
+          <string>Permitir el modo de Roland GS</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="page_5">
-      <layout class="QGridLayout" name="verticalLayout_1">
-       <property name="margin">
-        <number>4</number>
-       </property>
-       <property name="spacing">
-        <number>6</number>
-       </property>
+      <layout class="QGridLayout" name="verticalLayout_13">
        <item row="0" column="0">
         <widget class="QLabel" name="lb_wizard_Svm">
          <property name="font">
@@ -1410,8 +1334,8 @@
           </font>
          </property>
          <property name="text">
-          <string>Fin de la Configuración
-Pulsa Aceptar para cerrar el Asistente
+          <string>Fin de la configuración
+Pulsa aceptar para cerrar el asistente
 
 </string>
          </property>
@@ -1428,14 +1352,7 @@ Pulsa Aceptar para cerrar el Asistente
     </widget>
    </item>
    <item>
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="hLayout_botones">
+    <layout class="QHBoxLayout" name="hLayout_botones_3">
      <property name="spacing">
       <number>6</number>
      </property>
@@ -1454,13 +1371,13 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Cancelar</string>
        </property>
        <property name="icon">
-        <iconset resource="../res/grlida.qrc">
+        <iconset resource="../res/gr-lida.qrc">
          <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="hSpacer">
+      <spacer name="hSpacer_3">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -1487,7 +1404,7 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Atrás</string>
        </property>
        <property name="icon">
-        <iconset resource="../res/grlida.qrc">
+        <iconset resource="../res/gr-lida.qrc">
          <normaloff>:/img16/mp_rebobinar_atras.png</normaloff>:/img16/mp_rebobinar_atras.png</iconset>
        </property>
       </widget>
@@ -1504,7 +1421,7 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Siguiente</string>
        </property>
        <property name="icon">
-        <iconset resource="../res/grlida.qrc">
+        <iconset resource="../res/gr-lida.qrc">
          <normaloff>:/img16/mp_rebobinar_adelante.png</normaloff>:/img16/mp_rebobinar_adelante.png</iconset>
        </property>
       </widget>
@@ -1524,7 +1441,7 @@ Pulsa Aceptar para cerrar el Asistente
         <string>Aceptar</string>
        </property>
        <property name="icon">
-        <iconset resource="../res/grlida.qrc">
+        <iconset resource="../res/gr-lida.qrc">
          <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
@@ -1537,9 +1454,12 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>twScummVM</tabstop>
   <tabstop>txtDatos_Titulo</tabstop>
   <tabstop>txtSvm_game_label</tabstop>
+  <tabstop>txtSvm_gameid</tabstop>
+  <tabstop>btnSvm_Path</tabstop>
   <tabstop>txtSvm_path</tabstop>
   <tabstop>btnSvm_Path_clear</tabstop>
-  <tabstop>txtSvm_path_save</tabstop>
+  <tabstop>btnSvm_PathSave</tabstop>
+  <tabstop>txtSvm_savepath</tabstop>
   <tabstop>btnSvm_PathSave_clear</tabstop>
   <tabstop>cbxSvm_language</tabstop>
   <tabstop>chkSvm_subtitles</tabstop>
@@ -1558,203 +1478,19 @@ Pulsa Aceptar para cerrar el Asistente
   <tabstop>h_SliderSvm_tempo</tabstop>
   <tabstop>h_SliderSvm_talkspeed</tabstop>
   <tabstop>h_SliderSvm_debuglevel</tabstop>
+  <tabstop>h_SliderSvm_midi_gain</tabstop>
+  <tabstop>h_SliderSvm_walkspeed</tabstop>
   <tabstop>btnDefectoSvm</tabstop>
   <tabstop>chkSvm_multi_midi</tabstop>
   <tabstop>chkSvm_native_mt32</tabstop>
   <tabstop>chkSvm_enable_gs</tabstop>
-  <tabstop>btnNext</tabstop>
   <tabstop>btnOk</tabstop>
+  <tabstop>btnNext</tabstop>
   <tabstop>btnPrevious</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
-  <include location="../res/grlida.qrc"/>
+  <include location="../res/gr-lida.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>btnCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>SvmAddClass</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>73</x>
-     <y>435</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>214</x>
-     <y>174</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>h_SliderSvm_music_volume</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>posSliderSvm_1</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>47</x>
-     <y>71</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>93</x>
-     <y>71</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>h_SliderSvm_sfx_volume</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>posSliderSvm_2</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>47</x>
-     <y>73</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>93</x>
-     <y>73</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>h_SliderSvm_speech_volume</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>posSliderSvm_3</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>47</x>
-     <y>74</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>93</x>
-     <y>74</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>h_SliderSvm_tempo</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>posSliderSvm_4</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>47</x>
-     <y>75</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>93</x>
-     <y>75</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>h_SliderSvm_talkspeed</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>posSliderSvm_5</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>47</x>
-     <y>76</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>93</x>
-     <y>76</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>h_SliderSvm_debuglevel</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>posSliderSvm_6</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>47</x>
-     <y>78</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>93</x>
-     <y>78</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnSvm_Path_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtSvm_path</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>490</x>
-     <y>144</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>377</x>
-     <y>141</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnSvm_PathSave_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>txtSvm_path_save</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>479</x>
-     <y>169</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>406</x>
-     <y>175</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>h_SliderSvm_midi_gain</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>posSliderSvm_7</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>281</x>
-     <y>271</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>473</x>
-     <y>271</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>h_SliderSvm_walkspeed</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>posSliderSvm_8</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>281</x>
-     <y>298</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>473</x>
-     <y>298</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
