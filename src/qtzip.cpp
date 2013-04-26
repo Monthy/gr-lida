@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2012 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -40,32 +40,52 @@ bool QtZip::abrirZip(const QString file, const QString pwd)
 	if( isZipOpen )
 		uz.closeArchive();
 
-	if(!QFile::exists(file))
+	if( !QFile::exists(file) )
 	{
 		QMessageBox::information(0, "QtZip", QObject::tr("El archivo no existe."));
 		isZipOpen = false;
 		return false;
 	}
 
-	if(!pwd.isEmpty())
+	if( !pwd.isEmpty() )
 		uz.setPassword(pwd);
 
-	ec = uz.openArchive(file);
+	ec_uz = uz.openArchive(file);
 
-	if(ec != UnZip::Ok)
+	if( ec_uz != UnZip::Ok )
 	{
-		QMessageBox::information(0, "QtZip", QObject::tr("Incapaz de abrir el archivo")+": "+ uz.formatError(ec).toAscii() );
+		QMessageBox::information(0, "QtZip", QObject::tr("Incapaz de abrir el archivo") +": "+ uz.formatError(ec_uz).toAscii() );
 		isZipOpen = false;
 		return false;
 	}
 
 	QString comment = uz.archiveComment();
-	if (!comment.isEmpty())
+	if( !comment.isEmpty() )
 		comentarioZip = comment.toAscii().data();
 	else
 		comentarioZip = "";
 
 	isZipOpen = true;
+	return true;
+}
+
+bool QtZip::extractZip(const QString file, const QString out, const QString pwd)
+{
+	abrirZip(file, pwd);
+
+	if( isZipOpen )
+	{
+		ec_uz = uz.extractAll(out);
+		if( ec_uz != UnZip::Ok )
+		{
+			QMessageBox::information(0, "QtZip", QObject::tr("Incapaz de extraer el archivo") +": "+ uz.formatError(ec_uz).toAscii() );
+			uz.closeArchive();
+			return false;
+		}
+
+		return true;
+	}
+
 	return true;
 }
 
@@ -79,13 +99,11 @@ QStringList QtZip::listaZip()
 		listaZip.clear();
 		if( !list.isEmpty() )
 		{
-			int num_total = list.count();
-
+			const int num_total = list.count();
 			for (int i = 0; i < num_total; ++i)
 			{
 				const UnZip::ZipEntry& entry = list.at(i);
-
-				if( entry.type != UnZip::Directory)
+				if( entry.type != UnZip::Directory )
 					listaZip << entry.filename;
 			}
 		}
@@ -109,12 +127,10 @@ void QtZip::listaZipTreeWidget(QTreeWidget *myTreeWidget)
 
 		if( !list.isEmpty() )
 		{
-			int num_total = list.count();
-
+			const int num_total = list.count();
 			for (int i = 0; i < num_total; ++i)
 			{
 				const UnZip::ZipEntry& entry = list.at(i);
-
 				if( entry.type != UnZip::Directory)
 				{
 					QString file, crc, isEncrypted, path;
@@ -158,13 +174,11 @@ void QtZip::listaZipListWidget(QListWidget *myListWidget)
 		myListWidget->clear();
 		if( !list.isEmpty() )
 		{
-			int num_total = list.count();
-
+			const int num_total = list.count();
 			for (int i = 0; i < num_total; ++i)
 			{
 				const UnZip::ZipEntry& entry = list.at(i);
-
-				if( entry.type != UnZip::Directory)
+				if( entry.type != UnZip::Directory )
 				{
 					QString file, path;
 					file = entry.filename;
@@ -190,11 +204,11 @@ QString QtZip::loadTexto(QString filename)
 {
 	if( isZipOpen )
 	{
-		if(!filename.isEmpty())
+		if( !filename.isEmpty() )
 		{
 			QBuffer cbuf;
 			cbuf.open(QIODevice::WriteOnly);
-			ec = uz.extractFile(filename, &cbuf);
+			ec_uz = uz.extractFile(filename, &cbuf);
 			return cbuf.data();
 		} else
 			return "";
@@ -207,11 +221,11 @@ QPixmap QtZip::loadImagen(QString filename)
 	QPixmap pixmap;
 	if( isZipOpen )
 	{
-		if(!filename.isEmpty())
+		if( !filename.isEmpty() )
 		{
 			QBuffer cbuf;
 			cbuf.open(QIODevice::WriteOnly);
-			ec = uz.extractFile(filename, &cbuf);
+			ec_uz = uz.extractFile(filename, &cbuf);
 			pixmap.loadFromData( cbuf.data() );
 		}
 	}
@@ -223,11 +237,11 @@ QBitmap QtZip::loadImagenBitmap(QString filename)
 	QBitmap bitmap;
 	if( isZipOpen )
 	{
-		if(!filename.isEmpty())
+		if( !filename.isEmpty() )
 		{
 			QBuffer cbuf;
 			cbuf.open(QIODevice::WriteOnly);
-			ec = uz.extractFile(filename, &cbuf);
+			ec_uz = uz.extractFile(filename, &cbuf);
 			bitmap.loadFromData( cbuf.data() );
 		}
 	}
