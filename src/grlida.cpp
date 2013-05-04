@@ -345,7 +345,7 @@ void GrLida::setVisible(bool visible)
 // Hace la conexión con la base de datos.
 void GrLida::conectarBaseDatos()
 {
-	sql = new dbSql(grlCfg.db_type, grlCfg.db_server, grlCfg.db_host, grlCfg.db_name, grlCfg.db_username, grlCfg.db_password, grlCfg.db_port, fGrl->Idioma(), grlCfg.NameDirTheme);
+	sql = new dbSql(grlCfg.db_type, grlCfg.db_server, fGrl->getDirRelative(grlCfg.db_host), grlCfg.db_name, grlCfg.db_username, grlCfg.db_password, grlCfg.db_port, fGrl->Idioma(), grlCfg.NameDirTheme);
 
 	if( !sql->dbisOpen() )
 		QMessageBox::critical(this, tr("Error al abrir la base de datos"), tr("No se ha podido establecer una conexión con la base de datos.\nEsta aplicación necesita soporte de SQLite. Mira la documentación de Qt SQL driver para más información.\n\nClick cancelar para salir."), QMessageBox::Cancel);
@@ -1886,14 +1886,14 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 		{
 			lb_panel_3->setPixmap( QPixmap(fGrl->Theme() +"img16/datos.png") );
 
-			cfgExec.f_exe         = QDir::toNativeSeparators(conf_datos["path_exe"].replace("{DirBaseGames}", grlCfg.DirBaseGames));
+			cfgExec.f_exe         = fGrl->getDirRelative(conf_datos["path_exe"]);
 			cfgExec.f_param       = conf_datos["parametros_exe"];
-			cfgExec.f_exe_setup   = QDir::toNativeSeparators(conf_datos["path_setup"].replace("{DirBaseGames}", grlCfg.DirBaseGames));
+			cfgExec.f_exe_setup   = fGrl->getDirRelative(conf_datos["path_setup"]);
 			cfgExec.f_param_setup = conf_datos["parametros_setup"];
-			cfgExec.f_path        = fGrl->getInfoFile(cfgExec.f_exe).Path;
-			cfgExec.f_path_setup  = fGrl->getInfoFile(cfgExec.f_exe_setup).Path;
+			cfgExec.f_path        = fGrl->getInfoFile(fGrl->getDirRelative(cfgExec.f_exe)).Path;
+			cfgExec.f_path_setup  = fGrl->getInfoFile(fGrl->getDirRelative(cfgExec.f_exe_setup)).Path;
 
-			Capturas = conf_datos["path_capturas"];
+			Capturas = fGrl->getDirRelative(conf_datos["path_capturas"]);
 		}
 		else if( tipo_emu == "dosbox" )
 		{
@@ -1902,12 +1902,12 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 			QHash<QString, QString> conf_dosbox = sql->getDatos("dbgrl_emu_dosbox", "WHERE idgrl="+ IdGame +" AND idcat="+ categoria[id_cat].id,
 																"dosbox_captures, opt_consola_dbox, path_conf, path_exe, path_setup, parametros_setup");
 
-			cfgExec.f_exe         = QDir::toNativeSeparators(grlCfg.DirDOSBox);
+			cfgExec.f_exe         = fGrl->getDirRelative(grlCfg.DirDOSBox);
 			cfgExec.f_param       = "-conf|"+ QDir::toNativeSeparators(grlDir.Confdbx + conf_dosbox["path_conf"]);
-			cfgExec.f_exe_setup   = QDir::toNativeSeparators(conf_dosbox["path_setup"].replace("{DirBaseGames}", grlCfg.DirBaseGames));
+			cfgExec.f_exe_setup   = fGrl->getDirRelative(conf_dosbox["path_setup"], "DosGames");
 			cfgExec.f_param_setup = conf_dosbox["parametros_setup"];
-			cfgExec.f_path        = fGrl->getInfoFile(conf_dosbox["path_exe"].replace("{DirBaseGames}", grlCfg.DirBaseGames)).Path;
-			cfgExec.f_path_setup  = fGrl->getInfoFile(conf_dosbox["path_setup"].replace("{DirBaseGames}", grlCfg.DirBaseGames)).Path;
+			cfgExec.f_path        = fGrl->getInfoFile( fGrl->getDirRelative(conf_dosbox["path_exe"], "DosGames") ).Path;
+			cfgExec.f_path_setup  = fGrl->getInfoFile( fGrl->getDirRelative(conf_dosbox["path_setup"], "DosGames") ).Path;
 
 			#ifdef Q_OS_WIN32
 				if( fGrl->StrToBool(conf_dosbox["opt_consola_dbox"]) )
@@ -1919,7 +1919,7 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 			else
 				cfgExec.isCfgExec = true;
 
-			Capturas = conf_dosbox["dosbox_captures"];
+			Capturas = fGrl->getDirRelative(conf_dosbox["dosbox_captures"]);
 		}
 		else if( tipo_emu == "scummvm" )
 		{
@@ -1928,12 +1928,12 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 			stConfigScummVM conf_scummvm = sql->showConfg_ScummVM(IdGame, categoria[id_cat].id);
 			conf_scummvm.description = conf_datos["titulo"];;
 
-			cfgExec.f_exe         = QDir::toNativeSeparators(grlCfg.DirScummVM);
+			cfgExec.f_exe         = fGrl->getDirRelative(grlCfg.DirScummVM);
 			cfgExec.f_param       = "-c"+ grlDir.Temp +"scummvm.ini|-d"+ conf_scummvm.debuglevel +"|"+ conf_scummvm.game_label;
 			cfgExec.f_exe_setup   = "";
 			cfgExec.f_param_setup = "";
-			cfgExec.f_path        = fGrl->getInfoFile(conf_scummvm.path.replace("{DirBaseGames}", grlCfg.DirBaseGames)).Path;
-			cfgExec.f_path_setup  = conf_scummvm.path_setup.replace("{DirBaseGames}", grlCfg.DirBaseGames);
+			cfgExec.f_path        = fGrl->getInfoFile( fGrl->getDirRelative(conf_scummvm.path, "DosGames") ).Path;
+			cfgExec.f_path_setup  = fGrl->getDirRelative(conf_scummvm.path_setup, "DosGames");
 
 			if( cfgExec.f_exe.isEmpty() || cfgExec.f_path.isEmpty() || !QFile::exists( cfgExec.f_path ) )
 				cfgExec.isCfgExec = false;
@@ -1943,7 +1943,7 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 				fGrl->creaIniScummVM(conf_scummvm, grlDir.Temp +"scummvm.ini");
 			}
 
-			Capturas = fGrl->getInfoFile(conf_scummvm.path_capturas).Path;
+			Capturas = fGrl->getInfoFile( fGrl->getDirRelative(conf_scummvm.path_capturas) ).Path;
 			cfgExec.f_path = Capturas;
 		}
 		else if( tipo_emu == "vdmsound" )
@@ -1952,27 +1952,27 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 
 			stConfigVDMSound conf_vdmsound = sql->showConfg_VDMSound(IdGame, categoria[id_cat].id);
 
-			cfgExec.f_exe         = QDir::toNativeSeparators(grlDir.Confvdms + conf_vdmsound.path_conf);
+			cfgExec.f_exe         = grlDir.Confvdms + conf_vdmsound.path_conf;
 			cfgExec.f_param       = "";
 			cfgExec.f_exe_setup   = "";
 			cfgExec.f_param_setup = "";
-			cfgExec.f_path        = fGrl->getInfoFile(conf_vdmsound.path_exe.replace("{DirBaseGames}", grlCfg.DirBaseGames)).Path;
+			cfgExec.f_path        = fGrl->getInfoFile( fGrl->getDirRelative(conf_vdmsound.path_exe) ).Path;
 			cfgExec.f_path_setup  = "";
 
-			Capturas = conf_datos["path_capturas"];
+			Capturas = fGrl->getDirRelative(conf_datos["path_capturas"]);
 		} else {
 			if( emu_list.contains(tipo_emu)  )
 			{
 				lb_panel_3->setPixmap( QPixmap(fGrl->ThemeApp() +"img16_cat/"+ emu_list[tipo_emu].icono) );
 
-				cfgExec.f_exe         = QDir::toNativeSeparators(emu_list[tipo_emu].extra);
-				cfgExec.f_param       = conf_datos["path_exe"] +"|"+ conf_datos["parametros_exe"];
-				cfgExec.f_exe_setup   = QDir::toNativeSeparators(conf_datos["path_setup"]);
+				cfgExec.f_exe         = fGrl->getDirRelative(emu_list[tipo_emu].extra);
+				cfgExec.f_param       = fGrl->getDirRelative(conf_datos["path_exe"]) +"|"+ conf_datos["parametros_exe"];
+				cfgExec.f_exe_setup   = fGrl->getDirRelative(conf_datos["path_setup"]);
 				cfgExec.f_param_setup = conf_datos["parametros_setup"];
-				cfgExec.f_path        = fGrl->getInfoFile(conf_datos["path_exe"].replace("{DirBaseGames}", grlCfg.DirBaseGames)).Path;
-				cfgExec.f_path_setup  = fGrl->getInfoFile(conf_datos["path_setup"].replace("{DirBaseGames}", grlCfg.DirBaseGames)).Path;
+				cfgExec.f_path        = fGrl->getInfoFile( fGrl->getDirRelative(conf_datos["path_exe"]) ).Path;
+				cfgExec.f_path_setup  = fGrl->getInfoFile( fGrl->getDirRelative(conf_datos["path_setup"]) ).Path;
 
-				Capturas = conf_datos["path_capturas"];
+				Capturas = fGrl->getDirRelative(conf_datos["path_capturas"]);
 			} else
 				cargarConfigEmu("");
 		}
@@ -3455,32 +3455,41 @@ void GrLida::on_twFiles_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
 	if( item && column > -1 )
 	{
+		stFileInfo archivo = fGrl->getInfoFile( fGrl->getDirRelative(item->text(4)) );
 		if( item->text(5) == "manual" )
 		{
-			frmImgViewer *ImgViewer = new frmImgViewer(grlCfg, this);
-			ImgViewer->setWindowFlags(Qt::Window);
-			ImgViewer->openZip( item->text(4) );
-			ImgViewer->show();
+			if( archivo.Ext == ".cbz" || archivo.Ext == ".zip")
+			{
+				frmImgViewer *ImgViewer = new frmImgViewer(grlCfg, this);
+				ImgViewer->setWindowFlags(Qt::Window);
+				ImgViewer->openZip( archivo.FilePath );
+				ImgViewer->show();
+			} else
+				fGrl->abrirArchivo( archivo.FilePath );
 		}
 		else if( item->text(5) == "pdf" )
 		{
-			if( grlCfg.OpenPdfExternal )
-				fGrl->abrirArchivo( item->text(4) );
+			if( grlCfg.OpenPdfExternal || archivo.Ext != ".pdf")
+				fGrl->abrirArchivo( archivo.FilePath );
 			else {
 				frmPdfViewer *PdfViewer = new frmPdfViewer(this);
 				PdfViewer->setWindowFlags(Qt::Window);
-				PdfViewer->openPdf( item->text(4) );
+				PdfViewer->openPdf( archivo.FilePath );
 				PdfViewer->show();
 			}
 		}
 		else if( item->text(5) == "ruleta" )
 		{
-			frmRuleta *Ruleta = new frmRuleta(grlCfg, this);
-			Ruleta->setWindowFlags(Qt::Window);
-			Ruleta->cargarRuleta(item->text(4));
-			Ruleta->show();
+			if( archivo.Ext == ".conf" || archivo.Ext == ".zip")
+			{
+				frmRuleta *Ruleta = new frmRuleta(grlCfg, this);
+				Ruleta->setWindowFlags(Qt::Window);
+				Ruleta->cargarRuleta(archivo.FilePath);
+				Ruleta->show();
+			} else
+				fGrl->abrirArchivo( archivo.FilePath );
 		} else
-			fGrl->abrirArchivo( item->text(4) );
+			fGrl->abrirArchivo( archivo.FilePath );
 	}
 }
 

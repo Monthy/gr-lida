@@ -125,10 +125,14 @@ void frmConfigInicial::on_cbxIdioma_activated(int index)
 
 void frmConfigInicial::on_btnDirDbx_clicked()
 {
-	ui->txtDirDbx->setText( fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, ui->txtDirDbx->text(), "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)") );
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, fGrl->getDirRelative(ui->txtDirDbx->text()), "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
 
-	if( QFile::exists( ui->txtDirDbx->text() ) )
-		grlCfg.DirDbx = fGrl->getInfoFile( ui->txtDirDbx->text() ).Path;
+	stFileInfo f_info = fGrl->getInfoFile( archivo );
+	if( f_info.Exists )
+	{
+		ui->txtDirDbx->setText( fGrl->setDirRelative(archivo) );
+		grlCfg.DirDbx = f_info.Path;
+	}
 }
 
 void frmConfigInicial::on_btnDirDbx_find_clicked()
@@ -143,7 +147,7 @@ void frmConfigInicial::on_btnDirDbx_find_clicked()
 	bool ok = false;
 	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" DOSBox", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
 	if( ok && !letra_drive.isEmpty() )
-		ui->txtDirDbx->setText( fGrl->getFindFile(letra_drive, "dosbox.exe") );
+		ui->txtDirDbx->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "dosbox.exe") ) );
 #else
 	#ifdef Q_OS_MAC
 		ui->txtDirDbx->setText( fGrl->getFindFile("/", "dosbox") );
@@ -160,10 +164,14 @@ void frmConfigInicial::on_btnDirDbx_clear_clicked()
 
 void frmConfigInicial::on_btnDirSvm_clicked()
 {
-	ui->txtDirSvm->setText( fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, ui->txtDirSvm->text(), "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)") );
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, fGrl->getDirRelative(ui->txtDirSvm->text()), "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
 
-	if( QFile::exists( ui->txtDirSvm->text() ) )
-		grlCfg.DirSvm = fGrl->getInfoFile( ui->txtDirSvm->text() ).Path;
+	stFileInfo f_info = fGrl->getInfoFile( archivo );
+	if( f_info.Exists )
+	{
+		ui->txtDirSvm->setText( fGrl->setDirRelative(archivo) );
+		grlCfg.DirSvm = f_info.Path;
+	}
 }
 
 void frmConfigInicial::on_btnDirSvm_find_clicked()
@@ -178,7 +186,7 @@ void frmConfigInicial::on_btnDirSvm_find_clicked()
 	bool ok = false;
 	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" ScummVM", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
 	if( ok && !letra_drive.isEmpty() )
-		ui->txtDirSvm->setText( fGrl->getFindFile(letra_drive, "scummvm.exe") );
+		ui->txtDirSvm->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "scummvm.exe") ) );
 #else
 	#ifdef Q_OS_MAC
 		ui->txtDirSvm->setText( fGrl->getFindFile("/", "scummvm") );

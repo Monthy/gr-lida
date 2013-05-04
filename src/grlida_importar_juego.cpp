@@ -25,11 +25,10 @@
 #include "grlida_importar_juego.h"
 
 // INICIO ImportarTwPrototype -----------------------------------------------------------------------------------
-ImportarTwPrototype::ImportarTwPrototype(QString dir_theme, QString dir_base_game, QObject *parent)
+ImportarTwPrototype::ImportarTwPrototype(QString dir_theme, QObject *parent)
 	: QObject(parent)
 {
-	stTheme        = dir_theme;
-	stDirBaseGames = dir_base_game;
+	stTheme = dir_theme;
 }
 
 void ImportarTwPrototype::addItemFind(const QString &titulo, const QString &plataforma, const QString &anno, const QString &url, QString icono)
@@ -62,15 +61,13 @@ void ImportarTwPrototype::addItemDatosFiles(const QString &nombre, const QString
 
 void ImportarTwPrototype::addItemMounts(const QString &path, const QString &label, const QString &tipo_as, const QString &letter, const QString &indx_cd, const QString &opt_mount, const QString &io_ctrl, const QString &select_mount, const QString &opt_size, const QString &opt_freesize, const QString &freesize)
 {
-	QString dir_base_path = path;
-
 	QTreeWidget *widget = qscriptvalue_cast<QTreeWidget*>(thisObject());
 	QTreeWidgetItem *item = new QTreeWidgetItem(widget);
 
 	item->setTextAlignment(1, Qt::AlignCenter);
 	item->setTextAlignment(2, Qt::AlignCenter);
 	item->setIcon( 0, QIcon(fGrl.getIconMount(stTheme, tipo_as, (select_mount == "v")? "s_" : "")) );
-	item->setText( 0, dir_base_path.replace("{DirBaseGames}", stDirBaseGames) );
+	item->setText( 0, fGrl.setDirRelative(path, "DosGames") );
 	item->setText( 1, letter       );
 	item->setText( 2, tipo_as      );
 	item->setText( 3, label        );
@@ -153,7 +150,7 @@ void frmImportarJuego::cargarConfig()
 	ImportPathNew->ui->twDatosJuego->setColumnWidth(1, 120);
 	ImportPathNew->ui->twDatosJuego->setColumnWidth(2, 160);
 
-	twProto = new ImportarTwPrototype(fGrl->Theme(), grlCfg.DirBaseGames, this);
+	twProto = new ImportarTwPrototype(fGrl->Theme(), this);
 	engine  = new QScriptEngine(this);
 
 	engine->setDefaultPrototype(qMetaTypeId<QTreeWidget*>(), engine->newQObject(twProto));
@@ -485,7 +482,7 @@ void frmImportarJuego::mostrarFichaHtml(QHash<QString, QString> datos)
 					item->setTextAlignment(1, Qt::AlignCenter);
 					item->setTextAlignment(2, Qt::AlignCenter);
 					item->setIcon( 0, QIcon(fGrl->getIconMount(fGrl->Theme(), tipo_as, "")) );
-					item->setText( 0, dir_base_path.replace("{DirBaseGames}", grlCfg.DirBaseGames) ); // path
+					item->setText( 0, fGrl->setDirRelative(dir_base_path, "DosGames") ); // path
 					item->setText( 1, list_mount.at(2)  ); // letter
 					item->setText( 2, tipo_as           );
 					item->setText( 3, list_mount.at(4)  ); // label
@@ -594,6 +591,7 @@ void frmImportarJuego::analyzePage(QString filename, bool local, bool tipoDFend)
 			datosImportar.insert(it.name(), ""+ it.value().toString());
 		}
 	}
+/*
 //--------------------------------------------------------------------------------------------
 	qDebug() << "tipoDFend           : " << datosImportar["tipoDFend"];
 	qDebug() << "Datos --------------------------------------------------------";
@@ -799,7 +797,7 @@ void frmImportarJuego::analyzePage(QString filename, bool local, bool tipoDFend)
 	qDebug() << "Svm_alt_intro         :" << datosImportar["Svm_alt_intro"];
 	qDebug() << "Svm_boot_param        :" << datosImportar["Svm_boot_param"];
 //--------------------------------------------------------------------------------------------
-
+*/
 	index_fin_descarga = CargarThumb;
 	emit statusFinished();
 }
@@ -1136,8 +1134,8 @@ void frmImportarJuego::on_btnOk_clicked()
 		else
 			ImportPathNew->ui->txtDbx_path_conf->setText(f_info.Name +".conf");
 
-		ImportPathNew->ui->txtDbx_path_exe->setText( datosImportar["Dbx_path_exe"] );
-		ImportPathNew->ui->txtDbx_path_setup->setText( datosImportar["Dbx_path_setup"] );
+		ImportPathNew->ui->txtDbx_path_exe->setText( fGrl->setDirRelative(datosImportar["Dbx_path_exe"], "DosGames" ) );
+		ImportPathNew->ui->txtDbx_path_setup->setText( fGrl->setDirRelative(datosImportar["Dbx_path_setup"], "DosGames") );
 		ImportPathNew->ui->txtDbx_dosbox_language->setText( datosImportar["Dbx_dosbox_language"] );
 		ImportPathNew->ui->txtDbx_sdl_mapperfile->setText( datosImportar["Dbx_sdl_mapperfile"] );
 		ImportPathNew->ui->txtDbx_gus_ultradir->setText( datosImportar["Dbx_gus_ultradir"] );
@@ -1152,10 +1150,10 @@ void frmImportarJuego::on_btnOk_clicked()
 		ImportPathNew->ui->tabDatConf->setTabEnabled(tabScummVM , true );
 		ImportPathNew->ui->tabDatConf->setTabEnabled(tabVDMSound, false);
 
-		ImportPathNew->ui->txtSvm_path->setText( datosImportar["Svm_path"] );
-		ImportPathNew->ui->txtSvm_path_save->setText( datosImportar["Svm_path_save"] );
-		ImportPathNew->ui->txtSvm_path_setup->setText( datosImportar["Svm_path_setup"] );
-		ImportPathNew->ui->txtSvm_path_extra->setText( datosImportar["Svm_path_extra"] );
+		ImportPathNew->ui->txtSvm_path->setText( fGrl->setDirRelative(datosImportar["Svm_path"], "DosGames") );
+		ImportPathNew->ui->txtSvm_path_save->setText( fGrl->setDirRelative(datosImportar["Svm_path_save"], "DosGames") );
+		ImportPathNew->ui->txtSvm_path_setup->setText( fGrl->setDirRelative(datosImportar["Svm_path_setup"], "DosGames") );
+		ImportPathNew->ui->txtSvm_path_extra->setText( fGrl->setDirRelative(datosImportar["Svm_path_extra"], "DosGames") );
 		ImportPathNew->ui->txtSvm_path_capturas->setText( datosImportar["Svm_path_capturas"] );
 		ImportPathNew->ui->txtSvm_path_sonido->setText( datosImportar["Svm_path_sonido"] );
 	}
@@ -1173,7 +1171,7 @@ void frmImportarJuego::on_btnOk_clicked()
 		else
 			ImportPathNew->ui->txtVdms_path_conf->setText(f_info.Name +".vlp");
 
-		ImportPathNew->ui->txtVdms_path_exe->setText( datosImportar["Vdms_path_exe"] );
+		ImportPathNew->ui->txtVdms_path_exe->setText( fGrl->setDirRelative(datosImportar["Vdms_path_exe"], "DosGames") );
 	}
 
 	if( ImportPathNew->exec() == QDialog::Accepted )
@@ -1206,7 +1204,7 @@ void frmImportarJuego::on_btnCancelar_clicked()
 
 void frmImportarJuego::on_btnAbrir_clicked()
 {
-	QString file_config = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo para importarlo"), grlCfg.DirImportar, grlDir.Home, tr("Soportados") +" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend Reloaded (*.prof);;"+ tr("Todos los archivo") +" (*)", 0, false);
+	QString file_config = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo para importarlo"), grlCfg.DirImportar, grlDir.Home, tr("Soportados") +" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend Reloaded (*.prof);;"+ tr("Todos los archivo") +" (*)");
 
 	stFileInfo f_info = fGrl->getInfoFile( file_config );
 	if( f_info.Exists )

@@ -261,13 +261,13 @@ void frmAddEditMontajes::on_btnDirFile_clicked()
 
 	if( tipo_montaje == "drive" || tipo_montaje == "cdrom" || tipo_montaje == "floppy" )
 	{
-		QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Montaje_path, ui->txtMontaje_path->text() );
+		QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Montaje_path, fGrl->getDirRelative(ui->txtMontaje_path->text(), "DosGames") );
 		if( !directorio.isEmpty() )
 		{
 			QDir dir( directorio );
 			if( dir.exists() )
 			{
-				ui->txtMontaje_path->setText( directorio );
+				ui->txtMontaje_path->setText( fGrl->setDirRelative(directorio, "DosGames") );
 				grlCfg.Montaje_path = ui->txtMontaje_path->text();
 
 				fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Montaje_path", grlCfg.Montaje_path);
@@ -282,7 +282,7 @@ void frmAddEditMontajes::on_btnDirFile_clicked()
 		else
 			tipo_archivo = "";
 
-		QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Montaje_path, ui->txtMontaje_path->text(), tipo_archivo + tr("Todos los archivo") +" (*)", 0, false);
+		QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Montaje_path, fGrl->getDirRelative(ui->txtMontaje_path->text(), "DosGames"), tipo_archivo + tr("Todos los archivo") +" (*)");
 		
 		stFileInfo f_info = fGrl->getInfoFile( archivo );
 		if( f_info.Exists )
@@ -294,9 +294,9 @@ void frmAddEditMontajes::on_btnDirFile_clicked()
 					itemIso->setIcon( QIcon(fGrl->Theme() +"img16/floppy_2.png") );
 				else
 					itemIso->setIcon( QIcon(fGrl->Theme() +"img16/cd_iso.png") );
-				itemIso->setText( archivo );
+				itemIso->setText( fGrl->setDirRelative(archivo, "DosGames") );
 			} else
-				ui->txtMontaje_path->setText( archivo );
+				ui->txtMontaje_path->setText( fGrl->setDirRelative(archivo, "DosGames") );
 
 			grlCfg.Montaje_path = f_info.Path;
 

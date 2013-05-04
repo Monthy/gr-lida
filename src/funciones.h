@@ -140,6 +140,9 @@ public:
 // Devuelve el directorio que usa el GR-lida
 	QString GRlidaHomePath();
 	QString DirApp(){ return stDirApp; }
+// Rutas relativas
+	QString setDirRelative(QString dir, QString carpeta = "");
+	QString getDirRelative(QString dir, QString carpeta = "");
 // Devuelve el directorio del Theme a usar
 	void setTheme(QString theme);
 	QString Theme(){ return stTheme; }

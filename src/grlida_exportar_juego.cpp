@@ -297,14 +297,14 @@ void frmExportarJuego::on_cbxExpotarComo_activated(int index)
 
 void frmExportarJuego::on_btnDirExportPath_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.DirExportPath, ui->txtDirExportPath->text() );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.DirExportPath, fGrl->getDirRelative(ui->txtDirExportPath->text()) );
 
 	if( !directorio.isEmpty() )
 	{
 		QDir dir( directorio );
 		if( dir.exists() )
 		{
-			ui->txtDirExportPath->setText( directorio );
+			ui->txtDirExportPath->setText( fGrl->setDirRelative(directorio) );
 			grlCfg.DirExportPath = ui->txtDirExportPath->text();
 
 			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirExportPath", grlCfg.DirExportPath);

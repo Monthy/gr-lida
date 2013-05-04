@@ -151,8 +151,8 @@ void frmPdfViewer::on_btn_Salir_clicked()
 
 void frmPdfViewer::on_btn_Abrir_clicked()
 {
-	QString fileName = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), lastPath, stHomeDir,
-												tr("Abrir PDF") +" (*.pdf);;"+ tr("Todos los archivo") +" (*)", 0, false);
+	QString fileName = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), lastPath, stHomeDir, tr("Abrir PDF") +" (*.pdf);;"+ tr("Todos los archivo") +" (*)");
+
 	if( !fileName.isEmpty() )
 		openPdf( fileName );
 }

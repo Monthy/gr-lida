@@ -313,14 +313,14 @@ void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeW
 
 void frmSvmAdd::on_btnSvm_Path_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path, ui->txtSvm_path->text() );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path, fGrl->getDirRelative(ui->txtSvm_path->text(), "DosGames") );
 
 	if( !directorio.isEmpty() )
 	{
 		QDir dir( directorio );
 		if( dir.exists() )
 		{
-			ui->txtSvm_path->setText( directorio );
+			ui->txtSvm_path->setText( fGrl->setDirRelative(directorio, "DosGames") );
 			grlCfg.Svm_path = ui->txtSvm_path->text();
 
 			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
@@ -335,14 +335,14 @@ void frmSvmAdd::on_btnSvm_Path_clear_clicked()
 
 void frmSvmAdd::on_btnSvm_PathSave_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_savepath, ui->txtSvm_savepath->text() );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_savepath, fGrl->getDirRelative(ui->txtSvm_savepath->text(), "DosGames") );
 
 	if( !directorio.isEmpty() )
 	{
 		QDir dir( directorio );
 		if( dir.exists() )
 		{
-			ui->txtSvm_savepath->setText( directorio );
+			ui->txtSvm_savepath->setText( fGrl->setDirRelative(directorio, "DosGames") );
 			grlCfg.Svm_savepath = ui->txtSvm_savepath->text();
 
 			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_savepath", grlCfg.Svm_savepath);

@@ -42,11 +42,11 @@ class ImportarTwPrototype : public QObject, public QScriptable
 	Q_OBJECT
 
 public:
-	ImportarTwPrototype(QString dir_theme, QString dir_base_game, QObject *parent = 0);
+	ImportarTwPrototype(QString dir_theme, QObject *parent = 0);
 
 private:
 	Funciones fGrl;
-	QString stDirApp, stTheme, stDirBaseGames;
+	QString stDirApp, stTheme;
 
 public slots:
 	void addItemFind(const QString &titulo, const QString &plataforma, const QString &anno, const QString &url, QString icono = "tag");

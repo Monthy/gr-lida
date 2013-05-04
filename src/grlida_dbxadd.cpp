@@ -433,12 +433,12 @@ void frmDbxAdd::on_btnDbx_FileConfg_clear_clicked()
 
 void frmDbxAdd::on_btnDbx_ExeJuego_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_exe, ui->txtDbx_path_exe->text(), tr("Ejecutables") +" (*.exe; *.bat; *.com);;"+ tr("Todos los archivo") +" (*)", 0, false);
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_exe, fGrl->getDirRelative(ui->txtDbx_path_exe->text(), "DosGames"), tr("Ejecutables") +" (*.exe; *.bat; *.com);;"+ tr("Todos los archivo") +" (*)");
 
 	stFileInfo f_info = fGrl->getInfoFile( archivo );
 	if( f_info.Exists )
 	{
-		ui->txtDbx_path_exe->setText( archivo );
+		ui->txtDbx_path_exe->setText( fGrl->setDirRelative(archivo, "DosGames") );
 		grlCfg.Dbx_path_exe = f_info.Path;
 
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_exe", grlCfg.Dbx_path_exe);
@@ -452,12 +452,12 @@ void frmDbxAdd::on_btnDbx_ExeJuego_clear_clicked()
 
 void frmDbxAdd::on_btnDbx_ExeSetup_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_setup, ui->txtDbx_path_setup->text(), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)", 0, false);
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_setup, fGrl->getDirRelative(ui->txtDbx_path_setup->text(), "DosGames"), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
 
 	stFileInfo f_info = fGrl->getInfoFile( archivo );
 	if( f_info.Exists )
 	{
-		ui->txtDbx_path_setup->setText( archivo );
+		ui->txtDbx_path_setup->setText( fGrl->setDirRelative(archivo, "DosGames") );
 		grlCfg.Dbx_path_setup = f_info.Path;
 
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_setup", grlCfg.Dbx_path_setup);
@@ -618,7 +618,7 @@ void frmDbxAdd::on_btnMount_Bajar_clicked()
 
 void frmDbxAdd::on_btnMount_AutoCrear_clicked()
 {
-	stFileInfo f_info = fGrl->getInfoFile( ui->txtDbx_path_exe->text().replace("{DirBaseGames}", grlCfg.DirBaseGames) );
+	stFileInfo f_info = fGrl->getInfoFile( fGrl->getDirRelative(ui->txtDbx_path_exe->text(), "DosGames") );
 	QTreeWidgetItem *item = new QTreeWidgetItem( ui->twMontajes );
 	item->setIcon( 0, QIcon(fGrl->Theme() +"img16/drive_hd.png") );
 	item->setText( 0, f_info.Path );	// directorio o iso

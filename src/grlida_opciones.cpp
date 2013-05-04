@@ -43,6 +43,7 @@ frmOpciones::frmOpciones(dbSql *m_sql, stGrlCfg m_cfg, QWidget *parent) :
 	grlDir.Datos    = grlDir.Home +"datos/";
 	grlDir.Idiomas  = grlDir.Home +"idiomas/";
 	grlDir.Scripts  = grlDir.Home +"scripts/";
+	grlDir.Smiles   = grlDir.Home +"smiles/";
 	grlDir.Themes   = grlDir.Home +"themes/";
 	grlDir.Thumbs   = grlDir.Home +"thumbs/";
 
@@ -157,7 +158,7 @@ void frmOpciones::cargarConfig()
 	ui->txtDat_Dato->setValidator(new QRegExpValidator(regexp, ui->txtDat_Dato));
 
 // Opciones de base de datos ---------
-	ui->txtDirBD->setText( grlCfg.db_host );
+	ui->txtDirBD->setText( fGrl->setDirRelative(grlCfg.db_host) );
 	ui->txt_dbserver->setText( grlCfg.db_server );
 	ui->txt_dbname->setText( grlCfg.db_name );
 	ui->txt_dbusername->setText( grlCfg.db_username );
@@ -602,12 +603,16 @@ void frmOpciones::on_chkDOSBoxDisp_toggled(bool checked)
 
 void frmOpciones::on_btnDirDbx_clicked()
 {
-	ui->txtDirDbx->setText( fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, ui->txtDirDbx->text(), "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)") );
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, fGrl->getDirRelative(ui->txtDirDbx->text()), "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
 
-	if( QFile::exists( ui->txtDirDbx->text() ) )
-		grlCfg.DirDbx = fGrl->getInfoFile( ui->txtDirDbx->text() ).Path;
+	stFileInfo f_info = fGrl->getInfoFile( archivo );
+	if( f_info.Exists )
+	{
+		ui->txtDirDbx->setText( fGrl->setDirRelative(archivo) );
+		grlCfg.DirDbx = f_info.Path;
 
-	fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirDbx", grlCfg.DirDbx);
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirDbx", grlCfg.DirDbx);
+	}
 }
 
 void frmOpciones::on_btnDirDbx_find_clicked()
@@ -622,7 +627,7 @@ void frmOpciones::on_btnDirDbx_find_clicked()
 	bool ok = false;
 	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" DOSBox", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
 	if( ok && !letra_drive.isEmpty() )
-		ui->txtDirDbx->setText( fGrl->getFindFile(letra_drive, "dosbox.exe") );
+		ui->txtDirDbx->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "dosbox.exe") ) );
 #else
 	#ifdef Q_OS_MAC
 		ui->txtDirDbx->setText( fGrl->getFindFile("/", "dosbox") );
@@ -646,12 +651,16 @@ void frmOpciones::on_chkScummVMDisp_toggled(bool checked)
 
 void frmOpciones::on_btnDirSvm_clicked()
 {
-	ui->txtDirSvm->setText( fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, ui->txtDirSvm->text(), "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)") );
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, fGrl->getDirRelative(ui->txtDirSvm->text()), "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
 
-	if( QFile::exists( ui->txtDirSvm->text() ) )
-		grlCfg.DirSvm = fGrl->getInfoFile( ui->txtDirSvm->text() ).Path;
+	stFileInfo f_info = fGrl->getInfoFile( archivo );
+	if( f_info.Exists )
+	{
+		ui->txtDirSvm->setText( fGrl->setDirRelative(archivo) );
+		grlCfg.DirSvm = f_info.Path;
 
-	fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirSvm", grlCfg.DirSvm );
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirSvm", grlCfg.DirSvm);
+	}
 }
 
 void frmOpciones::on_btnDirSvm_find_clicked()
@@ -666,7 +675,7 @@ void frmOpciones::on_btnDirSvm_find_clicked()
 	bool ok = false;
 	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" ScummVM", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
 	if( ok && !letra_drive.isEmpty() )
-		ui->txtDirSvm->setText( fGrl->getFindFile(letra_drive, "scummvm.exe") );
+		ui->txtDirSvm->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "scummvm.exe") ) );
 #else
 	#ifdef Q_OS_MAC
 		ui->txtDirSvm->setText( fGrl->getFindFile("/", "scummvm") );
@@ -683,8 +692,16 @@ void frmOpciones::on_btnDirSvm_clear_clicked()
 
 void frmOpciones::on_btnDirBaseGames_clicked()
 {
-	ui->txtDirBaseGames->setText( fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.DirBaseGames, ui->txtDirBaseGames->text() ) );
-	grlCfg.DirBaseGames = ui->txtDirBaseGames->text();
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.DirBaseGames, fGrl->getDirRelative(ui->txtDirBaseGames->text(), "DosGames") );
+	if( !directorio.isEmpty() )
+	{
+		QDir dir( directorio );
+		if( dir.exists() )
+		{
+			ui->txtDirBaseGames->setText( fGrl->setDirRelative(directorio, "DosGames") );
+			grlCfg.DirBaseGames = ui->txtDirBaseGames->text();
+		}
+	}
 }
 
 void frmOpciones::on_btnDirBaseGames_clear_clicked()
@@ -1334,7 +1351,7 @@ void frmOpciones::addEditDatosTwLista(bool isNew)
 	}
 
 	if( archivo == "smiles.txt" )
-		dir_img = fGrl->Theme() +"smiles/";
+		dir_img = grlDir.Smiles;
 	else if( archivo == "emu_list.txt" )
 		dir_img = fGrl->ThemeApp() +"img16_cat/";
 	else if( archivo == "svm_lista.txt" )
@@ -1460,7 +1477,7 @@ void frmOpciones::on_cbxDat_Archivo_activated(int index)
 	ui->cbxDat_Img->setMinimumHeight(24);
 
 	if( archivo == "smiles.txt" )
-		dir_img = fGrl->Theme() +"smiles/";
+		dir_img = grlDir.Smiles;
 	else if( archivo == "emu_list.txt" )
 		dir_img = fGrl->ThemeApp() +"img16_cat/";
 	else if( archivo == "svm_lista.txt" )
@@ -1611,14 +1628,18 @@ void frmOpciones::on_txtDat_Extra_textEdited(const QString &arg1)
 
 void frmOpciones::on_btnDatPath_clicked()
 {
-	ui->txtDat_Extra->setText( fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable"), grlCfg.DirOtherEmus, ui->txtDirDbx->text(), tr("Todos los archivo") +" (*)") );
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable"), grlCfg.DirOtherEmus, fGrl->getDirRelative(ui->txtDirDbx->text()), tr("Todos los archivo") +" (*)");
 
-	if( QFile::exists( ui->txtDat_Extra->text() ) )
-		grlCfg.DirOtherEmus = fGrl->getInfoFile( ui->txtDat_Extra->text() ).Path;
+	stFileInfo f_info = fGrl->getInfoFile( archivo );
+	if( f_info.Exists )
+	{
+		ui->txtDat_Extra->setText( fGrl->setDirRelative(archivo) );
+		grlCfg.DirOtherEmus = f_info.Path;
 
-	enabledDatosUpdate(ui->txtDat_Extra->text(), 3);
+		enabledDatosUpdate(ui->txtDat_Extra->text(), 3);
 
-	fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirOtherEmus", grlCfg.DirOtherEmus);
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirOtherEmus", grlCfg.DirOtherEmus);
+	}
 }
 
 void frmOpciones::on_btnDatPath_clear_clicked()
@@ -1650,20 +1671,20 @@ void frmOpciones::on_btnDatBajar_clicked()
 
 void frmOpciones::on_btnDatAddSmile_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlDir.Home, grlDir.Smiles,
-											 tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlDir.Home, grlDir.Smiles, tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
 	stFileInfo f_info = fGrl->getInfoFile(archivo);
-	if( QFile::exists(archivo) )
+	if( f_info.Exists )
 	{
-		if( QFile::exists(fGrl->Theme() +"smiles/"+ f_info.NameExt) )
+		if( QFile::exists(grlDir.Smiles + f_info.NameExt) )
 		{
 			QString hora = "_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss");
-			if( QFile::copy(archivo, fGrl->Theme() +"smiles/"+ f_info.Name + hora + f_info.Ext ) )
-				ui->cbxDat_Img->addItem(QIcon(fGrl->Theme() +"smiles/"+ f_info.Name + hora + f_info.Ext), f_info.Name + hora, f_info.Name + hora + f_info.Ext);
+
+			if( QFile::copy(archivo, grlDir.Smiles + f_info.Name + hora + f_info.Ext) )
+				ui->cbxDat_Img->addItem(QIcon(grlDir.Smiles + f_info.Name + hora + f_info.Ext), f_info.Name + hora, f_info.Name + hora + f_info.Ext);
 		} else {
-			if( QFile::copy(archivo, fGrl->Theme() +"smiles/"+ f_info.NameExt ) )
-				ui->cbxDat_Img->addItem(QIcon(fGrl->Theme() +"smiles/"+ f_info.NameExt), f_info.Name, f_info.NameExt);
+			if( QFile::copy(archivo, grlDir.Smiles + f_info.NameExt) )
+				ui->cbxDat_Img->addItem(QIcon(grlDir.Smiles + f_info.NameExt), f_info.Name, f_info.NameExt);
 		}
 	}
 }
@@ -1726,12 +1747,16 @@ void frmOpciones::on_twDatos_currentItemChanged(QTreeWidgetItem *current, QTreeW
 // Base de Datos-------------------------------------
 void frmOpciones::on_btnDirDB_clicked()
 {
-	ui->txtDirBD->setText( fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DirBD, ui->txtDirBD->text(), tr("Todos los archivo") +" (*)") );
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DirBD, fGrl->getDirRelative(ui->txtDirBD->text()), tr("Todos los archivo") +" (*)");
 
-	if( QFile::exists( ui->txtDirBD->text() ) )
-		grlCfg.DirBD = fGrl->getInfoFile( ui->txtDirBD->text() ).Path;
+	stFileInfo f_info = fGrl->getInfoFile( archivo );
+	if( f_info.Exists )
+	{
+		ui->txtDirBD->setText( fGrl->setDirRelative(archivo) );
+		grlCfg.DirBD = f_info.Path;
 
-	fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirBD", grlCfg.DirBD );
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirBD", grlCfg.DirBD);
+	}
 }
 
 void frmOpciones::on_btnDirDB_clear_clicked()

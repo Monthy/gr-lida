@@ -324,8 +324,8 @@ stFileInfo Funciones::getInfoFile(QString filename, TipoHash hash)
 		info.FilePath = info.Path + fi.fileName();
 		info.Name     = fi.baseName();
 		info.NameExt  = fi.fileName();
-		info.cExt     = "."+ fi.completeSuffix();
-		info.Ext      = "."+ fi.suffix();
+		info.cExt     = "."+ fi.completeSuffix().toLower();
+		info.Ext      = "."+ fi.suffix().toLower();
 		info.Size     = IntToStr( fi.size() );
 		info.Exists   = fi.exists();
 
@@ -516,11 +516,11 @@ QString Funciones::GRlidaHomePath()
 
 				settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
 				settings.beginGroup("SqlDatabase");
-					QString fileDb = settings.value("db_host", stDirApp +"/db_grl.grl").toString();
+					QString fileDb = settings.value("db_host", "./db_grl.grl").toString();
 				settings.endGroup();
 
-				QFileInfo info_db(fileDb);
-				guardarKeyGRLConfig(stDirApp +"GR-lida.conf", "SqlDatabase", "db_host", stDirApp + info_db.fileName());
+				QFileInfo info_db( getDirRelative(fileDb) );
+				guardarKeyGRLConfig(stDirApp +"GR-lida.conf", "SqlDatabase", "db_host", setDirRelative(stDirApp + info_db.fileName()));
 			}
 
 			settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
@@ -540,6 +540,69 @@ QString Funciones::GRlidaHomePath()
 	}
 
 	return stDirApp;
+}
+
+
+// Rutas relativas
+QString Funciones::setDirRelative(QString dir, QString carpeta)
+{
+	QString dir_base_game = "";
+	QString stDirBaseApp  = QDir::toNativeSeparators(stDirApp);
+
+	if( carpeta == "DosGames")
+	{
+		QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
+		settings.beginGroup("OpcGeneral");
+			dir_base_game = settings.value("DirBaseGames", "./DosGames/").toString().isEmpty() ? "./DosGames/" : QDir::toNativeSeparators(settings.value("DirBaseGames").toString());
+		settings.endGroup();
+	}
+
+	if( !carpeta.isEmpty() )
+		carpeta.append("/");
+
+	if( dir_base_game.isEmpty() )
+		dir_base_game = "./"+ carpeta;
+
+	if( dir.startsWith("{DirBaseGames}", Qt::CaseInsensitive) )
+		dir.replace("{DirBaseGames}", dir_base_game);
+
+	if( dir.startsWith(stDirBaseApp, Qt::CaseInsensitive) )
+	{
+		dir.replace(0, stDirBaseApp.length(), "");
+		if( dir.startsWith("/") || dir.startsWith("\\") )
+			return QDir::toNativeSeparators( dir.prepend(".") );
+		else
+			return QDir::toNativeSeparators( dir.prepend("./") );
+	} else
+		return QDir::toNativeSeparators( dir );
+}
+
+QString Funciones::getDirRelative(QString dir, QString carpeta)
+{
+	QString dir_base_game = "";
+	QString stDirBaseApp  = QDir::toNativeSeparators(stDirApp);
+
+	if( carpeta == "DosGames")
+	{
+		QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
+		settings.beginGroup("OpcGeneral");
+			dir_base_game = settings.value("DirBaseGames", "./DosGames/").toString().isEmpty() ? "./DosGames/" : QDir::toNativeSeparators(settings.value("DirBaseGames").toString());
+		settings.endGroup();
+	}
+
+	if( !carpeta.isEmpty() )
+		carpeta.append("/");
+
+	if( dir_base_game.isEmpty() )
+		dir_base_game = "./"+ carpeta;
+
+	if( dir_base_game.startsWith("./") || dir_base_game.startsWith(".\\") )
+		dir_base_game = stDirBaseApp;
+
+	if( dir.startsWith("./") || dir.startsWith(".\\") )
+		return QDir::toNativeSeparators( dir.replace(0, 2, dir_base_game) );
+	else
+		return QDir::toNativeSeparators( dir );
 }
 
 // Devuelve el directorio del Theme a usar
@@ -665,7 +728,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 	settings.beginGroup("SqlDatabase");
 		config.db_type      = settings.value("db_type"     , "QSQLITE").toString();
 		config.db_server    = settings.value("db_server"   , "localhost").toString();
-		config.db_host      = settings.value("db_host"     , stDirApp +"db_grl.grl").toString();
+		config.db_host      = settings.value("db_host"     , "./db_grl.grl").toString();
 		config.db_name      = settings.value("db_name"     , "").toString();
 		config.db_username  = settings.value("db_username" , "").toString();
 		config.db_password  = settings.value("db_password" , "").toString();
@@ -680,7 +743,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.DirApp       = settings.value("DirApp"      , "homepath").toString();
 		config.DirDOSBox    = settings.value("DirDOSBox"   , "").toString();
 		config.DirScummVM   = settings.value("DirScummVM"  , "").toString();
-		config.DirBaseGames = settings.value("DirBaseGames", "").toString();
+		config.DirBaseGames = settings.value("DirBaseGames", "./DosGames/").toString().isEmpty() ? "./DosGames/" : QDir::toNativeSeparators( settings.value("DirBaseGames").toString() );
 		config.DOSBoxDisp   = settings.value("DOSBoxDisp"  , false).toBool();
 		config.ScummVMDisp  = settings.value("ScummVMDisp" , false).toBool();
 	#ifdef Q_OS_WIN32
@@ -2122,7 +2185,7 @@ QString Funciones::getShortPathName(QString longPath)
 // Crea la configuración de los Montajes para el DOSBox
 QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBox cfgDbx)
 {
-	QString NombreEXEDbx, DirEXEDbx, Dbx_loadfix, Dbx_cerrardbx, dir_base_game;
+	QString NombreEXEDbx, DirEXEDbx, Dbx_loadfix, Dbx_cerrardbx;
 	QString mount_letra_primario, mount_dir_primario, mount_dir, montaje_boot, mount_freesize;
 	QString mount_type, mount_drive, mount_letter, mount_label, mount_options, mount_ioctl;
 	int num_mount = 0;
@@ -2130,12 +2193,7 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 	bool mount_Boot = false;
 	QStringList listmontajes, lista_multiple_iso, lista_isos;
 
-	QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
-	settings.beginGroup("OpcGeneral");
-		dir_base_game = settings.value("DirBaseGames", "").toString();
-	settings.endGroup();
-
-	QFileInfo fi( cfgDbx.path_exe.replace("{DirBaseGames}", dir_base_game) );
+	QFileInfo fi( getDirRelative(cfgDbx.path_exe, "DosGames") );
 	NombreEXEDbx = fi.fileName();
 	DirEXEDbx    = fi.absolutePath().replace("/","\\");
 
@@ -2162,7 +2220,7 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 	listmontajes.clear();
 	if( twDbxMount->topLevelItemCount() > 0 )
 	{
-		mount_dir_primario   = twDbxMount->topLevelItem(0)->text(0);
+		mount_dir_primario   = getDirRelative(twDbxMount->topLevelItem(0)->text(0), "DosGames");
 		mount_letra_primario = twDbxMount->topLevelItem(0)->text(1);
 
 		const int count_mount = twDbxMount->topLevelItemCount();
@@ -2171,7 +2229,7 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 			QTreeWidgetItem *item = twDbxMount->topLevelItem( num_mount );
 
 		// Indicamos el directorio y la letra a montar
-			mount_drive  = item->text(0); // Real Drive or Directory or Image ISO, IMA
+			mount_drive  = getDirRelative(item->text(0), "DosGames"); // Real Drive or Directory or Image ISO, IMA
 			mount_letter = item->text(1); // Emulated Drive letter
 
 			if( (item->text(2) == "floppy") || (item->text(2) == "drive") || (item->text(2) == "cdrom") )
@@ -2280,7 +2338,7 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 					lista_multiple_iso.clear();
 					const int lmiso_Size = lista_isos.size();
 					for (int i = 0; i < lmiso_Size; ++i)
-						lista_multiple_iso << "\""+ getShortPathName( lista_isos.at(i) ) +"\"";
+						lista_multiple_iso << "\""+ getShortPathName( getDirRelative(lista_isos.at(i), "DosGames") ) +"\"";
 					mount_drive.clear();
 					mount_drive = lista_multiple_iso.join(" ");
 				}
@@ -2316,7 +2374,7 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 				const int lmisoSize = lista_isos.size();
 				for (int i = 0; i < lmisoSize; ++i)
 				{
-					lista_multiple_iso << "\""+ getShortPathName( lista_isos.at(i) ) +"\"";
+					lista_multiple_iso << "\""+ getShortPathName( getDirRelative(lista_isos.at(i), "DosGames") ) +"\"";
 				}
 				mount_drive.clear();
 				mount_drive = lista_multiple_iso.join(" ");
@@ -2362,11 +2420,11 @@ void Funciones::crearArchivoConfigDbx(stDatosJuego datos, QList<QString> url_lis
 
 void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_list, stConfigDOSBox cfgDbx, QTreeWidget *twDbxMount, stConfigScummVM cfgSvm, stConfigVDMSound cfgVdms, QString dir_app, QString tabla, QString pathSaveConfg, TipoCfg tipo_cfg)
 {
-	QString cfg_out, dirBaseGames, versionDbx;
+	QString cfg_out, versionDbx;//, dirBaseGames
 
 	QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
 	settings.beginGroup("OpcGeneral");
-		dirBaseGames = settings.value("DirBaseGames", "").toString();
+//		dirBaseGames = settings.value("DirBaseGames", "./DosGames/").toString();
 		versionDbx   = settings.value("VersionDBx", "0.74").toString();
 	settings.endGroup();
 
@@ -3003,10 +3061,10 @@ void Funciones::crearArchivoConfigVdmS(stConfigVDMSound cfgVdms, QString pathSav
 QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString tabla, QString filename)
 {
 	QHash<QString, QString> cfgDFend;
-	QSettings optgrl(dir_app +"GR-lida.conf", QSettings::IniFormat);
-	optgrl.beginGroup("OpcGeneral");
-		QString dirBaseGames = optgrl.value("DirBaseGames", "").toString();
-	optgrl.endGroup();
+//	QSettings optgrl(dir_app +"GR-lida.conf", QSettings::IniFormat);
+//	optgrl.beginGroup("OpcGeneral");
+//		QString dirBaseGames = optgrl.value("DirBaseGames", "./DosGames/").toString();
+//	optgrl.endGroup();
 
 // Leer archivo ------------------------------------------------------
 	QString lineas = leerArchivo(filename);
