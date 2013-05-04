@@ -440,6 +440,33 @@ setUpdatesEnabled(false);
 			if( respuesta == 0 )
 			{
 				DatosJuego.tipo_emu = TipoEmu;
+				sql->actualizaDatosItem(categoria.tabla, IdGame, "tipo_emu", TipoEmu);
+
+				Thumbs     = datos.thumbs;
+				CoverFront = datos.cover_front;
+				CoverBack  = datos.cover_back;
+				QString img_tmp_name = "id-"+ IdGame +"_"+ fGrl->eliminar_caracteres(DatosJuego.titulo) +"_"+ TipoEmu;
+
+				if( !datos.thumbs.isEmpty() )
+				{
+					datos.thumbs = img_tmp_name +"_thumbs"+ fGrl->getInfoFile(Thumbs).Ext;
+					QFile::rename(grlDir.Thumbs + Thumbs, grlDir.Thumbs + datos.thumbs);
+					sql->actualizaDatosItem(categoria.tabla, IdGame, "thumbs", datos.thumbs);
+				}
+
+				if( !datos.cover_front.isEmpty() )
+				{
+					datos.cover_front = img_tmp_name +"_cover_front"+ fGrl->getInfoFile(CoverFront).Ext;
+					QFile::rename(grlDir.Covers + CoverFront, grlDir.Covers + datos.cover_front);
+					sql->actualizaDatosItem(categoria.tabla, IdGame, "cover_front", datos.cover_front);
+				}
+
+				if( !datos.cover_back.isEmpty() )
+				{
+					datos.cover_back = img_tmp_name +"_cover_back"+ fGrl->getInfoFile(CoverBack).Ext;
+					QFile::rename(grlDir.Covers + CoverBack, grlDir.Covers + datos.cover_back);
+					sql->actualizaDatosItem(categoria.tabla, IdGame, "cover_back", datos.cover_back);
+				}
 
 				if( TipoEmu == "dosbox" )
 				{
