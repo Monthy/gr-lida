@@ -256,6 +256,7 @@ void frmDbxAdd::cargarDatosDBxMontaje(QTreeWidget *twMontajesDbx)
 			item->setText( 9, itemDbx->text(9) );	// Id_lista
 			item->setText(10, itemDbx->text(10));
 			item->setText(11, itemDbx->text(11));
+			item->setText(12, itemDbx->text(12));
 		}
 	}
 	previerMontajes();
