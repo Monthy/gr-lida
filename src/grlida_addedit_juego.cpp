@@ -616,7 +616,6 @@ bool frmAddEditJuego::setDatosJuegos(bool isSoloDatos)
 	if( !Editando )
 		DatosJuego.fecha = fGrl->getTime();
 
-//	DatosJuego.tipo_emu   = TipoEmu.isEmpty() ? "datos" : TipoEmu;
 	DatosJuego.comentario = ui->txtDatos_Comentario->toPlainText();
 	DatosJuego.favorito   = fGrl->BoolToStr( ui->chkDatos_Favorito->isChecked() );
 
@@ -640,8 +639,8 @@ bool frmAddEditJuego::setDatosJuegos(bool isSoloDatos)
 
 		if( Editando )
 			DatosJuego.idgrl = IdGame;
-	//	else
-	//		DatosJuego.idgrl = "";
+		else
+			DatosJuego.tipo_emu = TipoEmu.isEmpty() ? "datos" : TipoEmu;
 	} else {
 		if( Editando )
 		{
@@ -892,18 +891,18 @@ void frmAddEditJuego::on_btnDescargarInfo_clicked()
 		grlCfg = ImportarJuego->getGrlCfg();
 		cargarDatosJuego(ImportarJuego->getDatosJuegos(), true);
 
-		if( TipoEmu == "dosbox" && DatosJuego.tipo_emu == "dosbox" )
+		if( TipoEmu == "dosbox" && !ImportarJuego->isSoloDatos )
 		{
 			wDbx->cargarDatosDosBox(ImportarJuego->getDatosDosBox());
 			wDbx->cargarDatosDBxMontaje(ImportarJuego->ui->twMontajes);
 		}
 
-		if( TipoEmu == "scummvm" && DatosJuego.tipo_emu == "scummvm" )
+		if( TipoEmu == "scummvm" && !ImportarJuego->isSoloDatos )
 		{
 			wSvm->cargarDatosScummVM(ImportarJuego->getDatosScummVM());
 		}
 
-		if( TipoEmu == "vdmsound" && DatosJuego.tipo_emu == "vdmsound" )
+		if( TipoEmu == "vdmsound" && !ImportarJuego->isSoloDatos )
 		{
 			wVdms->cargarDatosVDMSound(ImportarJuego->getDatosVDMSound());
 		}

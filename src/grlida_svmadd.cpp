@@ -370,7 +370,7 @@ void frmSvmAdd::on_btnDescargarInfo_clicked()
 		DatosJuego = ImportarJuego->getDatosJuegos();
 		ui->txtDatos_Titulo->setText( DatosJuego.titulo );
 
-		if( DatosJuego.tipo_emu == "scummvm" )
+		if( DatosJuego.tipo_emu == "scummvm" && !ImportarJuego->isSoloDatos )
 		{
 			cargarDatosScummVM( ImportarJuego->getDatosScummVM() );
 		}

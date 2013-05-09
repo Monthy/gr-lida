@@ -852,6 +852,8 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 	DatosJuego.parametros_setup = ""+ datos["Dat_parametros_setup"];
 	DatosJuego.path_capturas    = ""+ datos["Dat_path_capturas"];
 
+	isSoloDatos = ImportPathNew->ui->chk_soloDatos->isChecked();
+
 	if( DatosJuego.thumbs != datos["Dat_thumbs"] )
 	{
 		DatosJuego.thumbs = "thumbs_"+ datos["Dat_thumbs"];
@@ -874,7 +876,7 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 		DatosJuego.cover_back_new = false;
 
 // DOSBox --------------------
-	if( TipoEmu == "dosbox" )
+	if( TipoEmu == "dosbox" && !isSoloDatos )
 	{
 		datos["Dbx_path_conf"]       = ImportPathNew->ui->txtDbx_path_conf->text();
 		datos["Dbx_path_exe"]        = ImportPathNew->ui->txtDbx_path_exe->text();
@@ -1006,7 +1008,7 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 	}
 
 // ScummVM -------------------
-	if( TipoEmu == "scummvm" )
+	if( TipoEmu == "scummvm" && !isSoloDatos )
 	{
 		datos["Svm_path"]          = ImportPathNew->ui->txtSvm_path->text();
 		datos["Svm_path_save"]     = ImportPathNew->ui->txtSvm_path_save->text();
@@ -1052,7 +1054,7 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 	}
 
 // VDMSound ------------------
-	if( TipoEmu == "vdmsound" )
+	if( TipoEmu == "vdmsound" && !isSoloDatos )
 	{
 		datos["Vdms_path_conf"] = ImportPathNew->ui->txtVdms_path_conf->text();
 		datos["Vdms_path_exe"]  = ImportPathNew->ui->txtVdms_path_exe->text();
@@ -1120,6 +1122,15 @@ void frmImportarJuego::on_btnOk_clicked()
 
 	index_fin_descarga = CargarCoverFront;
 	emit statusFinished();
+
+	if( datosImportar["Dat_tipo_emu"] == "datos" )
+	{
+		ImportPathNew->ui->chk_soloDatos->setEnabled(false);
+		ImportPathNew->ui->chk_soloDatos->setChecked(true);
+	} else {
+		ImportPathNew->ui->chk_soloDatos->setEnabled(true);
+		ImportPathNew->ui->chk_soloDatos->setChecked(false);
+	}
 
 	if( datosImportar["Dat_tipo_emu"] == "dosbox" )
 	{

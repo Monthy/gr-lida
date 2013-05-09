@@ -484,7 +484,7 @@ void frmDbxAdd::on_btnDescargarInfo_clicked()
 		DatosJuego = ImportarJuego->getDatosJuegos();
 		ui->txtDatos_Titulo->setText( DatosJuego.titulo );
 
-		if( DatosJuego.tipo_emu == "dosbox" )
+		if( DatosJuego.tipo_emu == "dosbox" && !ImportarJuego->isSoloDatos )
 		{
 			if( !ImportarJuego->getDatosDosBox().path_conf.isEmpty() )
 				ui->txtDbx_path_conf->setText( ImportarJuego->getDatosDosBox().path_conf );

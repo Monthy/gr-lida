@@ -1802,6 +1802,7 @@ void Funciones::insertaIconos(QHash<QString, QPixmap> &ico, QString m_dir, QStri
 stDatosJuego Funciones::getDefectDatos(QString icono, QHash<QString, QString> dato)
 {
 	bool isQHash = dato.isEmpty() ? false : true;
+	icono = icono.isEmpty() ? "datos" : icono;
 	stDatosJuego datos;
 	datos.idgrl = isQHash ? dato["Dat_idgrl"] : "";
 //--
@@ -1833,7 +1834,7 @@ stDatosJuego Funciones::getDefectDatos(QString icono, QHash<QString, QString> da
 	datos.cover_back       = isQHash ? dato["Dat_cover_back"]       : "";
 	datos.cover_back_new   = isQHash ? StrToBool(dato["Dat_cover_back_new"])  : false;
 	datos.fecha            = isQHash ? dato["Dat_fecha"]            : "";
-	datos.tipo_emu         = isQHash ? dato["Dat_tipo_emu"]         : "datos";
+	datos.tipo_emu         = isQHash ? dato["Dat_tipo_emu"]         : icono;
 	datos.comentario       = isQHash ? dato["Dat_comentario"]       : "";
 	datos.favorito         = isQHash ? dato["Dat_favorito"]         : "false";
 	datos.rating           = isQHash ? dato["Dat_rating"]           : "0";

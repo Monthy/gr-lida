@@ -209,7 +209,7 @@ void frmVdmsAdd::on_btnDescargarInfo_clicked()
 		DatosJuego = ImportarJuego->getDatosJuegos();
 		ui->txtDatos_Titulo->setText( DatosJuego.titulo );
 
-		if( DatosJuego.tipo_emu == "vdmsound" )
+		if( DatosJuego.tipo_emu == "vdmsound" && !ImportarJuego->isSoloDatos )
 		{
 			cargarDatosVDMSound( ImportarJuego->getDatosVDMSound() );
 		}

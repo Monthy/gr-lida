@@ -74,6 +74,7 @@ public:
 	stConfigVDMSound getDatosVDMSound(){return DatosVDMSound;}
 	stGrlCfg getGrlCfg(){return grlCfg;}
 	QString TipoEmu;
+	bool isSoloDatos;
 
 	Ui::frmImportarJuego *ui;
 
