@@ -2977,9 +2977,9 @@ void Funciones::creaIniScummVM(stConfigScummVM cfgSvm, QString archivo)
 		out << "render_mode"     << "=" << cfgSvm.render_mode     << endl;
 		out << "fullscreen"      << "=" << cfgSvm.fullscreen      << endl;
 		out << "aspect_ratio"    << "=" << cfgSvm.aspect_ratio    << endl;
-		out << "path"            << "=" << QDir::toNativeSeparators(cfgSvm.path) << endl;
-		out << "extrapath"       << "=" << QDir::toNativeSeparators(cfgSvm.path_extra) << endl;
-		out << "savepath"        << "=" << QDir::toNativeSeparators(cfgSvm.path_save) << endl;
+		out << "path"            << "=" << getDirRelative(cfgSvm.path      , "DosGames") << endl;
+		out << "extrapath"       << "=" << getDirRelative(cfgSvm.path_extra, "DosGames") << endl;
+		out << "savepath"        << "=" << getDirRelative(cfgSvm.path_save , "DosGames") << endl;
 		out << "music_driver"    << "=" << cfgSvm.music_driver    << endl;
 		out << "enable_gs"       << "=" << cfgSvm.enable_gs       << endl;
 		out << "multi_midi"      << "=" << cfgSvm.multi_midi      << endl;
@@ -3002,8 +3002,8 @@ void Funciones::creaIniScummVM(stConfigScummVM cfgSvm, QString archivo)
 		out << "gui_theme"  << "=" << "modern" << endl;
 		out << "gfx_mode"   << "=" << "2x"     << endl;
 		out << "fullscreen" << "=" << "false"  << endl;
-		out << "extrapath"  << "=" << QDir::toNativeSeparators(cfgSvm.path_extra) << endl;
-		out << "themepath"  << "=" << QDir::toNativeSeparators(cfgSvm.emu_svmpath) << endl << endl;
+		out << "extrapath"  << "=" << getDirRelative(cfgSvm.path_extra, "DosGames") << endl;
+		out << "themepath"  << "=" << getDirRelative(cfgSvm.emu_svmpath) << endl << endl;
 
 		out.flush();
 	}
