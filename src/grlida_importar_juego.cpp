@@ -767,7 +767,6 @@ void frmImportarJuego::analyzePage(QString filename, bool local, bool tipoDFend)
 	qDebug() << "Svm_fullscreen        :" << datosImportar["Svm_fullscreen"];
 	qDebug() << "Svm_aspect_ratio      :" << datosImportar["Svm_aspect_ratio"];
 	qDebug() << "Svm_path              :" << datosImportar["Svm_path"];
-	qDebug() << "Svm_path_setup        :" << datosImportar["Svm_path_setup"];
 	qDebug() << "Svm_path_extra        :" << datosImportar["Svm_path_extra"];
 	qDebug() << "Svm_path_save         :" << datosImportar["Svm_path_save"];
 	qDebug() << "Svm_path_capturas     :" << datosImportar["Svm_path_capturas"];
@@ -1012,7 +1011,6 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 	{
 		datos["Svm_path"]          = ImportPathNew->ui->txtSvm_path->text();
 		datos["Svm_path_save"]     = ImportPathNew->ui->txtSvm_path_save->text();
-		datos["Svm_path_setup"]    = ImportPathNew->ui->txtSvm_path_setup->text();
 		datos["Svm_path_extra"]    = ImportPathNew->ui->txtSvm_path_extra->text();
 		datos["Svm_path_capturas"] = ImportPathNew->ui->txtSvm_path_capturas->text();
 		datos["Svm_path_sonido"]   = ImportPathNew->ui->txtSvm_path_sonido->text();
@@ -1027,7 +1025,6 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 		DatosScummVM.fullscreen      = ""+ datos["Svm_fullscreen"];
 		DatosScummVM.aspect_ratio    = ""+ datos["Svm_aspect_ratio"];
 		DatosScummVM.path            = ""+ datos["Svm_path"];
-		DatosScummVM.path_setup      = ""+ datos["Svm_path_setup"];
 		DatosScummVM.path_extra      = ""+ datos["Svm_path_extra"];
 		DatosScummVM.path_save       = ""+ datos["Svm_path_save"];
 		DatosScummVM.path_capturas   = ""+ datos["Svm_path_capturas"];
@@ -1163,7 +1160,6 @@ void frmImportarJuego::on_btnOk_clicked()
 
 		ImportPathNew->ui->txtSvm_path->setText( fGrl->setDirRelative(datosImportar["Svm_path"], "DosGames") );
 		ImportPathNew->ui->txtSvm_path_save->setText( fGrl->setDirRelative(datosImportar["Svm_path_save"], "DosGames") );
-		ImportPathNew->ui->txtSvm_path_setup->setText( fGrl->setDirRelative(datosImportar["Svm_path_setup"], "DosGames") );
 		ImportPathNew->ui->txtSvm_path_extra->setText( fGrl->setDirRelative(datosImportar["Svm_path_extra"], "DosGames") );
 		ImportPathNew->ui->txtSvm_path_capturas->setText( datosImportar["Svm_path_capturas"] );
 		ImportPathNew->ui->txtSvm_path_sonido->setText( datosImportar["Svm_path_sonido"] );

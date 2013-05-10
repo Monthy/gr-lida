@@ -260,7 +260,6 @@ struct stGrlCfg {
 	QString Svm_extrapath;
 	QString Svm_path_capturas;
 	QString Svm_path_sonido;
-	QString Svm_path_setup;
 	QString Svm_soundfont;
 // VDMSound
 	QString Vdms_path_exe;
@@ -517,7 +516,6 @@ struct stConfigScummVM {
 	QString fullscreen;
 	QString aspect_ratio;
 	QString path;
-	QString path_setup;
 	QString path_extra;
 	QString path_save;
 	QString path_capturas;

@@ -9,7 +9,6 @@
       <Svm_fullscreen>{Svm_fullscreen}</Svm_fullscreen>
       <Svm_aspect_ratio>{Svm_aspect_ratio}</Svm_aspect_ratio>
       <Svm_path>{Svm_path}</Svm_path>
-      <Svm_path_setup>{Svm_path_setup}</Svm_path_setup>
       <Svm_path_extra>{Svm_path_extra}</Svm_path_extra>
       <Svm_path_save>{Svm_path_save}</Svm_path_save>
       <Svm_path_capturas>{Svm_path_capturas}</Svm_path_capturas>

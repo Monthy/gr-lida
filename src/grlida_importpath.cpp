@@ -95,8 +95,6 @@ void frmImportPath::setTheme()
 	ui->btnSvm_Path_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnSvm_PathSave->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
 	ui->btnSvm_PathSave_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnSvm_PathSetup->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnSvm_PathSetup_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnSvm_PathExtra->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
 	ui->btnSvm_PathExtra_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnSvm_PathCapturas->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
@@ -336,25 +334,6 @@ void frmImportPath::on_btnSvm_PathSave_clicked()
 void frmImportPath::on_btnSvm_PathSave_clear_clicked()
 {
 	ui->txtSvm_path_save->clear();
-}
-
-void frmImportPath::on_btnSvm_PathSetup_clicked()
-{
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Svm_path_setup, fGrl->getDirRelative(ui->txtSvm_path_setup->text(), "DosGames"), tr("Todos los archivo") +" (*)");
-
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
-	{
-		ui->txtSvm_path_setup->setText( fGrl->setDirRelative(archivo, "DosGames") );
-		grlCfg.Svm_path_setup = f_info.Path;
-
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_setup", grlCfg.Svm_path_setup);
-	}
-}
-
-void frmImportPath::on_btnSvm_PathSetup_clear_clicked()
-{
-	ui->txtSvm_path_setup->clear();
 }
 
 void frmImportPath::on_btnSvm_PathExtra_clicked()

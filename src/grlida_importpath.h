@@ -84,8 +84,6 @@ private slots:
 	void on_btnSvm_Path_clear_clicked();
 	void on_btnSvm_PathSave_clicked();
 	void on_btnSvm_PathSave_clear_clicked();
-	void on_btnSvm_PathSetup_clicked();
-	void on_btnSvm_PathSetup_clear_clicked();
 	void on_btnSvm_PathExtra_clicked();
 	void on_btnSvm_PathExtra_clear_clicked();
 	void on_btnSvm_PathCapturas_clicked();

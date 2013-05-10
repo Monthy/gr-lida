@@ -85,8 +85,6 @@ private slots:
 	void on_btnSvm_PathCapturas_clear_clicked();
 	void on_btnSvm_PathSonido_clicked();
 	void on_btnSvm_PathSonido_clear_clicked();
-	void on_btnSvm_PathSetup_clicked();
-	void on_btnSvm_PathSetup_clear_clicked();
 	void on_btnSvm_SoundFont_clicked();
 	void on_btnSvm_SoundFont_clear_clicked();
 

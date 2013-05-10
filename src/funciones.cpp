@@ -879,7 +879,6 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.Svm_extrapath     = QDir::toNativeSeparators(settings.value("Svm_extrapath"    , "").toString());
 		config.Svm_path_capturas = QDir::toNativeSeparators(settings.value("Svm_path_capturas", "").toString());
 		config.Svm_path_sonido   = QDir::toNativeSeparators(settings.value("Svm_path_sonido"  , "").toString());
-		config.Svm_path_setup    = QDir::toNativeSeparators(settings.value("Svm_path_setup"   , "").toString());
 		config.Svm_soundfont     = QDir::toNativeSeparators(settings.value("Svm_soundfont"    , "").toString());
 	// VDMSound
 		config.Vdms_path_exe = QDir::toNativeSeparators(settings.value("Vdms_path_exe", "").toString());
@@ -1059,7 +1058,6 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 		settings.setValue("Svm_extrapath"    , config.Svm_extrapath     );
 		settings.setValue("Svm_path_capturas", config.Svm_path_capturas );
 		settings.setValue("Svm_path_sonido"  , config.Svm_path_sonido   );
-		settings.setValue("Svm_path_setup"   , config.Svm_path_setup    );
 		settings.setValue("Svm_soundfont"    , config.Svm_soundfont     );
 	// VDMSound
 		settings.setValue("Vdms_path_exe", config.Vdms_path_exe );
@@ -1998,7 +1996,6 @@ stConfigScummVM Funciones::getDefectScummVM(QHash<QString, QString> dato)
 	datos.fullscreen        = isQHash ? dato["Svm_fullscreen"]        : "false";
 	datos.aspect_ratio      = isQHash ? dato["Svm_aspect_ratio"]      : "false";
 	datos.path              = isQHash ? dato["Svm_path"]              : "";
-	datos.path_setup        = isQHash ? dato["Svm_path_setup"]        : "";
 	datos.path_extra        = isQHash ? dato["Svm_path_extra"]        : "";
 	datos.path_save         = isQHash ? dato["Svm_path_save"]         : "";
 	datos.path_capturas     = isQHash ? dato["Svm_path_capturas"]     : "";
@@ -2895,7 +2892,6 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Svm_fullscreen}"       , cfgSvm.fullscreen     );
 		cfg_out.replace("{Svm_aspect_ratio}"     , cfgSvm.aspect_ratio   );
 		cfg_out.replace("{Svm_path}"             , cfgSvm.path           );
-		cfg_out.replace("{Svm_path_setup}"       , cfgSvm.path_setup     );
 		cfg_out.replace("{Svm_path_extra}"       , cfgSvm.path_extra     );
 		cfg_out.replace("{Svm_path_save}"        , cfgSvm.path_save      );
 		cfg_out.replace("{Svm_path_capturas}"    , cfgSvm.path_capturas  );
@@ -3345,7 +3341,6 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 		cfgDFend["Svm_fullscreen"]        = BoolToStr( settings.value("fullscreen", false).toBool() );
 		cfgDFend["Svm_aspect_ratio"]      = BoolToStr( settings.value("aspect_ratio", true).toBool() );
 		cfgDFend["Svm_path"]              = settings.value("GamePath", "").toString();
-		cfgDFend["Svm_path_setup"]        = settings.value("path_setup", "").toString();
 		cfgDFend["Svm_path_extra"]        = settings.value("path_extra", "").toString();
 		cfgDFend["Svm_path_save"]         = settings.value("Savepath", "").toString();
 		cfgDFend["Svm_path_capturas"]     = settings.value("path_capturas", "").toString();

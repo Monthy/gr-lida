@@ -900,75 +900,6 @@
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="lb_path_11">
-         <property name="minimumSize">
-          <size>
-           <width>95</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>path_setup</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="txtSvm_path_setup">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="btnSvm_PathSetup">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QPushButton" name="btnSvm_PathSetup_clear">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
         <widget class="QLabel" name="lb_path_12">
          <property name="minimumSize">
           <size>
@@ -981,7 +912,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="2" column="1">
         <widget class="QLineEdit" name="txtSvm_path_extra">
          <property name="minimumSize">
           <size>
@@ -991,7 +922,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
+       <item row="2" column="2">
         <widget class="QPushButton" name="btnSvm_PathExtra">
          <property name="minimumSize">
           <size>
@@ -1014,7 +945,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="3">
+       <item row="2" column="3">
         <widget class="QPushButton" name="btnSvm_PathExtra_clear">
          <property name="minimumSize">
           <size>
@@ -1037,7 +968,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="lb_path_13">
          <property name="minimumSize">
           <size>
@@ -1050,7 +981,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="3" column="1">
         <widget class="QLineEdit" name="txtSvm_path_capturas">
          <property name="minimumSize">
           <size>
@@ -1060,7 +991,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="2">
+       <item row="3" column="2">
         <widget class="QPushButton" name="btnSvm_PathCapturas">
          <property name="minimumSize">
           <size>
@@ -1083,7 +1014,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="3">
+       <item row="3" column="3">
         <widget class="QPushButton" name="btnSvm_PathCapturas_clear">
          <property name="minimumSize">
           <size>
@@ -1106,7 +1037,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="lb_path_14">
          <property name="minimumSize">
           <size>
@@ -1119,7 +1050,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
+       <item row="4" column="1">
         <widget class="QLineEdit" name="txtSvm_path_sonido">
          <property name="minimumSize">
           <size>
@@ -1129,7 +1060,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="2">
+       <item row="4" column="2">
         <widget class="QPushButton" name="btnSvm_PathSonido">
          <property name="minimumSize">
           <size>
@@ -1152,7 +1083,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="3">
+       <item row="4" column="3">
         <widget class="QPushButton" name="btnSvm_PathSonido_clear">
          <property name="minimumSize">
           <size>
@@ -1175,7 +1106,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
+       <item row="5" column="0">
         <spacer name="vSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1433,6 +1364,7 @@
   <tabstop>tabDatConf</tabstop>
   <tabstop>twDatosJuego</tabstop>
   <tabstop>chk_selectDatos</tabstop>
+  <tabstop>chk_soloDatos</tabstop>
   <tabstop>btnDbx_FileConfg</tabstop>
   <tabstop>txtDbx_path_conf</tabstop>
   <tabstop>btnDbx_FileConfg_clear</tabstop>
@@ -1462,9 +1394,6 @@
   <tabstop>btnSvm_PathSave</tabstop>
   <tabstop>txtSvm_path_save</tabstop>
   <tabstop>btnSvm_PathSave_clear</tabstop>
-  <tabstop>btnSvm_PathSetup</tabstop>
-  <tabstop>txtSvm_path_setup</tabstop>
-  <tabstop>btnSvm_PathSetup_clear</tabstop>
   <tabstop>btnSvm_PathExtra</tabstop>
   <tabstop>txtSvm_path_extra</tabstop>
   <tabstop>btnSvm_PathExtra_clear</tabstop>
