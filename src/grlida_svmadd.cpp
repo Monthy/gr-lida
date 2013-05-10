@@ -119,6 +119,8 @@ void frmSvmAdd::setTheme()
 
 void frmSvmAdd::cargarDatosScummVM(stConfigScummVM cfgSvm)
 {
+	DatosScummVM = cfgSvm;
+
 	ui->txtSvm_gameid->setText( cfgSvm.game );
 	ui->txtSvm_game_label->setText( cfgSvm.game_label );
 	ui->cbxSvm_language->setCurrentIndex( ui->cbxSvm_language->findData( cfgSvm.language ) );
