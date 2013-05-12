@@ -771,13 +771,17 @@ QString frmAddEditDosBox::setOpcionesSerial()
 
 void frmAddEditDosBox::on_btnDbx_FileConfg_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Guardar archivo como..."), grlDir.Confdbx, ui->txtDbx_path_conf->text(), tr("Configuraciones") +" DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Guardar archivo como..."), grlDir.Confdbx, "", tr("Configuraciones") +" DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists && !Editando )
-		ui->txtDbx_path_conf->setText(f_info.Name +"_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss") +".conf");
-	else
-		ui->txtDbx_path_conf->setText(f_info.Name +".conf");
+	if( !archivo.isEmpty() )
+	{
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists && !Editando )
+			ui->txtDbx_path_conf->setText(f_info.Name +"_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss") +".conf");
+		else
+			ui->txtDbx_path_conf->setText(f_info.Name +".conf");
+	}
+
 }
 
 void frmAddEditDosBox::on_btnDbx_FileConfg_clear_clicked()
@@ -820,15 +824,18 @@ void frmAddEditDosBox::on_cbxDbx_dos_keyboardlayout_activated(int index)
 
 void frmAddEditDosBox::on_btnDbx_ExeJuego_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_exe, fGrl->getDirRelative(ui->txtDbx_path_exe->text(), "DosGames"), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_exe, "DosGames", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDbx_path_exe->setText( fGrl->setDirRelative(archivo, "DosGames") );
-		grlCfg.Dbx_path_exe = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDbx_path_exe->setText( fGrl->setDirRelative(archivo, "DosGames") );
+			grlCfg.Dbx_path_exe = fGrl->setDirRelative(f_info.Path, "DosGames");
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_exe", grlCfg.Dbx_path_exe);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_exe", grlCfg.Dbx_path_exe);
+		}
 	}
 }
 
@@ -839,15 +846,18 @@ void frmAddEditDosBox::on_btnDbx_ExeJuego_clear_clicked()
 
 void frmAddEditDosBox::on_btnDbx_ExeSetup_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_setup, fGrl->getDirRelative(ui->txtDbx_path_setup->text(), "DosGames"), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_setup, "DosGames", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDbx_path_setup->setText( fGrl->setDirRelative(archivo, "DosGames") );
-		grlCfg.Dbx_path_setup = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDbx_path_setup->setText( fGrl->setDirRelative(archivo, "DosGames") );
+			grlCfg.Dbx_path_setup = fGrl->setDirRelative(f_info.Path, "DosGames");
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_setup", grlCfg.Dbx_path_setup);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_setup", grlCfg.Dbx_path_setup);
+		}
 	}
 }
 
@@ -1086,51 +1096,60 @@ void frmAddEditDosBox::on_btnDbx_AddSerial_clicked()
 
 void frmAddEditDosBox::on_btnToolDbx_mount_HD_clicked()
 {
-	QString m_dir = fGrl->ventanaDirectorios(tr("Seleccionar un directorio"), grlDir.Home, "");
-	addMontajeAutoexec("driver", m_dir);
+	QString directorio = fGrl->ventanaDirectorios(tr("Seleccionar un directorio"), grlDir.Home);
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
+		addMontajeAutoexec("driver", directorio);
 }
 
 void frmAddEditDosBox::on_btnToolDbx_mount_CD_clicked()
 {
-	QString m_dir = fGrl->ventanaDirectorios(tr("Seleccionar un directorio"), grlDir.Home, "");
-	addMontajeAutoexec("cdrom", m_dir);
+	QString directorio = fGrl->ventanaDirectorios(tr("Seleccionar un directorio"), grlDir.Home);
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
+		addMontajeAutoexec("cdrom", directorio);
 }
 
 void frmAddEditDosBox::on_btnToolDbx_mount_Floppy_clicked()
 {
-	QString m_dir = fGrl->ventanaDirectorios(tr("Seleccionar un directorio"), grlDir.Home, "");
-	addMontajeAutoexec("floppy", m_dir);
+	QString directorio = fGrl->ventanaDirectorios(tr("Seleccionar un directorio"), grlDir.Home);
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
+		addMontajeAutoexec("floppy", directorio);
 }
 
 void frmAddEditDosBox::on_btnToolDbx_mount_ImgFloppy_clicked()
 {
-	QString m_file = fGrl->ventanaAbrirArchivos(tr("Selecciona un archivo"), grlDir.Home, "", tr("Imagen") +" (*.ima *.img);;"+ tr("Todos los archivo") +" (*)");
-	addMontajeAutoexec("IMG_floppy", m_file);
+	QString archivo = fGrl->ventanaAbrirArchivos(tr("Selecciona un archivo"), grlDir.Home, "", tr("Imagen") +" (*.ima *.img);;"+ tr("Todos los archivo") +" (*)");
+	if( !archivo.isEmpty() )
+		addMontajeAutoexec("IMG_floppy", archivo);
 }
 
 void frmAddEditDosBox::on_btnToolDbx_mount_ImgCD_clicked()
 {
-	QString m_file = fGrl->ventanaAbrirArchivos(tr("Selecciona un archivo"), grlDir.Home, "", tr("Imagen CD") +" (*.iso *.cue);;"+ tr("Todos los archivo") +" (*)");
-	addMontajeAutoexec("IMG_iso", m_file);
+	QString archivo = fGrl->ventanaAbrirArchivos(tr("Selecciona un archivo"), grlDir.Home, "", tr("Imagen CD") +" (*.iso *.cue);;"+ tr("Todos los archivo") +" (*)");
+	if( !archivo.isEmpty() )
+		addMontajeAutoexec("IMG_iso", archivo);
 }
 
 void frmAddEditDosBox::on_btnToolDbx_mount_ImgHD_clicked()
 {
-	QString m_file = fGrl->ventanaAbrirArchivos(tr("Selecciona un archivo"), grlDir.Home, "", tr("Imagen HD") +" (*.ima *.img);;"+ tr("Todos los archivo") +" (*)");
-	addMontajeAutoexec("IMG_hdd", m_file);
+	QString archivo = fGrl->ventanaAbrirArchivos(tr("Selecciona un archivo"), grlDir.Home, "", tr("Imagen HD") +" (*.ima *.img);;"+ tr("Todos los archivo") +" (*)");
+	if( !archivo.isEmpty() )
+		addMontajeAutoexec("IMG_hdd", archivo);
 }
 
 void frmAddEditDosBox::on_btnDbx_mapperfile_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_sdl_mapperfile, fGrl->getDirRelative(ui->txtDbx_sdl_mapperfile->text()), "KeyMapper (*.map *.txt);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_sdl_mapperfile, "", "KeyMapper (*.map *.txt);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDbx_sdl_mapperfile->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.Dbx_sdl_mapperfile = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDbx_sdl_mapperfile->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Dbx_sdl_mapperfile = fGrl->setDirRelative(f_info.Path);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_sdl_mapperfile", grlCfg.Dbx_sdl_mapperfile);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_sdl_mapperfile", grlCfg.Dbx_sdl_mapperfile);
+		}
 	}
 }
 
@@ -1141,15 +1160,18 @@ void frmAddEditDosBox::on_btnDbx_mapperfile_clear_clicked()
 
 void frmAddEditDosBox::on_btnDbx_language_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_dosbox_language, fGrl->getDirRelative(ui->txtDbx_dosbox_language->text()), tr("Idioma") +" (*.lng *.txt);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_dosbox_language, "", tr("Idioma") +" (*.lng *.txt);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDbx_dosbox_language->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.Dbx_dosbox_language = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDbx_dosbox_language->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Dbx_dosbox_language = fGrl->setDirRelative(f_info.Path);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_dosbox_language", grlCfg.Dbx_dosbox_language);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_dosbox_language", grlCfg.Dbx_dosbox_language);
+		}
 	}
 }
 
@@ -1160,18 +1182,14 @@ void frmAddEditDosBox::on_btnDbx_language_clear_clicked()
 
 void frmAddEditDosBox::on_btnDbx_capturas_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Dbx_dosbox_captures, fGrl->getDirRelative(ui->txtDbx_dosbox_captures->text()) );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Dbx_dosbox_captures);
 
-	if( !directorio.isEmpty() )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtDbx_dosbox_captures->setText( fGrl->setDirRelative(directorio) );
-			grlCfg.Dbx_dosbox_captures = ui->txtDbx_dosbox_captures->text();
+		ui->txtDbx_dosbox_captures->setText( fGrl->setDirRelative(directorio) );
+		grlCfg.Dbx_dosbox_captures = ui->txtDbx_dosbox_captures->text();
 	
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_dosbox_captures", grlCfg.Dbx_dosbox_captures);
-		}
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_dosbox_captures", grlCfg.Dbx_dosbox_captures);
 	}
 }
 
@@ -1182,18 +1200,14 @@ void frmAddEditDosBox::on_btnDbx_capturas_clear_clicked()
 
 void frmAddEditDosBox::on_btnDbx_musica_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Dbx_path_sonido, fGrl->getDirRelative(ui->txtDbx_path_sonido->text()) );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Dbx_path_sonido);
 
-	if( !directorio.isEmpty() )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtDbx_path_sonido->setText( fGrl->setDirRelative(directorio) );
-			grlCfg.Dbx_path_sonido = ui->txtDbx_path_sonido->text();
+		ui->txtDbx_path_sonido->setText( fGrl->setDirRelative(directorio) );
+		grlCfg.Dbx_path_sonido = ui->txtDbx_path_sonido->text();
 	
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_sonido", grlCfg.Dbx_path_sonido);
-		}
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_sonido", grlCfg.Dbx_path_sonido);
 	}
 }
 

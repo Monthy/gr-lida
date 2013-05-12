@@ -315,18 +315,14 @@ void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeW
 
 void frmSvmAdd::on_btnSvm_Path_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path, fGrl->getDirRelative(ui->txtSvm_path->text(), "DosGames") );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path, "DosGames");
 
-	if( !directorio.isEmpty() )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtSvm_path->setText( fGrl->setDirRelative(directorio, "DosGames") );
-			grlCfg.Svm_path = ui->txtSvm_path->text();
+		ui->txtSvm_path->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.Svm_path = ui->txtSvm_path->text();
 
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
-		}
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
 	}
 }
 
@@ -337,18 +333,14 @@ void frmSvmAdd::on_btnSvm_Path_clear_clicked()
 
 void frmSvmAdd::on_btnSvm_PathSave_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_savepath, fGrl->getDirRelative(ui->txtSvm_savepath->text(), "DosGames") );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_savepath, "DosGames");
 
-	if( !directorio.isEmpty() )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtSvm_savepath->setText( fGrl->setDirRelative(directorio, "DosGames") );
-			grlCfg.Svm_savepath = ui->txtSvm_savepath->text();
+		ui->txtSvm_savepath->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.Svm_savepath = ui->txtSvm_savepath->text();
 
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_savepath", grlCfg.Svm_savepath);
-		}
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_savepath", grlCfg.Svm_savepath);
 	}
 }
 

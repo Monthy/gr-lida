@@ -173,13 +173,17 @@ void frmAddEditVDMSound::setPathConf(QString config)
 
 void frmAddEditVDMSound::on_btnVdms_FileConfg_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Guardar archivo como..."), grlDir.Confvdms, ui->txtVdms_path_conf->text(), tr("Configuraciones") +" VDMSound (*.vlp);;"+ tr("Todos los archivo") +" (*)", 0, true);
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Guardar archivo como..."), grlDir.Confvdms, "", tr("Configuraciones") +" VDMSound (*.vlp);;"+ tr("Todos los archivo") +" (*)", 0, true);
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists && !Editando )
-		ui->txtVdms_path_conf->setText(f_info.Name +"_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss") +".vlp");
-	else
-		ui->txtVdms_path_conf->setText(f_info.Name +".vlp");
+	if( !archivo.isEmpty() )
+	{
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists && !Editando )
+			ui->txtVdms_path_conf->setText(f_info.Name +"_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss") +".vlp");
+		else
+			ui->txtVdms_path_conf->setText(f_info.Name +".vlp");
+	}
+
 }
 
 void frmAddEditVDMSound::on_btnVdms_FileConfg_clear_clicked()
@@ -189,15 +193,18 @@ void frmAddEditVDMSound::on_btnVdms_FileConfg_clear_clicked()
 
 void frmAddEditVDMSound::on_btnVdms_ExeJuego_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Vdms_path_exe, fGrl->getDirRelative(ui->txtVdms_path_exe->text(), "DosGames"), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Vdms_path_exe, "DosGames", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtVdms_path_exe->setText( fGrl->setDirRelative(archivo, "DosGames") );
-		grlCfg.Vdms_path_exe = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtVdms_path_exe->setText( fGrl->setDirRelative(archivo, "DosGames") );
+			grlCfg.Vdms_path_exe = fGrl->setDirRelative(f_info.Path, "DosGames");
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Vdms_path_exe", grlCfg.Vdms_path_exe);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Vdms_path_exe", grlCfg.Vdms_path_exe);
+		}
 	}
 }
 
@@ -213,16 +220,20 @@ void frmAddEditVDMSound::on_btnVdms_params_clear_clicked()
 
 void frmAddEditVDMSound::on_btnVdms_Icono_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Vdms_icon, fGrl->getDirRelative(ui->txtVdms_icon->text()), tr("Iconos") +" (*.ico);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Vdms_icon, "", tr("Iconos") +" (*.ico);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtVdms_icon->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.Vdms_icon = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtVdms_icon->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Vdms_icon = fGrl->setDirRelative(f_info.Path);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Vdms_icon", grlCfg.Vdms_icon);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Vdms_icon", grlCfg.Vdms_icon);
+		}
 	}
+
 }
 
 void frmAddEditVDMSound::on_btnVdms_Icono_clear_clicked()

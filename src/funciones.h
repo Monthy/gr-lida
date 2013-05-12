@@ -162,9 +162,9 @@ public:
 	void guardarKeyGRLConfig(QString iniFileName, QString grupo, QString key, QString value);
 
 // Obtiene la dirección y el nombre del archivo atraves de QFileDialog
-	QString ventanaAbrirArchivos(QString caption, QString dir, QString archivo_old, QString filter, QString *selectedFilter = 0, bool isSave = false);
+	QString ventanaAbrirArchivos(QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter = 0, bool isSave = false);
 // Obtiene la dirección de una carpeta atraves de QFileDialog
-	QString ventanaDirectorios(QString caption, QString dir, QString dir_old);
+	QString ventanaDirectorios(QString caption, QString dir, QString dir_relative = "");
 // Abre un archivo con el programa predeterminado
 	bool abrirArchivo(QString filePath);
 // Abre un directorio

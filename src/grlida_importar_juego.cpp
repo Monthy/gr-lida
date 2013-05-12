@@ -1211,30 +1211,33 @@ void frmImportarJuego::on_btnCancelar_clicked()
 
 void frmImportarJuego::on_btnAbrir_clicked()
 {
-	QString file_config = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo para importarlo"), grlCfg.DirImportar, grlDir.Home, tr("Soportados") +" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend Reloaded (*.prof);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo para importarlo"), grlCfg.DirImportar, "", tr("Soportados") +" (*.xml *.prof);;DB GR-lida (*.xml);;D-Fend Reloaded (*.prof);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( file_config );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		bool siguiente = false;
-		grlCfg.DirImportar = f_info.Path;
-
-		if( f_info.Ext == ".xml" )
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
 		{
-			cargarScript(grlDir.Scripts +"gr-lida.js");
-			analyzePage(file_config, true);
-			siguiente = true;
+			bool siguiente = false;
+			grlCfg.DirImportar = fGrl->setDirRelative(f_info.Path);
+
+			if( f_info.Ext == ".xml" )
+			{
+				cargarScript(grlDir.Scripts +"gr-lida.js");
+				analyzePage(archivo, true);
+				siguiente = true;
+			}
+			else if( f_info.Ext == ".prof" )
+			{
+				analyzePage(archivo, true, true); // Indicamos que es tipo DFend
+				siguiente = true;
+			} else
+				siguiente = false;
+
+			ui->btnOk->setEnabled( siguiente );
+
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirImportar", grlCfg.DirImportar);
 		}
-		else if( f_info.Ext == ".prof" )
-		{
-			analyzePage(file_config, true, true); // Indicamos que tipo DFend
-			siguiente = true;
-		} else
-			siguiente = false;
-
-		ui->btnOk->setEnabled( siguiente );
-	
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirImportar", grlCfg.DirImportar);
 	}
 }
 

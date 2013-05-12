@@ -119,7 +119,7 @@ void frmPdfViewer::openPdf(QString fileName)
 
 	if( doc_pdf_widget->setDocument(fileName) )
 	{
-		lastPath = fileName;
+		lastPath = fGrl->getInfoFile(fileName).Path;
 		ui->btn_PaginaBack->setEnabled(false);
 		ui->btn_PaginaNext->setEnabled(true);
 		ui->btn_Buscar->setEnabled(true);
@@ -151,10 +151,10 @@ void frmPdfViewer::on_btn_Salir_clicked()
 
 void frmPdfViewer::on_btn_Abrir_clicked()
 {
-	QString fileName = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), lastPath, stHomeDir, tr("Abrir PDF") +" (*.pdf);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), (lastPath.isEmpty() ? grlDir.Home : lastPath), "", tr("Abrir PDF") +" (*.pdf);;"+ tr("Todos los archivo") +" (*)");
 
-	if( !fileName.isEmpty() )
-		openPdf( fileName );
+	if( !archivo.isEmpty() )
+		openPdf( archivo );
 }
 
 void frmPdfViewer::on_btn_TextSelect_toggled(bool checked)

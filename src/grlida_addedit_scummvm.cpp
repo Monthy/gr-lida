@@ -146,8 +146,7 @@ bool frmAddEditScummVM::isCorrectNext()
 				ui->txtSvm_path->setFocus();
 			} else {
 				siguiente = true;
-				QDir tmpdirsvm( ui->txtSvm_path->text() );
-				if( !tmpdirsvm.exists() )
+				if( !fGrl->comprobarDirectorio(fGrl->getDirRelative(ui->txtSvm_path->text(), "DosGames"), true) )
 				{
 					siguiente = false;
 					QMessageBox::information(this, titulo_ventana(), tr("Debes indicar un directorio que exista") );
@@ -292,18 +291,14 @@ void frmAddEditScummVM::on_twScummVM_currentItemChanged(QTreeWidgetItem *current
 
 void frmAddEditScummVM::on_btnSvm_Path_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path, fGrl->getDirRelative(ui->txtSvm_path->text(), "DosGames") );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path, "DosGames");
 
-	if( !directorio.isEmpty() )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtSvm_path->setText( fGrl->setDirRelative(directorio, "DosGames") );
-			grlCfg.Svm_path = ui->txtSvm_path->text();
+		ui->txtSvm_path->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.Svm_path = ui->txtSvm_path->text();
 
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
-		}
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
 	}
 }
 
@@ -314,18 +309,14 @@ void frmAddEditScummVM::on_btnSvm_Path_clear_clicked()
 
 void frmAddEditScummVM::on_btnSvm_PathSave_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_savepath, fGrl->getDirRelative(ui->txtSvm_savepath->text(), "DosGames") );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_savepath, "DosGames");
 
-	if( !directorio.isEmpty() )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtSvm_savepath->setText( fGrl->setDirRelative(directorio, "DosGames") );
-			grlCfg.Svm_savepath = ui->txtSvm_savepath->text();
+		ui->txtSvm_savepath->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.Svm_savepath = ui->txtSvm_savepath->text();
 
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_savepath", grlCfg.Svm_savepath);
-		}
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_savepath", grlCfg.Svm_savepath);
 	}
 }
 
@@ -336,18 +327,14 @@ void frmAddEditScummVM::on_btnSvm_PathSave_clear_clicked()
 
 void frmAddEditScummVM::on_btnSvm_PathExtra_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_extrapath, fGrl->getDirRelative(ui->txtSvm_extrapath->text(), "DosGames") );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_extrapath, "DosGames");
 
-	if( !directorio.isEmpty() )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtSvm_extrapath->setText( fGrl->setDirRelative(directorio, "DosGames") );
-			grlCfg.Svm_extrapath = ui->txtSvm_extrapath->text();
+		ui->txtSvm_extrapath->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.Svm_extrapath = ui->txtSvm_extrapath->text();
 
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_extrapath", grlCfg.Svm_extrapath);
-		}
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_extrapath", grlCfg.Svm_extrapath);
 	}
 }
 
@@ -358,18 +345,14 @@ void frmAddEditScummVM::on_btnSvm_PathExtra_clear_clicked()
 
 void frmAddEditScummVM::on_btnSvm_PathCapturas_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_capturas, fGrl->getDirRelative(ui->txtSvm_path_capturas->text()) );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_capturas);
 
-	if( !directorio.isEmpty() )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtSvm_path_capturas->setText( fGrl->setDirRelative(directorio) );
-			grlCfg.Svm_path_capturas = ui->txtSvm_path_capturas->text();
+		ui->txtSvm_path_capturas->setText( fGrl->setDirRelative(directorio) );
+		grlCfg.Svm_path_capturas = ui->txtSvm_path_capturas->text();
 
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_capturas", grlCfg.Svm_path_capturas);
-		}
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_capturas", grlCfg.Svm_path_capturas);
 	}
 }
 
@@ -380,18 +363,14 @@ void frmAddEditScummVM::on_btnSvm_PathCapturas_clear_clicked()
 
 void frmAddEditScummVM::on_btnSvm_PathSonido_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_sonido, fGrl->getDirRelative(ui->txtSvm_path_sonido->text()) );
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_sonido);
 
-	if( !directorio.isEmpty() )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtSvm_path_sonido->setText( fGrl->setDirRelative(directorio) );
-			grlCfg.Svm_path_sonido = ui->txtSvm_path_sonido->text();
+		ui->txtSvm_path_sonido->setText( fGrl->setDirRelative(directorio) );
+		grlCfg.Svm_path_sonido = ui->txtSvm_path_sonido->text();
 
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_sonido", grlCfg.Svm_path_sonido);
-		}
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_sonido", grlCfg.Svm_path_sonido);
 	}
 }
 
@@ -402,15 +381,18 @@ void frmAddEditScummVM::on_btnSvm_PathSonido_clear_clicked()
 
 void frmAddEditScummVM::on_btnSvm_SoundFont_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Svm_soundfont, fGrl->getDirRelative(ui->txtSvm_soundfont->text()), tr("Todos los archivo") +" (*)", 0, false);
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Svm_soundfont, "", tr("Todos los archivo") +" (*)", 0, false);
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtSvm_soundfont->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.Svm_soundfont = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtSvm_soundfont->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Svm_soundfont = fGrl->setDirRelative(f_info.Path);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_soundfont", grlCfg.Svm_soundfont);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_soundfont", grlCfg.Svm_soundfont);
+		}
 	}
 }
 

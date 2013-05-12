@@ -1890,8 +1890,8 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 			cfgExec.f_param       = conf_datos["parametros_exe"];
 			cfgExec.f_exe_setup   = fGrl->getDirRelative(conf_datos["path_setup"]);
 			cfgExec.f_param_setup = conf_datos["parametros_setup"];
-			cfgExec.f_path        = fGrl->getInfoFile(fGrl->getDirRelative(cfgExec.f_exe)).Path;
-			cfgExec.f_path_setup  = fGrl->getInfoFile(fGrl->getDirRelative(cfgExec.f_exe_setup)).Path;
+			cfgExec.f_path        = fGrl->getInfoFile( cfgExec.f_exe ).Path;
+			cfgExec.f_path_setup  = fGrl->getInfoFile( cfgExec.f_exe_setup ).Path;
 
 			Capturas = fGrl->getDirRelative(conf_datos["path_capturas"]);
 		}
@@ -1907,7 +1907,7 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 			cfgExec.f_exe_setup   = fGrl->getDirRelative(conf_dosbox["path_setup"], "DosGames");
 			cfgExec.f_param_setup = conf_dosbox["parametros_setup"];
 			cfgExec.f_path        = fGrl->getInfoFile( fGrl->getDirRelative(conf_dosbox["path_exe"], "DosGames") ).Path;
-			cfgExec.f_path_setup  = fGrl->getInfoFile( fGrl->getDirRelative(conf_dosbox["path_setup"], "DosGames") ).Path;
+			cfgExec.f_path_setup  = fGrl->getInfoFile( cfgExec.f_exe_setup ).Path;
 
 			#ifdef Q_OS_WIN32
 				if( fGrl->StrToBool(conf_dosbox["opt_consola_dbox"]) )
@@ -1970,7 +1970,7 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 				cfgExec.f_exe_setup   = fGrl->getDirRelative(conf_datos["path_setup"]);
 				cfgExec.f_param_setup = conf_datos["parametros_setup"];
 				cfgExec.f_path        = fGrl->getInfoFile( fGrl->getDirRelative(conf_datos["path_exe"]) ).Path;
-				cfgExec.f_path_setup  = fGrl->getInfoFile( fGrl->getDirRelative(conf_datos["path_setup"]) ).Path;
+				cfgExec.f_path_setup  = fGrl->getInfoFile( cfgExec.f_exe_setup ).Path;
 
 				Capturas = fGrl->getDirRelative(conf_datos["path_capturas"]);
 			} else

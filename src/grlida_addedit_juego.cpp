@@ -993,20 +993,24 @@ void frmAddEditJuego::on_cbxDatos_TipoEmu_activated(int index)
 
 void frmAddEditJuego::on_btnImgAbrir_Thumbs_clicked()
 {
-	file_thumbs = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Img_Thumbs, Thumbs, tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Img_Thumbs, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( file_thumbs );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		Thumbs = f_info.NameExt;
-		ui->lbImg_Thumbs->setPixmap( QPixmap(file_thumbs) );
-		ui->btnImgVer_Thumbs->setEnabled( true );
-		ui->btnImgEliminar_Thumbs->setEnabled( true );
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			file_thumbs = archivo;
+			Thumbs      = f_info.NameExt;
+			ui->lbImg_Thumbs->setPixmap( QPixmap(file_thumbs) );
+			ui->btnImgVer_Thumbs->setEnabled( true );
+			ui->btnImgEliminar_Thumbs->setEnabled( true );
 
-		grlCfg.Img_Thumbs = f_info.Path;
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Img_Thumbs", grlCfg.Img_Thumbs);
-	} else
-		emit on_btnImgEliminar_Thumbs_clicked();
+			grlCfg.Img_Thumbs = fGrl->setDirRelative(f_info.Path);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Img_Thumbs", grlCfg.Img_Thumbs);
+		} else
+			emit on_btnImgEliminar_Thumbs_clicked();
+	}
 }
 
 void frmAddEditJuego::on_btnImgVer_Thumbs_clicked()
@@ -1030,20 +1034,25 @@ void frmAddEditJuego::on_btnImgEliminar_Thumbs_clicked()
 
 void frmAddEditJuego::on_btnImgAbrir_CoverFront_clicked()
 {
-	file_cover_front = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Img_CoverFront, CoverFront, tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Img_CoverFront, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( file_cover_front );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		CoverFront = f_info.NameExt;
-		ui->lbImg_CoverFront->setPixmap( QPixmap(file_cover_front) );
-		ui->btnImgVer_CoverFront->setEnabled( true );
-		ui->btnImgEliminar_CoverFront->setEnabled( true );
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			file_cover_front = archivo;
+			CoverFront       = f_info.NameExt;
+			ui->lbImg_CoverFront->setPixmap( QPixmap(file_cover_front) );
+			ui->btnImgVer_CoverFront->setEnabled( true );
+			ui->btnImgEliminar_CoverFront->setEnabled( true );
 
-		grlCfg.Img_CoverFront = f_info.Path;
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Img_CoverFront", grlCfg.Img_CoverFront);
-	} else
-		emit on_btnImgEliminar_CoverFront_clicked();
+			grlCfg.Img_CoverFront = fGrl->setDirRelative(f_info.Path);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Img_CoverFront", grlCfg.Img_CoverFront);
+		} else
+			emit on_btnImgEliminar_CoverFront_clicked();
+	}
+
 }
 
 void frmAddEditJuego::on_btnImgVer_CoverFront_clicked()
@@ -1067,20 +1076,24 @@ void frmAddEditJuego::on_btnImgEliminar_CoverFront_clicked()
 
 void frmAddEditJuego::on_btnImgAbrir_CoverBack_clicked()
 {
-	file_cover_back = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Img_CoverBack, CoverBack, tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Img_CoverBack, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( file_cover_back );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		CoverBack = f_info.NameExt;
-		ui->lbImg_CoverBack->setPixmap( QPixmap(file_cover_back) );
-		ui->btnImgVer_CoverBack->setEnabled( true );
-		ui->btnImgEliminar_CoverBack->setEnabled( true );
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			file_cover_back = archivo;
+			CoverBack       = f_info.NameExt;
+			ui->lbImg_CoverBack->setPixmap( QPixmap(file_cover_back) );
+			ui->btnImgVer_CoverBack->setEnabled( true );
+			ui->btnImgEliminar_CoverBack->setEnabled( true );
 
-		grlCfg.Img_CoverBack = f_info.Path;
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Img_CoverBack", grlCfg.Img_CoverBack);
-	} else
-		emit on_btnImgEliminar_CoverBack_clicked();
+			grlCfg.Img_CoverBack = fGrl->setDirRelative(f_info.Path);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Img_CoverBack", grlCfg.Img_CoverBack);
+		} else
+			emit on_btnImgEliminar_CoverBack_clicked();
+	}
 }
 
 void frmAddEditJuego::on_btnImgVer_CoverBack_clicked()
@@ -1264,15 +1277,18 @@ void frmAddEditJuego::on_twDatoSmile_itemDoubleClicked(QTreeWidgetItem *item, in
 // Otros Datos
 void frmAddEditJuego::on_btnDatos_ExeJuego_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DatosFiles_PathExe, fGrl->getDirRelative(ui->txtDatos_path_exe->text()), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DatosFiles_PathExe, "", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDatos_path_exe->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.DatosFiles_PathExe = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDatos_path_exe->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.DatosFiles_PathExe = fGrl->setDirRelative(f_info.Path);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DatosFiles_PathExe", grlCfg.DatosFiles_PathExe);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DatosFiles_PathExe", grlCfg.DatosFiles_PathExe);
+		}
 	}
 }
 
@@ -1288,15 +1304,18 @@ void frmAddEditJuego::on_btnDatos_ParametrosExe_clear_clicked()
 
 void frmAddEditJuego::on_btnDatos_SetupJuego_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DatosFiles_PathSetup, fGrl->getDirRelative(ui->txtDatos_path_setup->text()), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DatosFiles_PathSetup, "", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDatos_path_setup->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.DatosFiles_PathSetup = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDatos_path_setup->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.DatosFiles_PathSetup = fGrl->setDirRelative(f_info.Path);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DatosFiles_PathSetup", grlCfg.DatosFiles_PathSetup);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DatosFiles_PathSetup", grlCfg.DatosFiles_PathSetup);
+		}
 	}
 }
 
@@ -1312,10 +1331,9 @@ void frmAddEditJuego::on_btnDatos_ParametrosSetup_clear_clicked()
 
 void frmAddEditJuego::on_btnDatos_PathCapturas_clicked()
 {
-	QDir dir;
-	QString directorio = fGrl->ventanaDirectorios(tr("Selecciona un archivo"), grlCfg.DatosFiles_PathCapturas, fGrl->getDirRelative(ui->txtDatos_path_capturas->text()) );
+	QString directorio = fGrl->ventanaDirectorios(tr("Selecciona un archivo"), grlCfg.DatosFiles_PathCapturas);
 
-	if( dir.exists(directorio) )
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
 		ui->txtDatos_path_capturas->setText( fGrl->setDirRelative(directorio) );
 		grlCfg.DatosFiles_PathCapturas = ui->txtDatos_path_capturas->text();
@@ -1595,23 +1613,26 @@ void frmAddEditJuego::on_btnDatosFiles_PathFile_clicked()
 		break;
 	}
 
-	archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DatosFiles_PathFile, fGrl->getDirRelative(ui->txtDatosFiles_PathFile->text()), tipo_archivo);
+	archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DatosFiles_PathFile, "", tipo_archivo);
 
-	stFileInfo f_info = fGrl->getInfoFile(archivo, hashCrc32);
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		grlCfg.DatosFiles_PathFile = f_info.Path;
-		ui->txtDatosFiles_PathFile->setText( fGrl->setDirRelative(archivo) );
-		ui->txtDatosFiles_FileName->setText( f_info.NameExt  );
-		ui->txtDatosFiles_Crc32->setText( f_info.Crc32 );
-		ui->txtDatosFiles_Size->setText( f_info.Size );
-		ui->txtDatosFiles_Comentario->setText("");
-		ui->lb_files_size->setText( fGrl->covertir_bytes( f_info.Size.toFloat() ) );
-		enabledDatosUpdate(fGrl->setDirRelative(archivo), 4);
+		stFileInfo f_info = fGrl->getInfoFile(archivo, hashCrc32);
+		if( f_info.Exists )
+		{
+			grlCfg.DatosFiles_PathFile = fGrl->setDirRelative(f_info.Path);
+			ui->txtDatosFiles_PathFile->setText( fGrl->setDirRelative(archivo) );
+			ui->txtDatosFiles_FileName->setText( f_info.Name );
+			ui->txtDatosFiles_Crc32->setText( f_info.Crc32 );
+			ui->txtDatosFiles_Size->setText( f_info.Size );
+			ui->txtDatosFiles_Comentario->setText("");
+			ui->lb_files_size->setText( fGrl->covertir_bytes( f_info.Size.toFloat() ) );
+			enabledDatosUpdate(ui->txtDatosFiles_PathFile->text(), 4);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DatosFiles_PathFile", grlCfg.DatosFiles_PathFile);
-	} else
-		emit on_btnDatosFiles_PathFile_clear_clicked();
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DatosFiles_PathFile", grlCfg.DatosFiles_PathFile);
+		} else
+			emit on_btnDatosFiles_PathFile_clear_clicked();
+	}
 }
 
 void frmAddEditJuego::on_btnDatosFiles_PathFile_clear_clicked()

@@ -569,6 +569,7 @@ QString Funciones::setDirRelative(QString dir, QString carpeta)
 	if( dir.startsWith(stDirBaseApp, Qt::CaseInsensitive) )
 	{
 		dir.replace(0, stDirBaseApp.length(), "");
+
 		if( dir.startsWith("/") || dir.startsWith("\\") )
 			return QDir::toNativeSeparators( dir.prepend(".") );
 		else
@@ -582,7 +583,7 @@ QString Funciones::getDirRelative(QString dir, QString carpeta)
 	QString dir_base_game = "";
 	QString stDirBaseApp  = QDir::toNativeSeparators(stDirApp);
 
-	if( carpeta == "DosGames")
+	if( carpeta == "DosGames" )
 	{
 		QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
 		settings.beginGroup("OpcGeneral");
@@ -598,6 +599,10 @@ QString Funciones::getDirRelative(QString dir, QString carpeta)
 
 	if( dir_base_game.startsWith("./") || dir_base_game.startsWith(".\\") )
 		dir_base_game = stDirBaseApp;
+	else {
+		if( dir.startsWith("./DosGames/") || dir.startsWith(".\\DosGames\\") )
+			dir.replace(0, 11, "./");
+	}
 
 	if( dir.startsWith("./") || dir.startsWith(".\\") )
 		return QDir::toNativeSeparators( dir.replace(0, 2, dir_base_game) );
@@ -1082,13 +1087,12 @@ void Funciones::guardarKeyGRLConfig(QString iniFileName, QString grupo, QString 
 }
 
 // Obtiene la dirección y el nombre del archivo atraves de QFileDialog
-QString Funciones::ventanaAbrirArchivos(QString caption, QString dir, QString archivo_old, QString filter, QString *selectedFilter, bool isSave)
+QString Funciones::ventanaAbrirArchivos(QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter, bool isSave)
 {
-	QString archivo, base;
-	QDir m_dir;
-	if( !dir.isEmpty() && m_dir.exists(dir) )
-		base = dir;
-	else
+	QString archivo = "";
+	QString base    = getDirRelative(dir, dir_relative);
+
+	if( !comprobarDirectorio(base, true) )
 		base = stDirApp;
 
 	if( isSave )
@@ -1096,40 +1100,31 @@ QString Funciones::ventanaAbrirArchivos(QString caption, QString dir, QString ar
 	else
 		archivo = QFileDialog::getOpenFileName(0, caption, base, filter, selectedFilter);
 
-	if( archivo.isEmpty() )
-		return QDir::toNativeSeparators( archivo_old );
-	else
+	if( !archivo.isEmpty() && QFile::exists(archivo) )
 		return QDir::toNativeSeparators( archivo );
+	else
+		return "";
 }
 
 // Obtiene la dirección de una carpeta atraves de QFileDialog
-QString Funciones::ventanaDirectorios(QString caption, QString dir, QString dir_old)
+QString Funciones::ventanaDirectorios(QString caption, QString dir, QString dir_relative)
 {
-	QString directorio, base;
-	QDir m_dir;
-	if( !dir.isEmpty() && m_dir.exists(dir) )
-		base = dir;
-	else
+	QString directorio = "";
+	QString base       = getDirRelative(dir, dir_relative);
+
+	if( !comprobarDirectorio(base, true) )
 		base = stDirApp;
 
-	directorio = QFileDialog::getExistingDirectory(0, caption, base, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
+	directorio = QFileDialog::getExistingDirectory(0, caption, base, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
-	if( directorio.isEmpty() )
+	if( !directorio.isEmpty() && comprobarDirectorio(directorio, true) )
 	{
-		if( dir_old.isEmpty() )
-			return "";
-		else {
-			if( dir_old.endsWith("/") || dir_old.endsWith("\\") )
-				return QDir::toNativeSeparators( dir_old );
-			else
-				return QDir::toNativeSeparators( dir_old +"/");
-		}
-	} else {
 		if( directorio.endsWith("/") || directorio.endsWith("\\") )
 			return QDir::toNativeSeparators( directorio );
 		else
-			return QDir::toNativeSeparators( directorio +"/");
-	}
+			return QDir::toNativeSeparators(directorio +"/");
+	} else
+		return "";
 }
 
 // Abre un archivo con el programa predeterminado
@@ -2962,6 +2957,7 @@ void Funciones::creaIniScummVM(stConfigScummVM cfgSvm, QString archivo)
 	{
 		QTextStream out(&file_out);
 		out.setCodec("UTF-8");
+		cfgSvm.path_extra = getDirRelative(cfgSvm.path_extra, "DosGames");
 
 		out << "[" << cfgSvm.game_label << "]" << endl;
 		out << "description"     << "=" << cfgSvm.description     << endl;
@@ -2973,9 +2969,9 @@ void Funciones::creaIniScummVM(stConfigScummVM cfgSvm, QString archivo)
 		out << "render_mode"     << "=" << cfgSvm.render_mode     << endl;
 		out << "fullscreen"      << "=" << cfgSvm.fullscreen      << endl;
 		out << "aspect_ratio"    << "=" << cfgSvm.aspect_ratio    << endl;
-		out << "path"            << "=" << getDirRelative(cfgSvm.path      , "DosGames") << endl;
-		out << "extrapath"       << "=" << getDirRelative(cfgSvm.path_extra, "DosGames") << endl;
-		out << "savepath"        << "=" << getDirRelative(cfgSvm.path_save , "DosGames") << endl;
+		out << "path"            << "=" << getDirRelative(cfgSvm.path, "DosGames") << endl;
+		out << "extrapath"       << "=" << cfgSvm.path_extra      << endl;
+		out << "savepath"        << "=" << getDirRelative(cfgSvm.path_save, "DosGames") << endl;
 		out << "music_driver"    << "=" << cfgSvm.music_driver    << endl;
 		out << "enable_gs"       << "=" << cfgSvm.enable_gs       << endl;
 		out << "multi_midi"      << "=" << cfgSvm.multi_midi      << endl;
@@ -2998,7 +2994,7 @@ void Funciones::creaIniScummVM(stConfigScummVM cfgSvm, QString archivo)
 		out << "gui_theme"  << "=" << "modern" << endl;
 		out << "gfx_mode"   << "=" << "2x"     << endl;
 		out << "fullscreen" << "=" << "false"  << endl;
-		out << "extrapath"  << "=" << getDirRelative(cfgSvm.path_extra, "DosGames") << endl;
+		out << "extrapath"  << "=" << cfgSvm.path_extra << endl;
 		out << "themepath"  << "=" << getDirRelative(cfgSvm.emu_svmpath) << endl << endl;
 
 		out.flush();

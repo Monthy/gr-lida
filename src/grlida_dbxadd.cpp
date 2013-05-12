@@ -418,13 +418,16 @@ void frmDbxAdd::on_btnPrevious_clicked()
 
 void frmDbxAdd::on_btnDbx_FileConfg_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Guardar archivo como..."), grlDir.Confdbx, ui->txtDbx_path_conf->text(), tr("Configuraciones") +" DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Guardar archivo como..."), grlDir.Confdbx, "", tr("Configuraciones") +" DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
-		ui->txtDbx_path_conf->setText(f_info.Name +"_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss") +".conf");
-	else
-		ui->txtDbx_path_conf->setText(f_info.Name +".conf");
+	if( !archivo.isEmpty() )
+	{
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+			ui->txtDbx_path_conf->setText(f_info.Name +"_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss") +".conf");
+		else
+			ui->txtDbx_path_conf->setText(f_info.Name +".conf");
+	}
 }
 
 void frmDbxAdd::on_btnDbx_FileConfg_clear_clicked()
@@ -434,15 +437,18 @@ void frmDbxAdd::on_btnDbx_FileConfg_clear_clicked()
 
 void frmDbxAdd::on_btnDbx_ExeJuego_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_exe, fGrl->getDirRelative(ui->txtDbx_path_exe->text(), "DosGames"), tr("Ejecutables") +" (*.exe; *.bat; *.com);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_exe, "DosGames", tr("Ejecutables") +" (*.exe; *.bat; *.com);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDbx_path_exe->setText( fGrl->setDirRelative(archivo, "DosGames") );
-		grlCfg.Dbx_path_exe = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDbx_path_exe->setText( fGrl->setDirRelative(archivo, "DosGames") );
+			grlCfg.Dbx_path_exe = fGrl->setDirRelative(f_info.Path, "DosGames");
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_exe", grlCfg.Dbx_path_exe);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_exe", grlCfg.Dbx_path_exe);
+		}
 	}
 }
 
@@ -453,15 +459,18 @@ void frmDbxAdd::on_btnDbx_ExeJuego_clear_clicked()
 
 void frmDbxAdd::on_btnDbx_ExeSetup_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_setup, fGrl->getDirRelative(ui->txtDbx_path_setup->text(), "DosGames"), tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_setup, "DosGames", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDbx_path_setup->setText( fGrl->setDirRelative(archivo, "DosGames") );
-		grlCfg.Dbx_path_setup = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDbx_path_setup->setText( fGrl->setDirRelative(archivo, "DosGames") );
+			grlCfg.Dbx_path_setup = fGrl->setDirRelative(f_info.Path, "DosGames");
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_setup", grlCfg.Dbx_path_setup);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_setup", grlCfg.Dbx_path_setup);
+		}
 	}
 }
 

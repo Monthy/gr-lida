@@ -125,14 +125,18 @@ void frmConfigInicial::on_cbxIdioma_activated(int index)
 
 void frmConfigInicial::on_btnDirDbx_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, fGrl->getDirRelative(ui->txtDirDbx->text()), "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDirDbx->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.DirDbx = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDirDbx->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.DirDbx = fGrl->setDirRelative(f_info.Path);
+		}
 	}
+
 }
 
 void frmConfigInicial::on_btnDirDbx_find_clicked()
@@ -164,13 +168,16 @@ void frmConfigInicial::on_btnDirDbx_clear_clicked()
 
 void frmConfigInicial::on_btnDirSvm_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, fGrl->getDirRelative(ui->txtDirSvm->text()), "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDirSvm->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.DirSvm = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDirSvm->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.DirSvm = fGrl->setDirRelative(f_info.Path);
+		}
 	}
 }
 

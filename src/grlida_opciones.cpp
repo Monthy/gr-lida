@@ -603,15 +603,18 @@ void frmOpciones::on_chkDOSBoxDisp_toggled(bool checked)
 
 void frmOpciones::on_btnDirDbx_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, fGrl->getDirRelative(ui->txtDirDbx->text()), "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDirDbx->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.DirDbx = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDirDbx->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.DirDbx = fGrl->setDirRelative(f_info.Path);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirDbx", grlCfg.DirDbx);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirDbx", grlCfg.DirDbx);
+		}
 	}
 }
 
@@ -651,15 +654,18 @@ void frmOpciones::on_chkScummVMDisp_toggled(bool checked)
 
 void frmOpciones::on_btnDirSvm_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, fGrl->getDirRelative(ui->txtDirSvm->text()), "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDirSvm->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.DirSvm = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDirSvm->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.DirSvm = fGrl->setDirRelative(f_info.Path);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirSvm", grlCfg.DirSvm);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirSvm", grlCfg.DirSvm);
+		}
 	}
 }
 
@@ -692,21 +698,18 @@ void frmOpciones::on_btnDirSvm_clear_clicked()
 
 void frmOpciones::on_btnDirBaseGames_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.DirBaseGames, fGrl->getDirRelative(ui->txtDirBaseGames->text(), "DosGames") );
-	if( !directorio.isEmpty() )
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.DirBaseGames, "DosGames");
+
+	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		QDir dir( directorio );
-		if( dir.exists() )
-		{
-			ui->txtDirBaseGames->setText( fGrl->setDirRelative(directorio, "DosGames") );
-			grlCfg.DirBaseGames = ui->txtDirBaseGames->text();
-		}
+		ui->txtDirBaseGames->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.DirBaseGames = ui->txtDirBaseGames->text();
 	}
 }
 
 void frmOpciones::on_btnDirBaseGames_clear_clicked()
 {
-	ui->txtDirBaseGames->clear();
+	ui->txtDirBaseGames->setText( QDir::toNativeSeparators("./DosGames/") );
 }
 
 void frmOpciones::on_btnOpenUrl_clicked()
@@ -1628,17 +1631,20 @@ void frmOpciones::on_txtDat_Extra_textEdited(const QString &arg1)
 
 void frmOpciones::on_btnDatPath_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable"), grlCfg.DirOtherEmus, fGrl->getDirRelative(ui->txtDirDbx->text()), tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable"), grlCfg.DirOtherEmus, "", tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDat_Extra->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.DirOtherEmus = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDat_Extra->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.DirOtherEmus = fGrl->setDirRelative(f_info.Path);
 
-		enabledDatosUpdate(ui->txtDat_Extra->text(), 3);
+			enabledDatosUpdate(ui->txtDat_Extra->text(), 3);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirOtherEmus", grlCfg.DirOtherEmus);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirOtherEmus", grlCfg.DirOtherEmus);
+		}
 	}
 }
 
@@ -1671,20 +1677,23 @@ void frmOpciones::on_btnDatBajar_clicked()
 
 void frmOpciones::on_btnDatAddSmile_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlDir.Home, grlDir.Smiles, tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlDir.Smiles, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile(archivo);
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		if( QFile::exists(grlDir.Smiles + f_info.NameExt) )
+		stFileInfo f_info = fGrl->getInfoFile(archivo);
+		if( f_info.Exists )
 		{
-			QString hora = "_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss");
+			if( QFile::exists(grlDir.Smiles + f_info.NameExt) )
+			{
+				QString hora = "_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss");
 
-			if( QFile::copy(archivo, grlDir.Smiles + f_info.Name + hora + f_info.Ext) )
-				ui->cbxDat_Img->addItem(QIcon(grlDir.Smiles + f_info.Name + hora + f_info.Ext), f_info.Name + hora, f_info.Name + hora + f_info.Ext);
-		} else {
-			if( QFile::copy(archivo, grlDir.Smiles + f_info.NameExt) )
-				ui->cbxDat_Img->addItem(QIcon(grlDir.Smiles + f_info.NameExt), f_info.Name, f_info.NameExt);
+				if( QFile::copy(archivo, grlDir.Smiles + f_info.Name + hora + f_info.Ext) )
+					ui->cbxDat_Img->addItem(QIcon(grlDir.Smiles + f_info.Name + hora + f_info.Ext), f_info.Name + hora, f_info.Name + hora + f_info.Ext);
+			} else {
+				if( QFile::copy(archivo, grlDir.Smiles + f_info.NameExt) )
+					ui->cbxDat_Img->addItem(QIcon(grlDir.Smiles + f_info.NameExt), f_info.Name, f_info.NameExt);
+			}
 		}
 	}
 }
@@ -1747,15 +1756,18 @@ void frmOpciones::on_twDatos_currentItemChanged(QTreeWidgetItem *current, QTreeW
 // Base de Datos-------------------------------------
 void frmOpciones::on_btnDirDB_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DirBD, fGrl->getDirRelative(ui->txtDirBD->text()), tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.DirBD, "", tr("Todos los archivo") +" (*)");
 
-	stFileInfo f_info = fGrl->getInfoFile( archivo );
-	if( f_info.Exists )
+	if( !archivo.isEmpty() )
 	{
-		ui->txtDirBD->setText( fGrl->setDirRelative(archivo) );
-		grlCfg.DirBD = f_info.Path;
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDirBD->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.DirBD = fGrl->setDirRelative(f_info.Path);
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirBD", grlCfg.DirBD);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirBD", grlCfg.DirBD);
+		}
 	}
 }
 

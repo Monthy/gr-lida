@@ -319,10 +319,10 @@ void frmImgViewer::on_exit_triggered()
 void frmImgViewer::on_open_triggered()
 {
 	isZip = false;
-	QString fileName = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlDir.Home, grlDir.Home, tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlDir.Home, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
-	if( !fileName.isEmpty() )
-		open( fileName );
+	if( !archivo.isEmpty() )
+		open( archivo );
 }
 
 void frmImgViewer::on_print_triggered()
