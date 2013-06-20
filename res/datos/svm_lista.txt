@@ -3,7 +3,7 @@ Maniac Mansion|maniac|90|maniac.png
 Zak McKracken and the Alien Mindbenders|zak|90|zak.png
 Indiana Jones and the Last Crusade|indy3|90|indy3.png
 Loom|loom|95|loom.png
-Passport to Adventure|pass|95|pass.png
+Passport to Adventure|pass|95|sinimg.png
 The Secret of Monkey Island|monkey|95|monkey1.png
 Monkey Island 2: LeChuck's Revenge|monkey2|95|monkey2.png
 Indiana Jones and the Fate of Atlantis|atlantis|95|indy4.png
@@ -113,7 +113,7 @@ Space Quest V|sq5|95|sq_sci.png
 The Island of Dr. Brain|islandbrain|95|castlebrain.png
 
 Other Game Compatibility Chart|||sinimg.png
-3 Skulls of the Toltecs|toltecs|90|sinimg.png
+3 Skulls of the Toltecs|toltecs|90|toltecs.png
 Blue Force|blueforce|90|sinimg.png
 Bud Tucker in Double Trouble|tucker|95|tucker.png
 Cruise for a Corpse|cruise|95|cruise.png
@@ -126,6 +126,7 @@ Eye of the Beholder|eob|80|sinimg.png
 Eye of the Beholder II: The Legend of Darkmoon|eob2|80|sinimg.png
 Flight of the Amazon Queen|queen|98|queen.png
 Future Wars|fw|80|fw.png
+Hopkins FBI|hopkins|85|sinimg.png
 Hugo's House of Horrors|hugo1|90|sinimg.png
 Hugo 2: Whodunit?|hugo2|90|sinimg.png
 Hugo 3: Jungle of Doom|hugo3|90|sinimg.png
@@ -135,13 +136,14 @@ Lands of Lore: The Throne of Chaos|lol|80|lol.png
 Nippon Safes Inc.|nippon|90|nippon.png
 Ringworld: Revenge Of The Patriarch|ring|90|ringworld.png
 Soltys|soltys|90|soltys.png
+The Journeyman Project: Pegasus Prime|pegasus|90|sinimg.png
 The Legend of Kyrandia|kyra1|90|kyra.png
 The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|90|kyra.png
 The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|90|kyra.png
 The 7th Guest|t7g|95|t7g.png
 TeenAgent|teenagent|80|teenagent.png
-Toonstruck|toon|80|toon.png
-Tony Tough|tony|98|sinimg.png
+Toonstruck|toon|95|toon.png
+Tony Tough and the Night of Roasted Moths|tony|98|sinimg.png
 Touche: The Adventures of the Fifth Musketeer|touche|75|touche.png
 
 Humongous Entertainment Game Compatibility Chart|||sinimg.png
