@@ -80,7 +80,7 @@ public:
 // DOSBox
 	QString versionDbx(){return "0.74";}
 // ScummVM
-	QString versionSvm(){return "1.5.0";}
+	QString versionSvm(){return "1.6.0";}
 // VDMSound
 	QString versionVdms(){return "2.0.4";}
 
