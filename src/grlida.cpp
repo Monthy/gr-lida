@@ -1194,7 +1194,7 @@ void GrLida::cargarListaJuegosDB(QString sql_where)
 			do {
 				img_thumb = query.record().value("thumbs").toString();
 				if( img_thumb.isEmpty() || !QFile::exists(grlDir.Thumbs + img_thumb) )
-					img_thumb = fGrl->Theme() +"images/juego_sin_imagen.png";
+                    img_thumb = fGrl->ThemeApp() +"images/juego_sin_imagen.png";
 				else
 					img_thumb = grlDir.Thumbs + query.record().value("thumbs").toString();
 
@@ -1282,7 +1282,7 @@ void GrLida::cargarListaPicFlow(QString sql_where)
 	}
 	query.clear();
 
-	grl_picflow->setImagePaths(thumbs_list, grlDir.Thumbs, fGrl->Theme());
+    grl_picflow->setImagePaths(thumbs_list, grlDir.Thumbs, fGrl->ThemeApp());
 	grl_picflow->setFocus(Qt::OtherFocusReason);
 }
 
@@ -1322,6 +1322,8 @@ void GrLida::setChangeCategorias(int cat_id)
 	grl_lv_delegate->setTheme( fGrl->Theme() );
 	grl_lv_delegate->setTable( categoria[id_cat].tabla );
 	grl_lv_delegate->setLwIconCfg(lwIconCfg);
+
+    grl_picflow->setSlideSize( QSize(lwIconCfg.pf_img_width,lwIconCfg.pf_img_height) );
 
 	crearMenuNav();
 	cargarListaJuegosDB(sql_where_select);
@@ -1430,7 +1432,7 @@ void GrLida::nuevoEditarDatosDelJuego(stDatosJuego datos, bool isNew)
 
 		QString img_thumb = datos.thumbs;
 		if( img_thumb.isEmpty() || !QFile::exists(grlDir.Thumbs + img_thumb) )
-			img_thumb = fGrl->Theme() +"images/juego_sin_imagen.png";
+            img_thumb = fGrl->ThemeApp() +"images/juego_sin_imagen.png";
 		else
 			img_thumb = grlDir.Thumbs + datos.thumbs;
 
@@ -1675,7 +1677,7 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 				dat_thumbs = grlDir.Thumbs + Thumbs;
 			else {
 				Thumbs     = "juego_sin_imagen.png";
-				dat_thumbs = fGrl->Theme() +"images/"+ Thumbs;
+                dat_thumbs = fGrl->ThemeApp() +"images/"+ Thumbs;
 			}
 
 			if( QFile::exists( fGrl->ThemeApp() +"img24_cat/"+ datos.icono ) )
@@ -2253,21 +2255,21 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 
 // Comprueba iconos categoría.
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/");
-//	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/images/");
+    fGrl->comprobarDirectorio(grlDir.Themes +"defecto/images/");
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img16_cat/");
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img24_cat/");
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img32_cat/");
 
 	if(	fGrl->Theme() == ":/" )
 	{
-//		if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_top.png") )
-//			fGrl->copiarArchivo(":/images/list_cover_top.png", fGrl->ThemeApp() +"images/list_cover_top.png", true);
+        if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_top.png") )
+            fGrl->copiarArchivo(":/images/list_cover_top.png", fGrl->ThemeApp() +"images/list_cover_top.png", true);
 
-//		if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_top_select.png") )
-//			fGrl->copiarArchivo(":/images/list_cover_top_select.png", fGrl->ThemeApp() +"images/list_cover_top_select.png", true);
+        if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_top_select.png") )
+            fGrl->copiarArchivo(":/images/list_cover_top_select.png", fGrl->ThemeApp() +"images/list_cover_top_select.png", true);
 
-//		if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_title_bg.png") )
-//			fGrl->copiarArchivo(":/images/list_cover_title_bg.png", fGrl->ThemeApp() +"images/list_cover_title_bg.png", true);
+        if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_title_bg.png") )
+            fGrl->copiarArchivo(":/images/list_cover_title_bg.png", fGrl->ThemeApp() +"images/list_cover_title_bg.png", true);
 
 	// Copia los iconos categoría.
 		QList<stGrlDatos> list_img_cat = fGrl->cargarListaArchivos(":/img16_cat/", CbxListIcon);

@@ -690,13 +690,13 @@ stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla)
 		lwConf.icon_height          = settings.value("icon_height"         , 243     ).toInt();
 		lwConf.img_cover_top        = settings.value("img_cover_top"       , "images/list_cover_top.png").toString();
 		lwConf.img_cover_top_select = settings.value("img_cover_top_select", "images/list_cover_top_select.png").toString();
-		lwConf.img_cover_top_pos_x  = settings.value("img_cover_top_pos_x" , 31      ).toInt();
-		lwConf.img_cover_top_pos_y  = settings.value("img_cover_top_pos_y" , 27      ).toInt();
+        lwConf.img_cover_top_pos_x  = settings.value("img_cover_top_pos_x" , 22      ).toInt();
+        lwConf.img_cover_top_pos_y  = settings.value("img_cover_top_pos_y" , 22      ).toInt();
 		lwConf.img_scaled           = settings.value("img_scaled"          , true    ).toBool();
-		lwConf.img_scale_w          = settings.value("img_scale_w"         , 128     ).toInt();
-		lwConf.img_scale_h          = settings.value("img_scale_h"         , 180     ).toInt();
-		lwConf.img_scale_pos_x      = settings.value("img_scale_pos_x"     , 36      ).toInt();
-		lwConf.img_scale_pos_y      = settings.value("img_scale_pos_y"     , 32      ).toInt();
+        lwConf.img_scale_w          = settings.value("img_scale_w"         , 145     ).toInt();
+        lwConf.img_scale_h          = settings.value("img_scale_h"         , 186     ).toInt();
+        lwConf.img_scale_pos_x      = settings.value("img_scale_pos_x"     , 28      ).toInt();
+        lwConf.img_scale_pos_y      = settings.value("img_scale_pos_y"     , 28      ).toInt();
 		lwConf.tipo_emu_show        = settings.value("tipo_emu_show"       , true    ).toBool();
 		lwConf.tipo_emu_pos_x       = settings.value("tipo_emu_pos_x"      , 15      ).toInt();
 		lwConf.tipo_emu_pos_y       = settings.value("tipo_emu_pos_y"      , 202     ).toInt();
@@ -1410,7 +1410,7 @@ void Funciones::cargarArchivosTwLista(QTreeWidget *twList, QString m_dir, QStrin
 				if( QFile::exists(archivo) )
 					item->setIcon( 0, QIcon( archivo ) );
 				else
-					item->setIcon( 0, QIcon(stTheme +"images/juego_sin_imagen.png") );
+                    item->setIcon( 0, QIcon(stThemeApp +"images/juego_sin_imagen.png") );
 				item->setText( 0, "" );
 			} else {
 				if( QFile::exists(stTheme +"img16/"+ img) )

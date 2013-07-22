@@ -376,7 +376,7 @@ void frmOpciones::cargarListaThemes()
 	item->setTextAlignment(1, Qt::AlignCenter);
 	item->setTextAlignment(2, Qt::AlignCenter);
 	item->setSelected(true);
-	ui->lb_theme_example->setPixmap( QPixmap(fGrl->Theme() +"images/juego_sin_imagen.png") );
+    ui->lb_theme_example->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
 
 	setUpdatesEnabled( false );
 	const int list_themesSize = list_themes.size();
@@ -1866,12 +1866,12 @@ void frmOpciones::on_twThemes_itemClicked(QTreeWidgetItem *item, int column)
 		if( QFile::exists(fGrl->Theme() + item->text(0) +"/preview.png") )
 			ui->lb_theme_example->setPixmap( QPixmap(fGrl->Theme() + item->text(0) +"/preview.png") );
 		else
-			ui->lb_theme_example->setPixmap( QPixmap(fGrl->Theme() +"images/juego_sin_imagen.png") );
+            ui->lb_theme_example->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
 
 		cargarConfig();
 		setTheme();
 	} else
-		ui->lb_theme_example->setPixmap( QPixmap(fGrl->Theme() +"images/juego_sin_imagen.png") );
+        ui->lb_theme_example->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
 }
 
 void frmOpciones::on_twThemes_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
