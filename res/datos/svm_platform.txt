@@ -1,21 +1,21 @@
 <default>||sinimg.png
 Apple IIgs|2gs|sinimg.png
-3DO|3do|sinimg.png
+3DO|3do|3do.png
 Acorn|acorn|sinimg.png
 Amiga|amiga|amiga.png
 Atari ST|atari|atari.png
 Commodore 64|c64|c64.png
 DOS|pc|pc.png
 PC-98|pc98|pc.png
-Nintendo Wii|wii|sinimg.png
+Nintendo Wii|wii|wii.png
 CoCo3|coco3|sinimg.png
-FM-TOWNS|fmtowns|sinimg.png
+FM-TOWNS|fmtowns|fm_towns_marty.png
 Linux|linux|linux.png
 Macintosh|macintosh|macintosh.png
-PC-Engine|pce|sinimg.png
+PC-Engine|pce|pce.png
 NES|nes|nes.png
-SegaCD|segacd|sinimg.png
+SegaCD|segacd|sm_cd.png
 Windows|windows|win9x.png
-Sony PlayStation|playstation|sinimg.png
-Phillips CD-i|cdi|sinimg.png
+Sony PlayStation|playstation|psx-1.png
+Philips CD-i|cdi|sinimg.png
 Apple iOS|ios|sinimg.png

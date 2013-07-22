@@ -1,4 +1,4 @@
-Auto|auto|sinimg.png
-Normal|normal|sinimg.png
-Simple|simple|sinimg.png
-Dynamic|dynamic|sinimg.png
+Auto|auto|hw-cpu.png
+Normal|normal|hw-cpu.png
+Simple|simple|hw-cpu.png
+Dynamic|dynamic|hw-cpu.png

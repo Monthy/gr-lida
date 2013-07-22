@@ -1,7 +1,7 @@
-Sound Blaster Emulation disabled|none|sinimg.png
-Sound Blaster 1.0|sb1|sinimg.png
-Sound Blaster 2.0|sb2|sinimg.png
-Sound Blaster Pro 1.0|sbpro1|sinimg.png
-Sound Blaster Pro 2.0|sbpro2|sinimg.png
-Sound Blaster 16|sb16|sinimg.png
-GB|gb|sinimg.png
+Sound Blaster Emulation disabled|none|hw-card.png
+Sound Blaster 1.0|sb1|hw-card.png
+Sound Blaster 2.0|sb2|hw-card.png
+Sound Blaster Pro 1.0|sbpro1|hw-card.png
+Sound Blaster Pro 2.0|sbpro2|hw-card.png
+Sound Blaster 16|sb16|hw-card.png
+GB|gb|hw-card.png

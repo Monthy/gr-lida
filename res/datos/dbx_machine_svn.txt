@@ -1,2 +1,2 @@
-CGA mono|cga_mono|sinimg.png
-Amstrad|amstrad|sinimg.png
+CGA mono|cga_mono|hw-card.png
+Amstrad|amstrad|hw-card.png

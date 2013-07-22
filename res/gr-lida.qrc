@@ -94,12 +94,12 @@
         <file>datos/dbx_scaler.txt</file>
         <file>datos/dbx_scaler_svn.txt</file>
         <file>datos/dbx_sensitivity.txt</file>
+        <file>datos/dosbox.conf</file>
+        <file>datos/fechas.txt</file>
         <file>datos/grl_datos.xml</file>
         <file>datos/grl_dosbox.xml</file>
         <file>datos/grl_scummvm.xml</file>
         <file>datos/grl_vdmsound.xml</file>
-        <file>datos/dosbox.conf</file>
-        <file>datos/fechas.txt</file>
         <file>datos/puntuacion.txt</file>
         <file>datos/rating.txt</file>
         <file>datos/sistemas.txt</file>
@@ -295,6 +295,7 @@
         <file>icon_svm/winnie.png</file>
         <file>icon_svm/woodruff.png</file>
         <file>icon_svm/zak.png</file>
+        <file>img16/3do.png</file>
         <file>img16/acercad.png</file>
         <file>img16/actualizar.png</file>
         <file>img16/amiga.png</file>
@@ -373,6 +374,7 @@
         <file>img16/floppy_1.png</file>
         <file>img16/floppy_2.png</file>
         <file>img16/floppy_3.png</file>
+        <file>img16/fm_towns_marty.png</file>
         <file>img16/go-back.png</file>
         <file>img16/go-down.png</file>
         <file>img16/go-next.png</file>
@@ -380,6 +382,8 @@
         <file>img16/grafica.png</file>
         <file>img16/gr-lida.png</file>
         <file>img16/html.png</file>
+        <file>img16/hw-card.png</file>
+        <file>img16/hw-cpu.png</file>
         <file>img16/idiomas.png</file>
         <file>img16/img_1x.png</file>
         <file>img16/img_2x.png</file>
@@ -424,8 +428,11 @@
         <file>img16/orden_desc.png</file>
         <file>img16/original.png</file>
         <file>img16/pc.png</file>
+        <file>img16/pce.png</file>
         <file>img16/pdf.png</file>
         <file>img16/pictureflow.png</file>
+        <file>img16/psx.png</file>
+        <file>img16/psx-1.png</file>
         <file>img16/qt.png</file>
         <file>img16/ruleta.png</file>
         <file>img16/s_cd_iso.png</file>
@@ -438,6 +445,7 @@
         <file>img16/script.png</file>
         <file>img16/scummvm.png</file>
         <file>img16/sinimg.png</file>
+        <file>img16/sm_cd.png</file>
         <file>img16/smile.png</file>
         <file>img16/style.png</file>
         <file>img16/tag.png</file>
@@ -446,6 +454,7 @@
         <file>img16/tray_restore.png</file>
         <file>img16/umd.png</file>
         <file>img16/vdmsound.png</file>
+        <file>img16/wii.png</file>
         <file>img16/win9x.png</file>
         <file>img16/winxp.png</file>
         <file>img16/zoom.png</file>
@@ -453,12 +462,12 @@
         <file>img16/zoom_out.png</file>
         <file>img24/basedatos.png</file>
         <file>img24/categorias.png</file>
-        <file>img24/menu_nav.png</file>
         <file>img24/datos.png</file>
         <file>img24/datos_1.png</file>
         <file>img24/dosbox.png</file>
         <file>img24/ejecutar_app_setup.png</file>
         <file>img24/html.png</file>
+        <file>img24/menu_nav.png</file>
         <file>img24/opciones.png</file>
         <file>img24/scummvm.png</file>
         <file>img24/sinimg.png</file>

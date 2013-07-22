@@ -1,6 +1,6 @@
-AdLib Emulation disabled|none|sinimg.png
-Auto-Select Synthesizer|auto|sinimg.png
-Creative Music System / GameBlaster|cms|sinimg.png
-AdLib / OPL-2 / Yamaha 3812|opl2|sinimg.png
-Dual OPL-2|dualopl2|sinimg.png
-AdLib Gold / OPL-3 / Yamaha YMF262|opl3|sinimg.png
+AdLib Emulation disabled|none|hw-card.png
+Auto-Select Synthesizer|auto|hw-card.png
+Creative Music System / GameBlaster|cms|hw-card.png
+AdLib / OPL-2 / Yamaha 3812|opl2|hw-card.png
+Dual OPL-2|dualopl2|hw-card.png
+AdLib Gold / OPL-3 / Yamaha YMF262|opl3|hw-card.png

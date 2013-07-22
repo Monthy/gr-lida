@@ -1,13 +1,13 @@
-VGA only (video graphics array)|vgaonly|sinimg.png
-VGA (video graphics array) DOSBox 0.70 and previous|vga|sinimg.png
-CGA (color graphics adapter)|cga|sinimg.png
-EGA (enhanced graphics adapter)|ega|sinimg.png
-Hercules graphics card|hercules|sinimg.png
-IBM PCjr|pcjr|sinimg.png
-Tseng ET3000 SuperVGA card|svga_et3000|sinimg.png
-Tseng ET4000 SuperVGA card|svga_et4000|sinimg.png
-Paradise PVGA1A SuperVGA card|svga_paradise|sinimg.png
-VESA 2.0 compatible S3 SuperVGA card|svga_s3|sinimg.png
-Tandy|tandy|sinimg.png
-VESA 2.0 compatible S3 SuperVGA card (vesa_nolfb)|vesa_nolfb|sinimg.png
-VESA 1.2 compatible S3 SuperVGA card (vesa_oldvbe)|vesa_oldvbe|sinimg.png
+VGA only (video graphics array)|vgaonly|hw-card.png
+VGA (video graphics array) DOSBox 0.70 and previous|vga|hw-card.png
+CGA (color graphics adapter)|cga|hw-card.png
+EGA (enhanced graphics adapter)|ega|hw-card.png
+Hercules graphics card|hercules|hw-card.png
+IBM PCjr|pcjr|hw-card.png
+Tseng ET3000 SuperVGA card|svga_et3000|hw-card.png
+Tseng ET4000 SuperVGA card|svga_et4000|hw-card.png
+Paradise PVGA1A SuperVGA card|svga_paradise|hw-card.png
+VESA 2.0 compatible S3 SuperVGA card|svga_s3|hw-card.png
+Tandy|tandy|hw-card.png
+VESA 2.0 compatible S3 SuperVGA card (vesa_nolfb)|vesa_nolfb|hw-card.png
+VESA 1.2 compatible S3 SuperVGA card (vesa_oldvbe)|vesa_oldvbe|hw-card.png

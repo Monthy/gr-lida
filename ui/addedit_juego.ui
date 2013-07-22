@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>:/img16/grlida.png</normaloff>:/img16/grlida.png</iconset>
+    <normaloff>:/img16/gr-lida.png</normaloff>:/img16/gr-lida.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <property name="spacing">

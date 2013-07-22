@@ -1,6 +1,6 @@
-Auto|auto|sinimg.png
-386|386|sinimg.png
-386 Slow|386_slow|sinimg.png
-486 Slow|486_slow|sinimg.png
-Pentium Slow|pentium_slow|sinimg.png
-386 Prefetch|386_prefetch|sinimg.png
+Auto|auto|hw-cpu.png
+386|386|hw-cpu.png
+386 Slow|386_slow|hw-cpu.png
+486 Slow|486_slow|hw-cpu.png
+Pentium Slow|pentium_slow|hw-cpu.png
+386 Prefetch|386_prefetch|hw-cpu.png

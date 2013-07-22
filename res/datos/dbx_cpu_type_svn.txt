@@ -1,1 +1,1 @@
-Pentium MMX|pentium_mmx|sinimg.png
+Pentium MMX|pentium_mmx|hw-cpu.png
