@@ -248,37 +248,39 @@ void frmInstalarJuego::on_btnOk_clicked()
 		QFile file_out(grlDir.Temp +"dosbox.conf");
 		if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
 		{
+			QString dir_montaje = fGrl->getDirRelative(ui->txtMontaje_path->text(), "DosGames");
+
 			QTextStream out(&file_out);
 			out.setCodec("UTF-8");
 			out << "[autoexec]" << endl;
 			out << "@echo off" << endl;
 
 			if( tipo_origen == "drive" )
-				out << "mount D \"" << QDir::toNativeSeparators(ui->txtMontaje_path->text()) << "\"" << endl;
+				out << "mount D \"" << dir_montaje << "\"" << endl;
 			else if( tipo_origen == "cdrom" )
-				out << "mount D \"" << QDir::toNativeSeparators(ui->txtMontaje_path->text()) << "\" -t cdrom" << endl;
+				out << "mount D \"" << dir_montaje << "\" -t cdrom" << endl;
 			else if( tipo_origen == "floppy" )
-				out << "mount A \"" << QDir::toNativeSeparators(ui->txtMontaje_path->text()) << "\" -t floppy" << endl;
+				out << "mount A \"" << dir_montaje << "\" -t floppy" << endl;
 			else if( tipo_origen == "IMG_floppy" )
-				out << "imgmount A \"" << QDir::toNativeSeparators(ui->txtMontaje_path->text()) << "\" -t floppy" << endl;
+				out << "imgmount A \"" << dir_montaje << "\" -t floppy" << endl;
 			else if( tipo_origen == "IMG_iso" )
-				out << "imgmount D \"" << QDir::toNativeSeparators(ui->txtMontaje_path->text()) << "\" -t iso" << endl;
+				out << "imgmount D \"" << dir_montaje << "\" -t iso" << endl;
 			else if( tipo_origen == "IMG_multi_iso" )
 			{
 				lista_multiple_iso.clear();
 				for( int i = 0; i < ui->lw_MultiIso->count(); ++i )
 				{
 					if(i == 0)
-						lista_multiple_iso << "\""+ fGrl->getShortPathName( ui->lw_MultiIso->item(i)->text() ) +"\"";
+						lista_multiple_iso << "\""+ fGrl->getShortPathName( fGrl->getDirRelative(ui->lw_MultiIso->item(i)->text()) ) +"\"";
 					else
-						lista_multiple_iso << "\""+ ui->lw_MultiIso->item(i)->text() +"\"";
+						lista_multiple_iso << "\""+ fGrl->getDirRelative(ui->lw_MultiIso->item(i)->text()) +"\"";
 				}
 				out << "imgmount D " << lista_multiple_iso.join(" ") << " -t iso" << endl;
 			}
 			else if( tipo_origen == "IMG_hdd" )
-				out << "imgmount D \"" << QDir::toNativeSeparators(ui->txtMontaje_path->text()) << "\" -t hdd" << endl;
+				out << "imgmount D \"" << dir_montaje << "\" -t hdd" << endl;
 
-			out << "mount C \"" << QDir::toNativeSeparators(ui->txtDestinoPath->text()) << "\"" << endl;
+			out << "mount C \"" << fGrl->getDirRelative(ui->txtDestinoPath->text(), "DosGames") << "\"" << endl;
 			out << "echo " << install_info << endl;
 
 			if(tipo_origen == "floppy" || tipo_origen == "IMG_floppy")
