@@ -113,6 +113,10 @@ int main(int argc, char *argv[])
 //	app.processEvents();
 //	fGrl.comprobarDirectorio(  );
 
+	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta DosGames"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+	fGrl.comprobarDirectorio(grlDir.Home +"DosGames");
+
 #ifdef Q_OS_WIN32
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta configuración del VDMSound"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
