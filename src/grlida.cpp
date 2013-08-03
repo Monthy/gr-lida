@@ -1543,42 +1543,29 @@ stDatosJuego GrLida::nuevoItemCopiarImagenes(stDatosJuego datos, QString tabla, 
 	old_name_thumbs      = datos.thumbs;
 	old_name_cover_front = datos.cover_front;
 	old_name_cover_back  = datos.cover_back;
-
-	qDebug() << "old_name_thumbs: " << old_name_thumbs;
-
-	img_tmp_name = "id-"+ datos.idgrl +"_"+ fGrl->eliminar_caracteres(datos.titulo) +"_"+ datos.tipo_emu;
+	img_tmp_name         = "id-"+ datos.idgrl +"_"+ fGrl->eliminar_caracteres(datos.titulo) +"_"+ datos.tipo_emu;
 
 // Actualizamos las imagenes
 	if( !old_name_thumbs.isEmpty() )
 	{
 		stFileInfo fi_t = fGrl->getInfoFile(old_name_thumbs);
-		datos.thumbs = img_tmp_name +"_thumbs"+ fi_t.Ext;
+		datos.thumbs    = img_tmp_name +"_thumbs"+ fi_t.Ext;
 		sql->actualizaDatosItem(tabla, datos.idgrl, "thumbs", datos.thumbs);
 
-		qDebug() << "datos.thumbs: " << datos.thumbs;
-
 		if( isNew )
-		{	
-			qDebug() << "isNew copy: " << grlDir.Temp + old_name_thumbs << " -a- " << grlDir.Thumbs + datos.thumbs;
 			QFile::copy(grlDir.Temp + old_name_thumbs, grlDir.Thumbs + datos.thumbs);
-		} else {
+		else {
 			if( fi_t.Exists )
-			{
-				qDebug() << "Exists copy: " << old_name_thumbs << " -a- " << grlDir.Thumbs + datos.thumbs;
 				QFile::copy(old_name_thumbs, grlDir.Thumbs + datos.thumbs);
-			} else {
-				qDebug() << "Exists rename: " << grlDir.Thumbs + old_name_thumbs << " -a- " << grlDir.Thumbs + datos.thumbs;
+			else
 				QFile::rename(grlDir.Thumbs + old_name_thumbs, grlDir.Thumbs + datos.thumbs);
-			}
 		}
 	} else
 		datos.thumbs = "";
 
-	qDebug() << "final datos.thumbs: " << datos.thumbs;
-
 	if( !old_name_cover_front.isEmpty() )
 	{
-		stFileInfo fi_cf = fGrl->getInfoFile(old_name_cover_front);
+		stFileInfo fi_cf  = fGrl->getInfoFile(old_name_cover_front);
 		datos.cover_front = img_tmp_name +"_cover_front"+ fi_cf.Ext;
 		sql->actualizaDatosItem(tabla, datos.idgrl, "cover_front", datos.cover_front);
 
@@ -1979,14 +1966,6 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 				cargarConfigEmu("");
 		}
 
-/*qDebug() << "f_exe:         " << cfgExec.f_exe;
-qDebug() << "f_param:       " << cfgExec.f_param;
-qDebug() << "f_exe_setup:   " << cfgExec.f_exe_setup;
-qDebug() << "f_param_setup: " << cfgExec.f_param_setup;
-qDebug() << "f_path:        " << cfgExec.f_path;
-qDebug() << "f_path_setup:  " << cfgExec.f_path_setup;
-qDebug() << "--------------------------------------------------------------------------------------";*/
-
 		if( cfgExec.f_exe.isEmpty() || !QFile::exists(cfgExec.f_exe) )
 			cfgExec.isCfgExec = false;
 		else
@@ -2152,7 +2131,6 @@ void GrLida::ejecutar(QString bin, QString parametros, QString working_dir)
 
 		if( isTrayIcon )
 		{
-//			if( !trayIcon->isVisible() )
 			trayIcon->show();
 			this->hide();
 		}
@@ -2491,45 +2469,11 @@ void GrLida::on_mnu_edit_eliminar_triggered()
 						pos   = ui->lvJuegos->currentIndex().row();
 						nItem = pos;
 						isOk  = lv_model->removeRow( pos );
-
-/*						nItem = pos;
-						if( nItem <= 0 )
-						{
-							if( count > -1 )
-								select = lv_model->index(0, 0);
-						} else
-							select = lv_model->index(nItem - 1, 0);
-
-						if( count > -1 )
-						{
-							ui->lvJuegos->clearSelection();
-							ui->lvJuegos->setCurrentIndex(select);
-							ui->lvJuegos->scrollTo(select, QAbstractItemView::EnsureVisible);
-
-							emit on_lvJuegos_clicked(select);
-						}*/
 					} else {
 						pos   = ui->tvJuegos->currentIndex().row();
 						nItem = pos;
 						isOk  = tv_model->removeRow( pos );
 						tv_model->submitAll();
-
-/*						nItem = pos;
-						if( nItem <= 0 )
-						{
-							if( count > -1 )
-								select = tv_model->index(0, col_select);
-						} else
-							select = tv_model->index(nItem - 1, col_select);
-
-						if( count > -1 )
-						{
-							ui->tvJuegos->clearSelection();
-							ui->tvJuegos->setCurrentIndex(select);
-							ui->tvJuegos->scrollTo(select, QAbstractItemView::EnsureVisible);
-
-							emit on_tvJuegos_clicked(select);
-						}*/
 					}
 
 					if( isOk )

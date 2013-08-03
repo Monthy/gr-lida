@@ -75,6 +75,8 @@ private:
 private slots:
 	void on_btnOk_clicked();
 	void on_btnCancelar_clicked();
+
+	void on_cbxTipoEmu_activated(int index);
 	void on_cbxCategorias_activated(int index);
 	void on_btnCheckedAll_clicked();
 	void on_btnUnCheckedAll_clicked();
@@ -82,7 +84,6 @@ private slots:
 	void on_btnDirExportPath_clicked();
 	void on_btnDirExportPath_clear_clicked();
 
-	void on_cbxTipoEmu_activated(int index);
 };
 
 #endif // GRLIDA_EXPORTARJUEGO_H

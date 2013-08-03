@@ -82,7 +82,7 @@ private:
 	void downloadFile(int id_down);
 
 private slots:
-	void on_btnOk_clicked();
+	void on_btnClose_clicked();
 	void on_btnUpdate_clicked();
 	void on_btnCheckUpdate_clicked();
 
@@ -92,6 +92,7 @@ private slots:
 	void statusFinished();
 
 	void on_chkSoloUpdates_clicked(bool checked);
+
 };
 
 #endif // GRLIDA_UPDATE_H

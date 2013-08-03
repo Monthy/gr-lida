@@ -216,6 +216,14 @@ void frmExportarJuego::cargarDatosExportar(QString IdGame)
 	}
 }
 
+void frmExportarJuego::on_cbxTipoEmu_activated(int index)
+{
+	if( index > -1 )
+		cargarListaJuegos(ui->cbxTipoEmu->itemData(index, Qt::UserRole).toString());
+	else
+		cargarListaJuegos();
+}
+
 void frmExportarJuego::on_cbxCategorias_activated(int index)
 {
 	if( index > -1 )
@@ -249,14 +257,6 @@ void frmExportarJuego::on_cbxCategorias_activated(int index)
 
 	ui->cbxTipoEmu->setCurrentIndex(0);
 	emit on_cbxTipoEmu_activated(0);
-}
-
-void frmExportarJuego::on_cbxTipoEmu_activated(int index)
-{
-	if( index > -1 )
-		cargarListaJuegos(ui->cbxTipoEmu->itemData(index, Qt::UserRole).toString());
-	else
-		cargarListaJuegos();
 }
 
 void frmExportarJuego::on_btnCheckedAll_clicked()

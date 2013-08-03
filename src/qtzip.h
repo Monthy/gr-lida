@@ -58,6 +58,7 @@ private:
 
 	bool isZipOpen;
 	QString comentarioZip;
+
 };
 
 #endif /*QTZIP_H*/

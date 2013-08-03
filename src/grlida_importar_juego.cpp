@@ -208,10 +208,6 @@ void frmImportarJuego::cargarConfig()
 	ui->twMontajes->header()->setMovable(false);
 	ui->twMontajes->header()->setStretchLastSection(false);
 	ui->twMontajes->header()->setResizeMode(0, QHeaderView::Stretch);
-//	ui->twMontajes->header()->setResizeMode(1, QHeaderView::Fixed);
-//	ui->twMontajes->header()->setResizeMode(2, QHeaderView::Fixed);
-//	ui->twMontajes->header()->setResizeMode(3, QHeaderView::ResizeToContents);
-//	ui->twMontajes->setColumnWidth(0, 300);
 	ui->twMontajes->setColumnWidth(1, 40);
 	ui->twMontajes->setColumnWidth(2, 80);
 	ui->twMontajes->setColumnWidth(3, 80);
@@ -375,7 +371,6 @@ void frmImportarJuego::mostrarFichaHtml(QHash<QString, QString> datos)
 	str_html_new.replace("<dir_scripts>", grlDir.Scripts);
 
 	ui->txtHtmlInfo->setHtml( str_html_new );
-//	fGrl->ventanaInfo("","",500,300, str_html_new, true);
 
 	for (int i = 1; i < 10; ++i)
 	{
@@ -591,212 +586,7 @@ void frmImportarJuego::analyzePage(QString filename, bool local, bool tipoDFend)
 			datosImportar.insert(it.name(), ""+ it.value().toString());
 		}
 	}
-/*
-//--------------------------------------------------------------------------------------------
-	qDebug() << "tipoDFend           : " << datosImportar["tipoDFend"];
-	qDebug() << "Datos --------------------------------------------------------";
-	qDebug() << "Dat_idgrl           : " << datosImportar["Dat_idgrl"];
-	qDebug() << "Dat_icono           : " << datosImportar["Dat_icono"];
-	qDebug() << "Dat_titulo          : " << datosImportar["Dat_titulo"];
-	qDebug() << "Dat_subtitulo       : " << datosImportar["Dat_subtitulo"];
-	qDebug() << "Dat_genero          : " << datosImportar["Dat_genero"];
-	qDebug() << "Dat_compania        : " << datosImportar["Dat_compania"];
-	qDebug() << "Dat_desarrollador   : " << datosImportar["Dat_desarrollador"];
-	qDebug() << "Dat_tema            : " << datosImportar["Dat_tema"];
-	qDebug() << "Dat_grupo           : " << datosImportar["Dat_grupo"];
-	qDebug() << "Dat_perspectiva     : " << datosImportar["Dat_perspectiva"];
-	qDebug() << "Dat_idioma          : " << datosImportar["Dat_idioma"];
-	qDebug() << "Dat_idioma_voces    : " << datosImportar["Dat_idioma_voces"];
-	qDebug() << "Dat_formato         : " << datosImportar["Dat_formato"];
-	qDebug() << "Dat_anno            : " << datosImportar["Dat_anno"];
-	qDebug() << "Dat_numdisc         : " << datosImportar["Dat_numdisc"];
-	qDebug() << "Dat_sistemaop       : " << datosImportar["Dat_sistemaop"];
-	qDebug() << "Dat_tamano          : " << datosImportar["Dat_tamano"];
-	qDebug() << "Dat_graficos        : " << datosImportar["Dat_graficos"];
-	qDebug() << "Dat_sonido          : " << datosImportar["Dat_sonido"];
-	qDebug() << "Dat_jugabilidad     : " << datosImportar["Dat_jugabilidad"];
-	qDebug() << "Dat_original        : " << datosImportar["Dat_original"];
-	qDebug() << "Dat_estado          : " << datosImportar["Dat_estado"];
-	qDebug() << "Dat_thumbs          : " << datosImportar["Dat_thumbs"];
-	qDebug() << "Dat_thumbs_new      : " << datosImportar["Dat_thumbs_new"];
-	qDebug() << "Dat_cover_front     : " << datosImportar["Dat_cover_front"];
-	qDebug() << "Dat_cover_front_new : " << datosImportar["Dat_cover_front_new"];
-	qDebug() << "Dat_cover_back      : " << datosImportar["Dat_cover_back"];
-	qDebug() << "Dat_cover_back_new  : " << datosImportar["Dat_cover_back_new"];
-	qDebug() << "Dat_fecha           : " << datosImportar["Dat_fecha"];
-	qDebug() << "Dat_tipo_emu        : " << datosImportar["Dat_tipo_emu"];
-	qDebug() << "Dat_comentario      : " << datosImportar["Dat_comentario"];
-	qDebug() << "Dat_favorito        : " << datosImportar["Dat_favorito"];
-	qDebug() << "Dat_rating          : " << datosImportar["Dat_rating"];
-	qDebug() << "Dat_edad_recomendada: " << datosImportar["Dat_edad_recomendada"];
-	qDebug() << "Dat_usuario         : " << datosImportar["Dat_usuario"];
-	qDebug() << "Dat_path_exe        : " << datosImportar["Dat_path_exe"];
-	qDebug() << "Dat_parametros_exe  : " << datosImportar["Dat_parametros_exe"];
-	qDebug() << "Dat_path_capturas   : " << datosImportar["Dat_path_capturas"];
-	qDebug() << "Dat_path_setup      : " << datosImportar["Dat_path_setup"];
-	qDebug() << "Dat_parametros_setup: " << datosImportar["Dat_parametros_setup"];
 
-	qDebug() << "DOSBox -------------------------------------------------------";
-// [sdl]
-	qDebug() << "Dbx_sdl_fullscreen       : " << datosImportar["Dbx_sdl_fullscreen"];
-	qDebug() << "Dbx_sdl_fulldouble       : " << datosImportar["Dbx_sdl_fulldouble"];
-	qDebug() << "Dbx_sdl_fullfixed        : " << datosImportar["Dbx_sdl_fullfixed"];
-	qDebug() << "Dbx_sdl_fullresolution   : " << datosImportar["Dbx_sdl_fullresolution"];
-	qDebug() << "Dbx_sdl_windowresolution : " << datosImportar["Dbx_sdl_windowresolution"];
-	qDebug() << "Dbx_sdl_output           : " << datosImportar["Dbx_sdl_output"];
-	qDebug() << "Dbx_sdl_hwscale          : " << datosImportar["Dbx_sdl_hwscale"];
-	qDebug() << "Dbx_sdl_autolock         : " << datosImportar["Dbx_sdl_autolock"];
-	qDebug() << "Dbx_sdl_sensitivity      : " << datosImportar["Dbx_sdl_sensitivity"];
-	qDebug() << "Dbx_sdl_waitonerror      : " << datosImportar["Dbx_sdl_waitonerror"];
-	qDebug() << "Dbx_sdl_priority         : " << datosImportar["Dbx_sdl_priority"];
-	qDebug() << "Dbx_sdl_mapperfile       : " << datosImportar["Dbx_sdl_mapperfile"];
-	qDebug() << "Dbx_sdl_usescancodes     : " << datosImportar["Dbx_sdl_usescancodes"];
-// [dosbox]
-	qDebug() << "Dbx_dosbox_language      : " << datosImportar["Dbx_dosbox_language"];
-	qDebug() << "Dbx_dosbox_machine       : " << datosImportar["Dbx_dosbox_machine"];
-	qDebug() << "Dbx_dosbox_captures      : " << datosImportar["Dbx_dosbox_captures"];
-	qDebug() << "Dbx_dosbox_memsize       : " << datosImportar["Dbx_dosbox_memsize"];
-// [render]
-	qDebug() << "Dbx_render_frameskip     : " << datosImportar["Dbx_render_frameskip"];
-	qDebug() << "Dbx_render_aspect        : " << datosImportar["Dbx_render_aspect"];
-	qDebug() << "Dbx_render_scaler        : " << datosImportar["Dbx_render_scaler"];
-// [cpu]
-	qDebug() << "Dbx_cpu_core             : " << datosImportar["Dbx_cpu_core"];
-	qDebug() << "Dbx_cpu_cputype          : " << datosImportar["Dbx_cpu_cputype"];
-	qDebug() << "Dbx_cpu_cycles           : " << datosImportar["Dbx_cpu_cycles"];
-	qDebug() << "Dbx_cpu_cycles_realmode  : " << datosImportar["Dbx_cpu_cycles_realmode"];
-	qDebug() << "Dbx_cpu_cycles_protmode  : " << datosImportar["Dbx_cpu_cycles_protmode"];
-	qDebug() << "Dbx_cpu_cycles_limitmode : " << datosImportar["Dbx_cpu_cycles_limitmode"];
-	qDebug() << "Dbx_cpu_cycleup          : " << datosImportar["Dbx_cpu_cycleup"];
-	qDebug() << "Dbx_cpu_cycledown        : " << datosImportar["Dbx_cpu_cycledown"];
-// [mixer]
-	qDebug() << "Dbx_mixer_nosound        : " << datosImportar["Dbx_mixer_nosound"];
-	qDebug() << "Dbx_mixer_rate           : " << datosImportar["Dbx_mixer_rate"];
-	qDebug() << "Dbx_mixer_blocksize      : " << datosImportar["Dbx_mixer_blocksize"];
-	qDebug() << "Dbx_mixer_prebuffer      : " << datosImportar["Dbx_mixer_prebuffer"];
-// [midi]
-	qDebug() << "Dbx_midi_mpu401          : " << datosImportar["Dbx_midi_mpu401"];
-	qDebug() << "Dbx_midi_intelligent     : " << datosImportar["Dbx_midi_intelligent"];
-	qDebug() << "Dbx_midi_device          : " << datosImportar["Dbx_midi_device"];
-	qDebug() << "Dbx_midi_config          : " << datosImportar["Dbx_midi_config"];
-	qDebug() << "Dbx_midi_mt32rate        : " << datosImportar["Dbx_midi_mt32rate"];
-// [sblaster]
-	qDebug() << "Dbx_sblaster_sbtype      : " << datosImportar["Dbx_sblaster_sbtype"];
-	qDebug() << "Dbx_sblaster_sbbase      : " << datosImportar["Dbx_sblaster_sbbase"];
-	qDebug() << "Dbx_sblaster_irq         : " << datosImportar["Dbx_sblaster_irq"];
-	qDebug() << "Dbx_sblaster_dma         : " << datosImportar["Dbx_sblaster_dma"];
-	qDebug() << "Dbx_sblaster_hdma        : " << datosImportar["Dbx_sblaster_hdma"];
-	qDebug() << "Dbx_sblaster_mixer       : " << datosImportar["Dbx_sblaster_mixer"];
-	qDebug() << "Dbx_sblaster_oplmode     : " << datosImportar["Dbx_sblaster_oplmode"];
-	qDebug() << "Dbx_sblaster_oplemu      : " << datosImportar["Dbx_sblaster_oplemu"];
-	qDebug() << "Dbx_sblaster_oplrate     : " << datosImportar["Dbx_sblaster_oplrate"];
-// [gus]
-	qDebug() << "Dbx_gus_gus              : " << datosImportar["Dbx_gus_gus"];
-	qDebug() << "Dbx_gus_gusrate          : " << datosImportar["Dbx_gus_gusrate"];
-	qDebug() << "Dbx_gus_gusbase          : " << datosImportar["Dbx_gus_gusbase"];
-	qDebug() << "Dbx_gus_irq1             : " << datosImportar["Dbx_gus_irq1"];
-	qDebug() << "Dbx_gus_irq2             : " << datosImportar["Dbx_gus_irq2"];
-	qDebug() << "Dbx_gus_dma1             : " << datosImportar["Dbx_gus_dma1"];
-	qDebug() << "Dbx_gus_dma2             : " << datosImportar["Dbx_gus_dma2"];
-	qDebug() << "Dbx_gus_ultradir         : " << datosImportar["Dbx_gus_ultradir"];
-// [speaker]
-	qDebug() << "Dbx_speaker_pcspeaker    : " << datosImportar["Dbx_speaker_pcspeaker"];
-	qDebug() << "Dbx_speaker_pcrate       : " << datosImportar["Dbx_speaker_pcrate"];
-	qDebug() << "Dbx_speaker_tandy        : " << datosImportar["Dbx_speaker_tandy"];
-	qDebug() << "Dbx_speaker_tandyrate    : " << datosImportar["Dbx_speaker_tandyrate"];
-	qDebug() << "Dbx_speaker_disney       : " << datosImportar["Dbx_speaker_disney"];
-// [joystick]
-	qDebug() << "Dbx_joystick_type        : " << datosImportar["Dbx_joystick_type"];
-	qDebug() << "Dbx_joystick_timed       : " << datosImportar["Dbx_joystick_timed"];
-	qDebug() << "Dbx_joystick_autofire    : " << datosImportar["Dbx_joystick_autofire"];
-	qDebug() << "Dbx_joystick_swap34      : " << datosImportar["Dbx_joystick_swap34"];
-	qDebug() << "Dbx_joystick_buttonwrap  : " << datosImportar["Dbx_joystick_buttonwrap"];
-// [modem]
-	qDebug() << "Dbx_modem_modem          : " << datosImportar["Dbx_modem_modem"];
-	qDebug() << "Dbx_modem_comport        : " << datosImportar["Dbx_modem_comport"];
-	qDebug() << "Dbx_modem_listenport     : " << datosImportar["Dbx_modem_listenport"];
-// [dserial]
-	qDebug() << "Dbx_dserial_directserial : " << datosImportar["Dbx_dserial_directserial"];
-	qDebug() << "Dbx_dserial_comport      : " << datosImportar["Dbx_dserial_comport"];
-	qDebug() << "Dbx_dserial_realport     : " << datosImportar["Dbx_dserial_realport"];
-	qDebug() << "Dbx_dserial_defaultbps   : " << datosImportar["Dbx_dserial_defaultbps"];
-	qDebug() << "Dbx_dserial_parity       : " << datosImportar["Dbx_dserial_parity"];
-	qDebug() << "Dbx_dserial_bytesize     : " << datosImportar["Dbx_dserial_bytesize"];
-	qDebug() << "Dbx_dserial_stopbit      : " << datosImportar["Dbx_dserial_stopbit"];
-// [serial]
-	qDebug() << "Dbx_serial_1             : " << datosImportar["Dbx_serial_1"];
-	qDebug() << "Dbx_serial_2             : " << datosImportar["Dbx_serial_2"];
-	qDebug() << "Dbx_serial_3             : " << datosImportar["Dbx_serial_3"];
-	qDebug() << "Dbx_serial_4             : " << datosImportar["Dbx_serial_4"];
-// [dos]
-	qDebug() << "Dbx_dos_xms              : " << datosImportar["Dbx_dos_xms"];
-	qDebug() << "Dbx_dos_ems              : " << datosImportar["Dbx_dos_ems"];
-	qDebug() << "Dbx_dos_umb              : " << datosImportar["Dbx_dos_umb"];
-	qDebug() << "Dbx_dos_keyboardlayout   : " << datosImportar["Dbx_dos_keyboardlayout"];
-	qDebug() << "Dbx_dos_version          : " << datosImportar["Dbx_dos_version"];
-// [ipx]
-	qDebug() << "Dbx_ipx_ipx              : " << datosImportar["Dbx_ipx_ipx"];
-	qDebug() << "Dbx_ipx_type             : " << datosImportar["Dbx_ipx_type"];
-	qDebug() << "Dbx_ipx_port             : " << datosImportar["Dbx_ipx_port"];
-	qDebug() << "Dbx_ipx_ip               : " << datosImportar["Dbx_ipx_ip"];
-// [autoexec]
-	qDebug() << "Dbx_autoexec             : " << datosImportar["Dbx_autoexec"];
-// Opciones
-	qDebug() << "Dbx_opt_autoexec         : " << datosImportar["Dbx_opt_autoexec"];
-	qDebug() << "Dbx_opt_loadfix          : " << datosImportar["Dbx_opt_loadfix"];
-	qDebug() << "Dbx_opt_loadfix_mem      : " << datosImportar["Dbx_opt_loadfix_mem"];
-	qDebug() << "Dbx_opt_consola_dbox     : " << datosImportar["Dbx_opt_consola_dbox"];
-	qDebug() << "Dbx_opt_cerrar_dbox      : " << datosImportar["Dbx_opt_cerrar_dbox"];
-	qDebug() << "Dbx_opt_cycle_sincronizar: " << datosImportar["Dbx_opt_cycle_sincronizar"];
-// Path
-	qDebug() << "Dbx_path_conf            : " << datosImportar["Dbx_path_conf"];
-	qDebug() << "Dbx_path_sonido          : " << datosImportar["Dbx_path_sonido"];
-	qDebug() << "Dbx_path_exe             : " << datosImportar["Dbx_path_exe"];
-	qDebug() << "Dbx_path_setup           : " << datosImportar["Dbx_path_setup"];
-	qDebug() << "Dbx_parametros_exe       : " << datosImportar["Dbx_parametros_exe"];
-	qDebug() << "Dbx_parametros_setup     : " << datosImportar["Dbx_parametros_setup"];
-
-	qDebug() << "ScummVM ------------------------------------------------------";
-	qDebug() << "Svm_game              :" << datosImportar["Svm_game"];
-	qDebug() << "Svm_game_label        :" << datosImportar["Svm_game_label"];
-	qDebug() << "Svm_language          :" << datosImportar["Svm_language"];
-	qDebug() << "Svm_subtitles         :" << datosImportar["Svm_subtitles"];
-	qDebug() << "Svm_platform          :" << datosImportar["Svm_platform"];
-	qDebug() << "Svm_gfx_mode          :" << datosImportar["Svm_gfx_mode"];
-	qDebug() << "Svm_render_mode       :" << datosImportar["Svm_render_mode"];
-	qDebug() << "Svm_fullscreen        :" << datosImportar["Svm_fullscreen"];
-	qDebug() << "Svm_aspect_ratio      :" << datosImportar["Svm_aspect_ratio"];
-	qDebug() << "Svm_path              :" << datosImportar["Svm_path"];
-	qDebug() << "Svm_path_extra        :" << datosImportar["Svm_path_extra"];
-	qDebug() << "Svm_path_save         :" << datosImportar["Svm_path_save"];
-	qDebug() << "Svm_path_capturas     :" << datosImportar["Svm_path_capturas"];
-	qDebug() << "Svm_path_sonido       :" << datosImportar["Svm_path_sonido"];
-	qDebug() << "Svm_music_driver      :" << datosImportar["Svm_music_driver"];
-	qDebug() << "Svm_enable_gs         :" << datosImportar["Svm_enable_gs"];
-	qDebug() << "Svm_multi_midi        :" << datosImportar["Svm_multi_midi"];
-	qDebug() << "Svm_native_mt32       :" << datosImportar["Svm_native_mt32"];
-	qDebug() << "Svm_mute              :" << datosImportar["Svm_mute"];
-	qDebug() << "Svm_master_volume     :" << datosImportar["Svm_master_volume"];
-	qDebug() << "Svm_music_volume      :" << datosImportar["Svm_music_volume"];
-	qDebug() << "Svm_sfx_volume        :" << datosImportar["Svm_sfx_volume"];
-	qDebug() << "Svm_speech_volume     :" << datosImportar["Svm_speech_volume"];
-	qDebug() << "Svm_speech_mute       :" << datosImportar["Svm_speech_mute"];
-	qDebug() << "Svm_tempo             :" << datosImportar["Svm_tempo"];
-	qDebug() << "Svm_talkspeed         :" << datosImportar["Svm_talkspeed"];
-	qDebug() << "Svm_debuglevel        :" << datosImportar["Svm_debuglevel"];
-	qDebug() << "Svm_cdrom             :" << datosImportar["Svm_cdrom"];
-	qDebug() << "Svm_joystick_num      :" << datosImportar["Svm_joystick_num"];
-	qDebug() << "Svm_output_rate       :" << datosImportar["Svm_output_rate"];
-	qDebug() << "Svm_midi_gain         :" << datosImportar["Svm_midi_gain"];
-	qDebug() << "Svm_copy_protection   :" << datosImportar["Svm_copy_protection"];
-	qDebug() << "Svm_sound_font        :" << datosImportar["Svm_sound_font"];
-	qDebug() << "Svm_walkspeed         :" << datosImportar["Svm_walkspeed"];
-	qDebug() << "Svm_opl_driver        :" << datosImportar["Svm_opl_driver"];
-	qDebug() << "Svm_disable_dithering :" << datosImportar["Svm_disable_dithering"];
-	qDebug() << "Svm_alt_intro         :" << datosImportar["Svm_alt_intro"];
-	qDebug() << "Svm_boot_param        :" << datosImportar["Svm_boot_param"];
-//--------------------------------------------------------------------------------------------
-*/
 	index_fin_descarga = CargarThumb;
 	emit statusFinished();
 }
@@ -1316,7 +1106,6 @@ void frmImportarJuego::on_cbxScriptURL_activated(int index)
 			ui->txtTituloBuscar->setEnabled(false);
 			ui->btnBuscar->setEnabled(false);
 			ui->twListaBusqueda->setVisible(false);
-		//	str_url_web = "";
 		} else {
 			ui->btnAbrir->setEnabled(false);
 			ui->txtTituloBuscar->setEnabled(true);

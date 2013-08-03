@@ -145,10 +145,6 @@ void HttpDownload::downloadFile(QString urlfile, QString fileName, QString tipo,
 
 	// schedule the request
 	httpRequestAborted = false;
-//	if( tipo == "POST" )
-//		startRequest(url, d_POST, contentPost);
-//	else
-//		startRequest(url, d_GET, contentPost);
 	startRequest(url, (tipo == "POST")? d_POST : d_GET, contentPost);
 }
 

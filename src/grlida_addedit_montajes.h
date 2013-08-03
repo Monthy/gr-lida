@@ -74,6 +74,7 @@ private slots:
 	void on_h_SliderMontaje_freesize_valueChanged(int value);
 
 	void on_btnMontaje_opt_size_mount_clear_clicked();
+
 };
 
 #endif // GRLIDA_ADDEDIT_MONTAJES_H

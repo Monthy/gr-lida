@@ -72,7 +72,7 @@ void frmUpdate::cargarConfig()
 	ui->btnUpdate->setText(tr("Descargar") +" / "+ tr("Actualizar"));
 	ui->btnCheckUpdate->setText(tr("Comprobar actualizaciones"));
 
-	ui->btnOk->setIcon( QIcon(fGrl->Theme() +"img16/aplicar.png") );
+	ui->btnClose->setIcon( QIcon(fGrl->Theme() +"img16/aplicar.png") );
 	ui->btnUpdate->setIcon( QIcon(fGrl->Theme() +"img16/descarga.png") );
 	ui->btnCheckUpdate->setIcon( QIcon(fGrl->Theme() +"img16/actualizar.png") );
 	ui->lb_update_ico->setPixmap( QPixmap(fGrl->Theme() +"img16/actualizar.png") );
@@ -434,7 +434,7 @@ void frmUpdate::statusFinished()
 	}
 }
 
-void frmUpdate::on_btnOk_clicked()
+void frmUpdate::on_btnClose_clicked()
 {
 	if( isDownload )
 		emit httpdown->cancelDownload();
