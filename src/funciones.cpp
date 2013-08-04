@@ -657,9 +657,9 @@ void Funciones::setIdioma(QString lng)
 QString Funciones::myStyleSheet(bool isList)
 {
 	if( isList )
-		return leerArchivo(stTheme +"StyleSheetList.qss", "UTF-8").replace("<theme>", stTheme) +"\n";
+        return leerArchivo(stThemeApp +"StyleSheetList.qss", "UTF-8").replace("<theme>", stThemeApp) +"\n";
 	else
-		return leerArchivo(stTheme +"StyleSheet.qss", "UTF-8").replace("<theme>", stTheme) +"\n";
+        return leerArchivo(stThemeApp +"StyleSheet.qss", "UTF-8").replace("<theme>", stThemeApp) +"\n";
 }
 
 // Carga la configuración de los iconos de la lista en modo Icono

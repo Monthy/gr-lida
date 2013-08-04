@@ -2240,14 +2240,23 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 
 	if(	fGrl->Theme() == ":/" )
 	{
-        if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_top.png") )
-            fGrl->copiarArchivo(":/images/list_cover_top.png", fGrl->ThemeApp() +"images/list_cover_top.png", true);
+		if( !QFile::exists(fGrl->ThemeApp() +"StyleSheet.qss") )
+			fGrl->copiarArchivo(":/StyleSheet.qss", fGrl->ThemeApp() +"StyleSheet.qss", true);
 
-        if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_top_select.png") )
-            fGrl->copiarArchivo(":/images/list_cover_top_select.png", fGrl->ThemeApp() +"images/list_cover_top_select.png", true);
+		if( !QFile::exists(fGrl->ThemeApp() +"StyleSheetList.qss") )
+			fGrl->copiarArchivo(":/StyleSheetList.qss", fGrl->ThemeApp() +"StyleSheetList.qss", true);
 
-        if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_title_bg.png") )
-            fGrl->copiarArchivo(":/images/list_cover_title_bg.png", fGrl->ThemeApp() +"images/list_cover_title_bg.png", true);
+		if( !QFile::exists(fGrl->ThemeApp() +"images/list_bg.jpg") )
+			fGrl->copiarArchivo(":/images/list_bg.jpg", fGrl->ThemeApp() +"images/list_bg.jpg", true);
+
+		if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_top.png") )
+			fGrl->copiarArchivo(":/images/list_cover_top.png", fGrl->ThemeApp() +"images/list_cover_top.png", true);
+
+		if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_top_select.png") )
+			fGrl->copiarArchivo(":/images/list_cover_top_select.png", fGrl->ThemeApp() +"images/list_cover_top_select.png", true);
+
+		if( !QFile::exists(fGrl->ThemeApp() +"images/list_cover_title_bg.png") )
+			fGrl->copiarArchivo(":/images/list_cover_title_bg.png", fGrl->ThemeApp() +"images/list_cover_title_bg.png", true);
 
 	// Copia los iconos categoría.
 		QList<stGrlDatos> list_img_cat = fGrl->cargarListaArchivos(":/img16_cat/", CbxListIcon);
