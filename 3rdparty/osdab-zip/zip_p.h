@@ -46,7 +46,11 @@
 #include <QtCore/QObject>
 #include <QtCore/QtGlobal>
 
+#ifdef USE_ZLIB
+#include <zconf.h>
+#else
 #include <zlib/zconf.h>
+#endif
 
 /*!
 	zLib authors suggest using larger buffers (128K or 256K) for (de)compression (especially for inflate())

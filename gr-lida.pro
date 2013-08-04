@@ -21,11 +21,14 @@ RCC_DIR += build
 OBJECTS_DIR += build
 
 # ###### Compiler, tools and options
+# To use external zlib add: use_zlib
 CONFIG += qt warn_on thread release
-QT += core gui sql network script phonon
 
+# Examples:
+#CONFIG += qt warn_on thread release use_zlib
 #CONFIG += qt warn_on thread debug
 
+QT += core gui sql network script phonon
 #greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 # ###### Files
@@ -162,7 +165,12 @@ TRANSLATIONS += res/idiomas/gr-lida_es_ES.ts \
 win32:RC_FILE += gr-lida.rc
 mac:ICON += gr-lida.icns
 
-LIBS += -lz -lpoppler-qt4
+LIBS += -lpoppler-qt4
+
+use_zlib {
+    DEFINES += USE_ZLIB
+    LIBS += -lz
+}
 
 # ###### Install
 !win32 {
