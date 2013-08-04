@@ -68,10 +68,12 @@ private:
 	dbSql *sql;
 
 	QString stDirApp, stTheme, stThemeApp, stTabla, stFilter;
-	QPixmap star_on, star_off, title_bg, cover_top, cover_top_select;
+	QPixmap star_on, star_off, title_bg, title_bg_select, cover_top, cover_top_select;
 	QHash<QString, QPixmap> ico_emu;
 	QHash<int, int> col;
 	stLwIconCfg lwConf;
+	QPen pen, pen_def, pen_select;
+
 };
 // FIN GrlListViewDelegate --------------------------------------------------------------------------------------
 

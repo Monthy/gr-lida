@@ -706,6 +706,7 @@ stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla)
 		lwConf.rating_pos_y         = settings.value("rating_pos_y"        , 202     ).toInt();
 		lwConf.title_bg_show        = settings.value("title_bg_show"       , true    ).toBool();
 		lwConf.title_bg             = settings.value("title_bg"            , "images/list_cover_title_bg.png").toString();
+		lwConf.title_bg_select      = settings.value("title_bg_select"     , "images/list_cover_title_bg.png").toString();
 		lwConf.title_bg_pos_x       = settings.value("title_bg_pos_x"      , 13      ).toInt();
 		lwConf.title_bg_pos_y       = settings.value("title_bg_pos_y"      , 222     ).toInt();
 		lwConf.title_show           = settings.value("title_show"          , true    ).toBool();
@@ -715,6 +716,8 @@ stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla)
 		lwConf.title_height         = settings.value("title_height"        , 16      ).toInt();
 		lwConf.title_font           = settings.value("title_font"          , "Tahoma").toString();
 		lwConf.title_font_size      = settings.value("title_font_size"     , 7       ).toInt();
+		lwConf.title_font_color     = settings.value("title_font_color"    , QStringList() << "0" << "0" << "0").toStringList();
+		lwConf.title_font_color_select = settings.value("title_font_color_select", QStringList() << "0" << "0" << "0").toStringList();
 		lwConf.title_font_bold      = settings.value("title_font_bold"     , true    ).toBool();
 		lwConf.title_font_italic    = settings.value("title_font_italic"   , false   ).toBool();
 		lwConf.title_font_underline = settings.value("title_font_underline", false   ).toBool();

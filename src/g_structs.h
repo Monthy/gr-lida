@@ -302,6 +302,7 @@ struct stLwIconCfg {
 	int rating_pos_y;
 	bool title_bg_show;
 	QString title_bg;
+	QString title_bg_select;
 	int title_bg_pos_x;
 	int title_bg_pos_y;
 	bool title_show;
@@ -311,6 +312,8 @@ struct stLwIconCfg {
 	int title_height;
 	QString title_font;
 	int title_font_size;
+	QStringList title_font_color;
+	QStringList title_font_color_select;
 	bool title_font_bold;
 	bool title_font_italic;
 	bool title_font_underline;

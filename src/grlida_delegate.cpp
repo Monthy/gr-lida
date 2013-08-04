@@ -53,6 +53,9 @@ void GrlListViewDelegate::setLwIconCfg(stLwIconCfg m_lwConf)
 	if( !title_bg.load(stThemeApp + lwConf.title_bg) )
 		title_bg.load(":/images/list_cover_title_bg.png");
 
+	if( !title_bg_select.load(stThemeApp + lwConf.title_bg_select) )
+		title_bg_select.load(":/images/list_cover_title_bg.png");
+
 	if( !star_on.load(stTheme +"images/star_on.png") )
 		star_on.load(":/images/star_on.png");
 
@@ -65,6 +68,10 @@ void GrlListViewDelegate::setLwIconCfg(stLwIconCfg m_lwConf)
 	QHash<QString, stGrlDatos> emu_list = fGrl.cargaDatosQHash(stDirApp +"datos/emu_list.txt", 4, "|");
 	foreach (const stGrlDatos &dat, emu_list)
 		ico_emu.insert(dat.key, QPixmap(stThemeApp +"img16_cat/"+ dat.icono));
+
+	pen = QApplication::palette().text().color();
+	pen_def.setColor(QColor(lwConf.title_font_color.at(0).toInt(), lwConf.title_font_color.at(1).toInt(), lwConf.title_font_color.at(2).toInt()));
+	pen_select.setColor(QColor(lwConf.title_font_color_select.at(0).toInt(), lwConf.title_font_color_select.at(1).toInt(), lwConf.title_font_color_select.at(2).toInt()));
 }
 
 void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
@@ -86,7 +93,7 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 	else
 		painter->drawPixmap(QPointF(rect_x + lwConf.img_cover_top_pos_x, rect_y + lwConf.img_cover_top_pos_y), cover_top);
 
-// Dibujamos tipo de mulador
+// Dibujamos tipo de emulador
 	if( lwConf.tipo_emu_show )
 	{
 		QString str_emu = qvariant_cast<QString>(index.data(TipoEmuRole));
@@ -115,7 +122,12 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
 // Dibujamos el fondo del titulo
 	if( lwConf.title_bg_show )
-		painter->drawPixmap(QPointF(rect_x + lwConf.title_bg_pos_x, rect_y + lwConf.title_bg_pos_y), title_bg);
+	{
+		if( option.state & QStyle::State_Selected )
+			painter->drawPixmap(QPointF(rect_x + lwConf.title_bg_pos_x, rect_y + lwConf.title_bg_pos_y), title_bg_select);
+		else
+			painter->drawPixmap(QPointF(rect_x + lwConf.title_bg_pos_x, rect_y + lwConf.title_bg_pos_y), title_bg);
+	}
 
 // Dibujamos el titulo
 	if( lwConf.title_show )
@@ -131,10 +143,17 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 		font.setStyleStrategy(QFont::PreferAntialias);
 		painter->setFont( font );
 
+		if( option.state & QStyle::State_Selected )
+			painter->setPen(pen_select);
+		else
+			painter->setPen(pen_def);
+
 		if( titulo.size() > lwConf.title_max_caracteres )
 			painter->drawText(rect_font, Qt::AlignCenter, titulo.left(lwConf.title_max_caracteres) +"..");
 		else
 			painter->drawText(rect_font, Qt::AlignCenter, titulo);
+
+		painter->setPen(pen);
 	}
 	QItemDelegate::paint(painter, option, index);
 }
