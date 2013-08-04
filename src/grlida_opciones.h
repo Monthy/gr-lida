@@ -77,7 +77,7 @@ private:
 	void addEditDatosTwLista(bool isNew);
 	void enabledDatosUpdate(QString texto, int col);
 	void guardarDatosTwLista();
-	void setColorBtn(int r, int g, int b);
+	void setColorBtn(QColor color);
 
 private slots:
 	void on_btnOk_clicked();

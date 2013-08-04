@@ -96,6 +96,12 @@ public:
 	bool StrToBool(QString str);
 // Convierte bool a texto "true", "yes" indicando el tipo
 	QString BoolToStr(bool estado, bool type_yes = false);
+// Devuelve un QColor desde un QStringList o QString
+	QColor getColor(QStringList color);
+	QColor getColor(QString color);
+// Convierte un QColor a un QStringList o QString
+	QStringList setColor(QColor color);
+	QString setColorStr(QColor color);
 // Convierte bytes
 	QString covertir_bytes(float size);
 // Convierte la lista de un QListWidget a QStringList

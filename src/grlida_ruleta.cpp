@@ -155,7 +155,7 @@ void frmRuleta::cargarRuleta(QString filename)
 	ui->lb_info_titulo->setText(config["info_title"]);
 
 	if( bgcolor.count() > -1 && bgcolor.count() == 3)
-		scene->setBackgroundBrush(QBrush(QColor(bgcolor.at(0).toInt(), bgcolor.at(1).toInt(), bgcolor.at(2).toInt())));
+		scene->setBackgroundBrush(QBrush(fGrl->getColor(bgcolor)));
 	else
 		scene->setBackgroundBrush(QBrush(QPalette::Dark));
 

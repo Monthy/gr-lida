@@ -70,8 +70,8 @@ void GrlListViewDelegate::setLwIconCfg(stLwIconCfg m_lwConf)
 		ico_emu.insert(dat.key, QPixmap(stThemeApp +"img16_cat/"+ dat.icono));
 
 	pen = QApplication::palette().text().color();
-	pen_def.setColor(QColor(lwConf.title_font_color.at(0).toInt(), lwConf.title_font_color.at(1).toInt(), lwConf.title_font_color.at(2).toInt()));
-	pen_select.setColor(QColor(lwConf.title_font_color_select.at(0).toInt(), lwConf.title_font_color_select.at(1).toInt(), lwConf.title_font_color_select.at(2).toInt()));
+	pen_def.setColor( fGrl.getColor(lwConf.title_font_color) );
+	pen_select.setColor( fGrl.getColor(lwConf.title_font_color_select) );
 }
 
 void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,

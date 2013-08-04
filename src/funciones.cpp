@@ -119,6 +119,53 @@ QString Funciones::BoolToStr(bool estado, bool type_yes)
 		return type_yes ? "no": "false";
 }
 
+// Devuelve un QColor desde un QStringList o QString
+QColor Funciones::getColor(QStringList color)
+{
+	int r = 0; int g = 0; int b = 0;
+
+	if( color.isEmpty() )
+		color << "0" << "0" << "0";
+
+	if( color.size() < 3 )
+	{
+		int pos = color.size();
+		for(int i = pos; i < 3; ++i)
+			color.insert(i, "0");
+	}
+
+	r = color.at(0).toInt();
+	g = color.at(1).toInt();
+	b = color.at(2).toInt();
+
+	return QColor(r, g, b);
+}
+
+QColor Funciones::getColor(QString color)
+{
+	return getColor( color.split(",") );
+}
+
+// Convierte un QColor a un QStringList o QString
+QStringList Funciones::setColor(QColor color)
+{
+	QStringList list_color;
+	int r = 0; int g = 0; int b = 0;
+
+	r = qRed(color.rgb());
+	g = qGreen(color.rgb());
+	b = qBlue(color.rgb());
+
+	list_color << IntToStr(r) << IntToStr(g) << IntToStr(b);
+
+	return list_color;
+}
+
+QString Funciones::setColorStr(QColor color)
+{
+	return setColor(color).join(",");
+}
+
 // Convierte bytes
 QString Funciones::covertir_bytes(float size)
 {

@@ -860,7 +860,7 @@ void GrLida::setTheme()
 	grl_picflow->setShowNumPos(grlCfg.PicFlowShowNumPos);
 	grl_picflow->setShowTriangle(grlCfg.PicFlowShowTriangle);
 	grl_picflow->setMinimumHeight(grlCfg.PicFlowMinHeight);
-	grl_picflow->setBackgroundColor(QColor(grlCfg.PicFlowBgColor.at(0).toInt(), grlCfg.PicFlowBgColor.at(1).toInt(), grlCfg.PicFlowBgColor.at(2).toInt()));
+	grl_picflow->setBackgroundColor(fGrl->getColor(grlCfg.PicFlowBgColor));
 	ui->dockw_PictureFlow->setMinimumHeight( grlCfg.PicFlowMinHeight );
 
 	ui->lvJuegos->setStyleSheet( fGrl->myStyleSheet(true) );

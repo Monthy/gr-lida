@@ -194,7 +194,7 @@ void frmOpciones::cargarConfig()
 	ui->spinBox_SkipPicFlow->setValue( grlCfg.Skip_PicFlow );
 	ui->spinBox_MinHeightPicFlow->setValue( grlCfg.PicFlowMinHeight  );
 
-	setColorBtn(grlCfg.PicFlowBgColor.at(0).toInt(), grlCfg.PicFlowBgColor.at(1).toInt(), grlCfg.PicFlowBgColor.at(2).toInt());
+	setColorBtn( fGrl->getColor(grlCfg.PicFlowBgColor) );
 	ui->chkPicFlowShowNumPos->setChecked(grlCfg.PicFlowShowNumPos);
 	ui->chkPicFlowShowTriangle->setChecked(grlCfg.PicFlowShowTriangle);
 
@@ -1777,19 +1777,19 @@ void frmOpciones::on_btnDirDB_clear_clicked()
 }
 
 // Style themes -------------------------------------
-void frmOpciones::setColorBtn(int r, int g, int b)
+void frmOpciones::setColorBtn(QColor color)
 {
 	int w = 40;
 	int h = 16;
 	QPixmap img(w, h);
 	QPainter painter(&img);
-	painter.fillRect(img.rect(), QColor(r, g, b));
+	painter.fillRect(img.rect(), color);
 	painter.setPen(Qt::black);
 	painter.drawRect(0, 0, w-1, h-1);
 	painter.end();
 	ui->btnPicFlowBgColor->setIconSize(QSize(w, h));
 	ui->btnPicFlowBgColor->setIcon(QIcon(img));
-	ui->lb_picflowtype->setStyleSheet("background-color: rgb("+ fGrl->IntToStr(r) +", "+ fGrl->IntToStr(g) +", "+ fGrl->IntToStr(b) +");");
+	ui->lb_picflowtype->setStyleSheet("background-color: rgb("+ fGrl->setColorStr(color) +");");
 }
 
 void frmOpciones::on_cbxStyle_activated(int index)
@@ -1839,19 +1839,14 @@ void frmOpciones::on_cbxPicFlowType_activated(int index)
 
 void frmOpciones::on_btnPicFlowBgColor_clicked()
 {
-	QColor color = QColorDialog::getColor(QColor(grlCfg.PicFlowBgColor.at(0).toInt(), grlCfg.PicFlowBgColor.at(1).toInt(), grlCfg.PicFlowBgColor.at(2).toInt()), this, tr("Color de fondo"),  QColorDialog::DontUseNativeDialog);
+	QColor color = QColorDialog::getColor( fGrl->getColor(grlCfg.PicFlowBgColor), this, tr("Color de fondo"),  QColorDialog::DontUseNativeDialog);
 
 	if( color.isValid() )
 	{
-		int r, g, b;
-		r = qRed(color.rgb());
-		g = qGreen(color.rgb());
-		b = qBlue(color.rgb());
-
-		setColorBtn(r, g, b);
+		setColorBtn(color);
 
 		grlCfg.PicFlowBgColor.clear();
-		grlCfg.PicFlowBgColor << fGrl->IntToStr(r) << fGrl->IntToStr(g) << fGrl->IntToStr(b);
+		grlCfg.PicFlowBgColor = fGrl->setColor(color);
 	}
 }
 
