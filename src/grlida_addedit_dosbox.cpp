@@ -488,7 +488,7 @@ void frmAddEditDosBox::cargarDatosDosBox(stConfigDOSBox cfgDbx)
 // parametros_setup
 	ui->txtDbx_parametros_setup->setText( cfgDbx.parametros_setup );
 
-	if( Editando && !IdGame.isEmpty() )//&& !isProfileGame 
+	if( Editando && !IdGame.isEmpty() )//&& !isProfileGame
 	{
 		IdDbx = cfgDbx.id;
 		cargarDatosDBxMontaje(IdDbx);
@@ -1188,7 +1188,7 @@ void frmAddEditDosBox::on_btnDbx_capturas_clicked()
 	{
 		ui->txtDbx_dosbox_captures->setText( fGrl->setDirRelative(directorio) );
 		grlCfg.Dbx_dosbox_captures = ui->txtDbx_dosbox_captures->text();
-	
+
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_dosbox_captures", grlCfg.Dbx_dosbox_captures);
 	}
 }
@@ -1206,7 +1206,7 @@ void frmAddEditDosBox::on_btnDbx_musica_clicked()
 	{
 		ui->txtDbx_path_sonido->setText( fGrl->setDirRelative(directorio) );
 		grlCfg.Dbx_path_sonido = ui->txtDbx_path_sonido->text();
-	
+
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_sonido", grlCfg.Dbx_path_sonido);
 	}
 }

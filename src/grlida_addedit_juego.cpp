@@ -434,7 +434,7 @@ setUpdatesEnabled(false);
 	{
 		if( TipoEmu != datos.tipo_emu )
 		{
-			int respuesta = QMessageBox::question(this, tr("Tipo emulador distintos"), 
+			int respuesta = QMessageBox::question(this, tr("Tipo emulador distintos"),
 												  tr("El tipo de mulador no corresponde al seleccionado.") +"\n"+
 												  tr("¿Deseas crear la configuración por defecto?"), tr("Si"), tr("No"), 0, 1);
 			if( respuesta == 0 )
@@ -497,7 +497,7 @@ setUpdatesEnabled(false);
 
 					wSvm->cargarDatosScummVM( DatosScummVM );
 				}
-				
+
 				if( TipoEmu == "vdmsound" )
 				{
 					ui->tabWidget_Datos->setTabEnabled(tabVDMSound, true);
@@ -1027,7 +1027,7 @@ void frmAddEditJuego::on_btnImgVer_Thumbs_clicked()
 void frmAddEditJuego::on_btnImgEliminar_Thumbs_clicked()
 {
 	Thumbs = "";
-    ui->lbImg_Thumbs->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
+	ui->lbImg_Thumbs->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
 	ui->btnImgVer_Thumbs->setEnabled( false );
 	ui->btnImgEliminar_Thumbs->setEnabled( false );
 }
@@ -1069,7 +1069,7 @@ void frmAddEditJuego::on_btnImgVer_CoverFront_clicked()
 void frmAddEditJuego::on_btnImgEliminar_CoverFront_clicked()
 {
 	CoverFront = "";
-    ui->lbImg_CoverFront->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
+	ui->lbImg_CoverFront->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
 	ui->btnImgVer_CoverFront->setEnabled( false );
 	ui->btnImgEliminar_CoverFront->setEnabled( false );
 }
@@ -1110,7 +1110,7 @@ void frmAddEditJuego::on_btnImgVer_CoverBack_clicked()
 void frmAddEditJuego::on_btnImgEliminar_CoverBack_clicked()
 {
 	CoverBack = "";
-    ui->lbImg_CoverBack->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
+	ui->lbImg_CoverBack->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
 	ui->btnImgVer_CoverBack->setEnabled( false );
 	ui->btnImgEliminar_CoverBack->setEnabled( false );
 }

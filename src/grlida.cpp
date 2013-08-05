@@ -495,7 +495,7 @@ void GrLida::createConnections()
 // Carga la configuración del GR-lida.
 void GrLida::cargarConfig()
 {
-	if( grlCfg.main_maximized ) 
+	if( grlCfg.main_maximized )
 		setWindowState( windowState() | Qt::WindowMaximized );
 
 	ui->mnu_ver_nav->setChecked         ( grlCfg.Pnl_Nav         );
@@ -937,7 +937,7 @@ void GrLida::cargarListaCategorias(bool isEmit)
 				cat.orden    = query.record().value("orden").toString();
 				cat.emu_show = query.record().value("emu_show").toString();
 				categoria.insert(cat.id.toInt(), cat);
-	
+
 				QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
 				if( QFile::exists(fGrl->ThemeApp() +"img32_cat/"+ cat.img) )
 					ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img32_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
@@ -958,7 +958,7 @@ void GrLida::cargarListaCategorias(bool isEmit)
 			cat.emu_show = "all";
 			cat.id       = sql->insertaCategoria(cat.tabla, cat.titulo, cat.img, cat.orden.toInt(), cat.emu_show);
 			categoria.insert(cat.id.toInt(), cat);
-	
+
 			QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
 			if( QFile::exists(fGrl->ThemeApp() +"img32_cat/"+ cat.img) )
 				ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img32_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
@@ -1194,7 +1194,7 @@ void GrLida::cargarListaJuegosDB(QString sql_where)
 			do {
 				img_thumb = query.record().value("thumbs").toString();
 				if( img_thumb.isEmpty() || !QFile::exists(grlDir.Thumbs + img_thumb) )
-                    img_thumb = fGrl->ThemeApp() +"images/juego_sin_imagen.png";
+					img_thumb = fGrl->ThemeApp() +"images/juego_sin_imagen.png";
 				else
 					img_thumb = grlDir.Thumbs + query.record().value("thumbs").toString();
 
@@ -1282,7 +1282,7 @@ void GrLida::cargarListaPicFlow(QString sql_where)
 	}
 	query.clear();
 
-    grl_picflow->setImagePaths(thumbs_list, grlDir.Thumbs, fGrl->ThemeApp());
+	grl_picflow->setImagePaths(thumbs_list, grlDir.Thumbs, fGrl->ThemeApp());
 	grl_picflow->setFocus(Qt::OtherFocusReason);
 }
 
@@ -1323,7 +1323,7 @@ void GrLida::setChangeCategorias(int cat_id)
 	grl_lv_delegate->setTable( categoria[id_cat].tabla );
 	grl_lv_delegate->setLwIconCfg(lwIconCfg);
 
-    grl_picflow->setSlideSize( QSize(lwIconCfg.pf_img_width,lwIconCfg.pf_img_height) );
+	grl_picflow->setSlideSize( QSize(lwIconCfg.pf_img_width,lwIconCfg.pf_img_height) );
 
 	crearMenuNav();
 	cargarListaJuegosDB(sql_where_select);
@@ -1432,7 +1432,7 @@ void GrLida::nuevoEditarDatosDelJuego(stDatosJuego datos, bool isNew)
 
 		QString img_thumb = datos.thumbs;
 		if( img_thumb.isEmpty() || !QFile::exists(grlDir.Thumbs + img_thumb) )
-            img_thumb = fGrl->ThemeApp() +"images/juego_sin_imagen.png";
+			img_thumb = fGrl->ThemeApp() +"images/juego_sin_imagen.png";
 		else
 			img_thumb = grlDir.Thumbs + datos.thumbs;
 
@@ -1664,7 +1664,7 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 				dat_thumbs = grlDir.Thumbs + Thumbs;
 			else {
 				Thumbs     = "juego_sin_imagen.png";
-                dat_thumbs = fGrl->ThemeApp() +"images/"+ Thumbs;
+				dat_thumbs = fGrl->ThemeApp() +"images/"+ Thumbs;
 			}
 
 			if( QFile::exists( fGrl->ThemeApp() +"img24_cat/"+ datos.icono ) )
@@ -2233,7 +2233,7 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 
 // Comprueba iconos categoría.
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/");
-    fGrl->comprobarDirectorio(grlDir.Themes +"defecto/images/");
+	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/images/");
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img16_cat/");
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img24_cat/");
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img32_cat/");

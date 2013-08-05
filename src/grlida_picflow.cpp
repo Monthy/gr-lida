@@ -113,9 +113,9 @@ void GrlPicFlow::updateImageData()
 		}
 	}
 
-	// try to load only few images on the left and right side 
+	// try to load only few images on the left and right side
 	// i.e. all visible ones plus some extra
-#define COUNT 8  
+#define COUNT 8
 	int indexes[2*COUNT+1];
 	int center = centerIndex();
 	indexes[0] = center;
@@ -123,7 +123,7 @@ void GrlPicFlow::updateImageData()
 	{
 		indexes[j*2+1] = center+j+1;
 		indexes[j*2+2] = center-j-1;
-	}  
+	}
 	for (int c = 0; c < 2*COUNT+1; ++c)
 	{
 		int i = indexes[c];
@@ -208,7 +208,7 @@ ImageLoader::~ImageLoader()
 bool ImageLoader::busy() const
 {
 	return isRunning() ? working : false;
-}  
+}
 
 void ImageLoader::generate(int index, const QString& fileName, QSize size)
 {
@@ -256,7 +256,7 @@ void ImageLoader::run()
 	}
 }
 
-QImage ImageLoader::result() 
-{ 
-	return img; 
+QImage ImageLoader::result()
+{
+	return img;
 }

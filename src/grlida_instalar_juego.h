@@ -35,7 +35,7 @@ namespace Ui {
 
 class frmInstalarJuego : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	explicit frmInstalarJuego(stGrlCfg m_cfg, QWidget *parent = 0);

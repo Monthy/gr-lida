@@ -36,7 +36,7 @@ namespace Ui {
 
 class frmConfigInicial : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	frmConfigInicial(stGrlCfg m_cfg, QWidget *parent = 0);

@@ -124,7 +124,7 @@ private:
 
 	void nuevoEditarDatosDelJuego(stDatosJuego datos, bool isNew);
 	stDatosJuego nuevoItemCopiarImagenes(stDatosJuego datos, QString tabla, bool isNew);
-	
+
 	void mostrarDatosDelJuego(QString IDitem = "");
 	void itemNext();
 	void itemBack();

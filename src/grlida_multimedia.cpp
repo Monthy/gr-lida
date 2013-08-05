@@ -294,7 +294,7 @@ frmMultiMedia::frmMultiMedia(QWidget *parent) :
 	QAction *const openLinkAction = fileMenu->addAction(tr("Abrir archivo &RAM..."));
 	connect(openLinkAction, SIGNAL(triggered(bool)), this, SLOT(openRamFile()));
 
-	fileMenu->addSeparator();  
+	fileMenu->addSeparator();
 	QMenu *aspectMenu = fileMenu->addMenu(tr("&Aspect ratio"));
 	QActionGroup *aspectGroup = new QActionGroup(aspectMenu);
 	connect(aspectGroup, SIGNAL(triggered(QAction*)), this, SLOT(aspectChanged(QAction*)));
@@ -501,7 +501,7 @@ void frmMultiMedia::initSettingsDialog()
 	ui->crossFadeLabel3->setVisible(false);
 #endif
 	ui->crossFadeSlider->setValue((int)(2 * m_MediaObject->transitionTime() / 1000.0f));
-	
+
 	// Insert audio devices:
 	QList<Phonon::AudioOutputDevice> devices = Phonon::BackendCapabilities::availableAudioOutputDevices();
 	for (int i=0; i<devices.size(); i++)
@@ -573,7 +573,7 @@ void frmMultiMedia::showSettingsDialog()
 	Phonon::VideoWidget::ScaleMode oldScale = m_videoWidget->scaleMode();
 	int currentEffect = ui->audioEffectsCombo->currentIndex();
 	settingsDialog->exec();
-	
+
 	if (settingsDialog->result() == QDialog::Accepted)
 	{
 		m_MediaObject->setTransitionTime((int)(1000 * float(ui->crossFadeSlider->value()) / 2.0f));
@@ -584,7 +584,7 @@ void frmMultiMedia::showSettingsDialog()
 
 		if (ui->audioEffectsCombo->currentIndex() > 0)
 		{
-			Phonon::Effect *currentEffect = currEffects.size() ? currEffects[0] : 0;	
+			Phonon::Effect *currentEffect = currEffects.size() ? currEffects[0] : 0;
 			if (!currentEffect || currentEffect->description() != nextEffect->description())
 			{
 				foreach(Phonon::Effect *effect, currEffects)
@@ -633,7 +633,7 @@ void frmMultiMedia::configureEffect()
 		QVBoxLayout *topLayout = new QVBoxLayout(&effectDialog);
 
 		QLabel *description = new QLabel("<b>"+ tr("Descripción") +":</b><br>"+ chosenEffect.description(), &effectDialog);
-		description->setWordWrap(true); 
+		description->setWordWrap(true);
 		topLayout->addWidget(description);
 
 		QScrollArea *scrollArea = new QScrollArea(&effectDialog);
@@ -812,7 +812,7 @@ void frmMultiMedia::updateInfo()
 			fileName = fileName.left(maxLength) +"...";
 	}
 
-	QString title;	
+	QString title;
 	if (!trackTitle.isEmpty())
 	{
 		if (trackTitle.length() > maxLength)
@@ -846,7 +846,7 @@ void frmMultiMedia::updateTime()
 {
 	long len = m_MediaObject->totalTime();
 	long pos = m_MediaObject->currentTime();
-	QString timeString;	
+	QString timeString;
 	if (pos || len)
 	{
 		int sec = pos/1000;
@@ -863,7 +863,7 @@ void frmMultiMedia::updateTime()
 		QTime stopTime(hour%60, min%60, sec%60, msec%1000);
 		QString timeFormat = "m:ss";
 		if (hour > 0)
-			timeFormat = "h:mm:ss";		
+			timeFormat = "h:mm:ss";
 		timeString = playTime.toString(timeFormat);
 		if (len)
 			timeString += " / "+ stopTime.toString(timeFormat);
@@ -970,8 +970,8 @@ void frmMultiMedia::scaleChanged(QAction *act)
 {
 	if (act->text() == tr("Scale and crop"))
 		m_videoWidget->setScaleMode(Phonon::VideoWidget::ScaleAndCrop);
-	else 
-		m_videoWidget->setScaleMode(Phonon::VideoWidget::FitInView);	
+	else
+		m_videoWidget->setScaleMode(Phonon::VideoWidget::FitInView);
 }
 
 void frmMultiMedia::aspectChanged(QAction *act)
@@ -983,7 +983,7 @@ void frmMultiMedia::aspectChanged(QAction *act)
 	else if (act->text() == "4/3")
 		m_videoWidget->setAspectRatio(Phonon::VideoWidget::AspectRatio4_3);
 	else
-		m_videoWidget->setAspectRatio(Phonon::VideoWidget::AspectRatioAuto);	
+		m_videoWidget->setAspectRatio(Phonon::VideoWidget::AspectRatioAuto);
 }
 
 void frmMultiMedia::hasVideoChanged(bool bHasVideo)

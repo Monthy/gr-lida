@@ -302,7 +302,7 @@ void frmImportarJuego::mostrarFichaHtml(QHash<QString, QString> datos)
 		dat_thumbs = grlDir.Temp +"thumbs_"+ datos["Dat_thumbs"];
 	else {
 		datos["Dat_thumbs"] = "juego_sin_imagen.png";
-        dat_thumbs = fGrl->ThemeApp() +"images/"+ datos["Dat_thumbs"];
+		dat_thumbs = fGrl->ThemeApp() +"images/"+ datos["Dat_thumbs"];
 	}
 
 	if( QFile::exists( fGrl->ThemeApp() +"img24_cat/"+ datos["Dat_icono"] ) )

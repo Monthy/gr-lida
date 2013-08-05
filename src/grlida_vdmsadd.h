@@ -36,7 +36,7 @@ namespace Ui {
 
 class frmVdmsAdd : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	frmVdmsAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent = 0);

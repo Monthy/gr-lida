@@ -36,7 +36,7 @@ namespace Ui {
 
 class frmExportarJuego : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	frmExportarJuego(dbSql *m_sql, stGrlCfg m_cfg, int m_id_cat, QWidget *parent = 0);

@@ -704,9 +704,9 @@ void Funciones::setIdioma(QString lng)
 QString Funciones::myStyleSheet(bool isList)
 {
 	if( isList )
-        return leerArchivo(stThemeApp +"StyleSheetList.qss", "UTF-8").replace("<theme>", stThemeApp) +"\n";
+		return leerArchivo(stThemeApp +"StyleSheetList.qss", "UTF-8").replace("<theme>", stThemeApp) +"\n";
 	else
-        return leerArchivo(stThemeApp +"StyleSheet.qss", "UTF-8").replace("<theme>", stThemeApp) +"\n";
+		return leerArchivo(stThemeApp +"StyleSheet.qss", "UTF-8").replace("<theme>", stThemeApp) +"\n";
 }
 
 // Carga la configuración de los iconos de la lista en modo Icono
@@ -737,13 +737,13 @@ stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla)
 		lwConf.icon_height          = settings.value("icon_height"         , 243     ).toInt();
 		lwConf.img_cover_top        = settings.value("img_cover_top"       , "images/list_cover_top.png").toString();
 		lwConf.img_cover_top_select = settings.value("img_cover_top_select", "images/list_cover_top_select.png").toString();
-        lwConf.img_cover_top_pos_x  = settings.value("img_cover_top_pos_x" , 22      ).toInt();
-        lwConf.img_cover_top_pos_y  = settings.value("img_cover_top_pos_y" , 22      ).toInt();
+		lwConf.img_cover_top_pos_x  = settings.value("img_cover_top_pos_x" , 22      ).toInt();
+		lwConf.img_cover_top_pos_y  = settings.value("img_cover_top_pos_y" , 22      ).toInt();
 		lwConf.img_scaled           = settings.value("img_scaled"          , true    ).toBool();
-        lwConf.img_scale_w          = settings.value("img_scale_w"         , 145     ).toInt();
-        lwConf.img_scale_h          = settings.value("img_scale_h"         , 186     ).toInt();
-        lwConf.img_scale_pos_x      = settings.value("img_scale_pos_x"     , 28      ).toInt();
-        lwConf.img_scale_pos_y      = settings.value("img_scale_pos_y"     , 28      ).toInt();
+		lwConf.img_scale_w          = settings.value("img_scale_w"         , 145     ).toInt();
+		lwConf.img_scale_h          = settings.value("img_scale_h"         , 186     ).toInt();
+		lwConf.img_scale_pos_x      = settings.value("img_scale_pos_x"     , 28      ).toInt();
+		lwConf.img_scale_pos_y      = settings.value("img_scale_pos_y"     , 28      ).toInt();
 		lwConf.tipo_emu_show        = settings.value("tipo_emu_show"       , true    ).toBool();
 		lwConf.tipo_emu_pos_x       = settings.value("tipo_emu_pos_x"      , 15      ).toInt();
 		lwConf.tipo_emu_pos_y       = settings.value("tipo_emu_pos_y"      , 202     ).toInt();
@@ -818,7 +818,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.PicFlowType         = settings.value("PicFlowType"        , "CoverFlowLike").toString();
 		config.PicFlowBgColor      = settings.value("PicFlowBgColor"     , QStringList() << "0" << "0" << "0").toStringList();
 		config.PicFlowShowNumPos   = settings.value("PicFlowShowNumPos"  , false).toBool();
-		config.PicFlowShowTriangle = settings.value("PicFlowShowTriangle", false).toBool();		
+		config.PicFlowShowTriangle = settings.value("PicFlowShowTriangle", false).toBool();
 		config.PicFlowMinHeight    = settings.value("PicFlowMinHeight"   , 260).toInt();
 		config.Skip_PicFlow        = settings.value("Skip_PicFlow"       , 10).toInt();
 		config.IndexTabArchivos    = settings.value("IndexTabArchivos"   , 0).toInt();
@@ -1460,7 +1460,7 @@ void Funciones::cargarArchivosTwLista(QTreeWidget *twList, QString m_dir, QStrin
 				if( QFile::exists(archivo) )
 					item->setIcon( 0, QIcon( archivo ) );
 				else
-                    item->setIcon( 0, QIcon(stThemeApp +"images/juego_sin_imagen.png") );
+					item->setIcon( 0, QIcon(stThemeApp +"images/juego_sin_imagen.png") );
 				item->setText( 0, "" );
 			} else {
 				if( QFile::exists(stTheme +"img16/"+ img) )
@@ -2871,7 +2871,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 			}
 
 			cfg_out.replace("{Dbx_autoexec}", autoexec);
-		} 
+		}
 		else if( tipo_cfg == ExportGrlida )
 		{
 		// [ipx]
@@ -2924,7 +2924,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		} else
 			cfg_out.replace("{Dbx_autoexec}", "");
 	}
-	
+
 	if( datos.tipo_emu == "scummvm" )
 	{
 		cfg_out.replace("{Svm_game}"             , cfgSvm.game           );
@@ -2972,7 +2972,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Vdms_path_conf}"      , cfgVdms.path_conf      );
 		cfg_out.replace("{Vdms_path_exe}"       , cfgVdms.path_exe       );
 		cfg_out.replace("{Vdms_program_1}"      , cfgVdms.program_1      );
-		cfg_out.replace("{Vdms_program_2}"      , cfgVdms.program_2      );		
+		cfg_out.replace("{Vdms_program_2}"      , cfgVdms.program_2      );
 		cfg_out.replace("{Vdms_vdms_debug_1}"   , cfgVdms.vdms_debug_1   );
 		cfg_out.replace("{Vdms_vdms_debug_2}"   , cfgVdms.vdms_debug_2   );
 		cfg_out.replace("{Vdms_winnt_dos_1}"    , cfgVdms.winnt_dos_1    );

@@ -229,7 +229,7 @@ struct stGrlCfg {
 // OpcMultimedia
 	QStringList FormatsVideo;
 	QStringList FormatsMusic;
-	QStringList FormatsImage; 
+	QStringList FormatsImage;
 // UltimoDirectorio
 	QString DirBD;
 	QString DirImportar;

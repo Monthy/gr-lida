@@ -38,7 +38,7 @@ class frmUpdate;
 class frmUpdate : public QDialog
 {
 	Q_OBJECT
-	
+
 public:
 	explicit frmUpdate(stGrlCfg m_cfg, QWidget *parent = 0);
 	~frmUpdate();

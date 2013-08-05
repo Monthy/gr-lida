@@ -52,10 +52,10 @@ signals:
 // INI QCheckComboBox -------------------------------------------------------------------------------------------
 class QCheckComboBox : public QComboBox
 {
-    Q_OBJECT
+	Q_OBJECT
 	Q_PROPERTY(QString separator READ separator WRITE setSeparator)
 	Q_PROPERTY(QString defaultText READ defaultText WRITE setDefaultText)
-    Q_PROPERTY(QStringList checkedItems READ checkedItems WRITE setCheckedItems)
+	Q_PROPERTY(QStringList checkedItems READ checkedItems WRITE setCheckedItems)
 
 public:
 	explicit QCheckComboBox(QWidget *parent = 0);

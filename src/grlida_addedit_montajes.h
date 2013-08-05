@@ -30,7 +30,7 @@
 #include "funciones.h"
 
 namespace Ui {
-    class frmAddEditMontajes;
+	class frmAddEditMontajes;
 }
 
 class frmAddEditMontajes : public QDialog

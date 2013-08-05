@@ -31,12 +31,12 @@
 #include "doc_pdf_widget.h"
 
 namespace Ui {
-    class frmPdfViewer;
+	class frmPdfViewer;
 }
 
 class frmPdfViewer : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	explicit frmPdfViewer(QWidget *parent = 0);
@@ -57,7 +57,7 @@ private:
 	QString lastPath, stHomeDir, stTheme;
 	int id_scale;
 	DocPdfWidget *doc_pdf_widget;
-    QVector<qreal> scaleFactors;
+	QVector<qreal> scaleFactors;
 
 	void cargarConfig();
 	void setTheme();

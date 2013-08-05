@@ -270,7 +270,7 @@ void frmImportPath::on_btnDbx_capturas_clicked()
 	{
 		ui->txtDbx_dosbox_captures->setText( fGrl->setDirRelative(directorio) );
 		grlCfg.Dbx_dosbox_captures = ui->txtDbx_dosbox_captures->text();
-	
+
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_dosbox_captures", grlCfg.Dbx_dosbox_captures);
 	}
 }
@@ -288,7 +288,7 @@ void frmImportPath::on_btnDbx_musica_clicked()
 	{
 		ui->txtDbx_path_sonido->setText( fGrl->setDirRelative(directorio) );
 		grlCfg.Dbx_path_sonido = ui->txtDbx_path_sonido->text();
-	
+
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path_sonido", grlCfg.Dbx_path_sonido);
 	}
 }
@@ -307,7 +307,7 @@ void frmImportPath::on_btnSvm_Path_clicked()
 	{
 		ui->txtSvm_path->setText( fGrl->setDirRelative(directorio, "DosGames") );
 		grlCfg.Svm_path = ui->txtSvm_path->text();
-	
+
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
 	}
 }
@@ -325,7 +325,7 @@ void frmImportPath::on_btnSvm_PathSave_clicked()
 	{
 		ui->txtSvm_path_save->setText( fGrl->setDirRelative(directorio, "DosGames") );
 		grlCfg.Svm_savepath = ui->txtSvm_path_save->text();
-	
+
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_savepath", grlCfg.Svm_savepath);
 	}
 }
@@ -343,7 +343,7 @@ void frmImportPath::on_btnSvm_PathExtra_clicked()
 	{
 		ui->txtSvm_path_extra->setText( fGrl->setDirRelative(directorio, "DosGames") );
 		grlCfg.Svm_extrapath = ui->txtSvm_path_extra->text();
-	
+
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_extrapath", grlCfg.Svm_extrapath);
 	}
 }
@@ -361,7 +361,7 @@ void frmImportPath::on_btnSvm_PathCapturas_clicked()
 	{
 		ui->txtSvm_path_capturas->setText( fGrl->setDirRelative(directorio) );
 		grlCfg.Svm_path_capturas = ui->txtSvm_path_capturas->text();
-	
+
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_capturas", grlCfg.Svm_path_capturas);
 	}
 }
@@ -379,7 +379,7 @@ void frmImportPath::on_btnSvm_PathSonido_clicked()
 	{
 		ui->txtSvm_path_sonido->setText( fGrl->setDirRelative(directorio) );
 		grlCfg.Svm_path_sonido = ui->txtSvm_path_sonido->text();
-	
+
 		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_sonido", grlCfg.Svm_path_sonido);
 	}
 }

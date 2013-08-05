@@ -32,7 +32,7 @@
 #include "qtzip.h"
 
 namespace Ui {
-    class frmRuleta;
+	class frmRuleta;
 }
 
 class frmRuleta : public QDialog

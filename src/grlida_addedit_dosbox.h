@@ -45,7 +45,7 @@ public:
 
 	bool isCorrectNext();
 	void cargarConfig();
-	
+
 	stGrlCfg getGrlCfg(){return grlCfg;}
 	stConfigDOSBox getDatosDosBox(){return DatosDosBox;}
 

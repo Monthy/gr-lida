@@ -33,12 +33,12 @@
 #include "qtzip.h"
 
 namespace Ui {
-    class frmImgViewer;
+	class frmImgViewer;
 }
 
 class frmImgViewer : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	explicit frmImgViewer(stGrlCfg m_cfg, QWidget *parent = 0);

@@ -260,7 +260,7 @@ bool dbSql::crearTabla(QString tabla)
 		"	parametros_setup		VARCHAR(255) NOT NULL DEFAULT '',"
 		"	"+ qpsql_pkey +" PRIMARY KEY(idgrl)"
 		")"+ qpsql_oids +";");
-		
+
 		return chequearQuery(query);
 	}
 }
