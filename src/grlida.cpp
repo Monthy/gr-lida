@@ -1451,7 +1451,7 @@ void GrLida::nuevoEditarDatosDelJuego(stDatosJuego datos, bool isNew)
 			if( ui->mnu_ver_pictureflow->isChecked() || grlCfg.PictureFlowToCenter )
 			{
 				if( isNew )
-					grl_picflow->addImageSlide(datos.thumbs, grlDir.Thumbs, fGrl->Theme());
+					grl_picflow->addImageSlide(datos.thumbs, grlDir.Thumbs, fGrl->ThemeApp());
 				else
 					grl_picflow->setCenterIndex(row);
 //				grl_picflow->setSlide(row, QPixmap(img_thumb));
@@ -1509,7 +1509,7 @@ void GrLida::nuevoEditarDatosDelJuego(stDatosJuego datos, bool isNew)
 			if( ui->mnu_ver_pictureflow->isChecked() || grlCfg.PictureFlowToCenter )
 			{
 				if( isNew )
-					grl_picflow->addImageSlide(datos.thumbs, grlDir.Thumbs, fGrl->Theme());
+					grl_picflow->addImageSlide(datos.thumbs, grlDir.Thumbs, fGrl->ThemeApp());
 				else
 					grl_picflow->setCenterIndex(row);
 	//				grl_picflow->setSlide(row, QPixmap(img_thumb));
@@ -2246,6 +2246,9 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 
 		if( !QFile::exists(fGrl->ThemeApp() +"StyleSheetList.qss") )
 			fGrl->copiarArchivo(":/StyleSheetList.qss", fGrl->ThemeApp() +"StyleSheetList.qss", true);
+
+		if( !QFile::exists(fGrl->ThemeApp() +"images/juego_sin_imagen.png") )
+			fGrl->copiarArchivo(":/images/juego_sin_imagen.png", fGrl->ThemeApp() +"images/juego_sin_imagen.png", true);
 
 		if( !QFile::exists(fGrl->ThemeApp() +"images/list_bg.jpg") )
 			fGrl->copiarArchivo(":/images/list_bg.jpg", fGrl->ThemeApp() +"images/list_bg.jpg", true);
