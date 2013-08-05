@@ -702,6 +702,7 @@ void GrLida::guardarConfig()
 	if( !grlCfg.ver_IconMode )
 		grlCfg.main_twJuegos_state = ui->tvJuegos->header()->saveState();
 
+	grlCfg.Version               = fGrl->versionGrl();
 	grlCfg.main_maximized        = this->isMaximized();
 	grlCfg.main_geometry         = this->saveGeometry();
 	grlCfg.main_state            = this->saveState(); // Toolbar and DockWidget state.

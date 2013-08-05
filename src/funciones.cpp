@@ -1122,7 +1122,7 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 	settings.beginGroup("Updates");
 		settings.setValue("chkVersion" , config.chkVersion  );
 		settings.setValue("SoloUpdates", config.SoloUpdates );
-		settings.setValue("Version"    , versionGrl()       );
+		settings.setValue("Version"    , config.Version     );
 		settings.setValue("VerListSvm" , config.VerListSvm  );
 	settings.endGroup();
 }
