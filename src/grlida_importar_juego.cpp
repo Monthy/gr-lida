@@ -339,8 +339,8 @@ void frmImportarJuego::mostrarFichaHtml(QHash<QString, QString> datos)
 
 // Reempla la info del juego.
 	str_html_new.replace("{info_icono}"               , ":icono_rs_"+ datos["Dat_icono"]);
-	str_html_new.replace("{info_titulo}"              , datos["Dat_titulo"]        );
-	str_html_new.replace("{info_subtitulo}"           , datos["Dat_subtitulo"]     );
+	str_html_new.replace("{info_titulo}"              , Qt::escape(datos["Dat_titulo"])    );
+	str_html_new.replace("{info_subtitulo}"           , Qt::escape(datos["Dat_subtitulo"]) );
 	str_html_new.replace("{info_genero}"              , datos["Dat_genero"]        );
 	str_html_new.replace("{info_compania}"            , datos["Dat_compania"]      );
 	str_html_new.replace("{info_desarrollador}"       , datos["Dat_desarrollador"] );

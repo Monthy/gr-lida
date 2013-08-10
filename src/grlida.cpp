@@ -1703,8 +1703,8 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 
 		// Reempla la info del juego.
 			str_html_new.replace("{info_icono}"               , ":icono_rs_"+ datos.icono);
-			str_html_new.replace("{info_titulo}"              , datos.titulo        );
-			str_html_new.replace("{info_subtitulo}"           , datos.subtitulo     );
+			str_html_new.replace("{info_titulo}"              , Qt::escape(datos.titulo)    );
+			str_html_new.replace("{info_subtitulo}"           , Qt::escape(datos.subtitulo) );
 			str_html_new.replace("{info_genero}"              , datos.genero        );
 			str_html_new.replace("{info_compania}"            , datos.compania      );
 			str_html_new.replace("{info_desarrollador}"       , datos.desarrollador );
