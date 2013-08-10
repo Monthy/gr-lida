@@ -248,7 +248,7 @@ void frmSvmAdd::on_btnNext_clicked()
 							ui->txtSvm_path->setFocus();
 						} else {
 							siguiente = true;
-							QDir tmpdirsvm( ui->txtSvm_path->text() );
+							QDir tmpdirsvm( fGrl->getDirRelative(ui->txtSvm_path->text(), "DosGames") );
 							if( !tmpdirsvm.exists() )
 							{
 								siguiente = false;

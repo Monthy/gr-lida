@@ -315,7 +315,7 @@ void frmExportarJuego::on_btnDirExportPath_clear_clicked()
 
 void frmExportarJuego::on_btnOk_clicked()
 {
-	QDir dir_export( ui->txtDirExportPath->text() );
+	QDir dir_export( fGrl->getDirRelative( ui->txtDirExportPath->text() ) );
 
 	if( !ui->txtDirExportPath->text().isEmpty() && dir_export.exists() )
 	{
