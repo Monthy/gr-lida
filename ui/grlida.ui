@@ -212,6 +212,7 @@
     <addaction name="mnu_tool_importar"/>
     <addaction name="mnu_tool_exportar"/>
     <addaction name="separator"/>
+    <addaction name="mnu_tool_edit_themes"/>
     <addaction name="mnu_tool_opciones"/>
    </widget>
    <widget class="QMenu" name="menuVer">
@@ -1239,6 +1240,24 @@
    </property>
    <property name="shortcut">
     <string>Shift+E</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="mnu_tool_edit_themes">
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/style.png</normaloff>:/img16/style.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit themes</string>
+   </property>
+   <property name="toolTip">
+    <string>Edit themes</string>
+   </property>
+   <property name="statusTip">
+    <string>Edit themes</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>

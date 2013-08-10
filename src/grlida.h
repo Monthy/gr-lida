@@ -161,6 +161,7 @@ private slots:
 	void on_mnu_tool_instalar_triggered();
 	void on_mnu_tool_importar_triggered();
 	void on_mnu_tool_exportar_triggered();
+	void on_mnu_tool_edit_themes_triggered();
 	void on_mnu_tool_opciones_triggered();
 // Menú ver
 	void on_mnu_ver_nav_triggered(bool checked);

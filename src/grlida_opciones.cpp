@@ -23,6 +23,7 @@
 **/
 
 #include "grlida_opciones.h"
+#include "grlida_list_icon_cfg.h"
 #include "ui_opciones.h"
 
 frmOpciones::frmOpciones(dbSql *m_sql, stGrlCfg m_cfg, QWidget *parent) :
@@ -1067,6 +1068,11 @@ void frmOpciones::on_btnCatBajar_clicked()
 	grlCfg.isChangedCategoria = true;
 }
 
+void frmOpciones::on_btnCatEditTheme_clicked()
+{
+	emit on_btnEditTheme_clicked();
+}
+
 void frmOpciones::on_btnCatDelete_clicked()
 {
 	int pos = ui->twCategorias->indexOfTopLevelItem( ui->twCategorias->currentItem() );
@@ -1847,6 +1853,23 @@ void frmOpciones::on_btnPicFlowBgColor_clicked()
 
 		grlCfg.PicFlowBgColor.clear();
 		grlCfg.PicFlowBgColor = fGrl->setColor(color);
+	}
+}
+
+void frmOpciones::on_btnEditTheme_clicked()
+{
+	int pos = ui->twThemes->indexOfTopLevelItem( ui->twThemes->currentItem() );
+	if( ui->twThemes->topLevelItemCount() > 0 && pos != -1 )
+	{
+		int id_cat = 1;
+		int pos_cat = ui->twCategorias->indexOfTopLevelItem(ui->twCategorias->currentItem());
+		if( ui->twCategorias->topLevelItemCount() > 0 && pos_cat != -1 )
+			id_cat = ui->twCategorias->currentItem()->text(3).toInt();
+
+		frmListIconCfg *ListIconCfg  = new frmListIconCfg(sql, grlCfg, id_cat, grlCfg.NameDirTheme, this);
+		ListIconCfg->setWindowFlags(Qt::Window);
+		ListIconCfg->exec();
+		delete ListIconCfg ;
 	}
 }
 

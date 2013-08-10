@@ -712,7 +712,7 @@ QString Funciones::myStyleSheet(bool isList)
 // Carga la configuración de los iconos de la lista en modo Icono
 stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla)
 {
-	QString file_cfg, dir_cfg, tmpfile, file_lwConf;
+	QString file_cfg, dir_cfg, file_lwConf;
 	stLwIconCfg lwConf;
 
 	dir_cfg  = (stTheme == ":/" ? stThemeApp : stTheme);
@@ -761,6 +761,7 @@ stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla)
 		lwConf.title_pos_y          = settings.value("title_pos_y"         , 222     ).toInt();
 		lwConf.title_width          = settings.value("title_width"         , 156     ).toInt();
 		lwConf.title_height         = settings.value("title_height"        , 16      ).toInt();
+		lwConf.title_max_caracteres = settings.value("title_max_caracteres", 25      ).toInt();
 		lwConf.title_font           = settings.value("title_font"          , "Tahoma").toString();
 		lwConf.title_font_size      = settings.value("title_font_size"     , 7       ).toInt();
 		lwConf.title_font_color     = settings.value("title_font_color"    , QStringList() << "0" << "0" << "0").toStringList();
@@ -768,10 +769,68 @@ stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla)
 		lwConf.title_font_bold      = settings.value("title_font_bold"     , true    ).toBool();
 		lwConf.title_font_italic    = settings.value("title_font_italic"   , false   ).toBool();
 		lwConf.title_font_underline = settings.value("title_font_underline", false   ).toBool();
-		lwConf.title_max_caracteres = settings.value("title_max_caracteres", 25      ).toInt();
 	settings.endGroup();
 
 	return lwConf;
+}
+
+// Crea la configuración de los iconos de la lista en modo Icono
+void Funciones::guardarListWidgetIconConf(stLwIconCfg lwConf, QString tabla)
+{
+	QString file_cfg, dir_cfg, file_lwConf;
+
+	dir_cfg     = (stTheme == ":/" ? stThemeApp : stTheme);
+	file_cfg    = (tabla != "dbgrl" ? tabla +"_list_cfg.ini" : "list_cfg.ini");
+	file_lwConf = dir_cfg + file_cfg;
+
+	QSettings settings(file_lwConf, QSettings::IniFormat);
+	settings.clear();
+	settings.beginGroup("tw_list_icon");
+		settings.setValue("tw_icon_width" , lwConf.tw_icon_width);
+		settings.setValue("tw_icon_height", lwConf.tw_icon_height);
+	settings.endGroup();
+	settings.beginGroup("picflow_img");
+		settings.setValue("pf_img_width" , lwConf.pf_img_width);
+		settings.setValue("pf_img_height", lwConf.pf_img_height);
+	settings.endGroup();
+	settings.beginGroup("list_icon");
+		settings.setValue("icon_width"             , lwConf.icon_width             );
+		settings.setValue("icon_height"            , lwConf.icon_height            );
+		settings.setValue("img_cover_top"          , lwConf.img_cover_top          );
+		settings.setValue("img_cover_top_select"   , lwConf.img_cover_top_select   );
+		settings.setValue("img_cover_top_pos_x"    , lwConf.img_cover_top_pos_x    );
+		settings.setValue("img_cover_top_pos_y"    , lwConf.img_cover_top_pos_y    );
+		settings.setValue("img_scaled"             , lwConf.img_scaled             );
+		settings.setValue("img_scale_w"            , lwConf.img_scale_w            );
+		settings.setValue("img_scale_h"            , lwConf.img_scale_h            );
+		settings.setValue("img_scale_pos_x"        , lwConf.img_scale_pos_x        );
+		settings.setValue("img_scale_pos_y"        , lwConf.img_scale_pos_y        );
+		settings.setValue("tipo_emu_show"          , lwConf.tipo_emu_show          );
+		settings.setValue("tipo_emu_pos_x"         , lwConf.tipo_emu_pos_x         );
+		settings.setValue("tipo_emu_pos_y"         , lwConf.tipo_emu_pos_y         );
+		settings.setValue("rating_show"            , lwConf.rating_show            );
+		settings.setValue("rating_vertical"        , lwConf.rating_vertical        );
+		settings.setValue("rating_pos_x"           , lwConf.rating_pos_x           );
+		settings.setValue("rating_pos_y"           , lwConf.rating_pos_y           );
+		settings.setValue("title_bg_show"          , lwConf.title_bg_show          );
+		settings.setValue("title_bg"               , lwConf.title_bg               );
+		settings.setValue("title_bg_select"        , lwConf.title_bg_select        );
+		settings.setValue("title_bg_pos_x"         , lwConf.title_bg_pos_x         );
+		settings.setValue("title_bg_pos_y"         , lwConf.title_bg_pos_y         );
+		settings.setValue("title_show"             , lwConf.title_show             );
+		settings.setValue("title_pos_x"            , lwConf.title_pos_x            );
+		settings.setValue("title_pos_y"            , lwConf.title_pos_y            );
+		settings.setValue("title_width"            , lwConf.title_width            );
+		settings.setValue("title_height"           , lwConf.title_height           );
+		settings.setValue("title_max_caracteres"   , lwConf.title_max_caracteres   );
+		settings.setValue("title_font"             , lwConf.title_font             );
+		settings.setValue("title_font_size"        , lwConf.title_font_size        );
+		settings.setValue("title_font_color"       , lwConf.title_font_color       );
+		settings.setValue("title_font_color_select", lwConf.title_font_color_select);
+		settings.setValue("title_font_bold"        , lwConf.title_font_bold        );
+		settings.setValue("title_font_italic"      , lwConf.title_font_italic      );
+		settings.setValue("title_font_underline"   , lwConf.title_font_underline   );
+	settings.endGroup();
 }
 
 // Carga la configuracion del GR-lida

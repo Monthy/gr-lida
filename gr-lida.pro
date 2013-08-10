@@ -60,6 +60,7 @@ HEADERS += src/dbsql.h \
     src/grlida_importpath.h \
     src/grlida_info.h \
     src/grlida_instalar_juego.h \
+    src/grlida_list_icon_cfg.h \
     src/grlida_multimedia.h \
     src/grlida_opciones.h \
     src/grlida_pdf_viewer.h \
@@ -90,6 +91,7 @@ SOURCES += src/dbsql.cpp \
     src/grlida_importpath.cpp \
     src/grlida_info.cpp \
     src/grlida_instalar_juego.cpp \
+    src/grlida_list_icon_cfg.cpp \
     src/grlida_multimedia.cpp \
     src/grlida_opciones.cpp \
     src/grlida_pdf_viewer.cpp \
@@ -124,7 +126,8 @@ FORMS += ui/grlida.ui \
     ui/multimedia_setup.ui \
     ui/informacion.ui \
     ui/update.ui \
-    ui/exportar_juego.ui
+    ui/exportar_juego.ui \
+    ui/list_icon_cfg.ui
 
 # ###### 3rdparty Files
 HEADERS += 3rdparty/pictureflow-qt/pictureflow.h

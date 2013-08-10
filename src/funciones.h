@@ -161,6 +161,9 @@ public:
 
 // Carga la configuración de los iconos de la lista en modo Icono
 	stLwIconCfg cargarListWidgetIconConf(QString tabla = "dbgrl");
+// Crea la configuración de los iconos de la lista en modo Icono
+	void guardarListWidgetIconConf(stLwIconCfg lwConf, QString tabla = "dbgrl");
+
 // Carga la configuración del GR-lida
 	stGrlCfg cargarGRLConfig(QString iniFileName);
 // Guarda la configuración del GR-lida

@@ -93,33 +93,6 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 	else
 		painter->drawPixmap(QPointF(rect_x + lwConf.img_cover_top_pos_x, rect_y + lwConf.img_cover_top_pos_y), cover_top);
 
-// Dibujamos tipo de emulador
-	if( lwConf.tipo_emu_show )
-	{
-		QString str_emu = qvariant_cast<QString>(index.data(TipoEmuRole));
-		painter->drawPixmap(QPointF(rect_x + lwConf.tipo_emu_pos_x, rect_y + lwConf.tipo_emu_pos_y), ico_emu[str_emu]);
-	}
-
-// Dibujamos el rating
-	if( lwConf.rating_show )
-	{
-		int rating = qvariant_cast<int>(index.data(RatingRole));
-		int rating_x = rect_x + lwConf.rating_pos_x;
-		int rating_y = rect_y + lwConf.rating_pos_y;
-		for (int i = 0; i < 5; ++i)
-		{
-			if( i < rating )
-				painter->drawPixmap(QPointF(rating_x, rating_y), star_on);
-			else
-				painter->drawPixmap(QPointF(rating_x, rating_y), star_off);
-
-			if( lwConf.rating_vertical )
-				rating_y -= star_on.height();
-			else
-				rating_x += star_on.width();
-		}
-	}
-
 // Dibujamos el fondo del titulo
 	if( lwConf.title_bg_show )
 	{
@@ -155,6 +128,34 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
 		painter->setPen(pen);
 	}
+
+// Dibujamos tipo de emulador
+	if( lwConf.tipo_emu_show )
+	{
+		QString str_emu = qvariant_cast<QString>(index.data(TipoEmuRole));
+		painter->drawPixmap(QPointF(rect_x + lwConf.tipo_emu_pos_x, rect_y + lwConf.tipo_emu_pos_y), ico_emu[str_emu]);
+	}
+
+// Dibujamos el rating
+	if( lwConf.rating_show )
+	{
+		int rating = qvariant_cast<int>(index.data(RatingRole));
+		int rating_x = rect_x + lwConf.rating_pos_x;
+		int rating_y = rect_y + lwConf.rating_pos_y;
+		for (int i = 0; i < 5; ++i)
+		{
+			if( i < rating )
+				painter->drawPixmap(QPointF(rating_x, rating_y), star_on);
+			else
+				painter->drawPixmap(QPointF(rating_x, rating_y), star_off);
+
+			if( lwConf.rating_vertical )
+				rating_y -= star_on.height();
+			else
+				rating_x += star_on.width();
+		}
+	}
+
 	QItemDelegate::paint(painter, option, index);
 }
 
@@ -200,7 +201,8 @@ bool GrlListViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
 						stars = qBound(0, int(0.5 + qreal(pos_x - rating_x) / star_on.width()), 5);
 
 					model->setData(index, QVariant(stars), RatingRole);
-					sql->actualizaDatosRating(stTabla, id_grl, fGrl.IntToStr(stars));
+					if( id_grl != "null" )
+						sql->actualizaDatosRating(stTabla, id_grl, fGrl.IntToStr(stars));
 				}
 			}
 			return false;

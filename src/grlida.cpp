@@ -37,6 +37,7 @@
 #include "grlida_multimedia.h"
 #include "grlida_ruleta.h"
 #include "grlida_instalar_juego.h"
+#include "grlida_list_icon_cfg.h"
 #include "grlida_update.h"
 #include "ui_grlida.h"
 
@@ -1320,7 +1321,7 @@ void GrLida::setChangeCategorias(int cat_id)
 
 	grl_lv_delegate->setDirApp( grlDir.Home );
 	grl_lv_delegate->setTheme( fGrl->Theme() );
-	grl_lv_delegate->setTheme( fGrl->Theme() );
+	grl_lv_delegate->setThemeCat( fGrl->ThemeApp() );
 	grl_lv_delegate->setTable( categoria[id_cat].tabla );
 	grl_lv_delegate->setLwIconCfg(lwIconCfg);
 
@@ -2239,6 +2240,9 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img24_cat/");
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img32_cat/");
 
+	if( !QFile::exists(fGrl->ThemeApp() +"list_cfg.ini") )
+		fGrl->guardarListWidgetIconConf( fGrl->cargarListWidgetIconConf() );
+
 	if(	fGrl->Theme() == ":/" )
 	{
 		if( !QFile::exists(fGrl->ThemeApp() +"StyleSheet.qss") )
@@ -2677,6 +2681,39 @@ void GrLida::on_mnu_tool_exportar_triggered()
 	NewExportarJuego->exec();
 	grlCfg = NewExportarJuego->getGrlCfg();
 	delete NewExportarJuego;
+}
+
+void GrLida::on_mnu_tool_edit_themes_triggered()
+{
+	frmListIconCfg *ListIconCfg  = new frmListIconCfg(sql, grlCfg, id_cat, grlCfg.NameDirTheme, this);
+	ListIconCfg->setWindowFlags(Qt::Window);
+	if( ListIconCfg->exec() == QDialog::Accepted )
+	{
+		lwIconCfg = fGrl->cargarListWidgetIconConf( categoria[id_cat].tabla );
+
+		grl_tv_delegate->setDirApp( grlDir.Home );
+		grl_tv_delegate->setTheme( fGrl->Theme() );
+		grl_tv_delegate->setThemeCat( fGrl->ThemeApp() );
+		grl_tv_delegate->setTable( categoria[id_cat].tabla );
+		grl_tv_delegate->setIconSize( QSize(lwIconCfg.tw_icon_width, lwIconCfg.tw_icon_height) );
+		grl_tv_delegate->setIconFav(grlCfg.IconoFav);
+
+		grl_lv_delegate->setDirApp( grlDir.Home );
+		grl_lv_delegate->setTheme( fGrl->Theme() );
+		grl_lv_delegate->setThemeCat( fGrl->ThemeApp() );
+		grl_lv_delegate->setTable( categoria[id_cat].tabla );
+		grl_lv_delegate->setLwIconCfg(lwIconCfg);
+
+		ui->tvJuegos->setIconSize( QSize(lwIconCfg.tw_icon_width, lwIconCfg.tw_icon_height) );
+		ui->lvJuegos->setIconSize( QSize(lwIconCfg.icon_width, lwIconCfg.icon_height) );
+		grl_picflow->setSlideSize( QSize(lwIconCfg.pf_img_width,lwIconCfg.pf_img_height) );
+
+		ui->tvJuegos->update();
+		ui->lvJuegos->update();
+		setTheme();
+		mostrarDatosDelJuego( IdGame );
+	}
+	delete ListIconCfg ;
 }
 
 void GrLida::on_mnu_tool_opciones_triggered()

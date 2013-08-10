@@ -310,6 +310,7 @@ struct stLwIconCfg {
 	int title_pos_y;
 	int title_width;
 	int title_height;
+	int title_max_caracteres;
 	QString title_font;
 	int title_font_size;
 	QStringList title_font_color;
@@ -317,7 +318,6 @@ struct stLwIconCfg {
 	bool title_font_bold;
 	bool title_font_italic;
 	bool title_font_underline;
-	int title_max_caracteres;
 };
 
 struct stDatosJuego {

@@ -107,6 +107,7 @@ private slots:
 	void on_btnCatUpdate_clicked();
 	void on_btnCatSubir_clicked();
 	void on_btnCatBajar_clicked();
+	void on_btnCatEditTheme_clicked();
 	void on_btnCatDelete_clicked();
 	void on_twCategorias_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twCategorias_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
@@ -155,6 +156,7 @@ private slots:
 	void on_sbxFontSize_valueChanged(const QString &arg1);
 	void on_cbxPicFlowType_activated(int index);
 	void on_btnPicFlowBgColor_clicked();
+	void on_btnEditTheme_clicked();
 	void on_twThemes_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twThemes_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 // --
