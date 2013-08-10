@@ -117,6 +117,7 @@ void frmVdmsAdd::on_btnOk_clicked()
 
 					DatosJuego.titulo   = ui->txtDatos_Titulo->text();
 					DatosJuego.tipo_emu = "vdmsound";
+					DatosJuego.fecha    = fGrl->getTime();
 					DatosJuego.idgrl    = sql->insertaDatos(categoria.tabla, DatosJuego);
 
 					DatosVDMSound.idgrl = DatosJuego.idgrl;

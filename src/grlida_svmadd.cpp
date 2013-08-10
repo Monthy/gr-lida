@@ -195,6 +195,7 @@ void frmSvmAdd::on_btnOk_clicked()
 
 		DatosJuego.titulo   = ui->txtDatos_Titulo->text();
 		DatosJuego.tipo_emu = "scummvm";
+		DatosJuego.fecha    = fGrl->getTime();
 		DatosJuego.idgrl    = sql->insertaDatos(categoria.tabla, DatosJuego);
 
 		DatosScummVM.idgrl = DatosJuego.idgrl;

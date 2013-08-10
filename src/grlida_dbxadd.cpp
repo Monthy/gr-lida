@@ -335,6 +335,7 @@ void frmDbxAdd::on_btnOk_clicked()
 
 		DatosJuego.titulo   = ui->txtDatos_Titulo->text();
 		DatosJuego.tipo_emu = "dosbox";
+		DatosJuego.fecha    = fGrl->getTime();
 		DatosJuego.idgrl    = sql->insertaDatos(categoria.tabla, DatosJuego);
 
 		DatosDosBox.idgrl = DatosJuego.idgrl;
