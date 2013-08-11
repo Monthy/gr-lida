@@ -222,10 +222,10 @@ public:
 	QString getImgDatos(QHash<QString, stGrlDatos> datos, QStringList lista, bool isLng);
 	void insertaIconos(QHash<QString, QPixmap> &ico, QString m_dir, QString contiene = "", QString filter = "*.*", bool isExt = true);
 
-	stDatosJuego getDefectDatos(QString icono = "datos", QHash<QString, QString> dato = QHash<QString, QString>());
-	stConfigDOSBox getDefectDOSBox(QHash<QString, QString> dato = QHash<QString, QString>());
-	stConfigScummVM getDefectScummVM(QHash<QString, QString> dato = QHash<QString, QString>());
-	stConfigVDMSound getDefectVDMSound(QHash<QString, QString> dato = QHash<QString, QString>());
+	stDatosJuego getDefectDatos(QString icono = "datos", QHash<QString, QString> dato = (QHash<QString, QString>()));
+	stConfigDOSBox getDefectDOSBox(QHash<QString, QString> dato = (QHash<QString, QString>()));
+	stConfigScummVM getDefectScummVM(QHash<QString, QString> dato = (QHash<QString, QString>()));
+	stConfigVDMSound getDefectVDMSound(QHash<QString, QString> dato = (QHash<QString, QString>()));
 
 	QString getNameTo8Caracter(QString name, int index = 1);
 	QString getShortPathName(QString longPath);
