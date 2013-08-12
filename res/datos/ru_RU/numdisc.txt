@@ -7,6 +7,8 @@
 7 CD|cd_iso.png
 8 CD|cd_iso.png
 1 DVD|dvd.png
+2 DVD|dvd.png
+1 Blu-ray Disc|blu_ray.png
 1 дискета|floppy_2.png
 2 дискеты|floppy_2.png
 3 дискеты|floppy_2.png
@@ -15,4 +17,5 @@
 6 дискет|floppy_2.png
 7 дискет|floppy_2.png
 8 дискет|floppy_2.png
+1 Cartucho|cartucho.png
 |sinimg.png

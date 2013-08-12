@@ -1,8 +1,10 @@
 PC|floppy_1.png
 Floppy 3.5|floppy_2.png
 Floppy 5.25|floppy_3.png
+Cartucho|cartucho.png
 CD-Rom|cd_iso.png
 DVD|dvd.png
+Blu-ray Disc|blu_ray.png
 CD-Audio|cd_audio.png
 Komprimeret fil|archivo_comprimido.png
 ISO fil|cd_iso.png
