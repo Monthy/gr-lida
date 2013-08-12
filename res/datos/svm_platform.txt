@@ -17,5 +17,5 @@ NES|nes|nes.png
 SegaCD|segacd|sm_cd.png
 Windows|windows|win9x.png
 Sony PlayStation|playstation|psx-1.png
-Philips CD-i|cdi|sinimg.png
+Philips CD-i|cdi|cdi.png
 Apple iOS|ios|sinimg.png
