@@ -1858,19 +1858,15 @@ void frmOpciones::on_btnPicFlowBgColor_clicked()
 
 void frmOpciones::on_btnEditTheme_clicked()
 {
-	int pos = ui->twThemes->indexOfTopLevelItem( ui->twThemes->currentItem() );
-	if( ui->twThemes->topLevelItemCount() > 0 && pos != -1 )
-	{
-		int id_cat = 1;
-		int pos_cat = ui->twCategorias->indexOfTopLevelItem(ui->twCategorias->currentItem());
-		if( ui->twCategorias->topLevelItemCount() > 0 && pos_cat != -1 )
-			id_cat = ui->twCategorias->currentItem()->text(3).toInt();
+	int id_cat = 1;
+	int pos_cat = ui->twCategorias->indexOfTopLevelItem(ui->twCategorias->currentItem());
+	if( ui->twCategorias->topLevelItemCount() > 0 && pos_cat != -1 )
+		id_cat = ui->twCategorias->currentItem()->text(3).toInt();
 
-		frmListIconCfg *ListIconCfg  = new frmListIconCfg(sql, grlCfg, id_cat, grlCfg.NameDirTheme, this);
-		ListIconCfg->setWindowFlags(Qt::Window);
-		ListIconCfg->exec();
-		delete ListIconCfg ;
-	}
+	frmListIconCfg *ListIconCfg = new frmListIconCfg(sql, grlCfg, id_cat, grlCfg.NameDirTheme, this);
+	ListIconCfg->setWindowFlags(Qt::Window);
+	ListIconCfg->exec();
+	delete ListIconCfg ;
 }
 
 void frmOpciones::on_twThemes_itemClicked(QTreeWidgetItem *item, int column)
