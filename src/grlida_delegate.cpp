@@ -175,7 +175,7 @@ bool GrlListViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
 		{
 			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
 
-			if( index.data(RatingRole).toString() != "" )
+			if( !index.data(RatingRole).toString().isEmpty() && lwConf.rating_show )
 			{
 				QString id_grl = index.data(IdGrlRole).toString();
 				int stars, pos_x, pos_y, rating_x, rating_y, limit_x, limit_y;
