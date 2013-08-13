@@ -527,15 +527,21 @@ void frmListIconCfg::on_btn_icon_height_def_clicked()
 //--
 void frmListIconCfg::on_btn_img_cover_top_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), lwConf.img_cover_top, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), fGrl->ThemeApp() + lwConf.img_cover_top, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
 	if( !archivo.isEmpty() )
 	{
 		stFileInfo f_info = fGrl->getInfoFile( archivo );
 		if( f_info.Exists )
 		{
-			lwConf.img_cover_top = archivo;
-			ui->img_cover_top->setText( archivo );
+			if( f_info.Path != QDir::toNativeSeparators(fGrl->ThemeApp()) )
+			{
+				fGrl->copiarArchivo(archivo, fGrl->ThemeApp() +"images/"+ f_info.NameExt);
+				archivo = QDir::toNativeSeparators(fGrl->ThemeApp() +"images/"+ f_info.NameExt);
+			}
+
+			lwConf.img_cover_top = archivo.remove( QDir::toNativeSeparators(fGrl->ThemeApp()) );
+			ui->img_cover_top->setText( lwConf.img_cover_top );
 			previewIconConfig();
 		}
 	}
@@ -556,15 +562,21 @@ void frmListIconCfg::on_img_cover_top_editingFinished()
 
 void frmListIconCfg::on_btn_img_cover_top_select_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), lwConf.img_cover_top_select, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), fGrl->ThemeApp() + lwConf.img_cover_top_select, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
 	if( !archivo.isEmpty() )
 	{
 		stFileInfo f_info = fGrl->getInfoFile( archivo );
 		if( f_info.Exists )
 		{
-			lwConf.img_cover_top_select = archivo;
-			ui->img_cover_top_select->setText( archivo );
+			if( f_info.Path != QDir::toNativeSeparators(fGrl->ThemeApp()) )
+			{
+				fGrl->copiarArchivo(archivo, fGrl->ThemeApp() +"images/"+ f_info.NameExt);
+				archivo = QDir::toNativeSeparators(fGrl->ThemeApp() +"images/"+ f_info.NameExt);
+			}
+
+			lwConf.img_cover_top_select = archivo.remove( QDir::toNativeSeparators(fGrl->ThemeApp()) );
+			ui->img_cover_top_select->setText( lwConf.img_cover_top_select );
 			previewIconConfig();
 		}
 	}
@@ -784,15 +796,21 @@ void frmListIconCfg::on_btn_title_bg_show_def_clicked()
 
 void frmListIconCfg::on_btn_title_bg_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), lwConf.title_bg, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), fGrl->ThemeApp() + lwConf.title_bg, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
 	if( !archivo.isEmpty() )
 	{
 		stFileInfo f_info = fGrl->getInfoFile( archivo );
 		if( f_info.Exists )
 		{
-			lwConf.title_bg = archivo;
-			ui->title_bg->setText( archivo );
+			if( f_info.Path != QDir::toNativeSeparators(fGrl->ThemeApp()) )
+			{
+				fGrl->copiarArchivo(archivo, fGrl->ThemeApp() +"images/"+ f_info.NameExt);
+				archivo = QDir::toNativeSeparators(fGrl->ThemeApp() +"images/"+ f_info.NameExt);
+			}
+
+			lwConf.title_bg = archivo.remove( QDir::toNativeSeparators(fGrl->ThemeApp()) );
+			ui->title_bg->setText( lwConf.title_bg );
 			previewIconConfig();
 		}
 	}
@@ -813,15 +831,21 @@ void frmListIconCfg::on_title_bg_editingFinished()
 
 void frmListIconCfg::on_btn_title_bg_select_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), lwConf.title_bg_select, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), fGrl->ThemeApp() + lwConf.title_bg_select, "", tr("Imagenes soportadas") +" ("+ grlCfg.FormatsImage.join(" ") +");;"+ tr("Todos los archivo") +" (*)");
 
 	if( !archivo.isEmpty() )
 	{
 		stFileInfo f_info = fGrl->getInfoFile( archivo );
 		if( f_info.Exists )
 		{
-			lwConf.title_bg_select = archivo;
-			ui->title_bg_select->setText( archivo );
+			if( f_info.Path != QDir::toNativeSeparators(fGrl->ThemeApp()) )
+			{
+				fGrl->copiarArchivo(archivo, fGrl->ThemeApp() +"images/"+ f_info.NameExt);
+				archivo = QDir::toNativeSeparators(fGrl->ThemeApp() +"images/"+ f_info.NameExt);
+			}
+
+			lwConf.title_bg_select = archivo.remove( QDir::toNativeSeparators(fGrl->ThemeApp()) );
+			ui->title_bg_select->setText( lwConf.title_bg_select );
 			previewIconConfig();
 		}
 	}
