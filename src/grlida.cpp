@@ -2934,7 +2934,7 @@ void GrLida::on_mnu_ver_fullscreen_triggered(bool checked)
 
 void GrLida::on_mnu_ver_ayuda_triggered()
 {
-	//
+	QDesktopServices::openUrl( QUrl("http://www.gr-lida.org/ayuda/") );
 }
 
 void GrLida::on_mnu_ver_check_updates_triggered()
