@@ -192,7 +192,7 @@ use_zlib {
         doc/NEWS.txt \
         doc/THANKS.txt \
         doc/TODO.txt
-    docs.path = /usr/share/doc/GR-lida
+    docs.path = /usr/share/doc/gr-lida
     INSTALLS += target \
         pixmaps \
         desktop \
