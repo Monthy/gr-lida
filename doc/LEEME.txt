@@ -3,7 +3,7 @@
 -  GR-lida Lanzador para el DOSBox, ScummVM y VdmSound
 -  Por Pedro García aka Monthy <ermonthy@gmail.com>
 -
--  versión 0.10.0 - 6 Enero del 2012
+-  versión 0.11.0 - 18 Agosto del 2013
 -		por Monthy
 -
 ------------------------------------------------------------------

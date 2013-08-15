@@ -3,6 +3,22 @@
 -----------------------------------
 version (DD-MM-AAAA)
 
+0.11.0 (18-08-2013)
+ - Añadida la posibilidad de crear categorías para las distintas plataformas o juegos.
+ - Añadido editor de themes y configuración de la lista en modo carátula.
+ - Menú de navegación totalmente personalizable.
+ - Añadida comprobación de actualizaciones/descarga de themes, scripts y del GR-lida.
+ - Añadidas rutas relativas para su uso como portable.
+ - Añadidas nuevas opciones tanto para el DOSBox como ScummVM.
+ - Añadida la posibilidad de añadir/editar todos los datos (genero, plataforma, etc) para los juegos.
+ - Mejora de rendimiento ya que puede cargar mas 10.000 juegos en la base de datos sin problemas.
+ - Mejora en los montajes del DOSBox.
+ - Corregido el autoincremento del index para la base de datos PostgreSql.
+ - Corregido error en el asistente del ScummVM al importar una configuración, ya que esta no se guardaba.
+ - Corregido error al importar información del juego, al no obtener el tipo de emulador correcto.
+ - Actualizada la versión soportada del ScummVM 1.6.0.
+ - Actualizada la lista de compatibilidad del ScummVM.
+
 0.10.0 (06-01-2012)
  - Añadida la traducción del GR-lida al Ruso por Vadim Petryaev.
  - Añadida resolución 1360x768 y 0x0 para pantalla completa del DOSBox.
