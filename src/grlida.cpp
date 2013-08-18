@@ -2228,10 +2228,10 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 	}
 
 // Copia los script de importar.
-	if( !QFile::exists(grlDir.Scripts +"gr-lida.js") )
-		fGrl->copiarArchivo(":/scripts/gr-lida.js"  , grlDir.Scripts +"gr-lida.js"  , true);
-	if( !QFile::exists(grlDir.Scripts +"mobygames.js") )
-		fGrl->copiarArchivo(":/scripts/mobygames.js", grlDir.Scripts +"mobygames.js", true);
+	if( !QFile::exists(grlDir.Scripts +"gr-lida.js") || isNuevaVersionGRlida )
+		fGrl->copiarArchivo(":/scripts/gr-lida.js"  , grlDir.Scripts +"gr-lida.js", true, true);
+	if( !QFile::exists(grlDir.Scripts +"mobygames.js") || isNuevaVersionGRlida )
+		fGrl->copiarArchivo(":/scripts/mobygames.js", grlDir.Scripts +"mobygames.js", true, true);
 
 // Comprueba iconos categoría.
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/");

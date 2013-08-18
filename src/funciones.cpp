@@ -462,9 +462,11 @@ QString Funciones::leerArchivo(QString filename, const QByteArray code)
 }
 
 // Copia un archivo de un directorio a otro.
-bool Funciones::copiarArchivo(QString origen, QString destino, bool permisos)
+bool Funciones::copiarArchivo(QString origen, QString destino, bool permisos, bool sobrescribir)
 {
 	QFile f_name(destino);
+	if( sobrescribir && f_name.exists() )
+		f_name.remove();
 	bool isOk = f_name.copy(origen, destino);
 	if( permisos )
 		f_name.setPermissions(QFile::ReadOwner | QFile::ReadUser | QFile::ReadGroup | QFile::ReadOther |

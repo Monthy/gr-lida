@@ -135,7 +135,7 @@ public:
 // Leer archivo de texto
 	QString leerArchivo(QString filename, const QByteArray code = "");
 // Copia un archivo de un directorio a otro.
-	bool copiarArchivo(QString origen, QString destino, bool permisos = false);
+	bool copiarArchivo(QString origen, QString destino, bool permisos = false, bool sobrescribir = false);
 // Elimina un directorio si existe
 	bool eliminarDirectorio(QString nameDir);
 // Renombra un directorio existe
