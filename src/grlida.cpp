@@ -2120,7 +2120,11 @@ void GrLida::ejecutar(QString bin, QString parametros, QString working_dir)
 		connect(grlProcess, SIGNAL( error(QProcess::ProcessError) ), this, SLOT( error_Proceso(QProcess::ProcessError) ) );
 
 		if( fGrl->comprobarDirectorio(working_dir, true) )
-			grlProcess->setWorkingDirectory( QDir::toNativeSeparators(working_dir) );
+		{
+			QFileInfo fi( working_dir );
+			if( fi.isWritable() )
+				grlProcess->setWorkingDirectory( QDir::toNativeSeparators(working_dir) );
+		}
 
 		QStringList stl_param;
 		stl_param << parametros.split("|", QString::SkipEmptyParts);
