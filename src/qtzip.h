@@ -26,16 +26,20 @@
 #define QTZIP_H
 
 #include <QtCore>
-#include <QtGui>
-
+#include <QMessageBox>
+#include <QTreeWidget>
+#include <QListWidget>
+#include <QInputDialog>
 #include <QPixmap>
 #include <QBitmap>
 
 #include "osdab-zip/zip.h"
 #include "osdab-zip/unzip.h"
 
-class QtZip
+class QtZip : public QObject
 {
+	Q_OBJECT
+
 public:
 	QtZip();
 	~QtZip();
@@ -43,22 +47,37 @@ public:
 	bool abrirZip(const QString file, const QString pwd = "");
 	bool extractZip(const QString file, const QString out, const QString pwd = "");
 
-	QStringList listaZip();
-	void listaZipTreeWidget(QTreeWidget *myTreeWidget);
-	void listaZipListWidget(QListWidget *myListWidget);
+	QStringList listaZip(bool show_dir = false);
+	void listaZipTreeWidget(QTreeWidget *myTreeWidget, bool show_dir = false);
+	void listaZipListWidget(QListWidget *myListWidget, bool show_dir = false);
 
 	QString getCommentZip(){return comentarioZip;}
 	QString loadTexto(QString filename);
 	QPixmap loadImagen(QString filename);
 	QBitmap loadImagenBitmap(QString filename);
 
+	bool isZipOpen;
+
 private:
+	struct stQtZip {
+		QString filename;
+		QString size;
+		QString ratio;
+		QString crc32;
+		QString encrypted;
+		QString path;
+		bool    isDir;
+	};
+
 	UnZip::ErrorCode ec_uz;
 	UnZip uz;
 
-	bool isZipOpen;
+	QHash<int, stQtZip> hash_uz;
 	QString comentarioZip;
+	int count_uz;
+
+	const QByteArray loadData(QString filename);
 
 };
 
-#endif /*QTZIP_H*/
+#endif // QTZIP_H

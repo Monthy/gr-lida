@@ -27,6 +27,7 @@
 QtZip::QtZip()
 {
 	isZipOpen = false;
+	count_uz  = -1;
 }
 
 QtZip::~QtZip()
@@ -40,32 +41,121 @@ bool QtZip::abrirZip(const QString file, const QString pwd)
 	if( isZipOpen )
 		uz.closeArchive();
 
+	isZipOpen = false;
+	count_uz  = -1;
+
 	if( !QFile::exists(file) )
 	{
-		QMessageBox::information(0, "QtZip", QObject::tr("El archivo no existe."));
+		QMessageBox::information(0, "QtZip", tr("El archivo no existe."));
 		isZipOpen = false;
 		return false;
 	}
+
+	ec_uz = UnZip::Ok;
 
 	if( !pwd.isEmpty() )
 		uz.setPassword(pwd);
 
 	ec_uz = uz.openArchive(file);
-
 	if( ec_uz != UnZip::Ok )
 	{
-		QMessageBox::information(0, "QtZip", QObject::tr("Incapaz de abrir el archivo") +": "+ uz.formatError(ec_uz).toAscii() );
+		QMessageBox::information(0, "QtZip", tr("Incapaz de abrir el archivo") +": "+ uz.formatError(ec_uz).toLatin1() );
 		isZipOpen = false;
 		return false;
 	}
 
-	QString comment = uz.archiveComment();
-	if( !comment.isEmpty() )
-		comentarioZip = comment.toAscii().data();
-	else
-		comentarioZip = "";
+	ec_uz = uz.verifyArchive();
+	switch (ec_uz)
+	{
+		case UnZip::WrongPassword:
+		{
+			bool ok = false;
+			QString text_pass = QInputDialog::getText(0, tr("Contraseña incorrecta"), tr("Contraseña") +":", QLineEdit::PasswordEchoOnEdit, "", &ok);
+			if( ok && !text_pass.isEmpty() )
+			{
+				abrirZip(file, text_pass);
+				return false;
+			}
+		//	QMessageBox::information(0, "QtZip", tr("Wrong password.") +": "+ uz.formatError(ec_uz).toLatin1() );
+			isZipOpen = false;
+			return false;
+		}
+		break;
+		case UnZip::PartiallyCorrupted:
+			QMessageBox::information(0, "QtZip", tr("Encontrados algunos archivos dañados.") +": "+ uz.formatError(ec_uz).toLatin1() );
+			isZipOpen = false;
+			return false;
+		break;
+		case UnZip::Corrupted:
+			QMessageBox::information(0, "QtZip", tr("Archivos dañados.") +": "+ uz.formatError(ec_uz).toLatin1() );
+			isZipOpen = false;
+			return false;
+		break;
+		case UnZip::Ok:
+			// Sin problemas.
+		break;
+		default:
+		{
+			bool ok = false;
+			QString text_pass = QInputDialog::getText(0, tr("Incapaz de abrir el archivo"), tr("Puede que necesite una contraseña") +"\n"+ tr("Contraseña") +":", QLineEdit::PasswordEchoOnEdit, "", &ok);
+			if( ok && !text_pass.isEmpty() )
+			{
+				abrirZip(file, text_pass);
+				return false;
+			}
+			isZipOpen = false;
+			return false;
+		}
+		break;
+	}
 
 	isZipOpen = true;
+
+	comentarioZip = uz.archiveComment();
+
+	hash_uz.clear();
+	QList<UnZip::ZipEntry> list_uz = uz.entryList();
+	if( !list_uz.isEmpty() )
+	{
+		stQtZip z_info;
+		count_uz = list_uz.size();
+		for (int i = 0; i < count_uz; ++i)
+		{
+			const UnZip::ZipEntry& entry_uz = list_uz.at(i);
+			if( entry_uz.type == UnZip::Directory )
+			{
+				z_info.filename  = "";
+				z_info.size      = "";
+				z_info.ratio     = "";
+				z_info.crc32     = "";
+				z_info.encrypted = "";
+				z_info.path      = entry_uz.filename;
+				z_info.isDir     = true;
+			} else {
+				double ratio   = entry_uz.uncompressedSize == 0 ? 0 : 100 - (double)entry_uz.compressedSize * 100 / (double)entry_uz.uncompressedSize;
+				QString ratioS = QString::number(ratio, 'f', 2).append("%");
+				QString crc32  = "00000000";
+				crc32 = crc32.sprintf("%X", entry_uz.crc32).rightJustified(8, '0');
+
+				QString filename = entry_uz.filename;
+				int idx = filename.lastIndexOf("/");
+			//	if( idx >= 0 && idx != filename.length()-1 )
+			//		filename = filename.right(filename.length() - idx - 1);
+				if( idx > -1 )
+					filename = filename.left(idx);
+
+				z_info.filename  = filename;
+				z_info.size      = QString::number(entry_uz.uncompressedSize);
+				z_info.ratio     = ratioS;
+				z_info.crc32     = crc32;
+				z_info.encrypted = (entry_uz.encrypted) ? "*" : "";
+				z_info.path      = entry_uz.filename;
+				z_info.isDir     = false;
+			}
+			hash_uz.insert(i, z_info);
+		}
+	}
+
 	return true;
 }
 
@@ -78,45 +168,30 @@ bool QtZip::extractZip(const QString file, const QString out, const QString pwd)
 		ec_uz = uz.extractAll(out);
 		if( ec_uz != UnZip::Ok )
 		{
-			QMessageBox::information(0, "QtZip", QObject::tr("Incapaz de extraer el archivo") +": "+ uz.formatError(ec_uz).toAscii() );
+			QMessageBox::information(0, "QtZip", tr("Incapaz de extraer el archivo") +": "+ uz.formatError(ec_uz).toLatin1() );
 			uz.closeArchive();
 			return false;
 		}
-
 		return true;
 	}
-
 	return true;
 }
 
-QStringList QtZip::listaZip()
+QStringList QtZip::listaZip(bool show_dir)
 {
 	QList<QString> listaZip;
-	if( isZipOpen )
+	for(int i = 0; i < count_uz; ++i)
 	{
-		QList<UnZip::ZipEntry> list = uz.entryList();
-
-		listaZip.clear();
-		if( !list.isEmpty() )
-		{
-			const int num_total = list.count();
-			for (int i = 0; i < num_total; ++i)
-			{
-				const UnZip::ZipEntry& entry = list.at(i);
-				if( entry.type != UnZip::Directory )
-					listaZip << entry.filename;
-			}
-		}
+		if( !hash_uz[i].isDir || show_dir )
+			listaZip << hash_uz[i].path;
 	}
 	return listaZip;
 }
 
-void QtZip::listaZipTreeWidget(QTreeWidget *myTreeWidget)
+void QtZip::listaZipTreeWidget(QTreeWidget *myTreeWidget, bool show_dir)
 {
-	if( isZipOpen )
+	if( isZipOpen && !hash_uz.isEmpty() )
 	{
-		QList<UnZip::ZipEntry> list = uz.entryList();
-
 		myTreeWidget->clear();
 		myTreeWidget->headerItem()->setText(0, "Filename");
 		myTreeWidget->headerItem()->setText(1, "Size");
@@ -125,125 +200,70 @@ void QtZip::listaZipTreeWidget(QTreeWidget *myTreeWidget)
 		myTreeWidget->headerItem()->setText(4, "Encrypted");
 		myTreeWidget->headerItem()->setText(5, "path");
 
-		if( !list.isEmpty() )
+		for(int i = 0; i < count_uz; ++i)
 		{
-			const int num_total = list.count();
-			for (int i = 0; i < num_total; ++i)
+			if( !hash_uz[i].isDir || show_dir )
 			{
-				const UnZip::ZipEntry& entry = list.at(i);
-				if( entry.type != UnZip::Directory)
-				{
-					QString file, crc, isEncrypted, path;
-					double ratio = entry.uncompressedSize == 0 ? 0 : 100 - (double) entry.compressedSize * 100 / (double) entry.uncompressedSize;
-					QString ratioS = QString::number(ratio, 'f', 2).append("%");
-					crc = crc.sprintf("%X", entry.crc32).rightJustified(8, '0');
-
-					file = entry.filename;
-					path = entry.filename;
-
-					int idx = file.lastIndexOf("/");
-					if (idx >= 0 && idx != file.length()-1)
-						file = file.right(file.length() - idx - 1);
-
-					if(entry.encrypted)
-						isEncrypted = "*";
-					else
-						isEncrypted = "";
-
-					QTreeWidgetItem *item = new QTreeWidgetItem(myTreeWidget);
-		//			item->setIcon(0, QIcon("") );
-					item->setText(0, file.toAscii().data()        ); // Filename
-					item->setText(1, QString::number(entry.uncompressedSize)  ); // Size
-					item->setText(2, ratioS.toAscii().data()      ); // Ratio
-					item->setText(3, crc.toAscii().data()         ); // CRC32
-					item->setText(4, isEncrypted.toAscii().data() ); // Encrypted
-					item->setText(5, path.toAscii().data()        ); // path
-					item->setText(5, QString::number( i )         ); // id
-				}
+				QTreeWidgetItem *item = new QTreeWidgetItem(myTreeWidget);
+	//			item->setIcon(0, QIcon("") );
+				item->setText(0, hash_uz[i].filename  );
+				item->setText(1, hash_uz[i].size      );
+				item->setText(2, hash_uz[i].ratio     );
+				item->setText(3, hash_uz[i].crc32     );
+				item->setText(4, hash_uz[i].encrypted );
+				item->setText(5, hash_uz[i].path      );
+				item->setText(6, QString::number(i)   );
 			}
 		}
 	}
 }
 
-void QtZip::listaZipListWidget(QListWidget *myListWidget)
+void QtZip::listaZipListWidget(QListWidget *myListWidget, bool show_dir)
 {
-	if( isZipOpen )
+	if( isZipOpen && !hash_uz.isEmpty() )
 	{
-		QList<UnZip::ZipEntry> list = uz.entryList();
-
 		myListWidget->clear();
-		if( !list.isEmpty() )
+
+		for(int i = 0; i < count_uz; ++i)
 		{
-			const int num_total = list.count();
-			for (int i = 0; i < num_total; ++i)
+			if( !hash_uz[i].isDir || show_dir )
 			{
-				const UnZip::ZipEntry& entry = list.at(i);
-				if( entry.type != UnZip::Directory )
-				{
-					QString file, path;
-					file = entry.filename;
-					path = entry.filename;
-
-					int idx = file.lastIndexOf("/");
-					if (idx >= 0 && idx != file.length()-1)
-						file = file.right(file.length() - idx - 1);
-
-					QListWidgetItem *item = new QListWidgetItem(myListWidget);
-		//			item->setIcon(QIcon( m_scaled ));
-					item->setText( file.toAscii().data() );
-					item->setData(Qt::UserRole  , path.toAscii().data() );
-					item->setData(Qt::UserRole+1, QVariant(i).toString());
-					item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled);
-				}
+				QListWidgetItem *item = new QListWidgetItem(myListWidget);
+	//			item->setIcon(QIcon( m_scaled ));
+				item->setText( hash_uz[i].filename );
+				item->setData(Qt::UserRole  , hash_uz[i].path    );
+				item->setData(Qt::UserRole+1, QString::number(i) );
+				item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled);
 			}
 		}
 	}
+}
+
+const QByteArray QtZip::loadData(QString filename)
+{
+	if( !filename.isEmpty() && isZipOpen )
+	{
+		QBuffer cbuf;
+		cbuf.open(QIODevice::WriteOnly);
+		ec_uz = uz.extractFile(filename, &cbuf);
+		return cbuf.data();
+	} else
+		return QByteArray("");
 }
 
 QString QtZip::loadTexto(QString filename)
 {
-	if( isZipOpen )
-	{
-		if( !filename.isEmpty() )
-		{
-			QBuffer cbuf;
-			cbuf.open(QIODevice::WriteOnly);
-			ec_uz = uz.extractFile(filename, &cbuf);
-			return cbuf.data();
-		} else
-			return "";
-	} else
-		return "";
+	return QString( loadData(filename) );
 }
 
 QPixmap QtZip::loadImagen(QString filename)
 {
 	QPixmap pixmap;
-	if( isZipOpen )
-	{
-		if( !filename.isEmpty() )
-		{
-			QBuffer cbuf;
-			cbuf.open(QIODevice::WriteOnly);
-			ec_uz = uz.extractFile(filename, &cbuf);
-			pixmap.loadFromData( cbuf.data() );
-		}
-	}
+	pixmap.loadFromData( loadData(filename) );
 	return pixmap;
 }
 
 QBitmap QtZip::loadImagenBitmap(QString filename)
 {
-	QBitmap bitmap;
-	if( isZipOpen )
-	{
-		if( !filename.isEmpty() )
-		{
-			QBuffer cbuf;
-			cbuf.open(QIODevice::WriteOnly);
-			ec_uz = uz.extractFile(filename, &cbuf);
-			bitmap.loadFromData( cbuf.data() );
-		}
-	}
-	return bitmap;
+	return QBitmap( loadImagen(filename) );
 }
