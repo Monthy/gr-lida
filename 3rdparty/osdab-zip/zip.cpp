@@ -283,7 +283,7 @@ ZipPrivate::ZipPrivate() :
 {
 	// keep an unsigned pointer so we avoid to over bloat the code with casts
 	uBuffer = (unsigned char*) buffer1;
-    crcTable = get_crc_table();
+	crcTable = (unsigned long*) get_crc_table();
 }
 
 //! \internal
