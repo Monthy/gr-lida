@@ -106,7 +106,7 @@ void frmRuleta::cargarRuleta(QString filename)
 	ui->txtInfo->setHtml("<b>"+ tr("Título del juego") +":</b> "+ config["info_title"] +"<br>"
 								"<b>"+ tr("Autor") +":</b> "+ config["info_autor"] +"<br>"
 								"<b>"+ tr("Url") +":</b> <a href=\""+ config["info_url"] +"\">"+ config["info_url"] +"</a><br>"
-								"<b>"+ tr("Descipción") +":</b><br>"+ config["info_description"] +"<br>");
+								"<b>"+ tr("Descripción") +":</b><br>"+ config["info_description"] +"<br>");
 
 	settings.beginGroup("lienzo");
 		scene_width  = settings.value("scene_width" , 500).toInt();
