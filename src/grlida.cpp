@@ -919,7 +919,7 @@ void GrLida::checkUpdateGrl(bool is_menu)
 void GrLida::cargarListaCategorias(bool isEmit)
 {
 	QString ico_size = (grlCfg.ToolbarBigIcon) ? "24" : "16";
-//setUpdatesEnabled( false );
+
 	QSqlQuery query(sql->getSqlDB());
 	stGrlCats cat;
 
@@ -993,7 +993,6 @@ void GrLida::cargarListaCategorias(bool isEmit)
 			ui->cbxCategoriasTb->addItem(QIcon(":/img"+ ico_size +"_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 	}
 	query.clear();
-//setUpdatesEnabled( true );
 
 	int id_index = ui->cbxCategoriasTb->findData(id_cat);
 	if( id_index < 0 )
@@ -1187,8 +1186,6 @@ void GrLida::cargarListaJuegosDB(QString sql_where)
 		QSqlQuery query(sql->getSqlDB());
 		int num_juegos = 0;
 
-	//	ui->lvJuegos->setUpdatesEnabled(false);
-	//	setUpdatesEnabled(false);
 		lv_model->clear();
 		query.exec("SELECT idgrl, titulo, thumbs, tipo_emu, rating FROM "+ categoria[id_cat].tabla +" "+ sql_where +" ORDER BY "+ grlCfg.db_orden_by +" "+ grlCfg.db_orden);
 		if( query.first() )
@@ -1213,8 +1210,6 @@ void GrLida::cargarListaJuegosDB(QString sql_where)
 			} while ( query.next() );
 		}
 		query.clear();
-	//	setUpdatesEnabled(true);
-	//	ui->lvJuegos->setUpdatesEnabled(true);
 
 		ui->lvJuegos->setIconSize( QSize(lwIconCfg.icon_width, lwIconCfg.icon_height) );
 		ui->lvJuegos->setModel(lv_model);
@@ -1333,7 +1328,6 @@ void GrLida::setChangeCategorias(int cat_id)
 
 void GrLida::menuNavAddCat(QString etiqueta, QString icono, QString sql_query, bool m_expanded, bool m_show_total)
 {
-//setUpdatesEnabled( false );
 	QFont m_font;
 	int total = 0;
 	if( m_show_total )
@@ -1349,12 +1343,10 @@ void GrLida::menuNavAddCat(QString etiqueta, QString icono, QString sql_query, b
 	twListMnuNav->setText( 1, m_show_total ? fGrl->IntToStr(total) : "");
 	twListMnuNav->setText( 2, sql_query );
 	twListMnuNav->setExpanded( m_expanded );
-//setUpdatesEnabled( true );
 }
 
 void GrLida::menuNavAddSubCat(QString etiqueta, QString icono, QString sql_query, QString sql_col)
 {
-//setUpdatesEnabled( false );
 	QFont m_font;
 	int total = 0;
 	total = sql->getCount(categoria[id_cat].tabla, sql_query, sql_col, etiqueta);
@@ -1373,13 +1365,10 @@ void GrLida::menuNavAddSubCat(QString etiqueta, QString icono, QString sql_query
 	sub_cat->setText( 0, etiqueta             );
 	sub_cat->setText( 1, fGrl->IntToStr(total) );
 	sub_cat->setText( 2, sql_query            );
-//setUpdatesEnabled( true );
 }
 
 void GrLida::crearMenuNav()
 {
-//setUpdatesEnabled( false );
-	ui->twListNav->setUpdatesEnabled(false);
 	ui->twListNav->clear();
 
 	menuNavAddCat( tr("Todos")     , fGrl->Theme() +"img16/basedatos.png"    , "", false, true);
@@ -1411,10 +1400,8 @@ void GrLida::crearMenuNav()
 	}
 
 	sql->cargarMenuNav(ui->twListNav, categoria[id_cat].tabla);
-	ui->twListNav->setUpdatesEnabled(true);
 
 	comprobarEmuloresDisp();
-//setUpdatesEnabled( true );
 }
 
 void GrLida::nuevoEditarDatosDelJuego(stDatosJuego datos, bool isNew)
@@ -1604,7 +1591,6 @@ stDatosJuego GrLida::nuevoItemCopiarImagenes(stDatosJuego datos, QString tabla, 
 
 void GrLida::mostrarDatosDelJuego(QString IDitem)
 {
-//setUpdatesEnabled( false );
 	if( IDitem.isEmpty() )
 	{
 		IdGame     = "";
@@ -1756,7 +1742,6 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 	}
 // Carga la configuración dependiendo el emulador
 	cargarConfigEmu( TipoEmu );
-//setUpdatesEnabled( true );
 }
 
 void GrLida::itemNext()

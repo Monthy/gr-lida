@@ -173,7 +173,6 @@ void frmAddEditJuego::createConnections()
 
 void frmAddEditJuego::cargarConfig()
 {
-setUpdatesEnabled(false);
 	fGrl->setIdioma(grlCfg.IdiomaSelect);
 
 	ui->tabWidget_Datos->setTabEnabled(tabDOSBox  , false);
@@ -324,7 +323,6 @@ setUpdatesEnabled(false);
 	}
 
 	setTheme();
-setUpdatesEnabled(true);
 
 	ui->txtDatos_Titulo->setFocus();
 }
@@ -397,7 +395,6 @@ void frmAddEditJuego::setTheme()
 
 void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 {
-setUpdatesEnabled(false);
 	if( !isImport )
 		DatosJuego = datos;
 
@@ -578,7 +575,6 @@ setUpdatesEnabled(false);
 		if( !datos.thumbs_new )
 			emit on_btnImgEliminar_CoverBack_clicked();
 	}
-setUpdatesEnabled(true);
 }
 
 bool frmAddEditJuego::setDatosJuegos(bool isSoloDatos)

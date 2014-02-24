@@ -94,7 +94,6 @@ void frmInfo::setTheme()
 // Carga las categorías de la base de datos.
 void frmInfo::cargarListaCategorias()
 {
-//setUpdatesEnabled( false );
 	QSqlQuery query(sql->getSqlDB());
 	stGrlCats cat;
 
@@ -151,7 +150,6 @@ void frmInfo::cargarListaCategorias()
 			ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 	}
 	query.clear();
-//setUpdatesEnabled( true );
 
 	int id_index = ui->cbxCategorias->findData(id_cat);
 	if( id_index < 0 )
@@ -163,7 +161,6 @@ void frmInfo::cargarListaCategorias()
 
 void frmInfo::menuNavAddCat(QString etiqueta, QString icono, QString sql_query, bool m_expanded, bool m_show_total)
 {
-//setUpdatesEnabled( false );
 	QFont m_font;
 	int total = 0;
 	if( m_show_total )
@@ -179,12 +176,10 @@ void frmInfo::menuNavAddCat(QString etiqueta, QString icono, QString sql_query, 
 	twListInfo->setText( 1, m_show_total ? fGrl->IntToStr(total) : "");
 	twListInfo->setText( 2, sql_query );
 	twListInfo->setExpanded( m_expanded );
-//setUpdatesEnabled( true );
 }
 
 void frmInfo::menuNavAddSubCat(QString etiqueta, QString icono, QString sql_query, QString sql_col)
 {
-//setUpdatesEnabled( false );
 	QFont m_font;
 	int total = 0;
 	total = sql->getCount(categoria[id_cat].tabla, sql_query, sql_col, etiqueta);
@@ -203,13 +198,10 @@ void frmInfo::menuNavAddSubCat(QString etiqueta, QString icono, QString sql_quer
 	sub_cat->setText( 0, etiqueta             );
 	sub_cat->setText( 1, fGrl->IntToStr(total) );
 	sub_cat->setText( 2, sql_query            );
-//setUpdatesEnabled( true );
 }
 
 void frmInfo::crearMenuNav()
 {
-//setUpdatesEnabled( false );
-	ui->twInfo->setUpdatesEnabled(false);
 	ui->twInfo->clear();
 
 	menuNavAddCat( tr("Todos")     , fGrl->Theme() +"img16/basedatos.png"    , "", false, true);
@@ -239,8 +231,6 @@ void frmInfo::crearMenuNav()
 	}
 
 	sql->cargarMenuNav(ui->twInfo, categoria[id_cat].tabla);
-	ui->twInfo->setUpdatesEnabled(true);
-//setUpdatesEnabled( true );
 }
 
 void frmInfo::on_cbxCategorias_activated(int index)

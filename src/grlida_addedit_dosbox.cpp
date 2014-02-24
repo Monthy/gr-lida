@@ -52,7 +52,6 @@ frmAddEditDosBox::~frmAddEditDosBox()
 
 void frmAddEditDosBox::cargarConfig()
 {
-//setUpdatesEnabled(false);
 	fGrl->setIdioma(grlCfg.IdiomaSelect);
 
 	fGrl->cargarListaArchivosComboBox(ui->cbxDbx_Profiles, grlDir.Templates, "_defecto_", CbxListProf, "*.conf;*.prof",";");
@@ -239,7 +238,6 @@ void frmAddEditDosBox::cargarConfig()
 	ui->twMontajes->setColumnWidth(3, 80);
 
 	setTheme();
-//setUpdatesEnabled(true);
 }
 
 void frmAddEditDosBox::setTheme()

@@ -227,8 +227,6 @@ void frmImgViewer::showImg(int index)
 {
 	if( index > -1 )
 	{
-		setUpdatesEnabled( false );
-
 		QFileInfo f_info( imgLista.at(index) );
 
 		if( isZip )
@@ -251,8 +249,6 @@ void frmImgViewer::showImg(int index)
 		ui->fitToWindow->setEnabled(true);
 
 		emit on_fitToWindow_triggered( grlCfg.img_fitToWindow );
-
-		setUpdatesEnabled( true );
 
 		lbpanel_2->setText(tr("Total") +": "+ fGrl->IntToStr(id_imagen+1) +" "+ tr("de") +" "+ fGrl->IntToStr(total_img) +" "+
 				tr("Tamaño") +": "+ fGrl->IntToStr(imagen_src.width()) +"x"+ fGrl->IntToStr(imagen_src.height()) +" | "+ f_info.fileName() );

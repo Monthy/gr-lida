@@ -59,7 +59,6 @@ void frmSvmAdd::cargarConfig()
 	regexp.setPatternSyntax(QRegExp::RegExp);
 	regexp.setPattern("[A-Za-z-0-9]+");
 
-//setUpdatesEnabled(false);
 	fGrl->setIdioma(grlCfg.IdiomaSelect);
 
 	DatosJuego   = fGrl->getDefectDatos("scummvm");
@@ -97,7 +96,6 @@ void frmSvmAdd::cargarConfig()
 	ui->cbxSvm_joystick_num->addItem(QIcon(fGrl->Theme() +"img16/controller.png"), "Joystick 2" , "1");
 
 	cargarDatosScummVM(DatosScummVM);
-//setUpdatesEnabled(true);
 }
 
 void frmSvmAdd::setTheme()

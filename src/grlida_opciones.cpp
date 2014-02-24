@@ -379,7 +379,6 @@ void frmOpciones::cargarListaThemes()
 	item->setSelected(true);
 	ui->lb_theme_example->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
 
-	setUpdatesEnabled( false );
 	const int list_themesSize = list_themes.size();
 	for (int i = 0; i < list_themesSize; ++i)
 	{
@@ -407,7 +406,6 @@ void frmOpciones::cargarListaThemes()
 			}
 		}
 	}
-	setUpdatesEnabled( true );
 }
 
 void frmOpciones::on_btnOk_clicked()

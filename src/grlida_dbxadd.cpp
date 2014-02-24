@@ -63,7 +63,6 @@ void frmDbxAdd::cargarConfig()
 	regexp.setPatternSyntax(QRegExp::RegExp);
 	regexp.setPattern("[A-Za-z-_0-9]+");
 
-//setUpdatesEnabled(false);
 	fGrl->setIdioma(grlCfg.IdiomaSelect);
 
 	DatosJuego  = fGrl->getDefectDatos("dosbox");
@@ -124,7 +123,6 @@ void frmDbxAdd::cargarConfig()
 	ui->twMontajes->setColumnWidth(3, 80);
 
 	cargarDatosDosBox(DatosDosBox);
-//setUpdatesEnabled(true);
 }
 
 void frmDbxAdd::setTheme()

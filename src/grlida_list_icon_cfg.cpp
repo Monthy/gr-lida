@@ -219,7 +219,6 @@ void frmListIconCfg::cargarListaThemes()
 // Carga las categorias de la base de datos.
 void frmListIconCfg::cargarListaCategorias()
 {
-//setUpdatesEnabled( false );
 	QSqlQuery query(sql->getSqlDB());
 	stGrlCats cat;
 
@@ -276,7 +275,6 @@ void frmListIconCfg::cargarListaCategorias()
 			ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 	}
 	query.clear();
-//setUpdatesEnabled( true );
 
 	int id_index = ui->cbxCategorias->findData(id_cat);
 	if( id_index < 0 )

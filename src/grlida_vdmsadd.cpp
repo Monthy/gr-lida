@@ -54,14 +54,12 @@ frmVdmsAdd::~frmVdmsAdd()
 
 void frmVdmsAdd::cargarConfig()
 {
-//setUpdatesEnabled(false);
 	fGrl->setIdioma(grlCfg.IdiomaSelect);
 
 	DatosJuego    = fGrl->getDefectDatos("vdmsound");
 	DatosVDMSound = fGrl->getDefectVDMSound();
 
 	cargarDatosVDMSound(DatosVDMSound);
-//setUpdatesEnabled(true);
 }
 
 void frmVdmsAdd::setTheme()
