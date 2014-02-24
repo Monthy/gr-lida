@@ -33,11 +33,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QtGlobal>
 
-#ifdef USE_ZLIB
 #include <zlib.h>
-#else
-#include <zlib/zlib.h>
-#endif
 
 class QIODevice;
 class QFile;
