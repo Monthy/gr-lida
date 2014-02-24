@@ -326,7 +326,7 @@ UnZip::ErrorCode UnzipPrivate::parseLocalHeaderRecord(const QString& path, const
     if (device->read(buffer2, szName) != szName)
         return UnZip::ReadFailed;
 
-    QString filename = QString::fromAscii(buffer2, szName);
+	QString filename = QString::fromLatin1(buffer2, szName);
     if (filename != path) {
         qDebug() << "Filename in local header mismatches.";
         return UnZip::HeaderConsistencyError;
@@ -555,7 +555,7 @@ UnZip::ErrorCode UnzipPrivate::parseCentralDirectoryRecord()
         ec = UnZip::ReadFailed;
         skipEntry = true;
     } else {
-        filename = QString::fromAscii(buffer2, szName);
+		filename = QString::fromLatin1(buffer2, szName);
     }
 
     // Unsupported features if version is bigger than UNZIP_VERSION
@@ -610,7 +610,7 @@ UnZip::ErrorCode UnzipPrivate::parseCentralDirectoryRecord()
             return UnZip::ReadFailed;
         }
 
-        h->comment = QString::fromAscii(buffer2, szComment);
+		h->comment = QString::fromLatin1(buffer2, szComment);
     }
 
     h->lhOffset = getULong(uBuffer, UNZIP_CD_OFF_LHOFFSET);
@@ -1004,7 +1004,7 @@ void UnzipPrivate::initKeys(const QString& pwd, quint32* keys) const
     keys[1] = 591751049L;
     keys[2] = 878082192L;
 
-    QByteArray pwdBytes = pwd.toAscii();
+	QByteArray pwdBytes = pwd.toLatin1();
     int sz = pwdBytes.size();
     const char* ascii = pwdBytes.data();
 

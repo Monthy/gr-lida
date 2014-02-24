@@ -821,7 +821,7 @@ Zip::ErrorCode ZipPrivate::createEntry(const QFileInfo& file, const QString& roo
 	setULong(h->szUncomp, buffer1, ZIP_LH_OFF_USIZE);
 
 	// filename length
-	QByteArray entryNameBytes = entryName.toAscii();
+	QByteArray entryNameBytes = entryName.toLatin1();
 	int sz = entryNameBytes.size();
 
 	buffer1[ZIP_LH_OFF_NAMELEN] = sz & 0xFF;
@@ -970,7 +970,7 @@ void ZipPrivate::initKeys(quint32* keys) const
 	keys[1] = 591751049L;
 	keys[2] = 878082192L;
 
-	QByteArray pwdBytes = password.toAscii();
+	QByteArray pwdBytes = password.toLatin1();
 	int sz = pwdBytes.size();
 	const char* ascii = pwdBytes.data();
 
@@ -1191,7 +1191,7 @@ Zip::ErrorCode ZipPrivate::writeEntry(const QString& fileName, const ZipEntryP* 
 	setULong(h->szUncomp, buffer1, ZIP_CD_OFF_USIZE);
 
 	// filename
-	QByteArray fileNameBytes = fileName.toAscii();
+	QByteArray fileNameBytes = fileName.toLatin1();
 	sz = fileNameBytes.size();
 	buffer1[ZIP_CD_OFF_NAMELEN] = sz & 0xFF;
 	buffer1[ZIP_CD_OFF_NAMELEN + 1] = (sz >> 8) & 0xFF;
@@ -1266,7 +1266,7 @@ Zip::ErrorCode ZipPrivate::writeCentralDir(quint32 offCentralDir, quint32 szCent
 	setULong(offCentralDir, buffer1, ZIP_EOCD_OFF_CDOFF);
 
 	// ZIP file comment length
-	QByteArray commentBytes = comment.toAscii();
+	QByteArray commentBytes = comment.toLatin1();
 	quint16 commentLength = commentBytes.size();
 
 	if (commentLength == 0) {
