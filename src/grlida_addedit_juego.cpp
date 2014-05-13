@@ -196,14 +196,17 @@ void frmAddEditJuego::cargarConfig()
 	if( lista.isEmpty() || lista.contains("all") || lista.contains("vdmsound") )
 		ui->cbxDatos_TipoEmu->addItem(QIcon(fGrl->Theme() +"img16/vdmsound.png"), tr("VDMSound"), "vdmsound");
 
-	foreach (const stGrlDatos &dat, emu_list)
+	if( emu_list.count() > 0 )
 	{
-		if( lista.isEmpty() || lista.contains("all") || lista.contains(dat.key) )
+		foreach (const stGrlDatos &dat, emu_list)
 		{
-			if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ dat.icono) )
-				ui->cbxDatos_TipoEmu->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ dat.icono), dat.titulo, dat.key);
-			else
-				ui->cbxDatos_TipoEmu->addItem(QIcon(":/img16_cat/sinimg.png"), dat.titulo, dat.key);
+			if( lista.isEmpty() || lista.contains("all") || lista.contains(dat.key) )
+			{
+				if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ dat.icono) )
+					ui->cbxDatos_TipoEmu->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ dat.icono), dat.titulo, dat.key);
+				else
+					ui->cbxDatos_TipoEmu->addItem(QIcon(":/img16_cat/sinimg.png"), dat.titulo, dat.key);
+			}
 		}
 	}
 
