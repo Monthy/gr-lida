@@ -105,8 +105,8 @@ void frmAddEditScummVM::setTheme()
 	setTabIcon(1, QIcon(fGrl->Theme() +"img16/opciones.png") );
 	setTabIcon(2, QIcon(fGrl->Theme() +"img16/vdmsound.png") );
 
-	ui->btnSvm_Path->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
-	ui->btnSvm_Path_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnSvm_PathGame->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
+	ui->btnSvm_PathGame_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnSvm_PathSave->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
 	ui->btnSvm_PathSave_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnSvm_PathExtra->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
@@ -139,18 +139,18 @@ bool frmAddEditScummVM::isCorrectNext()
 			ui->txtSvm_game_label->setFocus();
 		} else {
 			siguiente = true;
-			if( ui->txtSvm_path->text().isEmpty() )
+			if( ui->txtSvm_path_game->text().isEmpty() )
 			{
 				siguiente = false;
 				QMessageBox::information(this, titulo_ventana(), tr("Debes indicar el directorio del juego de ScummVM") );
-				ui->txtSvm_path->setFocus();
+				ui->txtSvm_path_game->setFocus();
 			} else {
 				siguiente = true;
-				if( !fGrl->comprobarDirectorio(fGrl->getDirRelative(ui->txtSvm_path->text(), "DosGames"), true) )
+				if( !fGrl->comprobarDirectorio(fGrl->getDirRelative(ui->txtSvm_path_game->text(), "DosGames"), true) )
 				{
 					siguiente = false;
 					QMessageBox::information(this, titulo_ventana(), tr("Debes indicar un directorio que exista") );
-					ui->txtSvm_path->setFocus();
+					ui->txtSvm_path_game->setFocus();
 				} else
 					siguiente = true;
 			}
@@ -179,9 +179,9 @@ void frmAddEditScummVM::cargarDatosScummVM(stConfigScummVM cfgSvm)
 	ui->cbxSvm_render_mode->setCurrentIndex( ui->cbxSvm_render_mode->findData( cfgSvm.render_mode ) );
 	ui->chkSvm_fullscreen->setChecked( fGrl->StrToBool( cfgSvm.fullscreen ) );
 	ui->chkSvm_aspect_ratio->setChecked( fGrl->StrToBool( cfgSvm.aspect_ratio ) );
-	ui->txtSvm_path->setText( cfgSvm.path );
-	ui->txtSvm_extrapath->setText( cfgSvm.path_extra );
-	ui->txtSvm_savepath->setText( cfgSvm.path_save );
+	ui->txtSvm_path_game->setText( cfgSvm.path_game );
+	ui->txtSvm_path_extra->setText( cfgSvm.path_extra );
+	ui->txtSvm_path_save->setText( cfgSvm.path_save );
 	ui->txtSvm_path_capturas->setText( cfgSvm.path_capturas );
 	ui->txtSvm_path_sonido->setText( cfgSvm.path_sonido );
 	ui->cbxSvm_music_driver->setCurrentIndex( ui->cbxSvm_music_driver->findData( cfgSvm.music_driver ) );
@@ -235,9 +235,9 @@ void frmAddEditScummVM::setDatosScummVM()
 	DatosScummVM.render_mode       = str.isEmpty() ? "" : str;
 	DatosScummVM.fullscreen        = fGrl->BoolToStr( ui->chkSvm_fullscreen->isChecked() );
 	DatosScummVM.aspect_ratio      = fGrl->BoolToStr( ui->chkSvm_aspect_ratio->isChecked() );
-	DatosScummVM.path              = ui->txtSvm_path->text();
-	DatosScummVM.path_extra        = ui->txtSvm_extrapath->text();
-	DatosScummVM.path_save         = ui->txtSvm_savepath->text();
+	DatosScummVM.path_game         = ui->txtSvm_path_game->text();
+	DatosScummVM.path_extra        = ui->txtSvm_path_extra->text();
+	DatosScummVM.path_save         = ui->txtSvm_path_save->text();
 	DatosScummVM.path_capturas     = ui->txtSvm_path_capturas->text();
 	DatosScummVM.path_sonido       = ui->txtSvm_path_sonido->text();
 	str = ui->cbxSvm_music_driver->itemData( ui->cbxSvm_music_driver->currentIndex() ).toString();
@@ -289,58 +289,58 @@ void frmAddEditScummVM::on_twScummVM_currentItemChanged(QTreeWidgetItem *current
 		emit on_twScummVM_itemClicked(current, 0);
 }
 
-void frmAddEditScummVM::on_btnSvm_Path_clicked()
+void frmAddEditScummVM::on_btnSvm_PathGame_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path, "DosGames");
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_game, "DosGames");
 
 	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		ui->txtSvm_path->setText( fGrl->setDirRelative(directorio, "DosGames") );
-		grlCfg.Svm_path = ui->txtSvm_path->text();
+		ui->txtSvm_path_game->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.Svm_path_game = ui->txtSvm_path_game->text();
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_game", grlCfg.Svm_path_game);
 	}
 }
 
-void frmAddEditScummVM::on_btnSvm_Path_clear_clicked()
+void frmAddEditScummVM::on_btnSvm_PathGame_clear_clicked()
 {
-	ui->txtSvm_path->clear();
+	ui->txtSvm_path_game->clear();
 }
 
 void frmAddEditScummVM::on_btnSvm_PathSave_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_savepath, "DosGames");
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_save, "DosGames");
 
 	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		ui->txtSvm_savepath->setText( fGrl->setDirRelative(directorio, "DosGames") );
-		grlCfg.Svm_savepath = ui->txtSvm_savepath->text();
+		ui->txtSvm_path_save->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.Svm_path_save = ui->txtSvm_path_save->text();
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_savepath", grlCfg.Svm_savepath);
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_save", grlCfg.Svm_path_save);
 	}
 }
 
 void frmAddEditScummVM::on_btnSvm_PathSave_clear_clicked()
 {
-	ui->txtSvm_savepath->clear();
+	ui->txtSvm_path_save->clear();
 }
 
 void frmAddEditScummVM::on_btnSvm_PathExtra_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_extrapath, "DosGames");
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_extra, "DosGames");
 
 	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		ui->txtSvm_extrapath->setText( fGrl->setDirRelative(directorio, "DosGames") );
-		grlCfg.Svm_extrapath = ui->txtSvm_extrapath->text();
+		ui->txtSvm_path_extra->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.Svm_path_extra = ui->txtSvm_path_extra->text();
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_extrapath", grlCfg.Svm_extrapath);
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_extra", grlCfg.Svm_path_extra);
 	}
 }
 
 void frmAddEditScummVM::on_btnSvm_PathExtra_clear_clicked()
 {
-	 ui->txtSvm_extrapath->clear();
+	 ui->txtSvm_path_extra->clear();
 }
 
 void frmAddEditScummVM::on_btnSvm_PathCapturas_clicked()

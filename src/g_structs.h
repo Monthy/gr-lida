@@ -244,7 +244,7 @@ struct stGrlCfg {
 	QString DatosFiles_PathSetup;
 	QString DatosFiles_PathCapturas;
 // DOSBox
-	QString DirDbx;
+	QString Dbx_path;
 	QString Dbx_path_exe;
 	QString Dbx_path_setup;
 	QString Dbx_gus_ultradir;
@@ -254,10 +254,10 @@ struct stGrlCfg {
 	QString Dbx_path_sonido;
 	QString Montaje_path;
 // ScummVM
-	QString DirSvm;
 	QString Svm_path;
-	QString Svm_savepath;
-	QString Svm_extrapath;
+	QString Svm_path_game;
+	QString Svm_path_save;
+	QString Svm_path_extra;
 	QString Svm_path_capturas;
 	QString Svm_path_sonido;
 	QString Svm_soundfont;
@@ -518,7 +518,7 @@ struct stConfigScummVM {
 	QString render_mode;
 	QString fullscreen;
 	QString aspect_ratio;
-	QString path;
+	QString path_game;
 	QString path_extra;
 	QString path_save;
 	QString path_capturas;

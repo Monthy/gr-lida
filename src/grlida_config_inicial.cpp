@@ -63,9 +63,9 @@ void frmConfigInicial::cargarConfig()
 	emit on_cbxIdioma_activated( idx );
 
 	ui->chkDOSBoxDisp->setChecked( grlCfg.DOSBoxDisp );
-	ui->txtDirDbx->setText( grlCfg.DirDOSBox );
+	ui->txtDbxPath->setText( grlCfg.DirDOSBox );
 	ui->chkScummVMDisp->setChecked( grlCfg.ScummVMDisp );
-	ui->txtDirSvm->setText( grlCfg.DirScummVM );
+	ui->txtSvmPath->setText( grlCfg.DirScummVM );
 
 	ui->chkVDMSoundDisp->setChecked( grlCfg.VDMSoundDisp );
 	ui->chkShowNext->setChecked( grlCfg.Primeravez );
@@ -80,12 +80,12 @@ void frmConfigInicial::cargarConfig()
 void frmConfigInicial::setTheme()
 {
 	ui->btnOk->setIcon( QIcon(fGrl->Theme() +"img16/aplicar.png") );
-	ui->btnDirDbx->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnDirDbx_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
-	ui->btnDirDbx_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnDirSvm->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnDirSvm_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
-	ui->btnDirSvm_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnDbxPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->btnDbxPath_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
+	ui->btnDbxPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnSvmPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->btnSvmPath_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
+	ui->btnSvmPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 
 	if( grlCfg.font_usar )
 		this->setStyleSheet(fGrl->myStyleSheet() +"*{font-family:\""+ grlCfg.font_family +"\";font-size:"+ grlCfg.font_size +"pt;}");
@@ -123,23 +123,23 @@ void frmConfigInicial::on_cbxIdioma_activated(int index)
 	ui->retranslateUi(this);
 }
 
-void frmConfigInicial::on_btnDirDbx_clicked()
+void frmConfigInicial::on_btnDbxPath_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.Dbx_path, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
 
 	if( !archivo.isEmpty() )
 	{
 		stFileInfo f_info = fGrl->getInfoFile( archivo );
 		if( f_info.Exists )
 		{
-			ui->txtDirDbx->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.DirDbx = fGrl->setDirRelative(f_info.Path);
+			ui->txtDbxPath->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Dbx_path = fGrl->setDirRelative(f_info.Path);
 		}
 	}
 
 }
 
-void frmConfigInicial::on_btnDirDbx_find_clicked()
+void frmConfigInicial::on_btnDbxPath_find_clicked()
 {
 #ifdef Q_OS_WIN32
 	QStringList lista_drivers;
@@ -151,37 +151,37 @@ void frmConfigInicial::on_btnDirDbx_find_clicked()
 	bool ok = false;
 	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" DOSBox", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
 	if( ok && !letra_drive.isEmpty() )
-		ui->txtDirDbx->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "dosbox.exe") ) );
+		ui->txtDbxPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "dosbox.exe") ) );
 #else
 	#ifdef Q_OS_MAC
-		ui->txtDirDbx->setText( fGrl->getFindFile("/", "dosbox") );
+		ui->txtDbxPath->setText( fGrl->getFindFile("/", "dosbox") );
 	#else
-		ui->txtDirDbx->setText( fGrl->getFindFile("/usr/bin/", "dosbox") );
+		ui->txtDbxPath->setText( fGrl->getFindFile("/usr/bin/", "dosbox") );
 	#endif
 #endif
 }
 
-void frmConfigInicial::on_btnDirDbx_clear_clicked()
+void frmConfigInicial::on_btnDbxPath_clear_clicked()
 {
-	ui->txtDirDbx->clear();
+	ui->txtDbxPath->clear();
 }
 
-void frmConfigInicial::on_btnDirSvm_clicked()
+void frmConfigInicial::on_btnSvmPath_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.Svm_path, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
 
 	if( !archivo.isEmpty() )
 	{
 		stFileInfo f_info = fGrl->getInfoFile( archivo );
 		if( f_info.Exists )
 		{
-			ui->txtDirSvm->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.DirSvm = fGrl->setDirRelative(f_info.Path);
+			ui->txtSvmPath->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Svm_path = fGrl->setDirRelative(f_info.Path);
 		}
 	}
 }
 
-void frmConfigInicial::on_btnDirSvm_find_clicked()
+void frmConfigInicial::on_btnSvmPath_find_clicked()
 {
 #ifdef Q_OS_WIN32
 	QStringList lista_drivers;
@@ -193,27 +193,27 @@ void frmConfigInicial::on_btnDirSvm_find_clicked()
 	bool ok = false;
 	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" ScummVM", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
 	if( ok && !letra_drive.isEmpty() )
-		ui->txtDirSvm->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "scummvm.exe") ) );
+		ui->txtSvmPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "scummvm.exe") ) );
 #else
 	#ifdef Q_OS_MAC
-		ui->txtDirSvm->setText( fGrl->getFindFile("/", "scummvm") );
+		ui->txtSvmPath->setText( fGrl->getFindFile("/", "scummvm") );
 	#else
-		ui->txtDirSvm->setText( fGrl->getFindFile("/usr/games/", "scummvm") );
+		ui->txtSvmPath->setText( fGrl->getFindFile("/usr/games/", "scummvm") );
 	#endif
 #endif
 }
 
-void frmConfigInicial::on_btnDirSvm_clear_clicked()
+void frmConfigInicial::on_btnSvmPath_clear_clicked()
 {
-	ui->txtDirSvm->clear();
+	ui->txtSvmPath->clear();
 }
 
 void frmConfigInicial::on_btnOk_clicked()
 {
 	grlCfg.DOSBoxDisp   = ui->chkDOSBoxDisp->isChecked();
-	grlCfg.DirDOSBox    = ui->txtDirDbx->text();
+	grlCfg.DirDOSBox    = ui->txtDbxPath->text();
 	grlCfg.ScummVMDisp  = ui->chkScummVMDisp->isChecked();
-	grlCfg.DirScummVM   = ui->txtDirSvm->text();
+	grlCfg.DirScummVM   = ui->txtSvmPath->text();
 	grlCfg.VDMSoundDisp = ui->chkVDMSoundDisp->isChecked();
 	grlCfg.Primeravez   = ui->chkShowNext->isChecked();
 

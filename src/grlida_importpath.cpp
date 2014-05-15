@@ -91,8 +91,8 @@ void frmImportPath::setTheme()
 	ui->btnDbx_musica->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
 	ui->btnDbx_musica_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 //-- ScummVM
-	ui->btnSvm_Path->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
-	ui->btnSvm_Path_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnSvm_PathGame->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
+	ui->btnSvm_PathGame_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnSvm_PathSave->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
 	ui->btnSvm_PathSave_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnSvm_PathExtra->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
@@ -299,34 +299,34 @@ void frmImportPath::on_btnDbx_musica_clear_clicked()
 }
 
 //-- ScummVM
-void frmImportPath::on_btnSvm_Path_clicked()
+void frmImportPath::on_btnSvm_PathGame_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path, "DosGames");
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_game, "DosGames");
 
 	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
-		ui->txtSvm_path->setText( fGrl->setDirRelative(directorio, "DosGames") );
-		grlCfg.Svm_path = ui->txtSvm_path->text();
+		ui->txtSvm_path_game->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		grlCfg.Svm_path_game = ui->txtSvm_path_game->text();
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_game", grlCfg.Svm_path_game);
 	}
 }
 
-void frmImportPath::on_btnSvm_Path_clear_clicked()
+void frmImportPath::on_btnSvm_PathGame_clear_clicked()
 {
-	ui->txtSvm_path->clear();
+	ui->txtSvm_path_game->clear();
 }
 
 void frmImportPath::on_btnSvm_PathSave_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_savepath, "DosGames");
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_save, "DosGames");
 
 	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
 		ui->txtSvm_path_save->setText( fGrl->setDirRelative(directorio, "DosGames") );
-		grlCfg.Svm_savepath = ui->txtSvm_path_save->text();
+		grlCfg.Svm_path_save = ui->txtSvm_path_save->text();
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_savepath", grlCfg.Svm_savepath);
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_save", grlCfg.Svm_path_save);
 	}
 }
 
@@ -337,14 +337,14 @@ void frmImportPath::on_btnSvm_PathSave_clear_clicked()
 
 void frmImportPath::on_btnSvm_PathExtra_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_extrapath, "DosGames");
+	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_extra, "DosGames");
 
 	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
 	{
 		ui->txtSvm_path_extra->setText( fGrl->setDirRelative(directorio, "DosGames") );
-		grlCfg.Svm_extrapath = ui->txtSvm_path_extra->text();
+		grlCfg.Svm_path_extra = ui->txtSvm_path_extra->text();
 
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_extrapath", grlCfg.Svm_extrapath);
+		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_extra", grlCfg.Svm_path_extra);
 	}
 }
 

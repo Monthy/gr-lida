@@ -507,6 +507,7 @@ QString frmImportarJuego::leerArchivoHTML(QString file_html)
 	else {
 		text_html.replace("&#x27;","'");
 		text_html.replace("&#x26;","&");
+		text_html.replace("&amp;","&");
 	//	text_html.replace("&#xE9;","Ã©");
 	//	text_html.replace("&#xE0;","Ã ");
 		text_html.replace("&#039;","'");
@@ -799,7 +800,7 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 // ScummVM -------------------
 	if( TipoEmu == "scummvm" && !isSoloDatos )
 	{
-		datos["Svm_path"]          = ImportPathNew->ui->txtSvm_path->text();
+		datos["Svm_path_game"]     = ImportPathNew->ui->txtSvm_path_game->text();
 		datos["Svm_path_save"]     = ImportPathNew->ui->txtSvm_path_save->text();
 		datos["Svm_path_extra"]    = ImportPathNew->ui->txtSvm_path_extra->text();
 		datos["Svm_path_capturas"] = ImportPathNew->ui->txtSvm_path_capturas->text();
@@ -814,7 +815,7 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 		DatosScummVM.render_mode     = ""+ datos["Svm_render_mode"];
 		DatosScummVM.fullscreen      = ""+ datos["Svm_fullscreen"];
 		DatosScummVM.aspect_ratio    = ""+ datos["Svm_aspect_ratio"];
-		DatosScummVM.path            = ""+ datos["Svm_path"];
+		DatosScummVM.path_game       = ""+ datos["Svm_path_game"];
 		DatosScummVM.path_extra      = ""+ datos["Svm_path_extra"];
 		DatosScummVM.path_save       = ""+ datos["Svm_path_save"];
 		DatosScummVM.path_capturas   = ""+ datos["Svm_path_capturas"];
@@ -948,7 +949,7 @@ void frmImportarJuego::on_btnOk_clicked()
 		ImportPathNew->ui->tabDatConf->setTabEnabled(tabScummVM , true );
 		ImportPathNew->ui->tabDatConf->setTabEnabled(tabVDMSound, false);
 
-		ImportPathNew->ui->txtSvm_path->setText( fGrl->setDirRelative(datosImportar["Svm_path"], "DosGames") );
+		ImportPathNew->ui->txtSvm_path_game->setText( fGrl->setDirRelative(datosImportar["Svm_path_game"], "DosGames") );
 		ImportPathNew->ui->txtSvm_path_save->setText( fGrl->setDirRelative(datosImportar["Svm_path_save"], "DosGames") );
 		ImportPathNew->ui->txtSvm_path_extra->setText( fGrl->setDirRelative(datosImportar["Svm_path_extra"], "DosGames") );
 		ImportPathNew->ui->txtSvm_path_capturas->setText( datosImportar["Svm_path_capturas"] );

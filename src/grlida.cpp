@@ -1908,7 +1908,7 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 			cfgExec.f_param       = "-c"+ grlDir.Temp +"scummvm.ini|-d"+ conf_scummvm.debuglevel +"|"+ conf_scummvm.game_label;
 			cfgExec.f_exe_setup   = "";
 			cfgExec.f_param_setup = "";
-			cfgExec.f_path        = fGrl->getDirRelative(conf_scummvm.path, "DosGames");
+			cfgExec.f_path        = fGrl->getDirRelative(conf_scummvm.path_game, "DosGames");
 			cfgExec.f_path_setup  = "";
 
 			if( cfgExec.f_exe.isEmpty() || cfgExec.f_path.isEmpty() || !QFile::exists( cfgExec.f_path ) )

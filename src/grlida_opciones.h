@@ -86,13 +86,13 @@ private slots:
 // General
 	void on_cbxIdioma_activated(int index);
 	void on_chkDOSBoxDisp_toggled(bool checked);
-	void on_btnDirDbx_clicked();
-	void on_btnDirDbx_find_clicked();
-	void on_btnDirDbx_clear_clicked();
+	void on_btnDbxPath_clicked();
+	void on_btnDbxPath_find_clicked();
+	void on_btnDbxPath_clear_clicked();
 	void on_chkScummVMDisp_toggled(bool checked);
-	void on_btnDirSvm_clicked();
-	void on_btnDirSvm_find_clicked();
-	void on_btnDirSvm_clear_clicked();
+	void on_btnSvmPath_clicked();
+	void on_btnSvmPath_find_clicked();
+	void on_btnSvmPath_clear_clicked();
 	void on_btnDirBaseGames_clicked();
 	void on_btnDirBaseGames_clear_clicked();
 	void on_btnOpenUrl_clicked();

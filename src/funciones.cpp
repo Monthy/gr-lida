@@ -979,7 +979,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.DatosFiles_PathSetup    = QDir::toNativeSeparators(settings.value("DatosFiles_PathSetup"   , "").toString());
 		config.DatosFiles_PathCapturas = QDir::toNativeSeparators(settings.value("DatosFiles_PathCapturas", "").toString());
 	// DOSBox
-		config.DirDbx              = QDir::toNativeSeparators(settings.value("DirDbx"             , "").toString());
+		config.Dbx_path            = QDir::toNativeSeparators(settings.value("Dbx_path"           , "").toString());
 		config.Dbx_path_exe        = QDir::toNativeSeparators(settings.value("Dbx_path_exe"       , "").toString());
 		config.Dbx_path_setup      = QDir::toNativeSeparators(settings.value("Dbx_path_setup"     , "").toString());
 		config.Dbx_gus_ultradir    = QDir::toNativeSeparators(settings.value("Dbx_gus_ultradir"   , "").toString());
@@ -989,10 +989,10 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.Dbx_path_sonido     = QDir::toNativeSeparators(settings.value("Dbx_path_sonido"    , "").toString());
 		config.Montaje_path        = QDir::toNativeSeparators(settings.value("Montaje_path"       , "").toString());
 	// ScummVM
-		config.DirSvm            = QDir::toNativeSeparators(settings.value("DirSvm"           , "").toString());
 		config.Svm_path          = QDir::toNativeSeparators(settings.value("Svm_path"         , "").toString());
-		config.Svm_savepath      = QDir::toNativeSeparators(settings.value("Svm_savepath"     , "").toString());
-		config.Svm_extrapath     = QDir::toNativeSeparators(settings.value("Svm_extrapath"    , "").toString());
+		config.Svm_path_game     = QDir::toNativeSeparators(settings.value("Svm_path_game"    , "").toString());
+		config.Svm_path_save     = QDir::toNativeSeparators(settings.value("Svm_path_save"    , "").toString());
+		config.Svm_path_extra    = QDir::toNativeSeparators(settings.value("Svm_path_extra"   , "").toString());
 		config.Svm_path_capturas = QDir::toNativeSeparators(settings.value("Svm_path_capturas", "").toString());
 		config.Svm_path_sonido   = QDir::toNativeSeparators(settings.value("Svm_path_sonido"  , "").toString());
 		config.Svm_soundfont     = QDir::toNativeSeparators(settings.value("Svm_soundfont"    , "").toString());
@@ -1158,7 +1158,7 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 		settings.setValue("DatosFiles_PathSetup"   , config.DatosFiles_PathSetup    );
 		settings.setValue("DatosFiles_PathCapturas", config.DatosFiles_PathCapturas );
 	// DOSBox
-		settings.setValue("DirDbx"             , config.DirDbx              );
+		settings.setValue("Dbx_path"           , config.Dbx_path            );
 		settings.setValue("Dbx_path_exe"       , config.Dbx_path_exe        );
 		settings.setValue("Dbx_path_setup"     , config.Dbx_path_setup      );
 		settings.setValue("Dbx_gus_ultradir"   , config.Dbx_gus_ultradir    );
@@ -1168,10 +1168,10 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 		settings.setValue("Dbx_path_sonido"    , config.Dbx_path_sonido     );
 		settings.setValue("Montaje_path"       , config.Montaje_path        );
 	// ScummVM
-		settings.setValue("DirSvm"           , config.DirSvm            );
 		settings.setValue("Svm_path"         , config.Svm_path          );
-		settings.setValue("Svm_savepath"     , config.Svm_savepath      );
-		settings.setValue("Svm_extrapath"    , config.Svm_extrapath     );
+		settings.setValue("Svm_path_game"    , config.Svm_path_game     );
+		settings.setValue("Svm_path_save"    , config.Svm_path_save     );
+		settings.setValue("Svm_path_extra"   , config.Svm_path_extra    );
 		settings.setValue("Svm_path_capturas", config.Svm_path_capturas );
 		settings.setValue("Svm_path_sonido"  , config.Svm_path_sonido   );
 		settings.setValue("Svm_soundfont"    , config.Svm_soundfont     );
@@ -2101,7 +2101,7 @@ stConfigScummVM Funciones::getDefectScummVM(QHash<QString, QString> dato)
 	datos.render_mode       = isQHash ? dato["Svm_render_mode"]       : "";
 	datos.fullscreen        = isQHash ? dato["Svm_fullscreen"]        : "false";
 	datos.aspect_ratio      = isQHash ? dato["Svm_aspect_ratio"]      : "false";
-	datos.path              = isQHash ? dato["Svm_path"]              : "";
+	datos.path_game         = isQHash ? dato["Svm_path_game"]         : "";
 	datos.path_extra        = isQHash ? dato["Svm_path_extra"]        : "";
 	datos.path_save         = isQHash ? dato["Svm_path_save"]         : "";
 	datos.path_capturas     = isQHash ? dato["Svm_path_capturas"]     : "";
@@ -2997,7 +2997,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Svm_render_mode}"      , cfgSvm.render_mode    );
 		cfg_out.replace("{Svm_fullscreen}"       , cfgSvm.fullscreen     );
 		cfg_out.replace("{Svm_aspect_ratio}"     , cfgSvm.aspect_ratio   );
-		cfg_out.replace("{Svm_path}"             , cfgSvm.path           );
+		cfg_out.replace("{Svm_path_game}"        , cfgSvm.path_game      );
 		cfg_out.replace("{Svm_path_extra}"       , cfgSvm.path_extra     );
 		cfg_out.replace("{Svm_path_save}"        , cfgSvm.path_save      );
 		cfg_out.replace("{Svm_path_capturas}"    , cfgSvm.path_capturas  );
@@ -3080,7 +3080,7 @@ void Funciones::creaIniScummVM(stConfigScummVM cfgSvm, QString archivo)
 		out << "render_mode"     << "=" << cfgSvm.render_mode     << endl;
 		out << "fullscreen"      << "=" << cfgSvm.fullscreen      << endl;
 		out << "aspect_ratio"    << "=" << cfgSvm.aspect_ratio    << endl;
-		out << "path"            << "=" << getDirRelative(cfgSvm.path, "DosGames") << endl;
+		out << "path"            << "=" << getDirRelative(cfgSvm.path_game, "DosGames") << endl;
 		out << "extrapath"       << "=" << cfgSvm.path_extra      << endl;
 		out << "savepath"        << "=" << getDirRelative(cfgSvm.path_save, "DosGames") << endl;
 		out << "music_driver"    << "=" << cfgSvm.music_driver    << endl;
@@ -3447,7 +3447,7 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 		cfgDFend["Svm_render_mode"]       = settings.value("render_mode", "").toString();
 		cfgDFend["Svm_fullscreen"]        = BoolToStr( settings.value("fullscreen", false).toBool() );
 		cfgDFend["Svm_aspect_ratio"]      = BoolToStr( settings.value("aspect_ratio", true).toBool() );
-		cfgDFend["Svm_path"]              = settings.value("GamePath", "").toString();
+		cfgDFend["Svm_path_game"]         = settings.value("GamePath", "").toString();
 		cfgDFend["Svm_path_extra"]        = settings.value("path_extra", "").toString();
 		cfgDFend["Svm_path_save"]         = settings.value("Savepath", "").toString();
 		cfgDFend["Svm_path_capturas"]     = settings.value("path_capturas", "").toString();

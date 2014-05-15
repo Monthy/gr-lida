@@ -77,10 +77,10 @@ void frmOpciones::closeEvent(QCloseEvent *event)
 
 void frmOpciones::createWidgets()
 {
-	cbxCat_EmuShow = new QCheckComboBox(ui->groupBox_1);
+	cbxCat_EmuShow = new QCheckComboBox(ui->gBox_categorias);
 	cbxCat_EmuShow->setMinimumHeight(24);
 
-	ui->gridLayout_1->addWidget(cbxCat_EmuShow, 2, 1, 1, 1);
+	ui->gridLayout_categorias->addWidget(cbxCat_EmuShow, 2, 1, 1, 1);
 }
 
 void frmOpciones::cargarConfig()
@@ -94,18 +94,18 @@ void frmOpciones::cargarConfig()
 
 // DOSBox ----------------------------
 	ui->chkDOSBoxDisp->setChecked( grlCfg.DOSBoxDisp );
-	ui->txtDirDbx->setText( grlCfg.DirDOSBox );
+	ui->txtDbxPath->setText( grlCfg.DirDOSBox );
 
-	ui->cbxVersionDbx->clear();
-	ui->cbxVersionDbx->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.72", "0.72");
-	ui->cbxVersionDbx->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.73", "0.73");
-	ui->cbxVersionDbx->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.74", "0.74");
-	ui->cbxVersionDbx->setCurrentIndex( ui->cbxVersionDbx->findData( grlCfg.VersionDBx ) );
+	ui->cbxDbxVersion->clear();
+	ui->cbxDbxVersion->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.72", "0.72");
+	ui->cbxDbxVersion->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.73", "0.73");
+	ui->cbxDbxVersion->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.74", "0.74");
+	ui->cbxDbxVersion->setCurrentIndex( ui->cbxDbxVersion->findData( grlCfg.VersionDBx ) );
 	ui->chkDbxSVN->setChecked( grlCfg.DOSBoxSVN );
 
 // ScummVM ---------------------------
 	ui->chkScummVMDisp->setChecked( grlCfg.ScummVMDisp );
-	ui->txtDirSvm->setText( grlCfg.DirScummVM );
+	ui->txtSvmPath->setText( grlCfg.DirScummVM );
 
 // VDMSound --------------------------
 	ui->chkVDMSoundDisp->setChecked( grlCfg.VDMSoundDisp );
@@ -251,8 +251,8 @@ void frmOpciones::guardarConfig()
 	grlCfg.db_port     = ui->txt_dbport->text();
 // OpcGeneral
 	grlCfg.Primeravez      = ui->chkShowNext->isChecked();
-	grlCfg.DirDOSBox       = ui->txtDirDbx->text();
-	grlCfg.DirScummVM      = ui->txtDirSvm->text();
+	grlCfg.DirDOSBox       = ui->txtDbxPath->text();
+	grlCfg.DirScummVM      = ui->txtSvmPath->text();
 	grlCfg.DirBaseGames    = ui->txtDirBaseGames->text();
 	grlCfg.DOSBoxDisp      = ui->chkDOSBoxDisp->isChecked();
 	grlCfg.ScummVMDisp     = ui->chkScummVMDisp->isChecked();
@@ -275,7 +275,7 @@ void frmOpciones::guardarConfig()
 	grlCfg.PicFlowShowTriangle = ui->chkPicFlowShowTriangle->isChecked();
 	grlCfg.PicFlowMinHeight    = ui->spinBox_MinHeightPicFlow->value();
 	grlCfg.Skip_PicFlow        = ui->spinBox_SkipPicFlow->value();
-	grlCfg.VersionDBx          = ui->cbxVersionDbx->itemData(ui->cbxVersionDbx->currentIndex()).toString();
+	grlCfg.VersionDBx          = ui->cbxDbxVersion->itemData(ui->cbxDbxVersion->currentIndex()).toString();
 	grlCfg.DOSBoxSVN           = ui->chkDbxSVN->isChecked();
 	grlCfg.LastTabOptSelect    = ui->lwOpciones->currentRow();
 // OpcFuente
@@ -316,10 +316,10 @@ void frmOpciones::setTheme()
 	ui->lwOpciones->item(6)->setIcon( QIcon(fGrl->Theme() +"img24/html.png") );
 	ui->lwOpciones->item(7)->setIcon( QIcon(fGrl->Theme() +"img24/ejecutar_app_setup.png") );
 
-	ui->btnDirDbx->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnDirDbx_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnDirSvm->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnDirSvm_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnDbxPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->btnDbxPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnSvmPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->btnSvmPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnDirBaseGames->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
 	ui->btnDirBaseGames_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnOpenUrl->setIcon( QIcon(fGrl->Theme() +"img16/edit_enlace.png") );
@@ -595,29 +595,29 @@ void frmOpciones::on_cbxIdioma_activated(int index)
 
 void frmOpciones::on_chkDOSBoxDisp_toggled(bool checked)
 {
-	ui->txtDirDbx->setEnabled( checked );
-	ui->btnDirDbx->setEnabled( checked );
-	ui->btnDirDbx_clear->setEnabled( checked );
+	ui->txtDbxPath->setEnabled( checked );
+	ui->btnDbxPath->setEnabled( checked );
+	ui->btnDbxPath_clear->setEnabled( checked );
 }
 
-void frmOpciones::on_btnDirDbx_clicked()
+void frmOpciones::on_btnDbxPath_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.DirDbx, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.Dbx_path, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
 
 	if( !archivo.isEmpty() )
 	{
 		stFileInfo f_info = fGrl->getInfoFile( archivo );
 		if( f_info.Exists )
 		{
-			ui->txtDirDbx->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.DirDbx = fGrl->setDirRelative(f_info.Path);
+			ui->txtDbxPath->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Dbx_path = fGrl->setDirRelative(f_info.Path);
 
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirDbx", grlCfg.DirDbx);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path", grlCfg.Dbx_path);
 		}
 	}
 }
 
-void frmOpciones::on_btnDirDbx_find_clicked()
+void frmOpciones::on_btnDbxPath_find_clicked()
 {
 #ifdef Q_OS_WIN32
 	QStringList lista_drivers;
@@ -629,46 +629,46 @@ void frmOpciones::on_btnDirDbx_find_clicked()
 	bool ok = false;
 	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" DOSBox", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
 	if( ok && !letra_drive.isEmpty() )
-		ui->txtDirDbx->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "dosbox.exe") ) );
+		ui->txtDbxPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "dosbox.exe") ) );
 #else
 	#ifdef Q_OS_MAC
-		ui->txtDirDbx->setText( fGrl->getFindFile("/", "dosbox") );
+		ui->txtDbxPath->setText( fGrl->getFindFile("/", "dosbox") );
 	#else
-		ui->txtDirDbx->setText( fGrl->getFindFile("/usr/bin/", "dosbox") );
+		ui->txtDbxPath->setText( fGrl->getFindFile("/usr/bin/", "dosbox") );
 	#endif
 #endif
 }
 
-void frmOpciones::on_btnDirDbx_clear_clicked()
+void frmOpciones::on_btnDbxPath_clear_clicked()
 {
-	ui->txtDirDbx->clear();
+	ui->txtDbxPath->clear();
 }
 
 void frmOpciones::on_chkScummVMDisp_toggled(bool checked)
 {
-	ui->txtDirSvm->setEnabled( checked );
-	ui->btnDirSvm->setEnabled( checked );
-	ui->btnDirSvm_clear->setEnabled( checked );
+	ui->txtSvmPath->setEnabled( checked );
+	ui->btnSvmPath->setEnabled( checked );
+	ui->btnSvmPath_clear->setEnabled( checked );
 }
 
-void frmOpciones::on_btnDirSvm_clicked()
+void frmOpciones::on_btnSvmPath_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.DirSvm, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.Svm_path, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
 
 	if( !archivo.isEmpty() )
 	{
 		stFileInfo f_info = fGrl->getInfoFile( archivo );
 		if( f_info.Exists )
 		{
-			ui->txtDirSvm->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.DirSvm = fGrl->setDirRelative(f_info.Path);
+			ui->txtSvmPath->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Svm_path = fGrl->setDirRelative(f_info.Path);
 
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirSvm", grlCfg.DirSvm);
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
 		}
 	}
 }
 
-void frmOpciones::on_btnDirSvm_find_clicked()
+void frmOpciones::on_btnSvmPath_find_clicked()
 {
 #ifdef Q_OS_WIN32
 	QStringList lista_drivers;
@@ -680,19 +680,19 @@ void frmOpciones::on_btnDirSvm_find_clicked()
 	bool ok = false;
 	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" ScummVM", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
 	if( ok && !letra_drive.isEmpty() )
-		ui->txtDirSvm->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "scummvm.exe") ) );
+		ui->txtSvmPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "scummvm.exe") ) );
 #else
 	#ifdef Q_OS_MAC
-		ui->txtDirSvm->setText( fGrl->getFindFile("/", "scummvm") );
+		ui->txtSvmPath->setText( fGrl->getFindFile("/", "scummvm") );
 	#else
-		ui->txtDirSvm->setText( fGrl->getFindFile("/usr/games/", "scummvm") );
+		ui->txtSvmPath->setText( fGrl->getFindFile("/usr/games/", "scummvm") );
 	#endif
 #endif
 }
 
-void frmOpciones::on_btnDirSvm_clear_clicked()
+void frmOpciones::on_btnSvmPath_clear_clicked()
 {
-	ui->txtDirSvm->clear();
+	ui->txtSvmPath->clear();
 }
 
 void frmOpciones::on_btnDirBaseGames_clicked()

@@ -80,8 +80,8 @@ private slots:
 	void on_btnDbx_musica_clicked();
 	void on_btnDbx_musica_clear_clicked();
 //-- ScummVM
-	void on_btnSvm_Path_clicked();
-	void on_btnSvm_Path_clear_clicked();
+	void on_btnSvm_PathGame_clicked();
+	void on_btnSvm_PathGame_clear_clicked();
 	void on_btnSvm_PathSave_clicked();
 	void on_btnSvm_PathSave_clear_clicked();
 	void on_btnSvm_PathExtra_clicked();

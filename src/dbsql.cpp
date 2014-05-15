@@ -1481,7 +1481,7 @@ stConfigScummVM dbSql::showConfg_ScummVM(QString IDgrl, QString IDcat)
 			cfgSvm.render_mode       = query.record().value("render_mode").toString();
 			cfgSvm.fullscreen        = query.record().value("fullscreen").toString();
 			cfgSvm.aspect_ratio      = query.record().value("aspect_ratio").toString();
-			cfgSvm.path              = query.record().value("path").toString();
+			cfgSvm.path_game         = query.record().value("path").toString();
 			cfgSvm.path_extra        = query.record().value("path_extra").toString();
 			cfgSvm.path_save         = query.record().value("path_save").toString();
 			cfgSvm.path_capturas     = query.record().value("path_capturas").toString();
@@ -1533,7 +1533,7 @@ QString dbSql::insertaSvm(stConfigScummVM cfgSvm)
 			"master_volume, music_volume, sfx_volume, speech_volume, speech_mute, tempo, talkspeed, debuglevel, cdrom, joystick_num, "
 			"output_rate, midi_gain, copy_protection, sound_font, walkspeed, opl_driver, disable_dithering, alt_intro, boot_param"
 		") VALUES ("
-			":idgrl, :idcat, :game, :game_label, :language, :subtitles, :platform, :gfx_mode, :render_mode, :fullscreen, :aspect_ratio, :path, "
+			":idgrl, :idcat, :game, :game_label, :language, :subtitles, :platform, :gfx_mode, :render_mode, :fullscreen, :aspect_ratio, :path_game, "
 			":path_extra, :path_save, :path_capturas, :path_sonido, :music_driver, :enable_gs, :multi_midi, :native_mt32, :mute, "
 			":master_volume, :music_volume, :sfx_volume, :speech_volume, :speech_mute, :tempo, :talkspeed, :debuglevel, :cdrom, :joystick_num, "
 			":output_rate, :midi_gain, :copy_protection, :sound_font, :walkspeed, :opl_driver, :disable_dithering, :alt_intro, :boot_param"
@@ -1551,7 +1551,7 @@ QString dbSql::insertaSvm(stConfigScummVM cfgSvm)
 	query.bindValue(":render_mode"      , cfgSvm.render_mode       );
 	query.bindValue(":fullscreen"       , cfgSvm.fullscreen        );
 	query.bindValue(":aspect_ratio"     , cfgSvm.aspect_ratio      );
-	query.bindValue(":path"             , cfgSvm.path              );
+	query.bindValue(":path_game"        , cfgSvm.path_game         );
 	query.bindValue(":path_extra"       , cfgSvm.path_extra        );
 	query.bindValue(":path_save"        , cfgSvm.path_save         );
 	query.bindValue(":path_capturas"    , cfgSvm.path_capturas     );
@@ -1593,7 +1593,7 @@ bool dbSql::actualizaSvm(stConfigScummVM cfgSvm)
 	QSqlQuery query(sqldb);
 	QString strSQL = "UPDATE dbgrl_emu_scummvm SET "
 		"game = :game, game_label = :game_label, language = :language, subtitles = :subtitles, platform = :platform, gfx_mode = :gfx_mode, "
-		"render_mode = :render_mode, fullscreen = :fullscreen, aspect_ratio = :aspect_ratio, path = :path, "
+		"render_mode = :render_mode, fullscreen = :fullscreen, aspect_ratio = :aspect_ratio, path = :path_game, "
 		"path_extra = :path_extra, path_save = :path_save, path_capturas = :path_capturas, path_sonido = :path_sonido, music_driver = :music_driver, "
 		"enable_gs = :enable_gs, multi_midi = :multi_midi, native_mt32 = :native_mt32, mute = :mute, master_volume = :master_volume, "
 		"music_volume = :music_volume, sfx_volume = :sfx_volume, speech_volume = :speech_volume, speech_mute = :speech_mute, tempo = :tempo, "
@@ -1614,7 +1614,7 @@ bool dbSql::actualizaSvm(stConfigScummVM cfgSvm)
 	query.bindValue(":render_mode"      , cfgSvm.render_mode       );
 	query.bindValue(":fullscreen"       , cfgSvm.fullscreen        );
 	query.bindValue(":aspect_ratio"     , cfgSvm.aspect_ratio      );
-	query.bindValue(":path"             , cfgSvm.path              );
+	query.bindValue(":path_game"        , cfgSvm.path_game         );
 	query.bindValue(":path_extra"       , cfgSvm.path_extra        );
 	query.bindValue(":path_save"        , cfgSvm.path_save         );
 	query.bindValue(":path_capturas"    , cfgSvm.path_capturas     );

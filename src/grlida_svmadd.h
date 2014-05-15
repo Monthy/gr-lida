@@ -76,8 +76,8 @@ private slots:
 	void on_twScummVM_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twScummVM_itemDoubleClicked(QTreeWidgetItem *item, int column);
 	void on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-	void on_btnSvm_Path_clicked();
-	void on_btnSvm_Path_clear_clicked();
+	void on_btnSvm_PathGame_clicked();
+	void on_btnSvm_PathGame_clear_clicked();
 	void on_btnSvm_PathSave_clicked();
 	void on_btnSvm_PathSave_clear_clicked();
 	void on_btnDescargarInfo_clicked();
