@@ -197,7 +197,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="txtDirDbx">
+                <widget class="QLineEdit" name="txtDbxPath">
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -207,7 +207,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btnDirDbx">
+                <widget class="QPushButton" name="btnDbxPath">
                  <property name="minimumSize">
                   <size>
                    <width>30</width>
@@ -230,7 +230,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btnDirDbx_find">
+                <widget class="QPushButton" name="btnDbxPath_find">
                  <property name="minimumSize">
                   <size>
                    <width>30</width>
@@ -253,7 +253,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btnDirDbx_clear">
+                <widget class="QPushButton" name="btnDbxPath_clear">
                  <property name="minimumSize">
                   <size>
                    <width>30</width>
@@ -316,7 +316,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="txtDirSvm">
+                <widget class="QLineEdit" name="txtSvmPath">
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -326,7 +326,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btnDirSvm">
+                <widget class="QPushButton" name="btnSvmPath">
                  <property name="minimumSize">
                   <size>
                    <width>30</width>
@@ -349,7 +349,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btnDirSvm_find">
+                <widget class="QPushButton" name="btnSvmPath_find">
                  <property name="minimumSize">
                   <size>
                    <width>30</width>
@@ -372,7 +372,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btnDirSvm_clear">
+                <widget class="QPushButton" name="btnSvmPath_clear">
                  <property name="minimumSize">
                   <size>
                    <width>30</width>
@@ -696,7 +696,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="cbxVersionDbx">
+               <widget class="QComboBox" name="cbxDbxVersion">
                 <property name="minimumSize">
                  <size>
                   <width>80</width>
@@ -731,11 +731,11 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QGroupBox" name="groupBox_1">
+          <widget class="QGroupBox" name="gBox_categorias">
            <property name="title">
             <string>Añadir, editar o eliminar categorías</string>
            </property>
-           <layout class="QGridLayout" name="gridLayout_1">
+           <layout class="QGridLayout" name="gridLayout_categorias">
             <property name="verticalSpacing">
              <number>4</number>
             </property>
@@ -3190,18 +3190,18 @@
  <tabstops>
   <tabstop>lwOpciones</tabstop>
   <tabstop>cbxIdioma</tabstop>
-  <tabstop>cbxVersionDbx</tabstop>
+  <tabstop>cbxDbxVersion</tabstop>
   <tabstop>chkDbxSVN</tabstop>
   <tabstop>chkDOSBoxDisp</tabstop>
-  <tabstop>btnDirDbx_find</tabstop>
-  <tabstop>btnDirDbx</tabstop>
-  <tabstop>txtDirDbx</tabstop>
-  <tabstop>btnDirDbx_clear</tabstop>
+  <tabstop>btnDbxPath_find</tabstop>
+  <tabstop>btnDbxPath</tabstop>
+  <tabstop>txtDbxPath</tabstop>
+  <tabstop>btnDbxPath_clear</tabstop>
   <tabstop>chkScummVMDisp</tabstop>
-  <tabstop>btnDirSvm_find</tabstop>
-  <tabstop>btnDirSvm</tabstop>
-  <tabstop>txtDirSvm</tabstop>
-  <tabstop>btnDirSvm_clear</tabstop>
+  <tabstop>btnSvmPath_find</tabstop>
+  <tabstop>btnSvmPath</tabstop>
+  <tabstop>txtSvmPath</tabstop>
+  <tabstop>btnSvmPath_clear</tabstop>
   <tabstop>chkVDMSoundDisp</tabstop>
   <tabstop>btnDirBaseGames</tabstop>
   <tabstop>txtDirBaseGames</tabstop>

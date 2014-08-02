@@ -770,12 +770,12 @@
           </size>
          </property>
          <property name="text">
-          <string>path</string>
+          <string>path_game</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="txtSvm_path">
+        <widget class="QLineEdit" name="txtSvm_path_game">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -785,7 +785,7 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QPushButton" name="btnSvm_Path">
+        <widget class="QPushButton" name="btnSvm_PathGame">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -808,7 +808,7 @@
         </widget>
        </item>
        <item row="0" column="3">
-        <widget class="QPushButton" name="btnSvm_Path_clear">
+        <widget class="QPushButton" name="btnSvm_PathGame_clear">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -1388,9 +1388,9 @@
   <tabstop>btnDbx_musica</tabstop>
   <tabstop>txtDbx_path_sonido</tabstop>
   <tabstop>btnDbx_musica_clear</tabstop>
-  <tabstop>btnSvm_Path</tabstop>
-  <tabstop>txtSvm_path</tabstop>
-  <tabstop>btnSvm_Path_clear</tabstop>
+  <tabstop>btnSvm_PathGame</tabstop>
+  <tabstop>txtSvm_path_game</tabstop>
+  <tabstop>btnSvm_PathGame_clear</tabstop>
   <tabstop>btnSvm_PathSave</tabstop>
   <tabstop>txtSvm_path_save</tabstop>
   <tabstop>btnSvm_PathSave_clear</tabstop>
@@ -1413,6 +1413,7 @@
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/gr-lida.qrc"/>
   <include location="../res/gr-lida.qrc"/>
  </resources>
  <connections/>

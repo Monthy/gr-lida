@@ -28,7 +28,16 @@
     <property name="spacing">
      <number>4</number>
     </property>
-    <property name="margin">
+    <property name="leftMargin">
+     <number>4</number>
+    </property>
+    <property name="topMargin">
+     <number>4</number>
+    </property>
+    <property name="rightMargin">
+     <number>4</number>
+    </property>
+    <property name="bottomMargin">
      <number>4</number>
     </property>
     <item>
@@ -91,7 +100,16 @@
     <property name="spacing">
      <number>4</number>
     </property>
-    <property name="margin">
+    <property name="leftMargin">
+     <number>4</number>
+    </property>
+    <property name="topMargin">
+     <number>4</number>
+    </property>
+    <property name="rightMargin">
+     <number>4</number>
+    </property>
+    <property name="bottomMargin">
      <number>4</number>
     </property>
     <item>
@@ -100,14 +118,23 @@
        <string>Opciones generales</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
+        <number>4</number>
+       </property>
        <property name="verticalSpacing">
         <number>4</number>
        </property>
-       <property name="margin">
-        <number>4</number>
-       </property>
        <item row="1" column="7">
-        <widget class="QPushButton" name="btnSvm_Path_clear">
+        <widget class="QPushButton" name="btnSvm_PathGame_clear">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -127,7 +154,7 @@
         </widget>
        </item>
        <item row="1" column="6">
-        <widget class="QPushButton" name="btnSvm_Path">
+        <widget class="QPushButton" name="btnSvm_PathGame">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -147,7 +174,7 @@
         </widget>
        </item>
        <item row="1" column="2" colspan="4">
-        <widget class="QLineEdit" name="txtSvm_path">
+        <widget class="QLineEdit" name="txtSvm_path_game">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -390,7 +417,7 @@
         </spacer>
        </item>
        <item row="2" column="2" colspan="4">
-        <widget class="QLineEdit" name="txtSvm_savepath">
+        <widget class="QLineEdit" name="txtSvm_path_save">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -576,7 +603,7 @@
         </widget>
        </item>
        <item row="8" column="2" colspan="4">
-        <widget class="QLineEdit" name="txtSvm_extrapath">
+        <widget class="QLineEdit" name="txtSvm_path_extra">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -602,7 +629,16 @@
     <property name="spacing">
      <number>4</number>
     </property>
-    <property name="margin">
+    <property name="leftMargin">
+     <number>4</number>
+    </property>
+    <property name="topMargin">
+     <number>4</number>
+    </property>
+    <property name="rightMargin">
+     <number>4</number>
+    </property>
+    <property name="bottomMargin">
      <number>4</number>
     </property>
     <item>
@@ -611,10 +647,19 @@
        <string>Opciones de sonido</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <property name="verticalSpacing">
+       <property name="leftMargin">
         <number>4</number>
        </property>
-       <property name="margin">
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
+        <number>4</number>
+       </property>
+       <property name="verticalSpacing">
         <number>4</number>
        </property>
        <item row="0" column="1" colspan="5">
@@ -1120,11 +1165,11 @@
  <tabstops>
   <tabstop>txtSvm_game_label</tabstop>
   <tabstop>txtSvm_gameid</tabstop>
-  <tabstop>btnSvm_Path</tabstop>
-  <tabstop>txtSvm_path</tabstop>
-  <tabstop>btnSvm_Path_clear</tabstop>
+  <tabstop>btnSvm_PathGame</tabstop>
+  <tabstop>txtSvm_path_game</tabstop>
+  <tabstop>btnSvm_PathGame_clear</tabstop>
   <tabstop>btnSvm_PathSave</tabstop>
-  <tabstop>txtSvm_savepath</tabstop>
+  <tabstop>txtSvm_path_save</tabstop>
   <tabstop>btnSvm_PathSave_clear</tabstop>
   <tabstop>cbxSvm_language</tabstop>
   <tabstop>cbxSvm_platform</tabstop>
@@ -1139,7 +1184,7 @@
   <tabstop>chkSvm_disable_dithering</tabstop>
   <tabstop>chkSvm_aspect_ratio</tabstop>
   <tabstop>btnSvm_PathExtra</tabstop>
-  <tabstop>txtSvm_extrapath</tabstop>
+  <tabstop>txtSvm_path_extra</tabstop>
   <tabstop>btnSvm_PathExtra_clear</tabstop>
   <tabstop>btnSvm_PathCapturas</tabstop>
   <tabstop>txtSvm_path_capturas</tabstop>

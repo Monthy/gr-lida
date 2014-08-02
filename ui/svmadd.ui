@@ -391,7 +391,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -458,13 +467,22 @@
      </property>
      <widget class="QWidget" name="page_1">
       <layout class="QGridLayout" name="verticalLayout_4">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
+        <number>4</number>
+       </property>
        <property name="horizontalSpacing">
         <number>6</number>
        </property>
        <property name="verticalSpacing">
-        <number>4</number>
-       </property>
-       <property name="margin">
         <number>4</number>
        </property>
        <item row="0" column="0">
@@ -579,7 +597,7 @@
         </widget>
        </item>
        <item row="2" column="1" colspan="3">
-        <widget class="QLineEdit" name="txtSvm_path">
+        <widget class="QLineEdit" name="txtSvm_path_game">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -589,7 +607,7 @@
         </widget>
        </item>
        <item row="2" column="4">
-        <widget class="QPushButton" name="btnSvm_Path">
+        <widget class="QPushButton" name="btnSvm_PathGame">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -612,7 +630,7 @@
         </widget>
        </item>
        <item row="2" column="5">
-        <widget class="QPushButton" name="btnSvm_Path_clear">
+        <widget class="QPushButton" name="btnSvm_PathGame_clear">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -642,7 +660,7 @@
         </widget>
        </item>
        <item row="3" column="1" colspan="3">
-        <widget class="QLineEdit" name="txtSvm_savepath">
+        <widget class="QLineEdit" name="txtSvm_path_save">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -1356,7 +1374,16 @@ Pulsa aceptar para cerrar el asistente
      <property name="spacing">
       <number>6</number>
      </property>
-     <property name="margin">
+     <property name="leftMargin">
+      <number>4</number>
+     </property>
+     <property name="topMargin">
+      <number>4</number>
+     </property>
+     <property name="rightMargin">
+      <number>4</number>
+     </property>
+     <property name="bottomMargin">
       <number>4</number>
      </property>
      <item>
@@ -1455,11 +1482,11 @@ Pulsa aceptar para cerrar el asistente
   <tabstop>txtDatos_Titulo</tabstop>
   <tabstop>txtSvm_game_label</tabstop>
   <tabstop>txtSvm_gameid</tabstop>
-  <tabstop>btnSvm_Path</tabstop>
-  <tabstop>txtSvm_path</tabstop>
-  <tabstop>btnSvm_Path_clear</tabstop>
+  <tabstop>btnSvm_PathGame</tabstop>
+  <tabstop>txtSvm_path_game</tabstop>
+  <tabstop>btnSvm_PathGame_clear</tabstop>
   <tabstop>btnSvm_PathSave</tabstop>
-  <tabstop>txtSvm_savepath</tabstop>
+  <tabstop>txtSvm_path_save</tabstop>
   <tabstop>btnSvm_PathSave_clear</tabstop>
   <tabstop>cbxSvm_language</tabstop>
   <tabstop>chkSvm_subtitles</tabstop>
