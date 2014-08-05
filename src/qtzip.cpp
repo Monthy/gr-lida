@@ -70,7 +70,7 @@ bool QtZip::abrirZip(const QString file, const QString pwd)
 		case UnZip::WrongPassword:
 		{
 			bool ok = false;
-			QString text_pass = QInputDialog::getText(0, tr("Contraseña incorrecta"), tr("Contraseña") +":", QLineEdit::PasswordEchoOnEdit, "", &ok);
+			QString text_pass = QInputDialog::getText(0, tr("Contraseña incorrecta"), tr("Contraseña") +":", QLineEdit::Password, "", &ok);
 			if( ok && !text_pass.isEmpty() )
 			{
 				abrirZip(file, text_pass);
@@ -114,14 +114,15 @@ bool QtZip::abrirZip(const QString file, const QString pwd)
 	comentarioZip = uz.archiveComment();
 
 	hash_uz.clear();
-	QList<UnZip::ZipEntry> list_uz = uz.entryList();
-	if( !list_uz.isEmpty() )
+	list_uz.clear();
+	QList<UnZip::ZipEntry> entry_list_uz = uz.entryList();
+	if( !entry_list_uz.isEmpty() )
 	{
 		stQtZip z_info;
-		count_uz = list_uz.size();
+		count_uz = entry_list_uz.size();
 		for (int i = 0; i < count_uz; ++i)
 		{
-			const UnZip::ZipEntry& entry_uz = list_uz.at(i);
+			const UnZip::ZipEntry& entry_uz = entry_list_uz.at(i);
 			if( entry_uz.type == UnZip::Directory )
 			{
 				z_info.filename  = "";
@@ -129,7 +130,6 @@ bool QtZip::abrirZip(const QString file, const QString pwd)
 				z_info.ratio     = "";
 				z_info.crc32     = "";
 				z_info.encrypted = "";
-				z_info.path      = entry_uz.filename;
 				z_info.isDir     = true;
 			} else {
 				double ratio   = entry_uz.uncompressedSize == 0 ? 0 : 100 - (double)entry_uz.compressedSize * 100 / (double)entry_uz.uncompressedSize;
@@ -149,10 +149,12 @@ bool QtZip::abrirZip(const QString file, const QString pwd)
 				z_info.ratio     = ratioS;
 				z_info.crc32     = crc32;
 				z_info.encrypted = (entry_uz.encrypted) ? "*" : "";
-				z_info.path      = entry_uz.filename;
 				z_info.isDir     = false;
 			}
+			z_info.path = entry_uz.filename;
+
 			hash_uz.insert(i, z_info);
+			list_uz.insert(i, entry_uz.filename);
 		}
 	}
 
@@ -237,6 +239,32 @@ void QtZip::listaZipListWidget(QListWidget *myListWidget, bool show_dir)
 			}
 		}
 	}
+}
+
+stQtZip QtZip::getFileInfo(QString filename)
+{
+	stQtZip z_info;
+	z_info.filename  = "";
+	z_info.size      = "";
+	z_info.ratio     = "";
+	z_info.crc32     = "";
+	z_info.encrypted = "";
+	z_info.path      = "";
+	z_info.isDir     = false;
+
+	if( isZipOpen && !hash_uz.isEmpty() && !list_uz.isEmpty() )
+	{
+		const int index = list_uz.indexOf(filename, 0);
+		z_info.filename  = hash_uz[index].filename;
+		z_info.size      = hash_uz[index].size;
+		z_info.ratio     = hash_uz[index].ratio;
+		z_info.crc32     = hash_uz[index].crc32;
+		z_info.encrypted = hash_uz[index].encrypted;
+		z_info.path      = hash_uz[index].path;
+		z_info.isDir     = hash_uz[index].isDir;
+	}
+
+	return z_info;
 }
 
 const QByteArray QtZip::loadData(QString filename)

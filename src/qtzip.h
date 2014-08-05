@@ -36,6 +36,16 @@
 #include "osdab-zip/zip.h"
 #include "osdab-zip/unzip.h"
 
+struct stQtZip {
+	QString filename;
+	QString size;
+	QString ratio;
+	QString crc32;
+	QString encrypted;
+	QString path;
+	bool    isDir;
+};
+
 class QtZip : public QObject
 {
 	Q_OBJECT
@@ -52,6 +62,7 @@ public:
 	void listaZipListWidget(QListWidget *myListWidget, bool show_dir = false);
 
 	QString getCommentZip(){return comentarioZip;}
+	stQtZip getFileInfo(QString filename);
 	QString loadTexto(QString filename);
 	QPixmap loadImagen(QString filename);
 	QBitmap loadImagenBitmap(QString filename);
@@ -59,20 +70,11 @@ public:
 	bool isZipOpen;
 
 private:
-	struct stQtZip {
-		QString filename;
-		QString size;
-		QString ratio;
-		QString crc32;
-		QString encrypted;
-		QString path;
-		bool    isDir;
-	};
-
 	UnZip::ErrorCode ec_uz;
 	UnZip uz;
 
 	QHash<int, stQtZip> hash_uz;
+	QList<QString> list_uz;
 	QString comentarioZip;
 	int count_uz;
 
