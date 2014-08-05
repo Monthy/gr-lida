@@ -120,6 +120,7 @@ struct stFileInfo {
 	QString Ext;
 	QString Size;
 	bool    Exists;
+	bool    isDir;
 	QString Crc32;
 	QString Sha1;
 	QString Md5;

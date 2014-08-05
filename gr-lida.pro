@@ -28,6 +28,7 @@ CONFIG += qt warn_on thread release
 #CONFIG += qt warn_on thread debug
 
 QT += core gui sql network script phonon
+contains(QT_CONFIG, opengl):QT += opengl
 #greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 # ###### Files
@@ -54,7 +55,6 @@ HEADERS += src/dbsql.h \
     src/grlida_dbxadd.h \
     src/grlida_delegate.h \
     src/grlida_exportar_juego.h \
-    src/grlida_img_viewer.h \
     src/grlida_importar_juego.h \
     src/grlida_importpath.h \
     src/grlida_info.h \
@@ -64,13 +64,14 @@ HEADERS += src/dbsql.h \
     src/grlida_opciones.h \
     src/grlida_pdf_viewer.h \
     src/grlida_picflow.h \
-    src/grlida_ruleta.h \
     src/grlida_svmadd.h \
     src/grlida_update.h \
     src/grlida_vdmsadd.h \
     src/g_structs.h \
     src/httpdownload.h \
-    src/qtzip.h
+    src/qtzip.h \
+    src/grdap.h \
+    src/grdapview.h
 
 SOURCES += src/dbsql.cpp \
     src/funciones.cpp \
@@ -85,7 +86,6 @@ SOURCES += src/dbsql.cpp \
     src/grlida_dbxadd.cpp \
     src/grlida_delegate.cpp \
     src/grlida_exportar_juego.cpp \
-    src/grlida_img_viewer.cpp \
     src/grlida_importar_juego.cpp \
     src/grlida_importpath.cpp \
     src/grlida_info.cpp \
@@ -95,13 +95,14 @@ SOURCES += src/dbsql.cpp \
     src/grlida_opciones.cpp \
     src/grlida_pdf_viewer.cpp \
     src/grlida_picflow.cpp \
-    src/grlida_ruleta.cpp \
     src/grlida_svmadd.cpp \
     src/grlida_update.cpp \
     src/grlida_vdmsadd.cpp \
     src/httpdownload.cpp \
-    src/main.cpp\
-    src/qtzip.cpp
+    src/main.cpp \
+    src/qtzip.cpp \
+    src/grdap.cpp \
+    src/grdapview.cpp
 
 FORMS += ui/grlida.ui \
     ui/opciones.ui \
@@ -118,8 +119,7 @@ FORMS += ui/grlida.ui \
     ui/svmadd.ui \
     ui/vdmsound.ui \
     ui/config_inicial.ui \
-    ui/ruleta.ui \
-    ui/img_viewer.ui \
+    ui/grdap.ui \
     ui/instalar_juego.ui \
     ui/pdf_viewer.ui \
     ui/multimedia_setup.ui \

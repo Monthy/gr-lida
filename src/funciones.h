@@ -75,6 +75,8 @@ public:
 
 // Versión del GR-lida
 	QString versionGrl(){return "0.11.0";}
+// Versión del GR-dap
+	QString versionGrd(){return "0.1.0";}
 
 // Versiones de los emuladores que soporta el GR-lida
 // DOSBox

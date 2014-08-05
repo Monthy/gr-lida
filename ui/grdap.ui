@@ -1,0 +1,1275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GrDap</class>
+ <widget class="QMainWindow" name="GrDap">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GR-dap</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="QFrame" name="frame_gv">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_frame_gv">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="frame_info">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>200</height>
+        </size>
+       </property>
+       <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,0">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>2</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="lb_info_ico">
+          <property name="minimumSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="../res/gr-lida.qrc">:/img16/informacion.png</pixmap>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QToolButton" name="btn_cerrar_info">
+          <property name="minimumSize">
+           <size>
+            <width>20</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>20</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Cerrar info</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/images/tab_close.png</normaloff>:/images/tab_close.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>9</width>
+            <height>9</height>
+           </size>
+          </property>
+          <property name="toolButtonStyle">
+           <enum>Qt::ToolButtonIconOnly</enum>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="lb_info_titulo"/>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QTextBrowser" name="txt_info"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_toolbar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>35</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,1,0,0">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>2</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QToolButton" name="btn_salir">
+         <property name="minimumSize">
+          <size>
+           <width>26</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>26</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Cerrar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/cerrar.png</normaloff>:/img16/cerrar.png</iconset>
+         </property>
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_abrir">
+         <property name="minimumSize">
+          <size>
+           <width>26</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>26</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Abrir</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+         </property>
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_zoom">
+         <property name="minimumSize">
+          <size>
+           <width>180</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>180</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="hl_frame_zoom">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="Line" name="lsep_1">
+            <property name="minimumSize">
+             <size>
+              <width>10</width>
+              <height>16</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>10</width>
+              <height>16</height>
+             </size>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btn_zoom_in">
+            <property name="minimumSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Acercar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res/gr-lida.qrc">
+              <normaloff>:/img16/zoom_in.png</normaloff>:/img16/zoom_in.png</iconset>
+            </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btn_zoom_out">
+            <property name="minimumSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Alejar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res/gr-lida.qrc">
+              <normaloff>:/img16/zoom_out.png</normaloff>:/img16/zoom_out.png</iconset>
+            </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btn_zoom_normal">
+            <property name="minimumSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Zoom normal</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res/gr-lida.qrc">
+              <normaloff>:/img16/zoom.png</normaloff>:/img16/zoom.png</iconset>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="slider_zoom">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>22</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Zoom</string>
+            </property>
+            <property name="maximum">
+             <number>500</number>
+            </property>
+            <property name="value">
+             <number>250</number>
+            </property>
+            <property name="sliderPosition">
+             <number>250</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QFrame" name="frame_images">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>34</height>
+            </size>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_frame_images">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_img_pagina">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Página</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbx_img_pagina">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToContents</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_img_pagina_total">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btn_img_back">
+              <property name="minimumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Imágen anterior</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../res/gr-lida.qrc">
+                <normaloff>:/img16/go-back.png</normaloff>:/img16/go-back.png</iconset>
+              </property>
+              <property name="autoRepeat">
+               <bool>true</bool>
+              </property>
+              <property name="autoRaise">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btn_img_next">
+              <property name="minimumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Imágen siguiente</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../res/gr-lida.qrc">
+                <normaloff>:/img16/go-next.png</normaloff>:/img16/go-next.png</iconset>
+              </property>
+              <property name="autoRepeat">
+               <bool>true</bool>
+              </property>
+              <property name="autoRaise">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="slider_rotar_img">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Rotar imágen</string>
+              </property>
+              <property name="minimum">
+               <number>-360</number>
+              </property>
+              <property name="maximum">
+               <number>360</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_img_rotar">
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btn_rotar_img">
+              <property name="minimumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Reiniciar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../res/gr-lida.qrc">
+                <normaloff>:/img16/rotar.png</normaloff>:/img16/rotar.png</iconset>
+              </property>
+              <property name="autoRaise">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_visor">
+              <layout class="QHBoxLayout" name="horizontalLayout_frame_visor">
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="lb_visor_color">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Color</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="btn_visor_color">
+                 <property name="minimumSize">
+                  <size>
+                   <width>30</width>
+                   <height>26</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>30</width>
+                   <height>26</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Color del visor</string>
+                 </property>
+                 <property name="autoRaise">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lb_visor_composicion">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Modo</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="cbx_visor_mode">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_cartas">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>34</height>
+            </size>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_frame_cartas" stretch="0,1,0,1">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_carta_top">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Carta</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbx_carta_top">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_carta_bot">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>sobre</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbx_carta_bot">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_d">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>34</height>
+            </size>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_frame_d" stretch="0,1,0,0">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_d">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Ruleta D</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="slider_rotar_d">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Rotar ruleta</string>
+              </property>
+              <property name="minimum">
+               <number>-360</number>
+              </property>
+              <property name="maximum">
+               <number>360</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_d_rotar">
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btn_rotar_d">
+              <property name="minimumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Reiniciar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../res/gr-lida.qrc">
+                <normaloff>:/img16/rotar.png</normaloff>:/img16/rotar.png</iconset>
+              </property>
+              <property name="autoRaise">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_c">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>34</height>
+            </size>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_frame_c" stretch="0,1,0,0">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_c">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Ruleta C</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="slider_rotar_c">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Rotar ruleta</string>
+              </property>
+              <property name="minimum">
+               <number>-360</number>
+              </property>
+              <property name="maximum">
+               <number>360</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_c_rotar">
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btn_rotar_c">
+              <property name="minimumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Reiniciar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../res/gr-lida.qrc">
+                <normaloff>:/img16/rotar.png</normaloff>:/img16/rotar.png</iconset>
+              </property>
+              <property name="autoRaise">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_b">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>34</height>
+            </size>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_frame_b" stretch="0,1,0,0">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_b">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Ruleta B</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="slider_rotar_b">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Rotar ruleta</string>
+              </property>
+              <property name="minimum">
+               <number>-360</number>
+              </property>
+              <property name="maximum">
+               <number>360</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_b_rotar">
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btn_rotar_b">
+              <property name="minimumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Reiniciar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../res/gr-lida.qrc">
+                <normaloff>:/img16/rotar.png</normaloff>:/img16/rotar.png</iconset>
+              </property>
+              <property name="autoRaise">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_a">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>34</height>
+            </size>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_frame_a" stretch="0,1,0,0">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lb_a">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Ruleta A</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="slider_rotar_a">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Rotar ruleta</string>
+              </property>
+              <property name="minimum">
+               <number>-360</number>
+              </property>
+              <property name="maximum">
+               <number>360</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_a_rotar">
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btn_rotar_a">
+              <property name="minimumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>26</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Reiniciar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../res/gr-lida.qrc">
+                <normaloff>:/img16/rotar.png</normaloff>:/img16/rotar.png</iconset>
+              </property>
+              <property name="autoRaise">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_visor">
+         <property name="minimumSize">
+          <size>
+           <width>26</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>26</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Visor texto oculto</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/visor.png</normaloff>:/img16/visor.png</iconset>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_menu">
+         <property name="minimumSize">
+          <size>
+           <width>26</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>26</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/applications.png</normaloff>:/img16/applications.png</iconset>
+         </property>
+         <property name="popupMode">
+          <enum>QToolButton::InstantPopup</enum>
+         </property>
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <action name="btn_info">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/informacion.png</normaloff>:/img16/informacion.png</iconset>
+   </property>
+   <property name="text">
+    <string>Información</string>
+   </property>
+   <property name="statusTip">
+    <string>Muestra información sobre la base de datos</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="btn_ayuda">
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/ayuda.png</normaloff>:/img16/ayuda.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ayuda</string>
+   </property>
+   <property name="iconText">
+    <string>Ayuda</string>
+   </property>
+   <property name="statusTip">
+    <string>Muestra la ayuda del GR-lida</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="btn_acercade">
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/acercad.png</normaloff>:/img16/acercad.png</iconset>
+   </property>
+   <property name="text">
+    <string>Acerca de...</string>
+   </property>
+   <property name="iconText">
+    <string>Acerca de...</string>
+   </property>
+   <property name="toolTip">
+    <string>Acerca de...</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="btn_fullscreen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/fit_to_win.png</normaloff>:/img16/fit_to_win.png</iconset>
+   </property>
+   <property name="text">
+    <string>Pantalla completa</string>
+   </property>
+   <property name="shortcut">
+    <string>F11</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>btn_cerrar_info</tabstop>
+  <tabstop>txt_info</tabstop>
+  <tabstop>btn_salir</tabstop>
+  <tabstop>btn_abrir</tabstop>
+  <tabstop>cbx_img_pagina</tabstop>
+  <tabstop>btn_img_back</tabstop>
+  <tabstop>btn_img_next</tabstop>
+  <tabstop>slider_rotar_img</tabstop>
+  <tabstop>btn_rotar_img</tabstop>
+  <tabstop>btn_visor_color</tabstop>
+  <tabstop>cbx_visor_mode</tabstop>
+  <tabstop>cbx_carta_top</tabstop>
+  <tabstop>cbx_carta_bot</tabstop>
+  <tabstop>slider_rotar_d</tabstop>
+  <tabstop>btn_rotar_d</tabstop>
+  <tabstop>slider_rotar_c</tabstop>
+  <tabstop>btn_rotar_c</tabstop>
+  <tabstop>slider_rotar_b</tabstop>
+  <tabstop>btn_rotar_b</tabstop>
+  <tabstop>slider_rotar_a</tabstop>
+  <tabstop>btn_rotar_a</tabstop>
+  <tabstop>btn_zoom_in</tabstop>
+  <tabstop>btn_zoom_out</tabstop>
+  <tabstop>btn_zoom_normal</tabstop>
+  <tabstop>slider_zoom</tabstop>
+  <tabstop>btn_visor</tabstop>
+  <tabstop>btn_menu</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/gr-lida.qrc"/>
+  <include location="../res/gr-lida.qrc"/>
+ </resources>
+ <connections/>
+</ui>

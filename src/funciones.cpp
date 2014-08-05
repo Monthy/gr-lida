@@ -122,23 +122,25 @@ QString Funciones::BoolToStr(bool estado, bool type_yes)
 // Devuelve un QColor desde un QStringList o QString
 QColor Funciones::getColor(QStringList color)
 {
-	int r = 0; int g = 0; int b = 0;
+	int r = 0; int g = 0; int b = 0; int a = 255;
 
 	if( color.isEmpty() )
 		color << "0" << "0" << "0";
 
-	if( color.size() < 3 )
+	if( color.size() < 4 )
 	{
 		int pos = color.size();
 		for(int i = pos; i < 3; ++i)
 			color.insert(i, "0");
+		color.insert(3, "255");
 	}
 
 	r = color.at(0).toInt();
 	g = color.at(1).toInt();
 	b = color.at(2).toInt();
+	a = color.at(3).toInt();
 
-	return QColor(r, g, b);
+	return QColor(r, g, b, a);
 }
 
 QColor Funciones::getColor(QString color)
@@ -354,6 +356,7 @@ stFileInfo Funciones::getInfoFile(QString filename, TipoHash hash)
 		info.Ext      = "";
 		info.Size     = "";
 		info.Exists   = false;
+		info.isDir    = false;
 		info.Crc32    = "00000000";
 		info.Sha1     = "";
 		info.Md5      = "";
@@ -375,6 +378,7 @@ stFileInfo Funciones::getInfoFile(QString filename, TipoHash hash)
 		info.Ext      = "."+ fi.suffix().toLower();
 		info.Size     = IntToStr( fi.size() );
 		info.Exists   = fi.exists();
+		info.isDir = fi.isDir();
 
 		if( hash == hashCrc32 || hash == hashAll )
 			info.Crc32 = getHashFile(filename, hashCrc32);

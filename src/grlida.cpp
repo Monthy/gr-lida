@@ -32,13 +32,12 @@
 #include "grlida_opciones.h"
 #include "grlida_importar_juego.h"
 #include "grlida_exportar_juego.h"
-#include "grlida_img_viewer.h"
 #include "grlida_pdf_viewer.h"
 #include "grlida_multimedia.h"
-#include "grlida_ruleta.h"
 #include "grlida_instalar_juego.h"
 #include "grlida_list_icon_cfg.h"
 #include "grlida_update.h"
+#include "grdap.h"
 #include "ui_grlida.h"
 
 #ifdef Q_OS_WIN32
@@ -3377,16 +3376,16 @@ void GrLida::on_twCapturas_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
 	if( item && column > -1 )
 	{
-		frmImgViewer *ImgViewer = new frmImgViewer(grlCfg, this);
-		ImgViewer->setWindowFlags(Qt::Window);
+		GrDap *grdap = new GrDap(this);
 		QStringList lista;
 		const int listSize = ui->twCapturas->topLevelItemCount();
 		for (int i = 0; i < listSize; ++i)
 		{
 			lista << ui->twCapturas->topLevelItem( i )->text(1);
 		}
-		ImgViewer->open(item->text(1), lista, false);
-		ImgViewer->show();
+		int id_imagen = lista.indexOf( item->text(1) );
+		grdap->cargarImagenes(lista, (id_imagen != -1 ? id_imagen : 0), true);
+		grdap->show();
 	}
 }
 
@@ -3441,14 +3440,15 @@ void GrLida::on_twFiles_itemDoubleClicked(QTreeWidgetItem *item, int column)
 	if( item && column > -1 )
 	{
 		stFileInfo archivo = fGrl->getInfoFile( fGrl->getDirRelative(item->text(4)) );
-		if( item->text(5) == "manual" )
+		if( item->text(5) == "ruleta" || item->text(5) == "manual" )
 		{
-			if( archivo.Ext == ".cbz" || archivo.Ext == ".zip")
+			if( archivo.Ext == ".cbz" || archivo.Ext == ".zip" ||
+				archivo.Ext == ".dap" || archivo.Ext == ".dapz" ||
+				archivo.Ext == ".conf" )
 			{
-				frmImgViewer *ImgViewer = new frmImgViewer(grlCfg, this);
-				ImgViewer->setWindowFlags(Qt::Window);
-				ImgViewer->openZip( archivo.FilePath );
-				ImgViewer->show();
+				GrDap *grdap = new GrDap(this);
+				grdap->cargarArchivo( archivo.FilePath );
+				grdap->show();
 			} else
 				fGrl->abrirArchivo( archivo.FilePath );
 		}
@@ -3462,17 +3462,6 @@ void GrLida::on_twFiles_itemDoubleClicked(QTreeWidgetItem *item, int column)
 				PdfViewer->openPdf( archivo.FilePath );
 				PdfViewer->show();
 			}
-		}
-		else if( item->text(5) == "ruleta" )
-		{
-			if( archivo.Ext == ".conf" || archivo.Ext == ".zip")
-			{
-				frmRuleta *Ruleta = new frmRuleta(grlCfg, this);
-				Ruleta->setWindowFlags(Qt::Window);
-				Ruleta->cargarRuleta(archivo.FilePath);
-				Ruleta->show();
-			} else
-				fGrl->abrirArchivo( archivo.FilePath );
 		} else
 			fGrl->abrirArchivo( archivo.FilePath );
 	}
@@ -3489,10 +3478,9 @@ void GrLida::on_btnVer_CoverFront_clicked()
 {
 	if( !CoverFront.isEmpty() )
 	{
-		frmImgViewer *ImgViewer = new frmImgViewer(grlCfg, this);
-		ImgViewer->setWindowFlags(Qt::Window);
-		ImgViewer->open(grlDir.Covers + CoverFront);
-		ImgViewer->show();
+		GrDap *grdap = new GrDap(this);
+		grdap->cargarImagen( grlDir.Covers + CoverFront );
+		grdap->show();
 	}
 }
 
@@ -3500,10 +3488,9 @@ void GrLida::on_btnVer_CoverBack_clicked()
 {
 	if( !CoverBack.isEmpty() )
 	{
-		frmImgViewer *ImgViewer = new frmImgViewer(grlCfg, this);
-		ImgViewer->setWindowFlags(Qt::Window);
-		ImgViewer->open(grlDir.Covers + CoverBack);
-		ImgViewer->show();
+		GrDap *grdap = new GrDap(this);
+		grdap->cargarImagen( grlDir.Covers + CoverBack );
+		grdap->show();
 	}
 }
 

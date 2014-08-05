@@ -112,6 +112,7 @@
         <file>images/flow0.png</file>
         <file>images/flow1.png</file>
         <file>images/flow2.png</file>
+        <file>images/gr-dap.png</file>
         <file>images/gr-lida_logo.png</file>
         <file>images/juego_eliminado.png</file>
         <file>images/juego_sin_imagen.png</file>
@@ -123,6 +124,7 @@
         <file>images/star_off.png</file>
         <file>images/star_on.png</file>
         <file>images/tab_close.png</file>
+        <file>images/visor.png</file>
         <file>images/wizard_dosbox.png</file>
         <file>images/wizard_scummvm.png</file>
         <file>images/wizard_scummvm_bg.png</file>
@@ -315,6 +317,7 @@
         <file>img16/capturas.png</file>
         <file>img16/carpeta_0.png</file>
         <file>img16/carpeta_1.png</file>
+        <file>img16/cartas.png</file>
         <file>img16/cartucho.png</file>
         <file>img16/categorias.png</file>
         <file>img16/cd_audio.png</file>
@@ -381,11 +384,13 @@
         <file>img16/go-next.png</file>
         <file>img16/go-up.png</file>
         <file>img16/grafica.png</file>
+        <file>img16/gr-dap.png</file>
         <file>img16/gr-lida.png</file>
         <file>img16/html.png</file>
         <file>img16/hw-card.png</file>
         <file>img16/hw-cpu.png</file>
         <file>img16/idiomas.png</file>
+        <file>img16/imagen.png</file>
         <file>img16/img_1x.png</file>
         <file>img16/img_2x.png</file>
         <file>img16/img_2xsai.png</file>
@@ -435,6 +440,7 @@
         <file>img16/psx.png</file>
         <file>img16/psx-1.png</file>
         <file>img16/qt.png</file>
+        <file>img16/rotar.png</file>
         <file>img16/ruleta.png</file>
         <file>img16/s_cd_iso.png</file>
         <file>img16/s_cd_multi_iso.png</file>
@@ -455,6 +461,7 @@
         <file>img16/tray_restore.png</file>
         <file>img16/umd.png</file>
         <file>img16/vdmsound.png</file>
+        <file>img16/visor.png</file>
         <file>img16/wii.png</file>
         <file>img16/win9x.png</file>
         <file>img16/winxp.png</file>
