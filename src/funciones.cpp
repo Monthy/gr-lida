@@ -304,7 +304,7 @@ bool Funciones::getArchivoIs3Col(QString archivo)
 	lista << "dbx_scaler.txt" << "dbx_scaler_svn.txt" << "dbx_sbtype.txt" << "dbx_sb_oplmode.txt" << "dbx_output.txt" << "dbx_output_svn.txt" << "dbx_machine.txt" << "dbx_machine_svn.txt";
 	lista << "dbx_joystick.txt" << "dbx_cpu_type.txt" << "dbx_cpu_type_svn.txt" << "dbx_cpu_core.txt" << "svm_render_mode.txt" << "svm_platform.txt";
 	lista << "svm_music_driver.txt" << "svm_gfxmode.txt" << "edad_recomendada.txt";// << "dbx_keyboardlayout.txt";
-	lista << "svm_idioma.txt" << "idiomas.txt"  << "grupos.txt";
+	lista << "svm_idioma.txt" << "idiomas.txt";
 
 	if( lista.contains(archivo) )
 		return true;
