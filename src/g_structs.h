@@ -78,6 +78,8 @@ struct stGrlDatos {
 	QString titulo;
 	QString icono;
 	QString extra;
+	QString version;
+	QString issvn;
 	QString key;
 };
 
@@ -144,6 +146,7 @@ struct stGrlCfg {
 	QString DirDOSBox;
 	QString DirScummVM;
 	QString DirBaseGames;
+	QString DOSBoxDefault;
 	bool    DOSBoxDisp;
 	bool    ScummVMDisp;
 	bool    VDMSoundDisp;
@@ -274,6 +277,7 @@ struct stGrlCfg {
 	bool isChangedCategoria;
 	bool isChangedEmuList;
 	bool isChangedIdioma;
+	bool isChangedListDOSBox;
 
 };
 
@@ -387,6 +391,7 @@ struct stConfigDOSBox {
 	QString dosbox_machine;
 	QString dosbox_captures;
 	QString dosbox_memsize;
+	QString dosbox_emu_key;
 // [render]
 	QString render_frameskip;
 	QString render_aspect;

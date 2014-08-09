@@ -69,13 +69,8 @@ private:
 
 	QString IdGame, IdDbx;
 	QString dos_keyboardlayout;
-
-	QHash<QString, stGrlDatos> emu_list;
-	QHash<QString, stGrlDatos> smiles_list;
-	QHash<QString, stGrlDatos> dbx_keyboardlayout_list;
-	QHash<QString, QString> dbx_keyboardlayout;
-
-	bool Editando;
+	QHash<QString, stGrlDatos> dbx_list;
+	bool Editando, isDbxSVN;
 
 	void setTheme();
 	void previerMontajes();
@@ -87,6 +82,7 @@ private slots:
 	void on_btnDbx_FileConfg_clicked();
 
 	void on_btnDbx_FileConfg_clear_clicked();
+	void on_cbxDbx_EmuKey_activated(int index);
 	void on_cbxDbx_Profiles_activated(int index);
 	void on_chkDbx_loadfix_clicked();
 	void on_spinDbx_loadfix_mem_valueChanged(int arg1);

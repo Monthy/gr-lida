@@ -859,13 +859,14 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 	settings.endGroup();
 
 	settings.beginGroup("OpcGeneral");
-		config.Primeravez   = settings.value("Primeravez"  , true).toBool();
-		config.DirApp       = settings.value("DirApp"      , "homepath").toString();
-		config.DirDOSBox    = settings.value("DirDOSBox"   , "").toString();
-		config.DirScummVM   = settings.value("DirScummVM"  , "").toString();
-		config.DirBaseGames = settings.value("DirBaseGames", "./DosGames/").toString().isEmpty() ? "./DosGames/" : QDir::toNativeSeparators( settings.value("DirBaseGames").toString() );
-		config.DOSBoxDisp   = settings.value("DOSBoxDisp"  , false).toBool();
-		config.ScummVMDisp  = settings.value("ScummVMDisp" , false).toBool();
+		config.Primeravez    = settings.value("Primeravez"   , true).toBool();
+		config.DirApp        = settings.value("DirApp"       , "homepath").toString();
+		config.DirDOSBox     = settings.value("DirDOSBox"    , "").toString();
+		config.DirScummVM    = settings.value("DirScummVM"   , "").toString();
+		config.DirBaseGames  = settings.value("DirBaseGames" , "./DosGames/").toString().isEmpty() ? "./DosGames/" : QDir::toNativeSeparators( settings.value("DirBaseGames").toString() );
+		config.DOSBoxDefault = settings.value("DOSBoxDefault", "dosbox").toString();
+		config.DOSBoxDisp    = settings.value("DOSBoxDisp"   , false).toBool();
+		config.ScummVMDisp   = settings.value("ScummVMDisp"  , false).toBool();
 	#ifdef Q_OS_WIN32
 		config.VDMSoundDisp = settings.value("VDMSoundDisp", false).toBool();
 	#else
@@ -1012,9 +1013,10 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.VerListSvm  = settings.value("VerListSvm" , versionSvm()).toString();
 	settings.endGroup();
 
-	config.isChangedCategoria = false;
-	config.isChangedEmuList   = false;
-	config.isChangedIdioma    = false;
+	config.isChangedCategoria  = false;
+	config.isChangedEmuList    = false;
+	config.isChangedIdioma     = false;
+	config.isChangedListDOSBox = false;
 
 	setIdioma( config.IdiomaSelect );
 	setTheme( config.NameDirTheme );
@@ -1047,6 +1049,7 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 		settings.setValue("DirDOSBox"          , config.DirDOSBox           );
 		settings.setValue("DirScummVM"         , config.DirScummVM          );
 		settings.setValue("DirBaseGames"       , config.DirBaseGames        );
+		settings.setValue("DOSBoxDefault"      , config.DOSBoxDefault       );
 		settings.setValue("DOSBoxDisp"         , config.DOSBoxDisp          );
 		settings.setValue("ScummVMDisp"        , config.ScummVMDisp         );
 		settings.setValue("VDMSoundDisp"       , config.VDMSoundDisp        );
@@ -1575,6 +1578,9 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 					case TwListEmu:
 						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
 					break;
+					case TwListDbx:
+						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
+					break;
 					case TwListTraduccion:
 						item->setIcon( 1, QIcon(stTheme +"img16/sinimg.png") );
 					break;
@@ -1599,6 +1605,14 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 				QTreeWidgetItem *item = new QTreeWidgetItem( twList );
 				switch ( tipo )
 				{
+					case TwListDbx:
+						titulo = lista.at(0);
+						dato   = lista.at(1);
+						extra  = lista.at(2);
+						img    = lista.at(3);
+						col_titulo = 0;
+						dir_img    = stTheme +"img16/";
+					break;
 					case TwListSvm:
 					case TwListEmu:
 						titulo = lista.at(0);
@@ -1677,11 +1691,22 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 				else
 					item->setIcon( col_titulo, QIcon(dir_img +"sinimg.png") );
 
-				item->setText( col_nada  , ""     );
-				item->setText( col_titulo, titulo );
-				item->setText( col_dato  , dato   );
-				item->setText( 3         , extra  );
-				item->setText( 4         , img    );
+				if( tipo == TwListDbx )
+				{
+					item->setTextAlignment(2, Qt::AlignCenter);
+					item->setTextAlignment(3, Qt::AlignCenter);
+					item->setText( 0, titulo      );
+					item->setText( 1, dato        );
+					item->setText( 2, lista.at(4) );
+					item->setText( 3, lista.at(5) );
+					item->setText( 4, extra       );
+				} else {
+					item->setText( col_nada  , ""     );
+					item->setText( col_titulo, titulo );
+					item->setText( col_dato  , dato   );
+					item->setText( 3         , extra  );
+					item->setText( 4         , img    );
+				}
 			}
 		}
 	}
@@ -1718,6 +1743,9 @@ void Funciones::guardarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLi
 					break;
 					case TwListEmu:
 						out << item->text(0) << sep << item->text(1) << sep << item->text(3) << sep << item->text(4) << endl;
+					break;
+					case TwListDbx:
+						out << item->text(0) << sep << item->text(1) << sep << item->text(4) << sep << "dosbox.png" << sep << item->text(2) << sep << item->text(3) << endl;
 					break;
 					case TwListTraduccion:
 						//
@@ -1763,6 +1791,7 @@ QList<stGrlDatos> Funciones::cargaListaDatos(QString archivo, int num_col, QStri
 			img_col = 2;
 		break;
 		case 4:
+		case 6:
 			key_col = 1;
 			img_col = 3;
 		break;
@@ -1780,10 +1809,12 @@ QList<stGrlDatos> Funciones::cargaListaDatos(QString archivo, int num_col, QStri
 			{
 				lista = linea.split( sep );
 
-				dato.titulo = lista.at(0);
-				dato.icono  = lista.at(img_col);
-				dato.extra  = (num_col == 4) ? lista.at(2) : "";
-				dato.key    = lista.at(key_col);
+				dato.titulo  = lista.at(0);
+				dato.icono   = lista.at(img_col);
+				dato.extra   = (num_col == 4 || num_col == 6) ? lista.at(2) : "";
+				dato.version = (num_col == 6) ? lista.at(4) : "";
+				dato.issvn   = (num_col == 6) ? lista.at(5) : "";
+				dato.key     = lista.at(key_col);
 
 				dato_list << dato;
 			}
@@ -1984,6 +2015,7 @@ stConfigDOSBox Funciones::getDefectDOSBox(QHash<QString, QString> dato)
 	datos.dosbox_machine        = isQHash ? dato["Dbx_dosbox_machine"]        : "svga_s3";
 	datos.dosbox_captures       = isQHash ? dato["Dbx_dosbox_captures"]       : "capture";
 	datos.dosbox_memsize        = isQHash ? dato["Dbx_dosbox_memsize"]        : "16";
+	datos.dosbox_emu_key        = isQHash ? dato["Dbx_dosbox_emu_key"]        : "dosbox";
 // [render]
 	datos.render_frameskip      = isQHash ? dato["Dbx_render_frameskip"]      : "0";
 	datos.render_aspect         = isQHash ? dato["Dbx_render_aspect"]         : "false";
@@ -2528,13 +2560,23 @@ void Funciones::crearArchivoConfigDbx(stDatosJuego datos, QList<QString> url_lis
 
 void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_list, stConfigDOSBox cfgDbx, QTreeWidget *twDbxMount, stConfigScummVM cfgSvm, stConfigVDMSound cfgVdms, QString dir_app, QString tabla, QString pathSaveConfg, TipoCfg tipo_cfg)
 {
-	QString cfg_out, versionDbx;//, dirBaseGames
+	QString cfg_out;//, dirBaseGames
 
+	QHash<QString, stGrlDatos> dbx_list = cargaDatosQHash(stDirApp +"datos/dbx_list.txt", 6, "|");
+	stGrlDatos dbx_dato;
+	dbx_dato.titulo = "DOSBox";
+	dbx_dato.icono  = "dosbox.png";
+	dbx_dato.key    = "dosbox";
 	QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
 	settings.beginGroup("OpcGeneral");
 //		dirBaseGames = settings.value("DirBaseGames", "./DosGames/").toString();
-		versionDbx   = settings.value("VersionDBx", "0.74").toString();
+		dbx_dato.extra   = settings.value("DirDOSBox", "").toString();
+		dbx_dato.issvn   = settings.value("DOSBoxSVN", false).toBool();
+		dbx_dato.version = settings.value("VersionDBx", "0.74").toString();
 	settings.endGroup();
+	dbx_list.insert(dbx_dato.key, dbx_dato);
+// DOSBox a usar
+	stGrlDatos dosbox_dato_emu = dbx_list[cfgDbx.dosbox_emu_key];
 
 	if( tipo_cfg == ExportGrlida )
 	{
@@ -2709,7 +2751,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_sdl_fullresolution}"  , cfgDbx.sdl_fullresolution);
 		cfg_out.replace("{Dbx_sdl_windowresolution}", cfgDbx.sdl_windowresolution);
 		cfg_out.replace("{Dbx_sdl_output}"          , cfgDbx.sdl_output);
-		cfg_out.replace("{Dbx_sdl_hwscale}"          , cfgDbx.sdl_hwscale);
+		cfg_out.replace("{Dbx_sdl_hwscale}"         , cfgDbx.sdl_hwscale);
 		cfg_out.replace("{Dbx_sdl_autolock}"        , cfgDbx.sdl_autolock);
 		cfg_out.replace("{Dbx_sdl_sensitivity}"     , cfgDbx.sdl_sensitivity);
 		cfg_out.replace("{Dbx_sdl_waitonerror}"     , cfgDbx.sdl_waitonerror);
@@ -2717,7 +2759,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_sdl_mapperfile}"      , cfgDbx.sdl_mapperfile);
 		cfg_out.replace("{Dbx_sdl_usescancodes}"    , cfgDbx.sdl_usescancodes);
 
-		if( versionDbx <= "0.73" )
+		if( dosbox_dato_emu.version <= "0.73" )
 			cfg_out.replace("{Dbx_sdl_extra}", "hwscale="+ cfgDbx.sdl_hwscale +"\n");
 		else
 			cfg_out.replace("{Dbx_sdl_extra}", "");
@@ -2731,7 +2773,8 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		else
 			cfg_out.replace("{Dbx_dosbox_captures}", cfgDbx.dosbox_captures);
 
-		cfg_out.replace("{Dbx_dosbox_memsize}" , cfgDbx.dosbox_memsize);
+		cfg_out.replace("{Dbx_dosbox_memsize}", cfgDbx.dosbox_memsize);
+		cfg_out.replace("{Dbx_dosbox_emu_key}", cfgDbx.dosbox_emu_key);
 
 	// [render]
 		cfg_out.replace("{Dbx_render_frameskip}", cfgDbx.render_frameskip);
@@ -2745,11 +2788,11 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_cpu_cycles_protmode}" , cfgDbx.cpu_cycles_protmode);
 		cfg_out.replace("{Dbx_cpu_cycles_limitmode}", cfgDbx.cpu_cycles_limitmode);
 
-		if( cfgDbx.cpu_cycles != "auto" && cfgDbx.cpu_cycles != "max" && versionDbx >= "0.73" )
+		if( cfgDbx.cpu_cycles != "auto" && cfgDbx.cpu_cycles != "max" && dosbox_dato_emu.version >= "0.73" )
 			cfg_out.replace("{Dbx_cpu_cycles}", "fixed "+ cfgDbx.cpu_cycles);
 		else {
 			QString cycles_realmode, cycles_protmode, cycles_limitmode;
-			if( cfgDbx.cpu_cycles == "auto" && versionDbx >= "0.74" )
+			if( cfgDbx.cpu_cycles == "auto" && dosbox_dato_emu.version >= "0.74" )
 			{
 				cycles_realmode = cycles_protmode = cycles_limitmode = "";
 				if( !cfgDbx.cpu_cycles_realmode.isEmpty() )
@@ -2761,7 +2804,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 
 				cfg_out.replace("{Dbx_cpu_cycles}", "auto"+ cycles_realmode + cycles_protmode + cycles_limitmode);
 			}
-			else if( cfgDbx.cpu_cycles == "max" && versionDbx >= "0.74" )
+			else if( cfgDbx.cpu_cycles == "max" && dosbox_dato_emu.version >= "0.74" )
 			{
 				cycles_protmode = cycles_limitmode = "";
 				if( !cfgDbx.cpu_cycles_protmode.isEmpty() )
@@ -2787,7 +2830,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_midi_mpu401}"     , cfgDbx.midi_mpu401);
 		cfg_out.replace("{Dbx_midi_intelligent}", cfgDbx.midi_intelligent);
 
-		if( versionDbx >= "0.73" || tipo_cfg == ExportGrlida )
+		if( dosbox_dato_emu.version >= "0.73" || tipo_cfg == ExportGrlida )
 		{
 			cfg_out.replace("{Dbx_midi_device}", cfgDbx.midi_device);
 			cfg_out.replace("{Dbx_midi_config}", cfgDbx.midi_config);
@@ -2805,7 +2848,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_sblaster_dma}"    , cfgDbx.sblaster_dma);
 		cfg_out.replace("{Dbx_sblaster_hdma}"   , cfgDbx.sblaster_hdma);
 
-		if( versionDbx >= "0.73" )
+		if( dosbox_dato_emu.version >= "0.73" )
 			cfg_out.replace("{Dbx_sblaster_mixer}", cfgDbx.sblaster_mixer);
 		else
 			cfg_out.replace("sbmixer={Dbx_sblaster_mixer}", "mixer="+ cfgDbx.sblaster_mixer);
@@ -2819,7 +2862,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_gus_gusrate}" , cfgDbx.gus_gusrate);
 		cfg_out.replace("{Dbx_gus_gusbase}" , cfgDbx.gus_gusbase);
 
-		if( versionDbx >= "0.73" || tipo_cfg == ExportGrlida )
+		if( dosbox_dato_emu.version >= "0.73" || tipo_cfg == ExportGrlida )
 		{
 			cfg_out.replace("{Dbx_gus_irq1}", cfgDbx.gus_irq1);
 			cfg_out.replace("{Dbx_gus_irq2}", cfgDbx.gus_irq2);
@@ -2860,7 +2903,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 			cfg_out.replace("{Dbx_dserial_bytesize}"    , cfgDbx.dserial_bytesize);
 			cfg_out.replace("{Dbx_dserial_stopbit}"     , cfgDbx.dserial_stopbit);
 		} else {
-			if( versionDbx <= "0.73" )
+			if( dosbox_dato_emu.version <= "0.73" )
 			{
 				QString moden_dserial = "\n[modem]\n"; // DOSBox 0.63
 				moden_dserial.append("modem="+ cfgDbx.modem_modem +"\n");

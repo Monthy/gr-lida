@@ -59,6 +59,8 @@ private:
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
 	stGrlCats categoria;
+	QHash<QString, stGrlDatos> dbx_list;
+	bool isDbxSVN;
 	int index_wizard;
 
 	void cargarConfig();
@@ -92,6 +94,7 @@ private slots:
 	void on_btnMount_AutoCrear_clicked();
 	void on_btnMount_Primario_clicked();
 
+	void on_cbxDbx_EmuKey_activated(int index);
 	void on_cbxDbx_Profiles_activated(int index);
 	void on_txtDatos_Titulo_textEdited(const QString &arg1);
 

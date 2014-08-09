@@ -79,6 +79,7 @@ private:
 	QHash<int, stGrlCats> categoria;
 	QTreeWidgetItem *twListMnuNav;
 
+	QHash<QString, stGrlDatos> dbx_list;
 	QHash<QString, stGrlDatos> emu_list;
 	QHash<QString, stGrlDatos> smiles_list;
 	QHash<QString, stGrlDatos> idiomas_list;

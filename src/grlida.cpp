@@ -666,6 +666,17 @@ void GrLida::cargarConfig()
 	idiomas_list = fGrl->cargaDatosQHash(grlDir.Datos + fGrl->Idioma() +"/idiomas.txt", 3, "|");
 	edades_list  = fGrl->cargaDatosQHash(grlDir.Datos + fGrl->Idioma() +"/edad_recomendada.txt", 3, "|");
 
+	dbx_list.clear();
+	dbx_list = fGrl->cargaDatosQHash(grlDir.Datos +"dbx_list.txt", 6, "|");
+	stGrlDatos dbx_dato;
+	dbx_dato.titulo  = "DOSBox";
+	dbx_dato.icono   = "dosbox.png";
+	dbx_dato.extra   = grlCfg.DirDOSBox;
+	dbx_dato.issvn   = grlCfg.DOSBoxSVN;
+	dbx_dato.version = grlCfg.VersionDBx;
+	dbx_dato.key     = "dosbox";
+	dbx_list.insert(dbx_dato.key, dbx_dato);
+
 	IdGame  = "";
 	TipoEmu = "";
 	sql_where_select = "";
@@ -1686,6 +1697,25 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 					dat_rating.append("<img src=\":img_rs_star_off.png\"> ");
 			}
 
+			if( TipoEmu == "datos" )
+				datos.tipo_emu = tr("Datos");
+			else if( TipoEmu == "scummvm" )
+				datos.tipo_emu = "ScummVM";
+			else if( TipoEmu == "vdmsound" )
+				datos.tipo_emu = "VDMSound";
+			else if( TipoEmu == "dosbox" )
+			{
+				QHash<QString, QString> info_dosbox = sql->getDatos("dbgrl_emu_dosbox", "WHERE idgrl="+ IdGame +" AND idcat="+ categoria[id_cat].id, "dosbox_emu_key");
+				if( info_dosbox["dosbox_emu_key"].isEmpty() || !dbx_list.contains(info_dosbox["dosbox_emu_key"]) )
+					info_dosbox["dosbox_emu_key"] = grlCfg.DOSBoxDefault.isEmpty() ? "dosbox" : grlCfg.DOSBoxDefault;
+				datos.tipo_emu = dbx_list[info_dosbox["dosbox_emu_key"]].titulo;
+			} else {
+				if( emu_list.contains(TipoEmu)  )
+					datos.tipo_emu = emu_list[TipoEmu].titulo;
+				else
+					datos.tipo_emu = tr("Otro emulador");
+			}
+
 		// Reempla la info del juego.
 			str_html_new.replace("{info_icono}"               , ":icono_rs_"+ datos.icono);
 			str_html_new.replace("{info_titulo}"              , Qt::escape(datos.titulo)    );
@@ -1875,9 +1905,12 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 			lb_panel_3->setPixmap( QPixmap(fGrl->Theme() +"img16/dosbox.png") );
 
 			QHash<QString, QString> conf_dosbox = sql->getDatos("dbgrl_emu_dosbox", "WHERE idgrl="+ IdGame +" AND idcat="+ categoria[id_cat].id,
-																"dosbox_captures, opt_consola_dbox, path_conf, path_exe, path_setup, parametros_setup");
+																"dosbox_emu_key, dosbox_captures, opt_consola_dbox, path_conf, path_exe, path_setup, parametros_setup");
 
-			cfgExec.f_exe         = fGrl->getDirRelative(grlCfg.DirDOSBox);
+			if( conf_dosbox["dosbox_emu_key"].isEmpty() || !dbx_list.contains(conf_dosbox["dosbox_emu_key"]) )
+				conf_dosbox["dosbox_emu_key"] = grlCfg.DOSBoxDefault.isEmpty() ? "dosbox" : grlCfg.DOSBoxDefault;
+
+			cfgExec.f_exe         = fGrl->getDirRelative(dbx_list[conf_dosbox["dosbox_emu_key"]].extra);
 			cfgExec.f_param       = "-conf|"+ QDir::toNativeSeparators(grlDir.Confdbx + conf_dosbox["path_conf"]);
 			cfgExec.f_exe_setup   = fGrl->getDirRelative(conf_dosbox["path_setup"], "DosGames");
 			cfgExec.f_param_setup = conf_dosbox["parametros_setup"];
@@ -2740,6 +2773,21 @@ void GrLida::on_mnu_tool_opciones_triggered()
 	} else {
 		grlCfg = Opciones->getConfig();
 		sql->setIdioma(grlCfg.IdiomaSelect);
+	}
+
+	if( grlCfg.isChangedListDOSBox )
+	{
+		dbx_list.clear();
+		dbx_list = fGrl->cargaDatosQHash(grlDir.Datos +"dbx_list.txt", 6, "|");
+		stGrlDatos dbx_dato;
+		dbx_dato.titulo  = "DOSBox";
+		dbx_dato.icono   = "dosbox.png";
+		dbx_dato.extra   = grlCfg.DirDOSBox;
+		dbx_dato.issvn   = grlCfg.DOSBoxSVN;
+		dbx_dato.version = grlCfg.VersionDBx;
+		dbx_dato.key     = "dosbox";
+		dbx_list.insert(dbx_dato.key, dbx_dato);
+		grlCfg.isChangedListDOSBox = false;
 	}
 
 	if( grlCfg.isChangedIdioma )

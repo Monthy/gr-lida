@@ -677,6 +677,10 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 		datos["Dbx_dosbox_captures"] = ImportPathNew->ui->txtDbx_dosbox_captures->text();
 		datos["Dbx_path_sonido"]     = ImportPathNew->ui->txtDbx_path_sonido->text();
 
+	// DOSBox version a usar
+		if( datos["Dbx_dosbox_emu_key"].isEmpty() )
+			datos["Dbx_dosbox_emu_key"] = grlCfg.DOSBoxDefault.isEmpty() ? "dosbox" : grlCfg.DOSBoxDefault;
+
 	// [sdl]
 		DatosDosBox.sdl_fullscreen        = ""+ datos["Dbx_sdl_fullscreen"];
 		DatosDosBox.sdl_fulldouble        = ""+ datos["Dbx_sdl_fulldouble"];
@@ -696,6 +700,7 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 		DatosDosBox.dosbox_machine        = ""+ datos["Dbx_dosbox_machine"];
 		DatosDosBox.dosbox_captures       = ""+ datos["Dbx_dosbox_captures"];
 		DatosDosBox.dosbox_memsize        = ""+ datos["Dbx_dosbox_memsize"];
+		DatosDosBox.dosbox_emu_key        = ""+ datos["Dbx_dosbox_emu_key"];
 	// [render]
 		DatosDosBox.render_frameskip      = ""+ datos["Dbx_render_frameskip"];
 		DatosDosBox.render_aspect         = ""+ datos["Dbx_render_aspect"];

@@ -38,6 +38,7 @@ frmDbxAdd::frmDbxAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidge
 	sql          = m_sql;
 	grlCfg       = m_cfg;
 	categoria    = m_categoria;
+	isDbxSVN     = grlCfg.DOSBoxSVN;
 	index_wizard = 0;
 
 	grlDir.Home      = fGrl->GRlidaHomePath();
@@ -65,8 +66,30 @@ void frmDbxAdd::cargarConfig()
 
 	fGrl->setIdioma(grlCfg.IdiomaSelect);
 
+	dbx_list.clear();
+	dbx_list = fGrl->cargaDatosQHash(grlDir.Datos +"dbx_list.txt", 6, "|");
+	stGrlDatos dbx_dato;
+	dbx_dato.titulo  = "DOSBox";
+	dbx_dato.icono   = "dosbox.png";
+	dbx_dato.extra   = grlCfg.DirDOSBox;
+	dbx_dato.issvn   = grlCfg.DOSBoxSVN;
+	dbx_dato.version = grlCfg.VersionDBx;
+	dbx_dato.key     = "dosbox";
+	dbx_list.insert(dbx_dato.key, dbx_dato);
+
+	if( dbx_list.count() > 0 )
+	{
+		foreach (const stGrlDatos &dat, dbx_list)
+			ui->cbxDbx_EmuKey->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), dat.titulo, dat.key);
+	}
+	int index_dbx = ui->cbxDbx_EmuKey->findData( grlCfg.DOSBoxDefault );
+	index_dbx = (index_dbx < 0 ? 0 : index_dbx);
+	ui->cbxDbx_EmuKey->setCurrentIndex(index_dbx);
+	isDbxSVN = fGrl->StrToBool(dbx_list[ui->cbxDbx_EmuKey->itemData(index_dbx).toString()].issvn);
+
 	DatosJuego  = fGrl->getDefectDatos("dosbox");
 	DatosDosBox = fGrl->getDefectDOSBox();
+	DatosDosBox.dosbox_emu_key = grlCfg.DOSBoxDefault.isEmpty() ? "dosbox" : grlCfg.DOSBoxDefault;
 
 	fGrl->cargarListaArchivosComboBox(ui->cbxDbx_Profiles, grlDir.Templates, "_defecto_", CbxListProf, "*.conf;*.prof", ";");
 
@@ -85,7 +108,7 @@ void frmDbxAdd::cargarConfig()
 	ui->txtDbx_path_conf->setValidator(new QRegExpValidator(regexp, ui->txtDbx_path_conf));
 	ui->cbxDbx_sdl_fullresolution->addItem(QIcon(fGrl->Theme() +"img16/sinimg.png"), "0x0", "0x0");
 
-	if( grlCfg.DOSBoxSVN )
+	if( isDbxSVN )
 	{
 		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_fullresolution, grlDir.Datos +"dbx_resolution_svn.txt", fGrl->Theme() +"img16/", "", 2, "|", false);
 		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_output        , grlDir.Datos +"dbx_output_svn.txt"    , fGrl->Theme() +"img16/", "", 3, "|", false);
@@ -175,6 +198,11 @@ void frmDbxAdd::previerMontajes()
 
 void frmDbxAdd::cargarDatosDosBox(stConfigDOSBox cfgDbx)
 {
+// DOSBox version a usar
+	if( cfgDbx.dosbox_emu_key.isEmpty() )
+		cfgDbx.dosbox_emu_key = grlCfg.DOSBoxDefault.isEmpty() ? "dosbox" : grlCfg.DOSBoxDefault;
+	int index_dbx = ui->cbxDbx_EmuKey->findData( cfgDbx.dosbox_emu_key );
+	ui->cbxDbx_EmuKey->setCurrentIndex((index_dbx < 0 ? 0 : index_dbx));
 // [sdl]
 	ui->chkDbx_sdl_fullscreen->setChecked( fGrl->StrToBool( cfgDbx.sdl_fullscreen ) );
 	ui->chkDbx_sdl_fullfixed->setChecked( fGrl->StrToBool( cfgDbx.sdl_fullfixed ) );
@@ -275,6 +303,8 @@ void frmDbxAdd::setDatosDosBox()
 	str = ui->cbxDbx_dosbox_machine->itemData( ui->cbxDbx_dosbox_machine->currentIndex() ).toString();
 	DatosDosBox.dosbox_machine = str.isEmpty() ? "svga_s3" : str;
 	DatosDosBox.dosbox_memsize = ui->cbxDbx_dosbox_memsize->currentText().isEmpty() ? "16" : ui->cbxDbx_dosbox_memsize->currentText();
+	str = ui->cbxDbx_EmuKey->itemData( ui->cbxDbx_EmuKey->currentIndex() ).toString();
+	DatosDosBox.dosbox_emu_key = str.isEmpty() ? "dosbox" : str;
 // [render]
 	DatosDosBox.render_aspect = fGrl->BoolToStr( ui->chkDbx_render_aspect->isChecked() );
 	str = ui->cbxDbx_render_scaler->itemData( ui->cbxDbx_render_scaler->currentIndex() ).toString();
@@ -680,6 +710,28 @@ void frmDbxAdd::on_btnMount_Primario_clicked()
 
 		previerMontajes();
 	}
+}
+
+void frmDbxAdd::on_cbxDbx_EmuKey_activated(int index)
+{
+	isDbxSVN = fGrl->StrToBool(dbx_list[ui->cbxDbx_EmuKey->itemData( index ).toString()].issvn);
+
+	setDatosDosBox();
+
+	fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_fullresolution  , grlDir.Datos +"dbx_resolution.txt"    , fGrl->Theme() +"img16/"  , "original"   , 2, "|"); // Resolución pantalla
+	fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_output          , grlDir.Datos +"dbx_output.txt"        , fGrl->Theme() +"img16/"  , "surface"    , 3, "|"); // Modo de Renderizado
+	fGrl->cargarDatosComboBox(ui->cbxDbx_dosbox_machine      , grlDir.Datos +"dbx_machine.txt"       , fGrl->Theme() +"img16/"  , "svga_s3"    , 3, "|", true, true); // Tarjeta de Video
+	fGrl->cargarDatosComboBox(ui->cbxDbx_render_scaler       , grlDir.Datos +"dbx_scaler.txt"        , fGrl->Theme() +"img16/"  , "normal2x"   , 3, "|", true, true); // Escalar y Filtros
+
+	if( isDbxSVN )
+	{
+		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_fullresolution  , grlDir.Datos +"dbx_resolution_svn.txt", fGrl->Theme() +"img16/", "", 2, "|", false);
+		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_output          , grlDir.Datos +"dbx_output_svn.txt"    , fGrl->Theme() +"img16/", "", 3, "|", false);
+		fGrl->cargarDatosComboBox(ui->cbxDbx_dosbox_machine      , grlDir.Datos +"dbx_machine_svn.txt"   , fGrl->Theme() +"img16/", "", 3, "|", false, true);
+		fGrl->cargarDatosComboBox(ui->cbxDbx_render_scaler       , grlDir.Datos +"dbx_scaler_svn.txt"    , fGrl->Theme() +"img16/", "", 3, "|", false, true);
+	}
+
+	cargarDatosDosBox(DatosDosBox);
 }
 
 void frmDbxAdd::on_cbxDbx_Profiles_activated(int index)

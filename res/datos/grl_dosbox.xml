@@ -16,6 +16,7 @@
       <Dbx_dosbox_machine>{Dbx_dosbox_machine}</Dbx_dosbox_machine>
       <Dbx_dosbox_captures>{Dbx_dosbox_captures}</Dbx_dosbox_captures>
       <Dbx_dosbox_memsize>{Dbx_dosbox_memsize}</Dbx_dosbox_memsize>
+      <Dbx_dosbox_emu_key>{Dbx_dosbox_emu_key}</Dbx_dosbox_emu_key>
       <Dbx_render_frameskip>{Dbx_render_frameskip}</Dbx_render_frameskip>
       <Dbx_render_aspect>{Dbx_render_aspect}</Dbx_render_aspect>
       <Dbx_render_scaler>{Dbx_render_scaler}</Dbx_render_scaler>

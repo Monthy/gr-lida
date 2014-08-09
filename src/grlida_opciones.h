@@ -71,6 +71,7 @@ private:
 	void setTheme();
 	void cargarListaThemes();
 
+	void textEditedTxtDbxDato();
 	void enabledCatUpdate(QString texto, int col);
 	void addEditTwMnuNav(bool isNew);
 	void enabledMnuNavUpdate(QString texto, int col);
@@ -85,18 +86,33 @@ private slots:
 	void on_lwOpciones_currentRowChanged(int currentRow);
 // General
 	void on_cbxIdioma_activated(int index);
-	void on_chkDOSBoxDisp_toggled(bool checked);
-	void on_btnDbxPath_clicked();
-	void on_btnDbxPath_find_clicked();
-	void on_btnDbxPath_clear_clicked();
-	void on_chkScummVMDisp_toggled(bool checked);
-	void on_btnSvmPath_clicked();
-	void on_btnSvmPath_find_clicked();
-	void on_btnSvmPath_clear_clicked();
+	void on_btnSowEmus_clicked();
 	void on_btnDirBaseGames_clicked();
 	void on_btnDirBaseGames_clear_clicked();
 	void on_btnOpenUrl_clicked();
 	void on_btnInfoFormatoFecha_clicked();
+// Emuladores
+	void on_chkScummVMDisp_toggled(bool checked);
+	void on_btnSvmPath_clicked();
+	void on_btnSvmPath_find_clicked();
+	void on_btnSvmPath_clear_clicked();
+	void on_chkDOSBoxDisp_toggled(bool checked);
+	void on_txtDbxTitulo_textEdited(const QString &arg1);
+	void on_chkDbxSVN_toggled(bool checked);
+	void on_cbxDbxVersion_activated(int index);
+	void on_btnDbxPath_clicked();
+	void on_btnDbxPath_find_clicked();
+	void on_btnDbxPath_clear_clicked();
+	void on_btnDbxDefault_clicked();
+	void on_btnDbxDefaultList_clicked();
+	void on_btnDbxNew_clicked();
+	void on_btnDbxAdd_clicked();
+	void on_btnDbxEdit_clicked();
+	void on_btnDbxUpdate_clicked();
+	void on_btnDbxSubir_clicked();
+	void on_btnDbxBajar_clicked();
+	void on_btnDbxDelete_clicked();
+	void on_btnDbxCancel_clicked();
 // Categoría
 	void on_txtCat_Nombre_editingFinished();
 	void on_txtCat_Nombre_textEdited(const QString &arg1);

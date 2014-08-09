@@ -87,21 +87,40 @@ void frmOpciones::cargarConfig()
 {
 	QRegExp regexp;
 	regexp.setPatternSyntax(QRegExp::RegExp);
-	regexp.setPattern("[A-Za-z-_0-9]+");
 
 // Opciones Generales ----------------
 	ui->lwOpciones->setCurrentRow( grlCfg.LastTabOptSelect );
 
 // DOSBox ----------------------------
 	ui->chkDOSBoxDisp->setChecked( grlCfg.DOSBoxDisp );
-	ui->txtDbxPath->setText( grlCfg.DirDOSBox );
+	regexp.setPattern("[a-z-_0-9]+");
+	ui->txtDbxDato->setValidator(new QRegExpValidator(regexp, ui->txtDbxDato));
 
 	ui->cbxDbxVersion->clear();
 	ui->cbxDbxVersion->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.72", "0.72");
 	ui->cbxDbxVersion->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.73", "0.73");
 	ui->cbxDbxVersion->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "0.74", "0.74");
-	ui->cbxDbxVersion->setCurrentIndex( ui->cbxDbxVersion->findData( grlCfg.VersionDBx ) );
-	ui->chkDbxSVN->setChecked( grlCfg.DOSBoxSVN );
+
+	ui->twDOSBox->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png") );
+	ui->twDOSBox->headerItem()->setIcon(1, QIcon(fGrl->Theme() +"img16/bullet_black.png") );
+	ui->twDOSBox->headerItem()->setIcon(4, QIcon(fGrl->Theme() +"img16/bullet_black.png") );
+	ui->twDOSBox->headerItem()->setTextAlignment(2, Qt::AlignCenter );
+	ui->twDOSBox->headerItem()->setTextAlignment(3, Qt::AlignCenter );
+	ui->twDOSBox->header()->setMovable(false);
+	ui->twDOSBox->header()->setStretchLastSection(false);
+	ui->twDOSBox->header()->setResizeMode(0, QHeaderView::Stretch     );
+	ui->twDOSBox->header()->setResizeMode(1, QHeaderView::Interactive );
+	ui->twDOSBox->header()->setResizeMode(2, QHeaderView::Interactive );
+	ui->twDOSBox->header()->setResizeMode(3, QHeaderView::Interactive );
+	ui->twDOSBox->header()->setResizeMode(4, QHeaderView::Interactive );
+	ui->twDOSBox->setColumnWidth(1, 90);
+	ui->twDOSBox->setColumnWidth(2, 50);
+	ui->twDOSBox->setColumnWidth(3, 50);
+	ui->twDOSBox->setColumnWidth(4, 50);
+
+	fGrl->cargarDatosTwLista(ui->twDOSBox, grlDir.Datos +"dbx_list.txt", TwListDbx, "|");
+
+	emit on_btnDbxCancel_clicked();
 
 // ScummVM ---------------------------
 	ui->chkScummVMDisp->setChecked( grlCfg.ScummVMDisp );
@@ -121,6 +140,7 @@ void frmOpciones::cargarConfig()
 // Crear, editar categorías ----------
 	ui->twCategorias->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png") );
 	ui->twCategorias->headerItem()->setTextAlignment(2, Qt::AlignCenter );
+	ui->twCategorias->header()->setMovable(false);
 	ui->twCategorias->header()->setStretchLastSection(false);
 	ui->twCategorias->header()->setResizeMode(0, QHeaderView::Stretch     );
 	ui->twCategorias->header()->setResizeMode(1, QHeaderView::Interactive );
@@ -128,6 +148,7 @@ void frmOpciones::cargarConfig()
 	ui->twCategorias->setColumnWidth(1, 90);
 	ui->twCategorias->setColumnWidth(2, 50);
 
+	regexp.setPattern("[A-Za-z-_0-9]+");
 	ui->txtCat_Tabla->setValidator(new QRegExpValidator(regexp, ui->txtCat_Tabla));
 
 	fGrl->cargarIconosComboBox(ui->cbxCat_Img, fGrl->ThemeApp() +"img16_cat/", "sinimg.png", grlCfg.FormatsImage.join(";"));
@@ -156,6 +177,7 @@ void frmOpciones::cargarConfig()
 	fGrl->cargarIconosComboBox(ui->cbxDat_Img    , fGrl->Theme() +"img16/"  , "sinimg.png", grlCfg.FormatsImage.join(";"));
 	fGrl->cargarIconosComboBox(ui->cbxDat_ImgCmpt, fGrl->Theme() +"img_svm/", "sinimg.png", grlCfg.FormatsImage.join(";"));
 
+	regexp.setPattern("[A-Za-z-_0-9]+");
 	ui->txtDat_Dato->setValidator(new QRegExpValidator(regexp, ui->txtDat_Dato));
 
 // Opciones de base de datos ---------
@@ -203,6 +225,7 @@ void frmOpciones::cargarConfig()
 	ui->twThemes->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png"));
 	ui->twThemes->headerItem()->setTextAlignment(1, Qt::AlignCenter);
 	ui->twThemes->headerItem()->setTextAlignment(2, Qt::AlignCenter);
+	ui->twThemes->header()->setMovable(false);
 	ui->twThemes->header()->setStretchLastSection(false);
 	ui->twThemes->header()->setResizeMode(0, QHeaderView::Stretch);
 	ui->twThemes->header()->setResizeMode(1, QHeaderView::Interactive);
@@ -241,6 +264,8 @@ void frmOpciones::cargarConfig()
 
 void frmOpciones::guardarConfig()
 {
+	if( ui->btnDbxCancel->isEnabled() )
+		emit on_btnDbxCancel_clicked();
 // SqlDatabase
 	grlCfg.db_type     = ui->cbxMotorDataBase->itemData( ui->cbxMotorDataBase->currentIndex() ).toString();
 	grlCfg.db_server   = ui->txt_dbserver->text();
@@ -308,49 +333,70 @@ void frmOpciones::setTheme()
 	ui->btnCancel->setIcon( QIcon(fGrl->Theme() +"img16/cancelar.png") );
 
 	ui->lwOpciones->item(0)->setIcon( QIcon(fGrl->Theme() +"img24/opciones.png") );
-	ui->lwOpciones->item(1)->setIcon( QIcon(fGrl->Theme() +"img24/categorias.png") );
-	ui->lwOpciones->item(2)->setIcon( QIcon(fGrl->Theme() +"img24/menu_nav.png") );
-	ui->lwOpciones->item(3)->setIcon( QIcon(fGrl->Theme() +"img24/datos_1.png") );
-	ui->lwOpciones->item(4)->setIcon( QIcon(fGrl->Theme() +"img24/basedatos.png") );
-	ui->lwOpciones->item(5)->setIcon( QIcon(fGrl->Theme() +"img24/style.png") );
-	ui->lwOpciones->item(6)->setIcon( QIcon(fGrl->Theme() +"img24/html.png") );
-	ui->lwOpciones->item(7)->setIcon( QIcon(fGrl->Theme() +"img24/ejecutar_app_setup.png") );
+	ui->lwOpciones->item(1)->setIcon( QIcon(fGrl->Theme() +"img24/dosbox.png") );
+	ui->lwOpciones->item(2)->setIcon( QIcon(fGrl->Theme() +"img24/categorias.png") );
+	ui->lwOpciones->item(3)->setIcon( QIcon(fGrl->Theme() +"img24/menu_nav.png") );
+	ui->lwOpciones->item(4)->setIcon( QIcon(fGrl->Theme() +"img24/datos_1.png") );
+	ui->lwOpciones->item(5)->setIcon( QIcon(fGrl->Theme() +"img24/basedatos.png") );
+	ui->lwOpciones->item(6)->setIcon( QIcon(fGrl->Theme() +"img24/style.png") );
+	ui->lwOpciones->item(7)->setIcon( QIcon(fGrl->Theme() +"img24/html.png") );
+	ui->lwOpciones->item(8)->setIcon( QIcon(fGrl->Theme() +"img24/ejecutar_app_setup.png") );
 
-	ui->btnDbxPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnDbxPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnSvmPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnSvmPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnSowEmus->setIcon( QIcon(fGrl->Theme() +"img24/dosbox.png") );
 	ui->btnDirBaseGames->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
 	ui->btnDirBaseGames_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnOpenUrl->setIcon( QIcon(fGrl->Theme() +"img16/edit_enlace.png") );
 	ui->btnInfoFormatoFecha->setIcon( QIcon(fGrl->Theme() +"img16/informacion.png") );
 
+	ui->twEmuladores->setTabIcon(0, QIcon(fGrl->Theme() +"img16/dosbox-scummvm.png") );
+	ui->twEmuladores->setTabIcon(1, QIcon(fGrl->Theme() +"img16/cartucho.png") );
+	ui->btnSvmPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->btnSvmPath_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
+	ui->btnSvmPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnDbxDefault->setIcon( QIcon(fGrl->Theme() +"img16/go-back.png") );
+	ui->btnDbxPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->btnDbxPath_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
+	ui->btnDbxPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+
+	ui->btnDbxNew->setIcon( QIcon(fGrl->Theme() +"img16/nuevo.png") );
+	ui->btnDbxAdd->setIcon( QIcon(fGrl->Theme() +"img16/list_add.png") );
+	ui->btnDbxEdit->setIcon( QIcon(fGrl->Theme() +"img16/editar.png") );
+	ui->btnDbxUpdate->setIcon( QIcon(fGrl->Theme() +"img16/actualizar.png") );
+	ui->btnDbxDefaultList->setIcon( QIcon(fGrl->Theme() +"img16/go-back.png") );
+	ui->btnDbxSubir->setIcon( QIcon(fGrl->Theme() +"img16/go-up.png") );
+	ui->btnDbxBajar->setIcon( QIcon(fGrl->Theme() +"img16/go-down.png") );
+	ui->btnDbxDelete->setIcon( QIcon(fGrl->Theme() +"img16/list_remove.png") );
+	ui->btnDbxCancel->setIcon( QIcon(fGrl->Theme() +"img16/cancelar.png") );
+
 	ui->btnCatAdd->setIcon( QIcon(fGrl->Theme() +"img16/list_add.png") );
 	ui->btnCatUpdate->setIcon( QIcon(fGrl->Theme() +"img16/actualizar.png") );
 	ui->btnCatSubir->setIcon( QIcon(fGrl->Theme() +"img16/go-up.png") );
 	ui->btnCatBajar->setIcon( QIcon(fGrl->Theme() +"img16/go-down.png") );
+	ui->btnCatEditTheme->setIcon( QIcon(fGrl->Theme() +"img16/style.png") );
 	ui->btnCatDelete->setIcon( QIcon(fGrl->Theme() +"img16/list_remove.png") );
 
 	ui->btnMnuNavAdd->setIcon( QIcon(fGrl->Theme() +"img16/list_add.png") );
 	ui->btnMnuNavUpdate->setIcon( QIcon(fGrl->Theme() +"img16/actualizar.png") );
 	ui->btnMnuNavSubir->setIcon( QIcon(fGrl->Theme() +"img16/go-up.png") );
 	ui->btnMnuNavBajar->setIcon( QIcon(fGrl->Theme() +"img16/go-down.png") );
+	ui->btnMnuNavDefecto->setIcon( QIcon(fGrl->Theme() +"img16/categorias.png") );
 	ui->btnMnuNavDelete->setIcon( QIcon(fGrl->Theme() +"img16/list_remove.png") );
 
+	ui->btnDatPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
+	ui->btnDatPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnDatAdd->setIcon( QIcon(fGrl->Theme() +"img16/list_add.png") );
 	ui->btnDatUpdate->setIcon( QIcon(fGrl->Theme() +"img16/actualizar.png") );
 	ui->btnDatSubir->setIcon( QIcon(fGrl->Theme() +"img16/go-up.png") );
 	ui->btnDatBajar->setIcon( QIcon(fGrl->Theme() +"img16/go-down.png") );
-	ui->btnDatDelete->setIcon( QIcon(fGrl->Theme() +"img16/list_remove.png") );
 	ui->btnDatAddSmile->setIcon( QIcon(fGrl->Theme() +"img16/smile.png") );
-	ui->btnDatPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnDatPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	ui->btnDatDelete->setIcon( QIcon(fGrl->Theme() +"img16/list_remove.png") );
 
 	ui->btnDirDB->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
 	ui->btnDirDB_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 
 	ui->tabApariencia->setTabIcon( 0, QIcon(fGrl->Theme() +"img16/archivo_config.png") );
 	ui->tabApariencia->setTabIcon( 1, QIcon(fGrl->Theme() +"img16/style.png") );
+	ui->btnEditTheme->setIcon( QIcon(fGrl->Theme() +"img16/style.png") );
 
 	ui->btnExtVideoAdd->setIcon( QIcon(fGrl->Theme() +"img16/list_add.png") );
 	ui->btnExtVideoDelete->setIcon( QIcon(fGrl->Theme() +"img16/list_remove.png") );
@@ -593,106 +639,9 @@ void frmOpciones::on_cbxIdioma_activated(int index)
 	ui->cbxTypeProxy->setCurrentIndex( ui->cbxTypeProxy->findData(grlCfg.ProxyType) );
 }
 
-void frmOpciones::on_chkDOSBoxDisp_toggled(bool checked)
+void frmOpciones::on_btnSowEmus_clicked()
 {
-	ui->txtDbxPath->setEnabled( checked );
-	ui->btnDbxPath->setEnabled( checked );
-	ui->btnDbxPath_clear->setEnabled( checked );
-}
-
-void frmOpciones::on_btnDbxPath_clicked()
-{
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.Dbx_path, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
-
-	if( !archivo.isEmpty() )
-	{
-		stFileInfo f_info = fGrl->getInfoFile( archivo );
-		if( f_info.Exists )
-		{
-			ui->txtDbxPath->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.Dbx_path = fGrl->setDirRelative(f_info.Path);
-
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path", grlCfg.Dbx_path);
-		}
-	}
-}
-
-void frmOpciones::on_btnDbxPath_find_clicked()
-{
-#ifdef Q_OS_WIN32
-	QStringList lista_drivers;
-	QFileInfoList list_drives = QDir::drives();
-	lista_drivers.clear();
-	for (int i = 0; i < list_drives.size(); ++i)
-		lista_drivers.insert(i, QDir::toNativeSeparators(list_drives.at(i).absoluteFilePath()));
-
-	bool ok = false;
-	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" DOSBox", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
-	if( ok && !letra_drive.isEmpty() )
-		ui->txtDbxPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "dosbox.exe") ) );
-#else
-	#ifdef Q_OS_MAC
-		ui->txtDbxPath->setText( fGrl->getFindFile("/", "dosbox") );
-	#else
-		ui->txtDbxPath->setText( fGrl->getFindFile("/usr/bin/", "dosbox") );
-	#endif
-#endif
-}
-
-void frmOpciones::on_btnDbxPath_clear_clicked()
-{
-	ui->txtDbxPath->clear();
-}
-
-void frmOpciones::on_chkScummVMDisp_toggled(bool checked)
-{
-	ui->txtSvmPath->setEnabled( checked );
-	ui->btnSvmPath->setEnabled( checked );
-	ui->btnSvmPath_clear->setEnabled( checked );
-}
-
-void frmOpciones::on_btnSvmPath_clicked()
-{
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.Svm_path, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
-
-	if( !archivo.isEmpty() )
-	{
-		stFileInfo f_info = fGrl->getInfoFile( archivo );
-		if( f_info.Exists )
-		{
-			ui->txtSvmPath->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.Svm_path = fGrl->setDirRelative(f_info.Path);
-
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
-		}
-	}
-}
-
-void frmOpciones::on_btnSvmPath_find_clicked()
-{
-#ifdef Q_OS_WIN32
-	QStringList lista_drivers;
-	QFileInfoList list_drives = QDir::drives();
-	lista_drivers.clear();
-	for (int i = 0; i < list_drives.size(); ++i)
-		lista_drivers.insert(i, QDir::toNativeSeparators(list_drives.at(i).absoluteFilePath()));
-
-	bool ok = false;
-	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" ScummVM", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
-	if( ok && !letra_drive.isEmpty() )
-		ui->txtSvmPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "scummvm.exe") ) );
-#else
-	#ifdef Q_OS_MAC
-		ui->txtSvmPath->setText( fGrl->getFindFile("/", "scummvm") );
-	#else
-		ui->txtSvmPath->setText( fGrl->getFindFile("/usr/games/", "scummvm") );
-	#endif
-#endif
-}
-
-void frmOpciones::on_btnSvmPath_clear_clicked()
-{
-	ui->txtSvmPath->clear();
+	ui->lwOpciones->setCurrentRow(1);
 }
 
 void frmOpciones::on_btnDirBaseGames_clicked()
@@ -838,6 +787,360 @@ void frmOpciones::on_btnInfoFormatoFecha_clicked()
 		"  </tr>"
 		"</table>"
 	);
+}
+
+// Emuladores ---------------------------------------
+void frmOpciones::on_chkScummVMDisp_toggled(bool checked)
+{
+	ui->txtSvmPath->setEnabled( checked );
+	ui->btnSvmPath->setEnabled( checked );
+	ui->btnSvmPath_clear->setEnabled( checked );
+}
+
+void frmOpciones::on_btnSvmPath_clicked()
+{
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.Svm_path, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
+
+	if( !archivo.isEmpty() )
+	{
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtSvmPath->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Svm_path = fGrl->setDirRelative(f_info.Path);
+
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path", grlCfg.Svm_path);
+		}
+	}
+}
+
+void frmOpciones::on_btnSvmPath_find_clicked()
+{
+#ifdef Q_OS_WIN32
+	QStringList lista_drivers;
+	QFileInfoList list_drives = QDir::drives();
+	lista_drivers.clear();
+	for (int i = 0; i < list_drives.size(); ++i)
+		lista_drivers.insert(i, QDir::toNativeSeparators(list_drives.at(i).absoluteFilePath()));
+
+	bool ok = false;
+	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" ScummVM", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
+	if( ok && !letra_drive.isEmpty() )
+		ui->txtSvmPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "scummvm.exe") ) );
+#else
+	#ifdef Q_OS_MAC
+		ui->txtSvmPath->setText( fGrl->getFindFile("/", "scummvm") );
+	#else
+		ui->txtSvmPath->setText( fGrl->getFindFile("/usr/games/", "scummvm") );
+	#endif
+#endif
+}
+
+void frmOpciones::on_btnSvmPath_clear_clicked()
+{
+	ui->txtSvmPath->clear();
+}
+
+void frmOpciones::on_chkDOSBoxDisp_toggled(bool checked)
+{
+	ui->txtDbxPath->setEnabled( checked );
+	ui->btnDbxPath->setEnabled( checked );
+	ui->btnDbxPath_clear->setEnabled( checked );
+}
+
+void frmOpciones::textEditedTxtDbxDato()
+{
+	if( ui->btnDbxAdd->isVisible() || ui->btnDbxUpdate->isVisible() )
+	{
+		QString text = fGrl->eliminar_caracteres(ui->txtDbxTitulo->text());
+		text.append("_"+ fGrl->eliminar_caracteres(ui->cbxDbxVersion->itemData(ui->cbxDbxVersion->currentIndex()).toString()));
+		text.append(ui->chkDbxSVN->isChecked()?"_svn":"");
+		ui->txtDbxDato->setText( text.toLower() );
+	}
+}
+
+void frmOpciones::on_txtDbxTitulo_textEdited(const QString &arg1)
+{
+	Q_UNUSED(arg1);
+	textEditedTxtDbxDato();
+}
+
+void frmOpciones::on_chkDbxSVN_toggled(bool checked)
+{
+	Q_UNUSED(checked);
+	textEditedTxtDbxDato();
+}
+
+void frmOpciones::on_cbxDbxVersion_activated(int index)
+{
+	if( index > -1 )
+		textEditedTxtDbxDato();
+}
+
+void frmOpciones::on_btnDbxPath_clicked()
+{
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.Dbx_path, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
+
+	if( !archivo.isEmpty() )
+	{
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtDbxPath->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.Dbx_path = fGrl->setDirRelative(f_info.Path);
+
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Dbx_path", grlCfg.Dbx_path);
+		}
+	}
+}
+
+void frmOpciones::on_btnDbxPath_find_clicked()
+{
+#ifdef Q_OS_WIN32
+	QStringList lista_drivers;
+	QFileInfoList list_drives = QDir::drives();
+	lista_drivers.clear();
+	for (int i = 0; i < list_drives.size(); ++i)
+		lista_drivers.insert(i, QDir::toNativeSeparators(list_drives.at(i).absoluteFilePath()));
+
+	bool ok = false;
+	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" DOSBox", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
+	if( ok && !letra_drive.isEmpty() )
+		ui->txtDbxPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "dosbox.exe") ) );
+#else
+	#ifdef Q_OS_MAC
+		ui->txtDbxPath->setText( fGrl->getFindFile("/", "dosbox") );
+	#else
+		ui->txtDbxPath->setText( fGrl->getFindFile("/usr/bin/", "dosbox") );
+	#endif
+#endif
+}
+
+void frmOpciones::on_btnDbxPath_clear_clicked()
+{
+	ui->txtDbxPath->clear();
+}
+
+void frmOpciones::on_btnDbxDefault_clicked()
+{
+	grlCfg.DOSBoxDefault = "dosbox";
+}
+
+void frmOpciones::on_btnDbxDefaultList_clicked()
+{
+	int pos = ui->twDOSBox->indexOfTopLevelItem(ui->twDOSBox->currentItem());
+	if( ui->twDOSBox->topLevelItemCount() > 0 && pos != -1 )
+	{
+		grlCfg.DOSBoxDefault = ui->twDOSBox->currentItem()->text(1);
+	} else
+		emit on_btnDbxDefault_clicked();
+}
+
+void frmOpciones::on_btnDbxNew_clicked()
+{
+	ui->txtDbxTitulo->setEnabled(true);
+	ui->txtDbxDato->setEnabled(true);
+	ui->btnDbxDefault->setEnabled(false);
+	ui->btnDbxDefaultList->setEnabled(false);
+	ui->btnDbxSubir->setEnabled(false);
+	ui->btnDbxBajar->setEnabled(false);
+	ui->btnDbxNew->setVisible(false);
+	ui->btnDbxAdd->setVisible(true);
+	ui->btnDbxEdit->setEnabled(false);
+	ui->btnDbxUpdate->setVisible(false);
+	ui->btnDbxDelete->setEnabled(false);
+	ui->btnDbxCancel->setEnabled(true);
+
+	ui->txtDbxTitulo->setText("");
+	ui->txtDbxDato->setText("");
+	ui->txtDbxPath->setText("");
+	ui->chkDbxSVN->setChecked(false);
+	ui->cbxDbxVersion->setCurrentIndex(2);
+	ui->txtDbxTitulo->setFocus();
+}
+
+void frmOpciones::on_btnDbxAdd_clicked()
+{
+	bool siguiente = false;
+	if( ui->txtDbxDato->text().isEmpty() )
+		QMessageBox::information(this, tr("Opciones"), tr("Debes poner una etiqueta."));
+	else if( ui->txtDbxPath->text().isEmpty() )
+		QMessageBox::information(this, tr("Opciones"), tr("Debes indicar el ejecutable del DOSBox."));
+	else {
+		int total_dbx_find_cfg = 0;
+		if( ui->txtDbxDato->text() == "dosbox" )
+			total_dbx_find_cfg = 1;
+		else {
+			QList<QTreeWidgetItem *> dbx_find_cfg = ui->twDOSBox->findItems(ui->txtDbxDato->text(), Qt::MatchExactly, 1);
+			total_dbx_find_cfg = dbx_find_cfg.size();
+		}
+
+		if( total_dbx_find_cfg > 0 )
+			QMessageBox::information(this, tr("Opciones"), tr("Ya esiste la misma etiqueta para el ejecutable del DOSBox."));
+		else {
+			siguiente = true;
+			QTreeWidgetItem *item = new QTreeWidgetItem( ui->twDOSBox );
+			item->setTextAlignment(2, Qt::AlignCenter);
+			item->setTextAlignment(3, Qt::AlignCenter);
+			item->setIcon( 0, QIcon(fGrl->Theme() +"img16/dosbox.png") );
+			item->setText( 0, ui->txtDbxTitulo->text() );
+			item->setText( 1, ui->txtDbxDato->text()   );
+			item->setText( 2, ui->cbxDbxVersion->itemData(ui->cbxDbxVersion->currentIndex()).toString() );
+			item->setText( 3, fGrl->BoolToStr(ui->chkDbxSVN->isChecked(),true)  );
+			item->setText( 4, ui->txtDbxPath->text() );
+
+			fGrl->guardarDatosTwLista(ui->twDOSBox, grlDir.Datos +"dbx_list.txt", TwListDbx);
+			grlCfg.isChangedListDOSBox = true;
+		}
+	}
+
+	if( siguiente )
+		emit on_btnDbxCancel_clicked();
+}
+
+void frmOpciones::on_btnDbxEdit_clicked()
+{
+	int pos = ui->twDOSBox->indexOfTopLevelItem(ui->twDOSBox->currentItem());
+	if( ui->twDOSBox->topLevelItemCount() > 0 && pos != -1 )
+	{
+		QTreeWidgetItem *item = ui->twDOSBox->currentItem();
+
+		ui->txtDbxTitulo->setText( item->text(0) );
+		ui->txtDbxDato->setText( item->text(1) );
+		ui->txtDbxPath->setText( item->text(4) );
+		ui->chkDbxSVN->setChecked( fGrl->StrToBool( item->text(3) ) );
+		int row = ui->cbxDbxVersion->findData(item->text(2), Qt::UserRole, Qt::MatchExactly);
+		if( row < 0 ) row = 0;
+		ui->cbxDbxVersion->setCurrentIndex( row );
+
+		ui->twDOSBox->setEnabled(false);
+		ui->txtDbxTitulo->setEnabled(true);
+		ui->txtDbxDato->setEnabled(true);
+		ui->btnDbxDefault->setEnabled(false);
+		ui->btnDbxDefaultList->setEnabled(false);
+		ui->btnDbxSubir->setEnabled(false);
+		ui->btnDbxBajar->setEnabled(false);
+		ui->btnDbxNew->setEnabled(false);
+		ui->btnDbxAdd->setVisible(false);
+		ui->btnDbxEdit->setVisible(false);
+		ui->btnDbxUpdate->setVisible(true);
+		ui->btnDbxDelete->setEnabled(false);
+		ui->btnDbxCancel->setEnabled(true);
+	}
+}
+
+void frmOpciones::on_btnDbxUpdate_clicked()
+{
+	int pos = ui->twDOSBox->indexOfTopLevelItem(ui->twDOSBox->currentItem());
+	if( ui->twDOSBox->topLevelItemCount() > 0 && pos != -1 )
+	{
+		bool siguiente = false;
+		if( ui->txtDbxTitulo->text().isEmpty() )
+			QMessageBox::information(this, tr("Opciones"), tr("Debes poner un título."));
+		else if( ui->txtDbxDato->text().isEmpty() )
+			QMessageBox::information(this, tr("Opciones"), tr("Debes poner una etiqueta."));
+		else if( ui->txtDbxPath->text().isEmpty() )
+			QMessageBox::information(this, tr("Opciones"), tr("Debes indicar el ejecutable del DOSBox."));
+		else {
+			QTreeWidgetItem *item = ui->twDOSBox->currentItem();
+			int total_dbx_find_cfg = 0;
+			if( ui->txtDbxDato->text() != item->text(1) )
+			{
+				if( ui->txtDbxDato->text() == "dosbox" )
+					total_dbx_find_cfg = 1;
+				else {
+					QList<QTreeWidgetItem *> dbx_find_cfg = ui->twDOSBox->findItems(ui->txtDbxDato->text(), Qt::MatchExactly, 1);
+					total_dbx_find_cfg = dbx_find_cfg.size();
+				}
+			}
+
+			if( total_dbx_find_cfg > 0 )
+				QMessageBox::information(this, tr("Opciones"), tr("Ya esiste la misma etiqueta para el ejecutable del DOSBox."));
+			else {
+				siguiente = true;
+
+				item->setIcon( 0, QIcon(fGrl->Theme() +"img16/dosbox.png") );
+				item->setText( 0, ui->txtDbxTitulo->text() );
+				item->setText( 1, ui->txtDbxDato->text()   );
+				item->setText( 2, ui->cbxDbxVersion->itemData(ui->cbxDbxVersion->currentIndex()).toString() );
+				item->setText( 3, fGrl->BoolToStr(ui->chkDbxSVN->isChecked(),true)  );
+				item->setText( 4, ui->txtDbxPath->text() );
+
+				fGrl->guardarDatosTwLista(ui->twDOSBox, grlDir.Datos +"dbx_list.txt", TwListDbx);
+				grlCfg.isChangedListDOSBox = true;
+			}
+		}
+
+		if( siguiente )
+			emit on_btnDbxCancel_clicked();
+	}
+
+	emit on_btnDbxCancel_clicked();
+}
+
+void frmOpciones::on_btnDbxSubir_clicked()
+{
+	fGrl->moveUpItemTw(ui->twDOSBox);
+	fGrl->guardarDatosTwLista(ui->twDOSBox, grlDir.Datos +"dbx_list.txt", TwListDbx);
+	grlCfg.isChangedListDOSBox = true;
+}
+
+void frmOpciones::on_btnDbxBajar_clicked()
+{
+	fGrl->moveDownItemTw(ui->twDOSBox);
+	fGrl->guardarDatosTwLista(ui->twDOSBox, grlDir.Datos +"dbx_list.txt", TwListDbx);
+	grlCfg.isChangedListDOSBox = true;
+}
+
+void frmOpciones::on_btnDbxDelete_clicked()
+{
+	int pos = ui->twDOSBox->indexOfTopLevelItem( ui->twDOSBox->currentItem() );
+	if( ui->twDOSBox->topLevelItemCount() > 0 && pos != -1 )
+	{
+		int respuesta = QMessageBox::question(this, tr("¿Eliminar...?"), tr("¿Deseas realmente eliminar este DOSBox de la lista?") +"\n"+ tr("Se actualizaran los juegos al emulador por defecto."), tr("Si"), tr("No"), 0, 1);
+		if( respuesta == 0 )
+		{
+		// Actualizamos el DOSBox que se usaba a uno por defecto.
+			QSqlQuery query(sql->getSqlDB());
+			QString strSQL = "UPDATE dbgrl_emu_dosbox SET dbx_emu_use = :new_dbx_emu_use WHERE dbx_emu_use = :old_dbx_emu_use;";
+			query.prepare( strSQL );
+			query.bindValue(":new_dbx_emu_use", grlCfg.DOSBoxDefault );
+			query.bindValue(":old_dbx_emu_use", ui->twDOSBox->currentItem()->text(1) );
+			query.exec();
+			sql->chequearQuery(query);
+
+			fGrl->deleteItemTree(ui->twDOSBox->currentItem());
+			fGrl->guardarDatosTwLista(ui->twDOSBox, grlDir.Datos +"dbx_list.txt", TwListDbx);
+			grlCfg.isChangedListDOSBox = true;
+		}
+	} else
+		QMessageBox::information(this, tr("Opciones"), tr("Por favor seleccione un dato de la lista para eliminarlo"));
+}
+
+void frmOpciones::on_btnDbxCancel_clicked()
+{
+	ui->twDOSBox->setEnabled(true);
+	ui->txtDbxTitulo->setEnabled(false);
+	ui->txtDbxDato->setEnabled(false);
+	ui->btnDbxDefault->setEnabled(true);
+	ui->btnDbxDefaultList->setEnabled(true);
+	ui->btnDbxSubir->setEnabled(true);
+	ui->btnDbxBajar->setEnabled(true);
+	ui->btnDbxNew->setEnabled(true);
+	ui->btnDbxEdit->setEnabled(true);
+	ui->btnDbxDelete->setEnabled(true);
+	ui->btnDbxCancel->setEnabled(false);
+
+	ui->btnDbxNew->setVisible(true);
+	ui->btnDbxAdd->setVisible(false);
+	ui->btnDbxEdit->setVisible(true);
+	ui->btnDbxUpdate->setVisible(false);
+
+	ui->txtDbxTitulo->setText("DOSBox");
+	ui->txtDbxDato->setText("dosbox");
+	ui->txtDbxPath->setText( grlCfg.DirDOSBox );
+	ui->cbxDbxVersion->setCurrentIndex( ui->cbxDbxVersion->findData( grlCfg.VersionDBx ) );
+	ui->chkDbxSVN->setChecked( grlCfg.DOSBoxSVN );
 }
 
 // Categoría ----------------------------------------
@@ -1507,6 +1810,7 @@ void frmOpciones::on_cbxDat_Archivo_activated(int index)
 	ui->twDatos->headerItem()->setText( 2, ""           );
 	ui->twDatos->headerItem()->setText( 3, ""           );
 	ui->twDatos->headerItem()->setTextAlignment(1, Qt::AlignCenter);
+	ui->twDatos->header()->setMovable(false);
 	ui->twDatos->header()->setStretchLastSection(false);
 	ui->twDatos->header()->setResizeMode( 0, QHeaderView::Stretch     );
 	ui->twDatos->header()->setResizeMode( 1, QHeaderView::Interactive );

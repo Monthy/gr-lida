@@ -63,7 +63,8 @@ enum TipoListTw {
 	TwListTraduccion = 2,
 	TwListSmile      = 3,
 	TwList2col       = 4,
-	TwList3col       = 5
+	TwList3col       = 5,
+	TwListDbx        = 6
 };
 
 class Funciones : public QObject

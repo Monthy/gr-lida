@@ -319,6 +319,7 @@ void dbSql::crearTablas()
 		"	dosbox_machine			VARCHAR(20) NOT NULL DEFAULT 'svga_s3',"
 		"	dosbox_captures			VARCHAR(255) NOT NULL DEFAULT 'capture',"
 		"	dosbox_memsize			VARCHAR(4) NOT NULL DEFAULT '16',"
+		"	dosbox_emu_key			VARCHAR(255) NOT NULL DEFAULT 'dosbox',"
 		"	render_frameskip		VARCHAR(2) NOT NULL DEFAULT '0',"
 		"	render_aspect			VARCHAR(5) NOT NULL DEFAULT 'false',"
 		"	render_scaler			VARCHAR(15) NOT NULL DEFAULT 'normal2x',"
@@ -654,6 +655,7 @@ void dbSql::crearTablas()
 	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN ipx_type VARCHAR(5) NOT NULL DEFAULT 'none';");
 	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN ipx_port VARCHAR(5) NOT NULL DEFAULT '213';");
 	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN ipx_ip VARCHAR(255) NOT NULL DEFAULT '';");
+	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN dosbox_emu_key VARCHAR(255) NOT NULL DEFAULT 'dosbox';");
 // Tabla - dbgrl_emu_dosbox_mount
 	query.exec("ALTER TABLE dbgrl_emu_dosbox_mount ADD COLUMN opt_size VARCHAR(255) NOT NULL DEFAULT '';");
 	query.exec("ALTER TABLE dbgrl_emu_dosbox_mount ADD COLUMN opt_freesize VARCHAR(5) NOT NULL DEFAULT 'false';");
@@ -956,6 +958,7 @@ stConfigDOSBox dbSql::showConfg_DOSBox(QString IDgrl, QString IDcat)
 			cfgDbx.dosbox_machine        = query.record().value("dosbox_machine").toString();
 			cfgDbx.dosbox_captures       = query.record().value("dosbox_captures").toString();
 			cfgDbx.dosbox_memsize        = query.record().value("dosbox_memsize").toString();
+			cfgDbx.dosbox_emu_key        = query.record().value("dosbox_emu_key").toString();
 		// [render]
 			cfgDbx.render_frameskip      = query.record().value("render_frameskip").toString();
 			cfgDbx.render_aspect         = query.record().value("render_aspect").toString();
@@ -1070,7 +1073,7 @@ QString dbSql::insertaDbx(stConfigDOSBox cfgDbx)
 	strSQL = "INSERT INTO dbgrl_emu_dosbox ("
 			"idgrl, idcat, sdl_fullscreen, sdl_fulldouble, sdl_fullfixed, sdl_fullresolution, sdl_windowresolution, sdl_output, "
 			"sdl_hwscale, sdl_autolock, sdl_sensitivity, sdl_waitonerror, sdl_priority, sdl_mapperfile, sdl_usescancodes, "
-			"dosbox_language, dosbox_machine, dosbox_captures, dosbox_memsize, render_frameskip, render_aspect, render_scaler, "
+			"dosbox_language, dosbox_machine, dosbox_captures, dosbox_memsize, dosbox_emu_key, render_frameskip, render_aspect, render_scaler, "
 			"cpu_core, cpu_cputype, cpu_cycles, cpu_cycles_realmode, cpu_cycles_protmode, cpu_cycles_limitmode, cpu_cycleup, cpu_cycledown, mixer_nosound, mixer_rate, mixer_blocksize, mixer_prebuffer, "
 			"midi_mpu401, midi_intelligent, midi_device, midi_config, midi_mt32rate, sblaster_sbtype, sblaster_sbbase, sblaster_irq, "
 			"sblaster_dma, sblaster_hdma, sblaster_mixer, sblaster_oplmode, sblaster_oplemu, sblaster_oplrate, gus_gus, gus_gusrate, gus_gusbase, "
@@ -1083,7 +1086,7 @@ QString dbSql::insertaDbx(stConfigDOSBox cfgDbx)
 		") VALUES ("
 			":idgrl, :idcat, :sdl_fullscreen, :sdl_fulldouble, :sdl_fullfixed, :sdl_fullresolution, :sdl_windowresolution, :sdl_output, "
 			":sdl_hwscale, :sdl_autolock, :sdl_sensitivity, :sdl_waitonerror, :sdl_priority, :sdl_mapperfile, :sdl_usescancodes, "
-			":dosbox_language, :dosbox_machine, :dosbox_captures, :dosbox_memsize, :render_frameskip, :render_aspect, :render_scaler, "
+			":dosbox_language, :dosbox_machine, :dosbox_captures, :dosbox_memsize, :dosbox_emu_key, :render_frameskip, :render_aspect, :render_scaler, "
 			":cpu_core, :cpu_cputype, :cpu_cycles, :cpu_cycles_realmode, :cpu_cycles_protmode, :cpu_cycles_limitmode, :cpu_cycleup, :cpu_cycledown, :mixer_nosound, :mixer_rate, :mixer_blocksize, :mixer_prebuffer, "
 			":midi_mpu401, :midi_intelligent, :midi_device, :midi_config, :midi_mt32rate, :sblaster_sbtype, :sblaster_sbbase, :sblaster_irq, "
 			":sblaster_dma, :sblaster_hdma, :sblaster_mixer, :sblaster_oplmode, :sblaster_oplemu, :sblaster_oplrate, :gus_gus, :gus_gusrate, :gus_gusbase, "
@@ -1115,6 +1118,7 @@ QString dbSql::insertaDbx(stConfigDOSBox cfgDbx)
 	query.bindValue(":dosbox_machine"       , cfgDbx.dosbox_machine        );
 	query.bindValue(":dosbox_captures"      , cfgDbx.dosbox_captures       );
 	query.bindValue(":dosbox_memsize"       , cfgDbx.dosbox_memsize        );
+	query.bindValue(":dosbox_emu_key"       , cfgDbx.dosbox_emu_key        );
 	query.bindValue(":render_frameskip"     , cfgDbx.render_frameskip      );
 	query.bindValue(":render_aspect"        , cfgDbx.render_aspect         );
 	query.bindValue(":render_scaler"        , cfgDbx.render_scaler         );
@@ -1213,7 +1217,7 @@ bool dbSql::actualizaDbx(stConfigDOSBox cfgDbx)
 		"sdl_windowresolution = :sdl_windowresolution, sdl_output = :sdl_output, sdl_hwscale = :sdl_hwscale, sdl_autolock = :sdl_autolock, "
 		"sdl_sensitivity = :sdl_sensitivity, sdl_waitonerror = :sdl_waitonerror, sdl_priority = :sdl_priority, sdl_mapperfile = :sdl_mapperfile, "
 		"sdl_usescancodes = :sdl_usescancodes, dosbox_language = :dosbox_language, dosbox_machine = :dosbox_machine, dosbox_captures = :dosbox_captures, "
-		"dosbox_memsize = :dosbox_memsize, render_frameskip = :render_frameskip, render_aspect = :render_aspect, render_scaler = :render_scaler, "
+		"dosbox_memsize = :dosbox_memsize, dosbox_emu_key = :dosbox_emu_key, render_frameskip = :render_frameskip, render_aspect = :render_aspect, render_scaler = :render_scaler, "
 		"cpu_core = :cpu_core, cpu_cputype = :cpu_cputype, cpu_cycles = :cpu_cycles, cpu_cycles_realmode = :cpu_cycles_realmode, "
 		"cpu_cycles_protmode = :cpu_cycles_protmode, cpu_cycles_limitmode = :cpu_cycles_limitmode, cpu_cycleup = :cpu_cycleup, cpu_cycledown = :cpu_cycledown, mixer_nosound = :mixer_nosound, "
 		"mixer_rate = :mixer_rate, mixer_blocksize = :mixer_blocksize, mixer_prebuffer = :mixer_prebuffer, midi_mpu401 = :midi_mpu401, midi_intelligent = :midi_intelligent, "
@@ -1249,6 +1253,7 @@ bool dbSql::actualizaDbx(stConfigDOSBox cfgDbx)
 	query.bindValue(":dosbox_machine"       , cfgDbx.dosbox_machine        );
 	query.bindValue(":dosbox_captures"      , cfgDbx.dosbox_captures       );
 	query.bindValue(":dosbox_memsize"       , cfgDbx.dosbox_memsize        );
+	query.bindValue(":dosbox_emu_key"       , cfgDbx.dosbox_emu_key        );
 	query.bindValue(":render_frameskip"     , cfgDbx.render_frameskip      );
 	query.bindValue(":render_aspect"        , cfgDbx.render_aspect         );
 	query.bindValue(":render_scaler"        , cfgDbx.render_scaler         );
