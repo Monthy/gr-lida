@@ -6,7 +6,7 @@
  * modified by: Pedro A. Garcia Rosado Aka Monthy (http://www.gr-lida.org)
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2013 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

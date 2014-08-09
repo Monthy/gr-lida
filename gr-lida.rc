@@ -18,7 +18,7 @@ BEGIN
             VALUE "CompanyName", ""
             VALUE "FileDescription", "GR-lida front-end para DOSBox, ScummVM y VDMSound"
             VALUE "FileVersion", "0.11.0.0"
-            VALUE "LegalCopyright", "Copyright (C) 2006-2013"
+            VALUE "LegalCopyright", "Copyright (C) 2006-2014"
             VALUE "InternalName", "gr-lida.exe"
             VALUE "OriginalFilename", "GR-lida.exe"
             VALUE "ProductName", "GR-lida"
