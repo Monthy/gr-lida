@@ -1657,7 +1657,7 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 							dir_img = stTheme +"img16/";
 
 						if( tipo == TwListSmile )
-							dir_img = stTheme +"smiles/";
+							dir_img = stDirApp +"smiles/";
 					break;
 					case TwListTraduccion:
 					case TwList3col:
@@ -1877,7 +1877,10 @@ void Funciones::cargarDatosCheckComboBox(QCheckComboBox *chk_cbx, QString archiv
 QString Funciones::reemplazaTextoSmiles(QString str, QHash<QString, stGrlDatos> lista)
 {
 	foreach (const stGrlDatos &smile, lista)
-		str.replace(smile.key, "<img src=\":smile_rs_"+ smile.icono +"\" alt=\""+ smile.key +"\" title=\""+ smile.key +"\"> ");
+	{
+		QRegExp rx_smile("\\s("+ QRegExp::escape(smile.key) +")\\s");
+		str.replace(rx_smile, "<img src=\":smile_rs_"+ smile.icono +"\" alt=\""+ smile.key +"\" title=\""+ smile.key +"\"> ");
+	}
 	return str;
 }
 
