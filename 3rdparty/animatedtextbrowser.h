@@ -40,7 +40,9 @@ class AnimatedTextBrowser : public QTextBrowser
 public:
 	AnimatedTextBrowser(QWidget *parent = 0) : QTextBrowser(parent)
 	{
-		this->setOpenExternalLinks(true);
+		setOpenExternalLinks(false);
+		setOpenLinks(false);
+		setReadOnly(true);
 	}
 
 	~AnimatedTextBrowser()
