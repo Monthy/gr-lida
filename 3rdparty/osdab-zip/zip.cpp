@@ -460,7 +460,9 @@ Zip::ErrorCode ZipPrivate::addFiles(const QStringList& files, const QString& roo
         return Zip::NoOpenArchive;
 
     QFileInfoList paths;
+#if QT_VERSION >= 0x040700
     paths.reserve(files.size());
+#endif
     for (int i = 0; i < files.size(); ++i) {
         QFileInfo info(files.at(i));
         if (noDups && (paths.contains(info) || containsEntry(info)))
