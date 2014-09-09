@@ -31,6 +31,8 @@ frmListIconCfg::frmListIconCfg(dbSql *m_sql, stGrlCfg m_cfg, int m_id_cat, QStri
 {
 	ui->setupUi(this);
 	fGrl = new Funciones;
+	editor = new CodeEditor(this, CodeEditor::Html);
+	ui->verticalLayout_otherThemes->addWidget(editor);
 
 	if( !name_theme.isEmpty() )
 		grlCfg.NameDirTheme = name_theme;
@@ -1092,14 +1094,22 @@ void frmListIconCfg::on_cbxListFiles_activated(int index)
 {
 	if( index > -1 )
 	{
-		textEditDef = fGrl->leerArchivo( fGrl->ThemeApp() + ui->cbxListFiles->itemData(index, Qt::UserRole).toString() );
-		ui->textEdit->setPlainText( textEditDef );
+		stFileInfo filename = fGrl->getInfoFile(fGrl->ThemeApp() + ui->cbxListFiles->itemData(index, Qt::UserRole).toString());
+		textEditDef = fGrl->leerArchivo( filename.FilePath );
+
+		if( filename.Ext == ".html" || filename.Ext == ".htm" )
+			editor->setSyntaxType(CodeEditor::Html);
+		else if( filename.Ext == ".qss" || filename.Ext == ".css" )
+			editor->setSyntaxType(CodeEditor::Css);
+		else
+			editor->setSyntaxType(CodeEditor::JavaScript);
+		editor->setPlainText( textEditDef );
 	}
 }
 
 void frmListIconCfg::on_btnTextDef_clicked()
 {
-	ui->textEdit->setPlainText( textEditDef );
+	editor->setPlainText( textEditDef );
 }
 
 void frmListIconCfg::on_btnSaveText_clicked()
@@ -1112,7 +1122,7 @@ void frmListIconCfg::on_btnSaveText_clicked()
 		{
 			QTextStream out(&file_out);
 			out.setCodec("UTF-8");
-			out << ui->textEdit->toPlainText() << endl;
+			out << editor->toPlainText() << endl;
 			out.flush();
 			file_out.close();
 		}

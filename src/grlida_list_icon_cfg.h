@@ -30,6 +30,7 @@
 #include "dbsql.h"
 #include "funciones.h"
 #include "grlida_delegate.h"
+#include "editorwidget/codeeditor.h"
 
 namespace Ui {
 	class frmListIconCfg;
@@ -49,6 +50,7 @@ private:
 	Funciones *fGrl;
 	dbSql *sql;
 	GrlListViewDelegate *grl_lv_delegate;
+	CodeEditor *editor;
 
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;

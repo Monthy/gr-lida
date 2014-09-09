@@ -27,7 +27,16 @@
    <property name="spacing">
     <number>4</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>4</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>4</number>
+   </property>
+   <property name="bottomMargin">
     <number>4</number>
    </property>
    <item>
@@ -44,7 +53,16 @@
        <string>Main list themes</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
         <number>4</number>
        </property>
        <item>
@@ -101,7 +119,16 @@
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_4">
-               <property name="margin">
+               <property name="leftMargin">
+                <number>4</number>
+               </property>
+               <property name="topMargin">
+                <number>4</number>
+               </property>
+               <property name="rightMargin">
+                <number>4</number>
+               </property>
+               <property name="bottomMargin">
                 <number>4</number>
                </property>
                <property name="spacing">
@@ -113,7 +140,16 @@
                   <string>tw_list_icon</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout">
-                  <property name="margin">
+                  <property name="leftMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="bottomMargin">
                    <number>4</number>
                   </property>
                   <item row="0" column="0">
@@ -211,7 +247,16 @@
                   <string>picflow_img</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_2">
-                  <property name="margin">
+                  <property name="leftMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="bottomMargin">
                    <number>4</number>
                   </property>
                   <item row="0" column="0">
@@ -309,7 +354,16 @@
                   <string>list_icon</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0,0,0,0,0,0,0">
-                  <property name="margin">
+                  <property name="leftMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="bottomMargin">
                    <number>4</number>
                   </property>
                   <item row="8" column="1" colspan="7">
@@ -2086,8 +2140,17 @@
       <attribute name="title">
        <string>Other themes</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <property name="margin">
+      <layout class="QVBoxLayout" name="verticalLayout_otherThemes">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
         <number>4</number>
        </property>
        <item>
@@ -2141,23 +2204,22 @@
          </item>
         </layout>
        </item>
-       <item>
-        <widget class="QTextEdit" name="textEdit">
-         <property name="tabStopWidth">
-          <number>40</number>
-         </property>
-         <property name="acceptRichText">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_1">
-     <property name="margin">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
       <number>0</number>
      </property>
      <item>
@@ -2288,7 +2350,6 @@
   <tabstop>cbxListFiles</tabstop>
   <tabstop>btnTextDef</tabstop>
   <tabstop>btnSaveText</tabstop>
-  <tabstop>textEdit</tabstop>
   <tabstop>btnOk</tabstop>
  </tabstops>
  <resources>
