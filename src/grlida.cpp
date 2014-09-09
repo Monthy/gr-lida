@@ -491,6 +491,8 @@ void GrLida::createConnections()
 	connect(grl_picflow, SIGNAL(finishedAnimation()), this, SLOT(finishedAnimationPicFlow()));
 	connect(grl_picflow, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(grl_picflow_customContextMenuRequested(const QPoint &)));
 	connect(grl_picflow, SIGNAL(isActive(bool)), this, SLOT(isActivePicFlow(bool)));
+// Conecta txtInfo para abrir enlaces o archivos
+	connect(txtInfo, SIGNAL(anchorClicked(QUrl)), this, SLOT(onAnchorClicked(QUrl)));
 }
 
 // Carga la configuración del GR-lida.
@@ -3589,4 +3591,9 @@ void GrLida::on_dockw_PictureFlow_visibilityChanged(bool visible)
 //	if( ui->dockw_PictureFlow->isHidden() )
 		grlCfg.Pnl_PictureFlow = visible;
 		ui->mnu_ver_pictureflow->setChecked( visible );
+}
+
+void GrLida::onAnchorClicked(const QUrl &url)
+{
+	fGrl->abrirArchivo( url.toString() );
 }

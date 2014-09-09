@@ -275,6 +275,8 @@ private slots:
 	void on_dockw_PictureFlow_visibilityChanged(bool visible);
 	void on_dockw_FilesUrl_visibilityChanged(bool visible);
 
+	void onAnchorClicked(const QUrl &url);
+
 };
 
 #endif // GRLIDA_H
