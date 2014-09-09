@@ -20,14 +20,23 @@
    <string>Añadir o editar juego</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../res/gr-lida.qrc">
     <normaloff>:/img16/gr-lida.png</normaloff>:/img16/gr-lida.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <property name="spacing">
     <number>4</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>4</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>4</number>
+   </property>
+   <property name="bottomMargin">
     <number>4</number>
    </property>
    <item>
@@ -47,7 +56,16 @@
        <property name="spacing">
         <number>4</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
         <number>4</number>
        </property>
        <item>
@@ -56,10 +74,19 @@
           <string>Datos generales del juego</string>
          </property>
          <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1" columnstretch="0,0,0,0,1,0,0,0,0,0">
-          <property name="verticalSpacing">
+          <property name="leftMargin">
            <number>4</number>
           </property>
-          <property name="margin">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
+          <property name="verticalSpacing">
            <number>4</number>
           </property>
           <item row="3" column="8" rowspan="6" colspan="2">
@@ -1007,7 +1034,16 @@
        <property name="spacing">
         <number>4</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
         <number>4</number>
        </property>
        <item>
@@ -1015,790 +1051,22 @@
          <property name="title">
           <string>Descripción del juego</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_11">
+         <layout class="QVBoxLayout" name="verticalLayout_comentario">
           <property name="spacing">
            <number>4</number>
           </property>
-          <property name="margin">
+          <property name="leftMargin">
            <number>4</number>
           </property>
-          <item>
-           <widget class="QFrame" name="frame">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_9">
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <property name="margin">
-              <number>0</number>
-             </property>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_4">
-               <property name="spacing">
-                <number>4</number>
-               </property>
-               <item>
-                <widget class="QToolButton" name="btnTool_Cortar">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Cortar</string>
-                 </property>
-                 <property name="text">
-                  <string>Cortar</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_cut.png</normaloff>:/img16/edit_cut.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_Copiar">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Copiar</string>
-                 </property>
-                 <property name="text">
-                  <string>Copiar</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_copy.png</normaloff>:/img16/edit_copy.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_Pegar">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Pegar</string>
-                 </property>
-                 <property name="text">
-                  <string>Pegar</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_paste.png</normaloff>:/img16/edit_paste.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_SelectAll">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Seleccionar todo</string>
-                 </property>
-                 <property name="text">
-                  <string>Seleccionar todo</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_select_all.png</normaloff>:/img16/edit_select_all.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <property name="spacing">
-                <number>4</number>
-               </property>
-               <item>
-                <widget class="QToolButton" name="btnTool_Deshacer">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Deshacer</string>
-                 </property>
-                 <property name="text">
-                  <string>Deshacer</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_deshacer.png</normaloff>:/img16/edit_deshacer.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_Rehacer">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Rehacer</string>
-                 </property>
-                 <property name="text">
-                  <string>Rehacer</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_rehacer.png</normaloff>:/img16/edit_rehacer.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
-               <property name="spacing">
-                <number>4</number>
-               </property>
-               <item>
-                <widget class="QToolButton" name="btnTool_TextoNegrita">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Texto en negrita</string>
-                 </property>
-                 <property name="text">
-                  <string>Negrita</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_negrita.png</normaloff>:/img16/edit_negrita.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_TextoCursiva">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Texto en cursiva</string>
-                 </property>
-                 <property name="text">
-                  <string>Cursiva</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_cursiva.png</normaloff>:/img16/edit_cursiva.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_TextoSubrayado">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Texto subrayado</string>
-                 </property>
-                 <property name="text">
-                  <string>Subrayada</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_subrayada.png</normaloff>:/img16/edit_subrayada.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_7">
-               <property name="spacing">
-                <number>4</number>
-               </property>
-               <item>
-                <widget class="QToolButton" name="btnTool_InsertarImg">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Insertar dirección de una imagen</string>
-                 </property>
-                 <property name="text">
-                  <string>Imagen</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_imagen.png</normaloff>:/img16/edit_imagen.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_InsertaUrl">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Insertar dirección url</string>
-                 </property>
-                 <property name="text">
-                  <string>Url</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_enlace.png</normaloff>:/img16/edit_enlace.png</iconset>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_8">
-               <property name="spacing">
-                <number>4</number>
-               </property>
-               <item>
-                <widget class="QToolButton" name="btnTool_Buscar">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Buscar texto</string>
-                 </property>
-                 <property name="text">
-                  <string>Buscar texto</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_buscar.png</normaloff>:/img16/edit_buscar.png</iconset>
-                 </property>
-                 <property name="checkable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_Reemplazar">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Reemplazar</string>
-                 </property>
-                 <property name="text">
-                  <string>Reemplazar</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_reemplazar.png</normaloff>:/img16/edit_reemplazar.png</iconset>
-                 </property>
-                 <property name="checkable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QToolButton" name="btnTool_Preview">
-               <property name="minimumSize">
-                <size>
-                 <width>60</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>60</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Preview</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../res/gr-lida.qrc">
-                 <normaloff>:/img16/edit_preview.png</normaloff>:/img16/edit_preview.png</iconset>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-               <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonIconOnly</enum>
-               </property>
-               <property name="autoRaise">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="hSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>95</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSplitter" name="splitter">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <widget class="QWidget" name="layoutWidget_2">
-             <layout class="QVBoxLayout" name="verticalLayout_10">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QTextEdit" name="txtDatos_Comentario">
-                <property name="acceptRichText">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextBrowser" name="html_preview">
-                <property name="openExternalLinks">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QTreeWidget" name="twDatoSmile">
-             <property name="minimumSize">
-              <size>
-               <width>120</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>120</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="showDropIndicator" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="textElideMode">
-              <enum>Qt::ElideNone</enum>
-             </property>
-             <property name="rootIsDecorated">
-              <bool>false</bool>
-             </property>
-             <property name="uniformRowHeights">
-              <bool>true</bool>
-             </property>
-             <property name="itemsExpandable">
-              <bool>false</bool>
-             </property>
-             <property name="allColumnsShowFocus">
-              <bool>true</bool>
-             </property>
-             <column>
-              <property name="text">
-               <string>Smiles</string>
-              </property>
-             </column>
-            </widget>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="frame_find">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>60</height>
-             </size>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_15">
-             <property name="spacing">
-              <number>4</number>
-             </property>
-             <property name="leftMargin">
-              <number>4</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>4</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <item>
-                <widget class="QLabel" name="lb_Datos_30">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Buscar:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="txtDatos_Buscar">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lb_reemplazar_por">
-                 <property name="minimumSize">
-                  <size>
-                   <width>22</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>22</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>por:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="txtDatos_Reeplazar">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_ReemplazarTexto">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Reemplazar</string>
-                 </property>
-                 <property name="text">
-                  <string>Reemplazar</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_reemplazar.png</normaloff>:/img16/edit_reemplazar.png</iconset>
-                 </property>
-                 <property name="toolButtonStyle">
-                  <enum>Qt::ToolButtonTextBesideIcon</enum>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_BuscarAnterior">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Buscar anterior</string>
-                 </property>
-                 <property name="text">
-                  <string>Anterior</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_buscar_anterior.png</normaloff>:/img16/edit_buscar_anterior.png</iconset>
-                 </property>
-                 <property name="toolButtonStyle">
-                  <enum>Qt::ToolButtonTextBesideIcon</enum>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="btnTool_BuscarSiguiente">
-                 <property name="minimumSize">
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Buscar siguiente</string>
-                 </property>
-                 <property name="text">
-                  <string>Siguiente</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../res/gr-lida.qrc">
-                   <normaloff>:/img16/edit_buscar_siguiente.png</normaloff>:/img16/edit_buscar_siguiente.png</iconset>
-                 </property>
-                 <property name="toolButtonStyle">
-                  <enum>Qt::ToolButtonTextBesideIcon</enum>
-                 </property>
-                 <property name="autoRaise">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_10">
-               <item>
-                <widget class="QCheckBox" name="chkDatos_CoincideMayusculas">
-                 <property name="text">
-                  <string>Coincidir mayúsculas</string>
-                 </property>
-                 <property name="checked">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="chkDatos_SoloPalabrasCompletas">
-                 <property name="text">
-                  <string>Sólo palabras completas</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="hSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>346</width>
-                   <height>14</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
          </layout>
         </widget>
        </item>
@@ -1816,7 +1084,16 @@
        <property name="spacing">
         <number>4</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
         <number>4</number>
        </property>
        <item>
@@ -1825,10 +1102,19 @@
           <string>Ejecutar juego directamente, solo si se añade como datos u otro emulador.</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
-          <property name="verticalSpacing">
+          <property name="leftMargin">
            <number>4</number>
           </property>
-          <property name="margin">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
+          <property name="verticalSpacing">
            <number>4</number>
           </property>
           <item row="0" column="0">
@@ -2130,10 +1416,19 @@
           <string>Direcciones url</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,1,0">
-          <property name="verticalSpacing">
+          <property name="leftMargin">
            <number>4</number>
           </property>
-          <property name="margin">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
+          <property name="verticalSpacing">
            <number>4</number>
           </property>
           <item row="0" column="0">
@@ -2361,7 +1656,16 @@
           <string>Usuarios que han colaborado con la ficha / imagenes</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>4</number>
+          </property>
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
            <number>4</number>
           </property>
           <item>
@@ -2418,7 +1722,16 @@
        <property name="spacing">
         <number>4</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
         <number>4</number>
        </property>
        <item>
@@ -2427,10 +1740,19 @@
           <string>Opciones de archivos</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4" columnstretch="0,0,0,1,0,0,0">
-          <property name="verticalSpacing">
+          <property name="leftMargin">
            <number>4</number>
           </property>
-          <property name="margin">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
+          <property name="verticalSpacing">
            <number>4</number>
           </property>
           <item row="2" column="0">
@@ -2797,7 +2119,16 @@
        <property name="spacing">
         <number>4</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
         <number>4</number>
        </property>
       </layout>
@@ -2814,7 +2145,16 @@
        <property name="spacing">
         <number>4</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
         <number>4</number>
        </property>
       </layout>
@@ -2831,7 +2171,16 @@
        <property name="spacing">
         <number>4</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
         <number>4</number>
        </property>
       </layout>
@@ -2943,30 +2292,6 @@
   <tabstop>btnImgAbrir_CoverBack</tabstop>
   <tabstop>btnImgVer_CoverBack</tabstop>
   <tabstop>btnImgEliminar_CoverBack</tabstop>
-  <tabstop>btnTool_Cortar</tabstop>
-  <tabstop>btnTool_Copiar</tabstop>
-  <tabstop>btnTool_Pegar</tabstop>
-  <tabstop>btnTool_SelectAll</tabstop>
-  <tabstop>btnTool_Deshacer</tabstop>
-  <tabstop>btnTool_Rehacer</tabstop>
-  <tabstop>btnTool_TextoNegrita</tabstop>
-  <tabstop>btnTool_TextoCursiva</tabstop>
-  <tabstop>btnTool_TextoSubrayado</tabstop>
-  <tabstop>btnTool_InsertarImg</tabstop>
-  <tabstop>btnTool_InsertaUrl</tabstop>
-  <tabstop>btnTool_Buscar</tabstop>
-  <tabstop>btnTool_Reemplazar</tabstop>
-  <tabstop>btnTool_Preview</tabstop>
-  <tabstop>txtDatos_Comentario</tabstop>
-  <tabstop>html_preview</tabstop>
-  <tabstop>twDatoSmile</tabstop>
-  <tabstop>txtDatos_Buscar</tabstop>
-  <tabstop>txtDatos_Reeplazar</tabstop>
-  <tabstop>btnTool_ReemplazarTexto</tabstop>
-  <tabstop>btnTool_BuscarAnterior</tabstop>
-  <tabstop>btnTool_BuscarSiguiente</tabstop>
-  <tabstop>chkDatos_CoincideMayusculas</tabstop>
-  <tabstop>chkDatos_SoloPalabrasCompletas</tabstop>
   <tabstop>btnDatos_ExeJuego</tabstop>
   <tabstop>txtDatos_path_exe</tabstop>
   <tabstop>btnDatos_ExeJuego_clear</tabstop>

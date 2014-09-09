@@ -71,6 +71,7 @@ frmAddEditJuego::~frmAddEditJuego()
 	delete cbxDatos_Formato;
 	delete cbxDatos_Perspectiva;
 	delete cbxDatos_SistemaOp;
+	delete txtDatos_Comentario;
 
 	delete fGrl;
 	delete ui;
@@ -163,6 +164,13 @@ void frmAddEditJuego::createWidgets()
 
 	wVdms = new frmAddEditVDMSound(sql, grlCfg, categoria, IdGame, Editando, this);
 	ui->verticalLayout_wVdms->addWidget( wVdms );
+
+	txtDatos_Comentario = new EditorWidget(fGrl->Theme(), this);
+	ui->verticalLayout_comentario->addWidget( txtDatos_Comentario );
+	txtDatos_Comentario->setSmileList(grlDir.Datos +"smiles.txt", "\",\"", grlDir.Smiles);
+	txtDatos_Comentario->showSource(false);
+	txtDatos_Comentario->showFindReplace(false);
+	txtDatos_Comentario->showSmiles(true);
 }
 
 void frmAddEditJuego::createConnections()
@@ -179,10 +187,7 @@ void frmAddEditJuego::cargarConfig()
 	ui->tabWidget_Datos->setTabEnabled(tabVDMSound, false);
 
 	emu_list.clear();
-	smiles_list.clear();
-	emu_list    = fGrl->cargaDatosQHash(grlDir.Datos +"emu_list.txt", 4, "|"    );
-	smiles_list = fGrl->cargaDatosQHash(grlDir.Datos +"smiles.txt"  , 2, "\",\"");
-	fGrl->cargarDatosTwLista(ui->twDatoSmile, grlDir.Datos +"smiles.txt", TwListSmile, "\",\"");
+	emu_list = fGrl->cargaDatosQHash(grlDir.Datos +"emu_list.txt", 4, "|");
 
 	ui->cbxDatos_TipoEmu->clear();
 	QStringList lista = categoria.emu_show.split(";", QString::SkipEmptyParts);
@@ -270,8 +275,6 @@ void frmAddEditJuego::cargarConfig()
 
 	fGrl->cargarIconosComboBox(ui->cbxDatos_Icono, grlDir.Iconos, "sinimg.png", grlCfg.FormatsImage.join(";"));
 	ui->cbxDatos_Estado->setVisible(false);
-	ui->html_preview->setVisible(false);
-	ui->frame_find->setVisible(false);
 
 	ui->cbxDatos_TipoArchivo->clear();
 	ui->cbxDatos_TipoArchivo->addItem(QIcon(fGrl->Theme() +"img16/datos.png")   , tr("Documentos - Manuales") +" - (cbz - zip)", "manual");
@@ -355,24 +358,6 @@ void frmAddEditJuego::setTheme()
 	ui->btnImgEliminar_Thumbs->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnImgEliminar_CoverFront->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnImgEliminar_CoverBack->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-
-	ui->btnTool_Cortar->setIcon( QIcon(fGrl->Theme() +"img16/edit_cut.png") );
-	ui->btnTool_Copiar->setIcon( QIcon(fGrl->Theme() +"img16/edit_copy.png") );
-	ui->btnTool_Pegar->setIcon( QIcon(fGrl->Theme() +"img16/edit_paste.png") );
-	ui->btnTool_SelectAll->setIcon( QIcon(fGrl->Theme() +"img16/edit_select_all.png") );
-	ui->btnTool_Deshacer->setIcon( QIcon(fGrl->Theme() +"img16/edit_deshacer.png") );
-	ui->btnTool_Rehacer->setIcon( QIcon(fGrl->Theme() +"img16/edit_rehacer.png") );
-	ui->btnTool_TextoNegrita->setIcon( QIcon(fGrl->Theme() +"img16/edit_negrita.png") );
-	ui->btnTool_TextoCursiva->setIcon( QIcon(fGrl->Theme() +"img16/edit_cursiva.png") );
-	ui->btnTool_TextoSubrayado->setIcon( QIcon(fGrl->Theme() +"img16/edit_subrayada.png") );
-	ui->btnTool_InsertarImg->setIcon( QIcon(fGrl->Theme() +"img16/edit_imagen.png") );
-	ui->btnTool_InsertaUrl->setIcon( QIcon(fGrl->Theme() +"img16/edit_enlace.png") );
-	ui->btnTool_Buscar->setIcon( QIcon(fGrl->Theme() +"img16/edit_buscar.png") );
-	ui->btnTool_Reemplazar->setIcon( QIcon(fGrl->Theme() +"img16/edit_reemplazar.png") );
-	ui->btnTool_Preview->setIcon( QIcon(fGrl->Theme() +"img16/edit_preview.png") );
-	ui->btnTool_ReemplazarTexto->setIcon( QIcon(fGrl->Theme() +"img16/edit_reemplazar.png") );
-	ui->btnTool_BuscarAnterior->setIcon( QIcon(fGrl->Theme() +"img16/edit_buscar_anterior.png") );
-	ui->btnTool_BuscarSiguiente->setIcon( QIcon(fGrl->Theme() +"img16/edit_buscar_siguiente.png") );
 
 	ui->btnDatos_ExeJuego->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
 	ui->btnDatos_ExeJuego_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
@@ -515,7 +500,8 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 		}
 	}
 
-	ui->txtDatos_Comentario->setPlainText( datos.comentario );
+	if( !datos.comentario.isEmpty() )
+		txtDatos_Comentario->setText(datos.comentario);
 	ui->chkDatos_Favorito->setChecked( fGrl->StrToBool( datos.favorito ) );
 	ui->cbxDatos_Rating->setCurrentIndex( ui->cbxDatos_Rating->findData( datos.rating ) );
 	ui->cbxDatos_EdadRecomendada->setCurrentIndex( ui->cbxDatos_EdadRecomendada->findData( datos.edad_recomendada ) );
@@ -614,7 +600,7 @@ bool frmAddEditJuego::setDatosJuegos(bool isSoloDatos)
 	if( !Editando )
 		DatosJuego.fecha = fGrl->getTime();
 
-	DatosJuego.comentario = ui->txtDatos_Comentario->toPlainText();
+	DatosJuego.comentario = txtDatos_Comentario->toPlainText();
 	DatosJuego.favorito   = fGrl->BoolToStr( ui->chkDatos_Favorito->isChecked() );
 
 	str = ui->cbxDatos_Rating->itemData( ui->cbxDatos_Rating->currentIndex() ).toString();
@@ -1108,165 +1094,6 @@ void frmAddEditJuego::on_btnImgEliminar_CoverBack_clicked()
 	ui->lbImg_CoverBack->setPixmap( QPixmap(fGrl->ThemeApp() +"images/juego_sin_imagen.png") );
 	ui->btnImgVer_CoverBack->setEnabled( false );
 	ui->btnImgEliminar_CoverBack->setEnabled( false );
-}
-
-// Descripción
-void frmAddEditJuego::on_btnTool_Cortar_clicked()
-{
-// Cortar texto
-	ui->txtDatos_Comentario->cut();
-}
-
-void frmAddEditJuego::on_btnTool_Copiar_clicked()
-{
-// Copiar texto
-	ui->txtDatos_Comentario->copy();
-}
-
-void frmAddEditJuego::on_btnTool_Pegar_clicked()
-{
-// Pegar texto
-	ui->txtDatos_Comentario->paste();
-}
-
-void frmAddEditJuego::on_btnTool_SelectAll_clicked()
-{
-// Seleccionar el texto
-	ui->txtDatos_Comentario->selectAll();
-}
-
-void frmAddEditJuego::on_btnTool_Deshacer_clicked()
-{
-// Deshacer texto
-	ui->txtDatos_Comentario->undo();
-}
-
-void frmAddEditJuego::on_btnTool_Rehacer_clicked()
-{
-// Rehacer texto
-	ui->txtDatos_Comentario->redo();
-}
-
-void frmAddEditJuego::on_btnTool_TextoNegrita_clicked()
-{
-// Texto en negrita
-	ui->txtDatos_Comentario->textCursor().insertText("<strong>"+ ui->txtDatos_Comentario->textCursor().selectedText() +"</strong>");
-}
-
-void frmAddEditJuego::on_btnTool_TextoCursiva_clicked()
-{
-// Texto en cursiva
-	ui->txtDatos_Comentario->textCursor().insertText("<em>"+ ui->txtDatos_Comentario->textCursor().selectedText() +"</em>");
-}
-
-void frmAddEditJuego::on_btnTool_TextoSubrayado_clicked()
-{
-// Texto subrayado
-	ui->txtDatos_Comentario->textCursor().insertText("<u>"+ ui->txtDatos_Comentario->textCursor().selectedText() +"</u>");
-}
-
-void frmAddEditJuego::on_btnTool_InsertarImg_clicked()
-{
-// Insertar una imagen en el texto
-	ui->txtDatos_Comentario->textCursor().insertText("<img src=\"direccion_imagen\" />");
-}
-
-void frmAddEditJuego::on_btnTool_InsertaUrl_clicked()
-{
-// Insertar una url en el texto
-	ui->txtDatos_Comentario->textCursor().insertText("<a href=\""+ ui->txtDatos_Comentario->textCursor().selectedText() +"\">"+ ui->txtDatos_Comentario->textCursor().selectedText() +"</a>");
-}
-
-void frmAddEditJuego::on_btnTool_Buscar_clicked(bool checked)
-{
-// Buscar texto
-	ui->btnTool_Buscar->setChecked(checked);
-
-	if( ui->btnTool_Reemplazar->isChecked() && checked )
-		ui->btnTool_Reemplazar->setChecked(!checked);
-
-	ui->lb_reemplazar_por->setVisible(!checked);
-	ui->txtDatos_Reeplazar->setVisible(!checked);
-	ui->btnTool_ReemplazarTexto->setVisible(!checked);
-
-	ui->frame_find->setVisible(checked);
-}
-
-void frmAddEditJuego::on_btnTool_Reemplazar_clicked(bool checked)
-{
-// Reemlazar texto
-	if( ui->btnTool_Buscar->isChecked() && checked )
-		ui->btnTool_Buscar->setChecked(!checked);
-
-	ui->btnTool_Reemplazar->setChecked(checked);
-	ui->lb_reemplazar_por->setVisible(checked);
-	ui->txtDatos_Reeplazar->setVisible(checked);
-	ui->btnTool_ReemplazarTexto->setVisible(checked);
-
-	ui->frame_find->setVisible(checked);
-}
-
-void frmAddEditJuego::on_btnTool_Preview_clicked()
-{
-// Preview texto-html
-	if( ui->btnTool_Preview->isChecked() )
-	{
-		ui->html_preview->document()->clear();
-		ui->html_preview->clear();
-		foreach (const stGrlDatos &smile, smiles_list)
-			ui->html_preview->document()->addResource(QTextDocument::ImageResource, QUrl("smile_rs_"+ smile.icono), QImage(grlDir.Smiles + smile.icono));
-		ui->txtDatos_Comentario->setVisible(false);
-		ui->html_preview->setVisible(true);
-		ui->html_preview->setHtml( fGrl->reemplazaTextoSmiles(ui->txtDatos_Comentario->toPlainText(), smiles_list) );
-	} else {
-		ui->txtDatos_Comentario->setVisible(true);
-		ui->html_preview->setVisible(false);
-	}
-}
-
-void frmAddEditJuego::on_btnTool_ReemplazarTexto_clicked()
-{
-// Reemplaza el texto seleccionado
-	if( ui->txtDatos_Comentario->textCursor().selectedText() == ui->txtDatos_Buscar->text() )
-		ui->txtDatos_Comentario->insertPlainText( ui->txtDatos_Reeplazar->text() );
-}
-
-void frmAddEditJuego::buscarTexto(QString texto, bool anterior)
-{
-	QTextDocument::FindFlags flags;
-
-	ui->txtDatos_Comentario->setFocus(Qt::ShortcutFocusReason);
-
-	if ( anterior )
-		flags |= QTextDocument::FindBackward;
-	if ( ui->chkDatos_SoloPalabrasCompletas->isChecked() )
-		flags |= QTextDocument::FindWholeWords;
-	if ( ui->chkDatos_CoincideMayusculas->isChecked() )
-		flags |= QTextDocument::FindCaseSensitively;
-
-	ui->txtDatos_Comentario->find(texto, flags);
-}
-
-void frmAddEditJuego::on_btnTool_BuscarAnterior_clicked()
-{
-// Buscar texto anterior
-	buscarTexto(ui->txtDatos_Buscar->text(), true);
-}
-
-void frmAddEditJuego::on_btnTool_BuscarSiguiente_clicked()
-{
-// Buscar texto siguiente
-	buscarTexto(ui->txtDatos_Buscar->text(), false);
-}
-
-void frmAddEditJuego::on_twDatoSmile_itemDoubleClicked(QTreeWidgetItem *item, int column)
-{
-	if( item && column > -1 )
-	{
-		ui->txtDatos_Comentario->textCursor().insertText(" "+ item->text(0) +" ");
-		if( ui->btnTool_Preview->isChecked() )
-			ui->html_preview->setHtml( fGrl->reemplazaTextoSmiles(ui->txtDatos_Comentario->toPlainText(), smiles_list) );
-	}
 }
 
 // Otros Datos

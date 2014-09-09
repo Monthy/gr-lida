@@ -33,6 +33,7 @@
 #include "grlida_addedit_scummvm.h"
 #include "grlida_addedit_vdmsound.h"
 #include "qcheckcombobox.h"
+#include "editorwidget/editorwidget.h"
 
 namespace Ui {
 	class frmAddEditJuego;
@@ -65,6 +66,7 @@ private:
 
 	Funciones *fGrl;
 	dbSql *sql;
+	EditorWidget *txtDatos_Comentario;
 
 	frmAddEditDosBox *wDbx;
 	frmAddEditScummVM *wSvm;
@@ -84,7 +86,6 @@ private:
 	QString file_thumbs, file_cover_front, file_cover_back;
 
 	QHash<QString, stGrlDatos> emu_list;
-	QHash<QString, stGrlDatos> smiles_list;
 	bool Editando;
 
 	QCheckComboBox *cbxDatos_Genero;
@@ -129,25 +130,6 @@ private slots:
 	void on_btnImgAbrir_CoverBack_clicked();
 	void on_btnImgVer_CoverBack_clicked();
 	void on_btnImgEliminar_CoverBack_clicked();
-// Descripción
-	void on_btnTool_Cortar_clicked();
-	void on_btnTool_Copiar_clicked();
-	void on_btnTool_Pegar_clicked();
-	void on_btnTool_SelectAll_clicked();
-	void on_btnTool_Deshacer_clicked();
-	void on_btnTool_Rehacer_clicked();
-	void on_btnTool_TextoNegrita_clicked();
-	void on_btnTool_TextoCursiva_clicked();
-	void on_btnTool_TextoSubrayado_clicked();
-	void on_btnTool_InsertarImg_clicked();
-	void on_btnTool_InsertaUrl_clicked();
-	void on_btnTool_Buscar_clicked(bool checked);
-	void on_btnTool_Reemplazar_clicked(bool checked);
-	void on_btnTool_Preview_clicked();
-	void on_btnTool_ReemplazarTexto_clicked();
-	void on_btnTool_BuscarAnterior_clicked();
-	void on_btnTool_BuscarSiguiente_clicked();
-	void on_twDatoSmile_itemDoubleClicked(QTreeWidgetItem *item, int column);
 // Otros datos
 	void on_btnDatos_ExeJuego_clicked();
 	void on_btnDatos_ExeJuego_clear_clicked();

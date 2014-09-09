@@ -129,6 +129,12 @@ FORMS += ui/grlida.ui \
     ui/list_icon_cfg.ui
 
 # ###### 3rdparty Files
+HEADERS += 3rdparty/editorwidget/codeeditor.h \
+	3rdparty/editorwidget/editorwidget.h
+
+SOURCES += 3rdparty/editorwidget/codeeditor.cpp \
+	3rdparty/editorwidget/editorwidget.cpp
+
 HEADERS += 3rdparty/pictureflow-qt/pictureflow.h
 SOURCES += 3rdparty/pictureflow-qt/pictureflow.cpp
 

@@ -363,7 +363,14 @@
         <file>img16/edit_reemplazar.png</file>
         <file>img16/edit_rehacer.png</file>
         <file>img16/edit_select_all.png</file>
+        <file>img16/edit_simplify_richtext.png</file>
         <file>img16/edit_subrayada.png</file>
+        <file>img16/edit_text_center.png</file>
+        <file>img16/edit_text_justify.png</file>
+        <file>img16/edit_text_left.png</file>
+        <file>img16/edit_text_right.png</file>
+        <file>img16/edit_text_subs.png</file>
+        <file>img16/edit_text_super.png</file>
         <file>img16/editar.png</file>
         <file>img16/ejecutar_app.png</file>
         <file>img16/ejecutar_app_setup.png</file>
