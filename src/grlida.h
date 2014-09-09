@@ -35,6 +35,7 @@
 #include "dbsql.h"
 #include "grlida_delegate.h"
 #include "grlida_picflow.h"
+#include "animatedtextbrowser.h"
 
 namespace Ui {
 	class GrLida;
@@ -63,6 +64,7 @@ private:
 	GrlTreeViewDelegate *grl_tv_delegate;
 	GrlListViewDelegate *grl_lv_delegate;
 	GrlPicFlow *grl_picflow;
+	AnimatedTextBrowser *txtInfo;
 
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;

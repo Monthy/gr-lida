@@ -356,7 +356,7 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_InfoDatos">
-    <layout class="QVBoxLayout" name="verticalLayout_3">
+    <layout class="QVBoxLayout" name="verticalLayout_Info">
      <property name="spacing">
       <number>0</number>
      </property>
@@ -373,18 +373,21 @@
       <number>1</number>
      </property>
      <item>
-      <widget class="QTextBrowser" name="txtInfo">
-       <property name="openExternalLinks">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QLabel" name="lb_info_12">
          <property name="text">
+          <string>Descripción</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lb_info_13">
+         <property name="text">
           <string>Dispone de archivos / carátulas</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -2432,7 +2435,6 @@
  <tabstops>
   <tabstop>tvJuegos</tabstop>
   <tabstop>lvJuegos</tabstop>
-  <tabstop>txtInfo</tabstop>
   <tabstop>cbxCategoriasTb</tabstop>
   <tabstop>cbxCategorias</tabstop>
   <tabstop>twListNav</tabstop>

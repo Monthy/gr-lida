@@ -1878,8 +1878,8 @@ QString Funciones::reemplazaTextoSmiles(QString str, QHash<QString, stGrlDatos> 
 {
 	foreach (const stGrlDatos &smile, lista)
 	{
-		QRegExp rx_smile("\\s("+ QRegExp::escape(smile.key) +")\\s");
-		str.replace(rx_smile, "<img src=\":smile_rs_"+ smile.icono +"\" alt=\""+ smile.key +"\" title=\""+ smile.key +"\"> ");
+		QRegExp rx_smile(QRegExp::escape(smile.key) +"\\s");
+		str.replace(rx_smile, "<img src=\":smile_rs_"+ smile.key +"_"+ smile.icono +"\" alt=\""+ smile.key +"\" title=\""+ smile.key +"\"/> ");
 	}
 	return str;
 }

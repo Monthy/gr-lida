@@ -146,6 +146,7 @@ SOURCES += 3rdparty/osdab-zip/unzip.cpp \
 HEADERS += 3rdparty/doc_pdf_widget.h
 SOURCES += 3rdparty/doc_pdf_widget.cpp
 
+HEADERS += 3rdparty/animatedtextbrowser.h
 HEADERS += 3rdparty/crc32qt.h
 
 HEADERS += 3rdparty/qcheckcombobox.h

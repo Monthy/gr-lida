@@ -54,6 +54,7 @@ GrLida::GrLida(QWidget *parent) :
 {
 	ui->setupUi(this);
 	fGrl = new Funciones;
+	txtInfo = new AnimatedTextBrowser(this);
 
 // Título de la aplicación
 	setWindowTitle( tituloGrl() +" - v"+ fGrl->versionGrl() );
@@ -651,7 +652,8 @@ void GrLida::cargarConfig()
 	ui->twCapturaSonido->header()->setResizeMode(1, QHeaderView::Interactive);
 	ui->twCapturaSonido->setColumnWidth(1, 200 );
 
-	ui->txtInfo->installEventFilter(this);
+	txtInfo->installEventFilter(this);
+	ui->verticalLayout_Info->addWidget(txtInfo);
 
 	ui->btnVer_CoverFront->setEnabled( false );
 	ui->btnVer_CoverBack->setEnabled( false );
@@ -665,6 +667,28 @@ void GrLida::cargarConfig()
 	smiles_list  = fGrl->cargaDatosQHash(grlDir.Datos +"smiles.txt", 2, "\",\"");
 	idiomas_list = fGrl->cargaDatosQHash(grlDir.Datos + fGrl->Idioma() +"/idiomas.txt", 3, "|");
 	edades_list  = fGrl->cargaDatosQHash(grlDir.Datos + fGrl->Idioma() +"/edad_recomendada.txt", 3, "|");
+
+	txtInfo->clear();
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("img_rs_star_on.png"), QImage(fGrl->Theme() +"images/star_on.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("img_rs_star_off.png"), QImage(fGrl->Theme() +"images/star_off.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_3.png") , QImage(fGrl->Theme() +"img16/edad_3.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_7.png") , QImage(fGrl->Theme() +"img16/edad_7.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_12.png"), QImage(fGrl->Theme() +"img16/edad_12.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_16.png"), QImage(fGrl->Theme() +"img16/edad_16.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_18.png"), QImage(fGrl->Theme() +"img16/edad_18.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_nd.png"), QImage(fGrl->Theme() +"img16/edad_nd.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_tp.png"), QImage(fGrl->Theme() +"img16/edad_tp.png"));
+
+	foreach (const stGrlDatos &idioma, idiomas_list)
+		txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("idioma_rs_"+ idioma.icono), QImage(fGrl->Theme() +"img_lng/"+ idioma.icono));
+
+	foreach (const stGrlDatos &smile, smiles_list)
+	{
+		if( fGrl->getInfoFile(grlDir.Smiles + smile.icono).Ext == ".gif" )
+			txtInfo->addAnimation(QUrl("smile_rs_"+ smile.key +"_"+ smile.icono), grlDir.Smiles + smile.icono);
+		else
+			txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("smile_rs_"+ smile.key +"_"+ smile.icono), QImage(grlDir.Smiles + smile.icono));
+	}
 
 	dbx_list.clear();
 	dbx_list = fGrl->cargaDatosQHash(grlDir.Datos +"dbx_list.txt", 6, "|");
@@ -1630,8 +1654,8 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 			str_html_new = fGrl->leerArchivo(":/tpl_juego_no_info.html", "UTF-8");
 
 		str_html_new.replace("{lb_juego_no_info}", tr("Información no disponible"));
-		ui->txtInfo->clear();
-		ui->txtInfo->setHtml( str_html_new );
+
+		txtInfo->setHtml( str_html_new );
 
 		lb_panel_2->setText(" "+ tr("Nº juegos") +": "+ fGrl->IntToStr(row_select) +" "+ tr("de") +" "+ fGrl->IntToStr(total_juegos) +"  ");
 		lb_panel_3->setPixmap( QPixmap(fGrl->Theme() +"img16/sinimg.png") );
@@ -1670,19 +1694,6 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 			else
 				dat_icono = ":/img24_cat/sinimg.png";
 
-			ui->txtInfo->clear();
-			ui->txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("thumb_rs_"+ Thumbs), QImage(dat_thumbs));
-			ui->txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("icono_rs_"+ datos.icono), QImage(dat_icono));
-			ui->txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("img_rs_star_on.png"), QImage(fGrl->Theme() +"images/star_on.png"));
-			ui->txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("img_rs_star_off.png"), QImage(fGrl->Theme() +"images/star_off.png"));
-			ui->txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_"+ edades_list[datos.edad_recomendada].icono), QImage(fGrl->Theme() +"img16/"+ edades_list[datos.edad_recomendada].icono));
-
-			foreach (const stGrlDatos &smile, smiles_list)
-				ui->txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("smile_rs_"+ smile.icono), QImage(grlDir.Smiles + smile.icono));
-
-			foreach (const stGrlDatos &idioma, idiomas_list)
-				ui->txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("idioma_rs_"+ idioma.icono), QImage(fGrl->Theme() +"img_lng/"+ idioma.icono));
-
 			dat_idioma       = fGrl->getImgDatos(idiomas_list, datos.idioma.split(";")      , true);
 			dat_idioma_voces = fGrl->getImgDatos(idiomas_list, datos.idioma_voces.split(";"), true);
 			dat_img_edad     = "<img src=\":edad_rs_"+ edades_list[datos.edad_recomendada].icono +"\" alt=\""+ edades_list[datos.edad_recomendada].titulo +"\" title=\""+ edades_list[datos.edad_recomendada].titulo +"\"> ";
@@ -1717,7 +1728,7 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 			}
 
 		// Reempla la info del juego.
-			str_html_new.replace("{info_icono}"               , ":icono_rs_"+ datos.icono);
+			str_html_new.replace("{info_icono}"               , QUrl::fromLocalFile(dat_icono).path() );
 			str_html_new.replace("{info_titulo}"              , Qt::escape(datos.titulo)    );
 			str_html_new.replace("{info_subtitulo}"           , Qt::escape(datos.subtitulo) );
 			str_html_new.replace("{info_genero}"              , datos.genero        );
@@ -1740,7 +1751,7 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 			str_html_new.replace("{info_jugabilidad}"         , datos.jugabilidad   );
 			str_html_new.replace("{info_original}"            , datos.original      );
 			str_html_new.replace("{info_estado}"              , datos.estado        );
-			str_html_new.replace("{info_thumbs}"              , ":thumb_rs_"+ Thumbs);
+			str_html_new.replace("{info_thumbs}"              , QUrl::fromLocalFile(dat_thumbs).path() );
 			str_html_new.replace("{info_fecha}"               , fGrl->HoraFechaActual(datos.fecha, grlCfg.FormatoFecha) );
 			str_html_new.replace("{info_tipo_emu}"            , datos.tipo_emu      );
 			str_html_new.replace("{info_favorito}"            , datos.favorito == "true" ? tr("Si") : tr("No") );
@@ -1748,7 +1759,7 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 			str_html_new.replace("{info_usuario}"             , datos.usuario       );
 			str_html_new.replace("{info_comentario}", fGrl->reemplazaTextoSmiles(datos.comentario, smiles_list) );
 
-			ui->txtInfo->setHtml( str_html_new );
+			txtInfo->setHtml( str_html_new );
 
 			if( !CoverFront.isEmpty() && QFile::exists(grlDir.Covers + CoverFront) )
 				ui->btnVer_CoverFront->setEnabled(true);
