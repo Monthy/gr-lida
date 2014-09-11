@@ -102,6 +102,7 @@ private slots:
 	void on_btn_zoom_normal_clicked();
 	void on_btn_fullscreen_toggled(bool checked);
 	void on_btn_info_toggled(bool checked);
+	void on_btn_ayuda_triggered();
 	void on_btn_acercade_triggered();
 // Ruletas de la A a la D
 	void on_slider_rotar_a_valueChanged(int value);

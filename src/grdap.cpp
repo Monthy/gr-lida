@@ -744,6 +744,11 @@ void GrDap::on_btn_info_toggled(bool checked)
 	ui->frame_info->setVisible(checked);
 }
 
+void GrDap::on_btn_ayuda_triggered()
+{
+	QDesktopServices::openUrl( QUrl("http://www.gr-lida.org/ayuda/gr-dap/") );
+}
+
 void GrDap::on_btn_acercade_triggered()
 {
 	QDialog *AcercaD = new QDialog(this);
