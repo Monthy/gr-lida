@@ -1192,7 +1192,7 @@
     <string>Ayuda</string>
    </property>
    <property name="statusTip">
-    <string>Muestra la ayuda del GR-lida</string>
+    <string>Muestra la ayuda del GR-dap</string>
    </property>
    <property name="shortcut">
     <string>F1</string>
@@ -1268,6 +1268,7 @@
   <tabstop>btn_menu</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/gr-lida.qrc"/>
   <include location="../res/gr-lida.qrc"/>
   <include location="../res/gr-lida.qrc"/>
  </resources>
