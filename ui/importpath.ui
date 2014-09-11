@@ -1414,7 +1414,6 @@
  </tabstops>
  <resources>
   <include location="../res/gr-lida.qrc"/>
-  <include location="../res/gr-lida.qrc"/>
  </resources>
  <connections/>
 </ui>
