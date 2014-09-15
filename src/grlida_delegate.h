@@ -36,7 +36,7 @@
 #include "dbsql.h"
 
 // INICIO GrlListViewDelegate -----------------------------------------------------------------------------------
-class GrlListViewDelegate : public QItemDelegate
+class GrlListViewDelegate : public QStyledItemDelegate
 {
 	Q_OBJECT
 
@@ -95,7 +95,7 @@ private:
 // FIN GrlTreeViewModel -----------------------------------------------------------------------------------------
 
 // INICIO GrlTreeViewDelegate -----------------------------------------------------------------------------------
-class GrlTreeViewDelegate : public QItemDelegate
+class GrlTreeViewDelegate : public QStyledItemDelegate
 {
 	Q_OBJECT
 

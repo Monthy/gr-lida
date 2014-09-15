@@ -26,7 +26,7 @@
 
 // INICIO GrlListViewDelegate -----------------------------------------------------------------------------------
 GrlListViewDelegate::GrlListViewDelegate(dbSql *m_sql, QString dir_app, QString dir_theme, QString dir_theme_app, QString filter, QWidget *parent)
-	:QItemDelegate(parent)
+	:QStyledItemDelegate(parent)
 {
 	sql        = m_sql;
 	stDirApp   = dir_app;
@@ -79,6 +79,7 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 {
 	int rect_x = option.rect.x();
 	int rect_y = option.rect.y();
+	QStyledItemDelegate::paint(painter, option, index);
 
 // Dibujamos la caratula.
 	QPixmap icon = qvariant_cast<QPixmap>(index.data(IconRole));
@@ -155,15 +156,13 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 				rating_x += star_on.width();
 		}
 	}
-
-	QItemDelegate::paint(painter, option, index);
 }
 
 QSize GrlListViewDelegate::sizeHint(const QStyleOptionViewItem &option,
 		const QModelIndex &index) const
 {
 	return QSize(lwConf.icon_width, lwConf.icon_height);
-	return QItemDelegate::sizeHint(option, index);
+	return QStyledItemDelegate::sizeHint(option, index);
 }
 
 bool GrlListViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
@@ -209,7 +208,7 @@ bool GrlListViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
 		}
 		return true;
 	} else
-		return QItemDelegate::editorEvent(event, model, option, index);
+		return QStyledItemDelegate::editorEvent(event, model, option, index);
 }
 // FIN GrlListViewDelegate --------------------------------------------------------------------------------------
 
@@ -235,6 +234,16 @@ QVariant GrlTreeViewModel::data(const QModelIndex &index, int role) const
 			return Qt::AlignCenter;
 		}
 	}
+	else if (role == Qt::DecorationRole)
+	{
+		if( this->fieldIndex("icono") == index.column() || this->fieldIndex("original") == index.column() ||
+			this->fieldIndex("favorito") == index.column() || this->fieldIndex("rating") == index.column() ||
+			this->fieldIndex("edad_recomendada") == index.column() )
+		{
+			QString textoDecoration = QSqlTableModel::data(index, Qt::DisplayRole).toString();
+			return textoDecoration;
+		}
+	}
 	else if (role == Qt::DisplayRole)
 	{
 		if( this->fieldIndex("fecha") == index.column() )
@@ -243,6 +252,10 @@ QVariant GrlTreeViewModel::data(const QModelIndex &index, int role) const
 			dt.setTime_t( QSqlTableModel::data(index, Qt::DisplayRole).toInt() );
 			return ""+ dt.toString(formatofecha);
 		}
+		if( this->fieldIndex("icono") == index.column() || this->fieldIndex("original") == index.column() ||
+			this->fieldIndex("favorito") == index.column() || this->fieldIndex("rating") == index.column() ||
+			this->fieldIndex("edad_recomendada") == index.column() )
+			return "";
 		if( this->fieldIndex("genero") == index.column() || this->fieldIndex("compania") == index.column() ||
 			this->fieldIndex("desarrollador") == index.column() || this->fieldIndex("tema") == index.column() ||
 			this->fieldIndex("grupo") == index.column() || this->fieldIndex("perspectiva") == index.column() ||
@@ -260,7 +273,7 @@ QVariant GrlTreeViewModel::data(const QModelIndex &index, int role) const
 
 // INICIO GrlTreeViewDelegate -----------------------------------------------------------------------------------
 GrlTreeViewDelegate::GrlTreeViewDelegate(dbSql *m_sql, QString dir_app, QString dir_theme, QString dir_theme_app, QString filter, QTreeWidget *m_twNav, QWidget *parent)
-	:QItemDelegate(parent)
+	:QStyledItemDelegate(parent)
 {
 	sql        = m_sql;
 	stDirApp   = dir_app;
@@ -296,23 +309,18 @@ GrlTreeViewDelegate::~GrlTreeViewDelegate()
 void GrlTreeViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
 		const QModelIndex &index) const
 {
+	QStyledItemDelegate::paint(painter, option, index);
 	if( index.column() == col[col_Icono] || index.column() == col[col_Original] ||
 		index.column() == col[col_Favorito] || index.column() == col[col_Rating] ||
 		index.column() == col[col_Edad] )
 	{
 		const QAbstractItemModel *model = index.model();
-		QPalette::ColorGroup cg = (option.state & QStyle::State_Enabled) ?
-			(option.state & QStyle::State_Active) ? QPalette::Normal : QPalette::Inactive : QPalette::Disabled;
-
-		if( option.state & QStyle::State_Selected )
-			painter->fillRect(option.rect, option.palette.color(cg, QPalette::Highlight));
-
-		if( !model->data(index, Qt::DisplayRole).toString().isEmpty() )
+		if( !model->data(index, Qt::DecorationRole).toString().isEmpty() )
 		{
 			int width, height, x, y;
 			if ( index.column() == col[col_Icono] )
 			{
-				QString ico = model->data(index, Qt::DisplayRole).toString();
+				QString ico = model->data(index, Qt::DecorationRole).toString();
 				width  = icono[ico].width();
 				height = icono[ico].height();
 				QImage img_painter(option.rect.width(), option.rect.height(), QImage::Format_ARGB32);
@@ -323,14 +331,12 @@ void GrlTreeViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 				p.fillRect(img_painter.rect(), Qt::transparent);
 				p.drawPixmap(x, y, icono[ico]);
 				p.end();
-				x = option.rect.x();
-				y = option.rect.y() + (option.rect.height() / 2) - (img_painter.height() / 2);
 
-				painter->drawImage(x, y, img_painter);
+				painter->drawImage(option.rect.x(), option.rect.y(), img_painter);
 			}
 			if ( index.column() == col[col_Original] )
 			{
-				QString original = model->data(index, Qt::DisplayRole).toString().toLower();
+				QString original = model->data(index, Qt::DecorationRole).toString().toLower();
 				width  = img_original.width();
 				height = img_original.height();
 				x      = option.rect.x() + (option.rect.width() / 2) - (width / 2);
@@ -343,7 +349,7 @@ void GrlTreeViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 			}
 			if ( index.column() == col[col_Favorito] )
 			{
-				bool favorito = model->data(index, Qt::DisplayRole).toBool();
+				bool favorito = model->data(index, Qt::DecorationRole).toBool();
 				width  = img_favorito.width();
 				height = img_favorito.height();
 				x      = option.rect.x() + (option.rect.width() / 2) - (width / 2);
@@ -356,11 +362,11 @@ void GrlTreeViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 			}
 			if ( index.column() == col[col_Rating] )
 			{
-				int rating = model->data(index, Qt::DisplayRole).toInt();
+				int rating = model->data(index, Qt::DecorationRole).toInt();
 				width  = star_on.width();
 				height = star_on.height();
 				QImage img_painter(option.rect.width(), option.rect.height(), QImage::Format_ARGB32);
-				x = 0;
+				x = (img_painter.width() / 2) - (width*5 / 2);
 				y = (img_painter.height() / 2) - (height / 2);
 				QPainter p(&img_painter);
 				p.setCompositionMode(QPainter::CompositionMode_Source);
@@ -374,14 +380,12 @@ void GrlTreeViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 					x += width;
 				}
 				p.end();
-				x = option.rect.x();
-				y = option.rect.y() + (option.rect.height() / 2) - (img_painter.height() / 2);
 
-				painter->drawImage(x, y, img_painter);
+				painter->drawImage(option.rect.x(), option.rect.y(), img_painter);
 			}
 			if ( index.column() == col[col_Edad] )
 			{
-				QString edad = "edad_"+ model->data(index, Qt::DisplayRole).toString() +".png";
+				QString edad = "edad_"+ model->data(index, Qt::DecorationRole).toString() +".png";
 				width  = edades[edad].width();
 				height = edades[edad].height();
 				x      = option.rect.x() + (option.rect.width() / 2) - (width / 2);
@@ -390,11 +394,6 @@ void GrlTreeViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 				painter->drawPixmap(x, y, edades[edad]);
 			}
 		}
-		drawFocus(painter, option, option.rect.adjusted(0, 0, 0, 0));
-	} else {
-		QStyleOptionViewItemV3 opt = option;
-		opt.rect.adjust(0, 0, 0, 0); // since we draw the grid ourselves
-		QItemDelegate::paint(painter, opt, index);
 	}
 }
 
@@ -407,7 +406,7 @@ QSize GrlTreeViewDelegate::sizeHint(const QStyleOptionViewItem &option,
 	if( index.column() == col[col_Titulo] )
 		return size_icon + QSize(1, 1);
 
-	return QItemDelegate::sizeHint(option, index) + QSize(1, 1);
+	return QStyledItemDelegate::sizeHint(option, index) + QSize(1, 1);
 }
 
 bool GrlTreeViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
@@ -419,12 +418,12 @@ bool GrlTreeViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
 		{
 			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
 
-			if( index.data(Qt::DisplayRole).toString() != "" )
+			if( index.data(Qt::DecorationRole).toString() != "" )
 			{
 				QString id_grl = model->data(index.sibling(index.row(), col[col_IdGrl]), Qt::DisplayRole).toString();
 				if( index.column() == col[col_Original] )
 				{
-					QString original = index.data(Qt::DisplayRole).toString();
+					QString original = index.data(Qt::DecorationRole).toString();
 					original = fGrl.StrToBool(original) ? "false" : "true";
 					model->setData(index, original);
 					sql->actualizaDatosItem(stTabla, id_grl, "original", original);
@@ -440,7 +439,7 @@ bool GrlTreeViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
 				}
 				if( index.column() == col[col_Favorito] )
 				{
-					QString fav = index.data(Qt::DisplayRole).toString();
+					QString fav = index.data(Qt::DecorationRole).toString();
 					fav = fGrl.StrToBool(fav) ? "false" : "true";
 					model->setData(index, fav);
 					sql->actualizaDatosFavorito(stTabla, id_grl, fav);
@@ -456,7 +455,8 @@ bool GrlTreeViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
 				}
 				if( index.column() == col[col_Rating] )
 				{
-					int stars = qBound(0, int(0.5 + qreal(mouseEvent->pos().x() - option.rect.x()) / star_on.width()), 5);
+					int pos_x_rating = option.rect.x() + (option.rect.width() / 2) - (star_on.width()*5 / 2);
+					int stars = qBound(0, int(0.5 + qreal(mouseEvent->pos().x() - pos_x_rating) / star_on.width()), 5);
 					model->setData(index, QVariant(stars));
 					sql->actualizaDatosRating(stTabla, id_grl, fGrl.IntToStr(stars));
 				}
@@ -465,6 +465,6 @@ bool GrlTreeViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
 		}
 		return true;
 	} else
-		return QItemDelegate::editorEvent(event, model, option, index);
+		return QStyledItemDelegate::editorEvent(event, model, option, index);
 }
 // FIN GrlTreeViewDelegate --------------------------------------------------------------------------------------
