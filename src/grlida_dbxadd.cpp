@@ -372,7 +372,8 @@ void frmDbxAdd::on_btnOk_clicked()
 
 		QList<QString> url_list = sql->getDatosUrls(DatosJuego.idgrl, categoria.id);
 		sql->insertaMontajesDbx(ui->twMontajes, DatosDosBox.id);
-		fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, ui->twMontajes, grlDir.Home, categoria.tabla, grlDir.Confdbx + DatosDosBox.path_conf);
+		if( grlCfg.DOSBoxSaveConfFile )
+			fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, ui->twMontajes, grlDir.Home, categoria.tabla, grlDir.Confdbx + DatosDosBox.path_conf);
 
 		QDialog::accept();
 	}

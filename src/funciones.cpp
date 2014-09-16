@@ -890,6 +890,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.IndexTabArchivos    = settings.value("IndexTabArchivos"   , 0).toInt();
 		config.VersionDBx          = settings.value("VersionDBx"         , "0.74").toString();
 		config.DOSBoxSVN           = settings.value("DOSBoxSVN"          , false).toBool();
+		config.DOSBoxSaveConfFile  = settings.value("DOSBoxSaveConfFile" , true).toBool();
 		config.LastSelectCatID     = settings.value("LastSelectCatID"    , "0").toString();
 		config.LastTabOptSelect    = settings.value("LastTabOptSelect"   , 0).toInt();
 	settings.endGroup();
@@ -1071,6 +1072,7 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 		settings.setValue("IndexTabArchivos"   , config.IndexTabArchivos    );
 		settings.setValue("VersionDBx"         , config.VersionDBx          );
 		settings.setValue("DOSBoxSVN"          , config.DOSBoxSVN           );
+		settings.setValue("DOSBoxSaveConfFile" , config.DOSBoxSaveConfFile  );
 		settings.setValue("LastSelectCatID"    , config.LastSelectCatID     );
 		settings.setValue("LastTabOptSelect"   , config.LastTabOptSelect    );
 	settings.endGroup();

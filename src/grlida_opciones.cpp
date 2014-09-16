@@ -93,6 +93,7 @@ void frmOpciones::cargarConfig()
 
 // DOSBox ----------------------------
 	ui->chkDOSBoxDisp->setChecked( grlCfg.DOSBoxDisp );
+	ui->chkDbxSaveConfFile->setChecked( grlCfg.DOSBoxSaveConfFile );
 	regexp.setPattern("[a-z-_0-9]+");
 	ui->txtDbxDato->setValidator(new QRegExpValidator(regexp, ui->txtDbxDato));
 
@@ -280,6 +281,7 @@ void frmOpciones::guardarConfig()
 	grlCfg.DirScummVM      = ui->txtSvmPath->text();
 	grlCfg.DirBaseGames    = ui->txtDirBaseGames->text();
 	grlCfg.DOSBoxDisp      = ui->chkDOSBoxDisp->isChecked();
+	grlCfg.DOSBoxSaveConfFile = ui->chkDbxSaveConfFile->isChecked();
 	grlCfg.ScummVMDisp     = ui->chkScummVMDisp->isChecked();
 	grlCfg.VDMSoundDisp    = ui->chkVDMSoundDisp->isChecked();
 	grlCfg.OpenPdfExternal = ui->chkOpenPdfExternal->isChecked();

@@ -1923,8 +1923,13 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 			if( conf_dosbox["dosbox_emu_key"].isEmpty() || !dbx_list.contains(conf_dosbox["dosbox_emu_key"]) )
 				conf_dosbox["dosbox_emu_key"] = grlCfg.DOSBoxDefault.isEmpty() ? "dosbox" : grlCfg.DOSBoxDefault;
 
+			if( grlCfg.DOSBoxSaveConfFile )
+				conf_dosbox["path_conf"] = grlDir.Confdbx + conf_dosbox["path_conf"];
+			else
+				conf_dosbox["path_conf"] = grlDir.Temp +"config_game_dosbox.conf";
+
 			cfgExec.f_exe         = fGrl->getDirRelative(dbx_list[conf_dosbox["dosbox_emu_key"]].extra);
-			cfgExec.f_param       = "-conf|"+ QDir::toNativeSeparators(grlDir.Confdbx + conf_dosbox["path_conf"]);
+			cfgExec.f_param       = "-conf|"+ QDir::toNativeSeparators(conf_dosbox["path_conf"]);
 			cfgExec.f_exe_setup   = fGrl->getDirRelative(conf_dosbox["path_setup"], "DosGames");
 			cfgExec.f_param_setup = conf_dosbox["parametros_setup"];
 			cfgExec.f_path        = fGrl->getInfoFile( fGrl->getDirRelative(conf_dosbox["path_exe"], "DosGames") ).Path;
@@ -2629,6 +2634,39 @@ void GrLida::on_mnu_ejecutar_scummvm_triggered()
 
 void GrLida::on_mnu_ejecutar_juego_triggered()
 {
+	if( !grlCfg.DOSBoxSaveConfFile && TipoEmu == "dosbox" )
+	{
+		stDatosJuego DatosJuego = sql->show_Datos(categoria[id_cat].tabla, IdGame);
+		stConfigDOSBox DatosDosBox = sql->showConfg_DOSBox(IdGame, categoria[id_cat].id);
+		QList<QString> url_list;
+		QTreeWidget *twTempDbxMontajes = new QTreeWidget();
+		twTempDbxMontajes->setVisible(false);
+		QSqlQuery query(sql->getSqlDB());
+		query.exec("SELECT id, id_lista, path, label, tipo_as, letter, indx_cd, opt_mount, io_ctrl, select_mount, opt_size, opt_freesize, freesize FROM dbgrl_emu_dosbox_mount WHERE id_dosbox="+ DatosDosBox.id +" ORDER BY id_lista");
+		if( query.first() )
+		{
+			twTempDbxMontajes->clear();
+			do {
+				QTreeWidgetItem *item = new QTreeWidgetItem( twTempDbxMontajes );
+				item->setText( 0, query.record().value("path").toString()         );	// Directorio o iso
+				item->setText( 1, query.record().value("letter").toString()       );	// Letra de montaje
+				item->setText( 2, query.record().value("tipo_as").toString()      );	// Tipo de montaje
+				item->setText( 3, query.record().value("label").toString()        );	// Etiqueta
+				item->setText( 4, query.record().value("indx_cd").toString()      );	// Index de la unidad de cd-rom
+				item->setText( 5, query.record().value("opt_mount").toString()    );	// Opciones del cd-rom
+				item->setText( 6, query.record().value("io_ctrl").toString()      );	// Cd/dvd
+				item->setText( 7, query.record().value("select_mount").toString() );	// Primer montaje
+				item->setText( 8, query.record().value("id").toString()           );	// Id
+				item->setText( 9, query.record().value("id_lista").toString()     );	// Id_lista
+				item->setText(10, query.record().value("opt_size").toString()     );
+				item->setText(11, query.record().value("opt_freesize").toString() );
+				item->setText(12, query.record().value("freesize").toString()     );
+			} while (query.next());
+		}
+		fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, twTempDbxMontajes, grlDir.Home, categoria[id_cat].tabla, grlDir.Temp +"config_game_dosbox.conf");
+		delete twTempDbxMontajes;
+	}
+
 	if( cfgExec.isCfgExec )
 		ejecutar(cfgExec.f_exe, cfgExec.f_param, cfgExec.f_path);
 }
@@ -2679,7 +2717,8 @@ void GrLida::on_mnu_tool_importar_triggered()
 
 				QList<QString> url_list = sql->getDatosUrls(DatosJuego.idgrl, categoria[id_cat].id);
 				sql->insertaMontajesDbx(ImportarJuego->ui->twMontajes, DatosDosBox.id);
-				fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, ImportarJuego->ui->twMontajes, grlDir.Home, categoria[id_cat].tabla, grlDir.Confdbx + DatosDosBox.path_conf);
+				if( grlCfg.DOSBoxSaveConfFile )
+					fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, ImportarJuego->ui->twMontajes, grlDir.Home, categoria[id_cat].tabla, grlDir.Confdbx + DatosDosBox.path_conf);
 			}
 
 			if( DatosJuego.tipo_emu == "scummvm" )

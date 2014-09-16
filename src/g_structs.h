@@ -168,6 +168,7 @@ struct stGrlCfg {
 	int     IndexTabArchivos;
 	QString VersionDBx;
 	bool    DOSBoxSVN;
+	bool    DOSBoxSaveConfFile;
 	QString LastSelectCatID;
 	int     LastTabOptSelect;
 // OpcFuente

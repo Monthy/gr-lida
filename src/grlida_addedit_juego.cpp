@@ -794,7 +794,8 @@ void frmAddEditJuego::on_btnOk_clicked()
 					{
 						sql->actualizaDbx( DatosDosBox );
 						sql->actualizaMontajeDbx( wDbx->ui->twMontajes );
-						fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, wDbx->ui->twMontajes, grlDir.Home, categoria.tabla, grlDir.Confdbx + DatosDosBox.path_conf);
+						if( grlCfg.DOSBoxSaveConfFile )
+							fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, wDbx->ui->twMontajes, grlDir.Home, categoria.tabla, grlDir.Confdbx + DatosDosBox.path_conf);
 
 						comprobarDirCapturas(DatosDosBox.dosbox_captures, oldTitulo, DatosJuego.titulo, TipoEmu);
 					} else {
@@ -802,7 +803,8 @@ void frmAddEditJuego::on_btnOk_clicked()
 						DatosDosBox.idcat = categoria.id;
 						DatosDosBox.id    = sql->insertaDbx( DatosDosBox );
 						sql->insertaMontajesDbx(wDbx->ui->twMontajes, DatosDosBox.id);
-						fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, wDbx->ui->twMontajes, grlDir.Home, categoria.tabla, grlDir.Confdbx + DatosDosBox.path_conf);
+						if( grlCfg.DOSBoxSaveConfFile )
+							fGrl->crearArchivoConfigDbx(DatosJuego, url_list, DatosDosBox, wDbx->ui->twMontajes, grlDir.Home, categoria.tabla, grlDir.Confdbx + DatosDosBox.path_conf);
 
 						comprobarDirCapturas(DatosDosBox.dosbox_captures, DatosJuego.titulo, DatosJuego.titulo, TipoEmu);
 					}
