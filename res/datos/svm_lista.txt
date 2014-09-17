@@ -22,7 +22,7 @@ Rodney's Funscreen|rodney|90|rodney.png
 Adventuresoft/Horrorsoft Game Compatibility Chart|||sinimg.png
 Elvira - Mistress of the Dark|elvira1|90|elvira.png
 Elvira II - The Jaws of Cerberus|elvira2|90|elvira.png
-Personal Nightmare|pn|not|sinimg.png
+Personal Nightmare|pn|sin_num|sinimg.png
 Simon the Sorcerer 1|simon1|100|simon.png
 Simon the Sorcerer 2|simon2|100|simon.png
 Simon the Sorcerer's Puzzle Pack - D.I.M.P.|dimp|90|simon.png
@@ -30,7 +30,7 @@ Simon the Sorcerer's Puzzle Pack - Jumble|jumble|90|simon.png
 Simon the Sorcerer's Puzzle Pack - NoPatience|puzzle|90|simon.png
 Simon the Sorcerer's Puzzle Pack - Swampy Adventures|swampy|90|simon.png
 The Feeble Files|feeble|100|feeble.png
-Waxworks|waxworks|not|waxworks.png
+Waxworks|waxworks|sin_num|waxworks.png
 
 Coktel Vision Game Compatibility Chart|||logo_coktel_vision.png
 Bargon Attack|bargon|100|bargon.png
@@ -40,7 +40,7 @@ Gobliiins|gob1|100|gob.png
 Gobliins 2|gob2|100|gob.png
 Goblins 3|gob3|100|gob.png
 Lost in Time|gob|100|lostintime.png
-Once Upon A Time: Little Red Riding Hood|littlered|90|sinimg.png
+Once Upon A Time: Little Red Riding Hood|littlered|90|littlered.png
 Playtoons: Bambou le Sauveur de la Jungle|bambou|100|sinimg.png
 The Bizarre Adventures of Woodruff and the Schnibble|woodruff|100|woodruff.png
 Urban Runner|urban|100|urban.png
@@ -123,21 +123,21 @@ Discworld|dw|100|dw.png
 Discworld II - Missing presumed...!?|dw2|100|dw.png
 Dragon History|draci|90|draci.png
 Drascula: The Vampire Strikes Back|drascula|100|drascula.png
-Eye of the Beholder|eob|80|sinimg.png|eob|90|sinimg.png
-Eye of the Beholder II: The Legend of Darkmoon|eob2|90|sinimg.png
+Eye of the Beholder|eob|90|eob.png
+Eye of the Beholder II: The Legend of Darkmoon|eob2|90|eob.png
 Flight of the Amazon Queen|queen|100|queen.png
 Future Wars|fw|90|fw.png
-Hopkins FBI|hopkins|90|sinimg.png
+Hopkins FBI|hopkins|90|hopkins.png
 Hugo's House of Horrors|hugo1|90|sinimg.png
 Hugo 2: Whodunit?|hugo2|90|sinimg.png
 Hugo 3: Jungle of Doom|hugo3|90|sinimg.png
 I Have No Mouth, and I Must Scream|ihnm|90|ihnm.png
 Inherit the Earth: Quest for the Orb|ite|100|ite.png
 Lands of Lore: The Throne of Chaos|lol|90|lol.png
-Mortville Manor|mortevielle|not|sinimg.png
+Mortville Manor|mortevielle|sin_num|sinimg.png
 Nippon Safes Inc.|nippon|90|nippon.png
 Ringworld: Revenge Of The Patriarch|ringworld|90|ringworld.png
-Return to Ringworld|ringworld2|not|sinimg.png
+Return to Ringworld|ringworld2|sin_num|sinimg.png
 Soltys|soltys|90|soltys.png
 The Journeyman Project: Pegasus Prime|pegasus|90|sinimg.png
 The Legend of Kyrandia|kyra1|90|kyra.png
