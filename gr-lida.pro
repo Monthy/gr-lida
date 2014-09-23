@@ -162,14 +162,16 @@ mac|unix {
 LIBS += -lpoppler-qt4
 
 # ###### Install
-!win32 { 
+!win32 {
+    isEmpty(PREFIX):PREFIX = /usr/local
+    DATADIR = $$PREFIX/share
     target.files = bin/gr-lida
-    target.path = /usr/bin
+    target.path = $$PREFIX/bin
     pixmaps.files = gr-lida.svg \
         gr-lida.png
-    pixmaps.path = /usr/share/pixmaps
+    pixmaps.path = $$DATADIR/pixmaps
     desktop.files = res/gr-lida.desktop
-    desktop.path = /usr/share/applications
+    desktop.path = $$DATADIR/applications
     docs.files = doc/AUTHORS.txt \
         doc/COPYING.txt \
         doc/INSTALL.txt \
@@ -178,7 +180,7 @@ LIBS += -lpoppler-qt4
         doc/NEWS.txt \
         doc/THANKS.txt \
         doc/TODO.txt
-    docs.path = /usr/share/doc/GR-lida
+    docs.path = $$DATADIR/doc/GR-lida
     INSTALLS += target \
         pixmaps \
         desktop \
