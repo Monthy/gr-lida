@@ -130,10 +130,10 @@ FORMS += ui/grlida.ui \
 
 # ###### 3rdparty Files
 HEADERS += 3rdparty/editorwidget/codeeditor.h \
-	3rdparty/editorwidget/editorwidget.h
+    3rdparty/editorwidget/editorwidget.h
 
 SOURCES += 3rdparty/editorwidget/codeeditor.cpp \
-	3rdparty/editorwidget/editorwidget.cpp
+    3rdparty/editorwidget/editorwidget.cpp
 
 HEADERS += 3rdparty/pictureflow-qt/pictureflow.h
 SOURCES += 3rdparty/pictureflow-qt/pictureflow.cpp
@@ -178,13 +178,15 @@ LIBS += -lz -lpoppler-qt4
 
 # ###### Install
 !win32 {
+    isEmpty(PREFIX):PREFIX = /usr/local
+    DATADIR = $$PREFIX/share
     target.files = bin/gr-lida
-    target.path = /usr/bin
+    target.path = $$PREFIX/bin
     pixmaps.files = gr-lida.svg \
         gr-lida.png
-    pixmaps.path = /usr/share/pixmaps
+    pixmaps.path = $$DATADIR/pixmaps
     desktop.files = res/gr-lida.desktop
-    desktop.path = /usr/share/applications
+    desktop.path = $$DATADIR/applications
     docs.files = doc/AUTHORS.txt \
         doc/COPYING.txt \
         doc/INSTALL.txt \
@@ -193,7 +195,7 @@ LIBS += -lz -lpoppler-qt4
         doc/NEWS.txt \
         doc/THANKS.txt \
         doc/TODO.txt
-    docs.path = /usr/share/doc/gr-lida
+    docs.path = $$DATADIR/doc/gr-lida
     INSTALLS += target \
         pixmaps \
         desktop \
