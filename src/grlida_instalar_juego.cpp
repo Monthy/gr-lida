@@ -241,7 +241,7 @@ void frmInstalarJuego::on_btnOk_clicked()
 {
 	QDir dir;
 	QString install_info = tr("El ejecutable suele ser: INSTALL, si no esta seguro teclee DIR y pulsa INTRO");
-	if( QFile::exists(grlCfg.DirDOSBox) && dir.exists(ui->txtDestinoPath->text()) )
+	if( QFile::exists(grlCfg.DirDOSBox) && dir.exists(fGrl->getDirRelative(ui->txtDestinoPath->text(), "DosGames")) )
 	{
 		QStringList lista_multiple_iso;
 		QString tipo_origen = ui->cbxMontaje_type_drive->itemData( ui->cbxMontaje_type_drive->currentIndex() ).toString();
