@@ -130,6 +130,28 @@ void frmOpciones::cargarConfig()
 // VDMSound --------------------------
 	ui->chkVDMSoundDisp->setChecked( grlCfg.VDMSoundDisp );
 
+// Otros Emuladores ------------------
+	regexp.setPattern("[a-z-_0-9]+");
+	ui->txtEmuDato->setValidator(new QRegExpValidator(regexp, ui->txtEmuDato));
+	fGrl->cargarIconosComboBox(ui->cbxEmuImg, fGrl->ThemeApp() +"img16_cat/", "sinimg.png", grlCfg.FormatsImage.join(";"));
+
+	ui->twEmus->clear();
+	ui->twEmus->header()->setMovable(false);
+	ui->twEmus->header()->setStretchLastSection(false);
+	ui->twEmus->header()->setResizeMode( 0, QHeaderView::Stretch     );
+	ui->twEmus->header()->setResizeMode( 1, QHeaderView::Interactive );
+	ui->twEmus->header()->setResizeMode( 3, QHeaderView::Interactive );
+	ui->twEmus->headerItem()->setIcon( 0, QIcon(fGrl->Theme() +"img16/tag.png") );
+	ui->twEmus->headerItem()->setIcon( 1, QIcon(fGrl->Theme() +"img16/bullet_black.png") );
+	ui->twEmus->headerItem()->setIcon( 3, QIcon(fGrl->Theme() +"img16/bullet_black.png") );
+	ui->twEmus->setColumnWidth( 0, 150 );
+	ui->twEmus->setColumnWidth( 1,  90 );
+	ui->twEmus->setColumnWidth( 3,  80 );
+	ui->twEmus->setColumnHidden( 2, true );
+	ui->twEmus->setColumnHidden( 4, true );
+
+	fGrl->cargarDatosTwLista(ui->twEmus, grlDir.Datos +"emu_list.txt", TwListEmu, "|");
+
 // Otras Opciones --------------------
 	ui->txtDirBaseGames->setText( grlCfg.DirBaseGames );
 	fGrl->cargarScriptsComboBox(ui->cbxScriptURL, grlDir.Scripts, grlCfg.url_xmldb);
@@ -350,8 +372,8 @@ void frmOpciones::setTheme()
 	ui->btnOpenUrl->setIcon( QIcon(fGrl->Theme() +"img16/edit_enlace.png") );
 	ui->btnInfoFormatoFecha->setIcon( QIcon(fGrl->Theme() +"img16/informacion.png") );
 
-	ui->twEmuladores->setTabIcon(0, QIcon(fGrl->Theme() +"img16/dosbox-scummvm.png") );
-	ui->twEmuladores->setTabIcon(1, QIcon(fGrl->Theme() +"img16/cartucho.png") );
+	ui->tabwEmuladores->setTabIcon(0, QIcon(fGrl->Theme() +"img16/dosbox-scummvm.png") );
+	ui->tabwEmuladores->setTabIcon(1, QIcon(fGrl->Theme() +"img16/cartucho.png") );
 	ui->btnSvmPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
 	ui->btnSvmPath_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
 	ui->btnSvmPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
@@ -384,8 +406,6 @@ void frmOpciones::setTheme()
 	ui->btnMnuNavDefecto->setIcon( QIcon(fGrl->Theme() +"img16/categorias.png") );
 	ui->btnMnuNavDelete->setIcon( QIcon(fGrl->Theme() +"img16/list_remove.png") );
 
-	ui->btnDatPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnDatPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
 	ui->btnDatAdd->setIcon( QIcon(fGrl->Theme() +"img16/list_add.png") );
 	ui->btnDatUpdate->setIcon( QIcon(fGrl->Theme() +"img16/actualizar.png") );
 	ui->btnDatSubir->setIcon( QIcon(fGrl->Theme() +"img16/go-up.png") );
@@ -601,7 +621,6 @@ void frmOpciones::on_cbxIdioma_activated(int index)
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/scummvm.png") , tr("Modificar archivo") +" ScummVM - svm_music_driver"   , "svm_music_driver.txt"  );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/scummvm.png") , tr("Modificar archivo") +" ScummVM - svm_platform"       , "svm_platform.txt"      );
 	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/scummvm.png") , tr("Modificar archivo") +" ScummVM - svm_render_mode"    , "svm_render_mode.txt"   );
-	ui->cbxDat_Archivo->addItem(QIcon(fGrl->Theme() +"img16/cartucho.png"), tr("Otros emuladores") +" - emu_list"                    , "emu_list.txt"          );
 	ui->cbxDat_Archivo->setCurrentIndex(0);
 	emit on_cbxDat_Archivo_activated( ui->cbxDat_Archivo->currentIndex() );
 
@@ -1145,6 +1164,215 @@ void frmOpciones::on_btnDbxCancel_clicked()
 	ui->chkDbxSVN->setChecked( grlCfg.DOSBoxSVN );
 }
 
+// Otros Emuladores ---------------------------------
+void frmOpciones::enabledEmuUpdate(QString texto, int col)
+{
+	int pos = ui->twEmus->indexOfTopLevelItem(ui->twEmus->currentItem());
+	if( ui->twEmus->topLevelItemCount() > 0 && pos != -1 )
+	{
+		if( texto != ui->twEmus->currentItem()->text(col) )
+			ui->btnEmuUpdate->setEnabled(true);
+		else
+			ui->btnEmuUpdate->setEnabled(false);
+	} else
+		ui->btnEmuUpdate->setEnabled(false);
+}
+
+void frmOpciones::on_txtEmuTitulo_textEdited(const QString &arg1)
+{
+//	if( ui->txtEmuDato->text().isEmpty() )
+//		ui->txtEmuDato->setText( fGrl->eliminar_caracteres(arg1).toLower() );
+	enabledEmuUpdate(arg1, 0);
+}
+
+void frmOpciones::on_txtEmuDato_textEdited(const QString &arg1)
+{
+	enabledEmuUpdate(arg1, 1);
+}
+
+void frmOpciones::on_txtEmuPath_textEdited(const QString &arg1)
+{
+	enabledEmuUpdate(arg1, 3);
+}
+
+void frmOpciones::on_cbxEmuImg_activated(int index)
+{
+	if( index > -1 )
+		enabledEmuUpdate(ui->cbxEmuImg->itemData(index).toString(), 4);
+	else
+		ui->btnDatUpdate->setEnabled(false);
+}
+
+void frmOpciones::on_btnEmuPath_clicked()
+{
+	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable"), grlCfg.DirOtherEmus, "", tr("Todos los archivo") +" (*)");
+
+	if( !archivo.isEmpty() )
+	{
+		stFileInfo f_info = fGrl->getInfoFile( archivo );
+		if( f_info.Exists )
+		{
+			ui->txtEmuPath->setText( fGrl->setDirRelative(archivo) );
+			grlCfg.DirOtherEmus = fGrl->setDirRelative(f_info.Path);
+
+			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirOtherEmus", grlCfg.DirOtherEmus);
+		}
+	}
+}
+
+void frmOpciones::on_btnEmuPath_clear_clicked()
+{
+	ui->txtEmuPath->clear();
+}
+
+void frmOpciones::on_btnEmuAdd_clicked()
+{
+	if( ui->txtEmuTitulo->text().isEmpty() )
+	{
+		QMessageBox::information(this, tr("Opciones"), tr("Debes poner un título."));
+		ui->txtEmuTitulo->setFocus();
+	}
+	else if( ui->txtEmuDato->text().isEmpty() )
+	{
+		QMessageBox::information(this, tr("Opciones"), tr("Debes poner una etiqueta."));
+		ui->txtEmuDato->setFocus();
+	}
+	else if( ui->txtEmuPath->text().isEmpty() )
+	{
+		QMessageBox::information(this, tr("Opciones"), tr("Debes indicar el ejecutable del Emulador."));
+		ui->txtEmuPath->setFocus();
+	} else {
+		int total_emu_find_cfg = 0;
+		QList<QTreeWidgetItem *> emu_find_cfg = ui->twEmus->findItems(ui->txtEmuDato->text(), Qt::MatchExactly, 1);
+		total_emu_find_cfg = emu_find_cfg.size();
+
+		if( total_emu_find_cfg > 0 )
+		{
+			QMessageBox::information(this, tr("Opciones"), tr("Ya esiste la misma etiqueta para el ejecutable del Emulador."));
+			ui->txtEmuDato->setFocus();
+		} else {
+			QTreeWidgetItem *item = new QTreeWidgetItem( ui->twEmus );
+			QString imgEmu = ui->cbxEmuImg->itemData(ui->cbxEmuImg->currentIndex()).toString();
+			item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img16_cat/"+ imgEmu) );
+			item->setText( 0, ui->txtEmuTitulo->text() );
+			item->setText( 1, ui->txtEmuDato->text() );
+			item->setText( 2, "-"   );
+			item->setText( 3, ui->txtEmuPath->text() );
+			item->setText( 4, imgEmu );
+			item->setSelected(true);
+			ui->twEmus->setCurrentItem(item,0);
+
+			on_btnEmuUpdate_clicked();
+		}
+	}
+}
+
+void frmOpciones::on_btnEmuUpdate_clicked()
+{
+	QTreeWidgetItem *item;
+	int pos = ui->twEmus->indexOfTopLevelItem(ui->twEmus->currentItem());
+	if( ui->twEmus->topLevelItemCount() > 0 && pos != -1 )
+	{
+		item = ui->twEmus->currentItem();
+		QString etiqueta = item->text(1);
+		item->setText( 1, ui->txtEmuDato->text() );
+
+		int total_emu_find_cfg = 0;
+		QList<QTreeWidgetItem *> emu_find_cfg = ui->twEmus->findItems(ui->txtEmuDato->text(), Qt::MatchExactly, 1);
+		total_emu_find_cfg = emu_find_cfg.size();
+
+		if( total_emu_find_cfg > 1 )
+		{
+			item->setText(1, etiqueta );
+			QMessageBox::information(this, tr("Opciones"), tr("Ya esiste la misma etiqueta para el ejecutable del Emulador."));
+			ui->txtEmuDato->setFocus();
+		} else {
+			QString imgEmu = ui->cbxEmuImg->itemData(ui->cbxEmuImg->currentIndex()).toString();
+			item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img16_cat/"+ imgEmu) );
+			item->setText( 0, ui->txtEmuTitulo->text() );
+			item->setText( 2, "-"   );
+			item->setText( 3, ui->txtEmuPath->text() );
+			item->setText( 4, imgEmu );
+
+			grlCfg.isChangedEmuList = true;
+			fGrl->guardarDatosTwLista(ui->twEmus, grlDir.Datos +"emu_list.txt", TwListEmu);
+
+			cbxCat_EmuShow->clear();
+			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/tag.png")     , tr("Todos")   , "all"     );
+			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/datos.png")   , tr("Datos")   , "datos"   );
+			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png")  , tr("DOSBox")  , "dosbox"  );
+			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/scummvm.png") , tr("ScummVM") , "scummvm" );
+			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/vdmsound.png"), tr("VDMSound"), "vdmsound");
+
+			emu_list.clear();
+			emu_list = fGrl->cargaDatosQHash(grlDir.Datos +"emu_list.txt", 4, "|");
+			foreach (const stGrlDatos &dat, emu_list)
+				cbxCat_EmuShow->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ dat.icono), dat.titulo, dat.key);
+
+			ui->btnEmuUpdate->setEnabled(false);
+		}
+	}
+}
+
+void frmOpciones::on_btnEmuSubir_clicked()
+{
+	fGrl->moveUpItemTw(ui->twEmus);
+	fGrl->guardarDatosTwLista(ui->twEmus, grlDir.Datos +"emu_list.txt", TwListEmu);
+	grlCfg.isChangedEmuList = true;
+}
+
+void frmOpciones::on_btnEmuBajar_clicked()
+{
+	fGrl->moveDownItemTw(ui->twEmus);
+	fGrl->guardarDatosTwLista(ui->twEmus, grlDir.Datos +"emu_list.txt", TwListEmu);
+	grlCfg.isChangedEmuList = true;
+}
+
+void frmOpciones::on_btnEmuDelete_clicked()
+{
+	int pos = ui->twEmus->indexOfTopLevelItem( ui->twEmus->currentItem() );
+	if( ui->twEmus->topLevelItemCount() > 0 && pos != -1 )
+	{
+		int respuesta = QMessageBox::question(this, tr("¿Eliminar...?"), tr("¿Deseas realmente eliminar este emulador de la lista?"), tr("Si"), tr("No"), 0, 1);
+		if( respuesta == 0 )
+		{
+			fGrl->deleteItemTree(ui->twEmus->currentItem());
+			fGrl->guardarDatosTwLista(ui->twEmus, grlDir.Datos +"emu_list.txt", TwListEmu);
+		}
+	} else
+		QMessageBox::information(this, tr("Opciones"), tr("Por favor seleccione un emulador de la lista para eliminarlo"));
+
+	if( ui->twEmus->topLevelItemCount() <= 0 )
+	{
+		ui->txtEmuTitulo->clear();
+		ui->txtEmuDato->clear();
+		ui->txtEmuPath->clear();
+		int row = ui->cbxEmuImg->findData("sinimg.png", Qt::UserRole, Qt::MatchExactly);
+		if( row < 0 ) row = 0;
+		ui->cbxEmuImg->setCurrentIndex( row );
+	}
+}
+
+void frmOpciones::on_twEmus_itemClicked(QTreeWidgetItem *item, int column)
+{
+	if( item && column > -1 )
+	{
+		ui->txtEmuTitulo->setText( item->text(0) );
+		ui->txtEmuDato->setText( item->text(1) );
+		ui->txtEmuPath->setText( item->text(3) );
+
+		int row = ui->cbxEmuImg->findData(item->text(4), Qt::UserRole, Qt::MatchExactly);
+		if( row < 0 ) row = 0;
+		ui->cbxEmuImg->setCurrentIndex( row );
+	}
+}
+
+void frmOpciones::on_twEmus_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+	if(current != previous)
+		emit on_twEmus_itemClicked(current, 0);
+}
+
 // Categoría ----------------------------------------
 void frmOpciones::enabledCatUpdate(QString texto, int col)
 {
@@ -1664,8 +1892,6 @@ void frmOpciones::addEditDatosTwLista(bool isNew)
 
 	if( archivo == "smiles.txt" )
 		dir_img = grlDir.Smiles;
-	else if( archivo == "emu_list.txt" )
-		dir_img = fGrl->ThemeApp() +"img16_cat/";
 	else if( archivo == "svm_lista.txt" )
 	{
 		dir_img    = fGrl->Theme() +"icon_svm/";
@@ -1726,26 +1952,9 @@ void frmOpciones::guardarDatosTwLista()
 		fGrl->guardarDatosTwLista(ui->twDatos, grlDir.Datos + sLng + archivo, TwList3col);
 	else if( archivo == "smiles.txt" )
 		fGrl->guardarDatosTwLista(ui->twDatos, grlDir.Datos + sLng + archivo, TwListSmile, "\",\"");
-	else if( archivo == "emu_list.txt" || archivo == "dbx_keyboardlayout.txt" )
-	{
+	else if( archivo == "dbx_keyboardlayout.txt" )
 		fGrl->guardarDatosTwLista(ui->twDatos, grlDir.Datos + sLng + archivo, TwListEmu);
-		if( archivo == "emu_list.txt" )
-		{
-			grlCfg.isChangedEmuList = true;
-
-			cbxCat_EmuShow->clear();
-			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/tag.png")     , tr("Todos")   , "all"     );
-			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/datos.png")   , tr("Datos")   , "datos"   );
-			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png")  , tr("DOSBox")  , "dosbox"  );
-			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/scummvm.png") , tr("ScummVM") , "scummvm" );
-			cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/vdmsound.png"), tr("VDMSound"), "vdmsound");
-
-			emu_list.clear();
-			emu_list = fGrl->cargaDatosQHash(grlDir.Datos +"emu_list.txt", 4, "|");
-			foreach (const stGrlDatos &dat, emu_list)
-				cbxCat_EmuShow->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ dat.icono), dat.titulo, dat.key);
-		}
-	} else if( archivo == "svm_lista.txt" )
+	else if( archivo == "svm_lista.txt" )
 		fGrl->guardarDatosTwLista(ui->twDatos, grlDir.Datos + sLng + archivo, TwListSvm);
 	else
 		fGrl->guardarDatosTwLista(ui->twDatos, grlDir.Datos + sLng + archivo, TwList2col);
@@ -1774,11 +1983,9 @@ void frmOpciones::on_cbxDat_Archivo_activated(int index)
 	sLng    = fGrl->getArchivoIsLng(archivo);
 
 	ui->lb_Opt_14->setText(tr("Dato") +":");
-	ui->lb_Opt_datpath->setVisible(false);
+	ui->lb_Opt_dato->setVisible(false);
 	ui->cbxDat_ImgCmpt->setVisible(false);
 	ui->txtDat_Extra->setVisible(false);
-	ui->btnDatPath->setVisible(false);
-	ui->btnDatPath_clear->setVisible(false);
 	ui->txtDat_Dato->setEnabled(false);
 	ui->btnDatAddSmile->setEnabled(false);
 
@@ -1790,8 +1997,6 @@ void frmOpciones::on_cbxDat_Archivo_activated(int index)
 
 	if( archivo == "smiles.txt" )
 		dir_img = grlDir.Smiles;
-	else if( archivo == "emu_list.txt" )
-		dir_img = fGrl->ThemeApp() +"img16_cat/";
 	else if( archivo == "svm_lista.txt" )
 		dir_img = fGrl->Theme() +"icon_svm/";
 	else if( archivo == "idiomas.txt" || archivo == "svm_idioma.txt" || archivo == "dbx_keyboardlayout.txt" )
@@ -1840,35 +2045,20 @@ void frmOpciones::on_cbxDat_Archivo_activated(int index)
 		ui->btnDatAddSmile->setEnabled(true);
 		fGrl->cargarDatosTwLista(ui->twDatos, grlDir.Datos + sLng + archivo, TwListSmile, "\",\"", isLng);
 	}
-	else if( archivo == "emu_list.txt" || archivo == "dbx_keyboardlayout.txt" )
+	else if( archivo == "dbx_keyboardlayout.txt" )
 	{
 		ui->txtDat_Dato->setEnabled(true);
-		ui->lb_Opt_datpath->setVisible(true);
+		ui->lb_Opt_dato->setVisible(true);
 		ui->txtDat_Extra->setVisible(true);
-		ui->btnDatPath->setVisible(true);
-		ui->btnDatPath_clear->setVisible(true);
+
 		ui->twDatos->headerItem()->setTextAlignment(1, Qt::AlignLeft);
 		ui->twDatos->setColumnHidden( 1, false );
 		ui->twDatos->setColumnHidden( 3, false );
+		ui->twDatos->headerItem()->setText( 1, tr("Etiqueta") );
+		ui->twDatos->headerItem()->setText( 3, tr("Config") );
 
-		if( archivo == "dbx_keyboardlayout.txt" )
-		{
-			ui->twDatos->headerItem()->setText( 1, tr("Etiqueta") );
-			ui->twDatos->headerItem()->setText( 3, tr("Config") );
-
-			ui->lb_Opt_14->setText(tr("Etiqueta") +":");
-			ui->lb_Opt_datpath->setText(tr("Dato") +":");
-			ui->btnDatPath->setVisible(false);
-			ui->btnDatPath_clear->setVisible(false);
-		} else {
-			ui->twDatos->headerItem()->setText( 1, tr("Etiqueta") );
-			ui->twDatos->headerItem()->setText( 3, "Dir" );
-
-			ui->lb_Opt_14->setText(tr("Etiqueta") +":");
-			ui->lb_Opt_datpath->setText(tr("Dirección") +":");
-			ui->btnDatPath->setVisible(true);
-			ui->btnDatPath_clear->setVisible(true);
-		}
+		ui->lb_Opt_14->setText(tr("Etiqueta") +":");
+		ui->lb_Opt_dato->setText(tr("Dato") +":");
 
 		fGrl->cargarDatosTwLista(ui->twDatos, grlDir.Datos + sLng + archivo, TwListEmu, "|", isLng);
 	}
@@ -1937,30 +2127,6 @@ void frmOpciones::on_cbxDat_Img_activated(int index)
 void frmOpciones::on_txtDat_Extra_textEdited(const QString &arg1)
 {
 	enabledDatosUpdate(arg1, 3);
-}
-
-void frmOpciones::on_btnDatPath_clicked()
-{
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable"), grlCfg.DirOtherEmus, "", tr("Todos los archivo") +" (*)");
-
-	if( !archivo.isEmpty() )
-	{
-		stFileInfo f_info = fGrl->getInfoFile( archivo );
-		if( f_info.Exists )
-		{
-			ui->txtDat_Extra->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.DirOtherEmus = fGrl->setDirRelative(f_info.Path);
-
-			enabledDatosUpdate(ui->txtDat_Extra->text(), 3);
-
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "DirOtherEmus", grlCfg.DirOtherEmus);
-		}
-	}
-}
-
-void frmOpciones::on_btnDatPath_clear_clicked()
-{
-	ui->txtDat_Extra->clear();
 }
 
 void frmOpciones::on_btnDatAdd_clicked()
@@ -2033,10 +2199,10 @@ void frmOpciones::on_twDatos_itemClicked(QTreeWidgetItem *item, int column)
 		int col_titulo = 0;
 		int col_dato   = 1;
 
-		if( fGrl->getArchivoIs3Col(archivo) || archivo == "emu_list.txt" || archivo == "svm_lista.txt" || archivo == "dbx_keyboardlayout.txt" )
+		if( fGrl->getArchivoIs3Col(archivo) || archivo == "svm_lista.txt" || archivo == "dbx_keyboardlayout.txt" )
 		{
 			ui->txtDat_Dato->setEnabled(true);
-			if( archivo == "emu_list.txt" || archivo == "dbx_keyboardlayout.txt" )
+			if( archivo == "dbx_keyboardlayout.txt" )
 				ui->txtDat_Extra->setText( item->text(3) );
 
 			if( archivo == "svm_lista.txt" )

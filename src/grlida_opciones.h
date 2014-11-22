@@ -79,6 +79,7 @@ private:
 	void enabledDatosUpdate(QString texto, int col);
 	void guardarDatosTwLista();
 	void setColorBtn(QColor color);
+	void enabledEmuUpdate(QString texto, int col);
 
 private slots:
 	void on_btnOk_clicked();
@@ -113,6 +114,20 @@ private slots:
 	void on_btnDbxBajar_clicked();
 	void on_btnDbxDelete_clicked();
 	void on_btnDbxCancel_clicked();
+// Otros Emuladores
+	void on_txtEmuTitulo_textEdited(const QString &arg1);
+	void on_txtEmuDato_textEdited(const QString &arg1);
+	void on_txtEmuPath_textEdited(const QString &arg1);
+	void on_cbxEmuImg_activated(int index);
+	void on_btnEmuPath_clicked();
+	void on_btnEmuPath_clear_clicked();
+	void on_btnEmuAdd_clicked();
+	void on_btnEmuUpdate_clicked();
+	void on_btnEmuSubir_clicked();
+	void on_btnEmuBajar_clicked();
+	void on_btnEmuDelete_clicked();
+	void on_twEmus_itemClicked(QTreeWidgetItem *item, int column);
+	void on_twEmus_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 // Categoría
 	void on_txtCat_Nombre_editingFinished();
 	void on_txtCat_Nombre_textEdited(const QString &arg1);
@@ -151,8 +166,6 @@ private slots:
 	void on_txtDat_Dato_textEdited(const QString &arg1);
 	void on_cbxDat_Img_activated(int index);
 	void on_txtDat_Extra_textEdited(const QString &arg1);
-	void on_btnDatPath_clicked();
-	void on_btnDatPath_clear_clicked();
 	void on_btnDatAdd_clicked();
 	void on_btnDatUpdate_clicked();
 	void on_btnDatSubir_clicked();
