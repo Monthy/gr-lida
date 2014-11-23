@@ -2062,7 +2062,7 @@ void GrLida::comprobarEmuloresDisp()
 	isEmuDisp = isEnabled = false;
 	if( lista.isEmpty() || lista.contains("all") || lista.contains("dosbox") )
 		isEmuDisp = true;
-	if( isEmuDisp && grlCfg.DOSBoxDisp && QFile::exists(grlCfg.DirDOSBox) )
+	if( isEmuDisp && grlCfg.DOSBoxDisp && QFile::exists(fGrl->getDirRelative(grlCfg.DirDOSBox, "DosGames")) )
 		isEnabled = true;
 	ui->mnu_edit_nuevo_dosbox->setEnabled( isEnabled );
 	ui->mnu_edit_nuevo_dosbox_big->setEnabled( isEnabled );
@@ -2071,7 +2071,7 @@ void GrLida::comprobarEmuloresDisp()
 	isEmuDisp = isEnabled = false;
 	if( lista.isEmpty() || lista.contains("all") || lista.contains("scummvm") )
 		isEmuDisp = true;
-	if( isEmuDisp && grlCfg.ScummVMDisp && QFile::exists(grlCfg.DirScummVM) )
+	if( isEmuDisp && grlCfg.ScummVMDisp && QFile::exists(fGrl->getDirRelative(grlCfg.DirScummVM, "DosGames")) )
 		isEnabled = true;
 	ui->mnu_edit_nuevo_scummvm->setEnabled( isEnabled );
 	ui->mnu_edit_nuevo_scummvm_big->setEnabled( isEnabled );
@@ -2624,12 +2624,12 @@ void GrLida::on_mnu_edit_favorito_triggered(bool checked)
 // Menú ejecutar
 void GrLida::on_mnu_ejecutar_dosbox_triggered()
 {
-	ejecutar(grlCfg.DirDOSBox);
+	ejecutar(fGrl->getDirRelative(grlCfg.DirDOSBox, "DosGames"));
 }
 
 void GrLida::on_mnu_ejecutar_scummvm_triggered()
 {
-	ejecutar(grlCfg.DirScummVM);
+	ejecutar(fGrl->getDirRelative(grlCfg.DirScummVM, "DosGames"));
 }
 
 void GrLida::on_mnu_ejecutar_juego_triggered()
