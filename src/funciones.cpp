@@ -2002,24 +2002,24 @@ stConfigDOSBox Funciones::getDefectDOSBox(QHash<QString, QString> dato)
 	datos.idgrl = isQHash ? dato["Dbx_idgrl"] : "";
 	datos.idcat = isQHash ? dato["Dbx_idcat"] : "";
 // [sdl]
-	datos.sdl_fullscreen        = isQHash ? dato["Dbx_sdl_fullscreen"]        : "false";
+	datos.sdl_fullscreen        = isQHash ? dato["Dbx_sdl_fullscreen"]        : "true";
 	datos.sdl_fulldouble        = isQHash ? dato["Dbx_sdl_fulldouble"]        : "false";
 	datos.sdl_fullfixed         = isQHash ? dato["Dbx_sdl_fullfixed"]         : "false";
-	datos.sdl_fullresolution    = isQHash ? dato["Dbx_sdl_fullresolution"]    : "original";
+	datos.sdl_fullresolution    = isQHash ? dato["Dbx_sdl_fullresolution"]    : "0x0";
 	datos.sdl_windowresolution  = isQHash ? dato["Dbx_sdl_windowresolution"]  : "original";
-	datos.sdl_output            = isQHash ? dato["Dbx_sdl_output"]            : "surface";
+	datos.sdl_output            = isQHash ? dato["Dbx_sdl_output"]            : "ddraw";
 	datos.sdl_hwscale           = isQHash ? dato["Dbx_sdl_hwscale"]           : "1.00";
 	datos.sdl_autolock          = isQHash ? dato["Dbx_sdl_autolock"]          : "true";
 	datos.sdl_sensitivity       = isQHash ? dato["Dbx_sdl_sensitivity"]       : "100";
 	datos.sdl_waitonerror       = isQHash ? dato["Dbx_sdl_waitonerror"]       : "true";
 	datos.sdl_priority          = isQHash ? dato["Dbx_sdl_priority"]          : "higher,normal";
-	datos.sdl_mapperfile        = isQHash ? dato["Dbx_sdl_mapperfile"]        : "mapper.txt";
+	datos.sdl_mapperfile        = isQHash ? dato["Dbx_sdl_mapperfile"]        : "mapper.map";
 	datos.sdl_usescancodes      = isQHash ? dato["Dbx_sdl_usescancodes"]      : "true";
 // [dosbox]
 	datos.dosbox_language       = isQHash ? dato["Dbx_dosbox_language"]       : "";
 	datos.dosbox_machine        = isQHash ? dato["Dbx_dosbox_machine"]        : "svga_s3";
 	datos.dosbox_captures       = isQHash ? dato["Dbx_dosbox_captures"]       : "capture";
-	datos.dosbox_memsize        = isQHash ? dato["Dbx_dosbox_memsize"]        : "16";
+	datos.dosbox_memsize        = isQHash ? dato["Dbx_dosbox_memsize"]        : "31";
 	datos.dosbox_emu_key        = isQHash ? dato["Dbx_dosbox_emu_key"]        : "dosbox";
 // [render]
 	datos.render_frameskip      = isQHash ? dato["Dbx_render_frameskip"]      : "0";
