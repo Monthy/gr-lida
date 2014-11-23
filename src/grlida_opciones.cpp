@@ -92,7 +92,6 @@ void frmOpciones::cargarConfig()
 	ui->lwOpciones->setCurrentRow( grlCfg.LastTabOptSelect );
 
 // DOSBox ----------------------------
-	ui->chkDOSBoxDisp->setChecked( grlCfg.DOSBoxDisp );
 	ui->chkDbxSaveConfFile->setChecked( grlCfg.DOSBoxSaveConfFile );
 	regexp.setPattern("[a-z-_0-9]+");
 	ui->txtDbxDato->setValidator(new QRegExpValidator(regexp, ui->txtDbxDato));
@@ -122,6 +121,7 @@ void frmOpciones::cargarConfig()
 	fGrl->cargarDatosTwLista(ui->twDOSBox, grlDir.Datos +"dbx_list.txt", TwListDbx, "|");
 
 	emit on_btnDbxCancel_clicked();
+	ui->chkDOSBoxDisp->setChecked( grlCfg.DOSBoxDisp );
 
 // ScummVM ---------------------------
 	ui->chkScummVMDisp->setChecked( grlCfg.ScummVMDisp );
