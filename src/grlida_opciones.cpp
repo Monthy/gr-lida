@@ -1045,6 +1045,7 @@ void frmOpciones::on_btnDbxEdit_clicked()
 		ui->btnDbxAdd->setVisible(false);
 		ui->btnDbxEdit->setVisible(false);
 		ui->btnDbxUpdate->setVisible(true);
+		ui->btnDbxUpdate->setEnabled(true);
 		ui->btnDbxDelete->setEnabled(false);
 		ui->btnDbxCancel->setEnabled(true);
 	}
