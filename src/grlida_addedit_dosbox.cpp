@@ -369,15 +369,15 @@ void frmAddEditDosBox::cargarDatosDosBox(stConfigDOSBox cfgDbx)
 	int index_dbx = ui->cbxDbx_EmuKey->findData( cfgDbx.dosbox_emu_key );
 	ui->cbxDbx_EmuKey->setCurrentIndex((index_dbx < 0 ? 0 : index_dbx));
 
+	fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_fullresolution  , grlDir.Datos +"dbx_resolution.txt"    , fGrl->Theme() +"img16/"  , "original"   , 2, "|"); // Resolución pantalla
+	fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_windowresolution, grlDir.Datos +"dbx_resolution.txt"    , fGrl->Theme() +"img16/"  , "original"   , 2, "|"); // windowresolution
+	fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_output          , grlDir.Datos +"dbx_output.txt"        , fGrl->Theme() +"img16/"  , "surface"    , 3, "|"); // Modo de Renderizado
+	fGrl->cargarDatosComboBox(ui->cbxDbx_dosbox_machine      , grlDir.Datos +"dbx_machine.txt"       , fGrl->Theme() +"img16/"  , "svga_s3"    , 3, "|", true, true); // Tarjeta de Video
+	fGrl->cargarDatosComboBox(ui->cbxDbx_render_scaler       , grlDir.Datos +"dbx_scaler.txt"        , fGrl->Theme() +"img16/"  , "normal2x"   , 3, "|", true, true); // Escalar y Filtros
+	fGrl->cargarDatosComboBox(ui->cbxDbx_cpu_cputype         , grlDir.Datos +"dbx_cpu_type.txt"      , fGrl->Theme() +"img16/"  , "auto"       , 3, "|"); // Tipo de CPU para usar en la emulación
+
 	if( isDbxSVN )
 	{
-		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_fullresolution  , grlDir.Datos +"dbx_resolution.txt"    , fGrl->Theme() +"img16/"  , "original"   , 2, "|"); // Resolución pantalla
-		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_windowresolution, grlDir.Datos +"dbx_resolution.txt"    , fGrl->Theme() +"img16/"  , "original"   , 2, "|"); // windowresolution
-		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_output          , grlDir.Datos +"dbx_output.txt"        , fGrl->Theme() +"img16/"  , "surface"    , 3, "|"); // Modo de Renderizado
-		fGrl->cargarDatosComboBox(ui->cbxDbx_dosbox_machine      , grlDir.Datos +"dbx_machine.txt"       , fGrl->Theme() +"img16/"  , "svga_s3"    , 3, "|", true, true); // Tarjeta de Video
-		fGrl->cargarDatosComboBox(ui->cbxDbx_render_scaler       , grlDir.Datos +"dbx_scaler.txt"        , fGrl->Theme() +"img16/"  , "normal2x"   , 3, "|", true, true); // Escalar y Filtros
-		fGrl->cargarDatosComboBox(ui->cbxDbx_cpu_cputype         , grlDir.Datos +"dbx_cpu_type.txt"      , fGrl->Theme() +"img16/"  , "auto"       , 3, "|"); // Tipo de CPU para usar en la emulación
-
 		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_fullresolution  , grlDir.Datos +"dbx_resolution_svn.txt", fGrl->Theme() +"img16/", "", 2, "|", false);
 		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_windowresolution, grlDir.Datos +"dbx_resolution_svn.txt", fGrl->Theme() +"img16/", "", 2, "|", false);
 		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_output          , grlDir.Datos +"dbx_output_svn.txt"    , fGrl->Theme() +"img16/", "", 3, "|", false);
@@ -385,6 +385,8 @@ void frmAddEditDosBox::cargarDatosDosBox(stConfigDOSBox cfgDbx)
 		fGrl->cargarDatosComboBox(ui->cbxDbx_render_scaler       , grlDir.Datos +"dbx_scaler_svn.txt"    , fGrl->Theme() +"img16/", "", 3, "|", false, true);
 		fGrl->cargarDatosComboBox(ui->cbxDbx_cpu_cputype         , grlDir.Datos +"dbx_cpu_type_svn.txt"  , fGrl->Theme() +"img16/", "", 3, "|", false);
 	}
+
+	ui->cbxDbx_sdl_fullresolution->addItem(QIcon(fGrl->Theme() +"img16/sinimg.png"), "0x0", "0x0");
 
 // [sdl]
 	ui->chkDbx_sdl_fullscreen->setChecked( fGrl->StrToBool( cfgDbx.sdl_fullscreen ) );
@@ -837,23 +839,6 @@ void frmAddEditDosBox::on_cbxDbx_EmuKey_activated(int index)
 		isDbxSVN = fGrl->StrToBool(dbx_list[ui->cbxDbx_EmuKey->itemData( index ).toString()].issvn);
 
 		setDatosDosBox();
-
-		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_fullresolution  , grlDir.Datos +"dbx_resolution.txt"    , fGrl->Theme() +"img16/"  , "original"   , 2, "|"); // Resolución pantalla
-		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_windowresolution, grlDir.Datos +"dbx_resolution.txt"    , fGrl->Theme() +"img16/"  , "original"   , 2, "|"); // windowresolution
-		fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_output          , grlDir.Datos +"dbx_output.txt"        , fGrl->Theme() +"img16/"  , "surface"    , 3, "|"); // Modo de Renderizado
-		fGrl->cargarDatosComboBox(ui->cbxDbx_dosbox_machine      , grlDir.Datos +"dbx_machine.txt"       , fGrl->Theme() +"img16/"  , "svga_s3"    , 3, "|", true, true); // Tarjeta de Video
-		fGrl->cargarDatosComboBox(ui->cbxDbx_render_scaler       , grlDir.Datos +"dbx_scaler.txt"        , fGrl->Theme() +"img16/"  , "normal2x"   , 3, "|", true, true); // Escalar y Filtros
-		fGrl->cargarDatosComboBox(ui->cbxDbx_cpu_cputype         , grlDir.Datos +"dbx_cpu_type.txt"      , fGrl->Theme() +"img16/"  , "auto"       , 3, "|"); // Tipo de CPU para usar en la emulación
-
-		if( isDbxSVN )
-		{
-			fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_fullresolution  , grlDir.Datos +"dbx_resolution_svn.txt", fGrl->Theme() +"img16/", "", 2, "|", false);
-			fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_windowresolution, grlDir.Datos +"dbx_resolution_svn.txt", fGrl->Theme() +"img16/", "", 2, "|", false);
-			fGrl->cargarDatosComboBox(ui->cbxDbx_sdl_output          , grlDir.Datos +"dbx_output_svn.txt"    , fGrl->Theme() +"img16/", "", 3, "|", false);
-			fGrl->cargarDatosComboBox(ui->cbxDbx_dosbox_machine      , grlDir.Datos +"dbx_machine_svn.txt"   , fGrl->Theme() +"img16/", "", 3, "|", false, true);
-			fGrl->cargarDatosComboBox(ui->cbxDbx_render_scaler       , grlDir.Datos +"dbx_scaler_svn.txt"    , fGrl->Theme() +"img16/", "", 3, "|", false, true);
-			fGrl->cargarDatosComboBox(ui->cbxDbx_cpu_cputype         , grlDir.Datos +"dbx_cpu_type_svn.txt"  , fGrl->Theme() +"img16/", "", 3, "|", false);
-		}
 
 		cargarDatosDosBox(DatosDosBox);
 	}
