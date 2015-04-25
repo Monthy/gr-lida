@@ -2483,7 +2483,7 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 					lista_multiple_iso.clear();
 					const int lmiso_Size = lista_isos.size();
 					for (int i = 0; i < lmiso_Size; ++i)
-						lista_multiple_iso << "\""+ getShortPathName( getDirRelative(lista_isos.at(i), "DosGames") ) +"\"";
+						lista_multiple_iso << "\""+ getDirRelative(lista_isos.at(i), "DosGames") +"\"";
 					mount_drive.clear();
 					mount_drive = lista_multiple_iso.join(" ");
 				}
@@ -2519,7 +2519,7 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 				const int lmisoSize = lista_isos.size();
 				for (int i = 0; i < lmisoSize; ++i)
 				{
-					lista_multiple_iso << "\""+ getShortPathName( getDirRelative(lista_isos.at(i), "DosGames") ) +"\"";
+					lista_multiple_iso << "\""+ getDirRelative(lista_isos.at(i), "DosGames") +"\"";
 				}
 				mount_drive.clear();
 				mount_drive = lista_multiple_iso.join(" ");
