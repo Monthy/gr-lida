@@ -1,13 +1,13 @@
 The *.cpp and *.h files in this archive are 
-Copyright (C) 2007-2012 Angius Fabrizio (hippydream@42cows.org)
+Copyright (C) 2007-2016 Angius Fabrizio (hippydream@42cows.org)
 
 You may use, distribute and copy the files under the terms of
-GNU General Public License version 2 (see the file LICENSE.GPL for details)
+GNU General Public License version 3 (see the file LICENSE.GPL for details)
 
 -------------------------------------------------------------------------
 
 Website: http://osdab.42cows.org/
-Google Code project page: http://code.google.com/p/osdab
+GitHub project page: https://github.com/hippydream/osdab/
 
 **************** ******* ******************************************************
 
@@ -88,6 +88,6 @@ is calculated. Qt has no proper time zone support (Qt 4.7.x) so the code
 relies on gmtime and localtime.
 
 
-**************** ******* ******************************************************
-BEFORE SENDING ANY EMAILS, CHECK OUT THE WEBSITE: http://osdab.42cows.org/
-**************** ******* ******************************************************
+**************** ******* *******************************************************
+BEFORE SENDING ANY EMAIL, CHECK OUT THE OSDAB WEBSITE HOSTED AT OSDAB.42COWS.ORG
+**************** ******* *******************************************************

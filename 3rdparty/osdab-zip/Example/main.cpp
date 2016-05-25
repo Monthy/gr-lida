@@ -4,12 +4,12 @@
 **
 ** Test routine for the Zip and UnZip classed.
 **
-** Copyright (C) 2007-2012 Angius Fabrizio. All rights reserved.
+** Copyright (C) 2007-2016 Angius Fabrizio. All rights reserved.
 **
 ** This file is part of the OSDaB project (http://osdab.42cows.org/).
 **
 ** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
+** GNU General Public License version 3 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.
 **
@@ -17,7 +17,7 @@
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ** See the file LICENSE.GPL that came with this software distribution or
-** visit http://www.gnu.org/copyleft/gpl.html for GPL licensing information.
+** visit http://www.gnu.org/licenses/gpl-3.0.en.html for GPL licensing information.
 **
 **********************************************************************/
 
@@ -148,13 +148,13 @@ bool decompress(const QString& file, const QString& out, const QString& pwd)
 
 	ec = uz.openArchive(file);
 	if (ec != UnZip::Ok) {
-		cout << "Failed to open archive: " << uz.formatError(ec).toAscii().data() << endl << endl;
+		cout << "Failed to open archive: " << uz.formatError(ec).toLatin1().data() << endl << endl;
 		return false;
 	}
 
 	ec = uz.extractAll(out);
 	if (ec != UnZip::Ok) {
-		cout << "Extraction failed: " << uz.formatError(ec).toAscii().data() << endl << endl;
+		cout << "Extraction failed: " << uz.formatError(ec).toLatin1().data() << endl << endl;
 		uz.closeArchive();
 		return false;
 	}
@@ -175,20 +175,20 @@ bool compress(const QString& zip, const QString& dir, const QString& pwd)
 
 	ec = uz.createArchive(zip);
 	if (ec != Zip::Ok) {
-		cout << "Unable to create archive: " << uz.formatError(ec).toAscii().data() << endl << endl;
+		cout << "Unable to create archive: " << uz.formatError(ec).toLatin1().data() << endl << endl;
 		return false;
 	}
 
     uz.setPassword(pwd);
     ec = uz.addDirectory(dir);
 	if (ec != Zip::Ok) {
-		cout << "Unable to add directory: " << uz.formatError(ec).toAscii().data() << endl << endl;
+		cout << "Unable to add directory: " << uz.formatError(ec).toLatin1().data() << endl << endl;
 	}
 
 	uz.setArchiveComment("This archive has been created using OSDaB Zip (http://osdab.42cows.org/).");
 
 	if (uz.closeArchive() != Zip::Ok) {
-		cout << "Unable to close the archive: " << uz.formatError(ec).toAscii().data() << endl << endl;
+		cout << "Unable to close the archive: " << uz.formatError(ec).toLatin1().data() << endl << endl;
 	}
 
 	return ec == Zip::Ok;
@@ -209,13 +209,13 @@ bool listFiles(const QString& file, const QString& pwd)
 
 	ec = uz.openArchive(file);
 	if (ec != UnZip::Ok) {
-		cout << "Unable to open archive: " << uz.formatError(ec).toAscii().data() << endl << endl;
+		cout << "Unable to open archive: " << uz.formatError(ec).toLatin1().data() << endl << endl;
 		return false;
 	}
 
 	QString comment = uz.archiveComment();
 	if (!comment.isEmpty())
-		cout << "Archive comment: " << comment.toAscii().data() << endl << endl;
+		cout << "Archive comment: " << comment.toLatin1().data() << endl << endl;
 
 	QList<UnZip::ZipEntry> list = uz.entryList();
 	if (list.isEmpty()) {
@@ -247,7 +247,7 @@ bool listFiles(const QString& file, const QString& pwd)
 			if (entry.encrypted)
 				file.append("*");
 
-			cout << setw(40) << file.toAscii().data() << setw(10) << entry.uncompressedSize << setw(10) << ratioS.toAscii().data() << setw(10) << crc.toAscii().data() << endl;
+			cout << setw(40) << file.toLatin1().data() << setw(10) << entry.uncompressedSize << setw(10) << ratioS.toLatin1().data() << setw(10) << crc.toLatin1().data() << endl;
 		}
 	}
 
@@ -270,7 +270,7 @@ bool verifyArchive(const QString& file, const QString& pwd)
 
     ec = uz.openArchive(file);
     if (ec != UnZip::Ok) {
-        cout << "Unable to open archive: " << uz.formatError(ec).toAscii().data() << endl << endl;
+        cout << "Unable to open archive: " << uz.formatError(ec).toLatin1().data() << endl << endl;
         return false;
     }
 
