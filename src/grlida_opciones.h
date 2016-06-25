@@ -31,6 +31,7 @@
 #include "funciones.h"
 #include "dbsql.h"
 #include "qcheckcombobox.h"
+#include "grlida_picflow.h"
 
 namespace Ui {
 	class frmOpciones;
@@ -55,6 +56,7 @@ private:
 
 	Funciones *fGrl;
 	dbSql *sql;
+	GrlPicFlow *grl_picflow;
 
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;

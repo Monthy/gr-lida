@@ -194,7 +194,7 @@
    <item row="0" column="1" colspan="3">
     <widget class="QStackedWidget" name="swConfigOpciones">
      <property name="currentIndex">
-      <number>0</number>
+      <number>6</number>
      </property>
      <widget class="QWidget" name="page_0">
       <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -3077,25 +3077,6 @@
                 </property>
                 <property name="maximum">
                  <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2" rowspan="6">
-               <widget class="QLabel" name="lb_picflowtype">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(0, 0, 0);</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>

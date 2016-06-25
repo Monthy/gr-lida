@@ -81,6 +81,18 @@ void frmOpciones::createWidgets()
 	cbxCat_EmuShow->setMinimumHeight(24);
 
 	ui->gridLayout_categorias->addWidget(cbxCat_EmuShow, 2, 1, 1, 1);
+
+	grl_picflow = new GrlPicFlow(ui->groupBox);
+	grl_picflow->setFocusPolicy(Qt::StrongFocus);
+	grl_picflow->setFocus(Qt::OtherFocusReason);
+	grl_picflow->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred));
+	grl_picflow->setSlideSize(QSize(80,100));
+	grl_picflow->addSlide(QImage(fGrl->Theme() +"images/juego_sin_imagen.png"));
+	grl_picflow->addSlide(QImage(fGrl->Theme() +"images/juego_sin_imagen.png"));
+	grl_picflow->addSlide(QImage(fGrl->Theme() +"images/juego_sin_imagen.png"));
+	grl_picflow->addSlide(QImage(fGrl->Theme() +"images/juego_sin_imagen.png"));
+	grl_picflow->addSlide(QImage(fGrl->Theme() +"images/juego_sin_imagen.png"));
+	ui->gridLayout_5->addWidget(grl_picflow, 1, 2, 6, 1);
 }
 
 void frmOpciones::cargarConfig()
@@ -319,7 +331,6 @@ void frmOpciones::guardarConfig()
 
 	grlCfg.ToolbarBigIcon      = ui->chkToolbarBigIcon->isChecked();
 	grlCfg.IconoFav            = ui->cbxIconFav->itemData(ui->cbxIconFav->currentIndex()).toString();
-	grlCfg.PicFlowType         = ui->cbxPicFlowType->itemData(ui->cbxPicFlowType->currentIndex()).toString();
 	grlCfg.PicFlowShowNumPos   = ui->chkPicFlowShowNumPos->isChecked();
 	grlCfg.PicFlowShowTriangle = ui->chkPicFlowShowTriangle->isChecked();
 	grlCfg.PicFlowMinHeight    = ui->spinBox_MinHeightPicFlow->value();
@@ -2266,7 +2277,7 @@ void frmOpciones::setColorBtn(QColor color)
 	painter.end();
 	ui->btnPicFlowBgColor->setIconSize(QSize(w, h));
 	ui->btnPicFlowBgColor->setIcon(QIcon(img));
-	ui->lb_picflowtype->setStyleSheet("background-color: rgb("+ fGrl->setColorStr(color) +");");
+	grl_picflow->setBackgroundColor(color);
 }
 
 void frmOpciones::on_cbxStyle_activated(int index)
@@ -2308,10 +2319,20 @@ void frmOpciones::on_sbxFontSize_valueChanged(const QString &arg1)
 
 void frmOpciones::on_cbxPicFlowType_activated(int index)
 {
-	if( index > -1 )
-		ui->lb_picflowtype->setPixmap(QPixmap(":/images/flow"+ fGrl->IntToStr(index) +".png"));
-	else
-		ui->lb_picflowtype->setPixmap(QPixmap(":/images/flow0.png"));
+	if (index > -1)
+	{
+		grlCfg.PicFlowType = ui->cbxPicFlowType->itemData(index).toString();
+		if (grlCfg.PicFlowType.toLower() == "strip")
+			grl_picflow->setFlowType(PictureFlow::Strip);
+		else if (grlCfg.PicFlowType.toLower() == "stripoverlapped")
+			grl_picflow->setFlowType(PictureFlow::StripOverlapped);
+		else
+			grl_picflow->setFlowType(PictureFlow::CoverFlowLike);
+	} else {
+		grlCfg.PicFlowType = "CoverFlowLike";
+		grl_picflow->setFlowType(PictureFlow::CoverFlowLike);
+	}
+	grl_picflow->update();
 }
 
 void frmOpciones::on_btnPicFlowBgColor_clicked()
