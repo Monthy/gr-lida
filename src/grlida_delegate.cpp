@@ -63,11 +63,11 @@ void GrlListViewDelegate::setLwIconCfg(stLwIconCfg m_lwConf)
 		star_off.load(":/images/star_off.png");
 
 	ico_emu.clear();
-	fGrl.insertaIconos(ico_emu, stThemeApp +"img16_cat/", "", stFilter, false);
+	fGrl.insertaIconos(ico_emu, stThemeApp +"img16/cat/", "", stFilter, false);
 
 	QHash<QString, stGrlDatos> emu_list = fGrl.cargaDatosQHash(stDirApp +"datos/emu_list.txt", 4, "|");
 	foreach (const stGrlDatos &dat, emu_list)
-		ico_emu.insert(dat.key, QPixmap(stThemeApp +"img16_cat/"+ dat.icono));
+		ico_emu.insert(dat.key, QPixmap(stThemeApp +"img16/cat/"+ dat.icono));
 
 	pen = QApplication::palette().text().color();
 	pen_def.setColor( fGrl.getColor(lwConf.title_font_color) );
@@ -298,7 +298,7 @@ GrlTreeViewDelegate::GrlTreeViewDelegate(dbSql *m_sql, QString dir_app, QString 
 
 	icono.clear();
 	fGrl.insertaIconos(icono, stDirApp +"iconos/", "", filter);
-	fGrl.insertaIconos(icono, stThemeApp +"img24_cat/", "", filter);
+	fGrl.insertaIconos(icono, stThemeApp +"img24/cat/", "", filter);
 }
 
 GrlTreeViewDelegate::~GrlTreeViewDelegate()

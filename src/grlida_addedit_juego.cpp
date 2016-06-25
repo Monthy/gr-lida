@@ -206,10 +206,10 @@ void frmAddEditJuego::cargarConfig()
 		{
 			if( lista.isEmpty() || lista.contains("all") || lista.contains(dat.key) )
 			{
-				if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ dat.icono) )
-					ui->cbxDatos_TipoEmu->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ dat.icono), dat.titulo, dat.key);
+				if( QFile::exists(fGrl->ThemeApp() +"img16/cat/"+ dat.icono) )
+					ui->cbxDatos_TipoEmu->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ dat.icono), dat.titulo, dat.key);
 				else
-					ui->cbxDatos_TipoEmu->addItem(QIcon(":/img16_cat/sinimg.png"), dat.titulo, dat.key);
+					ui->cbxDatos_TipoEmu->addItem(QIcon(":/img16/cat/sinimg.png"), dat.titulo, dat.key);
 			}
 		}
 	}
@@ -259,8 +259,8 @@ void frmAddEditJuego::cargarConfig()
 	fGrl->cargarDatosCheckComboBox(cbxDatos_Desarrollador, grlDir.Datos +"companias.txt"                     , fGrl->Theme() +"img16/"  , "", 2, "|");
 	fGrl->cargarDatosCheckComboBox(cbxDatos_Tema         , grlDir.Datos + fGrl->Idioma() +"/temas.txt"       , fGrl->Theme() +"img16/"  , "", 2, "|");
 	fGrl->cargarDatosCheckComboBox(cbxDatos_Grupo        , grlDir.Datos +"grupos.txt"                        , fGrl->Theme() +"img16/"  , "", 2, "|");
-	fGrl->cargarDatosCheckComboBox(cbxDatos_Idioma       , grlDir.Datos + fGrl->Idioma() +"/idiomas.txt"     , fGrl->Theme() +"img_lng/", "", 3, "|");
-	fGrl->cargarDatosCheckComboBox(cbxDatos_IdiomaVoces  , grlDir.Datos + fGrl->Idioma() +"/idiomas.txt"     , fGrl->Theme() +"img_lng/", "", 3, "|");
+	fGrl->cargarDatosCheckComboBox(cbxDatos_Idioma       , grlDir.Datos + fGrl->Idioma() +"/idiomas.txt"     , fGrl->Theme() +"img16/lng/", "", 3, "|");
+	fGrl->cargarDatosCheckComboBox(cbxDatos_IdiomaVoces  , grlDir.Datos + fGrl->Idioma() +"/idiomas.txt"     , fGrl->Theme() +"img16/lng/", "", 3, "|");
 	fGrl->cargarDatosCheckComboBox(cbxDatos_Formato      , grlDir.Datos + fGrl->Idioma() +"/formatos.txt"    , fGrl->Theme() +"img16/"  , "", 2, "|");
 	fGrl->cargarDatosCheckComboBox(cbxDatos_Perspectiva  , grlDir.Datos + fGrl->Idioma() +"/perspectivas.txt", fGrl->Theme() +"img16/"  , "", 2, "|");
 	fGrl->cargarDatosCheckComboBox(cbxDatos_SistemaOp    , grlDir.Datos +"sistemas.txt"                      , fGrl->Theme() +"img16/"  , "", 2, "|");

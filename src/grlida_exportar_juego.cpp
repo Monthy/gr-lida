@@ -106,10 +106,10 @@ void frmExportarJuego::cargarListaCategorias()
 				categoria.insert(cat.id.toInt(), cat);
 
 				QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
-				if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ cat.img) )
-					ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+				if( QFile::exists(fGrl->ThemeApp() +"img16/cat/"+ cat.img) )
+					ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 				else
-					ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+					ui->cbxCategorias->addItem(QIcon(":/img16/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 			} while ( query.next() );
 		} else {
 			cat.tabla    = "dbgrl";
@@ -121,10 +121,10 @@ void frmExportarJuego::cargarListaCategorias()
 			categoria.insert(cat.id.toInt(), cat);
 
 			QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
-			if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ cat.img) )
-				ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+			if( QFile::exists(fGrl->ThemeApp() +"img16/cat/"+ cat.img) )
+				ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 			else
-				ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+				ui->cbxCategorias->addItem(QIcon(":/img16/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 		}
 	} else {
 		cat.tabla    = "dbgrl";
@@ -136,10 +136,10 @@ void frmExportarJuego::cargarListaCategorias()
 		categoria.insert(cat.id.toInt(), cat);
 
 		QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
-		if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ cat.img) )
-			ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+		if( QFile::exists(fGrl->ThemeApp() +"img16/cat/"+ cat.img) )
+			ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 		else
-			ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+			ui->cbxCategorias->addItem(QIcon(":/img16/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 	}
 	query.clear();
 
@@ -246,10 +246,10 @@ void frmExportarJuego::on_cbxCategorias_activated(int index)
 	{
 		if( lista.isEmpty() || lista.contains("all") || lista.contains(dat.key) )
 		{
-			if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ dat.icono) )
-				ui->cbxTipoEmu->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ dat.icono), dat.titulo, "WHERE tipo_emu='"+ dat.key +"'");
+			if( QFile::exists(fGrl->ThemeApp() +"img16/cat/"+ dat.icono) )
+				ui->cbxTipoEmu->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ dat.icono), dat.titulo, "WHERE tipo_emu='"+ dat.key +"'");
 			else
-				ui->cbxTipoEmu->addItem(QIcon(":/img16_cat/sinimg.png"), dat.titulo, "WHERE tipo_emu='"+ dat.key +"'");
+				ui->cbxTipoEmu->addItem(QIcon(":/img16/cat/sinimg.png"), dat.titulo, "WHERE tipo_emu='"+ dat.key +"'");
 		}
 	}
 

@@ -241,10 +241,10 @@ void frmListIconCfg::cargarListaCategorias()
 				categoria.insert(cat.id.toInt(), cat);
 
 				QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
-				if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ cat.img) )
-					ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+				if( QFile::exists(fGrl->ThemeApp() +"img16/cat/"+ cat.img) )
+					ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 				else
-					ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+					ui->cbxCategorias->addItem(QIcon(":/img16/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 			} while ( query.next() );
 		} else {
 			cat.tabla    = "dbgrl";
@@ -256,10 +256,10 @@ void frmListIconCfg::cargarListaCategorias()
 			categoria.insert(cat.id.toInt(), cat);
 
 			QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
-			if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ cat.img) )
-				ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+			if( QFile::exists(fGrl->ThemeApp() +"img16/cat/"+ cat.img) )
+				ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 			else
-				ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+				ui->cbxCategorias->addItem(QIcon(":/img16/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 		}
 	} else {
 		cat.tabla    = "dbgrl";
@@ -271,10 +271,10 @@ void frmListIconCfg::cargarListaCategorias()
 		categoria.insert(cat.id.toInt(), cat);
 
 		QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
-		if( QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ cat.img) )
-			ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+		if( QFile::exists(fGrl->ThemeApp() +"img16/cat/"+ cat.img) )
+			ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 		else
-			ui->cbxCategorias->addItem(QIcon(":/img16_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+			ui->cbxCategorias->addItem(QIcon(":/img16/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 	}
 	query.clear();
 

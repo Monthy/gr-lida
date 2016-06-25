@@ -67,7 +67,7 @@ void frmAddEditScummVM::cargarConfig()
 	QValidator *validarTexto = new QRegExpValidator( regexp, this );
 	ui->txtSvm_game_label->setValidator( validarTexto );
 
-	fGrl->cargarDatosComboBox(ui->cbxSvm_language    , grlDir.Datos + fGrl->Idioma() +"/svm_idioma.txt", fGrl->Theme() +"img_lng/", "es"   , 3, "|", true, true);
+	fGrl->cargarDatosComboBox(ui->cbxSvm_language    , grlDir.Datos + fGrl->Idioma() +"/svm_idioma.txt", fGrl->Theme() +"img16/lng/", "es" , 3, "|", true, true);
 	fGrl->cargarDatosComboBox(ui->cbxSvm_platform    , grlDir.Datos +"svm_platform.txt"                , fGrl->Theme() +"img16/"  , "pc"   , 3, "|");
 	fGrl->cargarDatosComboBox(ui->cbxSvm_gfx_mode    , grlDir.Datos +"svm_gfxmode.txt"                 , fGrl->Theme() +"img16/"  , "2x"   , 3, "|");
 	fGrl->cargarDatosComboBox(ui->cbxSvm_render_mode , grlDir.Datos +"svm_render_mode.txt"             , fGrl->Theme() +"img16/"  , ""     , 3, "|");

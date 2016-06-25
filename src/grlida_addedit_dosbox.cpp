@@ -89,7 +89,7 @@ void frmAddEditDosBox::cargarConfig()
 	fGrl->cargarDatosComboBox(ui->cbxDbx_cpu_cycles_realmode , grlDir.Datos +"dbx_cycles.txt"        , fGrl->Theme() +"img16/"  , ""           , 2, "|"); // Ciclos DOSBox realmode
 	fGrl->cargarDatosComboBox(ui->cbxDbx_cpu_cycles_limitmode, grlDir.Datos +"dbx_cycles.txt"        , fGrl->Theme() +"img16/"  , ""           , 2, "|"); // Ciclos DOSBox limitmode
 	fGrl->cargarDatosComboBox(ui->cbxDbx_joystick_type       , grlDir.Datos +"dbx_joystick.txt"      , fGrl->Theme() +"img16/"  , "auto"       , 3, "|", true, true); // Emulador de joystick
-	fGrl->cargarDatosComboBox(ui->cbxDbx_dos_keyboardlayout  , grlDir.Datos +"dbx_keyboardlayout.txt", fGrl->Theme() +"img_lng/", "default"    , 4, "|"); // keyboardlayout
+	fGrl->cargarDatosComboBox(ui->cbxDbx_dos_keyboardlayout  , grlDir.Datos +"dbx_keyboardlayout.txt", fGrl->Theme() +"img16/lng/", "default"  , 4, "|"); // keyboardlayout
 	fGrl->cargarDatosComboBox(ui->cbxDbx_sblaster_sbtype     , grlDir.Datos +"dbx_sbtype.txt"        , fGrl->Theme() +"img16/"  , "sb16"       , 3, "|", true, true); // Tipo Sound Blaste
 	fGrl->cargarDatosComboBox(ui->cbxDbx_sblaster_oplmode    , grlDir.Datos +"dbx_sb_oplmode.txt"    , fGrl->Theme() +"img16/"  , "auto"       , 3, "|", true, true); // Sound Blaste Opl mode
 	fGrl->cargarDatosComboBox(ui->cbxDbx_sblaster_oplemu     , grlDir.Datos +"dbx_sb_oplemu.txt"     , fGrl->Theme() +"img16/"  , "default"    , 2, "|"); // Provider for the OPL emulation

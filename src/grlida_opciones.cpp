@@ -133,7 +133,7 @@ void frmOpciones::cargarConfig()
 // Otros Emuladores ------------------
 	regexp.setPattern("[a-z-_0-9]+");
 	ui->txtEmuDato->setValidator(new QRegExpValidator(regexp, ui->txtEmuDato));
-	fGrl->cargarIconosComboBox(ui->cbxEmuImg, fGrl->ThemeApp() +"img16_cat/", "sinimg.png", grlCfg.FormatsImage.join(";"));
+	fGrl->cargarIconosComboBox(ui->cbxEmuImg, fGrl->ThemeApp() +"img16/cat/", "sinimg.png", grlCfg.FormatsImage.join(";"));
 
 	ui->twEmus->clear();
 	ui->twEmus->header()->setMovable(false);
@@ -174,7 +174,7 @@ void frmOpciones::cargarConfig()
 	regexp.setPattern("[A-Za-z-_0-9]+");
 	ui->txtCat_Tabla->setValidator(new QRegExpValidator(regexp, ui->txtCat_Tabla));
 
-	fGrl->cargarIconosComboBox(ui->cbxCat_Img, fGrl->ThemeApp() +"img16_cat/", "sinimg.png", grlCfg.FormatsImage.join(";"));
+	fGrl->cargarIconosComboBox(ui->cbxCat_Img, fGrl->ThemeApp() +"img16/cat/", "sinimg.png", grlCfg.FormatsImage.join(";"));
 	sql->cargarCategorias(ui->twCategorias);
 
 	emu_list.clear();
@@ -530,7 +530,7 @@ void frmOpciones::on_cbxIdioma_activated(int index)
 	cbxCat_EmuShow->addItem(QIcon(fGrl->Theme() +"img16/vdmsound.png"), tr("VDMSound"), "vdmsound");
 
 	foreach (const stGrlDatos &dat, emu_list)
-		cbxCat_EmuShow->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ dat.icono), dat.titulo, dat.key);
+		cbxCat_EmuShow->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ dat.icono), dat.titulo, dat.key);
 
 // Crear, editar menú nav ------------
 	ui->cbxMnuNav_ColName->clear();
@@ -1254,7 +1254,7 @@ void frmOpciones::on_btnEmuAdd_clicked()
 		} else {
 			QTreeWidgetItem *item = new QTreeWidgetItem( ui->twEmus );
 			QString imgEmu = ui->cbxEmuImg->itemData(ui->cbxEmuImg->currentIndex()).toString();
-			item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img16_cat/"+ imgEmu) );
+			item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img16/cat/"+ imgEmu) );
 			item->setText( 0, ui->txtEmuTitulo->text() );
 			item->setText( 1, ui->txtEmuDato->text() );
 			item->setText( 2, "-"   );
@@ -1289,7 +1289,7 @@ void frmOpciones::on_btnEmuUpdate_clicked()
 			ui->txtEmuDato->setFocus();
 		} else {
 			QString imgEmu = ui->cbxEmuImg->itemData(ui->cbxEmuImg->currentIndex()).toString();
-			item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img16_cat/"+ imgEmu) );
+			item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img16/cat/"+ imgEmu) );
 			item->setText( 0, ui->txtEmuTitulo->text() );
 			item->setText( 2, "-"   );
 			item->setText( 3, ui->txtEmuPath->text() );
@@ -1308,7 +1308,7 @@ void frmOpciones::on_btnEmuUpdate_clicked()
 			emu_list.clear();
 			emu_list = fGrl->cargaDatosQHash(grlDir.Datos +"emu_list.txt", 4, "|");
 			foreach (const stGrlDatos &dat, emu_list)
-				cbxCat_EmuShow->addItem(QIcon(fGrl->ThemeApp() +"img16_cat/"+ dat.icono), dat.titulo, dat.key);
+				cbxCat_EmuShow->addItem(QIcon(fGrl->ThemeApp() +"img16/cat/"+ dat.icono), dat.titulo, dat.key);
 
 			ui->btnEmuUpdate->setEnabled(false);
 		}
@@ -1464,10 +1464,10 @@ void frmOpciones::on_btnCatAdd_clicked()
 					QTreeWidgetItem *item = new QTreeWidgetItem( ui->twCategorias );
 					item->setTextAlignment(2, Qt::AlignCenter);
 
-					if( QFile::exists(fGrl->ThemeApp() +"img32_cat/"+ img) )
-						item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32_cat/"+ img) );
+					if( QFile::exists(fGrl->ThemeApp() +"img32/cat/"+ img) )
+						item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32/cat/"+ img) );
 					else
-						item->setIcon( 0, QIcon(":/img32_cat/"+ img) );
+						item->setIcon( 0, QIcon(":/img32/cat/"+ img) );
 
 					item->setText( 0, titulo );
 					item->setText( 1, tabla  );
@@ -1564,10 +1564,10 @@ void frmOpciones::on_btnCatUpdate_clicked()
 						QTreeWidgetItem *item = ui->twCategorias->currentItem();
 						item->setTextAlignment(2, Qt::AlignCenter);
 
-						if( QFile::exists(fGrl->ThemeApp() +"img32_cat/"+ img) )
-							item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32_cat/"+ img) );
+						if( QFile::exists(fGrl->ThemeApp() +"img32/cat/"+ img) )
+							item->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32/cat/"+ img) );
 						else
-							item->setIcon( 0, QIcon(":/img32_cat/"+ img) );
+							item->setIcon( 0, QIcon(":/img32/cat/"+ img) );
 
 						item->setText( 0, titulo );
 						item->setText( 1, tabla  );
@@ -1921,7 +1921,7 @@ void frmOpciones::addEditDatosTwLista(bool isNew)
 			item->setIcon( 0, QIcon(fGrl->Theme() +"img_svm/"+ extra +".png") );
 	}
 	else if( archivo == "idiomas.txt" || archivo == "svm_idioma.txt" || archivo == "dbx_keyboardlayout.txt" )
-		dir_img = fGrl->Theme() +"img_lng/";
+		dir_img = fGrl->Theme() +"img16/lng/";
 	else
 		dir_img = fGrl->Theme() +"img16/";
 
@@ -2003,7 +2003,7 @@ void frmOpciones::on_cbxDat_Archivo_activated(int index)
 	else if( archivo == "idiomas.txt" || archivo == "svm_idioma.txt" || archivo == "dbx_keyboardlayout.txt" )
 	{
 		isLng = true;
-		dir_img = fGrl->Theme() +"img_lng/";
+		dir_img = fGrl->Theme() +"img16/lng/";
 	} else
 		dir_img = fGrl->Theme() +"img16/";
 

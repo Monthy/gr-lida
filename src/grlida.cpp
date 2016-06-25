@@ -682,7 +682,7 @@ void GrLida::cargarConfig()
 	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_tp.png"), QImage(fGrl->Theme() +"img16/edad_tp.png"));
 
 	foreach (const stGrlDatos &idioma, idiomas_list)
-		txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("idioma_rs_"+ idioma.icono), QImage(fGrl->Theme() +"img_lng/"+ idioma.icono));
+		txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("idioma_rs_"+ idioma.icono), QImage(fGrl->Theme() +"img16/lng/"+ idioma.icono));
 
 	foreach (const stGrlDatos &smile, smiles_list)
 	{
@@ -977,10 +977,10 @@ void GrLida::cargarListaCategorias(bool isEmit)
 				categoria.insert(cat.id.toInt(), cat);
 
 				QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
-				if( QFile::exists(fGrl->ThemeApp() +"img32_cat/"+ cat.img) )
-					ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img32_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+				if( QFile::exists(fGrl->ThemeApp() +"img32/cat/"+ cat.img) )
+					ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img32/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 				else
-					ui->cbxCategorias->addItem(QIcon(":/img32_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+					ui->cbxCategorias->addItem(QIcon(":/img32/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 
 				if( QFile::exists(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img) )
 					ui->cbxCategoriasTb->addItem(QIcon(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
@@ -998,10 +998,10 @@ void GrLida::cargarListaCategorias(bool isEmit)
 			categoria.insert(cat.id.toInt(), cat);
 
 			QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
-			if( QFile::exists(fGrl->ThemeApp() +"img32_cat/"+ cat.img) )
-				ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img32_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+			if( QFile::exists(fGrl->ThemeApp() +"img32/cat/"+ cat.img) )
+				ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img32/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 			else
-				ui->cbxCategorias->addItem(QIcon(":/img32_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+				ui->cbxCategorias->addItem(QIcon(":/img32/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 
 			if( QFile::exists(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img) )
 				ui->cbxCategoriasTb->addItem(QIcon(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
@@ -1018,10 +1018,10 @@ void GrLida::cargarListaCategorias(bool isEmit)
 		categoria.insert(cat.id.toInt(), cat);
 
 		QString total = fGrl->IntToStr( sql->getCount(cat.tabla) );
-		if( QFile::exists(fGrl->ThemeApp() +"img32_cat/"+ cat.img) )
-			ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img32_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+		if( QFile::exists(fGrl->ThemeApp() +"img32/cat/"+ cat.img) )
+			ui->cbxCategorias->addItem(QIcon(fGrl->ThemeApp() +"img32/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 		else
-			ui->cbxCategorias->addItem(QIcon(":/img32_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+			ui->cbxCategorias->addItem(QIcon(":/img32/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 
 		if( QFile::exists(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img) )
 			ui->cbxCategoriasTb->addItem(QIcon(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
@@ -1431,7 +1431,7 @@ void GrLida::crearMenuNav()
 		if( lista.isEmpty() || lista.contains("all") || lista.contains(list_emu.at(i).key) )
 		{
 			emu_list.insert(list_emu.at(i).key, list_emu.at(i));
-			menuNavAddSubCat(list_emu.at(i).titulo, fGrl->ThemeApp() +"img16_cat/"+ list_emu.at(i).icono, "WHERE tipo_emu='"+ list_emu.at(i).key +"'");
+			menuNavAddSubCat(list_emu.at(i).titulo, fGrl->ThemeApp() +"img16/cat/"+ list_emu.at(i).icono, "WHERE tipo_emu='"+ list_emu.at(i).key +"'");
 		}
 	}
 
@@ -1691,10 +1691,10 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 				dat_thumbs = fGrl->ThemeApp() +"images/"+ Thumbs;
 			}
 
-			if( QFile::exists( fGrl->ThemeApp() +"img24_cat/"+ datos.icono ) )
-				dat_icono = fGrl->ThemeApp() +"img24_cat/"+ datos.icono;
+			if( QFile::exists( fGrl->ThemeApp() +"img24/cat/"+ datos.icono ) )
+				dat_icono = fGrl->ThemeApp() +"img24/cat/"+ datos.icono;
 			else
-				dat_icono = ":/img24_cat/sinimg.png";
+				dat_icono = ":/img24/cat/sinimg.png";
 
 			dat_idioma       = fGrl->getImgDatos(idiomas_list, datos.idioma.split(";")      , true);
 			dat_idioma_voces = fGrl->getImgDatos(idiomas_list, datos.idioma_voces.split(";"), true);
@@ -1989,7 +1989,7 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 		} else {
 			if( emu_list.contains(tipo_emu)  )
 			{
-				lb_panel_3->setPixmap( QPixmap(fGrl->ThemeApp() +"img16_cat/"+ emu_list[tipo_emu].icono) );
+				lb_panel_3->setPixmap( QPixmap(fGrl->ThemeApp() +"img16/cat/"+ emu_list[tipo_emu].icono) );
 
 				cfgExec.f_exe         = fGrl->getDirRelative(emu_list[tipo_emu].extra);
 				cfgExec.f_param       = fGrl->getDirRelative(conf_datos["path_exe"]) +"|"+ conf_datos["parametros_exe"];
@@ -2249,7 +2249,7 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 
 	Q_UNUSED(lng);
 // Copia iconos categorías.
-	QList<stGrlDatos> list_icos = fGrl->cargarListaArchivos(":/img24_cat/", CbxListIcon);
+	QList<stGrlDatos> list_icos = fGrl->cargarListaArchivos(":/img24/cat/", CbxListIcon);
 	const int list_icosSize = list_icos.size();
 	for(int i = 0; i < list_icosSize; ++i)
 	{
@@ -2275,9 +2275,9 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 // Comprueba iconos categoría.
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/");
 	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/images/");
-	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img16_cat/");
-	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img24_cat/");
-	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img32_cat/");
+	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img16/cat/");
+	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img24/cat/");
+	fGrl->comprobarDirectorio(grlDir.Themes +"defecto/img32/cat/");
 
 	if( !QFile::exists(fGrl->ThemeApp() +"list_cfg.ini") )
 		fGrl->guardarListWidgetIconConf( fGrl->cargarListWidgetIconConf() );
@@ -2306,25 +2306,25 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 			fGrl->copiarArchivo(":/images/list_cover_title_bg.png", fGrl->ThemeApp() +"images/list_cover_title_bg.png", true);
 
 	// Copia los iconos categoría.
-		QList<stGrlDatos> list_img_cat = fGrl->cargarListaArchivos(":/img16_cat/", CbxListIcon);
+		QList<stGrlDatos> list_img_cat = fGrl->cargarListaArchivos(":/img16/cat/", CbxListIcon);
 		for(int i = 0; i < list_img_cat.size(); ++i)
 		{
-			if( !QFile::exists(fGrl->ThemeApp() +"img16_cat/"+ list_img_cat.at(i).key) )
-				fGrl->copiarArchivo(list_img_cat.at(i).icono, fGrl->ThemeApp() +"img16_cat/"+ list_img_cat.at(i).key, true);
+			if( !QFile::exists(fGrl->ThemeApp() +"img16/cat/"+ list_img_cat.at(i).key) )
+				fGrl->copiarArchivo(list_img_cat.at(i).icono, fGrl->ThemeApp() +"img16/cat/"+ list_img_cat.at(i).key, true);
 		}
 
-		list_img_cat = fGrl->cargarListaArchivos(":/img24_cat/", CbxListIcon);
+		list_img_cat = fGrl->cargarListaArchivos(":/img24/cat/", CbxListIcon);
 		for(int i = 0; i < list_img_cat.size(); ++i)
 		{
-			if( !QFile::exists(fGrl->ThemeApp() +"img24_cat/"+ list_img_cat.at(i).key) )
-				fGrl->copiarArchivo(list_img_cat.at(i).icono, fGrl->ThemeApp() +"img24_cat/"+ list_img_cat.at(i).key, true);
+			if( !QFile::exists(fGrl->ThemeApp() +"img24/cat/"+ list_img_cat.at(i).key) )
+				fGrl->copiarArchivo(list_img_cat.at(i).icono, fGrl->ThemeApp() +"img24/cat/"+ list_img_cat.at(i).key, true);
 		}
 
-		list_img_cat = fGrl->cargarListaArchivos(":/img32_cat/", CbxListIcon);
+		list_img_cat = fGrl->cargarListaArchivos(":/img32/cat/", CbxListIcon);
 		for(int i = 0; i < list_img_cat.size(); ++i)
 		{
-			if( !QFile::exists(fGrl->ThemeApp() +"img32_cat/"+ list_img_cat.at(i).key) )
-				fGrl->copiarArchivo(list_img_cat.at(i).icono, fGrl->ThemeApp() +"img32_cat/"+ list_img_cat.at(i).key, true);
+			if( !QFile::exists(fGrl->ThemeApp() +"img32/cat/"+ list_img_cat.at(i).key) )
+				fGrl->copiarArchivo(list_img_cat.at(i).icono, fGrl->ThemeApp() +"img32/cat/"+ list_img_cat.at(i).key, true);
 		}
 
 		if( !QFile::exists(fGrl->ThemeApp() +"tpl_info.html") )

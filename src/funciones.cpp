@@ -1417,10 +1417,10 @@ QList<stGrlDatos> Funciones::cargarListaArchivos(QString m_dir, TipoListCbx tipo
 				language  = parts_lng.at(1) +"_"+ parts_lng.at(2);
 				locale    = language;
 
-				if( QFile::exists(stTheme +"img_lng/"+ parts_lng.at(2).toLower() +".png") )
-					dato.icono = stTheme +"img_lng/"+ parts_lng.at(2).toLower() +".png";
+				if( QFile::exists(stTheme +"img16/lng/"+ parts_lng.at(2).toLower() +".png") )
+					dato.icono = stTheme +"img16/lng/"+ parts_lng.at(2).toLower() +".png";
 				else
-					dato.icono = stTheme +"img_lng/sinimg.png";
+					dato.icono = stTheme +"img16/lng/sinimg.png";
 
 				dato.titulo = locale.languageToString(locale.language()) +" ("+ locale.countryToString(locale.country()) +")"+ (m_dir == ":/idiomas/" ? "" : " "+ tr("exterior"));
 				dato.extra  = "";
@@ -1625,9 +1625,9 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 						if( tipo == TwListEmu )
 						{
 							if( isLng )
-								dir_img = stTheme +"img_lng/";
+								dir_img = stTheme +"img16/lng/";
 							else
-								dir_img = stThemeApp +"img16_cat/";
+								dir_img = stThemeApp +"img16/cat/";
 						} else {
 							dir_img = stTheme +"icon_svm/";
 							col_nada   = 0;
@@ -1654,7 +1654,7 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 						img    = lista.at(1);
 
 						if( isLng )
-							dir_img = stTheme +"img_lng/";
+							dir_img = stTheme +"img16/lng/";
 						else
 							dir_img = stTheme +"img16/";
 
@@ -1669,7 +1669,7 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 						img    = lista.at(2);
 
 						if( isLng )
-							dir_img = stTheme +"img_lng/";
+							dir_img = stTheme +"img16/lng/";
 						else
 							dir_img = stTheme +"img16/";
 
@@ -1677,7 +1677,7 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 						{
 							titulo  = lista.at(1);
 							dato    = lista.at(0);
-							dir_img = stTheme +"img_lng/";
+							dir_img = stTheme +"img16/lng/";
 
 							item->setFont( 0, m_font         );
 							item->setText( 0, lista.at(0) );

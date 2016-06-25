@@ -2071,10 +2071,10 @@ void dbSql::cargarCategorias(QTreeWidget *twCat)
 				QTreeWidgetItem *item_cat = new QTreeWidgetItem( twCat );
 				item_cat->setTextAlignment(2, Qt::AlignCenter);
 
-				if( QFile::exists(fGrl->ThemeApp() +"img32_cat/"+ query.record().value("img").toString()) )
-					item_cat->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32_cat/"+ query.record().value("img").toString()) );
+				if( QFile::exists(fGrl->ThemeApp() +"img32/cat/"+ query.record().value("img").toString()) )
+					item_cat->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32/cat/"+ query.record().value("img").toString()) );
 				else
-					item_cat->setIcon( 0, QIcon(":/img32_cat/sinimg.png") );
+					item_cat->setIcon( 0, QIcon(":/img32/cat/sinimg.png") );
 
 				item_cat->setText( 0, query.record().value("titulo").toString()   );
 				item_cat->setText( 1, query.record().value("tabla").toString()    );
@@ -2089,10 +2089,10 @@ void dbSql::cargarCategorias(QTreeWidget *twCat)
 			QTreeWidgetItem *item_cat = new QTreeWidgetItem( twCat );
 			item_cat->setTextAlignment(2, Qt::AlignCenter);
 
-			if( QFile::exists(fGrl->ThemeApp() +"img32_cat/pc.png") )
-				item_cat->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32_cat/pc.png") );
+			if( QFile::exists(fGrl->ThemeApp() +"img32/cat/pc.png") )
+				item_cat->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32/cat/pc.png") );
 			else
-				item_cat->setIcon( 0, QIcon(":/img32_cat/sinimg.png") );
+				item_cat->setIcon( 0, QIcon(":/img32/cat/sinimg.png") );
 
 			item_cat->setText( 0, "Db GR-lida" );
 			item_cat->setText( 1, "dbgrl"      );
@@ -2107,10 +2107,10 @@ void dbSql::cargarCategorias(QTreeWidget *twCat)
 		QTreeWidgetItem *item_cat = new QTreeWidgetItem( twCat );
 		item_cat->setTextAlignment(2, Qt::AlignCenter);
 
-		if( QFile::exists(fGrl->ThemeApp() +"img32_cat/pc.png") )
-			item_cat->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32_cat/pc.png") );
+		if( QFile::exists(fGrl->ThemeApp() +"img32/cat/pc.png") )
+			item_cat->setIcon( 0, QIcon(fGrl->ThemeApp() +"img32/cat/pc.png") );
 		else
-			item_cat->setIcon( 0, QIcon(":/img32_cat/sinimg.png") );
+			item_cat->setIcon( 0, QIcon(":/img32/cat/sinimg.png") );
 
 
 		item_cat->setText( 0, "Db GR-lida" );
@@ -2315,9 +2315,7 @@ void dbSql::cargarMenuNav(QTreeWidget *twMnuNav, QString tabla, bool isOpt)
 							item->setText( 2, "" );
 
 							if( archivo == "idiomas.txt" || archivo == "svm_idioma.txt" || archivo == "dbx_keyboardlayout.txt" )
-								dir_img = fGrl->Theme() +"img_lng/";
-							else if( archivo == "rating.txt" )
-								dir_img = fGrl->Theme() +"images/";
+								dir_img = fGrl->Theme() +"img16/lng/";
 							else
 								dir_img = fGrl->Theme() +"img16/";
 

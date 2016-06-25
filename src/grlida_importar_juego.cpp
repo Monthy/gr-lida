@@ -305,10 +305,10 @@ void frmImportarJuego::mostrarFichaHtml(QHash<QString, QString> datos)
 		dat_thumbs = fGrl->ThemeApp() +"images/"+ datos["Dat_thumbs"];
 	}
 
-	if( QFile::exists( fGrl->ThemeApp() +"img24_cat/"+ datos["Dat_icono"] ) )
-		dat_icono = fGrl->ThemeApp() +"img24_cat/"+ datos["Dat_icono"];
+	if( QFile::exists( fGrl->ThemeApp() +"img24/cat/"+ datos["Dat_icono"] ) )
+		dat_icono = fGrl->ThemeApp() +"img24/cat/"+ datos["Dat_icono"];
 	else
-		dat_icono = ":/img24_cat/sinimg.png";
+		dat_icono = ":/img24/cat/sinimg.png";
 
 	ui->txtHtmlInfo->clear();
 	ui->txtHtmlInfo->document()->addResource(QTextDocument::ImageResource, QUrl("thumb_rs_"+ datos["Dat_thumbs"]), QImage(dat_thumbs));
@@ -321,7 +321,7 @@ void frmImportarJuego::mostrarFichaHtml(QHash<QString, QString> datos)
 		ui->txtHtmlInfo->document()->addResource(QTextDocument::ImageResource, QUrl("smile_rs_"+ smile.icono), QImage(grlDir.Smiles + smile.icono));
 
 	foreach (const stGrlDatos &idioma, idiomas_list)
-		ui->txtHtmlInfo->document()->addResource(QTextDocument::ImageResource, QUrl("idioma_rs_"+ idioma.icono), QImage(fGrl->Theme() +"img_lng/"+ idioma.icono));
+		ui->txtHtmlInfo->document()->addResource(QTextDocument::ImageResource, QUrl("idioma_rs_"+ idioma.icono), QImage(fGrl->Theme() +"img16/lng/"+ idioma.icono));
 
 	dat_idioma       = fGrl->getImgDatos(idiomas_list, datos["Dat_idioma"].split(";")      , true);
 	dat_idioma_voces = fGrl->getImgDatos(idiomas_list, datos["Dat_idioma_voces"].split(";"), true);
