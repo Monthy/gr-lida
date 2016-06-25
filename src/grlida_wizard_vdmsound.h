@@ -22,8 +22,8 @@
  *
 **/
 
-#ifndef GRLIDA_DBXADD_H
-#define GRLIDA_DBXADD_H
+#ifndef GRLIDA_WIZARD_VDMSOUND_H
+#define GRLIDA_WIZARD_VDMSOUND_H
 
 #include <QDialog>
 
@@ -31,73 +31,56 @@
 #include "dbsql.h"
 
 namespace Ui {
-	class frmDbxAdd;
+	class frmWizardVdmSound;
 }
 
-class frmDbxAdd : public QDialog
+class frmWizardVdmSound : public QDialog
 {
 	Q_OBJECT
 
 public:
-	explicit frmDbxAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent = 0);
-	~frmDbxAdd();
+	frmWizardVdmSound(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent = 0);
+	~frmWizardVdmSound();
 
 	stGrlCfg getGrlCfg(){return grlCfg;}
 	stDatosJuego getDatosJuegos(){return DatosJuego;}
 
 private:
-	Ui::frmDbxAdd *ui;
+	Ui::frmWizardVdmSound *ui;
 
-	QString titulo_ventana(){ return tr("Nuevo juego para el DOSBox"); }
+	QString titulo_ventana(){ return tr("Nuevo juego para el VDMSound"); }
 
 	Funciones *fGrl;
 	dbSql *sql;
 
 	stDatosJuego DatosJuego;
-	stConfigDOSBox DatosDosBox;
+	stConfigVDMSound DatosVDMSound;
 
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
 	stGrlCats categoria;
-	QHash<QString, stGrlDatos> dbx_list;
-	bool isDbxSVN;
-	int index_wizard;
 
 	void cargarConfig();
 	void setTheme();
 
-	void previerMontajes();
-	void setDatosDosBox();
-	void cargarDatosDosBox(stConfigDOSBox cfgDbx);
-	void cargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
+	void setDatosVDMSound();
+	void cargarDatosVDMSound(stConfigVDMSound cfgVdms);
 
 private slots:
 	void on_btnOk_clicked();
 	void on_btnCancel_clicked();
-	void on_btnNext_clicked();
-	void on_btnPrevious_clicked();
 
-	void on_btnDbx_FileConfg_clicked();
-	void on_btnDbx_FileConfg_clear_clicked();
-	void on_btnDbx_ExeJuego_clicked();
-	void on_btnDbx_ExeJuego_clear_clicked();
-	void on_btnDbx_ExeSetup_clicked();
-	void on_btnDbx_ExeSetup_clear_clicked();
+	void on_btnVdms_FileConfg_clicked();
+	void on_btnVdms_FileConfg_clear_clicked();
+	void on_btnVdms_ExeJuego_clicked();
+	void on_btnVdms_ExeJuego_clear_clicked();
+	void on_btnVdms_params_clear_clicked();
+	void on_btnVdms_Icono_clicked();
+	void on_btnVdms_Icono_clear_clicked();
 	void on_btnDescargarInfo_clicked();
-	void on_btnInstalarJuego_clicked();
-	void on_btnMount_Add_clicked();
-	void on_btnMount_Edit_clicked();
-	void on_btnMount_Delete_clicked();
-	void on_btnMount_Clear_clicked();
-	void on_btnMount_Subir_clicked();
-	void on_btnMount_Bajar_clicked();
-	void on_btnMount_AutoCrear_clicked();
-	void on_btnMount_Primario_clicked();
 
-	void on_cbxDbx_EmuKey_activated(int index);
-	void on_cbxDbx_Profiles_activated(int index);
 	void on_txtDatos_Titulo_textEdited(const QString &arg1);
 
 };
 
-#endif // GRLIDA_DBXADD_H
+#endif // GRLIDA_VDMSADD_H

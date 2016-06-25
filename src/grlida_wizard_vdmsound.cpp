@@ -22,13 +22,13 @@
  *
 **/
 
-#include "grlida_vdmsadd.h"
+#include "grlida_wizard_vdmsound.h"
 #include "grlida_importar_juego.h"
-#include "ui_vdmsound.h"
+#include "ui_wizard_vdmsound.h"
 
-frmVdmsAdd::frmVdmsAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent) :
+frmWizardVdmSound::frmWizardVdmSound(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::frmVdmsAdd)
+	ui(new Ui::frmWizardVdmSound)
 {
 	ui->setupUi(this);
 	fGrl = new Funciones;
@@ -47,12 +47,12 @@ frmVdmsAdd::frmVdmsAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWid
 	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
-frmVdmsAdd::~frmVdmsAdd()
+frmWizardVdmSound::~frmWizardVdmSound()
 {
 	delete ui;
 }
 
-void frmVdmsAdd::cargarConfig()
+void frmWizardVdmSound::cargarConfig()
 {
 	fGrl->setIdioma(grlCfg.IdiomaSelect);
 
@@ -62,7 +62,7 @@ void frmVdmsAdd::cargarConfig()
 	cargarDatosVDMSound(DatosVDMSound);
 }
 
-void frmVdmsAdd::setTheme()
+void frmWizardVdmSound::setTheme()
 {
 	setWindowIcon( QIcon(fGrl->Theme() +"img16/vdmsound.png") );
 
@@ -79,7 +79,7 @@ void frmVdmsAdd::setTheme()
 	ui->btnDescargarInfo->setIcon( QIcon(fGrl->Theme() +"img16/go-down.png") );
 }
 
-void frmVdmsAdd::cargarDatosVDMSound(stConfigVDMSound cfgVdms)
+void frmWizardVdmSound::cargarDatosVDMSound(stConfigVDMSound cfgVdms)
 {
 	ui->txtVdms_path_conf->setText( cfgVdms.path_conf );
 	ui->txtVdms_path_exe->setText( cfgVdms.path_exe );
@@ -88,7 +88,7 @@ void frmVdmsAdd::cargarDatosVDMSound(stConfigVDMSound cfgVdms)
 	ui->txtVdms_icon->setText( cfgVdms.program_2 );
 }
 
-void frmVdmsAdd::setDatosVDMSound()
+void frmWizardVdmSound::setDatosVDMSound()
 {
 	DatosVDMSound.path_conf = ui->txtVdms_path_conf->text();
 	DatosVDMSound.path_exe  = ui->txtVdms_path_exe->text();
@@ -96,7 +96,7 @@ void frmVdmsAdd::setDatosVDMSound()
 	DatosVDMSound.program_2 = ui->txtVdms_icon->text();
 }
 
-void frmVdmsAdd::on_btnOk_clicked()
+void frmWizardVdmSound::on_btnOk_clicked()
 {
 	if( ui->txtDatos_Titulo->text().isEmpty() )
 		QMessageBox::information(this, titulo_ventana(), tr("Debes poner por lo menos el título."));
@@ -129,12 +129,12 @@ void frmVdmsAdd::on_btnOk_clicked()
 	}
 }
 
-void frmVdmsAdd::on_btnCancel_clicked()
+void frmWizardVdmSound::on_btnCancel_clicked()
 {
 	QDialog::reject();
 }
 
-void frmVdmsAdd::on_btnVdms_FileConfg_clicked()
+void frmWizardVdmSound::on_btnVdms_FileConfg_clicked()
 {
 	QString archivo = fGrl->ventanaAbrirArchivos( tr("Guardar archivo como..."), grlDir.Confvdms, "", tr("Configuraciones") +" VDMSound (*.vlp);;"+ tr("Todos los archivo") +" (*)", 0, true);
 
@@ -148,12 +148,12 @@ void frmVdmsAdd::on_btnVdms_FileConfg_clicked()
 	}
 }
 
-void frmVdmsAdd::on_btnVdms_FileConfg_clear_clicked()
+void frmWizardVdmSound::on_btnVdms_FileConfg_clear_clicked()
 {
 	ui->txtVdms_path_conf->clear();
 }
 
-void frmVdmsAdd::on_btnVdms_ExeJuego_clicked()
+void frmWizardVdmSound::on_btnVdms_ExeJuego_clicked()
 {
 	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Vdms_path_exe, "DosGames", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
 
@@ -170,17 +170,17 @@ void frmVdmsAdd::on_btnVdms_ExeJuego_clicked()
 	}
 }
 
-void frmVdmsAdd::on_btnVdms_ExeJuego_clear_clicked()
+void frmWizardVdmSound::on_btnVdms_ExeJuego_clear_clicked()
 {
 	ui->txtVdms_path_exe->clear();
 }
 
-void frmVdmsAdd::on_btnVdms_params_clear_clicked()
+void frmWizardVdmSound::on_btnVdms_params_clear_clicked()
 {
 	ui->txtVdms_params->clear();
 }
 
-void frmVdmsAdd::on_btnVdms_Icono_clicked()
+void frmWizardVdmSound::on_btnVdms_Icono_clicked()
 {
 	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Vdms_icon, "", tr("Iconos") +" (*.ico);;"+ tr("Todos los archivo") +" (*)");
 
@@ -197,12 +197,12 @@ void frmVdmsAdd::on_btnVdms_Icono_clicked()
 	}
 }
 
-void frmVdmsAdd::on_btnVdms_Icono_clear_clicked()
+void frmWizardVdmSound::on_btnVdms_Icono_clear_clicked()
 {
 	ui->txtVdms_icon->clear();
 }
 
-void frmVdmsAdd::on_btnDescargarInfo_clicked()
+void frmWizardVdmSound::on_btnDescargarInfo_clicked()
 {
 	stConfigDOSBox  DatosDosBox   = fGrl->getDefectDOSBox();
 	stConfigScummVM  DatosScummVM = fGrl->getDefectScummVM();
@@ -226,7 +226,7 @@ void frmVdmsAdd::on_btnDescargarInfo_clicked()
 	delete ImportarJuego;
 }
 
-void frmVdmsAdd::on_txtDatos_Titulo_textEdited(const QString &arg1)
+void frmWizardVdmSound::on_txtDatos_Titulo_textEdited(const QString &arg1)
 {
 	if( !arg1.isEmpty() )
 	{

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>frmVdmsAdd</class>
- <widget class="QDialog" name="frmVdmsAdd">
+ <class>frmWizardVdmSound</class>
+ <widget class="QDialog" name="frmWizardVdmSound">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -505,6 +505,7 @@
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/gr-lida.qrc"/>
   <include location="../res/gr-lida.qrc"/>
  </resources>
  <connections/>

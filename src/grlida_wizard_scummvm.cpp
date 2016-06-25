@@ -22,13 +22,13 @@
  *
 **/
 
-#include "grlida_svmadd.h"
+#include "grlida_wizard_scummvm.h"
 #include "grlida_importar_juego.h"
-#include "ui_svmadd.h"
+#include "ui_wizard_scummvm.h"
 
-frmSvmAdd::frmSvmAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent) :
+frmWizardScummVM::frmWizardScummVM(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::frmSvmAdd)
+	ui(new Ui::frmWizardScummVM)
 {
 	ui->setupUi(this);
 	fGrl = new Funciones;
@@ -48,12 +48,12 @@ frmSvmAdd::frmSvmAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidge
 	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
-frmSvmAdd::~frmSvmAdd()
+frmWizardScummVM::~frmWizardScummVM()
 {
 	delete ui;
 }
 
-void frmSvmAdd::cargarConfig()
+void frmWizardScummVM::cargarConfig()
 {
 	QRegExp regexp;
 	regexp.setPatternSyntax(QRegExp::RegExp);
@@ -77,7 +77,7 @@ void frmSvmAdd::cargarConfig()
 	QValidator *validarTexto = new QRegExpValidator( regexp, this );
 	ui->txtSvm_game_label->setValidator( validarTexto );
 
-	fGrl->cargarDatosComboBox(ui->cbxSvm_language    , grlDir.Datos + fGrl->Idioma() +"/svm_idioma.txt", fGrl->Theme() +"img_lng/", "es"   , 3, "|", true, true);
+	fGrl->cargarDatosComboBox(ui->cbxSvm_language    , grlDir.Datos + fGrl->Idioma() +"/svm_idioma.txt", fGrl->Theme() +"img16/lng/", "es" , 3, "|", true, true);
 	fGrl->cargarDatosComboBox(ui->cbxSvm_platform    , grlDir.Datos +"svm_platform.txt"                , fGrl->Theme() +"img16/"  , "pc"   , 3, "|");
 	fGrl->cargarDatosComboBox(ui->cbxSvm_gfx_mode    , grlDir.Datos +"svm_gfxmode.txt"                 , fGrl->Theme() +"img16/"  , "2x"   , 3, "|");
 	fGrl->cargarDatosComboBox(ui->cbxSvm_render_mode , grlDir.Datos +"svm_render_mode.txt"             , fGrl->Theme() +"img16/"  , ""     , 3, "|");
@@ -98,7 +98,7 @@ void frmSvmAdd::cargarConfig()
 	cargarDatosScummVM(DatosScummVM);
 }
 
-void frmSvmAdd::setTheme()
+void frmWizardScummVM::setTheme()
 {
 	setWindowIcon( QIcon(fGrl->Theme() +"img16/scummvm.png") );
 
@@ -115,7 +115,7 @@ void frmSvmAdd::setTheme()
 	ui->btnDefectoSvm->setIcon( QIcon(fGrl->Theme() +"img16/actualizar.png") );
 }
 
-void frmSvmAdd::cargarDatosScummVM(stConfigScummVM cfgSvm)
+void frmWizardScummVM::cargarDatosScummVM(stConfigScummVM cfgSvm)
 {
 	DatosScummVM = cfgSvm;
 
@@ -146,7 +146,7 @@ void frmSvmAdd::cargarDatosScummVM(stConfigScummVM cfgSvm)
 	ui->h_SliderSvm_walkspeed->setSliderPosition( fGrl->StrToInt( cfgSvm.walkspeed ) );
 }
 
-void frmSvmAdd::setDatosScummVM()
+void frmWizardScummVM::setDatosScummVM()
 {
 	QString str;
 	DatosScummVM.game              = ui->txtSvm_gameid->text();
@@ -184,7 +184,7 @@ void frmSvmAdd::setDatosScummVM()
 	DatosScummVM.walkspeed         = fGrl->IntToStr( ui->h_SliderSvm_walkspeed->value() );
 }
 
-void frmSvmAdd::on_btnOk_clicked()
+void frmWizardScummVM::on_btnOk_clicked()
 {
 	if( ui->txtDatos_Titulo->text().isEmpty() )
 		QMessageBox::information(this, titulo_ventana(), tr("Debes poner por lo menos el titulo."));
@@ -204,12 +204,12 @@ void frmSvmAdd::on_btnOk_clicked()
 	}
 }
 
-void frmSvmAdd::on_btnCancel_clicked()
+void frmWizardScummVM::on_btnCancel_clicked()
 {
 	QDialog::reject();
 }
 
-void frmSvmAdd::on_btnNext_clicked()
+void frmWizardScummVM::on_btnNext_clicked()
 {
 	bool siguiente = false;
 
@@ -279,7 +279,7 @@ void frmSvmAdd::on_btnNext_clicked()
 	}
 }
 
-void frmSvmAdd::on_btnPrevious_clicked()
+void frmWizardScummVM::on_btnPrevious_clicked()
 {
 	ui->wizardSvm->setCurrentIndex( ui->wizardSvm->currentIndex() - 1);
 	ui->btnNext->setEnabled( true );
@@ -287,7 +287,7 @@ void frmSvmAdd::on_btnPrevious_clicked()
 		ui->btnPrevious->setEnabled( false ) ;
 }
 
-void frmSvmAdd::on_twScummVM_itemClicked(QTreeWidgetItem *item, int column)
+void frmWizardScummVM::on_twScummVM_itemClicked(QTreeWidgetItem *item, int column)
 {
 	if( item && column > -1 )
 	{
@@ -297,7 +297,7 @@ void frmSvmAdd::on_twScummVM_itemClicked(QTreeWidgetItem *item, int column)
 	}
 }
 
-void frmSvmAdd::on_twScummVM_itemDoubleClicked(QTreeWidgetItem *item, int column)
+void frmWizardScummVM::on_twScummVM_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
 	if( item && column > -1 )
 	{
@@ -306,13 +306,13 @@ void frmSvmAdd::on_twScummVM_itemDoubleClicked(QTreeWidgetItem *item, int column
 	}
 }
 
-void frmSvmAdd::on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+void frmWizardScummVM::on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
 	if( current != previous )
 		emit on_twScummVM_itemClicked(current, 0);
 }
 
-void frmSvmAdd::on_btnSvm_PathGame_clicked()
+void frmWizardScummVM::on_btnSvm_PathGame_clicked()
 {
 	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_game, "DosGames");
 
@@ -325,12 +325,12 @@ void frmSvmAdd::on_btnSvm_PathGame_clicked()
 	}
 }
 
-void frmSvmAdd::on_btnSvm_PathGame_clear_clicked()
+void frmWizardScummVM::on_btnSvm_PathGame_clear_clicked()
 {
 	ui->txtSvm_path_game->clear();
 }
 
-void frmSvmAdd::on_btnSvm_PathSave_clicked()
+void frmWizardScummVM::on_btnSvm_PathSave_clicked()
 {
 	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_save, "DosGames");
 
@@ -343,12 +343,12 @@ void frmSvmAdd::on_btnSvm_PathSave_clicked()
 	}
 }
 
-void frmSvmAdd::on_btnSvm_PathSave_clear_clicked()
+void frmWizardScummVM::on_btnSvm_PathSave_clear_clicked()
 {
 	ui->txtSvm_path_save->clear();
 }
 
-void frmSvmAdd::on_btnDescargarInfo_clicked()
+void frmWizardScummVM::on_btnDescargarInfo_clicked()
 {
 	stConfigDOSBox  DatosDosBox    = fGrl->getDefectDOSBox();
 	stConfigVDMSound DatosVDMSound = fGrl->getDefectVDMSound();
@@ -372,47 +372,47 @@ void frmSvmAdd::on_btnDescargarInfo_clicked()
 	delete ImportarJuego;
 }
 
-void frmSvmAdd::on_h_SliderSvm_music_volume_valueChanged(int value)
+void frmWizardScummVM::on_h_SliderSvm_music_volume_valueChanged(int value)
 {
 	ui->valueSliderSvm_music_volume->setText( fGrl->IntToStr(value) );
 }
 
-void frmSvmAdd::on_h_SliderSvm_sfx_volume_valueChanged(int value)
+void frmWizardScummVM::on_h_SliderSvm_sfx_volume_valueChanged(int value)
 {
 	ui->valueSliderSvm_sfx_volume->setText( fGrl->IntToStr(value) );
 }
 
-void frmSvmAdd::on_h_SliderSvm_speech_volume_valueChanged(int value)
+void frmWizardScummVM::on_h_SliderSvm_speech_volume_valueChanged(int value)
 {
 	ui->valueSliderSvm_speech_volume->setText( fGrl->IntToStr(value) );
 }
 
-void frmSvmAdd::on_h_SliderSvm_tempo_valueChanged(int value)
+void frmWizardScummVM::on_h_SliderSvm_tempo_valueChanged(int value)
 {
 	ui->valueSliderSvm_tempo->setText( fGrl->IntToStr(value) );
 }
 
-void frmSvmAdd::on_h_SliderSvm_talkspeed_valueChanged(int value)
+void frmWizardScummVM::on_h_SliderSvm_talkspeed_valueChanged(int value)
 {
 	ui->valueSliderSvm_talkspeed->setText( fGrl->IntToStr(value) );
 }
 
-void frmSvmAdd::on_h_SliderSvm_debuglevel_valueChanged(int value)
+void frmWizardScummVM::on_h_SliderSvm_debuglevel_valueChanged(int value)
 {
 	ui->valueSliderSvm_debuglevel->setText( fGrl->IntToStr(value) );
 }
 
-void frmSvmAdd::on_h_SliderSvm_midi_gain_valueChanged(int value)
+void frmWizardScummVM::on_h_SliderSvm_midi_gain_valueChanged(int value)
 {
 	ui->valueSliderSvm_midi_gain->setText( fGrl->IntToStr(value) );
 }
 
-void frmSvmAdd::on_h_SliderSvm_walkspeed_valueChanged(int value)
+void frmWizardScummVM::on_h_SliderSvm_walkspeed_valueChanged(int value)
 {
 	ui->valueSliderSvm_walkspeed->setText( fGrl->IntToStr(value) );
 }
 
-void frmSvmAdd::on_btnDefectoSvm_clicked()
+void frmWizardScummVM::on_btnDefectoSvm_clicked()
 {
 	ui->h_SliderSvm_music_volume->setValue(192);
 	ui->h_SliderSvm_sfx_volume->setValue(192);

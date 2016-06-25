@@ -52,7 +52,6 @@ HEADERS += src/dbsql.h \
     src/grlida_addedit_scummvm.h \
     src/grlida_addedit_vdmsound.h \
     src/grlida_config_inicial.h \
-    src/grlida_dbxadd.h \
     src/grlida_delegate.h \
     src/grlida_exportar_juego.h \
     src/grlida_importar_juego.h \
@@ -64,9 +63,10 @@ HEADERS += src/dbsql.h \
     src/grlida_opciones.h \
     src/grlida_pdf_viewer.h \
     src/grlida_picflow.h \
-    src/grlida_svmadd.h \
     src/grlida_update.h \
-    src/grlida_vdmsadd.h \
+    src/grlida_wizard_dosbox.h \
+    src/grlida_wizard_scummvm.h \
+    src/grlida_wizard_vdmsound.h \
     src/g_structs.h \
     src/httpdownload.h \
     src/qtzip.h \
@@ -83,7 +83,6 @@ SOURCES += src/dbsql.cpp \
     src/grlida_addedit_scummvm.cpp \
     src/grlida_addedit_vdmsound.cpp \
     src/grlida_config_inicial.cpp \
-    src/grlida_dbxadd.cpp \
     src/grlida_delegate.cpp \
     src/grlida_exportar_juego.cpp \
     src/grlida_importar_juego.cpp \
@@ -95,9 +94,10 @@ SOURCES += src/dbsql.cpp \
     src/grlida_opciones.cpp \
     src/grlida_pdf_viewer.cpp \
     src/grlida_picflow.cpp \
-    src/grlida_svmadd.cpp \
     src/grlida_update.cpp \
-    src/grlida_vdmsadd.cpp \
+    src/grlida_wizard_dosbox.cpp \
+    src/grlida_wizard_scummvm.cpp \
+    src/grlida_wizard_vdmsound.cpp \
     src/httpdownload.cpp \
     src/main.cpp \
     src/qtzip.cpp \
@@ -115,9 +115,9 @@ FORMS += ui/grlida.ui \
     ui/login_url.ui \
     ui/importpath.ui \
     ui/addedit_montajes.ui \
-    ui/dbxadd.ui \
-    ui/svmadd.ui \
-    ui/vdmsound.ui \
+    ui/wizard_dosbox.ui \
+    ui/wizard_scummvm.ui \
+    ui/wizard_vdmsound.ui \
     ui/config_inicial.ui \
     ui/grdap.ui \
     ui/instalar_juego.ui \

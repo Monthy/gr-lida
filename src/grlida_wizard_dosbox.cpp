@@ -22,15 +22,15 @@
  *
 **/
 
-#include "grlida_dbxadd.h"
+#include "grlida_wizard_dosbox.h"
 #include "grlida_addedit_montajes.h"
 #include "grlida_importar_juego.h"
 #include "grlida_instalar_juego.h"
-#include "ui_dbxadd.h"
+#include "ui_wizard_dosbox.h"
 
-frmDbxAdd::frmDbxAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent) :
+frmWizardDosBox::frmWizardDosBox(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::frmDbxAdd)
+	ui(new Ui::frmWizardDosBox)
 {
 	ui->setupUi(this);
 	fGrl = new Funciones;
@@ -53,12 +53,12 @@ frmDbxAdd::frmDbxAdd(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidge
 	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
-frmDbxAdd::~frmDbxAdd()
+frmWizardDosBox::~frmWizardDosBox()
 {
 	delete ui;
 }
 
-void frmDbxAdd::cargarConfig()
+void frmWizardDosBox::cargarConfig()
 {
 	QRegExp regexp;
 	regexp.setPatternSyntax(QRegExp::RegExp);
@@ -148,7 +148,7 @@ void frmDbxAdd::cargarConfig()
 	cargarDatosDosBox(DatosDosBox);
 }
 
-void frmDbxAdd::setTheme()
+void frmWizardDosBox::setTheme()
 {
 	setWindowIcon( QIcon(fGrl->Theme() +"img16/dosbox.png") );
 
@@ -176,7 +176,7 @@ void frmDbxAdd::setTheme()
 	ui->btnMount_Primario->setIcon( QIcon(fGrl->Theme() +"img16/aplicar.png") );
 }
 
-void frmDbxAdd::previerMontajes()
+void frmWizardDosBox::previerMontajes()
 {
 	if( ui->twMontajes->topLevelItemCount() > 0 )
 	{
@@ -196,7 +196,7 @@ void frmDbxAdd::previerMontajes()
 		ui->previer_mount->clear();
 }
 
-void frmDbxAdd::cargarDatosDosBox(stConfigDOSBox cfgDbx)
+void frmWizardDosBox::cargarDatosDosBox(stConfigDOSBox cfgDbx)
 {
 // DOSBox version a usar
 	if( cfgDbx.dosbox_emu_key.isEmpty() )
@@ -257,7 +257,7 @@ void frmDbxAdd::cargarDatosDosBox(stConfigDOSBox cfgDbx)
 	ui->txtDbx_parametros_setup->setText( cfgDbx.parametros_setup );
 }
 
-void frmDbxAdd::cargarDatosDBxMontaje(QTreeWidget *twMontajesDbx)
+void frmWizardDosBox::cargarDatosDBxMontaje(QTreeWidget *twMontajesDbx)
 {
 	const int count_mount = twMontajesDbx->topLevelItemCount();
 	if( count_mount > 0 )
@@ -288,7 +288,7 @@ void frmDbxAdd::cargarDatosDBxMontaje(QTreeWidget *twMontajesDbx)
 	previerMontajes();
 }
 
-void frmDbxAdd::setDatosDosBox()
+void frmWizardDosBox::setDatosDosBox()
 {
 	QString str;
 // [sdl]
@@ -354,7 +354,7 @@ void frmDbxAdd::setDatosDosBox()
 	DatosDosBox.parametros_setup = ui->txtDbx_parametros_setup->text().isEmpty() ? "" : ui->txtDbx_parametros_setup->text();
 }
 
-void frmDbxAdd::on_btnOk_clicked()
+void frmWizardDosBox::on_btnOk_clicked()
 {
 	if( ui->txtDatos_Titulo->text().isEmpty() )
 		QMessageBox::information(this, titulo_ventana(), tr("Debes poner por lo menos el título."));
@@ -379,12 +379,12 @@ void frmDbxAdd::on_btnOk_clicked()
 	}
 }
 
-void frmDbxAdd::on_btnCancel_clicked()
+void frmWizardDosBox::on_btnCancel_clicked()
 {
 	QDialog::reject();
 }
 
-void frmDbxAdd::on_btnNext_clicked()
+void frmWizardDosBox::on_btnNext_clicked()
 {
 	bool siguiente = false;
 	if( !ui->txtDatos_Titulo->text().isEmpty() )
@@ -438,7 +438,7 @@ void frmDbxAdd::on_btnNext_clicked()
 	}
 }
 
-void frmDbxAdd::on_btnPrevious_clicked()
+void frmWizardDosBox::on_btnPrevious_clicked()
 {
 	ui->wizardDbx->setCurrentIndex(ui->wizardDbx->currentIndex()-1);
 	ui->btnNext->setEnabled( true );
@@ -446,7 +446,7 @@ void frmDbxAdd::on_btnPrevious_clicked()
 		ui->btnPrevious->setEnabled(false);
 }
 
-void frmDbxAdd::on_btnDbx_FileConfg_clicked()
+void frmWizardDosBox::on_btnDbx_FileConfg_clicked()
 {
 	QString archivo = fGrl->ventanaAbrirArchivos( tr("Guardar archivo como..."), grlDir.Confdbx, "", tr("Configuraciones") +" DOSBox (*.conf);;"+ tr("Todos los archivo") +" (*)", 0, true);
 
@@ -460,12 +460,12 @@ void frmDbxAdd::on_btnDbx_FileConfg_clicked()
 	}
 }
 
-void frmDbxAdd::on_btnDbx_FileConfg_clear_clicked()
+void frmWizardDosBox::on_btnDbx_FileConfg_clear_clicked()
 {
 	ui->txtDbx_path_conf->clear();
 }
 
-void frmDbxAdd::on_btnDbx_ExeJuego_clicked()
+void frmWizardDosBox::on_btnDbx_ExeJuego_clicked()
 {
 	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_exe, "DosGames", tr("Ejecutables") +" (*.exe; *.bat; *.com);;"+ tr("Todos los archivo") +" (*)");
 
@@ -482,12 +482,12 @@ void frmDbxAdd::on_btnDbx_ExeJuego_clicked()
 	}
 }
 
-void frmDbxAdd::on_btnDbx_ExeJuego_clear_clicked()
+void frmWizardDosBox::on_btnDbx_ExeJuego_clear_clicked()
 {
 	ui->txtDbx_path_exe->clear();
 }
 
-void frmDbxAdd::on_btnDbx_ExeSetup_clicked()
+void frmWizardDosBox::on_btnDbx_ExeSetup_clicked()
 {
 	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Dbx_path_setup, "DosGames", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
 
@@ -504,12 +504,12 @@ void frmDbxAdd::on_btnDbx_ExeSetup_clicked()
 	}
 }
 
-void frmDbxAdd::on_btnDbx_ExeSetup_clear_clicked()
+void frmWizardDosBox::on_btnDbx_ExeSetup_clear_clicked()
 {
 	ui->txtDbx_path_setup->clear();
 }
 
-void frmDbxAdd::on_btnDescargarInfo_clicked()
+void frmWizardDosBox::on_btnDescargarInfo_clicked()
 {
 	stConfigScummVM  DatosScummVM  = fGrl->getDefectScummVM();
 	stConfigVDMSound DatosVDMSound = fGrl->getDefectVDMSound();
@@ -537,14 +537,14 @@ void frmDbxAdd::on_btnDescargarInfo_clicked()
 	delete ImportarJuego;
 }
 
-void frmDbxAdd::on_btnInstalarJuego_clicked()
+void frmWizardDosBox::on_btnInstalarJuego_clicked()
 {
 	frmInstalarJuego *NewInstalarJuego = new frmInstalarJuego(grlCfg, this);
 	NewInstalarJuego->exec();
 	delete NewInstalarJuego;
 }
 
-void frmDbxAdd::on_btnMount_Add_clicked()
+void frmWizardDosBox::on_btnMount_Add_clicked()
 {
 	frmAddEditMontajes *AddEditMontajes = new frmAddEditMontajes(grlCfg, false, this);
 	if( AddEditMontajes->exec() == QDialog::Accepted )
@@ -576,7 +576,7 @@ void frmDbxAdd::on_btnMount_Add_clicked()
 	previerMontajes();
 }
 
-void frmDbxAdd::on_btnMount_Edit_clicked()
+void frmWizardDosBox::on_btnMount_Edit_clicked()
 {
 	int pos = ui->twMontajes->indexOfTopLevelItem( ui->twMontajes->currentItem() );
 	if( ui->twMontajes->topLevelItemCount() > 0 && pos != -1 )
@@ -621,7 +621,7 @@ void frmDbxAdd::on_btnMount_Edit_clicked()
 	}
 }
 
-void frmDbxAdd::on_btnMount_Delete_clicked()
+void frmWizardDosBox::on_btnMount_Delete_clicked()
 {
 	if( ui->twMontajes->topLevelItemCount() > 0 )
 	{
@@ -634,7 +634,7 @@ void frmDbxAdd::on_btnMount_Delete_clicked()
 	}
 }
 
-void frmDbxAdd::on_btnMount_Clear_clicked()
+void frmWizardDosBox::on_btnMount_Clear_clicked()
 {
 	const int count_mount = ui->twMontajes->topLevelItemCount();
 	if( count_mount > 0 )
@@ -644,19 +644,19 @@ void frmDbxAdd::on_btnMount_Clear_clicked()
 	}
 }
 
-void frmDbxAdd::on_btnMount_Subir_clicked()
+void frmWizardDosBox::on_btnMount_Subir_clicked()
 {
 	fGrl->moveUpItemTw(ui->twMontajes);
 	previerMontajes();
 }
 
-void frmDbxAdd::on_btnMount_Bajar_clicked()
+void frmWizardDosBox::on_btnMount_Bajar_clicked()
 {
 	fGrl->moveDownItemTw(ui->twMontajes);
 	previerMontajes();
 }
 
-void frmDbxAdd::on_btnMount_AutoCrear_clicked()
+void frmWizardDosBox::on_btnMount_AutoCrear_clicked()
 {
 	stFileInfo f_info = fGrl->getInfoFile( fGrl->getDirRelative(ui->txtDbx_path_exe->text(), "DosGames") );
 	QTreeWidgetItem *item = new QTreeWidgetItem( ui->twMontajes );
@@ -678,7 +678,7 @@ void frmDbxAdd::on_btnMount_AutoCrear_clicked()
 	previerMontajes();
 }
 
-void frmDbxAdd::on_btnMount_Primario_clicked()
+void frmWizardDosBox::on_btnMount_Primario_clicked()
 {
 	int indx_mount = 0;
 	QString tipoDrive, isPrimario;
@@ -713,7 +713,7 @@ void frmDbxAdd::on_btnMount_Primario_clicked()
 	}
 }
 
-void frmDbxAdd::on_cbxDbx_EmuKey_activated(int index)
+void frmWizardDosBox::on_cbxDbx_EmuKey_activated(int index)
 {
 	isDbxSVN = fGrl->StrToBool(dbx_list[ui->cbxDbx_EmuKey->itemData( index ).toString()].issvn);
 
@@ -735,7 +735,7 @@ void frmDbxAdd::on_cbxDbx_EmuKey_activated(int index)
 	cargarDatosDosBox(DatosDosBox);
 }
 
-void frmDbxAdd::on_cbxDbx_Profiles_activated(int index)
+void frmWizardDosBox::on_cbxDbx_Profiles_activated(int index)
 {
 	if( index > -1 )
 	{
@@ -754,7 +754,7 @@ void frmDbxAdd::on_cbxDbx_Profiles_activated(int index)
 	}
 }
 
-void frmDbxAdd::on_txtDatos_Titulo_textEdited(const QString &arg1)
+void frmWizardDosBox::on_txtDatos_Titulo_textEdited(const QString &arg1)
 {
 	if( !arg1.isEmpty() )
 	{

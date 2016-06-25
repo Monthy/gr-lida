@@ -25,9 +25,9 @@
 #include "grlida.h"
 #include "grlida_acercad.h"
 #include "grlida_info.h"
-#include "grlida_dbxadd.h"
-#include "grlida_svmadd.h"
-#include "grlida_vdmsadd.h"
+#include "grlida_wizard_dosbox.h"
+#include "grlida_wizard_scummvm.h"
+#include "grlida_wizard_vdmsound.h"
 #include "grlida_addedit_juego.h"
 #include "grlida_opciones.h"
 #include "grlida_importar_juego.h"
@@ -2423,47 +2423,47 @@ void GrLida::on_mnu_file_cerrar_triggered()
 // Menú editar
 void GrLida::on_mnu_edit_nuevo_dosbox_triggered()
 {
-	frmDbxAdd *AddDbxNew = new frmDbxAdd(sql, grlCfg, categoria[id_cat], this);
-	AddDbxNew->setWindowFlags(Qt::Window);
+	frmWizardDosBox *wizardDosBoxNew = new frmWizardDosBox(sql, grlCfg, categoria[id_cat], this);
+	wizardDosBoxNew->setWindowFlags(Qt::Window);
 
-	if( AddDbxNew->exec() == QDialog::Accepted )
+	if( wizardDosBoxNew->exec() == QDialog::Accepted )
 	{
-		grlCfg = AddDbxNew->getGrlCfg();
-		nuevoEditarDatosDelJuego(nuevoItemCopiarImagenes(AddDbxNew->getDatosJuegos(), categoria[id_cat].tabla, true), true);
+		grlCfg = wizardDosBoxNew->getGrlCfg();
+		nuevoEditarDatosDelJuego(nuevoItemCopiarImagenes(wizardDosBoxNew->getDatosJuegos(), categoria[id_cat].tabla, true), true);
 	} else
-		grlCfg = AddDbxNew->getGrlCfg();
+		grlCfg = wizardDosBoxNew->getGrlCfg();
 
-	delete AddDbxNew;
+	delete wizardDosBoxNew;
 }
 
 void GrLida::on_mnu_edit_nuevo_scummvm_triggered()
 {
-	frmSvmAdd *AddSvmNew = new frmSvmAdd(sql, grlCfg, categoria[id_cat], this);
-	AddSvmNew->setWindowFlags(Qt::Window);
+	frmWizardScummVM *wizardScummVMNew = new frmWizardScummVM(sql, grlCfg, categoria[id_cat], this);
+	wizardScummVMNew->setWindowFlags(Qt::Window);
 
-	if( AddSvmNew->exec() == QDialog::Accepted )
+	if( wizardScummVMNew->exec() == QDialog::Accepted )
 	{
-		grlCfg = AddSvmNew->getGrlCfg();
-		nuevoEditarDatosDelJuego(nuevoItemCopiarImagenes(AddSvmNew->getDatosJuegos(), categoria[id_cat].tabla, true), true);
+		grlCfg = wizardScummVMNew->getGrlCfg();
+		nuevoEditarDatosDelJuego(nuevoItemCopiarImagenes(wizardScummVMNew->getDatosJuegos(), categoria[id_cat].tabla, true), true);
 	} else
-		grlCfg = AddSvmNew->getGrlCfg();
+		grlCfg = wizardScummVMNew->getGrlCfg();
 
-	delete AddSvmNew;
+	delete wizardScummVMNew;
 }
 
 void GrLida::on_mnu_edit_nuevo_vdmsound_triggered()
 {
-	frmVdmsAdd *AddVdmsNew = new frmVdmsAdd(sql, grlCfg, categoria[id_cat], this);
-	AddVdmsNew->setWindowFlags(Qt::Window);
+	frmWizardVdmSound *wizardVdmSoundNew = new frmWizardVdmSound(sql, grlCfg, categoria[id_cat], this);
+	wizardVdmSoundNew->setWindowFlags(Qt::Window);
 
-	if( AddVdmsNew->exec() == QDialog::Accepted )
+	if( wizardVdmSoundNew->exec() == QDialog::Accepted )
 	{
-		grlCfg = AddVdmsNew->getGrlCfg();
-		nuevoEditarDatosDelJuego(nuevoItemCopiarImagenes(AddVdmsNew->getDatosJuegos(), categoria[id_cat].tabla, true), true);
+		grlCfg = wizardVdmSoundNew->getGrlCfg();
+		nuevoEditarDatosDelJuego(nuevoItemCopiarImagenes(wizardVdmSoundNew->getDatosJuegos(), categoria[id_cat].tabla, true), true);
 	} else
-		grlCfg = AddVdmsNew->getGrlCfg();
+		grlCfg = wizardVdmSoundNew->getGrlCfg();
 
-	delete AddVdmsNew;
+	delete wizardVdmSoundNew;
 }
 
 void GrLida::on_mnu_edit_nuevo_triggered()

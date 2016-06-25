@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>frmDbxAdd</class>
- <widget class="QDialog" name="frmDbxAdd">
+ <class>frmWizardDosBox</class>
+ <widget class="QDialog" name="frmWizardDosBox">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -27,16 +27,7 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
@@ -1729,16 +1720,7 @@ Pulsa aceptar para cerrar el asistente
      <property name="spacing">
       <number>6</number>
      </property>
-     <property name="leftMargin">
-      <number>4</number>
-     </property>
-     <property name="topMargin">
-      <number>4</number>
-     </property>
-     <property name="rightMargin">
-      <number>4</number>
-     </property>
-     <property name="bottomMargin">
+     <property name="margin">
       <number>4</number>
      </property>
      <item>
@@ -1897,6 +1879,7 @@ Pulsa aceptar para cerrar el asistente
   <tabstop>btnOk</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/gr-lida.qrc"/>
   <include location="../res/gr-lida.qrc"/>
  </resources>
  <connections/>
