@@ -2404,7 +2404,7 @@ QString dbSql::insertaMenuNav(QString titulo, QString col_value, QString col_nam
 	query.bindValue(":img"      , img       );
 	query.bindValue(":orden"    , orden     );
 	query.bindValue(":show"     , fGrl->BoolToStr(show)     );
-	query.bindValue(":expanded ", fGrl->BoolToStr(expanded) );
+	query.bindValue(":expanded" , fGrl->BoolToStr(expanded) );
 	query.exec();
 
 	if( chequearQuery(query) )
@@ -2430,7 +2430,7 @@ bool dbSql::actualizaMenuNav(QString IDmnu, QString titulo, QString col_value, Q
 	query.bindValue(":img"      , img       );
 	query.bindValue(":orden"    , orden     );
 	query.bindValue(":show"     , fGrl->BoolToStr(show)     );
-	query.bindValue(":expanded ", fGrl->BoolToStr(expanded) );
+	query.bindValue(":expanded" , fGrl->BoolToStr(expanded) );
 	query.bindValue(":id"       , IDmnu  );
 	query.exec();
 
