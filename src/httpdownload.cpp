@@ -36,9 +36,17 @@ HttpDownload::HttpDownload(QWidget *parent)
 	progressDialog = new QProgressDialog(this);
 
 	connect(&qnam, SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)), this, SLOT(slotAuthenticationRequired(QNetworkReply*,QAuthenticator*)));
-	#ifndef QT_NO_OPENSSL
-		connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
-	#endif
+
+	sslConfiguration = QSslConfiguration::defaultConfiguration();
+#if QT_VERSION >= 0x050000
+	sslConfiguration.setProtocol(QSsl::TlsV1_2);
+#else
+	sslConfiguration.setProtocol(QSsl::TlsV1);
+#endif
+
+#ifndef QT_NO_OPENSSL
+	connect(&qnam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(sslErrors(QNetworkReply*,QList<QSslError>)));
+#endif
 
 	connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
 }
@@ -96,16 +104,20 @@ void HttpDownload::startRequest(QUrl m_url, TipoDown tipo, QString contentPost)
 	if( isProxyEnable )
 		qnam.setProxy(proxy);
 
-	switch ( tipo )
+	QNetworkRequest request;
+	request.setSslConfiguration(sslConfiguration);
+	request.setUrl(m_url);
+
+	switch (tipo)
 	{
 		case d_GET:
-			reply = qnam.get(QNetworkRequest(m_url));
+			reply = qnam.get(request);
 		break;
 		case d_POST:
 		// content
 			QByteArray content;
-				content.append( contentPost );
-			reply = qnam.post(QNetworkRequest(m_url), content);
+			content.append(contentPost);
+			reply = qnam.post(request, content);
 		break;
 	}
 

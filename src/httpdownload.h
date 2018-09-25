@@ -72,6 +72,7 @@ private:
 	QNetworkAccessManager qnam;
 	QNetworkReply *reply;
 	QNetworkProxy proxy;
+	QSslConfiguration sslConfiguration;
 	QProgressDialog *progressDialog;
 	QFile *file;
 
