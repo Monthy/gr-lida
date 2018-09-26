@@ -75,7 +75,7 @@ public:
 	~Funciones();
 
 // Versión del GR-lida
-	QString versionGrl(){return "0.11.0";}
+	QString versionGrl(){return "0.11.1";}
 // Versión del GR-dap
 	QString versionGrd(){return "0.1.0";}
 
@@ -150,8 +150,8 @@ public:
 	QString GRlidaHomePath();
 	QString DirApp(){ return stDirApp; }
 // Rutas relativas
-	QString setDirRelative(QString dir, QString carpeta = "");
-	QString getDirRelative(QString dir, QString carpeta = "");
+	QString setDirRelative(QString dir, QString dir_relative = "");
+	QString getDirRelative(QString dir, QString dir_relative = "");
 // Devuelve el directorio del Theme a usar
 	void setTheme(QString theme);
 	QString Theme(){ return stTheme; }

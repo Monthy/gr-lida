@@ -597,70 +597,95 @@ QString Funciones::GRlidaHomePath()
 
 
 // Rutas relativas
-QString Funciones::setDirRelative(QString dir, QString carpeta)
+QString Funciones::setDirRelative(QString dir, QString dir_relative)
 {
-	QString dir_base_game = "";
-	QString stDirBaseApp  = QDir::toNativeSeparators(stDirApp);
+	dir.replace("\\", "/");
+	dir_relative.replace("\\", "/");
 
-	if( carpeta == "DosGames")
+	QString dir_base_game = "";
+
+	if (dir_relative == "DosGames")
 	{
 		QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
 		settings.beginGroup("OpcGeneral");
-			dir_base_game = settings.value("DirBaseGames", "./DosGames/").toString().isEmpty() ? "./DosGames/" : QDir::toNativeSeparators(settings.value("DirBaseGames").toString());
+			dir_base_game = settings.value("DirBaseGames", "./DosGames/").toString().isEmpty() ? "./DosGames/" : settings.value("DirBaseGames").toString().replace("\\", "/");
 		settings.endGroup();
 	}
 
-	if( !carpeta.isEmpty() )
-		carpeta.append("/");
+	if (!dir_relative.isEmpty())
+	{
+		if (!dir_relative.endsWith("/"))
+			dir_relative.append("/");
+	}
 
-	if( dir_base_game.isEmpty() )
-		dir_base_game = "./"+ carpeta;
+	if (dir_base_game.isEmpty())
+	{
+		if (dir_relative.startsWith("./"))
+			dir_base_game = dir_relative;
+		else
+			dir_base_game = "./"+ dir_relative;
+	}
 
-	if( dir.startsWith("{DirBaseGames}", Qt::CaseInsensitive) )
+	if (dir.startsWith("{DirBaseGames}", Qt::CaseInsensitive))
 		dir.replace("{DirBaseGames}", dir_base_game);
 
-	if( dir.startsWith(stDirBaseApp, Qt::CaseInsensitive) )
+	QString dir_final = dir;
+	if (dir.startsWith(stDirApp, Qt::CaseInsensitive))
 	{
-		dir.replace(0, stDirBaseApp.length(), "");
-
-		if( dir.startsWith("/") || dir.startsWith("\\") )
-			return QDir::toNativeSeparators( dir.prepend(".") );
+		dir.replace(0, stDirApp.length(), "");
+		if (dir.startsWith("/"))
+			dir_final = dir.prepend(".");
 		else
-			return QDir::toNativeSeparators( dir.prepend("./") );
-	} else
-		return QDir::toNativeSeparators( dir );
+			dir_final = dir.prepend("./");
+	}
+
+	return dir_final;
 }
 
-QString Funciones::getDirRelative(QString dir, QString carpeta)
+QString Funciones::getDirRelative(QString dir, QString dir_relative)
 {
-	QString dir_base_game = "";
-	QString stDirBaseApp  = QDir::toNativeSeparators(stDirApp);
+	dir.replace("\\", "/");
+	dir_relative.replace("\\", "/");
 
-	if( carpeta == "DosGames" )
+	QString dir_base_game = "";
+
+	if (dir_relative == "DosGames")
 	{
 		QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
 		settings.beginGroup("OpcGeneral");
-			dir_base_game = settings.value("DirBaseGames", "./DosGames/").toString().isEmpty() ? "./DosGames/" : QDir::toNativeSeparators(settings.value("DirBaseGames").toString());
+			dir_base_game = settings.value("DirBaseGames", "./DosGames/").toString().isEmpty() ? "./DosGames/" : settings.value("DirBaseGames").toString().replace("\\", "/");
 		settings.endGroup();
 	}
 
-	if( !carpeta.isEmpty() )
-		carpeta.append("/");
+	if (!dir_relative.isEmpty())
+	{
+		if (!dir_relative.endsWith("/"))
+			dir_relative.append("/");
+	}
 
-	if( dir_base_game.isEmpty() )
-		dir_base_game = "./"+ carpeta;
+	if (dir_base_game.isEmpty())
+	{
+		if (dir_relative.startsWith("./"))
+			dir_base_game = dir_relative;
+		else
+			dir_base_game = "./"+ dir_relative;
+	}
 
-	if( dir_base_game.startsWith("./") || dir_base_game.startsWith(".\\") )
-		dir_base_game = stDirBaseApp;
+	if (dir_base_game.startsWith("./"))
+		dir_base_game = stDirApp;
 	else {
-		if( dir.startsWith("./DosGames/") || dir.startsWith(".\\DosGames\\") )
+		if (dir.startsWith("{DirBaseGames}", Qt::CaseInsensitive))
+			dir.replace("{DirBaseGames}", dir_base_game);
+
+		if (dir.startsWith("./DosGames/"))
 			dir.replace(0, 11, "./");
 	}
 
-	if( dir.startsWith("./") || dir.startsWith(".\\") )
-		return QDir::toNativeSeparators( dir.replace(0, 2, dir_base_game) );
-	else
-		return QDir::toNativeSeparators( dir );
+	QString dir_final = dir;
+	if (dir.startsWith("./"))
+		dir_final = dir.replace(0, 2, dir_base_game);
+
+	return dir_final;
 }
 
 // Devuelve el directorio del Theme a usar
@@ -670,19 +695,12 @@ void Funciones::setTheme(QString theme)
 
 	if( theme.toLower() == "defecto" || theme.isEmpty() )
 	{
-	//	if( themeDir.exists(stDirApp +"themes/defecto/") )
-	//		stTheme = stDirApp +"themes/defecto/";
-	//	else
-			stTheme = ":/";
+		stTheme = ":/";
 	} else {
 		if( themeDir.exists(stDirApp +"themes/"+ theme +"/") )
 			stTheme = stDirApp +"themes/"+ theme +"/";
-		else {
-		//	if( themeDir.exists(stDirApp +"themes/defecto/") )
-		//		stTheme = stDirApp +"themes/defecto/";
-		//	else
-				stTheme = ":/";
-		}
+		else
+			stTheme = ":/";
 	}
 
 	if( stTheme == ":/" )
