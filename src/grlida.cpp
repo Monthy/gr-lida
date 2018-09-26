@@ -982,10 +982,10 @@ void GrLida::cargarListaCategorias(bool isEmit)
 				else
 					ui->cbxCategorias->addItem(QIcon(":/img32/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 
-				if( QFile::exists(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img) )
-					ui->cbxCategoriasTb->addItem(QIcon(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+				if( QFile::exists(fGrl->ThemeApp() +"img"+ ico_size +"/cat/"+ cat.img) )
+					ui->cbxCategoriasTb->addItem(QIcon(fGrl->ThemeApp() +"img"+ ico_size +"/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 				else
-					ui->cbxCategoriasTb->addItem(QIcon(":/img"+ ico_size +"_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+					ui->cbxCategoriasTb->addItem(QIcon(":/img"+ ico_size +"/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 
 			} while ( query.next() );
 		} else {
@@ -1003,10 +1003,10 @@ void GrLida::cargarListaCategorias(bool isEmit)
 			else
 				ui->cbxCategorias->addItem(QIcon(":/img32/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 
-			if( QFile::exists(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img) )
-				ui->cbxCategoriasTb->addItem(QIcon(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+			if( QFile::exists(fGrl->ThemeApp() +"img"+ ico_size +"/cat/"+ cat.img) )
+				ui->cbxCategoriasTb->addItem(QIcon(fGrl->ThemeApp() +"img"+ ico_size +"/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 			else
-				ui->cbxCategoriasTb->addItem(QIcon(":/img"+ ico_size +"_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+				ui->cbxCategoriasTb->addItem(QIcon(":/img"+ ico_size +"/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 		}
 	} else {
 		cat.tabla    = "dbgrl";
@@ -1023,10 +1023,10 @@ void GrLida::cargarListaCategorias(bool isEmit)
 		else
 			ui->cbxCategorias->addItem(QIcon(":/img32/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 
-		if( QFile::exists(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img) )
-			ui->cbxCategoriasTb->addItem(QIcon(fGrl->ThemeApp() +"img"+ ico_size +"_cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
+		if( QFile::exists(fGrl->ThemeApp() +"img"+ ico_size +"/cat/"+ cat.img) )
+			ui->cbxCategoriasTb->addItem(QIcon(fGrl->ThemeApp() +"img"+ ico_size +"/cat/"+ cat.img), cat.titulo +" ("+ total +")", cat.id);
 		else
-			ui->cbxCategoriasTb->addItem(QIcon(":/img"+ ico_size +"_cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
+			ui->cbxCategoriasTb->addItem(QIcon(":/img"+ ico_size +"/cat/sinimg.png"), cat.titulo +" ("+ total +")", cat.id);
 	}
 	query.clear();
 
