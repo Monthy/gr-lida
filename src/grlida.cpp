@@ -32,8 +32,6 @@
 #include "grlida_opciones.h"
 #include "grlida_importar_juego.h"
 #include "grlida_exportar_juego.h"
-#include "grlida_pdf_viewer.h"
-#include "grlida_multimedia.h"
 #include "grlida_instalar_juego.h"
 #include "grlida_list_icon_cfg.h"
 #include "grlida_update.h"
@@ -578,10 +576,16 @@ void GrLida::cargarConfig()
 
 // Configuración del twListNav
 	ui->twListNav->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png"));
-	ui->twListNav->header()->setMovable(false);
 	ui->twListNav->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twListNav->header()->setSectionsMovable(false);
+	ui->twListNav->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twListNav->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+#else
+	ui->twListNav->header()->setMovable(false);
 	ui->twListNav->header()->setResizeMode(0, QHeaderView::Stretch);
 	ui->twListNav->header()->setResizeMode(1, QHeaderView::ResizeToContents);
+#endif
 	ui->twListNav->setColumnWidth(1, 60);
 
 // Creamos el data model para el QTreeView
@@ -611,12 +615,21 @@ void GrLida::cargarConfig()
 // Configuración del twFiles
 	ui->twFiles->installEventFilter(this);
 	ui->twFiles->header()->setStretchLastSection(true);
+#if QT_VERSION >= 0x050000
+	ui->twFiles->header()->setSectionsMovable(false);
+	ui->twFiles->header()->setSectionResizeMode(0, QHeaderView::Interactive);
+	ui->twFiles->header()->setSectionResizeMode(1, QHeaderView::Fixed);
+	ui->twFiles->header()->setSectionResizeMode(2, QHeaderView::Interactive);
+	ui->twFiles->header()->setSectionResizeMode(3, QHeaderView::Interactive);
+	ui->twFiles->header()->setSectionResizeMode(4, QHeaderView::Interactive);
+#else
 	ui->twFiles->header()->setMovable(false);
 	ui->twFiles->header()->setResizeMode(0, QHeaderView::Interactive);
-	ui->twFiles->header()->setResizeMode(1, QHeaderView::Fixed      );
+	ui->twFiles->header()->setResizeMode(1, QHeaderView::Fixed);
 	ui->twFiles->header()->setResizeMode(2, QHeaderView::Interactive);
 	ui->twFiles->header()->setResizeMode(3, QHeaderView::Interactive);
 	ui->twFiles->header()->setResizeMode(4, QHeaderView::Interactive);
+#endif
 	ui->twFiles->setColumnWidth(0, 200 );
 	ui->twFiles->setColumnWidth(1, 60  );
 	ui->twFiles->setColumnWidth(2, 100 );
@@ -626,32 +639,54 @@ void GrLida::cargarConfig()
 // Configuración del twUrls
 	ui->twUrls->installEventFilter(this);
 	ui->twUrls->header()->setStretchLastSection(true);
+#if QT_VERSION >= 0x050000
+	ui->twUrls->header()->setSectionsMovable(false);
+	ui->twUrls->header()->setSectionResizeMode(0, QHeaderView::Interactive);
+	ui->twUrls->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+#else
 	ui->twUrls->header()->setMovable(false);
 	ui->twUrls->header()->setResizeMode(0, QHeaderView::Interactive);
 	ui->twUrls->header()->setResizeMode(1, QHeaderView::Interactive);
+#endif
 	ui->twUrls->setColumnWidth(0, 250 );
 
 // Configuración del twCapturas
 	ui->twCapturas->installEventFilter(this);
 	ui->twCapturas->header()->setStretchLastSection(true);
+#if QT_VERSION >= 0x050000
+	ui->twCapturas->header()->setSectionsMovable(false);
+#else
 	ui->twCapturas->header()->setMovable(false);
+#endif
 	ui->twCapturas->setMinimumSize(QSize(170, 0));
 	ui->twCapturas->setMaximumSize(QSize(170, 16777215));
 
 // Configuración del twCapturaVideo
 	ui->twCapturaVideo->installEventFilter(this);
 	ui->twCapturaVideo->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twCapturaVideo->header()->setSectionsMovable(false);
+	ui->twCapturaVideo->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twCapturaVideo->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+#else
 	ui->twCapturaVideo->header()->setMovable(false);
 	ui->twCapturaVideo->header()->setResizeMode(0, QHeaderView::Stretch);
 	ui->twCapturaVideo->header()->setResizeMode(1, QHeaderView::Interactive);
+#endif
 	ui->twCapturaVideo->setColumnWidth(1, 200 );
 
 // Configuración del twCapturaSonido
 	ui->twCapturaSonido->installEventFilter(this);
 	ui->twCapturaSonido->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twCapturaSonido->header()->setSectionsMovable(false);
+	ui->twCapturaSonido->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twCapturaSonido->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+#else
 	ui->twCapturaSonido->header()->setMovable(false);
 	ui->twCapturaSonido->header()->setResizeMode(0, QHeaderView::Stretch);
 	ui->twCapturaSonido->header()->setResizeMode(1, QHeaderView::Interactive);
+#endif
 	ui->twCapturaSonido->setColumnWidth(1, 200 );
 
 	txtInfo->installEventFilter(this);
@@ -671,15 +706,11 @@ void GrLida::cargarConfig()
 	edades_list  = fGrl->cargaDatosQHash(grlDir.Datos + fGrl->Idioma() +"/edad_recomendada.txt", 3, "|");
 
 	txtInfo->clear();
-	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("img_rs_star_on.png"), QImage(fGrl->Theme() +"images/star_on.png"));
-	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("img_rs_star_off.png"), QImage(fGrl->Theme() +"images/star_off.png"));
-	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_3.png") , QImage(fGrl->Theme() +"img16/edad_3.png"));
-	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_7.png") , QImage(fGrl->Theme() +"img16/edad_7.png"));
-	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_12.png"), QImage(fGrl->Theme() +"img16/edad_12.png"));
-	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_16.png"), QImage(fGrl->Theme() +"img16/edad_16.png"));
-	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_18.png"), QImage(fGrl->Theme() +"img16/edad_18.png"));
-	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_nd.png"), QImage(fGrl->Theme() +"img16/edad_nd.png"));
-	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_edad_tp.png"), QImage(fGrl->Theme() +"img16/edad_tp.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("img_rs_star_on.png"), QImage(fGrl->Theme() +"img16/star_on.png"));
+	txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("img_rs_star_off.png"), QImage(fGrl->Theme() +"img16/star_off.png"));
+
+	foreach (const stGrlDatos &edades, edades_list)
+		txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("edad_rs_"+ edades.icono), QImage(fGrl->Theme() +"img16/"+ edades.icono));
 
 	foreach (const stGrlDatos &idioma, idiomas_list)
 		txtInfo->document()->addResource(QTextDocument::ImageResource, QUrl("idioma_rs_"+ idioma.icono), QImage(fGrl->Theme() +"img16/lng/"+ idioma.icono));
@@ -1144,7 +1175,7 @@ void GrLida::setConfigHeaderListaJuegos()
 	tv_model->setHeaderData( col[col_Fecha]        , Qt::Horizontal, QIcon(fGrl->Theme() +"img16/fecha.png")         , Qt::DecorationRole );
 	tv_model->setHeaderData( col[col_TipoEmu]      , Qt::Horizontal, QIcon(fGrl->Theme() +"img16/dosbox-scummvm.png"), Qt::DecorationRole );
 	tv_model->setHeaderData( col[col_Favorito]     , Qt::Horizontal, QIcon(fGrl->Theme() +"img16/"+ grlCfg.IconoFav) , Qt::DecorationRole );
-	tv_model->setHeaderData( col[col_Rating]       , Qt::Horizontal, QIcon(fGrl->Theme() +"images/star_on.png")      , Qt::DecorationRole );
+	tv_model->setHeaderData( col[col_Rating]       , Qt::Horizontal, QIcon(fGrl->Theme() +"img16/star_on.png")      , Qt::DecorationRole );
 	tv_model->setHeaderData( col[col_Edad]         , Qt::Horizontal, QIcon(fGrl->Theme() +"img16/edad_nd.png")       , Qt::DecorationRole );
 	tv_model->setHeaderData( col[col_Usuario]      , Qt::Horizontal, QIcon(fGrl->Theme() +"img16/edad_nd.png")       , Qt::DecorationRole );
 
@@ -1698,16 +1729,16 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 
 			dat_idioma       = fGrl->getImgDatos(idiomas_list, datos.idioma.split(";")      , true);
 			dat_idioma_voces = fGrl->getImgDatos(idiomas_list, datos.idioma_voces.split(";"), true);
-			dat_img_edad     = "<img src=\":edad_rs_"+ edades_list[datos.edad_recomendada].icono +"\" alt=\""+ edades_list[datos.edad_recomendada].titulo +"\" title=\""+ edades_list[datos.edad_recomendada].titulo +"\"> ";
+			dat_img_edad     = "<img src=\"edad_rs_"+ edades_list[datos.edad_recomendada].icono +"\" alt=\""+ edades_list[datos.edad_recomendada].titulo +"\" title=\""+ edades_list[datos.edad_recomendada].titulo +"\"> ";
 
 			int total_rating = datos.rating.toInt();
 			dat_rating = "";
 			for (int i=0; i < 5; ++i)
 			{
 				if( i < total_rating )
-					dat_rating.append("<img src=\":img_rs_star_on.png\" alt=\""+ fGrl->IntToStr(i+1) +"\" title=\""+ fGrl->IntToStr(i+1) +"\"> ");
+					dat_rating.append("<img src=\"img_rs_star_on.png\" alt=\""+ fGrl->IntToStr(i+1) +"\" title=\""+ fGrl->IntToStr(i+1) +"\"> ");
 				else
-					dat_rating.append("<img src=\":img_rs_star_off.png\"> ");
+					dat_rating.append("<img src=\"img_rs_star_off.png\"> ");
 			}
 
 			if( TipoEmu == "datos" )
@@ -1731,8 +1762,8 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 
 		// Reempla la info del juego.
 			str_html_new.replace("{info_icono}"               , QUrl::fromLocalFile(dat_icono).path() );
-			str_html_new.replace("{info_titulo}"              , Qt::escape(datos.titulo)    );
-			str_html_new.replace("{info_subtitulo}"           , Qt::escape(datos.subtitulo) );
+			str_html_new.replace("{info_titulo}"              , datos.titulo        );
+			str_html_new.replace("{info_subtitulo}"           , datos.subtitulo     );
 			str_html_new.replace("{info_genero}"              , datos.genero        );
 			str_html_new.replace("{info_compania}"            , datos.compania      );
 			str_html_new.replace("{info_desarrollador}"       , datos.desarrollador );
@@ -1751,7 +1782,7 @@ void GrLida::mostrarDatosDelJuego(QString IDitem)
 			str_html_new.replace("{info_graficos}"            , datos.graficos      );
 			str_html_new.replace("{info_sonido}"              , datos.sonido        );
 			str_html_new.replace("{info_jugabilidad}"         , datos.jugabilidad   );
-			str_html_new.replace("{info_original}"            , datos.original      );
+			str_html_new.replace("{info_original}"            , fGrl->StrToBool(datos.original) ? tr("Si") : tr("No"));
 			str_html_new.replace("{info_estado}"              , datos.estado        );
 			str_html_new.replace("{info_thumbs}"              , QUrl::fromLocalFile(dat_thumbs).path() );
 			str_html_new.replace("{info_fecha}"               , fGrl->HoraFechaActual(datos.fecha, grlCfg.FormatoFecha) );
@@ -3493,18 +3524,22 @@ void GrLida::on_twCapturaVideo_itemDoubleClicked(QTreeWidgetItem *item, int colu
 {
 	if( item && column > -1 )
 	{
-		frmMultiMedia *m_Media = new frmMultiMedia(this);
+		GrlMultiMedia *m_Media = new GrlMultiMedia(grlDir.Home, fGrl->Theme(), grlCfg, ui->tabFileUrl);
 		m_Media->setWindowFlags(Qt::Window);
+		m_Media->setOnlySound(false);
+		m_Media->setPlaylistVisible(false);
+
 		QStringList lista;
 		int id = -1;
 		const int listSize = ui->twCapturaVideo->topLevelItemCount();
 		for (int i = 0; i < listSize; ++i)
 		{
-			lista << ui->twCapturaVideo->topLevelItem( i )->text(1);
-			if( item->text(1) == ui->twCapturaVideo->topLevelItem( i )->text(1) )
+			lista << ui->twCapturaVideo->topLevelItem(i)->text(1);
+			if (item->text(1) == ui->twCapturaVideo->topLevelItem(i)->text(1))
 				id = i;
 		}
-		m_Media->open(id, lista);//
+
+		m_Media->setPlaylist(lista, true, id, true);
 		m_Media->show();
 	}
 }
@@ -3513,18 +3548,23 @@ void GrLida::on_twCapturaSonido_itemDoubleClicked(QTreeWidgetItem *item, int col
 {
 	if( item && column > -1 )
 	{
-		frmMultiMedia *m_Media = new frmMultiMedia(this);
+		GrlMultiMedia *m_Media = new GrlMultiMedia(grlDir.Home, fGrl->Theme(), grlCfg, ui->tabFileUrl);
 		m_Media->setWindowFlags(Qt::Window);
+		m_Media->setOnlySound(true);
+		m_Media->setPlaylistVisible(true);
+		m_Media->setShowListaMedia(false);
+
 		QStringList lista;
 		int id = -1;
 		const int listSize = ui->twCapturaSonido->topLevelItemCount();
 		for (int i = 0; i < listSize; ++i)
 		{
-			lista << ui->twCapturaSonido->topLevelItem( i )->text(1);
-			if( item->text(1) == ui->twCapturaSonido->topLevelItem( i )->text(1) )
+			lista << ui->twCapturaSonido->topLevelItem(i)->text(1);
+			if (item->text(1) == ui->twCapturaSonido->topLevelItem(i)->text(1))
 				id = i;
 		}
-		m_Media->open(id, lista);//
+
+		m_Media->setPlaylist(lista, true, id, true);
 		m_Media->show();
 	}
 }

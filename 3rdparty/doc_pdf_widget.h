@@ -42,7 +42,12 @@
 #include <QtGui>
 #include <QLabel>
 #include <QRectF>
+
+#ifdef IS_POPPLER_QT5
+#include <poppler/qt5/poppler-qt5.h>
+#else
 #include <poppler/qt4/poppler-qt4.h>
+#endif
 
 class QRubberBand;
 

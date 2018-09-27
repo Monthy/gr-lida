@@ -22,6 +22,10 @@
  *
 **/
 
+#include <QDesktopWidget>
+#include <QStyleFactory>
+#include <QInputDialog>
+
 #include "grlida_config_inicial.h"
 #include "ui_config_inicial.h"
 

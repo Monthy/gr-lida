@@ -22,6 +22,8 @@
  *
 **/
 
+#include <QMessageBox>
+
 #include "grlida_addedit_vdmsound.h"
 #include "ui_addedit_vdmsound.h"
 

@@ -1,184 +1,118 @@
-/*
- *
- * GR-lida by Monthy
- *
- * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
- *
- *
-**/
-
 #ifndef GRLIDA_MULTIMEDIA_H
 #define GRLIDA_MULTIMEDIA_H
 
-#include <QtGui/QWidget>
-#include <QtGui/QApplication>
-#include <QtCore/QTimerEvent>
-#include <QtGui/QShowEvent>
-#include <QtGui/QIcon>
-#include <QtCore/QBasicTimer>
-#include <QtGui/QAction>
+#include <QWidget>
+#include <QFileInfo>
+#include <QLabel>
+#include <QToolButton>
+#include <QListWidget>
+#include <QSplitter>
+#include <QSlider>
+#include <QKeyEvent>
 
-#include <phonon/audiooutput.h>
-#include <phonon/backendcapabilities.h>
-#include <phonon/effect.h>
-#include <phonon/effectparameter.h>
-#include <phonon/effectwidget.h>
-#include <phonon/mediaobject.h>
-#include <phonon/seekslider.h>
-#include <phonon/videowidget.h>
-#include <phonon/volumeslider.h>
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+#include "grlida_media.h"
+#else
+#include "grlida_media_qt5.h"
+#endif
 
-#include "funciones.h"
+#include "g_structs.h"
 
-QT_BEGIN_NAMESPACE
-class QStringList;
-class QListWidget;
-class QPushButton;
-class QLabel;
-class QSlider;
-class QTextEdit;
-class QMenu;
-class Ui_multimedia_setup;
-QT_END_NAMESPACE
-
-class frmMultiMedia;
-
-class MediaVideoWidget : public Phonon::VideoWidget
+class GrlMultiMedia : public QWidget
 {
 	Q_OBJECT
 
 public:
-	MediaVideoWidget(frmMultiMedia *player, QWidget *parent = 0);
+	GrlMultiMedia(QString dir_game, QString dir_theme, stGrlCfg m_cfg, QWidget *parent = 0);
+	~GrlMultiMedia();
 
-public slots:
-// Over-riding non-virtual Phonon::VideoWidget slot
-	void setFullScreen(bool);
+	void setDirGame(QString dir_game) { stDirGame = dir_game; }
+	void setTheme(QString dir_theme);
+	void setGrlCfg(stGrlCfg m_cfg);
+	void setIconSize(int size);
+	void setOnlySound(bool checked);
+	void setShowListaMedia(bool checked);
+	void setPlaylistVisible(bool checked);
+	void setBtnPlaylistVisible(bool checked);
 
-signals:
-	void fullScreenChanged(bool);
+	void clearPlaylist();
+	void setDirPlaylist(QString dir, QStringList filter, bool isClear = false, bool isSubDir = false);
+	void setPlaylist(QStringList fileNames, bool autoPlay = true, int id_select = -1, bool isClear = false);
+
+	void addPlaylist(QString fileName);
+	bool removeSelectMedia();
+	void closeMedia();
+
+	QString getFileName();
+	int count() { return lwMedia->count(); }
+	int currentRow() { return lwMedia->currentRow(); }
 
 protected:
-	void mouseDoubleClickEvent(QMouseEvent *e);
-	void keyPressEvent(QKeyEvent *e);
-	bool event(QEvent *e);
-	void timerEvent(QTimerEvent *e);
+	void closeEvent(QCloseEvent *event);
+	void keyPressEvent(QKeyEvent *event);
+	bool eventFilter(QObject *object, QEvent *event);
+
+public slots:
+	void playPausa();
+	void setVolume(int volume); // 0 - 100
+	void setMuted(bool muted);
 
 private:
-	frmMultiMedia *m_player;
-	QBasicTimer m_timer;
-	QAction m_action;
-};
+	GrlMedia *media;
+	QWidget  *w_controls;
+	stGrlCfg grlCfg;
 
-class frmMultiMedia : public QWidget
-{
-	Q_OBJECT
+	QIcon playIcon, pauseIcon;
+	QString stDirGame, stTheme, sizeIcon;
+	QStringList listMedia, audio_ext, video_ext;
+	bool m_fullScreen, m_repetir, m_onlySound;
+	int total_media, current_media, select_media;
 
-public:
-	frmMultiMedia(QWidget *parent = 0);
-	~frmMultiMedia();
+	QLabel *lb_status, *lb_tiempo, *lb_buffer;
+	QToolButton *btnClose;
+	QToolButton *btnPlayPausa;
+	QToolButton *btnAnterior;
+	QToolButton *btnStop;
+	QToolButton *btnSiguiente;
+	QToolButton *btnRepetir;
+	QToolButton *btnAbrir;
+	QToolButton *btnListaMedia;
+	QToolButton *btnMute;
+	QToolButton *btnFullScreen;
+	QListWidget *lwMedia;
+	QSplitter   *splitter;
 
-	void open(int id, QStringList lista);
-	void setMediaId(int id = -1);
-	void addItemList(QString fileName);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+	Phonon::SeekSlider *slider;
+#else
+	QSlider *slider;
+#endif
+	QSlider *volumeSlider;
 
-	void initVideoWindow();
-	void initSettingsDialog();
-	void setVolume(qreal volume);
-	void setSmallScreen(bool smallScreen);
-
-protected:
-	void closeEvent(QCloseEvent *e);
-
-public slots:
-	void openFile();
-	void rewind();
-	void forward();
-	void updateInfo();
-	void updateTime();
-	void finished();
-	void playPause();
-	void mpStop();
-	void scaleChanged(QAction *);
-	void aspectChanged(QAction *);
+	void setStatus();
+	void addItemPlaylist(QFileInfo f_info, int row, int i);
 
 private slots:
-	void setAspect(int);
-	void setScale(int);
-	void setSaturation(int);
-	void setContrast(int);
-	void setHue(int);
-	void setBrightness(int);
-	void stateChanged(Phonon::State newstate, Phonon::State oldstate);
-	void effectChanged();
-	void showSettingsDialog();
-	void showContextMenu(const QPoint& point);
-	void bufferStatus(int percent);
-	void openUrl();
-	void openRamFile();
-	void configureEffect();
-	void hasVideoChanged(bool);
-
+	void open();
 	void lwMedia_DoubleClicked(QListWidgetItem *item);
+	void lwMedia_currentRowChanged(int row);
 
-private:
-	bool playPauseForDialog();
+	void previousClicked();
+	void nextClicked();
+	void repetirClicked(bool checked);
+	void muteClicked();
 
-	Funciones *fGrl;
-	stGrlDir grlDir;
+	void setFullScreen(bool checked);
+	void setResize(QSize size);
+	void setMetaData(MediaMetaData);
+	void setInfo(QString info);
+	void controlVisible(bool visible);
+	void stateChanged();
+	void endOfMedia();
 
-	Phonon::SeekSlider *slider;
-	Phonon::VolumeSlider *volume;
-	Phonon::Effect *nextEffect;
-	Phonon::MediaObject *m_MediaObject;
-	Phonon::AudioOutput *m_AudioOutput;
-	Phonon::Path m_audioOutputPath;
-
-	int id_media, total_media;
-	QStringList lista_media, formatsVideo, formatsMusic;
-	QListWidget *lwMedia;
-
-	QIcon playIcon;
-	QIcon pauseIcon;
-
-	QPushButton *btnPlayPausa;
-	QPushButton *btnAnterior;
-	QPushButton *btnSiguiente;
-
-	QLabel *lb_status;
-	QLabel *lb_tiempo;
-	QLabel *lb_buffer;
-	QLabel *info;
-
-	QSlider *m_hueSlider;
-	QSlider *m_satSlider;
-	QSlider *m_contSlider;
-
-	QDialog *settingsDialog;
-	Ui_multimedia_setup *ui;
-
-	QMenu *fileMenu;
-	QAction *m_fullScreenAction;
-	QWidget m_videoWindow;
-
-	MediaVideoWidget *m_videoWidget;
-
-	bool m_smallScreen;
+	void setMaxSlider(qint64 max);
+	void setPosSlider(qint64 pos);
 
 };
 
-#endif //GRLIDA_MULTIMEDIA_H
+#endif // GRLIDA_MULTIMEDIA_H

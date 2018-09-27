@@ -22,6 +22,9 @@
  *
 **/
 
+#include <QDesktopWidget>
+#include <QColorDialog>
+
 #include "grlida_list_icon_cfg.h"
 #include "ui_list_icon_cfg.h"
 

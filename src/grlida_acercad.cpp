@@ -22,6 +22,8 @@
  *
 **/
 
+#include <QDesktopWidget>
+
 #include "grlida_acercad.h"
 #include "ui_acercad.h"
 

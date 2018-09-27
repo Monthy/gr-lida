@@ -22,6 +22,9 @@
  *
 **/
 
+#include <QDesktopWidget>
+#include <QMessageBox>
+
 #include "grlida_wizard_dosbox.h"
 #include "grlida_addedit_montajes.h"
 #include "grlida_importar_juego.h"
@@ -138,9 +141,14 @@ void frmWizardDosBox::cargarConfig()
 	ui->chkDbx_sdl_fullfixed->setVisible(false); // En desuso
 
 // Configuración del twMontajes
-	ui->twMontajes->header()->setMovable(false);
 	ui->twMontajes->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twMontajes->header()->setSectionsMovable(false);
+	ui->twMontajes->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+#else
+	ui->twMontajes->header()->setMovable(false);
 	ui->twMontajes->header()->setResizeMode(0, QHeaderView::Stretch);
+#endif
 	ui->twMontajes->setColumnWidth(1, 40);
 	ui->twMontajes->setColumnWidth(2, 80);
 	ui->twMontajes->setColumnWidth(3, 80);

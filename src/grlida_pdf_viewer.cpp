@@ -22,6 +22,9 @@
  *
 **/
 
+#include <QDesktopWidget>
+#include <QMessageBox>
+
 #include "grlida_pdf_viewer.h"
 #include "ui_pdf_viewer.h"
 

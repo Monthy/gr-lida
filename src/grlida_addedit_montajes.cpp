@@ -22,6 +22,9 @@
  *
 **/
 
+#include <QDesktopWidget>
+#include <QMessageBox>
+
 #include "grlida_addedit_montajes.h"
 #include "ui_addedit_montajes.h"
 

@@ -22,6 +22,14 @@
  *
 **/
 
+#include <QDesktopWidget>
+#include <QDesktopServices>
+#include <QStyleFactory>
+#include <QScriptEngine>
+#include <QMessageBox>
+#include <QInputDialog>
+#include <QColorDialog>
+
 #include "grlida_opciones.h"
 #include "grlida_list_icon_cfg.h"
 #include "ui_opciones.h"
@@ -118,13 +126,23 @@ void frmOpciones::cargarConfig()
 	ui->twDOSBox->headerItem()->setIcon(4, QIcon(fGrl->Theme() +"img16/bullet_black.png") );
 	ui->twDOSBox->headerItem()->setTextAlignment(2, Qt::AlignCenter );
 	ui->twDOSBox->headerItem()->setTextAlignment(3, Qt::AlignCenter );
-	ui->twDOSBox->header()->setMovable(false);
+
 	ui->twDOSBox->header()->setStretchLastSection(false);
-	ui->twDOSBox->header()->setResizeMode(0, QHeaderView::Stretch     );
-	ui->twDOSBox->header()->setResizeMode(1, QHeaderView::Interactive );
-	ui->twDOSBox->header()->setResizeMode(2, QHeaderView::Interactive );
-	ui->twDOSBox->header()->setResizeMode(3, QHeaderView::Interactive );
-	ui->twDOSBox->header()->setResizeMode(4, QHeaderView::Interactive );
+#if QT_VERSION >= 0x050000
+	ui->twDOSBox->header()->setSectionsMovable(false);
+	ui->twDOSBox->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twDOSBox->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+	ui->twDOSBox->header()->setSectionResizeMode(2, QHeaderView::Interactive);
+	ui->twDOSBox->header()->setSectionResizeMode(3, QHeaderView::Interactive);
+	ui->twDOSBox->header()->setSectionResizeMode(4, QHeaderView::Interactive);
+#else
+	ui->twDOSBox->header()->setMovable(false);
+	ui->twDOSBox->header()->setResizeMode(0, QHeaderView::Stretch);
+	ui->twDOSBox->header()->setResizeMode(1, QHeaderView::Interactive);
+	ui->twDOSBox->header()->setResizeMode(2, QHeaderView::Interactive);
+	ui->twDOSBox->header()->setResizeMode(3, QHeaderView::Interactive);
+	ui->twDOSBox->header()->setResizeMode(4, QHeaderView::Interactive);
+#endif
 	ui->twDOSBox->setColumnWidth(1, 90);
 	ui->twDOSBox->setColumnWidth(2, 50);
 	ui->twDOSBox->setColumnWidth(3, 50);
@@ -148,11 +166,18 @@ void frmOpciones::cargarConfig()
 	fGrl->cargarIconosComboBox(ui->cbxEmuImg, fGrl->ThemeApp() +"img16/cat/", "sinimg.png", grlCfg.FormatsImage.join(";"));
 
 	ui->twEmus->clear();
-	ui->twEmus->header()->setMovable(false);
 	ui->twEmus->header()->setStretchLastSection(false);
-	ui->twEmus->header()->setResizeMode( 0, QHeaderView::Stretch     );
-	ui->twEmus->header()->setResizeMode( 1, QHeaderView::Interactive );
-	ui->twEmus->header()->setResizeMode( 3, QHeaderView::Interactive );
+#if QT_VERSION >= 0x050000
+	ui->twEmus->header()->setSectionsMovable(false);
+	ui->twEmus->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twEmus->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+	ui->twEmus->header()->setSectionResizeMode(3, QHeaderView::Interactive);
+#else
+	ui->twEmus->header()->setMovable(false);
+	ui->twEmus->header()->setResizeMode(0, QHeaderView::Stretch);
+	ui->twEmus->header()->setResizeMode(1, QHeaderView::Interactive);
+	ui->twEmus->header()->setResizeMode(3, QHeaderView::Interactive);
+#endif
 	ui->twEmus->headerItem()->setIcon( 0, QIcon(fGrl->Theme() +"img16/tag.png") );
 	ui->twEmus->headerItem()->setIcon( 1, QIcon(fGrl->Theme() +"img16/bullet_black.png") );
 	ui->twEmus->headerItem()->setIcon( 3, QIcon(fGrl->Theme() +"img16/bullet_black.png") );
@@ -175,11 +200,18 @@ void frmOpciones::cargarConfig()
 // Crear, editar categorías ----------
 	ui->twCategorias->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png") );
 	ui->twCategorias->headerItem()->setTextAlignment(2, Qt::AlignCenter );
-	ui->twCategorias->header()->setMovable(false);
 	ui->twCategorias->header()->setStretchLastSection(false);
-	ui->twCategorias->header()->setResizeMode(0, QHeaderView::Stretch     );
-	ui->twCategorias->header()->setResizeMode(1, QHeaderView::Interactive );
-	ui->twCategorias->header()->setResizeMode(2, QHeaderView::Fixed       );
+#if QT_VERSION >= 0x050000
+	ui->twCategorias->header()->setSectionsMovable(false);
+	ui->twCategorias->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twCategorias->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+	ui->twCategorias->header()->setSectionResizeMode(2, QHeaderView::Fixed);
+#else
+	ui->twCategorias->header()->setMovable(false);
+	ui->twCategorias->header()->setResizeMode(0, QHeaderView::Stretch);
+	ui->twCategorias->header()->setResizeMode(1, QHeaderView::Interactive);
+	ui->twCategorias->header()->setResizeMode(2, QHeaderView::Fixed);
+#endif
 	ui->twCategorias->setColumnWidth(1, 90);
 	ui->twCategorias->setColumnWidth(2, 50);
 
@@ -260,11 +292,18 @@ void frmOpciones::cargarConfig()
 	ui->twThemes->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png"));
 	ui->twThemes->headerItem()->setTextAlignment(1, Qt::AlignCenter);
 	ui->twThemes->headerItem()->setTextAlignment(2, Qt::AlignCenter);
-	ui->twThemes->header()->setMovable(false);
 	ui->twThemes->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twThemes->header()->setSectionsMovable(false);
+	ui->twThemes->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twThemes->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+	ui->twThemes->header()->setSectionResizeMode(2, QHeaderView::Fixed);
+#else
+	ui->twThemes->header()->setMovable(false);
 	ui->twThemes->header()->setResizeMode(0, QHeaderView::Stretch);
 	ui->twThemes->header()->setResizeMode(1, QHeaderView::Interactive);
 	ui->twThemes->header()->setResizeMode(2, QHeaderView::Fixed);
+#endif
 	ui->twThemes->setColumnWidth(1, 90);
 	ui->twThemes->setColumnWidth(2, 50);
 
@@ -2029,12 +2068,18 @@ void frmOpciones::on_cbxDat_Archivo_activated(int index)
 	ui->twDatos->headerItem()->setText( 2, ""           );
 	ui->twDatos->headerItem()->setText( 3, ""           );
 	ui->twDatos->headerItem()->setTextAlignment(1, Qt::AlignCenter);
-	ui->twDatos->header()->setMovable(false);
 	ui->twDatos->header()->setStretchLastSection(false);
-	ui->twDatos->header()->setResizeMode( 0, QHeaderView::Stretch     );
-	ui->twDatos->header()->setResizeMode( 1, QHeaderView::Interactive );
-	ui->twDatos->header()->setResizeMode( 2, QHeaderView::Fixed       );
-	ui->twDatos->header()->setResizeMode( 3, QHeaderView::Interactive );
+#if QT_VERSION >= 0x050000
+	ui->twDatos->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twDatos->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+	ui->twDatos->header()->setSectionResizeMode(2, QHeaderView::Fixed);
+	ui->twDatos->header()->setSectionResizeMode(3, QHeaderView::Interactive);
+#else
+	ui->twDatos->header()->setResizeMode(0, QHeaderView::Stretch);
+	ui->twDatos->header()->setResizeMode(1, QHeaderView::Interactive);
+	ui->twDatos->header()->setResizeMode(2, QHeaderView::Fixed);
+	ui->twDatos->header()->setResizeMode(3, QHeaderView::Interactive);
+#endif
 	ui->twDatos->setColumnWidth( 0, 150 );
 	ui->twDatos->setColumnWidth( 1,  90 );
 	ui->twDatos->setColumnWidth( 2,  80 );
@@ -2086,9 +2131,13 @@ void frmOpciones::on_cbxDat_Archivo_activated(int index)
 		ui->twDatos->headerItem()->setText( 0, ""           );
 		ui->twDatos->headerItem()->setText( 1, tr("Título") );
 		ui->twDatos->headerItem()->setText( 2, tr("Config") );
-
-		ui->twDatos->header()->setResizeMode( 0, QHeaderView::Fixed   );
-		ui->twDatos->header()->setResizeMode( 1, QHeaderView::Stretch );
+	#if QT_VERSION >= 0x050000
+		ui->twDatos->header()->setSectionResizeMode(0, QHeaderView::Fixed);
+		ui->twDatos->header()->setSectionResizeMode(1, QHeaderView::Stretch);
+	#else
+		ui->twDatos->header()->setResizeMode(0, QHeaderView::Fixed);
+		ui->twDatos->header()->setResizeMode(1, QHeaderView::Stretch);
+	#endif
 		ui->twDatos->setColumnWidth( 0, 30 );
 		ui->twDatos->setColumnHidden( 1, false );
 		ui->twDatos->setColumnHidden( 2, false );

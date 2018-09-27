@@ -35,6 +35,8 @@
 #include "dbsql.h"
 #include "grlida_delegate.h"
 #include "grlida_picflow.h"
+#include "grlida_multimedia.h"
+#include "grlida_pdf_viewer.h"
 #include "animatedtextbrowser.h"
 
 namespace Ui {

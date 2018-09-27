@@ -22,6 +22,11 @@
  *
 **/
 
+#include <QFileDialog>
+#include <QVBoxLayout>
+#include <QTextBrowser>
+#include <QPushButton>
+
 #include "funciones.h"
 
 Funciones::Funciones()
@@ -1899,7 +1904,7 @@ QString Funciones::reemplazaTextoSmiles(QString str, QHash<QString, stGrlDatos> 
 	foreach (const stGrlDatos &smile, lista)
 	{
 		QRegExp rx_smile(QRegExp::escape(smile.key) +"\\s");
-		str.replace(rx_smile, "<img src=\":smile_rs_"+ smile.key +"_"+ smile.icono +"\" alt=\""+ smile.key +"\" title=\""+ smile.key +"\"/> ");
+		str.replace(rx_smile, "<img src=\"smile_rs_"+ smile.key +"_"+ smile.icono +"\" alt=\""+ smile.key +"\" title=\""+ smile.key +"\"/> ");
 	}
 	return str;
 }
@@ -1918,7 +1923,7 @@ QString Funciones::getImgDatos(QHash<QString, stGrlDatos> datos, QStringList lis
 				if( dat.titulo == lista.at(i) || dat.extra == lista.at(i) )
 				{
 					if( isLng )
-						img_lng.append("<img src=\":idioma_rs_"+ dat.icono +"\" alt=\""+ dat.titulo +"\" title=\""+ dat.titulo +"\"> "+ dat.titulo +" ");
+						img_lng.append("<img src=\"idioma_rs_"+ dat.icono +"\" alt=\""+ dat.titulo +"\" title=\""+ dat.titulo +"\"> "+ dat.titulo +" ");
 					else
 						img_lng.append("<img src=\""+ stTheme +"img16/"+ dat.icono +"\" alt=\""+ dat.titulo +"\" title=\""+ dat.titulo +"\"> "+ dat.titulo +" ");
 				}

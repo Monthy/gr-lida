@@ -36,6 +36,8 @@
 **
 ****************************************************************************/
 
+#include <QRubberBand>
+
 #include "doc_pdf_widget.h"
 
 DocPdfWidget::DocPdfWidget(QWidget *parent)
@@ -142,9 +144,15 @@ QRectF DocPdfWidget::searchBackwards(const QString &text)
 
         QList<QRectF> locations;
         searchLocation = QRectF();
+        double rectLeft   = searchLocation.left();
+        double rectTop    = searchLocation.top();
+        double rectRight  = searchLocation.right();
+        double rectBottom = searchLocation.bottom();
 
-        while (doc->page(page)->search(text, searchLocation,
-            Poppler::Page::NextResult, Poppler::Page::CaseInsensitive)) {
+//        while (doc->page(page)->search(text, searchLocation,
+//            Poppler::Page::NextResult, Poppler::Page::CaseInsensitive)) {
+        while (doc->page(page)->search(text, rectLeft, rectTop, rectRight, rectBottom,
+            Poppler::Page::NextResult)) {//, Poppler::Page::CaseInsensitive
 
             if (searchLocation != oldLocation)
                 locations.append(searchLocation);
@@ -177,9 +185,15 @@ QRectF DocPdfWidget::searchBackwards(const QString &text)
 
         QList<QRectF> locations;
         searchLocation = QRectF();
+        double rectLeft   = searchLocation.left();
+        double rectTop    = searchLocation.top();
+        double rectRight  = searchLocation.right();
+        double rectBottom = searchLocation.bottom();
 
-        while (doc->page(page)->search(text, searchLocation,
-            Poppler::Page::NextResult, Poppler::Page::CaseInsensitive)) {
+//        while (doc->page(page)->search(text, searchLocation,
+//             Poppler::Page::NextResult, Poppler::Page::CaseInsensitive)) {
+        while (doc->page(page)->search(text, rectLeft, rectTop, rectRight, rectBottom,
+            Poppler::Page::NextResult)) {//, Poppler::Page::CaseInsensitive
 
             locations.append(searchLocation);
         }
@@ -198,10 +212,17 @@ QRectF DocPdfWidget::searchBackwards(const QString &text)
 QRectF DocPdfWidget::searchForwards(const QString &text)
 {
     int page = currentPage;
-    while (page < doc->numPages()) {
+    double rectLeft   = searchLocation.left();
+    double rectTop    = searchLocation.top();
+    double rectRight  = searchLocation.right();
+    double rectBottom = searchLocation.bottom();
 
-        if (doc->page(page)->search(text, searchLocation,
-            Poppler::Page::NextResult, Poppler::Page::CaseInsensitive)) {
+    while (page < doc->numPages()) {
+//        if (doc->page(page)->search(text, searchLocation,
+//            Poppler::Page::NextResult, Poppler::Page::CaseInsensitive)) {
+        if (doc->page(page)->search(text, rectLeft, rectTop, rectRight, rectBottom,
+            Poppler::Page::NextResult)) {//, Poppler::Page::CaseInsensitive
+
             if (!searchLocation.isNull()) {
                 showPage(page + 1);
                 return searchLocation;
@@ -216,9 +237,14 @@ QRectF DocPdfWidget::searchForwards(const QString &text)
     while (page < currentPage) {
 
         searchLocation = QRectF();
-
-        if (doc->page(page)->search(text, searchLocation,
-            Poppler::Page::NextResult, Poppler::Page::CaseInsensitive)) {
+        rectLeft   = searchLocation.left();
+        rectTop    = searchLocation.top();
+        rectRight  = searchLocation.right();
+        rectBottom = searchLocation.bottom();
+//        if (doc->page(page)->search(text, searchLocation,
+//            Poppler::Page::NextResult, Poppler::Page::CaseInsensitive)) {
+        if (doc->page(page)->search(text, rectLeft, rectTop, rectRight, rectBottom,
+            Poppler::Page::NextResult)) {//, Poppler::Page::CaseInsensitive
             if (!searchLocation.isNull()) {
                 showPage(page + 1);
                 return searchLocation;

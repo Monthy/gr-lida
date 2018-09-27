@@ -12,9 +12,9 @@ win32|mac {
 }
 
 TEMPLATE = app
-DESTDIR += bin
 
 # ###### Output directory
+DESTDIR += bin
 UI_DIR += src
 MOC_DIR += build
 RCC_DIR += build
@@ -27,9 +27,15 @@ CONFIG += qt warn_on thread release
 #CONFIG += qt warn_on thread release
 #CONFIG += qt warn_on thread debug
 
-QT += core gui sql network script phonon
+QT += core gui sql network script
 contains(QT_CONFIG, opengl):QT += opengl
-#greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+greaterThan(QT_MAJOR_VERSION, 4) {
+    message(Building with Qt5)
+    QT += widgets printsupport
+} else {
+    message(Building with Qt4)
+}
 
 # ###### Files
 INCLUDEPATH += . \
@@ -128,6 +134,19 @@ FORMS += ui/grlida.ui \
     ui/exportar_juego.ui \
     ui/list_icon_cfg.ui
 
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT += multimedia multimediawidgets
+
+    SOURCES += src/grlida_media_qt5.cpp
+    HEADERS += src/grlida_media_qt5.h
+
+} else {
+    QT += phonon
+
+    SOURCES += src/grlida_media.cpp
+    HEADERS += src/grlida_media.h
+}
+
 # ###### 3rdparty Files
 HEADERS += 3rdparty/editorwidget/codeeditor.h \
     3rdparty/editorwidget/editorwidget.h
@@ -174,7 +193,14 @@ TRANSLATIONS += res/idiomas/gr-lida_es_ES.ts \
 win32:RC_FILE += gr-lida.rc
 mac:ICON += gr-lida.icns
 
-LIBS += -lz -lpoppler-qt4
+LIBS += -lz
+
+greaterThan(QT_MAJOR_VERSION, 4) {
+    DEFINES += IS_POPPLER_QT5
+    LIBS += -lpoppler-qt5
+} else {
+    LIBS += -lpoppler-qt4
+}
 
 # ###### Install
 !win32 {

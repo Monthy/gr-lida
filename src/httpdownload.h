@@ -30,10 +30,10 @@
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QUrl>
+#include <QProgressDialog>
 
 QT_BEGIN_NAMESPACE
 class QFile;
-class QProgressDialog;
 class QSslError;
 class QAuthenticator;
 class QNetworkReply;

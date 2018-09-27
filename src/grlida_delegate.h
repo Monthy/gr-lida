@@ -25,8 +25,10 @@
 #ifndef GRLIDA_DELEGATE_H
 #define GRLIDA_DELEGATE_H
 
+#include <QApplication>
 #include <QSqlTableModel>
-#include <QItemDelegate>
+#include <QStandardItemModel>
+#include <QStyledItemDelegate>
 #include <QObject>
 #include <QString>
 #include <QPixmap>

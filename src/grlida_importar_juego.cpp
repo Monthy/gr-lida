@@ -22,6 +22,8 @@
  *
 **/
 
+#include <QDesktopWidget>
+
 #include "grlida_importar_juego.h"
 
 // INICIO ImportarTwPrototype -----------------------------------------------------------------------------------
@@ -143,9 +145,15 @@ void frmImportarJuego::cargarConfig()
 	ImportPathNew->ui->tabDatConf->setTabEnabled(tabVDMSound, false);
 
 	ImportPathNew->ui->twDatosJuego->header()->setStretchLastSection(true);
+#if QT_VERSION >= 0x050000
+	ImportPathNew->ui->twDatosJuego->header()->setSectionsMovable(false);
+	ImportPathNew->ui->twDatosJuego->header()->setSectionResizeMode(0, QHeaderView::Fixed);
+	ImportPathNew->ui->twDatosJuego->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+#else
 	ImportPathNew->ui->twDatosJuego->header()->setMovable(false);
 	ImportPathNew->ui->twDatosJuego->header()->setResizeMode(0, QHeaderView::Fixed);
 	ImportPathNew->ui->twDatosJuego->header()->setResizeMode(1, QHeaderView::ResizeToContents);
+#endif
 	ImportPathNew->ui->twDatosJuego->setColumnWidth(0, 20 );
 	ImportPathNew->ui->twDatosJuego->setColumnWidth(1, 120);
 	ImportPathNew->ui->twDatosJuego->setColumnWidth(2, 160);
@@ -175,22 +183,38 @@ void frmImportarJuego::cargarConfig()
 	edades_list  = fGrl->cargaDatosQHash(grlDir.Datos + fGrl->Idioma() +"/edad_recomendada.txt", 3, "|");
 
 // Configuración del twListaBusqueda
-	ui->twListaBusqueda->header()->setMovable(false);
 	ui->twListaBusqueda->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twListaBusqueda->header()->setSectionsMovable(false);
+	ui->twListaBusqueda->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twListaBusqueda->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+	ui->twListaBusqueda->header()->setSectionResizeMode(2, QHeaderView::Interactive);
+#else
+	ui->twListaBusqueda->header()->setMovable(false);
 	ui->twListaBusqueda->header()->setResizeMode(0, QHeaderView::Stretch);
 	ui->twListaBusqueda->header()->setResizeMode(1, QHeaderView::Interactive);
 	ui->twListaBusqueda->header()->setResizeMode(2, QHeaderView::Interactive);
+#endif
 	ui->twListaBusqueda->setColumnWidth(1, 60);
 	ui->twListaBusqueda->setColumnWidth(2, 35);
 
 // Configuración del twDatosFiles
 	ui->twDatosFiles->header()->setStretchLastSection(true);
+#if QT_VERSION >= 0x050000
+	ui->twDatosFiles->header()->setSectionsMovable(false);
+	ui->twDatosFiles->header()->setSectionResizeMode(0, QHeaderView::Interactive);
+	ui->twDatosFiles->header()->setSectionResizeMode(1, QHeaderView::Fixed);
+	ui->twDatosFiles->header()->setSectionResizeMode(2, QHeaderView::Interactive);
+	ui->twDatosFiles->header()->setSectionResizeMode(3, QHeaderView::Interactive);
+	ui->twDatosFiles->header()->setSectionResizeMode(4, QHeaderView::Interactive);
+#else
 	ui->twDatosFiles->header()->setMovable(false);
 	ui->twDatosFiles->header()->setResizeMode(0, QHeaderView::Interactive);
-	ui->twDatosFiles->header()->setResizeMode(1, QHeaderView::Fixed      );
+	ui->twDatosFiles->header()->setResizeMode(1, QHeaderView::Fixed);
 	ui->twDatosFiles->header()->setResizeMode(2, QHeaderView::Interactive);
 	ui->twDatosFiles->header()->setResizeMode(3, QHeaderView::Interactive);
 	ui->twDatosFiles->header()->setResizeMode(4, QHeaderView::Interactive);
+#endif
 	ui->twDatosFiles->setColumnWidth(0, 200 );
 	ui->twDatosFiles->setColumnWidth(1, 60  );
 	ui->twDatosFiles->setColumnWidth(2, 100 );
@@ -199,15 +223,26 @@ void frmImportarJuego::cargarConfig()
 
 // Configuración del twDatosURL
 	ui->twDatosURL->header()->setStretchLastSection(true);
+#if QT_VERSION >= 0x050000
+	ui->twDatosURL->header()->setSectionsMovable(false);
+	ui->twDatosURL->header()->setSectionResizeMode(0, QHeaderView::Interactive);
+	ui->twDatosURL->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+#else
 	ui->twDatosURL->header()->setMovable(false);
 	ui->twDatosURL->header()->setResizeMode(0, QHeaderView::Interactive);
 	ui->twDatosURL->header()->setResizeMode(1, QHeaderView::Interactive);
+#endif
 	ui->twDatosURL->setColumnWidth(0, 250 );
 
 // Configuración del twMontajes
-	ui->twMontajes->header()->setMovable(false);
 	ui->twMontajes->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twMontajes->header()->setSectionsMovable(false);
+	ui->twMontajes->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+#else
+	ui->twMontajes->header()->setMovable(false);
 	ui->twMontajes->header()->setResizeMode(0, QHeaderView::Stretch);
+#endif
 	ui->twMontajes->setColumnWidth(1, 40);
 	ui->twMontajes->setColumnWidth(2, 80);
 	ui->twMontajes->setColumnWidth(3, 80);
@@ -339,8 +374,8 @@ void frmImportarJuego::mostrarFichaHtml(QHash<QString, QString> datos)
 
 // Reempla la info del juego.
 	str_html_new.replace("{info_icono}"               , ":icono_rs_"+ datos["Dat_icono"]);
-	str_html_new.replace("{info_titulo}"              , Qt::escape(datos["Dat_titulo"])    );
-	str_html_new.replace("{info_subtitulo}"           , Qt::escape(datos["Dat_subtitulo"]) );
+	str_html_new.replace("{info_titulo}"              , datos["Dat_titulo"]        );
+	str_html_new.replace("{info_subtitulo}"           , datos["Dat_subtitulo"]     );
 	str_html_new.replace("{info_genero}"              , datos["Dat_genero"]        );
 	str_html_new.replace("{info_compania}"            , datos["Dat_compania"]      );
 	str_html_new.replace("{info_desarrollador}"       , datos["Dat_desarrollador"] );
@@ -359,7 +394,7 @@ void frmImportarJuego::mostrarFichaHtml(QHash<QString, QString> datos)
 	str_html_new.replace("{info_graficos}"            , datos["Dat_graficos"]      );
 	str_html_new.replace("{info_sonido}"              , datos["Dat_sonido"]        );
 	str_html_new.replace("{info_jugabilidad}"         , datos["Dat_jugabilidad"]   );
-	str_html_new.replace("{info_original}"            , datos["Dat_original"]      );
+	str_html_new.replace("{info_original}"            , fGrl->StrToBool(datos["Dat_original"]) ? tr("Si") : tr("No"));
 	str_html_new.replace("{info_estado}"              , datos["Dat_estado"]        );
 	str_html_new.replace("{info_thumbs}"              , ":thumb_rs_"+ datos["Dat_thumbs"]);
 	str_html_new.replace("{info_fecha}"               , datos["Dat_fecha"]         );
@@ -629,10 +664,10 @@ void frmImportarJuego::setDatosJuego(QHash<QString, QString> datos)
 	DatosJuego.jugabilidad      = ""+ datos["Dat_jugabilidad"];
 	DatosJuego.original         = ""+ datos["Dat_original"];
 	DatosJuego.estado           = ""+ datos["Dat_estado"];
-	DatosJuego.fecha            = ""+ DatosJuego.fecha.isEmpty() ? fGrl->getTime() : DatosJuego.fecha;
+	DatosJuego.fecha            = ""+ (DatosJuego.fecha.isEmpty() ? fGrl->getTime() : DatosJuego.fecha);
 	TipoEmu                     = datos["Dat_tipo_emu"].isEmpty() ? "datos" : datos["Dat_tipo_emu"];
 	DatosJuego.comentario       = ""+ datos["Dat_comentario"];
-	DatosJuego.favorito         = ""+ datos["Dat_favorito"].isEmpty() ? "false" : datos["Dat_favorito"];
+	DatosJuego.favorito         = ""+ (datos["Dat_favorito"].isEmpty() ? "false" : datos["Dat_favorito"]);
 	DatosJuego.rating           = ""+ datos["Dat_rating"];
 	DatosJuego.edad_recomendada = ""+ datos["Dat_edad_recomendada"];
 	DatosJuego.usuario          = ""+ datos["Dat_usuario"];

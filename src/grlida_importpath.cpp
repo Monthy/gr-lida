@@ -22,6 +22,8 @@
  *
 **/
 
+#include <QDesktopWidget>
+
 #include "grlida_importpath.h"
 
 frmImportPath::frmImportPath(stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent) :

@@ -22,6 +22,9 @@
  *
 **/
 
+#include <QDesktopWidget>
+#include <QMessageBox>
+
 #include "grlida_wizard_vdmsound.h"
 #include "grlida_importar_juego.h"
 #include "ui_wizard_vdmsound.h"

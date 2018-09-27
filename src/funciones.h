@@ -25,6 +25,8 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
+#include <QListWidget>
+#include <QTreeWidget>
 #include <QDialog>
 #include <QtCore>
 #include <QtGui>

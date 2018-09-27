@@ -307,6 +307,7 @@
         <file>img16/archivo_config.png</file>
         <file>img16/archivos.png</file>
         <file>img16/atari.png</file>
+        <file>img16/audio.png</file>
         <file>img16/ayuda.png</file>
         <file>img16/barra_herramintas.png</file>
         <file>img16/basedatos.png</file>
@@ -427,8 +428,10 @@
         <file>img16/mp_eject.png</file>
         <file>img16/mp_pausa.png</file>
         <file>img16/mp_play.png</file>
+        <file>img16/mp_playlist.png</file>
         <file>img16/mp_rebobinar_adelante.png</file>
         <file>img16/mp_rebobinar_atras.png</file>
+        <file>img16/mp_repeat.png</file>
         <file>img16/mp_siguiente.png</file>
         <file>img16/mp_stop.png</file>
         <file>img16/ms-dos.png</file>
@@ -467,6 +470,7 @@
         <file>img16/tray_restore.png</file>
         <file>img16/umd.png</file>
         <file>img16/vdmsound.png</file>
+        <file>img16/video.png</file>
         <file>img16/visor.png</file>
         <file>img16/wii.png</file>
         <file>img16/win9x.png</file>
@@ -474,6 +478,7 @@
         <file>img16/zoom.png</file>
         <file>img16/zoom_in.png</file>
         <file>img16/zoom_out.png</file>
+        <file>img24/audio.png</file>
         <file>img24/basedatos.png</file>
         <file>img24/categorias.png</file>
         <file>img24/datos.png</file>
@@ -487,6 +492,7 @@
         <file>img24/sinimg.png</file>
         <file>img24/style.png</file>
         <file>img24/vdmsound.png</file>
+        <file>img24/video.png</file>
         <file>img32/acercad.png</file>
         <file>img32/archivos.png</file>
         <file>img32/capturas.png</file>

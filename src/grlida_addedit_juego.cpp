@@ -235,12 +235,21 @@ void frmAddEditJuego::cargarConfig()
 
 // Configuración del twDatosFiles
 	ui->twDatosFiles->header()->setStretchLastSection(true);
+#if QT_VERSION >= 0x050000
+	ui->twDatosFiles->header()->setSectionsMovable(false);
+	ui->twDatosFiles->header()->setSectionResizeMode(0, QHeaderView::Interactive);
+	ui->twDatosFiles->header()->setSectionResizeMode(1, QHeaderView::Fixed);
+	ui->twDatosFiles->header()->setSectionResizeMode(2, QHeaderView::Interactive);
+	ui->twDatosFiles->header()->setSectionResizeMode(3, QHeaderView::Interactive);
+	ui->twDatosFiles->header()->setSectionResizeMode(4, QHeaderView::Interactive);
+#else
 	ui->twDatosFiles->header()->setMovable(false);
 	ui->twDatosFiles->header()->setResizeMode(0, QHeaderView::Interactive);
-	ui->twDatosFiles->header()->setResizeMode(1, QHeaderView::Fixed      );
+	ui->twDatosFiles->header()->setResizeMode(1, QHeaderView::Fixed);
 	ui->twDatosFiles->header()->setResizeMode(2, QHeaderView::Interactive);
 	ui->twDatosFiles->header()->setResizeMode(3, QHeaderView::Interactive);
 	ui->twDatosFiles->header()->setResizeMode(4, QHeaderView::Interactive);
+#endif
 	ui->twDatosFiles->setColumnWidth(0, 200 );
 	ui->twDatosFiles->setColumnWidth(1, 65  );
 	ui->twDatosFiles->setColumnWidth(2, 100 );
@@ -249,9 +258,15 @@ void frmAddEditJuego::cargarConfig()
 
 // Configuración del twDatosURL
 	ui->twDatosURL->header()->setStretchLastSection(true);
+#if QT_VERSION >= 0x050000
+	ui->twDatosURL->header()->setSectionsMovable(false);
+	ui->twDatosURL->header()->setSectionResizeMode(0, QHeaderView::Interactive);
+	ui->twDatosURL->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+#else
 	ui->twDatosURL->header()->setMovable(false);
 	ui->twDatosURL->header()->setResizeMode(0, QHeaderView::Interactive);
 	ui->twDatosURL->header()->setResizeMode(1, QHeaderView::Interactive);
+#endif
 	ui->twDatosURL->setColumnWidth(0, 250 );
 
 	fGrl->cargarDatosCheckComboBox(cbxDatos_Genero       , grlDir.Datos + fGrl->Idioma() +"/generos.txt"     , fGrl->Theme() +"img16/"  , "", 2, "|");

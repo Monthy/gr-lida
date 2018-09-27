@@ -22,6 +22,9 @@
  *
 **/
 
+#include <QDesktopWidget>
+#include <QMessageBox>
+
 #include "grlida_wizard_scummvm.h"
 #include "grlida_importar_juego.h"
 #include "ui_wizard_scummvm.h"
@@ -65,10 +68,17 @@ void frmWizardScummVM::cargarConfig()
 	DatosScummVM = fGrl->getDefectScummVM();
 
 	ui->twScummVM->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twScummVM->header()->setSectionsMovable(false);
+	ui->twScummVM->header()->setSectionResizeMode(0, QHeaderView::Fixed);
+	ui->twScummVM->header()->setSectionResizeMode(1, QHeaderView::Stretch);
+	ui->twScummVM->header()->setSectionResizeMode(2, QHeaderView::Fixed);
+#else
 	ui->twScummVM->header()->setMovable(false);
-	ui->twScummVM->header()->setResizeMode(0, QHeaderView::Fixed  );
+	ui->twScummVM->header()->setResizeMode(0, QHeaderView::Fixed);
 	ui->twScummVM->header()->setResizeMode(1, QHeaderView::Stretch);
-	ui->twScummVM->header()->setResizeMode(2, QHeaderView::Fixed  );
+	ui->twScummVM->header()->setResizeMode(2, QHeaderView::Fixed);
+#endif
 	ui->twScummVM->setColumnWidth(0, 30);
 	ui->twScummVM->setColumnWidth(2, 80);
 

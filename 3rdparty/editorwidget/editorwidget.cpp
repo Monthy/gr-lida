@@ -56,6 +56,7 @@
 #include <QXmlStreamAttributes>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include <QMimeData>
 
 static QAction *createAction(const QIcon &icon, const QString &text, const bool checked, QObject *parent = 0)
 {
@@ -207,7 +208,9 @@ void EditorRichText::setDefaultFont(QFont font)
 QString EditorRichText::text(Qt::TextFormat format) const
 {
 	switch (format) {
-	case Qt::LogText:
+#if QT_VERSION < 0x050000
+		case Qt::LogText:
+#endif
 	case Qt::PlainText:
 		return toPlainText();
 	case Qt::RichText:

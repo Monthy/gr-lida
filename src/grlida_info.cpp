@@ -22,6 +22,8 @@
  *
 **/
 
+#include <QDesktopWidget>
+
 #include "grlida_info.h"
 #include "ui_informacion.h"
 
@@ -56,10 +58,16 @@ void frmInfo::cargarConfig()
 {
 // Configuración del twInfo
 	ui->twInfo->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png"));
-	ui->twInfo->header()->setMovable(false);
 	ui->twInfo->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twInfo->header()->setSectionsMovable(false);
+	ui->twInfo->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twInfo->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+#else
+	ui->twInfo->header()->setMovable(false);
 	ui->twInfo->header()->setResizeMode(0, QHeaderView::Stretch);
 	ui->twInfo->header()->setResizeMode(1, QHeaderView::ResizeToContents);
+#endif
 	ui->twInfo->setColumnWidth(1, 60);
 
 	ui->lb_info_grlida->setText( tr("Versión") +" GR-lida" );

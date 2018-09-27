@@ -22,6 +22,8 @@
  *
 **/
 
+#include <QMessageBox>
+
 #include "httpdownload.h"
 #include "ui_login_url.h"
 

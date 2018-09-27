@@ -22,6 +22,8 @@
  *
 **/
 
+#include <QDesktopWidget>
+
 #include "grlida_exportar_juego.h"
 #include "ui_exportar_juego.h"
 
@@ -59,8 +61,12 @@ void frmExportarJuego::cargarConfig()
 {
 // Configuración del twListaJuegos
 	ui->twListaJuegos->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png"));
-	ui->twListaJuegos->header()->setMovable(false);
 	ui->twListaJuegos->header()->setStretchLastSection(true);
+#if QT_VERSION >= 0x050000
+	ui->twListaJuegos->header()->setSectionsMovable(false);
+#else
+	ui->twListaJuegos->header()->setMovable(false);
+#endif
 
 	ui->cbxExpotarComo->clear();
 	ui->cbxExpotarComo->addItem(QIcon(fGrl->Theme() +"img16/gr-lida.png"), "GR-lida (*.xml)"         , "grl"  );

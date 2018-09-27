@@ -22,6 +22,8 @@
  *
 **/
 
+#include <QDesktopWidget>
+
 #include "grlida_update.h"
 #include "qtzip.h"
 #include "ui_update.h"
@@ -61,11 +63,18 @@ void frmUpdate::cargarConfig()
 
 // Configuración del twInfo
 	ui->twUpdates->headerItem()->setIcon(0, QIcon(fGrl->Theme() +"img16/tag.png"));
-	ui->twUpdates->header()->setMovable(false);
 	ui->twUpdates->header()->setStretchLastSection(false);
+#if QT_VERSION >= 0x050000
+	ui->twUpdates->header()->setSectionsMovable(false);
+	ui->twUpdates->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->twUpdates->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+	ui->twUpdates->header()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+#else
+	ui->twUpdates->header()->setMovable(false);
 	ui->twUpdates->header()->setResizeMode(0, QHeaderView::Stretch);
 	ui->twUpdates->header()->setResizeMode(1, QHeaderView::ResizeToContents);
 	ui->twUpdates->header()->setResizeMode(2, QHeaderView::ResizeToContents);
+#endif
 	ui->twUpdates->setColumnWidth(1, 60);
 	ui->twUpdates->setColumnWidth(2, 60);
 

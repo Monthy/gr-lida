@@ -22,6 +22,9 @@
  *
 **/
 
+#include <QDesktopWidget>
+#include <QMessageBox>
+
 #include "grlida_instalar_juego.h"
 #include "ui_instalar_juego.h"
 
