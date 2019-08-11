@@ -3,8 +3,8 @@
 IDI_ICON1		ICON		DISCARDABLE	"gr-lida.ico"
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,11,0,0
- PRODUCTVERSION 0,11,0,0
+ FILEVERSION 0,12,0,0
+ PRODUCTVERSION 0,12,0,0
  FILEFLAGS 0x0L
  FILEFLAGSMASK 0x3fL
  FILEOS 0x00040004L
@@ -15,14 +15,14 @@ BEGIN
     BEGIN
         BLOCK "000004b0"
         BEGIN
-            VALUE "CompanyName", ""
-            VALUE "FileDescription", "GR-lida front-end para DOSBox, ScummVM y VDMSound"
-            VALUE "FileVersion", "0.11.0.0"
-            VALUE "LegalCopyright", "Copyright (C) 2006-2014"
-            VALUE "InternalName", "gr-lida.exe"
-            VALUE "OriginalFilename", "GR-lida.exe"
-            VALUE "ProductName", "GR-lida"
-            VALUE "ProductVersion", "0.11.0.0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "GR-lida front-end para DOSBox, ScummVM y VDMSound\0"
+            VALUE "FileVersion", "0.12.0.0\0"
+            VALUE "LegalCopyright", "Copyright (C) 2006-2016\0"
+            VALUE "InternalName", "gr-lida.exe\0"
+            VALUE "OriginalFilename", "GR-lida.exe\0"
+            VALUE "ProductName", "GR-lida\0"
+            VALUE "ProductVersion", "0.12.0.0\0"
         END
     END
     BLOCK "VarFileInfo"

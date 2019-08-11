@@ -2,9 +2,8 @@
  *
  * GR-dap by Monthy
  *
- * This file is part of GR-dap is Dial-A-Protection and
- * GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * This file is part of GR-dap is Dial-A-Protection
+ * Copyright (C) 2014-2016 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +25,6 @@
 #ifndef GRDAPVIEW_H
 #define GRDAPVIEW_H
 
-#include <QDebug>
 #include <QGraphicsView>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsRectItem>
@@ -77,6 +75,8 @@ public:
 	GrDapView(QWidget *parent = 0);
 	~GrDapView();
 
+	void clearScene();
+
 	void setNewScene(int scene_width = 400, int scene_height = 400, bool ogl = true);
 	void setSpaceScene(int space = 4){scene_space = space;}
 	void setOpenGlScene(bool usar_ogl = true);
@@ -97,14 +97,15 @@ protected:
 #ifndef QT_NO_WHEELEVENT
 	void wheelEvent(QWheelEvent *event);
 #endif
-/*	void dropEvent(QDropEvent *event);
-	void dragMoveEvent(QDragMoveEvent *event);*/
+//	void dropEvent(QDropEvent *event);
+//	void dragMoveEvent(QDragMoveEvent *event);
 
 private:
 	QGraphicsScene *scene;
 
 	QList<GrDapImgItem *> listItems;
-	int scene_space, visor_height, img_pos_x, img_pos_y, zoomSlider, rotateSlider;
+	int scene_space, visor_height, zoomSlider, rotateSlider;
+	qreal img_pos_x, img_pos_y;
 	QPainter::CompositionMode visor_mode;
 	QColor visor_color;
 	QImage visor_img;

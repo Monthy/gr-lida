@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,12 +26,18 @@
 #define GRLIDA_ADDEDIT_JUEGO_H
 
 #include <QDialog>
+#include <QTextEdit>
+#include <QCloseEvent>
 
 #include "funciones.h"
 #include "dbsql.h"
 #include "grlida_addedit_dosbox.h"
 #include "grlida_addedit_scummvm.h"
 #include "grlida_addedit_vdmsound.h"
+#include "grlida_importar_juego.h"
+#include "grlida_multimedia.h"
+#include "grlida_pdf_viewer.h"
+#include "grdap.h"
 #include "qcheckcombobox.h"
 #include "editorwidget/editorwidget.h"
 
@@ -57,16 +63,34 @@ private:
 	Ui::frmAddEditJuego *ui;
 
 	enum tab_datos {
-		tabDOSBox   = 4,
-		tabScummVM  = 5,
-		tabVDMSound = 6
+		tabDatos        = 0,
+		tabDescripcion  = 1,
+		tabMultimedia   = 2,
+		tabOtrosDatos   = 3,
+		tabEjecutabeRom = 4,
+		tabDOSBox       = 5,
+		tabScummVM      = 6,
+		tabVDMSound     = 7
 	};
 
-	QString titulo_ventana(){ return windowTitle(); }
+	enum tipoImagen {
+		t_thumb        = 0,
+		t_cover_front  = 1,
+		t_cover_back   = 2,
+		t_cover_left   = 3,
+		t_cover_right  = 4,
+		t_cover_top    = 5,
+		t_cover_bottom = 6,
+		t_imagenes     = 7,
+		t_capturas     = 8
+	};
 
 	Funciones *fGrl;
 	dbSql *sql;
-	EditorWidget *txtDatos_Comentario;
+	EditorWidget *txtDat_comentario;
+	GrlMultiMedia *mediaVideo, *mediaSound;
+	GrDap *grdap;
+	frmPdfViewer *pdfViewer;
 
 	frmAddEditDosBox *wDbx;
 	frmAddEditScummVM *wSvm;
@@ -77,91 +101,149 @@ private:
 	stGrlCats categoria;
 
 	stDatosJuego DatosJuego;
-	stConfigDOSBox DatosDosBox;
-	stConfigScummVM DatosScummVM;
-	stConfigVDMSound DatosVDMSound;
+//	stConfigDOSBox DatosDosBox;
+//	stConfigScummVM DatosScummVM;
+//	stConfigVDMSound DatosVDMSound;
+	QList<stDatosImagenes> listImagenesAdd;
+	QList<stDatosImagenes> listImagenesImportadas;
+	QStringList listVideosAdd, listSonidosAdd;
 
-	QString IdGame, TipoEmu, oldTitulo, str_html_old;
-	QString Thumbs, CoverFront, CoverBack;
-	QString file_thumbs, file_cover_front, file_cover_back;
+	QString IdGame, TipoEmu/*, TituloGuiones*/, oldTitulo, oldGameDir, oldThumbs;
+//	QString oldPathCapturas;
+	QString Thumbs, CoverFront, CoverBack, CoverLeft, CoverRight, CoverTop, CoverBottom;
+	QString file_thumbs, file_cover_front, file_cover_back, file_cover_left, file_cover_right, file_cover_top, file_cover_bottom;
+	QStringList dap_ext, comic_ext, z_ext;
+	bool Editando, isOpenGrDap, isOpenPdf;
 
-	QHash<QString, stGrlDatos> emu_list;
-	bool Editando;
-
-	QCheckComboBox *cbxDatos_Genero;
-	QCheckComboBox *cbxDatos_Compania;
-	QCheckComboBox *cbxDatos_Desarrollador;
-	QCheckComboBox *cbxDatos_Tema;
-	QCheckComboBox *cbxDatos_Grupo;
-	QCheckComboBox *cbxDatos_Idioma;
-	QCheckComboBox *cbxDatos_IdiomaVoces;
-	QCheckComboBox *cbxDatos_Formato;
-	QCheckComboBox *cbxDatos_Perspectiva;
-	QCheckComboBox *cbxDatos_SistemaOp;
+	QCheckComboBox *cbxDat_genero;
+	QCheckComboBox *cbxDat_compania;
+	QCheckComboBox *cbxDat_desarrollador;
+	QCheckComboBox *cbxDat_tema;
+	QCheckComboBox *cbxDat_grupo;
+	QCheckComboBox *cbxDat_idioma;
+	QCheckComboBox *cbxDat_idioma_voces;
+	QCheckComboBox *cbxDat_formato;
+	QCheckComboBox *cbxDat_perspectiva;
+	QCheckComboBox *cbxDat_sistemaop;
 
 	void createWidgets();
-	void createConnections();
 	void cargarConfig();
 	void setTheme();
 
 	void cargarDatosJuego(stDatosJuego datos, bool isImport = false);
 	bool setDatosJuegos(bool isSoloDatos = false);
-	void comprobarDirCapturas(QString dir_capturas, QString old_titulo, QString new_titulo, QString tipo_emu);
+
+	void asignarImagen(stFileInfo f_info, tipoImagen tipo);
 
 	void enabledUrlUpdate(QString texto, int col);
 	void addEditTwDatosURL(bool isNew);
 
 	void enabledDatosUpdate(QString texto, int col);
 	void addEditTwDatosFiles(bool isNew);
-	void buscarTexto(QString texto, bool anterior = false);
+
+	void cargarParametrosTwList(QTreeWidget *twList, QString parametros);
+	QString getParametrosTwList(QTreeWidget *twList);
 
 private slots:
 	void on_btnOk_clicked();
 	void on_btnCancel_clicked();
 	void on_btnDescargarInfo_clicked();
-	void on_txtDatos_Titulo_editingFinished();
-	void on_cbxDatos_TipoEmu_activated(int index);
-	void on_btnImgAbrir_Thumbs_clicked();
-	void on_btnImgVer_Thumbs_clicked();
-	void on_btnImgEliminar_Thumbs_clicked();
-	void on_btnImgAbrir_CoverFront_clicked();
-	void on_btnImgVer_CoverFront_clicked();
-	void on_btnImgEliminar_CoverFront_clicked();
-	void on_btnImgAbrir_CoverBack_clicked();
-	void on_btnImgVer_CoverBack_clicked();
-	void on_btnImgEliminar_CoverBack_clicked();
+	void on_cbxDat_tipo_emu_activated(int index);
+	void on_btnDat_grupo_add_clicked();
+// Thumbs
+	void on_btnDat_thumbs_crear_clicked();
+	void on_btnDat_thumbs_abrir_clicked();
+	void on_btnDat_thumbs_ver_clicked();
+	void on_btnDat_thumbs_eliminar_clicked();
+// CoverFront
+	void on_btnDat_thumbs_crear__clicked();
+	void on_btnDat_cover_front_abrir_clicked();
+	void on_btnDat_cover_front_ver_clicked();
+	void on_btnDat_cover_front_eliminar_clicked();
+// CoverBack
+	void on_btnDat_cover_back_abrir_clicked();
+	void on_btnDat_cover_back_ver_clicked();
+	void on_btnDat_cover_back_eliminar_clicked();
+// CoverLeft
+	void on_btnDat_cover_left_abrir_clicked();
+	void on_btnDat_cover_left_ver_clicked();
+	void on_btnDat_cover_left_eliminar_clicked();
+// CoverRight
+	void on_btnDat_cover_right_abrir_clicked();
+	void on_btnDat_cover_right_ver_clicked();
+	void on_btnDat_cover_right_eliminar_clicked();
+// CoverTop
+	void on_btnDat_cover_top_abrir_clicked();
+	void on_btnDat_cover_top_ver_clicked();
+	void on_btnDat_cover_top_eliminar_clicked();
+// CoverBottom
+	void on_btnDat_cover_bottom_abrir_clicked();
+	void on_btnDat_cover_bottom_ver_clicked();
+	void on_btnDat_cover_bottom_eliminar_clicked();
+// Multimedia
+	void on_lwImagenes_itemDoubleClicked(QListWidgetItem *item);
+	void on_btnDat_imagenes_add_clicked();
+	void on_btnDat_imagenes_eliminar_clicked();
+	void on_btnDat_imagenes_asignar_clicked();
+
+	void on_lwCapturas_itemDoubleClicked(QListWidgetItem *item);
+	void on_btnDat_capturas_add_clicked();
+	void on_btnDat_capturas_eliminar_clicked();
+
+	void on_btnDat_videos_add_clicked();
+	void on_btnDat_videos_eliminar_clicked();
+
+	void on_btnDat_sonidos_add_clicked();
+	void on_btnDat_sonidos_eliminar_clicked();
+
+	void changeMediaConfig();
 // Otros datos
-	void on_btnDatos_ExeJuego_clicked();
-	void on_btnDatos_ExeJuego_clear_clicked();
-	void on_btnDatos_ParametrosExe_clear_clicked();
-	void on_btnDatos_SetupJuego_clicked();
-	void on_btnDatos_SetupJuego_clear_clicked();
-	void on_btnDatos_ParametrosSetup_clear_clicked();
-	void on_btnDatos_PathCapturas_clicked();
-	void on_btnDatos_PathCapturas_clear_clicked();
+	void on_btnDat_path_exe_clicked();
+	void on_btnDat_path_exe_clear_clicked();
+
+	void on_txtDat_parametros_exe_textEdited(const QString &arg1);
+	void on_txtDat_parametros_exe_valor_textEdited(const QString &arg1);
+	void on_btnDat_parametros_exe_add_clicked();
+	void on_btnDat_parametros_exe_update_clicked();
+	void on_btnDat_parametros_exe_eliminar_clicked();
+	void on_btnDat_parametros_exe_clear_clicked();
+	void on_twDatosParametrosExe_itemClicked(QTreeWidgetItem *item, int column);
+
+	void on_btnDat_path_setup_clicked();
+	void on_btnDat_path_setup_clear_clicked();
+
+	void on_txtDat_parametros_setup_textEdited(const QString &arg1);
+	void on_txtDat_parametros_setup_valor_textEdited(const QString &arg1);
+	void on_btnDat_parametros_setup_add_clicked();
+	void on_btnDat_parametros_setup_update_clicked();
+	void on_btnDat_parametros_setup_eliminar_clicked();
+	void on_btnDat_parametros_setup_clear_clicked();
+	void on_twDatosParametrosSetup_itemClicked(QTreeWidgetItem *item, int column);
 // Direcciones url
 	void on_cbxUrl_url_editTextChanged(const QString &arg1);
 	void on_txtUrl_descripcion_textChanged();
 	void on_cbxUrl_url_activated(int index);
-	void on_btnAddUrl_clicked();
-	void on_btnUpdateUrl_clicked();
-	void on_btnAbrirUrl_clicked();
-	void on_btnDeleteUrl_clicked();
+	void on_btnUrl_add_clicked();
+	void on_btnUrl_update_clicked();
+	void on_btnUrl_abrir_clicked();
+	void on_btnUrl_delete_clicked();
 	void on_twDatosURL_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twDatosURL_itemDoubleClicked(QTreeWidgetItem *item, int column);
 // Datos usuario
-	void on_btnDatos_Usuario_clear_clicked();
+	void on_btnDat_usuario_clear_clicked();
 // Datos archivos
-	void on_txtDatosFiles_PathFile_textEdited(const QString &arg1);
-	void on_txtDatosFiles_FileName_textEdited(const QString &arg1);
-	void on_txtDatosFiles_Comentario_textChanged();
-	void on_btnDatosFiles_PathFile_clicked();
-	void on_btnDatosFiles_PathFile_clear_clicked();
-	void on_btnAddFile_clicked();
-	void on_btnUpdateFile_clicked();
-	void on_btnDeleteFile_clicked();
+	void on_txtFile_path_textEdited(const QString &arg1);
+	void on_txtFile_nombre_textEdited(const QString &arg1);
+	void on_txtFile_descripcion_textChanged();
+	void on_btnFile_path_clicked();
+	void on_btnFile_path_clear_clicked();
+	void on_btnFile_add_clicked();
+	void on_btnFile_update_clicked();
+	void on_btnFile_delete_clicked();
 	void on_twDatosFiles_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twDatosFiles_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
+	void on_txtDat_titulo_editingFinished();
 
 };
 

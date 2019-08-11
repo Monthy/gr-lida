@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 
 #include "funciones.h"
 #include "dbsql.h"
+#include "grlida_importar_juego.h"
 
 namespace Ui {
 	class frmWizardScummVM;
@@ -48,21 +49,28 @@ public:
 private:
 	Ui::frmWizardScummVM *ui;
 
-	QString titulo_ventana(){ return tr("Nuevo juego para el ScummVM"); }
+	QString titulo_ventana(){return tr("Nuevo juego para el ScummVM");}
 
 	Funciones *fGrl;
 	dbSql *sql;
 
-	stDatosJuego DatosJuego;
-	stConfigScummVM DatosScummVM;
-
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
 	stGrlCats categoria;
+
+	stDatosJuego DatosJuego;
+	stConfigScummVM DatosScummVM;
+	QList<stDatosImagenes> listImagenesImportadas;
+
+	QString Thumbs, CoverFront, CoverBack, CoverLeft, CoverRight, CoverTop, CoverBottom;
+	QString file_thumbs, file_cover_front, file_cover_back, file_cover_left, file_cover_right, file_cover_top, file_cover_bottom;
 	int index_wizard;
 
 	void cargarConfig();
 	void setTheme();
+
+	void cargarDatosJuego(stDatosJuego datos);
+	bool setDatosJuegos();
 
 	void setDatosScummVM();
 	void cargarDatosScummVM(stConfigScummVM cfgSvm);
@@ -76,8 +84,8 @@ private slots:
 	void on_twScummVM_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twScummVM_itemDoubleClicked(QTreeWidgetItem *item, int column);
 	void on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-	void on_btnSvm_PathGame_clicked();
-	void on_btnSvm_PathGame_clear_clicked();
+	void on_btnSvm_Path_clicked();
+	void on_btnSvm_Path_clear_clicked();
 	void on_btnSvm_PathSave_clicked();
 	void on_btnSvm_PathSave_clear_clicked();
 	void on_btnDescargarInfo_clicked();
@@ -94,4 +102,4 @@ private slots:
 
 };
 
-#endif // GRLIDA_SVMADD_H
+#endif // GRLIDA_WIZARD_SCUMMVM_H

@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,90 +26,123 @@
 
 GrlPicFlow::GrlPicFlow(QWidget* parent) : PictureFlow(parent)
 {
-	num_pic = 0;
 	updateTimer = new QTimer;
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateImageData()));
 
 	worker = new ImageLoader;
 	connect(this, SIGNAL(centerIndexChanged(int)), this, SLOT(preload()));
+	connect(this, SIGNAL(centerIndexChangedSilent(int)), this, SLOT(preload()));
 
 	setReflectionEffect(PlainReflection);
-	setFlowType( CoverFlowLike );
+	setFlowType(CoverFlowLike);
 }
 
 GrlPicFlow::~GrlPicFlow()
 {
-//	delete worker;	// Crash
+	worker->terminate();
+
+	delete worker;
 	delete updateTimer;
+//	worker->deleteLater();
 }
 
-void GrlPicFlow::setImagePaths(QStringList thumbs_list, QString dir, QString dir_theme)
+void GrlPicFlow::setImagePaths(QList<stListPicFlow> thumbs_list, int index)
 {
-	num_pic = 0;
-
 	clear();
+
 	imageFiles.clear();
+	imageFiles = thumbs_list;
 	imagesLoaded.clear();
+	imagesLoaded.fill(false, imageFiles.size());
 	imagesSetted.clear();
+	imagesSetted.fill(false, imageFiles.size());
 
-	const int listSize = thumbs_list.size();
+	// populate with empty images
+	QImage img; // TODO remove
+	const int listSize = imageFiles.size();
 	for (int i = 0; i < listSize; ++i)
-		addImageSlide(thumbs_list.at(i), dir, dir_theme);
-
+	{
+		addSlide(img, imageFiles.at(i).caption);
+	}
 	numImagesLoaded = 0;
-	setCenterIndex(0);
+
+	setCenterIndex(index);
 	worker->reset();
 	preload();
 }
 
-void GrlPicFlow::addImageSlide(QString thumbs, QString dir, QString dir_theme)
+void GrlPicFlow::addImageSlide(QString thumb, QString caption)
 {
-	addSlide(img);
+// populate with empty images
+	QImage img; //TODO remove
+	addSlide(img, caption);
 
-	if( thumbs.isEmpty() || !QFile::exists(dir + thumbs) )
-		imageFiles.insert(num_pic, dir_theme +"images/juego_sin_imagen.png");
-	else
-		imageFiles.insert(num_pic, dir + thumbs);
+	int listSize = imageFiles.count();
+	stListPicFlow info_picflow;
+	info_picflow.caption = caption;
+	info_picflow.path    = thumb;
 
-	imagesLoaded.insert(num_pic, false);
-	imagesSetted.insert(num_pic, false);
+	imageFiles.insert(listSize, info_picflow);
+	imagesLoaded.insert(listSize, false);
+	imagesSetted.insert(listSize, false);
 
-	++num_pic;
+//	setCenterIndex(listSize);
+	worker->reset();
+	preload();
+}
+
+void GrlPicFlow::setImageSlide(int index, QString thumb, QString caption)
+{
+	imageFiles[index].caption = caption;
+	imageFiles[index].path = thumb;
+	setSlide(index, QPixmap(thumb), caption);
+}
+
+void GrlPicFlow::clearImageSlide()
+{
+	clear();
+	imageFiles.clear();
+	imagesLoaded.clear();
+	imagesSetted.clear();
+	numImagesLoaded = 0;
+
+	worker->reset();
+	preload();
 }
 
 void GrlPicFlow::setPicFlowType(QString picflowtype)
 {
-	if( picflowtype.toLower() == "strip" )
-		setFlowType( Strip );
-	else if( picflowtype.toLower() == "stripoverlapped" )
-		setFlowType( StripOverlapped );
+	if (picflowtype.toLower() == "strip")
+		setFlowType(Strip);
+	else if (picflowtype.toLower() == "stripoverlapped")
+		setFlowType(StripOverlapped);
 	else
-		setFlowType( CoverFlowLike );
+		setFlowType(CoverFlowLike);
 }
 
 void GrlPicFlow::preload()
 {
 	uint img_loaded = imagesLoaded.size();
-	if(numImagesLoaded < img_loaded)
-		updateTimer->start(30); //TODO comprobar rendimiento, originalmente era 70
+	if (numImagesLoaded < img_loaded)
+		updateTimer->start(30); // TODO comprobar rendimiento, originalmente era 70
 }
 
 void GrlPicFlow::updateImageData()
 {
 	// can't do anything, wait for the next possibility
-	if(worker->busy())
+	if (worker->busy())
 		return;
 
 	// set image of last one
 	int idx = worker->index();
-	if( idx >= 0 && !worker->result().isNull())
+	if (idx >= 0 && !worker->result().isNull())
 	{
-		if(!imagesSetted[idx])
+		if (!imagesSetted[idx])
 		{
-			setSlide(idx, worker->result());
+			setSlide(idx, worker->result(), imageFiles.at(idx).caption);
 			imagesSetted[idx] = true;
-			++numImagesLoaded;
-			imagesLoaded[idx] = true;
+			numImagesLoaded++;
+			imagesLoaded[idx]=true;
 		}
 	}
 
@@ -119,20 +152,19 @@ void GrlPicFlow::updateImageData()
 	int indexes[2*COUNT+1];
 	int center = centerIndex();
 	indexes[0] = center;
-	for (int j = 0; j < COUNT; ++j)
+	for (int j = 0; j < COUNT; j++)
 	{
-		indexes[j*2+1] = center+j+1;
-		indexes[j*2+2] = center-j-1;
+		indexes[j * 2 + 1] = center + j + 1;
+		indexes[j * 2 + 2] = center - j - 1;
 	}
-	for (int c = 0; c < 2*COUNT+1; ++c)
+	for (int c = 0; c < 2 * COUNT + 1; c++)
 	{
 		int i = indexes[c];
-		if((i >= 0) && (i < slideCount()))
-			if(!imagesLoaded[i])//slide(i).isNull())
+		if ((i >= 0) && (i < slideCount()))
+			if (!imagesLoaded[i])//slide(i).isNull())
 			{
 				// schedule thumbnail generation
-				QString fname = imageFiles[i];
-//				imagesLoaded[i] = true;
+				QString fname = imageFiles[i].path;
 
 				worker->generate(i, fname, slideSize());
 				return;
@@ -143,9 +175,53 @@ void GrlPicFlow::updateImageData()
 	updateTimer->stop();
 }
 
+void GrlPicFlow::removeSlide(int cover)
+{
+	worker->lock();
+
+	worker->reset();
+
+	imageFiles.removeAt(cover);
+	if (imagesLoaded[cover])
+		numImagesLoaded--;
+	imagesLoaded.remove(cover);
+	imagesSetted.remove(cover);
+
+	PictureFlow::removeSlide(cover);
+	worker->unlock();
+
+	preload();
+}
+
+void GrlPicFlow::resortCovers(QList<int> newOrder)
+{
+	worker->lock();
+	worker->reset();
+
+	PictureFlow::resortCovers(newOrder);
+
+	QList<stListPicFlow> imageFilesNew;
+	QVector<bool> imagesLoadedNew;
+	QVector<bool> imagesSettedNew;
+
+	const int listOrderSize = newOrder.size();
+	for (int i = 0; i < listOrderSize; ++i)
+	{
+		imageFilesNew << imageFiles.at(newOrder.at(i));
+		imagesLoadedNew << imagesLoaded.at(newOrder.at(i));
+		imagesSettedNew << imagesSetted.at(newOrder.at(i));
+	}
+
+	imageFiles = imageFilesNew;
+	imagesLoaded = imagesLoadedNew;
+	imagesSetted = imagesSettedNew;
+
+	worker->unlock();
+}
+
 void GrlPicFlow::wheelEvent(QWheelEvent* event)
 {
-	if( event->delta() < 0 )
+	if (event->delta() < 0)
 	{
 		showNext();
 		emit isActive(true);
@@ -158,12 +234,12 @@ void GrlPicFlow::wheelEvent(QWheelEvent* event)
 
 void GrlPicFlow::mousePressEvent(QMouseEvent* event)
 {
-	if(event->x() > (width()+slideSize().width())/2)
+	if (event->x() > (width()+slideSize().width())/2)
 	{
 		showNext();
 		emit isActive(true);
 	} else {
-		if(event->x() < (width()-slideSize().width())/2)
+		if (event->x() < (width()-slideSize().width())/2)
 		{
 			showPrevious();
 			emit isActive(true);
@@ -174,7 +250,7 @@ void GrlPicFlow::mousePressEvent(QMouseEvent* event)
 
 void GrlPicFlow::mouseDoubleClickEvent(QMouseEvent* event)
 {
-	if((event->x() > (width()-slideSize().width())/2)&&(event->x() < (width()+slideSize().width())/2))
+	if ((event->x() > (width() - slideSize().width()) / 2) && (event->x() < (width() + slideSize().width()) / 2))
 		emit selected(centerIndex());
 }
 
@@ -186,14 +262,14 @@ static QImage loadImage(const QString& fileName)
 	QImage image;
 	bool result = image.load(fileName);
 
-	if(!result)
+	if (!result)
 		return QImage();
 
 	return image;
 }
 
-ImageLoader::ImageLoader():
-QThread(), restart(false), working(false), idx(-1)
+ImageLoader::ImageLoader() :
+	QThread(), restart(false), working(false), idx(-1)
 {
 }
 
@@ -221,12 +297,21 @@ void ImageLoader::generate(int index, const QString& fileName, QSize size)
 
 	if (!isRunning())
 		start();
-	else
-	{
+	else {
 		// already running, wake up whenever ready
 		restart = true;
 		condition.wakeOne();
 	}
+}
+
+void ImageLoader::lock()
+{
+	mutex.lock();
+}
+
+void ImageLoader::unlock()
+{
+	mutex.unlock();
 }
 
 void ImageLoader::run()

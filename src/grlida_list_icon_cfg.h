@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 #define GRLIDA_LIST_ICON_CFG_H
 
 #include <QDialog>
+#include <QTextEdit>
 
 #include "dbsql.h"
 #include "funciones.h"
@@ -41,33 +42,42 @@ class frmListIconCfg : public QDialog
 	Q_OBJECT
 
 public:
-	explicit frmListIconCfg(dbSql *m_sql, stGrlCfg m_cfg, int m_id_cat = 0, QString name_theme = "", QWidget *parent = 0);
+	explicit frmListIconCfg(dbSql *m_sql, stGrlCfg m_cfg, int m_id_cat = 0, QWidget *parent = 0);
 	~frmListIconCfg();
+
+protected:
+	void closeEvent(QCloseEvent *event);
 
 private:
 	Ui::frmListIconCfg *ui;
 
 	Funciones *fGrl;
 	dbSql *sql;
-	GrlListViewDelegate *grl_lv_delegate;
 	CodeEditor *editor;
+
+	GrlTreeViewModel *data_model;
+	GrlTreeViewDelegate *grl_tv_delegate;
+	GrlListViewDelegate *grl_lv_delegate;
 
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
-	stLwIconCfg lwConf, lwConftmp;
-	QStandardItemModel *lv_model;
+	stLwIconCfg lwIconCfg, lwIconCfgtmp;
 
-	unsigned int id_cat;
-	QString textEditDef;
+	QModelIndex select_row;
+	int id_cat, id_theme;
+	QString textEditDef, stTheme, stItem;
 	QHash<int, stGrlCats> categoria;
 	QHash<int, stGrlDatos> themes;
-	QColor title_font_color, title_font_color_select;
+	QList<stGrlDatos> list_emu;
+	QHash<QString, int> list_items;
 
 	void cargarConfig();
 	void setTheme();
-	void cargarListaThemes();
-	void cargarListaCategorias();
 	void setColorBtn(QPushButton *btn, QColor color);
+
+	void cargarListaCategorias();
+	void cargarListaThemes();
+	void cargarListaItems();
 
 	void cargarIconConfig();
 	void guardarIconConfig();
@@ -75,20 +85,25 @@ private:
 
 private slots:
 // Categorias y Themes
-	void on_cbxCategorias_activated(int index);
 	void on_cbxThemes_activated(int index);
+	void on_cbxCategorias_activated(int index);
+	void on_cbxTipoEmu_activated(int index);
 
 // Iconos del treewidget
 	void on_tw_icon_width_valueChanged(int arg1);
 	void on_btn_tw_icon_width_def_clicked();
 	void on_tw_icon_height_valueChanged(int arg1);
 	void on_btn_tw_icon_height_def_clicked();
+	void on_tw_alternating_row_colors_toggled(bool checked);
+	void on_btn_tw_alternating_row_colors_def_clicked();
 
-// Imagenes del picturefow
+// Imágenes del picturefow
 	void on_pf_img_width_valueChanged(int arg1);
 	void on_btn_pf_img_width_def_clicked();
 	void on_pf_img_height_valueChanged(int arg1);
 	void on_btn_pf_img_height_def_clicked();
+	void on_pf_img_fixsize_toggled(bool checked);
+	void on_btn_pf_img_fixsize_def_clicked();
 
 // Iconos de la lista en modo caratula
 	void on_icon_width_valueChanged(int arg1);
@@ -106,6 +121,8 @@ private slots:
 	void on_btn_img_cover_top_pos_x_def_clicked();
 	void on_img_cover_top_pos_y_valueChanged(int arg1);
 	void on_btn_img_cover_top_pos_y_def_clicked();
+	void on_img_cover_top_zindex_clicked(bool checked);
+	void on_btn_img_cover_top_zindex_def_clicked();
 //--
 	void on_img_scaled_clicked(bool checked);
 	void on_btn_img_scaled_def_clicked();
@@ -164,10 +181,16 @@ private slots:
 	void on_btn_title_font_def_clicked();
 	void on_title_font_size_valueChanged(int arg1);
 	void on_btn_title_font_size_def_clicked();
+
+	void on_title_font_pos_activated(int index);
+	void on_btn_title_font_pos_def_clicked();
+
 	void on_btn_title_font_color_clicked();
 	void on_btn_title_font_color_def_clicked();
 	void on_btn_title_font_color_select_clicked();
 	void on_btn_title_font_color_select_def_clicked();
+	void on_title_font_wordwrap_clicked(bool checked);
+	void on_btn_title_font_wordwrap_def_clicked();
 	void on_title_font_bold_clicked(bool checked);
 	void on_btn_title_font_bold_def_clicked();
 	void on_title_font_italic_clicked(bool checked);
@@ -179,11 +202,13 @@ private slots:
 	void on_btnSave_clicked();
 //--
 	void on_cbxListFiles_activated(int index);
+	void on_btnTextDef_clicked();
 	void on_btnSaveText_clicked();
 //--
 	void on_btnOk_clicked();
+	void on_tvJuegos_clicked(const QModelIndex &index);
+	void on_lvJuegos_clicked(const QModelIndex &index);
 
-	void on_btnTextDef_clicked();
 };
 
 #endif // GRLIDA_LIST_ICON_CFG_H

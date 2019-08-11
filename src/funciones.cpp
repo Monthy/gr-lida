@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,19 +22,32 @@
  *
 **/
 
+#include <QObject>
+#include <QDesktopServices>
+#include <QSettings>
+#include <QTextStream>
+#include <QTextCodec>
+#include <QDir>
 #include <QFileDialog>
-#include <QVBoxLayout>
-#include <QTextBrowser>
-#include <QPushButton>
+#include <QFileInfo>
+#include <QFile>
+#include <QFileSystemWatcher>
+#include <QUrl>
+#include <QDateTime>
+#include <QDirIterator>
+#include <QPainter>
+#include <QMessageBox>
 
 #include "funciones.h"
+#include "findfiles.h"
+
+#include <QCryptographicHash>
+#include "crc32qt.h"
 
 Funciones::Funciones()
 {
-	stDirApp    = GRlidaHomePath();
-	stTheme     = Theme();
-	stThemeApp  = ThemeApp();
-	stLngSelect = Idioma();
+	stOS     = "win";
+	stDirApp = homePath();
 }
 
 Funciones::~Funciones()
@@ -42,86 +55,175 @@ Funciones::~Funciones()
 	//
 }
 
-// Compara distintas version y devuelve True si es nueva o mayor
-bool Funciones::version_compare(QString ver_old, QString ver_new)
+// Compara distintas versiones y devuelve True si es nueva o mayor
+stVersion Funciones::version_compare(QString ver_old, QString ver_new)
 {
+	stVersion version;
+	version.isNew = false;
+	version.info  = esIgual;
+
 	QStringList v_old, v_new;
 	v_old = ver_old.split(".");
 	v_new = ver_new.split(".");
 
-	if( v_old.size() < 3 )
+	if (v_old.size() < 3)
 	{
 		int num = 3 - v_old.size();
-		for(int i = 0; i < num; ++i)
+		for (int i = 0; i < num; ++i)
 			v_old.insert(i, "0");
 		ver_old = v_old.join(".");
 	}
 
-	if( v_new.size() < 3 )
+	if (v_new.size() < 3)
 	{
 		int num = 3 - v_new.size();
-		for(int i = 0; i < num; ++i)
+		for (int i = 0; i < num; ++i)
 			v_new.insert(i, "0");
 		ver_new = v_new.join(".");
 	}
 
-	if( v_new.at(0).toInt() > v_old.at(0).toInt() )
-		return true;
+	if (v_new.at(0).toInt() > v_old.at(0).toInt())
+	{
+		version.isNew = true;
+		version.info  = esMayor;
+	}
 	else // Major ver are =
 	{
-		if( v_new.at(1).toInt() > v_old.at(1).toInt() )
-			return true;
-		else // Minor ver are =
+		if (v_new.at(1).toInt() > v_old.at(1).toInt())
 		{
-			if( v_new.at(2).toInt() > v_old.at(2).toInt() )
-				return true;
-			else
-				return false;
+			version.isNew = true;
+			version.info  = esMayor;
+		}
+		else if (v_new.at(1).toInt() == v_old.at(1).toInt()) // Minor ver are =
+		{
+			if (v_new.at(2).toInt() > v_old.at(2).toInt())
+			{
+				version.isNew = true;
+				version.info  = esMayor;
+			} else
+				version.isNew = false;
 		}
 	}
+
+	if (!version.isNew)
+	{
+		if (ver_old == ver_new)
+			version.info = esIgual;
+		else
+			version.info = esMenor;
+	}
+
+	return version;
 }
 
 // Crea una copia de seguridad de la base de datos
 void Funciones::crearCopiaSeguridad_DB(QString dir, QString version_grl)
 {
-	if( version_compare(version_grl, versionGrl()) )
+	uint secs = QDateTime::currentDateTime().toTime_t();
+	comprobarDirectorio(dir +"backup/");
+
+	if (version_compare(version_grl, versionGrl()).isNew)
 	{
-		if( QFile::exists(dir +"db_grl_v"+ version_grl +"_backup.grl") )
-			QFile::copy(dir +"db_grl.grl", dir +"db_grl_v"+ version_grl +"_"+ HoraFechaActual(getTime(), "ddMMyyyy_HHmmss") +"_backup.grl");
+		if (QFile::exists(dir +"backup/db_grl_v"+ version_grl +"_backup.grl"))
+			QFile::copy(dir +"db_grl.grl", dir +"backup/db_grl_v"+ version_grl +"_"+ horaFechaActual(intToStr(secs), "ddMMyyyy_HHmmss") +"_backup.grl");
 		else
-			QFile::copy(dir +"db_grl.grl", dir +"db_grl_v"+ version_grl +"_backup.grl");
+			QFile::copy(dir +"db_grl.grl", dir +"backup/db_grl_v"+ version_grl +"_backup.grl");
 	}
 }
 
 // Convierte de número a texto
-QString Funciones::IntToStr(int num)
+QString Funciones::intToStr(int num)
+{
+	return QVariant(num).toString();
+}
+
+QString Funciones::intToStr(qint64 num)
+{
+	return QVariant(num).toString();
+}
+
+QString Funciones::intToStr(quint64 num)
+{
+	return QVariant(num).toString();
+}
+
+QString Funciones::intToStr(uint num)
 {
 	return QVariant(num).toString();
 }
 
 // Convierte de texto a número
-int Funciones::StrToInt(QString str)
+int Funciones::strToInt(QString str)
 {
 	return str.toInt();
 }
 
 // Convierte texto "true", "yes", "1" a tipo bool
-bool Funciones::StrToBool(QString str)
+bool Funciones::strToBool(QString str)
 {
 	QString value = str.toLower();
-	if( value == "true" || value == "yes" || value == "1" )
+	if (value == "true" || value == "yes" || value == "1")
 		return true;
 	else
 		return false;
 }
 
 // Convierte bool a texto "true", "yes" indicando el tipo
-QString Funciones::BoolToStr(bool estado, bool type_yes)
+QString Funciones::boolToStr(bool estado, bool type_yes)
 {
-	if( estado )
+	if (estado)
 		return type_yes ? "yes": "true";
 	else
 		return type_yes ? "no": "false";
+}
+
+// Devuelve las cordenadas de posición
+int Funciones::getPosition(int posText, bool wordWrap)
+{
+	int pos = Qt::AlignRight | Qt::AlignTop;
+	switch (posText)
+	{
+		case 0: // topLeft
+			pos = Qt::AlignLeft | Qt::AlignTop;
+		break;
+		case 1: // topCenter
+			pos = Qt::AlignHCenter | Qt::AlignTop;
+		break;
+		case 2: // topRight
+			pos = Qt::AlignRight | Qt::AlignTop;
+		break;
+		case 3: // centerLeft
+			pos = Qt::AlignLeft | Qt::AlignVCenter;
+		break;
+		case 4: // center
+			pos = Qt::AlignCenter;
+		break;
+		case 5: // centerRight
+			pos = Qt::AlignRight | Qt::AlignVCenter;
+		break;
+		case 6: // bottomLeft
+			pos = Qt::AlignLeft | Qt::AlignBottom;
+		break;
+		case 7: // bottomCenter
+			pos = Qt::AlignHCenter | Qt::AlignBottom;
+		break;
+		case 8: // bottomRight
+			pos = Qt::AlignRight | Qt::AlignBottom;
+		break;
+	}
+
+	if (wordWrap)
+		return pos | Qt::TextWordWrap;
+	else
+		return pos;
+}
+
+// Devuelve un QImagen en estado desactivado
+QImage Funciones::imagenToDisabled(QString filename)
+{
+	QPixmap pixmap(filename);
+	QIcon icon(pixmap);
+	return icon.pixmap(pixmap.size(), QIcon::Disabled).toImage();
 }
 
 // Devuelve un QColor desde un QStringList o QString
@@ -129,13 +231,13 @@ QColor Funciones::getColor(QStringList color)
 {
 	int r = 0; int g = 0; int b = 0; int a = 255;
 
-	if( color.isEmpty() )
+	if (color.isEmpty())
 		color << "0" << "0" << "0";
 
-	if( color.size() < 4 )
+	if (color.size() < 4)
 	{
 		int pos = color.size();
-		for(int i = pos; i < 3; ++i)
+		for (int i = pos; i < 3; ++i)
 			color.insert(i, "0");
 		color.insert(3, "255");
 	}
@@ -150,7 +252,7 @@ QColor Funciones::getColor(QStringList color)
 
 QColor Funciones::getColor(QString color)
 {
-	return getColor( color.split(",") );
+	return getColor(color.split(","));
 }
 
 // Convierte un QColor a un QStringList o QString
@@ -163,7 +265,7 @@ QStringList Funciones::setColor(QColor color)
 	g = qGreen(color.rgb());
 	b = qBlue(color.rgb());
 
-	list_color << IntToStr(r) << IntToStr(g) << IntToStr(b);
+	list_color << intToStr(r) << intToStr(g) << intToStr(b);
 
 	return list_color;
 }
@@ -173,21 +275,13 @@ QString Funciones::setColorStr(QColor color)
 	return setColor(color).join(",");
 }
 
-// Convierte bytes
-QString Funciones::covertir_bytes(float size)
+// Devuelve valor Script
+QString Funciones::getValueScript(QScriptEngine &engine, QString key, QString str_default)
 {
-	QStringList list;
-	list << "KB" << "MB" << "GB" << "TB";
-	QStringListIterator i(list);
-	QString unidad("bytes");
-
-	while( size >= 1024.0 && i.hasNext() )
-	{
-		unidad = i.next();
-		size /= 1024.0;
-	}
-
-	return QString().setNum(size, 'f', 2) +" "+ unidad;
+	QString str = str_default;
+	if (engine.evaluate(key).isValid())
+		str = engine.evaluate(key).toString();
+	return str;
 }
 
 // Convierte la lista de un QListWidget a QStringList
@@ -205,75 +299,85 @@ QStringList Funciones::lwToStrList(QListWidget *lwlist)
 QString Funciones::getTime()
 {
 	uint secs = QDateTime::currentDateTime().toTime_t();
-	return IntToStr(secs);
-}
-
-// Convierte fecha 'dd/MM/yyyy HH:mm:ss' a formato unix
-QString Funciones::setTime(QString fecha, QString formato)
-{
-	uint secs = QDateTime::fromString(fecha, formato).toTime_t();
-	return IntToStr(secs);
+	return intToStr(secs);
 }
 
 // Devuelve la hora y la fecha
-QString Funciones::HoraFechaActual(QString fecha, QString formato)
+QString Funciones::horaFechaActual(QString fecha, QString formato)
 {
 	QDateTime dt;
-	dt.setTime_t( fecha.toInt() );
+	dt.setTime_t(fecha.toUInt());
 
-	if( formato.isEmpty() )
+	if (formato.isEmpty())
 		return dt.toString("dd/MM/yyyy HH:mm:ss");
 	else
-		return dt.toString( formato );
+		return dt.toString(formato);
 }
 
-// Devuelve una la forma correcta
-QString Funciones::str_correcto(QString str, QString str_ini, QString str_end)
+// Crea y devuelve un listado de fechas desde 1970 a año actual
+QStringList Funciones::listaFechas()
 {
-	if( !str_ini.isEmpty() )
-	{
-		if( !str.startsWith(str_ini, Qt::CaseInsensitive) )
-			str.prepend(str_ini);
-	}
+	QStringList fechas;
+	const int fecha_actual = horaFechaActual(getTime(), "yyyy").toInt()+1;
+	for (int fecha = 1970; fecha < fecha_actual; ++fecha)
+		fechas << intToStr(fecha);
+	return fechas;
+}
 
-	if( !str_end.isEmpty() )
-	{
-		if( !str.endsWith(str_end, Qt::CaseInsensitive) )
-			str.append(str_end);
-	}
+bool Funciones::questionMsg(QString titulo, QString mensaje, QString texto_btn_si, QString texto_btn_no)
+{
+	texto_btn_si = texto_btn_si.isEmpty() ? tr("Si") : texto_btn_si;
+	texto_btn_no = texto_btn_no.isEmpty() ? tr("No") : texto_btn_no;
 
+	int respuesta = QMessageBox::question(0, titulo, mensaje, texto_btn_si, texto_btn_no, 0, 1);
+	if (respuesta == 0)
+		return true;
+	return false;
+}
+
+// Devuelve una forma correcta de parametros
+QString Funciones::getParametrosEXE(QString parametros)
+{
+	QStringList param_list, param_exe;
+	param_list << parametros.split("|:|", QString::SkipEmptyParts);
+
+	const int paramListSize = param_list.size();
+	for (int i = 0; i < paramListSize; ++i)
+		param_exe << param_list[i].replace("|", "");
+
+	return param_exe.join("|");
+}
+
+// Devuelve una forma correcta
+QString Funciones::str_end(QString str, QString str_fin)
+{
+	if (!str_fin.isEmpty())
+	{
+		if (!str.endsWith(str_fin, Qt::CaseInsensitive))
+			str.append(str_fin);
+	}
 	return str;
-}
-
-QString Funciones::str_start(QString str, QString str_ini)
-{
-	return str_correcto(str, str_ini, "");
-}
-
-QString Funciones::str_end(QString str, QString str_end)
-{
-	return str_correcto(str, "", str_end);
 }
 
 // Elimina caracteres no permitidos por windows por ejemplo
 QString Funciones::eliminar_caracteres(QString str, QString cambiar, QString sep)
 {
-	if( str.isEmpty() )
+	if (str.isEmpty())
 		return "";
 	else {
 		str.replace(" " , "_");
-		str.replace("\\", "" );
-		str.replace("/" , "" );
-		str.replace(":" , "" );
-		str.replace("*" , "" );
-		str.replace("?" , "" );
-		str.replace("\"", "" );
-		str.replace("<" , "" );
-		str.replace(">" , "" );
-		str.replace("|" , "" );
-		str.replace("." , "" );
+		str.replace("\\", "");
+		str.replace("/" , "");
+		str.replace(":" , "");
+		str.replace("*" , "");
+		str.replace("?" , "");
+		str.replace("\"", "");
+		str.replace("<" , "");
+		str.replace(">" , "");
+		str.replace("|" , "");
+		str.replace("." , "");
 
-		if( !cambiar.isEmpty() )
+		if (!cambiar.isEmpty())
 		{
 			QStringList lista = cambiar.split(sep, QString::SkipEmptyParts);
 			const int listSize = lista.size();
@@ -285,64 +389,18 @@ QString Funciones::eliminar_caracteres(QString str, QString cambiar, QString sep
 	}
 }
 
-// Devuelve si el archivos admiten traducción
-QString Funciones::getArchivoIsLng(QString archivo)
-{
-	QStringList lista;
-	lista << "edad_recomendada.txt" << "formatos.txt" << "generos.txt" << "idiomas.txt";
-	lista << "numdisc.txt" << "perspectivas.txt" << "svm_idioma.txt" << "temas.txt";
-
-	if( lista.contains(archivo) )
-	{
-		if( stLngSelect.isEmpty() )
-			stLngSelect = Idioma();
-
-		return stLngSelect +"/";
-	} else
-		return "";
-}
-
-// Devuelve si el archivos es de 3 columnas
-bool Funciones::getArchivoIs3Col(QString archivo)
-{
-	QStringList lista;
-	lista << "dbx_scaler.txt" << "dbx_scaler_svn.txt" << "dbx_sbtype.txt" << "dbx_sb_oplmode.txt" << "dbx_output.txt" << "dbx_output_svn.txt" << "dbx_machine.txt" << "dbx_machine_svn.txt";
-	lista << "dbx_joystick.txt" << "dbx_cpu_type.txt" << "dbx_cpu_type_svn.txt" << "dbx_cpu_core.txt" << "svm_render_mode.txt" << "svm_platform.txt";
-	lista << "svm_music_driver.txt" << "svm_gfxmode.txt" << "edad_recomendada.txt";// << "dbx_keyboardlayout.txt";
-	lista << "svm_idioma.txt" << "idiomas.txt";
-
-	if( lista.contains(archivo) )
-		return true;
-	else
-		return false;
-}
-
-// Busca y obtiene la ruta de un archivo
-QString Funciones::getFindFile(QString dir, QString filename)
-{
-	QString resultado = "";
-	QDirIterator iterator(dir, QDirIterator::Subdirectories);
-	while (iterator.hasNext())
-	{
-		iterator.next();
-		if( !iterator.fileInfo().isDir() )
-		{
-			QString file_name = iterator.fileName().toLower();
-			if( file_name == filename )
-			{
-				resultado = QDir::toNativeSeparators( iterator.filePath() );
-				break;
-			}
-		}
-	}
-	return resultado;
-}
-
 // Obtiene una la lista de archivos
-QFileInfoList Funciones::getListFiles(QString dir, QStringList filter)
+QFileInfoList Funciones::getListFiles(QString dir, QStringList filter, bool isSubDir)
 {
-	QDir m_dir( dir );
-	return m_dir.entryInfoList(filter, QDir::Files | QDir::Readable | QDir::Hidden | QDir::NoDotAndDotDot | QDir::NoSymLinks, QDir::Name);
+	QFileInfoList list;
+	QDirIterator it(dir, filter, QDir::Files | QDir::Readable | QDir::Hidden | QDir::NoDotAndDotDot | QDir::NoSymLinks, (isSubDir ? QDirIterator::Subdirectories : QDirIterator::NoIteratorFlags));
+	while (it.hasNext())
+	{
+		it.next();
+		if (!it.fileInfo().isDir())
+			list << it.fileInfo();
+	}
+	return list;
 }
 
 // Obtiene información del archivo
@@ -350,7 +408,7 @@ stFileInfo Funciones::getInfoFile(QString filename, TipoHash hash)
 {
 	stFileInfo info;
 
-	if( filename.isEmpty() )
+	if (filename.isEmpty())
 	{
 		info.Drive    = "";
 		info.Path     = "";
@@ -366,36 +424,39 @@ stFileInfo Funciones::getInfoFile(QString filename, TipoHash hash)
 		info.Sha1     = "";
 		info.Md5      = "";
 	} else {
-		QFileInfo fi( filename );
+		QFileInfo fi(filename);
+
 		#ifdef Q_OS_WIN32
-			info.Drive = filename.left(2) +"\\";
+			info.Drive = filename.left(2) +"/";
 		#else
 			info.Drive = "/";
 		#endif
-		if( fi.absolutePath().endsWith("/") || fi.absolutePath().endsWith("\\") )
-			info.Path = QDir::toNativeSeparators( fi.absolutePath() );
+
+		if (fi.absolutePath().endsWith("/"))
+			info.Path = fi.absolutePath();
 		else
-			info.Path = QDir::toNativeSeparators( fi.absolutePath().append("/") );
+			info.Path = fi.absolutePath().append("/");
+
 		info.FilePath = info.Path + fi.fileName();
 		info.Name     = fi.baseName();
 		info.NameExt  = fi.fileName();
 		info.cExt     = "."+ fi.completeSuffix().toLower();
 		info.Ext      = "."+ fi.suffix().toLower();
-		info.Size     = IntToStr( fi.size() );
+		info.Size     = intToStr(fi.size());
 		info.Exists   = fi.exists();
-		info.isDir = fi.isDir();
+		info.isDir    = fi.isDir();
 
-		if( hash == hashCrc32 || hash == hashAll )
+		if (hash == hashCrc32 || hash == hashAll)
 			info.Crc32 = getHashFile(filename, hashCrc32);
 		else
 			info.Crc32 = "00000000";
 
-		if( hash == hashSha1 || hash == hashAll )
+		if (hash == hashSha1 || hash == hashAll)
 			info.Sha1 = getHashFile(filename, hashSha1);
 		else
 			info.Sha1 = "";
 
-		if( hash == hashMd5 || hash == hashAll )
+		if (hash == hashMd5 || hash == hashAll)
 			info.Md5 = getHashFile(filename, hashMd5);
 		else
 			info.Md5 = "";
@@ -407,21 +468,21 @@ stFileInfo Funciones::getInfoFile(QString filename, TipoHash hash)
 // Obtiene el Hash del archivo
 QString Funciones::getHashFile(QString filename, TipoHash hash)
 {
-	if( hash == hashCrc32 )
+	if (hash == hashCrc32)
 	{
 		Crc32Qt crc;
 		return crc.getCRC32toString(filename);
 	} else {
 		QCryptographicHash::Algorithm tipoAlgorithm = QCryptographicHash::Sha1;
-		if( hash == hashMd5 )
+		if (hash == hashMd5)
 			tipoAlgorithm = QCryptographicHash::Md5;
 		else
 			tipoAlgorithm = QCryptographicHash::Sha1;
 
 		QCryptographicHash crypto(tipoAlgorithm);
-		QFile file( filename );
+		QFile file(filename);
 		file.open(QFile::ReadOnly);
-		while( !file.atEnd() )
+		while (!file.atEnd())
 			crypto.addData(file.read(8192));
 		file.close();
 
@@ -429,38 +490,63 @@ QString Funciones::getHashFile(QString filename, TipoHash hash)
 	}
 }
 
-// Devuelve un icono montaje
-QString Funciones::getIconMount(QString theme, QString tipoDrive, QString select_mount)
+// Devuelve un icono de montaje
+QString Funciones::getIconMount(QString tipoDrive, QString select_mount)
 {
-	if( tipoDrive == "drive" )
-		return theme +"img16/"+ select_mount +"drive_hd.png";
-	else if( tipoDrive == "cdrom" )
-		return theme +"img16/"+ select_mount +"drive_cdrom.png";
-	else if( tipoDrive == "floppy" )
-		return theme +"img16/"+ select_mount +"drive_floppy.png";
-	else if( tipoDrive == "IMG_floppy" )
-		return theme +"img16/"+ select_mount +"floppy_1.png";
-	else if( tipoDrive == "IMG_iso" )
-		return theme +"img16/"+ select_mount +"cd_iso.png";
-	else if( tipoDrive == "IMG_multi_iso" )
-		return theme +"img16/"+ select_mount +"cd_multi_iso.png";
-	else if( tipoDrive == "IMG_hdd" )
-		return theme +"img16/"+ select_mount +"drive_hd.png";
-	else if( tipoDrive == "boot" )
-		return theme +"img16/"+ select_mount +"floppy_2.png";
+	if (tipoDrive == "drive")
+		return stTheme +"img16/"+ select_mount +"drive_hd.png";
+	else if (tipoDrive == "cdrom")
+		return stTheme +"img16/"+ select_mount +"drive_cdrom.png";
+	else if (tipoDrive == "floppy")
+		return stTheme +"img16/"+ select_mount +"drive_floppy.png";
+	else if (tipoDrive == "IMG_floppy")
+		return stTheme +"img16/"+ select_mount +"floppy_1.png";
+	else if (tipoDrive == "IMG_iso")
+		return stTheme +"img16/"+ select_mount +"cd_iso.png";
+	else if (tipoDrive == "IMG_multi_iso")
+		return stTheme +"img16/"+ select_mount +"cd_multi_iso.png";
+	else if (tipoDrive == "IMG_hdd")
+		return stTheme +"img16/"+ select_mount +"drive_hd.png";
+	else if (tipoDrive == "boot")
+		return stTheme +"img16/"+ select_mount +"floppy_2.png";
 	else
-		return theme +"img16/sinimg.png";
+		return stTheme +"img16/sinimg.png";
+}
+
+// Crear Thumbs
+// format  = BMP, JPG, JPEG, PNG
+// quality = -1 = defecto, 0 a 100 peor a mejor calidad
+bool Funciones::crearThumbs(QString origen, QString destino, int width, int height, int quality, bool ignoreAspectRatio, QString format)
+{
+	QImage img_src(origen);
+
+	if (img_src.width() > width || img_src.height() > height)
+		img_src = img_src.scaled(QSize(width, height), (ignoreAspectRatio ? Qt::IgnoreAspectRatio : Qt::KeepAspectRatio), Qt::SmoothTransformation);
+
+	QImage img_final(QSize(img_src.width(), img_src.height()), QImage::Format_ARGB32_Premultiplied);
+	QPainter painter(&img_final);
+
+//	painter.fillRect(img_final.rect(), (strcmp(format, "PNG") ? Qt::transparent : Qt::white));
+	if (format.toUpper() == "PNG")
+		painter.fillRect(img_final.rect(), Qt::transparent);
+	else
+		painter.fillRect(img_final.rect(), Qt::white);
+
+	painter.drawImage(img_src.rect(), img_src);
+	painter.end();
+
+	return img_final.save(destino, format.toUpper().toStdString().c_str(), quality);
 }
 
 // Leer archivo de texto
 QString Funciones::leerArchivo(QString filename, const QByteArray code)
 {
 	QString lineas;
-	QFile file_in( filename );
-	if( file_in.open(QIODevice::ReadOnly | QIODevice::Text) )
+	QFile file_in(filename);
+	if (file_in.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		QTextStream in( &file_in );
-		if( !code.isEmpty() )
+		QTextStream in(&file_in);
+		if (!code.isEmpty())
 			in.setCodec(QTextCodec::codecForName(code));
 		lineas = in.readAll();
 	} else
@@ -470,138 +556,279 @@ QString Funciones::leerArchivo(QString filename, const QByteArray code)
 	return lineas;
 }
 
-// Copia un archivo de un directorio a otro.
-bool Funciones::copiarArchivo(QString origen, QString destino, bool permisos, bool sobrescribir)
+// Guarda archivo de texto
+bool Funciones::guardarArchivo(QString filename, QString txt_out, const QByteArray code)
 {
-	QFile f_name(destino);
-	if( sobrescribir && f_name.exists() )
-		f_name.remove();
-	bool isOk = f_name.copy(origen, destino);
-	if( permisos )
-		f_name.setPermissions(QFile::ReadOwner | QFile::ReadUser | QFile::ReadGroup | QFile::ReadOther |
-							  QFile::WriteOwner | QFile::WriteUser | QFile::WriteGroup | QFile::WriteOther);
+	bool isOk = false;
+	QFile file_out(filename);
+	if (file_out.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		QTextStream out(&file_out);
+		if (!code.isEmpty())
+			out.setCodec(QTextCodec::codecForName(code));
+	//	out.setCodec("ISO 8859-1"); // ANSI
+		out << txt_out << endl;
+		out.flush();
+		isOk = true;
+	}
+	file_out.close();
+
 	return isOk;
 }
-/*
-// Comprueba el archivo y si existe aumenta un digito
-QString Funciones::comprobarArchivo(QString dir, QString filename)
+
+// Copia o mueve un archivo de un directorio a otro
+bool Funciones::opArchivo(QString origen, QString destino, bool mover, bool permisos, bool sobrescribir, bool preguntar)
 {
-	if( QFile::exists(dir + filename) )
+	bool siguiente = false;
+	bool isOk = false;
+
+	QFile f_name(destino);
+	if (f_name.exists())
 	{
-		int i = 1;
-		filename.remove(0, 1);
-		while( QFile::exists(dir + fGrl.IntToStr(i) + filename ) )
-			++i;
-		filename.prepend(fGrl.IntToStr(i));
-	}
-	return filename;
+		if (sobrescribir)
+		{
+			f_name.remove();
+			siguiente = true;
+		} else {
+			if (preguntar)
+			{
+				if (questionMsg("¿Sobrescribir?", "¿El archivo '"+ f_name.fileName() +"' ya existe quieres sobrescribirlo?"))
+				{
+					f_name.remove();
+					siguiente = true;
+				} else
+					siguiente = false;
+			} else
+				siguiente = false;
+		}
+	} else
+		siguiente = true;
+
+	if (siguiente)
+	{
+		if (mover)
+			isOk = f_name.rename(origen, destino);
+		else
+			isOk = f_name.copy(origen, destino);
+
+		if (permisos)
+			f_name.setPermissions(QFile::ReadOwner | QFile::ReadUser | QFile::ReadGroup | QFile::ReadOther |
+								  QFile::WriteOwner | QFile::WriteUser | QFile::WriteGroup | QFile::WriteOther);
+	} else
+		isOk = false;
+
+
+	f_name.close();
+	return isOk;
 }
-*/
+
+// Copia o mueve varios archivos de un directorio a otro
+void Funciones::opArchivos(QString dir_old, QString dir_new, QString filter, QString filter_sep, bool mover, bool permisos, bool sobrescribir, bool preguntar)
+{
+	QFileInfoList list_files = getListFiles(dir_old, filter.split(filter_sep, QString::SkipEmptyParts));
+	const int listSize = list_files.size();
+	for (int i = 0; i < listSize; ++i)
+	{
+		opArchivo(dir_old + list_files.at(i).fileName(), dir_new + list_files.at(i).fileName(), mover, permisos, sobrescribir, preguntar);
+	}
+
+	list_files.clear();
+}
+
+// Copia un archivo de un directorio a otro
+bool Funciones::copiarArchivo(QString origen, QString destino, bool permisos, bool sobrescribir, bool preguntar)
+{
+	return opArchivo(origen, destino, false, permisos, sobrescribir, preguntar);
+}
+
+// Copia varios archivos de un directorio a otro
+void Funciones::copiarArchivos(QString dir_old, QString dir_new, QString filter, QString filter_sep, bool permisos, bool sobrescribir, bool preguntar)
+{
+	opArchivos(dir_old, dir_new, filter, filter_sep, false, permisos, sobrescribir, preguntar);
+}
+
+// Mueve un archivo de un directorio a otro
+bool Funciones::moverArchivo(QString origen, QString destino, bool permisos, bool sobrescribir, bool preguntar)
+{
+	return opArchivo(origen, destino, true, permisos, sobrescribir, preguntar);
+}
+
+// Mueve varios archivos de un directorio a otro
+void Funciones::moverArchivos(QString dir_old, QString dir_new, QString filter, QString filter_sep, bool permisos, bool sobrescribir, bool preguntar)
+{
+	opArchivos(dir_old, dir_new, filter, filter_sep, true, permisos, sobrescribir, preguntar);
+}
+
+// Elimina archivos de un directorio
+bool Funciones::eliminarArchivo(QString nameFile)
+{
+	QFile archivo;
+	bool isOk = false;
+
+	if (archivo.exists(nameFile))
+		isOk = archivo.remove(nameFile);
+
+	return isOk;
+}
+
+void Funciones::eliminarArchivos(QFileInfoList list_files)
+{
+	const int listSize = list_files.size();
+	if (listSize > -1)
+	{
+		for (int i = 0; i < listSize; ++i)
+			eliminarArchivo(list_files.at(i).absoluteFilePath());
+	}
+}
+
 // Elimina un directorio si existe
-bool Funciones::eliminarDirectorio(QString nameDir)
+bool Funciones::eliminarDirectorio(QString dir)
 {
 	QDir directorio;
-	if( directorio.exists( nameDir ) )
-		return directorio.rmdir( nameDir );
-	else
+	if (directorio.exists(dir))
+	{
+		if (directorio.isReadable())
+			return directorio.rmdir(dir);
+		else
+			return false;
+	} else
 		return false;
 }
 
-// Renombra un directorio existe
-void Funciones::renombrarDirectorio(QString oldName, QString newName)
+// Renombra un directorio si existe
+bool Funciones::renombrarDirectorio(QString dir_old, QString dir_new)
 {
 	QDir directorio;
-	if( directorio.exists( oldName ) )
-		directorio.rename( oldName, newName );
+	if (directorio.exists(dir_old))
+		return directorio.rename(dir_old, dir_new);
 	else
-		comprobarDirectorio( newName );
+		return comprobarDirectorio(dir_new);
 }
 
 // Comprueba si un directorio existe y sino lo crea
-bool Funciones::comprobarDirectorio(QString nameDir, bool info)
+bool Funciones::comprobarDirectorio(QString dir, bool info)
 {
-	if( !nameDir.isEmpty() )
+	if (!dir.isEmpty())
 	{
 		QDir directorio;
-		if( directorio.exists( nameDir ) )
+		if (directorio.exists(dir))
 			return true;
 		else {
-			if( info )
+			if (info)
 				return false;
 			else
-				return directorio.mkpath( nameDir );
+				return directorio.mkpath(dir);
 		}
 	} else
 		return false;
 }
 
-// Devuelve el directorio que usa el GR-lida
-QString Funciones::GRlidaHomePath()
+// Comprueba si un directorio si termina o empieza con barra o si ella
+bool Funciones::comprobarBarraPath(QString dir, bool inicio, bool addChkSlashIni)
 {
-	QSettings settings;
+	bool tieneBarra = false;
+	QStringList list;
+	list << "\\" << "/";
+	if (inicio && addChkSlashIni)
+		list << ".\\" << "./";
+
+	int i = 0;
+	while (i < list.size() && !tieneBarra)
+	{
+		if (inicio)
+		{
+			if (dir.endsWith(list.at(i)))
+				tieneBarra = true;
+			else
+				i++;
+		} else {
+			if (dir.startsWith(list.at(i)))
+				tieneBarra = true;
+			else
+				i++;
+		}
+	}
+	return tieneBarra;
+}
+
+// Compara dos estructuras stGrlDatos si son iguales.
+bool Funciones::compararStGrlDatos(stGrlDatos a, stGrlDatos b)
+{
+	bool sonIguales = true;
+
+	if (a.titulo != b.titulo)
+		sonIguales = false;
+//	if (a.icono != b.icono)
+//		sonIguales = false;
+	if (a.key != b.key)
+		sonIguales = false;
+	if (a.extra != b.extra)
+		sonIguales = false;
+	if (a.version != b.version)
+		sonIguales = false;
+	if (a.issvn != b.issvn)
+		sonIguales = false;
+
+	return sonIguales;
+}
+
+// Devuelve el directorio que usa el GR-lida
+QString Funciones::homePath()
+{
 	QDir dirGrl;
 	bool isWinOrMac = false;
 	stDirApp    = "";
 	stTheme     = "";
 	stLngSelect = "";
 
-	if( QFile::exists(QDir::currentPath() +"/GR-lida.conf") )
-	{
+	if (QFile::exists(QDir::currentPath() +"/GR-lida.conf"))
 		stDirApp = QDir::currentPath() +"/";
-
-		settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
-		settings.beginGroup("OpcGeneral");
-			setTheme( settings.value("NameDirTheme", "defecto").toString() );
-			setIdioma( settings.value("IdiomaSelect", "es_ES").toString() );
-		settings.endGroup();
-	} else {
+	else {
 		#ifdef Q_OS_WIN32
 			isWinOrMac = true;
+			stOS = "win";
 		#else
 			#ifdef Q_OS_MAC
 				isWinOrMac = true;
+				stOS = "mac";
 			#else
 				isWinOrMac = false;
+				stOS = "linux";
 			#endif
 		#endif
 
-		if( isWinOrMac )
+		if (isWinOrMac)
 		{
 			stDirApp = QDir::homePath() +"/GR-lida/";
-			if( dirGrl.exists(QDir::homePath() +"/.gr-lida/") )
-			{
+			if (dirGrl.exists(QDir::homePath() +"/.gr-lida/"))
 				dirGrl.rename(QDir::homePath() +"/.gr-lida/", QDir::homePath() +"/GR-lida/");
-
-				settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
-				settings.beginGroup("SqlDatabase");
-					QString fileDb = settings.value("db_host", "./db_grl.grl").toString();
-				settings.endGroup();
-
-				QFileInfo info_db( getDirRelative(fileDb) );
-				guardarKeyGRLConfig(stDirApp +"GR-lida.conf", "SqlDatabase", "db_host", setDirRelative(stDirApp + info_db.fileName()));
-			}
-
-			settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
-			settings.beginGroup("OpcGeneral");
-				setTheme( settings.value("NameDirTheme", "defecto").toString() );
-				setIdioma( settings.value("IdiomaSelect", "es_ES").toString() );
-			settings.endGroup();
-		} else {
+		} else
 			stDirApp = QDir::homePath() +"/.gr-lida/";
-
-			settings.setPath(QSettings::IniFormat, QSettings::UserScope, stDirApp +"GR-lida.conf");
-			settings.beginGroup("OpcGeneral");
-				setTheme( settings.value("NameDirTheme", "defecto").toString() );
-				setIdioma( settings.value("IdiomaSelect", "es_ES").toString() );
-			settings.endGroup();
-		}
 	}
+
+	QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
+	settings.beginGroup("SqlDatabase");
+		QFileInfo info_db(getDirRelative(settings.value("db_host", "./db_grl.grl").toString()));
+		settings.setValue("db_host", setDirRelative(stDirApp + info_db.fileName()));
+	settings.endGroup();
+	settings.beginGroup("OpcGeneral");
+		setTheme(settings.value("NameDirTheme", "defecto").toString());
+		setIdioma(settings.value("IdiomaSelect", "es_ES").toString());
+	settings.endGroup();
 
 	return stDirApp;
 }
 
-
 // Rutas relativas
+QString Funciones::getRelative(QString dir, QString dir_relative)
+{
+	int pos_path = dir.indexOf(dir_relative);
+	if (pos_path > -1)
+		return "./"+ dir.remove(0, pos_path);
+	else
+		return  dir;
+}
+
 QString Funciones::setDirRelative(QString dir, QString dir_relative)
 {
 	dir.replace("\\", "/");
@@ -697,169 +924,297 @@ QString Funciones::getDirRelative(QString dir, QString dir_relative)
 void Funciones::setTheme(QString theme)
 {
 	QDir themeDir;
-
-	if( theme.toLower() == "defecto" || theme.isEmpty() )
-	{
-		stTheme = ":/";
-	} else {
-		if( themeDir.exists(stDirApp +"themes/"+ theme +"/") )
-			stTheme = stDirApp +"themes/"+ theme +"/";
-		else
-			stTheme = ":/";
-	}
-
-	if( stTheme == ":/" )
-		stThemeApp = stDirApp +"themes/defecto/";
+	if (theme.toLower() == "defecto" || theme.isEmpty())
+		stTheme = stDirApp +"themes/defecto/";
 	else
-		stThemeApp = stTheme;
+		stTheme = stDirApp +"themes/"+ theme +"/";
+
+	if (!themeDir.exists(stTheme))
+		stTheme = ":/";
 }
 
+// Devuelve el directorio del Idioma a usar
 void Funciones::setIdioma(QString lng)
 {
-	if( lng.isEmpty() )
+	if (lng.isEmpty())
 		stLngSelect = "es_ES";
 	else {
 		QStringList lngs;
 		lngs << "da_DK" << "en_EN" << "es_ES" << "fr_FR" << "hu_HU" << "ru_RU";
-
-		if( lngs.contains(lng) )
-			stLngSelect = lng;
-		else
-			stLngSelect = "es_ES";
+		stLngSelect = lngs.contains(lng) ? lng : "es_ES";
 	}
 }
 
-// Carga la hoja de estilo y reemplazando el comodin <theme> por el que se use
-QString Funciones::myStyleSheet(bool isList)
+// Carga la hoja de estilo y reemplaza el comodin <theme> por la ruta del theme que se use
+QString Funciones::myStyleSheet(QString file_style)
 {
-	if( isList )
-		return leerArchivo(stThemeApp +"StyleSheetList.qss", "UTF-8").replace("<theme>", stThemeApp) +"\n";
+	QString archivo = leerArchivo(stTheme + file_style, "UTF-8");
+	archivo.replace("<theme>", stTheme);
+//	archivo.replace("<bgimagen>", stTheme);
+	return archivo +"\n";
+}
+
+QString Funciones::tplInfoJuego(QString file_tpl)
+{
+	QString tpl = "";
+	if (QFile::exists(stTheme + file_tpl +".html"))
+		tpl = leerArchivo(stTheme + file_tpl +".html", "UTF-8");
 	else
-		return leerArchivo(stThemeApp +"StyleSheet.qss", "UTF-8").replace("<theme>", stThemeApp) +"\n";
+		tpl = leerArchivo(":/"+ file_tpl +".html", "UTF-8");
+	tpl.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
+
+	QString tpl_css = "";
+	if (QFile::exists(stTheme + file_tpl +".css"))
+		tpl_css = leerArchivo(stTheme + file_tpl +".css", "UTF-8");
+	else
+		tpl_css = leerArchivo(":/"+ file_tpl +".css", "UTF-8");
+	tpl_css.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
+
+	tpl.replace("{tpl_css}", tpl_css);
+
+	if (file_tpl.toLower() == "tpl_info_juego")
+	{
+	// Reempla las etiquetas
+		tpl.replace("{lb_cover_front}"     , tr("Carátula frontal")  );
+		tpl.replace("{lb_detalles_juego}"  , tr("Detalles del juego"));
+		tpl.replace("{lb_calificacion}"    , tr("Calificación")      );
+		tpl.replace("{lb_otros_datos}"     , tr("Otros datos")       );
+		tpl.replace("{lb_usuario}"         , tr("Subido por")        );
+		tpl.replace("{lb_subtitulo}"       , tr("Subtítulo")         );
+		tpl.replace("{lb_compania}"        , tr("Publicado por")     );
+		tpl.replace("{lb_desarrollador}"   , tr("Desarrollado por")  );
+		tpl.replace("{lb_anno}"            , tr("Publicado")         );
+		tpl.replace("{lb_edad_recomendada}", tr("Edad recomendada")  );
+		tpl.replace("{lb_idioma}"          , tr("Idioma")            );
+		tpl.replace("{lb_idioma_voces}"    , tr("Idioma voces")      );
+		tpl.replace("{lb_formato}"         , tr("Formato")           );
+		tpl.replace("{lb_genero}"          , tr("Genero")            );
+		tpl.replace("{lb_tema}"            , tr("Tema")              );
+		tpl.replace("{lb_grupo}"           , tr("Grupo")             );
+		tpl.replace("{lb_perspectiva}"     , tr("Perspectiva")       );
+		tpl.replace("{lb_sistemaop}"       , tr("Sistema operativo") );
+		tpl.replace("{lb_favorito}"        , tr("Favorito")          );
+		tpl.replace("{lb_gamepad}"         , tr("Joystick") +"/"+ tr("GamePad"));
+		tpl.replace("{lb_fecha}"           , tr("Añadido el")        );
+		tpl.replace("{lb_graficos}"        , tr("Gráficos")          );
+		tpl.replace("{lb_sonido}"          , tr("Sonido")            );
+		tpl.replace("{lb_jugabilidad}"     , tr("Jugabilidad")       );
+		tpl.replace("{lb_original}"        , tr("Original")          );
+		tpl.replace("{lb_estado}"          , tr("Estado")            );
+		tpl.replace("{lb_tipo_emu}"        , tr("Tipo Emu")          );
+		tpl.replace("{lb_comentario}"      , tr("Descripción")       );
+		tpl.replace("{lb_rating}"          , tr("Rating")            );
+		tpl.replace("{lb_numdisc}"         , tr("Nº discos")         );
+	}
+	else if (file_tpl.toLower() == "tpl_info_media")
+	{
+		tpl.replace("{lb_titulo}"      , tr("Título")       );
+		tpl.replace("{lb_album_title}" , tr("Título album") );
+		tpl.replace("{lb_album_artist}", tr("Artista album"));
+	} else {
+
+	}
+
+	return tpl;
+}
+
+// Lista los gupos para la configuración de los iconos
+QStringList Funciones::listItemIconConf(QString iniFileName)
+{
+	QStringList list_group;
+	QSettings settings(iniFileName, QSettings::IniFormat);
+	const int listSize = settings.childGroups().size();
+	for (int i = 0; i < listSize; ++i)
+	{
+		if (settings.childGroups().at(i).startsWith("item_"))
+			list_group << settings.childGroups().at(i).toLower();
+	}
+	return list_group;
+}
+
+// Obtiene la configuración de los distintos elementos
+stLwItemCfg Funciones::getDefectLwItemConf(QSettings &settings)
+{
+	stLwItemCfg itemCfg;
+	itemCfg.img_cover_top_path        = settings.value("img_cover_top"       , "images/list_cover_top.png").toString();
+	itemCfg.img_cover_top_path_select = settings.value("img_cover_top_select", "images/list_cover_top_select.png").toString();
+
+	if (!itemCfg.img_cover_top.load(stTheme + itemCfg.img_cover_top_path))
+		itemCfg.img_cover_top.load(":/images/list_cover_top.png");
+	if (!itemCfg.img_cover_top_select.load(stTheme + itemCfg.img_cover_top_path_select))
+		itemCfg.img_cover_top_select.load(":/images/list_cover_top_select.png");
+
+	itemCfg.img_cover_top_pos_x  = settings.value("img_cover_top_pos_x" , 22   ).toInt();
+	itemCfg.img_cover_top_pos_y  = settings.value("img_cover_top_pos_y" , 22   ).toInt();
+	itemCfg.img_cover_top_zindex = settings.value("img_cover_top_zindex", false).toBool();
+	itemCfg.img_scaled           = settings.value("img_scaled"          , true ).toBool();
+	itemCfg.img_scale_w          = settings.value("img_scale_w"         , 145  ).toInt();
+	itemCfg.img_scale_h          = settings.value("img_scale_h"         , 186  ).toInt();
+	itemCfg.img_scale_pos_x      = settings.value("img_scale_pos_x"     , 28   ).toInt();
+	itemCfg.img_scale_pos_y      = settings.value("img_scale_pos_y"     , 28   ).toInt();
+	itemCfg.tipo_emu_show        = settings.value("tipo_emu_show"       , true ).toBool();
+	itemCfg.tipo_emu_pos_x       = settings.value("tipo_emu_pos_x"      , 15   ).toInt();
+	itemCfg.tipo_emu_pos_y       = settings.value("tipo_emu_pos_y"      , 202  ).toInt();
+	itemCfg.rating_show          = settings.value("rating_show"         , true ).toBool();
+	itemCfg.rating_vertical      = settings.value("rating_vertical"     , false).toBool();
+	itemCfg.rating_pos_x         = settings.value("rating_pos_x"        , 105  ).toInt();
+	itemCfg.rating_pos_y         = settings.value("rating_pos_y"        , 202  ).toInt();
+	itemCfg.title_bg_show        = settings.value("title_bg_show"       , true ).toBool();
+	itemCfg.title_bg_path        = settings.value("title_bg"            , "images/list_cover_title_bg.png").toString();
+	itemCfg.title_bg_path_select = settings.value("title_bg_select"     , "images/list_cover_title_bg.png").toString();
+
+	if (!itemCfg.title_bg.load(stTheme + itemCfg.title_bg_path))
+		itemCfg.title_bg.load(":/images/list_cover_title_bg.png");
+	if (!itemCfg.title_bg_select.load(stTheme + itemCfg.title_bg_path_select))
+		itemCfg.title_bg_select.load(":/images/list_cover_title_bg_select.png");
+
+	itemCfg.title_bg_pos_x       = settings.value("title_bg_pos_x"      , 13  ).toInt();
+	itemCfg.title_bg_pos_y       = settings.value("title_bg_pos_y"      , 222 ).toInt();
+	itemCfg.title_show           = settings.value("title_show"          , true).toBool();
+	itemCfg.title_pos_x          = settings.value("title_pos_x"         , 21  ).toInt();
+	itemCfg.title_pos_y          = settings.value("title_pos_y"         , 222 ).toInt();
+	itemCfg.title_width          = settings.value("title_width"         , 156 ).toInt();
+	itemCfg.title_height         = settings.value("title_height"        , 16  ).toInt();
+	itemCfg.title_max_caracteres = settings.value("title_max_caracteres", 25  ).toInt();
+	itemCfg.title_font           = settings.value("title_font"          , "Tahoma").toString();
+	itemCfg.title_font_size      = settings.value("title_font_size"     , 7).toInt();
+	itemCfg.title_font_pos       = settings.value("title_font_pos"      , 4).toInt();
+	itemCfg.title_font_color.setColor(getColor(settings.value("title_font_color", QStringList() << "0" << "0" << "0").toStringList()));
+	itemCfg.title_font_color_select.setColor(getColor(settings.value("title_font_color_select", QStringList() << "0" << "0" << "0").toStringList()));
+	itemCfg.title_font_wordwrap  = settings.value("title_font_wordwrap" , false).toBool();
+	itemCfg.title_font_bold      = settings.value("title_font_bold"     , true ).toBool();
+	itemCfg.title_font_italic    = settings.value("title_font_italic"   , false).toBool();
+	itemCfg.title_font_underline = settings.value("title_font_underline", false).toBool();
+
+	return itemCfg;
 }
 
 // Carga la configuración de los iconos de la lista en modo Icono
-stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla)
+stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla, QString theme)
 {
 	QString file_cfg, dir_cfg, file_lwConf;
 	stLwIconCfg lwConf;
 
-	dir_cfg  = (stTheme == ":/" ? stThemeApp : stTheme);
+	dir_cfg = theme.isEmpty() ? stTheme : theme;
 	file_cfg = (tabla != "dbgrl" ? tabla +"_list_cfg.ini" : "list_cfg.ini");
 
-	if( QFile::exists(dir_cfg + file_cfg) )
+	if (QFile::exists(dir_cfg + file_cfg))
 		file_lwConf = dir_cfg + file_cfg;
 	else
 		file_lwConf = dir_cfg +"list_cfg.ini";
 
 	QSettings settings(file_lwConf, QSettings::IniFormat);
 	settings.beginGroup("tw_list_icon");
-		lwConf.tw_icon_width  = settings.value("tw_icon_width" , 24).toInt();
-		lwConf.tw_icon_height = settings.value("tw_icon_height", 24).toInt();
+		lwConf.tw_icon_width  = settings.value("tw_icon_width" , 32).toInt();
+		lwConf.tw_icon_height = settings.value("tw_icon_height", 29).toInt();
+		lwConf.tw_alternating_row_colors = settings.value("tw_alternating_row_colors", true).toBool();
 	settings.endGroup();
 	settings.beginGroup("picflow_img");
-		lwConf.pf_img_width  = settings.value("pf_img_width" , 145).toInt();
-		lwConf.pf_img_height = settings.value("pf_img_height", 186).toInt();
+		lwConf.pf_img_width   = settings.value("pf_img_width"  , 145).toInt();
+		lwConf.pf_img_height  = settings.value("pf_img_height" , 186).toInt();
+		lwConf.pf_img_fixsize = settings.value("pf_img_fixsize", true).toBool();
 	settings.endGroup();
 	settings.beginGroup("list_icon");
-		lwConf.icon_width           = settings.value("icon_width"          , 200     ).toInt();
-		lwConf.icon_height          = settings.value("icon_height"         , 243     ).toInt();
-		lwConf.img_cover_top        = settings.value("img_cover_top"       , "images/list_cover_top.png").toString();
-		lwConf.img_cover_top_select = settings.value("img_cover_top_select", "images/list_cover_top_select.png").toString();
-		lwConf.img_cover_top_pos_x  = settings.value("img_cover_top_pos_x" , 22      ).toInt();
-		lwConf.img_cover_top_pos_y  = settings.value("img_cover_top_pos_y" , 22      ).toInt();
-		lwConf.img_scaled           = settings.value("img_scaled"          , true    ).toBool();
-		lwConf.img_scale_w          = settings.value("img_scale_w"         , 145     ).toInt();
-		lwConf.img_scale_h          = settings.value("img_scale_h"         , 186     ).toInt();
-		lwConf.img_scale_pos_x      = settings.value("img_scale_pos_x"     , 28      ).toInt();
-		lwConf.img_scale_pos_y      = settings.value("img_scale_pos_y"     , 28      ).toInt();
-		lwConf.tipo_emu_show        = settings.value("tipo_emu_show"       , true    ).toBool();
-		lwConf.tipo_emu_pos_x       = settings.value("tipo_emu_pos_x"      , 15      ).toInt();
-		lwConf.tipo_emu_pos_y       = settings.value("tipo_emu_pos_y"      , 202     ).toInt();
-		lwConf.rating_show          = settings.value("rating_show"         , true    ).toBool();
-		lwConf.rating_vertical      = settings.value("rating_vertical"     , false   ).toBool();
-		lwConf.rating_pos_x         = settings.value("rating_pos_x"        , 105     ).toInt();
-		lwConf.rating_pos_y         = settings.value("rating_pos_y"        , 202     ).toInt();
-		lwConf.title_bg_show        = settings.value("title_bg_show"       , true    ).toBool();
-		lwConf.title_bg             = settings.value("title_bg"            , "images/list_cover_title_bg.png").toString();
-		lwConf.title_bg_select      = settings.value("title_bg_select"     , "images/list_cover_title_bg.png").toString();
-		lwConf.title_bg_pos_x       = settings.value("title_bg_pos_x"      , 13      ).toInt();
-		lwConf.title_bg_pos_y       = settings.value("title_bg_pos_y"      , 222     ).toInt();
-		lwConf.title_show           = settings.value("title_show"          , true    ).toBool();
-		lwConf.title_pos_x          = settings.value("title_pos_x"         , 21      ).toInt();
-		lwConf.title_pos_y          = settings.value("title_pos_y"         , 222     ).toInt();
-		lwConf.title_width          = settings.value("title_width"         , 156     ).toInt();
-		lwConf.title_height         = settings.value("title_height"        , 16      ).toInt();
-		lwConf.title_max_caracteres = settings.value("title_max_caracteres", 25      ).toInt();
-		lwConf.title_font           = settings.value("title_font"          , "Tahoma").toString();
-		lwConf.title_font_size      = settings.value("title_font_size"     , 7       ).toInt();
-		lwConf.title_font_color     = settings.value("title_font_color"    , QStringList() << "0" << "0" << "0").toStringList();
-		lwConf.title_font_color_select = settings.value("title_font_color_select", QStringList() << "0" << "0" << "0").toStringList();
-		lwConf.title_font_bold      = settings.value("title_font_bold"     , true    ).toBool();
-		lwConf.title_font_italic    = settings.value("title_font_italic"   , false   ).toBool();
-		lwConf.title_font_underline = settings.value("title_font_underline", false   ).toBool();
+		lwConf.icon_width  = settings.value("icon_width" , 200).toInt();
+		lwConf.icon_height = settings.value("icon_height", 243).toInt();
 	settings.endGroup();
+
+	lwConf.item.clear();
+	settings.beginGroup("item_datos");
+		lwConf.item.insert("item_datos", getDefectLwItemConf(settings));
+	settings.endGroup();
+	settings.beginGroup("item_dosbox");
+		lwConf.item.insert("item_dosbox", getDefectLwItemConf(settings));
+	settings.endGroup();
+	settings.beginGroup("item_scummvm");
+		lwConf.item.insert("item_scummvm", getDefectLwItemConf(settings));
+	settings.endGroup();
+	settings.beginGroup("item_vdmsound");
+		lwConf.item.insert("item_vdmsound", getDefectLwItemConf(settings));
+	settings.endGroup();
+
+	QList<stGrlDatos> list_emu = cargaListaDatos(stDirApp +"datos/emu_list.txt", 4, "|");
+	const int listSize = list_emu.size();
+	for (int i = 0; i < listSize; ++i)
+	{
+		settings.beginGroup("item_"+ list_emu.at(i).key);
+			lwConf.item.insert("item_"+ list_emu.at(i).key, getDefectLwItemConf(settings));
+		settings.endGroup();
+	}
 
 	return lwConf;
 }
 
 // Crea la configuración de los iconos de la lista en modo Icono
-void Funciones::guardarListWidgetIconConf(stLwIconCfg lwConf, QString tabla)
+void Funciones::guardarListWidgetIconConf(stLwIconCfg lwConf, QString tabla, QString theme)
 {
 	QString file_cfg, dir_cfg, file_lwConf;
 
-	dir_cfg     = (stTheme == ":/" ? stThemeApp : stTheme);
+	dir_cfg     = theme.isEmpty() ? stTheme : theme;
 	file_cfg    = (tabla != "dbgrl" ? tabla +"_list_cfg.ini" : "list_cfg.ini");
 	file_lwConf = dir_cfg + file_cfg;
 
 	QSettings settings(file_lwConf, QSettings::IniFormat);
 	settings.clear();
 	settings.beginGroup("tw_list_icon");
-		settings.setValue("tw_icon_width" , lwConf.tw_icon_width);
+		settings.setValue("tw_icon_width" , lwConf.tw_icon_width );
 		settings.setValue("tw_icon_height", lwConf.tw_icon_height);
+		settings.setValue("tw_alternating_row_colors", lwConf.tw_alternating_row_colors);
 	settings.endGroup();
 	settings.beginGroup("picflow_img");
-		settings.setValue("pf_img_width" , lwConf.pf_img_width);
-		settings.setValue("pf_img_height", lwConf.pf_img_height);
+		settings.setValue("pf_img_width"  , lwConf.pf_img_width  );
+		settings.setValue("pf_img_height" , lwConf.pf_img_height );
+		settings.setValue("pf_img_fixsize", lwConf.pf_img_fixsize);
 	settings.endGroup();
 	settings.beginGroup("list_icon");
-		settings.setValue("icon_width"             , lwConf.icon_width             );
-		settings.setValue("icon_height"            , lwConf.icon_height            );
-		settings.setValue("img_cover_top"          , lwConf.img_cover_top          );
-		settings.setValue("img_cover_top_select"   , lwConf.img_cover_top_select   );
-		settings.setValue("img_cover_top_pos_x"    , lwConf.img_cover_top_pos_x    );
-		settings.setValue("img_cover_top_pos_y"    , lwConf.img_cover_top_pos_y    );
-		settings.setValue("img_scaled"             , lwConf.img_scaled             );
-		settings.setValue("img_scale_w"            , lwConf.img_scale_w            );
-		settings.setValue("img_scale_h"            , lwConf.img_scale_h            );
-		settings.setValue("img_scale_pos_x"        , lwConf.img_scale_pos_x        );
-		settings.setValue("img_scale_pos_y"        , lwConf.img_scale_pos_y        );
-		settings.setValue("tipo_emu_show"          , lwConf.tipo_emu_show          );
-		settings.setValue("tipo_emu_pos_x"         , lwConf.tipo_emu_pos_x         );
-		settings.setValue("tipo_emu_pos_y"         , lwConf.tipo_emu_pos_y         );
-		settings.setValue("rating_show"            , lwConf.rating_show            );
-		settings.setValue("rating_vertical"        , lwConf.rating_vertical        );
-		settings.setValue("rating_pos_x"           , lwConf.rating_pos_x           );
-		settings.setValue("rating_pos_y"           , lwConf.rating_pos_y           );
-		settings.setValue("title_bg_show"          , lwConf.title_bg_show          );
-		settings.setValue("title_bg"               , lwConf.title_bg               );
-		settings.setValue("title_bg_select"        , lwConf.title_bg_select        );
-		settings.setValue("title_bg_pos_x"         , lwConf.title_bg_pos_x         );
-		settings.setValue("title_bg_pos_y"         , lwConf.title_bg_pos_y         );
-		settings.setValue("title_show"             , lwConf.title_show             );
-		settings.setValue("title_pos_x"            , lwConf.title_pos_x            );
-		settings.setValue("title_pos_y"            , lwConf.title_pos_y            );
-		settings.setValue("title_width"            , lwConf.title_width            );
-		settings.setValue("title_height"           , lwConf.title_height           );
-		settings.setValue("title_max_caracteres"   , lwConf.title_max_caracteres   );
-		settings.setValue("title_font"             , lwConf.title_font             );
-		settings.setValue("title_font_size"        , lwConf.title_font_size        );
-		settings.setValue("title_font_color"       , lwConf.title_font_color       );
-		settings.setValue("title_font_color_select", lwConf.title_font_color_select);
-		settings.setValue("title_font_bold"        , lwConf.title_font_bold        );
-		settings.setValue("title_font_italic"      , lwConf.title_font_italic      );
-		settings.setValue("title_font_underline"   , lwConf.title_font_underline   );
+		settings.setValue("icon_width" , lwConf.icon_width );
+		settings.setValue("icon_height", lwConf.icon_height);
 	settings.endGroup();
+
+	QHash<QString, stLwItemCfg>::const_iterator itemCfg = lwConf.item.constBegin();
+	while (itemCfg != lwConf.item.constEnd())
+	{
+		settings.beginGroup(itemCfg.key());
+			settings.setValue("img_cover_top"          , itemCfg.value().img_cover_top_path  );
+			settings.setValue("img_cover_top_select"   , itemCfg.value().img_cover_top_path_select);
+			settings.setValue("img_cover_top_pos_x"    , itemCfg.value().img_cover_top_pos_x );
+			settings.setValue("img_cover_top_pos_y"    , itemCfg.value().img_cover_top_pos_y );
+			settings.setValue("img_cover_top_zindex"   , itemCfg.value().img_cover_top_zindex);
+			settings.setValue("img_scaled"             , itemCfg.value().img_scaled          );
+			settings.setValue("img_scale_w"            , itemCfg.value().img_scale_w         );
+			settings.setValue("img_scale_h"            , itemCfg.value().img_scale_h         );
+			settings.setValue("img_scale_pos_x"        , itemCfg.value().img_scale_pos_x     );
+			settings.setValue("img_scale_pos_y"        , itemCfg.value().img_scale_pos_y     );
+			settings.setValue("tipo_emu_show"          , itemCfg.value().tipo_emu_show       );
+			settings.setValue("tipo_emu_pos_x"         , itemCfg.value().tipo_emu_pos_x      );
+			settings.setValue("tipo_emu_pos_y"         , itemCfg.value().tipo_emu_pos_y      );
+			settings.setValue("rating_show"            , itemCfg.value().rating_show         );
+			settings.setValue("rating_vertical"        , itemCfg.value().rating_vertical     );
+			settings.setValue("rating_pos_x"           , itemCfg.value().rating_pos_x        );
+			settings.setValue("rating_pos_y"           , itemCfg.value().rating_pos_y        );
+			settings.setValue("title_bg_show"          , itemCfg.value().title_bg_show       );
+			settings.setValue("title_bg"               , itemCfg.value().title_bg_path       );
+			settings.setValue("title_bg_select"        , itemCfg.value().title_bg_path_select);
+			settings.setValue("title_bg_pos_x"         , itemCfg.value().title_bg_pos_x      );
+			settings.setValue("title_bg_pos_y"         , itemCfg.value().title_bg_pos_y      );
+			settings.setValue("title_show"             , itemCfg.value().title_show          );
+			settings.setValue("title_pos_x"            , itemCfg.value().title_pos_x         );
+			settings.setValue("title_pos_y"            , itemCfg.value().title_pos_y         );
+			settings.setValue("title_width"            , itemCfg.value().title_width         );
+			settings.setValue("title_height"           , itemCfg.value().title_height        );
+			settings.setValue("title_max_caracteres"   , itemCfg.value().title_max_caracteres);
+			settings.setValue("title_font"             , itemCfg.value().title_font          );
+			settings.setValue("title_font_size"        , itemCfg.value().title_font_size     );
+			settings.setValue("title_font_pos"         , itemCfg.value().title_font_pos      );
+			settings.setValue("title_font_color"       , setColor(itemCfg.value().title_font_color.color()));
+			settings.setValue("title_font_color_select", setColor(itemCfg.value().title_font_color_select.color()));
+			settings.setValue("title_font_wordwrap"    , itemCfg.value().title_font_wordwrap );
+			settings.setValue("title_font_bold"        , itemCfg.value().title_font_bold     );
+			settings.setValue("title_font_italic"      , itemCfg.value().title_font_italic   );
+			settings.setValue("title_font_underline"   , itemCfg.value().title_font_underline);
+		settings.endGroup();
+		++itemCfg;
+	}
 }
 
 // Carga la configuracion del GR-lida
@@ -875,7 +1230,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.db_name      = settings.value("db_name"     , "").toString();
 		config.db_username  = settings.value("db_username" , "").toString();
 		config.db_password  = settings.value("db_password" , "").toString();
-		config.db_port      = settings.value("db_port"     , "3306").toString();
+		config.db_port      = settings.value("db_port"     , 3306).toInt();
 		config.db_orden_col = settings.value("db_orden_col", "titulo").toString();
 		config.db_orden_by  = settings.value("db_orden_by" , "titulo").toString();
 		config.db_orden     = settings.value("db_orden"    , "ASC").toString();
@@ -883,10 +1238,10 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 
 	settings.beginGroup("OpcGeneral");
 		config.Primeravez    = settings.value("Primeravez"   , true).toBool();
-		config.DirApp        = settings.value("DirApp"       , "homepath").toString();
+		config.dirApp        = settings.value("dirApp"       , "homepath").toString();
 		config.DirDOSBox     = settings.value("DirDOSBox"    , "").toString();
 		config.DirScummVM    = settings.value("DirScummVM"   , "").toString();
-		config.DirBaseGames  = settings.value("DirBaseGames" , "./DosGames/").toString().isEmpty() ? "./DosGames/" : QDir::toNativeSeparators( settings.value("DirBaseGames").toString() );
+		config.DirBaseGames  = settings.value("DirBaseGames" , "./DosGames/").toString().isEmpty() ? "./DosGames/" : settings.value("DirBaseGames").toString();
 		config.DOSBoxDefault = settings.value("DOSBoxDefault", "dosbox").toString();
 		config.DOSBoxDisp    = settings.value("DOSBoxDisp"   , false).toBool();
 		config.ScummVMDisp   = settings.value("ScummVMDisp"  , false).toBool();
@@ -895,27 +1250,77 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 	#else
 		config.VDMSoundDisp = false;
 	#endif
-		config.IdiomaSelect        = settings.value("IdiomaSelect"       , "es_ES").toString();
-		config.OpenPdfExternal     = settings.value("OpenPdfExternal"    , false  ).toBool();
-		config.url_xmldb           = settings.value("url_xmldb"          , "gr-lida.js").toString();
-		config.FormatoFecha        = settings.value("FormatoFecha"       , "dd/MM/yyyy HH:mm:ss").toString();
-		config.ToolbarBigIcon      = settings.value("ToolbarBigIcon"     , true).toBool();
-		config.Style               = settings.value("Style"              , "").toString();
-		config.StylePalette        = settings.value("StylePalette"       , false).toBool();
-		config.NameDirTheme        = settings.value("NameDirTheme"       , "defecto").toString();
-		config.IconoFav            = settings.value("IconoFav"           , "fav_0.png").toString();
-		config.PicFlowType         = settings.value("PicFlowType"        , "CoverFlowLike").toString();
-		config.PicFlowBgColor      = settings.value("PicFlowBgColor"     , QStringList() << "0" << "0" << "0").toStringList();
-		config.PicFlowShowNumPos   = settings.value("PicFlowShowNumPos"  , false).toBool();
+		config.IdiomaSelect         = settings.value("IdiomaSelect"        , "es_ES").toString();
+		config.OpenPdfExternal      = settings.value("OpenPdfExternal"     , false).toBool();
+		config.url_xmldb            = settings.value("url_xmldb"           , "gr-lida.js").toString();
+		config.FormatoFecha         = settings.value("FormatoFecha"        , "dd/MM/yyyy HH:mm:ss").toString();
+		config.ToolbarBigIcon       = settings.value("ToolbarBigIcon"      , true).toBool();
+		config.Style                = settings.value("Style"               , "").toString();
+		config.StylePalette         = settings.value("StylePalette"        , false).toBool();
+		config.NameDirTheme         = settings.value("NameDirTheme"        , "defecto").toString();
+		config.IconoFav             = settings.value("IconoFav"            , "fav_0.png").toString();
+		config.IndexTabArchivos     = settings.value("IndexTabArchivos"    , 0).toInt();
+		config.VersionDBx           = settings.value("VersionDBx"          , "0.74").toString();
+		config.DOSBoxSVN            = settings.value("DOSBoxSVN"           , false).toBool();
+		config.DOSBoxSaveConfFile   = settings.value("DOSBoxSaveConfFile"  , true).toBool();
+		config.ScummVMSaveConfFile  = settings.value("ScummVMSaveConfFile" , true).toBool();
+		config.LastSelectGameID     = settings.value("LastSelectGameID"    , "0").toString();
+		config.LastSelectCatID      = settings.value("LastSelectCatID"     , "0").toString();
+		config.LastSelectNavID      = settings.value("LastSelectNavID"     , 0).toInt();
+		config.LastSelectNavSubID   = settings.value("LastSelectNavSubID"  , 0).toInt();
+		config.LastTabOptSelect     = settings.value("LastTabOptSelect"    , 0).toInt();
+		config.LastSelectShortCutID = settings.value("LastSelectShortCutID", 0).toInt();
+	settings.endGroup();
+
+	settings.beginGroup("OpcSaveThumbs");
+		config.thumb_width       = settings.value("thumb_width"      , 145).toInt();
+		config.thumb_height      = settings.value("thumb_height"     , 186).toInt();
+		config.thumb_quality     = settings.value("thumb_quality"    ,  95).toInt();
+		config.thumb_format      = settings.value("thumb_format"     , "JPG").toString();
+		config.thumb_img_width   = settings.value("thumb_img_width"  , 128).toInt();
+		config.thumb_img_height  = settings.value("thumb_img_height" , 128).toInt();
+		config.thumb_img_quality = settings.value("thumb_img_quality",  95).toInt();
+	settings.endGroup();
+
+	settings.beginGroup("OpcPicFlow");
+		config.PicFlowType              = settings.value("PicFlowType"            , "CoverFlowLike").toString();
+		config.PicFlowBgColor           = settings.value("PicFlowBgColor"         , QStringList() << "0" << "0" << "0").toStringList();
+		config.PicFlowFontFamily        = settings.value("PicFlowFontFamily"      , "Tahoma").toString();
+		config.PicFlowFontSize          = settings.value("PicFlowFontSize"        , 20).toInt();
+		config.PicFlowFontBold          = settings.value("PicFlowFontBold"        , false).toInt();
+		config.PicFlowFontItalic        = settings.value("PicFlowFontItalic"      , false).toInt();
+		config.PicFlowFontColor         = settings.value("PicFlowFontColor"       , QStringList() << "255" << "255" << "255").toStringList();
+		config.PicFlowMinHeight         = settings.value("PicFlowMinHeight"       , 260).toInt();
+		config.PicFlowSkip              = settings.value("PicFlowSkip"            , 10).toInt();
+
+		config.PicFlowShowTitle         = settings.value("PicFlowShowTitle"       , true).toBool();
+		config.PicFlowTitlePos          = settings.value("PicFlowTitlePos"        , 0).toInt();
+		config.PicFlowTitleMargin       = settings.value("PicFlowTitleMargin"     , QPoint(36, 0)).toPoint();
+
+		config.PicFlowShowTitleIcon     = settings.value("PicFlowShowTitleIcon"   , true).toBool();
+		config.PicFlowTitleIconPos      = settings.value("PicFlowTitleIconPos"    , 0).toInt();
+		config.PicFlowTitleIconMargin   = settings.value("PicFlowTitleIconMargin" , QPoint(0, 0)).toPoint();
+
+		config.PicFlowShowCaption       = settings.value("PicFlowShowCaption"     , true).toBool();
+		config.PicFlowCaptionPos        = settings.value("PicFlowCaptionPos"      , 7).toInt();
+		config.PicFlowCaptionMargin     = settings.value("PicFlowCaptionMargin"   , QPoint(0, 0)).toPoint();
+
+		config.PicFlowShowNumber        = settings.value("PicFlowShowNumber"      , true).toBool();
+		config.PicFlowNumberPos         = settings.value("PicFlowNumberPos"       , 2).toInt();
+		config.PicFlowNumberMargin      = settings.value("PicFlowNumberMargin"    , QPoint(0, 0)).toPoint();
+		config.PicFlowNumberFormat      = settings.value("PicFlowNumberFormat"    , "%1/%2").toString();
+
+		config.PicFlowShowIconExtra     = settings.value("PicFlowShowIconExtra"   , false).toBool();
+		config.PicFlowIconExtraPos      = settings.value("PicFlowIconExtraPos"    , 2).toInt();
+		config.PicFlowIconExtraMargin   = settings.value("PicFlowIconExtraMargin" , QPoint(0, 0)).toPoint();
+
+		config.PicFlowIconExtraUse         = settings.value("PicFlowIconExtraUse"        , "favorito").toString();
+		config.PicFlowIconExtraImgFavorito = settings.value("PicFlowIconExtraImgFavorito", "img32/fav_0.png").toString();
+		config.PicFlowIconExtraImgOriginal = settings.value("PicFlowIconExtraImgOriginal", "img32/original.png").toString();
+
+		config.PicFlowMargin = settings.value("PicFlowMargin", QPoint(10, 10)).toPoint();
+
 		config.PicFlowShowTriangle = settings.value("PicFlowShowTriangle", false).toBool();
-		config.PicFlowMinHeight    = settings.value("PicFlowMinHeight"   , 260).toInt();
-		config.Skip_PicFlow        = settings.value("Skip_PicFlow"       , 10).toInt();
-		config.IndexTabArchivos    = settings.value("IndexTabArchivos"   , 0).toInt();
-		config.VersionDBx          = settings.value("VersionDBx"         , "0.74").toString();
-		config.DOSBoxSVN           = settings.value("DOSBoxSVN"          , false).toBool();
-		config.DOSBoxSaveConfFile  = settings.value("DOSBoxSaveConfFile" , true).toBool();
-		config.LastSelectCatID     = settings.value("LastSelectCatID"    , "0").toString();
-		config.LastTabOptSelect    = settings.value("LastTabOptSelect"   , 0).toInt();
 	settings.endGroup();
 
 	settings.beginGroup("OpcFuente");
@@ -928,58 +1333,86 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.ProxyEnable   = settings.value("ProxyEnable"  , false).toBool();
 		config.ProxyType     = settings.value("ProxyType"    , 2    ).toInt();
 		config.ProxyHost     = settings.value("ProxyHost"    , ""   ).toString();
-		config.ProxyPort     = settings.value("ProxyPort"    , "1080").toString();
+		config.ProxyPort     = static_cast<quint16>(settings.value("ProxyPort", 1080).toInt());
 		config.ProxyLogin    = settings.value("ProxyLogin"   , false).toBool();
 		config.ProxyUserName = settings.value("ProxyUserName", ""   ).toString();
 		config.ProxyPassword = settings.value("ProxyPassword", ""   ).toString();
 	settings.endGroup();
 
 	settings.beginGroup("MainState");
-		config.main_fullscreen     = settings.value("main_fullscreen"    , false).toBool();
-		config.main_maximized      = settings.value("main_maximized"     , false).toBool();
-		config.main_geometry       = settings.value("main_geometry"      , "").toByteArray();
-		config.main_state          = settings.value("main_state"         , "").toByteArray();
-		config.main_twJuegos_state = settings.value("main_twJuegos_state", "").toByteArray();
+		config.main_fullscreen       = settings.value("main_fullscreen"      , false).toBool();
+		config.main_maximized        = settings.value("main_maximized"       , false).toBool();
+		config.main_geometry         = settings.value("main_geometry"        , "").toByteArray();
+		config.main_state            = settings.value("main_state"           , "").toByteArray();
+//		config.main_twJuegos_state   = settings.value("main_twJuegos_state"  , "").toByteArray();
+		config.main_tvJuegos_state   = settings.value("main_tvJuegos_state"  , "").toByteArray();
+		config.import_geometry       = settings.value("import_geometry"      , "").toByteArray();
+		config.import_splitter_state = settings.value("import_splitter_state", "").toByteArray();
 	settings.endGroup();
 
 	settings.beginGroup("OpcVer");
-		config.Pnl_Nav               = settings.value("Pnl_Nav"              , false).toBool();
-		config.Pnl_FilesUrl          = settings.value("Pnl_FilesUrl"         , false).toBool();
-		config.Pnl_Datos             = settings.value("Pnl_Datos"            , true ).toBool();
-		config.Pnl_PictureFlow       = settings.value("Pnl_PictureFlow"      , true ).toBool();
-		config.Pnl_Capturas          = settings.value("Pnl_Capturas"         , false).toBool();
-		config.Pnl_Menubar           = settings.value("Pnl_Menubar"          , true ).toBool();
-		config.Pnl_Toolbar           = settings.value("Pnl_Toolbar"          , true ).toBool();
-		config.Pnl_Ordenar           = settings.value("Pnl_Ordenar"          , false).toBool();
-		config.Pnl_StatusBar         = settings.value("Pnl_StatusBar"        , true ).toBool();
-		config.PictureFlowToCenter   = settings.value("PictureFlowToCenter"  , false).toBool();
-		config.ver_IconMode          = settings.value("ver_IconMode"         , false).toBool();
-		config.ver_col_Icono         = settings.value("ver_col_Icono"        , true ).toBool();
-		config.ver_col_Subtitulo     = settings.value("ver_col_Subtitulo"    , false).toBool();
-		config.ver_col_Genero        = settings.value("ver_col_Genero"       , false).toBool();
-		config.ver_col_Compania      = settings.value("ver_col_Compania"     , true ).toBool();
-		config.ver_col_Desarrollador = settings.value("ver_col_Desarrollador", false).toBool();
-		config.ver_col_Tema          = settings.value("ver_col_Tema"         , false).toBool();
-		config.ver_col_Grupo         = settings.value("ver_col_Grupo"        , false).toBool();
-		config.ver_col_Perspectiva   = settings.value("ver_col_Perspectiva"  , false).toBool();
-		config.ver_col_Idioma        = settings.value("ver_col_Idioma"       , false).toBool();
-		config.ver_col_IdiomaVoces   = settings.value("ver_col_IdiomaVoces"  , false).toBool();
-		config.ver_col_Formato       = settings.value("ver_col_Formato"      , false).toBool();
-		config.ver_col_Anno          = settings.value("ver_col_Anno"         , true ).toBool();
-		config.ver_col_NumDisc       = settings.value("ver_col_NumDisc"      , false).toBool();
-		config.ver_col_SistemaOp     = settings.value("ver_col_SistemaOp"    , false).toBool();
-		config.ver_col_Tamano        = settings.value("ver_col_Tamano"       , false).toBool();
-		config.ver_col_Graficos      = settings.value("ver_col_Graficos"     , false).toBool();
-		config.ver_col_Sonido        = settings.value("ver_col_Sonido"       , false).toBool();
-		config.ver_col_Jugabilidad   = settings.value("ver_col_Jugabilidad"  , false).toBool();
-		config.ver_col_Original      = settings.value("ver_col_Original"     , false).toBool();
-		config.ver_col_Estado        = settings.value("ver_col_Estado"       , false).toBool();
-		config.ver_col_Fecha         = settings.value("ver_col_Fecha"        , false).toBool();
-		config.ver_col_TipoEmu       = settings.value("ver_col_TipoEmu"      , false).toBool();
-		config.ver_col_Favorito      = settings.value("ver_col_Favorito"     , false).toBool();
-		config.ver_col_Rating        = settings.value("ver_col_Rating"       , true ).toBool();
-		config.ver_col_Edad          = settings.value("ver_col_Edad"         , false).toBool();
-		config.ver_col_Usuario       = settings.value("ver_col_Usuario"      , false).toBool();
+		config.Pnl_AutoHideTitleBars            = settings.value("Pnl_AutoHideTitleBars"           , true ).toBool();
+		config.Pnl_Nav_VisibleTitleBars         = settings.value("Pnl_Nav_VisibleTitleBars"        , true ).toBool();
+		config.Pnl_Datos_VisibleTitleBars       = settings.value("Pnl_Datos_VisibleTitleBars"      , true ).toBool();
+		config.Pnl_Files_VisibleTitleBars       = settings.value("Pnl_Files_VisibleTitleBars"      , true ).toBool();
+		config.Pnl_Urls_VisibleTitleBars        = settings.value("Pnl_Urls_VisibleTitleBars"       , true ).toBool();
+		config.Pnl_Videos_VisibleTitleBars      = settings.value("Pnl_Videos_VisibleTitleBars"     , true ).toBool();
+		config.Pnl_Sonidos_VisibleTitleBars     = settings.value("Pnl_Sonidos_VisibleTitleBars"    , true ).toBool();
+		config.Pnl_Capturas_VisibleTitleBars    = settings.value("Pnl_Capturas_VisibleTitleBars"   , true ).toBool();
+		config.Pnl_Imagenes_VisibleTitleBars    = settings.value("Pnl_Imagenes_VisibleTitleBars"   , true ).toBool();
+		config.Pnl_PictureFlow_VisibleTitleBars = settings.value("Pnl_PictureFlow_VisibleTitleBars", false).toBool();
+		config.Pnl_Nav_IgnoreAutoHide           = settings.value("Pnl_Nav_IgnoreAutoHide"          , true ).toBool();
+		config.Pnl_Datos_IgnoreAutoHide         = settings.value("Pnl_Datos_IgnoreAutoHide"        , false).toBool();
+		config.Pnl_Files_IgnoreAutoHide         = settings.value("Pnl_Files_IgnoreAutoHide"        , false).toBool();
+		config.Pnl_Urls_IgnoreAutoHide          = settings.value("Pnl_Urls_IgnoreAutoHide"         , false).toBool();
+		config.Pnl_Videos_IgnoreAutoHide        = settings.value("Pnl_Videos_IgnoreAutoHide"       , false).toBool();
+		config.Pnl_Sonidos_IgnoreAutoHide       = settings.value("Pnl_Sonidos_IgnoreAutoHide"      , false).toBool();
+		config.Pnl_Capturas_IgnoreAutoHide      = settings.value("Pnl_Capturas_IgnoreAutoHide"     , false).toBool();
+		config.Pnl_Imagenes_IgnoreAutoHide      = settings.value("Pnl_Imagenes_IgnoreAutoHide"     , false).toBool();
+		config.Pnl_PictureFlow_IgnoreAutoHide   = settings.value("Pnl_PictureFlow_IgnoreAutoHide"  , true ).toBool();
+		config.Pnl_Nav                          = settings.value("Pnl_Nav"                         , false).toBool();
+		config.Pnl_Datos                        = settings.value("Pnl_Datos"                       , true ).toBool();
+		config.Pnl_Files                        = settings.value("Pnl_Files"                       , false).toBool();
+		config.Pnl_Urls                         = settings.value("Pnl_Urls"                        , false).toBool();
+		config.Pnl_Videos                       = settings.value("Pnl_Videos"                      , false).toBool();
+		config.Pnl_Sonidos                      = settings.value("Pnl_Sonidos"                     , false).toBool();
+		config.Pnl_Capturas                     = settings.value("Pnl_Capturas"                    , false).toBool();
+		config.Pnl_Imagenes                     = settings.value("Pnl_Imagenes"                    , false).toBool();
+		config.Pnl_PictureFlow                  = settings.value("Pnl_PictureFlow"                 , true ).toBool();
+		config.PictureFlowToCenter              = settings.value("PictureFlowToCenter"             , false).toBool();
+		config.Pnl_Menubar                      = settings.value("Pnl_Menubar"                     , true ).toBool();
+		config.Pnl_Toolbar                      = settings.value("Pnl_Toolbar"                     , true ).toBool();
+		config.Pnl_ToolbarDatos                 = settings.value("Pnl_ToolbarDatos"                , true ).toBool();
+		config.Pnl_Ordenar                      = settings.value("Pnl_Ordenar"                     , false).toBool();
+		config.Pnl_ShortCut                     = settings.value("Pnl_ShortCut"                    , false).toBool();
+		config.Pnl_StatusBar                    = settings.value("Pnl_StatusBar"                   , true ).toBool();
+		config.ver_IconMode                     = settings.value("ver_IconMode"                    , true ).toBool();
+		config.ver_col_Icono                    = settings.value("ver_col_Icono"                   , true ).toBool();
+		config.ver_col_Subtitulo                = settings.value("ver_col_Subtitulo"               , false).toBool();
+		config.ver_col_Genero                   = settings.value("ver_col_Genero"                  , false).toBool();
+		config.ver_col_Compania                 = settings.value("ver_col_Compania"                , true ).toBool();
+		config.ver_col_Desarrollador            = settings.value("ver_col_Desarrollador"           , false).toBool();
+		config.ver_col_Tema                     = settings.value("ver_col_Tema"                    , false).toBool();
+		config.ver_col_Grupo                    = settings.value("ver_col_Grupo"                   , false).toBool();
+		config.ver_col_Perspectiva              = settings.value("ver_col_Perspectiva"             , false).toBool();
+		config.ver_col_Idioma                   = settings.value("ver_col_Idioma"                  , false).toBool();
+		config.ver_col_IdiomaVoces              = settings.value("ver_col_IdiomaVoces"             , false).toBool();
+		config.ver_col_Formato                  = settings.value("ver_col_Formato"                 , false).toBool();
+		config.ver_col_Anno                     = settings.value("ver_col_Anno"                    , true ).toBool();
+		config.ver_col_NumDisc                  = settings.value("ver_col_NumDisc"                 , false).toBool();
+		config.ver_col_SistemaOp                = settings.value("ver_col_SistemaOp"               , false).toBool();
+		config.ver_col_Tamano                   = settings.value("ver_col_Tamano"                  , false).toBool();
+		config.ver_col_Graficos                 = settings.value("ver_col_Graficos"                , false).toBool();
+		config.ver_col_Sonido                   = settings.value("ver_col_Sonido"                  , false).toBool();
+		config.ver_col_Jugabilidad              = settings.value("ver_col_Jugabilidad"             , false).toBool();
+		config.ver_col_Original                 = settings.value("ver_col_Original"                , false).toBool();
+		config.ver_col_Estado                   = settings.value("ver_col_Estado"                  , false).toBool();
+		config.ver_col_Fecha                    = settings.value("ver_col_Fecha"                   , false).toBool();
+		config.ver_col_TipoEmu                  = settings.value("ver_col_TipoEmu"                 , false).toBool();
+		config.ver_col_Favorito                 = settings.value("ver_col_Favorito"                , false).toBool();
+		config.ver_col_Rating                   = settings.value("ver_col_Rating"                  , true ).toBool();
+		config.ver_col_Edad                     = settings.value("ver_col_Edad"                    , false).toBool();
+		config.ver_col_Usuario                  = settings.value("ver_col_Usuario"                 , false).toBool();
 	settings.endGroup();
 
 	settings.beginGroup("ImageViewerState");
@@ -989,61 +1422,74 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 	settings.endGroup();
 
 	settings.beginGroup("OpcMultimedia");
-		config.FormatsVideo = settings.value("FormatsVideo", QStringList() << "*.avi" << "*.mkv" << "*.mov" << "*.mp4" << "*.mpeg" << "*.mpg" << "*.wmv").toStringList();
-		config.FormatsMusic = settings.value("FormatsMusic", QStringList() << "*.mp3" << "*.ogg" << "*.wav" << "*.wma").toStringList();
-		config.FormatsImage = settings.value("FormatsImage", QStringList() << "*.bmp" << "*.gif" << "*.jpg" << "*.jpeg" << "*.png" << "*.pbm" << "*.pgm" << "*.ppm" << "*.tiff" << "*.xbm" << "*.xpm" << "*.svg").toStringList();
+		config.FormatsVideo         = settings.value("FormatsVideo", QStringList() << "*.avi" << "*.mkv" << "*.mov" << "*.mp4" << "*.mpeg" << "*.mpg" << "*.wmv").toStringList();
+		config.FormatsMusic         = settings.value("FormatsMusic", QStringList() << "*.mp3" << "*.ogg" << "*.wav" << "*.wma" << "*.m4a").toStringList();
+		config.FormatsImage         = settings.value("FormatsImage", QStringList() << "*.bmp" << "*.gif" << "*.jpg" << "*.jpeg" << "*.png" << "*.pbm" << "*.pgm" << "*.ppm" << "*.tiff" << "*.xbm" << "*.xpm" << "*.svg").toStringList();
+		config.VerPlaylistVideo     = settings.value("VerPlaylistVideo"    , false).toBool();
+		config.VerPlaylistVideoMain = settings.value("VerPlaylistVideoMain", false).toBool();
+		config.VerPlaylistSound     = settings.value("VerPlaylistSound"    , false).toBool();
+		config.VerPlaylistSoundMain = settings.value("VerPlaylistSoundMain", false).toBool();
+		config.VerInfoMedia         = settings.value("VerInfoMedia"        , true ).toBool();
+		config.VerInfoMediaMain     = settings.value("VerInfoMediaMain"    , true ).toBool();
 	settings.endGroup();
 
 	settings.beginGroup("UltimoDirectorio");
-		config.DirBD         = QDir::toNativeSeparators(settings.value("DirBD" , "").toString());
-		config.DirImportar   = QDir::toNativeSeparators(settings.value("DirImportar"  , "").toString());
-		config.DirExportPath = QDir::toNativeSeparators(settings.value("DirExportPath", "").toString());
-		config.DirOtherEmus  = QDir::toNativeSeparators(settings.value("DirOtherEmus", "").toString());
+		config.DirBD         = settings.value("DirBD"        , "").toString();
+		config.DirImportar   = settings.value("DirImportar"  , "").toString();
+		config.DirExportPath = settings.value("DirExportPath", "").toString();
+		config.DirOtherEmus  = settings.value("DirOtherEmus" , "").toString();
 	// Datos de Juegos
-		config.Img_Thumbs          = QDir::toNativeSeparators(settings.value("Img_Thumbs"                 , "").toString());
-		config.Img_CoverFront      = QDir::toNativeSeparators(settings.value("Img_CoverFront"             , "").toString());
-		config.Img_CoverBack       = QDir::toNativeSeparators(settings.value("Img_CoverBack"              , "").toString());
-		config.DatosFiles_PathFile = QDir::toNativeSeparators(settings.value("DatosFiles_PathFile"        , "").toString());
-		config.DatosFiles_PathExe  = QDir::toNativeSeparators(settings.value("DatosFiles_PathExe"         , "").toString());
-		config.DatosFiles_PathSetup    = QDir::toNativeSeparators(settings.value("DatosFiles_PathSetup"   , "").toString());
-		config.DatosFiles_PathCapturas = QDir::toNativeSeparators(settings.value("DatosFiles_PathCapturas", "").toString());
+		config.Img_Thumbs              = settings.value("Img_Thumbs"             , "").toString();
+		config.Img_CoverFront          = settings.value("Img_CoverFront"         , "").toString();
+		config.Img_CoverBack           = settings.value("Img_CoverBack"          , "").toString();
+		config.Img_CoverLeft           = settings.value("Img_CoverLeft"          , "").toString();
+		config.Img_CoverRight          = settings.value("Img_CoverRight"         , "").toString();
+		config.Img_CoverTop            = settings.value("Img_CoverTop"           , "").toString();
+		config.Img_CoverBottom         = settings.value("Img_CoverBottom"        , "").toString();
+		config.Img_Imagenes            = settings.value("Img_Imagenes"           , "").toString();
+		config.Img_Capturas            = settings.value("Img_Capturas"           , "").toString();
+		config.Datos_Videos            = settings.value("Datos_Videos"           , "").toString();
+		config.Datos_Sonidos           = settings.value("Datos_Sonidos"          , "").toString();
+		config.DatosFiles_PathFile     = settings.value("DatosFiles_PathFile"    , "").toString();
+		config.DatosFiles_PathExe      = settings.value("DatosFiles_PathExe"     , "").toString();
+		config.DatosFiles_PathSetup    = settings.value("DatosFiles_PathSetup"   , "").toString();
+		config.DatosFiles_PathCapturas = settings.value("DatosFiles_PathCapturas", "").toString();
 	// DOSBox
-		config.Dbx_path            = QDir::toNativeSeparators(settings.value("Dbx_path"           , "").toString());
-		config.Dbx_path_exe        = QDir::toNativeSeparators(settings.value("Dbx_path_exe"       , "").toString());
-		config.Dbx_path_setup      = QDir::toNativeSeparators(settings.value("Dbx_path_setup"     , "").toString());
-		config.Dbx_gus_ultradir    = QDir::toNativeSeparators(settings.value("Dbx_gus_ultradir"   , "").toString());
-		config.Dbx_sdl_mapperfile  = QDir::toNativeSeparators(settings.value("Dbx_sdl_mapperfile" , "").toString());
-		config.Dbx_dosbox_language = QDir::toNativeSeparators(settings.value("Dbx_dosbox_language", "").toString());
-		config.Dbx_dosbox_captures = QDir::toNativeSeparators(settings.value("Dbx_dosbox_captures", "").toString());
-		config.Dbx_path_sonido     = QDir::toNativeSeparators(settings.value("Dbx_path_sonido"    , "").toString());
-		config.Montaje_path        = QDir::toNativeSeparators(settings.value("Montaje_path"       , "").toString());
+		config.Dbx_path            = settings.value("Dbx_path"           , "").toString();
+		config.Dbx_path_exe        = settings.value("Dbx_path_exe"       , "").toString();
+		config.Dbx_path_setup      = settings.value("Dbx_path_setup"     , "").toString();
+		config.Dbx_gus_ultradir    = settings.value("Dbx_gus_ultradir"   , "").toString();
+		config.Dbx_sdl_mapperfile  = settings.value("Dbx_sdl_mapperfile" , "").toString();
+		config.Dbx_dosbox_language = settings.value("Dbx_dosbox_language", "").toString();
+		config.Montaje_path        = settings.value("Montaje_path"       , "").toString();
 	// ScummVM
-		config.Svm_path          = QDir::toNativeSeparators(settings.value("Svm_path"         , "").toString());
-		config.Svm_path_game     = QDir::toNativeSeparators(settings.value("Svm_path_game"    , "").toString());
-		config.Svm_path_save     = QDir::toNativeSeparators(settings.value("Svm_path_save"    , "").toString());
-		config.Svm_path_extra    = QDir::toNativeSeparators(settings.value("Svm_path_extra"   , "").toString());
-		config.Svm_path_capturas = QDir::toNativeSeparators(settings.value("Svm_path_capturas", "").toString());
-		config.Svm_path_sonido   = QDir::toNativeSeparators(settings.value("Svm_path_sonido"  , "").toString());
-		config.Svm_soundfont     = QDir::toNativeSeparators(settings.value("Svm_soundfont"    , "").toString());
+		config.Svm_path       = settings.value("Svm_path"      , "").toString();
+		config.Svm_path_save  = settings.value("Svm_path_save" , "").toString();
+		config.Svm_path_extra = settings.value("Svm_path_extra", "").toString();
+		config.Svm_soundfont  = settings.value("Svm_soundfont" , "").toString();
 	// VDMSound
-		config.Vdms_path_exe = QDir::toNativeSeparators(settings.value("Vdms_path_exe", "").toString());
-		config.Vdms_icon     = QDir::toNativeSeparators(settings.value("Vdms_icon"    , "").toString());
+		config.Vdms_path_exe = settings.value("Vdms_path_exe", "").toString();
+		config.Vdms_icon     = settings.value("Vdms_icon"    , "").toString();
 	settings.endGroup();
 
 	settings.beginGroup("Updates");
-		config.chkVersion  = settings.value("chkVersion" , false).toBool();
-		config.SoloUpdates = settings.value("SoloUpdates", false).toBool();
 		config.Version     = settings.value("Version"    , versionGrl()).toString();
 		config.VerListSvm  = settings.value("VerListSvm" , versionSvm()).toString();
+		config.chkVersion  = settings.value("chkVersion" , false).toBool();
+		config.chkUpdateThemes   = settings.value("chkUpdateThemes", false).toBool();
+		config.chkUpdateInterval = settings.value("chkUpdateInterval", 7).toInt();
+		config.lastChkUpdate     = settings.value("lastChkUpdate", getTime()).toInt();
 	settings.endGroup();
 
-	config.isChangedCategoria  = false;
-	config.isChangedEmuList    = false;
-	config.isChangedIdioma     = false;
-	config.isChangedListDOSBox = false;
-
-	setIdioma( config.IdiomaSelect );
-	setTheme( config.NameDirTheme );
+	config.isChangedToolbarBigIcon = false;
+	config.isChangedTheme          = false;
+	config.isChangedFormatoFecha   = false;
+	config.isChangedCategoria      = false;
+	config.isChangedEmuList        = false;
+	config.isChangedIdioma         = false;
+	config.isChangedListDOSBox     = false;
+	config.isChangedShortcut       = false;
+	config.isChangedFavorito       = false;
 
 	return config;
 }
@@ -1055,217 +1501,290 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 	settings.clear();
 
 	settings.beginGroup("SqlDatabase");
-		settings.setValue("db_type"     , config.db_type      );
-		settings.setValue("db_server"   , config.db_server    );
-		settings.setValue("db_host"     , config.db_host      );
-		settings.setValue("db_name"     , config.db_name      );
-		settings.setValue("db_username" , config.db_username  );
-		settings.setValue("db_password" , config.db_password  );
-		settings.setValue("db_port"     , config.db_port      );
-		settings.setValue("db_orden_col", config.db_orden_col );
-		settings.setValue("db_orden_by" , config.db_orden_by  );
-		settings.setValue("db_orden"    , config.db_orden     );
+		settings.setValue("db_type"     , config.db_type     );
+		settings.setValue("db_server"   , config.db_server   );
+		settings.setValue("db_host"     , config.db_host     );
+		settings.setValue("db_name"     , config.db_name     );
+		settings.setValue("db_username" , config.db_username );
+		settings.setValue("db_password" , config.db_password );
+		settings.setValue("db_port"     , config.db_port     );
+		settings.setValue("db_orden_col", config.db_orden_col);
+		settings.setValue("db_orden_by" , config.db_orden_by );
+		settings.setValue("db_orden"    , config.db_orden    );
 	settings.endGroup();
 
 	settings.beginGroup("OpcGeneral");
-		settings.setValue("Primeravez"         , config.Primeravez          );
-		settings.setValue("DirApp"             , config.DirApp              );
-		settings.setValue("DirDOSBox"          , config.DirDOSBox           );
-		settings.setValue("DirScummVM"         , config.DirScummVM          );
-		settings.setValue("DirBaseGames"       , config.DirBaseGames        );
-		settings.setValue("DOSBoxDefault"      , config.DOSBoxDefault       );
-		settings.setValue("DOSBoxDisp"         , config.DOSBoxDisp          );
-		settings.setValue("ScummVMDisp"        , config.ScummVMDisp         );
-		settings.setValue("VDMSoundDisp"       , config.VDMSoundDisp        );
-		settings.setValue("IdiomaSelect"       , config.IdiomaSelect        );
-		settings.setValue("OpenPdfExternal"    , config.OpenPdfExternal     );
-		settings.setValue("url_xmldb"          , config.url_xmldb           );
-		settings.setValue("FormatoFecha"       , config.FormatoFecha        );
-		settings.setValue("ToolbarBigIcon"     , config.ToolbarBigIcon      );
-		settings.setValue("Style"              , config.Style               );
-		settings.setValue("StylePalette"       , config.StylePalette        );
-		settings.setValue("NameDirTheme"       , config.NameDirTheme        );
-		settings.setValue("IconoFav"           , config.IconoFav            );
-		settings.setValue("PicFlowType"        , config.PicFlowType         );
-		settings.setValue("PicFlowBgColor"     , config.PicFlowBgColor      );
-		settings.setValue("PicFlowShowNumPos"  , config.PicFlowShowNumPos   );
-		settings.setValue("PicFlowShowTriangle", config.PicFlowShowTriangle );
-		settings.setValue("PicFlowMinHeight"   , config.PicFlowMinHeight    );
-		settings.setValue("Skip_PicFlow"       , config.Skip_PicFlow        );
-		settings.setValue("IndexTabArchivos"   , config.IndexTabArchivos    );
-		settings.setValue("VersionDBx"         , config.VersionDBx          );
-		settings.setValue("DOSBoxSVN"          , config.DOSBoxSVN           );
-		settings.setValue("DOSBoxSaveConfFile" , config.DOSBoxSaveConfFile  );
-		settings.setValue("LastSelectCatID"    , config.LastSelectCatID     );
-		settings.setValue("LastTabOptSelect"   , config.LastTabOptSelect    );
+		settings.setValue("Primeravez"          , config.Primeravez          );
+		settings.setValue("dirApp"              , config.dirApp              );
+		settings.setValue("DirDOSBox"           , config.DirDOSBox           );
+		settings.setValue("DirScummVM"          , config.DirScummVM          );
+		settings.setValue("DirBaseGames"        , config.DirBaseGames        );
+		settings.setValue("DOSBoxDefault"       , config.DOSBoxDefault       );
+		settings.setValue("DOSBoxDisp"          , config.DOSBoxDisp          );
+		settings.setValue("ScummVMDisp"         , config.ScummVMDisp         );
+		settings.setValue("VDMSoundDisp"        , config.VDMSoundDisp        );
+		settings.setValue("IdiomaSelect"        , config.IdiomaSelect        );
+		settings.setValue("OpenPdfExternal"     , config.OpenPdfExternal     );
+		settings.setValue("url_xmldb"           , config.url_xmldb           );
+		settings.setValue("FormatoFecha"        , config.FormatoFecha        );
+		settings.setValue("ToolbarBigIcon"      , config.ToolbarBigIcon      );
+		settings.setValue("Style"               , config.Style               );
+		settings.setValue("StylePalette"        , config.StylePalette        );
+		settings.setValue("NameDirTheme"        , config.NameDirTheme        );
+		settings.setValue("IconoFav"            , config.IconoFav            );
+		settings.setValue("IndexTabArchivos"    , config.IndexTabArchivos    );
+		settings.setValue("VersionDBx"          , config.VersionDBx          );
+		settings.setValue("DOSBoxSVN"           , config.DOSBoxSVN           );
+		settings.setValue("DOSBoxSaveConfFile"  , config.DOSBoxSaveConfFile  );
+		settings.setValue("ScummVMSaveConfFile" , config.ScummVMSaveConfFile );
+		settings.setValue("LastSelectGameID"    , config.LastSelectGameID    );
+		settings.setValue("LastSelectCatID"     , config.LastSelectCatID     );
+		settings.setValue("LastSelectNavID"     , config.LastSelectNavID     );
+		settings.setValue("LastSelectNavSubID"  , config.LastSelectNavSubID  );
+		settings.setValue("LastTabOptSelect"    , config.LastTabOptSelect    );
+		settings.setValue("LastSelectShortCutID", config.LastSelectShortCutID);
+	settings.endGroup();
+
+	settings.beginGroup("OpcSaveThumbs");
+		settings.setValue("thumb_width"      , config.thumb_width      );
+		settings.setValue("thumb_height"     , config.thumb_height     );
+		settings.setValue("thumb_quality"    , config.thumb_quality    );
+		settings.setValue("thumb_format"     , config.thumb_format     );
+		settings.setValue("thumb_img_width"  , config.thumb_img_width  );
+		settings.setValue("thumb_img_height" , config.thumb_img_height );
+		settings.setValue("thumb_img_quality", config.thumb_img_quality);
+	settings.endGroup();
+
+	settings.beginGroup("OpcPicFlow");
+		settings.setValue("PicFlowType"            , config.PicFlowType            );
+		settings.setValue("PicFlowBgColor"         , config.PicFlowBgColor         );
+		settings.setValue("PicFlowFontFamily"      , config.PicFlowFontFamily      );
+		settings.setValue("PicFlowFontSize"        , config.PicFlowFontSize        );
+		settings.setValue("PicFlowFontBold"        , config.PicFlowFontBold        );
+		settings.setValue("PicFlowFontItalic"      , config.PicFlowFontItalic      );
+		settings.setValue("PicFlowFontColor"       , config.PicFlowFontColor       );
+		settings.setValue("PicFlowMinHeight"       , config.PicFlowMinHeight       );
+		settings.setValue("PicFlowSkip"            , config.PicFlowSkip            );
+
+		settings.setValue("PicFlowShowTitle"       , config.PicFlowShowTitle       );
+		settings.setValue("PicFlowTitlePos"        , config.PicFlowTitlePos        );
+		settings.setValue("PicFlowTitleMargin"     , config.PicFlowTitleMargin     );
+
+		settings.setValue("PicFlowShowTitleIcon"   , config.PicFlowShowTitleIcon   );
+		settings.setValue("PicFlowTitleIconPos"    , config.PicFlowTitleIconPos    );
+		settings.setValue("PicFlowTitleIconMargin" , config.PicFlowTitleIconMargin );
+
+		settings.setValue("PicFlowShowCaption"     , config.PicFlowShowCaption     );
+		settings.setValue("PicFlowCaptionPos"      , config.PicFlowCaptionPos      );
+		settings.setValue("PicFlowCaptionMargin"   , config.PicFlowCaptionMargin   );
+
+		settings.setValue("PicFlowShowNumber"      , config.PicFlowShowNumber      );
+		settings.setValue("PicFlowNumberPos"       , config.PicFlowNumberPos       );
+		settings.setValue("PicFlowNumberMargin"    , config.PicFlowNumberMargin    );
+		settings.setValue("PicFlowNumberFormat"    , config.PicFlowNumberFormat    );
+
+		settings.setValue("PicFlowShowIconExtra"   , config.PicFlowShowIconExtra   );
+		settings.setValue("PicFlowIconExtraPos"    , config.PicFlowIconExtraPos    );
+		settings.setValue("PicFlowIconExtraMargin" , config.PicFlowIconExtraMargin );
+
+		settings.setValue("PicFlowIconExtraUse"        , config.PicFlowIconExtraUse        );
+		settings.setValue("PicFlowIconExtraImgFavorito", config.PicFlowIconExtraImgFavorito);
+		settings.setValue("PicFlowIconExtraImgOriginal", config.PicFlowIconExtraImgOriginal);
+
+		settings.setValue("PicFlowMargin", config.PicFlowMargin);
+
+		settings.setValue("PicFlowShowTriangle", config.PicFlowShowTriangle);
 	settings.endGroup();
 
 	settings.beginGroup("OpcFuente");
-		settings.setValue("font_usar"  , config.font_usar   );
-		settings.setValue("font_family", config.font_family );
-		settings.setValue("font_size"  , config.font_size   );
+		settings.setValue("font_usar"  , config.font_usar  );
+		settings.setValue("font_family", config.font_family);
+		settings.setValue("font_size"  , config.font_size  );
 	settings.endGroup();
 
 	settings.beginGroup("HttpProxy");
-		settings.setValue("ProxyEnable"  , config.ProxyEnable   );
-		settings.setValue("ProxyType"    , config.ProxyType     );
-		settings.setValue("ProxyHost"    , config.ProxyHost     );
-		settings.setValue("ProxyPort"    , config.ProxyPort     );
-		settings.setValue("ProxyLogin"   , config.ProxyLogin    );
-		settings.setValue("ProxyUserName", config.ProxyUserName );
-		settings.setValue("ProxyPassword", config.ProxyPassword );
+		settings.setValue("ProxyEnable"  , config.ProxyEnable  );
+		settings.setValue("ProxyType"    , config.ProxyType    );
+		settings.setValue("ProxyHost"    , config.ProxyHost    );
+		settings.setValue("ProxyPort"    , config.ProxyPort    );
+		settings.setValue("ProxyLogin"   , config.ProxyLogin   );
+		settings.setValue("ProxyUserName", config.ProxyUserName);
+		settings.setValue("ProxyPassword", config.ProxyPassword);
 	settings.endGroup();
 
 	settings.beginGroup("MainState");
-		settings.setValue("main_fullscreen"    , config.main_fullscreen     );
-		settings.setValue("main_maximized"     , config.main_maximized      );
-		settings.setValue("main_geometry"      , config.main_geometry       );
-		settings.setValue("main_state"         , config.main_state          );
-		settings.setValue("main_twJuegos_state", config.main_twJuegos_state );
+		settings.setValue("main_fullscreen"      , config.main_fullscreen      );
+		settings.setValue("main_maximized"       , config.main_maximized       );
+		settings.setValue("main_geometry"        , config.main_geometry        );
+		settings.setValue("main_state"           , config.main_state           );
+		settings.setValue("main_tvJuegos_state"  , config.main_tvJuegos_state  );
+		settings.setValue("import_geometry"      , config.import_geometry      );
+		settings.setValue("import_splitter_state", config.import_splitter_state);
 	settings.endGroup();
 
 	settings.beginGroup("OpcVer");
-		settings.setValue("Pnl_Nav"              , config.Pnl_Nav               );
-		settings.setValue("Pnl_FilesUrl"         , config.Pnl_FilesUrl          );
-		settings.setValue("Pnl_Datos"            , config.Pnl_Datos             );
-		settings.setValue("Pnl_PictureFlow"      , config.Pnl_PictureFlow       );
-		settings.setValue("Pnl_Capturas"         , config.Pnl_Capturas          );
-		settings.setValue("Pnl_Menubar"          , config.Pnl_Menubar           );
-		settings.setValue("Pnl_Toolbar"          , config.Pnl_Toolbar           );
-		settings.setValue("Pnl_Ordenar"          , config.Pnl_Ordenar           );
-		settings.setValue("Pnl_StatusBar"        , config.Pnl_StatusBar         );
-		settings.setValue("PictureFlowToCenter"  , config.PictureFlowToCenter   );
-		settings.setValue("ver_IconMode"         , config.ver_IconMode          );
-		settings.setValue("ver_col_Icono"        , config.ver_col_Icono         );
-		settings.setValue("ver_col_Subtitulo"    , config.ver_col_Subtitulo     );
-		settings.setValue("ver_col_Genero"       , config.ver_col_Genero        );
-		settings.setValue("ver_col_Compania"     , config.ver_col_Compania      );
-		settings.setValue("ver_col_Desarrollador", config.ver_col_Desarrollador );
-		settings.setValue("ver_col_Tema"         , config.ver_col_Tema          );
-		settings.setValue("ver_col_Grupo"        , config.ver_col_Grupo         );
-		settings.setValue("ver_col_Perspectiva"  , config.ver_col_Perspectiva   );
-		settings.setValue("ver_col_Idioma"       , config.ver_col_Idioma        );
-		settings.setValue("ver_col_IdiomaVoces"  , config.ver_col_IdiomaVoces   );
-		settings.setValue("ver_col_Formato"      , config.ver_col_Formato       );
-		settings.setValue("ver_col_Anno"         , config.ver_col_Anno          );
-		settings.setValue("ver_col_NumDisc"      , config.ver_col_NumDisc       );
-		settings.setValue("ver_col_SistemaOp"    , config.ver_col_SistemaOp     );
-		settings.setValue("ver_col_Tamano"       , config.ver_col_Tamano        );
-		settings.setValue("ver_col_Graficos"     , config.ver_col_Graficos      );
-		settings.setValue("ver_col_Sonido"       , config.ver_col_Sonido        );
-		settings.setValue("ver_col_Jugabilidad"  , config.ver_col_Jugabilidad   );
-		settings.setValue("ver_col_Original"     , config.ver_col_Original      );
-		settings.setValue("ver_col_Estado"       , config.ver_col_Estado        );
-		settings.setValue("ver_col_Fecha"        , config.ver_col_Fecha         );
-		settings.setValue("ver_col_TipoEmu"      , config.ver_col_TipoEmu       );
-		settings.setValue("ver_col_Favorito"     , config.ver_col_Favorito      );
-		settings.setValue("ver_col_Rating"       , config.ver_col_Rating        );
-		settings.setValue("ver_col_Edad"         , config.ver_col_Edad          );
-		settings.setValue("ver_col_Usuario"      , config.ver_col_Usuario       );
+		settings.setValue("Pnl_AutoHideTitleBars"           , config.Pnl_AutoHideTitleBars           );
+		settings.setValue("Pnl_Nav_VisibleTitleBars"        , config.Pnl_Nav_VisibleTitleBars        );
+		settings.setValue("Pnl_Datos_VisibleTitleBars"      , config.Pnl_Datos_VisibleTitleBars      );
+		settings.setValue("Pnl_Files_VisibleTitleBars"      , config.Pnl_Files_VisibleTitleBars      );
+		settings.setValue("Pnl_Urls_VisibleTitleBars"       , config.Pnl_Urls_VisibleTitleBars       );
+		settings.setValue("Pnl_Videos_VisibleTitleBars"     , config.Pnl_Videos_VisibleTitleBars     );
+		settings.setValue("Pnl_Sonidos_VisibleTitleBars"    , config.Pnl_Sonidos_VisibleTitleBars    );
+		settings.setValue("Pnl_Capturas_VisibleTitleBars"   , config.Pnl_Capturas_VisibleTitleBars   );
+		settings.setValue("Pnl_Imagenes_VisibleTitleBars"   , config.Pnl_Imagenes_VisibleTitleBars   );
+		settings.setValue("Pnl_PictureFlow_VisibleTitleBars", config.Pnl_PictureFlow_VisibleTitleBars);
+		settings.setValue("Pnl_Nav_IgnoreAutoHide"          , config.Pnl_Nav_IgnoreAutoHide          );
+		settings.setValue("Pnl_Datos_IgnoreAutoHide"        , config.Pnl_Datos_IgnoreAutoHide        );
+		settings.setValue("Pnl_Files_IgnoreAutoHide"        , config.Pnl_Files_IgnoreAutoHide        );
+		settings.setValue("Pnl_Urls_IgnoreAutoHide"         , config.Pnl_Urls_IgnoreAutoHide         );
+		settings.setValue("Pnl_Videos_IgnoreAutoHide"       , config.Pnl_Videos_IgnoreAutoHide       );
+		settings.setValue("Pnl_Sonidos_IgnoreAutoHide"      , config.Pnl_Sonidos_IgnoreAutoHide      );
+		settings.setValue("Pnl_Capturas_IgnoreAutoHide"     , config.Pnl_Capturas_IgnoreAutoHide     );
+		settings.setValue("Pnl_Imagenes_IgnoreAutoHide"     , config.Pnl_Imagenes_IgnoreAutoHide     );
+		settings.setValue("Pnl_PictureFlow_IgnoreAutoHide"  , config.Pnl_PictureFlow_IgnoreAutoHide  );
+		settings.setValue("Pnl_Nav"                         , config.Pnl_Nav                         );
+		settings.setValue("Pnl_Datos"                       , config.Pnl_Datos                       );
+		settings.setValue("Pnl_Files"                       , config.Pnl_Files                       );
+		settings.setValue("Pnl_Urls"                        , config.Pnl_Urls                        );
+		settings.setValue("Pnl_Videos"                      , config.Pnl_Videos                      );
+		settings.setValue("Pnl_Sonidos"                     , config.Pnl_Sonidos                     );
+		settings.setValue("Pnl_Capturas"                    , config.Pnl_Capturas                    );
+		settings.setValue("Pnl_Imagenes"                    , config.Pnl_Imagenes                    );
+		settings.setValue("Pnl_PictureFlow"                 , config.Pnl_PictureFlow                 );
+		settings.setValue("PictureFlowToCenter"             , config.PictureFlowToCenter             );
+		settings.setValue("Pnl_Menubar"                     , config.Pnl_Menubar                     );
+		settings.setValue("Pnl_Toolbar"                     , config.Pnl_Toolbar                     );
+		settings.setValue("Pnl_ToolbarDatos"                , config.Pnl_ToolbarDatos                );
+		settings.setValue("Pnl_Ordenar"                     , config.Pnl_Ordenar                     );
+		settings.setValue("Pnl_ShortCut"                    , config.Pnl_ShortCut                    );
+		settings.setValue("Pnl_StatusBar"                   , config.Pnl_StatusBar                   );
+		settings.setValue("ver_IconMode"                    , config.ver_IconMode                    );
+		settings.setValue("ver_col_Icono"                   , config.ver_col_Icono                   );
+		settings.setValue("ver_col_Subtitulo"               , config.ver_col_Subtitulo               );
+		settings.setValue("ver_col_Genero"                  , config.ver_col_Genero                  );
+		settings.setValue("ver_col_Compania"                , config.ver_col_Compania                );
+		settings.setValue("ver_col_Desarrollador"           , config.ver_col_Desarrollador           );
+		settings.setValue("ver_col_Tema"                    , config.ver_col_Tema                    );
+		settings.setValue("ver_col_Grupo"                   , config.ver_col_Grupo                   );
+		settings.setValue("ver_col_Perspectiva"             , config.ver_col_Perspectiva             );
+		settings.setValue("ver_col_Idioma"                  , config.ver_col_Idioma                  );
+		settings.setValue("ver_col_IdiomaVoces"             , config.ver_col_IdiomaVoces             );
+		settings.setValue("ver_col_Formato"                 , config.ver_col_Formato                 );
+		settings.setValue("ver_col_Anno"                    , config.ver_col_Anno                    );
+		settings.setValue("ver_col_NumDisc"                 , config.ver_col_NumDisc                 );
+		settings.setValue("ver_col_SistemaOp"               , config.ver_col_SistemaOp               );
+		settings.setValue("ver_col_Tamano"                  , config.ver_col_Tamano                  );
+		settings.setValue("ver_col_Graficos"                , config.ver_col_Graficos                );
+		settings.setValue("ver_col_Sonido"                  , config.ver_col_Sonido                  );
+		settings.setValue("ver_col_Jugabilidad"             , config.ver_col_Jugabilidad             );
+		settings.setValue("ver_col_Original"                , config.ver_col_Original                );
+		settings.setValue("ver_col_Estado"                  , config.ver_col_Estado                  );
+		settings.setValue("ver_col_Fecha"                   , config.ver_col_Fecha                   );
+		settings.setValue("ver_col_TipoEmu"                 , config.ver_col_TipoEmu                 );
+		settings.setValue("ver_col_Favorito"                , config.ver_col_Favorito                );
+		settings.setValue("ver_col_Rating"                  , config.ver_col_Rating                  );
+		settings.setValue("ver_col_Edad"                    , config.ver_col_Edad                    );
+		settings.setValue("ver_col_Usuario"                 , config.ver_col_Usuario                 );
 	settings.endGroup();
 
 	settings.beginGroup("ImageViewerState");
-		settings.setValue("img_maximized"       , config.img_maximized        );
-		settings.setValue("img_fitToWindow"     , config.img_fitToWindow      );
-		settings.setValue("img_verListaImagenes", config.img_verListaImagenes );
+		settings.setValue("img_maximized"       , config.img_maximized       );
+		settings.setValue("img_fitToWindow"     , config.img_fitToWindow     );
+		settings.setValue("img_verListaImagenes", config.img_verListaImagenes);
 	settings.endGroup();
 
 	settings.beginGroup("OpcMultimedia");
-		settings.setValue("FormatsVideo", config.FormatsVideo );
-		settings.setValue("FormatsMusic", config.FormatsMusic );
-		settings.setValue("FormatsImage", config.FormatsImage );
+		settings.setValue("FormatsVideo"        , config.FormatsVideo        );
+		settings.setValue("FormatsMusic"        , config.FormatsMusic        );
+		settings.setValue("FormatsImage"        , config.FormatsImage        );
+		settings.setValue("VerPlaylistVideo"    , config.VerPlaylistVideo    );
+		settings.setValue("VerPlaylistVideoMain", config.VerPlaylistVideoMain);
+		settings.setValue("VerPlaylistSound"    , config.VerPlaylistSound    );
+		settings.setValue("VerPlaylistSoundMain", config.VerPlaylistSoundMain);
+		settings.setValue("VerInfoMedia"        , config.VerInfoMedia        );
+		settings.setValue("VerInfoMediaMain"    , config.VerInfoMediaMain    );
 	settings.endGroup();
 
 	settings.beginGroup("UltimoDirectorio");
-		settings.setValue("DirBD"        , config.DirBD         );
-		settings.setValue("DirImportar"  , config.DirImportar   );
-		settings.setValue("DirExportPath", config.DirExportPath );
-		settings.setValue("DirOtherEmus" , config.DirOtherEmus  );
+		settings.setValue("DirBD"        , config.DirBD        );
+		settings.setValue("DirImportar"  , config.DirImportar  );
+		settings.setValue("DirExportPath", config.DirExportPath);
+		settings.setValue("DirOtherEmus" , config.DirOtherEmus );
 	// Datos de Juegos
-		settings.setValue("Img_Thumbs"             , config.Img_Thumbs              );
-		settings.setValue("Img_CoverFront"         , config.Img_CoverFront          );
-		settings.setValue("Img_CoverBack"          , config.Img_CoverBack           );
-		settings.setValue("DatosFiles_PathFile"    , config.DatosFiles_PathFile     );
-		settings.setValue("DatosFiles_PathExe"     , config.DatosFiles_PathExe      );
-		settings.setValue("DatosFiles_PathSetup"   , config.DatosFiles_PathSetup    );
-		settings.setValue("DatosFiles_PathCapturas", config.DatosFiles_PathCapturas );
+		settings.setValue("Img_Thumbs"             , config.Img_Thumbs             );
+		settings.setValue("Img_CoverFront"         , config.Img_CoverFront         );
+		settings.setValue("Img_CoverBack"          , config.Img_CoverBack          );
+		settings.setValue("Img_CoverLeft"          , config.Img_CoverLeft          );
+		settings.setValue("Img_CoverRight"         , config.Img_CoverRight         );
+		settings.setValue("Img_CoverTop"           , config.Img_CoverTop           );
+		settings.setValue("Img_CoverBottom"        , config.Img_CoverBottom        );
+		settings.setValue("Img_Imagenes"           , config.Img_Imagenes           );
+		settings.setValue("Img_Capturas"           , config.Img_Capturas           );
+		settings.setValue("Datos_Videos"           , config.Datos_Videos           );
+		settings.setValue("Datos_Sonidos"          , config.Datos_Sonidos          );
+		settings.setValue("DatosFiles_PathFile"    , config.DatosFiles_PathFile    );
+		settings.setValue("DatosFiles_PathExe"     , config.DatosFiles_PathExe     );
+		settings.setValue("DatosFiles_PathSetup"   , config.DatosFiles_PathSetup   );
+		settings.setValue("DatosFiles_PathCapturas", config.DatosFiles_PathCapturas);
 	// DOSBox
-		settings.setValue("Dbx_path"           , config.Dbx_path            );
-		settings.setValue("Dbx_path_exe"       , config.Dbx_path_exe        );
-		settings.setValue("Dbx_path_setup"     , config.Dbx_path_setup      );
-		settings.setValue("Dbx_gus_ultradir"   , config.Dbx_gus_ultradir    );
-		settings.setValue("Dbx_sdl_mapperfile" , config.Dbx_sdl_mapperfile  );
-		settings.setValue("Dbx_dosbox_language", config.Dbx_dosbox_language );
-		settings.setValue("Dbx_dosbox_captures", config.Dbx_dosbox_captures );
-		settings.setValue("Dbx_path_sonido"    , config.Dbx_path_sonido     );
-		settings.setValue("Montaje_path"       , config.Montaje_path        );
+		settings.setValue("Dbx_path"           , config.Dbx_path           );
+		settings.setValue("Dbx_path_exe"       , config.Dbx_path_exe       );
+		settings.setValue("Dbx_path_setup"     , config.Dbx_path_setup     );
+		settings.setValue("Dbx_gus_ultradir"   , config.Dbx_gus_ultradir   );
+		settings.setValue("Dbx_sdl_mapperfile" , config.Dbx_sdl_mapperfile );
+		settings.setValue("Dbx_dosbox_language", config.Dbx_dosbox_language);
+		settings.setValue("Montaje_path"       , config.Montaje_path       );
 	// ScummVM
-		settings.setValue("Svm_path"         , config.Svm_path          );
-		settings.setValue("Svm_path_game"    , config.Svm_path_game     );
-		settings.setValue("Svm_path_save"    , config.Svm_path_save     );
-		settings.setValue("Svm_path_extra"   , config.Svm_path_extra    );
-		settings.setValue("Svm_path_capturas", config.Svm_path_capturas );
-		settings.setValue("Svm_path_sonido"  , config.Svm_path_sonido   );
-		settings.setValue("Svm_soundfont"    , config.Svm_soundfont     );
+		settings.setValue("Svm_path"      , config.Svm_path      );
+		settings.setValue("Svm_path_save" , config.Svm_path_save );
+		settings.setValue("Svm_path_extra", config.Svm_path_extra);
+		settings.setValue("Svm_soundfont" , config.Svm_soundfont );
 	// VDMSound
-		settings.setValue("Vdms_path_exe", config.Vdms_path_exe );
-		settings.setValue("Vdms_icon"    , config.Vdms_icon     );
+		settings.setValue("Vdms_path_exe", config.Vdms_path_exe);
+		settings.setValue("Vdms_icon"    , config.Vdms_icon    );
 	settings.endGroup();
 
 	settings.beginGroup("Updates");
-		settings.setValue("chkVersion" , config.chkVersion  );
-		settings.setValue("SoloUpdates", config.SoloUpdates );
-		settings.setValue("Version"    , config.Version     );
-		settings.setValue("VerListSvm" , config.VerListSvm  );
-	settings.endGroup();
-}
-
-// Guarda la configuración del GR-lida
-void Funciones::guardarKeyGRLConfig(QString iniFileName, QString grupo, QString key, QString value)
-{
-	QSettings settings(iniFileName, QSettings::IniFormat);
-	settings.beginGroup(grupo);
-		settings.setValue(key, value);
+		settings.setValue("Version"          , config.Version          );
+		settings.setValue("VerListSvm"       , config.VerListSvm       );
+		settings.setValue("chkVersion"       , config.chkVersion       );
+		settings.setValue("chkUpdateThemes"  , config.chkUpdateThemes  );
+		settings.setValue("chkUpdateInterval", config.chkUpdateInterval);
+		settings.setValue("lastChkUpdate"    , config.lastChkUpdate    );
 	settings.endGroup();
 }
 
 // Obtiene la dirección y el nombre del archivo atraves de QFileDialog
-QString Funciones::ventanaAbrirArchivos(QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter, bool isSave)
+QString Funciones::ventanaAbrirArchivos(QWidget *parent, QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter, bool isSave)
 {
-	QString archivo = "";
-	QString base    = getDirRelative(dir, dir_relative);
+	QString base = getDirRelative(dir, dir_relative);
 
-	if( !comprobarDirectorio(base, true) )
+	if (!comprobarDirectorio(base, true))
 		base = stDirApp;
 
-	if( isSave )
-		archivo = QFileDialog::getSaveFileName(0, caption, base, filter, selectedFilter);
+	if (isSave)
+		return QFileDialog::getSaveFileName(parent, caption, base, filter, selectedFilter);
 	else
-		archivo = QFileDialog::getOpenFileName(0, caption, base, filter, selectedFilter);
-
-	if( !archivo.isEmpty() && QFile::exists(archivo) )
-		return QDir::toNativeSeparators( archivo );
-	else
-		return "";
+		return QFileDialog::getOpenFileName(parent, caption, base, filter, selectedFilter);
 }
 
 // Obtiene la dirección de una carpeta atraves de QFileDialog
-QString Funciones::ventanaDirectorios(QString caption, QString dir, QString dir_relative)
+QString Funciones::ventanaDirectorios(QWidget *parent, QString caption, QString dir, QString dir_relative)
 {
 	QString directorio = "";
 	QString base       = getDirRelative(dir, dir_relative);
 
-	if( !comprobarDirectorio(base, true) )
+	if (!comprobarDirectorio(base, true))
 		base = stDirApp;
 
-	directorio = QFileDialog::getExistingDirectory(0, caption, base, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+	directorio = QFileDialog::getExistingDirectory(parent, caption, base, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
-	if( !directorio.isEmpty() && comprobarDirectorio(directorio, true) )
+	if (!directorio.isEmpty() && comprobarDirectorio(directorio, true))
 	{
-		if( directorio.endsWith("/") || directorio.endsWith("\\") )
-			return QDir::toNativeSeparators( directorio );
+		if (directorio.endsWith("/"))
+			return directorio;
 		else
-			return QDir::toNativeSeparators(directorio +"/");
+			return directorio +"/";
 	} else
 		return "";
 }
@@ -1273,79 +1792,19 @@ QString Funciones::ventanaDirectorios(QString caption, QString dir, QString dir_
 // Abre un archivo con el programa predeterminado
 bool Funciones::abrirArchivo(QString filePath)
 {
-	return QDesktopServices::openUrl( QUrl::fromLocalFile( filePath ) );
+	return QDesktopServices::openUrl(QUrl::fromLocalFile(filePath));
 }
 
 // Abre un directorio
-bool Funciones::abrirDirectorio(QString dirPath)
+bool Funciones::abrirDirectorio(QString dir)
 {
-	return abrirArchivo(dirPath);
+	return abrirArchivo(dir);
 }
 
-// Crea una ventana para mostrar Información
-void Funciones::ventanaInfo(QString titulo, QString icono, int w, int h, QString contenido, bool isTextoPlano)
-{
-	QDialog *Dialog = new QDialog(0);
-	QVBoxLayout *mainLayout;
-	QTextBrowser *textInfo;
-	QHBoxLayout *hLayout;
-	QSpacerItem *hSpacer;
-	QPushButton *btnAceptar;
-
-	Dialog->resize(w, h);
-
-	textInfo = new QTextBrowser(Dialog);
-	textInfo->setReadOnly(true);
-	textInfo->setOpenExternalLinks(true);
-	textInfo->setOpenLinks(true);
-
-	hSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-	btnAceptar = new QPushButton(Dialog);
-
-	hLayout = new QHBoxLayout();
-	hLayout->addItem(hSpacer);
-	hLayout->addWidget(btnAceptar);
-
-	mainLayout = new QVBoxLayout(Dialog);
-	mainLayout->addWidget(textInfo);
-	mainLayout->addLayout(hLayout);
-
-	connect( btnAceptar, SIGNAL( clicked() ), Dialog, SLOT( accept() ) );
-	btnAceptar->setText( tr("Aceptar") );
-	btnAceptar->setIcon( QIcon(stTheme +"img16/aplicar.png") );
-	btnAceptar->setIconSize(QSize(16, 16));
-	btnAceptar->setMinimumSize(QSize(80, 24));
-
-	if( isTextoPlano )
-		textInfo->setPlainText(contenido);
-	else {
-		QString str_html = "{contenido_info}";
-		if( QFile::exists(stThemeApp +"tpl_info.html") )
-			str_html = leerArchivo(stThemeApp +"tpl_info.html", "UTF-8");
-		else
-			str_html = leerArchivo(":/tpl_info.html", "UTF-8");
-
-		str_html.replace("<theme>", stTheme);
-		str_html.replace("{contenido_info}", contenido.replace("\n","<br/>"));
-		textInfo->setHtml( str_html );
-	}
-
-	if( QFile::exists(icono) )
-		Dialog->setWindowIcon(QIcon(icono));
-	else
-		Dialog->setWindowIcon(QIcon(":/img16/informacion.png"));
-
-	Dialog->setWindowTitle( titulo );
-	Dialog->setStyleSheet( myStyleSheet() );
-	Dialog->exec();
-
-	delete Dialog;
-}
-
-// Elimina un item de un TreeWidget
+// Elimina un item de un QTreeWidget
 void Funciones::deleteItemTree(QTreeWidgetItem *item)
 {
-	if( !item )
+	if (!item)
 		return;
 	int count = item->childCount();
 	for (int i = count - 1; i >= 0; --i)
@@ -1357,212 +1816,266 @@ void Funciones::deleteItemTree(QTreeWidgetItem *item)
 // Mueve hacia arriba una posición de un QTreeWidget
 void Funciones::moveUpItemTw(QTreeWidget *twList)
 {
-	int current = twList->indexOfTopLevelItem( twList->currentItem() );
+	int current = twList->indexOfTopLevelItem(twList->currentItem());
 	int next_pos = -1;
-	if( current > 0 && current != -1 )
+	if (current > 0 && current != -1)
 	{
 		next_pos = current - 1;
 
-		QTreeWidgetItem *item = twList->topLevelItem( current );
-		item = twList->takeTopLevelItem( current );
+		QTreeWidgetItem *item = twList->topLevelItem(current);
+		item = twList->takeTopLevelItem(current);
 		twList->insertTopLevelItem(next_pos, item);
-		twList->setCurrentItem( item );
+		twList->setCurrentItem(item);
 	}
 }
 
 // Mueve hacia abajo una posición de un QTreeWidget
 void Funciones::moveDownItemTw(QTreeWidget *twList)
 {
-	int current = twList->indexOfTopLevelItem( twList->currentItem() );
+	int current = twList->indexOfTopLevelItem(twList->currentItem());
 	int next_pos = -1;
-	if( current < (twList->topLevelItemCount() - 1) && current != -1 )
+	if (current < (twList->topLevelItemCount() - 1) && current != -1)
 	{
 		next_pos = current + 1;
 
-		QTreeWidgetItem *item = twList->topLevelItem( current );
-		item = twList->takeTopLevelItem( current );
+		QTreeWidgetItem *item = twList->topLevelItem(current);
+		item = twList->takeTopLevelItem(current);
 		twList->insertTopLevelItem(next_pos, item);
-		twList->setCurrentItem( item );
+		twList->setCurrentItem(item);
 	}
 }
 
-// Carga la lista de archivos
-QList<stGrlDatos> Funciones::cargarListaArchivos(QString m_dir, TipoListCbx tipo, QString filter, QString filter_sep)
+// Marca o desmarca todos los item de un QTreeWidget
+void Funciones::checkStateAllItemTw(QTreeWidget *twList, int col, bool checked)
 {
-	QList<stGrlDatos> dato_list;
+	const int count = twList->topLevelItemCount();
+	if (count > 0)
+	{
+		for (int i = 0; i < count; ++i)
+		{
+			QTreeWidgetItem *item = twList->topLevelItem(i);
+			if (checked)
+				item->setCheckState(col, Qt::Checked);
+			else
+				item->setCheckState(col, Qt::Unchecked);
+		}
+	}
+}
+
+// Comprueba si existe la fila o subitem de la fila de un QTreeWidget
+bool Funciones::comprobarItemTwList(QTreeWidget *twList, int row, int sub_row)
+{
+	if (twList->topLevelItemCount() > 0)
+	{
+		if (sub_row == -1)
+		{
+			if (twList->topLevelItem(row) != NULL)
+			{
+				twList->setCurrentItem(twList->topLevelItem(row));
+				return true;
+			} else
+				comprobarItemTwList(twList, 0, -1);
+		} else {
+			if (twList->topLevelItem(row)->child(sub_row) != NULL)
+			{
+				twList->setCurrentItem(twList->topLevelItem(row)->child(sub_row));
+				return true;
+			} else
+				comprobarItemTwList(twList, row, -1);
+		}
+	}
+	return false;
+}
+
+// Activa o desactiva un boton asociado si existe un cambio en el item seleccionado del QTreeWidget
+void Funciones::enabledButtonUpdateTwList(QTreeWidget *twList, QPushButton *btn, QString texto, int col)
+{
+	int pos = twList->indexOfTopLevelItem(twList->currentItem());
+	if (twList->topLevelItemCount() > 0 && pos != -1)
+	{
+		if (texto != twList->currentItem()->text(col))
+			btn->setEnabled(true);
+		else
+			btn->setEnabled(false);
+	} else
+		btn->setEnabled(false);
+}
+
+
+// Carga la lista de archivos en un QComboBox
+void Funciones::cargarListaArchivosComboBox(TipoListCbx tipo, QComboBox *cbx, QString dir, QString dirImg, QString subDir, QString select_data, QString filter, QString filter_sep, bool isClear, QString contiene)
+{
 	stGrlDatos dato;
-	QString language, js_titulo, js_version;
 	QLocale locale;
 	QStringList parts_lng;
+	QString js_titulo, js_version, dirFiles = "";
 	QScriptEngine engine;
-	QFileInfoList list_files = getListFiles(m_dir, filter.split(filter_sep, QString::SkipEmptyParts));
 
-	dato_list.clear();
-	switch ( tipo )
+	if (isClear)
+		cbx->clear();
+
+	switch (tipo)
 	{
 		case CbxListIcon:
+			dirFiles = dir + dirImg;
+		break;
 		case CbxListLng:
-		case CbxListJs:
-//
+			dirFiles = dir;
 		break;
 		case CbxListProf:
-			dato.titulo  = tr("Configuración por defecto");
-			dato.icono   = stTheme +"img16/archivo_config.png";
-			dato.extra   = "";
-			dato.key     = "_defecto_";
+			dirFiles = dir;
 
-			dato_list << dato;
+			cbx->addItem(QIcon(stTheme + dirImg +"archivo_config.png"), tr("Configuración por defecto"), "_defecto_");
 		break;
-		case CbxListJsi:
-			dato.titulo  = tr("Importar desde un archivo") +": GR-lida XML, D-Fend Reloaded prof";
-			dato.icono   = stTheme +"img16/archivo_config.png";
-			dato.extra   = "";
-			dato.key     = "_desde_archivo_";
+		case CbxListJs:
+			dirFiles = dir;
 
-			dato_list << dato;
+			cbx->addItem(QIcon(stTheme + dirImg +"archivo_config.png"), tr("Importar desde un archivo") +": GR-lida XML, D-Fend Reloaded prof", "_desde_archivo_");
+			cbx->addItem(QIcon(stTheme + dirImg +"DBGL.png")          , tr("Importar desde un archivo") +": DOSBox Game Launcher (DBGL)"      , "_desde_dbgl_"   );
 		break;
-	};
+	}
+
+	QFileInfoList list_files = getListFiles(dirFiles, filter.split(filter_sep, QString::SkipEmptyParts));
 
 	const int listSize = list_files.size();
 	for (int i = 0; i < listSize; ++i)
 	{
-		switch ( tipo )
+		switch (tipo)
 		{
 			case CbxListIcon:
-				dato.icono  = m_dir + list_files.at(i).fileName();
-				dato.titulo = list_files.at(i).completeBaseName();
+				dato.icono  = list_files.at(i).absoluteFilePath();
+				dato.titulo = subDir + list_files.at(i).completeBaseName();
 				dato.extra  = "";
-				dato.key    = list_files.at(i).fileName();
+				dato.key    = subDir + list_files.at(i).fileName();
 			break;
 			case CbxListLng:
 				parts_lng.clear();
 				parts_lng = list_files.at(i).baseName().split("_");
-				language  = parts_lng.at(1) +"_"+ parts_lng.at(2);
-				locale    = language;
+				locale    = parts_lng.at(1) +"_"+ parts_lng.at(2);
 
-				if( QFile::exists(stTheme +"img16/lng/"+ parts_lng.at(2).toLower() +".png") )
-					dato.icono = stTheme +"img16/lng/"+ parts_lng.at(2).toLower() +".png";
-				else
-					dato.icono = stTheme +"img16/lng/sinimg.png";
+				dato.icono = stTheme + dirImg +"sinimg.png";
+				if (QFile::exists(stTheme + dirImg + parts_lng.at(2).toLower() +".png"))
+					dato.icono = stTheme + dirImg + parts_lng.at(2).toLower() +".png";
 
-				dato.titulo = locale.languageToString(locale.language()) +" ("+ locale.countryToString(locale.country()) +")"+ (m_dir == ":/idiomas/" ? "" : " "+ tr("exterior"));
+				dato.titulo = locale.languageToString(locale.language()) +" ("+ locale.countryToString(locale.country()) +")"+ (dir == ":/idiomas/" ? "" : " "+ tr("exterior"));
 				dato.extra  = "";
 				dato.key    = list_files.at(i).absoluteFilePath();
 			break;
 			case CbxListProf:
-				dato.icono  = stTheme +"img16/archivo_config.png";
+				dato.icono  = stTheme + dirImg +"archivo_config.png";
 				dato.titulo = list_files.at(i).completeBaseName();
 				dato.extra  = "";
 				dato.key    = list_files.at(i).fileName();
 			break;
 			case CbxListJs:
-			case CbxListJsi:
-				engine.evaluate( leerArchivo(list_files.at(i).absoluteFilePath(), "UTF-8") );
+				engine.evaluate(leerArchivo(list_files.at(i).absoluteFilePath(), "UTF-8"));
 
-				if( engine.evaluate("title").isValid() )
-					js_titulo = engine.evaluate("title").toString();
-				else
-					js_titulo = list_files.at(i).baseName();
+				js_titulo  = getValueScript(engine, "title", list_files.at(i).baseName());
+				js_version = getValueScript(engine, "version", "0");
 
-				if( engine.evaluate("version").isValid() )
-					js_version = engine.evaluate("version").toString();
-				else
-					js_version = "0";
-
-				dato.icono  = stTheme +"img16/script.png";
+				dato.icono  = stTheme + dirImg +"script.png";
 				dato.titulo = js_titulo +" v"+ js_version;
 				dato.extra  = js_version;
 				dato.key    = list_files.at(i).fileName();
+
 			break;
-		};
+		}
 
-		dato_list << dato;
+		if (contiene.isEmpty() || dato.key.contains(contiene, Qt::CaseInsensitive))
+			cbx->addItem(QIcon(dato.icono), dato.titulo, dato.key);
 	}
 
-	return dato_list;
-}
-
-void Funciones::cargarListaArchivosComboBox(QComboBox *cbx, QString m_dir, QString select_data, TipoListCbx tipo, QString filter, QString filter_sep, bool isClear)
-{
-	QList<stGrlDatos> list = cargarListaArchivos(m_dir, tipo, filter, filter_sep);
-
-	if( isClear )
-		cbx->clear();
-
-	const int listSize = list.size();
-	for (int i = 0; i < listSize; ++i)
-		cbx->addItem(QIcon(list.at(i).icono), list.at(i).titulo, list.at(i).key);
-
-	if( !select_data.isEmpty() )
+	if (!select_data.isEmpty())
 	{
-		int row = cbx->findData(select_data, Qt::UserRole, Qt::MatchExactly);
-		cbx->setCurrentIndex( row );
+		int row = cbx->findData(select_data, Qt::UserRole, (tipo == CbxListLng ? Qt::MatchContains : Qt::MatchExactly));
+		cbx->setCurrentIndex(row);
 	}
-}
-
-void Funciones::cargarListaArchivosCheckComboBox(QCheckComboBox *cbx, QString m_dir, QString select_data, TipoListCbx tipo, QString filter, QString filter_sep)
-{
-	QList<stGrlDatos> list = cargarListaArchivos(m_dir, tipo, filter, filter_sep);
-	cbx->clear();
-	const int listSize = list.size();
-	for (int i = 0; i < listSize; ++i)
-		cbx->addItem(QIcon(list.at(i).icono), list.at(i).titulo, list.at(i).key);
-
-	int row = cbx->findData(select_data, Qt::UserRole, Qt::MatchExactly);
-	cbx->setCurrentIndex( row );
 }
 
 // Carga la lista de Idiomas en un QComboBox
-void Funciones::cargarIdiomasComboBox(QComboBox *cbx, QString dirLng, bool isClear, QString select_data, QString filter)
+void Funciones::cargarIdiomasComboBox(QComboBox *cbx, QString dirLng, QString dirImg, QString select_data, bool isClear)
 {
-	cargarListaArchivosComboBox(cbx, dirLng, select_data, CbxListLng, filter, ";", isClear);
+	cargarListaArchivosComboBox(CbxListLng, cbx, dirLng, dirImg, "", select_data, "*.qm", ";", isClear);
 }
 
 // Carga la lista de Scripts en un QComboBox
-void Funciones::cargarScriptsComboBox(QComboBox *cbx, QString dirScripts, QString select_data, QString filter)
+void Funciones::cargarScriptsComboBox(QComboBox *cbx, QString dirScripts, QString dirImg, QString select_data)
 {
-	cargarListaArchivosComboBox(cbx, dirScripts, select_data, CbxListJsi, filter);
+	cargarListaArchivosComboBox(CbxListJs, cbx, dirScripts, dirImg, "", select_data, "*.js", ";");
 }
 
-// Carga Iconos e imagenes soportadas en un QComboBox de un directorio
-void Funciones::cargarIconosComboBox(QComboBox *cbx, QString iconDir, QString select_data, QString filter)
+// Carga la lista de Profiles en un QComboBox
+void Funciones::cargarProfilesComboBox(QComboBox *cbx, QString dirProfiles, QString dirImg, QString select_data)
 {
-	cargarListaArchivosComboBox(cbx, iconDir, select_data, CbxListIcon, filter);
+	cargarListaArchivosComboBox(CbxListProf, cbx, dirProfiles, dirImg, "", select_data, "*.conf;*.prof", ";");
 }
 
-// Carga las distintos archivos la ruta indicada en una Lista.
-void Funciones::cargarArchivosTwLista(QTreeWidget *twList, QString m_dir, QString filter, QString filter_sep, QString img)
+// Carga Iconos e Imágenes soportadas en un QComboBox de un directorio
+void Funciones::cargarIconosComboBox(QComboBox *cbx, QString dirIcon, QString dirImg, QString subDir, QString select_data, QString filter, bool isClear, QString contiene)
 {
-	QString archivo;
-	QFileInfoList list_files = getListFiles(m_dir, filter.split(filter_sep, QString::SkipEmptyParts));
+	cargarListaArchivosComboBox(CbxListIcon, cbx, dirIcon, dirImg, subDir, select_data, filter, ";", isClear, contiene);
+}
+
+void Funciones::cargarIconosGroupComboBox(QGroupComboBox *cbx, QString dirIcon, QString dirImg, QString subDir, QString filter, QString contiene)
+{
+	stGrlDatos dato;
+	QFileInfoList list_files = getListFiles(dirIcon + dirImg, filter.split(";", QString::SkipEmptyParts));
+	const int listSize = list_files.size();
+	for (int i = 0; i < listSize; ++i)
+	{
+		dato.icono  = list_files.at(i).absoluteFilePath();
+		dato.titulo = subDir + list_files.at(i).completeBaseName();
+		dato.extra  = "";
+		dato.key    = subDir + list_files.at(i).fileName();
+
+		if (contiene.isEmpty() || dato.key.contains(contiene, Qt::CaseInsensitive))
+			cbx->addItemChild(QIcon(dato.icono), dato.titulo, dato.key);
+	}
+}
+
+// Carga los distintos archivos de la ruta indicada en un QListWidget
+void Funciones::cargarArchivosLwLista(QListWidget *lwList, QString dir, QString filter, QString filter_sep, QString img, bool isClear, bool isThumbs, bool isSmall)
+{
+	QString archivo, thumbs;
+	QFileInfoList list_files = getListFiles(dir, filter.split(filter_sep, QString::SkipEmptyParts));
 
 	const int listSize = list_files.size();
-	twList->clear();
-	if( listSize > -1 )
+	if (isClear)
+		lwList->clear();
+
+	if (listSize > -1)
 	{
 		for (int i = 0; i < listSize; ++i)
 		{
-			if( m_dir.endsWith("/") || m_dir.endsWith("\\") )
-				archivo = m_dir + list_files.at(i).fileName();
+			if (dir.endsWith("/"))
+				archivo = dir + list_files.at(i).fileName();
 			else
-				archivo = m_dir +"/"+ list_files.at(i).fileName();
+				archivo = dir +"/"+ list_files.at(i).fileName();
 
-			QTreeWidgetItem *item = new QTreeWidgetItem( twList );
-			if( img.isEmpty() )
+			QListWidgetItem *item = new QListWidgetItem;
+			item->setData(Qt::UserRole, archivo);
+			if (isThumbs)
 			{
-				if( QFile::exists(archivo) )
-					item->setIcon( 0, QIcon( archivo ) );
+				QString _small = isSmall ? "small/" : "";
+				QString ext_extra = isSmall ? ".jpg" : "";
+
+				if (dir.endsWith("/"))
+					thumbs = dir + _small + list_files.at(i).fileName() + ext_extra;
 				else
-					item->setIcon( 0, QIcon(stThemeApp +"images/juego_sin_imagen.png") );
-				item->setText( 0, "" );
+					thumbs = dir +"/"+ _small + list_files.at(i).fileName() + ext_extra;
+
+				if (QFile::exists(thumbs))
+					item->setIcon(QIcon(thumbs));
+				else
+					item->setIcon(QIcon(stTheme +"images/juego_sin_imagen.png"));
 			} else {
-				if( QFile::exists(stTheme +"img16/"+ img) )
-					item->setIcon( 0, QIcon(stTheme +"img16/"+ img) );
+				if (QFile::exists(stTheme +"img24/"+ img))
+					item->setIcon(QIcon(stTheme +"img24/"+ img));
 				else
-					item->setIcon( 0, QIcon(stTheme +"img16/tag.png") );
-				item->setText( 0, list_files.at(i).fileName() );
+					item->setIcon(QIcon(stTheme +"img24/tag.png"));
+				item->setText(list_files.at(i).fileName());
 			}
-			item->setText( 1, archivo );
+			lwList->addItem(item);
 		}
 	}
 }
@@ -1570,74 +2083,56 @@ void Funciones::cargarArchivosTwLista(QTreeWidget *twList, QString m_dir, QStrin
 // Carga la lista de datos de un archivo a un QTreeWidget
 void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoListTw tipo, QString sep, bool isLng)
 {
-	QFile file_in( archivo );
+	QFile file_in(archivo);
 	QStringList lista;
 	QString linea, titulo, dato, extra, img, dir_img;
 	int col_titulo, col_dato, col_nada;
 	QFont m_font;
 	m_font.setBold(true);
-	col_titulo = 0;
-	col_dato   = 1;
-	col_nada   = 2;
+//	col_titulo = 0;
+//	col_dato   = 1;
+//	col_nada   = 2;
 
-	if( !file_in.exists() )
+	if (!file_in.exists())
 		file_in.setFileName(archivo.replace(stDirApp, ":/"));
 
 //	twList->clear();
-	if( file_in.open(QIODevice::ReadOnly | QIODevice::Text) )
+	if (file_in.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		QTextStream in( &file_in );
+		QTreeWidgetItem *item;
+		QList<QTreeWidgetItem *> items;
+		QTextStream in(&file_in);
 		in.setCodec("UTF-8");
-		while ( !in.atEnd() )
+		while (!in.atEnd())
 		{
 			linea = in.readLine();
-			if( linea.isEmpty() )
+			if (linea.isEmpty())
 			{
-				QTreeWidgetItem *item = new QTreeWidgetItem( twList );
-				switch ( tipo )
+				if (tipo == TwListSvm)
 				{
-					case TwListSvm:
-						item->setIcon( 0, QIcon(stTheme +"img_svm/sinimg.png") );
-						item->setIcon( 1, QIcon(stTheme +"icon_svm/sinimg.png") );
-					break;
-					case TwListEmu:
-						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
-					break;
-					case TwListDbx:
-						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
-					break;
-					case TwListTraduccion:
-						item->setIcon( 1, QIcon(stTheme +"img16/sinimg.png") );
-					break;
-					case TwListSmile:
-						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
-					break;
-					case TwList2col:
-						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
-					break;
-					case TwList3col:
-						item->setIcon( 0, QIcon(stTheme +"img16/sinimg.png") );
-					break;
+					item = new QTreeWidgetItem;
+					item->setIcon(0, QIcon(stTheme +"img_svm/level/sinimg.png"));
+					item->setIcon(1, QIcon(stTheme +"img_svm/sinimg.png"));
+					item->setText(0, "");
+					item->setText(1, "");
+					item->setText(2, "");
+					item->setText(3, "");
+					item->setText(4, "");
+
+					items << item;
 				}
-				item->setText( 0, "" );
-				item->setText( 1, "" );
-				item->setText( 2, "" );
-				item->setText( 3, "" );
-				item->setText( 4, "" );
 			} else {
-				lista = linea.split( sep );
+				lista = linea.split(sep);
 
-				QTreeWidgetItem *item = new QTreeWidgetItem( twList );
-				switch ( tipo )
+				col_titulo = 0;
+				col_dato   = 1;
+				col_nada   = 2;
+				dir_img    = stTheme +"img16/";
+
+				item = new QTreeWidgetItem;
+				switch (tipo)
 				{
 					case TwListDbx:
-						titulo = lista.at(0);
-						dato   = lista.at(1);
-						extra  = lista.at(2);
-						img    = lista.at(3);
-						col_titulo = 0;
-						dir_img    = stTheme +"img16/";
-					break;
 					case TwListSvm:
 					case TwListEmu:
 						titulo = lista.at(0);
@@ -1645,28 +2140,29 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 						extra  = lista.at(2);
 						img    = lista.at(3);
 
-						if( tipo == TwListEmu )
+						if (tipo == TwListDbx || tipo == TwListEmu)
 						{
-							if( isLng )
-								dir_img = stTheme +"img16/lng/";
-							else
-								dir_img = stThemeApp +"img16/cat/";
-						} else {
-							dir_img = stTheme +"icon_svm/";
-							col_nada   = 0;
+							if (!isLng)
+								dir_img = stTheme +"img32/";
+						}
+
+						if (tipo == TwListSvm)
+						{
 							col_titulo = 1;
 							col_dato   = 2;
+							col_nada   = 0;
+							dir_img    = stTheme +"img_svm/";
 
-							if( dato.isEmpty() )
+							if (dato.isEmpty())
 							{
-								item->setTextColor( 1, QColor(0,0,0) );
-								item->setFont( 1, m_font);
+								item->setFont(1, m_font);
+								item->setTextColor(1, QColor(0,0,0));
 							}
 
-							if( extra.isEmpty() )
-								item->setIcon( 0, QIcon(stTheme +"img_svm/sinimg.png") );
+							if (extra.isEmpty())
+								item->setIcon(0, QIcon(stTheme +"img_svm/level/sinimg.png"));
 							else
-								item->setIcon( 0, QIcon(stTheme +"img_svm/"+ extra +".png") );
+								item->setIcon(0, QIcon(stTheme +"img_svm/level/"+ extra +".png"));
 						}
 					break;
 					case TwListSmile:
@@ -1676,12 +2172,7 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 						extra  = "";
 						img    = lista.at(1);
 
-						if( isLng )
-							dir_img = stTheme +"img16/lng/";
-						else
-							dir_img = stTheme +"img16/";
-
-						if( tipo == TwListSmile )
+						if (tipo == TwListSmile)
 							dir_img = stDirApp +"smiles/";
 					break;
 					case TwListTraduccion:
@@ -1691,49 +2182,46 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 						extra  = "";
 						img    = lista.at(2);
 
-						if( isLng )
-							dir_img = stTheme +"img16/lng/";
-						else
-							dir_img = stTheme +"img16/";
-
-						if( tipo == TwListTraduccion )
+						if (tipo == TwListTraduccion)
 						{
 							titulo  = lista.at(1);
 							dato    = lista.at(0);
-							dir_img = stTheme +"img16/lng/";
 
-							item->setFont( 0, m_font         );
-							item->setText( 0, lista.at(0) );
+							item->setFont(0, m_font);
+							item->setText(0, lista.at(0));
 						}
 					break;
 				}
 
-				if( img.isEmpty() )
+				if (img.isEmpty())
 					img = "sinimg.png";
 
-				if( QFile::exists(dir_img + img) )
-					item->setIcon( col_titulo, QIcon(dir_img + img) );
-				else
-					item->setIcon( col_titulo, QIcon(dir_img +"sinimg.png") );
+				item->setIcon(col_titulo, QIcon(dir_img +"sinimg.png"));
+				if (QFile::exists(dir_img + img))
+					item->setIcon(col_titulo, QIcon(dir_img + img));
 
-				if( tipo == TwListDbx )
+				if (tipo == TwListDbx)
 				{
 					item->setTextAlignment(2, Qt::AlignCenter);
 					item->setTextAlignment(3, Qt::AlignCenter);
-					item->setText( 0, titulo      );
-					item->setText( 1, dato        );
-					item->setText( 2, lista.at(4) );
-					item->setText( 3, lista.at(5) );
-					item->setText( 4, extra       );
+					item->setText(0, titulo     );
+					item->setText(1, dato       );
+					item->setText(2, lista.at(4));
+					item->setText(3, lista.at(5));
+					item->setText(4, extra      );
+					item->setText(5, img        );
 				} else {
-					item->setText( col_nada  , ""     );
-					item->setText( col_titulo, titulo );
-					item->setText( col_dato  , dato   );
-					item->setText( 3         , extra  );
-					item->setText( 4         , img    );
+					item->setText(col_nada  , ""    );
+					item->setText(col_titulo, titulo);
+					item->setText(col_dato  , dato  );
+					item->setText(3         , extra );
+					item->setText(4         , img   );
 				}
+
+				items << item;
 			}
 		}
+		twList->addTopLevelItems(items);
 	}
 	file_in.close();
 }
@@ -1742,26 +2230,24 @@ void Funciones::cargarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLis
 void Funciones::guardarDatosTwLista(QTreeWidget *twList, QString archivo, TipoListTw tipo, QString sep)
 {
 	QFile file_out;
-	file_out.setFileName( archivo );
+	file_out.setFileName(archivo);
 
-	comprobarDirectorio( getInfoFile(archivo).Path );
+	comprobarDirectorio(getInfoFile(archivo).Path);
 
-	if( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
+	if (file_out.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		QTextStream out(&file_out);
 		out.setCodec("UTF-8");
-
-		if( twList->topLevelItemCount() > 0 )
+		if (twList->topLevelItemCount() > 0)
 		{
 			const int listSize = twList->topLevelItemCount();
 			for (int i = 0; i < listSize; ++i)
 			{
-				QTreeWidgetItem *item = twList->topLevelItem( i );
-
-				switch ( tipo )
+				QTreeWidgetItem *item = twList->topLevelItem(i);
+				switch (tipo)
 				{
 					case TwListSvm:
-						if( item->text(1).isEmpty() && item->text(2).isEmpty() )
+						if (item->text(1).isEmpty() && item->text(2).isEmpty())
 							out << endl;
 						else
 							out << item->text(1) << sep << item->text(2) << sep << item->text(3) << sep << item->text(4) << endl;
@@ -1770,7 +2256,7 @@ void Funciones::guardarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLi
 						out << item->text(0) << sep << item->text(1) << sep << item->text(3) << sep << item->text(4) << endl;
 					break;
 					case TwListDbx:
-						out << item->text(0) << sep << item->text(1) << sep << item->text(4) << sep << "dosbox.png" << sep << item->text(2) << sep << item->text(3) << endl;
+						out << item->text(0) << sep << item->text(1) << sep << item->text(4) << sep << item->text(5) << sep << item->text(2) << sep << item->text(3) << endl;
 					break;
 					case TwListTraduccion:
 						//
@@ -1785,120 +2271,127 @@ void Funciones::guardarDatosTwLista(QTreeWidget *twList, QString archivo, TipoLi
 				}
 			}
 		}
-
 		out.flush();
 	}
 	file_out.close();
 }
 
-// Carga la lista de datos.
+// Carga la lista de datos
 QList<stGrlDatos> Funciones::cargaListaDatos(QString archivo, int num_col, QString sep)
 {
 	QList<stGrlDatos> dato_list;
 	stGrlDatos dato;
-	QFile file_in( archivo );
+	QFile file_in(archivo);
 	QStringList lista;
 	QString linea;
 	int key_col = 1;
-	int img_col = 2;
+	int img_col = 3;
 
-	if( !file_in.exists() )
+	if (!file_in.exists())
 		file_in.setFileName(archivo.replace(stDirApp, ":/"));
 
-	switch ( num_col )
+	switch (num_col)
 	{
 		case 2:
 			key_col = 0;
 			img_col = 1;
 		break;
 		case 3:
-			key_col = 1;
 			img_col = 2;
-		break;
-		case 4:
-		case 6:
-			key_col = 1;
-			img_col = 3;
 		break;
 	}
 
 	dato_list.clear();
-	if( file_in.open(QIODevice::ReadOnly) != 0 )
+	if (file_in.open(QIODevice::ReadOnly) != 0)
 	{
 		QTextStream in(&file_in);
 		in.setCodec("UTF-8");
-		while ( !in.atEnd() )
+		while (!in.atEnd())
 		{
 			linea = in.readLine();
-			if( !linea.isEmpty() )
+			if (!linea.isEmpty())
 			{
-				lista = linea.split( sep );
-
-				dato.titulo  = lista.at(0);
-				dato.icono   = lista.at(img_col);
-				dato.extra   = (num_col == 4 || num_col == 6) ? lista.at(2) : "";
-				dato.version = (num_col == 6) ? lista.at(4) : "";
-				dato.issvn   = (num_col == 6) ? lista.at(5) : "";
-				dato.key     = lista.at(key_col);
-
+				lista = linea.split(sep);
+					dato.titulo  = lista.at(0);
+					dato.icono   = lista.at(img_col);
+					dato.key     = lista.at(key_col);
+					dato.extra   = (num_col == 4 || num_col == 6) ? lista.at(2) : "";
+					dato.version = (num_col == 6) ? lista.at(4) : "";
+					dato.issvn   = (num_col == 6) ? lista.at(5) : "";
 				dato_list << dato;
 			}
 		}
+		linea.clear();
 	}
 
 	return dato_list;
 }
 
-// Carga la lista de datos en un QHash.
+// Carga la lista de datos en un QHash
 QHash<QString, stGrlDatos> Funciones::cargaDatosQHash(QString archivo, int num_col, QString sep)
 {
 	QList<stGrlDatos> list = cargaListaDatos(archivo, num_col, sep);
 	QHash<QString, stGrlDatos> dato_list;
 	const int listSize = list.size();
 	for (int i = 0; i < listSize; ++i)
+	{
 		dato_list.insert(list.at(i).key, list.at(i));
+	}
 
 	return dato_list;
 }
 
 // Carga la lista de datos de un archivo a un QComboBox
-void Funciones::cargarDatosComboBox(QComboBox *cbx, QString archivo, QString theme, QString select_data, int num_col, QString sep, bool isClear, bool keyVisible)
+void Funciones::cargarDatosComboBox(QComboBox *cbx, QString archivo, QString dirImg, QString select_data, int num_col, QString sep, bool isClear, bool keyVisible)
 {
 	QList<stGrlDatos> list = cargaListaDatos(archivo, num_col, sep);
 	QString key_visible;
 
-	if( isClear )
+	if (isClear)
 		cbx->clear();
 
 	const int listSize = list.size();
 	for (int i = 0; i < listSize; ++i)
 	{
 		key_visible = keyVisible ? "("+ list.at(i).key +") - " : "";
-		cbx->addItem(QIcon(theme + list.at(i).icono), key_visible + list.at(i).titulo, list.at(i).key);
+
+/*		QString icono = "sinimg.png";
+		if (!list.at(i).icono.isEmpty())
+		{
+			if (QFile::exists(stTheme + dirImg + list.at(i).icono))
+				icono = list.at(i).icono;
+		}*/
+
+		cbx->addItem(QIcon(stTheme + dirImg + list.at(i).icono), key_visible + list.at(i).titulo, list.at(i).key);
 	}
 
-	if( !select_data.isEmpty() )
+	if (!select_data.isEmpty())
 	{
 		int row = cbx->findData(select_data, Qt::UserRole, Qt::MatchExactly);
-		cbx->setCurrentIndex( row );
+		cbx->setCurrentIndex(row);
 	}
 }
 
 // Carga la lista de datos de un archivo a un QCheckComboBox
-void Funciones::cargarDatosCheckComboBox(QCheckComboBox *chk_cbx, QString archivo, QString theme, QString select_data, int num_col, QString sep)
+void Funciones::cargarDatosCheckComboBox(QCheckComboBox *chk_cbx, QString archivo, QString dirImg, QString select_data, int num_col, QString sep, bool isClear)
 {
 	QList<stGrlDatos> list = cargaListaDatos(archivo, num_col, sep);
 
-	chk_cbx->clear();
+	if (isClear)
+		chk_cbx->clear();
+
 	const int listSize = list.size();
 	for (int i = 0; i < listSize; ++i)
-		chk_cbx->addItem(QIcon(theme + list.at(i).icono), list.at(i).titulo, list.at(i).key);
+		chk_cbx->addItem(QIcon(stTheme + dirImg + list.at(i).icono), list.at(i).titulo, list.at(i).key);
 
-	int row = chk_cbx->findData(select_data, Qt::UserRole, Qt::MatchExactly);
-	chk_cbx->setCurrentIndex( row );
+	if (!select_data.isEmpty())
+	{
+		int row = chk_cbx->findData(select_data, Qt::UserRole, Qt::MatchExactly);
+		chk_cbx->setCurrentIndex(row);
+	}
 }
 
-// Remplaza texto por las imagenes de los emoticones
+// Remplaza texto por las imágenes de los emoticones
 QString Funciones::reemplazaTextoSmiles(QString str, QHash<QString, stGrlDatos> lista)
 {
 	foreach (const stGrlDatos &smile, lista)
@@ -1909,20 +2402,20 @@ QString Funciones::reemplazaTextoSmiles(QString str, QHash<QString, stGrlDatos> 
 	return str;
 }
 
-// Devuelve imagenes para la info del juego
+// Devuelve imágenes para la info del juego
 QString Funciones::getImgDatos(QHash<QString, stGrlDatos> datos, QStringList lista, bool isLng)
 {
 	QString img_lng = "";
 	const int listSize = lista.size();
 	for (int i=0; i < listSize; ++i)
 	{
-		if( !lista.at(i).isEmpty() )
+		if (!lista.at(i).isEmpty())
 		{
 			foreach (const stGrlDatos &dat, datos)
 			{
-				if( dat.titulo == lista.at(i) || dat.extra == lista.at(i) )
+				if (dat.titulo == lista.at(i) || dat.extra == lista.at(i))
 				{
-					if( isLng )
+					if (isLng)
 						img_lng.append("<img src=\"idioma_rs_"+ dat.icono +"\" alt=\""+ dat.titulo +"\" title=\""+ dat.titulo +"\"> "+ dat.titulo +" ");
 					else
 						img_lng.append("<img src=\""+ stTheme +"img16/"+ dat.icono +"\" alt=\""+ dat.titulo +"\" title=\""+ dat.titulo +"\"> "+ dat.titulo +" ");
@@ -1934,297 +2427,20 @@ QString Funciones::getImgDatos(QHash<QString, stGrlDatos> datos, QStringList lis
 	return img_lng;
 }
 
-void Funciones::insertaIconos(QHash<QString, QPixmap> &ico, QString m_dir, QString contiene, QString filter, bool isExt)
+void Funciones::insertaIconos(QHash<QString, QPixmap> &ico, QString dir, QString dir_img, QString prefix, QString filter, QString contiene)
 {
-	QFileInfoList list_files = getListFiles(m_dir, filter.split(";", QString::SkipEmptyParts));
 	QPixmap img_ico;
+	QFileInfoList list_files = getListFiles(dir + dir_img, filter.split(";", QString::SkipEmptyParts));
 	const int listSize = list_files.size();
-	for (int i=0; i < listSize; ++i)
+	for (int i = 0; i < listSize; ++i)
 	{
-		if( contiene.isEmpty() )
+		if (contiene.isEmpty() || list_files.at(i).fileName().contains(contiene, Qt::CaseInsensitive))
 		{
-			if( !img_ico.load(m_dir + list_files.at(i).fileName()) )
-				img_ico.load(":/img16/sinimg.png");
-
-			if( isExt )
-				ico.insert(list_files.at(i).fileName(), img_ico);
-			else
-				ico.insert(list_files.at(i).baseName(), img_ico);
-		} else {
-			if( list_files.at(i).fileName().contains(contiene, Qt::CaseInsensitive) )
-			{
-				if( !img_ico.load(m_dir + list_files.at(i).fileName()) )
-					img_ico.load(":/img16/sinimg.png");
-
-				if( isExt )
-					ico.insert(list_files.at(i).fileName(), img_ico);
-				else
-					ico.insert(list_files.at(i).baseName(), img_ico);
-			}
+			if (!img_ico.load(list_files.at(i).absoluteFilePath()))
+				img_ico.load(":/"+ dir_img +"/sinimg.png");
+			ico.insert(prefix + list_files.at(i).fileName(), img_ico);
 		}
 	}
-}
-
-// Datos por defecto.
-stDatosJuego Funciones::getDefectDatos(QString icono, QHash<QString, QString> dato)
-{
-	bool isQHash = dato.isEmpty() ? false : true;
-	icono = icono.isEmpty() ? "datos" : icono;
-	stDatosJuego datos;
-	datos.idgrl = isQHash ? dato["Dat_idgrl"] : "";
-//--
-	datos.icono            = isQHash ? dato["Dat_icono"]            : icono +".png";
-	datos.titulo           = isQHash ? dato["Dat_titulo"]           : "";
-	datos.subtitulo        = isQHash ? dato["Dat_subtitulo"]        : "";
-	datos.genero           = isQHash ? dato["Dat_genero"]           : "";
-	datos.compania         = isQHash ? dato["Dat_compania"]         : "";
-	datos.desarrollador    = isQHash ? dato["Dat_desarrollador"]    : "";
-	datos.tema             = isQHash ? dato["Dat_tema"]             : "";
-	datos.grupo            = isQHash ? dato["Dat_grupo"]            : "";
-	datos.perspectiva      = isQHash ? dato["Dat_perspectiva"]      : "";
-	datos.idioma           = isQHash ? dato["Dat_idioma"]           : "";
-	datos.idioma_voces     = isQHash ? dato["Dat_idioma_voces"]     : "";
-	datos.formato          = isQHash ? dato["Dat_formato"]          : "";
-	datos.anno             = isQHash ? dato["Dat_anno"]             : "";
-	datos.numdisc          = isQHash ? dato["Dat_numdisc"]          : "";
-	datos.sistemaop        = isQHash ? dato["Dat_sistemaop"]        : "";
-	datos.tamano           = isQHash ? dato["Dat_tamano"]           : "";
-	datos.graficos         = isQHash ? dato["Dat_graficos"]         : "0";
-	datos.sonido           = isQHash ? dato["Dat_sonido"]           : "0";
-	datos.jugabilidad      = isQHash ? dato["Dat_jugabilidad"]      : "0";
-	datos.original         = isQHash ? dato["Dat_original"]         : "false";
-	datos.estado           = isQHash ? dato["Dat_estado"]           : "";
-	datos.thumbs           = isQHash ? dato["Dat_thumbs"]           : "";
-	datos.thumbs_new       = isQHash ? StrToBool(dato["Dat_thumbs_new"])      : false;
-	datos.cover_front      = isQHash ? dato["Dat_cover_front"]      : "";
-	datos.cover_front_new  = isQHash ? StrToBool(dato["Dat_cover_front_new"]) : false;
-	datos.cover_back       = isQHash ? dato["Dat_cover_back"]       : "";
-	datos.cover_back_new   = isQHash ? StrToBool(dato["Dat_cover_back_new"])  : false;
-	datos.fecha            = isQHash ? dato["Dat_fecha"]            : "";
-	datos.tipo_emu         = isQHash ? dato["Dat_tipo_emu"]         : icono;
-	datos.comentario       = isQHash ? dato["Dat_comentario"]       : "";
-	datos.favorito         = isQHash ? dato["Dat_favorito"]         : "false";
-	datos.rating           = isQHash ? dato["Dat_rating"]           : "0";
-	datos.edad_recomendada = isQHash ? dato["Dat_edad_recomendada"] : "nd";
-	datos.usuario          = isQHash ? dato["Dat_usuario"]          : "";
-	datos.path_exe         = isQHash ? dato["Dat_path_exe"]         : "";
-	datos.parametros_exe   = isQHash ? dato["Dat_parametros_exe"]   : "";
-	datos.path_capturas    = isQHash ? dato["Dat_path_capturas"]    : "";
-	datos.path_setup       = isQHash ? dato["Dat_path_setup"]       : "";
-	datos.parametros_setup = isQHash ? dato["Dat_parametros_setup"] : "";
-
-	return datos;
-}
-
-// DOSBox por defecto.
-stConfigDOSBox Funciones::getDefectDOSBox(QHash<QString, QString> dato)
-{
-	bool isQHash = dato.isEmpty() ? false : true;
-	stConfigDOSBox datos;
-	datos.id    = isQHash ? dato["Dbx_id"]    : "";
-	datos.idgrl = isQHash ? dato["Dbx_idgrl"] : "";
-	datos.idcat = isQHash ? dato["Dbx_idcat"] : "";
-// [sdl]
-	datos.sdl_fullscreen        = isQHash ? dato["Dbx_sdl_fullscreen"]        : "true";
-	datos.sdl_fulldouble        = isQHash ? dato["Dbx_sdl_fulldouble"]        : "false";
-	datos.sdl_fullfixed         = isQHash ? dato["Dbx_sdl_fullfixed"]         : "false";
-	datos.sdl_fullresolution    = isQHash ? dato["Dbx_sdl_fullresolution"]    : "0x0";
-	datos.sdl_windowresolution  = isQHash ? dato["Dbx_sdl_windowresolution"]  : "original";
-	datos.sdl_output            = isQHash ? dato["Dbx_sdl_output"]            : "ddraw";
-	datos.sdl_hwscale           = isQHash ? dato["Dbx_sdl_hwscale"]           : "1.00";
-	datos.sdl_autolock          = isQHash ? dato["Dbx_sdl_autolock"]          : "true";
-	datos.sdl_sensitivity       = isQHash ? dato["Dbx_sdl_sensitivity"]       : "100";
-	datos.sdl_waitonerror       = isQHash ? dato["Dbx_sdl_waitonerror"]       : "true";
-	datos.sdl_priority          = isQHash ? dato["Dbx_sdl_priority"]          : "higher,normal";
-	datos.sdl_mapperfile        = isQHash ? dato["Dbx_sdl_mapperfile"]        : "mapper.map";
-	datos.sdl_usescancodes      = isQHash ? dato["Dbx_sdl_usescancodes"]      : "true";
-// [dosbox]
-	datos.dosbox_language       = isQHash ? dato["Dbx_dosbox_language"]       : "";
-	datos.dosbox_machine        = isQHash ? dato["Dbx_dosbox_machine"]        : "svga_s3";
-	datos.dosbox_captures       = isQHash ? dato["Dbx_dosbox_captures"]       : "capture";
-	datos.dosbox_memsize        = isQHash ? dato["Dbx_dosbox_memsize"]        : "31";
-	datos.dosbox_emu_key        = isQHash ? dato["Dbx_dosbox_emu_key"]        : "dosbox";
-// [render]
-	datos.render_frameskip      = isQHash ? dato["Dbx_render_frameskip"]      : "0";
-	datos.render_aspect         = isQHash ? dato["Dbx_render_aspect"]         : "false";
-	datos.render_scaler         = isQHash ? dato["Dbx_render_scaler"]         : "normal2x";
-// [cpu]
-	datos.cpu_core              = isQHash ? dato["Dbx_cpu_core"]              : "auto";
-	datos.cpu_cputype           = isQHash ? dato["Dbx_cpu_cputype"]           : "auto";
-	datos.cpu_cycles            = isQHash ? dato["Dbx_cpu_cycles"]            : "auto";
-	datos.cpu_cycles_realmode   = isQHash ? dato["Dbx_cpu_cycles_realmode"]   : "";
-	datos.cpu_cycles_protmode   = isQHash ? dato["Dbx_cpu_cycles_protmode"]   : "";
-	datos.cpu_cycles_limitmode  = isQHash ? dato["Dbx_cpu_cycles_limitmode"]  : "";
-	datos.cpu_cycleup           = isQHash ? dato["Dbx_cpu_cycleup"]           : "10";
-	datos.cpu_cycledown         = isQHash ? dato["Dbx_cpu_cycledown"]         : "20";
-// [mixer]
-	datos.mixer_nosound         = isQHash ? dato["Dbx_mixer_nosound"]         : "false";
-	datos.mixer_rate            = isQHash ? dato["Dbx_mixer_rate"]            : "44100";
-	datos.mixer_blocksize       = isQHash ? dato["Dbx_mixer_blocksize"]       : "1024";
-	datos.mixer_prebuffer       = isQHash ? dato["Dbx_mixer_prebuffer"]       : "20";
-// [midi]
-	datos.midi_mpu401           = isQHash ? dato["Dbx_midi_mpu401"]           : "intelligent";
-	datos.midi_intelligent      = isQHash ? dato["Dbx_midi_intelligent"]      : "true";
-	datos.midi_device           = isQHash ? dato["Dbx_midi_device"]           : "default";
-	datos.midi_config           = isQHash ? dato["Dbx_midi_config"]           : "";
-	datos.midi_mt32rate         = isQHash ? dato["Dbx_midi_mt32rate"]         : "44100";
-// [sblaster]
-	datos.sblaster_sbtype       = isQHash ? dato["Dbx_sblaster_sbtype"]       : "sb16";
-	datos.sblaster_sbbase       = isQHash ? dato["Dbx_sblaster_sbbase"]       : "220";
-	datos.sblaster_irq          = isQHash ? dato["Dbx_sblaster_irq"]          : "7";
-	datos.sblaster_dma          = isQHash ? dato["Dbx_sblaster_dma"]          : "1";
-	datos.sblaster_hdma         = isQHash ? dato["Dbx_sblaster_hdma"]         : "5";
-	datos.sblaster_mixer        = isQHash ? dato["Dbx_sblaster_mixer"]        : "true";
-	datos.sblaster_oplmode      = isQHash ? dato["Dbx_sblaster_oplmode"]      : "auto";
-	datos.sblaster_oplemu       = isQHash ? dato["Dbx_sblaster_oplemu"]       : "default";
-	datos.sblaster_oplrate      = isQHash ? dato["Dbx_sblaster_oplrate"]      : "44100";
-// [gus]
-	datos.gus_gus               = isQHash ? dato["Dbx_gus_gus"]               : "false";
-	datos.gus_gusrate           = isQHash ? dato["Dbx_gus_gusrate"]           : "44100";
-	datos.gus_gusbase           = isQHash ? dato["Dbx_gus_gusbase"]           : "240";
-	datos.gus_irq1              = isQHash ? dato["Dbx_gus_irq1"]              : "5";
-	datos.gus_irq2              = isQHash ? dato["Dbx_gus_irq2"]              : "5";
-	datos.gus_dma1              = isQHash ? dato["Dbx_gus_dma1"]              : "3";
-	datos.gus_dma2              = isQHash ? dato["Dbx_gus_dma2"]              : "3";
-	datos.gus_ultradir          = isQHash ? dato["Dbx_gus_ultradir"]          : "C:\\ULTRASND";
-// [speaker]
-	datos.speaker_pcspeaker     = isQHash ? dato["Dbx_speaker_pcspeaker"]     : "true";
-	datos.speaker_pcrate        = isQHash ? dato["Dbx_speaker_pcrate"]        : "44100";
-	datos.speaker_tandy         = isQHash ? dato["Dbx_speaker_tandy"]         : "auto";
-	datos.speaker_tandyrate     = isQHash ? dato["Dbx_speaker_tandyrate"]     : "44100";
-	datos.speaker_disney        = isQHash ? dato["Dbx_speaker_disney"]        : "true";
-// [joystick]
-	datos.joystick_type         = isQHash ? dato["Dbx_joystick_type"]         : "auto";
-	datos.joystick_timed        = isQHash ? dato["Dbx_joystick_timed"]        : "true";
-	datos.joystick_autofire     = isQHash ? dato["Dbx_joystick_autofire"]     : "false";
-	datos.joystick_swap34       = isQHash ? dato["Dbx_joystick_swap34"]       : "false";
-	datos.joystick_buttonwrap   = isQHash ? dato["Dbx_joystick_buttonwrap"]   : "false";
-// [modem]
-	datos.modem_modem           = isQHash ? dato["Dbx_modem_modem"]           : "false";
-	datos.modem_comport         = isQHash ? dato["Dbx_modem_comport"]         : "2";
-	datos.modem_listenport      = isQHash ? dato["Dbx_modem_listenport"]      : "23";
-// [dserial]
-	datos.dserial_directserial  = isQHash ? dato["Dbx_dserial_directserial"]  : "false";
-	datos.dserial_comport       = isQHash ? dato["Dbx_dserial_comport"]       : "1";
-	datos.dserial_realport      = isQHash ? dato["Dbx_dserial_realport"]      : "COM1";
-	datos.dserial_defaultbps    = isQHash ? dato["Dbx_dserial_defaultbps"]    : "1200";
-	datos.dserial_parity        = isQHash ? dato["Dbx_dserial_parity"]        : "N";
-	datos.dserial_bytesize      = isQHash ? dato["Dbx_dserial_bytesize"]      : "8";
-	datos.dserial_stopbit       = isQHash ? dato["Dbx_dserial_stopbit"]       : "1";
-// [serial]
-	datos.serial_1              = isQHash ? dato["Dbx_serial_1"]              : "dummy";
-	datos.serial_2              = isQHash ? dato["Dbx_serial_2"]              : "dummy";
-	datos.serial_3              = isQHash ? dato["Dbx_serial_3"]              : "disabled";
-	datos.serial_4              = isQHash ? dato["Dbx_serial_4"]              : "disabled";
-// [dos]
-	datos.dos_xms               = isQHash ? dato["Dbx_dos_xms"]               : "true";
-	datos.dos_ems               = isQHash ? dato["Dbx_dos_ems"]               : "true";
-	datos.dos_umb               = isQHash ? dato["Dbx_dos_umb"]               : "true";
-	datos.dos_keyboardlayout    = isQHash ? dato["Dbx_dos_keyboardlayout"]    : "auto";
-	datos.dos_version           = isQHash ? dato["Dbx_dos_version"]           : "";
-// [ipx]
-	datos.ipx_ipx               = isQHash ? dato["Dbx_ipx_ipx"]               : "false";
-	datos.ipx_type              = isQHash ? dato["Dbx_ipx_type"]              : "none";
-	datos.ipx_port              = isQHash ? dato["Dbx_ipx_port"]              : "213";
-	datos.ipx_ip                = isQHash ? dato["Dbx_ipx_ip"]                : "";
-// [autoexec]
-	datos.autoexec              = isQHash ? dato["Dbx_autoexec"]              : "";
-// Opciones
-	datos.opt_autoexec          = isQHash ? dato["Dbx_opt_autoexec"]          : "false";
-	datos.opt_loadfix           = isQHash ? dato["Dbx_opt_loadfix"]           : "false";
-	datos.opt_loadfix_mem       = isQHash ? dato["Dbx_opt_loadfix_mem"]       : "64";
-	datos.opt_consola_dbox      = isQHash ? dato["Dbx_opt_consola_dbox"]      : "false";
-	datos.opt_cerrar_dbox       = isQHash ? dato["Dbx_opt_cerrar_dbox"]       : "true";
-	datos.opt_cycle_sincronizar = isQHash ? dato["Dbx_opt_cycle_sincronizar"] : "false";
-// Path
-	datos.path_conf             = isQHash ? dato["Dbx_path_conf"]             : "";
-	datos.path_sonido           = isQHash ? dato["Dbx_path_sonido"]           : "waves";
-	datos.path_exe              = isQHash ? dato["Dbx_path_exe"]              : "";
-	datos.path_setup            = isQHash ? dato["Dbx_path_setup"]            : "";
-	datos.parametros_exe        = isQHash ? dato["Dbx_parametros_exe"]        : "";
-	datos.parametros_setup      = isQHash ? dato["Dbx_parametros_setup"]      : "";
-
-	return datos;
-}
-
-// ScummVM por defecto.
-stConfigScummVM Funciones::getDefectScummVM(QHash<QString, QString> dato)
-{
-	bool isQHash = dato.isEmpty() ? false : true;
-	stConfigScummVM datos;
-	datos.id    = isQHash ? dato["Svm_id"]    : "";
-	datos.idgrl = isQHash ? dato["Svm_idgrl"] : "";
-	datos.idcat = isQHash ? dato["Svm_idcat"] : "";
-//--
-	datos.game              = isQHash ? dato["Svm_game"]              : "";
-	datos.game_label        = isQHash ? dato["Svm_game_label"]        : "";
-	datos.language          = isQHash ? dato["Svm_language"]          : "es";
-	datos.subtitles         = isQHash ? dato["Svm_subtitles"]         : "true";
-	datos.platform          = isQHash ? dato["Svm_platform"]          : "pc";
-	datos.gfx_mode          = isQHash ? dato["Svm_gfx_mode"]          : "2x";
-	datos.render_mode       = isQHash ? dato["Svm_render_mode"]       : "";
-	datos.fullscreen        = isQHash ? dato["Svm_fullscreen"]        : "false";
-	datos.aspect_ratio      = isQHash ? dato["Svm_aspect_ratio"]      : "false";
-	datos.path_game         = isQHash ? dato["Svm_path_game"]         : "";
-	datos.path_extra        = isQHash ? dato["Svm_path_extra"]        : "";
-	datos.path_save         = isQHash ? dato["Svm_path_save"]         : "";
-	datos.path_capturas     = isQHash ? dato["Svm_path_capturas"]     : "";
-	datos.path_sonido       = isQHash ? dato["Svm_path_sonido"]       : "";
-	datos.music_driver      = isQHash ? dato["Svm_music_driver"]      : "adlib";
-	datos.enable_gs         = isQHash ? dato["Svm_enable_gs"]         : "false";
-	datos.multi_midi        = isQHash ? dato["Svm_multi_midi"]        : "true";
-	datos.native_mt32       = isQHash ? dato["Svm_native_mt32"]       : "false";
-	datos.mute              = isQHash ? dato["Svm_mute"]              : "false";
-	datos.master_volume     = isQHash ? dato["Svm_master_volume"]     : "192";
-	datos.music_volume      = isQHash ? dato["Svm_music_volume"]      : "192";
-	datos.sfx_volume        = isQHash ? dato["Svm_sfx_volume"]        : "192";
-	datos.speech_volume     = isQHash ? dato["Svm_speech_volume"]     : "192";
-	datos.speech_mute       = isQHash ? dato["Svm_speech_mute"]       : "false";
-	datos.tempo             = isQHash ? dato["Svm_tempo"]             : "100";
-	datos.talkspeed         = isQHash ? dato["Svm_talkspeed"]         : "60";
-	datos.debuglevel        = isQHash ? dato["Svm_debuglevel"]        : "0";
-	datos.cdrom             = isQHash ? dato["Svm_cdrom"]             : "0";
-	datos.joystick_num      = isQHash ? dato["Svm_joystick_num"]      : "0";
-	datos.output_rate       = isQHash ? dato["Svm_output_rate"]       : "";
-	datos.midi_gain         = isQHash ? dato["Svm_midi_gain"]         : "100";
-	datos.copy_protection   = isQHash ? dato["Svm_copy_protection"]   : "false";
-	datos.sound_font        = isQHash ? dato["Svm_sound_font"]        : "";
-	datos.walkspeed         = isQHash ? dato["Svm_walkspeed"]         : "0";
-	datos.opl_driver        = isQHash ? dato["Svm_opl_driver"]        : "auto";
-	datos.disable_dithering = isQHash ? dato["Svm_disable_dithering"] : "false";
-	datos.alt_intro         = isQHash ? dato["Svm_alt_intro"]         : "false";
-	datos.boot_param        = isQHash ? dato["Svm_boot_param"]        : "";
-//--
-	datos.description       = isQHash ? dato["Svm_description"] : "";
-	datos.emu_svmpath       = isQHash ? dato["Svm_emu_svmpath"] : "";
-
-	return datos;
-}
-
-// VDMSound por defecto.
-stConfigVDMSound Funciones::getDefectVDMSound(QHash<QString, QString> dato)
-{
-	bool isQHash = dato.isEmpty() ? false : true;
-	stConfigVDMSound datos;
-	datos.id    = isQHash ? dato["Vdms_id"]    : "";
-	datos.idgrl = isQHash ? dato["Vdms_idgrl"] : "";
-	datos.idcat = isQHash ? dato["Vdms_idcat"] : "";
-//--
-	datos.path_conf       = isQHash ? dato["Vdms_path_conf"]       : "";
-	datos.path_exe        = isQHash ? dato["Vdms_path_exe"]        : "";
-	datos.program_1       = isQHash ? dato["Vdms_program_1"]       : "";
-	datos.program_2       = isQHash ? dato["Vdms_program_2"]       : "";
-	datos.vdms_debug_1    = isQHash ? dato["Vdms_vdms_debug_1"]    : "no";
-	datos.vdms_debug_2    = isQHash ? dato["Vdms_vdms_debug_2"]    : "";
-	datos.winnt_dos_1     = isQHash ? dato["Vdms_winnt_dos_1"]     : "no";
-	datos.winnt_dos_2     = isQHash ? dato["Vdms_winnt_dos_2"]     : "";
-	datos.winnt_dosbox_1  = isQHash ? dato["Vdms_winnt_dosbox_1"]  : "yes";
-	datos.winnt_dosbox_2  = isQHash ? dato["Vdms_winnt_dosbox_2"]  : "no";
-	datos.winnt_dosbox_3  = isQHash ? dato["Vdms_winnt_dosbox_3"]  : "no";
-	datos.winnt_storage_1 = isQHash ? dato["Vdms_winnt_storage_1"] : "yes";
-	datos.winnt_storage_2 = isQHash ? dato["Vdms_winnt_storage_2"] : "no";
-
-	return datos;
 }
 
 /*
@@ -2235,32 +2451,32 @@ stConfigVDMSound Funciones::getDefectVDMSound(QHash<QString, QString> dato)
 */
 QString Funciones::getNameTo8Caracter(QString name, int index)
 {
-	if( name.isEmpty() )
+	if (name.isEmpty())
 		return "";
 	else {
 		QString final, str, ext;
-		if( name.contains(".") )
+		if (name.contains("."))
 		{
 			int last_dot = name.lastIndexOf(".");
 			str = name.left(last_dot);
 			ext = name.remove(0, last_dot);
-			if( ext.size() > 4 )
+			if (ext.size() > 4)
 				ext = name.left(4);
 		} else {
 			ext = "";
 			str = name;
 		}
 
-		int idx = IntToStr(index).length()-1;
+		int idx = intToStr(index).length()-1;
 
 		// Contiene espacios
-		if( str.contains(" ") )
-			final = str.replace(" ","").replace(".","").left(6-idx).append("~"+ IntToStr(index)).append(ext).toUpper();
+		if (str.contains(" "))
+			final = str.replace(" ","").replace(".","").left(6-idx).append("~"+ intToStr(index)).append(ext).toUpper();
 		else {
 		// No contiene espacios
 		// Si es mayor que 8 se covierte.
-			if( str.length() > 8 )
-				final = str.left(6-idx).append("~"+ IntToStr(index)).append(ext).toUpper();
+			if (str.length() > 8)
+				final = str.left(6-idx).append("~"+ intToStr(index)).append(ext).toUpper();
 			else
 				final = str.append(ext);
 		}
@@ -2277,17 +2493,17 @@ QString Funciones::getShortPathName(QString longPath)
  * - Carpetas con extensión
  * - Carpetas similares nombre~1, nombre~2...
 */
-	if( !longPath.isEmpty() )
+	if (!longPath.isEmpty())
 	{
 		int index, idx_dos, listSize = 0;
 		QString f_name, f_path, sep;
 		QStringList listShortPath, shortPath, path_tmp, list_dir, list_dir_8names;
-#ifdef Q_OS_WIN32
-	sep = "\\";
-#else
+//#ifdef Q_OS_WIN32
+//	sep = "\\";
+//#else
 	sep = "/";
-#endif
-		QFileInfo fi( longPath.replace("\\", sep) );
+//#endif
+		QFileInfo fi(longPath.replace("\\", sep));
 		f_name = fi.fileName();
 		f_path = fi.absolutePath().append("/").replace("/", sep);
 
@@ -2301,124 +2517,149 @@ QString Funciones::getShortPathName(QString longPath)
 
 		for (int i = 1; i < listSize-1; ++i)
 		{
-			QDir dir( str_end(path_tmp.join(sep), sep) );
+			QDir dir(str_end(path_tmp.join(sep), sep));
 			list_dir = dir.entryList(QDir::NoDotAndDotDot | QDir::AllDirs);
 			list_dir_8names.clear();
 			idx_dos = 1;
-			for(int n = 0; n < list_dir.size(); ++n)
+			for (int n = 0; n < list_dir.size(); ++n)
 			{
-				if( n > 0)
+				if (n > 0)
 				{
-					if( getNameTo8Caracter(list_dir.at(n), idx_dos) == getNameTo8Caracter(list_dir.at(n-1), idx_dos) )
+					if (getNameTo8Caracter(list_dir.at(n), idx_dos) == getNameTo8Caracter(list_dir.at(n-1), idx_dos))
 						++idx_dos;
 					else
 						idx_dos = 1;
 				}
 				list_dir_8names << getNameTo8Caracter(list_dir.at(n), idx_dos);
 			}
-			index = list_dir.indexOf( listShortPath.at(i) );
-			if( index > -1 )
+			index = list_dir.indexOf(listShortPath.at(i));
+			if (index > -1)
 				shortPath << list_dir_8names.at(index);
 
 			path_tmp << listShortPath.at(i);
 		}
 
-		if( !f_name.isEmpty() )
+		if (!f_name.isEmpty())
 		{
-			QDir dir_exe( f_path );
+			QDir dir_exe(f_path);
 			list_dir = dir_exe.entryList(QDir::NoDotAndDotDot | QDir::Files);
 			list_dir_8names.clear();
 			idx_dos = 1;
-			for(int n = 0; n < list_dir.size(); ++n)
+			for (int n = 0; n < list_dir.size(); ++n)
 			{
-				if( n > 0)
+				if (n > 0)
 				{
-					if( getNameTo8Caracter(list_dir.at(n), idx_dos) == getNameTo8Caracter(list_dir.at(n-1), idx_dos) )
+					if (getNameTo8Caracter(list_dir.at(n), idx_dos) == getNameTo8Caracter(list_dir.at(n-1), idx_dos))
 						++idx_dos;
 					else
 						idx_dos = 1;
 				}
 				list_dir_8names << getNameTo8Caracter(list_dir.at(n), idx_dos);
 			}
-			index = list_dir.indexOf( f_name );
-			if( index > -1 )
+			index = list_dir.indexOf(f_name);
+			if (index > -1)
 				shortPath << list_dir_8names.at(index);
 		}
 
-		return shortPath.join("\\");
+//		return shortPath.join("\\");
+		return shortPath.join("/");
 	} else
 		return "";
 }
 
+QList<stConfigDOSBoxMount> Funciones::getListCfgMount(QTreeWidget *twDbxMount)
+{
+	QList<stConfigDOSBoxMount> listMount;
+	const int count_mount = twDbxMount->topLevelItemCount();
+	if (count_mount > 0)
+	{
+		stConfigDOSBoxMount cfgMount;
+		for (int num_mount = 0; num_mount < count_mount; ++num_mount)
+		{
+			QTreeWidgetItem *item = twDbxMount->topLevelItem(num_mount);
+				cfgMount.id           = item->text(8);
+				cfgMount.id_dosbox    = "";
+				cfgMount.id_lista     = item->text(9);
+				cfgMount.path         = item->text(0);
+				cfgMount.label        = item->text(3);
+				cfgMount.tipo_as      = item->text(2);
+				cfgMount.letter       = item->text(1);
+				cfgMount.indx_cd      = item->text(4);
+				cfgMount.opt_mount    = item->text(5);
+				cfgMount.io_ctrl      = item->text(6);
+				cfgMount.select_mount = item->text(7);
+				cfgMount.opt_size     = item->text(10);
+				cfgMount.opt_freesize = item->text(11);
+				cfgMount.freesize     = item->text(12);
+			listMount.append(cfgMount);
+		}
+	}
+	return listMount;
+}
+
 // Crea la configuración de los Montajes para el DOSBox
-QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBox cfgDbx)
+QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, stConfigDOSBox cfgDbx, bool isSetup)
 {
 	QString NombreEXEDbx, DirEXEDbx, Dbx_loadfix, Dbx_cerrardbx;
 	QString mount_letra_primario, mount_dir_primario, mount_dir, montaje_boot, mount_freesize;
 	QString mount_type, mount_drive, mount_letter, mount_label, mount_options, mount_ioctl;
-	int num_mount = 0;
 	bool montaje_IMG = false;
 	bool mount_Boot = false;
 	QStringList listmontajes, lista_multiple_iso, lista_isos;
+	const int listMountSize = listMount.size();
 
-	QFileInfo fi( getDirRelative(cfgDbx.path_exe, "DosGames") );
+	QFileInfo fi(getDirRelative((isSetup ? cfgDbx.path_setup : cfgDbx.path_exe), "DosGames"));
 	NombreEXEDbx = fi.fileName();
-	DirEXEDbx    = fi.absolutePath().replace("/","\\");
+	DirEXEDbx    = fi.absolutePath();
 
-	if( !DirEXEDbx.endsWith("\\") )
-		DirEXEDbx.append("\\");
+	if (!DirEXEDbx.endsWith("/"))
+		DirEXEDbx.append("/");
 
 // loadfix
-	if( StrToBool( cfgDbx.opt_loadfix ) )
+	if (strToBool(cfgDbx.opt_loadfix))
 		Dbx_loadfix = "loadfix -"+ cfgDbx.opt_loadfix_mem +" ";
 	else {
-		if( fi.completeSuffix().toLower() == "bat" )
+		if (fi.completeSuffix().toLower() == "bat")
 			Dbx_loadfix = "call ";
 		else
 			Dbx_loadfix = "";
 	}
 
 // Cerrar DOSBox
-	if( StrToBool( cfgDbx.opt_cerrar_dbox ) )
+	if (strToBool(cfgDbx.opt_cerrar_dbox))
 		Dbx_cerrardbx = "exit";
 	else
 		Dbx_cerrardbx = "";
 
 // Montajes
 	listmontajes.clear();
-	if( twDbxMount->topLevelItemCount() > 0 )
+	if (listMountSize > 0)
 	{
-		mount_dir_primario   = getDirRelative(twDbxMount->topLevelItem(0)->text(0), "DosGames");
-		mount_letra_primario = twDbxMount->topLevelItem(0)->text(1);
+		mount_dir_primario   = getDirRelative(listMount.at(0).path, "DosGames");
+		mount_letra_primario = listMount.at(0).letter;
 
-		const int count_mount = twDbxMount->topLevelItemCount();
-		for (num_mount = 0; num_mount < count_mount; ++num_mount)
+		for (int m = 0; m < listMountSize; ++m)
 		{
-			QTreeWidgetItem *item = twDbxMount->topLevelItem( num_mount );
-
 		// Indicamos el directorio y la letra a montar
-			mount_drive  = getDirRelative(item->text(0), "DosGames"); // Real Drive or Directory or Image ISO, IMA
-			mount_letter = item->text(1); // Emulated Drive letter
+			mount_drive  = getDirRelative(listMount.at(m).path, "DosGames"); // Real Drive or Directory or Image ISO, IMA
+			mount_letter = listMount.at(m).letter; // Emulated Drive letter
 
-			if( (item->text(2) == "floppy") || (item->text(2) == "drive") || (item->text(2) == "cdrom") )
+			if ((listMount.at(m).tipo_as == "floppy") || (listMount.at(m).tipo_as == "drive") || (listMount.at(m).tipo_as == "cdrom"))
 			{
-				#ifdef Q_OS_WIN32
-					mount_drive.replace("/","\\");
-					if( !mount_drive.endsWith("\\") )
-						mount_drive.append("\\");
-				#endif
-			} else {
-				#ifdef Q_OS_WIN32
-					mount_drive.replace("/","\\");
-				#endif
+				if (!mount_drive.endsWith("/"))
+					mount_drive.append("/");
 			}
 
 		// Situa el montaje primario independiente de donde este colocado
-			if( item->text(7) == "v" )
+			if (listMount.at(m).select_mount == "v")
 			{
 				mount_dir_primario   = mount_drive;
 				mount_letra_primario = mount_letter;
 			}
+
+		#ifdef Q_OS_WIN32
+			mount_drive.replace("/","\\");
+		#endif
 
 			mount_label    = "";
 			mount_freesize = "";
@@ -2426,76 +2667,76 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 			mount_options  = "";
 
 		// Montando las unidades
-		// Disco Duro, Montando Disquetera, CDs, Imagenes de Discos, disquetes y CDs
-			if( item->text(2) != "boot")
+		// Disco Duro, Montando Disquetera, CDs, Imágenes de Discos, disquetes y CDs
+			if (listMount.at(m).tipo_as != "boot")
 			{
 				mount_Boot = false;
 
-				if( item->text(2) == "drive" )
+				if (listMount.at(m).tipo_as == "drive")
 				{
 					montaje_IMG = false;
 					mount_type = "";
 
-					if( StrToBool( item->text(11) ) )
+					if (strToBool(listMount.at(m).opt_freesize))
 					{
-						if( item->text(10) != "" )
-							mount_freesize = " -size "+ item->text(10);
+						if (listMount.at(m).opt_size != "")
+							mount_freesize = " -size "+ listMount.at(m).opt_size;
 						else
-							mount_freesize = " -freesize "+ item->text(12);
+							mount_freesize = " -freesize "+ listMount.at(m).freesize;
 					}
 				}
 
-				if( item->text(2) == "cdrom" )
+				if (listMount.at(m).tipo_as == "cdrom")
 				{
 					montaje_IMG  = false;
 					mount_type  = " -t cdrom";
 				// usecd
-					if( item->text(4) != "" )
-						mount_freesize = " -usecd "+ item->text(4);
+					if (listMount.at(m).indx_cd != "")
+						mount_freesize = " -usecd "+ listMount.at(m).indx_cd;
 				// ioctl
-					if( item->text(6) != "" )
-						mount_ioctl = " "+ item->text(6);
+					if (listMount.at(m).io_ctrl != "")
+						mount_ioctl = " "+ listMount.at(m).io_ctrl;
 				// etiqueta
-					if( item->text(3) != "" )
-						mount_label = " -label "+ item->text(3);
+					if (listMount.at(m).label != "")
+						mount_label = " -label "+ listMount.at(m).label;
 				}
 
-				if( item->text(2) == "floppy" )
+				if (listMount.at(m).tipo_as == "floppy")
 				{
 					montaje_IMG = false;
 					mount_type = " -t floppy";
 
-					if( StrToBool( item->text(11) ) )
+					if (strToBool(listMount.at(m).opt_freesize))
 					{
-						if( item->text(10) != "" )
-							mount_freesize = " -size "+ item->text(10);
+						if (listMount.at(m).opt_size != "")
+							mount_freesize = " -size "+ listMount.at(m).opt_size;
 						else
-							mount_freesize = " -freesize "+ item->text(12);
+							mount_freesize = " -freesize "+ listMount.at(m).freesize;
 					}
 				}
 
-				if( item->text(2) == "IMG_floppy" )
+				if (listMount.at(m).tipo_as == "IMG_floppy")
 				{
 					montaje_IMG = true;
 					mount_type = " -t floppy";
 
-					if( item->text(10) != "" )
-						mount_freesize = " -size "+ item->text(10);
+					if (listMount.at(m).opt_size != "")
+						mount_freesize = " -size "+ listMount.at(m).opt_size;
 
-					if( item->text(5) != "" )
-						mount_options = " "+ item->text(5);
+					if (listMount.at(m).opt_mount != "")
+						mount_options = " "+ listMount.at(m).opt_mount;
 				}
 
-				if( item->text(2) == "IMG_iso" )
+				if (listMount.at(m).tipo_as == "IMG_iso")
 				{
 					montaje_IMG = true;
 					mount_type = " -t cdrom";
 
-					if( item->text(5) != "" )
-						mount_options = " "+ item->text(5);
+					if (listMount.at(m).opt_mount != "")
+						mount_options = " "+ listMount.at(m).opt_mount;
 				}
 
-				if( item->text(2) == "IMG_multi_iso" )
+				if (listMount.at(m).tipo_as == "IMG_multi_iso")
 				{
 					montaje_IMG = true;
 					mount_type = " -t cdrom";
@@ -2506,29 +2747,35 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 					lista_multiple_iso.clear();
 					const int lmiso_Size = lista_isos.size();
 					for (int i = 0; i < lmiso_Size; ++i)
-						lista_multiple_iso << "\""+ getDirRelative(lista_isos.at(i), "DosGames") +"\"";
+					{
+						QString path_multi_iso = getDirRelative(lista_isos.at(i), "DosGames");
+					#ifdef Q_OS_WIN32
+						path_multi_iso.replace("/","\\");
+					#endif
+						lista_multiple_iso << "\""+ path_multi_iso +"\"";
+					}
 					mount_drive.clear();
 					mount_drive = lista_multiple_iso.join(" ");
 				}
 
-				if( item->text(2) == "IMG_hdd" )
+				if (listMount.at(m).tipo_as == "IMG_hdd")
 				{
 					montaje_IMG = true;
 					mount_type = " -t hdd";
 
-					if( item->text(10) != "" )
-						mount_freesize = " -size "+ item->text(10);
+					if (listMount.at(m).opt_size != "")
+						mount_freesize = " -size "+ listMount.at(m).opt_size;
 
-					if( item->text(5) != "" )
-						mount_options = " "+ item->text(5);
+					if (listMount.at(m).opt_mount != "")
+						mount_options = " "+ listMount.at(m).opt_mount;
 				}
 
-				if( montaje_IMG == true )
+				if (montaje_IMG == true)
 				{
-					if( item->text(2) == "IMG_multi_iso" )
+					if (listMount.at(m).tipo_as == "IMG_multi_iso")
 						listmontajes << "imgmount "+ mount_letter +" "+ mount_drive + mount_type;
 					else
-						listmontajes << "imgmount "+ mount_letter +" \""+ mount_drive +"\""+ mount_type + mount_freesize + mount_options;
+						listmontajes << "imgmount "+ mount_letter +" \""+  mount_drive +"\""+ mount_type + mount_freesize + mount_options;
 				} else
 					listmontajes << "mount "+ mount_letter +" \""+ mount_drive +"\""+ mount_type + mount_freesize + mount_ioctl + mount_label;
 			} else {
@@ -2542,7 +2789,11 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 				const int lmisoSize = lista_isos.size();
 				for (int i = 0; i < lmisoSize; ++i)
 				{
-					lista_multiple_iso << "\""+ getDirRelative(lista_isos.at(i), "DosGames") +"\"";
+					QString path_multi_boot = getDirRelative(lista_isos.at(i), "DosGames");
+				#ifdef Q_OS_WIN32
+					path_multi_boot.replace("/","\\");
+				#endif
+					lista_multiple_iso << "\""+ path_multi_boot +"\"";
 				}
 				mount_drive.clear();
 				mount_drive = lista_multiple_iso.join(" ");
@@ -2555,17 +2806,13 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 		montaje_boot = "";
 	}
 
-	mount_dir_primario.replace("/","\\");
-	if( !mount_dir_primario.endsWith("\\") )
-		mount_dir_primario.append("\\");
+	mount_dir = getShortPathName(DirEXEDbx).remove(getShortPathName(mount_dir_primario), Qt::CaseInsensitive).replace("/","\\");
 
-	mount_dir = getShortPathName( DirEXEDbx ).remove( getShortPathName( mount_dir_primario ), Qt::CaseInsensitive);
-
-	if( mount_Boot == false )
+	if (mount_Boot == false)
 	{
 		listmontajes << mount_letra_primario +":";
 		listmontajes << "cd "+ mount_dir;
-		listmontajes << Dbx_loadfix + getNameTo8Caracter( NombreEXEDbx ) +" "+ cfgDbx.parametros_exe;
+		listmontajes << Dbx_loadfix + getNameTo8Caracter(NombreEXEDbx) +" "+ cfgDbx.parametros_exe;
 	} else {
 		listmontajes << montaje_boot;
 	}
@@ -2580,51 +2827,179 @@ QStringList Funciones::creaConfigMontajes(QTreeWidget *twDbxMount, stConfigDOSBo
 */
 
 // Crea el archivo de configuración del DOSBox
-void Funciones::crearArchivoConfigDbx(stDatosJuego datos, QList<QString> url_list, stConfigDOSBox cfgDbx, QTreeWidget *twDbxMount, QString dir_app, QString tabla, QString pathSaveConfg, TipoCfg tipo_cfg)
+QString Funciones::crearArchivoConfigDbx(stDatosJuego datos, stConfigDOSBox cfgDbx, QList<stConfigDOSBoxMount> listMount, QString dir_app, QString tabla, QString pathSaveConfg, bool isSetup)
 {
+	QList<QString> url_list;
+	stConfigScummVM cfgSvm;
+	stConfigVDMSound cfgVdms;
 	datos.tipo_emu = "dosbox";
-	exportarProfileGRlida(datos, url_list, cfgDbx, twDbxMount, getDefectScummVM(), getDefectVDMSound(), dir_app, tabla, pathSaveConfg, tipo_cfg);
+	return exportarProfileGRlida(datos, url_list, cfgDbx, listMount, cfgSvm, cfgVdms, dir_app, tabla, pathSaveConfg, ExportDbx, isSetup);
 }
 
-void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_list, stConfigDOSBox cfgDbx, QTreeWidget *twDbxMount, stConfigScummVM cfgSvm, stConfigVDMSound cfgVdms, QString dir_app, QString tabla, QString pathSaveConfg, TipoCfg tipo_cfg)
+// Crea la configuración del ScummVM
+QString Funciones::creaIniScummVM(stConfigScummVM cfgSvm, QString pathSaveConfg)
 {
-	QString cfg_out;//, dirBaseGames
+	QString cfg_out = "";
+	cfg_out.append("["+ cfgSvm.game_label +"]\n");
+	cfg_out.append("description="+ cfgSvm.description +"\n");
+	cfg_out.append("gameid="+ cfgSvm.game +"\n");
+	cfg_out.append("language="+ cfgSvm.language +"\n");
+	cfg_out.append("subtitles="+ cfgSvm.subtitles +"\n");
+	cfg_out.append("platform="+ cfgSvm.platform +"\n");
+	cfg_out.append("gfx_mode="+ cfgSvm.gfx_mode +"\n");
+	cfg_out.append("render_mode="+ cfgSvm.render_mode +"\n");
+	cfg_out.append("fullscreen="+ cfgSvm.fullscreen +"\n");
+	cfg_out.append("aspect_ratio="+ cfgSvm.aspect_ratio +"\n");
+	cfg_out.append("path="+ getDirRelative(cfgSvm.path, "DosGames") +"\n");
+	cfg_out.append("extrapath="+ getDirRelative(cfgSvm.path_extra, "DosGames") +"\n");
+	cfg_out.append("savepath="+ getDirRelative(cfgSvm.path_save, "DosGames") +"\n");
+	cfg_out.append("music_driver="+ cfgSvm.music_driver +"\n");
+	cfg_out.append("enable_gs="+ cfgSvm.enable_gs +"\n");
+	cfg_out.append("multi_midi="+ cfgSvm.multi_midi +"\n");
+	cfg_out.append("native_mt32="+ cfgSvm.native_mt32 +"\n");
+	cfg_out.append("master_volume="+ cfgSvm.master_volume +"\n");
+	cfg_out.append("music_volume="+ cfgSvm.music_volume +"\n");
+	cfg_out.append("sfx_volume="+ cfgSvm.sfx_volume +"\n");
+	cfg_out.append("speech_volume="+ cfgSvm.speech_volume +"\n");
+	cfg_out.append("tempo="+ cfgSvm.tempo +"\n");
+	cfg_out.append("talkspeed="+ cfgSvm.talkspeed +"\n");
+	cfg_out.append("cdrom="+ cfgSvm.cdrom +"\n");
+	cfg_out.append("joystick_num="+ cfgSvm.joystick_num +"\n");
+	cfg_out.append("output_rate="+ cfgSvm.output_rate +"\n");
+	cfg_out.append("midi_gain="+ cfgSvm.midi_gain +"\n");
+	cfg_out.append("copy_protection="+ cfgSvm.copy_protection +"\n");
+	cfg_out.append("soundfont="+ cfgSvm.sound_font +"\n");
+	cfg_out.append("walkspeed="+ cfgSvm.walkspeed +"\n");
+	cfg_out.append("originalsaveload="+ cfgSvm.originalsaveload +"\n");
+	cfg_out.append("bright_palette="+ cfgSvm.bright_palette +"\n\n");
 
+	cfg_out.append("[scummvm]\n");
+	cfg_out.append("gui_theme=modern\n");
+	cfg_out.append("gfx_mode=2x\n");
+	cfg_out.append("fullscreen=false\n");
+	cfg_out.append("extrapath="+ getDirRelative(cfgSvm.path_extra, "DosGames") +"\n");
+	cfg_out.append("themepath="+ getDirRelative(cfgSvm.emu_svmpath) +"\n");
+	cfg_out.append("autosave_period="+ cfgSvm.autosave_period +"\n");
+	cfg_out.append("gui_language="+ stLngSelect +"\n");
+	cfg_out.append("updates_check=0\n");
+
+	if (pathSaveConfg.isEmpty())
+	{
+		cfg_out.append("\n[ExtraInfo]\n");
+		cfg_out.append("game_label="+ cfgSvm.game_label +"\n");
+		cfg_out.append("path_game="+ cfgSvm.path +"\n");
+		cfg_out.append("path_extra="+ cfgSvm.path_extra +"\n");
+		cfg_out.append("path_save="+ cfgSvm.path_save +"\n");
+		cfg_out.append("mute="+ cfgSvm.mute +"\n");
+		cfg_out.append("speech_mute="+ cfgSvm.speech_mute +"\n");
+		cfg_out.append("debuglevel="+ cfgSvm.debuglevel +"\n");
+		cfg_out.append("opl_driver="+ cfgSvm.opl_driver +"\n");
+		cfg_out.append("disable_dithering="+ cfgSvm.disable_dithering +"\n");
+		cfg_out.append("alt_intro="+ cfgSvm.alt_intro +"\n");
+		cfg_out.append("boot_param="+ cfgSvm.boot_param +"\n");
+		cfg_out.append("emu_svmpath="+ cfgSvm.emu_svmpath +"\n\n");
+	}
+
+	if (!pathSaveConfg.isEmpty())
+	{
+		if (comprobarDirectorio(getInfoFile(pathSaveConfg).Path))
+			guardarArchivo(pathSaveConfg, cfg_out, "UTF-8");
+	}
+
+	return cfg_out;
+}
+
+// Crea el archivo de configuración del VDMSound
+QString Funciones::crearArchivoConfigVdmS(stConfigVDMSound cfgVdms, QString pathSaveConfg)
+{
+	QString cfg_out = "";
+	cfg_out.append("[program]\n");
+	cfg_out.append("executable="+ getDirRelative(cfgVdms.path_exe, "DosGames") +"\n");
+	cfg_out.append("workdir="+ getInfoFile(getDirRelative(cfgVdms.path_exe, "DosGames")).Path +"\n");
+	cfg_out.append("params="+ cfgVdms.program_1 +"\n");
+	cfg_out.append("icon="+ cfgVdms.program_2 +"\n\n");
+
+	cfg_out.append("[vdms.debug]\n");
+	cfg_out.append("useCustomCfg="+ cfgVdms.vdms_debug_1 +"\n");
+	cfg_out.append("customCfg="+ cfgVdms.vdms_debug_2 +"\n\n");
+
+	cfg_out.append("[winnt.dos]\n");
+	cfg_out.append("useAutoexec="+ cfgVdms.winnt_dos_1 +"\n");
+	cfg_out.append("autoexec="+ cfgVdms.winnt_dos_2 +"\n\n");
+
+	cfg_out.append("[winnt.dosbox]\n");
+	cfg_out.append("exitclose="+ cfgVdms.winnt_dosbox_1 +"\n");
+	cfg_out.append("exitWarn="+ cfgVdms.winnt_dosbox_2 +"\n");
+	cfg_out.append("fastPaste="+ cfgVdms.winnt_dosbox_3 +"\n\n");
+
+	cfg_out.append("[winnt.storage]\n");
+	cfg_out.append("useCDROM="+ cfgVdms.winnt_storage_1 +"\n");
+	cfg_out.append("useNetware="+ cfgVdms.winnt_storage_2 +"\n\n");
+
+	if (!pathSaveConfg.isEmpty())
+	{
+		if (comprobarDirectorio(getInfoFile(pathSaveConfg).Path))
+			guardarArchivo(pathSaveConfg, cfg_out, "UTF-8");
+	}
+
+	return cfg_out;
+}
+
+// Exportar la configuración del GR-lida, Datos, DOSBox, ScummVM y VDMSound
+QString Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_list, stConfigDOSBox cfgDbx, QList<stConfigDOSBoxMount> listMount, stConfigScummVM cfgSvm, stConfigVDMSound cfgVdms, QString dir_app, QString tabla, QString pathSaveConfg, TipoCfg tipo_cfg, bool isSetup)
+{
+	QString cfg_out;
+	const int listMountSize = listMount.size();
+
+// Directorio del juego
+	QString dirDatosGame = dir_app +"datosdb/"+ tabla +"/id-"+ datos.idgrl +"_"+ datos.titulo_guiones +"_"+ datos.tipo_emu +"/";
+
+// DOSBox a usar
 	QHash<QString, stGrlDatos> dbx_list = cargaDatosQHash(stDirApp +"datos/dbx_list.txt", 6, "|");
-	stGrlDatos dbx_dato;
-	dbx_dato.titulo = "DOSBox";
-	dbx_dato.icono  = "dosbox.png";
-	dbx_dato.key    = "dosbox";
+
 	QSettings settings(stDirApp +"GR-lida.conf", QSettings::IniFormat);
 	settings.beginGroup("OpcGeneral");
-//		dirBaseGames = settings.value("DirBaseGames", "./DosGames/").toString();
-		dbx_dato.extra   = settings.value("DirDOSBox", "").toString();
-		dbx_dato.issvn   = settings.value("DOSBoxSVN", false).toBool();
-		dbx_dato.version = settings.value("VersionDBx", "0.74").toString();
+		QString DOSBoxDefault = settings.value("DOSBoxDefault", "").toString();
 	settings.endGroup();
-	dbx_list.insert(dbx_dato.key, dbx_dato);
-// DOSBox a usar
+
+	if (cfgDbx.dosbox_emu_key.isEmpty() || !dbx_list.contains(cfgDbx.dosbox_emu_key))
+	{
+		const int num_dbx_count = dbx_list.count(DOSBoxDefault);
+		const int num_dbx_size  = dbx_list.size();
+		if (num_dbx_count > 0 || num_dbx_size > 0)
+		{
+			QHash<QString, stGrlDatos>::iterator i_dbx = dbx_list.begin();
+			cfgDbx.dosbox_emu_key = i_dbx.key();
+		} else
+			cfgDbx.dosbox_emu_key = DOSBoxDefault;
+	//	conf_dosbox["dosbox_emu_key"] = grlCfg.DOSBoxDefault.isEmpty() ? "dosbox" : grlCfg.DOSBoxDefault;
+	}
+
 	stGrlDatos dosbox_dato_emu = dbx_list[cfgDbx.dosbox_emu_key];
 
-	if( tipo_cfg == ExportGrlida )
+	if (tipo_cfg == ExportGrlida)
 	{
 		cfg_out = leerArchivo(":/datos/grl_datos.xml", "UTF-8");
-		if( datos.tipo_emu == "dosbox" )
+		if (datos.tipo_emu == "dosbox")
 			cfg_out.replace("{grl_otra_configuracion}", "\n"+ leerArchivo(":/datos/grl_dosbox.xml", "UTF-8"));
-		else if( datos.tipo_emu == "scummvm" )
+		else if (datos.tipo_emu == "scummvm")
 			cfg_out.replace("{grl_otra_configuracion}", "\n"+ leerArchivo(":/datos/grl_scummvm.xml", "UTF-8"));
-		else if( datos.tipo_emu == "vdmsound" )
+		else if (datos.tipo_emu == "vdmsound")
 			cfg_out.replace("{grl_otra_configuracion}", "\n"+ leerArchivo(":/datos/grl_vdmsound.xml", "UTF-8"));
 		else
 			cfg_out.replace("{grl_otra_configuracion}", "");
 	} else {
-		if( stLngSelect.isEmpty() )
-			cfg_out = leerArchivo(":/datos/dosbox.conf", "UTF-8");
-		else
-			cfg_out = leerArchivo(":/datos/"+ stLngSelect +"/dosbox.conf", "UTF-8");
+		if (pathSaveConfg.isEmpty())
+			cfg_out = leerArchivo(":/datos/dosbox_m.conf", "UTF-8");
+		else {
+			if (stLngSelect.isEmpty())
+				cfg_out = leerArchivo(":/datos/dosbox.conf", "UTF-8");
+			else
+				cfg_out = leerArchivo(":/datos/"+ stLngSelect +"/dosbox.conf", "UTF-8");
+		}
 	}
 
-	if( tipo_cfg == ExportDfend )
+	if (tipo_cfg == ExportDfend)
 	{
 		QString cfg_dfend = "\n";
 		cfg_dfend.append("[ExtraInfo]\n");
@@ -2642,13 +3017,13 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		const int url_listSize = url_list.size();
 		for (int i = 0; i < url_listSize; ++i)
 		{
-			if( i < 1 )
+			if (i < 1)
 			{
 				cfg_dfend.append("WWW="+ url_list.at(i) +"\n");
 				cfg_dfend.append("WWWName="+ url_list.at(i) +"\n");
 			} else {
-				cfg_dfend.append("WWW"+ IntToStr(i+1) +"="+ url_list.at(i) +"\n");
-				cfg_dfend.append("WWWName"+ IntToStr(i+1) +"="+ url_list.at(i) +"\n");
+				cfg_dfend.append("WWW"+ intToStr(i+1) +"="+ url_list.at(i) +"\n");
+				cfg_dfend.append("WWWName"+ intToStr(i+1) +"="+ url_list.at(i) +"\n");
 			}
 		}
 		cfg_dfend.append("\n");
@@ -2661,7 +3036,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 //		cfg_dfend.append("Overridegamestart="+ datos +"\n");
 //		cfg_dfend.append("OverrideMount="+ datos +"\n");
 		cfg_dfend.append("LoadFixVal="+ cfgDbx.opt_loadfix_mem +"\n");
-		cfg_dfend.append("NrOfMounts="+ IntToStr(twDbxMount->topLevelItemCount()) +"\n");
+		cfg_dfend.append("NrOfMounts="+ intToStr(listMountSize) +"\n");
 		cfg_dfend.append("Tab=-1\n");
 		cfg_dfend.append("Exe="+ cfgDbx.path_exe +"\n");
 		cfg_dfend.append("Setup="+ cfgDbx.path_setup +"\n");
@@ -2670,14 +3045,10 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 //		cfg_dfend.append("ExtraDirs=\n");
 //		cfg_dfend.append("DataDir=\n");
 
-		const int count_mount = twDbxMount->topLevelItemCount();
-		if( count_mount > 0 )
+		if (listMountSize > 0)
 		{
-			for (int num_mount = 0; num_mount < count_mount; ++num_mount)
-			{
-				QTreeWidgetItem *item = twDbxMount->topLevelItem( num_mount );
-				cfg_dfend.append(IntToStr(num_mount) +"="+ item->text(0) +";"+ item->text(2) +";"+ item->text(3) +";"+ item->text(6) +"\n");
-			}
+			for (int i = 0; i < listMountSize; ++i)
+				cfg_dfend.append(intToStr(i) +"="+ listMount.at(i).path +";"+ listMount.at(i).tipo_as +";"+ listMount.at(i).label +";"+ listMount.at(i).io_ctrl +"\n");
 		}
 
 		cfg_dfend.append("autoexec="+  cfgDbx.autoexec.replace("\n", "[13][10]") +"\n");
@@ -2727,9 +3098,12 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 
 		cfg_out.replace("{Dbx_config_export_dfend}", cfg_dfend);
 	}
-	else if( tipo_cfg == ExportGrlida )
+	else if (tipo_cfg == ExportGrlida)
 	{
-		cfg_out.replace("{lastBuildDate}", HoraFechaActual( getTime() ) );
+		uint secs = QDateTime::currentDateTime().toTime_t();
+
+		cfg_out.replace("{lastBuildDate}", horaFechaActual(intToStr(secs)));
+		cfg_out.replace("{year}", horaFechaActual(intToStr(secs), "yyyy"));
 
 		cfg_out.replace("{Dat_icono}"           , datos.icono           );
 		cfg_out.replace("{Dat_titulo}"          , datos.titulo          );
@@ -2764,30 +3138,30 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dat_usuario}"         , datos.usuario         );
 		cfg_out.replace("{Dat_path_exe}"        , datos.path_exe        );
 		cfg_out.replace("{Dat_parametros_exe}"  , datos.parametros_exe  );
-		cfg_out.replace("{Dat_path_capturas}"   , datos.path_capturas   );
+//		cfg_out.replace("{Dat_path_capturas}"   , datos.path_capturas   );
 		cfg_out.replace("{Dat_path_setup}"      , datos.path_setup      );
 		cfg_out.replace("{Dat_parametros_setup}", datos.parametros_setup);
 	} else
 		cfg_out.replace("{Dbx_config_export_dfend}", "");
 
-	if( datos.tipo_emu == "dosbox" )
+	if (datos.tipo_emu == "dosbox")
 	{
 	// [sdl]
-		cfg_out.replace("{Dbx_sdl_fullscreen}"      , cfgDbx.sdl_fullscreen);
-		cfg_out.replace("{Dbx_sdl_fulldouble}"      , cfgDbx.sdl_fulldouble);
-		cfg_out.replace("{Dbx_sdl_fullfixed}"       , cfgDbx.sdl_fullfixed);
-		cfg_out.replace("{Dbx_sdl_fullresolution}"  , cfgDbx.sdl_fullresolution);
+		cfg_out.replace("{Dbx_sdl_fullscreen}"      , cfgDbx.sdl_fullscreen      );
+		cfg_out.replace("{Dbx_sdl_fulldouble}"      , cfgDbx.sdl_fulldouble      );
+		cfg_out.replace("{Dbx_sdl_fullfixed}"       , cfgDbx.sdl_fullfixed       );
+		cfg_out.replace("{Dbx_sdl_fullresolution}"  , cfgDbx.sdl_fullresolution  );
 		cfg_out.replace("{Dbx_sdl_windowresolution}", cfgDbx.sdl_windowresolution);
-		cfg_out.replace("{Dbx_sdl_output}"          , cfgDbx.sdl_output);
-		cfg_out.replace("{Dbx_sdl_hwscale}"         , cfgDbx.sdl_hwscale);
-		cfg_out.replace("{Dbx_sdl_autolock}"        , cfgDbx.sdl_autolock);
-		cfg_out.replace("{Dbx_sdl_sensitivity}"     , cfgDbx.sdl_sensitivity);
-		cfg_out.replace("{Dbx_sdl_waitonerror}"     , cfgDbx.sdl_waitonerror);
-		cfg_out.replace("{Dbx_sdl_priority}"        , cfgDbx.sdl_priority);
-		cfg_out.replace("{Dbx_sdl_mapperfile}"      , cfgDbx.sdl_mapperfile);
-		cfg_out.replace("{Dbx_sdl_usescancodes}"    , cfgDbx.sdl_usescancodes);
+		cfg_out.replace("{Dbx_sdl_output}"          , cfgDbx.sdl_output          );
+		cfg_out.replace("{Dbx_sdl_hwscale}"         , cfgDbx.sdl_hwscale         );
+		cfg_out.replace("{Dbx_sdl_autolock}"        , cfgDbx.sdl_autolock        );
+		cfg_out.replace("{Dbx_sdl_sensitivity}"     , cfgDbx.sdl_sensitivity     );
+		cfg_out.replace("{Dbx_sdl_waitonerror}"     , cfgDbx.sdl_waitonerror     );
+		cfg_out.replace("{Dbx_sdl_priority}"        , cfgDbx.sdl_priority        );
+		cfg_out.replace("{Dbx_sdl_mapperfile}"      , cfgDbx.sdl_mapperfile      );
+		cfg_out.replace("{Dbx_sdl_usescancodes}"    , cfgDbx.sdl_usescancodes    );
 
-		if( dosbox_dato_emu.version <= "0.73" )
+		if (dosbox_dato_emu.version <= "0.73")
 			cfg_out.replace("{Dbx_sdl_extra}", "hwscale="+ cfgDbx.sdl_hwscale +"\n");
 		else
 			cfg_out.replace("{Dbx_sdl_extra}", "");
@@ -2795,14 +3169,9 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 	// [dosbox]
 		cfg_out.replace("{Dbx_dosbox_language}", cfgDbx.dosbox_language);
 		cfg_out.replace("{Dbx_dosbox_machine}" , cfgDbx.dosbox_machine);
-
-		if( cfgDbx.dosbox_captures == "" || cfgDbx.dosbox_captures == "capture" )
-			cfg_out.replace("{Dbx_dosbox_captures}", dir_app +"capturas/"+ tabla +"/id-"+ datos.idgrl +"_"+ eliminar_caracteres(datos.titulo) +"_"+ datos.tipo_emu);
-		else
-			cfg_out.replace("{Dbx_dosbox_captures}", cfgDbx.dosbox_captures);
-
-		cfg_out.replace("{Dbx_dosbox_memsize}", cfgDbx.dosbox_memsize);
-		cfg_out.replace("{Dbx_dosbox_emu_key}", cfgDbx.dosbox_emu_key);
+		cfg_out.replace("{Dbx_dosbox_captures}", dirDatosGame +"capturas/");
+		cfg_out.replace("{Dbx_dosbox_memsize}" , cfgDbx.dosbox_memsize);
+		cfg_out.replace("{Dbx_dosbox_emu_key}" , cfgDbx.dosbox_emu_key);
 
 	// [render]
 		cfg_out.replace("{Dbx_render_frameskip}", cfgDbx.render_frameskip);
@@ -2816,28 +3185,28 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_cpu_cycles_protmode}" , cfgDbx.cpu_cycles_protmode);
 		cfg_out.replace("{Dbx_cpu_cycles_limitmode}", cfgDbx.cpu_cycles_limitmode);
 
-		if( cfgDbx.cpu_cycles != "auto" && cfgDbx.cpu_cycles != "max" && dosbox_dato_emu.version >= "0.73" )
+		if (cfgDbx.cpu_cycles != "auto" && cfgDbx.cpu_cycles != "max" && dosbox_dato_emu.version >= "0.73")
 			cfg_out.replace("{Dbx_cpu_cycles}", "fixed "+ cfgDbx.cpu_cycles);
 		else {
 			QString cycles_realmode, cycles_protmode, cycles_limitmode;
-			if( cfgDbx.cpu_cycles == "auto" && dosbox_dato_emu.version >= "0.74" )
+			if (cfgDbx.cpu_cycles == "auto" && dosbox_dato_emu.version >= "0.74")
 			{
 				cycles_realmode = cycles_protmode = cycles_limitmode = "";
-				if( !cfgDbx.cpu_cycles_realmode.isEmpty() )
+				if (!cfgDbx.cpu_cycles_realmode.isEmpty())
 					cycles_realmode = " "+ cfgDbx.cpu_cycles_realmode;
-				if( !cfgDbx.cpu_cycles_protmode.isEmpty() )
+				if (!cfgDbx.cpu_cycles_protmode.isEmpty())
 					cycles_protmode = " "+ cfgDbx.cpu_cycles_protmode;
-				if( !cfgDbx.cpu_cycles_limitmode.isEmpty() )
+				if (!cfgDbx.cpu_cycles_limitmode.isEmpty())
 					cycles_limitmode = " "+ cfgDbx.cpu_cycles_limitmode;
 
 				cfg_out.replace("{Dbx_cpu_cycles}", "auto"+ cycles_realmode + cycles_protmode + cycles_limitmode);
 			}
-			else if( cfgDbx.cpu_cycles == "max" && dosbox_dato_emu.version >= "0.74" )
+			else if (cfgDbx.cpu_cycles == "max" && dosbox_dato_emu.version >= "0.74")
 			{
 				cycles_protmode = cycles_limitmode = "";
-				if( !cfgDbx.cpu_cycles_protmode.isEmpty() )
+				if (!cfgDbx.cpu_cycles_protmode.isEmpty())
 					cycles_protmode = " "+ cfgDbx.cpu_cycles_protmode;
-				if( !cfgDbx.cpu_cycles_limitmode.isEmpty() )
+				if (!cfgDbx.cpu_cycles_limitmode.isEmpty())
 					cycles_limitmode = " "+ cfgDbx.cpu_cycles_limitmode;
 
 				cfg_out.replace("{Dbx_cpu_cycles}", "max"+ cycles_protmode + cycles_limitmode);
@@ -2858,7 +3227,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_midi_mpu401}"     , cfgDbx.midi_mpu401);
 		cfg_out.replace("{Dbx_midi_intelligent}", cfgDbx.midi_intelligent);
 
-		if( dosbox_dato_emu.version >= "0.73" || tipo_cfg == ExportGrlida )
+		if (dosbox_dato_emu.version >= "0.73" || tipo_cfg == ExportGrlida)
 		{
 			cfg_out.replace("{Dbx_midi_device}", cfgDbx.midi_device);
 			cfg_out.replace("{Dbx_midi_config}", cfgDbx.midi_config);
@@ -2876,7 +3245,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_sblaster_dma}"    , cfgDbx.sblaster_dma);
 		cfg_out.replace("{Dbx_sblaster_hdma}"   , cfgDbx.sblaster_hdma);
 
-		if( dosbox_dato_emu.version >= "0.73" )
+		if (dosbox_dato_emu.version >= "0.73")
 			cfg_out.replace("{Dbx_sblaster_mixer}", cfgDbx.sblaster_mixer);
 		else
 			cfg_out.replace("sbmixer={Dbx_sblaster_mixer}", "mixer="+ cfgDbx.sblaster_mixer);
@@ -2890,7 +3259,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_gus_gusrate}" , cfgDbx.gus_gusrate);
 		cfg_out.replace("{Dbx_gus_gusbase}" , cfgDbx.gus_gusbase);
 
-		if( dosbox_dato_emu.version >= "0.73" || tipo_cfg == ExportGrlida )
+		if (dosbox_dato_emu.version >= "0.73" || tipo_cfg == ExportGrlida)
 		{
 			cfg_out.replace("{Dbx_gus_irq1}", cfgDbx.gus_irq1);
 			cfg_out.replace("{Dbx_gus_irq2}", cfgDbx.gus_irq2);
@@ -2918,7 +3287,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Dbx_joystick_buttonwrap}", cfgDbx.joystick_buttonwrap);
 
 	// [dserial]
-		if( tipo_cfg == ExportGrlida )
+		if (tipo_cfg == ExportGrlida)
 		{
 			cfg_out.replace("{Dbx_modem_modem}"         , cfgDbx.modem_modem);
 			cfg_out.replace("{Dbx_modem_comport}"       , cfgDbx.modem_comport);
@@ -2931,7 +3300,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 			cfg_out.replace("{Dbx_dserial_bytesize}"    , cfgDbx.dserial_bytesize);
 			cfg_out.replace("{Dbx_dserial_stopbit}"     , cfgDbx.dserial_stopbit);
 		} else {
-			if( dosbox_dato_emu.version <= "0.73" )
+			if (dosbox_dato_emu.version <= "0.73")
 			{
 				QString moden_dserial = "\n[modem]\n"; // DOSBox 0.63
 				moden_dserial.append("modem="+ cfgDbx.modem_modem +"\n");
@@ -2969,21 +3338,23 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 			dbx_keyboardlayout.insert(dat_kb.key, dat_kb.extra);
 		cfg_out.replace("{Dbx_dos_keyboardlayout}", dbx_keyboardlayout[cfgDbx.dos_keyboardlayout]);
 
-		if( tipo_cfg == ExportDfend )
+		if (tipo_cfg == ExportDfend)
 			cfg_out.replace("{Dbx_dos_version}", "ReportedDOSVersion="+ cfgDbx.dos_version +"\n");
-		else
+		else if (tipo_cfg == ExportGrlida)
 			cfg_out.replace("{Dbx_dos_version}", cfgDbx.dos_version);
+		else
+			cfg_out.replace("{Dbx_dos_version}", "");
 
 	// [ipx]
 		cfg_out.replace("{Dbx_ipx_ipx}", cfgDbx.ipx_ipx);
 
-		if( tipo_cfg == ExportDbx )
+		if (tipo_cfg == ExportDbx)
 		{
-			if( StrToBool( cfgDbx.ipx_ipx ) )
+			if (strToBool(cfgDbx.ipx_ipx))
 			{
-				if( cfgDbx.ipx_type == "server" )
+				if (cfgDbx.ipx_type == "server")
 					cfg_out.replace("{Dbx_ipx_config}", "IPXNET STARTSERVER "+ cfgDbx.ipx_port +"\n");
-				else if( cfgDbx.ipx_type == "client" )
+				else if (cfgDbx.ipx_type == "client")
 					cfg_out.replace("{Dbx_ipx_config}", "IPXNET CONNECT "+ cfgDbx.ipx_ip +" "+ cfgDbx.ipx_port +"\n");
 				else
 					cfg_out.replace("{Dbx_ipx_config}", "");
@@ -2993,14 +3364,14 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		// [autoexec]
 			QString autoexec = "";
 
-			if( !cfgDbx.dos_version.isEmpty() )
+			if (!cfgDbx.dos_version.isEmpty())
 				autoexec.append("ver set "+ cfgDbx.dos_version +"\n\n");
 
-			if( StrToBool( cfgDbx.opt_autoexec ) )
-				autoexec.append( cfgDbx.autoexec +"\n");
+			if (strToBool(cfgDbx.opt_autoexec))
+				autoexec.append(cfgDbx.autoexec +"\n");
 			else {
 				// Creando el Autoexec
-				QStringList listamontaje = creaConfigMontajes( twDbxMount, cfgDbx );
+				QStringList listamontaje = creaConfigMontajes(listMount, cfgDbx, isSetup);
 				const int listamontajeSize = listamontaje.size();
 				for (int i = 0; i < listamontajeSize; ++i)
 					autoexec.append(listamontaje.at(i) +"\n");
@@ -3008,7 +3379,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 
 			cfg_out.replace("{Dbx_autoexec}", autoexec);
 		}
-		else if( tipo_cfg == ExportGrlida )
+		else if (tipo_cfg == ExportGrlida)
 		{
 		// [ipx]
 			cfg_out.replace("{Dbx_ipx_type}", cfgDbx.ipx_type);
@@ -3026,8 +3397,6 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 			cfg_out.replace("{Dbx_opt_cerrar_dbox}"      , cfgDbx.opt_cerrar_dbox);
 			cfg_out.replace("{Dbx_opt_cycle_sincronizar}", cfgDbx.opt_cycle_sincronizar);
 		// Path
-			cfg_out.replace("{Dbx_path_conf}"       , cfgDbx.path_conf);
-			cfg_out.replace("{Dbx_path_sonido}"     , cfgDbx.path_sonido);
 			cfg_out.replace("{Dbx_path_exe}"        , cfgDbx.path_exe);
 			cfg_out.replace("{Dbx_path_setup}"      , cfgDbx.path_setup);
 			cfg_out.replace("{Dbx_parametros_exe}"  , cfgDbx.parametros_exe);
@@ -3035,24 +3404,22 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 
 		// Montajes
 			QString cfg_mount = "";
-			const int count_mount_grl = twDbxMount->topLevelItemCount();
-			if( count_mount_grl > 0 )
+			if (listMountSize > 0)
 			{
-				for (int num_mount_grl = 0; num_mount_grl < count_mount_grl; ++num_mount_grl)
+				for (int i = 0; i < listMountSize; ++i)
 				{
-					QTreeWidgetItem *item_mount_grl = twDbxMount->topLevelItem( num_mount_grl );
 					cfg_mount.append("\n    <dosbox_montajes>\n");
-					cfg_mount.append("      <Dbx_mount_path>"+ item_mount_grl->text(0) +"</Dbx_mount_path>\n");
-					cfg_mount.append("      <Dbx_mount_letter>"+ item_mount_grl->text(1) +"</Dbx_mount_letter>\n");
-					cfg_mount.append("      <Dbx_mount_tipo_as>"+ item_mount_grl->text(2) +"</Dbx_mount_tipo_as>\n");
-					cfg_mount.append("      <Dbx_mount_label>"+ item_mount_grl->text(3) +"</Dbx_mount_label>\n");
-					cfg_mount.append("      <Dbx_mount_indx_cd>"+ item_mount_grl->text(4) +"</Dbx_mount_indx_cd>\n");
-					cfg_mount.append("      <Dbx_mount_opt_mount>"+ item_mount_grl->text(5) +"</Dbx_mount_opt_mount>\n");
-					cfg_mount.append("      <Dbx_mount_io_ctrl>"+ item_mount_grl->text(6) +"</Dbx_mount_io_ctrl>\n");
-					cfg_mount.append("      <Dbx_mount_select_mount>"+ item_mount_grl->text(7) +"</Dbx_mount_select_mount>\n");
-					cfg_mount.append("      <Dbx_mount_opt_size>"+ item_mount_grl->text(10) +"</Dbx_mount_opt_size>\n");
-					cfg_mount.append("      <Dbx_mount_opt_freesize>"+ item_mount_grl->text(11) +"</Dbx_mount_opt_freesize>\n");
-					cfg_mount.append("      <Dbx_mount_freesize>"+ item_mount_grl->text(12) +"</Dbx_mount_freesize>\n");
+					cfg_mount.append("      <Dbx_mount_path>"+ listMount.at(i).path +"</Dbx_mount_path>\n");
+					cfg_mount.append("      <Dbx_mount_letter>"+ listMount.at(i).letter +"</Dbx_mount_letter>\n");
+					cfg_mount.append("      <Dbx_mount_tipo_as>"+ listMount.at(i).tipo_as +"</Dbx_mount_tipo_as>\n");
+					cfg_mount.append("      <Dbx_mount_label>"+ listMount.at(i).label +"</Dbx_mount_label>\n");
+					cfg_mount.append("      <Dbx_mount_indx_cd>"+ listMount.at(i).indx_cd +"</Dbx_mount_indx_cd>\n");
+					cfg_mount.append("      <Dbx_mount_opt_mount>"+ listMount.at(i).opt_mount +"</Dbx_mount_opt_mount>\n");
+					cfg_mount.append("      <Dbx_mount_io_ctrl>"+ listMount.at(i).io_ctrl +"</Dbx_mount_io_ctrl>\n");
+					cfg_mount.append("      <Dbx_mount_select_mount>"+ listMount.at(i).select_mount +"</Dbx_mount_select_mount>\n");
+					cfg_mount.append("      <Dbx_mount_opt_size>"+ listMount.at(i).opt_size +"</Dbx_mount_opt_size>\n");
+					cfg_mount.append("      <Dbx_mount_opt_freesize>"+ listMount.at(i).opt_freesize +"</Dbx_mount_opt_freesize>\n");
+					cfg_mount.append("      <Dbx_mount_freesize>"+ listMount.at(i).freesize +"</Dbx_mount_freesize>\n");
 					cfg_mount.append("    </dosbox_montajes>");
 				}
 			}
@@ -3061,7 +3428,7 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 			cfg_out.replace("{Dbx_autoexec}", "");
 	}
 
-	if( datos.tipo_emu == "scummvm" )
+	if (datos.tipo_emu == "scummvm")
 	{
 		cfg_out.replace("{Svm_game}"             , cfgSvm.game           );
 		cfg_out.replace("{Svm_game_label}"       , cfgSvm.game_label     );
@@ -3072,11 +3439,11 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Svm_render_mode}"      , cfgSvm.render_mode    );
 		cfg_out.replace("{Svm_fullscreen}"       , cfgSvm.fullscreen     );
 		cfg_out.replace("{Svm_aspect_ratio}"     , cfgSvm.aspect_ratio   );
-		cfg_out.replace("{Svm_path_game}"        , cfgSvm.path_game      );
+		cfg_out.replace("{Svm_path}"             , cfgSvm.path           );
 		cfg_out.replace("{Svm_path_extra}"       , cfgSvm.path_extra     );
 		cfg_out.replace("{Svm_path_save}"        , cfgSvm.path_save      );
-		cfg_out.replace("{Svm_path_capturas}"    , cfgSvm.path_capturas  );
-		cfg_out.replace("{Svm_path_sonido}"      , cfgSvm.path_sonido    );
+//		cfg_out.replace("{Svm_path_capturas}"    , cfgSvm.path_capturas  );
+//		cfg_out.replace("{Svm_path_sonido}"      , cfgSvm.path_sonido    );
 		cfg_out.replace("{Svm_music_driver}"     , cfgSvm.music_driver   );
 		cfg_out.replace("{Svm_enable_gs}"        , cfgSvm.enable_gs      );
 		cfg_out.replace("{Svm_multi_midi}"       , cfgSvm.multi_midi     );
@@ -3103,9 +3470,8 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Svm_boot_param}"       , cfgSvm.boot_param     );
 	}
 
-	if( datos.tipo_emu == "vdmsound" )
+	if (datos.tipo_emu == "vdmsound")
 	{
-		cfg_out.replace("{Vdms_path_conf}"      , cfgVdms.path_conf      );
 		cfg_out.replace("{Vdms_path_exe}"       , cfgVdms.path_exe       );
 		cfg_out.replace("{Vdms_program_1}"      , cfgVdms.program_1      );
 		cfg_out.replace("{Vdms_program_2}"      , cfgVdms.program_2      );
@@ -3120,274 +3486,176 @@ void Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_lis
 		cfg_out.replace("{Vdms_winnt_storage_2}", cfgVdms.winnt_storage_2);
 	}
 
-	QFile file_out( pathSaveConfg );
-	if ( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
+	if (!pathSaveConfg.isEmpty())
 	{
-		QTextStream out(&file_out);
-		out.setCodec("UTF-8");
-		out << cfg_out << endl;
-		out.flush();
-		file_out.close();
+		if (comprobarDirectorio(getInfoFile(pathSaveConfg).Path))
+			guardarArchivo(pathSaveConfg, cfg_out);
 	}
-}
 
-// Crea la configuración del ScummVM
-void Funciones::creaIniScummVM(stConfigScummVM cfgSvm, QString archivo)
-{
-	QFile file_out;
-	file_out.setFileName( archivo );
-
-	comprobarDirectorio( getInfoFile(archivo).Path );
-
-	if( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
-	{
-		QTextStream out(&file_out);
-		out.setCodec("UTF-8");
-		cfgSvm.path_extra = getDirRelative(cfgSvm.path_extra, "DosGames");
-
-		out << "[" << cfgSvm.game_label << "]" << endl;
-		out << "description"     << "=" << cfgSvm.description     << endl;
-		out << "gameid"          << "=" << cfgSvm.game            << endl;
-		out << "language"        << "=" << cfgSvm.language        << endl;
-		out << "subtitles"       << "=" << cfgSvm.subtitles       << endl;
-		out << "platform"        << "=" << cfgSvm.platform        << endl;
-		out << "gfx_mode"        << "=" << cfgSvm.gfx_mode        << endl;
-		out << "render_mode"     << "=" << cfgSvm.render_mode     << endl;
-		out << "fullscreen"      << "=" << cfgSvm.fullscreen      << endl;
-		out << "aspect_ratio"    << "=" << cfgSvm.aspect_ratio    << endl;
-		out << "path"            << "=" << getDirRelative(cfgSvm.path_game, "DosGames") << endl;
-		out << "extrapath"       << "=" << cfgSvm.path_extra      << endl;
-		out << "savepath"        << "=" << getDirRelative(cfgSvm.path_save, "DosGames") << endl;
-		out << "music_driver"    << "=" << cfgSvm.music_driver    << endl;
-		out << "enable_gs"       << "=" << cfgSvm.enable_gs       << endl;
-		out << "multi_midi"      << "=" << cfgSvm.multi_midi      << endl;
-		out << "native_mt32"     << "=" << cfgSvm.native_mt32     << endl;
-		out << "master_volume"   << "=" << cfgSvm.master_volume   << endl;
-		out << "music_volume"    << "=" << cfgSvm.music_volume    << endl;
-		out << "sfx_volume"      << "=" << cfgSvm.sfx_volume      << endl;
-		out << "speech_volume"   << "=" << cfgSvm.speech_volume   << endl;
-		out << "tempo"           << "=" << cfgSvm.tempo           << endl;
-		out << "talkspeed"       << "=" << cfgSvm.talkspeed       << endl;
-		out << "cdrom"           << "=" << cfgSvm.cdrom           << endl;
-		out << "joystick_num"    << "=" << cfgSvm.joystick_num    << endl;
-		out << "output_rate"     << "=" << cfgSvm.output_rate     << endl;
-		out << "midi_gain"       << "=" << cfgSvm.midi_gain       << endl;
-		out << "copy_protection" << "=" << cfgSvm.copy_protection << endl;
-		out << "soundfont"       << "=" << cfgSvm.sound_font      << endl;
-		out << "walkspeed"       << "=" << cfgSvm.walkspeed       << endl << endl;
-
-		out << "[scummvm]" << endl;
-		out << "gui_theme"  << "=" << "modern" << endl;
-		out << "gfx_mode"   << "=" << "2x"     << endl;
-		out << "fullscreen" << "=" << "false"  << endl;
-		out << "extrapath"  << "=" << cfgSvm.path_extra << endl;
-		out << "themepath"  << "=" << getDirRelative(cfgSvm.emu_svmpath) << endl << endl;
-
-		out.flush();
-	}
-	file_out.close();
-}
-
-// Crea el archivo de configuración del VDMSound
-void Funciones::crearArchivoConfigVdmS(stConfigVDMSound cfgVdms, QString pathSaveConfg)
-{
-	QFile file_out;
-	QString file_name_conf;
-	stFileInfo f_info = getInfoFile(pathSaveConfg);
-
-	comprobarDirectorio( f_info.Path );
-
-	if( f_info.Exists )
-		file_name_conf = f_info.Path + f_info.Name +"_"+ HoraFechaActual(getTime(), "ddMMyyyy_HHmmss") + f_info.Ext;
-	else
-		file_name_conf = f_info.FilePath;
-
-	file_out.setFileName( file_name_conf );
-	if( file_out.open(QIODevice::WriteOnly | QIODevice::Text) )
-	{
-		QTextStream out(&file_out);
-		out.setCodec("UTF-8");
-
-		out << "[program]" << endl;
-		out << "executable" << "=" << cfgVdms.path_exe  << endl;
-		out << "workdir"    << "=" << getInfoFile( cfgVdms.path_exe ).Path << endl;
-		out << "params"     << "=" << cfgVdms.program_1 << endl;
-		out << "icon"       << "=" << cfgVdms.program_2 << endl << endl;
-
-		out << "[vdms.debug]" << endl;
-		out << "useCustomCfg" << "=" << cfgVdms.vdms_debug_1 << endl;
-		out << "customCfg"    << "=" << cfgVdms.vdms_debug_2 << endl << endl;
-
-		out << "[winnt.dos]" << endl;
-		out << "useAutoexec" << "=" << cfgVdms.winnt_dos_1 << endl;
-		out << "autoexec"    << "=" << cfgVdms.winnt_dos_2 << endl << endl;
-
-		out << "[winnt.dosbox]" << endl;
-		out << "exitclose" << "=" << cfgVdms.winnt_dosbox_1 << endl;
-		out << "exitWarn"  << "=" << cfgVdms.winnt_dosbox_2 << endl;
-		out << "fastPaste" << "=" << cfgVdms.winnt_dosbox_3 << endl << endl;
-
-		out << "[winnt.storage]" << endl;
-		out << "useCDROM"   << "=" << cfgVdms.winnt_storage_1 << endl;
-		out << "useNetware" << "=" << cfgVdms.winnt_storage_2 << endl << endl;
-
-		out.flush();
-	}
-	file_out.close();
+	return cfg_out;
 }
 
 // Importar la configuración del DOSBox del DFend
-QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString tabla, QString filename)
+QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString filename, bool isDbx)
 {
 	QHash<QString, QString> cfgDFend;
-//	QSettings optgrl(dir_app +"GR-lida.conf", QSettings::IniFormat);
-//	optgrl.beginGroup("OpcGeneral");
-//		QString dirBaseGames = optgrl.value("DirBaseGames", "./DosGames/").toString();
-//	optgrl.endGroup();
+	QString lineas = "";
 
-// Leer archivo ------------------------------------------------------
-	QString lineas = leerArchivo(filename);
-	lineas.replace("\\", "\\\\");
-	lineas.replace(";", "|");
-	lineas.replace(",", "--");
+	if (!isDbx)
+	{
+		lineas = leerArchivo(filename);
+		lineas.replace("\\", "/");
+		lineas.replace(";", "|");
+		lineas.replace(",", "--");
+	} else {
+		lineas = filename;
+		lineas.replace("\\", "/");
+	}
 
-// Escribir archivo --------------------------------------------------
-	QFile file_out(dir_app +"temp/temp_config.prof");
-	file_out.open(QIODevice::WriteOnly | QIODevice::Text);
-
-	QTextStream out(&file_out);
-	out.setCodec("UTF-8");
-	out << lineas;
-	out.flush();
-	file_out.close();
+	filename = dir_app +"temp/temp_config.prof";
+	guardarArchivo(filename, lineas, "UTF-8");
 	lineas.clear();
 
-	QSettings settings(dir_app +"temp/temp_config.prof", QSettings::IniFormat);
-
+	QSettings settings(filename, QSettings::IniFormat);
 // Datos del juego -----
-	settings.beginGroup("ExtraInfo");
-		QString icono = settings.value("Icon", "dosbox").toString().replace("--", ",");
-		cfgDFend["Dat_icono"]            = icono.isEmpty() ? "dosbox" : icono;
-		cfgDFend["Dat_titulo"]           = settings.value("Name", "").toString().replace("--", ";");
-		cfgDFend["Dat_subtitulo"]        = "";
-		cfgDFend["Dat_genero"]           = settings.value("Genre", "").toString().replace("--", ";");
-		cfgDFend["Dat_compania"]         = settings.value("Publisher", "").toString().replace("--", ";");
-		cfgDFend["Dat_desarrollador"]    = settings.value("Developer", "").toString().replace("--", ";");
-		cfgDFend["Dat_tema"]             = "";
-		cfgDFend["Dat_grupo"]            = "";
-		cfgDFend["Dat_perspectiva"]      = "";
-		cfgDFend["Dat_idioma"]           = settings.value("Language", "").toString().replace("--", ";");
-		cfgDFend["Dat_idioma_voces"]     = "";
-		cfgDFend["Dat_formato"]          = "";
-		cfgDFend["Dat_anno"]             = settings.value("Year", "").toString().replace("--", ";");
-		cfgDFend["Dat_numdisc"]          = "";
-		cfgDFend["Dat_sistemaop"]        = "";
-		cfgDFend["Dat_tamano"]           = "";
-		cfgDFend["Dat_graficos"]         = "0";
-		cfgDFend["Dat_sonido"]           = "0";
-		cfgDFend["Dat_jugabilidad"]      = "0";
-		cfgDFend["Dat_original"]         = "false";
-		cfgDFend["Dat_estado"]           = "";
-		cfgDFend["Dat_thumbs"]           = "";
-		cfgDFend["Dat_cover_front"]      = "";
-		cfgDFend["Dat_cover_back"]       = "";
-		cfgDFend["Dat_fecha"]            = "";
-		cfgDFend["Dat_tipo_emu"]         = "dosbox";
-		cfgDFend["Dat_comentario"]       = settings.value("Notes", "").toString().replace("--", ";").replace("[13][10]", "<br/>\n").replace("[13]", "\n");
-		cfgDFend["Dat_favorito"]         = BoolToStr( settings.value("Favorite", "false").toBool() );
-		cfgDFend["Dat_rating"]           = "0";
-		cfgDFend["Dat_edad_recomendada"] = "";
-		cfgDFend["Dat_usuario"]          = "";
-		cfgDFend["Dat_path_exe"]         = "";
-		cfgDFend["Dat_parametros_exe"]   = "";
-		cfgDFend["Dat_path_capturas"]    = "";
-		cfgDFend["Dat_path_setup"]       = "";
-		cfgDFend["Dat_parametros_setup"] = "";
-	//--
-		cfgDFend["Dat_www_1_name"] = settings.value("WWWName", "").toString().replace("--", ";");
-		cfgDFend["Dat_www_1"]      = settings.value("WWW", "").toString().replace("--", ";");
-		for (int i = 2; i < 10; ++i)
-		{
-			cfgDFend.insert("Dat_www_"+ IntToStr(i) +"_name", settings.value("WWW"+ IntToStr(i) +"Name", "").toString().replace("--", ";") );
-			cfgDFend.insert("Dat_www_"+ IntToStr(i), settings.value("WWW"+ IntToStr(i), "").toString().replace("--", ";") );
-		}
-		cfgDFend["UserInfo"]= settings.value("UserInfo", "").toString().replace("--", ",");
-	settings.endGroup();
+	if (!isDbx)
+	{
+		settings.beginGroup("ExtraInfo");
+			QString icono = settings.value("Icon", "dosbox").toString().replace("--", ",");
+			cfgDFend["Dat_icono"]            = icono.isEmpty() ? "dosbox" : icono;
+			cfgDFend["Dat_titulo"]           = settings.value("Name", "").toString().replace("--", ";");
+			cfgDFend["Dat_subtitulo"]        = "";
+			cfgDFend["Dat_genero"]           = settings.value("Genre", "").toString().replace("--", ";");
+			cfgDFend["Dat_compania"]         = settings.value("Publisher", "").toString().replace("--", ";");
+			cfgDFend["Dat_desarrollador"]    = settings.value("Developer", "").toString().replace("--", ";");
+			cfgDFend["Dat_tema"]             = "";
+			cfgDFend["Dat_grupo"]            = "";
+			cfgDFend["Dat_perspectiva"]      = "";
+			cfgDFend["Dat_idioma"]           = settings.value("Language", "").toString().replace("--", ";");
+			cfgDFend["Dat_idioma_voces"]     = "";
+			cfgDFend["Dat_formato"]          = "";
+			cfgDFend["Dat_anno"]             = settings.value("Year", "").toString().replace("--", ";");
+			cfgDFend["Dat_numdisc"]          = "";
+			cfgDFend["Dat_sistemaop"]        = "";
+			cfgDFend["Dat_tamano"]           = "";
+			cfgDFend["Dat_graficos"]         = "0";
+			cfgDFend["Dat_sonido"]           = "0";
+			cfgDFend["Dat_jugabilidad"]      = "0";
+			cfgDFend["Dat_original"]         = "false";
+			cfgDFend["Dat_estado"]           = "";
+			cfgDFend["Dat_thumbs"]           = "";
+			cfgDFend["Dat_cover_front"]      = "";
+			cfgDFend["Dat_cover_back"]       = "";
+			cfgDFend["Dat_fecha"]            = "";
+			cfgDFend["Dat_tipo_emu"]         = "dosbox";
+			cfgDFend["Dat_comentario"]       = settings.value("Notes", "").toString().replace("--", ";").replace("[13][10]", "<br/>\n").replace("[13]", "\n");
+			cfgDFend["Dat_favorito"]         = boolToStr(settings.value("Favorite", "false").toBool());
+			cfgDFend["Dat_rating"]           = "0";
+			cfgDFend["Dat_edad_recomendada"] = "";
+			cfgDFend["Dat_usuario"]          = "";
+			cfgDFend["Dat_path_exe"]         = "";
+			cfgDFend["Dat_parametros_exe"]   = "";
+			cfgDFend["Dat_path_capturas"]    = "";
+			cfgDFend["Dat_path_setup"]       = "";
+			cfgDFend["Dat_parametros_setup"] = "";
+		//--
+			cfgDFend["Dat_www_1_name"] = settings.value("WWWName", "").toString().replace("--", ";");
+			cfgDFend["Dat_www_1"]      = settings.value("WWW", "").toString().replace("--", ";");
+			for (int i = 2; i < 10; ++i)
+			{
+				cfgDFend.insert("Dat_www_"+ intToStr(i) +"_name", settings.value("WWW"+ intToStr(i) +"Name", "").toString().replace("--", ";"));
+				cfgDFend.insert("Dat_www_"+ intToStr(i), settings.value("WWW"+ intToStr(i), "").toString().replace("--", ";"));
+			}
+			cfgDFend["UserInfo"]= settings.value("UserInfo", "").toString().replace("--", ",");
+		settings.endGroup();
 
-// Datos del emulador DOSBox ---
-	QString file_name_conf = eliminar_caracteres( cfgDFend["Dat_titulo"] );
-	stFileInfo f_info = getInfoFile(dir_app +"confdbx/"+ tabla +"/"+ file_name_conf +".conf");
+	// Datos del emulador DOSBox ---
+		cfgDFend["Dbx_path_sonido"] = "";
 
-	if( f_info.Exists )
-		cfgDFend["Dbx_path_conf"] = f_info.Name +"_"+ HoraFechaActual(getTime(), "ddMMyyyy_HHmmss") +".conf";
-	else
-		cfgDFend["Dbx_path_conf"] = f_info.Name +".conf";
+		settings.beginGroup("Extra");
+		// Path
+			cfgDFend["Dbx_path_exe"]         = settings.value("Exe"            , "").toString().replace("--", ",");
+			cfgDFend["Dbx_path_setup"]       = settings.value("Setup"          , "").toString().replace("--", ",");
+			cfgDFend["Dbx_parametros_exe"]   = settings.value("GameParameters" , "").toString().replace("--", ",");
+			cfgDFend["Dbx_parametros_setup"] = settings.value("SetupParameters", "").toString().replace("--", ",");
+		// [autoexec]
+			cfgDFend["Dbx_autoexec"] = settings.value("autoexec", "").toString().replace("--", ",").replace("[13][10]", "\n");
+		// Opciones
+			cfgDFend["Dbx_opt_autoexec"]     = cfgDFend["Dbx_autoexec"].isEmpty() ? "false" : "true";
+			cfgDFend["Dbx_opt_loadfix"]      = boolToStr(settings.value("Loadhigh", false).toBool());
+			cfgDFend["Dbx_opt_loadfix_mem"]  = settings.value("LoadFixVal", "64").toString();
+			cfgDFend["Dbx_opt_consola_dbox"] = boolToStr(settings.value("ConsoleWindow", false).toBool());
+			cfgDFend["Dbx_opt_cerrar_dbox"]  = boolToStr(settings.value("CloseOnExit", true).toBool());
+			cfgDFend["Dbx_opt_cycle_sincronizar"] = "false";
+			cfgDFend["Dbx_ExtraFiles"]       = settings.value("ExtraFiles", "").toString();
+			cfgDFend["Dbx_NrOfMounts"]       = settings.value("NrOfMounts", "0").toString();
 
-	cfgDFend["Dbx_path_sonido"] = "";
+			int num_mounts = cfgDFend["Dbx_NrOfMounts"].toInt();
+			if (num_mounts > -1)
+			{
+				for (int n = 0; n < num_mounts; n++)
+					cfgDFend.insert(intToStr(n), settings.value(intToStr(n), "").toString());
+			}
 
-	settings.beginGroup("Extra");
-	// Path
-		cfgDFend["Dbx_path_exe"]         = settings.value("Exe"            , "").toString().replace("--", ",");
-		cfgDFend["Dbx_path_setup"]       = settings.value("Setup"          , "").toString().replace("--", ",");
-		cfgDFend["Dbx_parametros_exe"]   = settings.value("GameParameters" , "").toString().replace("--", ",");
-		cfgDFend["Dbx_parametros_setup"] = settings.value("SetupParameters", "").toString().replace("--", ",");
-	// [autoexec]
-		cfgDFend["Dbx_autoexec"] = settings.value("autoexec", "").toString().replace("--", ",").replace("[13][10]", "\n");
+	//		cfgDFend["ExeMD5"]            = settings.value("ExeMD5"           ,"").toString();
+	//		cfgDFend["LastModification"]  = settings.value("LastModification" ,"").toString();
+	//		cfgDFend["Environment"]       = settings.value("Environment"      ,"").toString();
+	//		cfgDFend["SetupMD5"]          = settings.value("SetupMD5"         ,"").toString();
+	//		cfgDFend["DataDir"]           = settings.value("DataDir"          ,"").toString();
+	//		cfgDFend["Overridegamestart"] = settings.value("Overridegamestart","").toString();
+	//		cfgDFend["OverrideMount"]     = settings.value("OverrideMount"    ,"").toString();
+	//		cfgDFend["AutoMountCDs"]      = settings.value("AutoMountCDs"     ,"").toString();
+	//		cfgDFend["ExtraDirs"]         = settings.value("ExtraDirs"        ,"").toString();
+	//		cfgDFend["ExtraExe0"]         = settings.value("ExtraExe0"        ,"").toString();
+	//		cfgDFend["BootImage"]         = settings.value("BootImage"        ,"").toString();
+	//		cfgDFend["Finalization"]      = settings.value("Finalization"     ,"").toString();
+	//		cfgDFend["CustomSettings"]    = settings.value("CustomSettings"   ,"").toString();
+	//		cfgDFend["ScreenshotListScreenshot"] = settings.value("ScreenshotListScreenshot","").toString();
+
+			if (settings.value("ProfileMode").toString().toLower() == "dosbox")
+				cfgDFend["Dat_tipo_emu"] = "dosbox";
+			else if (settings.value("ProfileMode").toString().toLower() == "scummvm")
+				cfgDFend["Dat_tipo_emu"] = "scummvm";
+			else
+				cfgDFend["Dat_tipo_emu"] = "datos";
+		settings.endGroup();
+	} else {
 	// Opciones
-		cfgDFend["Dbx_opt_autoexec"]     = cfgDFend["Dbx_autoexec"].isEmpty() ? "false" : "true";
-		cfgDFend["Dbx_opt_loadfix"]      = BoolToStr( settings.value("Loadhigh", false).toBool() );
-		cfgDFend["Dbx_opt_loadfix_mem"]  = settings.value("LoadFixVal", "64").toString();
-		cfgDFend["Dbx_opt_consola_dbox"] = BoolToStr( settings.value("ConsoleWindow", false).toBool() );
-		cfgDFend["Dbx_opt_cerrar_dbox"]  = BoolToStr( settings.value("CloseOnExit", true).toBool() );
+		cfgDFend["Dbx_opt_autoexec"]          = "false";
+		cfgDFend["Dbx_opt_loadfix"]           = "false";
+		cfgDFend["Dbx_opt_loadfix_mem"]       = "64";
+		cfgDFend["Dbx_opt_consola_dbox"]      = "false";
+		cfgDFend["Dbx_opt_cerrar_dbox"]       = "true";
 		cfgDFend["Dbx_opt_cycle_sincronizar"] = "false";
-		cfgDFend["Dbx_ExtraFiles"]       = settings.value("ExtraFiles", "").toString();
-		cfgDFend["Dbx_NrOfMounts"]       = settings.value("NrOfMounts", "0").toString();
-
-		int num_mounts = cfgDFend["Dbx_NrOfMounts"].toInt();
-		if( num_mounts > -1 )
-		{
-			for(int n = 0; n < num_mounts; n++)
-				cfgDFend.insert(IntToStr(n), settings.value(IntToStr(n), "").toString() );
-		}
-
-//		cfgDFend["ExeMD5"]            = settings.value("ExeMD5"           ,"").toString();
-//		cfgDFend["LastModification"]  = settings.value("LastModification" ,"").toString();
-//		cfgDFend["Environment"]       = settings.value("Environment"      ,"").toString();
-//		cfgDFend["SetupMD5"]          = settings.value("SetupMD5"         ,"").toString();
-//		cfgDFend["DataDir"]           = settings.value("DataDir"          ,"").toString();
-//		cfgDFend["Overridegamestart"] = settings.value("Overridegamestart","").toString();
-//		cfgDFend["OverrideMount"]     = settings.value("OverrideMount"    ,"").toString();
-//		cfgDFend["AutoMountCDs"]      = settings.value("AutoMountCDs"     ,"").toString();
-//		cfgDFend["ExtraDirs"]         = settings.value("ExtraDirs"        ,"").toString();
-//		cfgDFend["ExtraExe0"]         = settings.value("ExtraExe0"        ,"").toString();
-//		cfgDFend["BootImage"]         = settings.value("BootImage"        ,"").toString();
-//		cfgDFend["Finalization"]      = settings.value("Finalization"     ,"").toString();
-//		cfgDFend["CustomSettings"]    = settings.value("CustomSettings"   ,"").toString();
-//		cfgDFend["ScreenshotListScreenshot"] = settings.value("ScreenshotListScreenshot","").toString();
-
-		if( settings.value("ProfileMode").toString().toLower() == "dosbox" )
-			cfgDFend["Dat_tipo_emu"] = "dosbox";
-		else if( settings.value("ProfileMode").toString().toLower() == "scummvm" )
-			cfgDFend["Dat_tipo_emu"] = "scummvm";
-		else
-			cfgDFend["Dat_tipo_emu"] = "datos";
-	settings.endGroup();
+	// Path
+		cfgDFend["Dbx_path_exe"]         = "";
+		cfgDFend["Dbx_path_setup"]       = "";
+		cfgDFend["Dbx_parametros_exe"]   = "";
+		cfgDFend["Dbx_parametros_setup"] = "";
+	}
 
 // [sdl]
 	settings.beginGroup("sdl");
-		cfgDFend["Dbx_sdl_fullscreen"]       = BoolToStr( settings.value("fullscreen", false).toBool() );
-		cfgDFend["Dbx_sdl_fulldouble"]       = BoolToStr( settings.value("fulldouble", false).toBool() );
-		cfgDFend["Dbx_sdl_fullfixed"]        = BoolToStr( settings.value("fullfixed" , false).toBool() ); // en desuso
-		cfgDFend["Dbx_sdl_fullresolution"]   = settings.value("fullresolution"  , "original").toString();
+		cfgDFend["Dbx_sdl_fullscreen"]       = boolToStr(settings.value("fullscreen", false).toBool());
+		cfgDFend["Dbx_sdl_fulldouble"]       = boolToStr(settings.value("fulldouble", false).toBool());
+		cfgDFend["Dbx_sdl_fullfixed"]        = boolToStr(settings.value("fullfixed" , false).toBool()); // en desuso
+		cfgDFend["Dbx_sdl_fullresolution"]   = settings.value("fullresolution", "original").toString();
 		cfgDFend["Dbx_sdl_windowresolution"] = settings.value("windowresolution", "original").toString();
-		cfgDFend["Dbx_sdl_output"]           = settings.value("output"          , "surface" ).toString();
-		cfgDFend["Dbx_sdl_hwscale"]          = settings.value("hwscale"         , "1.00"    ).toString();
-		cfgDFend["Dbx_sdl_autolock"]         = BoolToStr( settings.value("autolock", true).toBool() );
+		cfgDFend["Dbx_sdl_output"]           = settings.value("output", "surface").toString();
+		cfgDFend["Dbx_sdl_hwscale"]          = settings.value("hwscale", "1.00").toString();
+		cfgDFend["Dbx_sdl_autolock"]         = boolToStr(settings.value("autolock", true).toBool());
 		cfgDFend["Dbx_sdl_sensitivity"]      = settings.value("sensitivity", "100").toString();
-		cfgDFend["Dbx_sdl_waitonerror"]      = BoolToStr( settings.value("waitonerror", true).toBool() );
-		cfgDFend["Dbx_sdl_priority"]         = settings.value("priority"  , "higher,normal").toString().replace("--", ",");
-		cfgDFend["Dbx_sdl_mapperfile"]       = settings.value("mapperfile", "mapper.txt"   ).toString().replace("--", ",");
-		cfgDFend["Dbx_sdl_usescancodes"]     = BoolToStr( settings.value("usescancodes", true).toBool() );
+		cfgDFend["Dbx_sdl_waitonerror"]      = boolToStr(settings.value("waitonerror", true).toBool());
+
+		if (!isDbx)
+			cfgDFend["Dbx_sdl_priority"] = settings.value("priority", "higher,normal").toString().replace("--", ",");
+		else {
+			QStringList list_priority  = settings.value("priority", QStringList() << "higher" << "normal").toStringList();
+			cfgDFend["Dbx_sdl_priority"] = list_priority.join(",");
+		}
+
+		cfgDFend["Dbx_sdl_mapperfile"] = settings.value("mapperfile", "mapper.txt").toString().replace("--", ",");
+		cfgDFend["Dbx_sdl_usescancodes"]     = boolToStr(settings.value("usescancodes", true).toBool());
 //		cfgDFend["Dbx_sdl_dosboxlanguage"]   = settings.value("DOSBoxlanguage", "default").toString();
 	settings.endGroup();
 // [dosbox]
@@ -3399,10 +3667,10 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 	settings.endGroup();
 // [render]
 	settings.beginGroup("render");
-		cfgDFend["Dbx_render_frameskip"] = settings.value("frameskip", "0").toString();
-		cfgDFend["Dbx_render_aspect"]    = BoolToStr( settings.value("aspect", false).toBool() );
-		cfgDFend["Dbx_render_scaler"]    = settings.value("scaler", "normal2x").toString();
-//		cfgDFend["Dbx_render_textmodelines = settings.value("TextModeLines", "25").toString();
+		cfgDFend["Dbx_render_frameskip"]   = settings.value("frameskip", "0").toString();
+		cfgDFend["Dbx_render_aspect"]      = boolToStr(settings.value("aspect", false).toBool());
+		cfgDFend["Dbx_render_scaler"]      = settings.value("scaler", "normal2x").toString();
+//		cfgDFend["Dbx_render_textmodelines"] = settings.value("TextModeLines", "25").toString();
 	settings.endGroup();
 // [cpu]
 	settings.beginGroup("cpu");
@@ -3417,7 +3685,7 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 	settings.endGroup();
 // [mixer]
 	settings.beginGroup("mixer");
-		cfgDFend["Dbx_mixer_nosound"]   = BoolToStr( settings.value("nosound", false).toBool() );
+		cfgDFend["Dbx_mixer_nosound"]   = boolToStr(settings.value("nosound", false).toBool());
 		cfgDFend["Dbx_mixer_rate"]      = settings.value("rate"     , "44100").toString();
 		cfgDFend["Dbx_mixer_blocksize"] = settings.value("blocksize", "1024").toString();
 		cfgDFend["Dbx_mixer_prebuffer"] = settings.value("prebuffer", "20").toString();
@@ -3425,7 +3693,7 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 // [midi]
 	settings.beginGroup("midi");
 		cfgDFend["Dbx_midi_mpu401"]      = settings.value("mpu401", "intelligent").toString();
-		cfgDFend["Dbx_midi_intelligent"] = BoolToStr( settings.value("midi_intelligent", true).toBool() );
+		cfgDFend["Dbx_midi_intelligent"] = boolToStr(settings.value("midi_intelligent", true).toBool());
 		cfgDFend["Dbx_midi_device"]      = settings.value("device"  , "default").toString();
 		cfgDFend["Dbx_midi_config"]      = settings.value("config"  , "").toString();
 		cfgDFend["Dbx_midi_mt32rate"]    = settings.value("mt32rate", "44100").toString();
@@ -3437,14 +3705,14 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 		cfgDFend["Dbx_sblaster_irq"]     = settings.value("irq"   , "7").toString();
 		cfgDFend["Dbx_sblaster_dma"]     = settings.value("dma"   , "1").toString();
 		cfgDFend["Dbx_sblaster_hdma"]    = settings.value("hdma"  , "5").toString();
-		cfgDFend["Dbx_sblaster_mixer"]   = BoolToStr( settings.value("mixer", true).toBool() );
+		cfgDFend["Dbx_sblaster_mixer"]   = boolToStr(settings.value("mixer", true).toBool());
 		cfgDFend["Dbx_sblaster_oplmode"] = settings.value("oplmode", "auto").toString();
 		cfgDFend["Dbx_sblaster_oplemu"]  = settings.value("oplemu" , "default").toString();
 		cfgDFend["Dbx_sblaster_oplrate"] = settings.value("oplrate", "44100").toString();
 	settings.endGroup();
 // [gus]
 	settings.beginGroup("gus");
-		cfgDFend["Dbx_gus_gus"]      = BoolToStr( settings.value("gus", false).toBool() );
+		cfgDFend["Dbx_gus_gus"]      = boolToStr(settings.value("gus", false).toBool());
 		cfgDFend["Dbx_gus_gusrate"]  = settings.value("gusrate" , "44100").toString();
 		cfgDFend["Dbx_gus_gusbase"]  = settings.value("gusbase" , "240").toString();
 		cfgDFend["Dbx_gus_irq1"]     = settings.value("irq1"    , "5").toString();
@@ -3455,19 +3723,19 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 	settings.endGroup();
 // [speaker]
 	settings.beginGroup("speaker");
-		cfgDFend["Dbx_speaker_pcspeaker"] = BoolToStr( settings.value("pcspeaker", true).toBool() );
+		cfgDFend["Dbx_speaker_pcspeaker"] = boolToStr(settings.value("pcspeaker", true).toBool());
 		cfgDFend["Dbx_speaker_pcrate"]    = settings.value("pcrate"   , "44100").toString();
 		cfgDFend["Dbx_speaker_tandy"]     = settings.value("tandy"    , "auto").toString();
 		cfgDFend["Dbx_speaker_tandyrate"] = settings.value("tandyrate", "44100").toString();
-		cfgDFend["Dbx_speaker_disney"]    = BoolToStr( settings.value("disney", true).toBool() );
+		cfgDFend["Dbx_speaker_disney"]    = boolToStr(settings.value("disney", true).toBool());
 	settings.endGroup();
 // [joystick]
 	settings.beginGroup("joystick");
 		cfgDFend["Dbx_joystick_type"]       = settings.value("joysticktype", "auto").toString();
-		cfgDFend["Dbx_joystick_timed"]      = BoolToStr( settings.value("timed"     , true ).toBool() );
-		cfgDFend["Dbx_joystick_autofire"]   = BoolToStr( settings.value("autofire"  , false).toBool() );
-		cfgDFend["Dbx_joystick_swap34"]     = BoolToStr( settings.value("swap34"    , false).toBool() );
-		cfgDFend["Dbx_joystick_buttonwrap"] = BoolToStr( settings.value("buttonwrap", false).toBool() );
+		cfgDFend["Dbx_joystick_timed"]      = boolToStr(settings.value("timed"     , true).toBool());
+		cfgDFend["Dbx_joystick_autofire"]   = boolToStr(settings.value("autofire"  , false).toBool());
+		cfgDFend["Dbx_joystick_swap34"]     = boolToStr(settings.value("swap34"    , false).toBool());
+		cfgDFend["Dbx_joystick_buttonwrap"] = boolToStr(settings.value("buttonwrap", false).toBool());
 	settings.endGroup();
 // [modem]
 	cfgDFend["Dbx_modem_modem"]          = "false";
@@ -3483,18 +3751,18 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 	cfgDFend["Dbx_dserial_stopbit"]      = "1";
 // [serial]
 	settings.beginGroup("serial");
-		cfgDFend["Dbx_serial_1"] = settings.value("serial1", "dummy"   ).toString().replace("--",",");
-		cfgDFend["Dbx_serial_2"] = settings.value("serial2", "dummy"   ).toString().replace("--",",");
+		cfgDFend["Dbx_serial_1"] = settings.value("serial1", "dummy").toString().replace("--",",");
+		cfgDFend["Dbx_serial_2"] = settings.value("serial2", "dummy").toString().replace("--",",");
 		cfgDFend["Dbx_serial_3"] = settings.value("serial3", "disabled").toString().replace("--",",");
 		cfgDFend["Dbx_serial_4"] = settings.value("serial4", "disabled").toString().replace("--",",");
 	settings.endGroup();
 // [dos]
 	settings.beginGroup("dos");
-		cfgDFend["Dbx_dos_xms"] = BoolToStr( settings.value("xms", true).toBool() );
-		cfgDFend["Dbx_dos_ems"] = BoolToStr( settings.value("ems", true).toBool() );
+		cfgDFend["Dbx_dos_xms"] = boolToStr(settings.value("xms", true).toBool());
+		cfgDFend["Dbx_dos_ems"] = boolToStr(settings.value("ems", true).toBool());
 		cfgDFend["Dbx_dos_umb"] = settings.value("umb", "true").toString();
 
-		if( settings.value("keyboardlayout", "auto").toString().toLower() == "default" )
+		if (settings.value("keyboardlayout", "auto").toString().toLower() == "default")
 			cfgDFend["Dbx_dos_keyboardlayout"] = "auto";
 		else
 			cfgDFend["Dbx_dos_keyboardlayout"] = settings.value("keyboardlayout", "auto").toString();
@@ -3504,7 +3772,7 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 	settings.endGroup();
 // [ipx]
 	settings.beginGroup("ipx");
-		cfgDFend["Dbx_ipx_ipx"]  = BoolToStr( settings.value("ipx", false).toBool() );
+		cfgDFend["Dbx_ipx_ipx"]  = boolToStr(settings.value("ipx", false).toBool());
 		cfgDFend["Dbx_ipx_type"] = settings.value("type"   , "none").toString();
 		cfgDFend["Dbx_ipx_port"] = settings.value("port"   , "213").toString();
 		cfgDFend["Dbx_ipx_ip"]   = settings.value("address", "").toString();
@@ -3516,21 +3784,21 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 		cfgDFend["Svm_game"]              = settings.value("GameName", "").toString();
 		cfgDFend["Svm_game_label"]        = settings.value("GameName", "").toString();
 		cfgDFend["Svm_language"]          = settings.value("Language", "es").toString();
-		cfgDFend["Svm_subtitles"]         = BoolToStr( settings.value("Subtitles", true).toBool() );
+		cfgDFend["Svm_subtitles"]         = boolToStr(settings.value("Subtitles", true).toBool());
 		cfgDFend["Svm_platform"]          = settings.value("platform", "pc").toString();
 		cfgDFend["Svm_gfx_mode"]          = settings.value("Filter", "2x").toString();
 		cfgDFend["Svm_render_mode"]       = settings.value("render_mode", "").toString();
-		cfgDFend["Svm_fullscreen"]        = BoolToStr( settings.value("fullscreen", false).toBool() );
-		cfgDFend["Svm_aspect_ratio"]      = BoolToStr( settings.value("aspect_ratio", true).toBool() );
+		cfgDFend["Svm_fullscreen"]        = boolToStr(settings.value("fullscreen", false).toBool());
+		cfgDFend["Svm_aspect_ratio"]      = boolToStr(settings.value("aspect_ratio", true).toBool());
 		cfgDFend["Svm_path_game"]         = settings.value("GamePath", "").toString();
 		cfgDFend["Svm_path_extra"]        = settings.value("path_extra", "").toString();
 		cfgDFend["Svm_path_save"]         = settings.value("Savepath", "").toString();
 		cfgDFend["Svm_path_capturas"]     = settings.value("path_capturas", "").toString();
 		cfgDFend["Svm_path_sonido"]       = settings.value("path_sonido", "").toString();
 		cfgDFend["Svm_music_driver"]      = settings.value("MusicDriver", "adlib").toString();
-		cfgDFend["Svm_enable_gs"]         = BoolToStr( settings.value("EnableGS", true).toBool() );
-		cfgDFend["Svm_multi_midi"]        = BoolToStr( settings.value("MultiMIDI", true).toBool() );
-		cfgDFend["Svm_native_mt32"]       = BoolToStr( settings.value("NativeMT32", true).toBool() );
+		cfgDFend["Svm_enable_gs"]         = boolToStr(settings.value("EnableGS", true).toBool());
+		cfgDFend["Svm_multi_midi"]        = boolToStr(settings.value("MultiMIDI", true).toBool());
+		cfgDFend["Svm_native_mt32"]       = boolToStr(settings.value("NativeMT32", true).toBool());
 		cfgDFend["Svm_mute"]              = "false";
 		cfgDFend["Svm_master_volume"]     = settings.value("MusicVolume", "192").toString();
 		cfgDFend["Svm_music_volume"]      = settings.value("MusicVolume", "192").toString();
@@ -3544,7 +3812,7 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 		cfgDFend["Svm_joystick_num"]      = settings.value("JoystickNum", "0").toString();
 		cfgDFend["Svm_output_rate"]       = settings.value("SampleRate", "").toString();
 		cfgDFend["Svm_midi_gain"]         = settings.value("MIDIGain", "100").toString();
-		cfgDFend["Svm_copy_protection"]   = BoolToStr( settings.value("copy_protection", false).toBool() );
+		cfgDFend["Svm_copy_protection"]   = boolToStr(settings.value("copy_protection", false).toBool());
 		cfgDFend["Svm_sound_font"]        = settings.value("sound_font", "").toString();
 		cfgDFend["Svm_walkspeed"]         = settings.value("Walkspeed", "0").toString();
 		cfgDFend["Svm_opl_driver"]        = "";
@@ -3553,8 +3821,64 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 		cfgDFend["Svm_boot_param"]        = "";
 	settings.endGroup();
 
-	if( file_out.exists() )
-		file_out.remove();
+//	eliminarArchivo(dir_app +"temp/temp_config.prof");
 
 	return cfgDFend;
+}
+
+// Importar la configuración del ScummVM
+QHash<QString, QString> Funciones::importarIniScummVM(QString filename)
+{
+	QHash<QString, QString> cfgSvm;
+
+	QSettings settings(filename, QSettings::IniFormat);
+	settings.beginGroup("ExtraInfo");
+		cfgSvm["Svm_game_label"]        = settings.value("game_label"       , "").toString();
+		cfgSvm["Svm_path_game"]         = settings.value("path_game"        , "").toString();
+		cfgSvm["Svm_path_extra"]        = settings.value("path_extra"       , "").toString();
+		cfgSvm["Svm_path_save"]         = settings.value("path_save"        , "").toString();
+		cfgSvm["Svm_mute"]              = settings.value("mute"             , "false").toString();
+		cfgSvm["Svm_speech_mute"]       = settings.value("speech_mute"      , "false").toString();
+		cfgSvm["Svm_debuglevel"]        = settings.value("debuglevel"       , "0").toString();
+		cfgSvm["Svm_opl_driver"]        = settings.value("opl_driver"       , "auto").toString();
+		cfgSvm["Svm_disable_dithering"] = settings.value("disable_dithering", "false").toString();
+		cfgSvm["Svm_alt_intro"]         = settings.value("alt_intro"        , "false").toString();
+		cfgSvm["Svm_boot_param"]        = settings.value("boot_param"       , "").toString();
+		cfgSvm["Svm_emu_svmpath"]       = settings.value("emu_svmpath"      , "").toString();
+	settings.endGroup();
+
+	settings.beginGroup(cfgSvm["Svm_game_label"]);
+		cfgSvm["Svm_description"]     = settings.value("description"    , "").toString();
+		cfgSvm["Svm_game"]            = settings.value("gameid"         , "").toString();
+		cfgSvm["Svm_language"]        = settings.value("language"       , "es").toString();
+		cfgSvm["Svm_subtitles"]       = settings.value("subtitles"      , "true").toString();
+		cfgSvm["Svm_platform"]        = settings.value("platform"       , "pc").toString();
+		cfgSvm["Svm_gfx_mode"]        = settings.value("gfx_mode"       , "2x").toString();
+		cfgSvm["Svm_render_mode"]     = settings.value("render_mode"    , "").toString();
+		cfgSvm["Svm_fullscreen"]      = settings.value("fullscreen"     , "false").toString();
+		cfgSvm["Svm_aspect_ratio"]    = settings.value("aspect_ratio"   , "false").toString();
+		cfgSvm["Svm_music_driver"]    = settings.value("music_driver"   , "adlib").toString();
+		cfgSvm["Svm_enable_gs"]       = settings.value("enable_gs"      , "false").toString();
+		cfgSvm["Svm_multi_midi"]      = settings.value("multi_midi"     , "true").toString();
+		cfgSvm["Svm_native_mt32"]     = settings.value("native_mt32"    , "false").toString();
+		cfgSvm["Svm_master_volume"]   = settings.value("master_volume"  , "192").toString();
+		cfgSvm["Svm_music_volume"]    = settings.value("music_volume"   , "192").toString();
+		cfgSvm["Svm_sfx_volume"]      = settings.value("sfx_volume"     , "192").toString();
+		cfgSvm["Svm_speech_volume"]   = settings.value("speech_volume"  , "192").toString();
+		cfgSvm["Svm_tempo"]           = settings.value("tempo"          , "100").toString();
+		cfgSvm["Svm_talkspeed"]       = settings.value("talkspeed"      , "60").toString();
+		cfgSvm["Svm_cdrom"]           = settings.value("cdrom"          , "0").toString();
+		cfgSvm["Svm_joystick_num"]    = settings.value("joystick_num"   , "0").toString();
+		cfgSvm["Svm_output_rate"]     = settings.value("output_rate"    , "").toString();
+		cfgSvm["Svm_midi_gain"]       = settings.value("midi_gain"      , "100").toString();
+		cfgSvm["Svm_copy_protection"] = settings.value("copy_protection", "false").toString();
+		cfgSvm["Svm_sound_font"]      = settings.value("soundfont"      , "").toString();
+		cfgSvm["Svm_walkspeed"]       = settings.value("walkspeed"      , "0").toString();
+	settings.endGroup();
+
+	settings.beginGroup("scummvm");
+		cfgSvm["Svm_autosave_period"] = settings.value("autosave_period", "300").toString();
+	settings.endGroup();
+
+	return cfgSvm;
 }

@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,12 +38,12 @@ class frmAddEditMontajes : public QDialog
 	Q_OBJECT
 
 public:
-	frmAddEditMontajes(stGrlCfg m_cfg, bool m_editando, QWidget *parent = 0);
+	frmAddEditMontajes(stGrlCfg m_cfg, bool m_editando, QStringList m_list_letter_uses, QWidget *parent = 0);
 	~frmAddEditMontajes();
 
 	stGrlCfg getGrlCfg(){return grlCfg;}
 	void setDatosMontaje(stConfigDOSBoxMount montaje);
-	stConfigDOSBoxMount getDatosMontaje(){ return DatosMontaje;}
+	stConfigDOSBoxMount getDatosMontaje(){return DatosMontaje;}
 
 private:
 	Ui::frmAddEditMontajes *ui;
@@ -55,7 +55,7 @@ private:
 	stConfigDOSBoxMount DatosMontaje;
 
 	bool Editando;
-	QStringList list_letter;
+	QStringList list_letter, list_letter_uses;
 
 	void cargarConfig();
 	void setTheme();
@@ -72,7 +72,6 @@ private slots:
 	void on_lw_MultiIso_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 	void on_chkMontaje_opt_freesize_clicked(bool checked);
 	void on_h_SliderMontaje_freesize_valueChanged(int value);
-
 	void on_btnMontaje_opt_size_mount_clear_clicked();
 
 };

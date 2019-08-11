@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,8 @@ public:
 	explicit frmInstalarJuego(stGrlCfg m_cfg, QWidget *parent = 0);
 	~frmInstalarJuego();
 
+	QList<stConfigDOSBoxMount> getDatosMontajes(){return list_mount;}
+
 private:
 	Ui::frmInstalarJuego *ui;
 
@@ -48,6 +50,9 @@ private:
 
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
+	stConfigDOSBoxMount DatosMontaje;
+	QList<stConfigDOSBoxMount> list_mount;
+	QHash<QString, stGrlDatos> dbx_list;
 
 	void cargarConfig();
 	void setTheme();
@@ -63,6 +68,7 @@ private slots:
 	void on_btnDestino_clicked();
 	void on_btnDestinoClear_clicked();
 	void on_btnCancel_clicked();
+	void on_btnEjecutar_clicked();
 	void on_btnOk_clicked();
 	void on_lw_MultiIso_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 

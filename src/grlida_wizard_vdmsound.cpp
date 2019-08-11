@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@
 #include <QMessageBox>
 
 #include "grlida_wizard_vdmsound.h"
-#include "grlida_importar_juego.h"
 #include "ui_wizard_vdmsound.h"
 
 frmWizardVdmSound::frmWizardVdmSound(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QWidget *parent) :
@@ -40,13 +39,14 @@ frmWizardVdmSound::frmWizardVdmSound(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_c
 	grlCfg    = m_cfg;
 	categoria = m_categoria;
 
-	grlDir.Home     = fGrl->GRlidaHomePath();
-	grlDir.Confvdms = grlDir.Home +"confvdms/"+ categoria.tabla +"/";
+	grlDir.Home       = fGrl->homePath();
+	grlDir.DatosDbGrl = grlDir.Home +"datosdb/"+ categoria.tabla +"/";
+	grlDir.Temp       = grlDir.Home +"temp/";
 
 	cargarConfig();
 	setTheme();
 
-// centra la aplicación en el escritorio
+// Centra la aplicación en el escritorio
 	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
@@ -57,43 +57,206 @@ frmWizardVdmSound::~frmWizardVdmSound()
 
 void frmWizardVdmSound::cargarConfig()
 {
-	fGrl->setIdioma(grlCfg.IdiomaSelect);
-
-	DatosJuego    = fGrl->getDefectDatos("vdmsound");
-	DatosVDMSound = fGrl->getDefectVDMSound();
+	DatosJuego    = sql->getDefectDatos("vdmsound");
+	DatosVDMSound = sql->getDefectVDMSound();
 
 	cargarDatosVDMSound(DatosVDMSound);
 }
 
 void frmWizardVdmSound::setTheme()
 {
-	setWindowIcon( QIcon(fGrl->Theme() +"img16/vdmsound.png") );
+	setWindowIcon(QIcon(fGrl->theme() +"img16/cat/vdmsound.png"));
 
-	ui->btnOk->setIcon( QIcon(fGrl->Theme() +"img16/aplicar.png") );
-	ui->btnCancel->setIcon( QIcon(fGrl->Theme() +"img16/cancelar.png") );
+	ui->btnOk->setIcon(QIcon(fGrl->theme() +"img16/aplicar.png"));
+	ui->btnCancel->setIcon(QIcon(fGrl->theme() +"img16/cancelar.png"));
+// General
+	ui->btnVdms_ExeJuego->setIcon(QIcon(fGrl->theme() +"img16/carpeta_1.png"));
+	ui->btnVdms_ExeJuego_clear->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
+	ui->btnVdms_params_clear->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
+	ui->btnVdms_Icono->setIcon(QIcon(fGrl->theme() +"img16/carpeta_1.png"));
+	ui->btnVdms_Icono_clear->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
+	ui->btnDescargarInfo->setIcon(QIcon(fGrl->theme() +"img16/go-down.png"));
+}
 
-	ui->btnVdms_FileConfg->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnVdms_FileConfg_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnVdms_ExeJuego->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnVdms_ExeJuego_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnVdms_params_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnVdms_Icono->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnVdms_Icono_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnDescargarInfo->setIcon( QIcon(fGrl->Theme() +"img16/go-down.png") );
+void frmWizardVdmSound::cargarDatosJuego(stDatosJuego datos)
+{
+	DatosJuego = datos;
+	ui->txtDat_titulo->setText(datos.titulo);
+
+	Thumbs      = datos.thumbs;
+	CoverFront  = datos.cover_front;
+	CoverBack   = datos.cover_back;
+	CoverLeft   = datos.cover_left;
+	CoverRight  = datos.cover_right;
+	CoverTop    = datos.cover_top;
+	CoverBottom = datos.cover_bottom;
+
+// Thumbs
+	file_thumbs = grlDir.Temp +"imagenes/small/"+ Thumbs;
+	if (!QFile::exists(file_thumbs))
+	{
+		Thumbs = "";
+		file_thumbs = "";
+	}
+// CoverFront
+	file_cover_front = grlDir.Temp +"imagenes/"+ CoverFront;
+	if (!QFile::exists(file_cover_front))
+	{
+		CoverFront = "";
+		file_cover_front = "";
+	}
+// CoverBack
+	file_cover_back = grlDir.Temp +"imagenes/"+ CoverBack;
+	if (!QFile::exists(file_cover_back))
+	{
+		CoverBack = "";
+		file_cover_back = "";
+	}
+// CoverLeft
+	file_cover_left = grlDir.Temp +"imagenes/"+ CoverLeft;
+	if (!QFile::exists(file_cover_left))
+	{
+		CoverLeft = "";
+		file_cover_left = "";
+	}
+// CoverRight
+	file_cover_right = grlDir.Temp +"imagenes/"+ CoverRight;
+	if (!QFile::exists(file_cover_right))
+	{
+		CoverRight = "";
+		file_cover_right = "";
+	}
+// CoverTop
+	file_cover_top = grlDir.Temp +"imagenes/"+ CoverTop;
+	if (!QFile::exists(file_cover_top))
+	{
+		CoverTop = "";
+		file_cover_top = "";
+	}
+// CoverBottom
+	file_cover_bottom = grlDir.Temp +"imagenes/"+ CoverBottom;
+	if (!QFile::exists(file_cover_bottom))
+	{
+		CoverBottom = "";
+		file_cover_bottom = "";
+	}
+}
+
+bool frmWizardVdmSound::setDatosJuegos()
+{
+	bool isOk = false;
+
+	DatosJuego.icono          = "cat/vdmsound.png";
+	DatosJuego.titulo         = ui->txtDat_titulo->text();
+	DatosJuego.titulo_guiones = sql->removeAccents(DatosJuego.titulo);
+	DatosJuego.tipo_emu       = "vdmsound";
+	DatosJuego.fecha          = sql->getTime();
+	DatosJuego.idgrl          = sql->insertaDatos(categoria.tabla, DatosJuego);
+	isOk = DatosJuego.idgrl.isEmpty() ? false : true;
+
+	DatosJuego.game_dir = "id-"+ DatosJuego.idgrl +"_"+ DatosJuego.titulo_guiones +"_"+ DatosJuego.tipo_emu;
+	grlDir.DatosGame    = grlDir.DatosDbGrl + DatosJuego.game_dir +"/";
+
+	if (isOk)
+	{
+		DatosJuego.thumbs       = "";
+		DatosJuego.cover_front  = "";
+		DatosJuego.cover_back   = "";
+		DatosJuego.cover_left   = "";
+		DatosJuego.cover_right  = "";
+		DatosJuego.cover_top    = "";
+		DatosJuego.cover_bottom = "";
+
+		fGrl->comprobarDirectorio(grlDir.DatosGame);
+		fGrl->comprobarDirectorio(grlDir.DatosGame +"archivos/");
+		fGrl->comprobarDirectorio(grlDir.DatosGame +"caja/");
+		fGrl->comprobarDirectorio(grlDir.DatosGame +"capturas/");
+		fGrl->comprobarDirectorio(grlDir.DatosGame +"imagenes/");
+		fGrl->comprobarDirectorio(grlDir.DatosGame +"imagenes/small/");
+		fGrl->comprobarDirectorio(grlDir.DatosGame +"sonidos/");
+		fGrl->comprobarDirectorio(grlDir.DatosGame +"videos/");
+
+		if (!Thumbs.isEmpty() && QFile::exists(file_thumbs))
+		{
+			DatosJuego.thumbs = "thumbs."+ grlCfg.thumb_format.toLower();
+			sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "thumbs", DatosJuego.thumbs);
+			fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + DatosJuego.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, true, grlCfg.thumb_format);
+		}
+
+		if (!CoverFront.isEmpty() && QFile::exists(file_cover_front))
+		{
+			DatosJuego.cover_front = "cover_front"+ fGrl->getInfoFile(file_cover_front).Ext;
+			sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "cover_front", DatosJuego.cover_front);
+			fGrl->copiarArchivo(file_cover_front, grlDir.DatosGame +"caja/"+ DatosJuego.cover_front, false, true);
+		}
+
+		if (!CoverBack.isEmpty() && QFile::exists(file_cover_back))
+		{
+			DatosJuego.cover_back = "cover_back"+ fGrl->getInfoFile(file_cover_back).Ext;
+			sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "cover_back", DatosJuego.cover_back);
+			fGrl->copiarArchivo(file_cover_back, grlDir.DatosGame +"caja/"+ DatosJuego.cover_back, false, true);
+		}
+
+		if (!CoverLeft.isEmpty() && QFile::exists(file_cover_left))
+		{
+			DatosJuego.cover_left = "cover_left"+ fGrl->getInfoFile(file_cover_left).Ext;
+			sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "cover_left", DatosJuego.cover_left);
+			fGrl->copiarArchivo(file_cover_left, grlDir.DatosGame +"caja/"+ DatosJuego.cover_left, false, true);
+		}
+
+		if (!CoverRight.isEmpty() && QFile::exists(file_cover_right))
+		{
+			DatosJuego.cover_right = "cover_right"+ fGrl->getInfoFile(file_cover_right).Ext;
+			sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "cover_right", DatosJuego.cover_right);
+			fGrl->copiarArchivo(file_cover_right, grlDir.DatosGame +"caja/"+ DatosJuego.cover_right, false, true);
+		}
+
+		if (!CoverTop.isEmpty() && QFile::exists(file_cover_top))
+		{
+			DatosJuego.cover_top = "cover_top"+ fGrl->getInfoFile(file_cover_top).Ext;
+			sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "cover_top", DatosJuego.cover_top);
+			fGrl->copiarArchivo(file_cover_top, grlDir.DatosGame +"caja/"+ DatosJuego.cover_top, false, true);
+		}
+
+		if (!CoverBottom.isEmpty() && QFile::exists(file_cover_bottom))
+		{
+			DatosJuego.cover_bottom = "cover_bottom"+ fGrl->getInfoFile(file_cover_bottom).Ext;
+			sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "cover_bottom", DatosJuego.cover_bottom);
+			fGrl->copiarArchivo(file_cover_bottom, grlDir.DatosGame +"caja/"+ DatosJuego.cover_bottom, false, true);
+		}
+
+		if (listImagenesImportadas.size() > 0)
+		{
+			stDatosImagenes imagen;
+			QString dir_out = grlDir.DatosGame +"imagenes/";
+			const int numImagenes = listImagenesImportadas.size();
+			for (int i = 0; i < numImagenes; ++i)
+			{
+				imagen = listImagenesImportadas.at(i);
+
+				if (imagen.isImport)
+					fGrl->copiarArchivo(imagen.dir_in +"imagenes/"+ imagen.nombre, dir_out + imagen.nombre, false, true);
+				else
+					fGrl->copiarArchivo(imagen.dir_in + imagen.nombre, dir_out + imagen.nombre, false, true);
+
+				fGrl->crearThumbs(dir_out + imagen.nombre, dir_out +"small/"+ imagen.nombre +".jpg", grlCfg.thumb_img_width, grlCfg.thumb_img_height, grlCfg.thumb_img_quality);
+			}
+		}
+	}
+
+	return isOk;
 }
 
 void frmWizardVdmSound::cargarDatosVDMSound(stConfigVDMSound cfgVdms)
 {
-	ui->txtVdms_path_conf->setText( cfgVdms.path_conf );
-	ui->txtVdms_path_exe->setText( cfgVdms.path_exe );
+	ui->txtVdms_path_exe->setText(cfgVdms.path_exe);
 
-	ui->txtVdms_params->setText( cfgVdms.program_1 );
-	ui->txtVdms_icon->setText( cfgVdms.program_2 );
+	ui->txtVdms_params->setText(cfgVdms.program_1);
+	ui->txtVdms_icon->setText(cfgVdms.program_2);
 }
 
 void frmWizardVdmSound::setDatosVDMSound()
 {
-	DatosVDMSound.path_conf = ui->txtVdms_path_conf->text();
 	DatosVDMSound.path_exe  = ui->txtVdms_path_exe->text();
 	DatosVDMSound.program_1 = ui->txtVdms_params->text();
 	DatosVDMSound.program_2 = ui->txtVdms_icon->text();
@@ -101,32 +264,24 @@ void frmWizardVdmSound::setDatosVDMSound()
 
 void frmWizardVdmSound::on_btnOk_clicked()
 {
-	if( ui->txtDatos_Titulo->text().isEmpty() )
+	if (ui->txtDat_titulo->text().isEmpty())
 		QMessageBox::information(this, titulo_ventana(), tr("Debes poner por lo menos el título."));
 	else {
-		if( ui->txtVdms_path_conf->text().isEmpty() )
-			QMessageBox::information(this, titulo_ventana(), tr("Debes indicar el archivo de configuración para el VDMSound"));
+		if (ui->txtVdms_path_exe->text().isEmpty())
+			QMessageBox::information(this, titulo_ventana(), tr("Debes indicar el ejecutable del juego"));
 		else {
-			QFile appConfg( grlDir.Confvdms + ui->txtVdms_path_conf->text() );
-			if( appConfg.exists() )
-				QMessageBox::information( this, titulo_ventana(), tr("El archivo de configuración para el VDMSound ya esixte"));
-			else {
-				if( ui->txtVdms_path_exe->text().isEmpty() )
-					QMessageBox::information(this, titulo_ventana(), tr("Debes indicar el ejecutable del juego"));
-				else {
-					setDatosVDMSound();
+			if (setDatosJuegos())
+			{
+				setDatosVDMSound();
 
-					DatosJuego.titulo   = ui->txtDatos_Titulo->text();
-					DatosJuego.tipo_emu = "vdmsound";
-					DatosJuego.fecha    = fGrl->getTime();
-					DatosJuego.idgrl    = sql->insertaDatos(categoria.tabla, DatosJuego);
+				DatosVDMSound.idgrl = DatosJuego.idgrl;
+				DatosVDMSound.idcat = categoria.id;
+				DatosVDMSound.id    = sql->insertaVdms(DatosVDMSound);
 
-					DatosVDMSound.idgrl = DatosJuego.idgrl;
-					DatosVDMSound.idcat = categoria.id;
-					DatosVDMSound.id    = sql->insertaVdms(DatosVDMSound);
+			// Guardamos los cambios en la base de datos.
+				sql->comit();
+				QDialog::accept();
 
-					QDialog::accept();
-				}
 			}
 		}
 	}
@@ -137,38 +292,17 @@ void frmWizardVdmSound::on_btnCancel_clicked()
 	QDialog::reject();
 }
 
-void frmWizardVdmSound::on_btnVdms_FileConfg_clicked()
-{
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Guardar archivo como..."), grlDir.Confvdms, "", tr("Configuraciones") +" VDMSound (*.vlp);;"+ tr("Todos los archivo") +" (*)", 0, true);
-
-	if( !archivo.isEmpty() )
-	{
-		stFileInfo f_info = fGrl->getInfoFile( archivo );
-		if( f_info.Exists )
-			ui->txtVdms_path_conf->setText(f_info.Name +"_"+ fGrl->HoraFechaActual(fGrl->getTime(), "ddMMyyyy_HHmmss") +".vlp");
-		else
-			ui->txtVdms_path_conf->setText(f_info.Name +".vlp");
-	}
-}
-
-void frmWizardVdmSound::on_btnVdms_FileConfg_clear_clicked()
-{
-	ui->txtVdms_path_conf->clear();
-}
-
 void frmWizardVdmSound::on_btnVdms_ExeJuego_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Vdms_path_exe, "DosGames", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos(this, tr("Selecciona un archivo"), grlCfg.Vdms_path_exe, "DosGames", tr("Ejecutables") +" (*.exe *.bat *.com);;"+ tr("Todos los archivos") +" (*)");
 
-	if( !archivo.isEmpty() )
+	if (!archivo.isEmpty())
 	{
-		stFileInfo f_info = fGrl->getInfoFile( archivo );
-		if( f_info.Exists )
+		stFileInfo f_info = fGrl->getInfoFile(archivo);
+		if (f_info.Exists)
 		{
-			ui->txtVdms_path_exe->setText( fGrl->setDirRelative(archivo, "DosGames") );
+			ui->txtVdms_path_exe->setText(fGrl->setDirRelative(archivo, "DosGames"));
 			grlCfg.Vdms_path_exe = fGrl->setDirRelative(f_info.Path, "DosGames");
-
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Vdms_path_exe", grlCfg.Vdms_path_exe);
 		}
 	}
 }
@@ -185,17 +319,15 @@ void frmWizardVdmSound::on_btnVdms_params_clear_clicked()
 
 void frmWizardVdmSound::on_btnVdms_Icono_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Vdms_icon, "", tr("Iconos") +" (*.ico);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos(this, tr("Selecciona un archivo"), grlCfg.Vdms_icon, "", tr("Iconos") +" (*.ico);;"+ tr("Todos los archivos") +" (*)");
 
-	if( !archivo.isEmpty() )
+	if (!archivo.isEmpty())
 	{
-		stFileInfo f_info = fGrl->getInfoFile( archivo );
-		if( f_info.Exists )
+		stFileInfo f_info = fGrl->getInfoFile(archivo);
+		if (f_info.Exists)
 		{
-			ui->txtVdms_icon->setText( fGrl->setDirRelative(archivo) );
+			ui->txtVdms_icon->setText(fGrl->setDirRelative(archivo));
 			grlCfg.Vdms_icon = fGrl->setDirRelative(f_info.Path);
-
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Vdms_icon", grlCfg.Vdms_icon);
 		}
 	}
 }
@@ -207,38 +339,35 @@ void frmWizardVdmSound::on_btnVdms_Icono_clear_clicked()
 
 void frmWizardVdmSound::on_btnDescargarInfo_clicked()
 {
-	stConfigDOSBox  DatosDosBox   = fGrl->getDefectDOSBox();
-	stConfigScummVM  DatosScummVM = fGrl->getDefectScummVM();
+	stConfigDOSBox  DatosDosBox   = sql->getDefectDOSBox();
+	stConfigScummVM  DatosScummVM = sql->getDefectScummVM();
 
-	DatosJuego.titulo = ui->txtDatos_Titulo->text();
+	DatosJuego.titulo = ui->txtDat_titulo->text();
 
-	frmImportarJuego *ImportarJuego = new frmImportarJuego(sql, grlCfg, categoria, DatosJuego, DatosDosBox, DatosScummVM, DatosVDMSound, false, this);
-	ImportarJuego->setWindowFlags(Qt::Window);
+	frmImportarJuego *importarJuego = new frmImportarJuego(sql, grlCfg, categoria, DatosJuego, DatosDosBox, DatosScummVM, DatosVDMSound, false, false, this);
+	importarJuego->setWindowFlags(Qt::Window);
 
-	if( ImportarJuego->exec() == QDialog::Accepted )
+	if (importarJuego->exec() == QDialog::Accepted)
 	{
-		DatosJuego = ImportarJuego->getDatosJuegos();
-		ui->txtDatos_Titulo->setText( DatosJuego.titulo );
+		grlCfg = importarJuego->getGrlCfg();
 
-		if( DatosJuego.tipo_emu == "vdmsound" && !ImportarJuego->isSoloDatos )
+		if (importarJuego->getDatosImport().size() > 0)
 		{
-			cargarDatosVDMSound( ImportarJuego->getDatosVDMSound() );
+			stImport import = importarJuego->getDatosImport().at(0);
+
+			DatosJuego = import.datos;
+			listImagenesImportadas = import.imagenes;
+
+			cargarDatosJuego(DatosJuego);
+
+			if (!import.solo_datos && DatosJuego.tipo_emu == "vdmsound")
+			{
+				cargarDatosVDMSound(import.vdmsound);
+			}
 		}
+	} else {
+		grlCfg = importarJuego->getGrlCfg();
 	}
 
-	delete ImportarJuego;
-}
-
-void frmWizardVdmSound::on_txtDatos_Titulo_textEdited(const QString &arg1)
-{
-	if( !arg1.isEmpty() )
-	{
-		QString str = fGrl->eliminar_caracteres( arg1 );
-		bool str_ok = str.endsWith(".vlp");
-		if(str_ok == false)
-			str.append(".vlp");
-
-		ui->txtVdms_path_conf->setText( str );
-	} else
-		ui->txtVdms_path_conf->setText("");
+	delete importarJuego;
 }

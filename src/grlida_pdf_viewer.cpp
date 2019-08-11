@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ frmPdfViewer::frmPdfViewer(QWidget *parent) :
 	ui->setupUi(this);
 	fGrl = new Funciones;
 
-	grlDir.Home = fGrl->GRlidaHomePath();
+	grlDir.Home = fGrl->dirApp();
 
 	cargarConfig();
 	setTheme();
@@ -54,8 +54,8 @@ void frmPdfViewer::closeEvent(QCloseEvent *event)
 {
 	QSettings settings(grlDir.Home +"GR-lida.conf", QSettings::IniFormat);
 	settings.beginGroup("PdfViewerState");
-		settings.setValue("maximized"  , isMaximized() );
-		settings.setValue("showTextSelect", ui->btn_TextSelect->isChecked() );
+		settings.setValue("maximized", isMaximized());
+		settings.setValue("showTextSelect", ui->btn_TextSelect->isChecked());
 	settings.endGroup();
 
 	event->accept();
@@ -64,13 +64,13 @@ void frmPdfViewer::closeEvent(QCloseEvent *event)
 void frmPdfViewer::cargarConfig()
 {
 	ui->cbxOrden->addItem(tr("Hacia adelante"), "adelante");
-	ui->cbxOrden->addItem(tr("Hacia atras")   , "atras"   );
+	ui->cbxOrden->addItem(tr("Hacia atras")   , "atras");
 	ui->cbxOrden->setCurrentIndex(0);
 
 	scaleFactors << 0.25 << 0.5 << 0.75 << 1. << 1.25 << 1.5 << 1.75 << 2. << 2.5 << 3. << 3.5 << 4.;
-	ui->cbxZoom->addItem( "25%");
-	ui->cbxZoom->addItem( "50%");
-	ui->cbxZoom->addItem( "75%");
+	ui->cbxZoom->addItem("25%");
+	ui->cbxZoom->addItem("50%");
+	ui->cbxZoom->addItem("75%");
 	ui->cbxZoom->addItem("100%");
 	ui->cbxZoom->addItem("125%");
 	ui->cbxZoom->addItem("150%");
@@ -94,33 +94,33 @@ void frmPdfViewer::cargarConfig()
 
 void frmPdfViewer::setTheme()
 {
-	setWindowIcon( QIcon(fGrl->Theme() +"img16/pdf.png") );
+	setWindowIcon(QIcon(fGrl->theme() +"img16/pdf.png"));
 
-	ui->btn_Salir->setIcon( QIcon(fGrl->Theme() +"img16/cerrar.png") );
-	ui->btn_Abrir->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btn_TextSelect->setIcon( QIcon(fGrl->Theme() +"img16/edit_select_all.png") );
-	ui->btn_PaginaBack->setIcon( QIcon(fGrl->Theme() +"img16/go-up.png") );
-	ui->btn_PaginaNext->setIcon( QIcon(fGrl->Theme() +"img16/go-down.png") );
-	ui->btn_Buscar->setIcon( QIcon(fGrl->Theme() +"img16/edit_buscar.png") );
-	ui->btn_Limpiar->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btn_ZoomIn->setIcon( QIcon(fGrl->Theme() +"img16/zoom_in.png") );
-	ui->btn_ZoomOut->setIcon( QIcon(fGrl->Theme() +"img16/zoom_out.png") );
-	ui->btn_ZoomNormal->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
+	ui->btn_Salir->setIcon(QIcon(fGrl->theme() +"img16/cerrar.png"));
+	ui->btn_Abrir->setIcon(QIcon(fGrl->theme() +"img16/carpeta_1.png"));
+	ui->btn_TextSelect->setIcon(QIcon(fGrl->theme() +"img16/edit_select_all.png"));
+	ui->btn_PaginaBack->setIcon(QIcon(fGrl->theme() +"img16/go-up.png"));
+	ui->btn_PaginaNext->setIcon(QIcon(fGrl->theme() +"img16/go-down.png"));
+	ui->btn_Buscar->setIcon(QIcon(fGrl->theme() +"img16/edit_buscar.png"));
+	ui->btn_Limpiar->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
+	ui->btn_ZoomIn->setIcon(QIcon(fGrl->theme() +"img16/zoom_in.png"));
+	ui->btn_ZoomOut->setIcon(QIcon(fGrl->theme() +"img16/zoom_out.png"));
+	ui->btn_ZoomNormal->setIcon(QIcon(fGrl->theme() +"img16/zoom.png"));
 
 	QSettings settings(grlDir.Home +"GR-lida.conf", QSettings::IniFormat);
 	settings.beginGroup("PdfViewerState");
-		if( settings.value("maximized", isMaximized() ).toBool() ) // maximizado.
-			setWindowState( windowState() | Qt::WindowMaximized );
-		ui->btn_TextSelect->setChecked( settings.value("showTextSelect", false).toBool() );
+		if (settings.value("maximized", isMaximized()).toBool()) // maximizado.
+			setWindowState(windowState() | Qt::WindowMaximized);
+		ui->btn_TextSelect->setChecked(settings.value("showTextSelect", false).toBool());
 	settings.endGroup();
 }
 
 void frmPdfViewer::openPdf(QString fileName)
 {
-	if( fileName.isEmpty() )
+	if (fileName.isEmpty())
 		return;
 
-	if( doc_pdf_widget->setDocument(fileName) )
+	if (doc_pdf_widget->setDocument(fileName))
 	{
 		lastPath = fGrl->getInfoFile(fileName).Path;
 		ui->btn_PaginaBack->setEnabled(false);
@@ -137,6 +137,8 @@ void frmPdfViewer::openPdf(QString fileName)
 		ui->txtBuscar->setEnabled(true);
 		ui->cbxOrden->setEnabled(true);
 		ui->cbxZoom->setEnabled(true);
+
+		emit on_spinPagina_valueChanged(1);
 	} else
 		QMessageBox::warning(this, windowTitle(), tr("El archivo especificado no se ha podido abrir."));
 }
@@ -154,10 +156,10 @@ void frmPdfViewer::on_btn_Salir_clicked()
 
 void frmPdfViewer::on_btn_Abrir_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), (lastPath.isEmpty() ? grlDir.Home : lastPath), "", tr("Abrir PDF") +" (*.pdf);;"+ tr("Todos los archivo") +" (*)");
+	QString archivo = fGrl->ventanaAbrirArchivos(this, tr("Selecciona un archivo"), (lastPath.isEmpty() ? grlDir.Home : lastPath), "", tr("Abrir PDF") +" (*.pdf);;"+ tr("Todos los archivos") +" (*)");
 
-	if( !archivo.isEmpty() )
-		openPdf( archivo );
+	if (!archivo.isEmpty())
+		openPdf(archivo);
 }
 
 void frmPdfViewer::on_btn_TextSelect_toggled(bool checked)
@@ -167,54 +169,54 @@ void frmPdfViewer::on_btn_TextSelect_toggled(bool checked)
 
 void frmPdfViewer::on_btn_PaginaBack_clicked()
 {
-	if( ui->spinPagina->value() > 0 )
+	if (ui->spinPagina->value() > 0)
 	{
 		ui->btn_PaginaBack->setEnabled(true);
 		ui->btn_PaginaNext->setEnabled(true);
 		ui->spinPagina->setValue(ui->spinPagina->value()-1);
 	}
 
-	if( ui->spinPagina->value() <= 1 )
+	if (ui->spinPagina->value() <= 1)
 		ui->btn_PaginaBack->setEnabled(false);
 }
 
 void frmPdfViewer::on_btn_PaginaNext_clicked()
 {
-	if( ui->spinPagina->value() < doc_pdf_widget->document()->numPages() )
+	if (ui->spinPagina->value() < doc_pdf_widget->document()->numPages())
 	{
 		ui->btn_PaginaBack->setEnabled(true);
 		ui->btn_PaginaNext->setEnabled(true);
 		ui->spinPagina->setValue(ui->spinPagina->value()+1);
 	}
 
-	if( ui->spinPagina->value() >= doc_pdf_widget->document()->numPages() )
+	if (ui->spinPagina->value() >= doc_pdf_widget->document()->numPages())
 		ui->btn_PaginaNext->setEnabled(false);
 }
 
 void frmPdfViewer::on_spinPagina_valueChanged(int arg1)
 {
 	doc_pdf_widget->setPage(arg1);
-	ui->lb_pagina_count->setText("("+ fGrl->IntToStr(arg1) +" "+ tr("de") +" "+ fGrl->IntToStr(doc_pdf_widget->document()->numPages()) +")");
+	ui->lb_pagina_count->setText("("+ fGrl->intToStr(arg1) +" "+ tr("de") +" "+ fGrl->intToStr(doc_pdf_widget->document()->numPages()) +")");
 }
 
 void frmPdfViewer::on_txtBuscar_editingFinished()
 {
-//	if( text.isEmpty() )
+//	if (text.isEmpty())
 		doc_pdf_widget->setPage();
 }
 
 void frmPdfViewer::on_txtBuscar_textChanged(const QString &arg1)
 {
-	if( arg1.isEmpty() )
+	if (arg1.isEmpty())
 		doc_pdf_widget->setPage();
 }
 
 void frmPdfViewer::on_btn_Buscar_clicked()
 {
-	if( !ui->txtBuscar->text().isEmpty() )
+	if (!ui->txtBuscar->text().isEmpty())
 	{
 		QRectF location;
-		if( ui->cbxOrden->currentIndex() == 0 )
+		if (ui->cbxOrden->currentIndex() == 0)
 			location = doc_pdf_widget->searchForwards(ui->txtBuscar->text());
 		else
 			location = doc_pdf_widget->searchBackwards(ui->txtBuscar->text());
@@ -231,7 +233,7 @@ void frmPdfViewer::on_btn_Limpiar_clicked()
 
 void frmPdfViewer::on_btn_ZoomIn_clicked()
 {
-	if( id_scale < 11)
+	if (id_scale < 11)
 	{
 		id_scale++;
 		ui->cbxZoom->setCurrentIndex(id_scale);
@@ -241,7 +243,7 @@ void frmPdfViewer::on_btn_ZoomIn_clicked()
 
 void frmPdfViewer::on_btn_ZoomOut_clicked()
 {
-	if( id_scale > 0 )
+	if (id_scale > 0)
 	{
 		id_scale--;
 		ui->cbxZoom->setCurrentIndex(id_scale);

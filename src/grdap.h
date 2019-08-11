@@ -2,9 +2,8 @@
  *
  * GR-dap by Monthy
  *
- * This file is part of GR-dap is Dial-A-Protection and
- * GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * This file is part of GR-dap is Dial-A-Protection
+ * Copyright (C) 2014-2016 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +32,7 @@
 
 #include "grdapview.h"
 #include "funciones.h"
-#include "qtzip.h"
+#include "Qt7zip/qt7zip.h"
 
 namespace Ui {
 	class GrDap;
@@ -47,6 +46,9 @@ public:
 	explicit GrDap(QWidget *parent = 0);
 	~GrDap();
 
+	void setAssociation(QString ext, QString desc, QString ico);
+	void clearAssociation(QString ext);
+
 	void cargarArchivo(QString filename);
 	void cargarImagen(QString filename);
 	void cargarImagenes(QStringList images, int index, bool directo = true);
@@ -58,6 +60,8 @@ protected:
 	void dragEnterEvent(QDragEnterEvent *event);
 
 private:
+	Ui::GrDap *ui;
+
 	struct stGrdCfg {
 	// MainState
 		bool       main_fullscreen;
@@ -67,15 +71,18 @@ private:
 		bool show_info;
 	};
 
-	Ui::GrDap *ui;
 	Funciones *fGrl;
 	GrDapView *grdapView;
-	QtZip zip;
+
+	Qt7zip *z_file;
+	QStringList z_list;
+	QList<szEntryInfo> z_listInfo;
+	bool z_is_open, is_load_7zlib;
 
 	stGrdCfg grdCfg;
 	stGrlDir grlDir;
 	QHash<QString, QString> config;
-	QStringList img_ext, list_zip, list_titulos;
+	QStringList dap_ext, img_ext, comic_ext, z_ext, list_titulos;
 	QString stDir, texto_pagina;
 	QColor visor_color;
 	bool isInicio, isZip, visor_show;
@@ -83,13 +90,15 @@ private:
 
 	void cargarConfig();
 	void guardarConfig();
+	void setTheme();
+
 	QPixmap loadPixmap(QString filename);
 	QBitmap loadBitmap(QString filename);
 	void setCbxNextIndex(QComboBox *cbx);
 	void setCbxBackIndex(QComboBox *cbx);
 	void setColorBtn(QColor color);
 	void setDefecto();
-	void getInfoImg();
+	void getInfoImg(int index);
 
 private slots:
 //	void openfileDragDrop(QString filename);
@@ -104,6 +113,7 @@ private slots:
 	void on_btn_info_toggled(bool checked);
 	void on_btn_ayuda_triggered();
 	void on_btn_acercade_triggered();
+
 // Ruletas de la A a la D
 	void on_slider_rotar_a_valueChanged(int value);
 	void on_slider_rotar_b_valueChanged(int value);
@@ -113,24 +123,23 @@ private slots:
 	void on_btn_rotar_b_clicked();
 	void on_btn_rotar_c_clicked();
 	void on_btn_rotar_d_clicked();
-// --
+
 // Visor de cartas: Alone in the Dark 2
 	void on_cbx_carta_top_activated(int index);
 	void on_cbx_carta_bot_activated(int index);
-// --
-// Visor de imagenes
+
+// Visor de Imágenes
 	void on_cbx_img_pagina_activated(int index);
 	void on_btn_img_back_clicked();
 	void on_btn_img_next_clicked();
 	void on_slider_rotar_img_valueChanged(int value);
 	void on_btn_rotar_img_clicked();
-// --
+
 // Visor de texto oculto: Indiana Jones y la Última Cruzada
 	void on_btn_visor_clicked(bool checked);
 	void on_btn_visor_color_clicked();
 	void on_cbx_visor_mode_activated(int index);
 	void visorColorChanged(QColor color);
-// --
 
 };
 

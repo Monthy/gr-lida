@@ -332,6 +332,7 @@ void GrlMedia::setMetaData()
 		metaData.title       = m_metaData.value("TITLE");
 		metaData.albumTitle  = m_metaData.value("ALBUM");
 		metaData.albumArtist = m_metaData.value("ARTIST");
+
 		emit metaDataChanged(metaData);
 	}
 }

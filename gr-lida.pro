@@ -12,29 +12,42 @@ win32|mac {
 }
 
 TEMPLATE = app
-
-# ###### Output directory
-DESTDIR += bin
-UI_DIR += src
-MOC_DIR += build
-RCC_DIR += build
-OBJECTS_DIR += build
+#LANGUAGE = C++
 
 # ###### Compiler, tools and options
 CONFIG += qt warn_on thread release
+CONFIG += c++11
+
+# ###### Output directory
+DESTDIR += bin
+UI_DIR += build/ui
+MOC_DIR += build/moc
+RCC_DIR += build/rcc
+OBJECTS_DIR += build/obj
 
 # Examples:
 #CONFIG += qt warn_on thread release
 #CONFIG += qt warn_on thread debug
-
+# phonon
 QT += core gui sql network script
-contains(QT_CONFIG, opengl):QT += opengl
+
+contains(QT_CONFIG, opengl): QT += opengl
 
 greaterThan(QT_MAJOR_VERSION, 4) {
-    message(Building with Qt5)
     QT += widgets printsupport
+    TARGET_ARCH = $${QT_ARCH}
+
+    message(Building with Qt5 $${TARGET_ARCH})
 } else {
-    message(Building with Qt4)
+    TARGET_ARCH = $${QMAKE_HOST.arch}
+
+    message(Building with Qt4 $${TARGET_ARCH})
+}
+
+contains(TARGET_ARCH, x86_64) {
+    TARGET_ARCH = x64
+} else {
+    TARGET_ARCH = x86
 }
 
 # ###### Files
@@ -48,91 +61,73 @@ DEPENDPATH += . \
     res \
     ui
 
-HEADERS += src/dbsql.h \
+HEADERS += src/grlida.h \
+    src/grlida_picflow.h \
     src/funciones.h \
-    src/grlida.h \
-    src/grlida_acercad.h \
-    src/grlida_addedit_dosbox.h \
-    src/grlida_addedit_juego.h \
-    src/grlida_addedit_montajes.h \
-    src/grlida_addedit_scummvm.h \
-    src/grlida_addedit_vdmsound.h \
-    src/grlida_config_inicial.h \
+    src/g_structs.h \
     src/grlida_delegate.h \
-    src/grlida_exportar_juego.h \
-    src/grlida_importar_juego.h \
-    src/grlida_importpath.h \
+    src/dbsql.h \
     src/grlida_info.h \
-    src/grlida_instalar_juego.h \
+    src/grlida_acercad.h \
+    src/grlida_config_inicial.h \
+    src/grlida_buscar.h \
     src/grlida_list_icon_cfg.h \
+    src/grlida_addedit_juego.h \
     src/grlida_multimedia.h \
     src/grlida_opciones.h \
-    src/grlida_pdf_viewer.h \
-    src/grlida_picflow.h \
-    src/grlida_update.h \
+    src/grlida_addedit_scummvm.h \
+    src/grlida_addedit_vdmsound.h \
+    src/grlida_addedit_dosbox.h \
+    src/grlida_addedit_montajes.h \
     src/grlida_wizard_dosbox.h \
     src/grlida_wizard_scummvm.h \
     src/grlida_wizard_vdmsound.h \
-    src/g_structs.h \
-    src/httpdownload.h \
-    src/qtzip.h \
+    src/grlida_instalar_juego.h \
+    src/grlida_cambiar_categoria.h \
     src/grdap.h \
-    src/grdapview.h
+    src/grdap_acercad.h \
+    src/grdapview.h \
+    src/grlida_pdf_viewer.h \
+    src/grlida_importar_juego.h \
+    src/grlida_importar_datos.h \
+    src/grlida_importar_dosbox.h \
+    src/grlida_importar_scummvm.h \
+    src/httpdownload.h \
+    src/grlida_update.h
 
-SOURCES += src/dbsql.cpp \
-    src/funciones.cpp \
+SOURCES += src/main.cpp \
     src/grlida.cpp \
-    src/grlida_acercad.cpp \
-    src/grlida_addedit_dosbox.cpp \
-    src/grlida_addedit_juego.cpp \
-    src/grlida_addedit_montajes.cpp \
-    src/grlida_addedit_scummvm.cpp \
-    src/grlida_addedit_vdmsound.cpp \
-    src/grlida_config_inicial.cpp \
+    src/grlida_picflow.cpp \
+    src/funciones.cpp \
     src/grlida_delegate.cpp \
-    src/grlida_exportar_juego.cpp \
-    src/grlida_importar_juego.cpp \
-    src/grlida_importpath.cpp \
+    src/dbsql.cpp \
     src/grlida_info.cpp \
-    src/grlida_instalar_juego.cpp \
+    src/grlida_acercad.cpp \
+    src/grlida_config_inicial.cpp \
+    src/grlida_buscar.cpp \
     src/grlida_list_icon_cfg.cpp \
+    src/grlida_addedit_juego.cpp \
     src/grlida_multimedia.cpp \
     src/grlida_opciones.cpp \
-    src/grlida_pdf_viewer.cpp \
-    src/grlida_picflow.cpp \
-    src/grlida_update.cpp \
+    src/grlida_addedit_scummvm.cpp \
+    src/grlida_addedit_vdmsound.cpp \
+    src/grlida_addedit_dosbox.cpp \
+    src/grlida_addedit_montajes.cpp \
     src/grlida_wizard_dosbox.cpp \
     src/grlida_wizard_scummvm.cpp \
     src/grlida_wizard_vdmsound.cpp \
-    src/httpdownload.cpp \
-    src/main.cpp \
-    src/qtzip.cpp \
+    src/grlida_instalar_juego.cpp \
+    src/grlida_cambiar_categoria.cpp \
     src/grdap.cpp \
-    src/grdapview.cpp
-
-FORMS += ui/grlida.ui \
-    ui/opciones.ui \
-    ui/addedit_juego.ui \
-    ui/addedit_vdmsound.ui \
-    ui/addedit_scummvm.ui \
-    ui/addedit_dosbox.ui \
-    ui/acercad.ui \
-    ui/importar_juego.ui \
-    ui/login_url.ui \
-    ui/importpath.ui \
-    ui/addedit_montajes.ui \
-    ui/wizard_dosbox.ui \
-    ui/wizard_scummvm.ui \
-    ui/wizard_vdmsound.ui \
-    ui/config_inicial.ui \
-    ui/grdap.ui \
-    ui/instalar_juego.ui \
-    ui/pdf_viewer.ui \
-    ui/multimedia_setup.ui \
-    ui/informacion.ui \
-    ui/update.ui \
-    ui/exportar_juego.ui \
-    ui/list_icon_cfg.ui
+    src/grdap_acercad.cpp \
+    src/grdapview.cpp \
+    src/grlida_pdf_viewer.cpp \
+    src/grlida_importar_juego.cpp \
+    src/grlida_importar_datos.cpp \
+    src/grlida_importar_dosbox.cpp \
+    src/grlida_importar_scummvm.cpp \
+    src/httpdownload.cpp \
+    src/grlida_update.cpp
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     QT += multimedia multimediawidgets
@@ -147,53 +142,40 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     HEADERS += src/grlida_media.h
 }
 
+FORMS += ui/grlida.ui \
+    ui/informacion.ui \
+    ui/acercad.ui \
+    ui/config_inicial.ui \
+    ui/buscar.ui \
+    ui/list_icon_cfg.ui \
+    ui/addedit_juego.ui \
+    ui/opciones.ui \
+    ui/addedit_scummvm.ui \
+    ui/addedit_vdmsound.ui \
+    ui/addedit_dosbox.ui \
+    ui/addedit_montajes.ui \
+    ui/instalar_juego.ui \
+    ui/cambiar_categoria.ui \
+    ui/wizard_dosbox.ui \
+    ui/wizard_scummvm.ui \
+    ui/wizard_vdmsound.ui \
+    ui/grdap.ui \
+    ui/grdap_acercad.ui \
+    ui/pdf_viewer.ui \
+    ui/importar_juego.ui \
+    ui/importar_datos.ui \
+    ui/importar_dosbox.ui \
+    ui/importar_scummvm.ui \
+    ui/login_url.ui \
+    ui/update.ui
+
 # ###### 3rdparty Files
-HEADERS += 3rdparty/editorwidget/codeeditor.h \
-    3rdparty/editorwidget/editorwidget.h
-
-SOURCES += 3rdparty/editorwidget/codeeditor.cpp \
-    3rdparty/editorwidget/editorwidget.cpp
-
-HEADERS += 3rdparty/pictureflow-qt/pictureflow.h
-SOURCES += 3rdparty/pictureflow-qt/pictureflow.cpp
-
-HEADERS += 3rdparty/osdab-zip/unzip.h \
-    3rdparty/osdab-zip/unzip_p.h \
-    3rdparty/osdab-zip/zip.h \
-    3rdparty/osdab-zip/zipentry_p.h \
-    3rdparty/osdab-zip/zipglobal.h \
-    3rdparty/osdab-zip/zip_p.h
-
-SOURCES += 3rdparty/osdab-zip/unzip.cpp \
-    3rdparty/osdab-zip/zip.cpp \
-    3rdparty/osdab-zip/zipglobal.cpp
-
-HEADERS += 3rdparty/doc_pdf_widget.h
-SOURCES += 3rdparty/doc_pdf_widget.cpp
-
-HEADERS += 3rdparty/animatedtextbrowser.h
-HEADERS += 3rdparty/crc32qt.h
-
-HEADERS += 3rdparty/qcheckcombobox.h
-SOURCES += 3rdparty/qcheckcombobox.cpp
-# ###### FIN 3rdparty
+include(3rdparty/3rdparty.pri)
 
 RESOURCES += res/gr-lida.qrc
 
-TRANSLATIONS += res/idiomas/gr-lida_es_ES.ts \
-    res/idiomas/gr-lida_en_EN.ts \
-    res/idiomas/gr-lida_da_DK.ts \
-    res/idiomas/gr-lida_fr_FR.ts \
-    res/idiomas/gr-lida_hu_HU.ts \
-    res/idiomas/gr-lida_ru_RU.ts
-
-#CODECFORTR  = UTF-8
-#CODECFORSRC = UTF-8
-
 win32:RC_FILE += gr-lida.rc
 mac:ICON += gr-lida.icns
-
-LIBS += -lz
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     DEFINES += IS_POPPLER_QT5
@@ -201,6 +183,16 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 } else {
     LIBS += -lpoppler-qt4
 }
+
+#CODECFORTR  = UTF-8
+#CODECFORSRC = UTF-8
+
+TRANSLATIONS += res/idiomas/gr-lida_es_ES.ts \
+    res/idiomas/gr-lida_en_EN.ts \
+    res/idiomas/gr-lida_da_DK.ts \
+    res/idiomas/gr-lida_fr_FR.ts \
+    res/idiomas/gr-lida_hu_HU.ts \
+    res/idiomas/gr-lida_ru_RU.ts
 
 # ###### Install
 !win32 {

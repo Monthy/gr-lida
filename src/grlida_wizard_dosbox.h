@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 
 #include "funciones.h"
 #include "dbsql.h"
+#include "grlida_importar_juego.h"
 
 namespace Ui {
 	class frmWizardDosBox;
@@ -53,23 +54,32 @@ private:
 	Funciones *fGrl;
 	dbSql *sql;
 
-	stDatosJuego DatosJuego;
-	stConfigDOSBox DatosDosBox;
-
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
 	stGrlCats categoria;
+
+	stDatosJuego DatosJuego;
+	stConfigDOSBox DatosDosBox;
+	QList<stDatosImagenes> listImagenesImportadas;
+
+	QString Thumbs, CoverFront, CoverBack, CoverLeft, CoverRight, CoverTop, CoverBottom;
+	QString file_thumbs, file_cover_front, file_cover_back, file_cover_left, file_cover_right, file_cover_top, file_cover_bottom;
+	int index_wizard;
+
 	QHash<QString, stGrlDatos> dbx_list;
 	bool isDbxSVN;
-	int index_wizard;
 
 	void cargarConfig();
 	void setTheme();
 
+	void cargarDatosJuego(stDatosJuego datos);
+	bool setDatosJuegos();
+
 	void previerMontajes();
 	void setDatosDosBox();
 	void cargarDatosDosBox(stConfigDOSBox cfgDbx);
-	void cargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
+	void cargarDatosDBxMontaje(QList<stConfigDOSBoxMount> listMount);
+	QList<stConfigDOSBoxMount> getListMount();
 
 private slots:
 	void on_btnOk_clicked();
@@ -77,8 +87,6 @@ private slots:
 	void on_btnNext_clicked();
 	void on_btnPrevious_clicked();
 
-	void on_btnDbx_FileConfg_clicked();
-	void on_btnDbx_FileConfg_clear_clicked();
 	void on_btnDbx_ExeJuego_clicked();
 	void on_btnDbx_ExeJuego_clear_clicked();
 	void on_btnDbx_ExeSetup_clicked();
@@ -96,8 +104,7 @@ private slots:
 
 	void on_cbxDbx_EmuKey_activated(int index);
 	void on_cbxDbx_Profiles_activated(int index);
-	void on_txtDatos_Titulo_textEdited(const QString &arg1);
 
 };
 
-#endif // GRLIDA_DBXADD_H
+#endif // GRLIDA_WIZARD_DOSBOX_H

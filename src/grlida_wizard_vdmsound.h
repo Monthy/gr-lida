@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 
 #include "funciones.h"
 #include "dbsql.h"
+#include "grlida_importar_juego.h"
 
 namespace Ui {
 	class frmWizardVdmSound;
@@ -53,15 +54,22 @@ private:
 	Funciones *fGrl;
 	dbSql *sql;
 
-	stDatosJuego DatosJuego;
-	stConfigVDMSound DatosVDMSound;
-
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
 	stGrlCats categoria;
 
+	stDatosJuego DatosJuego;
+	stConfigVDMSound DatosVDMSound;
+	QList<stDatosImagenes> listImagenesImportadas;
+
+	QString Thumbs, CoverFront, CoverBack, CoverLeft, CoverRight, CoverTop, CoverBottom;
+	QString file_thumbs, file_cover_front, file_cover_back, file_cover_left, file_cover_right, file_cover_top, file_cover_bottom;
+
 	void cargarConfig();
 	void setTheme();
+
+	void cargarDatosJuego(stDatosJuego datos);
+	bool setDatosJuegos();
 
 	void setDatosVDMSound();
 	void cargarDatosVDMSound(stConfigVDMSound cfgVdms);
@@ -70,8 +78,6 @@ private slots:
 	void on_btnOk_clicked();
 	void on_btnCancel_clicked();
 
-	void on_btnVdms_FileConfg_clicked();
-	void on_btnVdms_FileConfg_clear_clicked();
 	void on_btnVdms_ExeJuego_clicked();
 	void on_btnVdms_ExeJuego_clear_clicked();
 	void on_btnVdms_params_clear_clicked();
@@ -79,8 +85,6 @@ private slots:
 	void on_btnVdms_Icono_clear_clicked();
 	void on_btnDescargarInfo_clicked();
 
-	void on_txtDatos_Titulo_textEdited(const QString &arg1);
-
 };
 
-#endif // GRLIDA_VDMSADD_H
+#endif // GRLIDA_WIZARD_VDMSOUND_H

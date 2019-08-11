@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,6 +30,8 @@
 
 #include "funciones.h"
 #include "httpdownload.h"
+#include "Qt7zip/qt7zip.h"
+
 
 namespace Ui {
 class frmUpdate;
@@ -40,58 +42,58 @@ class frmUpdate : public QDialog
 	Q_OBJECT
 
 public:
-	explicit frmUpdate(stGrlCfg m_cfg, QWidget *parent = 0);
+	explicit frmUpdate(QList<stUpdates> m_up_grl, QList<stUpdates> m_up_js, QList<stUpdates> m_up_st, stUpdates m_up_svm, stGrlCfg m_cfg, QWidget *parent = 0);
 	~frmUpdate();
 
-	stGrlCfg getGrlCfg(){return grlCfg;}
-	void checkUpdateGrl();
+	stGrlCfg getGrlCfg() { return grlCfg;}
 
 private:
 	Ui::frmUpdate *ui;
 
-	enum e_fin_descarga {
-		CompruebaUpdates  = 0,
-		CopiarArchivo     = 1,
-		DescargaSiguiente = 2
-	};
-
-	struct stUpdates {
-		QString tipo;
-		QString archivo;
-		QString url;
-	};
-
 	Funciones *fGrl;
 	HttpDownload *httpdown;
+	Qt7zip *z_file;
 
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
 
-	QString url_web, str_html_new, str_html_old, ver_list_svm;
+	QFont m_font;
+	QTreeWidgetItem *twItem;
+	QString tpl_info_old;
+	bool is_load_7zlib, z_is_open;
 
-	bool isDownload, isUpdates;
-	int total_update, id_descarga, index_fin_descarga;
-	QHash<int, stUpdates> grlUpdate;
+	enum col_TwUpdates {
+		col_title      = 0,
+		col_ver_old    = 1,
+		col_version    = 2,
+		col_info       = 3,
+		col_info_item  = 4,
+		col_tipo       = 5,
+		col_file       = 6,
+		col_url_method = 7,
+		col_url        = 8,
+	};
 
-	QTreeWidgetItem *twListUpdates;
+	struct stListFiles {
+		QString archivo;
+		QString tipo;
+	};
+	QList<stListFiles> listFiles;
 
 	void cargarConfig();
-	void comprobarActualizaciones();
-	void listUpdateAddCat(QString etiqueta, QString icono);
-	void listUpdateAddSubCat(QString etiqueta, QString icono, QString version_old, QString version_new, QString descipcion, QString tipo, QString filename, QString url, bool checked, bool select, bool oculto = false);
-	void downloadFile(int id_down);
+	void setTheme();
+
+	void twAddCat(QString etiqueta, QString info, QString icono);
+	void twAddSubCat(stUpdates up, QString icono, QString url_method);
+	bool extractFile(const QString file_in, const QString dir_out);
 
 private slots:
-	void on_btnClose_clicked();
-	void on_btnUpdate_clicked();
-	void on_btnCheckUpdate_clicked();
-
-	void on_twUpdates_itemClicked(QTreeWidgetItem *item, int column);
-
 	void statusBtnEnabled(bool estado);
 	void statusFinished();
 
-	void on_chkSoloUpdates_clicked(bool checked);
+	void on_twUpdates_itemClicked(QTreeWidgetItem *item, int column);
+	void on_btnUpdate_clicked();
+	void on_btnClose_clicked();
 
 };
 

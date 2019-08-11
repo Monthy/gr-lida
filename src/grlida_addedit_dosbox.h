@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 
 #include "funciones.h"
 #include "dbsql.h"
-#include "ui_addedit_dosbox.h"
 
 namespace Ui {
 	class frmAddEditDosBox;
@@ -48,14 +47,15 @@ public:
 
 	stGrlCfg getGrlCfg(){return grlCfg;}
 	stConfigDOSBox getDatosDosBox(){return DatosDosBox;}
+	QList<stConfigDOSBoxMount> getListMount();
 
 	void setDatosDosBox();
 	void cargarDatosDosBox(stConfigDOSBox cfgDbx);
-	void cargarDatosDBxMontaje(QTreeWidget *twMontajesDbx);
-
-	Ui::frmAddEditDosBox *ui;
+	void cargarDatosDBxMontaje(QList<stConfigDOSBoxMount> listMount);
 
 private:
+	Ui::frmAddEditDosBox *ui;
+
 	Funciones *fGrl;
 	dbSql *sql;
 
@@ -64,7 +64,6 @@ private:
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
 	stGrlCats categoria;
-
 	stConfigDOSBox DatosDosBox;
 
 	QString IdGame, IdDbx;
@@ -79,9 +78,6 @@ private:
 	void addMontajeAutoexec(QString tipo, QString dir_file);
 
 private slots:
-	void on_btnDbx_FileConfg_clicked();
-
-	void on_btnDbx_FileConfg_clear_clicked();
 	void on_cbxDbx_EmuKey_activated(int index);
 	void on_cbxDbx_Profiles_activated(int index);
 	void on_chkDbx_loadfix_clicked();
@@ -91,6 +87,7 @@ private slots:
 	void on_btnDbx_ExeJuego_clear_clicked();
 	void on_btnDbx_ExeSetup_clicked();
 	void on_btnDbx_ExeSetup_clear_clicked();
+	void on_btnInstalarJuego_clicked();
 	void on_btnMount_Add_clicked();
 	void on_btnMount_Edit_clicked();
 	void on_btnMount_Delete_clicked();
@@ -110,10 +107,6 @@ private slots:
 	void on_btnDbx_mapperfile_clear_clicked();
 	void on_btnDbx_language_clicked();
 	void on_btnDbx_language_clear_clicked();
-	void on_btnDbx_capturas_clicked();
-	void on_btnDbx_capturas_clear_clicked();
-	void on_btnDbx_musica_clicked();
-	void on_btnDbx_musica_clear_clicked();
 
 };
 

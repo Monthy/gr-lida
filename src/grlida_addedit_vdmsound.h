@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,8 +47,6 @@ public:
 
 	stGrlCfg getGrlCfg(){return grlCfg;}
 	stConfigVDMSound getDatosVDMSound(){return DatosVDMSound;}
-	QString getPathConf();
-	void setPathConf(QString config);
 
 	void setDatosVDMSound();
 	void cargarDatosVDMSound(stConfigVDMSound cfgVdms);
@@ -74,8 +72,6 @@ private:
 	void setTheme();
 
 private slots:
-	void on_btnVdms_FileConfg_clicked();
-	void on_btnVdms_FileConfg_clear_clicked();
 	void on_btnVdms_ExeJuego_clicked();
 	void on_btnVdms_ExeJuego_clear_clicked();
 	void on_btnVdms_params_clear_clicked();

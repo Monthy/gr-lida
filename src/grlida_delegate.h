@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,16 +26,13 @@
 #define GRLIDA_DELEGATE_H
 
 #include <QApplication>
-#include <QSqlTableModel>
 #include <QStandardItemModel>
 #include <QStyledItemDelegate>
-#include <QObject>
-#include <QString>
-#include <QPixmap>
-#include <QHash>
+#include <QPainter>
+#include <QDateTime>
+#include <QMouseEvent>
 
 #include "funciones.h"
-#include "dbsql.h"
 
 // INICIO GrlListViewDelegate -----------------------------------------------------------------------------------
 class GrlListViewDelegate : public QStyledItemDelegate
@@ -43,55 +40,47 @@ class GrlListViewDelegate : public QStyledItemDelegate
 	Q_OBJECT
 
 public:
-	GrlListViewDelegate(dbSql *m_sql, QString dir_app, QString dir_theme, QString dir_theme_app, QString filter, QWidget *parent = 0);
+	GrlListViewDelegate(QWidget *parent = 0);
 	virtual ~GrlListViewDelegate();
 
-	enum datarole {
-		IdGrlRole   = Qt::UserRole +100,
-		TituloRole  = Qt::UserRole +101,
-		IconRole    = Qt::UserRole +102,
-		TipoEmuRole = Qt::UserRole +103,
-		RatingRole  = Qt::UserRole +104
-	};
+	void setdirApp(QString dir_app){stDirApp = dir_app;}
+	void setTheme(stLwIconCfg m_lwConf, QString dir_theme);
+	void setShowLinesPos(bool showLinesPos) { m_showLinesPos = showLinesPos; }
 
 	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 	bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index);
 
-	void setDirApp(QString dir_app){stDirApp = dir_app;}
-	void setTheme(QString dir_theme){stTheme = dir_theme;}
-	void setThemeCat(QString dir_theme_app){stThemeApp = dir_theme_app;}
-	void setTable(QString m_tabla){stTabla = m_tabla;}
-	void setIdCol(QHash<int, int> m_col){col = m_col;}
-	void setLwIconCfg(stLwIconCfg m_lwConf);
+signals:
+	void updateCol(const QModelIndex &index, int col);
 
 private:
-	Funciones fGrl;
-	dbSql *sql;
+	Funciones *fGrl;
 
-	QString stDirApp, stTheme, stThemeApp, stTabla, stFilter;
-	QPixmap star_on, star_off, title_bg, title_bg_select, cover_top, cover_top_select;
+	QString stDirApp;
+	QPixmap star_on, star_off;
 	QHash<QString, QPixmap> ico_emu;
-	QHash<int, int> col;
 	stLwIconCfg lwConf;
-	QPen pen, pen_def, pen_select;
+	QPen pen;
+	bool m_showLinesPos;
 
 };
 // FIN GrlListViewDelegate --------------------------------------------------------------------------------------
 
 // INICIO GrlTreeViewModel --------------------------------------------------------------------------------------
-class GrlTreeViewModel : public QSqlTableModel
+class GrlTreeViewModel : public QStandardItemModel
 {
 	Q_OBJECT
 
 public:
-	GrlTreeViewModel(QObject *parent = 0, QSqlDatabase db = QSqlDatabase(), QString formato_fecha = "dd/MM/yyyy HH:mm:ss");
+	explicit GrlTreeViewModel(QHash<QString, QString> list_emu, QObject *parent = 0, QString formato_fecha = "dd/MM/yyyy HH:mm:ss");
 	virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
-	void setFormatoFecha(QString formato_fecha){formatofecha = (formato_fecha.isEmpty())?"dd/MM/yyyy HH:mm:ss":formato_fecha;}
+	void setFormatoFecha(QString formato_fecha);
 
 private:
 	QString formatofecha;
+	QHash<QString, QString> emu_list;
 
 };
 // FIN GrlTreeViewModel -----------------------------------------------------------------------------------------
@@ -102,36 +91,27 @@ class GrlTreeViewDelegate : public QStyledItemDelegate
 	Q_OBJECT
 
 public:
-	GrlTreeViewDelegate(dbSql *m_sql, QString dir_app, QString dir_theme, QString dir_theme_app, QString filter, QTreeWidget *m_twNav, QWidget *parent = 0);
+	GrlTreeViewDelegate(QWidget *parent = 0);
 	virtual ~GrlTreeViewDelegate();
+
+	void setdirApp(QString dir_app){stDirApp = dir_app;}
+	void setTheme(QSize m_size, QString m_fav, QString dir_theme, QString filter);
 
 	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 	bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index);
 
-	void setDirApp(QString dir_app){stDirApp = dir_app;}
-	void setTheme(QString dir_theme){stTheme = dir_theme;}
-	void setThemeCat(QString dir_theme_app){stThemeApp = dir_theme_app;}
-	void setTable(QString m_tabla){stTabla = m_tabla;}
-	void setIdCol(QHash<int, int> m_col){col = m_col;}
-	void setIconSize(QSize m_size){size_icon = m_size;}
-	void setIconFav(QString m_fav)
-	{
-		if( !img_favorito.load(stTheme +"img16/"+ m_fav) )
-			img_favorito.load(":/img16/original.png");
-	}
+signals:
+	void updateCol(const QModelIndex &index, int col);
 
 private:
-	Funciones fGrl;
-	dbSql *sql;
+	Funciones *fGrl;
 
-	QString stDirApp, stTheme, stThemeApp, stTabla;
+	QString stDirApp;
 	QSize size_icon;
 	QPixmap star_on, star_off, sin_img, img_original, img_favorito;
 	QHash<QString, QPixmap> icono;
 	QHash<QString, QPixmap> edades;
-	QHash<int, int> col;
-	QTreeWidget *twNav;
 
 };
 // FIN GrlTreeViewDelegate --------------------------------------------------------------------------------------

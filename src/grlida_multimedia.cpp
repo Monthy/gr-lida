@@ -9,13 +9,14 @@
 #include <QApplication>
 #include <QPainter>
 
-GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m_cfg, QWidget *parent) : QWidget(parent)
+GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m_cfg, bool onlySound, bool is_main, QWidget *parent) : QWidget(parent)
 {
 	setInfo("");
 	stDirGame     = dir_game;
 	m_fullScreen  = false;
 	m_repetir     = false;
-	m_onlySound   = false;
+	m_onlySound   = onlySound;
+	isMain        = is_main;
 	current_media = -1;
 	select_media  = -1;
 
@@ -25,21 +26,26 @@ GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m
 		splitter = new QSplitter(this);
 		splitter->setOrientation(Qt::Vertical);
 		splitter->installEventFilter(this);
-			media = new GrlMedia(splitter);
-				QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-				sizePolicy.setHorizontalStretch(0);
-				sizePolicy.setVerticalStretch(1);
-				sizePolicy.setHeightForWidth(media->sizePolicy().hasHeightForWidth());
-			media->setSizePolicy(sizePolicy);
-			media->installEventFilter(this);
-		splitter->addWidget(media);
+			w_media = new QWidget(splitter);
+			w_media->installEventFilter(this);
+			QVBoxLayout *vLayout_media = new QVBoxLayout(w_media);
+			vLayout_media->setSpacing(0);
+			vLayout_media->setContentsMargins(0, 0, 0, 0);
+				media = new GrlMedia(w_media);
+				media->installEventFilter(this);
+			vLayout_media->addWidget(media);
+				mediaInfo = new AnimatedTextBrowser(w_media);
+				mediaInfo->installEventFilter(this);
+				mediaInfo->setFrameShape(QFrame::NoFrame);
+				mediaInfo->document()->setDocumentMargin(0);
+				mediaInfo->setMinimumHeight(60);
+			vLayout_media->addWidget(mediaInfo);
+		splitter->addWidget(w_media);
 			lwMedia = new QListWidget(splitter);
 			lwMedia->setMinimumHeight(100);
 			lwMedia->setVisible(false);
 			connect(lwMedia, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(lwMedia_DoubleClicked(QListWidgetItem*)));
-	//		connect(lwMedia, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(lwMedia_ItemActivated(QListWidgetItem*)));
 			connect(lwMedia, SIGNAL(currentRowChanged(int)), this, SLOT(lwMedia_currentRowChanged(int)));
-
 		splitter->addWidget(lwMedia);
 	vLayout_main->addWidget(splitter);
 		w_controls = new QWidget(this);
@@ -56,7 +62,7 @@ GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m
 				slider->setMediaObject(media->getMediaObject());
 #else
 				slider = new QSlider(Qt::Horizontal, w_controls);
-				slider->setRange(0, media->duration() / 1000);
+				slider->setRange(0, static_cast<int>(media->duration() / 1000));
 				slider->setEnabled(false);
 				connect(slider, SIGNAL(sliderMoved(int)), media, SLOT(seek(int)));
 #endif
@@ -70,11 +76,6 @@ GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m
 			QHBoxLayout *hLayout_2 = new QHBoxLayout();
 			hLayout_2->setMargin(0);
 			hLayout_2->setSpacing(6);
-				btnClose = new QToolButton(w_controls);
-				btnClose->setMinimumSize(QSize(26, 26));
-				btnClose->setMaximumSize(QSize(26, 26));
-				connect(btnClose, SIGNAL(clicked()), this, SLOT(close()));
-			hLayout_2->addWidget(btnClose);
 				btnPlayPausa = new QToolButton(w_controls);
 				btnPlayPausa->setMinimumSize(QSize(26, 26));
 				btnPlayPausa->setMaximumSize(QSize(26, 26));
@@ -115,7 +116,6 @@ GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m
 				btnAbrir->setMinimumSize(QSize(26, 26));
 				btnAbrir->setMaximumSize(QSize(26, 26));
 				btnAbrir->setFocusPolicy(Qt::NoFocus);
-//				btnAbrir->setPopupMode(QToolButton::InstantPopup);
 				connect(btnAbrir, SIGNAL(clicked()), this, SLOT(open()));
 			hLayout_2->addWidget(btnAbrir);
 				btnListaMedia = new QToolButton(w_controls);
@@ -123,8 +123,7 @@ GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m
 				btnListaMedia->setMaximumSize(QSize(26, 26));
 				btnListaMedia->setCheckable(true);
 				btnListaMedia->setChecked(false);
-				btnListaMedia->setVisible(true);
-				connect(btnListaMedia, SIGNAL(toggled(bool)), lwMedia, SLOT(setVisible(bool)));
+				connect(btnListaMedia, SIGNAL(toggled(bool)), this, SLOT(setPlaylistVisible(bool)));
 			hLayout_2->addWidget(btnListaMedia);
 				QSpacerItem *hSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 			hLayout_2->addItem(hSpacer_4);
@@ -144,6 +143,12 @@ GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m
 				btnFullScreen->setCheckable(true);
 				connect(btnFullScreen, SIGNAL(clicked(bool)), this, SLOT(setFullScreen(bool)));
 			hLayout_2->addWidget(btnFullScreen);
+				btnMediaInfo = new QToolButton(w_controls);
+				btnMediaInfo->setMinimumSize(QSize(26, 26));
+				btnMediaInfo->setMaximumSize(QSize(26, 26));
+				btnMediaInfo->setCheckable(true);
+				connect(btnMediaInfo, SIGNAL(clicked(bool)), this, SLOT(setMediaInfoVisible(bool)));
+			hLayout_2->addWidget(btnMediaInfo);
 		vLayout_controls->addLayout(hLayout_2);
 	vLayout_main->addWidget(w_controls);
 	vLayout_main->setStretch(0, 1);
@@ -162,6 +167,7 @@ GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m
 	connect(media, SIGNAL(resizeChanged(QSize)), this, SLOT(setResize(QSize)));
 	connect(media, SIGNAL(metaDataChanged(MediaMetaData)), this, SLOT(setMetaData(MediaMetaData)));
 
+	setOnlySound(m_onlySound);
 	setIconSize(24);
 	setTheme(dir_theme_app);
 	setGrlCfg(m_cfg);
@@ -178,7 +184,7 @@ GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m
 	}
 
 // centra la aplicacion en el escritorio
-	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
+//	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
 GrlMultiMedia::~GrlMultiMedia()
@@ -189,8 +195,8 @@ GrlMultiMedia::~GrlMultiMedia()
 void GrlMultiMedia::closeEvent(QCloseEvent *event)
 {
 	closeMedia();
-
-	event->accept();
+	event->ignore();
+	setHidden(true);
 }
 
 void GrlMultiMedia::keyPressEvent(QKeyEvent *event)
@@ -248,7 +254,6 @@ void GrlMultiMedia::setTheme(QString dir_theme)
 	playIcon  = QIcon(stTheme +"img16/mp_play.png");
 	pauseIcon = QIcon(stTheme +"img16/mp_pausa.png");
 
-	btnClose->setIcon(QIcon(stTheme +"img16/cerrar.png"));
 	btnPlayPausa->setIcon(playIcon);
 	btnAnterior->setIcon(QIcon(stTheme +"img16/mp_anterior.png"));
 	btnStop->setIcon(QIcon(stTheme +"img16/mp_stop.png"));
@@ -258,6 +263,12 @@ void GrlMultiMedia::setTheme(QString dir_theme)
 	btnListaMedia->setIcon(QIcon(stTheme +"img16/mp_playlist.png"));
 	btnMute->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
 	btnFullScreen->setIcon(QIcon(stTheme +"img16/fit_to_win.png"));
+	btnMediaInfo->setIcon(QIcon(stTheme +"img16/informacion.png"));
+}
+
+void GrlMultiMedia::setTemplate(QString tpl)
+{
+	tpl_info_media_old = tpl;
 }
 
 void GrlMultiMedia::setGrlCfg(stGrlCfg m_cfg)
@@ -269,6 +280,18 @@ void GrlMultiMedia::setGrlCfg(stGrlCfg m_cfg)
 
 	video_ext.clear();
 	video_ext << grlCfg.FormatsVideo;
+
+	if (m_onlySound)
+	{
+		w_media->setVisible(isMain ? grlCfg.VerInfoMediaMain : grlCfg.VerInfoMedia);
+		btnMediaInfo->setChecked(isMain ? grlCfg.VerInfoMediaMain : grlCfg.VerInfoMedia);
+
+		setPlaylistVisible(isMain ? grlCfg.VerPlaylistSoundMain : grlCfg.VerPlaylistSound);
+	} else {
+		w_media->setVisible(true);
+
+		setPlaylistVisible(isMain ? grlCfg.VerPlaylistVideoMain : grlCfg.VerPlaylistVideo);
+	}
 }
 
 void GrlMultiMedia::setIconSize(int size)
@@ -280,21 +303,45 @@ void GrlMultiMedia::setIconSize(int size)
 void GrlMultiMedia::setOnlySound(bool checked)
 {
 	m_onlySound = checked;
-//	lwMedia->setVisible(m_onlySound);
 
 	btnFullScreen->setVisible(!m_onlySound);
+	btnMediaInfo->setVisible(m_onlySound);
 	media->setVisible(!m_onlySound);
-}
-
-void GrlMultiMedia::setShowListaMedia(bool checked)
-{
-	btnListaMedia->setVisible(checked);
+	mediaInfo->setVisible(m_onlySound);
 }
 
 void GrlMultiMedia::setPlaylistVisible(bool checked)
 {
 	lwMedia->setVisible(checked);
 	btnListaMedia->setChecked(checked);
+
+	if (m_onlySound)
+	{
+		if (isMain)
+			grlCfg.VerPlaylistSoundMain = checked;
+		else
+			grlCfg.VerPlaylistSound = checked;
+	} else {
+		if (isMain)
+			grlCfg.VerPlaylistVideoMain = checked;
+		else
+			grlCfg.VerPlaylistVideo = checked;
+	}
+
+	emit changeConfig();
+}
+
+void GrlMultiMedia::setMediaInfoVisible(bool checked)
+{
+	w_media->setVisible(checked);
+	btnMediaInfo->setChecked(checked);
+
+	if (isMain)
+		grlCfg.VerInfoMediaMain = checked;
+	else
+		grlCfg.VerInfoMedia = checked;
+
+	emit changeConfig();
 }
 
 void GrlMultiMedia::setBtnPlaylistVisible(bool checked)
@@ -356,6 +403,7 @@ void GrlMultiMedia::addItemPlaylist(QFileInfo f_info, int row, int i)
 	{
 		img = "video.png";
 	}
+
 	int new_row = row + i;
 	QListWidgetItem *item = new QListWidgetItem;
 		item->setIcon(QIcon(stTheme +"img"+ sizeIcon +"/"+ img));
@@ -495,7 +543,7 @@ void GrlMultiMedia::open()
 						tr("Archivos de audio") +" - ("+ ext_audio +");;";
 	} else
 		filter = tr("Archivos de audio") +" - ("+ ext_audio +");;";
-	filter.append(tr("Todos los archivo") +" (*)");
+	filter.append(tr("Todos los archivos") +" (*)");
 
 	QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Abrir archivo multimedia") +"...", stDirGame, filter);
 	if (fileNames.size() > 0)
@@ -635,13 +683,11 @@ void GrlMultiMedia::setResize(QSize size)
 
 void GrlMultiMedia::setMetaData(MediaMetaData metaData)
 {
-	Q_UNUSED(metaData);
-//qDebug() << "title        :" << metaData.title;
-//qDebug() << "albumTitle   :" << metaData.albumTitle;
-//qDebug() << "albumArtist  :" << metaData.albumArtist;
-//qDebug() << "coverArtImage:" << metaData.coverArtImage;
-//qDebug() << "resolution   :" << metaData.resolution;
-//qDebug() << "aspectRatio  :" << metaData.aspectRatio;
+	QString tpl_info_media_new = tpl_info_media_old;
+		tpl_info_media_new.replace("{info_titulo}"      , metaData.title      );
+		tpl_info_media_new.replace("{info_album_title}" , metaData.albumTitle );
+		tpl_info_media_new.replace("{info_album_artist}", metaData.albumArtist);
+	mediaInfo->setHtml(tpl_info_media_new);
 }
 
 void GrlMultiMedia::setInfo(QString info)
@@ -659,8 +705,6 @@ void GrlMultiMedia::controlVisible(bool visible)
 
 void GrlMultiMedia::stateChanged()
 {
-//	btnPlayPausa->setEnabled(media->isPlayEnabled());
-
 	if (media->isPlayIcon())
 		btnPlayPausa->setIcon(playIcon);
 	else
@@ -682,7 +726,7 @@ void GrlMultiMedia::endOfMedia()
 void GrlMultiMedia::setMaxSlider(qint64 max)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-	slider->setMaximum(max);
+	slider->setMaximum(static_cast<int>(max));
 #else
 	Q_UNUSED(max);
 #endif
@@ -692,7 +736,7 @@ void GrlMultiMedia::setPosSlider(qint64 pos)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 	if (!slider->isSliderDown())
-		slider->setValue(pos);
+		slider->setValue(static_cast<int>(pos));
 #else
 	Q_UNUSED(pos);
 #endif

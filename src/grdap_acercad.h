@@ -1,9 +1,9 @@
 /*
  *
- * GR-lida by Monthy
+ * GR-dap by Monthy
  *
- * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
+ * This file is part of GR-dap is Dial-A-Protection
+ * Copyright (C) 2014-2016 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,51 +22,37 @@
  *
 **/
 
-#ifndef GRLIDA_INFO_H
-#define GRLIDA_INFO_H
+#ifndef GRDAP_ACERCAD_H
+#define GRDAP_ACERCAD_H
 
 #include <QDialog>
 
-#include "dbsql.h"
 #include "funciones.h"
 
 namespace Ui {
-	class frmInfo;
+	class frmGrDapAcercaD;
 }
 
-class frmInfo : public QDialog
+class frmGrDapAcercaD : public QDialog
 {
 	Q_OBJECT
 
 public:
-	frmInfo(dbSql *m_sql, stGrlCfg m_cfg, QWidget *parent = 0);
-	~frmInfo();
+	explicit frmGrDapAcercaD(QWidget *parent = 0);
+	~frmGrDapAcercaD();
 
 private:
-	Ui::frmInfo *ui;
+	Ui::frmGrDapAcercaD *ui;
 
 	Funciones *fGrl;
-	dbSql *sql;
-
-	stGrlDir grlDir;
-	stGrlCfg grlCfg;
-
-	int id_cat;
-	QHash<int, stGrlCats> categoria;
-	QTreeWidgetItem *twListInfo;
 
 	void cargarConfig();
 	void setTheme();
 
-	void cargarListaCategorias();
-	void menuNavAddCat(QString etiqueta, QString icono, QString sql_query = "", bool m_expanded = true, bool m_show_total = true);
-	void menuNavAddSubCat(QString etiqueta, QString icono, QString sql_query = "", QString sql_col = "");
-	void crearMenuNav();
-
 private slots:
-	void on_cbxCategorias_activated(int index);
-	void on_btnOk_clicked();
+	void on_btnClose_clicked();
+	void on_btnAcercaQT_clicked();
 
 };
 
-#endif // GRLIDA_INFO_H
+#endif // GRDAP_ACERCAD_H

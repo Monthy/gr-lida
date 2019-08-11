@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,8 +25,6 @@
 #ifndef GRLIDA_PICFLOW_H
 #define GRLIDA_PICFLOW_H
 
-#define PICTUREFLOW_QT4 1
-
 #include <QtCore>
 #include <QThread>
 #include <QImage>
@@ -45,29 +43,37 @@ class GrlPicFlow : public PictureFlow
 
 public:
 	GrlPicFlow(QWidget* parent = 0);
-	~GrlPicFlow();
+	virtual ~GrlPicFlow();
 
-	void setImagePaths(QStringList thumbs_list, QString dir, QString dir_theme);
-	void addImageSlide(QString thumbs, QString dir, QString dir_theme);
+	struct stListPicFlow {
+		QString path;
+		QString caption;
+	};
+
+	void setImagePaths(QList<stListPicFlow> thumbs_list, int index = 0);
+	void addImageSlide(QString thumb, QString caption);
+	void setImageSlide(int index, QString thumb, QString caption);
+	void clearImageSlide();
 	void setPicFlowType(QString picflowtype);
+	void removeSlide(int cover);
+	void resortCovers(QList<int> newOrder);
 
 protected:
-	void wheelEvent(QWheelEvent* event);
+	virtual void wheelEvent(QWheelEvent* event);
 	void mousePressEvent(QMouseEvent* event);
 	void mouseDoubleClickEvent(QMouseEvent* event);
 
 signals:
-	void selected(unsigned int centerIndex);
+	void selected(int centerIndex);
 	void isActive(bool checked);
 
 private:
-	QStringList imageFiles;
+	QList<stListPicFlow> imageFiles;
 	QVector<bool> imagesLoaded;
 	QVector<bool> imagesSetted;
 	uint numImagesLoaded, num_pic;
 	QTimer *updateTimer;
 	ImageLoader *worker;
-	QImage img;
 
 private slots:
 	void preload();
@@ -82,16 +88,18 @@ class ImageLoader : public QThread
 {
 public:
   ImageLoader();
-  ~ImageLoader();
+  ~ImageLoader() override;
   // returns FALSE if worker is still busy and can't take the task
   bool busy() const;
   void generate(int index, const QString& fileName, QSize size);
   void reset(){idx = -1;}
-  int index() const { return idx; }
+  int index() const {return idx;}
+  void lock();
+  void unlock();
   QImage result();
 
 protected:
-  void run();
+  void run() override;
 
 private:
   QMutex mutex;

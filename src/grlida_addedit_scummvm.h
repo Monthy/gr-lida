@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,29 +62,25 @@ private:
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
 	stGrlCats categoria;
-
 	stConfigScummVM DatosScummVM;
 
-	QString IdGame, IdSvm;
+	QStandardItemModel *svm_model;
+	QList<stGrlDatos> list_svm;
 
+	QString IdGame, IdSvm;
 	bool Editando;
 
 	void setTheme();
 
 private slots:
-	void on_twScummVM_itemClicked(QTreeWidgetItem *item, int column);
-	void on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+	void on_cbxScummVM_activated(int index);
 
-	void on_btnSvm_PathGame_clicked();
-	void on_btnSvm_PathGame_clear_clicked();
+	void on_btnSvm_Path_clicked();
+	void on_btnSvm_Path_clear_clicked();
 	void on_btnSvm_PathSave_clicked();
 	void on_btnSvm_PathSave_clear_clicked();
 	void on_btnSvm_PathExtra_clicked();
 	void on_btnSvm_PathExtra_clear_clicked();
-	void on_btnSvm_PathCapturas_clicked();
-	void on_btnSvm_PathCapturas_clear_clicked();
-	void on_btnSvm_PathSonido_clicked();
-	void on_btnSvm_PathSonido_clear_clicked();
 	void on_btnSvm_SoundFont_clicked();
 	void on_btnSvm_SoundFont_clear_clicked();
 

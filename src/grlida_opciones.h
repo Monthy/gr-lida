@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,6 +50,7 @@ public:
 
 protected:
 	void closeEvent(QCloseEvent *event);
+	bool eventFilter(QObject *obj, QEvent *event);
 
 private:
 	Ui::frmOpciones *ui;
@@ -61,11 +62,14 @@ private:
 	stGrlDir grlDir;
 	stGrlCfg grlCfg;
 
-	QCheckComboBox *cbxCat_EmuShow;
+	QCheckComboBox *cbxCatEmuShow;
 	QHash<QString, stGrlDatos> emu_list;
 
+	QRegExp regexp;
 	QTranslator translator;
-	QString idioma, IdiomaSelect;
+	QString idioma, IdiomaSelect, ThemeSelect;
+	QStringList list_key_sequence;
+//	QStringList list_pos;
 
 	void createWidgets();
 	void cargarConfig();
@@ -73,15 +77,18 @@ private:
 	void setTheme();
 	void cargarListaThemes();
 
+	void setColorBtn(QPushButton *btnColor, QColor color);
+	void enabledButton(QTreeWidget *twList, QPushButton *btn, QString texto, int col);
+
+	void addEditTwDOSBox(bool isAdd);
+	void addEditTwEmus(bool isAdd);
+	void addEditTwCategorias(bool isAdd);
 	void textEditedTxtDbxDato();
-	void enabledCatUpdate(QString texto, int col);
-	void addEditTwMnuNav(bool isNew);
-	void enabledMnuNavUpdate(QString texto, int col);
-	void addEditDatosTwLista(bool isNew);
-	void enabledDatosUpdate(QString texto, int col);
+	void addEditTwMnuNav(bool isAdd);
+	void addEditTwMnuShortCut(bool isAdd);
+	void addEditDatosTwLista(bool isAdd);
 	void guardarDatosTwLista();
-	void setColorBtn(QColor color);
-	void enabledEmuUpdate(QString texto, int col);
+
 
 private slots:
 	void on_btnOk_clicked();
@@ -93,21 +100,22 @@ private slots:
 	void on_btnDirBaseGames_clicked();
 	void on_btnDirBaseGames_clear_clicked();
 	void on_btnOpenUrl_clicked();
+	void on_txtFormatoFecha_textEdited(const QString &arg1);
 	void on_btnInfoFormatoFecha_clicked();
 // Emuladores
-	void on_chkScummVMDisp_toggled(bool checked);
+//	void on_chkScummVMDisp_toggled(bool checked);
 	void on_btnSvmPath_clicked();
 	void on_btnSvmPath_find_clicked();
 	void on_btnSvmPath_clear_clicked();
-	void on_chkDOSBoxDisp_toggled(bool checked);
+//	void on_chkDOSBoxDisp_toggled(bool checked);
 	void on_txtDbxTitulo_textEdited(const QString &arg1);
 	void on_chkDbxSVN_toggled(bool checked);
 	void on_cbxDbxVersion_activated(int index);
+//	void on_cbxDbxImg_activated(int index);
 	void on_btnDbxPath_clicked();
 	void on_btnDbxPath_find_clicked();
 	void on_btnDbxPath_clear_clicked();
 	void on_btnDbxDefault_clicked();
-	void on_btnDbxDefaultList_clicked();
 	void on_btnDbxNew_clicked();
 	void on_btnDbxAdd_clicked();
 	void on_btnDbxEdit_clicked();
@@ -116,7 +124,7 @@ private slots:
 	void on_btnDbxBajar_clicked();
 	void on_btnDbxDelete_clicked();
 	void on_btnDbxCancel_clicked();
-// Otros Emuladores
+// Otros emuladores
 	void on_txtEmuTitulo_textEdited(const QString &arg1);
 	void on_txtEmuDato_textEdited(const QString &arg1);
 	void on_txtEmuPath_textEdited(const QString &arg1);
@@ -131,11 +139,11 @@ private slots:
 	void on_twEmus_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twEmus_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 // Categoría
-	void on_txtCat_Nombre_editingFinished();
-	void on_txtCat_Nombre_textEdited(const QString &arg1);
-	void on_txtCat_Tabla_textEdited(const QString &arg1);
-	void on_cbxCat_Img_activated(int index);
-	void cbxCat_EmuShow_activated(int index);
+	void on_txtCatNombre_editingFinished();
+	void on_txtCatNombre_textEdited(const QString &arg1);
+	void on_txtCatTabla_textEdited(const QString &arg1);
+	void on_cbxCatImg_activated(int index);
+	void cbxCatEmuShow_activated(int index);
 	void on_btnCatAdd_clicked();
 	void on_btnCatUpdate_clicked();
 	void on_btnCatSubir_clicked();
@@ -145,14 +153,14 @@ private slots:
 	void on_twCategorias_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twCategorias_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 // MenuNav
-	void on_txtMnuNav_Nombre_textEdited(const QString &arg1);
-	void on_chkMnuNav_Expanded_clicked(bool checked);
-	void on_chkMnuNav_Show_clicked(bool checked);
-	void on_cbxMnuNav_ColName_activated(int index);
-	void on_cbxMnuNav_Img_activated(int index);
-	void on_cbxMnuNav_Archivo_activated(int index);
-	void on_cbxMnuNav_ColValue_editTextChanged(const QString &arg1);
-	void on_cbxMnuNav_SqlQuery_editTextChanged(const QString &arg1);
+	void on_txtMnuNavNombre_textEdited(const QString &arg1);
+	void on_chkMnuNavExpanded_clicked(bool checked);
+	void on_chkMnuNavShow_clicked(bool checked);
+	void on_cbxMnuNavColName_activated(int index);
+	void on_cbxMnuNavImg_activated(int index);
+	void on_cbxMnuNavArchivo_activated(int index);
+	void on_cbxMnuNavColValue_editTextChanged(const QString &arg1);
+	void on_cbxMnuNavSqlQuery_editTextChanged(const QString &arg1);
 	void on_btnMnuNavAdd_clicked();
 	void on_btnMnuNavUpdate_clicked();
 	void on_btnMnuNavSubir_clicked();
@@ -161,13 +169,30 @@ private slots:
 	void on_btnMnuNavDelete_clicked();
 	void on_twMnuNav_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twMnuNav_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+// MnuShortCut
+	void on_txtMnuShortCutTitulo_textEdited(const QString &arg1);
+	void on_btnShortcutKeySequenceReset_clicked();
+	void on_chkMnuShortCutShow_toggled(bool checked);
+//	void on_chkMnuShortCutSeparator_toggled(bool checked);
+	void on_cbxMnuShortCutImg_activated(int index);
+	void on_cbxMnuShortCutSqlQuery_editTextChanged(const QString &arg1);
+	void on_txtShortcutKeySequence_textChanged(const QString &arg1);
+	void on_btnMnuShortCutAdd_clicked();
+	void on_btnMnuShortCutAddSeparator_clicked();
+	void on_btnMnuShortCutUpdate_clicked();
+	void on_btnMnuShortCutSubir_clicked();
+	void on_btnMnuShortCutBajar_clicked();
+	void on_btnMnuShortCutDefecto_clicked();
+	void on_btnMnuShortCutDelete_clicked();
+	void on_twMnuShortCut_itemClicked(QTreeWidgetItem *item, int column);
+	void on_twMnuShortCut_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 // Datos
-	void on_cbxDat_Archivo_activated(int index);
-	void on_txtDat_Nombre_textEdited(const QString &arg1);
-	void on_cbxDat_ImgCmpt_activated(int index);
-	void on_txtDat_Dato_textEdited(const QString &arg1);
-	void on_cbxDat_Img_activated(int index);
-	void on_txtDat_Extra_textEdited(const QString &arg1);
+	void on_cbxDatArchivo_activated(int index);
+	void on_txtDatNombre_textEdited(const QString &arg1);
+	void on_cbxDatImgCmpt_activated(int index);
+	void on_txtDatDato_textEdited(const QString &arg1);
+	void on_cbxDatImg_activated(int index);
+	void on_txtDatExtra_textEdited(const QString &arg1);
 	void on_btnDatAdd_clicked();
 	void on_btnDatUpdate_clicked();
 	void on_btnDatSubir_clicked();
@@ -176,20 +201,60 @@ private slots:
 	void on_btnDatDelete_clicked();
 	void on_twDatos_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twDatos_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-// Base de Datos
+// Base de datos
 	void on_btnDirDB_clicked();
 	void on_btnDirDB_clear_clicked();
 // Style themes
 	void on_cbxStyle_activated(int index);
+	void on_cbxIconFav_activated(int index);
 	void on_chkStylePalette_clicked(bool checked);
 	void on_chkUsarTipoFuente_clicked(bool checked);
 	void on_cbxFuenteTipo_activated(const QString &arg1);
-	void on_sbxFontSize_valueChanged(const QString &arg1);
-	void on_cbxPicFlowType_activated(int index);
-	void on_btnPicFlowBgColor_clicked();
+	void on_cbxFontSize_valueChanged(const QString &arg1);
 	void on_btnEditTheme_clicked();
 	void on_twThemes_itemClicked(QTreeWidgetItem *item, int column);
 	void on_twThemes_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+// PictureFlow
+	void on_cbxPicFlowType_activated(int index);
+	void on_btnPicFlowBgColor_clicked();
+	void on_cbxPicFlowFontFamily_activated(const QString &arg1);
+	void on_spinBox_PicFlowFontSize_valueChanged(int arg1);
+	void on_chkPicFlowFontBold_toggled(bool checked);
+	void on_chkPicFlowFontItalic_toggled(bool checked);
+	void on_btnPicFlowFontColor_clicked();
+
+	void on_chkPicFlowShowTitle_toggled(bool checked);
+	void on_cbxPicFlowTitlePos_activated(int index);
+	void on_spinBox_PicFlowTitleMarginX_valueChanged(int arg1);
+	void on_spinBox_PicFlowTitleMarginY_valueChanged(int arg1);
+
+	void on_chkPicFlowShowTitleIcon_toggled(bool checked);
+	void on_cbxPicFlowTitleIconPos_activated(int index);
+	void on_spinBox_PicFlowTitleIconMarginX_valueChanged(int arg1);
+	void on_spinBox_PicFlowTitleIconMarginY_valueChanged(int arg1);
+
+	void on_chkPicFlowShowCaption_toggled(bool checked);
+	void on_cbxPicFlowCaptionPos_activated(int index);
+	void on_spinBox_PicFlowCaptionMarginX_valueChanged(int arg1);
+	void on_spinBox_PicFlowCaptionMarginY_valueChanged(int arg1);
+
+	void on_chkPicFlowShowNumber_toggled(bool checked);
+	void on_cbxPicFlowNumberPos_activated(int index);
+	void on_spinBox_PicFlowNumberMarginX_valueChanged(int arg1);
+	void on_spinBox_PicFlowNumberMarginY_valueChanged(int arg1);
+	void on_txtPicFlowNumberFormat_textChanged(const QString &arg1);
+
+	void on_chkPicFlowShowIconExtra_toggled(bool checked);
+	void on_cbxPicFlowIconExtraPos_activated(int index);
+	void on_spinBox_PicFlowIconExtraMarginX_valueChanged(int arg1);
+	void on_spinBox_PicFlowIconExtraMarginY_valueChanged(int arg1);
+	void on_cbxPicFlowIconExtraUse_activated(int index);
+	void on_cbxPicFlowIconExtraImage_activated(int index);
+
+	void on_spinBox_PicFlowMarginX_valueChanged(int arg1);
+	void on_spinBox_PicFlowMarginY_valueChanged(int arg1);
+
+	void on_chkPicFlowShowTriangle_toggled(bool checked);
 // --
 	void on_btnExtVideoAdd_clicked();
 	void on_btnExtVideoDelete_clicked();

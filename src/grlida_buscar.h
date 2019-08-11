@@ -22,51 +22,54 @@
  *
 **/
 
-#ifndef GRLIDA_INFO_H
-#define GRLIDA_INFO_H
+#ifndef GRLIDA_BUSCAR_H
+#define GRLIDA_BUSCAR_H
 
 #include <QDialog>
+#include <QMovie>
 
-#include "dbsql.h"
-#include "funciones.h"
+#include <QCloseEvent>
+
+#include "findfiles.h"
 
 namespace Ui {
-	class frmInfo;
+	class frmBuscar;
 }
 
-class frmInfo : public QDialog
+class frmBuscar : public QDialog
 {
 	Q_OBJECT
 
 public:
-	frmInfo(dbSql *m_sql, stGrlCfg m_cfg, QWidget *parent = 0);
-	~frmInfo();
+	explicit frmBuscar(QString f_text, QString f_ext, QString f_sel, QString m_theme, QWidget *parent = 0);
+	~frmBuscar();
+
+	QString getSelect(){return f_select;}
+
+protected:
+	void closeEvent(QCloseEvent *event);
 
 private:
-	Ui::frmInfo *ui;
+	Ui::frmBuscar *ui;
 
-	Funciones *fGrl;
-	dbSql *sql;
+	findFiles *buscar;
+	bool isPpause;
+	QString f_texto, f_select, f_theme, styleSheet;
+	QMovie *load_movie;
 
-	stGrlDir grlDir;
-	stGrlCfg grlCfg;
-
-	int id_cat;
-	QHash<int, stGrlCats> categoria;
-	QTreeWidgetItem *twListInfo;
-
-	void cargarConfig();
 	void setTheme();
-
-	void cargarListaCategorias();
-	void menuNavAddCat(QString etiqueta, QString icono, QString sql_query = "", bool m_expanded = true, bool m_show_total = true);
-	void menuNavAddSubCat(QString etiqueta, QString icono, QString sql_query = "", QString sql_col = "");
-	void crearMenuNav();
+	void setStatusBotons(bool estado);
 
 private slots:
-	void on_cbxCategorias_activated(int index);
-	void on_btnOk_clicked();
+	void on_btn_buscar_clicked();
+	void on_btn_pausa_clicked();
+	void on_btn_parar_clicked();
+	void on_btn_aceptar_clicked();
+	void on_btn_cancelar_clicked();
+//--
+	void finished();
+	void fileFind(QString filename);
 
 };
 
-#endif // GRLIDA_INFO_H
+#endif // GRLIDA_BUSCAR_H

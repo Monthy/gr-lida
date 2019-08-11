@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,9 +24,11 @@
 
 #include <QDesktopWidget>
 #include <QStyleFactory>
-#include <QInputDialog>
+#include <QTextStream>
 
 #include "grlida_config_inicial.h"
+#include "grlida_buscar.h"
+
 #include "ui_config_inicial.h"
 
 frmConfigInicial::frmConfigInicial(stGrlCfg m_cfg, QWidget *parent) :
@@ -38,16 +40,14 @@ frmConfigInicial::frmConfigInicial(stGrlCfg m_cfg, QWidget *parent) :
 
 	grlCfg = m_cfg;
 
-	grlDir.Home    = fGrl->GRlidaHomePath();
+	grlDir.Home    = fGrl->dirApp();
+	grlDir.Datos   = grlDir.Home +"datos/";
 	grlDir.Idiomas = grlDir.Home +"idiomas/";
-
-	fGrl->setTheme(grlCfg.NameDirTheme);
-	fGrl->setIdioma(grlCfg.IdiomaSelect);
 
 	cargarConfig();
 	setTheme();
 
-// centra la aplicacion en el escritorio
+// Centra la aplicacion en el escritorio
 	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
 }
 
@@ -59,20 +59,36 @@ frmConfigInicial::~frmConfigInicial()
 
 void frmConfigInicial::cargarConfig()
 {
-	fGrl->cargarIdiomasComboBox(ui->cbxIdioma, ":/idiomas/");
-	fGrl->cargarIdiomasComboBox(ui->cbxIdioma, grlDir.Idiomas, false);
+	fGrl->cargarIdiomasComboBox(ui->cbxIdioma, ":/idiomas/"  , "img16/lng/");
+	fGrl->cargarIdiomasComboBox(ui->cbxIdioma, grlDir.Idiomas, "img16/lng/", "", false);
+	int idx = ui->cbxIdioma->findData(grlCfg.IdiomaSelect +".qm", Qt::UserRole, Qt::MatchContains);
+	ui->cbxIdioma->setCurrentIndex(idx);
+	emit on_cbxIdioma_activated(idx);
 
-	int idx = ui->cbxIdioma->findData( grlCfg.IdiomaSelect +".qm", Qt::UserRole, Qt::MatchEndsWith);
-	ui->cbxIdioma->setCurrentIndex( idx );
-	emit on_cbxIdioma_activated( idx );
+	id_key_dbx = -1;
+	new_dbx_default = false;
 
-	ui->chkDOSBoxDisp->setChecked( grlCfg.DOSBoxDisp );
-	ui->txtDbxPath->setText( grlCfg.DirDOSBox );
-	ui->chkScummVMDisp->setChecked( grlCfg.ScummVMDisp );
-	ui->txtSvmPath->setText( grlCfg.DirScummVM );
+	dbx_list.clear();
+	dbx_list = fGrl->cargaListaDatos(grlDir.Datos +"dbx_list.txt", 6, "|");
+	const int listSize = dbx_list.size();
+	if (listSize > 0)
+	{
+		id_key_dbx = 0;
+		for (int i = 0; i < listSize; ++i)
+		{
+			if (grlCfg.DOSBoxDefault == dbx_list.at(i).key)
+				id_key_dbx = i;
+		}
+		ui->txtDbxPath->setText(dbx_list.at(id_key_dbx).extra);
+	} else
+		new_dbx_default = true;
 
-	ui->chkVDMSoundDisp->setChecked( grlCfg.VDMSoundDisp );
-	ui->chkShowNext->setChecked( grlCfg.Primeravez );
+	ui->chkDOSBoxDisp->setChecked(grlCfg.DOSBoxDisp);
+	ui->chkScummVMDisp->setChecked(grlCfg.ScummVMDisp);
+	ui->txtSvmPath->setText(grlCfg.DirScummVM);
+
+	ui->chkVDMSoundDisp->setChecked(grlCfg.VDMSoundDisp);
+	ui->chkShowNext->setChecked(grlCfg.Primeravez);
 
 	#ifdef Q_OS_WIN32
 		ui->chkVDMSoundDisp->setEnabled(true);
@@ -83,22 +99,21 @@ void frmConfigInicial::cargarConfig()
 
 void frmConfigInicial::setTheme()
 {
-	ui->btnOk->setIcon( QIcon(fGrl->Theme() +"img16/aplicar.png") );
-	ui->btnDbxPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnDbxPath_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
-	ui->btnDbxPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnSvmPath->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnSvmPath_find->setIcon( QIcon(fGrl->Theme() +"img16/zoom.png") );
-	ui->btnSvmPath_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
+	setWindowIcon(QIcon(":/img32/gr-lida.png"));
 
-	if( grlCfg.font_usar )
-		this->setStyleSheet(fGrl->myStyleSheet() +"*{font-family:\""+ grlCfg.font_family +"\";font-size:"+ grlCfg.font_size +"pt;}");
-	else
-		this->setStyleSheet(fGrl->myStyleSheet());
+	ui->btnOk->setIcon(QIcon(fGrl->theme() +"img16/aplicar.png"));
+	ui->btnDbxPath->setIcon(QIcon(fGrl->theme() +"img16/carpeta_1.png"));
+	ui->btnDbxPath_find->setIcon(QIcon(fGrl->theme() +"img16/zoom.png"));
+	ui->btnDbxPath_clear->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
+	ui->btnSvmPath->setIcon(QIcon(fGrl->theme() +"img16/carpeta_1.png"));
+	ui->btnSvmPath_find->setIcon(QIcon(fGrl->theme() +"img16/zoom.png"));
+	ui->btnSvmPath_clear->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
 
+	QString font_usar = grlCfg.font_usar ? "*{font-family:\""+ grlCfg.font_family +"\";font-size:"+ grlCfg.font_size +"pt;}" : "";
+	this->setStyleSheet(fGrl->myStyleSheet("StyleSheet.qss") + font_usar);
 	this->setStyle(QStyleFactory::create(grlCfg.Style));
 
-	if( grlCfg.StylePalette )
+	if (grlCfg.StylePalette)
 		this->setPalette(QApplication::style()->standardPalette());
 	else
 		this->setPalette(QApplication::palette());
@@ -106,10 +121,10 @@ void frmConfigInicial::setTheme()
 
 void frmConfigInicial::on_cbxIdioma_activated(int index)
 {
-	if( index > -1 )
+	if (index > -1)
 	{
 		QString idioma = ui->cbxIdioma->itemData(index).toString();
-		translator.load( idioma );
+		translator.load(idioma);
 
 		idioma.remove(grlDir.Idiomas +"gr-lida_");
 		idioma.remove(":/idiomas/gr-lida_");
@@ -129,40 +144,21 @@ void frmConfigInicial::on_cbxIdioma_activated(int index)
 
 void frmConfigInicial::on_btnDbxPath_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del DOSBox"), grlCfg.Dbx_path, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivo") +" (*)");
+	stFileInfo f_info = fGrl->getInfoFile(fGrl->ventanaAbrirArchivos(this, tr("Selecciona el ejecutable del DOSBox"), grlCfg.Dbx_path, "", "DOSBox (dosbox.exe dosbox);;"+ tr("Todos los archivos") +" (*)"));
 
-	if( !archivo.isEmpty() )
+	if (f_info.Exists)
 	{
-		stFileInfo f_info = fGrl->getInfoFile( archivo );
-		if( f_info.Exists )
-		{
-			ui->txtDbxPath->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.Dbx_path = fGrl->setDirRelative(f_info.Path);
-		}
+		grlCfg.Dbx_path = fGrl->setDirRelative(f_info.Path);
+		ui->txtDbxPath->setText(fGrl->setDirRelative(f_info.FilePath));
 	}
-
 }
 
 void frmConfigInicial::on_btnDbxPath_find_clicked()
 {
-#ifdef Q_OS_WIN32
-	QStringList lista_drivers;
-	QFileInfoList list_drives = QDir::drives();
-	lista_drivers.clear();
-	for (int i = 0; i < list_drives.size(); ++i)
-		lista_drivers.insert(i, QDir::toNativeSeparators(list_drives.at(i).absoluteFilePath()));
-
-	bool ok = false;
-	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" DOSBox", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
-	if( ok && !letra_drive.isEmpty() )
-		ui->txtDbxPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "dosbox.exe") ) );
-#else
-	#ifdef Q_OS_MAC
-		ui->txtDbxPath->setText( fGrl->getFindFile("/", "dosbox") );
-	#else
-		ui->txtDbxPath->setText( fGrl->getFindFile("/usr/bin/", "dosbox") );
-	#endif
-#endif
+	frmBuscar *buscar = new frmBuscar("DOSBox", ".exe", ui->txtDbxPath->text(), fGrl->theme(), this);
+	if (buscar->exec() == QDialog::Accepted)
+		ui->txtDbxPath->setText(fGrl->setDirRelative(buscar->getSelect()));
+	delete buscar;
 }
 
 void frmConfigInicial::on_btnDbxPath_clear_clicked()
@@ -172,39 +168,21 @@ void frmConfigInicial::on_btnDbxPath_clear_clicked()
 
 void frmConfigInicial::on_btnSvmPath_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona el ejecutable del ScummVM"), grlCfg.Svm_path, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivo") +" (*)");
+	stFileInfo f_info = fGrl->getInfoFile(fGrl->ventanaAbrirArchivos(this, tr("Selecciona el ejecutable del ScummVM"), grlCfg.Svm_path, "", "ScummVM (scummvm.exe scummvm);;"+ tr("Todos los archivos") +" (*)"));
 
-	if( !archivo.isEmpty() )
+	if (f_info.Exists)
 	{
-		stFileInfo f_info = fGrl->getInfoFile( archivo );
-		if( f_info.Exists )
-		{
-			ui->txtSvmPath->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.Svm_path = fGrl->setDirRelative(f_info.Path);
-		}
+		grlCfg.Svm_path = fGrl->setDirRelative(f_info.Path);
+		ui->txtSvmPath->setText(fGrl->setDirRelative(f_info.FilePath));
 	}
 }
 
 void frmConfigInicial::on_btnSvmPath_find_clicked()
 {
-#ifdef Q_OS_WIN32
-	QStringList lista_drivers;
-	QFileInfoList list_drives = QDir::drives();
-	lista_drivers.clear();
-	for (int i = 0; i < list_drives.size(); ++i)
-		lista_drivers.insert(i, QDir::toNativeSeparators(list_drives.at(i).absoluteFilePath()));
-
-	bool ok = false;
-	QString letra_drive = QInputDialog::getItem(this, tr("Buscar") +" ScummVM", tr("Selecciona la letra de la unidad:"), lista_drivers, 0, false, &ok);
-	if( ok && !letra_drive.isEmpty() )
-		ui->txtSvmPath->setText( fGrl->setDirRelative( fGrl->getFindFile(letra_drive, "scummvm.exe") ) );
-#else
-	#ifdef Q_OS_MAC
-		ui->txtSvmPath->setText( fGrl->getFindFile("/", "scummvm") );
-	#else
-		ui->txtSvmPath->setText( fGrl->getFindFile("/usr/games/", "scummvm") );
-	#endif
-#endif
+	frmBuscar *buscar = new frmBuscar("ScummVM", ".exe", ui->txtSvmPath->text(), fGrl->theme(), this);
+	if (buscar->exec() == QDialog::Accepted)
+		ui->txtSvmPath->setText(fGrl->setDirRelative(buscar->getSelect()));
+	delete buscar;
 }
 
 void frmConfigInicial::on_btnSvmPath_clear_clicked()
@@ -214,8 +192,40 @@ void frmConfigInicial::on_btnSvmPath_clear_clicked()
 
 void frmConfigInicial::on_btnOk_clicked()
 {
+	if (new_dbx_default)
+	{
+		stGrlDatos dbx_datos;
+		dbx_datos.titulo  = "DOSBox";
+		dbx_datos.icono   = "cat/dosbox.png";
+		dbx_datos.extra   = ui->txtDbxPath->text();
+		dbx_datos.issvn   = "no";
+		dbx_datos.version = "0.74-2";
+		dbx_datos.key     = "dosbox";
+
+		dbx_list << dbx_datos;
+	} else
+		dbx_list[id_key_dbx].extra = ui->txtDbxPath->text();
+
+	QFile file_out;
+	file_out.setFileName(grlDir.Datos +"dbx_list.txt");
+	fGrl->comprobarDirectorio(grlDir.Datos);
+
+	if (file_out.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		QTextStream out(&file_out);
+		out.setCodec("UTF-8");
+		const int listSize = dbx_list.size();
+		if (listSize > 0)
+		{
+			id_key_dbx = 0;
+			for (int i = 0; i < listSize; ++i)
+				out << dbx_list.at(i).titulo << "|" << dbx_list.at(i).key << "|" << dbx_list.at(i).extra << "|" << dbx_list.at(i).icono << "|" << dbx_list.at(i).version << "|" << dbx_list.at(i).issvn << endl;
+		}
+		out.flush();
+	}
+	file_out.close();
+
 	grlCfg.DOSBoxDisp   = ui->chkDOSBoxDisp->isChecked();
-	grlCfg.DirDOSBox    = ui->txtDbxPath->text();
 	grlCfg.ScummVMDisp  = ui->chkScummVMDisp->isChecked();
 	grlCfg.DirScummVM   = ui->txtSvmPath->text();
 	grlCfg.VDMSoundDisp = ui->chkVDMSoundDisp->isChecked();

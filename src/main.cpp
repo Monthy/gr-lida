@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,9 +38,9 @@ int main(int argc, char *argv[])
 	app.setApplicationName("GR-lida");
 
 	stGrlDir grlDir;
-	grlDir.Home = fGrl.GRlidaHomePath();
+	grlDir.Home = fGrl.homePath();
 
-	QSplashScreen splash( QPixmap(":/images/splash.png") );
+	QSplashScreen splash(QPixmap(":/images/splash.png"));
 	splash.show();
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Cargando configuración..."), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
@@ -48,103 +48,80 @@ int main(int argc, char *argv[])
 
 	stGrlCfg grlCfg = fGrl.cargarGRLConfig(grlDir.Home +"GR-lida.conf");
 
-	if( grlCfg.Primeravez )
+	if (grlCfg.Primeravez)
 	{
-		frmConfigInicial *ConfigInicial = new frmConfigInicial(grlCfg);
-		if( ConfigInicial->exec() == QDialog::Accepted )
+		frmConfigInicial *configInicial = new frmConfigInicial(grlCfg);
+		if (configInicial->exec() == QDialog::Accepted)
 		{
-			grlCfg = ConfigInicial->getGrlCfg();
+			grlCfg = configInicial->getGrlCfg();
 			fGrl.guardarGRLConfig(grlDir.Home +"GR-lida.conf", grlCfg);
 		}
-		delete ConfigInicial;
+		delete configInicial;
 	}
 
 	fGrl.setIdioma(grlCfg.IdiomaSelect);
-	if( !translator.load(grlDir.Home +"idiomas/gr-lida_"+ grlCfg.IdiomaSelect +".qm") )
-		translator.load(":/idiomas/gr-lida_"+ fGrl.Idioma() +".qm");
+	if (!translator.load(grlDir.Home +"idiomas/gr-lida_"+ grlCfg.IdiomaSelect +".qm"))
+		translator.load(":/idiomas/gr-lida_"+ fGrl.idioma() +".qm");
 	app.installTranslator(&translator);
 
 // Crear directorio de la aplicacion si no existe
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta principal"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-	fGrl.comprobarDirectorio( grlDir.Home );
+	fGrl.comprobarDirectorio(grlDir.Home);
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta idiomas"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio idiomas si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"idiomas");
+	fGrl.comprobarDirectorio(grlDir.Home +"idiomas/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta iconos"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-// Crear directorio Themes si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"iconos");
+// Crear directorio themes si no existe
+	fGrl.comprobarDirectorio(grlDir.Home +"iconos/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta themes"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio iconos si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"themes");
+	fGrl.comprobarDirectorio(grlDir.Home +"themes/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta smiles"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio smiles si no existe
-	fGrl.comprobarDirectorio( grlDir.Home +"smiles" );
+	fGrl.comprobarDirectorio(grlDir.Home +"smiles/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta datos"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio datos si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"datos");
+	fGrl.comprobarDirectorio(grlDir.Home +"datos/");
+
+	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta datosdb"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio datosdb si no existe
+	fGrl.comprobarDirectorio(grlDir.Home +"datosdb/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta scripts"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio scripts si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"scripts");
+	fGrl.comprobarDirectorio(grlDir.Home +"scripts/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta templates"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
 // Crear directorio templates si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"templates");
-
-	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta configuración del DOSBox"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-	app.processEvents();
-// Crear directorio confDbx si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"confdbx");
-
-//	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta roms"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-//	app.processEvents();
-//	fGrl.comprobarDirectorio(  );
+	fGrl.comprobarDirectorio(grlDir.Home +"templates/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta DosGames"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-	fGrl.comprobarDirectorio(grlDir.Home +"DosGames");
-
-#ifdef Q_OS_WIN32
-	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta configuración del VDMSound"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-	app.processEvents();
-// Crear directorio confVdms si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"confvdms");
-#endif
-
-	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta thumbs"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-	app.processEvents();
-// Crear directorio Thumbs si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"thumbs");
-
-	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta covers"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-	app.processEvents();
-// Crear directorio Covers si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"covers");
-
-	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta capturas"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
-	app.processEvents();
-// Crear directorio Capturas si no existe
-	fGrl.comprobarDirectorio(grlDir.Home +"capturas");
+	fGrl.comprobarDirectorio(grlDir.Home +"DosGames/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta temp"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-// Crear directorio Temp para las descargas temporales de imagenes, archivos
-	fGrl.comprobarDirectorio(grlDir.Home +"temp");
 
-// Crea una copia de seguridad de la Base de Datos
+// Crear directorio temp para las descargas temporales de imagenes, archivos
+	fGrl.comprobarDirectorio(grlDir.Home +"temp/");
+	fGrl.comprobarDirectorio(grlDir.Home +"temp/imagenes/");
+	fGrl.comprobarDirectorio(grlDir.Home +"temp/imagenes/small/");
+
+// Crea una copia de seguridad de la base de datos
 	fGrl.crearCopiaSeguridad_DB(grlDir.Home, grlCfg.Version);
 
 	GrLida w;

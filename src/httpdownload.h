@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,19 +25,28 @@
 #ifndef HTTPDOWNLOAD_H
 #define HTTPDOWNLOAD_H
 
-#include <QtGui>
+#include <QtDebug>
+
 #include <QWidget>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QUrl>
-#include <QProgressDialog>
+#include <QProgressBar>
 
 QT_BEGIN_NAMESPACE
 class QFile;
+class QLabel;
 class QSslError;
 class QAuthenticator;
 class QNetworkReply;
 QT_END_NAMESPACE
+
+struct stDownItem {
+	QString urlfile;
+	QString fileName;
+	QString tipo;
+	QString contentPost;
+};
 
 class HttpDownload : public QWidget
 {
@@ -53,17 +62,21 @@ public:
 		d_POST = 1
 	};
 
-	void setHttpProxy(int typeProxy, const QString host, int port, const QString username = "", const QString password = "");
+	void setHttpProxy(int typeProxy, const QString host, quint16 port, const QString username = "", const QString password = "");
 	void setHttpWindowTitle(QString titulo = "GR-lida - HttpDownload"){ m_httpwindowtitle = titulo; }
+	void setConfirmRedirect(bool confirmRedirect) { isConfirmRedirect = confirmRedirect; }
 
-	void downloadFile(QString urlfile, QString fileName, QString tipo = "GET", QString contentPost = "");
-	void startRequest(QUrl m_url, TipoDown tipo = d_GET, QString contentPost = "");
+	void downloadMultiFiles(QList<stDownItem> listDown);
+	void downloadFile(QString urlfile, QString fileName, QString tipo = "GET", QString contentPost = "", bool multiFiles = false);
 
-	QString getStatusLabel(){ return m_statuslabel; }
 	bool getStatusBtnDownload(){ return m_downloadButton; }
+	void defaultInfo();
+	void setStatusLabel(QString text);
+
+	void cfgProgressBar(int min, int max);
+	void setProgressBarValue(int value, QString text);
 
 signals:
-	void statusLabel(QString str);
 	void statusBtnEnabled(bool mbool);
 	void statusFinished();
 
@@ -73,22 +86,28 @@ private:
 	QNetworkReply *reply;
 	QNetworkProxy proxy;
 	QSslConfiguration sslConfiguration;
-	QProgressDialog *progressDialog;
+	QList<stDownItem> listDownload;
+	QProgressBar *progressBar;
 	QFile *file;
+	QLabel *statusLabel;
+	QLabel *progressBarLabel;
+	int currentDownload;
+	bool isMultiFiles, isConfirmRedirect;
 
 	QString m_httpwindowtitle;
-	QString m_statuslabel;
-
-	int httpGetId;
 	bool m_downloadButton, httpRequestAborted, isProxyEnable;
 
-	void setStatusLabel(QString str);
-	void setStatusBtnDownload(bool mbool);
+	void startRequest(const QUrl &m_url, TipoDown tipo = d_GET, QString contentPost = "");
+	QFile *openFileForWrite(const QString &fileName);
+	QString covertBytes(float size);
 
 public slots:
 	void cancelDownload();
 
 private slots:
+	void setStatusBtnDownload(bool mbool);
+	void nextDownloadFile();
+
 	void httpFinished();
 	void httpReadyRead();
 	void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);

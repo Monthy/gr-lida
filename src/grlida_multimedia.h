@@ -1,6 +1,7 @@
 #ifndef GRLIDA_MULTIMEDIA_H
 #define GRLIDA_MULTIMEDIA_H
 
+#include <QDialog>
 #include <QWidget>
 #include <QFileInfo>
 #include <QLabel>
@@ -17,22 +18,22 @@
 #endif
 
 #include "g_structs.h"
+#include "animatedtextbrowser.h"
 
 class GrlMultiMedia : public QWidget
 {
 	Q_OBJECT
 
 public:
-	GrlMultiMedia(QString dir_game, QString dir_theme, stGrlCfg m_cfg, QWidget *parent = 0);
+	GrlMultiMedia(QString dir_game, QString dir_theme, stGrlCfg m_cfg, bool onlySound, bool is_main, QWidget *parent = 0);
 	~GrlMultiMedia();
 
 	void setDirGame(QString dir_game) { stDirGame = dir_game; }
 	void setTheme(QString dir_theme);
+	void setTemplate(QString tpl);
 	void setGrlCfg(stGrlCfg m_cfg);
 	void setIconSize(int size);
 	void setOnlySound(bool checked);
-	void setShowListaMedia(bool checked);
-	void setPlaylistVisible(bool checked);
 	void setBtnPlaylistVisible(bool checked);
 
 	void clearPlaylist();
@@ -46,30 +47,36 @@ public:
 	QString getFileName();
 	int count() { return lwMedia->count(); }
 	int currentRow() { return lwMedia->currentRow(); }
+	stGrlCfg getGrlCfg(){ return grlCfg; }
 
 protected:
 	void closeEvent(QCloseEvent *event);
 	void keyPressEvent(QKeyEvent *event);
 	bool eventFilter(QObject *object, QEvent *event);
 
+signals:
+	void changeConfig();
+
 public slots:
 	void playPausa();
 	void setVolume(int volume); // 0 - 100
 	void setMuted(bool muted);
+	void setPlaylistVisible(bool checked);
+	void setMediaInfoVisible(bool checked);
 
 private:
 	GrlMedia *media;
-	QWidget  *w_controls;
+	QWidget  *w_media, *w_controls;
 	stGrlCfg grlCfg;
 
 	QIcon playIcon, pauseIcon;
-	QString stDirGame, stTheme, sizeIcon;
+	QString stDirGame, stTheme, sizeIcon, tpl_info_media_old;
 	QStringList listMedia, audio_ext, video_ext;
-	bool m_fullScreen, m_repetir, m_onlySound;
+	bool m_fullScreen, m_repetir, m_onlySound, isMain;
 	int total_media, current_media, select_media;
 
+	AnimatedTextBrowser *mediaInfo;
 	QLabel *lb_status, *lb_tiempo, *lb_buffer;
-	QToolButton *btnClose;
 	QToolButton *btnPlayPausa;
 	QToolButton *btnAnterior;
 	QToolButton *btnStop;
@@ -79,6 +86,7 @@ private:
 	QToolButton *btnListaMedia;
 	QToolButton *btnMute;
 	QToolButton *btnFullScreen;
+	QToolButton *btnMediaInfo;
 	QListWidget *lwMedia;
 	QSplitter   *splitter;
 

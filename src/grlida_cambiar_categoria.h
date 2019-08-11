@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
  *
 **/
 
-#ifndef GRLIDA_EXPORTARJUEGO_H
-#define GRLIDA_EXPORTARJUEGO_H
+#ifndef GRLIDA_CAMBIAR_CATEGORIA_H
+#define GRLIDA_CAMBIAR_CATEGORIA_H
 
 #include <QDialog>
 
@@ -31,59 +31,42 @@
 #include "dbsql.h"
 
 namespace Ui {
-	class frmExportarJuego;
+	class frmCambiarCategoria;
 }
 
-class frmExportarJuego : public QDialog
+class frmCambiarCategoria : public QDialog
 {
 	Q_OBJECT
 
 public:
-	frmExportarJuego(dbSql *m_sql, stGrlCfg m_cfg, int m_id_cat, QWidget *parent = 0);
-	~frmExportarJuego();
+	explicit frmCambiarCategoria(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QString id_game, QWidget *parent = 0);
+	~frmCambiarCategoria();
 
-	stGrlCfg getGrlCfg(){return grlCfg;}
+	int getNuevaCategoria(){return id_cat;}
 
 private:
-	Ui::frmExportarJuego *ui;
+	Ui::frmCambiarCategoria *ui;
 
 	Funciones *fGrl;
 	dbSql *sql;
 
-	stGrlDir grlDir;
 	stGrlCfg grlCfg;
-
+	stGrlCats categoria;
 	stDatosJuego DatosJuego;
-	stConfigDOSBox DatosDosBox;
-	stConfigScummVM DatosScummVM;
-	stConfigVDMSound DatosVDMSound;
 
-	unsigned int id_cat;
-	QHash<int, stGrlCats> categoria;
-	QHash<QString, stGrlDatos> emu_list;
-	QString tipo_export;
-
-	QTreeWidget *twMontajes;
+	int id_cat;
+	QString stDirApp, IdGame, IdCat;
+	QHash<int, stGrlCats> categorias;
 
 	void cargarConfig();
 	void setTheme();
-
-	void cargarListaCategorias();
-	void cargarListaJuegos(QString sql_where = "");
-	void cargarDatosExportar(QString IdGame);
+	QStringList actualizaIds(QString tabla, QString cat_id_new, QString game_id_new);
 
 private slots:
-	void on_btnOk_clicked();
-	void on_btnCancelar_clicked();
-
-	void on_cbxTipoEmu_activated(int index);
 	void on_cbxCategorias_activated(int index);
-	void on_btnCheckedAll_clicked();
-	void on_btnUnCheckedAll_clicked();
-	void on_cbxExpotarComo_activated(int index);
-	void on_btnDirExportPath_clicked();
-	void on_btnDirExportPath_clear_clicked();
+	void on_btnOk_clicked();
+	void on_btnCancel_clicked();
 
 };
 
-#endif // GRLIDA_EXPORTARJUEGO_H
+#endif // GRLIDA_CAMBIAR_CATEGORIA_H

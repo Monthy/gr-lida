@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ frmAddEditScummVM::frmAddEditScummVM(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_c
 	IdGame    = id_game;
 	Editando  = m_editando;
 
-	grlDir.Home  = fGrl->GRlidaHomePath();
+	grlDir.Home  = fGrl->homePath();
 	grlDir.Datos = grlDir.Home +"datos/";
 }
 
@@ -53,114 +53,169 @@ frmAddEditScummVM::~frmAddEditScummVM()
 
 void frmAddEditScummVM::cargarConfig()
 {
-	ui->twScummVM->header()->setStretchLastSection(false);
-#if QT_VERSION >= 0x050000
-	ui->twScummVM->header()->setSectionsMovable(false);
-	ui->twScummVM->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-	ui->twScummVM->header()->setSectionResizeMode(1, QHeaderView::Fixed);
-	ui->twScummVM->header()->setSectionResizeMode(2, QHeaderView::Fixed);
-#else
-	ui->twScummVM->header()->setMovable(false);
-	ui->twScummVM->header()->setResizeMode(0, QHeaderView::Stretch);
-	ui->twScummVM->header()->setResizeMode(1, QHeaderView::Fixed);
-	ui->twScummVM->header()->setResizeMode(2, QHeaderView::Fixed);
-#endif
-	ui->twScummVM->setColumnWidth(0, 30);
-	ui->twScummVM->setColumnWidth(2, 80);
+	svm_model = new QStandardItemModel(ui->cbxScummVM);
+	QTreeView *tvScummVM = new QTreeView(ui->cbxScummVM);
+	tvScummVM->setFocusPolicy(Qt::ClickFocus);
+	tvScummVM->setProperty("showDropIndicator", QVariant(false));
+	tvScummVM->setIconSize(QSize(27, 24));
+	tvScummVM->setTextElideMode(Qt::ElideNone);
+	tvScummVM->setRootIsDecorated(false);
+	tvScummVM->setUniformRowHeights(true);
+	tvScummVM->setItemsExpandable(false);
+	tvScummVM->setAllColumnsShowFocus(true);
 
-	fGrl->cargarDatosTwLista(ui->twScummVM, grlDir.Datos +"svm_lista.txt", TwListSvm, "|");
+	ui->cbxScummVM->setView(tvScummVM);
+	ui->cbxScummVM->setModel(svm_model);
+
+	QFont m_font;
+	m_font.setBold(true);
+
+	svm_model->clear();
+	list_svm = fGrl->cargaListaDatos(grlDir.Datos +"svm_lista.txt", 4, "|");
+	const int listSvmSize = list_svm.size();
+	for (int row = 0; row < listSvmSize; ++row)
+	{
+		for (int col = 0; col < 3; ++col)
+		{
+			QStandardItem *item_svm = new QStandardItem();
+			switch (col)
+			{
+				case 0:
+				{
+					if (!QFile::exists(fGrl->theme() +"img_svm/"+ list_svm.at(row).icono))
+						item_svm->setIcon(QIcon(fGrl->theme() +"img_svm/sinimg.png"));
+					else
+						item_svm->setIcon(QIcon(fGrl->theme() +"img_svm/"+ list_svm.at(row).icono));
+					if (list_svm.at(row).key.isEmpty())
+						item_svm->setFont(m_font);
+					item_svm->setText(list_svm.at(row).titulo);
+				}
+				break;
+				case 1: item_svm->setText(list_svm.at(row).key); break;
+				case 2:
+				{
+					if (list_svm.at(row).extra.isEmpty())
+						item_svm->setIcon(QIcon(fGrl->theme() +"img_svm/level/sinimg.png"));
+					else
+						item_svm->setIcon(QIcon(fGrl->theme() +"img_svm/level/"+ list_svm.at(row).extra +".png"));
+				}
+				break;
+			}
+			svm_model->setItem(row, col, item_svm);
+		}
+	}
+
+	tvScummVM->header()->setStretchLastSection(false);
+	tvScummVM->header()->hide();
+#if QT_VERSION >= 0x050000
+	tvScummVM->header()->setSectionsMovable(false);
+	tvScummVM->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+	tvScummVM->header()->setSectionResizeMode(1, QHeaderView::Fixed);
+	tvScummVM->header()->setSectionResizeMode(2, QHeaderView::Fixed);
+#else
+	tvScummVM->header()->setMovable(false);
+	tvScummVM->header()->setResizeMode(0, QHeaderView::Stretch);
+	tvScummVM->header()->setResizeMode(1, QHeaderView::Fixed);
+	tvScummVM->header()->setResizeMode(2, QHeaderView::Fixed);
+#endif
+	tvScummVM->setColumnWidth(1, 80);
+	tvScummVM->setColumnWidth(2, 30);
 
 	QRegExp regexp;
 	regexp.setPatternSyntax(QRegExp::RegExp);
 	regexp.setPattern("[A-Za-z-0-9]+");
 
-	QValidator *validarTexto = new QRegExpValidator( regexp, this );
-	ui->txtSvm_game_label->setValidator( validarTexto );
+	QValidator *validarTexto = new QRegExpValidator(regexp, this);
+	ui->txtSvm_game_label->setValidator(validarTexto);
 
-	fGrl->cargarDatosComboBox(ui->cbxSvm_language    , grlDir.Datos + fGrl->Idioma() +"/svm_idioma.txt", fGrl->Theme() +"img16/lng/", "es" , 3, "|", true, true);
-	fGrl->cargarDatosComboBox(ui->cbxSvm_platform    , grlDir.Datos +"svm_platform.txt"                , fGrl->Theme() +"img16/"  , "pc"   , 3, "|");
-	fGrl->cargarDatosComboBox(ui->cbxSvm_gfx_mode    , grlDir.Datos +"svm_gfxmode.txt"                 , fGrl->Theme() +"img16/"  , "2x"   , 3, "|");
-	fGrl->cargarDatosComboBox(ui->cbxSvm_render_mode , grlDir.Datos +"svm_render_mode.txt"             , fGrl->Theme() +"img16/"  , ""     , 3, "|");
-	fGrl->cargarDatosComboBox(ui->cbxSvm_music_driver, grlDir.Datos +"svm_music_driver.txt"            , fGrl->Theme() +"img16/"  , "adlib", 3, "|");
+	fGrl->cargarDatosComboBox(ui->cbxSvm_language    , grlDir.Datos + fGrl->idioma() +"/svm_idioma.txt", "img16/", "es"   , 3, "|", true, true);
+	fGrl->cargarDatosComboBox(ui->cbxSvm_platform    , grlDir.Datos +"svm_platform.txt"                , "img16/", "pc"   , 3, "|");
+	fGrl->cargarDatosComboBox(ui->cbxSvm_gfx_mode    , grlDir.Datos +"svm_gfxmode.txt"                 , "img16/", "2x"   , 3, "|");
+	fGrl->cargarDatosComboBox(ui->cbxSvm_render_mode , grlDir.Datos +"svm_render_mode.txt"             , "img16/", ""     , 3, "|");
+	fGrl->cargarDatosComboBox(ui->cbxSvm_music_driver, grlDir.Datos +"svm_music_driver.txt"            , "img16/", "adlib", 3, "|");
 
 	ui->cbxSvm_opl_driver->clear();
-	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->Theme() +"img16/sinimg.png"), "<defecto>", "auto");
-	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->Theme() +"img16/img_advmame2x_3x.png"), "MAME OPL emulator", "mame");
-	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->Theme() +"img16/dosbox.png"), "DOSBox OPL emulator (experimental)", "db");
+	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->theme() +"img16/sinimg.png")          , "<defecto>"                         , "auto");
+	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->theme() +"img16/img_advmame2x_3x.png"), "MAME OPL emulator"                 , "mame");
+	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->theme() +"img16/cat/dosbox.png")      , "DOSBox OPL emulator (experimental)", "db"  );
 
 	ui->cbxSvm_output_rate->clear();
-	ui->cbxSvm_output_rate->addItem("<defecto>", "" );
-	ui->cbxSvm_output_rate->addItem("8000" , "8000" );
+	ui->cbxSvm_output_rate->addItem("<defecto>", "");
+	ui->cbxSvm_output_rate->addItem("8000", "8000");
 	ui->cbxSvm_output_rate->addItem("11025", "11025");
 	ui->cbxSvm_output_rate->addItem("22050", "22050");
 	ui->cbxSvm_output_rate->addItem("44100", "44100");
 	ui->cbxSvm_output_rate->addItem("48000", "48000");
 
 	ui->cbxSvm_cdrom->clear();
-	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 0", "0");
-	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 1", "1");
-	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 2", "2");
-	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 3", "3");
-	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->Theme() +"img16/drive_cdrom.png"), "CD Index 4", "4");
+	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->theme() +"img16/drive_cdrom.png"), "CD Index 0", "0");
+	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->theme() +"img16/drive_cdrom.png"), "CD Index 1", "1");
+	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->theme() +"img16/drive_cdrom.png"), "CD Index 2", "2");
+	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->theme() +"img16/drive_cdrom.png"), "CD Index 3", "3");
+	ui->cbxSvm_cdrom->addItem(QIcon(fGrl->theme() +"img16/drive_cdrom.png"), "CD Index 4", "4");
 
 	ui->cbxSvm_joystick_num->clear();
-	ui->cbxSvm_joystick_num->addItem(QIcon(fGrl->Theme() +"img16/controller.png"), tr("Sin Joystick"), "");
-	ui->cbxSvm_joystick_num->addItem(QIcon(fGrl->Theme() +"img16/controller.png"), "Joystick 1" , "0");
-	ui->cbxSvm_joystick_num->addItem(QIcon(fGrl->Theme() +"img16/controller.png"), "Joystick 2" , "1");
+	ui->cbxSvm_joystick_num->addItem(QIcon(fGrl->theme() +"img16/controller.png"), tr("Sin Joystick"), "");
+	ui->cbxSvm_joystick_num->addItem(QIcon(fGrl->theme() +"img16/controller.png"), "Joystick 1" , "0");
+	ui->cbxSvm_joystick_num->addItem(QIcon(fGrl->theme() +"img16/controller.png"), "Joystick 2" , "1");
+
+	ui->cbxSvm_autosave_period->clear();
+	ui->cbxSvm_autosave_period->addItem(QIcon(fGrl->theme() +"img16/sinimg.png"), tr("Nunca"), "0");
+	ui->cbxSvm_autosave_period->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png"), tr("Cada 5 minutos"), "300");
+	ui->cbxSvm_autosave_period->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png"), tr("Cada 10 minutos"), "600");
+	ui->cbxSvm_autosave_period->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png"), tr("Cada 15 minutos"), "900");
+	ui->cbxSvm_autosave_period->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png"), tr("Cada 30 minutos"), "1800");
+
+	setTheme();
 }
 
 void frmAddEditScummVM::setTheme()
 {
-	setTabIcon(0, QIcon(fGrl->Theme() +"img16/scummvm.png") );
-	setTabIcon(1, QIcon(fGrl->Theme() +"img16/opciones.png") );
-	setTabIcon(2, QIcon(fGrl->Theme() +"img16/vdmsound.png") );
+	setTabIcon(0, QIcon(fGrl->theme() +"img16/opciones.png"));
+	setTabIcon(1, QIcon(fGrl->theme() +"img16/img_audio.png"));
+// General
+	ui->btnSvm_Path->setIcon(QIcon(fGrl->theme() +"img16/carpeta_0.png"));
+	ui->btnSvm_Path_clear->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
+	ui->btnSvm_PathSave->setIcon(QIcon(fGrl->theme() +"img16/carpeta_0.png"));
+	ui->btnSvm_PathSave_clear->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
+	ui->btnSvm_PathExtra->setIcon(QIcon(fGrl->theme() +"img16/carpeta_0.png"));
+	ui->btnSvm_PathExtra_clear->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
+	ui->btnSvm_SoundFont->setIcon(QIcon(fGrl->theme() +"img16/carpeta_1.png"));
+	ui->btnSvm_SoundFont_clear->setIcon(QIcon(fGrl->theme() +"img16/limpiar.png"));
 
-	ui->btnSvm_PathGame->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
-	ui->btnSvm_PathGame_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnSvm_PathSave->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
-	ui->btnSvm_PathSave_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnSvm_PathExtra->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
-	ui->btnSvm_PathExtra_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnSvm_PathCapturas->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
-	ui->btnSvm_PathCapturas_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnSvm_PathSonido->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_0.png") );
-	ui->btnSvm_PathSonido_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-	ui->btnSvm_SoundFont->setIcon( QIcon(fGrl->Theme() +"img16/carpeta_1.png") );
-	ui->btnSvm_SoundFont_clear->setIcon( QIcon(fGrl->Theme() +"img16/limpiar.png") );
-
-	ui->btnDefectoSvm->setIcon( QIcon(fGrl->Theme() +"img16/actualizar.png") );
+	ui->btnDefectoSvm->setIcon(QIcon(fGrl->theme() +"img16/actualizar.png"));
 }
 
 bool frmAddEditScummVM::isCorrectNext()
 {
 	bool siguiente = false;
 
-	if( ui->txtSvm_gameid->text().isEmpty() )
+	if (ui->txtSvm_gameid->text().isEmpty())
 	{
 		siguiente = false;
-		QMessageBox::information(this, titulo_ventana(), tr("Debes poner el ID del juego de ScummVM") );
+		QMessageBox::information(this, titulo_ventana(), tr("Debes poner el ID del juego de ScummVM"));
 		ui->txtSvm_gameid->setFocus();
 	} else {
 		siguiente = true;
-		if( ui->txtSvm_game_label->text().isEmpty() )
+		if (ui->txtSvm_game_label->text().isEmpty())
 		{
 			siguiente = false;
-			QMessageBox::information(this, titulo_ventana(), tr("Debes poner la etiqueta del juego de ScummVM") );
+			QMessageBox::information(this, titulo_ventana(), tr("Debes poner la etiqueta del juego de ScummVM"));
 			ui->txtSvm_game_label->setFocus();
 		} else {
 			siguiente = true;
-			if( ui->txtSvm_path_game->text().isEmpty() )
+			if (ui->txtSvm_path->text().isEmpty())
 			{
 				siguiente = false;
-				QMessageBox::information(this, titulo_ventana(), tr("Debes indicar el directorio del juego de ScummVM") );
-				ui->txtSvm_path_game->setFocus();
+				QMessageBox::information(this, titulo_ventana(), tr("Debes indicar el directorio del juego de ScummVM"));
+				ui->txtSvm_path->setFocus();
 			} else {
 				siguiente = true;
-				if( !fGrl->comprobarDirectorio(fGrl->getDirRelative(ui->txtSvm_path_game->text(), "DosGames"), true) )
+				if (!fGrl->comprobarDirectorio(fGrl->getDirRelative(ui->txtSvm_path->text(), "DosGames"), true))
 				{
 					siguiente = false;
-					QMessageBox::information(this, titulo_ventana(), tr("Debes indicar un directorio que exista") );
-					ui->txtSvm_path_game->setFocus();
+					QMessageBox::information(this, titulo_ventana(), tr("Debes indicar un directorio que exista"));
+					ui->txtSvm_path->setFocus();
 				} else
 					siguiente = true;
 			}
@@ -172,53 +227,62 @@ bool frmAddEditScummVM::isCorrectNext()
 
 void frmAddEditScummVM::cargarDatosScummVM(stConfigScummVM cfgSvm)
 {
-	QTreeWidgetItem *item;
-	if( Editando )
+	int select_svm = 0;
+	if (Editando)
 	{
-		QList<QTreeWidgetItem *> found = ui->twScummVM->findItems(cfgSvm.game, Qt::MatchExactly, 2);
-		foreach (item, found)
-			ui->twScummVM->setItemSelected(item, true);
+		const int listSvmSize = list_svm.size();
+		for (int row = 0; row < listSvmSize; ++row)
+		{
+			if (list_svm.at(row).key == cfgSvm.game)
+			{
+				select_svm = row;
+			}
+		}
 	}
+	ui->cbxScummVM->setCurrentIndex(select_svm);
 
-	ui->txtSvm_gameid->setText( cfgSvm.game );
-	ui->txtSvm_game_label->setText( cfgSvm.game_label );
-	ui->cbxSvm_language->setCurrentIndex( ui->cbxSvm_language->findData( cfgSvm.language ) );
-	ui->chkSvm_subtitles->setChecked( fGrl->StrToBool( cfgSvm.subtitles ) );
-	ui->cbxSvm_platform->setCurrentIndex( ui->cbxSvm_platform->findData( cfgSvm.platform ) );
-	ui->cbxSvm_gfx_mode->setCurrentIndex( ui->cbxSvm_gfx_mode->findData( cfgSvm.gfx_mode ) );
-	ui->cbxSvm_render_mode->setCurrentIndex( ui->cbxSvm_render_mode->findData( cfgSvm.render_mode ) );
-	ui->chkSvm_fullscreen->setChecked( fGrl->StrToBool( cfgSvm.fullscreen ) );
-	ui->chkSvm_aspect_ratio->setChecked( fGrl->StrToBool( cfgSvm.aspect_ratio ) );
-	ui->txtSvm_path_game->setText( cfgSvm.path_game );
-	ui->txtSvm_path_extra->setText( cfgSvm.path_extra );
-	ui->txtSvm_path_save->setText( cfgSvm.path_save );
-	ui->txtSvm_path_capturas->setText( cfgSvm.path_capturas );
-	ui->txtSvm_path_sonido->setText( cfgSvm.path_sonido );
-	ui->cbxSvm_music_driver->setCurrentIndex( ui->cbxSvm_music_driver->findData( cfgSvm.music_driver ) );
-	ui->chkSvm_enable_gs->setChecked( fGrl->StrToBool( cfgSvm.enable_gs ) );
-	ui->chkSvm_multi_midi->setChecked( fGrl->StrToBool( cfgSvm.multi_midi ) );
-	ui->chkSvm_native_mt32->setChecked( fGrl->StrToBool( cfgSvm.native_mt32 ) );
-	ui->chkSvm_mute->setChecked( fGrl->StrToBool( cfgSvm.mute ) );
+	ui->txtSvm_gameid->setText(cfgSvm.game);
+	ui->txtSvm_game_label->setText(cfgSvm.game_label);
+	ui->cbxSvm_language->setCurrentIndex(ui->cbxSvm_language->findData(cfgSvm.language));
+	ui->chkSvm_subtitles->setChecked(fGrl->strToBool(cfgSvm.subtitles));
+	ui->cbxSvm_platform->setCurrentIndex(ui->cbxSvm_platform->findData(cfgSvm.platform));
+	ui->cbxSvm_gfx_mode->setCurrentIndex(ui->cbxSvm_gfx_mode->findData(cfgSvm.gfx_mode));
+	ui->cbxSvm_render_mode->setCurrentIndex(ui->cbxSvm_render_mode->findData(cfgSvm.render_mode));
+	ui->chkSvm_fullscreen->setChecked(fGrl->strToBool(cfgSvm.fullscreen));
+	ui->chkSvm_filtering->setChecked(fGrl->strToBool(cfgSvm.filtering));
+	ui->chkSvm_aspect_ratio->setChecked(fGrl->strToBool(cfgSvm.aspect_ratio));
+	ui->chkSvm_originalsaveload->setChecked(fGrl->strToBool(cfgSvm.originalsaveload));
+	ui->chkSvm_bright_palette->setChecked(fGrl->strToBool(cfgSvm.bright_palette));
+	ui->txtSvm_path->setText(cfgSvm.path);
+	ui->txtSvm_path_extra->setText(cfgSvm.path_extra);
+	ui->txtSvm_path_save->setText(cfgSvm.path_save);
+	ui->cbxSvm_music_driver->setCurrentIndex(ui->cbxSvm_music_driver->findData(cfgSvm.music_driver));
+	ui->chkSvm_enable_gs->setChecked(fGrl->strToBool(cfgSvm.enable_gs));
+	ui->chkSvm_multi_midi->setChecked(fGrl->strToBool(cfgSvm.multi_midi));
+	ui->chkSvm_native_mt32->setChecked(fGrl->strToBool(cfgSvm.native_mt32));
+	ui->chkSvm_mute->setChecked(fGrl->strToBool(cfgSvm.mute));
 // master_volume
-	ui->h_SliderSvm_music_volume->setSliderPosition( fGrl->StrToInt( cfgSvm.music_volume ) );
-	ui->h_SliderSvm_sfx_volume->setSliderPosition( fGrl->StrToInt( cfgSvm.sfx_volume ) );
-	ui->h_SliderSvm_speech_volume->setSliderPosition( fGrl->StrToInt( cfgSvm.speech_volume ) );
-	ui->chkSvm_speech_mute->setChecked( fGrl->StrToBool( cfgSvm.speech_mute ) );
-	ui->h_SliderSvm_tempo->setSliderPosition( fGrl->StrToInt( cfgSvm.tempo ) );
-	ui->h_SliderSvm_talkspeed->setSliderPosition(fGrl->StrToInt(  cfgSvm.talkspeed ) );
-	ui->h_SliderSvm_debuglevel->setSliderPosition( fGrl->StrToInt( cfgSvm.debuglevel ) );
-	ui->cbxSvm_cdrom->setCurrentIndex( fGrl->StrToInt( cfgSvm.cdrom ) );
-	ui->cbxSvm_joystick_num->setCurrentIndex( fGrl->StrToInt( cfgSvm.joystick_num ) );
-	ui->cbxSvm_output_rate->setCurrentIndex( ui->cbxSvm_output_rate->findData( cfgSvm.output_rate ) );
-	ui->h_SliderSvm_midi_gain->setSliderPosition( fGrl->StrToInt( cfgSvm.midi_gain ) );
-	ui->chkSvm_copy_protection->setChecked( fGrl->StrToBool( cfgSvm.copy_protection ) );
-	ui->txtSvm_soundfont->setText( cfgSvm.sound_font );
-	ui->h_SliderSvm_walkspeed->setSliderPosition( fGrl->StrToInt( cfgSvm.walkspeed ) );
-	ui->cbxSvm_opl_driver->setCurrentIndex( ui->cbxSvm_opl_driver->findData( cfgSvm.opl_driver ) );
-	ui->chkSvm_disable_dithering->setChecked( fGrl->StrToBool( cfgSvm.disable_dithering ) );
-	ui->chkSvm_alt_intro->setChecked( fGrl->StrToBool( cfgSvm.alt_intro ) );
+	ui->h_SliderSvm_music_volume->setSliderPosition(fGrl->strToInt(cfgSvm.music_volume));
+	ui->h_SliderSvm_sfx_volume->setSliderPosition(fGrl->strToInt(cfgSvm.sfx_volume));
+	ui->h_SliderSvm_speech_volume->setSliderPosition(fGrl->strToInt(cfgSvm.speech_volume));
+	ui->chkSvm_speech_mute->setChecked(fGrl->strToBool(cfgSvm.speech_mute));
+	ui->h_SliderSvm_tempo->setSliderPosition(fGrl->strToInt(cfgSvm.tempo));
+	ui->h_SliderSvm_talkspeed->setSliderPosition(fGrl->strToInt(cfgSvm.talkspeed));
+	ui->h_SliderSvm_debuglevel->setSliderPosition(fGrl->strToInt(cfgSvm.debuglevel));
+	ui->cbxSvm_cdrom->setCurrentIndex(fGrl->strToInt(cfgSvm.cdrom));
+	ui->cbxSvm_joystick_num->setCurrentIndex(fGrl->strToInt(cfgSvm.joystick_num));
+	ui->cbxSvm_autosave_period->setCurrentIndex(ui->cbxSvm_autosave_period->findData(cfgSvm.autosave_period));
+	ui->cbxSvm_output_rate->setCurrentIndex(ui->cbxSvm_output_rate->findData(cfgSvm.output_rate));
+	ui->h_SliderSvm_midi_gain->setSliderPosition(fGrl->strToInt(cfgSvm.midi_gain));
+	ui->chkSvm_copy_protection->setChecked(fGrl->strToBool(cfgSvm.copy_protection));
+	ui->txtSvm_soundfont->setText(cfgSvm.sound_font);
+	ui->h_SliderSvm_walkspeed->setSliderPosition(fGrl->strToInt(cfgSvm.walkspeed));
+	ui->cbxSvm_opl_driver->setCurrentIndex(ui->cbxSvm_opl_driver->findData(cfgSvm.opl_driver));
+	ui->chkSvm_disable_dithering->setChecked(fGrl->strToBool(cfgSvm.disable_dithering));
+	ui->chkSvm_alt_intro->setChecked(fGrl->strToBool(cfgSvm.alt_intro));
+// boot_param
 
-	if( Editando && !IdGame.isEmpty() )
+	if (Editando && !IdGame.isEmpty())
 		IdSvm = cfgSvm.id;
 	else
 		IdSvm = "";
@@ -232,101 +296,99 @@ void frmAddEditScummVM::setDatosScummVM()
 	DatosScummVM.idgrl = IdGame;
 	DatosScummVM.idcat = categoria.id;
 
-	DatosScummVM.game       = ui->txtSvm_gameid->text();
-	DatosScummVM.game_label = ui->txtSvm_game_label->text();
-	str = ui->cbxSvm_language->itemData( ui->cbxSvm_language->currentIndex() ).toString();
+	DatosScummVM.game              = ui->txtSvm_gameid->text();
+	DatosScummVM.game_label        = ui->txtSvm_game_label->text();
+	str = ui->cbxSvm_language->itemData(ui->cbxSvm_language->currentIndex()).toString();
 	DatosScummVM.language          = str.isEmpty() ? "es" : str;
-	DatosScummVM.subtitles         = fGrl->BoolToStr( ui->chkSvm_subtitles->isChecked() );
-	str = ui->cbxSvm_platform->itemData( ui->cbxSvm_platform->currentIndex() ).toString();
+	DatosScummVM.subtitles         = fGrl->boolToStr(ui->chkSvm_subtitles->isChecked());
+	str = ui->cbxSvm_platform->itemData(ui->cbxSvm_platform->currentIndex()).toString();
 	DatosScummVM.platform          = str.isEmpty() ? "pc" : str;
-	str = ui->cbxSvm_gfx_mode->itemData( ui->cbxSvm_gfx_mode->currentIndex() ).toString();
+	str = ui->cbxSvm_gfx_mode->itemData(ui->cbxSvm_gfx_mode->currentIndex()).toString();
 	DatosScummVM.gfx_mode          = str.isEmpty() ? "2x" : str;
-	str = ui->cbxSvm_render_mode->itemData( ui->cbxSvm_render_mode->currentIndex() ).toString();
+	str = ui->cbxSvm_render_mode->itemData(ui->cbxSvm_render_mode->currentIndex()).toString();
 	DatosScummVM.render_mode       = str.isEmpty() ? "" : str;
-	DatosScummVM.fullscreen        = fGrl->BoolToStr( ui->chkSvm_fullscreen->isChecked() );
-	DatosScummVM.aspect_ratio      = fGrl->BoolToStr( ui->chkSvm_aspect_ratio->isChecked() );
-	DatosScummVM.path_game         = ui->txtSvm_path_game->text();
+	DatosScummVM.fullscreen        = fGrl->boolToStr(ui->chkSvm_fullscreen->isChecked());
+	DatosScummVM.filtering         = fGrl->boolToStr(ui->chkSvm_filtering->isChecked());
+	DatosScummVM.aspect_ratio      = fGrl->boolToStr(ui->chkSvm_aspect_ratio->isChecked());
+	DatosScummVM.path              = ui->txtSvm_path->text();
 	DatosScummVM.path_extra        = ui->txtSvm_path_extra->text();
 	DatosScummVM.path_save         = ui->txtSvm_path_save->text();
-	DatosScummVM.path_capturas     = ui->txtSvm_path_capturas->text();
-	DatosScummVM.path_sonido       = ui->txtSvm_path_sonido->text();
-	str = ui->cbxSvm_music_driver->itemData( ui->cbxSvm_music_driver->currentIndex() ).toString();
+	str = ui->cbxSvm_music_driver->itemData(ui->cbxSvm_music_driver->currentIndex()).toString();
 	DatosScummVM.music_driver      = str.isEmpty() ? "auto" : str;
-	DatosScummVM.enable_gs         = fGrl->BoolToStr( ui->chkSvm_enable_gs->isChecked() );
-	DatosScummVM.multi_midi        = fGrl->BoolToStr( ui->chkSvm_multi_midi->isChecked() );
-	DatosScummVM.native_mt32       = fGrl->BoolToStr( ui->chkSvm_native_mt32->isChecked() );
-	DatosScummVM.mute              = fGrl->BoolToStr( ui->chkSvm_mute->isChecked() );
+	DatosScummVM.enable_gs         = fGrl->boolToStr(ui->chkSvm_enable_gs->isChecked());
+	DatosScummVM.multi_midi        = fGrl->boolToStr(ui->chkSvm_multi_midi->isChecked());
+	DatosScummVM.native_mt32       = fGrl->boolToStr(ui->chkSvm_native_mt32->isChecked());
+	DatosScummVM.mute              = fGrl->boolToStr(ui->chkSvm_mute->isChecked());
 	DatosScummVM.master_volume     = "192";
-	DatosScummVM.music_volume      = fGrl->IntToStr( ui->h_SliderSvm_music_volume->value() );
-	DatosScummVM.sfx_volume        = fGrl->IntToStr( ui->h_SliderSvm_sfx_volume->value() );
-	DatosScummVM.speech_volume     = fGrl->IntToStr( ui->h_SliderSvm_speech_volume->value() );
-	DatosScummVM.speech_mute       = fGrl->BoolToStr( ui->chkSvm_speech_mute->isChecked() );
-	DatosScummVM.tempo             = fGrl->IntToStr( ui->h_SliderSvm_tempo->value() );
-	DatosScummVM.talkspeed         = fGrl->IntToStr( ui->h_SliderSvm_talkspeed->value() );
-	DatosScummVM.debuglevel        = fGrl->IntToStr( ui->h_SliderSvm_debuglevel->value() );
-	str = ui->cbxSvm_cdrom->itemData( ui->cbxSvm_cdrom->currentIndex() ).toString();
+	DatosScummVM.music_volume      = fGrl->intToStr(ui->h_SliderSvm_music_volume->value());
+	DatosScummVM.sfx_volume        = fGrl->intToStr(ui->h_SliderSvm_sfx_volume->value());
+	DatosScummVM.speech_volume     = fGrl->intToStr(ui->h_SliderSvm_speech_volume->value());
+	DatosScummVM.speech_mute       = fGrl->boolToStr(ui->chkSvm_speech_mute->isChecked());
+	DatosScummVM.tempo             = fGrl->intToStr(ui->h_SliderSvm_tempo->value());
+	DatosScummVM.talkspeed         = fGrl->intToStr(ui->h_SliderSvm_talkspeed->value());
+	DatosScummVM.debuglevel        = fGrl->intToStr(ui->h_SliderSvm_debuglevel->value());
+	str = ui->cbxSvm_cdrom->itemData(ui->cbxSvm_cdrom->currentIndex()).toString();
 	DatosScummVM.cdrom             =  str.isEmpty() ? "" : str;
-	str = ui->cbxSvm_joystick_num->itemData( ui->cbxSvm_joystick_num->currentIndex() ).toString();
+	str = ui->cbxSvm_joystick_num->itemData(ui->cbxSvm_joystick_num->currentIndex()).toString();
 	DatosScummVM.joystick_num      = str.isEmpty() ? "" : str;
-	str = ui->cbxSvm_output_rate->itemData( ui->cbxSvm_output_rate->currentIndex() ).toString();
+	str = ui->cbxSvm_autosave_period->itemData(ui->cbxSvm_autosave_period->currentIndex()).toString();
+	DatosScummVM.autosave_period   = str.isEmpty() ? "300" : str;
+	str = ui->cbxSvm_output_rate->itemData(ui->cbxSvm_output_rate->currentIndex()).toString();
 	DatosScummVM.output_rate       = str.isEmpty() ? "44100" : str;
-	DatosScummVM.midi_gain         = fGrl->IntToStr( ui->h_SliderSvm_midi_gain->value() );
-	DatosScummVM.copy_protection   = fGrl->BoolToStr( ui->chkSvm_copy_protection->isChecked() );
+	DatosScummVM.midi_gain         = fGrl->intToStr(ui->h_SliderSvm_midi_gain->value());
+	DatosScummVM.copy_protection   = fGrl->boolToStr(ui->chkSvm_copy_protection->isChecked());
 	DatosScummVM.sound_font        = ui->txtSvm_soundfont->text();
-	DatosScummVM.walkspeed         = fGrl->IntToStr( ui->h_SliderSvm_walkspeed->value() );
-	str = ui->cbxSvm_opl_driver->itemData( ui->cbxSvm_opl_driver->currentIndex() ).toString();
+	DatosScummVM.walkspeed         = fGrl->intToStr(ui->h_SliderSvm_walkspeed->value());
+	str = ui->cbxSvm_opl_driver->itemData(ui->cbxSvm_opl_driver->currentIndex()).toString();
 	DatosScummVM.opl_driver        = str.isEmpty() ? "auto" : str;
-	DatosScummVM.disable_dithering = fGrl->BoolToStr( ui->chkSvm_disable_dithering->isChecked() );
-	DatosScummVM.alt_intro         = fGrl->BoolToStr( ui->chkSvm_alt_intro->isChecked() );
+	DatosScummVM.disable_dithering = fGrl->boolToStr(ui->chkSvm_disable_dithering->isChecked());
+	DatosScummVM.alt_intro         = fGrl->boolToStr(ui->chkSvm_alt_intro->isChecked());
 	DatosScummVM.boot_param        = "";
+	DatosScummVM.originalsaveload  = fGrl->boolToStr(ui->chkSvm_originalsaveload->isChecked());
+	DatosScummVM.bright_palette    = fGrl->boolToStr(ui->chkSvm_bright_palette->isChecked());
 //--
-	DatosScummVM.description       = "";
-	DatosScummVM.emu_svmpath       = "";
+	DatosScummVM.description = "";
+	DatosScummVM.emu_svmpath = "";
+	DatosScummVM.guioptions  = "";
 }
 
-void frmAddEditScummVM::on_twScummVM_itemClicked(QTreeWidgetItem *item, int column)
+void frmAddEditScummVM::on_cbxScummVM_activated(int index)
 {
-	if( item && column > -1 )
+	if (index > -1)
 	{
-		ui->txtSvm_gameid->setText( item->text(2) );
-		ui->txtSvm_game_label->setText( item->text(2) );
+		QString gameid = svm_model->index(index, 1).data().toString();
+		if (!gameid.isEmpty())
+		{
+			ui->txtSvm_gameid->setText(gameid);
+			ui->txtSvm_game_label->setText(gameid);
+		}
 	}
 }
 
-void frmAddEditScummVM::on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+void frmAddEditScummVM::on_btnSvm_Path_clicked()
 {
-	if( current != previous )
-		emit on_twScummVM_itemClicked(current, 0);
-}
+	QString directorio = fGrl->ventanaDirectorios(this, tr("Seleccionar un directorio"), grlCfg.Svm_path, "DosGames");
 
-void frmAddEditScummVM::on_btnSvm_PathGame_clicked()
-{
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_game, "DosGames");
-
-	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
+	if (!directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true))
 	{
-		ui->txtSvm_path_game->setText( fGrl->setDirRelative(directorio, "DosGames") );
-		grlCfg.Svm_path_game = ui->txtSvm_path_game->text();
-
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_game", grlCfg.Svm_path_game);
+		ui->txtSvm_path->setText(fGrl->setDirRelative(directorio, "DosGames"));
+		grlCfg.Svm_path = ui->txtSvm_path->text();
 	}
 }
 
-void frmAddEditScummVM::on_btnSvm_PathGame_clear_clicked()
+void frmAddEditScummVM::on_btnSvm_Path_clear_clicked()
 {
-	ui->txtSvm_path_game->clear();
+	ui->txtSvm_path->clear();
 }
 
 void frmAddEditScummVM::on_btnSvm_PathSave_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_save, "DosGames");
+	QString directorio = fGrl->ventanaDirectorios(this, tr("Seleccionar un directorio"), grlCfg.Svm_path_save, "DosGames");
 
-	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
+	if (!directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true))
 	{
-		ui->txtSvm_path_save->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		ui->txtSvm_path_save->setText(fGrl->setDirRelative(directorio, "DosGames"));
 		grlCfg.Svm_path_save = ui->txtSvm_path_save->text();
-
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_save", grlCfg.Svm_path_save);
 	}
 }
 
@@ -337,14 +399,12 @@ void frmAddEditScummVM::on_btnSvm_PathSave_clear_clicked()
 
 void frmAddEditScummVM::on_btnSvm_PathExtra_clicked()
 {
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_extra, "DosGames");
+	QString directorio = fGrl->ventanaDirectorios(this, tr("Seleccionar un directorio"), grlCfg.Svm_path_extra, "DosGames");
 
-	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
+	if (!directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true))
 	{
-		ui->txtSvm_path_extra->setText( fGrl->setDirRelative(directorio, "DosGames") );
+		ui->txtSvm_path_extra->setText(fGrl->setDirRelative(directorio, "DosGames"));
 		grlCfg.Svm_path_extra = ui->txtSvm_path_extra->text();
-
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_extra", grlCfg.Svm_path_extra);
 	}
 }
 
@@ -353,55 +413,17 @@ void frmAddEditScummVM::on_btnSvm_PathExtra_clear_clicked()
 	 ui->txtSvm_path_extra->clear();
 }
 
-void frmAddEditScummVM::on_btnSvm_PathCapturas_clicked()
-{
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_capturas);
-
-	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
-	{
-		ui->txtSvm_path_capturas->setText( fGrl->setDirRelative(directorio) );
-		grlCfg.Svm_path_capturas = ui->txtSvm_path_capturas->text();
-
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_capturas", grlCfg.Svm_path_capturas);
-	}
-}
-
-void frmAddEditScummVM::on_btnSvm_PathCapturas_clear_clicked()
-{
-	ui->txtSvm_path_capturas->clear();
-}
-
-void frmAddEditScummVM::on_btnSvm_PathSonido_clicked()
-{
-	QString directorio = fGrl->ventanaDirectorios( tr("Seleccionar un directorio"), grlCfg.Svm_path_sonido);
-
-	if( !directorio.isEmpty() && fGrl->comprobarDirectorio(directorio, true) )
-	{
-		ui->txtSvm_path_sonido->setText( fGrl->setDirRelative(directorio) );
-		grlCfg.Svm_path_sonido = ui->txtSvm_path_sonido->text();
-
-		fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_path_sonido", grlCfg.Svm_path_sonido);
-	}
-}
-
-void frmAddEditScummVM::on_btnSvm_PathSonido_clear_clicked()
-{
-	ui->txtSvm_path_sonido->clear();
-}
-
 void frmAddEditScummVM::on_btnSvm_SoundFont_clicked()
 {
-	QString archivo = fGrl->ventanaAbrirArchivos( tr("Selecciona un archivo"), grlCfg.Svm_soundfont, "", tr("Todos los archivo") +" (*)", 0, false);
+	QString archivo = fGrl->ventanaAbrirArchivos(this, tr("Selecciona un archivo"), grlCfg.Svm_soundfont, "", tr("Todos los archivos") +" (*)", 0, false);
 
-	if( !archivo.isEmpty() )
+	if (!archivo.isEmpty())
 	{
-		stFileInfo f_info = fGrl->getInfoFile( archivo );
-		if( f_info.Exists )
+		stFileInfo f_info = fGrl->getInfoFile(archivo);
+		if (f_info.Exists)
 		{
-			ui->txtSvm_soundfont->setText( fGrl->setDirRelative(archivo) );
-			grlCfg.Svm_soundfont = fGrl->setDirRelative(f_info.Path);
-
-			fGrl->guardarKeyGRLConfig(grlDir.Home +"GR-lida.conf", "UltimoDirectorio", "Svm_soundfont", grlCfg.Svm_soundfont);
+			ui->txtSvm_soundfont->setText(fGrl->setDirRelative(archivo));
+			grlCfg.Svm_soundfont = ui->txtSvm_soundfont->text();
 		}
 	}
 }
@@ -413,42 +435,42 @@ void frmAddEditScummVM::on_btnSvm_SoundFont_clear_clicked()
 
 void frmAddEditScummVM::on_h_SliderSvm_music_volume_valueChanged(int value)
 {
-	ui->valueSliderSvm_music_volume->setText( fGrl->IntToStr(value) );
+	ui->valueSliderSvm_music_volume->setText(fGrl->intToStr(value));
 }
 
 void frmAddEditScummVM::on_h_SliderSvm_sfx_volume_valueChanged(int value)
 {
-	ui->valueSliderSvm_sfx_volume->setText( fGrl->IntToStr(value) );
+	ui->valueSliderSvm_sfx_volume->setText(fGrl->intToStr(value));
 }
 
 void frmAddEditScummVM::on_h_SliderSvm_speech_volume_valueChanged(int value)
 {
-	ui->valueSliderSvm_speech_volume->setText( fGrl->IntToStr(value) );
+	ui->valueSliderSvm_speech_volume->setText(fGrl->intToStr(value));
 }
 
 void frmAddEditScummVM::on_h_SliderSvm_tempo_valueChanged(int value)
 {
-	ui->valueSliderSvm_tempo->setText( fGrl->IntToStr(value) );
+	ui->valueSliderSvm_tempo->setText(fGrl->intToStr(value));
 }
 
 void frmAddEditScummVM::on_h_SliderSvm_talkspeed_valueChanged(int value)
 {
-	ui->valueSliderSvm_talkspeed->setText( fGrl->IntToStr(value) );
+	ui->valueSliderSvm_talkspeed->setText(fGrl->intToStr(value));
 }
 
 void frmAddEditScummVM::on_h_SliderSvm_debuglevel_valueChanged(int value)
 {
-	ui->valueSliderSvm_debuglevel->setText( fGrl->IntToStr(value) );
+	ui->valueSliderSvm_debuglevel->setText(fGrl->intToStr(value));
 }
 
 void frmAddEditScummVM::on_h_SliderSvm_midi_gain_valueChanged(int value)
 {
-	ui->valueSliderSvm_midi_gain->setText( fGrl->IntToStr(value) );
+	ui->valueSliderSvm_midi_gain->setText(fGrl->intToStr(value));
 }
 
 void frmAddEditScummVM::on_h_SliderSvm_walkspeed_valueChanged(int value)
 {
-	ui->valueSliderSvm_walkspeed->setText( fGrl->IntToStr(value) );
+	ui->valueSliderSvm_walkspeed->setText(fGrl->intToStr(value));
 }
 
 void frmAddEditScummVM::on_btnDefectoSvm_clicked()

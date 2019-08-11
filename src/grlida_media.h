@@ -1,8 +1,6 @@
 #ifndef GRLIDA_MEDIA_H
 #define GRLIDA_MEDIA_H
 
-#include <QDebug>
-
 #include <QBasicTimer>
 #include <QWidget>
 

@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,25 @@
 
 #ifndef G_STRUCTS_H
 #define G_STRUCTS_H
+
+#include <Qt>
+#include <QPen>
+
+static const QString URL_GRL = "http://localhost/gr-lida.local/";
+//static const QString URL_GRL = "http://gr-lida.org/";
+//"http://www.gr-lida.org/"
+//"https://www.gr-lida.org/"
+
+enum dataRole {
+	IdGrlRole    = Qt::UserRole +100,
+	ThumbsRole   = Qt::UserRole +101,
+	IconRole     = Qt::UserRole +102,
+	OriginalRole = Qt::UserRole +103,
+	TipoEmuRole  = Qt::UserRole +104,
+	FavoritoRole = Qt::UserRole +105,
+	RatingRole   = Qt::UserRole +106,
+	EdadRole     = Qt::UserRole +107,
+};
 
 enum col_TwJuegos {
 	col_IdGrl           =  0,
@@ -48,21 +67,35 @@ enum col_TwJuegos {
 	col_Jugabilidad     = 19,
 	col_Original        = 20,
 	col_Estado          = 21,
-	col_Thumbs          = 22,
-	col_Cover_front     = 23,
-	col_Cover_back      = 24,
-	col_Fecha           = 25,
-	col_TipoEmu         = 26,
-	col_Comentario      = 27,
-	col_Favorito        = 28,
-	col_Rating          = 29,
-	col_Edad            = 30,
-	col_Usuario         = 31,
-	col_PathExe         = 32,
-	col_PathSetup       = 33,
-	col_ParametrosExe   = 34,
-	col_ParametrosSetup = 35,
-	col_PathCapturas    = 36
+	col_Fecha           = 22,
+	col_TipoEmu         = 23,
+	col_Favorito        = 24,
+	col_Rating          = 25,
+	col_Edad            = 26,
+	col_Usuario         = 27
+// Ocultos
+//	col_Thumbs          = 28,
+//	col_Cover_front     = 29,
+//	col_Cover_back      = 30,
+//	col_PathExe         = 31,
+//	col_ParametrosExe   = 32,
+//	col_PathSetup       = 33,
+//	col_ParametrosSetup = 34,
+//	col_PathCapturas    = 35,
+//	col_Comentario      = 36
+};
+
+struct stUpdates {
+	QString info;
+	QString info_item;
+	QString title;
+	QString version;
+	QString ver_old;
+	QString file;
+	QString url;
+	QString tipo;
+	bool    isNew;
+	bool    isInstalled;
 };
 
 struct stGrlCats {
@@ -72,35 +105,34 @@ struct stGrlCats {
 	QString img;
 	QString orden;
 	QString emu_show;
+	int     total;
 };
 
 struct stGrlDatos {
 	QString titulo;
 	QString icono;
+	QString key;
 	QString extra;
 	QString version;
 	QString issvn;
-	QString key;
 };
 
 struct stCfgExec {
 	QString f_exe;
-	QString f_param;
-	QString f_exe_setup;
-	QString f_param_setup;
-	QString f_path;
-	QString f_path_setup;
-	bool isCfgExec;
-	bool isCfgSetup;
+	QString f_exe_param;
+	QString f_exe_path;
+	QString f_setup;
+	QString f_setup_param;
+	QString f_setup_path;
+	bool    isCfgExec;
+	bool    isCfgSetup;
 };
 
 struct stGrlDir {
 	QString Home;
-	QString Capturas;
-	QString Confdbx;
-	QString Confvdms;
-	QString Covers;
 	QString Datos;
+	QString DatosDbGrl;
+	QString DatosGame;
 	QString Iconos;
 	QString Idiomas;
 	QString Scripts;
@@ -108,8 +140,13 @@ struct stGrlDir {
 	QString Temp;
 	QString Templates;
 	QString Themes;
-	QString Thumbs;
-	QString ThumbsList;
+//--
+//	QString Capturas;
+//	QString Confdbx;
+//	QString Confvdms;
+//	QString Covers;
+//	QString Thumbs;
+//	QString ThumbsList;
 };
 
 struct stFileInfo {
@@ -136,13 +173,13 @@ struct stGrlCfg {
 	QString db_name;
 	QString db_username;
 	QString db_password;
-	QString db_port;
+	int     db_port;
 	QString db_orden_col;
 	QString db_orden_by;
 	QString db_orden;
 // OpcGeneral
 	bool    Primeravez;
-	QString DirApp;
+	QString dirApp;
 	QString DirDOSBox;
 	QString DirScummVM;
 	QString DirBaseGames;
@@ -159,18 +196,64 @@ struct stGrlCfg {
 	bool    StylePalette;
 	QString NameDirTheme;
 	QString IconoFav;
-	QString PicFlowType;
-	QStringList PicFlowBgColor;
-	bool    PicFlowShowNumPos;
-	bool    PicFlowShowTriangle;
-	int     PicFlowMinHeight;
-	int     Skip_PicFlow;
 	int     IndexTabArchivos;
 	QString VersionDBx;
 	bool    DOSBoxSVN;
 	bool    DOSBoxSaveConfFile;
+	bool    ScummVMSaveConfFile;
+	QString LastSelectGameID;
 	QString LastSelectCatID;
+	int     LastSelectNavID;
+	int     LastSelectNavSubID;
 	int     LastTabOptSelect;
+	int     LastSelectShortCutID;
+// OpcSaveThumbs
+	int     thumb_width;
+	int     thumb_height;
+	int     thumb_quality;
+	int     thumb_img_width;
+	int     thumb_img_height;
+	int     thumb_img_quality;
+	QString thumb_format;
+//	QString thumb_format;
+// OpcPicFlow
+	QString PicFlowType;
+	QStringList PicFlowBgColor;
+	QString PicFlowFontFamily;
+	int     PicFlowFontSize;
+	bool    PicFlowFontBold;
+	bool    PicFlowFontItalic;
+	QStringList PicFlowFontColor;
+	int     PicFlowMinHeight;
+	int     PicFlowSkip;
+
+	bool    PicFlowShowTitle;
+	int     PicFlowTitlePos;
+	QPoint  PicFlowTitleMargin;
+
+	bool    PicFlowShowTitleIcon;
+	int     PicFlowTitleIconPos;
+	QPoint  PicFlowTitleIconMargin;
+
+	bool    PicFlowShowCaption;
+	int     PicFlowCaptionPos;
+	QPoint  PicFlowCaptionMargin;
+
+	bool    PicFlowShowNumber;
+	int     PicFlowNumberPos;
+	QPoint  PicFlowNumberMargin;
+	QString PicFlowNumberFormat;
+
+	bool    PicFlowShowIconExtra;
+	int     PicFlowIconExtraPos;
+	QPoint  PicFlowIconExtraMargin;
+	QString PicFlowIconExtraUse;
+	QString PicFlowIconExtraImgFavorito;
+	QString PicFlowIconExtraImgOriginal;
+
+	QPoint  PicFlowMargin;
+
+	bool    PicFlowShowTriangle;
 // OpcFuente
 	bool    font_usar;
 	QString font_family;
@@ -179,7 +262,7 @@ struct stGrlCfg {
 	bool    ProxyEnable;
 	int     ProxyType;
 	QString ProxyHost;
-	QString ProxyPort;
+	quint16 ProxyPort;
 	bool    ProxyLogin;
 	QString ProxyUserName;
 	QString ProxyPassword;
@@ -188,18 +271,46 @@ struct stGrlCfg {
 	bool       main_maximized;
 	QByteArray main_geometry;
 	QByteArray main_state;
-	QByteArray main_twJuegos_state;
+//	QByteArray main_twJuegos_state;
+	QByteArray main_tvJuegos_state;
+	QByteArray import_geometry;
+	QByteArray import_splitter_state;
 // OpcVer
+	bool Pnl_AutoHideTitleBars;
+	bool Pnl_Nav_VisibleTitleBars;
+	bool Pnl_Datos_VisibleTitleBars;
+	bool Pnl_Files_VisibleTitleBars;
+	bool Pnl_Urls_VisibleTitleBars;
+	bool Pnl_Videos_VisibleTitleBars;
+	bool Pnl_Sonidos_VisibleTitleBars;
+	bool Pnl_Capturas_VisibleTitleBars;
+	bool Pnl_Imagenes_VisibleTitleBars;
+	bool Pnl_PictureFlow_VisibleTitleBars;
+	bool Pnl_Nav_IgnoreAutoHide;
+	bool Pnl_Datos_IgnoreAutoHide;
+	bool Pnl_Files_IgnoreAutoHide;
+	bool Pnl_Urls_IgnoreAutoHide;
+	bool Pnl_Videos_IgnoreAutoHide;
+	bool Pnl_Sonidos_IgnoreAutoHide;
+	bool Pnl_Capturas_IgnoreAutoHide;
+	bool Pnl_Imagenes_IgnoreAutoHide;
+	bool Pnl_PictureFlow_IgnoreAutoHide;
 	bool Pnl_Nav;
-	bool Pnl_FilesUrl;
 	bool Pnl_Datos;
-	bool Pnl_PictureFlow;
+	bool Pnl_Files;
+	bool Pnl_Urls;
+	bool Pnl_Videos;
+	bool Pnl_Sonidos;
 	bool Pnl_Capturas;
+	bool Pnl_Imagenes;
+	bool Pnl_PictureFlow;
+	bool PictureFlowToCenter;
 	bool Pnl_Menubar;
 	bool Pnl_Toolbar;
+	bool Pnl_ToolbarDatos;
 	bool Pnl_Ordenar;
+	bool Pnl_ShortCut;
 	bool Pnl_StatusBar;
-	bool PictureFlowToCenter;
 	bool ver_IconMode;
 	bool ver_col_Icono;
 	bool ver_col_Subtitulo;
@@ -235,6 +346,12 @@ struct stGrlCfg {
 	QStringList FormatsVideo;
 	QStringList FormatsMusic;
 	QStringList FormatsImage;
+	bool        VerPlaylistVideo;
+	bool        VerPlaylistVideoMain;
+	bool        VerPlaylistSound;
+	bool        VerPlaylistSoundMain;
+	bool        VerInfoMedia;
+	bool        VerInfoMediaMain;
 // UltimoDirectorio
 	QString DirBD;
 	QString DirImportar;
@@ -244,6 +361,14 @@ struct stGrlCfg {
 	QString Img_Thumbs;
 	QString Img_CoverFront;
 	QString Img_CoverBack;
+	QString Img_CoverLeft;
+	QString Img_CoverRight;
+	QString Img_CoverTop;
+	QString Img_CoverBottom;
+	QString Img_Imagenes;
+	QString Img_Capturas;
+	QString Datos_Videos;
+	QString Datos_Sonidos;
 	QString DatosFiles_PathFile;
 	QString DatosFiles_PathExe;
 	QString DatosFiles_PathSetup;
@@ -255,81 +380,140 @@ struct stGrlCfg {
 	QString Dbx_gus_ultradir;
 	QString Dbx_sdl_mapperfile;
 	QString Dbx_dosbox_language;
-	QString Dbx_dosbox_captures;
-	QString Dbx_path_sonido;
 	QString Montaje_path;
 // ScummVM
 	QString Svm_path;
-	QString Svm_path_game;
+//	QString Svm_path_game;
 	QString Svm_path_save;
 	QString Svm_path_extra;
-	QString Svm_path_capturas;
-	QString Svm_path_sonido;
 	QString Svm_soundfont;
 // VDMSound
 	QString Vdms_path_exe;
 	QString Vdms_icon;
 // Updates
-	bool    chkVersion;
-	bool    SoloUpdates;
 	QString Version;
 	QString VerListSvm;
+	bool    chkVersion;
+	bool    chkUpdateThemes;
+	int     chkUpdateInterval;
+	int     lastChkUpdate;
 //--
+	bool isChangedToolbarBigIcon;
+	bool isChangedTheme;
+	bool isChangedFormatoFecha;
 	bool isChangedCategoria;
 	bool isChangedEmuList;
 	bool isChangedIdioma;
 	bool isChangedListDOSBox;
+	bool isChangedShortcut;
+	bool isChangedFavorito;
+};
 
+struct stLwItemCfg {
+	QString keyItemCfg;
+	QString img_cover_top_path;
+	QString img_cover_top_path_select;
+	QPixmap img_cover_top;
+	QPixmap img_cover_top_select;
+	int     img_cover_top_pos_x;
+	int     img_cover_top_pos_y;
+	bool    img_cover_top_zindex;
+	bool    img_scaled;
+	int     img_scale_w;
+	int     img_scale_h;
+	int     img_scale_pos_x;
+	int     img_scale_pos_y;
+	bool    tipo_emu_show;
+	int     tipo_emu_pos_x;
+	int     tipo_emu_pos_y;
+	bool    rating_show;
+	bool    rating_vertical;
+	int     rating_pos_x;
+	int     rating_pos_y;
+	bool    title_bg_show;
+	QString title_bg_path;
+	QString title_bg_path_select;
+	QPixmap title_bg;
+	QPixmap title_bg_select;
+	int     title_bg_pos_x;
+	int     title_bg_pos_y;
+	bool    title_show;
+	int     title_pos_x;
+	int     title_pos_y;
+	int     title_width;
+	int     title_height;
+	int     title_max_caracteres;
+	QString title_font;
+	int     title_font_size;
+	int     title_font_pos;
+	QPen    title_font_color;
+	QPen    title_font_color_select;
+	bool    title_font_wordwrap;
+	bool    title_font_bold;
+	bool    title_font_italic;
+	bool    title_font_underline;
 };
 
 struct stLwIconCfg {
-	int tw_icon_width;
-	int tw_icon_height;
-	int pf_img_width;
-	int pf_img_height;
+	int  tw_icon_width;
+	int  tw_icon_height;
+	bool tw_alternating_row_colors;
+	int  pf_img_width;
+	int  pf_img_height;
+	bool pf_img_fixsize;
 // Configuración --
-	int icon_width;
-	int icon_height;
-	QString img_cover_top;
-	QString img_cover_top_select;
-	int img_cover_top_pos_x;
-	int img_cover_top_pos_y;
-	bool img_scaled;
-	int img_scale_w;
-	int img_scale_h;
-	int img_scale_pos_x;
-	int img_scale_pos_y;
-	bool tipo_emu_show;
-	int tipo_emu_pos_x;
-	int tipo_emu_pos_y;
-	bool rating_show;
-	bool rating_vertical;
-	int rating_pos_x;
-	int rating_pos_y;
-	bool title_bg_show;
-	QString title_bg;
-	QString title_bg_select;
-	int title_bg_pos_x;
-	int title_bg_pos_y;
-	bool title_show;
-	int title_pos_x;
-	int title_pos_y;
-	int title_width;
-	int title_height;
-	int title_max_caracteres;
-	QString title_font;
-	int title_font_size;
-	QStringList title_font_color;
-	QStringList title_font_color_select;
-	bool title_font_bold;
-	bool title_font_italic;
-	bool title_font_underline;
+	int  icon_width;
+	int  icon_height;
+	QHash<QString, stLwItemCfg> item;
+};
+
+struct stCheckedDatos {
+	bool icono;
+	bool titulo;
+	bool subtitulo;
+	bool genero;
+	bool compania;
+	bool desarrollador;
+	bool tema;
+	bool grupo;
+	bool perspectiva;
+	bool idioma;
+	bool idioma_voces;
+	bool formato;
+	bool anno;
+	bool numdisc;
+	bool sistemaop;
+	bool tamano;
+	bool graficos;
+	bool sonido;
+	bool jugabilidad;
+	bool original;
+	bool estado;
+	bool thumbs;
+	bool cover_front;
+	bool cover_back;
+	bool cover_left;
+	bool cover_right;
+	bool cover_top;
+	bool cover_bottom;
+//	bool tipo_emu;
+	bool comentario;
+	bool favorito;
+	bool gamepad;
+	bool rating;
+	bool edad_recomendada;
+	bool usuario;
+	bool path_exe;
+	bool parametros_exe;
+	bool path_setup;
+	bool parametros_setup;
 };
 
 struct stDatosJuego {
 	QString idgrl;
 	QString icono;
 	QString titulo;
+	QString titulo_guiones;
 	QString subtitulo;
 	QString genero;
 	QString compania;
@@ -350,23 +534,42 @@ struct stDatosJuego {
 	QString original;
 	QString estado;
 	QString thumbs;
-	bool    thumbs_new;
 	QString cover_front;
-	bool    cover_front_new;
 	QString cover_back;
-	bool    cover_back_new;
+	QString cover_left;
+	QString cover_right;
+	QString cover_top;
+	QString cover_bottom;
 	QString fecha;
 	QString tipo_emu;
 	QString comentario;
 	QString favorito;
+	QString gamepad;
 	QString rating;
 	QString edad_recomendada;
 	QString usuario;
 	QString path_exe;
 	QString parametros_exe;
-	QString path_capturas;
 	QString path_setup;
 	QString parametros_setup;
+	stCheckedDatos isChecked;
+// --
+	QString path_capturas;
+	QString thumbs_url;
+	QString cover_front_url;
+	QString cover_front_url_small;
+	QString cover_back_url;
+	QString cover_back_url_small;
+	QString cover_left_url;
+	QString cover_left_url_small;
+	QString cover_right_url;
+	QString cover_right_url_small;
+	QString cover_top_url;
+	QString cover_top_url_small;
+	QString cover_bottom_url;
+	QString cover_bottom_url_small;
+// --
+	QString game_dir;
 };
 
 struct stConfigDOSBox {
@@ -452,6 +655,7 @@ struct stConfigDOSBox {
 	QString modem_modem;
 	QString modem_comport;
 	QString modem_listenport;
+	QString modem_irq;
 // [dserial]
 	QString dserial_directserial;
 	QString dserial_comport;
@@ -486,8 +690,6 @@ struct stConfigDOSBox {
 	QString opt_cerrar_dbox;
 	QString opt_cycle_sincronizar;
 // Path
-	QString path_conf;
-	QString path_sonido;
 	QString path_exe;
 	QString path_setup;
 	QString parametros_exe;
@@ -524,12 +726,11 @@ struct stConfigScummVM {
 	QString gfx_mode;
 	QString render_mode;
 	QString fullscreen;
+	QString filtering;
 	QString aspect_ratio;
-	QString path_game;
+	QString path;
 	QString path_extra;
 	QString path_save;
-	QString path_capturas;
-	QString path_sonido;
 	QString music_driver;
 	QString enable_gs;
 	QString multi_midi;
@@ -554,6 +755,10 @@ struct stConfigScummVM {
 	QString disable_dithering;
 	QString alt_intro;
 	QString boot_param;
+	QString autosave_period;
+	QString originalsaveload;
+	QString bright_palette;
+	QString guioptions;
 //--
 	QString description;
 	QString emu_svmpath;
@@ -564,7 +769,6 @@ struct stConfigVDMSound {
 	QString idgrl;
 	QString idcat;
 //--
-	QString path_conf;
 	QString path_exe;
 	QString program_1;
 	QString program_2;
@@ -599,6 +803,44 @@ struct stDatosUrls {
 //--
 	QString url;
 	QString descripcion;
+};
+
+struct stDatosImagenes {
+	QString nombre;
+	QString type;
+	QString url_full;
+	QString url_small;
+	QString dir_in;
+	QString dir_out;
+	bool    isImport;
+	bool    crearThumbs;
+};
+
+struct stConfigDBGL {
+	QString id_dbgl;
+// DBGL DOSBox cfgDbx
+	QString game_dir;
+	QString altexe1;
+	QString altexe2;
+	QString altexe1_param;
+	QString altexe2_param;
+	QString dosbox_title;
+	QString dosbox_version;
+// Custom
+	QString custom1;
+	QString custom2;
+	QString custom3;
+	QString custom4;
+	QString custom5;
+	QString custom6;
+	QString custom7;
+	QString custom8;
+	QString custom9;
+	QString custom10;
+	QString custom11;
+	QString custom12;
+	QString custom13;
+	QString custom14;
 };
 
 #endif // G_STRUCTS_H
