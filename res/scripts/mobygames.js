@@ -1,33 +1,47 @@
 /*
  * GR-lida importation script
- * http://sharesource.org/project/grlida/
+ * https://github.com/Monthy/gr-lida
  * http://www.gr-lida.org
- * 
+ *
  */
 // Info -------------------------------
-var authors		= "Monthy";						// Script authors
-var title		= "MobyGames (EN)";
-var url_site	= "https://www.mobygames.com";	// Site address
-var url_img_site= "https://www.mobygames.com";	// Site pics address
-var url_charset	= "UTF-8";
-var language	= "en-EN";						// Site language
-var version		= "0.4.4";						// Script version 17-11-2008 update 25-09-2018
-var requires	= "0.11.0";						// GR-lida version
-var comments	= "";
-var license		= "GPL v2";
-var description	= "Script para obtener los datos del juego (titulo, genero, año, compañía, etc...) así como la caratula principal del juego.";
+var authors			= 'Monthy';						// Script authors / Autor del script.
+var title			= 'MobyGames (EN)';				// Title script / Título del script.
+var url_site		= 'https://www.mobygames.com';	// Site address / Dirección del sitio.
+var url_img_site	= 'https://www.mobygames.com';	// Site pics address / Dirección de las imágenes sitio.
+var url_charset		= 'UTF-8';						// Character encoding / Codificación de caracteres.
+var url_page_skip	= 50;							// Number of items per page / Número de item por cada página.
+var language		= 'en-EN';						// Site language / Idioma del sitio, es-ES, en-EN ...
+var version			= '0.5.0';						// Script version 17-11-2008 update 16-12-2018 / Versión del script y la actualización.
+var requires		= '0.12.0';						// GR-lida version.
+var comments		= '';							// Comments / Comentarios.
+var license			= 'GPL v2';						// License / Licencia.
+var description		= 'Script para obtener los datos del juego (título, genero, año, compañía, etc...) así como la caratula principal del juego.'; // Description / Descripción.
 
-function UrlWebBusqueda(texto_busqueda)
+
+/**
+ * Genera la configuración para hacer la búsqueda en la web indicada.
+ *
+ * @param {string} texto_busqueda - Texto de búsqueda.
+ * @param {string} page - Indica la página de la búsqueda.
+ * @returns {Array} Retorna los datos de configuración de la url para hacer la búsqueda.
+ */
+function UrlWebBusqueda(texto_busqueda, page)
 {
 	var m_url = new Array();
 
-	m_url["metodo"] = "GET";	// POST, GET
-	m_url["c_post"] = "";		// Contenido del POST si es post
-	m_url["url"]    = url_site +"/search/quick?q="+ texto_busqueda.replace(" ","+") +"&p=-1&search=Go&sFilter=1&sG=on&sGG=on&sA=on&sD=on&sC=on";
+	m_url['metodo'] = 'GET';	// POST, GET.
+	m_url['c_post'] = '';		// Contenido del POST si es post.
+	m_url['url']    = url_site +'/search/quick/offset,'+ page +'/p,-1/q,'+ texto_busqueda +'/sA,on/sC,on/sD,on/sFilter,1/sG,on/sGG,on/search,Go/';
 
 	return m_url;
 }
 
+/**
+ * Analiza el código HTML del resultado de la búsqueda.
+ *
+ * @param {string} texto - Código HTML a analizar.
+ */
 function AnalyzeFindPage(texto)
 {
 // Expresión Regular para obtener los datos de la búsqueda.
@@ -35,7 +49,22 @@ function AnalyzeFindPage(texto)
 	textoFind = texto.replace(/<\/div><\/div><br clear="all"><\/div>/gi, '<fin_searchDetails>\n');// final a
 	textoFind = textoFind.replace(/&nbsp;/gi, ' ');
 
-/* Busqueda CON imagenes
+/* Búsqueda Páginas
+--------------------------------------------------------*/
+	myReFind = new RegExp('search,Go/">([0-9]+)</a>', 'g');
+	resultsFind = textoFind.match(myReFind);
+	if (resultsFind != null)
+	{
+		var pag = 0;
+		for (var i = 0; i < resultsFind.length; i++)
+		{
+			cbxPaginas.addItemPages((i+1), pag.toString());
+			pag = pag + url_page_skip;
+		}
+	} else
+		cbxPaginas.addItemPages('1', '0');
+
+/* Búsqueda CON imágenes
 --------------------------------------------------------*/
 	myReFind = new RegExp('<div class="([0-9a-z]+)"><div class="searchResult"><div class="searchNumber">([0-9]+).</div><div class="searchImage"><a href="([^"]*)"><img class="searchResultImage" alt="([^"]*)" border="([^"]*)" src="([^"]*)" height="([^"]*)" width="([^"]*)" ></a></div><div class="searchData"><div class="searchTitle">Game: <a href="([^"]*)">([^<]*)</a>([^"]*)</div><div class="searchDetails">([^\n[]*)</div><fin_searchDetails>\n', 'g');
 	resultsFind = textoFind.match(myReFind);
@@ -55,7 +84,7 @@ function AnalyzeFindPage(texto)
 		}
 	}
 
-/* Busqueda SIN imagenes
+/* Búsqueda SIN imágenes
 --------------------------------------------------------*/
 	myReFind = new RegExp('<div class="([0-9a-z]+)"><div class="searchResult"><div class="searchNumber">([0-9]+).</div><div class="searchData"><div class="searchTitle">Game: <a href="([^"]*)">([^<]*)</a>([^"]*)</div><div class="searchDetails">([^\n[]*)</div><fin_searchDetails>\n', 'g');
 	resultsFind = textoFind.match(myReFind);
@@ -76,40 +105,45 @@ function AnalyzeFindPage(texto)
 	}
 }
 
+/**
+ * Analiza el código HTML de la ficha del juego para obtener los distintos
+ * datos como el título, el genero, compañía, etc...
+ *
+ * @param {string} texto - Código HTML a analizar.
+ * @param {boolean} local - Indica si se hace de forma local.
+ * @returns {Array} Retorna el Array con los datos obtenidos.
+ */
 function AnalyzeGamePage(texto, local)
 {
 	var m_array = new Array();
 // INI Temp ---------------
-	m_array["Dat_grupo"]            = '';
-	m_array["Dat_idioma"]           = '';
-	m_array["Dat_idioma_voces"]     = '';
-	m_array["Dat_formato"]          = '';
-	m_array["Dat_numdisc"]          = '';
-	m_array["Dat_tamano"]           = '';
-	m_array["Dat_graficos"]         = '0';
-	m_array["Dat_sonido"]           = '0';
-	m_array["Dat_jugabilidad"]      = '0';
-	m_array["Dat_original"]         = 'false';
-	m_array["Dat_estado"]           = '';
-	m_array["Dat_thumbs"]           = '';
-	m_array["Dat_thumbs_new"]       = 'false';
-	m_array["Dat_cover_front"]      = '';
-	m_array["Dat_cover_front_new"]  = 'false';
-	m_array["Dat_cover_back"]       = '';
-	m_array["Dat_cover_back_new"]   = 'false';
-	m_array["Dat_fecha"]            = '';
-	m_array["Dat_tipo_emu"]         = 'datos'; // Importante = datos
-	m_array["Dat_favorito"]         = 'false';
-	m_array["Dat_path_exe"]         = '';
-	m_array["Dat_parametros_exe"]   = '';
-	m_array["Dat_path_capturas"]    = '';
-	m_array["Dat_path_setup"]       = '';
-	m_array["Dat_parametros_setup"] = '';
+	m_array['Dat_grupo']            = '';
+	m_array['Dat_idioma']           = '';
+	m_array['Dat_idioma_voces']     = '';
+	m_array['Dat_formato']          = '';
+	m_array['Dat_numdisc']          = '';
+	m_array['Dat_tamano']           = '';
+	m_array['Dat_graficos']         = '0';
+	m_array['Dat_sonido']           = '0';
+	m_array['Dat_jugabilidad']      = '0';
+	m_array['Dat_original']         = 'false';
+	m_array['Dat_estado']           = '';
+	m_array['Dat_fecha']            = '';
+	m_array['Dat_tipo_emu']         = 'datos'; // Importante = datos
+	m_array['Dat_favorito']         = 'false';
+	m_array['Dat_path_exe']         = '';
+	m_array['Dat_parametros_exe']   = '';
+	m_array['Dat_path_capturas']    = '';
+	m_array['Dat_path_setup']       = '';
+	m_array['Dat_parametros_setup'] = '';
 // FIN Temp ---------------
+
+// Algunos reemplazos.
+	texto = texto.replace(/&nbsp;/gi, ' ');
 
 // Icono ------------------
 	m_array['Dat_icono'] = 'datos';
-// Titulo -----------------
+// Título -----------------
 	if (texto.indexOf('niceHeaderTitle',0) != -1)
 	{
 		m_array['Dat_titulo'] = AnalyzeTag(texto, '<h1 class="niceHeaderTitle"><a href="([^"]*)">([^\n[]*)</a> <small>', 2, '');
@@ -254,10 +288,45 @@ function AnalyzeGamePage(texto, local)
 	else
 		m_array['Dat_usuario'] = '';
 
-// Imagenes Caratula ------
+// INI Imágenes Caratula --
+// /game/dos/alone-in-the-dark/cover-art/gameCoverId,440/
+
+// INI Temp ---------------
+	m_array['Dat_thumbs']                 = '';
+	m_array['Dat_thumbs_url']             = '';
+
+	m_array['Dat_cover_front']            = '';
+	m_array['Dat_cover_front_url']        = '';
+	m_array['Dat_cover_front_url_small']  = '';
+
+	m_array['Dat_cover_back']             = '';
+	m_array['Dat_cover_back_url']         = '';
+	m_array['Dat_cover_back_url_small']   = '';
+
+	m_array['Dat_cover_left']             = '';
+	m_array['Dat_cover_left_url']         = '';
+	m_array['Dat_cover_left_url_small']   = '';
+
+	m_array['Dat_cover_right']            = '';
+	m_array['Dat_cover_right_url']        = '';
+	m_array['Dat_cover_right_url_small']  = '';
+
+	m_array['Dat_cover_top']              = '';
+	m_array['Dat_cover_top_url']          = '';
+	m_array['Dat_cover_top_url_small']    = '';
+
+	m_array['Dat_cover_bottom']           = '';
+	m_array['Dat_cover_bottom_url']       = '';
+	m_array['Dat_cover_bottom_url_small'] = '';
+
+	m_array['Dat_covers_other_page']      = 'false';
+	m_array['Dat_url_all_covers']         = '';
+// FIN Temp ---------------
+
 	if (texto.indexOf('/images/covers/s/', 0) != -1)
 	{
 		var url_covers = '';
+//		var id_covers  = '';
 		myRE = new RegExp('/game/([^"]+)/([^"]+)/cover-art/gameCoverId,([0-9]+)/"><img alt="([^<]*)" border="0" src="/images/covers/s/([^"]+)"');
 		img_results = texto.match(myRE);
 		if (img_results != null)
@@ -265,6 +334,7 @@ function AnalyzeGamePage(texto, local)
 			m_array['Dat_thumbs']      = img_results[5];
 			m_array['Dat_cover_front'] = img_results[5];
 			url_covers = img_results[1] +'/'+ img_results[2];
+//			id_covers  = img_results[3];
 		} else {
 			myRE = new RegExp('/game/([^"]+)/cover-art/gameCoverId,([0-9]+)/"><img alt="([^<]*)" border="0" src="/images/covers/s/([^"]+)"');
 			img_results = texto.match(myRE);
@@ -273,30 +343,178 @@ function AnalyzeGamePage(texto, local)
 				m_array['Dat_thumbs']      = img_results[4];
 				m_array['Dat_cover_front'] = img_results[4];
 				url_covers = img_results[1];
+//				id_covers  = img_results[2];
 			} else {
 				m_array['Dat_thumbs']      = '';
 				m_array['Dat_cover_front'] = '';
 			}
 		}
 
-		m_array["Dat_cover_back"]       = '';
-		m_array["Dat_url_cover_thumbs"] = url_img_site +'/images/covers/s/'+ m_array['Dat_thumbs'];
-		m_array["Dat_url_cover_front"]  = url_img_site +'/images/covers/l/'+ m_array['Dat_cover_front'];
-		m_array["Dat_url_cover_back"]   = '';
-	} else {
-		m_array["Dat_thumbs"]           = '';
-		m_array["Dat_cover_front"]      = '';
-		m_array["Dat_cover_back"]       = '';
-		m_array["Dat_url_cover_thumbs"] = '';
-		m_array["Dat_url_cover_front"]  = '';
-		m_array["Dat_url_cover_back"]   = '';
+//		url_covers = AnalyzeTag(texto, '/game/([^"]+)/cover-art">Cover Art</a>', 1, '');	// Alternativa.
+
+		m_array['Dat_thumbs_url']             = url_img_site +'/images/covers/s/'+ m_array['Dat_thumbs'];
+		m_array['Dat_cover_front_url']        = url_img_site +'/images/covers/l/'+ m_array['Dat_cover_front'];
+		m_array['Dat_cover_front_url_small']  = url_img_site +'/images/covers/s/'+ m_array['Dat_cover_front'];
+
+// http://www.mobygames.com/game/dos/alone-in-the-dark/cover-art
+// http://www.mobygames.com/game/dos/alone-in-the-dark/cover-art/gameCoverId,440/
+		m_array['Dat_covers_other_page'] = 'true';
+		m_array['Dat_url_all_covers']    = url_img_site +'/game/'+ url_covers +'/cover-art';
 	}
 // FIN Imágenes Caratula --
 
 	return m_array;
 }
 
+/**
+ * Analiza el código HTML para obtener las distintas caratulas
+ * como la caratula frontal, trasera, lateral izquiedo,
+ * lateral derecho, etc...
+ *
+ * @param {string} texto - Código HTML a analizar.
+ * @returns {Array} Retorna el Array con los datos obtenidos.
+ */
+function AnalyzeGameCoverPage(texto)
+{
+	var m_array    = new Array();
+	var all_covers = '';
+	var textoFind  = '';
+
+// Algunos reemplazos.
+	textoFind = texto.replace(/<p>/gi, '{p}');
+	textoFind = textoFind.replace(/<\/p>/gi, '{/p}');
+	textoFind = textoFind.replace(/url\(/gi, 'url:');
+	textoFind = textoFind.replace(/\);/gi, ':;');
+	textoFind = textoFind.replace(/&nbsp;/gi, ' ');
+
+// INI Temp ---------------
+	m_array['Dat_thumbs']                 = '';
+	m_array['Dat_thumbs_url']             = '';
+	m_array['Dat_cover_front']            = '';
+	m_array['Dat_cover_front_url']        = '';
+	m_array['Dat_cover_front_url_small']  = '';
+	m_array['Dat_cover_back']             = '';
+	m_array['Dat_cover_back_url']         = '';
+	m_array['Dat_cover_back_url_small']   = '';
+	m_array['Dat_cover_left']             = '';
+	m_array['Dat_cover_left_url']         = '';
+	m_array['Dat_cover_left_url_small']   = '';
+	m_array['Dat_cover_right']            = '';
+	m_array['Dat_cover_right_url']        = '';
+	m_array['Dat_cover_right_url_small']  = '';
+	m_array['Dat_cover_top']              = '';
+	m_array['Dat_cover_top_url']          = '';
+	m_array['Dat_cover_top_url_small']    = '';
+	m_array['Dat_cover_bottom']           = '';
+	m_array['Dat_cover_bottom_url']       = '';
+	m_array['Dat_cover_bottom_url_small'] = '';
+// FIN Temp ---------------
+
+	myRE = new RegExp('<div class="row">([^[\[]*)<div class="sideBarLinks"', 'g');
+	row_results = textoFind.match(myRE);
+	if (row_results != null)
+	{
+		if (row_results.length > -1)
+		{
+			myRE = new RegExp('/game/([^/]+)/([^/]+)/cover-art/gameCoverId,([0-9]+)/" title="([^"]+)" class="thumbnail-([^"]+)" style="background-image:url:/images/covers/s/([^:]+):;"></a>([^{]*){p}([^{]*){/p}', 'g');
+			img_results = row_results[0].match(myRE);
+			var list_covers_array = AnalyzeGameCover(img_results);
+			for (var i = 0; i < list_covers_array.length; i++)
+			{
+				var img_type = list_covers_array[i]['img_type'];
+				if (img_type == 'Front Cover')
+				{
+					m_array['Dat_thumbs']                = list_covers_array[i]['img_name'];
+					m_array['Dat_thumbs_url']            = list_covers_array[i]['img_url_small'];
+					m_array['Dat_cover_front']           = list_covers_array[i]['img_name'];
+					m_array['Dat_cover_front_url']       = list_covers_array[i]['img_url_full'];
+					m_array['Dat_cover_front_url_small'] = list_covers_array[i]['img_url_small'];
+				}
+				if (img_type == 'Back Cover')
+				{
+					m_array['Dat_cover_back']           = list_covers_array[i]['img_name'];
+					m_array['Dat_cover_back_url']       = list_covers_array[i]['img_url_full'];
+					m_array['Dat_cover_back_url_small'] = list_covers_array[i]['img_url_small'];
+				}
+				if (img_type == 'Spine/Sides Left' || img_type == 'Spine/Sides Box Left' || img_type == 'Spine/Sides Left/Right')
+				{
+					m_array['Dat_cover_left']           = list_covers_array[i]['img_name'];
+					m_array['Dat_cover_left_url']       = list_covers_array[i]['img_url_full'];
+					m_array['Dat_cover_left_url_small'] = list_covers_array[i]['img_url_small'];
+				}
+				if (img_type == 'Spine/Sides Right' || img_type == 'Spine/Sides Box Right' || img_type == 'Spine/Sides Left/Right')
+				{
+					m_array['Dat_cover_right']           = list_covers_array[i]['img_name'];
+					m_array['Dat_cover_right_url']       = list_covers_array[i]['img_url_full'];
+					m_array['Dat_cover_right_url_small'] = list_covers_array[i]['img_url_small'];
+				}
+				if (img_type == 'Spine/Sides Top' || img_type == 'Spine/Sides Box Top' || img_type == 'Spine/Sides Top/Bottom')
+				{
+					m_array['Dat_cover_top']           = list_covers_array[i]['img_name'];
+					m_array['Dat_cover_top_url']       = list_covers_array[i]['img_url_full'];
+					m_array['Dat_cover_top_url_small'] = list_covers_array[i]['img_url_small'];
+				}
+				if (img_type == 'Spine/Sides Bottom' || img_type == 'Spine/Sides Box Bottom' || img_type == 'Spine/Sides Top/Bottom')
+				{
+					m_array['Dat_cover_bottom']           = list_covers_array[i]['img_name'];
+					m_array['Dat_cover_bottom_url']       = list_covers_array[i]['img_url_full'];
+					m_array['Dat_cover_bottom_url_small'] = list_covers_array[i]['img_url_small'];
+				}
+
+				all_covers += list_covers_array[i]['img_name'] +'|'+ list_covers_array[i]['img_url_full'] +'|'+ img_type +'|'+ list_covers_array[i]['img_url_small'] +'\n';
+			}
+		}
+	}
+
+	m_array['Dat_all_covers'] = all_covers;
+
+	return m_array;
+}
+
+/**
+ * Analiza el código HTML para obtener todas las imágenes
+ * posibles y disponibles como la caratula frontal, trasera,
+ * lateral izquiedo, lateral derecho, etc...
+ *
+ * @param {string} texto - Código HTML a analizar.
+ * @returns {Array} Retorna el Array con los datos obtenidos.
+ */
+function AnalyzeGameMoreCoverPage(texto)
+{
+	var m_array    = new Array();
+	var all_covers = '';
+	var textoFind  = '';
+
+	textoFind = texto.replace(/<p>/gi, '{p}');
+	textoFind = textoFind.replace(/<\/p>/gi, '{/p}');
+	textoFind = textoFind.replace(/url\(/gi, 'url:');
+	textoFind = textoFind.replace(/\);/gi, ':;');
+	textoFind = textoFind.replace(/&nbsp;/gi, ' ');
+
+	myRE = new RegExp('/game/([^/]+)/([^/]+)/cover-art/gameCoverId,([0-9]+)/" title="([^"]+)" class="thumbnail-([^"]+)" style="background-image:url:/images/covers/s/([^:]+):;"></a>([^{]*){p}([^{]*){/p}', 'g');
+	img_results = textoFind.match(myRE);
+	var list_covers_array = AnalyzeGameCover(img_results);
+	for (var i = 0; i < list_covers_array.length; i++)
+	{
+		all_covers += list_covers_array[i]['img_name'] +'|'+ list_covers_array[i]['img_url_full'] +'|'+ list_covers_array[i]['img_type'] +'|'+ list_covers_array[i]['img_url_small'] +'\n';
+	}
+
+	m_array['Dat_all_covers'] = all_covers;
+
+	return m_array;
+}
+
 // Funciones Extras -----------------------------
+/**
+ * Función extra para obtener los datos dentro de las etiquetas HTML
+ * entre otras.
+ *
+ * @param {string} texto - Código HTML a analizar.
+ * @param {string|RegExp} stRegExp - Expresión regular para hacer la busqueda deseada.
+ * @param {intiger} indxExp - Indice del resultado que sera devuelto.
+ * @param {string} stDefault - Texto por defecto si no se obtene nada.
+ * @returns {string} Retorna el texto encontrado o el indicado por defecto.
+ */
 function AnalyzeTag(texto, stRegExp, indxExp, stDefault)
 {
 	if (texto != '')
@@ -311,6 +529,15 @@ function AnalyzeTag(texto, stRegExp, indxExp, stDefault)
 		return stDefault;
 }
 
+/**
+ * Función extra para obtener los datos de las categorías de MobyGames.
+ *
+ * @param {string} texto - Código HTML a analizar.
+ * @param {string|RegExp} stRegExp - Expresión regular para hacer la primera busqueda deseada.
+ * @param {string} stRegExpDos - Expresión regular para hacer la segunda busqueda deseada y obtener los datos.
+ * @param {intiger} indxExp - Indice del resultado que sera devuelto.
+ * @returns
+ */
 function AnalyzeCategoriasMobyGames(texto, stRegExp, stRegExpDos, indxExp)
 {
 	var strTemp;
@@ -340,6 +567,12 @@ function AnalyzeCategoriasMobyGames(texto, stRegExp, stRegExpDos, indxExp)
 	return list_array.join('; ');
 }
 
+/**
+ * Función extra para obtener otros títulos en la busqueda.
+ *
+ * @param {string} titulo - Título de la busqueda.
+ * @param {string} contenido - Contenido donde buscar y extraer los otros títulos.
+ */
 function AnalyzeOtherGame(titulo, contenido)
 {
 	my_rx = new RegExp('<span style="([^"]*)"><a href="([^"]*)">([^"]*)</a> ([^"]*)</span>', 'g');
@@ -353,4 +586,35 @@ function AnalyzeOtherGame(titulo, contenido)
 			twListaBusqueda.addItemFind(titulo, results_game_Otro[3], results_game_Otro[4].replace('(<em>','').replace('</em>)',''), results_game_Otro[2], 'datos');
 		}
 	}
+}
+
+/**
+ *
+ *
+ * @param {*} img_results
+ * @returns
+ */
+function AnalyzeGameCover(img_results)
+{
+	var list_array = new Array();
+	if (img_results != null)
+	{
+		for (var i = 0; i < img_results.length; i++)
+		{
+			rx_img = new RegExp('/game/([^/]+)/([^/]+)/cover-art/gameCoverId,([0-9]+)/" title="([^"]+)" class="thumbnail-([^"]+)" style="background-image:url:/images/covers/s/([^:]+):;"></a>([^{]*){p}([^{]*){/p}');
+			results_img = img_results[i].match(rx_img);
+			if (results_img != null)
+			{
+				var m_array = new Array();
+				m_array['img_name']      = results_img[6];
+				m_array['img_type']      = results_img[8].replace(/<br>/gi, ' ').replace(/ \/ /gi, '/');
+				m_array['img_url_full']  = url_img_site +'/images/covers/l/'+ m_array['img_name'];
+				m_array['img_url_small'] = url_img_site +'/images/covers/s/'+ m_array['img_name'];
+
+				list_array.push(m_array);
+			}
+		}
+	}
+
+	return list_array;
 }

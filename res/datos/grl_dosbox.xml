@@ -82,6 +82,7 @@
       <Dbx_dos_ems>{Dbx_dos_ems}</Dbx_dos_ems>
       <Dbx_dos_umb>{Dbx_dos_umb}</Dbx_dos_umb>
       <Dbx_dos_keyboardlayout>{Dbx_dos_keyboardlayout}</Dbx_dos_keyboardlayout>
+      <Dbx_dos_version>{Dbx_dos_version}</Dbx_dos_version>
       <Dbx_ipx_ipx>{Dbx_ipx_ipx}</Dbx_ipx_ipx>
       <Dbx_ipx_type>{Dbx_ipx_type}</Dbx_ipx_type>
       <Dbx_ipx_port>{Dbx_ipx_port}</Dbx_ipx_port>
@@ -93,7 +94,6 @@
       <Dbx_opt_consola_dbox>{Dbx_opt_consola_dbox}</Dbx_opt_consola_dbox>
       <Dbx_opt_cerrar_dbox>{Dbx_opt_cerrar_dbox}</Dbx_opt_cerrar_dbox>
       <Dbx_opt_cycle_sincronizar>{Dbx_opt_cycle_sincronizar}</Dbx_opt_cycle_sincronizar>
-      <Dbx_path_conf>{Dbx_path_conf}</Dbx_path_conf>
       <Dbx_path_sonido>{Dbx_path_sonido}</Dbx_path_sonido>
       <Dbx_path_exe>{Dbx_path_exe}</Dbx_path_exe>
       <Dbx_path_setup>{Dbx_path_setup}</Dbx_path_setup>

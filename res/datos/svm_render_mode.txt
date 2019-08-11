@@ -8,3 +8,6 @@ Amiga|amiga|sinimg.png
 FM-Towns|fmtowns|sinimg.png
 PC-9821 (256 colors)|pc9821|sinimg.png
 PC-9801 (16 colors)|pc9801|sinimg.png
+Apple IIgs|2gs|apple_iigs.png
+Atari ST|atari|atari.png
+Macintosh|macintosh|macintosh.png

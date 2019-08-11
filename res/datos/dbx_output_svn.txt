@@ -1,2 +1,2 @@
-OpenGL HQ|openglhq|sinimg.png
-Direct3D|direct3d|sinimg.png
+OpenGL HQ|openglhq|opengl.png
+Direct3D|direct3d|directx.png

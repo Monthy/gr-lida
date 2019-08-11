@@ -1,0 +1,43 @@
+body, html {
+	color: #242424;
+	background-color: #d4d4d4;
+	margin: 5px 2px 5px 2px;
+	padding: 0px;
+}
+.head h2 {
+	font-weight:bold;
+	color: #242424;
+	padding:0px;
+	margin:0px;
+}
+.main {
+	color: #242424;
+	background-color: #F8F8F8;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #363636;
+	margin: 0px 0px 4px 0px;
+}
+th {
+	background-color:#ecce64;
+	border: 1px solid #242424;
+}
+td {
+	background-color:#E5E5E5;
+	margin: 0px;
+	padding: 1px;
+}
+img {
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+.cover {
+	margin: 4px 0px 0px 0px;
+}
+.absmiddle { vertical-align: middle; }
+.post {
+	margin: 5px;
+	padding: 5px;
+	color: #242424;
+}

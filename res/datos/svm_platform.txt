@@ -1,8 +1,10 @@
 <default>||sinimg.png
-Apple IIgs|2gs|sinimg.png
+Apple IIgs|2gs|apple_iigs.png
+Apple II|apple2|sinimg.png
 3DO|3do|3do.png
 Acorn|acorn|sinimg.png
 Amiga|amiga|amiga.png
+Atari 8-bit|atari8|sinimg.png
 Atari ST|atari|atari.png
 Commodore 64|c64|c64.png
 DOS|pc|pc.png
@@ -16,6 +18,8 @@ PC-Engine|pce|pce.png
 NES|nes|nes.png
 SegaCD|segacd|sm_cd.png
 Windows|windows|win9x.png
-Sony PlayStation|playstation|psx-1.png
+Sony PlayStation|playstation|psx.png
 Philips CD-i|cdi|cdi.png
 Apple iOS|ios|sinimg.png
+OS/2|os2|sinimg.png
+BeOS|beos|beos.png

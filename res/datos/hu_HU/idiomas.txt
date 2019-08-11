@@ -1,22 +1,22 @@
-Spanyol|es|es.png
-Anglol|en|en.png
-Angol (Britt)|gb|gb.png
-Angol (Egyesült Államok)|us|us.png
-Német|de|de.png
-Dán|dk|dk.png
-Francia|fr|fr.png
-Olasz|it|it.png
-Portugál|pt|pt.png
-Japán|jp|jp.png
-Kínai (Kína)|zh-cn|zh-cn.png
-Kínai (Tajván)|zh|zh.png
-Kóreai|kr|kr.png
-Héber|hb|hb.png
-Orosz|ru|ru.png
-Cseh|cz|cz.png
-Svéd|se|se.png
-Holland|nl|nl.png
-Norvég|nb|nb.png
-Lengyel|pl|pl.png
-Magyar|hu|hu.png
-Görög|gr|gr.png
+Spanyol|es|lng/es.png
+Anglol|en|lng/en.png
+Angol (Britt)|gb|lng/gb.png
+Angol (Egyesült Államok)|us|lng/us.png
+Német|de|lng/de.png
+Dán|dk|lng/dk.png
+Francia|fr|lng/fr.png
+Olasz|it|lng/it.png
+Portugál|pt|lng/pt.png
+Japán|jp|lng/jp.png
+Kínai (Kína)|zh-cn|lng/cn.png
+Kínai (Tajván)|zh|lng/zh.png
+Kóreai|kr|lng/kr.png
+Héber|hb|lng/il.png
+Orosz|ru|lng/ru.png
+Cseh|cz|lng/cz.png
+Svéd|se|lng/se.png
+Holland|nl|lng/nl.png
+Norvég|nb|lng/nb.png
+Lengyel|pl|lng/pl.png
+Magyar|hu|lng/hu.png
+Görög|gr|lng/gr.png

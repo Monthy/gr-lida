@@ -1,6 +1,6 @@
 /*
  * GR-lida importation script
- * http://sharesource.org/project/grlida/
+ * https://github.com/Monthy/gr-lida
  * http://www.gr-lida.org
  * 
  */
@@ -10,13 +10,13 @@ var title		= "GR-lida (ES)";
 var url_site	= "http://www.gr-lida.org";		// Site address
 var url_charset	= "UTF-8";
 var language	= "es-ES";						// Site language
-var version		= "0.2.0";						// Script version 19-04-2010 update 04-04-2013
-var requires	= "0.11.0";						// GR-lida version
+var version		= "0.2.2";						// Script version 19-04-2010 update 25-09-2016
+var requires	= "0.12.0";						// GR-lida version
 var comments	= "";
 var license		= "GPL v2";
-var description	= "Script para obtener los datos del juego (titulo, genero, año, compañía, etc...) así como las caratulas. También da la posibilidad de bajar configuración ya establecida de distintos juegos para el DOSBox y el ScummVM.";
+var description	= "Script para obtener los datos del juego (título, genero, año, compañía, etc...) así como las caratulas. También da la posibilidad de bajar configuración ya establecida de distintos juegos para el DOSBox y el ScummVM.";
 
-function UrlWebBusqueda(texto_busqueda)
+function UrlWebBusqueda(texto_busqueda, page)
 {
 	var m_url = new Array();
 
@@ -29,17 +29,19 @@ function UrlWebBusqueda(texto_busqueda)
 
 function AnalyzeFindPage(texto)
 {
+	cbxPaginas.addItemPages("1", "0");
+
 	myReFind = new RegExp("<juego ID=\"([0-9]+)\">([^\"]*)</juego>","g");
 	resultsFind = texto.match(myReFind);
-	for(var i = 0; i < resultsFind.length; i++)
+	for (var i = 0; i < resultsFind.length; i++)
 	{
-		results_id         = AnalyzeTagName(resultsFind[i], "ID=\"([0-9]+)\"");
-		results_id_emu     = AnalyzeTagName(resultsFind[i], "<id_emu>([0-9]+)</id_emu>");
-		results_titulo     = AnalyzeTagName(resultsFind[i], "<titulo>([^\"<>]*)</titulo>");
-		results_plataforma = AnalyzeTagName(resultsFind[i], "<plataforma>([^\"<>]*)</plataforma>");
-		results_publicado  = AnalyzeTagName(resultsFind[i], "<publicado>([0-9]+)</publicado>");
+		results_id         = AnalyzeTagName(resultsFind[i], "ID=\"([0-9]+)\"", "");
+		results_id_emu     = AnalyzeTagName(resultsFind[i], "<id_emu>([0-9]+)</id_emu>", "");
+		results_titulo     = AnalyzeTagName(resultsFind[i], "<titulo>([^\"<>]*)</titulo>", "");
+		results_plataforma = AnalyzeTagName(resultsFind[i], "<plataforma>([^\"<>]*)</plataforma>", "");
+		results_publicado  = AnalyzeTagName(resultsFind[i], "<publicado>([0-9]+)</publicado>", "");
 		results_tipo_emu   = AnalyzeTagName(resultsFind[i], "<tipo_emu>([^\"<>]*)</tipo_emu>", "datos");
-		results_alt_id     = AnalyzeTagName(resultsFind[i], "<alt_id>([0-9]+)</alt_id>");
+		results_alt_id     = AnalyzeTagName(resultsFind[i], "<alt_id>([0-9]+)</alt_id>", "");
 
 		twListaBusqueda.addItemFind(results_titulo, results_plataforma, results_publicado, url_site +"/grlidadb.php?ver=juego&gid="+ results_id +"&id_emu="+ results_id_emu +"&tipo_emu="+ results_tipo_emu +"&alt_id="+ results_alt_id, results_tipo_emu);		
 	}
@@ -49,37 +51,37 @@ function AnalyzeGamePage(texto, local)
 {
 	var m_array = new Array();
 
-	m_array["Dat_icono"]            = AnalyzeTagName(texto, "<Dat_icono>([^\"<>]*)</Dat_icono>", "datos.png");
-	m_array["Dat_titulo"]           = AnalyzeTagName(texto, "<Dat_titulo>([^\"<>]*)</Dat_titulo>");
-	m_array["Dat_subtitulo"]        = AnalyzeTagName(texto, "<Dat_subtitulo>([^\"<>]*)</Dat_subtitulo>");
-	m_array["Dat_genero"]           = AnalyzeTagName(texto, "<Dat_genero>([^\"<>]*)</Dat_genero>");
-	m_array["Dat_compania"]         = AnalyzeTagName(texto, "<Dat_compania>([^\"<>]*)</Dat_compania>");
-	m_array["Dat_desarrollador"]    = AnalyzeTagName(texto, "<Dat_desarrollador>([^\"<>]*)</Dat_desarrollador>");
-	m_array["Dat_tema"]             = AnalyzeTagName(texto, "<Dat_tema>([^\"<>]*)</Dat_tema>");
-	m_array["Dat_grupo"]            = AnalyzeTagName(texto, "<Dat_grupo>([^\"<>]*)</Dat_grupo>");
-	m_array["Dat_perspectiva"]      = AnalyzeTagName(texto, "<Dat_perspectiva>([^\"<>]*)</Dat_perspectiva>");
-	m_array["Dat_idioma"]           = AnalyzeTagName(texto, "<Dat_idioma>([^\"<>]*)</Dat_idioma>");
-	m_array["Dat_idioma_voces"]     = AnalyzeTagName(texto, "<Dat_idioma_voces>([^\"<>]*)</Dat_idioma_voces>");
-	m_array["Dat_formato"]          = AnalyzeTagName(texto, "<Dat_formato>([^\"<>]*)</Dat_formato>");
-	m_array["Dat_anno"]             = AnalyzeTagName(texto, "<Dat_anno>([^\"<>]*)</Dat_anno>");
-	m_array["Dat_numdisc"]          = AnalyzeTagName(texto, "<Dat_numdisc>([^\"<>]*)</Dat_numdisc>");
-	m_array["Dat_sistemaop"]        = AnalyzeTagName(texto, "<Dat_sistemaop>([^\"<>]*)</Dat_sistemaop>");
-	m_array["Dat_tamano"]           = AnalyzeTagName(texto, "<Dat_tamano>([^\"<>]*)</Dat_tamano>");
-	m_array["Dat_graficos"]         = AnalyzeTagName(texto, "<Dat_graficos>([^\"<>]*)</Dat_graficos>");
-	m_array["Dat_sonido"]           = AnalyzeTagName(texto, "<Dat_sonido>([^\"<>]*)</Dat_sonido>");
-	m_array["Dat_jugabilidad"]      = AnalyzeTagName(texto, "<Dat_jugabilidad>([^\"<>]*)</Dat_jugabilidad>");
-	m_array["Dat_original"]         = AnalyzeTagName(texto, "<Dat_original>([^\"<>]*)</Dat_original>");
-	m_array["Dat_estado"]           = AnalyzeTagName(texto, "<Dat_estado>([^\"<>]*)</Dat_estado>");
-	m_array["Dat_thumbs"]           = AnalyzeTagName(texto, "<Dat_thumbs>([^\"<>]*)</Dat_thumbs>");
-	m_array["Dat_cover_front"]      = AnalyzeTagName(texto, "<Dat_cover_front>([^\"<>]*)</Dat_cover_front>");
-	m_array["Dat_cover_back"]       = AnalyzeTagName(texto, "<Dat_cover_back>([^\"<>]*)</Dat_cover_back>");
-	m_array["Dat_fecha"]            = AnalyzeTagName(texto, "<Dat_fecha>([^\"<>]*)</Dat_fecha>");
+	m_array["Dat_icono"]            = AnalyzeTagName(texto, "<Dat_icono>([^\"<>]*)</Dat_icono>", "datos") +".png";
+	m_array["Dat_titulo"]           = AnalyzeTagName(texto, "<Dat_titulo>([^\"<>]*)</Dat_titulo>", "");
+	m_array["Dat_subtitulo"]        = AnalyzeTagName(texto, "<Dat_subtitulo>([^\"<>]*)</Dat_subtitulo>", "");
+	m_array["Dat_genero"]           = AnalyzeTagName(texto, "<Dat_genero>([^\"<>]*)</Dat_genero>", "");
+	m_array["Dat_compania"]         = AnalyzeTagName(texto, "<Dat_compania>([^\"<>]*)</Dat_compania>", "");
+	m_array["Dat_desarrollador"]    = AnalyzeTagName(texto, "<Dat_desarrollador>([^\"<>]*)</Dat_desarrollador>", "");
+	m_array["Dat_tema"]             = AnalyzeTagName(texto, "<Dat_tema>([^\"<>]*)</Dat_tema>", "");
+	m_array["Dat_grupo"]            = AnalyzeTagName(texto, "<Dat_grupo>([^\"<>]*)</Dat_grupo>", "");
+	m_array["Dat_perspectiva"]      = AnalyzeTagName(texto, "<Dat_perspectiva>([^\"<>]*)</Dat_perspectiva>", "");
+	m_array["Dat_idioma"]           = AnalyzeTagName(texto, "<Dat_idioma>([^\"<>]*)</Dat_idioma>", "");
+	m_array["Dat_idioma_voces"]     = AnalyzeTagName(texto, "<Dat_idioma_voces>([^\"<>]*)</Dat_idioma_voces>", "");
+	m_array["Dat_formato"]          = AnalyzeTagName(texto, "<Dat_formato>([^\"<>]*)</Dat_formato>", "");
+	m_array["Dat_anno"]             = AnalyzeTagName(texto, "<Dat_anno>([^\"<>]*)</Dat_anno>", "");
+	m_array["Dat_numdisc"]          = AnalyzeTagName(texto, "<Dat_numdisc>([^\"<>]*)</Dat_numdisc>", "");
+	m_array["Dat_sistemaop"]        = AnalyzeTagName(texto, "<Dat_sistemaop>([^\"<>]*)</Dat_sistemaop>", "");
+	m_array["Dat_tamano"]           = AnalyzeTagName(texto, "<Dat_tamano>([^\"<>]*)</Dat_tamano>", "");
+	m_array["Dat_graficos"]         = AnalyzeTagName(texto, "<Dat_graficos>([^\"<>]*)</Dat_graficos>", "");
+	m_array["Dat_sonido"]           = AnalyzeTagName(texto, "<Dat_sonido>([^\"<>]*)</Dat_sonido>", "");
+	m_array["Dat_jugabilidad"]      = AnalyzeTagName(texto, "<Dat_jugabilidad>([^\"<>]*)</Dat_jugabilidad>", "");
+	m_array["Dat_original"]         = AnalyzeTagName(texto, "<Dat_original>([^\"<>]*)</Dat_original>", "");
+	m_array["Dat_estado"]           = AnalyzeTagName(texto, "<Dat_estado>([^\"<>]*)</Dat_estado>", "");
+	m_array["Dat_thumbs"]           = AnalyzeTagName(texto, "<Dat_thumbs>([^\"<>]*)</Dat_thumbs>", "");
+	m_array["Dat_cover_front"]      = AnalyzeTagName(texto, "<Dat_cover_front>([^\"<>]*)</Dat_cover_front>", "");
+	m_array["Dat_cover_back"]       = AnalyzeTagName(texto, "<Dat_cover_back>([^\"<>]*)</Dat_cover_back>", "");
+	m_array["Dat_fecha"]            = AnalyzeTagName(texto, "<Dat_fecha>([^\"<>]*)</Dat_fecha>", "");
 	m_array["Dat_tipo_emu"]         = AnalyzeTagName(texto, "<Dat_tipo_emu>([^\"<>]*)</Dat_tipo_emu>", "datos");
-	m_array["Dat_comentario"]       = AnalyzeTagName(texto, "<Dat_comentario>([^[]*)</Dat_comentario>");
+	m_array["Dat_comentario"]       = AnalyzeTagName(texto, "<Dat_comentario>([^[]*)</Dat_comentario>", "");
 	m_array["Dat_favorito"]         = "false";
-	m_array["Dat_rating"]           = AnalyzeTagName(texto, "<Dat_rating>([0-9]+)</Dat_rating>","0");
+	m_array["Dat_rating"]           = AnalyzeTagName(texto, "<Dat_rating>([0-9]+)</Dat_rating>","0", "");
 	m_array["Dat_edad_recomendada"] = AnalyzeTagName(texto, "<Dat_edad_recomendada>([^\"<>]*)</Dat_edad_recomendada>","nd");
-	m_array["Dat_usuario"]          = AnalyzeTagName(texto, "<Dat_usuario>([^\"<>]*)</Dat_usuario>");
+	m_array["Dat_usuario"]          = AnalyzeTagName(texto, "<Dat_usuario>([^\"<>]*)</Dat_usuario>", "");
 	m_array["Dat_misc"]             = "";
 	m_array["Dat_path_exe"]         = "";
 	m_array["Dat_parametros_exe"]   = "";
@@ -87,42 +89,42 @@ function AnalyzeGamePage(texto, local)
 	m_array["Dat_path_setup"]       = "";
 	m_array["Dat_parametros_setup"] = "";
 
-// Imagenes Caratula ------
-	if( m_array["Dat_thumbs"] == "" || m_array["Dat_thumbs"] == "null" )
+// Imágenes Caratula ------
+	if (m_array["Dat_thumbs"] == "" || m_array["Dat_thumbs"] == "null")
 	{
-		m_array["Dat_thumbs"] = "";
-		m_array["Dat_url_cover_thumbs"] = "";
+		m_array["Dat_thumbs"]     = "";
+		m_array["Dat_thumbs_url"] = "";
 	} else {
-		if(local)
-			m_array["Dat_url_cover_thumbs"] = m_array["Dat_thumbs"];
+		if (local)
+			m_array["Dat_thumbs_url"] = m_array["Dat_thumbs"];
 		else
-			m_array["Dat_url_cover_thumbs"] = url_site+"/images/covers/small/"+m_array["Dat_thumbs"];
+			m_array["Dat_thumbs_url"] = url_site+"/images/covers/small/"+m_array["Dat_thumbs"];
 	}
 
-	if( m_array["Dat_cover_front"] == "" || m_array["Dat_cover_front"] == "null" )
+	if (m_array["Dat_cover_front"] == "" || m_array["Dat_cover_front"] == "null")
 	{
-		m_array["Dat_cover_front"] = "";
-		m_array["Dat_url_cover_front"]  = "";
+		m_array["Dat_cover_front"]     = "";
+		m_array["Dat_cover_front_url"] = "";
 	} else {
-		if(local)
-			m_array["Dat_url_cover_front"] = m_array["Dat_cover_front"];
+		if (local)
+			m_array["Dat_cover_front_url"] = m_array["Dat_cover_front"];
 		else
-			m_array["Dat_url_cover_front"]  = url_site+"/images/covers/large/"+m_array["Dat_cover_front"];
+			m_array["Dat_cover_front_url"] = url_site+"/images/covers/large/"+m_array["Dat_cover_front"];
 	}
 
-	if( m_array["Dat_cover_back"] == "" || m_array["Dat_cover_back"] == "null" )
+	if (m_array["Dat_cover_back"] == "" || m_array["Dat_cover_back"] == "null")
 	{
-		m_array["Dat_cover_back"] = "";
-		m_array["Dat_url_cover_back"]   = "";	
+		m_array["Dat_cover_back"]     = "";
+		m_array["Dat_cover_back_url"] = "";	
 	} else {
-		if(local)
-			m_array["Dat_url_cover_back"] = m_array["Dat_cover_back"];
+		if (local)
+			m_array["Dat_cover_back_url"] = m_array["Dat_cover_back"];
 		else	
-			m_array["Dat_url_cover_back"]   = url_site+"/images/covers/large/"+m_array["Dat_cover_back"];
+			m_array["Dat_cover_back_url"] = url_site+"/images/covers/large/"+m_array["Dat_cover_back"];
 	}
-// FIN Imagenes Caratula --
+// FIN Imágenes Caratula --
 
-	if( m_array["Dat_tipo_emu"] == "dosbox" )
+	if (m_array["Dat_tipo_emu"] == "dosbox")
 	{
 	// Datos del Configuración del DOSBox
 	// [sdl]
@@ -247,82 +249,83 @@ function AnalyzeGamePage(texto, local)
 	// Añadimos los distintos Montajes
 		myDbxRE = new RegExp("<dosbox_montajes>([^\"]*)</dosbox_montajes>","g");
 		resultsDbx = texto.match(myDbxRE);
-		for(var i_dbx = 0; i_dbx < resultsDbx.length; i_dbx++)
+		m_array["Dbx_mount_count"] = resultsDbx.length;
+		for (var i_dbx = 0; i_dbx < resultsDbx.length; i_dbx++)
 		{
-			path         = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_path>([^<]*)</Dbx_mount_path>");
-			label        = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_label>([^\"<>]*)</Dbx_mount_label>");
-			tipo_as      = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_tipo_as>([^\"<>]*)</Dbx_mount_tipo_as>");
-			letter       = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_letter>([^\"<>]*)</Dbx_mount_letter>");
-			indx_cd      = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_indx_cd>([^\"<>]*)</Dbx_mount_indx_cd>");
-			opt_mount    = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_opt_mount>([^\"<>]*)</Dbx_mount_opt_mount>");
-			io_ctrl      = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_io_ctrl>([^\"<>]*)</Dbx_mount_io_ctrl>");
-			select_mount = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_select_mount>([^\"<>]*)</Dbx_mount_select_mount>");
-			opt_size     = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_opt_size>([^\"<>]*)</Dbx_mount_opt_size>");
-			opt_freesize = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_opt_freesize>([^\"<>]*)</Dbx_mount_opt_freesize>");
-			freesize     = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_freesize>([^\"<>]*)</Dbx_mount_freesize>");
+			path         = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_path>([^<]*)</Dbx_mount_path>", "");
+			label        = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_label>([^\"<>]*)</Dbx_mount_label>", "");
+			tipo_as      = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_tipo_as>([^\"<>]*)</Dbx_mount_tipo_as>", "drive");
+			letter       = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_letter>([^\"<>]*)</Dbx_mount_letter>", "C");
+			indx_cd      = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_indx_cd>([^\"<>]*)</Dbx_mount_indx_cd>", "");
+			opt_mount    = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_opt_mount>([^\"<>]*)</Dbx_mount_opt_mount>", "");
+			io_ctrl      = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_io_ctrl>([^\"<>]*)</Dbx_mount_io_ctrl>", "");
+			select_mount = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_select_mount>([^\"<>]*)</Dbx_mount_select_mount>", "x");
+			opt_size     = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_opt_size>([^\"<>]*)</Dbx_mount_opt_size>", "");
+			opt_freesize = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_opt_freesize>([^\"<>]*)</Dbx_mount_opt_freesize>", "false");
+			freesize     = AnalyzeTagName(resultsDbx[i_dbx], "<Dbx_mount_freesize>([^\"<>]*)</Dbx_mount_freesize>", "250");
 
-			twMounts.addItemMounts(path, label, tipo_as, letter, indx_cd, opt_mount, io_ctrl, select_mount, opt_size, opt_freesize, freesize);
+			m_array["Dbx_mount_"+ i_dbx] = path +"@|"+ label +"@|"+ tipo_as +"@|"+ letter +"@|"+ indx_cd +"@|"+ opt_mount +"@|"+ io_ctrl +"@|"+ select_mount +"@|"+ opt_size +"@|"+ opt_freesize +"@|"+ freesize;
 		}
 	}
 
-	if( m_array["Dat_tipo_emu"] == "scummvm" )
+	if (m_array["Dat_tipo_emu"] == "scummvm")
 	{
-		m_array["Svm_game"]              = AnalyzeTagName(texto, "<Svm_game>([^\"<>]*)</Svm_game>");
-		m_array["Svm_game_label"]        = AnalyzeTagName(texto, "<Svm_game_label>([^\"<>]*)</Svm_game_label>");
-		m_array["Svm_language"]          = AnalyzeTagName(texto, "<Svm_language>([^\"<>]*)</Svm_language>");
-		m_array["Svm_subtitles"]         = AnalyzeTagName(texto, "<Svm_subtitles>([^\"<>]*)</Svm_subtitles>");
-		m_array["Svm_platform"]          = AnalyzeTagName(texto, "<Svm_platform>([^\"<>]*)</Svm_platform>");
-		m_array["Svm_gfx_mode"]          = AnalyzeTagName(texto, "<Svm_gfx_mode>([^\"<>]*)</Svm_gfx_mode>");
-		m_array["Svm_render_mode"]       = AnalyzeTagName(texto, "<Svm_render_mode>([^\"<>]*)</Svm_render_mode>");
-		m_array["Svm_fullscreen"]        = AnalyzeTagName(texto, "<Svm_fullscreen>([^\"<>]*)</Svm_fullscreen>");
-		m_array["Svm_aspect_ratio"]      = AnalyzeTagName(texto, "<Svm_aspect_ratio>([^\"<>]*)</Svm_aspect_ratio>");
-		m_array["Svm_path"]              = AnalyzeTagName(texto, "<Svm_path>([^<]*)</Svm_path>");
-		m_array["Svm_path_setup"]        = AnalyzeTagName(texto, "<Svm_path_setup>([^<]*)</Svm_path_setup>");
-		m_array["Svm_path_extra"]        = AnalyzeTagName(texto, "<Svm_path_extra>([^<]*)</Svm_path_extra>");
-		m_array["Svm_path_save"]         = AnalyzeTagName(texto, "<Svm_path_save>([^<]*)</Svm_path_save>");
-		m_array["Svm_path_capturas"]     = AnalyzeTagName(texto, "<Svm_path_capturas>([^<]*)</Svm_path_capturas>");
-		m_array["Svm_path_sonido"]       = AnalyzeTagName(texto, "<Svm_path_sonido>([^<]*)</Svm_path_sonido>");
-		m_array["Svm_music_driver"]      = AnalyzeTagName(texto, "<Svm_music_driver>([^\"<>]*)</Svm_music_driver>");
-		m_array["Svm_enable_gs"]         = AnalyzeTagName(texto, "<Svm_enable_gs>([^\"<>]*)</Svm_enable_gs>");
-		m_array["Svm_multi_midi"]        = AnalyzeTagName(texto, "<Svm_multi_midi>([^\"<>]*)</Svm_multi_midi>");
-		m_array["Svm_native_mt32"]       = AnalyzeTagName(texto, "<Svm_native_mt32>([^\"<>]*)</Svm_native_mt32>");
-		m_array["Svm_mute"]              = AnalyzeTagName(texto, "<Svm_mute>([^\"<>]*)</Svm_mute>");
-		m_array["Svm_master_volume"]     = AnalyzeTagName(texto, "<Svm_master_volume>([^\"<>]*)</Svm_master_volume>");
-		m_array["Svm_music_volume"]      = AnalyzeTagName(texto, "<Svm_music_volume>([^\"<>]*)</Svm_music_volume>");
-		m_array["Svm_sfx_volume"]        = AnalyzeTagName(texto, "<Svm_sfx_volume>([^\"<>]*)</Svm_sfx_volume>");
-		m_array["Svm_speech_volume"]     = AnalyzeTagName(texto, "<Svm_speech_volume>([^\"<>]*)</Svm_speech_volume>");
-		m_array["Svm_speech_mute"]       = AnalyzeTagName(texto, "<Svm_speech_mute>([^\"<>]*)</Svm_speech_mute>");
-		m_array["Svm_tempo"]             = AnalyzeTagName(texto, "<Svm_tempo>([^\"<>]*)</Svm_tempo>");
-		m_array["Svm_talkspeed"]         = AnalyzeTagName(texto, "<Svm_talkspeed>([^\"<>]*)</Svm_talkspeed>");
-		m_array["Svm_debuglevel"]        = AnalyzeTagName(texto, "<Svm_debuglevel>([^\"<>]*)</Svm_debuglevel>");
-		m_array["Svm_cdrom"]             = AnalyzeTagName(texto, "<Svm_cdrom>([^\"<>]*)</Svm_cdrom>");
-		m_array["Svm_joystick_num"]      = AnalyzeTagName(texto, "<Svm_joystick_num>([^\"<>]*)</Svm_joystick_num>");
-		m_array["Svm_output_rate"]       = AnalyzeTagName(texto, "<Svm_output_rate>([^\"<>]*)</Svm_output_rate>");
-		m_array["Svm_midi_gain"]         = AnalyzeTagName(texto, "<Svm_midi_gain>([^\"<>]*)</Svm_midi_gain>");
-		m_array["Svm_copy_protection"]   = AnalyzeTagName(texto, "<Svm_copy_protection>([^\"<>]*)</Svm_copy_protection>");
-		m_array["Svm_sound_font"]        = AnalyzeTagName(texto, "<Svm_sound_font>([^\"<>]*)</Svm_sound_font>");
-		m_array["Svm_walkspeed"]         = AnalyzeTagName(texto, "<Svm_walkspeed>([^\"<>]*)</Svm_walkspeed>");
-		m_array["Svm_opl_driver"]        = AnalyzeTagName(texto, "<Svm_opl_driver>([^\"<>]*)</Svm_opl_driver>");
-		m_array["Svm_disable_dithering"] = AnalyzeTagName(texto, "<Svm_disable_dithering>([^\"<>]*)</Svm_disable_dithering>");
-		m_array["Svm_alt_intro"]         = AnalyzeTagName(texto, "<Svm_alt_intro>([^\"<>]*)</Svm_alt_intro>");
-		m_array["Svm_boot_param"]        = AnalyzeTagName(texto, "<Svm_boot_param>([^\"<>]*)</Svm_boot_param>");
+		m_array["Svm_game"]              = AnalyzeTagName(texto, "<Svm_game>([^\"<>]*)</Svm_game>", "");
+		m_array["Svm_game_label"]        = AnalyzeTagName(texto, "<Svm_game_label>([^\"<>]*)</Svm_game_label>", "");
+		m_array["Svm_language"]          = AnalyzeTagName(texto, "<Svm_language>([^\"<>]*)</Svm_language>", "");
+		m_array["Svm_subtitles"]         = AnalyzeTagName(texto, "<Svm_subtitles>([^\"<>]*)</Svm_subtitles>", "");
+		m_array["Svm_platform"]          = AnalyzeTagName(texto, "<Svm_platform>([^\"<>]*)</Svm_platform>", "");
+		m_array["Svm_gfx_mode"]          = AnalyzeTagName(texto, "<Svm_gfx_mode>([^\"<>]*)</Svm_gfx_mode>", "");
+		m_array["Svm_render_mode"]       = AnalyzeTagName(texto, "<Svm_render_mode>([^\"<>]*)</Svm_render_mode>", "");
+		m_array["Svm_fullscreen"]        = AnalyzeTagName(texto, "<Svm_fullscreen>([^\"<>]*)</Svm_fullscreen>", "");
+		m_array["Svm_aspect_ratio"]      = AnalyzeTagName(texto, "<Svm_aspect_ratio>([^\"<>]*)</Svm_aspect_ratio>", "");
+		m_array["Svm_path"]              = AnalyzeTagName(texto, "<Svm_path>([^<]*)</Svm_path>", "");
+		m_array["Svm_path_setup"]        = AnalyzeTagName(texto, "<Svm_path_setup>([^<]*)</Svm_path_setup>", "");
+		m_array["Svm_path_extra"]        = AnalyzeTagName(texto, "<Svm_path_extra>([^<]*)</Svm_path_extra>", "");
+		m_array["Svm_path_save"]         = AnalyzeTagName(texto, "<Svm_path_save>([^<]*)</Svm_path_save>", "");
+		m_array["Svm_path_capturas"]     = AnalyzeTagName(texto, "<Svm_path_capturas>([^<]*)</Svm_path_capturas>", "");
+		m_array["Svm_path_sonido"]       = AnalyzeTagName(texto, "<Svm_path_sonido>([^<]*)</Svm_path_sonido>", "");
+		m_array["Svm_music_driver"]      = AnalyzeTagName(texto, "<Svm_music_driver>([^\"<>]*)</Svm_music_driver>", "");
+		m_array["Svm_enable_gs"]         = AnalyzeTagName(texto, "<Svm_enable_gs>([^\"<>]*)</Svm_enable_gs>", "");
+		m_array["Svm_multi_midi"]        = AnalyzeTagName(texto, "<Svm_multi_midi>([^\"<>]*)</Svm_multi_midi>", "");
+		m_array["Svm_native_mt32"]       = AnalyzeTagName(texto, "<Svm_native_mt32>([^\"<>]*)</Svm_native_mt32>", "");
+		m_array["Svm_mute"]              = AnalyzeTagName(texto, "<Svm_mute>([^\"<>]*)</Svm_mute>", "");
+		m_array["Svm_master_volume"]     = AnalyzeTagName(texto, "<Svm_master_volume>([^\"<>]*)</Svm_master_volume>", "");
+		m_array["Svm_music_volume"]      = AnalyzeTagName(texto, "<Svm_music_volume>([^\"<>]*)</Svm_music_volume>", "");
+		m_array["Svm_sfx_volume"]        = AnalyzeTagName(texto, "<Svm_sfx_volume>([^\"<>]*)</Svm_sfx_volume>", "");
+		m_array["Svm_speech_volume"]     = AnalyzeTagName(texto, "<Svm_speech_volume>([^\"<>]*)</Svm_speech_volume>", "");
+		m_array["Svm_speech_mute"]       = AnalyzeTagName(texto, "<Svm_speech_mute>([^\"<>]*)</Svm_speech_mute>", "");
+		m_array["Svm_tempo"]             = AnalyzeTagName(texto, "<Svm_tempo>([^\"<>]*)</Svm_tempo>", "");
+		m_array["Svm_talkspeed"]         = AnalyzeTagName(texto, "<Svm_talkspeed>([^\"<>]*)</Svm_talkspeed>", "");
+		m_array["Svm_debuglevel"]        = AnalyzeTagName(texto, "<Svm_debuglevel>([^\"<>]*)</Svm_debuglevel>", "");
+		m_array["Svm_cdrom"]             = AnalyzeTagName(texto, "<Svm_cdrom>([^\"<>]*)</Svm_cdrom>", "");
+		m_array["Svm_joystick_num"]      = AnalyzeTagName(texto, "<Svm_joystick_num>([^\"<>]*)</Svm_joystick_num>", "");
+		m_array["Svm_output_rate"]       = AnalyzeTagName(texto, "<Svm_output_rate>([^\"<>]*)</Svm_output_rate>", "");
+		m_array["Svm_midi_gain"]         = AnalyzeTagName(texto, "<Svm_midi_gain>([^\"<>]*)</Svm_midi_gain>", "");
+		m_array["Svm_copy_protection"]   = AnalyzeTagName(texto, "<Svm_copy_protection>([^\"<>]*)</Svm_copy_protection>", "");
+		m_array["Svm_sound_font"]        = AnalyzeTagName(texto, "<Svm_sound_font>([^\"<>]*)</Svm_sound_font>", "");
+		m_array["Svm_walkspeed"]         = AnalyzeTagName(texto, "<Svm_walkspeed>([^\"<>]*)</Svm_walkspeed>", "");
+		m_array["Svm_opl_driver"]        = AnalyzeTagName(texto, "<Svm_opl_driver>([^\"<>]*)</Svm_opl_driver>", "");
+		m_array["Svm_disable_dithering"] = AnalyzeTagName(texto, "<Svm_disable_dithering>([^\"<>]*)</Svm_disable_dithering>", "");
+		m_array["Svm_alt_intro"]         = AnalyzeTagName(texto, "<Svm_alt_intro>([^\"<>]*)</Svm_alt_intro>", "");
+		m_array["Svm_boot_param"]        = AnalyzeTagName(texto, "<Svm_boot_param>([^\"<>]*)</Svm_boot_param>", "");
 	}
 
-	if( m_array["Dat_tipo_emu"] == "vdmsound" )
+	if (m_array["Dat_tipo_emu"] == "vdmsound")
 	{
-		m_array["Vdms_path_conf"]       = AnalyzeTagName(texto, "<Vdms_path_conf>([^\"<>]*)</Vdms_path_conf>");
-		m_array["Vdms_path_exe"]        = AnalyzeTagName(texto, "<Vdms_path_exe>([^\"<>]*)</Vdms_path_exe>");
-		m_array["Vdms_program_1"]       = AnalyzeTagName(texto, "<Vdms_program_1>([^\"<>]*)</Vdms_program_1>");
-		m_array["Vdms_program_2"]       = AnalyzeTagName(texto, "<Vdms_program_2>([^\"<>]*)</Vdms_program_2>");
-		m_array["Vdms_vdms_debug_1"]    = AnalyzeTagName(texto, "<Vdms_vdms_debug_1>([^\"<>]*)</Vdms_vdms_debug_1>");
-		m_array["Vdms_vdms_debug_2"]    = AnalyzeTagName(texto, "<Vdms_vdms_debug_2>([^\"<>]*)</Vdms_vdms_debug_2>");
-		m_array["Vdms_winnt_dos_1"]     = AnalyzeTagName(texto, "<Vdms_winnt_dos_1>([^\"<>]*)</Vdms_winnt_dos_1>");
-		m_array["Vdms_winnt_dos_2"]     = AnalyzeTagName(texto, "<Vdms_winnt_dos_2>([^\"<>]*)</Vdms_winnt_dos_2>");
-		m_array["Vdms_winnt_dosbox_1"]  = AnalyzeTagName(texto, "<Vdms_winnt_dosbox_1>([^\"<>]*)</Vdms_winnt_dosbox_1>");
-		m_array["Vdms_winnt_dosbox_2"]  = AnalyzeTagName(texto, "<Vdms_winnt_dosbox_2>([^\"<>]*)</Vdms_winnt_dosbox_2>");
-		m_array["Vdms_winnt_dosbox_3"]  = AnalyzeTagName(texto, "<Vdms_winnt_dosbox_3>([^\"<>]*)</Vdms_winnt_dosbox_3>");
-		m_array["Vdms_winnt_storage_1"] = AnalyzeTagName(texto, "<Vdms_winnt_storage_1>([^\"<>]*)</Vdms_winnt_storage_1>");
-		m_array["Vdms_winnt_storage_2"] = AnalyzeTagName(texto, "<Vdms_winnt_storage_2>([^\"<>]*)</Vdms_winnt_storage_2>");
+		m_array["Vdms_path_conf"]       = AnalyzeTagName(texto, "<Vdms_path_conf>([^\"<>]*)</Vdms_path_conf>", "");
+		m_array["Vdms_path_exe"]        = AnalyzeTagName(texto, "<Vdms_path_exe>([^\"<>]*)</Vdms_path_exe>", "");
+		m_array["Vdms_program_1"]       = AnalyzeTagName(texto, "<Vdms_program_1>([^\"<>]*)</Vdms_program_1>", "");
+		m_array["Vdms_program_2"]       = AnalyzeTagName(texto, "<Vdms_program_2>([^\"<>]*)</Vdms_program_2>", "");
+		m_array["Vdms_vdms_debug_1"]    = AnalyzeTagName(texto, "<Vdms_vdms_debug_1>([^\"<>]*)</Vdms_vdms_debug_1>", "");
+		m_array["Vdms_vdms_debug_2"]    = AnalyzeTagName(texto, "<Vdms_vdms_debug_2>([^\"<>]*)</Vdms_vdms_debug_2>", "");
+		m_array["Vdms_winnt_dos_1"]     = AnalyzeTagName(texto, "<Vdms_winnt_dos_1>([^\"<>]*)</Vdms_winnt_dos_1>", "");
+		m_array["Vdms_winnt_dos_2"]     = AnalyzeTagName(texto, "<Vdms_winnt_dos_2>([^\"<>]*)</Vdms_winnt_dos_2>", "");
+		m_array["Vdms_winnt_dosbox_1"]  = AnalyzeTagName(texto, "<Vdms_winnt_dosbox_1>([^\"<>]*)</Vdms_winnt_dosbox_1>", "");
+		m_array["Vdms_winnt_dosbox_2"]  = AnalyzeTagName(texto, "<Vdms_winnt_dosbox_2>([^\"<>]*)</Vdms_winnt_dosbox_2>", "");
+		m_array["Vdms_winnt_dosbox_3"]  = AnalyzeTagName(texto, "<Vdms_winnt_dosbox_3>([^\"<>]*)</Vdms_winnt_dosbox_3>", "");
+		m_array["Vdms_winnt_storage_1"] = AnalyzeTagName(texto, "<Vdms_winnt_storage_1>([^\"<>]*)</Vdms_winnt_storage_1>", "");
+		m_array["Vdms_winnt_storage_2"] = AnalyzeTagName(texto, "<Vdms_winnt_storage_2>([^\"<>]*)</Vdms_winnt_storage_2>", "");
 	}
 
 	return m_array;
@@ -331,11 +334,11 @@ function AnalyzeGamePage(texto, local)
 // Funciones Extras -----------------------------
 function AnalyzeTagName(texto, stRegExp, defecto)
 {
-	if ( texto != "" )
+	if (texto != "")
 	{
-		myRE = new RegExp( stRegExp );
+		myRE = new RegExp(stRegExp);
 		results = texto.match(myRE);
-		if( results != null )
+		if (results != null)
 			return results[1];
 		else
 			return ""+ defecto;

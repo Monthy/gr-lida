@@ -1,0 +1,13 @@
+body, html {
+	color: #242424;
+	background-color: #d4d4d4;
+	margin: 5px 2px 5px 2px;
+	padding: 0px;
+}
+p {
+	margin:20px 0px 20px 0px;
+}
+h2 {
+	font-weight:bold;
+	color: #242424;
+}

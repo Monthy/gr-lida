@@ -48,3 +48,6 @@ original|sinimg.png
 1600x1200|sinimg.png
 1920x1080|sinimg.png
 1920x1200|sinimg.png
+1920×1440|sinimg.png
+2560×1440|sinimg.png
+3840×2160|sinimg.png

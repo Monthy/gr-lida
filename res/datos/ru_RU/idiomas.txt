@@ -1,22 +1,22 @@
-Испанский|es|es.png
-Английский|en|en.png
-Английский (GB)|gb|gb.png
-Английский (US)|us|us.png
-Немецкий|de|de.png
-Датский|dk|dk.png
-Французский|fr|fr.png
-Итальянский|it|it.png
-Португальский|pt|pt.png
-Японский|jp|jp.png
-Китайский (Китай)|zh-cn|zh-cn.png
-Китайский (Тайвань)|zh|zh.png
-Корейский|kr|kr.png
-Еврейский|hb|hb.png
-Русский|ru|ru.png
-Чешский|cz|cz.png
-Шведский|se|se.png
-Голландский|nl|nl.png
-Норвежский|nb|nb.png
-Польский|pl|pl.png
-Венгерский|hu|hu.png
-Греческий|gr|gr.png
+Испанский|es|lng/es.png
+Английский|en|lng/en.png
+Английский (GB)|gb|lng/gb.png
+Английский (US)|us|lng/us.png
+Немецкий|de|lng/de.png
+Датский|dk|lng/dk.png
+Французский|fr|lng/fr.png
+Итальянский|it|lng/it.png
+Португальский|pt|lng/pt.png
+Японский|jp|lng/jp.png
+Китайский (Китай)|zh-cn|lng/cn.png
+Китайский (Тайвань)|zh|lng/zh.png
+Корейский|kr|lng/kr.png
+Еврейский|hb|lng/il.png
+Русский|ru|lng/ru.png
+Чешский|cz|lng/cz.png
+Шведский|se|lng/se.png
+Голландский|nl|lng/nl.png
+Норвежский|nb|lng/no.png
+Польский|pl|lng/pl.png
+Венгерский|hu|lng/hu.png
+Греческий|gr|lng/gr.png

@@ -7,15 +7,15 @@
 7 CDs|cd_iso.png
 8 CDs|cd_iso.png
 1 DVD|dvd.png
-2 DVD|dvd.png
+2 DVDs|dvd.png
 1 Blu-ray Disc|blu_ray.png
 1 Disquete|floppy_2.png
-2 Disquete|floppy_2.png
-3 Disquete|floppy_2.png
-4 Disquete|floppy_2.png
-5 Disquete|floppy_2.png
-6 Disquete|floppy_2.png
-7 Disquete|floppy_2.png
-8 Disquete|floppy_2.png
+2 Disquetes|floppy_2.png
+3 Disquetes|floppy_2.png
+4 Disquetes|floppy_2.png
+5 Disquetes|floppy_2.png
+6 Disquetes|floppy_2.png
+7 Disquetes|floppy_2.png
+8 Disquetes|floppy_2.png
 1 Cartucho|cartucho.png
 |sinimg.png

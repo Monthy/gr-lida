@@ -10,3 +10,5 @@ High-Quality 2x|hq2x|img_hq2x.png
 High-Quality 3x|hq3x|img_hq3x.png
 Tv Interlacing 2x|tv2x|img_tv2x.png
 Dotmatrix|dotmatrix|img_dotmatrix.png
+OpenGL|opengl_linear|opengl.png
+OpenGL (no filters)|opengl_nearest|opengl.png

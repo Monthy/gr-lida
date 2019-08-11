@@ -1,22 +1,25 @@
-Español|es|es.png
-Inglés|en|en.png
-Inglés (GB)|gb|gb.png
-Inglés (US)|us|us.png
-Alemán|de|de.png
-Danés|dk|dk.png
-Francés|fr|fr.png
-Italiano|it|it.png
-Portugués|pt|pt.png
-Japonés|jp|jp.png
-Chino (China)|zh-cn|zh-cn.png
-Chino (Taiwan)|zh|zh.png
-Coreano|kr|kr.png
-Hebreo|hb|hb.png
-Ruso|ru|ru.png
-Checo|cz|cz.png
-Sueco|se|se.png
-Holandés|nl|nl.png
-Noruego Bokmal|nb|nb.png
-Polaco|pl|pl.png
-Húngaro|hu|hu.png
-Griego|gr|gr.png
+Español|es|lng/es.png
+Inglés|en|lng/en.png
+Inglés (GB)|gb|lng/gb.png
+Inglés (US)|us|lng/us.png
+Alemán|de|lng/de.png
+Danés|dk|lng/dk.png
+Francés|fr|lng/fr.png
+Italiano|it|lng/it.png
+Portugués|br|lng/pt.png
+Japonés|jp|lng/jp.png
+Chino (China)|zh-cn|lng/cn.png
+Chino (Taiwan)|zh|lng/tw.png
+Coreano|kr|lng/kr.png
+Hebreo|he|lng/il.png
+Ruso|ru|lng/ru.png
+Checo|cz|lng/cz.png
+Sueco|se|lng/se.png
+Holandés|nl|lng/nl.png
+Noruego Bokmål|nb|lng/no.png
+Polaco|pl|lng/pl.png
+Húngaro|hu|lng/hu.png
+Griego|gr|lng/gr.png
+Croata|hr|lng/hr.png
+Estonio|et|lng/ee.png
+Letonia|lv|lng/lv.png

@@ -1,7 +1,7 @@
 Auto Music emulation|auto|img_audio_auto.png
 Null output. Don't play any music|null|img_audio_null.png
 Windows MIDI, for Windows users|windows|img_audio_winmidi.png
-FluidSynth MIDI emulation|fluidsynth|img_audio.png
+FluidSynth MIDI emulation|fluidsynth|img_audio_winmidi.png
 MT-32 emulation|mt32|img_audio.png
 AdLib emulation (default)|adlib|img_audio.png
 PC Speaker emulation|pcspk|img_audio_winmidi.png
@@ -14,7 +14,7 @@ FM-TOWNS YM2612 emulation (only usable in SCUMM FM-TOWNS games)|towns|img_audio.
 PC-98 Audio|pc98|img_audio.png
 Output using ALSA sequencer device|alsa|img_audio.png
 CoreAudio sound, Mac OS X users|core|img_audio.png
-CoreMIDI sound, Mac OS X users. Use only if you have a hardware MIDI synthesizer|coremidi|img_audio.png
+CoreMIDI sound, Mac OS X users. Use only if you have a hardware MIDI synthesizer|coremidi|img_audio_winmidi.png
 Quicktime sound, for Macintosh users.|qt|img_audio.png
 Use /dev/sequencer for MIDI, *nix users. See below.|seq|img_audio.png
-Connect to TiMidity++ MIDI server. See below.|timidity|img_audio.png
+Connect to TiMidity++ MIDI server. See below.|timidity|img_audio_winmidi.png

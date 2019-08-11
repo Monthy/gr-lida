@@ -1,0 +1,9 @@
+Arriba izquierda|pos_top_left|pos_top_left.png
+Arriba centro|pos_top_center|pos_top_center.png
+Arriba derecha|pos_top_right|pos_top_right.png
+Centro izquierda|pos_center_left|pos_center_left.png
+Centrado|pos_center_center|pos_center_center.png
+Centro derecha|pos_center_right|pos_center_right.png
+Abajo izquierda|pos_bottom_left|pos_bottom_left.png
+Abajo centro|pos_bottom_center|pos_bottom_center.png
+Abajo derecha|pos_bottom_right|pos_bottom_right.png
