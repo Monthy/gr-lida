@@ -2,544 +2,1156 @@
 <ui version="4.0">
  <class>frmImportarJuego</class>
  <widget class="QDialog" name="frmImportarJuego">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>770</width>
-    <height>500</height>
+    <width>900</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Importar Juego</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../res/gr-lida.qrc">
-    <normaloff>:/img16/importar.png</normaloff>:/img16/importar.png</iconset>
-  </property>
-  <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,1,0,0">
+  <layout class="QVBoxLayout" name="vLayout_main">
    <property name="margin">
     <number>4</number>
    </property>
-   <item row="0" column="0">
-    <widget class="QLabel" name="lb_url">
-     <property name="text">
-      <string>URL:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QComboBox" name="cbxScriptURL">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="editable">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QPushButton" name="btnAbrir">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>26</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Abrir</string>
-     </property>
-     <property name="icon">
-      <iconset resource="../res/gr-lida.qrc">
-       <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-     </property>
-     <property name="autoDefault">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <widget class="QPushButton" name="btnAbrirUrl">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>26</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Abrir url</string>
-     </property>
-     <property name="icon">
-      <iconset resource="../res/gr-lida.qrc">
-       <normaloff>:/img16/edit_enlace.png</normaloff>:/img16/edit_enlace.png</iconset>
-     </property>
-     <property name="autoDefault">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="lb_titulo">
-     <property name="text">
-      <string>Título:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="txtTituloBuscar">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>24</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="btnBuscar">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>26</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Buscar</string>
-     </property>
-     <property name="icon">
-      <iconset resource="../res/gr-lida.qrc">
-       <normaloff>:/img16/edit_buscar.png</normaloff>:/img16/edit_buscar.png</iconset>
-     </property>
-     <property name="default">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="3">
-    <widget class="QPushButton" name="btnAbortar">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>26</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Abortar</string>
-     </property>
-     <property name="icon">
-      <iconset resource="../res/gr-lida.qrc">
-       <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="4">
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <widget class="QTreeWidget" name="twListaBusqueda">
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>false</bool>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>24</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="textElideMode">
-       <enum>Qt::ElideNone</enum>
-      </property>
-      <property name="rootIsDecorated">
-       <bool>false</bool>
-      </property>
-      <property name="uniformRowHeights">
-       <bool>true</bool>
-      </property>
-      <property name="itemsExpandable">
-       <bool>false</bool>
-      </property>
-      <property name="allColumnsShowFocus">
-       <bool>true</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string>Títulos</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Plataforma</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Año</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>440</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="tabPosition">
-       <enum>QTabWidget::South</enum>
-      </property>
-      <property name="currentIndex">
+   <item>
+    <widget class="QWidget" name="wTop" native="true">
+     <layout class="QHBoxLayout" name="hLayout_top" stretch="0,1,0,0">
+      <property name="margin">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tab_4">
-       <attribute name="icon">
-        <iconset resource="../res/gr-lida.qrc">
-         <normaloff>:/img16/datos_3.png</normaloff>:/img16/datos_3.png</iconset>
-       </attribute>
-       <attribute name="title">
-        <string>Info del juego</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <property name="margin">
-         <number>0</number>
+      <item>
+       <widget class="QLabel" name="lb_url">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
         </property>
-        <item>
-         <widget class="QTextBrowser" name="txtHtmlInfo">
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="openExternalLinks">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_5">
-       <attribute name="icon">
-        <iconset resource="../res/gr-lida.qrc">
-         <normaloff>:/img16/archivos.png</normaloff>:/img16/archivos.png</iconset>
-       </attribute>
-       <attribute name="title">
-        <string>Archivos</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
-        <property name="margin">
-         <number>0</number>
+        <property name="text">
+         <string>URL:</string>
         </property>
-        <item>
-         <widget class="QTreeWidget" name="twDatosFiles">
-          <property name="focusPolicy">
-           <enum>Qt::ClickFocus</enum>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="showDropIndicator" stdset="0">
-           <bool>false</bool>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="textElideMode">
-           <enum>Qt::ElideNone</enum>
-          </property>
-          <property name="rootIsDecorated">
-           <bool>false</bool>
-          </property>
-          <property name="uniformRowHeights">
-           <bool>true</bool>
-          </property>
-          <property name="itemsExpandable">
-           <bool>false</bool>
-          </property>
-          <property name="allColumnsShowFocus">
-           <bool>true</bool>
-          </property>
-          <column>
-           <property name="text">
-            <string>Nombre</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>CRC32</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Descripción</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Size</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Path</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_6">
-       <attribute name="icon">
-        <iconset resource="../res/gr-lida.qrc">
-         <normaloff>:/img16/edit_enlace.png</normaloff>:/img16/edit_enlace.png</iconset>
-       </attribute>
-       <attribute name="title">
-        <string>URLs</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
-        <property name="margin">
-         <number>0</number>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
-        <item>
-         <widget class="QTreeWidget" name="twDatosURL">
-          <property name="focusPolicy">
-           <enum>Qt::ClickFocus</enum>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="showDropIndicator" stdset="0">
-           <bool>false</bool>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="textElideMode">
-           <enum>Qt::ElideNone</enum>
-          </property>
-          <property name="rootIsDecorated">
-           <bool>false</bool>
-          </property>
-          <property name="uniformRowHeights">
-           <bool>true</bool>
-          </property>
-          <property name="itemsExpandable">
-           <bool>false</bool>
-          </property>
-          <property name="allColumnsShowFocus">
-           <bool>true</bool>
-          </property>
-          <column>
-           <property name="text">
-            <string>URL</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Descripción</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_7">
-       <property name="enabled">
-        <bool>true</bool>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbxScriptURL">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnAbrir">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Abrir</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnAbrirUrl">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Abrir url</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/edit_enlace.png</normaloff>:/img16/edit_enlace.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="swImport">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="page_info_dbgl">
+      <layout class="QVBoxLayout" name="vLayout_info_dbgl">
+       <property name="margin">
+        <number>0</number>
        </property>
-       <attribute name="icon">
-        <iconset resource="../res/gr-lida.qrc">
-         <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
-       </attribute>
-       <attribute name="title">
-        <string>DOSBox montajes</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QTreeWidget" name="twMontajes">
-          <property name="focusPolicy">
-           <enum>Qt::ClickFocus</enum>
+       <item>
+        <widget class="AnimatedTextBrowser" name="txtInfo"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_info_import">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1">
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="w_barra_busqueda" native="true">
+         <layout class="QHBoxLayout" name="hLayout_barra_busqueda">
+          <property name="margin">
+           <number>0</number>
           </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
+          <item>
+           <widget class="QLabel" name="lb_titulo">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Título:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="txtTituloBuscar">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lb_num_paginas">
+            <property name="text">
+             <string>Página</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cbxNumPag">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QComboBox::AdjustToContents</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnBuscar">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Buscar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res/gr-lida.qrc">
+              <normaloff>:/img16/buscar.png</normaloff>:/img16/buscar.png</iconset>
+            </property>
+            <property name="default">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnAbortar">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Abortar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res/gr-lida.qrc">
+              <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QWidget" name="layoutWidget1">
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QTreeWidget" name="twListaJuegos">
+             <property name="minimumSize">
+              <size>
+               <width>400</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="rootIsDecorated">
+              <bool>false</bool>
+             </property>
+             <property name="uniformRowHeights">
+              <bool>true</bool>
+             </property>
+             <property name="itemsExpandable">
+              <bool>false</bool>
+             </property>
+             <property name="allColumnsShowFocus">
+              <bool>true</bool>
+             </property>
+             <column>
+              <property name="text">
+               <string>Título</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Año</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Plataforma</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>DOSBox</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>url</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>tipo_emu</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="chkSelectListaJuegos">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Marcar / Desmasrcar la lista de juegos para importar.</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QTabWidget" name="tabwImport">
+          <property name="enabled">
+           <bool>true</bool>
           </property>
-          <property name="showDropIndicator" stdset="0">
-           <bool>false</bool>
-          </property>
-          <property name="iconSize">
+          <property name="minimumSize">
            <size>
-            <width>16</width>
-            <height>16</height>
+            <width>480</width>
+            <height>0</height>
            </size>
           </property>
-          <property name="textElideMode">
-           <enum>Qt::ElideNone</enum>
+          <property name="tabPosition">
+           <enum>QTabWidget::South</enum>
           </property>
-          <property name="rootIsDecorated">
-           <bool>false</bool>
+          <property name="currentIndex">
+           <number>0</number>
           </property>
-          <property name="uniformRowHeights">
+          <property name="documentMode">
            <bool>true</bool>
           </property>
-          <property name="itemsExpandable">
-           <bool>false</bool>
-          </property>
-          <property name="allColumnsShowFocus">
-           <bool>true</bool>
-          </property>
-          <column>
-           <property name="text">
-            <string>Carpeta / Imagen</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Letra</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Tipo</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Etiqueta</string>
-           </property>
-          </column>
+          <widget class="QWidget" name="tab_info">
+           <attribute name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/datos_3.png</normaloff>:/img16/datos_3.png</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Info del juego</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="vLayout_info">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>1</number>
+            </property>
+            <item>
+             <widget class="AnimatedTextBrowser" name="txtInfoJuego"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_datos_juego">
+           <attribute name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/cat/datos.png</normaloff>:/img16/cat/datos.png</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Datos del juego</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="vLayout_datos_juego">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>1</number>
+            </property>
+            <item>
+             <widget class="QTabWidget" name="tabwDatos">
+              <property name="tabShape">
+               <enum>QTabWidget::Rounded</enum>
+              </property>
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <property name="documentMode">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="tab_datos">
+               <attribute name="icon">
+                <iconset resource="../res/gr-lida.qrc">
+                 <normaloff>:/img16/cat/datos.png</normaloff>:/img16/cat/datos.png</iconset>
+               </attribute>
+               <attribute name="title">
+                <string>Datos</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="vLayout_wDat">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>1</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="tab_archivos">
+               <attribute name="icon">
+                <iconset resource="../res/gr-lida.qrc">
+                 <normaloff>:/img16/archivos.png</normaloff>:/img16/archivos.png</iconset>
+               </attribute>
+               <attribute name="title">
+                <string>Archivos</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="vLayout_archivos">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>1</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QTreeWidget" name="twDatosFiles">
+                  <property name="focusPolicy">
+                   <enum>Qt::ClickFocus</enum>
+                  </property>
+                  <property name="showDropIndicator" stdset="0">
+                   <bool>false</bool>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="textElideMode">
+                   <enum>Qt::ElideNone</enum>
+                  </property>
+                  <property name="rootIsDecorated">
+                   <bool>false</bool>
+                  </property>
+                  <property name="uniformRowHeights">
+                   <bool>true</bool>
+                  </property>
+                  <property name="itemsExpandable">
+                   <bool>false</bool>
+                  </property>
+                  <property name="allColumnsShowFocus">
+                   <bool>true</bool>
+                  </property>
+                  <column>
+                   <property name="text">
+                    <string>Nombre</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>CRC32</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Descripción</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Size</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Path</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="tab_urls">
+               <attribute name="icon">
+                <iconset resource="../res/gr-lida.qrc">
+                 <normaloff>:/img16/html.png</normaloff>:/img16/html.png</iconset>
+               </attribute>
+               <attribute name="title">
+                <string>URLs</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="vLayout_urls">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>1</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QTreeWidget" name="twDatosURL">
+                  <property name="focusPolicy">
+                   <enum>Qt::ClickFocus</enum>
+                  </property>
+                  <property name="showDropIndicator" stdset="0">
+                   <bool>false</bool>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="textElideMode">
+                   <enum>Qt::ElideNone</enum>
+                  </property>
+                  <property name="rootIsDecorated">
+                   <bool>false</bool>
+                  </property>
+                  <property name="uniformRowHeights">
+                   <bool>true</bool>
+                  </property>
+                  <property name="itemsExpandable">
+                   <bool>false</bool>
+                  </property>
+                  <property name="allColumnsShowFocus">
+                   <bool>true</bool>
+                  </property>
+                  <column>
+                   <property name="text">
+                    <string>URL</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Descripción</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="tab_images">
+               <attribute name="icon">
+                <iconset resource="../res/gr-lida.qrc">
+                 <normaloff>:/img16/imagen.png</normaloff>:/img16/imagen.png</iconset>
+               </attribute>
+               <attribute name="title">
+                <string>Imágenes</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="vLayout_imagenes">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>1</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QTreeWidget" name="twDatosImages">
+                  <property name="focusPolicy">
+                   <enum>Qt::ClickFocus</enum>
+                  </property>
+                  <property name="showDropIndicator" stdset="0">
+                   <bool>false</bool>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>100</width>
+                    <height>100</height>
+                   </size>
+                  </property>
+                  <property name="textElideMode">
+                   <enum>Qt::ElideNone</enum>
+                  </property>
+                  <property name="rootIsDecorated">
+                   <bool>false</bool>
+                  </property>
+                  <property name="uniformRowHeights">
+                   <bool>true</bool>
+                  </property>
+                  <property name="itemsExpandable">
+                   <bool>false</bool>
+                  </property>
+                  <property name="allColumnsShowFocus">
+                   <bool>true</bool>
+                  </property>
+                  <column>
+                   <property name="text">
+                    <string>thumbs</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>name</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>type</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_1" stretch="0,0">
+                  <item>
+                   <widget class="QPushButton" name="btnEliminarImagen">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Eliminar</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QTreeWidget" name="twDatosTempImages">
+                  <property name="focusPolicy">
+                   <enum>Qt::ClickFocus</enum>
+                  </property>
+                  <property name="showDropIndicator" stdset="0">
+                   <bool>false</bool>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>100</width>
+                    <height>100</height>
+                   </size>
+                  </property>
+                  <property name="textElideMode">
+                   <enum>Qt::ElideNone</enum>
+                  </property>
+                  <property name="rootIsDecorated">
+                   <bool>false</bool>
+                  </property>
+                  <property name="uniformRowHeights">
+                   <bool>true</bool>
+                  </property>
+                  <property name="itemsExpandable">
+                   <bool>false</bool>
+                  </property>
+                  <property name="allColumnsShowFocus">
+                   <bool>true</bool>
+                  </property>
+                  <column>
+                   <property name="text">
+                    <string>thumbs</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>name</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>type</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_2">
+                  <item>
+                   <widget class="QPushButton" name="btnAddImagen">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Añadir al listado</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="chkSelectDatosTempImages">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>Marcar / Desmasrcar la lista</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>10</width>
+                      <height>23</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btnDownAllCovers">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>120</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Obtener más imágenes</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lb_info_imagenes">
+                  <property name="text">
+                   <string>Las imágenes que esten en listado superior seran descargadas al importar el juego.</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_cfg_dosbox">
+           <attribute name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/cat/dosbox.png</normaloff>:/img16/cat/dosbox.png</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>DOSBox</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="vLayout_cfg_dosbox">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>1</number>
+            </property>
+            <item>
+             <widget class="QTabWidget" name="tabwDOSBox">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <property name="documentMode">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="tab_dosbox">
+               <attribute name="icon">
+                <iconset resource="../res/gr-lida.qrc">
+                 <normaloff>:/img16/cat/dosbox.png</normaloff>:/img16/cat/dosbox.png</iconset>
+               </attribute>
+               <attribute name="title">
+                <string>DOSBox</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="vLayout_wDbx">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>1</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="tab_montajes">
+               <attribute name="icon">
+                <iconset resource="../res/gr-lida.qrc">
+                 <normaloff>:/img16/drive_hd.png</normaloff>:/img16/drive_hd.png</iconset>
+               </attribute>
+               <attribute name="title">
+                <string>Montajes</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="vLayout_montajes">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>1</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QTreeWidget" name="twMontajes">
+                  <property name="focusPolicy">
+                   <enum>Qt::ClickFocus</enum>
+                  </property>
+                  <property name="showDropIndicator" stdset="0">
+                   <bool>false</bool>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="textElideMode">
+                   <enum>Qt::ElideNone</enum>
+                  </property>
+                  <property name="rootIsDecorated">
+                   <bool>false</bool>
+                  </property>
+                  <property name="uniformRowHeights">
+                   <bool>true</bool>
+                  </property>
+                  <property name="itemsExpandable">
+                   <bool>false</bool>
+                  </property>
+                  <property name="allColumnsShowFocus">
+                   <bool>true</bool>
+                  </property>
+                  <column>
+                   <property name="text">
+                    <string>Carpeta / Imagen</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Letra</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Tipo</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Etiqueta</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_cfg_scummvm">
+           <attribute name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/cat/scummvm.png</normaloff>:/img16/cat/scummvm.png</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>ScummVM</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="vLayout_wSvm">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>1</number>
+            </property>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_opciones">
+           <attribute name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/opciones.png</normaloff>:/img16/opciones.png</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Opciones importar</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="vLayout__opciones_importar">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>1</number>
+            </property>
+            <item>
+             <widget class="QGroupBox" name="gbox_opciones_importar">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QVBoxLayout" name="vLayout_opciones_importar_select">
+               <property name="margin">
+                <number>4</number>
+               </property>
+               <item>
+                <widget class="QCheckBox" name="chkSoloDatos">
+                 <property name="text">
+                  <string>Importar solo los datos del juego.</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chkSoloCfgDOSBox">
+                 <property name="text">
+                  <string>Importar solo la configuración de DOSBox (no extrae del zip los archivos del juego en DBGL).</string>
+                 </property>
+                 <property name="checked">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chkImportarCapturas">
+                 <property name="text">
+                  <string>Importar capturas del juego (en DBGL).</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string>Opciones de importación para la lista de juegos completa.</string>
+              </property>
+              <layout class="QVBoxLayout" name="vLayout_opciones_importar_all">
+               <property name="margin">
+                <number>4</number>
+               </property>
+               <item>
+                <widget class="QCheckBox" name="chkSoloDatos_all">
+                 <property name="text">
+                  <string>Importar solo los datos del juego.</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chkSoloCfgDOSBox_all">
+                 <property name="text">
+                  <string>Importar solo la configuración de DOSBox (no extrae del zip los archivos del juego en DBGL).</string>
+                 </property>
+                 <property name="checked">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chkImportarCapturas_all">
+                 <property name="text">
+                  <string>Importar capturas del juego (en DBGL).</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
-        </item>
-       </layout>
-      </widget>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
-   <item row="3" column="0" colspan="4">
-    <widget class="QLabel" name="lb_status">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>16</height>
-      </size>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
+   <item>
+    <widget class="QWidget" name="wBottom" native="true">
+     <layout class="QHBoxLayout" name="hLayout_bottom">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="btnDownInfo">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Descargar información</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/datos_2.png</normaloff>:/img16/datos_2.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnToggleInfo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/go-back.png</normaloff>:/img16/go-back.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="wInfo" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>24</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="hLayout_wInfo">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnOk">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Aceptar e importar</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnCancelar">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Cancelar</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
-   </item>
-   <item row="4" column="0" colspan="4">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="margin">
-      <number>0</number>
-     </property>
-     <item>
-      <widget class="QPushButton" name="btnVerInfo">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>97</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Ver info</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../res/gr-lida.qrc">
-         <normaloff>:/img16/datos_2.png</normaloff>:/img16/datos_2.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnOk">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>97</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Aceptar</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../res/gr-lida.qrc">
-         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnCancelar">
-       <property name="minimumSize">
-        <size>
-         <width>97</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Cancelar</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../res/gr-lida.qrc">
-         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AnimatedTextBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>animatedtextbrowser.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
-  <tabstop>txtTituloBuscar</tabstop>
-  <tabstop>cbxScriptURL</tabstop>
   <tabstop>btnBuscar</tabstop>
-  <tabstop>btnAbrir</tabstop>
-  <tabstop>btnAbrirUrl</tabstop>
+  <tabstop>txtTituloBuscar</tabstop>
+  <tabstop>cbxNumPag</tabstop>
   <tabstop>btnAbortar</tabstop>
-  <tabstop>twListaBusqueda</tabstop>
-  <tabstop>tabWidget</tabstop>
-  <tabstop>txtHtmlInfo</tabstop>
-  <tabstop>btnVerInfo</tabstop>
-  <tabstop>btnOk</tabstop>
-  <tabstop>btnCancelar</tabstop>
+  <tabstop>txtInfo</tabstop>
+  <tabstop>twListaJuegos</tabstop>
+  <tabstop>chkSelectListaJuegos</tabstop>
+  <tabstop>txtInfoJuego</tabstop>
+  <tabstop>tabwImport</tabstop>
+  <tabstop>tabwDatos</tabstop>
+  <tabstop>btnEliminarImagen</tabstop>
+  <tabstop>btnDownAllCovers</tabstop>
+  <tabstop>chkSelectDatosTempImages</tabstop>
+  <tabstop>btnAddImagen</tabstop>
+  <tabstop>tabwDOSBox</tabstop>
+  <tabstop>chkSoloDatos</tabstop>
+  <tabstop>chkSoloCfgDOSBox</tabstop>
+  <tabstop>chkImportarCapturas</tabstop>
+  <tabstop>chkSoloDatos_all</tabstop>
+  <tabstop>chkSoloCfgDOSBox_all</tabstop>
+  <tabstop>chkImportarCapturas_all</tabstop>
  </tabstops>
  <resources>
   <include location="../res/gr-lida.qrc"/>

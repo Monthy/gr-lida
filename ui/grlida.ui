@@ -6,27 +6,36 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1110</width>
-    <height>636</height>
+    <width>1024</width>
+    <height>778</height>
    </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::CustomContextMenu</enum>
   </property>
   <property name="windowTitle">
    <string>GR-lida</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../res/gr-lida.qrc">
-    <normaloff>:/img32/gr-lida.png</normaloff>:/img32/gr-lida.png</iconset>
+    <normaloff>:/img16/gr-lida.png</normaloff>:/img16/gr-lida.png</iconset>
   </property>
   <property name="dockOptions">
    <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="spacing">
-     <number>2</number>
+   <layout class="QHBoxLayout" name="hLayout_central">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-    <property name="margin">
-     <number>1</number>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
     </property>
     <item>
      <layout class="QHBoxLayout" name="hLayout_juegos">
@@ -40,6 +49,9 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
         </property>
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
@@ -84,6 +96,9 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>
@@ -118,48 +133,6 @@
       </item>
      </layout>
     </item>
-    <item>
-     <widget class="QTreeWidget" name="twCapturas">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>170</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>170</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>128</width>
-        <height>128</height>
-       </size>
-      </property>
-      <property name="rootIsDecorated">
-       <bool>false</bool>
-      </property>
-      <property name="uniformRowHeights">
-       <bool>true</bool>
-      </property>
-      <property name="allColumnsShowFocus">
-       <bool>true</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string>Capturas</string>
-       </property>
-      </column>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -167,8 +140,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1110</width>
-     <height>21</height>
+     <width>1024</width>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">
@@ -192,6 +165,7 @@
     <addaction name="mnu_edit_eliminar"/>
     <addaction name="separator"/>
     <addaction name="mnu_edit_favorito"/>
+    <addaction name="mnu_edit_original"/>
    </widget>
    <widget class="QMenu" name="menuEjecutar">
     <property name="title">
@@ -212,6 +186,7 @@
     <addaction name="mnu_tool_importar"/>
     <addaction name="mnu_tool_exportar"/>
     <addaction name="separator"/>
+    <addaction name="mnu_tool_cambiar_categoria"/>
     <addaction name="mnu_tool_edit_themes"/>
     <addaction name="mnu_tool_opciones"/>
    </widget>
@@ -227,11 +202,8 @@
       <iconset resource="../res/gr-lida.qrc">
        <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
      </property>
-     <addaction name="mnu_ver_carpeta_confdbx"/>
-     <addaction name="mnu_ver_carpeta_confvdms"/>
+     <addaction name="mnu_ver_carpeta_datos_juego"/>
      <addaction name="separator"/>
-     <addaction name="mnu_ver_carpeta_thumbs"/>
-     <addaction name="mnu_ver_carpeta_covers"/>
      <addaction name="mnu_ver_carpeta_iconos"/>
      <addaction name="mnu_ver_carpeta_smiles"/>
      <addaction name="mnu_ver_carpeta_themes"/>
@@ -279,17 +251,57 @@
      <addaction name="mnu_ver_col_edad"/>
      <addaction name="mnu_ver_col_usuario"/>
     </widget>
+    <widget class="QMenu" name="menuMenuVisibleTitleBars">
+     <property name="title">
+      <string>Ver la barra de título de los paneles ...</string>
+     </property>
+     <addaction name="mnu_ver_titlebars_nav"/>
+     <addaction name="mnu_ver_titlebars_datos"/>
+     <addaction name="mnu_ver_titlebars_files"/>
+     <addaction name="mnu_ver_titlebars_capturas"/>
+     <addaction name="mnu_ver_titlebars_imagenes"/>
+     <addaction name="mnu_ver_titlebars_urls"/>
+     <addaction name="mnu_ver_titlebars_videos"/>
+     <addaction name="mnu_ver_titlebars_sonidos"/>
+     <addaction name="mnu_ver_titlebars_pictureflow"/>
+    </widget>
+    <widget class="QMenu" name="menuMenuIgnoreAutoHide">
+     <property name="title">
+      <string>Ignorar auto ocultar en los paneles ...</string>
+     </property>
+     <addaction name="mnu_ver_ignore_auto_hide_nav"/>
+     <addaction name="mnu_ver_ignore_auto_hide_datos"/>
+     <addaction name="mnu_ver_ignore_auto_hide_files"/>
+     <addaction name="mnu_ver_ignore_auto_hide_capturas"/>
+     <addaction name="mnu_ver_ignore_auto_hide_imagenes"/>
+     <addaction name="mnu_ver_ignore_auto_hide_urls"/>
+     <addaction name="mnu_ver_ignore_auto_hide_videos"/>
+     <addaction name="mnu_ver_ignore_auto_hide_sonidos"/>
+     <addaction name="mnu_ver_ignore_auto_hide_pictureflow"/>
+    </widget>
     <addaction name="mnu_ver_nav"/>
     <addaction name="mnu_ver_cover_mode"/>
+    <addaction name="separator"/>
     <addaction name="mnu_ver_pictureflow"/>
-    <addaction name="mnu_ver_datos"/>
-    <addaction name="mnu_ver_archivos_url"/>
-    <addaction name="mnu_ver_capturas"/>
     <addaction name="mnu_ver_pictureflow_to_center"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_ver_datos"/>
+    <addaction name="mnu_ver_archivos"/>
+    <addaction name="mnu_ver_capturas"/>
+    <addaction name="mnu_ver_imagenes"/>
+    <addaction name="mnu_ver_enlaces"/>
+    <addaction name="mnu_ver_videos"/>
+    <addaction name="mnu_ver_sonidos"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_ver_auto_hide_title_bars"/>
+    <addaction name="menuMenuIgnoreAutoHide"/>
+    <addaction name="menuMenuVisibleTitleBars"/>
     <addaction name="separator"/>
     <addaction name="mnu_ver_menubar"/>
     <addaction name="mnu_ver_toolbar"/>
+    <addaction name="mnu_ver_toolbar_datos"/>
     <addaction name="mnu_ver_ordenar"/>
+    <addaction name="mnu_ver_shortcut"/>
     <addaction name="mnu_ver_statusbar"/>
     <addaction name="separator"/>
     <addaction name="menuMenuVerColumnas"/>
@@ -309,6 +321,9 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="tb_main">
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
    <property name="windowTitle">
     <string>Barra de herramientas</string>
    </property>
@@ -326,6 +341,9 @@
    </attribute>
   </widget>
   <widget class="QToolBar" name="tb_ordenar">
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
    <property name="windowTitle">
     <string>Barra ordenar lista</string>
    </property>
@@ -336,11 +354,11 @@
     <bool>true</bool>
    </attribute>
   </widget>
-  <widget class="QDockWidget" name="dockw_Datos">
+  <widget class="DockWidget" name="dockw_Datos">
    <property name="minimumSize">
     <size>
      <width>400</width>
-     <height>169</height>
+     <height>209</height>
     </size>
    </property>
    <property name="baseSize">
@@ -349,6 +367,9 @@
      <height>0</height>
     </size>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
    <property name="windowTitle">
     <string>Datos del juego</string>
    </property>
@@ -356,10 +377,7 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_InfoDatos">
-    <layout class="QVBoxLayout" name="verticalLayout_Info">
-     <property name="spacing">
-      <number>0</number>
-     </property>
+    <layout class="QVBoxLayout" name="vLayout_Info">
      <property name="leftMargin">
       <number>0</number>
      </property>
@@ -373,91 +391,111 @@
       <number>1</number>
      </property>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QLabel" name="lb_info_12">
-         <property name="text">
-          <string>Descripción</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="lb_info_13">
-         <property name="text">
-          <string>Dispone de archivos / carátulas</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="btnVer_Archivos">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/archivos.png</normaloff>:/img16/archivos.png</iconset>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="autoRaise">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="btnVer_CoverFront">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
-         </property>
-         <property name="autoRaise">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="btnVer_CoverBack">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
-         </property>
-         <property name="autoRaise">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="AnimatedTextBrowser" name="txtInfo"/>
      </item>
      <item>
-      <widget class="QFrame" name="frameOrdenar">
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <property name="margin">
+      <widget class="QWidget" name="wInfoDatos" native="true">
+       <layout class="QHBoxLayout" name="hLayout_tools_info_datos">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lb_info_12">
+          <property name="text">
+           <string>Descripción</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lb_info_13">
+          <property name="text">
+           <string>Dispone de archivos / carátulas</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="btnVer_Archivos">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/archivos.png</normaloff>:/img16/archivos.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="btnVer_CoverFront">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="btnVer_CoverBack">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWidget" name="widgetOrdenar" native="true">
+       <layout class="QHBoxLayout" name="hLayout_ordenar">
+        <property name="leftMargin">
          <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>3</number>
         </property>
         <item>
          <widget class="QLineEdit" name="txtBuscar">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -481,6 +519,12 @@
         </item>
         <item>
          <widget class="QComboBox" name="cbxOrdenBy">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -491,6 +535,12 @@
         </item>
         <item>
          <widget class="QComboBox" name="cbxOrden">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -501,6 +551,12 @@
         </item>
         <item>
          <widget class="QToolButton" name="btnOrdenar">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -531,296 +587,116 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="dockw_FilesUrl">
-   <property name="minimumSize">
-    <size>
-     <width>220</width>
-     <height>138</height>
-    </size>
+  <widget class="DockWidget" name="dockw_Files">
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
    </property>
    <property name="windowTitle">
-    <string>Archivos y url</string>
+    <string>Archivos</string>
    </property>
    <attribute name="dockWidgetArea">
-    <number>2</number>
+    <number>1</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_FileUrls">
-    <layout class="QVBoxLayout" name="verticalLayout_FileUrl">
-     <property name="spacing">
+   <widget class="QWidget" name="dockWidgetContents_File">
+    <layout class="QVBoxLayout" name="vLayout_twFiles">
+     <property name="leftMargin">
       <number>0</number>
      </property>
-     <property name="margin">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
       <number>0</number>
      </property>
      <item>
-      <widget class="QTabWidget" name="tabFileUrl">
-       <property name="minimumSize">
+      <widget class="QTreeWidget" name="twFiles">
+       <property name="iconSize">
         <size>
-         <width>0</width>
-         <height>0</height>
+         <width>16</width>
+         <height>16</height>
         </size>
        </property>
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <property name="documentMode">
+       <property name="rootIsDecorated">
         <bool>false</bool>
        </property>
-       <widget class="QWidget" name="tab_video">
-        <attribute name="icon">
-         <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/img_tv2x.png</normaloff>:/img16/img_tv2x.png</iconset>
-        </attribute>
-        <attribute name="title">
-         <string>Capturas de video</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <property name="spacing">
-          <number>4</number>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QTreeWidget" name="twCapturaVideo">
-           <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>16</width>
-             <height>16</height>
-            </size>
-           </property>
-           <property name="rootIsDecorated">
-            <bool>false</bool>
-           </property>
-           <property name="uniformRowHeights">
-            <bool>true</bool>
-           </property>
-           <property name="allColumnsShowFocus">
-            <bool>true</bool>
-           </property>
-           <column>
-            <property name="text">
-             <string>Archivo</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>path</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab_sonido">
-        <attribute name="icon">
-         <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/img_audio.png</normaloff>:/img16/img_audio.png</iconset>
-        </attribute>
-        <attribute name="title">
-         <string>Capturas de sonidos</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <property name="spacing">
-          <number>4</number>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QTreeWidget" name="twCapturaSonido">
-           <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>16</width>
-             <height>16</height>
-            </size>
-           </property>
-           <property name="rootIsDecorated">
-            <bool>false</bool>
-           </property>
-           <property name="uniformRowHeights">
-            <bool>true</bool>
-           </property>
-           <property name="allColumnsShowFocus">
-            <bool>true</bool>
-           </property>
-           <column>
-            <property name="text">
-             <string>Archivo</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>path</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab_url">
-        <attribute name="icon">
-         <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/html.png</normaloff>:/img16/html.png</iconset>
-        </attribute>
-        <attribute name="title">
-         <string>Ver url</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_tabUrl">
-         <property name="spacing">
-          <number>4</number>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QTreeWidget" name="twUrls">
-           <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>16</width>
-             <height>16</height>
-            </size>
-           </property>
-           <property name="rootIsDecorated">
-            <bool>false</bool>
-           </property>
-           <property name="uniformRowHeights">
-            <bool>true</bool>
-           </property>
-           <property name="allColumnsShowFocus">
-            <bool>true</bool>
-           </property>
-           <column>
-            <property name="text">
-             <string>Url</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Descripción</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab_file">
-        <attribute name="icon">
-         <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/archivos.png</normaloff>:/img16/archivos.png</iconset>
-        </attribute>
-        <attribute name="title">
-         <string>Ver archivos</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_tabFile">
-         <property name="spacing">
-          <number>4</number>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QTreeWidget" name="twFiles">
-           <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>16</width>
-             <height>16</height>
-            </size>
-           </property>
-           <property name="rootIsDecorated">
-            <bool>false</bool>
-           </property>
-           <property name="uniformRowHeights">
-            <bool>true</bool>
-           </property>
-           <property name="itemsExpandable">
-            <bool>false</bool>
-           </property>
-           <property name="allColumnsShowFocus">
-            <bool>true</bool>
-           </property>
-           <column>
-            <property name="text">
-             <string>Nombre</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>CRC32</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Descripción</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Size</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Path</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+       <property name="uniformRowHeights">
+        <bool>true</bool>
+       </property>
+       <property name="itemsExpandable">
+        <bool>false</bool>
+       </property>
+       <property name="allColumnsShowFocus">
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text">
+         <string>Nombre</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>CRC32</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Descripción</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Size</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Path</string>
+        </property>
+       </column>
       </widget>
      </item>
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="dockw_Nav">
+  <widget class="DockWidget" name="dockw_Nav">
    <property name="minimumSize">
     <size>
      <width>220</width>
      <height>183</height>
     </size>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
    <property name="windowTitle">
-    <string>Nav categorias</string>
+    <string>Nav categorías</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_twNav">
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <property name="spacing">
-      <number>4</number>
-     </property>
+    <layout class="QVBoxLayout" name="vLayout_twNav">
      <property name="leftMargin">
       <number>0</number>
      </property>
      <property name="topMargin">
-      <number>4</number>
+      <number>0</number>
      </property>
      <property name="rightMargin">
       <number>0</number>
      </property>
      <property name="bottomMargin">
-      <number>1</number>
+      <number>0</number>
      </property>
      <item>
       <widget class="QComboBox" name="cbxCategoriasTb">
        <property name="minimumSize">
         <size>
-         <width>140</width>
-         <height>30</height>
+         <width>0</width>
+         <height>24</height>
         </size>
        </property>
        <property name="sizeAdjustPolicy">
@@ -836,15 +712,15 @@
      </item>
      <item>
       <widget class="QComboBox" name="cbxCategorias">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
        <property name="minimumSize">
         <size>
          <width>0</width>
+         <height>38</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
          <height>38</height>
         </size>
        </property>
@@ -872,7 +748,7 @@
        </property>
        <column>
         <property name="text">
-         <string>Categorias</string>
+         <string>Categorías</string>
         </property>
        </column>
        <column>
@@ -885,21 +761,277 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="dockw_PictureFlow">
+  <widget class="DockWidget" name="dockw_PictureFlow">
+   <property name="minimumSize">
+    <size>
+     <width>80</width>
+     <height>100</height>
+    </size>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
    <property name="windowTitle">
     <string>PictureFlow</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>8</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_PicFlowWidget">
+   <widget class="QWidget" name="dockWidgetContents_PictureFlow">
     <layout class="QVBoxLayout" name="vLayout_picflow">
-     <property name="spacing">
-      <number>4</number>
-     </property>
-     <property name="margin">
+     <property name="leftMargin">
       <number>0</number>
      </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="DockWidget" name="dockw_Urls">
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="windowTitle">
+    <string>Listado de enlaces</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_Urls">
+    <layout class="QVBoxLayout" name="vLayout_twUrls">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="twUrls">
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="rootIsDecorated">
+        <bool>false</bool>
+       </property>
+       <property name="uniformRowHeights">
+        <bool>true</bool>
+       </property>
+       <property name="allColumnsShowFocus">
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text">
+         <string>Url</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Descripción</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="DockWidget" name="dockw_Videos">
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="windowTitle">
+    <string>Listado de videos</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_Videos">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QListWidget" name="lwVideos">
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="DockWidget" name="dockw_Sonidos">
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="windowTitle">
+    <string>Listado sonido</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_Sonidos">
+    <layout class="QVBoxLayout" name="vLayout_mediaSound">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="DockWidget" name="dockw_Capturas">
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="windowTitle">
+    <string>Capturas</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_Capturas">
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QListWidget" name="lwCapturas">
+       <property name="iconSize">
+        <size>
+         <width>128</width>
+         <height>128</height>
+        </size>
+       </property>
+       <property name="movement">
+        <enum>QListView::Static</enum>
+       </property>
+       <property name="flow">
+        <enum>QListView::LeftToRight</enum>
+       </property>
+       <property name="resizeMode">
+        <enum>QListView::Adjust</enum>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::IconMode</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="tb_shortcut">
+   <property name="windowTitle">
+    <string>Barra shortcut</string>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllToolBarAreas</set>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+  </widget>
+  <widget class="DockWidget" name="dockw_Imagenes">
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="windowTitle">
+    <string>Imágenes</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_Imagenes">
+    <layout class="QVBoxLayout" name="verticalLayout_7">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QListWidget" name="lwImagenes">
+       <property name="iconSize">
+        <size>
+         <width>128</width>
+         <height>128</height>
+        </size>
+       </property>
+       <property name="movement">
+        <enum>QListView::Static</enum>
+       </property>
+       <property name="flow">
+        <enum>QListView::LeftToRight</enum>
+       </property>
+       <property name="resizeMode">
+        <enum>QListView::Adjust</enum>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::IconMode</enum>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -913,9 +1045,6 @@
    </property>
    <property name="statusTip">
     <string>Muestra información sobre la base de datos</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_file_cerrar">
@@ -932,14 +1061,11 @@
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_nuevo_dosbox">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
+     <normaloff>:/img16/cat/dosbox.png</normaloff>:/img16/cat/dosbox.png</iconset>
    </property>
    <property name="text">
     <string>Nuevo con DOSBox</string>
@@ -956,14 +1082,11 @@
    <property name="shortcut">
     <string>Ctrl+D</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_nuevo_scummvm">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
+     <normaloff>:/img16/cat/scummvm.png</normaloff>:/img16/cat/scummvm.png</iconset>
    </property>
    <property name="text">
     <string>Nuevo con ScummVM</string>
@@ -980,14 +1103,11 @@
    <property name="shortcut">
     <string>Ctrl+S</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_nuevo_vdmsound">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/vdmsound.png</normaloff>:/img16/vdmsound.png</iconset>
+     <normaloff>:/img16/cat/vdmsound.png</normaloff>:/img16/cat/vdmsound.png</iconset>
    </property>
    <property name="text">
     <string>Nuevo con VDMSound</string>
@@ -1003,9 +1123,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+V</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_edit_nuevo">
@@ -1028,9 +1145,6 @@
    <property name="shortcut">
     <string>Ins</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_editar">
    <property name="icon">
@@ -1052,9 +1166,6 @@
    <property name="shortcut">
     <string>Shift+Ins</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_eliminar">
    <property name="icon">
@@ -1069,9 +1180,6 @@
    </property>
    <property name="shortcut">
     <string>Del</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_edit_favorito">
@@ -1097,14 +1205,32 @@
    <property name="shortcut">
     <string>Shift+F</string>
    </property>
-   <property name="iconVisibleInMenu">
+  </action>
+  <action name="mnu_edit_original">
+   <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/original.png</normaloff>:/img16/original.png</iconset>
+   </property>
+   <property name="text">
+    <string>Marcar como original</string>
+   </property>
+   <property name="toolTip">
+    <string>Marcar como original</string>
+   </property>
+   <property name="statusTip">
+    <string>Marca o quita un juego seleccionado como original</string>
    </property>
   </action>
   <action name="mnu_ejecutar_dosbox">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
+     <normaloff>:/img16/cat/dosbox.png</normaloff>:/img16/cat/dosbox.png</iconset>
    </property>
    <property name="text">
     <string>Ejecuta DOSBox</string>
@@ -1121,14 +1247,11 @@
    <property name="shortcut">
     <string>Shift+D</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ejecutar_scummvm">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
+     <normaloff>:/img16/cat/scummvm.png</normaloff>:/img16/cat/scummvm.png</iconset>
    </property>
    <property name="text">
     <string>Ejecuta ScummVM</string>
@@ -1144,9 +1267,6 @@
    </property>
    <property name="shortcut">
     <string>Shift+S</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ejecutar_juego">
@@ -1169,9 +1289,6 @@
    <property name="shortcut">
     <string>Ctrl+E</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ejecutar_setup">
    <property name="icon">
@@ -1190,9 +1307,6 @@
    <property name="shortcut">
     <string>Alt+S</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_tool_instalar">
    <property name="icon">
@@ -1207,9 +1321,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_tool_importar">
@@ -1226,11 +1337,11 @@
    <property name="shortcut">
     <string>Shift+I</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_tool_exportar">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/exportar.png</normaloff>:/img16/exportar.png</iconset>
@@ -1244,8 +1355,17 @@
    <property name="shortcut">
     <string>Shift+E</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
+  </action>
+  <action name="mnu_tool_cambiar_categoria">
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/cambiar_categoria.png</normaloff>:/img16/cambiar_categoria.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cambiar de categoría</string>
+   </property>
+   <property name="toolTip">
+    <string>Cambiar de categoría</string>
    </property>
   </action>
   <action name="mnu_tool_edit_themes">
@@ -1261,9 +1381,6 @@
    </property>
    <property name="statusTip">
     <string>Edit themes</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_tool_opciones">
@@ -1286,9 +1403,6 @@
    <property name="shortcut">
     <string>Ctrl+O</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_nav">
    <property name="checkable">
@@ -1307,12 +1421,12 @@
    <property name="shortcut">
     <string>F2</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_cover_mode">
    <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
     <bool>true</bool>
    </property>
    <property name="icon">
@@ -1324,9 +1438,6 @@
    </property>
    <property name="shortcut">
     <string>F3</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_pictureflow">
@@ -1346,8 +1457,20 @@
    <property name="shortcut">
     <string>F4</string>
    </property>
-   <property name="iconVisibleInMenu">
+  </action>
+  <action name="mnu_ver_pictureflow_to_center">
+   <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/pictureflow.png</normaloff>:/img16/pictureflow.png</iconset>
+   </property>
+   <property name="text">
+    <string>PictureFlow como principal</string>
+   </property>
+   <property name="shortcut">
+    <string>F8</string>
    </property>
   </action>
   <action name="mnu_ver_datos">
@@ -1359,7 +1482,7 @@
    </property>
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/datos.png</normaloff>:/img16/datos.png</iconset>
+     <normaloff>:/img16/cat/datos.png</normaloff>:/img16/cat/datos.png</iconset>
    </property>
    <property name="text">
     <string>Ver datos</string>
@@ -1376,11 +1499,8 @@
    <property name="shortcut">
     <string>F5</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
-  <action name="mnu_ver_archivos_url">
+  <action name="mnu_ver_archivos">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1389,22 +1509,19 @@
      <normaloff>:/img16/archivos.png</normaloff>:/img16/archivos.png</iconset>
    </property>
    <property name="text">
-    <string>Ver archivos y url</string>
+    <string>Ver archivos</string>
    </property>
    <property name="iconText">
-    <string>Ver archivos y url</string>
+    <string>Ver archivos</string>
    </property>
    <property name="toolTip">
-    <string>Ver archivos y url</string>
+    <string>Ver archivos</string>
    </property>
    <property name="statusTip">
-    <string>Muestra los archivos y url del juego</string>
+    <string>Muestra los archivos del juego</string>
    </property>
    <property name="shortcut">
     <string>F6</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_capturas">
@@ -1427,30 +1544,302 @@
    <property name="shortcut">
     <string>F7</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
-  <action name="mnu_ver_pictureflow_to_center">
+  <action name="mnu_ver_imagenes">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/pictureflow.png</normaloff>:/img16/pictureflow.png</iconset>
+     <normaloff>:/img16/imagen.png</normaloff>:/img16/imagen.png</iconset>
    </property>
    <property name="text">
-    <string>PictureFlow como principal</string>
+    <string>Ver imágenes</string>
    </property>
-   <property name="shortcut">
-    <string>F8</string>
+   <property name="iconText">
+    <string>Ver capturas</string>
    </property>
-   <property name="iconVisibleInMenu">
+   <property name="toolTip">
+    <string>Ver imágenes</string>
+   </property>
+   <property name="statusTip">
+    <string>Muestra las capturas del juego</string>
+   </property>
+  </action>
+  <action name="mnu_ver_enlaces">
+   <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/html.png</normaloff>:/img16/html.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ver enlaces</string>
+   </property>
+   <property name="iconText">
+    <string>Ver enlaces</string>
+   </property>
+   <property name="toolTip">
+    <string>Ver enlaces</string>
+   </property>
+   <property name="statusTip">
+    <string>Muestra los enlaces del juego</string>
+   </property>
+  </action>
+  <action name="mnu_ver_videos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/video.png</normaloff>:/img16/video.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ver videos</string>
+   </property>
+   <property name="iconText">
+    <string>Ver videos</string>
+   </property>
+   <property name="toolTip">
+    <string>Ver videos</string>
+   </property>
+   <property name="statusTip">
+    <string>Muestra los videos del juego</string>
+   </property>
+  </action>
+  <action name="mnu_ver_sonidos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/audio.png</normaloff>:/img16/audio.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ver sonidos</string>
+   </property>
+   <property name="iconText">
+    <string>Ver sonidos</string>
+   </property>
+   <property name="toolTip">
+    <string>Ver sonidos</string>
+   </property>
+   <property name="statusTip">
+    <string>Muestra los sonidos del juego</string>
+   </property>
+  </action>
+  <action name="mnu_ver_auto_hide_title_bars">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Auto ocultar  barra de título</string>
+   </property>
+   <property name="iconText">
+    <string>Auto ocultar  barra de título</string>
+   </property>
+   <property name="toolTip">
+    <string>Oculta automaticamente la barra de título en las ventanas acoplabes</string>
+   </property>
+   <property name="statusTip">
+    <string>Oculta automaticamente la barra de título en las ventanas acoplabes</string>
+   </property>
+  </action>
+  <action name="mnu_ver_titlebars_nav">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Nav categorías</string>
+   </property>
+  </action>
+  <action name="mnu_ver_titlebars_datos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Datos del juego</string>
+   </property>
+   <property name="toolTip">
+    <string>Datos del juego</string>
+   </property>
+  </action>
+  <action name="mnu_ver_titlebars_files">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Archivos</string>
+   </property>
+   <property name="toolTip">
+    <string>Archivos</string>
+   </property>
+  </action>
+  <action name="mnu_ver_titlebars_urls">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Enlaces</string>
+   </property>
+   <property name="toolTip">
+    <string>Enlaces</string>
+   </property>
+  </action>
+  <action name="mnu_ver_titlebars_capturas">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Capturas</string>
+   </property>
+   <property name="toolTip">
+    <string>Capturas</string>
+   </property>
+  </action>
+  <action name="mnu_ver_titlebars_imagenes">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Imágenes</string>
+   </property>
+   <property name="toolTip">
+    <string>Imágenes</string>
+   </property>
+  </action>
+  <action name="mnu_ver_titlebars_videos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Listado de videos</string>
+   </property>
+   <property name="toolTip">
+    <string>Listado de videos</string>
+   </property>
+  </action>
+  <action name="mnu_ver_titlebars_sonidos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Listado de sonidos</string>
+   </property>
+   <property name="toolTip">
+    <string>Listado de sonidos</string>
+   </property>
+  </action>
+  <action name="mnu_ver_titlebars_pictureflow">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>PictureFlow</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ignore_auto_hide_nav">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Nav categorías</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ignore_auto_hide_datos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Datos del juego</string>
+   </property>
+   <property name="toolTip">
+    <string>Datos del juego</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ignore_auto_hide_files">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Archivos</string>
+   </property>
+   <property name="toolTip">
+    <string>Archivos</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ignore_auto_hide_urls">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Enlaces</string>
+   </property>
+   <property name="toolTip">
+    <string>Enlaces</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ignore_auto_hide_capturas">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Capturas</string>
+   </property>
+   <property name="toolTip">
+    <string>Capturas</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ignore_auto_hide_imagenes">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Imágenes</string>
+   </property>
+   <property name="toolTip">
+    <string>Imágenes</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ignore_auto_hide_videos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Listado de videos</string>
+   </property>
+   <property name="toolTip">
+    <string>Listado de videos</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ignore_auto_hide_sonidos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Listado de sonidos</string>
+   </property>
+   <property name="toolTip">
+    <string>Listado de sonidos</string>
+   </property>
+  </action>
+  <action name="mnu_ver_ignore_auto_hide_pictureflow">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>PictureFlow</string>
    </property>
   </action>
   <action name="mnu_ver_menubar">
    <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
     <bool>true</bool>
    </property>
    <property name="icon">
@@ -1462,9 +1851,6 @@
    </property>
    <property name="shortcut">
     <string>F9</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_toolbar">
@@ -1487,8 +1873,26 @@
    <property name="shortcut">
     <string>F10</string>
    </property>
-   <property name="iconVisibleInMenu">
+  </action>
+  <action name="mnu_ver_toolbar_datos">
+   <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/barra_herramintas.png</normaloff>:/img16/barra_herramintas.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ver barra de herramientas datos</string>
+   </property>
+   <property name="iconText">
+    <string>Ver barra de herramientas</string>
+   </property>
+   <property name="toolTip">
+    <string>Ver barra de herramientas datos</string>
    </property>
   </action>
   <action name="mnu_ver_ordenar">
@@ -1514,8 +1918,26 @@
    <property name="shortcut">
     <string>F12</string>
    </property>
-   <property name="iconVisibleInMenu">
+  </action>
+  <action name="mnu_ver_shortcut">
+   <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/shortcut.png</normaloff>:/img16/shortcut.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ver shortcut</string>
+   </property>
+   <property name="iconText">
+    <string>Ver shortcut</string>
+   </property>
+   <property name="toolTip">
+    <string>Ver shortcut</string>
+   </property>
+   <property name="statusTip">
+    <string>Ordena la lista de juego</string>
    </property>
   </action>
   <action name="mnu_ver_statusbar">
@@ -1538,9 +1960,6 @@
    <property name="shortcut">
     <string>Ctrl+F9</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_icono">
    <property name="checkable">
@@ -1549,19 +1968,13 @@
    <property name="text">
     <string>Icono</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_subtitulo">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Subtitulo</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
+    <string>Subtítulo</string>
    </property>
   </action>
   <action name="mnu_ver_col_genero">
@@ -1571,9 +1984,6 @@
    <property name="text">
     <string>Genero</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_compania">
    <property name="checkable">
@@ -1581,9 +1991,6 @@
    </property>
    <property name="text">
     <string>Compañia</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_desarrollador">
@@ -1593,9 +2000,6 @@
    <property name="text">
     <string>Desarrollador</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_tema">
    <property name="checkable">
@@ -1603,9 +2007,6 @@
    </property>
    <property name="text">
     <string>Tema</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_grupo">
@@ -1615,9 +2016,6 @@
    <property name="text">
     <string>Grupo</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_perspectiva">
    <property name="checkable">
@@ -1625,9 +2023,6 @@
    </property>
    <property name="text">
     <string>Perspectiva</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_idioma">
@@ -1637,9 +2032,6 @@
    <property name="text">
     <string>Idioma</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_idioma_voces">
    <property name="checkable">
@@ -1647,9 +2039,6 @@
    </property>
    <property name="text">
     <string>Idioma voces</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_formato">
@@ -1659,9 +2048,6 @@
    <property name="text">
     <string>Formato</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_anno">
    <property name="checkable">
@@ -1669,9 +2055,6 @@
    </property>
    <property name="text">
     <string>Año</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_numdisc">
@@ -1681,9 +2064,6 @@
    <property name="text">
     <string>Nº discos</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_sistemaop">
    <property name="checkable">
@@ -1691,9 +2071,6 @@
    </property>
    <property name="text">
     <string>Sistema</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_tamano">
@@ -1703,9 +2080,6 @@
    <property name="text">
     <string>Tamaño</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_graficos">
    <property name="checkable">
@@ -1713,9 +2087,6 @@
    </property>
    <property name="text">
     <string>Gráficos</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_sonido">
@@ -1725,9 +2096,6 @@
    <property name="text">
     <string>Sonido</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_jugabilidad">
    <property name="checkable">
@@ -1735,9 +2103,6 @@
    </property>
    <property name="text">
     <string>Jugabilidad</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_original">
@@ -1747,9 +2112,6 @@
    <property name="text">
     <string>Original</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_estado">
    <property name="checkable">
@@ -1757,9 +2119,6 @@
    </property>
    <property name="text">
     <string>Estado</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_fecha">
@@ -1769,22 +2128,16 @@
    <property name="text">
     <string>Añadido el</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_tipoemu">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Tipo emu</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_favorito">
@@ -1792,13 +2145,10 @@
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Favorito</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_rating">
@@ -1806,13 +2156,10 @@
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Rating</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_col_edad">
@@ -1822,9 +2169,6 @@
    <property name="text">
     <string>Edad</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_col_usuario">
    <property name="checkable">
@@ -1833,80 +2177,38 @@
    <property name="text">
     <string>Usuario</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
-  <action name="mnu_ver_carpeta_confdbx">
+  <action name="mnu_ver_carpeta_datos_juego">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/dosbox.png</normaloff>:/img16/dosbox.png</iconset>
+     <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
    </property>
    <property name="text">
-    <string>Carpeta configuraciones DOSBox</string>
+    <string>Carpeta datos del Juego</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
-  </action>
-  <action name="mnu_ver_carpeta_confvdms">
-   <property name="icon">
-    <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/vdmsound.png</normaloff>:/img16/vdmsound.png</iconset>
-   </property>
-   <property name="text">
-    <string>Carpeta configuraciones VDMSound</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
-  </action>
-  <action name="mnu_ver_carpeta_thumbs">
-   <property name="icon">
-    <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
-   </property>
-   <property name="text">
-    <string>Carpeta de thumbs</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
-  </action>
-  <action name="mnu_ver_carpeta_covers">
-   <property name="icon">
-    <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
-   </property>
-   <property name="text">
-    <string>Carpeta de carátulas</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
+   <property name="toolTip">
+    <string>Carpeta datos del Juego</string>
    </property>
   </action>
   <action name="mnu_ver_carpeta_iconos">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
+     <normaloff>:/img16/imagen.png</normaloff>:/img16/imagen.png</iconset>
    </property>
    <property name="text">
     <string>Carpeta de iconos</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_carpeta_smiles">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/capturas.png</normaloff>:/img16/capturas.png</iconset>
+     <normaloff>:/img16/smile.png</normaloff>:/img16/smile.png</iconset>
    </property>
    <property name="text">
-    <string>Carpeta de emoticones</string>
+    <string>Carpeta de emoticonos</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
+   <property name="toolTip">
+    <string>Carpeta de emoticonos</string>
    </property>
   </action>
   <action name="mnu_ver_carpeta_themes">
@@ -1917,9 +2219,6 @@
    <property name="text">
     <string>Carpeta de themes</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_carpeta_datos">
    <property name="icon">
@@ -1929,32 +2228,23 @@
    <property name="text">
     <string>Carpeta de los datos</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_carpeta_scripts">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/archivo_config.png</normaloff>:/img16/archivo_config.png</iconset>
+     <normaloff>:/img16/script.png</normaloff>:/img16/script.png</iconset>
    </property>
    <property name="text">
     <string>Carpeta de scripts</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_carpeta_templates">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/datos_3.png</normaloff>:/img16/datos_3.png</iconset>
+     <normaloff>:/img16/archivo_config.png</normaloff>:/img16/archivo_config.png</iconset>
    </property>
    <property name="text">
     <string>Carpeta de templates</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_carpeta_idiomas">
@@ -1965,9 +2255,6 @@
    <property name="text">
     <string>Carpeta de idiomas</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_carpeta_temp">
    <property name="icon">
@@ -1977,9 +2264,6 @@
    <property name="text">
     <string>Carpeta temporal</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_carpeta_home">
    <property name="icon">
@@ -1988,9 +2272,6 @@
    </property>
    <property name="text">
     <string>Carpeta principal</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_fullscreen">
@@ -2006,9 +2287,6 @@
    </property>
    <property name="shortcut">
     <string>F11</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_ayuda">
@@ -2028,9 +2306,6 @@
    <property name="shortcut">
     <string>F1</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_ver_check_updates">
    <property name="icon">
@@ -2039,9 +2314,6 @@
    </property>
    <property name="text">
     <string>Buscar actualizaciones</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_acercad">
@@ -2057,9 +2329,6 @@
    </property>
    <property name="toolTip">
     <string>Acerca de...</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_file_cerrar_big">
@@ -2079,14 +2348,11 @@
    <property name="statusTip">
     <string>Cerrar el GR-lida</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_nuevo_dosbox_big">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img32/dosbox.png</normaloff>:/img32/dosbox.png</iconset>
+     <normaloff>:/img32/cat/dosbox.png</normaloff>:/img32/cat/dosbox.png</iconset>
    </property>
    <property name="text">
     <string>Nuevo con DOSBox</string>
@@ -2100,14 +2366,11 @@
    <property name="statusTip">
     <string>Nuevo juego para el emulador DOSBox</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_nuevo_scummvm_big">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img32/scummvm.png</normaloff>:/img32/scummvm.png</iconset>
+     <normaloff>:/img32/cat/scummvm.png</normaloff>:/img32/cat/scummvm.png</iconset>
    </property>
    <property name="text">
     <string>Nuevo con ScummVM</string>
@@ -2121,14 +2384,11 @@
    <property name="statusTip">
     <string>Nuevo juego para el emulador ScummVM</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_nuevo_vdmsound_big">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img32/vdmsound.png</normaloff>:/img32/vdmsound.png</iconset>
+     <normaloff>:/img32/cat/vdmsound.png</normaloff>:/img32/cat/vdmsound.png</iconset>
    </property>
    <property name="text">
     <string>Nuevo con VDMSound</string>
@@ -2141,9 +2401,6 @@
    </property>
    <property name="statusTip">
     <string>Nuevo juego para el emulador VDMSound</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ejecutar_juego_big">
@@ -2162,9 +2419,6 @@
    </property>
    <property name="statusTip">
     <string>Ejecuta un juego con el emulador correspondiente</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ejecutar_setup_big">
@@ -2187,9 +2441,6 @@
    <property name="statusTip">
     <string>Ejecuta el setup del juego</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_nuevo_big">
    <property name="icon">
@@ -2211,9 +2462,6 @@
    <property name="visible">
     <bool>true</bool>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_edit_editar_big">
    <property name="icon">
@@ -2231,9 +2479,6 @@
    </property>
    <property name="statusTip">
     <string>Edita los datos del juego asi como la configuración del emulador</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_edit_eliminar_big">
@@ -2253,9 +2498,6 @@
    <property name="statusTip">
     <string>Elimina un juego de la lista</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_tool_importar_big">
    <property name="icon">
@@ -2271,11 +2513,8 @@
    <property name="statusTip">
     <string>Importa los datos de un juego via web</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
-  <action name="mnu_ver_archivos_url_big">
+  <action name="mnu_ver_archivos_big">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -2284,19 +2523,16 @@
      <normaloff>:/img32/archivos.png</normaloff>:/img32/archivos.png</iconset>
    </property>
    <property name="text">
-    <string>Ver archivos y url</string>
+    <string>Ver archivos</string>
    </property>
    <property name="iconText">
-    <string>Ver archivos y url</string>
+    <string>Ver archivos</string>
    </property>
    <property name="toolTip">
-    <string>Ver archivos y url</string>
+    <string>Ver archivos</string>
    </property>
    <property name="statusTip">
-    <string>Muestra los archivos y url del juego</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
+    <string>Muestra los archivos del juego</string>
    </property>
   </action>
   <action name="mnu_ver_datos_big">
@@ -2308,7 +2544,7 @@
    </property>
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img32/datos.png</normaloff>:/img32/datos.png</iconset>
+     <normaloff>:/img32/cat/datos.png</normaloff>:/img32/cat/datos.png</iconset>
    </property>
    <property name="text">
     <string>Ver datos</string>
@@ -2324,9 +2560,6 @@
    </property>
    <property name="whatsThis">
     <string/>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_capturas_big">
@@ -2349,9 +2582,6 @@
    <property name="statusTip">
     <string>Muestra las capturas del juego</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_tool_opciones_big">
    <property name="icon">
@@ -2369,9 +2599,6 @@
    </property>
    <property name="statusTip">
     <string>Opciones de configuración del GR-lida</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_ver_acercad_big">
@@ -2391,9 +2618,6 @@
    <property name="statusTip">
     <string>Muestra información acerca del GR-lida</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_trayicon_minimize">
    <property name="icon">
@@ -2402,9 +2626,6 @@
    </property>
    <property name="text">
     <string>Mi&amp;nimizar</string>
-   </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
    </property>
   </action>
   <action name="mnu_trayicon_maximize">
@@ -2415,9 +2636,6 @@
    <property name="text">
     <string>Ma&amp;ximizar</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
   <action name="mnu_trayicon_restore">
    <property name="icon">
@@ -2427,30 +2645,34 @@
    <property name="text">
     <string>&amp;Restaurar</string>
    </property>
-   <property name="iconVisibleInMenu">
-    <bool>true</bool>
-   </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AnimatedTextBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>animatedtextbrowser.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DockWidget</class>
+   <extends>QDockWidget</extends>
+   <header>dockwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>tvJuegos</tabstop>
   <tabstop>lvJuegos</tabstop>
   <tabstop>cbxCategoriasTb</tabstop>
   <tabstop>cbxCategorias</tabstop>
   <tabstop>twListNav</tabstop>
-  <tabstop>twCapturas</tabstop>
-  <tabstop>btnVer_Archivos</tabstop>
-  <tabstop>btnVer_CoverFront</tabstop>
-  <tabstop>btnVer_CoverBack</tabstop>
   <tabstop>txtBuscar</tabstop>
   <tabstop>cbxOrdenBy</tabstop>
   <tabstop>cbxOrden</tabstop>
   <tabstop>btnOrdenar</tabstop>
-  <tabstop>tabFileUrl</tabstop>
-  <tabstop>twCapturaVideo</tabstop>
-  <tabstop>twCapturaSonido</tabstop>
-  <tabstop>twUrls</tabstop>
   <tabstop>twFiles</tabstop>
+  <tabstop>twUrls</tabstop>
  </tabstops>
  <resources>
   <include location="../res/gr-lida.qrc"/>

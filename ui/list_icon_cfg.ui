@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
-    <height>694</height>
+    <width>1000</width>
+    <height>950</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>730</width>
-    <height>694</height>
+    <width>780</width>
+    <height>568</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -23,10 +23,7 @@
    <iconset resource="../res/gr-lida.qrc">
     <normaloff>:/img16/cover_mode.png</normaloff>:/img16/cover_mode.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_1">
-   <property name="spacing">
-    <number>4</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0">
    <property name="leftMargin">
     <number>4</number>
    </property>
@@ -40,42 +37,55 @@
     <number>4</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="tabCfgThemes">
-     <property name="currentIndex">
-      <number>0</number>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="tab_1">
-      <attribute name="icon">
-       <iconset resource="../res/gr-lida.qrc">
-        <normaloff>:/img16/cover_mode.png</normaloff>:/img16/cover_mode.png</iconset>
-      </attribute>
-      <attribute name="title">
-       <string>Main list themes</string>
-      </attribute>
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="leftMargin">
-        <number>4</number>
-       </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>4</number>
-       </property>
-       <property name="bottomMargin">
-        <number>4</number>
-       </property>
        <item>
-        <widget class="QSplitter" name="splitter">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+        <widget class="QComboBox" name="cbxThemes">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
          </property>
-         <widget class="QWidget" name="layoutWidget_1">
-          <layout class="QVBoxLayout" name="verticalLayout_4">
-           <property name="spacing">
+        </widget>
+       </item>
+       <item>
+        <widget class="QTabWidget" name="tabCfgThemes">
+         <property name="minimumSize">
+          <size>
+           <width>520</width>
+           <height>522</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="tab_1">
+          <attribute name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/style.png</normaloff>:/img16/style.png</iconset>
+          </attribute>
+          <attribute name="title">
+           <string>Main list themes</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,0">
+           <property name="leftMargin">
             <number>4</number>
            </property>
-           <item>
+           <property name="topMargin">
+            <number>4</number>
+           </property>
+           <property name="rightMargin">
+            <number>4</number>
+           </property>
+           <property name="bottomMargin">
+            <number>4</number>
+           </property>
+           <item row="0" column="0">
             <widget class="QComboBox" name="cbxCategorias">
              <property name="minimumSize">
               <size>
@@ -85,24 +95,31 @@
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QComboBox" name="cbxThemes">
+           <item row="0" column="1">
+            <widget class="QPushButton" name="btnSave">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
-               <width>0</width>
-               <height>24</height>
+               <width>100</width>
+               <height>26</height>
               </size>
+             </property>
+             <property name="text">
+              <string>Save config</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../res/gr-lida.qrc">
+               <normaloff>:/img16/floppy_2.png</normaloff>:/img16/floppy_2.png</iconset>
              </property>
             </widget>
            </item>
-           <item>
+           <item row="1" column="0" colspan="2">
             <widget class="QScrollArea" name="scrollArea">
-             <property name="minimumSize">
-              <size>
-               <width>486</width>
-               <height>0</height>
-              </size>
-             </property>
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
              </property>
@@ -114,8 +131,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>469</width>
-                <height>1281</height>
+                <width>494</width>
+                <height>1436</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_4">
@@ -137,7 +154,7 @@
                <item row="0" column="0">
                 <widget class="QGroupBox" name="groupBox_1">
                  <property name="title">
-                  <string>tw_list_icon</string>
+                  <string>tv_list_icon</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout">
                   <property name="leftMargin">
@@ -152,29 +169,6 @@
                   <property name="bottomMargin">
                    <number>4</number>
                   </property>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="lb_cfg_1">
-                    <property name="text">
-                     <string>tw_icon_width</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QSpinBox" name="tw_icon_width">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>256</number>
-                    </property>
-                    <property name="value">
-                     <number>24</number>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="1" column="0">
                    <widget class="QLabel" name="lb_cfg_2">
                     <property name="text">
@@ -182,39 +176,10 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="1">
-                   <widget class="QSpinBox" name="tw_icon_height">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>256</number>
-                    </property>
-                    <property name="value">
-                     <number>24</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="2">
-                   <widget class="QPushButton" name="btn_tw_icon_width_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="lb_cfg_1">
+                    <property name="text">
+                     <string>tw_icon_width</string>
                     </property>
                    </widget>
                   </item>
@@ -234,19 +199,98 @@
                     </property>
                     <property name="icon">
                      <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QPushButton" name="btn_tw_icon_width_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QSpinBox" name="tw_icon_width">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>256</number>
+                    </property>
+                    <property name="value">
+                     <number>24</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QSpinBox" name="tw_icon_height">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>256</number>
+                    </property>
+                    <property name="value">
+                     <number>24</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0" colspan="2">
+                   <widget class="QCheckBox" name="tw_alternating_row_colors">
+                    <property name="text">
+                     <string>tw_alternating_row_colors</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QPushButton" name="btn_tw_alternating_row_colors_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
                     </property>
                    </widget>
                   </item>
                  </layout>
                 </widget>
                </item>
-               <item row="0" column="1">
+               <item row="0" column="1" rowspan="2">
                 <widget class="QGroupBox" name="groupBox_2">
                  <property name="title">
                   <string>picflow_img</string>
                  </property>
-                 <layout class="QGridLayout" name="gridLayout_2">
+                 <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,1,0">
                   <property name="leftMargin">
                    <number>4</number>
                   </property>
@@ -321,7 +365,7 @@
                     </property>
                     <property name="icon">
                      <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -341,19 +385,59 @@
                     </property>
                     <property name="icon">
                      <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
                     </property>
                    </widget>
+                  </item>
+                  <item row="2" column="0" colspan="2">
+                   <widget class="QCheckBox" name="pf_img_fixsize">
+                    <property name="text">
+                     <string>pf_img_fixsize</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QPushButton" name="btn_pf_img_fixsize_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <spacer name="verticalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                  </layout>
                 </widget>
                </item>
-               <item row="1" column="0" colspan="2">
+               <item row="1" column="0">
                 <widget class="QGroupBox" name="groupBox_3">
                  <property name="title">
-                  <string>list_icon</string>
+                  <string>lv_list_icon</string>
                  </property>
-                 <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0,0,0,0,0,0,0">
+                 <layout class="QGridLayout" name="gridLayout_3">
                   <property name="leftMargin">
                    <number>4</number>
                   </property>
@@ -366,1438 +450,14 @@
                   <property name="bottomMargin">
                    <number>4</number>
                   </property>
-                  <item row="8" column="1" colspan="7">
-                   <widget class="QCheckBox" name="img_scaled">
-                    <property name="text">
-                     <string>img_scaled</string>
-                    </property>
-                    <property name="checked">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="12" column="1" colspan="7">
-                   <widget class="QCheckBox" name="tipo_emu_show">
-                    <property name="text">
-                     <string>tipo_emu_show</string>
-                    </property>
-                    <property name="checked">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="37" column="1" colspan="7">
-                   <widget class="QCheckBox" name="title_font_italic">
-                    <property name="text">
-                     <string>title_font_italic</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="36" column="1" colspan="7">
-                   <widget class="QCheckBox" name="title_font_bold">
-                    <property name="text">
-                     <string>title_font_bold</string>
-                    </property>
-                    <property name="checked">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="38" column="1" colspan="7">
-                   <widget class="QCheckBox" name="title_font_underline">
-                    <property name="text">
-                     <string>title_font_underline</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="27" column="1" colspan="7">
-                   <widget class="QCheckBox" name="title_show">
-                    <property name="text">
-                     <string>title_show</string>
-                    </property>
-                    <property name="checked">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="7" column="0" colspan="8">
-                   <layout class="QHBoxLayout" name="horizontalLayout_4">
-                    <item>
-                     <widget class="QLabel" name="lb_cfg_12">
-                      <property name="text">
-                       <string>Option image</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="Line" name="line_sep_2">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item row="16" column="1" colspan="7">
-                   <widget class="QCheckBox" name="rating_show">
-                    <property name="text">
-                     <string>rating_show</string>
-                    </property>
-                    <property name="checked">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="21" column="1" colspan="7">
-                   <widget class="QCheckBox" name="title_bg_show">
-                    <property name="text">
-                     <string>title_bg_show</string>
-                    </property>
-                    <property name="checked">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="17" column="1" colspan="7">
-                   <widget class="QCheckBox" name="rating_vertical">
-                    <property name="text">
-                     <string>rating_vertical</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="8" column="0">
-                   <widget class="QPushButton" name="btn_img_scaled_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="3">
-                   <widget class="QPushButton" name="btn_img_cover_top_pos_x_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="6" column="2">
-                   <widget class="QSpinBox" name="img_cover_top_pos_y">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>22</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_6">
-                    <property name="text">
-                     <string>icon_height</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_10">
-                    <property name="text">
-                     <string>img_cover_top_pos_x</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="2" colspan="4">
-                   <widget class="QLineEdit" name="img_cover_top_select">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_8">
-                    <property name="text">
-                     <string>img_cover_top</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="3">
-                   <widget class="QPushButton" name="btn_icon_width_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="10" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_14">
-                    <property name="text">
-                     <string>img_scale_h</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="38" column="0">
-                   <widget class="QPushButton" name="btn_title_font_underline_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="7">
-                   <widget class="QPushButton" name="btn_img_cover_top_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="6" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_11">
-                    <property name="text">
-                     <string>img_cover_top_pos_y</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="6">
-                   <widget class="QPushButton" name="btn_img_cover_top">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="9" column="6">
-                   <widget class="QPushButton" name="btn_img_scale_pos_x_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0" colspan="2">
+                  <item row="0" column="0">
                    <widget class="QLabel" name="lb_cfg_5">
                     <property name="text">
                      <string>icon_width</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="37" column="0">
-                   <widget class="QPushButton" name="btn_title_font_italic_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="36" column="0">
-                   <widget class="QPushButton" name="btn_title_font_bold_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="35" column="3">
-                   <widget class="QPushButton" name="btn_title_font_color_select_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="35" column="2">
-                   <widget class="QPushButton" name="btn_title_font_color_select">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="35" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_37">
-                    <property name="text">
-                     <string>title_font_color_select</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="34" column="3">
-                   <widget class="QPushButton" name="btn_title_font_color_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="34" column="2">
-                   <widget class="QPushButton" name="btn_title_font_color">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="34" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_36">
-                    <property name="text">
-                     <string>title_font_color</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="33" column="3">
-                   <widget class="QPushButton" name="btn_title_font_size_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="33" column="2">
-                   <widget class="QSpinBox" name="title_font_size">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>7</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="33" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_35">
-                    <property name="text">
-                     <string>title_font_size</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="32" column="7">
-                   <widget class="QPushButton" name="btn_title_font_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="32" column="0" colspan="7">
-                   <widget class="QFontComboBox" name="title_font">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="31" column="0" colspan="8">
-                   <layout class="QHBoxLayout" name="horizontalLayout_5">
-                    <item>
-                     <widget class="QLabel" name="lb_cfg_34">
-                      <property name="text">
-                       <string>Option font title</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="Line" name="line_sep_7">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item row="30" column="3">
-                   <widget class="QPushButton" name="btn_title_max_caracteres_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="30" column="2">
-                   <widget class="QSpinBox" name="title_max_caracteres">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>25</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="30" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_31">
-                    <property name="text">
-                     <string>title_max_caracteres</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="29" column="6">
-                   <widget class="QPushButton" name="btn_title_height_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="29" column="5">
-                   <widget class="QSpinBox" name="title_height">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>16</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="29" column="4">
-                   <widget class="QLabel" name="lb_cfg_33">
-                    <property name="text">
-                     <string>title_height</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="29" column="3">
-                   <widget class="QPushButton" name="btn_title_pos_y_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="29" column="2">
-                   <widget class="QSpinBox" name="title_pos_y">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>222</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="29" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_30">
-                    <property name="text">
-                     <string>title_pos_y</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="28" column="6">
-                   <widget class="QPushButton" name="btn_title_width_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="28" column="5">
-                   <widget class="QSpinBox" name="title_width">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>156</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="28" column="4">
-                   <widget class="QLabel" name="lb_cfg_32">
-                    <property name="text">
-                     <string>title_width</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="28" column="2">
-                   <widget class="QSpinBox" name="title_pos_x">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>21</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="28" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_29">
-                    <property name="text">
-                     <string>title_pos_x</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="27" column="0">
-                   <widget class="QPushButton" name="btn_title_show_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="26" column="0" colspan="8">
-                   <layout class="QHBoxLayout" name="horizontalLayout_8">
-                    <item>
-                     <widget class="QLabel" name="lb_cfg_28">
-                      <property name="text">
-                       <string>Option title</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="Line" name="line_sep_6">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item row="25" column="3">
-                   <widget class="QPushButton" name="btn_title_bg_pos_y_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="25" column="2">
-                   <widget class="QSpinBox" name="title_bg_pos_y">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>222</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="25" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_27">
-                    <property name="text">
-                     <string>title_bg_pos_y</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="24" column="3">
-                   <widget class="QPushButton" name="btn_title_bg_pos_x_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="24" column="2">
-                   <widget class="QSpinBox" name="title_bg_pos_x">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>13</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="24" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_26">
-                    <property name="text">
-                     <string>title_bg_pos_x</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="23" column="7">
-                   <widget class="QPushButton" name="btn_title_bg_select_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="23" column="6">
-                   <widget class="QPushButton" name="btn_title_bg_select">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="23" column="2" colspan="4">
-                   <widget class="QLineEdit" name="title_bg_select">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="23" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_25">
-                    <property name="text">
-                     <string>title_bg_select</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="22" column="7">
-                   <widget class="QPushButton" name="btn_title_bg_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="22" column="6">
-                   <widget class="QPushButton" name="btn_title_bg">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="22" column="2" colspan="4">
-                   <widget class="QLineEdit" name="title_bg">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="21" column="0">
-                   <widget class="QPushButton" name="btn_title_bg_show_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="20" column="0" colspan="8">
-                   <layout class="QHBoxLayout" name="horizontalLayout_2">
-                    <item>
-                     <widget class="QLabel" name="lb_cfg_23">
-                      <property name="text">
-                       <string>Option background title</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="Line" name="line_sep_5">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item row="19" column="3">
-                   <widget class="QPushButton" name="btn_rating_pos_y_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="19" column="2">
-                   <widget class="QSpinBox" name="rating_pos_y">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>202</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="19" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_22">
-                    <property name="text">
-                     <string>rating_pos_y</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="18" column="3">
-                   <widget class="QPushButton" name="btn_rating_pos_x_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="18" column="2">
-                   <widget class="QSpinBox" name="rating_pos_x">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>105</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="18" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_21">
-                    <property name="text">
-                     <string>rating_pos_x</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="17" column="0">
-                   <widget class="QPushButton" name="btn_rating_vertical_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="16" column="0">
-                   <widget class="QPushButton" name="btn_rating_show_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="14" column="3">
-                   <widget class="QPushButton" name="btn_tipo_emu_pos_y_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="14" column="2">
-                   <widget class="QSpinBox" name="tipo_emu_pos_y">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>202</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="14" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_19">
-                    <property name="text">
-                     <string>tipo_emu_pos_y</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="13" column="3">
-                   <widget class="QPushButton" name="btn_tipo_emu_pos_x_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="13" column="2">
-                   <widget class="QSpinBox" name="tipo_emu_pos_x">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>15</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="13" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_18">
-                    <property name="text">
-                     <string>tipo_emu_pos_x</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="12" column="0">
-                   <widget class="QPushButton" name="btn_tipo_emu_show_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="10" column="6">
-                   <widget class="QPushButton" name="btn_img_scale_pos_y_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_9">
-                    <property name="text">
-                     <string>img_cover_top_select</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="10" column="5">
-                   <widget class="QSpinBox" name="img_scale_pos_y">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>68</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="10" column="4">
-                   <widget class="QLabel" name="lb_cfg_16">
-                    <property name="text">
-                     <string>img_scale_pos_y</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="9" column="2">
-                   <widget class="QSpinBox" name="img_scale_w">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>145</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="9" column="5">
-                   <widget class="QSpinBox" name="img_scale_pos_x">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>28</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="9" column="3">
-                   <widget class="QPushButton" name="btn_img_scale_w_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="6" column="3">
-                   <widget class="QPushButton" name="btn_img_cover_top_pos_y_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="10" column="2">
-                   <widget class="QSpinBox" name="img_scale_h">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>145</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="7">
-                   <widget class="QPushButton" name="btn_img_cover_top_select_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="10" column="3">
-                   <widget class="QPushButton" name="btn_img_scale_h_def">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="2">
+                  <item row="0" column="1">
                    <widget class="QSpinBox" name="icon_width">
                     <property name="minimumSize">
                      <size>
@@ -1813,24 +473,8 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="5" column="2">
-                   <widget class="QSpinBox" name="img_cover_top_pos_x">
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="maximum">
-                     <number>512</number>
-                    </property>
-                    <property name="value">
-                     <number>22</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="3">
-                   <widget class="QPushButton" name="btn_icon_height_def">
+                  <item row="0" column="2">
+                   <widget class="QPushButton" name="btn_icon_width_def">
                     <property name="minimumSize">
                      <size>
                       <width>30</width>
@@ -1845,31 +489,18 @@
                     </property>
                     <property name="icon">
                      <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="6">
-                   <widget class="QPushButton" name="btn_img_cover_top_select">
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>30</width>
-                      <height>26</height>
-                     </size>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="lb_cfg_6">
+                    <property name="text">
+                     <string>icon_height</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="2">
+                  <item row="1" column="1">
                    <widget class="QSpinBox" name="icon_height">
                     <property name="minimumSize">
                      <size>
@@ -1885,7 +516,54 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="0" colspan="8">
+                  <item row="1" column="2">
+                   <widget class="QPushButton" name="btn_icon_height_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QGroupBox" name="groupBox_4">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>1210</height>
+                  </size>
+                 </property>
+                 <property name="title">
+                  <string>item_list</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,0,0,1,0,0,0">
+                  <property name="leftMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>4</number>
+                  </property>
+                  <item row="1" column="0" colspan="8">
                    <layout class="QHBoxLayout" name="horizontalLayout_6">
                     <item>
                      <widget class="QLabel" name="lb_cfg_7">
@@ -1909,24 +587,14 @@
                     </item>
                    </layout>
                   </item>
-                  <item row="9" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_13">
+                  <item row="2" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_8">
                     <property name="text">
-                     <string>img_scale_w</string>
+                     <string>img_cover_top</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="9" column="4">
-                   <widget class="QLabel" name="lb_cfg_15">
-                    <property name="text">
-                     <string>img_scale_pos_x</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="2" colspan="4">
+                  <item row="2" column="2" colspan="4">
                    <widget class="QLineEdit" name="img_cover_top">
                     <property name="minimumSize">
                      <size>
@@ -1936,7 +604,422 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="11" column="0" colspan="8">
+                  <item row="2" column="6">
+                   <widget class="QPushButton" name="btn_img_cover_top">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="7">
+                   <widget class="QPushButton" name="btn_img_cover_top_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_9">
+                    <property name="text">
+                     <string>img_cover_top_select</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="2" colspan="4">
+                   <widget class="QLineEdit" name="img_cover_top_select">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="6">
+                   <widget class="QPushButton" name="btn_img_cover_top_select">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="7">
+                   <widget class="QPushButton" name="btn_img_cover_top_select_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_10">
+                    <property name="text">
+                     <string>img_cover_top_pos_x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="img_cover_top_pos_x">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>22</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="3">
+                   <widget class="QPushButton" name="btn_img_cover_top_pos_x_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_11">
+                    <property name="text">
+                     <string>img_cover_top_pos_y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="2">
+                   <widget class="QSpinBox" name="img_cover_top_pos_y">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>22</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="3">
+                   <widget class="QPushButton" name="btn_img_cover_top_pos_y_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0" colspan="8">
+                   <layout class="QHBoxLayout" name="horizontalLayout_4">
+                    <item>
+                     <widget class="QLabel" name="lb_cfg_12">
+                      <property name="text">
+                       <string>Option image</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="Line" name="line_sep_2">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QPushButton" name="btn_img_scaled_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="1" colspan="7">
+                   <widget class="QCheckBox" name="img_scaled">
+                    <property name="text">
+                     <string>img_scaled</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_13">
+                    <property name="text">
+                     <string>img_scale_w</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="2">
+                   <widget class="QSpinBox" name="img_scale_w">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>145</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="3">
+                   <widget class="QPushButton" name="btn_img_scale_w_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="4">
+                   <widget class="QLabel" name="lb_cfg_15">
+                    <property name="text">
+                     <string>img_scale_pos_x</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="5">
+                   <widget class="QSpinBox" name="img_scale_pos_x">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>28</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="6">
+                   <widget class="QPushButton" name="btn_img_scale_pos_x_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_14">
+                    <property name="text">
+                     <string>img_scale_h</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="2">
+                   <widget class="QSpinBox" name="img_scale_h">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>145</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="3">
+                   <widget class="QPushButton" name="btn_img_scale_h_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="4">
+                   <widget class="QLabel" name="lb_cfg_16">
+                    <property name="text">
+                     <string>img_scale_pos_y</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="5">
+                   <widget class="QSpinBox" name="img_scale_pos_y">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>68</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="6">
+                   <widget class="QPushButton" name="btn_img_scale_pos_y_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="10" column="0" colspan="8">
                    <layout class="QHBoxLayout" name="horizontalLayout_7">
                     <item>
                      <widget class="QLabel" name="lb_cfg_17">
@@ -1960,7 +1043,123 @@
                     </item>
                    </layout>
                   </item>
-                  <item row="15" column="0" colspan="8">
+                  <item row="11" column="0">
+                   <widget class="QPushButton" name="btn_tipo_emu_show_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="11" column="1" colspan="7">
+                   <widget class="QCheckBox" name="tipo_emu_show">
+                    <property name="text">
+                     <string>tipo_emu_show</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="12" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_18">
+                    <property name="text">
+                     <string>tipo_emu_pos_x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="12" column="2">
+                   <widget class="QSpinBox" name="tipo_emu_pos_x">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>15</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="12" column="3">
+                   <widget class="QPushButton" name="btn_tipo_emu_pos_x_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="13" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_19">
+                    <property name="text">
+                     <string>tipo_emu_pos_y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="13" column="2">
+                   <widget class="QSpinBox" name="tipo_emu_pos_y">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>202</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="13" column="3">
+                   <widget class="QPushButton" name="btn_tipo_emu_pos_y_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="14" column="0" colspan="8">
                    <layout class="QHBoxLayout" name="horizontalLayout_3">
                     <item>
                      <widget class="QLabel" name="lb_cfg_20">
@@ -1984,7 +1183,481 @@
                     </item>
                    </layout>
                   </item>
-                  <item row="28" column="3">
+                  <item row="15" column="0">
+                   <widget class="QPushButton" name="btn_rating_show_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="15" column="1" colspan="7">
+                   <widget class="QCheckBox" name="rating_show">
+                    <property name="text">
+                     <string>rating_show</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="16" column="0">
+                   <widget class="QPushButton" name="btn_rating_vertical_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="16" column="1" colspan="7">
+                   <widget class="QCheckBox" name="rating_vertical">
+                    <property name="text">
+                     <string>rating_vertical</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="17" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_21">
+                    <property name="text">
+                     <string>rating_pos_x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="17" column="2">
+                   <widget class="QSpinBox" name="rating_pos_x">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>105</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="17" column="3">
+                   <widget class="QPushButton" name="btn_rating_pos_x_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="18" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_22">
+                    <property name="text">
+                     <string>rating_pos_y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="18" column="2">
+                   <widget class="QSpinBox" name="rating_pos_y">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>202</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="18" column="3">
+                   <widget class="QPushButton" name="btn_rating_pos_y_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="19" column="0" colspan="8">
+                   <layout class="QHBoxLayout" name="horizontalLayout_2">
+                    <item>
+                     <widget class="QLabel" name="lb_cfg_23">
+                      <property name="text">
+                       <string>Option background title</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="Line" name="line_sep_5">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="20" column="0">
+                   <widget class="QPushButton" name="btn_title_bg_show_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="20" column="1" colspan="7">
+                   <widget class="QCheckBox" name="title_bg_show">
+                    <property name="text">
+                     <string>title_bg_show</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="21" column="0">
+                   <widget class="QLabel" name="lb_cfg_24">
+                    <property name="text">
+                     <string>title_bg</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="21" column="2" colspan="4">
+                   <widget class="QLineEdit" name="title_bg">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="21" column="6">
+                   <widget class="QPushButton" name="btn_title_bg">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="21" column="7">
+                   <widget class="QPushButton" name="btn_title_bg_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="22" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_25">
+                    <property name="text">
+                     <string>title_bg_select</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="22" column="2" colspan="4">
+                   <widget class="QLineEdit" name="title_bg_select">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="22" column="6">
+                   <widget class="QPushButton" name="btn_title_bg_select">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="22" column="7">
+                   <widget class="QPushButton" name="btn_title_bg_select_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="23" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_26">
+                    <property name="text">
+                     <string>title_bg_pos_x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="23" column="2">
+                   <widget class="QSpinBox" name="title_bg_pos_x">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>13</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="23" column="3">
+                   <widget class="QPushButton" name="btn_title_bg_pos_x_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="24" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_27">
+                    <property name="text">
+                     <string>title_bg_pos_y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="24" column="2">
+                   <widget class="QSpinBox" name="title_bg_pos_y">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>222</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="24" column="3">
+                   <widget class="QPushButton" name="btn_title_bg_pos_y_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="25" column="0" colspan="8">
+                   <layout class="QHBoxLayout" name="horizontalLayout_8">
+                    <item>
+                     <widget class="QLabel" name="lb_cfg_28">
+                      <property name="text">
+                       <string>Option title</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="Line" name="line_sep_6">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="26" column="0">
+                   <widget class="QPushButton" name="btn_title_show_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="26" column="1" colspan="7">
+                   <widget class="QCheckBox" name="title_show">
+                    <property name="text">
+                     <string>title_show</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="27" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_29">
+                    <property name="text">
+                     <string>title_pos_x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="27" column="2">
+                   <widget class="QSpinBox" name="title_pos_x">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>21</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="27" column="3">
                    <widget class="QPushButton" name="btn_title_pos_x_def">
                     <property name="minimumSize">
                      <size>
@@ -2000,14 +1673,563 @@
                     </property>
                     <property name="icon">
                      <iconset resource="../res/gr-lida.qrc">
-                      <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
                     </property>
                    </widget>
                   </item>
-                  <item row="22" column="0" colspan="2">
-                   <widget class="QLabel" name="lb_cfg_24">
+                  <item row="27" column="4">
+                   <widget class="QLabel" name="lb_cfg_32">
                     <property name="text">
-                     <string>title_bg</string>
+                     <string>title_width</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="27" column="5">
+                   <widget class="QSpinBox" name="title_width">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>156</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="27" column="6">
+                   <widget class="QPushButton" name="btn_title_width_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="28" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_30">
+                    <property name="text">
+                     <string>title_pos_y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="28" column="2">
+                   <widget class="QSpinBox" name="title_pos_y">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>222</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="28" column="3">
+                   <widget class="QPushButton" name="btn_title_pos_y_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="28" column="4">
+                   <widget class="QLabel" name="lb_cfg_33">
+                    <property name="text">
+                     <string>title_height</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="28" column="5">
+                   <widget class="QSpinBox" name="title_height">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>16</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="28" column="6">
+                   <widget class="QPushButton" name="btn_title_height_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="29" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_31">
+                    <property name="text">
+                     <string>title_max_caracteres</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="29" column="2">
+                   <widget class="QSpinBox" name="title_max_caracteres">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>25</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="29" column="3">
+                   <widget class="QPushButton" name="btn_title_max_caracteres_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="30" column="0" colspan="8">
+                   <layout class="QHBoxLayout" name="horizontalLayout_5">
+                    <item>
+                     <widget class="QLabel" name="lb_cfg_34">
+                      <property name="text">
+                       <string>Option font title</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="Line" name="line_sep_7">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="31" column="0" colspan="7">
+                   <widget class="QFontComboBox" name="title_font">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="31" column="7">
+                   <widget class="QPushButton" name="btn_title_font_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="32" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_35">
+                    <property name="text">
+                     <string>title_font_size</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="32" column="2">
+                   <widget class="QSpinBox" name="title_font_size">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="maximum">
+                     <number>512</number>
+                    </property>
+                    <property name="value">
+                     <number>7</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="32" column="3">
+                   <widget class="QPushButton" name="btn_title_font_size_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="33" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_36">
+                    <property name="text">
+                     <string>title_font_color</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="33" column="2">
+                   <widget class="QPushButton" name="btn_title_font_color">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>60</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="33" column="3">
+                   <widget class="QPushButton" name="btn_title_font_color_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="34" column="0" colspan="2">
+                   <widget class="QLabel" name="lb_cfg_37">
+                    <property name="text">
+                     <string>title_font_color_select</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="34" column="2">
+                   <widget class="QPushButton" name="btn_title_font_color_select">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>60</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="34" column="3">
+                   <widget class="QPushButton" name="btn_title_font_color_select_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="35" column="0">
+                   <widget class="QPushButton" name="btn_title_font_bold_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="35" column="1" colspan="7">
+                   <widget class="QCheckBox" name="title_font_bold">
+                    <property name="text">
+                     <string>title_font_bold</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="36" column="0">
+                   <widget class="QPushButton" name="btn_title_font_italic_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="36" column="1" colspan="7">
+                   <widget class="QCheckBox" name="title_font_italic">
+                    <property name="text">
+                     <string>title_font_italic</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="37" column="0">
+                   <widget class="QPushButton" name="btn_title_font_underline_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="37" column="1" colspan="7">
+                   <widget class="QCheckBox" name="title_font_underline">
+                    <property name="text">
+                     <string>title_font_underline</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1" colspan="7">
+                   <widget class="QComboBox" name="cbxTipoEmu">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="lb_cfg_38">
+                    <property name="text">
+                     <string>Tipo emu:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="4" colspan="3">
+                   <widget class="QCheckBox" name="img_cover_top_zindex">
+                    <property name="text">
+                     <string>img_cover_top_zindex -1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="7">
+                   <widget class="QPushButton" name="btn_img_cover_top_zindex_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="33" column="7">
+                   <widget class="QPushButton" name="btn_title_font_wordwrap_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="33" column="4" colspan="3">
+                   <widget class="QCheckBox" name="title_font_wordwrap">
+                    <property name="text">
+                     <string>title_font_wordwrap</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="32" column="4">
+                   <widget class="QLabel" name="lb_cfg_39">
+                    <property name="text">
+                     <string>title_font_pos</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="32" column="5" colspan="2">
+                   <widget class="QComboBox" name="title_font_pos">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="32" column="7">
+                   <widget class="QPushButton" name="btn_title_font_pos_def">
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../res/gr-lida.qrc">
+                      <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -2020,111 +2242,77 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="layoutWidget">
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <property name="spacing">
-            <number>2</number>
+         <widget class="QWidget" name="tab_2">
+          <attribute name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/datos_1.png</normaloff>:/img16/datos_1.png</iconset>
+          </attribute>
+          <attribute name="title">
+           <string>Other themes</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_otherThemes">
+           <property name="leftMargin">
+            <number>4</number>
+           </property>
+           <property name="topMargin">
+            <number>4</number>
+           </property>
+           <property name="rightMargin">
+            <number>4</number>
+           </property>
+           <property name="bottomMargin">
+            <number>4</number>
            </property>
            <item>
-            <widget class="QPushButton" name="btnIconMode">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Icon mode</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/gr-lida.qrc">
-               <normaloff>:/img16/cover_mode.png</normaloff>:/img16/cover_mode.png</iconset>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QListView" name="lvJuegos">
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="editTriggers">
-              <set>QAbstractItemView::NoEditTriggers</set>
-             </property>
-             <property name="dragDropMode">
-              <enum>QAbstractItemView::NoDragDrop</enum>
-             </property>
-             <property name="selectionBehavior">
-              <enum>QAbstractItemView::SelectRows</enum>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>181</width>
-               <height>238</height>
-              </size>
-             </property>
-             <property name="movement">
-              <enum>QListView::Static</enum>
-             </property>
-             <property name="flow">
-              <enum>QListView::LeftToRight</enum>
-             </property>
-             <property name="resizeMode">
-              <enum>QListView::Adjust</enum>
-             </property>
-             <property name="viewMode">
-              <enum>QListView::IconMode</enum>
-             </property>
-             <property name="uniformItemSizes">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTreeWidget" name="twJuegos">
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-             <property name="rootIsDecorated">
-              <bool>false</bool>
-             </property>
-             <property name="uniformRowHeights">
-              <bool>true</bool>
-             </property>
-             <property name="allColumnsShowFocus">
-              <bool>true</bool>
-             </property>
-             <column>
-              <property name="text">
-               <string>List</string>
-              </property>
-             </column>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnSave">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>26</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Save config</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../res/gr-lida.qrc">
-               <normaloff>:/img16/floppy_2.png</normaloff>:/img16/floppy_2.png</iconset>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <item>
+              <widget class="QComboBox" name="cbxListFiles">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnTextDef">
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="icon">
+                <iconset resource="../res/gr-lida.qrc">
+                 <normaloff>:/img16/reset.png</normaloff>:/img16/reset.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnSaveText">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Save config</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../res/gr-lida.qrc">
+                 <normaloff>:/img16/floppy_2.png</normaloff>:/img16/floppy_2.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
@@ -2132,79 +2320,461 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="icon">
-       <iconset resource="../res/gr-lida.qrc">
-        <normaloff>:/img16/datos_1.png</normaloff>:/img16/datos_1.png</iconset>
-      </attribute>
-      <attribute name="title">
-       <string>Other themes</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_otherThemes">
-       <property name="leftMargin">
-        <number>4</number>
-       </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>4</number>
-       </property>
-       <property name="bottomMargin">
-        <number>4</number>
-       </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
-         <item>
-          <widget class="QComboBox" name="cbxListFiles">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnTextDef">
-           <property name="minimumSize">
-            <size>
-             <width>30</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="icon">
-            <iconset resource="../res/gr-lida.qrc">
-             <normaloff>:/img16/mp_aleatorio.png</normaloff>:/img16/mp_aleatorio.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnSaveText">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>26</height>
-            </size>
-           </property>
+     <widget class="QTabWidget" name="tabCfgWidgets">
+      <property name="minimumSize">
+       <size>
+        <width>272</width>
+        <height>522</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/cover_mode.png</normaloff>:/img16/cover_mode.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Lista Juegos</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="leftMargin">
+         <number>4</number>
+        </property>
+        <property name="topMargin">
+         <number>4</number>
+        </property>
+        <property name="rightMargin">
+         <number>4</number>
+        </property>
+        <property name="bottomMargin">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="btnIconMode">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Icon mode</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/gr-lida.qrc">
+            <normaloff>:/img16/cover_mode.png</normaloff>:/img16/cover_mode.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTreeView" name="tvJuegos">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="showDropIndicator" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="rootIsDecorated">
+           <bool>false</bool>
+          </property>
+          <property name="uniformRowHeights">
+           <bool>true</bool>
+          </property>
+          <property name="itemsExpandable">
+           <bool>false</bool>
+          </property>
+          <property name="allColumnsShowFocus">
+           <bool>true</bool>
+          </property>
+          <attribute name="headerMinimumSectionSize">
+           <number>32</number>
+          </attribute>
+          <attribute name="headerStretchLastSection">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListView" name="lvJuegos">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::NoDragDrop</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>181</width>
+            <height>238</height>
+           </size>
+          </property>
+          <property name="movement">
+           <enum>QListView::Static</enum>
+          </property>
+          <property name="flow">
+           <enum>QListView::LeftToRight</enum>
+          </property>
+          <property name="resizeMode">
+           <enum>QListView::Adjust</enum>
+          </property>
+          <property name="viewMode">
+           <enum>QListView::IconMode</enum>
+          </property>
+          <property name="uniformItemSizes">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/applications.png</normaloff>:/img16/applications.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Otros componentes</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="radioButton">
+          <property name="text">
+           <string>RadioButton</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="checkBox">
+          <property name="text">
+           <string>CheckBox</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pushButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QToolButton" name="toolButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>toolButton</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QToolButton" name="toolButton_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>toolButton</string>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QComboBox" name="comboBox">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+          <item>
            <property name="text">
-            <string>Save config</string>
+            <string>Item 1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Item 2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Item icon 1</string>
            </property>
            <property name="icon">
             <iconset resource="../res/gr-lida.qrc">
-             <normaloff>:/img16/floppy_2.png</normaloff>:/img16/floppy_2.png</iconset>
+             <normaloff>:/img16/acercad.png</normaloff>:/img16/acercad.png</iconset>
            </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
+          </item>
+          <item>
+           <property name="text">
+            <string>Item icon 2</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/cat/pc.png</normaloff>:/img16/cat/pc.png</iconset>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QComboBox" name="comboBox_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+          <item>
+           <property name="text">
+            <string>Item 1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Item 2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Item icon 1</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/acercad.png</normaloff>:/img16/acercad.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Item icon 2</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/cat/pc.png</normaloff>:/img16/cat/pc.png</iconset>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QProgressBar" name="progressBar">
+          <property name="value">
+           <number>24</number>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QFontComboBox" name="fontComboBox"/>
+        </item>
+        <item row="5" column="0">
+         <widget class="QSpinBox" name="spinBox">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>password</string>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QTextEdit" name="textEdit">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>50</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QPlainTextEdit" name="plainTextEdit">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>50</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QListWidget" name="listWidget">
+          <item>
+           <property name="text">
+            <string>Item 1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Item 2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Item icon 1</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/acercad.png</normaloff>:/img16/acercad.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Item icon 2</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/gr-lida.qrc">
+             <normaloff>:/img16/cat/pc.png</normaloff>:/img16/cat/pc.png</iconset>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>GroupBox</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0" colspan="2">
+         <widget class="QDockWidget" name="dockWidget">
+          <property name="features">
+           <set>QDockWidget::AllDockWidgetFeatures</set>
+          </property>
+          <property name="allowedAreas">
+           <set>Qt::NoDockWidgetArea</set>
+          </property>
+          <widget class="QWidget" name="dockWidgetContents"/>
+         </widget>
+        </item>
+        <item row="10" column="0">
+         <widget class="QScrollBar" name="horizontalScrollBar">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="QSlider" name="horizontalSlider">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QScrollBar" name="verticalScrollBar">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="1">
+         <widget class="QSlider" name="verticalSlider">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </widget>
    </item>
@@ -2222,6 +2792,23 @@
      <property name="bottomMargin">
       <number>0</number>
      </property>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="minimumSize">
+        <size>
+         <width>97</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Cerrar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
+       </property>
+      </widget>
+     </item>
      <item>
       <spacer name="horizontalSpacer_1">
        <property name="orientation">
@@ -2257,22 +2844,27 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>cbxThemes</tabstop>
   <tabstop>tabCfgThemes</tabstop>
   <tabstop>cbxCategorias</tabstop>
-  <tabstop>cbxThemes</tabstop>
   <tabstop>scrollArea</tabstop>
   <tabstop>tw_icon_width</tabstop>
   <tabstop>btn_tw_icon_width_def</tabstop>
   <tabstop>tw_icon_height</tabstop>
   <tabstop>btn_tw_icon_height_def</tabstop>
+  <tabstop>tw_alternating_row_colors</tabstop>
+  <tabstop>btn_tw_alternating_row_colors_def</tabstop>
   <tabstop>pf_img_width</tabstop>
   <tabstop>btn_pf_img_width_def</tabstop>
   <tabstop>pf_img_height</tabstop>
   <tabstop>btn_pf_img_height_def</tabstop>
+  <tabstop>pf_img_fixsize</tabstop>
+  <tabstop>btn_pf_img_fixsize_def</tabstop>
   <tabstop>icon_width</tabstop>
   <tabstop>btn_icon_width_def</tabstop>
   <tabstop>icon_height</tabstop>
   <tabstop>btn_icon_height_def</tabstop>
+  <tabstop>cbxTipoEmu</tabstop>
   <tabstop>btn_img_cover_top</tabstop>
   <tabstop>img_cover_top</tabstop>
   <tabstop>btn_img_cover_top_def</tabstop>
@@ -2283,6 +2875,8 @@
   <tabstop>btn_img_cover_top_pos_x_def</tabstop>
   <tabstop>img_cover_top_pos_y</tabstop>
   <tabstop>btn_img_cover_top_pos_y_def</tabstop>
+  <tabstop>img_cover_top_zindex</tabstop>
+  <tabstop>btn_img_cover_top_zindex_def</tabstop>
   <tabstop>img_scaled</tabstop>
   <tabstop>btn_img_scaled_def</tabstop>
   <tabstop>img_scale_w</tabstop>
@@ -2325,31 +2919,55 @@
   <tabstop>btn_title_pos_x_def</tabstop>
   <tabstop>title_pos_y</tabstop>
   <tabstop>btn_title_pos_y_def</tabstop>
-  <tabstop>title_max_caracteres</tabstop>
-  <tabstop>btn_title_max_caracteres_def</tabstop>
   <tabstop>title_width</tabstop>
   <tabstop>btn_title_width_def</tabstop>
   <tabstop>title_height</tabstop>
   <tabstop>btn_title_height_def</tabstop>
+  <tabstop>title_max_caracteres</tabstop>
+  <tabstop>btn_title_max_caracteres_def</tabstop>
   <tabstop>title_font</tabstop>
   <tabstop>btn_title_font_def</tabstop>
   <tabstop>title_font_size</tabstop>
   <tabstop>btn_title_font_size_def</tabstop>
+  <tabstop>title_font_pos</tabstop>
+  <tabstop>btn_title_font_pos_def</tabstop>
   <tabstop>btn_title_font_color</tabstop>
   <tabstop>btn_title_font_color_def</tabstop>
   <tabstop>btn_title_font_color_select</tabstop>
   <tabstop>btn_title_font_color_select_def</tabstop>
+  <tabstop>title_font_wordwrap</tabstop>
+  <tabstop>btn_title_font_wordwrap_def</tabstop>
   <tabstop>title_font_bold</tabstop>
   <tabstop>btn_title_font_bold_def</tabstop>
   <tabstop>title_font_italic</tabstop>
   <tabstop>btn_title_font_italic_def</tabstop>
   <tabstop>title_font_underline</tabstop>
   <tabstop>btn_title_font_underline_def</tabstop>
-  <tabstop>btnIconMode</tabstop>
   <tabstop>btnSave</tabstop>
   <tabstop>cbxListFiles</tabstop>
-  <tabstop>btnTextDef</tabstop>
   <tabstop>btnSaveText</tabstop>
+  <tabstop>btnTextDef</tabstop>
+  <tabstop>tabCfgWidgets</tabstop>
+  <tabstop>btnIconMode</tabstop>
+  <tabstop>tvJuegos</tabstop>
+  <tabstop>lvJuegos</tabstop>
+  <tabstop>radioButton</tabstop>
+  <tabstop>checkBox</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>toolButton</tabstop>
+  <tabstop>toolButton_2</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>comboBox_2</tabstop>
+  <tabstop>fontComboBox</tabstop>
+  <tabstop>spinBox</tabstop>
+  <tabstop>doubleSpinBox</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>plainTextEdit</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>horizontalSlider</tabstop>
+  <tabstop>verticalSlider</tabstop>
   <tabstop>btnOk</tabstop>
  </tabstops>
  <resources>

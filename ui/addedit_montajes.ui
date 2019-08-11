@@ -20,10 +20,13 @@
    <string>Montaje de unidades</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../res/gr-lida.qrc">
     <normaloff>:/img16/gr-lida.png</normaloff>:/img16/gr-lida.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0,0,0,1,0">
+   <property name="margin">
+    <number>4</number>
+   </property>
    <item>
     <widget class="QLabel" name="lb_Montaje_1">
      <property name="text">
@@ -68,50 +71,17 @@
     </layout>
    </item>
    <item>
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="frame_list_mount">
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QGridLayout" name="gridLayout_list_mount">
       <property name="margin">
        <number>0</number>
       </property>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="btnDirFile">
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>26</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>26</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLineEdit" name="txtMontaje_path">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>24</height>
-         </size>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="2">
        <widget class="QPushButton" name="btnDeleteIso">
         <property name="enabled">
@@ -134,7 +104,7 @@
         </property>
         <property name="icon">
          <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
+          <normaloff>:/img16/list_remove.png</normaloff>:/img16/list_remove.png</iconset>
         </property>
        </widget>
       </item>
@@ -164,16 +134,6 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0" rowspan="3">
-       <widget class="QListWidget" name="lw_MultiIso">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>70</height>
-         </size>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="2">
        <widget class="QPushButton" name="btnDirFile_clear">
         <property name="minimumSize">
@@ -194,6 +154,29 @@
         <property name="icon">
          <iconset resource="../res/gr-lida.qrc">
           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="btnDirFile">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
         </property>
        </widget>
       </item>
@@ -220,6 +203,26 @@
         <property name="icon">
          <iconset resource="../res/gr-lida.qrc">
           <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" rowspan="3">
+       <widget class="QListWidget" name="lw_MultiIso">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>70</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLineEdit" name="txtMontaje_path">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
         </property>
        </widget>
       </item>

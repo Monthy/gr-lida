@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>474</height>
+    <width>600</width>
+    <height>590</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -23,12 +23,21 @@
    <iconset resource="../res/gr-lida.qrc">
     <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="margin">
+  <layout class="QVBoxLayout" name="vLayout_main">
+   <property name="leftMargin">
+    <number>4</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>4</number>
+   </property>
+   <property name="bottomMargin">
     <number>4</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="hLayout_label">
      <item>
       <widget class="QLabel" name="lb_update_ico">
        <property name="maximumSize">
@@ -60,32 +69,10 @@
    </item>
    <item>
     <widget class="QSplitter" name="splitter">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <widget class="QTextBrowser" name="txtInfoUpdate">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>150</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>150</height>
-       </size>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-     </widget>
+     <widget class="AnimatedTextBrowser" name="txtInfo"/>
      <widget class="QTreeWidget" name="twUpdates">
       <property name="uniformRowHeights">
        <bool>true</bool>
@@ -112,33 +99,45 @@
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="chkSoloUpdates">
-     <property name="text">
-      <string>Mostrar solo las actualizaciones</string>
+    <widget class="QWidget" name="wInfo" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>24</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="hLayout_wInfo">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+     </layout>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="hLayout_button">
      <property name="spacing">
       <number>4</number>
      </property>
      <item>
-      <widget class="QPushButton" name="btnCheckUpdate">
-       <property name="minimumSize">
-        <size>
-         <width>97</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="icon">
-        <iconset resource="../res/gr-lida.qrc">
-         <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
+      <spacer name="hSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -191,11 +190,17 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AnimatedTextBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>animatedtextbrowser.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>twUpdates</tabstop>
-  <tabstop>chkSoloUpdates</tabstop>
   <tabstop>btnUpdate</tabstop>
-  <tabstop>btnCheckUpdate</tabstop>
   <tabstop>btnClose</tabstop>
  </tabstops>
  <resources>

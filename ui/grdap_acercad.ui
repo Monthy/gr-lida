@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmGrDapAcercaD</class>
+ <widget class="QDialog" name="frmGrDapAcercaD">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>464</width>
+    <height>340</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GR-dap - Dial-A-Protection</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../res/gr-lida.qrc">
+    <normaloff>:/img16/gr-dap.png</normaloff>:/img16/gr-dap.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="vl_acercad">
+   <property name="margin">
+    <number>4</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lbad_logo">
+     <property name="minimumSize">
+      <size>
+       <width>128</width>
+       <height>128</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>128</height>
+      </size>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../res/gr-lida.qrc">:/images/gr-dap.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lbad_info">
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="vs_acercad">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>145</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="hl_acercad">
+     <item>
+      <widget class="QPushButton" name="btnAcercaQT">
+       <property name="minimumSize">
+        <size>
+         <width>97</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Acerca Qt</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/qt.png</normaloff>:/img16/qt.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="hs_acercad">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnClose">
+       <property name="minimumSize">
+        <size>
+         <width>97</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Cerrar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>btnClose</tabstop>
+  <tabstop>btnAcercaQT</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/gr-lida.qrc"/>
+ </resources>
+ <connections/>
+</ui>

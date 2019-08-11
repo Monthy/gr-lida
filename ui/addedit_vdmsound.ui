@@ -17,6 +17,10 @@
    <number>0</number>
   </property>
   <widget class="QWidget" name="tabVdms_1">
+   <attribute name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/opciones.png</normaloff>:/img16/opciones.png</iconset>
+   </attribute>
    <attribute name="title">
     <string>Opciones del VDMSound</string>
    </attribute>
@@ -29,45 +33,38 @@
       <property name="title">
        <string>Opciones del VDMSound</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,1,0,0,0">
+      <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0">
        <property name="verticalSpacing">
         <number>4</number>
        </property>
        <property name="margin">
         <number>4</number>
        </property>
-       <item row="1" column="0" colspan="4">
-        <widget class="QLineEdit" name="txtVdms_path_conf">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>24</height>
-          </size>
+       <item row="0" column="0" colspan="6">
+        <widget class="QLabel" name="lb_Vdms_2">
+         <property name="text">
+          <string>Ejecutable (exe,com,bat) del juego:</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="1" column="4">
-        <widget class="QPushButton" name="btnVdms_FileConfg">
-         <property name="minimumSize">
+       <item row="6" column="4">
+        <spacer name="verticalSpacer_1">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>30</width>
-           <height>26</height>
+           <width>20</width>
+           <height>11</height>
           </size>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-         </property>
-        </widget>
+        </spacer>
        </item>
-       <item row="1" column="5">
-        <widget class="QPushButton" name="btnVdms_FileConfg_clear">
+       <item row="2" column="5">
+        <widget class="QPushButton" name="btnVdms_params_clear">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -86,17 +83,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0" colspan="4">
-        <widget class="QLineEdit" name="txtVdms_path_exe">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="4">
+       <item row="1" column="4">
         <widget class="QPushButton" name="btnVdms_ExeJuego">
          <property name="minimumSize">
           <size>
@@ -116,7 +103,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="5">
+       <item row="1" column="5">
         <widget class="QPushButton" name="btnVdms_ExeJuego_clear">
          <property name="minimumSize">
           <size>
@@ -136,14 +123,17 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="lb_Vdms_3">
-         <property name="text">
-          <string>Parametros:</string>
+       <item row="1" column="0" colspan="4">
+        <widget class="QLineEdit" name="txtVdms_path_exe">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
          </property>
         </widget>
        </item>
-       <item row="4" column="1" colspan="3">
+       <item row="2" column="1" colspan="3">
         <widget class="QLineEdit" name="txtVdms_params">
          <property name="minimumSize">
           <size>
@@ -153,14 +143,21 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="2" column="0">
+        <widget class="QLabel" name="lb_Vdms_3">
+         <property name="text">
+          <string>Parametros:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
         <widget class="QLabel" name="lb_Vdms_4">
          <property name="text">
           <string>Dirección del icono:</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1" colspan="3">
+       <item row="3" column="1" colspan="3">
         <widget class="QLineEdit" name="txtVdms_icon">
          <property name="minimumSize">
           <size>
@@ -170,7 +167,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="4">
+       <item row="3" column="4">
         <widget class="QPushButton" name="btnVdms_Icono">
          <property name="minimumSize">
           <size>
@@ -190,7 +187,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="5">
+       <item row="3" column="5">
         <widget class="QPushButton" name="btnVdms_Icono_clear">
          <property name="minimumSize">
           <size>
@@ -210,51 +207,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="3" colspan="3">
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="title">
-          <string>winnt.storage</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <property name="spacing">
-           <number>4</number>
-          </property>
-          <property name="leftMargin">
-           <number>4</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>4</number>
-          </property>
-          <property name="bottomMargin">
-           <number>4</number>
-          </property>
-          <item>
-           <widget class="QCheckBox" name="chkVdms_useCDROM">
-            <property name="text">
-             <string>useCDROM</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="chkVdms_useNetware">
-            <property name="text">
-             <string>useNetware</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="7" column="3" colspan="3">
+       <item row="5" column="3" colspan="3">
         <widget class="QGroupBox" name="groupBox_3">
          <property name="minimumSize">
           <size>
@@ -305,60 +258,7 @@
          </layout>
         </widget>
        </item>
-       <item row="8" column="4">
-        <spacer name="verticalSpacer_1">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>11</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="6" column="2" rowspan="3">
-        <widget class="QGroupBox" name="chkVdms_useCustomCfg">
-         <property name="title">
-          <string>vdms.debug</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <property name="spacing">
-           <number>4</number>
-          </property>
-          <property name="leftMargin">
-           <number>4</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>4</number>
-          </property>
-          <property name="bottomMargin">
-           <number>4</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="lb_Vdms_6">
-            <property name="text">
-             <string>useCustomCfg</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QTextEdit" name="txtVdms_customCfg"/>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="6" column="0" rowspan="3" colspan="2">
+       <item row="4" column="0" rowspan="3" colspan="2">
         <widget class="QGroupBox" name="chkVdms_useAutoexec">
          <property name="title">
           <string>winnt.dos</string>
@@ -398,44 +298,88 @@
          </layout>
         </widget>
        </item>
-       <item row="2" column="0" colspan="6">
-        <widget class="QLabel" name="lb_Vdms_2">
-         <property name="text">
-          <string>Ejecutable (exe,com,bat) del juego:</string>
+       <item row="4" column="2" rowspan="3">
+        <widget class="QGroupBox" name="chkVdms_useCustomCfg">
+         <property name="title">
+          <string>vdms.debug</string>
          </property>
-         <property name="wordWrap">
+         <property name="checkable">
           <bool>true</bool>
          </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <property name="leftMargin">
+           <number>4</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lb_Vdms_6">
+            <property name="text">
+             <string>useCustomCfg</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="txtVdms_customCfg"/>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item row="0" column="0" colspan="6">
-        <widget class="QLabel" name="lb_Vdms_1">
-         <property name="text">
-          <string>Nombre del archivo de configuración a guardar ejemplo: nombre_archivo.vlp</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="5">
-        <widget class="QPushButton" name="btnVdms_params_clear">
+       <item row="4" column="3" colspan="3">
+        <widget class="QGroupBox" name="groupBox_2">
          <property name="minimumSize">
           <size>
-           <width>30</width>
-           <height>26</height>
+           <width>120</width>
+           <height>0</height>
           </size>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
+         <property name="title">
+          <string>winnt.storage</string>
          </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <property name="leftMargin">
+           <number>4</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="chkVdms_useCDROM">
+            <property name="text">
+             <string>useCDROM</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="chkVdms_useNetware">
+            <property name="text">
+             <string>useNetware</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -445,9 +389,6 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>btnVdms_FileConfg</tabstop>
-  <tabstop>txtVdms_path_conf</tabstop>
-  <tabstop>btnVdms_FileConfg_clear</tabstop>
   <tabstop>btnVdms_ExeJuego</tabstop>
   <tabstop>txtVdms_path_exe</tabstop>
   <tabstop>btnVdms_ExeJuego_clear</tabstop>

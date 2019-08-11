@@ -7,88 +7,16 @@
     <x>0</x>
     <y>0</y>
     <width>677</width>
-    <height>482</height>
+    <height>486</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Configuración del ScummVM</string>
   </property>
   <property name="currentIndex">
-   <number>1</number>
+   <number>0</number>
   </property>
   <widget class="QWidget" name="tabSvm_1">
-   <attribute name="icon">
-    <iconset resource="../res/gr-lida.qrc">
-     <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
-   </attribute>
-   <attribute name="title">
-    <string>Selecciona un juego del ScummVM</string>
-   </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>4</number>
-    </property>
-    <property name="leftMargin">
-     <number>4</number>
-    </property>
-    <property name="topMargin">
-     <number>4</number>
-    </property>
-    <property name="rightMargin">
-     <number>4</number>
-    </property>
-    <property name="bottomMargin">
-     <number>4</number>
-    </property>
-    <item>
-     <widget class="QTreeWidget" name="twScummVM">
-      <property name="focusPolicy">
-       <enum>Qt::ClickFocus</enum>
-      </property>
-      <property name="showDropIndicator" stdset="0">
-       <bool>false</bool>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>27</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="textElideMode">
-       <enum>Qt::ElideNone</enum>
-      </property>
-      <property name="rootIsDecorated">
-       <bool>false</bool>
-      </property>
-      <property name="uniformRowHeights">
-       <bool>true</bool>
-      </property>
-      <property name="itemsExpandable">
-       <bool>false</bool>
-      </property>
-      <property name="allColumnsShowFocus">
-       <bool>true</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string>%</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Selecciona el juego a añadir</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Config</string>
-       </property>
-      </column>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="tabSvm_2">
    <attribute name="icon">
     <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/opciones.png</normaloff>:/img16/opciones.png</iconset>
@@ -130,51 +58,29 @@
        <property name="bottomMargin">
         <number>4</number>
        </property>
-       <property name="verticalSpacing">
-        <number>4</number>
-       </property>
-       <item row="1" column="7">
-        <widget class="QPushButton" name="btnSvm_PathGame_clear">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+       <item row="7" column="2">
+        <widget class="QLabel" name="lb_Svm_11">
+         <property name="text">
+          <string>Autoguardado:</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="6">
-        <widget class="QPushButton" name="btnSvm_PathGame">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
+       <item row="10" column="2" colspan="4">
+        <widget class="QCheckBox" name="chkSvm_alt_intro">
+         <property name="text">
+          <string>Intro alternativa</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="2" colspan="4">
-        <widget class="QLineEdit" name="txtSvm_path_game">
+       <item row="6" column="2">
+        <widget class="QLabel" name="lb_Svm_9">
+         <property name="text">
+          <string>Joystick:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QComboBox" name="cbxSvm_platform">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -183,159 +89,58 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="QLabel" name="lb_Svm_2">
+       <item row="6" column="0">
+        <widget class="QLabel" name="lb_Svm_5">
          <property name="text">
-          <string>Directorio:</string>
+          <string>Plataforma:</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="4" colspan="2">
-        <widget class="QLineEdit" name="txtSvm_gameid">
+       <item row="11" column="1">
+        <widget class="QCheckBox" name="chkSvm_aspect_ratio">
+         <property name="text">
+          <string>Corrección de aspecto</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3">
+        <widget class="QComboBox" name="cbxSvm_cdrom">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>100</width>
            <height>24</height>
           </size>
          </property>
         </widget>
        </item>
-       <item row="0" column="3">
-        <widget class="QLabel" name="lb_Svm_24">
+       <item row="5" column="2">
+        <widget class="QLabel" name="lb_Svm_8">
          <property name="text">
-          <string>GameID:</string>
+          <string>Lector de CD:</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
-        <widget class="QLineEdit" name="txtSvm_game_label">
-         <property name="minimumSize">
+       <item row="13" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>0</width>
-           <height>24</height>
+           <width>77</width>
+           <height>94</height>
           </size>
          </property>
-        </widget>
+        </spacer>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="lb_Svm_1">
-         <property name="text">
-          <string>Etiqueta:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="3" colspan="2">
+       <item row="10" column="1">
         <widget class="QCheckBox" name="chkSvm_fullscreen">
          <property name="text">
           <string>Pantalla completa</string>
          </property>
         </widget>
        </item>
-       <item row="10" column="6">
-        <widget class="QPushButton" name="btnSvm_PathSonido">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="0" colspan="2">
-        <widget class="QLabel" name="lb_Svm_12">
-         <property name="text">
-          <string>Directorio sonido:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="7">
-        <widget class="QPushButton" name="btnSvm_PathCapturas_clear">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="6">
-        <widget class="QPushButton" name="btnSvm_PathCapturas">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="2" colspan="4">
-        <widget class="QLineEdit" name="txtSvm_path_capturas">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="0" colspan="2">
-        <widget class="QLabel" name="lb_Svm_11">
-         <property name="text">
-          <string>Directorio capturas:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="7">
-        <widget class="QPushButton" name="btnSvm_PathExtra_clear">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="6">
+       <item row="4" column="4">
         <widget class="QPushButton" name="btnSvm_PathExtra">
          <property name="minimumSize">
           <size>
@@ -355,69 +160,28 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="0" colspan="2">
-        <widget class="QLabel" name="lb_Svm_10">
-         <property name="text">
-          <string>Directorio extra:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="3" colspan="2">
-        <widget class="QCheckBox" name="chkSvm_aspect_ratio">
-         <property name="text">
-          <string>Corrección de aspecto</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="2">
-        <widget class="QCheckBox" name="chkSvm_disable_dithering">
-         <property name="text">
-          <string>Difuminado EGA</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="5" colspan="2">
-        <widget class="QCheckBox" name="chkSvm_alt_intro">
-         <property name="text">
-          <string>Intro alternativa</string>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="7">
-        <widget class="QPushButton" name="btnSvm_PathSonido_clear">
+       <item row="6" column="3">
+        <widget class="QComboBox" name="cbxSvm_joystick_num">
          <property name="minimumSize">
           <size>
-           <width>30</width>
-           <height>26</height>
+           <width>100</width>
+           <height>24</height>
           </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="icon">
-          <iconset resource="../res/gr-lida.qrc">
-           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
          </property>
         </widget>
        </item>
-       <item row="11" column="1">
-        <spacer name="verticalSpacer_13">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
+       <item row="7" column="3">
+        <widget class="QComboBox" name="cbxSvm_autosave_period">
+         <property name="minimumSize">
           <size>
-           <width>20</width>
-           <height>37</height>
+           <width>100</width>
+           <height>24</height>
           </size>
          </property>
-        </spacer>
+        </widget>
        </item>
-       <item row="2" column="2" colspan="4">
-        <widget class="QLineEdit" name="txtSvm_path_save">
+       <item row="8" column="1">
+        <widget class="QComboBox" name="cbxSvm_render_mode">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -426,14 +190,38 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="5" column="1">
+        <widget class="QComboBox" name="cbxSvm_language">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="lb_Svm_6">
+         <property name="text">
+          <string>Modo gráfico:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
         <widget class="QLabel" name="lb_Svm_4">
          <property name="text">
           <string>Idioma:</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="6">
+       <item row="9" column="2" colspan="4">
+        <widget class="QCheckBox" name="chkSvm_copy_protection">
+         <property name="text">
+          <string>Copy-Protection</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
         <widget class="QPushButton" name="btnSvm_PathSave">
          <property name="minimumSize">
           <size>
@@ -453,15 +241,15 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="5" colspan="2">
-        <widget class="QCheckBox" name="chkSvm_copy_protection">
+       <item row="4" column="0">
+        <widget class="QLabel" name="lb_Svm_10">
          <property name="text">
-          <string>Copy-Protection</string>
+          <string>Directorio extra:</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="2">
-        <widget class="QComboBox" name="cbxSvm_render_mode">
+       <item row="4" column="1" colspan="3">
+        <widget class="QLineEdit" name="txtSvm_path_extra">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -470,14 +258,17 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0" colspan="2">
-        <widget class="QLabel" name="lb_Svm_7">
-         <property name="text">
-          <string>Modo de render:</string>
+       <item row="3" column="1" colspan="3">
+        <widget class="QLineEdit" name="txtSvm_path_save">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
          </property>
         </widget>
        </item>
-       <item row="2" column="7">
+       <item row="3" column="5">
         <widget class="QPushButton" name="btnSvm_PathSave_clear">
          <property name="minimumSize">
           <size>
@@ -497,49 +288,28 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QLabel" name="lb_Svm_3">
+       <item row="8" column="0">
+        <widget class="QLabel" name="lb_Svm_7">
          <property name="text">
-          <string>Guardar partida:</string>
+          <string>Modo de render:</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="3" colspan="2">
+       <item row="11" column="2" colspan="4">
+        <widget class="QCheckBox" name="chkSvm_disable_dithering">
+         <property name="text">
+          <string>Difuminado EGA</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
         <widget class="QCheckBox" name="chkSvm_subtitles">
          <property name="text">
-          <string>Mostras subtitulo</string>
+          <string>Mostras subtítulo</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="0" colspan="2">
-        <widget class="QLabel" name="lb_Svm_6">
-         <property name="text">
-          <string>Modo gráfico:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="3">
-        <widget class="QLabel" name="lb_Svm_9">
-         <property name="text">
-          <string>Joystick:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0" colspan="2">
-        <widget class="QLabel" name="lb_Svm_5">
-         <property name="text">
-          <string>Plataforma:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="3">
-        <widget class="QLabel" name="lb_Svm_8">
-         <property name="text">
-          <string>Lector de CD:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="2">
+       <item row="7" column="1">
         <widget class="QComboBox" name="cbxSvm_gfx_mode">
          <property name="minimumSize">
           <size>
@@ -552,8 +322,76 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="4" colspan="2">
-        <widget class="QComboBox" name="cbxSvm_joystick_num">
+       <item row="1" column="2">
+        <widget class="QLabel" name="lb_Svm_24">
+         <property name="text">
+          <string>GameID:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lb_Svm_2">
+         <property name="text">
+          <string>Directorio:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lb_Svm_3">
+         <property name="text">
+          <string>Guardar partida:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QPushButton" name="btnSvm_Path">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/carpeta_0.png</normaloff>:/img16/carpeta_0.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="5">
+        <widget class="QPushButton" name="btnSvm_PathExtra_clear">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lb_Svm_1">
+         <property name="text">
+          <string>Etiqueta:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3" colspan="3">
+        <widget class="QLineEdit" name="txtSvm_gameid">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -562,8 +400,28 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="2">
-        <widget class="QComboBox" name="cbxSvm_platform">
+       <item row="2" column="5">
+        <widget class="QPushButton" name="btnSvm_Path_clear">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/gr-lida.qrc">
+           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="3">
+        <widget class="QLineEdit" name="txtSvm_path">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -572,8 +430,8 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="4" colspan="2">
-        <widget class="QComboBox" name="cbxSvm_cdrom">
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="txtSvm_game_label">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -582,33 +440,47 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="QComboBox" name="cbxSvm_language">
+       <item row="0" column="1" colspan="5">
+        <widget class="QComboBox" name="cbxScummVM">
          <property name="minimumSize">
           <size>
            <width>0</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>27</width>
            <height>24</height>
           </size>
          </property>
         </widget>
        </item>
-       <item row="10" column="2" colspan="4">
-        <widget class="QLineEdit" name="txtSvm_path_sonido">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>24</height>
-          </size>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lb_Svm_12">
+         <property name="text">
+          <string>Selecciona:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1">
+        <widget class="QCheckBox" name="chkSvm_filtering">
+         <property name="text">
+          <string>Filtros de gráficos</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="2" colspan="4">
+        <widget class="QCheckBox" name="chkSvm_bright_palette">
+         <property name="text">
+          <string>Paleta original</string>
          </property>
         </widget>
        </item>
        <item row="8" column="2" colspan="4">
-        <widget class="QLineEdit" name="txtSvm_path_extra">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>24</height>
-          </size>
+        <widget class="QCheckBox" name="chkSvm_originalsaveload">
+         <property name="text">
+          <string>Pantalla guardar/cargar originales</string>
          </property>
         </widget>
        </item>
@@ -617,7 +489,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="tabSvm_3">
+  <widget class="QWidget" name="tabSvm_2">
    <attribute name="icon">
     <iconset resource="../res/gr-lida.qrc">
      <normaloff>:/img16/img_audio.png</normaloff>:/img16/img_audio.png</iconset>
@@ -657,9 +529,6 @@
         <number>4</number>
        </property>
        <property name="bottomMargin">
-        <number>4</number>
-       </property>
-       <property name="verticalSpacing">
         <number>4</number>
        </property>
        <item row="0" column="1" colspan="5">
@@ -947,7 +816,7 @@
        <item row="7" column="0">
         <widget class="QLabel" name="lb_Svm_18">
          <property name="text">
-          <string>Velocidad de subtitulos:</string>
+          <string>Velocidad de subtítulos:</string>
          </property>
         </widget>
        </item>
@@ -1163,35 +1032,34 @@
   </widget>
  </widget>
  <tabstops>
+  <tabstop>cbxScummVM</tabstop>
   <tabstop>txtSvm_game_label</tabstop>
   <tabstop>txtSvm_gameid</tabstop>
-  <tabstop>btnSvm_PathGame</tabstop>
-  <tabstop>txtSvm_path_game</tabstop>
-  <tabstop>btnSvm_PathGame_clear</tabstop>
+  <tabstop>btnSvm_Path</tabstop>
+  <tabstop>txtSvm_path</tabstop>
+  <tabstop>btnSvm_Path_clear</tabstop>
   <tabstop>btnSvm_PathSave</tabstop>
   <tabstop>txtSvm_path_save</tabstop>
   <tabstop>btnSvm_PathSave_clear</tabstop>
-  <tabstop>cbxSvm_language</tabstop>
-  <tabstop>cbxSvm_platform</tabstop>
-  <tabstop>cbxSvm_gfx_mode</tabstop>
-  <tabstop>cbxSvm_render_mode</tabstop>
-  <tabstop>cbxSvm_cdrom</tabstop>
-  <tabstop>cbxSvm_joystick_num</tabstop>
-  <tabstop>chkSvm_subtitles</tabstop>
-  <tabstop>chkSvm_copy_protection</tabstop>
-  <tabstop>chkSvm_fullscreen</tabstop>
-  <tabstop>chkSvm_alt_intro</tabstop>
-  <tabstop>chkSvm_disable_dithering</tabstop>
-  <tabstop>chkSvm_aspect_ratio</tabstop>
   <tabstop>btnSvm_PathExtra</tabstop>
   <tabstop>txtSvm_path_extra</tabstop>
   <tabstop>btnSvm_PathExtra_clear</tabstop>
-  <tabstop>btnSvm_PathCapturas</tabstop>
-  <tabstop>txtSvm_path_capturas</tabstop>
-  <tabstop>btnSvm_PathCapturas_clear</tabstop>
-  <tabstop>btnSvm_PathSonido</tabstop>
-  <tabstop>txtSvm_path_sonido</tabstop>
-  <tabstop>btnSvm_PathSonido_clear</tabstop>
+  <tabstop>cbxSvm_language</tabstop>
+  <tabstop>cbxSvm_platform</tabstop>
+  <tabstop>cbxSvm_cdrom</tabstop>
+  <tabstop>cbxSvm_joystick_num</tabstop>
+  <tabstop>cbxSvm_gfx_mode</tabstop>
+  <tabstop>cbxSvm_autosave_period</tabstop>
+  <tabstop>chkSvm_originalsaveload</tabstop>
+  <tabstop>cbxSvm_render_mode</tabstop>
+  <tabstop>chkSvm_subtitles</tabstop>
+  <tabstop>chkSvm_fullscreen</tabstop>
+  <tabstop>chkSvm_aspect_ratio</tabstop>
+  <tabstop>chkSvm_filtering</tabstop>
+  <tabstop>chkSvm_copy_protection</tabstop>
+  <tabstop>chkSvm_alt_intro</tabstop>
+  <tabstop>chkSvm_disable_dithering</tabstop>
+  <tabstop>chkSvm_bright_palette</tabstop>
   <tabstop>cbxSvm_music_driver</tabstop>
   <tabstop>cbxSvm_opl_driver</tabstop>
   <tabstop>cbxSvm_output_rate</tabstop>
@@ -1199,16 +1067,16 @@
   <tabstop>txtSvm_soundfont</tabstop>
   <tabstop>btnSvm_SoundFont_clear</tabstop>
   <tabstop>h_SliderSvm_music_volume</tabstop>
+  <tabstop>chkSvm_mute</tabstop>
   <tabstop>h_SliderSvm_sfx_volume</tabstop>
   <tabstop>h_SliderSvm_speech_volume</tabstop>
+  <tabstop>chkSvm_speech_mute</tabstop>
   <tabstop>h_SliderSvm_tempo</tabstop>
   <tabstop>h_SliderSvm_talkspeed</tabstop>
   <tabstop>h_SliderSvm_debuglevel</tabstop>
   <tabstop>h_SliderSvm_midi_gain</tabstop>
   <tabstop>h_SliderSvm_walkspeed</tabstop>
   <tabstop>btnDefectoSvm</tabstop>
-  <tabstop>chkSvm_mute</tabstop>
-  <tabstop>chkSvm_speech_mute</tabstop>
   <tabstop>chkSvm_multi_midi</tabstop>
   <tabstop>chkSvm_native_mt32</tabstop>
   <tabstop>chkSvm_enable_gs</tabstop>

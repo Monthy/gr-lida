@@ -19,10 +19,6 @@
   <property name="windowTitle">
    <string>Acerca del GR-lida</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/img16/gr-lida.png</normaloff>:/img16/gr-lida.png</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -264,7 +260,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="../res/gr-lida.qrc">:/img24/dosbox.png</pixmap>
+          <pixmap resource="../res/gr-lida.qrc">:/img24/cat/dosbox.png</pixmap>
          </property>
         </widget>
        </item>
@@ -299,7 +295,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="../res/gr-lida.qrc">:/img24/scummvm.png</pixmap>
+          <pixmap resource="../res/gr-lida.qrc">:/img24/cat/scummvm.png</pixmap>
          </property>
         </widget>
        </item>
@@ -334,7 +330,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="../res/gr-lida.qrc">:/img24/vdmsound.png</pixmap>
+          <pixmap resource="../res/gr-lida.qrc">:/img24/cat/vdmsound.png</pixmap>
          </property>
         </widget>
        </item>
@@ -367,7 +363,7 @@
        <widget class="QWidget" name="tab_1">
         <attribute name="icon">
          <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/datos_2.png</normaloff>:/img16/datos_2.png</iconset>
+          <normaloff>:/img16/informacion.png</normaloff>:/img16/informacion.png</iconset>
         </attribute>
         <attribute name="title">
          <string>Info</string>
@@ -398,7 +394,7 @@
           <number>4</number>
          </property>
          <item>
-          <widget class="QTreeWidget" name="treeWidget">
+          <widget class="QTreeWidget" name="twTraductores">
            <property name="font">
             <font>
              <pointsize>8</pointsize>
@@ -539,7 +535,7 @@
  <tabstops>
   <tabstop>tabAcercaD</tabstop>
   <tabstop>txtAcercaD</tabstop>
-  <tabstop>treeWidget</tabstop>
+  <tabstop>twTraductores</tabstop>
   <tabstop>txtLicense</tabstop>
   <tabstop>btnClose</tabstop>
   <tabstop>btnAcercaQT</tabstop>

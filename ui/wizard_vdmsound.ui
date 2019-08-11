@@ -14,8 +14,8 @@
    <string>Asistente del VdmSound</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res/gr-lida.qrc">
-    <normaloff>:/img16/vdmsound.png</normaloff>:/img16/vdmsound.png</iconset>
+   <iconset>
+    <normaloff>:/img16/cat/vdmsound.png</normaloff>:/img16/cat/vdmsound.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -24,7 +24,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -135,70 +144,14 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0" colspan="3">
-       <widget class="QLineEdit" name="txtVdms_path_conf">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>24</height>
-         </size>
+      <item row="3" column="0" colspan="2">
+       <widget class="QLabel" name="lb_Vdms_3">
+        <property name="text">
+         <string>Parametros:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="QPushButton" name="btnVdms_FileConfg">
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>26</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>26</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="4">
-       <widget class="QPushButton" name="btnVdms_FileConfg_clear">
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>26</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>26</height>
-         </size>
-        </property>
-        <property name="icon">
-         <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0" colspan="3">
-       <widget class="QLineEdit" name="txtVdms_path_exe">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>24</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="3">
        <widget class="QPushButton" name="btnVdms_ExeJuego">
         <property name="minimumSize">
          <size>
@@ -216,12 +169,22 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../res/gr-lida.qrc">
+         <iconset>
           <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
         </property>
        </widget>
       </item>
-      <item row="4" column="4">
+      <item row="2" column="0" colspan="3">
+       <widget class="QLineEdit" name="txtVdms_path_exe">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
        <widget class="QPushButton" name="btnVdms_ExeJuego_clear">
         <property name="minimumSize">
          <size>
@@ -236,36 +199,19 @@
          </size>
         </property>
         <property name="icon">
-         <iconset resource="../res/gr-lida.qrc">
+         <iconset>
           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
         </property>
        </widget>
       </item>
-      <item row="5" column="0" colspan="2">
-       <widget class="QLabel" name="lb_Vdms_3">
-        <property name="text">
-         <string>Parametros:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
-       <widget class="QLineEdit" name="txtVdms_params">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>24</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0" colspan="2">
+      <item row="4" column="0" colspan="2">
        <widget class="QLabel" name="lb_Vdms_4">
         <property name="text">
          <string>Dirección del icono:</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="2">
+      <item row="4" column="2">
        <widget class="QLineEdit" name="txtVdms_icon">
         <property name="minimumSize">
          <size>
@@ -275,7 +221,7 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="3">
+      <item row="4" column="3">
        <widget class="QPushButton" name="btnVdms_Icono">
         <property name="minimumSize">
          <size>
@@ -293,12 +239,35 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../res/gr-lida.qrc">
+         <iconset>
           <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
         </property>
        </widget>
       </item>
-      <item row="6" column="4">
+      <item row="3" column="2">
+       <widget class="QLineEdit" name="txtVdms_params">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <spacer name="vSpacer_0">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>51</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="4" column="4">
        <widget class="QPushButton" name="btnVdms_Icono_clear">
         <property name="minimumSize">
          <size>
@@ -313,39 +282,49 @@
          </size>
         </property>
         <property name="icon">
-         <iconset resource="../res/gr-lida.qrc">
+         <iconset>
           <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
         </property>
        </widget>
       </item>
-      <item row="7" column="0">
-       <spacer name="vSpacer_0">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>51</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
       <item row="1" column="0" colspan="5">
-       <widget class="QLabel" name="lb_Vdms_1">
-        <property name="text">
-         <string>Nombre del archivo de configuración a guardar ejemplo: nombre_archivo.vlp</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" colspan="5">
        <widget class="QLabel" name="lb_Vdms_2">
         <property name="text">
          <string>Ejecutable (exe,com,bat) del juego:</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="0" colspan="5">
+      <item row="3" column="4">
+       <widget class="QPushButton" name="btnVdms_params_clear">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="4">
+       <widget class="QLineEdit" name="txtDat_titulo">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="5">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QPushButton" name="btnDescargarInfo">
@@ -365,7 +344,7 @@
            <string>Descargar la info del juego</string>
           </property>
           <property name="icon">
-           <iconset resource="../res/gr-lida.qrc">
+           <iconset>
             <normaloff>:/img16/go-down.png</normaloff>:/img16/go-down.png</iconset>
           </property>
          </widget>
@@ -385,36 +364,6 @@
         </item>
        </layout>
       </item>
-      <item row="0" column="1" colspan="4">
-       <widget class="QLineEdit" name="txtDatos_Titulo">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>24</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="4">
-       <widget class="QPushButton" name="btnVdms_params_clear">
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>26</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>26</height>
-         </size>
-        </property>
-        <property name="icon">
-         <iconset resource="../res/gr-lida.qrc">
-          <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
@@ -430,7 +379,16 @@
      <property name="spacing">
       <number>6</number>
      </property>
-     <property name="margin">
+     <property name="leftMargin">
+      <number>4</number>
+     </property>
+     <property name="topMargin">
+      <number>4</number>
+     </property>
+     <property name="rightMargin">
+      <number>4</number>
+     </property>
+     <property name="bottomMargin">
       <number>4</number>
      </property>
      <item>
@@ -445,7 +403,7 @@
         <string>Cancelar</string>
        </property>
        <property name="icon">
-        <iconset resource="../res/gr-lida.qrc">
+        <iconset>
          <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
        </property>
       </widget>
@@ -478,7 +436,7 @@
         <string>Aceptar</string>
        </property>
        <property name="icon">
-        <iconset resource="../res/gr-lida.qrc">
+        <iconset>
          <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
        </property>
       </widget>
@@ -488,10 +446,7 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>txtDatos_Titulo</tabstop>
-  <tabstop>btnVdms_FileConfg</tabstop>
-  <tabstop>txtVdms_path_conf</tabstop>
-  <tabstop>btnVdms_FileConfg_clear</tabstop>
+  <tabstop>txtDat_titulo</tabstop>
   <tabstop>btnVdms_ExeJuego</tabstop>
   <tabstop>txtVdms_path_exe</tabstop>
   <tabstop>btnVdms_ExeJuego_clear</tabstop>
@@ -505,7 +460,6 @@
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
-  <include location="../res/gr-lida.qrc"/>
   <include location="../res/gr-lida.qrc"/>
  </resources>
  <connections/>

@@ -382,7 +382,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../res/gr-lida.qrc">
-    <normaloff>:/img16/scummvm.png</normaloff>:/img16/scummvm.png</iconset>
+    <normaloff>:/img16/cat/scummvm.png</normaloff>:/img16/cat/scummvm.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -525,7 +525,7 @@
         </widget>
        </item>
        <item row="0" column="1" colspan="5">
-        <widget class="QLineEdit" name="txtDatos_Titulo">
+        <widget class="QLineEdit" name="txtDat_titulo">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -579,7 +579,7 @@
         </widget>
        </item>
        <item row="2" column="1" colspan="3">
-        <widget class="QLineEdit" name="txtSvm_path_game">
+        <widget class="QLineEdit" name="txtSvm_path">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -589,7 +589,7 @@
         </widget>
        </item>
        <item row="2" column="4">
-        <widget class="QPushButton" name="btnSvm_PathGame">
+        <widget class="QPushButton" name="btnSvm_Path">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -612,7 +612,7 @@
         </widget>
        </item>
        <item row="2" column="5">
-        <widget class="QPushButton" name="btnSvm_PathGame_clear">
+        <widget class="QPushButton" name="btnSvm_Path_clear">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -717,7 +717,7 @@
        <item row="5" column="1">
         <widget class="QCheckBox" name="chkSvm_subtitles">
          <property name="text">
-          <string>Mostras subtitulo</string>
+          <string>Mostras subtítulo</string>
          </property>
         </widget>
        </item>
@@ -799,6 +799,13 @@
          </property>
         </widget>
        </item>
+       <item row="2" column="1" colspan="2">
+        <widget class="QCheckBox" name="chkSvm_fullscreen">
+         <property name="text">
+          <string>Pantalla completa</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="1" colspan="2">
         <widget class="QComboBox" name="cbxSvm_gfx_mode">
          <property name="minimumSize">
@@ -812,10 +819,54 @@
          </property>
         </widget>
        </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="lb_Svm_48">
+         <property name="text">
+          <string>Joystick:</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="lb_Svm_46">
          <property name="text">
           <string>Modo de render:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QCheckBox" name="chkSvm_originalsaveload">
+         <property name="text">
+          <string>Pantalla guardar/cargar originales</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <spacer name="verticalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>175</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="lb_Svm_47">
+         <property name="text">
+          <string>Lector de CD:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QComboBox" name="cbxSvm_cdrom">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -829,38 +880,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QCheckBox" name="chkSvm_fullscreen">
-         <property name="text">
-          <string>Pantalla completa</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QCheckBox" name="chkSvm_aspect_ratio">
-         <property name="text">
-          <string>Aspect-ratio</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="lb_Svm_47">
-         <property name="text">
-          <string>Lector de CD:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QComboBox" name="cbxSvm_cdrom">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
+       <item row="7" column="2">
         <spacer name="horizontalSpacer_6">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -873,14 +893,7 @@
          </property>
         </spacer>
        </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="lb_Svm_48">
-         <property name="text">
-          <string>Joystick:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
+       <item row="8" column="1">
         <widget class="QComboBox" name="cbxSvm_joystick_num">
          <property name="minimumSize">
           <size>
@@ -888,38 +901,28 @@
            <height>24</height>
           </size>
          </property>
-         <item>
-          <property name="text">
-           <string>Joystick 1</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../res/gr-lida.qrc">
-            <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Joystick 2</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../res/gr-lida.qrc">
-            <normaloff>:/img16/controller.png</normaloff>:/img16/controller.png</iconset>
-          </property>
-         </item>
         </widget>
        </item>
-       <item row="6" column="0">
-        <spacer name="verticalSpacer_8">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+       <item row="4" column="1" colspan="2">
+        <widget class="QCheckBox" name="chkSvm_filtering">
+         <property name="text">
+          <string>Filtros de gráficos</string>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>175</height>
-          </size>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <widget class="QCheckBox" name="chkSvm_aspect_ratio">
+         <property name="text">
+          <string>Aspect-ratio</string>
          </property>
-        </spacer>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="chkSvm_bright_palette">
+         <property name="text">
+          <string>Paleta original</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -1113,7 +1116,7 @@
        <item row="5" column="0">
         <widget class="QLabel" name="lb_Svm_5">
          <property name="text">
-          <string>Velocidad de subtitulos:</string>
+          <string>Velocidad de subtítulos:</string>
          </property>
         </widget>
        </item>
@@ -1452,12 +1455,12 @@ Pulsa aceptar para cerrar el asistente
  </widget>
  <tabstops>
   <tabstop>twScummVM</tabstop>
-  <tabstop>txtDatos_Titulo</tabstop>
+  <tabstop>txtDat_titulo</tabstop>
   <tabstop>txtSvm_game_label</tabstop>
   <tabstop>txtSvm_gameid</tabstop>
-  <tabstop>btnSvm_PathGame</tabstop>
-  <tabstop>txtSvm_path_game</tabstop>
-  <tabstop>btnSvm_PathGame_clear</tabstop>
+  <tabstop>btnSvm_Path</tabstop>
+  <tabstop>txtSvm_path</tabstop>
+  <tabstop>btnSvm_Path_clear</tabstop>
   <tabstop>btnSvm_PathSave</tabstop>
   <tabstop>txtSvm_path_save</tabstop>
   <tabstop>btnSvm_PathSave_clear</tabstop>
@@ -1469,6 +1472,9 @@ Pulsa aceptar para cerrar el asistente
   <tabstop>cbxSvm_render_mode</tabstop>
   <tabstop>chkSvm_fullscreen</tabstop>
   <tabstop>chkSvm_aspect_ratio</tabstop>
+  <tabstop>chkSvm_filtering</tabstop>
+  <tabstop>chkSvm_originalsaveload</tabstop>
+  <tabstop>chkSvm_bright_palette</tabstop>
   <tabstop>cbxSvm_cdrom</tabstop>
   <tabstop>cbxSvm_joystick_num</tabstop>
   <tabstop>cbxSvm_music_driver</tabstop>
@@ -1490,6 +1496,7 @@ Pulsa aceptar para cerrar el asistente
   <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources>
+  <include location="../res/gr-lida.qrc"/>
   <include location="../res/gr-lida.qrc"/>
   <include location="../res/gr-lida.qrc"/>
  </resources>

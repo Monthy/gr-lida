@@ -137,7 +137,7 @@
       </size>
      </property>
      <property name="pixmap">
-      <pixmap resource="../res/gr-lida.qrc">:/img16/dosbox.png</pixmap>
+      <pixmap resource="../res/gr-lida.qrc">:/img16/cat/dosbox.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -181,7 +181,7 @@
       </size>
      </property>
      <property name="pixmap">
-      <pixmap resource="../res/gr-lida.qrc">:/img16/scummvm.png</pixmap>
+      <pixmap resource="../res/gr-lida.qrc">:/img16/cat/scummvm.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -225,7 +225,7 @@
       </size>
      </property>
      <property name="pixmap">
-      <pixmap resource="../res/gr-lida.qrc">:/img16/vdmsound.png</pixmap>
+      <pixmap resource="../res/gr-lida.qrc">:/img16/cat/vdmsound.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
