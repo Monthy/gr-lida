@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2015-2017 Pedro A. Garcia Rosado Aka Monthy
  * Contact: http://www.gr-lida.org/
  *
  * Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
@@ -21,42 +21,22 @@
 **/
 
 #include "editorwidget.h"
-#include <QWidget>
+
 #include <QAction>
 #include <QApplication>
-#include <QCheckBox>
 #include <QClipboard>
 #include <QColorDialog>
-#include <QComboBox>
 #include <QFile>
 #include <QFileDialog>
-#include <QFileInfo>
-#include <QFontComboBox>
-#include <QFontDatabase>
-#include <QHBoxLayout>
 #include <QInputDialog>
 #include <QLabel>
-#include <QListWidget>
-#include <QListWidgetItem>
-#include <QPainter>
-#include <QPrintDialog>
-#include <QPrintPreviewDialog>
 #include <QPrinter>
-#include <QStackedWidget>
-#include <QTextCodec>
-#include <QTextCursor>
-#include <QTextDocumentWriter>
-#include <QTextEdit>
-#include <QTextList>
 #include <QTextStream>
 #include <QToolBar>
-#include <QToolButton>
 #include <QUrl>
+#include <QMimeData>
 #include <QVBoxLayout>
 #include <QXmlStreamAttributes>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QMimeData>
 
 static QAction *createAction(const QIcon &icon, const QString &text, const bool checked, QObject *parent = 0)
 {
@@ -100,7 +80,7 @@ static inline void filterAttributes(const QStringRef &name, QXmlStreamAttributes
 	}
 	// Clean out everything except 'align' for 'p'
 	if (name == "p") {
-		for (AttributeIt it = atts->begin(); it != atts->end(); ) {
+		for (AttributeIt it = atts->begin(); it != atts->end();) {
 			if (it->name() == "align") {
 				++it;
 				*paragraphAlignmentFound = true;
@@ -134,28 +114,31 @@ QString simplifyRichTextFilter(const QString &in, bool *isPlainTextPtr = 0)
 	writer.setAutoFormatting(false);
 	writer.setAutoFormattingIndent(0);
 
-	while (!reader.atEnd()) {
-		switch (reader.readNext()) {
-		case QXmlStreamReader::StartElement:
-			elementCount++;
-			if (filterElement(reader.name())) {
-				const QStringRef name = reader.name();
-				QXmlStreamAttributes attributes = reader.attributes();
-				filterAttributes(name, &attributes, &paragraphAlignmentFound);
-				writer.writeStartElement(name.toString());
-				if (!attributes.isEmpty())
-					writer.writeAttributes(attributes);
-			} else
-				reader.readElementText(); // Skip away all nested elements and characters.
+	while (!reader.atEnd())
+	{
+		switch (reader.readNext())
+		{
+			case QXmlStreamReader::StartElement:
+				elementCount++;
+				if (filterElement(reader.name()))
+				{
+					const QStringRef name = reader.name();
+					QXmlStreamAttributes attributes = reader.attributes();
+					filterAttributes(name, &attributes, &paragraphAlignmentFound);
+					writer.writeStartElement(name.toString());
+					if (!attributes.isEmpty())
+						writer.writeAttributes(attributes);
+				} else
+					reader.readElementText(); // Skip away all nested elements and characters.
 			break;
-		case QXmlStreamReader::Characters:
-			if (!isWhiteSpace(reader.text()))
-				writer.writeCharacters(reader.text().toString());
+			case QXmlStreamReader::Characters:
+				if (!isWhiteSpace(reader.text()))
+					writer.writeCharacters(reader.text().toString());
 			break;
-		case QXmlStreamReader::EndElement:
-			writer.writeEndElement();
+			case QXmlStreamReader::EndElement:
+				writer.writeEndElement();
 			break;
-		default:
+			default:
 			break;
 		}
 	}
@@ -207,17 +190,19 @@ void EditorRichText::setDefaultFont(QFont font)
 
 QString EditorRichText::text(Qt::TextFormat format) const
 {
-	switch (format) {
+	switch (format)
+	{
 #if QT_VERSION < 0x050000
 		case Qt::LogText:
 #endif
-	case Qt::PlainText:
-		return toPlainText();
-	case Qt::RichText:
-		return m_simplifyRichText ? simplifyRichTextFilter(toHtml()) : toHtml();
-	case Qt::AutoText:
+		case Qt::PlainText:
+			return toPlainText();
+		case Qt::RichText:
+			return m_simplifyRichText ? simplifyRichTextFilter(toHtml()) : toHtml();
+		case Qt::AutoText:
 		break;
 	}
+
 	const QString html = toHtml();
 	bool isPlainText;
 	const QString simplifiedHtml = simplifyRichTextFilter(html, &isPlainText);
@@ -243,15 +228,19 @@ EditorWidget::EditorWidget(QString theme, QWidget *parent) :
 	connect(editor_rich_text, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(currentCharFormatChanged(QTextCharFormat)));
 	connect(editor_rich_text, SIGNAL(cursorPositionChanged()), this, SLOT(cursorPositionChanged()));
 
+	pag_stacked->addWidget(editor_rich_text);
+	pag_stacked->addWidget(editor_plain_text);
+	connect(pag_stacked, SIGNAL(currentChanged(int)), this, SLOT(pagIndexChanged(int)));
+
 	list_smile = new QListWidget(this);
-	list_smile->setMaximumSize(QSize(155, 16777215));
+	list_smile->setMaximumWidth(155);
 	list_smile->setMovement(QListView::Static);
 	list_smile->setResizeMode(QListView::Adjust);
 	list_smile->setViewMode(QListView::IconMode);
 	connect(list_smile, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(list_smile_itemDoubleClicked(QListWidgetItem*)));
 
 	toolbar_find_replace = new QWidget(this);
-	toolbar_find_replace->setMinimumSize(QSize(0, 30));
+	toolbar_find_replace->setMinimumSize(QSize(0, 54));
 
 	QVBoxLayout *main_layout = new QVBoxLayout(this);
 	main_layout->setContentsMargins(0, 0, 0, 0);
@@ -262,31 +251,33 @@ EditorWidget::EditorWidget(QString theme, QWidget *parent) :
 		toolbar_layout->setSpacing(10);
 
 			QToolBar *toolbar_edit = new QToolBar(this);
-			toolbar_edit->setMinimumSize(QSize(0, 30));
+			toolbar_edit->setMinimumSize(QSize(0, 28));
 			toolbar_edit->setIconSize(QSize(20, 20));
 			toolbar_edit->setStyleSheet("QToolBar{border:0px;}");
 		// Save Pdf
-		/*		m_pdf_action = createAction(QIcon(m_theme +"img16/pdf.png"), tr("Exportar a PDF") +"...", false, toolbar_edit);
+				m_pdf_action = createAction(QIcon(m_theme +"img16/pdf.png"), tr("Exportar a PDF") +"...", false, toolbar_edit);
 				m_pdf_action->setPriority(QAction::LowPriority);
-				m_pdf_action->setShortcut(Qt::CTRL + Qt::Key_D);
+			//	m_pdf_action->setShortcut(Qt::CTRL + Qt::Key_D);
 				connect(m_pdf_action, SIGNAL(triggered()), this, SLOT(on_edit_export_pdf()));
 			toolbar_edit->addAction(m_pdf_action);
-			toolbar_edit->addSeparator();*/
+			toolbar_edit->addSeparator();
 		// combos font and size
-				QWidget *toolbar_font_input = new QWidget(this);
+				QWidget *toolbar_font_input = new QWidget(toolbar_edit);
+				toolbar_font_input->setMaximumWidth(400);
 				QHBoxLayout *combofont_layout = new QHBoxLayout(toolbar_font_input);
 				combofont_layout->setContentsMargins(0, 0, 2, 0);
-					m_font_input = new QFontComboBox(toolbar_edit);
+					m_font_input = new QFontComboBox(toolbar_font_input);
 					connect(m_font_input, SIGNAL(activated(QString)), this, SLOT(on_edit_font(QString)));
 				combofont_layout->addWidget(m_font_input);
-					m_font_size_input = new QComboBox(toolbar_edit);
+					m_font_size_input = new QComboBox(toolbar_font_input);
+					m_font_size_input->setEditable(true);
 					QFontDatabase font_db;
-					foreach(int size, font_db.standardSizes())
-						m_font_size_input->addItem(QString::number(size));
+					const int listFontSize = font_db.standardSizes().size();
+					for (int i = 0; i < listFontSize; ++i)
+						m_font_size_input->addItem(QString::number(font_db.standardSizes().at(i)));
 					connect(m_font_size_input, SIGNAL(activated(QString)), this, SLOT(on_edit_font_size(QString)));
 				combofont_layout->addWidget(m_font_size_input);
-			//	combofont_layout->setStretch(0, 1);
-
+				combofont_layout->setStretch(0, 1);
 			toolbar_edit->addWidget(toolbar_font_input);
 			toolbar_edit->addSeparator();
 		// cut, copy, paste
@@ -387,8 +378,8 @@ EditorWidget::EditorWidget(QString theme, QWidget *parent) :
 		toolbar_layout->addWidget(toolbar_edit);
 
 			QToolBar *toolbar_opts = new QToolBar(this);
+			toolbar_opts->setMinimumSize(QSize(83, 28));
 			toolbar_opts->setIconSize(QSize(20, 20));
-			toolbar_opts->setMinimumSize(QSize(30, 30));
 			toolbar_opts->setStyleSheet("QToolBar{border:0px;}");
 				m_find_replace_text_action = createAction(QIcon(m_theme +"img16/edit_buscar.png"), tr("Buscar") +"/"+ tr("Reemplazar"), true, toolbar_opts);
 				m_find_replace_text_action->setPriority(QAction::LowPriority);
@@ -410,20 +401,6 @@ EditorWidget::EditorWidget(QString theme, QWidget *parent) :
 		QHBoxLayout *edit_smiles_layout = new QHBoxLayout();
 		edit_smiles_layout->setContentsMargins(0, 0, 0, 0);
 		edit_smiles_layout->setSpacing(4);
-
-			QWidget *rich_edit = new QWidget();
-				QVBoxLayout *rich_edit_layout = new QVBoxLayout(rich_edit);
-				rich_edit_layout->setContentsMargins(0, 0, 0, 0);
-				rich_edit_layout->addWidget(editor_rich_text);
-			pag_stacked->addWidget(rich_edit);
-
-			QWidget *plain_edit = new QWidget();
-				QVBoxLayout *plain_edit_layout = new QVBoxLayout(plain_edit);
-				plain_edit_layout->setContentsMargins(0, 0, 0, 0);
-				plain_edit_layout->addWidget(editor_plain_text);
-			pag_stacked->addWidget(plain_edit);
-			connect(pag_stacked, SIGNAL(currentChanged(int)), this, SLOT(pagIndexChanged(int)));
-
 		edit_smiles_layout->addWidget(pag_stacked);
 		edit_smiles_layout->addWidget(list_smile);
 
@@ -491,7 +468,7 @@ EditorWidget::EditorWidget(QString theme, QWidget *parent) :
 
 EditorWidget::~EditorWidget()
 {
-//	delete m_pdf_action;
+	delete m_pdf_action;
 	delete m_cut_action;
 	delete m_copy_action;
 	delete m_paste_action;
@@ -524,17 +501,16 @@ EditorWidget::~EditorWidget()
 	delete chkWholeWords;
 	delete toolbar_find_replace;
 	delete list_smile;
-	delete editor_rich_text;
-	delete editor_plain_text;
 	delete pag_stacked;
 }
 
-void EditorWidget::focusInEvent(QFocusEvent *)
+void EditorWidget::focusInEvent(QFocusEvent *event)
 {
 	if (m_initialPag == PlainTextIndex)
 		editor_rich_text->setFocus(Qt::TabFocusReason);
 	else
 		editor_plain_text->setFocus(Qt::TabFocusReason);
+	event->accept();
 }
 
 void EditorWidget::showSource(bool checked)
@@ -572,7 +548,7 @@ bool EditorWidget::isShowSmiles()
 
 void EditorWidget::setSmileList(QString filename, QString sep, QString path_smile)
 {
-	QFile file_in( filename );
+	QFile file_in(filename);
 
 	if (file_in.exists()) {
 		if (file_in.open(QIODevice::ReadOnly) != 0) {
@@ -581,17 +557,17 @@ void EditorWidget::setSmileList(QString filename, QString sep, QString path_smil
 			QTextStream in(&file_in);
 			in.setCodec("UTF-8");
 			list_smile->clear();
-		//	editor_rich_text->document()->clear();
-			while ( !in.atEnd() ) {
+			while (!in.atEnd()) {
 				line = in.readLine();
 				if (!line.isEmpty()) {
-					list = line.split( sep );
+					list = line.split(sep);
 					if (QFile::exists(path_smile + list.at(1))) {
-						QListWidgetItem *item = new QListWidgetItem(list_smile);
+						QListWidgetItem *item = new QListWidgetItem;//(list_smile)
 						item->setData(Qt::UserRole, list.at(1));
-						item->setText( list.at(0) );
+						item->setText(list.at(0));
 						item->setIcon(QIcon(path_smile + list.at(1)));
 						editor_rich_text->document()->addResource(QTextDocument::ImageResource, QUrl("smile_rs_"+ list.at(0) +"_"+ list.at(1)), QImage(path_smile + list.at(1)));
+						list_smile->addItem(item);
 					}
 				}
 			}
@@ -661,6 +637,11 @@ void EditorWidget::setColor(CodeEditor::HighlightType type, const QColor &color)
 	editor_plain_text->setColor(type, color);
 }
 
+void EditorWidget::setListWordsCompletion(const QString& fileName)
+{
+	editor_plain_text->setListWordsCompletion(fileName);
+}
+
 void EditorWidget::mark(const QString &str, Qt::CaseSensitivity caseSensitivity)
 {
 	editor_plain_text->mark(str, caseSensitivity);
@@ -695,10 +676,10 @@ QString EditorWidget::smilesToString(QString str) const
 		for (int i = 0; i < count_smiles; ++i) {
 			QString smile_text = list_smile->item(i)->text();
 			QString smile_icon = list_smile->item(i)->data(Qt::UserRole).toString();
-			if (str.indexOf("<img src=\":smile_rs_"+ smile_text +"_"+ smile_icon +"\"/>", 0) != -1)
-				str.replace("<img src=\":smile_rs_"+ smile_text +"_"+ smile_icon +"\"/>", smile_text +" ");
+			if (str.indexOf("<img src=\"smile_rs_"+ smile_text +"_"+ smile_icon +"\"/>", 0) != -1)
+				str.replace("<img src=\"smile_rs_"+ smile_text +"_"+ smile_icon +"\"/>", smile_text +" ");
 			else
-				str.replace("<img src=\":smile_rs_"+ smile_text +"_"+ smile_icon +"\" />", smile_text +" ");
+				str.replace("<img src=\"smile_rs_"+ smile_text +"_"+ smile_icon +"\" />", smile_text +" ");
 		}
 	}
 	return str;
@@ -712,7 +693,7 @@ QString EditorWidget::smilesToImage(QString str) const
 			QString smile_text = list_smile->item(i)->text();
 			QString smile_icon = list_smile->item(i)->data(Qt::UserRole).toString();
 			QRegExp rx_smile(QRegExp::escape(smile_text) +"\\s");
-			str.replace(rx_smile, "<img src=\":smile_rs_"+ smile_text +"_"+ smile_icon +"\"/> ");
+			str.replace(rx_smile, "<img src=\"smile_rs_"+ smile_text +"_"+ smile_icon +"\"/> ");
 		}
 	}
 	return str;
@@ -747,11 +728,11 @@ void EditorWidget::findReplace(QString str_find, QString str_replace, bool r_nex
 	if (m_initialPag == RichTextIndex) {
 		str_select = editor_rich_text->textCursor().selectedText();
 		if (!str_select.isEmpty() && str_select == str_find)
-			editor_rich_text->insertHtml( str_replace );
+			editor_rich_text->insertHtml(str_replace);
 	} else {
 		str_select = editor_plain_text->textCursor().selectedText();
 		if (!str_select.isEmpty() && str_select == str_find)
-			editor_plain_text->insertPlainText( str_replace );
+			editor_plain_text->insertPlainText(str_replace);
 	}
 
 	if (r_all && isFind)
@@ -769,34 +750,34 @@ void EditorWidget::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 	}
 }
 
-void EditorWidget::fontChanged(const QFont &f)
+void EditorWidget::fontChanged(const QFont &font)
 {
 	if (m_initialPag == RichTextIndex) {
-		m_font_input->setCurrentIndex(m_font_input->findText(QFontInfo(f).family()));
-		m_font_size_input->setCurrentIndex(m_font_size_input->findText(QString::number(f.pointSize())));
-		m_bold_action->setChecked(f.bold());
-		m_italic_action->setChecked(f.italic());
-		m_underline_action->setChecked(f.underline());
+		m_font_input->setCurrentIndex(m_font_input->findText(QFontInfo(font).family()));
+		m_font_size_input->setCurrentIndex(m_font_size_input->findText(QString::number(font.pointSize())));
+		m_bold_action->setChecked(font.bold());
+		m_italic_action->setChecked(font.italic());
+		m_underline_action->setChecked(font.underline());
 	}
 }
 
-void EditorWidget::colorChanged(const QColor &c)
+void EditorWidget::colorChanged(const QColor &color)
 {
 	QPixmap pix(16, 16);
-	pix.fill(c);
+	pix.fill(color);
 	m_color_action->setIcon(QIcon(pix));
 }
 
-void EditorWidget::alignmentChanged(Qt::Alignment a)
+void EditorWidget::alignmentChanged(Qt::Alignment align)
 {
 	if (m_initialPag == RichTextIndex) {
-		if (a & Qt::AlignHCenter) {
+		if (align & Qt::AlignHCenter) {
 			m_align_center_action->setChecked(true);
 			m_align_checked = "center";
-		} else if (a & Qt::AlignRight) {
+		} else if (align & Qt::AlignRight) {
 			m_align_right_action->setChecked(true);
 			m_align_checked = "right";
-		} else if (a & Qt::AlignJustify) {
+		} else if (align & Qt::AlignJustify) {
 			m_align_justify_action->setChecked(true);
 			m_align_checked = "justify";
 		} else {
@@ -819,18 +800,18 @@ void EditorWidget::pagIndexChanged(int newIndex)
 	int position = 0;
 	QTextCursor cursor;
 	if (newIndex == PlainTextIndex) {
-		position =  editor_plain_text->textCursor().position();
+		position = editor_plain_text->textCursor().position();
 		cursor = editor_plain_text->textCursor();
 		editor_plain_text->setPlainText(smilesToString(editor_rich_text->text(Qt::RichText)));
 	} else {
-		position =  editor_rich_text->textCursor().position();
+		position = editor_rich_text->textCursor().position();
 		cursor = editor_rich_text->textCursor();
 		editor_rich_text->setHtml(smilesToImage(editor_plain_text->toPlainText()));
 	}
 	cursor.movePosition(QTextCursor::End);
 	if (cursor.position() > position)
 		cursor.setPosition(position);
-	if ( newIndex == PlainTextIndex )
+	if (newIndex == PlainTextIndex)
 		editor_plain_text->setTextCursor(cursor);
 	else
 		editor_rich_text->setTextCursor(cursor);
@@ -851,7 +832,7 @@ void EditorWidget::list_smile_itemDoubleClicked(QListWidgetItem *item)
 {
 	if (item) {
 		if (m_initialPag == RichTextIndex) {
-			editor_rich_text->insertHtml("<img src=\":smile_rs_"+ item->text() +"_"+ item->data(Qt::UserRole).toString() +"\"/> ");
+			editor_rich_text->insertHtml("<img src=\"smile_rs_"+ item->text() +"_"+ item->data(Qt::UserRole).toString() +"\"/> ");
 			editor_rich_text->setFocus();
 		} else {
 			editor_plain_text->insertPlainText(item->text() +" ");
@@ -875,6 +856,8 @@ void EditorWidget::on_show_source(bool checked)
 	m_link_action->setCheckable(!checked);
 	m_simplify_richtext_action->setVisible(!checked);
 
+	pag_stacked->setCurrentIndex(checked ? 1 : 0);
+
 	if (m_initialPag == PlainTextIndex)
 		editor_plain_text->setFocus();
 	else {
@@ -889,8 +872,6 @@ void EditorWidget::on_show_source(bool checked)
 			m_align_left_action->setChecked(checked);
 		alignmentChanged(editor_rich_text->alignment());
 	}
-
-	pag_stacked->setCurrentIndex(checked ? 1 : 0);
 }
 
 void EditorWidget::on_show_find_replace(bool checked)
@@ -906,22 +887,28 @@ void EditorWidget::on_show_find_replace(bool checked)
 	txt_find->setFocus();
 }
 
-/*void EditorWidget::on_edit_export_pdf()
+void EditorWidget::on_edit_export_pdf()
 {
-	if (m_initialPag == RichTextIndex) {
-	#ifndef QT_NO_PRINTER
-		QString fileName = QFileDialog::getSaveFileName(this, "Export PDF", QString(), "*.pdf");
-		if (!fileName.isEmpty()) {
-			if (QFileInfo(fileName).suffix().isEmpty())
-				fileName.append(".pdf");
-			QPrinter printer(QPrinter::HighResolution);
-			printer.setOutputFormat(QPrinter::PdfFormat);
-			printer.setOutputFileName(fileName);
+#ifndef QT_NO_PRINTER
+	QString fileName = QFileDialog::getSaveFileName(this, tr("Exportar a PDF") +"...", QString(), "*.pdf");
+	if (!fileName.isEmpty()) {
+		if (QFileInfo(fileName).suffix().isEmpty())
+			fileName.append(".pdf");
+
+		QPrinter printer(QPrinter::HighResolution);
+		printer.setPageSize(QPrinter::A4);
+		printer.setOrientation(QPrinter::Portrait);
+		printer.setFullPage(true);
+		printer.setOutputFormat(QPrinter::PdfFormat);
+		printer.setOutputFileName(fileName);
+
+		if (m_initialPag == PlainTextIndex)
+			editor_plain_text->document()->print(&printer);
+		else
 			editor_rich_text->document()->print(&printer);
-		}
-	#endif
 	}
-}*/
+#endif
+}
 
 void EditorWidget::on_edit_font(const QString &font)
 {
@@ -945,9 +932,9 @@ void EditorWidget::on_edit_font_size(const QString &size)
 			if (!str_select.isEmpty())
 				editor_plain_text->textCursor().insertText("<span style=\"font-size:"+ size +"pt;\">"+ str_select +"</span>");
 		} else {
-				QTextCharFormat fmt;
-				fmt.setFontPointSize(pointSize);
-				mergeFormatOnWordOrSelection(fmt);
+			QTextCharFormat fmt;
+			fmt.setFontPointSize(pointSize);
+			mergeFormatOnWordOrSelection(fmt);
 		}
 	}
 }
@@ -1092,17 +1079,12 @@ void EditorWidget::on_edit_valign_sub()
 void EditorWidget::on_edit_image()
 {
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Seleccionar una imagen"), "",
-							tr("Imagenes") +" (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.tif *.tiff *.xbm *.xpm *.svg);;"+
-							tr("Imagen") +" JPEG (*.jpg *.jpeg);;"+
-							tr("Imagen") +" PNG (*.png);;"+
-							tr("Imagen") +" BMP (*.bmp);;"+
-							tr("Imagen") +" GIF (*.gif);;"+
-							tr("Imagen") +" TIFF (*.tif *.tiff);;"+
-							tr("Imagen") +" SVG (*.svg);;"+
-							tr("Imagen") +" PNM (*.pbm *.pgm *.ppm);;"+
-							tr("Imagen") +" X BitMap (*.xbm);;"+
-							tr("Imagen") +" X PixMap (*.xpm);;"+
-							tr("Imágenes soportadas") +" (*)", 0);
+							tr("Imágenes") +" (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.tif *.tiff *.xbm *.xpm *.svg);;"+
+							tr("Imagen") +" JPEG (*.jpg *.jpeg);;" + tr("Imagen") +" PNG (*.png);;"+
+							tr("Imagen") +" BMP (*.bmp);;" + tr("Imagen") +" GIF (*.gif);;"+
+							tr("Imagen") +" TIFF (*.tif *.tiff);;" + tr("Imagen") +" SVG (*.svg);;"+
+							tr("Imagen") +" PNM (*.pbm *.pgm *.ppm);;" + tr("Imagen") +" X BitMap (*.xbm);;"+
+							tr("Imagen") +" X PixMap (*.xpm);;" + tr("Imágenes soportadas") +" (*)", 0);
 
 	if (!fileName.isEmpty() && QFile::exists(fileName)) {
 		if (m_initialPag == PlainTextIndex)
@@ -1120,7 +1102,7 @@ void EditorWidget::on_edit_link(bool checked)
 		old_url = editor_rich_text->currentCharFormat().anchorHref();
 	newUrl = QInputDialog::getText(this, tr("Crear un enlace"), tr("URL del enlace") +":", QLineEdit::Normal, old_url, &ok);
 
-	if( !newUrl.startsWith("://") )
+	if (!newUrl.startsWith("://"))
 		newUrl.prepend("http://");
 
 	if (m_initialPag == PlainTextIndex) {

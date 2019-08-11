@@ -2,6 +2,7 @@
   PictureFlow - animated image show widget
   http://pictureflow.googlecode.com
 
+  Copyright (C) 2009 Ariya Hidayat (ariya@kde.org)
   Copyright (C) 2008 Ariya Hidayat (ariya@kde.org)
   Copyright (C) 2007 Ariya Hidayat (ariya@kde.org)
 
@@ -27,204 +28,262 @@
 #ifndef PICTUREFLOW_H
 #define PICTUREFLOW_H
 
-#include <qwidget.h>
+#include <QWidget>
 
 class PictureFlowPrivate;
 
 /*!
-  Class PictureFlow implements an image show widget with animation effect 
-  like Apple's CoverFlow (in iTunes and iPod). Images are arranged in form 
-  of slides, one main slide is shown at the center with few slides on 
-  the left and right sides of the center slide. When the next or previous 
-  slide is brought to the front, the whole slides flow to the right or 
-  the right with smooth animation effect; until the new slide is finally 
+  Class PictureFlow implements an image show widget with animation effect
+  like Apple's CoverFlow (in iTunes and iPod). Images are arranged in form
+  of slides, one main slide is shown at the center with few slides on
+  the left and right sides of the center slide. When the next or previous
+  slide is brought to the front, the whole slides flow to the right or
+  the right with smooth animation effect; until the new slide is finally
   placed at the center.
 
- */ 
+ */
 class PictureFlow : public QWidget
 {
-Q_OBJECT
+	Q_OBJECT
 
-  Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
-  Q_PROPERTY(QSize slideSize READ slideSize WRITE setSlideSize)
-  Q_PROPERTY(int slideCount READ slideCount)
-  Q_PROPERTY(int centerIndex READ centerIndex WRITE setCenterIndex)
+	Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
+	Q_PROPERTY(QSize slideSize READ slideSize WRITE setSlideSize)
+	Q_PROPERTY(int slideCount READ slideCount)
+	Q_PROPERTY(int centerIndex READ centerIndex WRITE setCenterIndex)
 
 public:
+	enum FlowType {
+		CoverFlowLike   = 0,
+		Strip		   = 1,
+		StripOverlapped = 2
+	};
 
-  enum ReflectionEffect
-  {
-    NoReflection,
-    PlainReflection,
-    BlurredReflection
-  };
+	enum FlowStatus {
+		Unread = 0,
+		Read   = 1,
+		Opened = 2
+	};
 
-  enum FlowType
-  {
-	CoverFlowLike   = 0,
-	Strip           = 1,
-	StripOverlapped = 2
-  };
+	enum ReflectionEffect {
+		NoReflection,
+		PlainReflection,
+		BlurredReflection
+	};
 
-  /*!
-    Creates a new PictureFlow widget.
-  */  
-  PictureFlow(QWidget* parent = 0, FlowType flowType = CoverFlowLike);
-  
-  /*!
-    Destroys the widget.
-  */
-  ~PictureFlow();
+	/*!
+	  Creates a new PictureFlow widget.
+	*/
+	PictureFlow(QWidget *parent = 0, FlowType flowType = CoverFlowLike);
 
-  /*!
-    Returns the background color.
-  */
-  QColor backgroundColor() const;
+	/*!
+	  Destroys the widget.
+	*/
+	~PictureFlow();
 
-  /*!
-    Sets the background color. By default it is black.
-  */
-  void setBackgroundColor(const QColor& c);
+	/*!
+	  Returns the background color.
+	*/
+	QColor backgroundColor() const;
 
-  /*!
-    Returns the dimension of each slide (in pixels).
-  */  
-  QSize slideSize() const;
+	/*!
+	  Sets the background color. By default it is black.
+	*/
+	void setBackgroundColor(const QColor &c);
 
-  /*!
-    Sets the dimension of each slide (in pixels).
-  */  
-  void setSlideSize(QSize size);
+	/*!
+	  Returns the font.
+	*/
+	QFont getPicFlowFont() const;
 
-  /*!
-    Returns the total number of slides.
-  */
-  int slideCount() const;
+	/*!
+	  Sets the font. By default it is Arial 14.
+	*/
+	void setPicFlowFont(const QFont& font);
+	void setPicFlowFont(QString f_family, int f_size, bool f_bold = false, bool f_italic = false);
 
-  /*!
-    Returns QImage of specified slide.
-  */  
-  QImage slide(int index) const;
+	/*!
+	  Returns the font color.
+	*/
+	QColor getFontColor() const;
 
-  /*!
-    Returns the index of slide currently shown in the middle of the viewport.
-  */  
-  int centerIndex() const;
+	/*!
+	  Sets the font color. By default it is white.
+	*/
+	void setFontColor(const QColor& c);
 
-  /*!
-    Returns the effect applied to the reflection.
-  */  
-  ReflectionEffect reflectionEffect() const;
+	/*!
+	  Returns the dimension of each slide (in pixels).
+	*/
+	QSize slideSize() const;
 
-  /*!
-    Sets the effect applied to the reflection. The default is PlainReflection.
-  */  
-  void setReflectionEffect(ReflectionEffect effect);
+	/*!
+	  Sets the dimension of each slide (in pixels).
+	*/
+	void setSlideSize(QSize size);
 
+	void setSlideFixSize(bool fix_size);
+
+	/*!
+	  Returns the total number of slides.
+	*/
+	int slideCount() const;
+
+	/*!
+	  Returns QImage of specified slide.
+	*/
+	QImage slide(int index) const;
+
+	/*!
+	  Returns the index of slide currently shown in the middle of the viewport.
+	*/
+	int centerIndex() const;
+
+	/*!
+	  Returns the effect applied to the reflection.
+	*/
+	ReflectionEffect reflectionEffect() const;
+
+	/*!
+	  Sets the effect applied to the reflection. The default is PlainReflection.
+	*/
+	void setReflectionEffect(ReflectionEffect effect);
 
 public slots:
 
-  /*!
-    Adds a new slide.
-  */  
-  void addSlide(const QImage& image);
+	/*!
+	  Adds a new slide.
+	*/
+	void addSlide(const QImage &image, QString caption = "");
 
-  /*!
-    Adds a new slide.
-  */  
-  void addSlide(const QPixmap& pixmap);
+	/*!
+	  Adds a new slide.
+	*/
+	void addSlide(const QPixmap &pixmap, QString caption = "");
 
-  /*!
-    Sets an image for specified slide. If the slide already exists,
-    it will be replaced.
-  */  
-  void setSlide(int index, const QImage& image);
+	/*!
+	  Removes an existing slide.
+	*/
+	void removeSlide(int index);
 
-  /*!
-    Sets a pixmap for specified slide. If the slide already exists,
-    it will be replaced.
-  */  
-  void setSlide(int index, const QPixmap& pixmap);
+	/*!
+	  Sets an image for specified slide. If the slide already exists,
+	  it will be replaced.
+	*/
+	void setSlide(int index, const QImage &image, QString caption = "");
 
-  /*!
-    Sets slide to be shown in the middle of the viewport. No animation 
-    effect will be produced, unlike using showSlide.
-  */  
-  void setCenterIndex(int index);
+	/*!
+	  Sets a pixmap for specified slide. If the slide already exists,
+	  it will be replaced.
+	*/
+	void setSlide(int index, const QPixmap &pixmap, QString caption = "");
 
-  /*!
-    Clears all slides.
-  */
-  void clear();
+	/*!
+	  Sets slide to be shown in the middle of the viewport. No animation
+	  effect will be produced, unlike using showSlide.
+	*/
+	void setCenterIndex(int index);
 
-  /*!
-    Shows previous slide using animation effect.
-  */
-  void showPrevious();
+	/*!
+	  Clears all slides.
+	*/
+	void clear();
 
-  /*!
-    Shows next slide using animation effect.
-  */
-  void showNext();
+	/*!
+	  Shows previous slide using animation effect.
+	*/
+	void showPrevious();
 
-  /*!
-    Go to specified slide using animation effect.
-  */
-  void showSlide(unsigned int index);
+	/*!
+	  Shows next slide using animation effect.
+	*/
+	void showNext();
 
-  /*!
-    Rerender the widget. Normally this function will be automatically invoked
-    whenever necessary, e.g. during the transition animation.
-  */
-  void render();
+	/*!
+	  Go to specified slide using animation effect.
+	*/
+	void showSlide(int index);
 
-  /*!
-    Schedules a rendering update. Unlike render(), this function does not cause
-    immediate rendering.
-  */  
-  void triggerRender();
+	/*!
+	  Rerender the widget. Normally this function will be automatically invoked
+	  whenever necessary, e.g. during the transition animation.
+	*/
+	void render();
 
-  void setFlowType(FlowType flowType);
+	/*!
+	  Schedules a rendering update. Unlike render(), this function does not cause
+	  immediate rendering.
+	*/
+	void triggerRender();
 
-  void setMarkImage(const QImage & mark);
+	void setFlowType(FlowType flowType);
 
-  void markSlide(int index);
+	void setShowLinesPos(bool enable = false);
 
-  void updateMarks();
+	void setShowTitle(bool enable);
+	void setSlideTitle(QString title);
+	void setSlideTitle(QString title, int position);
+	void setSlideTitlePos(int position = Qt::AlignLeft | Qt::AlignTop);
+	void setSlideTitleMargin(QPoint margin);
 
-  void unmarkSlide(int index);
+	void setShowTitleIcon(bool enable);
+	void setSlideTitleIcon(QString titleIcon);
+	void setSlideTitleIcon(QPixmap titleIcon);
+	void setSlideTitleIcon(QImage titleIcon);
+	void setSlideTitleIconPos(int position);
+	void setSlideTitleIconMargin(QPoint margin);
 
-  void setMarks(const QVector<bool> & marks);
+	void setShowCaption(bool enable);
+	void setSlideCaption(int index, QString caption);
+	void setSlideCaptionPos(int position = Qt::AlignHCenter | Qt::AlignBottom);
+	void setSlideCaptionMargin(QPoint margin);
 
-  void setShowMarks(bool enable);
+	void setShowNumber(bool enable);
+	void setSlideNumberPos(int position = Qt::AlignRight | Qt::AlignTop);
+	void setSlideNumberMargin(QPoint margin);
+	void setSlideNumberFormat(QString format = "%1/%2");
 
-  QVector<bool> getMarks();
+	void setShowIconExtra(bool enable);
+	void setSlideIconExtra(QString iconExtra);
+	void setSlideIconExtra(QPixmap iconExtra);
+	void setSlideIconExtra(QImage iconExtra);
+	void setSlideIconExtraPos(int position = Qt::AlignRight | Qt::AlignTop);
+	void setSlideIconExtraMargin(QPoint margin);
 
-  void setShowNumPos(bool enable);
-  void setShowTriangle(bool enable);
+	void setShowTriangle(bool enable);
+
+	void setSlideMargin(QPoint margin);
+
+	void setMarkImage(FlowStatus flowStatus, const QImage &image);
+
+	void markSlide(int index, FlowStatus flowStatus = Read);
+
+	void updateMarks();
+
+	void unmarkSlide(int index);
+
+	void setShowMarks(bool enable);
+
+	void resortCovers(QList<int> newOrder);
 
 signals:
-  void centerIndexChanged(int index);
-  void finishedAnimation();
+	void centerIndexChanged(int index);
+	void centerIndexChangedSilent(int index);
+	void finishedAnimation();
 
 protected:
-  void paintEvent(QPaintEvent *event);
-  void keyPressEvent(QKeyEvent* event);
-  void mousePressEvent(QMouseEvent* event);
-  void resizeEvent(QResizeEvent* event);
+	void paintEvent(QPaintEvent *event);
+	void keyPressEvent(QKeyEvent *event);
+	void mousePressEvent(QMouseEvent *event);
+	void mousePressEvent(QMouseEvent *event, int slideWidth);
+	void resizeEvent(QResizeEvent *event);
 
 private slots:
-  void updateAnimation();
+	void updateAnimation();
 
 private:
-  PictureFlowPrivate* d;
-  QImage mark;
-  QVector<bool> marks;
-  int framesSkip;
-  bool showNumPos;
-  bool showTriangle;
+	PictureFlowPrivate *d;
+	int framesSkip;
 
 };
 
 #endif // PICTUREFLOW_H
-

@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -77,6 +77,9 @@ public:
 	QString getCheckedItemsUserData() const;
 	QStringList items() const;
 
+// Para emitir si textChanged(const QString&) es protected
+	void emitTextChanged(const QString &text);
+
 public slots:
 	void setCheckedItems(const QStringList &items);
 	void setCheckedItems(const QString &items);
@@ -84,6 +87,7 @@ public slots:
 
 signals:
 	void checkedItemsChanged(const QStringList &items);
+	void textChanged(const QString &text);
 
 private:
 	bool eventFilter(QObject *object, QEvent *event);

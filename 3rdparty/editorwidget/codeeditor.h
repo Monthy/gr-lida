@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2015-2017 Pedro A. Garcia Rosado Aka Monthy
  * Contact: http://www.gr-lida.org/
  *
  * Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
@@ -24,9 +24,11 @@
 #define CODEEDITOR_H
 
 #include <QPlainTextEdit>
+#include <QCompleter>
 
 QT_BEGIN_NAMESPACE
 class Highlighter;
+class LineNumberArea;
 QT_END_NAMESPACE
 
 class CodeEditor: public QPlainTextEdit
@@ -75,11 +77,9 @@ public:
 	void setSyntaxType(SyntaxType type);
 	void setFormatFor(HighlightType type, const QColor &colorFg, const QColor &colorBg = Qt::transparent, bool bold = false, bool italic = false, bool underline = false);
 	void setColor(HighlightType type, const QColor &color);
-
+	void setListWordsCompletion(const QString& fileName);
 	bool isLineNumbersVisible() const;
 	bool isTextWrapEnabled() const;
-	void lineNumberAreaPaintEvent(QPaintEvent *event);
-	int lineNumberAreaWidth();
 
 public slots:
 	void mark(const QString &str, Qt::CaseSensitivity sens = Qt::CaseInsensitive);
@@ -88,22 +88,22 @@ public slots:
 
 protected:
 	void resizeEvent(QResizeEvent *event);
+	void keyPressEvent(QKeyEvent *e);
 
 private slots:
-	void updateLineNumberAreaWidth(int newBlockCount);
-	void updateLineNumberArea(const QRect &, int);
+	void updateLineNumberArea(const QRect &rect, int dy);
+	void updateLineNumberArea();
 	void highlightCurrentLine();
+	void insertCompletion(const QString &completion);
 
 private:
 	SyntaxType syntaxtype;
 	Highlighter *highlighter;
-	QWidget *lineNumberArea;
-	QFont font;
-	QColor numberAreaColor;
-	QColor lineNumberColor;
-	QColor lineSelectColor;
+	LineNumberArea *lineNumberArea;
 	bool showLineNumbers;
 	bool textWrap;
+	QColor lineSelectColor;
+	QCompleter *complete;
 
 };
 

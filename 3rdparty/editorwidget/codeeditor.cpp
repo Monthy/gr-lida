@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2015-2017 Pedro A. Garcia Rosado Aka Monthy
  * Contact: http://www.gr-lida.org/
  *
  * Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
@@ -23,7 +23,11 @@
 #include "codeeditor.h"
 
 #include <QSyntaxHighlighter>
+#include <QAbstractItemView>
 #include <QPainter>
+#include <QStringListModel>
+#include <QScrollBar>
+#include <QFile>
 
 class Highlighter : public QSyntaxHighlighter
 {
@@ -36,7 +40,7 @@ public:
 
 protected:
 	void highlightBlock(const QString &text);
-	void highlightBlockJavaScriptAndCss(const QString &text);
+	void highlightBlockJavaScriptAndCss(const QString &text, int m_state);
 	void highlightBlockHtml(const QString &text);
 
 private:
@@ -55,8 +59,10 @@ private:
 		jsNormal = -1,
 		jsNumber = 0,
 		jsString = 1,
-		jsRegex = 2,
-		jsIdentifier = 3
+		jsComment = 2,
+		jsCommentDoc = 3,
+		jsRegex = 4,
+		jsIdentifier = 5
 	};
 
 	CodeEditor::SyntaxType m_syntaxtype;
@@ -67,6 +73,7 @@ private:
 	QSet<QString> m_classes;
 	QSet<QString> m_other;
 	bool isScript, isStyle;
+	int tmp_state;
 
 	QHash<CodeEditor::HighlightType, QTextCharFormat> m_formats;
 	QString m_markString;
@@ -78,31 +85,31 @@ Highlighter::Highlighter(CodeEditor::SyntaxType type, QTextDocument *parent)
 {
 	m_markCaseSensitivity = Qt::CaseInsensitive;
 
-	setFormatFor(CodeEditor::Normal     , QColor("#000000"));                               // Qt::black
-	setFormatFor(CodeEditor::Number     , QColor("#ff0000"));                               // Qt::red
-	setFormatFor(CodeEditor::NumberCss  , QColor("#ff8000"));                               // orange
-	setFormatFor(CodeEditor::String     , QColor("#808080"));                               // Qt::darkGray
-	setFormatFor(CodeEditor::StringHtml , QColor("#0000ff"));                               // Qt::blue
-	setFormatFor(CodeEditor::Comment    , QColor("#008000"));                               // Qt::darkGreen
-	setFormatFor(CodeEditor::CommentDoc , QColor("#008080"));                               // Qt::darkCyan
-	setFormatFor(CodeEditor::Regex      , QColor("#8000ff"));                               // lila
-	setFormatFor(CodeEditor::RegexCss   , QColor("#ff8000"));                               // orange
-	setFormatFor(CodeEditor::RegexHtml  , QColor("#ff0000"));                               // Qt::red
-	setFormatFor(CodeEditor::Operator   , QColor("#000000"), Qt::transparent, true);        // Qt::black
-	setFormatFor(CodeEditor::Keyword    , QColor("#000080"), Qt::transparent, true, true);  // Qt::darkBlue
-	setFormatFor(CodeEditor::KeywordCss , QColor("#0000ff"));                               // Qt::blue
-	setFormatFor(CodeEditor::KeywordHtml, QColor("#800080"), Qt::transparent, true);        // Qt::darkMagenta
-	setFormatFor(CodeEditor::BuiltIn    , QColor("#008080"), Qt::transparent, false, true); // Qt::darkCyan
-	setFormatFor(CodeEditor::BuiltInCss , QColor("#008080"), Qt::transparent, false, true); // Qt::darkCyan
-	setFormatFor(CodeEditor::BuiltInHtml, QColor("#000000"), Qt::transparent, true);        // Qt::black
-	setFormatFor(CodeEditor::Classes    , QColor("#800080"));                               // Qt::darkMagenta
-	setFormatFor(CodeEditor::ClassesCss , QColor("#800080"), Qt::transparent, true);        // Qt::darkMagenta
-	setFormatFor(CodeEditor::Other      , QColor("#ff8000"));                               // orange
-	setFormatFor(CodeEditor::Marker     , QColor("#000000"), QColor("#ffff00"));            // Qt::black, Qt::yellow
-	setFormatFor(CodeEditor::Identifier , QColor("#800000"));                               // Qt::darkRed
+// Obsidian theme
+	setFormatFor(CodeEditor::Normal     , QColor("#e0e2e4"));
+	setFormatFor(CodeEditor::Number     , QColor("#ffcd22"));
+	setFormatFor(CodeEditor::NumberCss  , QColor("#ffcd22"));
+	setFormatFor(CodeEditor::String     , QColor("#ec7600"));
+	setFormatFor(CodeEditor::StringHtml , QColor("#ec7600"));
+	setFormatFor(CodeEditor::Comment    , QColor("#66747a"));
+	setFormatFor(CodeEditor::CommentDoc , QColor("#66747a"));
+	setFormatFor(CodeEditor::Regex      , QColor("#F74692"));
+	setFormatFor(CodeEditor::RegexCss   , QColor("#F74692"));
+	setFormatFor(CodeEditor::RegexHtml  , QColor("#F74692"));
+	setFormatFor(CodeEditor::Operator   , QColor("#e0e2e4"));
+	setFormatFor(CodeEditor::Keyword    , QColor("#93c763"), Qt::transparent, true);
+	setFormatFor(CodeEditor::KeywordCss , QColor("#668cb0"));
+	setFormatFor(CodeEditor::KeywordHtml, QColor("#668cb0"), Qt::transparent, true);
+	setFormatFor(CodeEditor::BuiltIn    , QColor("#93c763"), Qt::transparent, true);
+	setFormatFor(CodeEditor::BuiltInCss , QColor("#93c763"), Qt::transparent, true);
+	setFormatFor(CodeEditor::BuiltInHtml, QColor("#b3b689"), Qt::transparent, true);
+	setFormatFor(CodeEditor::Classes    , QColor("#668cb0"), Qt::transparent, true);
+	setFormatFor(CodeEditor::ClassesCss , QColor("#93c763"), Qt::transparent, true);
+	setFormatFor(CodeEditor::Other      , QColor("#ff8000"));
+	setFormatFor(CodeEditor::Marker     , QColor("#e0e2e4"), QColor("#404e51"));
+	setFormatFor(CodeEditor::Identifier , QColor("#d5ab55"));
 
-	// https://developer.mozilla.org/en/JavaScript/Reference/Reserved_Words
-	m_keywords.clear();
+// https://developer.mozilla.org/en/JavaScript/Reference/Reserved_Words
 	m_keywords << "abstract" << "boolean" << "break" << "byte" << "case" << "catch"
 		<< "char" << "class" << "const" << "continue" << "debugger" << "default"
 		<< "delete" << "do" << "double" << "else" << "enum" << "export" << "extends"
@@ -113,9 +120,7 @@ Highlighter::Highlighter(CodeEditor::SyntaxType type, QTextDocument *parent)
 		<< "this" << "throw" << "throws" << "transient" << "true" << "try"<< "typeof" << "var"
 		<< "void" << "while" << "with";
 
-	m_keywordsCss.clear();
-	m_keywordsCss
-		<< "absolute"  << "add"  << "adjoins"  << "align"  << "alternate"  << "alternating"
+	m_keywordsCss << "absolute" << "add" << "adjoins" << "align" << "alternate" << "alternating"
 		<< "area" << "arrow" << "attachment" << "background" << "bar" << "base" << "border"
 		<< "bottom" << "branch" << "bright" << "button" << "buttons" << "center" << "character"
 		<< "children" << "chunk" << "clip" << "close" << "color" << "colors" << "content"
@@ -129,12 +134,11 @@ Highlighter::Highlighter(CodeEditor::SyntaxType type, QTextDocument *parent)
 		<< "scroller" << "section" << "selection" << "separator" << "shadow" << "show" << "siblings"
 		<< "size" << "spacing" << "spread" << "stop" << "style" << "sub" << "subcontrol" << "tab"
 		<< "tear" << "tearoff" << "text" << "title" << "top" << "up" << "vertical" << "visited"
-		<< "weight" << "width" << "window" << "x" << "y";
+		<< "weight" << "width" << "window" << "overflow" << "display" << "cursor" << "white-space"
+		<< "clear" << "list-style";
 
-	// built-in and other popular objects + properties
-	m_builtin.clear();
-	m_builtin
-		<< "abs" << "acos" << "apply" << "arguments" << "arity" << "Array" << "asin" << "atan"
+// built-in and other popular objects + properties
+	m_builtin << "abs" << "acos" << "apply" << "arguments" << "arity" << "Array" << "asin" << "atan"
 		<< "atan2" << "bind" << "call" << "caller" << "ceil" << "charAt" << "charCodeAt" << "concat"
 		<< "constructor" << "cos" << "create" << "decodeURI" << "decodeURIComponent" << "defineProperties"
 		<< "defineProperty" << "document" << "E" << "encodeURI" << "encodeURIComponent" << "eval" << "every"
@@ -154,22 +158,19 @@ Highlighter::Highlighter(CodeEditor::SyntaxType type, QTextDocument *parent)
 		<< "__defineGetter__" << "__defineSetter__" << "__lookupGetter__" << "__lookupSetter__"
 		<< "__noSuchMethod__" << "__parent__" << "__proto__";
 
-	m_builtinCss.clear();
-	m_builtinCss
-		<< "a" << "b" << "black" << "body" << "bold" << "br" << "button" << "checked" << "darkgray"
+	m_builtinCss << "a" << "b" << "black" << "body" << "bold" << "br" << "button" << "checked" << "darkgray"
 		<< "dashed" << "dd" << "del" << "div" << "dl" << "dotted" << "double" << "dt" << "editable"
-		<< "em" << "fieldset" << "first" << "form" << "frame" << "frameset" << "gray" << "groove"
+		<< "em" << "fieldset" << "first" << "form" << "frame" << "frameset" << "gray" << "groove" << "x" << "y"
 		<< "h1" << "h2" << "h3" << "h4" << "h5" << "h6" << "head" << "hr" << "hsv" << "hsva" << "html"
 		<< "i" << "iframe" << "img" << "input" << "inset" << "italic" << "label" << "last" << "legend"
-		<< "li" << "link" << "middle" << "no-repeat" << "ol" << "optgroup" << "option" << "outset"
+		<< "li" << "link" << "middle" << "no-repeat" << "ol" << "optgroup" << "option" << "outset" << "z"
 		<< "p" << "pre" << "pt" << "px" << "qlineargradient" << "repeat" << "repeat-x" << "repeat-y"
 		<< "rgb" << "rgba" << "ridge" << "s" << "select" << "solid" << "span" << "strong" << "sub"
 		<< "summary" << "sup" << "table" << "tbody" << "td" << "textarea" << "tfoot" << "th" << "thead"
-		<< "tr" << "transparent" << "tt" << "u" << "ul"<< "unchecked" << "url" << "white";
+		<< "tr" << "transparent" << "tt" << "u" << "ul"<< "unchecked" << "url" << "white" << "no" << "hidden"
+		<< "block" << "pointer" << "normal" << "inline" << "auto" << "center" << "nowrap" << "both" << "none";
 
-	m_classes.clear();
-	m_classes
-		<< "QAbstractScrollArea" << "QCheckBox" << "QColumnView" << "QComboBox" << "QDateEdit"
+	m_classes << "QAbstractScrollArea" << "QCheckBox" << "QColumnView" << "QComboBox" << "QDateEdit"
 		<< "QTextBrowser" << "QDateTimeEdit" << "QDialog" << "QDialogButtonBox" << "QDockWidget"
 		<< "QDoubleSpinBox" << "QFrame" << "QGraphicsView" << "QGroupBox" << "QHeaderView"
 		<< "QLabel" << "QLineEdit"<< "QListView" << "QListWidget" << "QMainWindow" << "QMenu"
@@ -181,9 +182,7 @@ Highlighter::Highlighter(CodeEditor::SyntaxType type, QTextDocument *parent)
 		<< "QMdiArea" << "QDial" << "QCalendarWidget" << "QLCDNumber" << "Line" << "QDeclarativeView"
 		<< "QWebView" << "QAbstractItemView";
 
-	m_other.clear();
-	m_other
-		<< "closed" << "focus" << "hover" << "open" << "pad" << "pane" << "pressed" << "selected";
+	m_other << "closed" << "focus" << "hover" << "open" << "pad" << "pane" << "pressed" << "selected";
 
 	setSyntaxType(type);
 }
@@ -201,12 +200,11 @@ void Highlighter::setFormatFor(CodeEditor::HighlightType type, const QColor &col
 	m_formats[type].setFontWeight(bold ? QFont::Bold : QFont::Normal);
 	m_formats[type].setFontItalic(italic);
 	m_formats[type].setFontUnderline(underline);
-	rehighlight();
 }
 
 void Highlighter::setColor(CodeEditor::HighlightType type, const QColor &color)
 {
-	m_formats[type].setForeground(color);
+	setFormatFor(type, color);
 	rehighlight();
 }
 
@@ -222,12 +220,14 @@ void Highlighter::highlightBlock(const QString &text)
 	if (m_syntaxtype == CodeEditor::Html)
 		highlightBlockHtml(text);
 	else
-		highlightBlockJavaScriptAndCss(text);
+		highlightBlockJavaScriptAndCss(text, m_syntaxtype == CodeEditor::Css ? isCss : isJs);
 
-	if (!m_markString.isEmpty()) {
+	if (!m_markString.isEmpty())
+	{
 		int m_pos = 0;
 		int m_len = m_markString.length();
-		for (;;) {
+		for (;;)
+		{
 			m_pos = text.indexOf(m_markString, m_pos, m_markCaseSensitivity);
 			if (m_pos < 0)
 				break;
@@ -237,485 +237,516 @@ void Highlighter::highlightBlock(const QString &text)
 	}
 }
 
-void Highlighter::highlightBlockJavaScriptAndCss(const QString &text)
+void Highlighter::highlightBlockJavaScriptAndCss(const QString &text, int m_state)
 {
-	int state = previousBlockState();
+	int js_state = previousBlockState();
 	int len = text.length();
 	int start = 0;
 	int pos = 0;
-	while (pos <= len) {
+	while (pos <= len)
+	{
 		QChar ch = (pos < len) ? text.at(pos) : QChar();
 		QChar next = (pos < len - 1) ? text.at(pos + 1) : QChar();
-		switch (state) {
-		case Normal:
-		default:
-			start = pos;
-			setFormat(start, len, m_formats[CodeEditor::Normal]);
-			if (ch.isSpace()) {
-				++pos;
-			} else if (ch.isDigit()) {
-				++pos;
-				state = Number;
-			} else if (ch == '#') {
-				QRegExp expression("#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})");
-				int index = expression.indexIn(text, pos);
-				if (index >= 0) {
-					int length = expression.matchedLength();
-					setFormat(start, length, m_formats[CodeEditor::Identifier]);
-					pos += length;
-					state = Normal;
-				} else {
-					start = pos;
-					while (pos < len) {
-						if (QString("<>(){}[] ,;").contains(text.at(pos)) || text.at(pos) == '\n') {
-							state = Normal;
-							break;
-						}
-						++pos;
-					}
-					setFormat(start, pos - start, m_formats[CodeEditor::Operator]);
-				}
-			} else if (ch.isLetter() || ch == '_') {
-				++pos;
-				state = Identifier;
-			} else if (ch == '\'' || ch == '\"') {
-				++pos;
-				state = String;
-			} else if (ch == '/' && next == '/') {
-				pos = len;
-				setFormat(start, len, m_formats[CodeEditor::Comment]);
-			} else if (text.mid(pos, 3) == "/**") {
-				state = CommentDoc;
-			} else if (ch == '/' && next == '*') {
-				++pos;
-				++pos;
-				state = Comment;
-			} else if (ch == '/' && next != '*') {
-				++pos;
-				state = Regex;
-			} else {
-			//	if (!QString("(){}[]").contains(ch))
-				setFormat(start, 1, m_formats[CodeEditor::Operator]);
-				if (ch == '-' && m_syntaxtype == CodeEditor::Css)
-					setFormat(start, 1, m_formats[CodeEditor::KeywordCss]);
-				++pos;
-				state = Normal;
-			}
-			break;
-		case Number:
-			if (ch.isSpace() || !ch.isDigit()) {
-				setFormat(start, pos - start, m_formats[(m_syntaxtype == CodeEditor::Css ? CodeEditor::NumberCss : CodeEditor::Number)]);
-				state = Normal;
-			} else
-				++pos;
-			break;
-		case Identifier:
-			if (ch.isSpace() || !(ch.isLetter() || ch == '_')) {
-				QString token = text.mid(start, pos - start).trimmed();
-				if (m_keywords.contains(token))
-					setFormat(start, pos - start, m_formats[CodeEditor::Keyword]);
-				else if (m_keywordsCss.contains(token) && m_syntaxtype == CodeEditor::Css)
-					setFormat(start, pos - start, m_formats[CodeEditor::KeywordCss]);
-				else if (m_builtin.contains(token))
-					setFormat(start, pos - start, m_formats[CodeEditor::BuiltIn]);
-				else if (m_builtinCss.contains(token) && m_syntaxtype == CodeEditor::Css)
-					setFormat(start, pos - start, m_formats[CodeEditor::BuiltInCss]);
-				else if (m_classes.contains(token))
-					setFormat(start, pos - start, m_formats[(m_syntaxtype == CodeEditor::Css ? CodeEditor::ClassesCss : CodeEditor::Classes)]);
-				else if (m_other.contains(token))
-					setFormat(start, pos - start, m_formats[CodeEditor::Other]);
-				state = Normal;
-			} else
-				++pos;
-			break;
-		case String:
-			if (ch == text.at(start)) {
-				QChar prev = (pos > 0) ? text.at(pos - 1) : QChar();
-				++pos;
-				if (prev != '\\') {
-					setFormat(start, pos - start, m_formats[CodeEditor::String]);
-					state = Normal;
-				}
-			} else
-				++pos;
-			break;
-		case Comment:
-		case CommentDoc:
-			++pos;
-			if (ch == '*' && next == '/') {
-				++pos;
-				setFormat(start, pos - start, m_formats[(state == CommentDoc ? CodeEditor::CommentDoc : CodeEditor::Comment)]);
-				state = Normal;
-			}
-			break;
-		case Regex:
-			if (m_syntaxtype == CodeEditor::Css) {
-				++pos;
-				setFormat(start, pos - start, m_formats[CodeEditor::RegexCss]);
-				if (next == ')')
-					state = Normal;
-			} else {
-				if (ch == '/') {
-					QChar prev = (pos > 0) ? text.at(pos - 1) : QChar();
+		switch (js_state)
+		{
+			case jsNormal:
+			default:
+				start = pos;
+				setFormat(start, len, m_formats[CodeEditor::Normal]);
+				if (ch.isSpace()) {
 					++pos;
-					if (prev != '\\') {
-						setFormat(start, pos - start, m_formats[CodeEditor::Regex]);
-						state = Normal;
+				} else if (ch.isDigit()) {
+					++pos;
+					js_state = jsNumber;
+				} else if (ch == '-' && m_state == isCss) {
+					setFormat(start, 1, m_formats[CodeEditor::BuiltInCss]);
+					++pos;
+					js_state = jsNormal;
+				} else if (ch == '.' && m_state == isCss) {
+					start = pos;
+					while (pos < len)
+					{
+						if (QString("<>(){}[] ,;").contains(text.at(pos)) || text.at(pos) == '\n')
+						{
+							js_state = jsNormal;
+							break;
+						} else
+							++pos;
 					}
+					setFormat(start, pos - start, m_formats[CodeEditor::BuiltInCss]);
+				} else if (ch == '#') {
+					QRegExp expression("#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})");
+					int index = expression.indexIn(text, pos);
+					if (index >= 0)
+					{
+						int length = expression.matchedLength();
+						setFormat(start, length, m_formats[CodeEditor::Identifier]);
+						pos += length;
+						js_state = jsNormal;
+					} else {
+						start = pos;
+						while (pos < len) {
+							if (QString("<>(){}[] ,;").contains(text.at(pos)) || text.at(pos) == '\n') {
+								js_state = jsNormal;
+								break;
+							}
+							++pos;
+						}
+						setFormat(start, pos - start, m_formats[m_state == isCss ? CodeEditor::BuiltInCss : CodeEditor::Operator]);
+					}
+				} else if (ch.isLetter() || ch == '_') {
+					++pos;
+					js_state = jsIdentifier;
+				} else if (ch == '\'' || ch == '\"') {
+					++pos;
+					js_state = jsString;
+				} else if (ch == '/' && next == '/') {
+					pos = len;
+					setFormat(start, len, m_formats[CodeEditor::Comment]);
+				} else if (text.mid(pos, 3) == "/**") {
+					js_state = jsCommentDoc;
+				} else if (ch == '/' && next == '*') {
+					++pos;
+					++pos;
+					js_state = jsComment;
+				} else if (ch == '(' && next != '*' && m_state == isCss) {
+					++pos;
+					js_state = jsRegex;
+				} else if (ch == '/' && next != '*') {
+					++pos;
+					js_state = jsRegex;
+				} else {
+				//	if (!QString("(){}[]").contains(ch))
+					setFormat(start, 1, m_formats[CodeEditor::Operator]);
+					if (ch == '-' && m_state == isCss)
+						setFormat(start, 1, m_formats[CodeEditor::KeywordCss]);
+					++pos;
+					js_state = jsNormal;
+				}
+			break;
+			case jsNumber:
+				if (ch.isSpace() || !ch.isDigit())
+				{
+					setFormat(start, pos - start, m_formats[m_state == isCss ? CodeEditor::NumberCss : CodeEditor::Number]);
+					js_state = jsNormal;
 				} else
 					++pos;
-			}
+			break;
+			case jsIdentifier:
+				if (ch.isSpace() || !(ch.isLetter() || ch == '_'))
+				{
+					QString token = text.mid(start, pos - start).trimmed();
+					if (m_keywords.contains(token))
+						setFormat(start, pos - start, m_formats[CodeEditor::Keyword]);
+					if (m_keywordsCss.contains(token) && m_state == isCss)
+						setFormat(start, pos - start, m_formats[CodeEditor::KeywordCss]);
+					if (m_builtin.contains(token))
+						setFormat(start, pos - start, m_formats[CodeEditor::BuiltIn]);
+					if (m_builtinCss.contains(token) && m_state == isCss)
+						setFormat(start, pos - start, m_formats[CodeEditor::BuiltInCss]);
+					if (m_classes.contains(token))
+						setFormat(start, pos - start, m_formats[m_state == isCss ? CodeEditor::ClassesCss : CodeEditor::Classes]);
+					if (m_other.contains(token))
+						setFormat(start, pos - start, m_formats[CodeEditor::Other]);
+					js_state = jsNormal;
+				} else
+					++pos;
+			break;
+			case jsString:
+				if (ch == text.at(start))
+				{
+				//	QChar prev = (pos > 0) ? text.at(pos - 1) : QChar();
+					++pos;
+				//	if (prev != '\\') {
+						setFormat(start, pos - start, m_formats[CodeEditor::String]);
+						js_state = jsNormal;
+				//	}
+				} else
+					++pos;
+			break;
+			case jsComment:
+			case jsCommentDoc:
+				++pos;
+				if (ch == '*' && next == '/')
+				{
+					++pos;
+					setFormat(start, pos - start, m_formats[(js_state == CommentDoc ? CodeEditor::CommentDoc : CodeEditor::Comment)]);
+					js_state = jsNormal;
+				}
+			break;
+			case jsRegex:
+				if (m_state == isCss)
+				{
+					++pos;
+					setFormat(start, pos - start, m_formats[CodeEditor::RegexCss]);
+					setFormat(start, 1, m_formats[CodeEditor::Operator]);
+					if (next == ')')
+						js_state = jsNormal;
+				} else {
+					if (ch == '/')
+					{
+						QChar prev = (pos > 0) ? text.at(pos - 1) : QChar();
+						++pos;
+						if (prev != '\\') {
+							setFormat(start, pos - start, m_formats[CodeEditor::Regex]);
+							js_state = jsNormal;
+						}
+					} else
+						++pos;
+				}
 			break;
 		}
 	}
 
-	if (state == Comment)
+	if (js_state == jsComment)
 		setFormat(start, len, m_formats[CodeEditor::Comment]);
-	else if (state == CommentDoc)
+	else if (js_state == jsCommentDoc)
 		setFormat(start, len, m_formats[CodeEditor::CommentDoc]);
 	else
-		state = Normal;
+		js_state = jsNormal;
 
-	setCurrentBlockState(state);
+	setCurrentBlockState(js_state);
 }
 
 void Highlighter::highlightBlockHtml(const QString &text)
 {
-	int js_state = previousBlockState();
+	int c_state = -1;
 	int state = previousBlockState();
 	int len = text.length();
 	int start = 0;
 	int pos = 0;
-	while (pos < len) {
-		switch (state) {
-		case Normal:
-		case isJs:
-		case isCss:
-		default:
-			while (pos < len) {
-				QChar ch = text.at(pos);
-				QChar next = text.at(pos+1);
-				if ((text.mid(pos, 8) == "</script" || text.mid(pos, 7) == "</style") && js_state != jsString)
-					state = Normal;
+	isScript = false;
+	isStyle  = false;
 
-				if ((ch == '<' && state == Normal) || (text.mid(pos, 2) == "/*" && (state == isJs || state == isCss) && js_state != jsString)) {
-					isScript = false;
-					isStyle  = false;
-					if (text.mid(pos, 7) == "<script") {
-						state = isJs;
-						isScript = true;
-					}
-					if (text.mid(pos, 6) == "<style") {
-						state = isCss;
-						isStyle = true;
-					}
-
-					if (text.mid(pos, 3) == "/**" && (state == isJs || state == isCss)) {
-						state = CommentDoc;
-					} else if (text.mid(pos, 2) == "/*" && (state == isJs || state == isCss)) {
-						state = Comment;
-					} else if (text.mid(pos, 4) == "<!--" && state == Normal) {
-						state = Comment;
-					} else {
-						state = Identifier;
-						start = pos;
-						while (pos < len && text.at(pos) != ' ' && text.at(pos) != '>'
-								&& text.at(pos) != '\t' && text.mid(pos, 2) != "/>")
-							++pos;
-						if (text.mid(pos, 2) == "/>")
-							++pos;
-						setFormat(start, pos - start, m_formats[CodeEditor::KeywordHtml]);
-						break;
-					}
-					break;
-				} else if (ch == '&' && state == Normal) {
-					state = Regex;
+	while (pos < len)
+	{
+		switch (state)
+		{
+			case Normal:
+			case isJs:
+			case isCss:
+			default:
+				if (state == isJs || state == isCss)
+				{
+					int m_state = state;
 					start = pos;
-					while (pos < len && text.at(pos++) != ';');
-					setFormat(start, pos - start, m_formats[CodeEditor::RegexHtml]);
-					state = Normal;
-				} else if (ch == '.' && state == isCss && js_state != jsNormal && js_state != jsRegex) {
-					start = pos;
-					while (pos < len) {
-						if (QString("<>(){}[] ,;").contains(text.at(pos)) || text.at(pos) == '\n') {
-							state = isCss;
+					while (pos < len)
+					{
+						if (text.mid(pos, 3) == "/**")
+						{
+							tmp_state = m_state;
+							state = CommentDoc;
+							break;
+						} else if (text.mid(pos, 2) == "/*") {
+							tmp_state = m_state;
+							state = Comment;
+							break;
+						} else if (text.mid(pos, 8) == "</script" || text.mid(pos, 7) == "</style") {
+							state    = Normal;
+							isScript = false;
+							isStyle  = false;
 							break;
 						} else
 							++pos;
 					}
-					setFormat(start, pos - start, m_formats[CodeEditor::BuiltInCss]);
-				} else if (ch == '#' && state == isCss && js_state != jsNormal && js_state != jsRegex) {
-					start = pos;
-					while (pos < len) {
-						if (QString("<>(){}[] ,;").contains(text.at(pos)) || text.at(pos) == '\n') {
-							state = isCss;
-							break;
-						} else
-							++pos;
-					}
-					setFormat(start, pos - start, m_formats[CodeEditor::BuiltInCss]);
-				} else {
-				//-- ini js and css
-					if(state == isJs || state == isCss ) {
-						next = text.at(pos+1);
-						switch (js_state) {
-						case jsNormal:
-						default:
-							start = pos;
-							setFormat(start, len, m_formats[CodeEditor::Normal]);
-							if (ch.isSpace()) {
-								++pos;
-							} else if (ch.isDigit()) {
-								++pos;
-								js_state = jsNumber;
-							} else if (ch == '#' && state == isCss) {
-								QRegExp expression("#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})");
-								int index = expression.indexIn(text, pos);
-								if (index >= 0) {
-									pos = index;
-									int length = expression.matchedLength();
-									setFormat(pos, length, m_formats[CodeEditor::Identifier]);
-									pos += length;
-								} else
-									++pos;
-								js_state = jsNormal;
-							} else if (ch.isLetter() || ch == '_') {
-								++pos;
-								js_state = jsIdentifier;
-							} else if (ch == '\'' || ch == '\"') {
-								++pos;
-								js_state = jsString;
-							} else if (ch == '/' && next == '/') {
-								pos = len;
-								setFormat(start, len, m_formats[CodeEditor::Comment]);
-							} else if (ch == '/' && next != '*') {
-								++pos;
-								js_state = jsRegex;
-							} else {
-							//	if (!QString("(){}[]").contains(ch))
-								setFormat(start, 1, m_formats[CodeEditor::Operator]);
-								if (ch == '-' && state == isCss)
-									setFormat(start, 1, m_formats[CodeEditor::KeywordCss]);
-								++pos;
-								js_state = jsNormal;
-							}
-							break;
-						case jsNumber:
-							if (ch.isSpace() || !ch.isDigit()) {
-								setFormat(start, pos - start, m_formats[(state == isCss ? CodeEditor::NumberCss : CodeEditor::Number)]);
-								js_state = jsNormal;
-							} else
-								++pos;
-							break;
-						case jsIdentifier:
-							if (ch.isSpace() || !(ch.isDigit() || ch.isLetter() || ch == '_')) {
-								QString token = text.mid(start, pos - start).trimmed();
-								if (m_keywords.contains(token))
-									setFormat(start, pos - start, m_formats[CodeEditor::Keyword]);
-								else if (m_keywordsCss.contains(token) && state == isCss)
-									setFormat(start, pos - start, m_formats[CodeEditor::KeywordCss]);
-								else if (m_builtin.contains(token))
-									setFormat(start, pos - start, m_formats[CodeEditor::BuiltIn]);
-								else if (m_builtinCss.contains(token) && state == isCss)
-									setFormat(start, pos - start, m_formats[CodeEditor::BuiltInCss]);
-								else if (m_classes.contains(token))
-									setFormat(start, pos - start, m_formats[(state == isCss ? CodeEditor::ClassesCss : CodeEditor::Classes)]);
-								else if (m_other.contains(token))
-									setFormat(start, pos - start, m_formats[CodeEditor::Other]);
-								js_state = jsNormal;
-							} else
-								++pos;
-							break;
-						case jsString:
-							if (ch == text.at(start)) {
-								QChar prev = (pos > 0) ? text.at(pos - 1) : QChar();
-								++pos;
-								if (prev != '\\') {
-									setFormat(start, pos - start, m_formats[CodeEditor::String]);
-									js_state = jsNormal;
-								}
-							} else
-								++pos;
-							break;
-						case jsRegex:
-							if (state == isCss) {
-								++pos;
-								setFormat(start, pos - start, m_formats[CodeEditor::RegexCss]);
-								if (next == ')')
-									js_state = jsNormal;
-							} else {
-								if (ch == '/') {
-									QChar prev = (pos > 0) ? text.at(pos - 1) : QChar();
-									++pos;
-									if (prev != '\\') {
-										setFormat(start, pos - start, m_formats[CodeEditor::Regex]);
-										js_state = jsNormal;
-									}
-								} else
-									++pos;
-							}
-							break;
-						}
-					} else {
-						// No tag, comment or entity started, continue...
-						++pos;
-					}
-				//-- fin js and css
-				}
-			}
-			break;
-		case CommentDoc:
-		case Comment:
-			start = pos;
-			while (pos < len) {
-				if (text.mid(pos, 2) == "*/" || text.mid(pos, 3) == "-->") {
-					if (text.mid(pos, 2) == "*/")
-						pos += 2;
+					if (state == Normal)
+						setFormat(start, pos - start, m_formats[CodeEditor::Normal]);
 					else
-						pos += 3;
-					setFormat(start, pos - start, m_formats[(state == CommentDoc ? CodeEditor::CommentDoc : CodeEditor::Comment)]);
-					state = Normal;
-					break;
-				} else
-					++pos;
-				setFormat(start, pos - start, m_formats[(state == CommentDoc ? CodeEditor::CommentDoc : CodeEditor::Comment)]);
-			}
-			break;
-		case Identifier:
-			QChar quote = QChar::Null;
-			while (pos < len) {
-				QChar ch = text.at(pos);
-				if (quote.isNull()) {
-					start = pos;
-					if (ch == '\'' || ch == '"') {
-						quote = ch;
-					} else if (ch == '>') {
-						++pos;
-						setFormat(start, pos - start, m_formats[CodeEditor::KeywordHtml]);
-						if(isScript)
-							state = isJs;
-						else if(isStyle)
-							state = isCss;
-						else
-							state = Normal;
-						break;
-					} else if (text.mid(pos, 2) == "/>") {
-						pos += 2;
-						setFormat(start, pos - start, m_formats[CodeEditor::KeywordHtml]);
-						if(isScript)
-							state = isJs;
-						else if(isStyle)
-							state = isCss;
-						else
-							state = Normal;
-						break;
-					} else if (ch != ' ' && text.at(pos) != '\t') {
-						// Tag not ending, not a quote and no whitespace, so
-						// we must be dealing with an attribute.
-						++pos;
-						while (pos < len && text.at(pos) != ' '
-								&& text.at(pos) != '\t' && text.at(pos) != '=')
+						highlightBlockJavaScriptAndCss(text, m_state);
+				} else {
+					while (pos < len)
+					{
+						QChar ch = text.at(pos);
+						if ((ch == '<' && state == Normal) || (text.mid(pos, 2) == "/*" && (state == isJs || state == isCss)))
+						{
+							if (text.mid(pos, 7) == "<script" || text.mid(pos, 6) == "<style")
+							{
+								if (text.mid(pos, 7) == "<script")
+									isScript = true;
+								if (text.mid(pos, 6) == "<style")
+									isStyle = true;
+							}
+
+							if (text.mid(pos, 3) == "/**" && (state == isJs || state == isCss))
+							{
+								tmp_state = state;
+								state = CommentDoc;
+							} else if (text.mid(pos, 2) == "/*" && (state == isJs || state == isCss)) {
+								tmp_state = state;
+								state = Comment;
+							} else if (text.mid(pos, 4) == "<!--") {
+								state = Comment;
+							} else {
+								state = Identifier;
+								start = pos;
+								while (pos < len && text.at(pos) != ' ' && text.at(pos) != '>' && text.at(pos) != '\t' && text.mid(pos, 2) != "/>")
+									++pos;
+								if (text.mid(pos, 2) == "/>")
+									++pos;
+								setFormat(start, pos - start, m_formats[CodeEditor::KeywordHtml]);
+								break;
+							}
+							break;
+						} else if (ch == '&' && state == Normal) {
+							start = pos;
+							while (pos < len && text.at(pos++) != ';')
+								;
+							setFormat(start, pos - start, m_formats[CodeEditor::RegexHtml]);
+						} else {
+							// No tag, comment or entity started, continue...
 							++pos;
-						setFormat(start, pos - start, m_formats[CodeEditor::BuiltInHtml]);
-						start = pos;
+						}
 					}
-				} else if (ch == quote) {
-					quote = QChar::Null;
-					// Anything quoted is a value
-					setFormat(start, pos - start+1, m_formats[CodeEditor::StringHtml]);
 				}
-				++pos;
-			}
+			break;
+			case CommentDoc:
+			case Comment:
+				c_state = state;
+				start = pos;
+				while (pos < len)
+				{
+					bool isCode = (tmp_state == isJs || tmp_state == isCss) ? true : false;
+					if (text.mid(pos, 3) == "-->" || ((text.mid(pos, 2) == "*/" || text.mid(pos, 8) == "</script" || text.mid(pos, 7) == "</style") && isCode))
+					{
+						if (text.mid(pos, 2) == "*/" && isCode)
+						{
+							pos += 2;
+						} else if (text.mid(pos, 8) == "</script" && isCode) {
+							pos -= 8;
+						} else if (text.mid(pos, 7) == "</style" && isCode) {
+							pos -= 7;
+						} else
+							pos += 3;
+
+						if (tmp_state == isJs)
+							state = isJs;
+						else if (tmp_state == isCss)
+							state = isCss;
+						else
+							state = Normal;
+						break;
+					} else
+						++pos;
+				}
+				setFormat(start, pos - start, m_formats[(c_state == CommentDoc ? CodeEditor::CommentDoc : CodeEditor::Comment)]);
+			break;
+			case Identifier:
+				QChar quote = QChar::Null;
+				while (pos < len)
+				{
+					QChar ch = text.at(pos);
+					if (quote.isNull())
+					{
+						start = pos;
+						if (ch == '\'' || ch == '"')
+						{
+							quote = ch;
+						} else if (ch == '>') {
+							++pos;
+							setFormat(start, pos - start, m_formats[CodeEditor::KeywordHtml]);
+							if (isScript)
+								state = isJs;
+							else if (isStyle)
+								state = isCss;
+							else
+								state = Normal;
+							break;
+						} else if (text.mid(pos, 2) == "/>") {
+							pos += 2;
+							setFormat(start, pos - start, m_formats[CodeEditor::KeywordHtml]);
+							state = Normal;
+							break;
+						} else if (ch != ' ' && text.at(pos) != '\t') {
+							// Tag not ending, not a quote and no whitespace, so
+							// we must be dealing with an attribute.
+							++pos;
+							while (pos < len && text.at(pos) != ' ' && text.at(pos) != '\t' && text.at(pos) != '=')
+								++pos;
+							setFormat(start, pos - start, m_formats[CodeEditor::BuiltInHtml]);
+							start = pos;
+						}
+					} else if (ch == quote) {
+						quote = QChar::Null;
+						// Anything quoted is a value
+						setFormat(start, pos - start + 1, m_formats[CodeEditor::StringHtml]);
+					}
+					++pos;
+				}
 			break;
 		}
 	}
 
-	setCurrentBlockState(js_state);
 	setCurrentBlockState(state);
 }
 
-const int sepLine = 8;
 class LineNumberArea : public QWidget
 {
+private:
+	struct BlockInfo {
+		int position;
+		int number;
+	};
+
 public:
-	LineNumberArea(CodeEditor *editor) : QWidget(editor) {
-		m_editor = editor;
+	LineNumberArea(QWidget *parent) : QWidget(parent)
+	{
+		backgroundColor = QColor("#2b3337");
+		lineNumberColor = QColor("#81969a");
 	}
 
-	QSize sizeHint() const {
-		return QSize(m_editor->lineNumberAreaWidth(), 0);
-	}
+	QVector<BlockInfo> lineNumbers;
+	QFont font;
+	QColor backgroundColor;
+	QColor lineNumberColor;
 
 protected:
-	void paintEvent(QPaintEvent *event) {
-		m_editor->lineNumberAreaPaintEvent(event);
+	void paintEvent(QPaintEvent *event)
+	{
+		QPainter painter(this);
+		painter.fillRect(event->rect(), backgroundColor);
+		painter.setPen(lineNumberColor);
+		painter.setFont(font);
+
+		int fontheight = QFontMetrics(font).height();
+		const int listSize = lineNumbers.size();
+		for (int i = 0; i < listSize; ++i)
+			painter.drawText(0, lineNumbers.at(i).position, width() - 4, fontheight, Qt::AlignRight, QString::number(lineNumbers.at(i).number));
 	}
 
-private:
-	CodeEditor *m_editor;
 };
 
 CodeEditor::CodeEditor(QWidget *parent, SyntaxType type)
 	: QPlainTextEdit(parent)
 {
-	QFont font;
-	font.setFamily("Courier");
-	font.setFixedPitch(true);
-	font.setPointSize(11);
-	setFont(font);
-
-	connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
-	connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
-	connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-
 	lineNumberArea  = new LineNumberArea(this);
 	highlighter     = new Highlighter(type, document());
 	showLineNumbers = true;
 	textWrap        = false;
 
+	complete = new QCompleter(this);
+	complete->setWidget(this);
+	complete->setCompletionMode(QCompleter::PopupCompletion);
+	complete->setCaseSensitivity(Qt::CaseInsensitive);
+	complete->setWrapAround(false);
+	connect(complete, SIGNAL(activated(QString)), this, SLOT(insertCompletion(QString)));
+
+	QFont textFont = font();
+#if defined(Q_OS_MAC)
+	textFont.setPointSize(12);
+	textFont.setFamily("Monaco");
+#elif defined(Q_OS_UNIX)
+	textFont.setFamily("Monospace");
+#else
+	textFont.setPointSize(11);
+	textFont.setFamily("Courier");
+#endif
+	setFont(textFont);
+	lineNumberArea->font = textFont;
+
 	setTabStopWidth(40);
-	setTextWrapEnabled(false);
+	setTextWrapEnabled(textWrap);
 	setSyntaxType(type);
+
+	setFormatFor(Normal, QColor("#e0e2e4"));
+	setColor(Background, QColor("#232a2d"));
+	setColor(NumberArea, QColor("#2b3337"));
+	setColor(LineNumber, QColor("#81969a"));
+	setColor(LineSelect, QColor("#2f393c"));
+
+	connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+	connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberArea()));
+	connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
 }
 
 CodeEditor::~CodeEditor()
 {
 	delete highlighter;
 	delete lineNumberArea;
+	delete complete;
+}
+
+void CodeEditor::resizeEvent(QResizeEvent *event)
+{
+	QPlainTextEdit::resizeEvent(event);
+	updateLineNumberArea();
+}
+
+void CodeEditor::keyPressEvent(QKeyEvent *event)
+{
+	QTextCursor tc = textCursor();
+	tc.select(QTextCursor::WordUnderCursor);
+
+	if (complete && complete->popup()->isVisible())
+	{
+		// The following keys are forwarded by the completer to the widget
+		switch (event->key())
+		{
+			case Qt::Key_Enter:
+			case Qt::Key_Return:
+			case Qt::Key_Escape:
+			case Qt::Key_Tab:
+			case Qt::Key_Backtab:
+				event->ignore();
+				return; // let the completer do default behavior
+			default:
+				break;
+		}
+	}
+
+	bool isShortcut = ((event->modifiers() & Qt::ControlModifier) && event->key() == Qt::Key_Space); // CTRL+Space
+	if (!complete || !isShortcut) // do not process the shortcut when we have a completer
+		QPlainTextEdit::keyPressEvent(event);
+
+	const bool ctrlOrShift = event->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
+	if (!complete || (ctrlOrShift && event->text().isEmpty()))
+		return;
+
+	static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
+	bool hasModifier = (event->modifiers() != Qt::NoModifier) && !ctrlOrShift;
+	QString completionPrefix = tc.selectedText();
+
+	if (!isShortcut && (hasModifier || event->text().isEmpty()|| completionPrefix.length() < 3 || eow.contains(event->text().right(1))))
+	{
+		complete->popup()->hide();
+		return;
+	}
+
+	if (completionPrefix != complete->completionPrefix())
+	{
+		complete->setCompletionPrefix(completionPrefix);
+		complete->popup()->setCurrentIndex(complete->completionModel()->index(0, 0));
+	}
+
+	QRect cr = cursorRect();
+	cr.setWidth(complete->popup()->sizeHintForColumn(0) + complete->popup()->verticalScrollBar()->sizeHint().width());
+	complete->complete(cr); // popup it up!
 }
 
 void CodeEditor::setSyntaxType(SyntaxType type)
 {
 	syntaxtype = type;
-	if (syntaxtype == Html || syntaxtype == Css)
-		setColor(Background, QColor("#ffffff"));
-	else
-		setColor(Background, QColor("#f2f4ff"));
-	setColor(NumberArea, QColor("#e4e4e4"));
-	setColor(LineNumber, QColor("#808080"));
-	setColor(LineSelect, QColor("#e0f0ff"));
-
 	highlighter->setSyntaxType(type);
-	updateLineNumberAreaWidth(0);
 	highlightCurrentLine();
 }
 
 void CodeEditor::setFormatFor(CodeEditor::HighlightType type, const QColor &colorFg, const QColor &colorBg, bool bold, bool italic, bool underline)
 {
-	if (type == Normal) {
+	if (type == Normal)
+	{
 		QPalette pal = palette();
 		pal.setColor(QPalette::Text, colorFg);
 		setPalette(pal);
 	}
+
 	highlighter->setFormatFor(type, colorFg, colorBg, bold, italic, underline);
 	highlighter->rehighlight();
-	updateLineNumberAreaWidth(0);
 	highlightCurrentLine();
 }
 
 void CodeEditor::setColor(HighlightType type, const QColor &color)
 {
-	if (type == Background) {
+	if (type == Background)
+	{
 		QPalette pal = palette();
 		pal.setColor(QPalette::Base, color);
 		setPalette(pal);
@@ -724,14 +755,39 @@ void CodeEditor::setColor(HighlightType type, const QColor &color)
 		pal.setColor(QPalette::Text, color);
 		setPalette(pal);
 		highlighter->setColor(Normal, color);
-	} else if (type == NumberArea)
-		numberAreaColor = color;
-	else if (type == LineNumber)
-		lineNumberColor = color;
-	else if (type == LineSelect)
+	} else if (type == NumberArea) {
+		lineNumberArea->backgroundColor = color;
+		updateLineNumberArea();
+	} else if (type == LineNumber) {
+		lineNumberArea->lineNumberColor = color;
+		updateLineNumberArea();
+	} else if (type == LineSelect) {
 		lineSelectColor = color;
-	else
+		highlightCurrentLine();
+	} else {
 		highlighter->setColor(type, color);
+		highlightCurrentLine();
+	}
+}
+
+void CodeEditor::setListWordsCompletion(const QString& fileName)
+{
+	if (!fileName.isEmpty())
+	{
+		QStringList words;
+		QFile file(fileName);
+		if (file.open(QFile::ReadOnly) && !fileName.isEmpty())
+		{
+			while (!file.atEnd())
+			{
+				QByteArray line = file.readLine();
+				if (!line.isEmpty())
+					words << line.trimmed();
+			}
+			QStringListModel *model_list_words = new QStringListModel(words, complete);
+			complete->setModel(model_list_words);
+		}
+	}
 }
 
 void CodeEditor::mark(const QString &str, Qt::CaseSensitivity sens)
@@ -742,9 +798,7 @@ void CodeEditor::mark(const QString &str, Qt::CaseSensitivity sens)
 void CodeEditor::setLineNumbersVisible(bool visible)
 {
 	showLineNumbers = visible;
-	updateLineNumberAreaWidth(0);
-	highlightCurrentLine();
-	lineNumberArea->setVisible(showLineNumbers);
+	updateLineNumberArea();
 }
 
 bool CodeEditor::isLineNumbersVisible() const
@@ -763,81 +817,89 @@ bool CodeEditor::isTextWrapEnabled() const
 	return textWrap;
 }
 
-void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
+void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
 {
-	QPainter painter(lineNumberArea);
-	painter.fillRect(event->rect(), numberAreaColor);
-	painter.setPen(lineNumberColor);
-	painter.setFont(font);
-
-	QTextBlock block = firstVisibleBlock();
-	int blockNumber = block.blockNumber();
-	int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
-	int bottom = top + (int) blockBoundingRect(block).height();
-	while (block.isValid() && top <= event->rect().bottom()) {
-		if (block.isVisible() && bottom >= event->rect().top()) {
-			QString number = QString::number(blockNumber + 1);
-			painter.drawText(0, top, lineNumberArea->width()-4, fontMetrics().height(),
-							 Qt::AlignRight, number);
-		}
-		block = block.next();
-		top = bottom;
-		bottom = top + (int) blockBoundingRect(block).height();
-		++blockNumber;
-	}
+	Q_UNUSED(rect)
+	if (dy != 0)
+		updateLineNumberArea();
 }
 
-int CodeEditor::lineNumberAreaWidth()
+void CodeEditor::updateLineNumberArea()
 {
+	QRect cr = contentsRect();
+	if (!showLineNumbers)
+	{
+		lineNumberArea->hide();
+		setViewportMargins(0, 0, 0, 0);
+		lineNumberArea->setGeometry(cr.left(), cr.top(), 0, cr.height());
+		return;
+	}
+
+	lineNumberArea->font = this->font();
+	lineNumberArea->show();
+
 	int space = 0;
 	if (showLineNumbers)
 	{
-		int digits = 1;
-		int max = qMax(1, blockCount());
-		while (max >= 10) {
-			max /= 10;
-			++digits;
-		}
-		space = sepLine + fontMetrics().width(QLatin1Char('9')) * digits;
+		int digits = 3;
+		int maxLines = qMax(1, blockCount());
+		for (int number = 10; number <= maxLines; number *= 10)
+			if (number > 999) ++digits;
+		space += 8 + fontMetrics().width('9') * digits;
 	}
-	return space;
-}
 
-void CodeEditor::resizeEvent(QResizeEvent *e)
-{
-	QPlainTextEdit::resizeEvent(e);
-	QRect cr = contentsRect();
-	lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
-}
+	setViewportMargins(space, 0, 0, 0);
+	lineNumberArea->setGeometry(cr.left(), cr.top(), space, cr.height());
+	QRectF lineNumberAreaRect(cr.left(), cr.top(), space, cr.height());
 
-void CodeEditor::updateLineNumberAreaWidth(int /* newBlockCount */)
-{
-	setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
-}
-
-void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
-{
-	if (dy)
-		lineNumberArea->scroll(0, dy);
-	else
-		lineNumberArea->update(0, rect.y(), lineNumberArea->width(), rect.height());
-
-	if (rect.contains(viewport()->rect()))
-		updateLineNumberAreaWidth(0);
+	QTextBlock block = firstVisibleBlock();
+	int index = 0;
+	while (block.isValid())
+	{
+		if (block.isVisible())
+		{
+			QRectF rect = blockBoundingGeometry(block).translated(contentOffset());
+			if (lineNumberAreaRect.intersects(rect))
+			{
+				if (lineNumberArea->lineNumbers.count() >= index)
+					lineNumberArea->lineNumbers.resize(index + 1);
+				lineNumberArea->lineNumbers[index].position = rect.top();
+				lineNumberArea->lineNumbers[index].number   = block.blockNumber() + 1;
+				++index;
+			}
+			if (rect.top() > lineNumberAreaRect.bottom())
+				break;
+		}
+		block = block.next();
+	}
+	lineNumberArea->lineNumbers.resize(index);
+	lineNumberArea->update();
 }
 
 void CodeEditor::highlightCurrentLine()
 {
-	if (isReadOnly()) {
-		setExtraSelections(QList<QTextEdit::ExtraSelection>());
-	} else {
+	QList<QTextEdit::ExtraSelection> extraSelections;
+
+	if (!isReadOnly())
+	{
 		QTextEdit::ExtraSelection selection;
+
 		selection.format.setBackground(lineSelectColor);
 		selection.format.setProperty(QTextFormat::FullWidthSelection, true);
 		selection.cursor = textCursor();
 		selection.cursor.clearSelection();
-		QList<QTextEdit::ExtraSelection> extraSelections;
 		extraSelections.append(selection);
-		setExtraSelections(extraSelections);
 	}
+
+	setExtraSelections(extraSelections);
+}
+
+void CodeEditor::insertCompletion(const QString& completion)
+{
+	QTextCursor tc = textCursor();
+	int extra = completion.length() - complete->completionPrefix().length();
+	tc.movePosition(QTextCursor::Left);
+	tc.movePosition(QTextCursor::EndOfWord);
+	tc.insertText(completion.right(extra));
+	setTextCursor(tc);
 }

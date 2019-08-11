@@ -3,7 +3,7 @@
  * GR-lida by Monthy
  *
  * This file is part of GR-lida is a Frontend for DOSBox, ScummVM and VDMSound
- * Copyright (C) 2006-2014 Pedro A. Garcia Rosado Aka Monthy
+ * Copyright (C) 2006-2018 Pedro A. Garcia Rosado Aka Monthy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ Qt::ItemFlags QCheckComboModel::flags(const QModelIndex &index) const
 QVariant QCheckComboModel::data(const QModelIndex &index, int role) const
 {
 	QVariant value = QStandardItemModel::data(index, role);
-	if( index.isValid() && role == Qt::CheckStateRole && !value.isValid() )
+	if (index.isValid() && role == Qt::CheckStateRole && !value.isValid())
 		value = Qt::Unchecked;
 	return value;
 }
@@ -50,7 +50,7 @@ QVariant QCheckComboModel::data(const QModelIndex &index, int role) const
 bool QCheckComboModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
 	bool ok = QStandardItemModel::setData(index, value, role);
-	if( ok && role == Qt::CheckStateRole )
+	if (ok && role == Qt::CheckStateRole)
 	{
 		emit dataChanged(index, index);
 		emit checkStateChanged();
@@ -60,9 +60,9 @@ bool QCheckComboModel::setData(const QModelIndex &index, const QVariant &value, 
 // FIN QQCheckComboModel -----------------------------------------------------------------------------------------
 
 // INI QCheckComboBox -------------------------------------------------------------------------------------------
- QCheckComboBox::QCheckComboBox(QWidget *parent) : QComboBox(parent)
+QCheckComboBox::QCheckComboBox(QWidget *parent) : QComboBox(parent)
 {
-	setModel( new QCheckComboModel(this) );
+	setModel(new QCheckComboModel(this));
 
 	connect(this, SIGNAL(activated(int)), this, SLOT(toggleCheckState(int)));
 	connect(model(), SIGNAL(checkStateChanged()), this, SLOT(updateText()));
@@ -79,6 +79,7 @@ bool QCheckComboModel::setData(const QModelIndex &index, const QVariant &value, 
 	containerMousePress = false;
 
 	connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(updateCheckedItems()));
+	connect(lineEdit, SIGNAL(textEdited(QString)), this, SIGNAL(textChanged(QString)));
 
 	view()->installEventFilter(this);
 	view()->window()->installEventFilter(this);
@@ -93,25 +94,26 @@ QCheckComboBox::~QCheckComboBox()
 
 bool QCheckComboBox::eventFilter(QObject *object, QEvent *event)
 {
-	switch ( event->type() )
+	switch (event->type())
 	{
 		case QEvent::KeyPress:
 		case QEvent::KeyRelease:
 		{
 			QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
-			if( object == this && (keyEvent->key() == Qt::Key_Up || keyEvent->key() == Qt::Key_Down) )
+			if (object == this && (keyEvent->key() == Qt::Key_Up || keyEvent->key() == Qt::Key_Down))
 			{
 				showPopup();
 				return true;
 			}
-			else if( keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Escape )
+			else if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Escape)
 			{
 				// it is important to call QComboBox implementation
 				this->QComboBox::hidePopup();
-				if( keyEvent->key() != Qt::Key_Escape )
+				if (keyEvent->key() != Qt::Key_Escape)
 					return true;
 			}
 		}
+		break;
 		case QEvent::MouseButtonPress:
 			containerMousePress = (object == view()->window());
 		break;
@@ -119,7 +121,7 @@ bool QCheckComboBox::eventFilter(QObject *object, QEvent *event)
 			containerMousePress = false;
 		break;
 		default:
-			break;
+		break;
 	}
 	return false;
 }
@@ -127,10 +129,13 @@ bool QCheckComboBox::eventFilter(QObject *object, QEvent *event)
 void QCheckComboBox::updateText()
 {
 	QStringList items = checkedItems();
-	if( items.isEmpty() )
-		setEditText(default_text);
+	QString text = "";
+	if (items.isEmpty())
+		text = default_text;
 	else
-		setEditText(items.join(item_sep));
+		text = items.join(item_sep);
+
+	setEditText(text);
 
 	emit checkedItemsChanged(items);
 }
@@ -138,11 +143,12 @@ void QCheckComboBox::updateText()
 void QCheckComboBox::updateCheckedItems()
 {
 	const QStringList items = lineEdit()->text().split(item_sep, QString::SkipEmptyParts);
-	foreach(const QString &item, items)
+	const int listItemSize = items.size();
+	for (int i = 0; i < listItemSize; ++i)
 	{
-		int index = findText(item);
-		if( index == -1 )
-			addItem(item);
+		int index = findText(items.at(i));
+		if (index == -1)
+			addItem(items.at(i));
 	}
 	setCheckedItems(items);
 }
@@ -150,16 +156,17 @@ void QCheckComboBox::updateCheckedItems()
 void QCheckComboBox::toggleCheckState(int index)
 {
 	QVariant value = itemData(index, Qt::CheckStateRole);
-	if( value.isValid() )
+	if (value.isValid())
 	{
 		Qt::CheckState state = static_cast<Qt::CheckState>(value.toInt());
 		setItemData(index, (state == Qt::Unchecked ? Qt::Checked : Qt::Unchecked), Qt::CheckStateRole);
+		emit textChanged(lineEdit()->text());
 	}
 }
 
 void QCheckComboBox::hidePopup()
 {
-	if( containerMousePress )
+	if (containerMousePress)
 		this->QComboBox::hidePopup();
 }
 
@@ -176,12 +183,13 @@ void QCheckComboBox::setItemCheckState(int index, Qt::CheckState state)
 QStringList QCheckComboBox::checkedItems() const
 {
 	QStringList items;
-	if( model() )
+	if (model())
 	{
 		QModelIndex index = model()->index(0, modelColumn(), rootModelIndex());
 		QModelIndexList indexes = model()->match(index, Qt::CheckStateRole, Qt::Checked, -1, Qt::MatchExactly);
-		foreach(const QModelIndex &index, indexes)
-			items += index.data().toString();
+		const int listIndexesSize = indexes.size();
+		for (int i = 0; i < listIndexesSize; ++i)
+			items += indexes.at(i).data().toString();
 	}
 	return items;
 }
@@ -194,12 +202,13 @@ QString QCheckComboBox::getCheckedItems() const
 QString QCheckComboBox::getCheckedItemsUserData() const
 {
 	QStringList items;
-	if( model() )
+	if (model())
 	{
 		QModelIndex index = model()->index(0, modelColumn(), rootModelIndex());
 		QModelIndexList indexes = model()->match(index, Qt::CheckStateRole, Qt::Checked, -1, Qt::MatchExactly);
-		foreach(const QModelIndex &index, indexes)
-			items += itemData(index.row()).toString();
+		const int listIndexesSize = indexes.size();
+		for (int i = 0; i < listIndexesSize; ++i)
+			items += itemData(indexes.at(i).row()).toString();
 	}
 
 	return ""+ items.join(item_sep);
@@ -208,7 +217,7 @@ QString QCheckComboBox::getCheckedItemsUserData() const
 QStringList QCheckComboBox::items() const
 {
 	QStringList items;
-	if( model() )
+	if (model())
 	{
 		const int row_count = model()->rowCount();
 		for (int i = 0; i < row_count; ++i)
@@ -218,6 +227,11 @@ QStringList QCheckComboBox::items() const
 		}
 	}
 	return items;
+}
+
+void QCheckComboBox::emitTextChanged(const QString &text)
+{
+	emit textChanged(text);
 }
 
 void QCheckComboBox::setCheckedItems(const QStringList &items)
@@ -230,11 +244,12 @@ void QCheckComboBox::setCheckedItems(const QStringList &items)
 void QCheckComboBox::setCheckedItems(const QString &items)
 {
 	const QStringList items_list = items.split(item_sep, QString::SkipEmptyParts);
-	foreach(const QString &item, items_list)
+	const int listItemsSize = items_list.size();
+	for (int i = 0; i < listItemsSize; ++i)
 	{
-		int index = findText(item);
-		if( index == -1 )
-			addItem(item);
+		int index = findText(items_list.at(i));
+		if (index == -1)
+			addItem(items_list.at(i));
 	}
 	setCheckedItems(items_list);
 }
@@ -242,11 +257,12 @@ void QCheckComboBox::setCheckedItems(const QString &items)
 void QCheckComboBox::setCheckedItemsUserData(const QString &items)
 {
 	const QStringList items_list = items.split(item_sep, QString::SkipEmptyParts);
-	foreach(const QString &item, items_list)
+	const int listItemsSize = items_list.size();
+	for (int i = 0; i < listItemsSize; ++i)
 	{
-		int index = findData(item);
-		if( index == -1 )
-			addItem(item);
+		int index = findData(items_list.at(i));
+		if (index == -1)
+			addItem(items_list.at(i));
 	}
 	const int row_count = model()->rowCount();
 	for (int i = 0; i < row_count; ++i)
@@ -260,7 +276,7 @@ QString QCheckComboBox::separator() const
 
 void QCheckComboBox::setSeparator(const QString &sep)
 {
-	if( item_sep != sep )
+	if (item_sep != sep)
 	{
 		item_sep = sep;
 		updateText();
@@ -274,7 +290,7 @@ QString QCheckComboBox::defaultText() const
 
 void QCheckComboBox::setDefaultText(const QString &text)
 {
-	if( default_text != text )
+	if (default_text != text)
 	{
 		default_text = text;
 		updateText();
