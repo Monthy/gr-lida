@@ -1,10 +1,10 @@
 
 -  Dependencies / Dependencias
 -----------------------------------
-  * Qt4
+  * Qt4/Qt5
   * Phonon
   * Zlib
-  * Poppler-Qt4
+  * Poppler-Qt4/Poppler-Qt5
 
 
 -  Basic installation

@@ -3,6 +3,26 @@
 -----------------------------------
 version (DD-MM-AAAA)
 
+0.12.0 (18-08-2018)
+- Soporte para importar juegos de DBGL.
+- Soporte para tener guardada la caratula frontal, trasera, lado izquierdo, lado derecho, superior e inferior.
+- Ahora puede descargar mas imágenes de webs como MobyGame para completar la información del juego.
+- PictureFlow ahora puede mostrar el titulo del juego y un icono ya sea como favorito, original o el propio icono del juego.
+- Icono extra en el PictureFlow
+- Añadido control para saber que letra ya se ha usado en los montajes del DOSBox
+- Añadido sistema de Shortcut para filtrar la lista de juegos ya sea acción, aventura, idioma, etc sin tener que recurrir al menú de navegación.
+- Correcciones ortográficas
+- Actualización de los distintos idiomas
+- Mejora comprobación de actualizaciones
+- Corrección al eliminar un vídeo o sonido de la lista
+- Añadida librería 7-zip para manejar archivos comprimidos.
+- PictureFlow ahora requiere Qt 4.3 como mínimo.
+- Quitado theme() en la mayor parte en los parámetros ya que se puede obtener desde la propia funciones.cpp
+- Actualizando ruta de iconos en los datos *.txt.
+- Quitando la mayoría de los qDebug().
+- Mejorada carga de datos e iconos en los ComboBox
+- Añadido cargarIconosGroupComboBox para agrupar los distintos iconos con QGroupComboBox.
+
 0.11.0 (18-08-2013)
  - Añadida la posibilidad de crear categorías para las distintas plataformas o juegos.
  - Añadido editor de themes y configuración de la lista en modo carátula.
