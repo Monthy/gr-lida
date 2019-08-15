@@ -353,7 +353,7 @@ void frmOpciones::cargarConfig()
 
 	ui->twMnuShortCut->clear();
 	QSqlQuery query(sql->getSqlDB());
-	query.exec("SELECT id, titulo, key_sequence, sql_query, img, orden, show, separator FROM dbgrl_mnu_shortcut ORDER By orden ASC;");
+	query.exec("SELECT id, titulo, key_sequence, sql_query, img, orden, mostrar, separador FROM dbgrl_mnu_shortcut ORDER By orden ASC;");
 	if (sql->chequearQuery(query) && query.first())
 	{
 		QList<QTreeWidgetItem *> items;
@@ -363,8 +363,8 @@ void frmOpciones::cargarConfig()
 			item->setText(0, query.record().value("titulo").toString());
 			item->setText(1, query.record().value("sql_query").toString());
 			item->setText(2, query.record().value("img").toString());
-			item->setText(3, query.record().value("show").toString());
-			item->setText(4, query.record().value("separator").toString());
+			item->setText(3, query.record().value("mostrar").toString());
+			item->setText(4, query.record().value("separador").toString());
 			item->setText(5, query.record().value("id").toString());
 			item->setText(6, query.record().value("orden").toString());
 			item->setText(7, query.record().value("key_sequence").toString());
@@ -1864,7 +1864,7 @@ void frmOpciones::on_twCategorias_currentItemChanged(QTreeWidgetItem *current, Q
 void frmOpciones::addEditTwMnuNav(bool isAdd)
 {
 	QString id_mnu_nav, titulo, col_value, col_name, sql_query, archivo, img;
-	bool expanded, show;
+	bool expanded, mostrar;
 	int orden = 0;
 
 	titulo    = ui->txtMnuNavNombre->text();
@@ -1875,12 +1875,12 @@ void frmOpciones::addEditTwMnuNav(bool isAdd)
 	img       = ui->cbxMnuNavImg->itemData(ui->cbxMnuNavImg->currentIndex()).toString();
 	orden     = ui->twMnuNav->topLevelItemCount();
 	expanded  = ui->chkMnuNavExpanded->isChecked();
-	show      = ui->chkMnuNavShow->isChecked();
+	mostrar   = ui->chkMnuNavShow->isChecked();
 
 	QTreeWidgetItem *item = NULL;
 	if (isAdd)
 	{
-		id_mnu_nav = sql->insertaMenuNav(titulo, col_value, col_name, sql_query, archivo, img, orden, show, expanded);
+		id_mnu_nav = sql->insertaMenuNav(titulo, col_value, col_name, sql_query, archivo, img, orden, mostrar, expanded);
 		item = new QTreeWidgetItem;//(ui->twMnuNav)
 	} else {
 		int pos = ui->twMnuNav->indexOfTopLevelItem(ui->twMnuNav->currentItem());
@@ -1888,11 +1888,11 @@ void frmOpciones::addEditTwMnuNav(bool isAdd)
 		{
 			item  = ui->twMnuNav->currentItem();
 			orden = fGrl->strToInt(item->text(8));
-			sql->actualizaMenuNav(item->text(9), titulo, col_value, col_name, sql_query, archivo, img, orden, show, expanded);
+			sql->actualizaMenuNav(item->text(9), titulo, col_value, col_name, sql_query, archivo, img, orden, mostrar, expanded);
 		} else {
 			isAdd = true;
 			item = new QTreeWidgetItem;//(ui->twMnuNav)
-			id_mnu_nav = sql->insertaMenuNav(titulo, col_value, col_name, sql_query, archivo, img, orden, show, expanded);
+			id_mnu_nav = sql->insertaMenuNav(titulo, col_value, col_name, sql_query, archivo, img, orden, mostrar, expanded);
 		}
 		ui->btnMnuNavUpdate->setEnabled(false);
 	}
@@ -1908,7 +1908,7 @@ void frmOpciones::addEditTwMnuNav(bool isAdd)
 	item->setText(2, col_name );
 	item->setText(3, sql_query);
 	item->setText(4, archivo  );
-	item->setText(5, fGrl->boolToStr(show));
+	item->setText(5, fGrl->boolToStr(mostrar));
 	item->setText(6, fGrl->boolToStr(expanded));
 	item->setText(7, img);
 	if (isAdd)
@@ -2071,11 +2071,11 @@ void frmOpciones::on_twMnuNav_currentItemChanged(QTreeWidgetItem *current, QTree
 void frmOpciones::addEditTwMnuShortCut(bool isAdd)
 {
 	QString id_mnu_shortcut, titulo, key_sequence, sql_query, img;
-	bool separator, show;
+	bool separador, mostrar;
 	int orden = 0;
 
-	separator = ui->chkMnuShortCutSeparator->isChecked();
-	if (separator)
+	separador = ui->chkMnuShortCutSeparator->isChecked();
+	if (separador)
 	{
 		titulo       = "----";
 		sql_query    = "";
@@ -2087,13 +2087,13 @@ void frmOpciones::addEditTwMnuShortCut(bool isAdd)
 		key_sequence = ui->txtShortcutKeySequence->text();
 		img          = ui->cbxMnuShortCutImg->itemData(ui->cbxMnuShortCutImg->currentIndex()).toString();
 	}
-	orden = ui->twMnuShortCut->topLevelItemCount();
-	show  = ui->chkMnuShortCutShow->isChecked();
+	orden   = ui->twMnuShortCut->topLevelItemCount();
+	mostrar = ui->chkMnuShortCutShow->isChecked();
 
 	QTreeWidgetItem *item = NULL;
 	if (isAdd)
 	{
-		id_mnu_shortcut = sql->insertaMnuShortcut(titulo, key_sequence, sql_query, img, orden, show, separator);
+		id_mnu_shortcut = sql->insertaMnuShortcut(titulo, key_sequence, sql_query, img, orden, mostrar, separador);
 		item = new QTreeWidgetItem;//(ui->twMnuShortCut)
 	} else {
 		int pos = ui->twMnuShortCut->indexOfTopLevelItem(ui->twMnuShortCut->currentItem());
@@ -2101,11 +2101,11 @@ void frmOpciones::addEditTwMnuShortCut(bool isAdd)
 		{
 			item  = ui->twMnuShortCut->currentItem();
 			orden = fGrl->strToInt(item->text(6));
-			sql->actualizaMnuShortcut(item->text(5), titulo, key_sequence, sql_query, img, orden, show, separator);
+			sql->actualizaMnuShortcut(item->text(5), titulo, key_sequence, sql_query, img, orden, mostrar, separador);
 		} else {
 			isAdd = true;
 			item = new QTreeWidgetItem;
-			id_mnu_shortcut = sql->insertaMnuShortcut(titulo, key_sequence, sql_query, img, orden, show, separator);
+			id_mnu_shortcut = sql->insertaMnuShortcut(titulo, key_sequence, sql_query, img, orden, mostrar, separador);
 		}
 		ui->btnMnuShortCutUpdate->setEnabled(false);
 	}
@@ -2118,8 +2118,8 @@ void frmOpciones::addEditTwMnuShortCut(bool isAdd)
 	item->setText(0, titulo   );
 	item->setText(1, sql_query);
 	item->setText(2, img      );
-	item->setText(3, fGrl->boolToStr(show));
-	item->setText(4, fGrl->boolToStr(separator));
+	item->setText(3, fGrl->boolToStr(mostrar));
+	item->setText(4, fGrl->boolToStr(separador));
 	if (isAdd)
 	{
 		item->setText(5, id_mnu_shortcut);

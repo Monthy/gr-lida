@@ -145,12 +145,12 @@ public:
 	bool eliminarCategoria(QString IDcat);
 // MenuNav
 	void cargarMenuNav(QTreeWidget *twMnuNav, QString tabla, bool isOpt = false);
-	QString insertaMenuNav(QString titulo, QString col_value, QString col_name, QString sql_query, QString archivo, QString img, int orden, bool show, bool expanded);
-	bool actualizaMenuNav(QString IDmnu, QString titulo, QString col_value, QString col_name, QString sql_query, QString archivo, QString img, int orden, bool show, bool expanded);
+	QString insertaMenuNav(QString titulo, QString col_value, QString col_name, QString sql_query, QString archivo, QString img, int orden, bool mostrar, bool expanded);
+	bool actualizaMenuNav(QString IDmnu, QString titulo, QString col_value, QString col_name, QString sql_query, QString archivo, QString img, int orden, bool mostrar, bool expanded);
 	bool eliminarMenuNav(QString IDmnu);
 // MnuShortcut
-	QString insertaMnuShortcut(QString titulo, QString key_sequence, QString sql_query, QString img, int orden, bool show, bool separator);
-	bool actualizaMnuShortcut(QString IDmnu, QString titulo, QString key_sequence, QString sql_query, QString img, int orden, bool show, bool separator);
+	QString insertaMnuShortcut(QString titulo, QString key_sequence, QString sql_query, QString img, int orden, bool mostrar, bool separador);
+	bool actualizaMnuShortcut(QString IDmnu, QString titulo, QString key_sequence, QString sql_query, QString img, int orden, bool mostrar, bool separador);
 	bool eliminarMnuShortcut(QString IDmnu);
 
 private:

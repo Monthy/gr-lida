@@ -1958,11 +1958,11 @@ void GrLida::cargarListaShortCut()
 	}
 
 	QSqlQuery query(sql->getSqlDB());
-	query.exec("SELECT titulo, key_sequence, sql_query, img, separator FROM dbgrl_mnu_shortcut WHERE show = 'true' ORDER By orden ASC;");
+	query.exec("SELECT titulo, key_sequence, sql_query, img, separador FROM dbgrl_mnu_shortcut WHERE mostrar = 'true' ORDER By orden ASC;");
 	if (sql->chequearQuery(query) && query.first())
 	{
 		do {
-			if (fGrl->strToBool(query.record().value("separator").toString()))
+			if (fGrl->strToBool(query.record().value("separador").toString()))
 				ui->tb_shortcut->addSeparator();
 			//	container->addSeparator();
 			else {

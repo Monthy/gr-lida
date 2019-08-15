@@ -815,7 +815,7 @@ void dbSql::crearTablas()
 		"	archivo					VARCHAR(255) NOT NULL DEFAULT '',"
 		"	img						VARCHAR(255) NOT NULL DEFAULT 'sinimg.png',"
 		"	orden					INTEGER NOT NULL DEFAULT 0,"
-		"	show					VARCHAR(5) NOT NULL DEFAULT 'true',"
+		"	mostrar					VARCHAR(5) NOT NULL DEFAULT 'true',"
 		"	expanded				VARCHAR(5) NOT NULL DEFAULT 'true',"
 		"	"+ qpsql_pkey("dbgrl_mnu_nav") +" PRIMARY KEY (id)"
 		") "+ qpsql_oids +";");
@@ -841,8 +841,8 @@ void dbSql::crearTablas()
 		"	sql_query				TEXT,"
 		"	img						VARCHAR(255) NOT NULL DEFAULT 'sinimg.png',"
 		"	orden					INTEGER NOT NULL DEFAULT 0,"
-		"	show					VARCHAR(5) NOT NULL DEFAULT 'true',"
-		"	separator				VARCHAR(5) NOT NULL DEFAULT 'false',"
+		"	mostrar					VARCHAR(5) NOT NULL DEFAULT 'true',"
+		"	separador				VARCHAR(5) NOT NULL DEFAULT 'false',"
 		"	"+ qpsql_pkey("dbgrl_mnu_shortcut") +" PRIMARY KEY (id)"
 		") "+ qpsql_oids +";");
 
@@ -2641,13 +2641,13 @@ void dbSql::cargarMenuNav(QTreeWidget *twMnuNav, QString tabla, bool isOpt)
 	int id        = twMnuNav->topLevelItemCount();
 	dir_img       = stTheme +"img16/";
 
-	query.exec("SELECT id, titulo, col_value, col_name, sql_query, archivo, img, orden, show, expanded FROM dbgrl_mnu_nav ORDER BY orden ASC;");
+	query.exec("SELECT id, titulo, col_value, col_name, sql_query, archivo, img, orden, mostrar, expanded FROM dbgrl_mnu_nav ORDER BY orden ASC;");
 	if (chequearQuery(query))
 	{
 		if (query.first())
 		{
 			do {
-				if (strToBool(query.record().value("show").toString()) || isOpt)
+				if (strToBool(query.record().value("mostrar").toString()) || isOpt)
 				{
 					titulo    = query.record().value("titulo").toString();
 					col_value = query.record().value("col_value").toString();
@@ -2673,7 +2673,7 @@ void dbSql::cargarMenuNav(QTreeWidget *twMnuNav, QString tabla, bool isOpt)
 						item->setText(2, col_name);
 						item->setText(3, sql_query);
 						item->setText(4, archivo);
-						item->setText(5, query.record().value("show").toString());
+						item->setText(5, query.record().value("mostrar").toString());
 						item->setText(6, query.record().value("expanded").toString());
 						item->setText(7, img);
 						item->setText(8, orden);
@@ -2774,14 +2774,14 @@ void dbSql::cargarMenuNav(QTreeWidget *twMnuNav, QString tabla, bool isOpt)
 	}
 }
 
-QString dbSql::insertaMenuNav(QString titulo, QString col_value, QString col_name, QString sql_query, QString archivo, QString img, int orden, bool show, bool expanded)
+QString dbSql::insertaMenuNav(QString titulo, QString col_value, QString col_name, QString sql_query, QString archivo, QString img, int orden, bool mostrar, bool expanded)
 {
 	QSqlQuery query(sqldb);
 	QString strSQL;
 	strSQL = "INSERT INTO dbgrl_mnu_nav ("
-			"titulo, col_value, col_name, sql_query, archivo, img, orden, show, expanded"
+			"titulo, col_value, col_name, sql_query, archivo, img, orden, mostrar, expanded"
 		") VALUES ("
-			":titulo, :col_value, :col_name, :sql_query, :archivo, :img, :orden, :show, :expanded"
+			":titulo, :col_value, :col_name, :sql_query, :archivo, :img, :orden, :mostrar, :expanded"
 		")"+ qpsql_return_id("id");
 
 	query.prepare(strSQL);
@@ -2792,7 +2792,7 @@ QString dbSql::insertaMenuNav(QString titulo, QString col_value, QString col_nam
 	query.bindValue(":archivo"  , archivo   );
 	query.bindValue(":img"      , img       );
 	query.bindValue(":orden"    , orden     );
-	query.bindValue(":show"     , boolToStr(show));
+	query.bindValue(":mostrar"  , boolToStr(mostrar));
 	query.bindValue(":expanded" , boolToStr(expanded));
 	query.exec();
 
@@ -2802,12 +2802,12 @@ QString dbSql::insertaMenuNav(QString titulo, QString col_value, QString col_nam
 		return "";
 }
 
-bool dbSql::actualizaMenuNav(QString IDmnu, QString titulo, QString col_value, QString col_name, QString sql_query, QString archivo, QString img, int orden, bool show, bool expanded)
+bool dbSql::actualizaMenuNav(QString IDmnu, QString titulo, QString col_value, QString col_name, QString sql_query, QString archivo, QString img, int orden, bool mostrar, bool expanded)
 {
 	QSqlQuery query(sqldb);
 	QString strSQL = "UPDATE dbgrl_mnu_nav SET "
 		"titulo = :titulo, col_value = :col_value, col_name = :col_name, sql_query = :sql_query, "
-		"archivo = :archivo, img = :img, orden = :orden, show = :show, expanded = :expanded "
+		"archivo = :archivo, img = :img, orden = :orden, mostrar = :mostrar, expanded = :expanded "
 		"WHERE id = :id;";
 
 	query.prepare(strSQL);
@@ -2818,7 +2818,7 @@ bool dbSql::actualizaMenuNav(QString IDmnu, QString titulo, QString col_value, Q
 	query.bindValue(":archivo"  , archivo  );
 	query.bindValue(":img"      , img      );
 	query.bindValue(":orden"    , orden    );
-	query.bindValue(":show"     , boolToStr(show));
+	query.bindValue(":mostrar"  , boolToStr(mostrar));
 	query.bindValue(":expanded" , boolToStr(expanded));
 	query.bindValue(":id"       , IDmnu);
 	query.exec();
@@ -2833,14 +2833,14 @@ bool dbSql::eliminarMenuNav(QString IDmnu)
 // FIN MenuNav --------------------------------------------------------------------------------------------------
 
 // INICIO MnuShortcut -------------------------------------------------------------------------------------------
-QString dbSql::insertaMnuShortcut(QString titulo, QString key_sequence, QString sql_query, QString img, int orden, bool show, bool separator)
+QString dbSql::insertaMnuShortcut(QString titulo, QString key_sequence, QString sql_query, QString img, int orden, bool mostrar, bool separador)
 {
 	QSqlQuery query(sqldb);
 	QString strSQL;
 	strSQL = "INSERT INTO dbgrl_mnu_shortcut ("
-			"titulo, key_sequence, sql_query, img, orden, show, separator"
+			"titulo, key_sequence, sql_query, img, orden, mostrar, separador"
 		") VALUES ("
-			":titulo, :key_sequence, :sql_query, :img, :orden, :show, :separator"
+			":titulo, :key_sequence, :sql_query, :img, :orden, :mostrar, :separador"
 		")"+ qpsql_return_id("id");
 
 	query.prepare(strSQL);
@@ -2849,8 +2849,8 @@ QString dbSql::insertaMnuShortcut(QString titulo, QString key_sequence, QString 
 	query.bindValue(":sql_query"   , sql_query   );
 	query.bindValue(":img"         , img         );
 	query.bindValue(":orden"       , orden       );
-	query.bindValue(":show"        , boolToStr(show));
-	query.bindValue(":separator"   , boolToStr(separator));
+	query.bindValue(":mostrar"     , boolToStr(mostrar));
+	query.bindValue(":separador"   , boolToStr(separador));
 	query.exec();
 
 	if (chequearQuery(query))
@@ -2859,11 +2859,11 @@ QString dbSql::insertaMnuShortcut(QString titulo, QString key_sequence, QString 
 		return "";
 }
 
-bool dbSql::actualizaMnuShortcut(QString IDmnu, QString titulo, QString key_sequence, QString sql_query, QString img, int orden, bool show, bool separator)
+bool dbSql::actualizaMnuShortcut(QString IDmnu, QString titulo, QString key_sequence, QString sql_query, QString img, int orden, bool mostrar, bool separador)
 {
 	QSqlQuery query(sqldb);
 	QString strSQL = "UPDATE dbgrl_mnu_shortcut SET "
-		"titulo = :titulo, key_sequence = :key_sequence, sql_query = :sql_query, img = :img, orden = :orden, show = :show, separator = :separator "
+		"titulo = :titulo, key_sequence = :key_sequence, sql_query = :sql_query, img = :img, orden = :orden, mostrar = :mostrar, separador = :separador "
 		"WHERE id = :id;";
 
 	query.prepare(strSQL);
@@ -2872,8 +2872,8 @@ bool dbSql::actualizaMnuShortcut(QString IDmnu, QString titulo, QString key_sequ
 	query.bindValue(":sql_query"   , sql_query   );
 	query.bindValue(":img"         , img         );
 	query.bindValue(":orden"       , orden       );
-	query.bindValue(":show"        , boolToStr(show));
-	query.bindValue(":separator"   , boolToStr(separator));
+	query.bindValue(":mostrar"     , boolToStr(mostrar));
+	query.bindValue(":separador"   , boolToStr(separador));
 	query.bindValue(":id"          , IDmnu);
 	query.exec();
 
