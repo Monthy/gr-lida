@@ -586,10 +586,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 	ui->txtDat_path_exe->setText(datos.path_exe);
 	ui->txtDat_path_setup->setText(datos.path_setup);
 
-	qDebug() << "parametros_exe: " << datos.parametros_exe;
 	cargarParametrosTwList(ui->twDatosParametrosExe, datos.parametros_exe);
-
-	qDebug() << "parametros_setup: " << datos.parametros_setup;
 	cargarParametrosTwList(ui->twDatosParametrosSetup, datos.parametros_setup);
 
 // Thumbs
@@ -1979,36 +1976,24 @@ void frmAddEditJuego::cargarParametrosTwList(QTreeWidget *twList, QString parame
 	QStringList list_parametros = parametros.split("|:|", QString::SkipEmptyParts);
 	const int listParametrosSize = list_parametros.size();
 
-	qDebug() << "list_parametros: " << listParametrosSize;
-
 	for (int i = 0; i < listParametrosSize; ++i)
 	{
 		QStringList parametro = list_parametros.at(i).split("|", QString::SkipEmptyParts);
 		const int num_parm = parametro.size();
 
-		qDebug() << "num_parm: " << QString::number(num_parm);
-
 		QTreeWidgetItem *item = new QTreeWidgetItem;
-//		item->setFlags(item->flags() | Qt::ItemIsEditable);
 
 		if (num_parm > 0)
-		{
-			qDebug() << "param1: " << parametro.at(0);
 			item->setText(0, parametro.at(0));
-		} else {
+		else
 			item->setText(0, "");
-		}
 
 		if (num_parm > 1)
-		{
-			qDebug() << "param2: " << parametro.at(1);
 			item->setText(1, parametro.at(1));
-		} else {
+		else
 			item->setText(1, "");
-		}
 
 		twList->addTopLevelItem(item);
-		qDebug() << "-------------";
 	}
 }
 

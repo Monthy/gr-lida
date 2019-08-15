@@ -3248,8 +3248,6 @@ void GrLida::on_mnu_edit_eliminar_triggered()
 					QString dir_sonidos  = dir_game +"/sonidos/";
 					QString dir_archivos = dir_game +"/archivos/";
 
-qDebug() << "dir_capturas: " << dir_capturas;
-
 					if (chk_del_thumb->isChecked())
 					{
 						del_mensaje << tr("Carátula");

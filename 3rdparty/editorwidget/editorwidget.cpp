@@ -74,14 +74,18 @@ static inline void filterAttributes(const QStringRef &name, QXmlStreamAttributes
 	if (atts->isEmpty())
 		return;
 	 // No style attributes for <body>
-	if (name == "body") {
+	if (name == "body")
+	{
 		atts->clear();
 		return;
 	}
 	// Clean out everything except 'align' for 'p'
-	if (name == "p") {
-		for (AttributeIt it = atts->begin(); it != atts->end();) {
-			if (it->name() == "align") {
+	if (name == "p")
+	{
+		for (AttributeIt it = atts->begin(); it != atts->end();)
+		{
+			if (it->name() == "align")
+			{
 				++it;
 				*paragraphAlignmentFound = true;
 			} else
@@ -96,8 +100,10 @@ static inline bool isWhiteSpace(const QStringRef &in)
 {
 	const int count = in.size();
 	for (int i = 0; i < count; i++)
+	{
 		if (!in.at(i).isSpace())
 			return false;
+	}
 	return true;
 }
 
@@ -165,7 +171,8 @@ void EditorRichText::setText(const QString &text)
 
 void EditorRichText::setSimplifyRichText(bool v)
 {
-	if (v != m_simplifyRichText) {
+	if (v != m_simplifyRichText)
+	{
 		m_simplifyRichText = v;
 		emit simplifyRichTextChanged(v);
 	}
@@ -550,23 +557,29 @@ void EditorWidget::setSmileList(QString filename, QString sep, QString path_smil
 {
 	QFile file_in(filename);
 
-	if (file_in.exists()) {
-		if (file_in.open(QIODevice::ReadOnly) != 0) {
+	if (file_in.exists())
+	{
+		if (file_in.open(QIODevice::ReadOnly) != 0)
+		{
 			QString line;
 			QStringList list;
 			QTextStream in(&file_in);
 			in.setCodec("UTF-8");
 			list_smile->clear();
-			while (!in.atEnd()) {
+			while (!in.atEnd())
+			{
 				line = in.readLine();
-				if (!line.isEmpty()) {
+				if (!line.isEmpty())
+				{
 					list = line.split(sep);
-					if (QFile::exists(path_smile + list.at(1))) {
+					if (QFile::exists(path_smile + list.at(1)))
+					{
 						QListWidgetItem *item = new QListWidgetItem;//(list_smile)
 						item->setData(Qt::UserRole, list.at(1));
 						item->setText(list.at(0));
 						item->setIcon(QIcon(path_smile + list.at(1)));
 						editor_rich_text->document()->addResource(QTextDocument::ImageResource, QUrl("smile_rs_"+ list.at(0) +"_"+ list.at(1)), QImage(path_smile + list.at(1)));
+
 						list_smile->addItem(item);
 					}
 				}
@@ -612,6 +625,7 @@ QString EditorWidget::text(Qt::TextFormat format) const
 	// plain text.
 	if (m_initialPag == PlainTextIndex && m_state == PlainTextChanged)
 		editor_rich_text->setHtml(editor_plain_text->toPlainText());
+
 	return editor_rich_text->text(format);
 }
 
@@ -619,6 +633,7 @@ QString EditorWidget::toPlainText() const
 {
 	if (m_initialPag == RichTextIndex)
 		editor_plain_text->setPlainText(smilesToString(editor_rich_text->text(Qt::RichText)));
+
 	return editor_plain_text->toPlainText();
 }
 
@@ -669,11 +684,13 @@ bool EditorWidget::isTextWrapEnabled() const
 
 QString EditorWidget::smilesToString(QString str) const
 {
-	str.replace("<p", "\n<p");
-	str.replace("</body", "\n</body");
+	//str.replace("<p", "\n<p");
+	//str.replace("</body", "\n</body");
 	int count_smiles = list_smile->count();
-	if (count_smiles > -1) {
-		for (int i = 0; i < count_smiles; ++i) {
+	if (count_smiles > -1)
+	{
+		for (int i = 0; i < count_smiles; ++i)
+		{
 			QString smile_text = list_smile->item(i)->text();
 			QString smile_icon = list_smile->item(i)->data(Qt::UserRole).toString();
 			if (str.indexOf("<img src=\"smile_rs_"+ smile_text +"_"+ smile_icon +"\"/>", 0) != -1)
@@ -682,20 +699,23 @@ QString EditorWidget::smilesToString(QString str) const
 				str.replace("<img src=\"smile_rs_"+ smile_text +"_"+ smile_icon +"\" />", smile_text +" ");
 		}
 	}
+
 	return str;
 }
 
 QString EditorWidget::smilesToImage(QString str) const
 {
 	int count_smiles = list_smile->count();
-	if (count_smiles > -1) {
-		for (int i = 0; i < count_smiles; ++i) {
+	if (count_smiles > -1)
+	{
+		for (int i = 0; i < count_smiles; ++i)
+		{
 			QString smile_text = list_smile->item(i)->text();
 			QString smile_icon = list_smile->item(i)->data(Qt::UserRole).toString();
-			QRegExp rx_smile(QRegExp::escape(smile_text) +"\\s");
-			str.replace(rx_smile, "<img src=\"smile_rs_"+ smile_text +"_"+ smile_icon +"\"/> ");
+			str.replace(smile_text, "<img src=\"smile_rs_"+ smile_text +"_"+ smile_icon +"\" alt=\""+ smile_text +"\" title=\""+ smile_text +"\"/> ");
 		}
 	}
+
 	return str;
 }
 
@@ -709,7 +729,8 @@ bool EditorWidget::findFirst(QString str_find, bool forward)
 	if (chkCaseSensitive->isChecked())
 		flags |= QTextDocument::FindCaseSensitively;
 
-	if (m_initialPag == RichTextIndex) {
+	if (m_initialPag == RichTextIndex)
+	{
 		editor_rich_text->setFocus(Qt::ShortcutFocusReason);
 		return editor_rich_text->find(str_find, flags);
 	} else {
@@ -725,7 +746,8 @@ void EditorWidget::findReplace(QString str_find, QString str_replace, bool r_nex
 	if (r_next)
 		isFind = findFirst(str_find, false);
 
-	if (m_initialPag == RichTextIndex) {
+	if (m_initialPag == RichTextIndex)
+	{
 		str_select = editor_rich_text->textCursor().selectedText();
 		if (!str_select.isEmpty() && str_select == str_find)
 			editor_rich_text->insertHtml(str_replace);
@@ -741,7 +763,8 @@ void EditorWidget::findReplace(QString str_find, QString str_replace, bool r_nex
 
 void EditorWidget::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 {
-	if (m_initialPag == RichTextIndex) {
+	if (m_initialPag == RichTextIndex)
+	{
 		QTextCursor cursor = editor_rich_text->textCursor();
 		if (!cursor.hasSelection())
 			cursor.select(QTextCursor::WordUnderCursor);
@@ -752,7 +775,8 @@ void EditorWidget::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 
 void EditorWidget::fontChanged(const QFont &font)
 {
-	if (m_initialPag == RichTextIndex) {
+	if (m_initialPag == RichTextIndex)
+	{
 		m_font_input->setCurrentIndex(m_font_input->findText(QFontInfo(font).family()));
 		m_font_size_input->setCurrentIndex(m_font_size_input->findText(QString::number(font.pointSize())));
 		m_bold_action->setChecked(font.bold());
@@ -770,14 +794,20 @@ void EditorWidget::colorChanged(const QColor &color)
 
 void EditorWidget::alignmentChanged(Qt::Alignment align)
 {
-	if (m_initialPag == RichTextIndex) {
-		if (align & Qt::AlignHCenter) {
+	if (m_initialPag == RichTextIndex)
+	{
+		if (align & Qt::AlignHCenter)
+		{
 			m_align_center_action->setChecked(true);
 			m_align_checked = "center";
-		} else if (align & Qt::AlignRight) {
+		}
+		else if (align & Qt::AlignRight)
+		{
 			m_align_right_action->setChecked(true);
 			m_align_checked = "right";
-		} else if (align & Qt::AlignJustify) {
+		}
+		else if (align & Qt::AlignJustify)
+		{
 			m_align_justify_action->setChecked(true);
 			m_align_checked = "justify";
 		} else {
@@ -799,7 +829,8 @@ void EditorWidget::pagIndexChanged(int newIndex)
 	// Remember the cursor position, since it is invalidated by setPlainText
 	int position = 0;
 	QTextCursor cursor;
-	if (newIndex == PlainTextIndex) {
+	if (newIndex == PlainTextIndex)
+	{
 		position = editor_plain_text->textCursor().position();
 		cursor = editor_plain_text->textCursor();
 		editor_plain_text->setPlainText(smilesToString(editor_rich_text->text(Qt::RichText)));
@@ -830,8 +861,10 @@ void EditorWidget::plainTextChanged()
 
 void EditorWidget::list_smile_itemDoubleClicked(QListWidgetItem *item)
 {
-	if (item) {
-		if (m_initialPag == RichTextIndex) {
+	if (item)
+	{
+		if (m_initialPag == RichTextIndex)
+		{
 			editor_rich_text->insertHtml("<img src=\"smile_rs_"+ item->text() +"_"+ item->data(Qt::UserRole).toString() +"\"/> ");
 			editor_rich_text->setFocus();
 		} else {
@@ -891,7 +924,8 @@ void EditorWidget::on_edit_export_pdf()
 {
 #ifndef QT_NO_PRINTER
 	QString fileName = QFileDialog::getSaveFileName(this, tr("Exportar a PDF") +"...", QString(), "*.pdf");
-	if (!fileName.isEmpty()) {
+	if (!fileName.isEmpty())
+	{
 		if (QFileInfo(fileName).suffix().isEmpty())
 			fileName.append(".pdf");
 
@@ -912,7 +946,8 @@ void EditorWidget::on_edit_export_pdf()
 
 void EditorWidget::on_edit_font(const QString &font)
 {
-	if (m_initialPag == PlainTextIndex) {
+	if (m_initialPag == PlainTextIndex)
+	{
 		const QString str_select = editor_plain_text->textCursor().selectedText();
 		if (!str_select.isEmpty())
 			editor_plain_text->textCursor().insertText("<span style=\"font-family:'"+ font +"';\">"+ str_select +"</span>");
@@ -926,8 +961,10 @@ void EditorWidget::on_edit_font(const QString &font)
 void EditorWidget::on_edit_font_size(const QString &size)
 {
 	qreal pointSize = size.toFloat();
-	if (size.toFloat() > 0) {
-		if (m_initialPag == PlainTextIndex) {
+	if (size.toFloat() > 0)
+	{
+		if (m_initialPag == PlainTextIndex)
+		{
 			const QString str_select = editor_plain_text->textCursor().selectedText();
 			if (!str_select.isEmpty())
 				editor_plain_text->textCursor().insertText("<span style=\"font-size:"+ size +"pt;\">"+ str_select +"</span>");
@@ -981,7 +1018,8 @@ void EditorWidget::on_edit_redo()
 
 void EditorWidget::on_edit_bold()
 {
-	if (m_initialPag == PlainTextIndex) {
+	if (m_initialPag == PlainTextIndex)
+	{
 		const QString str_select = editor_plain_text->textCursor().selectedText();
 		if (!str_select.isEmpty())
 			editor_plain_text->textCursor().insertText("<strong>"+ str_select +"</strong>");
@@ -994,7 +1032,8 @@ void EditorWidget::on_edit_bold()
 
 void EditorWidget::on_edit_italic()
 {
-	if (m_initialPag == PlainTextIndex) {
+	if (m_initialPag == PlainTextIndex)
+	{
 		const QString str_select = editor_plain_text->textCursor().selectedText();
 		if (!str_select.isEmpty())
 			editor_plain_text->textCursor().insertText("<em>"+ str_select +"</em>");
@@ -1007,7 +1046,8 @@ void EditorWidget::on_edit_italic()
 
 void EditorWidget::on_edit_underline()
 {
-	if (m_initialPag == PlainTextIndex) {
+	if (m_initialPag == PlainTextIndex)
+	{
 		const QString str_select = editor_plain_text->textCursor().selectedText();
 		if (!str_select.isEmpty())
 			editor_plain_text->textCursor().insertText("<u>"+ str_select +"</u>");
@@ -1020,7 +1060,8 @@ void EditorWidget::on_edit_underline()
 
 void EditorWidget::on_edit_text_align(QAction *action)
 {
-	if (m_initialPag == PlainTextIndex) {
+	if (m_initialPag == PlainTextIndex)
+	{
 		const QString str_select = editor_plain_text->textCursor().selectedText();
 		QString txt_align = "";
 		if (action == m_align_center_action)
@@ -1046,7 +1087,8 @@ void EditorWidget::on_edit_text_align(QAction *action)
 
 void EditorWidget::on_edit_valign_sup()
 {
-	if (m_initialPag == PlainTextIndex) {
+	if (m_initialPag == PlainTextIndex)
+	{
 		const QString str_select = editor_plain_text->textCursor().selectedText();
 		if (!str_select.isEmpty())
 			editor_plain_text->textCursor().insertText("<span style=\"vertical-align:super;\">"+ str_select +"</span>");
@@ -1062,7 +1104,8 @@ void EditorWidget::on_edit_valign_sup()
 
 void EditorWidget::on_edit_valign_sub()
 {
-	if (m_initialPag == PlainTextIndex) {
+	if (m_initialPag == PlainTextIndex)
+	{
 		const QString str_select = editor_plain_text->textCursor().selectedText();
 		if (!str_select.isEmpty())
 			editor_plain_text->textCursor().insertText("<span style=\"vertical-align:sub;\">"+ str_select +"</span>");
@@ -1086,7 +1129,8 @@ void EditorWidget::on_edit_image()
 							tr("Imagen") +" PNM (*.pbm *.pgm *.ppm);;" + tr("Imagen") +" X BitMap (*.xbm);;"+
 							tr("Imagen") +" X PixMap (*.xpm);;" + tr("Imágenes soportadas") +" (*)", 0);
 
-	if (!fileName.isEmpty() && QFile::exists(fileName)) {
+	if (!fileName.isEmpty() && QFile::exists(fileName))
+	{
 		if (m_initialPag == PlainTextIndex)
 			editor_plain_text->textCursor().insertText("<img src=\""+ fileName +"\"/>");
 		else
@@ -1105,7 +1149,8 @@ void EditorWidget::on_edit_link(bool checked)
 	if (!newUrl.startsWith("://"))
 		newUrl.prepend("http://");
 
-	if (m_initialPag == PlainTextIndex) {
+	if (m_initialPag == PlainTextIndex)
+	{
 		QString str_select = editor_plain_text->textCursor().selectedText();
 		if (str_select.isEmpty())
 			str_select = newUrl;
@@ -1113,7 +1158,8 @@ void EditorWidget::on_edit_link(bool checked)
 			editor_plain_text->textCursor().insertText("<a href=\""+ newUrl +"\">"+ str_select +"</a>");
 	} else {
 		QTextCharFormat fmt;
-		if (checked && ok) {
+		if (checked && ok)
+		{
 			if (old_url.isEmpty())
 				editor_rich_text->textCursor().insertHtml("<a href=\""+ newUrl +"\">"+ newUrl +"</a>");
 			else {
@@ -1137,7 +1183,8 @@ void EditorWidget::on_edit_color()
 	if (!color.isValid() || color == m_color)
 		return;
 	m_color = color;
-	if (m_initialPag == PlainTextIndex) {
+	if (m_initialPag == PlainTextIndex)
+	{
 		const QString str_select = editor_plain_text->textCursor().selectedText();
 		if (!str_select.isEmpty())
 			editor_plain_text->textCursor().insertText("<span style=\"color:"+ color.name() +";\">"+ str_select +"</span>");
@@ -1194,7 +1241,8 @@ void EditorWidget::btnReplaceAll_clicked()
 
 void EditorWidget::currentCharFormatChanged(const QTextCharFormat &format)
 {
-	if (m_initialPag == RichTextIndex) {
+	if (m_initialPag == RichTextIndex)
+	{
 		fontChanged(format.font());
 		colorChanged(format.foreground().color());
 
