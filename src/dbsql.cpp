@@ -1242,11 +1242,11 @@ stConfigDOSBox dbSql::getDefectDOSBox(QHash<QString, QString> dato)
 	datos.dosbox_language       = setDefDatValue(isQHash, dato["Dbx_dosbox_language"]      , "");
 	datos.dosbox_machine        = setDefDatValue(isQHash, dato["Dbx_dosbox_machine"]       , "svga_s3");
 	datos.dosbox_captures       = setDefDatValue(isQHash, dato["Dbx_dosbox_captures"]      , "");
-	datos.dosbox_memsize        = setDefDatValue(isQHash, dato["Dbx_dosbox_memsize"]       , "31");
+	datos.dosbox_memsize        = setDefDatValue(isQHash, dato["Dbx_dosbox_memsize"]       , "16");
 	datos.dosbox_emu_key        = setDefDatValue(isQHash, dato["Dbx_dosbox_emu_key"]       , "dosbox");
 // [render]
 	datos.render_frameskip      = setDefDatValue(isQHash, dato["Dbx_render_frameskip"]     , "0");
-	datos.render_aspect         = setDefDatValue(isQHash, dato["Dbx_render_aspect"]        , "false");
+	datos.render_aspect         = setDefDatValue(isQHash, dato["Dbx_render_aspect"]        , "true");
 	datos.render_scaler         = setDefDatValue(isQHash, dato["Dbx_render_scaler"]        , "normal2x");
 // [cpu]
 	datos.cpu_core              = setDefDatValue(isQHash, dato["Dbx_cpu_core"]             , "auto");
