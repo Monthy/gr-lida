@@ -278,7 +278,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Marcar / Desmasrcar la lista de juegos para importar.</string>
+              <string>Marcar / Desmarcar la lista de juegos para importar.</string>
              </property>
             </widget>
            </item>

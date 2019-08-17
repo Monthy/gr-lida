@@ -121,7 +121,7 @@ void frmAddEditDosBox::cargarConfig()
 	ui->cbxDbx_dos_umb->addItem("max");
 
 	ui->cbxDbx_dos_version->clear();
-	ui->cbxDbx_dos_version->addItem(QIcon(fGrl->theme() +"img16/sinimg.png"), "defecto", "");
+	ui->cbxDbx_dos_version->addItem(QIcon(fGrl->theme() +"img16/sinimg.png"), tr("por defecto"), "");
 	ui->cbxDbx_dos_version->addItem(QIcon(fGrl->theme() +"img16/ms-dos_win9x.png"), "6.22", "6 22");
 	ui->cbxDbx_dos_version->addItem(QIcon(fGrl->theme() +"img16/ms-dos_win9x.png"), "6.2" , "6 2");
 	ui->cbxDbx_dos_version->addItem(QIcon(fGrl->theme() +"img16/ms-dos_win9x.png"), "6.0" , "6 0");

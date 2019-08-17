@@ -1374,13 +1374,13 @@
      <normaloff>:/img16/style.png</normaloff>:/img16/style.png</iconset>
    </property>
    <property name="text">
-    <string>Edit themes</string>
+    <string>Editar temas</string>
    </property>
    <property name="toolTip">
-    <string>Edit themes</string>
+    <string>Editar temas</string>
    </property>
    <property name="statusTip">
-    <string>Edit themes</string>
+    <string>Editar temas</string>
    </property>
   </action>
   <action name="mnu_tool_opciones">

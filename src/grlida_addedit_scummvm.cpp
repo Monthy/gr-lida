@@ -135,13 +135,13 @@ void frmAddEditScummVM::cargarConfig()
 	fGrl->cargarDatosComboBox(ui->cbxSvm_music_driver, grlDir.Datos +"svm_music_driver.txt"            , "img16/", "adlib", 3, "|");
 
 	ui->cbxSvm_opl_driver->clear();
-	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->theme() +"img16/sinimg.png")          , "<defecto>"                         , "auto");
+	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->theme() +"img16/sinimg.png")          , tr("por defecto")                   , "auto");
 	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->theme() +"img16/img_advmame2x_3x.png"), "MAME OPL emulator"                 , "mame");
 	ui->cbxSvm_opl_driver->addItem(QIcon(fGrl->theme() +"img16/cat/dosbox.png")      , "DOSBox OPL emulator (experimental)", "db"  );
 
 	ui->cbxSvm_output_rate->clear();
-	ui->cbxSvm_output_rate->addItem("<defecto>", "");
-	ui->cbxSvm_output_rate->addItem("8000", "8000");
+	ui->cbxSvm_output_rate->addItem(tr("por defecto"), "");
+	ui->cbxSvm_output_rate->addItem("8000" , "8000");
 	ui->cbxSvm_output_rate->addItem("11025", "11025");
 	ui->cbxSvm_output_rate->addItem("22050", "22050");
 	ui->cbxSvm_output_rate->addItem("44100", "44100");
