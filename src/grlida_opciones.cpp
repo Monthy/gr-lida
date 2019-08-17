@@ -351,6 +351,14 @@ void frmOpciones::cargarConfig()
 	row = ui->cbxMnuShortCutImg->findData("sinimg.png", Qt::UserRole, Qt::MatchContains);
 	ui->cbxMnuShortCutImg->setCurrentIndex(row);
 
+	ui->cbxMnuShortCutSqlQuery->clear();
+	ui->cbxMnuShortCutSqlQuery->addItem("WHERE favorito='true'");
+	ui->cbxMnuShortCutSqlQuery->addItem("WHERE original='true'");
+	ui->cbxMnuShortCutSqlQuery->addItem("WHERE tipo_emu='datos'");
+	ui->cbxMnuShortCutSqlQuery->addItem("WHERE tipo_emu='dosbox'");
+	ui->cbxMnuShortCutSqlQuery->addItem("WHERE tipo_emu='scummvm'");
+	ui->cbxMnuShortCutSqlQuery->addItem("WHERE tipo_emu='vdmsound'");
+
 	ui->twMnuShortCut->clear();
 	QSqlQuery query(sql->getSqlDB());
 	query.exec("SELECT id, titulo, key_sequence, sql_query, img, orden, mostrar, separador FROM dbgrl_mnu_shortcut ORDER By orden ASC;");

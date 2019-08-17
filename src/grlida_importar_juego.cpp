@@ -359,7 +359,7 @@ void frmImportarJuego::cargarConfig()
 	if (!DatosJuego.titulo.isEmpty())
 		ui->txtTituloBuscar->setText(DatosJuego.titulo);
 	else
-		ui->txtTituloBuscar->setText("Alone");
+		ui->txtTituloBuscar->setText("");
 	ui->txtTituloBuscar->setFocus();
 
 	codecFileHtml.clear();
