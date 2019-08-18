@@ -28,10 +28,7 @@
 #include <Qt>
 #include <QPen>
 
-static const QString URL_GRL = "http://localhost/gr-lida.local/";
-//static const QString URL_GRL = "http://gr-lida.org/";
-//"http://www.gr-lida.org/"
-//"https://www.gr-lida.org/"
+static const QString URL_GRL = "http://www.gr-lida.org/";
 
 enum dataRole {
 	IdGrlRole    = Qt::UserRole +100,
