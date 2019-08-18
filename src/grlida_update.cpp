@@ -44,31 +44,44 @@ frmUpdate::frmUpdate(QList<stUpdates> m_up_grl, QList<stUpdates> m_up_js, QList<
 
 	cargarConfig();
 
-	ui->twUpdates->clear();
-	twAddCat("GR-lida", m_up_grl.at(0).info, fGrl->theme() +"img16/gr-lida.png");
-
 	const int listUpGrlSize = m_up_grl.size();
-	for (int i = 0; i < listUpGrlSize; ++i)
-		twAddSubCat(m_up_grl.at(i), fGrl->theme() +"img16/gr-lida.png", "POST");
 
-	ui->twUpdates->clearSelection();
-	ui->twUpdates->topLevelItem(0)->child(0)->setSelected(true);
-	emit on_twUpdates_itemClicked(ui->twUpdates->topLevelItem(0)->child(0), col_title);
+	ui->twUpdates->clear();
+	if (listUpGrlSize > 0)
+	{
+		twAddCat("GR-lida", m_up_grl.at(0).info, fGrl->theme() +"img16/gr-lida.png");
 
-	twAddCat(tr("Script para importar datos del juego"), m_up_js.at(0).info, fGrl->theme() +"img16/script.png");
+		for (int i = 0; i < listUpGrlSize; ++i)
+			twAddSubCat(m_up_grl.at(i), fGrl->theme() +"img16/gr-lida.png", "POST");
+
+		ui->twUpdates->clearSelection();
+		ui->twUpdates->topLevelItem(0)->child(0)->setSelected(true);
+		emit on_twUpdates_itemClicked(ui->twUpdates->topLevelItem(0)->child(0), col_title);
+	}
 
 	const int listUpJsSize = m_up_js.size();
-	for (int i = 0; i < listUpJsSize; ++i)
-		twAddSubCat(m_up_js.at(i), fGrl->theme() +"img16/script.png", "POST");
+	if (listUpJsSize > 0)
+	{
+		twAddCat(tr("Script para importar datos del juego"), m_up_js.at(0).info, fGrl->theme() +"img16/script.png");
 
-	twAddCat(tr("Estilos o themes para el GR-lida"), m_up_st.at(0).info, fGrl->theme() +"img16/style.png");
+		for (int i = 0; i < listUpJsSize; ++i)
+			twAddSubCat(m_up_js.at(i), fGrl->theme() +"img16/script.png", "POST");
+	}
 
 	const int listUpStSize = m_up_st.size();
-	for (int i = 0; i < listUpStSize; ++i)
-		twAddSubCat(m_up_st.at(i), fGrl->theme() +"img16/style.png", "POST");
+	if (listUpStSize > 0)
+	{
+		twAddCat(tr("Estilos o themes para el GR-lida"), m_up_st.at(0).info, fGrl->theme() +"img16/style.png");
 
-	twAddCat(tr("Lista de compatibilidad del ScummVM"), m_up_svm.info, fGrl->theme() +"img16/cat/scummvm.png");
-		twAddSubCat(m_up_svm, fGrl->theme() +"img16/cat/scummvm.png", "GET");
+		for (int i = 0; i < listUpStSize; ++i)
+			twAddSubCat(m_up_st.at(i), fGrl->theme() +"img16/style.png", "POST");
+	}
+
+	if (!m_up_svm.info.isEmpty())
+	{
+		twAddCat(tr("Lista de compatibilidad del ScummVM"), m_up_svm.info, fGrl->theme() +"img16/cat/scummvm.png");
+			twAddSubCat(m_up_svm, fGrl->theme() +"img16/cat/scummvm.png", "GET");
+	}
 
 // centra la aplicacion en el escritorio
 	this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
