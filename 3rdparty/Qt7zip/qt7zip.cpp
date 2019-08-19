@@ -231,6 +231,9 @@ static QVariant getProperty(CMyComPtr<IInArchive> archive, quint32 index, PROPID
 
 Qt7zip::Qt7zip(QObject *parent) : QObject(parent),
 	sevenzLib(0), is_load_7zlib(false), is_open(false)
+#ifdef Q_OS_UNIX
+	, rarLib(0)
+#endif
 {
 	szInterface = new SevenZipInterface;
 	is_load_7zlib = loadLib();
