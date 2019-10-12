@@ -22,7 +22,7 @@ Rodney's Funscreen|rodney|75|rodney.png
 Adventuresoft/Horrorsoft Game Compatibility Chart|||sinimg.png
 Elvira - Mistress of the Dark|elvira1|75|elvira.png
 Elvira II - The Jaws of Cerberus|elvira2|75|elvira.png
-Personal Nightmare|pn|sinnum|sinimg.png
+Personal Nightmare|pn|75|sinimg.png
 Simon the Sorcerer 1|simon1|100|simon.png
 Simon the Sorcerer 2|simon2|100|simon.png
 Simon the Sorcerer's Puzzle Pack - D.I.M.P.|dimp|75|simon.png
@@ -30,7 +30,7 @@ Simon the Sorcerer's Puzzle Pack - Jumble|jumble|75|simon.png
 Simon the Sorcerer's Puzzle Pack - NoPatience|puzzle|75|simon.png
 Simon the Sorcerer's Puzzle Pack - Swampy Adventures|swampy|75|simon.png
 The Feeble Files|feeble|100|feeble.png
-Waxworks|waxworks|sinnum|waxworks.png
+Waxworks|waxworks|75|waxworks.png
 
 Coktel Vision Game Compatibility Chart|||logo_coktel_vision.png
 Bargon Attack|bargon|100|bargon.png
@@ -93,7 +93,8 @@ Hoyle's Book of Games 1|hoyle1|100|hoyle.png
 Hoyle's Book of Games 2|hoyle2|100|hoyle.png
 Hoyle's Book of Games 3 (EGA and VGA)|hoyle3|100|hoyle.png
 Hoyle Classic Card Games|hoyle4|100|hoyle.png
-Hoyle Classic Games/Bridge/Children's Collection/Solitaire|hoyle5|0|hoyle.png
+Hoyle Classic Games/Bridge/Children's Collection|hoyle5|75|hoyle.png
+Hoyle Solitaire|hoyle5solitaire|75|sinimg.png
 Inside the Chest/Behind the Developers' Shield|chest|0|sinimg.png
 Jones in the Fast Lane|jones|100|jones.png
 King's Quest I (SCI remake)|kq1sci|100|kq_sci.png
@@ -122,12 +123,12 @@ Police Quest 1 (SCI remake)|pq1sci|100|pq_sci.png
 Police Quest 2|pq2|100|pq_sci.png
 Police Quest 3 (EGA and VGA)|pq3|100|pq_sci.png
 Police Quest 4: Open Season|pq4|75|pq_sci.png
-Police Quest: SWAT|pqswat|sinnum|sinimg.png
+Police Quest: SWAT|pqswat|75|sinimg.png
 Quest for Glory 1/Hero's Quest|qfg1|100|qfg_sci.png
 Quest for Glory 1 VGA remake|qfg1vga|100|qfg_sci.png
 Quest for Glory 2|qfg2|100|qfg_sci.png
 Quest for Glory 3|qfg3|100|qfg_sci.png
-Quest for Glory 4|qfg4|0|qfg_sci.png
+Quest for Glory 4|qfg4|75|qfg_sci.png
 RAMA|rama|75|sinimg.png
 Shivers|shivers|100|sinimg.png
 Slater & Charlie Go Camping|slater|100|slater.png
@@ -142,10 +143,11 @@ Torin's Passage|torin|100|sinimg.png
 
 Other Game Compatibility Chart|||sinimg.png
 3 Skulls of the Toltecs|toltecs|75|toltecs.png
-Amazon: Guardians of Eden|access|sinnum|sinimg.png
-Beavis and Butt-head in Virtual Stupidity|bbvs|sinnum|bbvs.png
+Amazon: Guardians of Eden|access|75|sinimg.png
+Beavis and Butt-head in Virtual Stupidity|bbvs|75|bbvs.png
+Blade Runner|bladerunner|75|sinimg.png
 Blue Force|blueforce|75|blueforce.png
-Broken Sword 2.5: The Return of the Templars|sword25|sinnum|sword25.png
+Broken Sword 2.5: The Return of the Templars|sword25|100|sword25.png
 Bud Tucker in Double Trouble|tucker|100|tucker.png
 Chivalry is Not Dead|chivalry|75|chivalry.png
 Cruise for a Corpse|cruise|100|cruise.png
@@ -154,6 +156,7 @@ Discworld|dw|100|dw.png
 Discworld II - Missing presumed...!?|dw2|100|dw.png
 Dragon History|draci|75|draci.png
 Drascula: The Vampire Strikes Back|drascula|100|drascula.png
+Duckman: The Graphic Adventures of a Private Dick|duckman|75|sinimg.png
 Eye of the Beholder|eob|75|eob.png
 Eye of the Beholder II: The Legend of Darkmoon|eob2|75|eob.png
 Flight of the Amazon Queen|queen|100|queen.png
@@ -163,19 +166,27 @@ Hopkins FBI|hopkins|75|hopkins.png
 Hugo's House of Horrors|hugo1|75|sinimg.png
 Hugo 2: Whodunit?|hugo2|75|sinimg.png
 Hugo 3: Jungle of Doom|hugo3|75|sinimg.png
+Hyperspace Delivery Boy!|hdb|100|sinimg.png
 I Have No Mouth, and I Must Scream|ihnm|75|ihnm.png
 Inherit the Earth: Quest for the Orb|ite|100|ite.png
 Lands of Lore: The Throne of Chaos|lol|75|lol.png
-Mortville Manor|mortevielle|sinnum|mortevielle.png
+Might and Magic IV: Clouds of Xeen|cloudsofxeen|75|sinimg.png
+Might and Magic V: Dark Side of Xeen|darksideofxeen|75|sinimg.png
+Might and Magic: World of Xeen|worldofxeen|75|sinimg.png
+Might and Magic: Swords of Xeen|swordsofxeen|75|sinimg.png
+Mission Supernova Teil 1: Das Schicksal des Horst Hummel|msn1|75|sinimg.png
+Mission Supernova Teil 2: Der Doppelg&auml;nger|msn2|75|sinimg.png
+Mortville Manor|mortevielle|75|mortevielle.png
 Myst|myst|100|myst.png
 Myst: Masterpiece Edition|myst|75|myst.png
 Nippon Safes Inc.|nippon|75|nippon.png
-Plumbers Don't Wear Ties|plumbers|sinnum|sinimg.png
-Rex Nebular and the Cosmic Gender Bender|nebular|sinnum|nebular.png
+Plumbers Don't Wear Ties|plumbers|75|sinimg.png
+The Prince and the Coward|prince|sinnum|sinimg.png
+Rex Nebular and the Cosmic Gender Bender|nebular|75|nebular.png
 Ringworld: Revenge Of The Patriarch|ringworld|75|ringworld.png
 Riven|riven|75|riven.png
-Return to Ringworld|ringworld2|sinnum|ringworld.png
-Sfinx|sfinx|sinnum|sfinx.png
+Return to Ringworld|ringworld2|75|ringworld.png
+Sfinx|sfinx|75|sfinx.png
 Soltys|soltys|75|soltys.png
 Starship Titanic|titanic|75|sinimg.png
 The Journeyman Project: Pegasus Prime|pegasus|75|jmp.png
@@ -183,15 +194,16 @@ The Labyrinth of Time|lab|75|sinimg.png
 The Legend of Kyrandia|kyra1|75|kyra.png
 The Legend of Kyrandia: Book Two: Hand of Fate|kyra2|75|kyra.png
 The Legend of Kyrandia: Book Three: Malcolm's Revenge|kyra3|75|kyra.png
-The Lost Files of Sherlock Holmes: The Case of the Serrated Scalpel|scalpel|sinnum|sherlock.png
-The Lost Files of Sherlock Holmes: The Case of the Rose Tattoo|rosetattoo|sinnum|sherlock.png
+The Lost Files of Sherlock Holmes: The Case of the Serrated Scalpel|scalpel|75|sherlock.png
+The Lost Files of Sherlock Holmes: The Case of the Rose Tattoo|rosetattoo|75|sherlock.png
 The Neverhood|neverhood|75|sinimg.png
 The 7th Guest|t7g|100|t7g.png
 TeenAgent|teenagent|75|teenagent.png
 Toonstruck|toon|100|toon.png
 Tony Tough and the Night of Roasted Moths|tony|100|tony.png
 Touche: The Adventures of the Fifth Musketeer|touche|75|touche.png
-U.F.O.s / Gnap: Der Schurke aus dem All|gnap|sinnum|gnap.png
+U.F.O.s / Gnap: Der Schurke aus dem All|gnap|75|gnap.png
+Versailles 1685|versailles|75|sinimg.png
 Voyeur|voyeur|75|sinimg.png
 Zork: Grand Inquisitor|zgi|75|zgi.png
 Zork Nemesis: The Forbidden Lands|znemesis|75|zgi.png
@@ -267,4 +279,3 @@ Stellaluna|stellaluna|75|stellaluna.png
 The Berenstain Bears Get in a Fight|bearfight|75|bearfight.png
 The Berenstain Bears in the Dark|beardark|75|bearfight.png
 The New Kid on the Block|newkid|75|newkid.png
-
