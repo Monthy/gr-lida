@@ -257,7 +257,7 @@ bool frmWizardDosBox::setDatosJuegos()
 		{
 			DatosJuego.thumbs = "thumbs."+ grlCfg.thumb_format.toLower();
 			sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "thumbs", DatosJuego.thumbs);
-			fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + DatosJuego.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, true, grlCfg.thumb_format);
+			fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + DatosJuego.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, false, grlCfg.thumb_format);
 		}
 
 		if (!CoverFront.isEmpty() && QFile::exists(file_cover_front))

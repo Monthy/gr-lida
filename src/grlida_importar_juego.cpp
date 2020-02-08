@@ -2593,7 +2593,7 @@ void frmImportarJuego::importarJuegos()
 					if (!i.datos.thumbs.isEmpty())
 					{
 						f_info = fGrl->getInfoFile(i.datos.thumbs);
-						isOk   = fGrl->crearThumbs(grlDir.Temp +"imagenes/small/"+ i.datos.thumbs, grlDir.DatosGame +"thumbs."+ grlCfg.thumb_format.toLower(), grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, true, grlCfg.thumb_format);
+						isOk   = fGrl->crearThumbs(grlDir.Temp +"imagenes/small/"+ i.datos.thumbs, grlDir.DatosGame +"thumbs."+ grlCfg.thumb_format.toLower(), grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, false, grlCfg.thumb_format);
 						if (isOk)
 						{
 							i.datos.thumbs = "thumbs"+ f_info.Ext;

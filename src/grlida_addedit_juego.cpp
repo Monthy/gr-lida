@@ -601,7 +601,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!Thumbs.isEmpty() && QFile::exists(file_thumbs))
 	{
-		ui->lbDat_thumbs->setPixmap(QPixmap(file_thumbs));
+		ui->lbDat_thumbs->setPixmap(QPixmap(file_thumbs).scaled(ui->gbxImg_Thumbs->width(), ui->gbxImg_Thumbs->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		ui->btnDat_thumbs_ver->setEnabled(true);
 		ui->btnDat_thumbs_eliminar->setEnabled(true);
 	} else
@@ -615,7 +615,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverFront.isEmpty() && QFile::exists(file_cover_front))
 	{
-		ui->lbDat_cover_front->setPixmap(QPixmap(file_cover_front));
+		ui->lbDat_cover_front->setPixmap(QPixmap(file_cover_front).scaled(ui->gbxImg_CoverFront->width(), ui->gbxImg_CoverFront->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		ui->btnDat_cover_front_ver->setEnabled(true);
 		ui->btnDat_cover_front_eliminar->setEnabled(true);
 	} else
@@ -629,7 +629,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverBack.isEmpty() && QFile::exists(file_cover_back))
 	{
-		ui->lbDat_cover_back->setPixmap(QPixmap(file_cover_back));
+		ui->lbDat_cover_back->setPixmap(QPixmap(file_cover_back).scaled(ui->gbxImg_CoverBack->width(), ui->gbxImg_CoverBack->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		ui->btnDat_cover_back_ver->setEnabled(true);
 		ui->btnDat_cover_back_eliminar->setEnabled(true);
 	} else
@@ -643,7 +643,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverLeft.isEmpty() && QFile::exists(file_cover_left))
 	{
-		ui->lbDat_cover_left->setPixmap(QPixmap(file_cover_left));
+		ui->lbDat_cover_left->setPixmap(QPixmap(file_cover_left).scaled(ui->gbxImg_CoverLeft->width(), ui->gbxImg_CoverLeft->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		ui->btnDat_cover_left_ver->setEnabled(true);
 		ui->btnDat_cover_left_eliminar->setEnabled(true);
 	} else
@@ -657,7 +657,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverRight.isEmpty() && QFile::exists(file_cover_right))
 	{
-		ui->lbDat_cover_right->setPixmap(QPixmap(file_cover_right));
+		ui->lbDat_cover_right->setPixmap(QPixmap(file_cover_right).scaled(ui->gbxImg_CoverRight->width(), ui->gbxImg_CoverRight->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		ui->btnDat_cover_right_ver->setEnabled(true);
 		ui->btnDat_cover_right_eliminar->setEnabled(true);
 	} else
@@ -671,7 +671,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverTop.isEmpty() && QFile::exists(file_cover_top))
 	{
-		ui->lbDat_cover_top->setPixmap(QPixmap(file_cover_top));
+		ui->lbDat_cover_top->setPixmap(QPixmap(file_cover_top).scaled(ui->gbxImg_CoverTop->width(), ui->gbxImg_CoverTop->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		ui->btnDat_cover_top_ver->setEnabled(true);
 		ui->btnDat_cover_top_eliminar->setEnabled(true);
 	} else
@@ -685,7 +685,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverBottom.isEmpty() && QFile::exists(file_cover_bottom))
 	{
-		ui->lbDat_cover_bottom->setPixmap(QPixmap(file_cover_bottom));
+		ui->lbDat_cover_bottom->setPixmap(QPixmap(file_cover_bottom).scaled(ui->gbxImg_CoverBottom->width(), ui->gbxImg_CoverBottom->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		ui->btnDat_cover_bottom_ver->setEnabled(true);
 		ui->btnDat_cover_bottom_eliminar->setEnabled(true);
 	} else
@@ -927,7 +927,7 @@ bool frmAddEditJuego::setDatosJuegos(bool isSoloDatos)
 					DatosJuego.thumbs = "thumbs." + grlCfg.thumb_format.toLower();
 					sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "thumbs", DatosJuego.thumbs);
 					if (!Editando)
-						fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + DatosJuego.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, true, grlCfg.thumb_format);
+						fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + DatosJuego.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, false, grlCfg.thumb_format);
 				}
 
 				if (!CoverFront.isEmpty() && QFile::exists(file_cover_front))
@@ -1024,7 +1024,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			Thumbs            = "thumbs." + grlCfg.thumb_format.toLower();
 			grlCfg.Img_Thumbs = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_thumbs->setPixmap(QPixmap(file_thumbs));
+			ui->lbDat_thumbs->setPixmap(QPixmap(file_thumbs).scaled(ui->gbxImg_Thumbs->width(), ui->gbxImg_Thumbs->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 			ui->btnDat_thumbs_ver->setEnabled(true);
 			ui->btnDat_thumbs_eliminar->setEnabled(true);
 
@@ -1034,7 +1034,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 				{
 					if (oldThumbs != Thumbs)
 						fGrl->eliminarArchivo(grlDir.DatosGame + oldThumbs);
-					fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + Thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, true, grlCfg.thumb_format);
+					fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + Thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, false, grlCfg.thumb_format);
 					oldThumbs = Thumbs;
 				}
 			}
@@ -1044,7 +1044,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			CoverFront            = "cover_front"+ f_info.Ext;
 			grlCfg.Img_CoverFront = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_cover_front->setPixmap(QPixmap(file_cover_front));
+			ui->lbDat_cover_front->setPixmap(QPixmap(file_cover_front).scaled(ui->gbxImg_CoverFront->width(), ui->gbxImg_CoverFront->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 			ui->btnDat_cover_front_ver->setEnabled(true);
 			ui->btnDat_cover_front_eliminar->setEnabled(true);
 
@@ -1056,7 +1056,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			CoverBack            = "cover_back"+ f_info.Ext;
 			grlCfg.Img_CoverBack = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_cover_back->setPixmap(QPixmap(file_cover_back));
+			ui->lbDat_cover_back->setPixmap(QPixmap(file_cover_back).scaled(ui->gbxImg_CoverBack->width(), ui->gbxImg_CoverBack->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 			ui->btnDat_cover_back_ver->setEnabled(true);
 			ui->btnDat_cover_back_eliminar->setEnabled(true);
 
@@ -1068,7 +1068,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 				CoverLeft            = "cover_left"+ f_info.Ext;
 				grlCfg.Img_CoverLeft = fGrl->setDirRelative(f_info.Path);
 
-				ui->lbDat_cover_left->setPixmap(QPixmap(file_cover_left));
+				ui->lbDat_cover_left->setPixmap(QPixmap(file_cover_left).scaled(ui->gbxImg_CoverLeft->width(), ui->gbxImg_CoverLeft->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 				ui->btnDat_cover_left_ver->setEnabled(true);
 				ui->btnDat_cover_left_eliminar->setEnabled(true);
 
@@ -1080,7 +1080,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 				CoverRight            = "cover_right"+ f_info.Ext;
 				grlCfg.Img_CoverRight = fGrl->setDirRelative(f_info.Path);
 
-				ui->lbDat_cover_right->setPixmap(QPixmap(file_cover_right));
+				ui->lbDat_cover_right->setPixmap(QPixmap(file_cover_right).scaled(ui->gbxImg_CoverRight->width(), ui->gbxImg_CoverRight->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 				ui->btnDat_cover_right_ver->setEnabled(true);
 				ui->btnDat_cover_right_eliminar->setEnabled(true);
 
@@ -1092,7 +1092,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			CoverTop            = "cover_top"+ f_info.Ext;
 			grlCfg.Img_CoverTop = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_cover_top->setPixmap(QPixmap(file_cover_top));
+			ui->lbDat_cover_top->setPixmap(QPixmap(file_cover_top).scaled(ui->gbxImg_CoverTop->width(), ui->gbxImg_CoverTop->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 			ui->btnDat_cover_top_ver->setEnabled(true);
 			ui->btnDat_cover_top_eliminar->setEnabled(true);
 
@@ -1104,7 +1104,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			CoverBottom            = "cover_bottom"+ f_info.Ext;
 			grlCfg.Img_CoverBottom = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_cover_bottom->setPixmap(QPixmap(file_cover_bottom));
+			ui->lbDat_cover_bottom->setPixmap(QPixmap(file_cover_bottom).scaled(ui->gbxImg_CoverBottom->width(), ui->gbxImg_CoverBottom->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 			ui->btnDat_cover_bottom_ver->setEnabled(true);
 			ui->btnDat_cover_bottom_eliminar->setEnabled(true);
 

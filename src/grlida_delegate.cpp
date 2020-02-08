@@ -66,6 +66,7 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 {
 	int rect_x = option.rect.x();
 	int rect_y = option.rect.y();
+	int icon_x_offset, icon_y_offset = 0;
 	QStyledItemDelegate::paint(painter, option, index);
 
 	QPen pen_lines = pen;
@@ -95,10 +96,12 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
 // Dibujamos la carátula.
 	QPixmap icon = qvariant_cast<QPixmap>(index.sibling(index.row(), col_IdGrl).data(ThumbsRole));
-	if (lwConf.item[stItem].img_scaled)
-		painter->drawPixmap(QRect(rect_x + lwConf.item[stItem].img_scale_pos_x, rect_y + lwConf.item[stItem].img_scale_pos_y, lwConf.item[stItem].img_scale_w, lwConf.item[stItem].img_scale_h), icon);
-	else
-		painter->drawPixmap(QPointF(rect_x + lwConf.item[stItem].img_scale_pos_x, rect_y + lwConf.item[stItem].img_scale_pos_y), icon);
+	if (lwConf.item[stItem].img_scaled) {
+		icon = icon.scaled(lwConf.item[stItem].img_scale_w, lwConf.item[stItem].img_scale_h, Qt::KeepAspectRatio);
+		icon_x_offset = (lwConf.item[stItem].img_scale_w - icon.width()) / 2;
+		icon_y_offset = (lwConf.item[stItem].img_scale_h - icon.height()) / 2;
+	}
+	painter->drawPixmap(QPointF(rect_x + lwConf.item[stItem].img_scale_pos_x + icon_x_offset, rect_y + lwConf.item[stItem].img_scale_pos_y + icon_y_offset), icon);
 
 // Dibujamos carátula top
 	if (!lwConf.item[stItem].img_cover_top_zindex)

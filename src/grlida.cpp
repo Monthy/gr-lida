@@ -2232,7 +2232,6 @@ void GrLida::setChangeCategorias(int cat_id)
 	grl_tv_delegate->setTheme(QSize(lwIconCfg.tw_icon_width, lwIconCfg.tw_icon_height), grlCfg.IconoFav, fGrl->theme(), grlCfg.FormatsImage.join(";"));
 	grl_lv_delegate->setTheme(lwIconCfg, fGrl->theme());
 	grl_picflow->setSlideSize(QSize(lwIconCfg.pf_img_width, lwIconCfg.pf_img_height));
-	grl_picflow->setSlideFixSize(lwIconCfg.pf_img_fixsize);
 	ui->tvJuegos->setIconSize(QSize(lwIconCfg.tw_icon_width, lwIconCfg.tw_icon_height));
 	ui->lvJuegos->setIconSize(QSize(lwIconCfg.icon_width, lwIconCfg.icon_height));
 
@@ -3670,7 +3669,6 @@ void GrLida::on_mnu_tool_edit_themes_triggered()
 		grl_tv_delegate->setTheme(QSize(lwIconCfg.tw_icon_width, lwIconCfg.tw_icon_height), grlCfg.IconoFav, fGrl->theme(), grlCfg.FormatsImage.join(";"));
 		grl_lv_delegate->setTheme(lwIconCfg, fGrl->theme());
 		grl_picflow->setSlideSize(QSize(lwIconCfg.pf_img_width, lwIconCfg.pf_img_height));
-		grl_picflow->setSlideFixSize(lwIconCfg.pf_img_fixsize);
 		ui->tvJuegos->setAlternatingRowColors(lwIconCfg.tw_alternating_row_colors);
 		ui->tvJuegos->setIconSize(QSize(lwIconCfg.tw_icon_width, lwIconCfg.tw_icon_height));
 		ui->tvJuegos->setColumnWidth(col_Icono, lwIconCfg.tw_icon_width + 8);
