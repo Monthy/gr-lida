@@ -2005,12 +2005,12 @@
         <location filename="../../src/grlida.cpp" line="2202"/>
         <location filename="../../src/grlida.cpp" line="2727"/>
         <source>de</source>
-        <translation>the</translation>
+        <translation>of</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="2683"/>
         <source>introducido el</source>
-        <translation>Entered the</translation>
+        <translation>Added on</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="2632"/>
@@ -2279,7 +2279,7 @@ Click cancel to exit.</translation>
         <location filename="../../src/grlida.cpp" line="2202"/>
         <location filename="../../src/grlida.cpp" line="2727"/>
         <source>NÂº juegos</source>
-        <translation>Number of games</translation>
+        <translation>Game</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3014"/>
@@ -2743,7 +2743,7 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="829"/>
         <source>%1K memoria convencional restante</source>
-        <translation>%1K memoria convencional restante</translation>
+        <translation>%1K conventional memory left</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="840"/>
@@ -3068,7 +3068,7 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../ui/addedit_dosbox.ui" line="30"/>
         <source>Datos generales para el DOSbox</source>
-        <translation>Opciones del VDMSound</translation>
+        <translation>General DOSBox data</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_dosbox.ui" line="62"/>
@@ -3362,12 +3362,12 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../ui/addedit_dosbox.ui" line="2061"/>
         <source>Autocrear montaje</source>
-        <translation>Automatic mounting</translation>
+        <translation>Autocreate mount point</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_dosbox.ui" line="2078"/>
         <source>Selecciona montaje primario</source>
-        <translation>Choose first device mounting</translation>
+        <translation>Select as primary device</translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2106"/>
@@ -3628,7 +3628,7 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../ui/addedit_juego.ui" line="404"/>
         <source>Introducido el</source>
-        <translation>Entered the</translation>
+        <translation>added on</translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="414"/>
@@ -3760,7 +3760,7 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../ui/addedit_juego.ui" line="184"/>
         <source>Idioma voces:</source>
-        <translation>Language Voices:</translation>
+        <translation>Voices:</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_juego.ui" line="397"/>
@@ -8356,7 +8356,7 @@ Check if the program is really installed.</translation>
     <message utf8="true">
         <location filename="../../ui/opciones.ui" line="871"/>
         <source>Guardar archivo de configuración del DOSBox, si esta desactivado se genera al ejecutar el juego.</source>
-        <translation>Save DOSBox configuration file, if disabled, is generated when the game is executed.</translation>
+        <translation>Save DOSBox configuration file; if disabled generate when game is executed.</translation>
     </message>
     <message>
         <location filename="../../ui/opciones.ui" line="1110"/>
@@ -9027,7 +9027,7 @@ Check if the program is really installed.</translation>
     <message>
         <location filename="../../ui/wizard_dosbox.ui" line="630"/>
         <source>Templates profiles:</source>
-        <translation></translation>
+        <translation>Profile template:</translation>
     </message>
     <message>
         <location filename="../../ui/wizard_dosbox.ui" line="490"/>
