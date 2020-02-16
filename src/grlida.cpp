@@ -500,6 +500,18 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 		log_list << "---------------------------------------------------------------" << "";
 	}
 
+// Comprobar columna dbgrl_mnu_nav
+	bool existe_mostrar_en_menu_nav = sql->comprobarColumnaTabla("dbgrl_mnu_nav", "mostrar");
+	if (!existe_mostrar_en_menu_nav)
+	{
+		sql->crearTablaMnuNav(true);
+		QSqlQuery menu_nav_query(sql->getSqlDB());
+		menu_nav_query.exec("INSERT INTO dbgrl_mnu_nav_temp SELECT id, titulo, col_value , col_name, sql_query, archivo, img, orden, show, expanded FROM dbgrl_mnu_nav;");
+		sql->eliminarTabla("dbgrl_mnu_nav");
+		sql->renombrarTabla("dbgrl_mnu_nav_temp", "dbgrl_mnu_nav");
+	}
+	log_list << "---------------------------------------------------------------" << "";
+
 	if (esNuevaVersionGRlida)
 	{
 // esNuevaVersionGRlida -----------------------------------------------------------------------------------------
@@ -893,8 +905,8 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 	}
 
 //	fGrl->guardarArchivo(grlDir.Home +"comprobarArchivosDatos-"+ fGrl->getTime() +".log", log_out, "UTF-8");
-	if (!QFile::exists(grlDir.Home +"comprobarArchivosDatos.log"))
-		fGrl->guardarArchivo(grlDir.Home +"comprobarArchivosDatos.log", log_out, "UTF-8");
+//	if (!QFile::exists(grlDir.Home +"comprobarArchivosDatos.log"))
+//		fGrl->guardarArchivo(grlDir.Home +"comprobarArchivosDatos.log", log_out, "UTF-8");
 
 /*	qDebug() << "Datos Juego --------------------------------------------------------------";
 	qDebug() << "idgrl           : " << datos.idgrl;
@@ -2400,6 +2412,8 @@ void GrLida::nuevoEditarDatosDelJuego(stDatosJuego datos, bool isNew, bool isMen
 
 	if (isNew)
 		++total_juegos;
+	else
+		fGrl->eliminarArchivo(datosGame +"/ficha.html");
 
 	if (isNew && isMenu)
 	{
@@ -2576,77 +2590,85 @@ void GrLida::mostrarDatosDelJuego(QString IDitem, bool soloInfo)
 
 		if (grlCfg.Pnl_Datos)
 		{
-			QString dat_idioma          = fGrl->getImgDatos(idiomas_list, datos.idioma.split(";")      , true);
-			QString dat_idioma_voces    = fGrl->getImgDatos(idiomas_list, datos.idioma_voces.split(";"), true);
-			QString dat_img_edad_titulo = edades_list[datos.edad_recomendada].titulo;
-			QString dat_img_edad        = "<img src=\"edad_rs_"+ edades_list[datos.edad_recomendada].icono +"\" alt=\""+ dat_img_edad_titulo +"\" title=\""+ dat_img_edad_titulo +"\"> ";
-			QString dat_comentario      = fGrl->reemplazaTextoSmiles(datos.comentario, smiles_list);
-
-			QString dat_thumbs = fGrl->theme() +"images/juego_sin_imagen.png";
-			if (!datos.thumbs.isEmpty() && QFile::exists(grlDir.DatosGame + datos.thumbs))
-				dat_thumbs = grlDir.DatosGame + datos.thumbs;
-
-			QString dat_rating = "";
-			for (int i=0; i < 5; ++i)
+			QString tpl_info_game_new = "";
+			if (!QFile::exists(grlDir.DatosDbGrl + datos.game_dir +"/ficha.html"))
 			{
-				if (i < datos.rating.toInt())
-					dat_rating.append("<img src=\"img_rs_star_on.png\" alt=\""+ fGrl->intToStr(i+1) +"\" title=\""+ fGrl->intToStr(i+1) +"\"> ");
-				else
-					dat_rating.append("<img src=\"img_rs_star_off.png\"> ");
+				QString dat_idioma          = fGrl->getImgDatos(idiomas_list, datos.idioma.split(";")      , true);
+				QString dat_idioma_voces    = fGrl->getImgDatos(idiomas_list, datos.idioma_voces.split(";"), true);
+				QString dat_img_edad_titulo = edades_list[datos.edad_recomendada].titulo;
+				QString dat_img_edad        = "<img src=\"edad_rs_"+ edades_list[datos.edad_recomendada].icono +"\" alt=\""+ dat_img_edad_titulo +"\" title=\""+ dat_img_edad_titulo +"\"> ";
+				QString dat_comentario      = fGrl->reemplazaTextoSmiles(datos.comentario, smiles_list);
+
+				QString dat_thumbs = fGrl->theme() +"images/juego_sin_imagen.png";
+				if (!datos.thumbs.isEmpty() && QFile::exists(grlDir.DatosGame + datos.thumbs))
+					dat_thumbs = grlDir.DatosGame + datos.thumbs;
+
+				QString dat_rating = "";
+				for (int i=0; i < 5; ++i)
+				{
+					if (i < datos.rating.toInt())
+						dat_rating.append("<img src=\"img_rs_star_on.png\" alt=\""+ fGrl->intToStr(i+1) +"\" title=\""+ fGrl->intToStr(i+1) +"\"> ");
+					else
+						dat_rating.append("<img src=\"img_rs_star_off.png\"> ");
+				}
+
+				QString img_original = "<img src=\"img_rs_original_off.png\"> ";
+				if (fGrl->strToBool(datos.original))
+					img_original = "<img src=\"img_rs_original.png\"> ";
+
+				QString img_favorito = "<img src=\"img_rs_favorito_off.png\"> ";
+				if (fGrl->strToBool(datos.favorito))
+					img_favorito = "<img src=\"img_rs_favorito.png\"> ";
+
+				QString img_gamepad = "<img src=\"img_rs_gamepad_off.png\"> ";
+				if (fGrl->strToBool(datos.gamepad))
+					img_gamepad = "<img src=\"img_rs_gamepad.png\"> ";
+
+				tpl_info_game_new = tpl_info_game_old;
+				tpl_info_game_new.replace("{info_icono}"               , "<img src="+ QUrl::fromLocalFile(dat_icono).path() +">"); //  width=\"24\" height=\"24\"
+				tpl_info_game_new.replace("{info_titulo}"              , datos.titulo       );
+				tpl_info_game_new.replace("{info_subtitulo}"           , datos.subtitulo    );
+				tpl_info_game_new.replace("{info_genero}"              , datos.genero       );
+				tpl_info_game_new.replace("{info_compania}"            , datos.compania     );
+				tpl_info_game_new.replace("{info_desarrollador}"       , datos.desarrollador);
+				tpl_info_game_new.replace("{info_tema}"                , datos.tema         );
+				tpl_info_game_new.replace("{info_grupo}"               , datos.grupo        );
+				tpl_info_game_new.replace("{info_perspectiva}"         , datos.perspectiva  );
+				tpl_info_game_new.replace("{info_idioma}"              , dat_idioma         );
+				tpl_info_game_new.replace("{info_idioma_voces}"        , dat_idioma_voces   );
+				tpl_info_game_new.replace("{info_formato}"             , datos.formato      );
+				tpl_info_game_new.replace("{info_anno}"                , datos.anno         );
+				tpl_info_game_new.replace("{info_numdisc}"             , datos.numdisc      );
+				tpl_info_game_new.replace("{info_img_edad_recomendada}", dat_img_edad       );
+				tpl_info_game_new.replace("{info_edad_recomendada}"    , dat_img_edad_titulo);
+				tpl_info_game_new.replace("{info_sistemaop}"           , datos.sistemaop    );
+				tpl_info_game_new.replace("{info_tamano}"              , datos.tamano       );
+				tpl_info_game_new.replace("{info_graficos}"            , datos.graficos     );
+				tpl_info_game_new.replace("{info_sonido}"              , datos.sonido       );
+				tpl_info_game_new.replace("{info_jugabilidad}"         , datos.jugabilidad  );
+				tpl_info_game_new.replace("{info_original}"            , fGrl->strToBool(datos.original) ? tr("Si") : tr("No"));
+				tpl_info_game_new.replace("{img_original}"             , img_original       );
+				tpl_info_game_new.replace("{info_estado}"              , datos.estado       );
+				tpl_info_game_new.replace("{info_thumbs}"              , QUrl::fromLocalFile(dat_thumbs).path());
+				tpl_info_game_new.replace("{info_fecha}"               , fGrl->horaFechaActual(datos.fecha, grlCfg.FormatoFecha));
+				tpl_info_game_new.replace("{info_tipo_emu}"            , tipo_emu           );
+				tpl_info_game_new.replace("{img_tipo_emu}"             , img_tipo_emu       );
+				tpl_info_game_new.replace("{info_favorito}"            , fGrl->strToBool(datos.favorito) ? tr("Si") : tr("No"));
+				tpl_info_game_new.replace("{img_favorito}"             , img_favorito       );
+				tpl_info_game_new.replace("{info_gamepad}"             , fGrl->strToBool(datos.gamepad) ? tr("Si") : tr("No"));
+				tpl_info_game_new.replace("{img_gamepad}"              , img_gamepad        );
+				tpl_info_game_new.replace("{info_rating}"              , dat_rating         );
+				tpl_info_game_new.replace("{info_usuario}"             , datos.usuario      );
+				tpl_info_game_new.replace("{info_comentario}"          , dat_comentario     );
+				tpl_info_game_new.replace("<dir_scripts>"              , grlDir.Scripts     );
+				tpl_info_game_new.replace("<theme>"                    , fGrl->theme()      );
+				tpl_info_game_new.replace("{dbx_usado}"                , dbx_usado          );
+				tpl_info_game_new.replace("{dbx_usado_img}"            , dbx_usado_img      );
+
+				fGrl->guardarArchivo(grlDir.DatosDbGrl + datos.game_dir +"/ficha.html", tpl_info_game_new, "UTF-8");
+			} else {
+				tpl_info_game_new = fGrl->leerArchivo(grlDir.DatosDbGrl + datos.game_dir +"/ficha.html", "UTF-8");
 			}
-
-			QString img_original = "<img src=\"img_rs_original_off.png\"> ";
-			if (fGrl->strToBool(datos.original))
-				img_original = "<img src=\"img_rs_original.png\"> ";
-
-			QString img_favorito = "<img src=\"img_rs_favorito_off.png\"> ";
-			if (fGrl->strToBool(datos.favorito))
-				img_favorito = "<img src=\"img_rs_favorito.png\"> ";
-
-			QString img_gamepad = "<img src=\"img_rs_gamepad_off.png\"> ";
-			if (fGrl->strToBool(datos.gamepad))
-				img_gamepad = "<img src=\"img_rs_gamepad.png\"> ";
-
-			QString tpl_info_game_new = tpl_info_game_old;
-			tpl_info_game_new.replace("{info_icono}"               , "<img src="+ QUrl::fromLocalFile(dat_icono).path() +">"); //  width=\"24\" height=\"24\"
-			tpl_info_game_new.replace("{info_titulo}"              , datos.titulo       );
-			tpl_info_game_new.replace("{info_subtitulo}"           , datos.subtitulo    );
-			tpl_info_game_new.replace("{info_genero}"              , datos.genero       );
-			tpl_info_game_new.replace("{info_compania}"            , datos.compania     );
-			tpl_info_game_new.replace("{info_desarrollador}"       , datos.desarrollador);
-			tpl_info_game_new.replace("{info_tema}"                , datos.tema         );
-			tpl_info_game_new.replace("{info_grupo}"               , datos.grupo        );
-			tpl_info_game_new.replace("{info_perspectiva}"         , datos.perspectiva  );
-			tpl_info_game_new.replace("{info_idioma}"              , dat_idioma         );
-			tpl_info_game_new.replace("{info_idioma_voces}"        , dat_idioma_voces   );
-			tpl_info_game_new.replace("{info_formato}"             , datos.formato      );
-			tpl_info_game_new.replace("{info_anno}"                , datos.anno         );
-			tpl_info_game_new.replace("{info_numdisc}"             , datos.numdisc      );
-			tpl_info_game_new.replace("{info_img_edad_recomendada}", dat_img_edad       );
-			tpl_info_game_new.replace("{info_edad_recomendada}"    , dat_img_edad_titulo);
-			tpl_info_game_new.replace("{info_sistemaop}"           , datos.sistemaop    );
-			tpl_info_game_new.replace("{info_tamano}"              , datos.tamano       );
-			tpl_info_game_new.replace("{info_graficos}"            , datos.graficos     );
-			tpl_info_game_new.replace("{info_sonido}"              , datos.sonido       );
-			tpl_info_game_new.replace("{info_jugabilidad}"         , datos.jugabilidad  );
-			tpl_info_game_new.replace("{info_original}"            , fGrl->strToBool(datos.original) ? tr("Si") : tr("No"));
-			tpl_info_game_new.replace("{img_original}"             , img_original       );
-			tpl_info_game_new.replace("{info_estado}"              , datos.estado       );
-			tpl_info_game_new.replace("{info_thumbs}"              , QUrl::fromLocalFile(dat_thumbs).path());
-			tpl_info_game_new.replace("{info_fecha}"               , fGrl->horaFechaActual(datos.fecha, grlCfg.FormatoFecha));
-			tpl_info_game_new.replace("{info_tipo_emu}"            , tipo_emu           );
-			tpl_info_game_new.replace("{img_tipo_emu}"             , img_tipo_emu       );
-			tpl_info_game_new.replace("{info_favorito}"            , fGrl->strToBool(datos.favorito) ? tr("Si") : tr("No"));
-			tpl_info_game_new.replace("{img_favorito}"             , img_favorito       );
-			tpl_info_game_new.replace("{info_gamepad}"             , fGrl->strToBool(datos.gamepad) ? tr("Si") : tr("No"));
-			tpl_info_game_new.replace("{img_gamepad}"              , img_gamepad        );
-			tpl_info_game_new.replace("{info_rating}"              , dat_rating         );
-			tpl_info_game_new.replace("{info_usuario}"             , datos.usuario      );
-			tpl_info_game_new.replace("{info_comentario}"          , dat_comentario     );
-			tpl_info_game_new.replace("<dir_scripts>"              , grlDir.Scripts     );
-			tpl_info_game_new.replace("<theme>"                    , fGrl->theme()      );
-			tpl_info_game_new.replace("{dbx_usado}"                , dbx_usado          );
-			tpl_info_game_new.replace("{dbx_usado_img}"            , dbx_usado_img      );
 
 			ui->txtInfo->setHtml(tpl_info_game_new);
 

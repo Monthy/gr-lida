@@ -87,10 +87,17 @@ public:
 // Actualiza el orden de un QTreeWidget y en la base de datos
 	void actualizaOrdenTreeWidget(QTreeWidget *twOrden, QString tabla, QString col_id, QString col_orden, int coltw_id, int coltw_order);
 
+
+// Comprueba si existe la columna de una tabla
+	bool comprobarColumnaTabla(QString tabla, QString columna);
 // Renombrar una tabla
 	bool renombrarTabla(QString old_name, QString new_name);
+// Eliminamos una tabla
+	bool eliminarTabla(QString tabla);
 // Crea una tabla nueva para Datos
 	bool crearTablaDatos(QString tabla);
+// Crea la tabla dbgrl_mnu_nav
+	bool crearTablaMnuNav(bool isTemp = false);
 // Crea las tablas de la base de datos si es necesario
 	void crearTablas();
 

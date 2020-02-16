@@ -57,14 +57,15 @@ frmAddEditMontajes::~frmAddEditMontajes()
 void frmAddEditMontajes::cargarConfig()
 {
 	ui->cbxMontaje_type_drive->clear();
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_hd.png")    , tr("Carpeta como disco duro"), "drive"        );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_cdrom.png") , tr("Unidad de CD-ROM")       , "cdrom"        );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_floppy.png"), tr("Carpeta como disquete")  , "floppy"       );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png")    , tr("Imagen de disquete")     , "IMG_floppy"   );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/cd_iso.png")      , tr("Imagen ISO, CUE/BIN")    , "IMG_iso"      );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/cd_multi_iso.png"), tr("Imagen ISO multiples")   , "IMG_multi_iso");
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_hd.png")    , tr("Imagen de disco duro")   , "IMG_hdd"      );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/floppy_2.png")    , tr("Imagen Botable")         , "boot"         );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_hd.png")    , tr("Carpeta como disco duro")     , "drive"           );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_cdrom.png") , tr("Unidad de CD-ROM")            , "cdrom"           );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_floppy.png"), tr("Carpeta como disquete")       , "floppy"          );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png")    , tr("Imagen de disquete")          , "IMG_floppy"      );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png")    , tr("Imagen de disquete multiples"), "IMG_multi_floppy");
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/cd_iso.png")      , tr("Imagen ISO, CUE/BIN")         , "IMG_iso"         );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/cd_multi_iso.png"), tr("Imagen ISO multiples")        , "IMG_multi_iso"   );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_hd.png")    , tr("Imagen de disco duro")        , "IMG_hdd"         );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/floppy_2.png")    , tr("Imagen Botable")              , "boot"            );
 
 	ui->cbxMontaje_mode_cdrom->clear();
 	ui->cbxMontaje_mode_cdrom->addItem(tr("No usar nada"), "");
@@ -138,10 +139,10 @@ void frmAddEditMontajes::setTheme()
 void frmAddEditMontajes::setDatosMontaje(stConfigDOSBoxMount montaje)
 {
 	DatosMontaje = montaje;
-	if (montaje.tipo_as == "IMG_multi_iso" || montaje.tipo_as == "boot")
+	if (montaje.tipo_as == "IMG_multi_iso" || montaje.tipo_as == "IMG_multi_floppy" || montaje.tipo_as == "boot")
 	{
 		ui->txtMontaje_path->setText("");
-		QString img_tipo_as  = montaje.tipo_as == "boot" ? "floppy_2.png" : "cd_iso.png";
+		QString img_tipo_as   = montaje.tipo_as == "IMG_multi_iso" ? "cd_iso.png" : "floppy_2.png";
 		QStringList listaIsos = montaje.path.split("|");
 		ui->lw_MultiIso->clear();
 		const int listSize = listaIsos.size();
@@ -175,7 +176,7 @@ void frmAddEditMontajes::on_btnOk_clicked()
 	str = ui->cbxMontaje_type_drive->itemData(ui->cbxMontaje_type_drive->currentIndex()).toString();
 	DatosMontaje.tipo_as = str.isEmpty() ? "" : str;
 
-	if (DatosMontaje.tipo_as == "IMG_multi_iso" || DatosMontaje.tipo_as == "boot")
+	if (DatosMontaje.tipo_as == "IMG_multi_iso" || DatosMontaje.tipo_as == "IMG_multi_floppy" || DatosMontaje.tipo_as == "boot")
 	{
 		QStringList listaIsos;
 		listaIsos.clear();
@@ -212,7 +213,7 @@ void frmAddEditMontajes::on_cbxMontaje_type_drive_activated(int index)
 	if (index > -1)
 	{
 		QString tipo_montaje = ui->cbxMontaje_type_drive->itemData(index).toString();
-		if (tipo_montaje == "IMG_multi_iso" || tipo_montaje == "boot")
+		if (tipo_montaje == "IMG_multi_iso" || tipo_montaje == "IMG_multi_floppy" || tipo_montaje == "boot")
 		{
 			ui->txtMontaje_path->setVisible(false);
 			ui->lw_MultiIso->setVisible(true);
@@ -249,7 +250,7 @@ void frmAddEditMontajes::on_cbxMontaje_type_drive_activated(int index)
 				ui->cbxMontaje_letter->addItem("3");
 			}
 		}
-		else if (tipo_montaje == "floppy" || tipo_montaje == "IMG_floppy" || tipo_montaje == "boot")
+		else if (tipo_montaje == "floppy" || tipo_montaje == "IMG_floppy" || tipo_montaje == "IMG_multi_floppy" || tipo_montaje == "boot")
 		{
 			letra = "A";
 			if (tipo_montaje == "IMG_floppy")
@@ -277,7 +278,7 @@ void frmAddEditMontajes::on_btnDirFile_clicked()
 		}
 	} else {
 		QString tipo_archivo;
-		if (tipo_montaje == "IMG_floppy" || tipo_montaje == "boot" || tipo_montaje == "IMG_hdd")
+		if (tipo_montaje == "IMG_floppy" || tipo_montaje == "IMG_multi_floppy" || tipo_montaje == "boot" || tipo_montaje == "IMG_hdd")
 			tipo_archivo = tr("Imagen") +" (*.ima *.img);;";
 		else if (tipo_montaje == "IMG_iso" || tipo_montaje == "IMG_multi_iso")
 			tipo_archivo = tr("Imagen CD") +" (*.iso *.cue);;";
@@ -291,10 +292,10 @@ void frmAddEditMontajes::on_btnDirFile_clicked()
 			stFileInfo f_info = fGrl->getInfoFile(archivo);
 			if (f_info.Exists)
 			{
-				if (tipo_montaje == "IMG_multi_iso" || tipo_montaje == "boot")
+				if (tipo_montaje == "IMG_multi_iso" || tipo_montaje == "IMG_multi_floppy" || tipo_montaje == "boot")
 				{
 					QListWidgetItem *itemIso = new QListWidgetItem;
-					if (tipo_montaje == "boot")
+					if (tipo_montaje == "boot" || tipo_montaje == "IMG_multi_floppy")
 						itemIso->setIcon(QIcon(fGrl->theme() +"img16/floppy_2.png"));
 					else
 						itemIso->setIcon(QIcon(fGrl->theme() +"img16/cd_iso.png"));
@@ -344,7 +345,7 @@ void frmAddEditMontajes::on_btnDeleteIso_clicked()
 	QListWidgetItem *item = ui->lw_MultiIso->currentItem();
 	if (item != NULL)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Quieres eliminar la ISO de la lista?")))
+		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Quieres eliminar la ISO/IMA/IMG de la lista?")))
 		{
 			delete item;
 		}

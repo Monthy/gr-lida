@@ -444,6 +444,23 @@ void dbSql::actualizaOrdenTreeWidget(QTreeWidget *twOrden, QString tabla, QStrin
 	}
 }
 
+// Existe columna de una tabla
+bool dbSql::comprobarColumnaTabla(QString tabla, QString columna)
+{
+	QSqlQuery query(sqldb);
+	query.exec("SELECT * FROM "+ tabla +" LIMIT 1;");
+
+	bool existe = false;
+
+	if (chequearQuery(query))
+	{
+		if (query.first())
+			existe = query.record().value(columna).isValid();
+	}
+
+	return existe;
+}
+
 // Renombrar una tabla
 bool dbSql::renombrarTabla(QString old_name, QString new_name)
 {
@@ -458,6 +475,14 @@ bool dbSql::renombrarTabla(QString old_name, QString new_name)
 
 		return chequearQuery(query);
 	}
+}
+
+bool dbSql::eliminarTabla(QString tabla)
+{
+	QSqlQuery query(sqldb);
+	query.exec("DROP TABLE "+ tabla +";");
+
+	return chequearQuery(query);
 }
 
 // Crea una tabla nueva para Datos
@@ -516,6 +541,29 @@ bool dbSql::crearTablaDatos(QString tabla)
 
 		return chequearQuery(query);
 	}
+}
+
+// Crea la tabla dbgrl_mnu_nav
+bool dbSql::crearTablaMnuNav(bool isTemp)
+{
+	QSqlQuery query(sqldb);
+	QString temporal = isTemp ? "_temp" : "";
+
+	query.exec("CREATE TABLE IF NOT EXISTS dbgrl_mnu_nav"+ temporal +" ("
+	"	id						"+ dbTypeId +","
+	"	titulo					VARCHAR(255) NOT NULL DEFAULT '',"
+	"	col_value				VARCHAR(255) NOT NULL DEFAULT '',"
+	"	col_name				VARCHAR(255) NOT NULL DEFAULT '',"
+	"	sql_query				TEXT,"
+	"	archivo					VARCHAR(255) NOT NULL DEFAULT '',"
+	"	img						VARCHAR(255) NOT NULL DEFAULT 'sinimg.png',"
+	"	orden					INTEGER NOT NULL DEFAULT 0,"
+	"	mostrar					VARCHAR(5) NOT NULL DEFAULT 'true',"
+	"	expanded				VARCHAR(5) NOT NULL DEFAULT 'true',"
+	"	"+ qpsql_pkey("dbgrl_mnu_nav") +" PRIMARY KEY (id)"
+	") "+ qpsql_oids +";");
+
+	return chequearQuery(query);
 }
 
 // Crea las tablas de la base de datos si es necesario
@@ -806,21 +854,7 @@ void dbSql::crearTablas()
 // Tabla - dbgrl_mnu_nav
 	if (!lista_tablas.contains("dbgrl_mnu_nav"))
 	{
-		query.exec("CREATE TABLE IF NOT EXISTS dbgrl_mnu_nav ("
-		"	id						"+ dbTypeId +","
-		"	titulo					VARCHAR(255) NOT NULL DEFAULT '',"
-		"	col_value				VARCHAR(255) NOT NULL DEFAULT '',"
-		"	col_name				VARCHAR(255) NOT NULL DEFAULT '',"
-		"	sql_query				TEXT,"
-		"	archivo					VARCHAR(255) NOT NULL DEFAULT '',"
-		"	img						VARCHAR(255) NOT NULL DEFAULT 'sinimg.png',"
-		"	orden					INTEGER NOT NULL DEFAULT 0,"
-		"	mostrar					VARCHAR(5) NOT NULL DEFAULT 'true',"
-		"	expanded				VARCHAR(5) NOT NULL DEFAULT 'true',"
-		"	"+ qpsql_pkey("dbgrl_mnu_nav") +" PRIMARY KEY (id)"
-		") "+ qpsql_oids +";");
-
-		if (chequearQuery(query))
+		if (crearTablaMnuNav())
 		{
 			insertaMenuNav(tr("Generos")        , "{value}", "genero"       , "WHERE {col_name} LIKE ('%{col_value}%')", "generos.txt"  , "datos_3.png", 0, true, true);
 			insertaMenuNav(tr("Temas")          , "{value}", "tema"         , "WHERE {col_name} LIKE ('%{col_value}%')", "temas.txt"    , "datos_3.png", 1, true, true);

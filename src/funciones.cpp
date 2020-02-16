@@ -501,6 +501,8 @@ QString Funciones::getIconMount(QString tipoDrive, QString select_mount)
 		return stTheme +"img16/"+ select_mount +"drive_floppy.png";
 	else if (tipoDrive == "IMG_floppy")
 		return stTheme +"img16/"+ select_mount +"floppy_1.png";
+	else if (tipoDrive == "IMG_multi_floppy")
+		return stTheme +"img16/"+ select_mount +"floppy_1.png";
 	else if (tipoDrive == "IMG_iso")
 		return stTheme +"img16/"+ select_mount +"cd_iso.png";
 	else if (tipoDrive == "IMG_multi_iso")
@@ -2736,10 +2738,13 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 						mount_options = " "+ listMount.at(m).opt_mount;
 				}
 
-				if (listMount.at(m).tipo_as == "IMG_multi_iso")
+				if (listMount.at(m).tipo_as == "IMG_multi_iso" || listMount.at(m).tipo_as == "IMG_multi_floppy")
 				{
 					montaje_IMG = true;
-					mount_type = " -t cdrom";
+					if (listMount.at(m).tipo_as == "IMG_multi_floppy")
+						mount_type = " -t floppy";
+					else
+						mount_type = " -t cdrom";
 
 					lista_isos.clear();
 					lista_isos << mount_drive.split("|", QString::SkipEmptyParts);
@@ -2772,7 +2777,7 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 
 				if (montaje_IMG == true)
 				{
-					if (listMount.at(m).tipo_as == "IMG_multi_iso")
+					if (listMount.at(m).tipo_as == "IMG_multi_iso" || listMount.at(m).tipo_as == "IMG_multi_floppy")
 						listmontajes << "imgmount "+ mount_letter +" "+ mount_drive + mount_type;
 					else
 						listmontajes << "imgmount "+ mount_letter +" \""+  mount_drive +"\""+ mount_type + mount_freesize + mount_options;

@@ -79,13 +79,14 @@ void frmInstalarJuego::cargarConfig()
 	}
 
 	ui->cbxMontaje_type_drive->clear();
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_hd.png")    , tr("Carpeta como disco duro"), "drive"        );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_cdrom.png") , tr("Unidad de CD-ROM")       , "cdrom"        );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_floppy.png"), tr("Carpeta como disquete")  , "floppy"       );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png")    , tr("Imagen de disquete")     , "IMG_floppy"   );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/cd_iso.png")      , tr("Imagen ISO, CUE/BIN")    , "IMG_iso"      );
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/cd_multi_iso.png"), tr("Imagen ISO multiples")   , "IMG_multi_iso");
-	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_hd.png")    , tr("Imagen de disco duro")   , "IMG_hdd"      );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_hd.png")    , tr("Carpeta como disco duro")     , "drive"           );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_cdrom.png") , tr("Unidad de CD-ROM")            , "cdrom"           );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_floppy.png"), tr("Carpeta como disquete")       , "floppy"          );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png")    , tr("Imagen de disquete")          , "IMG_floppy"      );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/floppy_1.png")    , tr("Imagen de disquete multiples"), "IMG_multi_floppy");
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/cd_iso.png")      , tr("Imagen ISO, CUE/BIN")         , "IMG_iso"         );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/cd_multi_iso.png"), tr("Imagen ISO multiples")        , "IMG_multi_iso"   );
+	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_hd.png")    , tr("Imagen de disco duro")        , "IMG_hdd"         );
 	ui->cbxMontaje_type_drive->setCurrentIndex(1);
 	emit on_cbxMontaje_type_drive_activated(1);
 
@@ -136,7 +137,7 @@ void frmInstalarJuego::on_cbxMontaje_type_drive_activated(int index)
 	if (index > -1)
 	{
 		QString tipo_montaje = ui->cbxMontaje_type_drive->itemData(index).toString();
-		if (tipo_montaje == "IMG_multi_iso")
+		if (tipo_montaje == "IMG_multi_iso" || tipo_montaje == "IMG_multi_floppy" || tipo_montaje == "boot")
 		{
 			ui->txtMontaje_path->setVisible(false);
 			ui->lw_MultiIso->setVisible(true);
@@ -173,7 +174,7 @@ void frmInstalarJuego::on_btnDirFile_clicked()
 		}
 	} else {
 		QString tipo_archivo;
-		if (tipo_montaje == "IMG_floppy" || tipo_montaje == "boot" || tipo_montaje == "IMG_hdd")
+		if (tipo_montaje == "IMG_floppy" || tipo_montaje == "IMG_multi_floppy" || tipo_montaje == "boot" || tipo_montaje == "IMG_hdd")
 			tipo_archivo = tr("Imagen") +" (*.ima *.img);;";
 		else if (tipo_montaje == "IMG_iso" || tipo_montaje == "IMG_multi_iso")
 			tipo_archivo = tr("Imagen CD") +" (*.iso *.cue);;";
@@ -187,10 +188,10 @@ void frmInstalarJuego::on_btnDirFile_clicked()
 			stFileInfo f_info = fGrl->getInfoFile(archivo);
 			if (f_info.Exists)
 			{
-				if (tipo_montaje == "IMG_multi_iso" || tipo_montaje == "boot")
+				if (tipo_montaje == "IMG_multi_iso" || tipo_montaje == "IMG_multi_floppy" || tipo_montaje == "boot")
 				{
 					QListWidgetItem *itemIso = new QListWidgetItem;
-					if (tipo_montaje == "boot")
+					if (tipo_montaje == "boot" || tipo_montaje == "IMG_multi_floppy")
 						itemIso->setIcon(QIcon(fGrl->theme() +"img16/floppy_2.png"));
 					else
 						itemIso->setIcon(QIcon(fGrl->theme() +"img16/cd_iso.png"));
@@ -240,7 +241,7 @@ void frmInstalarJuego::on_btnDeleteIso_clicked()
 	QListWidgetItem *item = ui->lw_MultiIso->currentItem();
 	if (item != NULL)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Quieres eliminar la ISO de la lista?")))
+		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Quieres eliminar la ISO/IMA/IMG de la lista?")))
 		{
 			delete item;
 		}
@@ -312,7 +313,7 @@ void frmInstalarJuego::on_btnEjecutar_clicked()
 			} else if (tipo_origen == "IMG_iso") {
 				out << "imgmount D \"" << dir_montaje << "\" -t cdrom" << endl;
 				DatosMontaje.letter = "D";
-			} else if (tipo_origen == "IMG_multi_iso") {
+			} else if (tipo_origen == "IMG_multi_iso" || tipo_origen == "IMG_multi_floppy") {
 				listaIsosDirRelative.clear();
 				listaIsos.clear();
 				for (int i = 0; i < ui->lw_MultiIso->count(); ++i)
@@ -320,9 +321,16 @@ void frmInstalarJuego::on_btnEjecutar_clicked()
 					listaIsosDirRelative << ui->lw_MultiIso->item(i)->text();
 					listaIsos << "\""+ QDir::toNativeSeparators(fGrl->getDirRelative(ui->lw_MultiIso->item(i)->text())) +"\"";
 				}
-				out << "imgmount D " << listaIsos.join(" ") << " -t cdrom" << endl;
-				DatosMontaje.path   = ""+ listaIsosDirRelative.join("|");
-				DatosMontaje.letter = "D";
+				if (tipo_origen == "IMG_multi_floppy")
+				{
+					out << "imgmount A " << listaIsos.join(" ") << " -t floppy" << endl;
+					DatosMontaje.letter = "A";
+				} else {
+					out << "imgmount D " << listaIsos.join(" ") << " -t cdrom" << endl;
+					DatosMontaje.letter = "D";
+				}
+
+				DatosMontaje.path = ""+ listaIsosDirRelative.join("|");
 			} else if (tipo_origen == "IMG_hdd") {
 				out << "imgmount D \"" << dir_montaje << "\" -t hdd" << endl;
 				DatosMontaje.letter = "D";
@@ -332,7 +340,7 @@ void frmInstalarJuego::on_btnEjecutar_clicked()
 
 			out << "echo " << install_info << endl;
 
-			if (tipo_origen == "floppy" || tipo_origen == "IMG_floppy")
+			if (tipo_origen == "floppy" || tipo_origen == "IMG_floppy" || tipo_origen == "IMG_multi_floppy")
 				out << "A:" << endl;
 			else
 				out << "D:" << endl;

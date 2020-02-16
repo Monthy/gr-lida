@@ -1152,38 +1152,32 @@ void frmAddEditDosBox::on_btnMount_AutoCrear_clicked()
 
 void frmAddEditDosBox::on_btnMount_Primario_clicked()
 {
-	int indx_mount = 0;
-	QString tipoDrive, isPrimario;
-
 	int pos = ui->twMontajes->indexOfTopLevelItem(ui->twMontajes->currentItem());
 	if (ui->twMontajes->topLevelItemCount() > 0 && pos != -1)
 	{
+		int indx_mount = 0;
+		QString tipoDrive, isPrimario;
+
 		indx_mount = ui->twMontajes->indexOfTopLevelItem(ui->twMontajes->currentItem());
+		tipoDrive  = ui->twMontajes->topLevelItem(indx_mount)->text(2);
 		isPrimario = ui->twMontajes->topLevelItem(indx_mount)->text(7);
 
 		const int count_mount = ui->twMontajes->topLevelItemCount();
 		for (int num_mount = 0; num_mount < count_mount; ++num_mount)
 		{
-			tipoDrive = ui->twMontajes->topLevelItem(num_mount)->text(2);
+			QString tipoDrive_mount = ui->twMontajes->topLevelItem(num_mount)->text(2);
 
-			ui->twMontajes->topLevelItem(num_mount)->setIcon(0, QIcon(fGrl->getIconMount(tipoDrive)));
+			ui->twMontajes->topLevelItem(num_mount)->setIcon(0, QIcon(fGrl->getIconMount(tipoDrive_mount)));
 			ui->twMontajes->topLevelItem(num_mount)->setText(7, "x");
 		}
 
-		tipoDrive = ui->twMontajes->topLevelItem(indx_mount)->text(2);
-
-		if (isPrimario == "v")
-		{
-			ui->twMontajes->topLevelItem(indx_mount)->setIcon(0, QIcon(fGrl->getIconMount(tipoDrive)));
-			ui->twMontajes->topLevelItem(indx_mount)->setText(7, "x");
-		} else {
-			ui->twMontajes->topLevelItem(indx_mount)->setIcon(0, QIcon(fGrl->getIconMount(tipoDrive, "s_")));
-			ui->twMontajes->topLevelItem(indx_mount)->setText(7, "v");
-		}
+		ui->twMontajes->topLevelItem(indx_mount)->setIcon(0, QIcon(fGrl->getIconMount(tipoDrive, "s_")));
+		ui->twMontajes->topLevelItem(indx_mount)->setText(7, "v");
 
 		if (Editando)
 		{
-			sql->actualizaDatosItem("dbgrl_emu_dosbox_mount", ui->twMontajes->topLevelItem(indx_mount)->text(8), "select_mount", ui->twMontajes->topLevelItem(indx_mount)->text(7), "id");
+			sql->actualizaDatosItem("dbgrl_emu_dosbox_mount", IdDbx, "select_mount", "x", "id_dosbox");
+			sql->actualizaDatosItem("dbgrl_emu_dosbox_mount", ui->twMontajes->topLevelItem(indx_mount)->text(8), "select_mount", "v", "id");
 			sql->comit();
 		}
 
