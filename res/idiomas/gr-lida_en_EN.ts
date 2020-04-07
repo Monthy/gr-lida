@@ -4355,7 +4355,7 @@ If they are new data or you have made changes and do not save you can lose the c
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="64"/>
         <source>Imagen de disquete multiples</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiple floppy disk images</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="65"/>
@@ -4445,11 +4445,7 @@ If they are new data or you have made changes and do not save you can lose the c
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="348"/>
         <source>Â¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Â¿Quieres eliminar la ISO de la lista?</source>
-        <translation type="obsolete">Do you want to remove the ISO from the list?</translation>
+        <translation>Do you want to remove the ISO/IMA/IMG from the list?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="398"/>
@@ -6680,7 +6676,7 @@ If they are new data or you have made changes and do not save you can lose the c
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="86"/>
         <source>Imagen de disquete multiples</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiple floppy disk images</translation>
     </message>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="87"/>
@@ -6716,11 +6712,7 @@ If they are new data or you have made changes and do not save you can lose the c
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="244"/>
         <source>Â¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Â¿Quieres eliminar la ISO de la lista?</source>
-        <translation type="obsolete">Do you want to remove the ISO from the list?</translation>
+        <translation>Do you want to remove the ISO/IMA/IMG from the list?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="283"/>
@@ -7489,7 +7481,7 @@ Check if the program is really installed.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="3105"/>
         <location filename="../../src/grlida_opciones.cpp" line="3135"/>
         <source>Â¿Deseas eliminar la extensiÃ³n?</source>
-        <translation type="unfinished"></translation>
+        <translation>Do you want to remove this extension?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1193"/>
@@ -7861,17 +7853,17 @@ Check if the program is really installed.</translation>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="174"/>
         <source>Cada veinticuatro horas</source>
-        <translation type="unfinished"></translation>
+        <translation>Every 24 hours</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="175"/>
         <source>Semanalmente</source>
-        <translation type="unfinished"></translation>
+        <translation>Weekly</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="176"/>
         <source>Mensualmente</source>
-        <translation type="unfinished"></translation>
+        <translation>Monthly</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="202"/>
@@ -7883,7 +7875,7 @@ Check if the program is really installed.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="498"/>
         <location filename="../../src/grlida_opciones.cpp" line="2427"/>
         <source>ImÃ¡genes CategorÃ­as</source>
-        <translation type="unfinished"></translation>
+        <translation>Category icons</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="249"/>
@@ -7894,14 +7886,14 @@ Check if the program is really installed.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="501"/>
         <location filename="../../src/grlida_opciones.cpp" line="2429"/>
         <source>ImÃ¡genes defecto</source>
-        <translation type="unfinished"></translation>
+        <translation>defecto icons</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="322"/>
         <location filename="../../src/grlida_opciones.cpp" line="348"/>
         <location filename="../../src/grlida_opciones.cpp" line="504"/>
         <source>ImÃ¡genes idiomas</source>
-        <translation type="unfinished"></translation>
+        <translation>Language icons</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="555"/>
@@ -8725,7 +8717,7 @@ Check if the program is really installed.</translation>
     <message utf8="true">
         <location filename="../../ui/opciones.ui" line="404"/>
         <source>Comprobación cada</source>
-        <translation>Checking every</translation>
+        <translation>Check</translation>
     </message>
     <message>
         <location filename="../../ui/opciones.ui" line="421"/>
