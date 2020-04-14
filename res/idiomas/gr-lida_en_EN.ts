@@ -241,188 +241,188 @@
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="978"/>
+        <location filename="../../src/funciones.cpp" line="980"/>
         <source>CarÃ¡tula frontal</source>
         <translation>Front cover</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="979"/>
+        <location filename="../../src/funciones.cpp" line="981"/>
         <source>Detalles del juego</source>
         <translation>Game Details</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="980"/>
+        <location filename="../../src/funciones.cpp" line="982"/>
         <source>CalificaciÃ³n</source>
         <translation>Qualification</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="981"/>
+        <location filename="../../src/funciones.cpp" line="983"/>
         <source>Otros datos</source>
         <translation>Other data</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="982"/>
+        <location filename="../../src/funciones.cpp" line="984"/>
         <source>Subido por</source>
         <translation>Uploaded by</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="983"/>
+        <location filename="../../src/funciones.cpp" line="985"/>
         <source>SubtÃ­tulo</source>
         <translation>Subtitle</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="984"/>
+        <location filename="../../src/funciones.cpp" line="986"/>
         <source>Publicado por</source>
         <translation>Publisher by</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="985"/>
+        <location filename="../../src/funciones.cpp" line="987"/>
         <source>Desarrollado por</source>
         <translation>Developer by</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="986"/>
+        <location filename="../../src/funciones.cpp" line="988"/>
         <source>Publicado</source>
         <translation>Published</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="987"/>
+        <location filename="../../src/funciones.cpp" line="989"/>
         <source>Edad recomendada</source>
         <translation>Recommended age</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="988"/>
+        <location filename="../../src/funciones.cpp" line="990"/>
         <source>Idioma</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="989"/>
+        <location filename="../../src/funciones.cpp" line="991"/>
         <source>Idioma voces</source>
         <translation>Language voices</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="990"/>
+        <location filename="../../src/funciones.cpp" line="992"/>
         <source>Formato</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="991"/>
+        <location filename="../../src/funciones.cpp" line="993"/>
         <source>Genero</source>
         <translation>Genre</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="992"/>
+        <location filename="../../src/funciones.cpp" line="994"/>
         <source>Tema</source>
         <translation>Theme</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="993"/>
+        <location filename="../../src/funciones.cpp" line="995"/>
         <source>Grupo</source>
         <translation>Group</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="994"/>
+        <location filename="../../src/funciones.cpp" line="996"/>
         <source>Perspectiva</source>
         <translation>Perspective</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="995"/>
+        <location filename="../../src/funciones.cpp" line="997"/>
         <source>Sistema operativo</source>
         <translation>SO</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="996"/>
+        <location filename="../../src/funciones.cpp" line="998"/>
         <source>Favorito</source>
         <translation>Favorite</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="997"/>
+        <location filename="../../src/funciones.cpp" line="999"/>
         <source>Joystick</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="997"/>
+        <location filename="../../src/funciones.cpp" line="999"/>
         <source>GamePad</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="998"/>
+        <location filename="../../src/funciones.cpp" line="1000"/>
         <source>AÃ±adido el</source>
         <translation>Added the</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="999"/>
+        <location filename="../../src/funciones.cpp" line="1001"/>
         <source>GrÃ¡ficos</source>
         <translation>Graphics</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1000"/>
+        <location filename="../../src/funciones.cpp" line="1002"/>
         <source>Sonido</source>
         <translation>Sound</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1001"/>
+        <location filename="../../src/funciones.cpp" line="1003"/>
         <source>Jugabilidad</source>
         <translation>Playability</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1002"/>
+        <location filename="../../src/funciones.cpp" line="1004"/>
         <source>Original</source>
         <translation>Original</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1003"/>
+        <location filename="../../src/funciones.cpp" line="1005"/>
         <source>Estado</source>
         <translation>State</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1004"/>
+        <location filename="../../src/funciones.cpp" line="1006"/>
         <source>Tipo Emu</source>
         <translation>Emu type</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1005"/>
+        <location filename="../../src/funciones.cpp" line="1007"/>
         <source>DescripciÃ³n</source>
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1006"/>
+        <location filename="../../src/funciones.cpp" line="1008"/>
         <source>Rating</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1007"/>
+        <location filename="../../src/funciones.cpp" line="1009"/>
         <source>NÂº discos</source>
         <translation>Number of disks</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1011"/>
+        <location filename="../../src/funciones.cpp" line="1013"/>
         <source>TÃ­tulo</source>
         <translation>Title</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1012"/>
+        <location filename="../../src/funciones.cpp" line="1014"/>
         <source>TÃ­tulo album</source>
         <translation>Title album</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1013"/>
+        <location filename="../../src/funciones.cpp" line="1015"/>
         <source>Artista album</source>
         <translation>Album artist</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1928"/>
+        <location filename="../../src/funciones.cpp" line="1930"/>
         <source>ConfiguraciÃ³n por defecto</source>
         <translation>Default configuration</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1933"/>
-        <location filename="../../src/funciones.cpp" line="1934"/>
+        <location filename="../../src/funciones.cpp" line="1935"/>
+        <location filename="../../src/funciones.cpp" line="1936"/>
         <source>Importar desde un archivo</source>
         <translation>Import from file</translation>
     </message>
     <message>
-        <location filename="../../src/funciones.cpp" line="1960"/>
+        <location filename="../../src/funciones.cpp" line="1962"/>
         <source>exterior</source>
         <translation>external</translation>
     </message>
@@ -876,14 +876,14 @@
 <context>
     <name>GrLida</name>
     <message>
-        <location filename="../../src/grlida.cpp" line="1604"/>
+        <location filename="../../src/grlida.cpp" line="1616"/>
         <source>Por ID</source>
         <translation>By ID</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="1985"/>
-        <location filename="../../src/grlida.cpp" line="1607"/>
-        <location filename="../../src/grlida.cpp" line="2035"/>
+        <location filename="../../src/grlida.cpp" line="1619"/>
+        <location filename="../../src/grlida.cpp" line="2047"/>
         <source>Genero</source>
         <translation>Genre</translation>
     </message>
@@ -1403,9 +1403,9 @@
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="1470"/>
-        <location filename="../../src/grlida.cpp" line="3835"/>
-        <location filename="../../src/grlida.cpp" line="3836"/>
-        <location filename="../../src/grlida.cpp" line="3837"/>
+        <location filename="../../src/grlida.cpp" line="3857"/>
+        <location filename="../../src/grlida.cpp" line="3858"/>
+        <location filename="../../src/grlida.cpp" line="3859"/>
         <source>PictureFlow como principal</source>
         <translation>PictureFlow set as main</translation>
     </message>
@@ -1425,7 +1425,7 @@
         <location filename="../../ui/grlida.ui" line="1679"/>
         <location filename="../../ui/grlida.ui" line="1769"/>
         <location filename="../../ui/grlida.ui" line="1772"/>
-        <location filename="../../src/grlida.cpp" line="3303"/>
+        <location filename="../../src/grlida.cpp" line="3325"/>
         <source>Archivos</source>
         <translation>Files</translation>
     </message>
@@ -1594,7 +1594,7 @@
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="1969"/>
-        <location filename="../../src/grlida.cpp" line="2032"/>
+        <location filename="../../src/grlida.cpp" line="2044"/>
         <source>Icono</source>
         <translation>Icons</translation>
     </message>
@@ -1605,8 +1605,8 @@
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2001"/>
-        <location filename="../../src/grlida.cpp" line="1609"/>
-        <location filename="../../src/grlida.cpp" line="2037"/>
+        <location filename="../../src/grlida.cpp" line="1621"/>
+        <location filename="../../src/grlida.cpp" line="2049"/>
         <source>Desarrollador</source>
         <translation>Developer</translation>
     </message>
@@ -1630,34 +1630,34 @@
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2009"/>
-        <location filename="../../src/grlida.cpp" line="1610"/>
-        <location filename="../../src/grlida.cpp" line="2038"/>
+        <location filename="../../src/grlida.cpp" line="1622"/>
+        <location filename="../../src/grlida.cpp" line="2050"/>
         <source>Tema</source>
         <translation>Theme</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2017"/>
-        <location filename="../../src/grlida.cpp" line="2039"/>
+        <location filename="../../src/grlida.cpp" line="2051"/>
         <source>Grupo</source>
         <translation>Group</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2033"/>
-        <location filename="../../src/grlida.cpp" line="1611"/>
-        <location filename="../../src/grlida.cpp" line="2041"/>
+        <location filename="../../src/grlida.cpp" line="1623"/>
+        <location filename="../../src/grlida.cpp" line="2053"/>
         <source>Idioma</source>
         <translation>Language</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2049"/>
-        <location filename="../../src/grlida.cpp" line="1612"/>
-        <location filename="../../src/grlida.cpp" line="2043"/>
+        <location filename="../../src/grlida.cpp" line="1624"/>
+        <location filename="../../src/grlida.cpp" line="2055"/>
         <source>Formato</source>
         <translation>Format</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2073"/>
-        <location filename="../../src/grlida.cpp" line="2046"/>
+        <location filename="../../src/grlida.cpp" line="2058"/>
         <source>Sistema</source>
         <translation>OS</translation>
     </message>
@@ -1668,13 +1668,13 @@
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2170"/>
-        <location filename="../../src/grlida.cpp" line="2057"/>
+        <location filename="../../src/grlida.cpp" line="2069"/>
         <source>Edad</source>
         <translation>Age</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2178"/>
-        <location filename="../../src/grlida.cpp" line="2058"/>
+        <location filename="../../src/grlida.cpp" line="2070"/>
         <source>Usuario</source>
         <translation>Username</translation>
     </message>
@@ -1788,7 +1788,7 @@
         <translation>Has files / covers</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3295"/>
+        <location filename="../../src/grlida.cpp" line="3317"/>
         <source>Capturas de sonidos</source>
         <translation>Sound captures</translation>
     </message>
@@ -1835,48 +1835,48 @@
         <translation>&amp;Restore</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1615"/>
+        <location filename="../../src/grlida.cpp" line="1627"/>
         <source>Sistema OS</source>
         <translation>OS</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2097"/>
-        <location filename="../../src/grlida.cpp" line="1617"/>
-        <location filename="../../src/grlida.cpp" line="2049"/>
+        <location filename="../../src/grlida.cpp" line="1629"/>
+        <location filename="../../src/grlida.cpp" line="2061"/>
         <source>Sonido</source>
         <translation>Sound</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2105"/>
-        <location filename="../../src/grlida.cpp" line="1618"/>
-        <location filename="../../src/grlida.cpp" line="2050"/>
+        <location filename="../../src/grlida.cpp" line="1630"/>
+        <location filename="../../src/grlida.cpp" line="2062"/>
         <source>Jugabilidad</source>
         <translation>Playability</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2113"/>
-        <location filename="../../src/grlida.cpp" line="1619"/>
-        <location filename="../../src/grlida.cpp" line="2051"/>
+        <location filename="../../src/grlida.cpp" line="1631"/>
+        <location filename="../../src/grlida.cpp" line="2063"/>
         <source>Original</source>
         <translation>Original</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1620"/>
-        <location filename="../../src/grlida.cpp" line="2295"/>
+        <location filename="../../src/grlida.cpp" line="1632"/>
+        <location filename="../../src/grlida.cpp" line="2307"/>
         <source>Tipo emulador</source>
         <translation>Emulation type</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2151"/>
-        <location filename="../../src/grlida.cpp" line="1621"/>
-        <location filename="../../src/grlida.cpp" line="2055"/>
+        <location filename="../../src/grlida.cpp" line="1633"/>
+        <location filename="../../src/grlida.cpp" line="2067"/>
         <source>Favorito</source>
         <translation>Favorite</translation>
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2162"/>
-        <location filename="../../src/grlida.cpp" line="1622"/>
-        <location filename="../../src/grlida.cpp" line="2056"/>
+        <location filename="../../src/grlida.cpp" line="1634"/>
+        <location filename="../../src/grlida.cpp" line="2068"/>
         <source>Rating</source>
         <translation></translation>
     </message>
@@ -1886,12 +1886,12 @@
         <translation>by</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1626"/>
+        <location filename="../../src/grlida.cpp" line="1638"/>
         <source>Ascendente</source>
         <translation>Ascending</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1627"/>
+        <location filename="../../src/grlida.cpp" line="1639"/>
         <source>Descendente</source>
         <translation>Descending</translation>
     </message>
@@ -1901,17 +1901,17 @@
         <translation>Sort</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2289"/>
+        <location filename="../../src/grlida.cpp" line="2301"/>
         <source>Todos</source>
         <translation>All</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2290"/>
+        <location filename="../../src/grlida.cpp" line="2302"/>
         <source>Favoritos</source>
         <translation>Favorites</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2291"/>
+        <location filename="../../src/grlida.cpp" line="2303"/>
         <source>Originales</source>
         <translation>Original</translation>
     </message>
@@ -1921,36 +1921,36 @@
         <translation>Error when opening database</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2526"/>
+        <location filename="../../src/grlida.cpp" line="2540"/>
         <source>Datos</source>
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2558"/>
+        <location filename="../../src/grlida.cpp" line="2572"/>
         <source>Otro emulador</source>
         <translation>Another emulator</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3194"/>
+        <location filename="../../src/grlida.cpp" line="3216"/>
         <source>Eliminar imÃ¡genes.</source>
         <translation>Remove images.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3807"/>
-        <location filename="../../src/grlida.cpp" line="3808"/>
-        <location filename="../../src/grlida.cpp" line="3809"/>
+        <location filename="../../src/grlida.cpp" line="3829"/>
+        <location filename="../../src/grlida.cpp" line="3830"/>
+        <location filename="../../src/grlida.cpp" line="3831"/>
         <source>Ver lista de juegos</source>
         <translation>Show list games</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3810"/>
+        <location filename="../../src/grlida.cpp" line="3832"/>
         <source>Lista de juegos</source>
         <translation>List games</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3813"/>
-        <location filename="../../src/grlida.cpp" line="3814"/>
-        <location filename="../../src/grlida.cpp" line="3815"/>
+        <location filename="../../src/grlida.cpp" line="3835"/>
+        <location filename="../../src/grlida.cpp" line="3836"/>
+        <location filename="../../src/grlida.cpp" line="3837"/>
         <source>Lista de juegos como principal</source>
         <translation>List of games set as main</translation>
     </message>
@@ -1961,7 +1961,7 @@
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2025"/>
-        <location filename="../../src/grlida.cpp" line="2040"/>
+        <location filename="../../src/grlida.cpp" line="2052"/>
         <source>Perspectiva</source>
         <translation>Perspective</translation>
     </message>
@@ -1992,225 +1992,225 @@
     </message>
     <message>
         <location filename="../../ui/grlida.ui" line="2121"/>
-        <location filename="../../src/grlida.cpp" line="2052"/>
+        <location filename="../../src/grlida.cpp" line="2064"/>
         <source>Estado</source>
         <translation>State</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2054"/>
+        <location filename="../../src/grlida.cpp" line="2066"/>
         <source>Tipo Emu</source>
         <translation>Emu type</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2202"/>
-        <location filename="../../src/grlida.cpp" line="2727"/>
+        <location filename="../../src/grlida.cpp" line="2214"/>
+        <location filename="../../src/grlida.cpp" line="2749"/>
         <source>de</source>
-        <translation>the</translation>
+        <translation>of</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2683"/>
+        <location filename="../../src/grlida.cpp" line="2705"/>
         <source>introducido el</source>
-        <translation>Entered the</translation>
+        <translation>Added on</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2632"/>
-        <location filename="../../src/grlida.cpp" line="2639"/>
-        <location filename="../../src/grlida.cpp" line="2641"/>
-        <location filename="../../src/grlida.cpp" line="3216"/>
+        <location filename="../../src/grlida.cpp" line="2649"/>
+        <location filename="../../src/grlida.cpp" line="2656"/>
+        <location filename="../../src/grlida.cpp" line="2658"/>
+        <location filename="../../src/grlida.cpp" line="3238"/>
         <source>Si</source>
         <translation>Yes</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1924"/>
+        <location filename="../../src/grlida.cpp" line="1936"/>
         <source>The file is not an XBEL version 1.0 file.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1933"/>
+        <location filename="../../src/grlida.cpp" line="1945"/>
         <source>Actualizaciones</source>
         <translation>Updates</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1933"/>
+        <location filename="../../src/grlida.cpp" line="1945"/>
         <source>No existen actualizaciones.</source>
         <translation>There are no updates.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1933"/>
+        <location filename="../../src/grlida.cpp" line="1945"/>
         <source>Mostrar</source>
         <translation>Show</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1933"/>
+        <location filename="../../src/grlida.cpp" line="1945"/>
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2042"/>
+        <location filename="../../src/grlida.cpp" line="2054"/>
         <source>Idioma Voces</source>
         <translation>Language Voices</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2053"/>
+        <location filename="../../src/grlida.cpp" line="2065"/>
         <source>Fecha</source>
         <translation>Date</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2632"/>
-        <location filename="../../src/grlida.cpp" line="2639"/>
-        <location filename="../../src/grlida.cpp" line="2641"/>
-        <location filename="../../src/grlida.cpp" line="3221"/>
+        <location filename="../../src/grlida.cpp" line="2649"/>
+        <location filename="../../src/grlida.cpp" line="2656"/>
+        <location filename="../../src/grlida.cpp" line="2658"/>
+        <location filename="../../src/grlida.cpp" line="3243"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3149"/>
+        <location filename="../../src/grlida.cpp" line="3171"/>
         <source>Â¿Eliminar juego...?</source>
         <translation>Delete game ...?</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3157"/>
+        <location filename="../../src/grlida.cpp" line="3179"/>
         <source>Â¿Deseas realmente eliminar este juego de la base de datos?</source>
         <translation>Do you really want to delete this game from the database?</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3161"/>
+        <location filename="../../src/grlida.cpp" line="3183"/>
         <source>Si es de DOSBox o VDMSound tambiÃ©n se borra el archivo de configuraciÃ³n.</source>
         <translation>If it is DOSBox or VDMSound, the configuration file is also deleted.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3162"/>
+        <location filename="../../src/grlida.cpp" line="3184"/>
         <source>Ademas borrara lo marcado siempre y cuando este dentro del directorio del GR-lida.</source>
         <translation>It will also erase the marked as long as it is within the GR-lida directory.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3177"/>
+        <location filename="../../src/grlida.cpp" line="3199"/>
         <source>Eliminar carÃ¡tula thumbs.</source>
         <translation>Remove cover thumbs.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3181"/>
+        <location filename="../../src/grlida.cpp" line="3203"/>
         <source>Eliminar imÃ¡genes de la caja.</source>
         <translation>Remove images from the box.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3186"/>
+        <location filename="../../src/grlida.cpp" line="3208"/>
         <source>CarÃ¡tula delantera, trasera, lateral izquierdo, derecho, arriba, abajo.</source>
         <translation>Cover front, back, left side, right, up, down.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3190"/>
+        <location filename="../../src/grlida.cpp" line="3212"/>
         <source>Eliminar capturas de pantalla.</source>
         <translation>Delete screenshots.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3198"/>
+        <location filename="../../src/grlida.cpp" line="3220"/>
         <source>Eliminar capturas de sonido.</source>
         <translation>Remove sound captures.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3202"/>
+        <location filename="../../src/grlida.cpp" line="3224"/>
         <source>Eliminar capturas de video.</source>
         <translation>Delete video captures.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3206"/>
+        <location filename="../../src/grlida.cpp" line="3228"/>
         <source>Eliminar archivos guardados.</source>
         <translation>Delete saved files.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3253"/>
+        <location filename="../../src/grlida.cpp" line="3275"/>
         <source>CarÃ¡tula</source>
         <translation>Cover</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3260"/>
+        <location filename="../../src/grlida.cpp" line="3282"/>
         <source>ImÃ¡genes de la caja.</source>
         <translation>Pictures of the box.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3272"/>
+        <location filename="../../src/grlida.cpp" line="3294"/>
         <source>Capturas de pantalla</source>
         <translation>Screenshots</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3279"/>
+        <location filename="../../src/grlida.cpp" line="3301"/>
         <source>ImÃ¡genes del juego</source>
         <translation>Images of the game</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3287"/>
+        <location filename="../../src/grlida.cpp" line="3309"/>
         <source>Capturas de videos</source>
         <translation>Video captures</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3313"/>
+        <location filename="../../src/grlida.cpp" line="3335"/>
         <source>ConfiguraciÃ³n de DOSBox</source>
         <translation>Configuration of DOSBox</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3331"/>
+        <location filename="../../src/grlida.cpp" line="3353"/>
         <source>ConfiguraciÃ³n de ScummVM</source>
         <translation>Configuration of ScummVM</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3339"/>
+        <location filename="../../src/grlida.cpp" line="3361"/>
         <source>ConfiguraciÃ³n de VDMSound</source>
         <translation>Configuration of VDMSound</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3384"/>
+        <location filename="../../src/grlida.cpp" line="3406"/>
         <source>El juego ha sido eliminado correctamente</source>
         <translation>The game has been removed correctly</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3384"/>
+        <location filename="../../src/grlida.cpp" line="3406"/>
         <source>Ha borrado</source>
         <translation>Has erased</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3505"/>
+        <location filename="../../src/grlida.cpp" line="3527"/>
         <source>Ejecutar</source>
         <translation>Run</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="4816"/>
+        <location filename="../../src/grlida.cpp" line="4838"/>
         <source>Se ha producido un error al salir del proceso</source>
         <translation>There was an error out of the process</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="4841"/>
+        <location filename="../../src/grlida.cpp" line="4863"/>
         <source>Se ha producido un error al iniciar el proceso de inicio</source>
         <translation>There was an error starting the boot process</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="4844"/>
+        <location filename="../../src/grlida.cpp" line="4866"/>
         <source>Se ha producido un error en el proceso, tiempo despuÃ©s de empezar con Ã©xito</source>
         <translation>An error occurred in the process, time after successfully starting</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="4847"/>
+        <location filename="../../src/grlida.cpp" line="4869"/>
         <source>Se ha producido un error, waitFor...() Ãºltima funciÃ³n el tiempo de espera</source>
         <translation>An error has occurred, waitFor ... () Last function the timeout</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="4850"/>
+        <location filename="../../src/grlida.cpp" line="4872"/>
         <source>Se ha producido un error al intentar escribir en el proceso de inicio</source>
         <translation>There was an error while trying to write to the boot process</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="4853"/>
+        <location filename="../../src/grlida.cpp" line="4875"/>
         <source>Se ha producido un error al intentar leer en el proceso</source>
         <translation>There was an error while trying to read in the process</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="4856"/>
+        <location filename="../../src/grlida.cpp" line="4878"/>
         <source>Ha ocurrido un error desconocido</source>
         <translation>There was an unknown error</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3127"/>
-        <location filename="../../src/grlida.cpp" line="3388"/>
+        <location filename="../../src/grlida.cpp" line="3149"/>
+        <location filename="../../src/grlida.cpp" line="3410"/>
         <source>Por favor selecciona un juego de la lista para eliminarlo</source>
         <translation>Please select a game from the list to delete</translation>
     </message>
@@ -2226,63 +2226,63 @@ This application needs SQLite support. See the Qt SQL driver documentation for m
 Click cancel to exit.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1537"/>
+        <location filename="../../src/grlida.cpp" line="1549"/>
         <source>InformaciÃ³n no disponible</source>
         <translation>Information not available</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1605"/>
-        <location filename="../../src/grlida.cpp" line="2033"/>
+        <location filename="../../src/grlida.cpp" line="1617"/>
+        <location filename="../../src/grlida.cpp" line="2045"/>
         <source>TÃ­tulo</source>
         <translation>Title</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1606"/>
-        <location filename="../../src/grlida.cpp" line="2034"/>
+        <location filename="../../src/grlida.cpp" line="1618"/>
+        <location filename="../../src/grlida.cpp" line="2046"/>
         <source>SubtÃ­tulo</source>
         <translation>Subtitle</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1608"/>
-        <location filename="../../src/grlida.cpp" line="2036"/>
+        <location filename="../../src/grlida.cpp" line="1620"/>
+        <location filename="../../src/grlida.cpp" line="2048"/>
         <source>CompaÃ±ia</source>
         <translation>Publisher</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1613"/>
-        <location filename="../../src/grlida.cpp" line="2044"/>
+        <location filename="../../src/grlida.cpp" line="1625"/>
+        <location filename="../../src/grlida.cpp" line="2056"/>
         <source>AÃ±o</source>
         <translation>Year</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1614"/>
+        <location filename="../../src/grlida.cpp" line="1626"/>
         <source>NÂº discos</source>
         <translation>Number of disks</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1616"/>
-        <location filename="../../src/grlida.cpp" line="2048"/>
+        <location filename="../../src/grlida.cpp" line="1628"/>
+        <location filename="../../src/grlida.cpp" line="2060"/>
         <source>GrÃ¡ficos</source>
         <translation>Graphics</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2045"/>
+        <location filename="../../src/grlida.cpp" line="2057"/>
         <source>NÂº Discos</source>
         <translation>Number of disks</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2047"/>
+        <location filename="../../src/grlida.cpp" line="2059"/>
         <source>TamaÃ±o</source>
         <translation>Size</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="2202"/>
-        <location filename="../../src/grlida.cpp" line="2727"/>
+        <location filename="../../src/grlida.cpp" line="2214"/>
+        <location filename="../../src/grlida.cpp" line="2749"/>
         <source>NÂº juegos</source>
-        <translation>Number of games</translation>
+        <translation>Game</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="3014"/>
+        <location filename="../../src/grlida.cpp" line="3036"/>
         <source>No esta disponible el ejecutable del emulador.
 Compruebe si lo tiene instalado.</source>
         <translation>The emulator binary was not found.
@@ -2588,37 +2588,37 @@ Please check the media service plugins are installed.</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../src/dbsql.cpp" line="825"/>
+        <location filename="../../src/dbsql.cpp" line="859"/>
         <source>Generos</source>
         <translation>Genres</translation>
     </message>
     <message>
-        <location filename="../../src/dbsql.cpp" line="826"/>
+        <location filename="../../src/dbsql.cpp" line="860"/>
         <source>Temas</source>
         <translation>Themes</translation>
     </message>
     <message>
-        <location filename="../../src/dbsql.cpp" line="827"/>
+        <location filename="../../src/dbsql.cpp" line="861"/>
         <source>Desarrolladores</source>
         <translation>Developers</translation>
     </message>
     <message>
-        <location filename="../../src/dbsql.cpp" line="828"/>
+        <location filename="../../src/dbsql.cpp" line="862"/>
         <source>CompaÃ±ias</source>
         <translation>Publisher</translation>
     </message>
     <message>
-        <location filename="../../src/dbsql.cpp" line="829"/>
+        <location filename="../../src/dbsql.cpp" line="863"/>
         <source>AÃ±os</source>
         <translation>Year</translation>
     </message>
     <message>
-        <location filename="../../src/dbsql.cpp" line="830"/>
+        <location filename="../../src/dbsql.cpp" line="864"/>
         <source>Idiomas</source>
         <translation>Languages</translation>
     </message>
     <message>
-        <location filename="../../src/dbsql.cpp" line="849"/>
+        <location filename="../../src/dbsql.cpp" line="883"/>
         <source>Todos</source>
         <translation>All</translation>
     </message>
@@ -2743,16 +2743,16 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="829"/>
         <source>%1K memoria convencional restante</source>
-        <translation>%1K memoria convencional restante</translation>
+        <translation>%1K conventional memory left</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="840"/>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="865"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1236"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1243"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1250"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1257"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1277"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1230"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1237"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1244"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1251"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1271"/>
         <source>Selecciona un archivo</source>
         <translation>Select a file</translation>
     </message>
@@ -2763,19 +2763,19 @@ Please check the media service plugins are installed.</source>
         <translation>Executable</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1215"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1222"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1229"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1209"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1216"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1223"/>
         <source>Seleccionar un directorio</source>
         <translation>Select a folder</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1277"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1271"/>
         <source>Idioma</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1236"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1230"/>
         <source>Imagen</source>
         <translation>Image</translation>
     </message>
@@ -2787,11 +2787,11 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="840"/>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="865"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1236"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1243"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1250"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1257"/>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1277"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1230"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1237"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1244"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1251"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1271"/>
         <source>Todos los archivos</source>
         <translation>All files</translation>
     </message>
@@ -2816,12 +2816,12 @@ Please check the media service plugins are installed.</source>
         <translation>Do you want to delete this mount?</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1243"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1237"/>
         <source>Imagen CD</source>
         <translation>CD Image</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1250"/>
+        <location filename="../../src/grlida_addedit_dosbox.cpp" line="1244"/>
         <source>Imagen HD</source>
         <translation>HD Image</translation>
     </message>
@@ -3068,7 +3068,7 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../ui/addedit_dosbox.ui" line="30"/>
         <source>Datos generales para el DOSbox</source>
-        <translation>Opciones del VDMSound</translation>
+        <translation>General DOSBox data</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_dosbox.ui" line="62"/>
@@ -3362,12 +3362,12 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../ui/addedit_dosbox.ui" line="2061"/>
         <source>Autocrear montaje</source>
-        <translation>Automatic mounting</translation>
+        <translation>Autocreate mount point</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_dosbox.ui" line="2078"/>
         <source>Selecciona montaje primario</source>
-        <translation>Choose first device mounting</translation>
+        <translation>Select as primary device</translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2106"/>
@@ -3628,7 +3628,7 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../ui/addedit_juego.ui" line="404"/>
         <source>Introducido el</source>
-        <translation>Entered the</translation>
+        <translation>added on</translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="414"/>
@@ -3760,7 +3760,7 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../ui/addedit_juego.ui" line="184"/>
         <source>Idioma voces:</source>
-        <translation>Language Voices:</translation>
+        <translation>Voices:</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_juego.ui" line="397"/>
@@ -4354,121 +4354,126 @@ If they are new data or you have made changes and do not save you can lose the c
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="64"/>
+        <source>Imagen de disquete multiples</source>
+        <translation>Multiple floppy disk images</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="65"/>
         <source>Imagen ISO, CUE/BIN</source>
         <translation>ISO, CUE+BIN image</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="65"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="66"/>
         <source>Imagen ISO multiples</source>
         <translation>Multiple ISO images</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="66"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="67"/>
         <source>Imagen de disco duro</source>
         <translation>Harddisk image</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="67"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="68"/>
         <source>Imagen Botable</source>
         <translation>Bootable image</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="70"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="71"/>
         <source>No usar nada</source>
         <translation>Don&apos;t use anything</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="71"/>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="72"/>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="73"/>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="74"/>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="75"/>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="76"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="77"/>
         <source>Usar</source>
         <translation>Use</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="71"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="72"/>
         <source>Fuerza el uso de la capa ASPI. SÃ³lo en Windows con un ASPI-Layer</source>
         <translation>Force the use of the ASPI layer. Only on Windows with an ASPI-Layer</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="72"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="73"/>
         <source>SelecciÃ³n automÃ¡tica de la interfaz de audio de CD</source>
         <translation>Automatic selection of CD audio interface</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="73"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="74"/>
         <source>ExtracciÃ³n digital de audio utilizado para los CD de audio</source>
         <translation>Digital audio extraction used for audio CDs</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="74"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="75"/>
         <source>Llamadas ioctl utiliza para CD de audio</source>
         <translation>IOCTL calls for Audio CD</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="75"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="76"/>
         <source>MCI utiliza para CD de audio</source>
         <translation>Use MCI for Audio CD</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="76"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="77"/>
         <source>Fuerza el uso de las SDL para el CD-ROM. VÃ¡lido para todos los sistemas</source>
         <translation>Force the use of SDLs for the CD-ROM. Valid for all systems</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="87"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="88"/>
         <source>NO usar CD</source>
         <translation>Don&apos;t mount CD</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="272"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="273"/>
         <source>Seleccionar un directorio</source>
         <translation>Select a folder</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="287"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="288"/>
         <source>Todos los archivos</source>
         <translation>All files</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="347"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="348"/>
         <source>Â¿Eliminar...?</source>
         <translation>Delete?</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="347"/>
-        <source>Â¿Quieres eliminar la ISO de la lista?</source>
-        <translation>Do you want to remove the ISO from the list?</translation>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="348"/>
+        <source>Â¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
+        <translation>Do you want to remove the ISO/IMA/IMG from the list?</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="397"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="398"/>
         <source>Espacio libre virtual (%1 %2)</source>
         <translation>Virtual free space (%1 %2)</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="120"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="121"/>
         <source>Procura no montar la Raiz del sistema operativo: ejemplo en windows seria</source>
         <translation>Try not to include your OS path in the mounting: an example for Windows would be</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="120"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="121"/>
         <source>y en linux seria directamente</source>
         <translation>and in Linux it would be</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="281"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="282"/>
         <source>Imagen</source>
         <translation>Image</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="283"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="284"/>
         <source>Imagen CD</source>
         <translation>Image CD</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_montajes.cpp" line="287"/>
+        <location filename="../../src/grlida_addedit_montajes.cpp" line="288"/>
         <source>Selecciona un archivo</source>
         <translation>Select a folder</translation>
     </message>
@@ -6670,69 +6675,74 @@ If they are new data or you have made changes and do not save you can lose the c
     </message>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="86"/>
+        <source>Imagen de disquete multiples</source>
+        <translation>Multiple floppy disk images</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="87"/>
         <source>Imagen ISO, CUE/BIN</source>
         <translation>ISO, CUE+BIN image</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="87"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="88"/>
         <source>Imagen ISO multiples</source>
         <translation>Multiple ISO images</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="88"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="89"/>
         <source>Imagen de disco duro</source>
         <translation>Harddisk image</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="168"/>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="252"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="169"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="253"/>
         <source>Seleccionar un directorio</source>
         <translation>Select a folder</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="183"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="184"/>
         <source>Todos los archivos</source>
         <translation>All files</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="243"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="244"/>
         <source>Â¿Eliminar...?</source>
         <translation>Delete?</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="243"/>
-        <source>Â¿Quieres eliminar la ISO de la lista?</source>
-        <translation>Do you want to remove the ISO from the list?</translation>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="244"/>
+        <source>Â¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
+        <translation>Do you want to remove the ISO/IMA/IMG from the list?</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="282"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="283"/>
         <source>El ejecutable suele ser: INSTALL, si no esta seguro teclee DIR y pulsa INTRO</source>
         <translation>The program name is usually INSTALL. If you are unsure, type DIR and press ENTER</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="347"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="355"/>
         <source>Puede que no este disponible el ejecutable del emulador.
 O el directorio de destino.</source>
         <translation>Either the emulator program file is not available, 
 or the destination folder is wrong.</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="177"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="178"/>
         <source>Imagen</source>
         <translation>Image</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="179"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="180"/>
         <source>Imagen CD</source>
         <translation>Image CD</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="183"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="184"/>
         <source>Selecciona un archivo</source>
         <translation>Select a file</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_instalar_juego.cpp" line="131"/>
+        <location filename="../../src/grlida_instalar_juego.cpp" line="132"/>
         <source>No esta disponible el ejecutable del emulador.
 Compruebe si lo tiene instalado.</source>
         <translation>The emulator binary was not found.
@@ -7467,6 +7477,13 @@ Check if the program is really installed.</translation>
         <translation>Already exists</translation>
     </message>
     <message>
+        <location filename="../../src/grlida_opciones.cpp" line="3075"/>
+        <location filename="../../src/grlida_opciones.cpp" line="3105"/>
+        <location filename="../../src/grlida_opciones.cpp" line="3135"/>
+        <source>Â¿Deseas eliminar la extensiÃ³n?</source>
+        <translation>Do you want to remove this extension?</translation>
+    </message>
+    <message>
         <location filename="../../src/grlida_opciones.cpp" line="1193"/>
         <location filename="../../src/grlida_opciones.cpp" line="1456"/>
         <source>Debes poner una etiqueta.</source>
@@ -7562,6 +7579,7 @@ Check if the program is really installed.</translation>
         <translation>Label</translation>
     </message>
     <message>
+        <location filename="../../src/grlida_opciones.cpp" line="2440"/>
         <location filename="../../src/grlida_opciones.cpp" line="2490"/>
         <location filename="../../src/grlida_opciones.cpp" line="2508"/>
         <source>Config</source>
@@ -7831,6 +7849,51 @@ Check if the program is really installed.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="510"/>
         <source>Icono del juego</source>
         <translation>Game icon</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_opciones.cpp" line="174"/>
+        <source>Cada veinticuatro horas</source>
+        <translation>Every 24 hours</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_opciones.cpp" line="175"/>
+        <source>Semanalmente</source>
+        <translation>Weekly</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_opciones.cpp" line="176"/>
+        <source>Mensualmente</source>
+        <translation>Monthly</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_opciones.cpp" line="202"/>
+        <location filename="../../src/grlida_opciones.cpp" line="246"/>
+        <location filename="../../src/grlida_opciones.cpp" line="283"/>
+        <location filename="../../src/grlida_opciones.cpp" line="316"/>
+        <location filename="../../src/grlida_opciones.cpp" line="342"/>
+        <location filename="../../src/grlida_opciones.cpp" line="391"/>
+        <location filename="../../src/grlida_opciones.cpp" line="498"/>
+        <location filename="../../src/grlida_opciones.cpp" line="2427"/>
+        <source>ImÃ¡genes CategorÃ­as</source>
+        <translation>Category icons</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_opciones.cpp" line="249"/>
+        <location filename="../../src/grlida_opciones.cpp" line="286"/>
+        <location filename="../../src/grlida_opciones.cpp" line="319"/>
+        <location filename="../../src/grlida_opciones.cpp" line="345"/>
+        <location filename="../../src/grlida_opciones.cpp" line="394"/>
+        <location filename="../../src/grlida_opciones.cpp" line="501"/>
+        <location filename="../../src/grlida_opciones.cpp" line="2429"/>
+        <source>ImÃ¡genes defecto</source>
+        <translation>defecto icons</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_opciones.cpp" line="322"/>
+        <location filename="../../src/grlida_opciones.cpp" line="348"/>
+        <location filename="../../src/grlida_opciones.cpp" line="504"/>
+        <source>ImÃ¡genes idiomas</source>
+        <translation>Language icons</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="555"/>
@@ -8356,7 +8419,7 @@ Check if the program is really installed.</translation>
     <message utf8="true">
         <location filename="../../ui/opciones.ui" line="871"/>
         <source>Guardar archivo de configuración del DOSBox, si esta desactivado se genera al ejecutar el juego.</source>
-        <translation>Save DOSBox configuration file, if disabled, is generated when the game is executed.</translation>
+        <translation>Save DOSBox configuration file; if disabled generate when game is executed.</translation>
     </message>
     <message>
         <location filename="../../ui/opciones.ui" line="1110"/>
@@ -8654,7 +8717,7 @@ Check if the program is really installed.</translation>
     <message utf8="true">
         <location filename="../../ui/opciones.ui" line="404"/>
         <source>Comprobación cada</source>
-        <translation>Checking every</translation>
+        <translation>Check</translation>
     </message>
     <message>
         <location filename="../../ui/opciones.ui" line="421"/>
@@ -8921,7 +8984,7 @@ Check if the program is really installed.</translation>
     <message>
         <location filename="../../ui/update.ui" line="20"/>
         <location filename="../../ui/update.ui" line="64"/>
-        <location filename="../../src/grlida_update.cpp" line="108"/>
+        <location filename="../../src/grlida_update.cpp" line="121"/>
         <source>Actualizaciones</source>
         <translation>Updates</translation>
     </message>
@@ -8946,27 +9009,27 @@ Check if the program is really installed.</translation>
         <translation>Close</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_update.cpp" line="64"/>
+        <location filename="../../src/grlida_update.cpp" line="74"/>
         <source>Estilos o themes para el GR-lida</source>
         <translation>Styles or themes for the GR-lida</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_update.cpp" line="130"/>
+        <location filename="../../src/grlida_update.cpp" line="143"/>
         <source>Descargar</source>
         <translation>Download</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_update.cpp" line="130"/>
+        <location filename="../../src/grlida_update.cpp" line="143"/>
         <source>Actualizar</source>
         <translation>Refresh</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_update.cpp" line="70"/>
+        <location filename="../../src/grlida_update.cpp" line="82"/>
         <source>Lista de compatibilidad del ScummVM</source>
         <translation>ScummVM compatibility list</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_update.cpp" line="58"/>
+        <location filename="../../src/grlida_update.cpp" line="65"/>
         <source>Script para importar datos del juego</source>
         <translation>Script to import game data</translation>
     </message>
@@ -9027,7 +9090,7 @@ Check if the program is really installed.</translation>
     <message>
         <location filename="../../ui/wizard_dosbox.ui" line="630"/>
         <source>Templates profiles:</source>
-        <translation></translation>
+        <translation>Profile template:</translation>
     </message>
     <message>
         <location filename="../../ui/wizard_dosbox.ui" line="490"/>
