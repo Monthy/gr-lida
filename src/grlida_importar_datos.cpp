@@ -295,122 +295,200 @@ void frmImportarDatos::cargarEditorDatos()
 
 void frmImportarDatos::setEditorDatos(stDatosJuego cfgDat, stDatosJuego dat_def)
 {
-	pdat_icono->setIndex(pdat_icono->indexOfData(cfgDat.icono));
-	pdat_icono->setDefaultIndex(pdat_icono->indexOfData(dat_def.icono));
+	if (pdat_icono->isChecked()) {
+		pdat_icono->setIndex(pdat_icono->indexOfData(cfgDat.icono));
+		pdat_icono->setDefaultIndex(pdat_icono->indexOfData(dat_def.icono));
+	}
 
-	pdat_titulo->setValue(cfgDat.titulo);
-	pdat_titulo->setDefaultValue(dat_def.titulo);
+	if (pdat_titulo->isChecked()) {
+		pdat_titulo->setValue(cfgDat.titulo);
+		pdat_titulo->setDefaultValue(dat_def.titulo);
+	}
 
-	pdat_subtitulo->setValue(cfgDat.subtitulo);
-	pdat_subtitulo->setDefaultValue(dat_def.subtitulo);
+	if (pdat_subtitulo->isChecked()) {
+		pdat_subtitulo->setValue(cfgDat.subtitulo);
+		pdat_subtitulo->setDefaultValue(dat_def.subtitulo);
+	}
 
-	pdat_genero->setValue(cfgDat.genero);
-	pdat_genero->setDefaultValue(dat_def.genero);
+	if (pdat_genero->isChecked()) {
+		pdat_genero->setValue(cfgDat.genero);
+		pdat_genero->setDefaultValue(dat_def.genero);
+	}
 
-	pdat_compania->setValue(cfgDat.compania);
-	pdat_compania->setDefaultValue(dat_def.compania);
+	if (pdat_compania->isChecked()) {
+		pdat_compania->setValue(cfgDat.compania);
+		pdat_compania->setDefaultValue(dat_def.compania);
+	}
 
-	pdat_desarrollador->setValue(cfgDat.desarrollador);
-	pdat_desarrollador->setDefaultValue(dat_def.desarrollador);
+	if (pdat_desarrollador->isChecked()) {
+		pdat_desarrollador->setValue(cfgDat.desarrollador);
+		pdat_desarrollador->setDefaultValue(dat_def.desarrollador);
+	}
 
-	pdat_tema->setValue(cfgDat.tema);
-	pdat_tema->setDefaultValue(dat_def.tema);
+	if (pdat_tema->isChecked()) {
+		pdat_tema->setValue(cfgDat.tema);
+		pdat_tema->setDefaultValue(dat_def.tema);
+	}
 
-	pdat_grupo->setValue(cfgDat.grupo);
-	pdat_grupo->setDefaultValue(dat_def.grupo);
+	if (pdat_grupo->isChecked()) {
+		pdat_grupo->setValue(cfgDat.grupo);
+		pdat_grupo->setDefaultValue(dat_def.grupo);
+	}
 
-	pdat_perspectiva->setValue(cfgDat.perspectiva);
-	pdat_perspectiva->setDefaultValue(dat_def.perspectiva);
+	if (pdat_perspectiva->isChecked()) {
+		pdat_perspectiva->setValue(cfgDat.perspectiva);
+		pdat_perspectiva->setDefaultValue(dat_def.perspectiva);
+	}
 
-	pdat_idioma->setValue(cfgDat.idioma);
-	pdat_idioma->setDefaultValue(dat_def.idioma);
+	if (pdat_idioma->isChecked()) {
+		pdat_idioma->setValue(cfgDat.idioma);
+		pdat_idioma->setDefaultValue(dat_def.idioma);
+	}
 
-	pdat_idioma_voces->setValue(cfgDat.idioma_voces);
-	pdat_idioma_voces->setDefaultValue(dat_def.idioma_voces);
+	if (pdat_idioma_voces->isChecked()) {
+		pdat_idioma_voces->setValue(cfgDat.idioma_voces);
+		pdat_idioma_voces->setDefaultValue(dat_def.idioma_voces);
+	}
 
-	pdat_formato->setValue(cfgDat.formato);
-	pdat_formato->setDefaultValue(dat_def.formato);
+	if (pdat_formato->isChecked()) {
+		pdat_formato->setValue(cfgDat.formato);
+		pdat_formato->setDefaultValue(dat_def.formato);
+	}
 
-	pdat_anno->setIndex(pdat_anno->indexOfData(cfgDat.anno));
-	pdat_anno->setDefaultIndex(pdat_anno->indexOfData(dat_def.anno));
+	if (pdat_anno->isChecked()) {
+		pdat_anno->setIndex(pdat_anno->indexOfData(cfgDat.anno));
+		pdat_anno->setDefaultIndex(pdat_anno->indexOfData(dat_def.anno));
+	}
 
-	pdat_numdisc->setIndex(pdat_numdisc->indexOfData(cfgDat.numdisc));
-	pdat_numdisc->setDefaultIndex(pdat_numdisc->indexOfData(dat_def.numdisc));
+	if (pdat_numdisc->isChecked()) {
+		pdat_numdisc->setIndex(pdat_numdisc->indexOfData(cfgDat.numdisc));
+		pdat_numdisc->setDefaultIndex(pdat_numdisc->indexOfData(dat_def.numdisc));
+	}
 
-	pdat_sistemaop->setValue(cfgDat.sistemaop);
-	pdat_sistemaop->setDefaultValue(dat_def.sistemaop);
+	if (pdat_sistemaop->isChecked()) {
+		pdat_sistemaop->setValue(cfgDat.sistemaop);
+		pdat_sistemaop->setDefaultValue(dat_def.sistemaop);
+	}
 
-	pdat_tamano->setValue(cfgDat.tamano);
-	pdat_tamano->setDefaultValue(dat_def.tamano);
+	if (pdat_tamano->isChecked()) {
+		pdat_tamano->setValue(cfgDat.tamano);
+		pdat_tamano->setDefaultValue(dat_def.tamano);
+	}
 
-	pdat_graficos->setIndex(cfgDat.graficos.toInt());
-	pdat_graficos->setDefaultIndex(dat_def.graficos.toInt());
+	if (pdat_graficos->isChecked()) {
+		pdat_graficos->setIndex(cfgDat.graficos.toInt());
+		pdat_graficos->setDefaultIndex(dat_def.graficos.toInt());
+	}
 
-	pdat_sonido->setIndex(cfgDat.sonido.toInt());
-	pdat_sonido->setDefaultIndex(dat_def.sonido.toInt());
+	if (pdat_sonido->isChecked()) {
+		pdat_sonido->setIndex(cfgDat.sonido.toInt());
+		pdat_sonido->setDefaultIndex(dat_def.sonido.toInt());
+	}
 
-	pdat_jugabilidad->setIndex(cfgDat.jugabilidad.toInt());
-	pdat_jugabilidad->setDefaultIndex(dat_def.jugabilidad.toInt());
+	if (pdat_jugabilidad->isChecked()) {
+		pdat_jugabilidad->setIndex(cfgDat.jugabilidad.toInt());
+		pdat_jugabilidad->setDefaultIndex(dat_def.jugabilidad.toInt());
+	}
 
-	pdat_original->setValue(fGrl->strToBool(cfgDat.original));
-	pdat_original->setDefaultValue(fGrl->strToBool(dat_def.original));
+	if (pdat_original->isChecked()) {
+		pdat_original->setValue(fGrl->strToBool(cfgDat.original));
+		pdat_original->setDefaultValue(fGrl->strToBool(dat_def.original));
+	}
 
-	pdat_estado->setValue(cfgDat.estado);
-	pdat_estado->setDefaultValue(dat_def.estado);
+	if (pdat_estado->isChecked()) {
+		pdat_estado->setValue(cfgDat.estado);
+		pdat_estado->setDefaultValue(dat_def.estado);
+	}
 
-	pdat_thumbs->setValue(cfgDat.thumbs);
-	pdat_thumbs->setDefaultValue(dat_def.thumbs);
+	if (pdat_thumbs->isChecked()) {
+		pdat_thumbs->setValue(cfgDat.thumbs);
+		pdat_thumbs->setDefaultValue(dat_def.thumbs);
+	}
 
-	pdat_cover_front->setValue(cfgDat.cover_front);
-	pdat_cover_front->setDefaultValue(dat_def.cover_front);
+	if (pdat_cover_front->isChecked()) {
+		pdat_cover_front->setValue(cfgDat.cover_front);
+		pdat_cover_front->setDefaultValue(dat_def.cover_front);
+	}
 
-	pdat_cover_back->setValue(cfgDat.cover_back);
-	pdat_cover_back->setDefaultValue(dat_def.cover_back);
+	if (pdat_cover_back->isChecked()) {
+		pdat_cover_back->setValue(cfgDat.cover_back);
+		pdat_cover_back->setDefaultValue(dat_def.cover_back);
+	}
 
-	pdat_cover_left->setValue(cfgDat.cover_left);
-	pdat_cover_left->setDefaultValue(dat_def.cover_left);
+	if (pdat_cover_left->isChecked()) {
+		pdat_cover_left->setValue(cfgDat.cover_left);
+		pdat_cover_left->setDefaultValue(dat_def.cover_left);
+	}
 
-	pdat_cover_right->setValue(cfgDat.cover_right);
-	pdat_cover_right->setDefaultValue(dat_def.cover_right);
+	if (pdat_cover_right->isChecked()) {
+		pdat_cover_right->setValue(cfgDat.cover_right);
+		pdat_cover_right->setDefaultValue(dat_def.cover_right);
+	}
 
-	pdat_cover_top->setValue(cfgDat.cover_top);
-	pdat_cover_top->setDefaultValue(dat_def.cover_top);
+	if (pdat_cover_top->isChecked()) {
+		pdat_cover_top->setValue(cfgDat.cover_top);
+		pdat_cover_top->setDefaultValue(dat_def.cover_top);
+	}
 
-	pdat_cover_bottom->setValue(cfgDat.cover_bottom);
-	pdat_cover_bottom->setDefaultValue(dat_def.cover_bottom);
+	if (pdat_cover_bottom->isChecked()) {
+		pdat_cover_bottom->setValue(cfgDat.cover_bottom);
+		pdat_cover_bottom->setDefaultValue(dat_def.cover_bottom);
+	}
 
-	pdat_tipo_emu->setIndex(pdat_tipo_emu->indexOfData(cfgDat.tipo_emu));
-	pdat_tipo_emu->setDefaultIndex(pdat_tipo_emu->indexOfData(dat_def.tipo_emu));
+	if (pdat_tipo_emu->isChecked()) {
+		pdat_tipo_emu->setIndex(pdat_tipo_emu->indexOfData(cfgDat.tipo_emu));
+		pdat_tipo_emu->setDefaultIndex(pdat_tipo_emu->indexOfData(dat_def.tipo_emu));
+	}
 
-	pdat_comentario->setValue(cfgDat.comentario);
-	pdat_comentario->setDefaultValue(dat_def.comentario);
+	if (pdat_comentario->isChecked()) {
+		pdat_comentario->setValue(cfgDat.comentario);
+		pdat_comentario->setDefaultValue(dat_def.comentario);
+	}
 
-	pdat_favorito->setValue(fGrl->strToBool(cfgDat.favorito));
-	pdat_favorito->setDefaultValue(fGrl->strToBool(dat_def.favorito));
+	if (pdat_favorito->isChecked()) {
+		pdat_favorito->setValue(fGrl->strToBool(cfgDat.favorito));
+		pdat_favorito->setDefaultValue(fGrl->strToBool(dat_def.favorito));
+	}
 
-	pdat_gamepad->setValue(fGrl->strToBool(cfgDat.gamepad));
-	pdat_gamepad->setDefaultValue(fGrl->strToBool(dat_def.gamepad));
+	if (pdat_gamepad->isChecked()) {
+		pdat_gamepad->setValue(fGrl->strToBool(cfgDat.gamepad));
+		pdat_gamepad->setDefaultValue(fGrl->strToBool(dat_def.gamepad));
+	}
 
-	pdat_rating->setIndex(cfgDat.rating.toInt());
-	pdat_rating->setDefaultIndex(dat_def.rating.toInt());
+	if (pdat_rating->isChecked()) {
+		pdat_rating->setIndex(cfgDat.rating.toInt());
+		pdat_rating->setDefaultIndex(dat_def.rating.toInt());
+	}
 
-	pdat_edad_recomendada->setIndex(pdat_edad_recomendada->indexOfData(cfgDat.edad_recomendada));
-	pdat_edad_recomendada->setDefaultIndex(pdat_edad_recomendada->indexOfData(dat_def.edad_recomendada));
+	if (pdat_edad_recomendada->isChecked()) {
+		pdat_edad_recomendada->setIndex(pdat_edad_recomendada->indexOfData(cfgDat.edad_recomendada));
+		pdat_edad_recomendada->setDefaultIndex(pdat_edad_recomendada->indexOfData(dat_def.edad_recomendada));
+	}
 
-	pdat_usuario->setValue(cfgDat.usuario);
-	pdat_usuario->setDefaultValue(dat_def.usuario);
+	if (pdat_usuario->isChecked()) {
+		pdat_usuario->setValue(cfgDat.usuario);
+		pdat_usuario->setDefaultValue(dat_def.usuario);
+	}
 
-	pdat_path_exe->setValue(cfgDat.path_exe);
-	pdat_path_exe->setDefaultValue(dat_def.path_exe);
+	if (pdat_path_exe->isChecked()) {
+		pdat_path_exe->setValue(cfgDat.path_exe);
+		pdat_path_exe->setDefaultValue(dat_def.path_exe);
+	}
 
-	pdat_parametros_exe->setValue(cfgDat.parametros_exe);
-	pdat_parametros_exe->setDefaultValue(dat_def.parametros_exe);
+	if (pdat_parametros_exe->isChecked()) {
+		pdat_parametros_exe->setValue(cfgDat.parametros_exe);
+		pdat_parametros_exe->setDefaultValue(dat_def.parametros_exe);
+	}
 
-	pdat_path_setup->setValue(cfgDat.path_setup);
-	pdat_path_setup->setDefaultValue(dat_def.path_setup);
+	if (pdat_path_setup->isChecked()) {
+		pdat_path_setup->setValue(cfgDat.path_setup);
+		pdat_path_setup->setDefaultValue(dat_def.path_setup);
+	}
 
-	pdat_parametros_setup->setValue(cfgDat.parametros_setup);
-	pdat_parametros_setup->setDefaultValue(dat_def.parametros_setup);
+	if (pdat_parametros_setup->isChecked()) {
+		pdat_parametros_setup->setValue(cfgDat.parametros_setup);
+		pdat_parametros_setup->setDefaultValue(dat_def.parametros_setup);
+	}
 
 	DatosJuego = cfgDat;
 }
