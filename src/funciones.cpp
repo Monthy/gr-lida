@@ -2618,10 +2618,10 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 	}
 
 // Cerrar DOSBox
-	if (strToBool(cfgDbx.opt_cerrar_dbox))
-		Dbx_cerrardbx = "exit";
-	else
-		Dbx_cerrardbx = "";
+	//if (strToBool(cfgDbx.opt_cerrar_dbox))
+	//	Dbx_cerrardbx = "exit";
+	//else
+	//	Dbx_cerrardbx = "";
 
 // Montajes
 	listmontajes.clear();
@@ -2807,12 +2807,17 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 	{
 		listmontajes << mount_letra_primario +":";
 		listmontajes << "cd "+ mount_dir;
+
+		if (!cfgDbx.autoexec_ini_exe.isEmpty())
+			listmontajes << cfgDbx.autoexec_ini_exe;
+
 		listmontajes << Dbx_loadfix + getNameTo8Caracter(NombreEXEDbx) +" "+ cfgDbx.parametros_exe;
+
+		if (!cfgDbx.autoexec_fin_exe.isEmpty())
+			listmontajes << cfgDbx.autoexec_fin_exe;
 	} else {
 		listmontajes << montaje_boot;
 	}
-
-	listmontajes << Dbx_cerrardbx;
 
 	return listmontajes;
 }
@@ -3357,7 +3362,9 @@ QString Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_
 				cfg_out.replace("{Dbx_ipx_config}", "");
 
 		// [autoexec]
-			QString autoexec = "";
+			QString autoexec     = "";
+			QString autoexec_ini = cfgDbx.autoexec_ini.isEmpty() ? "" : cfgDbx.autoexec_ini +"\n";
+			QString autoexec_fin = cfgDbx.autoexec_fin.isEmpty() ? "" : cfgDbx.autoexec_fin +"\n";
 
 			if (!cfgDbx.dos_version.isEmpty())
 				autoexec.append("ver set "+ cfgDbx.dos_version +"\n\n");
@@ -3372,7 +3379,9 @@ QString Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_
 					autoexec.append(listamontaje.at(i) +"\n");
 			}
 
-			cfg_out.replace("{Dbx_autoexec}", autoexec);
+			cfg_out.replace("{Dbx_autoexec}"    , autoexec    );
+			cfg_out.replace("{Dbx_autoexec_ini}", autoexec_ini);
+			cfg_out.replace("{Dbx_autoexec_fin}", autoexec_fin);
 		}
 		else if (tipo_cfg == ExportGrlida)
 		{
@@ -3382,7 +3391,9 @@ QString Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_
 			cfg_out.replace("{Dbx_ipx_ip}"  , cfgDbx.ipx_ip);
 
 		// [autoexec]
-			cfg_out.replace("{Dbx_autoexec}", cfgDbx.autoexec);
+			cfg_out.replace("{Dbx_autoexec}"    , cfgDbx.autoexec    );
+			cfg_out.replace("{Dbx_autoexec_ini}", cfgDbx.autoexec_ini);
+			cfg_out.replace("{Dbx_autoexec_fin}", cfgDbx.autoexec_fin);
 
 		// Opciones
 			cfg_out.replace("{Dbx_opt_autoexec}"         , cfgDbx.opt_autoexec);
@@ -3419,8 +3430,14 @@ QString Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_
 				}
 			}
 			cfg_out.replace("{dosbox_montajes}", cfg_mount);
-		} else
-			cfg_out.replace("{Dbx_autoexec}", "");
+		} else {
+			cfg_out.replace("{Dbx_autoexec}"    , "");
+			cfg_out.replace("{Dbx_autoexec_ini}", "");
+			cfg_out.replace("{Dbx_autoexec_fin}", "");
+		}
+
+		QString Dbx_cerrar = strToBool(cfgDbx.opt_cerrar_dbox) ? "exit" : "";
+		cfg_out.replace("{Dbx_cerrar}", Dbx_cerrar);
 	}
 
 	if (datos.tipo_emu == "scummvm")
@@ -3575,6 +3592,8 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 			cfgDFend["Dbx_parametros_setup"] = settings.value("SetupParameters", "").toString().replace("--", ",");
 		// [autoexec]
 			cfgDFend["Dbx_autoexec"] = settings.value("autoexec", "").toString().replace("--", ",").replace("[13][10]", "\n");
+		//	cfgDFend["Dbx_autoexec_ini"] = settings.value("autoexec_ini", "").toString().replace("--", ",").replace("[13][10]", "\n");
+		//	cfgDFend["Dbx_autoexec_fin"] = settings.value("autoexec_fin", "").toString().replace("--", ",").replace("[13][10]", "\n");
 		// Opciones
 			cfgDFend["Dbx_opt_autoexec"]     = cfgDFend["Dbx_autoexec"].isEmpty() ? "false" : "true";
 			cfgDFend["Dbx_opt_loadfix"]      = boolToStr(settings.value("Loadhigh", false).toBool());

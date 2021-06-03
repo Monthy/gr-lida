@@ -639,6 +639,30 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_autoexec->setKey("Dbx_autoexec");
 	pdbx_autoexec->setTextMultiLine(true);
 
+	PropertyHeader *p_head_autoexec_ini = new PropertyHeader(tr("Config - Autoexec Inicio"));
+
+	pdbx_autoexec_ini = new StringProperty(p_head_autoexec_ini, tr("autoexec_ini"), "", "");
+	pdbx_autoexec_ini->setKey("Dbx_autoexec_ini");
+	pdbx_autoexec_ini->setTextMultiLine(true);
+
+	PropertyHeader *p_head_autoexec_fin = new PropertyHeader(tr("Config - Autoexec Final"));
+
+	pdbx_autoexec_fin = new StringProperty(p_head_autoexec_fin, tr("autoexec_fin"), "", "");
+	pdbx_autoexec_fin->setKey("Dbx_autoexec_fin");
+	pdbx_autoexec_fin->setTextMultiLine(true);
+
+	PropertyHeader *p_head_autoexec_ini_exe = new PropertyHeader(tr("Config - Antes del exe"));
+
+	pdbx_autoexec_ini_exe = new StringProperty(p_head_autoexec_ini_exe, tr("autoexec_ini_exe"), "", "");
+	pdbx_autoexec_ini_exe->setKey("Dbx_autoexec_ini_exe");
+	pdbx_autoexec_ini_exe->setTextMultiLine(true);
+
+	PropertyHeader *p_head_autoexec_fin_exe = new PropertyHeader(tr("Config - Después del exe"));
+
+	pdbx_autoexec_fin_exe = new StringProperty(p_head_autoexec_fin_exe, tr("autoexec_fin_exe"), "", "");
+	pdbx_autoexec_fin_exe->setKey("Dbx_autoexec_fin_exe");
+	pdbx_autoexec_fin_exe->setTextMultiLine(true);
+
 // Opciones
 	PropertyHeader *p_head_opt = new PropertyHeader("Config - Opciones");
 
@@ -676,25 +700,29 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_parametros_setup->setKey("Dbx_parametros_setup");
 
 // --
-	ui->twDOSBox->addProperty(p_head_sdl        , "p_head_sdl"        );
-	ui->twDOSBox->addProperty(p_head_dosbox     , "p_head_dosbox"     );
-	ui->twDOSBox->addProperty(p_head_render     , "p_head_render"     );
-	ui->twDOSBox->addProperty(p_head_cpu        , "p_head_cpu"        );
-	ui->twDOSBox->addProperty(p_head_mixer      , "p_head_mixer"      );
-	ui->twDOSBox->addProperty(p_head_midi       , "p_head_midi"       );
-	ui->twDOSBox->addProperty(p_head_sblaster   , "p_head_sblaster"   );
-	ui->twDOSBox->addProperty(p_head_gus        , "p_head_gus"        );
-	ui->twDOSBox->addProperty(p_head_speaker    , "p_head_speaker"    );
-	ui->twDOSBox->addProperty(p_head_joystick   , "p_head_joystick"   );
-	ui->twDOSBox->addProperty(p_head_modem      , "p_head_modem"      );
-	ui->twDOSBox->addProperty(p_head_dserial    , "p_head_dserial"    );
-	ui->twDOSBox->addProperty(p_head_edit_serial, "p_head_edit_serial");
-	ui->twDOSBox->addProperty(p_head_serial     , "p_head_serial"     );
-	ui->twDOSBox->addProperty(p_head_dos        , "p_head_dos"        );
-	ui->twDOSBox->addProperty(p_head_ipx        , "p_head_ipx"        );
-	ui->twDOSBox->addProperty(p_head_autoexec   , "p_head_autoexec"   );
-	ui->twDOSBox->addProperty(p_head_opt        , "p_head_opt"        );
-	ui->twDOSBox->addProperty(p_head_path       , "p_head_path"       );
+	ui->twDOSBox->addProperty(p_head_sdl             , "p_head_sdl"             );
+	ui->twDOSBox->addProperty(p_head_dosbox          , "p_head_dosbox"          );
+	ui->twDOSBox->addProperty(p_head_render          , "p_head_render"          );
+	ui->twDOSBox->addProperty(p_head_cpu             , "p_head_cpu"             );
+	ui->twDOSBox->addProperty(p_head_mixer           , "p_head_mixer"           );
+	ui->twDOSBox->addProperty(p_head_midi            , "p_head_midi"            );
+	ui->twDOSBox->addProperty(p_head_sblaster        , "p_head_sblaster"        );
+	ui->twDOSBox->addProperty(p_head_gus             , "p_head_gus"             );
+	ui->twDOSBox->addProperty(p_head_speaker         , "p_head_speaker"         );
+	ui->twDOSBox->addProperty(p_head_joystick        , "p_head_joystick"        );
+	ui->twDOSBox->addProperty(p_head_modem           , "p_head_modem"           );
+	ui->twDOSBox->addProperty(p_head_dserial         , "p_head_dserial"         );
+	ui->twDOSBox->addProperty(p_head_edit_serial     , "p_head_edit_serial"     );
+	ui->twDOSBox->addProperty(p_head_serial          , "p_head_serial"          );
+	ui->twDOSBox->addProperty(p_head_dos             , "p_head_dos"             );
+	ui->twDOSBox->addProperty(p_head_ipx             , "p_head_ipx"             );
+	ui->twDOSBox->addProperty(p_head_autoexec        , "p_head_autoexec"        );
+	ui->twDOSBox->addProperty(p_head_autoexec_ini    , "p_head_autoexec_ini"    );
+	ui->twDOSBox->addProperty(p_head_autoexec_fin    , "p_head_autoexec_fin"    );
+	ui->twDOSBox->addProperty(p_head_autoexec_ini_exe, "p_head_autoexec_ini_exe");
+	ui->twDOSBox->addProperty(p_head_autoexec_fin_exe, "p_head_autoexec_fin_exe");
+	ui->twDOSBox->addProperty(p_head_opt             , "p_head_opt"             );
+	ui->twDOSBox->addProperty(p_head_path            , "p_head_path"            );
 
 	ui->twDOSBox->setRootIsDecorated(false);
 	ui->twDOSBox->adjustToContents();
@@ -810,6 +838,10 @@ void frmImportarDosBox::setEditorDOSBox(stConfigDOSBox cfgDbx)
 	pdbx_ipx_ip->setValue(cfgDbx.ipx_ip);
 // [autoexec]
 	pdbx_autoexec->setValue(cfgDbx.autoexec);
+	pdbx_autoexec_ini->setValue(cfgDbx.autoexec_ini);
+	pdbx_autoexec_fin->setValue(cfgDbx.autoexec_fin);
+	pdbx_autoexec_ini_exe->setValue(cfgDbx.autoexec_ini_exe);
+	pdbx_autoexec_fin_exe->setValue(cfgDbx.autoexec_fin_exe);
 // Opciones
 	pdbx_opt_autoexec->setValue(fGrl->strToBool(cfgDbx.opt_autoexec));
 	pdbx_opt_loadfix->setValue(fGrl->strToBool(cfgDbx.opt_loadfix));
@@ -1105,6 +1137,14 @@ void frmImportarDosBox::onValueDOSBoxChanged(PropertyItem *prop, const QVariant 
 // [autoexec]
 	if (prop->getKey() == "Dbx_autoexec")
 		DatosDosBox.autoexec = value.toString();
+	if (prop->getKey() == "Dbx_autoexec_ini")
+		DatosDosBox.autoexec_ini = value.toString();
+	if (prop->getKey() == "Dbx_autoexec_fin")
+		DatosDosBox.autoexec_fin = value.toString();
+	if (prop->getKey() == "Dbx_autoexec_ini_exe")
+		DatosDosBox.autoexec_ini_exe = value.toString();
+	if (prop->getKey() == "Dbx_autoexec_fin_exe")
+		DatosDosBox.autoexec_fin_exe = value.toString();
 //Opciones
 	if (prop->getKey() == "Dbx_opt_autoexec")
 		DatosDosBox.opt_autoexec = fGrl->boolToStr(value.toBool());

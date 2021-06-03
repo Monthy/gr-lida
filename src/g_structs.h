@@ -547,8 +547,10 @@ struct stDatosJuego {
 	QString usuario;
 	QString path_exe;
 	QString parametros_exe;
+	QString compatibilidad_exe;
 	QString path_setup;
 	QString parametros_setup;
+	QString compatibilidad_setup;
 	stCheckedDatos isChecked;
 // --
 	QString path_capturas;
@@ -679,6 +681,10 @@ struct stConfigDOSBox {
 	QString ipx_ip;
 // [autoexec]
 	QString autoexec;
+	QString autoexec_ini;
+	QString autoexec_fin;
+	QString autoexec_ini_exe;
+	QString autoexec_fin_exe;
 // Opciones
 	QString opt_autoexec;
 	QString opt_loadfix;

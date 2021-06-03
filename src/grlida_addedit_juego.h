@@ -200,6 +200,7 @@ private slots:
 // Otros datos
 	void on_btnDat_path_exe_clicked();
 	void on_btnDat_path_exe_clear_clicked();
+	void on_btnDat_path_exe_compatibilidad_clicked();
 
 	void on_txtDat_parametros_exe_textEdited(const QString &arg1);
 	void on_txtDat_parametros_exe_valor_textEdited(const QString &arg1);
@@ -211,6 +212,7 @@ private slots:
 
 	void on_btnDat_path_setup_clicked();
 	void on_btnDat_path_setup_clear_clicked();
+	void on_btnDat_path_setup_compatibilidad_clicked();
 
 	void on_txtDat_parametros_setup_textEdited(const QString &arg1);
 	void on_txtDat_parametros_setup_valor_textEdited(const QString &arg1);

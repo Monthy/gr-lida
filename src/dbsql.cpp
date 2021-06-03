@@ -545,8 +545,10 @@ bool dbSql::crearTablaDatos(QString tabla)
 		"	usuario					VARCHAR(255) NOT NULL DEFAULT '',"
 		"	path_exe				VARCHAR(255) NOT NULL DEFAULT '',"
 		"	parametros_exe			VARCHAR(255) NOT NULL DEFAULT '',"
+		"	compatibilidad_exe		VARCHAR(255) NOT NULL DEFAULT 'false|',"
 		"	path_setup				VARCHAR(255) NOT NULL DEFAULT '',"
 		"	parametros_setup		VARCHAR(255) NOT NULL DEFAULT '',"
+		"	compatibilidad_setup	VARCHAR(255) NOT NULL DEFAULT 'false|',"
 		"	"+ qpsql_pkey(tabla) +" PRIMARY KEY(idgrl)"
 		") "+ qpsql_oids +";");
 
@@ -687,6 +689,10 @@ void dbSql::crearTablas()
 		"	ipx_port				VARCHAR(5) NOT NULL DEFAULT '213',"
 		"	ipx_ip					VARCHAR(255) NOT NULL DEFAULT '',"
 		"	autoexec				"+ qpsql_text +","
+		"	autoexec_ini			"+ qpsql_text +","
+		"	autoexec_fin			"+ qpsql_text +","
+		"	autoexec_ini_exe		"+ qpsql_text +","
+		"	autoexec_fin_exe		"+ qpsql_text +","
 		"	opt_autoexec			VARCHAR(5) NOT NULL DEFAULT 'false',"
 		"	opt_loadfix				VARCHAR(5) NOT NULL DEFAULT 'false',"
 		"	opt_loadfix_mem			VARCHAR(5) NOT NULL DEFAULT '64',"
@@ -920,6 +926,8 @@ void dbSql::crearTablas()
 			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN cover_top VARCHAR(255) NOT NULL DEFAULT '';");
 			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN cover_bottom VARCHAR(255) NOT NULL DEFAULT '';");
 			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN titulo_guiones VARCHAR(255) NOT NULL DEFAULT '';");
+			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN compatibilidad_exe VARCHAR(255) NOT NULL DEFAULT 'false|';");
+			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN compatibilidad_setup VARCHAR(255) NOT NULL DEFAULT 'false|';");
 		} while (query_cat.next());
 	}
 	query_cat.clear();
@@ -936,6 +944,10 @@ void dbSql::crearTablas()
 	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN ipx_port VARCHAR(5) NOT NULL DEFAULT '213';");
 	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN ipx_ip VARCHAR(255) NOT NULL DEFAULT '';");
 	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN dosbox_emu_key VARCHAR(255) NOT NULL DEFAULT 'dosbox';");
+	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN autoexec_ini "+ qpsql_text +";");
+	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN autoexec_fin "+ qpsql_text +";");
+	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN autoexec_ini_exe "+ qpsql_text +";");
+	query.exec("ALTER TABLE dbgrl_emu_dosbox ADD COLUMN autoexec_fin_exe "+ qpsql_text +";");
 // Tabla - dbgrl_emu_dosbox_mount
 	query.exec("ALTER TABLE dbgrl_emu_dosbox_mount ADD COLUMN opt_size VARCHAR(255) NOT NULL DEFAULT '';");
 	query.exec("ALTER TABLE dbgrl_emu_dosbox_mount ADD COLUMN opt_freesize VARCHAR(5) NOT NULL DEFAULT 'false';");
@@ -988,47 +1000,49 @@ stDatosJuego dbSql::getDefectDatos(QString icono, QHash<QString, QString> dato)
 	stDatosJuego datos;
 	datos.idgrl = setDefDatValue(isQHash, dato["Dat_idgrl"], "");
 //--
-	datos.icono            = setDefDatValue(isQHash, dato["Dat_icono"]           , icono);
-	datos.titulo           = setDefDatValue(isQHash, dato["Dat_titulo"]          , "");
-	datos.titulo_guiones   = setDefDatValue(isQHash, dato["Dat_titulo_guiones"]  , (!datos.titulo.isEmpty() ? removeAccents(datos.titulo) : ""));
-	datos.subtitulo        = setDefDatValue(isQHash, dato["Dat_subtitulo"]       , "");
-	datos.genero           = setDefDatValue(isQHash, dato["Dat_genero"]          , "");
-	datos.compania         = setDefDatValue(isQHash, dato["Dat_compania"]        , "");
-	datos.desarrollador    = setDefDatValue(isQHash, dato["Dat_desarrollador"]   , "");
-	datos.tema             = setDefDatValue(isQHash, dato["Dat_tema"]            , "");
-	datos.grupo            = setDefDatValue(isQHash, dato["Dat_grupo"]           , "");
-	datos.perspectiva      = setDefDatValue(isQHash, dato["Dat_perspectiva"]     , "");
-	datos.idioma           = setDefDatValue(isQHash, dato["Dat_idioma"]          , "");
-	datos.idioma_voces     = setDefDatValue(isQHash, dato["Dat_idioma_voces"]    , "");
-	datos.formato          = setDefDatValue(isQHash, dato["Dat_formato"]         , "");
-	datos.anno             = setDefDatValue(isQHash, dato["Dat_anno"]            , "");
-	datos.numdisc          = setDefDatValue(isQHash, dato["Dat_numdisc"]         , "");
-	datos.sistemaop        = setDefDatValue(isQHash, dato["Dat_sistemaop"]       , "");
-	datos.tamano           = setDefDatValue(isQHash, dato["Dat_tamano"]          , "");
-	datos.graficos         = setDefDatValue(isQHash, dato["Dat_graficos"]        , "0");
-	datos.sonido           = setDefDatValue(isQHash, dato["Dat_sonido"]          , "0");
-	datos.jugabilidad      = setDefDatValue(isQHash, dato["Dat_jugabilidad"]     , "0");
-	datos.original         = setDefDatValue(isQHash, dato["Dat_original"]        , "false");
-	datos.estado           = setDefDatValue(isQHash, dato["Dat_estado"]          , "");
-	datos.thumbs           = setDefDatValue(isQHash, dato["Dat_thumbs"]          , "");
-	datos.cover_front      = setDefDatValue(isQHash, dato["Dat_cover_front"]     , "");
-	datos.cover_back       = setDefDatValue(isQHash, dato["Dat_cover_back"]      , "");
-	datos.cover_left       = setDefDatValue(isQHash, dato["Dat_cover_left"]      , "");
-	datos.cover_right      = setDefDatValue(isQHash, dato["Dat_cover_right"]     , "");
-	datos.cover_top        = setDefDatValue(isQHash, dato["Dat_cover_top"]       , "");
-	datos.cover_bottom     = setDefDatValue(isQHash, dato["Dat_cover_bottom"]    , "");
-	datos.fecha            = setDefDatValue(isQHash, dato["Dat_fecha"]           , QVariant(QDateTime::currentDateTime().toTime_t()).toString());
-	datos.tipo_emu         = setDefDatValue(isQHash, dato["Dat_tipo_emu"]        , icono);
-	datos.comentario       = setDefDatValue(isQHash, dato["Dat_comentario"]      , "");
-	datos.favorito         = setDefDatValue(isQHash, dato["Dat_favorito"]        , "false");
-	datos.gamepad          = setDefDatValue(isQHash, dato["Dat_gamepad"]         , "false");
-	datos.rating           = setDefDatValue(isQHash, dato["Dat_rating"]          , "0");
-	datos.edad_recomendada = setDefDatValue(isQHash, dato["Dat_edad_recomendada"], "nd");
-	datos.usuario          = setDefDatValue(isQHash, dato["Dat_usuario"]         , "");
-	datos.path_exe         = setDefDatValue(isQHash, dato["Dat_path_exe"]        , "");
-	datos.parametros_exe   = setDefDatValue(isQHash, dato["Dat_parametros_exe"]  , "");
-	datos.path_setup       = setDefDatValue(isQHash, dato["Dat_path_setup"]      , "");
-	datos.parametros_setup = setDefDatValue(isQHash, dato["Dat_parametros_setup"], "");
+	datos.icono                = setDefDatValue(isQHash, dato["Dat_icono"]               , icono);
+	datos.titulo               = setDefDatValue(isQHash, dato["Dat_titulo"]              , "");
+	datos.titulo_guiones       = setDefDatValue(isQHash, dato["Dat_titulo_guiones"]      , (!datos.titulo.isEmpty() ? removeAccents(datos.titulo) : ""));
+	datos.subtitulo            = setDefDatValue(isQHash, dato["Dat_subtitulo"]           , "");
+	datos.genero               = setDefDatValue(isQHash, dato["Dat_genero"]              , "");
+	datos.compania             = setDefDatValue(isQHash, dato["Dat_compania"]            , "");
+	datos.desarrollador        = setDefDatValue(isQHash, dato["Dat_desarrollador"]       , "");
+	datos.tema                 = setDefDatValue(isQHash, dato["Dat_tema"]                , "");
+	datos.grupo                = setDefDatValue(isQHash, dato["Dat_grupo"]               , "");
+	datos.perspectiva          = setDefDatValue(isQHash, dato["Dat_perspectiva"]         , "");
+	datos.idioma               = setDefDatValue(isQHash, dato["Dat_idioma"]              , "");
+	datos.idioma_voces         = setDefDatValue(isQHash, dato["Dat_idioma_voces"]        , "");
+	datos.formato              = setDefDatValue(isQHash, dato["Dat_formato"]             , "");
+	datos.anno                 = setDefDatValue(isQHash, dato["Dat_anno"]                , "");
+	datos.numdisc              = setDefDatValue(isQHash, dato["Dat_numdisc"]             , "");
+	datos.sistemaop            = setDefDatValue(isQHash, dato["Dat_sistemaop"]           , "");
+	datos.tamano               = setDefDatValue(isQHash, dato["Dat_tamano"]              , "");
+	datos.graficos             = setDefDatValue(isQHash, dato["Dat_graficos"]            , "0");
+	datos.sonido               = setDefDatValue(isQHash, dato["Dat_sonido"]              , "0");
+	datos.jugabilidad          = setDefDatValue(isQHash, dato["Dat_jugabilidad"]         , "0");
+	datos.original             = setDefDatValue(isQHash, dato["Dat_original"]            , "false");
+	datos.estado               = setDefDatValue(isQHash, dato["Dat_estado"]              , "");
+	datos.thumbs               = setDefDatValue(isQHash, dato["Dat_thumbs"]              , "");
+	datos.cover_front          = setDefDatValue(isQHash, dato["Dat_cover_front"]         , "");
+	datos.cover_back           = setDefDatValue(isQHash, dato["Dat_cover_back"]          , "");
+	datos.cover_left           = setDefDatValue(isQHash, dato["Dat_cover_left"]          , "");
+	datos.cover_right          = setDefDatValue(isQHash, dato["Dat_cover_right"]         , "");
+	datos.cover_top            = setDefDatValue(isQHash, dato["Dat_cover_top"]           , "");
+	datos.cover_bottom         = setDefDatValue(isQHash, dato["Dat_cover_bottom"]        , "");
+	datos.fecha                = setDefDatValue(isQHash, dato["Dat_fecha"]               , QVariant(QDateTime::currentDateTime().toTime_t()).toString());
+	datos.tipo_emu             = setDefDatValue(isQHash, dato["Dat_tipo_emu"]            , icono);
+	datos.comentario           = setDefDatValue(isQHash, dato["Dat_comentario"]          , "");
+	datos.favorito             = setDefDatValue(isQHash, dato["Dat_favorito"]            , "false");
+	datos.gamepad              = setDefDatValue(isQHash, dato["Dat_gamepad"]             , "false");
+	datos.rating               = setDefDatValue(isQHash, dato["Dat_rating"]              , "0");
+	datos.edad_recomendada     = setDefDatValue(isQHash, dato["Dat_edad_recomendada"]    , "nd");
+	datos.usuario              = setDefDatValue(isQHash, dato["Dat_usuario"]             , "");
+	datos.path_exe             = setDefDatValue(isQHash, dato["Dat_path_exe"]            , "");
+	datos.parametros_exe       = setDefDatValue(isQHash, dato["Dat_parametros_exe"]      , "");
+	datos.compatibilidad_exe   = setDefDatValue(isQHash, dato["Dat_compatibilidad_exe"]  , "false|");
+	datos.path_setup           = setDefDatValue(isQHash, dato["Dat_path_setup"]          , "");
+	datos.parametros_setup     = setDefDatValue(isQHash, dato["Dat_parametros_setup"]    , "");
+	datos.compatibilidad_setup = setDefDatValue(isQHash, dato["Dat_compatibilidad_setup"], "false|");
 // --
 	datos.thumbs_url             = setDefDatValue(isQHash, dato["Dat_thumbs_url"]            , "");
 	datos.cover_front_url        = setDefDatValue(isQHash, dato["Dat_cover_front_url"]       , "");
@@ -1057,48 +1071,50 @@ stDatosJuego dbSql::show_Datos(QString tabla, QString IDgrl)
 	query.exec("SELECT * FROM "+ tabla +" WHERE idgrl="+ IDgrl +" LIMIT 0,1;");
 	if (chequearQuery(query) && query.first())
 	{
-		datos.idgrl            = query.record().value("idgrl").toString();
-		datos.icono            = query.record().value("icono").toString();
-		datos.titulo           = query.record().value("titulo").toString();
-		datos.titulo_guiones   = query.record().value("titulo_guiones").toString();
-		datos.subtitulo        = query.record().value("subtitulo").toString();
-		datos.genero           = query.record().value("genero").toString();
-		datos.compania         = query.record().value("compania").toString();
-		datos.desarrollador    = query.record().value("desarrollador").toString();
-		datos.tema             = query.record().value("tema").toString();
-		datos.grupo            = query.record().value("grupo").toString();
-		datos.perspectiva      = query.record().value("perspectiva").toString();
-		datos.idioma           = query.record().value("idioma").toString();
-		datos.idioma_voces     = query.record().value("idioma_voces").toString();
-		datos.formato          = query.record().value("formato").toString();
-		datos.anno             = query.record().value("anno").toString();
-		datos.numdisc          = query.record().value("numdisc").toString();
-		datos.sistemaop        = query.record().value("sistemaop").toString();
-		datos.tamano           = query.record().value("tamano").toString();
-		datos.graficos         = query.record().value("graficos").toString();
-		datos.sonido           = query.record().value("sonido").toString();
-		datos.jugabilidad      = query.record().value("jugabilidad").toString();
-		datos.original         = query.record().value("original").toString().toLower();
-		datos.estado           = query.record().value("estado").toString();
-		datos.thumbs           = query.record().value("thumbs").toString();
-		datos.cover_front      = query.record().value("cover_front").toString();
-		datos.cover_back       = query.record().value("cover_back").toString();
-		datos.cover_left       = query.record().value("cover_left").toString();
-		datos.cover_right      = query.record().value("cover_right").toString();
-		datos.cover_top        = query.record().value("cover_top").toString();
-		datos.cover_bottom     = query.record().value("cover_bottom").toString();
-		datos.fecha            = query.record().value("fecha").toString();
-		datos.tipo_emu         = query.record().value("tipo_emu").toString();
-		datos.comentario       = query.record().value("comentario").toString();
-		datos.favorito         = query.record().value("favorito").toString().toLower();
-		datos.gamepad          = query.record().value("gamepad").toString().toLower();
-		datos.rating           = query.record().value("rating").toString();
-		datos.edad_recomendada = query.record().value("edad_recomendada").toString();
-		datos.usuario          = query.record().value("usuario").toString();
-		datos.path_exe         = query.record().value("path_exe").toString();
-		datos.parametros_exe   = query.record().value("parametros_exe").toString();
-		datos.path_setup       = query.record().value("path_setup").toString();
-		datos.parametros_setup = query.record().value("parametros_setup").toString();
+		datos.idgrl                = query.record().value("idgrl").toString();
+		datos.icono                = query.record().value("icono").toString();
+		datos.titulo               = query.record().value("titulo").toString();
+		datos.titulo_guiones       = query.record().value("titulo_guiones").toString();
+		datos.subtitulo            = query.record().value("subtitulo").toString();
+		datos.genero               = query.record().value("genero").toString();
+		datos.compania             = query.record().value("compania").toString();
+		datos.desarrollador        = query.record().value("desarrollador").toString();
+		datos.tema                 = query.record().value("tema").toString();
+		datos.grupo                = query.record().value("grupo").toString();
+		datos.perspectiva          = query.record().value("perspectiva").toString();
+		datos.idioma               = query.record().value("idioma").toString();
+		datos.idioma_voces         = query.record().value("idioma_voces").toString();
+		datos.formato              = query.record().value("formato").toString();
+		datos.anno                 = query.record().value("anno").toString();
+		datos.numdisc              = query.record().value("numdisc").toString();
+		datos.sistemaop            = query.record().value("sistemaop").toString();
+		datos.tamano               = query.record().value("tamano").toString();
+		datos.graficos             = query.record().value("graficos").toString();
+		datos.sonido               = query.record().value("sonido").toString();
+		datos.jugabilidad          = query.record().value("jugabilidad").toString();
+		datos.original             = query.record().value("original").toString().toLower();
+		datos.estado               = query.record().value("estado").toString();
+		datos.thumbs               = query.record().value("thumbs").toString();
+		datos.cover_front          = query.record().value("cover_front").toString();
+		datos.cover_back           = query.record().value("cover_back").toString();
+		datos.cover_left           = query.record().value("cover_left").toString();
+		datos.cover_right          = query.record().value("cover_right").toString();
+		datos.cover_top            = query.record().value("cover_top").toString();
+		datos.cover_bottom         = query.record().value("cover_bottom").toString();
+		datos.fecha                = query.record().value("fecha").toString();
+		datos.tipo_emu             = query.record().value("tipo_emu").toString();
+		datos.comentario           = query.record().value("comentario").toString();
+		datos.favorito             = query.record().value("favorito").toString().toLower();
+		datos.gamepad              = query.record().value("gamepad").toString().toLower();
+		datos.rating               = query.record().value("rating").toString();
+		datos.edad_recomendada     = query.record().value("edad_recomendada").toString();
+		datos.usuario              = query.record().value("usuario").toString();
+		datos.path_exe             = query.record().value("path_exe").toString();
+		datos.parametros_exe       = query.record().value("parametros_exe").toString();
+		datos.compatibilidad_exe   = query.record().value("compatibilidad_exe").toString();
+		datos.path_setup           = query.record().value("path_setup").toString();
+		datos.parametros_setup     = query.record().value("parametros_setup").toString();
+		datos.compatibilidad_setup = query.record().value("compatibilidad_setup").toString();
 // --
 		datos.thumbs_url             = "";
 		datos.cover_front_url        = "";
@@ -1128,55 +1144,59 @@ QString dbSql::insertaDatos(QString tabla, stDatosJuego datos)
 	strSQL = "INSERT INTO "+ tabla +" ("
 			"icono, titulo, titulo_guiones, subtitulo, genero, compania, desarrollador, tema, grupo, perspectiva, idioma, idioma_voces, formato, anno, numdisc, "
 			"sistemaop, tamano, graficos, sonido, jugabilidad, original, estado, thumbs, cover_front, cover_back, cover_left, cover_right, cover_top, cover_bottom, "
-			"fecha, tipo_emu, comentario, favorito, gamepad, rating, edad_recomendada, usuario, path_exe, parametros_exe, path_setup, parametros_setup "
+			"fecha, tipo_emu, comentario, favorito, gamepad, rating, edad_recomendada, usuario, path_exe, parametros_exe, compatibilidad_exe, path_setup, parametros_setup, "
+			"compatibilidad_setup "
 		") VALUES ("
 			":icono, :titulo, :titulo_guiones, :subtitulo, :genero, :compania, :desarrollador, :tema, :grupo, :perspectiva, :idioma, :idioma_voces, :formato, :anno, :numdisc, "
 			":sistemaop, :tamano, :graficos, :sonido, :jugabilidad, :original, :estado, :thumbs, :cover_front, :cover_back, :cover_left, :cover_right, :cover_top, :cover_bottom, "
-			":fecha, :tipo_emu, :comentario, :favorito, :gamepad, :rating, :edad_recomendada, :usuario, :path_exe, :parametros_exe, :path_setup, :parametros_setup "
+			":fecha, :tipo_emu, :comentario, :favorito, :gamepad, :rating, :edad_recomendada, :usuario, :path_exe, :parametros_exe, :compatibilidad_exe, :path_setup, :parametros_setup, "
+			":compatibilidad_setup "
 		")"+ qpsql_return_id("idgrl");
 
 	query.prepare(strSQL);
-	query.bindValue(":icono"           , datos.icono             );
-	query.bindValue(":titulo"          , datos.titulo            );
-	query.bindValue(":titulo_guiones"  , datos.titulo_guiones    );
-	query.bindValue(":subtitulo"       , datos.subtitulo         );
-	query.bindValue(":genero"          , datos.genero            );
-	query.bindValue(":compania"        , datos.compania          );
-	query.bindValue(":desarrollador"   , datos.desarrollador     );
-	query.bindValue(":tema"            , datos.tema              );
-	query.bindValue(":grupo"           , datos.grupo             );
-	query.bindValue(":perspectiva"     , datos.perspectiva       );
-	query.bindValue(":idioma"          , datos.idioma            );
-	query.bindValue(":idioma_voces"    , datos.idioma_voces      );
-	query.bindValue(":formato"         , datos.formato           );
-	query.bindValue(":anno"            , datos.anno              );
-	query.bindValue(":numdisc"         , datos.numdisc           );
-	query.bindValue(":sistemaop"       , datos.sistemaop         );
-	query.bindValue(":tamano"          , datos.tamano            );
-	query.bindValue(":graficos"        , datos.graficos          );
-	query.bindValue(":sonido"          , datos.sonido            );
-	query.bindValue(":jugabilidad"     , datos.jugabilidad       );
-	query.bindValue(":original"        , datos.original.toLower());
-	query.bindValue(":estado"          , datos.estado            );
-	query.bindValue(":thumbs"          , datos.thumbs            );
-	query.bindValue(":cover_front"     , datos.cover_front       );
-	query.bindValue(":cover_back"      , datos.cover_back        );
-	query.bindValue(":cover_left"      , datos.cover_left        );
-	query.bindValue(":cover_right"     , datos.cover_right       );
-	query.bindValue(":cover_top"       , datos.cover_top         );
-	query.bindValue(":cover_bottom"    , datos.cover_bottom      );
-	query.bindValue(":fecha"           , datos.fecha             );
-	query.bindValue(":tipo_emu"        , datos.tipo_emu          );
-	query.bindValue(":comentario"      , removeHtmlTag(datos.comentario));
-	query.bindValue(":favorito"        , datos.favorito.toLower());
-	query.bindValue(":gamepad"         , datos.gamepad.toLower() );
-	query.bindValue(":rating"          , datos.rating            );
-	query.bindValue(":edad_recomendada", datos.edad_recomendada  );
-	query.bindValue(":usuario"         , datos.usuario           );
-	query.bindValue(":path_exe"        , datos.path_exe          );
-	query.bindValue(":parametros_exe"  , datos.parametros_exe    );
-	query.bindValue(":path_setup"      , datos.path_setup        );
-	query.bindValue(":parametros_setup", datos.parametros_setup  );
+	query.bindValue(":icono"               , datos.icono               );
+	query.bindValue(":titulo"              , datos.titulo              );
+	query.bindValue(":titulo_guiones"      , datos.titulo_guiones      );
+	query.bindValue(":subtitulo"           , datos.subtitulo           );
+	query.bindValue(":genero"              , datos.genero              );
+	query.bindValue(":compania"            , datos.compania            );
+	query.bindValue(":desarrollador"       , datos.desarrollador       );
+	query.bindValue(":tema"                , datos.tema                );
+	query.bindValue(":grupo"               , datos.grupo               );
+	query.bindValue(":perspectiva"         , datos.perspectiva         );
+	query.bindValue(":idioma"              , datos.idioma              );
+	query.bindValue(":idioma_voces"        , datos.idioma_voces        );
+	query.bindValue(":formato"             , datos.formato             );
+	query.bindValue(":anno"                , datos.anno                );
+	query.bindValue(":numdisc"             , datos.numdisc             );
+	query.bindValue(":sistemaop"           , datos.sistemaop           );
+	query.bindValue(":tamano"              , datos.tamano              );
+	query.bindValue(":graficos"            , datos.graficos            );
+	query.bindValue(":sonido"              , datos.sonido              );
+	query.bindValue(":jugabilidad"         , datos.jugabilidad         );
+	query.bindValue(":original"            , datos.original.toLower()  );
+	query.bindValue(":estado"              , datos.estado              );
+	query.bindValue(":thumbs"              , datos.thumbs              );
+	query.bindValue(":cover_front"         , datos.cover_front         );
+	query.bindValue(":cover_back"          , datos.cover_back          );
+	query.bindValue(":cover_left"          , datos.cover_left          );
+	query.bindValue(":cover_right"         , datos.cover_right         );
+	query.bindValue(":cover_top"           , datos.cover_top           );
+	query.bindValue(":cover_bottom"        , datos.cover_bottom        );
+	query.bindValue(":fecha"               , datos.fecha               );
+	query.bindValue(":tipo_emu"            , datos.tipo_emu            );
+	query.bindValue(":comentario"          , removeHtmlTag(datos.comentario));
+	query.bindValue(":favorito"            , datos.favorito.toLower()  );
+	query.bindValue(":gamepad"             , datos.gamepad.toLower()   );
+	query.bindValue(":rating"              , datos.rating              );
+	query.bindValue(":edad_recomendada"    , datos.edad_recomendada    );
+	query.bindValue(":usuario"             , datos.usuario             );
+	query.bindValue(":path_exe"            , datos.path_exe            );
+	query.bindValue(":parametros_exe"      , datos.parametros_exe      );
+	query.bindValue(":compatibilidad_exe"  , datos.compatibilidad_exe  );
+	query.bindValue(":path_setup"          , datos.path_setup          );
+	query.bindValue(":parametros_setup"    , datos.parametros_setup    );
+	query.bindValue(":compatibilidad_setup", datos.compatibilidad_setup);
 	query.exec();
 
 	if (chequearQuery(query))
@@ -1197,51 +1217,54 @@ bool dbSql::actualizaDatos(QString tabla, stDatosJuego datos)
 			"cover_left = :cover_left, cover_right = :cover_right, cover_top = :cover_top, cover_bottom = :cover_bottom, "
 			"fecha = :fecha, tipo_emu = :tipo_emu, comentario = :comentario, favorito = :favorito, gamepad = :gamepad, rating = :rating, "
 			"edad_recomendada = :edad_recomendada, usuario = :usuario, path_exe = :path_exe, parametros_exe = :parametros_exe, "
-			"path_setup = :path_setup, parametros_setup = :parametros_setup WHERE idgrl = :idgrl;";
+			"compatibilidad_exe = :compatibilidad_exe, path_setup = :path_setup, parametros_setup = :parametros_setup, "
+			"compatibilidad_setup = :compatibilidad_setup WHERE idgrl = :idgrl;";
 
 	query.prepare(strSQL);
-	query.bindValue(":icono"           , datos.icono           );
-	query.bindValue(":titulo"          , datos.titulo          );
-	query.bindValue(":titulo_guiones"  , datos.titulo_guiones  );
-	query.bindValue(":subtitulo"       , datos.subtitulo       );
-	query.bindValue(":genero"          , datos.genero          );
-	query.bindValue(":compania"        , datos.compania        );
-	query.bindValue(":desarrollador"   , datos.desarrollador   );
-	query.bindValue(":tema"            , datos.tema            );
-	query.bindValue(":grupo"           , datos.grupo           );
-	query.bindValue(":perspectiva"     , datos.perspectiva     );
-	query.bindValue(":idioma"          , datos.idioma          );
-	query.bindValue(":idioma_voces"    , datos.idioma_voces    );
-	query.bindValue(":formato"         , datos.formato         );
-	query.bindValue(":anno"            , datos.anno            );
-	query.bindValue(":numdisc"         , datos.numdisc         );
-	query.bindValue(":sistemaop"       , datos.sistemaop       );
-	query.bindValue(":tamano"          , datos.tamano          );
-	query.bindValue(":graficos"        , datos.graficos        );
-	query.bindValue(":sonido"          , datos.sonido          );
-	query.bindValue(":jugabilidad"     , datos.jugabilidad     );
-	query.bindValue(":original"        , datos.original        );
-	query.bindValue(":estado"          , datos.estado          );
-	query.bindValue(":thumbs"          , datos.thumbs          );
-	query.bindValue(":cover_front"     , datos.cover_front     );
-	query.bindValue(":cover_back"      , datos.cover_back      );
-	query.bindValue(":cover_left"      , datos.cover_left      );
-	query.bindValue(":cover_right"     , datos.cover_right     );
-	query.bindValue(":cover_top"       , datos.cover_top       );
-	query.bindValue(":cover_bottom"    , datos.cover_bottom    );
-	query.bindValue(":fecha"           , datos.fecha           );
-	query.bindValue(":tipo_emu"        , datos.tipo_emu        );
-	query.bindValue(":comentario"      , removeHtmlTag(datos.comentario));
-	query.bindValue(":favorito"        , datos.favorito        );
-	query.bindValue(":gamepad"         , datos.gamepad         );
-	query.bindValue(":rating"          , datos.rating          );
-	query.bindValue(":edad_recomendada", datos.edad_recomendada);
-	query.bindValue(":usuario"         , datos.usuario         );
-	query.bindValue(":path_exe"        , datos.path_exe        );
-	query.bindValue(":parametros_exe"  , datos.parametros_exe  );
-	query.bindValue(":path_setup"      , datos.path_setup      );
-	query.bindValue(":parametros_setup", datos.parametros_setup);
-	query.bindValue(":idgrl"           , datos.idgrl           );
+	query.bindValue(":icono"               , datos.icono               );
+	query.bindValue(":titulo"              , datos.titulo              );
+	query.bindValue(":titulo_guiones"      , datos.titulo_guiones      );
+	query.bindValue(":subtitulo"           , datos.subtitulo           );
+	query.bindValue(":genero"              , datos.genero              );
+	query.bindValue(":compania"            , datos.compania            );
+	query.bindValue(":desarrollador"       , datos.desarrollador       );
+	query.bindValue(":tema"                , datos.tema                );
+	query.bindValue(":grupo"               , datos.grupo               );
+	query.bindValue(":perspectiva"         , datos.perspectiva         );
+	query.bindValue(":idioma"              , datos.idioma              );
+	query.bindValue(":idioma_voces"        , datos.idioma_voces        );
+	query.bindValue(":formato"             , datos.formato             );
+	query.bindValue(":anno"                , datos.anno                );
+	query.bindValue(":numdisc"             , datos.numdisc             );
+	query.bindValue(":sistemaop"           , datos.sistemaop           );
+	query.bindValue(":tamano"              , datos.tamano              );
+	query.bindValue(":graficos"            , datos.graficos            );
+	query.bindValue(":sonido"              , datos.sonido              );
+	query.bindValue(":jugabilidad"         , datos.jugabilidad         );
+	query.bindValue(":original"            , datos.original            );
+	query.bindValue(":estado"              , datos.estado              );
+	query.bindValue(":thumbs"              , datos.thumbs              );
+	query.bindValue(":cover_front"         , datos.cover_front         );
+	query.bindValue(":cover_back"          , datos.cover_back          );
+	query.bindValue(":cover_left"          , datos.cover_left          );
+	query.bindValue(":cover_right"         , datos.cover_right         );
+	query.bindValue(":cover_top"           , datos.cover_top           );
+	query.bindValue(":cover_bottom"        , datos.cover_bottom        );
+	query.bindValue(":fecha"               , datos.fecha               );
+	query.bindValue(":tipo_emu"            , datos.tipo_emu            );
+	query.bindValue(":comentario"          , removeHtmlTag(datos.comentario));
+	query.bindValue(":favorito"            , datos.favorito            );
+	query.bindValue(":gamepad"             , datos.gamepad             );
+	query.bindValue(":rating"              , datos.rating              );
+	query.bindValue(":edad_recomendada"    , datos.edad_recomendada    );
+	query.bindValue(":usuario"             , datos.usuario             );
+	query.bindValue(":path_exe"            , datos.path_exe            );
+	query.bindValue(":parametros_exe"      , datos.parametros_exe      );
+	query.bindValue(":compatibilidad_exe"  , datos.compatibilidad_exe  );
+	query.bindValue(":path_setup"          , datos.path_setup          );
+	query.bindValue(":parametros_setup"    , datos.parametros_setup    );
+	query.bindValue(":compatibilidad_setup", datos.compatibilidad_setup);
+	query.bindValue(":idgrl"               , datos.idgrl               );
 	query.exec();
 
 	return chequearQuery(query);
@@ -1375,6 +1398,10 @@ stConfigDOSBox dbSql::getDefectDOSBox(QHash<QString, QString> dato)
 	datos.ipx_ip                = setDefDatValue(isQHash, dato["Dbx_ipx_ip"]               , "");
 // [autoexec]
 	datos.autoexec              = setDefDatValue(isQHash, dato["Dbx_autoexec"]             , "");
+	datos.autoexec_ini          = setDefDatValue(isQHash, dato["Dbx_autoexec_ini"]         , "");
+	datos.autoexec_fin          = setDefDatValue(isQHash, dato["Dbx_autoexec_fin"]         , "");
+	datos.autoexec_ini_exe      = setDefDatValue(isQHash, dato["Dbx_autoexec_ini_exe"]     , "");
+	datos.autoexec_fin_exe      = setDefDatValue(isQHash, dato["Dbx_autoexec_fin_exe"]     , "");
 // Opciones
 	datos.opt_autoexec          = setDefDatValue(isQHash, dato["Dbx_opt_autoexec"]         , "false");
 	datos.opt_loadfix           = setDefDatValue(isQHash, dato["Dbx_opt_loadfix"]          , "false");
@@ -1516,6 +1543,10 @@ stConfigDOSBox dbSql::showConfg_DOSBox_SqlQuery(QString sql_query)
 			cfgDbx.ipx_ip                = query.record().value("ipx_ip").toString();
 		// [autoexec]
 			cfgDbx.autoexec              = query.record().value("autoexec").toString();
+			cfgDbx.autoexec_ini          = query.record().value("autoexec_ini").toString();
+			cfgDbx.autoexec_fin          = query.record().value("autoexec_fin").toString();
+			cfgDbx.autoexec_ini_exe      = query.record().value("autoexec_ini_exe").toString();
+			cfgDbx.autoexec_fin_exe      = query.record().value("autoexec_fin_exe").toString();
 		// Opciones
 			cfgDbx.opt_autoexec          = query.record().value("opt_autoexec").toString();
 			cfgDbx.opt_loadfix           = query.record().value("opt_loadfix").toString();
@@ -1551,8 +1582,8 @@ QString dbSql::insertaDbx(stConfigDOSBox cfgDbx)
 			"speaker_disney, joystick_type, joystick_timed, joystick_autofire, joystick_swap34, joystick_buttonwrap, "
 			"modem_modem, modem_comport, modem_listenport, dserial_directserial, dserial_comport, "
 			"dserial_realport, dserial_defaultbps, dserial_parity, dserial_bytesize, dserial_stopbit, serial_1, serial_2, serial_3, "
-			"serial_4, dos_xms, dos_ems, dos_umb, dos_keyboardlayout, ipx_ipx, ipx_type, ipx_port, ipx_ip, autoexec, opt_autoexec, opt_loadfix, opt_loadfix_mem, opt_consola_dbox, "
-			"opt_cerrar_dbox, opt_cycle_sincronizar, path_exe, path_setup, parametros_exe, parametros_setup"
+			"serial_4, dos_xms, dos_ems, dos_umb, dos_keyboardlayout, ipx_ipx, ipx_type, ipx_port, ipx_ip, autoexec, autoexec_ini, autoexec_fin, autoexec_ini_exe, autoexec_fin_exe, "
+			"opt_autoexec, opt_loadfix, opt_loadfix_mem, opt_consola_dbox, opt_cerrar_dbox, opt_cycle_sincronizar, path_exe, path_setup, parametros_exe, parametros_setup"
 		") VALUES ("
 			":idgrl, :idcat, :sdl_fullscreen, :sdl_fulldouble, :sdl_fullfixed, :sdl_fullresolution, :sdl_windowresolution, :sdl_output, "
 			":sdl_hwscale, :sdl_autolock, :sdl_sensitivity, :sdl_waitonerror, :sdl_priority, :sdl_mapperfile, :sdl_usescancodes, "
@@ -1564,8 +1595,8 @@ QString dbSql::insertaDbx(stConfigDOSBox cfgDbx)
 			":speaker_disney, :joystick_type, :joystick_timed, :joystick_autofire, :joystick_swap34, :joystick_buttonwrap, "
 			":modem_modem, :modem_comport, :modem_listenport, :dserial_directserial, :dserial_comport, "
 			":dserial_realport, :dserial_defaultbps, :dserial_parity, :dserial_bytesize, :dserial_stopbit, :serial_1, :serial_2, :serial_3, "
-			":serial_4, :dos_xms, :dos_ems, :dos_umb, :dos_keyboardlayout, :ipx_ipx, :ipx_type, :ipx_port, :ipx_ip, :autoexec, :opt_autoexec, :opt_loadfix, :opt_loadfix_mem, :opt_consola_dbox, "
-			":opt_cerrar_dbox, :opt_cycle_sincronizar, :path_exe, :path_setup, :parametros_exe, :parametros_setup"
+			":serial_4, :dos_xms, :dos_ems, :dos_umb, :dos_keyboardlayout, :ipx_ipx, :ipx_type, :ipx_port, :ipx_ip, :autoexec, :autoexec_ini, :autoexec_fin, :autoexec_ini_exe, :autoexec_fin_exe, "
+			":opt_autoexec, :opt_loadfix, :opt_loadfix_mem, :opt_consola_dbox, :opt_cerrar_dbox, :opt_cycle_sincronizar, :path_exe, :path_setup, :parametros_exe, :parametros_setup"
 		")"+ qpsql_return_id("id");
 
 	query.prepare(strSQL);
@@ -1658,6 +1689,10 @@ QString dbSql::insertaDbx(stConfigDOSBox cfgDbx)
 	query.bindValue(":ipx_port"             , cfgDbx.ipx_port             );
 	query.bindValue(":ipx_ip"               , cfgDbx.ipx_ip               );
 	query.bindValue(":autoexec"             , cfgDbx.autoexec             );
+	query.bindValue(":autoexec_ini"         , cfgDbx.autoexec_ini         );
+	query.bindValue(":autoexec_fin"         , cfgDbx.autoexec_fin         );
+	query.bindValue(":autoexec_ini_exe"     , cfgDbx.autoexec_ini_exe     );
+	query.bindValue(":autoexec_fin_exe"     , cfgDbx.autoexec_fin_exe     );
 	query.bindValue(":opt_autoexec"         , cfgDbx.opt_autoexec         );
 	query.bindValue(":opt_loadfix"          , cfgDbx.opt_loadfix          );
 	query.bindValue(":opt_loadfix_mem"      , cfgDbx.opt_loadfix_mem      );
@@ -1698,8 +1733,9 @@ bool dbSql::actualizaDbx(stConfigDOSBox cfgDbx)
 		"dserial_comport = :dserial_comport, dserial_realport = :dserial_realport, dserial_defaultbps = :dserial_defaultbps, dserial_parity = :dserial_parity, "
 		"dserial_bytesize = :dserial_bytesize, dserial_stopbit = :dserial_stopbit, serial_1 = :serial_1, serial_2 = :serial_2, serial_3 = :serial_3, serial_4 = :serial_4, dos_xms = :dos_xms, "
 		"dos_ems = :dos_ems, dos_umb = :dos_umb, dos_keyboardlayout = :dos_keyboardlayout, ipx_ipx = :ipx_ipx, ipx_type = :ipx_type, ipx_port = :ipx_port, ipx_ip = :ipx_ip, autoexec = :autoexec, "
-		"opt_autoexec = :opt_autoexec, opt_loadfix = :opt_loadfix, opt_loadfix_mem = :opt_loadfix_mem, opt_consola_dbox = :opt_consola_dbox, opt_cerrar_dbox = :opt_cerrar_dbox, opt_cycle_sincronizar = :opt_cycle_sincronizar, "
-		"path_exe = :path_exe, path_setup = :path_setup, parametros_exe = :parametros_exe, parametros_setup = :parametros_setup "
+		"autoexec_ini = :autoexec_ini, autoexec_fin = :autoexec_fin, autoexec_ini_exe = :autoexec_ini_exe, autoexec_fin_exe = :autoexec_fin_exe, "
+		"opt_autoexec = :opt_autoexec, opt_loadfix = :opt_loadfix, opt_loadfix_mem = :opt_loadfix_mem, opt_consola_dbox = :opt_consola_dbox, "
+		"opt_cerrar_dbox = :opt_cerrar_dbox, opt_cycle_sincronizar = :opt_cycle_sincronizar, path_exe = :path_exe, path_setup = :path_setup, parametros_exe = :parametros_exe, parametros_setup = :parametros_setup "
 		"WHERE id = :id;";
 
 	query.prepare(strSQL);
@@ -1790,6 +1826,10 @@ bool dbSql::actualizaDbx(stConfigDOSBox cfgDbx)
 	query.bindValue(":ipx_port"             , cfgDbx.ipx_port             );
 	query.bindValue(":ipx_ip"               , cfgDbx.ipx_ip               );
 	query.bindValue(":autoexec"             , cfgDbx.autoexec             );
+	query.bindValue(":autoexec_ini"         , cfgDbx.autoexec_ini         );
+	query.bindValue(":autoexec_fin"         , cfgDbx.autoexec_fin         );
+	query.bindValue(":autoexec_ini_exe"     , cfgDbx.autoexec_ini_exe     );
+	query.bindValue(":autoexec_fin_exe"     , cfgDbx.autoexec_fin_exe     );
 	query.bindValue(":opt_autoexec"         , cfgDbx.opt_autoexec         );
 	query.bindValue(":opt_loadfix"          , cfgDbx.opt_loadfix          );
 	query.bindValue(":opt_loadfix_mem"      , cfgDbx.opt_loadfix_mem      );

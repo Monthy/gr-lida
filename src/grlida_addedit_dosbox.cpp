@@ -314,11 +314,13 @@ void frmAddEditDosBox::previerMontajes()
 	if (ui->twMontajes->topLevelItemCount() > 0)
 	{
 		stConfigDOSBox datos_montaje;
-		datos_montaje.path_exe        = ui->txtDbx_path_exe->text();
-		datos_montaje.parametros_exe  = ui->txtDbx_parametros_exe->text();
-		datos_montaje.opt_loadfix_mem = fGrl->intToStr(ui->spinDbx_loadfix_mem->value());
-		datos_montaje.opt_loadfix     = fGrl->boolToStr(ui->chkDbx_loadfix->isChecked());
-		datos_montaje.opt_cerrar_dbox = fGrl->boolToStr(ui->chkDbx_cerrar_dbox->isChecked());
+		datos_montaje.path_exe         = ui->txtDbx_path_exe->text();
+		datos_montaje.parametros_exe   = ui->txtDbx_parametros_exe->text();
+		datos_montaje.opt_loadfix_mem  = fGrl->intToStr(ui->spinDbx_loadfix_mem->value());
+		datos_montaje.opt_loadfix      = fGrl->boolToStr(ui->chkDbx_loadfix->isChecked());
+		datos_montaje.opt_cerrar_dbox  = fGrl->boolToStr(ui->chkDbx_cerrar_dbox->isChecked());
+		datos_montaje.autoexec_ini_exe = ui->txtDbx_Autoexec_ini_exe->toPlainText();
+		datos_montaje.autoexec_fin_exe = ui->txtDbx_Autoexec_fin_exe->toPlainText();
 		QStringList list_mount = fGrl->creaConfigMontajes(getListMount(), datos_montaje);
 
 		ui->previer_mount->clear();
@@ -483,6 +485,10 @@ void frmAddEditDosBox::cargarDatosDosBox(stConfigDOSBox cfgDbx)
 	ui->txtDbx_ipx_ip->setText(cfgDbx.ipx_ip);
 // [autoexec]
 	ui->txtDbx_Autoexec->setPlainText(cfgDbx.autoexec);
+	ui->txtDbx_Autoexec_ini->setPlainText(cfgDbx.autoexec_ini);
+	ui->txtDbx_Autoexec_fin->setPlainText(cfgDbx.autoexec_fin);
+	ui->txtDbx_Autoexec_ini_exe->setPlainText(cfgDbx.autoexec_ini_exe);
+	ui->txtDbx_Autoexec_fin_exe->setPlainText(cfgDbx.autoexec_fin_exe);
 // Opciones
 	ui->chkDbx_autoexec->setChecked(fGrl->strToBool(cfgDbx.opt_autoexec));
 	ui->chkDbx_loadfix->setChecked(fGrl->strToBool(cfgDbx.opt_loadfix));
@@ -717,7 +723,11 @@ void frmAddEditDosBox::setDatosDosBox()
 	DatosDosBox.ipx_port              = ui->spinDbx_ipx_port->value() > 0 ? fGrl->intToStr(ui->spinDbx_ipx_port->value()) : "213";
 	DatosDosBox.ipx_ip                = ui->txtDbx_ipx_ip->text();
 // [autoexec]
-	DatosDosBox.autoexec = ui->txtDbx_Autoexec->toPlainText().isEmpty() ? "" : ui->txtDbx_Autoexec->toPlainText();
+	DatosDosBox.autoexec              = ui->txtDbx_Autoexec->toPlainText().isEmpty() ? "" : ui->txtDbx_Autoexec->toPlainText();
+	DatosDosBox.autoexec_ini          = ui->txtDbx_Autoexec_ini->toPlainText().isEmpty() ? "" : ui->txtDbx_Autoexec_ini->toPlainText();
+	DatosDosBox.autoexec_fin          = ui->txtDbx_Autoexec_fin->toPlainText().isEmpty() ? "" : ui->txtDbx_Autoexec_fin->toPlainText();
+	DatosDosBox.autoexec_ini_exe      = ui->txtDbx_Autoexec_ini_exe->toPlainText().isEmpty() ? "" : ui->txtDbx_Autoexec_ini_exe->toPlainText();
+	DatosDosBox.autoexec_fin_exe      = ui->txtDbx_Autoexec_fin_exe->toPlainText().isEmpty() ? "" : ui->txtDbx_Autoexec_fin_exe->toPlainText();
 // Opciones
 	DatosDosBox.opt_autoexec          = fGrl->boolToStr(ui->chkDbx_autoexec->isChecked());
 	DatosDosBox.opt_loadfix           = fGrl->boolToStr(ui->chkDbx_loadfix->isChecked());

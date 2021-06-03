@@ -28,6 +28,7 @@
 #include <QPainter>
 
 #include "grlida_addedit_juego.h"
+#include "grlida_compatibilidad_exe.h"
 #include "ui_addedit_juego.h"
 
 frmAddEditJuego::frmAddEditJuego(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QString id_game, QString tipo_emu, bool m_editando, QWidget *parent) :
@@ -193,6 +194,15 @@ void frmAddEditJuego::createWidgets()
 	ui->gLayout_mediaVideo->addWidget(mediaVideo, 0, 0, 3, 1);
 	ui->gLayout_mediaVideo->addWidget(ui->btnDat_videos_add, 0, 1, 1, 1);
 	ui->gLayout_mediaVideo->addWidget(ui->btnDat_videos_eliminar, 1, 1, 1, 1);
+
+
+#ifdef Q_OS_WIN
+	ui->btnDat_path_exe_compatibilidad->setVisible(true);
+	ui->btnDat_path_setup_compatibilidad->setVisible(true);
+#else
+	ui->btnDat_path_exe_compatibilidad->setVisible(false);
+	ui->btnDat_path_setup_compatibilidad->setVisible(false);
+#endif
 }
 
 void frmAddEditJuego::cargarConfig()
@@ -2031,6 +2041,21 @@ void frmAddEditJuego::on_btnDat_path_exe_clear_clicked()
 	ui->txtDat_path_exe->clear();
 }
 
+
+void frmAddEditJuego::on_btnDat_path_exe_compatibilidad_clicked()
+{
+	if (ui->txtDat_path_exe->text().isEmpty() && QFile::exists(ui->txtDat_path_exe->text()))
+		QMessageBox::information(this, tr("Opciones"), tr("Para añadir opciones de compatibilidad debes indicar un ejecutable como minimo."));
+	else {
+		frmCompatibilidadExe *compatibilidadExe = new frmCompatibilidadExe(DatosJuego.path_exe, DatosJuego.compatibilidad_exe, this);
+
+		if (compatibilidadExe->exec() == QDialog::Accepted)
+			DatosJuego.compatibilidad_exe = compatibilidadExe->getCfgCompatibilidad();
+
+		delete compatibilidadExe;
+	}
+}
+
 void frmAddEditJuego::on_txtDat_parametros_exe_textEdited(const QString &arg1)
 {
 	fGrl->enabledButtonUpdateTwList(ui->twDatosParametrosExe, ui->btnDat_parametros_exe_update, arg1, 0);
@@ -2113,6 +2138,20 @@ void frmAddEditJuego::on_btnDat_path_setup_clicked()
 void frmAddEditJuego::on_btnDat_path_setup_clear_clicked()
 {
 	ui->txtDat_path_setup->clear();
+}
+
+void frmAddEditJuego::on_btnDat_path_setup_compatibilidad_clicked()
+{
+	if (ui->txtDat_path_setup->text().isEmpty() && QFile::exists(ui->txtDat_path_setup->text()))
+		QMessageBox::information(this, tr("Opciones"), tr("Para añadir opciones de compatibilidad debes indicar un ejecutable como minimo."));
+	else {
+		frmCompatibilidadExe *compatibilidadSetup = new frmCompatibilidadExe(DatosJuego.path_setup, DatosJuego.compatibilidad_setup, this);
+
+		if (compatibilidadSetup->exec() == QDialog::Accepted)
+			DatosJuego.compatibilidad_setup = compatibilidadSetup->getCfgCompatibilidad();
+
+		delete compatibilidadSetup;
+	}
 }
 
 void frmAddEditJuego::on_txtDat_parametros_setup_textEdited(const QString &arg1)
