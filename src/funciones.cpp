@@ -617,7 +617,7 @@ bool Funciones::opArchivo(QString origen, QString destino, bool mover, bool perm
 		} else {
 			if (preguntar)
 			{
-				if (questionMsg("¿Sobrescribir?", "¿El archivo '"+ f_name.fileName() +"' ya existe quieres sobrescribirlo?"))
+				if (questionMsg(tr("¿Sobrescribir?"), tr("¿El archivo '") + f_name.fileName() + tr("' ya existe quieres sobrescribirlo?")))
 				{
 					f_name.remove();
 					siguiente = true;

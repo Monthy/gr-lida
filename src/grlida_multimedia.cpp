@@ -55,7 +55,7 @@ GrlMultiMedia::GrlMultiMedia(QString dir_game, QString dir_theme_app, stGrlCfg m
 			QHBoxLayout *hLayout_1 = new QHBoxLayout();
 			hLayout_1->setSpacing(6);
 				lb_status = new QLabel(w_controls);
-				lb_status->setText("0 de 0");
+				lb_status->setText("0 "+ tr("de") +" 0");
 			hLayout_1->addWidget(lb_status);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 				slider = new Phonon::SeekSlider(w_controls);
@@ -373,7 +373,7 @@ void GrlMultiMedia::setMuted(bool muted)
 
 void GrlMultiMedia::setStatus()
 {
-	lb_status->setText(QString("%1 de %2").arg(current_media + 1).arg(total_media));
+	lb_status->setText(QString("%1 "+ tr("de") +" %2").arg(current_media + 1).arg(total_media));
 }
 
 void GrlMultiMedia::clearPlaylist()

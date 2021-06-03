@@ -257,10 +257,10 @@ void frmImportarJuego::cargarConfig()
 	ui->twListaJuegos->setColumnWidth(icol_anno      ,  36);
 	ui->twListaJuegos->setColumnWidth(icol_plataforma,  80);
 // Común
-	ui->twListaJuegos->headerItem()->setText(icol_titulo    , "Título"    );
-	ui->twListaJuegos->headerItem()->setText(icol_anno      , "Año"       );
-	ui->twListaJuegos->headerItem()->setText(icol_plataforma, "Plataforma");
-	ui->twListaJuegos->headerItem()->setText(icol_cbx_dosbox, "DOSBox"    );
+	ui->twListaJuegos->headerItem()->setText(icol_titulo    , tr("Título")    );
+	ui->twListaJuegos->headerItem()->setText(icol_anno      , tr("Año")       );
+	ui->twListaJuegos->headerItem()->setText(icol_plataforma, tr("Plataforma"));
+	ui->twListaJuegos->headerItem()->setText(icol_cbx_dosbox, tr("DOSBox")    );
 	ui->twListaJuegos->setIconSize(QSize(26, 26));
 // Ocultamos las columnas
 	ui->twListaJuegos->hideColumn(icol_cbx_dosbox);
@@ -288,11 +288,11 @@ void frmImportarJuego::cargarConfig()
 	ui->twDatosFiles->setColumnWidth(1, 60 );
 	ui->twDatosFiles->setColumnWidth(2, 100);
 	ui->twDatosFiles->setColumnWidth(3, 50 );
-	ui->twDatosFiles->headerItem()->setText(0, "Nombre"     );
-	ui->twDatosFiles->headerItem()->setText(1, "CRC"        );
-	ui->twDatosFiles->headerItem()->setText(2, "Descripción");
-	ui->twDatosFiles->headerItem()->setText(3, "Tamaño"     );
-	ui->twDatosFiles->headerItem()->setText(4, "Path"       );
+	ui->twDatosFiles->headerItem()->setText(0, tr("Nombre")     );
+	ui->twDatosFiles->headerItem()->setText(1, tr("CRC")        );
+	ui->twDatosFiles->headerItem()->setText(2, tr("Descripción"));
+	ui->twDatosFiles->headerItem()->setText(3, tr("Tamaño")     );
+	ui->twDatosFiles->headerItem()->setText(4, tr("Path")       );
 
 // Configuración del twDatosURL
 	ui->twDatosURL->header()->setStretchLastSection(true);
@@ -304,8 +304,8 @@ void frmImportarJuego::cargarConfig()
 	ui->twDatosURL->header()->setResizeMode(0, QHeaderView::Interactive);
 #endif
 	ui->twDatosURL->setColumnWidth(0, 250);
-	ui->twDatosURL->headerItem()->setText(0, "Url"        );
-	ui->twDatosURL->headerItem()->setText(1, "Descripción");
+	ui->twDatosURL->headerItem()->setText(0, tr("Url")        );
+	ui->twDatosURL->headerItem()->setText(1, tr("Descripción"));
 
 // Configuración del twDatosImages
 	ui->twDatosImages->header()->setStretchLastSection(false);
@@ -321,9 +321,9 @@ void frmImportarJuego::cargarConfig()
 	ui->twDatosImages->header()->setResizeMode(2, QHeaderView::Interactive);
 #endif
 	ui->twDatosImages->setColumnWidth(col_img_thumb, 250);
-	ui->twDatosImages->headerItem()->setText(col_img_thumb , "Thumbs");
-	ui->twDatosImages->headerItem()->setText(col_img_nombre, "Nombre");
-	ui->twDatosImages->headerItem()->setText(col_img_tipo  , "Tipo"  );
+	ui->twDatosImages->headerItem()->setText(col_img_thumb , tr("Thumbs"));
+	ui->twDatosImages->headerItem()->setText(col_img_nombre, tr("Nombre"));
+	ui->twDatosImages->headerItem()->setText(col_img_tipo  , tr("Tipo")  );
 
 // Configuración del twDatosTempImages
 	ui->twDatosTempImages->header()->setStretchLastSection(false);
@@ -339,9 +339,9 @@ void frmImportarJuego::cargarConfig()
 	ui->twDatosTempImages->header()->setResizeMode(2, QHeaderView::Interactive);
 #endif
 	ui->twDatosTempImages->setColumnWidth(col_img_thumb, 250);
-	ui->twDatosTempImages->headerItem()->setText(col_img_thumb , "Thumbs");
-	ui->twDatosTempImages->headerItem()->setText(col_img_nombre, "Nombre");
-	ui->twDatosTempImages->headerItem()->setText(col_img_tipo  , "Tipo"  );
+	ui->twDatosTempImages->headerItem()->setText(col_img_thumb , tr("Thumbs"));
+	ui->twDatosTempImages->headerItem()->setText(col_img_nombre, tr("Nombre"));
+	ui->twDatosTempImages->headerItem()->setText(col_img_tipo  , tr("Tipo")  );
 
 // Configuración del twMontajes
 	ui->twMontajes->header()->setStretchLastSection(false);
@@ -591,7 +591,7 @@ void frmImportarJuego::mostrarFichaHtml(QTreeWidgetItem *item)
 			img_gamepad = "<img src=\"img_rs_gamepad.png\"> ";
 
 		QString tpl_info_game_new = tpl_info_game_old;
-		tpl_info_game_new.replace("{info_icono}"               , "<img src="+ QUrl::fromLocalFile(dat_icono).path() +">"); //  width=\"24\" height=\"24\"
+		tpl_info_game_new.replace("{info_icono}"               , "<img src=\""+ QUrl::fromLocalFile(dat_icono).path() +"\">"); //  width=\"24\" height=\"24\"
 		tpl_info_game_new.replace("{info_titulo}"              , i.datos.titulo       );
 		tpl_info_game_new.replace("{info_subtitulo}"           , i.datos.subtitulo    );
 		tpl_info_game_new.replace("{info_genero}"              , i.datos.genero       );

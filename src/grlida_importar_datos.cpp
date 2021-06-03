@@ -61,7 +61,7 @@ void frmImportarDatos::cargarEditorDatos()
 	for (int i = 0; i < listSize; ++i)
 		lista.insert(i, ListDataItem(QIcon(icon_list.at(i).absoluteFilePath()), icon_list.at(i).completeBaseName(), icon_list.at(i).fileName()));
 
-	PropertyHeader *p_head_dat = new PropertyHeader("Datos del juego");
+	PropertyHeader *p_head_dat = new PropertyHeader(tr("Datos del juego"));
 	p_head_dat->setSizeHint(0, QSize(30, 30));
 
 // Icono
@@ -266,7 +266,7 @@ void frmImportarDatos::cargarEditorDatos()
 	pdat_usuario->setKey("Dat_usuario");
 	pdat_usuario->setChecked(true);
 // Path
-	PropertyHeader *p_head_path = new PropertyHeader("Config - Path");
+	PropertyHeader *p_head_path = new PropertyHeader(tr("Config - Path"));
 
 	pdat_path_exe = new FileDialogProperty(p_head_path, tr("Ruta del ejecutable"), DatosJuego.path_exe, DatosJuego.path_exe);
 	pdat_path_exe->setKey("Dat_path_exe");

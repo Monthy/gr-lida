@@ -74,7 +74,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	int idx_select = -1;
 
 // [sdl]
-	PropertyHeader *p_head_sdl = new PropertyHeader("Config - SDL");
+	PropertyHeader *p_head_sdl = new PropertyHeader(tr("Config - SDL"));
 
 	pdbx_sdl_fullscreen = new BoolProperty(p_head_sdl, tr("fullscreen"), false, false);
 	pdbx_sdl_fullscreen->setKey("Dbx_sdl_fullscreen");
@@ -150,7 +150,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_sdl_usescancodes->setKey("Dbx_sdl_usescancodes");
 
 // [dosbox]
-	PropertyHeader *p_head_dosbox = new PropertyHeader("Config - DOSBox");
+	PropertyHeader *p_head_dosbox = new PropertyHeader(tr("Config - DOSBox"));
 
 	pdbx_dosbox_language = new FileDialogProperty(p_head_dosbox, tr("language"), "", "");
 	pdbx_dosbox_language->setKey("Dbx_dosbox_language");
@@ -183,7 +183,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_dosbox_emu_key->setDefaultIndex(idx_select);
 
 // [render]
-	PropertyHeader *p_head_render = new PropertyHeader("Config - Render");
+	PropertyHeader *p_head_render = new PropertyHeader(tr("Config - Render"));
 
 	cargarListDataItem(lista, ":/datos/dbx_frameskip.txt", "img16/", 2, "|");
 	pdbx_render_frameskip = new ComboBoxProperty(p_head_render, tr("frameskip"), lista);
@@ -204,7 +204,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_render_scaler->setDefaultIndex(idx_select);
 
 // [cpu]
-	PropertyHeader *p_head_cpu = new PropertyHeader("Config - CPU");
+	PropertyHeader *p_head_cpu = new PropertyHeader(tr("Config - CPU"));
 
 	cargarListDataItem(lista, grlDir.Datos +"dbx_cpu_core.txt", "img16/", 3, "|");
 	pdbx_cpu_core = new ComboBoxProperty(p_head_cpu, tr("core"), lista);
@@ -263,7 +263,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_cpu_cycledown->setKey("Dbx_cpu_cycledown");
 
 // [mixer]
-	PropertyHeader *p_head_mixer = new PropertyHeader("Config - Mixer");
+	PropertyHeader *p_head_mixer = new PropertyHeader(tr("Config - Mixer"));
 
 	pdbx_mixer_nosound = new BoolProperty(p_head_mixer, tr("nosound"), false, false);
 	pdbx_mixer_nosound->setKey("Dbx_mixer_nosound");
@@ -281,7 +281,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_mixer_prebuffer->setKey("Dbx_mixer_prebuffer");
 
 // [midi]
-	PropertyHeader *p_head_midi = new PropertyHeader("Config - MIDI");
+	PropertyHeader *p_head_midi = new PropertyHeader(tr("Config - MIDI"));
 
 	cargarListDataItem(lista, grlDir.Datos +"dbx_mpu401.txt", "img16/", 2, "|");
 	pdbx_midi_mpu401 = new ComboBoxProperty(p_head_midi, tr("mpu401"), lista);
@@ -310,7 +310,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_midi_mt32rate->setDefaultIndex(idx_select);
 
 // [sblaster]
-	PropertyHeader *p_head_sblaster = new PropertyHeader("Config - Sound Blaster");
+	PropertyHeader *p_head_sblaster = new PropertyHeader(tr("Config - Sound Blaster"));
 
 	cargarListDataItem(lista, grlDir.Datos +"dbx_sbtype.txt", "img16/", 3, "|", true, true);
 	pdbx_sblaster_sbtype = new ComboBoxProperty(p_head_sblaster, tr("sbtype"), lista);
@@ -367,7 +367,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_sblaster_oplrate->setDefaultIndex(idx_select);
 
 // [gus]
-	PropertyHeader *p_head_gus = new PropertyHeader("Config - GUS");
+	PropertyHeader *p_head_gus = new PropertyHeader(tr("Config - GUS"));
 
 	pdbx_gus_gus = new BoolProperty(p_head_gus, tr("gus"), false, false);
 	pdbx_gus_gus->setKey("Dbx_gus_gus");
@@ -412,7 +412,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_gus_ultradir->setKey("Dbx_gus_ultradir");
 
 // [speaker]
-	PropertyHeader *p_head_speaker = new PropertyHeader("Config - Speaker");
+	PropertyHeader *p_head_speaker = new PropertyHeader(tr("Config - Speaker"));
 
 	pdbx_speaker_pcspeaker = new BoolProperty(p_head_speaker, tr("pcspeaker"), true, true);
 	pdbx_speaker_pcspeaker->setKey("Dbx_speaker_pcspeaker");
@@ -439,7 +439,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_speaker_disney->setKey("Dbx_speaker_disney");
 
 // [joystick]
-	PropertyHeader *p_head_joystick = new PropertyHeader("Config - Joystick");
+	PropertyHeader *p_head_joystick = new PropertyHeader(tr("Config - Joystick"));
 
 	cargarListDataItem(lista, grlDir.Datos +"dbx_joystick.txt", "img16/", 3, "|", true, true);
 	pdbx_joystick_type = new ComboBoxProperty(p_head_joystick, tr("type"), lista);
@@ -461,7 +461,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_joystick_buttonwrap->setKey("Dbx_joystick_buttonwrap");
 
 // [modem]
-	PropertyHeader *p_head_modem = new PropertyHeader("Config - Modem");
+	PropertyHeader *p_head_modem = new PropertyHeader(tr("Config - Modem"));
 
 	pdbx_modem_modem = new BoolProperty(p_head_modem, tr("modem"), false, false);
 	pdbx_modem_modem->setKey("Dbx_modem_modem");
@@ -481,7 +481,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_modem_irq->setKey("Dbx_modem_irq");
 
 // [dserial]
-	PropertyHeader *p_head_dserial = new PropertyHeader("Config - Direct Serial");
+	PropertyHeader *p_head_dserial = new PropertyHeader(tr("Config - Direct Serial"));
 
 	pdbx_dserial_directserial = new BoolProperty(p_head_dserial, tr("directserial"), false, false);
 	pdbx_dserial_directserial->setKey("Dbx_dserial_directserial");
@@ -540,7 +540,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_dserial_stopbit->setDefaultIndex(idx_select);
 
 // [serial]
-	PropertyHeader *p_head_edit_serial = new PropertyHeader("Edit - Serial");
+	PropertyHeader *p_head_edit_serial = new PropertyHeader(tr("Edit - Serial"));
 
 	lista.clear();
 	lista << ListDataItem("Serial 1", "serial_1") << ListDataItem("Serial 2", "serial_2")
@@ -560,7 +560,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_type_serial->setIndex(idx_select);
 	pdbx_type_serial->setDefaultIndex(idx_select);
 
-	PropertyHeader *p_head_serial = new PropertyHeader("Config - Serial");
+	PropertyHeader *p_head_serial = new PropertyHeader(tr("Config - Serial"));
 
 	pdbx_serial_1 = new StringProperty(p_head_serial, tr("serial_1"), "", "");
 	pdbx_serial_1->setKey("Dbx_serial_1");
@@ -575,7 +575,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_serial_4->setKey("Dbx_serial_4");
 
 // [dos]
-	PropertyHeader *p_head_dos = new PropertyHeader("Config - Dos");
+	PropertyHeader *p_head_dos = new PropertyHeader(tr("Config - Dos"));
 
 	pdbx_dos_xms = new BoolProperty(p_head_dos, tr("xms"), true, true);
 	pdbx_dos_xms->setKey("Dbx_dos_xms");
@@ -613,7 +613,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_dos_version->setDefaultIndex(idx_select);
 
 // [ipx]
-	PropertyHeader *p_head_ipx = new PropertyHeader("Config - IPX");
+	PropertyHeader *p_head_ipx = new PropertyHeader(tr("Config - IPX"));
 
 	pdbx_ipx_ipx = new BoolProperty(p_head_ipx, tr("ipx"), false, false);
 	pdbx_ipx_ipx->setKey("Dbx_ipx_ipx");
@@ -633,7 +633,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_ipx_ip->setKey("Dbx_ipx_ip");
 
 // [autoexec]
-	PropertyHeader *p_head_autoexec = new PropertyHeader("Config - Autoexec");
+	PropertyHeader *p_head_autoexec = new PropertyHeader(tr("Config - Autoexec"));
 
 	pdbx_autoexec = new StringProperty(p_head_autoexec, tr("autoexec"), "", "");
 	pdbx_autoexec->setKey("Dbx_autoexec");
@@ -664,7 +664,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_autoexec_fin_exe->setTextMultiLine(true);
 
 // Opciones
-	PropertyHeader *p_head_opt = new PropertyHeader("Config - Opciones");
+	PropertyHeader *p_head_opt = new PropertyHeader(tr("Config - Opciones"));
 
 	pdbx_opt_autoexec = new BoolProperty(p_head_opt, tr("autoexec"), false, false);
 	pdbx_opt_autoexec->setKey("Dbx_opt_autoexec");
@@ -685,7 +685,7 @@ void frmImportarDosBox::cargarEditorDOSBox()
 	pdbx_opt_cycle_sincronizar->setKey("Dbx_opt_cycle_sincronizar");
 
 // Path
-	PropertyHeader *p_head_path = new PropertyHeader("Config - Path");
+	PropertyHeader *p_head_path = new PropertyHeader(tr("Config - Path"));
 
 	pdbx_path_exe = new FileDialogProperty(p_head_path, tr("path_exe"), "", "");
 	pdbx_path_exe->setKey("Dbx_path_exe");
