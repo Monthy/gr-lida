@@ -65,11 +65,13 @@ GrLida::GrLida(QWidget *parent) :
 	grlDir.Templates  = grlDir.Home +"templates/";
 	grlDir.Themes     = grlDir.Home +"themes/";
 
-	grlCfg      = fGrl->cargarGRLConfig(grlDir.Home +"GR-lida.conf");
-	lwIconCfg   = fGrl->cargarListWidgetIconConf();
-	isImportar  = false;
-	isOpenGrDap = false;
-	isOpenPdf   = false;
+	grlCfg       = fGrl->cargarGRLConfig(grlDir.Home +"GR-lida.conf");
+	lwIconCfg    = fGrl->cargarListWidgetIconConf();
+	isImportar   = false;
+	isOpenGrDap  = false;
+	isOpenPdf    = false;
+	isMountImage = false;
+	isAutoMountImageExe = grlCfg.AutoMountImageExe;
 
 // Comprobación de nuevas versiones.
 	if (grlCfg.chkVersion)
@@ -537,7 +539,7 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 		QStringList no_admitidos;
 		no_admitidos.clear();
 //		no_admitidos << "svm_lista.txt" << "dbx_list.txt" <<  "emu_list.txt" << "grupos.txt" << "fechas.txt";
-		no_admitidos << "svm_lista.txt" << "dbx_list.txt" <<  "emu_list.txt";
+		no_admitidos << "svm_lista.txt" << "dbx_list.txt" <<  "emu_list.txt" << "virtual_driver_list.txt";
 
 		QString sLng = sql->getArchivoIsLng("temas.txt");
 		fGrl->moverArchivo(grlDir.Datos +"edad_recomendada.txt", grlDir.Datos + sLng +"edad_recomendada.txt");
@@ -1001,6 +1003,10 @@ void GrLida::createWidgets()
 	connect(grlProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(fin_Proceso(int, QProcess::ExitStatus)));
 	connect(grlProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(error_Proceso(QProcess::ProcessError)));
 
+	grlProcessMount = new QProcess(this);
+	connect(grlProcessMount, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(fin_ProcesoMount(int, QProcess::ExitStatus)));
+	connect(grlProcessMount, SIGNAL(error(QProcess::ProcessError)), this, SLOT(error_ProcesoMount(QProcess::ProcessError)));
+
 	grl_picflow = new GrlPicFlow(this);
 	grl_picflow->setFocusPolicy(Qt::StrongFocus);//NoFocus
 	grl_picflow->setFocus(Qt::OtherFocusReason);
@@ -1116,6 +1122,14 @@ void GrLida::createToolBars()
 
 	ui->tb_ordenar->clear();
 	ui->tb_ordenar->addWidget(ui->widgetOrdenar);
+
+#ifdef Q_OS_WIN
+	ui->mnu_tool_virtual_drive->setEnabled(true);
+	ui->mnu_ejecutar_montaje->setEnabled(true);
+#else
+	ui->mnu_tool_virtual_drive->setEnabled(false);
+	ui->mnu_ejecutar_montaje->setEnabled(false);
+#endif
 }
 
 void GrLida::createStatusBar()
@@ -1136,6 +1150,14 @@ void GrLida::createStatusBar()
 	lb_panel_3->setPixmap(QPixmap(fGrl->theme() +"img16/sinimg.png"));
 	lb_panel_3->setMinimumSize(20, 20);
 
+	lb_panel_7 = new QLabel(ui->statusBar);
+	lb_panel_7->setFrameStyle(QFrame::NoFrame);
+	lb_panel_7->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
+	lb_panel_7->setPixmap(QPixmap(fGrl->theme() +"img16/sinimg.png"));
+	lb_panel_7->setMinimumSize(20, 20);
+	lb_panel_7->setText("");
+	lb_panel_7->setVisible(false);
+
 	lb_panel_4 = new QLabel(ui->statusBar);
 	lb_panel_4->setFrameStyle(QFrame::NoFrame);
 	lb_panel_4->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
@@ -1152,6 +1174,7 @@ void GrLida::createStatusBar()
 
 	ui->statusBar->addWidget(lb_panel_1);
 	ui->statusBar->addWidget(lb_panel_2);
+	ui->statusBar->addWidget(lb_panel_7);
 	ui->statusBar->addWidget(lb_panel_3);
 	ui->statusBar->addWidget(lb_panel_4);
 	ui->statusBar->addWidget(lb_panel_5);
@@ -1515,6 +1538,9 @@ void GrLida::cargarConfig()
 	img_pf_original      = QImage(fGrl->theme() +"img32/"+ grlCfg.PicFlowIconExtraImgOriginal);
 	img_pf_original_gray = fGrl->imagenToDisabled(fGrl->theme() +"img32/"+ grlCfg.PicFlowIconExtraImgOriginal);
 
+	virtual_drive_list = fGrl->cargarListVirtualDrive(grlDir.Datos +"virtual_driver_list.txt");
+	virtualDrive       = virtual_drive_list["NO_VIRTUAL_DRIVE"];
+
 	cargarTextResource();
 
 	if (!grlCfg.LastSelectCatID.isEmpty())
@@ -1570,6 +1596,7 @@ void GrLida::setTheme()
 	ui->mnu_ejecutar_setup->setIcon(QIcon(fGrl->theme() +"img16/ejecutar_app_setup.png"));
 // Menú herramientas
 	ui->mnu_tool_instalar->setIcon(QIcon(fGrl->theme() +"img16/ejecutar_app_setup.png"));
+	ui->mnu_tool_virtual_drive->setIcon(QIcon(fGrl->theme() +"img16/virtual_drive.png"));
 	ui->mnu_tool_importar->setIcon(QIcon(fGrl->theme() +"img16/importar.png"));
 	ui->mnu_tool_exportar->setIcon(QIcon(fGrl->theme() +"img16/exportar.png"));
 	ui->mnu_tool_cambiar_categoria->setIcon(QIcon(fGrl->theme() +"img16/cambiar_categoria.png"));
@@ -2475,6 +2502,18 @@ void GrLida::listItemSelectDoubleClicked(const QModelIndex &index, QString info)
 
 void GrLida::mostrarDatosDelJuego(QString IDitem, bool soloInfo)
 {
+	cfgExec.f_exe         = "";
+	cfgExec.f_exe_param   = "";
+	cfgExec.f_exe_path    = "";
+	cfgExec.f_setup       = "";
+	cfgExec.f_setup_param = "";
+	cfgExec.f_setup_path  = "";
+	cfgExec.isCfgExec     = false;
+	cfgExec.isCfgSetup    = false;
+
+	// Desmontamos la imagen si previamente está montada.
+	ejecutar_desmontaje();
+
 	if (!IDitem.isEmpty())
 	{
 		if (!soloInfo)
@@ -2698,6 +2737,21 @@ void GrLida::mostrarDatosDelJuego(QString IDitem, bool soloInfo)
 					cfgExec.isCfgExec = true;
 			}
 
+			if (TipoEmu == "datos" || TipoEmu == "dosbox" || TipoEmu == "vdmsound")
+			{
+				if (datos.path_image.isEmpty() || datos.virtual_drive == "NO_VIRTUAL_DRIVE")
+				{
+					ui->mnu_ejecutar_montaje->setEnabled(false);
+
+					lb_panel_7->setVisible(false);
+				} else {
+					ui->mnu_ejecutar_montaje->setEnabled(true);
+
+					lb_panel_7->setPixmap(QPixmap(fGrl->theme() +"img16/cd_iso.png"));
+					lb_panel_7->setVisible(true);
+				}
+			}
+
 			cargarConfigEmu(TipoEmu);
 		}
 
@@ -2804,15 +2858,6 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 {
 	if (tipo_emu.isEmpty())
 	{
-		cfgExec.f_exe         = "";
-		cfgExec.f_exe_param   = "";
-		cfgExec.f_exe_path    = "";
-		cfgExec.f_setup       = "";
-		cfgExec.f_setup_param = "";
-		cfgExec.f_setup_path  = "";
-		cfgExec.isCfgExec     = false;
-		cfgExec.isCfgSetup    = false;
-
 		ui->mnu_ejecutar_juego->setEnabled(false);
 		ui->mnu_ejecutar_juego_big->setEnabled(false);
 		ui->mnu_ejecutar_setup->setEnabled(false);
@@ -2846,11 +2891,14 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 			cfgExec.f_exe_param = "-conf|"+ conf_dosbox["path_conf"] +"dosbox.conf";
 			cfgExec.f_exe_path  = fGrl->getInfoFile(fGrl->getDirRelative(conf_dosbox["path_exe"], "DosGames")).Path;
 
-			cfgExec.f_setup       = cfgExec.f_exe;
-			cfgExec.f_setup_param = "-conf|"+ conf_dosbox["path_conf"] +"dosbox-setup.conf";
-			cfgExec.f_setup_path  = fGrl->getInfoFile(fGrl->getDirRelative(conf_dosbox["path_setup"], "DosGames")).Path;
+			if (!conf_dosbox["path_setup"].isEmpty())
+			{
+				cfgExec.f_setup       = cfgExec.f_exe;
+				cfgExec.f_setup_param = "-conf|"+ conf_dosbox["path_conf"] +"dosbox-setup.conf";
+				cfgExec.f_setup_path  = fGrl->getInfoFile(fGrl->getDirRelative(conf_dosbox["path_setup"], "DosGames")).Path;
+			}
 
-			#ifdef Q_OS_WIN32
+			#ifdef Q_OS_WIN
 				if (fGrl->strToBool(conf_dosbox["opt_consola_dbox"]))
 					cfgExec.f_exe_param.append("|-noconsole");
 			#endif
@@ -2939,7 +2987,7 @@ void GrLida::cargarConfigEmu(QString tipo_emu)
 		ui->mnu_ejecutar_setup_big->setEnabled(cfgExec.isCfgSetup);
 		ui->mnu_ejecutar_setup->setEnabled(cfgExec.isCfgSetup);
 
-		/*qDebug() << "TipoEmu       : " << tipo_emu;
+/*		qDebug() << "TipoEmu       : " << tipo_emu;
 		qDebug() << "f_exe         : " << cfgExec.f_exe;
 		qDebug() << "f_exe_param   : " << cfgExec.f_exe_param;
 		qDebug() << "f_exe_path    : " << cfgExec.f_exe_path;
@@ -2954,7 +3002,7 @@ void GrLida::comprobarEmuloresDisp()
 {
 	bool isWin, isEmuDisp, isEnabled;
 
-	#if defined(Q_OS_WIN32)
+	#if defined(Q_OS_WIN)
 		isWin = true;
 	#else
 		isWin = false;
@@ -3006,6 +3054,35 @@ void GrLida::comprobarEmuloresDisp()
 	ui->mnu_edit_nuevo_vdmsound_big->setEnabled(isEnabled);
 }
 
+void GrLida::ejecutar_desmontaje()
+{
+	if (isMountImage)
+	{
+		QString unmount_image = fGrl->getCommandLineMount(virtualDrive, false);
+
+		fGrl->guardarArchivo(grlDir.Temp +"montaje.bat", "@echo off\n"+ unmount_image);
+		montaje(grlDir.Temp +"montaje.bat", unmount_image, grlDir.Temp);
+
+		isMountImage = false;
+		ui->mnu_ejecutar_montaje->setText(tr("Montar imagen"));
+	}
+
+/*	qDebug() << "isMountImage           : " << isMountImage;
+	qDebug() << "vd.titulo              : " << virtualDrive.titulo;
+	qDebug() << "vd.etiqueta            : " << virtualDrive.etiqueta;
+	qDebug() << "vd.icono               : " << virtualDrive.icono;
+	qDebug() << "vd.path_exe            : " << virtualDrive.path_exe;
+	qDebug() << "vd.path_image          : " << virtualDrive.path_image;
+	qDebug() << "vd.letter              : " << virtualDrive.letter;
+	qDebug() << "vd.param_mount         : " << virtualDrive.param_mount;
+	qDebug() << "vd.param_unmount       : " << virtualDrive.param_unmount;
+	qDebug() << "vd.param_extra_1       : " << virtualDrive.param_extra_1;
+	qDebug() << "vd.param_extra_2       : " << virtualDrive.param_extra_2;
+	qDebug() << "vd.command_line_mount  : " << virtualDrive.command_line_mount;
+	qDebug() << "vd.command_line_unmount: " << virtualDrive.command_line_unmount;
+	qDebug() << "----------------------------------------------------";*/
+}
+
 void GrLida::ejecutar(QString bin, QString parametros, QString working_dir)
 {
 	if (QFile::exists(bin))
@@ -3035,6 +3112,32 @@ void GrLida::ejecutar(QString bin, QString parametros, QString working_dir)
 	} else
 		QMessageBox::information(this, tituloGrl(), tr("No esta disponible el ejecutable del emulador.\nCompruebe si lo tiene instalado."));
 }
+
+void GrLida::montaje(QString bin, QString parametros, QString working_dir)
+{
+	if (QFile::exists(bin))
+	{
+		if (!working_dir.isEmpty())
+		{
+			if (fGrl->comprobarDirectorio(working_dir, true))
+			{
+				QFileInfo fi(working_dir);
+				if (fi.isWritable())
+					grlProcessMount->setWorkingDirectory(working_dir);
+				else
+					grlProcessMount->setWorkingDirectory(grlDir.Temp);
+			}
+		}
+
+		QStringList stl_param;
+		if (!parametros.isEmpty())
+			stl_param << parametros.split("|", QString::SkipEmptyParts);
+
+		grlProcessMount->start(bin, stl_param);
+		grlProcessMount->waitForFinished(1200);
+	} else
+		QMessageBox::information(this, tituloGrl(), tr("No esta disponible el script para ejecutar el montaje de la imagen."));
+}
 // FIN de Funciones ---------------------------------------------------------------------------------------------
 
 // INI de SLOTs -------------------------------------------------------------------------------------------------
@@ -3053,6 +3156,18 @@ void GrLida::on_mnu_file_informacion_triggered()
 
 void GrLida::on_mnu_file_cerrar_triggered()
 {
+	if (grlProcess->isOpen())
+	{
+		grlProcess->terminate();
+		grlProcess->close();
+	}
+
+	if (grlProcessMount->isOpen())
+	{
+		grlProcessMount->terminate();
+		grlProcessMount->close();
+	}
+
 	this->close();
 }
 
@@ -3132,10 +3247,15 @@ void GrLida::on_mnu_edit_editar_triggered()
 
 	if (EditJuego->exec() == QDialog::Accepted)
 	{
+		grlCfg = EditJuego->getGrlCfg();
+
+		if (grlCfg.isChangedVirtualDrive)
+			virtual_drive_list = fGrl->cargarListVirtualDrive(grlDir.Datos +"virtual_driver_list.txt");
+
 		nuevoEditarDatosDelJuego(EditJuego->getDatosJuegos(), false, true);
 		setConfigHeaderListaJuegos();
-	}
-	grlCfg = EditJuego->getGrlCfg();
+	} else
+		grlCfg = EditJuego->getGrlCfg();
 
 	delete EditJuego;
 }
@@ -3550,9 +3670,10 @@ void GrLida::on_mnu_ejecutar_scummvm_triggered()
 
 void GrLida::on_mnu_ejecutar_juego_triggered()
 {
+	stDatosJuego DatosJuego = sql->show_Datos(categoria[id_cat].tabla, IdGame);
+
 	if (!grlCfg.DOSBoxSaveConfFile && TipoEmu == "dosbox")
 	{
-		stDatosJuego DatosJuego = sql->show_Datos(categoria[id_cat].tabla, IdGame);
 		stConfigDOSBox DatosDosBox = sql->showConfg_DOSBox(IdGame, categoria[id_cat].id);
 		QList<stConfigDOSBoxMount> listMount = sql->showConfg_DOSBoxMount(DatosDosBox.id);
 		fGrl->crearArchivoConfigDbx(DatosJuego, DatosDosBox, listMount, grlDir.Home, categoria[id_cat].tabla, grlDir.Temp +"dosbox.conf");
@@ -3565,8 +3686,13 @@ void GrLida::on_mnu_ejecutar_juego_triggered()
 		fGrl->creaIniScummVM(DatosScummVM, grlDir.Temp +"scummvm.ini");
 	}
 
-	if (cfgExec.isCfgExec)
-		ejecutar(cfgExec.f_exe, cfgExec.f_exe_param, cfgExec.f_exe_path);
+	if (TipoEmu == "datos" || TipoEmu == "dosbox" || TipoEmu == "vdmsound")
+	{
+		if (isAutoMountImageExe)
+			emit on_mnu_ejecutar_montaje_triggered();
+	}
+
+	ejecutar(cfgExec.f_exe, cfgExec.f_exe_param, cfgExec.f_exe_path);
 }
 
 void GrLida::on_mnu_ejecutar_setup_triggered()
@@ -3575,12 +3701,70 @@ void GrLida::on_mnu_ejecutar_setup_triggered()
 		ejecutar(cfgExec.f_setup, cfgExec.f_setup_param, cfgExec.f_setup_path);
 }
 
+void GrLida::on_mnu_ejecutar_montaje_triggered()
+{
+	if (isMountImage)
+		ejecutar_desmontaje();
+	else {
+		conf_vd.clear();
+		conf_vd = sql->getDatos(categoria[id_cat].tabla, "WHERE idgrl="+ IdGame, "path_image, virtual_drive");
+
+		if (!conf_vd["path_image"].isEmpty() && conf_vd["virtual_drive"] != "NO_VIRTUAL_DRIVE")
+		{
+			virtualDrive            = virtual_drive_list[conf_vd["virtual_drive"]];
+			virtualDrive.path_image = conf_vd["path_image"];
+
+			if (virtualDrive.etiqueta == conf_vd["virtual_drive"])
+			{
+				QString mount_image = fGrl->getCommandLineMount(virtualDrive, true);
+
+				fGrl->guardarArchivo(grlDir.Temp +"montaje.bat", "@echo off\n"+ mount_image);
+				montaje(grlDir.Temp +"montaje.bat", mount_image, grlDir.Temp);
+
+				isMountImage = true;
+				ui->mnu_ejecutar_montaje->setText(tr("Desmontar imagen"));
+			}
+		}
+	}
+
+/*	qDebug() << "isMountImage           : " << isMountImage;
+	qDebug() << "vd.titulo              : " << virtualDrive.titulo;
+	qDebug() << "vd.etiqueta            : " << virtualDrive.etiqueta;
+	qDebug() << "vd.icono               : " << virtualDrive.icono;
+	qDebug() << "vd.path_exe            : " << virtualDrive.path_exe;
+	qDebug() << "vd.path_image          : " << virtualDrive.path_image;
+	qDebug() << "vd.letter              : " << virtualDrive.letter;
+	qDebug() << "vd.param_mount         : " << virtualDrive.param_mount;
+	qDebug() << "vd.param_unmount       : " << virtualDrive.param_unmount;
+	qDebug() << "vd.param_extra_1       : " << virtualDrive.param_extra_1;
+	qDebug() << "vd.param_extra_2       : " << virtualDrive.param_extra_2;
+	qDebug() << "vd.command_line_mount  : " << virtualDrive.command_line_mount;
+	qDebug() << "vd.command_line_unmount: " << virtualDrive.command_line_unmount;
+	qDebug() << "----------------------------------------------------";*/
+}
+
 // Menú herramientas
 void GrLida::on_mnu_tool_instalar_triggered()
 {
-	frmInstalarJuego *instalarJuego = new frmInstalarJuego(grlCfg, this);
+	frmInstalarJuego *instalarJuego = new frmInstalarJuego(sql, grlCfg, this);
 	instalarJuego->exec();
 	delete instalarJuego;
+}
+
+void GrLida::on_mnu_tool_virtual_drive_triggered()
+{
+	frmAddEditVirtualDrive *addeditVirtualDrive = new frmAddEditVirtualDrive(sql, grlCfg, this);
+	addeditVirtualDrive->setWindowFlags(Qt::Window);
+
+	if (addeditVirtualDrive->exec() == QDialog::Accepted)
+		grlCfg = addeditVirtualDrive->getGrlCfg();
+	else
+		grlCfg = addeditVirtualDrive->getGrlCfg();
+
+	if (grlCfg.isChangedVirtualDrive)
+		virtual_drive_list = fGrl->cargarListVirtualDrive(grlDir.Datos +"virtual_driver_list.txt");
+
+	delete addeditVirtualDrive;
 }
 
 void GrLida::on_mnu_tool_importar_triggered()
@@ -3691,6 +3875,8 @@ void GrLida::on_mnu_tool_opciones_triggered()
 	Opciones->setWindowFlags(Qt::Window);
 	Opciones->exec();
 	grlCfg = Opciones->getConfig();
+
+	isAutoMountImageExe = grlCfg.AutoMountImageExe;
 
 	if (grlCfg.isChangedToolbarBigIcon)
 		setToolbarBigIcon(grlCfg.ToolbarBigIcon);
@@ -4852,10 +5038,45 @@ void GrLida::fin_Proceso(int exitCode, QProcess::ExitStatus exitStatus)
 	if (isTrayIcon)
 	{
 		trayIcon->hide();
+
+		if (isAutoMountImageExe)
+			ejecutar_desmontaje();
 	}
 }
 
-void GrLida::error_Proceso(QProcess::ProcessError error)
+void GrLida::fin_ProcesoMount(int exitCode, QProcess::ExitStatus exitStatus)
+{
+	switch (exitStatus)
+	{
+		case QProcess::NormalExit:
+			//if (isMountImage)
+			//	isMountImage = false;
+			//else
+			//	isMountImage = true;
+		break;
+		case QProcess::CrashExit:
+			//isMountImage = false;
+			QMessageBox::critical(this, tituloGrl(), tr("Se ha producido un error al salir del proceso") +"\nError: "+ fGrl->intToStr(exitCode), QMessageBox::Ok);
+		break;
+	}
+
+	grlProcessMount->terminate();
+	grlProcessMount->close();
+
+	//ui->mnu_ejecutar_montaje->setEnabled(false);
+
+	// TODO: Si es lento el montaje añadir posibilidad de retardo?
+	//if (isMountImage && cfgExec.isCfgExec)
+	//	QTimer::singleShot(1000, this, SLOT(fin_ProcesoMountEjecutar()));
+}
+
+
+//void GrLida::fin_ProcesoMountEjecutar()
+//{
+//	ejecutar(cfgExec.f_exe, cfgExec.f_exe_param, cfgExec.f_exe_path);
+//}
+
+void GrLida::error_msg_Proceso(QProcess::ProcessError error)
 {
 	switch (error)
 	{
@@ -4878,6 +5099,11 @@ void GrLida::error_Proceso(QProcess::ProcessError error)
 			QMessageBox::critical(this, tituloGrl(), tr("Ha ocurrido un error desconocido"), QMessageBox::Ok);
 		break;
 	}
+}
+
+void GrLida::error_Proceso(QProcess::ProcessError error)
+{
+	error_msg_Proceso(error);
 
 	grlProcess->terminate();
 	grlProcess->close();
@@ -4893,4 +5119,12 @@ void GrLida::error_Proceso(QProcess::ProcessError error)
 	{
 		trayIcon->hide();
 	}
+}
+
+void GrLida::error_ProcesoMount(QProcess::ProcessError error)
+{
+	error_msg_Proceso(error);
+
+	grlProcessMount->terminate();
+	grlProcessMount->close();
 }

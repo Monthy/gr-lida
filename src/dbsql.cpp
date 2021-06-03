@@ -549,6 +549,8 @@ bool dbSql::crearTablaDatos(QString tabla)
 		"	path_setup				VARCHAR(255) NOT NULL DEFAULT '',"
 		"	parametros_setup		VARCHAR(255) NOT NULL DEFAULT '',"
 		"	compatibilidad_setup	VARCHAR(255) NOT NULL DEFAULT 'false|',"
+		"	path_image				VARCHAR(255) NOT NULL DEFAULT '',"
+		"	virtual_drive			VARCHAR(255) NOT NULL DEFAULT 'NO_VIRTUAL_DRIVE',"
 		"	"+ qpsql_pkey(tabla) +" PRIMARY KEY(idgrl)"
 		") "+ qpsql_oids +";");
 
@@ -928,6 +930,8 @@ void dbSql::crearTablas()
 			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN titulo_guiones VARCHAR(255) NOT NULL DEFAULT '';");
 			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN compatibilidad_exe VARCHAR(255) NOT NULL DEFAULT 'false|';");
 			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN compatibilidad_setup VARCHAR(255) NOT NULL DEFAULT 'false|';");
+			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN path_image VARCHAR(255) NOT NULL DEFAULT '';");
+			query.exec("ALTER TABLE "+ tabla +" ADD COLUMN virtual_drive VARCHAR(255) NOT NULL DEFAULT 'NO_VIRTUAL_DRIVE';");
 		} while (query_cat.next());
 	}
 	query_cat.clear();
@@ -1043,6 +1047,8 @@ stDatosJuego dbSql::getDefectDatos(QString icono, QHash<QString, QString> dato)
 	datos.path_setup           = setDefDatValue(isQHash, dato["Dat_path_setup"]          , "");
 	datos.parametros_setup     = setDefDatValue(isQHash, dato["Dat_parametros_setup"]    , "");
 	datos.compatibilidad_setup = setDefDatValue(isQHash, dato["Dat_compatibilidad_setup"], "false|");
+	datos.path_image           = setDefDatValue(isQHash, dato["Dat_path_image"]          , "");
+	datos.virtual_drive        = setDefDatValue(isQHash, dato["Dat_virtual_drive"]       , "NO_VIRTUAL_DRIVE");
 // --
 	datos.thumbs_url             = setDefDatValue(isQHash, dato["Dat_thumbs_url"]            , "");
 	datos.cover_front_url        = setDefDatValue(isQHash, dato["Dat_cover_front_url"]       , "");
@@ -1115,6 +1121,8 @@ stDatosJuego dbSql::show_Datos(QString tabla, QString IDgrl)
 		datos.path_setup           = query.record().value("path_setup").toString();
 		datos.parametros_setup     = query.record().value("parametros_setup").toString();
 		datos.compatibilidad_setup = query.record().value("compatibilidad_setup").toString();
+		datos.path_image           = query.record().value("path_image").toString();
+		datos.virtual_drive        = query.record().value("virtual_drive").toString();
 // --
 		datos.thumbs_url             = "";
 		datos.cover_front_url        = "";
@@ -1145,12 +1153,12 @@ QString dbSql::insertaDatos(QString tabla, stDatosJuego datos)
 			"icono, titulo, titulo_guiones, subtitulo, genero, compania, desarrollador, tema, grupo, perspectiva, idioma, idioma_voces, formato, anno, numdisc, "
 			"sistemaop, tamano, graficos, sonido, jugabilidad, original, estado, thumbs, cover_front, cover_back, cover_left, cover_right, cover_top, cover_bottom, "
 			"fecha, tipo_emu, comentario, favorito, gamepad, rating, edad_recomendada, usuario, path_exe, parametros_exe, compatibilidad_exe, path_setup, parametros_setup, "
-			"compatibilidad_setup "
+			"compatibilidad_setup, path_image, virtual_drive "
 		") VALUES ("
 			":icono, :titulo, :titulo_guiones, :subtitulo, :genero, :compania, :desarrollador, :tema, :grupo, :perspectiva, :idioma, :idioma_voces, :formato, :anno, :numdisc, "
 			":sistemaop, :tamano, :graficos, :sonido, :jugabilidad, :original, :estado, :thumbs, :cover_front, :cover_back, :cover_left, :cover_right, :cover_top, :cover_bottom, "
 			":fecha, :tipo_emu, :comentario, :favorito, :gamepad, :rating, :edad_recomendada, :usuario, :path_exe, :parametros_exe, :compatibilidad_exe, :path_setup, :parametros_setup, "
-			":compatibilidad_setup "
+			":compatibilidad_setup, :path_image, :virtual_drive "
 		")"+ qpsql_return_id("idgrl");
 
 	query.prepare(strSQL);
@@ -1197,6 +1205,8 @@ QString dbSql::insertaDatos(QString tabla, stDatosJuego datos)
 	query.bindValue(":path_setup"          , datos.path_setup          );
 	query.bindValue(":parametros_setup"    , datos.parametros_setup    );
 	query.bindValue(":compatibilidad_setup", datos.compatibilidad_setup);
+	query.bindValue(":path_image"          , datos.path_image          );
+	query.bindValue(":virtual_drive"       , datos.virtual_drive       );
 	query.exec();
 
 	if (chequearQuery(query))
@@ -1218,7 +1228,7 @@ bool dbSql::actualizaDatos(QString tabla, stDatosJuego datos)
 			"fecha = :fecha, tipo_emu = :tipo_emu, comentario = :comentario, favorito = :favorito, gamepad = :gamepad, rating = :rating, "
 			"edad_recomendada = :edad_recomendada, usuario = :usuario, path_exe = :path_exe, parametros_exe = :parametros_exe, "
 			"compatibilidad_exe = :compatibilidad_exe, path_setup = :path_setup, parametros_setup = :parametros_setup, "
-			"compatibilidad_setup = :compatibilidad_setup WHERE idgrl = :idgrl;";
+			"compatibilidad_setup = :compatibilidad_setup, path_image = :path_image, virtual_drive = :virtual_drive WHERE idgrl = :idgrl;";
 
 	query.prepare(strSQL);
 	query.bindValue(":icono"               , datos.icono               );
@@ -1264,6 +1274,8 @@ bool dbSql::actualizaDatos(QString tabla, stDatosJuego datos)
 	query.bindValue(":path_setup"          , datos.path_setup          );
 	query.bindValue(":parametros_setup"    , datos.parametros_setup    );
 	query.bindValue(":compatibilidad_setup", datos.compatibilidad_setup);
+	query.bindValue(":path_image"          , datos.path_image          );
+	query.bindValue(":virtual_drive"       , datos.virtual_drive       );
 	query.bindValue(":idgrl"               , datos.idgrl               );
 	query.exec();
 

@@ -37,6 +37,7 @@
 #include "grlida_importar_juego.h"
 #include "grlida_multimedia.h"
 #include "grlida_pdf_viewer.h"
+#include "grlida_addedit_virtual_drive.h"
 #include "grdap.h"
 #include "qcheckcombobox.h"
 #include "editorwidget/editorwidget.h"
@@ -114,6 +115,7 @@ private:
 	QString file_thumbs, file_cover_front, file_cover_back, file_cover_left, file_cover_right, file_cover_top, file_cover_bottom;
 	QStringList dap_ext, comic_ext, z_ext;
 	bool Editando, isOpenGrDap, isOpenPdf;
+	int idx_virtual_drive;
 
 	QCheckComboBox *cbxDat_genero;
 	QCheckComboBox *cbxDat_compania;
@@ -143,6 +145,8 @@ private:
 
 	void cargarParametrosTwList(QTreeWidget *twList, QString parametros);
 	QString getParametrosTwList(QTreeWidget *twList);
+
+	void cargarVirtualDriveList();
 
 private slots:
 	void on_btnOk_clicked();
@@ -221,6 +225,10 @@ private slots:
 	void on_btnDat_parametros_setup_eliminar_clicked();
 	void on_btnDat_parametros_setup_clear_clicked();
 	void on_twDatosParametrosSetup_itemClicked(QTreeWidgetItem *item, int column);
+// Montar Imagen en unidad virtual.
+	void on_btnDat_path_image_clicked();
+	void on_btnDat_path_image_clear_clicked();
+	void on_btn_virtual_drive_edit_clicked();
 // Direcciones url
 	void on_cbxUrl_url_editTextChanged(const QString &arg1);
 	void on_txtUrl_descripcion_textChanged();

@@ -176,12 +176,15 @@
     <addaction name="separator"/>
     <addaction name="mnu_ejecutar_juego"/>
     <addaction name="mnu_ejecutar_setup"/>
+    <addaction name="separator"/>
+    <addaction name="mnu_ejecutar_montaje"/>
    </widget>
    <widget class="QMenu" name="menuHerramientas">
     <property name="title">
      <string>&amp;Herramientas</string>
     </property>
     <addaction name="mnu_tool_instalar"/>
+    <addaction name="mnu_tool_virtual_drive"/>
     <addaction name="separator"/>
     <addaction name="mnu_tool_importar"/>
     <addaction name="mnu_tool_exportar"/>
@@ -1308,6 +1311,24 @@
     <string>Alt+S</string>
    </property>
   </action>
+  <action name="mnu_ejecutar_montaje">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/virtual_drive.png</normaloff>:/img16/virtual_drive.png</iconset>
+   </property>
+   <property name="text">
+    <string>Montar imagen</string>
+   </property>
+   <property name="toolTip">
+    <string>Montar imagen</string>
+   </property>
+   <property name="statusTip">
+    <string>Monta una imagen en la unidad virtual</string>
+   </property>
+  </action>
   <action name="mnu_tool_instalar">
    <property name="icon">
     <iconset resource="../res/gr-lida.qrc">
@@ -1321,6 +1342,21 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="mnu_tool_virtual_drive">
+   <property name="icon">
+    <iconset resource="../res/gr-lida.qrc">
+     <normaloff>:/img16/virtual_drive.png</normaloff>:/img16/virtual_drive.png</iconset>
+   </property>
+   <property name="text">
+    <string>Unidades Virtuales</string>
+   </property>
+   <property name="toolTip">
+    <string>Unidades Virtuales</string>
+   </property>
+   <property name="statusTip">
+    <string>Prepara el DOSBox para poder instalar un juego de forma facil</string>
    </property>
   </action>
   <action name="mnu_tool_importar">

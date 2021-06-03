@@ -1209,6 +1209,70 @@ void Funciones::guardarListWidgetIconConf(stLwIconCfg lwConf, QString tabla, QSt
 	}
 }
 
+// Carga el listado de unidades virtuales.
+QHash<QString, stVirtualDrive> Funciones::cargarListVirtualDrive(QString iniFileName)
+{
+	QHash<QString, stVirtualDrive> vd_list;
+	QString settings_group = "";
+
+	stVirtualDrive virtualDrive;
+		virtualDrive.titulo               = "";
+		virtualDrive.etiqueta             = "NO_VIRTUAL_DRIVE";
+		virtualDrive.icono                = "archivo_config.png";
+		virtualDrive.path_exe             = "";
+		virtualDrive.path_image           = "";
+		virtualDrive.letter               = "";
+		virtualDrive.param_mount          = "";
+		virtualDrive.param_unmount        = "";
+		virtualDrive.param_extra_1        = "";
+		virtualDrive.param_extra_2        = "";
+		virtualDrive.command_line_mount   = "";
+		virtualDrive.command_line_unmount = "";
+	vd_list.insert("NO_VIRTUAL_DRIVE", virtualDrive);
+
+	QSettings settings(iniFileName, QSettings::IniFormat);
+	const int listSize = settings.childGroups().size();
+	for (int i = 0; i < listSize; ++i)
+	{
+		settings_group = settings.childGroups().at(i).toLower();
+
+		settings.beginGroup(settings_group);
+			virtualDrive.titulo               = settings.value("titulo").toString();
+			virtualDrive.etiqueta             = settings_group;
+			virtualDrive.icono                = settings.value("icono").toString();
+			virtualDrive.path_exe             = settings.value("path_exe").toString();
+			virtualDrive.path_image           = "";
+			virtualDrive.letter               = settings.value("letter").toString();
+			virtualDrive.param_mount          = settings.value("param_mount").toString();
+			virtualDrive.param_unmount        = settings.value("param_unmount").toString();
+			virtualDrive.param_extra_1        = settings.value("param_extra_1").toString();
+			virtualDrive.param_extra_2        = settings.value("param_extra_2").toString();
+			virtualDrive.command_line_mount   = settings.value("command_line_mount").toString();
+			virtualDrive.command_line_unmount = settings.value("command_line_unmount").toString();
+		settings.endGroup();
+
+		vd_list.insert(settings_group, virtualDrive);
+	}
+
+	return vd_list;
+}
+
+QString Funciones::getCommandLineMount(stVirtualDrive virtualDrive, bool montar)
+{
+	QString command_line  = montar ? virtualDrive.command_line_mount : virtualDrive.command_line_unmount;
+	QString vd_path_image = getDirRelative(virtualDrive.path_image);
+
+	command_line.replace("{path_exe}"     , virtualDrive.path_exe.replace("/", "\\"));
+	command_line.replace("{path_image}"   , vd_path_image.replace("/", "\\"));
+	command_line.replace("{letter}"       , virtualDrive.letter);
+	command_line.replace("{param_mount}"  , virtualDrive.param_mount);
+	command_line.replace("{param_unmount}", virtualDrive.param_unmount);
+	command_line.replace("{param_extra_1}", virtualDrive.param_extra_1);
+	command_line.replace("{param_extra_2}", virtualDrive.param_extra_2);
+
+	return command_line;
+}
+
 // Carga la configuracion del GR-lida
 stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 {
@@ -1445,6 +1509,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.DatosFiles_PathFile     = settings.value("DatosFiles_PathFile"    , "").toString();
 		config.DatosFiles_PathExe      = settings.value("DatosFiles_PathExe"     , "").toString();
 		config.DatosFiles_PathSetup    = settings.value("DatosFiles_PathSetup"   , "").toString();
+		config.DatosFiles_PathImage    = settings.value("DatosFiles_PathImage"   , "").toString();
 		config.DatosFiles_PathCapturas = settings.value("DatosFiles_PathCapturas", "").toString();
 	// DOSBox
 		config.Dbx_path            = settings.value("Dbx_path"           , "").toString();
@@ -1454,6 +1519,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.Dbx_sdl_mapperfile  = settings.value("Dbx_sdl_mapperfile" , "").toString();
 		config.Dbx_dosbox_language = settings.value("Dbx_dosbox_language", "").toString();
 		config.Montaje_path        = settings.value("Montaje_path"       , "").toString();
+		config.AutoMountImageExe   = settings.value("AutoMountImageExe"  , false).toBool();
 	// ScummVM
 		config.Svm_path       = settings.value("Svm_path"      , "").toString();
 		config.Svm_path_save  = settings.value("Svm_path_save" , "").toString();
@@ -1482,6 +1548,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 	config.isChangedListDOSBox     = false;
 	config.isChangedShortcut       = false;
 	config.isChangedFavorito       = false;
+	config.isChangedVirtualDrive   = false;
 
 	return config;
 }
@@ -1717,6 +1784,7 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 		settings.setValue("DatosFiles_PathFile"    , config.DatosFiles_PathFile    );
 		settings.setValue("DatosFiles_PathExe"     , config.DatosFiles_PathExe     );
 		settings.setValue("DatosFiles_PathSetup"   , config.DatosFiles_PathSetup   );
+		settings.setValue("DatosFiles_PathImage"   , config.DatosFiles_PathImage   );
 		settings.setValue("DatosFiles_PathCapturas", config.DatosFiles_PathCapturas);
 	// DOSBox
 		settings.setValue("Dbx_path"           , config.Dbx_path           );
@@ -1726,6 +1794,7 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 		settings.setValue("Dbx_sdl_mapperfile" , config.Dbx_sdl_mapperfile );
 		settings.setValue("Dbx_dosbox_language", config.Dbx_dosbox_language);
 		settings.setValue("Montaje_path"       , config.Montaje_path       );
+		settings.setValue("AutoMountImageExe"  , config.AutoMountImageExe  );
 	// ScummVM
 		settings.setValue("Svm_path"      , config.Svm_path      );
 		settings.setValue("Svm_path_save" , config.Svm_path_save );
@@ -1758,6 +1827,16 @@ QString Funciones::ventanaAbrirArchivos(QWidget *parent, QString caption, QStrin
 		return QFileDialog::getSaveFileName(parent, caption, base, filter, selectedFilter);
 	else
 		return QFileDialog::getOpenFileName(parent, caption, base, filter, selectedFilter);
+}
+
+QStringList Funciones::ventanaAbrirMultiArchivos(QWidget *parent, QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter)
+{
+	QString base = getDirRelative(dir, dir_relative);
+
+	if (!comprobarDirectorio(base, true))
+		base = stDirApp;
+
+	return QFileDialog::getOpenFileNames(parent, caption, base, filter, selectedFilter);
 }
 
 // Obtiene la dirección de una carpeta atraves de QFileDialog

@@ -207,7 +207,10 @@ void frmAddEditJuego::createWidgets()
 
 void frmAddEditJuego::cargarConfig()
 {
-	ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, false);
+	ui->gBoxDatos_Exe->setEnabled(true);
+	ui->gBoxDatos_Setup->setEnabled(true);
+
+	ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, true);
 	ui->tabw_Datos->setTabEnabled(tabDOSBox  , false);
 	ui->tabw_Datos->setTabEnabled(tabScummVM , false);
 	ui->tabw_Datos->setTabEnabled(tabVDMSound, false);
@@ -274,6 +277,14 @@ void frmAddEditJuego::cargarConfig()
 #endif
 	ui->twDatosParametrosSetup->setColumnWidth(0, 220);
 	ui->twDatosParametrosSetup->setColumnWidth(1, 220);
+
+	cargarVirtualDriveList();
+
+#ifdef Q_OS_WIN
+	ui->gBoxDatos_Mount->setEnabled(true);
+#else
+	ui->gBoxDatos_Mount->setEnabled(false);
+#endif
 
 // Configuración del twDatosFiles
 	ui->twDatosFiles->header()->setStretchLastSection(true);
@@ -596,6 +607,11 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 	ui->txtDat_usuario->setText(datos.usuario);
 	ui->txtDat_path_exe->setText(datos.path_exe);
 	ui->txtDat_path_setup->setText(datos.path_setup);
+	ui->txtDat_path_image->setText(datos.path_image);
+
+	int row_vd = ui->cbx_virtual_drive->findData(datos.virtual_drive, Qt::UserRole, Qt::MatchExactly);
+	if (row_vd < 0) row_vd = 0;
+	ui->cbx_virtual_drive->setCurrentIndex(row_vd);
 
 	cargarParametrosTwList(ui->twDatosParametrosExe, datos.parametros_exe);
 	cargarParametrosTwList(ui->twDatosParametrosSetup, datos.parametros_setup);
@@ -876,6 +892,9 @@ bool frmAddEditJuego::setDatosJuegos(bool isSoloDatos)
 	DatosJuego.path_setup       = ui->txtDat_path_setup->text();
 	DatosJuego.parametros_exe   = getParametrosTwList(ui->twDatosParametrosExe);
 	DatosJuego.parametros_setup = getParametrosTwList(ui->twDatosParametrosSetup);
+	DatosJuego.path_image       = ui->txtDat_path_image->text();
+	str =  ui->cbx_virtual_drive->itemData(ui->cbx_virtual_drive->currentIndex()).toString();
+	DatosJuego.virtual_drive    = str.isEmpty() ? "NO_VIRTUAL_DRIVE" : str;
 
 	if (isSoloDatos)
 	{
@@ -1334,14 +1353,19 @@ void frmAddEditJuego::on_btnDescargarInfo_clicked()
 void frmAddEditJuego::on_cbxDat_tipo_emu_activated(int index)
 {
 	TipoEmu = ui->cbxDat_tipo_emu->itemData(index).toString();
+
 	ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, true);
+	ui->gBoxDatos_Exe->setEnabled(true);
+	ui->gBoxDatos_Setup->setEnabled(true);
 
 	if (TipoEmu.isEmpty())
 		TipoEmu = "datos";
 
 	if (TipoEmu == "dosbox")
 	{
-		ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, false);
+		ui->gBoxDatos_Exe->setEnabled(false);
+		ui->gBoxDatos_Setup->setEnabled(false);
+
 		ui->tabw_Datos->setTabEnabled(tabDOSBox  , true);
 		ui->tabw_Datos->setTabEnabled(tabScummVM , false);
 		ui->tabw_Datos->setTabEnabled(tabVDMSound, false);
@@ -1355,7 +1379,9 @@ void frmAddEditJuego::on_cbxDat_tipo_emu_activated(int index)
 	}
 	else if (TipoEmu == "vdmsound")
 	{
-		ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, false);
+		ui->gBoxDatos_Exe->setEnabled(false);
+		ui->gBoxDatos_Setup->setEnabled(false);
+
 		ui->tabw_Datos->setTabEnabled(tabDOSBox  , false);
 		ui->tabw_Datos->setTabEnabled(tabScummVM , false);
 		ui->tabw_Datos->setTabEnabled(tabVDMSound, true);
@@ -2224,6 +2250,57 @@ void frmAddEditJuego::on_twDatosParametrosSetup_itemClicked(QTreeWidgetItem *ite
 		ui->txtDat_parametros_setup->setText(item->text(0));
 		ui->txtDat_parametros_setup_valor->setText(item->text(1));
 	}
+}
+
+// Montar Imagen en unidad virtual.
+void frmAddEditJuego::cargarVirtualDriveList()
+{
+	ui->cbx_virtual_drive->clear();
+	ui->cbx_virtual_drive->addItem(QIcon(fGrl->theme() +"img16/archivo_config.png"), tr("Seleccionar Unidad Virtual"), "NO_VIRTUAL_DRIVE");
+
+	QHash<QString, stVirtualDrive> virtual_drive_list = fGrl->cargarListVirtualDrive(grlDir.Datos +"virtual_driver_list.txt");
+	QHashIterator<QString, stVirtualDrive> vd(virtual_drive_list);
+	while (vd.hasNext())
+	{
+		vd.next();
+		if (vd.value().etiqueta != "NO_VIRTUAL_DRIVE")
+			ui->cbx_virtual_drive->addItem(QIcon(fGrl->theme() +"img16/"+ vd.value().icono), vd.value().titulo, vd.value().etiqueta);
+	}
+	ui->cbx_virtual_drive->setCurrentIndex(idx_virtual_drive);
+}
+
+void frmAddEditJuego::on_btnDat_path_image_clicked()
+{
+	QString tipo_archivo = tr("Imagen CD") +" (*.iso *.cue);;"+ tr("Imagen HD/Floppy") +" (*.ima *.img);;"+ tr("Todos los archivos") +" (*)";
+	stFileInfo f_info    = fGrl->getInfoFile(fGrl->ventanaAbrirArchivos(this, tr("Selecciona un archivo"), grlCfg.DatosFiles_PathImage, "",  tipo_archivo));
+
+	if (f_info.Exists)
+	{
+		ui->txtDat_path_image->setText(fGrl->setDirRelative(f_info.FilePath));
+		grlCfg.DatosFiles_PathImage = fGrl->setDirRelative(f_info.Path);
+	}
+}
+
+void frmAddEditJuego::on_btnDat_path_image_clear_clicked()
+{
+	ui->txtDat_path_image->clear();
+}
+
+void frmAddEditJuego::on_btn_virtual_drive_edit_clicked()
+{
+	frmAddEditVirtualDrive *addeditVirtualDrive = new frmAddEditVirtualDrive(sql, grlCfg, this);
+	addeditVirtualDrive->setWindowFlags(Qt::Window);
+	idx_virtual_drive = ui->cbx_virtual_drive->currentIndex();
+
+	if (addeditVirtualDrive->exec() == QDialog::Accepted)
+	{
+		grlCfg = addeditVirtualDrive->getGrlCfg();
+
+		cargarVirtualDriveList();
+	} else
+		grlCfg = addeditVirtualDrive->getGrlCfg();
+
+	delete addeditVirtualDrive;
 }
 
 // Direcciones url

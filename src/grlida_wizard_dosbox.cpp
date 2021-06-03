@@ -685,7 +685,7 @@ void frmWizardDosBox::on_btnDescargarInfo_clicked()
 
 void frmWizardDosBox::on_btnInstalarJuego_clicked()
 {
-	frmInstalarJuego *instalarJuego = new frmInstalarJuego(grlCfg, this);
+	frmInstalarJuego *instalarJuego = new frmInstalarJuego(sql, grlCfg, this);
 	if (instalarJuego->exec() == QDialog::Accepted)
 	{
 		if (fGrl->questionMsg(tr("¿Usar montajes?"), tr("¿Deseas añadir los montajes usados?")))

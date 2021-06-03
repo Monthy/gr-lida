@@ -24,7 +24,16 @@
     <normaloff>:/img16/cover_mode.png</normaloff>:/img16/cover_mode.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>4</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>4</number>
+   </property>
+   <property name="bottomMargin">
     <number>4</number>
    </property>
    <item>
@@ -64,7 +73,16 @@
            <string>Temas principales de la lista</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,0">
-           <property name="margin">
+           <property name="leftMargin">
+            <number>4</number>
+           </property>
+           <property name="topMargin">
+            <number>4</number>
+           </property>
+           <property name="rightMargin">
+            <number>4</number>
+           </property>
+           <property name="bottomMargin">
             <number>4</number>
            </property>
            <item row="0" column="0">
@@ -113,12 +131,21 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>491</width>
-                <height>1424</height>
+                <width>494</width>
+                <height>1436</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_4">
-               <property name="margin">
+               <property name="leftMargin">
+                <number>4</number>
+               </property>
+               <property name="topMargin">
+                <number>4</number>
+               </property>
+               <property name="rightMargin">
+                <number>4</number>
+               </property>
+               <property name="bottomMargin">
                 <number>4</number>
                </property>
                <property name="spacing">
@@ -130,7 +157,16 @@
                   <string>tv_list_icon</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout">
-                  <property name="margin">
+                  <property name="leftMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="bottomMargin">
                    <number>4</number>
                   </property>
                   <item row="1" column="0">
@@ -255,7 +291,16 @@
                   <string>picflow_img</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,1,0">
-                  <property name="margin">
+                  <property name="leftMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="bottomMargin">
                    <number>4</number>
                   </property>
                   <item row="0" column="0">
@@ -393,7 +438,16 @@
                   <string>lv_list_icon</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_3">
-                  <property name="margin">
+                  <property name="leftMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="bottomMargin">
                    <number>4</number>
                   </property>
                   <item row="0" column="0">
@@ -497,7 +551,16 @@
                   <string>item_list</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,0,0,1,0,0,0">
-                  <property name="margin">
+                  <property name="leftMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>4</number>
+                  </property>
+                  <property name="bottomMargin">
                    <number>4</number>
                   </property>
                   <item row="1" column="0" colspan="8">
@@ -2188,7 +2251,16 @@
            <string>Otros temas</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_otherThemes">
-           <property name="margin">
+           <property name="leftMargin">
+            <number>4</number>
+           </property>
+           <property name="topMargin">
+            <number>4</number>
+           </property>
+           <property name="rightMargin">
+            <number>4</number>
+           </property>
+           <property name="bottomMargin">
             <number>4</number>
            </property>
            <item>
@@ -2256,7 +2328,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="icon">
@@ -2267,7 +2339,16 @@
         <string>Lista Juegos</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
-        <property name="margin">
+        <property name="leftMargin">
+         <number>4</number>
+        </property>
+        <property name="topMargin">
+         <number>4</number>
+        </property>
+        <property name="rightMargin">
+         <number>4</number>
+        </property>
+        <property name="bottomMargin">
          <number>4</number>
         </property>
         <item>
@@ -2699,7 +2780,16 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_1">
-     <property name="margin">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
       <number>0</number>
      </property>
      <item>

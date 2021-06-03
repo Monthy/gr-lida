@@ -892,7 +892,7 @@ void frmAddEditDosBox::on_btnDbx_ExeSetup_clear_clicked()
 
 void frmAddEditDosBox::on_btnInstalarJuego_clicked()
 {
-	frmInstalarJuego *instalarJuego = new frmInstalarJuego(grlCfg, this);
+	frmInstalarJuego *instalarJuego = new frmInstalarJuego(sql, grlCfg, this);
 	if (instalarJuego->exec() == QDialog::Accepted)
 	{
 		if (fGrl->questionMsg(tr("¿Usar montajes?"), tr("¿Deseas añadir los montajes usados?")))

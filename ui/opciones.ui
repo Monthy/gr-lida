@@ -377,9 +377,17 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="chkAutoMountImageExe">
+            <property name="text">
+             <string>Automontaje de imagenes de CD, disquete al ejecutar el juego.</string>
+            </property>
+           </widget>
+          </item>
          </layout>
          <zorder>chkOpenPdfExternal</zorder>
          <zorder>chkShowNext</zorder>
+         <zorder>chkAutoMountImageExe</zorder>
         </widget>
        </item>
        <item>
@@ -3550,7 +3558,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>622</width>
+                <width>620</width>
                 <height>551</height>
                </rect>
               </property>

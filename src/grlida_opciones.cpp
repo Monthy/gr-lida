@@ -53,6 +53,7 @@ frmOpciones::frmOpciones(dbSql *m_sql, stGrlCfg m_cfg, QWidget *parent) :
 	grlCfg.isChangedListDOSBox     = false;
 	grlCfg.isChangedShortcut       = false;
 	grlCfg.isChangedFavorito       = false;
+	grlCfg.isChangedVirtualDrive   = false;
 
 	grlDir.Home       = fGrl->dirApp();
 	grlDir.Datos      = grlDir.Home +"datos/";
@@ -168,6 +169,7 @@ void frmOpciones::cargarConfig()
 	ui->chkComprobarVersionGrl->setChecked(grlCfg.chkVersion);
 	ui->chkShowNext->setChecked(grlCfg.Primeravez);
 	ui->chkOpenPdfExternal->setChecked(grlCfg.OpenPdfExternal);
+	ui->chkAutoMountImageExe->setChecked(grlCfg.AutoMountImageExe);
 
 // Actualizaciones -------------------
 	ui->cbxUpdateInterval->clear();
@@ -598,6 +600,7 @@ void frmOpciones::guardarConfig()
 	grlCfg.VDMSoundDisp        = ui->chkVDMSoundDisp->isChecked();
 	grlCfg.isChangedIdioma     = IdiomaSelect != grlCfg.IdiomaSelect ? true : false;
 	grlCfg.OpenPdfExternal     = ui->chkOpenPdfExternal->isChecked();
+	grlCfg.AutoMountImageExe   = ui->chkAutoMountImageExe->isChecked();
 	grlCfg.url_xmldb           = ui->cbxScriptURL->itemData(ui->cbxScriptURL->currentIndex()).toString();
 	grlCfg.FormatoFecha        = ui->txtFormatoFecha->text().isEmpty() ? "dd/MM/yyyy HH:mm:ss" : ui->txtFormatoFecha->text();
 	grlCfg.isChangedToolbarBigIcon = grlCfg.ToolbarBigIcon == ui->chkToolbarBigIcon->isChecked() ? false : true;

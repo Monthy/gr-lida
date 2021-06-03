@@ -240,6 +240,9 @@ public:
 	stLwIconCfg cargarListWidgetIconConf(QString tabla = "dbgrl", QString theme = "");
 // Crea la configuración de los iconos de la lista en modo Icono
 	void guardarListWidgetIconConf(stLwIconCfg lwConf, QString tabla = "dbgrl", QString theme = "");
+// Carga el listado de unidades virtuales.
+	QHash<QString, stVirtualDrive> cargarListVirtualDrive(QString iniFileName);
+	QString getCommandLineMount(stVirtualDrive virtualDrive, bool montar);
 
 // Carga la configuración del GR-lida
 	stGrlCfg cargarGRLConfig(QString iniFileName);
@@ -247,6 +250,7 @@ public:
 	void guardarGRLConfig(QString iniFileName, stGrlCfg config);
 // Obtiene la dirección y el nombre del archivo atraves de QFileDialog
 	QString ventanaAbrirArchivos(QWidget *parent, QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter = 0, bool isSave = false);
+	QStringList ventanaAbrirMultiArchivos(QWidget *parent, QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter = 0);
 // Obtiene la dirección de una carpeta atraves de QFileDialog
 	QString ventanaDirectorios(QWidget *parent, QString caption, QString dir, QString dir_relative = "");
 // Abre un archivo con el programa predeterminado
