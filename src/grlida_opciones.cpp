@@ -173,9 +173,9 @@ void frmOpciones::cargarConfig()
 
 // Actualizaciones -------------------
 	ui->cbxUpdateInterval->clear();
-	ui->cbxUpdateInterval->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), "Cada veinticuatro horas",  1);
-	ui->cbxUpdateInterval->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), "Semanalmente",  7);
-	ui->cbxUpdateInterval->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), "Mensualmente", 30);
+	ui->cbxUpdateInterval->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), tr("Cada veinticuatro horas"),  1);
+	ui->cbxUpdateInterval->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), tr("Semanalmente"),  7);
+	ui->cbxUpdateInterval->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), tr("Mensualmente"), 30);
 
 	int idx_update_interval = ui->cbxUpdateInterval->findData(grlCfg.chkUpdateInterval, Qt::UserRole, Qt::MatchExactly);
 	ui->cbxUpdateInterval->setCurrentIndex(idx_update_interval);
@@ -201,7 +201,7 @@ void frmOpciones::cargarConfig()
 	ui->cbxDbxVersion->setCurrentIndex(0);
 
 	ui->cbxDbxImg->clear();
-	ui->cbxDbxImg->addItemParent("Imágenes Categorías");
+	ui->cbxDbxImg->addItemParent(tr("Imágenes Categorías"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxDbxImg, fGrl->theme(), "img32/cat/", "cat/", grlCfg.FormatsImage.join(";"));
 
 	emit on_btnDbxCancel_clicked();
@@ -245,10 +245,10 @@ void frmOpciones::cargarConfig()
 	ui->txtEmuDato->setValidator(new QRegExpValidator(regexp, ui->txtEmuDato));
 
 	ui->cbxEmuImg->clear();
-	ui->cbxEmuImg->addItemParent("Imágenes Categorías");
+	ui->cbxEmuImg->addItemParent(tr("Imágenes Categorías"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxEmuImg, fGrl->theme(), "img32/cat/", "cat/", grlCfg.FormatsImage.join(";"));
 
-	ui->cbxEmuImg->addItemParent("Imágenes defecto");
+	ui->cbxEmuImg->addItemParent(tr("Imágenes defecto"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxEmuImg, fGrl->theme(), "img32/", "", grlCfg.FormatsImage.join(";"));
 
 	int row = ui->cbxEmuImg->findData("sinimg.png", Qt::UserRole, Qt::MatchContains);
@@ -282,10 +282,10 @@ void frmOpciones::cargarConfig()
 	ui->txtCatTabla->setValidator(new QRegExpValidator(regexp, ui->txtCatTabla));
 
 	ui->cbxCatImg->clear();
-	ui->cbxCatImg->addItemParent("Imágenes Categorías");
+	ui->cbxCatImg->addItemParent(tr("Imágenes Categorías"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxCatImg, fGrl->theme(), "img32/cat/", "cat/", grlCfg.FormatsImage.join(";"));
 
-	ui->cbxCatImg->addItemParent("Imágenes defecto");
+	ui->cbxCatImg->addItemParent(tr("Imágenes defecto"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxCatImg, fGrl->theme(), "img32/", "", grlCfg.FormatsImage.join(";"));
 
 	row = ui->cbxCatImg->findData("sinimg.png", Qt::UserRole, Qt::MatchContains);
@@ -315,13 +315,13 @@ void frmOpciones::cargarConfig()
 
 // Crear, editar menú nav ------------
 	ui->cbxMnuNavImg->clear();
-	ui->cbxMnuNavImg->addItemParent("Imágenes Categorías");
+	ui->cbxMnuNavImg->addItemParent(tr("Imágenes Categorías"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxMnuNavImg, fGrl->theme(), "img16/cat/", "cat/", grlCfg.FormatsImage.join(";"));
 
-	ui->cbxMnuNavImg->addItemParent("Imágenes defecto");
+	ui->cbxMnuNavImg->addItemParent(tr("Imágenes defecto"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxMnuNavImg, fGrl->theme(), "img16/", "", grlCfg.FormatsImage.join(";"));
 
-	ui->cbxMnuNavImg->addItemParent("Imágenes idiomas");
+	ui->cbxMnuNavImg->addItemParent(tr("Imágenes idiomas"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxMnuNavImg, fGrl->theme(), "img16/lng/", "lng/", grlCfg.FormatsImage.join(";"));
 
 	row = ui->cbxMnuNavImg->findData("sinimg.png", Qt::UserRole, Qt::MatchContains);
@@ -341,13 +341,13 @@ void frmOpciones::cargarConfig()
 // Crear, editar menú shortcut -------
 	ui->cbxMnuShortCutImg->setIconSize(QSize(32, 32));
 	ui->cbxMnuShortCutImg->clear();
-	ui->cbxMnuShortCutImg->addItemParent("Imágenes Categorías");
+	ui->cbxMnuShortCutImg->addItemParent(tr("Imágenes Categorías"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxMnuShortCutImg, fGrl->theme(), "img32/cat/", "cat/", grlCfg.FormatsImage.join(";"));
 
-	ui->cbxMnuShortCutImg->addItemParent("Imágenes defecto");
+	ui->cbxMnuShortCutImg->addItemParent(tr("Imágenes defecto"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxMnuShortCutImg, fGrl->theme(), "img32/", "", grlCfg.FormatsImage.join(";"));
 
-	ui->cbxMnuShortCutImg->addItemParent("Imágenes idiomas");
+	ui->cbxMnuShortCutImg->addItemParent(tr("Imágenes idiomas"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxMnuShortCutImg, fGrl->theme(), "img32/lng/", "lng/", grlCfg.FormatsImage.join(";"));
 
 	row = ui->cbxMnuShortCutImg->findData("sinimg.png", Qt::UserRole, Qt::MatchContains);
@@ -390,10 +390,10 @@ void frmOpciones::cargarConfig()
 	fGrl->cargarIconosComboBox(ui->cbxDatImgCmpt, fGrl->theme(), "img_svm/level/", "", "sinimg.png", grlCfg.FormatsImage.join(";"));
 
 	ui->cbxDatImg->clear();
-	ui->cbxDatImg->addItemParent("Imágenes Categorías");
+	ui->cbxDatImg->addItemParent(tr("Imágenes Categorías"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxDatImg, fGrl->theme(), "img16/cat/", "cat/", grlCfg.FormatsImage.join(";"));
 
-	ui->cbxDatImg->addItemParent("Imágenes defecto");
+	ui->cbxDatImg->addItemParent(tr("Imágenes defecto"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxDatImg, fGrl->theme(), "img16/", "", grlCfg.FormatsImage.join(";"));
 
 	row = ui->cbxDatImg->findData("sinimg.png", Qt::UserRole, Qt::MatchContains);
@@ -497,13 +497,13 @@ void frmOpciones::cargarConfig()
 
 	ui->cbxPicFlowIconExtraImage->clear();
 	ui->cbxPicFlowIconExtraImage->setIconSize(QSize(32, 32));
-	ui->cbxPicFlowIconExtraImage->addItemParent("Imágenes Categorías");
+	ui->cbxPicFlowIconExtraImage->addItemParent(tr("Imágenes Categorías"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxPicFlowIconExtraImage, fGrl->theme(), "img32/cat/", "cat/", grlCfg.FormatsImage.join(";"));
 
-	ui->cbxPicFlowIconExtraImage->addItemParent("Imágenes defecto");
+	ui->cbxPicFlowIconExtraImage->addItemParent(tr("Imágenes defecto"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxPicFlowIconExtraImage, fGrl->theme(), "img32/", "", grlCfg.FormatsImage.join(";"));
 
-	ui->cbxPicFlowIconExtraImage->addItemParent("Imágenes idiomas");
+	ui->cbxPicFlowIconExtraImage->addItemParent(tr("Imágenes idiomas"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxPicFlowIconExtraImage, fGrl->theme(), "img32/lng/", "lng/", grlCfg.FormatsImage.join(";"));
 
 	ui->cbxPicFlowIconExtraUse->clear();
@@ -2434,9 +2434,9 @@ void frmOpciones::on_cbxDatArchivo_activated(int index)
 		isLng = true;
 		fGrl->cargarIconosComboBox(ui->cbxDatImg, fGrl->theme(), "img16/lng/", "lng/", "sinimg.png", grlCfg.FormatsImage.join(";"));
 	} else {
-		ui->cbxDatImg->addItemParent("Imágenes Categorías");
+		ui->cbxDatImg->addItemParent(tr("Imágenes Categorías"));
 		fGrl->cargarIconosGroupComboBox(ui->cbxDatImg, fGrl->theme(), "img16/cat/", "cat/", grlCfg.FormatsImage.join(";"));
-		ui->cbxDatImg->addItemParent("Imágenes defecto");
+		ui->cbxDatImg->addItemParent(tr("Imágenes defecto"));
 		fGrl->cargarIconosGroupComboBox(ui->cbxDatImg, fGrl->theme(), "img16/", "", grlCfg.FormatsImage.join(";"));
 	}
 	int row = ui->cbxDatImg->findData("sinimg.png", Qt::UserRole, Qt::MatchContains);
@@ -2447,7 +2447,7 @@ void frmOpciones::on_cbxDatArchivo_activated(int index)
 	ui->twDatos->headerItem()->setIcon(2, QIcon(fGrl->theme() +"img16/bullet_black.png"));
 	ui->twDatos->headerItem()->setIcon(3, QIcon(fGrl->theme() +"img16/bullet_black.png"));
 	ui->twDatos->headerItem()->setText(0, tr("Título"));
-	ui->twDatos->headerItem()->setText(1, "Config");
+	ui->twDatos->headerItem()->setText(1, tr("Config"));
 	ui->twDatos->headerItem()->setText(2, "");
 	ui->twDatos->headerItem()->setText(3, "");
 	ui->twDatos->headerItem()->setTextAlignment(1, Qt::AlignCenter);
@@ -3082,7 +3082,7 @@ void frmOpciones::on_btnExtVideoDelete_clicked()
 {
 	if (ui->lwExtVideo->count() > 0 && ui->lwExtVideo->currentItem()->isSelected())
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), "¿Deseas eliminar la extensión?"))
+		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar la extensión?")))
 			delete ui->lwExtVideo->currentItem();
 	}
 }
@@ -3112,7 +3112,7 @@ void frmOpciones::on_btnExtMusicDelete_clicked()
 {
 	if (ui->lwExtMusic->count() > 0 && ui->lwExtMusic->currentItem()->isSelected())
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), "¿Deseas eliminar la extensión?"))
+		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar la extensión?")))
 			delete ui->lwExtMusic->currentItem();
 	}
 }
@@ -3142,7 +3142,7 @@ void frmOpciones::on_btnExtImageDelete_clicked()
 {
 	if (ui->lwExtImage->count() > 0 && ui->lwExtImage->currentItem()->isSelected())
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), "¿Deseas eliminar la extensión?"))
+		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar la extensión?")))
 			delete ui->lwExtImage->currentItem();
 	}
 }
