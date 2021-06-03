@@ -300,6 +300,7 @@ void dbSql::ventanaInfo(QString titulo, QString icono, int w, int h, QString con
 	QPushButton *btnAceptar;
 
 	QDialog *Dialog = new QDialog();
+	Dialog->setWindowFlags(Qt::Window);
 	Dialog->resize(w, h);
 	Dialog->setWindowTitle(titulo);
 
@@ -321,7 +322,7 @@ void dbSql::ventanaInfo(QString titulo, QString icono, int w, int h, QString con
 	} else {
 		textInfo->setOpenExternalLinks(true);
 		textInfo->setOpenLinks(true);
-		textInfo->setHtml(contenido.replace("\n","<br/>"));
+		textInfo->setHtml(contenido);
 	}
 
 	mainLayout->addWidget(textInfo);
@@ -346,7 +347,7 @@ bool dbSql::chequearQuery(QSqlQuery &query)
 {
 	if (query.lastError().type() != QSqlError::NoError)
 	{
-		ventanaInfo("SQL info", "basedatos.png", 400, 300, "SQL:\n"+ query.lastQuery() +"\n\nError:\n"+ query.lastError().text());
+		ventanaInfo("SQL info", "basedatos.png", 400, 300, "SQL:\n"+ query.lastQuery() +"\n\nError:\n"+ query.lastError().text(), true);
 		return false;
 	}
 

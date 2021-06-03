@@ -416,7 +416,7 @@ stFileInfo Funciones::getInfoFile(QString filename, TipoHash hash)
 	} else {
 		QFileInfo fi(filename);
 
-		#ifdef Q_OS_WIN32
+		#ifdef Q_OS_WIN
 			info.Drive = filename.left(2) +"/";
 		#else
 			info.Drive = "/";
@@ -809,7 +809,7 @@ QString Funciones::homePath()
 	if (QFile::exists(QDir::currentPath() +"/GR-lida.conf"))
 		stDirApp = QDir::currentPath() +"/";
 	else {
-		#ifdef Q_OS_WIN32
+		#ifdef Q_OS_WIN
 			isWinOrMac = true;
 			stOS = "win";
 		#else
@@ -986,16 +986,17 @@ QString Funciones::tplInfoJuego(QString file_tpl)
 		tpl = leerArchivo(stTheme + file_tpl +".html", "UTF-8");
 	else
 		tpl = leerArchivo(":/"+ file_tpl +".html", "UTF-8");
-	tpl.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
 
 	QString tpl_css = "";
 	if (QFile::exists(stTheme + file_tpl +".css"))
 		tpl_css = leerArchivo(stTheme + file_tpl +".css", "UTF-8");
 	else
 		tpl_css = leerArchivo(":/"+ file_tpl +".css", "UTF-8");
-	tpl_css.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
 
 	tpl.replace("{tpl_css}", tpl_css);
+
+	//tpl_css.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
+	tpl.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
 
 	if (file_tpl.toLower() == "tpl_info_juego")
 	{
@@ -1334,7 +1335,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.DOSBoxDefault = settings.value("DOSBoxDefault", "dosbox").toString();
 		config.DOSBoxDisp    = settings.value("DOSBoxDisp"   , false).toBool();
 		config.ScummVMDisp   = settings.value("ScummVMDisp"  , false).toBool();
-	#ifdef Q_OS_WIN32
+	#ifdef Q_OS_WIN
 		config.VDMSoundDisp = settings.value("VDMSoundDisp", false).toBool();
 	#else
 		config.VDMSoundDisp = false;
@@ -2602,7 +2603,7 @@ QString Funciones::getShortPathName(QString longPath)
 		int index, idx_dos, listSize = 0;
 		QString f_name, f_path, sep;
 		QStringList listShortPath, shortPath, path_tmp, list_dir, list_dir_8names;
-//#ifdef Q_OS_WIN32
+//#ifdef Q_OS_WIN
 //	sep = "\\";
 //#else
 	sep = "/";
@@ -2761,7 +2762,7 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 				mount_letra_primario = mount_letter;
 			}
 
-		#ifdef Q_OS_WIN32
+		#ifdef Q_OS_WIN
 			mount_drive.replace("/","\\");
 		#endif
 
@@ -2856,7 +2857,7 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 					for (int i = 0; i < lmiso_Size; ++i)
 					{
 						QString path_multi_iso = getDirRelative(lista_isos.at(i), "DosGames");
-					#ifdef Q_OS_WIN32
+					#ifdef Q_OS_WIN
 						path_multi_iso.replace("/","\\");
 					#endif
 						lista_multiple_iso << "\""+ path_multi_iso +"\"";
@@ -2897,7 +2898,7 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 				for (int i = 0; i < lmisoSize; ++i)
 				{
 					QString path_multi_boot = getDirRelative(lista_isos.at(i), "DosGames");
-				#ifdef Q_OS_WIN32
+				#ifdef Q_OS_WIN
 					path_multi_boot.replace("/","\\");
 				#endif
 					lista_multiple_iso << "\""+ path_multi_boot +"\"";

@@ -90,7 +90,7 @@ void frmConfigInicial::cargarConfig()
 	ui->chkVDMSoundDisp->setChecked(grlCfg.VDMSoundDisp);
 	ui->chkShowNext->setChecked(grlCfg.Primeravez);
 
-	#ifdef Q_OS_WIN32
+	#ifdef Q_OS_WIN
 		ui->chkVDMSoundDisp->setEnabled(true);
 	#else
 		ui->chkVDMSoundDisp->setEnabled(false);

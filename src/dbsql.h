@@ -73,7 +73,7 @@ public:
 // Retorna si esta abierta o no la base de datos
 	bool dbisOpen();
 // Muestra una ventana de información
-	void ventanaInfo(QString titulo, QString icono, int w, int h, QString contenido, bool isTextoPlano = true);
+	void ventanaInfo(QString titulo, QString icono, int w, int h, QString contenido, bool isTextoPlano);
 // Comprueba si el Query se ha ejecutado bien
 	bool chequearQuery(QSqlQuery &query);
 	bool eliminarItemTable(QString tabla, QString Id);

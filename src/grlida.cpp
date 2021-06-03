@@ -165,6 +165,10 @@ bool GrLida::eventFilter(QObject *object, QEvent *event)
 							ui->mnu_ver_statusbar->setChecked(grlCfg.Pnl_StatusBar);
 							return true;
 						break;
+					//	case Qt::Key_F4:
+					//		qDebug() << "cambio de CD...";
+					//		return true;
+					//	break;
 					}
 				break;
 				case Qt::AltModifier:
@@ -516,6 +520,10 @@ void GrLida::comprobarArchivosDatos(QString version_grl, QString lng)
 
 	if (esNuevaVersionGRlida)
 	{
+		// Eliminamos las fichas cache para generarlas de nuevo.
+		QFileInfoList list_ficha_html = fGrl->getListFiles(grlDir.DatosDbGrl, QString("*.html").split(";"), true);
+		fGrl->eliminarArchivos(list_ficha_html);
+
 // esNuevaVersionGRlida -----------------------------------------------------------------------------------------
 	// Actualización de archivos de Datos.
 		QStringList datos_txt_2col, datos_txt_3col, datos_txt_4col;
@@ -1948,7 +1956,7 @@ void GrLida::statusFinished()
 				} else if (xml.name() == "list_svm") {
 					updates_svm.title       = xml.attributes().value("title").toString();
 					updates_svm.version     = xml.attributes().value("ver").toString();
-					updates_svm.ver_old     = fGrl->versionSvm();
+					updates_svm.ver_old     = !grlCfg.VerListSvm.isEmpty() ? grlCfg.VerListSvm : fGrl->versionSvm();
 					updates_svm.file        = xml.attributes().value("file").toString();
 					updates_svm.url         = "";
 					updates_svm.tipo        = "list_svm";
@@ -2664,7 +2672,7 @@ void GrLida::mostrarDatosDelJuego(QString IDitem, bool soloInfo)
 					img_gamepad = "<img src=\"img_rs_gamepad.png\"> ";
 
 				tpl_info_game_new = tpl_info_game_old;
-				tpl_info_game_new.replace("{info_icono}"               , "<img src="+ QUrl::fromLocalFile(dat_icono).path() +">"); //  width=\"24\" height=\"24\"
+				tpl_info_game_new.replace("{info_icono}"               , "<img src=\""+ QUrl::fromLocalFile(dat_icono).path() +"\">"); //  width=\"24\" height=\"24\"
 				tpl_info_game_new.replace("{info_titulo}"              , datos.titulo       );
 				tpl_info_game_new.replace("{info_subtitulo}"           , datos.subtitulo    );
 				tpl_info_game_new.replace("{info_genero}"              , datos.genero       );
@@ -3488,7 +3496,10 @@ void GrLida::on_mnu_edit_eliminar_triggered()
 						}
 						fGrl->eliminarArchivo(dir_game +"/vdmsound.vlp");
 					}
+
 				// Datos url y archivos
+					fGrl->eliminarArchivo(dir_game +"/ficha.html");
+
 					query_del.exec("DELETE FROM dbgrl_urls WHERE idgrl="+ idgrl +" AND idcat="+ categoria[id_cat].id);
 					query_del.exec("DELETE FROM dbgrl_files WHERE idgrl="+ idgrl +" AND idcat="+ categoria[id_cat].id);
 				// Datos
