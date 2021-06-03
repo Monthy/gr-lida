@@ -506,28 +506,61 @@ QString Funciones::getIconMount(QString tipoDrive, QString select_mount)
 }
 
 // Crear Thumbs
-// format  = BMP, JPG, JPEG, PNG
-// quality = -1 = defecto, 0 a 100 peor a mejor calidad
-bool Funciones::crearThumbs(QString origen, QString destino, int width, int height, int quality, bool ignoreAspectRatio, QString format)
+QPixmap Funciones::crearThumbs(QString origen, int width, int height, bool ignoreAspectRatio, bool center, bool marco)
 {
 	QImage img_src(origen);
 
 	if (img_src.width() > width || img_src.height() > height)
 		img_src = img_src.scaled(QSize(width, height), (ignoreAspectRatio ? Qt::IgnoreAspectRatio : Qt::KeepAspectRatio), Qt::SmoothTransformation);
 
-	QImage img_final(QSize(img_src.width(), img_src.height()), QImage::Format_ARGB32_Premultiplied);
-	QPainter painter(&img_final);
+	int sw = img_src.width();
+	int sh = img_src.height();
+	int x  = 0;
+	int y  = height - sh;
 
-//	painter.fillRect(img_final.rect(), (strcmp(format, "PNG") ? Qt::transparent : Qt::white));
-	if (format.toUpper() == "PNG")
+	if (center)
+	{
+		x  = (width - sw) / 2;  // centar en x
+		y  = (height - sh) / 2; // centar en y
+	}
+
+	if (marco)
+	{
+		QImage img_final(QSize(width, height), QImage::Format_ARGB32_Premultiplied);
+		QPainter painter(&img_final);
+		painter.setCompositionMode(QPainter::CompositionMode_Clear);
 		painter.fillRect(img_final.rect(), Qt::transparent);
-	else
+		painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+		painter.drawImage(x, y, img_src, 0, 0, sw, sh);
+		painter.end();
+
+		return QPixmap::fromImage(img_final);
+	} else
+		return QPixmap::fromImage(img_src);
+}
+
+// Guardar Thumbs
+// format  = BMP, JPG, JPEG, PNG
+// quality = -1 = defecto, 0 a 100 peor a mejor calidad
+bool Funciones::saveThumbs(QString origen, QString destino, int width, int height, bool ignoreAspectRatio, bool center, QString format, int quality, bool marco)
+{
+	bool isOk = false;
+
+	QPixmap img_src = crearThumbs(origen, width, height, ignoreAspectRatio, center, marco);
+
+	if (marco)
+	{
+		QImage img_final(QSize(width, height), QImage::Format_ARGB32_Premultiplied);
+		QPainter painter(&img_final);
 		painter.fillRect(img_final.rect(), Qt::white);
+		painter.drawPixmap(img_src.rect(), img_src);
+		painter.end();
 
-	painter.drawImage(img_src.rect(), img_src);
-	painter.end();
+		isOk = img_final.save(destino, format.toUpper().toStdString().c_str(), quality);
+	} else
+		isOk = img_src.save(destino, format.toUpper().toStdString().c_str(), quality);
 
-	return img_final.save(destino, format.toUpper().toStdString().c_str(), quality);
+	return isOk;
 }
 
 // Leer archivo de texto
@@ -1104,7 +1137,7 @@ stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla, QString theme)
 	settings.beginGroup("picflow_img");
 		lwConf.pf_img_width   = settings.value("pf_img_width"  , 145).toInt();
 		lwConf.pf_img_height  = settings.value("pf_img_height" , 186).toInt();
-		lwConf.pf_img_fixsize = settings.value("pf_img_fixsize", true).toBool();
+		lwConf.pf_img_fixsize = settings.value("pf_img_fixsize", false).toBool();
 	settings.endGroup();
 	settings.beginGroup("list_icon");
 		lwConf.icon_width  = settings.value("icon_width" , 200).toInt();

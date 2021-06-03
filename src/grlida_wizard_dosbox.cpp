@@ -169,7 +169,7 @@ void frmWizardDosBox::cargarDatosJuego(stDatosJuego datos)
 	CoverBottom = datos.cover_bottom;
 
 // Thumbs
-	file_thumbs = grlDir.Temp +"imagenes/small/"+ Thumbs;
+	file_thumbs = grlDir.Temp +"imagenes/"+ Thumbs;
 	if (!QFile::exists(file_thumbs))
 	{
 		Thumbs = "";
@@ -257,7 +257,7 @@ bool frmWizardDosBox::setDatosJuegos()
 		{
 			DatosJuego.thumbs = "thumbs."+ grlCfg.thumb_format.toLower();
 			sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "thumbs", DatosJuego.thumbs);
-			fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + DatosJuego.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, true, grlCfg.thumb_format);
+			fGrl->saveThumbs(file_thumbs, grlDir.DatosGame + DatosJuego.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, false, false, grlCfg.thumb_format, grlCfg.thumb_quality);
 		}
 
 		if (!CoverFront.isEmpty() && QFile::exists(file_cover_front))
@@ -316,7 +316,7 @@ bool frmWizardDosBox::setDatosJuegos()
 				else
 					fGrl->copiarArchivo(imagen.dir_in + imagen.nombre, dir_out + imagen.nombre, false, true);
 
-				fGrl->crearThumbs(dir_out + imagen.nombre, dir_out +"small/"+ imagen.nombre +".jpg", grlCfg.thumb_img_width, grlCfg.thumb_img_height, grlCfg.thumb_img_quality);
+				fGrl->saveThumbs(dir_out + imagen.nombre, dir_out +"small/"+ imagen.nombre +".jpg", grlCfg.thumb_img_width, grlCfg.thumb_img_height, false, true, "JPG", grlCfg.thumb_img_quality, true);
 			}
 		}
 	}

@@ -184,8 +184,9 @@ public:
 	QString getHashFile(QString filename, TipoHash hash = hashSha1);
 // Devuelve un icono de montaje
 	QString getIconMount(QString tipoDrive, QString select_mount = "");
-// Crear Thumbs
-	bool crearThumbs(QString origen, QString destino, int width = 145, int height = 186, int quality = -1, bool ignoreAspectRatio = false, QString format = "JPG");
+// Crear y Guardar Thumbs
+	QPixmap crearThumbs(QString origen, int width = 145, int height = 186, bool ignoreAspectRatio = false, bool center = false, bool marco = true);
+	bool saveThumbs(QString origen, QString destino, int width = 145, int height = 186, bool ignoreAspectRatio = false, bool center = false, QString format = "JPG", int quality = -1, bool marco = false);
 // Leer archivo de texto
 	QString leerArchivo(QString filename, const QByteArray code = "");
 // Guarda archivo de texto

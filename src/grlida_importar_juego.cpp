@@ -631,6 +631,9 @@ void frmImportarJuego::mostrarFichaHtml(QTreeWidgetItem *item)
 		tpl_info_game_new.replace("{dbx_usado}"                , dbx_usado            );
 		tpl_info_game_new.replace("{dbx_usado_img}"            , dbx_usado_img        );
 
+		if (Editando)
+			i.datos_def = DatosJuego;
+
 		ui->txtInfoJuego->setHtml(tpl_info_game_new);
 		wDat->setEditorDatos(i.datos, i.datos_def);
 
@@ -1498,8 +1501,12 @@ void frmImportarJuego::analyzePageCovers(QString filename)
 		{
 			list_import_temp[item].datos.thumbs         = tmpDatosImportar["Dat_thumbs"];
 			list_import_temp[item].datos.thumbs_url     = tmpDatosImportar["Dat_thumbs_url"];
-			list_import_temp[item].datos_def.thumbs     = list_import_temp[item].datos.thumbs;
-			list_import_temp[item].datos_def.thumbs_url = list_import_temp[item].datos.thumbs_url;
+
+			if (!Editando)
+			{
+				list_import_temp[item].datos_def.thumbs     = list_import_temp[item].datos.thumbs;
+				list_import_temp[item].datos_def.thumbs_url = list_import_temp[item].datos.thumbs_url;
+			}
 		}
 
 		if (!list_import_temp[item].datos.cover_front_url_small.isEmpty())
@@ -1507,9 +1514,13 @@ void frmImportarJuego::analyzePageCovers(QString filename)
 			list_import_temp[item].datos.cover_front               = tmpDatosImportar["Dat_cover_front"];
 			list_import_temp[item].datos.cover_front_url           = tmpDatosImportar["Dat_cover_front_url"];
 			list_import_temp[item].datos.cover_front_url_small     = tmpDatosImportar["Dat_cover_front_url_small"];
-			list_import_temp[item].datos_def.cover_front           = list_import_temp[item].datos.cover_front;
-			list_import_temp[item].datos_def.cover_front_url       = list_import_temp[item].datos.cover_front_url;
-			list_import_temp[item].datos_def.cover_front_url_small = list_import_temp[item].datos.cover_front_url_small;
+
+			if (!Editando)
+			{
+				list_import_temp[item].datos_def.cover_front           = list_import_temp[item].datos.cover_front;
+				list_import_temp[item].datos_def.cover_front_url       = list_import_temp[item].datos.cover_front_url;
+				list_import_temp[item].datos_def.cover_front_url_small = list_import_temp[item].datos.cover_front_url_small;
+			}
 		}
 
 		if (datosImportar["Dat_cover_back"].isEmpty() && !tmpDatosImportar["Dat_cover_back"].isEmpty())
@@ -1517,9 +1528,13 @@ void frmImportarJuego::analyzePageCovers(QString filename)
 			list_import_temp[item].datos.cover_back               = tmpDatosImportar["Dat_cover_back"];
 			list_import_temp[item].datos.cover_back_url           = tmpDatosImportar["Dat_cover_back_url"];
 			list_import_temp[item].datos.cover_back_url_small     = tmpDatosImportar["Dat_cover_back_url_small"];
-			list_import_temp[item].datos_def.cover_back           = list_import_temp[item].datos.cover_back;
-			list_import_temp[item].datos_def.cover_back_url       = list_import_temp[item].datos.cover_back_url;
-			list_import_temp[item].datos_def.cover_back_url_small = list_import_temp[item].datos.cover_back_url_small;
+
+			if (!Editando)
+			{
+				list_import_temp[item].datos_def.cover_back           = list_import_temp[item].datos.cover_back;
+				list_import_temp[item].datos_def.cover_back_url       = list_import_temp[item].datos.cover_back_url;
+				list_import_temp[item].datos_def.cover_back_url_small = list_import_temp[item].datos.cover_back_url_small;
+			}
 		}
 
 		if (datosImportar["Dat_cover_left"].isEmpty() && !tmpDatosImportar["Dat_cover_left"].isEmpty())
@@ -1527,9 +1542,13 @@ void frmImportarJuego::analyzePageCovers(QString filename)
 			list_import_temp[item].datos.cover_left               = tmpDatosImportar["Dat_cover_left"];
 			list_import_temp[item].datos.cover_left_url           = tmpDatosImportar["Dat_cover_left_url"];
 			list_import_temp[item].datos.cover_left_url_small     = tmpDatosImportar["Dat_cover_left_url_small"];
-			list_import_temp[item].datos_def.cover_left           = list_import_temp[item].datos.cover_left;
-			list_import_temp[item].datos_def.cover_left_url       = list_import_temp[item].datos.cover_left_url;
-			list_import_temp[item].datos_def.cover_left_url_small = list_import_temp[item].datos.cover_left_url_small;
+
+			if (!Editando)
+			{
+				list_import_temp[item].datos_def.cover_left           = list_import_temp[item].datos.cover_left;
+				list_import_temp[item].datos_def.cover_left_url       = list_import_temp[item].datos.cover_left_url;
+				list_import_temp[item].datos_def.cover_left_url_small = list_import_temp[item].datos.cover_left_url_small;
+			}
 		}
 
 		if (datosImportar["Dat_cover_right"].isEmpty() && !tmpDatosImportar["Dat_cover_right"].isEmpty())
@@ -1537,9 +1556,13 @@ void frmImportarJuego::analyzePageCovers(QString filename)
 			list_import_temp[item].datos.cover_right               = tmpDatosImportar["Dat_cover_right"];
 			list_import_temp[item].datos.cover_right_url           = tmpDatosImportar["Dat_cover_right_url"];
 			list_import_temp[item].datos.cover_right_url_small     = tmpDatosImportar["Dat_cover_right_url_small"];
-			list_import_temp[item].datos_def.cover_right           = list_import_temp[item].datos.cover_right;
-			list_import_temp[item].datos_def.cover_right_url       = list_import_temp[item].datos.cover_right_url;
-			list_import_temp[item].datos_def.cover_right_url_small = list_import_temp[item].datos.cover_right_url_small;
+
+			if (!Editando)
+			{
+				list_import_temp[item].datos_def.cover_right           = list_import_temp[item].datos.cover_right;
+				list_import_temp[item].datos_def.cover_right_url       = list_import_temp[item].datos.cover_right_url;
+				list_import_temp[item].datos_def.cover_right_url_small = list_import_temp[item].datos.cover_right_url_small;
+			}
 		}
 
 		if (datosImportar["Dat_cover_top"].isEmpty() && !tmpDatosImportar["Dat_cover_top"].isEmpty())
@@ -1547,9 +1570,13 @@ void frmImportarJuego::analyzePageCovers(QString filename)
 			list_import_temp[item].datos.cover_top               = tmpDatosImportar["Dat_cover_top"];
 			list_import_temp[item].datos.cover_top_url           = tmpDatosImportar["Dat_cover_top_url"];
 			list_import_temp[item].datos.cover_top_url_small     = tmpDatosImportar["Dat_cover_top_url_small"];
-			list_import_temp[item].datos_def.cover_top           = list_import_temp[item].datos.cover_top;
-			list_import_temp[item].datos_def.cover_top_url       = list_import_temp[item].datos.cover_top_url;
-			list_import_temp[item].datos_def.cover_top_url_small = list_import_temp[item].datos.cover_top_url_small;
+
+			if (!Editando)
+			{
+				list_import_temp[item].datos_def.cover_top           = list_import_temp[item].datos.cover_top;
+				list_import_temp[item].datos_def.cover_top_url       = list_import_temp[item].datos.cover_top_url;
+				list_import_temp[item].datos_def.cover_top_url_small = list_import_temp[item].datos.cover_top_url_small;
+			}
 		}
 
 		if (datosImportar["Dat_cover_bottom"].isEmpty() && !tmpDatosImportar["Dat_cover_bottom"].isEmpty())
@@ -1557,9 +1584,13 @@ void frmImportarJuego::analyzePageCovers(QString filename)
 			list_import_temp[item].datos.cover_bottom               = tmpDatosImportar["Dat_cover_bottom"];
 			list_import_temp[item].datos.cover_bottom_url           = tmpDatosImportar["Dat_cover_bottom_url"];
 			list_import_temp[item].datos.cover_bottom_url_small     = tmpDatosImportar["Dat_cover_bottom_url_small"];
-			list_import_temp[item].datos_def.cover_bottom           = list_import_temp[item].datos.cover_bottom;
-			list_import_temp[item].datos_def.cover_bottom_url       = list_import_temp[item].datos.cover_bottom_url;
-			list_import_temp[item].datos_def.cover_bottom_url_small = list_import_temp[item].datos.cover_bottom_url_small;
+
+			if (!Editando)
+			{
+				list_import_temp[item].datos_def.cover_bottom           = list_import_temp[item].datos.cover_bottom;
+				list_import_temp[item].datos_def.cover_bottom_url       = list_import_temp[item].datos.cover_bottom_url;
+				list_import_temp[item].datos_def.cover_bottom_url_small = list_import_temp[item].datos.cover_bottom_url_small;
+			}
 		}
 
 		list_import_temp[item].imagenes.clear();
@@ -1671,7 +1702,7 @@ void frmImportarJuego::setScriptDatos()
 			datos.icono = "datos.png";
 
 		import.datos     = datos;
-		import.datos_def = datos;
+		import.datos_def = Editando ? DatosJuego : datos;
 
 	// import.files
 	// import.urls
@@ -2590,18 +2621,19 @@ void frmImportarJuego::importarJuegos()
 				{
 					stFileInfo f_info;
 				// Thumbs
-					if (!i.datos.thumbs.isEmpty())
+					if (!i.datos.thumbs.isEmpty() && i.datos.isChecked.thumbs)
 					{
 						f_info = fGrl->getInfoFile(i.datos.thumbs);
-						isOk   = fGrl->crearThumbs(grlDir.Temp +"imagenes/small/"+ i.datos.thumbs, grlDir.DatosGame +"thumbs."+ grlCfg.thumb_format.toLower(), grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, true, grlCfg.thumb_format);
+						isOk   = fGrl->saveThumbs(grlDir.Temp +"imagenes/"+ i.datos.thumbs, grlDir.DatosGame +"thumbs."+ grlCfg.thumb_format.toLower(), grlCfg.thumb_width, grlCfg.thumb_height, false, false, grlCfg.thumb_format, grlCfg.thumb_quality);
 						if (isOk)
 						{
-							i.datos.thumbs = "thumbs"+ f_info.Ext;
+						//	i.datos.thumbs = "thumbs"+ f_info.Ext;
+							i.datos.thumbs = "thumbs."+ grlCfg.thumb_format.toLower();
 							sql->actualizaDatosItem(categoria.tabla, i.datos.idgrl, "thumbs", i.datos.thumbs);
 						}
 					}
 				// CoverFront
-					if (!i.datos.cover_front.isEmpty())
+					if (!i.datos.cover_front.isEmpty() && i.datos.isChecked.cover_front)
 					{
 						f_info = fGrl->getInfoFile(i.datos.cover_front);
 						isOk   = fGrl->copiarArchivo(grlDir.Temp +"imagenes/"+ i.datos.cover_front, grlDir.DatosGame +"caja/cover_front"+ f_info.Ext, false, true);
@@ -2612,7 +2644,7 @@ void frmImportarJuego::importarJuegos()
 						}
 					}
 				// CoverBack
-					if (!i.datos.cover_back.isEmpty())
+					if (!i.datos.cover_back.isEmpty() && i.datos.isChecked.cover_back)
 					{
 						f_info = fGrl->getInfoFile(i.datos.cover_back);
 						isOk   = fGrl->copiarArchivo(grlDir.Temp +"imagenes/"+ i.datos.cover_back, grlDir.DatosGame +"caja/cover_back"+ f_info.Ext, false, true);
@@ -2623,7 +2655,7 @@ void frmImportarJuego::importarJuegos()
 						}
 					}
 				// CoverLeft
-					if (!i.datos.cover_left.isEmpty())
+					if (!i.datos.cover_left.isEmpty() && i.datos.isChecked.cover_left)
 					{
 						f_info = fGrl->getInfoFile(i.datos.cover_left);
 						isOk   = fGrl->copiarArchivo(grlDir.Temp +"imagenes/"+ i.datos.cover_left, grlDir.DatosGame +"caja/cover_left"+ f_info.Ext, false, true);
@@ -2634,7 +2666,7 @@ void frmImportarJuego::importarJuegos()
 						}
 					}
 				// CoverRight
-					if (!i.datos.cover_right.isEmpty())
+					if (!i.datos.cover_right.isEmpty() && i.datos.isChecked.cover_right)
 					{
 						f_info = fGrl->getInfoFile(i.datos.cover_right);
 						isOk   = fGrl->copiarArchivo(grlDir.Temp +"imagenes/"+ i.datos.cover_right, grlDir.DatosGame +"caja/cover_right"+ f_info.Ext, false, true);
@@ -2645,7 +2677,7 @@ void frmImportarJuego::importarJuegos()
 						}
 					}
 				// CoverTop
-					if (!i.datos.cover_top.isEmpty())
+					if (!i.datos.cover_top.isEmpty() && i.datos.isChecked.cover_top)
 					{
 						f_info = fGrl->getInfoFile(i.datos.cover_top);
 						isOk   = fGrl->copiarArchivo(grlDir.Temp +"imagenes/"+ i.datos.cover_top, grlDir.DatosGame +"caja/cover_top"+ f_info.Ext, false, true);
@@ -2656,7 +2688,7 @@ void frmImportarJuego::importarJuegos()
 						}
 					}
 				// CoverBottom
-					if (!i.datos.cover_bottom.isEmpty())
+					if (!i.datos.cover_bottom.isEmpty() && i.datos.isChecked.cover_bottom)
 					{
 						f_info = fGrl->getInfoFile(i.datos.cover_bottom);
 						isOk   = fGrl->copiarArchivo(grlDir.Temp +"imagenes/"+ i.datos.cover_bottom, grlDir.DatosGame +"caja/cover_bottom"+ f_info.Ext, false, true);
@@ -2751,7 +2783,7 @@ void frmImportarJuego::importarJuegos()
 						{
 							isOk = fGrl->copiarArchivo(grlDir.Temp +"imagenes/"+ i.imagenes.at(n).nombre, grlDir.DatosGame +"imagenes/"+ i.imagenes.at(n).nombre, false, false, true);
 							if (isOk)
-								fGrl->crearThumbs(grlDir.Temp +"imagenes/"+ i.imagenes.at(n).nombre, grlDir.DatosGame +"imagenes/small/"+ i.imagenes.at(n).nombre +".jpg", grlCfg.thumb_img_width, grlCfg.thumb_img_height, grlCfg.thumb_img_quality);
+								fGrl->saveThumbs(grlDir.Temp +"imagenes/"+ i.imagenes.at(n).nombre, grlDir.DatosGame +"imagenes/small/"+ i.imagenes.at(n).nombre +".jpg", grlCfg.thumb_img_width, grlCfg.thumb_img_height, false, true, "JPG", grlCfg.thumb_img_quality, true);
 						} else {
 							i.imagenes[n].isImport    = true;
 							i.imagenes[n].crearThumbs = true;
