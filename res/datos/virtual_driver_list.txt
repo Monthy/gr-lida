@@ -1,0 +1,59 @@
+[win10_mount_diskimage]
+titulo=Windows 10 Mount-DiskImage solo ISO o VHD
+icono=cd_iso.png
+path_exe=PowerShell
+letter=
+param_mount=Mount-DiskImage
+param_unmount=Dismount-DiskImage
+param_extra_1=
+param_extra_2=
+command_line_mount={path_exe} {param_mount} -ImagePath \\\"{path_image}\"
+command_line_unmount={path_exe} {param_unmount} -ImagePath \\\"{path_image}\\\"
+
+[alcohol_120]
+titulo=Alcohol 120%
+icono=cd_iso.png
+path_exe=AxCmd.exe
+letter=V:
+param_mount=/M:
+param_unmount=/U
+param_extra_1=
+param_extra_2=
+command_line_mount=\"{path_exe}\" {letter} {param_mount}\"{path_image}\"
+command_line_unmount=\"{path_exe}\" {letter} {param_unmount}
+
+[daemon_tools_347]
+titulo=DAEMON Tools Lite 3.47
+icono=cd_iso.png
+path_exe=
+letter=0
+param_mount=-mount
+param_unmount=-unmount
+param_extra_1=
+param_extra_2=
+command_line_mount="\"{path_exe}\" {param_mount} {letter},\"{path_image}\" {param_extra_1} {param_extra_2}"
+command_line_unmount=\"{path_exe}\" {param_unmount} {letter}
+
+[daemon_tools]
+titulo=DAEMON Tools Lite
+icono=cd_iso.png
+path_exe=DTCommandLine.exe
+letter=V
+param_mount=--mount_to
+param_unmount=--unmount
+param_extra_1=
+param_extra_2=
+command_line_mount=\"{path_exe}\" {param_mount} --letter \"{letter}\" {param_extra_1} {param_extra_2} --path \"{path_image}\"
+command_line_unmount=\"{path_exe}\" {param_unmount} --letter \"{letter}\"
+
+[virtual_floppy_drive]
+titulo=Virtual Floppy Drive
+icono=floppy_1.png
+path_exe=
+letter=A:
+param_mount=/OPEN
+param_unmount=/CLOSE
+param_extra_1=
+param_extra_2=
+command_line_mount=\"{path_exe}\" {param_mount} {letter} \"{path_image}\" /RAM
+command_line_unmount=\"{path_exe}\" {param_unmount} {letter}

@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmAddEditVirtualDrive</class>
+ <widget class="QDialog" name="frmAddEditVirtualDrive">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>587</width>
+    <height>537</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Unidades virtuales</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <property name="leftMargin">
+    <number>4</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>4</number>
+   </property>
+   <property name="bottomMargin">
+    <number>4</number>
+   </property>
+   <item row="0" column="0" colspan="2">
+    <widget class="QGroupBox" name="gBox_datos_virtual_drive">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>Datos de la unidad virtual</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>4</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+      <item row="6" column="0">
+       <widget class="QLabel" name="lb_vd_7">
+        <property name="text">
+         <string>Parametro desmontaje</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lb_vd_0">
+        <property name="text">
+         <string>Plantilla de configuración</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="2">
+       <widget class="QLabel" name="lb_vd_9">
+        <property name="text">
+         <string>Parametro extra 2</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="3">
+       <widget class="QLineEdit" name="txtVd_etiqueta">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QComboBox" name="cbxVd_icono">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="4">
+       <widget class="QPushButton" name="btnVd_path_exe">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/carpeta_1.png</normaloff>:/img16/carpeta_1.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="lb_vd_4">
+        <property name="text">
+         <string>Icono</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="txtVd_param_mount">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="3">
+       <widget class="QComboBox" name="cbxVd_plantilla_cfg">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="lb_vd_11">
+        <property name="text">
+         <string>Linea de comando desmonstaje</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lb_vd_1">
+        <property name="text">
+         <string>Nombre</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1" colspan="3">
+       <widget class="QLineEdit" name="txtVd_command_line_unmount">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="lb_vd_6">
+        <property name="text">
+         <string>Parametro montaje</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLabel" name="lb_vd_5">
+        <property name="text">
+         <string>Letra</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QLabel" name="lb_vd_8">
+        <property name="text">
+         <string>Parametro extra 1</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lb_vd_2">
+        <property name="text">
+         <string>Etiqueta</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="4">
+       <widget class="QPushButton" name="btnVd_info">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/informacion.png</normaloff>:/img16/informacion.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3">
+       <widget class="QLineEdit" name="txtVd_param_extra_1">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="lb_vd_10">
+        <property name="text">
+         <string>Linea de comando montaje</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1" colspan="3">
+       <widget class="QLineEdit" name="txtVd_command_line_mount">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="3">
+       <widget class="QLineEdit" name="txtVd_param_extra_2">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="txtVd_param_unmount">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="3">
+       <widget class="QLineEdit" name="txtVd_path_exe">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="3">
+       <widget class="QLineEdit" name="txtVd_titulo">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="5">
+       <widget class="QPushButton" name="btnVd_path_exe_clear">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/gr-lida.qrc">
+          <normaloff>:/img16/limpiar.png</normaloff>:/img16/limpiar.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lb_vd_3">
+        <property name="text">
+         <string>Ejecutable</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLineEdit" name="txtVd_letter">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0" rowspan="2">
+    <widget class="QTreeWidget" name="twVirtualDrive">
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="rootIsDecorated">
+      <bool>false</bool>
+     </property>
+     <property name="uniformRowHeights">
+      <bool>true</bool>
+     </property>
+     <property name="allColumnsShowFocus">
+      <bool>true</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string>Nombre</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>etiqueta</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>icono</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>path_exe</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>drive</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>param_mount</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>param_unmount</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>param_extra_1</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>param_extra_2</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>command_line_mount</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>command_line_unmount</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="btnVdNew">
+       <property name="minimumSize">
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Nuevo</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/nuevo.png</normaloff>:/img16/nuevo.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnVdAdd">
+       <property name="minimumSize">
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Añadir</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/list_add.png</normaloff>:/img16/list_add.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnVdEdit">
+       <property name="minimumSize">
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Editar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/editar.png</normaloff>:/img16/editar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnVdUpdate">
+       <property name="minimumSize">
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Actualizar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/actualizar.png</normaloff>:/img16/actualizar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnVdDelete">
+       <property name="minimumSize">
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Eliminar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/list_remove.png</normaloff>:/img16/list_remove.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnVdCancel">
+       <property name="minimumSize">
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Cancelar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk">
+       <property name="minimumSize">
+        <size>
+         <width>97</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Aceptar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/aplicar.png</normaloff>:/img16/aplicar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="minimumSize">
+        <size>
+         <width>97</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Cancelar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/gr-lida.qrc">
+         <normaloff>:/img16/cancelar.png</normaloff>:/img16/cancelar.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>cbxVd_plantilla_cfg</tabstop>
+  <tabstop>txtVd_titulo</tabstop>
+  <tabstop>txtVd_etiqueta</tabstop>
+  <tabstop>btnVd_path_exe</tabstop>
+  <tabstop>txtVd_path_exe</tabstop>
+  <tabstop>btnVd_path_exe_clear</tabstop>
+  <tabstop>cbxVd_icono</tabstop>
+  <tabstop>txtVd_param_mount</tabstop>
+  <tabstop>txtVd_param_unmount</tabstop>
+  <tabstop>txtVd_param_extra_1</tabstop>
+  <tabstop>txtVd_param_extra_2</tabstop>
+  <tabstop>txtVd_command_line_mount</tabstop>
+  <tabstop>txtVd_command_line_unmount</tabstop>
+  <tabstop>btnVd_info</tabstop>
+  <tabstop>twVirtualDrive</tabstop>
+  <tabstop>btnVdNew</tabstop>
+  <tabstop>btnVdEdit</tabstop>
+  <tabstop>btnVdUpdate</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/gr-lida.qrc"/>
+ </resources>
+ <connections/>
+</ui>
