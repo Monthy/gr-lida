@@ -128,10 +128,11 @@ void frmImportarDatos::cargarEditorDatos()
 	lista.clear();
 	lista << ListDataItem(QIcon(fGrl->theme() +"img16/sinimg.png"),  "", "");
 
-	const QStringList fechas = fGrl->listaFechas();
-	const int listFechasSize = fechas.size();
-	for (int i = 0; i < listFechasSize; ++i)
-		lista << ListDataItem(QIcon(fGrl->theme() +"img16/fecha.png"), fechas.at(i), fechas.at(i));
+	// Listado de fechas desde 1970 a año actual
+	const int fecha_actual = fGrl->horaFechaActual(fGrl->getTime(), "yyyy").toInt() + 1;
+	for (int fecha = 1970; fecha < fecha_actual; ++fecha)
+		lista << ListDataItem(QIcon(fGrl->theme() +"img16/fecha.png"), fGrl->intToStr(fecha), fGrl->intToStr(fecha));
+	//--
 
 	pdat_anno = new ComboBoxProperty(p_head_dat, tr("Publicado"), lista);
 	pdat_anno->setKey("Dat_anno");

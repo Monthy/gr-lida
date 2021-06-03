@@ -168,8 +168,6 @@ public:
 	QString getTime();
 // Devuelve la hora y la fecha actual
 	QString horaFechaActual(QString fecha, QString formato = "dd/MM/yyyy HH:mm:ss");
-// Crea y devuelve un listado de fechas desde 1970 a año actual
-	QStringList listaFechas();
 // Devuelve la respuesta
 	bool questionMsg(QString titulo, QString mensaje, QString texto_btn_si = "", QString texto_btn_no = "");
 // Devuelve una forma correcta de parametros

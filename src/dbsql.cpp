@@ -201,10 +201,21 @@ QString dbSql::getTime()
 }
 
 // Convierte fecha 'dd/MM/yyyy HH:mm:ss' a formato unix
-QString dbSql::setTime(QString fecha, QString formato)
+QString dbSql::setTime(QString fecha, QString formato, bool to_unix)
 {
-	uint secs = QDateTime::fromString(fecha, formato).toTime_t();
-	return QVariant(secs).toString();
+	if (to_unix)
+	{
+		uint secs = QDateTime::fromString(fecha, formato).toTime_t();
+		return QVariant(secs).toString();
+	} else {
+		QDateTime dt;
+		dt.setTime_t(fecha.toUInt());
+
+		if (formato.isEmpty())
+			return dt.toString("dd/MM/yyyy HH:mm:ss");
+		else
+			return dt.toString(formato);
+	}
 }
 
 void dbSql::setTheme(QString theme)
@@ -2675,6 +2686,14 @@ void dbSql::cargarMenuNav(QTreeWidget *twMnuNav, QString tabla, bool isOpt)
 	int id        = twMnuNav->topLevelItemCount();
 	dir_img       = stTheme +"img16/";
 
+	// Listado de fechas desde 1970 a año actual
+	QStringList fechas;
+	const int fecha_actual = setTime(getTime(), "yyyy", false).toInt() + 1;
+	for (int fecha = 1970; fecha < fecha_actual; ++fecha)
+		fechas << QVariant(fecha).toString();
+	const int listFechasSize = fechas.size();
+	//--
+
 	query.exec("SELECT id, titulo, col_value, col_name, sql_query, archivo, img, orden, mostrar, expanded FROM dbgrl_mnu_nav ORDER BY orden ASC;");
 	if (chequearQuery(query))
 	{
@@ -2741,61 +2760,108 @@ void dbSql::cargarMenuNav(QTreeWidget *twMnuNav, QString tabla, bool isOpt)
 							else
 								col_img = 1;
 
-							if (QFile::exists(stDirApp +"datos/"+ sLng + archivo))
-								file_in.setFileName(stDirApp +"datos/"+ sLng + archivo);
-							else
-								file_in.setFileName(":/datos/"+ sLng + archivo);
-
-							if (file_in.open(QIODevice::ReadOnly | QIODevice::Text))
+							if (archivo == "fechas.txt")
 							{
-								QTextStream in(&file_in);
-								in.setCodec("UTF-8");
+								// recorre un array con las fechas.
+								QList<QTreeWidgetItem *> sub_items_;
+								for (int i = 0; i < listFechasSize; ++i)
+								{
+									titulo = fechas.at(i);
 
-								QList<QTreeWidgetItem *> sub_items;
-								do {
-									linea = in.readLine();
-									if (!linea.isEmpty())
-									{
-										lista = linea.split("|");
+								//	ui->cbxDat_anno->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), fechas.at(i), fechas.at(i));
 
-										titulo = lista.value(0);
-										if (!titulo.isEmpty())
+									tmp_col_value = col_value;
+									if (tmp_col_value == "{value}")
+										tmp_col_value = titulo;
+
+									tmp_query = sql_query;
+									tmp_query.replace("{col_value}", tmp_col_value.replace("'", "''")).replace("{col_name}", col_name);
+									img       = "fecha.png";
+
+									if (img.isEmpty())
+										img = "sinimg.png";
+
+									total_sub = getCount(tabla, tmp_query, col_name, tmp_col_value);
+									m_font.setBold((total_sub > 0) ? true : false);
+
+									QTreeWidgetItem *sub_item = new QTreeWidgetItem;
+
+									sub_item->setIcon(0, QIcon(dir_img +"sinimg.png"));
+									if (QFile::exists(dir_img + img))
+										sub_item->setIcon(0, QIcon(dir_img + img));
+
+									sub_item->setFont(1, m_font);
+									sub_item->setTextAlignment(1, Qt::AlignCenter);
+									sub_item->setText(0, titulo);
+									sub_item->setText(1, QString::number(total_sub));
+									sub_item->setText(2, tmp_query);
+									sub_item->setText(3, img);
+									sub_item->setText(4, QVariant(id).toString());
+
+									sub_items_ << sub_item;
+								}
+								item->addChildren(sub_items_);
+							} else {
+								// recorre un archivo por linea.
+
+								if (QFile::exists(stDirApp +"datos/"+ sLng + archivo))
+									file_in.setFileName(stDirApp +"datos/"+ sLng + archivo);
+								else
+									file_in.setFileName(":/datos/"+ sLng + archivo);
+
+								if (file_in.open(QIODevice::ReadOnly | QIODevice::Text))
+								{
+									QTextStream in(&file_in);
+									in.setCodec("UTF-8");
+
+									QList<QTreeWidgetItem *> sub_items;
+									do {
+										linea = in.readLine();
+
+										if (!linea.isEmpty())
 										{
-											tmp_col_value = col_value;
-											if (tmp_col_value == "{value}")
-												tmp_col_value = titulo;
+											lista = linea.split("|");
 
-											tmp_query = sql_query;
-											tmp_query.replace("{col_value}", tmp_col_value.replace("'", "''")).replace("{col_name}", col_name);
-											img       = lista.value(col_img);
+											titulo = lista.value(0);
+											if (!titulo.isEmpty())
+											{
+												tmp_col_value = col_value;
+												if (tmp_col_value == "{value}")
+													tmp_col_value = titulo;
 
-											if (img.isEmpty())
-												img = "sinimg.png";
+												tmp_query = sql_query;
+												tmp_query.replace("{col_value}", tmp_col_value.replace("'", "''")).replace("{col_name}", col_name);
+												img       = lista.value(col_img);
 
-											total_sub = getCount(tabla, tmp_query, col_name, tmp_col_value);
-											m_font.setBold((total_sub > 0) ? true : false);
+												if (img.isEmpty())
+													img = "sinimg.png";
 
-											QTreeWidgetItem *sub_item = new QTreeWidgetItem;
+												total_sub = getCount(tabla, tmp_query, col_name, tmp_col_value);
+												m_font.setBold((total_sub > 0) ? true : false);
 
-											sub_item->setIcon(0, QIcon(dir_img +"sinimg.png"));
-											if (QFile::exists(dir_img + img))
-												sub_item->setIcon(0, QIcon(dir_img + img));
+												QTreeWidgetItem *sub_item = new QTreeWidgetItem;
 
-											sub_item->setFont(1, m_font);
-											sub_item->setTextAlignment(1, Qt::AlignCenter);
-											sub_item->setText(0, titulo);
-											sub_item->setText(1, QString::number(total_sub));
-											sub_item->setText(2, tmp_query);
-											sub_item->setText(3, img);
-											sub_item->setText(4, QVariant(id).toString());
+												sub_item->setIcon(0, QIcon(dir_img +"sinimg.png"));
+												if (QFile::exists(dir_img + img))
+													sub_item->setIcon(0, QIcon(dir_img + img));
 
-											sub_items << sub_item;
+												sub_item->setFont(1, m_font);
+												sub_item->setTextAlignment(1, Qt::AlignCenter);
+												sub_item->setText(0, titulo);
+												sub_item->setText(1, QString::number(total_sub));
+												sub_item->setText(2, tmp_query);
+												sub_item->setText(3, img);
+												sub_item->setText(4, QVariant(id).toString());
+
+												sub_items << sub_item;
+											}
 										}
-									}
-								} while (!linea.isNull());
-								item->addChildren(sub_items);
+									} while (!linea.isNull());
+									item->addChildren(sub_items);
+								}
+								file_in.close();
 							}
-							file_in.close();
+
 							item->setText(6, query.record().value("expanded").toString());
 						}
 						id++;

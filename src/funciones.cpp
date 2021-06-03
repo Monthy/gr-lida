@@ -314,16 +314,6 @@ QString Funciones::horaFechaActual(QString fecha, QString formato)
 		return dt.toString(formato);
 }
 
-// Crea y devuelve un listado de fechas desde 1970 a año actual
-QStringList Funciones::listaFechas()
-{
-	QStringList fechas;
-	const int fecha_actual = horaFechaActual(getTime(), "yyyy").toInt()+1;
-	for (int fecha = 1970; fecha < fecha_actual; ++fecha)
-		fechas << intToStr(fecha);
-	return fechas;
-}
-
 bool Funciones::questionMsg(QString titulo, QString mensaje, QString texto_btn_si, QString texto_btn_no)
 {
 	texto_btn_si = texto_btn_si.isEmpty() ? tr("Si") : texto_btn_si;

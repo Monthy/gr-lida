@@ -66,7 +66,7 @@ public:
 // Devuelve el tiempo actual, formato unix
 	QString getTime();
 // Convierte fecha 'dd/MM/yyyy HH:mm:ss' a formato unix
-	QString setTime(QString fecha, QString formato = "dd/MM/yyyy HH:mm:ss");
+	QString setTime(QString fecha, QString formato = "dd/MM/yyyy HH:mm:ss", bool to_unix = true);
 
 // Cierra la base de datos
 	bool close();

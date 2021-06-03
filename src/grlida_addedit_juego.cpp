@@ -329,10 +329,11 @@ void frmAddEditJuego::cargarConfig()
 	ui->cbxDat_anno->clear();
 	ui->cbxDat_anno->addItem(QIcon(fGrl->theme() +"img16/sinimg.png"), "", "");
 
-	const QStringList fechas = fGrl->listaFechas();
-	const int listFechasSize = fechas.size();
-	for (int i = 0; i < listFechasSize; ++i)
-		ui->cbxDat_anno->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), fechas.at(i), fechas.at(i));
+	// Listado de fechas desde 1970 a año actual
+	const int fecha_actual = fGrl->horaFechaActual(fGrl->getTime(), "yyyy").toInt() + 1;
+	for (int fecha = 1970; fecha < fecha_actual; ++fecha)
+		ui->cbxDat_anno->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), fGrl->intToStr(fecha), fGrl->intToStr(fecha));
+	//--
 	ui->cbxDat_anno->setCurrentIndex(0);
 
 	fGrl->cargarDatosComboBox(ui->cbxDat_edad_recomendada, grlDir.Datos + fGrl->idioma() +"/edad_recomendada.txt", "img16/", "nd", 3, "|");
