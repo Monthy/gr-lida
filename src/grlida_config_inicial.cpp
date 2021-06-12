@@ -194,36 +194,43 @@ void frmConfigInicial::on_btnOk_clicked()
 {
 	if (new_dbx_default)
 	{
-		stGrlDatos dbx_datos;
-		dbx_datos.titulo  = "DOSBox";
-		dbx_datos.icono   = "cat/dosbox.png";
-		dbx_datos.extra   = ui->txtDbxPath->text();
-		dbx_datos.issvn   = "no";
-		dbx_datos.version = "0.74-2";
-		dbx_datos.key     = "dosbox";
+		if (!ui->txtDbxPath->text().isEmpty() && QFile(ui->txtDbxPath->text()).exists())
+		{
+			stGrlDatos dbx_datos;
+			dbx_datos.titulo  = "DOSBox";
+			dbx_datos.icono   = "cat/dosbox.png";
+			dbx_datos.extra   = ui->txtDbxPath->text();
+			dbx_datos.issvn   = "no";
+			dbx_datos.version = "0.74-2";
+			dbx_datos.key     = "dosbox";
 
-		dbx_list << dbx_datos;
+			dbx_list << dbx_datos;
+		}
 	} else
 		dbx_list[id_key_dbx].extra = ui->txtDbxPath->text();
 
-	QFile file_out;
-	file_out.setFileName(grlDir.Datos +"dbx_list.txt");
-	fGrl->comprobarDirectorio(grlDir.Datos);
-
-	if (file_out.open(QIODevice::WriteOnly | QIODevice::Text))
+	const int listSize = dbx_list.size();
+	if (listSize > 0)
 	{
-		QTextStream out(&file_out);
-		out.setCodec("UTF-8");
-		const int listSize = dbx_list.size();
-		if (listSize > 0)
+		QFile file_out;
+		file_out.setFileName(grlDir.Datos +"dbx_list.txt");
+		fGrl->comprobarDirectorio(grlDir.Datos);
+
+		if (file_out.open(QIODevice::WriteOnly | QIODevice::Text))
 		{
-			id_key_dbx = 0;
-			for (int i = 0; i < listSize; ++i)
-				out << dbx_list.at(i).titulo << "|" << dbx_list.at(i).key << "|" << dbx_list.at(i).extra << "|" << dbx_list.at(i).icono << "|" << dbx_list.at(i).version << "|" << dbx_list.at(i).issvn << endl;
+			QTextStream out(&file_out);
+			out.setCodec("UTF-8");
+			const int listSize = dbx_list.size();
+			if (listSize > 0)
+			{
+				id_key_dbx = 0;
+				for (int i = 0; i < listSize; ++i)
+					out << dbx_list.at(i).titulo << "|" << dbx_list.at(i).key << "|" << dbx_list.at(i).extra << "|" << dbx_list.at(i).icono << "|" << dbx_list.at(i).version << "|" << dbx_list.at(i).issvn << endl;
+			}
+			out.flush();
 		}
-		out.flush();
+		file_out.close();
 	}
-	file_out.close();
 
 	grlCfg.DOSBoxDisp   = ui->chkDOSBoxDisp->isChecked();
 	grlCfg.ScummVMDisp  = ui->chkScummVMDisp->isChecked();
