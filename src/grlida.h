@@ -70,7 +70,7 @@ private:
 
 	Funciones *fGrl;
 	dbSql *sql;
-	QProcess *grlProcess;
+	QProcess *grlProcess, *grlProcessMount;
 	GrlMultiMedia *mediaSound, *mediaVideo;
 	GrDap *grdap;
 	frmPdfViewer *pdfViewer;
@@ -95,7 +95,7 @@ private:
 	QString IdGame, TipoEmu, tpl_info_game_old, tpl_info_game_empty_old;
 	QFileSystemWatcher fs_watcher;
 	QString CoverFront, CoverBack, pathCapturas, pathImagenes, pathVideos, pathSonidos;
-	QString sql_where_select;
+	QString sql_where_select, pathImageSelect, mount_image_select, unmount_image_select;
 	QString iconExtraImg;
 	QImage img_pf_favorite, img_pf_favorite_gray, img_pf_original, img_pf_original_gray;
 	QImage icono_fav, icono_fav_gray;
@@ -113,13 +113,17 @@ private:
 	QMap<QString, stGrlDatos> emu_list;
 	QList<stGrlDatos> list_emu;
 
+	stVirtualDrive virtualDrive;
+	QHash<QString, stVirtualDrive> virtual_drive_list;
+	QHash<QString, QString> conf_vd;
+
 // StatusBar
-	QLabel *lb_panel_1, *lb_panel_2, *lb_panel_3, *lb_panel_4, *lb_panel_5, *lb_panel_6;
+	QLabel *lb_panel_1, *lb_panel_2, *lb_panel_3, *lb_panel_4, *lb_panel_5, *lb_panel_6, *lb_panel_7;
 
 // Tray icon
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu, *ljMenuPopUp;
-	bool isTrayIcon, isPicFlowActive, isSelectRow, isItemChanged, isNavItemChanged;
+	bool isTrayIcon, isPicFlowActive, isSelectRow, isItemChanged, isNavItemChanged, isMountImage, isAutoMountImageExe;
 	bool isImportar, isOpenGrDap, isOpenPdf, isUpdateMenu;
 
 	void conectarBaseDatos();
@@ -169,8 +173,12 @@ private:
 	void setCurrentItem(int index);
 	void cargarConfigEmu(QString tipo_emu = "");
 	void comprobarEmuloresDisp();
+	void ejecutar_desmontaje();
 
 	void ejecutar(QString bin, QString parametros = "", QString working_dir = "");
+	void montaje(QString bin, QString parametros = "", QString working_dir = "");
+
+	void error_msg_Proceso(QProcess::ProcessError error);
 
 private slots:
 	void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
@@ -197,8 +205,10 @@ private slots:
 	void on_mnu_ejecutar_scummvm_triggered();
 	void on_mnu_ejecutar_juego_triggered();
 	void on_mnu_ejecutar_setup_triggered();
+	void on_mnu_ejecutar_montaje_triggered();
 // Menú herramientas
 	void on_mnu_tool_instalar_triggered();
+	void on_mnu_tool_virtual_drive_triggered();
 	void on_mnu_tool_importar_triggered();
 	void on_mnu_tool_exportar_triggered();
 	void on_mnu_tool_cambiar_categoria_triggered();
@@ -350,14 +360,14 @@ private slots:
 	void dockw_PictureFlow_toggled(bool visible);
 // Procesos
 	void fin_Proceso(int exitCode, QProcess::ExitStatus exitStatus);
+	void fin_ProcesoMount(int exitCode, QProcess::ExitStatus exitStatus);
+	//void fin_ProcesoMountEjecutar();
 	void error_Proceso(QProcess::ProcessError error);
-
-
+	void error_ProcesoMount(QProcess::ProcessError error);
 
 //	void sliderRange(int min, int max);
 //	void on_btnLeftSc_triggered();
 //	void on_btnRightSc_triggered();
-
 
 };
 

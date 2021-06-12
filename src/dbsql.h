@@ -66,14 +66,14 @@ public:
 // Devuelve el tiempo actual, formato unix
 	QString getTime();
 // Convierte fecha 'dd/MM/yyyy HH:mm:ss' a formato unix
-	QString setTime(QString fecha, QString formato = "dd/MM/yyyy HH:mm:ss");
+	QString setTime(QString fecha, QString formato = "dd/MM/yyyy HH:mm:ss", bool to_unix = true);
 
 // Cierra la base de datos
 	bool close();
 // Retorna si esta abierta o no la base de datos
 	bool dbisOpen();
 // Muestra una ventana de información
-	void ventanaInfo(QString titulo, QString icono, int w, int h, QString contenido, bool isTextoPlano = true);
+	void ventanaInfo(QString titulo, QString icono, int w, int h, QString contenido, bool isTextoPlano);
 // Comprueba si el Query se ha ejecutado bien
 	bool chequearQuery(QSqlQuery &query);
 	bool eliminarItemTable(QString tabla, QString Id);

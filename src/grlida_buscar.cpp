@@ -42,7 +42,7 @@ frmBuscar::frmBuscar(QString f_text, QString f_ext, QString f_sel, QString m_the
 	setTheme();
 
 	ui->cbx_drivers->clear();
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	f_texto.append(f_ext);
 	QFileInfoList list_drives = QDir::drives();
 	for (int i = 0; i < list_drives.size(); ++i)

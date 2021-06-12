@@ -61,14 +61,45 @@ void GrlListViewDelegate::setTheme(stLwIconCfg m_lwConf, QString dir_theme)
 	pen = QApplication::palette().text().color();
 }
 
+// Seudo Sombra. Representacion de sombra
+void GrlListViewDelegate::paintShadow(QPainter *painter, QPen m_pen, int x, int y, int w, int h, int a) const
+{
+	int r = 0; int g = 0; int b = 0;
+	r = qRed(m_pen.color().rgb());
+	g = qGreen(m_pen.color().rgb());
+	b = qBlue(m_pen.color().rgb());
+
+	m_pen.setStyle(Qt::SolidLine);
+	m_pen.setBrush(QColor(r, g, b, 60 + a));
+	painter->setRenderHint(QPainter::Antialiasing, true);
+	painter->setPen(m_pen);
+//	painter->drawRect(QRectF(x, y, w, h));
+	painter->drawRoundedRect(x, y, w, h, 2, 2);
+
+	m_pen.setBrush(QColor(r, g, b, 45 + a));
+	painter->setPen(m_pen);
+//	painter->drawRect(QRectF(x - 1, y - 1, w + 2, h + 2));
+	painter->drawRoundedRect(x - 1, y - 1, w + 2, h, 2, 2);
+
+	m_pen.setBrush(QColor(r, g, b, 30 + a));
+	painter->setPen(m_pen);
+//	painter->drawRect(QRectF(x - 2, y - 2, w + 4, h + 4));
+	painter->drawRoundedRect(x - 2, y - 2, w + 4, h, 2, 2);
+
+	m_pen.setBrush(QColor(r, g, b, 18 + a));
+	painter->setPen(m_pen);
+//	painter->drawRect(QRectF(x - 3, y - 3, w + 6, h + 6));
+	painter->drawRoundedRect(x - 3, y - 3, w + 6, h, 2, 2);
+
+	painter->setRenderHint(QPainter::Antialiasing, false);
+}
+
 void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
 		const QModelIndex &index) const
 {
 	int rect_x = option.rect.x();
 	int rect_y = option.rect.y();
-	int icon_x_offset, icon_y_offset = 0;
 	QStyledItemDelegate::paint(painter, option, index);
-
 	QPen pen_lines = pen;
 	pen_lines.setStyle(Qt::DashLine);
 
@@ -85,32 +116,68 @@ void GrlListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 		painter->drawRect(rect_x, rect_y, lwConf.icon_width, lwConf.icon_height);
 	}
 
-// Dibujamos carátula top
-	if (lwConf.item[stItem].img_cover_top_zindex)
-	{
-		if (option.state & QStyle::State_Selected)
-			painter->drawPixmap(QPointF(rect_x + lwConf.item[stItem].img_cover_top_pos_x, rect_y + lwConf.item[stItem].img_cover_top_pos_y), lwConf.item[stItem].img_cover_top_select);
-		else
-			painter->drawPixmap(QPointF(rect_x + lwConf.item[stItem].img_cover_top_pos_x, rect_y + lwConf.item[stItem].img_cover_top_pos_y), lwConf.item[stItem].img_cover_top);
-	}
-
-// Dibujamos la carátula.
+	int pos_x, pos_y, icon_width, icon_height;
 	QPixmap icon = qvariant_cast<QPixmap>(index.sibling(index.row(), col_IdGrl).data(ThumbsRole));
-	if (lwConf.item[stItem].img_scaled) {
-		icon = icon.scaled(lwConf.item[stItem].img_scale_w, lwConf.item[stItem].img_scale_h, Qt::KeepAspectRatio);
-		icon_x_offset = (lwConf.item[stItem].img_scale_w - icon.width()) / 2;
-		icon_y_offset = (lwConf.item[stItem].img_scale_h - icon.height()) / 2;
-	}
-	painter->drawPixmap(QPointF(rect_x + lwConf.item[stItem].img_scale_pos_x + icon_x_offset, rect_y + lwConf.item[stItem].img_scale_pos_y + icon_y_offset), icon);
 
-// Dibujamos carátula top
-	if (!lwConf.item[stItem].img_cover_top_zindex)
+	if (lwConf.item[stItem].img_scaled)
 	{
-		if (option.state & QStyle::State_Selected)
-			painter->drawPixmap(QPointF(rect_x + lwConf.item[stItem].img_cover_top_pos_x, rect_y + lwConf.item[stItem].img_cover_top_pos_y), lwConf.item[stItem].img_cover_top_select);
-		else
-			painter->drawPixmap(QPointF(rect_x + lwConf.item[stItem].img_cover_top_pos_x, rect_y + lwConf.item[stItem].img_cover_top_pos_y), lwConf.item[stItem].img_cover_top);
+		icon_width  = lwConf.item[stItem].img_scale_w;
+		icon_height = lwConf.item[stItem].img_scale_h;
+
+		pos_x = (lwConf.icon_width / 2) - (icon_width / 2) + lwConf.item[stItem].img_pos_x;
+		pos_y = lwConf.icon_height - icon_height - lwConf.item[stItem].img_pos_y;
+	} else {
+		icon_width  = icon.width();
+		icon_height = icon.height();
+
+		pos_x = (lwConf.icon_width / 2) - (icon_width / 2) + lwConf.item[stItem].img_pos_x;
+		pos_y = lwConf.icon_height - icon.height() - lwConf.item[stItem].img_pos_y;
 	}
+
+	if (lwConf.item[stItem].img_cover_top_bg)
+	{
+		int cover_top_pos_x = (lwConf.icon_width / 2) - (lwConf.item[stItem].img_cover_top.width() / 2) + lwConf.item[stItem].img_cover_top_pos_x;
+		int cover_top_pos_y = lwConf.icon_height - lwConf.item[stItem].img_cover_top.height() - lwConf.item[stItem].img_cover_top_pos_y;
+
+		// Dibujamos la carátula.
+		if (lwConf.item[stItem].img_cover_top_zindex)
+			painter->drawPixmap(rect_x + pos_x, rect_y + pos_y, icon_width, icon_height, icon);
+
+		if (option.state & QStyle::State_Selected)
+			painter->drawPixmap(rect_x + cover_top_pos_x, rect_y + cover_top_pos_y, lwConf.item[stItem].img_cover_top_select);
+		else
+			painter->drawPixmap(rect_x + cover_top_pos_x, rect_y + cover_top_pos_y, lwConf.item[stItem].img_cover_top);
+
+		if (option.state & QStyle::State_MouseOver)
+			painter->drawPixmap(rect_x + cover_top_pos_x, rect_y + cover_top_pos_y, lwConf.item[stItem].img_cover_top_select);
+
+		// Dibujamos la carátula.
+		if (!lwConf.item[stItem].img_cover_top_zindex)
+			painter->drawPixmap(rect_x + pos_x, rect_y + pos_y, icon_width, icon_height, icon);
+	} else {
+		if (option.state & QStyle::State_Selected)
+			pen_lines.setColor(lwConf.item[stItem].img_border_color_select.color());
+		else
+			pen_lines.setColor(lwConf.item[stItem].img_border_color.color());
+
+		// Dibujamos la seudo sombra.
+		paintShadow(painter, pen_lines, rect_x + pos_x, rect_y + pos_y, icon_width, icon_height, lwConf.item[stItem].img_border_color_alpha);
+
+		if (option.state & QStyle::State_MouseOver)
+			paintShadow(painter, pen_lines, rect_x + pos_x, rect_y + pos_y, icon_width, icon_height, lwConf.item[stItem].img_border_color_alpha);
+
+		// Dibujamos la carátula.
+		painter->drawPixmap(rect_x + pos_x, rect_y + pos_y, icon_width, icon_height, icon);
+
+		// Dibujamos tapa superior.
+		if (option.state & QStyle::State_Selected)
+			painter->drawPixmap(rect_x + pos_x, rect_y + pos_y, icon_width, icon_height, lwConf.item[stItem].img_cover_top_select);
+		else
+			painter->drawPixmap(rect_x + pos_x, rect_y + pos_y, icon_width, icon_height, lwConf.item[stItem].img_cover_top);
+	}
+
+	pen_lines.setStyle(Qt::DashLine);
+	painter->setPen(pen_lines);
 
 // Dibujamos el fondo del título
 	if (lwConf.item[stItem].title_bg_show)

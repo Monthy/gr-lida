@@ -55,7 +55,8 @@ private:
 // Property Editor DOSBox
 	StringProperty     *pdbx_mixer_blocksize, *pdbx_mixer_prebuffer, *pdbx_midi_config, *pdbx_gus_ultradir;
 	StringProperty     *pdbx_serial_1, *pdbx_serial_2, *pdbx_serial_3, *pdbx_serial_4, *pdbx_ipx_ip;
-	StringProperty     *pdbx_autoexec, *pdbx_parametros_exe, *pdbx_parametros_setup, *pdbx_modem_irq;
+	StringProperty     *pdbx_autoexec, *pdbx_autoexec_ini, *pdbx_autoexec_fin, *pdbx_autoexec_ini_exe, *pdbx_autoexec_fin_exe;
+	StringProperty     *pdbx_parametros_exe, *pdbx_parametros_setup, *pdbx_modem_irq;
 	IntegerProperty    *pdbx_cpu_cycleup, *pdbx_cpu_cycledown, *pdbx_modem_listenport, *pdbx_ipx_port, *pdbx_opt_loadfix_mem;
 	BoolProperty       *pdbx_sdl_fullscreen, *pdbx_sdl_fulldouble, *pdbx_sdl_fullfixed, *pdbx_sdl_autolock;
 	BoolProperty       *pdbx_sdl_waitonerror, *pdbx_sdl_usescancodes, *pdbx_render_aspect, *pdbx_mixer_nosound;

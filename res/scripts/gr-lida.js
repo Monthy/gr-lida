@@ -231,6 +231,8 @@ function AnalyzeGamePage(texto, local)
 		m_array["Dbx_ipx_ip"]                = AnalyzeTagName(texto, "<Dbx_ipx_ip>([^\"<>]*)</Dbx_ipx_ip>", "");
 	// [autoexec]
 		m_array["Dbx_autoexec"]              = AnalyzeTagName(texto, "<Dbx_autoexec>([^\"<>]*)</Dbx_autoexec>", "");
+		m_array["Dbx_autoexec_ini"]          = AnalyzeTagName(texto, "<Dbx_autoexec_ini>([^\"<>]*)</Dbx_autoexec_ini>", "");
+		m_array["Dbx_autoexec_fin"]          = AnalyzeTagName(texto, "<Dbx_autoexec_fin>([^\"<>]*)</Dbx_autoexec_fin>", "");
 	// Opciones
 		m_array["Dbx_opt_autoexec"]          = AnalyzeTagName(texto, "<Dbx_opt_autoexec>([^\"<>]*)</Dbx_opt_autoexec>", "");
 		m_array["Dbx_opt_loadfix"]           = AnalyzeTagName(texto, "<Dbx_opt_loadfix>([^\"<>]*)</Dbx_opt_loadfix>", "");

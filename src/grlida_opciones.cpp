@@ -53,6 +53,7 @@ frmOpciones::frmOpciones(dbSql *m_sql, stGrlCfg m_cfg, QWidget *parent) :
 	grlCfg.isChangedListDOSBox     = false;
 	grlCfg.isChangedShortcut       = false;
 	grlCfg.isChangedFavorito       = false;
+	grlCfg.isChangedVirtualDrive   = false;
 
 	grlDir.Home       = fGrl->dirApp();
 	grlDir.Datos      = grlDir.Home +"datos/";
@@ -168,6 +169,7 @@ void frmOpciones::cargarConfig()
 	ui->chkComprobarVersionGrl->setChecked(grlCfg.chkVersion);
 	ui->chkShowNext->setChecked(grlCfg.Primeravez);
 	ui->chkOpenPdfExternal->setChecked(grlCfg.OpenPdfExternal);
+	ui->chkAutoMountImageExe->setChecked(grlCfg.AutoMountImageExe);
 
 // Actualizaciones -------------------
 	ui->cbxUpdateInterval->clear();
@@ -598,6 +600,7 @@ void frmOpciones::guardarConfig()
 	grlCfg.VDMSoundDisp        = ui->chkVDMSoundDisp->isChecked();
 	grlCfg.isChangedIdioma     = IdiomaSelect != grlCfg.IdiomaSelect ? true : false;
 	grlCfg.OpenPdfExternal     = ui->chkOpenPdfExternal->isChecked();
+	grlCfg.AutoMountImageExe   = ui->chkAutoMountImageExe->isChecked();
 	grlCfg.url_xmldb           = ui->cbxScriptURL->itemData(ui->cbxScriptURL->currentIndex()).toString();
 	grlCfg.FormatoFecha        = ui->txtFormatoFecha->text().isEmpty() ? "dd/MM/yyyy HH:mm:ss" : ui->txtFormatoFecha->text();
 	grlCfg.isChangedToolbarBigIcon = grlCfg.ToolbarBigIcon == ui->chkToolbarBigIcon->isChecked() ? false : true;
@@ -739,6 +742,8 @@ void frmOpciones::setTheme()
 	ui->btnExtMusicDelete->setIcon(QIcon(fGrl->theme() +"img16/list_remove.png"));
 	ui->btnExtImageAdd->setIcon(QIcon(fGrl->theme() +"img16/list_add.png"));
 	ui->btnExtImageDelete->setIcon(QIcon(fGrl->theme() +"img16/list_remove.png"));
+// Templates
+	tpl_info_formato_fecha_old = fGrl->tplInfoJuego("tpl_info");
 
 	emit on_chkUsarTipoFuente_clicked(grlCfg.font_usar);
 }
@@ -754,7 +759,7 @@ void frmOpciones::cargarListaThemes()
 	QStringList list_themes = dir.entryList(QDir::NoDotAndDotDot | QDir::AllDirs);
 	list_themes.insert(0, "defecto");
 
-	ui->lb_theme_example->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+	ui->lb_theme_example->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", 200, 128, false, true));
 
 	ui->twThemes->clear();
 	const int list_themesSize = list_themes.size();
@@ -786,7 +791,7 @@ void frmOpciones::cargarListaThemes()
 			index = i;
 
 			if (QFile::exists(grlDir.Themes + list_themes.at(i) +"/preview.png"))
-				ui->lb_theme_example->setPixmap(QPixmap(grlDir.Themes + list_themes.at(i) +"/preview.png"));
+				ui->lb_theme_example->setPixmap(fGrl->crearThumbs(grlDir.Themes + list_themes.at(i) +"/preview.png", 200, 128, false, true));
 		}
 	}
 
@@ -1040,115 +1045,120 @@ void frmOpciones::on_txtFormatoFecha_textEdited(const QString &arg1)
 
 void frmOpciones::on_btnInfoFormatoFecha_clicked()
 {
-	sql->ventanaInfo(tr("Información sobre el formato de la fecha y hora"), "informacion.png", 500, 400,
+	QString tpl_info_formato_fecha_new = tpl_info_formato_fecha_old;
+
+	tpl_info_formato_fecha_new.replace("{info_titulo}", tr("Información sobre el formato de la fecha y hora"));
+	tpl_info_formato_fecha_new.replace("{info_contenido}",
 		tr("Devuelve una cadena con formato de acuerdo a la cadena de formato dada.") +"<br>"+
 		tr("Lista básica de parámetros:") +"<br>"
-		"<table border=\"0\" align=\"center\" cellspacing=\"1\" cellpadding=\"2\">"
+		"<table border=\"0\" align=\"center\" cellspacing=\"1\" cellpadding=\"2\" class=\"main\">"
 		"  <thead>"
 		"    <tr>"
-		"      <td class=\"row_header\"><p align=\"center\">"+ tr("Expresión") +"</p></td>"
-		"      <td class=\"row_header\"><p align=\"center\">"+ tr("Salida") +"</p></td>"
+		"      <td><p align=\"center\">"+ tr("Expresión") +"</p></td>"
+		"      <td><p align=\"center\">"+ tr("Salida") +"</p></td>"
 		"    </tr>"
 		"  </thead>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>d</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("Día del mes sin ceros iniciales (1 a 31).") +"</p></td>"
+		"    <td><p>d</p></td>"
+		"    <td><p>"+ tr("Día del mes sin ceros iniciales (1 a 31).") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>dd</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("Día del mes, 2 dígitos con ceros iniciales (01 a 31).") +"</p></td>"
+		"    <td><p>dd</p></td>"
+		"    <td><p>"+ tr("Día del mes, 2 dígitos con ceros iniciales (01 a 31).") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>ddd</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("Una representación textual de un día, tres letras (e.j. 'Lun' a 'Dom').") +"</p></td>"
+		"    <td><p>ddd</p></td>"
+		"    <td><p>"+ tr("Una representación textual de un día, tres letras (e.j. 'Lun' a 'Dom').") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>dddd</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("Una representación textual completa del día de la semana (e.j. 'Lunes' a 'Domingo').") +"</p></td>"
+		"    <td><p>dddd</p></td>"
+		"    <td><p>"+ tr("Una representación textual completa del día de la semana (e.j. 'Lunes' a 'Domingo').") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>M</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("Representación numérica de un mes, sin ceros iniciales (1-12).") +"</p></td>"
+		"    <td><p>M</p></td>"
+		"    <td><p>"+ tr("Representación numérica de un mes, sin ceros iniciales (1-12).") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>MM</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("Representación numérica de un mes, con ceros iniciales (01-12).") +"</p></td>"
+		"    <td><p>MM</p></td>"
+		"    <td><p>"+ tr("Representación numérica de un mes, con ceros iniciales (01-12).") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>MMM</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("Una representación textual corta de un mes, tres letras (e.j. 'Ene' a 'Dic').") +"</p></td>"
+		"    <td><p>MMM</p></td>"
+		"    <td><p>"+ tr("Una representación textual corta de un mes, tres letras (e.j. 'Ene' a 'Dic').") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>MMMM</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("Una representación textual completa de un mes, como Enero o Marzo (e.j. 'Enero' a 'Diciembre').") +"</p></td>"
+		"    <td><p>MMMM</p></td>"
+		"    <td><p>"+ tr("Una representación textual completa de un mes, como Enero o Marzo (e.j. 'Enero' a 'Diciembre').") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>yy</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("Una representación de dos dígitos de un año (00-99).") +"</p></td>"
+		"    <td><p>yy</p></td>"
+		"    <td><p>"+ tr("Una representación de dos dígitos de un año (00-99).") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>yyyy</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("Una representación numérica completa de un año, 4 dígitos.") +"</p></td>"
+		"    <td><p>yyyy</p></td>"
+		"    <td><p>"+ tr("Una representación numérica completa de un año, 4 dígitos.") +"</p></td>"
 		"  </tr>"
 		"</table>"
 		"<br><br>"+ tr("Estas expresiones pueden ser utilizadas para el tiempo.") +"<br>"
 		"<table border=\"0\" align=\"center\" cellspacing=\"1\" cellpadding=\"2\">"
 		"  <thead>"
 		"    <tr>"
-		"      <td class=\"row_header\"><p align=\"center\">"+ tr("Expresión") +"</p></td>"
-		"      <td class=\"row_header\"><p align=\"center\">"+ tr("Salida") +"</p></td>"
+		"      <td><p align=\"center\">"+ tr("Expresión") +"</p></td>"
+		"      <td><p align=\"center\">"+ tr("Salida") +"</p></td>"
 		"    </tr>"
 		"  </thead>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>h</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("La hora sin ceros iniciales (0 a 23 o 1 a 12 si AM/PM display)") +"</p></td>"
+		"    <td><p>h</p></td>"
+		"    <td><p>"+ tr("La hora sin ceros iniciales (0 a 23 o 1 a 12 si AM/PM display)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>hh</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("La hora con ceros iniciales (00 a 23 o de 01 a 12 si AM/PM display)") +"</p></td>"
+		"    <td><p>hh</p></td>"
+		"    <td><p>"+ tr("La hora con ceros iniciales (00 a 23 o de 01 a 12 si AM/PM display)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>H</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("La hora sin ceros iniciales (0 a 23, incluso con AM/PM display)") +"</p></td>"
+		"    <td><p>H</p></td>"
+		"    <td><p>"+ tr("La hora sin ceros iniciales (0 a 23, incluso con AM/PM display)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>HH</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("La hora con un cero (00 a 23, incluso con AM/PM display)") +"</p></td>"
+		"    <td><p>HH</p></td>"
+		"    <td><p>"+ tr("La hora con un cero (00 a 23, incluso con AM/PM display)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>m</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("Los minutos sin ceros iniciales (0 a 59)") +"</p></td>"
+		"    <td><p>m</p></td>"
+		"    <td><p>"+ tr("Los minutos sin ceros iniciales (0 a 59)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>mm</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("Los minutos con ceros iniciales (00 a 59)") +"</p></td>"
+		"    <td><p>mm</p></td>"
+		"    <td><p>"+ tr("Los minutos con ceros iniciales (00 a 59)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>s</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("Los segundos sin ceros iniciales (0 a 59)") +"</p></td>"
+		"    <td><p>s</p></td>"
+		"    <td><p>"+ tr("Los segundos sin ceros iniciales (0 a 59)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>ss</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("Los segundos con ceros iniciales (00 a 59)") +"</p></td>"
+		"    <td><p>ss</p></td>"
+		"    <td><p>"+ tr("Los segundos con ceros iniciales (00 a 59)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>z</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("Los milisegundos sin ceros iniciales (0 a 999)") +"</p></td>"
+		"    <td><p>z</p></td>"
+		"    <td><p>"+ tr("Los milisegundos sin ceros iniciales (0 a 999)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>zzz</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("Los milisegundos con ceros iniciales (000 a 999)") +"</p></td>"
+		"    <td><p>zzz</p></td>"
+		"    <td><p>"+ tr("Los milisegundos con ceros iniciales (000 a 999)") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_1\"><p>AP or A</p></td>"
-		"    <td class=\"row_1\"><p>"+ tr("Interpretar como un AM/PM del tiempo. AP debe ser \"AM\" o \"PM\".") +"</p></td>"
+		"    <td><p>AP or A</p></td>"
+		"    <td><p>"+ tr("Interpretar como un AM/PM del tiempo. AP debe ser \"AM\" o \"PM\".") +"</p></td>"
 		"  </tr>"
 		"  <tr>"
-		"    <td class=\"row_2\"><p>ap or a</p></td>"
-		"    <td class=\"row_2\"><p>"+ tr("Interpretar como un AM/PM del tiempo. AP debe ser \"am\" o \"pm\".") +"</p></td>"
+		"    <td><p>ap or a</p></td>"
+		"    <td><p>"+ tr("Interpretar como un AM/PM del tiempo. AP debe ser \"am\" o \"pm\".") +"</p></td>"
 		"  </tr>"
-		"</table>", false
+		"</table>"
 	);
+
+	sql->ventanaInfo(tr("Información sobre el formato de la fecha y hora"), "informacion.png", 500, 400, tpl_info_formato_fecha_new, false);
 }
 
 // Emuladores ---------------------------------------
@@ -1492,7 +1502,7 @@ void frmOpciones::addEditTwEmus(bool isAdd)
 			ui->twEmus->setCurrentItem(item, 0);
 
 			if (isAdd)
-				ui->twEmus->addTopLevelItem(item);;
+				ui->twEmus->addTopLevelItem(item);
 
 			fGrl->guardarDatosTwLista(ui->twEmus, grlDir.Datos +"emu_list.txt", TwListEmu);
 			grlCfg.isChangedEmuList = true;
@@ -2758,14 +2768,14 @@ void frmOpciones::on_twThemes_itemClicked(QTreeWidgetItem *item, int column)
 		fGrl->setTheme(grlCfg.NameDirTheme);
 
 		if (QFile::exists(fGrl->theme() +"preview.png"))
-			ui->lb_theme_example->setPixmap(QPixmap(fGrl->theme() +"preview.png"));
+			ui->lb_theme_example->setPixmap(fGrl->crearThumbs(fGrl->theme() +"preview.png", 200, 128, false, true));
 		else
-			ui->lb_theme_example->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+			ui->lb_theme_example->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", 200, 128, false, true));
 
 		cargarConfig();
 		setTheme();
 	} else
-		ui->lb_theme_example->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+		ui->lb_theme_example->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", 200, 128, false, true));
 }
 
 void frmOpciones::on_twThemes_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)

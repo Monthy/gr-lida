@@ -28,6 +28,7 @@
 #include <QPainter>
 
 #include "grlida_addedit_juego.h"
+#include "grlida_compatibilidad_exe.h"
 #include "ui_addedit_juego.h"
 
 frmAddEditJuego::frmAddEditJuego(dbSql *m_sql, stGrlCfg m_cfg, stGrlCats m_categoria, QString id_game, QString tipo_emu, bool m_editando, QWidget *parent) :
@@ -193,11 +194,23 @@ void frmAddEditJuego::createWidgets()
 	ui->gLayout_mediaVideo->addWidget(mediaVideo, 0, 0, 3, 1);
 	ui->gLayout_mediaVideo->addWidget(ui->btnDat_videos_add, 0, 1, 1, 1);
 	ui->gLayout_mediaVideo->addWidget(ui->btnDat_videos_eliminar, 1, 1, 1, 1);
+
+
+#ifdef Q_OS_WIN
+	ui->btnDat_path_exe_compatibilidad->setVisible(true);
+	ui->btnDat_path_setup_compatibilidad->setVisible(true);
+#else
+	ui->btnDat_path_exe_compatibilidad->setVisible(false);
+	ui->btnDat_path_setup_compatibilidad->setVisible(false);
+#endif
 }
 
 void frmAddEditJuego::cargarConfig()
 {
-	ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, false);
+	ui->gBoxDatos_Exe->setEnabled(true);
+	ui->gBoxDatos_Setup->setEnabled(true);
+
+	ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, true);
 	ui->tabw_Datos->setTabEnabled(tabDOSBox  , false);
 	ui->tabw_Datos->setTabEnabled(tabScummVM , false);
 	ui->tabw_Datos->setTabEnabled(tabVDMSound, false);
@@ -265,6 +278,14 @@ void frmAddEditJuego::cargarConfig()
 	ui->twDatosParametrosSetup->setColumnWidth(0, 220);
 	ui->twDatosParametrosSetup->setColumnWidth(1, 220);
 
+	cargarVirtualDriveList();
+
+#ifdef Q_OS_WIN
+	ui->gBoxDatos_Mount->setEnabled(true);
+#else
+	ui->gBoxDatos_Mount->setEnabled(false);
+#endif
+
 // Configuración del twDatosFiles
 	ui->twDatosFiles->header()->setStretchLastSection(true);
 #if QT_VERSION >= 0x050000
@@ -329,10 +350,11 @@ void frmAddEditJuego::cargarConfig()
 	ui->cbxDat_anno->clear();
 	ui->cbxDat_anno->addItem(QIcon(fGrl->theme() +"img16/sinimg.png"), "", "");
 
-	const QStringList fechas = fGrl->listaFechas();
-	const int listFechasSize = fechas.size();
-	for (int i = 0; i < listFechasSize; ++i)
-		ui->cbxDat_anno->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), fechas.at(i), fechas.at(i));
+	// Listado de fechas desde 1970 a año actual
+	const int fecha_actual = fGrl->horaFechaActual(fGrl->getTime(), "yyyy").toInt() + 1;
+	for (int fecha = 1970; fecha < fecha_actual; ++fecha)
+		ui->cbxDat_anno->addItem(QIcon(fGrl->theme() +"img16/fecha.png"), fGrl->intToStr(fecha), fGrl->intToStr(fecha));
+	//--
 	ui->cbxDat_anno->setCurrentIndex(0);
 
 	fGrl->cargarDatosComboBox(ui->cbxDat_edad_recomendada, grlDir.Datos + fGrl->idioma() +"/edad_recomendada.txt", "img16/", "nd", 3, "|");
@@ -585,6 +607,11 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 	ui->txtDat_usuario->setText(datos.usuario);
 	ui->txtDat_path_exe->setText(datos.path_exe);
 	ui->txtDat_path_setup->setText(datos.path_setup);
+	ui->txtDat_path_image->setText(datos.path_image);
+
+	int row_vd = ui->cbx_virtual_drive->findData(datos.virtual_drive, Qt::UserRole, Qt::MatchExactly);
+	if (row_vd < 0) row_vd = 0;
+	ui->cbx_virtual_drive->setCurrentIndex(row_vd);
 
 	cargarParametrosTwList(ui->twDatosParametrosExe, datos.parametros_exe);
 	cargarParametrosTwList(ui->twDatosParametrosSetup, datos.parametros_setup);
@@ -601,11 +628,13 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!Thumbs.isEmpty() && QFile::exists(file_thumbs))
 	{
-		ui->lbDat_thumbs->setPixmap(QPixmap(file_thumbs).scaled(ui->gbxImg_Thumbs->width(), ui->gbxImg_Thumbs->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		ui->lbDat_thumbs->setPixmap(fGrl->crearThumbs(file_thumbs, grlCfg.thumb_width, grlCfg.thumb_height, false, true));
 		ui->btnDat_thumbs_ver->setEnabled(true);
 		ui->btnDat_thumbs_eliminar->setEnabled(true);
-	} else
-		emit on_btnDat_thumbs_eliminar_clicked();
+	} else {
+		if (!isImport)
+			emit on_btnDat_thumbs_eliminar_clicked();
+	}
 
 // CoverFront
 	if (!Editando && isImport)
@@ -615,11 +644,13 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverFront.isEmpty() && QFile::exists(file_cover_front))
 	{
-		ui->lbDat_cover_front->setPixmap(QPixmap(file_cover_front).scaled(ui->gbxImg_CoverFront->width(), ui->gbxImg_CoverFront->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		ui->lbDat_cover_front->setPixmap(fGrl->crearThumbs(file_cover_front, ui->lbDat_cover_front->width(), ui->lbDat_cover_front->height(), false, true));
 		ui->btnDat_cover_front_ver->setEnabled(true);
 		ui->btnDat_cover_front_eliminar->setEnabled(true);
-	} else
-		emit on_btnDat_cover_front_eliminar_clicked();
+	} else {
+		if (!isImport)
+			emit on_btnDat_cover_front_eliminar_clicked();
+	}
 
 // CoverBack
 	if (!Editando && isImport)
@@ -629,11 +660,13 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverBack.isEmpty() && QFile::exists(file_cover_back))
 	{
-		ui->lbDat_cover_back->setPixmap(QPixmap(file_cover_back).scaled(ui->gbxImg_CoverBack->width(), ui->gbxImg_CoverBack->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		ui->lbDat_cover_back->setPixmap(fGrl->crearThumbs(file_cover_back, ui->lbDat_cover_back->width(), ui->lbDat_cover_back->height(), false, true));
 		ui->btnDat_cover_back_ver->setEnabled(true);
 		ui->btnDat_cover_back_eliminar->setEnabled(true);
-	} else
-		emit on_btnDat_cover_back_eliminar_clicked();
+	} else {
+		if (!isImport)
+			emit on_btnDat_cover_back_eliminar_clicked();
+	}
 
 // CoverLeft
 	if (!Editando && isImport)
@@ -643,11 +676,13 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverLeft.isEmpty() && QFile::exists(file_cover_left))
 	{
-		ui->lbDat_cover_left->setPixmap(QPixmap(file_cover_left).scaled(ui->gbxImg_CoverLeft->width(), ui->gbxImg_CoverLeft->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		ui->lbDat_cover_left->setPixmap(fGrl->crearThumbs(file_cover_left, ui->lbDat_cover_left->width(), ui->lbDat_cover_left->height(), false, true));
 		ui->btnDat_cover_left_ver->setEnabled(true);
 		ui->btnDat_cover_left_eliminar->setEnabled(true);
-	} else
-		emit on_btnDat_cover_left_eliminar_clicked();
+	} else {
+		if (!isImport)
+			emit on_btnDat_cover_left_eliminar_clicked();
+	}
 
 // CoverRight
 	if (!Editando && isImport)
@@ -657,11 +692,13 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverRight.isEmpty() && QFile::exists(file_cover_right))
 	{
-		ui->lbDat_cover_right->setPixmap(QPixmap(file_cover_right).scaled(ui->gbxImg_CoverRight->width(), ui->gbxImg_CoverRight->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		ui->lbDat_cover_right->setPixmap(fGrl->crearThumbs(file_cover_right, ui->lbDat_cover_right->width(), ui->lbDat_cover_right->height(), false, true));
 		ui->btnDat_cover_right_ver->setEnabled(true);
 		ui->btnDat_cover_right_eliminar->setEnabled(true);
-	} else
-		emit on_btnDat_cover_right_eliminar_clicked();
+	} else {
+		if (!isImport)
+			emit on_btnDat_cover_right_eliminar_clicked();
+	}
 
 // CoverTop
 	if (!Editando && isImport)
@@ -671,11 +708,13 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverTop.isEmpty() && QFile::exists(file_cover_top))
 	{
-		ui->lbDat_cover_top->setPixmap(QPixmap(file_cover_top).scaled(ui->gbxImg_CoverTop->width(), ui->gbxImg_CoverTop->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		ui->lbDat_cover_top->setPixmap(fGrl->crearThumbs(file_cover_top, ui->lbDat_cover_top->width(), ui->lbDat_cover_top->height(), false, true));
 		ui->btnDat_cover_top_ver->setEnabled(true);
 		ui->btnDat_cover_top_eliminar->setEnabled(true);
-	} else
-		emit on_btnDat_cover_top_eliminar_clicked();
+	} else {
+		if (!isImport)
+			emit on_btnDat_cover_top_eliminar_clicked();
+	}
 
 // CoverBottom
 	if (!Editando && isImport)
@@ -685,11 +724,13 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 
 	if (!CoverBottom.isEmpty() && QFile::exists(file_cover_bottom))
 	{
-		ui->lbDat_cover_bottom->setPixmap(QPixmap(file_cover_bottom).scaled(ui->gbxImg_CoverBottom->width(), ui->gbxImg_CoverBottom->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		ui->lbDat_cover_bottom->setPixmap(fGrl->crearThumbs(file_cover_bottom, ui->lbDat_cover_bottom->width(), ui->lbDat_cover_bottom->height(), false, true));
 		ui->btnDat_cover_bottom_ver->setEnabled(true);
 		ui->btnDat_cover_bottom_eliminar->setEnabled(true);
-	} else
-		emit on_btnDat_cover_bottom_eliminar_clicked();
+	} else {
+		if (!isImport)
+			emit on_btnDat_cover_bottom_eliminar_clicked();
+	}
 
 // Capturas, videos y sonidos.
 	if (Editando || isImport)
@@ -865,6 +906,9 @@ bool frmAddEditJuego::setDatosJuegos(bool isSoloDatos)
 	DatosJuego.path_setup       = ui->txtDat_path_setup->text();
 	DatosJuego.parametros_exe   = getParametrosTwList(ui->twDatosParametrosExe);
 	DatosJuego.parametros_setup = getParametrosTwList(ui->twDatosParametrosSetup);
+	DatosJuego.path_image       = ui->txtDat_path_image->text();
+	str =  ui->cbx_virtual_drive->itemData(ui->cbx_virtual_drive->currentIndex()).toString();
+	DatosJuego.virtual_drive    = str.isEmpty() ? "NO_VIRTUAL_DRIVE" : str;
 
 	if (isSoloDatos)
 	{
@@ -927,7 +971,7 @@ bool frmAddEditJuego::setDatosJuegos(bool isSoloDatos)
 					DatosJuego.thumbs = "thumbs." + grlCfg.thumb_format.toLower();
 					sql->actualizaDatosItem(categoria.tabla, DatosJuego.idgrl, "thumbs", DatosJuego.thumbs);
 					if (!Editando)
-						fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + DatosJuego.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, false, grlCfg.thumb_format);
+						fGrl->saveThumbs(file_thumbs, grlDir.DatosGame + DatosJuego.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, false, false, grlCfg.thumb_format, grlCfg.thumb_quality);
 				}
 
 				if (!CoverFront.isEmpty() && QFile::exists(file_cover_front))
@@ -997,7 +1041,7 @@ bool frmAddEditJuego::setDatosJuegos(bool isSoloDatos)
 								fGrl->copiarArchivo(imagen.dir_in + imagen.nombre, grlDir.DatosGame + imagen.dir_out + imagen.nombre, true);
 
 							if (imagen.crearThumbs)
-								fGrl->crearThumbs(grlDir.DatosGame + imagen.dir_out + imagen.nombre, grlDir.DatosGame + imagen.dir_out +"small/"+ imagen.nombre +".jpg", grlCfg.thumb_img_width, grlCfg.thumb_img_height, grlCfg.thumb_img_quality);
+								fGrl->saveThumbs(grlDir.DatosGame + imagen.dir_out + imagen.nombre, grlDir.DatosGame + imagen.dir_out +"small/"+ imagen.nombre +".jpg", grlCfg.thumb_img_width, grlCfg.thumb_img_height, false, true, "JPG", grlCfg.thumb_img_quality, true);
 						}
 					}
 
@@ -1024,7 +1068,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			Thumbs            = "thumbs." + grlCfg.thumb_format.toLower();
 			grlCfg.Img_Thumbs = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_thumbs->setPixmap(QPixmap(file_thumbs).scaled(ui->gbxImg_Thumbs->width(), ui->gbxImg_Thumbs->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+			ui->lbDat_thumbs->setPixmap(fGrl->crearThumbs(file_thumbs, ui->lbDat_thumbs->width(), ui->lbDat_thumbs->height(), false, true));
 			ui->btnDat_thumbs_ver->setEnabled(true);
 			ui->btnDat_thumbs_eliminar->setEnabled(true);
 
@@ -1034,7 +1078,8 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 				{
 					if (oldThumbs != Thumbs)
 						fGrl->eliminarArchivo(grlDir.DatosGame + oldThumbs);
-					fGrl->crearThumbs(file_thumbs, grlDir.DatosGame + Thumbs, grlCfg.thumb_width, grlCfg.thumb_height, grlCfg.thumb_quality, false, grlCfg.thumb_format);
+
+          fGrl->saveThumbs(file_thumbs, grlDir.DatosGame + Thumbs, grlCfg.thumb_width, grlCfg.thumb_height, false, false, grlCfg.thumb_format, grlCfg.thumb_quality);
 					oldThumbs = Thumbs;
 				}
 			}
@@ -1044,7 +1089,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			CoverFront            = "cover_front"+ f_info.Ext;
 			grlCfg.Img_CoverFront = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_cover_front->setPixmap(QPixmap(file_cover_front).scaled(ui->gbxImg_CoverFront->width(), ui->gbxImg_CoverFront->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+			ui->lbDat_cover_front->setPixmap(fGrl->crearThumbs(file_cover_front, ui->lbDat_cover_front->width(), ui->lbDat_cover_front->height(), false, true));
 			ui->btnDat_cover_front_ver->setEnabled(true);
 			ui->btnDat_cover_front_eliminar->setEnabled(true);
 
@@ -1056,7 +1101,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			CoverBack            = "cover_back"+ f_info.Ext;
 			grlCfg.Img_CoverBack = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_cover_back->setPixmap(QPixmap(file_cover_back).scaled(ui->gbxImg_CoverBack->width(), ui->gbxImg_CoverBack->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+			ui->lbDat_cover_back->setPixmap(fGrl->crearThumbs(file_cover_back, ui->lbDat_cover_back->width(), ui->lbDat_cover_back->height(), false, true));
 			ui->btnDat_cover_back_ver->setEnabled(true);
 			ui->btnDat_cover_back_eliminar->setEnabled(true);
 
@@ -1068,7 +1113,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 				CoverLeft            = "cover_left"+ f_info.Ext;
 				grlCfg.Img_CoverLeft = fGrl->setDirRelative(f_info.Path);
 
-				ui->lbDat_cover_left->setPixmap(QPixmap(file_cover_left).scaled(ui->gbxImg_CoverLeft->width(), ui->gbxImg_CoverLeft->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+				ui->lbDat_cover_left->setPixmap(fGrl->crearThumbs(file_cover_left, ui->lbDat_cover_left->width(), ui->lbDat_cover_left->height(), false, true));
 				ui->btnDat_cover_left_ver->setEnabled(true);
 				ui->btnDat_cover_left_eliminar->setEnabled(true);
 
@@ -1080,7 +1125,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 				CoverRight            = "cover_right"+ f_info.Ext;
 				grlCfg.Img_CoverRight = fGrl->setDirRelative(f_info.Path);
 
-				ui->lbDat_cover_right->setPixmap(QPixmap(file_cover_right).scaled(ui->gbxImg_CoverRight->width(), ui->gbxImg_CoverRight->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+				ui->lbDat_cover_right->setPixmap(fGrl->crearThumbs(file_cover_right, ui->lbDat_cover_right->width(), ui->lbDat_cover_right->height(), false, true));
 				ui->btnDat_cover_right_ver->setEnabled(true);
 				ui->btnDat_cover_right_eliminar->setEnabled(true);
 
@@ -1092,7 +1137,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			CoverTop            = "cover_top"+ f_info.Ext;
 			grlCfg.Img_CoverTop = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_cover_top->setPixmap(QPixmap(file_cover_top).scaled(ui->gbxImg_CoverTop->width(), ui->gbxImg_CoverTop->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+      ui->lbDat_cover_top->setPixmap(fGrl->crearThumbs(file_cover_top, ui->lbDat_cover_top->width(), ui->lbDat_cover_top->height(), false, true));
 			ui->btnDat_cover_top_ver->setEnabled(true);
 			ui->btnDat_cover_top_eliminar->setEnabled(true);
 
@@ -1104,7 +1149,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 			CoverBottom            = "cover_bottom"+ f_info.Ext;
 			grlCfg.Img_CoverBottom = fGrl->setDirRelative(f_info.Path);
 
-			ui->lbDat_cover_bottom->setPixmap(QPixmap(file_cover_bottom).scaled(ui->gbxImg_CoverBottom->width(), ui->gbxImg_CoverBottom->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+			ui->lbDat_cover_bottom->setPixmap(fGrl->crearThumbs(file_cover_bottom, ui->lbDat_cover_bottom->width(), ui->lbDat_cover_bottom->height(), false, true));
 			ui->btnDat_cover_bottom_ver->setEnabled(true);
 			ui->btnDat_cover_bottom_eliminar->setEnabled(true);
 
@@ -1133,7 +1178,7 @@ void frmAddEditJuego::asignarImagen(stFileInfo f_info, tipoImagen tipo)
 					img_mini = grlDir.DatosGame + imagen.dir_out +"small/"+ imagen.nombre +".jpg";
 
 				if (imagen.crearThumbs)
-					fGrl->crearThumbs(f_info.FilePath, img_mini, grlCfg.thumb_img_width, grlCfg.thumb_img_height, grlCfg.thumb_img_quality);
+					fGrl->saveThumbs(f_info.FilePath, img_mini, grlCfg.thumb_img_width, grlCfg.thumb_img_height, false, true, "JPG", grlCfg.thumb_img_quality, true);
 			} else {
 				img_out  = imagen.dir_in;
 				img_mini = imagen.dir_in;
@@ -1323,14 +1368,19 @@ void frmAddEditJuego::on_btnDescargarInfo_clicked()
 void frmAddEditJuego::on_cbxDat_tipo_emu_activated(int index)
 {
 	TipoEmu = ui->cbxDat_tipo_emu->itemData(index).toString();
+
 	ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, true);
+	ui->gBoxDatos_Exe->setEnabled(true);
+	ui->gBoxDatos_Setup->setEnabled(true);
 
 	if (TipoEmu.isEmpty())
 		TipoEmu = "datos";
 
 	if (TipoEmu == "dosbox")
 	{
-		ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, false);
+		ui->gBoxDatos_Exe->setEnabled(false);
+		ui->gBoxDatos_Setup->setEnabled(false);
+
 		ui->tabw_Datos->setTabEnabled(tabDOSBox  , true);
 		ui->tabw_Datos->setTabEnabled(tabScummVM , false);
 		ui->tabw_Datos->setTabEnabled(tabVDMSound, false);
@@ -1344,7 +1394,9 @@ void frmAddEditJuego::on_cbxDat_tipo_emu_activated(int index)
 	}
 	else if (TipoEmu == "vdmsound")
 	{
-		ui->tabw_Datos->setTabEnabled(tabEjecutabeRom, false);
+		ui->gBoxDatos_Exe->setEnabled(false);
+		ui->gBoxDatos_Setup->setEnabled(false);
+
 		ui->tabw_Datos->setTabEnabled(tabDOSBox  , false);
 		ui->tabw_Datos->setTabEnabled(tabScummVM , false);
 		ui->tabw_Datos->setTabEnabled(tabVDMSound, true);
@@ -1471,7 +1523,8 @@ void frmAddEditJuego::on_btnDat_thumbs_eliminar_clicked()
 
 	Thumbs = "";
 	file_thumbs = "";
-	ui->lbDat_thumbs->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+
+	ui->lbDat_thumbs->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", ui->lbDat_thumbs->width(), ui->lbDat_thumbs->height(), false, true));
 	ui->btnDat_thumbs_ver->setEnabled(false);
 	ui->btnDat_thumbs_eliminar->setEnabled(false);
 }
@@ -1512,7 +1565,8 @@ void frmAddEditJuego::on_btnDat_cover_front_eliminar_clicked()
 
 	CoverFront = "";
 	file_cover_front = "";
-	ui->lbDat_cover_front->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+
+	ui->lbDat_cover_front->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", ui->lbDat_cover_front->width(), ui->lbDat_cover_front->height(), false, true));
 	ui->btnDat_cover_front_ver->setEnabled(false);
 	ui->btnDat_cover_front_eliminar->setEnabled(false);
 }
@@ -1548,7 +1602,8 @@ void frmAddEditJuego::on_btnDat_cover_back_eliminar_clicked()
 
 	CoverBack = "";
 	file_cover_back = "";
-	ui->lbDat_cover_back->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+
+	ui->lbDat_cover_back->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", ui->lbDat_cover_back->width(), ui->lbDat_cover_back->height(), false, true));
 	ui->btnDat_cover_back_ver->setEnabled(false);
 	ui->btnDat_cover_back_eliminar->setEnabled(false);
 }
@@ -1584,7 +1639,8 @@ void frmAddEditJuego::on_btnDat_cover_left_eliminar_clicked()
 
 	CoverLeft = "";
 	file_cover_left = "";
-	ui->lbDat_cover_left->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+
+	ui->lbDat_cover_left->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", ui->lbDat_cover_left->width(), ui->lbDat_cover_left->height(), false, true));
 	ui->btnDat_cover_left_ver->setEnabled(false);
 	ui->btnDat_cover_left_eliminar->setEnabled(false);
 }
@@ -1620,7 +1676,8 @@ void frmAddEditJuego::on_btnDat_cover_right_eliminar_clicked()
 
 	CoverRight = "";
 	file_cover_right = "";
-	ui->lbDat_cover_right->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+
+	ui->lbDat_cover_right->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", ui->lbDat_cover_right->width(), ui->lbDat_cover_right->height(), false, true));
 	ui->btnDat_cover_right_ver->setEnabled(false);
 	ui->btnDat_cover_right_eliminar->setEnabled(false);
 }
@@ -1656,7 +1713,8 @@ void frmAddEditJuego::on_btnDat_cover_top_eliminar_clicked()
 
 	CoverTop = "";
 	file_cover_top = "";
-	ui->lbDat_cover_top->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+
+	ui->lbDat_cover_top->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", ui->lbDat_cover_top->width(), ui->lbDat_cover_top->height(), false, true));
 	ui->btnDat_cover_top_ver->setEnabled(false);
 	ui->btnDat_cover_top_eliminar->setEnabled(false);
 }
@@ -1692,7 +1750,8 @@ void frmAddEditJuego::on_btnDat_cover_bottom_eliminar_clicked()
 
 	CoverBottom = "";
 	file_cover_bottom = "";
-	ui->lbDat_cover_bottom->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+
+	ui->lbDat_cover_bottom->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", ui->lbDat_cover_bottom->width(), ui->lbDat_cover_bottom->height(), false, true));
 	ui->btnDat_cover_bottom_ver->setEnabled(false);
 	ui->btnDat_cover_bottom_eliminar->setEnabled(false);
 }
@@ -1950,7 +2009,7 @@ void frmAddEditJuego::on_btnDat_sonidos_eliminar_clicked()
 		qDebug() << "f_info NameExt : " << f_info.NameExt;
 		qDebug() << "f_info FilePath: " << f_info.FilePath;
 
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), ("¿Deseas eliminar el sonido seleccionado?")))
+		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar el sonido seleccionado?")))
 		{
 			if (Editando)
 			{
@@ -2028,6 +2087,21 @@ void frmAddEditJuego::on_btnDat_path_exe_clicked()
 void frmAddEditJuego::on_btnDat_path_exe_clear_clicked()
 {
 	ui->txtDat_path_exe->clear();
+}
+
+
+void frmAddEditJuego::on_btnDat_path_exe_compatibilidad_clicked()
+{
+	if (ui->txtDat_path_exe->text().isEmpty() && QFile::exists(ui->txtDat_path_exe->text()))
+		QMessageBox::information(this, tr("Opciones"), tr("Para añadir opciones de compatibilidad debes indicar un ejecutable como minimo."));
+	else {
+		frmCompatibilidadExe *compatibilidadExe = new frmCompatibilidadExe(DatosJuego.path_exe, DatosJuego.compatibilidad_exe, this);
+
+		if (compatibilidadExe->exec() == QDialog::Accepted)
+			DatosJuego.compatibilidad_exe = compatibilidadExe->getCfgCompatibilidad();
+
+		delete compatibilidadExe;
+	}
 }
 
 void frmAddEditJuego::on_txtDat_parametros_exe_textEdited(const QString &arg1)
@@ -2114,6 +2188,20 @@ void frmAddEditJuego::on_btnDat_path_setup_clear_clicked()
 	ui->txtDat_path_setup->clear();
 }
 
+void frmAddEditJuego::on_btnDat_path_setup_compatibilidad_clicked()
+{
+	if (ui->txtDat_path_setup->text().isEmpty() && QFile::exists(ui->txtDat_path_setup->text()))
+		QMessageBox::information(this, tr("Opciones"), tr("Para añadir opciones de compatibilidad debes indicar un ejecutable como minimo."));
+	else {
+		frmCompatibilidadExe *compatibilidadSetup = new frmCompatibilidadExe(DatosJuego.path_setup, DatosJuego.compatibilidad_setup, this);
+
+		if (compatibilidadSetup->exec() == QDialog::Accepted)
+			DatosJuego.compatibilidad_setup = compatibilidadSetup->getCfgCompatibilidad();
+
+		delete compatibilidadSetup;
+	}
+}
+
 void frmAddEditJuego::on_txtDat_parametros_setup_textEdited(const QString &arg1)
 {
 	fGrl->enabledButtonUpdateTwList(ui->twDatosParametrosSetup, ui->btnDat_parametros_setup_update, arg1, 0);
@@ -2184,6 +2272,57 @@ void frmAddEditJuego::on_twDatosParametrosSetup_itemClicked(QTreeWidgetItem *ite
 		ui->txtDat_parametros_setup->setText(item->text(0));
 		ui->txtDat_parametros_setup_valor->setText(item->text(1));
 	}
+}
+
+// Montar Imagen en unidad virtual.
+void frmAddEditJuego::cargarVirtualDriveList()
+{
+	ui->cbx_virtual_drive->clear();
+	ui->cbx_virtual_drive->addItem(QIcon(fGrl->theme() +"img16/archivo_config.png"), tr("Seleccionar Unidad Virtual"), "NO_VIRTUAL_DRIVE");
+
+	QHash<QString, stVirtualDrive> virtual_drive_list = fGrl->cargarListVirtualDrive(grlDir.Datos +"virtual_driver_list.txt");
+	QHashIterator<QString, stVirtualDrive> vd(virtual_drive_list);
+	while (vd.hasNext())
+	{
+		vd.next();
+		if (vd.value().etiqueta != "NO_VIRTUAL_DRIVE")
+			ui->cbx_virtual_drive->addItem(QIcon(fGrl->theme() +"img16/"+ vd.value().icono), vd.value().titulo, vd.value().etiqueta);
+	}
+	ui->cbx_virtual_drive->setCurrentIndex(idx_virtual_drive);
+}
+
+void frmAddEditJuego::on_btnDat_path_image_clicked()
+{
+	QString tipo_archivo = tr("Imagen CD") +" (*.iso *.cue);;"+ tr("Imagen HD/Floppy") +" (*.ima *.img);;"+ tr("Todos los archivos") +" (*)";
+	stFileInfo f_info    = fGrl->getInfoFile(fGrl->ventanaAbrirArchivos(this, tr("Selecciona un archivo"), grlCfg.DatosFiles_PathImage, "",  tipo_archivo));
+
+	if (f_info.Exists)
+	{
+		ui->txtDat_path_image->setText(fGrl->setDirRelative(f_info.FilePath));
+		grlCfg.DatosFiles_PathImage = fGrl->setDirRelative(f_info.Path);
+	}
+}
+
+void frmAddEditJuego::on_btnDat_path_image_clear_clicked()
+{
+	ui->txtDat_path_image->clear();
+}
+
+void frmAddEditJuego::on_btn_virtual_drive_edit_clicked()
+{
+	frmAddEditVirtualDrive *addeditVirtualDrive = new frmAddEditVirtualDrive(sql, grlCfg, this);
+	addeditVirtualDrive->setWindowFlags(Qt::Window);
+	idx_virtual_drive = ui->cbx_virtual_drive->currentIndex();
+
+	if (addeditVirtualDrive->exec() == QDialog::Accepted)
+	{
+		grlCfg = addeditVirtualDrive->getGrlCfg();
+
+		cargarVirtualDriveList();
+	} else
+		grlCfg = addeditVirtualDrive->getGrlCfg();
+
+	delete addeditVirtualDrive;
 }
 
 // Direcciones url

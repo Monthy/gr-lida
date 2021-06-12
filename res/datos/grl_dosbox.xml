@@ -87,7 +87,9 @@
       <Dbx_ipx_type>{Dbx_ipx_type}</Dbx_ipx_type>
       <Dbx_ipx_port>{Dbx_ipx_port}</Dbx_ipx_port>
       <Dbx_ipx_ip>{Dbx_ipx_ip}</Dbx_ipx_ip>
-      <Dbx_autoexec>{Dbx_autoexec}</Dbx_autoexec>	
+      <Dbx_autoexec>{Dbx_autoexec}</Dbx_autoexec>
+      <Dbx_autoexec_ini>{Dbx_autoexec_ini}</Dbx_autoexec_ini>
+      <Dbx_autoexec_fin>{Dbx_autoexec_fin}</Dbx_autoexec_fin>
       <Dbx_opt_autoexec>{Dbx_opt_autoexec}</Dbx_opt_autoexec>
       <Dbx_opt_loadfix>{Dbx_opt_loadfix}</Dbx_opt_loadfix>
       <Dbx_opt_loadfix_mem>{Dbx_opt_loadfix_mem}</Dbx_opt_loadfix_mem>

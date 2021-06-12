@@ -314,16 +314,6 @@ QString Funciones::horaFechaActual(QString fecha, QString formato)
 		return dt.toString(formato);
 }
 
-// Crea y devuelve un listado de fechas desde 1970 a año actual
-QStringList Funciones::listaFechas()
-{
-	QStringList fechas;
-	const int fecha_actual = horaFechaActual(getTime(), "yyyy").toInt()+1;
-	for (int fecha = 1970; fecha < fecha_actual; ++fecha)
-		fechas << intToStr(fecha);
-	return fechas;
-}
-
 bool Funciones::questionMsg(QString titulo, QString mensaje, QString texto_btn_si, QString texto_btn_no)
 {
 	texto_btn_si = texto_btn_si.isEmpty() ? tr("Si") : texto_btn_si;
@@ -426,7 +416,7 @@ stFileInfo Funciones::getInfoFile(QString filename, TipoHash hash)
 	} else {
 		QFileInfo fi(filename);
 
-		#ifdef Q_OS_WIN32
+		#ifdef Q_OS_WIN
 			info.Drive = filename.left(2) +"/";
 		#else
 			info.Drive = "/";
@@ -516,28 +506,61 @@ QString Funciones::getIconMount(QString tipoDrive, QString select_mount)
 }
 
 // Crear Thumbs
-// format  = BMP, JPG, JPEG, PNG
-// quality = -1 = defecto, 0 a 100 peor a mejor calidad
-bool Funciones::crearThumbs(QString origen, QString destino, int width, int height, int quality, bool ignoreAspectRatio, QString format)
+QPixmap Funciones::crearThumbs(QString origen, int width, int height, bool ignoreAspectRatio, bool center, bool marco)
 {
 	QImage img_src(origen);
 
 	if (img_src.width() > width || img_src.height() > height)
 		img_src = img_src.scaled(QSize(width, height), (ignoreAspectRatio ? Qt::IgnoreAspectRatio : Qt::KeepAspectRatio), Qt::SmoothTransformation);
 
-	QImage img_final(QSize(img_src.width(), img_src.height()), QImage::Format_ARGB32_Premultiplied);
-	QPainter painter(&img_final);
+	int sw = img_src.width();
+	int sh = img_src.height();
+	int x  = 0;
+	int y  = height - sh;
 
-//	painter.fillRect(img_final.rect(), (strcmp(format, "PNG") ? Qt::transparent : Qt::white));
-	if (format.toUpper() == "PNG")
+	if (center)
+	{
+		x  = (width - sw) / 2;  // centar en x
+		y  = (height - sh) / 2; // centar en y
+	}
+
+	if (marco)
+	{
+		QImage img_final(QSize(width, height), QImage::Format_ARGB32_Premultiplied);
+		QPainter painter(&img_final);
+		painter.setCompositionMode(QPainter::CompositionMode_Clear);
 		painter.fillRect(img_final.rect(), Qt::transparent);
-	else
+		painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+		painter.drawImage(x, y, img_src, 0, 0, sw, sh);
+		painter.end();
+
+		return QPixmap::fromImage(img_final);
+	} else
+		return QPixmap::fromImage(img_src);
+}
+
+// Guardar Thumbs
+// format  = BMP, JPG, JPEG, PNG
+// quality = -1 = defecto, 0 a 100 peor a mejor calidad
+bool Funciones::saveThumbs(QString origen, QString destino, int width, int height, bool ignoreAspectRatio, bool center, QString format, int quality, bool marco)
+{
+	bool isOk = false;
+
+	QPixmap img_src = crearThumbs(origen, width, height, ignoreAspectRatio, center, marco);
+
+	if (marco)
+	{
+		QImage img_final(QSize(width, height), QImage::Format_ARGB32_Premultiplied);
+		QPainter painter(&img_final);
 		painter.fillRect(img_final.rect(), Qt::white);
+		painter.drawPixmap(img_src.rect(), img_src);
+		painter.end();
 
-	painter.drawImage(img_src.rect(), img_src);
-	painter.end();
+		isOk = img_final.save(destino, format.toUpper().toStdString().c_str(), quality);
+	} else
+		isOk = img_src.save(destino, format.toUpper().toStdString().c_str(), quality);
 
-	return img_final.save(destino, format.toUpper().toStdString().c_str(), quality);
+	return isOk;
 }
 
 // Leer archivo de texto
@@ -594,7 +617,7 @@ bool Funciones::opArchivo(QString origen, QString destino, bool mover, bool perm
 		} else {
 			if (preguntar)
 			{
-				if (questionMsg(tr("¿Sobrescribir?"), tr("¿El archivo '")+ f_name.fileName() + tr("' ya existe quieres sobrescribirlo?")))
+				if (questionMsg(tr("¿Sobrescribir?"), tr("¿El archivo '") + f_name.fileName() + tr("' ya existe quieres sobrescribirlo?")))
 				{
 					f_name.remove();
 					siguiente = true;
@@ -786,7 +809,7 @@ QString Funciones::homePath()
 	if (QFile::exists(QDir::currentPath() +"/GR-lida.conf"))
 		stDirApp = QDir::currentPath() +"/";
 	else {
-		#ifdef Q_OS_WIN32
+		#ifdef Q_OS_WIN
 			isWinOrMac = true;
 			stOS = "win";
 		#else
@@ -963,16 +986,17 @@ QString Funciones::tplInfoJuego(QString file_tpl)
 		tpl = leerArchivo(stTheme + file_tpl +".html", "UTF-8");
 	else
 		tpl = leerArchivo(":/"+ file_tpl +".html", "UTF-8");
-	tpl.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
 
 	QString tpl_css = "";
 	if (QFile::exists(stTheme + file_tpl +".css"))
 		tpl_css = leerArchivo(stTheme + file_tpl +".css", "UTF-8");
 	else
 		tpl_css = leerArchivo(":/"+ file_tpl +".css", "UTF-8");
-	tpl_css.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
 
 	tpl.replace("{tpl_css}", tpl_css);
+
+	//tpl_css.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
+	tpl.replace("<theme>", QUrl::fromLocalFile(stTheme).toString());
 
 	if (file_tpl.toLower() == "tpl_info_juego")
 	{
@@ -1046,24 +1070,28 @@ stLwItemCfg Funciones::getDefectLwItemConf(QSettings &settings)
 	if (!itemCfg.img_cover_top_select.load(stTheme + itemCfg.img_cover_top_path_select))
 		itemCfg.img_cover_top_select.load(":/images/list_cover_top_select.png");
 
-	itemCfg.img_cover_top_pos_x  = settings.value("img_cover_top_pos_x" , 22   ).toInt();
-	itemCfg.img_cover_top_pos_y  = settings.value("img_cover_top_pos_y" , 22   ).toInt();
-	itemCfg.img_cover_top_zindex = settings.value("img_cover_top_zindex", false).toBool();
-	itemCfg.img_scaled           = settings.value("img_scaled"          , true ).toBool();
-	itemCfg.img_scale_w          = settings.value("img_scale_w"         , 145  ).toInt();
-	itemCfg.img_scale_h          = settings.value("img_scale_h"         , 186  ).toInt();
-	itemCfg.img_scale_pos_x      = settings.value("img_scale_pos_x"     , 28   ).toInt();
-	itemCfg.img_scale_pos_y      = settings.value("img_scale_pos_y"     , 28   ).toInt();
-	itemCfg.tipo_emu_show        = settings.value("tipo_emu_show"       , true ).toBool();
-	itemCfg.tipo_emu_pos_x       = settings.value("tipo_emu_pos_x"      , 15   ).toInt();
-	itemCfg.tipo_emu_pos_y       = settings.value("tipo_emu_pos_y"      , 202  ).toInt();
-	itemCfg.rating_show          = settings.value("rating_show"         , true ).toBool();
-	itemCfg.rating_vertical      = settings.value("rating_vertical"     , false).toBool();
-	itemCfg.rating_pos_x         = settings.value("rating_pos_x"        , 105  ).toInt();
-	itemCfg.rating_pos_y         = settings.value("rating_pos_y"        , 202  ).toInt();
-	itemCfg.title_bg_show        = settings.value("title_bg_show"       , true ).toBool();
-	itemCfg.title_bg_path        = settings.value("title_bg"            , "images/list_cover_title_bg.png").toString();
-	itemCfg.title_bg_path_select = settings.value("title_bg_select"     , "images/list_cover_title_bg.png").toString();
+	itemCfg.img_border_color.setColor(getColor(settings.value("img_border_color", QStringList() << "0" << "0" << "0").toStringList()));
+	itemCfg.img_border_color_select.setColor(getColor(settings.value("img_border_color_select", QStringList() << "255" << "166" << "0").toStringList()));
+	itemCfg.img_border_color_alpha = settings.value("img_border_color_alpha", 22   ).toInt();
+	itemCfg.img_cover_top_pos_x    = settings.value("img_cover_top_pos_x"   , 0    ).toInt();
+	itemCfg.img_cover_top_pos_y    = settings.value("img_cover_top_pos_y"   , 22   ).toInt();
+	itemCfg.img_cover_top_bg       = settings.value("img_cover_top_bg"      , false).toBool();
+	itemCfg.img_cover_top_zindex   = settings.value("img_cover_top_zindex"  , false).toBool();
+	itemCfg.img_scaled             = settings.value("img_scaled"            , true ).toBool();
+	itemCfg.img_scale_w            = settings.value("img_scale_w"           , 145  ).toInt();
+	itemCfg.img_scale_h            = settings.value("img_scale_h"           , 186  ).toInt();
+	itemCfg.img_pos_x              = settings.value("img_pos_x"             , 0    ).toInt();
+	itemCfg.img_pos_y              = settings.value("img_pos_y"             , 28   ).toInt();
+	itemCfg.tipo_emu_show          = settings.value("tipo_emu_show"         , true ).toBool();
+	itemCfg.tipo_emu_pos_x         = settings.value("tipo_emu_pos_x"        , 15   ).toInt();
+	itemCfg.tipo_emu_pos_y         = settings.value("tipo_emu_pos_y"        , 202  ).toInt();
+	itemCfg.rating_show            = settings.value("rating_show"           , true ).toBool();
+	itemCfg.rating_vertical        = settings.value("rating_vertical"       , false).toBool();
+	itemCfg.rating_pos_x           = settings.value("rating_pos_x"          , 105  ).toInt();
+	itemCfg.rating_pos_y           = settings.value("rating_pos_y"          , 202  ).toInt();
+	itemCfg.title_bg_show          = settings.value("title_bg_show"         , true ).toBool();
+	itemCfg.title_bg_path          = settings.value("title_bg"              , "images/list_cover_title_bg.png").toString();
+	itemCfg.title_bg_path_select   = settings.value("title_bg_select"       , "images/list_cover_title_bg.png").toString();
 
 	if (!itemCfg.title_bg.load(stTheme + itemCfg.title_bg_path))
 		itemCfg.title_bg.load(":/images/list_cover_title_bg.png");
@@ -1114,7 +1142,7 @@ stLwIconCfg Funciones::cargarListWidgetIconConf(QString tabla, QString theme)
 	settings.beginGroup("picflow_img");
 		lwConf.pf_img_width   = settings.value("pf_img_width"  , 145).toInt();
 		lwConf.pf_img_height  = settings.value("pf_img_height" , 186).toInt();
-		lwConf.pf_img_fixsize = settings.value("pf_img_fixsize", true).toBool();
+		lwConf.pf_img_fixsize = settings.value("pf_img_fixsize", false).toBool();
 	settings.endGroup();
 	settings.beginGroup("list_icon");
 		lwConf.icon_width  = settings.value("icon_width" , 200).toInt();
@@ -1177,46 +1205,114 @@ void Funciones::guardarListWidgetIconConf(stLwIconCfg lwConf, QString tabla, QSt
 	while (itemCfg != lwConf.item.constEnd())
 	{
 		settings.beginGroup(itemCfg.key());
-			settings.setValue("img_cover_top"          , itemCfg.value().img_cover_top_path  );
+			settings.setValue("img_cover_top"          , itemCfg.value().img_cover_top_path    );
 			settings.setValue("img_cover_top_select"   , itemCfg.value().img_cover_top_path_select);
-			settings.setValue("img_cover_top_pos_x"    , itemCfg.value().img_cover_top_pos_x );
-			settings.setValue("img_cover_top_pos_y"    , itemCfg.value().img_cover_top_pos_y );
-			settings.setValue("img_cover_top_zindex"   , itemCfg.value().img_cover_top_zindex);
-			settings.setValue("img_scaled"             , itemCfg.value().img_scaled          );
-			settings.setValue("img_scale_w"            , itemCfg.value().img_scale_w         );
-			settings.setValue("img_scale_h"            , itemCfg.value().img_scale_h         );
-			settings.setValue("img_scale_pos_x"        , itemCfg.value().img_scale_pos_x     );
-			settings.setValue("img_scale_pos_y"        , itemCfg.value().img_scale_pos_y     );
-			settings.setValue("tipo_emu_show"          , itemCfg.value().tipo_emu_show       );
-			settings.setValue("tipo_emu_pos_x"         , itemCfg.value().tipo_emu_pos_x      );
-			settings.setValue("tipo_emu_pos_y"         , itemCfg.value().tipo_emu_pos_y      );
-			settings.setValue("rating_show"            , itemCfg.value().rating_show         );
-			settings.setValue("rating_vertical"        , itemCfg.value().rating_vertical     );
-			settings.setValue("rating_pos_x"           , itemCfg.value().rating_pos_x        );
-			settings.setValue("rating_pos_y"           , itemCfg.value().rating_pos_y        );
-			settings.setValue("title_bg_show"          , itemCfg.value().title_bg_show       );
-			settings.setValue("title_bg"               , itemCfg.value().title_bg_path       );
-			settings.setValue("title_bg_select"        , itemCfg.value().title_bg_path_select);
-			settings.setValue("title_bg_pos_x"         , itemCfg.value().title_bg_pos_x      );
-			settings.setValue("title_bg_pos_y"         , itemCfg.value().title_bg_pos_y      );
-			settings.setValue("title_show"             , itemCfg.value().title_show          );
-			settings.setValue("title_pos_x"            , itemCfg.value().title_pos_x         );
-			settings.setValue("title_pos_y"            , itemCfg.value().title_pos_y         );
-			settings.setValue("title_width"            , itemCfg.value().title_width         );
-			settings.setValue("title_height"           , itemCfg.value().title_height        );
-			settings.setValue("title_max_caracteres"   , itemCfg.value().title_max_caracteres);
-			settings.setValue("title_font"             , itemCfg.value().title_font          );
-			settings.setValue("title_font_size"        , itemCfg.value().title_font_size     );
-			settings.setValue("title_font_pos"         , itemCfg.value().title_font_pos      );
+			settings.setValue("img_border_color"       , setColor(itemCfg.value().img_border_color.color()));
+			settings.setValue("img_border_color_select", setColor(itemCfg.value().img_border_color_select.color()));
+			settings.setValue("img_border_color_alpha" , itemCfg.value().img_border_color_alpha);
+			settings.setValue("img_cover_top_pos_x"    , itemCfg.value().img_cover_top_pos_x   );
+			settings.setValue("img_cover_top_pos_y"    , itemCfg.value().img_cover_top_pos_y   );
+			settings.setValue("img_cover_top_bg"       , itemCfg.value().img_cover_top_bg      );
+			settings.setValue("img_cover_top_zindex"   , itemCfg.value().img_cover_top_zindex  );
+			settings.setValue("img_scaled"             , itemCfg.value().img_scaled            );
+			settings.setValue("img_scale_w"            , itemCfg.value().img_scale_w           );
+			settings.setValue("img_scale_h"            , itemCfg.value().img_scale_h           );
+			settings.setValue("img_pos_x"              , itemCfg.value().img_pos_x             );
+			settings.setValue("img_pos_y"              , itemCfg.value().img_pos_y             );
+			settings.setValue("tipo_emu_show"          , itemCfg.value().tipo_emu_show         );
+			settings.setValue("tipo_emu_pos_x"         , itemCfg.value().tipo_emu_pos_x        );
+			settings.setValue("tipo_emu_pos_y"         , itemCfg.value().tipo_emu_pos_y        );
+			settings.setValue("rating_show"            , itemCfg.value().rating_show           );
+			settings.setValue("rating_vertical"        , itemCfg.value().rating_vertical       );
+			settings.setValue("rating_pos_x"           , itemCfg.value().rating_pos_x          );
+			settings.setValue("rating_pos_y"           , itemCfg.value().rating_pos_y          );
+			settings.setValue("title_bg_show"          , itemCfg.value().title_bg_show         );
+			settings.setValue("title_bg"               , itemCfg.value().title_bg_path         );
+			settings.setValue("title_bg_select"        , itemCfg.value().title_bg_path_select  );
+			settings.setValue("title_bg_pos_x"         , itemCfg.value().title_bg_pos_x        );
+			settings.setValue("title_bg_pos_y"         , itemCfg.value().title_bg_pos_y        );
+			settings.setValue("title_show"             , itemCfg.value().title_show            );
+			settings.setValue("title_pos_x"            , itemCfg.value().title_pos_x           );
+			settings.setValue("title_pos_y"            , itemCfg.value().title_pos_y           );
+			settings.setValue("title_width"            , itemCfg.value().title_width           );
+			settings.setValue("title_height"           , itemCfg.value().title_height          );
+			settings.setValue("title_max_caracteres"   , itemCfg.value().title_max_caracteres  );
+			settings.setValue("title_font"             , itemCfg.value().title_font            );
+			settings.setValue("title_font_size"        , itemCfg.value().title_font_size       );
+			settings.setValue("title_font_pos"         , itemCfg.value().title_font_pos        );
 			settings.setValue("title_font_color"       , setColor(itemCfg.value().title_font_color.color()));
 			settings.setValue("title_font_color_select", setColor(itemCfg.value().title_font_color_select.color()));
-			settings.setValue("title_font_wordwrap"    , itemCfg.value().title_font_wordwrap );
-			settings.setValue("title_font_bold"        , itemCfg.value().title_font_bold     );
-			settings.setValue("title_font_italic"      , itemCfg.value().title_font_italic   );
-			settings.setValue("title_font_underline"   , itemCfg.value().title_font_underline);
+			settings.setValue("title_font_wordwrap"    , itemCfg.value().title_font_wordwrap   );
+			settings.setValue("title_font_bold"        , itemCfg.value().title_font_bold       );
+			settings.setValue("title_font_italic"      , itemCfg.value().title_font_italic     );
+			settings.setValue("title_font_underline"   , itemCfg.value().title_font_underline  );
 		settings.endGroup();
 		++itemCfg;
 	}
+}
+
+// Carga el listado de unidades virtuales.
+QHash<QString, stVirtualDrive> Funciones::cargarListVirtualDrive(QString iniFileName)
+{
+	QHash<QString, stVirtualDrive> vd_list;
+	QString settings_group = "";
+
+	stVirtualDrive virtualDrive;
+		virtualDrive.titulo               = "";
+		virtualDrive.etiqueta             = "NO_VIRTUAL_DRIVE";
+		virtualDrive.icono                = "archivo_config.png";
+		virtualDrive.path_exe             = "";
+		virtualDrive.path_image           = "";
+		virtualDrive.letter               = "";
+		virtualDrive.param_mount          = "";
+		virtualDrive.param_unmount        = "";
+		virtualDrive.param_extra_1        = "";
+		virtualDrive.param_extra_2        = "";
+		virtualDrive.command_line_mount   = "";
+		virtualDrive.command_line_unmount = "";
+	vd_list.insert("NO_VIRTUAL_DRIVE", virtualDrive);
+
+	QSettings settings(iniFileName, QSettings::IniFormat);
+	const int listSize = settings.childGroups().size();
+	for (int i = 0; i < listSize; ++i)
+	{
+		settings_group = settings.childGroups().at(i).toLower();
+
+		settings.beginGroup(settings_group);
+			virtualDrive.titulo               = settings.value("titulo").toString();
+			virtualDrive.etiqueta             = settings_group;
+			virtualDrive.icono                = settings.value("icono").toString();
+			virtualDrive.path_exe             = settings.value("path_exe").toString();
+			virtualDrive.path_image           = "";
+			virtualDrive.letter               = settings.value("letter").toString();
+			virtualDrive.param_mount          = settings.value("param_mount").toString();
+			virtualDrive.param_unmount        = settings.value("param_unmount").toString();
+			virtualDrive.param_extra_1        = settings.value("param_extra_1").toString();
+			virtualDrive.param_extra_2        = settings.value("param_extra_2").toString();
+			virtualDrive.command_line_mount   = settings.value("command_line_mount").toString();
+			virtualDrive.command_line_unmount = settings.value("command_line_unmount").toString();
+		settings.endGroup();
+
+		vd_list.insert(settings_group, virtualDrive);
+	}
+
+	return vd_list;
+}
+
+QString Funciones::getCommandLineMount(stVirtualDrive virtualDrive, bool montar)
+{
+	QString command_line  = montar ? virtualDrive.command_line_mount : virtualDrive.command_line_unmount;
+	QString vd_path_image = getDirRelative(virtualDrive.path_image);
+
+	command_line.replace("{path_exe}"     , virtualDrive.path_exe.replace("/", "\\"));
+	command_line.replace("{path_image}"   , vd_path_image.replace("/", "\\"));
+	command_line.replace("{letter}"       , virtualDrive.letter);
+	command_line.replace("{param_mount}"  , virtualDrive.param_mount);
+	command_line.replace("{param_unmount}", virtualDrive.param_unmount);
+	command_line.replace("{param_extra_1}", virtualDrive.param_extra_1);
+	command_line.replace("{param_extra_2}", virtualDrive.param_extra_2);
+
+	return command_line;
 }
 
 // Carga la configuracion del GR-lida
@@ -1247,7 +1343,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.DOSBoxDefault = settings.value("DOSBoxDefault", "dosbox").toString();
 		config.DOSBoxDisp    = settings.value("DOSBoxDisp"   , false).toBool();
 		config.ScummVMDisp   = settings.value("ScummVMDisp"  , false).toBool();
-	#ifdef Q_OS_WIN32
+	#ifdef Q_OS_WIN
 		config.VDMSoundDisp = settings.value("VDMSoundDisp", false).toBool();
 	#else
 		config.VDMSoundDisp = false;
@@ -1455,6 +1551,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.DatosFiles_PathFile     = settings.value("DatosFiles_PathFile"    , "").toString();
 		config.DatosFiles_PathExe      = settings.value("DatosFiles_PathExe"     , "").toString();
 		config.DatosFiles_PathSetup    = settings.value("DatosFiles_PathSetup"   , "").toString();
+		config.DatosFiles_PathImage    = settings.value("DatosFiles_PathImage"   , "").toString();
 		config.DatosFiles_PathCapturas = settings.value("DatosFiles_PathCapturas", "").toString();
 	// DOSBox
 		config.Dbx_path            = settings.value("Dbx_path"           , "").toString();
@@ -1464,6 +1561,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 		config.Dbx_sdl_mapperfile  = settings.value("Dbx_sdl_mapperfile" , "").toString();
 		config.Dbx_dosbox_language = settings.value("Dbx_dosbox_language", "").toString();
 		config.Montaje_path        = settings.value("Montaje_path"       , "").toString();
+		config.AutoMountImageExe   = settings.value("AutoMountImageExe"  , false).toBool();
 	// ScummVM
 		config.Svm_path       = settings.value("Svm_path"      , "").toString();
 		config.Svm_path_save  = settings.value("Svm_path_save" , "").toString();
@@ -1492,6 +1590,7 @@ stGrlCfg Funciones::cargarGRLConfig(QString iniFileName)
 	config.isChangedListDOSBox     = false;
 	config.isChangedShortcut       = false;
 	config.isChangedFavorito       = false;
+	config.isChangedVirtualDrive   = false;
 
 	return config;
 }
@@ -1727,6 +1826,7 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 		settings.setValue("DatosFiles_PathFile"    , config.DatosFiles_PathFile    );
 		settings.setValue("DatosFiles_PathExe"     , config.DatosFiles_PathExe     );
 		settings.setValue("DatosFiles_PathSetup"   , config.DatosFiles_PathSetup   );
+		settings.setValue("DatosFiles_PathImage"   , config.DatosFiles_PathImage   );
 		settings.setValue("DatosFiles_PathCapturas", config.DatosFiles_PathCapturas);
 	// DOSBox
 		settings.setValue("Dbx_path"           , config.Dbx_path           );
@@ -1736,6 +1836,7 @@ void Funciones::guardarGRLConfig(QString iniFileName, stGrlCfg config)
 		settings.setValue("Dbx_sdl_mapperfile" , config.Dbx_sdl_mapperfile );
 		settings.setValue("Dbx_dosbox_language", config.Dbx_dosbox_language);
 		settings.setValue("Montaje_path"       , config.Montaje_path       );
+		settings.setValue("AutoMountImageExe"  , config.AutoMountImageExe  );
 	// ScummVM
 		settings.setValue("Svm_path"      , config.Svm_path      );
 		settings.setValue("Svm_path_save" , config.Svm_path_save );
@@ -1768,6 +1869,16 @@ QString Funciones::ventanaAbrirArchivos(QWidget *parent, QString caption, QStrin
 		return QFileDialog::getSaveFileName(parent, caption, base, filter, selectedFilter);
 	else
 		return QFileDialog::getOpenFileName(parent, caption, base, filter, selectedFilter);
+}
+
+QStringList Funciones::ventanaAbrirMultiArchivos(QWidget *parent, QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter)
+{
+	QString base = getDirRelative(dir, dir_relative);
+
+	if (!comprobarDirectorio(base, true))
+		base = stDirApp;
+
+	return QFileDialog::getOpenFileNames(parent, caption, base, filter, selectedFilter);
 }
 
 // Obtiene la dirección de una carpeta atraves de QFileDialog
@@ -2500,7 +2611,7 @@ QString Funciones::getShortPathName(QString longPath)
 		int index, idx_dos, listSize = 0;
 		QString f_name, f_path, sep;
 		QStringList listShortPath, shortPath, path_tmp, list_dir, list_dir_8names;
-//#ifdef Q_OS_WIN32
+//#ifdef Q_OS_WIN
 //	sep = "\\";
 //#else
 	sep = "/";
@@ -2628,10 +2739,10 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 	}
 
 // Cerrar DOSBox
-	if (strToBool(cfgDbx.opt_cerrar_dbox))
-		Dbx_cerrardbx = "exit";
-	else
-		Dbx_cerrardbx = "";
+	//if (strToBool(cfgDbx.opt_cerrar_dbox))
+	//	Dbx_cerrardbx = "exit";
+	//else
+	//	Dbx_cerrardbx = "";
 
 // Montajes
 	listmontajes.clear();
@@ -2659,7 +2770,7 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 				mount_letra_primario = mount_letter;
 			}
 
-		#ifdef Q_OS_WIN32
+		#ifdef Q_OS_WIN
 			mount_drive.replace("/","\\");
 		#endif
 
@@ -2754,7 +2865,7 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 					for (int i = 0; i < lmiso_Size; ++i)
 					{
 						QString path_multi_iso = getDirRelative(lista_isos.at(i), "DosGames");
-					#ifdef Q_OS_WIN32
+					#ifdef Q_OS_WIN
 						path_multi_iso.replace("/","\\");
 					#endif
 						lista_multiple_iso << "\""+ path_multi_iso +"\"";
@@ -2795,7 +2906,7 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 				for (int i = 0; i < lmisoSize; ++i)
 				{
 					QString path_multi_boot = getDirRelative(lista_isos.at(i), "DosGames");
-				#ifdef Q_OS_WIN32
+				#ifdef Q_OS_WIN
 					path_multi_boot.replace("/","\\");
 				#endif
 					lista_multiple_iso << "\""+ path_multi_boot +"\"";
@@ -2817,12 +2928,17 @@ QStringList Funciones::creaConfigMontajes(QList<stConfigDOSBoxMount> listMount, 
 	{
 		listmontajes << mount_letra_primario +":";
 		listmontajes << "cd "+ mount_dir;
+
+		if (!cfgDbx.autoexec_ini_exe.isEmpty())
+			listmontajes << cfgDbx.autoexec_ini_exe;
+
 		listmontajes << Dbx_loadfix + getNameTo8Caracter(NombreEXEDbx) +" "+ cfgDbx.parametros_exe;
+
+		if (!cfgDbx.autoexec_fin_exe.isEmpty())
+			listmontajes << cfgDbx.autoexec_fin_exe;
 	} else {
 		listmontajes << montaje_boot;
 	}
-
-	listmontajes << Dbx_cerrardbx;
 
 	return listmontajes;
 }
@@ -3367,7 +3483,9 @@ QString Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_
 				cfg_out.replace("{Dbx_ipx_config}", "");
 
 		// [autoexec]
-			QString autoexec = "";
+			QString autoexec     = "";
+			QString autoexec_ini = cfgDbx.autoexec_ini.isEmpty() ? "" : cfgDbx.autoexec_ini +"\n";
+			QString autoexec_fin = cfgDbx.autoexec_fin.isEmpty() ? "" : cfgDbx.autoexec_fin +"\n";
 
 			if (!cfgDbx.dos_version.isEmpty())
 				autoexec.append("ver set "+ cfgDbx.dos_version +"\n\n");
@@ -3382,7 +3500,9 @@ QString Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_
 					autoexec.append(listamontaje.at(i) +"\n");
 			}
 
-			cfg_out.replace("{Dbx_autoexec}", autoexec);
+			cfg_out.replace("{Dbx_autoexec}"    , autoexec    );
+			cfg_out.replace("{Dbx_autoexec_ini}", autoexec_ini);
+			cfg_out.replace("{Dbx_autoexec_fin}", autoexec_fin);
 		}
 		else if (tipo_cfg == ExportGrlida)
 		{
@@ -3392,7 +3512,9 @@ QString Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_
 			cfg_out.replace("{Dbx_ipx_ip}"  , cfgDbx.ipx_ip);
 
 		// [autoexec]
-			cfg_out.replace("{Dbx_autoexec}", cfgDbx.autoexec);
+			cfg_out.replace("{Dbx_autoexec}"    , cfgDbx.autoexec    );
+			cfg_out.replace("{Dbx_autoexec_ini}", cfgDbx.autoexec_ini);
+			cfg_out.replace("{Dbx_autoexec_fin}", cfgDbx.autoexec_fin);
 
 		// Opciones
 			cfg_out.replace("{Dbx_opt_autoexec}"         , cfgDbx.opt_autoexec);
@@ -3429,8 +3551,14 @@ QString Funciones::exportarProfileGRlida(stDatosJuego datos, QList<QString> url_
 				}
 			}
 			cfg_out.replace("{dosbox_montajes}", cfg_mount);
-		} else
-			cfg_out.replace("{Dbx_autoexec}", "");
+		} else {
+			cfg_out.replace("{Dbx_autoexec}"    , "");
+			cfg_out.replace("{Dbx_autoexec_ini}", "");
+			cfg_out.replace("{Dbx_autoexec_fin}", "");
+		}
+
+		QString Dbx_cerrar = strToBool(cfgDbx.opt_cerrar_dbox) ? "exit" : "";
+		cfg_out.replace("{Dbx_cerrar}", Dbx_cerrar);
 	}
 
 	if (datos.tipo_emu == "scummvm")
@@ -3585,6 +3713,8 @@ QHash<QString, QString> Funciones::importarProfileDFend(QString dir_app, QString
 			cfgDFend["Dbx_parametros_setup"] = settings.value("SetupParameters", "").toString().replace("--", ",");
 		// [autoexec]
 			cfgDFend["Dbx_autoexec"] = settings.value("autoexec", "").toString().replace("--", ",").replace("[13][10]", "\n");
+		//	cfgDFend["Dbx_autoexec_ini"] = settings.value("autoexec_ini", "").toString().replace("--", ",").replace("[13][10]", "\n");
+		//	cfgDFend["Dbx_autoexec_fin"] = settings.value("autoexec_fin", "").toString().replace("--", ",").replace("[13][10]", "\n");
 		// Opciones
 			cfgDFend["Dbx_opt_autoexec"]     = cfgDFend["Dbx_autoexec"].isEmpty() ? "false" : "true";
 			cfgDFend["Dbx_opt_loadfix"]      = boolToStr(settings.value("Loadhigh", false).toBool());

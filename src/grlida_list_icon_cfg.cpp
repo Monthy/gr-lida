@@ -170,6 +170,8 @@ void frmListIconCfg::setTheme()
 	ui->btn_img_cover_top_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
 	ui->btn_img_cover_top_select->setIcon(QIcon(fGrl->theme() +"img16/carpeta_1.png"));
 	ui->btn_img_cover_top_select_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
+	ui->btn_img_border_color_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
+	ui->btn_img_border_color_select_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
 	ui->btn_img_cover_top_pos_x_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
 	ui->btn_img_cover_top_pos_y_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
 	ui->btn_img_cover_top_zindex_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
@@ -177,8 +179,8 @@ void frmListIconCfg::setTheme()
 	ui->btn_img_scaled_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
 	ui->btn_img_scale_w_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
 	ui->btn_img_scale_h_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
-	ui->btn_img_scale_pos_x_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
-	ui->btn_img_scale_pos_y_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
+	ui->btn_img_pos_x_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
+	ui->btn_img_pos_y_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
 // Option label emu
 	ui->btn_tipo_emu_show_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
 	ui->btn_tipo_emu_pos_x_def->setIcon(QIcon(fGrl->theme() +"img16/reset.png"));
@@ -440,14 +442,18 @@ void frmListIconCfg::cargarIconConfig()
 // [item_]
 	ui->img_cover_top->setText(lwIconCfg.item[stItem].img_cover_top_path);
 	ui->img_cover_top_select->setText(lwIconCfg.item[stItem].img_cover_top_path_select);
+	setColorBtn(ui->btn_img_border_color, lwIconCfg.item[stItem].img_border_color.color());
+	setColorBtn(ui->btn_img_border_color_select, lwIconCfg.item[stItem].img_border_color_select.color());
+	ui->slider_img_border_color_alpha->setValue(lwIconCfg.item[stItem].img_border_color_alpha);
+	ui->img_cover_top_bg->setChecked(lwIconCfg.item[stItem].img_cover_top_bg);
 	ui->img_cover_top_pos_x->setValue(lwIconCfg.item[stItem].img_cover_top_pos_x);
 	ui->img_cover_top_pos_y->setValue(lwIconCfg.item[stItem].img_cover_top_pos_y);
 	ui->img_cover_top_zindex->setChecked(lwIconCfg.item[stItem].img_cover_top_zindex);
 	ui->img_scaled->setChecked(lwIconCfg.item[stItem].img_scaled);
 	ui->img_scale_w->setValue(lwIconCfg.item[stItem].img_scale_w);
 	ui->img_scale_h->setValue(lwIconCfg.item[stItem].img_scale_h);
-	ui->img_scale_pos_x->setValue(lwIconCfg.item[stItem].img_scale_pos_x);
-	ui->img_scale_pos_y->setValue(lwIconCfg.item[stItem].img_scale_pos_y);
+	ui->img_pos_x->setValue(lwIconCfg.item[stItem].img_pos_x);
+	ui->img_pos_y->setValue(lwIconCfg.item[stItem].img_pos_y);
 	ui->tipo_emu_show->setChecked(lwIconCfg.item[stItem].tipo_emu_show);
 	ui->tipo_emu_pos_x->setValue(lwIconCfg.item[stItem].tipo_emu_pos_x);
 	ui->tipo_emu_pos_y->setValue(lwIconCfg.item[stItem].tipo_emu_pos_y);
@@ -655,8 +661,8 @@ void frmListIconCfg::on_btn_img_cover_top_clicked()
 
 	if (f_info.Exists)
 	{
-		if (f_info.Path != fGrl->theme())
-			fGrl->copiarArchivo(f_info.FilePath, fGrl->theme() +"images/"+ f_info.NameExt, false, true);
+	//	if (f_info.Path != fGrl->theme())
+	//		fGrl->copiarArchivo(f_info.FilePath, fGrl->theme() +"images/"+ f_info.NameExt, false, true);
 
 		lwIconCfg.item[stItem].img_cover_top_path = "images/"+ f_info.NameExt;
 		ui->img_cover_top->setText(lwIconCfg.item[stItem].img_cover_top_path);
@@ -695,8 +701,8 @@ void frmListIconCfg::on_btn_img_cover_top_select_clicked()
 
 	if (f_info.Exists)
 	{
-		if (f_info.Path != fGrl->theme())
-			fGrl->copiarArchivo(f_info.FilePath, fGrl->theme() +"images/"+ f_info.NameExt, false, true);
+	//	if (f_info.Path != fGrl->theme())
+	//		fGrl->copiarArchivo(f_info.FilePath, fGrl->theme() +"images/"+ f_info.NameExt, false, true);
 
 		lwIconCfg.item[stItem].img_cover_top_path_select = "images/"+ f_info.NameExt;
 		ui->img_cover_top_select->setText(lwIconCfg.item[stItem].img_cover_top_path_select);
@@ -726,6 +732,56 @@ void frmListIconCfg::on_img_cover_top_select_editingFinished()
 	if (!lwIconCfg.item[stItem].img_cover_top_select.load(stTheme + lwIconCfg.item[stItem].img_cover_top_path_select))
 		lwIconCfg.item[stItem].img_cover_top_select.load(":/images/list_cover_top_select.png");
 
+	previewIconConfig();
+}
+
+void frmListIconCfg::on_btn_img_border_color_clicked()
+{
+	QColor color = QColorDialog::getColor(lwIconCfg.item[stItem].img_border_color.color(), this, tr("Color de borde"),  QColorDialog::DontUseNativeDialog);
+
+	if (color.isValid())
+	{
+		setColorBtn(ui->btn_img_border_color, color);
+		lwIconCfg.item[stItem].img_border_color.setColor(color);
+		previewIconConfig();
+	}
+}
+
+void frmListIconCfg::on_btn_img_border_color_def_clicked()
+{
+	lwIconCfg.item[stItem].title_font_color_select = lwIconCfgtmp.item[stItem].title_font_color_select;
+	setColorBtn(ui->btn_img_border_color, lwIconCfg.item[stItem].title_font_color_select.color());
+	previewIconConfig();
+}
+
+void frmListIconCfg::on_btn_img_border_color_select_clicked()
+{
+	QColor color = QColorDialog::getColor(lwIconCfg.item[stItem].img_border_color_select.color(), this, tr("Color de fondo"),  QColorDialog::DontUseNativeDialog);
+
+	if (color.isValid())
+	{
+		setColorBtn(ui->btn_img_border_color_select, color);
+		lwIconCfg.item[stItem].img_border_color_select.setColor(color);
+		previewIconConfig();
+	}
+}
+
+void frmListIconCfg::on_btn_img_border_color_select_def_clicked()
+{
+	lwIconCfg.item[stItem].img_border_color_select = lwIconCfgtmp.item[stItem].img_border_color_select;
+	setColorBtn(ui->btn_img_border_color_select, lwIconCfg.item[stItem].img_border_color_select.color());
+	previewIconConfig();
+}
+
+void frmListIconCfg::on_slider_img_border_color_alpha_valueChanged(int value)
+{
+	lwIconCfg.item[stItem].img_border_color_alpha = value;
+	previewIconConfig();
+}
+
+void frmListIconCfg::on_img_cover_top_bg_clicked(bool checked)
+{
+	lwIconCfg.item[stItem].img_cover_top_bg = checked;
 	previewIconConfig();
 }
 
@@ -808,29 +864,29 @@ void frmListIconCfg::on_btn_img_scale_h_def_clicked()
 	previewIconConfig();
 }
 
-void frmListIconCfg::on_img_scale_pos_x_valueChanged(int arg1)
+void frmListIconCfg::on_img_pos_x_valueChanged(int arg1)
 {
-	lwIconCfg.item[stItem].img_scale_pos_x = arg1;
+	lwIconCfg.item[stItem].img_pos_x = arg1;
 	previewIconConfig();
 }
 
-void frmListIconCfg::on_btn_img_scale_pos_x_def_clicked()
+void frmListIconCfg::on_btn_img_pos_x_def_clicked()
 {
-	lwIconCfg.item[stItem].img_scale_pos_x = lwIconCfgtmp.item[stItem].img_scale_pos_x;
-	ui->img_scale_pos_x->setValue(lwIconCfg.item[stItem].img_scale_pos_x);
+	lwIconCfg.item[stItem].img_pos_x = lwIconCfgtmp.item[stItem].img_pos_x;
+	ui->img_pos_x->setValue(lwIconCfg.item[stItem].img_pos_x);
 	previewIconConfig();
 }
 
-void frmListIconCfg::on_img_scale_pos_y_valueChanged(int arg1)
+void frmListIconCfg::on_img_pos_y_valueChanged(int arg1)
 {
-	lwIconCfg.item[stItem].img_scale_pos_y = arg1;
+	lwIconCfg.item[stItem].img_pos_y = arg1;
 	previewIconConfig();
 }
 
-void frmListIconCfg::on_btn_img_scale_pos_y_def_clicked()
+void frmListIconCfg::on_btn_img_pos_y_def_clicked()
 {
-	lwIconCfg.item[stItem].img_scale_pos_y = lwIconCfgtmp.item[stItem].img_scale_pos_y;
-	ui->img_scale_pos_y->setValue(lwIconCfg.item[stItem].img_scale_pos_y);
+	lwIconCfg.item[stItem].img_pos_y = lwIconCfgtmp.item[stItem].img_pos_y;
+	ui->img_pos_y->setValue(lwIconCfg.item[stItem].img_pos_y);
 	previewIconConfig();
 }
 

@@ -108,6 +108,7 @@
         <file>datos/svm_render_mode.txt</file>
         <file>datos/text_accent_convert.txt</file>
         <file>datos/text_html_convert.txt</file>
+        <file>datos/virtual_driver_list.txt</file>
         <file>scripts/gr-lida.js</file>
         <file>scripts/mobygames.js</file>
         <file>gr-lida</file>
@@ -517,9 +518,13 @@
         <file>img16/umd.png</file>
         <file>img16/vdmsound.png</file>
         <file>img16/video.png</file>
+        <file>img16/virtual_drive.png</file>
         <file>img16/visor.png</file>
         <file>img16/wii.png</file>
+        <file>img16/win7.png</file>
+        <file>img16/win8.png</file>
         <file>img16/win9x.png</file>
+        <file>img16/winnt.png</file>
         <file>img16/winxp.png</file>
         <file>img16/zoom.png</file>
         <file>img16/zoom_in.png</file>

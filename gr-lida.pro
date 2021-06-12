@@ -72,6 +72,7 @@ HEADERS += src/grlida.h \
     src/grlida_config_inicial.h \
     src/grlida_buscar.h \
     src/grlida_list_icon_cfg.h \
+	src/grlida_listview.h \
     src/grlida_addedit_juego.h \
     src/grlida_multimedia.h \
     src/grlida_opciones.h \
@@ -79,11 +80,13 @@ HEADERS += src/grlida.h \
     src/grlida_addedit_vdmsound.h \
     src/grlida_addedit_dosbox.h \
     src/grlida_addedit_montajes.h \
+    src/grlida_addedit_virtual_drive.h \
     src/grlida_wizard_dosbox.h \
     src/grlida_wizard_scummvm.h \
     src/grlida_wizard_vdmsound.h \
     src/grlida_instalar_juego.h \
     src/grlida_cambiar_categoria.h \
+    src/grlida_compatibilidad_exe.h \
     src/grdap.h \
     src/grdap_acercad.h \
     src/grdapview.h \
@@ -106,6 +109,7 @@ SOURCES += src/main.cpp \
     src/grlida_config_inicial.cpp \
     src/grlida_buscar.cpp \
     src/grlida_list_icon_cfg.cpp \
+	src/grlida_listview.cpp \
     src/grlida_addedit_juego.cpp \
     src/grlida_multimedia.cpp \
     src/grlida_opciones.cpp \
@@ -113,11 +117,13 @@ SOURCES += src/main.cpp \
     src/grlida_addedit_vdmsound.cpp \
     src/grlida_addedit_dosbox.cpp \
     src/grlida_addedit_montajes.cpp \
+    src/grlida_addedit_virtual_drive.cpp \
     src/grlida_wizard_dosbox.cpp \
     src/grlida_wizard_scummvm.cpp \
     src/grlida_wizard_vdmsound.cpp \
     src/grlida_instalar_juego.cpp \
     src/grlida_cambiar_categoria.cpp \
+    src/grlida_compatibilidad_exe.cpp \
     src/grdap.cpp \
     src/grdap_acercad.cpp \
     src/grdapview.cpp \
@@ -154,8 +160,10 @@ FORMS += ui/grlida.ui \
     ui/addedit_vdmsound.ui \
     ui/addedit_dosbox.ui \
     ui/addedit_montajes.ui \
+    ui/addedit_virtual_drive.ui \
     ui/instalar_juego.ui \
     ui/cambiar_categoria.ui \
+    ui/compatibilidad_exe.ui \
     ui/wizard_dosbox.ui \
     ui/wizard_scummvm.ui \
     ui/wizard_vdmsound.ui \

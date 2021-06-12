@@ -67,7 +67,7 @@ private:
 
 	QRegExp regexp;
 	QTranslator translator;
-	QString idioma, IdiomaSelect, ThemeSelect;
+	QString idioma, IdiomaSelect, ThemeSelect, tpl_info_formato_fecha_old;
 	QStringList list_key_sequence;
 //	QStringList list_pos;
 

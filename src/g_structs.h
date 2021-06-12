@@ -369,6 +369,7 @@ struct stGrlCfg {
 	QString DatosFiles_PathFile;
 	QString DatosFiles_PathExe;
 	QString DatosFiles_PathSetup;
+	QString DatosFiles_PathImage;
 	QString DatosFiles_PathCapturas;
 // DOSBox
 	QString Dbx_path;
@@ -378,6 +379,7 @@ struct stGrlCfg {
 	QString Dbx_sdl_mapperfile;
 	QString Dbx_dosbox_language;
 	QString Montaje_path;
+	bool    AutoMountImageExe;
 // ScummVM
 	QString Svm_path;
 //	QString Svm_path_game;
@@ -404,6 +406,7 @@ struct stGrlCfg {
 	bool isChangedListDOSBox;
 	bool isChangedShortcut;
 	bool isChangedFavorito;
+	bool isChangedVirtualDrive;
 };
 
 struct stLwItemCfg {
@@ -412,14 +415,18 @@ struct stLwItemCfg {
 	QString img_cover_top_path_select;
 	QPixmap img_cover_top;
 	QPixmap img_cover_top_select;
+	QPen    img_border_color;
+	QPen    img_border_color_select;
+	int     img_border_color_alpha;
 	int     img_cover_top_pos_x;
 	int     img_cover_top_pos_y;
+	bool    img_cover_top_bg;
 	bool    img_cover_top_zindex;
 	bool    img_scaled;
 	int     img_scale_w;
 	int     img_scale_h;
-	int     img_scale_pos_x;
-	int     img_scale_pos_y;
+	int     img_pos_x;
+	int     img_pos_y;
 	bool    tipo_emu_show;
 	int     tipo_emu_pos_x;
 	int     tipo_emu_pos_y;
@@ -547,8 +554,12 @@ struct stDatosJuego {
 	QString usuario;
 	QString path_exe;
 	QString parametros_exe;
+	QString compatibilidad_exe;
 	QString path_setup;
 	QString parametros_setup;
+	QString compatibilidad_setup;
+	QString path_image;
+	QString virtual_drive;
 	stCheckedDatos isChecked;
 // --
 	QString path_capturas;
@@ -679,6 +690,10 @@ struct stConfigDOSBox {
 	QString ipx_ip;
 // [autoexec]
 	QString autoexec;
+	QString autoexec_ini;
+	QString autoexec_fin;
+	QString autoexec_ini_exe;
+	QString autoexec_fin_exe;
 // Opciones
 	QString opt_autoexec;
 	QString opt_loadfix;
@@ -838,6 +853,22 @@ struct stConfigDBGL {
 	QString custom12;
 	QString custom13;
 	QString custom14;
+};
+
+struct stVirtualDrive {
+	QString titulo;
+	QString etiqueta;
+	QString icono;                // Imagen para identificar la unidad virtual.
+// cfgVD
+	QString path_exe;             // Ejecutable del emulador virtual.
+	QString path_image;           // Imagen ISO, CUE/BIN, ecetera.
+	QString letter;               // Letra de la unidad virtual.
+	QString param_mount;          // Parametro para montar la imagen.
+	QString param_unmount;        // Parametro para desmontar la imagen.
+	QString param_extra_1;        // Parametro extra 1
+	QString param_extra_2;        // Parametro extra 2
+	QString command_line_mount;   // Forma de la linea de comandos para montar la imagen en la unidad virtual.
+	QString command_line_unmount; // Forma de la linea de comandos para desmontar la imagen de la unidad virtual.
 };
 
 #endif // G_STRUCTS_H

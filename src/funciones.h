@@ -168,8 +168,6 @@ public:
 	QString getTime();
 // Devuelve la hora y la fecha actual
 	QString horaFechaActual(QString fecha, QString formato = "dd/MM/yyyy HH:mm:ss");
-// Crea y devuelve un listado de fechas desde 1970 a año actual
-	QStringList listaFechas();
 // Devuelve la respuesta
 	bool questionMsg(QString titulo, QString mensaje, QString texto_btn_si = "", QString texto_btn_no = "");
 // Devuelve una forma correcta de parametros
@@ -186,8 +184,9 @@ public:
 	QString getHashFile(QString filename, TipoHash hash = hashSha1);
 // Devuelve un icono de montaje
 	QString getIconMount(QString tipoDrive, QString select_mount = "");
-// Crear Thumbs
-	bool crearThumbs(QString origen, QString destino, int width = 145, int height = 186, int quality = -1, bool ignoreAspectRatio = false, QString format = "JPG");
+// Crear y Guardar Thumbs
+	QPixmap crearThumbs(QString origen, int width = 145, int height = 186, bool ignoreAspectRatio = false, bool center = false, bool marco = true);
+	bool saveThumbs(QString origen, QString destino, int width = 145, int height = 186, bool ignoreAspectRatio = false, bool center = false, QString format = "JPG", int quality = -1, bool marco = false);
 // Leer archivo de texto
 	QString leerArchivo(QString filename, const QByteArray code = "");
 // Guarda archivo de texto
@@ -242,6 +241,9 @@ public:
 	stLwIconCfg cargarListWidgetIconConf(QString tabla = "dbgrl", QString theme = "");
 // Crea la configuración de los iconos de la lista en modo Icono
 	void guardarListWidgetIconConf(stLwIconCfg lwConf, QString tabla = "dbgrl", QString theme = "");
+// Carga el listado de unidades virtuales.
+	QHash<QString, stVirtualDrive> cargarListVirtualDrive(QString iniFileName);
+	QString getCommandLineMount(stVirtualDrive virtualDrive, bool montar);
 
 // Carga la configuración del GR-lida
 	stGrlCfg cargarGRLConfig(QString iniFileName);
@@ -249,6 +251,7 @@ public:
 	void guardarGRLConfig(QString iniFileName, stGrlCfg config);
 // Obtiene la dirección y el nombre del archivo atraves de QFileDialog
 	QString ventanaAbrirArchivos(QWidget *parent, QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter = 0, bool isSave = false);
+	QStringList ventanaAbrirMultiArchivos(QWidget *parent, QString caption, QString dir, QString dir_relative, QString filter, QString *selectedFilter = 0);
 // Obtiene la dirección de una carpeta atraves de QFileDialog
 	QString ventanaDirectorios(QWidget *parent, QString caption, QString dir, QString dir_relative = "");
 // Abre un archivo con el programa predeterminado
