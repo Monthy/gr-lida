@@ -89,7 +89,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QListView" name="lvJuegos">
+       <widget class="GrlListView" name="lvJuegos">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -2684,6 +2684,11 @@
   </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>GrlListView</class>
+   <extends>QListView</extends>
+   <header>grlida_listview.h</header>
+  </customwidget>
   <customwidget>
    <class>AnimatedTextBrowser</class>
    <extends>QTextBrowser</extends>

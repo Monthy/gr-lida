@@ -117,6 +117,12 @@ private slots:
 	void on_btn_img_cover_top_select_clicked();
 	void on_btn_img_cover_top_select_def_clicked();
 	void on_img_cover_top_select_editingFinished();
+	void on_btn_img_border_color_clicked();
+	void on_btn_img_border_color_def_clicked();
+	void on_btn_img_border_color_select_clicked();
+	void on_btn_img_border_color_select_def_clicked();
+	void on_slider_img_border_color_alpha_valueChanged(int value);
+	void on_img_cover_top_bg_clicked(bool checked);
 	void on_img_cover_top_pos_x_valueChanged(int arg1);
 	void on_btn_img_cover_top_pos_x_def_clicked();
 	void on_img_cover_top_pos_y_valueChanged(int arg1);
@@ -130,10 +136,10 @@ private slots:
 	void on_btn_img_scale_w_def_clicked();
 	void on_img_scale_h_valueChanged(int arg1);
 	void on_btn_img_scale_h_def_clicked();
-	void on_img_scale_pos_x_valueChanged(int arg1);
-	void on_btn_img_scale_pos_x_def_clicked();
-	void on_img_scale_pos_y_valueChanged(int arg1);
-	void on_btn_img_scale_pos_y_def_clicked();
+	void on_img_pos_x_valueChanged(int arg1);
+	void on_btn_img_pos_x_def_clicked();
+	void on_img_pos_y_valueChanged(int arg1);
+	void on_btn_img_pos_y_def_clicked();
 //--
 	void on_tipo_emu_show_clicked(bool checked);
 	void on_btn_tipo_emu_show_def_clicked();

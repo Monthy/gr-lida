@@ -72,6 +72,7 @@ HEADERS += src/grlida.h \
     src/grlida_config_inicial.h \
     src/grlida_buscar.h \
     src/grlida_list_icon_cfg.h \
+	src/grlida_listview.h \
     src/grlida_addedit_juego.h \
     src/grlida_multimedia.h \
     src/grlida_opciones.h \
@@ -108,6 +109,7 @@ SOURCES += src/main.cpp \
     src/grlida_config_inicial.cpp \
     src/grlida_buscar.cpp \
     src/grlida_list_icon_cfg.cpp \
+	src/grlida_listview.cpp \
     src/grlida_addedit_juego.cpp \
     src/grlida_multimedia.cpp \
     src/grlida_opciones.cpp \

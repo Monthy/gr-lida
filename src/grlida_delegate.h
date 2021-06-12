@@ -64,6 +64,8 @@ private:
 	QPen pen;
 	bool m_showLinesPos;
 
+	void paintShadow(QPainter *painter, QPen m_pen, int x, int y, int w, int h, int a = 25)  const;
+
 };
 // FIN GrlListViewDelegate --------------------------------------------------------------------------------------
 

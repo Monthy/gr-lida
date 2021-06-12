@@ -759,7 +759,7 @@ void frmOpciones::cargarListaThemes()
 	QStringList list_themes = dir.entryList(QDir::NoDotAndDotDot | QDir::AllDirs);
 	list_themes.insert(0, "defecto");
 
-	ui->lb_theme_example->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+	ui->lb_theme_example->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", 200, 128, false, true));
 
 	ui->twThemes->clear();
 	const int list_themesSize = list_themes.size();
@@ -791,7 +791,7 @@ void frmOpciones::cargarListaThemes()
 			index = i;
 
 			if (QFile::exists(grlDir.Themes + list_themes.at(i) +"/preview.png"))
-				ui->lb_theme_example->setPixmap(QPixmap(grlDir.Themes + list_themes.at(i) +"/preview.png"));
+				ui->lb_theme_example->setPixmap(fGrl->crearThumbs(grlDir.Themes + list_themes.at(i) +"/preview.png", 200, 128, false, true));
 		}
 	}
 
@@ -2768,14 +2768,14 @@ void frmOpciones::on_twThemes_itemClicked(QTreeWidgetItem *item, int column)
 		fGrl->setTheme(grlCfg.NameDirTheme);
 
 		if (QFile::exists(fGrl->theme() +"preview.png"))
-			ui->lb_theme_example->setPixmap(QPixmap(fGrl->theme() +"preview.png"));
+			ui->lb_theme_example->setPixmap(fGrl->crearThumbs(fGrl->theme() +"preview.png", 200, 128, false, true));
 		else
-			ui->lb_theme_example->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+			ui->lb_theme_example->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", 200, 128, false, true));
 
 		cargarConfig();
 		setTheme();
 	} else
-		ui->lb_theme_example->setPixmap(QPixmap(fGrl->theme() +"images/juego_sin_imagen.png"));
+		ui->lb_theme_example->setPixmap(fGrl->crearThumbs(fGrl->theme() +"images/juego_sin_imagen.png", 200, 128, false, true));
 }
 
 void frmOpciones::on_twThemes_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)

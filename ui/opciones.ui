@@ -3498,14 +3498,14 @@
                <widget class="QLabel" name="lb_theme_example">
                 <property name="minimumSize">
                  <size>
-                  <width>180</width>
-                  <height>128</height>
+                  <width>208</width>
+                  <height>132</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
-                  <height>128</height>
+                  <height>132</height>
                  </size>
                 </property>
                 <property name="frameShape">
@@ -3558,8 +3558,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>620</width>
-                <height>551</height>
+                <width>634</width>
+                <height>541</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_5">
