@@ -554,10 +554,10 @@ void frmOpciones::cargarConfig()
 	ui->lwExtImage->setCurrentRow(0);
 
 	ui->cbx_thumb_format->clear();
-	ui->cbx_thumb_format->addItem(QIcon(fGrl->theme() +"img16/imagen.png"), tr("Thumb en JPG"), "JPG");
+	ui->cbx_thumb_format->addItem(QIcon(fGrl->theme() +"img16/imagen.png"), tr("Thumb en JPG") , "JPG" );
 	ui->cbx_thumb_format->addItem(QIcon(fGrl->theme() +"img16/imagen.png"), tr("Thumb en JPEG"), "JPEG");
-	ui->cbx_thumb_format->addItem(QIcon(fGrl->theme() +"img16/imagen.png"), tr("Thumb en PNG"), "PNG");
-	ui->cbx_thumb_format->addItem(QIcon(fGrl->theme() +"img16/imagen.png"), tr("Thumb en BMP"), "BMP");
+	ui->cbx_thumb_format->addItem(QIcon(fGrl->theme() +"img16/imagen.png"), tr("Thumb en PNG") , "PNG" );
+	ui->cbx_thumb_format->addItem(QIcon(fGrl->theme() +"img16/imagen.png"), tr("Thumb en BMP") , "BMP" );
 
 	row = ui->cbx_thumb_format->findData(grlCfg.thumb_format, Qt::UserRole, Qt::MatchContains);
 	ui->cbx_thumb_format->setCurrentIndex(row);
@@ -3067,6 +3067,59 @@ void frmOpciones::on_chkPicFlowShowTriangle_toggled(bool checked)
 }
 
 //---------------------------------------------------
+void frmOpciones::on_btn_regenerar_thumbs_clicked()
+{
+	QList<stGrlCats> list_cat = sql->getCategorias();
+	QSqlQuery tmp_query(sql->getSqlDB());
+
+	grlCfg.thumb_width       = ui->spinBox_thumb_width->value();
+	grlCfg.thumb_height      = ui->spinBox_thumb_height->value();
+	grlCfg.thumb_quality     = ui->spinBox_thumb_quality->value();
+	grlCfg.thumb_format      = ui->cbx_thumb_format->itemData(ui->cbx_thumb_format->currentIndex()).toString();
+	grlCfg.thumb_img_width   = ui->spinBox_thumb_img_width->value();
+	grlCfg.thumb_img_height  = ui->spinBox_thumb_img_height->value();
+	grlCfg.thumb_img_quality = ui->spinBox_thumb_img_quality->value();
+
+	const int listCatSize = list_cat.size();
+	for (int c = 0; c < listCatSize; ++c)
+	{
+		tmp_query.exec("SELECT idgrl FROM "+ list_cat.at(c).tabla +";");
+		if (tmp_query.first())
+		{
+			do {
+				// Regenera los thumbs.
+				stDatosJuego datos   = sql->show_Datos(list_cat.at(c).tabla, tmp_query.record().value("idgrl").toString());
+				datos.titulo_guiones = sql->removeAccents(datos.titulo);
+				datos.game_dir       = "id-"+ datos.idgrl +"_"+ datos.titulo_guiones +"_"+ datos.tipo_emu;
+
+				QString dir_game_base = grlDir.Home +"datosdb/"+ list_cat.at(c).tabla +"/"+ datos.game_dir +"/";
+
+				fGrl->eliminarArchivo(dir_game_base + datos.thumbs);
+
+				datos.thumbs = "thumbs." + grlCfg.thumb_format.toLower();
+				sql->actualizaDatosItem(list_cat.at(c).tabla, datos.idgrl, "thumbs", datos.thumbs);
+
+				fGrl->saveThumbs(dir_game_base +"caja/"+ datos.cover_front, dir_game_base + datos.thumbs, grlCfg.thumb_width, grlCfg.thumb_height, false, false, grlCfg.thumb_format, grlCfg.thumb_quality);
+
+				// Regenera las imagenes pequeñas para el listado de imágenes.
+				if (ui->chk_regenerar_thumb_img->isChecked())
+				{
+					QFileInfoList list_imagenes_small = fGrl->getListFiles(dir_game_base +"imagenes/small/", QString("*.jpg").split(";"), true);
+					fGrl->eliminarArchivos(list_imagenes_small);
+
+					QFileInfoList list_imagenes = fGrl->getListFiles(dir_game_base +"imagenes/", QString("*.*").split(";"), true);
+					const int listSize = list_imagenes.size();
+					for (int i = 0; i < listSize; ++i)
+					{
+						QString fileName = list_imagenes.at(i).fileName();
+						fGrl->saveThumbs(dir_game_base +"imagenes/"+ fileName, dir_game_base +"imagenes/small/"+ fileName +".jpg", grlCfg.thumb_img_width, grlCfg.thumb_img_height, false, true, "JPG", grlCfg.thumb_img_quality, true);
+					}
+				}
+			} while (tmp_query.next()); // fin bucle juegos en la categoria.
+		} // fin SQL SELECT categoria.
+	}
+}
+
 void frmOpciones::on_btnExtVideoAdd_clicked()
 {
 	if (!ui->txtExtVideo->text().isEmpty())

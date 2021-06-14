@@ -256,6 +256,7 @@ private slots:
 
 	void on_chkPicFlowShowTriangle_toggled(bool checked);
 // --
+	void on_btn_regenerar_thumbs_clicked();
 	void on_btnExtVideoAdd_clicked();
 	void on_btnExtVideoDelete_clicked();
 	void on_btnExtVideoDefecto_clicked();

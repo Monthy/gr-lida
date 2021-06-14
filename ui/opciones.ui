@@ -3558,8 +3558,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>541</height>
+                <width>610</width>
+                <height>503</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_5">
@@ -4835,28 +4835,94 @@
          <property name="title">
           <string>Opciones para los thumbs</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_14">
-          <item row="0" column="0" colspan="7">
-           <widget class="QLabel" name="lb_Opt_74">
+         <layout class="QGridLayout" name="gridLayout_14" columnstretch="0,0,0,0,0,0,0,1">
+          <item row="4" column="2">
+           <widget class="QLabel" name="lb_Opt_70">
             <property name="text">
-             <string>Opciones para guardar minuatura de la carátula o portada del juego.</string>
+             <string>Alto:</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="lb_Opt_73">
-            <property name="text">
-             <string>Formato:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1" colspan="4">
-           <widget class="QComboBox" name="cbx_thumb_format">
+          <item row="4" column="1">
+           <widget class="QSpinBox" name="spinBox_thumb_img_width">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>60</width>
               <height>24</height>
              </size>
+            </property>
+            <property name="minimum">
+             <number>64</number>
+            </property>
+            <property name="maximum">
+             <number>1024</number>
+            </property>
+            <property name="value">
+             <number>128</number>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QSpinBox" name="spinBox_thumb_img_height">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="minimum">
+             <number>64</number>
+            </property>
+            <property name="maximum">
+             <number>1024</number>
+            </property>
+            <property name="value">
+             <number>128</number>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="5">
+           <widget class="QSpinBox" name="spinBox_thumb_img_quality">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>90</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QSpinBox" name="spinBox_thumb_height">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="minimum">
+             <number>64</number>
+            </property>
+            <property name="maximum">
+             <number>1024</number>
+            </property>
+            <property name="value">
+             <number>186</number>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="lb_Opt_72">
+            <property name="text">
+             <string>Ancho:</string>
             </property>
            </widget>
           </item>
@@ -4886,29 +4952,41 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="2">
-           <widget class="QLabel" name="lb_Opt_66">
+          <item row="1" column="0">
+           <widget class="QLabel" name="lb_Opt_73">
             <property name="text">
-             <string>Alto:</string>
+             <string>Formato:</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="3">
-           <widget class="QSpinBox" name="spinBox_thumb_height">
+          <item row="1" column="1" colspan="4">
+           <widget class="QComboBox" name="cbx_thumb_format">
             <property name="minimumSize">
              <size>
-              <width>60</width>
+              <width>0</width>
               <height>24</height>
              </size>
             </property>
-            <property name="minimum">
-             <number>64</number>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="7">
+           <widget class="QLabel" name="lb_Opt_74">
+            <property name="text">
+             <string>Opciones para guardar minuatura de la carátula o portada del juego.</string>
             </property>
-            <property name="maximum">
-             <number>1024</number>
+           </widget>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLabel" name="lb_Opt_71">
+            <property name="text">
+             <string>Calidad:</string>
             </property>
-            <property name="value">
-             <number>186</number>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="7">
+           <widget class="QLabel" name="lb_Opt_75">
+            <property name="text">
+             <string>Opciones para guardar minuatura de las imágenes del juego.</string>
             </property>
            </widget>
           </item>
@@ -4938,7 +5016,27 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="6">
+          <item row="2" column="2">
+           <widget class="QLabel" name="lb_Opt_66">
+            <property name="text">
+             <string>Alto:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="6" colspan="2">
+           <widget class="QLabel" name="lb_Opt_69">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>De 0 a 100 de peor a mejor calidad</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="6" colspan="2">
            <widget class="QLabel" name="lb_Opt_68">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -4951,101 +5049,26 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0" colspan="7">
-           <widget class="QLabel" name="lb_Opt_75">
-            <property name="text">
-             <string>Opciones para guardar minuatura de las imágenes del juego.</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="lb_Opt_72">
-            <property name="text">
-             <string>Ancho:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QSpinBox" name="spinBox_thumb_img_width">
+          <item row="1" column="6">
+           <widget class="QPushButton" name="btn_regenerar_thumbs">
             <property name="minimumSize">
              <size>
-              <width>60</width>
-              <height>24</height>
+              <width>100</width>
+              <height>26</height>
              </size>
             </property>
-            <property name="minimum">
-             <number>64</number>
-            </property>
-            <property name="maximum">
-             <number>1024</number>
-            </property>
-            <property name="value">
-             <number>128</number>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <widget class="QLabel" name="lb_Opt_70">
             <property name="text">
-             <string>Alto:</string>
+             <string>Regenerar thumbs</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="3">
-           <widget class="QSpinBox" name="spinBox_thumb_img_height">
-            <property name="minimumSize">
-             <size>
-              <width>60</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>64</number>
-            </property>
-            <property name="maximum">
-             <number>1024</number>
-            </property>
-            <property name="value">
-             <number>128</number>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="4">
-           <widget class="QLabel" name="lb_Opt_71">
+          <item row="1" column="7">
+           <widget class="QCheckBox" name="chk_regenerar_thumb_img">
             <property name="text">
-             <string>Calidad:</string>
+             <string>También miniaturas de imágenes</string>
             </property>
-           </widget>
-          </item>
-          <item row="4" column="5">
-           <widget class="QSpinBox" name="spinBox_thumb_img_quality">
-            <property name="minimumSize">
-             <size>
-              <width>60</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>0</number>
-            </property>
-            <property name="maximum">
-             <number>100</number>
-            </property>
-            <property name="value">
-             <number>90</number>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="6">
-           <widget class="QLabel" name="lb_Opt_69">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>De 0 a 100 de peor a mejor calidad</string>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -5349,6 +5372,12 @@
            <layout class="QHBoxLayout" name="horizontalLayout_13">
             <item>
              <widget class="QPushButton" name="btnExtVideoDefecto">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>26</height>
+               </size>
+              </property>
               <property name="text">
                <string>Por defecto</string>
               </property>
@@ -5373,6 +5402,12 @@
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
              <widget class="QPushButton" name="btnExtMusicDefecto">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>26</height>
+               </size>
+              </property>
               <property name="text">
                <string>Por defecto</string>
               </property>
@@ -5397,6 +5432,12 @@
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
              <widget class="QPushButton" name="btnExtImageDefecto">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>26</height>
+               </size>
+              </property>
               <property name="text">
                <string>Por defecto</string>
               </property>
@@ -5677,7 +5718,6 @@
   <tabstop>btnMnuNavDelete</tabstop>
   <tabstop>txtMnuShortCutTitulo</tabstop>
   <tabstop>cbxMnuShortCutSqlQuery</tabstop>
-  <tabstop>txtShortcutKeySequence</tabstop>
   <tabstop>btnShortcutKeySequenceReset</tabstop>
   <tabstop>chkMnuShortCutShow</tabstop>
   <tabstop>chkMnuShortCutSeparator</tabstop>
@@ -5721,7 +5761,6 @@
   <tabstop>cbxFuenteTipo</tabstop>
   <tabstop>cbxFontSize</tabstop>
   <tabstop>btnEditTheme</tabstop>
-  <tabstop>twThemes</tabstop>
   <tabstop>scrollArea</tabstop>
   <tabstop>cbxPicFlowType</tabstop>
   <tabstop>spinBox_PicFlowSkip</tabstop>
@@ -5772,6 +5811,8 @@
   <tabstop>spinBox_thumb_img_width</tabstop>
   <tabstop>spinBox_thumb_img_height</tabstop>
   <tabstop>spinBox_thumb_img_quality</tabstop>
+  <tabstop>btn_regenerar_thumbs</tabstop>
+  <tabstop>chk_regenerar_thumb_img</tabstop>
   <tabstop>txtExtVideo</tabstop>
   <tabstop>btnExtVideoAdd</tabstop>
   <tabstop>lwExtVideo</tabstop>
@@ -5789,6 +5830,7 @@
   <tabstop>btnExtImageDefecto</tabstop>
   <tabstop>btnOk</tabstop>
   <tabstop>btnCancel</tabstop>
+  <tabstop>chkAutoMountImageExe</tabstop>
  </tabstops>
  <resources>
   <include location="../res/gr-lida.qrc"/>
