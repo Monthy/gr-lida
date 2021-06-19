@@ -42,7 +42,7 @@ class frmUpdate : public QDialog
 	Q_OBJECT
 
 public:
-	explicit frmUpdate(QList<stUpdates> m_up_grl, QList<stUpdates> m_up_js, QList<stUpdates> m_up_st, stUpdates m_up_svm, stGrlCfg m_cfg, QWidget *parent = 0);
+	explicit frmUpdate(QList<stUpdates> m_up_grl, QList<stUpdates> m_up_js, QList<stUpdates> m_up_st, QList<stUpdates> m_up_emu, stUpdates m_up_svm, stGrlCfg m_cfg, QWidget *parent = 0);
 	~frmUpdate();
 
 	stGrlCfg getGrlCfg() { return grlCfg;}

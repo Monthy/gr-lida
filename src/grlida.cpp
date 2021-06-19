@@ -64,6 +64,7 @@ GrLida::GrLida(QWidget *parent) :
 	grlDir.Temp       = grlDir.Home +"temp/";
 	grlDir.Templates  = grlDir.Home +"templates/";
 	grlDir.Themes     = grlDir.Home +"themes/";
+	grlDir.Emus       = grlDir.Home +"emus/";
 
 	grlCfg       = fGrl->cargarGRLConfig(grlDir.Home +"GR-lida.conf");
 	lwIconCfg    = fGrl->cargarListWidgetIconConf();
@@ -1893,9 +1894,10 @@ bool GrLida::getDatosUpdates(QList<stUpdates> &update, QString tipo)
 				if (fGrl->getOS() == os)
 					up.isInstalled = true;
 			} else if (tipo == "scripts") {
-				if (QFile::exists(grlDir.Scripts + up.file))
+				QString file_scripts = grlDir.Scripts + fGrl->getInfoFile(up.file).Name +".js";
+				if (QFile::exists(file_scripts))
 				{
-					engine.evaluate(fGrl->leerArchivo(grlDir.Scripts + up.file, "UTF-8"));
+					engine.evaluate(fGrl->leerArchivo(file_scripts, "UTF-8"));
 					up.ver_old = fGrl->getValueScript(engine, "version", "0");
 					up.isInstalled = true;
 				}
@@ -1904,6 +1906,15 @@ bool GrLida::getDatosUpdates(QList<stUpdates> &update, QString tipo)
 				if (QFile::exists(grlDir.Themes + up.title +"/info.ini"))
 				{
 					QSettings settings(grlDir.Themes + up.title +"/info.ini", QSettings::IniFormat);
+					settings.beginGroup("info");
+						up.ver_old = settings.value("version", "0").toString();
+					settings.endGroup();
+					up.isInstalled = true;
+				}
+			} else if (tipo == "emus") {
+				if (QFile::exists(grlDir.Emus + up.title +"/info.ini"))
+				{
+					QSettings settings(grlDir.Emus + up.title +"/info.ini", QSettings::IniFormat);
 					settings.beginGroup("info");
 						up.ver_old = settings.value("version", "0").toString();
 					settings.endGroup();
@@ -1928,12 +1939,13 @@ bool GrLida::getDatosUpdates(QList<stUpdates> &update, QString tipo)
 
 void GrLida::statusFinished()
 {
-	QList<stUpdates> updates_grl, updates_js, updates_theme;
+	QList<stUpdates> updates_grl, updates_js, updates_theme, updates_emus;
 	stUpdates updates_svm;
 
 	bool isNuevaVersionGRlida  = false;
 	bool isNuevosScript        = false;
 	bool isNuevosThemes        = false;
+	bool isNuevosEmus          = false;
 	bool isNuevaVersionListSvm = false;
 
 	xml.clear();
@@ -1953,6 +1965,8 @@ void GrLida::statusFinished()
 					isNuevosScript = getDatosUpdates(updates_js, "scripts");
 				} else if (xml.name() == "themes") {
 					isNuevosThemes = getDatosUpdates(updates_theme, "themes");
+				} else if (xml.name() == "emus") {
+					isNuevosEmus = getDatosUpdates(updates_emus, "emus");
 				} else if (xml.name() == "list_svm") {
 					updates_svm.title       = xml.attributes().value("title").toString();
 					updates_svm.version     = xml.attributes().value("ver").toString();
@@ -1976,13 +1990,13 @@ void GrLida::statusFinished()
 	int respuesta = 0;
 	if (isUpdateMenu)
 	{
-		if (!isNuevaVersionGRlida && !isNuevaVersionListSvm && !isNuevosScript && !isNuevosThemes)
+		if (!isNuevaVersionGRlida && !isNuevaVersionListSvm && !isNuevosScript && !isNuevosThemes && !isNuevosEmus)
 			respuesta = fGrl->questionMsg(tr("Actualizaciones"), tr("No existen actualizaciones."), tr("Mostrar"), tr("Aceptar"));
 	}
 
-	if (isNuevaVersionGRlida || isNuevaVersionListSvm || isNuevosScript || (isNuevosThemes && grlCfg.chkUpdateThemes) || respuesta)
+	if (isNuevaVersionGRlida || isNuevaVersionListSvm || isNuevosScript || (isNuevosThemes && grlCfg.chkUpdateThemes) || isNuevosEmus || respuesta)
 	{
-		frmUpdate *UpdateNew = new frmUpdate(updates_grl, updates_js, updates_theme, updates_svm, grlCfg, this);
+		frmUpdate *UpdateNew = new frmUpdate(updates_grl, updates_js, updates_theme, updates_emus, updates_svm, grlCfg, this);
 		UpdateNew->exec();
 		grlCfg = UpdateNew->getGrlCfg();
 		delete UpdateNew;

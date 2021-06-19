@@ -76,13 +76,18 @@ int main(int argc, char *argv[])
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta iconos"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-// Crear directorio themes si no existe
+// Crear directorio iconos si no existe
 	fGrl.comprobarDirectorio(grlDir.Home +"iconos/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta themes"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();
-// Crear directorio iconos si no existe
+// Crear directorio themes si no existe
 	fGrl.comprobarDirectorio(grlDir.Home +"themes/");
+
+	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta emus"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
+	app.processEvents();
+// Crear directorio emus si no existe
+	fGrl.comprobarDirectorio(grlDir.Home +"emus/");
 
 	splash.showMessage(QObject::tr("Iniciando") +": "+ QObject::tr("Comprobando carpeta smiles"), Qt::AlignLeft | Qt::AlignBottom,  Qt::white);
 	app.processEvents();

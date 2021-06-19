@@ -137,6 +137,7 @@ struct stGrlDir {
 	QString Temp;
 	QString Templates;
 	QString Themes;
+	QString Emus;
 //--
 //	QString Capturas;
 //	QString Confdbx;

@@ -27,7 +27,7 @@
 #include "grlida_update.h"
 #include "ui_update.h"
 
-frmUpdate::frmUpdate(QList<stUpdates> m_up_grl, QList<stUpdates> m_up_js, QList<stUpdates> m_up_st, stUpdates m_up_svm, stGrlCfg m_cfg, QWidget *parent) :
+frmUpdate::frmUpdate(QList<stUpdates> m_up_grl, QList<stUpdates> m_up_js, QList<stUpdates> m_up_st, QList<stUpdates> m_up_emu, stUpdates m_up_svm, stGrlCfg m_cfg, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::frmUpdate)
 {
@@ -41,6 +41,7 @@ frmUpdate::frmUpdate(QList<stUpdates> m_up_grl, QList<stUpdates> m_up_js, QList<
 	grlDir.Scripts = grlDir.Home +"scripts/";
 	grlDir.Temp    = grlDir.Home +"temp/";
 	grlDir.Themes  = grlDir.Home +"themes/";
+	grlDir.Emus    = grlDir.Home +"emus/";
 
 	cargarConfig();
 
@@ -75,6 +76,15 @@ frmUpdate::frmUpdate(QList<stUpdates> m_up_grl, QList<stUpdates> m_up_js, QList<
 
 		for (int i = 0; i < listUpStSize; ++i)
 			twAddSubCat(m_up_st.at(i), fGrl->theme() +"img16/style.png", "POST");
+	}
+
+	const int listUpEmuSize = m_up_emu.size();
+	if (listUpEmuSize > 0)
+	{
+		twAddCat(tr("Emuladores que puedes usar en GR-lida"), m_up_emu.at(0).info, fGrl->theme() +"img16/cartucho.png");
+
+		for (int i = 0; i < listUpEmuSize; ++i)
+			twAddSubCat(m_up_emu.at(i), fGrl->theme() +"img16/cartucho.png", "POST");
 	}
 
 	if (!m_up_svm.info.isEmpty())
@@ -233,6 +243,10 @@ void frmUpdate::statusFinished()
 		if (listFiles.at(i).tipo == "themes")
 		{
 			extractFile(grlDir.Temp + listFiles.at(i).archivo, grlDir.Themes);
+		}
+		if (listFiles.at(i).tipo == "emus")
+		{
+			extractFile(grlDir.Temp + listFiles.at(i).archivo, grlDir.Emus);
 		}
 		if (listFiles.at(i).tipo == "list_svm")
 		{
