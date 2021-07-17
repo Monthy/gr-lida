@@ -101,32 +101,32 @@
     </message>
     <message>
         <location filename="../../3rdparty/editorwidget/editorwidget.cpp" line="359"/>
-        <source>SuperÃ­ndice</source>
+        <source>Superíndice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../3rdparty/editorwidget/editorwidget.cpp" line="362"/>
-        <source>SubÃ­ndice</source>
+        <source>Subíndice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../3rdparty/editorwidget/editorwidget.cpp" line="396"/>
-        <source>CÃ³digo</source>
+        <source>Código</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../3rdparty/editorwidget/editorwidget.cpp" line="433"/>
-        <source>Coincidir mayÃºsculas/minÃºsculas</source>
+        <source>Coincidir mayúsculas/minúsculas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../3rdparty/editorwidget/editorwidget.cpp" line="1125"/>
-        <source>ImÃ¡genes</source>
+        <source>Imágenes</source>
         <translation>képalkotás</translation>
     </message>
     <message>
         <location filename="../../3rdparty/editorwidget/editorwidget.cpp" line="1130"/>
-        <source>ImÃ¡genes soportadas</source>
+        <source>Imágenes soportadas</source>
         <translation>Támogatott képek</translation>
     </message>
     <message>
@@ -242,12 +242,12 @@
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="620"/>
-        <source>Â¿Sobrescribir?</source>
+        <source>¿Sobrescribir?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="620"/>
-        <source>Â¿El archivo &apos;</source>
+        <source>¿El archivo &apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -257,7 +257,7 @@
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="1004"/>
-        <source>CarÃ¡tula frontal</source>
+        <source>Carátula frontal</source>
         <translation>Előlap</translation>
     </message>
     <message>
@@ -267,7 +267,7 @@
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="1006"/>
-        <source>CalificaciÃ³n</source>
+        <source>Calificación</source>
         <translation>Értékelés</translation>
     </message>
     <message>
@@ -282,7 +282,7 @@
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="1009"/>
-        <source>SubtÃ­tulo</source>
+        <source>Subtítulo</source>
         <translation>Alcím</translation>
     </message>
     <message>
@@ -362,12 +362,12 @@
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="1024"/>
-        <source>AÃ±adido el</source>
+        <source>Añadido el</source>
         <translation>Hozzáadva</translation>
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="1025"/>
-        <source>GrÃ¡ficos</source>
+        <source>Gráficos</source>
         <translation>Grafika</translation>
     </message>
     <message>
@@ -397,7 +397,7 @@
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="1031"/>
-        <source>DescripciÃ³n</source>
+        <source>Descripción</source>
         <translation>Leírás</translation>
     </message>
     <message>
@@ -407,17 +407,17 @@
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="1033"/>
-        <source>NÂº discos</source>
+        <source>Nº discos</source>
         <translation>Lemezek száma</translation>
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="1037"/>
-        <source>TÃ­tulo</source>
+        <source>Título</source>
         <translation>Cím</translation>
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="1038"/>
-        <source>TÃ­tulo album</source>
+        <source>Título album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -427,7 +427,7 @@
     </message>
     <message>
         <location filename="../../src/funciones.cpp" line="2041"/>
-        <source>ConfiguraciÃ³n por defecto</source>
+        <source>Configuración por defecto</source>
         <translation>Az alapértelmezett konfiguráció</translation>
     </message>
     <message>
@@ -792,43 +792,43 @@
         <location filename="../../src/grdap.cpp" line="874"/>
         <location filename="../../src/grdap.cpp" line="880"/>
         <location filename="../../src/grdap.cpp" line="949"/>
-        <source>Âº</source>
+        <source>º</source>
         <translation>º</translation>
     </message>
     <message>
         <location filename="../../src/grdap.cpp" line="443"/>
-        <source>TamaÃ±o</source>
+        <source>Tamaño</source>
         <translation>Méret</translation>
     </message>
     <message>
         <location filename="../../src/grdap.cpp" line="495"/>
         <location filename="../../src/grdap.cpp" line="530"/>
-        <source>Seleccione la configuraciÃ³n que quieres abrir.</source>
+        <source>Seleccione la configuración que quieres abrir.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grdap.cpp" line="587"/>
-        <source>TÃ­tulo del juego</source>
+        <source>Título del juego</source>
         <translation>Game title</translation>
     </message>
     <message>
         <location filename="../../src/grdap.cpp" line="590"/>
-        <source>DescripciÃ³n</source>
+        <source>Descripción</source>
         <translation>Leírás</translation>
     </message>
     <message>
         <location filename="../../src/grdap.cpp" line="725"/>
-        <source>PÃ¡gina</source>
+        <source>Página</source>
         <translation>Oldal</translation>
     </message>
     <message>
         <location filename="../../src/grdap.cpp" line="799"/>
-        <source>Ruleta de protecciÃ³n</source>
+        <source>Ruleta de protección</source>
         <translation>Másolási védelem kerék</translation>
     </message>
     <message>
         <location filename="../../src/grdap.cpp" line="800"/>
-        <source>ImÃ¡genes soportadas</source>
+        <source>Imágenes soportadas</source>
         <translation>Támogatott képek</translation>
     </message>
     <message>
@@ -2027,8 +2027,8 @@
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="376"/>
-        <source>No se ha podido establecer una conexiÃ³n con la base de datos.
-Esta aplicaciÃ³n necesita soporte de SQLite. Mira la documentaciÃ³n de Qt SQL driver para mÃ¡s informaciÃ³n.
+        <source>No se ha podido establecer una conexión con la base de datos.
+Esta aplicación necesita soporte de SQLite. Mira la documentación de Qt SQL driver para más información.
 
 Click cancelar para salir.</source>
         <translation>Nem sikerült csatlakozni az adatbázishoz.
@@ -2039,30 +2039,30 @@ Kilépéshez kattincson a Mégse-re.</translation>
     <message>
         <location filename="../../src/grlida.cpp" line="1653"/>
         <location filename="../../src/grlida.cpp" line="2094"/>
-        <source>TÃ­tulo</source>
+        <source>Título</source>
         <translation>Cím</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="1656"/>
         <location filename="../../src/grlida.cpp" line="2097"/>
-        <source>CompaÃ±ia</source>
+        <source>Compañia</source>
         <translation>Kiadó</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="1661"/>
         <location filename="../../src/grlida.cpp" line="2105"/>
-        <source>AÃ±o</source>
+        <source>Año</source>
         <translation>Év</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="1662"/>
-        <source>NÂº discos</source>
+        <source>Nº discos</source>
         <translation>Lemezek száma</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="1664"/>
         <location filename="../../src/grlida.cpp" line="2109"/>
-        <source>GrÃ¡ficos</source>
+        <source>Gráficos</source>
         <translation>Grafika</translation>
     </message>
     <message>
@@ -2072,7 +2072,7 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="2108"/>
-        <source>TamaÃ±o</source>
+        <source>Tamaño</source>
         <translation>Méret</translation>
     </message>
     <message>
@@ -2084,12 +2084,12 @@ Kilépéshez kattincson a Mégse-re.</translation>
     <message>
         <location filename="../../src/grlida.cpp" line="2263"/>
         <location filename="../../src/grlida.cpp" line="2825"/>
-        <source>NÂº juegos</source>
+        <source>Nº juegos</source>
         <translation>Játékok száma</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="1584"/>
-        <source>InformaciÃ³n no disponible</source>
+        <source>Información no disponible</source>
         <translation>Információ nem áll rendelkezésre</translation>
     </message>
     <message>
@@ -2108,7 +2108,7 @@ Kilépéshez kattincson a Mégse-re.</translation>
     <message>
         <location filename="../../src/grlida.cpp" line="1654"/>
         <location filename="../../src/grlida.cpp" line="2095"/>
-        <source>SubtÃ­tulo</source>
+        <source>Subtítulo</source>
         <translation>Alcím</translation>
     </message>
     <message>
@@ -2143,7 +2143,7 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="2106"/>
-        <source>NÂº Discos</source>
+        <source>Nº Discos</source>
         <translation>Lemezek száma</translation>
     </message>
     <message>
@@ -2166,12 +2166,12 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3321"/>
-        <source>Â¿Deseas realmente eliminar este juego de la base de datos?</source>
+        <source>¿Deseas realmente eliminar este juego de la base de datos?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3325"/>
-        <source>Si es de DOSBox o VDMSound tambiÃ©n se borra el archivo de configuraciÃ³n.</source>
+        <source>Si es de DOSBox o VDMSound también se borra el archivo de configuración.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2181,17 +2181,17 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3341"/>
-        <source>Eliminar carÃ¡tula thumbs.</source>
+        <source>Eliminar carátula thumbs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3345"/>
-        <source>Eliminar imÃ¡genes de la caja.</source>
+        <source>Eliminar imágenes de la caja.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3350"/>
-        <source>CarÃ¡tula delantera, trasera, lateral izquierdo, derecho, arriba, abajo.</source>
+        <source>Carátula delantera, trasera, lateral izquierdo, derecho, arriba, abajo.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2201,7 +2201,7 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3358"/>
-        <source>Eliminar imÃ¡genes.</source>
+        <source>Eliminar imágenes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2221,12 +2221,12 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3417"/>
-        <source>CarÃ¡tula</source>
+        <source>Carátula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3424"/>
-        <source>ImÃ¡genes de la caja.</source>
+        <source>Imágenes de la caja.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2236,7 +2236,7 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3443"/>
-        <source>ImÃ¡genes del juego</source>
+        <source>Imágenes del juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2246,17 +2246,17 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3477"/>
-        <source>ConfiguraciÃ³n de DOSBox</source>
+        <source>Configuración de DOSBox</source>
         <translation>DOSBox konfiguráció</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3495"/>
-        <source>ConfiguraciÃ³n de ScummVM</source>
+        <source>Configuración de ScummVM</source>
         <translation>ScummVM konfiguráció</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3503"/>
-        <source>ConfiguraciÃ³n de VDMSound</source>
+        <source>Configuración de VDMSound</source>
         <translation>VDMSound konfiguráció</translation>
     </message>
     <message>
@@ -2292,12 +2292,12 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="5112"/>
-        <source>Se ha producido un error en el proceso, tiempo despuÃ©s de empezar con Ã©xito</source>
+        <source>Se ha producido un error en el proceso, tiempo después de empezar con éxito</source>
         <translation>Hiba történt a folyamat, miután sikeresen megkezdése</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="5115"/>
-        <source>Se ha producido un error, waitFor...() Ãºltima funciÃ³n el tiempo de espera</source>
+        <source>Se ha producido un error, waitFor...() última función el tiempo de espera</source>
         <translation>Hiba történt waitfor ... () Legutóbb out funkció</translation>
     </message>
     <message>
@@ -2323,7 +2323,7 @@ Kilépéshez kattincson a Mégse-re.</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3313"/>
-        <source>Â¿Eliminar juego...?</source>
+        <source>¿Eliminar juego...?</source>
         <translation>Játék törlése...?</translation>
     </message>
     <message>
@@ -2441,7 +2441,7 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/httpdownload.cpp" line="319"/>
-        <source>Â¿Redireccionar a &apos;%1&apos;?</source>
+        <source>¿Redireccionar a &apos;%1&apos;?</source>
         <translation>Átirányítás &apos;%1&apos;?</translation>
     </message>
     <message>
@@ -2466,7 +2466,7 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/httpdownload.cpp" line="402"/>
-        <source>Uno o mÃ¡s errores de SSL se ha producido: %1</source>
+        <source>Uno o más errores de SSL se ha producido: %1</source>
         <translation>Egy vagy több SSL könyvtár található: %1</translation>
     </message>
     <message>
@@ -2533,7 +2533,7 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="46"/>
-        <source>Cargando configuraciÃ³n...</source>
+        <source>Cargando configuración...</source>
         <translation>Konfiguráció betöltése...</translation>
     </message>
     <message>
@@ -2661,12 +2661,12 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/dbsql.cpp" line="882"/>
-        <source>CompaÃ±ias</source>
+        <source>Compañias</source>
         <translation>Kiadó</translation>
     </message>
     <message>
         <location filename="../../src/dbsql.cpp" line="883"/>
-        <source>AÃ±os</source>
+        <source>Años</source>
         <translation>Év</translation>
     </message>
     <message>
@@ -2684,12 +2684,12 @@ Please check the media service plugins are installed.</source>
     <name>frmAcercaD</name>
     <message>
         <location filename="../../src/grlida_acercad.cpp" line="68"/>
-        <source>es un lanzador comÃºn para los emuladores:</source>
+        <source>es un lanzador común para los emuladores:</source>
         <translation>egy közös indító a következő programoknak:</translation>
     </message>
     <message>
         <location filename="../../src/grlida_acercad.cpp" line="70"/>
-        <source>es GPL. Para mejorar el programa puedes dejar tu opiniÃ³n en</source>
+        <source>es GPL. Para mejorar el programa puedes dejar tu opinión en</source>
         <translation>a GPL védi. Építő jellegű kritikát szívesen fogadunk</translation>
     </message>
     <message>
@@ -2832,22 +2832,22 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="898"/>
-        <source>Â¿Usar montajes?</source>
+        <source>¿Usar montajes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="898"/>
-        <source>Â¿Deseas aÃ±adir los montajes usados?</source>
+        <source>¿Deseas añadir los montajes usados?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="1055"/>
-        <source>Â¿Eliminar montaje...?</source>
+        <source>¿Eliminar montaje...?</source>
         <translation>Törlés csatolás...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="1055"/>
-        <source>Â¿Deseas eliminar este montaje?</source>
+        <source>¿Deseas eliminar este montaje?</source>
         <translation>Szeretné e törölni ezt a csatolást?</translation>
     </message>
     <message>
@@ -4247,7 +4247,7 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="385"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2584"/>
-        <source>Ruleta de protecciÃ³n</source>
+        <source>Ruleta de protección</source>
         <translation>Másolási védelem kerék</translation>
     </message>
     <message>
@@ -4257,32 +4257,32 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="390"/>
-        <source>CarÃ¡tula delantera</source>
+        <source>Carátula delantera</source>
         <translation>Előlap</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="391"/>
-        <source>CarÃ¡tula trasera</source>
+        <source>Carátula trasera</source>
         <translation>Hátlap</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="392"/>
-        <source>CarÃ¡tula izquierda</source>
+        <source>Carátula izquierda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="393"/>
-        <source>CarÃ¡tula derecha</source>
+        <source>Carátula derecha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="394"/>
-        <source>CarÃ¡tula superior</source>
+        <source>Carátula superior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="395"/>
-        <source>CarÃ¡tula inferior</source>
+        <source>Carátula inferior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4292,7 +4292,7 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="441"/>
-        <source>AÃ±adiendo un nuevo juego</source>
+        <source>Añadiendo un nuevo juego</source>
         <translation>Új játék hozzáadása</translation>
     </message>
     <message>
@@ -4329,7 +4329,7 @@ Please check the media service plugins are installed.</source>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1725"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1783"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1874"/>
-        <source>ImÃ¡genes soportadas</source>
+        <source>Imágenes soportadas</source>
         <translation>Támogatott képek</translation>
     </message>
     <message>
@@ -4360,17 +4360,17 @@ Please check the media service plugins are installed.</source>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1887"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1949"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2012"/>
-        <source>Â¿Eliminar...?</source>
+        <source>¿Eliminar...?</source>
         <translation>Törlés...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1795"/>
-        <source>Â¿Deseas eliminar la imagen seleccionada?</source>
+        <source>¿Deseas eliminar la imagen seleccionada?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1887"/>
-        <source>Â¿Deseas eliminar la captura seleccionada?</source>
+        <source>¿Deseas eliminar la captura seleccionada?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4380,7 +4380,7 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1949"/>
-        <source>Â¿Deseas eliminar el video seleccionado?</source>
+        <source>¿Deseas eliminar el video seleccionado?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4390,7 +4390,7 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2012"/>
-        <source>Â¿Deseas eliminar el sonido seleccionado?</source>
+        <source>¿Deseas eliminar el sonido seleccionado?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4404,7 +4404,7 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2096"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2194"/>
-        <source>Para aÃ±adir opciones de compatibilidad debes indicar un ejecutable como minimo.</source>
+        <source>Para añadir opciones de compatibilidad debes indicar un ejecutable como minimo.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4430,32 +4430,32 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2427"/>
-        <source>Â¿Eliminar url...?</source>
+        <source>¿Eliminar url...?</source>
         <translation>Hivatkozás törlése?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2427"/>
-        <source>Â¿Deseas eliminar esta url?</source>
+        <source>¿Deseas eliminar esta url?</source>
         <translation>Akarja törölni ezt a hivatkozást?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2633"/>
-        <source>Â¿Eliminar archivo...?</source>
+        <source>¿Eliminar archivo...?</source>
         <translation>Fájl törlése...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2633"/>
-        <source>Â¿Deseas eliminar este archivo?</source>
+        <source>¿Deseas eliminar este archivo?</source>
         <translation>Tényleg akarja törölni ezt a fájlt?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="86"/>
-        <source>Â¿Cerrar ventana?</source>
+        <source>¿Cerrar ventana?</source>
         <translation>Close window?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="87"/>
-        <source>Â¿Deseas realmente cerrar la ventana?
+        <source>¿Deseas realmente cerrar la ventana?
 Si son nuevos datos o has echo cambios y no guardas puedes perder los cambios efectuados.</source>
         <translation>Do you really wish to close this window?
 Unsaved data / changes will be lost.</translation>
@@ -4467,7 +4467,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1420"/>
-        <source>AÃ±adir grupo</source>
+        <source>Añadir grupo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4477,7 +4477,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1455"/>
-        <source>AÃ±adir</source>
+        <source>Añadir</source>
         <translation>Hozzáadás</translation>
     </message>
     <message>
@@ -4551,17 +4551,17 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="72"/>
-        <source>Fuerza el uso de la capa ASPI. SÃ³lo en Windows con un ASPI-Layer</source>
+        <source>Fuerza el uso de la capa ASPI. Sólo en Windows con un ASPI-Layer</source>
         <translation>Force ASPI layer usage. Only Windows with ASPI-Layer</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="73"/>
-        <source>SelecciÃ³n automÃ¡tica de la interfaz de audio de CD</source>
+        <source>Selección automática de la interfaz de audio de CD</source>
         <translation>Automatic Audio CD interface</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="74"/>
-        <source>ExtracciÃ³n digital de audio utilizado para los CD de audio</source>
+        <source>Extracción digital de audio utilizado para los CD de audio</source>
         <translation>Digital audio extraction for Audio CD</translation>
     </message>
     <message>
@@ -4576,7 +4576,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="77"/>
-        <source>Fuerza el uso de las SDL para el CD-ROM. VÃ¡lido para todos los sistemas</source>
+        <source>Fuerza el uso de las SDL para el CD-ROM. Válido para todos los sistemas</source>
         <translation>Force SDL for CD-ROM. Available in all systems</translation>
     </message>
     <message>
@@ -4596,16 +4596,16 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="348"/>
-        <source>Â¿Eliminar...?</source>
+        <source>¿Eliminar...?</source>
         <translation>Törlés...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="348"/>
-        <source>Â¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
+        <source>¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Â¿Quieres eliminar la ISO de la lista?</source>
+        <source>¿Quieres eliminar la ISO de la lista?</source>
         <translation type="obsolete">Szeretné törölni az ISO képfájlt a listaból?</translation>
     </message>
     <message>
@@ -5310,7 +5310,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="236"/>
-        <source>Debes poner un tÃ­tulo.</source>
+        <source>Debes poner un título.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5356,12 +5356,12 @@ Unsaved data / changes will be lost.</translation>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="361"/>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="390"/>
-        <source>DescripciÃ³n</source>
+        <source>Descripción</source>
         <translation type="unfinished">Leírás</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="386"/>
-        <source>Ejemplo con la unidad virtual de Alcohol teniendo la siguiente configuraciÃ³n.</source>
+        <source>Ejemplo con la unidad virtual de Alcohol teniendo la siguiente configuración.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5392,17 +5392,17 @@ Unsaved data / changes will be lost.</translation>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="434"/>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="437"/>
-        <source>InformaciÃ³n</source>
+        <source>Información</source>
         <translation type="unfinished">Információ</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="504"/>
-        <source>Â¿Eliminar...?</source>
+        <source>¿Eliminar...?</source>
         <translation type="unfinished">Törlés...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="504"/>
-        <source>Â¿Deseas realmente eliminar este emulador de la lista?</source>
+        <source>¿Deseas realmente eliminar este emulador de la lista?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5494,12 +5494,12 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_cambiar_categoria.cpp" line="60"/>
-        <source>A la categorÃ­a</source>
+        <source>A la categoría</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_cambiar_categoria.cpp" line="66"/>
-        <source>Selecciona la categorÃ­a de destino</source>
+        <source>Selecciona la categoría de destino</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5563,7 +5563,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_compatibilidad_exe.cpp" line="232"/>
-        <source>InformaciÃ³n</source>
+        <source>Información</source>
         <translation type="unfinished">Információ</translation>
     </message>
     <message>
@@ -5665,7 +5665,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grdap_acercad.cpp" line="61"/>
-        <source>DiseÃ±ado y programado por</source>
+        <source>Diseñado y programado por</source>
         <translation>Tervezte és fejlesztette</translation>
     </message>
     <message>
@@ -5690,7 +5690,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grdap_acercad.cpp" line="62"/>
-        <source>Texto oculto en el manual del tipo Indiana Jones y la Ãltima Cruzada</source>
+        <source>Texto oculto en el manual del tipo Indiana Jones y la Última Cruzada</source>
         <translation>Rejtett szöveg a típusú kézikönyvben Indiana Jones and the Last Crusade</translation>
     </message>
 </context>
@@ -5723,12 +5723,12 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="76"/>
-        <source>TÃ­tulo</source>
+        <source>Título</source>
         <translation>Cím</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="80"/>
-        <source>SubtÃ­tulo</source>
+        <source>Subtítulo</source>
         <translation>Alcím</translation>
     </message>
     <message>
@@ -5783,7 +5783,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="145"/>
-        <source>NÂº discos</source>
+        <source>Nº discos</source>
         <translation>Lemezek száma</translation>
     </message>
     <message>
@@ -5793,12 +5793,12 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="157"/>
-        <source>TamaÃ±o</source>
+        <source>Tamaño</source>
         <translation>Méret</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="162"/>
-        <source>GrÃ¡ficos</source>
+        <source>Gráficos</source>
         <translation>Grafika</translation>
     </message>
     <message>
@@ -5842,32 +5842,32 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="187"/>
-        <source>CarÃ¡tula frontal</source>
+        <source>Carátula frontal</source>
         <translation>Előlap</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="192"/>
-        <source>CarÃ¡tula trasera</source>
+        <source>Carátula trasera</source>
         <translation>Hátlap</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="197"/>
-        <source>CarÃ¡tula lateral izquierdo</source>
+        <source>Carátula lateral izquierdo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="202"/>
-        <source>CarÃ¡tula lateral derecho</source>
+        <source>Carátula lateral derecho</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="207"/>
-        <source>CarÃ¡tula superior</source>
+        <source>Carátula superior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="212"/>
-        <source>CarÃ¡tula inferior</source>
+        <source>Carátula inferior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5897,7 +5897,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="239"/>
-        <source>DescripciÃ³n</source>
+        <source>Descripción</source>
         <translation>Leírás</translation>
     </message>
     <message>
@@ -6539,7 +6539,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_dosbox.cpp" line="660"/>
-        <source>Config - DespuÃ©s del exe</source>
+        <source>Config - Después del exe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6607,13 +6607,13 @@ Unsaved data / changes will be lost.</translation>
     <name>frmImportarJuego</name>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="164"/>
-        <source>InformaciÃ³n</source>
+        <source>Información</source>
         <translation>Információ</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="192"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="1432"/>
-        <source>PÃ¡gina</source>
+        <source>Página</source>
         <translation>Oldal</translation>
     </message>
     <message>
@@ -6635,12 +6635,12 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="260"/>
-        <source>TÃ­tulo</source>
+        <source>Título</source>
         <translation type="unfinished">Cím</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="261"/>
-        <source>AÃ±o</source>
+        <source>Año</source>
         <translation type="unfinished">Év</translation>
     </message>
     <message>
@@ -6651,12 +6651,12 @@ Unsaved data / changes will be lost.</translation>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="293"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="308"/>
-        <source>DescripciÃ³n</source>
+        <source>Descripción</source>
         <translation type="unfinished">Leírás</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="294"/>
-        <source>TamaÃ±o</source>
+        <source>Tamaño</source>
         <translation type="unfinished">Méret</translation>
     </message>
     <message>
@@ -6673,7 +6673,7 @@ Unsaved data / changes will be lost.</translation>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="420"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="779"/>
-        <source>InformaciÃ³n no disponible</source>
+        <source>Información no disponible</source>
         <translation>Információ nem áll rendelkezésre</translation>
     </message>
     <message>
@@ -6743,13 +6743,13 @@ Unsaved data / changes will be lost.</translation>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="1851"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="1872"/>
-        <source>AÃ±adiendo a la lista</source>
+        <source>Añadiendo a la lista</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="2776"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="2780"/>
-        <source>Importando imÃ¡genes, juego</source>
+        <source>Importando imágenes, juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7076,7 +7076,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="71"/>
-        <source>DescripciÃ³n</source>
+        <source>Descripción</source>
         <translation>Leírás</translation>
     </message>
     <message>
@@ -7111,7 +7111,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="101"/>
-        <source>Modo grÃ¡fico:</source>
+        <source>Modo gráfico:</source>
         <translation>Grafikai mód:</translation>
     </message>
     <message>
@@ -7166,12 +7166,12 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="148"/>
-        <source>Mostras subtÃ­tulo</source>
+        <source>Mostras subtítulo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="218"/>
-        <source>Velocidad de subtÃ­tulos:</source>
+        <source>Velocidad de subtítulos:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7181,12 +7181,12 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="154"/>
-        <source>Filtro de grÃ¡ficos</source>
+        <source>Filtro de gráficos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="157"/>
-        <source>CorrecciÃ³n de aspecto</source>
+        <source>Corrección de aspecto</source>
         <translation>Aspect korrekció</translation>
     </message>
     <message>
@@ -7241,7 +7241,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="206"/>
-        <source>Volumen mÃºsica:</source>
+        <source>Volumen música:</source>
         <translation>Zene hangerő:</translation>
     </message>
     <message>
@@ -7256,7 +7256,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="215"/>
-        <source>Tiempo de la mÃºsica:</source>
+        <source>Tiempo de la música:</source>
         <translation>Zene tempó:</translation>
     </message>
     <message>
@@ -7305,7 +7305,7 @@ Unsaved data / changes will be lost.</translation>
     <message>
         <location filename="../../src/grlida_info.cpp" line="73"/>
         <location filename="../../src/grlida_info.cpp" line="76"/>
-        <source>VersiÃ³n</source>
+        <source>Versión</source>
         <translation>Verzió</translation>
     </message>
     <message>
@@ -7425,12 +7425,12 @@ Unsaved data / changes will be lost.</translation>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="475"/>
         <location filename="../../src/grlida_instalar_juego.cpp" line="706"/>
-        <source>Â¿Eliminar...?</source>
+        <source>¿Eliminar...?</source>
         <translation>Törlés...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="475"/>
-        <source>Â¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
+        <source>¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7440,7 +7440,7 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="706"/>
-        <source>Â¿Quieres eliminar de la lista?</source>
+        <source>¿Quieres eliminar de la lista?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7476,12 +7476,12 @@ Unsaved data / changes will be lost.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="828"/>
-        <source>Se ha producido un error en el proceso, tiempo despuÃ©s de empezar con Ã©xito</source>
+        <source>Se ha producido un error en el proceso, tiempo después de empezar con éxito</source>
         <translation type="unfinished">Hiba történt a folyamat, miután sikeresen megkezdése</translation>
     </message>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="831"/>
-        <source>Se ha producido un error, waitFor...() Ãºltima funciÃ³n el tiempo de espera</source>
+        <source>Se ha producido un error, waitFor...() última función el tiempo de espera</source>
         <translation type="unfinished">Hiba történt waitfor ... () Legutóbb out funkció</translation>
     </message>
     <message>
@@ -7500,7 +7500,7 @@ Unsaved data / changes will be lost.</translation>
         <translation type="unfinished">Ismeretlen hiba történt</translation>
     </message>
     <message>
-        <source>Â¿Quieres eliminar la ISO de la lista?</source>
+        <source>¿Quieres eliminar la ISO de la lista?</source>
         <translation type="obsolete">Szeretné törölni az ISO képfájlt a listaból?</translation>
     </message>
     <message>
@@ -8056,7 +8056,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_list_icon_cfg.cpp" line="417"/>
-        <source>TÃ­tulo</source>
+        <source>Título</source>
         <translation>Cím</translation>
     </message>
     <message>
@@ -8072,7 +8072,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
         <location filename="../../src/grlida_list_icon_cfg.cpp" line="700"/>
         <location filename="../../src/grlida_list_icon_cfg.cpp" line="1002"/>
         <location filename="../../src/grlida_list_icon_cfg.cpp" line="1042"/>
-        <source>ImÃ¡genes soportadas</source>
+        <source>Imágenes soportadas</source>
         <translation>Támogatott képek</translation>
     </message>
     <message>
@@ -8106,7 +8106,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="915"/>
-        <source>PuntuaciÃ³n</source>
+        <source>Puntuación</source>
         <translation>Score</translation>
     </message>
     <message>
@@ -8126,52 +8126,52 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1063"/>
-        <source>DÃ­a del mes sin ceros iniciales (1 a 31).</source>
+        <source>Día del mes sin ceros iniciales (1 a 31).</source>
         <translation>A hónap napja nulla nélkül (1-től 31-ig).</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1067"/>
-        <source>DÃ­a del mes, 2 dÃ­gitos con ceros iniciales (01 a 31).</source>
+        <source>Día del mes, 2 dígitos con ceros iniciales (01 a 31).</source>
         <translation>A hónap napja nullával (01-től 31-ig).</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1071"/>
-        <source>Una representaciÃ³n textual de un dÃ­a, tres letras (e.j. &apos;Lun&apos; a &apos;Dom&apos;).</source>
+        <source>Una representación textual de un día, tres letras (e.j. &apos;Lun&apos; a &apos;Dom&apos;).</source>
         <translation>Rövidített hét napjai (pl. Hét-től Vas-ig).</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1075"/>
-        <source>Una representaciÃ³n textual completa del dÃ­a de la semana (e.j. &apos;Lunes&apos; a &apos;Domingo&apos;).</source>
+        <source>Una representación textual completa del día de la semana (e.j. &apos;Lunes&apos; a &apos;Domingo&apos;).</source>
         <translation>Teljes hét napjai (pl. Hétfőtől Vasárnapig).</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1079"/>
-        <source>RepresentaciÃ³n numÃ©rica de un mes, sin ceros iniciales (1-12).</source>
+        <source>Representación numérica de un mes, sin ceros iniciales (1-12).</source>
         <translation>Hónap számozással nulla nélkül (1-12).</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1083"/>
-        <source>RepresentaciÃ³n numÃ©rica de un mes, con ceros iniciales (01-12).</source>
+        <source>Representación numérica de un mes, con ceros iniciales (01-12).</source>
         <translation>Hónap számozással nullával (01-12).</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1087"/>
-        <source>Una representaciÃ³n textual corta de un mes, tres letras (e.j. &apos;Ene&apos; a &apos;Dic&apos;).</source>
+        <source>Una representación textual corta de un mes, tres letras (e.j. &apos;Ene&apos; a &apos;Dic&apos;).</source>
         <translation>Rövidített hónap nevek (pl. &apos;Jan&apos; to &apos;Dec&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1091"/>
-        <source>Una representaciÃ³n textual completa de un mes, como Enero o Marzo (e.j. &apos;Enero&apos; a &apos;Diciembre&apos;).</source>
+        <source>Una representación textual completa de un mes, como Enero o Marzo (e.j. &apos;Enero&apos; a &apos;Diciembre&apos;).</source>
         <translation>Hónap teljes neve (pl. &apos;Januártól&apos; to &apos;Decemberig&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1095"/>
-        <source>Una representaciÃ³n de dos dÃ­gitos de un aÃ±o (00-99).</source>
+        <source>Una representación de dos dígitos de un año (00-99).</source>
         <translation>Év két számjegyként (00-99).</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1099"/>
-        <source>Una representaciÃ³n numÃ©rica completa de un aÃ±o, 4 dÃ­gitos.</source>
+        <source>Una representación numérica completa de un año, 4 dígitos.</source>
         <translation>Év négy számjegyként.</translation>
     </message>
     <message>
@@ -8200,12 +8200,12 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1200"/>
         <location filename="../../src/grlida_opciones.cpp" line="1463"/>
-        <source>Debes poner un tÃ­tulo.</source>
+        <source>Debes poner un título.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1410"/>
-        <source>Â¿Deseas realmente eliminar este DOSBox de la lista?</source>
+        <source>¿Deseas realmente eliminar este DOSBox de la lista?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8215,17 +8215,17 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1601"/>
-        <source>Â¿Deseas realmente eliminar este emulador de la lista?</source>
+        <source>¿Deseas realmente eliminar este emulador de la lista?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1672"/>
-        <source>Debes poner el nombre de la tabla para la nueva categorÃ­a.</source>
+        <source>Debes poner el nombre de la tabla para la nueva categoría.</source>
         <translation>You must enter a table name for the new category.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1676"/>
-        <source>Debes poner el tÃ­tulo de la nueva categorÃ­a.</source>
+        <source>Debes poner el título de la nueva categoría.</source>
         <translation>You must enter the name of the new category.</translation>
     </message>
     <message>
@@ -8248,27 +8248,27 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1687"/>
         <location filename="../../src/grlida_opciones.cpp" line="1700"/>
-        <source>Â¿La tabla ya existe, quieres usar el siguiente nombre para la tabla?</source>
+        <source>¿La tabla ya existe, quieres usar el siguiente nombre para la tabla?</source>
         <translation>The table already exists. Do you want to use the following name for the table?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1721"/>
-        <source>No se ha podido aÃ±adir la nueva categorÃ­a.</source>
+        <source>No se ha podido añadir la nueva categoría.</source>
         <translation>Couldn&apos;t add the new category.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1733"/>
-        <source>No se ha podido actualizar la categorÃ­a.</source>
+        <source>No se ha podido actualizar la categoría.</source>
         <translation>Couldn&apos;t update the category.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1843"/>
-        <source>Por favor selecciona una categorÃ­a de la lista para eliminarla</source>
+        <source>Por favor selecciona una categoría de la lista para eliminarla</source>
         <translation>Please select a category from the list to delete</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1846"/>
-        <source>No se puede eliminar la tabla de la categorÃ­a.</source>
+        <source>No se puede eliminar la tabla de la categoría.</source>
         <translation>Can&apos;t delete this table from the category.</translation>
     </message>
     <message>
@@ -8283,42 +8283,42 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="3138"/>
         <location filename="../../src/grlida_opciones.cpp" line="3168"/>
         <location filename="../../src/grlida_opciones.cpp" line="3198"/>
-        <source>Â¿Eliminar...?</source>
+        <source>¿Eliminar...?</source>
         <translation>Törlés...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1848"/>
-        <source>Â¿Deseas realmente eliminar esta categorÃ­a de la base de datos?</source>
+        <source>¿Deseas realmente eliminar esta categoría de la base de datos?</source>
         <translation>Do you really wish to delete this category from the database?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="2021"/>
-        <source>Â¿Deseas restaurar el menÃº de navegaciÃ³n por defecto?</source>
+        <source>¿Deseas restaurar el menú de navegación por defecto?</source>
         <translation>Do you wish to restore the default navigation menu?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="2050"/>
-        <source>Por favor selecciona un menÃº nav de la lista para eliminarlo</source>
+        <source>Por favor selecciona un menú nav de la lista para eliminarlo</source>
         <translation>Please select a navigation menu from the list to delete</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="2052"/>
-        <source>Â¿Deseas realmente eliminar este menÃº nav de la base de datos?</source>
+        <source>¿Deseas realmente eliminar este menú nav de la base de datos?</source>
         <translation>Do you really wish to delete this navigation menu from the database?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="2223"/>
-        <source>Â¿Deseas restaurar el menÃº de shortcut por defecto?</source>
+        <source>¿Deseas restaurar el menú de shortcut por defecto?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="2256"/>
-        <source>Por favor selecciona un menÃº shortcut de la lista para eliminarlo</source>
+        <source>Por favor selecciona un menú shortcut de la lista para eliminarlo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="2258"/>
-        <source>Â¿Deseas realmente eliminar este menÃº shortcut de la base de datos?</source>
+        <source>¿Deseas realmente eliminar este menú shortcut de la base de datos?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8330,7 +8330,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="2449"/>
         <location filename="../../src/grlida_opciones.cpp" line="2517"/>
-        <source>TÃ­tulo</source>
+        <source>Título</source>
         <translation>Cím</translation>
     </message>
     <message>
@@ -8388,7 +8388,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="880"/>
-        <source>CompaÃ±ia</source>
+        <source>Compañia</source>
         <translation>Kiadó</translation>
     </message>
     <message>
@@ -8429,14 +8429,14 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="888"/>
-        <source>AÃ±o</source>
+        <source>Año</source>
         <translation>Év</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="889"/>
         <location filename="../../src/grlida_opciones.cpp" line="913"/>
         <location filename="../../src/grlida_opciones.cpp" line="932"/>
-        <source>NÂº discos</source>
+        <source>Nº discos</source>
         <translation>Lemezek száma</translation>
     </message>
     <message>
@@ -8446,7 +8446,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="891"/>
-        <source>GrÃ¡ficos</source>
+        <source>Gráficos</source>
         <translation>Grafika</translation>
     </message>
     <message>
@@ -8483,7 +8483,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="899"/>
         <location filename="../../src/grlida_opciones.cpp" line="916"/>
-        <source>CalificaciÃ³n</source>
+        <source>Calificación</source>
         <translation>Értékelés</translation>
     </message>
     <message>
@@ -8508,7 +8508,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="906"/>
         <location filename="../../src/grlida_opciones.cpp" line="926"/>
         <location filename="../../src/grlida_opciones.cpp" line="2033"/>
-        <source>CompaÃ±ias</source>
+        <source>Compañias</source>
         <translation>Kiadó</translation>
     </message>
     <message>
@@ -8546,7 +8546,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="912"/>
         <location filename="../../src/grlida_opciones.cpp" line="2034"/>
-        <source>AÃ±os</source>
+        <source>Años</source>
         <translation>Év</translation>
     </message>
     <message>
@@ -8631,12 +8631,12 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="999"/>
-        <source>El proxy se determina sobre la base de la aplicaciÃ³n</source>
+        <source>El proxy se determina sobre la base de la aplicación</source>
         <translation>Proxy használata a proxy adatokra alapozva</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1002"/>
-        <source>HTTP proxy sÃ³lo para las solicitudes</source>
+        <source>HTTP proxy sólo para las solicitudes</source>
         <translation>Proxy-zás HTTP kérelem esetén csak</translation>
     </message>
     <message>
@@ -8683,7 +8683,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="393"/>
         <location filename="../../src/grlida_opciones.cpp" line="500"/>
         <location filename="../../src/grlida_opciones.cpp" line="2437"/>
-        <source>ImÃ¡genes CategorÃ­as</source>
+        <source>Imágenes Categorías</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8694,14 +8694,14 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="396"/>
         <location filename="../../src/grlida_opciones.cpp" line="503"/>
         <location filename="../../src/grlida_opciones.cpp" line="2439"/>
-        <source>ImÃ¡genes defecto</source>
+        <source>Imágenes defecto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="324"/>
         <location filename="../../src/grlida_opciones.cpp" line="350"/>
         <location filename="../../src/grlida_opciones.cpp" line="506"/>
-        <source>ImÃ¡genes idiomas</source>
+        <source>Imágenes idiomas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8726,7 +8726,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="989"/>
-        <source>TÃ­tulo descriptivo</source>
+        <source>Título descriptivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8735,13 +8735,13 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="992"/>
         <location filename="../../src/grlida_opciones.cpp" line="993"/>
         <location filename="../../src/grlida_opciones.cpp" line="994"/>
-        <source>TÃ­tulo Juego</source>
+        <source>Título Juego</source>
         <translation>Game title</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1050"/>
         <location filename="../../src/grlida_opciones.cpp" line="1161"/>
-        <source>InformaciÃ³n sobre el formato de la fecha y hora</source>
+        <source>Información sobre el formato de la fecha y hora</source>
         <translation>Információ a dátumról és időformátumról</translation>
     </message>
     <message>
@@ -8751,13 +8751,13 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1053"/>
-        <source>Lista bÃ¡sica de parÃ¡metros:</source>
+        <source>Lista básica de parámetros:</source>
         <translation>Alapvető paraméter lista:</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1057"/>
         <location filename="../../src/grlida_opciones.cpp" line="1106"/>
-        <source>ExpresiÃ³n</source>
+        <source>Expresión</source>
         <translation>Kifejezés</translation>
     </message>
     <message>
@@ -8857,7 +8857,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="2602"/>
-        <source>ImÃ¡genes soportadas</source>
+        <source>Imágenes soportadas</source>
         <translation>Támogatott képek</translation>
     </message>
     <message>
@@ -8869,7 +8869,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="3138"/>
         <location filename="../../src/grlida_opciones.cpp" line="3168"/>
         <location filename="../../src/grlida_opciones.cpp" line="3198"/>
-        <source>Â¿Deseas eliminar la extensiÃ³n?</source>
+        <source>¿Deseas eliminar la extensión?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8889,7 +8889,7 @@ Ellenőrizze,hogy a program fel e van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="2628"/>
-        <source>Â¿Deseas realmente eliminar este dato de la lista?</source>
+        <source>¿Deseas realmente eliminar este dato de la lista?</source>
         <translation>Do you really wish to delete this item from the list?</translation>
     </message>
     <message>
@@ -10218,12 +10218,12 @@ A varázsló bezárásához kattincson az OK-ra
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="532"/>
-        <source>Debes poner por lo menos el tÃ­tulo.</source>
+        <source>Debes poner por lo menos el título.</source>
         <translation>Meg kell határoznia legalább a címet.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="573"/>
-        <source>Debes poner un tÃ­tulo al juego</source>
+        <source>Debes poner un título al juego</source>
         <translation>Meg kell határoznia a játék címét</translation>
     </message>
     <message>
@@ -10246,22 +10246,22 @@ A varázsló bezárásához kattincson az OK-ra
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="691"/>
-        <source>Â¿Usar montajes?</source>
+        <source>¿Usar montajes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="691"/>
-        <source>Â¿Deseas aÃ±adir los montajes usados?</source>
+        <source>¿Deseas añadir los montajes usados?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="824"/>
-        <source>Â¿Eliminar montaje...?</source>
+        <source>¿Eliminar montaje...?</source>
         <translation>Törlés csatolás...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="824"/>
-        <source>Â¿Deseas eliminar este montaje?</source>
+        <source>¿Deseas eliminar este montaje?</source>
         <translation>Szeretné e törölni ezt a csatolást?</translation>
     </message>
     <message>
@@ -10509,12 +10509,12 @@ A varázsló bezárásához kattincson az OK-ra
     </message>
     <message>
         <location filename="../../src/grlida_wizard_scummvm.cpp" line="375"/>
-        <source>Debes poner por lo menos el tÃ­tulo.</source>
+        <source>Debes poner por lo menos el título.</source>
         <translation>Meg kell határoznia legalább a címet.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_wizard_scummvm.cpp" line="415"/>
-        <source>Debes poner un tÃ­tulo al juego</source>
+        <source>Debes poner un título al juego</source>
         <translation>Meg kell határoznia a játék címét</translation>
     </message>
     <message>
@@ -10598,7 +10598,7 @@ A varázsló bezárásához kattincson az OK-ra
     </message>
     <message>
         <location filename="../../src/grlida_wizard_vdmsound.cpp" line="268"/>
-        <source>Debes poner por lo menos el tÃ­tulo.</source>
+        <source>Debes poner por lo menos el título.</source>
         <translation>Meg kell határoznia legalább a címet.</translation>
     </message>
     <message>

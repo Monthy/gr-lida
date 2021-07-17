@@ -193,7 +193,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 }
 
 #CODECFORTR  = UTF-8
-#CODECFORSRC = UTF-8
+CODECFORSRC = UTF-8
 
 TRANSLATIONS += res/idiomas/gr-lida_es_ES.ts \
     res/idiomas/gr-lida_en_EN.ts \
