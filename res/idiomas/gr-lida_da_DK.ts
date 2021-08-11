@@ -486,6 +486,7 @@
     </message>
     <message utf8="true">
         <location filename="../../ui/grdap.ui" line="404"/>
+        <location filename="../../src/grdap.cpp" line="725"/>
         <source>Página</source>
         <translation>Side</translation>
     </message>
@@ -815,11 +816,6 @@
         <location filename="../../src/grdap.cpp" line="590"/>
         <source>Descripción</source>
         <translation>Beskrivelse</translation>
-    </message>
-    <message>
-        <location filename="../../src/grdap.cpp" line="725"/>
-        <source>Página</source>
-        <translation>Side</translation>
     </message>
     <message>
         <location filename="../../src/grdap.cpp" line="799"/>
@@ -1642,11 +1638,15 @@
     </message>
     <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2013"/>
+        <location filename="../../src/grlida.cpp" line="1654"/>
+        <location filename="../../src/grlida.cpp" line="2095"/>
         <source>Subtítulo</source>
         <translation>Undertitel</translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2029"/>
+        <location filename="../../src/grlida.cpp" line="1656"/>
+        <location filename="../../src/grlida.cpp" line="2097"/>
         <source>Compañia</source>
         <translation>Udgiver</translation>
     </message>
@@ -1686,6 +1686,8 @@
     </message>
     <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2093"/>
+        <location filename="../../src/grlida.cpp" line="1661"/>
+        <location filename="../../src/grlida.cpp" line="2105"/>
         <source>Año</source>
         <translation>År</translation>
     </message>
@@ -1697,11 +1699,14 @@
     </message>
     <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2117"/>
+        <location filename="../../src/grlida.cpp" line="2108"/>
         <source>Tamaño</source>
         <translation>Størrelse</translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2125"/>
+        <location filename="../../src/grlida.cpp" line="1664"/>
+        <location filename="../../src/grlida.cpp" line="2109"/>
         <source>Gráficos</source>
         <translation>Grafik</translation>
     </message>
@@ -1858,6 +1863,7 @@
     </message>
     <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2101"/>
+        <location filename="../../src/grlida.cpp" line="1662"/>
         <source>Nº discos</source>
         <translation>Antal discs</translation>
     </message>
@@ -2043,37 +2049,9 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1656"/>
-        <location filename="../../src/grlida.cpp" line="2097"/>
-        <source>Compañia</source>
-        <translation>Udgiver</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="1661"/>
-        <location filename="../../src/grlida.cpp" line="2105"/>
-        <source>Año</source>
-        <translation>År</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="1662"/>
-        <source>Nº discos</source>
-        <translation>Antal discs</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="1664"/>
-        <location filename="../../src/grlida.cpp" line="2109"/>
-        <source>Gráficos</source>
-        <translation>Grafik</translation>
-    </message>
-    <message>
         <location filename="../../src/grlida.cpp" line="2115"/>
         <source>Tipo Emu</source>
         <translation>Emu type</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="2108"/>
-        <source>Tamaño</source>
-        <translation>Størrelse</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="2263"/>
@@ -2104,12 +2082,6 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
         <location filename="../../src/grlida.cpp" line="3380"/>
         <source>Si</source>
         <translation>Ok</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="1654"/>
-        <location filename="../../src/grlida.cpp" line="2095"/>
-        <source>Subtítulo</source>
-        <translation>Titel</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="1985"/>
@@ -2163,6 +2135,11 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
         <location filename="../../src/grlida.cpp" line="3161"/>
         <source>No esta disponible el script para ejecutar el montaje de la imagen.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida.cpp" line="3313"/>
+        <source>¿Eliminar juego?</source>
+        <translation type="unfinished">Slet spil?</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3321"/>
@@ -2320,11 +2297,6 @@ Klik på &apos;Annuller&apos; for at afslutte.</translation>
         <location filename="../../src/grlida.cpp" line="3555"/>
         <source>Por favor selecciona un juego de la lista para eliminarlo</source>
         <translation>Vælg et spil fra listen for at slette</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="3313"/>
-        <source>¿Eliminar juego...?</source>
-        <translation>Slet spil...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3135"/>
@@ -2842,8 +2814,8 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="1055"/>
-        <source>¿Eliminar montaje...?</source>
-        <translation>Slet montering indstillinger?</translation>
+        <source>¿Eliminar montaje?</source>
+        <translation type="unfinished">Slet montering indstillinger?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="1055"/>
@@ -3082,10 +3054,6 @@ Please check the media service plugins are installed.</source>
         <location filename="../../ui/addedit_dosbox.ui" line="988"/>
         <source>Sincronizar. Arriba/Abajo</source>
         <translation>Sync. Op / Ned</translation>
-    </message>
-    <message>
-        <source>Emulador de joystick:</source>
-        <translation type="obsolete">Jostick emulator:</translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="841"/>
@@ -3799,11 +3767,13 @@ Please check the media service plugins are installed.</source>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1153"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="391"/>
         <source>Carátula trasera</source>
         <translation>Bagdæksel</translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="984"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="390"/>
         <source>Carátula delantera</source>
         <translation>Forsideomslag</translation>
     </message>
@@ -3919,6 +3889,7 @@ Please check the media service plugins are installed.</source>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="854"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="392"/>
         <source>Carátula izquierda</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3966,16 +3937,19 @@ Please check the media service plugins are installed.</source>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1286"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="393"/>
         <source>Carátula derecha</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1429"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="394"/>
         <source>Carátula superior</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1559"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="395"/>
         <source>Carátula inferior</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4108,6 +4082,7 @@ Please check the media service plugins are installed.</source>
         <location filename="../../ui/addedit_juego.ui" line="2326"/>
         <location filename="../../ui/addedit_juego.ui" line="2842"/>
         <location filename="../../ui/addedit_juego.ui" line="3073"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="1455"/>
         <source>Añadir</source>
         <translation>Tilføj</translation>
     </message>
@@ -4252,36 +4227,6 @@ Please check the media service plugins are installed.</source>
         <translation>Alle filer</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="390"/>
-        <source>Carátula delantera</source>
-        <translation>Forsideomslag</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="391"/>
-        <source>Carátula trasera</source>
-        <translation>Bagdæksel</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="392"/>
-        <source>Carátula izquierda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="393"/>
-        <source>Carátula derecha</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="394"/>
-        <source>Carátula superior</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="395"/>
-        <source>Carátula inferior</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="427"/>
         <source>Editando a</source>
         <translation>Redigering af at</translation>
@@ -4356,8 +4301,8 @@ Please check the media service plugins are installed.</source>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1887"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1949"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2012"/>
-        <source>¿Eliminar...?</source>
-        <translation>Slet...?</translation>
+        <source>¿Eliminar?</source>
+        <translation type="unfinished">Slet?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1795"/>
@@ -4426,18 +4371,18 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2427"/>
-        <source>¿Eliminar url...?</source>
-        <translation>Slet adresse?</translation>
+        <source>¿Eliminar url?</source>
+        <translation type="unfinished">Slet adresse?</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="2633"/>
+        <source>¿Eliminar archivo?</source>
+        <translation type="unfinished">Slet filen?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2427"/>
         <source>¿Deseas eliminar esta url?</source>
         <translation>Ønsker du at slette denne URL?</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="2633"/>
-        <source>¿Eliminar archivo...?</source>
-        <translation>Slet filen...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2633"/>
@@ -4470,11 +4415,6 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1426"/>
         <source>Grupo</source>
         <translation>Gruppe</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="1455"/>
-        <source>Añadir</source>
-        <translation>Tilføj</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2078"/>
@@ -4592,17 +4532,13 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="348"/>
-        <source>¿Eliminar...?</source>
-        <translation>Slet...?</translation>
+        <source>¿Eliminar?</source>
+        <translation type="unfinished">Slet?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="348"/>
         <source>¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>¿Quieres eliminar la ISO de la lista?</source>
-        <translation type="obsolete">Ønsker du at fjerne ISO fra listen?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="398"/>
@@ -5393,8 +5329,8 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="504"/>
-        <source>¿Eliminar...?</source>
-        <translation type="unfinished">Slet...?</translation>
+        <source>¿Eliminar?</source>
+        <translation type="unfinished">Slet?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="504"/>
@@ -5710,7 +5646,7 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="64"/>
         <source>Datos del juego</source>
-        <translation type="unfinished">Spil data</translation>
+        <translation>Spil data</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_datos.cpp" line="68"/>
@@ -6606,7 +6542,8 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
         <source>Información</source>
         <translation>Information</translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/importar_juego.ui" line="150"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="192"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="1432"/>
         <source>Página</source>
@@ -6618,23 +6555,25 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
         <location filename="../../src/grlida_importar_juego.cpp" line="1290"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="1309"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="1432"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1851"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1872"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2566"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2571"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2776"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2780"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2806"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2812"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1853"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1874"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2568"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2573"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2778"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2782"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2808"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2814"/>
         <source>de</source>
         <translation>af</translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/importar_juego.ui" line="242"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="260"/>
         <source>Título</source>
         <translation type="unfinished">Titel</translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/importar_juego.ui" line="247"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="261"/>
         <source>Año</source>
         <translation type="unfinished">År</translation>
@@ -6644,7 +6583,9 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
         <source>CRC</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/importar_juego.ui" line="449"/>
+        <location filename="../../ui/importar_juego.ui" line="523"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="293"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="308"/>
         <source>Descripción</source>
@@ -6714,50 +6655,45 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="1318"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2883"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2885"/>
         <source>Importar juego</source>
         <translation>Import spil</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="1318"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2883"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2885"/>
         <source>Por favor selecciona al menos un juego de la lista para importarlo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="1366"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2566"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2571"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2568"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2573"/>
         <source>Importando</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1841"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1843"/>
         <source>The file is not an XBEL version 1.0 file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1851"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1872"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1853"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1874"/>
         <source>Añadiendo a la lista</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2776"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2780"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2778"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2782"/>
         <source>Importando imágenes, juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2806"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2812"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2808"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2814"/>
         <source>Descomprimiendo juego</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../../ui/importar_juego.ui" line="242"/>
-        <source>Título</source>
-        <translation>Titel</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="959"/>
@@ -6810,16 +6746,6 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
         <source>Plataforma</source>
         <translation>Platform</translation>
     </message>
-    <message utf8="true">
-        <location filename="../../ui/importar_juego.ui" line="247"/>
-        <source>Año</source>
-        <translation>År</translation>
-    </message>
-    <message utf8="true">
-        <location filename="../../ui/importar_juego.ui" line="150"/>
-        <source>Página</source>
-        <translation>Side</translation>
-    </message>
     <message>
         <location filename="../../ui/importar_juego.ui" line="257"/>
         <location filename="../../ui/importar_juego.ui" line="751"/>
@@ -6871,12 +6797,6 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
         <location filename="../../ui/importar_juego.ui" line="444"/>
         <source>CRC32</source>
         <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../../ui/importar_juego.ui" line="449"/>
-        <location filename="../../ui/importar_juego.ui" line="523"/>
-        <source>Descripción</source>
-        <translation>Beskrivelse</translation>
     </message>
     <message>
         <location filename="../../ui/importar_juego.ui" line="454"/>
@@ -7163,7 +7083,7 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="148"/>
         <source>Mostras subtítulo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vis undertekster</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="218"/>
@@ -7421,8 +7341,8 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="475"/>
         <location filename="../../src/grlida_instalar_juego.cpp" line="706"/>
-        <source>¿Eliminar...?</source>
-        <translation>Slet...?</translation>
+        <source>¿Eliminar?</source>
+        <translation type="unfinished">Slet?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="475"/>
@@ -7496,10 +7416,6 @@ Ikke gemte data eller ændringer vil gå tabt.</translation>
         <translation type="unfinished">Der opstod en ukendt fejl</translation>
     </message>
     <message>
-        <source>¿Quieres eliminar la ISO de la lista?</source>
-        <translation type="obsolete">Ønsker du at fjerne ISO fra listen?</translation>
-    </message>
-    <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="505"/>
         <source>El ejecutable suele ser: INSTALL, si no esta seguro teclee DIR y pulsa INTRO</source>
         <translation>Programmet hedder normalt INSTALL. Hvis du er i tvivl, skriv DIR og tryk ENTER</translation>
@@ -7536,10 +7452,6 @@ eller destinationsmappen er forkert.</translation>
 Compruebe si lo tiene instalado.</source>
         <translation>Den emulator fil blev ikke fundet.
 Tjek, om programmet virkelig er installeret.</translation>
-    </message>
-    <message>
-        <source> Instalar un juego mediante DOSBox</source>
-        <translation type="obsolete">Installer et spil med DOSBox</translation>
     </message>
     <message>
         <location filename="../../ui/instalar_juego.ui" line="545"/>
@@ -8279,8 +8191,8 @@ Tjek, om programmet virkelig er installeret.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="3138"/>
         <location filename="../../src/grlida_opciones.cpp" line="3168"/>
         <location filename="../../src/grlida_opciones.cpp" line="3198"/>
-        <source>¿Eliminar...?</source>
-        <translation>Slet...?</translation>
+        <source>¿Eliminar?</source>
+        <translation>Slet?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1848"/>
@@ -8323,7 +8235,12 @@ Tjek, om programmet virkelig er installeret.</translation>
         <source>Dato</source>
         <translation>Data</translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/opciones.ui" line="1082"/>
+        <location filename="../../ui/opciones.ui" line="1359"/>
+        <location filename="../../ui/opciones.ui" line="1589"/>
+        <location filename="../../ui/opciones.ui" line="1879"/>
+        <location filename="../../ui/opciones.ui" line="2320"/>
         <location filename="../../src/grlida_opciones.cpp" line="2449"/>
         <location filename="../../src/grlida_opciones.cpp" line="2517"/>
         <source>Título</source>
@@ -9045,15 +8962,6 @@ Tjek, om programmet virkelig er installeret.</translation>
         <location filename="../../ui/opciones.ui" line="1530"/>
         <source>Nombre de tabla:</source>
         <translation>Tabelnavn:</translation>
-    </message>
-    <message utf8="true">
-        <location filename="../../ui/opciones.ui" line="1082"/>
-        <location filename="../../ui/opciones.ui" line="1359"/>
-        <location filename="../../ui/opciones.ui" line="1589"/>
-        <location filename="../../ui/opciones.ui" line="1879"/>
-        <location filename="../../ui/opciones.ui" line="2320"/>
-        <source>Título</source>
-        <translation>Titel</translation>
     </message>
     <message>
         <location filename="../../ui/opciones.ui" line="1594"/>
@@ -10252,8 +10160,8 @@ Klik på &apos;OK&apos; for at afslutte denne guide
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="824"/>
-        <source>¿Eliminar montaje...?</source>
-        <translation>Slet montering indstillinger?</translation>
+        <source>¿Eliminar montaje?</source>
+        <translation type="unfinished">Slet montering indstillinger?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="824"/>

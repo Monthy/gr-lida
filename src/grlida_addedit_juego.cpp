@@ -1792,7 +1792,7 @@ void frmAddEditJuego::on_btnDat_imagenes_eliminar_clicked()
 	{
 		stFileInfo f_info = fGrl->getInfoFile(ui->lwImagenes->currentItem()->data(Qt::UserRole).toString());
 
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar la imagen seleccionada?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas eliminar la imagen seleccionada?")))
 		{
 			if (Editando)
 			{
@@ -1884,7 +1884,7 @@ void frmAddEditJuego::on_btnDat_capturas_eliminar_clicked()
 	{
 		stFileInfo f_info = fGrl->getInfoFile(ui->lwCapturas->currentItem()->data(Qt::UserRole).toString());
 
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar la captura seleccionada?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas eliminar la captura seleccionada?")))
 		{
 			if (Editando)
 			{
@@ -1946,7 +1946,7 @@ void frmAddEditJuego::on_btnDat_videos_eliminar_clicked()
 		qDebug() << "f_info NameExt : " << f_info.NameExt;
 		qDebug() << "f_info FilePath: " << f_info.FilePath;
 
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar el video seleccionado?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas eliminar el video seleccionado?")))
 		{
 			if (Editando)
 			{
@@ -2009,7 +2009,7 @@ void frmAddEditJuego::on_btnDat_sonidos_eliminar_clicked()
 		qDebug() << "f_info NameExt : " << f_info.NameExt;
 		qDebug() << "f_info FilePath: " << f_info.FilePath;
 
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar el sonido seleccionado?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas eliminar el sonido seleccionado?")))
 		{
 			if (Editando)
 			{
@@ -2424,7 +2424,7 @@ void frmAddEditJuego::on_btnUrl_delete_clicked()
 	int pos = ui->twDatosURL->indexOfTopLevelItem(ui->twDatosURL->currentItem());
 	if (ui->twDatosURL->topLevelItemCount() > 0 && pos != -1)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar url...?"), tr("¿Deseas eliminar esta url?")))
+		if (fGrl->questionMsg(tr("¿Eliminar url?"), tr("¿Deseas eliminar esta url?")))
 		{
 			if (Editando)
 				sql->eliminarURL(ui->twDatosURL->currentItem()->text(2));
@@ -2630,7 +2630,7 @@ void frmAddEditJuego::on_btnFile_delete_clicked()
 {
 	if (ui->twDatosFiles->topLevelItemCount() > 0)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar archivo...?"), tr("¿Deseas eliminar este archivo?")))
+		if (fGrl->questionMsg(tr("¿Eliminar archivo?"), tr("¿Deseas eliminar este archivo?")))
 		{
 			if (Editando)
 				sql->eliminarFiles(ui->twDatosFiles->currentItem()->text(6));

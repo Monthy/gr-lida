@@ -3310,7 +3310,7 @@ void GrLida::on_mnu_edit_eliminar_triggered()
 				sqlDel->resize(440, 330);
 				sqlDel->setMinimumSize(QSize(440, 330));
 				sqlDel->setWindowIcon(QIcon(fGrl->theme() +"img16/cancelar.png"));
-				sqlDel->setWindowTitle(tr("¿Eliminar juego...?"));
+				sqlDel->setWindowTitle(tr("¿Eliminar juego?"));
 
 				QGridLayout *gLayout_del = new QGridLayout(sqlDel);
 				gLayout_del->setHorizontalSpacing(9);

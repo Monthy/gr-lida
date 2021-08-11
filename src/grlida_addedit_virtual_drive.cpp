@@ -501,7 +501,7 @@ void frmAddEditVirtualDrive::on_btnVdDelete_clicked()
 	int pos = ui->twVirtualDrive->indexOfTopLevelItem(ui->twVirtualDrive->currentItem());
 	if (ui->twVirtualDrive->topLevelItemCount() > 0 && pos != -1)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas realmente eliminar este emulador de la lista?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas realmente eliminar este emulador de la lista?")))
 		{
 			actualizaDatosVirtualDrive(ui->twVirtualDrive->currentItem()->text(1), "NO_VIRTUAL_DRIVE");
 			fGrl->deleteItemTree(ui->twVirtualDrive->currentItem());

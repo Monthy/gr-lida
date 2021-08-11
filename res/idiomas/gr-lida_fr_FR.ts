@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR" sourcelanguage="es_ES">
+<TS version="2.0" language="fr_FR" sourcelanguage="es_ES">
 <context>
     <name>DialogLogin</name>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/login_url.ui" line="14"/>
         <source>Requiere autentificación</source>
         <translation>Authentification requise</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/login_url.ui" line="26"/>
         <source>Usted necesita introducir un nombre de usuario y una contraseña para acceder a este sitio</source>
         <translation>Vous devez enter un nom d&apos;utilisateur et un mot de passe pour accéder à ce site</translation>
@@ -18,7 +18,7 @@
         <source>Usuario:</source>
         <translation>Utilisateur:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/login_url.ui" line="76"/>
         <source>Contraseña:</source>
         <translation>Mot de passe:</translation>
@@ -484,8 +484,9 @@
         <source>Zoom</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grdap.ui" line="404"/>
+        <location filename="../../src/grdap.cpp" line="725"/>
         <source>Página</source>
         <translation>Page</translation>
     </message>
@@ -573,12 +574,12 @@
         <source>Visor texto oculto</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grdap.ui" line="1195"/>
         <source>Información</source>
         <translation>Infos</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grdap.ui" line="1198"/>
         <source>Muestra información sobre la base de datos</source>
         <translation>Afficher infos de la base de données</translation>
@@ -817,11 +818,6 @@
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="../../src/grdap.cpp" line="725"/>
-        <source>Página</source>
-        <translation>Page</translation>
-    </message>
-    <message>
         <location filename="../../src/grdap.cpp" line="799"/>
         <source>Ruleta de protección</source>
         <translation>Roulette de protection</translation>
@@ -921,7 +917,7 @@
         <source>&amp;Archivo</source>
         <translation>&amp;Fichier</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="157"/>
         <source>&amp;Edición</source>
         <translation>&amp;Editer</translation>
@@ -965,7 +961,7 @@
         <source>Url</source>
         <translation>URL</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="411"/>
         <location filename="../../ui/grlida.ui" line="649"/>
         <location filename="../../ui/grlida.ui" line="848"/>
@@ -1029,12 +1025,12 @@
         <source>Barra shortcut</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1047"/>
         <source>Información</source>
         <translation>Infos</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1050"/>
         <source>Muestra información sobre la base de datos</source>
         <translation>Afficher infos de la base de données</translation>
@@ -1131,7 +1127,7 @@
         <source>Nuevo juego</source>
         <translation>Nouveau jeu</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1146"/>
         <location filename="../../ui/grlida.ui" line="2496"/>
         <source>Añade un nuevo juego a la lista</source>
@@ -1152,7 +1148,7 @@
         <source>Editar juego</source>
         <translation>Editer le jeu</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1167"/>
         <location filename="../../ui/grlida.ui" line="2517"/>
         <source>Edita los datos del juego asi como la configuración del emulador</source>
@@ -1333,7 +1329,7 @@
         <source>Exportar juego</source>
         <translation>Exporter un jeu</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1389"/>
         <source>Exporta los datos de configuración del juego</source>
         <translation>Exporter les données de configuration du jeu</translation>
@@ -1343,7 +1339,7 @@
         <source>Shift+E</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1401"/>
         <location filename="../../ui/grlida.ui" line="1404"/>
         <source>Cambiar de categoría</source>
@@ -1364,7 +1360,7 @@
         <source>Ctrl+O</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="678"/>
         <location filename="../../ui/grlida.ui" line="1455"/>
         <location filename="../../ui/grlida.ui" line="1693"/>
@@ -1377,7 +1373,7 @@
         <source>F2</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1473"/>
         <source>Lista modo carátulas</source>
         <translation>Liste par Couverture</translation>
@@ -1448,7 +1444,7 @@
         <source>PictureFlow como principal</source>
         <translation>PictureFlow en vue principale</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="259"/>
         <source>Ver la barra de título de los paneles ...</source>
         <translation type="unfinished"></translation>
@@ -1468,7 +1464,7 @@
         <source>Archivos</source>
         <translation>Fichier</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="754"/>
         <source>Categorías</source>
         <translation>Catégories</translation>
@@ -1520,13 +1516,13 @@
         <source>Muestra los sonidos del juego</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1676"/>
         <location filename="../../ui/grlida.ui" line="1679"/>
         <source>Auto ocultar  barra de título</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1682"/>
         <location filename="../../ui/grlida.ui" line="1685"/>
         <source>Oculta automaticamente la barra de título en las ventanas acoplabes</source>
@@ -1540,7 +1536,7 @@
         <source>Enlaces</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="997"/>
         <location filename="../../ui/grlida.ui" line="1745"/>
         <location filename="../../ui/grlida.ui" line="1748"/>
@@ -1556,7 +1552,7 @@
         <source>Editar temas</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1593"/>
         <location filename="../../ui/grlida.ui" line="1599"/>
         <source>Ver imágenes</source>
@@ -1570,7 +1566,7 @@
         <source>Listado de sonidos</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1886"/>
         <source>Ver Menú</source>
         <translation>Afficher le menu</translation>
@@ -1640,13 +1636,17 @@
         <source>Icono</source>
         <translation>Icone</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2013"/>
+        <location filename="../../src/grlida.cpp" line="1654"/>
+        <location filename="../../src/grlida.cpp" line="2095"/>
         <source>Subtítulo</source>
         <translation>Soustitre</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2029"/>
+        <location filename="../../src/grlida.cpp" line="1656"/>
+        <location filename="../../src/grlida.cpp" line="2097"/>
         <source>Compañia</source>
         <translation>Editeur</translation>
     </message>
@@ -1684,8 +1684,10 @@
         <source>Formato</source>
         <translation>Format</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2093"/>
+        <location filename="../../src/grlida.cpp" line="1661"/>
+        <location filename="../../src/grlida.cpp" line="2105"/>
         <source>Año</source>
         <translation>Année</translation>
     </message>
@@ -1695,17 +1697,20 @@
         <source>Sistema</source>
         <translation>OS</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2117"/>
+        <location filename="../../src/grlida.cpp" line="2108"/>
         <source>Tamaño</source>
         <translation>Taille</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2125"/>
+        <location filename="../../src/grlida.cpp" line="1664"/>
+        <location filename="../../src/grlida.cpp" line="2109"/>
         <source>Gráficos</source>
-        <translation></translation>
+        <translation>Graphismes</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2165"/>
         <source>Añadido el</source>
         <translation>Ajouté le</translation>
@@ -1815,7 +1820,7 @@
         <source>Ejecutar el Setup</source>
         <translation>Lancer le Setup</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="1437"/>
         <location filename="../../ui/grlida.ui" line="2637"/>
         <source>Opciones de configuración del GR-lida</source>
@@ -1831,7 +1836,7 @@
         <source>Barra ordenar lista</source>
         <translation>Barre trier la liste</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="418"/>
         <source>Dispone de archivos / carátulas</source>
         <translation>Fichiers / couvertures disponibles</translation>
@@ -1856,8 +1861,9 @@
         <source>Marca o quita un juego seleccionado como favorito</source>
         <translation>Sélectionner ou désélectionner comme jeu favori</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2101"/>
+        <location filename="../../src/grlida.cpp" line="1662"/>
         <source>Nº discos</source>
         <translation>Nbre de Cds</translation>
     </message>
@@ -1873,7 +1879,7 @@
         <source>Carpeta de emoticonos</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/grlida.ui" line="2655"/>
         <source>Muestra información acerca del GR-lida</source>
         <translation>Montrer les informations GR-lida</translation>
@@ -2043,37 +2049,9 @@ Appuyer sur Annuler pour quitter.</translation>
         <translation>Titre</translation>
     </message>
     <message>
-        <location filename="../../src/grlida.cpp" line="1656"/>
-        <location filename="../../src/grlida.cpp" line="2097"/>
-        <source>Compañia</source>
-        <translation>Editeur</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="1661"/>
-        <location filename="../../src/grlida.cpp" line="2105"/>
-        <source>Año</source>
-        <translation>Année</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="1662"/>
-        <source>Nº discos</source>
-        <translation>Nbre de Cds</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="1664"/>
-        <location filename="../../src/grlida.cpp" line="2109"/>
-        <source>Gráficos</source>
-        <translation>Graphismes</translation>
-    </message>
-    <message>
         <location filename="../../src/grlida.cpp" line="2115"/>
         <source>Tipo Emu</source>
         <translation>Type émulation</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="2108"/>
-        <source>Tamaño</source>
-        <translation>Taille</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="2263"/>
@@ -2104,12 +2082,6 @@ Appuyer sur Annuler pour quitter.</translation>
         <location filename="../../src/grlida.cpp" line="3380"/>
         <source>Si</source>
         <translation>Oui</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="1654"/>
-        <location filename="../../src/grlida.cpp" line="2095"/>
-        <source>Subtítulo</source>
-        <translation>Soustitre</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="1985"/>
@@ -2163,6 +2135,11 @@ Appuyer sur Annuler pour quitter.</translation>
         <location filename="../../src/grlida.cpp" line="3161"/>
         <source>No esta disponible el script para ejecutar el montaje de la imagen.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida.cpp" line="3313"/>
+        <source>¿Eliminar juego?</source>
+        <translation type="unfinished">Effacer le jeu?</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3321"/>
@@ -2320,11 +2297,6 @@ Appuyer sur Annuler pour quitter.</translation>
         <location filename="../../src/grlida.cpp" line="3555"/>
         <source>Por favor selecciona un juego de la lista para eliminarlo</source>
         <translation>Choisir un jeu de la liste à effacer</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida.cpp" line="3313"/>
-        <source>¿Eliminar juego...?</source>
-        <translation>Effacer le jeu?</translation>
     </message>
     <message>
         <location filename="../../src/grlida.cpp" line="3135"/>
@@ -2714,12 +2686,12 @@ Please check the media service plugins are installed.</source>
         <source>Acerca del GR-lida</source>
         <translation>A propos de GR-lida</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/acercad.ui" line="161"/>
         <source>Versión del GR-lida:</source>
         <translation>Version de GR-lida:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/acercad.ui" line="181"/>
         <source>Diseñado y programado por:</source>
         <translation>Design et programmation par:</translation>
@@ -2729,7 +2701,7 @@ Please check the media service plugins are installed.</source>
         <source>Monthy</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/acercad.ui" line="201"/>
         <source>Lista de compañías de juegos creada por:</source>
         <translation>Liste des éditeurs créee par:</translation>
@@ -2833,17 +2805,17 @@ Please check the media service plugins are installed.</source>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="898"/>
         <source>¿Usar montajes?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Utiliser des montures?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="898"/>
         <source>¿Deseas añadir los montajes usados?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Voulez-vous ajouter les montures utilisées?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="1055"/>
-        <source>¿Eliminar montaje...?</source>
-        <translation>Effacer le montage...?</translation>
+        <source>¿Eliminar montaje?</source>
+        <translation type="unfinished">Effacer le montage?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_dosbox.cpp" line="1055"/>
@@ -2923,7 +2895,7 @@ Please check the media service plugins are installed.</source>
         <source>Ejecutable (exe,com,bat) setup del juego:</source>
         <translation>Setup (exe, com, bat) du jeu:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="304"/>
         <source>keyboardlayout -- Código de la lengua de la disposición de teclado (o ninguna)</source>
         <translation>keyboardlayout -- Langue du clavier</translation>
@@ -2933,12 +2905,12 @@ Please check the media service plugins are installed.</source>
         <source>General DOSBox</source>
         <translation>DOSBox Général</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="380"/>
         <source>Opciones de pantalla, video, ratón y renderizado....</source>
         <translation>Options écran, vidéo, souris, rendu...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="466"/>
         <source>Resolución pantalla:</source>
         <translation>Résolution de l&apos;écran:</translation>
@@ -2953,7 +2925,7 @@ Please check the media service plugins are installed.</source>
         <source>windowresolution:</source>
         <translation>Résolution de la fenêtre:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="520"/>
         <source>Sensibilidad del ratón:</source>
         <translation>Sensibilité de la souris:</translation>
@@ -2973,7 +2945,7 @@ Please check the media service plugins are installed.</source>
         <source>Escalar y filtros:</source>
         <translation>Echelle et filtres:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="456"/>
         <source>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed</source>
         <translation>Fullresolution -- Résolution à utiliser en plein écran, utiliser avec le mode &apos;fullfixed&apos;</translation>
@@ -2988,22 +2960,22 @@ Please check the media service plugins are installed.</source>
         <source>waitonerror -- Esperar antes de cerrar la consola si DOSBox provoca un error</source>
         <translation>Waitonerror -- Attendre avant de fermer la console en cas d&apos;erreur de DOSBox</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="429"/>
         <source>aspect -- Aplicar corrección de aspecto</source>
         <translation>Aspect -- Correction de l&apos;aspect</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="419"/>
         <source>autolock -- El ratón se autobloqueará al hace clic en la pantalla</source>
         <translation>Autolock - La souris sera capturée automatiquement en cliquant sur l&apos;écran</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="412"/>
         <source>fullfixed -- Fijar la resolución en pantalla completa</source>
         <translation>Fullfixed - Fixer la résolution en plein écran</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="405"/>
         <source>fulldouble -- Usar doble búfer en pantalla completa</source>
         <translation>Fulldouble -- Utiliser double buffering en mode plein écran</translation>
@@ -3018,22 +2990,22 @@ Please check the media service plugins are installed.</source>
         <source>Entorno</source>
         <translation>Environnement</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="629"/>
         <source>Opciones de memoria, joystick y ciclos de emulación</source>
         <translation>Options de mémoire, joystick et cycles d&apos;émulation</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="773"/>
         <source>Cantidad de memoria (Mb) que DOSBox tendrá disponible</source>
         <translation>Quantité de mémoire à disposition (Mb)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="713"/>
         <source>Versión MS-DOS</source>
         <translation>Version MS-DOS</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="660"/>
         <source>Núcleo de la CPU usado en la emulación</source>
         <translation>Noyau CPU pour l&apos;émulation</translation>
@@ -3083,11 +3055,7 @@ Please check the media service plugins are installed.</source>
         <source>Sincronizar. Arriba/Abajo</source>
         <translation>Syncroniser, haut/bas</translation>
     </message>
-    <message>
-        <source>Emulador de joystick:</source>
-        <translation type="obsolete">Emulateur de joystick:</translation>
-    </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="841"/>
         <source>Ciclos, cantidad de instrucciones que dosbox intenta emular cada milisegundo, Es malo darle un valor mayor al que su máquina puede soportar:</source>
         <translation>Cycles, quantité d&apos;instructions que dosbox tente d&apos;émuler par milliseconde. une valeur supérieure à celle que supporte la machine réduit les performances:</translation>
@@ -3102,22 +3070,22 @@ Please check the media service plugins are installed.</source>
         <source>ems -- Activa o desactiva soporte para memoria EMS.</source>
         <translation>EMS -- Activer ou désactiver le support pour la mémoire EMS.</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1081"/>
         <source>autofire -- Disparo continuado mientras mantengas el botón presionado</source>
         <translation>Autofire - Tir en continu tant que le bouton est pressé</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1088"/>
         <source>swap34 -- Intercambiar el 3ro y 4to eje. Puede ser útil para ciertas palancas de mando</source>
         <translation>Swap34 - Echanger le 3e et 4e axe. Peut être utile pour certaines configurations</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1095"/>
         <source>buttonwrap -- Habilitar el ajuste de botón en el número de botones emulados</source>
         <translation>buttonwrap -- Activer le bouton de réglage du nombre de boutons dans émulé</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="14"/>
         <source>Configuración del DOSBox</source>
         <translation>Configurer DOSBox</translation>
@@ -3126,10 +3094,6 @@ Please check the media service plugins are installed.</source>
         <location filename="../../ui/addedit_dosbox.ui" line="39"/>
         <source>Datos generales para el DOSbox</source>
         <translation>Données générales DOSBox</translation>
-    </message>
-    <message>
-        <source>Templates profiles:</source>
-        <translation type="obsolete">Modèles de profils:</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_dosbox.ui" line="80"/>
@@ -3156,12 +3120,12 @@ Please check the media service plugins are installed.</source>
         <source>Opciones de memoria</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="823"/>
         <source>Ciclos de emulación</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1011"/>
         <source>Emulación de joystick</source>
         <translation type="unfinished"></translation>
@@ -3176,7 +3140,7 @@ Please check the media service plugins are installed.</source>
         <source>Opciones de sonido</source>
         <translation>Options audio</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1140"/>
         <source>Todas las opciones de sonido y emulación de sonido</source>
         <translation>Toutes les options de son et d&apos;émulation du son</translation>
@@ -3255,7 +3219,7 @@ Please check the media service plugins are installed.</source>
         <source>Gravis Ultrasound</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1510"/>
         <source>Activa la emulación de Gravis Ultrasound</source>
         <translation>Activer l&apos;émulation Gravis UltraSound</translation>
@@ -3295,7 +3259,7 @@ Please check the media service plugins are installed.</source>
         <source>Opciones del MIDI</source>
         <translation>Options MIDI</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1736"/>
         <source>Activar emulación MPU-401</source>
         <translation>Activer l&apos;émulation MPU-401</translation>
@@ -3310,22 +3274,22 @@ Please check the media service plugins are installed.</source>
         <source>Modo inteligente</source>
         <translation>Mode Intelligent</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1776"/>
         <source>Dispositivo que recibirá los datos MIDI desde el MPU-401:</source>
         <translation>Dispositif qui recevra les données midi du MPU-401:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1799"/>
         <source>Frecuencia de muestreo de la emulación de música MT32:</source>
         <translation>Fréquence d&apos;échantillonage de l&apos;émulation MT32:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1822"/>
         <source>Opciones de configuración especiales para el dispositivo:</source>
         <translation>Options de configuration spécifiques au dispositif:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1859"/>
         <source>Configuración Adicional</source>
         <translation>Configuration supplémentaire</translation>
@@ -3345,7 +3309,7 @@ Please check the media service plugins are installed.</source>
         <source>Activa Disney Sound Source</source>
         <translation>Activer Disney Sound Source</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1918"/>
         <source>Frecuencia de muestreo de la generación de sonido del altavoz interno:</source>
         <translation>Fréquence d&apos;échantillonage du son pour le haut-parleur interne:</translation>
@@ -3355,7 +3319,7 @@ Please check the media service plugins are installed.</source>
         <source>Tandy:</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="1964"/>
         <source>Frecuencia de muestreo de la generación de sonido Tandy de 3 voces. La emulación de sonido Tandy está presente si se selecciona tandy como máquina:</source>
         <translation>Fréquence d&apos;échantillonage Tandy 3. Présente si l&apos;émulation tandy est sélectionnée:</translation>
@@ -3390,7 +3354,7 @@ Please check the media service plugins are installed.</source>
         <source>Etiqueta</source>
         <translation>Label</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2148"/>
         <source>Añadir</source>
         <translation>Ajouter</translation>
@@ -3430,7 +3394,7 @@ Please check the media service plugins are installed.</source>
         <source>Selecciona montaje primario</source>
         <translation>Sélectionner le point de montage par défaut</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2295"/>
         <source>Comunicación</source>
         <translation>Communication</translation>
@@ -3440,7 +3404,7 @@ Please check the media service plugins are installed.</source>
         <source>Opciones de comunicaciones como la red o modem</source>
         <translation>Options réseau/modem</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2656"/>
         <source>ipx -- Activa emulación IPX sobre UDP/IP</source>
         <translation>IPX -- Activer l&apos;émulation IPX pour le protocole UDP/IP</translation>
@@ -3450,7 +3414,7 @@ Please check the media service plugins are installed.</source>
         <source>Red IPX como:</source>
         <translation>Réseau IPX:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2700"/>
         <source>Dirección IP del IPX:</source>
         <translation>Adresse IP pour IPX:</translation>
@@ -3470,12 +3434,12 @@ Please check the media service plugins are installed.</source>
         <source>directserial -- Activa soporte de puerto serie directo</source>
         <translation>Directserial - Activer le support de port de série direct</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2348"/>
         <source>modem -- Activa emulación de módem virtual</source>
         <translation>Modem - Activer l&apos;émulation virtuelle de modem</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2400"/>
         <source>Tamaño del Byte:</source>
         <translation>Taille du Byte:</translation>
@@ -3520,7 +3484,7 @@ Please check the media service plugins are installed.</source>
         <source>Estado o tipo Serial:</source>
         <translation>Etat ou type de Serial:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2574"/>
         <source>Añade Serial</source>
         <translation>Ajouter port de série</translation>
@@ -3550,7 +3514,7 @@ Please check the media service plugins are installed.</source>
         <source>Autoexec</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="2791"/>
         <source>Activar configuración manual del [autoexec] del DOSBox</source>
         <translation>Activer la configuration manuelle de la section [autoexec] de DOSBox</translation>
@@ -3595,7 +3559,7 @@ Please check the media service plugins are installed.</source>
         <source>Autoexec Fin</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="3046"/>
         <source>Antes / Después del exe</source>
         <translation type="unfinished"></translation>
@@ -3605,12 +3569,12 @@ Please check the media service plugins are installed.</source>
         <source>Antes de ejecutar el exe</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="3088"/>
         <source>Después  de ejecutar el exe</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_dosbox.ui" line="3113"/>
         <source>Miscelánea</source>
         <translation>Divers</translation>
@@ -3701,7 +3665,7 @@ Please check the media service plugins are installed.</source>
         <source>Portada o pantallazo</source>
         <translation>Couverture ou capture d&apos;écran</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="467"/>
         <source>Subtítulo:</source>
         <translation>Soustitre:</translation>
@@ -3716,7 +3680,7 @@ Please check the media service plugins are installed.</source>
         <source>Introducido el</source>
         <translation>Entré le</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="441"/>
         <source>Título:</source>
         <translation>Titre:</translation>
@@ -3726,7 +3690,7 @@ Please check the media service plugins are installed.</source>
         <source>Genero:</source>
         <translation>Genre:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="161"/>
         <source>Compañía:</source>
         <translation>Editeur:</translation>
@@ -3751,7 +3715,7 @@ Please check the media service plugins are installed.</source>
         <source>Grupo:</source>
         <translation>Groupe:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="181"/>
         <source>Año:</source>
         <translation>Année:</translation>
@@ -3766,7 +3730,7 @@ Please check the media service plugins are installed.</source>
         <source>Edad:</source>
         <translation>Age:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="291"/>
         <source>Nº Cds:</source>
         <translation>Nbre de Cds:</translation>
@@ -3791,7 +3755,7 @@ Please check the media service plugins are installed.</source>
         <source>Sistema OS:</source>
         <translation>OS:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="404"/>
         <source>Tamaño:</source>
         <translation>Taille:</translation>
@@ -3801,13 +3765,15 @@ Please check the media service plugins are installed.</source>
         <source>Juego favorito</source>
         <translation>Jeu favori</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1153"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="391"/>
         <source>Carátula trasera</source>
         <translation>Couverture (derrière)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="984"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="390"/>
         <source>Carátula delantera</source>
         <translation>Couverture (devant)</translation>
     </message>
@@ -3821,12 +3787,12 @@ Please check the media service plugins are installed.</source>
         <source>Jugabilidad</source>
         <translation>Jouabilité</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="374"/>
         <source>Gráficos</source>
         <translation>Graphismes</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="726"/>
         <location filename="../../ui/addedit_juego.ui" line="2296"/>
         <location filename="../../ui/addedit_juego.ui" line="2493"/>
@@ -3838,7 +3804,7 @@ Please check the media service plugins are installed.</source>
         <source>Imagen</source>
         <translation>Image</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="20"/>
         <source>Añadir o editar juego</source>
         <translation>Ajouter ou éditer un jeu</translation>
@@ -3874,12 +3840,12 @@ Please check the media service plugins are installed.</source>
         <source>Direcciones url</source>
         <translation>URLS</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="2443"/>
         <source>Dirección url:</source>
         <translation>URL:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="2251"/>
         <location filename="../../ui/addedit_juego.ui" line="2453"/>
         <source>Descripción:</source>
@@ -3900,7 +3866,7 @@ Please check the media service plugins are installed.</source>
         <source>Borrar la imagen actual de la portada o pantallazo</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="687"/>
         <location filename="../../ui/addedit_juego.ui" line="1127"/>
         <source>Genera la portada o pantallazo a partir de la carátula delantera</source>
@@ -3916,17 +3882,18 @@ Please check the media service plugins are installed.</source>
         <source>Multimedia</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="778"/>
         <source>Carátulas caja</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="854"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="392"/>
         <source>Carátula izquierda</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="884"/>
         <location filename="../../ui/addedit_juego.ui" line="1208"/>
         <location filename="../../ui/addedit_juego.ui" line="1338"/>
@@ -3935,7 +3902,7 @@ Please check the media service plugins are installed.</source>
         <source>Seleccionar imagen para la carátula trasera</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="910"/>
         <location filename="../../ui/addedit_juego.ui" line="1234"/>
         <location filename="../../ui/addedit_juego.ui" line="1364"/>
@@ -3944,7 +3911,7 @@ Please check the media service plugins are installed.</source>
         <source>Abre la imagen actual de la carátula trasera</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="936"/>
         <location filename="../../ui/addedit_juego.ui" line="1260"/>
         <location filename="../../ui/addedit_juego.ui" line="1390"/>
@@ -3953,33 +3920,36 @@ Please check the media service plugins are installed.</source>
         <source>Borra la imagen actual de la carátula trasera</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1039"/>
         <source>Seleccionar imagen para la carátula delantera</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1065"/>
         <source>Abre la imagen actual de la carátula delantera</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1091"/>
         <source>Borra la imagen actual de la carátula delantera</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1286"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="393"/>
         <source>Carátula derecha</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1429"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="394"/>
         <source>Carátula superior</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1559"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="395"/>
         <source>Carátula inferior</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4019,7 +3989,7 @@ Please check the media service plugins are installed.</source>
         <source>Sonidos</source>
         <translation>Son</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="2513"/>
         <source>Añadir url</source>
         <translation>Ajouté url</translation>
@@ -4064,7 +4034,7 @@ Please check the media service plugins are installed.</source>
         <source>Nombre:</source>
         <translation>Nom:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="2097"/>
         <source>Archivo para añadir a la lista:</source>
         <translation>Fichier à ajouter à la liste:</translation>
@@ -4104,7 +4074,7 @@ Please check the media service plugins are installed.</source>
         <source>CRC32:</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1799"/>
         <location filename="../../ui/addedit_juego.ui" line="1839"/>
         <location filename="../../ui/addedit_juego.ui" line="1932"/>
@@ -4112,6 +4082,7 @@ Please check the media service plugins are installed.</source>
         <location filename="../../ui/addedit_juego.ui" line="2326"/>
         <location filename="../../ui/addedit_juego.ui" line="2842"/>
         <location filename="../../ui/addedit_juego.ui" line="3073"/>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="1455"/>
         <source>Añadir</source>
         <translation>Ajouter</translation>
     </message>
@@ -4122,7 +4093,7 @@ Please check the media service plugins are installed.</source>
         <source>Actualizar</source>
         <translation>Rafraichir</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="1699"/>
         <source>Imágenes</source>
         <translation>Images</translation>
@@ -4137,7 +4108,7 @@ Please check the media service plugins are installed.</source>
         <source>Ejecutable / Rom</source>
         <translation>Exécutable / rom</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="2725"/>
         <source>Configuración EXE / ROM</source>
         <translation type="unfinished"></translation>
@@ -4178,7 +4149,7 @@ Please check the media service plugins are installed.</source>
         <source>Compatibilidad</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_juego.ui" line="3033"/>
         <source>Configuración SETUP</source>
         <translation type="unfinished"></translation>
@@ -4256,36 +4227,6 @@ Please check the media service plugins are installed.</source>
         <translation>Archives diverses</translation>
     </message>
     <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="390"/>
-        <source>Carátula delantera</source>
-        <translation>Couverture (devant)</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="391"/>
-        <source>Carátula trasera</source>
-        <translation>Couverture (derrière)</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="392"/>
-        <source>Carátula izquierda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="393"/>
-        <source>Carátula derecha</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="394"/>
-        <source>Carátula superior</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="395"/>
-        <source>Carátula inferior</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="427"/>
         <source>Editando a</source>
         <translation>Edite sous</translation>
@@ -4360,8 +4301,8 @@ Please check the media service plugins are installed.</source>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1887"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1949"/>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2012"/>
-        <source>¿Eliminar...?</source>
-        <translation>Effacer...?</translation>
+        <source>¿Eliminar?</source>
+        <translation type="unfinished">Effacer?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="1795"/>
@@ -4430,18 +4371,18 @@ Please check the media service plugins are installed.</source>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2427"/>
-        <source>¿Eliminar url...?</source>
-        <translation>Effacer l&apos;url...?</translation>
+        <source>¿Eliminar url?</source>
+        <translation type="unfinished">Effacer l&apos;url?</translation>
+    </message>
+    <message>
+        <location filename="../../src/grlida_addedit_juego.cpp" line="2633"/>
+        <source>¿Eliminar archivo?</source>
+        <translation type="unfinished">Effacer le fichier?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2427"/>
         <source>¿Deseas eliminar esta url?</source>
         <translation>Effacer cette URL?</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="2633"/>
-        <source>¿Eliminar archivo...?</source>
-        <translation>Effacer le fichier...?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2633"/>
@@ -4474,11 +4415,6 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <location filename="../../src/grlida_addedit_juego.cpp" line="1426"/>
         <source>Grupo</source>
         <translation>Groupe</translation>
-    </message>
-    <message>
-        <location filename="../../src/grlida_addedit_juego.cpp" line="1455"/>
-        <source>Añadir</source>
-        <translation>Ajouter</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_juego.cpp" line="2078"/>
@@ -4596,17 +4532,13 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="348"/>
-        <source>¿Eliminar...?</source>
-        <translation>Effacer...?</translation>
+        <source>¿Eliminar?</source>
+        <translation type="unfinished">Effacer?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="348"/>
         <source>¿Quieres eliminar la ISO/IMA/IMG de la lista?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>¿Quieres eliminar la ISO de la lista?</source>
-        <translation type="obsolete">Vraiment effacer l&apos;ISO de la liste?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_montajes.cpp" line="398"/>
@@ -4678,7 +4610,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Otras opciones de montajes:</source>
         <translation>Autres options de montage:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_montajes.ui" line="397"/>
         <source>Opción avanzada: [sectorsbytesize, sectorsperhead, heads, cylinders]</source>
         <translation>Option avancée: [sectorsbytesize, sectorsperhead, heads, cylinders]</translation>
@@ -4769,7 +4701,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Todos los archivos</source>
         <translation>Tous les fichiers</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_scummvm.ui" line="14"/>
         <source>Configuración del ScummVM</source>
         <translation>Configuration de ScummVm</translation>
@@ -4819,7 +4751,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Joystick:</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_scummvm.ui" line="206"/>
         <source>Modo gráfico:</source>
         <translation></translation>
@@ -4839,7 +4771,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Pantalla completa</source>
         <translation>Plein écran</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_scummvm.ui" line="102"/>
         <source>Corrección de aspecto</source>
         <translation>Correction d&apos;aspect</translation>
@@ -4898,7 +4830,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>SoundFont:</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_scummvm.ui" line="795"/>
         <source>Configuración predeterminada</source>
         <translation>Configuration standard</translation>
@@ -4913,7 +4845,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Autoguardado:</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_scummvm.ui" line="308"/>
         <source>Mostras subtítulo</source>
         <translation>Afficher les soustitres</translation>
@@ -4923,20 +4855,20 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Selecciona:</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_scummvm.ui" line="469"/>
         <source>Filtros de gráficos</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Filtres graphiques</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_scummvm.ui" line="476"/>
         <source>Paleta original</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Palette d&apos;origine</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_scummvm.ui" line="483"/>
         <source>Pantalla guardar/cargar originales</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enregistrer / charger l&apos;écran d&apos;origine</translation>
     </message>
     <message>
         <location filename="../../ui/addedit_scummvm.ui" line="498"/>
@@ -4944,7 +4876,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Opciones de sonido</source>
         <translation>Options audio</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_scummvm.ui" line="819"/>
         <source>Velocidad de subtítulos:</source>
         <translation>Vitesse des sous-titres:</translation>
@@ -4954,12 +4886,12 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Walk Speed:</source>
         <translation>Vitesse de marche:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_scummvm.ui" line="855"/>
         <source>Volumen música:</source>
         <translation>Volume musique:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_scummvm.ui" line="869"/>
         <source>Tiempo de la música:</source>
         <translation>Tempo de la musique:</translation>
@@ -5044,7 +4976,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Iconos</source>
         <translation>Icones</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_vdmsound.ui" line="14"/>
         <source>Configuración del VDMSound</source>
         <translation>Configurer VDMSound</translation>
@@ -5060,7 +4992,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Parametros:</source>
         <translation>Paramètres:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_vdmsound.ui" line="156"/>
         <source>Dirección del icono:</source>
         <translation>Chemin de l&apos;icone:</translation>
@@ -5144,7 +5076,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Parametro desmontaje</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_virtual_drive.ui" line="63"/>
         <source>Plantilla de configuración</source>
         <translation type="unfinished"></translation>
@@ -5264,7 +5196,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Nuevo</source>
         <translation type="unfinished">Nouveau</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/addedit_virtual_drive.ui" line="476"/>
         <source>Añadir</source>
         <translation type="unfinished">Ajouter</translation>
@@ -5397,8 +5329,8 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
     </message>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="504"/>
-        <source>¿Eliminar...?</source>
-        <translation type="unfinished">Effacer...?</translation>
+        <source>¿Eliminar?</source>
+        <translation type="unfinished">Effacer?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_addedit_virtual_drive.cpp" line="504"/>
@@ -5472,7 +5404,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
 </context>
 <context>
     <name>frmCambiarCategoria</name>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/cambiar_categoria.ui" line="20"/>
         <source>Cambiar de categoría</source>
         <translation type="unfinished"></translation>
@@ -5516,7 +5448,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Ejecutar este programa en el modo de compatibilidad para:</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/compatibilidad_exe.ui" line="70"/>
         <source>Configuración</source>
         <translation type="unfinished"></translation>
@@ -5526,7 +5458,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Modo de color reducido</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/compatibilidad_exe.ui" line="105"/>
         <source>Ejecutar con una resolución de pantalla de 640 x 480</source>
         <translation type="unfinished"></translation>
@@ -5541,7 +5473,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Ejecutar este programa como administrador</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/compatibilidad_exe.ui" line="129"/>
         <source>Configuración de entrada</source>
         <translation type="unfinished"></translation>
@@ -5590,7 +5522,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Selecciona el ejecutable del ScummVM</source>
         <translation>Choisir l&apos;exécutable ScummVM</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/config_inicial.ui" line="14"/>
         <source>Configuración Inicial del GR-lida</source>
         <translation>Configuration initiale de GR-lida</translation>
@@ -5605,7 +5537,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Tengo instalado el emulador ScummVM</source>
         <translation>L&apos;émulateur ScummVM est installé</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/config_inicial.ui" line="174"/>
         <source>Dirección del ScummVM:</source>
         <translation>Chemin de ScummVM:</translation>
@@ -5615,12 +5547,12 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Tengo instalado el emulador DOSBox</source>
         <translation>L&apos;émulateur DOSBox est installé</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/config_inicial.ui" line="287"/>
         <source>Dirección del DOSBox:</source>
         <translation>Chemin de DOSBox:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/config_inicial.ui" line="392"/>
         <source>Esta es la primera vez que lo abres o todaví­a no lo has configurado y para poder utilizar el programa correctamente debes configurarlo primero con estas sencillas opciones</source>
         <translation>GR-lida est lancé pour la première fois ou bien n&apos;a pas encore été configuré. Pour le bon fonctionnement du programme, quelques options doivent être configurées</translation>
@@ -5635,7 +5567,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Aceptar</source>
         <translation>OK</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/config_inicial.ui" line="450"/>
         <source>Mostrar la próxima vez que inicie</source>
         <translation>Montrer au prochain démarrage</translation>
@@ -6610,7 +6542,8 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Información</source>
         <translation>Infos</translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/importar_juego.ui" line="150"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="192"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="1432"/>
         <source>Página</source>
@@ -6622,23 +6555,25 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <location filename="../../src/grlida_importar_juego.cpp" line="1290"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="1309"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="1432"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1851"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1872"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2566"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2571"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2776"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2780"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2806"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2812"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1853"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1874"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2568"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2573"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2778"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2782"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2808"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2814"/>
         <source>de</source>
         <translation>de</translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/importar_juego.ui" line="242"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="260"/>
         <source>Título</source>
         <translation type="unfinished">Titre</translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/importar_juego.ui" line="247"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="261"/>
         <source>Año</source>
         <translation type="unfinished">Année</translation>
@@ -6648,7 +6583,9 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>CRC</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/importar_juego.ui" line="449"/>
+        <location filename="../../ui/importar_juego.ui" line="523"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="293"/>
         <location filename="../../src/grlida_importar_juego.cpp" line="308"/>
         <source>Descripción</source>
@@ -6718,50 +6655,45 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="1318"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2883"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2885"/>
         <source>Importar juego</source>
         <translation>Importer un jeu</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="1318"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2883"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2885"/>
         <source>Por favor selecciona al menos un juego de la lista para importarlo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="1366"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2566"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2571"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2568"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2573"/>
         <source>Importando</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1841"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1843"/>
         <source>The file is not an XBEL version 1.0 file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1851"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="1872"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1853"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="1874"/>
         <source>Añadiendo a la lista</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2776"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2780"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2778"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2782"/>
         <source>Importando imágenes, juego</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2806"/>
-        <location filename="../../src/grlida_importar_juego.cpp" line="2812"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2808"/>
+        <location filename="../../src/grlida_importar_juego.cpp" line="2814"/>
         <source>Descomprimiendo juego</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ui/importar_juego.ui" line="242"/>
-        <source>Título</source>
-        <translation>Titre</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_juego.cpp" line="959"/>
@@ -6803,7 +6735,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Abortar</source>
         <translation>Annuler</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/importar_juego.ui" line="130"/>
         <source>Título:</source>
         <translation>Titre:</translation>
@@ -6813,16 +6745,6 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <location filename="../../src/grlida_importar_juego.cpp" line="262"/>
         <source>Plataforma</source>
         <translation>Plateforme</translation>
-    </message>
-    <message>
-        <location filename="../../ui/importar_juego.ui" line="247"/>
-        <source>Año</source>
-        <translation>Année</translation>
-    </message>
-    <message>
-        <location filename="../../ui/importar_juego.ui" line="150"/>
-        <source>Página</source>
-        <translation>Page</translation>
     </message>
     <message>
         <location filename="../../ui/importar_juego.ui" line="257"/>
@@ -6877,12 +6799,6 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <translation></translation>
     </message>
     <message>
-        <location filename="../../ui/importar_juego.ui" line="449"/>
-        <location filename="../../ui/importar_juego.ui" line="523"/>
-        <source>Descripción</source>
-        <translation>Description</translation>
-    </message>
-    <message>
         <location filename="../../ui/importar_juego.ui" line="454"/>
         <source>Size</source>
         <translation>Taille</translation>
@@ -6903,7 +6819,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>URL</source>
         <translation>URL</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/importar_juego.ui" line="536"/>
         <source>Imágenes</source>
         <translation>Images</translation>
@@ -6931,7 +6847,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Eliminar</source>
         <translation>Effacer</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/importar_juego.ui" line="684"/>
         <source>Añadir al listado</source>
         <translation type="unfinished"></translation>
@@ -6941,12 +6857,12 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Marcar / Desmasrcar la lista</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/importar_juego.ui" line="726"/>
         <source>Obtener más imágenes</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/importar_juego.ui" line="735"/>
         <source>Las imágenes que esten en listado superior seran descargadas al importar el juego.</source>
         <translation type="unfinished"></translation>
@@ -6972,7 +6888,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Importar solo los datos del juego.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/importar_juego.ui" line="938"/>
         <location filename="../../ui/importar_juego.ui" line="990"/>
         <source>Importar solo la configuración de DOSBox (no extrae del zip los archivos del juego en DBGL).</source>
@@ -6984,12 +6900,12 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Importar capturas del juego (en DBGL).</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/importar_juego.ui" line="974"/>
         <source>Opciones de importación para la lista de juegos completa.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/importar_juego.ui" line="1034"/>
         <source>Descargar información</source>
         <translation type="unfinished"></translation>
@@ -7112,7 +7028,7 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="101"/>
         <source>Modo gráfico:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mode graphique:</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="108"/>
@@ -7207,12 +7123,12 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="169"/>
         <source>Pantalla guardar/cargar originales</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enregistrer / charger l&apos;écran d&apos;origine</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="172"/>
         <source>Paleta original</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Palette d&apos;origine</translation>
     </message>
     <message>
         <location filename="../../src/grlida_importar_scummvm.cpp" line="175"/>
@@ -7335,13 +7251,13 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <source>Tipo emulador</source>
         <translation>Type émulation</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/informacion.ui" line="14"/>
         <location filename="../../ui/informacion.ui" line="298"/>
         <source>Información</source>
         <translation>Infos</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/informacion.ui" line="336"/>
         <source>Categorías</source>
         <translation>Catégories</translation>
@@ -7425,8 +7341,8 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="475"/>
         <location filename="../../src/grlida_instalar_juego.cpp" line="706"/>
-        <source>¿Eliminar...?</source>
-        <translation>Effacer...?</translation>
+        <source>¿Eliminar?</source>
+        <translation type="unfinished">Effacer?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="475"/>
@@ -7500,10 +7416,6 @@ Si c&apos;est un jeu DOSBox ou VDMSound, le fichier de configuration sera égale
         <translation type="unfinished">Une erreur inconnue s&apos;est produite</translation>
     </message>
     <message>
-        <source>¿Quieres eliminar la ISO de la lista?</source>
-        <translation type="obsolete">Vraiment effacer l&apos;ISO de la liste?</translation>
-    </message>
-    <message>
         <location filename="../../src/grlida_instalar_juego.cpp" line="505"/>
         <source>El ejecutable suele ser: INSTALL, si no esta seguro teclee DIR y pulsa INTRO</source>
         <translation>L&apos;exécutable est habituellement nommé INSTALL. En cas de doute taper DIR et presser ENTRÉE</translation>
@@ -7540,10 +7452,6 @@ ou que le dossier de destination soit invalide.</translation>
 Compruebe si lo tiene instalado.</source>
         <translation>L&apos;exécutable de l&apos;émulateur n&apos;est pas disponible.
 Vérifier l&apos;installation.</translation>
-    </message>
-    <message>
-        <source> Instalar un juego mediante DOSBox</source>
-        <translation type="obsolete">Installer un jeu via DOSBox</translation>
     </message>
     <message>
         <location filename="../../ui/instalar_juego.ui" line="545"/>
@@ -8283,8 +8191,8 @@ Vérifier l&apos;installation.</translation>
         <location filename="../../src/grlida_opciones.cpp" line="3138"/>
         <location filename="../../src/grlida_opciones.cpp" line="3168"/>
         <location filename="../../src/grlida_opciones.cpp" line="3198"/>
-        <source>¿Eliminar...?</source>
-        <translation>Effacer...?</translation>
+        <source>¿Eliminar?</source>
+        <translation type="unfinished">Effacer?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_opciones.cpp" line="1848"/>
@@ -8327,7 +8235,12 @@ Vérifier l&apos;installation.</translation>
         <source>Dato</source>
         <translation>Donnée</translation>
     </message>
-    <message>
+    <message utf8="true">
+        <location filename="../../ui/opciones.ui" line="1082"/>
+        <location filename="../../ui/opciones.ui" line="1359"/>
+        <location filename="../../ui/opciones.ui" line="1589"/>
+        <location filename="../../ui/opciones.ui" line="1879"/>
+        <location filename="../../ui/opciones.ui" line="2320"/>
         <location filename="../../src/grlida_opciones.cpp" line="2449"/>
         <location filename="../../src/grlida_opciones.cpp" line="2517"/>
         <source>Título</source>
@@ -8903,7 +8816,7 @@ Vérifier l&apos;installation.</translation>
         <source>Color de fondo</source>
         <translation>Couleur de fond</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="20"/>
         <source>Configuración del GR-lida</source>
         <translation>Configuration de GR-lida</translation>
@@ -8913,7 +8826,7 @@ Vérifier l&apos;installation.</translation>
         <source>Regenerar thumbs</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="5068"/>
         <source>También miniaturas de imágenes</source>
         <translation type="unfinished"></translation>
@@ -8928,12 +8841,12 @@ Vérifier l&apos;installation.</translation>
         <source>General</source>
         <translation>Général</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="5548"/>
         <source>Menú nav</source>
         <translation>Menu de navigation</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="5557"/>
         <source>Menú shortcut</source>
         <translation type="unfinished"></translation>
@@ -8985,7 +8898,7 @@ Vérifier l&apos;installation.</translation>
         <source>Tengo instalado el emulador DOSBox</source>
         <translation>L&apos;émulateur DOSBox est installé</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="962"/>
         <source>Dirección del DOSBox:</source>
         <translation>Chemin de DOSBox:</translation>
@@ -8995,7 +8908,7 @@ Vérifier l&apos;installation.</translation>
         <source>Tengo instalado el emulador ScummVM</source>
         <translation>L&apos;émulateur ScummVM est installé</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="542"/>
         <source>Dirección del ScummVM:</source>
         <translation>Chemin de ScummVM:</translation>
@@ -9025,17 +8938,17 @@ Vérifier l&apos;installation.</translation>
         <source>Formato de la fecha:</source>
         <translation>Format de la date:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="327"/>
         <source>Dia/Mes/Año Hora:Minutos:Segundos</source>
         <translation>Jour/Mois/Année Heures:Minutes:Secondes</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="405"/>
         <source>Comprobación automática de nuevas versiones del GR-lida al iniciar el programa</source>
         <translation>Contrôle automatique des nouvelles versions de la GR-lida démarrage du programme</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="366"/>
         <source>Mostrar configuración inicial la próxima vez que se inicie</source>
         <translation>Afficher la configuration initiale au prochain démarrage</translation>
@@ -9051,15 +8964,6 @@ Vérifier l&apos;installation.</translation>
         <translation>Nom de la table:</translation>
     </message>
     <message>
-        <location filename="../../ui/opciones.ui" line="1082"/>
-        <location filename="../../ui/opciones.ui" line="1359"/>
-        <location filename="../../ui/opciones.ui" line="1589"/>
-        <location filename="../../ui/opciones.ui" line="1879"/>
-        <location filename="../../ui/opciones.ui" line="2320"/>
-        <source>Título</source>
-        <translation>Titre</translation>
-    </message>
-    <message>
         <location filename="../../ui/opciones.ui" line="1594"/>
         <source>Tabla</source>
         <translation>Table</translation>
@@ -9069,7 +8973,7 @@ Vérifier l&apos;installation.</translation>
         <source>Total</source>
         <translation>Total</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="692"/>
         <location filename="../../ui/opciones.ui" line="1388"/>
         <location filename="../../ui/opciones.ui" line="1613"/>
@@ -9168,17 +9072,17 @@ Vérifier l&apos;installation.</translation>
         <source>Dato:</source>
         <translation>Donnée:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="1273"/>
         <source>Dirección:</source>
         <translation>URL:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="2588"/>
         <source>Nombre / Título:</source>
         <translation>Nom / Titre:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="5539"/>
         <source>Categorías</source>
         <translation>Catégories</translation>
@@ -9189,23 +9093,23 @@ Vérifier l&apos;installation.</translation>
         <source>SVN</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="1515"/>
         <source>Añadir, editar o eliminar categorías</source>
         <translation>Ajouter, éditer ou effacer des catégories</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="1543"/>
         <location filename="../../ui/opciones.ui" line="2043"/>
         <source>Nombre de categoría:</source>
         <translation>Nom de la catégorie:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="1796"/>
         <source>Añadir, editar o eliminar menú navegación</source>
         <translation>Ajouter, éditer ou effacer un menu de navigation</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="2550"/>
         <source>Añadir, editar o eliminar datos de los archivos</source>
         <translation>Ajouter, éditer ou effacer des données de fichiers</translation>
@@ -9246,7 +9150,7 @@ Vérifier l&apos;installation.</translation>
         <source>Etiqueta:</source>
         <translation>Label:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="1069"/>
         <source>versión</source>
         <translation>version</translation>
@@ -9271,7 +9175,7 @@ Vérifier l&apos;installation.</translation>
         <source>Marca el DOSBox de la lista por defecto</source>
         <translation>DOSBox marque la liste par défaut</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="879"/>
         <source>Guardar archivo de configuración del DOSBox, si esta desactivado se genera al ejecutar el juego.</source>
         <translation>Enregistrer le fichier de configuration de DOSBox, si elle est éteinte est produite lors de l&apos;exécution du jeu.</translation>
@@ -9291,18 +9195,18 @@ Vérifier l&apos;installation.</translation>
         <source>Imagen:</source>
         <translation>Image:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="1180"/>
         <source>Añadir, editar o eliminar datos de los distintos emuladores</source>
         <translation>Ajouter, modifier ou supprimer des données des différents émulateurs</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="1204"/>
         <location filename="../../ui/opciones.ui" line="2234"/>
         <source>Título:</source>
         <translation>Titre:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="1374"/>
         <source>Dirección</source>
         <translation>URL</translation>
@@ -9313,12 +9217,12 @@ Vérifier l&apos;installation.</translation>
         <source>Edit theme</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="2179"/>
         <source>Añadir, editar o eliminar menú shortcut</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="2254"/>
         <source>Añadir separador</source>
         <translation type="unfinished"></translation>
@@ -9328,7 +9232,7 @@ Vérifier l&apos;installation.</translation>
         <source>Combinacion tecla:</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="2831"/>
         <source>Añade un smile</source>
         <translation>Ajouter une émoticône</translation>
@@ -9343,12 +9247,12 @@ Vérifier l&apos;installation.</translation>
         <source>Tipo de base de datos a usar:</source>
         <translation>Type de Base de Données à utiliser:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="2947"/>
         <source>Dirección actual de la base de datos del GR-lida</source>
         <translation>Chemin actuel de la Base de Données GR-lida</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="2975"/>
         <source>Dirección de la base de datos:</source>
         <translation>Adresse de la base de données:</translation>
@@ -9424,12 +9328,12 @@ Vérifier l&apos;installation.</translation>
         <source>Color fuente</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="3819"/>
         <source>Mostrar título descriptivo</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="3846"/>
         <location filename="../../ui/opciones.ui" line="4063"/>
         <location filename="../../ui/opciones.ui" line="4194"/>
@@ -9472,17 +9376,17 @@ Vérifier l&apos;installation.</translation>
         <source>Margen general</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4036"/>
         <source>Mostrar icono al lado título descriptivo</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4167"/>
         <source>Mostrar título del juego seleccionado</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4298"/>
         <source>Mostrar posición / total</source>
         <translation>Afficher position / total</translation>
@@ -9492,7 +9396,7 @@ Vérifier l&apos;installation.</translation>
         <source>Usar tipo de fuente independientemente del theme</source>
         <translation>Utiliser une police indépendamment du thème</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="3300"/>
         <source>Utilizar la gama de colores estándar del estilo</source>
         <translation>Utiliser la gamme de couleurs standard du style</translation>
@@ -9508,7 +9412,7 @@ Vérifier l&apos;installation.</translation>
         <source>Estilo de los botones:</source>
         <translation>Style de boutons:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="3358"/>
         <location filename="../../ui/opciones.ui" line="3715"/>
         <source>Tamaño:</source>
@@ -9539,7 +9443,7 @@ Vérifier l&apos;installation.</translation>
         <source>Iconos de 32 o 16 pixel en la barra de herramientas</source>
         <translation>Icônes 16 ou 32 pixels pour la barre d&apos;outils</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4026"/>
         <source>Mostrar triangulo de selección</source>
         <translation>Afficher le triangle de sélection</translation>
@@ -9559,7 +9463,7 @@ Vérifier l&apos;installation.</translation>
         <source>Autor</source>
         <translation>Auteur</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="793"/>
         <location filename="../../ui/opciones.ui" line="3475"/>
         <source>Versión</source>
@@ -9570,7 +9474,7 @@ Vérifier l&apos;installation.</translation>
         <source>Actualizaciones</source>
         <translation>Mises à jour</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="412"/>
         <source>Comprobación cada</source>
         <translation type="unfinished"></translation>
@@ -9580,7 +9484,7 @@ Vérifier l&apos;installation.</translation>
         <source>Mostrar si existen actualizaciones de los themes</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="630"/>
         <source>Guardar archivo de configuración del ScummVM, si esta desactivado se genera al ejecutar el juego.</source>
         <translation type="unfinished"></translation>
@@ -9615,7 +9519,7 @@ Vérifier l&apos;installation.</translation>
         <source>Icono</source>
         <translation>Icone</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4674"/>
         <source>Configuración del proxy</source>
         <translation>Configuration du proxy</translation>
@@ -9625,7 +9529,7 @@ Vérifier l&apos;installation.</translation>
         <source>Tipo proxy:</source>
         <translation>Type de proxy:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4703"/>
         <source>Conectarse a un HTTP a través de un servidor proxy</source>
         <translation>Se connecter en HTTP par serveur proxy</translation>
@@ -9635,7 +9539,7 @@ Vérifier l&apos;installation.</translation>
         <source>Servidor:</source>
         <translation>Serveur:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4755"/>
         <source>Autentificación del servidor proxy</source>
         <translation>Authentification du serveur proxy</translation>
@@ -9645,7 +9549,7 @@ Vérifier l&apos;installation.</translation>
         <source>Usuario:</source>
         <translation>Utilisateur:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4784"/>
         <source>Contraseña:</source>
         <translation>Mot de passe:</translation>
@@ -9655,7 +9559,7 @@ Vérifier l&apos;installation.</translation>
         <source>Opciones para los thumbs</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4975"/>
         <source>Opciones para guardar minuatura de la carátula o portada del juego.</source>
         <translation type="unfinished"></translation>
@@ -9689,7 +9593,7 @@ Vérifier l&apos;installation.</translation>
         <source>De 0 a 100 de peor a mejor calidad</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="4989"/>
         <source>Opciones para guardar minuatura de las imágenes del juego.</source>
         <translation type="unfinished"></translation>
@@ -9699,12 +9603,12 @@ Vérifier l&apos;installation.</translation>
         <source>Video sopotados</source>
         <translation>Vidéos supportées</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="5110"/>
         <source>Música soportada</source>
         <translation>Musique supportée</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/opciones.ui" line="5137"/>
         <location filename="../../ui/opciones.ui" line="5154"/>
         <location filename="../../ui/opciones.ui" line="5171"/>
@@ -9754,17 +9658,17 @@ Vérifier l&apos;installation.</translation>
         <source>Ver texto seleccionado</source>
         <translation>Voir le texte sélectionné</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/pdf_viewer.ui" line="146"/>
         <source>Página:</source>
         <translation>Page:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/pdf_viewer.ui" line="171"/>
         <source>Página anterior</source>
         <translation>Page précédente</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/pdf_viewer.ui" line="200"/>
         <source>Página siguiente</source>
         <translation>Page suivante</translation>
@@ -9799,7 +9703,7 @@ Vérifier l&apos;installation.</translation>
         <source>Reducir</source>
         <translation>Réduire</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/pdf_viewer.ui" line="429"/>
         <source>Tamaño normal</source>
         <translation>Taille Normale</translation>
@@ -9859,7 +9763,7 @@ Vérifier l&apos;installation.</translation>
         <source>Version actual</source>
         <translation>Version actuelle</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/update.ui" line="95"/>
         <source>Versión nueva</source>
         <translation>Nouvelle version</translation>
@@ -9907,7 +9811,7 @@ Vérifier l&apos;installation.</translation>
         <source>Asistente del DOSBox</source>
         <translation>Assistant DOSBox</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="537"/>
         <source>Título:</source>
         <translation>Titre:</translation>
@@ -9968,27 +9872,27 @@ Vérifier l&apos;installation.</translation>
         <source>fullscreen -- Iniciar DOSBox directamente en pantalla completa</source>
         <translation>Plein écran -- Démarrer DOSBox en plein écran</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="748"/>
         <source>fullfixed -- Fijar la resolución en pantalla completa</source>
         <translation>Fullfixed - Fixer la résolution en plein écran</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="755"/>
         <source>autolock -- El ratón se autobloqueará al hace clic en la pantalla</source>
         <translation>Autolock - La souris sera capturée automatiquement en cliquant sur l&apos;écran</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="765"/>
         <source>aspect -- Aplicar corrección de aspecto</source>
         <translation>Aspect -- Correction de l&apos;aspect</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="772"/>
         <source>fullresolution -- La resolución a usar en pantalla completa, usar junto con fullfixed</source>
         <translation>Fullresolution -- Résolution à utiliser en plein écran, utiliser avec le mode &apos;fullfixed&apos;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="782"/>
         <source>Resolución pantalla:</source>
         <translation>Résolution de l&apos;écran:</translation>
@@ -10008,12 +9912,12 @@ Vérifier l&apos;installation.</translation>
         <source>Escalar y filtros:</source>
         <translation>Echelle et filtres:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="905"/>
         <source>Cantidad de memoria (Mb) que DOSBox tendrá disponible</source>
         <translation>Quantité de mémoire à disposition (Mb)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="931"/>
         <source>Núcleo de la CPU usado en la emulación</source>
         <translation>Noyau CPU pour l&apos;émulation</translation>
@@ -10065,17 +9969,17 @@ Vérifier l&apos;installation.</translation>
         <source>Gravis Ultrasound:</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="1147"/>
         <source>Activa la emulación de Gravis Ultrasound</source>
         <translation>Activer l&apos;émulation Gravis UltraSound</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="1182"/>
         <source>MIDI y configuración adicional:</source>
         <translation>MIDI et configuration supplémentaire:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="1204"/>
         <source>Activar emulación MPU-401</source>
         <translation>Activer l&apos;émulation MPU-401</translation>
@@ -10140,7 +10044,7 @@ Vérifier l&apos;installation.</translation>
         <source>Etiqueta</source>
         <translation>Label</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="1474"/>
         <source>Añadir</source>
         <translation>Ajouter</translation>
@@ -10180,7 +10084,7 @@ Vérifier l&apos;installation.</translation>
         <source>Montaje primario</source>
         <translation>Point de montage par défaut</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="1628"/>
         <source>Fin de la configuración
 Pulsa aceptar para cerrar el asistente
@@ -10196,7 +10100,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Cancelar</source>
         <translation>Annuler</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_dosbox.ui" line="1702"/>
         <source>Atrás</source>
         <translation>Précédent</translation>
@@ -10256,8 +10160,8 @@ Appuyer sur entrée pour quitter l&apos;assistant
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="824"/>
-        <source>¿Eliminar montaje...?</source>
-        <translation>Effacer le montage...?</translation>
+        <source>¿Eliminar montaje?</source>
+        <translation type="unfinished">Effacer le montage?</translation>
     </message>
     <message>
         <location filename="../../src/grlida_wizard_dosbox.cpp" line="824"/>
@@ -10282,7 +10186,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>%</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="503"/>
         <source>Selecciona el juego a añadir</source>
         <translation>Sélectionne un jeu à ajouter</translation>
@@ -10292,7 +10196,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Config</source>
         <translation>Configuration</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="523"/>
         <source>Título:</source>
         <translation>Titre:</translation>
@@ -10332,7 +10236,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Descargar la info del juego</source>
         <translation>Télécharger les infos du jeu</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="798"/>
         <source>Modo gráfico:</source>
         <translation>Mode graphique:</translation>
@@ -10352,7 +10256,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Pantalla guardar/cargar originales</source>
         <translation>Enregistrer / charger l&apos;écran d&apos;origine</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="909"/>
         <source>Filtros de gráficos</source>
         <translation>Filtres graphiques</translation>
@@ -10367,7 +10271,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Lector de CD:</source>
         <translation>Lecteur de CD:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="720"/>
         <source>Mostras subtítulo</source>
         <translation>Afficher les soustitres</translation>
@@ -10387,7 +10291,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Modo de audio:</source>
         <translation>Mode audio:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="960"/>
         <source>Volumen música:</source>
         <translation>Volume musique:</translation>
@@ -10409,7 +10313,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Volumen voces:</source>
         <translation>Volume voix:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="1077"/>
         <source>Tiempo de la música:</source>
         <translation>Tempo de la musique:</translation>
@@ -10420,7 +10324,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>100</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="1119"/>
         <source>Velocidad de subtítulos:</source>
         <translation>Vitesse des sous-titres:</translation>
@@ -10451,7 +10355,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Walk Speed:</source>
         <translation>Vitesse de marche:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="1284"/>
         <source>Configuración predeterminada</source>
         <translation>Configuration standard</translation>
@@ -10471,7 +10375,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Permitir el modo de Roland GS</source>
         <translation>Activer le mode Roland GS</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="1340"/>
         <source>Fin de la configuración
 Pulsa aceptar para cerrar el asistente
@@ -10487,7 +10391,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Cancelar</source>
         <translation>Annuler</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_scummvm.ui" line="1407"/>
         <source>Atrás</source>
         <translation>Précédent</translation>
@@ -10561,7 +10465,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Asistente del VdmSound</source>
         <translation>Assistant ScummVM</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_vdmsound.ui" line="143"/>
         <source>Título:</source>
         <translation>Titre:</translation>
@@ -10571,7 +10475,7 @@ Appuyer sur entrée pour quitter l&apos;assistant
         <source>Parametros:</source>
         <translation>Paramètres:</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="../../ui/wizard_vdmsound.ui" line="210"/>
         <source>Dirección del icono:</source>
         <translation>Chemin de l&apos;icone:</translation>

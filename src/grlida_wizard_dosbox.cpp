@@ -821,7 +821,7 @@ void frmWizardDosBox::on_btnMount_Delete_clicked()
 {
 	if (ui->twMontajes->topLevelItemCount() > 0)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar montaje...?"), tr("¿Deseas eliminar este montaje?")))
+		if (fGrl->questionMsg(tr("¿Eliminar montaje?"), tr("¿Deseas eliminar este montaje?")))
 		{
 			fGrl->deleteItemTree(ui->twMontajes->currentItem());
 			previerMontajes();

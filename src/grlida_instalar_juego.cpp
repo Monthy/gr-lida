@@ -472,7 +472,7 @@ void frmInstalarJuego::on_btnDeleteIso_clicked()
 	QListWidgetItem *item = ui->lw_MultiIso->currentItem();
 	if (item != NULL)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Quieres eliminar la ISO/IMA/IMG de la lista?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Quieres eliminar la ISO/IMA/IMG de la lista?")))
 		{
 			delete item;
 		}
@@ -703,7 +703,7 @@ void frmInstalarJuego::on_btn_vd_image_list_delete_clicked()
 	QListWidgetItem *item = ui->lw_vd_images->currentItem();
 	if (item != NULL)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Quieres eliminar de la lista?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Quieres eliminar de la lista?")))
 		{
 			delete item;
 		}

@@ -1407,7 +1407,7 @@ void frmOpciones::on_btnDbxDelete_clicked()
 	int pos = ui->twDOSBox->indexOfTopLevelItem(ui->twDOSBox->currentItem());
 	if (ui->twDOSBox->topLevelItemCount() > 0 && pos != -1)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas realmente eliminar este DOSBox de la lista?") +"\n"+ tr("Se actualizaran los juegos al emulador por defecto.")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas realmente eliminar este DOSBox de la lista?") +"\n"+ tr("Se actualizaran los juegos al emulador por defecto.")))
 		{
 		// Actualizamos el DOSBox que se usaba a uno por defecto.
 			QSqlQuery query(sql->getSqlDB());
@@ -1598,7 +1598,7 @@ void frmOpciones::on_btnEmuDelete_clicked()
 	int pos = ui->twEmus->indexOfTopLevelItem(ui->twEmus->currentItem());
 	if (ui->twEmus->topLevelItemCount() > 0 && pos != -1)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas realmente eliminar este emulador de la lista?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas realmente eliminar este emulador de la lista?")))
 		{
 			fGrl->deleteItemTree(ui->twEmus->currentItem());
 			fGrl->guardarDatosTwLista(ui->twEmus, grlDir.Datos +"emu_list.txt", TwListEmu);
@@ -1845,7 +1845,7 @@ void frmOpciones::on_btnCatDelete_clicked()
 			if (ui->twCategorias->currentItem()->text(1) == "dbgrl")
 				QMessageBox::information(this, tr("Opciones"), tr("No se puede eliminar la tabla de la categoría."));
 			else {
-				if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas realmente eliminar esta categoría de la base de datos?")))
+				if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas realmente eliminar esta categoría de la base de datos?")))
 				{
 					if (sql->eliminarCategoria(ui->twCategorias->currentItem()->text(3)))
 					{
@@ -2018,7 +2018,7 @@ void frmOpciones::on_btnMnuNavBajar_clicked()
 
 void frmOpciones::on_btnMnuNavDefecto_clicked()
 {
-	if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas restaurar el menú de navegación por defecto?")))
+	if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas restaurar el menú de navegación por defecto?")))
 	{
 		const int listSize = ui->twMnuNav->topLevelItemCount();
 		if (listSize > 0)
@@ -2049,7 +2049,7 @@ void frmOpciones::on_btnMnuNavDelete_clicked()
 		if (ui->twMnuNav->currentItem()->text(9).isEmpty())
 			QMessageBox::information(this, tr("Opciones"), tr("Por favor selecciona un menú nav de la lista para eliminarlo"));
 		else {
-			if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas realmente eliminar este menú nav de la base de datos?")))
+			if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas realmente eliminar este menú nav de la base de datos?")))
 			{
 				if (sql->eliminarMenuNav(ui->twMnuNav->currentItem()->text(9)))
 				{
@@ -2220,7 +2220,7 @@ void frmOpciones::on_btnMnuShortCutBajar_clicked()
 
 void frmOpciones::on_btnMnuShortCutDefecto_clicked()
 {
-	if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas restaurar el menú de shortcut por defecto?")))
+	if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas restaurar el menú de shortcut por defecto?")))
 	{
 		const int listSize = ui->twMnuShortCut->topLevelItemCount();
 		if (listSize > 0)
@@ -2255,7 +2255,7 @@ void frmOpciones::on_btnMnuShortCutDelete_clicked()
 		if (ui->twMnuShortCut->currentItem()->text(5).isEmpty())
 			QMessageBox::information(this, tr("Opciones"), tr("Por favor selecciona un menú shortcut de la lista para eliminarlo"));
 		else {
-			if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas realmente eliminar este menú shortcut de la base de datos?")))
+			if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas realmente eliminar este menú shortcut de la base de datos?")))
 			{
 				if (sql->eliminarMnuShortcut(ui->twMnuShortCut->currentItem()->text(5)))
 				{
@@ -2625,7 +2625,7 @@ void frmOpciones::on_btnDatDelete_clicked()
 	int pos = ui->twDatos->indexOfTopLevelItem(ui->twDatos->currentItem());
 	if (ui->twDatos->topLevelItemCount() > 0 && pos != -1)
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas realmente eliminar este dato de la lista?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas realmente eliminar este dato de la lista?")))
 		{
 			fGrl->deleteItemTree(ui->twDatos->currentItem());
 			guardarDatosTwLista();
@@ -3135,7 +3135,7 @@ void frmOpciones::on_btnExtVideoDelete_clicked()
 {
 	if (ui->lwExtVideo->count() > 0 && ui->lwExtVideo->currentItem()->isSelected())
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar la extensión?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas eliminar la extensión?")))
 			delete ui->lwExtVideo->currentItem();
 	}
 }
@@ -3165,7 +3165,7 @@ void frmOpciones::on_btnExtMusicDelete_clicked()
 {
 	if (ui->lwExtMusic->count() > 0 && ui->lwExtMusic->currentItem()->isSelected())
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar la extensión?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas eliminar la extensión?")))
 			delete ui->lwExtMusic->currentItem();
 	}
 }
@@ -3195,7 +3195,7 @@ void frmOpciones::on_btnExtImageDelete_clicked()
 {
 	if (ui->lwExtImage->count() > 0 && ui->lwExtImage->currentItem()->isSelected())
 	{
-		if (fGrl->questionMsg(tr("¿Eliminar...?"), tr("¿Deseas eliminar la extensión?")))
+		if (fGrl->questionMsg(tr("¿Eliminar?"), tr("¿Deseas eliminar la extensión?")))
 			delete ui->lwExtImage->currentItem();
 	}
 }
