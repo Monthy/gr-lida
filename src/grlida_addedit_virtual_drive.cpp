@@ -52,7 +52,7 @@ frmAddEditVirtualDrive::frmAddEditVirtualDrive(dbSql *m_sql, stGrlCfg m_cfg, QWi
 
 frmAddEditVirtualDrive::~frmAddEditVirtualDrive()
 {
-	emit on_btnVdCancel_clicked();
+	on_btnVdCancel_clicked();
 
 	delete fGrl;
 	delete ui;
@@ -120,7 +120,7 @@ void frmAddEditVirtualDrive::cargarConfig()
 		}
 	}
 
-	emit on_btnVdCancel_clicked();
+	on_btnVdCancel_clicked();
 }
 
 void frmAddEditVirtualDrive::setTheme()
@@ -311,7 +311,7 @@ void frmAddEditVirtualDrive::addEditTwVirtualDrive(bool isAdd)
 
 			guardarDatosVirtualDrive();
 
-			emit on_btnVdCancel_clicked();
+			on_btnVdCancel_clicked();
 		}
 	}
 }
@@ -455,7 +455,7 @@ void frmAddEditVirtualDrive::on_btnVdNew_clicked()
 	ui->btnVdCancel->setEnabled(true);
 
 	ui->cbxVd_plantilla_cfg->setCurrentIndex(0);
-	emit on_cbxVd_plantilla_cfg_activated(0);
+	on_cbxVd_plantilla_cfg_activated(0);
 	ui->txtVd_etiqueta->setText("");
 }
 
@@ -483,7 +483,7 @@ void frmAddEditVirtualDrive::on_btnVdEdit_clicked()
 
 	int pos = ui->twVirtualDrive->indexOfTopLevelItem(ui->twVirtualDrive->currentItem());
 	if (pos != -1)
-		emit on_twVirtualDrive_itemClicked(ui->twVirtualDrive->currentItem(), 0);
+		on_twVirtualDrive_itemClicked(ui->twVirtualDrive->currentItem(), 0);
 }
 
 void frmAddEditVirtualDrive::on_btnVdUpdate_clicked()
@@ -512,7 +512,7 @@ void frmAddEditVirtualDrive::on_btnVdDelete_clicked()
 
 	if (ui->twVirtualDrive->topLevelItemCount() <= 0)
 	{
-		emit on_btnVdCancel_clicked();
+		on_btnVdCancel_clicked();
 
 		ui->txtVd_titulo->clear();
 		ui->txtVd_etiqueta->clear();
@@ -559,7 +559,7 @@ void frmAddEditVirtualDrive::on_twVirtualDrive_itemClicked(QTreeWidgetItem *item
 void frmAddEditVirtualDrive::on_twVirtualDrive_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
 	if (current != previous)
-		emit on_twVirtualDrive_itemClicked(current, 0);
+		on_twVirtualDrive_itemClicked(current, 0);
 }
 
 void frmAddEditVirtualDrive::on_btnOk_clicked()

@@ -185,7 +185,7 @@ void HttpDownload::downloadMultiFiles(QList<stDownItem> listDown)
 	listDownload = listDown;
 	currentDownload = 0;
 	isMultiFiles = true;
-	emit nextDownloadFile();
+	nextDownloadFile();
 }
 
 void HttpDownload::nextDownloadFile()
@@ -198,9 +198,9 @@ void HttpDownload::nextDownloadFile()
 		if (!curremtDown.urlfile.isEmpty())
 			downloadFile(curremtDown.urlfile, curremtDown.fileName, curremtDown.tipo, curremtDown.contentPost, true);
 		else
-			emit nextDownloadFile();
+			nextDownloadFile();
 	} else {
-		emit setStatusBtnDownload(true);
+		setStatusBtnDownload(true);
 		emit statusFinished();
 	}
 }
@@ -237,7 +237,7 @@ void HttpDownload::downloadFile(QString urlfile, QString fileName, QString tipo,
 	if (!file)
 		return;
 
-	emit setStatusBtnDownload(false);
+	setStatusBtnDownload(false);
 
 // schedule the request
 	startRequest(newUrl, (tipo == "POST") ? d_POST : d_GET, contentPost);
@@ -275,7 +275,7 @@ void HttpDownload::cancelDownload()
 	setStatusLabel(tr("Descarga cancelada."));
 	httpRequestAborted = true;
 	reply->abort();
-	emit setStatusBtnDownload(true);
+	setStatusBtnDownload(true);
 }
 
 void HttpDownload::httpFinished()
@@ -300,7 +300,7 @@ void HttpDownload::httpFinished()
 	{
 //		QFile::remove(fi.absoluteFilePath());
 		setStatusLabel(tr("Descarga fallida: %1.").arg(reply->errorString()));
-		emit setStatusBtnDownload(true);
+		setStatusBtnDownload(true);
 		reply->deleteLater();
 		reply = 0;
 		return;
@@ -320,7 +320,7 @@ void HttpDownload::httpFinished()
 			if (respuesta == QMessageBox::No)
 			{
 			//	QFile::remove(fi.absoluteFilePath());
-				emit setStatusBtnDownload(true);
+				setStatusBtnDownload(true);
 				setStatusLabel(tr("Descarga fallida: Redirigir rechazado."));
 				return;
 			}
@@ -331,7 +331,7 @@ void HttpDownload::httpFinished()
 		file = openFileForWrite(fi.absoluteFilePath());
 		if (!file)
 		{
-			emit setStatusBtnDownload(true);
+			setStatusBtnDownload(true);
 			return;
 		}
 		startRequest(redirectedUrl);
@@ -343,7 +343,7 @@ void HttpDownload::httpFinished()
 	if (isMultiFiles)
 		nextDownloadFile();
 	else {
-		emit setStatusBtnDownload(true);
+		setStatusBtnDownload(true);
 		emit statusFinished();
 	}
 }

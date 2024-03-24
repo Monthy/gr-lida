@@ -63,7 +63,7 @@ void frmConfigInicial::cargarConfig()
 	fGrl->cargarIdiomasComboBox(ui->cbxIdioma, grlDir.Idiomas, "img16/lng/", "", false);
 	int idx = ui->cbxIdioma->findData(grlCfg.IdiomaSelect +".qm", Qt::UserRole, Qt::MatchContains);
 	ui->cbxIdioma->setCurrentIndex(idx);
-	emit on_cbxIdioma_activated(idx);
+	on_cbxIdioma_activated(idx);
 
 	id_key_dbx = -1;
 	new_dbx_default = false;

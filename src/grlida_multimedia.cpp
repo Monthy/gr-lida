@@ -228,7 +228,7 @@ bool GrlMultiMedia::eventFilter(QObject *object, QEvent *event)
 		{
 			if (event->type() == QEvent::Enter)
 			{
-				emit controlVisible(true);
+				controlVisible(true);
 				return true;
 			}
 		}
@@ -236,7 +236,7 @@ bool GrlMultiMedia::eventFilter(QObject *object, QEvent *event)
 		{
 			if (event->type() == QEvent::Enter)
 			{
-				emit controlVisible(false);
+				controlVisible(false);
 				return true;
 			}
 		}

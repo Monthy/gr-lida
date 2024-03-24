@@ -85,7 +85,7 @@ frmOpciones::~frmOpciones()
 
 void frmOpciones::closeEvent(QCloseEvent *event)
 {
-	emit on_btnOk_clicked();
+	on_btnOk_clicked();
 	event->accept();
 }
 
@@ -191,7 +191,7 @@ void frmOpciones::cargarConfig()
 	ui->txtDbxDato->setValidator(new QRegExpValidator(regexp, ui->txtDbxDato));
 	ui->chkDbxSaveConfFile->setChecked(grlCfg.DOSBoxSaveConfFile);
 	ui->chkSvmSaveConfFile->setChecked(grlCfg.ScummVMSaveConfFile);
-	emit on_btnDbxCancel_clicked();
+	on_btnDbxCancel_clicked();
 
 	ui->cbxDbxVersion->clear();
 	ui->cbxDbxVersion->addItem(QIcon(fGrl->theme() +"img16/cat/dosbox.png"), "0.74-2", "0.74-2");
@@ -204,7 +204,7 @@ void frmOpciones::cargarConfig()
 	ui->cbxDbxImg->addItemParent(tr("Imágenes Categorías"));
 	fGrl->cargarIconosGroupComboBox(ui->cbxDbxImg, fGrl->theme(), "img32/cat/", "cat/", grlCfg.FormatsImage.join(";"));
 
-	emit on_btnDbxCancel_clicked();
+	on_btnDbxCancel_clicked();
 
 	ui->twDOSBox->headerItem()->setIcon(0, QIcon(fGrl->theme() +"img16/tag.png"));
 //	ui->twDOSBox->headerItem()->setIcon(1, QIcon(fGrl->theme() +"img16/bullet_black.png"));
@@ -425,7 +425,7 @@ void frmOpciones::cargarConfig()
 	int index_style = ui->cbxStyle->findData(grlCfg.Style);
 	if (index_style < 0) index_style = 0;
 	ui->cbxStyle->setCurrentIndex(index_style);
-	emit on_cbxStyle_activated(index_style);
+	on_cbxStyle_activated(index_style);
 
 	ui->chkStylePalette->setChecked(grlCfg.StylePalette);
 	ui->chkToolbarBigIcon->setChecked(grlCfg.ToolbarBigIcon);
@@ -441,7 +441,7 @@ void frmOpciones::cargarConfig()
 	setColorBtn(ui->btnPicFlowBgColor, fGrl->getColor(grlCfg.PicFlowBgColor));
 	grl_picflow->setBackgroundColor(fGrl->getColor(grlCfg.PicFlowBgColor));
 	ui->cbxPicFlowFontFamily->setCurrentIndex(ui->cbxPicFlowFontFamily->findText(grlCfg.PicFlowFontFamily, Qt::MatchContains));
-	emit on_cbxPicFlowFontFamily_activated(grlCfg.PicFlowFontFamily);
+	on_cbxPicFlowFontFamily_activated(grlCfg.PicFlowFontFamily);
 	ui->spinBox_PicFlowFontSize->setValue(grlCfg.PicFlowFontSize);
 	ui->chkPicFlowFontBold->setChecked(grlCfg.PicFlowFontBold);
 	ui->chkPicFlowFontItalic->setChecked(grlCfg.PicFlowFontItalic);
@@ -451,41 +451,41 @@ void frmOpciones::cargarConfig()
 	ui->spinBox_PicFlowSkip->setValue(grlCfg.PicFlowSkip);
 
 	ui->chkPicFlowShowTitle->setChecked(grlCfg.PicFlowShowTitle);
-	emit on_chkPicFlowShowTitle_toggled(grlCfg.PicFlowShowTitle);
+	on_chkPicFlowShowTitle_toggled(grlCfg.PicFlowShowTitle);
 	fGrl->cargarDatosComboBox(ui->cbxPicFlowTitlePos, ":/datos/"+ sLng +"posiciones.txt", "img16/", "", 3, "|");
 	ui->cbxPicFlowTitlePos->setCurrentIndex(grlCfg.PicFlowTitlePos);
-	emit on_cbxPicFlowTitlePos_activated(grlCfg.PicFlowTitlePos);
+	on_cbxPicFlowTitlePos_activated(grlCfg.PicFlowTitlePos);
 	ui->spinBox_PicFlowTitleMarginX->setValue(grlCfg.PicFlowTitleMargin.x());
 	ui->spinBox_PicFlowTitleMarginY->setValue(grlCfg.PicFlowTitleMargin.y());
 
 	ui->chkPicFlowShowTitleIcon->setChecked(grlCfg.PicFlowShowTitleIcon);
-	emit on_chkPicFlowShowTitleIcon_toggled(grlCfg.PicFlowShowTitleIcon);
+	on_chkPicFlowShowTitleIcon_toggled(grlCfg.PicFlowShowTitleIcon);
 	fGrl->cargarDatosComboBox(ui->cbxPicFlowTitleIconPos, ":/datos/"+ sLng +"posiciones.txt", "img16/", "", 3, "|");
 	ui->spinBox_PicFlowTitleIconMarginX->setValue(grlCfg.PicFlowTitleIconMargin.x());
 	ui->spinBox_PicFlowTitleIconMarginY->setValue(grlCfg.PicFlowTitleIconMargin.y());
 
 	ui->chkPicFlowShowCaption->setChecked(grlCfg.PicFlowShowCaption);
-	emit on_chkPicFlowShowCaption_toggled(grlCfg.PicFlowShowCaption);
+	on_chkPicFlowShowCaption_toggled(grlCfg.PicFlowShowCaption);
 	fGrl->cargarDatosComboBox(ui->cbxPicFlowCaptionPos, ":/datos/"+ sLng +"posiciones.txt", "img16/", "", 3, "|");
 	ui->cbxPicFlowCaptionPos->setCurrentIndex(grlCfg.PicFlowCaptionPos);
-	emit on_cbxPicFlowCaptionPos_activated(grlCfg.PicFlowCaptionPos);
+	on_cbxPicFlowCaptionPos_activated(grlCfg.PicFlowCaptionPos);
 	ui->spinBox_PicFlowCaptionMarginX->setValue(grlCfg.PicFlowCaptionMargin.x());
 	ui->spinBox_PicFlowCaptionMarginY->setValue(grlCfg.PicFlowCaptionMargin.y());
 
 	ui->chkPicFlowShowNumber->setChecked(grlCfg.PicFlowShowNumber);
-	emit on_chkPicFlowShowNumber_toggled(grlCfg.PicFlowShowNumber);
+	on_chkPicFlowShowNumber_toggled(grlCfg.PicFlowShowNumber);
 	fGrl->cargarDatosComboBox(ui->cbxPicFlowNumberPos, ":/datos/"+ sLng +"posiciones.txt", "img16/", "", 3, "|");
 	ui->cbxPicFlowNumberPos->setCurrentIndex(grlCfg.PicFlowNumberPos);
-	emit on_cbxPicFlowNumberPos_activated(grlCfg.PicFlowNumberPos);
+	on_cbxPicFlowNumberPos_activated(grlCfg.PicFlowNumberPos);
 	ui->spinBox_PicFlowNumberMarginX->setValue(grlCfg.PicFlowNumberMargin.x());
 	ui->spinBox_PicFlowNumberMarginY->setValue(grlCfg.PicFlowNumberMargin.y());
 	ui->txtPicFlowNumberFormat->setText(grlCfg.PicFlowNumberFormat);
 
 	ui->chkPicFlowShowIconExtra->setChecked(grlCfg.PicFlowShowIconExtra);
-	emit on_chkPicFlowShowIconExtra_toggled(grlCfg.PicFlowShowIconExtra);
+	on_chkPicFlowShowIconExtra_toggled(grlCfg.PicFlowShowIconExtra);
 	fGrl->cargarDatosComboBox(ui->cbxPicFlowIconExtraPos, ":/datos/"+ sLng +"posiciones.txt", "img16/", "", 3, "|");
 	ui->cbxPicFlowIconExtraPos->setCurrentIndex(grlCfg.PicFlowIconExtraPos);
-	emit on_cbxPicFlowIconExtraPos_activated(grlCfg.PicFlowIconExtraPos);
+	on_cbxPicFlowIconExtraPos_activated(grlCfg.PicFlowIconExtraPos);
 	ui->spinBox_PicFlowIconExtraMarginX->setValue(grlCfg.PicFlowIconExtraMargin.x());
 	ui->spinBox_PicFlowIconExtraMarginY->setValue(grlCfg.PicFlowIconExtraMargin.y());
 
@@ -493,7 +493,7 @@ void frmOpciones::cargarConfig()
 	ui->spinBox_PicFlowMarginY->setValue(grlCfg.PicFlowMargin.y());
 
 	ui->chkPicFlowShowTriangle->setChecked(grlCfg.PicFlowShowTriangle);
-	emit on_chkPicFlowShowTriangle_toggled(grlCfg.PicFlowShowTriangle);
+	on_chkPicFlowShowTriangle_toggled(grlCfg.PicFlowShowTriangle);
 
 	ui->cbxPicFlowIconExtraImage->clear();
 	ui->cbxPicFlowIconExtraImage->setIconSize(QSize(32, 32));
@@ -513,7 +513,7 @@ void frmOpciones::cargarConfig()
 
 	row = ui->cbxPicFlowIconExtraUse->findData(grlCfg.PicFlowIconExtraUse, Qt::UserRole, Qt::MatchContains);
 	ui->cbxPicFlowIconExtraUse->setCurrentIndex(row);
-	emit on_cbxPicFlowIconExtraUse_activated(row);
+	on_cbxPicFlowIconExtraUse_activated(row);
 
 // Apariencia ------------------------
 	ui->twThemes->headerItem()->setIcon(0, QIcon(fGrl->theme() +"img16/tag.png"));
@@ -575,13 +575,13 @@ void frmOpciones::cargarConfig()
 	fGrl->cargarIdiomasComboBox(ui->cbxIdioma, grlDir.Idiomas, "img16/lng/", "", false);
 	int idx_idioma = ui->cbxIdioma->findData(grlCfg.IdiomaSelect +".qm", Qt::UserRole, Qt::MatchEndsWith);
 	ui->cbxIdioma->setCurrentIndex(idx_idioma);
-	emit on_cbxIdioma_activated(idx_idioma);
+	on_cbxIdioma_activated(idx_idioma);
 }
 
 void frmOpciones::guardarConfig()
 {
 	if (ui->btnDbxCancel->isEnabled())
-		emit on_btnDbxCancel_clicked();
+		on_btnDbxCancel_clicked();
 // SqlDatabase
 	grlCfg.db_type     = ui->cbxMotorDataBase->itemData(ui->cbxMotorDataBase->currentIndex()).toString();
 	grlCfg.db_server   = ui->txt_dbserver->text();
@@ -745,7 +745,7 @@ void frmOpciones::setTheme()
 // Templates
 	tpl_info_formato_fecha_old = fGrl->tplInfoJuego("tpl_info");
 
-	emit on_chkUsarTipoFuente_clicked(grlCfg.font_usar);
+	on_chkUsarTipoFuente_clicked(grlCfg.font_usar);
 }
 
 void frmOpciones::cargarListaThemes()
@@ -962,7 +962,7 @@ void frmOpciones::on_cbxIdioma_activated(int index)
 	ui->cbxDatArchivo->addItem(QIcon(fGrl->theme() +"img16/cat/scummvm.png"), tr("Modificar archivo") +" ScummVM - svm_platform"         , "svm_platform.txt"      );
 	ui->cbxDatArchivo->addItem(QIcon(fGrl->theme() +"img16/cat/scummvm.png"), tr("Modificar archivo") +" ScummVM - svm_render_mode"      , "svm_render_mode.txt"   );
 	ui->cbxDatArchivo->setCurrentIndex(0);
-	emit on_cbxDatArchivo_activated(ui->cbxDatArchivo->currentIndex());
+	on_cbxDatArchivo_activated(ui->cbxDatArchivo->currentIndex());
 
 // Opciones de base de datos ---------
 	ui->cbxMotorDataBase->clear();
@@ -983,7 +983,7 @@ void frmOpciones::on_cbxIdioma_activated(int index)
 	int index_picflowtype = ui->cbxPicFlowType->findData(grlCfg.PicFlowType);
 	if (index_picflowtype < 0) index_picflowtype = 0;
 	ui->cbxPicFlowType->setCurrentIndex(index_picflowtype);
-	emit on_cbxPicFlowType_activated(index_picflowtype);
+	on_cbxPicFlowType_activated(index_picflowtype);
 
 	grl_picflow->clear();
 	grl_picflow->setSlideTitle(tr("Título descriptivo"), grlCfg.PicFlowTitlePos);
@@ -1246,7 +1246,7 @@ void frmOpciones::addEditTwDOSBox(bool isAdd)
 	}
 
 	if (siguiente)
-		emit on_btnDbxCancel_clicked();
+		on_btnDbxCancel_clicked();
 }
 
 void frmOpciones::textEditedTxtDbxDato()
@@ -1635,7 +1635,7 @@ void frmOpciones::on_twEmus_itemClicked(QTreeWidgetItem *item, int column)
 void frmOpciones::on_twEmus_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
 	if (current != previous)
-		emit on_twEmus_itemClicked(current, 0);
+		on_twEmus_itemClicked(current, 0);
 }
 
 // Categoría ----------------------------------------
@@ -1831,7 +1831,7 @@ void frmOpciones::on_btnCatBajar_clicked()
 
 void frmOpciones::on_btnCatEditTheme_clicked()
 {
-	emit on_btnEditTheme_clicked();
+	on_btnEditTheme_clicked();
 }
 
 void frmOpciones::on_btnCatDelete_clicked()
@@ -1875,7 +1875,7 @@ void frmOpciones::on_twCategorias_itemClicked(QTreeWidgetItem *item, int column)
 void frmOpciones::on_twCategorias_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
 	if (current != previous)
-		emit on_twCategorias_itemClicked(current, 0);
+		on_twCategorias_itemClicked(current, 0);
 }
 
 // MenuNav ------------------------------------------
@@ -2082,7 +2082,7 @@ void frmOpciones::on_twMnuNav_itemClicked(QTreeWidgetItem *item, int column)
 void frmOpciones::on_twMnuNav_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
 	if (current != previous)
-		emit on_twMnuNav_itemClicked(current, 0);
+		on_twMnuNav_itemClicked(current, 0);
 }
 
 // MnuShortCut --------------------------------------
@@ -2293,7 +2293,7 @@ void frmOpciones::on_twMnuShortCut_itemClicked(QTreeWidgetItem *item, int column
 void frmOpciones::on_twMnuShortCut_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
 	if (current != previous)
-		emit on_twMnuShortCut_itemClicked(current, 0);
+		on_twMnuShortCut_itemClicked(current, 0);
 }
 
 // Datos --------------------------------------------
@@ -2675,7 +2675,7 @@ void frmOpciones::on_twDatos_itemClicked(QTreeWidgetItem *item, int column)
 void frmOpciones::on_twDatos_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
 	if (current != previous)
-		emit on_twDatos_itemClicked(current, 0);
+		on_twDatos_itemClicked(current, 0);
 }
 
 // Base de datos-------------------------------------
@@ -2705,7 +2705,7 @@ void frmOpciones::on_cbxStyle_activated(int index)
 	grlCfg.Style = ui->cbxStyle->itemData(index).toString();
 	QApplication::setStyle(QStyleFactory::create(grlCfg.Style));
 
-	emit on_chkStylePalette_clicked(ui->chkStylePalette->isChecked());
+	on_chkStylePalette_clicked(ui->chkStylePalette->isChecked());
 }
 
 void frmOpciones::on_chkStylePalette_clicked(bool checked)
@@ -2738,13 +2738,13 @@ void frmOpciones::on_chkUsarTipoFuente_clicked(bool checked)
 void frmOpciones::on_cbxFuenteTipo_activated(const QString &arg1)
 {
 	grlCfg.font_family = arg1;
-	emit on_chkUsarTipoFuente_clicked(grlCfg.font_usar);
+	on_chkUsarTipoFuente_clicked(grlCfg.font_usar);
 }
 
 void frmOpciones::on_cbxFontSize_valueChanged(const QString &arg1)
 {
 	grlCfg.font_size = arg1;
-	emit on_chkUsarTipoFuente_clicked(grlCfg.font_usar);
+	on_chkUsarTipoFuente_clicked(grlCfg.font_usar);
 }
 void frmOpciones::on_btnEditTheme_clicked()
 {
@@ -2783,7 +2783,7 @@ void frmOpciones::on_twThemes_currentItemChanged(QTreeWidgetItem *current, QTree
 	Q_UNUSED(current);
 	Q_UNUSED(previous);
 //	if (current != previous)
-//		emit on_twThemes_itemClicked(current, 0);
+//		on_twThemes_itemClicked(current, 0);
 }
 
 // PictureFlow --------------------------------------

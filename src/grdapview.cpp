@@ -74,7 +74,7 @@ void GrDapView::wheelEvent(QWheelEvent *event)
 void GrDapView::dropEvent(QDropEvent *event)
 {
 	if (event->mimeData()->urls().count() > -1)
-		emit openfileDragDrop(event->mimeData()->urls().at(0).toLocalFile());
+		openfileDragDrop(event->mimeData()->urls().at(0).toLocalFile());
 	event->acceptProposedAction();
 }
 
@@ -122,32 +122,32 @@ void GrDapView::setupMatrix()
 void GrDapView::rotarValue(int value)
 {
 	rotateSlider = value;
-	emit setupMatrix();
+	setupMatrix();
 }
 
 void GrDapView::zoomValue(int value)
 {
 	zoomSlider = value;
-	emit setupMatrix();
+	setupMatrix();
 }
 
 void GrDapView::setZoomIn(int level)
 {
 	zoomSlider = zoomSlider + level;
-	emit setupMatrix();
+	setupMatrix();
 }
 
 void GrDapView::setZoomOut(int level)
 {
 	zoomSlider = zoomSlider - level;
-	emit setupMatrix();
+	setupMatrix();
 }
 
 /*void GrDapView::setZoomNormal()
 {
 	zoomSlider   = 250;
 	rotateSlider = 0;
-	emit setupMatrix();
+	setupMatrix();
 	ensureVisible(QRectF(0, 0, 0, 0));
 }*/
 
@@ -170,7 +170,7 @@ void GrDapView::imgItemAddScene(int id, QPixmap capa, bool isVisor, bool resizeS
 		imagen->setFlag(QGraphicsItem::ItemIsMovable, true);
 		visor_img = capa.toImage();
 		connect(imagen, SIGNAL(posChanged(QPointF,bool)), this, SLOT(posVisorChanged(QPointF,bool)));
-		emit posVisorChanged(imagen->pos(), isVisor);
+		posVisorChanged(imagen->pos(), isVisor);
 	}
 
 	scene->addItem(imagen);
@@ -221,13 +221,13 @@ void GrDapView::setPixmapItem(int id, QPixmap capa, bool resizeScene)
 void GrDapView::setVisorMode(QPainter::CompositionMode mode)
 {
 	visor_mode = mode;
-	emit posVisorChanged(QPointF(img_pos_x, img_pos_y), true);
+	posVisorChanged(QPointF(img_pos_x, img_pos_y), true);
 }
 
 void GrDapView::setVisorColor(QColor color)
 {
 	visor_color = color;
-	emit posVisorChanged(QPointF(img_pos_x, img_pos_y), true);
+	posVisorChanged(QPointF(img_pos_x, img_pos_y), true);
 }
 
 void GrDapView::setVisorVisible(bool v_visible)

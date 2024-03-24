@@ -917,7 +917,7 @@ void frmImportarJuego::on_cbxScriptURL_activated(int index)
 
 void frmImportarJuego::on_txtTituloBuscar_returnPressed()
 {
-//	emit on_btnBuscar_clicked();
+//	on_btnBuscar_clicked();
 }
 
 void frmImportarJuego::on_cbxNumPag_activated(int index)
@@ -1053,7 +1053,7 @@ void frmImportarJuego::on_btnBuscar_clicked()
 
 void frmImportarJuego::on_btnAbortar_clicked()
 {
-	emit httpdown->cancelDownload();
+	httpdown->cancelDownload();
 }
 
 void frmImportarJuego::on_twListaJuegos_itemClicked(QTreeWidgetItem *item, int column)
@@ -1074,7 +1074,7 @@ void frmImportarJuego::on_twListaJuegos_itemDoubleClicked(QTreeWidgetItem *item,
 {
 	if (item && column > -1)
 	{
-		emit on_btnDownInfo_clicked();
+		on_btnDownInfo_clicked();
 		isItemDoubleClicked = true;
 	}
 }
@@ -1316,7 +1316,7 @@ void frmImportarJuego::on_btnOk_clicked()
 				siguiente = true;
 			} else {
 				QMessageBox::information(this, tr("Importar juego"), tr("Por favor selecciona al menos un juego de la lista para importarlo"));
-				emit statusWidgetEnabled(true);
+				statusWidgetEnabled(true);
 			}
 		}
 
@@ -1329,7 +1329,7 @@ void frmImportarJuego::on_btnOk_clicked()
 				httpdown->defaultInfo();
 				httpdown->downloadMultiFiles(listDown);
 			} else
-				emit statusFinished();
+				statusFinished();
 		}
 	}
 }
@@ -1472,7 +1472,7 @@ void frmImportarJuego::analyzePage(QString filename, bool local, bool tipoDFend)
 		index_fin_descarga = CargarCovers;
 	else
 		index_fin_descarga = CargarThumb;
-	emit statusFinished();
+	statusFinished();
 }
 
 void frmImportarJuego::analyzePageCovers(QString filename)
@@ -1598,7 +1598,7 @@ void frmImportarJuego::analyzePageCovers(QString filename)
 
 		analyzeImportImagenes(datosImportar["Dat_all_covers"], list_import_temp[item].imagenes);
 	} else
-		emit statusFinished();
+		statusFinished();
 }
 
 void frmImportarJuego::analyzePageMoreCovers(QString filename)
@@ -1628,7 +1628,7 @@ void frmImportarJuego::analyzePageMoreCovers(QString filename)
 
 		analyzeImportImagenes(datosImportar["Dat_all_covers"], list_import_temp[item].imagenes_tmp);
 	} else
-		emit statusFinished();
+		statusFinished();
 }
 
 void frmImportarJuego::analyzeImportImagenes(QString all_covers, QList<stDatosImagenes> &imagenes)
@@ -1671,9 +1671,9 @@ void frmImportarJuego::analyzeImportImagenes(QString all_covers, QList<stDatosIm
 		if (listDown.size() > 0)
 			httpdown->downloadMultiFiles(listDown);
 		else
-			emit statusFinished();
+			statusFinished();
 	} else
-		emit statusFinished();
+		statusFinished();
 }
 
 void frmImportarJuego::setScriptDatos()
@@ -2877,11 +2877,11 @@ void frmImportarJuego::importarJuegos()
 			sql->comit();
 		}
 
-		emit statusWidgetEnabled(true);
+		statusWidgetEnabled(true);
 		QDialog::accept();
 	} else {// Fin if num_import > 0
 		QMessageBox::information(this, tr("Importar juego"), tr("Por favor selecciona al menos un juego de la lista para importarlo"));
-		emit statusWidgetEnabled(true);
+		statusWidgetEnabled(true);
 	}
 }
 // FIN Importar -------------------------------------------------------------------------------------------------

@@ -134,35 +134,35 @@ bool GrLida::eventFilter(QObject *object, QEvent *event)
 					switch (key_Event->key())
 					{
 						case Qt::Key_Q:
-							emit on_mnu_file_cerrar_triggered();
+							on_mnu_file_cerrar_triggered();
 							return true;
 						break;
 						case Qt::Key_D:
-							emit on_mnu_edit_nuevo_dosbox_triggered();
+							on_mnu_edit_nuevo_dosbox_triggered();
 							return true;
 						break;
 						case Qt::Key_S:
-							emit on_mnu_edit_nuevo_scummvm_triggered();
+							on_mnu_edit_nuevo_scummvm_triggered();
 							return true;
 						break;
 						case Qt::Key_V:
-							emit on_mnu_edit_nuevo_vdmsound_triggered();
+							on_mnu_edit_nuevo_vdmsound_triggered();
 							return true;
 						break;
 						case Qt::Key_E:
-							emit on_mnu_ejecutar_juego_triggered();
+							on_mnu_ejecutar_juego_triggered();
 							return true;
 						break;
 						case Qt::Key_I:
-							emit on_mnu_tool_instalar_triggered();
+							on_mnu_tool_instalar_triggered();
 							return true;
 						break;
 						case Qt::Key_O:
-							emit on_mnu_tool_opciones_triggered();
+							on_mnu_tool_opciones_triggered();
 							return true;
 						break;
 						case Qt::Key_F9:
-							emit on_mnu_ver_statusbar_triggered(grlCfg.Pnl_StatusBar ? false : true);
+							on_mnu_ver_statusbar_triggered(grlCfg.Pnl_StatusBar ? false : true);
 							ui->mnu_ver_statusbar->setChecked(grlCfg.Pnl_StatusBar);
 							return true;
 						break;
@@ -176,7 +176,7 @@ bool GrLida::eventFilter(QObject *object, QEvent *event)
 					switch (key_Event->key())
 					{
 						case Qt::Key_S:
-							emit on_mnu_ejecutar_setup_triggered();
+							on_mnu_ejecutar_setup_triggered();
 							return true;
 						break;
 					}
@@ -185,27 +185,27 @@ bool GrLida::eventFilter(QObject *object, QEvent *event)
 					switch (key_Event->key())
 					{
 						case Qt::Key_Insert:
-							emit on_mnu_edit_editar_triggered();
+							on_mnu_edit_editar_triggered();
 							return true;
 						break;
 						case Qt::Key_F:
-							emit on_mnu_edit_favorito_triggered(ui->mnu_edit_favorito->isChecked() ? false : true);
+							on_mnu_edit_favorito_triggered(ui->mnu_edit_favorito->isChecked() ? false : true);
 							return true;
 						break;
 						case Qt::Key_D:
-							emit on_mnu_ejecutar_dosbox_triggered();
+							on_mnu_ejecutar_dosbox_triggered();
 							return true;
 						break;
 						case Qt::Key_S:
-							emit on_mnu_ejecutar_scummvm_triggered();
+							on_mnu_ejecutar_scummvm_triggered();
 							return true;
 						break;
 						case Qt::Key_I:
-							emit on_mnu_tool_importar_triggered();
+							on_mnu_tool_importar_triggered();
 							return true;
 						break;
 						case Qt::Key_E:
-							emit on_mnu_tool_exportar_triggered();
+							on_mnu_tool_exportar_triggered();
 							return true;
 						break;
 					}
@@ -214,68 +214,68 @@ bool GrLida::eventFilter(QObject *object, QEvent *event)
 					switch (key_Event->key())
 					{
 						case Qt::Key_Insert:
-							emit on_mnu_edit_nuevo_triggered();
+							on_mnu_edit_nuevo_triggered();
 							return true;
 						break;
 						case Qt::Key_Delete:
-							emit on_mnu_edit_eliminar_triggered();
+							on_mnu_edit_eliminar_triggered();
 							return true;
 						break;
 						case Qt::Key_F1:
 							return true;
 						break;
 						case Qt::Key_F2:
-							emit on_mnu_ver_nav_triggered(grlCfg.Pnl_Nav ? false : true);
+							on_mnu_ver_nav_triggered(grlCfg.Pnl_Nav ? false : true);
 							ui->mnu_ver_nav->setChecked(grlCfg.Pnl_Nav);
 							return true;
 						break;
 						case Qt::Key_F3:
-							emit on_mnu_ver_cover_mode_triggered(grlCfg.ver_IconMode ? false : true);
+							on_mnu_ver_cover_mode_triggered(grlCfg.ver_IconMode ? false : true);
 							ui->mnu_ver_cover_mode->setChecked(grlCfg.ver_IconMode);
 							return true;
 						break;
 						case Qt::Key_F4:
-							emit on_mnu_ver_pictureflow_triggered(grlCfg.Pnl_PictureFlow ? false : true);
+							on_mnu_ver_pictureflow_triggered(grlCfg.Pnl_PictureFlow ? false : true);
 							ui->mnu_ver_pictureflow->setChecked(grlCfg.Pnl_PictureFlow);
 							return true;
 						break;
 						case Qt::Key_F5:
-							emit on_mnu_ver_datos_triggered(grlCfg.Pnl_Datos ? false : true);
+							on_mnu_ver_datos_triggered(grlCfg.Pnl_Datos ? false : true);
 							ui->mnu_ver_datos->setChecked(grlCfg.Pnl_Datos);
 							return true;
 						break;
 						case Qt::Key_F6:
-							emit on_mnu_ver_archivos_triggered(grlCfg.Pnl_Files ? false : true);
+							on_mnu_ver_archivos_triggered(grlCfg.Pnl_Files ? false : true);
 							ui->mnu_ver_archivos->setChecked(grlCfg.Pnl_Files);
 							return true;
 						break;
 						case Qt::Key_F7:
-							emit on_mnu_ver_capturas_triggered(grlCfg.Pnl_Capturas ? false : true);
+							on_mnu_ver_capturas_triggered(grlCfg.Pnl_Capturas ? false : true);
 							ui->mnu_ver_capturas->setChecked(grlCfg.Pnl_Capturas);
 							return true;
 						break;
 						case Qt::Key_F8:
-							emit on_mnu_ver_pictureflow_to_center_triggered(grlCfg.PictureFlowToCenter ? false : true);
+							on_mnu_ver_pictureflow_to_center_triggered(grlCfg.PictureFlowToCenter ? false : true);
 							ui->mnu_ver_pictureflow_to_center->setChecked(grlCfg.PictureFlowToCenter);
 							return true;
 						break;
 						case Qt::Key_F9:
-							emit on_mnu_ver_menubar_triggered(grlCfg.Pnl_Menubar ? false : true);
+							on_mnu_ver_menubar_triggered(grlCfg.Pnl_Menubar ? false : true);
 							ui->mnu_ver_menubar->setChecked(grlCfg.Pnl_Menubar);
 							return true;
 						break;
 						case Qt::Key_F10:
-							emit on_mnu_ver_toolbar_triggered(grlCfg.Pnl_Toolbar ? false : true);
+							on_mnu_ver_toolbar_triggered(grlCfg.Pnl_Toolbar ? false : true);
 							ui->mnu_ver_toolbar->setChecked(grlCfg.Pnl_Toolbar);
 							return true;
 						break;
 						case Qt::Key_F11:
-							emit on_mnu_ver_fullscreen_triggered(grlCfg.main_fullscreen ? false : true);
+							on_mnu_ver_fullscreen_triggered(grlCfg.main_fullscreen ? false : true);
 							ui->mnu_ver_fullscreen->setChecked(grlCfg.main_fullscreen);
 							return true;
 						break;
 						case Qt::Key_F12:
-							emit on_mnu_ver_ordenar_triggered(grlCfg.Pnl_Ordenar ? false : true);
+							on_mnu_ver_ordenar_triggered(grlCfg.Pnl_Ordenar ? false : true);
 							ui->mnu_ver_ordenar->setChecked(grlCfg.Pnl_Ordenar);
 							return true;
 						break;
@@ -311,7 +311,7 @@ bool GrLida::eventFilter(QObject *object, QEvent *event)
 				case Qt::Key_Enter:
 				case Qt::Key_Space:
 				case Qt::Key_Return:
-					emit on_mnu_ejecutar_juego_triggered();
+					on_mnu_ejecutar_juego_triggered();
 					return true;
 				break;
 				case Qt::Key_Left:
@@ -336,15 +336,15 @@ bool GrLida::eventFilter(QObject *object, QEvent *event)
 			{
 				case Qt::Key_Return:
 					if (object == ui->twFiles)
-						emit on_twFiles_itemDoubleClicked(ui->twFiles->currentItem(), 0);
+						on_twFiles_itemDoubleClicked(ui->twFiles->currentItem(), 0);
 					if (object == ui->twUrls)
-						emit on_twUrls_itemDoubleClicked(ui->twUrls->currentItem(), 0);
+						on_twUrls_itemDoubleClicked(ui->twUrls->currentItem(), 0);
 					if (object == ui->lwVideos)
-						emit on_lwVideos_itemDoubleClicked(ui->lwVideos->currentItem());
+						on_lwVideos_itemDoubleClicked(ui->lwVideos->currentItem());
 					if (object == ui->lwCapturas)
-						emit on_lwCapturas_itemDoubleClicked(ui->lwCapturas->currentItem());
+						on_lwCapturas_itemDoubleClicked(ui->lwCapturas->currentItem());
 					if (object == ui->lwImagenes)
-						emit on_lwImagenes_itemDoubleClicked(ui->lwImagenes->currentItem());
+						on_lwImagenes_itemDoubleClicked(ui->lwImagenes->currentItem());
 					return true;
 				break;
 			}
@@ -1276,7 +1276,7 @@ void GrLida::actionShortCutClicked(QAction *action)
 //qDebug() << "---------------------------";
 
 //	if (sql_where_select == "grl:new_game")
-//		emit on_mnu_edit_nuevo_triggered();
+//		on_mnu_edit_nuevo_triggered();
 //	else {
 		grl_picflow->setSlideTitle(action->text());
 		grl_picflow->setSlideTitleIcon(action->icon().pixmap(action->icon().availableSizes().first()));
@@ -1375,7 +1375,7 @@ void GrLida::cargarConfig()
 	ui->dockw_Imagenes->setVisibleTitleBars(grlCfg.Pnl_Imagenes_VisibleTitleBars);
 	ui->dockw_PictureFlow->setVisibleTitleBars(grlCfg.Pnl_PictureFlow_VisibleTitleBars);
 
-	emit on_mnu_ver_auto_hide_title_bars_triggered(grlCfg.Pnl_AutoHideTitleBars);
+	on_mnu_ver_auto_hide_title_bars_triggered(grlCfg.Pnl_AutoHideTitleBars);
 
 // Menús Ver columnas
 	ui->mnu_ver_col_icono->setChecked(grlCfg.ver_col_Icono);
@@ -1614,7 +1614,7 @@ void GrLida::setTheme()
 // Menú ver
 	ui->mnu_ver_nav->setIcon(QIcon(fGrl->theme() +"img16/categorias.png"));
 	ui->mnu_ver_cover_mode->setIcon(QIcon(fGrl->theme() +"img16/cover_mode.png"));
-	emit on_mnu_ver_pictureflow_to_center_triggered(grlCfg.PictureFlowToCenter);
+	on_mnu_ver_pictureflow_to_center_triggered(grlCfg.PictureFlowToCenter);
 	ui->mnu_ver_datos->setIcon(QIcon(fGrl->theme() +"img16/cat/datos.png"));
 	ui->mnu_ver_archivos->setIcon(QIcon(fGrl->theme() +"img16/archivos.png"));
 	ui->mnu_ver_enlaces->setIcon(QIcon(fGrl->theme() +"img16/html.png"));
@@ -2085,7 +2085,7 @@ void GrLida::cargarListaCategorias()
 		id_index = 0;
 
 	ui->cbxCategoriasTb->setCurrentIndex(id_index);
-	emit on_cbxCategoriasTb_activated(id_index);
+	on_cbxCategoriasTb_activated(id_index);
 }
 
 void GrLida::setConfigHeaderListaJuegos()
@@ -2156,32 +2156,32 @@ void GrLida::setConfigHeaderListaJuegos()
 	ui->tvJuegos->setColumnHidden(col_IdGrl, true);
 
 // Ocultacion columnas
-	emit on_mnu_ver_col_icono_triggered(grlCfg.ver_col_Icono);
-	emit on_mnu_ver_col_subtitulo_triggered(grlCfg.ver_col_Subtitulo);
-	emit on_mnu_ver_col_genero_triggered(grlCfg.ver_col_Genero);
-	emit on_mnu_ver_col_compania_triggered(grlCfg.ver_col_Compania);
-	emit on_mnu_ver_col_desarrollador_triggered(grlCfg.ver_col_Desarrollador);
-	emit on_mnu_ver_col_tema_triggered(grlCfg.ver_col_Tema);
-	emit on_mnu_ver_col_grupo_triggered(grlCfg.ver_col_Grupo);
-	emit on_mnu_ver_col_perspectiva_triggered(grlCfg.ver_col_Perspectiva);
-	emit on_mnu_ver_col_idioma_triggered(grlCfg.ver_col_Idioma);
-	emit on_mnu_ver_col_idioma_voces_triggered(grlCfg.ver_col_IdiomaVoces);
-	emit on_mnu_ver_col_formato_triggered(grlCfg.ver_col_Formato);
-	emit on_mnu_ver_col_anno_triggered(grlCfg.ver_col_Anno);
-	emit on_mnu_ver_col_numdisc_triggered(grlCfg.ver_col_NumDisc);
-	emit on_mnu_ver_col_sistemaop_triggered(grlCfg.ver_col_SistemaOp);
-	emit on_mnu_ver_col_tamano_triggered(grlCfg.ver_col_Tamano);
-	emit on_mnu_ver_col_graficos_triggered(grlCfg.ver_col_Graficos);
-	emit on_mnu_ver_col_sonido_triggered(grlCfg.ver_col_Sonido);
-	emit on_mnu_ver_col_jugabilidad_triggered(grlCfg.ver_col_Jugabilidad);
-	emit on_mnu_ver_col_original_triggered(grlCfg.ver_col_Original);
-	emit on_mnu_ver_col_estado_triggered(grlCfg.ver_col_Estado);
-	emit on_mnu_ver_col_fecha_triggered(grlCfg.ver_col_Fecha);
-	emit on_mnu_ver_col_tipoemu_triggered(grlCfg.ver_col_TipoEmu);
-	emit on_mnu_ver_col_favorito_triggered(grlCfg.ver_col_Favorito);
-	emit on_mnu_ver_col_rating_triggered(grlCfg.ver_col_Rating);
-	emit on_mnu_ver_col_edad_triggered(grlCfg.ver_col_Edad);
-	emit on_mnu_ver_col_usuario_triggered(grlCfg.ver_col_Usuario);
+	on_mnu_ver_col_icono_triggered(grlCfg.ver_col_Icono);
+	on_mnu_ver_col_subtitulo_triggered(grlCfg.ver_col_Subtitulo);
+	on_mnu_ver_col_genero_triggered(grlCfg.ver_col_Genero);
+	on_mnu_ver_col_compania_triggered(grlCfg.ver_col_Compania);
+	on_mnu_ver_col_desarrollador_triggered(grlCfg.ver_col_Desarrollador);
+	on_mnu_ver_col_tema_triggered(grlCfg.ver_col_Tema);
+	on_mnu_ver_col_grupo_triggered(grlCfg.ver_col_Grupo);
+	on_mnu_ver_col_perspectiva_triggered(grlCfg.ver_col_Perspectiva);
+	on_mnu_ver_col_idioma_triggered(grlCfg.ver_col_Idioma);
+	on_mnu_ver_col_idioma_voces_triggered(grlCfg.ver_col_IdiomaVoces);
+	on_mnu_ver_col_formato_triggered(grlCfg.ver_col_Formato);
+	on_mnu_ver_col_anno_triggered(grlCfg.ver_col_Anno);
+	on_mnu_ver_col_numdisc_triggered(grlCfg.ver_col_NumDisc);
+	on_mnu_ver_col_sistemaop_triggered(grlCfg.ver_col_SistemaOp);
+	on_mnu_ver_col_tamano_triggered(grlCfg.ver_col_Tamano);
+	on_mnu_ver_col_graficos_triggered(grlCfg.ver_col_Graficos);
+	on_mnu_ver_col_sonido_triggered(grlCfg.ver_col_Sonido);
+	on_mnu_ver_col_jugabilidad_triggered(grlCfg.ver_col_Jugabilidad);
+	on_mnu_ver_col_original_triggered(grlCfg.ver_col_Original);
+	on_mnu_ver_col_estado_triggered(grlCfg.ver_col_Estado);
+	on_mnu_ver_col_fecha_triggered(grlCfg.ver_col_Fecha);
+	on_mnu_ver_col_tipoemu_triggered(grlCfg.ver_col_TipoEmu);
+	on_mnu_ver_col_favorito_triggered(grlCfg.ver_col_Favorito);
+	on_mnu_ver_col_rating_triggered(grlCfg.ver_col_Rating);
+	on_mnu_ver_col_edad_triggered(grlCfg.ver_col_Edad);
+	on_mnu_ver_col_usuario_triggered(grlCfg.ver_col_Usuario);
 }
 
 // Abre y carga la base de datos.
@@ -2377,7 +2377,7 @@ void GrLida::crearMenuNav()
 	sql->cargarMenuNav(ui->twListNav, categoria[id_cat].tabla);
 
 	if (fGrl->comprobarItemTwList(ui->twListNav, grlCfg.LastSelectNavID, grlCfg.LastSelectNavSubID))
-		emit on_twListNav_itemClicked(ui->twListNav->currentItem(), 0);
+		on_twListNav_itemClicked(ui->twListNav->currentItem(), 0);
 	else {
 		isNavItemChanged = true;
 		cargarListaJuegosDB(sql_where_select);
@@ -2518,7 +2518,7 @@ void GrLida::listItemSelectDoubleClicked(const QModelIndex &index, QString info)
 	if (index.isValid())
 	{
 		IdGame = index.sibling(index.row(), col_IdGrl).data(IdGrlRole).toString();
-		emit on_mnu_ejecutar_juego_triggered();
+		on_mnu_ejecutar_juego_triggered();
 	}
 }
 
@@ -2579,8 +2579,8 @@ void GrLida::mostrarDatosDelJuego(QString IDitem, bool soloInfo)
 			pathVideos   = fGrl->getDirRelative(grlDir.DatosGame +"videos/");
 			pathSonidos  = fGrl->getDirRelative(grlDir.DatosGame +"sonidos/");
 
-			emit directoryChanged(pathCapturas);
-			emit directoryChanged(pathImagenes);
+			directoryChanged(pathCapturas);
+			directoryChanged(pathImagenes);
 
 			if (!fs_watcher.directories().contains(pathCapturas))
 				fs_watcher.addPath(pathCapturas);
@@ -3622,14 +3622,14 @@ void GrLida::updateCol(const QModelIndex &index, int col)
 			{
 				bool isOriginal = fGrl->strToBool(index.sibling(index.row(), col_IdGrl).data(OriginalRole).toString());
 				ui->mnu_edit_original->setChecked(isOriginal);
-				emit on_mnu_edit_original_triggered(isOriginal);
+				on_mnu_edit_original_triggered(isOriginal);
 			}
 			break;
 			case col_Favorito:
 			{
 				bool isFavorito = fGrl->strToBool(index.sibling(index.row(), col_IdGrl).data(FavoritoRole).toString());
 				ui->mnu_edit_favorito->setChecked(isFavorito);
-				emit on_mnu_edit_favorito_triggered(isFavorito);
+				on_mnu_edit_favorito_triggered(isFavorito);
 			}
 			break;
 			case col_Rating:
@@ -3714,7 +3714,7 @@ void GrLida::on_mnu_ejecutar_juego_triggered()
 	if (TipoEmu == "datos" || TipoEmu == "dosbox" || TipoEmu == "vdmsound")
 	{
 		if (isAutoMountImageExe)
-			emit on_mnu_ejecutar_montaje_triggered();
+			on_mnu_ejecutar_montaje_triggered();
 	}
 
 	ejecutar(cfgExec.f_exe, cfgExec.f_exe_param, cfgExec.f_exe_path);
@@ -4528,77 +4528,77 @@ void GrLida::on_mnu_ver_carpeta_home_triggered()
 // Barra de heramientas
 void GrLida::on_mnu_file_cerrar_big_triggered()
 {
-	emit on_mnu_file_cerrar_triggered();
+	on_mnu_file_cerrar_triggered();
 }
 
 void GrLida::on_mnu_edit_nuevo_dosbox_big_triggered()
 {
-	emit on_mnu_edit_nuevo_dosbox_triggered();
+	on_mnu_edit_nuevo_dosbox_triggered();
 }
 
 void GrLida::on_mnu_edit_nuevo_scummvm_big_triggered()
 {
-	emit on_mnu_edit_nuevo_scummvm_triggered();
+	on_mnu_edit_nuevo_scummvm_triggered();
 }
 
 void GrLida::on_mnu_edit_nuevo_vdmsound_big_triggered()
 {
-	emit on_mnu_edit_nuevo_vdmsound_triggered();
+	on_mnu_edit_nuevo_vdmsound_triggered();
 }
 
 void GrLida::on_mnu_ejecutar_juego_big_triggered()
 {
-	emit on_mnu_ejecutar_juego_triggered();
+	on_mnu_ejecutar_juego_triggered();
 }
 
 void GrLida::on_mnu_ejecutar_setup_big_triggered()
 {
-	emit on_mnu_ejecutar_setup_triggered();
+	on_mnu_ejecutar_setup_triggered();
 }
 
 void GrLida::on_mnu_edit_nuevo_big_triggered()
 {
-	emit on_mnu_edit_nuevo_triggered();
+	on_mnu_edit_nuevo_triggered();
 }
 
 void GrLida::on_mnu_edit_editar_big_triggered()
 {
-	emit on_mnu_edit_editar_triggered();
+	on_mnu_edit_editar_triggered();
 }
 
 void GrLida::on_mnu_edit_eliminar_big_triggered()
 {
-	emit on_mnu_edit_eliminar_triggered();
+	on_mnu_edit_eliminar_triggered();
 }
 
 void GrLida::on_mnu_tool_importar_big_triggered()
 {
-	emit on_mnu_tool_importar_triggered();
+	on_mnu_tool_importar_triggered();
 }
 
 void GrLida::on_mnu_ver_datos_big_triggered(bool checked)
 {
-	emit on_mnu_ver_datos_triggered(checked);
+	on_mnu_ver_datos_triggered(checked);
 }
 
 void GrLida::on_mnu_ver_archivos_big_triggered(bool checked)
 {
-	emit on_mnu_ver_archivos_triggered(checked);
+	on_mnu_ver_archivos_triggered(checked);
 }
 
 void GrLida::on_mnu_ver_capturas_big_triggered(bool checked)
 {
-	emit on_mnu_ver_capturas_triggered(checked);
+	on_mnu_ver_capturas_triggered(checked);
 }
 
 void GrLida::on_mnu_tool_opciones_big_triggered()
 {
-	emit on_mnu_tool_opciones_triggered();
+	on_mnu_tool_opciones_triggered();
 }
 
 void GrLida::on_mnu_ver_acercad_big_triggered()
 {
-	emit on_mnu_ver_acercad_triggered();
+	on_mnu_ver_acercad_triggered();
 }
 
 // Barra de heramientas busqueda
@@ -4624,7 +4624,7 @@ void GrLida::on_cbxOrden_activated(int index)
 
 void GrLida::on_btnOrdenar_clicked()
 {
-	emit on_txtBuscar_textChanged(ui->txtBuscar->text());
+	on_txtBuscar_textChanged(ui->txtBuscar->text());
 }
 
 // Menú desplegable de categorias
@@ -4771,7 +4771,7 @@ void GrLida::grl_picflow_isActive(bool active)
 void GrLida::grl_picflow_selected(int current)
 {
 	IdGame = select_row.sibling(current, col_IdGrl).data(IdGrlRole).toString();
-	emit on_mnu_ejecutar_juego_triggered();
+	on_mnu_ejecutar_juego_triggered();
 }
 
 void GrLida::grl_picflow_customContextMenuRequested(const QPoint &pos)
@@ -4784,7 +4784,7 @@ void GrLida::on_btnVer_Archivos_clicked(bool checked)
 {
 	ui->mnu_ver_archivos->setChecked(checked);
 	ui->mnu_ver_archivos_big->setChecked(checked);
-	emit on_mnu_ver_archivos_triggered(checked);
+	on_mnu_ver_archivos_triggered(checked);
 }
 
 void GrLida::on_btnVer_CoverFront_clicked()

@@ -89,7 +89,7 @@ void frmPdfViewer::cargarConfig()
 	connect(doc_pdf_widget, SIGNAL(textSelected(const QString &)), this, SLOT(showSelectedText(const QString &)));
 
 	ui->btn_TextSelect->setChecked(false);
-	emit on_btn_TextSelect_toggled(false);
+	on_btn_TextSelect_toggled(false);
 }
 
 void frmPdfViewer::setTheme()
@@ -138,7 +138,7 @@ void frmPdfViewer::openPdf(QString fileName)
 		ui->cbxOrden->setEnabled(true);
 		ui->cbxZoom->setEnabled(true);
 
-		emit on_spinPagina_valueChanged(1);
+		on_spinPagina_valueChanged(1);
 	} else
 		QMessageBox::warning(this, windowTitle(), tr("El archivo especificado no se ha podido abrir."));
 }
@@ -237,7 +237,7 @@ void frmPdfViewer::on_btn_ZoomIn_clicked()
 	{
 		id_scale++;
 		ui->cbxZoom->setCurrentIndex(id_scale);
-		emit on_cbxZoom_activated(id_scale);
+		on_cbxZoom_activated(id_scale);
 	}
 }
 
@@ -247,7 +247,7 @@ void frmPdfViewer::on_btn_ZoomOut_clicked()
 	{
 		id_scale--;
 		ui->cbxZoom->setCurrentIndex(id_scale);
-		emit on_cbxZoom_activated(id_scale);
+		on_cbxZoom_activated(id_scale);
 	}
 }
 
@@ -260,5 +260,5 @@ void frmPdfViewer::on_cbxZoom_activated(int index)
 void frmPdfViewer::on_btn_ZoomNormal_clicked()
 {
 	ui->cbxZoom->setCurrentIndex(3);
-	emit on_cbxZoom_activated(3);
+	on_cbxZoom_activated(3);
 }

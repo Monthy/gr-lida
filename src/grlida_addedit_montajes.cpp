@@ -165,8 +165,8 @@ void frmAddEditMontajes::setDatosMontaje(stConfigDOSBoxMount montaje)
 	ui->chkMontaje_opt_freesize->setChecked(fGrl->strToBool(montaje.opt_freesize));
 	ui->h_SliderMontaje_freesize->setEnabled(ui->chkMontaje_opt_freesize->isChecked());
 	ui->h_SliderMontaje_freesize->setValue(montaje.freesize.toInt());
-	emit on_h_SliderMontaje_freesize_valueChanged(montaje.freesize.toInt());
-	emit on_cbxMontaje_type_drive_activated(ui->cbxMontaje_type_drive->currentIndex());
+	on_h_SliderMontaje_freesize_valueChanged(montaje.freesize.toInt());
+	on_cbxMontaje_type_drive_activated(ui->cbxMontaje_type_drive->currentIndex());
 }
 
 void frmAddEditMontajes::on_btnOk_clicked()

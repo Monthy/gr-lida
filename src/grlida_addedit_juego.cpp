@@ -95,7 +95,7 @@ void frmAddEditJuego::closeEvent(QCloseEvent *event)
 	{
 		case QMessageBox::Save:
 			event->ignore();
-			emit on_btnOk_clicked();
+			on_btnOk_clicked();
 		break;
 		case QMessageBox::Cancel:
 			event->ignore();
@@ -242,7 +242,7 @@ void frmAddEditJuego::cargarConfig()
 	int row_tipo_emu = ui->cbxDat_tipo_emu->findData(TipoEmu);
 	if (row_tipo_emu < 0) row_tipo_emu = 0;
 	ui->cbxDat_tipo_emu->setCurrentIndex(row_tipo_emu);
-	emit on_cbxDat_tipo_emu_activated(row_tipo_emu);
+	on_cbxDat_tipo_emu_activated(row_tipo_emu);
 
 	ui->cbxUrl_url->clear();
 	ui->cbxUrl_url->addItem(QIcon(fGrl->theme() +"img16/edit_enlace.png"), "", "");
@@ -256,7 +256,7 @@ void frmAddEditJuego::cargarConfig()
 	}
 	query.clear();
 	ui->cbxUrl_url->setCurrentIndex(0);
-	emit on_cbxUrl_url_activated(0);
+	on_cbxUrl_url_activated(0);
 
 // Configuración del twDatosParametrosExe
 	ui->twDatosParametrosExe->header()->setStretchLastSection(true);
@@ -633,7 +633,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 		ui->btnDat_thumbs_eliminar->setEnabled(true);
 	} else {
 		if (!isImport)
-			emit on_btnDat_thumbs_eliminar_clicked();
+			on_btnDat_thumbs_eliminar_clicked();
 	}
 
 // CoverFront
@@ -649,7 +649,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 		ui->btnDat_cover_front_eliminar->setEnabled(true);
 	} else {
 		if (!isImport)
-			emit on_btnDat_cover_front_eliminar_clicked();
+			on_btnDat_cover_front_eliminar_clicked();
 	}
 
 // CoverBack
@@ -665,7 +665,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 		ui->btnDat_cover_back_eliminar->setEnabled(true);
 	} else {
 		if (!isImport)
-			emit on_btnDat_cover_back_eliminar_clicked();
+			on_btnDat_cover_back_eliminar_clicked();
 	}
 
 // CoverLeft
@@ -681,7 +681,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 		ui->btnDat_cover_left_eliminar->setEnabled(true);
 	} else {
 		if (!isImport)
-			emit on_btnDat_cover_left_eliminar_clicked();
+			on_btnDat_cover_left_eliminar_clicked();
 	}
 
 // CoverRight
@@ -697,7 +697,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 		ui->btnDat_cover_right_eliminar->setEnabled(true);
 	} else {
 		if (!isImport)
-			emit on_btnDat_cover_right_eliminar_clicked();
+			on_btnDat_cover_right_eliminar_clicked();
 	}
 
 // CoverTop
@@ -713,7 +713,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 		ui->btnDat_cover_top_eliminar->setEnabled(true);
 	} else {
 		if (!isImport)
-			emit on_btnDat_cover_top_eliminar_clicked();
+			on_btnDat_cover_top_eliminar_clicked();
 	}
 
 // CoverBottom
@@ -729,7 +729,7 @@ void frmAddEditJuego::cargarDatosJuego(stDatosJuego datos, bool isImport)
 		ui->btnDat_cover_bottom_eliminar->setEnabled(true);
 	} else {
 		if (!isImport)
-			emit on_btnDat_cover_bottom_eliminar_clicked();
+			on_btnDat_cover_bottom_eliminar_clicked();
 	}
 
 // Capturas, videos y sonidos.
@@ -1337,7 +1337,7 @@ void frmAddEditJuego::on_btnDescargarInfo_clicked()
 				int row_tipo_emu = ui->cbxDat_tipo_emu->findData(datos.tipo_emu);
 				if (row_tipo_emu < 0) row_tipo_emu = 0;
 				ui->cbxDat_tipo_emu->setCurrentIndex(row_tipo_emu);
-				emit on_cbxDat_tipo_emu_activated(row_tipo_emu);
+				on_cbxDat_tipo_emu_activated(row_tipo_emu);
 			}
 
 			cargarDatosJuego(datos, true);
@@ -1531,7 +1531,7 @@ void frmAddEditJuego::on_btnDat_thumbs_eliminar_clicked()
 
 void frmAddEditJuego::on_btnDat_thumbs_crear__clicked()
 {
-	emit on_btnDat_thumbs_crear_clicked();
+	on_btnDat_thumbs_crear_clicked();
 }
 
 // CoverFront
@@ -2444,7 +2444,7 @@ void frmAddEditJuego::on_btnUrl_delete_clicked()
 			query.clear();
 
 			ui->cbxUrl_url->setCurrentIndex(0);
-			emit on_cbxUrl_url_activated(0);
+			on_cbxUrl_url_activated(0);
 
 			ui->txtUrl_descripcion->setPlainText("");
 		}
@@ -2463,7 +2463,7 @@ void frmAddEditJuego::on_twDatosURL_itemClicked(QTreeWidgetItem *item, int colum
 void frmAddEditJuego::on_twDatosURL_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
 	if (item && column > -1)
-		emit on_btnUrl_abrir_clicked();
+		on_btnUrl_abrir_clicked();
 }
 
 // Datos usuario
@@ -2604,7 +2604,7 @@ void frmAddEditJuego::on_btnFile_path_clicked()
 
 		enabledDatosUpdate(grlCfg.DatosFiles_PathFile, 4);
 	} else
-		emit on_btnFile_path_clear_clicked();
+		on_btnFile_path_clear_clicked();
 }
 
 void frmAddEditJuego::on_btnFile_path_clear_clicked()
@@ -2636,7 +2636,7 @@ void frmAddEditJuego::on_btnFile_delete_clicked()
 				sql->eliminarFiles(ui->twDatosFiles->currentItem()->text(6));
 			fGrl->deleteItemTree(ui->twDatosFiles->currentItem());
 
-			emit on_btnFile_path_clear_clicked();
+			on_btnFile_path_clear_clicked();
 		}
 	}
 }

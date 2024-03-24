@@ -523,7 +523,7 @@ void EditorWidget::focusInEvent(QFocusEvent *event)
 void EditorWidget::showSource(bool checked)
 {
 	m_rich_plain_action->setChecked(checked);
-	emit on_show_source(checked);
+	on_show_source(checked);
 }
 
 bool EditorWidget::isShowSource()
@@ -534,7 +534,7 @@ bool EditorWidget::isShowSource()
 void EditorWidget::showFindReplace(bool checked)
 {
 	m_find_replace_text_action->setChecked(checked);
-	emit on_show_find_replace(checked);
+	on_show_find_replace(checked);
 }
 
 bool EditorWidget::isShowFindReplace()
@@ -1198,12 +1198,12 @@ void EditorWidget::on_edit_color()
 
 void EditorWidget::txtFindTextChanged(QString text)
 {
-	emit mark(text, chkCaseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
+	mark(text, chkCaseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
 }
 
 void EditorWidget::chkCaseSensitive_toggled(bool checked)
 {
-	emit mark(txt_find->text(), checked ? Qt::CaseSensitive : Qt::CaseInsensitive);
+	mark(txt_find->text(), checked ? Qt::CaseSensitive : Qt::CaseInsensitive);
 }
 
 void EditorWidget::chkReplace_toggled(bool checked)

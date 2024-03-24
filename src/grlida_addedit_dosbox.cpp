@@ -493,7 +493,7 @@ void frmAddEditDosBox::cargarDatosDosBox(stConfigDOSBox cfgDbx)
 	ui->chkDbx_autoexec->setChecked(fGrl->strToBool(cfgDbx.opt_autoexec));
 	ui->chkDbx_loadfix->setChecked(fGrl->strToBool(cfgDbx.opt_loadfix));
 	ui->spinDbx_loadfix_mem->setValue(cfgDbx.opt_loadfix_mem.toInt());
-	emit on_spinDbx_loadfix_mem_valueChanged(cfgDbx.opt_loadfix_mem.toInt());
+	on_spinDbx_loadfix_mem_valueChanged(cfgDbx.opt_loadfix_mem.toInt());
 
 	ui->chkDbx_consola_dbox->setChecked(fGrl->strToBool(cfgDbx.opt_consola_dbox));
 	ui->chkDbx_cerrar_dbox->setChecked(fGrl->strToBool(cfgDbx.opt_cerrar_dbox));
@@ -830,7 +830,7 @@ void frmAddEditDosBox::on_cbxDbx_Profiles_activated(int index)
 
 void frmAddEditDosBox::on_chkDbx_loadfix_clicked()
 {
-	emit on_spinDbx_loadfix_mem_valueChanged(DatosDosBox.opt_loadfix_mem.toInt());
+	on_spinDbx_loadfix_mem_valueChanged(DatosDosBox.opt_loadfix_mem.toInt());
 }
 
 void frmAddEditDosBox::on_spinDbx_loadfix_mem_valueChanged(int arg1)
@@ -858,7 +858,7 @@ void frmAddEditDosBox::on_btnDbx_ExeJuego_clicked()
 			grlCfg.Dbx_path_exe = fGrl->setDirRelative(f_info.Path, "DosGames");
 
 			if (ui->twMontajes->topLevelItemCount() < 1 && !Editando)
-				emit on_btnMount_AutoCrear_clicked();
+				on_btnMount_AutoCrear_clicked();
 			else
 				previerMontajes();
 		}

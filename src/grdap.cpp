@@ -88,40 +88,40 @@ bool GrDap::eventFilter(QObject *object, QEvent *event)
 		switch (key_Event->key())
 		{
 			case Qt::Key_Plus:
-				emit on_btn_zoom_in_clicked();
+				on_btn_zoom_in_clicked();
 				return true;
 			break;
 			case Qt::Key_Minus:
-				emit on_btn_zoom_out_clicked();
+				on_btn_zoom_out_clicked();
 				return true;
 			break;
 			case Qt::Key_Slash:
-				emit on_btn_zoom_normal_clicked();
+				on_btn_zoom_normal_clicked();
 				return true;
 			break;
 			case Qt::Key_0:
 				if (ui->frame_images->isVisible())
-					emit on_btn_rotar_img_clicked();
+					on_btn_rotar_img_clicked();
 				if (ui->frame_a->isVisible())
-					emit on_btn_rotar_a_clicked();
+					on_btn_rotar_a_clicked();
 				if (ui->frame_b->isVisible())
-					emit on_btn_rotar_b_clicked();
+					on_btn_rotar_b_clicked();
 				if (ui->frame_c->isVisible())
-					emit on_btn_rotar_c_clicked();
+					on_btn_rotar_c_clicked();
 				if (ui->frame_d->isVisible())
-					emit on_btn_rotar_d_clicked();
+					on_btn_rotar_d_clicked();
 				return true;
 			break;
 			case Qt::Key_Left:
 			case Qt::Key_Up:
 				if (ui->frame_images->isVisible())
-					emit on_btn_img_back_clicked();
+					on_btn_img_back_clicked();
 				return true;
 			break;
 			case Qt::Key_Right:
 			case Qt::Key_Down:
 				if (ui->frame_images->isVisible())
-					emit on_btn_img_next_clicked();
+					on_btn_img_next_clicked();
 				return true;
 			break;
 			default:
@@ -199,7 +199,7 @@ void GrDap::cargarConfig()
 #endif
 
 	isInicio = true;
-	emit on_btn_fullscreen_toggled(grdCfg.main_fullscreen);
+	on_btn_fullscreen_toggled(grdCfg.main_fullscreen);
 
 	ui->btn_fullscreen->setChecked(grdCfg.main_fullscreen);
 	ui->btn_info->setChecked(grdCfg.show_info);
@@ -694,8 +694,8 @@ void GrDap::cargarArchivo(QString filename)
 		cargarImagenes(z_list, 0, false);
 
 	this->setWindowTitle("GR-dap - Dial-A-Protection v"+ fGrl->versionGrd() +": "+ config["info_title"] + texto_pagina);
-	emit on_btn_zoom_normal_clicked();
-	emit on_btn_rotar_img_clicked();
+	on_btn_zoom_normal_clicked();
+	on_btn_rotar_img_clicked();
 }
 
 
@@ -721,7 +721,7 @@ void GrDap::cargarImagenes(QStringList images, int index, bool directo)
 	if (config["info_type"] == "texto_oculto")
 	{
 		ui->btn_visor->setChecked(visor_show);
-		emit on_btn_visor_clicked(visor_show);
+		on_btn_visor_clicked(visor_show);
 		ui->lb_img_pagina->setText(tr("Página"));
 	} else {
 		grdapView->setBackgroundBrush(Qt::darkGray);
@@ -756,7 +756,7 @@ void GrDap::cargarImagenes(QStringList images, int index, bool directo)
 
 	ui->cbx_img_pagina->setCurrentIndex(index);
 	ui->cbx_visor_mode->setCurrentIndex(16);
-	emit on_cbx_visor_mode_activated(ui->cbx_visor_mode->currentIndex());
+	on_cbx_visor_mode_activated(ui->cbx_visor_mode->currentIndex());
 	getInfoImg(index);
 
 	texto_pagina = (config["info_title"].isEmpty() ? "" : " - ")+ ui->cbx_img_pagina->currentText();
@@ -764,8 +764,8 @@ void GrDap::cargarImagenes(QStringList images, int index, bool directo)
 	if (directo)
 	{
 		this->setWindowTitle("GR-dap - Dial-A-Protection v"+ fGrl->versionGrd() +": "+ config["info_title"] + texto_pagina);
-		emit on_btn_zoom_normal_clicked();
-		emit on_btn_rotar_img_clicked();
+		on_btn_zoom_normal_clicked();
+		on_btn_rotar_img_clicked();
 	}
 }
 
@@ -779,7 +779,7 @@ void GrDap::cargarImagenes(QStringList images, int index, bool directo)
 void GrDap::on_btn_cerrar_info_clicked()
 {
 	ui->btn_info->setChecked(false);
-	emit on_btn_info_toggled(false);
+	on_btn_info_toggled(false);
 }
 
 void GrDap::on_btn_salir_clicked()
@@ -921,26 +921,26 @@ void GrDap::on_cbx_img_pagina_activated(int index)
 		grdapView->setPixmapItem(0, loadPixmap(stDir + ui->cbx_img_pagina->itemData(index).toString()), true);
 
 		if (ui->frame_visor->isVisible())
-			emit on_cbx_visor_mode_activated(ui->cbx_visor_mode->currentIndex());
+			on_cbx_visor_mode_activated(ui->cbx_visor_mode->currentIndex());
 
 		texto_pagina = (config["info_title"].isEmpty() ? "" : " - ")+ ui->cbx_img_pagina->itemText(index);
 		this->setWindowTitle("GR-dap - Dial-A-Protection v"+ fGrl->versionGrd() +": "+ config["info_title"] + texto_pagina);
 		ui->lb_img_pagina_total->setText(fGrl->intToStr(index+1) +" / "+ fGrl->intToStr(num_img_pagina));
 		getInfoImg(index);
-		emit on_btn_rotar_img_clicked();
+		on_btn_rotar_img_clicked();
 	}
 }
 
 void GrDap::on_btn_img_back_clicked()
 {
 	setCbxBackIndex(ui->cbx_img_pagina);
-	emit on_cbx_img_pagina_activated(ui->cbx_img_pagina->currentIndex());
+	on_cbx_img_pagina_activated(ui->cbx_img_pagina->currentIndex());
 }
 
 void GrDap::on_btn_img_next_clicked()
 {
 	setCbxNextIndex(ui->cbx_img_pagina);
-	emit on_cbx_img_pagina_activated(ui->cbx_img_pagina->currentIndex());
+	on_cbx_img_pagina_activated(ui->cbx_img_pagina->currentIndex());
 }
 
 void GrDap::on_slider_rotar_img_valueChanged(int value)
@@ -958,7 +958,7 @@ void GrDap::on_btn_rotar_img_clicked()
 void GrDap::on_btn_visor_clicked(bool checked)
 {
 	ui->frame_visor->setVisible(checked);
-	emit on_cbx_visor_mode_activated(ui->cbx_visor_mode->currentIndex());
+	on_cbx_visor_mode_activated(ui->cbx_visor_mode->currentIndex());
 	grdapView->setVisorVisible(checked);
 }
 
@@ -969,9 +969,9 @@ void GrDap::on_btn_visor_color_clicked()
 	colorDg->setOption(QColorDialog::ShowAlphaChannel);
 	connect(colorDg, SIGNAL(currentColorChanged(QColor)), this, SLOT(visorColorChanged(QColor)));
 	if (colorDg->exec() == QDialog::Accepted)
-		emit visorColorChanged(colorDg->selectedColor());
+		visorColorChanged(colorDg->selectedColor());
 	else
-		emit visorColorChanged(color);
+		visorColorChanged(color);
 	delete colorDg;
 }
 

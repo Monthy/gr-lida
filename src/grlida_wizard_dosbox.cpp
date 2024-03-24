@@ -585,7 +585,7 @@ void frmWizardDosBox::on_btnNext_clicked()
 	if (ui->wizardDbx->currentIndex() == 4)
 	{
 //		if (isImportDbx == false)
-//			emit on_btnMount_AutoCrear();
+//			on_btnMount_AutoCrear();
 		ui->twMontajes->setFocus();
 	}
 
@@ -618,7 +618,7 @@ void frmWizardDosBox::on_btnDbx_ExeJuego_clicked()
 			grlCfg.Dbx_path_exe = fGrl->setDirRelative(f_info.Path, "DosGames");
 
 			if (ui->twMontajes->topLevelItemCount() < 1)
-				emit on_btnMount_AutoCrear_clicked();
+				on_btnMount_AutoCrear_clicked();
 		}
 	}
 }

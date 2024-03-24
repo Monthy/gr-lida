@@ -492,15 +492,15 @@ void frmWizardScummVM::on_twScummVM_itemDoubleClicked(QTreeWidgetItem *item, int
 {
 	if (item && column > -1)
 	{
-		emit on_twScummVM_itemClicked(item, 0);
-		emit on_btnNext_clicked();
+		on_twScummVM_itemClicked(item, 0);
+		on_btnNext_clicked();
 	}
 }
 
 void frmWizardScummVM::on_twScummVM_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
 	if (current != previous)
-		emit on_twScummVM_itemClicked(current, 0);
+		on_twScummVM_itemClicked(current, 0);
 }
 
 void frmWizardScummVM::on_btnSvm_Path_clicked()

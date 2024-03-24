@@ -60,7 +60,7 @@ void frmInstalarJuego::closeEvent(QCloseEvent *event)
 	if (!isCloseEvent && isMountImage)
 	{
 		isCloseEvent = true;
-		emit on_btn_virtual_drive_montar_clicked();
+		on_btn_virtual_drive_montar_clicked();
 
 		event->ignore();
 	} else
@@ -140,7 +140,7 @@ void frmInstalarJuego::cargarConfig()
 	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/cd_multi_iso.png"), tr("Imagen ISO multiples")        , "IMG_multi_iso"   );
 	ui->cbxMontaje_type_drive->addItem(QIcon(fGrl->theme() +"img16/drive_hd.png")    , tr("Imagen de disco duro")        , "IMG_hdd"         );
 	ui->cbxMontaje_type_drive->setCurrentIndex(1);
-	emit on_cbxMontaje_type_drive_activated(1);
+	on_cbxMontaje_type_drive_activated(1);
 
 	ui->txtDestinoPath->setText("./DosGames/");
 	ui->btnEjecutarDbx->setEnabled(true);
@@ -294,7 +294,7 @@ void frmInstalarJuego::on_btnOk_clicked()
 	ui->gBoxMount->setEnabled(false);
 
 	if (isMountImage)
-		emit on_btn_virtual_drive_montar_clicked();
+		on_btn_virtual_drive_montar_clicked();
 	else {
 		setConfigDatosMontaje();
 
@@ -311,7 +311,7 @@ void frmInstalarJuego::on_btnCancel_clicked()
 //	ui->gBoxMount->setEnabled(false);
 
 	if (isMountImage)
-		emit on_btn_virtual_drive_montar_clicked();
+		on_btn_virtual_drive_montar_clicked();
 	else
 		QDialog::reject();
 }
@@ -790,9 +790,9 @@ void frmInstalarJuego::fin_Proceso(int exitCode, QProcess::ExitStatus exitStatus
 	if (isCloseEvent)
 	{
 		if (isCancel)
-			emit on_btnCancel_clicked();
+			on_btnCancel_clicked();
 		else
-			emit on_btnOk_clicked();
+			on_btnOk_clicked();
 	} else
 		ui->gBoxDbx->setEnabled(true);
 }

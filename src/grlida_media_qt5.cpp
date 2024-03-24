@@ -186,10 +186,10 @@ void GrlMedia::playPausa()
 	{
 		case QMediaPlayer::StoppedState:
 		case QMediaPlayer::PausedState:
-			emit play();
+			play();
 		break;
 		case QMediaPlayer::PlayingState:
-			emit pause();
+			pause();
 		break;
 	}
 }
@@ -207,7 +207,7 @@ void GrlMedia::pause()
 void GrlMedia::stop()
 {
 	m_player->stop();
-	emit positionChanged(0);
+	positionChanged(0);
 	update();
 }
 

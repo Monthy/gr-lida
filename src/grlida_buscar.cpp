@@ -81,7 +81,7 @@ frmBuscar::~frmBuscar()
 
 void frmBuscar::closeEvent(QCloseEvent *event)
 {
-	emit on_btn_parar_clicked();
+	on_btn_parar_clicked();
 	event->accept();
 }
 
@@ -142,7 +142,7 @@ void frmBuscar::on_btn_parar_clicked()
 
 void frmBuscar::on_btn_aceptar_clicked()
 {
-	emit on_btn_parar_clicked();
+	on_btn_parar_clicked();
 
 	if (!ui->cbx_lista->currentText().isEmpty())
 		f_select = ui->cbx_lista->currentText();
@@ -152,7 +152,7 @@ void frmBuscar::on_btn_aceptar_clicked()
 
 void frmBuscar::on_btn_cancelar_clicked()
 {
-	emit on_btn_parar_clicked();
+	on_btn_parar_clicked();
 
 	QDialog::reject();
 }
@@ -174,5 +174,5 @@ void frmBuscar::finished()
 	if (ui->cbx_lista->count() > 0)
 		ui->btn_aceptar->setEnabled(true);
 	if (!isPpause)
-		emit on_btn_parar_clicked();
+		on_btn_parar_clicked();
 }

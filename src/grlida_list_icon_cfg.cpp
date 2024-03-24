@@ -139,7 +139,7 @@ void frmListIconCfg::cargarConfig()
 	grl_lv_delegate->setShowLinesPos(true);
 
 	ui->btnIconMode->setChecked(true);
-	emit on_btnIconMode_clicked(true);
+	on_btnIconMode_clicked(true);
 
 	QString sLng = sql->getArchivoIsLng("posiciones.txt");
 	fGrl->cargarDatosComboBox(ui->title_font_pos, ":/datos/"+ sLng +"posiciones.txt", "img16/", "", 3, "|");
@@ -330,7 +330,7 @@ void frmListIconCfg::cargarListaThemes()
 	}
 
 	ui->cbxThemes->setCurrentIndex(id_theme);
-	emit on_cbxThemes_activated(id_theme);
+	on_cbxThemes_activated(id_theme);
 }
 
 void frmListIconCfg::cargarListaItems()
@@ -419,7 +419,7 @@ void frmListIconCfg::cargarListaItems()
 	ui->tvJuegos->setColumnHidden(col_IdGrl, true);
 
 	ui->cbxTipoEmu->setCurrentIndex(0);
-	emit on_cbxTipoEmu_activated(0);
+	on_cbxTipoEmu_activated(0);
 }
 
 void frmListIconCfg::cargarIconConfig()
@@ -513,8 +513,8 @@ void frmListIconCfg::on_cbxThemes_activated(int index)
 
 		ui->tabCfgWidgets->setStyleSheet(fGrl->myStyleSheet("StyleSheet.qss") +"\n");
 		ui->lvJuegos->setStyleSheet(fGrl->myStyleSheet("StyleSheetList.qss") +"\n");
-		emit on_cbxListFiles_activated(ui->cbxListFiles->currentIndex());
-		emit on_cbxCategorias_activated(ui->cbxCategorias->currentIndex());
+		on_cbxListFiles_activated(ui->cbxListFiles->currentIndex());
+		on_cbxCategorias_activated(ui->cbxCategorias->currentIndex());
 	}
 }
 
@@ -1362,7 +1362,7 @@ void frmListIconCfg::on_btnSaveText_clicked()
 {
 	QString archivo = stTheme + ui->cbxListFiles->itemData(ui->cbxListFiles->currentIndex()).toString();
 	fGrl->guardarArchivo(archivo, editor->toPlainText(), "UTF-8");
-	emit on_cbxThemes_activated(id_theme);
+	on_cbxThemes_activated(id_theme);
 }
 
 //--
@@ -1380,7 +1380,7 @@ void frmListIconCfg::on_tvJuegos_clicked(const QModelIndex &index)
 
 		select_row = data_model->index(index.row(), col_IdGrl);
 		ui->cbxTipoEmu->setCurrentIndex(ui->cbxTipoEmu->findData(select_row.data(TipoEmuRole).toString()));
-		emit on_cbxTipoEmu_activated(ui->cbxTipoEmu->currentIndex());
+		on_cbxTipoEmu_activated(ui->cbxTipoEmu->currentIndex());
 	}
 }
 
@@ -1392,6 +1392,6 @@ void frmListIconCfg::on_lvJuegos_clicked(const QModelIndex &index)
 
 		select_row = data_model->index(index.row(), col_IdGrl);
 		ui->cbxTipoEmu->setCurrentIndex(ui->cbxTipoEmu->findData(select_row.data(TipoEmuRole).toString()));
-		emit on_cbxTipoEmu_activated(ui->cbxTipoEmu->currentIndex());
+		on_cbxTipoEmu_activated(ui->cbxTipoEmu->currentIndex());
 	}
 }

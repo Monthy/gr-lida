@@ -124,7 +124,7 @@ void frmInfo::cargarListaCategorias()
 		id_index = 0;
 
 	ui->cbxCategorias->setCurrentIndex(id_index);
-	emit on_cbxCategorias_activated(id_index);
+	on_cbxCategorias_activated(id_index);
 }
 
 void frmInfo::menuNavAddCat(QString etiqueta, QString icono, QString sql_query, bool m_expanded, bool m_show_total)

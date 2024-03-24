@@ -82,7 +82,7 @@ void frmCambiarCategoria::cargarConfig()
 		}
 	}
 	ui->cbxCategorias->setCurrentIndex(0);
-	emit on_cbxCategorias_activated(0);
+	on_cbxCategorias_activated(0);
 }
 
 void frmCambiarCategoria::setTheme()
